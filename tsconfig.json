@@ -34,7 +34,7 @@
       "@/*": ["./app/*"],
       "@/styles/*": ["./styles/*"],
       "@/context/*": ["./context/*"],
-      "@/components/*": ["./components/*"]
+      "@/components/*": ["./app/components/*"]
     }
   },
   "exclude": [".next", "node_modules"],
