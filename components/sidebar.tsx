@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import { Sidebar as FlowbiteSidebar } from "flowbite-react";
 import type { FC, PropsWithChildren } from "react";
-import { useSidebarContext } from "../context/SidebarContext";
+
+import { useSidebarContext } from "@/context/SidebarContext";
 
 const Sidebar: FC<PropsWithChildren<Record<string, unknown>>> = function ({
   children,
