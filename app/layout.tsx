@@ -1,13 +1,13 @@
 import { FC, PropsWithChildren } from "react";
 
-import FlowbiteContext from "@/context/FlowbiteContext";
+import AppContext from "@/context/AppContext";
 import "@/styles/globals.css";
 
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {
   return (
     <html lang="en">
       <body>
-        <FlowbiteContext>{children}</FlowbiteContext>
+        <AppContext>{children}</AppContext>
       </body>
     </html>
   );

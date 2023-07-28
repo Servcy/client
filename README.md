@@ -2,7 +2,7 @@
 
 ## Getting started
 
-`Next.js` requires [`Node.js`](https://nodejs.org).
+This client requires [`Node.js`](https://nodejs.org).
 
 If you don't already have `npm` and `yarn` available, make sure you set them up.
 
