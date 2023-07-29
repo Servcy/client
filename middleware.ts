@@ -1,4 +1,4 @@
-import { publicRoutes } from "@/router/routes";
+import { publicRoutes } from "@/constants/routes";
 import { isJwtTokenValid } from "@/utils/Authentication/jwt";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
