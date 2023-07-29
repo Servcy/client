@@ -1,7 +1,7 @@
-import { publicRoutes } from "@/router/routes";
-import { isJwtTokenValid } from "@/utils/jwt";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { publicRoutes } from "./router/routes";
+import { isJwtTokenValid } from "./utils/jwt";
 
 export const config = {
   matcher: [

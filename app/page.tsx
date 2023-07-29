@@ -11,9 +11,9 @@ import {
   HiViewBoards,
 } from "react-icons/hi";
 
-import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
 import { SidebarProvider } from "@/context/SidebarContext";
+import Header from "../components/header";
+import Sidebar from "../components/sidebar";
 
 export default function Index(): JSX.Element {
   return (

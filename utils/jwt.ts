@@ -1,5 +1,5 @@
-import { JwtToken } from "@/types/authentication";
 import jwtDecode from "jwt-decode";
+import { JwtToken } from "../types/authentication";
 
 export const isJwtTokenValid = (token: string) => {
   if (!token) return false;
