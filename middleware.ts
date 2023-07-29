@@ -12,7 +12,7 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    "/((?!login|_next/static|_next/image|favicon.ico).*)",
+    "/((?!login|_next/static|_next/image|favicon.ico|logo.svg).*)",
   ],
 };
 

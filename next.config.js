@@ -5,6 +5,14 @@ const nextConfig = {
   },
   images: {
     domains: ["servcy.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'servcy-public.s3.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   reactStrictMode: true,
   swcMinify: true,

@@ -1,5 +1,8 @@
 "use client";
 
+import Header from "@/components/Shared/header";
+import Sidebar from "@/components/Shared/sidebar";
+import { SidebarProvider } from "@/context/SidebarContext";
 import { BiBuoy } from "react-icons/bi";
 import {
   HiArrowSmRight,
@@ -10,26 +13,6 @@ import {
   HiUser,
   HiViewBoards,
 } from "react-icons/hi";
-
-import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
-import { SidebarProvider } from "@/context/SidebarContext";
-
-export default function Index(): JSX.Element {
-  return (
-    <SidebarProvider>
-      <Header />
-      <div className="flex dark:bg-gray-900">
-        <main className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem]">
-          <HomePage />
-        </main>
-        <div className="order-1">
-          <ActualSidebar />
-        </div>
-      </div>
-    </SidebarProvider>
-  );
-}
 
 function ActualSidebar(): JSX.Element {
   return (
@@ -85,5 +68,21 @@ function HomePage(): JSX.Element {
         </header>
       </section>
     </div>
+  );
+}
+
+export default function Index(): JSX.Element {
+  return (
+    <SidebarProvider>
+      <Header />
+      <div className="flex dark:bg-gray-900">
+        <main className="order-2 mx-4 mt-4 mb-24 flex-[1_0_16rem]">
+          <HomePage />
+        </main>
+        <div className="order-1">
+          <ActualSidebar />
+        </div>
+      </div>
+    </SidebarProvider>
   );
 }

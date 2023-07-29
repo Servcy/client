@@ -20,6 +20,7 @@
     "cypress": "cypress open"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "flowbite": "^1.5.5",
     "flowbite-react": "^0.3.7",
     "jwt-decode": "^3.1.2",
