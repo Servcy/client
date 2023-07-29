@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["flowbite.com"],
+    domains: ["servcy.com"],
   },
   reactStrictMode: true,
   swcMinify: true,
