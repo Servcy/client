@@ -31,10 +31,18 @@
     "strict": true,
     "target": "ESNext",
     "paths": {
-      "@/*": ["./app/*"],
-      "@/styles/*": ["./styles/*"],
+      "@/app/*": ["./app/*"],
+      "@/components/*": ["./components/*"],
+      "@/constants/*": ["./constants/*"],
       "@/context/*": ["./context/*"],
-      "@/components/*": ["components/*"]
+      "@/enums/*": ["./enums/*"],
+      "@/router/*": ["./router/*"],
+      "@/services/*": ["./services/*"],
+      "@/store/*": ["./store/*"],
+      "@/stories/*": ["./stories/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/types/*": ["./types/*"],
+      "@/utils/*": ["./utils/*"]
     }
   },
   "exclude": [".next", "node_modules"],
