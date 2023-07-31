@@ -7,10 +7,10 @@ const nextConfig = {
     domains: ["servcy.com"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'servcy-public.s3.amazonaws.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "servcy-public.s3.amazonaws.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },

@@ -1,6 +1,5 @@
 "use client";
 
-import country_codes from "@/constants/country_codes.json";
 import {
   Button,
   Card,
@@ -17,10 +16,12 @@ import { BsTelephoneFill } from "react-icons/bs";
 import { GrSecure } from "react-icons/gr";
 import { HiMail } from "react-icons/hi";
 import { RiWhatsappLine } from "react-icons/ri";
-import { VscLoading } from "react-icons/vsc";
 // Types
 import { LoginState } from "@/types/Authentication/login";
 import { ReducerAction } from "@/types/Shared";
+// Utils
+import country_codes from "@/constants/country_codes.json";
+import { validateEmail, validatePhone } from "@/utils/Shared/validators";
 
 const initialState: LoginState = {
   email: "",
@@ -48,24 +49,13 @@ const reducer = (state: LoginState, action: ReducerAction) => {
       return state;
   }
 };
+
 export default function Login(): JSX.Element {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [stage, setStage] = useState(1);
+  const [stage, setStage] = useState(0);
   const [invalidPhone, setInvalidPhone] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const validateEmail = (input: string) => {
-    // eslint-disable-next-line no-useless-escape
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return emailRegex.test(input);
-  };
-
-  const validatePhone = (input: string) => {
-    const phoneRegex =
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/g;
-    return phoneRegex.test(input);
-  };
 
   const sendOtp = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
@@ -135,6 +125,7 @@ export default function Login(): JSX.Element {
         />
         <h4 className=" font-semibold">Welcome To Servcy</h4>
         <form>
+          {/* email and corresponding otp */}
           <div>
             {stage === 0 ? (
               <TextInput
@@ -152,10 +143,12 @@ export default function Login(): JSX.Element {
                 required
                 placeholder="Enter the code sent to your email"
                 type="text"
+                rightIcon={HiMail}
                 className="mb-[24px]"
               />
             )}
           </div>
+          {/* phone and country code input and corresponding otp */}
           <div className="flex w-full">
             {stage === 0 ? (
               <>
@@ -186,9 +179,11 @@ export default function Login(): JSX.Element {
                 placeholder="Enter the code sent to your phone"
                 type="text"
                 className="mb-[24px] w-full"
+                rightIcon={BsTelephoneFill}
               />
             )}
           </div>
+          {/* is whatsapp & privacy & T&C checkbox */}
           {stage === 0 ? (
             <>
               <div className="flex">
@@ -223,13 +218,10 @@ export default function Login(): JSX.Element {
             className="w-full"
             gradientDuoTone="greenToBlue"
             disabled={loading}
+            isProcessing={loading}
           >
-            {stage === 0 ? "Send OTP" : "Verify & Login"}{" "}
-            {!loading ? (
-              <BiLogIn className="ml-3 inline" />
-            ) : (
-              <VscLoading className="ml-3 inline animate-spin" />
-            )}
+            {stage === 0 ? "Send OTP" : "Login"}{" "}
+            <BiLogIn className="ml-3 inline" />
           </Button>
         </form>
       </Card>
