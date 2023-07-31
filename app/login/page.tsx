@@ -1,5 +1,6 @@
 "use client";
 
+import { setCookie } from "cookies-next";
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -133,14 +134,20 @@ export default function Login(): JSX.Element {
         type: "code_phone",
         payload: code_phone.value,
       });
-      await verifyOtpApi(
+      const tokens = await verifyOtpApi(
         code_email.value,
         code_phone.value,
         state.email,
         state.phone_number,
         state.phone_is_whatsapp
       );
-      router.push("/");
+      setCookie("refreshToken", tokens.refresh_token, {
+        path: "/",
+      });
+      setCookie("accessToken", tokens.access_token, {
+        path: "/",
+      });
+      router.replace("/");
     } finally {
       setLoading(false);
     }
