@@ -1,6 +1,7 @@
 export interface LoginState {
   email: string;
   phone: string;
+  country_code: string;
   code_email: string;
   code_phone: string;
   phone_is_whatsapp: boolean;
