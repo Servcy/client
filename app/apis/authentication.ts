@@ -17,7 +17,6 @@ export const verifyOtp = async (
     is_whatsapp: phone_is_whatsapp,
   });
   const { data } = await response;
-  console.log(data);
   return data;
 };
 

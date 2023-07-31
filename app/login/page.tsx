@@ -133,9 +133,9 @@ export default function Login(): JSX.Element {
         type: "code_phone",
         payload: code_phone.value,
       });
-      verifyOtpApi(
-        state.code_email,
-        state.code_phone,
+      await verifyOtpApi(
+        code_email.value,
+        code_phone.value,
         state.email,
         state.phone_number,
         state.phone_is_whatsapp
