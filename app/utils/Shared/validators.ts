@@ -9,3 +9,8 @@ export const validatePhone = (input: string) => {
     /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/g;
   return phoneRegex.test(input);
 };
+
+export const validateOtp = (input: string) => {
+  const otpRegex = /^\d{6}$/;
+  return otpRegex.test(input);
+};

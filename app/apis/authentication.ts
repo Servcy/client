@@ -1,18 +1,38 @@
 import Axios from "axios";
 
-const refreshToken = async () => {
-  const { data } = await Axios.post("/api/refreshToken");
+const SERVER_URL = process.env["NEXT_PUBLIC_SERVER_URL"];
+
+export const verifyOtp = async (
+  code_email: string,
+  code_phone: string,
+  email: string,
+  phone_number: string,
+  phone_is_whatsapp: boolean
+) => {
+  const response = Axios.post(`${SERVER_URL}/authentication`, {
+    code_email,
+    code_phone,
+    email,
+    phone_number: phone_number.replace("+", ""),
+    is_whatsapp: phone_is_whatsapp,
+  });
+  const { data } = await response;
+  console.log(data);
   return data;
 };
 
-const login = async (email: string, password: string) => {
-  const { data } = await Axios.post("/api/login", { email, password });
+export const sendOtp = async (
+  email: string,
+  phone_number: string,
+  phone_is_whatsapp: boolean
+) => {
+  const is_whatsapp = phone_is_whatsapp ? "yes" : "no";
+  const response = Axios.get(
+    `${SERVER_URL}/authentication?email=${email}&phone_number=${phone_number.replace(
+      "+",
+      ""
+    )}&is_whatsapp=${is_whatsapp}`
+  );
+  const { data } = await response;
   return data;
 };
-
-const logout = async () => {
-  const { data } = await Axios.post("/api/logout");
-  return data;
-};
-
-export { refreshToken, login, logout };
