@@ -32,11 +32,9 @@
     "target": "ESNext",
     "paths": {
       "@/*": ["./app/*"],
-      "@/styles/*": ["./styles/*"],
-      "@/context/*": ["./context/*"],
-      "@/components/*": ["./app/components/*"]
+      "@/stories/*": ["./stories/*"]
     }
   },
   "exclude": [".next", "node_modules"],
-  "include": [".next/types/**/*.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": [".next/types/**/*.ts", "app/types/*.d.ts", "**/*.ts", "**/*.tsx"]
 }

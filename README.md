@@ -2,7 +2,7 @@
 
 ## Getting started
 
-`Next.js` requires [`Node.js`](https://nodejs.org).
+This client requires [`Node.js`](https://nodejs.org).
 
 If you don't already have `npm` and `yarn` available, make sure you set them up.
 
@@ -23,3 +23,5 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Refer Next.js ['Docs'](https://nextjs.org/docs)

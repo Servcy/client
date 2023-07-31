@@ -4,7 +4,15 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["flowbite.com"],
+    domains: ["servcy.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "servcy-public.s3.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
   reactStrictMode: true,
   swcMinify: true,
