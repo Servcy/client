@@ -5,6 +5,7 @@ import { Sidebar } from "flowbite-react";
 import {
   AiOutlineApi,
   AiOutlineAreaChart,
+  AiOutlineCalendar,
   AiOutlineDollarCircle,
   AiOutlineFileSearch,
   AiOutlineInbox,
@@ -25,6 +26,13 @@ export default function SideBar(): JSX.Element {
           <Sidebar.ItemGroup>
             <Sidebar.Item className="mb-2" href="/inbox" icon={AiOutlineInbox}>
               <p className="text-base">Inbox</p>
+            </Sidebar.Item>
+            <Sidebar.Item
+              className="mb-2"
+              href="/calendar"
+              icon={AiOutlineCalendar}
+            >
+              <p className="text-base">Calendar</p>
             </Sidebar.Item>
             <Sidebar.Item
               className="mb-2"
