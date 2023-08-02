@@ -23,14 +23,19 @@ export function middleware(request: NextRequest) {
   const accessToken = isJwtTokenValid(
     request.cookies.get("accessToken")?.value ?? ""
   );
-  if (
-    refreshToken &&
-    accessToken &&
-    authRoutes.includes(request.nextUrl.pathname)
-  ) {
-    return NextResponse.redirect(new URL("/", request.nextUrl.origin));
-  } else if (refreshToken && accessToken) {
-    return;
+  const areTokensValid = !!accessToken && !!refreshToken;
+  const canTokensBeRefreshed = !!refreshToken && !accessToken;
+  if (areTokensValid) {
+    return authRoutes.includes(request.nextUrl.pathname)
+      ? NextResponse.redirect(new URL("/", request.nextUrl.origin))
+      : NextResponse.next();
   }
-  return NextResponse.redirect(new URL("/login", request.url));
+  if (canTokensBeRefreshed) {
+    // TODO: handle refresh tokens case
+  }
+  return authRoutes.includes(request.nextUrl.pathname)
+    ? null
+    : NextResponse.redirect(
+        new URL("/login", request.nextUrl.origin).toString()
+      );
 }
