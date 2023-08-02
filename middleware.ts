@@ -1,4 +1,4 @@
-import { publicRoutes } from "@/constants/routes";
+import { authRoutes } from "@/constants/routes";
 import { isJwtTokenValid } from "@/utils/Authentication/jwt";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -12,7 +12,7 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    "/((?!login|_next/static|_next/image|favicon.ico|logo.svg).*)",
+    "/((?!_next/static|_next/image|favicon.ico|logo.svg).*)",
   ],
 };
 
@@ -23,11 +23,15 @@ export function middleware(request: NextRequest) {
   const accessToken = isJwtTokenValid(
     request.cookies.get("accessToken")?.value ?? ""
   );
+  console.log(request);
   if (
-    (refreshToken && accessToken) ||
-    publicRoutes.includes(request.nextUrl.pathname)
+    refreshToken &&
+    accessToken &&
+    authRoutes.includes(request.nextUrl.pathname)
   ) {
-    return NextResponse.next();
+    return NextResponse.redirect(new URL("/", request.nextUrl.origin));
+  } else if (refreshToken && accessToken) {
+    return;
   }
   return NextResponse.redirect(new URL("/login", request.url));
 }
