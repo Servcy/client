@@ -23,7 +23,6 @@ export function middleware(request: NextRequest) {
   const accessToken = isJwtTokenValid(
     request.cookies.get("accessToken")?.value ?? ""
   );
-  console.log(request);
   if (
     refreshToken &&
     accessToken &&
