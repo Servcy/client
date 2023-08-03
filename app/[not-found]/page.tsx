@@ -5,7 +5,7 @@ import { CiWarning } from "react-icons/ci";
 
 export default function NotFound(): JSX.Element {
   return (
-    <div className="flex dark:bg-gray-900">
+    <div className="flex ">
       <main className="order-2 m-auto p-24">
         <div className="flex flex-col items-center justify-center">
           <CiWarning className="h-32 w-32 text-gray-400" />

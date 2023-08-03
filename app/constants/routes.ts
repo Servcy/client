@@ -8,7 +8,6 @@ export const routes = [
   "/payments",
   "/documents",
   "/reports",
-  "/integrations",
   "/account",
   "/settings",
 ];
