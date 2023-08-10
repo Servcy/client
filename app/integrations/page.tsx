@@ -24,7 +24,7 @@ export default function Index(): JSX.Element {
               <div className="flex flex-row">
                 <Image
                   className="my-auto mr-5 min-h-[40px] rounded-lg border border-gray-300 p-1"
-                  src={`https://servcy-public.s3.amazonaws.com/${integration.id}.png`}
+                  src={`https://servcy-public.s3.amazonaws.com/${integration.id}.svg`}
                   width={40}
                   height={40}
                   alt={integration.name}
