@@ -3,12 +3,20 @@
 import Sidebar from "@/components/Shared/sidebar";
 import integrations from "@/constants/integrations";
 import { Integration } from "@/types/Integrations";
+import { getGoogleUrl } from "@/utils/Integration/google";
 import { Button, Card } from "flowbite-react";
 import Image from "next/image.js";
 import { AiOutlineApi } from "react-icons/ai";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 
 export default function Index(): JSX.Element {
+  const from = window.location.href;
+
+  const connect = (e: any) => {
+    e.preventDefault();
+    window.location.href = getGoogleUrl(from);
+  };
+
   return (
     <div className="flex">
       <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-slate-200 p-3">
@@ -40,6 +48,7 @@ export default function Index(): JSX.Element {
                   color="gray"
                   outline
                   size="sm"
+                  onClick={connect}
                 >
                   <HiArrowsRightLeft className="my-auto mr-2" />
                   Connect
