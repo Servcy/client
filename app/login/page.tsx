@@ -48,8 +48,8 @@ export default function Login(): JSX.Element {
       // validate email address and phone number
       const isEmailValid = validateEmail(email.value);
       const isPhoneValid = validatePhone(phone_number.value);
-      setInvalidEmail(!isEmailValid);
-      setInvalidPhone(!isPhoneValid);
+      if (!isPhoneValid) setInvalidEmail(!isEmailValid);
+      else if (!isEmailValid) setInvalidPhone(!isPhoneValid);
       if (
         (!isEmailValid && !isPhoneValid) ||
         !agree_terms_conditions_and_privacy_policy.checked
