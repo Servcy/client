@@ -1,20 +1,35 @@
 "use client";
 
-import Sidebar from "@/components/Shared/sidebar";
-import integrations from "@/constants/integrations";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+// Types
 import { Integration } from "@/types/Integrations";
+// Components
+import Sidebar from "@/components/Shared/sidebar";
 import { getGoogleUrl } from "@/utils/Integration/google";
 import { Button, Card } from "flowbite-react";
 import Image from "next/image.js";
 import { AiOutlineApi } from "react-icons/ai";
 import { HiArrowsRightLeft } from "react-icons/hi2";
+// APIs
+import { fetchIntegrations } from "@/apis/integration";
 
 export default function Index(): JSX.Element {
-  const from = window.location.href;
+  const [integrations, setIntegrations] = useState<Integration[]>([]);
 
-  const connect = (e: any) => {
-    e.preventDefault();
-    window.location.href = getGoogleUrl(from);
+  useEffect(() => {
+    fetchIntegrations()
+      .then((integrations) => {
+        setIntegrations(integrations);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.detail);
+      });
+  }, []);
+
+  const connect = (integration: Integration) => {
+    if (integration.name === "Gmail")
+      window.location.href = getGoogleUrl(window.location.href);
   };
 
   return (
@@ -32,7 +47,7 @@ export default function Index(): JSX.Element {
               <div className="flex flex-row">
                 <Image
                   className="my-auto mr-5 min-h-[40px] rounded-lg border border-gray-300 p-1"
-                  src={`https://servcy-public.s3.amazonaws.com/${integration.id}.svg`}
+                  src={integration.logo}
                   width={40}
                   height={40}
                   alt={integration.name}
@@ -48,7 +63,7 @@ export default function Index(): JSX.Element {
                   color="gray"
                   outline
                   size="sm"
-                  onClick={connect}
+                  onClick={() => connect(integration)}
                 >
                   <HiArrowsRightLeft className="my-auto mr-2" />
                   Connect

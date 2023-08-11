@@ -23,3 +23,16 @@ export const sendOtp = async (input: string, inputType: string) => {
   const { data } = await response;
   return data;
 };
+
+export const refreshTokensApi = async (
+  refreshToken: string,
+  setCookie: (key: string, value: string) => void // eslint-disable-line no-unused-vars
+) => {
+  const response = Axios.post(`${SERVER_URL}/refresh-token`, {
+    refresh: refreshToken,
+  });
+  const { data } = await response;
+  setCookie("accessToken", data.access);
+  setCookie("refreshToken", data.refresh);
+  return data;
+};

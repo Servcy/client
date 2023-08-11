@@ -1,5 +1,6 @@
 export interface Integration {
-  id: string;
+  id: number;
   name: string;
+  logo: string;
   description: string;
 }

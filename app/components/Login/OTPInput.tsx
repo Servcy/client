@@ -38,7 +38,7 @@ interface OTPInputProps {
   /** Number of OTP inputs to be rendered */
   numInputs?: number;
   /** Callback to be called when the OTP value changes */
-  onChange: (otp: string) => void; // eslint-disable-line no-unused-vars
+  onChange: (otp: string, activeInput: number) => void; // eslint-disable-line no-unused-vars
   /** Function to render the input */
   renderInput: (inputProps: InputProps, index: number) => React.ReactNode; // eslint-disable-line no-unused-vars
   /** Whether the first input should be auto focused */
@@ -175,9 +175,9 @@ export default function OTPInput({
     handleOTPChange(otp);
   };
 
-  const handleOTPChange = (otp: string[]) => {
+  const handleOTPChange = (otp: string[], temp: number = activeInput) => {
     const otpValue = otp.join("");
-    onChange(otpValue);
+    onChange(otpValue, temp);
   };
 
   const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
@@ -206,7 +206,7 @@ export default function OTPInput({
     }
 
     focusInput(nextActiveInput);
-    handleOTPChange(otp);
+    handleOTPChange(otp, Math.max(Math.min(numInputs - 1, nextActiveInput), 0));
   };
 
   return (

@@ -16,24 +16,16 @@ export const config = {
   ],
 };
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const refreshToken = isJwtTokenValid(
     request.cookies.get("refreshToken")?.value ?? ""
   );
-  const accessToken = isJwtTokenValid(
-    request.cookies.get("accessToken")?.value ?? ""
-  );
-  const areTokensValid = !!accessToken && !!refreshToken;
-  const canTokensBeRefreshed = !!refreshToken && !accessToken;
-  if (areTokensValid) {
+  if (refreshToken) {
     return authRoutes.includes(request.nextUrl.pathname)
       ? NextResponse.redirect(new URL("/", request.nextUrl.origin))
       : routes.includes(request.nextUrl.pathname)
       ? NextResponse.redirect(new URL("/wip", request.nextUrl.origin))
       : NextResponse.next();
-  }
-  if (canTokensBeRefreshed) {
-    // TODO: handle refresh tokens case
   }
   return authRoutes.includes(request.nextUrl.pathname)
     ? null

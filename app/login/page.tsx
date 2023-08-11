@@ -1,11 +1,9 @@
 "use client";
 
 import { setCookie } from "cookies-next";
-import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
-import Image from "next/image";
-import Link from "next/link.js";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 // Icons
 import { BiLogIn } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
@@ -23,6 +21,9 @@ import {
 } from "@/apis/authentication";
 // Components
 import OTPInput from "@/components/Login/OTPInput";
+import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+import Image from "next/image";
+import Link from "next/link.js";
 
 export default function Login(): JSX.Element {
   const [stage, setStage] = useState<number>(0);
@@ -36,8 +37,8 @@ export default function Login(): JSX.Element {
 
   const sendOtp = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      setLoading(true);
       e.preventDefault();
+      setLoading(true);
       const email = document.getElementById("email") as HTMLInputElement;
       const phone_number = document.getElementById(
         "phone_number"
@@ -59,9 +60,16 @@ export default function Login(): JSX.Element {
       setInput(
         isEmailValid ? email.value : phone_number.value.replace("+", "")
       );
-      await sendOtpApi(
-        isEmailValid ? email.value : phone_number.value.replace("+", ""),
-        isEmailValid ? "email" : "phone_number"
+      await toast.promise(
+        sendOtpApi(
+          isEmailValid ? email.value : phone_number.value.replace("+", ""),
+          isEmailValid ? "email" : "phone_number"
+        ),
+        {
+          loading: "Sending OTP...",
+          success: "OTP sent successfully",
+          error: "Failed to send OTP",
+        }
       );
       setStage(1);
     } finally {
@@ -74,7 +82,11 @@ export default function Login(): JSX.Element {
       setLoading(true);
       const otpIsValid = validateOtp(otp);
       if (!otpIsValid) return;
-      const tokens = await verifyOtpApi(otp, input, inputType);
+      const tokens = await toast.promise(verifyOtpApi(otp, input, inputType), {
+        loading: "Verifying OTP...",
+        success: "OTP verified successfully",
+        error: "Failed to verify OTP",
+      });
       setCookie("refreshToken", tokens.refresh_token, {
         path: "/",
       });
@@ -167,19 +179,23 @@ export default function Login(): JSX.Element {
                 {...{
                   value: otp,
                   numInputs: 6,
-                  onChange: (otp: string) => {
+                  onChange: (otp: string, activeInput: number) => {
                     setOtp(otp);
-                    if (otp.length === 6) verifyOtp(otp);
+                    console.info(`OTP: ${otp}`, `Active Input: ${activeInput}`);
+                    if (activeInput === 5) verifyOtp(otp);
                   },
-                  renderInput: (inputProps) => (
-                    <TextInput
-                      {...inputProps}
-                      className="h-10 text-center"
-                      type="text"
-                      maxLength={1}
-                      required
-                    />
-                  ),
+                  renderInput: (inputProps) =>
+                    loading ? (
+                      <div className="h-10 w-10 animate-pulse rounded-full bg-gray-300" />
+                    ) : (
+                      <TextInput
+                        {...inputProps}
+                        className="h-10 text-center"
+                        type="text"
+                        maxLength={1}
+                        required
+                      />
+                    ),
                   containerStyle: "flex justify-between w-full my-4",
                   shouldAutoFocus: true,
                 }}
