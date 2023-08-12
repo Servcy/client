@@ -24,7 +24,7 @@ export const sendOtp = async (input: string, inputType: string) => {
   return data;
 };
 
-export const refreshTokensApi = async (
+export const refreshTokens = async (
   refreshToken: string,
   setCookie: (key: string, value: string) => void // eslint-disable-line no-unused-vars
 ) => {

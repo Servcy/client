@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// Types
-import { Integration } from "@/types/Integrations";
 // Components
 import Sidebar from "@/components/Shared/sidebar";
-import { getGoogleUrl } from "@/utils/Integration/google";
+import { getGoogleUrl } from "@/utils/Integration/gmail";
 import { Button, Card } from "flowbite-react";
 import Image from "next/image.js";
 import { AiOutlineApi } from "react-icons/ai";
@@ -14,7 +12,14 @@ import { HiArrowsRightLeft } from "react-icons/hi2";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
 
-export default function Index(): JSX.Element {
+export interface Integration {
+  id: number;
+  name: string;
+  logo: string;
+  description: string;
+}
+
+export default function Integrations(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
 
   useEffect(() => {
