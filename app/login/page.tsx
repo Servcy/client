@@ -138,6 +138,7 @@ export default function Login(): JSX.Element {
                   id="agree_terms_conditions_and_privacy_policy"
                   className="mr-2 checked:bg-green-700 hover:ring-2 hover:ring-green-500"
                   required
+                  defaultChecked
                 />
                 <Label
                   htmlFor="agree_terms_conditions_and_privacy_policy"
