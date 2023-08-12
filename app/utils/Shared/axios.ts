@@ -8,10 +8,13 @@ const SERVER_URL = process.env["NEXT_PUBLIC_SERVER_URL"];
 
 export const axiosGet = async (url: string, params: Record<string, string>) => {
   const encodedParams = new URLSearchParams();
-  const accessToken = String(getCookie("accessToken") ?? "");
-  const refreshToken = String(getCookie("refreshToken") ?? "");
-  if (isJwtTokenValid(refreshToken) && !isJwtTokenValid(accessToken))
-    refreshTokensApi(refreshToken, setCookie);
+  let accessToken = String(getCookie("accessToken") ?? "");
+  let refreshToken = String(getCookie("refreshToken") ?? "");
+  if (isJwtTokenValid(refreshToken) && !isJwtTokenValid(accessToken)) {
+    await refreshTokensApi(refreshToken, setCookie);
+    accessToken = String(getCookie("accessToken") ?? "");
+    refreshToken = String(getCookie("refreshToken") ?? "");
+  }
   Object.keys(params).forEach((key: string) => {
     encodedParams.append(key, params[key] ?? "");
   });
