@@ -3,35 +3,36 @@ import Axios from "axios";
 const SERVER_URL = process.env["NEXT_PUBLIC_SERVER_URL"];
 
 export const verifyOtp = async (
-  code_email: string,
-  code_phone: string,
-  email: string,
-  phone_number: string,
-  phone_is_whatsapp: boolean
+  otp: string,
+  input: string,
+  inputType: string
 ) => {
   const response = Axios.post(`${SERVER_URL}/authentication`, {
-    code_email,
-    code_phone,
-    email,
-    phone_number: phone_number.replace("+", ""),
-    is_whatsapp: phone_is_whatsapp,
+    otp,
+    input,
+    input_type: inputType,
   });
   const { data } = await response;
   return data;
 };
 
-export const sendOtp = async (
-  email: string,
-  phone_number: string,
-  phone_is_whatsapp: boolean
-) => {
-  const is_whatsapp = phone_is_whatsapp ? "yes" : "no";
+export const sendOtp = async (input: string, inputType: string) => {
   const response = Axios.get(
-    `${SERVER_URL}/authentication?email=${email}&phone_number=${phone_number.replace(
-      "+",
-      ""
-    )}&is_whatsapp=${is_whatsapp}`
+    `${SERVER_URL}/authentication?input=${input}&input_type=${inputType}`
   );
   const { data } = await response;
+  return data;
+};
+
+export const refreshTokens = async (
+  refreshToken: string,
+  setCookie: (key: string, value: string) => void // eslint-disable-line no-unused-vars
+) => {
+  const response = Axios.post(`${SERVER_URL}/refresh-token`, {
+    refresh: refreshToken,
+  });
+  const { data } = await response;
+  setCookie("accessToken", data.access);
+  setCookie("refreshToken", data.refresh);
   return data;
 };

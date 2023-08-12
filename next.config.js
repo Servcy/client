@@ -9,12 +9,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "servcy-public.s3.amazonaws.com",
-        port: "",
-        pathname: "/**",
       },
     ],
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
 };
 

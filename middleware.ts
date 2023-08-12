@@ -1,4 +1,4 @@
-import { authRoutes } from "@/constants/routes";
+import { authRoutes, routes } from "@/constants/routes";
 import { isJwtTokenValid } from "@/utils/Authentication/jwt";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -16,22 +16,20 @@ export const config = {
   ],
 };
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const refreshToken = isJwtTokenValid(
     request.cookies.get("refreshToken")?.value ?? ""
   );
-  const accessToken = isJwtTokenValid(
-    request.cookies.get("accessToken")?.value ?? ""
-  );
-  console.log(request);
-  if (
-    refreshToken &&
-    accessToken &&
-    authRoutes.includes(request.nextUrl.pathname)
-  ) {
-    return NextResponse.redirect(new URL("/", request.nextUrl.origin));
-  } else if (refreshToken && accessToken) {
-    return;
+  if (refreshToken) {
+    return authRoutes.includes(request.nextUrl.pathname)
+      ? NextResponse.redirect(new URL("/", request.nextUrl.origin))
+      : routes.includes(request.nextUrl.pathname)
+      ? NextResponse.redirect(new URL("/wip", request.nextUrl.origin))
+      : NextResponse.next();
   }
-  return NextResponse.redirect(new URL("/login", request.url));
+  return authRoutes.includes(request.nextUrl.pathname)
+    ? null
+    : NextResponse.redirect(
+        new URL("/login", request.nextUrl.origin).toString()
+      );
 }
