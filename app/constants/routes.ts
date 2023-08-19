@@ -1,7 +1,6 @@
 export const authRoutes = ["/login"];
 
 export const routes = [
-  "/inbox",
   "/calendar",
   "/projects",
   "/clients",

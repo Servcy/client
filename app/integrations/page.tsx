@@ -7,7 +7,7 @@ import Sidebar from "@/components/Shared/sidebar";
 import { getGoogleUrl } from "@/utils/Integration/gmail";
 import { Button, Card, Tooltip } from "flowbite-react";
 import Image from "next/image.js";
-import { AiOutlineApi, AiOutlineSafety } from "react-icons/ai";
+import { AiOutlineApi, AiOutlineInfoCircle } from "react-icons/ai";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
@@ -63,21 +63,18 @@ export default function Integrations(): JSX.Element {
                 </div>
               </div>
               <div className="mt-2 text-sm">{integration.description}</div>
-              {integration.account_ids.length === 0 ? (
-                <div>
-                  <Button
-                    className="mt-2 flex-1 enabled:hover:text-green-500"
-                    color="gray"
-                    outline
-                    size="sm"
-                    onClick={() => connect(integration)}
-                  >
-                    <HiArrowsRightLeft className="my-auto mr-2" />
-                    Connect
-                  </Button>
-                </div>
-              ) : (
-                <div>
+              <div className="mt-2 flex flex-row justify-between">
+                <Button
+                  className=" enabled:hover:text-green-500"
+                  color="gray"
+                  outline
+                  size="sm"
+                  onClick={() => connect(integration)}
+                >
+                  <HiArrowsRightLeft className="my-auto mr-2" />
+                  Connect
+                </Button>
+                {integration.account_ids.length !== 0 && (
                   <Tooltip
                     content={integration.account_ids.map((id) => (
                       <div key={id}>{id}</div>
@@ -86,17 +83,17 @@ export default function Integrations(): JSX.Element {
                     animation="duration-500"
                   >
                     <Button
-                      className="border-1 mt-2 flex-1 border-green-500 p-0"
+                      className="border-1 h-full border-green-500 p-0"
                       color="green"
+                      pill
                       outline
                       size="sm"
                     >
-                      <AiOutlineSafety className="my-auto mr-2" color="green" />
-                      <span className="text-green-500">Connected</span>
+                      <AiOutlineInfoCircle className="my-auto" color="green" />
                     </Button>
                   </Tooltip>
-                </div>
-              )}
+                )}
+              </div>
             </Card>
           ))}
         </section>

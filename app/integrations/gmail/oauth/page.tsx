@@ -20,10 +20,11 @@ export default function GoogleOauth(): JSX.Element {
     googleOauthApi(params["code"] ?? "", params["scope"] ?? "")
       .then(() => {
         toast.success("Gmail connected successfully!");
-        router.push("/integrations/gmail");
       })
       .catch((error) => {
         toast.error(error.response.data.detail);
+      })
+      .finally(() => {
         router.push("/integrations");
       });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
