@@ -1,10 +1,11 @@
 "use client";
 
+import { getGoogleUrl } from "@/utils/Integration/gmail";
+import { getMicrosoftOauthUrl } from "@/utils/Integration/outlook";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
 import Sidebar from "@/components/Shared/sidebar";
-import { getGoogleUrl } from "@/utils/Integration/gmail";
 import { Button, Card, Tooltip } from "flowbite-react";
 import Image from "next/image.js";
 import { AiOutlineApi, AiOutlineInfoCircle } from "react-icons/ai";
@@ -36,6 +37,8 @@ export default function Integrations(): JSX.Element {
   const connect = (integration: Integration) => {
     if (integration.name === "Gmail")
       window.location.href = getGoogleUrl(window.location.href);
+    else if (integration.name === "Outlook")
+      window.location.href = getMicrosoftOauthUrl(window.location.href);
   };
 
   return (
