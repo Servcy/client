@@ -1,5 +1,6 @@
 "use client";
 
+import cn from "classnames";
 import { useEffect, useState } from "react";
 // Components
 import Sidebar from "@/components/Shared/sidebar";
@@ -39,12 +40,14 @@ export default function Gmail(): JSX.Element {
               className="border-1 ml-auto h-full border-green-500 p-0"
               color="green"
               pill
-              isProcessing={loading}
               outline
               size="sm"
             >
-              {!loading && <AiOutlineSync className="my-auto mr-2" />}
-              Sync
+              <AiOutlineSync
+                className={cn("my-auto", {
+                  "animate-spin": loading,
+                })}
+              />
             </Button>
           </div>
         </header>
