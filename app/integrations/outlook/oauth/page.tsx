@@ -17,11 +17,7 @@ export default function MicrosoftOauth(): JSX.Element {
     const params: Record<string, string> = getQueryParams(
       window.location.search
     );
-    microsoftOauthApi(
-      params["code"] ?? "",
-      params["state"] ?? "",
-      params["session_state"] ?? ""
-    )
+    microsoftOauthApi(params["code"] ?? "", params["session_state"] ?? "")
       .then(() => {
         toast.success("Outlook connected successfully!");
       })

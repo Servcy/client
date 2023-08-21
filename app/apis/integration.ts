@@ -13,14 +13,9 @@ export const googleOauth = async (code: string, scope: string) => {
   return response;
 };
 
-export const microsoftOauth = async (
-  code: string,
-  state: string,
-  session_state: string
-) => {
+export const microsoftOauth = async (code: string, session_state: string) => {
   const response = await axiosPut("/integration/microsoft/oauth", {
     code,
-    state,
     session_state,
   });
   return response;
