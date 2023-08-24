@@ -20,3 +20,8 @@ export const microsoftOauth = async (code: string, session_state: string) => {
   });
   return response;
 };
+
+export const notionOauth = async (payload: object) => {
+  const response = await axiosPut("/integration/notion/oauth", payload);
+  return response;
+};
