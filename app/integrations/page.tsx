@@ -60,7 +60,7 @@ export default function Integrations(): JSX.Element {
             <Card key={integration.id} className="min-h-[200px] rounded-lg">
               <div className="flex flex-row">
                 <Image
-                  className="my-auto mr-5 min-h-[40px] rounded-lg border border-gray-300 p-1"
+                  className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-gray-300 p-1"
                   src={integration.logo}
                   width={40}
                   height={40}
