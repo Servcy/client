@@ -1,4 +1,4 @@
-export const getMicrosoftOauthUrl = (from: string) => {
+const getMicrosoftOauthUrl = (from: string) => {
   const scopes = ["User.Read", "Mail.Read", "openid", "profile", "email"];
   const options = [
     ["client_id", process.env["NEXT_PUBLIC_MICROSOFT_CLIENT_ID"] ?? ""],
@@ -14,7 +14,7 @@ export const getMicrosoftOauthUrl = (from: string) => {
   )}`;
 };
 
-export const getGoogleOauthUrl = (from: string) => {
+const getGoogleOauthUrl = (from: string) => {
   const options = [
     ["redirect_uri", process.env["NEXT_PUBLIC_GOOGLE_REDIRECT_URI"] ?? ""],
     ["client_id", process.env["NEXT_PUBLIC_GOOGLE_CLIENT_ID"] ?? ""],
@@ -37,7 +37,7 @@ export const getGoogleOauthUrl = (from: string) => {
   )}`;
 };
 
-export const getNotionOauthUrl = (from: string) => {
+const getNotionOauthUrl = (from: string) => {
   return `https://api.notion.com/v1/oauth/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_NOTION_CLIENT_ID"] ?? ""],
     ["redirect_uri", process.env["NEXT_PUBLIC_NOTION_REDIRECT_URI"] ?? ""],
@@ -47,7 +47,7 @@ export const getNotionOauthUrl = (from: string) => {
   ])}`;
 };
 
-export const getSlackOauthUrl = (from: string) => {
+const getSlackOauthUrl = (from: string) => {
   return `https://slack.com/oauth/v2/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_SLACK_CLIENT_ID"] ?? ""],
     ["redirect_uri", process.env["NEXT_PUBLIC_SLACK_REDIRECT_URI"] ?? ""],
@@ -57,4 +57,11 @@ export const getSlackOauthUrl = (from: string) => {
     ],
     ["state", from],
   ])}`;
+};
+
+export const oauthUrlGenerators: Record<string, Function> = {
+  Gmail: getGoogleOauthUrl,
+  Outlook: getMicrosoftOauthUrl,
+  Notion: getNotionOauthUrl,
+  Slack: getSlackOauthUrl,
 };

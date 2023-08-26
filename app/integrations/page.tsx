@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  getGoogleOauthUrl,
-  getMicrosoftOauthUrl,
-  getNotionOauthUrl,
-} from "@/utils/Integration";
+import { oauthUrlGenerators } from "@/utils/Integration";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
@@ -38,12 +34,12 @@ export default function Integrations(): JSX.Element {
   }, []);
 
   const connect = (integration: Integration) => {
-    if (integration.name === "Gmail")
-      window.location.href = getGoogleOauthUrl(window.location.href);
-    else if (integration.name === "Outlook")
-      window.location.href = getMicrosoftOauthUrl(window.location.href);
-    else if (integration.name === "Notion")
-      window.location.href = getNotionOauthUrl(window.location.href);
+    const oauthUrlGenerator = oauthUrlGenerators[integration.name];
+    if (oauthUrlGenerator) {
+      window.location.href = oauthUrlGenerator(window.location.href);
+    } else {
+      console.error(`Unknown integration: ${integration.name}`);
+    }
   };
 
   return (

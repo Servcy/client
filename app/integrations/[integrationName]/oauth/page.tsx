@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 // Components
@@ -8,20 +8,29 @@ import { Spinner } from "flowbite-react";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
 // APIs
-import { notionOauth as notionOauthApi } from "@/apis/integration";
+import { integrationOauth as integrationOauthApi } from "@/apis/integration";
 
-export default function NotionOauth(): JSX.Element {
+const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export default function IntegrationOauth(): JSX.Element {
+  const params = useParams();
   const router = useRouter();
+  const { integrationName } = params;
 
   useEffect(() => {
-    const params: Record<string, string> = getQueryParams(
+    if (typeof integrationName !== "string") return;
+    const oauthParams: Record<string, string> = getQueryParams(
       window.location.search
     );
-    notionOauthApi({ ...params })
+    integrationOauthApi(oauthParams, integrationName)
       .then(() => {
-        toast.success("Notion connected successfully!");
+        toast.success(
+          `${capitalizeFirstLetter(integrationName)} connected successfully!`
+        );
       })
-      .catch((error) => {
+      .catch((error: any) => {
         toast.error(error.response.data.detail);
       })
       .finally(() => {
