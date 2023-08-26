@@ -51,7 +51,10 @@ export const getSlackOauthUrl = (from: string) => {
   return `https://slack.com/oauth/v2/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_SLACK_CLIENT_ID"] ?? ""],
     ["redirect_uri", process.env["NEXT_PUBLIC_SLACK_REDIRECT_URI"] ?? ""],
-    ["scope", "channels:read,channels:history,chat:write"],
+    [
+      "scope",
+      "channels:history,chat:write,files:read,groups:history,im:history,mpim:history",
+    ],
     ["state", from],
   ])}`;
 };
