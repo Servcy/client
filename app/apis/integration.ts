@@ -5,13 +5,7 @@ export const fetchIntegrations = async () => {
   return response.results;
 };
 
-export const integrationOauth = async (
-  payload: object,
-  integrationName: string
-) => {
-  const response = await axiosPut(
-    `/integration/${integrationName}/oauth`,
-    payload
-  );
+export const integrationOauth = async (payload: object, slug: string) => {
+  const response = await axiosPut(`/integration/oauth/${slug}`, payload);
   return response;
 };

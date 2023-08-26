@@ -3,7 +3,10 @@ const getMicrosoftOauthUrl = (from: string) => {
   const options = [
     ["client_id", process.env["NEXT_PUBLIC_MICROSOFT_CLIENT_ID"] ?? ""],
     ["response_type", "code"],
-    ["redirect_uri", process.env["NEXT_PUBLIC_MICROSOFT_REDIRECT_URI"] ?? ""],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/microsoft/oauth`,
+    ],
     ["state", from],
     ["scope", scopes.join(" ")],
     ["response_mode", "query"],
@@ -16,7 +19,10 @@ const getMicrosoftOauthUrl = (from: string) => {
 
 const getGoogleOauthUrl = (from: string) => {
   const options = [
-    ["redirect_uri", process.env["NEXT_PUBLIC_GOOGLE_REDIRECT_URI"] ?? ""],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/google/oauth`,
+    ],
     ["client_id", process.env["NEXT_PUBLIC_GOOGLE_CLIENT_ID"] ?? ""],
     ["access_type", "offline"],
     ["response_type", "code"],
@@ -40,7 +46,10 @@ const getGoogleOauthUrl = (from: string) => {
 const getNotionOauthUrl = (from: string) => {
   return `https://api.notion.com/v1/oauth/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_NOTION_CLIENT_ID"] ?? ""],
-    ["redirect_uri", process.env["NEXT_PUBLIC_NOTION_REDIRECT_URI"] ?? ""],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/notion/oauth`,
+    ],
     ["response_type", "code"],
     ["owner", "user"],
     ["state", from],
@@ -50,7 +59,10 @@ const getNotionOauthUrl = (from: string) => {
 const getSlackOauthUrl = (from: string) => {
   return `https://slack.com/oauth/v2/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_SLACK_CLIENT_ID"] ?? ""],
-    ["redirect_uri", process.env["NEXT_PUBLIC_SLACK_REDIRECT_URI"] ?? ""],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/slack/oauth`,
+    ],
     [
       "user_scope",
       "channels:history,chat:write,files:read,groups:history,im:history,mpim:history,pins:read,reactions:read,usergroups:read",
@@ -64,4 +76,6 @@ export const oauthUrlGenerators: Record<string, Function> = {
   Outlook: getMicrosoftOauthUrl,
   Notion: getNotionOauthUrl,
   Slack: getSlackOauthUrl,
+  Github: () => "",
+  Figma: () => "",
 };

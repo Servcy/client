@@ -17,18 +17,16 @@ const capitalizeFirstLetter = (string: string) => {
 export default function IntegrationOauth(): JSX.Element {
   const params = useParams();
   const router = useRouter();
-  const { integrationName } = params;
+  const { slug } = params;
 
   useEffect(() => {
-    if (typeof integrationName !== "string") return;
+    if (typeof slug !== "string") return;
     const oauthParams: Record<string, string> = getQueryParams(
       window.location.search
     );
-    integrationOauthApi(oauthParams, integrationName)
+    integrationOauthApi(oauthParams, slug)
       .then(() => {
-        toast.success(
-          `${capitalizeFirstLetter(integrationName)} connected successfully!`
-        );
+        toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`);
       })
       .catch((error: any) => {
         toast.error(error.response.data.detail);
