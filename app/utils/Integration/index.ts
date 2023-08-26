@@ -52,7 +52,7 @@ const getSlackOauthUrl = (from: string) => {
     ["client_id", process.env["NEXT_PUBLIC_SLACK_CLIENT_ID"] ?? ""],
     ["redirect_uri", process.env["NEXT_PUBLIC_SLACK_REDIRECT_URI"] ?? ""],
     [
-      "scope",
+      "user_scope",
       "channels:history,chat:write,files:read,groups:history,im:history,mpim:history,pins:read,reactions:read,usergroups:read",
     ],
     ["state", from],
