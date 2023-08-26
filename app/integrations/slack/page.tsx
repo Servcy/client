@@ -8,18 +8,18 @@ import { Spinner } from "flowbite-react";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
 // APIs
-import { notionOauth as notionOauthApi } from "@/apis/integration";
+import { slackOauth as slackOauthApi } from "@/apis/integration";
 
-export default function NotionOauth(): JSX.Element {
+export default function SlackOauth(): JSX.Element {
   const router = useRouter();
 
   useEffect(() => {
     const params: Record<string, string> = getQueryParams(
       window.location.search
     );
-    notionOauthApi({ ...params })
+    slackOauthApi(params)
       .then(() => {
-        toast.success("Notion connected successfully!");
+        toast.success("Slack connected successfully!");
       })
       .catch((error) => {
         toast.error(error.response.data.detail);

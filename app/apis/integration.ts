@@ -25,3 +25,8 @@ export const notionOauth = async (payload: object) => {
   const response = await axiosPut("/integration/notion/oauth", payload);
   return response;
 };
+
+export const slackOauth = async (payload: object) => {
+  const response = await axiosPut("/integration/slack/oauth", payload);
+  return response;
+};
