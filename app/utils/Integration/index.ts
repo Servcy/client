@@ -85,7 +85,7 @@ const getFigmaOauthUrl = (from: string) => {
 };
 
 const getGithubOauthUrl = (from: string) => {
-  return `https://github.com/login/oauth/authorize${new URLSearchParams([
+  return `https://github.com/login/oauth/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_GITHUB_CLIENT_ID"] ?? ""],
     [
       "redirect_uri",
