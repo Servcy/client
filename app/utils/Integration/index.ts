@@ -71,11 +71,24 @@ const getSlackOauthUrl = (from: string) => {
   ])}`;
 };
 
+const getFigmaOauthUrl = (from: string) => {
+  return `https://www.figma.com/oauth?${new URLSearchParams([
+    ["client_id", process.env["NEXT_PUBLIC_FIGMA_CLIENT_ID"] ?? ""],
+    ["response_type", "code"],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/figma/oauth`,
+    ],
+    ["scope", "files:read,file_comments:write,webhooks:write"],
+    ["state", from],
+  ])}`;
+};
+
 export const oauthUrlGenerators: Record<string, Function> = {
   Gmail: getGoogleOauthUrl,
   Outlook: getMicrosoftOauthUrl,
   Notion: getNotionOauthUrl,
   Slack: getSlackOauthUrl,
   Github: () => "",
-  Figma: () => "",
+  Figma: getFigmaOauthUrl,
 };
