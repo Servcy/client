@@ -84,11 +84,22 @@ const getFigmaOauthUrl = (from: string) => {
   ])}`;
 };
 
+const getGithubOauthUrl = (from: string) => {
+  return `https://github.com/login/oauth/authorize${new URLSearchParams([
+    ["client_id", process.env["NEXT_PUBLIC_GITHUB_CLIENT_ID"] ?? ""],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/github/oauth`,
+    ],
+    ["state", from],
+  ])}`;
+};
+
 export const oauthUrlGenerators: Record<string, Function> = {
   Gmail: getGoogleOauthUrl,
   Outlook: getMicrosoftOauthUrl,
   Notion: getNotionOauthUrl,
   Slack: getSlackOauthUrl,
-  Github: () => "",
+  Github: getGithubOauthUrl,
   Figma: getFigmaOauthUrl,
 };
