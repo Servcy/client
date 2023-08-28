@@ -29,7 +29,7 @@ export default function IntegrationOauth(): JSX.Element {
         toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`);
       })
       .catch((error: any) => {
-        toast.error(error.response.data.detail);
+        toast.error(error?.response?.data?.detail || "Something went wrong!");
       })
       .finally(() => {
         router.push("/integrations");
