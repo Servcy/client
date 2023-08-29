@@ -28,7 +28,9 @@ export default function IntegrationOauth(): JSX.Element {
       .then((response) => {
         toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`);
         if (response?.results !== "null")
-          router.push(response?.results?.redirect || "/integrations");
+          router.push(
+            JSON.parse(response?.results)?.redirect || "/integrations"
+          );
         else router.push("/integrations");
       })
       .catch((error: any) => {
