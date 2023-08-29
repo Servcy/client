@@ -1,10 +1,10 @@
 "use client";
 
+import { oauthUrlGenerators } from "@/utils/Integration";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
 import Sidebar from "@/components/Shared/sidebar";
-import { getGoogleUrl } from "@/utils/Integration/gmail";
 import { Button, Card, Tooltip } from "flowbite-react";
 import Image from "next/image.js";
 import { AiOutlineApi, AiOutlineInfoCircle } from "react-icons/ai";
@@ -17,7 +17,7 @@ export interface Integration {
   name: string;
   logo: string;
   description: string;
-  account_ids: string[];
+  account_display_names: string[];
 }
 
 export default function Integrations(): JSX.Element {
@@ -34,8 +34,12 @@ export default function Integrations(): JSX.Element {
   }, []);
 
   const connect = (integration: Integration) => {
-    if (integration.name === "Gmail")
-      window.location.href = getGoogleUrl(window.location.href);
+    const oauthUrlGenerator = oauthUrlGenerators[integration.name];
+    if (oauthUrlGenerator) {
+      window.location.href = oauthUrlGenerator(window.location.href);
+    } else {
+      console.error(`Unknown integration: ${integration.name}`);
+    }
   };
 
   return (
@@ -52,7 +56,7 @@ export default function Integrations(): JSX.Element {
             <Card key={integration.id} className="min-h-[200px] rounded-lg">
               <div className="flex flex-row">
                 <Image
-                  className="my-auto mr-5 min-h-[40px] rounded-lg border border-gray-300 p-1"
+                  className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-gray-300 p-1"
                   src={integration.logo}
                   width={40}
                   height={40}
@@ -74,11 +78,15 @@ export default function Integrations(): JSX.Element {
                   <HiArrowsRightLeft className="my-auto mr-2" />
                   Connect
                 </Button>
-                {integration.account_ids.length !== 0 && (
+                {integration.account_display_names.length !== 0 && (
                   <Tooltip
-                    content={integration.account_ids.map((id) => (
-                      <div key={id}>{id}</div>
-                    ))}
+                    content={integration.account_display_names.map(
+                      (account_display_name, index) => (
+                        <div key={`account_display_name-${index}`}>
+                          {account_display_name}
+                        </div>
+                      )
+                    )}
                     placement="bottom-start"
                     animation="duration-500"
                   >

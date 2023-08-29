@@ -16,6 +16,8 @@ Install the dependencies:
 yarn install
 ```
 
+### Please make sure that you've populated values for environment variables using .env-example
+
 Now you can run the development server:
 
 ```bash
