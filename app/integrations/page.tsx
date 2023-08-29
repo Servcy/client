@@ -17,7 +17,7 @@ export interface Integration {
   name: string;
   logo: string;
   description: string;
-  account_ids: string[];
+  account_display_names: string[];
 }
 
 export default function Integrations(): JSX.Element {
@@ -78,11 +78,15 @@ export default function Integrations(): JSX.Element {
                   <HiArrowsRightLeft className="my-auto mr-2" />
                   Connect
                 </Button>
-                {integration.account_ids.length !== 0 && (
+                {integration.account_display_names.length !== 0 && (
                   <Tooltip
-                    content={integration.account_ids.map((id) => (
-                      <div key={id}>{id}</div>
-                    ))}
+                    content={integration.account_display_names.map(
+                      (account_display_name, index) => (
+                        <div key={`account_display_name-${index}`}>
+                          {account_display_name}
+                        </div>
+                      )
+                    )}
                     placement="bottom-start"
                     animation="duration-500"
                   >
