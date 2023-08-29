@@ -25,13 +25,14 @@ export default function IntegrationOauth(): JSX.Element {
       window.location.search
     );
     integrationOauthApi(oauthParams, slug)
-      .then(() => {
+      .then((response) => {
         toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`);
+        if (response?.results !== "null")
+          router.push(response?.results?.redirect || "/integrations");
+        else router.push("/integrations");
       })
       .catch((error: any) => {
         toast.error(error?.response?.data?.detail || "Something went wrong!");
-      })
-      .finally(() => {
         router.push("/integrations");
       });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
