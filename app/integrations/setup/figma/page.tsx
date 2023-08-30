@@ -1,48 +1,88 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
 // Components
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, Label, Select, TextInput } from "flowbite-react";
 import Image from "next/image.js";
 import { MdOutlineSyncAlt } from "react-icons/md";
 // APIs
-import { configureFigma as configureFigmaApi } from "@/apis/integration";
+import {
+  configureUserIntegration as configureUserIntegrationApi,
+  fetchUserIntegrations as fetchUserIntegrationsApi,
+} from "@/apis/integration";
+
+export interface UserIntegration {
+  id: number;
+  account_display_name: string;
+  account_id: string;
+  integration_id: number;
+  user_id: number;
+  configuration: string;
+}
 
 export default function FigmaSetup(): JSX.Element {
-  const [query, setQueryParams] = useState<Record<string, string>>({});
-  const router = useRouter();
-  const [teamIds, setTeamIds] = useState<string[]>([""]);
+  const [userIntegrationId, setUserIntegrationId] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [saving, setSaving] = useState<boolean>(false);
+  const [teamIds, setTeamIds] = useState<Set<string>>(new Set([""]));
+  const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>(
+    []
+  );
 
   useEffect(() => {
-    setQueryParams(getQueryParams(window.location.search));
-    console.log(getQueryParams(window.location.search));
+    setLoading(true);
+    const queryParams: Record<string, string> = getQueryParams(
+      window.location.search
+    );
+    setUserIntegrationId(
+      Number.parseInt(queryParams["user_integration_id"] ?? "")
+    );
+    fetchUserIntegrationsApi("Figma")
+      .then((response) => {
+        setUserIntegrations(response);
+        if (response.length === 1) {
+          setUserIntegrationId(response[0].id);
+          setTeamIds(new Set(response[0].configuration.team_ids));
+        }
+      })
+      .catch((error) => {
+        toast.error(error.response.data.detail);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
-
-  const addTeamId = () => {
-    if (teamIds.length > 2) {
-      toast.error("You can add a maximum of 3 team IDs");
-      return;
-    }
-    setTeamIds([...teamIds, ""]);
-  };
 
   const configureFigma = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    configureFigmaApi({
-      teamIds,
-      userIntegrationId: query["user_integration_id"],
-    })
+    const nonEmptyTeamIds = new Set(teamIds);
+    nonEmptyTeamIds.delete("");
+    if (nonEmptyTeamIds.size === 0) {
+      toast.error("Please enter atleast one team ID");
+      return;
+    }
+    setSaving(true);
+    configureUserIntegrationApi(
+      userIntegrationId,
+      {
+        team_ids: Array.from(nonEmptyTeamIds),
+      },
+      "Figma"
+    )
       .then(() => {
         toast.success("Figma configured successfully!");
-        router.push("/integrations");
       })
       .catch((error: any) => {
         toast.error(error?.response?.data?.detail || "Something went wrong!");
-        router.push("/integrations");
+      })
+      .finally(() => {
+        setSaving(false);
+        setTimeout(() => {
+          window.close();
+        }, 1000);
       });
   };
 
@@ -73,6 +113,36 @@ export default function FigmaSetup(): JSX.Element {
               />
               <div className="my-auto">Figma Integration Setup</div>
             </div>
+            {loading ? (
+              <div className="mt-8 ml-auto mb-2.5 h-5 animate-pulse rounded-full bg-gray-300 dark:bg-gray-600"></div>
+            ) : (
+              <Select
+                className="mt-8 ml-auto"
+                id="user_integration_id"
+                required
+                helperText="Select Account"
+                value={userIntegrationId}
+                onChange={(e) => {
+                  setUserIntegrationId(Number.parseInt(e.target.value));
+                }}
+              >
+                {userIntegrations.length === 0 ? (
+                  <option value={0} className="capitalize">
+                    No accounts found
+                  </option>
+                ) : (
+                  userIntegrations.map((userIntegration) => (
+                    <option
+                      key={userIntegration.id}
+                      value={userIntegration.id}
+                      className="capitalize"
+                    >
+                      {userIntegration.account_display_name}
+                    </option>
+                  ))
+                )}
+              </Select>
+            )}
             <section className="mt-8">
               <span className="font-sans text-lg font-semibold">
                 To find your team IDs follow listed instructions:
@@ -107,32 +177,48 @@ export default function FigmaSetup(): JSX.Element {
           <div className="w-full flex-col p-4">
             <form className="flex flex-col gap-4" onSubmit={configureFigma}>
               <div>
-                {teamIds.map((teamId, index) => (
-                  <div key={index} className="py-2">
+                {loading ? (
+                  <>
                     <Label>Team ID</Label>
-                    <TextInput
-                      value={teamId}
-                      placeholder="Enter team ID"
-                      onChange={(e) => {
-                        const newTeamIds = [...teamIds];
-                        newTeamIds[index] = e.target.value;
-                        setTeamIds(newTeamIds);
-                      }}
-                    />
-                  </div>
-                ))}
+                    <div className="my-3 h-5 animate-pulse rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                    <Label className="mt-5">Team ID</Label>
+                    <div className="my-3 h-5 animate-pulse rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                  </>
+                ) : (
+                  Array.from(teamIds).map((teamId, index) => (
+                    <div key={index} className="py-2">
+                      <Label>Team ID</Label>
+                      <TextInput
+                        value={teamId}
+                        placeholder="Enter team ID"
+                        onChange={(e) => {
+                          const newTeamIds = new Set(teamIds);
+                          newTeamIds.delete(teamId);
+                          newTeamIds.add(e.target.value);
+                          setTeamIds(newTeamIds);
+                        }}
+                      />
+                    </div>
+                  ))
+                )}
               </div>
               <div className="flex items-center gap-2">
                 <Button
                   size="xs"
                   color="cyan"
                   outline
-                  onClick={() => addTeamId()}
+                  onClick={() => {
+                    if (teamIds.has("")) return;
+                    const newTeamIds = new Set(teamIds);
+                    newTeamIds.add("");
+                    setTeamIds(newTeamIds);
+                  }}
+                  disabled={teamIds.size > 2 || saving}
                 >
                   + Add More
                 </Button>
               </div>
-              <Button color="success" type="submit">
+              <Button color="success" type="submit" isProcessing={saving}>
                 Submit
               </Button>
             </form>
