@@ -78,7 +78,11 @@ export default function Integrations(): JSX.Element {
                       rel="noreferrer"
                       className="my-auto ml-auto"
                     >
-                      <AiOutlineSetting />
+                      <AiOutlineSetting
+                        size={20}
+                        color="gray"
+                        className="hover:animate-spin"
+                      />
                     </a>
                   )}
               </div>
