@@ -7,7 +7,11 @@ import toast from "react-hot-toast";
 import Sidebar from "@/components/Shared/sidebar";
 import { Button, Card, Tooltip } from "flowbite-react";
 import Image from "next/image.js";
-import { AiOutlineApi, AiOutlineInfoCircle } from "react-icons/ai";
+import {
+  AiOutlineApi,
+  AiOutlineInfoCircle,
+  AiOutlineSetting,
+} from "react-icons/ai";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
@@ -18,6 +22,7 @@ export interface Integration {
   logo: string;
   description: string;
   account_display_names: string[];
+  configure_at: string; // relative or absolute url
 }
 
 export default function Integrations(): JSX.Element {
@@ -65,6 +70,17 @@ export default function Integrations(): JSX.Element {
                 <div className="my-auto flex-col text-lg font-semibold">
                   {integration.name}
                 </div>
+                {integration.configure_at !== "None" &&
+                  integration.account_display_names.length !== 0 && (
+                    <a
+                      href={integration.configure_at}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="my-auto ml-auto"
+                    >
+                      <AiOutlineSetting />
+                    </a>
+                  )}
               </div>
               <div className="mt-2 text-sm">{integration.description}</div>
               <div className="mt-2 flex flex-row justify-between">
