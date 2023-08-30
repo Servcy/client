@@ -27,11 +27,13 @@ export default function IntegrationOauth(): JSX.Element {
     integrationOauthApi(oauthParams, slug)
       .then((response) => {
         toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`);
-        if (response?.results !== "null")
-          router.push(
-            JSON.parse(response?.results)?.redirect || "/integrations"
-          );
-        else router.push("/integrations");
+        if (response?.results !== "null") {
+          const redirect_uri =
+            JSON.parse(response?.results)?.redirect_uri || "/integrations";
+          if (redirect_uri.startsWith("https"))
+            window.open(redirect_uri, "_blank");
+          else router.push(redirect_uri);
+        } else router.push("/integrations");
       })
       .catch((error: any) => {
         toast.error(error?.response?.data?.detail || "Something went wrong!");
