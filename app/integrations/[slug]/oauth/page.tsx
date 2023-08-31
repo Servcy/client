@@ -30,9 +30,12 @@ export default function IntegrationOauth(): JSX.Element {
         if (response?.results !== "null") {
           const redirect_uri =
             JSON.parse(response?.results)?.redirect_uri || "/integrations";
-          if (redirect_uri.startsWith("https"))
-            window.open(redirect_uri, "_blank");
-          else router.push(redirect_uri);
+          if (redirect_uri.startsWith("https")) {
+            window.open("/integrations", "_blank");
+            setTimeout(() => {
+              router.push(redirect_uri);
+            }, 1000);
+          } else router.push(redirect_uri);
         } else router.push("/integrations");
       })
       .catch((error: any) => {
