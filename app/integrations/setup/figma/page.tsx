@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Utils
@@ -26,6 +27,7 @@ export interface UserIntegration {
 export default function FigmaSetup(): JSX.Element {
   const [userIntegrationId, setUserIntegrationId] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
   const [saving, setSaving] = useState<boolean>(false);
   const [teamIds, setTeamIds] = useState<Set<string>>(new Set([""]));
   const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>(
@@ -80,9 +82,7 @@ export default function FigmaSetup(): JSX.Element {
       })
       .finally(() => {
         setSaving(false);
-        setTimeout(() => {
-          window.close();
-        }, 1000);
+        router.push("/integrations");
       });
   };
 
