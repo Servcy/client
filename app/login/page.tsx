@@ -2,7 +2,7 @@
 
 import { setCookie } from "cookies-next";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Icons
 import { BiLogIn } from "react-icons/bi";
@@ -24,6 +24,8 @@ import OTPInput from "@/components/Login/OTPInput";
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link.js";
+// Context
+import { useSidebarContext } from "@/context/SidebarContext";
 
 export default function Login(): JSX.Element {
   const searchParams = useSearchParams();
@@ -35,6 +37,11 @@ export default function Login(): JSX.Element {
   const [invalidEmail, setInvalidEmail] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+  const { setIsPageWithSidebar } = useSidebarContext();
+
+  useEffect(() => {
+    setIsPageWithSidebar(false);
+  }, [setIsPageWithSidebar]);
 
   const sendOtp = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
@@ -102,7 +109,7 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <main className="flex  min-h-screen w-full">
+    <main className="flex min-h-screen w-full">
       <Card className="m-auto w-[430px] text-center">
         <Image
           src="/logo.svg"

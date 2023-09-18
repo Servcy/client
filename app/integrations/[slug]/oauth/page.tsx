@@ -9,6 +9,8 @@ import { Spinner } from "flowbite-react";
 import { getQueryParams } from "@/utils/Shared";
 // APIs
 import { integrationOauth as integrationOauthApi } from "@/apis/integration";
+// Context
+import { useSidebarContext } from "@/context/SidebarContext";
 
 const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -18,8 +20,10 @@ export default function IntegrationOauth(): JSX.Element {
   const params = useParams();
   const router = useRouter();
   const { slug } = params;
+  const { setIsPageWithSidebar } = useSidebarContext();
 
   useEffect(() => {
+    setIsPageWithSidebar(false);
     if (typeof slug !== "string") return;
     const oauthParams: Record<string, string> = getQueryParams(
       window.location.search

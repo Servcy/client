@@ -14,6 +14,8 @@ import {
   configureUserIntegration as configureUserIntegrationApi,
   fetchUserIntegrations as fetchUserIntegrationsApi,
 } from "@/apis/integration";
+// Context
+import { useSidebarContext } from "@/context/SidebarContext";
 
 export interface UserIntegration {
   id: number;
@@ -33,8 +35,10 @@ export default function FigmaSetup(): JSX.Element {
   const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>(
     []
   );
+  const { setIsPageWithSidebar } = useSidebarContext();
 
   useEffect(() => {
+    setIsPageWithSidebar(false);
     setLoading(true);
     const queryParams: Record<string, string> = getQueryParams(
       window.location.search
