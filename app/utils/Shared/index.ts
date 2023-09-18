@@ -5,3 +5,11 @@ export const getQueryParams = (search: string) => {
     {}
   );
 };
+
+export function isBrowser(): boolean {
+  return typeof window !== "undefined";
+}
+
+export function isSmallScreen(): boolean {
+  return isBrowser() && window.innerWidth < 1024;
+}
