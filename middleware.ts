@@ -27,9 +27,11 @@ export async function middleware(request: NextRequest) {
       ? NextResponse.redirect(new URL("/wip", request.nextUrl.origin))
       : NextResponse.next();
   }
-  return authRoutes.includes(request.nextUrl.pathname)
-    ? null
-    : NextResponse.redirect(
-        new URL("/login", request.nextUrl.origin).toString()
-      );
+  if (authRoutes.includes(request.nextUrl.pathname)) return null;
+  return NextResponse.redirect(
+    new URL(
+      "/login?nextUrl=" + request.nextUrl.pathname,
+      request.nextUrl.origin
+    )
+  );
 }

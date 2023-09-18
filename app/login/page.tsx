@@ -1,7 +1,7 @@
 "use client";
 
 import { setCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 // Icons
@@ -26,6 +26,7 @@ import Image from "next/image";
 import Link from "next/link.js";
 
 export default function Login(): JSX.Element {
+  const searchParams = useSearchParams();
   const [stage, setStage] = useState<number>(0);
   const [inputType, setInputType] = useState<string>("email");
   const [input, setInput] = useState<string>("");
@@ -93,7 +94,8 @@ export default function Login(): JSX.Element {
       setCookie("accessToken", tokens.access_token, {
         path: "/",
       });
-      router.replace("/");
+      const nextUrl = searchParams.get("nextUrl") ?? "/";
+      router.push(nextUrl);
     } finally {
       setLoading(false);
     }
