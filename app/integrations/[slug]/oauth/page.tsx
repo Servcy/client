@@ -41,10 +41,12 @@ export default function IntegrationOauth(): JSX.Element {
             }, 1000);
           } else router.push(redirect_uri);
         } else router.push("/integrations");
+        setIsPageWithSidebar(true);
       })
       .catch((error: any) => {
         toast.error(error?.response?.data?.detail || "Something went wrong!");
         router.push("/integrations");
+        setIsPageWithSidebar(true);
       });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

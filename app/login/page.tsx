@@ -103,6 +103,7 @@ export default function Login(): JSX.Element {
       });
       const nextUrl = searchParams.get("nextUrl") ?? "/";
       router.push(nextUrl);
+      setIsPageWithSidebar(true);
     } finally {
       setLoading(false);
     }

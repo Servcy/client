@@ -87,6 +87,7 @@ export default function FigmaSetup(): JSX.Element {
       .finally(() => {
         setSaving(false);
         router.push("/integrations");
+        setIsPageWithSidebar(true);
       });
   };
 
