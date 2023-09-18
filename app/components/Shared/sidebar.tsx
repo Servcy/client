@@ -8,6 +8,7 @@ import {
   AiOutlineCalendar,
   AiOutlineDollarCircle,
   AiOutlineFileSearch,
+  AiOutlineHome,
   AiOutlineInbox,
   AiOutlineProject,
   AiOutlineSetting,
@@ -24,6 +25,9 @@ export default function SideBar(): JSX.Element {
         </Sidebar.Logo>
         <Sidebar.Items className="mt-10">
           <Sidebar.ItemGroup>
+            <Sidebar.Item className="mb-2" icon={AiOutlineHome} href="/">
+              <p className="text-base">Dashboard</p>
+            </Sidebar.Item>
             <Sidebar.Item className="mb-2" href="/inbox" icon={AiOutlineInbox}>
               <p className="text-base">Inbox</p>
             </Sidebar.Item>
