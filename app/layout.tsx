@@ -32,6 +32,7 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
 const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
   const { isPageWithSidebar, isOpenOnSmallScreens, setOpenOnSmallScreens } =
     useSidebarContext();
+
   return (
     <div className="flex">
       {children}
