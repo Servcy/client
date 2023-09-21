@@ -37,30 +37,32 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
     <div className="flex">
       {children}
       {isPageWithSidebar ? (
-        <div
-          className={cn("order-1", {
-            hidden: isSmallScreen() && !isOpenOnSmallScreens,
-          })}
-        >
-          <Sidebar />
-        </div>
+        <>
+          <div
+            className={cn("order-1", {
+              hidden: isSmallScreen() && !isOpenOnSmallScreens,
+            })}
+          >
+            <Sidebar />
+          </div>
+          {isSmallScreen() && !isOpenOnSmallScreens && (
+            <AiOutlineMenu
+              className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-900 p-2 text-4xl text-white"
+              onClick={() => {
+                setOpenOnSmallScreens(true);
+              }}
+            />
+          )}
+          {isSmallScreen() && isOpenOnSmallScreens && (
+            <AiOutlineClose
+              className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-900 p-2 text-4xl text-white"
+              onClick={() => {
+                setOpenOnSmallScreens(false);
+              }}
+            />
+          )}
+        </>
       ) : null}
-      {isSmallScreen() && !isOpenOnSmallScreens && (
-        <AiOutlineMenu
-          className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-900 p-2 text-4xl text-white"
-          onClick={() => {
-            setOpenOnSmallScreens(true);
-          }}
-        />
-      )}
-      {isSmallScreen() && isOpenOnSmallScreens && (
-        <AiOutlineClose
-          className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-900 p-2 text-4xl text-white"
-          onClick={() => {
-            setOpenOnSmallScreens(false);
-          }}
-        />
-      )}
     </div>
   );
 };
