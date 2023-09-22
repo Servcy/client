@@ -37,9 +37,6 @@ export default function Gmail(): JSX.Element {
             onClick={syncInbox}
             className="border-1 ml-auto h-full border-green-500 p-0"
             color="green"
-            pill
-            outline
-            size="sm"
           >
             <AiOutlineSync
               className={cn("my-auto", {
