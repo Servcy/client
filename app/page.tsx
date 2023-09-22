@@ -10,23 +10,30 @@ import {
 
 const activationSteps = [
   {
+    title: "Add Your Clients",
+    description: "Add client details like name, address, email, phone etc.",
+    cta: "Add",
+    href: "/clients?tour_step=add-client",
+  },
+  {
     title: "Add Your Projects",
     description: "Add your on-going projects or start a new one",
     cta: "Add",
     href: "/projects?tour_step=add-project",
   },
   {
-    title: "Integrate Your SaaS Stack",
-    description: "Integrate your SaaS stack like GitHub, Slack, Google etc.",
+    title: "Integrate Your Apps",
+    description:
+      "Integrate workspaces like GitHub, Slack, Google, Notion, Figma, Linear, Jira, Trello etc.",
     cta: "Integrate",
     href: "/integrations?tour_step=integrate-saas-stack",
   },
   {
-    title: "Associate Your Accounts",
+    title: "Invite Your Team",
     description:
-      "Associate client emails, GitHub repos, Slack channels, Notion pages etc. with your projects",
-    cta: "Associate",
-    href: "/projects?tour_step=associate-account-with-project",
+      "Invite your team members, and assign them to projects with roles",
+    cta: "Invite",
+    href: "/team?tour_step=invite-team",
   },
 ];
 
@@ -44,11 +51,11 @@ export default function Index(): JSX.Element {
           <AiOutlineRocket size="24" className="my-auto mr-2" />
           Account Activation Steps
         </div>
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 lg:grid-cols-4">
           {activationSteps.map((step, index) => (
             <div
               key={index}
-              className="rounded-lg border  bg-servcy-black p-4 text-servcy-white shadow-sm"
+              className="rounded-lg border bg-servcy-black p-4 text-servcy-white shadow-sm"
             >
               <div className="mb-4 h-20">
                 <h5 className="mb-3 font-semibold tracking-tight">
