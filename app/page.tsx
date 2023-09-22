@@ -49,7 +49,7 @@ export default function Index(): JSX.Element {
       <div className="mb-6 min-h-[80px] rounded-lg bg-servcy-white p-6 text-lg">
         <div className="mb-4 flex flex-row">
           <AiOutlineRocket size="24" className="my-auto mr-2" />
-          Account Activation Steps
+          Start Your Journey
         </div>
         <div className="grid gap-8 lg:grid-cols-4">
           {activationSteps.map((step, index) => (
