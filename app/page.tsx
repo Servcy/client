@@ -57,7 +57,7 @@ export default function Index(): JSX.Element {
               key={index}
               className="rounded-lg border bg-servcy-black p-4 text-servcy-white shadow-sm"
             >
-              <div className="mb-4 h-20">
+              <div className="mb-4 h-24">
                 <h5 className="mb-3 font-semibold tracking-tight">
                   {step.title}
                 </h5>
