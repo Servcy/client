@@ -153,8 +153,15 @@ export default function Index(): JSX.Element {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="min-h-[400px] min-w-[300px] rounded-lg border border-servcy-gray bg-servcy-white p-4 shadow-sm"
-              ></div>
+                className="min-h-[250px] rounded-lg border border-servcy-gray bg-servcy-black p-4 shadow-sm"
+              >
+                <div className="mb-4 h-20">
+                  <h5 className="mb-3 font-semibold tracking-tight">
+                    {project.name}
+                  </h5>
+                  <p className="text-sm font-normal">{project.description}</p>
+                </div>
+              </div>
             ))}
           </>
         )}
