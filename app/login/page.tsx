@@ -21,7 +21,7 @@ import {
 } from "@/apis/authentication";
 // Components
 import OTPInput from "@/components/Login/OTPInput";
-import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link.js";
 // Context
@@ -110,8 +110,8 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <main className="flex min-h-screen w-full">
-      <Card className="m-auto w-[430px] text-center">
+    <main className="flex min-h-screen w-full bg-servcy-white">
+      <div className="m-auto w-[430px] rounded-lg border border-servcy-black bg-servcy-black p-10 text-center text-servcy-white shadow-md">
         <Image
           src="/logo.svg"
           alt="Servcy logo"
@@ -119,44 +119,41 @@ export default function Login(): JSX.Element {
           width="64"
           className="mx-auto"
         />
-        <h4 className=" font-semibold">Welcome To Servcy</h4>
+        <h4 className="my-5 font-semibold">Welcome To Servcy</h4>
         <form>
           {/* email and corresponding otp */}
           {stage === 0 ? (
             <>
-              <TextInput
+              <Input
                 id="email"
                 color={invalidEmail ? "failure" : "default"}
-                icon={HiMail}
+                prefix={<HiMail className="mr-1" />}
                 required
                 placeholder="name@company.com"
                 type="email"
-                className="mb-[16px]"
+                className="mb-[16px] p-3 text-sm"
               />
-              <h2 className="s-hr-lines mb-[16px]">Or</h2>
-              <TextInput
-                icon={RiWhatsappLine}
+              <h2 className="servcy-hr-lines mb-[16px]">Or</h2>
+              <Input
                 id="phone_number"
-                required
-                type="tel"
                 color={invalidPhone ? "failure" : "default"}
+                prefix={<RiWhatsappLine className="mr-1" />}
+                required
                 placeholder="+123 456 7890"
-                className="mb-[24px] w-full"
+                type="email"
+                className="mb-[16px] p-3 text-sm"
               />
-              <div className="flex">
-                <Checkbox
+              <div className="mb-6 text-left">
+                <input
                   id="agree_terms_conditions_and_privacy_policy"
-                  className="mr-2 checked:bg-green-700 hover:ring-2 hover:ring-green-500"
-                  required
-                  defaultChecked
+                  type="checkbox"
+                  checked
+                  className="mr-2 accent-servcy-light"
                 />
-                <Label
-                  htmlFor="agree_terms_conditions_and_privacy_policy"
-                  className="mb-4 font-normal"
-                >
+                <span className="text-sm font-normal">
                   I agree to Servcys&nbsp;
                   <Link
-                    className="text-green-500"
+                    className="text-servcy-light"
                     href="https://servcy.com/documents/privacy-policy/"
                     target="_blank"
                   >
@@ -164,28 +161,28 @@ export default function Login(): JSX.Element {
                   </Link>
                   &nbsp;&&nbsp;
                   <Link
-                    className="text-green-500"
+                    className="text-servcy-light"
                     href="https://servcy.com/documents/terms-and-conditions"
                     target="_blank"
                   >
                     Terms of Service
                   </Link>
-                </Label>
+                </span>
               </div>
               <Button
-                type="submit"
+                type="default"
                 onClick={sendOtp}
-                className="w-full"
-                gradientDuoTone="greenToBlue"
+                className="flex w-full items-center justify-center text-center font-medium !text-servcy-white hover:!border-servcy-light hover:!text-servcy-light"
                 disabled={loading}
-                isProcessing={loading}
+                size="large"
+                loading={loading}
               >
-                Send OTP <BiLogIn className="ml-3 inline" />
+                {!loading && <BiLogIn className="mr-2 inline" />} Send OTP
               </Button>
             </>
           ) : (
             <>
-              <h2 className="s-hr-lines mb-[16px]">Enter OTP</h2>
+              <h2 className="servcy-hr-lines mb-[16px]">Enter OTP</h2>
               <OTPInput
                 {...{
                   value: otp,
@@ -195,11 +192,11 @@ export default function Login(): JSX.Element {
                     console.info(`OTP: ${otp}`, `Active Input: ${activeInput}`);
                     if (activeInput === 5) verifyOtp(otp);
                   },
-                  renderInput: (inputProps) =>
+                  renderInput: (inputProps: any) =>
                     loading ? (
-                      <div className="h-10 w-10 animate-pulse rounded-full bg-gray-300" />
+                      <div className="h-10 w-10 animate-pulse rounded-full bg-servcy-white" />
                     ) : (
-                      <TextInput
+                      <Input
                         {...inputProps}
                         className="h-10 text-center"
                         type="text"
@@ -214,7 +211,7 @@ export default function Login(): JSX.Element {
             </>
           )}
         </form>
-      </Card>
+      </div>
     </main>
   );
 }

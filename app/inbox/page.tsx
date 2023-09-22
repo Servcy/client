@@ -3,7 +3,7 @@
 import cn from "classnames";
 import { useEffect, useState } from "react";
 // Components
-import { Button } from "flowbite-react";
+import { Button } from "antd";
 import { AiOutlineInbox, AiOutlineSync } from "react-icons/ai";
 // APIs
 import { syncInbox as syncInboxApi } from "@/apis/inbox";
@@ -28,8 +28,8 @@ export default function Gmail(): JSX.Element {
   }, []);
 
   return (
-    <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-slate-200 p-3">
-      <header className="mb-6 h-[80px] rounded-lg bg-white p-6">
+    <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
+      <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
         <div className="flex">
           <AiOutlineInbox className="my-auto mr-2" size="24" />
           <p className="text-xl">Inbox</p>

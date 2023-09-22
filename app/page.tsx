@@ -1,7 +1,7 @@
 "use client";
 
 // Components
-import { Button } from "flowbite-react";
+import { Button } from "antd";
 import {
   AiOutlineHome,
   AiOutlineRightCircle,
@@ -32,14 +32,14 @@ const activationSteps = [
 
 export default function Index(): JSX.Element {
   return (
-    <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-slate-200 p-3">
-      <header className="mb-6 h-[80px] rounded-lg bg-white p-6">
+    <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
+      <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
         <div className="flex flex-row">
           <AiOutlineHome size="24" className="my-auto mr-2" />
           <p className="text-xl">Dashboard</p>
         </div>
       </header>
-      <div className="mb-6 min-h-[80px] rounded-lg bg-white p-6 text-lg">
+      <div className="mb-6 min-h-[80px] rounded-lg bg-servcy-white p-6 text-lg">
         <div className="mb-4 flex flex-row">
           <AiOutlineRocket size="24" className="my-auto mr-2" />
           Account Activation Steps
@@ -48,26 +48,21 @@ export default function Index(): JSX.Element {
           {activationSteps.map((step, index) => (
             <div
               key={index}
-              className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+              className="rounded-lg border  bg-servcy-black p-4 text-servcy-white shadow-sm"
             >
               <div className="mb-4 h-20">
-                <h5 className="mb-3 font-semibold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-3 font-semibold tracking-tight">
                   {step.title}
                 </h5>
-                <p className="text-sm font-normal text-gray-700 dark:text-gray-400">
-                  {step.description}
-                </p>
+                <p className="text-sm font-normal">{step.description}</p>
               </div>
               <div className="mt-2 flex flex-row justify-between">
                 <Button
-                  className="w-32"
-                  color="gray"
-                  outline
-                  size="sm"
                   href={step.href}
+                  icon={<AiOutlineRightCircle />}
+                  className="hover:!border-servcy-light hover:!text-servcy-light"
                 >
-                  <span className="hover:text-green-500">{step.cta}</span>
-                  <AiOutlineRightCircle size="18" className="ml-2" />
+                  {step.cta}
                 </Button>
               </div>
             </div>

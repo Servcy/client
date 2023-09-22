@@ -3,17 +3,26 @@
 // Dependencies
 import cn from "classnames";
 import { useSearchParams } from "next/navigation.js";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
-import { Button, Label, Modal, Textarea, TextInput } from "flowbite-react";
+import DragDrop from "@/components/Shared/dragDrop";
+import { Button, Form, Input, Modal, Skeleton } from "antd";
 import {
   AiFillPlusCircle,
+  AiOutlineCloseCircle,
   AiOutlineProject,
   AiOutlineSave,
 } from "react-icons/ai";
 // APIs
 import { createProject, fetchProjects } from "@/apis/project";
+
+const normFile = (e: any) => {
+  if (Array.isArray(e)) {
+    return e;
+  }
+  return e?.fileList;
+};
 
 interface Project {
   id: number;
@@ -29,8 +38,11 @@ export default function Index(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(true);
   const [saving, setSaving] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>();
+  const [fileList, setFileList] = useState<number[]>([]);
+  const [fileNameIdMap, setFileNameIdMap] = useState<Record<string, number>>(
+    {}
+  );
   const [projects, setProjects] = useState<Project[]>([]);
-  const projectNameInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const tour_step = searchParams.get("tour_step");
@@ -63,27 +75,35 @@ export default function Index(): JSX.Element {
       });
   };
 
-  const createNewProject = (event: any) => {
-    event.preventDefault();
-    const name = event.target.name.value;
-    const description = event.target.description.value;
-    if (!name) {
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setFileList([]);
+    setFileNameIdMap({});
+  };
+
+  const createNewProject = () => {
+    const name = document.getElementById("project-name") as HTMLInputElement;
+    const description = document.getElementById(
+      "project-description"
+    ) as HTMLInputElement;
+    if (!name.value) {
       toast.error("Project name is required");
       return;
     }
-    if (!description) {
+    if (!description.value) {
       toast.error("Project description is required");
       return;
     }
     setSaving(true);
     createProject({
-      name,
-      description,
+      name: name.value,
+      description: description.value,
+      file_list: fileList,
     })
       .then((project) => {
         setProjects([...projects, project]);
         setTimeout(() => {
-          setIsModalOpen(false);
+          closeModal();
           toast.success("Project created successfully");
         }, 250);
         refetchProjects();
@@ -97,8 +117,8 @@ export default function Index(): JSX.Element {
   };
 
   return (
-    <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-slate-200 p-3">
-      <header className="mb-6 h-[80px] rounded-lg bg-white p-6">
+    <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
+      <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
         <div className="flex flex-row">
           <AiOutlineProject size="24" className="my-auto mr-2" />
           <p className="text-xl">Projects</p>
@@ -106,51 +126,34 @@ export default function Index(): JSX.Element {
       </header>
       <div className="grid gap-8 lg:grid-cols-3 xl:grid-cols-4">
         <button onClick={() => setIsModalOpen(true)}>
-          <div className="min-h-[400px] min-w-[300px] rounded-xl border border-gray-200 bg-white p-10 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+          <div className="min-h-[250px] rounded-lg border border-servcy-gray bg-servcy-black p-5 shadow-sm">
             <AiFillPlusCircle
-              className={cn(
-                "mx-auto my-10 h-1/2 w-1/2 text-green-300 dark:text-green-400",
-                {
-                  "animate-pulse":
-                    tourStep === "add-project" || projects.length === 0,
-                }
-              )}
+              className={cn("mx-auto my-10 h-1/3 w-1/4 text-servcy-light", {
+                "animate-pulse":
+                  tourStep === "add-project" || projects.length === 0,
+              })}
               size="48"
             />
-            <p className="text-center text-lg font-semibold text-gray-500 dark:text-gray-400">
+            <p className="text-center text-lg font-semibold text-servcy-gray">
               Add A New Project
             </p>
           </div>
         </button>
         {loading ? (
-          <div className="flex min-h-[400px] min-w-[300px] animate-pulse flex-col rounded-xl border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800">
-            <div className="flex h-full flex-col justify-between p-10">
-              <div className="flex-row">
-                <div className="mb-6 h-6 w-1/3 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                <div className="mb-3 h-6 w-full rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                <div className="mb-3 h-6 w-full rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                <div className="mb-3 h-6 w-full rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                <div className="mb-3 h-6 w-full rounded-full bg-gray-300 dark:bg-gray-700"></div>
-              </div>
-              <div role="status" className="mt-6 w-full flex-row">
-                <svg
-                  className="ml-auto h-10 w-10 text-gray-200 dark:text-gray-700"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"></path>
-                </svg>
-              </div>
-            </div>
+          <div className="min-h-[250px] rounded-lg border border-servcy-gray bg-servcy-white p-5 shadow-sm">
+            <Skeleton
+              avatar
+              paragraph={{
+                rows: 5,
+              }}
+            />
           </div>
         ) : (
           <>
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="min-h-[400px] min-w-[300px] rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                className="min-h-[400px] min-w-[300px] rounded-lg border border-servcy-gray bg-servcy-white p-4 shadow-sm"
               ></div>
             ))}
           </>
@@ -158,51 +161,64 @@ export default function Index(): JSX.Element {
       </div>
       {isModalOpen && (
         <Modal
-          show={isModalOpen}
-          size="lg"
-          popup
-          onClose={() => setIsModalOpen(false)}
-          initialFocus={projectNameInputRef}
+          title="Add a new project"
+          closeIcon={<AiOutlineCloseCircle size="24" color="servcy-black" />}
+          open={isModalOpen}
+          footer={null}
+          onCancel={() => {
+            closeModal();
+          }}
+          className="rounded-lg p-0"
         >
-          <Modal.Header />
-          <Modal.Body>
-            <div className="space-y-6">
-              <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                Add a new project
-              </h3>
-              <form onSubmit={createNewProject}>
-                <div className="mb-2 block">
-                  <Label htmlFor="name" value="Project title" />
-                </div>
-                <TextInput
-                  id="name"
-                  ref={projectNameInputRef}
-                  placeholder="Project #1"
-                  required
-                />
-                <div className="mt-4 mb-2 block">
-                  <Label htmlFor="description" value="Project description..." />
-                </div>
-                <Textarea
-                  id="description"
-                  required
-                  placeholder="lorem ipsum..."
-                  maxLength={500}
-                />
-                <Button
-                  type="submit"
-                  className="mt-8 w-full enabled:hover:text-green-500"
-                  color="gray"
-                  outline
-                  isProcessing={saving}
-                  size="sm"
-                >
-                  <span>Submit</span>
-                  <AiOutlineSave size="18" className="ml-2" />
-                </Button>
-              </form>
-            </div>
-          </Modal.Body>
+          <Form layout="vertical" className="mt-5" preserve={false}>
+            <Form.Item label="Name">
+              <Input
+                id="project-name"
+                className="hover:!border-servcy-black focus:!border-servcy-black active:!border-servcy-black"
+              />
+            </Form.Item>
+            <Form.Item label="Description">
+              <Input.TextArea
+                rows={3}
+                id="project-description"
+                className="hover:!border-servcy-black focus:!border-servcy-black active:!border-servcy-black"
+              />
+            </Form.Item>
+            <Form.Item valuePropName="fileList" getValueFromEvent={normFile}>
+              <DragDrop
+                onSave={(data, fileName) => {
+                  const fileIds = JSON.parse(data.results).file_ids;
+                  setFileList((prevState) => [...prevState, ...fileIds]);
+                  setFileNameIdMap((prevState) => ({
+                    ...prevState,
+                    [fileName]: fileIds[0],
+                  }));
+                }}
+                url="/project/upload"
+                onRemove={(file: any) => {
+                  const fileName = file.name;
+                  const fileId = fileNameIdMap[fileName];
+                  setFileList((prevState) =>
+                    prevState.filter((id) => id !== fileId)
+                  );
+                }}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                className="h-10 w-full rounded-lg !bg-servcy-black font-semibold !text-servcy-white hover:!border-servcy-light"
+                icon={<AiOutlineSave size="14" className="my-auto" />}
+                onClick={() => {
+                  createNewProject();
+                }}
+                loading={saving}
+                disabled={saving}
+              >
+                Save
+              </Button>
+            </Form.Item>
+          </Form>
         </Modal>
       )}
     </main>

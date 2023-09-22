@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
 // Components
-import { Button, Label, Select, TextInput } from "flowbite-react";
+import { Button, Input, Select } from "antd";
 import Image from "next/image.js";
 import { MdOutlineSyncAlt } from "react-icons/md";
 // APIs
@@ -92,13 +92,13 @@ export default function FigmaSetup(): JSX.Element {
   };
 
   return (
-    <main className="h-screen w-full bg-slate-200">
+    <main className="h-screen w-full bg-servcy-gray">
       <div className="flex h-full w-full flex-col items-center justify-center">
-        <div className="flex min-h-[500px] w-[80%] flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-md md:flex-row">
+        <div className="flex min-h-[500px] w-[80%] flex-col rounded-lg border border-servcy-gray bg-servcy-black p-6 text-servcy-white shadow-md md:flex-row">
           <div className="w-full flex-col p-4">
             <div className="flex text-xl font-semibold">
               <Image
-                className="my-auto h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-gray-300 p-1"
+                className="my-auto h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1"
                 src="https://servcy-public.s3.amazonaws.com/figma.svg"
                 width={40}
                 height={40}
@@ -110,7 +110,7 @@ export default function FigmaSetup(): JSX.Element {
                 size={20}
               />
               <Image
-                className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-gray-300 p-1"
+                className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray p-1"
                 src="https://servcy-public.s3.amazonaws.com/logo.svg"
                 width={40}
                 height={40}
@@ -119,15 +119,14 @@ export default function FigmaSetup(): JSX.Element {
               <div className="my-auto">Figma Integration Setup</div>
             </div>
             {loading ? (
-              <div className="mt-8 ml-auto mb-2.5 h-5 animate-pulse rounded-full bg-gray-300 dark:bg-gray-600"></div>
+              <div className="mt-8 ml-auto mb-2.5 h-5 animate-pulse rounded-full bg-servcy-white"></div>
             ) : (
               <Select
-                className="mt-8 ml-auto"
+                className="mt-8 w-full"
                 id="user_integration_id"
-                required
-                helperText="Select Account"
+                placeholder="Select Account"
                 value={userIntegrationId}
-                onChange={(e) => {
+                onChange={(e: any) => {
                   setUserIntegrationId(Number.parseInt(e.target.value));
                 }}
               >
@@ -168,11 +167,11 @@ export default function FigmaSetup(): JSX.Element {
                 </li>
                 <li>
                   For example if the URL is{" "}
-                  <span className="rounded-lg bg-slate-200 p-1 font-semibold">
+                  <span className="rounded-lg bg-servcy-white p-1 font-semibold text-servcy-black">
                     https://www.figma.com/files/team/123/Servcy
                   </span>{" "}
                   then the team id is{" "}
-                  <span className="rounded-lg bg-slate-200 p-1 font-semibold">
+                  <span className="rounded-lg bg-servcy-white p-1 font-semibold text-servcy-black">
                     123
                   </span>
                 </li>
@@ -184,18 +183,19 @@ export default function FigmaSetup(): JSX.Element {
               <div>
                 {loading ? (
                   <>
-                    <Label>Team ID</Label>
-                    <div className="my-3 h-5 animate-pulse rounded-full bg-gray-300 dark:bg-gray-600"></div>
-                    <Label className="mt-5">Team ID</Label>
-                    <div className="my-3 h-5 animate-pulse rounded-full bg-gray-300 dark:bg-gray-600"></div>
+                    <span>Team ID</span>
+                    <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white"></div>
+                    <span className="mt-5">Team ID</span>
+                    <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white"></div>
                   </>
                 ) : (
                   Array.from(teamIds).map((teamId, index) => (
                     <div key={index} className="py-2">
-                      <Label>Team ID</Label>
-                      <TextInput
+                      <span>Team ID</span>
+                      <Input
                         value={teamId}
                         placeholder="Enter team ID"
+                        className="my-3 p-1"
                         onChange={(e) => {
                           const newTeamIds = new Set(teamIds);
                           newTeamIds.delete(teamId);
@@ -207,25 +207,32 @@ export default function FigmaSetup(): JSX.Element {
                   ))
                 )}
               </div>
-              <div className="flex items-center gap-2">
-                <Button
-                  size="xs"
-                  color="cyan"
-                  outline
-                  onClick={() => {
-                    if (teamIds.has("")) return;
-                    const newTeamIds = new Set(teamIds);
-                    newTeamIds.add("");
-                    setTeamIds(newTeamIds);
-                  }}
-                  disabled={teamIds.size > 2 || saving}
-                >
-                  + Add More
-                </Button>
-              </div>
-              <Button color="success" type="submit" isProcessing={saving}>
-                Submit
-              </Button>
+              {!loading && (
+                <>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      size="small"
+                      className="text-sm font-thin text-servcy-white hover:!border-servcy-light hover:!text-servcy-light"
+                      onClick={() => {
+                        if (teamIds.has("")) return;
+                        const newTeamIds = new Set(teamIds);
+                        newTeamIds.add("");
+                        setTeamIds(newTeamIds);
+                      }}
+                      disabled={teamIds.size > 2 || saving}
+                    >
+                      + Add More
+                    </Button>
+                  </div>
+                  <Button
+                    loading={saving}
+                    disabled={saving}
+                    className="w-full font-semibold text-servcy-white hover:!border-servcy-light hover:!text-servcy-light"
+                  >
+                    Submit
+                  </Button>
+                </>
+              )}
             </form>
           </div>
         </div>

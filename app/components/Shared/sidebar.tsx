@@ -16,7 +16,7 @@ export default function SideBar(): JSX.Element {
 
   return (
     <div
-      className="fixed top-0 z-10 h-screen overflow-auto lg:sticky lg:!block"
+      className="fixed top-0 z-10 h-screen overflow-auto bg-servcy-black lg:sticky lg:!block"
       onMouseOver={() => {
         !isSidebarHovered && setIsSidebarHovered(true);
       }}
@@ -28,11 +28,10 @@ export default function SideBar(): JSX.Element {
       }}
     >
       <nav aria-label="Sidebar" className="flex h-full w-full flex-col">
-        <div className="h-full overflow-y-auto overflow-x-hidden rounded bg-gray-50 py-4 px-3 dark:bg-gray-800">
+        <div className="h-full overflow-y-auto overflow-x-hidden rounded py-4 px-3">
           <a
-            aria-labelledby="flowbite-sidebar-logo-:Rqkq:"
             href="/"
-            className="mb-5 flex items-center rounded-lg bg-gray-200 py-4 pl-2.5"
+            className="mb-5 flex items-center rounded-lg bg-servcy-gray py-4 pl-2.5"
           >
             <Image
               alt="Servcy logo"
@@ -42,18 +41,18 @@ export default function SideBar(): JSX.Element {
               className="mr-3 h-6 sm:h-7"
             />
             {isSidebarHovered && (
-              <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+              <span className="self-center whitespace-nowrap text-xl font-semibold">
                 <p className="text-xl">Servcy</p>
               </span>
             )}
           </a>
           <div className="mt-6">
-            <ul className="list-none border-t border-gray-200 pt-3 first:mt-0 first:border-t-0 first:pt-0">
+            <ul className="list-none border-t border-servcy-gray pt-3 first:mt-0 first:border-t-0 first:pt-0">
               {sidebarOptions.map((option, index) => (
                 <li key={index}>
                   <a
                     className={cn(
-                      "mb-2 flex items-center rounded-lg p-2 text-lg font-normal text-gray-900 no-underline hover:bg-gray-100",
+                      "mb-2 flex items-center rounded-lg p-2 text-lg font-normal no-underline hover:bg-servcy-white text-servcy-white hover:text-servcy-black",
                       {
                         "justify-center": !isSidebarHovered,
                       }
@@ -62,7 +61,6 @@ export default function SideBar(): JSX.Element {
                   >
                     <option.icon size="24" />
                     <span
-                      id="flowbite-sidebar-item-:R5akq:"
                       className={cn("flex-1 whitespace-nowrap px-3", {
                         hidden: !isSidebarHovered,
                       })}
@@ -73,11 +71,11 @@ export default function SideBar(): JSX.Element {
                 </li>
               ))}
             </ul>
-            <ul className="fixed bottom-0 list-none border-t border-gray-200 pt-3 first:mt-0 first:border-t-0 first:pt-0 last:mb-3">
+            <ul className="fixed bottom-0 list-none border-t border-servcy-gray pt-3 first:mt-0 first:border-t-0 first:pt-0 last:mb-3">
               <li>
                 <a
                   className={cn(
-                    "mb-2 flex items-center rounded-lg p-2 text-lg font-normal text-gray-900 no-underline hover:bg-gray-100",
+                    "mb-2 flex items-center rounded-lg p-2 text-lg font-normal no-underline hover:bg-servcy-white text-servcy-white hover:text-servcy-black",
                     {
                       "justify-center": !isSidebarHovered,
                     }
@@ -86,7 +84,6 @@ export default function SideBar(): JSX.Element {
                 >
                   <AiOutlineSetting size="24" />
                   <span
-                    id="flowbite-sidebar-item-:R5akq:"
                     className={cn("flex-1 whitespace-nowrap px-3", {
                       hidden: !isSidebarHovered,
                     })}
@@ -98,7 +95,7 @@ export default function SideBar(): JSX.Element {
               <li>
                 <a
                   className={cn(
-                    "mb-2 flex items-center rounded-lg p-2 text-lg font-normal text-gray-900 no-underline hover:bg-gray-100",
+                    "mb-2 flex items-center rounded-lg p-2 text-lg font-normal no-underline hover:bg-servcy-white text-servcy-white hover:text-servcy-black",
                     {
                       "justify-center": !isSidebarHovered,
                     }
@@ -107,7 +104,6 @@ export default function SideBar(): JSX.Element {
                 >
                   <VscAccount size="24" />
                   <span
-                    id="flowbite-sidebar-item-:R5akq:"
                     className={cn("flex-1 whitespace-nowrap px-3", {
                       hidden: !isSidebarHovered,
                     })}

@@ -4,7 +4,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 // Components
-import { Spinner } from "flowbite-react";
+import { SyncOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
 // APIs
@@ -51,9 +52,21 @@ export default function IntegrationOauth(): JSX.Element {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <main className="h-screen w-full">
+    <main className="h-screen w-full bg-servcy-white">
       <div className="flex h-full w-full flex-col items-center justify-center">
-        <Spinner className="m-auto" size="xl" color="success" />
+        <Spin
+          className="m-auto"
+          size="large"
+          indicator={
+            <SyncOutlined
+              rev
+              spin
+              style={{
+                color: "#26542F",
+              }}
+            />
+          }
+        />
       </div>
     </main>
   );

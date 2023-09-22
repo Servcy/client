@@ -1,12 +1,10 @@
 "use client";
-// Type definitions for flowbite 1.0.0
 import { FC, PropsWithChildren } from "react";
 // Components
 import Sidebar from "@/components/Shared/sidebar";
 import { Toaster } from "react-hot-toast";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 // Context
-import FlowbiteProvider from "@/context/FlowbiteContext";
 import { SidebarProvider, useSidebarContext } from "@/context/SidebarContext";
 // Styles
 import "@/styles/globals.css";
@@ -18,12 +16,10 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
   return (
     <html lang="en">
       <body>
-        <FlowbiteProvider>
-          <Toaster />
-          <SidebarProvider>
-            <ContentWithSidebar>{children}</ContentWithSidebar>
-          </SidebarProvider>
-        </FlowbiteProvider>
+        <Toaster />
+        <SidebarProvider>
+          <ContentWithSidebar>{children}</ContentWithSidebar>
+        </SidebarProvider>
       </body>
     </html>
   );
@@ -47,7 +43,7 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
           </div>
           {isSmallScreen() && !isOpenOnSmallScreens && (
             <AiOutlineMenu
-              className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-900 p-2 text-4xl text-white"
+              className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-servcy-black p-2 text-4xl text-servcy-white"
               onClick={() => {
                 setOpenOnSmallScreens(true);
               }}
@@ -55,7 +51,7 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
           )}
           {isSmallScreen() && isOpenOnSmallScreens && (
             <AiOutlineClose
-              className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-900 p-2 text-4xl text-white"
+              className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-servcy-black p-2 text-4xl text-servcy-white"
               onClick={() => {
                 setOpenOnSmallScreens(false);
               }}

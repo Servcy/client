@@ -3,11 +3,22 @@
  */
 module.exports = {
   content: [
-    "./node_modules/flowbite/**/*.js",
-    "./node_modules/flowbite-react/**/*.js",
     "./public/**/*.html",
     "./app/**/*.{ts,tsx}",
   ],
-  plugins: [require("flowbite/plugin")],
-  theme: {},
+  plugins: [],
+  theme: {
+    extend: {
+      colors: {
+        servcy: "#4D7E3E",
+        "servcy-dark": "#26542F",
+        "servcy-light": "#5BA959",
+        "servcy-gray": "#DFE0EC",
+        "servcy-silver": "#7E84A3",
+        "servcy-white": "#F7F6FA",
+        "servcy-black": "#2B3232",
+      },
+    },
+  },
+  darkMode: 'class',
 };
