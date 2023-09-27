@@ -172,7 +172,7 @@ export default function Login(): JSX.Element {
               <Button
                 type="default"
                 onClick={sendOtp}
-                className="flex w-full items-center justify-center text-center font-medium !text-servcy-white hover:!border-servcy-light hover:!text-servcy-light"
+                className="flex w-full items-center justify-center text-center font-medium !text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                 disabled={loading}
                 size="large"
                 loading={loading}

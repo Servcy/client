@@ -6,42 +6,19 @@ import { useSearchParams } from "next/navigation.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
-import DragDrop from "@/components/Shared/dragDrop";
-import { Button, Form, Input, Modal, Skeleton } from "antd";
-import {
-  AiFillPlusCircle,
-  AiOutlineCloseCircle,
-  AiOutlineProject,
-  AiOutlineSave,
-} from "react-icons/ai";
+import AddProject from "@/components/Activation/addProject";
+import { Skeleton } from "antd";
+import { AiFillPlusCircle, AiOutlineProject } from "react-icons/ai";
 // APIs
-import { createProject, fetchProjects } from "@/apis/project";
-
-const normFile = (e: any) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e?.fileList;
-};
-
-interface Project {
-  id: number;
-  name: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-}
+import { fetchProjects } from "@/apis/project";
+// Types
+import { Project } from "@/types/projects";
 
 export default function Index(): JSX.Element {
   const searchParams = useSearchParams();
   const [tourStep, setTourStep] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
-  const [saving, setSaving] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>();
-  const [fileList, setFileList] = useState<number[]>([]);
-  const [fileNameIdMap, setFileNameIdMap] = useState<Record<string, number>>(
-    {}
-  );
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -72,47 +49,6 @@ export default function Index(): JSX.Element {
       })
       .finally(() => {
         setLoading(false);
-      });
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setFileList([]);
-    setFileNameIdMap({});
-  };
-
-  const createNewProject = () => {
-    const name = document.getElementById("project-name") as HTMLInputElement;
-    const description = document.getElementById(
-      "project-description"
-    ) as HTMLInputElement;
-    if (!name.value) {
-      toast.error("Project name is required");
-      return;
-    }
-    if (!description.value) {
-      toast.error("Project description is required");
-      return;
-    }
-    setSaving(true);
-    createProject({
-      name: name.value,
-      description: description.value,
-      file_list: fileList,
-    })
-      .then((project) => {
-        setProjects([...projects, project]);
-        setTimeout(() => {
-          closeModal();
-          toast.success("Project created successfully");
-        }, 250);
-        refetchProjects();
-      })
-      .catch((error) => {
-        toast.error(error.response.data.detail);
-      })
-      .finally(() => {
-        setSaving(false);
       });
   };
 
@@ -167,66 +103,11 @@ export default function Index(): JSX.Element {
         )}
       </div>
       {isModalOpen && (
-        <Modal
-          title="Add a new project"
-          closeIcon={<AiOutlineCloseCircle size="24" color="servcy-black" />}
-          open={isModalOpen}
-          footer={null}
-          onCancel={() => {
-            closeModal();
-          }}
-          className="rounded-lg p-0"
-        >
-          <Form layout="vertical" className="mt-5" preserve={false}>
-            <Form.Item label="Name">
-              <Input
-                id="project-name"
-                className="hover:!border-servcy-black focus:!border-servcy-black active:!border-servcy-black"
-              />
-            </Form.Item>
-            <Form.Item label="Description">
-              <Input.TextArea
-                rows={3}
-                id="project-description"
-                className="hover:!border-servcy-black focus:!border-servcy-black active:!border-servcy-black"
-              />
-            </Form.Item>
-            <Form.Item valuePropName="fileList" getValueFromEvent={normFile}>
-              <DragDrop
-                onSave={(data, fileName) => {
-                  const fileIds = JSON.parse(data.results).file_ids;
-                  setFileList((prevState) => [...prevState, ...fileIds]);
-                  setFileNameIdMap((prevState) => ({
-                    ...prevState,
-                    [fileName]: fileIds[0],
-                  }));
-                }}
-                url="/project/upload"
-                onRemove={(file: any) => {
-                  const fileName = file.name;
-                  const fileId = fileNameIdMap[fileName];
-                  setFileList((prevState) =>
-                    prevState.filter((id) => id !== fileId)
-                  );
-                }}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button
-                type="primary"
-                className="h-10 w-full rounded-lg !bg-servcy-black font-semibold !text-servcy-white hover:!border-servcy-light"
-                icon={<AiOutlineSave size="14" className="my-auto" />}
-                onClick={() => {
-                  createNewProject();
-                }}
-                loading={saving}
-                disabled={saving}
-              >
-                Save
-              </Button>
-            </Form.Item>
-          </Form>
-        </Modal>
+        <AddProject
+          isModalOpen={isModalOpen}
+          refetchProjects={refetchProjects}
+          setIsModalOpen={setIsModalOpen}
+        />
       )}
     </main>
   );

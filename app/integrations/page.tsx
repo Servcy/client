@@ -78,7 +78,7 @@ export default function Integrations(): JSX.Element {
               key={integration.id}
               className="min-h-[200px] rounded-lg bg-servcy-black text-servcy-white"
             >
-              <div className="flex flex-row">
+              <div className="flex flex-row text-servcy-wheat">
                 <Image
                   className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1"
                   src={integration.logo}
@@ -110,7 +110,7 @@ export default function Integrations(): JSX.Element {
               </div>
               <div className="mt-6 flex flex-row justify-between">
                 <Button
-                  className="text-servcy-white hover:!border-servcy-light hover:!text-servcy-light"
+                  className="text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                   size="middle"
                   onClick={() => connect(integration)}
                   icon={<HiArrowsRightLeft />}

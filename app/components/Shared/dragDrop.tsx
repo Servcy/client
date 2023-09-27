@@ -1,7 +1,7 @@
+import { refreshTokens } from "@/utils/Shared/axios";
 import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined";
 import { Upload } from "antd";
 import axios from "axios";
-import { getCookie } from "cookies-next";
 import toast from "react-hot-toast";
 
 const Dragger = Upload.Dragger;
@@ -22,10 +22,11 @@ const DragDrop = ({
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       const fmData = new FormData();
+      const accessToken = await refreshTokens();
       const config = {
         headers: {
           "content-type": "multipart/form-data",
-          authorization: `Bearer ${getCookie("accessToken")}`,
+          authorization: `Bearer ${accessToken}`,
         },
       };
       fmData.append("file", file);
@@ -61,4 +62,5 @@ const DragDrop = ({
     </Dragger>
   );
 };
+
 export default DragDrop;
