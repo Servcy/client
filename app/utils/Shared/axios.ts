@@ -6,7 +6,7 @@ import { getCookie, setCookie } from "cookies-next";
 
 const SERVER_URL = process.env["NEXT_PUBLIC_SERVER_URL"];
 
-const refreshTokens = async () => {
+export const refreshTokens = async () => {
   let accessToken = String(getCookie("accessToken") ?? "");
   let refreshToken = String(getCookie("refreshToken") ?? "");
   if (isJwtTokenValid(refreshToken) && !isJwtTokenValid(accessToken)) {
