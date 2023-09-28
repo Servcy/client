@@ -22,7 +22,7 @@ const AddProject = ({
   isModalOpen: boolean;
   // eslint-disable-next-line no-unused-vars
   setIsModalOpen: (isModalOpen: boolean) => void;
-  refetchProjects: undefined | (() => void);
+  refetchProjects?: () => void;
 }) => {
   const [saving, setSaving] = useState<boolean>(false);
   const [fileList, setFileList] = useState<number[]>([]);

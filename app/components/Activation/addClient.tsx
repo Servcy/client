@@ -26,7 +26,7 @@ const AddClient = ({
   isModalOpen: boolean;
   // eslint-disable-next-line no-unused-vars
   setIsModalOpen: (isModalOpen: boolean) => void;
-  refreshClients: undefined | (() => void);
+  refreshClients?: () => void;
 }) => {
   const [saving, setSaving] = useState<boolean>(false);
   const [fileList, setFileList] = useState<number[]>([]);

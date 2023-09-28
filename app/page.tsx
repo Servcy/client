@@ -90,11 +90,7 @@ export default function Index(): JSX.Element {
         <AddClient isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       )}
       {isModalOpen && selectedActivationStep === "add-projects" && (
-        <AddProject
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          refetchProjects={undefined}
-        />
+        <AddProject isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       )}
     </main>
   );
