@@ -59,7 +59,7 @@ export default function Index(): JSX.Element {
         <button onClick={() => setIsModalOpen(true)}>
           <div className="min-h-[250px] rounded-lg border border-servcy-gray bg-servcy-black p-5 shadow-sm">
             <AiFillPlusCircle
-              className={cn("mx-auto my-10 h-1/3 w-1/4 text-servcy-light", {
+              className={cn("mx-auto my-10 h-1/3 w-1/4 text-servcy-wheat", {
                 "animate-pulse": projects.length === 0,
               })}
               size="48"
