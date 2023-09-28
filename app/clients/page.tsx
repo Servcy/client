@@ -6,24 +6,24 @@ import { useSearchParams } from "next/navigation.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
-import AddProject from "@/components/Activation/addProject";
+import AddClient from "@/components/Activation/addClient";
 import { Skeleton } from "antd";
 import { AiFillPlusCircle, AiOutlineProject } from "react-icons/ai";
 // APIs
-import { fetchProjects } from "@/apis/project";
+import { fetchClients } from "@/apis/client";
 // Types
-import { Project } from "@/types/projects";
+import { Client } from "@/types/client";
 
 export default function Index(): JSX.Element {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>();
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
 
   useEffect(() => {
-    fetchProjects()
-      .then((projects) => {
-        setProjects(projects);
+    fetchClients()
+      .then((clients) => {
+        setClients(clients);
       })
       .catch((error) => {
         toast.error(error.response.data.detail);
@@ -33,11 +33,11 @@ export default function Index(): JSX.Element {
       });
   }, [searchParams]);
 
-  const refetchProjects = () => {
+  const refreshClients = () => {
     setLoading(true);
-    fetchProjects()
-      .then((projects) => {
-        setProjects(projects);
+    fetchClients()
+      .then((clients) => {
+        setClients(clients);
       })
       .catch((error) => {
         toast.error(error.response.data.detail);
@@ -52,7 +52,7 @@ export default function Index(): JSX.Element {
       <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
         <div className="flex flex-row">
           <AiOutlineProject size="24" className="my-auto mr-2" />
-          <p className="text-xl">Projects</p>
+          <p className="text-xl">Clients</p>
         </div>
       </header>
       <div className="grid gap-8 lg:grid-cols-3 xl:grid-cols-4">
@@ -60,12 +60,12 @@ export default function Index(): JSX.Element {
           <div className="min-h-[250px] rounded-lg border border-servcy-gray bg-servcy-black p-5 shadow-sm">
             <AiFillPlusCircle
               className={cn("mx-auto my-10 h-1/3 w-1/4 text-servcy-light", {
-                "animate-pulse": projects.length === 0,
+                "animate-pulse": clients.length === 0,
               })}
               size="48"
             />
             <p className="text-center text-lg font-semibold text-servcy-gray">
-              Add A New Project
+              Add A New Client
             </p>
           </div>
         </button>
@@ -80,16 +80,16 @@ export default function Index(): JSX.Element {
           </div>
         ) : (
           <>
-            {projects.map((project) => (
+            {clients.map((client) => (
               <div
-                key={project.id}
+                key={client.id}
                 className="min-h-[250px] rounded-lg border border-servcy-gray bg-servcy-black p-4 text-servcy-white shadow-sm"
               >
                 <div className="mb-4 h-20">
                   <h5 className="mb-3 font-semibold tracking-tight">
-                    {project.name}
+                    {client.name}
                   </h5>
-                  <p className="text-sm font-normal">{project.description}</p>
+                  <p className="text-sm font-normal">{client.notes}</p>
                 </div>
               </div>
             ))}
@@ -97,9 +97,9 @@ export default function Index(): JSX.Element {
         )}
       </div>
       {isModalOpen && (
-        <AddProject
+        <AddClient
           isModalOpen={isModalOpen}
-          refetchProjects={refetchProjects}
+          refreshClients={refreshClients}
           setIsModalOpen={setIsModalOpen}
         />
       )}

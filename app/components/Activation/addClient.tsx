@@ -21,10 +21,12 @@ import {
 const AddClient = ({
   isModalOpen,
   setIsModalOpen,
+  refreshClients,
 }: {
   isModalOpen: boolean;
   // eslint-disable-next-line no-unused-vars
   setIsModalOpen: (isModalOpen: boolean) => void;
+  refreshClients: undefined | (() => void);
 }) => {
   const [saving, setSaving] = useState<boolean>(false);
   const [fileList, setFileList] = useState<number[]>([]);
@@ -81,6 +83,7 @@ const AddClient = ({
         setTimeout(() => {
           closeModal();
           toast.success("Client created successfully");
+          if (refreshClients) refreshClients();
         }, 250);
       })
       .catch(() => {
