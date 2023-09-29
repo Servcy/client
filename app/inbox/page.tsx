@@ -35,13 +35,13 @@ export default function Gmail(): JSX.Element {
           <p className="text-xl">Inbox</p>
           <Button
             onClick={syncInbox}
-            className="border-1 ml-auto h-full border-green-500 p-0"
-            color="green"
+            className="ml-auto h-full p-0 hover:!border-servcy-green hover:!text-servcy-green"
           >
             <AiOutlineSync
               className={cn("my-auto", {
                 "animate-spin": loading,
               })}
+              size="24"
             />
           </Button>
         </div>
