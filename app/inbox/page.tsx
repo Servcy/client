@@ -4,7 +4,7 @@ import cn from "classnames";
 import { useEffect, useState } from "react";
 // Components
 import InboxItems from "@/components/Inbox/InboxItems";
-import { Button, ConfigProvider, Tabs } from "antd";
+import { Button, ConfigProvider, Select, Tabs } from "antd";
 import {
   AiOutlineComment,
   AiOutlineInbox,
@@ -16,6 +16,8 @@ import {
 import { fetchInbox as fetchInboxApi } from "@/apis/inbox";
 // Types
 import { InboxItem, PaginationDetails } from "@/types/inbox";
+// constants
+import { integrationCategories } from "@/constants/integrations";
 
 const tabItems = [
   {
@@ -115,6 +117,30 @@ export default function Gmail(): JSX.Element {
               });
               setActiveTab(key);
             }}
+            tabBarExtraContent={
+              <Select
+                placeholder="Filter By Source"
+                allowClear
+                onClear={() => {
+                  setFilters((prevState) => {
+                    return { ...prevState, source: "" };
+                  });
+                }}
+                onChange={(value) => {
+                  setFilters((prevState) => {
+                    return { ...prevState, source: value };
+                  });
+                }}
+                options={Object.keys(integrationCategories).map(
+                  (key: string) => {
+                    return {
+                      label: key,
+                      value: key,
+                    };
+                  }
+                )}
+              />
+            }
             items={tabItems.map((item) => {
               return {
                 label: (
@@ -135,10 +161,13 @@ export default function Gmail(): JSX.Element {
                 children: (
                   <InboxItems
                     setPage={setPage}
+                    loading={loading}
                     page={page}
                     filters={filters}
                     setFilters={setFilters}
                     inboxPagination={inboxPagination}
+                    setSearch={setSearch}
+                    search={search}
                     inboxItems={inboxItems}
                   />
                 ),
