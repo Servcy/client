@@ -116,7 +116,7 @@ export default function Integrations(): JSX.Element {
                       (category: string, index: number) => (
                         <Tag
                           key={`category-${index}`}
-                          className="mr-1 bg-servcy-wheat text-white"
+                          className="mr-1 bg-servcy-wheat font-bold text-servcy-black"
                           bordered={false}
                         >
                           {category.charAt(0).toUpperCase() + category.slice(1)}

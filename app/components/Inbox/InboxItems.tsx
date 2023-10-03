@@ -71,7 +71,7 @@ const InboxItems = ({
         return (
           <Tag
             key={source}
-            className="cursor-pointer bg-servcy-wheat text-white"
+            className="cursor-pointer bg-servcy-wheat font-bold text-servcy-black"
             onClick={() => {
               setFilters((prevState: object) => {
                 return { ...prevState, source: source };
