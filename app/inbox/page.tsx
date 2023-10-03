@@ -3,6 +3,7 @@
 import cn from "classnames";
 import { useEffect, useState } from "react";
 // Components
+import InboxItemModal from "@/components/Inbox/InboxItemModal";
 import InboxItems from "@/components/Inbox/InboxItems";
 import { Button, ConfigProvider, Select, Tabs } from "antd";
 import {
@@ -16,7 +17,6 @@ import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 // APIs
 import {
   archiveItems as archiveItemsApi,
-  deleteItem as deleteItemApi,
   fetchInbox as fetchInboxApi,
 } from "@/apis/inbox";
 // Types
@@ -55,6 +55,9 @@ export default function Gmail(): JSX.Element {
     category: "message",
   });
   const [search, setSearch] = useState<Record<string, string>>({});
+  const [selectedRow, setSelectedRow] = useState<InboxItem>({} as InboxItem);
+  const [isInboxItemModalVisible, setIsInboxItemModalVisible] =
+    useState<boolean>(false);
 
   const refetchInboxItems = async () => {
     try {
@@ -69,33 +72,18 @@ export default function Gmail(): JSX.Element {
     }
   };
 
-  const archiveItems = async () => {
+  const archiveItems = (itemIds: React.Key[]) => {
     try {
-      setLoading(true);
-      const response = await archiveItemsApi({
-        item_ids: selectedItemIds,
+      archiveItemsApi({
+        item_ids: itemIds.map((item_id) => parseInt(item_id.toString())),
       });
-      setInboxItems(JSON.parse(response.results).items);
-      setInboxPagination(JSON.parse(response.results).details);
+      setInboxItems((prevState) => {
+        return prevState.filter((item) => {
+          return !itemIds.includes(item.id);
+        });
+      });
     } catch (err) {
       console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const deleteItem = async (id: number) => {
-    try {
-      setLoading(true);
-      const response = await deleteItemApi({
-        item_ids: [id],
-      });
-      setInboxItems(JSON.parse(response.results).items);
-      setInboxPagination(JSON.parse(response.results).details);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -103,7 +91,11 @@ export default function Gmail(): JSX.Element {
     const fetchInboxItems = async () => {
       try {
         setLoading(true);
-        const response = await fetchInboxApi({ filters, search, page });
+        const response = await fetchInboxApi({
+          filters,
+          search,
+          pagination: { page },
+        });
         setInboxItems(JSON.parse(response.results).items);
         setInboxPagination(JSON.parse(response.results).details);
       } catch (err) {
@@ -158,10 +150,10 @@ export default function Gmail(): JSX.Element {
                 <Button
                   className="mr-2 w-[120px] text-sm hover:!border-red-400 hover:!text-red-400"
                   disabled={selectedItemIds.length === 0}
-                  onClick={archiveItems}
+                  onClick={() => archiveItems(selectedItemIds)}
                   icon={<HiArchiveBoxArrowDown />}
                 >
-                  <span>Archive</span>
+                  <span>Mark Read</span>
                 </Button>
                 <Select
                   placeholder="Filter By Source"
@@ -171,6 +163,7 @@ export default function Gmail(): JSX.Element {
                       return { ...prevState, source: "" };
                     });
                   }}
+                  value={filters["source"]}
                   onChange={(value) => {
                     setFilters((prevState) => {
                       return { ...prevState, source: value };
@@ -212,7 +205,9 @@ export default function Gmail(): JSX.Element {
                     setFilters={setFilters}
                     inboxPagination={inboxPagination}
                     setSearch={setSearch}
-                    deleteItem={deleteItem}
+                    setSelectedRow={setSelectedRow}
+                    setIsInboxItemModalVisible={setIsInboxItemModalVisible}
+                    archiveItems={archiveItems}
                     inboxItems={inboxItems}
                     setSelectedItemIds={setSelectedItemIds}
                   />
@@ -222,6 +217,12 @@ export default function Gmail(): JSX.Element {
           />
         </ConfigProvider>
       </div>
+      {isInboxItemModalVisible && (
+        <InboxItemModal
+          selectedRow={selectedRow}
+          setIsInboxItemModalVisible={setIsInboxItemModalVisible}
+        />
+      )}
     </main>
   );
 }

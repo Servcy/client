@@ -4,19 +4,11 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["servcy.com"],
+    domains: ["servcy.com", "amazonaws.com"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "servcy-public.s3.amazonaws.com",
-      },
-      {
-        protocol: "https",
         hostname: "avatars.githubusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: "*.amazonaws.com",
       },
       {
         protocol: "https",
