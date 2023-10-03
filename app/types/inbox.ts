@@ -4,6 +4,7 @@ export interface InboxItem {
   updated_at: string;
   uid: string;
   title: string;
+  source: string;
   body: string;
   is_archived: boolean;
   is_deleted: boolean;

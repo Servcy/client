@@ -12,8 +12,13 @@ import {
   AiOutlineNotification,
   AiOutlineSync,
 } from "react-icons/ai";
+import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 // APIs
-import { fetchInbox as fetchInboxApi } from "@/apis/inbox";
+import {
+  archiveItems as archiveItemsApi,
+  deleteItem as deleteItemApi,
+  fetchInbox as fetchInboxApi,
+} from "@/apis/inbox";
 // Types
 import { InboxItem, PaginationDetails } from "@/types/inbox";
 // constants
@@ -39,6 +44,7 @@ const tabItems = [
 
 export default function Gmail(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
+  const [selectedItemIds, setSelectedItemIds] = useState<React.Key[]>([]);
   const [inboxItems, setInboxItems] = useState<InboxItem[]>([] as InboxItem[]);
   const [inboxPagination, setInboxPagination] = useState<PaginationDetails>(
     {} as PaginationDetails
@@ -54,6 +60,36 @@ export default function Gmail(): JSX.Element {
     try {
       setLoading(true);
       const response = await fetchInboxApi({ filters, search, page });
+      setInboxItems(JSON.parse(response.results).items);
+      setInboxPagination(JSON.parse(response.results).details);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const archiveItems = async () => {
+    try {
+      setLoading(true);
+      const response = await archiveItemsApi({
+        item_ids: selectedItemIds,
+      });
+      setInboxItems(JSON.parse(response.results).items);
+      setInboxPagination(JSON.parse(response.results).details);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteItem = async (id: number) => {
+    try {
+      setLoading(true);
+      const response = await deleteItemApi({
+        item_ids: [id],
+      });
       setInboxItems(JSON.parse(response.results).items);
       setInboxPagination(JSON.parse(response.results).details);
     } catch (err) {
@@ -118,28 +154,38 @@ export default function Gmail(): JSX.Element {
               setActiveTab(key);
             }}
             tabBarExtraContent={
-              <Select
-                placeholder="Filter By Source"
-                allowClear
-                onClear={() => {
-                  setFilters((prevState) => {
-                    return { ...prevState, source: "" };
-                  });
-                }}
-                onChange={(value) => {
-                  setFilters((prevState) => {
-                    return { ...prevState, source: value };
-                  });
-                }}
-                options={Object.keys(integrationCategories).map(
-                  (key: string) => {
-                    return {
-                      label: key,
-                      value: key,
-                    };
-                  }
-                )}
-              />
+              <div className="flex">
+                <Button
+                  className="mr-2 w-[120px] text-sm hover:!border-red-400 hover:!text-red-400"
+                  disabled={selectedItemIds.length === 0}
+                  onClick={archiveItems}
+                  icon={<HiArchiveBoxArrowDown />}
+                >
+                  <span>Archive</span>
+                </Button>
+                <Select
+                  placeholder="Filter By Source"
+                  allowClear
+                  onClear={() => {
+                    setFilters((prevState) => {
+                      return { ...prevState, source: "" };
+                    });
+                  }}
+                  onChange={(value) => {
+                    setFilters((prevState) => {
+                      return { ...prevState, source: value };
+                    });
+                  }}
+                  options={Object.keys(integrationCategories).map(
+                    (key: string) => {
+                      return {
+                        label: key,
+                        value: key,
+                      };
+                    }
+                  )}
+                />
+              </div>
             }
             items={tabItems.map((item) => {
               return {
@@ -163,12 +209,12 @@ export default function Gmail(): JSX.Element {
                     setPage={setPage}
                     loading={loading}
                     page={page}
-                    filters={filters}
                     setFilters={setFilters}
                     inboxPagination={inboxPagination}
                     setSearch={setSearch}
-                    search={search}
+                    deleteItem={deleteItem}
                     inboxItems={inboxItems}
+                    setSelectedItemIds={setSelectedItemIds}
                   />
                 ),
               };
