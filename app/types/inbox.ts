@@ -10,6 +10,7 @@ export interface InboxItem {
   is_deleted: boolean;
   cause: string;
   is_body_html: boolean;
+  account: string;
   user_integration_id: number;
   category: string;
 }

@@ -5,12 +5,11 @@ import Image from "next/image";
 
 const Cause = ({ cause, source }: { cause: any; source: string }) => {
   if (["Gmail", "Outlook"].includes(source)) {
-    console.log(cause);
     let [name, email] = String(cause).split("<");
     email = String(email).replace(">", "").trim();
     name = String(name).replace(/"/g, "").trim();
     return (
-      <div className="min-h-[50px] max-w-[250px] flex-col text-ellipsis text-sm">
+      <div className="min-h-[50px] max-w-[250px] flex-col justify-center text-ellipsis text-left text-sm">
         <div className="flex-row">{name}</div>
         {email !== "undefined" && (
           <div className="flex-row text-gray-400">&lt;{email}&gt;</div>
@@ -21,7 +20,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
     const { login, avatar_url, html_url } = JSON.parse(cause);
     const cleanImageLink = getCleanLink(avatar_url);
     return (
-      <div className="flex min-h-[50px] max-w-[250px] items-center justify-center text-ellipsis text-sm">
+      <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
         <Image
           src={cleanImageLink}
           alt={login}
@@ -44,7 +43,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
     const { name, avatar_url } = JSON.parse(cause);
     const cleanImageLink = getCleanLink(avatar_url);
     return (
-      <div className="flex min-h-[50px] max-w-[250px] items-center justify-center text-ellipsis text-sm">
+      <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
         <Image
           src={cleanImageLink}
           alt={name}
@@ -60,7 +59,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
     const { real_name, image_32 } = JSON.parse(cause);
     const cleanImageLink = getCleanLink(image_32);
     return (
-      <div className="flex min-h-[50px] max-w-[250px] items-center justify-center text-ellipsis text-sm">
+      <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
         <Image
           src={cleanImageLink}
           alt={real_name}
@@ -73,7 +72,9 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
       </div>
     );
   }
-  return <span className="max-w-[250px] text-ellipsis">{cause}</span>;
+  return (
+    <span className="max-w-[250px] text-ellipsis text-center">{cause}</span>
+  );
 };
 
 export default Cause;
