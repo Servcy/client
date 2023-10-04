@@ -5,6 +5,7 @@ import * as DOMPurify from "dompurify";
 // Compponents
 import { Button, Modal, Tag } from "antd";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
+import FigmaNotification from "./FigmaNotification";
 import NotionComment from "./NotionComment";
 // Types
 import { InboxItem } from "@/types/inbox";
@@ -47,6 +48,11 @@ const InboxItemModal = ({
           />
         ) : selectedRow.source === "Notion" ? (
           <NotionComment
+            data={JSON.parse(selectedRow.body)}
+            cause={selectedRow.cause}
+          />
+        ) : selectedRow.source === "Figma" ? (
+          <FigmaNotification
             data={JSON.parse(selectedRow.body)}
             cause={selectedRow.cause}
           />
