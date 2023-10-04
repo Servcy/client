@@ -12,7 +12,7 @@ interface Comment {
   mention?: string;
 }
 
-interface FigmaNotification {
+interface FigmaNotificationProps {
   event_type: string;
   file_key: string;
   timestamp: string;
@@ -49,38 +49,10 @@ const FigmaNotification = ({
   data,
   cause,
 }: {
-  data: FigmaNotification;
+  data: FigmaNotificationProps;
   cause: string;
 }) => {
   const link = `https://www.figma.com/file/${data.file_key}`;
-  const formatFigmaComment = (
-    comment: Comment[],
-    mentions: Mention[] | undefined
-  ) => {
-    let result = "";
-    comment.forEach((item: any, index: number) => {
-      if (item.mention && mentions) {
-        const handle = mentions.find(
-          (mention: Mention) => mention.id === item.mention
-        );
-        if (handle) {
-          result += "@";
-          result += handle.handle;
-        }
-      } else if (item.text) {
-        item.text.split("\\n").forEach((line: string, index: number) => {
-          result += line;
-          if (index !== item.text.split("\n").length - 1) {
-            result += "\n";
-          }
-        });
-      }
-      if (index !== comment.length - 1) {
-        result += " ";
-      }
-    });
-    return result;
-  };
   return (
     <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
       {["FILE_UPDATE", "FILE_DELETE"].includes(
