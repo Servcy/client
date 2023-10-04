@@ -1,5 +1,7 @@
 "use client";
 
+// dependencies
+import * as DOMPurify from "dompurify";
 // Compponents
 import { Modal } from "antd";
 // Types
@@ -10,14 +12,34 @@ const InboxItemModal = ({
   setIsInboxItemModalVisible,
 }: {
   selectedRow: InboxItem;
-  // eslint-disable-next-line no-unused-vars
+
   setIsInboxItemModalVisible: (value: boolean) => void;
 }) => {
+  let body = selectedRow.body;
+  if (selectedRow.source === "Gmail") {
+    body = Buffer.from(body, "base64").toString("utf8");
+  }
+  if (selectedRow.is_body_html) {
+    body = DOMPurify.sanitize(body);
+  }
   return (
     <Modal
       open={true}
+      title={selectedRow.title}
       onCancel={() => setIsInboxItemModalVisible(false)}
-    ></Modal>
+      footer={false}
+      width={1000}
+    >
+      {selectedRow.is_body_html ? (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: body,
+          }}
+        />
+      ) : (
+        <p>{body}</p>
+      )}
+    </Modal>
   );
 };
 

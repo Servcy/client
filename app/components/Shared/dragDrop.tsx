@@ -11,9 +11,7 @@ const DragDrop = ({
   onRemove,
   url,
 }: {
-  // eslint-disable-next-line no-unused-vars
   onSave: (_: any, __: string) => void;
-  // eslint-disable-next-line no-unused-vars
   onRemove: (_: any) => void;
   url: string;
 }) => {

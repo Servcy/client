@@ -27,7 +27,7 @@ const InboxItems = ({
   loading: boolean;
   inboxItems: InboxItem[];
   inboxPagination: PaginationDetails;
-  // eslint-disable-next-line no-unused-vars
+
   archiveItems: (_: React.Key[]) => void;
   setFilters: Dispatch<SetStateAction<Record<string, string>>>;
   setSearch: Dispatch<SetStateAction<Record<string, string>>>;

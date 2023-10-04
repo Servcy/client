@@ -38,13 +38,13 @@ interface OTPInputProps {
   /** Number of OTP inputs to be rendered */
   numInputs?: number;
   /** Callback to be called when the OTP value changes */
-  onChange: (otp: string, activeInput: number) => void; // eslint-disable-line no-unused-vars
+  onChange: (otp: string, activeInput: number) => void;
   /** Function to render the input */
-  renderInput: (inputProps: InputProps, index: number) => React.ReactNode; // eslint-disable-line no-unused-vars
+  renderInput: (inputProps: InputProps, index: number) => React.ReactNode;
   /** Whether the first input should be auto focused */
   shouldAutoFocus?: boolean;
   /** Function to render the separator */
-  renderSeparator?: ((index: number) => React.ReactNode) | React.ReactNode; // eslint-disable-line no-unused-vars
+  renderSeparator?: ((index: number) => React.ReactNode) | React.ReactNode;
   /** Style for the container */
   containerStyle?: React.CSSProperties | string;
   /** Style for the input */

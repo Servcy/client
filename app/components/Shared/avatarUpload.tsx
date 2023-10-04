@@ -13,7 +13,6 @@ const AvatarUpload = ({
   onSave,
   url,
 }: {
-  // eslint-disable-next-line no-unused-vars
   onSave: (_: any) => void;
   url: string;
 }) => {

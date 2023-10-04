@@ -26,7 +26,7 @@ export const sendOtp = async (input: string, inputType: string) => {
 
 export const refreshTokens = async (
   refreshToken: string,
-  setCookie: (key: string, value: string) => void // eslint-disable-line no-unused-vars
+  setCookie: (key: string, value: string) => void
 ) => {
   const response = Axios.post(`${SERVER_URL}/refresh-token`, {
     refresh: refreshToken,
