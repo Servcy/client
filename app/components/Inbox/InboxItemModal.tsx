@@ -7,6 +7,7 @@ import { Button, Modal, Tag } from "antd";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import FigmaNotification from "./FigmaNotification";
 import NotionComment from "./NotionComment";
+import SlackMessage from "./SlackMessage";
 // Types
 import { InboxItem } from "@/types/inbox";
 
@@ -53,6 +54,11 @@ const InboxItemModal = ({
           />
         ) : selectedRow.source === "Figma" ? (
           <FigmaNotification
+            data={JSON.parse(selectedRow.body)}
+            cause={selectedRow.cause}
+          />
+        ) : selectedRow.source === "Slack" ? (
+          <SlackMessage
             data={JSON.parse(selectedRow.body)}
             cause={selectedRow.cause}
           />

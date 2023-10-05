@@ -79,7 +79,7 @@ export default function Gmail(): JSX.Element {
       });
       setInboxItems((prevState) => {
         return prevState.filter((item) => {
-          return !itemIds.includes(item.id);
+          return !itemIds.includes(parseInt(item.id));
         });
       });
     } catch (err) {
