@@ -65,18 +65,24 @@ const GithubNotification = ({
                 </Tag>
               </div>
             </div>
-            <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Labels:
+            {data.pull_request?.labels && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Labels:
+                </div>
+                <div>
+                  {data.pull_request.labels.map((label) => (
+                    <Tag
+                      key={label.id}
+                      className="m-1"
+                      color={`#${label.color}`}
+                    >
+                      {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
+                    </Tag>
+                  ))}
+                </div>
               </div>
-              <div>
-                {data.pull_request?.labels?.map((label) => (
-                  <Tag key={label.id} className="m-1" color={`#${label.color}`}>
-                    {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
-                  </Tag>
-                ))}
-              </div>
-            </div>
+            )}
             <div className="mb-2 flex w-full">
               <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
                 Thread:
@@ -137,18 +143,24 @@ const GithubNotification = ({
                 </Tag>
               </div>
             </div>
-            <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Labels:
+            {data.pull_request?.labels && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Labels:
+                </div>
+                <div>
+                  {data.pull_request.labels.map((label) => (
+                    <Tag
+                      key={label.id}
+                      className="m-1"
+                      color={`#${label.color}`}
+                    >
+                      {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
+                    </Tag>
+                  ))}
+                </div>
               </div>
-              <div>
-                {data.pull_request?.labels?.map((label) => (
-                  <Tag key={label.id} className="m-1" color={`#${label.color}`}>
-                    {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
-                  </Tag>
-                ))}
-              </div>
-            </div>
+            )}
             <div className="mb-2 flex w-full">
               <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
                 Comment:
@@ -163,7 +175,7 @@ const GithubNotification = ({
                 }}
               />
             </div>
-            <div className="mb-2 flex w-full">
+            <div className="mb-2 mt-4 flex w-full">
               <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
                 Reactions:
               </div>
@@ -240,18 +252,24 @@ const GithubNotification = ({
                 </Tag>
               </div>
             </div>
-            <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Labels:
+            {data.pull_request?.labels && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Labels:
+                </div>
+                <div>
+                  {data.pull_request.labels.map((label) => (
+                    <Tag
+                      key={label.id}
+                      className="m-1"
+                      color={`#${label.color}`}
+                    >
+                      {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
+                    </Tag>
+                  ))}
+                </div>
               </div>
-              <div>
-                {data.pull_request?.labels?.map((label) => (
-                  <Tag key={label.id} className="m-1" color={`#${label.color}`}>
-                    {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
-                  </Tag>
-                ))}
-              </div>
-            </div>
+            )}
             <div className="mb-2 flex w-full">
               <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
                 Review State:
@@ -618,7 +636,7 @@ const GithubNotification = ({
                 </div>
               </div>
             )}
-            <div className="mb-2 flex w-full">
+            <div className="mb-2 mt-4 flex w-full">
               <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
                 Reactions:
               </div>
