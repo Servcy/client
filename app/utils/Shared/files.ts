@@ -8,7 +8,6 @@ export const normFile = (e: any) => {
   return e?.fileList;
 };
 
-// eslint-disable-next-line no-unused-vars
 export const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
   reader.addEventListener("load", () => callback(reader.result as string));

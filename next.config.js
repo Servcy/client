@@ -4,16 +4,18 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["servcy.com"],
+    domains: ["servcy.com", "amazonaws.com"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "servcy-public.s3.amazonaws.com",
+        hostname: "avatars.githubusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "secure.gravatar.com",
       },
     ],
   },
   reactStrictMode: false,
   swcMinify: true,
 };
-
-module.exports = nextConfig;

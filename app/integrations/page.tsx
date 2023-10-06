@@ -4,7 +4,7 @@ import { oauthUrlGenerators } from "@/utils/Integration";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
-import { Button, Card, Skeleton, Tooltip } from "antd";
+import { Button, Card, Skeleton, Tag, Tooltip } from "antd";
 import Image from "next/image.js";
 import {
   AiOutlineApi,
@@ -14,6 +14,8 @@ import {
 import { HiArrowsRightLeft } from "react-icons/hi2";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
+// constants
+import { integrationCategories } from "@/constants/integrations";
 
 export interface Integration {
   id: number;
@@ -107,6 +109,21 @@ export default function Integrations(): JSX.Element {
               </div>
               <div className="mt-2 h-20 p-3 text-sm">
                 {integration.description}
+              </div>
+              <div className="mt-2 h-10 p-3">
+                {integrationCategories[integration.name] !== undefined
+                  ? integrationCategories[integration.name]?.map(
+                      (category: string, index: number) => (
+                        <Tag
+                          key={`category-${index}`}
+                          className="mr-1 bg-servcy-wheat font-bold text-servcy-black"
+                          bordered={false}
+                        >
+                          {category.charAt(0).toUpperCase() + category.slice(1)}
+                        </Tag>
+                      )
+                    )
+                  : null}
               </div>
               <div className="mt-6 flex flex-row justify-between">
                 <Button

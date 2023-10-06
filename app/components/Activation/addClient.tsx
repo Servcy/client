@@ -24,7 +24,6 @@ const AddClient = ({
   refreshClients,
 }: {
   isModalOpen: boolean;
-  // eslint-disable-next-line no-unused-vars
   setIsModalOpen: (isModalOpen: boolean) => void;
   refreshClients?: () => void;
 }) => {

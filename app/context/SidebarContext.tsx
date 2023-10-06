@@ -7,9 +7,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 interface SidebarContextProps {
   isOpenOnSmallScreens: boolean;
   isPageWithSidebar: boolean;
-  // eslint-disable-next-line no-unused-vars
+
   setOpenOnSmallScreens: (isOpen: boolean) => void;
-  // eslint-disable-next-line no-unused-vars
+
   setIsPageWithSidebar: (isPageWithSidebar: boolean) => void;
 }
 

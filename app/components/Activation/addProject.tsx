@@ -20,7 +20,7 @@ const AddProject = ({
   refetchProjects,
 }: {
   isModalOpen: boolean;
-  // eslint-disable-next-line no-unused-vars
+
   setIsModalOpen: (isModalOpen: boolean) => void;
   refetchProjects?: () => void;
 }) => {

@@ -1,6 +1,11 @@
-import { axiosGet } from "@/utils/Shared/axios";
+import { axiosPost } from "@/utils/Shared/axios";
 
-export const syncInbox = async () => {
-  const response = await axiosGet("/inbox/sync", {});
+export const fetchInbox = async (payload: object) => {
+  const response = await axiosPost("/inbox/items", payload);
+  return response;
+};
+
+export const archiveItems = async (payload: object) => {
+  const response = await axiosPost("/inbox/archive", payload);
   return response;
 };
