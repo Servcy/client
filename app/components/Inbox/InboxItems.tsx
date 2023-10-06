@@ -163,7 +163,7 @@ const InboxItems = ({
               size="large"
               indicator={
                 <SyncOutlined
-                  rev
+                  rev={1}
                   spin
                   style={{
                     color: "#26542F",

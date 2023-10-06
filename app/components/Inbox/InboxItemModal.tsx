@@ -6,6 +6,7 @@ import * as DOMPurify from "dompurify";
 import { Button, Modal, Tag } from "antd";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import FigmaNotification from "./FigmaNotification";
+import GithubNotification from "./GithubNotification";
 import NotionComment from "./NotionComment";
 import SlackMessage from "./SlackMessage";
 // Types
@@ -27,6 +28,7 @@ const InboxItemModal = ({
   if (selectedRow.is_body_html) {
     body = DOMPurify.sanitize(body);
   }
+
   return (
     <Modal
       open={true}
@@ -61,6 +63,17 @@ const InboxItemModal = ({
           <SlackMessage
             data={JSON.parse(selectedRow.body)}
             cause={selectedRow.cause}
+          />
+        ) : selectedRow.source === "Github" ? (
+          <GithubNotification
+            data={JSON.parse(selectedRow.body)}
+            event={selectedRow.title
+              .split(" ")
+              .slice(0, selectedRow.title.split(" ").length - 1)
+              .join("_")
+              .toLocaleLowerCase()}
+            cause={selectedRow.cause}
+            timestamp={selectedRow.created_at}
           />
         ) : (
           <div className="col-span-2 max-h-[600px] overflow-y-scroll p-1">

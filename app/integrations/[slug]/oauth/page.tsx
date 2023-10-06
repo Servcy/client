@@ -59,7 +59,7 @@ export default function IntegrationOauth(): JSX.Element {
           size="large"
           indicator={
             <SyncOutlined
-              rev
+              rev={1}
               spin
               style={{
                 color: "#26542F",
