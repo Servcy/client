@@ -1,7 +1,7 @@
 import { axiosGet, axiosPost } from "@/utils/Shared/axios";
 
-export const fetchClients = async () => {
-  const response = await axiosGet("/client/", {});
+export const fetchClients = async (search = "") => {
+  const response = await axiosGet("/client/", { search });
   return response.results;
 };
 
