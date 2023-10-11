@@ -27,3 +27,13 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ### Refer Next.js ['Docs'](https://nextjs.org/docs)
+
+## Supported Integrations
+
+1. Google
+2. Microsoft
+3. Github
+4. Notion
+5. Slack
+6. Figma
+7. Asana
