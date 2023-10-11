@@ -21,3 +21,7 @@ export const integrationCategories: Record<string, string[]> = {
   QuickBook: ["Documents"],
   Calendly: ["Calendar"],
 };
+
+export const uniqueIntegrationCategories = [
+  ...new Set(Object.values(integrationCategories).flat()),
+];

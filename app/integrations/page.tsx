@@ -4,7 +4,7 @@ import { oauthUrlGenerators } from "@/utils/Integration";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
-import { Button, Card, Input, Skeleton, Tag, Tooltip } from "antd";
+import { Button, Card, Input, Select, Skeleton, Tag, Tooltip } from "antd";
 import Image from "next/image.js";
 import {
   AiOutlineApi,
@@ -15,7 +15,10 @@ import { HiArrowsRightLeft } from "react-icons/hi2";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
 // constants
-import { integrationCategories } from "@/constants/integrations";
+import {
+  integrationCategories,
+  uniqueIntegrationCategories,
+} from "@/constants/integrations";
 
 export interface Integration {
   id: number;
@@ -30,6 +33,7 @@ export default function Integrations(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
 
   useEffect(() => {
     setLoading(true);
@@ -64,7 +68,17 @@ export default function Integrations(): JSX.Element {
             className="ml-auto w-[250px]"
             value={search}
             placeholder="search by name..."
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={(event) => setSearch(event.target.value || "")}
+          />
+          <Select
+            className="ml-2 w-[200px]"
+            placeholder="Filter by usage"
+            allowClear={true}
+            options={uniqueIntegrationCategories.map((categories) => {
+              return { label: categories, value: categories };
+            })}
+            onChange={(value) => setCategory(value)}
+            onClear={() => setCategory("")}
           />
         </div>
       </header>
@@ -83,8 +97,14 @@ export default function Integrations(): JSX.Element {
           </>
         ) : (
           integrations
-            .filter((integration) =>
-              integration.name.toLowerCase().includes(search.toLowerCase())
+            .filter(
+              (integration) =>
+                (search === "" ||
+                  integration.name
+                    .toLowerCase()
+                    .includes(search.toLowerCase())) &&
+                (!category ||
+                  integrationCategories[integration.name]?.includes(category))
             )
             .map((integration: Integration) => (
               <Card
