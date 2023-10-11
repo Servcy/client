@@ -81,13 +81,16 @@ export default function Integrations(): JSX.Element {
               className="min-h-[200px] rounded-lg bg-servcy-black text-servcy-white"
             >
               <div className="flex flex-row text-servcy-wheat">
-                <Image
-                  className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1"
-                  src={integration.logo}
-                  width={40}
-                  height={40}
-                  alt={integration.name}
-                />
+                {integration.logo.split(",").map((logo, index) => (
+                  <Image
+                    className="my-auto mr-2 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1 last-of-type:mr-5"
+                    src={logo}
+                    width={40}
+                    key={`logo-${index}`}
+                    height={40}
+                    alt={integration.name}
+                  />
+                ))}
                 <div className="my-auto flex-col text-lg font-semibold">
                   {integration.name}
                 </div>
@@ -107,10 +110,10 @@ export default function Integrations(): JSX.Element {
                     </a>
                   )}
               </div>
-              <div className="mt-2 h-20 p-3 text-sm">
+              <div className="mt-2 h-20 py-3 pr-3 text-sm">
                 {integration.description}
               </div>
-              <div className="mt-2 h-10 p-3">
+              <div className="mt-2 h-10 py-3 pr-3">
                 {integrationCategories[integration.name] !== undefined
                   ? integrationCategories[integration.name]?.map(
                       (category: string, index: number) => (
