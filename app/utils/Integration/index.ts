@@ -95,11 +95,24 @@ const getGithubOauthUrl = (from: string) => {
   ])}`;
 };
 
+const getAsanaOauthUrl = (from: string) => {
+  return `https://app.asana.com/-/oauth_authorize?${new URLSearchParams([
+    ["client_id", process.env["NEXT_PUBLIC_ASANA_CLIENT_ID"] ?? ""],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/asana/oauth`,
+    ],
+    ["response_type", "code"],
+    ["state", from],
+  ])}`;
+};
+
 export const oauthUrlGenerators: Record<string, Function> = {
   Gmail: getGoogleOauthUrl,
   Outlook: getMicrosoftOauthUrl,
   Notion: getNotionOauthUrl,
   Slack: getSlackOauthUrl,
   Github: getGithubOauthUrl,
+  Asana: getAsanaOauthUrl,
   Figma: getFigmaOauthUrl,
 };
