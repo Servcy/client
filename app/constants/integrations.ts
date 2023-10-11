@@ -13,4 +13,11 @@ export const integrationCategories: Record<string, string[]> = {
   Dropbox: ["Documents"],
   ClickUp: ["Documents", "Project", "Inbox"],
   SmartSheet: ["Documents", "Project", "Inbox"],
+  Wise: ["Payments"],
+  Stripe: ["Payments"],
+  PayPal: ["Payments"],
+  DocuSign: ["Documents"],
+  Ironclad: ["Documents"],
+  QuickBook: ["Documents"],
+  Calendly: ["Calendar"],
 };
