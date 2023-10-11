@@ -1,8 +1,16 @@
 export const integrationCategories: Record<string, string[]> = {
   Github: ["Inbox", "Project"],
   Gmail: ["Inbox", "Calendar", "Documents", "Project"],
-  Outlook: ["Inbox", "Calendar", "Documents"],
+  Outlook: ["Inbox", "Calendar", "Documents", "Project"],
   Notion: ["Inbox", "Documents"],
   Slack: ["Inbox", "Documents"],
   Figma: ["Inbox", "Documents"],
+  Monday: ["Documents", "Project", "Inbox"],
+  Asana: ["Documents", "Project", "Inbox"],
+  Trello: ["Documents", "Project", "Inbox"],
+  Jira: ["Documents", "Project", "Inbox"],
+  Airtable: ["Documents", "Project", "Inbox"],
+  Dropbox: ["Documents"],
+  ClickUp: ["Documents", "Project", "Inbox"],
+  SmartSheet: ["Documents", "Project", "Inbox"],
 };
