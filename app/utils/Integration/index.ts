@@ -107,6 +107,38 @@ const getAsanaOauthUrl = (from: string) => {
   ])}`;
 };
 
+const getTrelloOauthUrl = (from: string) => {
+  return `https://trello.com/1/authorize?${new URLSearchParams([
+    ["expiration", "never"],
+    ["scope", "read,write,account"],
+    ["response_type", "token"],
+    ["key", process.env["NEXT_PUBLIC_TRELLO_CLIENT_ID"] ?? ""],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/trello/oauth`,
+    ],
+    ["state", from],
+  ])}`;
+};
+
+const getJiraOauthUrl = (from: string) => {
+  return `https://auth.atlassian.com/authorize?${new URLSearchParams([
+    ["audience", "api.atlassian.com"],
+    ["client_id", process.env["NEXT_PUBLIC_JIRA_CLIENT_ID"] ?? ""],
+    [
+      "redirect_uri",
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/jira/oauth`,
+    ],
+    [
+      "scope",
+      "read:me read:account read:jira-work read:jira-user write:jira-work manage:jira-webhook",
+    ],
+    ["state", from],
+    ["response_type", "code"],
+    ["prompt", "consent"],
+  ])}`;
+};
+
 export const oauthUrlGenerators: Record<string, Function> = {
   Gmail: getGoogleOauthUrl,
   Outlook: getMicrosoftOauthUrl,
@@ -115,4 +147,6 @@ export const oauthUrlGenerators: Record<string, Function> = {
   Github: getGithubOauthUrl,
   Asana: getAsanaOauthUrl,
   Figma: getFigmaOauthUrl,
+  Jira: getJiraOauthUrl,
+  Trello: getTrelloOauthUrl,
 };
