@@ -163,7 +163,7 @@ export default function Integrations(): JSX.Element {
                 </div>
                 <div className="mt-6 flex flex-row justify-between">
                   <Button
-                    className="text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
+                    className="!text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                     size="middle"
                     onClick={() => connect(integration)}
                     icon={<HiArrowsRightLeft />}
