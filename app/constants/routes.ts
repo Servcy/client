@@ -7,7 +7,6 @@ import {
   AiOutlineFileSearch,
   AiOutlineHome,
   AiOutlineInbox,
-  AiOutlineProject,
 } from "react-icons/ai";
 import { IoBusiness } from "react-icons/io5";
 
@@ -33,11 +32,11 @@ export const sidebarOptions = [
     href: "/integrations",
     icon: AiOutlineApi,
   },
-  {
-    name: "Projects",
-    href: "/projects",
-    icon: AiOutlineProject,
-  },
+  // {
+  //   name: "Projects",
+  //   href: "/projects",
+  //   icon: AiOutlineProject,
+  // },
   {
     name: "Clients",
     href: "/clients",

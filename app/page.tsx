@@ -20,12 +20,12 @@ const activationSteps = [
     description: "Add client details like name, address, email, phone etc.",
     cta: "Add",
   },
-  {
-    uid: "add-projects",
-    title: "Add Your Projects",
-    description: "Add your on-going projects or start a new one",
-    cta: "Add",
-  },
+  // {
+  //   uid: "add-projects",
+  //   title: "Add Your Projects",
+  //   description: "Add your on-going projects or start a new one",
+  //   cta: "Add",
+  // },
   {
     title: "Integrate Your Apps",
     description:
