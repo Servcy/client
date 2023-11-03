@@ -26,6 +26,7 @@ export interface Integration {
   logo: string;
   description: string;
   account_display_names: string[];
+  is_wip: boolean;
   configure_at: string; // relative or absolute url
 }
 
@@ -166,8 +167,9 @@ export default function Integrations(): JSX.Element {
                     size="middle"
                     onClick={() => connect(integration)}
                     icon={<HiArrowsRightLeft />}
+                    disabled={integration.is_wip}
                   >
-                    Connect
+                    {integration.is_wip ? "Coming Soon..." : "Connect"}
                   </Button>
                   {integration.account_display_names.length !== 0 && (
                     <Tooltip
