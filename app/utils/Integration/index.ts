@@ -111,7 +111,6 @@ const getTrelloOauthUrl = (from: string) => {
   return `https://trello.com/1/authorize?${new URLSearchParams([
     ["expiration", "never"],
     ["scope", "read,write,account"],
-    ["response_type", "token"],
     ["key", process.env["NEXT_PUBLIC_TRELLO_CLIENT_ID"] ?? ""],
     [
       "redirect_uri",
