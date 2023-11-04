@@ -29,6 +29,14 @@ export default function IntegrationOauth(): JSX.Element {
     const oauthParams: Record<string, string> = getQueryParams(
       window.location.search
     );
+    if (!oauthParams["code"]) {
+      // try hash to support legacy oauth
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const token = hashParams.get("token");
+      if (token) {
+        oauthParams["code"] = token;
+      }
+    }
     integrationOauthApi(oauthParams, slug)
       .then((response) => {
         toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`);
