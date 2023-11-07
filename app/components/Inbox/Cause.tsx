@@ -73,17 +73,21 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
     );
   } else if (source === "Asana") {
     const { name, photo } = JSON.parse(cause);
-    const cleanImageLink = getCleanLink(photo.image_60x60);
+    const cleanImageLink = getCleanLink(
+      photo.image_60x60 ?? photo.image_128x128 ?? photo.image_21x21 ?? ""
+    );
     return (
       <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
-        <Image
-          src={cleanImageLink}
-          alt={name}
-          className="mr-2 h-5 w-5 rounded-full"
-          width={20}
-          loader={() => cleanImageLink}
-          height={20}
-        />
+        {cleanImageLink && (
+          <Image
+            src={cleanImageLink}
+            alt={name}
+            className="mr-2 h-5 w-5 rounded-full"
+            width={20}
+            loader={() => cleanImageLink}
+            height={20}
+          />
+        )}
         <div>{name}</div>
       </div>
     );
