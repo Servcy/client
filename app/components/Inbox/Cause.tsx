@@ -1,6 +1,7 @@
 "use client";
 
 import { getCleanLink } from "@/utils/Shared";
+import Avatar from "antd/es/avatar/avatar.js";
 import Image from "next/image";
 
 const Cause = ({ cause, source }: { cause: any; source: string }) => {
@@ -89,6 +90,16 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
           />
         )}
         <div>{name}</div>
+      </div>
+    );
+  } else if (source === "Trello") {
+    const { fullName, initials } = JSON.parse(cause);
+    return (
+      <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
+        <Avatar className="mr-2 rounded-full" size="small">
+          {initials}
+        </Avatar>
+        <div>{fullName}</div>
       </div>
     );
   }
