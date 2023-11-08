@@ -5,6 +5,7 @@ import * as DOMPurify from "dompurify";
 // Compponents
 import { Button, Modal, Tag } from "antd";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
+import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
 import GithubNotification from "./GithubNotification";
 import NotionComment from "./NotionComment";
@@ -58,6 +59,11 @@ const InboxItemModal = ({
           <FigmaNotification
             data={JSON.parse(selectedRow.body)}
             cause={selectedRow.cause}
+          />
+        ) : selectedRow.source === "Asana" ? (
+          <AsanaNotification
+            data={JSON.parse(selectedRow.body)}
+            cause={JSON.parse(selectedRow.cause)}
           />
         ) : selectedRow.source === "Slack" ? (
           <SlackMessage
