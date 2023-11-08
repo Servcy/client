@@ -5,14 +5,28 @@ import Image from "next/image.js";
 // Constants
 import { sidebarOptions } from "@/constants/routes";
 // Icons
-import { AiOutlineSetting } from "react-icons/ai";
-import { VscAccount } from "react-icons/vsc";
+import { AiOutlinePoweroff, AiOutlineSetting } from "react-icons/ai";
+// APIs
+import { logout as logoutApi } from "@/apis/logout";
 // Utils
 import cn from "classnames";
+import { deleteCookie } from "cookies-next";
 import { useState } from "react";
 
 export default function SideBar(): JSX.Element {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+
+  const logout = async () => {
+    try {
+      await logoutApi();
+    } finally {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div
@@ -100,15 +114,18 @@ export default function SideBar(): JSX.Element {
                       "justify-center": !isSidebarHovered,
                     }
                   )}
-                  href="/settings"
+                  href="#logging-out"
+                  onClick={() => {
+                    logout();
+                  }}
                 >
-                  <VscAccount size="24" />
+                  <AiOutlinePoweroff size="24" />
                   <span
                     className={cn("flex-1 whitespace-nowrap px-3", {
                       hidden: !isSidebarHovered,
                     })}
                   >
-                    <p className="text-base">My Account</p>
+                    <p className="text-base">Logout</p>
                   </span>
                 </a>
               </li>
