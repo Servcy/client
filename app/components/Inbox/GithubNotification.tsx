@@ -16,7 +16,7 @@ const GithubNotification = ({
   timestamp,
 }: GithubNotificationProps) => {
   let link = "#null";
-  let linkLabel = "View in Github";
+  let linkLabel = "";
   const { login, avatar_url } = JSON.parse(cause);
   const cleanImageLink = getCleanLink(avatar_url);
 
