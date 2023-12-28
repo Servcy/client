@@ -8,7 +8,6 @@ import {
   AiOutlineHome,
   AiOutlineInbox,
 } from "react-icons/ai";
-import { IoBusiness } from "react-icons/io5";
 
 export const authRoutes = ["/login"];
 
@@ -32,16 +31,6 @@ export const sidebarOptions = [
     href: "/integrations",
     icon: AiOutlineApi,
   },
-  // {
-  //   name: "Projects",
-  //   href: "/projects",
-  //   icon: AiOutlineProject,
-  // },
-  {
-    name: "Clients",
-    href: "/clients",
-    icon: IoBusiness,
-  },
   {
     name: "Inbox",
     href: "/inbox",
@@ -53,16 +42,15 @@ export const sidebarOptions = [
     icon: AiOutlineCalendar,
   },
   {
-    name: "Payments",
-    href: "/payments",
-    icon: AiOutlineDollarCircle,
-  },
-  {
     name: "Documents",
     href: "/documents",
     icon: AiOutlineFileSearch,
   },
-
+  {
+    name: "Payments",
+    href: "/payments",
+    icon: AiOutlineDollarCircle,
+  },
   {
     name: "Reports",
     href: "/reports",
