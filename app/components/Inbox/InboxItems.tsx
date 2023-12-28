@@ -60,7 +60,7 @@ const InboxItems = ({
       render: (title, record) => {
         return (
           <button
-            className="cursor-pointer"
+            className="cursor-pointer text-left"
             onClick={() => {
               setSelectedRow(record);
               setIsInboxItemModalVisible(true);
