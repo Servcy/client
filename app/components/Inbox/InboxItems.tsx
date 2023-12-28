@@ -6,7 +6,15 @@ import type { ColumnsType } from "antd/es/table";
 import React, { Dispatch, SetStateAction } from "react";
 // Compponents
 import { SyncOutlined } from "@ant-design/icons";
-import { Button, ConfigProvider, Spin, Table, Tag, Tooltip } from "antd";
+import {
+  Avatar,
+  Button,
+  ConfigProvider,
+  Spin,
+  Table,
+  Tag,
+  Tooltip,
+} from "antd";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import Cause from "./Cause";
 
@@ -80,6 +88,21 @@ const InboxItems = ({
           >
             {source}
           </Tag>
+        );
+      },
+    },
+    {
+      dataIndex: "account",
+      width: 100,
+      title: "Source",
+      render: (account) => {
+        return (
+          <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
+            <Avatar className="mr-2 rounded-full" size="small">
+              {account.slice(0, 1).toUpperCase()}
+            </Avatar>
+            <div>{account}</div>
+          </div>
         );
       },
     },
