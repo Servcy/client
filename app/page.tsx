@@ -2,10 +2,7 @@
 
 // Dependencies
 import { useRouter } from "next/navigation.js";
-import { useState } from "react";
 // Components
-import AddClient from "@/components/Activation/addClient";
-import AddProject from "@/components/Activation/addProject";
 import { Button } from "antd";
 import {
   AiOutlineHome,
@@ -14,18 +11,6 @@ import {
 } from "react-icons/ai";
 
 const activationSteps = [
-  {
-    uid: "add-clients",
-    title: "Add Your Clients",
-    description: "Add client details like name, address, email, phone etc.",
-    cta: "Add",
-  },
-  // {
-  //   uid: "add-projects",
-  //   title: "Add Your Projects",
-  //   description: "Add your on-going projects or start a new one",
-  //   cta: "Add",
-  // },
   {
     title: "Integrate Your Apps",
     description:
@@ -36,9 +21,6 @@ const activationSteps = [
 ];
 
 export default function Index(): JSX.Element {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>();
-  const [selectedActivationStep, setSelectedActivationStep] =
-    useState<string>("");
   const router = useRouter();
 
   return (
@@ -69,12 +51,7 @@ export default function Index(): JSX.Element {
               <div className="mt-2 flex flex-row justify-between">
                 <Button
                   onClick={() => {
-                    setIsModalOpen(true);
-                    step.uid
-                      ? setSelectedActivationStep(step.uid)
-                      : step.href
-                      ? router.push(step.href)
-                      : undefined;
+                    step.href && router.push(step.href);
                   }}
                   icon={<AiOutlineRightCircle />}
                   className="text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
@@ -86,12 +63,6 @@ export default function Index(): JSX.Element {
           ))}
         </div>
       </div>
-      {isModalOpen && selectedActivationStep === "add-clients" && (
-        <AddClient isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      )}
-      {isModalOpen && selectedActivationStep === "add-projects" && (
-        <AddProject isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      )}
     </main>
   );
 }
