@@ -10,6 +10,7 @@ import FigmaNotification from "./FigmaNotification";
 import GithubNotification from "./GithubNotification";
 import NotionComment from "./NotionComment";
 import SlackMessage from "./SlackMessage";
+import TrelloNotification from "./TrelloNotification";
 // Types
 import { InboxItem } from "@/types/inbox";
 
@@ -62,6 +63,11 @@ const InboxItemModal = ({
           />
         ) : selectedRow.source === "Asana" ? (
           <AsanaNotification
+            data={JSON.parse(selectedRow.body)}
+            cause={JSON.parse(selectedRow.cause)}
+          />
+        ) : selectedRow.source === "Trello" ? (
+          <TrelloNotification
             data={JSON.parse(selectedRow.body)}
             cause={JSON.parse(selectedRow.cause)}
           />
