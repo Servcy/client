@@ -5,36 +5,6 @@ import { HiExternalLink } from "react-icons/hi";
 import { remark } from "remark";
 import html from "remark-html";
 
-const EVENT_MAP = {
-  createBoard: "Created a board",
-  updateBoard: "Updated board details",
-  convertToCardFromCheckItem: "Converted a check item to a card",
-  createCard: "Created a card",
-  deleteCard: "Deleted a card",
-  updateCard: "Updated card details",
-  removeChecklistFromCard: "Removed a checklist from a card",
-  updateCheckItemStateOnCard: "Updated check item state on a card",
-  updateChecklist: "Updated checklist details",
-  updateList: "Updated list details",
-  addLabelToCard: "A label was added to a card",
-  createCheckItem: "Created a check item",
-  deleteCheckItem: "Deleted a check item",
-  removeLabelFromCard: "Removed a label from a card",
-  updateCheckItem: "Updated check item details",
-  addChecklistToCard: "A checklist was added to a card",
-  addMemberToCard: "A member was added to a card",
-  addMemberToBoard: "A member was added to a board",
-  moveCardFromBoard: "Moved a card from one board to another",
-  moveCardToBoard: "Moved a card to a different board",
-  moveListFromBoard: "Moved a list from one board to another",
-  moveListToBoard: "Moved a list to a different board",
-  deleteComment: "Someone deleted their comment on a card",
-  updateComment: "Someone updated their comment on a card",
-  commentCard: "Someone commented on a card",
-  deleteAttachmentFromCard: "Deleted an attachment from a card",
-  addAttachmentToCard: "An attachment was added to a card",
-};
-
 const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
   let link = "#null";
   let linkLabel = "";
