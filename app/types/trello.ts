@@ -12,29 +12,7 @@ export interface TrelloBoard {
   pinned?: boolean;
   url?: string;
   shortUrl?: string;
-  prefs?: {
-    permissionLevel: string;
-    voting: string;
-    comments: string;
-    invitations: string;
-    selfJoin: boolean;
-    cardCovers: boolean;
-    isTemplate: boolean;
-    cardAging: string;
-    calendarFeedEnabled: boolean;
-    background: string;
-    backgroundImage?: any;
-    backgroundImageScaled?: any;
-    backgroundTile: boolean;
-    backgroundBrightness: string;
-    backgroundColor: string;
-    backgroundBottomColor: string;
-    backgroundTopColor: string;
-    canBePublic: boolean;
-    canBeOrg: boolean;
-    canBePrivate: boolean;
-    canInvite: boolean;
-  };
+  prefs?: object;
   labelNames?: {
     green: string;
     yellow: string;
