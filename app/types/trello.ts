@@ -178,14 +178,22 @@ export interface TrelloNotificationProps {
         desc?: string;
         name?: string;
       };
-      board: TrelloBoard;
+      board?: TrelloBoard;
       boardSource?: {
         id: string;
       };
       boardTarget?: {
         id: string;
       };
-      list: TrelloList;
+      checklist?: {
+        id: string;
+        name: string;
+      };
+      cardSource?: {
+        id: string;
+        name: string;
+      };
+      list?: TrelloList;
       attachment?: TrelloAttachment;
     };
     appCreator?: {

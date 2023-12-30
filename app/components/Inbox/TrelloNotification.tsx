@@ -14,108 +14,142 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
     switch (data.type) {
       case "createBoard": {
         linkLabel = "View board on Trello";
-        link = `https://trello.com/b/${data.data.board.shortLink}`;
+        link = data.data.board
+          ? `https://trello.com/b/${data.data.board.shortLink}`
+          : "#null";
         return (
-          <>
-            <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Board Name:
-              </div>
-              <div>{data.data.board.name}</div>
-            </div>
-            {data.data.board.desc && (
+          data.data.board && (
+            <>
               <div className="mb-2 flex w-full">
                 <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Description:
+                  Board Name:
                 </div>
-                <div
-                  className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
-                  dangerouslySetInnerHTML={{
-                    __html: remark()
-                      .use(html)
-                      .processSync(data.data.board.desc)
-                      .toString(),
-                  }}
-                />
+                <div>{data.data.board.name}</div>
               </div>
-            )}
-            <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Status:
+              {data.data.board.desc && (
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                    Description:
+                  </div>
+                  <div
+                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    dangerouslySetInnerHTML={{
+                      __html: remark()
+                        .use(html)
+                        .processSync(data.data.board.desc)
+                        .toString(),
+                    }}
+                  />
+                </div>
+              )}
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Status:
+                </div>
+                <div>{data.data.board.closed ? "Closed" : "Open"}</div>
               </div>
-              <div>{data.data.board.closed ? "Closed" : "Open"}</div>
-            </div>
-          </>
+            </>
+          )
         );
       }
       case "updateBoard": {
         linkLabel = "View board on Trello";
-        link = `https://trello.com/b/${data.data.board.shortLink}`;
+        link = data.data.board
+          ? `https://trello.com/b/${data.data.board.shortLink}`
+          : "#null";
+        return (
+          data.data.board && (
+            <>
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Board Name:
+                </div>
+                <div>{data.data.board.name}</div>
+              </div>
+              {data.data.board.desc && (
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                    Description:
+                  </div>
+                  <div
+                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    dangerouslySetInnerHTML={{
+                      __html: remark()
+                        .use(html)
+                        .processSync(data.data.board.desc)
+                        .toString(),
+                    }}
+                  />
+                </div>
+              )}
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Status:
+                </div>
+                <div>{data.data.board.closed ? "Closed" : "Open"}</div>
+              </div>
+              {data.data.old && (
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                    Fields Updated:
+                  </div>
+                  <div>
+                    {Object.keys(data.data.old).map((field) => (
+                      <div key={field}>{field}</div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )
+        );
+      }
+      case "convertToCardFromCheckItem": {
+        linkLabel = "View card on Trello";
+        link = `https://trello.com/c/${data.data.card.shortLink}`;
         return (
           <>
             <div className="mb-2 flex w-full">
               <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Board Name:
+                Card Name:
               </div>
-              <div>{data.data.board.name}</div>
+              <div>{data.data.card.name}</div>
             </div>
-            {data.data.board.desc && (
+            {data.data.checklist && (
               <div className="mb-2 flex w-full">
                 <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Description:
+                  Checklist Name:
                 </div>
-                <div
-                  className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
-                  dangerouslySetInnerHTML={{
-                    __html: remark()
-                      .use(html)
-                      .processSync(data.data.board.desc)
-                      .toString(),
-                  }}
-                />
+                <div>{data.data.checklist.name}</div>
               </div>
             )}
-            <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Status:
-              </div>
-              <div>{data.data.board.closed ? "Closed" : "Open"}</div>
-            </div>
-            {data.data.old && (
+            {data.data.cardSource && (
               <div className="mb-2 flex w-full">
                 <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Fields Updated:
+                  Source Card:
                 </div>
-                <div>
-                  {Object.keys(data.data.old).map((field) => (
-                    <div key={field}>{field}</div>
-                  ))}
+                <div>{data.data.cardSource.name}</div>
+              </div>
+            )}
+            {data.data.board && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Board:
                 </div>
+                <div>{data.data.board.name}</div>
+              </div>
+            )}
+            {data.data.list && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  List:
+                </div>
+                <div>{data.data.list.name}</div>
               </div>
             )}
           </>
         );
       }
-      // case "convertToCardFromCheckItem": {
-      //   linkLabel = "View card on Trello";
-      //   link = `https://trello.com/c/${data.data.card.shortLink}`;
-      //   return (
-      //     <>
-      //       <div className="mb-2 flex w-full">
-      //         <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-      //           Card Name:
-      //         </div>
-      //         <div>{data.data.card.name}</div>
-      //       </div>
-      //       <div className="mb-2 flex w-full">
-      //         <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-      //           Checklist Name:
-      //         </div>
-      //         <div>{data.data.checklist.name}</div>
-      //       </div>
-      //     </>
-      //   );
-      // }
       default:
         return <div>Event not supported yet.</div>;
     }
