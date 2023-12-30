@@ -1,3 +1,191 @@
+export interface TrelloBoard {
+  id: string;
+  name: string;
+  desc?: string;
+  shortLink: string;
+  descData?: {
+    emoji?: any;
+  };
+  closed?: boolean;
+  idMemberCreator?: string;
+  idOrganization?: string;
+  pinned?: boolean;
+  url?: string;
+  shortUrl?: string;
+  prefs?: {
+    permissionLevel: string;
+    voting: string;
+    comments: string;
+    invitations: string;
+    selfJoin: boolean;
+    cardCovers: boolean;
+    isTemplate: boolean;
+    cardAging: string;
+    calendarFeedEnabled: boolean;
+    background: string;
+    backgroundImage?: any;
+    backgroundImageScaled?: any;
+    backgroundTile: boolean;
+    backgroundBrightness: string;
+    backgroundColor: string;
+    backgroundBottomColor: string;
+    backgroundTopColor: string;
+    canBePublic: boolean;
+    canBeOrg: boolean;
+    canBePrivate: boolean;
+    canInvite: boolean;
+  };
+  labelNames?: {
+    green: string;
+    yellow: string;
+    orange: string;
+    red: string;
+    purple: string;
+    blue: string;
+    sky: string;
+    lime: string;
+    pink: string;
+    black: string;
+  };
+  limits?: {
+    attachments: {
+      perBoard: { status: string; disableAt: number; warnAt: number };
+      perCard: { status: string; disableAt: number; warnAt: number };
+    };
+    boards: {
+      totalMembersPerBoard: {
+        status: string;
+        disableAt: number;
+        warnAt: number;
+      };
+    };
+    cards: {
+      openPerBoard: { status: string; disableAt: number; warnAt: number };
+      totalPerBoard: { status: string; disableAt: number; warnAt: number };
+    };
+    checklists: {
+      perBoard: { status: string; disableAt: number; warnAt: number };
+    };
+    customFields: {
+      perBoard: { status: string; disableAt: number; warnAt: number };
+    };
+    labels: {
+      perBoard: { status: string; disableAt: number; warnAt: number };
+    };
+    lists: {
+      openPerBoard: { status: string; disableAt: number; warnAt: number };
+      totalPerBoard: { status: string; disableAt: number; warnAt: number };
+    };
+    stickers: {
+      perCard: { status: string; disableAt: number; warnAt: number };
+    };
+  };
+  memberships?: [
+    {
+      id: string;
+      idMember: string;
+      memberType: string;
+      unconfirmed: boolean;
+      deactivated: boolean;
+    }
+  ];
+  enterpriseOwned?: boolean;
+  starred?: boolean;
+}
+
+export interface TrelloCard {
+  id: string;
+  checkItemStates?: any;
+  closed: boolean;
+  dateLastActivity: string;
+  desc?: string;
+  descData?: {
+    emoji?: any;
+  };
+  dueReminder?: number;
+  idBoard: string;
+  idList: string;
+  idMembersVoted?: any;
+  idShort: number;
+  idAttachmentCover?: any;
+  idLabels?: any;
+  manualCoverAttachment: boolean;
+  name: string;
+  pos: number;
+  shortLink: string;
+  isTemplate: boolean;
+  cardRole?: string;
+  badges?: {
+    attachmentsByType: {
+      trello: {
+        board: number;
+        card: number;
+      };
+    };
+    location?: boolean;
+    votes: number;
+    viewingMemberVoted: boolean;
+    subscribed: boolean;
+    fogbugz: string;
+    checkItems: number;
+    checkItemsChecked: number;
+    checkItemsEarliestDue?: any;
+    comments: number;
+    attachments: number;
+    description: boolean;
+    due?: string;
+    dueComplete: boolean;
+    start?: string;
+  };
+  dueComplete: boolean;
+  due?: string;
+  idChecklists?: any;
+  idMembers?: any;
+  labels?: any;
+  shortUrl: string;
+  start?: string;
+  subscribed: boolean;
+  url: string;
+  cover?: {
+    idAttachment?: any;
+    color?: string;
+    idUploadedBackground?: any;
+    size: string;
+    brightness: string;
+    idPlugin?: any;
+  };
+}
+
+export interface TrelloList {
+  id: string;
+  name: string;
+  closed?: boolean;
+  idBoard?: string;
+  pos?: number;
+  subscribed?: boolean;
+}
+
+export interface TrelloAttachment {
+  id: string;
+  url: string;
+  name: string;
+  bytes?: number;
+  date?: string;
+  edgeColor?: string;
+  idMember?: string;
+  isUpload?: boolean;
+  mimeType?: string;
+  previews?: [
+    {
+      bytes: number;
+      height: number;
+      scaled: boolean;
+      url: string;
+      width: number;
+    }
+  ];
+}
+
 export interface TrelloNotificationProps {
   data: {
     id: string;
@@ -7,34 +195,20 @@ export interface TrelloNotificationProps {
       textData?: {
         emoji?: any;
       };
-      card: {
-        id: string;
-        desc?: string;
-        name: string;
-        idShort: number;
-        shortLink: string;
-      };
+      card: TrelloCard;
       old?: {
         desc?: string;
         name?: string;
       };
-      board: {
-        id: string;
-        name: string;
-        shortLink: string;
-      };
+      board: TrelloBoard;
       boardSource?: {
         id: string;
       };
       boardTarget?: {
         id: string;
       };
-      list: { id: string; name: string };
-      attachment?: {
-        id: string;
-        name: string;
-        url: string;
-      };
+      list: TrelloList;
+      attachment?: TrelloAttachment;
     };
     appCreator?: {
       id: string;
