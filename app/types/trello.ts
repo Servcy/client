@@ -173,7 +173,7 @@ export interface TrelloNotificationProps {
       textData?: {
         emoji?: any;
       };
-      card: TrelloCard;
+      card?: TrelloCard;
       old?: {
         desc?: string;
         name?: string;

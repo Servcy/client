@@ -106,15 +106,19 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
       }
       case "convertToCardFromCheckItem": {
         linkLabel = "View card on Trello";
-        link = `https://trello.com/c/${data.data.card.shortLink}`;
+        link = data.data.card
+          ? `https://trello.com/c/${data.data.card.shortLink}`
+          : "#null";
         return (
           <>
-            <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Card Name:
+            {data.data.card && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Card Name:
+                </div>
+                <div>{data.data.card.name}</div>
               </div>
-              <div>{data.data.card.name}</div>
-            </div>
+            )}
             {data.data.checklist && (
               <div className="mb-2 flex w-full">
                 <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
@@ -145,6 +149,56 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                   List:
                 </div>
                 <div>{data.data.list.name}</div>
+              </div>
+            )}
+          </>
+        );
+      }
+      case "createCard": {
+        linkLabel = "View card on Trello";
+        link = data.data.card
+          ? `https://trello.com/c/${data.data.card.shortLink}`
+          : "#null";
+        return (
+          <>
+            {data.data.card && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Card Name:
+                </div>
+                <div>{data.data.card.name}</div>
+              </div>
+            )}
+            {data.data.card?.desc && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  Description:
+                </div>
+                <div
+                  className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                  dangerouslySetInnerHTML={{
+                    __html: remark()
+                      .use(html)
+                      .processSync(data.data.card.desc)
+                      .toString(),
+                  }}
+                />
+              </div>
+            )}
+            {data.data.list && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  List:
+                </div>
+                <div>{data.data.list.name}</div>
+              </div>
+            )}
+            {data.data.board && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                  Board:
+                </div>
+                <div>{data.data.board.name}</div>
               </div>
             )}
           </>
