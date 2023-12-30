@@ -221,7 +221,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                 </div>
                 {data.data.card.desc && (
                   <div className="mb-2 flex w-full">
-                    <div className="mr-2 w-[150px] font-mono font-semibold">
+                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
                       Description:
                     </div>
                     <div
