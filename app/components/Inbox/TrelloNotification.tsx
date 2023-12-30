@@ -132,7 +132,19 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                 <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
                   Source Card:
                 </div>
-                <div>{data.data.cardSource.name}</div>
+                <div>
+                  {data.data.cardSource.name}{" "}
+                  <a
+                    href={data.data.cardSource.shortLink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <HiExternalLink
+                      className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                      size="18"
+                    />
+                  </a>
+                </div>
               </div>
             )}
             {data.data.board && (
@@ -140,7 +152,19 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                 <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
                   Board:
                 </div>
-                <div>{data.data.board.name}</div>
+                <div>
+                  {data.data.board.name}{" "}
+                  <a
+                    href={data.data.board.shortLink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <HiExternalLink
+                      className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                      size="18"
+                    />
+                  </a>
+                </div>
               </div>
             )}
             {data.data.list && (
