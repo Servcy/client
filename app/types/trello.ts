@@ -192,6 +192,7 @@ export interface TrelloNotificationProps {
       cardSource?: {
         id: string;
         name: string;
+        shortLink: string;
       };
       list?: TrelloList;
       attachment?: TrelloAttachment;
