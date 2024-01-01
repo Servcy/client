@@ -1563,7 +1563,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
         );
       }
       default:
-        return <div>Event not supported yet.</div>;
+        return <div>Event not supported</div>;
     }
   };
 
