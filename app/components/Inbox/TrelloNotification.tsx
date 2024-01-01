@@ -1214,6 +1214,354 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
           </>
         );
       }
+      case "commentCard": {
+        linkLabel = "View card on Trello";
+        link = data.data.card
+          ? `https://trello.com/c/${data.data.card.shortLink}`
+          : "#null";
+        return (
+          <>
+            {data.data.card && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  Card Name:
+                </div>
+                <div>{data.data.card.name}</div>
+              </div>
+            )}
+            {data.data.text && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Comment:
+                  </div>
+                  <div
+                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    dangerouslySetInnerHTML={{
+                      __html: remark()
+                        .use(html)
+                        .processSync(data.data.text)
+                        .toString(),
+                    }}
+                  />
+                </div>
+              </>
+            )}
+            {data.data.board && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Board:
+                  </div>
+                  <div>
+                    {data.data.board.name}{" "}
+                    <a
+                      href={data.data.board.shortLink}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <HiExternalLink
+                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                        size="18"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </>
+            )}
+            {data.data.list && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  List Name:
+                </div>
+                <div>{data.data.list.name}</div>
+              </div>
+            )}
+          </>
+        );
+      }
+      case "updateComment": {
+        linkLabel = "View card on Trello";
+        link = data.data.card
+          ? `https://trello.com/c/${data.data.card.shortLink}`
+          : "#null";
+
+        return (
+          <>
+            {data.data.card && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  Card Name:
+                </div>
+                <div>{data.data.card.name}</div>
+              </div>
+            )}
+            {data.data.text && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Comment:
+                  </div>
+                  <div
+                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    dangerouslySetInnerHTML={{
+                      __html: remark()
+                        .use(html)
+                        .processSync(data.data.text)
+                        .toString(),
+                    }}
+                  />
+                </div>
+              </>
+            )}
+            {data.data.board && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Board:
+                  </div>
+                  <div>
+                    {data.data.board.name}{" "}
+                    <a
+                      href={data.data.board.shortLink}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <HiExternalLink
+                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                        size="18"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </>
+            )}
+            {data.data.list && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  List Name:
+                </div>
+                <div>{data.data.list.name}</div>
+              </div>
+            )}
+          </>
+        );
+      }
+      case "deleteComment": {
+        linkLabel = "View card on Trello";
+        link = data.data.card
+          ? `https://trello.com/c/${data.data.card.shortLink}`
+          : "#null";
+
+        return (
+          <>
+            {data.data.card && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  Card Name:
+                </div>
+                <div>{data.data.card.name}</div>
+              </div>
+            )}
+            {data.data.text && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Comment:
+                  </div>
+                  <div
+                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    dangerouslySetInnerHTML={{
+                      __html: remark()
+                        .use(html)
+                        .processSync(data.data.text)
+                        .toString(),
+                    }}
+                  />
+                </div>
+              </>
+            )}
+            {data.data.board && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Board:
+                  </div>
+                  <div>
+                    {data.data.board.name}{" "}
+                    <a
+                      href={data.data.board.shortLink}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <HiExternalLink
+                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                        size="18"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </>
+            )}
+            {data.data.list && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  List Name:
+                </div>
+                <div>{data.data.list.name}</div>
+              </div>
+            )}
+          </>
+        );
+      }
+      case "addAttachmentToCard": {
+        linkLabel = "View attachment on Trello";
+        link = data.data.attachment ? data.data.attachment.url : "#null";
+
+        return (
+          <>
+            {data.data.card && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  Card Name:
+                </div>
+                <div>{data.data.card.name}</div>
+              </div>
+            )}
+            {data.data.attachment && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Attachment Name:
+                  </div>
+                  <div>{data.data.attachment.name}</div>
+                </div>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Attachment URL:
+                  </div>
+                  <div>
+                    <a
+                      href={data.data.attachment.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <HiExternalLink
+                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                        size="18"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </>
+            )}
+            {data.data.board && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Board:
+                  </div>
+                  <div>
+                    {data.data.board.name}{" "}
+                    <a
+                      href={data.data.board.shortLink}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <HiExternalLink
+                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                        size="18"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </>
+            )}
+            {data.data.list && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  List Name:
+                </div>
+                <div>{data.data.list.name}</div>
+              </div>
+            )}
+          </>
+        );
+      }
+      case "deleteAttachmentFromCard": {
+        linkLabel = "View attachment on Trello";
+        link = data.data.attachment ? data.data.attachment.url : "#null";
+
+        return (
+          <>
+            {data.data.card && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  Card Name:
+                </div>
+                <div>{data.data.card.name}</div>
+              </div>
+            )}
+            {data.data.attachment && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Attachment Name:
+                  </div>
+                  <div>{data.data.attachment.name}</div>
+                </div>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Attachment URL:
+                  </div>
+                  <div>
+                    <a
+                      href={data.data.attachment.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <HiExternalLink
+                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                        size="18"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </>
+            )}
+            {data.data.board && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Board:
+                  </div>
+                  <div>
+                    {data.data.board.name}{" "}
+                    <a
+                      href={data.data.board.shortLink}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <HiExternalLink
+                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                        size="18"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </>
+            )}
+            {data.data.list && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold">
+                  List Name:
+                </div>
+                <div>{data.data.list.name}</div>
+              </div>
+            )}
+          </>
+        );
+      }
       default:
         return <div>Event not supported yet.</div>;
     }
