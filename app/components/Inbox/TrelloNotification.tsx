@@ -894,6 +894,198 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
           </>
         );
       }
+      case "addMemberToCard": {
+        linkLabel = "View card on Trello";
+        link = data.data.card
+          ? `https://trello.com/c/${data.data.card.shortLink}`
+          : "#null";
+
+        return (
+          <>
+            {data.data.card && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Card Name:
+                  </div>
+                  <div>{data.data.card.name}</div>
+                </div>
+                {data.data.member && (
+                  <>
+                    <div className="mb-2 flex w-full">
+                      <div className="mr-2 w-[150px] font-mono font-semibold">
+                        Member Name:
+                      </div>
+                      <div>{data.data.member.name}</div>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </>
+        );
+      }
+      case "addMemberToBoard": {
+        linkLabel = "View board on Trello";
+        link = data.data.board
+          ? `https://trello.com/b/${data.data.board.shortLink}`
+          : "#null";
+
+        return (
+          <>
+            {data.data.board && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Board Name:
+                  </div>
+                  <div>{data.data.board.name}</div>
+                </div>
+                {data.data.member && (
+                  <>
+                    <div className="mb-2 flex w-full">
+                      <div className="mr-2 w-[150px] font-mono font-semibold">
+                        Member Name:
+                      </div>
+                      <div>{data.data.member.name}</div>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </>
+        );
+      }
+      case "moveCardFromBoard": {
+        linkLabel = "View card on Trello";
+        link = data.data.card
+          ? `https://trello.com/c/${data.data.card.shortLink}`
+          : "#null";
+
+        return (
+          <>
+            {data.data.card && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Card Name:
+                  </div>
+                  <div>{data.data.card.name}</div>
+                </div>
+                {data.data.board && (
+                  <>
+                    <div className="mb-2 flex w-full">
+                      <div className="mr-2 w-[150px] font-mono font-semibold">
+                        Source Board:
+                      </div>
+                      <div>
+                        {data.data.board.name}{" "}
+                        <a
+                          href={data.data.board.shortLink}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <HiExternalLink
+                            className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                            size="18"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {data.display.entities.board && (
+                  <>
+                    <div className="mb-2 flex w-full">
+                      <div className="mr-2 w-[150px] font-mono font-semibold">
+                        Target Board:
+                      </div>
+                      <div>
+                        {data.display.entities.board.text}{" "}
+                        <a
+                          href={data.display.entities.board.shortLink}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <HiExternalLink
+                            className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                            size="18"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </>
+        );
+      }
+      case "moveCardToBoard": {
+        linkLabel = "View board on Trello";
+        link = data.data.board
+          ? `https://trello.com/b/${data.data.board.shortLink}`
+          : "#null";
+
+        return (
+          <>
+            {data.data.board && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold">
+                    Board Name:
+                  </div>
+                  <div>{data.data.board.name}</div>
+                </div>
+                {data.data.card && (
+                  <>
+                    <div className="mb-2 flex w-full">
+                      <div className="mr-2 w-[150px] font-mono font-semibold">
+                        Card Name:
+                      </div>
+                      <div>
+                        {data.data.card.name}{" "}
+                        <a
+                          href={data.data.card.shortLink}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <HiExternalLink
+                            className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                            size="18"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {data.display.entities.board && (
+                  <>
+                    <div className="mb-2 flex w-full">
+                      <div className="mr-2 w-[150px] font-mono font-semibold">
+                        Source Board:
+                      </div>
+                      <div>
+                        {data.display.entities.board.text}{" "}
+                        <a
+                          href={data.display.entities.board.shortLink}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <HiExternalLink
+                            className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                            size="18"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </>
+        );
+      }
       default:
         return <div>Event not supported yet.</div>;
     }
