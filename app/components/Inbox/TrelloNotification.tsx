@@ -364,6 +364,70 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
           </>
         );
       }
+      case "createCheckItem": {
+        linkLabel = "View card on Trello";
+        link = data.data.card
+          ? `https://trello.com/c/${data.data.card.shortLink}`
+          : "#null";
+        return (
+          <>
+            {data.data.card && (
+              <>
+                <div className="mb-2 flex w-full">
+                  <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                    Card Name:
+                  </div>
+                  <div>{data.data.card.name}</div>
+                </div>
+                {data.data.checkItem && (
+                  <>
+                    <div className="mb-2 flex w-full">
+                      <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                        Check Item Name:
+                      </div>
+                      <div>{data.data.checkItem.name}</div>
+                    </div>
+                    <div className="mb-2 flex w-full">
+                      <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                        Check Item State:
+                      </div>
+                      <div>{data.data.checkItem.state}</div>
+                    </div>
+                  </>
+                )}
+                {data.data.checklist && (
+                  <div className="mb-2 flex w-full">
+                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                      Checklist Name:
+                    </div>
+                    <div>{data.data.checklist.name}</div>
+                  </div>
+                )}
+                {data.data.board && (
+                  <div className="mb-2 flex w-full">
+                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                      Board:
+                    </div>
+                    <div>
+                      {data.data.board.name}{" "}
+                      <a
+                        href={data.data.board.shortLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <HiExternalLink
+                          className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                          size="18"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+          </>
+        );
+      }
       default:
         return <div>Event not supported yet.</div>;
     }
