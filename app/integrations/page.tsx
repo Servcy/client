@@ -40,7 +40,12 @@ export default function Integrations(): JSX.Element {
     setLoading(true);
     fetchIntegrations()
       .then((integrations) => {
-        setIntegrations(integrations);
+        setIntegrations(
+          integrations.sort(
+            (a: Integration, b: Integration) =>
+              Number(a.is_wip) - Number(b.is_wip)
+          )
+        );
       })
       .catch((error) => {
         toast.error(error.response.data.detail);
