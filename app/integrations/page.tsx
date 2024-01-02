@@ -6,11 +6,7 @@ import toast from "react-hot-toast";
 // Components
 import { Button, Card, Input, Select, Skeleton, Tag, Tooltip } from "antd";
 import Image from "next/image.js";
-import {
-  AiOutlineApi,
-  AiOutlineInfoCircle,
-  AiOutlineSetting,
-} from "react-icons/ai";
+import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
@@ -123,8 +119,8 @@ export default function Integrations(): JSX.Element {
                   <div className="my-auto flex-col text-lg font-semibold">
                     {integration.name}
                   </div>
-                  {integration.configure_at !== "None" &&
-                    integration.account_display_names.length !== 0 && (
+                  {integration.is_connected && (
+                    <Tooltip title="configure">
                       <a
                         href={integration.configure_at}
                         target="_blank"
@@ -137,7 +133,8 @@ export default function Integrations(): JSX.Element {
                           className="hover:animate-spin"
                         />
                       </a>
-                    )}
+                    </Tooltip>
+                  )}
                 </div>
                 <div className="mt-2 h-16 py-3 pr-3 text-xs">
                   {integration.description}
@@ -168,24 +165,6 @@ export default function Integrations(): JSX.Element {
                   >
                     {integration.is_wip ? "Coming Soon..." : "Connect"}
                   </Button>
-                  {integration.account_display_names.length !== 0 && (
-                    <Tooltip
-                      title={integration.account_display_names.map(
-                        (account_display_name, index) => (
-                          <div key={`account_display_name-${index}`}>
-                            {account_display_name}
-                          </div>
-                        )
-                      )}
-                      animation="duration-500"
-                      color="servcy-black"
-                    >
-                      <AiOutlineInfoCircle
-                        size="20"
-                        className="my-auto text-servcy-white hover:text-servcy-light"
-                      />
-                    </Tooltip>
-                  )}
                 </div>
               </Card>
             ))

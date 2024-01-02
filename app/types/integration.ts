@@ -3,7 +3,7 @@ export interface Integration {
   name: string;
   logo: string;
   description: string;
-  account_display_names: string[];
+  is_connected: boolean;
   is_wip: boolean;
   configure_at: string; // relative or absolute url
 }

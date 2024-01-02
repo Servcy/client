@@ -80,10 +80,7 @@ export default function Settings(): JSX.Element {
             </>
           ) : (
             integrations
-              .filter(
-                (integration: Integration) =>
-                  integration.account_display_names.length > 0
-              )
+              .filter((integration: Integration) => integration.is_connected)
               .map((integration: Integration) => (
                 <Card
                   key={integration.id}
@@ -103,21 +100,6 @@ export default function Settings(): JSX.Element {
                     <div className="my-auto flex-col text-lg font-semibold">
                       {integration.name}
                     </div>
-                    {integration.configure_at !== "None" &&
-                      integration.account_display_names.length !== 0 && (
-                        <a
-                          href={integration.configure_at}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="my-auto ml-auto hover:text-servcy-light"
-                        >
-                          <AiOutlineSetting
-                            size={20}
-                            color="servcy-white"
-                            className="hover:animate-spin"
-                          />
-                        </a>
-                      )}
                   </div>
                   <div className="mt-2 h-16 py-3 pr-3 text-xs max-lg:h-24">
                     {integration.description}
