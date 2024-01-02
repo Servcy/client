@@ -17,7 +17,6 @@ export const routes = [
   "/documents",
   "/reports",
   "/account",
-  "/settings",
 ];
 
 export const sidebarOptions = [

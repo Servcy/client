@@ -19,6 +19,7 @@ module.exports = {
         "servcy-white": "#F7F6FA",
         "servcy-black": "#2B3232",
         "servcy-cream": "#F1F2EF",
+        "servcy-neutral": "#7A7A7A",
         "servcy-wheat": "#D1BFAE",
       },
     },
