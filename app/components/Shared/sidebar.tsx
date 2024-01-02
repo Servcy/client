@@ -30,7 +30,7 @@ export default function SideBar(): JSX.Element {
 
   return (
     <div
-      className="fixed top-0 z-10 h-screen overflow-auto bg-servcy-black lg:sticky lg:!block"
+      className="!sticky top-0 z-10 !block h-screen overflow-auto bg-servcy-black"
       onMouseOver={() => {
         !isSidebarHovered && setIsSidebarHovered(true);
       }}
