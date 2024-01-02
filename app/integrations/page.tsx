@@ -80,7 +80,7 @@ export default function Integrations(): JSX.Element {
           />
         </div>
       </header>
-      <section className="max-xs:grid-cols-1 grid grid-cols-3 gap-3 max-sm:grid-cols-2">
+      <section className="xs:grid-cols-1 grid gap-3 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4">
         {loading ? (
           <>
             <Card className="min-h-[200px] animate-pulse rounded-lg">
