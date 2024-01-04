@@ -14,7 +14,7 @@ import { fetchProjects } from "@/apis/project";
 // Types
 import { Project } from "@/types/projects";
 
-export default function Index(): JSX.Element {
+export default function Projects(): JSX.Element {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>();

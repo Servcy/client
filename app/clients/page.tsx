@@ -14,7 +14,7 @@ import { fetchClients } from "@/apis/client";
 // Types
 import { Client } from "@/types/client";
 
-export default function Index(): JSX.Element {
+export default function Clients(): JSX.Element {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>();
