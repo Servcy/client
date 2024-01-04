@@ -16,7 +16,7 @@ export default function IntegrationConfigurationModal({
       title={`${selectedIntegration.name} Configuration`}
       onCancel={onClose}
       footer={false}
-      width="80vw"
+      width="60vw"
       bodyStyle={{
         overflowY: "scroll",
         overflowX: "hidden",
