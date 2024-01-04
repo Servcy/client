@@ -4,7 +4,7 @@ import { oauthUrlGenerators } from "@/utils/Integration";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
-import { Button, Card, Input, Select, Skeleton, Tag, Tooltip } from "antd";
+import { Button, Card, Input, Select, Skeleton, Tag } from "antd";
 import Image from "next/image.js";
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai";
 import { HiArrowsRightLeft } from "react-icons/hi2";
@@ -119,22 +119,6 @@ export default function Integrations(): JSX.Element {
                   <div className="my-auto flex-col text-lg font-semibold">
                     {integration.name}
                   </div>
-                  {integration.is_connected && (
-                    <Tooltip title="configure">
-                      <a
-                        href={integration.configure_at}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="my-auto ml-auto hover:text-servcy-light"
-                      >
-                        <AiOutlineSetting
-                          size={20}
-                          color="servcy-white"
-                          className="hover:animate-spin"
-                        />
-                      </a>
-                    </Tooltip>
-                  )}
                 </div>
                 <div className="mt-2 h-16 py-3 pr-3 text-xs">
                   {integration.description}
@@ -165,6 +149,16 @@ export default function Integrations(): JSX.Element {
                   >
                     {integration.is_wip ? "Coming Soon..." : "Connect"}
                   </Button>
+                  {integration.is_connected && (
+                    <Button
+                      className="!border-servcy-wheat !text-servcy-wheat hover:!border-servcy-white hover:!text-servcy-white"
+                      size="middle"
+                      icon={<AiOutlineSetting />}
+                      disabled={integration.is_wip}
+                    >
+                      Settings
+                    </Button>
+                  )}
                 </div>
               </Card>
             ))
