@@ -1,9 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
+import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal";
 import { Button, Card, Skeleton } from "antd";
 import Image from "next/image.js";
 import { AiFillSetting } from "react-icons/ai";
@@ -15,6 +15,9 @@ import { Integration } from "@/types/integration";
 export default function IntegrationSettings(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [selectedIntegration, setSelectedIntegration] =
+    useState<Integration | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -34,7 +37,6 @@ export default function IntegrationSettings(): JSX.Element {
         setLoading(false);
       });
   }, []);
-  const router = useRouter();
 
   return (
     <div className="xs:grid-cols-1 grid flex-auto gap-3 rounded-lg bg-servcy-white p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
@@ -80,11 +82,10 @@ export default function IntegrationSettings(): JSX.Element {
                 <Button
                   className="!text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                   size="middle"
-                  onClick={() =>
-                    router.push(
-                      `settings/integrations/${integration.name.toLowerCase()}`
-                    )
-                  }
+                  onClick={() => {
+                    setSelectedIntegration(integration);
+                    setIsModalVisible(true);
+                  }}
                   icon={<AiFillSetting />}
                   disabled={integration.is_wip}
                 >
@@ -93,6 +94,15 @@ export default function IntegrationSettings(): JSX.Element {
               </div>
             </Card>
           ))
+      )}
+      {isModalVisible && selectedIntegration !== null && (
+        <IntegrationConfigurationModal
+          onClose={() => {
+            setIsModalVisible(false);
+            setSelectedIntegration(null);
+          }}
+          selectedIntegration={selectedIntegration}
+        />
       )}
     </div>
   );
