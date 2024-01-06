@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// Utils
+import { getQueryParams } from "@/utils/Shared";
 // Components
 import {
   AiFillApi,
@@ -14,6 +16,15 @@ export default function SettingsLayout({
   integrations: React.ReactNode;
 }) {
   const [selection, setSelection] = useState<string>("integrations");
+
+  useEffect(() => {
+    const queryParams: Record<string, string> = getQueryParams(
+      window.location.search
+    );
+    if (queryParams["selection"]) {
+      setSelection(queryParams["selection"]);
+    }
+  }, []);
 
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">

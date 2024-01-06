@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+// Utils
+import { getQueryParams } from "@/utils/Shared";
 // Components
 import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal";
 import { Button, Card, Skeleton } from "antd";
@@ -21,6 +23,9 @@ export default function IntegrationSettings(): JSX.Element {
 
   useEffect(() => {
     setLoading(true);
+    const queryParams: Record<string, string> = getQueryParams(
+      window.location.search
+    );
     fetchIntegrations()
       .then((integrations) => {
         setIntegrations(
@@ -29,6 +34,16 @@ export default function IntegrationSettings(): JSX.Element {
               Number(a.is_wip) - Number(b.is_wip)
           )
         );
+        if (queryParams["integration"]) {
+          const integration = integrations.find(
+            (integration: Integration) =>
+              integration.name === queryParams["integration"]
+          );
+          if (integration) {
+            setSelectedIntegration(integration);
+            setIsModalVisible(true);
+          }
+        }
       })
       .catch((error) => {
         toast.error(error.response.data.detail);
