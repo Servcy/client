@@ -40,3 +40,19 @@ export const integrationOauth = async (payload: object, slug: string) => {
   const response = await axiosPut(`/integration/oauth/${slug}`, payload);
   return response;
 };
+
+export const enableIntegrationEvent = async (payload: object) => {
+  const response = await axiosPut(
+    "/integration/integration-event/enable-event",
+    payload
+  );
+  return response;
+};
+
+export const disableIntegrationEvent = async (payload: object) => {
+  const response = await axiosPut(
+    "/integration/integration-event/disable-event",
+    payload
+  );
+  return response;
+};
