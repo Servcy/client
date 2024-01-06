@@ -4,10 +4,21 @@ export const fetchIntegrations = async () => {
   const response = await axiosGet("/integration/", {});
   return response.results;
 };
+
 export const fetchUserIntegrations = async (integration_name: string) => {
-  const response = await axiosGet("/integration/user_integration", {
+  const response = await axiosGet("/integration/user-integration", {
     integration_name,
   });
+  return response.results;
+};
+
+export const fetchIntegrationEvents = async (integration_id: string) => {
+  const response = await axiosGet(
+    "/integration/integration-event/fetch-events",
+    {
+      integration_id,
+    }
+  );
   return response.results;
 };
 

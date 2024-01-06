@@ -1,7 +1,10 @@
+import { useEffect } from "react";
 // Types
 import { Integration } from "@/types/integration";
 // Components
 import { Modal } from "antd";
+// Apis
+import { fetchIntegrationEvents } from "@/apis/integration";
 
 export default function IntegrationConfigurationModal({
   selectedIntegration,
@@ -10,6 +13,12 @@ export default function IntegrationConfigurationModal({
   selectedIntegration: Integration;
   onClose: () => void;
 }) {
+  useEffect(() => {
+    fetchIntegrationEvents(String(selectedIntegration.id)).then((res) => {
+      console.log(res);
+    });
+  }, [selectedIntegration.id]);
+
   return (
     <Modal
       open={true}
