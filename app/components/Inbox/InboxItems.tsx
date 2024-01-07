@@ -16,6 +16,7 @@ import {
   Tooltip,
 } from "antd";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
+import { MdOutlineBlock } from "react-icons/md";
 import Cause from "./Cause";
 
 const InboxItems = ({
@@ -29,13 +30,14 @@ const InboxItems = ({
   setSelectedRow,
   setIsInboxItemModalVisible,
   setSelectedItemIds,
+  activeTab,
 }: {
   setPage: Dispatch<SetStateAction<number>>;
   page: number;
   loading: boolean;
   inboxItems: InboxItem[];
   inboxPagination: PaginationDetails;
-
+  activeTab: string;
   archiveItems: (_: React.Key[]) => void;
   setFilters: Dispatch<SetStateAction<Record<string, string>>>;
   setSearch: Dispatch<SetStateAction<Record<string, string>>>;
@@ -137,17 +139,30 @@ const InboxItems = ({
       width: 100,
       render: (id) => {
         return (
-          <Tooltip title="Mark Read">
-            <Button
-              type="primary"
-              className="bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
-              size="small"
-              onClick={() => {
-                archiveItems([parseInt(id)]);
-              }}
-              icon={<HiArchiveBoxArrowDown />}
-            ></Button>
-          </Tooltip>
+          <>
+            <Tooltip title="Mark Read">
+              <Button
+                type="primary"
+                className="bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
+                size="small"
+                onClick={() => {
+                  archiveItems([parseInt(id)]);
+                }}
+                icon={<HiArchiveBoxArrowDown className="mt-1" />}
+              ></Button>
+            </Tooltip>
+            {activeTab === "notifications" && (
+              <Tooltip title="Disable these type of notifications">
+                <Button
+                  type="primary"
+                  className="ml-2 bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
+                  size="small"
+                  icon={<MdOutlineBlock className="mt-1" />}
+                  // TODO: Add disable notification functionality @gargmegham
+                ></Button>
+              </Tooltip>
+            )}
+          </>
         );
       },
     },
