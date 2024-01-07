@@ -209,6 +209,7 @@ export default function Gmail(): JSX.Element {
                     setIsInboxItemModalVisible={setIsInboxItemModalVisible}
                     archiveItems={archiveItems}
                     inboxItems={inboxItems}
+                    activeTab={activeTab}
                     setSelectedItemIds={setSelectedItemIds}
                   />
                 ),
