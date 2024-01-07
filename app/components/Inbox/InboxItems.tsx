@@ -151,7 +151,7 @@ const InboxItems = ({
                 icon={<HiArchiveBoxArrowDown className="mt-1" />}
               ></Button>
             </Tooltip>
-            {activeTab === "notifications" && (
+            {activeTab === "notification" && (
               <Tooltip title="Disable these type of notifications">
                 <Button
                   type="primary"
