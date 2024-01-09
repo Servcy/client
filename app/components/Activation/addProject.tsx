@@ -157,7 +157,6 @@ const AddProject = ({
                       className="mx-auto"
                       indicator={
                         <SyncOutlined
-                          rev={1}
                           spin
                           style={{
                             color: "#26542F",
@@ -181,7 +180,7 @@ const AddProject = ({
                   <Button
                     type="text"
                     className="ml-2"
-                    icon={<PlusOutlined rev={1} />}
+                    icon={<PlusOutlined />}
                     onClick={() => setIsAddClientModalOpen(true)}
                   >
                     Add A Client
