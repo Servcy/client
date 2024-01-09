@@ -56,3 +56,11 @@ export const disableIntegrationEvent = async (payload: object) => {
   );
   return response;
 };
+
+export const disableNotificationType = async (payload: object) => {
+  const response = await axiosPut(
+    "/integration/integration-event/disable-such-notifications",
+    payload
+  );
+  return response;
+};

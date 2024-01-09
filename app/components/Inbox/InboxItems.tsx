@@ -15,9 +15,12 @@ import {
   Tag,
   Tooltip,
 } from "antd";
+import toast from "react-hot-toast";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import { MdOutlineBlock } from "react-icons/md";
 import Cause from "./Cause";
+// APIs
+import { disableNotificationType } from "@/apis/integration";
 
 const InboxItems = ({
   setPage,
@@ -53,6 +56,19 @@ const InboxItems = ({
       disabled: record.is_archived,
       name: record.id,
     }),
+  };
+
+  const disableNotificationTypeHandler = (
+    body: any,
+    user_integration_id: number
+  ) => {
+    disableNotificationType({ body, user_integration_id })
+      .then(() => {
+        toast.success("Notification type disabled successfully");
+      })
+      .catch(() => {
+        toast.error("Error in disabling notification type");
+      });
   };
 
   const columns: ColumnsType<InboxItem> = [
@@ -137,7 +153,7 @@ const InboxItems = ({
       dataIndex: "id",
       title: "Actions",
       width: 100,
-      render: (id) => {
+      render: (id, record) => {
         return (
           <>
             <Tooltip title="Mark Read">
@@ -158,7 +174,12 @@ const InboxItems = ({
                   className="ml-2 bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
                   size="small"
                   icon={<MdOutlineBlock className="mt-1" />}
-                  // TODO: Add disable notification functionality @gargmegham
+                  onClick={() => {
+                    disableNotificationTypeHandler(
+                      record.body,
+                      record.user_integration_id
+                    );
+                  }}
                 ></Button>
               </Tooltip>
             )}
