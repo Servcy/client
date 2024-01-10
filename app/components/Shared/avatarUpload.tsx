@@ -77,9 +77,9 @@ const AvatarUpload = ({
       ) : (
         <div>
           {loading ? (
-            <LoadingOutlined rev spin className="mx-auto" />
+            <LoadingOutlined spin className="mx-auto" />
           ) : (
-            <PlusOutlined rev className="mx-auto" />
+            <PlusOutlined className="mx-auto" />
           )}
           <div style={{ marginTop: 8 }}>Upload</div>
         </div>

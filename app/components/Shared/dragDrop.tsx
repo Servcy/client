@@ -54,7 +54,7 @@ const DragDrop = ({
   return (
     <Dragger {...props}>
       <p>
-        <InboxOutlined rev />
+        <InboxOutlined />
       </p>
       <p>Click or drag file to this area to upload</p>
     </Dragger>
