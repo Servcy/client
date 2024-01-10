@@ -2,6 +2,7 @@
 import { FC, PropsWithChildren } from "react";
 // Components
 import Sidebar from "@/components/Shared/sidebar";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "react-hot-toast";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 // Context
@@ -18,7 +19,10 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
       <body>
         <Toaster />
         <SidebarProvider>
-          <ContentWithSidebar>{children}</ContentWithSidebar>
+          <ContentWithSidebar>
+            {children}
+            <Analytics />
+          </ContentWithSidebar>
         </SidebarProvider>
       </body>
     </html>
