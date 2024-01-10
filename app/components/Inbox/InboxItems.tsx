@@ -59,10 +59,10 @@ const InboxItems = ({
   };
 
   const disableNotificationTypeHandler = (
-    body: any,
+    event: string,
     user_integration_id: number
   ) => {
-    disableNotificationType({ body, user_integration_id })
+    disableNotificationType({ event, user_integration_id })
       .then(() => {
         toast.success("Notification type disabled successfully");
       })
