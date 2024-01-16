@@ -3,8 +3,7 @@
 // dependencies
 import * as DOMPurify from "dompurify";
 // Compponents
-import { Button, Modal, Tag } from "antd";
-import { HiArchiveBoxArrowDown } from "react-icons/hi2";
+import { Modal } from "antd";
 import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
 import GithubNotification from "./GithubNotification";
@@ -17,11 +16,9 @@ import { InboxItem } from "@/types/inbox";
 const InboxItemModal = ({
   selectedRow,
   setIsInboxItemModalVisible,
-  markRead,
 }: {
   selectedRow: InboxItem;
   setIsInboxItemModalVisible: (value: boolean) => void;
-  markRead: (_: React.Key[]) => void;
 }) => {
   let body = selectedRow.body;
   if (selectedRow.source === "Gmail") {
@@ -38,12 +35,14 @@ const InboxItemModal = ({
       onCancel={() => setIsInboxItemModalVisible(false)}
       footer={false}
       width="80vw"
-      bodyStyle={{
-        overflowY: "scroll",
-        overflowX: "hidden",
+      styles={{
+        body: {
+          overflowY: "scroll",
+          overflowX: "hidden",
+        },
       }}
     >
-      <div className="border-1 mt-2 grid grid-cols-3 gap-4 rounded-lg border-servcy-black shadow-sm">
+      <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
         {selectedRow.is_body_html ? (
           <div
             dangerouslySetInnerHTML={{
@@ -92,36 +91,6 @@ const InboxItemModal = ({
             {body}
           </div>
         )}
-        <div className="col-span-1 h-full px-3">
-          <div className="py-5">
-            <Tag
-              key={selectedRow.source}
-              className="m-1 bg-servcy-wheat font-bold text-servcy-white"
-            >
-              {selectedRow.source}
-            </Tag>
-            <Tag
-              key={selectedRow.category}
-              className="m-1 bg-servcy-wheat font-bold text-servcy-white"
-            >
-              {selectedRow.category[0]?.toLocaleUpperCase() +
-                selectedRow.category.slice(1)}
-            </Tag>
-            <Tag
-              key={selectedRow.account}
-              className="m-1 bg-servcy-wheat font-bold text-servcy-white"
-            >
-              {selectedRow.account}
-            </Tag>
-          </div>
-          <Button
-            className="mb-4 w-full text-sm hover:!border-red-400 hover:!text-red-400"
-            icon={<HiArchiveBoxArrowDown />}
-            onClick={() => markRead([selectedRow.id])}
-          >
-            <span>Mark Read</span>
-          </Button>
-        </div>
       </div>
     </Modal>
   );

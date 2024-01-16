@@ -222,7 +222,6 @@ export default function Gmail(): JSX.Element {
         <InboxItemModal
           selectedRow={selectedRow}
           setIsInboxItemModalVisible={setIsInboxItemModalVisible}
-          markRead={archiveItems}
         />
       )}
     </main>
