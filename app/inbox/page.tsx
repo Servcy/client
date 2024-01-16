@@ -75,7 +75,7 @@ export default function Gmail(): JSX.Element {
   const archiveItems = (itemIds: React.Key[]) => {
     try {
       archiveItemsApi({
-        item_ids: itemIds.map((item_id) => parseInt(item_id.toString())),
+        item_ids: itemIds,
       });
       setInboxItems((prevState) => {
         return prevState.filter((item) => {
@@ -150,7 +150,13 @@ export default function Gmail(): JSX.Element {
                 <Button
                   className="mr-2 w-[120px] text-sm hover:!border-red-400 hover:!text-red-400"
                   disabled={selectedItemIds.length === 0}
-                  onClick={() => archiveItems(selectedItemIds)}
+                  onClick={() =>
+                    archiveItems(
+                      selectedItemIds.map((item_id) =>
+                        parseInt(item_id.toString())
+                      )
+                    )
+                  }
                   icon={<HiArchiveBoxArrowDown />}
                 >
                   <span>Mark Read</span>
