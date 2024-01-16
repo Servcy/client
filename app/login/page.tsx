@@ -190,7 +190,6 @@ export default function Login(): JSX.Element {
                   numInputs: 6,
                   onChange: (otp: string, activeInput: number) => {
                     setOtp(otp);
-                    console.info(`OTP: ${otp}`, `Active Input: ${activeInput}`);
                     if (activeInput === 5) verifyOtp(otp);
                   },
                   renderInput: (inputProps: any) =>
