@@ -1,4 +1,4 @@
-import { authRoutes, routes } from "@/constants/routes";
+import { authRoutes, wipRoutes } from "@/constants/routes";
 import { isJwtTokenValid } from "@/utils/Authentication/jwt";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
   if (refreshToken) {
     return authRoutes.includes(request.nextUrl.pathname)
       ? NextResponse.redirect(new URL("/", request.nextUrl.origin))
-      : routes.includes(request.nextUrl.pathname)
+      : wipRoutes.includes(request.nextUrl.pathname)
       ? NextResponse.redirect(new URL("/wip", request.nextUrl.origin))
       : NextResponse.next();
   }
