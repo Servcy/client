@@ -9,14 +9,11 @@ import {
   AiOutlineHome,
   AiOutlineInbox,
 } from "react-icons/ai";
-import { FaFileContract, FaFileInvoiceDollar } from "react-icons/fa";
 
 export const authRoutes = ["/login"];
 
 export const wipRoutes = [
   "/calendar",
-  "/invoices",
-  "/contracts",
   "/documents",
   "/payments",
   "/time-tracking",
@@ -43,16 +40,6 @@ export const sidebarOptions = [
     name: "Calendar",
     href: "/calendar",
     icon: AiOutlineCalendar,
-  },
-  {
-    name: "Invoices",
-    href: "/invoices",
-    icon: FaFileInvoiceDollar,
-  },
-  {
-    name: "Contracts",
-    href: "/contracts",
-    icon: FaFileContract,
   },
   {
     name: "Documents",
