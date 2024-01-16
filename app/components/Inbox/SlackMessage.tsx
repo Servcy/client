@@ -59,8 +59,31 @@ const SlackMessage = ({
               {element.text}
             </a>
           );
-        case "user":
+        case "user": {
+          if (
+            data["x-servcy-mentions"] &&
+            data["x-servcy-mentions"].length > 0
+          ) {
+            const mentioned_profile = data["x-servcy-mentions"].find(
+              (mention) => mention.id === element.user_id
+            );
+            if (mentioned_profile)
+              return (
+                <>
+                  <Image
+                    src={mentioned_profile.profile.image_32}
+                    width={50}
+                    alt={mentioned_profile.name}
+                    height={50}
+                    className="mx-2 inline h-5 w-5 rounded-full"
+                    loader={({ src }) => src}
+                  />
+                  @{mentioned_profile.name}
+                </>
+              );
+          }
           return <span key={index}>@{element.user_id}</span>;
+        }
         case "rich_text_section":
           return (
             <span

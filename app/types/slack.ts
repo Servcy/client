@@ -35,4 +35,11 @@ export interface SlackMessageProps {
     block_id: string;
     elements: SlackMessageElementProps[];
   }[];
+  "x-servcy-mentions"?: {
+    id: string;
+    name: string;
+    profile: {
+      image_32: string;
+    };
+  }[];
 }
