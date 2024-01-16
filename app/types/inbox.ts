@@ -11,6 +11,7 @@ export interface InboxItem {
   cause: string;
   is_body_html: boolean;
   account: string;
+  i_am_mentioned: boolean;
   user_integration_id: number;
   category: string;
 }
