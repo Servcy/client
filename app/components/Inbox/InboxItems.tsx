@@ -42,7 +42,7 @@ const InboxItems = ({
   inboxPagination: PaginationDetails;
   activeTab: string;
   archiveItems: (_: React.Key[]) => void;
-  setFilters: Dispatch<SetStateAction<Record<string, string>>>;
+  setFilters: Dispatch<SetStateAction<Record<string, string | boolean>>>;
   setSearch: Dispatch<SetStateAction<Record<string, string>>>;
   setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>;
   setSelectedRowIndex: Dispatch<SetStateAction<number>>;

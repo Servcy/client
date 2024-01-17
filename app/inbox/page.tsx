@@ -13,6 +13,7 @@ import {
   AiOutlineNotification,
   AiOutlineSync,
 } from "react-icons/ai";
+import { GoMention } from "react-icons/go";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 // APIs
 import {
@@ -51,13 +52,15 @@ export default function Gmail(): JSX.Element {
   );
   const [activeTab, setActiveTab] = useState<string>("message");
   const [page, setPage] = useState<number>(1);
-  const [filters, setFilters] = useState<Record<string, string>>({
+  const [filters, setFilters] = useState<Record<string, string | boolean>>({
     category: "message",
   });
   const [search, setSearch] = useState<Record<string, string>>({});
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(0);
   const [isInboxItemModalVisible, setIsInboxItemModalVisible] =
     useState<boolean>(false);
+  const [filterByIAmMentionedButtonText, setFilterByIAmMentionedButtonText] =
+    useState<string>("For Me");
 
   const refetchInboxItems = async () => {
     try {
@@ -144,9 +147,33 @@ export default function Gmail(): JSX.Element {
                 return { ...prevState, category: key };
               });
               setActiveTab(key);
+              if (key === "comment") {
+                setFilterByIAmMentionedButtonText("Mentions Me");
+              } else {
+                setFilterByIAmMentionedButtonText("For Me");
+              }
             }}
             tabBarExtraContent={
               <div className="flex">
+                <Button
+                  className={cn(
+                    "mr-2 text-sm hover:!border-servcy hover:!text-servcy",
+                    {
+                      "!border-servcy !text-servcy": filters["i_am_mentioned"],
+                    }
+                  )}
+                  onClick={() => {
+                    setFilters((prevState) => {
+                      return {
+                        ...prevState,
+                        i_am_mentioned: !prevState["i_am_mentioned"],
+                      };
+                    });
+                  }}
+                  icon={<GoMention />}
+                >
+                  <span>{filterByIAmMentionedButtonText}</span>
+                </Button>
                 <Button
                   className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
                   disabled={inboxItems.length === 0}
