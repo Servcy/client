@@ -45,7 +45,7 @@ const InboxItemModal = ({
     };
     const handleRightLeftArrow = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") handleArrowRight();
-      if (e.key === "ArrowLeft") handleArrowLeft();
+      else if (e.key === "ArrowLeft") handleArrowLeft();
     };
     document.addEventListener("keydown", handleRightLeftArrow);
     return () => document.removeEventListener("keydown", handleRightLeftArrow);
