@@ -55,7 +55,7 @@ export default function Gmail(): JSX.Element {
     category: "message",
   });
   const [search, setSearch] = useState<Record<string, string>>({});
-  const [selectedRow, setSelectedRow] = useState<InboxItem>({} as InboxItem);
+  const [selectedRowIndex, setSelectedRowIndex] = useState<number>(0);
   const [isInboxItemModalVisible, setIsInboxItemModalVisible] =
     useState<boolean>(false);
 
@@ -221,7 +221,7 @@ export default function Gmail(): JSX.Element {
                     setFilters={setFilters}
                     inboxPagination={inboxPagination}
                     setSearch={setSearch}
-                    setSelectedRow={setSelectedRow}
+                    setSelectedRowIndex={setSelectedRowIndex}
                     setIsInboxItemModalVisible={setIsInboxItemModalVisible}
                     archiveItems={archiveItems}
                     inboxItems={inboxItems}
@@ -236,8 +236,11 @@ export default function Gmail(): JSX.Element {
       </div>
       {isInboxItemModalVisible && (
         <InboxItemModal
-          selectedRow={selectedRow}
+          selectedRow={inboxItems[selectedRowIndex] ?? ({} as InboxItem)}
           setIsInboxItemModalVisible={setIsInboxItemModalVisible}
+          selectedRowIndex={selectedRowIndex}
+          setSelectedRowIndex={setSelectedRowIndex}
+          totalInboxItems={inboxItems.length}
         />
       )}
     </main>

@@ -2,6 +2,7 @@
 
 // dependencies
 import * as DOMPurify from "dompurify";
+import { useEffect } from "react";
 // Compponents
 import { Modal } from "antd";
 import AsanaNotification from "./AsanaNotification";
@@ -16,9 +17,15 @@ import { InboxItem } from "@/types/inbox";
 const InboxItemModal = ({
   selectedRow,
   setIsInboxItemModalVisible,
+  selectedRowIndex,
+  setSelectedRowIndex,
+  totalInboxItems,
 }: {
   selectedRow: InboxItem;
   setIsInboxItemModalVisible: (value: boolean) => void;
+  selectedRowIndex: number;
+  setSelectedRowIndex: (value: number) => void;
+  totalInboxItems: number;
 }) => {
   let body = selectedRow.body;
   if (selectedRow.source === "Gmail") {
@@ -27,6 +34,27 @@ const InboxItemModal = ({
   if (selectedRow.is_body_html) {
     body = DOMPurify.sanitize(body);
   }
+
+  useEffect(() => {
+    const handleArrowRight = () => {
+      if (selectedRowIndex < totalInboxItems - 1)
+        setSelectedRowIndex(selectedRowIndex + 1);
+    };
+    const handleArrowLeft = () => {
+      if (selectedRowIndex > 0) setSelectedRowIndex(selectedRowIndex - 1);
+    };
+    const handleRightLeftArrow = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") handleArrowRight();
+      if (e.key === "ArrowLeft") handleArrowLeft();
+    };
+    document.addEventListener("keydown", handleRightLeftArrow);
+    return () => document.removeEventListener("keydown", handleRightLeftArrow);
+  }, [
+    selectedRowIndex,
+    setSelectedRowIndex,
+    totalInboxItems,
+    setIsInboxItemModalVisible,
+  ]);
 
   return (
     <Modal

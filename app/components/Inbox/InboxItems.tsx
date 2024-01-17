@@ -30,7 +30,7 @@ const InboxItems = ({
   inboxPagination,
   setFilters,
   archiveItems,
-  setSelectedRow,
+  setSelectedRowIndex,
   setIsInboxItemModalVisible,
   setSelectedItemIds,
   activeTab,
@@ -45,7 +45,7 @@ const InboxItems = ({
   setFilters: Dispatch<SetStateAction<Record<string, string>>>;
   setSearch: Dispatch<SetStateAction<Record<string, string>>>;
   setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>;
-  setSelectedRow: Dispatch<SetStateAction<InboxItem>>;
+  setSelectedRowIndex: Dispatch<SetStateAction<number>>;
   setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>;
 }) => {
   const rowSelection = {
@@ -75,12 +75,12 @@ const InboxItems = ({
     {
       dataIndex: "title",
       title: "Title",
-      render: (title, record) => {
+      render: (title, _, index) => {
         return (
           <button
             className="cursor-pointer text-left"
             onClick={() => {
-              setSelectedRow(record);
+              setSelectedRowIndex(index);
               setIsInboxItemModalVisible(true);
             }}
           >
