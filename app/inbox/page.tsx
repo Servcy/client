@@ -148,7 +148,17 @@ export default function Gmail(): JSX.Element {
             tabBarExtraContent={
               <div className="flex">
                 <Button
-                  className="mr-2 w-[120px] text-sm hover:!border-red-400 hover:!text-red-400"
+                  className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
+                  disabled={inboxItems.length === 0}
+                  onClick={() =>
+                    archiveItems(inboxItems.map((item) => parseInt(item.id)))
+                  }
+                  icon={<HiArchiveBoxArrowDown />}
+                >
+                  <span>Read All ({inboxItems.length})</span>
+                </Button>
+                <Button
+                  className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
                   disabled={selectedItemIds.length === 0}
                   onClick={() =>
                     archiveItems(
@@ -159,7 +169,7 @@ export default function Gmail(): JSX.Element {
                   }
                   icon={<HiArchiveBoxArrowDown />}
                 >
-                  <span>Mark Read</span>
+                  <span>Read Selected</span>
                 </Button>
                 <Select
                   placeholder="Filter By Source"
