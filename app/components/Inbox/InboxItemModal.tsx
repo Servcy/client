@@ -43,12 +43,14 @@ const InboxItemModal = ({
     const handleArrowLeft = () => {
       if (selectedRowIndex > 0) setSelectedRowIndex(selectedRowIndex - 1);
     };
-    const handleRightLeftArrow = (e: KeyboardEvent) => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      // move to next item on right arrow key press
       if (e.key === "ArrowRight") handleArrowRight();
+      // move to previous item on left arrow key press
       else if (e.key === "ArrowLeft") handleArrowLeft();
     };
-    document.addEventListener("keydown", handleRightLeftArrow);
-    return () => document.removeEventListener("keydown", handleRightLeftArrow);
+    document.addEventListener("keydown", handleKeydown);
+    return () => document.removeEventListener("keydown", handleKeydown);
   }, [
     selectedRowIndex,
     setSelectedRowIndex,
