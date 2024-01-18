@@ -207,10 +207,9 @@ const InboxItemModal = ({
                 icon={<AiOutlineSend />}
                 shape="round"
                 type="primary"
-                disabled={activeTab === "notification"}
+                disabled={reply.length === 0 || reply.length > 500}
                 onClick={() => {
-                  if (reply.length === 0 || reply.length > 500) return;
-                  else console.log(reply);
+                  console.log(reply);
                 }}
               >
                 Send
