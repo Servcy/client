@@ -80,9 +80,11 @@ export default function IntegrationConfigurationModal({
       onCancel={onClose}
       footer={false}
       width="60vw"
-      bodyStyle={{
-        overflowY: "scroll",
-        overflowX: "hidden",
+      styles={{
+        body: {
+          overflowY: "scroll",
+          overflowX: "hidden",
+        },
       }}
     >
       <Card
