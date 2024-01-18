@@ -1,8 +1,9 @@
 import { axiosGet, axiosPut } from "@/utils/Shared/axios";
 
 export const fetchIntegrations = async () => {
-  const response = await axiosGet("/integration/", {});
-  return response.results;
+  const response = await axiosGet("/integration/fetch-integrations", {});
+  const results = response.results;
+  return JSON.parse(results);
 };
 
 export const fetchUserIntegrations = async (integration_name: string) => {
