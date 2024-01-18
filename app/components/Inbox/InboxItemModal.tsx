@@ -4,7 +4,6 @@
 import cn from "classnames";
 import * as DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 // Compponents
 import { Button, Modal } from "antd";
 import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
@@ -210,11 +209,7 @@ const InboxItemModal = ({
                 type="primary"
                 disabled={activeTab === "notification"}
                 onClick={() => {
-                  if (reply.length === 0) toast.error("Reply box is empty!");
-                  else if (reply.length > 500)
-                    toast.error(
-                      "Reply message cannot be longer than 500 characters!"
-                    );
+                  if (reply.length === 0 || reply.length > 500) return;
                   else console.log(reply);
                 }}
               >
