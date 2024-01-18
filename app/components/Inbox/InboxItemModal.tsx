@@ -3,7 +3,7 @@
 // dependencies
 import cn from "classnames";
 import * as DOMPurify from "dompurify";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Compponents
 import { Button, Modal } from "antd";
@@ -41,7 +41,7 @@ const InboxItemModal = ({
     body = DOMPurify.sanitize(body);
   }
   const [isReplyBoxVisible, setIsReplyBoxVisible] = useState<boolean>(false);
-  const replyBoxRef = useRef<HTMLTextAreaElement>(null);
+  const [reply, setReply] = useState<string>("");
 
   useEffect(() => {
     const handleArrowRight = () => {
@@ -145,14 +145,20 @@ const InboxItemModal = ({
               <textarea
                 className="h-full w-full resize-none rounded-lg p-2 !outline-none selection:!bg-servcy-wheat selection:!text-servcy-black"
                 placeholder="Write a reply..."
-                ref={replyBoxRef}
+                onChange={(e) => setReply(e.target.value)}
+                value={reply}
+                maxLength={500}
                 id="replyBox"
               />
+              <div className="float-right text-xs">
+                <span id="current">{reply.length}</span>
+                <span id="maximum">/ 500</span>
+              </div>
             </div>
           )}
         </div>
         {/* actions */}
-        <div className="mt-6 flex justify-between">
+        <div className="mt-8 flex justify-between">
           <div className="flex">
             <Button
               className="mr-2 text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
@@ -204,16 +210,13 @@ const InboxItemModal = ({
                 type="primary"
                 disabled={activeTab === "notification"}
                 onClick={() => {
-                  if (
-                    replyBoxRef.current?.value === undefined ||
-                    replyBoxRef.current.value === ""
-                  ) {
+                  if (reply === "") {
                     toast.error("Reply box is empty!");
-                  } else if (replyBoxRef.current.value.length > 1000) {
+                  } else if (reply.length > 500) {
                     toast.error(
-                      "Reply message cannot be longer than 1000 characters!"
+                      "Reply message cannot be longer than 500 characters!"
                     );
-                  } else console.log(replyBoxRef.current.value);
+                  } else console.log(reply);
                 }}
               >
                 Send
