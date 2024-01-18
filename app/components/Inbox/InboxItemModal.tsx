@@ -4,7 +4,8 @@
 import * as DOMPurify from "dompurify";
 import { useEffect } from "react";
 // Compponents
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
 import GithubNotification from "./GithubNotification";
@@ -64,7 +65,7 @@ const InboxItemModal = ({
       title={selectedRow.title}
       onCancel={() => setIsInboxItemModalVisible(false)}
       footer={false}
-      width="80vw"
+      width="70vw"
       styles={{
         body: {
           overflowY: "scroll",
@@ -72,55 +73,80 @@ const InboxItemModal = ({
         },
       }}
     >
-      <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
-        {selectedRow.is_body_html ? (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: body,
-            }}
-            className="col-span-2 max-h-[600px] overflow-y-scroll p-1"
-          />
-        ) : selectedRow.source === "Notion" ? (
-          <NotionComment
-            data={JSON.parse(selectedRow.body)}
-            cause={selectedRow.cause}
-          />
-        ) : selectedRow.source === "Figma" ? (
-          <FigmaNotification
-            data={JSON.parse(selectedRow.body)}
-            cause={selectedRow.cause}
-          />
-        ) : selectedRow.source === "Asana" ? (
-          <AsanaNotification
-            data={JSON.parse(selectedRow.body)}
-            cause={JSON.parse(selectedRow.cause)}
-          />
-        ) : selectedRow.source === "Trello" ? (
-          <TrelloNotification
-            data={JSON.parse(selectedRow.body)}
-            cause={JSON.parse(selectedRow.cause)}
-          />
-        ) : selectedRow.source === "Slack" ? (
-          <SlackMessage
-            data={JSON.parse(selectedRow.body)}
-            cause={selectedRow.cause}
-          />
-        ) : selectedRow.source === "Github" ? (
-          <GithubNotification
-            data={JSON.parse(selectedRow.body)}
-            event={selectedRow.title
-              .split(" ")
-              .slice(0, selectedRow.title.split(" ").length - 1)
-              .join("_")
-              .toLocaleLowerCase()}
-            cause={selectedRow.cause}
-            timestamp={selectedRow.created_at}
-          />
-        ) : (
-          <div className="col-span-2 max-h-[600px] overflow-y-scroll p-1">
-            {body}
-          </div>
-        )}
+      <div>
+        <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
+          {selectedRow.is_body_html ? (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: body,
+              }}
+              className="col-span-2 max-h-[600px] overflow-y-scroll p-1"
+            />
+          ) : selectedRow.source === "Notion" ? (
+            <NotionComment
+              data={JSON.parse(selectedRow.body)}
+              cause={selectedRow.cause}
+            />
+          ) : selectedRow.source === "Figma" ? (
+            <FigmaNotification
+              data={JSON.parse(selectedRow.body)}
+              cause={selectedRow.cause}
+            />
+          ) : selectedRow.source === "Asana" ? (
+            <AsanaNotification
+              data={JSON.parse(selectedRow.body)}
+              cause={JSON.parse(selectedRow.cause)}
+            />
+          ) : selectedRow.source === "Trello" ? (
+            <TrelloNotification
+              data={JSON.parse(selectedRow.body)}
+              cause={JSON.parse(selectedRow.cause)}
+            />
+          ) : selectedRow.source === "Slack" ? (
+            <SlackMessage
+              data={JSON.parse(selectedRow.body)}
+              cause={selectedRow.cause}
+            />
+          ) : selectedRow.source === "Github" ? (
+            <GithubNotification
+              data={JSON.parse(selectedRow.body)}
+              event={selectedRow.title
+                .split(" ")
+                .slice(0, selectedRow.title.split(" ").length - 1)
+                .join("_")
+                .toLocaleLowerCase()}
+              cause={selectedRow.cause}
+              timestamp={selectedRow.created_at}
+            />
+          ) : (
+            <div className="col-span-2 max-h-[600px] overflow-y-scroll p-1">
+              {body}
+            </div>
+          )}
+        </div>
+        <div className="mt-2 flex justify-between">
+          <Button
+            className="flex items-center text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
+            onClick={() =>
+              selectedRowIndex > 0 && setSelectedRowIndex(selectedRowIndex - 1)
+            }
+            disabled={selectedRowIndex === 0}
+          >
+            <FaAngleDoubleLeft className="mr-1" />
+            Previous
+          </Button>
+          <Button
+            className="flex items-center text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
+            onClick={() =>
+              selectedRowIndex < totalInboxItems - 1 &&
+              setSelectedRowIndex(selectedRowIndex + 1)
+            }
+            disabled={selectedRowIndex === totalInboxItems - 1}
+          >
+            Next
+            <FaAngleDoubleRight className="ml-1" />
+          </Button>
+        </div>
       </div>
     </Modal>
   );
