@@ -5,9 +5,10 @@ import cn from "classnames";
 import * as DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 // Compponents
-import { Button, Modal } from "antd";
+import { Button, Modal, Tooltip } from "antd";
 import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaReply } from "react-icons/fa";
+import { RxMagicWand } from "react-icons/rx";
 import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
 import GithubNotification from "./GithubNotification";
@@ -140,7 +141,7 @@ const InboxItemModal = ({
             )}
           </div>
           {isReplyBoxVisible && (
-            <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
+            <div className="border-1 relative mt-2 rounded-lg border-servcy-black shadow-sm">
               <textarea
                 className="h-full w-full resize-none rounded-lg p-2 !outline-none selection:!bg-servcy-wheat selection:!text-servcy-black"
                 placeholder="Write a reply..."
@@ -149,10 +150,22 @@ const InboxItemModal = ({
                 maxLength={500}
                 id="replyBox"
               />
-              <div className="float-right text-xs">
+              <div className="absolute bottom-2 right-2 float-right text-xs">
                 <span id="current">{reply.length}</span>
                 <span id="maximum">/ 500</span>
               </div>
+              <Tooltip title="Generate a reply using AI">
+                <Button
+                  className="absolute bottom-8 right-2  ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
+                  icon={<RxMagicWand className="mt-1" />}
+                  shape="circle"
+                  type="primary"
+                  onClick={() => {
+                    console.log("AI generated reply");
+                    // TODO: AI generated reply
+                  }}
+                ></Button>
+              </Tooltip>
             </div>
           )}
         </div>
@@ -167,7 +180,7 @@ const InboxItemModal = ({
               }
               disabled={selectedRowIndex === 0}
               shape="circle"
-              icon={<FaAngleDoubleLeft className="my-auto" />}
+              icon={<FaAngleDoubleLeft className="mt-1" />}
             />
             <Button
               className="text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
@@ -176,7 +189,7 @@ const InboxItemModal = ({
                 setSelectedRowIndex(selectedRowIndex + 1)
               }
               disabled={selectedRowIndex === totalInboxItems - 1}
-              icon={<FaAngleDoubleRight className="my-auto" />}
+              icon={<FaAngleDoubleRight className="mt-1" />}
               shape="circle"
             />
           </div>
@@ -210,6 +223,7 @@ const InboxItemModal = ({
                 disabled={reply.length === 0 || reply.length > 500}
                 onClick={() => {
                   console.log(reply);
+                  // TODO: Send reply
                 }}
               >
                 Send
