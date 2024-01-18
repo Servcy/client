@@ -210,13 +210,12 @@ const InboxItemModal = ({
                 type="primary"
                 disabled={activeTab === "notification"}
                 onClick={() => {
-                  if (reply === "") {
-                    toast.error("Reply box is empty!");
-                  } else if (reply.length > 500) {
+                  if (reply.length === 0) toast.error("Reply box is empty!");
+                  else if (reply.length > 500)
                     toast.error(
                       "Reply message cannot be longer than 500 characters!"
                     );
-                  } else console.log(reply);
+                  else console.log(reply);
                 }}
               >
                 Send
