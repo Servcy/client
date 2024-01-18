@@ -72,6 +72,7 @@ const InboxItemModal = ({
           overflowX: "hidden",
         },
       }}
+      style={{ top: "50%", transform: "translateY(-50%)" }}
     >
       <div>
         <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">

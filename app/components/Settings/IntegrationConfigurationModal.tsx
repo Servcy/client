@@ -86,6 +86,7 @@ export default function IntegrationConfigurationModal({
           overflowX: "hidden",
         },
       }}
+      style={{ top: "50%", transform: "translateY(-50%)" }}
     >
       <Card
         className="mt-4 min-h-[200px] rounded-lg"

@@ -123,6 +123,13 @@ const AddProject = ({
         closeModal();
       }}
       className="rounded-lg p-0"
+      styles={{
+        body: {
+          overflowY: "scroll",
+          overflowX: "hidden",
+        },
+      }}
+      style={{ top: "50%", transform: "translateY(-50%)" }}
     >
       <Form layout="vertical" className="mt-5" preserve={false}>
         <Form.Item label="Name">
