@@ -80,12 +80,6 @@ export default function IntegrationConfigurationModal({
       onCancel={onClose}
       footer={false}
       width="60vw"
-      styles={{
-        body: {
-          overflowY: "scroll",
-          overflowX: "hidden",
-        },
-      }}
       style={{ top: "50%", transform: "translateY(-50%)" }}
     >
       <Card

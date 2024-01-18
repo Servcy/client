@@ -68,15 +68,10 @@ const InboxItemModal = ({
       onCancel={() => setIsInboxItemModalVisible(false)}
       footer={false}
       width="70vw"
-      styles={{
-        body: {
-          overflowY: "scroll",
-          overflowX: "hidden",
-        },
-      }}
       style={{ top: "50%", transform: "translateY(-50%)" }}
     >
       <div>
+        {/* body */}
         <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
           {selectedRow.is_body_html ? (
             <div
@@ -127,6 +122,8 @@ const InboxItemModal = ({
             </div>
           )}
         </div>
+        {/* reply box */}
+        {/* actions */}
         <div className="mt-6 flex justify-between">
           <div className="flex">
             <Button
