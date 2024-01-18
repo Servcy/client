@@ -1,10 +1,13 @@
 "use client";
 
 // dependencies
+import cn from "classnames";
 import * as DOMPurify from "dompurify";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 // Compponents
 import { Button, Modal } from "antd";
+import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaReply } from "react-icons/fa";
 import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
@@ -37,6 +40,8 @@ const InboxItemModal = ({
   if (selectedRow.is_body_html) {
     body = DOMPurify.sanitize(body);
   }
+  const [isReplyBoxVisible, setIsReplyBoxVisible] = useState<boolean>(false);
+  const replyBoxRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     const handleArrowRight = () => {
@@ -67,62 +72,85 @@ const InboxItemModal = ({
       title={selectedRow.title}
       onCancel={() => setIsInboxItemModalVisible(false)}
       footer={false}
-      width="70vw"
+      width={isReplyBoxVisible ? "90vw" : "70vw"}
       style={{ top: "50%", transform: "translateY(-50%)" }}
     >
       <div>
         {/* body */}
-        <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
-          {selectedRow.is_body_html ? (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: body,
-              }}
-              className="col-span-2 max-h-[600px] overflow-y-scroll p-1"
-            />
-          ) : selectedRow.source === "Notion" ? (
-            <NotionComment
-              data={JSON.parse(selectedRow.body)}
-              cause={selectedRow.cause}
-            />
-          ) : selectedRow.source === "Figma" ? (
-            <FigmaNotification
-              data={JSON.parse(selectedRow.body)}
-              cause={selectedRow.cause}
-            />
-          ) : selectedRow.source === "Asana" ? (
-            <AsanaNotification
-              data={JSON.parse(selectedRow.body)}
-              cause={JSON.parse(selectedRow.cause)}
-            />
-          ) : selectedRow.source === "Trello" ? (
-            <TrelloNotification
-              data={JSON.parse(selectedRow.body)}
-              cause={JSON.parse(selectedRow.cause)}
-            />
-          ) : selectedRow.source === "Slack" ? (
-            <SlackMessage
-              data={JSON.parse(selectedRow.body)}
-              cause={selectedRow.cause}
-            />
-          ) : selectedRow.source === "Github" ? (
-            <GithubNotification
-              data={JSON.parse(selectedRow.body)}
-              event={selectedRow.title
-                .split(" ")
-                .slice(0, selectedRow.title.split(" ").length - 1)
-                .join("_")
-                .toLocaleLowerCase()}
-              cause={selectedRow.cause}
-              timestamp={selectedRow.created_at}
-            />
-          ) : (
-            <div className="col-span-2 max-h-[600px] overflow-y-scroll p-1">
-              {body}
+        <div
+          className={cn("grid", {
+            "grid-cols-1": !isReplyBoxVisible,
+            "grid-cols-3 gap-2": isReplyBoxVisible,
+          })}
+        >
+          <div
+            className={cn(
+              "border-1 mt-2 rounded-lg border-servcy-black shadow-sm",
+              {
+                "col-span-2": isReplyBoxVisible,
+              }
+            )}
+          >
+            {selectedRow.is_body_html ? (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: body,
+                }}
+                className="col-span-2 max-h-[600px] overflow-y-scroll p-1"
+              />
+            ) : selectedRow.source === "Notion" ? (
+              <NotionComment
+                data={JSON.parse(selectedRow.body)}
+                cause={selectedRow.cause}
+              />
+            ) : selectedRow.source === "Figma" ? (
+              <FigmaNotification
+                data={JSON.parse(selectedRow.body)}
+                cause={selectedRow.cause}
+              />
+            ) : selectedRow.source === "Asana" ? (
+              <AsanaNotification
+                data={JSON.parse(selectedRow.body)}
+                cause={JSON.parse(selectedRow.cause)}
+              />
+            ) : selectedRow.source === "Trello" ? (
+              <TrelloNotification
+                data={JSON.parse(selectedRow.body)}
+                cause={JSON.parse(selectedRow.cause)}
+              />
+            ) : selectedRow.source === "Slack" ? (
+              <SlackMessage
+                data={JSON.parse(selectedRow.body)}
+                cause={selectedRow.cause}
+              />
+            ) : selectedRow.source === "Github" ? (
+              <GithubNotification
+                data={JSON.parse(selectedRow.body)}
+                event={selectedRow.title
+                  .split(" ")
+                  .slice(0, selectedRow.title.split(" ").length - 1)
+                  .join("_")
+                  .toLocaleLowerCase()}
+                cause={selectedRow.cause}
+                timestamp={selectedRow.created_at}
+              />
+            ) : (
+              <div className="col-span-2 max-h-[600px] overflow-y-scroll p-1">
+                {body}
+              </div>
+            )}
+          </div>
+          {isReplyBoxVisible && (
+            <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
+              <textarea
+                className="h-full w-full resize-none rounded-lg p-2 !outline-none selection:!bg-servcy-wheat selection:!text-servcy-black"
+                placeholder="Write a reply..."
+                ref={replyBoxRef}
+                id="replyBox"
+              />
             </div>
           )}
         </div>
-        {/* reply box */}
         {/* actions */}
         <div className="mt-6 flex justify-between">
           <div className="flex">
@@ -147,15 +175,51 @@ const InboxItemModal = ({
               shape="circle"
             />
           </div>
-          <Button
-            type="primary"
-            className="bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
-            icon={<FaReply />}
-            shape="round"
-            disabled={activeTab === "notification"}
-          >
-            Reply
-          </Button>
+          {!isReplyBoxVisible ? (
+            <Button
+              type="primary"
+              className="bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
+              icon={<FaReply />}
+              shape="round"
+              disabled={activeTab === "notification"}
+              onClick={() => setIsReplyBoxVisible(true)}
+            >
+              Reply
+            </Button>
+          ) : (
+            <div>
+              <Button
+                className="mr-2 hover:!border-servcy-wheat hover:!text-servcy-wheat"
+                icon={<AiFillCloseCircle />}
+                shape="round"
+                disabled={activeTab === "notification"}
+                onClick={() => setIsReplyBoxVisible(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                className="bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
+                icon={<AiOutlineSend />}
+                shape="round"
+                type="primary"
+                disabled={activeTab === "notification"}
+                onClick={() => {
+                  if (
+                    replyBoxRef.current?.value === undefined ||
+                    replyBoxRef.current.value === ""
+                  ) {
+                    toast.error("Reply box is empty!");
+                  } else if (replyBoxRef.current.value.length > 1000) {
+                    toast.error(
+                      "Reply message cannot be longer than 1000 characters!"
+                    );
+                  } else console.log(replyBoxRef.current.value);
+                }}
+              >
+                Send
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </Modal>
