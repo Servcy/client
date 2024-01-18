@@ -5,7 +5,7 @@ import * as DOMPurify from "dompurify";
 import { useEffect } from "react";
 // Compponents
 import { Button, Modal } from "antd";
-import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import { FaAngleDoubleLeft, FaAngleDoubleRight, FaReply } from "react-icons/fa";
 import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
 import GithubNotification from "./GithubNotification";
@@ -21,12 +21,14 @@ const InboxItemModal = ({
   selectedRowIndex,
   setSelectedRowIndex,
   totalInboxItems,
+  activeTab,
 }: {
   selectedRow: InboxItem;
   setIsInboxItemModalVisible: (value: boolean) => void;
   selectedRowIndex: number;
   setSelectedRowIndex: (value: number) => void;
   totalInboxItems: number;
+  activeTab: string;
 }) => {
   let body = selectedRow.body;
   if (selectedRow.source === "Gmail") {
@@ -125,27 +127,37 @@ const InboxItemModal = ({
             </div>
           )}
         </div>
-        <div className="mt-2 flex justify-between">
+        <div className="mt-6 flex justify-between">
+          <div className="flex">
+            <Button
+              className="mr-2 text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
+              onClick={() =>
+                selectedRowIndex > 0 &&
+                setSelectedRowIndex(selectedRowIndex - 1)
+              }
+              disabled={selectedRowIndex === 0}
+              shape="circle"
+              icon={<FaAngleDoubleLeft className="my-auto" />}
+            />
+            <Button
+              className="text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
+              onClick={() =>
+                selectedRowIndex < totalInboxItems - 1 &&
+                setSelectedRowIndex(selectedRowIndex + 1)
+              }
+              disabled={selectedRowIndex === totalInboxItems - 1}
+              icon={<FaAngleDoubleRight className="my-auto" />}
+              shape="circle"
+            />
+          </div>
           <Button
-            className="flex items-center text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
-            onClick={() =>
-              selectedRowIndex > 0 && setSelectedRowIndex(selectedRowIndex - 1)
-            }
-            disabled={selectedRowIndex === 0}
+            type="primary"
+            className="bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
+            icon={<FaReply />}
+            shape="round"
+            disabled={activeTab === "notification"}
           >
-            <FaAngleDoubleLeft className="mr-1" />
-            Previous
-          </Button>
-          <Button
-            className="flex items-center text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
-            onClick={() =>
-              selectedRowIndex < totalInboxItems - 1 &&
-              setSelectedRowIndex(selectedRowIndex + 1)
-            }
-            disabled={selectedRowIndex === totalInboxItems - 1}
-          >
-            Next
-            <FaAngleDoubleRight className="ml-1" />
+            Reply
           </Button>
         </div>
       </div>
