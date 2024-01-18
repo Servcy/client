@@ -1,6 +1,7 @@
 "use client";
 
 import { oauthUrlGenerators } from "@/utils/Integration";
+import { useRouter } from "next/navigation.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
@@ -21,6 +22,7 @@ import { Integration } from "@/types/integration";
 export default function Integrations(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
   const [search, setSearch] = useState<string>("");
   const [category, setCategory] = useState<string>("");
 
@@ -154,6 +156,11 @@ export default function Integrations(): JSX.Element {
                       className="!border-servcy-wheat !text-servcy-wheat hover:!border-servcy-white hover:!text-servcy-white"
                       size="middle"
                       icon={<AiOutlineSetting />}
+                      onClick={() =>
+                        router.push(
+                          `/settings?selection=integrations&integration=${integration.name}`
+                        )
+                      }
                       disabled={integration.is_wip}
                     >
                       Settings
