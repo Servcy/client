@@ -43,9 +43,9 @@ export default function Login(): JSX.Element {
     setIsPageWithSidebar(false);
   }, [setIsPageWithSidebar]);
 
-  const sendOtp = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const sendOtp = async (e: React.MouseEvent<HTMLButtonElement> | null) => {
     try {
-      e.preventDefault();
+      e?.preventDefault();
       setLoading(true);
       const email = document.getElementById("email") as HTMLInputElement;
       const phone_number = document.getElementById(
@@ -129,6 +129,9 @@ export default function Login(): JSX.Element {
                 color={invalidEmail ? "failure" : "default"}
                 prefix={<HiMail className="mr-1" />}
                 required
+                onKeyDown={(event) => {
+                  if (event.code === "Enter") sendOtp(null);
+                }}
                 placeholder="name@company.com"
                 type="email"
                 className="mb-[16px] p-3 text-sm"
@@ -139,6 +142,9 @@ export default function Login(): JSX.Element {
                 color={invalidPhone ? "failure" : "default"}
                 prefix={<RiWhatsappLine className="mr-1" />}
                 required
+                onKeyDown={(event) => {
+                  if (event.code === "Enter") sendOtp(null);
+                }}
                 placeholder="+123 456 7890"
                 type="email"
                 className="mb-[16px] p-3 text-sm"
