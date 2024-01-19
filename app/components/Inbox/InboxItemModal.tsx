@@ -19,6 +19,7 @@ import TrelloNotification from "./TrelloNotification";
 import { InboxItem } from "@/types/inbox";
 // APIs
 import { generateReply as generateReplyApi } from "@/apis/inbox";
+import { toast } from "react-hot-toast";
 
 const InboxItemModal = ({
   selectedRow,
@@ -47,12 +48,17 @@ const InboxItemModal = ({
   const [generatingReply, setGeneratingReply] = useState<boolean>(false);
 
   const generateReply = async () => {
-    setGeneratingReply(true);
-    const reply = await generateReplyApi({
-      input_text: body,
-    });
-    setReply(reply);
-    setGeneratingReply(false);
+    try {
+      setGeneratingReply(true);
+      const reply = await generateReplyApi({
+        input_text: body,
+      });
+      setReply(reply);
+    } catch {
+      toast.error("Something went wrong, please try again later");
+    } finally {
+      setGeneratingReply(false);
+    }
   };
 
   useEffect(() => {
