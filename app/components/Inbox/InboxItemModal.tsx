@@ -17,6 +17,8 @@ import SlackMessage from "./SlackMessage";
 import TrelloNotification from "./TrelloNotification";
 // Types
 import { InboxItem } from "@/types/inbox";
+// APIs
+import { generateReply as generateReplyApi } from "@/apis/inbox";
 
 const InboxItemModal = ({
   selectedRow,
@@ -42,6 +44,16 @@ const InboxItemModal = ({
   }
   const [isReplyBoxVisible, setIsReplyBoxVisible] = useState<boolean>(false);
   const [reply, setReply] = useState<string>("");
+  const [generatingReply, setGeneratingReply] = useState<boolean>(false);
+
+  const generateReply = async () => {
+    setGeneratingReply(true);
+    const reply = await generateReplyApi({
+      input_text: body,
+    });
+    setReply(reply);
+    setGeneratingReply(false);
+  };
 
   useEffect(() => {
     const handleArrowRight = () => {
@@ -159,10 +171,10 @@ const InboxItemModal = ({
                   className="absolute bottom-8 right-2  ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
                   icon={<RxMagicWand className="mt-1" />}
                   shape="circle"
+                  loading={generatingReply}
                   type="primary"
                   onClick={() => {
-                    console.log("AI generated reply");
-                    // TODO: AI generated reply
+                    generateReply();
                   }}
                 ></Button>
               </Tooltip>
