@@ -43,9 +43,9 @@ export default function Login(): JSX.Element {
     setIsPageWithSidebar(false);
   }, [setIsPageWithSidebar]);
 
-  const sendOtp = async (e: React.MouseEvent<HTMLButtonElement> | null) => {
+  const sendOtp = async (e: React.MouseEvent | React.KeyboardEvent) => {
     try {
-      e?.preventDefault();
+      e.preventDefault();
       setLoading(true);
       const email = document.getElementById("email") as HTMLInputElement;
       const phone_number = document.getElementById(
@@ -130,7 +130,7 @@ export default function Login(): JSX.Element {
                 prefix={<HiMail className="mr-1" />}
                 required
                 onKeyDown={(event) => {
-                  if (event.code === "Enter") sendOtp(null);
+                  if (event.code === "Enter") sendOtp(event);
                 }}
                 placeholder="name@company.com"
                 type="email"
@@ -143,7 +143,7 @@ export default function Login(): JSX.Element {
                 prefix={<RiWhatsappLine className="mr-1" />}
                 required
                 onKeyDown={(event) => {
-                  if (event.code === "Enter") sendOtp(null);
+                  if (event.code === "Enter") sendOtp(event);
                 }}
                 placeholder="+123 456 7890"
                 type="email"
