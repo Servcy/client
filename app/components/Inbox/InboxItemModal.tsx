@@ -69,8 +69,9 @@ const InboxItemModal = ({
     try {
       setSendingReply(true);
       await sendReplyApi({
-        input_text: body,
-        reply_text: reply,
+        body,
+        reply,
+        is_body_html: selectedRow.is_body_html,
         integration_name: selectedRow.source,
       });
       toast.success("Reply sent successfully");
@@ -259,6 +260,7 @@ const InboxItemModal = ({
                 icon={<AiOutlineSend />}
                 shape="round"
                 type="primary"
+                loading={sendingReply}
                 disabled={reply.length === 0 || reply.length > 500}
                 onClick={() => {
                   sendReply();
