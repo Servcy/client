@@ -1,5 +1,12 @@
 const getMicrosoftOauthUrl = (from: string) => {
-  const scopes = ["User.Read", "Mail.Read", "openid", "profile", "email"];
+  const scopes = [
+    "User.Read",
+    "Mail.Read",
+    "openid",
+    "profile",
+    "email",
+    "Mail.Send",
+  ];
   const options = [
     ["client_id", process.env["NEXT_PUBLIC_MICROSOFT_CLIENT_ID"] ?? ""],
     ["response_type", "code"],
