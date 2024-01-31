@@ -75,6 +75,8 @@ const InboxItemModal = ({
         user_integration_id: selectedRow.user_integration_id,
       });
       toast.success("Reply sent successfully");
+      setReply("");
+      setIsReplyBoxVisible(false);
     } catch (err: any) {
       if (err?.response?.status === 400) {
         toast.error(
@@ -83,7 +85,6 @@ const InboxItemModal = ({
         );
       } else toast.error("Something went wrong, please try again later");
     } finally {
-      setReply("");
       setSendingReply(false);
     }
   };
