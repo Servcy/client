@@ -69,7 +69,7 @@ const InboxItemModal = ({
     try {
       setSendingReply(true);
       await sendReplyApi({
-        body,
+        body: !selectedRow.is_body_html ? body : selectedRow.uid,
         reply,
         is_body_html: selectedRow.is_body_html,
         user_integration_id: selectedRow.user_integration_id,
@@ -78,6 +78,7 @@ const InboxItemModal = ({
     } catch {
       toast.error("Something went wrong, please try again later");
     } finally {
+      setReply("");
       setSendingReply(false);
     }
   };
