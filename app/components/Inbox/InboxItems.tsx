@@ -115,11 +115,11 @@ const InboxItems = ({
       title: "Source",
       render: (account) => {
         return (
-          <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
+          <div className="flex min-h-[50px] max-w-[250px] items-center text-sm">
             <Avatar className="mr-2 rounded-full" size="small">
               {account.slice(0, 1).toUpperCase()}
             </Avatar>
-            <div>{account}</div>
+            <div className="overflow-hidden truncate">{account}</div>
           </div>
         );
       },

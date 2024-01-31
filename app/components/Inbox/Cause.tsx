@@ -13,7 +13,9 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
       <div className="min-h-[50px] max-w-[250px] flex-col justify-center text-ellipsis text-left text-sm">
         <div className="flex-row">{name}</div>
         {email !== "undefined" && (
-          <div className="flex-row text-gray-400">&lt;{email}&gt;</div>
+          <div className="flex-row text-gray-400">
+            &lt;{email.slice(0, 30)}&gt;
+          </div>
         )}
       </div>
     );
