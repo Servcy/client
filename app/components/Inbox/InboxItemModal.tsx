@@ -72,7 +72,7 @@ const InboxItemModal = ({
         body,
         reply,
         is_body_html: selectedRow.is_body_html,
-        integration_name: selectedRow.source,
+        user_integration_id: selectedRow.user_integration_id,
       });
       toast.success("Reply sent successfully");
     } catch {
