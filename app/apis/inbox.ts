@@ -14,3 +14,8 @@ export const generateReply = async (payload: object) => {
   const response = await axiosPost("/inbox/assisstant/generate-reply", payload);
   return response;
 };
+
+export const sendReply = async (payload: object) => {
+  const response = await axiosPost("/inbox/assisstant/send-reply", payload);
+  return response;
+};

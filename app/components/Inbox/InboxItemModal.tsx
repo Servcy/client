@@ -18,7 +18,10 @@ import TrelloNotification from "./TrelloNotification";
 // Types
 import { InboxItem } from "@/types/inbox";
 // APIs
-import { generateReply as generateReplyApi } from "@/apis/inbox";
+import {
+  generateReply as generateReplyApi,
+  sendReply as sendReplyApi,
+} from "@/apis/inbox";
 import { toast } from "react-hot-toast";
 
 const InboxItemModal = ({
@@ -46,6 +49,7 @@ const InboxItemModal = ({
   const [isReplyBoxVisible, setIsReplyBoxVisible] = useState<boolean>(false);
   const [reply, setReply] = useState<string>("");
   const [generatingReply, setGeneratingReply] = useState<boolean>(false);
+  const [sendingReply, setSendingReply] = useState<boolean>(false);
 
   const generateReply = async () => {
     try {
@@ -58,6 +62,22 @@ const InboxItemModal = ({
       toast.error("Something went wrong, please try again later");
     } finally {
       setGeneratingReply(false);
+    }
+  };
+
+  const sendReply = async () => {
+    try {
+      setSendingReply(true);
+      await sendReplyApi({
+        input_text: body,
+        reply_text: reply,
+        integration_name: selectedRow.source,
+      });
+      toast.success("Reply sent successfully");
+    } catch {
+      toast.error("Something went wrong, please try again later");
+    } finally {
+      setSendingReply(false);
     }
   };
 
@@ -166,6 +186,7 @@ const InboxItemModal = ({
                 onChange={(e) => setReply(e.target.value)}
                 value={reply}
                 maxLength={500}
+                disabled={generatingReply}
                 id="replyBox"
               />
               <div className="absolute bottom-2 right-2 float-right text-xs">
@@ -240,8 +261,7 @@ const InboxItemModal = ({
                 type="primary"
                 disabled={reply.length === 0 || reply.length > 500}
                 onClick={() => {
-                  console.log(reply);
-                  // TODO: Send reply
+                  sendReply();
                 }}
               >
                 Send
