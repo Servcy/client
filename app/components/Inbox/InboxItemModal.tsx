@@ -75,8 +75,13 @@ const InboxItemModal = ({
         user_integration_id: selectedRow.user_integration_id,
       });
       toast.success("Reply sent successfully");
-    } catch {
-      toast.error("Something went wrong, please try again later");
+    } catch (err: any) {
+      if (err?.response?.status === 400) {
+        toast.error(
+          err.response?.data?.detail ||
+            "Something went wrong, please try again later"
+        );
+      } else toast.error("Something went wrong, please try again later");
     } finally {
       setReply("");
       setSendingReply(false);
