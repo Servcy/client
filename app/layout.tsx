@@ -51,8 +51,6 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
       const refresh_token = getCookie("refreshToken");
       await logoutApi(String(refresh_token));
       googleLogout();
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
       window.location.href = "/";
