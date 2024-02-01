@@ -188,16 +188,18 @@ export default function Login(): JSX.Element {
                 {!loading && <BiLogIn className="mr-2 inline" />} Send OTP
               </Button>
               <h2 className="servcy-hr-lines my-4">Or</h2>
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-                auto_select
-                useOneTap
-              />
+              <div className="flex place-content-center">
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    console.log(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                  auto_select
+                  useOneTap
+                />
+              </div>
             </>
           ) : (
             <>
