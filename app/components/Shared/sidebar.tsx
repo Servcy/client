@@ -1,32 +1,19 @@
-"use client";
-
 // Components
 import Image from "next/image.js";
 // Constants
 import { sidebarOptions } from "@/constants/routes";
 // Icons
 import { AiOutlinePoweroff, AiOutlineSetting } from "react-icons/ai";
-// APIs
-import { logout as logoutApi } from "@/apis/logout";
 // Utils
 import cn from "classnames";
-import { deleteCookie } from "cookies-next";
 import { useState } from "react";
 
-export default function SideBar(): JSX.Element {
+export default function SideBar({
+  logout,
+}: {
+  logout: () => Promise<void>;
+}): JSX.Element {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
-
-  const logout = async () => {
-    try {
-      await logoutApi();
-    } finally {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-      window.location.href = "/";
-    }
-  };
 
   return (
     <div
@@ -42,7 +29,7 @@ export default function SideBar(): JSX.Element {
       }}
     >
       <nav aria-label="Sidebar" className="flex h-full w-full flex-col">
-        <div className="h-full overflow-y-auto overflow-x-hidden rounded py-4 px-3">
+        <div className="h-full overflow-y-auto overflow-x-hidden rounded px-3 py-4">
           <a
             href="/"
             className="mb-5 flex items-center rounded-lg bg-servcy-gray py-4 pl-2.5"

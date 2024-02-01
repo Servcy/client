@@ -1,7 +1,7 @@
 "use client";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 // Components
-import Sidebar from "@/components/Shared/sidebar";
+import SideBar from "@/components/Shared/sidebar";
 import { SyncOutlined } from "@ant-design/icons";
 import { Analytics } from "@vercel/analytics/react";
 import { Spin } from "antd";
@@ -15,6 +15,9 @@ import "@/styles/globals.css";
 // Utils
 import { isSmallScreen } from "@/utils/Shared";
 import cn from "classnames";
+import { deleteCookie } from "cookies-next";
+// APIs
+import { logout as logoutApi } from "@/apis/logout";
 
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {
   return (
@@ -40,6 +43,22 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
   const { isPageWithSidebar, isOpenOnSmallScreens, setOpenOnSmallScreens } =
     useSidebarContext();
   const [loading, setLoading] = useState(true);
+
+  const logout = async () => {
+    try {
+      setLoading(true);
+      await logoutApi();
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+        window.location.href = "/";
+      }, 1000);
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -72,7 +91,7 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
               hidden: isSmallScreen() && !isOpenOnSmallScreens,
             })}
           >
-            <Sidebar />
+            <SideBar logout={logout} />
           </div>
           {isSmallScreen() && !isOpenOnSmallScreens && (
             <AiOutlineMenu
