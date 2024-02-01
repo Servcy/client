@@ -53,7 +53,7 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
       googleLogout();
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
-      window.location.href = "/";
+      window.location.href = "/login";
     } finally {
       setLoading(false);
     }
