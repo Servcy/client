@@ -24,6 +24,15 @@ export const sendOtp = async (input: string, inputType: string) => {
   return data;
 };
 
+export const googleLogin = async (credential: string) => {
+  const response = Axios.post(`${SERVER_URL}/authentication`, {
+    credential,
+    type: "google",
+  });
+  const { data } = await response;
+  return data;
+};
+
 export const refreshTokens = async (
   refreshToken: string,
   setCookie: (key: string, value: string) => void

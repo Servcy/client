@@ -14,6 +14,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import "@/styles/globals.css";
 // Utils
 import { isSmallScreen } from "@/utils/Shared";
+import { googleLogout } from "@react-oauth/google";
 import cn from "classnames";
 import { deleteCookie } from "cookies-next";
 // APIs
@@ -48,6 +49,7 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
     try {
       setLoading(true);
       await logoutApi();
+      googleLogout();
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       deleteCookie("accessToken");

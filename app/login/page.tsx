@@ -16,6 +16,7 @@ import {
 } from "@/utils/Shared/validators";
 // APIs
 import {
+  googleLogin as googleLoginApi,
   sendOtp as sendOtpApi,
   verifyOtp as verifyOtpApi,
 } from "@/apis/authentication";
@@ -92,6 +93,28 @@ export default function Login(): JSX.Element {
       const otpIsValid = validateOtp(otp);
       if (!otpIsValid) return;
       const tokens = await toast.promise(verifyOtpApi(otp, input, inputType), {
+        loading: "Verifying OTP...",
+        success: "OTP verified successfully",
+        error: "Failed to verify OTP",
+      });
+      setCookie("refreshToken", tokens.refresh_token, {
+        path: "/",
+      });
+      setCookie("accessToken", tokens.access_token, {
+        path: "/",
+      });
+      const nextUrl = searchParams.get("nextUrl") ?? "/";
+      router.push(nextUrl);
+      setIsPageWithSidebar(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const googleLogin = async (credential: string) => {
+    try {
+      setLoading(true);
+      const tokens = await toast.promise(googleLoginApi(credential), {
         loading: "Verifying OTP...",
         success: "OTP verified successfully",
         error: "Failed to verify OTP",
@@ -191,10 +214,12 @@ export default function Login(): JSX.Element {
               <div className="flex place-content-center">
                 <GoogleLogin
                   onSuccess={(credentialResponse) => {
-                    console.log(credentialResponse);
+                    const { credential } = credentialResponse;
+                    if (credential) googleLogin(credential);
+                    else toast.error("Failed to login with Google");
                   }}
                   onError={() => {
-                    console.log("Login Failed");
+                    toast.error("Failed to login with Google");
                   }}
                   auto_select
                   useOneTap
