@@ -1,4 +1,5 @@
 import Axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const SERVER_URL = process.env["NEXT_PUBLIC_SERVER_URL"];
 
@@ -26,7 +27,7 @@ export const sendOtp = async (input: string, inputType: string) => {
 
 export const googleLogin = async (credential: string) => {
   const response = Axios.post(`${SERVER_URL}/authentication`, {
-    credential,
+    ...jwtDecode(credential),
     type: "google",
   });
   const { data } = await response;
