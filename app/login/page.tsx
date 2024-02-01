@@ -115,9 +115,9 @@ export default function Login(): JSX.Element {
     try {
       setLoading(true);
       const tokens = await toast.promise(googleLoginApi(credential), {
-        loading: "Verifying OTP...",
-        success: "OTP verified successfully",
-        error: "Failed to verify OTP",
+        loading: "Logging in..",
+        success: "Logged in successfully",
+        error: "Failed to login with Google",
       });
       setCookie("refreshToken", tokens.refresh_token, {
         path: "/",
