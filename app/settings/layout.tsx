@@ -27,14 +27,19 @@ export default function SettingsLayout({
   }, []);
 
   return (
-    <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
+    <main className="order-2 max-h-screen flex-[1_0_16rem] bg-servcy-gray p-3">
       <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
         <div className="flex flex-row">
           <AiOutlineSetting size="24" className="my-auto mr-2" />
           <p className="text-xl">Settings</p>
         </div>
       </header>
-      <div className="flex gap-4">
+      <div
+        className="flex gap-4 overflow-y-hidden"
+        style={{
+          height: "calc(100vh - 150px)",
+        }}
+      >
         <div className="w-56 flex-none rounded-lg bg-servcy-white p-6">
           <div className="flex flex-col gap-4 font-semibold">
             <div className="servcy-small-title flex flex-row items-center gap-2 text-xs text-servcy-neutral">

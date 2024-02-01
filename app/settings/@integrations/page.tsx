@@ -54,7 +54,7 @@ export default function IntegrationSettings(): JSX.Element {
   }, []);
 
   return (
-    <div className="xs:grid-cols-1 grid flex-auto gap-3 rounded-lg bg-servcy-white p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
+    <div className="xs:grid-cols-1 grid flex-auto gap-3 overflow-y-scroll rounded-lg bg-servcy-white p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
       {loading ? (
         <>
           <Card className="min-h-[200px] animate-pulse rounded-lg">
