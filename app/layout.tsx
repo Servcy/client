@@ -1,8 +1,10 @@
 "use client";
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, useEffect, useState } from "react";
 // Components
 import Sidebar from "@/components/Shared/sidebar";
+import { SyncOutlined } from "@ant-design/icons";
 import { Analytics } from "@vercel/analytics/react";
+import { Spin } from "antd";
 import { Toaster } from "react-hot-toast";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 // Context
@@ -32,10 +34,32 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
 const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
   const { isPageWithSidebar, isOpenOnSmallScreens, setOpenOnSmallScreens } =
     useSidebarContext();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <div className="flex">
-      {children}
+      {loading ? (
+        <Spin
+          className="order-2 m-auto"
+          size="large"
+          indicator={
+            <SyncOutlined
+              spin
+              style={{
+                color: "#26542F",
+              }}
+            />
+          }
+        />
+      ) : (
+        children
+      )}
       {isPageWithSidebar ? (
         <>
           <div
