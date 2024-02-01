@@ -16,7 +16,7 @@ import "@/styles/globals.css";
 import { isSmallScreen } from "@/utils/Shared";
 import { googleLogout } from "@react-oauth/google";
 import cn from "classnames";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 // APIs
 import { logout as logoutApi } from "@/apis/logout";
 
@@ -48,17 +48,16 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
   const logout = async () => {
     try {
       setLoading(true);
-      await logoutApi();
+      const refresh_token = getCookie("refreshToken");
+      await logoutApi(String(refresh_token));
       googleLogout();
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
+      window.location.href = "/";
     } finally {
-      setTimeout(() => {
-        setLoading(false);
-        window.location.href = "/";
-      }, 1000);
+      setLoading(false);
     }
   };
 
