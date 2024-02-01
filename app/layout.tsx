@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 // Context
 import { SidebarProvider, useSidebarContext } from "@/context/SidebarContext";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 // Styles
 import "@/styles/globals.css";
 // Utils
@@ -20,12 +21,16 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     <html lang="en">
       <body>
         <Toaster />
-        <SidebarProvider>
-          <ContentWithSidebar>
-            {children}
-            <Analytics />
-          </ContentWithSidebar>
-        </SidebarProvider>
+        <GoogleOAuthProvider
+          clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}
+        >
+          <SidebarProvider>
+            <ContentWithSidebar>
+              {children}
+              <Analytics />
+            </ContentWithSidebar>
+          </SidebarProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

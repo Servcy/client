@@ -21,6 +21,7 @@ import {
 } from "@/apis/authentication";
 // Components
 import OTPInput from "@/components/Login/OTPInput";
+import { GoogleLogin } from "@react-oauth/google";
 import { Button, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link.js";
@@ -186,6 +187,17 @@ export default function Login(): JSX.Element {
               >
                 {!loading && <BiLogIn className="mr-2 inline" />} Send OTP
               </Button>
+              <h2 className="servcy-hr-lines my-4">Or</h2>
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+                auto_select
+                useOneTap
+              />
             </>
           ) : (
             <>
