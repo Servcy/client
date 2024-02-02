@@ -56,6 +56,9 @@ const InboxItemModal = ({
       setGeneratingReply(true);
       const reply = await generateReplyApi({
         input_text: body,
+        input_type: ["Gmail", "Outlook"].includes(selectedRow.source)
+          ? "email"
+          : "message",
       });
       setReply(reply);
     } catch {
