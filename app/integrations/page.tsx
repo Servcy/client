@@ -18,6 +18,8 @@ import {
 } from "@/constants/integrations";
 // Types
 import { Integration } from "@/types/integration";
+// Utils
+import { getQueryParams } from "@/utils/Shared";
 
 export default function Integrations(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
@@ -28,14 +30,34 @@ export default function Integrations(): JSX.Element {
 
   useEffect(() => {
     setLoading(true);
+    const queryParams: Record<string, string> = getQueryParams(
+      window.location.search
+    );
     fetchIntegrations()
-      .then((integrations) => {
+      .then((results) => {
         setIntegrations(
-          integrations.sort(
+          results.sort(
             (a: Integration, b: Integration) =>
               Number(a.is_wip) - Number(b.is_wip)
           )
         );
+        if (queryParams["integration"]) {
+          const integration = results.find(
+            (integration: Integration) =>
+              integration.id === Number(queryParams["integration"])
+          );
+          if (integration) {
+            setTimeout(() => {
+              // click on the connect button
+              const connectButton = document.getElementById(
+                `connect-${integration.id}`
+              );
+              if (connectButton) {
+                connectButton.click();
+              }
+            }, 1000);
+          }
+        }
       })
       .catch((error) => {
         toast.error(error.response.data.detail);
@@ -105,6 +127,7 @@ export default function Integrations(): JSX.Element {
             .map((integration: Integration) => (
               <Card
                 key={integration.id}
+                id={`integration-${integration.id}`}
                 className="min-h-[200px] rounded-lg bg-servcy-black text-servcy-white"
               >
                 <div className="flex flex-row text-servcy-wheat">
@@ -145,6 +168,7 @@ export default function Integrations(): JSX.Element {
                   <Button
                     className="!text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                     size="middle"
+                    id={`connect-${integration.id}`}
                     onClick={() => connect(integration)}
                     icon={<HiArrowsRightLeft />}
                     disabled={integration.is_wip}
