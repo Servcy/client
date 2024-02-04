@@ -5,6 +5,11 @@ import Avatar from "antd/es/avatar/avatar.js";
 import Image from "next/image";
 
 const Cause = ({ cause, source }: { cause: any; source: string }) => {
+  if (cause === "None") {
+    return (
+      <div className="max-w-[250px] text-ellipsis text-center">{source}</div>
+    );
+  }
   if (["Gmail", "Outlook"].includes(source)) {
     let [name, email] = String(cause).split("<");
     email = String(email).replace(">", "").trim();
