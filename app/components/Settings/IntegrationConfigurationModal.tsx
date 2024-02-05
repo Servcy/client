@@ -80,7 +80,12 @@ export default function IntegrationConfigurationModal({
       onCancel={onClose}
       footer={false}
       width="60vw"
-      style={{ top: "50%", transform: "translateY(-50%)" }}
+      style={{
+        top: "50%",
+        transform: ["Github", "Figma"].includes(selectedIntegration.name)
+          ? "translateY(-35%)" // Github and Figma have additional configuration
+          : "translateY(-50%)",
+      }}
     >
       <Card
         className="mt-4 min-h-[200px] rounded-lg"
