@@ -94,7 +94,7 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
           </div>
           {isSmallScreen() && !isOpenOnSmallScreens && (
             <AiOutlineMenu
-              className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-servcy-black p-2 text-4xl text-servcy-white"
+              className="fixed bottom-5 right-5 z-50 cursor-pointer rounded-full border border-servcy-cream bg-servcy-black p-2 text-4xl text-servcy-white shadow-md"
               onClick={() => {
                 setOpenOnSmallScreens(true);
               }}
@@ -102,7 +102,7 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
           )}
           {isSmallScreen() && isOpenOnSmallScreens && (
             <AiOutlineClose
-              className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-servcy-black p-2 text-4xl text-servcy-white"
+              className="fixed bottom-5 right-5 z-50 cursor-pointer rounded-full border border-servcy-cream bg-servcy-black p-2 text-4xl text-servcy-white shadow-md"
               onClick={() => {
                 setOpenOnSmallScreens(false);
               }}
