@@ -8,9 +8,9 @@ export default function GithubConfiguration() {
       target="_blank"
       rel="noreferrer"
     >
-      <button className="flex flex-row rounded-lg bg-servcy-black p-2 text-servcy-wheat">
-        <AiFillGithub className="my-auto mr-2" size={20} />
-        <span className="text-servcy-cream">Install Servcy on Github</span>
+      <button className="servcy-card-bg flex flex-row items-center rounded-lg p-2 text-servcy-black">
+        <AiFillGithub className="mr-2" size={20} />
+        <span>Install Servcy on Github</span>
       </button>
     </a>
   );

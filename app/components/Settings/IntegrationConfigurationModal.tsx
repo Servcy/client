@@ -103,8 +103,8 @@ export default function IntegrationConfigurationModal({
       }}
     >
       <Card
-        className="servcy-card-bg mt-4 rounded-lg"
-        title="Integrated Accounts"
+        className="mt-4 rounded-lg bg-servcy-black"
+        title={<div className="text-servcy-cream">Integrated Accounts</div>}
         loading={loading}
       >
         <div className="grid max-h-[400px] grid-cols-2 gap-2 overflow-auto">
@@ -112,12 +112,14 @@ export default function IntegrationConfigurationModal({
             return (
               <div
                 key={userIntegration.id}
-                className="flex justify-between rounded-lg bg-servcy-black p-4 font-semibold text-servcy-cream"
+                className="servcy-card-bg flex items-center justify-between rounded-lg p-4 font-semibold text-servcy-black"
               >
                 <div className="truncate">
                   {userIntegration.account_display_name}
                 </div>
-                <button className="ml-4 text-servcy-wheat">Disconnect</button>
+                <button className="ml-4 rounded bg-servcy-black p-2 text-servcy-wheat">
+                  Disconnect
+                </button>
               </div>
             );
           })}
@@ -161,8 +163,10 @@ export default function IntegrationConfigurationModal({
       )}
       {["Github", "Figma"].includes(selectedIntegration.name) && (
         <Card
-          className="servcy-card-bg mt-4 rounded-lg"
-          title="Additional Configuration"
+          className="mt-4 rounded-lg bg-servcy-black text-servcy-cream"
+          title={
+            <div className="text-servcy-cream">Additional Configuration</div>
+          }
         >
           {selectedIntegration.name === "Github" && <GithubConfiguration />}
           {selectedIntegration.name === "Figma" && (
