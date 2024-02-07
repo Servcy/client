@@ -206,6 +206,7 @@ const InboxItems = ({
         dataSource={inboxItems}
         columns={columns}
         rowKey={(record) => record.id}
+        className="overflow-x-scroll"
         rowSelection={{
           type: "checkbox",
           ...rowSelection,

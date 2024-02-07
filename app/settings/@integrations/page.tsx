@@ -75,18 +75,20 @@ export default function IntegrationSettings(): JSX.Element {
               key={integration.id}
               className="cursor-pointer rounded-lg bg-servcy-black text-servcy-white"
             >
-              <div className="flex flex-row text-servcy-wheat">
-                {integration.logo.split(",").map((logo, index) => (
-                  <Image
-                    className="my-auto mr-2 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1 last-of-type:mr-5"
-                    src={logo}
-                    width={40}
-                    key={`logo-${index}`}
-                    height={40}
-                    alt={integration.name}
-                  />
-                ))}
-                <div className="my-auto flex-col text-lg font-semibold">
+              <div className="flex flex-row items-center text-servcy-wheat">
+                <div className="flex overflow-x-hidden">
+                  {integration.logo.split(",").map((logo, index) => (
+                    <Image
+                      className="my-auto mr-2 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1 last-of-type:mr-5"
+                      src={logo}
+                      width={40}
+                      key={`logo-${index}`}
+                      height={40}
+                      alt={integration.name}
+                    />
+                  ))}
+                </div>
+                <div className="flex-col pl-4 text-lg font-semibold">
                   {integration.name}
                 </div>
               </div>
