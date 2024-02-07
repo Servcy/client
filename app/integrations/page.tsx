@@ -79,17 +79,19 @@ export default function Integrations(): JSX.Element {
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
       <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
-        <div className="flex flex-row">
-          <AiOutlineApi size="24" className="my-auto mr-2" />
-          <p className="text-xl">Available Integrations</p>
+        <div className="flex flex-row items-center">
+          <AiOutlineApi size="24" />
+          <p className="truncate px-2 text-xl max-md:text-lg">
+            Available Integrations
+          </p>
           <Input
-            className="ml-auto w-[250px]"
+            className="ml-auto max-w-[200px]"
             value={search}
             placeholder="search by name..."
             onChange={(event) => setSearch(event.target.value || "")}
           />
           <Select
-            className="ml-2 w-[200px]"
+            className="ml-2 max-w-[200px]"
             placeholder="Filter by usage"
             allowClear={true}
             options={uniqueIntegrationCategories.map((categories) => {
