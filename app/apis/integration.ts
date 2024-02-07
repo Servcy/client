@@ -13,6 +13,13 @@ export const fetchUserIntegrations = async (integration_name: string) => {
   return response.results;
 };
 
+export const disconnectUserIntegration = async (integration_id: string) => {
+  const response = await axiosPut("/integration/user-integration", {
+    integration_id,
+  });
+  return response.results;
+};
+
 export const fetchIntegrationEvents = async (integration_id: string) => {
   const response = await axiosGet(
     "/integration/integration-event/fetch-events",

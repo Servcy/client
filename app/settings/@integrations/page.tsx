@@ -73,7 +73,7 @@ export default function IntegrationSettings(): JSX.Element {
           .map((integration: Integration) => (
             <Card
               key={integration.id}
-              className="min-h-[200px] cursor-pointer rounded-lg bg-servcy-black text-servcy-white"
+              className="cursor-pointer rounded-lg bg-servcy-black text-servcy-white"
             >
               <div className="flex flex-row text-servcy-wheat">
                 {integration.logo.split(",").map((logo, index) => (

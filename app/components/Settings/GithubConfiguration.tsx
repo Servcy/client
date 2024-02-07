@@ -10,7 +10,7 @@ export default function GithubConfiguration() {
     >
       <button className="flex flex-row rounded-lg bg-servcy-black p-2 text-servcy-wheat">
         <AiFillGithub className="my-auto mr-2" size={20} />
-        Install Servcy on Github
+        <span className="text-servcy-cream">Install Servcy on Github</span>
       </button>
     </a>
   );
