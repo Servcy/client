@@ -2,6 +2,7 @@
 
 // dependencies
 import cn from "classnames";
+import * as DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 // Compponents
 import { Button, Modal, Tooltip } from "antd";
@@ -41,6 +42,9 @@ const InboxItemModal = ({
   let body = selectedRow.body;
   if (selectedRow.source === "Gmail" && selectedRow.cause !== "None") {
     body = Buffer.from(body, "base64").toString("utf8");
+  }
+  if (selectedRow.is_body_html && selectedRow.cause !== "None") {
+    body = DOMPurify.sanitize(body);
   }
   const [isReplyBoxVisible, setIsReplyBoxVisible] = useState<boolean>(false);
   const [reply, setReply] = useState<string>("");
