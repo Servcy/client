@@ -27,6 +27,7 @@ import {
 import { toast } from "react-hot-toast";
 // Utils
 import { saveByteArray } from "@/utils/Shared/files";
+import { BiSolidTrash } from "react-icons/bi";
 
 const InboxItemModal = ({
   selectedRow,
@@ -63,6 +64,7 @@ const InboxItemModal = ({
   const [fileNameIdMap, setFileNameIdMap] = useState<Record<string, number>>(
     {}
   );
+  const [removedFiles, setRemovedFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState<boolean>(false);
   const [sendingReply, setSendingReply] = useState<boolean>(false);
 
@@ -92,6 +94,7 @@ const InboxItemModal = ({
         is_body_html: selectedRow.is_body_html,
         user_integration_id: selectedRow.user_integration_id,
         file_ids: fileList,
+        removed_files: removedFiles,
       });
       toast.success("Reply sent successfully");
       setReply("");
@@ -137,7 +140,20 @@ const InboxItemModal = ({
         <ul>
           {fileList.map((id) => (
             <li key={id}>
-              <div></div>
+              <div className="flex justify-between">
+                <div className="truncate">
+                  {Object.entries(fileNameIdMap).find(
+                    ([_, value]) => value === id
+                  )?.[0] ?? id.toString()}
+                </div>
+                <BiSolidTrash
+                  className="ml-2 cursor-pointer text-red-400"
+                  onClick={() => {
+                    setFileList(fileList.filter((fileId) => fileId !== id));
+                    setRemovedFiles([...removedFiles, id.toString()]);
+                  }}
+                />
+              </div>
             </li>
           ))}
         </ul>
@@ -284,6 +300,8 @@ const InboxItemModal = ({
                     setFileList((prevState) =>
                       prevState.filter((id) => id !== fileId)
                     );
+                    fileId &&
+                      setRemovedFiles([...removedFiles, fileId.toString()]);
                   }}
                   setUploading={setUploading}
                 >
