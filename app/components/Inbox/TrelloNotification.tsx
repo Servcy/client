@@ -32,7 +32,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     Description:
                   </div>
                   <div
-                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                     dangerouslySetInnerHTML={{
                       __html: remark()
                         .use(html)
@@ -72,7 +72,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     Description:
                   </div>
                   <div
-                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                     dangerouslySetInnerHTML={{
                       __html: remark()
                         .use(html)
@@ -199,7 +199,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                   Description:
                 </div>
                 <div
-                  className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                  className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                   dangerouslySetInnerHTML={{
                     __html: remark()
                       .use(html)
@@ -261,7 +261,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                       Description:
                     </div>
                     <div
-                      className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                      className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                       dangerouslySetInnerHTML={{
                         __html: remark()
                           .use(html)
@@ -1236,7 +1236,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     Comment:
                   </div>
                   <div
-                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                     dangerouslySetInnerHTML={{
                       __html: remark()
                         .use(html)
@@ -1303,7 +1303,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     Comment:
                   </div>
                   <div
-                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                     dangerouslySetInnerHTML={{
                       __html: remark()
                         .use(html)
@@ -1370,7 +1370,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     Comment:
                   </div>
                   <div
-                    className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                    className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                     dangerouslySetInnerHTML={{
                       __html: remark()
                         .use(html)

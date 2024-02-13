@@ -88,7 +88,7 @@ const GithubNotification = ({
                 Thread:
               </div>
               <div
-                className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                 dangerouslySetInnerHTML={{
                   __html: remark()
                     .use(html)
@@ -166,7 +166,7 @@ const GithubNotification = ({
                 Comment:
               </div>
               <div
-                className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                 dangerouslySetInnerHTML={{
                   __html: remark()
                     .use(html)
@@ -286,7 +286,7 @@ const GithubNotification = ({
                   Review comment:
                 </div>
                 <div
-                  className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                  className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                   dangerouslySetInnerHTML={{
                     __html: remark()
                       .use(html)
@@ -569,7 +569,7 @@ const GithubNotification = ({
                   Description:
                 </div>
                 <div
-                  className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                  className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                   dangerouslySetInnerHTML={{
                     __html: remark()
                       .use(html)
@@ -680,7 +680,7 @@ const GithubNotification = ({
                 Comment:
               </div>
               <div
-                className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                 dangerouslySetInnerHTML={{
                   __html: remark()
                     .use(html)
@@ -979,7 +979,7 @@ const GithubNotification = ({
                   Body:
                 </div>
                 <div
-                  className="border-1 max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                  className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                   dangerouslySetInnerHTML={{
                     __html: remark()
                       .use(html)
