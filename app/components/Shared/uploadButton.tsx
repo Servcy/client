@@ -1,17 +1,16 @@
 import { refreshTokens } from "@/utils/Shared/axios";
-import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined";
 import { Upload } from "antd";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const Dragger = Upload.Dragger;
-
-const DragDrop = ({
+const UploadButton = ({
   onSave,
   onRemove,
+  children,
 }: {
   onSave: (_: any, __: string) => void;
   onRemove: (_: any) => void;
+  children: React.ReactNode;
 }) => {
   const props = {
     multiple: true,
@@ -49,14 +48,7 @@ const DragDrop = ({
     onRemove,
   };
 
-  return (
-    <Dragger {...props}>
-      <p>
-        <InboxOutlined />
-      </p>
-      <p>Click or drag file to this area to upload</p>
-    </Dragger>
-  );
+  return <Upload {...props}>{children}</Upload>;
 };
 
-export default DragDrop;
+export default UploadButton;

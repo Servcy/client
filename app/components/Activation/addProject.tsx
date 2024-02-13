@@ -204,7 +204,6 @@ const AddProject = ({
                 [fileName]: fileIds[0],
               }));
             }}
-            url="/client/upload"
             onRemove={(file: any) => {
               const fileName = file.name;
               const fileId = fileNameIdMap[fileName];

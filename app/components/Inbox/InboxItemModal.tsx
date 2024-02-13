@@ -5,6 +5,7 @@ import cn from "classnames";
 import * as DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 // Compponents
+import UploadButton from "@/components/Shared/uploadButton";
 import { Button, Modal, Tooltip } from "antd";
 import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaReply } from "react-icons/fa";
@@ -58,6 +59,10 @@ const InboxItemModal = ({
   const [isReplyBoxVisible, setIsReplyBoxVisible] = useState<boolean>(false);
   const [reply, setReply] = useState<string>("");
   const [generatingReply, setGeneratingReply] = useState<boolean>(false);
+  const [fileList, setFileList] = useState<number[]>([]);
+  const [fileNameIdMap, setFileNameIdMap] = useState<Record<string, number>>(
+    {}
+  );
   const [sendingReply, setSendingReply] = useState<boolean>(false);
 
   const generateReply = async () => {
@@ -85,6 +90,7 @@ const InboxItemModal = ({
         reply,
         is_body_html: selectedRow.is_body_html,
         user_integration_id: selectedRow.user_integration_id,
+        file_ids: fileList,
       });
       toast.success("Reply sent successfully");
       setReply("");
@@ -131,7 +137,6 @@ const InboxItemModal = ({
       onCancel={() => setIsInboxItemModalVisible(false)}
       footer={false}
       width={isReplyBoxVisible ? "90vw" : "70vw"}
-      style={{ top: "50%", transform: "translateY(-50%)" }}
     >
       <div>
         {/* body */}
@@ -245,14 +250,34 @@ const InboxItemModal = ({
                   }}
                 ></Button>
               </Tooltip>
-              <Tooltip title="Add an attachment">
-                <Button
-                  className="absolute bottom-8 right-12 ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
-                  icon={<HiPaperClip className="mt-1" />}
-                  shape="circle"
-                  type="primary"
-                ></Button>
-              </Tooltip>
+              {activeTab === "message" && (
+                <Tooltip title="Add an attachment">
+                  <UploadButton
+                    onSave={(data, fileName) => {
+                      const fileIds = JSON.parse(data.results).file_ids;
+                      setFileList((prevState) => [...prevState, ...fileIds]);
+                      setFileNameIdMap((prevState) => ({
+                        ...prevState,
+                        [fileName]: fileIds[0],
+                      }));
+                    }}
+                    onRemove={(file: any) => {
+                      const fileName = file.name;
+                      const fileId = fileNameIdMap[fileName];
+                      setFileList((prevState) =>
+                        prevState.filter((id) => id !== fileId)
+                      );
+                    }}
+                  >
+                    <Button
+                      className="absolute bottom-8 right-12 ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
+                      icon={<HiPaperClip className="mt-1" />}
+                      shape="circle"
+                      type="primary"
+                    ></Button>
+                  </UploadButton>
+                </Tooltip>
+              )}
             </div>
           )}
         </div>
