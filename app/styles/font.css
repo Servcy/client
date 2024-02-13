@@ -2,8 +2,3 @@
     letter-spacing: .8px !important;
     text-transform: uppercase !important;
 }
-
-.servcy-link-inbox-item-comment a {
-    text-decoration: underline;
-    color: rgb(209 191 174/var(--tw-border-opacity));
-}
