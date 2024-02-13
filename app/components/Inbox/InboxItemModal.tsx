@@ -390,8 +390,13 @@ const InboxItemModal = ({
                 icon={<AiOutlineSend />}
                 shape="round"
                 type="primary"
-                loading={sendingReply || generatingReply || uploading}
-                disabled={reply.length === 0 || reply.length > 500}
+                loading={sendingReply}
+                disabled={
+                  reply.length === 0 ||
+                  reply.length > 500 ||
+                  generatingReply ||
+                  uploading
+                }
                 onClick={() => {
                   sendReply();
                 }}
