@@ -14,7 +14,7 @@ export interface InboxItem {
   i_am_mentioned: boolean;
   user_integration_id: number;
   category: string;
-  attachments: Attachment[];
+  attachments: string;
 }
 
 export interface Attachment {

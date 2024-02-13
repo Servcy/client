@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Button, Modal, Tooltip } from "antd";
 import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaReply } from "react-icons/fa";
+import { HiPaperClip } from "react-icons/hi";
 import { RxMagicWand } from "react-icons/rx";
 import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
@@ -16,13 +17,15 @@ import NotionComment from "./NotionComment";
 import SlackMessage from "./SlackMessage";
 import TrelloNotification from "./TrelloNotification";
 // Types
-import { InboxItem } from "@/types/inbox";
+import { Attachment, InboxItem } from "@/types/inbox";
 // APIs
 import {
   generateReply as generateReplyApi,
   sendReply as sendReplyApi,
 } from "@/apis/inbox";
 import { toast } from "react-hot-toast";
+// Utils
+import { saveByteArray } from "@/utils/Shared/files";
 
 const InboxItemModal = ({
   selectedRow,
@@ -147,12 +150,32 @@ const InboxItemModal = ({
             )}
           >
             {selectedRow.is_body_html ? (
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: body,
-                }}
-                className="col-span-2 max-h-[600px] overflow-y-scroll p-1"
-              />
+              <>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: body,
+                  }}
+                  className="col-span-2 max-h-[600px] overflow-y-scroll p-1"
+                />
+                {selectedRow.attachments !== "None" && (
+                  <div className="mt-4 grid grid-cols-4 gap-4 bg-servcy-black p-4">
+                    {JSON.parse(
+                      selectedRow.attachments.replaceAll("'", '"')
+                    ).map((attachment: Attachment) => (
+                      <button
+                        key={attachment.name}
+                        onClick={() => {
+                          saveByteArray(attachment.name, attachment.data);
+                        }}
+                        className="flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
+                      >
+                        <HiPaperClip className="mr-1 inline" size="18" />
+                        <span className="truncate">{attachment.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
             ) : selectedRow.source === "Notion" ? (
               <NotionComment
                 data={JSON.parse(selectedRow.body)}

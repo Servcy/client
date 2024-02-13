@@ -25,3 +25,11 @@ export const beforeUpload = (file: RcFile) => {
   }
   return isJpgOrPng && isLt2M;
 };
+
+export const saveByteArray = (fileName: string, bytes: any) => {
+  const blob = new Blob([bytes], { type: "application/pdf" });
+  const link = document.createElement("a");
+  link.href = window.URL.createObjectURL(blob);
+  link.download = fileName;
+  link.click();
+};
