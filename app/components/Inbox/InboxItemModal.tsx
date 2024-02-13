@@ -94,7 +94,7 @@ const InboxItemModal = ({
         is_body_html: selectedRow.is_body_html,
         user_integration_id: selectedRow.user_integration_id,
         file_ids: fileList,
-        removed_files: removedFiles,
+        removed_file_ids: removedFiles,
       });
       toast.success("Reply sent successfully");
       setReply("");
