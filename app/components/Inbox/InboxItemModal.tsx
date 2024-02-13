@@ -99,6 +99,10 @@ const InboxItemModal = ({
       toast.success("Reply sent successfully");
       setReply("");
       setIsReplyBoxVisible(false);
+      setFileList([]);
+      setRemovedFiles([]);
+      setFileNameIdMap({});
+      setIsInboxItemModalVisible(false);
     } catch (err: any) {
       if (err?.response?.status === 400) {
         toast.error(
