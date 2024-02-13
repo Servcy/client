@@ -111,7 +111,10 @@ export default function IntegrationConfigurationModal({
                 <div className="truncate">
                   {userIntegration.account_display_name}
                 </div>
-                <button className="ml-4 rounded bg-servcy-black p-2 text-servcy-wheat">
+                <button
+                  className="ml-4 rounded bg-servcy-black p-2 text-servcy-wheat"
+                  disabled
+                >
                   Disconnect
                 </button>
               </div>

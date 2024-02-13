@@ -75,16 +75,20 @@ export default function Gmail(): JSX.Element {
     }
   };
 
-  const archiveItems = (itemIds: React.Key[]) => {
+  const archiveItems = async (itemIds: React.Key[]) => {
     try {
-      archiveItemsApi({
+      await archiveItemsApi({
         item_ids: itemIds,
       });
-      setInboxItems((prevState) => {
-        return prevState.filter((item) => {
-          return !itemIds.includes(parseInt(item.id));
+      if (itemIds.length === inboxItems.length) {
+        setInboxItems([]);
+        refetchInboxItems();
+      } else
+        setInboxItems((prevState) => {
+          return prevState.filter((item) => {
+            return !itemIds.includes(parseInt(item.id));
+          });
         });
-      });
     } catch (err) {
       console.error(err);
     }
