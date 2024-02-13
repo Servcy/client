@@ -112,7 +112,7 @@ export default function IntegrationConfigurationModal({
                   {userIntegration.account_display_name}
                 </div>
                 <button
-                  className="ml-4 rounded bg-servcy-black p-2 text-servcy-wheat cursor-not-allowed"
+                  className="ml-4 cursor-not-allowed rounded bg-servcy-black p-2 text-servcy-wheat"
                   disabled
                 >
                   Disconnect
