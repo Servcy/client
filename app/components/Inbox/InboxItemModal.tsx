@@ -155,10 +155,10 @@ const InboxItemModal = ({
                   dangerouslySetInnerHTML={{
                     __html: body,
                   }}
-                  className="col-span-2 max-h-[600px] overflow-y-scroll p-1"
+                  className="max-h-[600px] overflow-y-scroll p-1"
                 />
                 {selectedRow.attachments !== "None" && (
-                  <div className="mt-4 grid grid-cols-4 gap-4 bg-servcy-black p-4">
+                  <div className="mt-4 flex overflow-x-scroll bg-servcy-black p-4">
                     {JSON.parse(
                       selectedRow.attachments.replaceAll("'", '"')
                     ).map((attachment: Attachment) => (
@@ -167,7 +167,7 @@ const InboxItemModal = ({
                         onClick={() => {
                           saveByteArray(attachment.name, attachment.data);
                         }}
-                        className="flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
+                        className="mr-2 flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
                       >
                         <HiPaperClip className="mr-1 inline" size="18" />
                         <span className="truncate">{attachment.name}</span>
