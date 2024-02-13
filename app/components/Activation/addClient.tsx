@@ -103,7 +103,6 @@ const AddClient = ({
         closeModal();
       }}
       className="min-w-[600px] rounded-lg p-0"
-      style={{ top: "50%", transform: "translateY(-50%)" }}
     >
       <Form layout="vertical" className="mt-5" preserve={false}>
         <div className="flex justify-between">
