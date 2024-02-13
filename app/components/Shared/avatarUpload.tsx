@@ -1,5 +1,5 @@
 import { refreshTokens } from "@/utils/Shared/axios";
-import { beforeUpload, getBase64 } from "@/utils/Shared/files";
+import { getBase64 } from "@/utils/Shared/files";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Upload } from "antd";
 import type { UploadChangeParam } from "antd/es/upload";
@@ -11,10 +11,12 @@ import toast from "react-hot-toast";
 
 const AvatarUpload = ({
   onSave,
+  beforeUpload,
   url,
 }: {
   onSave: (_: any) => void;
   url: string;
+  beforeUpload: (_: any) => boolean;
 }) => {
   const [imageUrl, setImageUrl] = useState<string>();
   const [loading, setLoading] = useState(false);

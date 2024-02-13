@@ -19,6 +19,7 @@ import SlackMessage from "./SlackMessage";
 import TrelloNotification from "./TrelloNotification";
 // Types
 import { Attachment, InboxItem } from "@/types/inbox";
+import type { RcFile } from "antd/es/upload/interface";
 // APIs
 import {
   generateReply as generateReplyApi,
@@ -113,6 +114,14 @@ const InboxItemModal = ({
     } finally {
       setSendingReply(false);
     }
+  };
+
+  const beforeFileUpload = (file: RcFile) => {
+    const isFileSmallerThan30M = file.size / 1024 / 1024 < 30;
+    if (!isFileSmallerThan30M) {
+      toast.error("Image must smaller than 30MB!");
+    }
+    return isFileSmallerThan30M;
   };
 
   useEffect(() => {
@@ -289,6 +298,7 @@ const InboxItemModal = ({
               </Tooltip>
               {activeTab === "message" && (
                 <UploadButton
+                  beforeUpload={beforeFileUpload}
                   onSave={(data, fileName) => {
                     const fileIds = JSON.parse(data.results).file_ids;
                     setFileList((prevState) => [...prevState, ...fileIds]);

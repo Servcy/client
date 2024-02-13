@@ -17,6 +17,7 @@ import { normFile } from "@/utils/Shared/files";
 // Types
 import { Client } from "@/types/client";
 import { Project } from "@/types/projects";
+import type { RcFile } from "antd/es/upload/interface";
 
 const AddProject = ({
   isModalOpen,
@@ -108,6 +109,14 @@ const AddProject = ({
       });
   };
 
+  const beforeFileUpload = (file: RcFile) => {
+    const isFileSmallerThan30M = file.size / 1024 / 1024 < 30;
+    if (!isFileSmallerThan30M) {
+      toast.error("Image must smaller than 30MB!");
+    }
+    return isFileSmallerThan30M;
+  };
+
   return isAddClientModalOpen ? (
     <AddClient
       isModalOpen={isAddClientModalOpen}
@@ -196,6 +205,7 @@ const AddProject = ({
         </Form.Item>
         <Form.Item valuePropName="fileList" getValueFromEvent={normFile}>
           <DragDrop
+            beforeUpload={beforeFileUpload}
             onSave={(data, fileName) => {
               const fileIds = JSON.parse(data.results).file_ids;
               setFileList((prevState) => [...prevState, ...fileIds]);

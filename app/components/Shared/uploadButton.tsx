@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 const UploadButton = ({
   onSave,
+  beforeUpload,
   onRemove,
   showUploadList = true,
   setUploading,
@@ -12,6 +13,7 @@ const UploadButton = ({
 }: {
   showUploadList?: boolean;
   onSave: (_: any, __: string) => void;
+  beforeUpload: (_: any) => boolean;
   onRemove: (_: any) => void;
   setUploading: (_: boolean) => void;
   children: React.ReactNode;
@@ -19,6 +21,7 @@ const UploadButton = ({
   const props = {
     multiple: true,
     showUploadList,
+    beforeUpload,
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       const fmData = new FormData();
