@@ -71,7 +71,7 @@ const getSlackOauthUrl = (from: string) => {
     ],
     [
       "user_scope",
-      "channels:history,chat:write,files:read,groups:history,im:history,mpim:history,users:read",
+      "channels:history,chat:write,files:read,groups:history,im:history,mpim:history,users:read,files:write",
     ],
     ["state", from],
   ])}`;
