@@ -155,7 +155,7 @@ const InboxItemModal = ({
                   dangerouslySetInnerHTML={{
                     __html: body,
                   }}
-                  className="max-h-[600px] overflow-y-scroll p-1"
+                  className="max-h-[600px] min-h-48 overflow-y-scroll p-1"
                 />
                 {selectedRow.attachments !== "None" && (
                   <div className="mt-4 flex overflow-x-scroll bg-servcy-black p-4">
@@ -243,6 +243,14 @@ const InboxItemModal = ({
                   onClick={() => {
                     generateReply();
                   }}
+                ></Button>
+              </Tooltip>
+              <Tooltip title="Add an attachment">
+                <Button
+                  className="absolute bottom-8 right-12 ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
+                  icon={<HiPaperClip className="mt-1" />}
+                  shape="circle"
+                  type="primary"
                 ></Button>
               </Tooltip>
             </div>
