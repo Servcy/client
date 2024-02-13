@@ -14,6 +14,12 @@ export interface InboxItem {
   i_am_mentioned: boolean;
   user_integration_id: number;
   category: string;
+  attachments: Attachment[];
+}
+
+export interface Attachment {
+  name: string;
+  data: string; // bytes string or link
 }
 
 export interface PaginationDetails {
