@@ -8,13 +8,16 @@ const Dragger = Upload.Dragger;
 
 const DragDrop = ({
   onSave,
+  beforeUpload,
   onRemove,
 }: {
   onSave: (_: any, __: string) => void;
+  beforeUpload: (_: any) => boolean;
   onRemove: (_: any) => void;
 }) => {
   const props = {
     multiple: true,
+    beforeUpload,
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       const fmData = new FormData();

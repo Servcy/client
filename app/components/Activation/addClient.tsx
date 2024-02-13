@@ -17,6 +17,8 @@ import {
   validatePhone,
   validateWebUrl,
 } from "@/utils/Shared/validators";
+// Types
+import type { RcFile } from "antd/es/upload/interface";
 
 const AddClient = ({
   isModalOpen,
@@ -93,6 +95,26 @@ const AddClient = ({
       });
   };
 
+  const beforeAvatarUpload = (file: RcFile) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      toast.error("You can only upload JPG/PNG file!");
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      toast.error("Image must smaller than 2MB!");
+    }
+    return isJpgOrPng && isLt2M;
+  };
+
+  const beforeFileUpload = (file: RcFile) => {
+    const isFileSmallerThan30M = file.size / 1024 / 1024 < 30;
+    if (!isFileSmallerThan30M) {
+      toast.error("Image must smaller than 30MB!");
+    }
+    return isFileSmallerThan30M;
+  };
+
   return (
     <Modal
       title="Add New Client"
@@ -124,6 +146,7 @@ const AddClient = ({
           </div>
           <Form.Item label="Logo" className="w-1/3 flex-col">
             <AvatarUpload
+              beforeUpload={beforeAvatarUpload}
               url="/client/avatar"
               onSave={(data: any) => {
                 setAvatar(parseInt(JSON.parse(data.results).avatar_id));
@@ -165,6 +188,7 @@ const AddClient = ({
         </Form.Item>
         <Form.Item valuePropName="fileList" getValueFromEvent={normFile}>
           <DragDrop
+            beforeUpload={beforeFileUpload}
             onSave={(data, fileName) => {
               const fileIds = JSON.parse(data.results).file_ids;
               setFileList((prevState) => [...prevState, ...fileIds]);
