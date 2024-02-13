@@ -46,6 +46,12 @@ const InboxItemModal = ({
   if (selectedRow.is_body_html && selectedRow.cause !== "None") {
     body = DOMPurify.sanitize(body);
   }
+  if (
+    selectedRow.source === "Gmail" &&
+    selectedRow.cause !== "None" &&
+    body.includes("�")
+  )
+    body = selectedRow.body;
   const [isReplyBoxVisible, setIsReplyBoxVisible] = useState<boolean>(false);
   const [reply, setReply] = useState<string>("");
   const [generatingReply, setGeneratingReply] = useState<boolean>(false);
