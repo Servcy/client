@@ -6,7 +6,7 @@ import * as DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 // Compponents
 import UploadButton from "@/components/Shared/uploadButton";
-import { Button, Modal, Tooltip } from "antd";
+import { Button, Modal, Popover, Tooltip } from "antd";
 import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaReply } from "react-icons/fa";
 import { HiPaperClip } from "react-icons/hi";
@@ -63,6 +63,7 @@ const InboxItemModal = ({
   const [fileNameIdMap, setFileNameIdMap] = useState<Record<string, number>>(
     {}
   );
+  const [uploading, setUploading] = useState<boolean>(false);
   const [sendingReply, setSendingReply] = useState<boolean>(false);
 
   const generateReply = async () => {
@@ -129,6 +130,22 @@ const InboxItemModal = ({
     totalInboxItems,
     setIsInboxItemModalVisible,
   ]);
+
+  const content = (
+    <div>
+      {fileList.length !== 0 ? (
+        <ul>
+          {fileList.map((id) => (
+            <li key={id}>
+              <div></div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div>None added yet.</div>
+      )}
+    </div>
+  );
 
   return (
     <Modal
@@ -251,32 +268,41 @@ const InboxItemModal = ({
                 ></Button>
               </Tooltip>
               {activeTab === "message" && (
-                <Tooltip title="Add an attachment">
-                  <UploadButton
-                    onSave={(data, fileName) => {
-                      const fileIds = JSON.parse(data.results).file_ids;
-                      setFileList((prevState) => [...prevState, ...fileIds]);
-                      setFileNameIdMap((prevState) => ({
-                        ...prevState,
-                        [fileName]: fileIds[0],
-                      }));
-                    }}
-                    onRemove={(file: any) => {
-                      const fileName = file.name;
-                      const fileId = fileNameIdMap[fileName];
-                      setFileList((prevState) =>
-                        prevState.filter((id) => id !== fileId)
-                      );
-                    }}
+                <UploadButton
+                  onSave={(data, fileName) => {
+                    const fileIds = JSON.parse(data.results).file_ids;
+                    setFileList((prevState) => [...prevState, ...fileIds]);
+                    setFileNameIdMap((prevState) => ({
+                      ...prevState,
+                      [fileName]: fileIds[0],
+                    }));
+                  }}
+                  showUploadList={false}
+                  onRemove={(file: any) => {
+                    const fileName = file.name;
+                    const fileId = fileNameIdMap[fileName];
+                    setFileList((prevState) =>
+                      prevState.filter((id) => id !== fileId)
+                    );
+                  }}
+                  setUploading={setUploading}
+                >
+                  <Popover
+                    placement="leftBottom"
+                    title={<span>Attachments</span>}
+                    content={content}
                   >
-                    <Button
-                      className="absolute bottom-8 right-12 ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
-                      icon={<HiPaperClip className="mt-1" />}
-                      shape="circle"
-                      type="primary"
-                    ></Button>
-                  </UploadButton>
-                </Tooltip>
+                    <Tooltip title="Add an attachment" placement="bottom">
+                      <Button
+                        className="absolute bottom-8 right-12 ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
+                        icon={<HiPaperClip className="mt-1" />}
+                        shape="circle"
+                        type="primary"
+                        loading={uploading}
+                      ></Button>
+                    </Tooltip>
+                  </Popover>
+                </UploadButton>
               )}
             </div>
           )}
@@ -332,7 +358,7 @@ const InboxItemModal = ({
                 icon={<AiOutlineSend />}
                 shape="round"
                 type="primary"
-                loading={sendingReply}
+                loading={sendingReply || generatingReply || uploading}
                 disabled={reply.length === 0 || reply.length > 500}
                 onClick={() => {
                   sendReply();

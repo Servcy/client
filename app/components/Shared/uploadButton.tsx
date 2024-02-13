@@ -6,14 +6,19 @@ import toast from "react-hot-toast";
 const UploadButton = ({
   onSave,
   onRemove,
+  showUploadList = true,
+  setUploading,
   children,
 }: {
+  showUploadList?: boolean;
   onSave: (_: any, __: string) => void;
   onRemove: (_: any) => void;
+  setUploading: (_: boolean) => void;
   children: React.ReactNode;
 }) => {
   const props = {
     multiple: true,
+    showUploadList,
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       const fmData = new FormData();
@@ -26,6 +31,7 @@ const UploadButton = ({
       };
       fmData.append("file", file);
       try {
+        setUploading(true);
         const res = await axios.post(
           `${process.env["NEXT_PUBLIC_SERVER_URL"]}/document/upload`,
           fmData,
@@ -36,6 +42,8 @@ const UploadButton = ({
       } catch (err: any) {
         toast.error(err?.response?.data?.detail || "Some error occoured.");
         onError({ err: new Error("Some error") });
+      } finally {
+        setUploading(false);
       }
     },
     onChange(info: any) {
