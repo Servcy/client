@@ -242,7 +242,7 @@ export default function Gmail(): JSX.Element {
                     <item.Icon className="my-auto mr-2" />
                     {item.label}{" "}
                     {activeTab === item.key
-                      ? `(${inboxPagination.total_items})`
+                      ? `(${inboxPagination.total_items || "-"})`
                       : ""}
                   </div>
                 ),
