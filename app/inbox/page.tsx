@@ -154,6 +154,12 @@ export default function Gmail(): JSX.Element {
       }
     };
     fetchInboxItems();
+    const timeoutId = setTimeout(() => {
+      fetchInboxItems();
+    }, 30000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [page, filters, search, activeTab]);
 
   useEffect(() => {
@@ -162,16 +168,8 @@ export default function Gmail(): JSX.Element {
   }, [selectedRowIndex, inboxItems]);
 
   useEffect(() => {
-    const timeOut = setTimeout(() => {
-      refetchInboxItems();
-    }, 30000);
-    return () => {
-      console.info("clearing timeout", timeOut);
-      clearTimeout(timeOut);
-    };
-  });
-
-  useEffect(() => {
+    if (!("Notification" in window) || Notification.permission !== "granted")
+      return;
     const newInboxItemsInLast30Seconds = inboxItems.filter((item) => {
       return (
         new Date(item.created_at).getTime() > new Date().getTime() - 30000 &&
