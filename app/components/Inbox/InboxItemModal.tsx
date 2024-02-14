@@ -208,24 +208,25 @@ const InboxItemModal = ({
                   }}
                   className="max-h-[600px] min-h-48 overflow-y-scroll p-1"
                 />
-                {selectedRow.attachments !== "None" && (
-                  <div className="mt-4 flex overflow-x-scroll bg-servcy-black p-4">
-                    {JSON.parse(
-                      selectedRow.attachments.replaceAll("'", '"')
-                    ).map((attachment: Attachment) => (
-                      <button
-                        key={attachment.name}
-                        onClick={() => {
-                          saveByteArray(attachment.name, attachment.data);
-                        }}
-                        className="mr-2 flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
-                      >
-                        <HiPaperClip className="mr-1 inline" size="18" />
-                        <span className="truncate">{attachment.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {selectedRow.attachments !== "None" &&
+                  selectedRow.attachments !== "[]" && (
+                    <div className="mt-4 flex overflow-x-scroll bg-servcy-black p-4">
+                      {JSON.parse(
+                        selectedRow.attachments.replaceAll("'", '"')
+                      ).map((attachment: Attachment) => (
+                        <button
+                          key={attachment.name}
+                          onClick={() => {
+                            saveByteArray(attachment.name, attachment.data);
+                          }}
+                          className="mr-2 flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
+                        >
+                          <HiPaperClip className="mr-1 inline" size="18" />
+                          <span className="truncate">{attachment.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
               </>
             ) : selectedRow.source === "Notion" ? (
               <NotionComment
