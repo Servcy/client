@@ -1,4 +1,4 @@
-import { axiosGet, axiosPut } from "@/utils/Shared/axios";
+import { axiosGet, axiosPost, axiosPut } from "@/utils/Shared/axios";
 
 export const fetchIntegrations = async () => {
   const response = await axiosGet("/integration/fetch-integrations", {});
@@ -14,7 +14,7 @@ export const fetchUserIntegrations = async (integration_name: string) => {
 };
 
 export const disconnectUserIntegration = async (integration_id: string) => {
-  const response = await axiosPut("/integration/user-integration", {
+  const response = await axiosPost("/integration/user-integration", {
     integration_id,
   });
   return response.results;
@@ -35,8 +35,8 @@ export const configureUserIntegration = async (
   configuration: object,
   integration_name: string
 ) => {
-  const response = await axiosPut(
-    `/integration/user_integration/${id}?integration_name=${integration_name}`,
+  const response = await axiosPost(
+    `/integration/user-integration/${id}?integration_name=${integration_name}`,
     {
       configuration,
     }
@@ -50,7 +50,7 @@ export const integrationOauth = async (payload: object, slug: string) => {
 };
 
 export const enableIntegrationEvent = async (payload: object) => {
-  const response = await axiosPut(
+  const response = await axiosPost(
     "/integration/integration-event/enable-event",
     payload
   );
@@ -58,7 +58,7 @@ export const enableIntegrationEvent = async (payload: object) => {
 };
 
 export const disableIntegrationEvent = async (payload: object) => {
-  const response = await axiosPut(
+  const response = await axiosPost(
     "/integration/integration-event/disable-event",
     payload
   );
@@ -66,7 +66,7 @@ export const disableIntegrationEvent = async (payload: object) => {
 };
 
 export const disableNotificationType = async (payload: object) => {
-  const response = await axiosPut(
+  const response = await axiosPost(
     "/integration/integration-event/disable-such-notifications",
     payload
   );
