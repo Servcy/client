@@ -243,7 +243,8 @@ const InboxItems = ({
         }}
         pagination={{
           current: page,
-          pageSize: 10,
+          pageSizeOptions: ["50"],
+          pageSize: 50,
           total: inboxPagination.total_items,
           onChange: (page) => {
             setPage(page);
