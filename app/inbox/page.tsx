@@ -11,6 +11,7 @@ import {
   AiOutlineInbox,
   AiOutlineMessage,
   AiOutlineNotification,
+  AiOutlineRead,
   AiOutlineSync,
 } from "react-icons/ai";
 import { GoMention } from "react-icons/go";
@@ -40,6 +41,11 @@ const tabItems = [
     key: "notification",
     label: "Notifications",
     Icon: AiOutlineNotification,
+  },
+  {
+    key: "archived",
+    label: "Archived",
+    Icon: AiOutlineRead,
   },
 ];
 

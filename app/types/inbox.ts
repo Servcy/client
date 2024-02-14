@@ -15,6 +15,7 @@ export interface InboxItem {
   user_integration_id: number;
   category: string;
   attachments: string;
+  is_read: boolean;
 }
 
 export interface Attachment {

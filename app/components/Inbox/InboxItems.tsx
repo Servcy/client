@@ -1,5 +1,6 @@
 "use client";
 
+import cn from "classnames";
 // Types
 import { InboxItem, PaginationDetails } from "@/types/inbox";
 import type { ColumnsType } from "antd/es/table";
@@ -211,8 +212,10 @@ const InboxItems = ({
           type: "checkbox",
           ...rowSelection,
         }}
-        rowClassName={() => {
-          return "bg-servcy-black text-white rounded-tr";
+        rowClassName={(record) => {
+          return cn("bg-servcy-black text-white rounded-tr", {
+            "opacity-80": record.is_read,
+          });
         }}
         showHeader={false}
         loading={{
