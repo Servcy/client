@@ -4,6 +4,7 @@
 import { useRouter } from "next/navigation.js";
 // Components
 import { Button } from "antd";
+import { useEffect } from "react";
 import {
   AiOutlineHome,
   AiOutlineRightCircle,
@@ -22,6 +23,16 @@ const activationSteps = [
 
 export default function Index(): JSX.Element {
   const router = useRouter();
+
+  const requestNotificationPermission = async () => {
+    if (!("Notification" in window) || Notification.permission === "granted")
+      return;
+    await Notification.requestPermission();
+  };
+
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
 
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">

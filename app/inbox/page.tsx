@@ -171,6 +171,24 @@ export default function Gmail(): JSX.Element {
     };
   });
 
+  useEffect(() => {
+    const newInboxItemsInLast30Seconds = inboxItems.filter((item) => {
+      return (
+        new Date(item.created_at).getTime() > new Date().getTime() - 30000 &&
+        !item.is_read
+      );
+    }).length;
+    if (newInboxItemsInLast30Seconds > 0) {
+      const notification = new Notification("New Inbox Items", {
+        body: `You have ${newInboxItemsInLast30Seconds} new ${activeTab}`,
+        icon: "/favicon.ico",
+      });
+      notification.onclick = () => {
+        window.focus();
+      };
+    }
+  }, [inboxItems, activeTab]);
+
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
       <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
@@ -180,6 +198,7 @@ export default function Gmail(): JSX.Element {
           <Button
             onClick={refetchInboxItems}
             className="ml-auto h-full p-0 hover:!border-servcy-green hover:!text-servcy-green"
+            disabled={loading}
           >
             <AiOutlineSync
               className={cn("my-auto", {
