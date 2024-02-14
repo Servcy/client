@@ -30,7 +30,7 @@ export const sendReply = async (payload: object) => {
   return response;
 };
 
-export const hideSender = async (payload: object) => {
-  const response = await axiosPost("/inbox/hide-sender", payload);
+export const blockEmail = async (payload: object) => {
+  const response = await axiosPost("/inbox/block-email", payload);
   return response;
 };

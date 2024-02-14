@@ -21,7 +21,7 @@ import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import { MdOutlineBlock } from "react-icons/md";
 import Cause from "./Cause";
 // APIs
-import { hideSender } from "@/apis/inbox";
+import { blockEmail } from "@/apis/inbox";
 import { disableNotificationType } from "@/apis/integration";
 
 const InboxItems = ({
@@ -76,12 +76,12 @@ const InboxItems = ({
       });
   };
 
-  const hideSenderHandler = (cause: string) => {
+  const blockEmailHandler = (cause: string) => {
     try {
       let [name, email] = String(cause).split("<");
       email = String(email).replace(">", "").trim();
       name = String(name).replace(/"/g, "").trim();
-      hideSender({ email })
+      blockEmail({ email })
         .then(() => {
           toast.success("Email blocked successfully");
         })
@@ -218,7 +218,7 @@ const InboxItems = ({
                     size="small"
                     icon={<MdOutlineBlock className="mt-1" />}
                     onClick={() => {
-                      hideSenderHandler(record.cause);
+                      blockEmailHandler(record.cause);
                     }}
                   ></Button>
                 </Tooltip>
