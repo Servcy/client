@@ -20,6 +20,7 @@ import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import {
   archiveItems as archiveItemsApi,
   fetchInbox as fetchInboxApi,
+  readItem as readItemApi,
 } from "@/apis/inbox";
 // Types
 import { InboxItem, PaginationDetails } from "@/types/inbox";
@@ -62,7 +63,7 @@ export default function Gmail(): JSX.Element {
     category: "message",
   });
   const [search, setSearch] = useState<Record<string, string>>({});
-  const [selectedRowIndex, setSelectedRowIndex] = useState<number>(0);
+  const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
   const [isInboxItemModalVisible, setIsInboxItemModalVisible] =
     useState<boolean>(false);
   const [filterByIAmMentionedButtonText, setFilterByIAmMentionedButtonText] =
@@ -100,6 +101,25 @@ export default function Gmail(): JSX.Element {
     }
   };
 
+  const readItem = async (itemId: string | undefined) => {
+    try {
+      if (!itemId) return;
+      readItemApi({
+        item_id: Number.parseInt(itemId),
+      });
+      setInboxItems((prevState) => {
+        return prevState.map((item) => {
+          if (item.id === itemId.toString()) {
+            return { ...item, is_read: true };
+          }
+          return item;
+        });
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     const fetchInboxItems = async () => {
       try {
@@ -119,6 +139,11 @@ export default function Gmail(): JSX.Element {
     };
     fetchInboxItems();
   }, [page, filters, search, activeTab]);
+
+  useEffect(() => {
+    if (!inboxItems[selectedRowIndex]?.is_read)
+      readItem(inboxItems[selectedRowIndex]?.id);
+  }, [selectedRowIndex, inboxItems]);
 
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">

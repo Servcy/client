@@ -10,6 +10,11 @@ export const archiveItems = async (payload: object) => {
   return response;
 };
 
+export const readItem = async (payload: object) => {
+  const response = await axiosPost("/inbox/read", payload);
+  return response;
+};
+
 export const generateReply = async (payload: object) => {
   const response = await axiosPost("/inbox/assisstant/generate-reply", payload);
   return response;
