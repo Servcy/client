@@ -322,7 +322,6 @@ export default function Gmail(): JSX.Element {
                 children: (
                   <InboxItems
                     setPage={setPage}
-                    loading={loading}
                     page={page}
                     setFilters={setFilters}
                     inboxPagination={inboxPagination}

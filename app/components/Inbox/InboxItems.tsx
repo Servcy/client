@@ -6,16 +6,7 @@ import { InboxItem, PaginationDetails } from "@/types/inbox";
 import type { ColumnsType } from "antd/es/table";
 import React, { Dispatch, SetStateAction } from "react";
 // Compponents
-import { SyncOutlined } from "@ant-design/icons";
-import {
-  Avatar,
-  Button,
-  ConfigProvider,
-  Spin,
-  Table,
-  Tag,
-  Tooltip,
-} from "antd";
+import { Avatar, Button, ConfigProvider, Table, Tag, Tooltip } from "antd";
 import toast from "react-hot-toast";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import { MdOutlineBlock } from "react-icons/md";
@@ -26,7 +17,6 @@ import { disableNotificationType } from "@/apis/integration";
 const InboxItems = ({
   setPage,
   page,
-  loading,
   inboxItems,
   inboxPagination,
   setFilters,
@@ -39,7 +29,6 @@ const InboxItems = ({
 }: {
   setPage: Dispatch<SetStateAction<number>>;
   page: number;
-  loading: boolean;
   inboxItems: InboxItem[];
   inboxPagination: PaginationDetails;
   activeTab: string;
@@ -224,23 +213,6 @@ const InboxItems = ({
           });
         }}
         showHeader={false}
-        loading={{
-          spinning: loading,
-          indicator: (
-            <Spin
-              className="m-auto"
-              size="large"
-              indicator={
-                <SyncOutlined
-                  spin
-                  style={{
-                    color: "#26542F",
-                  }}
-                />
-              }
-            />
-          ),
-        }}
         pagination={{
           current: page,
           pageSizeOptions: ["50"],
