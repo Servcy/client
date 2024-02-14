@@ -32,6 +32,7 @@ const InboxItems = ({
   setFilters,
   archiveItems,
   setSelectedRowIndex,
+  deleteItem,
   setIsInboxItemModalVisible,
   setSelectedItemIds,
   activeTab,
@@ -43,6 +44,7 @@ const InboxItems = ({
   inboxPagination: PaginationDetails;
   activeTab: string;
   archiveItems: (_: React.Key[]) => void;
+  deleteItem: (_: number) => void;
   setFilters: Dispatch<SetStateAction<Record<string, string | boolean>>>;
   setSearch: Dispatch<SetStateAction<Record<string, string>>>;
   setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>;
@@ -157,13 +159,17 @@ const InboxItems = ({
       render: (id, record) => {
         return (
           <>
-            <Tooltip title="Mark Read">
+            <Tooltip title={activeTab === "archived" ? "Delete" : "Archive"}>
               <Button
                 type="primary"
-                className="bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
+                className={cn("bg-servcy-cream text-servcy-black", {
+                  "hover:!bg-servcy-wheat": activeTab !== "archived",
+                  "hover:!bg-rose-600": activeTab === "archived",
+                })}
                 size="small"
                 onClick={() => {
-                  archiveItems([parseInt(id)]);
+                  if (activeTab !== "archived") archiveItems([parseInt(id)]);
+                  else deleteItem(parseInt(id));
                 }}
                 icon={<HiArchiveBoxArrowDown className="mt-1" />}
               ></Button>

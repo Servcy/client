@@ -19,6 +19,7 @@ import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 // APIs
 import {
   archiveItems as archiveItemsApi,
+  deleteItem as deleteItemApi,
   fetchInbox as fetchInboxApi,
   readItem as readItemApi,
 } from "@/apis/inbox";
@@ -113,6 +114,21 @@ export default function Gmail(): JSX.Element {
             return { ...item, is_read: true };
           }
           return item;
+        });
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const deleteItem = async (itemId: number) => {
+    try {
+      deleteItemApi({
+        item_id: itemId,
+      });
+      setInboxItems((prevState) => {
+        return prevState.filter((item) => {
+          return item.id !== itemId.toString();
         });
       });
     } catch (err) {
@@ -217,7 +233,7 @@ export default function Gmail(): JSX.Element {
                   }
                   icon={<HiArchiveBoxArrowDown />}
                 >
-                  <span>Read All ({inboxItems.length})</span>
+                  <span>Archive All ({inboxItems.length})</span>
                 </Button>
                 <Button
                   className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
@@ -231,7 +247,7 @@ export default function Gmail(): JSX.Element {
                   }
                   icon={<HiArchiveBoxArrowDown />}
                 >
-                  <span>Read Selected</span>
+                  <span>Archive Selected</span>
                 </Button>
                 <Select
                   placeholder="Filter By Source"
@@ -291,6 +307,7 @@ export default function Gmail(): JSX.Element {
                     archiveItems={archiveItems}
                     inboxItems={inboxItems}
                     activeTab={activeTab}
+                    deleteItem={deleteItem}
                     setSelectedItemIds={setSelectedItemIds}
                   />
                 ),
