@@ -21,6 +21,7 @@ import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import { MdOutlineBlock } from "react-icons/md";
 import Cause from "./Cause";
 // APIs
+import { hideSender } from "@/apis/inbox";
 import { disableNotificationType } from "@/apis/integration";
 
 const InboxItems = ({
@@ -72,6 +73,16 @@ const InboxItems = ({
       })
       .catch(() => {
         toast.error("Error in disabling notification type");
+      });
+  };
+
+  const hideSenderHandler = (payload: object) => {
+    hideSender(payload)
+      .then(() => {
+        toast.success("Sender hidden successfully");
+      })
+      .catch(() => {
+        toast.error("Error in hiding sender");
       });
   };
 
@@ -159,7 +170,7 @@ const InboxItems = ({
       width: 100,
       render: (id, record) => {
         return (
-          <>
+          <div className="flex gap-1">
             <Tooltip title={activeTab === "archived" ? "Delete" : "Archive"}>
               <Button
                 type="primary"
@@ -179,7 +190,7 @@ const InboxItems = ({
               <Tooltip title="Disable these type of notifications">
                 <Button
                   type="primary"
-                  className="ml-2 bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
+                  className="bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
                   size="small"
                   icon={<MdOutlineBlock className="mt-1" />}
                   onClick={() => {
@@ -191,7 +202,20 @@ const InboxItems = ({
                 ></Button>
               </Tooltip>
             )}
-          </>
+            {activeTab === "message" && (
+              <Tooltip title="Hide messages from this sender">
+                <Button
+                  type="primary"
+                  className="bg-servcy-cream text-servcy-black hover:!bg-rose-600"
+                  size="small"
+                  icon={<MdOutlineBlock className="mt-1" />}
+                  onClick={() => {
+                    hideSenderHandler({ item_id: record.id });
+                  }}
+                ></Button>
+              </Tooltip>
+            )}
+          </div>
         );
       },
     },
