@@ -6,7 +6,16 @@ import { InboxItem, PaginationDetails } from "@/types/inbox";
 import type { ColumnsType } from "antd/es/table";
 import React, { Dispatch, SetStateAction } from "react";
 // Compponents
-import { Avatar, Button, ConfigProvider, Table, Tag, Tooltip } from "antd";
+import { SyncOutlined } from "@ant-design/icons";
+import {
+  Avatar,
+  Button,
+  ConfigProvider,
+  Spin,
+  Table,
+  Tag,
+  Tooltip,
+} from "antd";
 import toast from "react-hot-toast";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import { MdOutlineBlock } from "react-icons/md";
@@ -22,6 +31,7 @@ const InboxItems = ({
   setFilters,
   archiveItems,
   setSelectedRowIndex,
+  loading,
   deleteItems,
   setIsInboxItemModalVisible,
   setSelectedItemIds,
@@ -31,6 +41,8 @@ const InboxItems = ({
   page: number;
   inboxItems: InboxItem[];
   inboxPagination: PaginationDetails;
+  loading: boolean;
+
   activeTab: string;
   archiveItems: (_: React.Key[]) => void;
   deleteItems: (_: number[]) => void;
@@ -206,6 +218,23 @@ const InboxItems = ({
         rowSelection={{
           type: "checkbox",
           ...rowSelection,
+        }}
+        loading={{
+          spinning: loading,
+          indicator: (
+            <Spin
+              className="m-auto"
+              size="large"
+              indicator={
+                <SyncOutlined
+                  spin
+                  style={{
+                    color: "#26542F",
+                  }}
+                />
+              }
+            />
+          ),
         }}
         rowClassName={(record) => {
           return cn("bg-servcy-black text-white rounded-tr", {

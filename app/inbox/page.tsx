@@ -348,6 +348,7 @@ export default function Gmail(): JSX.Element {
                     archiveItems={archiveItems}
                     inboxItems={inboxItems}
                     activeTab={activeTab}
+                    loading={loading}
                     deleteItems={deleteItems}
                     setSelectedItemIds={setSelectedItemIds}
                   />
