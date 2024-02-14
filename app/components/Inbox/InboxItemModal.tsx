@@ -3,7 +3,7 @@
 // dependencies
 import cn from "classnames";
 import * as DOMPurify from "dompurify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // Compponents
 import UploadButton from "@/components/Shared/uploadButton";
 import { Button, Modal, Popover, Tooltip } from "antd";
@@ -123,29 +123,6 @@ const InboxItemModal = ({
     }
     return isFileSmallerThan30M;
   };
-
-  useEffect(() => {
-    const handleArrowRight = () => {
-      if (selectedRowIndex < totalInboxItems - 1)
-        setSelectedRowIndex(selectedRowIndex + 1);
-    };
-    const handleArrowLeft = () => {
-      if (selectedRowIndex > 0) setSelectedRowIndex(selectedRowIndex - 1);
-    };
-    const handleKeydown = (e: KeyboardEvent) => {
-      // move to next item on right arrow key press
-      if (e.key === "ArrowRight") handleArrowRight();
-      // move to previous item on left arrow key press
-      else if (e.key === "ArrowLeft") handleArrowLeft();
-    };
-    document.addEventListener("keydown", handleKeydown);
-    return () => document.removeEventListener("keydown", handleKeydown);
-  }, [
-    selectedRowIndex,
-    setSelectedRowIndex,
-    totalInboxItems,
-    setIsInboxItemModalVisible,
-  ]);
 
   const content = (
     <div>
