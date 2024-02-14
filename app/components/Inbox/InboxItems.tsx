@@ -76,14 +76,21 @@ const InboxItems = ({
       });
   };
 
-  const hideSenderHandler = (payload: object) => {
-    hideSender(payload)
-      .then(() => {
-        toast.success("Sender hidden successfully");
-      })
-      .catch(() => {
-        toast.error("Error in hiding sender");
-      });
+  const hideSenderHandler = (cause: string) => {
+    try {
+      let [name, email] = String(cause).split("<");
+      email = String(email).replace(">", "").trim();
+      name = String(name).replace(/"/g, "").trim();
+      hideSender({ email })
+        .then(() => {
+          toast.success("Email blocked successfully");
+        })
+        .catch(() => {
+          toast.error("Error while blocking email");
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const columns: ColumnsType<InboxItem> = [
@@ -202,19 +209,20 @@ const InboxItems = ({
                 ></Button>
               </Tooltip>
             )}
-            {activeTab === "message" && (
-              <Tooltip title="Hide messages from this sender">
-                <Button
-                  type="primary"
-                  className="bg-servcy-cream text-servcy-black hover:!bg-rose-600"
-                  size="small"
-                  icon={<MdOutlineBlock className="mt-1" />}
-                  onClick={() => {
-                    hideSenderHandler({ item_id: record.id });
-                  }}
-                ></Button>
-              </Tooltip>
-            )}
+            {activeTab === "message" &&
+              ["Gmail", "Outlook"].includes(record.source) && (
+                <Tooltip title="Hide messages from this email">
+                  <Button
+                    type="primary"
+                    className="bg-servcy-cream text-servcy-black hover:!bg-rose-600"
+                    size="small"
+                    icon={<MdOutlineBlock className="mt-1" />}
+                    onClick={() => {
+                      hideSenderHandler(record.cause);
+                    }}
+                  ></Button>
+                </Tooltip>
+              )}
           </div>
         );
       },
