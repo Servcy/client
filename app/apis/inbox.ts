@@ -15,7 +15,7 @@ export const readItem = async (payload: object) => {
   return response;
 };
 
-export const deleteItem = async (payload: object) => {
+export const deleteItems = async (payload: object) => {
   const response = await axiosPost("/inbox/delete", payload);
   return response;
 };

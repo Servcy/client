@@ -32,7 +32,7 @@ const InboxItems = ({
   setFilters,
   archiveItems,
   setSelectedRowIndex,
-  deleteItem,
+  deleteItems,
   setIsInboxItemModalVisible,
   setSelectedItemIds,
   activeTab,
@@ -44,7 +44,7 @@ const InboxItems = ({
   inboxPagination: PaginationDetails;
   activeTab: string;
   archiveItems: (_: React.Key[]) => void;
-  deleteItem: (_: number) => void;
+  deleteItems: (_: number[]) => void;
   setFilters: Dispatch<SetStateAction<Record<string, string | boolean>>>;
   setSearch: Dispatch<SetStateAction<Record<string, string>>>;
   setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>;
@@ -169,7 +169,7 @@ const InboxItems = ({
                 size="small"
                 onClick={() => {
                   if (activeTab !== "archived") archiveItems([parseInt(id)]);
-                  else deleteItem(parseInt(id));
+                  else deleteItems([parseInt(id)]);
                 }}
                 icon={<HiArchiveBoxArrowDown className="mt-1" />}
               ></Button>

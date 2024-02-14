@@ -19,7 +19,7 @@ import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 // APIs
 import {
   archiveItems as archiveItemsApi,
-  deleteItem as deleteItemApi,
+  deleteItems as deleteItemsApi,
   fetchInbox as fetchInboxApi,
   readItem as readItemApi,
 } from "@/apis/inbox";
@@ -121,14 +121,14 @@ export default function Gmail(): JSX.Element {
     }
   };
 
-  const deleteItem = async (itemId: number) => {
+  const deleteItems = async (itemIds: number[]) => {
     try {
-      deleteItemApi({
-        item_id: itemId,
+      deleteItemsApi({
+        item_ids: itemIds,
       });
       setInboxItems((prevState) => {
         return prevState.filter((item) => {
-          return item.id !== itemId.toString();
+          return !itemIds.includes(parseInt(item.id));
         });
       });
     } catch (err) {
@@ -228,26 +228,41 @@ export default function Gmail(): JSX.Element {
                 <Button
                   className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
                   disabled={inboxItems.length === 0}
-                  onClick={() =>
-                    archiveItems(inboxItems.map((item) => parseInt(item.id)))
-                  }
+                  onClick={() => {
+                    if (activeTab !== "archived")
+                      archiveItems(inboxItems.map((item) => parseInt(item.id)));
+                    else
+                      deleteItems(inboxItems.map((item) => parseInt(item.id)));
+                  }}
                   icon={<HiArchiveBoxArrowDown />}
                 >
-                  <span>Archive All ({inboxItems.length})</span>
+                  <span>
+                    {activeTab === "archived" ? "Delete" : "Archive"} All (
+                    {inboxItems.length})
+                  </span>
                 </Button>
                 <Button
                   className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
                   disabled={selectedItemIds.length === 0}
-                  onClick={() =>
-                    archiveItems(
-                      selectedItemIds.map((item_id) =>
-                        parseInt(item_id.toString())
-                      )
-                    )
-                  }
+                  onClick={() => {
+                    if (activeTab !== "archived")
+                      archiveItems(
+                        selectedItemIds.map((item_id) =>
+                          parseInt(item_id.toString())
+                        )
+                      );
+                    else
+                      deleteItems(
+                        selectedItemIds.map((item_id) =>
+                          parseInt(item_id.toString())
+                        )
+                      );
+                  }}
                   icon={<HiArchiveBoxArrowDown />}
                 >
-                  <span>Archive Selected</span>
+                  <span>
+                    {activeTab === "archived" ? "Delete" : "Archive"} Selected
+                  </span>
                 </Button>
                 <Select
                   placeholder="Filter By Source"
@@ -307,7 +322,7 @@ export default function Gmail(): JSX.Element {
                     archiveItems={archiveItems}
                     inboxItems={inboxItems}
                     activeTab={activeTab}
-                    deleteItem={deleteItem}
+                    deleteItems={deleteItems}
                     setSelectedItemIds={setSelectedItemIds}
                   />
                 ),
