@@ -209,7 +209,7 @@ const InboxItems = ({
         }}
         rowClassName={(record) => {
           return cn("bg-servcy-black text-white rounded-tr", {
-            "opacity-80": record.is_read,
+            "opacity-80": !record.is_read,
           });
         }}
         showHeader={false}
