@@ -26,7 +26,7 @@ import {
 // Types
 import { InboxItem, PaginationDetails } from "@/types/inbox";
 // constants
-import { integrationCategories } from "@/constants/integrations";
+import { integrationInboxCategories } from "@/constants/integrations";
 
 const tabItems = [
   {
@@ -305,14 +305,11 @@ export default function Gmail(): JSX.Element {
                       return { ...prevState, source: value };
                     });
                   }}
-                  options={Object.keys(integrationCategories).map(
-                    (key: string) => {
-                      return {
-                        label: key,
-                        value: key,
-                      };
-                    }
-                  )}
+                  options={Object.entries(integrationInboxCategories)
+                    .filter(([_, value]) => value.includes(activeTab))
+                    .map(([key, _]) => {
+                      return { label: key, value: key };
+                    })}
                 />
               </div>
             }
