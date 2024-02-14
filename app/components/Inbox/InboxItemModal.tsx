@@ -27,7 +27,7 @@ import {
 } from "@/apis/inbox";
 import { toast } from "react-hot-toast";
 // Utils
-import { saveByteArray } from "@/utils/Shared/files";
+import { downloadFile } from "@/utils/Shared/files";
 import { BiSolidTrash } from "react-icons/bi";
 
 const InboxItemModal = ({
@@ -217,7 +217,7 @@ const InboxItemModal = ({
                         <button
                           key={attachment.name}
                           onClick={() => {
-                            saveByteArray(attachment.name, attachment.data);
+                            downloadFile(attachment.name, attachment.data);
                           }}
                           className="mr-2 flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
                         >
