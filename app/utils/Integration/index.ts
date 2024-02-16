@@ -126,7 +126,7 @@ const getTrelloOauthUrl = (from: string) => {
   ])}`;
 };
 
-const getAtlassianOauthUrl = (from: string) => {
+const getJiraOauthUrl = (from: string) => {
   return `https://auth.atlassian.com/authorize?${new URLSearchParams([
     ["audience", "api.atlassian.com"],
     ["client_id", process.env["NEXT_PUBLIC_ATLASSIAN_CLIENT_ID"] ?? ""],
@@ -138,13 +138,6 @@ const getAtlassianOauthUrl = (from: string) => {
       "scope",
       [
         "read:me",
-        "write:confluence-content",
-        "read:confluence-space.summary",
-        "write:confluence-file",
-        "read:confluence-content.all",
-        "read:confluence-content.summary",
-        "search:confluence",
-        "readonly:content.attachment:confluence",
         "read:jira-work",
         "write:jira-work",
         "manage:jira-webhook",
@@ -164,6 +157,6 @@ export const oauthUrlGenerators: Record<string, Function> = {
   Github: getGithubOauthUrl,
   Asana: getAsanaOauthUrl,
   Figma: getFigmaOauthUrl,
-  Atlassian: getAtlassianOauthUrl,
+  Jira: getJiraOauthUrl,
   Trello: getTrelloOauthUrl,
 };

@@ -18,7 +18,7 @@ export const integrationInboxCategories: Record<string, string[]> = {
   Figma: ["archived", "comment", "notification"],
   Asana: ["archived", "comment", "notification"],
   Trello: ["archived", "comment", "notification"],
-  Atlassian: ["archived", "comment", "notification"],
+  Jira: ["archived", "comment", "notification"],
 };
 
 export const uniqueIntegrationCategories = [
