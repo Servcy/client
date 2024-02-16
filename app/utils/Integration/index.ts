@@ -132,7 +132,7 @@ const getJiraOauthUrl = (from: string) => {
     ["client_id", process.env["NEXT_PUBLIC_JIRA_CLIENT_ID"] ?? ""],
     [
       "redirect_uri",
-      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/atlassian/oauth`,
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/jira/oauth`,
     ],
     [
       "scope",
