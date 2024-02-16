@@ -141,6 +141,7 @@ const getJiraOauthUrl = (from: string) => {
         "read:jira-work",
         "write:jira-work",
         "manage:jira-webhook",
+        "offline_access",
       ].join(" "),
     ],
     ["state", from],
