@@ -129,7 +129,7 @@ const getTrelloOauthUrl = (from: string) => {
 const getJiraOauthUrl = (from: string) => {
   return `https://auth.atlassian.com/authorize?${new URLSearchParams([
     ["audience", "api.atlassian.com"],
-    ["client_id", process.env["NEXT_PUBLIC_ATLASSIAN_CLIENT_ID"] ?? ""],
+    ["client_id", process.env["NEXT_PUBLIC_JIRA_CLIENT_ID"] ?? ""],
     [
       "redirect_uri",
       `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/atlassian/oauth`,
