@@ -126,17 +126,29 @@ const getTrelloOauthUrl = (from: string) => {
   ])}`;
 };
 
-const getJiraOauthUrl = (from: string) => {
+const getAtlassianOauthUrl = (from: string) => {
   return `https://auth.atlassian.com/authorize?${new URLSearchParams([
     ["audience", "api.atlassian.com"],
-    ["client_id", process.env["NEXT_PUBLIC_JIRA_CLIENT_ID"] ?? ""],
+    ["client_id", process.env["NEXT_PUBLIC_ATLASSIAN_CLIENT_ID"] ?? ""],
     [
       "redirect_uri",
-      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/jira/oauth`,
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/atlassian/oauth`,
     ],
     [
       "scope",
-      "read:me read:account read:jira-work read:jira-user write:jira-work manage:jira-webhook",
+      [
+        "read:me",
+        "write:confluence-content",
+        "read:confluence-space.summary",
+        "write:confluence-file",
+        "read:confluence-content.all",
+        "read:confluence-content.summary",
+        "search:confluence",
+        "readonly:content.attachment:confluence",
+        "read:jira-work",
+        "write:jira-work",
+        "manage:jira-webhook",
+      ].join(" "),
     ],
     ["state", from],
     ["response_type", "code"],
@@ -152,6 +164,6 @@ export const oauthUrlGenerators: Record<string, Function> = {
   Github: getGithubOauthUrl,
   Asana: getAsanaOauthUrl,
   Figma: getFigmaOauthUrl,
-  Jira: getJiraOauthUrl,
+  Atlassian: getAtlassianOauthUrl,
   Trello: getTrelloOauthUrl,
 };
