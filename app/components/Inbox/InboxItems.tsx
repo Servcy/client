@@ -59,7 +59,6 @@ const InboxItems = ({
       setSelectedItemIds(selectedRowKeys);
     },
     getCheckboxProps: (record: InboxItem) => ({
-      disabled: record.is_archived,
       name: record.id,
     }),
   };
@@ -105,7 +104,7 @@ const InboxItems = ({
             onClick={() => {
               setSelectedRowIndex(index);
               setIsInboxItemModalVisible(true);
-              readItem(row.id);
+              !row.is_read && readItem(row.id);
             }}
           >
             {title}

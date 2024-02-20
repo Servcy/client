@@ -327,7 +327,7 @@ const InboxItemModal = ({
               onClick={() => {
                 selectedRowIndex > 0 &&
                   setSelectedRowIndex(selectedRowIndex - 1);
-                readItem(selectedRow.id);
+                !selectedRow.is_read && readItem(selectedRow.id);
               }}
               disabled={selectedRowIndex === 0}
               shape="circle"
@@ -338,7 +338,7 @@ const InboxItemModal = ({
               onClick={() => {
                 selectedRowIndex < totalInboxItems - 1 &&
                   setSelectedRowIndex(selectedRowIndex + 1);
-                readItem(selectedRow.id);
+                !selectedRow.is_read && readItem(selectedRow.id);
               }}
               disabled={selectedRowIndex === totalInboxItems - 1}
               icon={<FaAngleDoubleRight className="mt-1" />}
