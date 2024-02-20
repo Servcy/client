@@ -36,14 +36,15 @@ const InboxItems = ({
   deleteItems,
   setIsInboxItemModalVisible,
   setSelectedItemIds,
+  readItem,
   activeTab,
 }: {
   setPage: Dispatch<SetStateAction<number>>;
   page: number;
+  readItem: (id: string | undefined) => void;
   inboxItems: InboxItem[];
   inboxPagination: PaginationDetails;
   loading: boolean;
-
   activeTab: string;
   archiveItems: (_: React.Key[]) => void;
   deleteItems: (_: number[]) => void;
@@ -97,13 +98,14 @@ const InboxItems = ({
     {
       dataIndex: "title",
       title: "Title",
-      render: (title, _, index) => {
+      render: (title, row, index) => {
         return (
           <button
             className="cursor-pointer text-left"
             onClick={() => {
               setSelectedRowIndex(index);
               setIsInboxItemModalVisible(true);
+              readItem(row.id);
             }}
           >
             {title}

@@ -163,11 +163,6 @@ export default function Gmail(): JSX.Element {
   }, [page, filters, search, activeTab]);
 
   useEffect(() => {
-    if (!inboxItems[selectedRowIndex]?.is_read)
-      readItem(inboxItems[selectedRowIndex]?.id);
-  }, [selectedRowIndex, inboxItems]);
-
-  useEffect(() => {
     if (!("Notification" in window) || Notification.permission !== "granted")
       return;
     const newInboxItemsInLast30Seconds = inboxItems.filter((item) => {
@@ -344,6 +339,7 @@ export default function Gmail(): JSX.Element {
                     setIsInboxItemModalVisible={setIsInboxItemModalVisible}
                     archiveItems={archiveItems}
                     inboxItems={inboxItems}
+                    readItem={readItem}
                     activeTab={activeTab}
                     loading={loading}
                     deleteItems={deleteItems}
@@ -360,6 +356,7 @@ export default function Gmail(): JSX.Element {
           selectedRow={inboxItems[selectedRowIndex] ?? ({} as InboxItem)}
           setIsInboxItemModalVisible={setIsInboxItemModalVisible}
           selectedRowIndex={selectedRowIndex}
+          readItem={readItem}
           setSelectedRowIndex={setSelectedRowIndex}
           totalInboxItems={inboxItems.length}
           activeTab={activeTab}

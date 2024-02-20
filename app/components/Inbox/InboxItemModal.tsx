@@ -36,6 +36,7 @@ const InboxItemModal = ({
   selectedRowIndex,
   setSelectedRowIndex,
   totalInboxItems,
+  readItem,
   activeTab,
 }: {
   selectedRow: InboxItem;
@@ -43,6 +44,7 @@ const InboxItemModal = ({
   selectedRowIndex: number;
   setSelectedRowIndex: (value: number) => void;
   totalInboxItems: number;
+  readItem: (id: string | undefined) => void;
   activeTab: string;
 }) => {
   let body = selectedRow.body;
@@ -322,20 +324,22 @@ const InboxItemModal = ({
           <div className="flex">
             <Button
               className="mr-2 text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
-              onClick={() =>
+              onClick={() => {
                 selectedRowIndex > 0 &&
-                setSelectedRowIndex(selectedRowIndex - 1)
-              }
+                  setSelectedRowIndex(selectedRowIndex - 1);
+                readItem(selectedRow.id);
+              }}
               disabled={selectedRowIndex === 0}
               shape="circle"
               icon={<FaAngleDoubleLeft className="mt-1" />}
             />
             <Button
               className="text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
-              onClick={() =>
+              onClick={() => {
                 selectedRowIndex < totalInboxItems - 1 &&
-                setSelectedRowIndex(selectedRowIndex + 1)
-              }
+                  setSelectedRowIndex(selectedRowIndex + 1);
+                readItem(selectedRow.id);
+              }}
               disabled={selectedRowIndex === totalInboxItems - 1}
               icon={<FaAngleDoubleRight className="mt-1" />}
               shape="circle"
