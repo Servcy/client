@@ -215,6 +215,16 @@ export default function Login(): JSX.Element {
                 <GoogleLogin
                   onSuccess={(credentialResponse) => {
                     const { credential } = credentialResponse;
+                    const agree_terms_conditions_and_privacy_policy =
+                      document.getElementById(
+                        "agree_terms_conditions_and_privacy_policy"
+                      ) as HTMLInputElement;
+                    if (!agree_terms_conditions_and_privacy_policy.checked) {
+                      toast.error(
+                        "Please agree to our privacy policy and TOS by checking the checkbox"
+                      );
+                      return;
+                    }
                     if (credential) googleLogin(credential);
                     else toast.error("Failed to login with Google");
                   }}
