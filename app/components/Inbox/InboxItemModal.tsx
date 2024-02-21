@@ -256,13 +256,13 @@ const InboxItemModal = ({
                 placeholder="Write a reply..."
                 onChange={(e) => setReply(e.target.value)}
                 value={reply}
-                maxLength={500}
+                maxLength={5000}
                 disabled={generatingReply}
                 id="replyBox"
               />
               <div className="absolute bottom-2 right-2 float-right text-xs">
                 <span id="current">{reply.length}</span>
-                <span id="maximum">/ 500</span>
+                <span id="maximum">/ 5000</span>
               </div>
               <Tooltip title="Generate a reply using AI">
                 <Button
@@ -375,7 +375,7 @@ const InboxItemModal = ({
                 loading={sendingReply}
                 disabled={
                   reply.length === 0 ||
-                  reply.length > 500 ||
+                  reply.length > 5000 ||
                   generatingReply ||
                   uploading
                 }
