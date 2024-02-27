@@ -1,39 +1,48 @@
 # Servcy - One For All Platform
 
+[Servcy](https://servcy.com) is an open-source software tool kit for all your business needs. We're going on an Open Source spree of creating business solutions.
+
+> Servcy is still in its early days, not everything will be perfect yet, and hiccups may happen. Please let us know of any suggestions, ideas, or bugs that you encounter using GitHub issues, and we will use your feedback to improve on our upcoming releases.
+
+The easiest way to get started with Servcy is by creating a [Servcy Cloud](https://web.servcy.com) account. Servcy Cloud offers a hosted solution for Servcy. If you prefer to self-host Servcy for your personal use, you're free to do so.
+
 ## Getting started
 
-This client requires [`Node.js`](https://nodejs.org).
+### Prerequisite
 
-If you don't already have `npm` and `yarn` available, make sure you set them up.
+- [`Node.js`](https://nodejs.org)
+
+### Installing Dependencies
 
 ```bash
 npm i -g npm yarn
-```
-
-Install the dependencies:
-
-```bash
 yarn install
 ```
 
-### Please make sure that you've populated values for environment variables using .env-example
-
-Now you can run the development server:
+### Running server
 
 ```bash
 yarn dev
 ```
 
+#### Refer Next.js ['Docs'](https://nextjs.org/docs)
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Refer Next.js ['Docs'](https://nextjs.org/docs)
+You are ready to make changes to the code. Do not forget to refresh the browser (in case it does not auto-reload)
 
-## Supported Integrations
+That's it!
 
-1. Google
-2. Microsoft
-3. Github
-4. Notion
-5. Slack
-6. Figma
-7. Asana
+## 📚Documentation
+
+To see how to Contribute, visit [here](/CONTRIBUTING.md)
+
+## ❤️ Community
+
+The Servcy community can be found on GitHub Discussions, where you can ask questions, voice ideas, and share your projects.
+
+Our [Code of Conduct](./CODE_OF_CONDUCT.md) applies to all Servcy community channels.
+
+## ⛓️ Security
+
+If you believe you have found a security vulnerability in Servcy, we encourage you to responsibly disclose this and not open a public issue. We will investigate all legitimate reports. Email [contact@servcy.com](mailto:contact@servcy.com) to disclose any security vulnerabilities.
