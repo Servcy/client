@@ -85,7 +85,7 @@ export default function FigmaConfiguration({
             height={40}
             alt="Figma Logo"
           />
-          <MdOutlineSyncAlt className="my-auto mx-2" color="grey" size={20} />
+          <MdOutlineSyncAlt className="mx-2 my-auto" color="grey" size={20} />
           <Image
             className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray p-1"
             src="https://servcy-public.s3.amazonaws.com/logo.svg"
@@ -96,7 +96,7 @@ export default function FigmaConfiguration({
           <div className="my-auto">Figma Integration Setup</div>
         </div>
         {loading ? (
-          <div className="mt-8 ml-auto mb-2.5 h-5 animate-pulse rounded-full bg-servcy-white"></div>
+          <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-servcy-white"></div>
         ) : (
           <Select
             className="mt-8 w-full"
