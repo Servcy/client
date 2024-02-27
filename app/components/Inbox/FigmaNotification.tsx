@@ -1,49 +1,7 @@
 "use client";
 
+import type { Comment, FigmaNotificationProps, Mention } from "@/types/figma";
 import { HiExternalLink } from "react-icons/hi";
-
-interface Mention {
-  id: string;
-  handle: string;
-}
-
-interface Comment {
-  text?: string;
-  mention?: string;
-}
-
-interface FigmaNotificationProps {
-  event_type: string;
-  file_key: string;
-  timestamp: string;
-  created_components?: {
-    key: string;
-    name: string;
-  }[];
-  created_styles?: {
-    key: string;
-    name: string;
-  }[];
-  deleted_components?: {
-    key: string;
-    name: string;
-  }[];
-  deleted_styles?: {
-    key: string;
-    name: string;
-  }[];
-  description?: string;
-  modified_components?: {
-    key: string;
-    name: string;
-  }[];
-  modified_styles?: {
-    key: string;
-    name: string;
-  }[];
-  comment?: Comment[];
-  mentions?: Mention[];
-}
 
 const FigmaNotification = ({
   data,

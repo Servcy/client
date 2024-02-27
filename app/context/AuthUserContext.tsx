@@ -1,11 +1,10 @@
 "use client";
 
+import type { AuthUserContextProps } from "@/types/authUser";
 import type { PropsWithChildren } from "react";
 import { createContext, useContext } from "react";
 
-interface AuthUserContextProps {}
-
-const AuthUserContext = createContext<AuthUserContextProps>(undefined!);
+export const AuthUserContext = createContext<AuthUserContextProps>(undefined!);
 
 export function SidebarProvider({
   children,

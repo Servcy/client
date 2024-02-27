@@ -1,19 +1,11 @@
 "use client";
 
+import type { SidebarContextProps } from "@/types/sidebar";
 import { isBrowser, isSmallScreen } from "@/utils/Shared";
 import type { PropsWithChildren } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
-interface SidebarContextProps {
-  isOpenOnSmallScreens: boolean;
-  isPageWithSidebar: boolean;
-
-  setOpenOnSmallScreens: (isOpen: boolean) => void;
-
-  setIsPageWithSidebar: (isPageWithSidebar: boolean) => void;
-}
-
-const SidebarContext = createContext<SidebarContextProps>(undefined!);
+export const SidebarContext = createContext<SidebarContextProps>(undefined!);
 
 export function SidebarProvider({
   children,
