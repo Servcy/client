@@ -1,5 +1,3 @@
-"use client";
-
 import type { NativeEvent, OTPInputProps } from "@/types/otpInput";
 import React from "react";
 

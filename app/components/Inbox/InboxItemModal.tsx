@@ -1,5 +1,3 @@
-"use client";
-
 // dependencies
 import cn from "classnames";
 import * as DOMPurify from "dompurify";

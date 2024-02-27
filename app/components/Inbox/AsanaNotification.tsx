@@ -1,5 +1,3 @@
-"use client";
-
 import { AsanaNotificationProps } from "@/types/asana";
 import { getCleanLink } from "@/utils/Shared";
 import { Avatar, Tag, Tooltip } from "antd";

@@ -1,5 +1,3 @@
-"use client";
-
 import { getCleanLink } from "@/utils/Shared";
 import cn from "classnames";
 import Image from "next/image";

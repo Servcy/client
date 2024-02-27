@@ -1,5 +1,3 @@
-"use client";
-
 import type { NotionComment } from "@/types/notion";
 import { getCleanLink } from "@/utils/Shared";
 import Image from "next/image";

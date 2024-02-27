@@ -1,5 +1,3 @@
-"use client";
-
 import { getCleanLink } from "@/utils/Shared";
 import Avatar from "antd/es/avatar/avatar.js";
 import Image from "next/image";

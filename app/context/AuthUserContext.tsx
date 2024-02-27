@@ -1,5 +1,3 @@
-"use client";
-
 import type { AuthUserContextProps } from "@/types/authUser";
 import type { PropsWithChildren } from "react";
 import { createContext, useContext } from "react";

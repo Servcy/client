@@ -1,5 +1,3 @@
-"use client";
-
 import type { Comment, FigmaNotificationProps, Mention } from "@/types/figma";
 import { HiExternalLink } from "react-icons/hi";
 

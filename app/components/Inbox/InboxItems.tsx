@@ -1,5 +1,3 @@
-"use client";
-
 import cn from "classnames";
 // Types
 import { InboxItem, PaginationDetails } from "@/types/inbox";

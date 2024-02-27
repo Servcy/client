@@ -1,5 +1,3 @@
-"use client";
-
 import { GithubNotificationProps } from "@/types/github";
 import { getCleanLink } from "@/utils/Shared";
 import { Tag, Tooltip } from "antd";

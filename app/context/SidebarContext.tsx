@@ -1,5 +1,3 @@
-"use client";
-
 import type { SidebarContextProps } from "@/types/sidebar";
 import { isBrowser, isSmallScreen } from "@/utils/Shared";
 import type { PropsWithChildren } from "react";

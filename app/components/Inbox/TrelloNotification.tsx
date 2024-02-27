@@ -1,5 +1,3 @@
-"use client";
-
 import { TrelloNotificationProps } from "@/types/trello";
 import { HiExternalLink } from "react-icons/hi";
 import { remark } from "remark";
