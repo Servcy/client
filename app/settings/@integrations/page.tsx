@@ -28,12 +28,7 @@ export default function IntegrationSettings(): JSX.Element {
     );
     fetchIntegrations()
       .then((integrations) => {
-        setIntegrations(
-          integrations.sort(
-            (a: Integration, b: Integration) =>
-              Number(a.is_wip) - Number(b.is_wip)
-          )
-        );
+        setIntegrations(integrations);
         if (queryParams["integration"]) {
           const integration = integrations.find(
             (integration: Integration) =>
@@ -104,7 +99,6 @@ export default function IntegrationSettings(): JSX.Element {
                     setIsModalVisible(true);
                   }}
                   icon={<AiFillSetting />}
-                  disabled={integration.is_wip}
                 >
                   Configure
                 </Button>

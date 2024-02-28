@@ -35,12 +35,7 @@ export default function Integrations(): JSX.Element {
     );
     fetchIntegrations()
       .then((results) => {
-        setIntegrations(
-          results.sort(
-            (a: Integration, b: Integration) =>
-              Number(a.is_wip) - Number(b.is_wip)
-          )
-        );
+        setIntegrations(results);
         if (queryParams["integration"]) {
           const integration = results.find(
             (integration: Integration) =>
@@ -175,9 +170,8 @@ export default function Integrations(): JSX.Element {
                     id={`connect-${integration.id}`}
                     onClick={() => connect(integration)}
                     icon={<HiArrowsRightLeft />}
-                    disabled={integration.is_wip}
                   >
-                    {integration.is_wip ? "Coming Soon..." : "Connect"}
+                    Connect
                   </Button>
                   {integration.is_connected && (
                     <Button
@@ -189,7 +183,6 @@ export default function Integrations(): JSX.Element {
                           `/settings?selection=integrations&integration=${integration.name}`
                         )
                       }
-                      disabled={integration.is_wip}
                     >
                       Settings
                     </Button>

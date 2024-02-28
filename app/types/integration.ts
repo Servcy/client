@@ -4,8 +4,7 @@ export interface Integration {
   logo: string;
   description: string;
   is_connected: boolean;
-  is_wip: boolean;
-  configure_at: string; // relative or absolute url
+  configure_at: string;
 }
 
 export interface UserIntegration {
