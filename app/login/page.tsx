@@ -1,7 +1,7 @@
 "use client";
 
 import { setCookie } from "cookies-next";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 // Icons
@@ -37,7 +37,6 @@ export default function Login(): JSX.Element {
   const [otp, setOtp] = useState<string>("");
   const [invalidEmail, setInvalidEmail] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
 
   const sendOtp = async (e: React.MouseEvent | React.KeyboardEvent) => {
     try {
@@ -98,7 +97,7 @@ export default function Login(): JSX.Element {
         path: "/",
       });
       const nextUrl = searchParams.get("nextUrl") ?? "/";
-      router.push(nextUrl);
+      window.location.href = nextUrl;
     } finally {
       setLoading(false);
     }
@@ -119,7 +118,7 @@ export default function Login(): JSX.Element {
         path: "/",
       });
       const nextUrl = searchParams.get("nextUrl") ?? "/";
-      router.push(nextUrl);
+      window.location.href = nextUrl;
     } finally {
       setLoading(false);
     }

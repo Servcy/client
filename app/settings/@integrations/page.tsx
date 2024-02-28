@@ -87,7 +87,7 @@ export default function IntegrationSettings(): JSX.Element {
                   {integration.name}
                 </div>
               </div>
-              <div className="mt-2 h-16 py-3 pr-3 text-xs max-lg:h-24">
+              <div className="mt-2 py-3 pr-3 text-xs max-lg:h-24">
                 {integration.description}
               </div>
               <div className="mt-6 flex flex-row justify-between">

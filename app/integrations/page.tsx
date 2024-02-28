@@ -144,7 +144,7 @@ export default function Integrations(): JSX.Element {
                     {integration.name}
                   </div>
                 </div>
-                <div className="mt-2 h-16 py-3 pr-3 text-xs">
+                <div className="mt-2 py-3 pr-3 text-xs">
                   {integration.description}
                 </div>
                 <div className="mt-2 h-10 py-3 pr-3">
