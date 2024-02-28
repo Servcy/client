@@ -6,12 +6,12 @@ export const getQueryParams = (search: string) => {
   );
 };
 
-export function isBrowser(): boolean {
-  return typeof window !== "undefined";
-}
-
-export function isSmallScreen(): boolean {
-  return isBrowser() && window.innerWidth < 1024;
+export function isMobileDevice(userAgent: string): boolean {
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      userAgent
+    );
+  return isMobile;
 }
 
 export function getCleanLink(url: string) {

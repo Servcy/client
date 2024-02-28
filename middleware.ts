@@ -17,19 +17,19 @@ export const config = {
 };
 
 export async function middleware(request: NextRequest) {
-  const refreshToken = request.cookies.get("refreshToken")?.value || "";
+  const refreshToken = request.cookies.get("refreshToken")?.value ?? "";
   const requestedPath = request.nextUrl.pathname;
   if (isJwtTokenValid(refreshToken)) {
-    if (authRoutes.includes(request.nextUrl.pathname))
+    if (authRoutes.includes(requestedPath))
       // Redirect to home if user is already logged in
       return NextResponse.redirect(new URL("/", request.nextUrl.origin));
-    else if (wipRoutes.includes(request.nextUrl.pathname))
+    else if (wipRoutes.includes(requestedPath))
       // Redirect to WIP page if user is already logged in
       return NextResponse.redirect(new URL("/wip", request.nextUrl.origin));
     // If user is already logged in, continue to the requested page
-    else NextResponse.next();
+    else return null;
   }
-  if (authRoutes.includes(request.nextUrl.pathname)) return null;
+  if (authRoutes.includes(requestedPath)) return null;
   return NextResponse.redirect(
     new URL(
       "/login?nextUrl=" + encodeURIComponent(requestedPath),

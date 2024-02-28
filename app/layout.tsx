@@ -1,21 +1,20 @@
 "use client";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 // Components
+import Blocked from "@/components/Shared/blocked";
 import SideBar from "@/components/Shared/sidebar";
 import { SyncOutlined } from "@ant-design/icons";
 import { Analytics } from "@vercel/analytics/react";
 import { Spin } from "antd";
 import { Toaster } from "react-hot-toast";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 // Context
 import { SidebarProvider, useSidebarContext } from "@/context/SidebarContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // Styles
 import "@/styles/globals.css";
 // Utils
-import { isSmallScreen } from "@/utils/Shared";
+import { isMobileDevice } from "@/utils/Shared";
 import { googleLogout } from "@react-oauth/google";
-import cn from "classnames";
 import { deleteCookie, getCookie } from "cookies-next";
 // APIs
 import { logout as logoutApi } from "@/apis/logout";
@@ -41,8 +40,7 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
 };
 
 const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
-  const { isPageWithSidebar, isOpenOnSmallScreens, setOpenOnSmallScreens } =
-    useSidebarContext();
+  const { isPageWithSidebar } = useSidebarContext();
   const [loading, setLoading] = useState(true);
 
   const logout = async () => {
@@ -65,9 +63,9 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
     }, 1000);
   }, []);
 
-  return (
-    <div className="flex">
-      {loading ? (
+  if (loading)
+    return (
+      <div className="flex h-screen justify-center">
         <Spin
           className="order-2 m-auto"
           size="large"
@@ -80,36 +78,24 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
             />
           }
         />
-      ) : (
-        children
-      )}
-      {isPageWithSidebar ? (
+      </div>
+    );
+  if (isMobileDevice(navigator.userAgent))
+    return (
+      <div className="flex h-screen justify-center">
+        <Blocked />
+      </div>
+    );
+  return (
+    <div className="flex">
+      {children}
+      {isPageWithSidebar && !isMobileDevice(navigator.userAgent) && (
         <>
-          <div
-            className={cn("order-1", {
-              hidden: isSmallScreen() && !isOpenOnSmallScreens,
-            })}
-          >
+          <div className="order-1">
             <SideBar logout={logout} />
           </div>
-          {isSmallScreen() && !isOpenOnSmallScreens && (
-            <AiOutlineMenu
-              className="fixed bottom-5 right-5 z-50 cursor-pointer rounded-full border border-servcy-cream bg-servcy-black p-2 text-4xl text-servcy-white shadow-md"
-              onClick={() => {
-                setOpenOnSmallScreens(true);
-              }}
-            />
-          )}
-          {isSmallScreen() && isOpenOnSmallScreens && (
-            <AiOutlineClose
-              className="fixed bottom-5 right-5 z-50 cursor-pointer rounded-full border border-servcy-cream bg-servcy-black p-2 text-4xl text-servcy-white shadow-md"
-              onClick={() => {
-                setOpenOnSmallScreens(false);
-              }}
-            />
-          )}
         </>
-      ) : null}
+      )}
     </div>
   );
 };
