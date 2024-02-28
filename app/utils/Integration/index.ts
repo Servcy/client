@@ -1,12 +1,5 @@
 const getMicrosoftOauthUrl = (from: string) => {
-  const scopes = [
-    "User.Read",
-    "Mail.Read",
-    "openid",
-    "profile",
-    "email",
-    "Mail.Send",
-  ];
+  const scopes = ["User.Read", "Mail.Read", "openid", "profile", "email"];
   const options = [
     ["client_id", process.env["NEXT_PUBLIC_MICROSOFT_CLIENT_ID"] ?? ""],
     ["response_type", "code"],
@@ -38,7 +31,6 @@ const getGoogleOauthUrl = (from: string) => {
       "scope",
       [
         "https://www.googleapis.com/auth/gmail.readonly",
-        "https://www.googleapis.com/auth/gmail.send",
         "https://www.googleapis.com/auth/userinfo.email",
       ].join(" "),
     ],
