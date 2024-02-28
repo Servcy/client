@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
-import AddClient from "@/components/Activation/addClient";
+import AddClient from "@/components/Client/addClient";
 import DragDrop from "@/components/Shared/dragDrop";
 import { PlusOutlined, SyncOutlined } from "@ant-design/icons";
 import { Button, Divider, Form, Input, Modal, Select, Spin } from "antd";

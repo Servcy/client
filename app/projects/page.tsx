@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
-import AddProject from "@/components/Activation/addProject";
+import AddProject from "@/components/Project/addProject";
 import { Skeleton } from "antd";
 import { AiFillPlusCircle, AiOutlineProject } from "react-icons/ai";
 // APIs
