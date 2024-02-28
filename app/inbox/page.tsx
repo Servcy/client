@@ -363,7 +363,6 @@ export default function Gmail(): JSX.Element {
           readItem={readItem}
           setSelectedRowIndex={setSelectedRowIndex}
           totalInboxItems={inboxItems.length}
-          activeTab={activeTab}
         />
       )}
     </main>

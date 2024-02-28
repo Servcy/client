@@ -25,11 +25,6 @@ export const generateReply = async (payload: object) => {
   return response;
 };
 
-export const sendReply = async (payload: object) => {
-  const response = await axiosPost("/inbox/send-reply", payload);
-  return response;
-};
-
 export const blockEmail = async (payload: object) => {
   const response = await axiosPost("/inbox/block-email", payload);
   return response;

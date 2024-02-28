@@ -1,14 +1,9 @@
 // dependencies
-import cn from "classnames";
 import * as DOMPurify from "dompurify";
-import { useState } from "react";
 // Compponents
-import UploadButton from "@/components/Shared/uploadButton";
-import { Button, Modal, Popover, Tooltip } from "antd";
-import { AiFillCloseCircle, AiOutlineSend } from "react-icons/ai";
-import { FaAngleDoubleLeft, FaAngleDoubleRight, FaReply } from "react-icons/fa";
+import { Button, Modal } from "antd";
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { HiPaperClip } from "react-icons/hi";
-import { RxMagicWand } from "react-icons/rx";
 import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
 import GithubNotification from "./GithubNotification";
@@ -17,16 +12,8 @@ import SlackMessage from "./SlackMessage";
 import TrelloNotification from "./TrelloNotification";
 // Types
 import { Attachment, InboxItem } from "@/types/inbox";
-import type { RcFile } from "antd/es/upload/interface";
-// APIs
-import {
-  generateReply as generateReplyApi,
-  sendReply as sendReplyApi,
-} from "@/apis/inbox";
-import { toast } from "react-hot-toast";
 // Utils
 import { downloadFile } from "@/utils/Shared/files";
-import { BiSolidTrash } from "react-icons/bi";
 
 const InboxItemModal = ({
   selectedRow,
@@ -35,7 +22,6 @@ const InboxItemModal = ({
   setSelectedRowIndex,
   totalInboxItems,
   readItem,
-  activeTab,
 }: {
   selectedRow: InboxItem;
   setIsInboxItemModalVisible: (value: boolean) => void;
@@ -43,7 +29,6 @@ const InboxItemModal = ({
   setSelectedRowIndex: (value: number) => void;
   totalInboxItems: number;
   readItem: (id: string | undefined) => void;
-  activeTab: string;
 }) => {
   let body = selectedRow.body;
   if (selectedRow.source === "Gmail" && selectedRow.cause !== "None") {
@@ -58,100 +43,6 @@ const InboxItemModal = ({
     body.includes("�")
   )
     body = selectedRow.body;
-  const [isReplyBoxVisible, setIsReplyBoxVisible] = useState<boolean>(false);
-  const [reply, setReply] = useState<string>("");
-  const [generatingReply, setGeneratingReply] = useState<boolean>(false);
-  const [fileList, setFileList] = useState<number[]>([]);
-  const [fileNameIdMap, setFileNameIdMap] = useState<Record<string, number>>(
-    {}
-  );
-  const [removedFiles, setRemovedFiles] = useState<string[]>([]);
-  const [uploading, setUploading] = useState<boolean>(false);
-  const [sendingReply, setSendingReply] = useState<boolean>(false);
-
-  const generateReply = async () => {
-    try {
-      setGeneratingReply(true);
-      const reply = await generateReplyApi({
-        input_text: body,
-        input_type: ["Gmail", "Outlook"].includes(selectedRow.source)
-          ? "email"
-          : "message",
-      });
-      setReply(reply);
-    } catch {
-      toast.error("Something went wrong, please try again later");
-    } finally {
-      setGeneratingReply(false);
-    }
-  };
-
-  const sendReply = async () => {
-    try {
-      setSendingReply(true);
-      await sendReplyApi({
-        body: !selectedRow.is_body_html ? body : selectedRow.uid,
-        reply,
-        is_body_html: selectedRow.is_body_html,
-        user_integration_id: selectedRow.user_integration_id,
-        file_ids: fileList,
-        removed_file_ids: removedFiles,
-      });
-      toast.success("Reply sent successfully");
-      setReply("");
-      setIsReplyBoxVisible(false);
-      setFileList([]);
-      setRemovedFiles([]);
-      setFileNameIdMap({});
-      setIsInboxItemModalVisible(false);
-    } catch (err: any) {
-      if (err?.response?.status === 400) {
-        toast.error(
-          err.response?.data?.detail ||
-            "Something went wrong, please try again later"
-        );
-      } else toast.error("Something went wrong, please try again later");
-    } finally {
-      setSendingReply(false);
-    }
-  };
-
-  const beforeFileUpload = (file: RcFile) => {
-    const isFileSmallerThan30M = file.size / 1024 / 1024 < 30;
-    if (!isFileSmallerThan30M) {
-      toast.error("Image must smaller than 30MB!");
-    }
-    return isFileSmallerThan30M;
-  };
-
-  const content = (
-    <div>
-      {fileList.length !== 0 ? (
-        <ul>
-          {fileList.map((id) => (
-            <li key={id}>
-              <div className="flex justify-between">
-                <div className="truncate">
-                  {Object.entries(fileNameIdMap).find(
-                    ([_, value]) => value === id
-                  )?.[0] ?? id.toString()}
-                </div>
-                <BiSolidTrash
-                  className="ml-2 cursor-pointer text-red-400"
-                  onClick={() => {
-                    setFileList(fileList.filter((fileId) => fileId !== id));
-                    setRemovedFiles([...removedFiles, id.toString()]);
-                  }}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>None added yet.</div>
-      )}
-    </div>
-  );
 
   return (
     <Modal
@@ -159,24 +50,12 @@ const InboxItemModal = ({
       title={selectedRow.title}
       onCancel={() => setIsInboxItemModalVisible(false)}
       footer={false}
-      width={isReplyBoxVisible ? "90vw" : "70vw"}
+      width="70vw"
     >
       <div>
         {/* body */}
-        <div
-          className={cn("grid", {
-            "grid-cols-1": !isReplyBoxVisible,
-            "grid-cols-3 gap-2": isReplyBoxVisible,
-          })}
-        >
-          <div
-            className={cn(
-              "border-1 mt-2 rounded-lg border-servcy-black shadow-sm",
-              {
-                "col-span-2": isReplyBoxVisible,
-              }
-            )}
-          >
+        <div className="grid grid-cols-1">
+          <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
             {selectedRow.is_body_html ? (
               <>
                 <div
@@ -247,75 +126,6 @@ const InboxItemModal = ({
               </div>
             )}
           </div>
-          {isReplyBoxVisible && (
-            <div className="border-1 relative mt-2 rounded-lg border-servcy-black shadow-sm">
-              <textarea
-                className="h-full w-full resize-none rounded-lg p-2 !outline-none selection:!bg-servcy-wheat selection:!text-servcy-black"
-                placeholder="Write a reply..."
-                onChange={(e) => setReply(e.target.value)}
-                value={reply}
-                maxLength={5000}
-                disabled={generatingReply}
-                id="replyBox"
-              />
-              <div className="absolute bottom-2 right-2 float-right text-xs">
-                <span id="current">{reply.length}</span>
-                <span id="maximum">/ 5000</span>
-              </div>
-              <Tooltip title="Generate a reply using AI">
-                <Button
-                  className="absolute bottom-8 right-2  ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
-                  icon={<RxMagicWand className="mt-1" />}
-                  shape="circle"
-                  loading={generatingReply}
-                  type="primary"
-                  onClick={() => {
-                    generateReply();
-                  }}
-                ></Button>
-              </Tooltip>
-              {activeTab === "message" && (
-                <UploadButton
-                  beforeUpload={beforeFileUpload}
-                  onSave={(data, fileName) => {
-                    const fileIds = JSON.parse(data.results).file_ids;
-                    setFileList((prevState) => [...prevState, ...fileIds]);
-                    setFileNameIdMap((prevState) => ({
-                      ...prevState,
-                      [fileName]: fileIds[0],
-                    }));
-                  }}
-                  showUploadList={false}
-                  onRemove={(file: any) => {
-                    const fileName = file.name;
-                    const fileId = fileNameIdMap[fileName];
-                    setFileList((prevState) =>
-                      prevState.filter((id) => id !== fileId)
-                    );
-                    fileId &&
-                      setRemovedFiles([...removedFiles, fileId.toString()]);
-                  }}
-                  setUploading={setUploading}
-                >
-                  <Popover
-                    placement="leftBottom"
-                    title={<span>Attachments</span>}
-                    content={content}
-                  >
-                    <Tooltip title="Add an attachment" placement="bottom">
-                      <Button
-                        className="absolute bottom-8 right-12 ml-2 bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
-                        icon={<HiPaperClip className="mt-1" />}
-                        shape="circle"
-                        type="primary"
-                        loading={uploading}
-                      ></Button>
-                    </Tooltip>
-                  </Popover>
-                </UploadButton>
-              )}
-            </div>
-          )}
         </div>
         {/* actions */}
         <div className="mt-8 flex justify-between">
@@ -343,48 +153,6 @@ const InboxItemModal = ({
               shape="circle"
             />
           </div>
-          {!isReplyBoxVisible ? (
-            <Button
-              type="primary"
-              className="bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
-              icon={<FaReply />}
-              shape="round"
-              disabled={activeTab === "notification"}
-              onClick={() => setIsReplyBoxVisible(true)}
-            >
-              Reply
-            </Button>
-          ) : (
-            <div>
-              <Button
-                className="mr-2 hover:!border-servcy-wheat hover:!text-servcy-wheat"
-                icon={<AiFillCloseCircle />}
-                shape="round"
-                disabled={activeTab === "notification"}
-                onClick={() => setIsReplyBoxVisible(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="bg-servcy-black hover:!bg-servcy-wheat hover:!text-servcy-black"
-                icon={<AiOutlineSend />}
-                shape="round"
-                type="primary"
-                loading={sendingReply}
-                disabled={
-                  reply.length === 0 ||
-                  reply.length > 5000 ||
-                  generatingReply ||
-                  uploading
-                }
-                onClick={() => {
-                  sendReply();
-                }}
-              >
-                Send
-              </Button>
-            </div>
-          )}
         </div>
       </div>
     </Modal>
