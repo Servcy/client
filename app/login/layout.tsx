@@ -2,7 +2,6 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 // Components
 import Blocked from "@/components/Shared/blocked";
-import SideBar from "@/components/Shared/sidebar";
 import { SyncOutlined } from "@ant-design/icons";
 import { Analytics } from "@vercel/analytics/react";
 import { Spin } from "antd";
@@ -13,12 +12,8 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import "@/styles/globals.css";
 // Utils
 import { isMobileDevice } from "@/utils/Shared";
-import { googleLogout } from "@react-oauth/google";
-import { deleteCookie, getCookie } from "cookies-next";
-// APIs
-import { logout as logoutApi } from "@/apis/logout";
 
-const RootLayout: FC<PropsWithChildren> = function ({ children }) {
+const LoginLayout: FC<PropsWithChildren> = function ({ children }) {
   return (
     <html lang="en">
       <body>
@@ -39,24 +34,10 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
 const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
   const [loading, setLoading] = useState(true);
 
-  const logout = async () => {
-    try {
-      setLoading(true);
-      const refresh_token = getCookie("refreshToken");
-      await logoutApi(String(refresh_token));
-      googleLogout();
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-      window.location.href = "/login";
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   if (loading)
@@ -82,14 +63,7 @@ const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
         <Blocked />
       </div>
     );
-  return (
-    <div className="flex">
-      {children}
-      <div className="order-1">
-        <SideBar logout={logout} />
-      </div>
-    </div>
-  );
+  return <div className="flex">{children}</div>;
 };
 
-export default RootLayout;
+export default LoginLayout;

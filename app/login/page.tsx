@@ -2,7 +2,7 @@
 
 import { setCookie } from "cookies-next";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 // Icons
 import { BiLogIn } from "react-icons/bi";
@@ -27,7 +27,6 @@ import { Button, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link.js";
 // Context
-import { useSidebarContext } from "@/context/SidebarContext";
 
 export default function Login(): JSX.Element {
   const searchParams = useSearchParams();
@@ -39,11 +38,6 @@ export default function Login(): JSX.Element {
   const [invalidEmail, setInvalidEmail] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
-  const { setIsPageWithSidebar } = useSidebarContext();
-
-  useEffect(() => {
-    setIsPageWithSidebar(false);
-  }, [setIsPageWithSidebar]);
 
   const sendOtp = async (e: React.MouseEvent | React.KeyboardEvent) => {
     try {
@@ -105,7 +99,6 @@ export default function Login(): JSX.Element {
       });
       const nextUrl = searchParams.get("nextUrl") ?? "/";
       router.push(nextUrl);
-      setIsPageWithSidebar(true);
     } finally {
       setLoading(false);
     }
@@ -127,7 +120,6 @@ export default function Login(): JSX.Element {
       });
       const nextUrl = searchParams.get("nextUrl") ?? "/";
       router.push(nextUrl);
-      setIsPageWithSidebar(true);
     } finally {
       setLoading(false);
     }
