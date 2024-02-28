@@ -32,6 +32,8 @@ const getGoogleOauthUrl = (from: string) => {
       [
         "https://www.googleapis.com/auth/gmail.readonly",
         "https://www.googleapis.com/auth/userinfo.email",
+        "email",
+        "openid",
       ].join(" "),
     ],
     ["state", from],
