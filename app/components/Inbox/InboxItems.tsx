@@ -19,7 +19,6 @@ import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import { MdOutlineBlock } from "react-icons/md";
 import Cause from "./Cause";
 // APIs
-import { blockEmail } from "@/apis/inbox";
 import { disableNotificationType } from "@/apis/integration";
 
 const InboxItems = ({
@@ -72,23 +71,6 @@ const InboxItems = ({
       .catch(() => {
         toast.error("Error in disabling notification type");
       });
-  };
-
-  const blockEmailHandler = (cause: string) => {
-    try {
-      let [name, email] = String(cause).split("<");
-      email = String(email).replace(">", "").trim();
-      name = String(name).replace(/"/g, "").trim();
-      blockEmail({ email })
-        .then(() => {
-          toast.success("Email blocked successfully");
-        })
-        .catch(() => {
-          toast.error("Error while blocking email");
-        });
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   const columns: ColumnsType<InboxItem> = [
@@ -208,20 +190,6 @@ const InboxItems = ({
                 ></Button>
               </Tooltip>
             )}
-            {activeTab === "message" &&
-              ["Gmail", "Outlook"].includes(record.source) && (
-                <Tooltip title="Hide messages from this email">
-                  <Button
-                    type="primary"
-                    className="bg-servcy-cream text-servcy-black hover:!bg-rose-600"
-                    size="small"
-                    icon={<MdOutlineBlock className="mt-1" />}
-                    onClick={() => {
-                      blockEmailHandler(record.cause);
-                    }}
-                  ></Button>
-                </Tooltip>
-              )}
           </div>
         );
       },
