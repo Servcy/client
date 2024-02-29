@@ -5,15 +5,8 @@ import type { ColumnsType } from "antd/es/table";
 import React, { Dispatch, SetStateAction } from "react";
 // Compponents
 import { SyncOutlined } from "@ant-design/icons";
-import {
-  Avatar,
-  Button,
-  ConfigProvider,
-  Spin,
-  Table,
-  Tag,
-  Tooltip,
-} from "antd";
+import { Avatar, Button, ConfigProvider, Spin, Table, Tooltip } from "antd";
+import Image from "next/image";
 import toast from "react-hot-toast";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import { MdOutlineBlock } from "react-icons/md";
@@ -26,7 +19,6 @@ const InboxItems = ({
   page,
   inboxItems,
   inboxPagination,
-  setFilters,
   archiveItems,
   setSelectedRowIndex,
   loading,
@@ -45,7 +37,6 @@ const InboxItems = ({
   activeTab: string;
   archiveItems: (_: React.Key[]) => void;
   deleteItems: (_: number[]) => void;
-  setFilters: Dispatch<SetStateAction<Record<string, string | boolean>>>;
   setSearch: Dispatch<SetStateAction<Record<string, string>>>;
   setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>;
   setSelectedRowIndex: Dispatch<SetStateAction<number>>;
@@ -93,26 +84,6 @@ const InboxItems = ({
       },
     },
     {
-      dataIndex: "source",
-      width: 100,
-      title: "Source",
-      render: (source) => {
-        return (
-          <Tag
-            key={source}
-            className="cursor-pointer bg-servcy-wheat font-bold text-servcy-black"
-            onClick={() => {
-              setFilters((prevState: object) => {
-                return { ...prevState, source: source };
-              });
-            }}
-          >
-            {source}
-          </Tag>
-        );
-      },
-    },
-    {
       dataIndex: "account",
       width: 100,
       title: "Source",
@@ -149,6 +120,23 @@ const InboxItems = ({
             minute: "numeric",
             second: "numeric",
           }
+        );
+      },
+    },
+    {
+      dataIndex: "source",
+      width: 100,
+      title: "Source",
+      render: (source, _, index) => {
+        return (
+          <Image
+            className="my-auto max-h-[30px] min-h-[30px] min-w-[30px] max-w-[30px] rounded-lg border border-servcy-gray bg-servcy-white p-1 last-of-type:mr-5"
+            src={`https://servcy-public.s3.amazonaws.com/${source.toLowerCase()}.svg`}
+            width={40}
+            key={`logo-${index}`}
+            height={40}
+            alt={source}
+          />
         );
       },
     },

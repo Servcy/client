@@ -336,7 +336,6 @@ export default function Gmail(): JSX.Element {
                   <InboxItems
                     setPage={setPage}
                     page={page}
-                    setFilters={setFilters}
                     inboxPagination={inboxPagination}
                     setSearch={setSearch}
                     setSelectedRowIndex={setSelectedRowIndex}
