@@ -9,6 +9,7 @@ import {
 import { Card, Checkbox, Modal } from "antd";
 import FigmaConfiguration from "./FigmaConfiguration";
 import GithubConfiguration from "./GithubConfiguration";
+import GoogleConfiguration from "./GoogleConfiguration";
 // Apis
 import {
   disableIntegrationEvent,
@@ -158,7 +159,7 @@ export default function IntegrationConfigurationModal({
           </div>
         </Card>
       )}
-      {["Github", "Figma"].includes(selectedIntegration.name) && (
+      {["Github", "Figma", "Gmail"].includes(selectedIntegration.name) && (
         <Card
           className="mt-4 rounded-lg bg-servcy-black text-servcy-cream"
           title={
@@ -168,6 +169,9 @@ export default function IntegrationConfigurationModal({
           {selectedIntegration.name === "Github" && <GithubConfiguration />}
           {selectedIntegration.name === "Figma" && (
             <FigmaConfiguration selectedIntegration={selectedIntegration} />
+          )}
+          {selectedIntegration.name === "Gmail" && (
+            <GoogleConfiguration selectedIntegration={selectedIntegration} />
           )}
         </Card>
       )}

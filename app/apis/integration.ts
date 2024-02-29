@@ -35,7 +35,7 @@ export const configureUserIntegration = async (
   configuration: object,
   integration_name: string
 ) => {
-  const response = await axiosPost(
+  const response = await axiosPut(
     `/integration/user-integration/${id}?integration_name=${integration_name}`,
     {
       configuration,
