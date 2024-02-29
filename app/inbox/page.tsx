@@ -158,33 +158,7 @@ export default function Gmail(): JSX.Element {
       }
     };
     fetchInboxItems();
-    const timeoutId = setTimeout(() => {
-      fetchInboxItems();
-    }, 30000);
-    return () => {
-      clearTimeout(timeoutId);
-    };
   }, [page, filters, search, activeTab]);
-
-  useEffect(() => {
-    if (!("Notification" in window) || Notification.permission !== "granted")
-      return;
-    const newInboxItemsInLast30Seconds = inboxItems.filter((item) => {
-      return (
-        new Date(item.created_at).getTime() > new Date().getTime() - 30000 &&
-        !item.is_read
-      );
-    }).length;
-    if (newInboxItemsInLast30Seconds > 0) {
-      const notification = new Notification("New Inbox Items", {
-        body: `You have ${newInboxItemsInLast30Seconds} new ${activeTab}`,
-        icon: "/favicon.ico",
-      });
-      notification.onclick = () => {
-        window.focus();
-      };
-    }
-  }, [inboxItems, activeTab]);
 
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
