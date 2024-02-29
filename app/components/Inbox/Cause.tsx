@@ -105,6 +105,22 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
         <div>{fullName}</div>
       </div>
     );
+  } else if (source === "Jira") {
+    const { displayName, avatarUrls } = JSON.parse(cause);
+    const cleanImageLink = getCleanLink(avatarUrls["48x48"]);
+    return (
+      <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
+        <Image
+          src={cleanImageLink}
+          alt={displayName}
+          className="mr-2 h-5 w-5 rounded-full"
+          width={20}
+          loader={() => cleanImageLink}
+          height={20}
+        />
+        <div>{displayName}</div>
+      </div>
+    );
   }
   return (
     <span className="max-w-[250px] text-ellipsis text-center">{cause}</span>
