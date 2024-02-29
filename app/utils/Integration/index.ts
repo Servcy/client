@@ -21,7 +21,7 @@ const getGoogleOauthUrl = (from: string) => {
   const options = [
     [
       "redirect_uri",
-      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/google/oauth`,
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/gmail/oauth`,
     ],
     ["client_id", process.env["NEXT_PUBLIC_GOOGLE_CLIENT_ID"] ?? ""],
     ["access_type", "offline"],
