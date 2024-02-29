@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
+import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal";
 import { Button, Card, Input, Select, Skeleton, Tag } from "antd";
 import Image from "next/image.js";
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai";
@@ -20,12 +21,16 @@ import {
 import { Integration } from "@/types/integration";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
+import { capitalizeFirstLetter } from "@/utils/Shared/formatters";
 
 export default function Integrations(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const [search, setSearch] = useState<string>("");
+  const [selectedIntegration, setSelectedIntegration] =
+    useState<Integration | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [category, setCategory] = useState<string>("");
 
   useEffect(() => {
@@ -51,6 +56,23 @@ export default function Integrations(): JSX.Element {
                 connectButton.click();
               }
             }, 1000);
+          }
+        }
+        if (
+          queryParams["selectedIntegration"] &&
+          queryParams["openConfigurationModal"]
+        ) {
+          const integration = results.find(
+            (integration: Integration) =>
+              integration.name ===
+              capitalizeFirstLetter(queryParams["selectedIntegration"] ?? "")
+          );
+          if (integration) {
+            // open configuration modal
+            setTimeout(() => {
+              setIsModalVisible(true);
+              setSelectedIntegration(integration);
+            }, 100);
           }
         }
       })
@@ -192,6 +214,15 @@ export default function Integrations(): JSX.Element {
             ))
         )}
       </section>
+      {isModalVisible && selectedIntegration !== null && (
+        <IntegrationConfigurationModal
+          onClose={() => {
+            setIsModalVisible(false);
+            setSelectedIntegration(null);
+          }}
+          selectedIntegration={selectedIntegration}
+        />
+      )}
     </main>
   );
 }

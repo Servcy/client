@@ -8,12 +8,9 @@ import { SyncOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
+import { capitalizeFirstLetter } from "@/utils/Shared/formatters";
 // APIs
 import { integrationOauth as integrationOauthApi } from "@/apis/integration";
-
-const capitalizeFirstLetter = (string: string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
 
 export default function IntegrationOauth(): JSX.Element {
   const params = useParams();
