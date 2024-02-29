@@ -136,7 +136,15 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
             <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
               Comment:
             </div>
-            <div>{data.comment.body}</div>
+            <div
+              className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+              dangerouslySetInnerHTML={{
+                __html: remark()
+                  .use(html)
+                  .processSync(data.comment.body)
+                  .toString(),
+              }}
+            />
           </div>
           <div className="mb-2 flex w-full">
             <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
