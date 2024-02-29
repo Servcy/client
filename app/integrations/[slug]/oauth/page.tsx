@@ -38,14 +38,21 @@ export default function IntegrationOauth(): JSX.Element {
         toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`);
         if (response?.results !== "null") {
           const redirect_uri =
-            JSON.parse(response?.results)?.redirect_uri || "/integrations";
+            JSON.parse(response?.results)?.redirect_uri ||
+            `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`;
           if (redirect_uri.startsWith("https")) {
-            window.open("/integrations", "_blank");
+            window.open(
+              `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`,
+              "_blank"
+            );
             setTimeout(() => {
               router.push(redirect_uri);
             }, 1000);
           } else router.push(redirect_uri);
-        } else router.push("/integrations");
+        } else
+          router.push(
+            `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`
+          );
       })
       .catch((error: any) => {
         toast.error(error?.response?.data?.detail || "Something went wrong!");
