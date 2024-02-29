@@ -68,11 +68,8 @@ export default function Integrations(): JSX.Element {
               capitalizeFirstLetter(queryParams["selectedIntegration"] ?? "")
           );
           if (integration) {
-            // open configuration modal
-            setTimeout(() => {
-              setIsModalVisible(true);
-              setSelectedIntegration(integration);
-            }, 100);
+            setIsModalVisible(true);
+            setSelectedIntegration(integration);
           }
         }
       })
