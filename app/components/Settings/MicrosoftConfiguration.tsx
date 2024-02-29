@@ -13,7 +13,7 @@ import {
 } from "@/apis/integration";
 // Utils
 
-export default function GoogleConfiguration({
+export default function MicrosoftConfiguration({
   selectedIntegration,
 }: {
   selectedIntegration: Integration;
@@ -31,7 +31,7 @@ export default function GoogleConfiguration({
   useEffect(() => {
     setLoading(true);
     setUserIntegrationId(selectedIntegration.id);
-    fetchUserIntegrationsApi("Gmail")
+    fetchUserIntegrationsApi("Outlook")
       .then((response) => {
         setUserIntegrations(response);
         if (response.length === 1) {
@@ -50,7 +50,7 @@ export default function GoogleConfiguration({
       });
   }, [selectedIntegration.id]);
 
-  const configureGoogle = async () => {
+  const configureMicrosoft = async () => {
     const nonEmptyWhitelistedEmails = new Set(whitelistedEmails);
     nonEmptyWhitelistedEmails.delete("");
     if (nonEmptyWhitelistedEmails.size === 0) {
@@ -63,7 +63,7 @@ export default function GoogleConfiguration({
       {
         whitelisted_emails: Array.from(nonEmptyWhitelistedEmails),
       },
-      "Gmail"
+      "Outlook"
     )
       .then(() => {
         toast.success("Email IDs configured successfully");
@@ -82,10 +82,10 @@ export default function GoogleConfiguration({
         <div className="flex text-xl font-semibold">
           <Image
             className="my-auto h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1"
-            src="https://servcy-public.s3.amazonaws.com/gmail.svg"
+            src="https://servcy-public.s3.amazonaws.com/outlook.svg"
             width={40}
             height={40}
-            alt="Gmail Logo"
+            alt="Outlook Logo"
           />
           <MdOutlineSyncAlt className="mx-2 my-auto" color="grey" size={20} />
           <Image
@@ -95,7 +95,7 @@ export default function GoogleConfiguration({
             height={40}
             alt="Servcy Logo"
           />
-          <div className="my-auto">Google Integration Setup</div>
+          <div className="my-auto">Microsoft Integration Setup</div>
         </div>
         {loading ? (
           <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-servcy-white"></div>
@@ -185,7 +185,7 @@ export default function GoogleConfiguration({
               <Button
                 loading={saving}
                 disabled={saving}
-                onClick={() => configureGoogle()}
+                onClick={() => configureMicrosoft()}
                 className="w-full font-semibold !text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
               >
                 Submit
