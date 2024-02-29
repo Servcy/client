@@ -13,7 +13,10 @@ export interface UserIntegration {
   account_id: string;
   integration_id: number;
   user_id: number;
-  configuration: string;
+  configuration?: {
+    team_ids?: string[];
+    whitelisted_emails?: string[];
+  };
 }
 
 export interface IntegrationEvent {

@@ -50,6 +50,19 @@ export default function MicrosoftConfiguration({
       });
   }, [selectedIntegration.id]);
 
+  useEffect(() => {
+    const userIntegration = userIntegrations.find(
+      (userIntegration) => userIntegration.id === userIntegrationId
+    );
+    if (userIntegration) {
+      if (!userIntegration.configuration) setWhitelistedEmails(new Set([""]));
+      else
+        setWhitelistedEmails(
+          new Set(userIntegration.configuration.whitelisted_emails)
+        );
+    }
+  }, [userIntegrationId, userIntegrations]);
+
   const configureMicrosoft = async () => {
     const nonEmptyWhitelistedEmails = new Set(whitelistedEmails);
     nonEmptyWhitelistedEmails.delete("");
@@ -110,18 +123,18 @@ export default function MicrosoftConfiguration({
             }}
           >
             {userIntegrations.length === 0 ? (
-              <option value={0} className="capitalize">
+              <Select.Option value={0} className="capitalize">
                 No accounts found
-              </option>
+              </Select.Option>
             ) : (
               userIntegrations.map((userIntegration) => (
-                <option
+                <Select.Option
                   key={userIntegration.id}
                   value={userIntegration.id}
                   className="capitalize"
                 >
                   {userIntegration.account_display_name}
-                </option>
+                </Select.Option>
               ))
             )}
           </Select>

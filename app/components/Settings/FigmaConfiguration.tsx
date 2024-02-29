@@ -44,6 +44,16 @@ export default function FigmaConfiguration({
       });
   }, [selectedIntegration.id]);
 
+  useEffect(() => {
+    const userIntegration = userIntegrations.find(
+      (userIntegration) => userIntegration.id === userIntegrationId
+    );
+    if (userIntegration) {
+      if (!userIntegration.configuration) setTeamIds(new Set([""]));
+      else setTeamIds(new Set(userIntegration.configuration.team_ids));
+    }
+  }, [userIntegrationId, userIntegrations]);
+
   const configureFigma = async () => {
     const nonEmptyTeamIds = new Set(teamIds);
     nonEmptyTeamIds.delete("");
@@ -100,22 +110,22 @@ export default function FigmaConfiguration({
             placeholder="Select Account"
             value={userIntegrationId}
             onChange={(e: any) => {
-              setUserIntegrationId(Number.parseInt(e.target.value));
+              setUserIntegrationId(Number.parseInt(e));
             }}
           >
             {userIntegrations.length === 0 ? (
-              <option value={0} className="capitalize">
-                No accounts found
-              </option>
+              <Select.Option value={0} key={0} className="capitalize">
+                No account found
+              </Select.Option>
             ) : (
               userIntegrations.map((userIntegration) => (
-                <option
+                <Select.Option
                   key={userIntegration.id}
                   value={userIntegration.id}
                   className="capitalize"
                 >
                   {userIntegration.account_display_name}
-                </option>
+                </Select.Option>
               ))
             )}
           </Select>
