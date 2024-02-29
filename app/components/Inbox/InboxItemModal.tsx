@@ -7,6 +7,7 @@ import { HiPaperClip } from "react-icons/hi";
 import AsanaNotification from "./AsanaNotification";
 import FigmaNotification from "./FigmaNotification";
 import GithubNotification from "./GithubNotification";
+import JiraNotification from "./JiraNotification";
 import NotionComment from "./NotionComment";
 import SlackMessage from "./SlackMessage";
 import TrelloNotification from "./TrelloNotification";
@@ -101,6 +102,11 @@ const InboxItemModal = ({
               />
             ) : selectedRow.source === "Trello" ? (
               <TrelloNotification
+                data={JSON.parse(selectedRow.body)}
+                cause={JSON.parse(selectedRow.cause)}
+              />
+            ) : selectedRow.source === "Jira" ? (
+              <JiraNotification
                 data={JSON.parse(selectedRow.body)}
                 cause={JSON.parse(selectedRow.cause)}
               />
