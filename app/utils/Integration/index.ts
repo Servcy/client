@@ -5,7 +5,7 @@ const getMicrosoftOauthUrl = (from: string) => {
     ["response_type", "code"],
     [
       "redirect_uri",
-      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/microsoft/oauth`,
+      `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/outlook/oauth`,
     ],
     ["state", from],
     ["scope", scopes.join(" ")],
