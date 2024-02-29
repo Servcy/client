@@ -1,7 +1,6 @@
 "use client";
 
 import { oauthUrlGenerators } from "@/utils/Integration";
-import { useRouter } from "next/navigation.js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Components
@@ -26,7 +25,6 @@ import { capitalizeFirstLetter } from "@/utils/Shared/formatters";
 export default function Integrations(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
   const [search, setSearch] = useState<string>("");
   const [selectedIntegration, setSelectedIntegration] =
     useState<Integration | null>(null);
@@ -197,11 +195,10 @@ export default function Integrations(): JSX.Element {
                       className="!border-servcy-wheat !text-servcy-wheat hover:!border-servcy-white hover:!text-servcy-white"
                       size="middle"
                       icon={<AiOutlineSetting />}
-                      onClick={() =>
-                        router.push(
-                          `/settings?selection=integrations&integration=${integration.name}`
-                        )
-                      }
+                      onClick={() => {
+                        setSelectedIntegration(integration);
+                        setIsModalVisible(true);
+                      }}
                     >
                       Settings
                     </Button>
