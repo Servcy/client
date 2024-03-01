@@ -1,11 +1,12 @@
 "use client";
 
 import cn from "classnames";
+import debounce from "lodash/debounce";
 import { useEffect, useState } from "react";
 // Components
 import InboxItemModal from "@/components/Inbox/InboxItemModal";
 import InboxItems from "@/components/Inbox/InboxItems";
-import { Button, ConfigProvider, Select, Tabs } from "antd";
+import { Button, ConfigProvider, Input, Select, Tabs } from "antd";
 import {
   AiOutlineComment,
   AiOutlineInbox,
@@ -53,6 +54,7 @@ const tabItems = [
 
 export default function Gmail(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
   const [selectedItemIds, setSelectedItemIds] = useState<React.Key[]>([]);
   const [inboxItems, setInboxItems] = useState<InboxItem[]>([] as InboxItem[]);
   const [inboxPagination, setInboxPagination] = useState<PaginationDetails>(
@@ -63,7 +65,6 @@ export default function Gmail(): JSX.Element {
   const [filters, setFilters] = useState<Record<string, string | boolean>>({
     category: "message",
   });
-  const [search, setSearch] = useState<Record<string, string>>({});
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
   const [isInboxItemModalVisible, setIsInboxItemModalVisible] =
     useState<boolean>(false);
@@ -73,7 +74,12 @@ export default function Gmail(): JSX.Element {
   const refetchInboxItems = async () => {
     try {
       setLoading(true);
-      const response = await fetchInboxApi({ filters, search, page });
+      const response = await fetchInboxApi({
+        filters,
+        search,
+        page,
+        pagination: { page },
+      });
       setInboxItems(JSON.parse(response.results).items);
       setInboxPagination(JSON.parse(response.results).details);
     } catch (err) {
@@ -141,12 +147,13 @@ export default function Gmail(): JSX.Element {
   };
 
   useEffect(() => {
-    const fetchInboxItems = async () => {
+    const debouncedFetchInbox = debounce(async () => {
       try {
         setLoading(true);
         const response = await fetchInboxApi({
           filters,
           search,
+          page,
           pagination: { page },
         });
         setInboxItems(JSON.parse(response.results).items);
@@ -156,8 +163,11 @@ export default function Gmail(): JSX.Element {
       } finally {
         setLoading(false);
       }
+    }, 500);
+    debouncedFetchInbox();
+    return () => {
+      debouncedFetchInbox.cancel();
     };
-    fetchInboxItems();
   }, [page, filters, search, activeTab]);
 
   return (
@@ -166,9 +176,15 @@ export default function Gmail(): JSX.Element {
         <div className="flex">
           <AiOutlineInbox className="my-auto mr-2" size="24" />
           <p className="text-xl">Inbox</p>
+          <Input
+            className="ml-auto max-w-[200px]"
+            value={search}
+            placeholder="search by notification..."
+            onChange={(event) => setSearch(event.target.value || "")}
+          />
           <Button
             onClick={refetchInboxItems}
-            className="ml-auto h-full p-0 hover:!border-servcy-green hover:!text-servcy-green"
+            className="ml-2 h-full p-0 hover:!border-servcy-green hover:!text-servcy-green"
             disabled={loading}
           >
             <AiOutlineSync
@@ -311,7 +327,6 @@ export default function Gmail(): JSX.Element {
                     setPage={setPage}
                     page={page}
                     inboxPagination={inboxPagination}
-                    setSearch={setSearch}
                     setSelectedRowIndex={setSelectedRowIndex}
                     setIsInboxItemModalVisible={setIsInboxItemModalVisible}
                     archiveItems={archiveItems}

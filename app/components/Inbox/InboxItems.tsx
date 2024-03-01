@@ -37,7 +37,6 @@ const InboxItems = ({
   activeTab: string;
   archiveItems: (_: React.Key[]) => void;
   deleteItems: (_: number[]) => void;
-  setSearch: Dispatch<SetStateAction<Record<string, string>>>;
   setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>;
   setSelectedRowIndex: Dispatch<SetStateAction<number>>;
   setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>;
