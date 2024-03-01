@@ -201,7 +201,7 @@ export default function FigmaConfiguration({
                     newTeamIds.add("");
                     setTeamIds(newTeamIds);
                   }}
-                  disabled={teamIds.size > 2 || saving}
+                  disabled={saving}
                 >
                   + Add More
                 </Button>

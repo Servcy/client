@@ -190,7 +190,7 @@ export default function GoogleConfiguration({
                     newWhitelistedEmails.add("");
                     setWhitelistedEmails(newWhitelistedEmails);
                   }}
-                  disabled={whitelistedEmails.size > 2 || saving}
+                  disabled={saving}
                 >
                   + Add More
                 </Button>
