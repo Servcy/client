@@ -10,7 +10,6 @@ import html from "remark-html";
 const GithubNotification = ({
   data,
   cause,
-  event,
   timestamp,
 }: GithubNotificationProps) => {
   let link = "#null";
@@ -19,7 +18,7 @@ const GithubNotification = ({
   const cleanImageLink = getCleanLink(avatar_url);
 
   const renderGithubEvent = () => {
-    switch (event) {
+    switch (data.event) {
       case "pull_request_review_thread": {
         link = data.thread?.comments[0]?.html_url ?? "#null";
         linkLabel = "View thread in Github";

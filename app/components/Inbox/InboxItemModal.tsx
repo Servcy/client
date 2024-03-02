@@ -118,11 +118,6 @@ const InboxItemModal = ({
             ) : selectedRow.source === "Github" ? (
               <GithubNotification
                 data={JSON.parse(selectedRow.body)}
-                event={selectedRow.title
-                  .split(" ")
-                  .slice(0, selectedRow.title.split(" ").length - 1)
-                  .join("_")
-                  .toLocaleLowerCase()}
                 cause={selectedRow.cause}
                 timestamp={selectedRow.created_at}
               />

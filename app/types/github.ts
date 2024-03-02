@@ -172,9 +172,9 @@ export interface GithubNotificationProps {
       archived_at: string | null;
     };
     milestone?: GithubMilestone;
+    event: string;
     issue?: GithubIssue;
   };
   cause: string;
-  event: string;
   timestamp: string;
 }
