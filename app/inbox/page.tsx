@@ -150,22 +150,6 @@ export default function Gmail(): JSX.Element {
     const debouncedFetchInbox = debounce(async () => {
       try {
         setLoading(true);
-        const hash = window.location.hash;
-        if (!hash) window.location.hash = `#${activeTab}`;
-        else {
-          const tab = hash.split("#")[1];
-          if (
-            tab &&
-            activeTab !== tab &&
-            ["message", "comment", "notification", "archived"].includes(tab)
-          ) {
-            setActiveTab(tab);
-            setFilters((prevState) => {
-              return { ...prevState, category: tab };
-            });
-            return;
-          }
-        }
         const response = await fetchInboxApi({
           filters,
           search,
