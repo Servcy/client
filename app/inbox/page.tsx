@@ -170,6 +170,14 @@ export default function Gmail(): JSX.Element {
     };
   }, [page, filters, search, activeTab]);
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    const tab = hash.split("#")[1];
+    if (tab && ["message", "comment", "notification"].includes(tab)) {
+      setActiveTab(tab);
+    }
+  }, []);
+
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
       <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
