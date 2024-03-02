@@ -151,6 +151,7 @@ export default function Gmail(): JSX.Element {
       try {
         setLoading(true);
         const hash = window.location.hash;
+        if (!hash) window.location.hash = `#${activeTab}`;
         const tab = hash.split("#")[1];
         if (
           tab &&
@@ -180,10 +181,6 @@ export default function Gmail(): JSX.Element {
       debouncedFetchInbox.cancel();
     };
   }, [page, filters, search, activeTab]);
-
-  useEffect(() => {
-    window.location.hash = `#${activeTab}`;
-  }, [activeTab]);
 
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
