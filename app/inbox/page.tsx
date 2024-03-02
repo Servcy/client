@@ -150,6 +150,17 @@ export default function Gmail(): JSX.Element {
     const debouncedFetchInbox = debounce(async () => {
       try {
         setLoading(true);
+        const hash = window.location.hash;
+        const tab = hash.split("#")[1];
+        if (
+          tab &&
+          ["message", "comment", "notification", "archived"].includes(tab)
+        ) {
+          setActiveTab(tab);
+          setFilters((prevState) => {
+            return { ...prevState, category: tab };
+          });
+        }
         const response = await fetchInboxApi({
           filters,
           search,
@@ -169,14 +180,6 @@ export default function Gmail(): JSX.Element {
       debouncedFetchInbox.cancel();
     };
   }, [page, filters, search, activeTab]);
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    const tab = hash.split("#")[1];
-    if (tab && ["message", "comment", "notification"].includes(tab)) {
-      setActiveTab(tab);
-    }
-  }, []);
 
   useEffect(() => {
     window.location.hash = `#${activeTab}`;
