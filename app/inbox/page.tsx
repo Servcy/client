@@ -178,6 +178,10 @@ export default function Gmail(): JSX.Element {
     }
   }, []);
 
+  useEffect(() => {
+    window.location.hash = `#${activeTab}`;
+  }, [activeTab]);
+
   return (
     <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
       <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
