@@ -4,7 +4,18 @@ import Image from "next/image";
 
 const Cause = ({ cause, source }: { cause: any; source: string }) => {
   if (cause === "None") {
-    return null;
+    return (
+      <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
+        <Image
+          alt="Servcy logo"
+          width={20}
+          height={20}
+          src="/logo.svg"
+          className="mr-2 h-5 w-5 rounded-full"
+        />
+        <div>Servcy Auditor</div>
+      </div>
+    );
   }
   if (["Gmail", "Outlook"].includes(source)) {
     let [name, email] = String(cause).split("<");
