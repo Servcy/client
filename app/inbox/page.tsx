@@ -152,15 +152,19 @@ export default function Gmail(): JSX.Element {
         setLoading(true);
         const hash = window.location.hash;
         if (!hash) window.location.hash = `#${activeTab}`;
-        const tab = hash.split("#")[1];
-        if (
-          tab &&
-          ["message", "comment", "notification", "archived"].includes(tab)
-        ) {
-          setActiveTab(tab);
-          setFilters((prevState) => {
-            return { ...prevState, category: tab };
-          });
+        else {
+          const tab = hash.split("#")[1];
+          if (
+            tab &&
+            activeTab !== tab &&
+            ["message", "comment", "notification", "archived"].includes(tab)
+          ) {
+            setActiveTab(tab);
+            setFilters((prevState) => {
+              return { ...prevState, category: tab };
+            });
+            return;
+          }
         }
         const response = await fetchInboxApi({
           filters,
