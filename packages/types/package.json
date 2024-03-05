@@ -1,0 +1,6 @@
+{
+  "name": "@servcy/types",
+  "version": "0.16.0",
+  "private": true,
+  "main": "./src/index.d.ts"
+}

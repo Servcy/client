@@ -1,0 +1,61 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NEXT_PUBLIC_CRISP_ID",
+    "NEXT_PUBLIC_POSTHOG_KEY",
+    "NEXT_PUBLIC_POSTHOG_HOST",
+    "NEXT_PUBLIC_SERVER_URL",
+    "NEXT_PUBLIC_CLIENT_URL",
+    "NODE_ENV",
+    "NEXT_PUBLIC_GOOGLE_CLIENT_ID",
+    "NEXT_PUBLIC_MICROSOFT_CLIENT_ID",
+    "NEXT_PUBLIC_NOTION_CLIENT_ID",
+    "NEXT_PUBLIC_SLACK_CLIENT_ID",
+    "NEXT_PUBLIC_FIGMA_CLIENT_ID",
+    "NEXT_PUBLIC_GITHUB_CLIENT_ID",
+    "NEXT_PUBLIC_ASANA_CLIENT_ID",
+    "NEXT_PUBLIC_JIRA_CLIENT_ID",
+    "NEXT_PUBLIC_TRELLO_CLIENT_ID",
+    "NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID",
+  ],
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "dist/**"
+      ]
+    },
+    "develop": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "start": {
+      "cache": false
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
