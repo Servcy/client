@@ -1,7 +1,5 @@
 import type { AuthUserContextProps } from "@/types/auth/authUser";
-import type { PropsWithChildren } from "react";
-import { createContext, useContext } from "react";
-
+import { createContext, PropsWithChildren, useContext } from "react";
 export const AuthUserContext = createContext<AuthUserContextProps>(undefined!);
 
 export function SidebarProvider({ children }: PropsWithChildren<Record<string, unknown>>) {

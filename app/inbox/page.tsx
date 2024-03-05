@@ -93,12 +93,7 @@ export default function Gmail(): JSX.Element {
       if (itemIds.length === inboxItems.length) {
         setInboxItems([]);
         refetchInboxItems();
-      } else
-        setInboxItems((prevState) => {
-          return prevState.filter((item) => {
-            return !itemIds.includes(parseInt(item.id));
-          });
-        });
+      } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))));
     } catch (err) {
       console.error(err);
     }
@@ -110,14 +105,14 @@ export default function Gmail(): JSX.Element {
       readItemApi({
         item_id: Number.parseInt(itemId),
       });
-      setInboxItems((prevState) => {
-        return prevState.map((item) => {
+      setInboxItems((prevState) =>
+        prevState.map((item) => {
           if (item.id === itemId.toString()) {
             return { ...item, is_read: true };
           }
           return item;
-        });
-      });
+        })
+      );
     } catch (err) {
       console.error(err);
     }
@@ -131,12 +126,7 @@ export default function Gmail(): JSX.Element {
       if (itemIds.length === inboxItems.length) {
         setInboxItems([]);
         refetchInboxItems();
-      } else
-        setInboxItems((prevState) => {
-          return prevState.filter((item) => {
-            return !itemIds.includes(parseInt(item.id));
-          });
-        });
+      } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))));
     } catch (err) {
       console.error(err);
     }
@@ -206,9 +196,7 @@ export default function Gmail(): JSX.Element {
             defaultActiveKey="message"
             indicatorSize={(origin) => origin - 16}
             onChange={(key) => {
-              setFilters((prevState) => {
-                return { ...prevState, category: key };
-              });
+              setFilters((prevState) => ({ ...prevState, category: key }));
               setActiveTab(key);
               if (key === "comment") {
                 setFilterByIAmMentionedButtonText("Mentions Me");
@@ -223,12 +211,10 @@ export default function Gmail(): JSX.Element {
                     "!border-servcy !text-servcy": filters["i_am_mentioned"],
                   })}
                   onClick={() => {
-                    setFilters((prevState) => {
-                      return {
-                        ...prevState,
-                        i_am_mentioned: !prevState["i_am_mentioned"],
-                      };
-                    });
+                    setFilters((prevState) => ({
+                      ...prevState,
+                      i_am_mentioned: !prevState["i_am_mentioned"],
+                    }));
                   }}
                   icon={<GoMention />}
                 >
@@ -263,55 +249,47 @@ export default function Gmail(): JSX.Element {
                   placeholder="Filter By Source"
                   allowClear
                   onClear={() => {
-                    setFilters((prevState) => {
-                      return { ...prevState, source: "" };
-                    });
+                    setFilters((prevState) => ({ ...prevState, source: "" }));
                   }}
                   value={filters["source"]}
                   onChange={(value) => {
-                    setFilters((prevState) => {
-                      return { ...prevState, source: value };
-                    });
+                    setFilters((prevState) => ({ ...prevState, source: value }));
                   }}
                   options={Object.entries(integrationInboxCategories)
                     .filter(([_, value]) => value.includes(activeTab))
-                    .map(([key, _]) => {
-                      return { label: key, value: key };
-                    })}
+                    .map(([key, _]) => ({ label: key, value: key }))}
                 />
               </div>
             }
-            items={tabItems.map((item) => {
-              return {
-                label: (
-                  <div
-                    className={cn("flex justify-center align-middle hover:!text-servcy-dark", {
-                      "text-servcy-green font-semibold": activeTab === item.key,
-                    })}
-                  >
-                    <item.Icon className="my-auto mr-2" />
-                    {item.label} {activeTab === item.key ? `(${inboxPagination.total_items || "-"})` : ""}
-                  </div>
-                ),
-                key: item.key,
-                children: (
-                  <InboxItems
-                    setPage={setPage}
-                    page={page}
-                    inboxPagination={inboxPagination}
-                    setSelectedRowIndex={setSelectedRowIndex}
-                    setIsInboxItemModalVisible={setIsInboxItemModalVisible}
-                    archiveItems={archiveItems}
-                    inboxItems={inboxItems}
-                    readItem={readItem}
-                    activeTab={activeTab}
-                    loading={loading}
-                    deleteItems={deleteItems}
-                    setSelectedItemIds={setSelectedItemIds}
-                  />
-                ),
-              };
-            })}
+            items={tabItems.map((item) => ({
+              label: (
+                <div
+                  className={cn("flex justify-center align-middle hover:!text-servcy-dark", {
+                    "text-servcy-green font-semibold": activeTab === item.key,
+                  })}
+                >
+                  <item.Icon className="my-auto mr-2" />
+                  {item.label} {activeTab === item.key ? `(${inboxPagination.total_items || "-"})` : ""}
+                </div>
+              ),
+              key: item.key,
+              children: (
+                <InboxItems
+                  setPage={setPage}
+                  page={page}
+                  inboxPagination={inboxPagination}
+                  setSelectedRowIndex={setSelectedRowIndex}
+                  setIsInboxItemModalVisible={setIsInboxItemModalVisible}
+                  archiveItems={archiveItems}
+                  inboxItems={inboxItems}
+                  readItem={readItem}
+                  activeTab={activeTab}
+                  loading={loading}
+                  deleteItems={deleteItems}
+                  setSelectedItemIds={setSelectedItemIds}
+                />
+              ),
+            }))}
           />
         </ConfigProvider>
       </div>

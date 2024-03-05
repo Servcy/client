@@ -51,8 +51,8 @@ export default function IntegrationConfigurationModal({
       integration_id: selectedIntegration.id,
       event_id: event.id,
     }).then(() => {
-      setEvents((events) => {
-        return events.map((e) => {
+      setEvents((events) =>
+        events.map((e) => {
           if (e.id === event.id) {
             return {
               ...e,
@@ -60,8 +60,8 @@ export default function IntegrationConfigurationModal({
             };
           }
           return e;
-        });
-      });
+        })
+      );
     });
   };
 
@@ -70,8 +70,8 @@ export default function IntegrationConfigurationModal({
       integration_id: selectedIntegration.id,
       event_id: event.id,
     }).then(() => {
-      setEvents((events) => {
-        return events.map((e) => {
+      setEvents((events) =>
+        events.map((e) => {
           if (e.id === event.id) {
             return {
               ...e,
@@ -79,8 +79,8 @@ export default function IntegrationConfigurationModal({
             };
           }
           return e;
-        });
-      });
+        })
+      );
     });
   };
 
@@ -98,19 +98,17 @@ export default function IntegrationConfigurationModal({
         loading={loading}
       >
         <div className="grid max-h-[400px] grid-cols-2 gap-2 overflow-auto">
-          {userIntegrations.map((userIntegration) => {
-            return (
-              <div
-                key={userIntegration.id}
-                className="servcy-card-bg flex items-center justify-between rounded-lg p-4 font-semibold text-servcy-black"
-              >
-                <div className="truncate">{userIntegration.account_display_name}</div>
-                <button className="ml-4 cursor-not-allowed rounded bg-servcy-black p-2 text-servcy-wheat" disabled>
-                  Disconnect
-                </button>
-              </div>
-            );
-          })}
+          {userIntegrations.map((userIntegration) => (
+            <div
+              key={userIntegration.id}
+              className="servcy-card-bg flex items-center justify-between rounded-lg p-4 font-semibold text-servcy-black"
+            >
+              <div className="truncate">{userIntegration.account_display_name}</div>
+              <button className="ml-4 cursor-not-allowed rounded bg-servcy-black p-2 text-servcy-wheat" disabled>
+                Disconnect
+              </button>
+            </div>
+          ))}
         </div>
       </Card>
       {events.length > 0 && (
@@ -125,27 +123,25 @@ export default function IntegrationConfigurationModal({
           loading={loading}
         >
           <div className="grid max-h-[400px] grid-cols-2 gap-2 overflow-auto">
-            {events.map((event) => {
-              return (
-                <div key={event.id} className="flex flex-row">
-                  <Checkbox
-                    className="mr-2"
-                    checked={!event.is_disabled}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        handleEnableEvent(event);
-                      } else {
-                        handleDisableEvent(event);
-                      }
-                    }}
-                  />
-                  <div className="flex flex-col">
-                    <p className="font-bold">{event.name}</p>
-                    <p className="text-sm">{event.description}</p>
-                  </div>
+            {events.map((event) => (
+              <div key={event.id} className="flex flex-row">
+                <Checkbox
+                  className="mr-2"
+                  checked={!event.is_disabled}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      handleEnableEvent(event);
+                    } else {
+                      handleDisableEvent(event);
+                    }
+                  }}
+                />
+                <div className="flex flex-col">
+                  <p className="font-bold">{event.name}</p>
+                  <p className="text-sm">{event.description}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </Card>
       )}

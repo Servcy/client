@@ -64,113 +64,102 @@ const InboxItems = ({
     {
       dataIndex: "title",
       title: "Title",
-      render: (title, row, index) => {
-        return (
-          <button
-            className="cursor-pointer text-left"
-            onClick={() => {
-              setSelectedRowIndex(index);
-              setIsInboxItemModalVisible(true);
-              !row.is_read && readItem(row.id);
-            }}
-          >
-            {title}
-          </button>
-        );
-      },
+      render: (title, row, index) => (
+        <button
+          className="cursor-pointer text-left"
+          onClick={() => {
+            setSelectedRowIndex(index);
+            setIsInboxItemModalVisible(true);
+            !row.is_read && readItem(row.id);
+          }}
+        >
+          {title}
+        </button>
+      ),
     },
     {
       dataIndex: "account",
       width: 100,
       title: "Source",
-      render: (account) => {
-        return (
-          <div className="flex min-h-[50px] max-w-[250px] items-center text-sm">
-            <Avatar className="mr-2 rounded-full" size="small">
-              {account.slice(0, 1).toUpperCase()}
-            </Avatar>
-            <div className="overflow-hidden truncate">{account}</div>
-          </div>
-        );
-      },
+      render: (account) => (
+        <div className="flex min-h-[50px] max-w-[250px] items-center text-sm">
+          <Avatar className="mr-2 rounded-full" size="small">
+            {account.slice(0, 1).toUpperCase()}
+          </Avatar>
+          <div className="overflow-hidden truncate">{account}</div>
+        </div>
+      ),
     },
     {
       dataIndex: "cause",
       title: "From",
       width: 200,
-      render: (cause, record) => {
-        return <Cause cause={cause} source={record.source} />;
-      },
+      render: (cause, record) => <Cause cause={cause} source={record.source} />,
     },
     {
       dataIndex: "created_at",
       title: "Date",
       width: 200,
-      render: (date) => {
-        return new Date(date).toLocaleDateString(navigator.language || "en-US", {
+      render: (date) =>
+        new Date(date).toLocaleDateString(navigator.language || "en-US", {
           month: "short",
           day: "numeric",
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
-        });
-      },
+        }),
     },
     {
       dataIndex: "source",
       width: 100,
       title: "Source",
-      render: (source, _, index) => {
-        return (
-          <Image
-            className="my-auto max-h-[30px] min-h-[30px] min-w-[30px] max-w-[30px] rounded-lg border border-servcy-gray bg-servcy-white p-1 last-of-type:mr-5"
-            src={`https://servcy-public.s3.amazonaws.com/${source.toLowerCase()}.svg`}
-            width={40}
-            key={`logo-${index}`}
-            height={40}
-            alt={source}
-          />
-        );
-      },
+      render: (source, _, index) => (
+        <Image
+          className="my-auto max-h-[30px] min-h-[30px] min-w-[30px] max-w-[30px] rounded-lg border border-servcy-gray bg-servcy-white p-1 last-of-type:mr-5"
+          src={`https://servcy-public.s3.amazonaws.com/${source.toLowerCase()}.svg`}
+          width={40}
+          key={`logo-${index}`}
+          height={40}
+          alt={source}
+        />
+      ),
     },
     {
       dataIndex: "id",
       title: "Actions",
       width: 100,
-      render: (id, record) => {
-        return (
-          <div className="flex gap-1">
-            <Tooltip title={activeTab === "archived" ? "Delete" : "Archive"}>
+      render: (id, record) => (
+        <div className="flex gap-1">
+          <Tooltip title={activeTab === "archived" ? "Delete" : "Archive"}>
+            <Button
+              type="primary"
+              className={cn("bg-servcy-cream text-servcy-black", {
+                "hover:!bg-servcy-wheat": activeTab !== "archived",
+                "hover:!bg-rose-600": activeTab === "archived",
+              })}
+              size="small"
+              onClick={() => {
+                if (activeTab !== "archived") archiveItems([parseInt(id)]);
+                else deleteItems([parseInt(id)]);
+              }}
+              icon={<HiArchiveBoxArrowDown className="mt-1" />}
+            />
+          </Tooltip>
+          {activeTab === "notification" && record.cause !== "None" && (
+            <Tooltip title="Disable these type of notifications">
               <Button
                 type="primary"
-                className={cn("bg-servcy-cream text-servcy-black", {
-                  "hover:!bg-servcy-wheat": activeTab !== "archived",
-                  "hover:!bg-rose-600": activeTab === "archived",
-                })}
+                className="bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
                 size="small"
+                icon={<MdOutlineBlock className="mt-1" />}
                 onClick={() => {
-                  if (activeTab !== "archived") archiveItems([parseInt(id)]);
-                  else deleteItems([parseInt(id)]);
+                  disableNotificationTypeHandler(record.body, record.user_integration_id);
                 }}
-                icon={<HiArchiveBoxArrowDown className="mt-1" />}
-              ></Button>
+              />
             </Tooltip>
-            {activeTab === "notification" && record.cause !== "None" && (
-              <Tooltip title="Disable these type of notifications">
-                <Button
-                  type="primary"
-                  className="bg-servcy-cream text-servcy-black hover:!bg-servcy-wheat"
-                  size="small"
-                  icon={<MdOutlineBlock className="mt-1" />}
-                  onClick={() => {
-                    disableNotificationTypeHandler(record.body, record.user_integration_id);
-                  }}
-                ></Button>
-              </Tooltip>
-            )}
-          </div>
-        );
-      },
+          )}
+        </div>
+      ),
     },
   ];
 
@@ -213,11 +202,11 @@ const InboxItems = ({
             />
           ),
         }}
-        rowClassName={(record) => {
-          return cn("bg-servcy-black text-white rounded-tr", {
+        rowClassName={(record) =>
+          cn("bg-servcy-black text-white rounded-tr", {
             "opacity-80": !record.is_read,
-          });
-        }}
+          })
+        }
         showHeader={false}
         pagination={{
           current: page,

@@ -33,18 +33,17 @@ const getGoogleOauthUrl = (from: string) => {
   return `https://accounts.google.com/o/oauth2/v2/auth?${new URLSearchParams(options)}`;
 };
 
-const getNotionOauthUrl = (from: string) => {
-  return `https://api.notion.com/v1/oauth/authorize?${new URLSearchParams([
+const getNotionOauthUrl = (from: string) =>
+  `https://api.notion.com/v1/oauth/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_NOTION_CLIENT_ID"] ?? ""],
     ["redirect_uri", `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/notion/oauth`],
     ["response_type", "code"],
     ["owner", "user"],
     ["state", from],
   ])}`;
-};
 
-const getSlackOauthUrl = (from: string) => {
-  return `https://slack.com/oauth/v2/authorize?${new URLSearchParams([
+const getSlackOauthUrl = (from: string) =>
+  `https://slack.com/oauth/v2/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_SLACK_CLIENT_ID"] ?? ""],
     ["redirect_uri", `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/slack/oauth`],
     [
@@ -53,47 +52,42 @@ const getSlackOauthUrl = (from: string) => {
     ],
     ["state", from],
   ])}`;
-};
 
-const getFigmaOauthUrl = (from: string) => {
-  return `https://www.figma.com/oauth?${new URLSearchParams([
+const getFigmaOauthUrl = (from: string) =>
+  `https://www.figma.com/oauth?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_FIGMA_CLIENT_ID"] ?? ""],
     ["response_type", "code"],
     ["redirect_uri", `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/figma/oauth`],
     ["scope", "files:read,file_comments:write,webhooks:write"],
     ["state", from],
   ])}`;
-};
 
-const getGithubOauthUrl = (from: string) => {
-  return `https://github.com/login/oauth/authorize?${new URLSearchParams([
+const getGithubOauthUrl = (from: string) =>
+  `https://github.com/login/oauth/authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_GITHUB_CLIENT_ID"] ?? ""],
     ["redirect_uri", `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/github/oauth`],
     ["state", from],
   ])}`;
-};
 
-const getAsanaOauthUrl = (from: string) => {
-  return `https://app.asana.com/-/oauth_authorize?${new URLSearchParams([
+const getAsanaOauthUrl = (from: string) =>
+  `https://app.asana.com/-/oauth_authorize?${new URLSearchParams([
     ["client_id", process.env["NEXT_PUBLIC_ASANA_CLIENT_ID"] ?? ""],
     ["redirect_uri", `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/asana/oauth`],
     ["response_type", "code"],
     ["state", from],
   ])}`;
-};
 
-const getTrelloOauthUrl = (from: string) => {
-  return `https://trello.com/1/authorize?${new URLSearchParams([
+const getTrelloOauthUrl = (from: string) =>
+  `https://trello.com/1/authorize?${new URLSearchParams([
     ["expiration", "never"],
     ["scope", "read,write,account"],
     ["key", process.env["NEXT_PUBLIC_TRELLO_CLIENT_ID"] ?? ""],
     ["redirect_uri", `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/trello/oauth`],
     ["state", from],
   ])}`;
-};
 
-const getJiraOauthUrl = (from: string) => {
-  return `https://auth.atlassian.com/authorize?${new URLSearchParams([
+const getJiraOauthUrl = (from: string) =>
+  `https://auth.atlassian.com/authorize?${new URLSearchParams([
     ["audience", "api.atlassian.com"],
     ["client_id", process.env["NEXT_PUBLIC_JIRA_CLIENT_ID"] ?? ""],
     ["redirect_uri", `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/integrations/jira/oauth`],
@@ -102,7 +96,6 @@ const getJiraOauthUrl = (from: string) => {
     ["response_type", "code"],
     ["prompt", "consent"],
   ])}`;
-};
 
 export const oauthUrlGenerators: Record<string, Function> = {
   Gmail: getGoogleOauthUrl,

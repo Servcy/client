@@ -95,7 +95,7 @@ export default function MicrosoftConfiguration({ selectedIntegration }: { select
           <div className="my-auto">Microsoft Integration Setup</div>
         </div>
         {loading ? (
-          <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-servcy-white"></div>
+          <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-servcy-white" />
         ) : (
           <Select
             className="mt-8 w-full"
@@ -135,9 +135,9 @@ export default function MicrosoftConfiguration({ selectedIntegration }: { select
             {loading ? (
               <>
                 <span>Whitelisted Email IDs</span>
-                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white"></div>
+                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white" />
                 <span className="mt-5">Email ID</span>
-                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white"></div>
+                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white" />
               </>
             ) : (
               Array.from(whitelistedEmails).map((emailId, index) => (

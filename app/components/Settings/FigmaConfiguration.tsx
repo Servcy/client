@@ -94,7 +94,7 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
           <div className="my-auto">Figma Integration Setup</div>
         </div>
         {loading ? (
-          <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-servcy-white"></div>
+          <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-servcy-white" />
         ) : (
           <Select
             className="mt-8 w-full"
@@ -142,9 +142,9 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
             {loading ? (
               <>
                 <span>Team ID</span>
-                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white"></div>
+                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white" />
                 <span className="mt-5">Team ID</span>
-                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white"></div>
+                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white" />
               </>
             ) : (
               Array.from(teamIds).map((teamId, index) => (

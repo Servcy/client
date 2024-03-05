@@ -8,12 +8,11 @@ import { Analytics } from "@vercel/analytics/react";
 import { Spin } from "antd";
 import { Toaster } from "react-hot-toast";
 // Context
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google";
 // Styles
 import "@/styles/globals.css";
 // Utils
 import { isMobileDevice } from "@/utils/Shared";
-import { googleLogout } from "@react-oauth/google";
 import { deleteCookie, getCookie } from "cookies-next";
 // APIs
 import { logout as logoutApi } from "@/apis/logout";
