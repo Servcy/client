@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "homepage": "https://github.com/Servcy/Client",
   "bugs": "https://github.com/Servcy/Client/issues",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "author": "Megham Garg <meghamgarg@gmail.com>",
   "repository": {
     "type": "git",
