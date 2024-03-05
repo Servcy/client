@@ -1,8 +1,15 @@
 {
-  "repository": "https://github.com/Servcy/Client.git",
-  "version": "0.16.0",
-  "license": "AGPL-3.0",
+  "name": "servcy-client",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Servcy/Client",
+  "bugs": "https://github.com/Servcy/Client/issues",
   "private": true,
+  "license": "AGPL-3.0",
+  "author": "Megham Garg <meghamgarg@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Servcy/Client.git"
+  },
   "workspaces": [
     "web",
     "packages/editor/*",
@@ -32,5 +39,36 @@
   "resolutions": {
     "@types/react": "18.2.42"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "next/core-web-vitals",
+      "plugin:@typescript-eslint/strict",
+      "plugin:jsx-a11y/recommended",
+      "plugin:prettier/recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended",
+      "plugin:tailwindcss/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "project": "./tsconfig.json"
+    },
+    "root": true,
+    "rules": {
+      "no-undef": "off",
+      "no-unused-vars": "off",
+      "react/react-in-jsx-scope": "off",
+      "tailwindcss/classnames-order": [
+        "warn",
+        {
+          "officialSorting": true
+        }
+      ]
+    }
+  }
 }
