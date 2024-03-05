@@ -1,4 +1,8 @@
-import type { Comment, FigmaNotificationProps, Mention } from "@/types/figma";
+import type {
+  Comment,
+  FigmaNotificationProps,
+  Mention,
+} from "@/types/integrations/figma";
 import { HiExternalLink } from "react-icons/hi";
 
 const FigmaNotification = ({

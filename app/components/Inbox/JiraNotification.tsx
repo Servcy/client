@@ -1,4 +1,4 @@
-import { JiraNotificationProps } from "@/types/jira";
+import { JiraNotificationProps } from "@/types/integrations/jira";
 import Image from "next/image.js";
 import { HiExternalLink } from "react-icons/hi";
 import { remark } from "remark";

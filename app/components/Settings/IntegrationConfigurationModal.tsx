@@ -4,7 +4,7 @@ import {
   Integration,
   IntegrationEvent,
   UserIntegration,
-} from "@/types/integration";
+} from "@/types/apps/integration";
 // Components
 import { Card, Checkbox, Modal } from "antd";
 import FigmaConfiguration from "./FigmaConfiguration";

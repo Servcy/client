@@ -36,5 +36,5 @@
     }
   },
   "exclude": [".next", "node_modules"],
-  "include": [".next/types/**/*.ts", "app/types/*.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": [".next/types/**/*.ts", "app/types/*.d.ts", "app/types/**/*.d.ts", "**/*.ts", "**/*.tsx"]
 }

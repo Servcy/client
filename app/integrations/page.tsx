@@ -17,7 +17,7 @@ import {
   uniqueIntegrationCategories,
 } from "@/constants/integrations";
 // Types
-import { Integration } from "@/types/integration";
+import { Integration } from "@/types/apps/integration";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
 import { capitalizeFirstLetter } from "@/utils/Shared/formatters";

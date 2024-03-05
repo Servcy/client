@@ -1,4 +1,4 @@
-import { GithubNotificationProps } from "@/types/github";
+import { GithubNotificationProps } from "@/types/integrations/github";
 import { getCleanLink } from "@/utils/Shared";
 import { Tag, Tooltip } from "antd";
 import Image from "next/image";

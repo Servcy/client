@@ -12,7 +12,7 @@ import { AiFillSetting } from "react-icons/ai";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
 // Types
-import { Integration } from "@/types/integration";
+import { Integration } from "@/types/apps/integration";
 
 export default function IntegrationSettings(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);

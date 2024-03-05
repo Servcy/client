@@ -1,4 +1,4 @@
-import { AsanaNotificationProps } from "@/types/asana";
+import { AsanaNotificationProps } from "@/types/integrations/asana";
 import { getCleanLink } from "@/utils/Shared";
 import { Avatar, Tag, Tooltip } from "antd";
 import Image from "next/image";

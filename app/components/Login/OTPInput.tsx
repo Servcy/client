@@ -1,4 +1,4 @@
-import type { NativeEvent, OTPInputProps } from "@/types/otpInput";
+import type { NativeEvent, OTPInputProps } from "@/types/auth/otpInput";
 import React from "react";
 
 const isStyleObject = (obj: unknown) => typeof obj === "object" && obj !== null;

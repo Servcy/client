@@ -3,7 +3,10 @@ import cn from "classnames";
 import Image from "next/image";
 import { HiExternalLink, HiPaperClip } from "react-icons/hi";
 
-import { SlackMessageElementProps, SlackMessageProps } from "@/types/slack";
+import {
+  SlackMessageElementProps,
+  SlackMessageProps,
+} from "@/types/integrations/slack";
 
 const SlackMessage = ({
   data,

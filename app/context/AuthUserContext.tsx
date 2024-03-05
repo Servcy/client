@@ -1,4 +1,4 @@
-import type { AuthUserContextProps } from "@/types/authUser";
+import type { AuthUserContextProps } from "@/types/auth/authUser";
 import type { PropsWithChildren } from "react";
 import { createContext, useContext } from "react";
 

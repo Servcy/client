@@ -1,6 +1,6 @@
 import cn from "classnames";
 // Types
-import { InboxItem, PaginationDetails } from "@/types/inbox";
+import { InboxItem, PaginationDetails } from "@/types/apps/inbox";
 import type { ColumnsType } from "antd/es/table";
 import React, { Dispatch, SetStateAction } from "react";
 // Compponents

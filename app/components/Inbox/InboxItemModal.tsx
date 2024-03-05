@@ -12,7 +12,7 @@ import NotionComment from "./NotionComment";
 import SlackMessage from "./SlackMessage";
 import TrelloNotification from "./TrelloNotification";
 // Types
-import { Attachment, InboxItem } from "@/types/inbox";
+import { Attachment, InboxItem } from "@/types/apps/inbox";
 // Utils
 import { downloadFile } from "@/utils/Shared/files";
 

@@ -1,4 +1,4 @@
-import type { NotionComment } from "@/types/notion";
+import type { NotionComment } from "@/types/integrations/notion";
 import { getCleanLink } from "@/utils/Shared";
 import Image from "next/image";
 import { HiExternalLink } from "react-icons/hi";

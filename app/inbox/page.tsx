@@ -25,7 +25,7 @@ import {
   readItem as readItemApi,
 } from "@/apis/inbox";
 // Types
-import { InboxItem, PaginationDetails } from "@/types/inbox";
+import { InboxItem, PaginationDetails } from "@/types/apps/inbox";
 // constants
 import { integrationInboxCategories } from "@/constants/integrations";
 
