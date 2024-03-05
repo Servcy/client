@@ -100,7 +100,8 @@ export const handleDragDrop = async (
     const [removed] = sourceIssues.splice(source.index, 1);
 
     if (removed) {
-      if (viewId) return await store?.removeIssue(workspaceSlug, projectId, removed); //, viewId);
+      if (viewId)
+        return await store?.removeIssue(workspaceSlug, projectId, removed); //, viewId);
       else return await store?.removeIssue(workspaceSlug, projectId, removed);
     }
   } else {

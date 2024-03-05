@@ -7,16 +7,11 @@ import { useApplication } from "hooks/store";
 import useOutsideClickDetector from "hooks/use-outside-click-detector";
 // icons
 import { HelpCircle, MessagesSquare, MoveLeft, Zap } from "lucide-react";
-import { GithubIcon, Tooltip } from "@servcy/ui";
+import { Tooltip } from "@servcy/ui";
 // assets
 import packageJson from "package.json";
 
 const helpOptions = [
-  {
-    name: "Report a bug",
-    href: "https://github.com/Servcy/Client/issues/new/choose",
-    Icon: GithubIcon,
-  },
   {
     name: "Chat with us",
     href: null,

@@ -65,7 +65,7 @@ export interface TrelloBoard {
       memberType: string;
       unconfirmed: boolean;
       deactivated: boolean;
-    }
+    },
   ];
   enterpriseOwned?: boolean;
   starred?: boolean;
@@ -160,7 +160,7 @@ export interface TrelloAttachment {
       scaled: boolean;
       url: string;
       width: number;
-    }
+    },
   ];
 }
 

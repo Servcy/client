@@ -1,5 +1,10 @@
 // types
-import { TIssue, IIssueLabel, IWorkspaceLite, IProjectLite } from "@servcy/types";
+import {
+  TIssue,
+  IIssueLabel,
+  IWorkspaceLite,
+  IProjectLite,
+} from "@servcy/types";
 
 export interface IPage {
   access: number;

@@ -4,17 +4,10 @@ import Link from "next/link";
 import { HelpCircle, MessagesSquare, MoveLeft } from "lucide-react";
 // hooks
 import { useApplication } from "hooks/store";
-// icons
-import { GithubIcon } from "@servcy/ui";
 // assets
 import packageJson from "package.json";
 
 const helpOptions = [
-  {
-    name: "Report a bug",
-    href: "https://github.com/Servcy/Client/issues/new/choose",
-    Icon: GithubIcon,
-  },
   {
     name: "Chat with us",
     href: null,

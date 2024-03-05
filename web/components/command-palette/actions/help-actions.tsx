@@ -1,5 +1,5 @@
 import { Command } from "cmdk";
-import { GithubIcon, MessageSquare, Rocket } from "lucide-react";
+import { MessageSquare, Rocket } from "lucide-react";
 // hooks
 import { useApplication } from "hooks/store";
 
@@ -26,18 +26,6 @@ export const CommandPaletteHelpActions: React.FC<Props> = (props) => {
         <div className="flex items-center gap-2 text-custom-text-200">
           <Rocket className="h-3.5 w-3.5" />
           Open keyboard shortcuts
-        </div>
-      </Command.Item>
-      <Command.Item
-        onSelect={() => {
-          closePalette();
-          window.open("https://github.com/Servcy/Client/issues/new/choose", "_blank");
-        }}
-        className="focus:outline-none"
-      >
-        <div className="flex items-center gap-2 text-custom-text-200">
-          <GithubIcon className="h-4 w-4" color="rgb(var(--color-text-200))" />
-          Report a bug
         </div>
       </Command.Item>
       <Command.Item

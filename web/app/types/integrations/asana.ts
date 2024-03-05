@@ -90,7 +90,7 @@ export interface AsanaTask {
         name: string;
         resource_type: string;
       };
-    }
+    },
   ];
   modified_at: string;
   name: string;
@@ -109,7 +109,7 @@ export interface AsanaTask {
       gid: string;
       name: string;
       resource_type: string;
-    }
+    },
   ];
   resource_type: string;
   start_at?: string;
