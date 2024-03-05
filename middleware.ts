@@ -30,10 +30,5 @@ export async function middleware(request: NextRequest) {
     else return null;
   }
   if (authRoutes.includes(requestedPath)) return null;
-  return NextResponse.redirect(
-    new URL(
-      "/login?nextUrl=" + encodeURIComponent(requestedPath),
-      request.nextUrl.origin
-    )
-  );
+  return NextResponse.redirect(new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin));
 }

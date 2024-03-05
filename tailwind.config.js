@@ -2,10 +2,7 @@
  * @type {import('@types/tailwindcss/tailwind-config').TailwindConfig}
  */
 module.exports = {
-  content: [
-    "./public/**/*.html",
-    "./app/**/*.{ts,tsx}",
-  ],
+  content: ["./public/**/*.html", "./app/**/*.{ts,tsx}"],
   plugins: [],
   theme: {
     extend: {
@@ -24,5 +21,5 @@ module.exports = {
       },
     },
   },
-  darkMode: 'class',
+  darkMode: "class",
 };
