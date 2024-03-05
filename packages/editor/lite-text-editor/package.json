@@ -1,7 +1,7 @@
 {
   "name": "@servcy/lite-text-editor",
   "version": "0.16.0",
-  "description": "Package that powers Plane's Comment Editor",
+  "description": "Package that powers Servcy's Comment Editor",
   "private": true,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",

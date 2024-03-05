@@ -1,7 +1,7 @@
 {
   "name": "@servcy/editor-extensions",
   "version": "0.16.0",
-  "description": "Package that powers Plane's Editor with extensions",
+  "description": "Package that powers Servcy's Editor with extensions",
   "private": true,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",

@@ -1,7 +1,7 @@
 {
   "name": "@servcy/editor-core",
   "version": "0.16.0",
-  "description": "Core Editor that powers Plane",
+  "description": "Core Editor that powers Servcy",
   "private": true,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
