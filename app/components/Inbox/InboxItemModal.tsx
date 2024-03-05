@@ -38,12 +38,7 @@ const InboxItemModal = ({
   if (selectedRow.is_body_html && selectedRow.cause !== "None") {
     body = DOMPurify.sanitize(body);
   }
-  if (
-    selectedRow.source === "Gmail" &&
-    selectedRow.cause !== "None" &&
-    body.includes("�")
-  )
-    body = selectedRow.body;
+  if (selectedRow.source === "Gmail" && selectedRow.cause !== "None" && body.includes("�")) body = selectedRow.body;
 
   return (
     <Modal
@@ -65,56 +60,35 @@ const InboxItemModal = ({
                   }}
                   className="max-h-[600px] min-h-48 overflow-y-scroll p-1"
                 />
-                {selectedRow.attachments !== "None" &&
-                  selectedRow.attachments !== "[]" && (
-                    <div className="mt-4 flex overflow-x-scroll bg-servcy-black p-4">
-                      {JSON.parse(
-                        selectedRow.attachments.replaceAll("'", '"')
-                      ).map((attachment: Attachment) => (
-                        <button
-                          key={attachment.name}
-                          onClick={() => {
-                            downloadFile(attachment.name, attachment.data);
-                          }}
-                          className="mr-2 flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
-                        >
-                          <HiPaperClip className="mr-1 inline" size="18" />
-                          <span className="truncate">{attachment.name}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                {selectedRow.attachments !== "None" && selectedRow.attachments !== "[]" && (
+                  <div className="mt-4 flex overflow-x-scroll bg-servcy-black p-4">
+                    {JSON.parse(selectedRow.attachments.replaceAll("'", '"')).map((attachment: Attachment) => (
+                      <button
+                        key={attachment.name}
+                        onClick={() => {
+                          downloadFile(attachment.name, attachment.data);
+                        }}
+                        className="mr-2 flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
+                      >
+                        <HiPaperClip className="mr-1 inline" size="18" />
+                        <span className="truncate">{attachment.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </>
             ) : selectedRow.source === "Notion" ? (
-              <NotionComment
-                data={JSON.parse(selectedRow.body)}
-                cause={selectedRow.cause}
-              />
+              <NotionComment data={JSON.parse(selectedRow.body)} cause={selectedRow.cause} />
             ) : selectedRow.source === "Figma" ? (
-              <FigmaNotification
-                data={JSON.parse(selectedRow.body)}
-                cause={selectedRow.cause}
-              />
+              <FigmaNotification data={JSON.parse(selectedRow.body)} cause={selectedRow.cause} />
             ) : selectedRow.source === "Asana" ? (
-              <AsanaNotification
-                data={JSON.parse(selectedRow.body)}
-                cause={JSON.parse(selectedRow.cause)}
-              />
+              <AsanaNotification data={JSON.parse(selectedRow.body)} cause={JSON.parse(selectedRow.cause)} />
             ) : selectedRow.source === "Trello" ? (
-              <TrelloNotification
-                data={JSON.parse(selectedRow.body)}
-                cause={JSON.parse(selectedRow.cause)}
-              />
+              <TrelloNotification data={JSON.parse(selectedRow.body)} cause={JSON.parse(selectedRow.cause)} />
             ) : selectedRow.source === "Jira" ? (
-              <JiraNotification
-                data={JSON.parse(selectedRow.body)}
-                cause={JSON.parse(selectedRow.cause)}
-              />
+              <JiraNotification data={JSON.parse(selectedRow.body)} cause={JSON.parse(selectedRow.cause)} />
             ) : selectedRow.source === "Slack" ? (
-              <SlackMessage
-                data={JSON.parse(selectedRow.body)}
-                cause={selectedRow.cause}
-              />
+              <SlackMessage data={JSON.parse(selectedRow.body)} cause={selectedRow.cause} />
             ) : selectedRow.source === "Github" ? (
               <GithubNotification
                 data={JSON.parse(selectedRow.body)}
@@ -122,9 +96,7 @@ const InboxItemModal = ({
                 timestamp={selectedRow.created_at}
               />
             ) : (
-              <div className="col-span-2 max-h-[600px] overflow-y-scroll p-1">
-                {body}
-              </div>
+              <div className="col-span-2 max-h-[600px] overflow-y-scroll p-1">{body}</div>
             )}
           </div>
         </div>
@@ -134,8 +106,7 @@ const InboxItemModal = ({
             <Button
               className="mr-2 text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
               onClick={() => {
-                selectedRowIndex > 0 &&
-                  setSelectedRowIndex(selectedRowIndex - 1);
+                selectedRowIndex > 0 && setSelectedRowIndex(selectedRowIndex - 1);
                 !selectedRow.is_read && readItem(selectedRow.id);
               }}
               disabled={selectedRowIndex === 0}
@@ -145,8 +116,7 @@ const InboxItemModal = ({
             <Button
               className="text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
               onClick={() => {
-                selectedRowIndex < totalInboxItems - 1 &&
-                  setSelectedRowIndex(selectedRowIndex + 1);
+                selectedRowIndex < totalInboxItems - 1 && setSelectedRowIndex(selectedRowIndex + 1);
                 !selectedRow.is_read && readItem(selectedRow.id);
               }}
               disabled={selectedRowIndex === totalInboxItems - 1}

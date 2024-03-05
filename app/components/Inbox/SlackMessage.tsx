@@ -3,21 +3,10 @@ import cn from "classnames";
 import Image from "next/image";
 import { HiExternalLink, HiPaperClip } from "react-icons/hi";
 
-import {
-  SlackMessageElementProps,
-  SlackMessageProps,
-} from "@/types/integrations/slack";
+import { SlackMessageElementProps, SlackMessageProps } from "@/types/integrations/slack";
 
-const SlackMessage = ({
-  data,
-  cause,
-}: {
-  data: SlackMessageProps;
-  cause: string;
-}) => {
-  const link = `https://servcy.slack.com/archives/${
-    data.channel
-  }/p${data.ts.replace(".", "")}`;
+const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string }) => {
+  const link = `https://servcy.slack.com/archives/${data.channel}/p${data.ts.replace(".", "")}`;
   const { real_name, image_32 } = JSON.parse(cause);
   const cleanImageLink = getCleanLink(image_32);
 
@@ -31,10 +20,7 @@ const SlackMessage = ({
           ) : element.text === " " ? (
             <span>&nbsp;</span>
           ) : typeof element.style === "object" && element.style.code ? (
-            <code
-              key={index}
-              className="border-1 border-servcy-wheat bg-servcy-cream p-0.5 text-servcy-black"
-            >
+            <code key={index} className="border-1 border-servcy-wheat bg-servcy-cream p-0.5 text-servcy-black">
               {element.text}
             </code>
           ) : (
@@ -42,8 +28,7 @@ const SlackMessage = ({
               key={index}
               className={cn({
                 "font-semibold": element.style?.bold,
-                italic:
-                  typeof element.style === "object" && element.style.italic,
+                italic: typeof element.style === "object" && element.style.italic,
                 "line-through": element.style?.strike,
               })}
             >
@@ -52,22 +37,13 @@ const SlackMessage = ({
           );
         case "link":
           return (
-            <a
-              key={index}
-              href={element.url}
-              className="text-servcy-wheat hover:text-servcy-silver"
-            >
+            <a key={index} href={element.url} className="text-servcy-wheat hover:text-servcy-silver">
               {element.text}
             </a>
           );
         case "user": {
-          if (
-            data["x-servcy-mentions"] &&
-            data["x-servcy-mentions"].length > 0
-          ) {
-            const mentioned_profile = data["x-servcy-mentions"].find(
-              (mention) => mention.id === element.user_id
-            );
+          if (data["x-servcy-mentions"] && data["x-servcy-mentions"].length > 0) {
+            const mentioned_profile = data["x-servcy-mentions"].find((mention) => mention.id === element.user_id);
             if (mentioned_profile)
               return (
                 <>
@@ -126,13 +102,9 @@ const SlackMessage = ({
                 listStyle: "inside decimal",
               }}
             >
-              {element.elements?.map(
-                (listItem: SlackMessageElementProps, listItemIndex: number) => (
-                  <li key={listItemIndex}>
-                    {renderElements(listItem.elements)}
-                  </li>
-                )
-              )}
+              {element.elements?.map((listItem: SlackMessageElementProps, listItemIndex: number) => (
+                <li key={listItemIndex}>{renderElements(listItem.elements)}</li>
+              ))}
             </ol>
           ) : (
             <ul
@@ -143,13 +115,9 @@ const SlackMessage = ({
                 listStyle: "inside circle",
               }}
             >
-              {element.elements?.map(
-                (listItem: SlackMessageElementProps, listItemIndex: number) => (
-                  <li key={listItemIndex}>
-                    {renderElements(listItem.elements)}
-                  </li>
-                )
-              )}
+              {element.elements?.map((listItem: SlackMessageElementProps, listItemIndex: number) => (
+                <li key={listItemIndex}>{renderElements(listItem.elements)}</li>
+              ))}
             </ul>
           );
         default:
@@ -172,11 +140,7 @@ const SlackMessage = ({
 
   return (
     <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
-      {data.blocks && (
-        <div className="mb-4 min-h-[75px]">
-          {renderMessageBlocks(data.blocks)}
-        </div>
-      )}
+      {data.blocks && <div className="mb-4 min-h-[75px]">{renderMessageBlocks(data.blocks)}</div>}
       {data.files ? (
         <div className="mb-4 grid grid-cols-6 gap-4">
           {data.files.map((file) => (
@@ -217,16 +181,13 @@ const SlackMessage = ({
             {real_name}
           </div>
           <div className="flex-row">
-            {new Date(parseFloat(data.event_ts) * 1000).toLocaleString(
-              "en-US",
-              {
-                weekday: "short",
-                month: "short",
-                day: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-              }
-            )}
+            {new Date(parseFloat(data.event_ts) * 1000).toLocaleString("en-US", {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+            })}
           </div>
         </div>
       </div>

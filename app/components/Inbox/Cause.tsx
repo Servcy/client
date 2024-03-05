@@ -6,13 +6,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
   if (cause === "None") {
     return (
       <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
-        <Image
-          alt="Servcy logo"
-          width={20}
-          height={20}
-          src="/logo.svg"
-          className="mr-2 h-5 w-5 rounded-full"
-        />
+        <Image alt="Servcy logo" width={20} height={20} src="/logo.svg" className="mr-2 h-5 w-5 rounded-full" />
         <div>Servcy Auditor</div>
       </div>
     );
@@ -24,11 +18,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
     return (
       <div className="min-h-[50px] max-w-[250px] flex-col justify-center text-ellipsis text-left text-sm">
         <div className="flex-row">{name}</div>
-        {email !== "undefined" && (
-          <div className="flex-row text-gray-400">
-            &lt;{email.slice(0, 30)}&gt;
-          </div>
-        )}
+        {email !== "undefined" && <div className="flex-row text-gray-400">&lt;{email.slice(0, 30)}&gt;</div>}
       </div>
     );
   } else if (source === "Github") {
@@ -44,12 +34,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
           width={20}
           height={20}
         />
-        <a
-          href={html_url}
-          target="_blank"
-          rel="noreferrer"
-          className="text-white"
-        >
+        <a href={html_url} target="_blank" rel="noreferrer" className="text-white">
           {login}
         </a>
       </div>
@@ -88,9 +73,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
     );
   } else if (source === "Asana") {
     const { name, photo } = JSON.parse(cause);
-    const cleanImageLink = getCleanLink(
-      photo.image_60x60 ?? photo.image_128x128 ?? photo.image_21x21 ?? ""
-    );
+    const cleanImageLink = getCleanLink(photo.image_60x60 ?? photo.image_128x128 ?? photo.image_21x21 ?? "");
     return (
       <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
         {cleanImageLink && (
@@ -133,9 +116,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
       </div>
     );
   }
-  return (
-    <span className="max-w-[250px] text-ellipsis text-center">{cause}</span>
-  );
+  return <span className="max-w-[250px] text-ellipsis text-center">{cause}</span>;
 };
 
 export default Cause;

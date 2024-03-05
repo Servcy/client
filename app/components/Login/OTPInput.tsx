@@ -32,9 +32,7 @@ export default function OTPInput({
   }, [shouldAutoFocus]);
 
   const isInputValueValid = (value: string) => {
-    const isTypeValid = isInputNum
-      ? !isNaN(Number(value))
-      : typeof value === "string";
+    const isTypeValid = isInputNum ? !isNaN(Number(value)) : typeof value === "string";
     return isTypeValid && value.trim().length === 1;
   };
 
@@ -53,10 +51,7 @@ export default function OTPInput({
     };
     if (!isInputValueValid(event.target.value)) {
       // for dealing with keyCode "229 Unidentified" on Android.
-      if (
-        nativeEvent.data === null &&
-        nativeEvent.inputType === "deleteContentBackward"
-      ) {
+      if (nativeEvent.data === null && nativeEvent.inputType === "deleteContentBackward") {
         event.preventDefault();
         changeCodeAtFocus("");
         focusInput(activeInput - 1);
@@ -66,11 +61,10 @@ export default function OTPInput({
     }
   };
 
-  const handleFocus =
-    (event: React.FocusEvent<HTMLInputElement>) => (index: number) => {
-      setActiveInput(index);
-      event.target.select();
-    };
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => (index: number) => {
+    setActiveInput(index);
+    event.target.select();
+  };
 
   const handleBlur = () => {
     setActiveInput(activeInput - 1);
@@ -159,13 +153,8 @@ export default function OTPInput({
 
   return (
     <div
-      style={Object.assign(
-        { display: "flex", alignItems: "center" },
-        isStyleObject(containerStyle) && containerStyle
-      )}
-      className={
-        typeof containerStyle === "string" ? containerStyle : undefined
-      }
+      style={Object.assign({ display: "flex", alignItems: "center" }, isStyleObject(containerStyle) && containerStyle)}
+      className={typeof containerStyle === "string" ? containerStyle : undefined}
     >
       {Array.from({ length: numInputs }, (_, index) => index).map((index) => (
         <React.Fragment key={index}>
@@ -181,8 +170,7 @@ export default function OTPInput({
                 { width: "3em", textAlign: "center" } as const,
                 isStyleObject(inputStyle) && inputStyle
               ),
-              className:
-                typeof inputStyle === "string" ? inputStyle : undefined,
+              className: typeof inputStyle === "string" ? inputStyle : undefined,
               type: inputType,
               inputMode: isInputNum ? "numeric" : "text",
               onInput: handleInputChange,
@@ -194,10 +182,7 @@ export default function OTPInput({
             },
             index
           )}
-          {index < numInputs - 1 &&
-            (typeof renderSeparator === "function"
-              ? renderSeparator(index)
-              : renderSeparator)}
+          {index < numInputs - 1 && (typeof renderSeparator === "function" ? renderSeparator(index) : renderSeparator)}
         </React.Fragment>
       ))}
     </div>

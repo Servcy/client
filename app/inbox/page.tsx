@@ -57,19 +57,15 @@ export default function Gmail(): JSX.Element {
   const [search, setSearch] = useState<string>("");
   const [selectedItemIds, setSelectedItemIds] = useState<React.Key[]>([]);
   const [inboxItems, setInboxItems] = useState<InboxItem[]>([] as InboxItem[]);
-  const [inboxPagination, setInboxPagination] = useState<PaginationDetails>(
-    {} as PaginationDetails
-  );
+  const [inboxPagination, setInboxPagination] = useState<PaginationDetails>({} as PaginationDetails);
   const [activeTab, setActiveTab] = useState<string>("message");
   const [page, setPage] = useState<number>(1);
   const [filters, setFilters] = useState<Record<string, string | boolean>>({
     category: "message",
   });
   const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
-  const [isInboxItemModalVisible, setIsInboxItemModalVisible] =
-    useState<boolean>(false);
-  const [filterByIAmMentionedButtonText, setFilterByIAmMentionedButtonText] =
-    useState<string>("For Me");
+  const [isInboxItemModalVisible, setIsInboxItemModalVisible] = useState<boolean>(false);
+  const [filterByIAmMentionedButtonText, setFilterByIAmMentionedButtonText] = useState<string>("For Me");
 
   const refetchInboxItems = async () => {
     try {
@@ -223,12 +219,9 @@ export default function Gmail(): JSX.Element {
             tabBarExtraContent={
               <div className="flex">
                 <Button
-                  className={cn(
-                    "mr-2 text-sm hover:!border-servcy hover:!text-servcy",
-                    {
-                      "!border-servcy !text-servcy": filters["i_am_mentioned"],
-                    }
-                  )}
+                  className={cn("mr-2 text-sm hover:!border-servcy hover:!text-servcy", {
+                    "!border-servcy !text-servcy": filters["i_am_mentioned"],
+                  })}
                   onClick={() => {
                     setFilters((prevState) => {
                       return {
@@ -245,16 +238,13 @@ export default function Gmail(): JSX.Element {
                   className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
                   disabled={inboxItems.length === 0}
                   onClick={() => {
-                    if (activeTab !== "archived")
-                      archiveItems(inboxItems.map((item) => parseInt(item.id)));
-                    else
-                      deleteItems(inboxItems.map((item) => parseInt(item.id)));
+                    if (activeTab !== "archived") archiveItems(inboxItems.map((item) => parseInt(item.id)));
+                    else deleteItems(inboxItems.map((item) => parseInt(item.id)));
                   }}
                   icon={<HiArchiveBoxArrowDown />}
                 >
                   <span>
-                    {activeTab === "archived" ? "Delete" : "Archive"} All (
-                    {inboxItems.length})
+                    {activeTab === "archived" ? "Delete" : "Archive"} All ({inboxItems.length})
                   </span>
                 </Button>
                 <Button
@@ -262,23 +252,12 @@ export default function Gmail(): JSX.Element {
                   disabled={selectedItemIds.length === 0}
                   onClick={() => {
                     if (activeTab !== "archived")
-                      archiveItems(
-                        selectedItemIds.map((item_id) =>
-                          parseInt(item_id.toString())
-                        )
-                      );
-                    else
-                      deleteItems(
-                        selectedItemIds.map((item_id) =>
-                          parseInt(item_id.toString())
-                        )
-                      );
+                      archiveItems(selectedItemIds.map((item_id) => parseInt(item_id.toString())));
+                    else deleteItems(selectedItemIds.map((item_id) => parseInt(item_id.toString())));
                   }}
                   icon={<HiArchiveBoxArrowDown />}
                 >
-                  <span>
-                    {activeTab === "archived" ? "Delete" : "Archive"} Selected
-                  </span>
+                  <span>{activeTab === "archived" ? "Delete" : "Archive"} Selected</span>
                 </Button>
                 <Select
                   placeholder="Filter By Source"
@@ -306,19 +285,12 @@ export default function Gmail(): JSX.Element {
               return {
                 label: (
                   <div
-                    className={cn(
-                      "flex justify-center align-middle hover:!text-servcy-dark",
-                      {
-                        "text-servcy-green font-semibold":
-                          activeTab === item.key,
-                      }
-                    )}
+                    className={cn("flex justify-center align-middle hover:!text-servcy-dark", {
+                      "text-servcy-green font-semibold": activeTab === item.key,
+                    })}
                   >
                     <item.Icon className="my-auto mr-2" />
-                    {item.label}{" "}
-                    {activeTab === item.key
-                      ? `(${inboxPagination.total_items || "-"})`
-                      : ""}
+                    {item.label} {activeTab === item.key ? `(${inboxPagination.total_items || "-"})` : ""}
                   </div>
                 ),
                 key: item.key,

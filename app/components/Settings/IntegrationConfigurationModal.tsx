@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 // Types
-import {
-  Integration,
-  IntegrationEvent,
-  UserIntegration,
-} from "@/types/apps/integration";
+import { Integration, IntegrationEvent, UserIntegration } from "@/types/apps/integration";
 // Components
 import { Card, Checkbox, Modal } from "antd";
 import FigmaConfiguration from "./FigmaConfiguration";
@@ -28,9 +24,7 @@ export default function IntegrationConfigurationModal({
 }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [events, setEvents] = useState<IntegrationEvent[]>([]);
-  const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>(
-    []
-  );
+  const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -110,13 +104,8 @@ export default function IntegrationConfigurationModal({
                 key={userIntegration.id}
                 className="servcy-card-bg flex items-center justify-between rounded-lg p-4 font-semibold text-servcy-black"
               >
-                <div className="truncate">
-                  {userIntegration.account_display_name}
-                </div>
-                <button
-                  className="ml-4 cursor-not-allowed rounded bg-servcy-black p-2 text-servcy-wheat"
-                  disabled
-                >
+                <div className="truncate">{userIntegration.account_display_name}</div>
+                <button className="ml-4 cursor-not-allowed rounded bg-servcy-black p-2 text-servcy-wheat" disabled>
                   Disconnect
                 </button>
               </div>
@@ -160,22 +149,14 @@ export default function IntegrationConfigurationModal({
           </div>
         </Card>
       )}
-      {["Github", "Figma", "Gmail", "Outlook"].includes(
-        selectedIntegration.name
-      ) && (
+      {["Github", "Figma", "Gmail", "Outlook"].includes(selectedIntegration.name) && (
         <Card
           className="mt-4 rounded-lg bg-servcy-black text-servcy-cream"
-          title={
-            <div className="text-servcy-cream">Additional Configuration</div>
-          }
+          title={<div className="text-servcy-cream">Additional Configuration</div>}
         >
           {selectedIntegration.name === "Github" && <GithubConfiguration />}
-          {selectedIntegration.name === "Figma" && (
-            <FigmaConfiguration selectedIntegration={selectedIntegration} />
-          )}
-          {selectedIntegration.name === "Gmail" && (
-            <GoogleConfiguration selectedIntegration={selectedIntegration} />
-          )}
+          {selectedIntegration.name === "Figma" && <FigmaConfiguration selectedIntegration={selectedIntegration} />}
+          {selectedIntegration.name === "Gmail" && <GoogleConfiguration selectedIntegration={selectedIntegration} />}
           {selectedIntegration.name === "Outlook" && (
             <MicrosoftConfiguration selectedIntegration={selectedIntegration} />
           )}

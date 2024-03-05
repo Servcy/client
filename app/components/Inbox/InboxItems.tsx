@@ -50,10 +50,7 @@ const InboxItems = ({
     }),
   };
 
-  const disableNotificationTypeHandler = (
-    event: string,
-    user_integration_id: number
-  ) => {
+  const disableNotificationTypeHandler = (event: string, user_integration_id: number) => {
     disableNotificationType({ event, user_integration_id })
       .then(() => {
         toast.success("Notification type disabled successfully");
@@ -110,16 +107,13 @@ const InboxItems = ({
       title: "Date",
       width: 200,
       render: (date) => {
-        return new Date(date).toLocaleDateString(
-          navigator.language || "en-US",
-          {
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-          }
-        );
+        return new Date(date).toLocaleDateString(navigator.language || "en-US", {
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+        });
       },
     },
     {
@@ -169,10 +163,7 @@ const InboxItems = ({
                   size="small"
                   icon={<MdOutlineBlock className="mt-1" />}
                   onClick={() => {
-                    disableNotificationTypeHandler(
-                      record.body,
-                      record.user_integration_id
-                    );
+                    disableNotificationTypeHandler(record.body, record.user_integration_id);
                   }}
                 ></Button>
               </Tooltip>

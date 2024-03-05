@@ -16,53 +16,39 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
       return (
         <>
           <div className="mb-2 flex w-full">
-            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-              Issue Title:
-            </div>
+            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Issue Title:</div>
             <div>{data.issue.fields.summary}</div>
           </div>
           {data.issue.fields.description && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Description:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Description:</div>
               <div
                 className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                 dangerouslySetInnerHTML={{
-                  __html: remark()
-                    .use(html)
-                    .processSync(data.issue.fields.description)
-                    .toString(),
+                  __html: remark().use(html).processSync(data.issue.fields.description).toString(),
                 }}
               />
             </div>
           )}
           {data.issue.fields.issuetype && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Issue Type:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Issue Type:</div>
               <div>{data.issue.fields.issuetype.name}</div>
             </div>
           )}
           {data.issue.fields.status && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Status:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Status:</div>
               <div>{data.issue.fields.status.name}</div>
             </div>
           )}
           {data.changelog && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Updated Fields:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Updated Fields:</div>
               <div>
                 {data.changelog.items.map((item) => (
                   <div key={item.field}>
-                    {item.field} changed from {item.fromString} to{" "}
-                    {item.toString}
+                    {item.field} changed from {item.fromString} to {item.toString}
                   </div>
                 ))}
               </div>
@@ -70,17 +56,13 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
           )}
           {data.issue.fields.priority && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Priority:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Priority:</div>
               <div>{data.issue.fields.priority.name}</div>
             </div>
           )}
           {data.issue.fields.project && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                project:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">project:</div>
               <div className="flex justify-center">
                 <Image
                   src={data.issue.fields.project.avatarUrls["48x48"]}
@@ -91,24 +73,15 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
                   className="mr-2 rounded-full"
                 />
                 {data.issue.fields.project.name}
-                <a
-                  href={`${projectUrl}/browse/${data.issue.fields.project.key}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <HiExternalLink
-                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
-                    size="18"
-                  />
+                <a href={`${projectUrl}/browse/${data.issue.fields.project.key}`} target="_blank" rel="noreferrer">
+                  <HiExternalLink className="my-auto inline text-servcy-silver hover:text-servcy-wheat" size="18" />
                 </a>
               </div>
             </div>
           )}
           {data.issue.fields.assignee && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Assignee:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Assignee:</div>
               <div>
                 <div className="flex justify-center">
                   <Image
@@ -133,59 +106,42 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
       return (
         <>
           <div className="mb-2 flex w-full">
-            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-              Comment:
-            </div>
+            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Comment:</div>
             <div
               className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
               dangerouslySetInnerHTML={{
-                __html: remark()
-                  .use(html)
-                  .processSync(data.comment.body)
-                  .toString(),
+                __html: remark().use(html).processSync(data.comment.body).toString(),
               }}
             />
           </div>
           <div className="mb-2 flex w-full">
-            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-              Issue Title:
-            </div>
+            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Issue Title:</div>
             <div>{data.issue.fields.summary}</div>
           </div>
           {data.issue.fields.description && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Description:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Description:</div>
               <div
                 className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                 dangerouslySetInnerHTML={{
-                  __html: remark()
-                    .use(html)
-                    .processSync(data.issue.fields.description)
-                    .toString(),
+                  __html: remark().use(html).processSync(data.issue.fields.description).toString(),
                 }}
               />
             </div>
           )}
           {data.issue.fields.status && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Status:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Status:</div>
               <div>{data.issue.fields.status.name}</div>
             </div>
           )}
           {data.changelog && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Updated Fields:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Updated Fields:</div>
               <div>
                 {data.changelog.items.map((item) => (
                   <div key={item.field}>
-                    {item.field} changed from {item.fromString} to{" "}
-                    {item.toString}
+                    {item.field} changed from {item.fromString} to {item.toString}
                   </div>
                 ))}
               </div>
@@ -193,17 +149,13 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
           )}
           {data.issue.fields.priority && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Priority:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Priority:</div>
               <div>{data.issue.fields.priority.name}</div>
             </div>
           )}
           {data.comment.author && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Comment Author:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Comment Author:</div>
               <div>
                 <div className="flex justify-center">
                   <Image
@@ -221,9 +173,7 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
           )}
           {data.issue.fields.project && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                project:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">project:</div>
               <div className="flex justify-center">
                 <Image
                   src={data.issue.fields.project.avatarUrls["48x48"]}
@@ -234,24 +184,15 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
                   className="mr-2 rounded-full"
                 />
                 {data.issue.fields.project.name}
-                <a
-                  href={`${projectUrl}/browse/${data.issue.fields.project.key}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <HiExternalLink
-                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
-                    size="18"
-                  />
+                <a href={`${projectUrl}/browse/${data.issue.fields.project.key}`} target="_blank" rel="noreferrer">
+                  <HiExternalLink className="my-auto inline text-servcy-silver hover:text-servcy-wheat" size="18" />
                 </a>
               </div>
             </div>
           )}
           {data.issue.fields.assignee && (
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Assignee:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Assignee:</div>
               <div>
                 <div className="flex justify-center">
                   <Image
@@ -274,9 +215,7 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
 
   return (
     <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
-      <div className="mb-4 min-h-[75px] text-servcy-white">
-        {renderTrelloEvent()}
-      </div>
+      <div className="mb-4 min-h-[75px] text-servcy-white">{renderTrelloEvent()}</div>
       <div className="flex justify-between">
         {linkLabel && (
           <a

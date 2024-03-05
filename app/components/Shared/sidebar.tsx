@@ -8,11 +8,7 @@ import { AiOutlinePoweroff, AiOutlineSetting } from "react-icons/ai";
 import cn from "classnames";
 import { useState } from "react";
 
-export default function SideBar({
-  logout,
-}: {
-  logout: () => Promise<void>;
-}): JSX.Element {
+export default function SideBar({ logout }: { logout: () => Promise<void> }): JSX.Element {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
   return (
@@ -30,17 +26,8 @@ export default function SideBar({
     >
       <nav aria-label="Sidebar" className="flex h-full w-full flex-col">
         <div className="h-full overflow-y-auto overflow-x-hidden rounded px-3 py-4">
-          <a
-            href="/"
-            className="mb-5 flex items-center rounded-lg bg-servcy-gray py-4 pl-2.5"
-          >
-            <Image
-              alt="Servcy logo"
-              width={28}
-              height={28}
-              src="/logo.svg"
-              className="mr-3 h-6 sm:h-7"
-            />
+          <a href="/" className="mb-5 flex items-center rounded-lg bg-servcy-gray py-4 pl-2.5">
+            <Image alt="Servcy logo" width={28} height={28} src="/logo.svg" className="mr-3 h-6 sm:h-7" />
             {isSidebarHovered && (
               <span className="self-center whitespace-nowrap text-xl font-semibold">
                 <p className="text-xl">Servcy</p>

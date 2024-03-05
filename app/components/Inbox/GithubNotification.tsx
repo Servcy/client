@@ -7,11 +7,7 @@ import { HiExternalLink } from "react-icons/hi";
 import { remark } from "remark";
 import html from "remark-html";
 
-const GithubNotification = ({
-  data,
-  cause,
-  timestamp,
-}: GithubNotificationProps) => {
+const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps) => {
   let link = "#null";
   let linkLabel = "";
   const { login, avatar_url } = JSON.parse(cause);
@@ -25,37 +21,22 @@ const GithubNotification = ({
         return (
           <>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Pull Request:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Pull Request:</div>
               <div>
                 {data.pull_request?.title} [#{data.pull_request?.number}]{" "}
-                <a
-                  href={data.pull_request?.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <HiExternalLink
-                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
-                    size="18"
-                  />
+                <a href={data.pull_request?.html_url} target="_blank" rel="noreferrer">
+                  <HiExternalLink className="my-auto inline text-servcy-silver hover:text-servcy-wheat" size="18" />
                 </a>
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                State:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">State:</div>
               <div>
-                <Tag className="m-1 bg-servcy-wheat font-bold text-servcy-white">
-                  {data.pull_request?.state}
-                </Tag>
+                <Tag className="m-1 bg-servcy-wheat font-bold text-servcy-white">{data.pull_request?.state}</Tag>
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Action Taken:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Action Taken:</div>
               <div>
                 <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">
                   {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
@@ -64,16 +45,10 @@ const GithubNotification = ({
             </div>
             {data.pull_request?.labels && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Labels:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Labels:</div>
                 <div>
                   {data.pull_request.labels.map((label) => (
-                    <Tag
-                      key={label.id}
-                      className="m-1"
-                      color={`#${label.color}`}
-                    >
+                    <Tag key={label.id} className="m-1" color={`#${label.color}`}>
                       {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
                     </Tag>
                   ))}
@@ -81,16 +56,11 @@ const GithubNotification = ({
               </div>
             )}
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Thread:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Thread:</div>
               <div
                 className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                 dangerouslySetInnerHTML={{
-                  __html: remark()
-                    .use(html)
-                    .processSync(data.thread?.comments[0]?.body)
-                    .toString(),
+                  __html: remark().use(html).processSync(data.thread?.comments[0]?.body).toString(),
                 }}
               />
             </div>
@@ -103,37 +73,22 @@ const GithubNotification = ({
         return (
           <>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Pull Request:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Pull Request:</div>
               <div>
                 {data.pull_request?.title} [#{data.pull_request?.number}]{" "}
-                <a
-                  href={data.pull_request?.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <HiExternalLink
-                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
-                    size="18"
-                  />
+                <a href={data.pull_request?.html_url} target="_blank" rel="noreferrer">
+                  <HiExternalLink className="my-auto inline text-servcy-silver hover:text-servcy-wheat" size="18" />
                 </a>
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                State:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">State:</div>
               <div>
-                <Tag className="m-1 bg-servcy-wheat font-bold text-servcy-white">
-                  {data.pull_request?.state}
-                </Tag>
+                <Tag className="m-1 bg-servcy-wheat font-bold text-servcy-white">{data.pull_request?.state}</Tag>
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Action Taken:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Action Taken:</div>
               <div>
                 <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">
                   {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
@@ -142,16 +97,10 @@ const GithubNotification = ({
             </div>
             {data.pull_request?.labels && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Labels:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Labels:</div>
                 <div>
                   {data.pull_request.labels.map((label) => (
-                    <Tag
-                      key={label.id}
-                      className="m-1"
-                      color={`#${label.color}`}
-                    >
+                    <Tag key={label.id} className="m-1" color={`#${label.color}`}>
                       {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
                     </Tag>
                   ))}
@@ -159,48 +108,31 @@ const GithubNotification = ({
               </div>
             )}
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Comment:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Comment:</div>
               <div
                 className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                 dangerouslySetInnerHTML={{
-                  __html: remark()
-                    .use(html)
-                    .processSync(data.comment?.body)
-                    .toString(),
+                  __html: remark().use(html).processSync(data.comment?.body).toString(),
                 }}
               />
             </div>
             <div className="mb-2 mt-4 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Reactions:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Reactions:</div>
               <div className="text-xs font-semibold text-servcy-black">
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  👍 {data.comment?.reactions["+1"]}
-                </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  👎 {data.comment?.reactions["-1"]}
-                </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  😄 {data.comment?.reactions.laugh}
-                </span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">👍 {data.comment?.reactions["+1"]}</span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">👎 {data.comment?.reactions["-1"]}</span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">😄 {data.comment?.reactions.laugh}</span>
                 <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
                   🎉 {data.comment?.reactions.hooray}
                 </span>
                 <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
                   😕 {data.comment?.reactions.confused}
                 </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  ❤️ {data.comment?.reactions.heart}
-                </span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">❤️ {data.comment?.reactions.heart}</span>
                 <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
                   🚀 {data.comment?.reactions.rocket}
                 </span>
-                <span className="border-1 rounded-lg bg-servcy-white p-1">
-                  👀 {data.comment?.reactions.eyes}
-                </span>
+                <span className="border-1 rounded-lg bg-servcy-white p-1">👀 {data.comment?.reactions.eyes}</span>
               </div>
             </div>
           </>
@@ -212,37 +144,22 @@ const GithubNotification = ({
         return (
           <>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Pull Request:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Pull Request:</div>
               <div>
                 {data.pull_request?.title} [#{data.pull_request?.number}]{" "}
-                <a
-                  href={data.pull_request?.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <HiExternalLink
-                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
-                    size="18"
-                  />
+                <a href={data.pull_request?.html_url} target="_blank" rel="noreferrer">
+                  <HiExternalLink className="my-auto inline text-servcy-silver hover:text-servcy-wheat" size="18" />
                 </a>
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                State:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">State:</div>
               <div>
-                <Tag className="m-1 bg-servcy-wheat font-bold text-servcy-white">
-                  {data.pull_request?.state}
-                </Tag>
+                <Tag className="m-1 bg-servcy-wheat font-bold text-servcy-white">{data.pull_request?.state}</Tag>
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Action Taken:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Action Taken:</div>
               <div>
                 <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">
                   {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
@@ -251,16 +168,10 @@ const GithubNotification = ({
             </div>
             {data.pull_request?.labels && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Labels:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Labels:</div>
                 <div>
                   {data.pull_request.labels.map((label) => (
-                    <Tag
-                      key={label.id}
-                      className="m-1"
-                      color={`#${label.color}`}
-                    >
+                    <Tag key={label.id} className="m-1" color={`#${label.color}`}>
                       {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
                     </Tag>
                   ))}
@@ -268,27 +179,18 @@ const GithubNotification = ({
               </div>
             )}
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Review State:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Review State:</div>
               <div>
-                <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">
-                  {data.review?.state}
-                </Tag>
+                <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">{data.review?.state}</Tag>
               </div>
             </div>
             {data.review?.body && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Review comment:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Review comment:</div>
                 <div
                   className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                   dangerouslySetInnerHTML={{
-                    __html: remark()
-                      .use(html)
-                      .processSync(data.review.body)
-                      .toString(),
+                    __html: remark().use(html).processSync(data.review.body).toString(),
                   }}
                 />
               </div>
@@ -302,18 +204,14 @@ const GithubNotification = ({
         return (
           <>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Issue:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Issue:</div>
               <div>
                 {data.issue?.title} [#
                 {data.issue?.number}]
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Action Taken:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Action Taken:</div>
               <div>
                 <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">
                   {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
@@ -322,26 +220,19 @@ const GithubNotification = ({
             </div>
             {data.issue?.state && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  State:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">State:</div>
                 <div>
                   <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">
-                    {data.issue.state.charAt(0).toUpperCase() +
-                      data.issue.state.slice(1)}
+                    {data.issue.state.charAt(0).toUpperCase() + data.issue.state.slice(1)}
                   </Tag>
                 </div>
               </div>
             )}
             {data.issue?.closed_at && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Closed On:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Closed On:</div>
                 <div>
-                  {new Date(
-                    parseFloat(data.issue.closed_at) * 1000
-                  ).toLocaleString("en-US", {
+                  {new Date(parseFloat(data.issue.closed_at) * 1000).toLocaleString("en-US", {
                     weekday: "short",
                     month: "short",
                     day: "numeric",
@@ -352,32 +243,23 @@ const GithubNotification = ({
               </div>
             )}
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Comments:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Comments:</div>
               <div>{data.issue?.comments}</div>
             </div>
             {data.issue?.body && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Description:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Description:</div>
                 <div
                   className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                   dangerouslySetInnerHTML={{
-                    __html: remark()
-                      .use(html)
-                      .processSync(data.issue.body)
-                      .toString(),
+                    __html: remark().use(html).processSync(data.issue.body).toString(),
                   }}
                 />
               </div>
             )}
             {data.issue?.assignees && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Assignees:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Assignees:</div>
                 <div>
                   {data.issue.assignees.map((assignee) => (
                     <Tooltip title={assignee.login} key={assignee.id}>
@@ -396,16 +278,10 @@ const GithubNotification = ({
             )}
             {data.issue?.labels && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Labels:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Labels:</div>
                 <div>
                   {data.issue.labels.map((label) => (
-                    <Tag
-                      key={label.id}
-                      className="m-1"
-                      color={`#${label.color}`}
-                    >
+                    <Tag key={label.id} className="m-1" color={`#${label.color}`}>
                       {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
                     </Tag>
                   ))}
@@ -414,9 +290,7 @@ const GithubNotification = ({
             )}
             {data.issue?.milestone && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Milestone:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Milestone:</div>
                 <div>
                   <a
                     href={data.issue.milestone.html_url}
@@ -431,34 +305,18 @@ const GithubNotification = ({
               </div>
             )}
             <div className="mb-2 mt-4 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Reactions:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Reactions:</div>
               <div className="text-xs font-semibold text-servcy-black">
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  👍 {data.issue?.reactions["+1"]}
-                </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  👎 {data.issue?.reactions["-1"]}
-                </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  😄 {data.issue?.reactions.laugh}
-                </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  🎉 {data.issue?.reactions.hooray}
-                </span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">👍 {data.issue?.reactions["+1"]}</span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">👎 {data.issue?.reactions["-1"]}</span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">😄 {data.issue?.reactions.laugh}</span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">🎉 {data.issue?.reactions.hooray}</span>
                 <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
                   😕 {data.issue?.reactions.confused}
                 </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  ❤️ {data.issue?.reactions.heart}
-                </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  🚀 {data.issue?.reactions.rocket}
-                </span>
-                <span className="border-1 rounded-lg bg-servcy-white p-1">
-                  👀 {data.issue?.reactions.eyes}
-                </span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">❤️ {data.issue?.reactions.heart}</span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">🚀 {data.issue?.reactions.rocket}</span>
+                <span className="border-1 rounded-lg bg-servcy-white p-1">👀 {data.issue?.reactions.eyes}</span>
               </div>
             </div>
           </>
@@ -470,23 +328,16 @@ const GithubNotification = ({
         return (
           <>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Comment:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Comment:</div>
               <div
                 className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                 dangerouslySetInnerHTML={{
-                  __html: remark()
-                    .use(html)
-                    .processSync(data.comment?.body)
-                    .toString(),
+                  __html: remark().use(html).processSync(data.comment?.body).toString(),
                 }}
               />
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Action Taken:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Action Taken:</div>
               <div>
                 <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">
                   {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
@@ -494,43 +345,29 @@ const GithubNotification = ({
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Issue:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Issue:</div>
               <div>
                 {data.issue?.title} [#
                 {data.issue?.number}]
               </div>
             </div>
             <div className="mb-2 mt-4 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Reactions:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Reactions:</div>
               <div className="text-xs font-semibold text-servcy-black">
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  👍 {data.comment?.reactions["+1"]}
-                </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  👎 {data.comment?.reactions["-1"]}
-                </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  😄 {data.comment?.reactions.laugh}
-                </span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">👍 {data.comment?.reactions["+1"]}</span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">👎 {data.comment?.reactions["-1"]}</span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">😄 {data.comment?.reactions.laugh}</span>
                 <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
                   🎉 {data.comment?.reactions.hooray}
                 </span>
                 <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
                   😕 {data.comment?.reactions.confused}
                 </span>
-                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
-                  ❤️ {data.comment?.reactions.heart}
-                </span>
+                <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">❤️ {data.comment?.reactions.heart}</span>
                 <span className="border-1 mr-2 rounded-lg bg-servcy-white p-1">
                   🚀 {data.comment?.reactions.rocket}
                 </span>
-                <span className="border-1 rounded-lg bg-servcy-white p-1">
-                  👀 {data.comment?.reactions.eyes}
-                </span>
+                <span className="border-1 rounded-lg bg-servcy-white p-1">👀 {data.comment?.reactions.eyes}</span>
               </div>
             </div>
           </>
@@ -542,9 +379,7 @@ const GithubNotification = ({
         return (
           <>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Pull Request:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Pull Request:</div>
               <div>
                 {data.pull_request?.title} [#{data.pull_request?.number}] [
                 <a
@@ -570,41 +405,30 @@ const GithubNotification = ({
               </div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Branch:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Branch:</div>
               <div className="font-semibold">
-                {data.pull_request?.base.ref}{" "}
-                <BiRightArrowAlt className="inline" />{" "}
-                {data.pull_request?.head.ref}
+                {data.pull_request?.base.ref} <BiRightArrowAlt className="inline" /> {data.pull_request?.head.ref}
               </div>
             </div>
             {data.pull_request?.state && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  State:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">State:</div>
                 <div>
                   <Tag className="m-1 bg-servcy-wheat font-bold text-servcy-white">
-                    {data.pull_request.state.charAt(0).toUpperCase() +
-                      data.pull_request.state.slice(1)}
+                    {data.pull_request.state.charAt(0).toUpperCase() + data.pull_request.state.slice(1)}
                   </Tag>
                 </div>
               </div>
             )}
             {data.pull_request?.draft && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Is Draft:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Is Draft:</div>
                 <div>✅</div>
               </div>
             )}
             {data.pull_request?.milestone && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Milestone:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Milestone:</div>
                 <div>
                   <a
                     href={data.pull_request.milestone.html_url}
@@ -621,9 +445,7 @@ const GithubNotification = ({
             )}
             {data.pull_request?.issue_url && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Issue Url:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Issue Url:</div>
                 <div>
                   <a
                     href={data.pull_request.issue_url}
@@ -632,9 +454,7 @@ const GithubNotification = ({
                     className="text-servcy-wheat hover:text-servcy-silver hover:underline"
                   >
                     <HiExternalLink className="mr-1 inline" size="18" />
-                    {data.pull_request.issue_url.slice(
-                      data.pull_request.issue_url.length - 6
-                    )}
+                    {data.pull_request.issue_url.slice(data.pull_request.issue_url.length - 6)}
                     ...
                   </a>
                 </div>
@@ -642,9 +462,7 @@ const GithubNotification = ({
             )}
             {data.pull_request?.assignees && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Assignees:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Assignees:</div>
                 <div>
                   {data.pull_request.assignees.map((assignee) => (
                     <Tooltip title={assignee.login} key={assignee.id}>
@@ -663,9 +481,7 @@ const GithubNotification = ({
             )}
             {data.pull_request?.requested_reviewers && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Reviewers:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Reviewers:</div>
                 <div>
                   {data.pull_request.requested_reviewers.map((reviewer) => (
                     <Tooltip title={reviewer.login} key={reviewer.id}>
@@ -684,9 +500,7 @@ const GithubNotification = ({
             )}
             {data.pull_request?.merged_by && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Merged By:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Merged By:</div>
                 <div>
                   <Tooltip title={data.pull_request.merged_by.login}>
                     <Image
@@ -695,90 +509,59 @@ const GithubNotification = ({
                       className="mr-2 inline h-5 w-5 rounded-full"
                       width={20}
                       height={20}
-                      loader={() =>
-                        data.pull_request?.merged_by.avatar_url ?? "#null"
-                      }
+                      loader={() => data.pull_request?.merged_by.avatar_url ?? "#null"}
                     />
                   </Tooltip>
                 </div>
               </div>
             )}
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Action Taken:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Action Taken:</div>
               <div>
                 <Tag className="m-1 bg-servcy-light font-bold text-servcy-white">
                   {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                 </Tag>
               </div>
             </div>
-            {data.pull_request?.labels &&
-              data.pull_request.labels.length > 0 && (
-                <div className="mb-2 flex w-full">
-                  <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                    Labels:
-                  </div>
-                  <div>
-                    {data.pull_request.labels.map((label) => (
-                      <Tag
-                        key={label.id}
-                        className="m-1"
-                        color={`#${label.color}`}
-                      >
-                        {label.name.charAt(0).toUpperCase() +
-                          label.name.slice(1)}
-                      </Tag>
-                    ))}
-                  </div>
+            {data.pull_request?.labels && data.pull_request.labels.length > 0 && (
+              <div className="mb-2 flex w-full">
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Labels:</div>
+                <div>
+                  {data.pull_request.labels.map((label) => (
+                    <Tag key={label.id} className="m-1" color={`#${label.color}`}>
+                      {label.name.charAt(0).toUpperCase() + label.name.slice(1)}
+                    </Tag>
+                  ))}
                 </div>
-              )}
-            <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Comments:
               </div>
+            )}
+            <div className="mb-2 flex w-full">
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Comments:</div>
               <div>{data.pull_request?.comments}</div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Commits:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Commits:</div>
               <div>{data.pull_request?.commits}</div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Additions:
-              </div>
-              <div className="text-servcy-light">
-                + {data.pull_request?.additions}
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Additions:</div>
+              <div className="text-servcy-light">+ {data.pull_request?.additions}</div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Deletions:
-              </div>
-              <div className="text-red-400">
-                - {data.pull_request?.deletions}
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Deletions:</div>
+              <div className="text-red-400">- {data.pull_request?.deletions}</div>
             </div>
             <div className="mb-2 flex w-full">
-              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                Files Changed:
-              </div>
+              <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Files Changed:</div>
               <div>{data.pull_request?.changed_files}</div>
             </div>
             {data.pull_request?.body && (
               <div className="mb-2 flex w-full">
-                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
-                  Body:
-                </div>
+                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Body:</div>
                 <div
                   className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
                   dangerouslySetInnerHTML={{
-                    __html: remark()
-                      .use(html)
-                      .processSync(data.pull_request.body)
-                      .toString(),
+                    __html: remark().use(html).processSync(data.pull_request.body).toString(),
                   }}
                 />
               </div>
@@ -793,9 +576,7 @@ const GithubNotification = ({
 
   return (
     <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
-      <div className="mb-4 min-h-[75px] text-servcy-white">
-        {renderGithubEvent()}
-      </div>
+      <div className="mb-4 min-h-[75px] text-servcy-white">{renderGithubEvent()}</div>
       <div className="flex justify-between">
         {linkLabel && (
           <a

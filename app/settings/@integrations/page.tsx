@@ -18,21 +18,17 @@ export default function IntegrationSettings(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [selectedIntegration, setSelectedIntegration] =
-    useState<Integration | null>(null);
+  const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
 
   useEffect(() => {
     setLoading(true);
-    const queryParams: Record<string, string> = getQueryParams(
-      window.location.search
-    );
+    const queryParams: Record<string, string> = getQueryParams(window.location.search);
     fetchIntegrations()
       .then((integrations) => {
         setIntegrations(integrations);
         if (queryParams["integration"]) {
           const integration = integrations.find(
-            (integration: Integration) =>
-              integration.name === queryParams["integration"]
+            (integration: Integration) => integration.name === queryParams["integration"]
           );
           if (integration) {
             setSelectedIntegration(integration);
@@ -66,10 +62,7 @@ export default function IntegrationSettings(): JSX.Element {
         integrations
           .filter((integration: Integration) => integration.is_connected)
           .map((integration: Integration) => (
-            <Card
-              key={integration.id}
-              className="cursor-pointer rounded-lg bg-servcy-black text-servcy-white"
-            >
+            <Card key={integration.id} className="cursor-pointer rounded-lg bg-servcy-black text-servcy-white">
               <div className="flex flex-row items-center text-servcy-wheat">
                 <div className="flex overflow-x-hidden">
                   {integration.logo.split(",").map((logo, index) => (
@@ -83,13 +76,9 @@ export default function IntegrationSettings(): JSX.Element {
                     />
                   ))}
                 </div>
-                <div className="flex-col pl-4 text-lg font-semibold">
-                  {integration.name}
-                </div>
+                <div className="flex-col pl-4 text-lg font-semibold">{integration.name}</div>
               </div>
-              <div className="mt-2 py-3 pr-3 text-xs max-lg:h-24">
-                {integration.description}
-              </div>
+              <div className="mt-2 py-3 pr-3 text-xs max-lg:h-24">{integration.description}</div>
               <div className="mt-6 flex flex-row justify-between">
                 <Button
                   className="!text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"

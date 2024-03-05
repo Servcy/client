@@ -9,17 +9,9 @@ import { BiLogIn } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
 import { RiWhatsappLine } from "react-icons/ri";
 // Utils
-import {
-  validateEmail,
-  validateOtp,
-  validatePhone,
-} from "@/utils/Shared/validators";
+import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
 // APIs
-import {
-  googleLogin as googleLoginApi,
-  sendOtp as sendOtpApi,
-  verifyOtp as verifyOtpApi,
-} from "@/apis/authentication";
+import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";
 // Components
 import OTPInput from "@/components/Login/OTPInput";
 import { GoogleLogin } from "@react-oauth/google";
@@ -43,9 +35,7 @@ export default function Login(): JSX.Element {
       e.preventDefault();
       setLoading(true);
       const email = document.getElementById("email") as HTMLInputElement;
-      const phone_number = document.getElementById(
-        "phone_number"
-      ) as HTMLInputElement;
+      const phone_number = document.getElementById("phone_number") as HTMLInputElement;
       const agree_terms_conditions_and_privacy_policy = document.getElementById(
         "agree_terms_conditions_and_privacy_policy"
       ) as HTMLInputElement;
@@ -54,15 +44,9 @@ export default function Login(): JSX.Element {
       const isPhoneValid = validatePhone(phone_number.value);
       if (!isPhoneValid) setInvalidEmail(!isEmailValid);
       else if (!isEmailValid) setInvalidPhone(!isPhoneValid);
-      if (
-        (!isEmailValid && !isPhoneValid) ||
-        !agree_terms_conditions_and_privacy_policy.checked
-      )
-        return;
+      if ((!isEmailValid && !isPhoneValid) || !agree_terms_conditions_and_privacy_policy.checked) return;
       setInputType(isEmailValid ? "email" : "phone_number");
-      setInput(
-        isEmailValid ? email.value : phone_number.value.replace("+", "")
-      );
+      setInput(isEmailValid ? email.value : phone_number.value.replace("+", ""));
       await toast.promise(
         sendOtpApi(
           isEmailValid ? email.value : phone_number.value.replace("+", ""),
@@ -127,13 +111,7 @@ export default function Login(): JSX.Element {
   return (
     <main className="flex min-h-screen w-full bg-servcy-white">
       <div className="m-auto w-[430px] rounded-lg border border-servcy-black bg-servcy-black p-10 text-center text-servcy-white shadow-md">
-        <Image
-          src="/logo.svg"
-          alt="Servcy logo"
-          height="64"
-          width="64"
-          className="mx-auto"
-        />
+        <Image src="/logo.svg" alt="Servcy logo" height="64" width="64" className="mx-auto" />
         <h4 className="my-5 font-semibold">Welcome To Servcy</h4>
         <form>
           {/* email and corresponding otp */}
@@ -206,14 +184,11 @@ export default function Login(): JSX.Element {
                 <GoogleLogin
                   onSuccess={(credentialResponse) => {
                     const { credential } = credentialResponse;
-                    const agree_terms_conditions_and_privacy_policy =
-                      document.getElementById(
-                        "agree_terms_conditions_and_privacy_policy"
-                      ) as HTMLInputElement;
+                    const agree_terms_conditions_and_privacy_policy = document.getElementById(
+                      "agree_terms_conditions_and_privacy_policy"
+                    ) as HTMLInputElement;
                     if (!agree_terms_conditions_and_privacy_policy.checked) {
-                      toast.error(
-                        "Please agree to our privacy policy and TOS by checking the checkbox"
-                      );
+                      toast.error("Please agree to our privacy policy and TOS by checking the checkbox");
                       return;
                     }
                     if (credential) googleLogin(credential);
@@ -242,13 +217,7 @@ export default function Login(): JSX.Element {
                     loading ? (
                       <div className="h-10 w-10 animate-pulse rounded-full bg-servcy-white" />
                     ) : (
-                      <Input
-                        {...inputProps}
-                        className="h-10 text-center"
-                        type="text"
-                        maxLength={1}
-                        required
-                      />
+                      <Input {...inputProps} className="h-10 text-center" type="text" maxLength={1} required />
                     ),
                   containerStyle: "flex justify-between w-full my-4",
                   shouldAutoFocus: true,

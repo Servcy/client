@@ -4,23 +4,13 @@ import { useEffect, useState } from "react";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
 // Components
-import {
-  AiFillApi,
-  AiOutlineArrowRight,
-  AiOutlineSetting,
-} from "react-icons/ai";
+import { AiFillApi, AiOutlineArrowRight, AiOutlineSetting } from "react-icons/ai";
 
-export default function SettingsLayout({
-  integrations,
-}: {
-  integrations: React.ReactNode;
-}) {
+export default function SettingsLayout({ integrations }: { integrations: React.ReactNode }) {
   const [selection, setSelection] = useState<string>("integrations");
 
   useEffect(() => {
-    const queryParams: Record<string, string> = getQueryParams(
-      window.location.search
-    );
+    const queryParams: Record<string, string> = getQueryParams(window.location.search);
     if (queryParams["selection"]) {
       setSelection(queryParams["selection"]);
     }

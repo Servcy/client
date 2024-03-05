@@ -10,8 +10,7 @@ export const validateEmail = (input: string) => {
 };
 
 export const validatePhone = (input: string) => {
-  const phoneRegex =
-    /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/g;
+  const phoneRegex = /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/g;
   return phoneRegex.test(input);
 };
 

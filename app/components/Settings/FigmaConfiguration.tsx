@@ -12,18 +12,12 @@ import {
   fetchUserIntegrations as fetchUserIntegrationsApi,
 } from "@/apis/integration";
 
-export default function FigmaConfiguration({
-  selectedIntegration,
-}: {
-  selectedIntegration: Integration;
-}) {
+export default function FigmaConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [userIntegrationId, setUserIntegrationId] = useState<number>(0);
   const [saving, setSaving] = useState<boolean>(false);
   const [teamIds, setTeamIds] = useState<Set<string>>(new Set([""]));
-  const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>(
-    []
-  );
+  const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -45,9 +39,7 @@ export default function FigmaConfiguration({
   }, [selectedIntegration.id]);
 
   useEffect(() => {
-    const userIntegration = userIntegrations.find(
-      (userIntegration) => userIntegration.id === userIntegrationId
-    );
+    const userIntegration = userIntegrations.find((userIntegration) => userIntegration.id === userIntegrationId);
     if (userIntegration) {
       if (!userIntegration.configuration) setTeamIds(new Set([""]));
       else setTeamIds(new Set(userIntegration.configuration.team_ids));
@@ -119,11 +111,7 @@ export default function FigmaConfiguration({
               </Select.Option>
             ) : (
               userIntegrations.map((userIntegration) => (
-                <Select.Option
-                  key={userIntegration.id}
-                  value={userIntegration.id}
-                  className="capitalize"
-                >
+                <Select.Option key={userIntegration.id} value={userIntegration.id} className="capitalize">
                   {userIntegration.account_display_name}
                 </Select.Option>
               ))
@@ -131,31 +119,19 @@ export default function FigmaConfiguration({
           </Select>
         )}
         <section className="mt-8">
-          <span className="font-sans text-lg font-semibold">
-            To find your team IDs follow listed instructions:
-          </span>
+          <span className="font-sans text-lg font-semibold">To find your team IDs follow listed instructions:</span>
           <ul className="mt-4 list-inside font-serif text-sm font-light">
-            <li className="mb-4">
-              Login to your figma account in a separate tab
-            </li>
-            <li className="mb-4">
-              Under teams dropdown in your sidebar, you will find all your teams
-            </li>
-            <li className="mb-4">
-              Click on the team you want to integrate with Servcy
-            </li>
-            <li className="mb-4">
-              Copy the team id from the URL in your browser
-            </li>
+            <li className="mb-4">Login to your figma account in a separate tab</li>
+            <li className="mb-4">Under teams dropdown in your sidebar, you will find all your teams</li>
+            <li className="mb-4">Click on the team you want to integrate with Servcy</li>
+            <li className="mb-4">Copy the team id from the URL in your browser</li>
             <li>
               For example if the URL is{" "}
               <span className="rounded-lg bg-servcy-white p-1 font-semibold text-servcy-black">
                 https://www.figma.com/files/team/123/Servcy
               </span>{" "}
               then the team id is{" "}
-              <span className="rounded-lg bg-servcy-white p-1 font-semibold text-servcy-black">
-                123
-              </span>
+              <span className="rounded-lg bg-servcy-white p-1 font-semibold text-servcy-black">123</span>
             </li>
           </ul>
         </section>

@@ -21,26 +21,16 @@ export const disconnectUserIntegration = async (integration_id: string) => {
 };
 
 export const fetchIntegrationEvents = async (integration_id: string) => {
-  const response = await axiosGet(
-    "/integration/integration-event/fetch-events",
-    {
-      integration_id,
-    }
-  );
+  const response = await axiosGet("/integration/integration-event/fetch-events", {
+    integration_id,
+  });
   return response.results;
 };
 
-export const configureUserIntegration = async (
-  id: number,
-  configuration: object,
-  integration_name: string
-) => {
-  const response = await axiosPut(
-    `/integration/user-integration/${id}?integration_name=${integration_name}`,
-    {
-      configuration,
-    }
-  );
+export const configureUserIntegration = async (id: number, configuration: object, integration_name: string) => {
+  const response = await axiosPut(`/integration/user-integration/${id}?integration_name=${integration_name}`, {
+    configuration,
+  });
   return response;
 };
 
@@ -50,25 +40,16 @@ export const integrationOauth = async (payload: object, slug: string) => {
 };
 
 export const enableIntegrationEvent = async (payload: object) => {
-  const response = await axiosPost(
-    "/integration/integration-event/enable-event",
-    payload
-  );
+  const response = await axiosPost("/integration/integration-event/enable-event", payload);
   return response;
 };
 
 export const disableIntegrationEvent = async (payload: object) => {
-  const response = await axiosPost(
-    "/integration/integration-event/disable-event",
-    payload
-  );
+  const response = await axiosPost("/integration/integration-event/disable-event", payload);
   return response;
 };
 
 export const disableNotificationType = async (payload: object) => {
-  const response = await axiosPost(
-    "/integration/integration-event/disable-such-notifications",
-    payload
-  );
+  const response = await axiosPost("/integration/integration-event/disable-such-notifications", payload);
   return response;
 };

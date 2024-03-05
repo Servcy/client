@@ -21,6 +21,4 @@ export const integrationInboxCategories: Record<string, string[]> = {
   Jira: ["archived", "comment", "notification"],
 };
 
-export const uniqueIntegrationCategories = [
-  ...new Set(Object.values(integrationCategories).flat()),
-];
+export const uniqueIntegrationCategories = [...new Set(Object.values(integrationCategories).flat())];

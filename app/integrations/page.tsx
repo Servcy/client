@@ -12,10 +12,7 @@ import { HiArrowsRightLeft } from "react-icons/hi2";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
 // constants
-import {
-  integrationCategories,
-  uniqueIntegrationCategories,
-} from "@/constants/integrations";
+import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations";
 // Types
 import { Integration } from "@/types/apps/integration";
 // Utils
@@ -26,44 +23,34 @@ export default function Integrations(): JSX.Element {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
-  const [selectedIntegration, setSelectedIntegration] =
-    useState<Integration | null>(null);
+  const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [category, setCategory] = useState<string>("");
 
   useEffect(() => {
     setLoading(true);
-    const queryParams: Record<string, string> = getQueryParams(
-      window.location.search
-    );
+    const queryParams: Record<string, string> = getQueryParams(window.location.search);
     fetchIntegrations()
       .then((results) => {
         setIntegrations(results);
         if (queryParams["integration"]) {
           const integration = results.find(
-            (integration: Integration) =>
-              integration.id === Number(queryParams["integration"])
+            (integration: Integration) => integration.id === Number(queryParams["integration"])
           );
           if (integration) {
             setTimeout(() => {
               // click on the connect button
-              const connectButton = document.getElementById(
-                `connect-${integration.id}`
-              );
+              const connectButton = document.getElementById(`connect-${integration.id}`);
               if (connectButton) {
                 connectButton.click();
               }
             }, 1000);
           }
         }
-        if (
-          queryParams["selectedIntegration"] &&
-          queryParams["openConfigurationModal"]
-        ) {
+        if (queryParams["selectedIntegration"] && queryParams["openConfigurationModal"]) {
           const integration = results.find(
             (integration: Integration) =>
-              integration.name ===
-              capitalizeFirstLetter(queryParams["selectedIntegration"] ?? "")
+              integration.name === capitalizeFirstLetter(queryParams["selectedIntegration"] ?? "")
           );
           if (integration) {
             setIsModalVisible(true);
@@ -93,9 +80,7 @@ export default function Integrations(): JSX.Element {
       <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
         <div className="flex flex-row items-center">
           <AiOutlineApi size="24" />
-          <p className="truncate px-2 text-xl max-md:text-lg">
-            Available Integrations
-          </p>
+          <p className="truncate px-2 text-xl max-md:text-lg">Available Integrations</p>
           <Input
             className="ml-auto max-w-[200px]"
             value={search}
@@ -131,12 +116,8 @@ export default function Integrations(): JSX.Element {
           integrations
             .filter(
               (integration) =>
-                (search === "" ||
-                  integration.name
-                    .toLowerCase()
-                    .includes(search.toLowerCase())) &&
-                (!category ||
-                  integrationCategories[integration.name]?.includes(category))
+                (search === "" || integration.name.toLowerCase().includes(search.toLowerCase())) &&
+                (!category || integrationCategories[integration.name]?.includes(category))
             )
             .map((integration: Integration) => (
               <Card
@@ -157,27 +138,20 @@ export default function Integrations(): JSX.Element {
                       />
                     ))}
                   </div>
-                  <div className="flex-col pl-4 text-lg font-semibold">
-                    {integration.name}
-                  </div>
+                  <div className="flex-col pl-4 text-lg font-semibold">{integration.name}</div>
                 </div>
-                <div className="mt-2 py-3 pr-3 text-xs">
-                  {integration.description}
-                </div>
+                <div className="mt-2 py-3 pr-3 text-xs">{integration.description}</div>
                 <div className="mt-2 h-10 py-3 pr-3">
                   {integrationCategories[integration.name] !== undefined
-                    ? integrationCategories[integration.name]?.map(
-                        (category: string, index: number) => (
-                          <Tag
-                            key={`category-${index}`}
-                            className="mr-1 bg-servcy-wheat font-bold text-servcy-black"
-                            bordered={false}
-                          >
-                            {category.charAt(0).toUpperCase() +
-                              category.slice(1)}
-                          </Tag>
-                        )
-                      )
+                    ? integrationCategories[integration.name]?.map((category: string, index: number) => (
+                        <Tag
+                          key={`category-${index}`}
+                          className="mr-1 bg-servcy-wheat font-bold text-servcy-black"
+                          bordered={false}
+                        >
+                          {category.charAt(0).toUpperCase() + category.slice(1)}
+                        </Tag>
+                      ))
                     : null}
                 </div>
                 <div className="mt-6 flex flex-row justify-between">

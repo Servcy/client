@@ -5,17 +5,12 @@ import { useRouter } from "next/navigation.js";
 // Components
 import { Button } from "antd";
 import { useEffect } from "react";
-import {
-  AiOutlineHome,
-  AiOutlineRightCircle,
-  AiOutlineRocket,
-} from "react-icons/ai";
+import { AiOutlineHome, AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai";
 
 const activationSteps = [
   {
     title: "Integrate Your Apps",
-    description:
-      "Integrate workspaces like GitHub, Slack, Google, Notion, Figma, Linear, Jira, Trello etc.",
+    description: "Integrate workspaces like GitHub, Slack, Google, Notion, Figma, Linear, Jira, Trello etc.",
     cta: "Integrate",
     href: "/integrations",
   },
@@ -25,8 +20,7 @@ export default function Index(): JSX.Element {
   const router = useRouter();
 
   const requestNotificationPermission = async () => {
-    if (!("Notification" in window) || Notification.permission === "granted")
-      return;
+    if (!("Notification" in window) || Notification.permission === "granted") return;
     await Notification.requestPermission();
   };
 
@@ -49,14 +43,9 @@ export default function Index(): JSX.Element {
         </div>
         <div className="grid gap-8 lg:grid-cols-3">
           {activationSteps.map((step, index) => (
-            <div
-              key={index}
-              className="rounded-lg border bg-servcy-black p-4 text-servcy-white shadow-sm"
-            >
+            <div key={index} className="rounded-lg border bg-servcy-black p-4 text-servcy-white shadow-sm">
               <div className="mb-4 h-24">
-                <h5 className="mb-3 font-semibold tracking-tight text-servcy-wheat">
-                  {step.title}
-                </h5>
+                <h5 className="mb-3 font-semibold tracking-tight text-servcy-wheat">{step.title}</h5>
                 <p className="text-sm font-normal">{step.description}</p>
               </div>
               <div className="mt-2 flex flex-row justify-between">

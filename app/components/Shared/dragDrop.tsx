@@ -30,11 +30,7 @@ const DragDrop = ({
       };
       fmData.append("file", file);
       try {
-        const res = await axios.post(
-          `${process.env["NEXT_PUBLIC_SERVER_URL"]}/document/upload`,
-          fmData,
-          config
-        );
+        const res = await axios.post(`${process.env["NEXT_PUBLIC_SERVER_URL"]}/document/upload`, fmData, config);
         onSuccess("Ok");
         onSave(res.data, file.name);
       } catch (err: any) {

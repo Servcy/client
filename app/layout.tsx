@@ -23,9 +23,7 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     <html lang="en">
       <body>
         <Toaster />
-        <GoogleOAuthProvider
-          clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}
-        >
+        <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
           <ContentWithSidebar>
             {children}
             <Analytics />

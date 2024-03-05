@@ -13,20 +13,12 @@ import {
 } from "@/apis/integration";
 // Utils
 
-export default function GoogleConfiguration({
-  selectedIntegration,
-}: {
-  selectedIntegration: Integration;
-}) {
+export default function GoogleConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [saving, setSaving] = useState<boolean>(false);
-  const [whitelistedEmails, setWhitelistedEmails] = useState<Set<string>>(
-    new Set([""])
-  );
+  const [whitelistedEmails, setWhitelistedEmails] = useState<Set<string>>(new Set([""]));
   const [userIntegrationId, setUserIntegrationId] = useState<number>(0);
-  const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>(
-    []
-  );
+  const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -36,10 +28,7 @@ export default function GoogleConfiguration({
         setUserIntegrations(response);
         if (response.length === 1) {
           setUserIntegrationId(response[0].id);
-          response[0].configuration &&
-            setWhitelistedEmails(
-              new Set(response[0].configuration.whitelisted_emails)
-            );
+          response[0].configuration && setWhitelistedEmails(new Set(response[0].configuration.whitelisted_emails));
         }
       })
       .catch((error) => {
@@ -51,15 +40,10 @@ export default function GoogleConfiguration({
   }, [selectedIntegration.id]);
 
   useEffect(() => {
-    const userIntegration = userIntegrations.find(
-      (userIntegration) => userIntegration.id === userIntegrationId
-    );
+    const userIntegration = userIntegrations.find((userIntegration) => userIntegration.id === userIntegrationId);
     if (userIntegration) {
       if (!userIntegration.configuration) setWhitelistedEmails(new Set([""]));
-      else
-        setWhitelistedEmails(
-          new Set(userIntegration.configuration.whitelisted_emails)
-        );
+      else setWhitelistedEmails(new Set(userIntegration.configuration.whitelisted_emails));
     }
   }, [userIntegrationId, userIntegrations]);
 
@@ -128,11 +112,7 @@ export default function GoogleConfiguration({
               </Select.Option>
             ) : (
               userIntegrations.map((userIntegration) => (
-                <Select.Option
-                  key={userIntegration.id}
-                  value={userIntegration.id}
-                  className="capitalize"
-                >
+                <Select.Option key={userIntegration.id} value={userIntegration.id} className="capitalize">
                   {userIntegration.account_display_name}
                 </Select.Option>
               ))

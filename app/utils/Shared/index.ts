@@ -1,16 +1,10 @@
 export const getQueryParams = (search: string) => {
   const params = new URLSearchParams(search);
-  return Array.from(params.entries()).reduce(
-    (acc, [key, value]) => ({ ...acc, [key]: value }),
-    {}
-  );
+  return Array.from(params.entries()).reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 };
 
 export function isMobileDevice(userAgent: string): boolean {
-  const isMobile =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      userAgent
-    );
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
   return isMobile;
 }
 

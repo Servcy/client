@@ -19,9 +19,7 @@ export default function IntegrationOauth(): JSX.Element {
 
   useEffect(() => {
     if (typeof slug !== "string") return;
-    const oauthParams: Record<string, string> = getQueryParams(
-      window.location.search
-    );
+    const oauthParams: Record<string, string> = getQueryParams(window.location.search);
     if (!oauthParams["code"]) {
       // try hash to support legacy oauth
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
@@ -38,18 +36,12 @@ export default function IntegrationOauth(): JSX.Element {
             JSON.parse(response?.results)?.redirect_uri ||
             `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`;
           if (redirect_uri.startsWith("https")) {
-            window.open(
-              `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`,
-              "_blank"
-            );
+            window.open(`/integrations?openConfigurationModal=1&selectedIntegration=${slug}`, "_blank");
             setTimeout(() => {
               router.push(redirect_uri);
             }, 1000);
           } else router.push(redirect_uri);
-        } else
-          router.push(
-            `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`
-          );
+        } else router.push(`/integrations?openConfigurationModal=1&selectedIntegration=${slug}`);
       })
       .catch((error: any) => {
         toast.error(error?.response?.data?.detail || "Something went wrong!");
