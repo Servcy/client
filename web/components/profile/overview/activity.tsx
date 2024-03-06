@@ -14,7 +14,7 @@ import { Loader } from "@servcy/ui";
 import recentActivityEmptyState from "public/empty-state/recent_activity.svg";
 
 import { calculateTimeAgo } from "@helpers/date-time.helper";
-// fetch-keys
+
 import { USER_PROFILE_ACTIVITY } from "@constants/fetch-keys";
 
 const userService = new UserService();

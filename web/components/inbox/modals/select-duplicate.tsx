@@ -10,7 +10,7 @@ import { IssueService } from "@services/issue";
 import { Button, LayersIcon } from "@servcy/ui";
 
 import { Search } from "lucide-react";
-// fetch-keys
+
 import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys";
 import { useProject, useProjectState } from "@hooks/store";
 

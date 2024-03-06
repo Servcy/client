@@ -7,7 +7,7 @@ import useSWRInfinite from "swr/infinite";
 import { NotificationService } from "@services/notification.service";
 
 import useToast from "./use-toast";
-// fetch-keys
+
 import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@constants/fetch-keys";
 // type
 import type { IMarkAllAsReadPayload, NotificationCount, NotificationType } from "@servcy/types";

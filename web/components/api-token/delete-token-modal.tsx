@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { Button } from "@servcy/ui";
 
 import { IApiToken } from "@servcy/types";
-// fetch-keys
+
 import { API_TOKENS_LIST } from "@constants/fetch-keys";
 
 type Props = {

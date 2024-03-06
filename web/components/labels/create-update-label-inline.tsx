@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { Button, Input } from "@servcy/ui";
 
 import { IIssueLabel } from "@servcy/types";
-// fetch-keys
+
 import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "@constants/label";
 
 type Props = {

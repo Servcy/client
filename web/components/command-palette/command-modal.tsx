@@ -27,7 +27,7 @@ import {
 import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
 
 import { IWorkspaceSearchResults } from "@servcy/types";
-// fetch-keys
+
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
 
 const workspaceService = new WorkspaceService();

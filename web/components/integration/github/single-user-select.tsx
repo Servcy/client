@@ -7,7 +7,7 @@ import { Avatar, CustomSelect, CustomSearchSelect, Input } from "@servcy/ui";
 
 import { IGithubRepoCollaborator } from "@servcy/types";
 import { IUserDetails } from "./root";
-// fetch-keys
+
 import { WORKSPACE_MEMBERS } from "@constants/fetch-keys";
 
 type Props = {

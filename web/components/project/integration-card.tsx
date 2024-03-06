@@ -15,7 +15,7 @@ import GithubLogo from "public/logos/github-square.png";
 import SlackLogo from "public/services/slack.png";
 
 import { IWorkspaceIntegration } from "@servcy/types";
-// fetch-keys
+
 import { PROJECT_GITHUB_REPOSITORY } from "@constants/fetch-keys";
 
 type Props = {

@@ -8,7 +8,7 @@ import { Button, Loader } from "@servcy/ui";
 import { convertResponseToBarGraphData } from "@helpers/analytics.helper";
 
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
-// fetch-keys
+
 import { ANALYTICS } from "@constants/fetch-keys";
 
 type Props = {

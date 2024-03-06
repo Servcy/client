@@ -12,7 +12,7 @@ import { MemberSelect } from "@components/project";
 import { Loader } from "@servcy/ui";
 
 import { IProject, IUserLite, IWorkspace } from "@servcy/types";
-// fetch-keys
+
 import { PROJECT_MEMBERS } from "@constants/fetch-keys";
 
 import { EUserProjectRoles } from "@constants/project";

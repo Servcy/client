@@ -8,7 +8,7 @@ import { AnalyticsService } from "@services/analytics.service";
 import { CustomAnalyticsSelectBar, CustomAnalyticsMainContent, CustomAnalyticsSidebar } from "@components/analytics";
 
 import { IAnalyticsParams } from "@servcy/types";
-// fetch-keys
+
 import { ANALYTICS } from "@constants/fetch-keys";
 import { cn } from "@helpers/common.helper";
 import { useApplication } from "@hooks/store";

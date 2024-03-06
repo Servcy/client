@@ -18,7 +18,7 @@ import SlackLogo from "public/services/slack.png";
 import { CheckCircle } from "lucide-react";
 
 import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types";
-// fetch-keys
+
 import { WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";
 
 type Props = {

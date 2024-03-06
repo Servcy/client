@@ -11,7 +11,7 @@ import { AppInstallationService } from "@services/app_installation.service";
 import { Loader } from "@servcy/ui";
 
 import { IWorkspaceIntegration, ISlackIntegration } from "@servcy/types";
-// fetch-keys
+
 import { SLACK_CHANNEL_INFO } from "@constants/fetch-keys";
 
 type Props = {

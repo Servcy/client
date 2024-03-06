@@ -12,7 +12,7 @@ import { csvDownload } from "@helpers/download.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
 
 import { IApiToken } from "@servcy/types";
-// fetch-keys
+
 import { API_TOKENS_LIST } from "@constants/fetch-keys";
 
 type Props = {

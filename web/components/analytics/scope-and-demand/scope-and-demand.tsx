@@ -7,7 +7,7 @@ import { AnalyticsService } from "@services/analytics.service";
 import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "@components/analytics";
 
 import { Button, Loader } from "@servcy/ui";
-// fetch-keys
+
 import { DEFAULT_ANALYTICS } from "@constants/fetch-keys";
 
 type Props = {

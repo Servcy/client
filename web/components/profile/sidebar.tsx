@@ -16,7 +16,7 @@ import { ChevronDown, Pencil } from "lucide-react";
 
 import { renderFormattedDate } from "@helpers/date-time.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
-// fetch-keys
+
 import { USER_PROFILE_PROJECT_SEGREGATION } from "@constants/fetch-keys";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { useEffect, useRef } from "react";
