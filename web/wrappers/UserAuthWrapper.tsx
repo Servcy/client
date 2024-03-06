@@ -13,7 +13,7 @@ export interface IUserAuthWrapper {
     children: ReactNode
 }
 
-export const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
+const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
     const { children } = props
     // store hooks
     const { currentUser, currentUserError, fetchCurrentUser, fetchCurrentUserSettings } = useUser()
@@ -51,3 +51,5 @@ export const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
 
     return <>{children}</>
 })
+
+export default UserAuthWrapper

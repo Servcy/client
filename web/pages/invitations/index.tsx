@@ -18,7 +18,6 @@ import { PageHead } from "@components/core"
 
 import { useEventTracker, useUser } from "@hooks/store"
 
-import { UserAuthWrapper } from "@layouts/auth-layout"
 import DefaultLayout from "@layouts/DefaultLayout"
 
 import { MEMBER_ACCEPTED } from "@constants/event-tracker"
@@ -26,6 +25,8 @@ import { ROLE } from "@constants/workspace"
 
 import { UserService } from "@services/user.service"
 import { WorkspaceService } from "@services/workspace.service"
+
+import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { truncateText } from "@helpers/string.helper"
 import { getUserRole } from "@helpers/user.helper"
@@ -65,11 +66,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
 
     const submitInvitations = () => {
         if (invitationsRespond.length === 0) {
-            toast.error({
-                type: "error",
-                title: "Error!",
-                message: "Please select at least one invitation.",
-            })
+            toast.error("Please select at least one invitation.")
             return
         }
 
@@ -98,11 +95,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                         router.push(`/${redirectWorkspace?.slug}`)
                     })
                     .catch(() => {
-                        toast.error({
-                            type: "error",
-                            title: "Error!",
-                            message: "Something went wrong, Please try again.",
-                        })
+                        toast.error("Something went wrong, Please try again.")
                         setIsJoiningWorkspaces(false)
                     })
             })
@@ -113,11 +106,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                     state: "FAILED",
                     element: "Workspace invitations page",
                 })
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Something went wrong, Please try again.",
-                })
+                toast.error("Something went wrong, Please try again.")
                 setIsJoiningWorkspaces(false)
             })
     }

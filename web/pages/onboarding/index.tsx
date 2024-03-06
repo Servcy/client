@@ -19,12 +19,13 @@ import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
 import useUserAuth from "@hooks/use-user-auth"
 
-import { UserAuthWrapper } from "@layouts/auth-layout"
 import DefaultLayout from "@layouts/DefaultLayout"
 
 import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
 
 import { WorkspaceService } from "@services/workspace.service"
+
+import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { IUser, TOnboardingSteps } from "@servcy/types"
 import { Avatar, Spinner } from "@servcy/ui"

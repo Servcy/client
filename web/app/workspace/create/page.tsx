@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
-import { ReactElement, useState } from "react"
+import { useState } from "react"
 
 import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
@@ -16,8 +16,7 @@ import { CreateWorkspaceForm } from "@components/workspace"
 
 import { useUser } from "@hooks/store"
 
-import { UserAuthWrapper } from "@layouts/auth-layout"
-import DefaultLayout from "@layouts/DefaultLayout"
+import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { IWorkspace } from "@servcy/types"
 
@@ -37,7 +36,7 @@ const CreateWorkspacePage: NextPageWithLayout = observer(() => {
     }
 
     return (
-        <>
+        <UserAuthWrapper>
             <PageHead title="Create Workspace" />
             <div className="flex h-full flex-col gap-y-2 overflow-hidden sm:flex-row sm:gap-y-0">
                 <div className="relative h-1/6 flex-shrink-0 sm:w-2/12 md:w-3/12 lg:w-1/5">
@@ -67,17 +66,9 @@ const CreateWorkspacePage: NextPageWithLayout = observer(() => {
                     </div>
                 </div>
             </div>
-        </>
-    )
-})
-
-CreateWorkspacePage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <UserAuthWrapper>
-            <DefaultLayout>{page} </DefaultLayout>
         </UserAuthWrapper>
     )
-}
+})
 
 CreateWorkspacePage.hasWrapper = true
 
