@@ -1,41 +1,37 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { useProject } from "@hooks/store";
-
-import { ProjectExportService } from "@services/project";
-import toast from "react-hot-toast";
-
-import { Button, CustomSearchSelect } from "@servcy/ui";
-
-import { IUser, IImporterService } from "@servcy/types";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProject } from "@hooks/store"
+import { ProjectExportService } from "@services/project"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IImporterService, IUser } from "@servcy/types"
+import { Button, CustomSearchSelect } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    handleClose: () => void;
-    data: IImporterService | null;
-    user: IUser | null;
-    provider: string | string[];
-    mutateServices: () => void;
-};
+    isOpen: boolean
+    handleClose: () => void
+    data: IImporterService | null
+    user: IUser | null
+    provider: string | string[]
+    mutateServices: () => void
+}
 
-const projectExportService = new ProjectExportService();
+const projectExportService = new ProjectExportService()
 
 export const Exporter: React.FC<Props> = observer((props) => {
-    const { isOpen, handleClose, user, provider, mutateServices } = props;
+    const { isOpen, handleClose, user, provider, mutateServices } = props
     // states
-    const [exportLoading, setExportLoading] = useState(false);
-    const [isSelectOpen, setIsSelectOpen] = useState(false);
+    const [exportLoading, setExportLoading] = useState(false)
+    const [isSelectOpen, setIsSelectOpen] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { workspaceProjectIds, getProjectById } = useProject();
+    const { workspaceProjectIds, getProjectById } = useProject()
 
     const options = workspaceProjectIds?.map((projectId) => {
-        const projectDetails = getProjectById(projectId);
+        const projectDetails = getProjectById(projectId)
 
         return {
             value: projectDetails?.id,
@@ -46,28 +42,28 @@ export const Exporter: React.FC<Props> = observer((props) => {
                     {projectDetails?.name}
                 </div>
             ),
-        };
-    });
+        }
+    })
 
-    const [value, setValue] = React.useState<string[]>([]);
-    const [multiple, setMultiple] = React.useState<boolean>(false);
+    const [value, setValue] = React.useState<string[]>([])
+    const [multiple, setMultiple] = React.useState<boolean>(false)
     const onChange = (val: any) => {
-        setValue(val);
-    };
+        setValue(val)
+    }
     const ExportCSVToMail = async () => {
-        setExportLoading(true);
+        setExportLoading(true)
         if (workspaceSlug && user && typeof provider === "string") {
             const payload = {
                 provider: provider,
                 project: value,
                 multiple: multiple,
-            };
+            }
             await projectExportService
                 .csvExport(workspaceSlug as string, payload)
                 .then(() => {
-                    mutateServices();
-                    router.push(`/${workspaceSlug}/settings/exports`);
-                    setExportLoading(false);
+                    mutateServices()
+                    router.push(`/${workspaceSlug}/settings/exports`)
+                    setExportLoading(false)
                     toast.error({
                         type: "success",
                         title: "Export Successful",
@@ -80,18 +76,18 @@ export const Exporter: React.FC<Props> = observer((props) => {
                                     ? "JSON"
                                     : ""
                         } from the previous export.`,
-                    });
+                    })
                 })
                 .catch(() => {
-                    setExportLoading(false);
+                    setExportLoading(false)
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: "Export was unsuccessful. Please try again.",
-                    });
-                });
+                    })
+                })
         }
-    };
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -99,7 +95,7 @@ export const Exporter: React.FC<Props> = observer((props) => {
                 as="div"
                 className="relative z-20"
                 onClose={() => {
-                    if (!isSelectOpen) handleClose();
+                    if (!isSelectOpen) handleClose()
                 }}
             >
                 <Transition.Child
@@ -151,9 +147,9 @@ export const Exporter: React.FC<Props> = observer((props) => {
                                                 value && value.length > 0
                                                     ? value
                                                           .map((projectId) => {
-                                                              const projectDetails = getProjectById(projectId);
+                                                              const projectDetails = getProjectById(projectId)
 
-                                                              return projectDetails?.identifier;
+                                                              return projectDetails?.identifier
                                                           })
                                                           .join(", ")
                                                     : "All projects"
@@ -198,5 +194,5 @@ export const Exporter: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

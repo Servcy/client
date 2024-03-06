@@ -1,51 +1,47 @@
-import { observer } from "mobx-react-lite";
-
-import { IssueProperties } from "../properties/all-properties";
-
-import { useApplication, useIssueDetail, useProject } from "@hooks/store";
-
-import { Spinner, Tooltip, ControlLink } from "@servcy/ui";
 // helper
-import { cn } from "@helpers/common.helper";
-
-import { TIssue, IIssueDisplayProperties, TIssueMap } from "@servcy/types";
-import { EIssueActions } from "../types";
+import { cn } from "@helpers/common.helper"
+import { useApplication, useIssueDetail, useProject } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayProperties, TIssue, TIssueMap } from "@servcy/types"
+import { ControlLink, Spinner, Tooltip } from "@servcy/ui"
+import { IssueProperties } from "../properties/all-properties"
+import { EIssueActions } from "../types"
 
 interface IssueBlockProps {
-    issueId: string;
-    issuesMap: TIssueMap;
-    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>;
-    quickActions: (issue: TIssue) => React.ReactNode;
-    displayProperties: IIssueDisplayProperties | undefined;
-    canEditProperties: (projectId: string | undefined) => boolean;
+    issueId: string
+    issuesMap: TIssueMap
+    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>
+    quickActions: (issue: TIssue) => React.ReactNode
+    displayProperties: IIssueDisplayProperties | undefined
+    canEditProperties: (projectId: string | undefined) => boolean
 }
 
 export const IssueBlock: React.FC<IssueBlockProps> = observer((props: IssueBlockProps) => {
-    const { issuesMap, issueId, handleIssues, quickActions, displayProperties, canEditProperties } = props;
+    const { issuesMap, issueId, handleIssues, quickActions, displayProperties, canEditProperties } = props
 
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { getProjectIdentifierById } = useProject();
-    const { peekIssue, setPeekIssue } = useIssueDetail();
+    } = useApplication()
+    const { getProjectIdentifierById } = useProject()
+    const { peekIssue, setPeekIssue } = useIssueDetail()
 
     const updateIssue = async (issueToUpdate: TIssue) => {
-        await handleIssues(issueToUpdate, EIssueActions.UPDATE);
-    };
+        await handleIssues(issueToUpdate, EIssueActions.UPDATE)
+    }
 
     const handleIssuePeekOverview = (issue: TIssue) =>
         workspaceSlug &&
         issue &&
         issue.project_id &&
         issue.id &&
-        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id });
+        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id })
 
-    const issue = issuesMap[issueId];
+    const issue = issuesMap[issueId]
 
-    if (!issue) return null;
+    if (!issue) return null
 
-    const canEditIssueProperties = canEditProperties(issue.project_id);
-    const projectIdentifier = getProjectIdentifierById(issue.project_id);
+    const canEditIssueProperties = canEditProperties(issue.project_id)
+    const projectIdentifier = getProjectIdentifierById(issue.project_id)
 
     return (
         <div
@@ -105,5 +101,5 @@ export const IssueBlock: React.FC<IssueBlockProps> = observer((props: IssueBlock
                 )}
             </div>
         </div>
-    );
-});
+    )
+})

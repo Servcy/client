@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const EditIcon: React.FC<Props> = ({ width, height, className }) => (
     <svg
@@ -16,4 +15,4 @@ export const EditIcon: React.FC<Props> = ({ width, height, className }) => (
             fill="#212529"
         />
     </svg>
-);
+)

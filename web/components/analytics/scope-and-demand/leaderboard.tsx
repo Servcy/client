@@ -1,20 +1,20 @@
-import { ProfileEmptyState } from "@components/ui";
+import { ProfileEmptyState } from "@components/ui"
 // image
-import emptyUsers from "public/empty-state/empty_users.svg";
+import emptyUsers from "public/empty-state/empty_users.svg"
 
 type Props = {
     users: {
-        avatar: string | null;
-        display_name: string | null;
-        firstName: string;
-        lastName: string;
-        count: number;
-        id: string;
-    }[];
-    title: string;
-    emptyStateMessage: string;
-    workspaceSlug: string;
-};
+        avatar: string | null
+        display_name: string | null
+        firstName: string
+        lastName: string
+        count: number
+        id: string
+    }[]
+    title: string
+    emptyStateMessage: string
+    workspaceSlug: string
+}
 
 export const AnalyticsLeaderBoard: React.FC<Props> = ({ users, title, emptyStateMessage, workspaceSlug }) => (
     <div className="rounded-[10px] border border-custom-border-200 p-3">
@@ -57,4 +57,4 @@ export const AnalyticsLeaderBoard: React.FC<Props> = ({ users, title, emptyState
             </div>
         )}
     </div>
-);
+)

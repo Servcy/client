@@ -1,18 +1,14 @@
-import { Fragment } from "react";
-import { useRouter } from "next/router";
-import { useTheme } from "next-themes";
-import { observer } from "mobx-react-lite";
-import Link from "next/link";
-import { mutate } from "swr";
-
-import { Menu, Transition } from "@headlessui/react";
-
-import { LogIn, LogOut, Settings, UserCog2 } from "lucide-react";
-
-import { useApplication, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Avatar, Tooltip } from "@servcy/ui";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { Fragment } from "react"
+import { Menu, Transition } from "@headlessui/react"
+import { useApplication, useUser } from "@hooks/store"
+import { LogIn, LogOut, Settings, UserCog2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
+import { mutate } from "swr"
+import { Avatar, Tooltip } from "@servcy/ui"
 
 // Static Data
 const PROFILE_LINKS = [
@@ -22,33 +18,33 @@ const PROFILE_LINKS = [
         icon: Settings,
         link: `/profile`,
     },
-];
+]
 
 export const InstanceSidebarDropdown = observer(() => {
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
     const {
         theme: { sidebarCollapsed },
         router: { workspaceSlug },
-    } = useApplication();
-    const { signOut, currentUser, currentUserSettings } = useUser();
+    } = useApplication()
+    const { signOut, currentUser, currentUserSettings } = useUser()
 
-    const { setTheme } = useTheme();
+    const { setTheme } = useTheme()
 
     // redirect url for normal mode
     const redirectWorkspaceSlug =
         workspaceSlug ||
         currentUserSettings?.workspace?.last_workspace_slug ||
         currentUserSettings?.workspace?.fallback_workspace_slug ||
-        "";
+        ""
 
     const handleSignOut = async () => {
         await signOut()
             .then(() => {
-                mutate("CURRENT_USER_DETAILS", null);
-                setTheme("system");
-                router.push("/");
+                mutate("CURRENT_USER_DETAILS", null)
+                setTheme("system")
+                router.push("/")
             })
             .catch(() =>
                 toast.error({
@@ -56,8 +52,8 @@ export const InstanceSidebarDropdown = observer(() => {
                     title: "Error!",
                     message: "Failed to sign out. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     return (
         <div className="flex max-h-[3.75rem] items-center gap-x-5 gap-y-2 border-b border-custom-sidebar-border-200 px-4 py-3.5">
@@ -152,5 +148,5 @@ export const InstanceSidebarDropdown = observer(() => {
                 </Menu>
             )}
         </div>
-    );
-});
+    )
+})

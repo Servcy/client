@@ -1,33 +1,30 @@
-import { Fragment, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
-import { Check, Globe2 } from "lucide-react";
-
-import { useProjectPublish } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, Loader, ToggleSwitch } from "@servcy/ui";
-import { CustomPopover } from "./popover";
-
-import { IProject } from "@servcy/types";
-import { IProjectPublishSettings, TProjectPublishViews } from "@store/project/project-publish.store";
+import { useRouter } from "next/router"
+import { Fragment, useEffect, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProjectPublish } from "@hooks/store"
+import { IProjectPublishSettings, TProjectPublishViews } from "@store/project/project-publish.store"
+import { Check, Globe2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IProject } from "@servcy/types"
+import { Button, Loader, ToggleSwitch } from "@servcy/ui"
+import { CustomPopover } from "./popover"
 
 type Props = {
-    isOpen: boolean;
-    project: IProject;
-    onClose: () => void;
-};
+    isOpen: boolean
+    project: IProject
+    onClose: () => void
+}
 
 type FormData = {
-    id: string | null;
-    comments: boolean;
-    reactions: boolean;
-    votes: boolean;
-    inbox: string | null;
-    views: TProjectPublishViews[];
-};
+    id: string | null
+    comments: boolean
+    reactions: boolean
+    votes: boolean
+    inbox: string | null
+    views: TProjectPublishViews[]
+}
 
 const defaultValues: FormData = {
     id: null,
@@ -36,25 +33,25 @@ const defaultValues: FormData = {
     votes: false,
     inbox: null,
     views: ["list", "kanban"],
-};
+}
 
 const viewOptions: {
-    key: TProjectPublishViews;
-    label: string;
+    key: TProjectPublishViews
+    label: string
 }[] = [
     { key: "list", label: "List" },
     { key: "kanban", label: "Kanban" },
-];
+]
 
 export const PublishProjectModal: React.FC<Props> = observer((props) => {
-    const { isOpen, project, onClose } = props;
+    const { isOpen, project, onClose } = props
     // states
-    const [isUnPublishing, setIsUnPublishing] = useState(false);
-    const [isUpdateRequired, setIsUpdateRequired] = useState(false);
+    const [isUnPublishing, setIsUnPublishing] = useState(false)
+    const [isUpdateRequired, setIsUpdateRequired] = useState(false)
 
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         projectPublishSettings,
@@ -63,7 +60,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
         updateProjectSettingsAsync,
         unPublishProject,
         fetchSettingsLoader,
-    } = useProjectPublish();
+    } = useProjectPublish()
 
     // form info
     const {
@@ -75,32 +72,32 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
         watch,
     } = useForm({
         defaultValues,
-    });
+    })
 
     const handleClose = () => {
-        onClose();
+        onClose()
 
-        setIsUpdateRequired(false);
-        reset({ ...defaultValues });
-    };
+        setIsUpdateRequired(false)
+        reset({ ...defaultValues })
+    }
 
     // prefill form with the saved settings if the project is already published
     useEffect(() => {
         if (projectPublishSettings && projectPublishSettings !== "not-initialized") {
-            let userBoards: TProjectPublishViews[] = [];
+            let userBoards: TProjectPublishViews[] = []
 
             if (projectPublishSettings?.views) {
-                const savedViews = projectPublishSettings?.views;
+                const savedViews = projectPublishSettings?.views
 
-                if (!savedViews) return;
+                if (!savedViews) return
 
-                if (savedViews.list) userBoards.push("list");
-                if (savedViews.kanban) userBoards.push("kanban");
-                if (savedViews.calendar) userBoards.push("calendar");
-                if (savedViews.gantt) userBoards.push("gantt");
-                if (savedViews.spreadsheet) userBoards.push("spreadsheet");
+                if (savedViews.list) userBoards.push("list")
+                if (savedViews.kanban) userBoards.push("kanban")
+                if (savedViews.calendar) userBoards.push("calendar")
+                if (savedViews.gantt) userBoards.push("gantt")
+                if (savedViews.spreadsheet) userBoards.push("spreadsheet")
 
-                userBoards = userBoards && userBoards.length > 0 ? userBoards : ["list"];
+                userBoards = userBoards && userBoards.length > 0 ? userBoards : ["list"]
             }
 
             const updatedData = {
@@ -110,65 +107,65 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                 votes: projectPublishSettings?.votes || false,
                 inbox: projectPublishSettings?.inbox || null,
                 views: userBoards,
-            };
+            }
 
-            reset({ ...updatedData });
+            reset({ ...updatedData })
         }
-    }, [reset, projectPublishSettings, isOpen]);
+    }, [reset, projectPublishSettings, isOpen])
 
     // fetch publish settings
     useEffect(() => {
-        if (!workspaceSlug || !isOpen) return;
+        if (!workspaceSlug || !isOpen) return
 
         if (projectPublishSettings === "not-initialized") {
-            getProjectSettingsAsync(workspaceSlug.toString(), project.id);
+            getProjectSettingsAsync(workspaceSlug.toString(), project.id)
         }
-    }, [isOpen, workspaceSlug, project, projectPublishSettings, getProjectSettingsAsync]);
+    }, [isOpen, workspaceSlug, project, projectPublishSettings, getProjectSettingsAsync])
 
     const handlePublishProject = async (payload: IProjectPublishSettings) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         return publishProject(workspaceSlug.toString(), project.id, payload)
             .then((res) => {
-                handleClose();
-                return res;
+                handleClose()
+                return res
             })
-            .catch((err) => err);
-    };
+            .catch((err) => err)
+    }
 
     const handleUpdatePublishSettings = async (payload: IProjectPublishSettings) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         await updateProjectSettingsAsync(workspaceSlug.toString(), project.id, payload.id ?? "", payload)
             .then((res) => {
-                toast.error("Publish settings updated successfully!");
-                handleClose();
-                return res;
+                toast.error("Publish settings updated successfully!")
+                handleClose()
+                return res
             })
             .catch((error) => {
-                console.error("error", error);
-                return error;
-            });
-    };
+                console.error("error", error)
+                return error
+            })
+    }
 
     const handleUnPublishProject = async (publishId: string) => {
-        if (!workspaceSlug || !publishId) return;
+        if (!workspaceSlug || !publishId) return
 
-        setIsUnPublishing(true);
+        setIsUnPublishing(true)
 
         await unPublishProject(workspaceSlug.toString(), project.id, publishId)
             .then((res) => {
-                handleClose();
-                return res;
+                handleClose()
+                return res
             })
             .catch(() => toast.error("Something went wrong while un-publishing the project."))
-            .finally(() => setIsUnPublishing(false));
-    };
+            .finally(() => setIsUnPublishing(false))
+    }
 
     const handleFormSubmit = async (formData: FormData) => {
         if (!formData.views || formData.views.length === 0) {
-            toast.error("Please select at least one view layout to publish the project.");
-            return;
+            toast.error("Please select at least one view layout to publish the project.")
+            return
         }
 
         const payload = {
@@ -183,40 +180,40 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                 gantt: formData.views.includes("gantt"),
                 spreadsheet: formData.views.includes("spreadsheet"),
             },
-        };
+        }
 
-        if (project.is_deployed) await handleUpdatePublishSettings({ id: watch("id") ?? "", ...payload });
-        else await handlePublishProject(payload);
-    };
+        if (project.is_deployed) await handleUpdatePublishSettings({ id: watch("id") ?? "", ...payload })
+        else await handlePublishProject(payload)
+    }
 
     // check if an update is required or not
     const checkIfUpdateIsRequired = () => {
-        if (!projectPublishSettings || projectPublishSettings === "not-initialized") return;
+        if (!projectPublishSettings || projectPublishSettings === "not-initialized") return
 
-        const currentSettings = projectPublishSettings;
-        const newSettings = getValues();
+        const currentSettings = projectPublishSettings
+        const newSettings = getValues()
 
         if (
             currentSettings.comments !== newSettings.comments ||
             currentSettings.reactions !== newSettings.reactions ||
             currentSettings.votes !== newSettings.votes
         ) {
-            setIsUpdateRequired(true);
-            return;
+            setIsUpdateRequired(true)
+            return
         }
 
-        let viewCheckFlag = 0;
+        let viewCheckFlag = 0
         viewOptions.forEach((option) => {
-            if (currentSettings.views[option.key] !== newSettings.views.includes(option.key)) viewCheckFlag++;
-        });
+            if (currentSettings.views[option.key] !== newSettings.views.includes(option.key)) viewCheckFlag++
+        })
 
         if (viewCheckFlag !== 0) {
-            setIsUpdateRequired(true);
-            return;
+            setIsUpdateRequired(true)
+            return
         }
 
-        setIsUpdateRequired(false);
-    };
+        setIsUpdateRequired(false)
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -306,12 +303,12 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                                                                                                       _o !== option.key
                                                                                               )
                                                                                             : [...value, option.key]
-                                                                                        : [option.key];
+                                                                                        : [option.key]
 
-                                                                                if (_views.length === 0) return;
+                                                                                if (_views.length === 0) return
 
-                                                                                onChange(_views);
-                                                                                checkIfUpdateIsRequired();
+                                                                                onChange(_views)
+                                                                                checkIfUpdateIsRequired()
                                                                             }}
                                                                         >
                                                                             <div className="text-sm">
@@ -341,8 +338,8 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                                                             <ToggleSwitch
                                                                 value={value}
                                                                 onChange={(val) => {
-                                                                    onChange(val);
-                                                                    checkIfUpdateIsRequired();
+                                                                    onChange(val)
+                                                                    checkIfUpdateIsRequired()
                                                                 }}
                                                                 size="sm"
                                                             />
@@ -358,8 +355,8 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                                                             <ToggleSwitch
                                                                 value={value}
                                                                 onChange={(val) => {
-                                                                    onChange(val);
-                                                                    checkIfUpdateIsRequired();
+                                                                    onChange(val)
+                                                                    checkIfUpdateIsRequired()
                                                                 }}
                                                                 size="sm"
                                                             />
@@ -375,8 +372,8 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                                                             <ToggleSwitch
                                                                 value={value}
                                                                 onChange={(val) => {
-                                                                    onChange(val);
-                                                                    checkIfUpdateIsRequired();
+                                                                    onChange(val)
+                                                                    checkIfUpdateIsRequired()
                                                                 }}
                                                                 size="sm"
                                                             />
@@ -443,5 +440,5 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

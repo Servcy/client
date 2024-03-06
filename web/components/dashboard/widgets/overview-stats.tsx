@@ -1,31 +1,27 @@
-import { useEffect } from "react";
-import { observer } from "mobx-react-lite";
-import Link from "next/link";
-
-import { useDashboard } from "@hooks/store";
-
-import { WidgetLoader } from "@components/dashboard/widgets";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { TOverviewStatsWidgetResponse } from "@servcy/types";
-import { cn } from "@helpers/common.helper";
+import Link from "next/link"
+import { useEffect } from "react"
+import { WidgetLoader } from "@components/dashboard/widgets"
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { useDashboard } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TOverviewStatsWidgetResponse } from "@servcy/types"
 
 export type WidgetProps = {
-    dashboardId: string;
-    workspaceSlug: string;
-};
+    dashboardId: string
+    workspaceSlug: string
+}
 
-const WIDGET_KEY = "overview_stats";
+const WIDGET_KEY = "overview_stats"
 
 export const OverviewStatsWidget: React.FC<WidgetProps> = observer((props) => {
-    const { dashboardId, workspaceSlug } = props;
+    const { dashboardId, workspaceSlug } = props
     // store hooks
-    const { fetchWidgetStats, getWidgetStats } = useDashboard();
+    const { fetchWidgetStats, getWidgetStats } = useDashboard()
     // derived values
-    const widgetStats = getWidgetStats<TOverviewStatsWidgetResponse>(workspaceSlug, dashboardId, WIDGET_KEY);
+    const widgetStats = getWidgetStats<TOverviewStatsWidgetResponse>(workspaceSlug, dashboardId, WIDGET_KEY)
 
-    const today = renderFormattedPayloadDate(new Date());
+    const today = renderFormattedPayloadDate(new Date())
     const STATS_LIST = [
         {
             key: "assigned",
@@ -51,16 +47,16 @@ export const OverviewStatsWidget: React.FC<WidgetProps> = observer((props) => {
             count: widgetStats?.completed_issues_count,
             link: `/${workspaceSlug}/workspace-views/assigned?state_group=completed`,
         },
-    ];
+    ]
 
     useEffect(() => {
         fetchWidgetStats(workspaceSlug, dashboardId, {
             widget_key: WIDGET_KEY,
-        });
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
-    if (!widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />;
+    if (!widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />
 
     return (
         <div
@@ -93,5 +89,5 @@ export const OverviewStatsWidget: React.FC<WidgetProps> = observer((props) => {
                 </div>
             ))}
         </div>
-    );
-});
+    )
+})

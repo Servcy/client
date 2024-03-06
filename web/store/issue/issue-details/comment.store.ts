@@ -1,16 +1,14 @@
-import concat from "lodash/concat";
-import pull from "lodash/pull";
-import set from "lodash/set";
-import uniq from "lodash/uniq";
-import update from "lodash/update";
-import { action, makeObservable, observable, runInAction } from "mobx";
+import { IssueCommentService } from "@services/issue"
+import concat from "lodash/concat"
+import pull from "lodash/pull"
+import set from "lodash/set"
+import uniq from "lodash/uniq"
+import update from "lodash/update"
+import { action, makeObservable, observable, runInAction } from "mobx"
+import { TIssueComment, TIssueCommentIdMap, TIssueCommentMap } from "@servcy/types"
+import { IIssueDetail } from "./root.store"
 
-import { IssueCommentService } from "@services/issue";
-
-import { TIssueComment, TIssueCommentIdMap, TIssueCommentMap } from "@servcy/types";
-import { IIssueDetail } from "./root.store";
-
-export type TCommentLoader = "fetch" | "create" | "update" | "delete" | "mutate" | undefined;
+export type TCommentLoader = "fetch" | "create" | "update" | "delete" | "mutate" | undefined
 
 export interface IIssueCommentStoreActions {
     fetchComments: (
@@ -18,42 +16,42 @@ export interface IIssueCommentStoreActions {
         projectId: string,
         issueId: string,
         loaderType?: TCommentLoader
-    ) => Promise<TIssueComment[]>;
+    ) => Promise<TIssueComment[]>
     createComment: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         data: Partial<TIssueComment>
-    ) => Promise<any>;
+    ) => Promise<any>
     updateComment: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         commentId: string,
         data: Partial<TIssueComment>
-    ) => Promise<any>;
-    removeComment: (workspaceSlug: string, projectId: string, issueId: string, commentId: string) => Promise<any>;
+    ) => Promise<any>
+    removeComment: (workspaceSlug: string, projectId: string, issueId: string, commentId: string) => Promise<any>
 }
 
 export interface IIssueCommentStore extends IIssueCommentStoreActions {
     // observables
-    loader: TCommentLoader;
-    comments: TIssueCommentIdMap;
-    commentMap: TIssueCommentMap;
+    loader: TCommentLoader
+    comments: TIssueCommentIdMap
+    commentMap: TIssueCommentMap
 
-    getCommentsByIssueId: (issueId: string) => string[] | undefined;
-    getCommentById: (activityId: string) => TIssueComment | undefined;
+    getCommentsByIssueId: (issueId: string) => string[] | undefined
+    getCommentById: (activityId: string) => TIssueComment | undefined
 }
 
 export class IssueCommentStore implements IIssueCommentStore {
     // observables
-    loader: TCommentLoader = "fetch";
-    comments: TIssueCommentIdMap = {};
-    commentMap: TIssueCommentMap = {};
+    loader: TCommentLoader = "fetch"
+    comments: TIssueCommentIdMap = {}
+    commentMap: TIssueCommentMap = {}
     // root store
-    rootIssueDetail: IIssueDetail;
+    rootIssueDetail: IIssueDetail
 
-    issueCommentService;
+    issueCommentService
 
     constructor(rootStore: IIssueDetail) {
         makeObservable(this, {
@@ -66,22 +64,22 @@ export class IssueCommentStore implements IIssueCommentStore {
             createComment: action,
             updateComment: action,
             removeComment: action,
-        });
+        })
         // root store
-        this.rootIssueDetail = rootStore;
+        this.rootIssueDetail = rootStore
 
-        this.issueCommentService = new IssueCommentService();
+        this.issueCommentService = new IssueCommentService()
     }
 
     getCommentsByIssueId = (issueId: string) => {
-        if (!issueId) return undefined;
-        return this.comments[issueId] ?? undefined;
-    };
+        if (!issueId) return undefined
+        return this.comments[issueId] ?? undefined
+    }
 
     getCommentById = (commentId: string) => {
-        if (!commentId) return undefined;
-        return this.commentMap[commentId] ?? undefined;
-    };
+        if (!commentId) return undefined
+        return this.commentMap[commentId] ?? undefined
+    }
 
     fetchComments = async (
         workspaceSlug: string,
@@ -90,56 +88,56 @@ export class IssueCommentStore implements IIssueCommentStore {
         loaderType: TCommentLoader = "fetch"
     ) => {
         try {
-            this.loader = loaderType;
+            this.loader = loaderType
 
-            let props = {};
-            const _commentIds = this.getCommentsByIssueId(issueId);
+            let props = {}
+            const _commentIds = this.getCommentsByIssueId(issueId)
             if (_commentIds && _commentIds.length > 0) {
-                const _comment = this.getCommentById(_commentIds[_commentIds.length - 1]);
-                if (_comment) props = { created_at__gt: _comment.created_at };
+                const _comment = this.getCommentById(_commentIds[_commentIds.length - 1])
+                if (_comment) props = { created_at__gt: _comment.created_at }
             }
 
-            const comments = await this.issueCommentService.getIssueComments(workspaceSlug, projectId, issueId, props);
+            const comments = await this.issueCommentService.getIssueComments(workspaceSlug, projectId, issueId, props)
 
-            const commentIds = comments.map((comment) => comment.id);
+            const commentIds = comments.map((comment) => comment.id)
             runInAction(() => {
                 update(this.comments, issueId, (_commentIds) => {
-                    if (!_commentIds) return commentIds;
-                    return uniq(concat(_commentIds, commentIds));
-                });
+                    if (!_commentIds) return commentIds
+                    return uniq(concat(_commentIds, commentIds))
+                })
                 comments.forEach((comment) => {
                     this.rootIssueDetail.commentReaction.applyCommentReactions(
                         comment.id,
                         comment?.comment_reactions || []
-                    );
-                    set(this.commentMap, comment.id, comment);
-                });
-                this.loader = undefined;
-            });
+                    )
+                    set(this.commentMap, comment.id, comment)
+                })
+                this.loader = undefined
+            })
 
-            return comments;
+            return comments
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     createComment = async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssueComment>) => {
         try {
-            const response = await this.issueCommentService.createIssueComment(workspaceSlug, projectId, issueId, data);
+            const response = await this.issueCommentService.createIssueComment(workspaceSlug, projectId, issueId, data)
 
             runInAction(() => {
                 update(this.comments, issueId, (_commentIds) => {
-                    if (!_commentIds) return [response.id];
-                    return uniq(concat(_commentIds, [response.id]));
-                });
-                set(this.commentMap, response.id, response);
-            });
+                    if (!_commentIds) return [response.id]
+                    return uniq(concat(_commentIds, [response.id]))
+                })
+                set(this.commentMap, response.id, response)
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     updateComment = async (
         workspaceSlug: string,
@@ -151,9 +149,9 @@ export class IssueCommentStore implements IIssueCommentStore {
         try {
             runInAction(() => {
                 Object.keys(data).forEach((key) => {
-                    set(this.commentMap, [commentId, key], data[key as keyof TIssueComment]);
-                });
-            });
+                    set(this.commentMap, [commentId, key], data[key as keyof TIssueComment])
+                })
+            })
 
             const response = await this.issueCommentService.patchIssueComment(
                 workspaceSlug,
@@ -161,14 +159,14 @@ export class IssueCommentStore implements IIssueCommentStore {
                 issueId,
                 commentId,
                 data
-            );
+            )
 
-            return response;
+            return response
         } catch (error) {
-            this.rootIssueDetail.activity.fetchActivities(workspaceSlug, projectId, issueId);
-            throw error;
+            this.rootIssueDetail.activity.fetchActivities(workspaceSlug, projectId, issueId)
+            throw error
         }
-    };
+    }
 
     removeComment = async (workspaceSlug: string, projectId: string, issueId: string, commentId: string) => {
         try {
@@ -177,16 +175,16 @@ export class IssueCommentStore implements IIssueCommentStore {
                 projectId,
                 issueId,
                 commentId
-            );
+            )
 
             runInAction(() => {
-                pull(this.comments[issueId], commentId);
-                delete this.commentMap[commentId];
-            });
+                pull(this.comments[issueId], commentId)
+                delete this.commentMap[commentId]
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 }

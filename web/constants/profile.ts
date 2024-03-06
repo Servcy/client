@@ -1,13 +1,12 @@
-import React from "react";
-
-import { Activity, CircleUser, KeyRound, LucideProps, Settings2 } from "lucide-react";
+import React from "react"
+import { Activity, CircleUser, KeyRound, LucideProps, Settings2 } from "lucide-react"
 
 export const PROFILE_ACTION_LINKS: {
-    key: string;
-    label: string;
-    href: string;
-    highlight: (pathname: string) => boolean;
-    Icon: React.FC<LucideProps>;
+    key: string
+    label: string
+    href: string
+    highlight: (pathname: string) => boolean
+    Icon: React.FC<LucideProps>
 }[] = [
     {
         key: "profile",
@@ -37,7 +36,7 @@ export const PROFILE_ACTION_LINKS: {
         highlight: (pathname: string) => pathname.includes("/profile/preferences"),
         Icon: Settings2,
     },
-];
+]
 
 export const PROFILE_VIEWER_TAB = [
     {
@@ -45,7 +44,7 @@ export const PROFILE_VIEWER_TAB = [
         label: "Summary",
         selected: "/[workspaceSlug]/profile/[userId]",
     },
-];
+]
 
 export const PROFILE_ADMINS_TAB = [
     {
@@ -63,4 +62,4 @@ export const PROFILE_ADMINS_TAB = [
         label: "Subscribed",
         selected: "/[workspaceSlug]/profile/[userId]/subscribed",
     },
-];
+]

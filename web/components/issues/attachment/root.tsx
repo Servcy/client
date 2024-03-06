@@ -1,41 +1,39 @@
-import { FC, useMemo } from "react";
-
-import { useEventTracker, useIssueDetail } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { IssueAttachmentUpload } from "./attachment-upload";
-import { IssueAttachmentsList } from "./attachments-list";
+import { FC, useMemo } from "react"
+import { useEventTracker, useIssueDetail } from "@hooks/store"
+import toast from "react-hot-toast"
+import { IssueAttachmentUpload } from "./attachment-upload"
+import { IssueAttachmentsList } from "./attachments-list"
 
 export type TIssueAttachmentRoot = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    disabled?: boolean;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    disabled?: boolean
+}
 
 export type TAttachmentOperations = {
-    create: (data: FormData) => Promise<void>;
-    remove: (linkId: string) => Promise<void>;
-};
+    create: (data: FormData) => Promise<void>
+    remove: (linkId: string) => Promise<void>
+}
 
 export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
     // props
-    const { workspaceSlug, projectId, issueId, disabled = false } = props;
+    const { workspaceSlug, projectId, issueId, disabled = false } = props
 
-    const { createAttachment, removeAttachment } = useIssueDetail();
-    const { captureIssueEvent } = useEventTracker();
+    const { createAttachment, removeAttachment } = useIssueDetail()
+    const { captureIssueEvent } = useEventTracker()
 
     const handleAttachmentOperations: TAttachmentOperations = useMemo(
         () => ({
             create: async (data: FormData) => {
                 try {
-                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields");
-                    const res = await createAttachment(workspaceSlug, projectId, issueId, data);
+                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
+                    const res = await createAttachment(workspaceSlug, projectId, issueId, data)
                     toast.error({
                         message: "The attachment has been successfully uploaded",
                         type: "success",
                         title: "Attachment uploaded",
-                    });
+                    })
                     captureIssueEvent({
                         eventName: "Issue attachment added",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -43,28 +41,28 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                             changed_property: "attachment",
                             change_details: res.id,
                         },
-                    });
+                    })
                 } catch (error) {
                     captureIssueEvent({
                         eventName: "Issue attachment added",
                         payload: { id: issueId, state: "FAILED", element: "Issue detail page" },
-                    });
+                    })
                     toast.error({
                         message: "The attachment could not be uploaded",
                         type: "error",
                         title: "Attachment not uploaded",
-                    });
+                    })
                 }
             },
             remove: async (attachmentId: string) => {
                 try {
-                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields");
-                    await removeAttachment(workspaceSlug, projectId, issueId, attachmentId);
+                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
+                    await removeAttachment(workspaceSlug, projectId, issueId, attachmentId)
                     toast.error({
                         message: "The attachment has been successfully removed",
                         type: "success",
                         title: "Attachment removed",
-                    });
+                    })
                     captureIssueEvent({
                         eventName: "Issue attachment deleted",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -72,7 +70,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                             changed_property: "attachment",
                             change_details: "",
                         },
-                    });
+                    })
                 } catch (error) {
                     captureIssueEvent({
                         eventName: "Issue attachment deleted",
@@ -81,17 +79,17 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                             changed_property: "attachment",
                             change_details: "",
                         },
-                    });
+                    })
                     toast.error({
                         message: "The Attachment could not be removed",
                         type: "error",
                         title: "Attachment not removed",
-                    });
+                    })
                 }
             },
         }),
         [workspaceSlug, projectId, issueId, createAttachment, removeAttachment, setToastAlert]
-    );
+    )
 
     return (
         <div className="relative py-3 space-y-3">
@@ -109,5 +107,5 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                 />
             </div>
         </div>
-    );
-};
+    )
+}

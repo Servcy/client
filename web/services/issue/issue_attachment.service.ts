@@ -1,12 +1,11 @@
-import { APIService } from "@services/api.service";
 // helper
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import { TIssueAttachment } from "@servcy/types";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { TIssueAttachment } from "@servcy/types"
 
 export class IssueAttachmentService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async uploadIssueAttachment(
@@ -27,16 +26,16 @@ export class IssueAttachmentService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getIssueAttachment(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueAttachment[]> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-attachments/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async deleteIssueAttachment(
@@ -50,7 +49,7 @@ export class IssueAttachmentService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

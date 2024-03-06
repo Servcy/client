@@ -1,36 +1,32 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { GanttChartSquare, LayoutGrid, List, Plus } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { Breadcrumbs, Button, Tooltip, DiceIcon, CustomMenu } from "@servcy/ui";
+import { useRouter } from "next/router"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { MODULE_VIEW_LAYOUTS } from "@constants/module"
+import { EUserProjectRoles } from "@constants/project"
 // helper
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { MODULE_VIEW_LAYOUTS } from "@constants/module";
-import { EUserProjectRoles } from "@constants/project";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { GanttChartSquare, LayoutGrid, List, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, Button, CustomMenu, DiceIcon, Tooltip } from "@servcy/ui"
 
 export const ModulesListHeader: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { commandPalette: commandPaletteStore } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    const { commandPalette: commandPaletteStore } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
 
-    const { storedValue: modulesView, setValue: setModulesView } = useLocalStorage("modules_view", "grid");
+    const { storedValue: modulesView, setValue: setModulesView } = useLocalStorage("modules_view", "grid")
 
     const canUserCreateModule =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
     return (
         <div>
             <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -99,8 +95,8 @@ export const ModulesListHeader: React.FC = observer(() => {
                             size="sm"
                             prependIcon={<Plus />}
                             onClick={() => {
-                                setTrackElement("Modules page");
-                                commandPaletteStore.toggleCreateModuleModal(true);
+                                setTrackElement("Modules page")
+                                commandPaletteStore.toggleCreateModuleModal(true)
                             }}
                         >
                             <div className="hidden sm:block">Add</div> Module
@@ -140,5 +136,5 @@ export const ModulesListHeader: React.FC = observer(() => {
                 </CustomMenu>
             </div>
         </div>
-    );
-});
+    )
+})

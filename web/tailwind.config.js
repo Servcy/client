@@ -1,4 +1,4 @@
-const sharedConfig = require("tailwind-config-custom/tailwind.config.js");
+const sharedConfig = require("tailwind-config-custom/tailwind.config.js")
 
 module.exports = {
     content: {
@@ -24,4 +24,4 @@ module.exports = {
         },
         darkMode: "class",
     },
-};
+}

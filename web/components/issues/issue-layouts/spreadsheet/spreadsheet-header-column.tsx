@@ -1,25 +1,25 @@
-import { useRef } from "react";
+import { useRef } from "react"
+import { observer } from "mobx-react"
 //types
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types";
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types"
 //components
-import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
-import { HeaderColumn } from "./columns/header-column";
-import { observer } from "mobx-react";
+import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
+import { HeaderColumn } from "./columns/header-column"
 
 interface Props {
-    displayProperties: IIssueDisplayProperties;
-    property: keyof IIssueDisplayProperties;
-    isEstimateEnabled: boolean;
-    displayFilters: IIssueDisplayFilterOptions;
-    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void;
+    displayProperties: IIssueDisplayProperties
+    property: keyof IIssueDisplayProperties
+    isEstimateEnabled: boolean
+    displayFilters: IIssueDisplayFilterOptions
+    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void
 }
 export const SpreadsheetHeaderColumn = observer((props: Props) => {
-    const { displayProperties, displayFilters, property, isEstimateEnabled, handleDisplayFilterUpdate } = props;
+    const { displayProperties, displayFilters, property, isEstimateEnabled, handleDisplayFilterUpdate } = props
 
     //hooks
-    const tableHeaderCellRef = useRef<HTMLTableCellElement | null>(null);
+    const tableHeaderCellRef = useRef<HTMLTableCellElement | null>(null)
 
-    const shouldRenderProperty = property === "estimate" ? isEstimateEnabled : true;
+    const shouldRenderProperty = property === "estimate" ? isEstimateEnabled : true
 
     return (
         <WithDisplayPropertiesHOC
@@ -37,10 +37,10 @@ export const SpreadsheetHeaderColumn = observer((props: Props) => {
                     handleDisplayFilterUpdate={handleDisplayFilterUpdate}
                     property={property}
                     onClose={() => {
-                        tableHeaderCellRef?.current?.focus();
+                        tableHeaderCellRef?.current?.focus()
                     }}
                 />
             </th>
         </WithDisplayPropertiesHOC>
-    );
-});
+    )
+})

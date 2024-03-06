@@ -1,14 +1,13 @@
-import { Button } from "@servcy/ui";
-import { GithubAuth, TIntegrationSteps } from "@components/integration";
-
-import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types";
+import { GithubAuth, TIntegrationSteps } from "@components/integration"
+import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    provider: string | undefined;
-    handleStepChange: (value: TIntegrationSteps) => void;
-    appIntegrations: IAppIntegration[] | undefined;
-    workspaceIntegrations: IWorkspaceIntegration[] | undefined;
-};
+    provider: string | undefined
+    handleStepChange: (value: TIntegrationSteps) => void
+    appIntegrations: IAppIntegration[] | undefined
+    workspaceIntegrations: IWorkspaceIntegration[] | undefined
+}
 
 export const GithubImportConfigure: React.FC<Props> = ({
     handleStepChange,
@@ -18,14 +17,14 @@ export const GithubImportConfigure: React.FC<Props> = ({
 }) => {
     // current integration from all the integrations available
     const integration =
-        appIntegrations && appIntegrations.length > 0 && appIntegrations.find((i) => i.provider === provider);
+        appIntegrations && appIntegrations.length > 0 && appIntegrations.find((i) => i.provider === provider)
 
     // current integration from workspace integrations
     const workspaceIntegration =
         integration &&
         workspaceIntegrations &&
         workspaceIntegrations.length > 0 &&
-        workspaceIntegrations.find((i: any) => i.integration_detail.id === integration.id);
+        workspaceIntegrations.find((i: any) => i.integration_detail.id === integration.id)
 
     return (
         <div className="space-y-6">
@@ -49,5 +48,5 @@ export const GithubImportConfigure: React.FC<Props> = ({
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}

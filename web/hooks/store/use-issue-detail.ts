@@ -1,11 +1,10 @@
-import { useContext } from "react";
+import { useContext } from "react"
 // mobx store
-import { StoreContext } from "@contexts/StoreContext";
-
-import { IIssueDetail } from "@store/issue/issue-details/root.store";
+import { StoreContext } from "@contexts/StoreContext"
+import { IIssueDetail } from "@store/issue/issue-details/root.store"
 
 export const useIssueDetail = (): IIssueDetail => {
-    const context = useContext(StoreContext);
-    if (context === undefined) throw new Error("useInbox must be used within StoreProvider");
-    return context.issue.issueDetail;
-};
+    const context = useContext(StoreContext)
+    if (context === undefined) throw new Error("useInbox must be used within StoreProvider")
+    return context.issue.issueDetail
+}

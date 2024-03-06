@@ -1,19 +1,16 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-
-import { useMember } from "@hooks/store";
-
-import { WorkspaceInvitationsListItem, WorkspaceMembersListItem } from "@components/workspace";
-
-import { MembersSettingsLoader } from "@components/ui";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { MembersSettingsLoader } from "@components/ui"
+import { WorkspaceInvitationsListItem, WorkspaceMembersListItem } from "@components/workspace"
+import { useMember } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
 
 export const WorkspaceMembersList: FC<{ searchQuery: string }> = observer((props) => {
-    const { searchQuery } = props;
+    const { searchQuery } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         workspace: {
@@ -23,18 +20,18 @@ export const WorkspaceMembersList: FC<{ searchQuery: string }> = observer((props
             workspaceMemberInvitationIds,
             getSearchedWorkspaceInvitationIds,
         },
-    } = useMember();
+    } = useMember()
     // fetching workspace invitations
     useSWR(
         workspaceSlug ? `WORKSPACE_INVITATIONS_${workspaceSlug.toString()}` : null,
         workspaceSlug ? () => fetchWorkspaceMemberInvitations(workspaceSlug.toString()) : null
-    );
+    )
 
-    if (!workspaceMemberIds && !workspaceMemberInvitationIds) return <MembersSettingsLoader />;
+    if (!workspaceMemberIds && !workspaceMemberInvitationIds) return <MembersSettingsLoader />
 
     // derived values
-    const searchedMemberIds = getSearchedWorkspaceMemberIds(searchQuery);
-    const searchedInvitationsIds = getSearchedWorkspaceInvitationIds(searchQuery);
+    const searchedMemberIds = getSearchedWorkspaceMemberIds(searchQuery)
+    const searchedInvitationsIds = getSearchedWorkspaceInvitationIds(searchQuery)
 
     return (
         <div className="divide-y-[0.5px] divide-custom-border-100">
@@ -50,5 +47,5 @@ export const WorkspaceMembersList: FC<{ searchQuery: string }> = observer((props
                 <h4 className="mt-16 text-center text-sm text-custom-text-400">No matching members</h4>
             )}
         </div>
-    );
-});
+    )
+})

@@ -1,39 +1,35 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { TwitterPicker } from "react-color";
-import { Dialog, Popover, Transition } from "@headlessui/react";
-import { ChevronDown } from "lucide-react";
-
-import { useLabel } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, Input } from "@servcy/ui";
-
-import type { IIssueLabel, IState } from "@servcy/types";
-
-import { LABEL_COLOR_OPTIONS, getRandomLabelColor } from "@constants/label";
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
+import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "@constants/label"
+import { Dialog, Popover, Transition } from "@headlessui/react"
+import { useLabel } from "@hooks/store"
+import { ChevronDown } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TwitterPicker } from "react-color"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import type { IIssueLabel, IState } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    projectId: string;
-    handleClose: () => void;
-    onSuccess?: (response: IIssueLabel) => void;
-};
+    isOpen: boolean
+    projectId: string
+    handleClose: () => void
+    onSuccess?: (response: IIssueLabel) => void
+}
 
 const defaultValues: Partial<IState> = {
     name: "",
     color: "rgb(var(--color-text-200))",
-};
+}
 
 export const CreateLabelModal: React.FC<Props> = observer((props) => {
-    const { isOpen, projectId, handleClose, onSuccess } = props;
+    const { isOpen, projectId, handleClose, onSuccess } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { createLabel } = useLabel();
+    const { createLabel } = useLabel()
     // form info
     const {
         formState: { errors, isSubmitting },
@@ -45,41 +41,41 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
         setFocus,
     } = useForm<IIssueLabel>({
         defaultValues,
-    });
+    })
 
     /**
      * For setting focus on name input
      */
     useEffect(() => {
-        setFocus("name");
-    }, [setFocus, isOpen]);
+        setFocus("name")
+    }, [setFocus, isOpen])
 
     useEffect(() => {
-        if (isOpen) setValue("color", getRandomLabelColor());
-    }, [setValue, isOpen]);
+        if (isOpen) setValue("color", getRandomLabelColor())
+    }, [setValue, isOpen])
 
     const onClose = () => {
-        handleClose();
-        reset(defaultValues);
-    };
+        handleClose()
+        reset(defaultValues)
+    }
 
     const onSubmit = async (formData: IIssueLabel) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         await createLabel(workspaceSlug.toString(), projectId.toString(), formData)
             .then((res) => {
-                onClose();
-                if (onSuccess) onSuccess(res);
+                onClose()
+                if (onSuccess) onSuccess(res)
             })
             .catch((error) => {
                 toast.error({
                     title: "Oops!",
                     type: "error",
                     message: error?.error ?? "Error while adding the label",
-                });
-                reset(formData);
-            });
-    };
+                })
+                reset(formData)
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -159,8 +155,8 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
                                                                             color={value}
                                                                             colors={LABEL_COLOR_OPTIONS}
                                                                             onChange={(value) => {
-                                                                                onChange(value.hex);
-                                                                                close();
+                                                                                onChange(value.hex)
+                                                                                close()
                                                                             }}
                                                                         />
                                                                     )}
@@ -210,5 +206,5 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

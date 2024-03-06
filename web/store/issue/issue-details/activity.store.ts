@@ -1,16 +1,14 @@
-import concat from "lodash/concat";
-import set from "lodash/set";
-import sortBy from "lodash/sortBy";
-import uniq from "lodash/uniq";
-import update from "lodash/update";
-import { action, makeObservable, observable, runInAction } from "mobx";
+import { IssueActivityService } from "@services/issue"
+import concat from "lodash/concat"
+import set from "lodash/set"
+import sortBy from "lodash/sortBy"
+import uniq from "lodash/uniq"
+import update from "lodash/update"
+import { action, makeObservable, observable, runInAction } from "mobx"
+import { TIssueActivity, TIssueActivityComment, TIssueActivityIdMap, TIssueActivityMap } from "@servcy/types"
+import { IIssueDetail } from "./root.store"
 
-import { IssueActivityService } from "@services/issue";
-
-import { TIssueActivity, TIssueActivityComment, TIssueActivityIdMap, TIssueActivityMap } from "@servcy/types";
-import { IIssueDetail } from "./root.store";
-
-export type TActivityLoader = "fetch" | "mutate" | undefined;
+export type TActivityLoader = "fetch" | "mutate" | undefined
 
 export interface IIssueActivityStoreActions {
     // actions
@@ -19,29 +17,29 @@ export interface IIssueActivityStoreActions {
         projectId: string,
         issueId: string,
         loaderType?: TActivityLoader
-    ) => Promise<TIssueActivity[]>;
+    ) => Promise<TIssueActivity[]>
 }
 
 export interface IIssueActivityStore extends IIssueActivityStoreActions {
     // observables
-    loader: TActivityLoader;
-    activities: TIssueActivityIdMap;
-    activityMap: TIssueActivityMap;
+    loader: TActivityLoader
+    activities: TIssueActivityIdMap
+    activityMap: TIssueActivityMap
 
-    getActivitiesByIssueId: (issueId: string) => string[] | undefined;
-    getActivityById: (activityId: string) => TIssueActivity | undefined;
-    getActivityCommentByIssueId: (issueId: string) => TIssueActivityComment[] | undefined;
+    getActivitiesByIssueId: (issueId: string) => string[] | undefined
+    getActivityById: (activityId: string) => TIssueActivity | undefined
+    getActivityCommentByIssueId: (issueId: string) => TIssueActivityComment[] | undefined
 }
 
 export class IssueActivityStore implements IIssueActivityStore {
     // observables
-    loader: TActivityLoader = "fetch";
-    activities: TIssueActivityIdMap = {};
-    activityMap: TIssueActivityMap = {};
+    loader: TActivityLoader = "fetch"
+    activities: TIssueActivityIdMap = {}
+    activityMap: TIssueActivityMap = {}
     // root store
-    rootIssueDetailStore: IIssueDetail;
+    rootIssueDetailStore: IIssueDetail
 
-    issueActivityService;
+    issueActivityService
 
     constructor(rootStore: IIssueDetail) {
         makeObservable(this, {
@@ -51,59 +49,59 @@ export class IssueActivityStore implements IIssueActivityStore {
             activityMap: observable,
             // actions
             fetchActivities: action,
-        });
+        })
         // root store
-        this.rootIssueDetailStore = rootStore;
+        this.rootIssueDetailStore = rootStore
 
-        this.issueActivityService = new IssueActivityService();
+        this.issueActivityService = new IssueActivityService()
     }
 
     getActivitiesByIssueId = (issueId: string) => {
-        if (!issueId) return undefined;
-        return this.activities[issueId] ?? undefined;
-    };
+        if (!issueId) return undefined
+        return this.activities[issueId] ?? undefined
+    }
 
     getActivityById = (activityId: string) => {
-        if (!activityId) return undefined;
-        return this.activityMap[activityId] ?? undefined;
-    };
+        if (!activityId) return undefined
+        return this.activityMap[activityId] ?? undefined
+    }
 
     getActivityCommentByIssueId = (issueId: string) => {
-        if (!issueId) return undefined;
+        if (!issueId) return undefined
 
-        let activityComments: TIssueActivityComment[] = [];
+        let activityComments: TIssueActivityComment[] = []
 
-        const activities = this.getActivitiesByIssueId(issueId) || [];
-        const comments = this.rootIssueDetailStore.comment.getCommentsByIssueId(issueId) || [];
+        const activities = this.getActivitiesByIssueId(issueId) || []
+        const comments = this.rootIssueDetailStore.comment.getCommentsByIssueId(issueId) || []
 
         activities.forEach((activityId) => {
-            const activity = this.getActivityById(activityId);
-            if (!activity) return;
+            const activity = this.getActivityById(activityId)
+            if (!activity) return
             activityComments.push({
                 id: activity.id,
                 activity_type: "ACTIVITY",
                 created_at: activity.created_at,
-            });
-        });
+            })
+        })
 
         comments.forEach((commentId) => {
-            const comment = this.rootIssueDetailStore.comment.getCommentById(commentId);
-            if (!comment) return;
+            const comment = this.rootIssueDetailStore.comment.getCommentById(commentId)
+            if (!comment) return
             activityComments.push({
                 id: comment.id,
                 activity_type: "COMMENT",
                 created_at: comment.created_at,
-            });
-        });
+            })
+        })
 
-        activityComments = sortBy(activityComments, "created_at");
+        activityComments = sortBy(activityComments, "created_at")
         activityComments = activityComments.map((activityComment) => ({
             id: activityComment.id,
             activity_type: activityComment.activity_type,
-        }));
+        }))
 
-        return activityComments;
-    };
+        return activityComments
+    }
 
     // actions
     fetchActivities = async (
@@ -113,13 +111,13 @@ export class IssueActivityStore implements IIssueActivityStore {
         loaderType: TActivityLoader = "fetch"
     ) => {
         try {
-            this.loader = loaderType;
+            this.loader = loaderType
 
-            let props = {};
-            const _activityIds = this.getActivitiesByIssueId(issueId);
+            let props = {}
+            const _activityIds = this.getActivitiesByIssueId(issueId)
             if (_activityIds && _activityIds.length > 0) {
-                const _activity = this.getActivityById(_activityIds[_activityIds.length - 1]);
-                if (_activity) props = { created_at__gt: _activity.created_at };
+                const _activity = this.getActivityById(_activityIds[_activityIds.length - 1])
+                if (_activity) props = { created_at__gt: _activity.created_at }
             }
 
             const activities = await this.issueActivityService.getIssueActivities(
@@ -127,24 +125,24 @@ export class IssueActivityStore implements IIssueActivityStore {
                 projectId,
                 issueId,
                 props
-            );
+            )
 
-            const activityIds = activities.map((activity) => activity.id);
+            const activityIds = activities.map((activity) => activity.id)
 
             runInAction(() => {
                 update(this.activities, issueId, (_activityIds) => {
-                    if (!_activityIds) return activityIds;
-                    return uniq(concat(_activityIds, activityIds));
-                });
+                    if (!_activityIds) return activityIds
+                    return uniq(concat(_activityIds, activityIds))
+                })
                 activities.forEach((activity) => {
-                    set(this.activityMap, activity.id, activity);
-                });
-                this.loader = undefined;
-            });
+                    set(this.activityMap, activity.id, activity)
+                })
+                this.loader = undefined
+            })
 
-            return activities;
+            return activities
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 }

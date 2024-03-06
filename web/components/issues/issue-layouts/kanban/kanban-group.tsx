@@ -1,45 +1,44 @@
-import { MutableRefObject } from "react";
-import { Droppable } from "@hello-pangea/dnd";
-
-import { useProjectState } from "@hooks/store";
-//components
-import { KanbanIssueBlocksList, KanBanQuickAddIssueForm } from ".";
+import { MutableRefObject } from "react"
+import { Droppable } from "@hello-pangea/dnd"
+import { useProjectState } from "@hooks/store"
 //types
 import {
-    TGroupedIssues,
-    TIssue,
     IIssueDisplayProperties,
     IIssueMap,
+    TGroupedIssues,
+    TIssue,
     TSubGroupedIssues,
     TUnGroupedIssues,
-} from "@servcy/types";
-import { EIssueActions } from "../types";
+} from "@servcy/types"
+//components
+import { KanbanIssueBlocksList, KanBanQuickAddIssueForm } from "."
+import { EIssueActions } from "../types"
 
 interface IKanbanGroup {
-    groupId: string;
-    issuesMap: IIssueMap;
-    peekIssueId?: string;
-    issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues;
-    displayProperties: IIssueDisplayProperties | undefined;
-    sub_group_by: string | null;
-    group_by: string | null;
-    sub_group_id: string;
-    isDragDisabled: boolean;
-    handleIssues: (issue: TIssue, action: EIssueActions) => void;
-    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode;
-    enableQuickIssueCreate?: boolean;
+    groupId: string
+    issuesMap: IIssueMap
+    peekIssueId?: string
+    issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues
+    displayProperties: IIssueDisplayProperties | undefined
+    sub_group_by: string | null
+    group_by: string | null
+    sub_group_id: string
+    isDragDisabled: boolean
+    handleIssues: (issue: TIssue, action: EIssueActions) => void
+    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
+    enableQuickIssueCreate?: boolean
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-    disableIssueCreation?: boolean;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    groupByVisibilityToggle: boolean;
-    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>;
-    isDragStarted?: boolean;
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+    disableIssueCreation?: boolean
+    canEditProperties: (projectId: string | undefined) => boolean
+    groupByVisibilityToggle: boolean
+    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>
+    isDragStarted?: boolean
 }
 
 export const KanbanGroup = (props: IKanbanGroup) => {
@@ -62,9 +61,9 @@ export const KanbanGroup = (props: IKanbanGroup) => {
         viewId,
         scrollableContainerRef,
         isDragStarted,
-    } = props;
+    } = props
 
-    const projectState = useProjectState();
+    const projectState = useProjectState()
 
     const prePopulateQuickAddData = (
         groupByKey: string | null,
@@ -72,51 +71,51 @@ export const KanbanGroup = (props: IKanbanGroup) => {
         groupValue: string,
         subGroupValue: string
     ) => {
-        const defaultState = projectState.projectStates?.find((state) => state.default);
-        let preloadedData: object = { state_id: defaultState?.id };
+        const defaultState = projectState.projectStates?.find((state) => state.default)
+        let preloadedData: object = { state_id: defaultState?.id }
 
         if (groupByKey) {
             if (groupByKey === "state") {
-                preloadedData = { ...preloadedData, state_id: groupValue };
+                preloadedData = { ...preloadedData, state_id: groupValue }
             } else if (groupByKey === "priority") {
-                preloadedData = { ...preloadedData, priority: groupValue };
+                preloadedData = { ...preloadedData, priority: groupValue }
             } else if (groupByKey === "cycle") {
-                preloadedData = { ...preloadedData, cycle_id: groupValue };
+                preloadedData = { ...preloadedData, cycle_id: groupValue }
             } else if (groupByKey === "module") {
-                preloadedData = { ...preloadedData, module_ids: [groupValue] };
+                preloadedData = { ...preloadedData, module_ids: [groupValue] }
             } else if (groupByKey === "labels" && groupValue != "None") {
-                preloadedData = { ...preloadedData, label_ids: [groupValue] };
+                preloadedData = { ...preloadedData, label_ids: [groupValue] }
             } else if (groupByKey === "assignees" && groupValue != "None") {
-                preloadedData = { ...preloadedData, assignee_ids: [groupValue] };
+                preloadedData = { ...preloadedData, assignee_ids: [groupValue] }
             } else if (groupByKey === "created_by") {
-                preloadedData = { ...preloadedData };
+                preloadedData = { ...preloadedData }
             } else {
-                preloadedData = { ...preloadedData, [groupByKey]: groupValue };
+                preloadedData = { ...preloadedData, [groupByKey]: groupValue }
             }
         }
 
         if (subGroupByKey) {
             if (subGroupByKey === "state") {
-                preloadedData = { ...preloadedData, state_id: subGroupValue };
+                preloadedData = { ...preloadedData, state_id: subGroupValue }
             } else if (subGroupByKey === "priority") {
-                preloadedData = { ...preloadedData, priority: subGroupValue };
+                preloadedData = { ...preloadedData, priority: subGroupValue }
             } else if (groupByKey === "cycle") {
-                preloadedData = { ...preloadedData, cycle_id: subGroupValue };
+                preloadedData = { ...preloadedData, cycle_id: subGroupValue }
             } else if (groupByKey === "module") {
-                preloadedData = { ...preloadedData, module_ids: [subGroupValue] };
+                preloadedData = { ...preloadedData, module_ids: [subGroupValue] }
             } else if (subGroupByKey === "labels" && subGroupValue != "None") {
-                preloadedData = { ...preloadedData, label_ids: [subGroupValue] };
+                preloadedData = { ...preloadedData, label_ids: [subGroupValue] }
             } else if (subGroupByKey === "assignees" && subGroupValue != "None") {
-                preloadedData = { ...preloadedData, assignee_ids: [subGroupValue] };
+                preloadedData = { ...preloadedData, assignee_ids: [subGroupValue] }
             } else if (subGroupByKey === "created_by") {
-                preloadedData = { ...preloadedData };
+                preloadedData = { ...preloadedData }
             } else {
-                preloadedData = { ...preloadedData, [subGroupByKey]: subGroupValue };
+                preloadedData = { ...preloadedData, [subGroupByKey]: subGroupValue }
             }
         }
 
-        return preloadedData;
-    };
+        return preloadedData
+    }
 
     return (
         <div className={`relative w-full h-full transition-all`}>
@@ -163,5 +162,5 @@ export const KanbanGroup = (props: IKanbanGroup) => {
                 )}
             </Droppable>
         </div>
-    );
-};
+    )
+}

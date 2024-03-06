@@ -3,65 +3,65 @@ import {
     MODULE_ISSUES_WITH_PARAMS,
     PROJECT_ISSUES_LIST_WITH_PARAMS,
     VIEW_ISSUES,
-} from "@constants/fetch-keys";
-import * as DOMPurify from "dompurify";
+} from "@constants/fetch-keys"
+import * as DOMPurify from "dompurify"
 
 export const addSpaceIfCamelCase = (str: string) => {
-    if (str === undefined || str === null) return "";
+    if (str === undefined || str === null) return ""
 
-    if (typeof str !== "string") str = `${str}`;
+    if (typeof str !== "string") str = `${str}`
 
-    return str.replace(/([a-z])([A-Z])/g, "$1 $2");
-};
+    return str.replace(/([a-z])([A-Z])/g, "$1 $2")
+}
 
-export const replaceUnderscoreIfSnakeCase = (str: string) => str.replace(/_/g, " ");
+export const replaceUnderscoreIfSnakeCase = (str: string) => str.replace(/_/g, " ")
 
-export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
 
 export const truncateText = (str: string, length: number) => {
-    if (!str || str === "") return "";
+    if (!str || str === "") return ""
 
-    return str.length > length ? `${str.substring(0, length)}...` : str;
-};
+    return str.length > length ? `${str.substring(0, length)}...` : str
+}
 
 export const createSimilarString = (str: string) => {
     const shuffled = str
         .split("")
         .sort(() => Math.random() - 0.5)
-        .join("");
+        .join("")
 
-    return shuffled;
-};
+    return shuffled
+}
 
 const fallbackCopyTextToClipboard = (text: string) => {
-    var textArea = document.createElement("textarea");
-    textArea.value = text;
+    var textArea = document.createElement("textarea")
+    textArea.value = text
 
     // Avoid scrolling to bottom
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.position = "fixed";
+    textArea.style.top = "0"
+    textArea.style.left = "0"
+    textArea.style.position = "fixed"
 
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
+    document.body.appendChild(textArea)
+    textArea.focus()
+    textArea.select()
 
     try {
         // FIXME: Even though we are using this as a fallback, execCommand is deprecated 👎. We should find a better way to do this.
         // https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
-        var successful = document.execCommand("copy");
+        var successful = document.execCommand("copy")
     } catch (err) {}
 
-    document.body.removeChild(textArea);
-};
+    document.body.removeChild(textArea)
+}
 
 export const copyTextToClipboard = async (text: string) => {
     if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard(text);
-        return;
+        fallbackCopyTextToClipboard(text)
+        return
     }
-    await navigator.clipboard.writeText(text);
-};
+    await navigator.clipboard.writeText(text)
+}
 
 /**
  * @description: This function copies the url to clipboard after prepending the origin URL to it
@@ -71,41 +71,41 @@ export const copyTextToClipboard = async (text: string) => {
  * copied URL: origin_url/path
  */
 export const copyUrlToClipboard = async (path: string) => {
-    const originUrl = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
+    const originUrl = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
 
-    await copyTextToClipboard(`${originUrl}/${path}`);
-};
+    await copyTextToClipboard(`${originUrl}/${path}`)
+}
 
 export const generateRandomColor = (string: string): string => {
-    if (!string) return "rgb(var(--color-primary-100))";
+    if (!string) return "rgb(var(--color-primary-100))"
 
-    string = `${string}`;
+    string = `${string}`
 
-    const uniqueId = string.length.toString() + string; // Unique identifier based on string length
-    const combinedString = uniqueId + string;
+    const uniqueId = string.length.toString() + string // Unique identifier based on string length
+    const combinedString = uniqueId + string
 
     const hash = Array.from(combinedString).reduce((acc, char) => {
-        const charCode = char.charCodeAt(0);
-        return (acc << 5) - acc + charCode;
-    }, 0);
+        const charCode = char.charCodeAt(0)
+        return (acc << 5) - acc + charCode
+    }, 0)
 
-    const hue = hash % 360;
-    const saturation = 70; // Higher saturation for pastel colors
-    const lightness = 60; // Mid-range lightness for pastel colors
+    const hue = hash % 360
+    const saturation = 70 // Higher saturation for pastel colors
+    const lightness = 60 // Mid-range lightness for pastel colors
 
-    const randomColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    const randomColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`
 
-    return randomColor;
-};
+    return randomColor
+}
 
 export const getFirstCharacters = (str: string) => {
-    const words = str.trim().split(" ");
+    const words = str.trim().split(" ")
     if (words.length === 1) {
-        return words[0].charAt(0);
+        return words[0].charAt(0)
     } else {
-        return words[0].charAt(0) + words[1].charAt(0);
+        return words[0].charAt(0) + words[1].charAt(0)
     }
-};
+}
 
 /**
  * @description: This function will remove all the HTML tags from the string
@@ -118,9 +118,9 @@ export const getFirstCharacters = (str: string) => {
  */
 
 export const stripHTML = (html: string) => {
-    const strippedText = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, ""); // Remove script tags
-    return strippedText.replace(/<[^>]*>/g, ""); // Remove all other HTML tags
-};
+    const strippedText = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "") // Remove script tags
+    return strippedText.replace(/<[^>]*>/g, "") // Remove all other HTML tags
+}
 
 /**
  *
@@ -130,7 +130,7 @@ export const stripHTML = (html: string) => {
  * console.log(text); // Some text
  */
 
-export const stripAndTruncateHTML = (html: string, length: number = 55) => truncateText(stripHTML(html), length);
+export const stripAndTruncateHTML = (html: string, length: number = 55) => truncateText(stripHTML(html), length)
 
 /**
  * @description: This function return number count in string if number is more than 100 then it will return 99+
@@ -144,30 +144,30 @@ export const stripAndTruncateHTML = (html: string, length: number = 55) => trunc
 
 export const getNumberCount = (number: number): string => {
     if (number > 99) {
-        return "99+";
+        return "99+"
     }
-    return number.toString();
-};
+    return number.toString()
+}
 
 export const objToQueryParams = (obj: any) => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams()
 
     for (const [key, value] of Object.entries(obj)) {
-        if (value !== undefined && value !== null) params.append(key, value as string);
+        if (value !== undefined && value !== null) params.append(key, value as string)
     }
 
-    return params.toString();
-};
+    return params.toString()
+}
 
 export const getFetchKeysForIssueMutation = (options: {
-    cycleId?: string | string[];
-    moduleId?: string | string[];
-    viewId?: string | string[];
-    projectId: string;
-    viewGanttParams: any;
-    ganttParams: any;
+    cycleId?: string | string[]
+    moduleId?: string | string[]
+    viewId?: string | string[]
+    projectId: string
+    viewGanttParams: any
+    ganttParams: any
 }) => {
-    const { cycleId, moduleId, viewId, projectId, viewGanttParams, ganttParams } = options;
+    const { cycleId, moduleId, viewId, projectId, viewGanttParams, ganttParams } = options
 
     const ganttFetchKey = cycleId
         ? { ganttFetchKey: CYCLE_ISSUES_WITH_PARAMS(cycleId.toString(), ganttParams) }
@@ -175,12 +175,12 @@ export const getFetchKeysForIssueMutation = (options: {
           ? { ganttFetchKey: MODULE_ISSUES_WITH_PARAMS(moduleId.toString(), ganttParams) }
           : viewId
             ? { ganttFetchKey: VIEW_ISSUES(viewId.toString(), viewGanttParams) }
-            : { ganttFetchKey: PROJECT_ISSUES_LIST_WITH_PARAMS(projectId?.toString() ?? "", ganttParams) };
+            : { ganttFetchKey: PROJECT_ISSUES_LIST_WITH_PARAMS(projectId?.toString() ?? "", ganttParams) }
 
     return {
         ...ganttFetchKey,
-    };
-};
+    }
+}
 
 /**
  * @returns {boolean} true if searchQuery is substring of text in the same order, false otherwise
@@ -192,21 +192,21 @@ export const getFetchKeysForIssueMutation = (options: {
  */
 export const substringMatch = (text: string, searchQuery: string): boolean => {
     try {
-        let searchIndex = 0;
+        let searchIndex = 0
 
         for (let i = 0; i < text.length; i++) {
-            if (text[i].toLowerCase() === searchQuery[searchIndex]?.toLowerCase()) searchIndex++;
+            if (text[i].toLowerCase() === searchQuery[searchIndex]?.toLowerCase()) searchIndex++
 
             // All characters of searchQuery found in order
-            if (searchIndex === searchQuery.length) return true;
+            if (searchIndex === searchQuery.length) return true
         }
 
         // Not all characters of searchQuery found in order
-        return false;
+        return false
     } catch (error) {
-        return false;
+        return false
     }
-};
+}
 
 /**
  * @returns {boolean} true if email is valid, false otherwise
@@ -216,19 +216,19 @@ export const substringMatch = (text: string, searchQuery: string): boolean => {
  * @example checkEmailIsValid("example@servcy.com") => true
  */
 export const checkEmailValidity = (email: string): boolean => {
-    if (!email) return false;
+    if (!email) return false
 
     const isEmailValid =
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
             email
-        );
+        )
 
-    return isEmailValid;
-};
+    return isEmailValid
+}
 
 export const isEmptyHtmlString = (htmlString: string) => {
     // Remove HTML tags using regex
-    const cleanText = DOMPurify.sanitize(htmlString, { ALLOWED_TAGS: [] });
+    const cleanText = DOMPurify.sanitize(htmlString, { ALLOWED_TAGS: [] })
     // Trim the string and check if it's empty
-    return cleanText.trim() === "";
-};
+    return cleanText.trim() === ""
+}

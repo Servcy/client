@@ -1,34 +1,34 @@
-import { FC, ReactNode } from "react";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC, ReactNode } from "react"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { useApplication } from "@hooks/store"
 // layout
-import { ProfileSettingsLayout } from "@layouts/settings-layout";
-import { ProfilePreferenceSettingsSidebar } from "./sidebar";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { CustomMenu } from "@servcy/ui";
-import { ChevronDown } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useApplication } from "@hooks/store";
+import { ProfileSettingsLayout } from "@layouts/settings-layout"
+import { ChevronDown } from "lucide-react"
+import { CustomMenu } from "@servcy/ui"
+import { ProfilePreferenceSettingsSidebar } from "./sidebar"
 
 interface IProfilePreferenceSettingsLayout {
-    children: ReactNode;
-    header?: ReactNode;
+    children: ReactNode
+    header?: ReactNode
 }
 
 export const ProfilePreferenceSettingsLayout: FC<IProfilePreferenceSettingsLayout> = (props) => {
-    const { children, header } = props;
-    const router = useRouter();
-    const { theme: themeStore } = useApplication();
+    const { children, header } = props
+    const router = useRouter()
+    const { theme: themeStore } = useApplication()
 
     const showMenuItem = () => {
-        const item = router.asPath.split("/");
-        let splittedItem = item[item.length - 1];
-        splittedItem = splittedItem.replace(splittedItem[0], splittedItem[0].toUpperCase());
-        return splittedItem;
-    };
+        const item = router.asPath.split("/")
+        let splittedItem = item[item.length - 1]
+        splittedItem = splittedItem.replace(splittedItem[0], splittedItem[0].toUpperCase())
+        return splittedItem
+    }
 
     const profilePreferenceLinks: Array<{
-        label: string;
-        href: string;
+        label: string
+        href: string
     }> = [
         {
             label: "Theme",
@@ -38,7 +38,7 @@ export const ProfilePreferenceSettingsLayout: FC<IProfilePreferenceSettingsLayou
             label: "Email",
             href: `/profile/preferences/email`,
         },
-    ];
+    ]
 
     return (
         <ProfileSettingsLayout
@@ -79,5 +79,5 @@ export const ProfilePreferenceSettingsLayout: FC<IProfilePreferenceSettingsLayou
                 </main>
             </div>
         </ProfileSettingsLayout>
-    );
-};
+    )
+}

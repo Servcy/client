@@ -1,20 +1,18 @@
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import { APIService } from "@services/api.service";
-
-import { IProjectPublishSettings } from "@store/project/project-publish.store";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { IProjectPublishSettings } from "@store/project/project-publish.store"
 
 export class ProjectPublishService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async getProjectSettingsAsync(workspace_slug: string, project_slug: string): Promise<any> {
         return this.get(`/api/workspaces/${workspace_slug}/projects/${project_slug}/project-deploy-boards/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response;
-            });
+                throw error?.response
+            })
     }
 
     async createProjectSettingsAsync(
@@ -25,8 +23,8 @@ export class ProjectPublishService extends APIService {
         return this.post(`/api/workspaces/${workspace_slug}/projects/${project_slug}/project-deploy-boards/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response;
-            });
+                throw error?.response
+            })
     }
 
     async updateProjectSettingsAsync(
@@ -41,8 +39,8 @@ export class ProjectPublishService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response;
-            });
+                throw error?.response
+            })
     }
 
     async deleteProjectSettingsAsync(
@@ -55,7 +53,7 @@ export class ProjectPublishService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response;
-            });
+                throw error?.response
+            })
     }
 }

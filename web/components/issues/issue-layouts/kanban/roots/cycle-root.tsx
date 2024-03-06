@@ -1,31 +1,27 @@
-import React, { useCallback, useMemo } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useCycle, useIssues } from "@hooks/store";
-
-import { CycleIssueQuickActions } from "@components/issues";
-
-import { TIssue } from "@servcy/types";
-import { EIssueActions } from "../../types";
-
-import { BaseKanBanRoot } from "../base-kanban-root";
-import { EIssuesStoreType } from "@constants/issue";
+import { useRouter } from "next/router"
+import React, { useCallback, useMemo } from "react"
+import { CycleIssueQuickActions } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
+import { useCycle, useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { EIssueActions } from "../../types"
+import { BaseKanBanRoot } from "../base-kanban-root"
 
 export interface ICycleKanBanLayout {}
 
 export const CycleKanBanLayout: React.FC = observer(() => {
-    const router = useRouter();
-    const { workspaceSlug, projectId, cycleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, cycleId } = router.query
 
     // store
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE);
-    const { currentProjectCompletedCycleIds } = useCycle();
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE)
+    const { currentProjectCompletedCycleIds } = useCycle()
 
     const issueActions = useMemo(
         () => ({
             [EIssueActions.UPDATE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !cycleId) return;
+                if (!workspaceSlug || !cycleId) return
 
                 await issues.updateIssue(
                     workspaceSlug.toString(),
@@ -33,46 +29,46 @@ export const CycleKanBanLayout: React.FC = observer(() => {
                     issue.id,
                     issue,
                     cycleId.toString()
-                );
+                )
             },
             [EIssueActions.DELETE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !cycleId) return;
+                if (!workspaceSlug || !cycleId) return
 
-                await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id, cycleId.toString());
+                await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id, cycleId.toString())
             },
             [EIssueActions.REMOVE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !cycleId) return;
+                if (!workspaceSlug || !cycleId) return
 
                 await issues.removeIssueFromCycle(
                     workspaceSlug.toString(),
                     issue.project_id,
                     cycleId.toString(),
                     issue.id
-                );
+                )
             },
             [EIssueActions.ARCHIVE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !cycleId) return;
+                if (!workspaceSlug || !cycleId) return
 
-                await issues.archiveIssue(workspaceSlug.toString(), issue.project_id, issue.id, cycleId.toString());
+                await issues.archiveIssue(workspaceSlug.toString(), issue.project_id, issue.id, cycleId.toString())
             },
         }),
         [issues, workspaceSlug, cycleId]
-    );
+    )
 
     const isCompletedCycle =
         cycleId && currentProjectCompletedCycleIds
             ? currentProjectCompletedCycleIds.includes(cycleId.toString())
-            : false;
+            : false
 
-    const canEditIssueProperties = useCallback(() => !isCompletedCycle, [isCompletedCycle]);
+    const canEditIssueProperties = useCallback(() => !isCompletedCycle, [isCompletedCycle])
 
     const addIssuesToView = useCallback(
         (issueIds: string[]) => {
-            if (!workspaceSlug || !projectId || !cycleId) throw new Error();
-            return issues.addIssueToCycle(workspaceSlug.toString(), projectId.toString(), cycleId.toString(), issueIds);
+            if (!workspaceSlug || !projectId || !cycleId) throw new Error()
+            return issues.addIssueToCycle(workspaceSlug.toString(), projectId.toString(), cycleId.toString(), issueIds)
         },
         [issues?.addIssueToCycle, workspaceSlug, projectId, cycleId]
-    );
+    )
 
     return (
         <BaseKanBanRoot
@@ -87,5 +83,5 @@ export const CycleKanBanLayout: React.FC = observer(() => {
             canEditPropertiesBasedOnProject={canEditIssueProperties}
             isCompletedCycle={isCompletedCycle}
         />
-    );
-});
+    )
+})

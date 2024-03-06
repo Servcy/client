@@ -1,58 +1,56 @@
-import { FC, useEffect } from "react";
-import { observer } from "mobx-react";
+import { FC, useEffect } from "react"
+import { TIssueOperations } from "@components/issues"
 // store hooks
-import { useIssueDetail, useProject, useUser } from "@hooks/store";
-
-import useReloadConfirmations from "@hooks/use-reload-confirmation";
-
-import { TIssueOperations } from "@components/issues";
-import { IssueReaction } from "../issue-detail/reactions";
-import { IssueTitleInput } from "../title-input";
-import { IssueDescriptionInput } from "../description-input";
+import { useIssueDetail, useProject, useUser } from "@hooks/store"
+import useReloadConfirmations from "@hooks/use-reload-confirmation"
+import { observer } from "mobx-react"
+import { IssueDescriptionInput } from "../description-input"
+import { IssueReaction } from "../issue-detail/reactions"
+import { IssueTitleInput } from "../title-input"
 
 interface IPeekOverviewIssueDetails {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    issueOperations: TIssueOperations;
-    disabled: boolean;
-    isSubmitting: "submitting" | "submitted" | "saved";
-    setIsSubmitting: (value: "submitting" | "submitted" | "saved") => void;
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    issueOperations: TIssueOperations
+    disabled: boolean
+    isSubmitting: "submitting" | "submitted" | "saved"
+    setIsSubmitting: (value: "submitting" | "submitted" | "saved") => void
 }
 
 export const PeekOverviewIssueDetails: FC<IPeekOverviewIssueDetails> = observer((props) => {
-    const { workspaceSlug, issueId, issueOperations, disabled, isSubmitting, setIsSubmitting } = props;
+    const { workspaceSlug, issueId, issueOperations, disabled, isSubmitting, setIsSubmitting } = props
     // store hooks
-    const { getProjectById } = useProject();
-    const { currentUser } = useUser();
+    const { getProjectById } = useProject()
+    const { currentUser } = useUser()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const { setShowAlert } = useReloadConfirmations(isSubmitting === "submitting");
+    const { setShowAlert } = useReloadConfirmations(isSubmitting === "submitting")
 
     useEffect(() => {
         if (isSubmitting === "submitted") {
-            setShowAlert(false);
+            setShowAlert(false)
             setTimeout(async () => {
-                setIsSubmitting("saved");
-            }, 2000);
+                setIsSubmitting("saved")
+            }, 2000)
         } else if (isSubmitting === "submitting") {
-            setShowAlert(true);
+            setShowAlert(true)
         }
-    }, [isSubmitting, setShowAlert, setIsSubmitting]);
+    }, [isSubmitting, setShowAlert, setIsSubmitting])
 
-    const issue = issueId ? getIssueById(issueId) : undefined;
-    if (!issue) return <></>;
+    const issue = issueId ? getIssueById(issueId) : undefined
+    if (!issue) return <></>
 
-    const projectDetails = getProjectById(issue?.project_id);
+    const projectDetails = getProjectById(issue?.project_id)
 
     const issueDescription =
         issue.description_html !== undefined || issue.description_html !== null
             ? issue.description_html != ""
                 ? issue.description_html
                 : "<p></p>"
-            : undefined;
+            : undefined
 
     return (
         <>
@@ -90,5 +88,5 @@ export const PeekOverviewIssueDetails: FC<IPeekOverviewIssueDetails> = observer(
                 />
             )}
         </>
-    );
-});
+    )
+})

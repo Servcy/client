@@ -1,15 +1,14 @@
-import * as React from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-
-import { MoveLeft } from "lucide-react";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import * as React from "react"
+import { MoveLeft } from "lucide-react"
 
 type BreadcrumbsProps = {
-    children: any;
-};
+    children: any
+}
 
 const Breadcrumbs = ({ children }: BreadcrumbsProps) => {
-    const router = useRouter();
+    const router = useRouter()
 
     return (
         <>
@@ -24,16 +23,16 @@ const Breadcrumbs = ({ children }: BreadcrumbsProps) => {
                 {children}
             </div>
         </>
-    );
-};
+    )
+}
 
 type BreadcrumbItemProps = {
-    title: string;
-    link?: string;
-    icon?: any;
-    linkTruncate?: boolean;
-    unshrinkTitle?: boolean;
-};
+    title: string
+    link?: string
+    icon?: any
+    linkTruncate?: boolean
+    unshrinkTitle?: boolean
+}
 
 const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
     title,
@@ -63,8 +62,8 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
             </div>
         )}
     </>
-);
+)
 
-Breadcrumbs.BreadcrumbItem = BreadcrumbItem;
+Breadcrumbs.BreadcrumbItem = BreadcrumbItem
 
-export { Breadcrumbs, BreadcrumbItem };
+export { Breadcrumbs, BreadcrumbItem }

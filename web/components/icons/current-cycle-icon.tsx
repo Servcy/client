@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const CurrentCycleIcon: React.FC<Props> = ({ width = "24", height = "24", className, color = "black" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" height={height} width={width} className={className}>
@@ -9,4 +8,4 @@ export const CurrentCycleIcon: React.FC<Props> = ({ width = "24", height = "24",
             fill={color}
         />
     </svg>
-);
+)

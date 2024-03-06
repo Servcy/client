@@ -1,12 +1,11 @@
-import { BarGraph, ProfileEmptyState } from "@components/ui";
+import { BarGraph, ProfileEmptyState } from "@components/ui"
 // image
-import emptyBarGraph from "public/empty-state/empty_bar_graph.svg";
-
-import { IDefaultAnalyticsResponse } from "@servcy/types";
+import emptyBarGraph from "public/empty-state/empty_bar_graph.svg"
+import { IDefaultAnalyticsResponse } from "@servcy/types"
 
 type Props = {
-    defaultAnalytics: IDefaultAnalyticsResponse;
-};
+    defaultAnalytics: IDefaultAnalyticsResponse
+}
 
 export const AnalyticsScope: React.FC<Props> = ({ defaultAnalytics }) => (
     <div className="rounded-[10px] border border-custom-border-200">
@@ -27,7 +26,7 @@ export const AnalyticsScope: React.FC<Props> = ({ defaultAnalytics }) => (
                         tooltip={(datum) => {
                             const assignee = defaultAnalytics.pending_issue_user.find(
                                 (a) => a.assignees__id === `${datum.indexValue}`
-                            );
+                            )
 
                             return (
                                 <div className="rounded-md border border-custom-border-200 bg-custom-background-80 p-2 text-xs">
@@ -36,11 +35,11 @@ export const AnalyticsScope: React.FC<Props> = ({ defaultAnalytics }) => (
                                     </span>
                                     {datum.value}
                                 </div>
-                            );
+                            )
                         }}
                         axisBottom={{
                             renderTick: (datum) => {
-                                const assignee = defaultAnalytics.pending_issue_user[datum.tickIndex] ?? "";
+                                const assignee = defaultAnalytics.pending_issue_user[datum.tickIndex] ?? ""
 
                                 if (assignee && assignee?.assignees__avatar && assignee?.assignees__avatar !== "")
                                     return (
@@ -54,7 +53,7 @@ export const AnalyticsScope: React.FC<Props> = ({ defaultAnalytics }) => (
                                                 style={{ clipPath: "circle(50%)" }}
                                             />
                                         </g>
-                                    );
+                                    )
                                 else
                                     return (
                                         <g transform={`translate(${datum.x},${datum.y})`}>
@@ -65,7 +64,7 @@ export const AnalyticsScope: React.FC<Props> = ({ defaultAnalytics }) => (
                                                     : "?"}
                                             </text>
                                         </g>
-                                    );
+                                    )
                             },
                         }}
                         margin={{ top: 20 }}
@@ -85,4 +84,4 @@ export const AnalyticsScope: React.FC<Props> = ({ defaultAnalytics }) => (
             </div>
         </div>
     </div>
-);
+)

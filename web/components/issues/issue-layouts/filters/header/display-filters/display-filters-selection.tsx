@@ -1,6 +1,4 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-
+import React from "react"
 import {
     FilterDisplayProperties,
     FilterExtraOptions,
@@ -8,19 +6,19 @@ import {
     FilterIssueType,
     FilterOrderBy,
     FilterSubGroupBy,
-} from "@components/issues";
-
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueGroupByOptions } from "@servcy/types";
-import { ILayoutDisplayFiltersOptions } from "@constants/issue";
+} from "@components/issues"
+import { ILayoutDisplayFiltersOptions } from "@constants/issue"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueGroupByOptions } from "@servcy/types"
 
 type Props = {
-    displayFilters: IIssueDisplayFilterOptions;
-    displayProperties: IIssueDisplayProperties;
-    handleDisplayFiltersUpdate: (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => void;
-    handleDisplayPropertiesUpdate: (updatedDisplayProperties: Partial<IIssueDisplayProperties>) => void;
-    layoutDisplayFiltersOptions: ILayoutDisplayFiltersOptions | undefined;
-    ignoreGroupedFilters?: Partial<TIssueGroupByOptions>[];
-};
+    displayFilters: IIssueDisplayFilterOptions
+    displayProperties: IIssueDisplayProperties
+    handleDisplayFiltersUpdate: (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => void
+    handleDisplayPropertiesUpdate: (updatedDisplayProperties: Partial<IIssueDisplayProperties>) => void
+    layoutDisplayFiltersOptions: ILayoutDisplayFiltersOptions | undefined
+    ignoreGroupedFilters?: Partial<TIssueGroupByOptions>[]
+}
 
 export const DisplayFiltersSelection: React.FC<Props> = observer((props) => {
     const {
@@ -30,10 +28,10 @@ export const DisplayFiltersSelection: React.FC<Props> = observer((props) => {
         handleDisplayPropertiesUpdate,
         layoutDisplayFiltersOptions,
         ignoreGroupedFilters = [],
-    } = props;
+    } = props
 
     const isDisplayFilterEnabled = (displayFilter: keyof IIssueDisplayFilterOptions) =>
-        Object.keys(layoutDisplayFiltersOptions?.display_filters ?? {}).includes(displayFilter);
+        Object.keys(layoutDisplayFiltersOptions?.display_filters ?? {}).includes(displayFilter)
 
     return (
         <div className="relative h-full w-full divide-y divide-custom-border-200 overflow-hidden overflow-y-auto px-2.5">
@@ -128,5 +126,5 @@ export const DisplayFiltersSelection: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

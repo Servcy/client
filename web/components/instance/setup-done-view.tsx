@@ -1,29 +1,27 @@
-import React, { useState } from "react";
-import Image from "next/image";
-
-import { useApplication } from "@hooks/store";
-
-import { Button } from "@servcy/ui";
-import { UserCog2 } from "lucide-react";
+import Image from "next/image"
+import React, { useState } from "react"
+import { useApplication } from "@hooks/store"
+import { UserCog2 } from "lucide-react"
 // images
-import instanceSetupDone from "public/instance-setup-done.webp";
-import ServcyLogo from "public/logo.svg";
+import instanceSetupDone from "public/instance-setup-done.webp"
+import ServcyLogo from "public/logo.svg"
+import { Button } from "@servcy/ui"
 
 export const InstanceSetupDone = () => {
     // states
-    const [isRedirecting, setIsRedirecting] = useState(false);
+    const [isRedirecting, setIsRedirecting] = useState(false)
     // store hooks
     const {
         instance: { fetchInstanceInfo },
-    } = useApplication();
+    } = useApplication()
 
-    const servcyLogo = ServcyLogo;
+    const servcyLogo = ServcyLogo
 
     const redirectToGodMode = async () => {
-        setIsRedirecting(true);
+        setIsRedirecting(true)
 
-        await fetchInstanceInfo().finally(() => setIsRedirecting(false));
-    };
+        await fetchInstanceInfo().finally(() => setIsRedirecting(false))
+    }
 
     return (
         <div className="h-full w-full overflow-hidden">
@@ -64,5 +62,5 @@ export const InstanceSetupDone = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

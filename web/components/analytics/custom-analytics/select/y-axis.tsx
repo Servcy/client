@@ -1,13 +1,11 @@
-import { CustomSelect } from "@servcy/ui";
-
-import { TYAxisValues } from "@servcy/types";
-
-import { ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics";
+import { ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics"
+import { TYAxisValues } from "@servcy/types"
+import { CustomSelect } from "@servcy/ui"
 
 type Props = {
-    value: TYAxisValues;
-    onChange: () => void;
-};
+    value: TYAxisValues
+    onChange: () => void
+}
 
 export const SelectYAxis: React.FC<Props> = ({ value, onChange }) => (
     <CustomSelect
@@ -22,4 +20,4 @@ export const SelectYAxis: React.FC<Props> = ({ value, onChange }) => (
             </CustomSelect.Option>
         ))}
     </CustomSelect>
-);
+)

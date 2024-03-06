@@ -1,37 +1,33 @@
-import { useState, FC } from "react";
-import { useRouter } from "next/router";
-import { Button, Tooltip } from "@servcy/ui";
-import { Copy, Eye, EyeOff, RefreshCw } from "lucide-react";
-import { observer } from "mobx-react-lite";
-
-import { useWebhook, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { copyTextToClipboard } from "@helpers/string.helper";
-import { csvDownload } from "@helpers/download.helper";
-
-import { getCurrentHookAsCSV } from "../utils";
-
-import { IWebhook } from "@servcy/types";
+import { useRouter } from "next/router"
+import { FC, useState } from "react"
+import { csvDownload } from "@helpers/download.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+import { useWebhook, useWorkspace } from "@hooks/store"
+import { Copy, Eye, EyeOff, RefreshCw } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IWebhook } from "@servcy/types"
+import { Button, Tooltip } from "@servcy/ui"
+import { getCurrentHookAsCSV } from "../utils"
 
 type Props = {
-    data: Partial<IWebhook>;
-};
+    data: Partial<IWebhook>
+}
 
 export const WebhookSecretKey: FC<Props> = observer((props) => {
-    const { data } = props;
+    const { data } = props
     // states
-    const [isRegenerating, setIsRegenerating] = useState(false);
-    const [shouldShowKey, setShouldShowKey] = useState(false);
+    const [isRegenerating, setIsRegenerating] = useState(false)
+    const [shouldShowKey, setShouldShowKey] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, webhookId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, webhookId } = router.query
     // store hooks
-    const { currentWorkspace } = useWorkspace();
-    const { currentWebhook, regenerateSecretKey, webhookSecretKey } = useWebhook();
+    const { currentWorkspace } = useWorkspace()
+    const { currentWebhook, regenerateSecretKey, webhookSecretKey } = useWebhook()
 
     const handleCopySecretKey = () => {
-        if (!webhookSecretKey) return;
+        if (!webhookSecretKey) return
 
         copyTextToClipboard(webhookSecretKey)
             .then(() =>
@@ -47,13 +43,13 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
                     title: "Error!",
                     message: "Error occurred while copying secret key.",
                 })
-            );
-    };
+            )
+    }
 
     const handleRegenerateSecretKey = () => {
-        if (!workspaceSlug || !data.id) return;
+        if (!workspaceSlug || !data.id) return
 
-        setIsRegenerating(true);
+        setIsRegenerating(true)
 
         regenerateSecretKey(workspaceSlug.toString(), data.id)
             .then(() => {
@@ -61,11 +57,11 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
                     type: "success",
                     title: "Success!",
                     message: "New key regenerated successfully.",
-                });
+                })
 
                 if (currentWebhook && webhookSecretKey) {
-                    const csvData = getCurrentHookAsCSV(currentWorkspace, currentWebhook, webhookSecretKey);
-                    csvDownload(csvData, `webhook-secret-key-${Date.now()}`);
+                    const csvData = getCurrentHookAsCSV(currentWorkspace, currentWebhook, webhookSecretKey)
+                    csvDownload(csvData, `webhook-secret-key-${Date.now()}`)
                 }
             })
             .catch((err) =>
@@ -75,15 +71,15 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
                     message: err?.error ?? "Something went wrong. Please try again.",
                 })
             )
-            .finally(() => setIsRegenerating(false));
-    };
+            .finally(() => setIsRegenerating(false))
+    }
 
-    const toggleShowKey = () => setShouldShowKey((prevState) => !prevState);
+    const toggleShowKey = () => setShouldShowKey((prevState) => !prevState)
 
     const SECRET_KEY_OPTIONS = [
         { label: "View secret key", Icon: shouldShowKey ? EyeOff : Eye, onClick: toggleShowKey, key: "eye" },
         { label: "Copy secret key", Icon: Copy, onClick: handleCopySecretKey, key: "copy" },
-    ];
+    ]
 
     return (
         <>
@@ -138,5 +134,5 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

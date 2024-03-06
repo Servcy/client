@@ -1,34 +1,31 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router"
+import { useEffect } from "react"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { capitalizeFirstLetter } from "@helpers/string.helper"
 // store hooks
-import { useEstimate, useLabel } from "@hooks/store";
-
-import { Tooltip, BlockedIcon, BlockerIcon, RelatedIcon, LayersIcon, DiceIcon } from "@servcy/ui";
+import { useEstimate, useLabel } from "@hooks/store"
 import {
-    TagIcon,
-    CopyPlus,
-    Calendar,
-    Link2Icon,
-    Users2Icon,
     ArchiveIcon,
-    PaperclipIcon,
+    Calendar,
     ContrastIcon,
-    TriangleIcon,
+    CopyPlus,
     LayoutGridIcon,
-    SignalMediumIcon,
+    Link2Icon,
     MessageSquareIcon,
+    PaperclipIcon,
+    SignalMediumIcon,
+    TagIcon,
+    TriangleIcon,
+    Users2Icon,
     UsersIcon,
-} from "lucide-react";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-import { capitalizeFirstLetter } from "@helpers/string.helper";
-
-import { IIssueActivity } from "@servcy/types";
+} from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueActivity } from "@servcy/types"
+import { BlockedIcon, BlockerIcon, DiceIcon, LayersIcon, RelatedIcon, Tooltip } from "@servcy/ui"
 
 export const IssueLink = ({ activity }: { activity: IIssueActivity }) => {
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     return (
         <Tooltip tooltipContent={activity?.issue_detail ? activity.issue_detail.name : "This issue has been deleted"}>
@@ -51,12 +48,12 @@ export const IssueLink = ({ activity }: { activity: IIssueActivity }) => {
                 </span>
             )}
         </Tooltip>
-    );
-};
+    )
+}
 
 const UserLink = ({ activity }: { activity: IIssueActivity }) => {
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     return (
         <a
@@ -69,16 +66,16 @@ const UserLink = ({ activity }: { activity: IIssueActivity }) => {
         >
             {activity.new_value && activity.new_value !== "" ? activity.new_value : activity.old_value}
         </a>
-    );
-};
+    )
+}
 
 const LabelPill = observer(({ labelId, workspaceSlug }: { labelId: string; workspaceSlug: string }) => {
     // store hooks
-    const { workspaceLabels, fetchWorkspaceLabels } = useLabel();
+    const { workspaceLabels, fetchWorkspaceLabels } = useLabel()
 
     useEffect(() => {
-        if (!workspaceLabels) fetchWorkspaceLabels(workspaceSlug);
-    }, [fetchWorkspaceLabels, workspaceLabels, workspaceSlug]);
+        if (!workspaceLabels) fetchWorkspaceLabels(workspaceSlug)
+    }, [fetchWorkspaceLabels, workspaceLabels, workspaceSlug])
 
     return (
         <span
@@ -88,15 +85,15 @@ const LabelPill = observer(({ labelId, workspaceSlug }: { labelId: string; works
             }}
             aria-hidden="true"
         />
-    );
-});
+    )
+})
 
 const EstimatePoint = observer((props: { point: string }) => {
-    const { point } = props;
-    const { areEstimatesEnabledForCurrentProject, getEstimatePointValue } = useEstimate();
-    const currentPoint = Number(point) + 1;
+    const { point } = props
+    const { areEstimatesEnabledForCurrentProject, getEstimatePointValue } = useEstimate()
+    const currentPoint = Number(point) + 1
 
-    const estimateValue = getEstimatePointValue(Number(point), null);
+    const estimateValue = getEstimatePointValue(Number(point), null)
 
     return (
         <span className="font-medium text-custom-text-100">
@@ -104,14 +101,14 @@ const EstimatePoint = observer((props: { point: string }) => {
                 ? estimateValue
                 : `${currentPoint} ${currentPoint > 1 ? "points" : "point"}`}
         </span>
-    );
-});
+    )
+})
 
 const activityDetails: {
     [key: string]: {
-        message: (activity: IIssueActivity, showIssue: boolean, workspaceSlug: string) => React.ReactNode;
-        icon: React.ReactNode;
-    };
+        message: (activity: IIssueActivity, showIssue: boolean, workspaceSlug: string) => React.ReactNode
+        icon: React.ReactNode
+    }
 } = {
     assignees: {
         message: (activity, showIssue) => {
@@ -126,7 +123,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -138,7 +135,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
         },
         icon: <Users2Icon size={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -149,13 +146,13 @@ const activityDetails: {
                     <>
                         restored <IssueLink activity={activity} />
                     </>
-                );
+                )
             else
                 return (
                     <>
                         archived <IssueLink activity={activity} />
                     </>
-                );
+                )
         },
         icon: <ArchiveIcon size={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -180,7 +177,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -192,7 +189,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
         },
         icon: <PaperclipIcon size={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -223,7 +220,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -235,7 +232,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
         },
         icon: <TriangleIcon size={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -246,13 +243,13 @@ const activityDetails: {
                     <>
                         created <IssueLink activity={activity} />
                     </>
-                );
+                )
             else
                 return (
                     <>
                         deleted <IssueLink activity={activity} />
                     </>
-                );
+                )
         },
         icon: <LayersIcon width={12} height={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -275,7 +272,7 @@ const activityDetails: {
                             </span>
                         )}
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -293,7 +290,7 @@ const activityDetails: {
                             </span>
                         )}
                     </>
-                );
+                )
         },
         icon: <TagIcon size={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -318,7 +315,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
             else if (activity.verb === "updated")
                 return (
                     <>
@@ -338,7 +335,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -358,7 +355,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
         },
         icon: <Link2Icon size={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -379,7 +376,7 @@ const activityDetails: {
                             <span className="truncate">{activity.new_value}</span>
                         </a>
                     </>
-                );
+                )
             else if (activity.verb === "updated")
                 return (
                     <>
@@ -393,7 +390,7 @@ const activityDetails: {
                             <span className="truncate">{activity.new_value}</span>
                         </a>
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -407,7 +404,7 @@ const activityDetails: {
                             <span className="truncate">{activity.old_value}</span>
                         </a>
                     </>
-                );
+                )
         },
         icon: <ContrastIcon size={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -426,7 +423,7 @@ const activityDetails: {
                             <span className="truncate">{activity.new_value}</span>
                         </a>
                     </>
-                );
+                )
             else if (activity.verb === "updated")
                 return (
                     <>
@@ -440,7 +437,7 @@ const activityDetails: {
                             <span className="truncate">{activity.new_value}</span>
                         </a>
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -454,7 +451,7 @@ const activityDetails: {
                             <span className="truncate">{activity.old_value}</span>
                         </a>
                     </>
-                );
+                )
         },
         icon: <DiceIcon className="h-3 w-3 !text-[#6b7280]" aria-hidden="true" />,
     },
@@ -486,7 +483,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -498,7 +495,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
         },
         icon: <UsersIcon className="h-3 w-3 !text-[#6b7280]" aria-hidden="true" />,
     },
@@ -527,14 +524,14 @@ const activityDetails: {
                         marked that {showIssue ? <IssueLink activity={activity} /> : "this issue"} relates to{" "}
                         <span className="font-medium text-custom-text-100">{activity.new_value}</span>.
                     </>
-                );
+                )
             else
                 return (
                     <>
                         removed the relation from{" "}
                         <span className="font-medium text-custom-text-100">{activity.old_value}</span>.
                     </>
-                );
+                )
         },
         icon: <RelatedIcon height="12" width="12" color="#6b7280" />,
     },
@@ -546,14 +543,14 @@ const activityDetails: {
                         marked {showIssue ? <IssueLink activity={activity} /> : "this issue"} is blocking issue{" "}
                         <span className="font-medium text-custom-text-100">{activity.new_value}</span>.
                     </>
-                );
+                )
             else
                 return (
                     <>
                         removed the blocking issue{" "}
                         <span className="font-medium text-custom-text-100">{activity.old_value}</span>.
                     </>
-                );
+                )
         },
         icon: <BlockerIcon height="12" width="12" color="#6b7280" />,
     },
@@ -565,14 +562,14 @@ const activityDetails: {
                         marked {showIssue ? <IssueLink activity={activity} /> : "this issue"} is being blocked by{" "}
                         <span className="font-medium text-custom-text-100">{activity.new_value}</span>.
                     </>
-                );
+                )
             else
                 return (
                     <>
                         removed {showIssue ? <IssueLink activity={activity} /> : "this issue"} being blocked by issue{" "}
                         <span className="font-medium text-custom-text-100">{activity.old_value}</span>.
                     </>
-                );
+                )
         },
         icon: <BlockedIcon height="12" width="12" color="#6b7280" />,
     },
@@ -584,14 +581,14 @@ const activityDetails: {
                         marked {showIssue ? <IssueLink activity={activity} /> : "this issue"} as duplicate of{" "}
                         <span className="font-medium text-custom-text-100">{activity.new_value}</span>.
                     </>
-                );
+                )
             else
                 return (
                     <>
                         removed {showIssue ? <IssueLink activity={activity} /> : "this issue"} as a duplicate of{" "}
                         <span className="font-medium text-custom-text-100">{activity.old_value}</span>.
                     </>
-                );
+                )
         },
         icon: <CopyPlus size={12} color="#6b7280" />,
     },
@@ -622,7 +619,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -637,7 +634,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
         },
         icon: <Calendar size={12} color="#6b7280" aria-hidden="true" />,
     },
@@ -654,7 +651,7 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
             else
                 return (
                     <>
@@ -669,24 +666,24 @@ const activityDetails: {
                             </>
                         )}
                     </>
-                );
+                )
         },
         icon: <Calendar size={12} color="#6b7280" aria-hidden="true" />,
     },
-};
+}
 
 export const ActivityIcon = ({ activity }: { activity: IIssueActivity }) => (
     <>{activityDetails[activity.field as keyof typeof activityDetails]?.icon}</>
-);
+)
 
 type ActivityMessageProps = {
-    activity: IIssueActivity;
-    showIssue?: boolean;
-};
+    activity: IIssueActivity
+    showIssue?: boolean
+}
 
 export const ActivityMessage = ({ activity, showIssue = false }: ActivityMessageProps) => {
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     return (
         <>
@@ -696,5 +693,5 @@ export const ActivityMessage = ({ activity, showIssue = false }: ActivityMessage
                 workspaceSlug ? workspaceSlug.toString() : activity.workspace_detail?.slug ?? ""
             )}
         </>
-    );
-};
+    )
+}

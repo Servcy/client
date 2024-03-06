@@ -1,83 +1,78 @@
-import { useCallback, useMemo } from "react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import { CalendarCheck2, CalendarClock, Layers, Link, Paperclip } from "lucide-react";
-import xor from "lodash/xor";
-
-import { useEventTracker, useEstimate, useLabel, useIssues, useProjectState } from "@hooks/store";
-
-import { IssuePropertyLabels } from "../properties/labels";
-import { Tooltip } from "@servcy/ui";
-import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
+import { useRouter } from "next/router"
+import { useCallback, useMemo } from "react"
 import {
+    CycleDropdown,
     DateDropdown,
     EstimateDropdown,
-    PriorityDropdown,
     MemberDropdown,
     ModuleDropdown,
-    CycleDropdown,
+    PriorityDropdown,
     StateDropdown,
-} from "@components/dropdowns";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
-import { cn } from "@helpers/common.helper";
-
-import { TIssue, IIssueDisplayProperties, TIssuePriorities } from "@servcy/types";
-
-import { ISSUE_UPDATED } from "@constants/event-tracker";
-import { EIssuesStoreType } from "@constants/issue";
+} from "@components/dropdowns"
+import { ISSUE_UPDATED } from "@constants/event-tracker"
+import { EIssuesStoreType } from "@constants/issue"
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
+import { useEstimate, useEventTracker, useIssues, useLabel, useProjectState } from "@hooks/store"
+import xor from "lodash/xor"
+import { CalendarCheck2, CalendarClock, Layers, Link, Paperclip } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayProperties, TIssue, TIssuePriorities } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
+import { IssuePropertyLabels } from "../properties/labels"
+import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
 
 export interface IIssueProperties {
-    issue: TIssue;
-    handleIssues: (issue: TIssue) => Promise<void>;
-    displayProperties: IIssueDisplayProperties | undefined;
-    isReadOnly: boolean;
-    className: string;
-    activeLayout: string;
+    issue: TIssue
+    handleIssues: (issue: TIssue) => Promise<void>
+    displayProperties: IIssueDisplayProperties | undefined
+    isReadOnly: boolean
+    className: string
+    activeLayout: string
 }
 
 export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
-    const { issue, handleIssues, displayProperties, activeLayout, isReadOnly, className } = props;
+    const { issue, handleIssues, displayProperties, activeLayout, isReadOnly, className } = props
     // store hooks
-    const { labelMap } = useLabel();
-    const { captureIssueEvent } = useEventTracker();
+    const { labelMap } = useLabel()
+    const { captureIssueEvent } = useEventTracker()
     const {
         issues: { addModulesToIssue, removeModulesFromIssue },
-    } = useIssues(EIssuesStoreType.MODULE);
+    } = useIssues(EIssuesStoreType.MODULE)
     const {
         issues: { addIssueToCycle, removeIssueFromCycle },
-    } = useIssues(EIssuesStoreType.CYCLE);
-    const { areEstimatesEnabledForCurrentProject } = useEstimate();
-    const { getStateById } = useProjectState();
+    } = useIssues(EIssuesStoreType.CYCLE)
+    const { areEstimatesEnabledForCurrentProject } = useEstimate()
+    const { getStateById } = useProjectState()
     // router
-    const router = useRouter();
-    const { workspaceSlug, cycleId, moduleId } = router.query;
-    const currentLayout = `${activeLayout} layout`;
+    const router = useRouter()
+    const { workspaceSlug, cycleId, moduleId } = router.query
+    const currentLayout = `${activeLayout} layout`
     // derived values
-    const stateDetails = getStateById(issue.state_id);
+    const stateDetails = getStateById(issue.state_id)
 
     const issueOperations = useMemo(
         () => ({
             addModulesToIssue: async (moduleIds: string[]) => {
-                if (!workspaceSlug || !issue.project_id || !issue.id) return;
-                await addModulesToIssue?.(workspaceSlug.toString(), issue.project_id, issue.id, moduleIds);
+                if (!workspaceSlug || !issue.project_id || !issue.id) return
+                await addModulesToIssue?.(workspaceSlug.toString(), issue.project_id, issue.id, moduleIds)
             },
             removeModulesFromIssue: async (moduleIds: string[]) => {
-                if (!workspaceSlug || !issue.project_id || !issue.id) return;
-                await removeModulesFromIssue?.(workspaceSlug.toString(), issue.project_id, issue.id, moduleIds);
+                if (!workspaceSlug || !issue.project_id || !issue.id) return
+                await removeModulesFromIssue?.(workspaceSlug.toString(), issue.project_id, issue.id, moduleIds)
             },
             addIssueToCycle: async (cycleId: string) => {
-                if (!workspaceSlug || !issue.project_id || !issue.id) return;
-                await addIssueToCycle?.(workspaceSlug.toString(), issue.project_id, cycleId, [issue.id]);
+                if (!workspaceSlug || !issue.project_id || !issue.id) return
+                await addIssueToCycle?.(workspaceSlug.toString(), issue.project_id, cycleId, [issue.id])
             },
             removeIssueFromCycle: async (cycleId: string) => {
-                if (!workspaceSlug || !issue.project_id || !issue.id) return;
-                await removeIssueFromCycle?.(workspaceSlug.toString(), issue.project_id, cycleId, issue.id);
+                if (!workspaceSlug || !issue.project_id || !issue.id) return
+                await removeIssueFromCycle?.(workspaceSlug.toString(), issue.project_id, cycleId, issue.id)
             },
         }),
         [workspaceSlug, issue, addModulesToIssue, removeModulesFromIssue, addIssueToCycle, removeIssueFromCycle]
-    );
+    )
 
     const handleState = (stateId: string) => {
         handleIssues({ ...issue, state_id: stateId }).then(() => {
@@ -89,9 +84,9 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                     changed_property: "state",
                     change_details: stateId,
                 },
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handlePriority = (value: TIssuePriorities) => {
         handleIssues({ ...issue, priority: value }).then(() => {
@@ -103,9 +98,9 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                     changed_property: "priority",
                     change_details: value,
                 },
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleLabel = (ids: string[]) => {
         handleIssues({ ...issue, label_ids: ids }).then(() => {
@@ -117,9 +112,9 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                     changed_property: "labels",
                     change_details: ids,
                 },
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleAssignee = (ids: string[]) => {
         handleIssues({ ...issue, assignee_ids: ids }).then(() => {
@@ -131,48 +126,48 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                     changed_property: "assignees",
                     change_details: ids,
                 },
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleModule = useCallback(
         (moduleIds: string[] | null) => {
-            if (!issue || !issue.module_ids || !moduleIds) return;
+            if (!issue || !issue.module_ids || !moduleIds) return
 
-            const updatedModuleIds = xor(issue.module_ids, moduleIds);
-            const modulesToAdd: string[] = [];
-            const modulesToRemove: string[] = [];
+            const updatedModuleIds = xor(issue.module_ids, moduleIds)
+            const modulesToAdd: string[] = []
+            const modulesToRemove: string[] = []
             for (const moduleId of updatedModuleIds)
-                if (issue.module_ids.includes(moduleId)) modulesToRemove.push(moduleId);
-                else modulesToAdd.push(moduleId);
-            if (modulesToAdd.length > 0) issueOperations.addModulesToIssue(modulesToAdd);
-            if (modulesToRemove.length > 0) issueOperations.removeModulesFromIssue(modulesToRemove);
+                if (issue.module_ids.includes(moduleId)) modulesToRemove.push(moduleId)
+                else modulesToAdd.push(moduleId)
+            if (modulesToAdd.length > 0) issueOperations.addModulesToIssue(modulesToAdd)
+            if (modulesToRemove.length > 0) issueOperations.removeModulesFromIssue(modulesToRemove)
 
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
                 path: router.asPath,
                 updates: { changed_property: "module_ids", change_details: { module_ids: moduleIds } },
-            });
+            })
         },
         [issueOperations, captureIssueEvent, currentLayout, router, issue]
-    );
+    )
 
     const handleCycle = useCallback(
         (cycleId: string | null) => {
-            if (!issue || issue.cycle_id === cycleId) return;
-            if (cycleId) issueOperations.addIssueToCycle?.(cycleId);
-            else issueOperations.removeIssueFromCycle?.(issue.cycle_id ?? "");
+            if (!issue || issue.cycle_id === cycleId) return
+            if (cycleId) issueOperations.addIssueToCycle?.(cycleId)
+            else issueOperations.removeIssueFromCycle?.(issue.cycle_id ?? "")
 
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
                 path: router.asPath,
                 updates: { changed_property: "cycle", change_details: { cycle_id: cycleId } },
-            });
+            })
         },
         [issue, issueOperations, captureIssueEvent, currentLayout, router.asPath]
-    );
+    )
 
     const handleStartDate = (date: Date | null) => {
         handleIssues({ ...issue, start_date: date ? renderFormattedPayloadDate(date) : null }).then(() => {
@@ -184,9 +179,9 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                     changed_property: "start_date",
                     change_details: date ? renderFormattedPayloadDate(date) : null,
                 },
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleTargetDate = (date: Date | null) => {
         handleIssues({ ...issue, target_date: date ? renderFormattedPayloadDate(date) : null }).then(() => {
@@ -198,9 +193,9 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                     changed_property: "target_date",
                     change_details: date ? renderFormattedPayloadDate(date) : null,
                 },
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleEstimate = (value: number | null) => {
         handleIssues({ ...issue, estimate_point: value }).then(() => {
@@ -212,9 +207,9 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                     changed_property: "estimate_point",
                     change_details: value,
                 },
-            });
-        });
-    };
+            })
+        })
+    }
 
     const redirectToIssueDetail = () => {
         router.push({
@@ -222,18 +217,18 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                 issue.id
             }`,
             hash: "sub-issues",
-        });
-    };
+        })
+    }
 
-    if (!displayProperties) return null;
+    if (!displayProperties) return null
 
-    const defaultLabelOptions = issue?.label_ids?.map((id) => labelMap[id]) || [];
+    const defaultLabelOptions = issue?.label_ids?.map((id) => labelMap[id]) || []
 
-    const minDate = issue.start_date ? new Date(issue.start_date) : null;
-    minDate?.setDate(minDate.getDate());
+    const minDate = issue.start_date ? new Date(issue.start_date) : null
+    minDate?.setDate(minDate.getDate())
 
-    const maxDate = issue.target_date ? new Date(issue.target_date) : null;
-    maxDate?.setDate(maxDate.getDate());
+    const maxDate = issue.target_date ? new Date(issue.target_date) : null
+    maxDate?.setDate(maxDate.getDate())
 
     return (
         <div className={className}>
@@ -432,5 +427,5 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                 </Tooltip>
             </WithDisplayPropertiesHOC>
         </div>
-    );
-});
+    )
+})

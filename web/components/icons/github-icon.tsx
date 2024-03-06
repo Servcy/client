@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const GithubIcon: React.FC<Props> = ({ width = "24", height = "24", className, color }) => (
     <svg
@@ -25,4 +24,4 @@ export const GithubIcon: React.FC<Props> = ({ width = "24", height = "24", class
             </clipPath>
         </defs>
     </svg>
-);
+)

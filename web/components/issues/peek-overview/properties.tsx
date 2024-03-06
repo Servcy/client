@@ -1,64 +1,62 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
+import { FC } from "react"
+import { DateDropdown, EstimateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
 import {
+    IssueCycleSelect,
+    IssueLabel,
+    IssueLinkRoot,
+    IssueModuleSelect,
+    IssueParentSelect,
+    IssueRelationSelect,
+    TIssueOperations,
+} from "@components/issues"
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
+import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+import {
+    CalendarCheck2,
+    CalendarClock,
+    CircleDot,
+    CopyPlus,
+    LayoutPanelTop,
     Signal,
     Tag,
     Triangle,
-    LayoutPanelTop,
-    CircleDot,
-    CopyPlus,
     XCircle,
-    CalendarClock,
-    CalendarCheck2,
-} from "lucide-react";
+} from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { ContrastIcon, DiceIcon, DoubleCircleIcon, RelatedIcon, UserGroupIcon } from "@servcy/ui"
 
-import { useIssueDetail, useProject, useProjectState } from "@hooks/store";
-icons;
-import { DiceIcon, DoubleCircleIcon, UserGroupIcon, ContrastIcon, RelatedIcon } from "@servcy/ui";
-import {
-    IssueLinkRoot,
-    IssueCycleSelect,
-    IssueModuleSelect,
-    IssueParentSelect,
-    IssueLabel,
-    TIssueOperations,
-    IssueRelationSelect,
-} from "@components/issues";
-import { DateDropdown, EstimateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "@components/dropdowns";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { cn } from "@helpers/common.helper";
-import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
+icons
 
 interface IPeekOverviewProperties {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    disabled: boolean;
-    issueOperations: TIssueOperations;
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    disabled: boolean
+    issueOperations: TIssueOperations
 }
 
 export const PeekOverviewProperties: FC<IPeekOverviewProperties> = observer((props) => {
-    const { workspaceSlug, projectId, issueId, issueOperations, disabled } = props;
+    const { workspaceSlug, projectId, issueId, issueOperations, disabled } = props
     // store hooks
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getStateById } = useProjectState();
+    } = useIssueDetail()
+    const { getStateById } = useProjectState()
     // derived values
-    const issue = getIssueById(issueId);
-    if (!issue) return <></>;
-    const projectDetails = getProjectById(issue.project_id);
-    const isEstimateEnabled = projectDetails?.estimate;
-    const stateDetails = getStateById(issue.state_id);
+    const issue = getIssueById(issueId)
+    if (!issue) return <></>
+    const projectDetails = getProjectById(issue.project_id)
+    const isEstimateEnabled = projectDetails?.estimate
+    const stateDetails = getStateById(issue.state_id)
 
-    const minDate = issue.start_date ? new Date(issue.start_date) : null;
-    minDate?.setDate(minDate.getDate());
+    const minDate = issue.start_date ? new Date(issue.start_date) : null
+    minDate?.setDate(minDate.getDate())
 
-    const maxDate = issue.target_date ? new Date(issue.target_date) : null;
-    maxDate?.setDate(maxDate.getDate());
+    const maxDate = issue.target_date ? new Date(issue.target_date) : null
+    maxDate?.setDate(maxDate.getDate())
 
     return (
         <div className="mt-1">
@@ -351,5 +349,5 @@ export const PeekOverviewProperties: FC<IPeekOverviewProperties> = observer((pro
                 />
             </div>
         </div>
-    );
-});
+    )
+})

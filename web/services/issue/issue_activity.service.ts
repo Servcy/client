@@ -1,12 +1,11 @@
-import { APIService } from "@services/api.service";
-
-import { TIssueActivity } from "@servcy/types";
 // helper
-import { API_BASE_URL } from "@helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { TIssueActivity } from "@servcy/types"
 
 export class IssueActivityService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async getIssueActivities(
@@ -15,7 +14,7 @@ export class IssueActivityService extends APIService {
         issueId: string,
         params:
             | {
-                  created_at__gt: string;
+                  created_at__gt: string
               }
             | {} = {}
     ): Promise<TIssueActivity[]> {
@@ -27,7 +26,7 @@ export class IssueActivityService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

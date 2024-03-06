@@ -1,26 +1,23 @@
-import Image from "next/image.js";
-
-import { sidebarOptions } from "@/constants/routes";
-
-import { AiOutlinePoweroff, AiOutlineSetting } from "react-icons/ai";
-
-import cn from "classnames";
-import { useState } from "react";
+import Image from "next/image.js"
+import { useState } from "react"
+import cn from "classnames"
+import { AiOutlinePoweroff, AiOutlineSetting } from "react-icons/ai"
+import { sidebarOptions } from "@/constants/routes"
 
 export default function SideBar({ logOut }: { logOut: () => Promise<void> }): JSX.Element {
-    const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+    const [isSidebarHovered, setIsSidebarHovered] = useState(false)
 
     return (
         <div
             className="!sticky top-0 z-10 !block h-screen overflow-auto bg-servcy-black"
             onMouseOver={() => {
-                !isSidebarHovered && setIsSidebarHovered(true);
+                !isSidebarHovered && setIsSidebarHovered(true)
             }}
             onMouseLeave={() => {
-                isSidebarHovered && setIsSidebarHovered(false);
+                isSidebarHovered && setIsSidebarHovered(false)
             }}
             onFocus={() => {
-                !isSidebarHovered && setIsSidebarHovered(true);
+                !isSidebarHovered && setIsSidebarHovered(true)
             }}
         >
             <nav aria-label="Sidebar" className="flex h-full w-full flex-col">
@@ -89,7 +86,7 @@ export default function SideBar({ logOut }: { logOut: () => Promise<void> }): JS
                                     )}
                                     href="#logging-out"
                                     onClick={() => {
-                                        logOut();
+                                        logOut()
                                     }}
                                 >
                                     <AiOutlinePoweroff size="24" />
@@ -107,5 +104,5 @@ export default function SideBar({ logOut }: { logOut: () => Promise<void> }): JS
                 </div>
             </nav>
         </div>
-    );
+    )
 }

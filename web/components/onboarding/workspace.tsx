@@ -1,48 +1,43 @@
-import { useState } from "react";
-import { Control, Controller, FieldErrors, UseFormHandleSubmit, UseFormSetValue } from "react-hook-form";
-
-import { Button, Input } from "@servcy/ui";
-
-import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
-
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { WorkspaceService } from "@services/workspace.service";
-
-import { RESTRICTED_URLS } from "@constants/workspace";
-import { WORKSPACE_CREATED } from "@constants/event-tracker";
+import { useState } from "react"
+import { WORKSPACE_CREATED } from "@constants/event-tracker"
+import { RESTRICTED_URLS } from "@constants/workspace"
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+import { WorkspaceService } from "@services/workspace.service"
+import { Control, Controller, FieldErrors, UseFormHandleSubmit, UseFormSetValue } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    stepChange: (steps: Partial<TOnboardingSteps>) => Promise<void>;
-    user: IUser | undefined;
-    control: Control<IWorkspace, any>;
-    handleSubmit: UseFormHandleSubmit<IWorkspace, undefined>;
-    errors: FieldErrors<IWorkspace>;
-    setValue: UseFormSetValue<IWorkspace>;
-    isSubmitting: boolean;
-};
+    stepChange: (steps: Partial<TOnboardingSteps>) => Promise<void>
+    user: IUser | undefined
+    control: Control<IWorkspace, any>
+    handleSubmit: UseFormHandleSubmit<IWorkspace, undefined>
+    errors: FieldErrors<IWorkspace>
+    setValue: UseFormSetValue<IWorkspace>
+    isSubmitting: boolean
+}
 
-const workspaceService = new WorkspaceService();
+const workspaceService = new WorkspaceService()
 
 export const Workspace: React.FC<Props> = (props) => {
-    const { stepChange, user, control, handleSubmit, setValue, errors, isSubmitting } = props;
+    const { stepChange, user, control, handleSubmit, setValue, errors, isSubmitting } = props
     // states
-    const [slugError, setSlugError] = useState(false);
-    const [invalidSlug, setInvalidSlug] = useState(false);
+    const [slugError, setSlugError] = useState(false)
+    const [invalidSlug, setInvalidSlug] = useState(false)
     // store hooks
-    const { updateCurrentUser } = useUser();
-    const { createWorkspace, fetchWorkspaces, workspaces } = useWorkspace();
-    const { captureWorkspaceEvent } = useEventTracker();
+    const { updateCurrentUser } = useUser()
+    const { createWorkspace, fetchWorkspaces, workspaces } = useWorkspace()
+    const { captureWorkspaceEvent } = useEventTracker()
 
     const handleCreateWorkspace = async (formData: IWorkspace) => {
-        if (isSubmitting) return;
+        if (isSubmitting) return
 
         await workspaceService
             .workspaceSlugCheck(formData.slug)
             .then(async (res) => {
                 if (res.status === true && !RESTRICTED_URLS.includes(formData.slug)) {
-                    setSlugError(false);
+                    setSlugError(false)
 
                     await createWorkspace(formData)
                         .then(async (res) => {
@@ -50,7 +45,7 @@ export const Workspace: React.FC<Props> = (props) => {
                                 type: "success",
                                 title: "Success!",
                                 message: "Workspace created successfully.",
-                            });
+                            })
                             captureWorkspaceEvent({
                                 eventName: WORKSPACE_CREATED,
                                 payload: {
@@ -59,9 +54,9 @@ export const Workspace: React.FC<Props> = (props) => {
                                     first_time: true,
                                     element: "Onboarding",
                                 },
-                            });
-                            await fetchWorkspaces();
-                            await completeStep();
+                            })
+                            await fetchWorkspaces()
+                            await completeStep()
                         })
                         .catch(() => {
                             captureWorkspaceEvent({
@@ -71,14 +66,14 @@ export const Workspace: React.FC<Props> = (props) => {
                                     first_time: true,
                                     element: "Onboarding",
                                 },
-                            });
+                            })
                             toast.error({
                                 type: "error",
                                 title: "Error!",
                                 message: "Workspace could not be created. Please try again.",
-                            });
-                        });
-                } else setSlugError(true);
+                            })
+                        })
+                } else setSlugError(true)
             })
             .catch(() =>
                 toast.error({
@@ -86,24 +81,24 @@ export const Workspace: React.FC<Props> = (props) => {
                     title: "Error!",
                     message: "Some error occurred while creating workspace. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     const completeStep = async () => {
-        if (!user || !workspaces) return;
+        if (!user || !workspaces) return
 
-        const firstWorkspace = Object.values(workspaces ?? {})?.[0];
+        const firstWorkspace = Object.values(workspaces ?? {})?.[0]
 
         const payload: Partial<TOnboardingSteps> = {
             workspace_create: true,
             workspace_join: true,
-        };
+        }
 
-        await stepChange(payload);
+        await stepChange(payload)
         await updateCurrentUser({
             last_workspace_id: firstWorkspace?.id,
-        });
-    };
+        })
+    }
 
     return (
         <form className="mt-5 md:w-2/3" onSubmit={handleSubmit(handleCreateWorkspace)}>
@@ -130,9 +125,9 @@ export const Workspace: React.FC<Props> = (props) => {
                                 type="text"
                                 value={value}
                                 onChange={(event) => {
-                                    onChange(event.target.value);
-                                    setValue("name", event.target.value);
-                                    setValue("slug", event.target.value.toLocaleLowerCase().trim().replace(/ /g, "-"));
+                                    onChange(event.target.value)
+                                    setValue("name", event.target.value)
+                                    setValue("slug", event.target.value.toLocaleLowerCase().trim().replace(/ /g, "-"))
                                 }}
                                 placeholder="Enter workspace name..."
                                 ref={ref}
@@ -160,10 +155,10 @@ export const Workspace: React.FC<Props> = (props) => {
                                 type="text"
                                 value={value.toLocaleLowerCase().trim().replace(/ /g, "-")}
                                 onChange={(e) => {
-                                    /^[a-zA-Z0-9_-]+$/.test(e.target.value)
+                                    ;/^[a-zA-Z0-9_-]+$/.test(e.target.value)
                                         ? setInvalidSlug(false)
-                                        : setInvalidSlug(true);
-                                    onChange(e.target.value.toLowerCase());
+                                        : setInvalidSlug(true)
+                                    onChange(e.target.value.toLowerCase())
                                 }}
                                 ref={ref}
                                 hasError={Boolean(errors.slug)}
@@ -181,5 +176,5 @@ export const Workspace: React.FC<Props> = (props) => {
                 {isSubmitting ? "Creating..." : "Make it live"}
             </Button>
         </form>
-    );
-};
+    )
+}

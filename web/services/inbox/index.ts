@@ -1,2 +1,2 @@
-export * from "./inbox.service";
-export * from "./inbox-issue.service";
+export * from "./inbox.service"
+export * from "./inbox-issue.service"

@@ -1,11 +1,5 @@
-import React, { Fragment } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-import size from "lodash/size";
-// mobx store
-import { useIssues } from "@hooks/store";
-
+import { useRouter } from "next/router"
+import React, { Fragment } from "react"
 import {
     IssuePeekOverview,
     ModuleAppliedFiltersRoot,
@@ -15,19 +9,22 @@ import {
     ModuleKanBanLayout,
     ModuleListLayout,
     ModuleSpreadsheetLayout,
-} from "@components/issues";
-import { ActiveLoader } from "@components/ui";
-
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-
-import { IIssueFilterOptions } from "@servcy/types";
+} from "@components/issues"
+import { ActiveLoader } from "@components/ui"
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+// mobx store
+import { useIssues } from "@hooks/store"
+import size from "lodash/size"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { IIssueFilterOptions } from "@servcy/types"
 
 export const ModuleLayoutRoot: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, moduleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, moduleId } = router.query
 
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE);
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE)
 
     useSWR(
         workspaceSlug && projectId && moduleId
@@ -35,32 +32,32 @@ export const ModuleLayoutRoot: React.FC = observer(() => {
             : null,
         async () => {
             if (workspaceSlug && projectId && moduleId) {
-                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString(), moduleId.toString());
+                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString(), moduleId.toString())
                 await issues?.fetchIssues(
                     workspaceSlug.toString(),
                     projectId.toString(),
                     issues?.groupedIssueIds ? "mutation" : "init-loader",
                     moduleId.toString()
-                );
+                )
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
 
-    const userFilters = issuesFilter?.issueFilters?.filters;
+    const userFilters = issuesFilter?.issueFilters?.filters
 
     const issueFilterCount = size(
         Object.fromEntries(
             Object.entries(userFilters ?? {}).filter(([, value]) => value && Array.isArray(value) && value.length > 0)
         )
-    );
+    )
 
     const handleClearAllFilters = () => {
-        if (!workspaceSlug || !projectId || !moduleId) return;
-        const newFilters: IIssueFilterOptions = {};
+        if (!workspaceSlug || !projectId || !moduleId) return
+        const newFilters: IIssueFilterOptions = {}
         Object.keys(userFilters ?? {}).forEach((key) => {
-            newFilters[key as keyof IIssueFilterOptions] = null;
-        });
+            newFilters[key as keyof IIssueFilterOptions] = null
+        })
         issuesFilter.updateFilters(
             workspaceSlug.toString(),
             projectId.toString(),
@@ -69,15 +66,15 @@ export const ModuleLayoutRoot: React.FC = observer(() => {
                 ...newFilters,
             },
             moduleId.toString()
-        );
-    };
+        )
+    }
 
-    if (!workspaceSlug || !projectId || !moduleId) return <></>;
+    if (!workspaceSlug || !projectId || !moduleId) return <></>
 
-    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout || undefined;
+    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout || undefined
 
     if (issues?.loader === "init-loader" || !issues?.groupedIssueIds) {
-        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>;
+        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>
     }
 
     return (
@@ -115,5 +112,5 @@ export const ModuleLayoutRoot: React.FC = observer(() => {
                 </Fragment>
             )}
         </div>
-    );
-});
+    )
+})

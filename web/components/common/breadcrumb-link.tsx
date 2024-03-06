@@ -1,14 +1,14 @@
-import { Tooltip } from "@servcy/ui";
-import Link from "next/link";
+import Link from "next/link"
+import { Tooltip } from "@servcy/ui"
 
 type Props = {
-    label?: string;
-    href?: string;
-    icon?: React.ReactNode | undefined;
-};
+    label?: string
+    href?: string
+    icon?: React.ReactNode | undefined
+}
 
 export const BreadcrumbLink: React.FC<Props> = (props) => {
-    const { href, label, icon } = props;
+    const { href, label, icon } = props
     return (
         <Tooltip tooltipContent={label} position="bottom">
             <li className="flex items-center space-x-2" tabIndex={-1}>
@@ -40,5 +40,5 @@ export const BreadcrumbLink: React.FC<Props> = (props) => {
                 </div>
             </li>
         </Tooltip>
-    );
-};
+    )
+}

@@ -1,18 +1,16 @@
-import { ProfileEmptyState, PieGraph } from "@components/ui";
+import { PieGraph, ProfileEmptyState } from "@components/ui"
+import { STATE_GROUPS } from "@constants/state"
 // image
-import stateGraph from "public/empty-state/state_graph.svg";
-
-import { IUserProfileData, IUserStateDistribution } from "@servcy/types";
-
-import { STATE_GROUPS } from "@constants/state";
+import stateGraph from "public/empty-state/state_graph.svg"
+import { IUserProfileData, IUserStateDistribution } from "@servcy/types"
 
 type Props = {
-    stateDistribution: IUserStateDistribution[];
-    userProfile: IUserProfileData | undefined;
-};
+    stateDistribution: IUserStateDistribution[]
+    userProfile: IUserProfileData | undefined
+}
 
 export const ProfileStateDistribution: React.FC<Props> = ({ stateDistribution, userProfile }) => {
-    if (!userProfile) return null;
+    if (!userProfile) return null
 
     return (
         <div className="flex flex-col space-y-2">
@@ -86,5 +84,5 @@ export const ProfileStateDistribution: React.FC<Props> = ({ stateDistribution, u
                 )}
             </div>
         </div>
-    );
-};
+    )
+}

@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const TransferIcon: React.FC<Props> = ({ width, height, className, color }) => (
     <svg
@@ -16,4 +15,4 @@ export const TransferIcon: React.FC<Props> = ({ width, height, className, color 
             fill={color}
         />
     </svg>
-);
+)

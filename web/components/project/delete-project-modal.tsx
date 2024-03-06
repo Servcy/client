@@ -1,38 +1,34 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { Controller, useForm } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
-import { AlertTriangle } from "lucide-react";
-
-import { useEventTracker, useProject, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, Input } from "@servcy/ui";
-
-import type { IProject } from "@servcy/types";
-
-import { PROJECT_DELETED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import React from "react"
+import { PROJECT_DELETED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useEventTracker, useProject, useWorkspace } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import type { IProject } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type DeleteProjectModal = {
-    isOpen: boolean;
-    project: IProject;
-    onClose: () => void;
-};
+    isOpen: boolean
+    project: IProject
+    onClose: () => void
+}
 
 const defaultValues = {
     projectName: "",
     confirmDelete: "",
-};
+}
 
 export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
-    const { isOpen, project, onClose } = props;
+    const { isOpen, project, onClose } = props
     // store hooks
-    const { captureProjectEvent } = useEventTracker();
-    const { currentWorkspace } = useWorkspace();
-    const { deleteProject } = useProject();
+    const { captureProjectEvent } = useEventTracker()
+    const { currentWorkspace } = useWorkspace()
+    const { deleteProject } = useProject()
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     // form info
     const {
@@ -41,49 +37,49 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
         handleSubmit,
         reset,
         watch,
-    } = useForm({ defaultValues });
+    } = useForm({ defaultValues })
 
-    const canDelete = watch("projectName") === project?.name && watch("confirmDelete") === "delete my project";
+    const canDelete = watch("projectName") === project?.name && watch("confirmDelete") === "delete my project"
 
     const handleClose = () => {
         const timer = setTimeout(() => {
-            reset(defaultValues);
-            clearTimeout(timer);
-        }, 350);
+            reset(defaultValues)
+            clearTimeout(timer)
+        }, 350)
 
-        onClose();
-    };
+        onClose()
+    }
 
     const onSubmit = async () => {
-        if (!workspaceSlug || !canDelete) return;
+        if (!workspaceSlug || !canDelete) return
 
         await deleteProject(workspaceSlug.toString(), project.id)
             .then(() => {
-                if (projectId && projectId.toString() === project.id) router.push(`/${workspaceSlug}/projects`);
+                if (projectId && projectId.toString() === project.id) router.push(`/${workspaceSlug}/projects`)
 
-                handleClose();
+                handleClose()
                 captureProjectEvent({
                     eventName: PROJECT_DELETED,
                     payload: { ...project, state: "SUCCESS", element: "Project general settings" },
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "Project deleted successfully.",
-                });
+                })
             })
             .catch(() => {
                 captureProjectEvent({
                     eventName: PROJECT_DELETED,
                     payload: { ...project, state: "FAILED", element: "Project general settings" },
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Something went wrong. Please try again later.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -200,5 +196,5 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

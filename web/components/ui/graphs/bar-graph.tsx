@@ -1,17 +1,14 @@
 // nivo
-import { ResponsiveBar, BarSvgProps } from "@nivo/bar";
-
-import { generateYAxisTickValues } from "@helpers/graph.helper";
-
-import { TGraph } from "./types";
-
-import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";
+import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph"
+import { generateYAxisTickValues } from "@helpers/graph.helper"
+import { BarSvgProps, ResponsiveBar } from "@nivo/bar"
+import { TGraph } from "./types"
 
 type Props = {
-    indexBy: string;
-    keys: string[];
-    customYAxisTickValues?: number[];
-};
+    indexBy: string
+    keys: string[]
+    customYAxisTickValues?: number[]
+}
 
 export const BarGraph: React.FC<Props & TGraph & Omit<BarSvgProps<any>, "height" | "width">> = ({
     indexBy,
@@ -46,4 +43,4 @@ export const BarGraph: React.FC<Props & TGraph & Omit<BarSvgProps<any>, "height"
             {...rest}
         />
     </div>
-);
+)

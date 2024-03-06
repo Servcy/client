@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { IIssueDisplayFilterOptions, TIssueGroupByOptions } from "@servcy/types";
-
-import { ISSUE_GROUP_BY_OPTIONS } from "@constants/issue";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { ISSUE_GROUP_BY_OPTIONS } from "@constants/issue"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, TIssueGroupByOptions } from "@servcy/types"
 
 type Props = {
-    displayFilters: IIssueDisplayFilterOptions;
-    groupByOptions: TIssueGroupByOptions[];
-    handleUpdate: (val: TIssueGroupByOptions) => void;
-    ignoreGroupedFilters: Partial<TIssueGroupByOptions>[];
-};
+    displayFilters: IIssueDisplayFilterOptions
+    groupByOptions: TIssueGroupByOptions[]
+    handleUpdate: (val: TIssueGroupByOptions) => void
+    ignoreGroupedFilters: Partial<TIssueGroupByOptions>[]
+}
 
 export const FilterGroupBy: React.FC<Props> = observer((props) => {
-    const { displayFilters, groupByOptions, handleUpdate, ignoreGroupedFilters } = props;
+    const { displayFilters, groupByOptions, handleUpdate, ignoreGroupedFilters } = props
 
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const selectedGroupBy = displayFilters.group_by ?? null;
-    const selectedSubGroupBy = displayFilters.sub_group_by ?? null;
+    const selectedGroupBy = displayFilters.group_by ?? null
+    const selectedSubGroupBy = displayFilters.sub_group_by ?? null
 
     return (
         <>
@@ -37,8 +34,8 @@ export const FilterGroupBy: React.FC<Props> = observer((props) => {
                             selectedSubGroupBy !== null &&
                             groupBy.key === selectedSubGroupBy
                         )
-                            return null;
-                        if (ignoreGroupedFilters.includes(groupBy?.key)) return null;
+                            return null
+                        if (ignoreGroupedFilters.includes(groupBy?.key)) return null
 
                         return (
                             <FilterOption
@@ -48,10 +45,10 @@ export const FilterGroupBy: React.FC<Props> = observer((props) => {
                                 title={groupBy.title}
                                 multiple={false}
                             />
-                        );
+                        )
                     })}
                 </div>
             )}
         </>
-    );
-});
+    )
+})

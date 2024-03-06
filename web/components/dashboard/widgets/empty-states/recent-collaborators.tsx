@@ -1,20 +1,19 @@
-import Image from "next/image";
-import { useTheme } from "next-themes";
-
-import DarkImage1 from "public/empty-state/dashboard/dark/recent-collaborators-1.svg";
-import DarkImage2 from "public/empty-state/dashboard/dark/recent-collaborators-2.svg";
-import DarkImage3 from "public/empty-state/dashboard/dark/recent-collaborators-3.svg";
-import LightImage1 from "public/empty-state/dashboard/light/recent-collaborators-1.svg";
-import LightImage2 from "public/empty-state/dashboard/light/recent-collaborators-2.svg";
-import LightImage3 from "public/empty-state/dashboard/light/recent-collaborators-3.svg";
+import Image from "next/image"
+import { useTheme } from "next-themes"
+import DarkImage1 from "public/empty-state/dashboard/dark/recent-collaborators-1.svg"
+import DarkImage2 from "public/empty-state/dashboard/dark/recent-collaborators-2.svg"
+import DarkImage3 from "public/empty-state/dashboard/dark/recent-collaborators-3.svg"
+import LightImage1 from "public/empty-state/dashboard/light/recent-collaborators-1.svg"
+import LightImage2 from "public/empty-state/dashboard/light/recent-collaborators-2.svg"
+import LightImage3 from "public/empty-state/dashboard/light/recent-collaborators-3.svg"
 
 export const RecentCollaboratorsEmptyState = () => {
     // next-themes
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
 
-    const image1 = resolvedTheme === "dark" ? DarkImage1 : LightImage1;
-    const image2 = resolvedTheme === "dark" ? DarkImage2 : LightImage2;
-    const image3 = resolvedTheme === "dark" ? DarkImage3 : LightImage3;
+    const image1 = resolvedTheme === "dark" ? DarkImage1 : LightImage1
+    const image2 = resolvedTheme === "dark" ? DarkImage2 : LightImage2
+    const image3 = resolvedTheme === "dark" ? DarkImage3 : LightImage3
 
     return (
         <div className="mt-7 mb-16 px-36 flex flex-col lg:flex-row items-center justify-between gap-x-24 gap-y-16">
@@ -35,5 +34,5 @@ export const RecentCollaboratorsEmptyState = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

@@ -1,48 +1,43 @@
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
-
-import { useProject, useUser } from "@hooks/store";
-
-import { AppLayout } from "@layouts/app-layout";
-import { ProjectSettingLayout } from "@layouts/settings-layout";
-import toast from "react-hot-toast";
-
-import { AutoArchiveAutomation, AutoCloseAutomation } from "@components/automation";
-import { PageHead } from "@components/core";
-import { ProjectSettingHeader } from "@components/headers";
-
-import { NextPageWithLayout } from "@/types/types";
-import { IProject } from "@servcy/types";
-
-import { EUserProjectRoles } from "@constants/project";
+import { useRouter } from "next/router"
+import { ReactElement } from "react"
+import { AutoArchiveAutomation, AutoCloseAutomation } from "@components/automation"
+import { PageHead } from "@components/core"
+import { ProjectSettingHeader } from "@components/headers"
+import { EUserProjectRoles } from "@constants/project"
+import { useProject, useUser } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { ProjectSettingLayout } from "@layouts/settings-layout"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IProject } from "@servcy/types"
+import { NextPageWithLayout } from "@/types/types"
 
 const AutomationSettingsPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails: projectDetails, updateProject } = useProject();
+    } = useUser()
+    const { currentProjectDetails: projectDetails, updateProject } = useProject()
 
     const handleChange = async (formData: Partial<IProject>) => {
-        if (!workspaceSlug || !projectId || !projectDetails) return;
+        if (!workspaceSlug || !projectId || !projectDetails) return
 
         await updateProject(workspaceSlug.toString(), projectId.toString(), formData).catch(() => {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Something went wrong. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     // derived values
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
-    const pageTitle = projectDetails?.name ? `${projectDetails?.name} - Automations` : undefined;
+    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const pageTitle = projectDetails?.name ? `${projectDetails?.name} - Automations` : undefined
 
     return (
         <>
@@ -55,15 +50,15 @@ const AutomationSettingsPage: NextPageWithLayout = observer(() => {
                 <AutoCloseAutomation handleChange={handleChange} />
             </section>
         </>
-    );
-});
+    )
+})
 
 AutomationSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<ProjectSettingHeader title="Automations Settings" />} withProjectWrapper>
             <ProjectSettingLayout>{page}</ProjectSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default AutomationSettingsPage;
+export default AutomationSettingsPage

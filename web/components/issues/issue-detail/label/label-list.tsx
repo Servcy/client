@@ -1,30 +1,27 @@
-import { FC } from "react";
-
-import { LabelListItem } from "./label-list-item";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { TLabelOperations } from "./root";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { LabelListItem } from "./label-list-item"
+import { TLabelOperations } from "./root"
 
 type TLabelList = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    labelOperations: TLabelOperations;
-    disabled: boolean;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    labelOperations: TLabelOperations
+    disabled: boolean
+}
 
 export const LabelList: FC<TLabelList> = (props) => {
-    const { workspaceSlug, projectId, issueId, labelOperations, disabled } = props;
+    const { workspaceSlug, projectId, issueId, labelOperations, disabled } = props
 
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const issue = getIssueById(issueId);
-    const issueLabels = issue?.label_ids || undefined;
+    const issue = getIssueById(issueId)
+    const issueLabels = issue?.label_ids || undefined
 
-    if (!issue || !issueLabels) return <></>;
+    if (!issue || !issueLabels) return <></>
     return (
         <>
             {issueLabels.map((labelId) => (
@@ -38,5 +35,5 @@ export const LabelList: FC<TLabelList> = (props) => {
                 />
             ))}
         </>
-    );
-};
+    )
+}

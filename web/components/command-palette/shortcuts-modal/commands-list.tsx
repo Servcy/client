@@ -1,10 +1,9 @@
-import { Command } from "lucide-react";
-
-import { substringMatch } from "@helpers/string.helper";
+import { substringMatch } from "@helpers/string.helper"
+import { Command } from "lucide-react"
 
 type Props = {
-    searchQuery: string;
-};
+    searchQuery: string
+}
 
 const KEYBOARD_SHORTCUTS = [
     {
@@ -30,28 +29,28 @@ const KEYBOARD_SHORTCUTS = [
             },
         ],
     },
-];
+]
 
 export const ShortcutCommandsList: React.FC<Props> = (props) => {
-    const { searchQuery } = props;
+    const { searchQuery } = props
 
     const filteredShortcuts = KEYBOARD_SHORTCUTS.map((category) => {
-        const newCategory = { ...category };
+        const newCategory = { ...category }
 
         newCategory.shortcuts = newCategory.shortcuts.filter((shortcut) =>
             substringMatch(shortcut.description, searchQuery)
-        );
+        )
 
-        return newCategory;
-    });
+        return newCategory
+    })
 
-    const isShortcutsEmpty = filteredShortcuts.every((category) => category.shortcuts.length === 0);
+    const isShortcutsEmpty = filteredShortcuts.every((category) => category.shortcuts.length === 0)
 
     return (
         <div className="flex flex-col gap-y-3 overflow-y-auto">
             {!isShortcutsEmpty ? (
                 filteredShortcuts.map((category) => {
-                    if (category.shortcuts.length === 0) return;
+                    if (category.shortcuts.length === 0) return
 
                     return (
                         <div key={category.key}>
@@ -81,7 +80,7 @@ export const ShortcutCommandsList: React.FC<Props> = (props) => {
                                 ))}
                             </div>
                         </div>
-                    );
+                    )
                 })
             ) : (
                 <p className="flex justify-center text-center text-sm text-custom-text-200">
@@ -94,5 +93,5 @@ export const ShortcutCommandsList: React.FC<Props> = (props) => {
                 </p>
             )}
         </div>
-    );
-};
+    )
+}

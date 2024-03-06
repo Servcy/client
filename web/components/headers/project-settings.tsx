@@ -1,34 +1,30 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { Breadcrumbs, CustomMenu } from "@servcy/ui";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project"
 // helper
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { useProject, useUser } from "@hooks/store";
-
-import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useProject, useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, CustomMenu } from "@servcy/ui"
 
 export interface IProjectSettingHeader {
-    title: string;
+    title: string
 }
 
 export const ProjectSettingHeader: FC<IProjectSettingHeader> = observer((props) => {
-    const { title } = props;
+    const { title } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
 
-    if (currentProjectRole && currentProjectRole <= EUserProjectRoles.VIEWER) return null;
+    if (currentProjectRole && currentProjectRole <= EUserProjectRoles.VIEWER) return null
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -85,5 +81,5 @@ export const ProjectSettingHeader: FC<IProjectSettingHeader> = observer((props) 
                 </CustomMenu>
             </div>
         </div>
-    );
-});
+    )
+})

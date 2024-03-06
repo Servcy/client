@@ -1,65 +1,61 @@
-import { useRef, useState } from "react";
-import { observer } from "mobx-react-lite";
-import { ChevronUp, PenSquare, Search } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { CreateUpdateIssueModal } from "@components/issues";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { EIssuesStoreType } from "@constants/issue";
-
-import { TIssue } from "@servcy/types";
+import { useRef, useState } from "react"
+import { CreateUpdateIssueModal } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { ChevronUp, PenSquare, Search } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
 
 export const WorkspaceSidebarQuickAction = observer(() => {
     // states
-    const [isDraftIssueModalOpen, setIsDraftIssueModalOpen] = useState(false);
+    const [isDraftIssueModalOpen, setIsDraftIssueModalOpen] = useState(false)
 
     const {
         router: { workspaceSlug },
         theme: themeStore,
         commandPalette: commandPaletteStore,
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
-    const { joinedProjectIds } = useProject();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
+    const { joinedProjectIds } = useProject()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
 
-    const { storedValue, setValue } = useLocalStorage<Record<string, Partial<TIssue>>>("draftedIssue", {});
+    const { storedValue, setValue } = useLocalStorage<Record<string, Partial<TIssue>>>("draftedIssue", {})
 
     //useState control for displaying draft issue button instead of group hover
-    const [isDraftButtonOpen, setIsDraftButtonOpen] = useState(false);
+    const [isDraftButtonOpen, setIsDraftButtonOpen] = useState(false)
 
-    const timeoutRef = useRef<any>();
+    const timeoutRef = useRef<any>()
 
-    const isSidebarCollapsed = themeStore.sidebarCollapsed;
+    const isSidebarCollapsed = themeStore.sidebarCollapsed
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
 
-    const disabled = joinedProjectIds.length === 0;
+    const disabled = joinedProjectIds.length === 0
 
     const onMouseEnter = () => {
         //if renet before timout clear the timeout
-        timeoutRef?.current && clearTimeout(timeoutRef.current);
-        setIsDraftButtonOpen(true);
-    };
+        timeoutRef?.current && clearTimeout(timeoutRef.current)
+        setIsDraftButtonOpen(true)
+    }
 
     const onMouseLeave = () => {
         timeoutRef.current = setTimeout(() => {
-            setIsDraftButtonOpen(false);
-        }, 300);
-    };
+            setIsDraftButtonOpen(false)
+        }, 300)
+    }
 
-    const workspaceDraftIssue = workspaceSlug ? storedValue?.[workspaceSlug] ?? undefined : undefined;
+    const workspaceDraftIssue = workspaceSlug ? storedValue?.[workspaceSlug] ?? undefined : undefined
 
     const removeWorkspaceDraftIssue = () => {
-        const draftIssues = storedValue ?? {};
-        if (workspaceSlug && draftIssues[workspaceSlug]) delete draftIssues[workspaceSlug];
-        setValue(draftIssues);
-        return Promise.resolve();
-    };
+        const draftIssues = storedValue ?? {}
+        if (workspaceSlug && draftIssues[workspaceSlug]) delete draftIssues[workspaceSlug]
+        setValue(draftIssues)
+        return Promise.resolve()
+    }
 
     return (
         <>
@@ -92,8 +88,8 @@ export const WorkspaceSidebarQuickAction = observer(() => {
                                 isSidebarCollapsed ? "justify-center" : ""
                             } ${disabled ? "cursor-not-allowed opacity-50" : ""}`}
                             onClick={() => {
-                                setTrackElement("APP_SIDEBAR_QUICK_ACTIONS");
-                                commandPaletteStore.toggleCreateIssueModal(true, EIssuesStoreType.PROJECT);
+                                setTrackElement("APP_SIDEBAR_QUICK_ACTIONS")
+                                commandPaletteStore.toggleCreateIssueModal(true, EIssuesStoreType.PROJECT)
                             }}
                             disabled={disabled}
                         >
@@ -160,5 +156,5 @@ export const WorkspaceSidebarQuickAction = observer(() => {
                 </button>
             </div>
         </>
-    );
-});
+    )
+})

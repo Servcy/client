@@ -1,2 +1,2 @@
-export * from "./header";
-export * from "./applied-filters";
+export * from "./header"
+export * from "./applied-filters"

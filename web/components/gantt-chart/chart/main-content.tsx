@@ -1,8 +1,4 @@
-import { useRef } from "react";
-import { observer } from "mobx-react";
-
-import { useGanttChart } from "../hooks/use-gantt-chart";
-
+import { useRef } from "react"
 import {
     BiWeekChartView,
     DayChartView,
@@ -16,28 +12,29 @@ import {
     TGanttViews,
     WeekChartView,
     YearChartView,
-} from "@components/gantt-chart";
-
-import { cn } from "@helpers/common.helper";
+} from "@components/gantt-chart"
+import { cn } from "@helpers/common.helper"
+import { observer } from "mobx-react"
+import { useGanttChart } from "../hooks/use-gantt-chart"
 
 type Props = {
-    blocks: IGanttBlock[] | null;
-    blockToRender: (data: any) => React.ReactNode;
-    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void;
-    bottomSpacing: boolean;
-    chartBlocks: IGanttBlock[] | null;
-    enableBlockLeftResize: boolean;
-    enableBlockMove: boolean;
-    enableBlockRightResize: boolean;
-    enableReorder: boolean;
-    enableAddBlock: boolean;
-    itemsContainerWidth: number;
-    showAllBlocks: boolean;
-    sidebarToRender: (props: any) => React.ReactNode;
-    title: string;
-    updateCurrentViewRenderPayload: (direction: "left" | "right", currentView: TGanttViews) => void;
-    quickAdd?: React.JSX.Element | undefined;
-};
+    blocks: IGanttBlock[] | null
+    blockToRender: (data: any) => React.ReactNode
+    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void
+    bottomSpacing: boolean
+    chartBlocks: IGanttBlock[] | null
+    enableBlockLeftResize: boolean
+    enableBlockMove: boolean
+    enableBlockRightResize: boolean
+    enableReorder: boolean
+    enableAddBlock: boolean
+    itemsContainerWidth: number
+    showAllBlocks: boolean
+    sidebarToRender: (props: any) => React.ReactNode
+    title: string
+    updateCurrentViewRenderPayload: (direction: "left" | "right", currentView: TGanttViews) => void
+    quickAdd?: React.JSX.Element | undefined
+}
 
 export const GanttChartMainContent: React.FC<Props> = observer((props) => {
     const {
@@ -57,26 +54,26 @@ export const GanttChartMainContent: React.FC<Props> = observer((props) => {
         title,
         updateCurrentViewRenderPayload,
         quickAdd,
-    } = props;
+    } = props
     // refs
-    const ganttContainerRef = useRef<HTMLDivElement>(null);
+    const ganttContainerRef = useRef<HTMLDivElement>(null)
     // chart hook
-    const { currentView, currentViewData } = useGanttChart();
+    const { currentView, currentViewData } = useGanttChart()
     // handling scroll functionality
     const onScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        const { clientWidth, scrollLeft, scrollWidth } = e.currentTarget;
+        const { clientWidth, scrollLeft, scrollWidth } = e.currentTarget
 
         // updateScrollLeft(scrollLeft);
 
-        const approxRangeLeft = scrollLeft >= clientWidth + 1000 ? 1000 : scrollLeft - clientWidth;
-        const approxRangeRight = scrollWidth - (scrollLeft + clientWidth);
+        const approxRangeLeft = scrollLeft >= clientWidth + 1000 ? 1000 : scrollLeft - clientWidth
+        const approxRangeRight = scrollWidth - (scrollLeft + clientWidth)
 
-        if (approxRangeRight < 1000) updateCurrentViewRenderPayload("right", currentView);
-        if (approxRangeLeft < 1000) updateCurrentViewRenderPayload("left", currentView);
-    };
+        if (approxRangeRight < 1000) updateCurrentViewRenderPayload("right", currentView)
+        if (approxRangeLeft < 1000) updateCurrentViewRenderPayload("left", currentView)
+    }
 
     const CHART_VIEW_COMPONENTS: {
-        [key in TGanttViews]: React.FC;
+        [key in TGanttViews]: React.FC
     } = {
         hours: HourChartView,
         day: DayChartView,
@@ -85,10 +82,10 @@ export const GanttChartMainContent: React.FC<Props> = observer((props) => {
         month: MonthChartView,
         quarter: QuarterChartView,
         year: YearChartView,
-    };
+    }
 
-    if (!currentView) return null;
-    const ActiveChartView = CHART_VIEW_COMPONENTS[currentView];
+    if (!currentView) return null
+    const ActiveChartView = CHART_VIEW_COMPONENTS[currentView]
 
     return (
         <div
@@ -129,5 +126,5 @@ export const GanttChartMainContent: React.FC<Props> = observer((props) => {
                 )}
             </div>
         </div>
-    );
-});
+    )
+})

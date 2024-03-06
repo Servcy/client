@@ -1,18 +1,18 @@
-import React from "react";
+import React from "react"
 // lucide icons
-import { Check } from "lucide-react";
+import { Check } from "lucide-react"
 
 type Props = {
-    icon?: React.ReactNode;
-    isChecked: boolean;
-    title: React.ReactNode;
-    onClick?: () => void;
-    multiple?: boolean;
-    activePulse?: boolean;
-};
+    icon?: React.ReactNode
+    isChecked: boolean
+    title: React.ReactNode
+    onClick?: () => void
+    multiple?: boolean
+    activePulse?: boolean
+}
 
 export const FilterOption: React.FC<Props> = (props) => {
-    const { icon, isChecked, multiple = true, onClick, title, activePulse = false } = props;
+    const { icon, isChecked, multiple = true, onClick, title, activePulse = false } = props
 
     return (
         <button
@@ -37,5 +37,5 @@ export const FilterOption: React.FC<Props> = (props) => {
                 <div className="flex-shrink-0 text-xs w-2 h-2 rounded-full bg-custom-primary-100 animate-pulse ml-auto" />
             )}
         </button>
-    );
-};
+    )
+}

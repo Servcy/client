@@ -1,75 +1,70 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useModule } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import { AlertTriangle } from "lucide-react";
-
-import type { IModule } from "@servcy/types";
-
-import { MODULE_DELETED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { MODULE_DELETED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useEventTracker, useModule } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import type { IModule } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    data: IModule;
-    isOpen: boolean;
-    onClose: () => void;
-};
+    data: IModule
+    isOpen: boolean
+    onClose: () => void
+}
 
 export const DeleteModuleModal: React.FC<Props> = observer((props) => {
-    const { data, isOpen, onClose } = props;
+    const { data, isOpen, onClose } = props
     // states
-    const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+    const [isDeleteLoading, setIsDeleteLoading] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, moduleId, peekModule } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, moduleId, peekModule } = router.query
     // store hooks
-    const { captureModuleEvent } = useEventTracker();
-    const { deleteModule } = useModule();
+    const { captureModuleEvent } = useEventTracker()
+    const { deleteModule } = useModule()
 
     const handleClose = () => {
-        onClose();
-        setIsDeleteLoading(false);
-    };
+        onClose()
+        setIsDeleteLoading(false)
+    }
 
     const handleDeletion = async () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        setIsDeleteLoading(true);
+        setIsDeleteLoading(true)
 
         await deleteModule(workspaceSlug.toString(), projectId.toString(), data.id)
             .then(() => {
-                if (moduleId || peekModule) router.push(`/${workspaceSlug}/projects/${data.project_id}/modules`);
-                handleClose();
+                if (moduleId || peekModule) router.push(`/${workspaceSlug}/projects/${data.project_id}/modules`)
+                handleClose()
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "Module deleted successfully.",
-                });
+                })
                 captureModuleEvent({
                     eventName: MODULE_DELETED,
                     payload: { ...data, state: "SUCCESS" },
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Module could not be deleted. Please try again.",
-                });
+                })
                 captureModuleEvent({
                     eventName: MODULE_DELETED,
                     payload: { ...data, state: "FAILED" },
-                });
+                })
             })
             .finally(() => {
-                setIsDeleteLoading(false);
-            });
-    };
+                setIsDeleteLoading(false)
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -143,5 +138,5 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

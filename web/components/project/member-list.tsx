@@ -1,34 +1,31 @@
-import { useState } from "react";
-import { observer } from "mobx-react-lite";
-import { Search } from "lucide-react";
-
-import { useEventTracker, useMember } from "@hooks/store";
-
-import { ProjectMemberListItem, SendProjectInvitationModal } from "@components/project";
-
-import { Button } from "@servcy/ui";
-import { MembersSettingsLoader } from "@components/ui";
+import { useState } from "react"
+import { ProjectMemberListItem, SendProjectInvitationModal } from "@components/project"
+import { MembersSettingsLoader } from "@components/ui"
+import { useEventTracker, useMember } from "@hooks/store"
+import { Search } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Button } from "@servcy/ui"
 
 export const ProjectMemberList: React.FC = observer(() => {
     // states
-    const [inviteModal, setInviteModal] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [inviteModal, setInviteModal] = useState(false)
+    const [searchQuery, setSearchQuery] = useState("")
     // store hooks
-    const { setTrackElement } = useEventTracker();
+    const { setTrackElement } = useEventTracker()
     const {
         project: { projectMemberIds, getProjectMemberDetails },
-    } = useMember();
+    } = useMember()
 
     const searchedMembers = (projectMemberIds ?? []).filter((userId) => {
-        const memberDetails = getProjectMemberDetails(userId);
+        const memberDetails = getProjectMemberDetails(userId)
 
-        if (!memberDetails?.member) return false;
+        if (!memberDetails?.member) return false
 
-        const fullName = `${memberDetails?.member.first_name} ${memberDetails?.member.last_name}`.toLowerCase();
-        const displayName = memberDetails?.member.display_name.toLowerCase();
+        const fullName = `${memberDetails?.member.first_name} ${memberDetails?.member.last_name}`.toLowerCase()
+        const displayName = memberDetails?.member.display_name.toLowerCase()
 
-        return displayName?.includes(searchQuery.toLowerCase()) || fullName.includes(searchQuery.toLowerCase());
-    });
+        return displayName?.includes(searchQuery.toLowerCase()) || fullName.includes(searchQuery.toLowerCase())
+    })
 
     return (
         <>
@@ -49,8 +46,8 @@ export const ProjectMemberList: React.FC = observer(() => {
                 <Button
                     variant="primary"
                     onClick={() => {
-                        setTrackElement("PROJECT_SETTINGS_MEMBERS_PAGE_HEADER");
-                        setInviteModal(true);
+                        setTrackElement("PROJECT_SETTINGS_MEMBERS_PAGE_HEADER")
+                        setInviteModal(true)
                     }}
                 >
                     Add member
@@ -69,5 +66,5 @@ export const ProjectMemberList: React.FC = observer(() => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

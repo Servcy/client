@@ -1,23 +1,22 @@
-import { FC } from "react";
-import Link from "next/link";
-
-import { useIssueDetail } from "@hooks/store";
+import Link from "next/link"
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
 
 type TIssueUser = {
-    activityId: string;
-    customUserName?: string;
-};
+    activityId: string
+    customUserName?: string
+}
 
 export const IssueUser: FC<TIssueUser> = (props) => {
-    const { activityId, customUserName } = props;
+    const { activityId, customUserName } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
 
     return (
         <>
@@ -32,5 +31,5 @@ export const IssueUser: FC<TIssueUser> = (props) => {
                 </Link>
             )}
         </>
-    );
-};
+    )
+}

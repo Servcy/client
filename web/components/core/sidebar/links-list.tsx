@@ -1,42 +1,39 @@
-import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
-
-import { Pencil, Trash2, LinkIcon } from "lucide-react";
-
-import { calculateTimeAgo } from "@helpers/date-time.helper";
-
-import { ILinkDetails, UserAuth } from "@servcy/types";
-import toast from "react-hot-toast";
-import { observer } from "mobx-react";
-import { useMeasure } from "@nivo/core";
-import { useMember } from "@hooks/store";
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+import { useMember } from "@hooks/store"
+import { useMeasure } from "@nivo/core"
+import { LinkIcon, Pencil, Trash2 } from "lucide-react"
+import { observer } from "mobx-react"
+import toast from "react-hot-toast"
+import { ILinkDetails, UserAuth } from "@servcy/types"
+import { ExternalLinkIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
-    links: ILinkDetails[];
-    handleDeleteLink: (linkId: string) => void;
-    handleEditLink: (link: ILinkDetails) => void;
-    userAuth: UserAuth;
-};
+    links: ILinkDetails[]
+    handleDeleteLink: (linkId: string) => void
+    handleEditLink: (link: ILinkDetails) => void
+    userAuth: UserAuth
+}
 
 export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, handleEditLink, userAuth }) => {
     // toast
 
-    const { getUserDetails } = useMember();
+    const { getUserDetails } = useMember()
 
-    const isNotAllowed = userAuth.isGuest || userAuth.isViewer;
+    const isNotAllowed = userAuth.isGuest || userAuth.isViewer
 
     const copyToClipboard = (text: string) => {
-        navigator.clipboard.writeText(text);
+        navigator.clipboard.writeText(text)
         toast.error({
             message: "The URL has been successfully copied to your clipboard",
             type: "success",
             title: "Copied to clipboard",
-        });
-    };
+        })
+    }
 
     return (
         <>
             {links.map((link) => {
-                const createdByDetails = getUserDetails(link.created_by);
+                const createdByDetails = getUserDetails(link.created_by)
                 return (
                     <div key={link.id} className="relative flex flex-col rounded-md bg-custom-background-90 p-2.5">
                         <div className="flex w-full items-start justify-between gap-2">
@@ -62,9 +59,9 @@ export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, h
                                         type="button"
                                         className="flex items-center justify-center p-1 hover:bg-custom-background-80"
                                         onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            handleEditLink(link);
+                                            e.preventDefault()
+                                            e.stopPropagation()
+                                            handleEditLink(link)
                                         }}
                                     >
                                         <Pencil className="h-3 w-3 stroke-[1.5] text-custom-text-200" />
@@ -81,9 +78,9 @@ export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, h
                                         type="button"
                                         className="flex items-center justify-center p-1 hover:bg-custom-background-80"
                                         onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            handleDeleteLink(link.id);
+                                            e.preventDefault()
+                                            e.stopPropagation()
+                                            handleDeleteLink(link.id)
                                         }}
                                     >
                                         <Trash2 className="h-3 w-3" />
@@ -106,8 +103,8 @@ export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, h
                             </p>
                         </div>
                     </div>
-                );
+                )
             })}
         </>
-    );
-});
+    )
+})

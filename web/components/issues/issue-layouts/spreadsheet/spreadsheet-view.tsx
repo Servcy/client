@@ -1,38 +1,36 @@
-import React, { useRef } from "react";
-import { observer } from "mobx-react-lite";
-
-import { Spinner } from "@servcy/ui";
-import { SpreadsheetQuickAddIssueForm } from "@components/issues";
-import { SpreadsheetTable } from "./spreadsheet-table";
-
-import { TIssue, IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types";
-import { EIssueActions } from "../types";
+import React, { useRef } from "react"
+import { SpreadsheetQuickAddIssueForm } from "@components/issues"
 //hooks
-import { useProject } from "@hooks/store";
+import { useProject } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssue } from "@servcy/types"
+import { Spinner } from "@servcy/ui"
+import { EIssueActions } from "../types"
+import { SpreadsheetTable } from "./spreadsheet-table"
 
 type Props = {
-    displayProperties: IIssueDisplayProperties;
-    displayFilters: IIssueDisplayFilterOptions;
-    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void;
-    issueIds: string[] | undefined;
+    displayProperties: IIssueDisplayProperties
+    displayFilters: IIssueDisplayFilterOptions
+    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void
+    issueIds: string[] | undefined
     quickActions: (
         issue: TIssue,
         customActionButton?: React.ReactElement,
         portalElement?: HTMLDivElement | null
-    ) => React.ReactNode;
-    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>;
-    openIssuesListModal?: (() => void) | null;
+    ) => React.ReactNode
+    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>
+    openIssuesListModal?: (() => void) | null
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    enableQuickCreateIssue?: boolean;
-    disableIssueCreation?: boolean;
-};
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+    canEditProperties: (projectId: string | undefined) => boolean
+    enableQuickCreateIssue?: boolean
+    disableIssueCreation?: boolean
+}
 
 export const SpreadsheetView: React.FC<Props> = observer((props) => {
     const {
@@ -47,21 +45,21 @@ export const SpreadsheetView: React.FC<Props> = observer((props) => {
         canEditProperties,
         enableQuickCreateIssue,
         disableIssueCreation,
-    } = props;
+    } = props
     // refs
-    const containerRef = useRef<HTMLTableElement | null>(null);
-    const portalRef = useRef<HTMLDivElement | null>(null);
+    const containerRef = useRef<HTMLTableElement | null>(null)
+    const portalRef = useRef<HTMLDivElement | null>(null)
 
-    const { currentProjectDetails } = useProject();
+    const { currentProjectDetails } = useProject()
 
-    const isEstimateEnabled: boolean = currentProjectDetails?.estimate !== null;
+    const isEstimateEnabled: boolean = currentProjectDetails?.estimate !== null
 
     if (!issueIds || issueIds.length === 0)
         return (
             <div className="grid h-full w-full place-items-center">
                 <Spinner />
             </div>
-        );
+        )
 
     return (
         <div className="relative flex flex-col h-full w-full overflow-x-hidden whitespace-nowrap rounded-lg bg-custom-background-200 text-custom-text-200">
@@ -92,5 +90,5 @@ export const SpreadsheetView: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

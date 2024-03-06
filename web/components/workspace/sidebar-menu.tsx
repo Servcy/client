@@ -1,42 +1,38 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useApplication, useEventTracker, useUser } from "@hooks/store";
-
-import { NotificationPopover } from "@components/notifications";
-
-import { Tooltip } from "@servcy/ui";
-import { Crown } from "lucide-react";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { SIDEBAR_MENU_ITEMS } from "@constants/dashboard";
-import { SIDEBAR_CLICKED } from "@constants/event-tracker";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React from "react"
+import { NotificationPopover } from "@components/notifications"
+import { SIDEBAR_MENU_ITEMS } from "@constants/dashboard"
+import { SIDEBAR_CLICKED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles } from "@constants/workspace"
 // helper
-import { cn } from "@helpers/common.helper";
+import { cn } from "@helpers/common.helper"
+import { useApplication, useEventTracker, useUser } from "@hooks/store"
+import { Crown } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Tooltip } from "@servcy/ui"
 
 export const WorkspaceSidebarMenu = observer(() => {
     // store hooks
-    const { theme: themeStore } = useApplication();
-    const { captureEvent } = useEventTracker();
+    const { theme: themeStore } = useApplication()
+    const { captureEvent } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // computed
-    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST;
+    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST
 
     const handleLinkClick = (itemKey: string) => {
         if (window.innerWidth < 768) {
-            themeStore.toggleSidebar();
+            themeStore.toggleSidebar()
         }
         captureEvent(SIDEBAR_CLICKED, {
             destination: itemKey,
-        });
-    };
+        })
+    }
 
     return (
         <div className="w-full cursor-pointer space-y-2 p-4">
@@ -81,5 +77,5 @@ export const WorkspaceSidebarMenu = observer(() => {
             )}
             <NotificationPopover />
         </div>
-    );
-});
+    )
+})

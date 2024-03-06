@@ -1,83 +1,76 @@
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDown } from "lucide-react";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { ReactElement, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import useSWR from "swr";
-
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
-import useUserAuth from "@hooks/use-user-auth";
-
-import { WorkspaceService } from "@services/workspace.service";
-
-import { UserAuthWrapper } from "@layouts/auth-layout";
-import DefaultLayout from "@layouts/DefaultLayout";
-
-import { PageHead } from "@components/core";
-import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding";
-
-import { Avatar, Spinner } from "@servcy/ui";
+import Image from "next/image"
+import { useRouter } from "next/router"
+import { ReactElement, useEffect, useState } from "react"
+import { PageHead } from "@components/core"
+import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding"
+import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
+import { Menu, Transition } from "@headlessui/react"
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+import useUserAuth from "@hooks/use-user-auth"
+import { UserAuthWrapper } from "@layouts/auth-layout"
+import DefaultLayout from "@layouts/DefaultLayout"
+import { WorkspaceService } from "@services/workspace.service"
+import { ChevronDown } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
 // images
-import ServcyLogo from "public/logo.png";
+import ServcyLogo from "public/logo.png"
+import { Controller, useForm } from "react-hook-form"
+import useSWR from "swr"
+import { IUser, TOnboardingSteps } from "@servcy/types"
+import { Avatar, Spinner } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
-import { NextPageWithLayout } from "@/types/types";
-import { IUser, TOnboardingSteps } from "@servcy/types";
-
-import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker";
-
-const workspaceService = new WorkspaceService();
+const workspaceService = new WorkspaceService()
 
 const OnboardingPage: NextPageWithLayout = observer(() => {
     // states
-    const [step, setStep] = useState<number | null>(null);
-    const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
+    const [step, setStep] = useState<number | null>(null)
+    const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { captureEvent } = useEventTracker();
-    const { currentUser, currentUserLoader, updateCurrentUser, updateUserOnBoard } = useUser();
-    const { workspaces, fetchWorkspaces } = useWorkspace();
+    const { captureEvent } = useEventTracker()
+    const { currentUser, currentUserLoader, updateCurrentUser, updateUserOnBoard } = useUser()
+    const { workspaces, fetchWorkspaces } = useWorkspace()
     // custom hooks
-    const {} = useUserAuth({ routeAuth: "onboarding", user: currentUser, isLoading: currentUserLoader });
+    const {} = useUserAuth({ routeAuth: "onboarding", user: currentUser, isLoading: currentUserLoader })
 
-    const user = currentUser ?? undefined;
-    const workspacesList = Object.values(workspaces ?? {});
+    const user = currentUser ?? undefined
+    const workspacesList = Object.values(workspaces ?? {})
 
-    const { setTheme } = useTheme();
+    const { setTheme } = useTheme()
 
     const { control, setValue } = useForm<{ full_name: string }>({
         defaultValues: {
             full_name: "",
         },
-    });
+    })
 
     useSWR(`USER_WORKSPACES_LIST`, () => fetchWorkspaces(), {
         shouldRetryOnError: false,
-    });
+    })
 
     const { data: invitations } = useSWR("USER_WORKSPACE_INVITATIONS_LIST", () =>
         workspaceService.userWorkspaceInvitations()
-    );
+    )
 
     // handle step change
     const stepChange = async (steps: Partial<TOnboardingSteps>) => {
-        if (!user) return;
+        if (!user) return
 
         const payload: Partial<IUser> = {
             onboarding_step: {
                 ...user.onboarding_step,
                 ...steps,
             },
-        };
+        }
 
-        await updateCurrentUser(payload);
-    };
+        await updateCurrentUser(payload)
+    }
     // complete onboarding
     const finishOnboarding = async () => {
-        if (!user || !workspacesList) return;
+        if (!user || !workspacesList) return
 
         await updateUserOnBoard()
             .then(() => {
@@ -86,24 +79,24 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
                     email: user.email,
                     user_id: user.id,
                     status: "SUCCESS",
-                });
+                })
             })
             .catch((error) => {
-                console.log(error);
-            });
+                console.log(error)
+            })
 
-        router.replace(`/${workspacesList[0]?.slug}`);
-    };
+        router.replace(`/${workspacesList[0]?.slug}`)
+    }
 
     useEffect(() => {
-        setTheme("system");
-    }, [setTheme]);
+        setTheme("system")
+    }, [setTheme])
 
     useEffect(() => {
         const handleStepChange = async () => {
-            if (!user || !invitations) return;
+            if (!user || !invitations) return
 
-            const onboardingStep = user.onboarding_step;
+            const onboardingStep = user.onboarding_step
 
             if (
                 !onboardingStep.workspace_join &&
@@ -118,15 +111,15 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
                         workspace_create: true,
                     },
                     last_workspace_id: workspacesList[0]?.id,
-                });
-                setStep(2);
-                return;
+                })
+                setStep(2)
+                return
             }
 
-            if (!onboardingStep.workspace_join && !onboardingStep.workspace_create && step !== 1) setStep(1);
+            if (!onboardingStep.workspace_join && !onboardingStep.workspace_create && step !== 1) setStep(1)
 
             if (onboardingStep.workspace_join || onboardingStep.workspace_create) {
-                if (!onboardingStep.profile_complete && step !== 2) setStep(2);
+                if (!onboardingStep.profile_complete && step !== 2) setStep(2)
             }
             if (
                 onboardingStep.profile_complete &&
@@ -134,11 +127,11 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
                 !onboardingStep.workspace_invite &&
                 step !== 3
             )
-                setStep(3);
-        };
+                setStep(3)
+        }
 
-        handleStepChange();
-    }, [user, invitations, step, updateCurrentUser, workspacesList]);
+        handleStepChange()
+    }, [user, invitations, step, updateCurrentUser, workspacesList])
 
     return (
         <>
@@ -207,7 +200,7 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
                                                                 <div
                                                                     className="mr-auto mt-2 rounded-md border border-red-400 bg-onboarding-background-200 p-3 text-base font-normal text-red-400 shadow-sm hover:cursor-pointer"
                                                                     onClick={() => {
-                                                                        setShowDeleteAccountModal(true);
+                                                                        setShowDeleteAccountModal(true)
                                                                     }}
                                                                 >
                                                                     Wrong e-mail address?
@@ -228,7 +221,7 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
                             {step === 1 ? (
                                 <JoinWorkspaces
                                     setTryDiffAccount={() => {
-                                        setShowDeleteAccountModal(true);
+                                        setShowDeleteAccountModal(true)
                                     }}
                                     finishOnboarding={finishOnboarding}
                                     stepChange={stepChange}
@@ -252,15 +245,15 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})
 
 OnboardingPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <UserAuthWrapper>
             <DefaultLayout>{page}</DefaultLayout>
         </UserAuthWrapper>
-    );
-};
+    )
+}
 
-export default OnboardingPage;
+export default OnboardingPage

@@ -1,45 +1,41 @@
-import { Tab } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/router";
-import { Fragment, ReactElement } from "react";
-
-import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { CustomAnalytics, ScopeAndDemand } from "@components/analytics";
-import { PageHead } from "@components/core";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-import { WorkspaceAnalyticsHeader } from "@components/headers";
-
-import { ANALYTICS_TABS } from "@constants/analytics";
-import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import { useRouter } from "next/router"
+import { Fragment, ReactElement } from "react"
+import { CustomAnalytics, ScopeAndDemand } from "@components/analytics"
+import { PageHead } from "@components/core"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { WorkspaceAnalyticsHeader } from "@components/headers"
+import { ANALYTICS_TABS } from "@constants/analytics"
+import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { Tab } from "@headlessui/react"
+import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
 // type
-import { NextPageWithLayout } from "@/types/types";
+import { NextPageWithLayout } from "@/types/types"
 
 const AnalyticsPage: NextPageWithLayout = observer(() => {
-    const router = useRouter();
-    const { analytics_tab } = router.query;
+    const router = useRouter()
+    const { analytics_tab } = router.query
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
     const {
         commandPalette: { toggleCreateProjectModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
         currentUser,
-    } = useUser();
-    const { workspaceProjectIds } = useProject();
-    const { currentWorkspace } = useWorkspace();
+    } = useUser()
+    const { workspaceProjectIds } = useProject()
+    const { currentWorkspace } = useWorkspace()
     // derived values
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "analytics", isLightMode);
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Analytics` : undefined;
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "analytics", isLightMode)
+    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Analytics` : undefined
 
     return (
         <>
@@ -62,8 +58,8 @@ const AnalyticsPage: NextPageWithLayout = observer(() => {
                                         }`
                                     }
                                     onClick={() => {
-                                        router.query.analytics_tab = tab.key;
-                                        router.push(router);
+                                        router.query.analytics_tab = tab.key
+                                        router.push(router)
                                     }}
                                 >
                                     {tab.title}
@@ -88,8 +84,8 @@ const AnalyticsPage: NextPageWithLayout = observer(() => {
                     primaryButton={{
                         text: WORKSPACE_EMPTY_STATE_DETAILS["analytics"].primaryButton.text,
                         onClick: () => {
-                            setTrackElement("Analytics empty state");
-                            toggleCreateProjectModal(true);
+                            setTrackElement("Analytics empty state")
+                            toggleCreateProjectModal(true)
                         },
                     }}
                     comicBox={{
@@ -101,11 +97,11 @@ const AnalyticsPage: NextPageWithLayout = observer(() => {
                 />
             )}
         </>
-    );
-});
+    )
+})
 
 AnalyticsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <AppLayout header={<WorkspaceAnalyticsHeader />}>{page}</AppLayout>;
-};
+    return <AppLayout header={<WorkspaceAnalyticsHeader />}>{page}</AppLayout>
+}
 
-export default AnalyticsPage;
+export default AnalyticsPage

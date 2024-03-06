@@ -1,41 +1,37 @@
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
-import useSWR from "swr";
-
-import { useProject } from "@hooks/store";
-
-import { AppLayout } from "@layouts/app-layout";
-import { ProjectSettingLayout } from "@layouts/settings-layout";
-
-import { PageHead } from "@components/core";
-import { ProjectSettingHeader } from "@components/headers";
+import { useRouter } from "next/router"
+import { ReactElement, useState } from "react"
+import { PageHead } from "@components/core"
+import { ProjectSettingHeader } from "@components/headers"
 import {
     DeleteProjectModal,
     DeleteProjectSection,
     ProjectDetailsForm,
     ProjectDetailsFormLoader,
-} from "@components/project";
-
-import { NextPageWithLayout } from "@/types/types";
+} from "@components/project"
+import { useProject } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { ProjectSettingLayout } from "@layouts/settings-layout"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { NextPageWithLayout } from "@/types/types"
 
 const GeneralSettingsPage: NextPageWithLayout = observer(() => {
     // states
-    const [selectProject, setSelectedProject] = useState<string | null>(null);
+    const [selectProject, setSelectedProject] = useState<string | null>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { currentProjectDetails, fetchProjectDetails } = useProject();
+    const { currentProjectDetails, fetchProjectDetails } = useProject()
     // api call to fetch project details
     // TODO: removed this API if not necessary
     const { isLoading } = useSWR(
         workspaceSlug && projectId ? `PROJECT_DETAILS_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchProjectDetails(workspaceSlug.toString(), projectId.toString()) : null
-    );
+    )
     // derived values
-    const isAdmin = currentProjectDetails?.member_role === 20;
-    const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - General Settings` : undefined;
+    const isAdmin = currentProjectDetails?.member_role === 20
+    const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - General Settings` : undefined
     // const currentNetwork = NETWORK_CHOICES.find((n) => n.key === projectDetails?.network);
     // const selectedNetwork = NETWORK_CHOICES.find((n) => n.key === watch("network"));
 
@@ -70,15 +66,15 @@ const GeneralSettingsPage: NextPageWithLayout = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})
 
 GeneralSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<ProjectSettingHeader title="General Settings" />} withProjectWrapper>
             <ProjectSettingLayout>{page}</ProjectSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default GeneralSettingsPage;
+export default GeneralSettingsPage

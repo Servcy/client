@@ -1,6 +1,12 @@
-import { FC, useState } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC, useState } from "react"
+import { CreateUpdatePageModal, DeletePageModal } from "@components/pages"
+import { EUserProjectRoles } from "@constants/project"
+import { renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useMember, usePage, useUser } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-specific-pages"
 import {
     AlertCircle,
     Archive,
@@ -12,49 +18,40 @@ import {
     Pencil,
     Star,
     Trash2,
-} from "lucide-react";
-import { copyUrlToClipboard } from "@helpers/string.helper";
-import { renderFormattedTime, renderFormattedDate } from "@helpers/date-time.helper";
-
-import { CustomMenu, Tooltip } from "@servcy/ui";
-
-import { CreateUpdatePageModal, DeletePageModal } from "@components/pages";
-
-import { EUserProjectRoles } from "@constants/project";
-import { useRouter } from "next/router";
-import { useProjectPages } from "@hooks/store/use-project-specific-pages";
-import { useMember, usePage, useUser } from "@hooks/store";
-import { IIssueLabel } from "@servcy/types";
+} from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueLabel } from "@servcy/types"
+import { CustomMenu, Tooltip } from "@servcy/ui"
 
 export interface IPagesListItem {
-    pageId: string;
-    projectId: string;
+    pageId: string
+    projectId: string
 }
 
 export const PagesListItem: FC<IPagesListItem> = observer(({ pageId, projectId }: IPagesListItem) => {
-    const projectPageStore = useProjectPages();
+    const projectPageStore = useProjectPages()
     // Now, I am observing only the projectPages, out of the projectPageStore.
-    const { archivePage, restorePage } = projectPageStore;
+    const { archivePage, restorePage } = projectPageStore
 
-    const pageStore = usePage(pageId);
+    const pageStore = usePage(pageId)
 
     // states
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
-    const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false);
+    const router = useRouter()
+    const { workspaceSlug } = router.query
+    const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false)
 
-    const [deletePageModal, setDeletePageModal] = useState(false);
+    const [deletePageModal, setDeletePageModal] = useState(false)
 
     const {
         currentUser,
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
     const {
         project: { getProjectMemberDetails },
-    } = useMember();
+    } = useMember()
 
-    if (!pageStore) return null;
+    if (!pageStore) return null
 
     const {
         archived_at,
@@ -69,80 +66,80 @@ export const PagesListItem: FC<IPagesListItem> = observer(({ pageId, projectId }
         makePrivate,
         addToFavorites,
         removeFromFavorites,
-    } = pageStore;
+    } = pageStore
 
     const handleCopyUrl = async (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        await copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/pages/${pageId}`);
-    };
+        await copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/pages/${pageId}`)
+    }
 
     const handleAddToFavorites = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        addToFavorites();
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        addToFavorites()
+    }
 
     const handleRemoveFromFavorites = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        removeFromFavorites();
-    };
+        removeFromFavorites()
+    }
 
     const handleMakePublic = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        makePublic();
-    };
+        makePublic()
+    }
 
     const handleMakePrivate = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        makePrivate();
-    };
+        makePrivate()
+    }
 
     const handleArchivePage = async (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        await archivePage(workspaceSlug as string, projectId as string, pageId as string);
-    };
+        await archivePage(workspaceSlug as string, projectId as string, pageId as string)
+    }
 
     const handleRestorePage = async (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        await restorePage(workspaceSlug as string, projectId as string, pageId as string);
-    };
+        await restorePage(workspaceSlug as string, projectId as string, pageId as string)
+    }
 
     const handleDeletePage = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        setDeletePageModal(true);
-    };
+        setDeletePageModal(true)
+    }
 
     const handleEditPage = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
-        setCreateUpdatePageModal(true);
-    };
+        setCreateUpdatePageModal(true)
+    }
 
-    const ownerDetails = getProjectMemberDetails(owned_by);
-    const isCurrentUserOwner = owned_by === currentUser?.id;
+    const ownerDetails = getProjectMemberDetails(owned_by)
+    const isCurrentUserOwner = owned_by === currentUser?.id
 
     const userCanEdit =
         isCurrentUserOwner ||
-        (currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole));
-    const userCanChangeAccess = isCurrentUserOwner;
-    const userCanArchive = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN;
-    const userCanDelete = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN;
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+        (currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole))
+    const userCanChangeAccess = isCurrentUserOwner
+    const userCanArchive = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN
+    const userCanDelete = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
     return (
         <>
@@ -296,5 +293,5 @@ export const PagesListItem: FC<IPagesListItem> = observer(({ pageId, projectId }
                 </Link>
             </li>
         </>
-    );
-});
+    )
+})

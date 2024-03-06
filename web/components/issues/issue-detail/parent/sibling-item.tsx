@@ -1,27 +1,25 @@
-import { FC } from "react";
-import Link from "next/link";
-
-import { CustomMenu, LayersIcon } from "@servcy/ui";
-
-import { useIssueDetail, useProject } from "@hooks/store";
+import Link from "next/link"
+import { FC } from "react"
+import { useIssueDetail, useProject } from "@hooks/store"
+import { CustomMenu, LayersIcon } from "@servcy/ui"
 
 type TIssueParentSiblingItem = {
-    issueId: string;
-};
+    issueId: string
+}
 
 export const IssueParentSiblingItem: FC<TIssueParentSiblingItem> = (props) => {
-    const { issueId } = props;
+    const { issueId } = props
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     const {
         peekIssue,
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const issueDetail = (issueId && getIssueById(issueId)) || undefined;
-    if (!issueDetail) return <></>;
+    const issueDetail = (issueId && getIssueById(issueId)) || undefined
+    if (!issueDetail) return <></>
 
-    const projectDetails = (issueDetail.project_id && getProjectById(issueDetail.project_id)) || undefined;
+    const projectDetails = (issueDetail.project_id && getProjectById(issueDetail.project_id)) || undefined
 
     return (
         <>
@@ -35,5 +33,5 @@ export const IssueParentSiblingItem: FC<TIssueParentSiblingItem> = (props) => {
                 </Link>
             </CustomMenu.MenuItem>
         </>
-    );
-};
+    )
+}

@@ -1,2 +1,2 @@
-export * from "./inbox";
-export * from "./inbox-issue";
+export * from "./inbox"
+export * from "./inbox-issue"

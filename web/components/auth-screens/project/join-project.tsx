@@ -1,36 +1,33 @@
-import { useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/router";
-
-import { useProject, useUser } from "@hooks/store";
-
-import { Button } from "@servcy/ui";
-
-import { ClipboardList } from "lucide-react";
+import Image from "next/image"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { useProject, useUser } from "@hooks/store"
+import { ClipboardList } from "lucide-react"
 // images
-import JoinProjectImg from "public/auth/project-not-authorized.svg";
+import JoinProjectImg from "public/auth/project-not-authorized.svg"
+import { Button } from "@servcy/ui"
 
 export const JoinProject: React.FC = () => {
     // states
-    const [isJoiningProject, setIsJoiningProject] = useState(false);
+    const [isJoiningProject, setIsJoiningProject] = useState(false)
     // store hooks
     const {
         membership: { joinProject },
-    } = useUser();
-    const { fetchProjects } = useProject();
+    } = useUser()
+    const { fetchProjects } = useProject()
 
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     const handleJoin = () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        setIsJoiningProject(true);
+        setIsJoiningProject(true)
 
         joinProject(workspaceSlug.toString(), [projectId.toString()])
             .then(() => fetchProjects(workspaceSlug.toString()))
-            .finally(() => setIsJoiningProject(false));
-    };
+            .finally(() => setIsJoiningProject(false))
+    }
 
     return (
         <div className="flex h-full w-full flex-col items-center justify-center gap-y-5 bg-custom-background-100 text-center">
@@ -55,5 +52,5 @@ export const JoinProject: React.FC = () => {
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}

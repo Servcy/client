@@ -1,27 +1,25 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-import { Triangle } from "lucide-react";
+import { FC } from "react"
+import { useEstimate, useIssueDetail } from "@hooks/store"
+import { Triangle } from "lucide-react"
+import { observer } from "mobx-react"
+import { IssueActivityBlockComponent, IssueLink } from "./"
 
-import { useEstimate, useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent, IssueLink } from "./";
-
-type TIssueEstimateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
+type TIssueEstimateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }
 
 export const IssueEstimateActivity: FC<TIssueEstimateActivity> = observer((props) => {
-    const { activityId, showIssue = true, ends } = props;
+    const { activityId, showIssue = true, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
-    const { areEstimatesEnabledForCurrentProject, getEstimatePointValue } = useEstimate();
+    } = useIssueDetail()
+    const { areEstimatesEnabledForCurrentProject, getEstimatePointValue } = useEstimate()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
 
-    const estimateValue = getEstimatePointValue(Number(activity.new_value), null);
-    const currentPoint = Number(activity.new_value) + 1;
+    const estimateValue = getEstimatePointValue(Number(activity.new_value), null)
+    const currentPoint = Number(activity.new_value) + 1
 
     return (
         <IssueActivityBlockComponent
@@ -44,5 +42,5 @@ export const IssueEstimateActivity: FC<TIssueEstimateActivity> = observer((props
                 {showIssue && <IssueLink activityId={activityId} />}.
             </>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

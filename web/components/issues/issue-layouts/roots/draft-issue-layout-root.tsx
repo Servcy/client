@@ -1,48 +1,44 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-
-import { useIssues } from "@hooks/store";
-
-import { DraftIssueAppliedFiltersRoot } from "../filters/applied-filters/roots/draft-issue";
-import { DraftIssueListLayout } from "../list/roots/draft-issue-root";
-import { ProjectDraftEmptyState } from "../empty-states";
-import { IssuePeekOverview } from "@components/issues/peek-overview";
-import { ActiveLoader } from "@components/ui";
-
-import { DraftKanBanLayout } from "../kanban/roots/draft-issue-root";
-
-import { EIssuesStoreType } from "@constants/issue";
+import { useRouter } from "next/router"
+import React from "react"
+import { IssuePeekOverview } from "@components/issues/peek-overview"
+import { ActiveLoader } from "@components/ui"
+import { EIssuesStoreType } from "@constants/issue"
+import { useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { ProjectDraftEmptyState } from "../empty-states"
+import { DraftIssueAppliedFiltersRoot } from "../filters/applied-filters/roots/draft-issue"
+import { DraftKanBanLayout } from "../kanban/roots/draft-issue-root"
+import { DraftIssueListLayout } from "../list/roots/draft-issue-root"
 
 export const DraftIssueLayoutRoot: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT);
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT)
 
     useSWR(
         workspaceSlug && projectId ? `DRAFT_ISSUES_${workspaceSlug.toString()}_${projectId.toString()}` : null,
         async () => {
             if (workspaceSlug && projectId) {
-                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString());
+                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString())
                 await issues?.fetchIssues(
                     workspaceSlug.toString(),
                     projectId.toString(),
                     issues?.groupedIssueIds ? "mutation" : "init-loader"
-                );
+                )
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
 
-    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout || undefined;
+    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout || undefined
 
-    if (!workspaceSlug || !projectId) return <></>;
+    if (!workspaceSlug || !projectId) return <></>
 
     if (issues?.loader === "init-loader" || !issues?.groupedIssueIds) {
-        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>;
+        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>
     }
 
     return (
@@ -65,5 +61,5 @@ export const DraftIssueLayoutRoot: React.FC = observer(() => {
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

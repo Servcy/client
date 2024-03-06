@@ -1,37 +1,35 @@
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import { APIService } from "@services/api.service";
-
-import { IPage, IPageBlock, TIssue } from "@servcy/types";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { IPage, IPageBlock, TIssue } from "@servcy/types"
 
 export class PageService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async createPage(workspaceSlug: string, projectId: string, data: Partial<IPage>): Promise<IPage> {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async patchPage(workspaceSlug: string, projectId: string, pageId: string, data: Partial<IPage>): Promise<IPage> {
         return this.patch(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                console.error("error", error?.response?.data);
-                throw error?.response?.data;
-            });
+                console.error("error", error?.response?.data)
+                throw error?.response?.data
+            })
     }
 
     async deletePage(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
         return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async addPageToFavorites(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
@@ -40,24 +38,24 @@ export class PageService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async removePageFromFavorites(workspaceSlug: string, projectId: string, pageId: string) {
         return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/user-favorite-pages/${pageId}`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getProjectPages(workspaceSlug: string, projectId: string): Promise<IPage[]> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getPagesWithParams(
@@ -72,16 +70,16 @@ export class PageService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getPageDetails(workspaceSlug: string, projectId: string, pageId: string): Promise<IPage> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async createPageBlock(
@@ -93,8 +91,8 @@ export class PageService extends APIService {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getPageBlock(
@@ -108,8 +106,8 @@ export class PageService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async patchPageBlock(
@@ -125,8 +123,8 @@ export class PageService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async deletePageBlock(workspaceSlug: string, projectId: string, pageId: string, pageBlockId: string): Promise<any> {
@@ -135,16 +133,16 @@ export class PageService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async listPageBlocks(workspaceSlug: string, projectId: string, pageId: string): Promise<IPageBlock[]> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async convertPageBlockToIssue(
@@ -158,8 +156,8 @@ export class PageService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     // =============== Archiving & Unarchiving Pages =================
@@ -167,39 +165,39 @@ export class PageService extends APIService {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/archive/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async restorePage(workspaceSlug: string, projectId: string, pageId: string): Promise<void> {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/unarchive/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getArchivedPages(workspaceSlug: string, projectId: string): Promise<IPage[]> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/archived-pages/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error;
-            });
+                throw error
+            })
     }
     // ==================== Pages Locking Services ==========================
     async lockPage(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/lock/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async unlockPage(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/unlock/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

@@ -1,42 +1,42 @@
-import { NextPageWithLayout } from "@/types/types";
-import { CustomThemeSelector, PageHead, ThemeSwitch } from "@components/core";
-import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes";
-import { useUser } from "@hooks/store";
-import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
-import { Spinner } from "@servcy/ui";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-import { ReactElement, useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { ReactElement, useEffect, useState } from "react"
+import { CustomThemeSelector, PageHead, ThemeSwitch } from "@components/core"
+import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
+import { useUser } from "@hooks/store"
+import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
+import { Spinner } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
     // states
-    const [currentTheme, setCurrentTheme] = useState<I_THEME_OPTION | null>(null);
+    const [currentTheme, setCurrentTheme] = useState<I_THEME_OPTION | null>(null)
     // store hooks
-    const { currentUser, updateCurrentUserTheme } = useUser();
+    const { currentUser, updateCurrentUserTheme } = useUser()
     // computed
-    const userTheme = currentUser?.theme;
+    const userTheme = currentUser?.theme
 
-    const { setTheme } = useTheme();
+    const { setTheme } = useTheme()
 
     useEffect(() => {
         if (userTheme) {
-            const userThemeOption = THEME_OPTIONS.find((t) => t.value === userTheme?.theme);
+            const userThemeOption = THEME_OPTIONS.find((t) => t.value === userTheme?.theme)
             if (userThemeOption) {
-                setCurrentTheme(userThemeOption);
+                setCurrentTheme(userThemeOption)
             }
         }
-    }, [userTheme]);
+    }, [userTheme])
 
     const handleThemeChange = (themeOption: I_THEME_OPTION) => {
-        setTheme(themeOption.value);
+        setTheme(themeOption.value)
         updateCurrentUserTheme(themeOption.value).catch(() => {
             toast.error({
                 title: "Failed to Update the theme",
                 type: "error",
-            });
-        });
-    };
+            })
+        })
+    }
 
     return (
         <>
@@ -65,11 +65,11 @@ const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})
 
 ProfilePreferencesThemePage.getWrapper = function getWrapper(page: ReactElement) {
-    return <ProfilePreferenceSettingsLayout>{page}</ProfilePreferenceSettingsLayout>;
-};
+    return <ProfilePreferenceSettingsLayout>{page}</ProfilePreferenceSettingsLayout>
+}
 
-export default ProfilePreferencesThemePage;
+export default ProfilePreferencesThemePage

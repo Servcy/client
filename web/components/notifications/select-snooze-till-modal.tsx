@@ -1,44 +1,41 @@
-import { Fragment, FC } from "react";
-import { useRouter } from "next/router";
-import { useForm, Controller } from "react-hook-form";
-import { DateDropdown } from "@components/dropdowns";
-import { Transition, Dialog } from "@headlessui/react";
-import { X } from "lucide-react";
-
-import { allTimeIn30MinutesInterval12HoursFormat } from "@constants/notification";
-import toast from "react-hot-toast";
-
-import { Button, CustomSelect } from "@servcy/ui";
-
-import type { IUserNotification } from "@servcy/types";
+import { useRouter } from "next/router"
+import { FC, Fragment } from "react"
+import { DateDropdown } from "@components/dropdowns"
+import { allTimeIn30MinutesInterval12HoursFormat } from "@constants/notification"
+import { Dialog, Transition } from "@headlessui/react"
+import { X } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import type { IUserNotification } from "@servcy/types"
+import { Button, CustomSelect } from "@servcy/ui"
 
 type SnoozeModalProps = {
-    isOpen: boolean;
-    onClose: () => void;
-    onSuccess: () => void;
-    notification: IUserNotification | null;
-    onSubmit: (notificationId: string, dateTime?: Date | undefined) => Promise<void>;
-};
+    isOpen: boolean
+    onClose: () => void
+    onSuccess: () => void
+    notification: IUserNotification | null
+    onSubmit: (notificationId: string, dateTime?: Date | undefined) => Promise<void>
+}
 
 type FormValues = {
-    time: string | null;
-    date: Date | null;
-    period: "AM" | "PM";
-};
+    time: string | null
+    date: Date | null
+    period: "AM" | "PM"
+}
 
 const defaultValues: FormValues = {
     time: null,
     date: null,
     period: "AM",
-};
+}
 
-const timeStamps = allTimeIn30MinutesInterval12HoursFormat;
+const timeStamps = allTimeIn30MinutesInterval12HoursFormat
 
 export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
-    const { isOpen, onClose, notification, onSuccess, onSubmit: handleSubmitSnooze } = props;
+    const { isOpen, onClose, notification, onSuccess, onSubmit: handleSubmitSnooze } = props
 
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const {
         formState: { isSubmitting },
@@ -49,74 +46,74 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
         setValue,
     } = useForm({
         defaultValues,
-    });
+    })
 
     const getTimeStamp = () => {
-        const today = new Date();
-        const formDataDate = watch("date");
+        const today = new Date()
+        const formDataDate = watch("date")
 
-        if (!formDataDate) return timeStamps;
+        if (!formDataDate) return timeStamps
 
-        const isToday = today.toDateString() === new Date(formDataDate).toDateString();
+        const isToday = today.toDateString() === new Date(formDataDate).toDateString()
 
-        if (!isToday) return timeStamps;
+        if (!isToday) return timeStamps
 
-        const hours = today.getHours();
-        const minutes = today.getMinutes();
+        const hours = today.getHours()
+        const minutes = today.getMinutes()
 
         return timeStamps.filter((optionTime) => {
-            let optionHours = parseInt(optionTime.value.split(":")[0]);
-            const optionMinutes = parseInt(optionTime.value.split(":")[1]);
+            let optionHours = parseInt(optionTime.value.split(":")[0])
+            const optionMinutes = parseInt(optionTime.value.split(":")[1])
 
-            const period = watch("period");
+            const period = watch("period")
 
-            if (period === "PM" && optionHours !== 12) optionHours += 12;
+            if (period === "PM" && optionHours !== 12) optionHours += 12
 
-            if (optionHours < hours) return false;
-            if (optionHours === hours && optionMinutes < minutes) return false;
+            if (optionHours < hours) return false
+            if (optionHours === hours && optionMinutes < minutes) return false
 
-            return true;
-        });
-    };
+            return true
+        })
+    }
 
     const onSubmit = async (formData: FormValues) => {
-        if (!workspaceSlug || !notification || !formData.date || !formData.time) return;
+        if (!workspaceSlug || !notification || !formData.date || !formData.time) return
 
-        const period = formData.period;
+        const period = formData.period
 
-        const time = formData.time.split(":");
+        const time = formData.time.split(":")
         const hours = parseInt(
             `${period === "AM" ? time[0] : parseInt(time[0]) + 12 === 24 ? "00" : parseInt(time[0]) + 12}`
-        );
-        const minutes = parseInt(time[1]);
+        )
+        const minutes = parseInt(time[1])
 
-        const dateTime = new Date(formData.date);
-        dateTime.setHours(hours);
-        dateTime.setMinutes(minutes);
+        const dateTime = new Date(formData.date)
+        dateTime.setHours(hours)
+        dateTime.setMinutes(minutes)
 
         await handleSubmitSnooze(notification.id, dateTime).then(() => {
-            handleClose();
-            onSuccess();
+            handleClose()
+            onSuccess()
             toast.error({
                 title: "Notification snoozed",
                 message: "Notification snoozed successfully",
                 type: "success",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleClose = () => {
         // This is a workaround to fix the issue of the Notification popover modal close on closing this modal
         const closeTimeout = setTimeout(() => {
-            onClose();
-            clearTimeout(closeTimeout);
-        }, 50);
+            onClose()
+            clearTimeout(closeTimeout)
+        }, 50)
 
         const timeout = setTimeout(() => {
-            reset({ ...defaultValues });
-            clearTimeout(timeout);
-        }, 500);
-    };
+            reset({ ...defaultValues })
+            clearTimeout(timeout)
+        }, 500)
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -175,8 +172,8 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
                                                         value={value}
                                                         placeholder="Select date"
                                                         onChange={(val) => {
-                                                            setValue("time", null);
-                                                            onChange(val);
+                                                            setValue("time", null)
+                                                            onChange(val)
                                                         }}
                                                         minDate={new Date()}
                                                         buttonVariant="border-with-text"
@@ -218,7 +215,7 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
                                                         <div className="mb-2 flex h-9 w-full overflow-hidden rounded">
                                                             <div
                                                                 onClick={() => {
-                                                                    setValue("period", "AM");
+                                                                    setValue("period", "AM")
                                                                 }}
                                                                 className={`flex h-full w-1/2 cursor-pointer items-center justify-center text-center ${
                                                                     watch("period") === "AM"
@@ -230,7 +227,7 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
                                                             </div>
                                                             <div
                                                                 onClick={() => {
-                                                                    setValue("period", "PM");
+                                                                    setValue("period", "PM")
                                                                 }}
                                                                 className={`flex h-full w-1/2 cursor-pointer items-center justify-center text-center ${
                                                                     watch("period") === "PM"
@@ -282,5 +279,5 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

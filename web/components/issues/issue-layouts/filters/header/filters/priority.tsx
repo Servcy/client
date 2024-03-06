@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { PriorityIcon } from "@servcy/ui";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { ISSUE_PRIORITIES } from "@constants/issue";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { ISSUE_PRIORITIES } from "@constants/issue"
+import { observer } from "mobx-react-lite"
+import { PriorityIcon } from "@servcy/ui"
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string) => void;
-    searchQuery: string;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string) => void
+    searchQuery: string
+}
 
 export const FilterPriority: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, searchQuery } = props;
+    const { appliedFilters, handleUpdate, searchQuery } = props
 
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const appliedFiltersCount = appliedFilters?.length ?? 0
 
-    const filteredOptions = ISSUE_PRIORITIES.filter((p) => p.key.includes(searchQuery.toLowerCase()));
+    const filteredOptions = ISSUE_PRIORITIES.filter((p) => p.key.includes(searchQuery.toLowerCase()))
 
     return (
         <>
@@ -47,5 +44,5 @@ export const FilterPriority: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

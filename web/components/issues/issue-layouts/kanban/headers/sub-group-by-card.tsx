@@ -1,16 +1,16 @@
-import React from "react";
-import { Circle, ChevronDown, ChevronUp } from "lucide-react";
+import React from "react"
+import { ChevronDown, ChevronUp, Circle } from "lucide-react"
 // mobx
-import { observer } from "mobx-react-lite";
-import { TIssueKanbanFilters } from "@servcy/types";
+import { observer } from "mobx-react-lite"
+import { TIssueKanbanFilters } from "@servcy/types"
 
 interface IHeaderSubGroupByCard {
-    icon?: React.ReactNode;
-    title: string;
-    count: number;
-    column_id: string;
-    kanbanFilters: TIssueKanbanFilters;
-    handleKanbanFilters: (toggle: "group_by" | "sub_group_by", value: string) => void;
+    icon?: React.ReactNode
+    title: string
+    count: number
+    column_id: string
+    kanbanFilters: TIssueKanbanFilters
+    handleKanbanFilters: (toggle: "group_by" | "sub_group_by", value: string) => void
 }
 
 export const HeaderSubGroupByCard = observer(
@@ -37,4 +37,4 @@ export const HeaderSubGroupByCard = observer(
             </div>
         </div>
     )
-);
+)

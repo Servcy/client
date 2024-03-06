@@ -1,80 +1,78 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useIssueDetail } from "@hooks/store";
-
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react-lite"
 import {
-    IssueDefaultActivity,
-    IssueNameActivity,
-    IssueDescriptionActivity,
-    IssueStateActivity,
+    IssueArchivedAtActivity,
     IssueAssigneeActivity,
-    IssuePriorityActivity,
-    IssueEstimateActivity,
-    IssueParentActivity,
-    IssueRelationActivity,
-    IssueStartDateActivity,
-    IssueTargetDateActivity,
+    IssueAttachmentActivity,
     IssueCycleActivity,
-    IssueModuleActivity,
+    IssueDefaultActivity,
+    IssueDescriptionActivity,
+    IssueEstimateActivity,
     IssueLabelActivity,
     IssueLinkActivity,
-    IssueAttachmentActivity,
-    IssueArchivedAtActivity,
-} from "./actions";
+    IssueModuleActivity,
+    IssueNameActivity,
+    IssueParentActivity,
+    IssuePriorityActivity,
+    IssueRelationActivity,
+    IssueStartDateActivity,
+    IssueStateActivity,
+    IssueTargetDateActivity,
+} from "./actions"
 
 type TIssueActivityList = {
-    activityId: string;
-    ends: "top" | "bottom" | undefined;
-};
+    activityId: string
+    ends: "top" | "bottom" | undefined
+}
 
 export const IssueActivityList: FC<TIssueActivityList> = observer((props) => {
-    const { activityId, ends } = props;
+    const { activityId, ends } = props
 
     const {
         activity: { getActivityById },
         comment: {},
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const componentDefaultProps = { activityId, ends };
+    const componentDefaultProps = { activityId, ends }
 
-    const activityField = getActivityById(activityId)?.field;
+    const activityField = getActivityById(activityId)?.field
     switch (activityField) {
         case null: // default issue creation
-            return <IssueDefaultActivity {...componentDefaultProps} />;
+            return <IssueDefaultActivity {...componentDefaultProps} />
         case "state":
-            return <IssueStateActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueStateActivity {...componentDefaultProps} showIssue={false} />
         case "name":
-            return <IssueNameActivity {...componentDefaultProps} />;
+            return <IssueNameActivity {...componentDefaultProps} />
         case "description":
-            return <IssueDescriptionActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueDescriptionActivity {...componentDefaultProps} showIssue={false} />
         case "assignees":
-            return <IssueAssigneeActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueAssigneeActivity {...componentDefaultProps} showIssue={false} />
         case "priority":
-            return <IssuePriorityActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssuePriorityActivity {...componentDefaultProps} showIssue={false} />
         case "estimate_point":
-            return <IssueEstimateActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueEstimateActivity {...componentDefaultProps} showIssue={false} />
         case "parent":
-            return <IssueParentActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueParentActivity {...componentDefaultProps} showIssue={false} />
         case ["blocking", "blocked_by", "duplicate", "relates_to"].find((field) => field === activityField):
-            return <IssueRelationActivity {...componentDefaultProps} />;
+            return <IssueRelationActivity {...componentDefaultProps} />
         case "start_date":
-            return <IssueStartDateActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueStartDateActivity {...componentDefaultProps} showIssue={false} />
         case "target_date":
-            return <IssueTargetDateActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueTargetDateActivity {...componentDefaultProps} showIssue={false} />
         case "cycles":
-            return <IssueCycleActivity {...componentDefaultProps} />;
+            return <IssueCycleActivity {...componentDefaultProps} />
         case "modules":
-            return <IssueModuleActivity {...componentDefaultProps} />;
+            return <IssueModuleActivity {...componentDefaultProps} />
         case "labels":
-            return <IssueLabelActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueLabelActivity {...componentDefaultProps} showIssue={false} />
         case "link":
-            return <IssueLinkActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueLinkActivity {...componentDefaultProps} showIssue={false} />
         case "attachment":
-            return <IssueAttachmentActivity {...componentDefaultProps} showIssue={false} />;
+            return <IssueAttachmentActivity {...componentDefaultProps} showIssue={false} />
         case "archived_at":
-            return <IssueArchivedAtActivity {...componentDefaultProps} />;
+            return <IssueArchivedAtActivity {...componentDefaultProps} />
         default:
-            return <></>;
+            return <></>
     }
-});
+})

@@ -1,23 +1,20 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { Controller, useForm } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { checkDuplicates } from "@helpers/array.helper"
 // store hooks
-import { useEstimate } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, Input, TextArea } from "@servcy/ui";
-
-import { checkDuplicates } from "@helpers/array.helper";
-
-import { IEstimate, IEstimateFormData } from "@servcy/types";
+import { useEstimate } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IEstimate, IEstimateFormData } from "@servcy/types"
+import { Button, Input, TextArea } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    handleClose: () => void;
-    data?: IEstimate;
-};
+    isOpen: boolean
+    handleClose: () => void
+    data?: IEstimate
+}
 
 const defaultValues = {
     name: "",
@@ -28,17 +25,17 @@ const defaultValues = {
     value4: "",
     value5: "",
     value6: "",
-};
+}
 
-type FormValues = typeof defaultValues;
+type FormValues = typeof defaultValues
 
 export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
-    const { handleClose, data, isOpen } = props;
+    const { handleClose, data, isOpen } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { createEstimate, updateEstimate } = useEstimate();
+    const { createEstimate, updateEstimate } = useEstimate()
     // form info
 
     const {
@@ -48,23 +45,23 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
         reset,
     } = useForm<FormValues>({
         defaultValues,
-    });
+    })
 
     const onClose = () => {
-        handleClose();
-        reset();
-    };
+        handleClose()
+        reset()
+    }
 
     const handleCreateEstimate = async (payload: IEstimateFormData) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
         await createEstimate(workspaceSlug.toString(), projectId.toString(), payload)
             .then(() => {
-                onClose();
+                onClose()
             })
             .catch((err) => {
-                const error = err?.error;
-                const errorString = Array.isArray(error) ? error[0] : error;
+                const error = err?.error
+                const errorString = Array.isArray(error) ? error[0] : error
 
                 toast.error({
                     type: "error",
@@ -73,28 +70,28 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                         errorString ?? err.status === 400
                             ? "Estimate with that name already exists. Please try again with another name."
                             : "Estimate could not be created. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleUpdateEstimate = async (payload: IEstimateFormData) => {
-        if (!workspaceSlug || !projectId || !data) return;
+        if (!workspaceSlug || !projectId || !data) return
 
         await updateEstimate(workspaceSlug.toString(), projectId.toString(), data.id, payload)
             .then(() => {
-                onClose();
+                onClose()
             })
             .catch((err) => {
-                const error = err?.error;
-                const errorString = Array.isArray(error) ? error[0] : error;
+                const error = err?.error
+                const errorString = Array.isArray(error) ? error[0] : error
 
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: errorString ?? "Estimate could not be updated. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const onSubmit = async (formData: FormValues) => {
         if (!formData.name || formData.name === "") {
@@ -102,8 +99,8 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 type: "error",
                 title: "Error!",
                 message: "Estimate title cannot be empty.",
-            });
-            return;
+            })
+            return
         }
 
         if (
@@ -118,8 +115,8 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 type: "error",
                 title: "Error!",
                 message: "Estimate point cannot be empty.",
-            });
-            return;
+            })
+            return
         }
 
         if (
@@ -134,8 +131,8 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 type: "error",
                 title: "Error!",
                 message: "Estimate point cannot have more than 20 characters.",
-            });
-            return;
+            })
+            return
         }
 
         if (
@@ -152,8 +149,8 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 type: "error",
                 title: "Error!",
                 message: "Estimate points cannot have duplicate values.",
-            });
-            return;
+            })
+            return
         }
 
         const payload: IEstimateFormData = {
@@ -162,25 +159,25 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 description: formData.description,
             },
             estimate_points: [],
-        };
+        }
 
         for (let i = 0; i < 6; i++) {
             const point = {
                 key: i,
                 value: formData[`value${i + 1}` as keyof FormValues],
-            };
+            }
 
             if (data)
                 payload.estimate_points.push({
                     id: data.points[i].id,
                     ...point,
-                });
-            else payload.estimate_points.push({ ...point });
+                })
+            else payload.estimate_points.push({ ...point })
         }
 
-        if (data) await handleUpdateEstimate(payload);
-        else await handleCreateEstimate(payload);
-    };
+        if (data) await handleUpdateEstimate(payload)
+        else await handleCreateEstimate(payload)
+    }
 
     useEffect(() => {
         if (data)
@@ -193,9 +190,9 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 value4: data.points[3]?.value,
                 value5: data.points[4]?.value,
                 value6: data.points[5]?.value,
-            });
-        else reset({ ...defaultValues });
-    }, [data, reset]);
+            })
+        else reset({ ...defaultValues })
+    }, [data, reset])
 
     return (
         <>
@@ -337,5 +334,5 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 </Dialog>
             </Transition.Root>
         </>
-    );
-});
+    )
+})

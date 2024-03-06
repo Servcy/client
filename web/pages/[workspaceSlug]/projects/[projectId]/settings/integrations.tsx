@@ -1,58 +1,51 @@
-import { observer } from "mobx-react";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
-import useSWR from "swr";
+import { useRouter } from "next/router"
+import { ReactElement } from "react"
+import { PageHead } from "@components/core"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { ProjectSettingHeader } from "@components/headers"
+import { IntegrationCard } from "@components/project"
+import { IntegrationsSettingsLoader } from "@components/ui"
+import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { PROJECT_DETAILS, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
+import { useUser } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { ProjectSettingLayout } from "@layouts/settings-layout"
+import { IntegrationService } from "@services/integrations"
+import { ProjectService } from "@services/project"
+import { observer } from "mobx-react"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+import { IProject } from "@servcy/types"
+import { NextPageWithLayout } from "@/types/types"
 
-import { useUser } from "@hooks/store";
-
-import { AppLayout } from "@layouts/app-layout";
-import { ProjectSettingLayout } from "@layouts/settings-layout";
-
-import { IntegrationService } from "@services/integrations";
-import { ProjectService } from "@services/project";
-
-import { PageHead } from "@components/core";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-import { ProjectSettingHeader } from "@components/headers";
-import { IntegrationCard } from "@components/project";
-
-import { IntegrationsSettingsLoader } from "@components/ui";
-
-import { NextPageWithLayout } from "@/types/types";
-import { IProject } from "@servcy/types";
-
-import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-import { PROJECT_DETAILS, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";
-
-const integrationService = new IntegrationService();
-const projectService = new ProjectService();
+const integrationService = new IntegrationService()
+const projectService = new ProjectService()
 
 const ProjectIntegrationsPage: NextPageWithLayout = observer(() => {
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
     // fetch project details
     const { data: projectDetails } = useSWR<IProject>(
         workspaceSlug && projectId ? PROJECT_DETAILS(projectId as string) : null,
         workspaceSlug && projectId
             ? () => projectService.getProject(workspaceSlug as string, projectId as string)
             : null
-    );
+    )
     // fetch Integrations list
     const { data: workspaceIntegrations } = useSWR(
         workspaceSlug ? WORKSPACE_INTEGRATIONS(workspaceSlug as string) : null,
         () => (workspaceSlug ? integrationService.getWorkspaceIntegrationsList(workspaceSlug as string) : null)
-    );
+    )
     // derived values
-    const emptyStateDetail = PROJECT_SETTINGS_EMPTY_STATE_DETAILS["integrations"];
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("project-settings", "integrations", isLightMode);
-    const isAdmin = projectDetails?.member_role === 20;
-    const pageTitle = projectDetails?.name ? `${projectDetails?.name} - Integrations` : undefined;
+    const emptyStateDetail = PROJECT_SETTINGS_EMPTY_STATE_DETAILS["integrations"]
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("project-settings", "integrations", isLightMode)
+    const isAdmin = projectDetails?.member_role === 20
+    const pageTitle = projectDetails?.name ? `${projectDetails?.name} - Integrations` : undefined
 
     return (
         <>
@@ -88,15 +81,15 @@ const ProjectIntegrationsPage: NextPageWithLayout = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})
 
 ProjectIntegrationsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout withProjectWrapper header={<ProjectSettingHeader title="Integrations Settings" />}>
             <ProjectSettingLayout>{page}</ProjectSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default ProjectIntegrationsPage;
+export default ProjectIntegrationsPage

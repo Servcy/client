@@ -1,51 +1,46 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useProjectState } from "@hooks/store";
-
-import { Tooltip, StateGroupIcon } from "@servcy/ui";
-
-import { Pencil, X, ArrowDown, ArrowUp } from "lucide-react";
-
-import { addSpaceIfCamelCase } from "@helpers/string.helper";
-
-import { IState } from "@servcy/types";
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { addSpaceIfCamelCase } from "@helpers/string.helper"
+import { useEventTracker, useProjectState } from "@hooks/store"
+import { ArrowDown, ArrowUp, Pencil, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IState } from "@servcy/types"
+import { StateGroupIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
-    index: number;
-    state: IState;
-    statesList: IState[];
-    handleEditState: () => void;
-    handleDeleteState: () => void;
-};
+    index: number
+    state: IState
+    statesList: IState[]
+    handleEditState: () => void
+    handleDeleteState: () => void
+}
 
 export const StatesListItem: React.FC<Props> = observer((props) => {
-    const { index, state, statesList, handleEditState, handleDeleteState } = props;
+    const { index, state, statesList, handleEditState, handleDeleteState } = props
     // states
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { setTrackElement } = useEventTracker();
-    const { markStateAsDefault, moveStatePosition } = useProjectState();
+    const { setTrackElement } = useEventTracker()
+    const { markStateAsDefault, moveStatePosition } = useProjectState()
     // derived values
-    const groupStates = statesList.filter((s) => s.group === state.group);
-    const groupLength = groupStates.length;
+    const groupStates = statesList.filter((s) => s.group === state.group)
+    const groupLength = groupStates.length
 
     const handleMakeDefault = () => {
-        if (!workspaceSlug || !projectId) return;
-        setIsSubmitting(true);
+        if (!workspaceSlug || !projectId) return
+        setIsSubmitting(true)
         markStateAsDefault(workspaceSlug.toString(), projectId.toString(), state.id).finally(() => {
-            setIsSubmitting(false);
-        });
-    };
+            setIsSubmitting(false)
+        })
+    }
 
     const handleMove = (state: IState, direction: "up" | "down") => {
-        if (!workspaceSlug || !projectId) return;
-        moveStatePosition(workspaceSlug.toString(), projectId.toString(), state.id, direction, index);
-    };
+        if (!workspaceSlug || !projectId) return
+        moveStatePosition(workspaceSlug.toString(), projectId.toString(), state.id, direction, index)
+    }
 
     return (
         <div className="group flex items-center justify-between gap-2 rounded border-[0.5px] border-custom-border-200 bg-custom-background-100 px-4 py-3">
@@ -103,8 +98,8 @@ export const StatesListItem: React.FC<Props> = observer((props) => {
                             state.default || groupLength === 1 ? "cursor-not-allowed" : ""
                         } grid place-items-center`}
                         onClick={() => {
-                            setTrackElement("PROJECT_SETTINGS_STATE_PAGE");
-                            handleDeleteState();
+                            setTrackElement("PROJECT_SETTINGS_STATE_PAGE")
+                            handleDeleteState()
                         }}
                         disabled={state.default || groupLength === 1}
                     >
@@ -129,5 +124,5 @@ export const StatesListItem: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

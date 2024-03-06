@@ -1,18 +1,14 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-
-import { useGanttChart } from "@components/gantt-chart/hooks/use-gantt-chart";
-
-import { cn } from "@helpers/common.helper";
-
-import { IMonthBlock } from "../../views";
-
-import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "@components/gantt-chart/constants";
+import { FC } from "react"
+import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "@components/gantt-chart/constants"
+import { useGanttChart } from "@components/gantt-chart/hooks/use-gantt-chart"
+import { cn } from "@helpers/common.helper"
+import { observer } from "mobx-react"
+import { IMonthBlock } from "../../views"
 
 export const MonthChartView: FC<any> = observer(() => {
     // chart hook
-    const { currentViewData, renderView } = useGanttChart();
-    const monthBlocks: IMonthBlock[] = renderView;
+    const { currentViewData, renderView } = useGanttChart()
+    const monthBlocks: IMonthBlock[] = renderView
 
     return (
         <div className="absolute top-0 left-0 min-h-full h-max w-max flex divide-x divide-custom-border-100/50">
@@ -71,5 +67,5 @@ export const MonthChartView: FC<any> = observer(() => {
                 </div>
             ))}
         </div>
-    );
-});
+    )
+})

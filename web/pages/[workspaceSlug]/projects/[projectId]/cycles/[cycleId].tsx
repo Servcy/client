@@ -1,50 +1,44 @@
-import { observer } from "mobx-react";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
-import useSWR from "swr";
-
-import { useCycle, useProject } from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { PageHead } from "@components/core";
-import { CycleDetailsSidebar } from "@components/cycles";
-import { CycleIssuesHeader } from "@components/headers";
-import { CycleLayoutRoot } from "@components/issues/issue-layouts";
-
-import { EmptyState } from "@components/common";
-
-import emptyCycle from "public/empty-state/cycle.svg";
-
-import { NextPageWithLayout } from "@/types/types";
+import { useRouter } from "next/router"
+import { ReactElement } from "react"
+import { EmptyState } from "@components/common"
+import { PageHead } from "@components/core"
+import { CycleDetailsSidebar } from "@components/cycles"
+import { CycleIssuesHeader } from "@components/headers"
+import { CycleLayoutRoot } from "@components/issues/issue-layouts"
+import { useCycle, useProject } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { AppLayout } from "@layouts/app-layout"
+import { observer } from "mobx-react"
+import emptyCycle from "public/empty-state/cycle.svg"
+import useSWR from "swr"
+import { NextPageWithLayout } from "@/types/types"
 
 const CycleDetailPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, cycleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, cycleId } = router.query
     // store hooks
-    const { fetchCycleDetails, getCycleById } = useCycle();
-    const { getProjectById } = useProject();
+    const { fetchCycleDetails, getCycleById } = useCycle()
+    const { getProjectById } = useProject()
 
-    const { setValue, storedValue } = useLocalStorage("cycle_sidebar_collapsed", "false");
+    const { setValue, storedValue } = useLocalStorage("cycle_sidebar_collapsed", "false")
     // fetching cycle details
     const { error } = useSWR(
         workspaceSlug && projectId && cycleId ? `CYCLE_DETAILS_${cycleId.toString()}` : null,
         workspaceSlug && projectId && cycleId
             ? () => fetchCycleDetails(workspaceSlug.toString(), projectId.toString(), cycleId.toString())
             : null
-    );
+    )
     // derived values
-    const isSidebarCollapsed = storedValue ? (storedValue === "true" ? true : false) : false;
-    const cycle = cycleId ? getCycleById(cycleId.toString()) : undefined;
-    const project = projectId ? getProjectById(projectId.toString()) : undefined;
-    const pageTitle = project?.name && cycle?.name ? `${project?.name} - ${cycle?.name}` : undefined;
+    const isSidebarCollapsed = storedValue ? (storedValue === "true" ? true : false) : false
+    const cycle = cycleId ? getCycleById(cycleId.toString()) : undefined
+    const project = projectId ? getProjectById(projectId.toString()) : undefined
+    const pageTitle = project?.name && cycle?.name ? `${project?.name} - ${cycle?.name}` : undefined
 
     /**
      * Toggles the sidebar
      */
-    const toggleSidebar = () => setValue(`${!isSidebarCollapsed}`);
+    const toggleSidebar = () => setValue(`${!isSidebarCollapsed}`)
 
     return (
         <>
@@ -80,15 +74,15 @@ const CycleDetailPage: NextPageWithLayout = observer(() => {
                 </>
             )}
         </>
-    );
-});
+    )
+})
 
 CycleDetailPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<CycleIssuesHeader />} withProjectWrapper>
             {page}
         </AppLayout>
-    );
-};
+    )
+}
 
-export default CycleDetailPage;
+export default CycleDetailPage

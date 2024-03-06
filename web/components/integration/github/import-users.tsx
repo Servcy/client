@@ -1,21 +1,18 @@
-import { FC } from "react";
-
+import { FC } from "react"
+import { IUserDetails, SingleUserSelect, TFormValues, TIntegrationSteps } from "@components/integration"
 // react-hook-form
-import { UseFormWatch } from "react-hook-form";
-
-import { Button } from "@servcy/ui";
-
-import { IUserDetails, SingleUserSelect, TFormValues, TIntegrationSteps } from "@components/integration";
+import { UseFormWatch } from "react-hook-form"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    handleStepChange: (value: TIntegrationSteps) => void;
-    users: IUserDetails[];
-    setUsers: React.Dispatch<React.SetStateAction<IUserDetails[]>>;
-    watch: UseFormWatch<TFormValues>;
-};
+    handleStepChange: (value: TIntegrationSteps) => void
+    users: IUserDetails[]
+    setUsers: React.Dispatch<React.SetStateAction<IUserDetails[]>>
+    watch: UseFormWatch<TFormValues>
+}
 
 export const GithubImportUsers: FC<Props> = ({ handleStepChange, users, setUsers, watch }) => {
-    const isInvalid = users.filter((u) => u.import !== false && u.email === "").length > 0;
+    const isInvalid = users.filter((u) => u.import !== false && u.email === "").length > 0
 
     return (
         <div className="mt-6">
@@ -46,5 +43,5 @@ export const GithubImportUsers: FC<Props> = ({ handleStepChange, users, setUsers
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}

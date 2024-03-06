@@ -1,38 +1,34 @@
-import { observer } from "mobx-react-lite";
-import isToday from "date-fns/isToday";
-
-import { useIssueDetail, useMember, useProject } from "@hooks/store";
-
-import { Avatar, AvatarGroup, ControlLink, PriorityIcon } from "@servcy/ui";
-
-import { findTotalDaysInRange, renderFormattedDate } from "@helpers/date-time.helper";
-
-import { TIssue, TWidgetIssue } from "@servcy/types";
+import { findTotalDaysInRange, renderFormattedDate } from "@helpers/date-time.helper"
+import { useIssueDetail, useMember, useProject } from "@hooks/store"
+import isToday from "date-fns/isToday"
+import { observer } from "mobx-react-lite"
+import { TIssue, TWidgetIssue } from "@servcy/types"
+import { Avatar, AvatarGroup, ControlLink, PriorityIcon } from "@servcy/ui"
 
 export type IssueListItemProps = {
-    issueId: string;
-    onClick: (issue: TIssue) => void;
-    workspaceSlug: string;
-};
+    issueId: string
+    onClick: (issue: TIssue) => void
+    workspaceSlug: string
+}
 
 export const AssignedUpcomingIssueListItem: React.FC<IssueListItemProps> = observer((props) => {
-    const { issueId, onClick, workspaceSlug } = props;
+    const { issueId, onClick, workspaceSlug } = props
     // store hooks
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
     // derived values
-    const issueDetails = getIssueById(issueId) as TWidgetIssue | undefined;
+    const issueDetails = getIssueById(issueId) as TWidgetIssue | undefined
 
-    if (!issueDetails) return null;
+    if (!issueDetails) return null
 
-    const projectDetails = getProjectById(issueDetails.project_id);
+    const projectDetails = getProjectById(issueDetails.project_id)
 
-    const blockedByIssues = issueDetails.issue_relation?.filter((issue) => issue.relation_type === "blocked_by") ?? [];
+    const blockedByIssues = issueDetails.issue_relation?.filter((issue) => issue.relation_type === "blocked_by") ?? []
 
     const blockedByIssueProjectDetails =
-        blockedByIssues.length === 1 ? getProjectById(blockedByIssues[0]?.project_id ?? "") : null;
+        blockedByIssues.length === 1 ? getProjectById(blockedByIssues[0]?.project_id ?? "") : null
 
     return (
         <ControlLink
@@ -62,28 +58,28 @@ export const AssignedUpcomingIssueListItem: React.FC<IssueListItemProps> = obser
                     : "-"}
             </div>
         </ControlLink>
-    );
-});
+    )
+})
 
 export const AssignedOverdueIssueListItem: React.FC<IssueListItemProps> = observer((props) => {
-    const { issueId, onClick, workspaceSlug } = props;
+    const { issueId, onClick, workspaceSlug } = props
     // store hooks
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
     // derived values
-    const issueDetails = getIssueById(issueId) as TWidgetIssue | undefined;
+    const issueDetails = getIssueById(issueId) as TWidgetIssue | undefined
 
-    if (!issueDetails) return null;
+    if (!issueDetails) return null
 
-    const projectDetails = getProjectById(issueDetails.project_id);
-    const blockedByIssues = issueDetails.issue_relation?.filter((issue) => issue.relation_type === "blocked_by") ?? [];
+    const projectDetails = getProjectById(issueDetails.project_id)
+    const blockedByIssues = issueDetails.issue_relation?.filter((issue) => issue.relation_type === "blocked_by") ?? []
 
     const blockedByIssueProjectDetails =
-        blockedByIssues.length === 1 ? getProjectById(blockedByIssues[0]?.project_id ?? "") : null;
+        blockedByIssues.length === 1 ? getProjectById(blockedByIssues[0]?.project_id ?? "") : null
 
-    const dueBy = findTotalDaysInRange(new Date(issueDetails.target_date ?? ""), new Date(), false) ?? 0;
+    const dueBy = findTotalDaysInRange(new Date(issueDetails.target_date ?? ""), new Date(), false) ?? 0
 
     return (
         <ControlLink
@@ -109,22 +105,22 @@ export const AssignedOverdueIssueListItem: React.FC<IssueListItemProps> = observ
                     : "-"}
             </div>
         </ControlLink>
-    );
-});
+    )
+})
 
 export const AssignedCompletedIssueListItem: React.FC<IssueListItemProps> = observer((props) => {
-    const { issueId, onClick, workspaceSlug } = props;
+    const { issueId, onClick, workspaceSlug } = props
     // store hooks
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getProjectById } = useProject();
+    } = useIssueDetail()
+    const { getProjectById } = useProject()
     // derived values
-    const issueDetails = getIssueById(issueId);
+    const issueDetails = getIssueById(issueId)
 
-    if (!issueDetails) return null;
+    if (!issueDetails) return null
 
-    const projectDetails = getProjectById(issueDetails.project_id);
+    const projectDetails = getProjectById(issueDetails.project_id)
 
     return (
         <ControlLink
@@ -140,23 +136,23 @@ export const AssignedCompletedIssueListItem: React.FC<IssueListItemProps> = obse
                 <h6 className="text-sm flex-grow truncate">{issueDetails.name}</h6>
             </div>
         </ControlLink>
-    );
-});
+    )
+})
 
 export const CreatedUpcomingIssueListItem: React.FC<IssueListItemProps> = observer((props) => {
-    const { issueId, onClick, workspaceSlug } = props;
+    const { issueId, onClick, workspaceSlug } = props
     // store hooks
-    const { getUserDetails } = useMember();
+    const { getUserDetails } = useMember()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getProjectById } = useProject();
+    } = useIssueDetail()
+    const { getProjectById } = useProject()
     // derived values
-    const issue = getIssueById(issueId);
+    const issue = getIssueById(issueId)
 
-    if (!issue) return null;
+    if (!issue) return null
 
-    const projectDetails = getProjectById(issue.project_id);
+    const projectDetails = getProjectById(issue.project_id)
 
     return (
         <ControlLink
@@ -182,11 +178,11 @@ export const CreatedUpcomingIssueListItem: React.FC<IssueListItemProps> = observ
                 {issue.assignee_ids && issue.assignee_ids?.length > 0 ? (
                     <AvatarGroup>
                         {issue.assignee_ids?.map((assigneeId) => {
-                            const userDetails = getUserDetails(assigneeId);
+                            const userDetails = getUserDetails(assigneeId)
 
-                            if (!userDetails) return null;
+                            if (!userDetails) return null
 
-                            return <Avatar key={assigneeId} src={userDetails.avatar} name={userDetails.display_name} />;
+                            return <Avatar key={assigneeId} src={userDetails.avatar} name={userDetails.display_name} />
                         })}
                     </AvatarGroup>
                 ) : (
@@ -194,25 +190,25 @@ export const CreatedUpcomingIssueListItem: React.FC<IssueListItemProps> = observ
                 )}
             </div>
         </ControlLink>
-    );
-});
+    )
+})
 
 export const CreatedOverdueIssueListItem: React.FC<IssueListItemProps> = observer((props) => {
-    const { issueId, onClick, workspaceSlug } = props;
+    const { issueId, onClick, workspaceSlug } = props
     // store hooks
-    const { getUserDetails } = useMember();
+    const { getUserDetails } = useMember()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getProjectById } = useProject();
+    } = useIssueDetail()
+    const { getProjectById } = useProject()
     // derived values
-    const issue = getIssueById(issueId);
+    const issue = getIssueById(issueId)
 
-    if (!issue) return null;
+    if (!issue) return null
 
-    const projectDetails = getProjectById(issue.project_id);
+    const projectDetails = getProjectById(issue.project_id)
 
-    const dueBy = findTotalDaysInRange(new Date(issue.target_date ?? ""), new Date(), false) ?? 0;
+    const dueBy = findTotalDaysInRange(new Date(issue.target_date ?? ""), new Date(), false) ?? 0
 
     return (
         <ControlLink
@@ -234,11 +230,11 @@ export const CreatedOverdueIssueListItem: React.FC<IssueListItemProps> = observe
                 {issue.assignee_ids.length > 0 ? (
                     <AvatarGroup>
                         {issue.assignee_ids?.map((assigneeId) => {
-                            const userDetails = getUserDetails(assigneeId);
+                            const userDetails = getUserDetails(assigneeId)
 
-                            if (!userDetails) return null;
+                            if (!userDetails) return null
 
-                            return <Avatar key={assigneeId} src={userDetails.avatar} name={userDetails.display_name} />;
+                            return <Avatar key={assigneeId} src={userDetails.avatar} name={userDetails.display_name} />
                         })}
                     </AvatarGroup>
                 ) : (
@@ -246,23 +242,23 @@ export const CreatedOverdueIssueListItem: React.FC<IssueListItemProps> = observe
                 )}
             </div>
         </ControlLink>
-    );
-});
+    )
+})
 
 export const CreatedCompletedIssueListItem: React.FC<IssueListItemProps> = observer((props) => {
-    const { issueId, onClick, workspaceSlug } = props;
+    const { issueId, onClick, workspaceSlug } = props
     // store hooks
-    const { getUserDetails } = useMember();
+    const { getUserDetails } = useMember()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getProjectById } = useProject();
+    } = useIssueDetail()
+    const { getProjectById } = useProject()
     // derived values
-    const issue = getIssueById(issueId);
+    const issue = getIssueById(issueId)
 
-    if (!issue) return null;
+    if (!issue) return null
 
-    const projectDetails = getProjectById(issue.project_id);
+    const projectDetails = getProjectById(issue.project_id)
 
     return (
         <ControlLink
@@ -281,11 +277,11 @@ export const CreatedCompletedIssueListItem: React.FC<IssueListItemProps> = obser
                 {issue.assignee_ids.length > 0 ? (
                     <AvatarGroup>
                         {issue.assignee_ids?.map((assigneeId) => {
-                            const userDetails = getUserDetails(assigneeId);
+                            const userDetails = getUserDetails(assigneeId)
 
-                            if (!userDetails) return null;
+                            if (!userDetails) return null
 
-                            return <Avatar key={assigneeId} src={userDetails.avatar} name={userDetails.display_name} />;
+                            return <Avatar key={assigneeId} src={userDetails.avatar} name={userDetails.display_name} />
                         })}
                     </AvatarGroup>
                 ) : (
@@ -293,5 +289,5 @@ export const CreatedCompletedIssueListItem: React.FC<IssueListItemProps> = obser
                 )}
             </div>
         </ControlLink>
-    );
-});
+    )
+})

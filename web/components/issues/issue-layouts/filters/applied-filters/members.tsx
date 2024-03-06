@@ -1,29 +1,27 @@
-import { observer } from "mobx-react-lite";
-import { X } from "lucide-react";
-
-import { Avatar } from "@servcy/ui";
-
-import { useMember } from "@hooks/store";
+import { useMember } from "@hooks/store"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Avatar } from "@servcy/ui"
 
 type Props = {
-    handleRemove: (val: string) => void;
-    values: string[];
-    editable: boolean | undefined;
-};
+    handleRemove: (val: string) => void
+    values: string[]
+    editable: boolean | undefined
+}
 
 export const AppliedMembersFilters: React.FC<Props> = observer((props) => {
-    const { handleRemove, values, editable } = props;
+    const { handleRemove, values, editable } = props
 
     const {
         workspace: { getWorkspaceMemberDetails },
-    } = useMember();
+    } = useMember()
 
     return (
         <>
             {values.map((memberId) => {
-                const memberDetails = getWorkspaceMemberDetails(memberId)?.member;
+                const memberDetails = getWorkspaceMemberDetails(memberId)?.member
 
-                if (!memberDetails) return null;
+                if (!memberDetails) return null
 
                 return (
                     <div key={memberId} className="flex items-center gap-1 rounded bg-custom-background-80 p-1 text-xs">
@@ -39,8 +37,8 @@ export const AppliedMembersFilters: React.FC<Props> = observer((props) => {
                             </button>
                         )}
                     </div>
-                );
+                )
             })}
         </>
-    );
-});
+    )
+})

@@ -1,85 +1,83 @@
-import { observer } from "mobx-react-lite";
-
-import { CalendarMonthsDropdown, CalendarOptionsDropdown } from "@components/issues";
-
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useCalendarView } from "@hooks/store/use-calendar-view";
-import { ICycleIssuesFilter } from "@store/issue/cycle";
-import { IModuleIssuesFilter } from "@store/issue/module";
-import { IProjectIssuesFilter } from "@store/issue/project";
-import { IProjectViewIssuesFilter } from "@store/issue/project-views";
+import { CalendarMonthsDropdown, CalendarOptionsDropdown } from "@components/issues"
+import { useCalendarView } from "@hooks/store/use-calendar-view"
+import { ICycleIssuesFilter } from "@store/issue/cycle"
+import { IModuleIssuesFilter } from "@store/issue/module"
+import { IProjectIssuesFilter } from "@store/issue/project"
+import { IProjectViewIssuesFilter } from "@store/issue/project-views"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { observer } from "mobx-react-lite"
 
 interface ICalendarHeader {
-    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter;
-    viewId?: string;
+    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter
+    viewId?: string
 }
 
 export const CalendarHeader: React.FC<ICalendarHeader> = observer((props) => {
-    const { issuesFilterStore, viewId } = props;
+    const { issuesFilterStore, viewId } = props
 
-    const issueCalendarView = useCalendarView();
+    const issueCalendarView = useCalendarView()
 
-    const calendarLayout = issuesFilterStore.issueFilters?.displayFilters?.calendar?.layout ?? "month";
+    const calendarLayout = issuesFilterStore.issueFilters?.displayFilters?.calendar?.layout ?? "month"
 
-    const { activeMonthDate, activeWeekDate } = issueCalendarView.calendarFilters;
+    const { activeMonthDate, activeWeekDate } = issueCalendarView.calendarFilters
 
     const handlePrevious = () => {
         if (calendarLayout === "month") {
             const previousMonthYear =
-                activeMonthDate.getMonth() === 0 ? activeMonthDate.getFullYear() - 1 : activeMonthDate.getFullYear();
-            const previousMonthMonth = activeMonthDate.getMonth() === 0 ? 11 : activeMonthDate.getMonth() - 1;
+                activeMonthDate.getMonth() === 0 ? activeMonthDate.getFullYear() - 1 : activeMonthDate.getFullYear()
+            const previousMonthMonth = activeMonthDate.getMonth() === 0 ? 11 : activeMonthDate.getMonth() - 1
 
-            const previousMonthFirstDate = new Date(previousMonthYear, previousMonthMonth, 1);
+            const previousMonthFirstDate = new Date(previousMonthYear, previousMonthMonth, 1)
 
             issueCalendarView.updateCalendarFilters({
                 activeMonthDate: previousMonthFirstDate,
-            });
+            })
         } else {
             const previousWeekDate = new Date(
                 activeWeekDate.getFullYear(),
                 activeWeekDate.getMonth(),
                 activeWeekDate.getDate() - 7
-            );
+            )
 
             issueCalendarView.updateCalendarFilters({
                 activeWeekDate: previousWeekDate,
-            });
+            })
         }
-    };
+    }
 
     const handleNext = () => {
         if (calendarLayout === "month") {
             const nextMonthYear =
-                activeMonthDate.getMonth() === 11 ? activeMonthDate.getFullYear() + 1 : activeMonthDate.getFullYear();
-            const nextMonthMonth = (activeMonthDate.getMonth() + 1) % 12;
+                activeMonthDate.getMonth() === 11 ? activeMonthDate.getFullYear() + 1 : activeMonthDate.getFullYear()
+            const nextMonthMonth = (activeMonthDate.getMonth() + 1) % 12
 
-            const nextMonthFirstDate = new Date(nextMonthYear, nextMonthMonth, 1);
+            const nextMonthFirstDate = new Date(nextMonthYear, nextMonthMonth, 1)
 
             issueCalendarView.updateCalendarFilters({
                 activeMonthDate: nextMonthFirstDate,
-            });
+            })
         } else {
             const nextWeekDate = new Date(
                 activeWeekDate.getFullYear(),
                 activeWeekDate.getMonth(),
                 activeWeekDate.getDate() + 7
-            );
+            )
 
             issueCalendarView.updateCalendarFilters({
                 activeWeekDate: nextWeekDate,
-            });
+            })
         }
-    };
+    }
 
     const handleToday = () => {
-        const today = new Date();
-        const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const today = new Date()
+        const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1)
 
         issueCalendarView.updateCalendarFilters({
             activeMonthDate: firstDayOfCurrentMonth,
             activeWeekDate: today,
-        });
-    };
+        })
+    }
 
     return (
         <div className="mb-4 flex items-center justify-between gap-2 px-3">
@@ -103,5 +101,5 @@ export const CalendarHeader: React.FC<ICalendarHeader> = observer((props) => {
                 <CalendarOptionsDropdown issuesFilterStore={issuesFilterStore} viewId={viewId} />
             </div>
         </div>
-    );
-});
+    )
+})

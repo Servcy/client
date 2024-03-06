@@ -1,18 +1,16 @@
-import React, { Fragment } from "react";
-
+import React, { Fragment } from "react"
 // headless ui
-import { Popover, Transition } from "@headlessui/react";
-
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { Popover, Transition } from "@headlessui/react"
+import { ChevronDown, ChevronUp } from "lucide-react"
 
 export const CustomPopover = ({
     children,
     label,
     placeholder = "Select",
 }: {
-    children: React.ReactNode;
-    label?: string;
-    placeholder?: string;
+    children: React.ReactNode
+    label?: string
+    placeholder?: string
 }) => (
     <div className="relative">
         <Popover className="relative">
@@ -46,4 +44,4 @@ export const CustomPopover = ({
             )}
         </Popover>
     </div>
-);
+)

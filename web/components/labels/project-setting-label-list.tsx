@@ -1,79 +1,74 @@
-import React, { useState, useRef } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import {
-    DragDropContext,
-    Draggable,
-    DraggableProvided,
-    DraggableStateSnapshot,
-    DropResult,
-    Droppable,
-} from "@hello-pangea/dnd";
-import { useTheme } from "next-themes";
-
-import { useLabel, useUser } from "@hooks/store";
-import useDraggableInPortal from "@hooks/use-draggable-portal";
-
+import { useRouter } from "next/router"
+import React, { useRef, useState } from "react"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import {
     CreateUpdateLabelInline,
     DeleteLabelModal,
     ProjectSettingLabelGroup,
     ProjectSettingLabelItem,
-} from "@components/labels";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
+} from "@components/labels"
+import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import {
+    DragDropContext,
+    Draggable,
+    DraggableProvided,
+    DraggableStateSnapshot,
+    Droppable,
+    DropResult,
+} from "@hello-pangea/dnd"
+import { useLabel, useUser } from "@hooks/store"
+import useDraggableInPortal from "@hooks/use-draggable-portal"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import { IIssueLabel } from "@servcy/types"
+import { Button, Loader } from "@servcy/ui"
 
-import { Button, Loader } from "@servcy/ui";
-
-import { IIssueLabel } from "@servcy/types";
-
-import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-
-const LABELS_ROOT = "labels.root";
+const LABELS_ROOT = "labels.root"
 
 export const ProjectSettingsLabelList: React.FC = observer(() => {
     // states
-    const [showLabelForm, setLabelForm] = useState(false);
-    const [isUpdating, setIsUpdating] = useState(false);
-    const [selectDeleteLabel, setSelectDeleteLabel] = useState<IIssueLabel | null>(null);
-    const [isDraggingGroup, setIsDraggingGroup] = useState(false);
+    const [showLabelForm, setLabelForm] = useState(false)
+    const [isUpdating, setIsUpdating] = useState(false)
+    const [selectDeleteLabel, setSelectDeleteLabel] = useState<IIssueLabel | null>(null)
+    const [isDraggingGroup, setIsDraggingGroup] = useState(false)
     // refs
-    const scrollToRef = useRef<HTMLFormElement>(null);
+    const scrollToRef = useRef<HTMLFormElement>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { currentUser } = useUser();
-    const { projectLabels, updateLabelPosition, projectLabelsTree } = useLabel();
+    const { currentUser } = useUser()
+    const { projectLabels, updateLabelPosition, projectLabelsTree } = useLabel()
     // portal
-    const renderDraggable = useDraggableInPortal();
+    const renderDraggable = useDraggableInPortal()
 
     const newLabel = () => {
-        setIsUpdating(false);
-        setLabelForm(true);
-    };
+        setIsUpdating(false)
+        setLabelForm(true)
+    }
 
-    const emptyStateDetail = PROJECT_SETTINGS_EMPTY_STATE_DETAILS["labels"];
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("project-settings", "labels", isLightMode);
+    const emptyStateDetail = PROJECT_SETTINGS_EMPTY_STATE_DETAILS["labels"]
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("project-settings", "labels", isLightMode)
 
     const onDragEnd = (result: DropResult) => {
-        const { combine, draggableId, destination, source } = result;
+        const { combine, draggableId, destination, source } = result
 
         // return if dropped outside the DragDropContext
-        if (!combine && !destination) return;
+        if (!combine && !destination) return
 
-        const childLabel = draggableId.split(".")[2];
-        let parentLabel: string | undefined | null = destination?.droppableId?.split(".")[3];
-        const index = destination?.index || 0;
+        const childLabel = draggableId.split(".")[2]
+        let parentLabel: string | undefined | null = destination?.droppableId?.split(".")[3]
+        const index = destination?.index || 0
 
-        const prevParentLabel: string | undefined | null = source?.droppableId?.split(".")[3];
-        const prevIndex = source?.index;
+        const prevParentLabel: string | undefined | null = source?.droppableId?.split(".")[3]
+        const prevIndex = source?.index
 
-        if (combine && combine.draggableId) parentLabel = combine?.draggableId?.split(".")[2];
+        if (combine && combine.draggableId) parentLabel = combine?.draggableId?.split(".")[2]
 
-        if (destination?.droppableId === LABELS_ROOT) parentLabel = null;
+        if (destination?.droppableId === LABELS_ROOT) parentLabel = null
 
         if (result.reason == "DROP" && childLabel != parentLabel) {
             updateLabelPosition(
@@ -84,10 +79,10 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
                 index,
                 prevParentLabel == parentLabel,
                 prevIndex
-            );
-            return;
+            )
+            return
         }
-    };
+    }
 
     return (
         <>
@@ -111,8 +106,8 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
                             isUpdating={isUpdating}
                             ref={scrollToRef}
                             onClose={() => {
-                                setLabelForm(false);
-                                setIsUpdating(false);
+                                setLabelForm(false)
+                                setIsUpdating(false)
                             }}
                         />
                     </div>
@@ -166,8 +161,8 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
                                                                 const isGroup =
                                                                     droppableSnapshot.draggingFromThisWith?.split(
                                                                         "."
-                                                                    )[3] === "group";
-                                                                setIsDraggingGroup(isGroup);
+                                                                    )[3] === "group"
+                                                                setIsDraggingGroup(isGroup)
 
                                                                 return (
                                                                     <div
@@ -189,10 +184,10 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
                                                                             setIsUpdating={setIsUpdating}
                                                                         />
                                                                     </div>
-                                                                );
+                                                                )
                                                             }}
                                                         </Draggable>
-                                                    );
+                                                    )
                                                 }
                                                 return (
                                                     <Draggable
@@ -225,7 +220,7 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
                                                             )
                                                         )}
                                                     </Draggable>
-                                                );
+                                                )
                                             })}
                                             {droppableProvided.placeholder}
                                         </div>
@@ -246,5 +241,5 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

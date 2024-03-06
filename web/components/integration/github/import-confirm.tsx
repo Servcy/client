@@ -1,16 +1,13 @@
-import { FC } from "react";
-
+import { FC } from "react"
+import { TFormValues, TIntegrationSteps } from "@components/integration"
 // react-hook-form
-import { UseFormWatch } from "react-hook-form";
-
-import { Button } from "@servcy/ui";
-
-import { TFormValues, TIntegrationSteps } from "@components/integration";
+import { UseFormWatch } from "react-hook-form"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    handleStepChange: (value: TIntegrationSteps) => void;
-    watch: UseFormWatch<TFormValues>;
-};
+    handleStepChange: (value: TIntegrationSteps) => void
+    watch: UseFormWatch<TFormValues>
+}
 
 export const GithubImportConfirm: FC<Props> = ({ handleStepChange, watch }) => (
     <div className="mt-6">
@@ -27,4 +24,4 @@ export const GithubImportConfirm: FC<Props> = ({ handleStepChange, watch }) => (
             </Button>
         </div>
     </div>
-);
+)

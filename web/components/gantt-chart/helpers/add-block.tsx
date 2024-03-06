@@ -1,69 +1,66 @@
-import { useEffect, useRef, useState } from "react";
-import { addDays } from "date-fns";
-import { Plus } from "lucide-react";
-
-import { Tooltip } from "@servcy/ui";
-
-import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { IBlockUpdateData, IGanttBlock } from "../types";
-import { useGanttChart } from "../hooks/use-gantt-chart";
-import { observer } from "mobx-react";
+import { useEffect, useRef, useState } from "react"
+import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { addDays } from "date-fns"
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react"
+import { Tooltip } from "@servcy/ui"
+import { useGanttChart } from "../hooks/use-gantt-chart"
+import { IBlockUpdateData, IGanttBlock } from "../types"
 
 type Props = {
-    block: IGanttBlock;
-    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void;
-};
+    block: IGanttBlock
+    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void
+}
 
 export const ChartAddBlock: React.FC<Props> = observer((props) => {
-    const { block, blockUpdateHandler } = props;
+    const { block, blockUpdateHandler } = props
     // states
-    const [isButtonVisible, setIsButtonVisible] = useState(false);
-    const [buttonXPosition, setButtonXPosition] = useState(0);
-    const [buttonStartDate, setButtonStartDate] = useState<Date | null>(null);
+    const [isButtonVisible, setIsButtonVisible] = useState(false)
+    const [buttonXPosition, setButtonXPosition] = useState(0)
+    const [buttonStartDate, setButtonStartDate] = useState<Date | null>(null)
     // refs
-    const containerRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null)
     // chart hook
-    const { currentViewData } = useGanttChart();
+    const { currentViewData } = useGanttChart()
 
     const handleButtonClick = () => {
-        if (!currentViewData) return;
+        if (!currentViewData) return
 
-        const { startDate: chartStartDate, width } = currentViewData.data;
-        const columnNumber = buttonXPosition / width;
+        const { startDate: chartStartDate, width } = currentViewData.data
+        const columnNumber = buttonXPosition / width
 
-        const startDate = addDays(chartStartDate, columnNumber);
-        const endDate = addDays(startDate, 1);
+        const startDate = addDays(chartStartDate, columnNumber)
+        const endDate = addDays(startDate, 1)
 
         blockUpdateHandler(block.data, {
             start_date: renderFormattedPayloadDate(startDate) ?? undefined,
             target_date: renderFormattedPayloadDate(endDate) ?? undefined,
-        });
-    };
+        })
+    }
 
     useEffect(() => {
-        const container = containerRef.current;
+        const container = containerRef.current
 
-        if (!container) return;
+        if (!container) return
 
         const handleMouseMove = (e: MouseEvent) => {
-            if (!currentViewData) return;
+            if (!currentViewData) return
 
-            setButtonXPosition(e.offsetX);
+            setButtonXPosition(e.offsetX)
 
-            const { startDate: chartStartDate, width } = currentViewData.data;
-            const columnNumber = buttonXPosition / width;
+            const { startDate: chartStartDate, width } = currentViewData.data
+            const columnNumber = buttonXPosition / width
 
-            const startDate = addDays(chartStartDate, columnNumber);
-            setButtonStartDate(startDate);
-        };
+            const startDate = addDays(chartStartDate, columnNumber)
+            setButtonStartDate(startDate)
+        }
 
-        container.addEventListener("mousemove", handleMouseMove);
+        container.addEventListener("mousemove", handleMouseMove)
 
         return () => {
-            container?.removeEventListener("mousemove", handleMouseMove);
-        };
-    }, [buttonXPosition, currentViewData]);
+            container?.removeEventListener("mousemove", handleMouseMove)
+        }
+    }, [buttonXPosition, currentViewData])
 
     return (
         <div
@@ -87,5 +84,5 @@ export const ChartAddBlock: React.FC<Props> = observer((props) => {
                 </Tooltip>
             )}
         </div>
-    );
-});
+    )
+})

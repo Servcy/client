@@ -1,56 +1,54 @@
-import { observable, action, makeObservable, runInAction } from "mobx";
-import set from "lodash/set";
+import { ProjectPublishService } from "@services/project"
+import set from "lodash/set"
+import { action, makeObservable, observable, runInAction } from "mobx"
+import { ProjectRootStore } from "./"
 
-import { ProjectRootStore } from "./";
-
-import { ProjectPublishService } from "@services/project";
-
-export type TProjectPublishViews = "list" | "gantt" | "kanban" | "calendar" | "spreadsheet";
+export type TProjectPublishViews = "list" | "gantt" | "kanban" | "calendar" | "spreadsheet"
 
 export type TProjectPublishViewsSettings = {
-    [key in TProjectPublishViews]: boolean;
-};
+    [key in TProjectPublishViews]: boolean
+}
 
 export interface IProjectPublishSettings {
-    id?: string;
-    project?: string;
-    comments: boolean;
-    reactions: boolean;
-    votes: boolean;
-    views: TProjectPublishViewsSettings;
-    inbox: string | null;
+    id?: string
+    project?: string
+    comments: boolean
+    reactions: boolean
+    votes: boolean
+    views: TProjectPublishViewsSettings
+    inbox: string | null
 }
 
 export interface IProjectPublishStore {
     // states
-    generalLoader: boolean;
-    fetchSettingsLoader: boolean;
+    generalLoader: boolean
+    fetchSettingsLoader: boolean
     // observables
-    projectPublishSettings: IProjectPublishSettings | "not-initialized";
+    projectPublishSettings: IProjectPublishSettings | "not-initialized"
     // project settings actions
-    getProjectSettingsAsync: (workspaceSlug: string, projectId: string) => Promise<void>;
+    getProjectSettingsAsync: (workspaceSlug: string, projectId: string) => Promise<void>
     updateProjectSettingsAsync: (
         workspaceSlug: string,
         projectId: string,
         projectPublishId: string,
         data: IProjectPublishSettings
-    ) => Promise<void>;
+    ) => Promise<void>
     // project publish actions
-    publishProject: (workspaceSlug: string, projectId: string, data: IProjectPublishSettings) => Promise<void>;
-    unPublishProject: (workspaceSlug: string, projectId: string, projectPublishId: string) => Promise<void>;
+    publishProject: (workspaceSlug: string, projectId: string, data: IProjectPublishSettings) => Promise<void>
+    unPublishProject: (workspaceSlug: string, projectId: string, projectPublishId: string) => Promise<void>
 }
 
 export class ProjectPublishStore implements IProjectPublishStore {
     // states
-    generalLoader: boolean = false;
-    fetchSettingsLoader: boolean = false;
+    generalLoader: boolean = false
+    fetchSettingsLoader: boolean = false
     // actions
-    project_id: string | null = null;
-    projectPublishSettings: IProjectPublishSettings | "not-initialized" = "not-initialized";
+    project_id: string | null = null
+    projectPublishSettings: IProjectPublishSettings | "not-initialized" = "not-initialized"
     // root store
-    projectRootStore: ProjectRootStore;
+    projectRootStore: ProjectRootStore
 
-    projectPublishService;
+    projectPublishService
 
     constructor(_projectRootStore: ProjectRootStore) {
         makeObservable(this, {
@@ -66,11 +64,11 @@ export class ProjectPublishStore implements IProjectPublishStore {
             // project publish actions
             publishProject: action,
             unPublishProject: action,
-        });
+        })
         // root store
-        this.projectRootStore = _projectRootStore;
+        this.projectRootStore = _projectRootStore
 
-        this.projectPublishService = new ProjectPublishService();
+        this.projectPublishService = new ProjectPublishService()
     }
 
     /**
@@ -82,9 +80,9 @@ export class ProjectPublishStore implements IProjectPublishStore {
     getProjectSettingsAsync = async (workspaceSlug: string, projectId: string) => {
         try {
             runInAction(() => {
-                this.fetchSettingsLoader = true;
-            });
-            const response = await this.projectPublishService.getProjectSettingsAsync(workspaceSlug, projectId);
+                this.fetchSettingsLoader = true
+            })
+            const response = await this.projectPublishService.getProjectSettingsAsync(workspaceSlug, projectId)
             if (response && response.length > 0) {
                 const _projectPublishSettings: IProjectPublishSettings = {
                     id: response[0]?.id,
@@ -100,25 +98,25 @@ export class ProjectPublishStore implements IProjectPublishStore {
                     },
                     inbox: response[0]?.inbox || null,
                     project: response[0]?.project || null,
-                };
+                }
                 runInAction(() => {
-                    this.projectPublishSettings = _projectPublishSettings;
-                    this.fetchSettingsLoader = false;
-                });
+                    this.projectPublishSettings = _projectPublishSettings
+                    this.fetchSettingsLoader = false
+                })
             } else {
                 runInAction(() => {
-                    this.projectPublishSettings = "not-initialized";
-                    this.fetchSettingsLoader = false;
-                });
+                    this.projectPublishSettings = "not-initialized"
+                    this.fetchSettingsLoader = false
+                })
             }
-            return response;
+            return response
         } catch (error) {
             runInAction(() => {
-                this.fetchSettingsLoader = false;
-            });
-            throw error;
+                this.fetchSettingsLoader = false
+            })
+            throw error
         }
-    };
+    }
 
     /**
      * Publishes project and updates project publish status in the store
@@ -130,13 +128,9 @@ export class ProjectPublishStore implements IProjectPublishStore {
     publishProject = async (workspaceSlug: string, projectId: string, data: IProjectPublishSettings) => {
         try {
             runInAction(() => {
-                this.generalLoader = true;
-            });
-            const response = await this.projectPublishService.createProjectSettingsAsync(
-                workspaceSlug,
-                projectId,
-                data
-            );
+                this.generalLoader = true
+            })
+            const response = await this.projectPublishService.createProjectSettingsAsync(workspaceSlug, projectId, data)
             if (response) {
                 const _projectPublishSettings: IProjectPublishSettings = {
                     id: response?.id || null,
@@ -146,22 +140,22 @@ export class ProjectPublishStore implements IProjectPublishStore {
                     views: { ...response?.views },
                     inbox: response?.inbox || null,
                     project: response?.project || null,
-                };
+                }
 
                 runInAction(() => {
-                    this.projectPublishSettings = _projectPublishSettings;
-                    set(this.projectRootStore.project.projectMap, [projectId, "is_deployed"], true);
-                    this.generalLoader = false;
-                });
-                return response;
+                    this.projectPublishSettings = _projectPublishSettings
+                    set(this.projectRootStore.project.projectMap, [projectId, "is_deployed"], true)
+                    this.generalLoader = false
+                })
+                return response
             }
         } catch (error) {
             runInAction(() => {
-                this.generalLoader = false;
-            });
-            throw error;
+                this.generalLoader = false
+            })
+            throw error
         }
-    };
+    }
 
     /**
      * Updates project publish settings
@@ -179,14 +173,14 @@ export class ProjectPublishStore implements IProjectPublishStore {
     ) => {
         try {
             runInAction(() => {
-                this.generalLoader = true;
-            });
+                this.generalLoader = true
+            })
             const response = await this.projectPublishService.updateProjectSettingsAsync(
                 workspaceSlug,
                 projectId,
                 projectPublishId,
                 data
-            );
+            )
             if (response) {
                 const _projectPublishSettings: IProjectPublishSettings = {
                     id: response?.id || null,
@@ -196,20 +190,20 @@ export class ProjectPublishStore implements IProjectPublishStore {
                     views: { ...response?.views },
                     inbox: response?.inbox || null,
                     project: response?.project || null,
-                };
+                }
                 runInAction(() => {
-                    this.projectPublishSettings = _projectPublishSettings;
-                    this.generalLoader = false;
-                });
-                return response;
+                    this.projectPublishSettings = _projectPublishSettings
+                    this.generalLoader = false
+                })
+                return response
             }
         } catch (error) {
             runInAction(() => {
-                this.generalLoader = false;
-            });
-            throw error;
+                this.generalLoader = false
+            })
+            throw error
         }
-    };
+    }
 
     /**
      * Unpublishes project and updates project publish status in the store
@@ -221,24 +215,24 @@ export class ProjectPublishStore implements IProjectPublishStore {
     unPublishProject = async (workspaceSlug: string, projectId: string, projectPublishId: string) => {
         try {
             runInAction(() => {
-                this.generalLoader = true;
-            });
+                this.generalLoader = true
+            })
             const response = await this.projectPublishService.deleteProjectSettingsAsync(
                 workspaceSlug,
                 projectId,
                 projectPublishId
-            );
+            )
             runInAction(() => {
-                this.projectPublishSettings = "not-initialized";
-                set(this.projectRootStore.project.projectMap, [projectId, "is_deployed"], false);
-                this.generalLoader = false;
-            });
-            return response;
+                this.projectPublishSettings = "not-initialized"
+                set(this.projectRootStore.project.projectMap, [projectId, "is_deployed"], false)
+                this.generalLoader = false
+            })
+            return response
         } catch (error) {
             runInAction(() => {
-                this.generalLoader = false;
-            });
-            throw error;
+                this.generalLoader = false
+            })
+            throw error
         }
-    };
+    }
 }

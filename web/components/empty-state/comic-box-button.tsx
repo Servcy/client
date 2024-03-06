@@ -1,33 +1,33 @@
-import { useState } from "react";
-import { Popover } from "@headlessui/react";
+import { useState } from "react"
+import { Popover } from "@headlessui/react"
 // popper
-import { usePopper } from "react-popper";
+import { usePopper } from "react-popper"
 // helper
-import { getButtonStyling } from "@servcy/ui";
+import { getButtonStyling } from "@servcy/ui"
 
 type Props = {
-    label: string;
-    icon?: any;
-    title: string | undefined;
-    description: string | undefined;
-    onClick?: () => void;
-    disabled?: boolean;
-};
+    label: string
+    icon?: any
+    title: string | undefined
+    description: string | undefined
+    onClick?: () => void
+    disabled?: boolean
+}
 
 export const ComicBoxButton: React.FC<Props> = (props) => {
-    const { label, icon, title, description, onClick, disabled = false } = props;
-    const [isHovered, setIsHovered] = useState(false);
+    const { label, icon, title, description, onClick, disabled = false } = props
+    const [isHovered, setIsHovered] = useState(false)
 
     const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
+        setIsHovered(true)
+    }
 
     const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
+        setIsHovered(false)
+    }
 
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>();
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>()
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: "right-end",
         modifiers: [
@@ -38,7 +38,7 @@ export const ComicBoxButton: React.FC<Props> = (props) => {
                 },
             },
         ],
-    });
+    })
 
     return (
         <Popover>
@@ -71,5 +71,5 @@ export const ComicBoxButton: React.FC<Props> = (props) => {
                 </Popover.Panel>
             )}
         </Popover>
-    );
-};
+    )
+}

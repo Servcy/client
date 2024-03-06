@@ -1,26 +1,24 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useUser } from "@hooks/store";
-
-import DefaultLayout from "@layouts/DefaultLayout";
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React from "react"
+import { useUser } from "@hooks/store"
+import DefaultLayout from "@layouts/DefaultLayout"
+import { observer } from "mobx-react-lite"
 // images
-import ProjectNotAuthorizedImg from "public/auth/project-not-authorized.svg";
-import WorkspaceNotAuthorizedImg from "public/auth/workspace-not-authorized.svg";
+import ProjectNotAuthorizedImg from "public/auth/project-not-authorized.svg"
+import WorkspaceNotAuthorizedImg from "public/auth/workspace-not-authorized.svg"
 
 type Props = {
-    actionButton?: React.ReactNode;
-    type: "project" | "workspace";
-};
+    actionButton?: React.ReactNode
+    type: "project" | "workspace"
+}
 
 export const NotAuthorizedView: React.FC<Props> = observer((props) => {
-    const { actionButton, type } = props;
-    const { currentUser } = useUser();
-    const { query } = useRouter();
-    const { next_path } = query;
+    const { actionButton, type } = props
+    const { currentUser } = useUser()
+    const { query } = useRouter()
+    const { next_path } = query
 
     return (
         <DefaultLayout>
@@ -60,5 +58,5 @@ export const NotAuthorizedView: React.FC<Props> = observer((props) => {
                 {actionButton}
             </div>
         </DefaultLayout>
-    );
-});
+    )
+})

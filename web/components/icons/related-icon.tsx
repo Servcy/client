@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const RelatedIcon: React.FC<Props> = ({
     width = "24",
@@ -38,4 +37,4 @@ export const RelatedIcon: React.FC<Props> = ({
             strokeLinejoin="round"
         />
     </svg>
-);
+)

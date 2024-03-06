@@ -1,12 +1,10 @@
-import { APIService } from "@services/api.service";
-
-import { IGptResponse } from "@servcy/types";
-
-import { API_BASE_URL } from "@helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { IGptResponse } from "@servcy/types"
 
 export class AIService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async createGptTask(
@@ -17,7 +15,7 @@ export class AIService extends APIService {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/ai-assistant/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response;
-            });
+                throw error?.response
+            })
     }
 }

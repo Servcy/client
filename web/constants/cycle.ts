@@ -8,13 +8,12 @@ import {
     List,
     Microscope,
     Search,
-} from "lucide-react";
-
-import { TCycleLayout, TCycleView } from "@servcy/types";
+} from "lucide-react"
+import { TCycleLayout, TCycleView } from "@servcy/types"
 
 export const CYCLE_TAB_LIST: {
-    key: TCycleView;
-    name: string;
+    key: TCycleView
+    name: string
 }[] = [
     {
         key: "all",
@@ -36,12 +35,12 @@ export const CYCLE_TAB_LIST: {
         key: "draft",
         name: "Drafts",
     },
-];
+]
 
 export const CYCLE_VIEW_LAYOUTS: {
-    key: TCycleLayout;
-    icon: any;
-    title: string;
+    key: TCycleLayout
+    icon: any
+    title: string
 }[] = [
     {
         key: "list",
@@ -58,14 +57,14 @@ export const CYCLE_VIEW_LAYOUTS: {
         icon: GanttChartSquare,
         title: "Gantt layout",
     },
-];
+]
 
 export const CYCLE_STATUS: {
-    label: string;
-    value: "current" | "upcoming" | "completed" | "draft";
-    color: string;
-    textColor: string;
-    bgColor: string;
+    label: string
+    value: "current" | "upcoming" | "completed" | "draft"
+    color: string
+    textColor: string
+    bgColor: string
 }[] = [
     {
         label: "day left",
@@ -95,7 +94,7 @@ export const CYCLE_STATUS: {
         textColor: "text-custom-text-300",
         bgColor: "bg-custom-background-90",
     },
-];
+]
 
 export const CYCLE_STATE_GROUPS_DETAILS = [
     {
@@ -123,7 +122,7 @@ export const CYCLE_STATE_GROUPS_DETAILS = [
         title: "Cancelled",
         color: "#ef4444",
     },
-];
+]
 
 export const WORKSPACE_ACTIVE_CYCLES_DETAILS = [
     {
@@ -160,4 +159,4 @@ export const WORKSPACE_ACTIVE_CYCLES_DETAILS = [
             "Spot challenges from one project to another and see inter-cycle dependencies that aren’t obvious from any other view.",
         icon: Microscope,
     },
-];
+]

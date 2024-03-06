@@ -1,27 +1,22 @@
-import { observer } from "mobx-react";
-
-import { useGanttChart } from "../hooks";
-import { useIssueDetail } from "@hooks/store";
-
-import { ChartAddBlock, ChartDraggable } from "../helpers";
-
-import { cn } from "@helpers/common.helper";
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { IBlockUpdateData, IGanttBlock } from "../types";
-
-import { BLOCK_HEIGHT } from "../constants";
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react"
+import { BLOCK_HEIGHT } from "../constants"
+import { ChartAddBlock, ChartDraggable } from "../helpers"
+import { useGanttChart } from "../hooks"
+import { IBlockUpdateData, IGanttBlock } from "../types"
 
 type Props = {
-    block: IGanttBlock;
-    blockToRender: (data: any) => React.ReactNode;
-    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void;
-    enableBlockLeftResize: boolean;
-    enableBlockRightResize: boolean;
-    enableBlockMove: boolean;
-    enableAddBlock: boolean;
-    ganttContainerRef: React.RefObject<HTMLDivElement>;
-};
+    block: IGanttBlock
+    blockToRender: (data: any) => React.ReactNode
+    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void
+    enableBlockLeftResize: boolean
+    enableBlockRightResize: boolean
+    enableBlockMove: boolean
+    enableAddBlock: boolean
+    ganttContainerRef: React.RefObject<HTMLDivElement>
+}
 
 export const GanttChartBlock: React.FC<Props> = observer((props) => {
     const {
@@ -33,42 +28,42 @@ export const GanttChartBlock: React.FC<Props> = observer((props) => {
         enableBlockMove,
         enableAddBlock,
         ganttContainerRef,
-    } = props;
+    } = props
     // store hooks
-    const { updateActiveBlockId, isBlockActive } = useGanttChart();
-    const { peekIssue } = useIssueDetail();
+    const { updateActiveBlockId, isBlockActive } = useGanttChart()
+    const { peekIssue } = useIssueDetail()
 
-    const isBlockVisibleOnChart = block.start_date && block.target_date;
+    const isBlockVisibleOnChart = block.start_date && block.target_date
 
     const handleChartBlockPosition = (
         block: IGanttBlock,
         totalBlockShifts: number,
         dragDirection: "left" | "right" | "move"
     ) => {
-        if (!block.start_date || !block.target_date) return;
+        if (!block.start_date || !block.target_date) return
 
-        const originalStartDate = new Date(block.start_date);
-        const updatedStartDate = new Date(originalStartDate);
+        const originalStartDate = new Date(block.start_date)
+        const updatedStartDate = new Date(originalStartDate)
 
-        const originalTargetDate = new Date(block.target_date);
-        const updatedTargetDate = new Date(originalTargetDate);
+        const originalTargetDate = new Date(block.target_date)
+        const updatedTargetDate = new Date(originalTargetDate)
 
         // update the start date on left resize
-        if (dragDirection === "left") updatedStartDate.setDate(originalStartDate.getDate() - totalBlockShifts);
+        if (dragDirection === "left") updatedStartDate.setDate(originalStartDate.getDate() - totalBlockShifts)
         // update the target date on right resize
-        else if (dragDirection === "right") updatedTargetDate.setDate(originalTargetDate.getDate() + totalBlockShifts);
+        else if (dragDirection === "right") updatedTargetDate.setDate(originalTargetDate.getDate() + totalBlockShifts)
         // update both the dates on x-axis move
         else if (dragDirection === "move") {
-            updatedStartDate.setDate(originalStartDate.getDate() + totalBlockShifts);
-            updatedTargetDate.setDate(originalTargetDate.getDate() + totalBlockShifts);
+            updatedStartDate.setDate(originalStartDate.getDate() + totalBlockShifts)
+            updatedTargetDate.setDate(originalTargetDate.getDate() + totalBlockShifts)
         }
 
         // call the block update handler with the updated dates
         blockUpdateHandler(block.data, {
             start_date: renderFormattedPayloadDate(updatedStartDate) ?? undefined,
             target_date: renderFormattedPayloadDate(updatedTargetDate) ?? undefined,
-        });
-    };
+        })
+    }
 
     return (
         <div
@@ -102,5 +97,5 @@ export const GanttChartBlock: React.FC<Props> = observer((props) => {
                 )}
             </div>
         </div>
-    );
-});
+    )
+})

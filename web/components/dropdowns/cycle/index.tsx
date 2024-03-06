@@ -1,32 +1,26 @@
-import { Fragment, ReactNode, useRef, useState } from "react";
-import { observer } from "mobx-react-lite";
-import { Combobox } from "@headlessui/react";
-import { ChevronDown } from "lucide-react";
-
-import { useCycle } from "@hooks/store";
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { DropdownButton } from "../buttons";
-
-import { ContrastIcon } from "@servcy/ui";
-
-import { cn } from "@helpers/common.helper";
-
-import { TDropdownProps } from "../types";
-
-import { BUTTON_VARIANTS_WITH_TEXT } from "../constants";
-import { CycleOptions } from "./cycle-options";
+import { Fragment, ReactNode, useRef, useState } from "react"
+import { Combobox } from "@headlessui/react"
+import { cn } from "@helpers/common.helper"
+import { useCycle } from "@hooks/store"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { ChevronDown } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { ContrastIcon } from "@servcy/ui"
+import { DropdownButton } from "../buttons"
+import { BUTTON_VARIANTS_WITH_TEXT } from "../constants"
+import { TDropdownProps } from "../types"
+import { CycleOptions } from "./cycle-options"
 
 type Props = TDropdownProps & {
-    button?: ReactNode;
-    dropdownArrow?: boolean;
-    dropdownArrowClassName?: string;
-    onChange: (val: string | null) => void;
-    onClose?: () => void;
-    projectId: string;
-    value: string | null;
-};
+    button?: ReactNode
+    dropdownArrow?: boolean
+    dropdownArrowClassName?: string
+    onChange: (val: string | null) => void
+    onClose?: () => void
+    projectId: string
+    value: string | null
+}
 
 export const CycleDropdown: React.FC<Props> = observer((props) => {
     const {
@@ -47,43 +41,43 @@ export const CycleDropdown: React.FC<Props> = observer((props) => {
         showTooltip = false,
         tabIndex,
         value,
-    } = props;
+    } = props
     // states
 
-    const [isOpen, setIsOpen] = useState(false);
-    const { getCycleNameById } = useCycle();
+    const [isOpen, setIsOpen] = useState(false)
+    const { getCycleNameById } = useCycle()
     // refs
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
     // popper-js refs
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
 
-    const selectedName = value ? getCycleNameById(value) : null;
+    const selectedName = value ? getCycleNameById(value) : null
 
     const handleClose = () => {
-        if (!isOpen) return;
-        setIsOpen(false);
-        onClose && onClose();
-    };
+        if (!isOpen) return
+        setIsOpen(false)
+        onClose && onClose()
+    }
 
     const toggleDropdown = () => {
-        setIsOpen((prevIsOpen) => !prevIsOpen);
-        if (isOpen) onClose && onClose();
-    };
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+        if (isOpen) onClose && onClose()
+    }
 
     const dropdownOnChange = (val: string | null) => {
-        onChange(val);
-        handleClose();
-    };
+        onChange(val)
+        handleClose()
+    }
 
-    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose);
+    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        toggleDropdown();
-    };
+        e.stopPropagation()
+        e.preventDefault()
+        toggleDropdown()
+    }
 
-    useOutsideClickDetector(dropdownRef, handleClose);
+    useOutsideClickDetector(dropdownRef, handleClose)
 
     return (
         <Combobox
@@ -154,5 +148,5 @@ export const CycleDropdown: React.FC<Props> = observer((props) => {
                 />
             )}
         </Combobox>
-    );
-});
+    )
+})

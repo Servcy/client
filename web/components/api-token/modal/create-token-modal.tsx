@@ -1,44 +1,39 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { mutate } from "swr";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { APITokenService } from "@services/api_token.service";
-import toast from "react-hot-toast";
-
-import { CreateApiTokenForm, GeneratedTokenDetails } from "@components/api-token";
-
-import { csvDownload } from "@helpers/download.helper";
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { IApiToken } from "@servcy/types";
-
-import { API_TOKENS_LIST } from "@constants/fetch-keys";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { CreateApiTokenForm, GeneratedTokenDetails } from "@components/api-token"
+import { API_TOKENS_LIST } from "@constants/fetch-keys"
+import { Dialog, Transition } from "@headlessui/react"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { csvDownload } from "@helpers/download.helper"
+import { APITokenService } from "@services/api_token.service"
+import toast from "react-hot-toast"
+import { mutate } from "swr"
+import { IApiToken } from "@servcy/types"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-};
+    isOpen: boolean
+    onClose: () => void
+}
 
-const apiTokenService = new APITokenService();
+const apiTokenService = new APITokenService()
 
 export const CreateApiTokenModal: React.FC<Props> = (props) => {
-    const { isOpen, onClose } = props;
+    const { isOpen, onClose } = props
     // states
-    const [neverExpires, setNeverExpires] = useState<boolean>(false);
-    const [generatedToken, setGeneratedToken] = useState<IApiToken | null | undefined>(null);
+    const [neverExpires, setNeverExpires] = useState<boolean>(false)
+    const [generatedToken, setGeneratedToken] = useState<IApiToken | null | undefined>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const handleClose = () => {
-        onClose();
+        onClose()
 
         setTimeout(() => {
-            setNeverExpires(false);
-            setGeneratedToken(null);
-        }, 350);
-    };
+            setNeverExpires(false)
+            setGeneratedToken(null)
+        }, 350)
+    }
 
     const downloadSecretKey = (data: IApiToken) => {
         const csvData = {
@@ -46,41 +41,41 @@ export const CreateApiTokenModal: React.FC<Props> = (props) => {
             Description: data.description,
             Expiry: data.expired_at ? renderFormattedDate(data.expired_at)?.replace(",", " ") ?? "" : "Never expires",
             "Secret key": data.token ?? "",
-        };
+        }
 
-        csvDownload(csvData, `secret-key-${Date.now()}`);
-    };
+        csvDownload(csvData, `secret-key-${Date.now()}`)
+    }
 
     const handleCreateToken = async (data: Partial<IApiToken>) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         // make the request to generate the token
         await apiTokenService
             .createApiToken(workspaceSlug.toString(), data)
             .then((res) => {
-                setGeneratedToken(res);
-                downloadSecretKey(res);
+                setGeneratedToken(res)
+                downloadSecretKey(res)
 
                 mutate<IApiToken[]>(
                     API_TOKENS_LIST(workspaceSlug.toString()),
                     (prevData) => {
-                        if (!prevData) return;
+                        if (!prevData) return
 
-                        return [res, ...prevData];
+                        return [res, ...prevData]
                     },
                     false
-                );
+                )
             })
             .catch((err) => {
                 toast.error({
                     message: err.message,
                     type: "error",
                     title: "Error",
-                });
+                })
 
-                throw err;
-            });
-    };
+                throw err
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -125,5 +120,5 @@ export const CreateApiTokenModal: React.FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

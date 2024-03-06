@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 // lucide icons
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react"
 
 interface IFilterHeader {
-    title: string;
-    isPreviewEnabled: boolean;
-    handleIsPreviewEnabled: () => void;
+    title: string
+    isPreviewEnabled: boolean
+    handleIsPreviewEnabled: () => void
 }
 
 export const FilterHeader = ({ title, isPreviewEnabled, handleIsPreviewEnabled }: IFilterHeader) => (
@@ -19,4 +19,4 @@ export const FilterHeader = ({ title, isPreviewEnabled, handleIsPreviewEnabled }
             {isPreviewEnabled ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
         </button>
     </div>
-);
+)

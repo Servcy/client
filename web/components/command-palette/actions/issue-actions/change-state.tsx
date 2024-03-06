@@ -1,45 +1,41 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Command } from "cmdk";
-
-import { useProjectState, useIssues } from "@hooks/store";
-
-import { Spinner, StateGroupIcon } from "@servcy/ui";
-
-import { Check } from "lucide-react";
-
-import { TIssue } from "@servcy/types";
-import { EIssuesStoreType } from "@constants/issue";
+import { useRouter } from "next/router"
+import { EIssuesStoreType } from "@constants/issue"
+import { useIssues, useProjectState } from "@hooks/store"
+import { Command } from "cmdk"
+import { Check } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { Spinner, StateGroupIcon } from "@servcy/ui"
 
 type Props = {
-    closePalette: () => void;
-    issue: TIssue;
-};
+    closePalette: () => void
+    issue: TIssue
+}
 
 export const ChangeIssueState: React.FC<Props> = observer((props) => {
-    const { closePalette, issue } = props;
+    const { closePalette, issue } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
     const {
         issues: { updateIssue },
-    } = useIssues(EIssuesStoreType.PROJECT);
-    const { projectStates } = useProjectState();
+    } = useIssues(EIssuesStoreType.PROJECT)
+    const { projectStates } = useProjectState()
 
     const submitChanges = async (formData: Partial<TIssue>) => {
-        if (!workspaceSlug || !projectId || !issue) return;
+        if (!workspaceSlug || !projectId || !issue) return
 
-        const payload = { ...formData };
+        const payload = { ...formData }
         await updateIssue(workspaceSlug.toString(), projectId.toString(), issue.id, payload).catch((e) => {
-            console.error(e);
-        });
-    };
+            console.error(e)
+        })
+    }
 
     const handleIssueState = (stateId: string) => {
-        submitChanges({ state_id: stateId });
-        closePalette();
-    };
+        submitChanges({ state_id: stateId })
+        closePalette()
+    }
 
     return (
         <>
@@ -70,5 +66,5 @@ export const ChangeIssueState: React.FC<Props> = observer((props) => {
                 <Spinner />
             )}
         </>
-    );
-});
+    )
+})

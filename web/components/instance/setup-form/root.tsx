@@ -1,7 +1,6 @@
-import { useState } from "react";
-
-import { LatestFeatureBlock } from "@components/common";
-import { InstanceSetupDone, InstanceSetupSignInForm } from "@components/instance";
+import { useState } from "react"
+import { LatestFeatureBlock } from "@components/common"
+import { InstanceSetupDone, InstanceSetupSignInForm } from "@components/instance"
 
 export enum EInstanceSetupSteps {
     SIGN_IN = "SIGN_IN",
@@ -10,7 +9,7 @@ export enum EInstanceSetupSteps {
 
 export const InstanceSetupFormRoot = () => {
     // states
-    const [setupStep, setSetupStep] = useState(EInstanceSetupSteps.SIGN_IN);
+    const [setupStep, setSetupStep] = useState(EInstanceSetupSteps.SIGN_IN)
 
     return (
         <>
@@ -26,5 +25,5 @@ export const InstanceSetupFormRoot = () => {
                 </div>
             )}
         </>
-    );
-};
+    )
+}

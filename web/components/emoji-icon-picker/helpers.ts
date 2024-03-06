@@ -1,26 +1,26 @@
 export const saveRecentEmoji = (emoji: string) => {
-    const recentEmojis = localStorage.getItem("recentEmojis");
+    const recentEmojis = localStorage.getItem("recentEmojis")
     if (recentEmojis) {
-        const recentEmojisArray = recentEmojis.split(",");
+        const recentEmojisArray = recentEmojis.split(",")
         if (recentEmojisArray.includes(emoji)) {
-            const index = recentEmojisArray.indexOf(emoji);
-            recentEmojisArray.splice(index, 1);
+            const index = recentEmojisArray.indexOf(emoji)
+            recentEmojisArray.splice(index, 1)
         }
-        recentEmojisArray.unshift(emoji);
+        recentEmojisArray.unshift(emoji)
         if (recentEmojisArray.length > 18) {
-            recentEmojisArray.pop();
+            recentEmojisArray.pop()
         }
-        localStorage.setItem("recentEmojis", recentEmojisArray.join(","));
+        localStorage.setItem("recentEmojis", recentEmojisArray.join(","))
     } else {
-        localStorage.setItem("recentEmojis", emoji);
+        localStorage.setItem("recentEmojis", emoji)
     }
-};
+}
 
 export const getRecentEmojis = () => {
-    const recentEmojis = localStorage.getItem("recentEmojis");
+    const recentEmojis = localStorage.getItem("recentEmojis")
     if (recentEmojis) {
-        const recentEmojisArray = recentEmojis.split(",");
-        return recentEmojisArray;
+        const recentEmojisArray = recentEmojis.split(",")
+        return recentEmojisArray
     }
-    return [];
-};
+    return []
+}

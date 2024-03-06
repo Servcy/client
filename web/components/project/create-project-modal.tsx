@@ -1,76 +1,70 @@
-import { useState, useEffect, Fragment, FC, ChangeEvent } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { X } from "lucide-react";
-
-import { useEventTracker, useProject, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
-
-import { ImagePickerPopover } from "@components/core";
-import EmojiIconPicker from "@components/emoji-icon-picker";
-import { MemberDropdown } from "@components/dropdowns";
-
-import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper";
-
-import { NETWORK_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { PROJECT_CREATED } from "@constants/event-tracker";
+import { ChangeEvent, FC, Fragment, useEffect, useState } from "react"
+import { ImagePickerPopover } from "@components/core"
+import { MemberDropdown } from "@components/dropdowns"
+import EmojiIconPicker from "@components/emoji-icon-picker"
+import { PROJECT_CREATED } from "@constants/event-tracker"
+import { NETWORK_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { Dialog, Transition } from "@headlessui/react"
+import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper"
+import { useEventTracker, useProject, useUser } from "@hooks/store"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { Button, CustomSelect, Input, TextArea } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    setToFavorite?: boolean;
-    workspaceSlug: string;
-};
+    isOpen: boolean
+    onClose: () => void
+    setToFavorite?: boolean
+    workspaceSlug: string
+}
 
 interface IIsGuestCondition {
-    onClose: () => void;
+    onClose: () => void
 }
 
 const IsGuestCondition: FC<IIsGuestCondition> = ({ onClose }) => {
     useEffect(() => {
-        onClose();
+        onClose()
         toast.error({
             title: "Error",
             type: "error",
             message: "You don't have permission to create project.",
-        });
-    }, [onClose, setToastAlert]);
+        })
+    }, [onClose, setToastAlert])
 
-    return null;
-};
+    return null
+}
 
 export interface ICreateProjectForm {
-    name: string;
-    identifier: string;
-    description: string;
-    emoji_and_icon: string;
-    network: number;
-    project_lead_member: string;
-    project_lead: string;
-    cover_image: string;
-    icon_prop: any;
-    emoji: string;
+    name: string
+    identifier: string
+    description: string
+    emoji_and_icon: string
+    network: number
+    project_lead_member: string
+    project_lead: string
+    cover_image: string
+    icon_prop: any
+    emoji: string
 }
 
 export const CreateProjectModal: FC<Props> = observer((props) => {
-    const { isOpen, onClose, setToFavorite = false, workspaceSlug } = props;
+    const { isOpen, onClose, setToFavorite = false, workspaceSlug } = props
     // store
-    const { captureProjectEvent } = useEventTracker();
+    const { captureProjectEvent } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { addProjectToFavorites, createProject } = useProject();
+    } = useUser()
+    const { addProjectToFavorites, createProject } = useProject()
     // states
-    const [isChangeInIdentifierRequired, setIsChangeInIdentifierRequired] = useState(true);
+    const [isChangeInIdentifierRequired, setIsChangeInIdentifierRequired] = useState(true)
     // toast
 
     // form info
-    const cover_image = PROJECT_UNSPLASH_COVERS[Math.floor(Math.random() * PROJECT_UNSPLASH_COVERS.length)];
+    const cover_image = PROJECT_UNSPLASH_COVERS[Math.floor(Math.random() * PROJECT_UNSPLASH_COVERS.length)]
     const {
         formState: { errors, isSubmitting },
         handleSubmit,
@@ -89,61 +83,61 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
             project_lead: undefined,
         },
         reValidateMode: "onChange",
-    });
+    })
 
-    const currentNetwork = NETWORK_CHOICES.find((n) => n.key === watch("network"));
+    const currentNetwork = NETWORK_CHOICES.find((n) => n.key === watch("network"))
 
     if (currentWorkspaceRole && isOpen)
-        if (currentWorkspaceRole < EUserWorkspaceRoles.MEMBER) return <IsGuestCondition onClose={onClose} />;
+        if (currentWorkspaceRole < EUserWorkspaceRoles.MEMBER) return <IsGuestCondition onClose={onClose} />
 
     const handleClose = () => {
-        onClose();
-        setIsChangeInIdentifierRequired(true);
-        reset();
-    };
+        onClose()
+        setIsChangeInIdentifierRequired(true)
+        reset()
+    }
 
     const handleAddToFavorites = (projectId: string) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         addProjectToFavorites(workspaceSlug.toString(), projectId).catch(() => {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const onSubmit = async (formData: ICreateProjectForm) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { emoji_and_icon, project_lead_member, ...payload } = formData;
+        const { emoji_and_icon, project_lead_member, ...payload } = formData
 
-        if (typeof formData.emoji_and_icon === "object") payload.icon_prop = formData.emoji_and_icon;
-        else payload.emoji = formData.emoji_and_icon;
+        if (typeof formData.emoji_and_icon === "object") payload.icon_prop = formData.emoji_and_icon
+        else payload.emoji = formData.emoji_and_icon
 
-        payload.project_lead = formData.project_lead_member;
+        payload.project_lead = formData.project_lead_member
         // Upper case identifier
-        payload.identifier = payload.identifier.toUpperCase();
+        payload.identifier = payload.identifier.toUpperCase()
 
         return createProject(workspaceSlug.toString(), payload)
             .then((res) => {
                 const newPayload = {
                     ...res,
                     state: "SUCCESS",
-                };
+                }
                 captureProjectEvent({
                     eventName: PROJECT_CREATED,
                     payload: newPayload,
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "Project created successfully.",
-                });
+                })
                 if (setToFavorite) {
-                    handleAddToFavorites(res.id);
+                    handleAddToFavorites(res.id)
                 }
-                handleClose();
+                handleClose()
             })
             .catch((err) => {
                 Object.keys(err.data).map((key) => {
@@ -151,34 +145,34 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                         type: "error",
                         title: "Error!",
                         message: err.data[key],
-                    });
+                    })
                     captureProjectEvent({
                         eventName: PROJECT_CREATED,
                         payload: {
                             ...payload,
                             state: "FAILED",
                         },
-                    });
-                });
-            });
-    };
+                    })
+                })
+            })
+    }
 
     const handleNameChange = (onChange: any) => (e: ChangeEvent<HTMLInputElement>) => {
         if (!isChangeInIdentifierRequired) {
-            onChange(e);
-            return;
+            onChange(e)
+            return
         }
-        if (e.target.value === "") setValue("identifier", "");
-        else setValue("identifier", e.target.value.replace(/[^ÇŞĞIİÖÜA-Za-z0-9]/g, "").substring(0, 5));
-        onChange(e);
-    };
+        if (e.target.value === "") setValue("identifier", "")
+        else setValue("identifier", e.target.value.replace(/[^ÇŞĞIİÖÜA-Za-z0-9]/g, "").substring(0, 5))
+        onChange(e)
+    }
 
     const handleIdentifierChange = (onChange: any) => (e: ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        const alphanumericValue = value.replace(/[^ÇŞĞIİÖÜA-Za-z0-9]/g, "");
-        setIsChangeInIdentifierRequired(false);
-        onChange(alphanumericValue);
-    };
+        const { value } = e.target
+        const alphanumericValue = value.replace(/[^ÇŞĞIİÖÜA-Za-z0-9]/g, "")
+        setIsChangeInIdentifierRequired(false)
+        onChange(alphanumericValue)
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -230,7 +224,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                         <ImagePickerPopover
                                             label="Change Cover"
                                             onChange={(image) => {
-                                                setValue("cover_image", image);
+                                                setValue("cover_image", image)
                                             }}
                                             control={control}
                                             value={watch("cover_image")}
@@ -433,5 +427,5 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

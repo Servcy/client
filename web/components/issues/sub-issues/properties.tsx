@@ -1,29 +1,26 @@
-import React from "react";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { PriorityDropdown, MemberDropdown, StateDropdown } from "@components/dropdowns";
-
-import { TSubIssueOperations } from "./root";
+import React from "react"
+import { MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
+import { useIssueDetail } from "@hooks/store"
+import { TSubIssueOperations } from "./root"
 
 export interface IIssueProperty {
-    workspaceSlug: string;
-    parentIssueId: string;
-    issueId: string;
-    disabled: boolean;
-    subIssueOperations: TSubIssueOperations;
+    workspaceSlug: string
+    parentIssueId: string
+    issueId: string
+    disabled: boolean
+    subIssueOperations: TSubIssueOperations
 }
 
 export const IssueProperty: React.FC<IIssueProperty> = (props) => {
-    const { workspaceSlug, parentIssueId, issueId, disabled, subIssueOperations } = props;
+    const { workspaceSlug, parentIssueId, issueId, disabled, subIssueOperations } = props
 
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const issue = getIssueById(issueId);
+    const issue = getIssueById(issueId)
 
-    if (!issue) return <></>;
+    if (!issue) return <></>
     return (
         <div className="relative flex items-center gap-2">
             <div className="h-5 flex-shrink-0">
@@ -77,5 +74,5 @@ export const IssueProperty: React.FC<IIssueProperty> = (props) => {
                 />
             </div>
         </div>
-    );
-};
+    )
+}

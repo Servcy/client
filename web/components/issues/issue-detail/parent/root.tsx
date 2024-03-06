@@ -1,39 +1,36 @@
-import { FC } from "react";
-import Link from "next/link";
-import { MinusCircle } from "lucide-react";
+import Link from "next/link"
+import { FC } from "react"
+import { useIssues, useProject, useProjectState } from "@hooks/store"
+import { MinusCircle } from "lucide-react"
+import { TIssue } from "@servcy/types"
+import { CustomMenu } from "@servcy/ui"
+import { TIssueOperations } from "../root"
 // component
-import { IssueParentSiblings } from "./siblings";
-
-import { CustomMenu } from "@servcy/ui";
-
-import { useIssues, useProject, useProjectState } from "@hooks/store";
-
-import { TIssueOperations } from "../root";
-import { TIssue } from "@servcy/types";
+import { IssueParentSiblings } from "./siblings"
 
 export type TIssueParentDetail = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    issue: TIssue;
-    issueOperations: TIssueOperations;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    issue: TIssue
+    issueOperations: TIssueOperations
+}
 
 export const IssueParentDetail: FC<TIssueParentDetail> = (props) => {
-    const { workspaceSlug, projectId, issueId, issue, issueOperations } = props;
+    const { workspaceSlug, projectId, issueId, issue, issueOperations } = props
 
-    const { issueMap } = useIssues();
-    const { getProjectById } = useProject();
-    const { getProjectStates } = useProjectState();
+    const { issueMap } = useIssues()
+    const { getProjectById } = useProject()
+    const { getProjectStates } = useProjectState()
 
-    const parentIssue = issueMap?.[issue.parent_id || ""] || undefined;
+    const parentIssue = issueMap?.[issue.parent_id || ""] || undefined
 
     const issueParentState = getProjectStates(parentIssue?.project_id)?.find(
         (state) => state?.id === parentIssue?.state_id
-    );
-    const stateColor = issueParentState?.color || undefined;
+    )
+    const stateColor = issueParentState?.color || undefined
 
-    if (!parentIssue) return <></>;
+    if (!parentIssue) return <></>
 
     return (
         <>
@@ -69,5 +66,5 @@ export const IssueParentDetail: FC<TIssueParentDetail> = (props) => {
                 </CustomMenu>
             </div>
         </>
-    );
-};
+    )
+}

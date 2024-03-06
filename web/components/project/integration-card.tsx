@@ -1,26 +1,18 @@
-import React from "react";
-
-import Image from "next/image";
-
-import useSWR, { mutate } from "swr";
-
-import { ProjectService } from "@services/project";
-
-import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-
-import { SelectRepository, SelectChannel } from "@components/integration";
-
-import GithubLogo from "public/logos/github-square.png";
-import SlackLogo from "public/services/slack.png";
-
-import { IWorkspaceIntegration } from "@servcy/types";
-
-import { PROJECT_GITHUB_REPOSITORY } from "@constants/fetch-keys";
+import Image from "next/image"
+import { useRouter } from "next/router"
+import React from "react"
+import { SelectChannel, SelectRepository } from "@components/integration"
+import { PROJECT_GITHUB_REPOSITORY } from "@constants/fetch-keys"
+import { ProjectService } from "@services/project"
+import GithubLogo from "public/logos/github-square.png"
+import SlackLogo from "public/services/slack.png"
+import toast from "react-hot-toast"
+import useSWR, { mutate } from "swr"
+import { IWorkspaceIntegration } from "@servcy/types"
 
 type Props = {
-    integration: IWorkspaceIntegration;
-};
+    integration: IWorkspaceIntegration
+}
 
 const integrationDetails: { [key: string]: any } = {
     github: {
@@ -31,13 +23,13 @@ const integrationDetails: { [key: string]: any } = {
         logo: SlackLogo,
         description: "Get regular updates and control which notification you want to receive.",
     },
-};
+}
 
-const projectService = new ProjectService();
+const projectService = new ProjectService()
 
 export const IntegrationCard: React.FC<Props> = ({ integration }) => {
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     const { data: syncedGithubRepository } = useSWR(
         projectId ? PROJECT_GITHUB_REPOSITORY(projectId as string) : null,
@@ -49,17 +41,17 @@ export const IntegrationCard: React.FC<Props> = ({ integration }) => {
                       integration.id
                   )
                 : null
-    );
+    )
 
     const handleChange = (repo: any) => {
-        if (!workspaceSlug || !projectId || !integration) return;
+        if (!workspaceSlug || !projectId || !integration) return
 
         const {
             html_url,
             owner: { login },
             id,
             name,
-        } = repo;
+        } = repo
 
         projectService
             .syncGithubRepository(workspaceSlug as string, projectId as string, integration.id, {
@@ -69,23 +61,23 @@ export const IntegrationCard: React.FC<Props> = ({ integration }) => {
                 url: html_url,
             })
             .then(() => {
-                mutate(PROJECT_GITHUB_REPOSITORY(projectId as string));
+                mutate(PROJECT_GITHUB_REPOSITORY(projectId as string))
 
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: `${login}/${name} repository synced with the project successfully.`,
-                });
+                })
             })
             .catch((err) => {
-                console.error(err);
+                console.error(err)
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Repository could not be synced with the project. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     return (
         <>
@@ -127,5 +119,5 @@ export const IntegrationCard: React.FC<Props> = ({ integration }) => {
                 </div>
             )}
         </>
-    );
-};
+    )
+}

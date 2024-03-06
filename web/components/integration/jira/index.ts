@@ -1,20 +1,20 @@
-export * from "./root";
-export * from "./give-details";
-export * from "./jira-project-detail";
-export * from "./import-users";
-export * from "./confirm-import";
+import { IJiraImporterForm } from "@servcy/types"
 
-import { IJiraImporterForm } from "@servcy/types";
+export * from "./root"
+export * from "./give-details"
+export * from "./jira-project-detail"
+export * from "./import-users"
+export * from "./confirm-import"
 
 export type TJiraIntegrationSteps =
     | "import-configure"
     | "display-import-data"
     | "select-import-data"
     | "import-users"
-    | "import-confirmation";
+    | "import-confirmation"
 
 export interface IJiraIntegrationData {
-    state: TJiraIntegrationSteps;
+    state: TJiraIntegrationSteps
 }
 
 export const jiraFormDefaultValues: IJiraImporterForm = {
@@ -36,4 +36,4 @@ export const jiraFormDefaultValues: IJiraImporterForm = {
         total_states: 0,
     },
     project_id: "",
-};
+}

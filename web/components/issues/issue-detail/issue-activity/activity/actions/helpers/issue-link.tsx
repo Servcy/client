@@ -1,23 +1,21 @@
-import { FC } from "react";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { Tooltip } from "@servcy/ui";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { Tooltip } from "@servcy/ui"
 
 type TIssueLink = {
-    activityId: string;
-};
+    activityId: string
+}
 
 export const IssueLink: FC<TIssueLink> = (props) => {
-    const { activityId } = props;
+    const { activityId } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <Tooltip tooltipContent={activity.issue_detail ? activity.issue_detail.name : "This issue has been deleted"}>
             <a
@@ -37,5 +35,5 @@ export const IssueLink: FC<TIssueLink> = (props) => {
                 <span className="font-normal">{activity.issue_detail?.name}</span>
             </a>
         </Tooltip>
-    );
-};
+    )
+}

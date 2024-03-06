@@ -1,43 +1,39 @@
-import { useState, Fragment, FC } from "react";
-import { useRouter } from "next/router";
-import { mutate } from "swr";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { APITokenService } from "@services/api_token.service";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import { IApiToken } from "@servcy/types";
-
-import { API_TOKENS_LIST } from "@constants/fetch-keys";
+import { useRouter } from "next/router"
+import { FC, Fragment, useState } from "react"
+import { API_TOKENS_LIST } from "@constants/fetch-keys"
+import { Dialog, Transition } from "@headlessui/react"
+import { APITokenService } from "@services/api_token.service"
+import toast from "react-hot-toast"
+import { mutate } from "swr"
+import { IApiToken } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    tokenId: string;
-};
+    isOpen: boolean
+    onClose: () => void
+    tokenId: string
+}
 
-const apiTokenService = new APITokenService();
+const apiTokenService = new APITokenService()
 
 export const DeleteApiTokenModal: FC<Props> = (props) => {
-    const { isOpen, onClose, tokenId } = props;
+    const { isOpen, onClose, tokenId } = props
     // states
-    const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
+    const [deleteLoading, setDeleteLoading] = useState<boolean>(false)
 
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const handleClose = () => {
-        onClose();
-        setDeleteLoading(false);
-    };
+        onClose()
+        setDeleteLoading(false)
+    }
 
     const handleDeletion = () => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
-        setDeleteLoading(true);
+        setDeleteLoading(true)
 
         apiTokenService
             .deleteApiToken(workspaceSlug.toString(), tokenId)
@@ -46,15 +42,15 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
                     type: "success",
                     title: "Success!",
                     message: "Token deleted successfully.",
-                });
+                })
 
                 mutate<IApiToken[]>(
                     API_TOKENS_LIST(workspaceSlug.toString()),
                     (prevData) => (prevData ?? []).filter((token) => token.id !== tokenId),
                     false
-                );
+                )
 
-                handleClose();
+                handleClose()
             })
             .catch((err) =>
                 toast.error({
@@ -63,8 +59,8 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
                     message: err?.message ?? "Something went wrong. Please try again.",
                 })
             )
-            .finally(() => setDeleteLoading(false));
-    };
+            .finally(() => setDeleteLoading(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -125,5 +121,5 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

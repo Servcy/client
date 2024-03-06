@@ -1,49 +1,47 @@
-import set from "lodash/set";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-
-import { IssueService } from "@services/issue";
-
-import { TIssueLink, TIssueLinkIdMap, TIssueLinkMap } from "@servcy/types";
-import { IIssueDetail } from "./root.store";
+import { IssueService } from "@services/issue"
+import set from "lodash/set"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { TIssueLink, TIssueLinkIdMap, TIssueLinkMap } from "@servcy/types"
+import { IIssueDetail } from "./root.store"
 
 export interface IIssueLinkStoreActions {
-    addLinks: (issueId: string, links: TIssueLink[]) => void;
-    fetchLinks: (workspaceSlug: string, projectId: string, issueId: string) => Promise<TIssueLink[]>;
+    addLinks: (issueId: string, links: TIssueLink[]) => void
+    fetchLinks: (workspaceSlug: string, projectId: string, issueId: string) => Promise<TIssueLink[]>
     createLink: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         data: Partial<TIssueLink>
-    ) => Promise<TIssueLink>;
+    ) => Promise<TIssueLink>
     updateLink: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         linkId: string,
         data: Partial<TIssueLink>
-    ) => Promise<TIssueLink>;
-    removeLink: (workspaceSlug: string, projectId: string, issueId: string, linkId: string) => Promise<void>;
+    ) => Promise<TIssueLink>
+    removeLink: (workspaceSlug: string, projectId: string, issueId: string, linkId: string) => Promise<void>
 }
 
 export interface IIssueLinkStore extends IIssueLinkStoreActions {
     // observables
-    links: TIssueLinkIdMap;
-    linkMap: TIssueLinkMap;
+    links: TIssueLinkIdMap
+    linkMap: TIssueLinkMap
     // computed
-    issueLinks: string[] | undefined;
+    issueLinks: string[] | undefined
 
-    getLinksByIssueId: (issueId: string) => string[] | undefined;
-    getLinkById: (linkId: string) => TIssueLink | undefined;
+    getLinksByIssueId: (issueId: string) => string[] | undefined
+    getLinkById: (linkId: string) => TIssueLink | undefined
 }
 
 export class IssueLinkStore implements IIssueLinkStore {
     // observables
-    links: TIssueLinkIdMap = {};
-    linkMap: TIssueLinkMap = {};
+    links: TIssueLinkIdMap = {}
+    linkMap: TIssueLinkMap = {}
     // root store
-    rootIssueDetailStore: IIssueDetail;
+    rootIssueDetailStore: IIssueDetail
 
-    issueService;
+    issueService
 
     constructor(rootStore: IIssueDetail) {
         makeObservable(this, {
@@ -58,64 +56,64 @@ export class IssueLinkStore implements IIssueLinkStore {
             createLink: action,
             updateLink: action,
             removeLink: action,
-        });
+        })
         // root store
-        this.rootIssueDetailStore = rootStore;
+        this.rootIssueDetailStore = rootStore
 
-        this.issueService = new IssueService();
+        this.issueService = new IssueService()
     }
 
     // computed
     get issueLinks() {
-        const issueId = this.rootIssueDetailStore.peekIssue?.issueId;
-        if (!issueId) return undefined;
-        return this.links[issueId] ?? undefined;
+        const issueId = this.rootIssueDetailStore.peekIssue?.issueId
+        if (!issueId) return undefined
+        return this.links[issueId] ?? undefined
     }
 
     getLinksByIssueId = (issueId: string) => {
-        if (!issueId) return undefined;
-        return this.links[issueId] ?? undefined;
-    };
+        if (!issueId) return undefined
+        return this.links[issueId] ?? undefined
+    }
 
     getLinkById = (linkId: string) => {
-        if (!linkId) return undefined;
-        return this.linkMap[linkId] ?? undefined;
-    };
+        if (!linkId) return undefined
+        return this.linkMap[linkId] ?? undefined
+    }
 
     // actions
     addLinks = (issueId: string, links: TIssueLink[]) => {
         runInAction(() => {
-            this.links[issueId] = links.map((link) => link.id);
-            links.forEach((link) => set(this.linkMap, link.id, link));
-        });
-    };
+            this.links[issueId] = links.map((link) => link.id)
+            links.forEach((link) => set(this.linkMap, link.id, link))
+        })
+    }
 
     fetchLinks = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            const response = await this.issueService.fetchIssueLinks(workspaceSlug, projectId, issueId);
-            this.addLinks(issueId, response);
-            return response;
+            const response = await this.issueService.fetchIssueLinks(workspaceSlug, projectId, issueId)
+            this.addLinks(issueId, response)
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     createLink = async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssueLink>) => {
         try {
-            const response = await this.issueService.createIssueLink(workspaceSlug, projectId, issueId, data);
+            const response = await this.issueService.createIssueLink(workspaceSlug, projectId, issueId, data)
 
             runInAction(() => {
-                this.links[issueId].push(response.id);
-                set(this.linkMap, response.id, response);
-            });
+                this.links[issueId].push(response.id)
+                set(this.linkMap, response.id, response)
+            })
 
             // fetching activity
-            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId);
-            return response;
+            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId)
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     updateLink = async (
         workspaceSlug: string,
@@ -127,36 +125,36 @@ export class IssueLinkStore implements IIssueLinkStore {
         try {
             runInAction(() => {
                 Object.keys(data).forEach((key) => {
-                    set(this.linkMap, [linkId, key], data[key as keyof TIssueLink]);
-                });
-            });
+                    set(this.linkMap, [linkId, key], data[key as keyof TIssueLink])
+                })
+            })
 
-            const response = await this.issueService.updateIssueLink(workspaceSlug, projectId, issueId, linkId, data);
+            const response = await this.issueService.updateIssueLink(workspaceSlug, projectId, issueId, linkId, data)
 
             // fetching activity
-            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId);
-            return response;
+            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId)
+            return response
         } catch (error) {
             // TODO: fetch issue detail
-            throw error;
+            throw error
         }
-    };
+    }
 
     removeLink = async (workspaceSlug: string, projectId: string, issueId: string, linkId: string) => {
         try {
-            await this.issueService.deleteIssueLink(workspaceSlug, projectId, issueId, linkId);
+            await this.issueService.deleteIssueLink(workspaceSlug, projectId, issueId, linkId)
 
-            const linkIndex = this.links[issueId].findIndex((_comment) => _comment === linkId);
+            const linkIndex = this.links[issueId].findIndex((_comment) => _comment === linkId)
             if (linkIndex >= 0)
                 runInAction(() => {
-                    this.links[issueId].splice(linkIndex, 1);
-                    delete this.linkMap[linkId];
-                });
+                    this.links[issueId].splice(linkIndex, 1)
+                    delete this.linkMap[linkId]
+                })
 
             // fetching activity
-            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId);
+            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId)
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 }

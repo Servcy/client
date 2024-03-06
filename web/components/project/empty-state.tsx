@@ -1,21 +1,19 @@
-import React from "react";
-
-import Image from "next/image";
-
-import { Button } from "@servcy/ui";
+import Image from "next/image"
+import React from "react"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    title: string;
-    description?: React.ReactNode;
-    image: any;
+    title: string
+    description?: React.ReactNode
+    image: any
     primaryButton?: {
-        icon?: any;
-        text: string;
-        onClick: () => void;
-    };
-    secondaryButton?: React.ReactNode;
-    disabled?: boolean;
-};
+        icon?: any
+        text: string
+        onClick: () => void
+    }
+    secondaryButton?: React.ReactNode
+    disabled?: boolean
+}
 
 export const EmptyState: React.FC<Props> = ({
     title,
@@ -48,4 +46,4 @@ export const EmptyState: React.FC<Props> = ({
             </div>
         </div>
     </div>
-);
+)

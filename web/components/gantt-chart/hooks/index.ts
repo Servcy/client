@@ -1,1 +1,1 @@
-export * from "./use-gantt-chart";
+export * from "./use-gantt-chart"

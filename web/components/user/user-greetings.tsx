@@ -1,40 +1,38 @@
-import { FC } from "react";
-
-import { useCurrentTime } from "@hooks/use-current-time";
-
-import { IUser } from "@servcy/types";
+import { FC } from "react"
+import { useCurrentTime } from "@hooks/use-current-time"
+import { IUser } from "@servcy/types"
 
 export interface IUserGreetingsView {
-    user: IUser;
+    user: IUser
 }
 
 export const UserGreetingsView: FC<IUserGreetingsView> = (props) => {
-    const { user } = props;
+    const { user } = props
     // current time hook
-    const { currentTime } = useCurrentTime();
+    const { currentTime } = useCurrentTime()
 
     const hour = new Intl.DateTimeFormat("en-US", {
         hour12: false,
         hour: "numeric",
-    }).format(currentTime);
+    }).format(currentTime)
 
     const date = new Intl.DateTimeFormat("en-US", {
         month: "short",
         day: "numeric",
-    }).format(currentTime);
+    }).format(currentTime)
 
     const weekDay = new Intl.DateTimeFormat("en-US", {
         weekday: "long",
-    }).format(currentTime);
+    }).format(currentTime)
 
     const timeString = new Intl.DateTimeFormat("en-US", {
         timeZone: user?.user_timezone,
         hour12: false, // Use 24-hour format
         hour: "2-digit",
         minute: "2-digit",
-    }).format(currentTime);
+    }).format(currentTime)
 
-    const greeting = parseInt(hour, 10) < 12 ? "morning" : parseInt(hour, 10) < 18 ? "afternoon" : "evening";
+    const greeting = parseInt(hour, 10) < 12 ? "morning" : parseInt(hour, 10) < 18 ? "afternoon" : "evening"
 
     return (
         <div>
@@ -48,5 +46,5 @@ export const UserGreetingsView: FC<IUserGreetingsView> = (props) => {
                 </div>
             </h6>
         </div>
-    );
-};
+    )
+}

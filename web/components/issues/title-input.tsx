@@ -1,80 +1,76 @@
-import { FC, useState, useEffect, useCallback } from "react";
-import { observer } from "mobx-react";
-
-import { TextArea } from "@servcy/ui";
-
-import { TIssueOperations } from "./issue-detail";
-
-import useDebounce from "@hooks/use-debounce";
+import { FC, useCallback, useEffect, useState } from "react"
+import useDebounce from "@hooks/use-debounce"
+import { observer } from "mobx-react"
+import { TextArea } from "@servcy/ui"
+import { TIssueOperations } from "./issue-detail"
 
 export type IssueTitleInputProps = {
-    disabled?: boolean;
-    value: string | undefined | null;
-    workspaceSlug: string;
-    isSubmitting: "submitting" | "submitted" | "saved";
-    setIsSubmitting: (value: "submitting" | "submitted" | "saved") => void;
-    issueOperations: TIssueOperations;
-    projectId: string;
-    issueId: string;
-};
+    disabled?: boolean
+    value: string | undefined | null
+    workspaceSlug: string
+    isSubmitting: "submitting" | "submitted" | "saved"
+    setIsSubmitting: (value: "submitting" | "submitted" | "saved") => void
+    issueOperations: TIssueOperations
+    projectId: string
+    issueId: string
+}
 
 export const IssueTitleInput: FC<IssueTitleInputProps> = observer((props) => {
-    const { disabled, value, workspaceSlug, isSubmitting, setIsSubmitting, issueId, issueOperations, projectId } =
-        props;
+    const { disabled, value, workspaceSlug, isSubmitting, setIsSubmitting, issueId, issueOperations, projectId } = props
     // states
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState("")
 
-    const debouncedValue = useDebounce(title, 1500);
-
-    useEffect(() => {
-        if (value) setTitle(value);
-    }, [value]);
+    const debouncedValue = useDebounce(title, 1500)
 
     useEffect(() => {
-        const textarea = document.querySelector("#title-input");
+        if (value) setTitle(value)
+    }, [value])
+
+    useEffect(() => {
+        const textarea = document.querySelector("#title-input")
         if (debouncedValue && debouncedValue !== value) {
             issueOperations.update(workspaceSlug, projectId, issueId, { name: debouncedValue }, false).finally(() => {
-                setIsSubmitting("saved");
+                setIsSubmitting("saved")
                 if (textarea && !textarea.matches(":focus")) {
-                    const trimmedTitle = debouncedValue.trim();
-                    if (trimmedTitle !== title) setTitle(trimmedTitle);
+                    const trimmedTitle = debouncedValue.trim()
+                    if (trimmedTitle !== title) setTitle(trimmedTitle)
                 }
-            });
+            })
         }
         // DO NOT Add more dependencies here. It will cause multiple requests to be sent.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [debouncedValue]);
+    }, [debouncedValue])
 
     useEffect(() => {
         const handleBlur = () => {
-            const trimmedTitle = title.trim();
+            const trimmedTitle = title.trim()
             if (trimmedTitle !== title && isSubmitting !== "submitting") {
-                setTitle(trimmedTitle);
-                setIsSubmitting("submitting");
+                setTitle(trimmedTitle)
+                setIsSubmitting("submitting")
             }
-        };
+        }
 
-        const textarea = document.querySelector("#title-input"); // You might need to change this selector according to your TextArea component
+        const textarea = document.querySelector("#title-input") // You might need to change this selector according to your TextArea component
         if (textarea) {
-            textarea.addEventListener("blur", handleBlur);
+            textarea.addEventListener("blur", handleBlur)
         }
 
         return () => {
             if (textarea) {
-                textarea.removeEventListener("blur", handleBlur);
+                textarea.removeEventListener("blur", handleBlur)
             }
-        };
-    }, [title, isSubmitting, setIsSubmitting]);
+        }
+    }, [title, isSubmitting, setIsSubmitting])
 
     const handleTitleChange = useCallback(
         (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setIsSubmitting("submitting");
-            setTitle(e.target.value);
+            setIsSubmitting("submitting")
+            setTitle(e.target.value)
         },
         [setIsSubmitting]
-    );
+    )
 
-    if (disabled) return <div className="text-2xl font-medium">{title}</div>;
+    if (disabled) return <div className="text-2xl font-medium">{title}</div>
 
     return (
         <div className="relative">
@@ -96,5 +92,5 @@ export const IssueTitleInput: FC<IssueTitleInputProps> = observer((props) => {
                 /255
             </div>
         </div>
-    );
-});
+    )
+})

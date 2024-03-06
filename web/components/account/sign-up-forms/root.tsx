@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useApplication, useEventTracker } from "@hooks/store";
-import useSignInRedirection from "@hooks/use-login-redirection";
-
+import Link from "next/link"
+import React, { useEffect, useState } from "react"
 import {
     OAuthOptions,
     SignUpEmailForm,
     SignUpOptionalSetPasswordForm,
     SignUpPasswordForm,
     SignUpUniqueCodeForm,
-} from "@components/account";
-import Link from "next/link";
-
-import { NAVIGATE_TO_SIGNIN } from "@constants/event-tracker";
+} from "@components/account"
+import { NAVIGATE_TO_SIGNIN } from "@constants/event-tracker"
+import { useApplication, useEventTracker } from "@hooks/store"
+import useSignInRedirection from "@hooks/use-login-redirection"
+import { observer } from "mobx-react-lite"
 
 export enum ESignUpSteps {
     EMAIL = "EMAIL",
@@ -22,40 +19,40 @@ export enum ESignUpSteps {
     OPTIONAL_SET_PASSWORD = "OPTIONAL_SET_PASSWORD",
 }
 
-const OAUTH_ENABLED_STEPS = [ESignUpSteps.EMAIL];
+const OAUTH_ENABLED_STEPS = [ESignUpSteps.EMAIL]
 
 export const SignUpRoot = observer(() => {
     // states
-    const [signInStep, setSignInStep] = useState<ESignUpSteps | null>(null);
-    const [email, setEmail] = useState("");
+    const [signInStep, setSignInStep] = useState<ESignUpSteps | null>(null)
+    const [email, setEmail] = useState("")
     // sign in redirection hook
-    const { handleRedirection } = useSignInRedirection();
+    const { handleRedirection } = useSignInRedirection()
     // mobx store
     const {
         config: { envConfig },
-    } = useApplication();
-    const { captureEvent } = useEventTracker();
+    } = useApplication()
+    const { captureEvent } = useEventTracker()
 
     // step 1 submit handler- email verification
-    const handleEmailVerification = () => setSignInStep(ESignUpSteps.UNIQUE_CODE);
+    const handleEmailVerification = () => setSignInStep(ESignUpSteps.UNIQUE_CODE)
 
     // step 2 submit handler- unique code sign in
     const handleUniqueCodeSignIn = async (isPasswordAutoset: boolean) => {
-        if (isPasswordAutoset) setSignInStep(ESignUpSteps.OPTIONAL_SET_PASSWORD);
-        else await handleRedirection();
-    };
+        if (isPasswordAutoset) setSignInStep(ESignUpSteps.OPTIONAL_SET_PASSWORD)
+        else await handleRedirection()
+    }
 
     // step 3 submit handler- password sign in
     const handlePasswordSignIn = async () => {
-        await handleRedirection();
-    };
+        await handleRedirection()
+    }
 
-    const isOAuthEnabled = envConfig && (envConfig.google_client_id || envConfig.github_client_id);
+    const isOAuthEnabled = envConfig && (envConfig.google_client_id || envConfig.github_client_id)
 
     useEffect(() => {
-        if (envConfig?.is_smtp_configured) setSignInStep(ESignUpSteps.EMAIL);
-        else setSignInStep(ESignUpSteps.PASSWORD);
-    }, [envConfig?.is_smtp_configured]);
+        if (envConfig?.is_smtp_configured) setSignInStep(ESignUpSteps.EMAIL)
+        else setSignInStep(ESignUpSteps.PASSWORD)
+    }, [envConfig?.is_smtp_configured])
 
     return (
         <>
@@ -71,8 +68,8 @@ export const SignUpRoot = observer(() => {
                         <SignUpUniqueCodeForm
                             email={email}
                             handleEmailClear={() => {
-                                setEmail("");
-                                setSignInStep(ESignUpSteps.EMAIL);
+                                setEmail("")
+                                setSignInStep(ESignUpSteps.EMAIL)
                             }}
                             onSubmit={handleUniqueCodeSignIn}
                         />
@@ -103,5 +100,5 @@ export const SignUpRoot = observer(() => {
                 </>
             )}
         </>
-    );
-});
+    )
+})

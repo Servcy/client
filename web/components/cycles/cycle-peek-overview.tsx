@@ -1,37 +1,35 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useCycle } from "@hooks/store";
-
-import { CycleDetailsSidebar } from "./sidebar";
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
+import { useCycle } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { CycleDetailsSidebar } from "./sidebar"
 
 type Props = {
-    projectId: string;
-    workspaceSlug: string;
-};
+    projectId: string
+    workspaceSlug: string
+}
 
 export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, workspaceSlug }) => {
     // router
-    const router = useRouter();
-    const { peekCycle } = router.query;
+    const router = useRouter()
+    const { peekCycle } = router.query
     // refs
-    const ref = React.useRef(null);
+    const ref = React.useRef(null)
     // store hooks
-    const { fetchCycleDetails } = useCycle();
+    const { fetchCycleDetails } = useCycle()
 
     const handleClose = () => {
-        delete router.query.peekCycle;
+        delete router.query.peekCycle
         router.push({
             pathname: router.pathname,
             query: { ...router.query },
-        });
-    };
+        })
+    }
 
     useEffect(() => {
-        if (!peekCycle) return;
-        fetchCycleDetails(workspaceSlug, projectId, peekCycle.toString());
-    }, [fetchCycleDetails, peekCycle, projectId, workspaceSlug]);
+        if (!peekCycle) return
+        fetchCycleDetails(workspaceSlug, projectId, peekCycle.toString())
+    }, [fetchCycleDetails, peekCycle, projectId, workspaceSlug])
 
     return (
         <>
@@ -48,5 +46,5 @@ export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, workspa
                 </div>
             )}
         </>
-    );
-});
+    )
+})

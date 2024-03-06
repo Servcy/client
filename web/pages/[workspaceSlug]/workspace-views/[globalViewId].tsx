@@ -1,36 +1,31 @@
-import { observer } from "mobx-react";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { useGlobalView, useWorkspace } from "@hooks/store";
-
-import { PageHead } from "@components/core";
-import { GlobalIssuesHeader } from "@components/headers";
-import { AllIssueLayoutRoot } from "@components/issues";
-import { GlobalViewsHeader } from "@components/workspace";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace";
+import { useRouter } from "next/router"
+import { ReactElement } from "react"
+import { PageHead } from "@components/core"
+import { GlobalIssuesHeader } from "@components/headers"
+import { AllIssueLayoutRoot } from "@components/issues"
+import { GlobalViewsHeader } from "@components/workspace"
+import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
+import { useGlobalView, useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { observer } from "mobx-react"
+import { NextPageWithLayout } from "@/types/types"
 
 const GlobalViewIssuesPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { globalViewId } = router.query;
+    const router = useRouter()
+    const { globalViewId } = router.query
     // store hooks
-    const { currentWorkspace } = useWorkspace();
-    const { getViewDetailsById } = useGlobalView();
+    const { currentWorkspace } = useWorkspace()
+    const { getViewDetailsById } = useGlobalView()
     // derived values
-    const globalViewDetails = globalViewId ? getViewDetailsById(globalViewId.toString()) : undefined;
-    const defaultView = DEFAULT_GLOBAL_VIEWS_LIST.find((view) => view.key === globalViewId);
+    const globalViewDetails = globalViewId ? getViewDetailsById(globalViewId.toString()) : undefined
+    const defaultView = DEFAULT_GLOBAL_VIEWS_LIST.find((view) => view.key === globalViewId)
     const pageTitle =
         currentWorkspace?.name && defaultView?.label
             ? `${currentWorkspace?.name} - ${defaultView?.label}`
             : currentWorkspace?.name && globalViewDetails?.name
               ? `${currentWorkspace?.name} - ${globalViewDetails?.name}`
-              : undefined;
+              : undefined
 
     return (
         <>
@@ -42,11 +37,11 @@ const GlobalViewIssuesPage: NextPageWithLayout = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})
 
 GlobalViewIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <AppLayout header={<GlobalIssuesHeader activeLayout="spreadsheet" />}>{page}</AppLayout>;
-};
+    return <AppLayout header={<GlobalIssuesHeader activeLayout="spreadsheet" />}>{page}</AppLayout>
+}
 
-export default GlobalViewIssuesPage;
+export default GlobalViewIssuesPage

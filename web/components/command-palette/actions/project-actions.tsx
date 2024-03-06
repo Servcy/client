@@ -1,16 +1,14 @@
-import { Command } from "cmdk";
-import { ContrastIcon, FileText } from "lucide-react";
-
-import { useApplication, useEventTracker } from "@hooks/store";
-
-import { DiceIcon, PhotoFilterIcon } from "@servcy/ui";
+import { useApplication, useEventTracker } from "@hooks/store"
+import { Command } from "cmdk"
+import { ContrastIcon, FileText } from "lucide-react"
+import { DiceIcon, PhotoFilterIcon } from "@servcy/ui"
 
 type Props = {
-    closePalette: () => void;
-};
+    closePalette: () => void
+}
 
 export const CommandPaletteProjectActions: React.FC<Props> = (props) => {
-    const { closePalette } = props;
+    const { closePalette } = props
 
     const {
         commandPalette: {
@@ -19,17 +17,17 @@ export const CommandPaletteProjectActions: React.FC<Props> = (props) => {
             toggleCreatePageModal,
             toggleCreateViewModal,
         },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
 
     return (
         <>
             <Command.Group heading="Cycle">
                 <Command.Item
                     onSelect={() => {
-                        closePalette();
-                        setTrackElement("Command palette");
-                        toggleCreateCycleModal(true);
+                        closePalette()
+                        setTrackElement("Command palette")
+                        toggleCreateCycleModal(true)
                     }}
                     className="focus:outline-none"
                 >
@@ -43,9 +41,9 @@ export const CommandPaletteProjectActions: React.FC<Props> = (props) => {
             <Command.Group heading="Module">
                 <Command.Item
                     onSelect={() => {
-                        closePalette();
-                        setTrackElement("Command palette");
-                        toggleCreateModuleModal(true);
+                        closePalette()
+                        setTrackElement("Command palette")
+                        toggleCreateModuleModal(true)
                     }}
                     className="focus:outline-none"
                 >
@@ -59,9 +57,9 @@ export const CommandPaletteProjectActions: React.FC<Props> = (props) => {
             <Command.Group heading="View">
                 <Command.Item
                     onSelect={() => {
-                        closePalette();
-                        setTrackElement("Command palette");
-                        toggleCreateViewModal(true);
+                        closePalette()
+                        setTrackElement("Command palette")
+                        toggleCreateViewModal(true)
                     }}
                     className="focus:outline-none"
                 >
@@ -75,9 +73,9 @@ export const CommandPaletteProjectActions: React.FC<Props> = (props) => {
             <Command.Group heading="Page">
                 <Command.Item
                     onSelect={() => {
-                        closePalette();
-                        setTrackElement("Command palette");
-                        toggleCreatePageModal(true);
+                        closePalette()
+                        setTrackElement("Command palette")
+                        toggleCreatePageModal(true)
                     }}
                     className="focus:outline-none"
                 >
@@ -89,5 +87,5 @@ export const CommandPaletteProjectActions: React.FC<Props> = (props) => {
                 </Command.Item>
             </Command.Group>
         </>
-    );
-};
+    )
+}

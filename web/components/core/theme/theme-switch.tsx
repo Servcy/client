@@ -1,16 +1,14 @@
-import { FC } from "react";
-
-import { THEME_OPTIONS, I_THEME_OPTION } from "@constants/themes";
-
-import { CustomSelect } from "@servcy/ui";
+import { FC } from "react"
+import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
+import { CustomSelect } from "@servcy/ui"
 
 type Props = {
-    value: I_THEME_OPTION | null;
-    onChange: (value: I_THEME_OPTION) => void;
-};
+    value: I_THEME_OPTION | null
+    onChange: (value: I_THEME_OPTION) => void
+}
 
 export const ThemeSwitch: FC<Props> = (props) => {
-    const { value, onChange } = props;
+    const { value, onChange } = props
 
     return (
         <CustomSelect
@@ -75,5 +73,5 @@ export const ThemeSwitch: FC<Props> = (props) => {
                 </CustomSelect.Option>
             ))}
         </CustomSelect>
-    );
-};
+    )
+}

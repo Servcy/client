@@ -1,59 +1,56 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-
-import { Integration, UserIntegration } from "@/types/apps/integration";
-
-import { Button, Input, Select } from "antd";
-import Image from "next/image.js";
-import { MdOutlineSyncAlt } from "react-icons/md";
-
+import Image from "next/image.js"
+import { useEffect, useState } from "react"
 import {
     configureUserIntegration as configureUserIntegrationApi,
     fetchUserIntegrations as fetchUserIntegrationsApi,
-} from "@/apis/integration";
+} from "@/apis/integration"
+import { Button, Input, Select } from "antd"
+import toast from "react-hot-toast"
+import { MdOutlineSyncAlt } from "react-icons/md"
+import { Integration, UserIntegration } from "@/types/apps/integration"
 
 export default function FigmaConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [userIntegrationId, setUserIntegrationId] = useState<number>(0);
-    const [saving, setSaving] = useState<boolean>(false);
-    const [teamIds, setTeamIds] = useState<Set<string>>(new Set([""]));
-    const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([]);
+    const [loading, setLoading] = useState<boolean>(false)
+    const [userIntegrationId, setUserIntegrationId] = useState<number>(0)
+    const [saving, setSaving] = useState<boolean>(false)
+    const [teamIds, setTeamIds] = useState<Set<string>>(new Set([""]))
+    const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([])
 
     useEffect(() => {
-        setLoading(true);
-        setUserIntegrationId(selectedIntegration.id);
+        setLoading(true)
+        setUserIntegrationId(selectedIntegration.id)
         fetchUserIntegrationsApi("Figma")
             .then((response) => {
-                setUserIntegrations(response);
+                setUserIntegrations(response)
                 if (response.length === 1) {
-                    setUserIntegrationId(response[0].id);
-                    setTeamIds(new Set(response[0].configuration.team_ids));
+                    setUserIntegrationId(response[0].id)
+                    setTeamIds(new Set(response[0].configuration.team_ids))
                 }
             })
             .catch((error) => {
-                toast.error(error.response.data.detail);
+                toast.error(error.response.data.detail)
             })
             .finally(() => {
-                setLoading(false);
-            });
-    }, [selectedIntegration.id]);
+                setLoading(false)
+            })
+    }, [selectedIntegration.id])
 
     useEffect(() => {
-        const userIntegration = userIntegrations.find((userIntegration) => userIntegration.id === userIntegrationId);
+        const userIntegration = userIntegrations.find((userIntegration) => userIntegration.id === userIntegrationId)
         if (userIntegration) {
-            if (!userIntegration.configuration) setTeamIds(new Set([""]));
-            else setTeamIds(new Set(userIntegration.configuration.team_ids));
+            if (!userIntegration.configuration) setTeamIds(new Set([""]))
+            else setTeamIds(new Set(userIntegration.configuration.team_ids))
         }
-    }, [userIntegrationId, userIntegrations]);
+    }, [userIntegrationId, userIntegrations])
 
     const configureFigma = async () => {
-        const nonEmptyTeamIds = new Set(teamIds);
-        nonEmptyTeamIds.delete("");
+        const nonEmptyTeamIds = new Set(teamIds)
+        nonEmptyTeamIds.delete("")
         if (nonEmptyTeamIds.size === 0) {
-            toast.error("Please enter atleast one team ID");
-            return;
+            toast.error("Please enter atleast one team ID")
+            return
         }
-        setSaving(true);
+        setSaving(true)
         configureUserIntegrationApi(
             userIntegrationId,
             {
@@ -62,15 +59,15 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
             "Figma"
         )
             .then(() => {
-                toast.success("Figma configured successfully!");
+                toast.success("Figma configured successfully!")
             })
             .catch((error: any) => {
-                toast.error(error?.response?.data?.detail || "Something went wrong!");
+                toast.error(error?.response?.data?.detail || "Something went wrong!")
             })
             .finally(() => {
-                setSaving(false);
-            });
-    };
+                setSaving(false)
+            })
+    }
 
     return (
         <div className="flex min-h-[500px] flex-col rounded-lg border border-servcy-gray bg-servcy-black p-6 text-servcy-white shadow-md md:flex-row">
@@ -102,7 +99,7 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                         placeholder="Select Account"
                         value={userIntegrationId}
                         onChange={(e: any) => {
-                            setUserIntegrationId(Number.parseInt(e));
+                            setUserIntegrationId(Number.parseInt(e))
                         }}
                     >
                         {userIntegrations.length === 0 ? (
@@ -161,10 +158,10 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                                         placeholder="Enter team ID"
                                         className="my-3 p-1"
                                         onChange={(e) => {
-                                            const newTeamIds = new Set(teamIds);
-                                            newTeamIds.delete(teamId);
-                                            newTeamIds.add(e.target.value);
-                                            setTeamIds(newTeamIds);
+                                            const newTeamIds = new Set(teamIds)
+                                            newTeamIds.delete(teamId)
+                                            newTeamIds.add(e.target.value)
+                                            setTeamIds(newTeamIds)
                                         }}
                                     />
                                 </div>
@@ -178,10 +175,10 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                                     size="small"
                                     className="text-sm font-thin text-servcy-white hover:!border-servcy-light hover:!text-servcy-light"
                                     onClick={() => {
-                                        if (teamIds.has("")) return;
-                                        const newTeamIds = new Set(teamIds);
-                                        newTeamIds.add("");
-                                        setTeamIds(newTeamIds);
+                                        if (teamIds.has("")) return
+                                        const newTeamIds = new Set(teamIds)
+                                        newTeamIds.add("")
+                                        setTeamIds(newTeamIds)
                                     }}
                                     disabled={saving}
                                 >
@@ -201,5 +198,5 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                 </form>
             </div>
         </div>
-    );
+    )
 }

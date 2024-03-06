@@ -1,25 +1,22 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-
-import { IssuePropertyLabels } from "../../properties";
-
-import { useLabel } from "@hooks/store";
-
-import { TIssue } from "@servcy/types";
+import React from "react"
+import { useLabel } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { IssuePropertyLabels } from "../../properties"
 
 type Props = {
-    issue: TIssue;
-    onClose: () => void;
-    onChange: (issue: TIssue, data: Partial<TIssue>, updates: any) => void;
-    disabled: boolean;
-};
+    issue: TIssue
+    onClose: () => void
+    onChange: (issue: TIssue, data: Partial<TIssue>, updates: any) => void
+    disabled: boolean
+}
 
 export const SpreadsheetLabelColumn: React.FC<Props> = observer((props: Props) => {
-    const { issue, onChange, disabled, onClose } = props;
+    const { issue, onChange, disabled, onClose } = props
 
-    const { labelMap } = useLabel();
+    const { labelMap } = useLabel()
 
-    const defaultLabelOptions = issue?.label_ids?.map((id) => labelMap[id]) || [];
+    const defaultLabelOptions = issue?.label_ids?.map((id) => labelMap[id]) || []
 
     return (
         <IssuePropertyLabels
@@ -37,5 +34,5 @@ export const SpreadsheetLabelColumn: React.FC<Props> = observer((props: Props) =
             placeholderText="Select labels"
             onClose={onClose}
         />
-    );
-});
+    )
+})

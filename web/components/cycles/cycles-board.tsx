@@ -1,33 +1,30 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-
-import { useUser } from "@hooks/store";
-
-import { CyclePeekOverview, CyclesBoardCard } from "@components/cycles";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-
-import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { FC } from "react"
+import { CyclePeekOverview, CyclesBoardCard } from "@components/cycles"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
 
 export interface ICyclesBoard {
-    cycleIds: string[];
-    filter: string;
-    workspaceSlug: string;
-    projectId: string;
-    peekCycle: string | undefined;
+    cycleIds: string[]
+    filter: string
+    workspaceSlug: string
+    projectId: string
+    peekCycle: string | undefined
 }
 
 export const CyclesBoard: FC<ICyclesBoard> = observer((props) => {
-    const { cycleIds, filter, workspaceSlug, projectId, peekCycle } = props;
+    const { cycleIds, filter, workspaceSlug, projectId, peekCycle } = props
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
 
-    const emptyStateDetail = CYCLE_EMPTY_STATE_DETAILS[filter as keyof typeof CYCLE_EMPTY_STATE_DETAILS];
+    const emptyStateDetail = CYCLE_EMPTY_STATE_DETAILS[filter as keyof typeof CYCLE_EMPTY_STATE_DETAILS]
 
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("cycle", filter, isLightMode);
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("cycle", filter, isLightMode)
 
     return (
         <>
@@ -65,5 +62,5 @@ export const CyclesBoard: FC<ICyclesBoard> = observer((props) => {
                 />
             )}
         </>
-    );
-});
+    )
+})

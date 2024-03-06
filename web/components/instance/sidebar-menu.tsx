@@ -1,10 +1,8 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Image, BrainCog, Cog, Lock, Mail } from "lucide-react";
-
-import { useApplication } from "@hooks/store";
-
-import { Tooltip } from "@servcy/ui";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useApplication } from "@hooks/store"
+import { BrainCog, Cog, Image, Lock, Mail } from "lucide-react"
+import { Tooltip } from "@servcy/ui"
 
 const INSTANCE_ADMIN_LINKS = [
     {
@@ -37,21 +35,21 @@ const INSTANCE_ADMIN_LINKS = [
         description: "Allow third-party image libraries",
         href: `/god-mode/image`,
     },
-];
+]
 
 export const InstanceAdminSidebarMenu = () => {
     // store hooks
     const {
         theme: { sidebarCollapsed },
-    } = useApplication();
+    } = useApplication()
     // router
-    const router = useRouter();
+    const router = useRouter()
 
     return (
         <div className="flex h-full w-full flex-col gap-2.5 overflow-y-auto px-4 py-6">
             {INSTANCE_ADMIN_LINKS.map((item, index) => {
                 const isActive =
-                    item.name === "Settings" ? router.asPath.includes(item.href) : router.asPath === item.href;
+                    item.name === "Settings" ? router.asPath.includes(item.href) : router.asPath === item.href
 
                 return (
                     <Link key={index} href={item.href}>
@@ -94,8 +92,8 @@ export const InstanceAdminSidebarMenu = () => {
                             </Tooltip>
                         </div>
                     </Link>
-                );
+                )
             })}
         </div>
-    );
-};
+    )
+}

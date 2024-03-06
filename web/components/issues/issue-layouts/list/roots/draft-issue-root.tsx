@@ -1,41 +1,37 @@
-import { FC, useMemo } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useIssues } from "@hooks/store";
-
-import { ProjectIssueQuickActions } from "@components/issues";
-
-import { TIssue } from "@servcy/types";
-import { EIssueActions } from "../../types";
-
-import { BaseListRoot } from "../base-list-root";
-import { EIssuesStoreType } from "@constants/issue";
+import { useRouter } from "next/router"
+import { FC, useMemo } from "react"
+import { ProjectIssueQuickActions } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
+import { useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { EIssueActions } from "../../types"
+import { BaseListRoot } from "../base-list-root"
 
 export const DraftIssueListLayout: FC = observer(() => {
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query as { workspaceSlug: string; projectId: string };
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query as { workspaceSlug: string; projectId: string }
 
-    if (!workspaceSlug || !projectId) return null;
+    if (!workspaceSlug || !projectId) return null
 
     // store
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT);
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT)
 
     const issueActions = useMemo(
         () => ({
             [EIssueActions.UPDATE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !projectId) return;
+                if (!workspaceSlug || !projectId) return
 
-                await issues.updateIssue(workspaceSlug, projectId, issue.id, issue);
+                await issues.updateIssue(workspaceSlug, projectId, issue.id, issue)
             },
             [EIssueActions.DELETE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !projectId) return;
+                if (!workspaceSlug || !projectId) return
 
-                await issues.removeIssue(workspaceSlug, projectId, issue.id);
+                await issues.removeIssue(workspaceSlug, projectId, issue.id)
             },
         }),
         [issues, workspaceSlug, projectId]
-    );
+    )
 
     return (
         <BaseListRoot
@@ -45,5 +41,5 @@ export const DraftIssueListLayout: FC = observer(() => {
             issueActions={issueActions}
             storeType={EIssuesStoreType.PROJECT}
         />
-    );
-});
+    )
+})

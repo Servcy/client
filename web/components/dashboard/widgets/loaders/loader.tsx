@@ -1,19 +1,18 @@
-import { AssignedIssuesWidgetLoader } from "./assigned-issues";
-import { IssuesByPriorityWidgetLoader } from "./issues-by-priority";
-import { IssuesByStateGroupWidgetLoader } from "./issues-by-state-group";
-import { OverviewStatsWidgetLoader } from "./overview-stats";
-import { RecentActivityWidgetLoader } from "./recent-activity";
-import { RecentProjectsWidgetLoader } from "./recent-projects";
-import { RecentCollaboratorsWidgetLoader } from "./recent-collaborators";
-
-import { TWidgetKeys } from "@servcy/types";
+import { TWidgetKeys } from "@servcy/types"
+import { AssignedIssuesWidgetLoader } from "./assigned-issues"
+import { IssuesByPriorityWidgetLoader } from "./issues-by-priority"
+import { IssuesByStateGroupWidgetLoader } from "./issues-by-state-group"
+import { OverviewStatsWidgetLoader } from "./overview-stats"
+import { RecentActivityWidgetLoader } from "./recent-activity"
+import { RecentCollaboratorsWidgetLoader } from "./recent-collaborators"
+import { RecentProjectsWidgetLoader } from "./recent-projects"
 
 type Props = {
-    widgetKey: TWidgetKeys;
-};
+    widgetKey: TWidgetKeys
+}
 
 export const WidgetLoader: React.FC<Props> = (props) => {
-    const { widgetKey } = props;
+    const { widgetKey } = props
 
     const loaders = {
         overview_stats: <OverviewStatsWidgetLoader />,
@@ -24,7 +23,7 @@ export const WidgetLoader: React.FC<Props> = (props) => {
         recent_activity: <RecentActivityWidgetLoader />,
         recent_projects: <RecentProjectsWidgetLoader />,
         recent_collaborators: <RecentCollaboratorsWidgetLoader />,
-    };
+    }
 
-    return loaders[widgetKey];
-};
+    return loaders[widgetKey]
+}

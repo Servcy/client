@@ -1,34 +1,29 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { FileText, Plus } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-
-import { Breadcrumbs, Button } from "@servcy/ui";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { EUserProjectRoles } from "@constants/project";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
+import { useRouter } from "next/router"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { EUserProjectRoles } from "@constants/project"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import { FileText, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, Button } from "@servcy/ui"
 
 export const PagesHeader = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         commandPalette: { toggleCreatePageModal },
-    } = useApplication();
+    } = useApplication()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
-    const { setTrackElement } = useEventTracker();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
+    const { setTrackElement } = useEventTracker()
 
     const canUserCreatePage =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -75,8 +70,8 @@ export const PagesHeader = observer(() => {
                         prependIcon={<Plus />}
                         size="sm"
                         onClick={() => {
-                            setTrackElement("Project pages page");
-                            toggleCreatePageModal(true);
+                            setTrackElement("Project pages page")
+                            toggleCreatePageModal(true)
                         }}
                     >
                         Create Page
@@ -84,5 +79,5 @@ export const PagesHeader = observer(() => {
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

@@ -1,73 +1,67 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { ArrowLeft } from "lucide-react";
-
-import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store";
-
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
-
-import { Breadcrumbs, LayersIcon } from "@servcy/ui";
-
-import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "@components/issues";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues"
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store"
+import { ArrowLeft } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types"
+import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 
 export const ProjectArchivedIssuesHeader: FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
     const {
         issuesFilter: { issueFilters, updateFilters },
-    } = useIssues(EIssuesStoreType.ARCHIVED);
-    const { currentProjectDetails } = useProject();
-    const { projectStates } = useProjectState();
-    const { projectLabels } = useLabel();
+    } = useIssues(EIssuesStoreType.ARCHIVED)
+    const { currentProjectDetails } = useProject()
+    const { projectStates } = useProjectState()
+    const { projectLabels } = useLabel()
     const {
         project: { projectMemberIds },
-    } = useMember();
+    } = useMember()
 
     // for archived issues list layout is the only option
-    const activeLayout = "list";
+    const activeLayout = "list"
 
     const handleFiltersUpdate = (key: keyof IIssueFilterOptions, value: string | string[]) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        const newValues = issueFilters?.filters?.[key] ?? [];
+        const newValues = issueFilters?.filters?.[key] ?? []
 
         if (Array.isArray(value)) {
             value.forEach((val) => {
-                if (!newValues.includes(val)) newValues.push(val);
-            });
+                if (!newValues.includes(val)) newValues.push(val)
+            })
         } else {
-            if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
-            else newValues.push(value);
+            if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+            else newValues.push(value)
         }
 
         updateFilters(workspaceSlug.toString(), projectId.toString(), EIssueFilterType.FILTERS, {
             [key]: newValues,
-        });
-    };
+        })
+    }
 
     const handleDisplayFiltersUpdate = (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
         updateFilters(workspaceSlug.toString(), projectId.toString(), EIssueFilterType.DISPLAY_FILTERS, {
             ...issueFilters?.displayFilters,
             ...updatedDisplayFilter,
-        });
-    };
+        })
+    }
 
     const handleDisplayPropertiesUpdate = (property: Partial<IIssueDisplayProperties>) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        updateFilters(workspaceSlug.toString(), projectId.toString(), EIssueFilterType.DISPLAY_PROPERTIES, property);
-    };
+        updateFilters(workspaceSlug.toString(), projectId.toString(), EIssueFilterType.DISPLAY_PROPERTIES, property)
+    }
 
     return (
         <div className="relative z-10 flex h-14 w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -145,5 +139,5 @@ export const ProjectArchivedIssuesHeader: FC = observer(() => {
                 </FiltersDropdown>
             </div>
         </div>
-    );
-});
+    )
+})

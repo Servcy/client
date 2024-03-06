@@ -1,44 +1,40 @@
-import { useRef, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd";
-import { Disclosure, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useRef, useState } from "react"
+import { LeaveProjectModal, PublishProjectModal } from "@components/project"
+import { EUserProjectRoles } from "@constants/project"
+import { Disclosure, Transition } from "@headlessui/react"
+import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
+import { cn } from "@helpers/common.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { getNumberCount } from "@helpers/string.helper"
+import { useApplication, useEventTracker, useInbox, useProject } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 import {
+    ChevronDown,
+    FileText,
+    Inbox,
+    LinkIcon,
+    LogOut,
+    MoreHorizontal,
     MoreVertical,
     PenSquare,
-    LinkIcon,
-    Star,
-    FileText,
     Settings,
     Share2,
-    LogOut,
-    ChevronDown,
-    MoreHorizontal,
-    Inbox,
-} from "lucide-react";
-
-import { useApplication, useEventTracker, useInbox, useProject } from "@hooks/store";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-import toast from "react-hot-toast";
-
-import { cn } from "@helpers/common.helper";
-import { getNumberCount } from "@helpers/string.helper";
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { CustomMenu, Tooltip, ArchiveIcon, PhotoFilterIcon, DiceIcon, ContrastIcon, LayersIcon } from "@servcy/ui";
-import { LeaveProjectModal, PublishProjectModal } from "@components/project";
-import { EUserProjectRoles } from "@constants/project";
+    Star,
+} from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { ArchiveIcon, ContrastIcon, CustomMenu, DiceIcon, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
-    projectId: string;
-    provided?: DraggableProvided;
-    snapshot?: DraggableStateSnapshot;
-    handleCopyText: () => void;
-    shortContextMenu?: boolean;
-    disableDrag?: boolean;
-};
+    projectId: string
+    provided?: DraggableProvided
+    snapshot?: DraggableStateSnapshot
+    handleCopyText: () => void
+    shortContextMenu?: boolean
+    disableDrag?: boolean
+}
 
 const navigation = (workspaceSlug: string, projectId: string) => [
     {
@@ -76,80 +72,80 @@ const navigation = (workspaceSlug: string, projectId: string) => [
         href: `/${workspaceSlug}/projects/${projectId}/settings`,
         Icon: Settings,
     },
-];
+]
 
 export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { projectId, provided, snapshot, handleCopyText, shortContextMenu = false, disableDrag } = props;
+    const { projectId, provided, snapshot, handleCopyText, shortContextMenu = false, disableDrag } = props
     // store hooks
-    const { theme: themeStore } = useApplication();
-    const { setTrackElement } = useEventTracker();
-    const { addProjectToFavorites, removeProjectFromFavorites, getProjectById } = useProject();
-    const { getInboxesByProjectId, getInboxById } = useInbox();
+    const { theme: themeStore } = useApplication()
+    const { setTrackElement } = useEventTracker()
+    const { addProjectToFavorites, removeProjectFromFavorites, getProjectById } = useProject()
+    const { getInboxesByProjectId, getInboxById } = useInbox()
     // states
-    const [leaveProjectModalOpen, setLeaveProjectModal] = useState(false);
-    const [publishModalOpen, setPublishModal] = useState(false);
-    const [isMenuActive, setIsMenuActive] = useState(false);
+    const [leaveProjectModalOpen, setLeaveProjectModal] = useState(false)
+    const [publishModalOpen, setPublishModal] = useState(false)
+    const [isMenuActive, setIsMenuActive] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId: URLProjectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId: URLProjectId } = router.query
 
     // derived values
-    const project = getProjectById(projectId);
+    const project = getProjectById(projectId)
 
-    const isAdmin = project?.member_role === EUserProjectRoles.ADMIN;
+    const isAdmin = project?.member_role === EUserProjectRoles.ADMIN
     const isViewerOrGuest =
-        project?.member_role && [EUserProjectRoles.VIEWER, EUserProjectRoles.GUEST].includes(project.member_role);
+        project?.member_role && [EUserProjectRoles.VIEWER, EUserProjectRoles.GUEST].includes(project.member_role)
 
-    const isCollapsed = themeStore.sidebarCollapsed;
+    const isCollapsed = themeStore.sidebarCollapsed
 
-    const actionSectionRef = useRef<HTMLDivElement | null>(null);
+    const actionSectionRef = useRef<HTMLDivElement | null>(null)
 
-    const inboxesMap = project?.inbox_view ? getInboxesByProjectId(projectId) : undefined;
-    const inboxDetails = inboxesMap && inboxesMap.length > 0 ? getInboxById(inboxesMap[0]) : undefined;
+    const inboxesMap = project?.inbox_view ? getInboxesByProjectId(projectId) : undefined
+    const inboxDetails = inboxesMap && inboxesMap.length > 0 ? getInboxById(inboxesMap[0]) : undefined
 
     const handleAddToFavorites = () => {
-        if (!workspaceSlug || !project) return;
+        if (!workspaceSlug || !project) return
 
         addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleRemoveFromFavorites = () => {
-        if (!workspaceSlug || !project) return;
+        if (!workspaceSlug || !project) return
 
         removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleLeaveProject = () => {
-        setTrackElement("APP_SIDEBAR_PROJECT_DROPDOWN");
-        setLeaveProjectModal(true);
-    };
+        setTrackElement("APP_SIDEBAR_PROJECT_DROPDOWN")
+        setLeaveProjectModal(true)
+    }
 
     const handleLeaveProjectModalClose = () => {
-        setLeaveProjectModal(false);
-    };
+        setLeaveProjectModal(false)
+    }
 
     const handleProjectClick = () => {
         if (window.innerWidth < 768) {
-            themeStore.toggleSidebar();
+            themeStore.toggleSidebar()
         }
-    };
+    }
 
-    useOutsideClickDetector(actionSectionRef, () => setIsMenuActive(false));
+    useOutsideClickDetector(actionSectionRef, () => setIsMenuActive(false))
 
-    if (!project) return null;
+    if (!project) return null
 
     return (
         <>
@@ -341,7 +337,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                         (item.name === "Pages" && !project.page_view) ||
                                         (item.name === "Inbox" && !project.inbox_view)
                                     )
-                                        return;
+                                        return
 
                                     return (
                                         <Link key={item.name} href={item.href} onClick={handleProjectClick}>
@@ -398,7 +394,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                                 </Tooltip>
                                             </span>
                                         </Link>
-                                    );
+                                    )
                                 })}
                             </Disclosure.Panel>
                         </Transition>
@@ -406,5 +402,5 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                 )}
             </Disclosure>
         </>
-    );
-});
+    )
+})

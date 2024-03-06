@@ -1,70 +1,65 @@
-import { Tab } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import { Fragment, ReactElement, useState } from "react";
-import useSWR from "swr";
-
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-import useUserAuth from "@hooks/use-user-auth";
-import useSize from "@hooks/use-window-size";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-import { PagesHeader } from "@components/headers";
-import { CreateUpdatePageModal, RecentPagesList } from "@components/pages";
-import { PagesLoader } from "@components/ui";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { PageHead } from "@components/core";
-import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-import { PAGE_TABS_LIST } from "@constants/page";
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { useProjectPages } from "@hooks/store/use-project-page";
+import dynamic from "next/dynamic"
+import { useRouter } from "next/router"
+import { Fragment, ReactElement, useState } from "react"
+import { PageHead } from "@components/core"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { PagesHeader } from "@components/headers"
+import { CreateUpdatePageModal, RecentPagesList } from "@components/pages"
+import { PagesLoader } from "@components/ui"
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { PAGE_TABS_LIST } from "@constants/page"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { Tab } from "@headlessui/react"
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-page"
+import useLocalStorage from "@hooks/use-local-storage"
+import useUserAuth from "@hooks/use-user-auth"
+import useSize from "@hooks/use-window-size"
+import { AppLayout } from "@layouts/app-layout"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+import { NextPageWithLayout } from "@/types/types"
 
 const AllPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.AllPagesList), {
     ssr: false,
-});
+})
 
 const FavoritePagesList = dynamic<any>(() => import("@components/pages").then((a) => a.FavoritePagesList), {
     ssr: false,
-});
+})
 
 const PrivatePagesList = dynamic<any>(() => import("@components/pages").then((a) => a.PrivatePagesList), {
     ssr: false,
-});
+})
 
 const ArchivedPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.ArchivedPagesList), {
     ssr: false,
-});
+})
 
 const SharedPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.SharedPagesList), {
     ssr: false,
-});
+})
 
 const ProjectPagesPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // states
-    const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false);
+    const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false)
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
     const {
         currentUser,
         currentUserLoader,
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
     const {
         commandPalette: { toggleCreatePageModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
-    const { getProjectById } = useProject();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
+    const { getProjectById } = useProject()
     const {
         fetchProjectPages,
         fetchArchivedProjectPages,
@@ -72,50 +67,50 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
         archivedPageLoader,
         projectPageIds,
         archivedPageIds,
-    } = useProjectPages();
+    } = useProjectPages()
 
-    const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
-    const [windowWidth] = useSize();
+    const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader })
+    const [windowWidth] = useSize()
     // local storage
-    const { storedValue: pageTab, setValue: setPageTab } = useLocalStorage("pageTab", "Recent");
+    const { storedValue: pageTab, setValue: setPageTab } = useLocalStorage("pageTab", "Recent")
     // fetching pages from API
     useSWR(
         workspaceSlug && projectId ? `ALL_PAGES_LIST_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchProjectPages(workspaceSlug.toString(), projectId.toString()) : null
-    );
+    )
     // fetching archived pages from API
     useSWR(
         workspaceSlug && projectId ? `ALL_ARCHIVED_PAGES_LIST_${projectId}` : null,
         workspaceSlug && projectId
             ? () => fetchArchivedProjectPages(workspaceSlug.toString(), projectId.toString())
             : null
-    );
+    )
 
     const currentTabValue = (tab: string | null) => {
         switch (tab) {
             case "Recent":
-                return 0;
+                return 0
             case "All":
-                return 1;
+                return 1
             case "Favorites":
-                return 2;
+                return 2
             case "Private":
-                return 3;
+                return 3
             case "Shared":
-                return 4;
+                return 4
             case "Archived":
-                return 5;
+                return 5
             default:
-                return 0;
+                return 0
         }
-    };
+    }
 
     // derived values
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "pages", isLightMode);
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER;
-    const project = projectId ? getProjectById(projectId.toString()) : undefined;
-    const pageTitle = project?.name ? `${project?.name} - Pages` : undefined;
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "pages", isLightMode)
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
+    const project = projectId ? getProjectById(projectId.toString()) : undefined
+    const pageTitle = project?.name ? `${project?.name} - Pages` : undefined
 
     const MobileTabList = () => (
         <Tab.List
@@ -137,9 +132,9 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
                 ))}
             </div>
         </Tab.List>
-    );
+    )
 
-    if (loader || archivedPageLoader) return <PagesLoader />;
+    if (loader || archivedPageLoader) return <PagesLoader />
 
     return (
         <>
@@ -163,19 +158,19 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
                             onChange={(i) => {
                                 switch (i) {
                                     case 0:
-                                        return setPageTab("Recent");
+                                        return setPageTab("Recent")
                                     case 1:
-                                        return setPageTab("All");
+                                        return setPageTab("All")
                                     case 2:
-                                        return setPageTab("Favorites");
+                                        return setPageTab("Favorites")
                                     case 3:
-                                        return setPageTab("Private");
+                                        return setPageTab("Private")
                                     case 4:
-                                        return setPageTab("Shared");
+                                        return setPageTab("Shared")
                                     case 5:
-                                        return setPageTab("Archived");
+                                        return setPageTab("Archived")
                                     default:
-                                        return setPageTab("All");
+                                        return setPageTab("All")
                                 }
                             }}
                         >
@@ -236,8 +231,8 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
                     primaryButton={{
                         text: PAGE_EMPTY_STATE_DETAILS["pages"].primaryButton.text,
                         onClick: () => {
-                            setTrackElement("Pages empty state");
-                            toggleCreatePageModal(true);
+                            setTrackElement("Pages empty state")
+                            toggleCreatePageModal(true)
                         },
                     }}
                     comicBox={{
@@ -249,15 +244,15 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
                 />
             )}
         </>
-    );
-});
+    )
+})
 
 ProjectPagesPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<PagesHeader />} withProjectWrapper>
             {page}
         </AppLayout>
-    );
-};
+    )
+}
 
-export default ProjectPagesPage;
+export default ProjectPagesPage

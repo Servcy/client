@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-
-import { useApplication, useEventTracker } from "@hooks/store";
-import useSignInRedirection from "@hooks/use-login-redirection";
-
-import { LatestFeatureBlock } from "@components/common";
+import Link from "next/link"
+import React, { useEffect, useState } from "react"
 import {
-    SignInEmailForm,
-    SignInUniqueCodeForm,
-    SignInPasswordForm,
     OAuthOptions,
+    SignInEmailForm,
     SignInOptionalSetPasswordForm,
-} from "@components/account";
-
-import { NAVIGATE_TO_SIGNUP } from "@constants/event-tracker";
+    SignInPasswordForm,
+    SignInUniqueCodeForm,
+} from "@components/account"
+import { LatestFeatureBlock } from "@components/common"
+import { NAVIGATE_TO_SIGNUP } from "@constants/event-tracker"
+import { useApplication, useEventTracker } from "@hooks/store"
+import useSignInRedirection from "@hooks/use-login-redirection"
+import { observer } from "mobx-react-lite"
 
 export enum ESignInSteps {
     EMAIL = "EMAIL",
@@ -26,41 +23,41 @@ export enum ESignInSteps {
 
 export const SignInRoot = observer(() => {
     // states
-    const [signInStep, setSignInStep] = useState<ESignInSteps | null>(null);
-    const [email, setEmail] = useState("");
+    const [signInStep, setSignInStep] = useState<ESignInSteps | null>(null)
+    const [email, setEmail] = useState("")
     // sign in redirection hook
-    const { handleRedirection } = useSignInRedirection();
+    const { handleRedirection } = useSignInRedirection()
     // mobx store
     const {
         config: { envConfig },
-    } = useApplication();
-    const { captureEvent } = useEventTracker();
+    } = useApplication()
+    const { captureEvent } = useEventTracker()
     // derived values
-    const isSmtpConfigured = envConfig?.is_smtp_configured;
+    const isSmtpConfigured = envConfig?.is_smtp_configured
 
     // step 1 submit handler- email verification
     const handleEmailVerification = (isPasswordAutoset: boolean) => {
-        if (isSmtpConfigured && isPasswordAutoset) setSignInStep(ESignInSteps.UNIQUE_CODE);
-        else setSignInStep(ESignInSteps.PASSWORD);
-    };
+        if (isSmtpConfigured && isPasswordAutoset) setSignInStep(ESignInSteps.UNIQUE_CODE)
+        else setSignInStep(ESignInSteps.PASSWORD)
+    }
 
     // step 2 submit handler- unique code sign in
     const handleUniqueCodeSignIn = async (isPasswordAutoset: boolean) => {
-        if (isPasswordAutoset) setSignInStep(ESignInSteps.OPTIONAL_SET_PASSWORD);
-        else await handleRedirection();
-    };
+        if (isPasswordAutoset) setSignInStep(ESignInSteps.OPTIONAL_SET_PASSWORD)
+        else await handleRedirection()
+    }
 
     // step 3 submit handler- password sign in
     const handlePasswordSignIn = async () => {
-        await handleRedirection();
-    };
+        await handleRedirection()
+    }
 
-    const isOAuthEnabled = envConfig && (envConfig.google_client_id || envConfig.github_client_id);
+    const isOAuthEnabled = envConfig && (envConfig.google_client_id || envConfig.github_client_id)
 
     useEffect(() => {
-        if (isSmtpConfigured) setSignInStep(ESignInSteps.EMAIL);
-        else setSignInStep(ESignInSteps.PASSWORD);
-    }, [isSmtpConfigured]);
+        if (isSmtpConfigured) setSignInStep(ESignInSteps.EMAIL)
+        else setSignInStep(ESignInSteps.PASSWORD)
+    }, [isSmtpConfigured])
 
     return (
         <>
@@ -76,8 +73,8 @@ export const SignInRoot = observer(() => {
                         <SignInUniqueCodeForm
                             email={email}
                             handleEmailClear={() => {
-                                setEmail("");
-                                setSignInStep(ESignInSteps.EMAIL);
+                                setEmail("")
+                                setSignInStep(ESignInSteps.EMAIL)
                             }}
                             onSubmit={handleUniqueCodeSignIn}
                             submitButtonText="Continue"
@@ -87,8 +84,8 @@ export const SignInRoot = observer(() => {
                         <SignInPasswordForm
                             email={email}
                             handleEmailClear={() => {
-                                setEmail("");
-                                setSignInStep(ESignInSteps.EMAIL);
+                                setEmail("")
+                                setSignInStep(ESignInSteps.EMAIL)
                             }}
                             onSubmit={handlePasswordSignIn}
                             handleStepChange={(step) => setSignInStep(step)}
@@ -98,8 +95,8 @@ export const SignInRoot = observer(() => {
                         <SignInUniqueCodeForm
                             email={email}
                             handleEmailClear={() => {
-                                setEmail("");
-                                setSignInStep(ESignInSteps.EMAIL);
+                                setEmail("")
+                                setSignInStep(ESignInSteps.EMAIL)
                             }}
                             onSubmit={handleUniqueCodeSignIn}
                             submitButtonText="Go to workspace"
@@ -128,5 +125,5 @@ export const SignInRoot = observer(() => {
                 )}
             <LatestFeatureBlock />
         </>
-    );
-});
+    )
+})

@@ -1,24 +1,22 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityList } from "./activity-list";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { IssueActivityList } from "./activity-list"
 
 type TIssueActivityRoot = {
-    issueId: string;
-};
+    issueId: string
+}
 
 export const IssueActivityRoot: FC<TIssueActivityRoot> = observer((props) => {
-    const { issueId } = props;
+    const { issueId } = props
 
     const {
         activity: { getActivitiesByIssueId },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activityIds = getActivitiesByIssueId(issueId);
+    const activityIds = getActivitiesByIssueId(issueId)
 
-    if (!activityIds) return <></>;
+    if (!activityIds) return <></>
     return (
         <div>
             {activityIds.map((activityId, index) => (
@@ -28,5 +26,5 @@ export const IssueActivityRoot: FC<TIssueActivityRoot> = observer((props) => {
                 />
             ))}
         </div>
-    );
-});
+    )
+})

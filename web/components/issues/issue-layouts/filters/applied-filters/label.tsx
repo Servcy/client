@@ -1,25 +1,23 @@
-import { observer } from "mobx-react-lite";
-
-import { X } from "lucide-react";
-
-import { IIssueLabel } from "@servcy/types";
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueLabel } from "@servcy/types"
 
 type Props = {
-    handleRemove: (val: string) => void;
-    labels: IIssueLabel[] | undefined;
-    values: string[];
-    editable: boolean | undefined;
-};
+    handleRemove: (val: string) => void
+    labels: IIssueLabel[] | undefined
+    values: string[]
+    editable: boolean | undefined
+}
 
 export const AppliedLabelsFilters: React.FC<Props> = observer((props) => {
-    const { handleRemove, labels, values, editable } = props;
+    const { handleRemove, labels, values, editable } = props
 
     return (
         <>
             {values.map((labelId) => {
-                const labelDetails = labels?.find((l) => l.id === labelId);
+                const labelDetails = labels?.find((l) => l.id === labelId)
 
-                if (!labelDetails) return null;
+                if (!labelDetails) return null
 
                 return (
                     <div key={labelId} className="flex items-center gap-1 rounded bg-custom-background-80 p-1 text-xs">
@@ -40,8 +38,8 @@ export const AppliedLabelsFilters: React.FC<Props> = observer((props) => {
                             </button>
                         )}
                     </div>
-                );
+                )
             })}
         </>
-    );
-});
+    )
+})

@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const DiscordIcon: React.FC<Props> = ({ width = "24", height = "24", className, color }) => (
     <svg
@@ -23,4 +22,4 @@ export const DiscordIcon: React.FC<Props> = ({ width = "24", height = "24", clas
             </clipPath>
         </defs>
     </svg>
-);
+)

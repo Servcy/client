@@ -1,37 +1,33 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { useProject } from "@hooks/store";
-
-import { AlertTriangle } from "lucide-react";
-
-import { Button } from "@servcy/ui";
-
-import type { TIssue } from "@servcy/types";
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProject } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import type { TIssue } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    data: TIssue;
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: () => Promise<void>;
-};
+    data: TIssue
+    isOpen: boolean
+    onClose: () => void
+    onSubmit: () => Promise<void>
+}
 
 export const DeleteInboxIssueModal: React.FC<Props> = observer(({ isOpen, onClose, onSubmit, data }) => {
     // states
-    const [isDeleting, setIsDeleting] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false)
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
 
     const handleClose = () => {
-        setIsDeleting(false);
-        onClose();
-    };
+        setIsDeleting(false)
+        onClose()
+    }
 
     const handleDelete = () => {
-        setIsDeleting(true);
-        onSubmit().finally(() => setIsDeleting(false));
-    };
+        setIsDeleting(true)
+        onSubmit().finally(() => setIsDeleting(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -100,5 +96,5 @@ export const DeleteInboxIssueModal: React.FC<Props> = observer(({ isOpen, onClos
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

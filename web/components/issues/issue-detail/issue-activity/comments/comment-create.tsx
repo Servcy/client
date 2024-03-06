@@ -1,32 +1,27 @@
-import { FC, useRef } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { FC, useRef } from "react"
+import { isEmptyHtmlString } from "@helpers/string.helper"
+import { useMention, useWorkspace } from "@hooks/store"
+import { FileService } from "@services/file.service"
+import { Globe2, Lock } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import { LiteTextEditorWithRef } from "@servcy/lite-text-editor"
+import { TIssueComment } from "@servcy/types"
+import { Button } from "@servcy/ui"
+import { TActivityOperations } from "../root"
 
-import { LiteTextEditorWithRef } from "@servcy/lite-text-editor";
-import { Button } from "@servcy/ui";
-
-import { FileService } from "@services/file.service";
-
-import { TActivityOperations } from "../root";
-import { TIssueComment } from "@servcy/types";
-
-import { Globe2, Lock } from "lucide-react";
-import { useMention, useWorkspace } from "@hooks/store";
-
-import { isEmptyHtmlString } from "@helpers/string.helper";
-
-const fileService = new FileService();
+const fileService = new FileService()
 
 type TIssueCommentCreate = {
-    workspaceSlug: string;
-    activityOperations: TActivityOperations;
-    showAccessSpecifier?: boolean;
-};
+    workspaceSlug: string
+    activityOperations: TActivityOperations
+    showAccessSpecifier?: boolean
+}
 
 type commentAccessType = {
-    icon: any;
-    key: string;
-    label: "Private" | "Public";
-};
+    icon: any
+    key: string
+    label: "Private" | "Public"
+}
 const commentAccess: commentAccessType[] = [
     {
         icon: Lock,
@@ -38,17 +33,17 @@ const commentAccess: commentAccessType[] = [
         key: "EXTERNAL",
         label: "Public",
     },
-];
+]
 
 export const IssueCommentCreate: FC<TIssueCommentCreate> = (props) => {
-    const { workspaceSlug, activityOperations, showAccessSpecifier = false } = props;
-    const workspaceStore = useWorkspace();
-    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string;
+    const { workspaceSlug, activityOperations, showAccessSpecifier = false } = props
+    const workspaceStore = useWorkspace()
+    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
 
-    const { mentionHighlights, mentionSuggestions } = useMention();
+    const { mentionHighlights, mentionSuggestions } = useMention()
 
     // refs
-    const editorRef = useRef<any>(null);
+    const editorRef = useRef<any>(null)
     // react hook form
     const {
         handleSubmit,
@@ -56,26 +51,26 @@ export const IssueCommentCreate: FC<TIssueCommentCreate> = (props) => {
         watch,
         formState: { isSubmitting },
         reset,
-    } = useForm<Partial<TIssueComment>>({ defaultValues: { comment_html: "<p></p>" } });
+    } = useForm<Partial<TIssueComment>>({ defaultValues: { comment_html: "<p></p>" } })
 
     const onSubmit = async (formData: Partial<TIssueComment>) => {
         await activityOperations.createComment(formData).finally(() => {
-            reset({ comment_html: "" });
-            editorRef.current?.clearEditor();
-        });
-    };
+            reset({ comment_html: "" })
+            editorRef.current?.clearEditor()
+        })
+    }
 
     const isEmpty =
         watch("comment_html") === "" ||
         watch("comment_html")?.trim() === "" ||
         watch("comment_html") === "<p></p>" ||
-        isEmptyHtmlString(watch("comment_html") ?? "");
+        isEmptyHtmlString(watch("comment_html") ?? "")
 
     return (
         <div
             onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey && !isEmpty && !isSubmitting) {
-                    handleSubmit(onSubmit)(e);
+                    handleSubmit(onSubmit)(e)
                 }
             }}
         >
@@ -98,7 +93,7 @@ export const IssueCommentCreate: FC<TIssueCommentCreate> = (props) => {
                                 editorContentCustomClassNames="min-h-[35px]"
                                 debouncedUpdatesEnabled={false}
                                 onChange={(comment_json: Object, comment_html: string) => {
-                                    onChange(comment_html);
+                                    onChange(comment_html)
                                 }}
                                 mentionSuggestions={mentionSuggestions}
                                 mentionHighlights={mentionHighlights}
@@ -119,7 +114,7 @@ export const IssueCommentCreate: FC<TIssueCommentCreate> = (props) => {
                                         type="submit"
                                         className="!px-2.5 !py-1.5 !text-xs"
                                         onClick={(e) => {
-                                            handleSubmit(onSubmit)(e);
+                                            handleSubmit(onSubmit)(e)
                                         }}
                                     >
                                         {isSubmitting ? "Adding..." : "Comment"}
@@ -131,5 +126,5 @@ export const IssueCommentCreate: FC<TIssueCommentCreate> = (props) => {
                 )}
             />
         </div>
-    );
-};
+    )
+}

@@ -1,105 +1,100 @@
-import { useCallback, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Briefcase, Plus } from "lucide-react";
-
+import { useRouter } from "next/router"
+import { useCallback, useState } from "react"
+import { ProjectAnalyticsModal } from "@components/analytics"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
+import { IssuesMobileHeader } from "@components/issues/issues-mobile-header"
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+// helper
+import { renderEmoji } from "@helpers/emoji.helper"
 import {
     useApplication,
     useEventTracker,
     useLabel,
+    useMember,
     useProject,
     useProjectState,
     useUser,
-    useMember,
-} from "@hooks/store";
-
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
-import { ProjectAnalyticsModal } from "@components/analytics";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-
-import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
-
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
-
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
-// helper
-import { renderEmoji } from "@helpers/emoji.helper";
-import { EUserProjectRoles } from "@constants/project";
-import { useIssues } from "@hooks/store/use-issues";
-import { IssuesMobileHeader } from "@components/issues/issues-mobile-header";
+} from "@hooks/store"
+import { useIssues } from "@hooks/store/use-issues"
+import { Briefcase, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
+import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui"
 
 export const ProjectIssuesHeader: React.FC = observer(() => {
     // states
-    const [analyticsModal, setAnalyticsModal] = useState(false);
+    const [analyticsModal, setAnalyticsModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query as { workspaceSlug: string; projectId: string };
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query as { workspaceSlug: string; projectId: string }
     // store hooks
     const {
         project: { projectMemberIds },
-    } = useMember();
+    } = useMember()
     const {
         issuesFilter: { issueFilters, updateFilters },
-    } = useIssues(EIssuesStoreType.PROJECT);
+    } = useIssues(EIssuesStoreType.PROJECT)
     const {
         commandPalette: { toggleCreateIssueModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
-    const { projectStates } = useProjectState();
-    const { projectLabels } = useLabel();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
+    const { projectStates } = useProjectState()
+    const { projectLabels } = useLabel()
 
-    const activeLayout = issueFilters?.displayFilters?.layout;
+    const activeLayout = issueFilters?.displayFilters?.layout
 
     const handleFiltersUpdate = useCallback(
         (key: keyof IIssueFilterOptions, value: string | string[]) => {
-            if (!workspaceSlug || !projectId) return;
-            const newValues = issueFilters?.filters?.[key] ?? [];
+            if (!workspaceSlug || !projectId) return
+            const newValues = issueFilters?.filters?.[key] ?? []
 
             if (Array.isArray(value)) {
                 value.forEach((val) => {
-                    if (!newValues.includes(val)) newValues.push(val);
-                });
+                    if (!newValues.includes(val)) newValues.push(val)
+                })
             } else {
-                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
-                else newValues.push(value);
+                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                else newValues.push(value)
             }
 
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues });
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues })
         },
         [workspaceSlug, projectId, issueFilters, updateFilters]
-    );
+    )
 
     const handleLayoutChange = useCallback(
         (layout: TIssueLayouts) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout });
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout })
         },
         [workspaceSlug, projectId, updateFilters]
-    );
+    )
 
     const handleDisplayFilters = useCallback(
         (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter)
         },
         [workspaceSlug, projectId, updateFilters]
-    );
+    )
 
     const handleDisplayProperties = useCallback(
         (property: Partial<IIssueDisplayProperties>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property)
         },
         [workspaceSlug, projectId, updateFilters]
-    );
+    )
 
     const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return (
         <>
@@ -200,8 +195,8 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
                             </Button>
                             <Button
                                 onClick={() => {
-                                    setTrackElement("Project issues page");
-                                    toggleCreateIssueModal(true, EIssuesStoreType.PROJECT);
+                                    setTrackElement("Project issues page")
+                                    toggleCreateIssueModal(true, EIssuesStoreType.PROJECT)
                                 }}
                                 size="sm"
                                 prependIcon={<Plus />}
@@ -216,5 +211,5 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,39 +1,36 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { Loader } from "@servcy/ui";
-
-import { IIssueLabel } from "@servcy/types";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { observer } from "mobx-react"
+import { IIssueLabel } from "@servcy/types"
+import { Loader } from "@servcy/ui"
 
 const LabelIcons = ({ color }: { color: string }) => (
     <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color }} />
-);
+)
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string) => void;
-    labels: IIssueLabel[] | undefined;
-    searchQuery: string;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string) => void
+    labels: IIssueLabel[] | undefined
+    searchQuery: string
+}
 
 export const FilterLabels: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, labels, searchQuery } = props;
+    const { appliedFilters, handleUpdate, labels, searchQuery } = props
 
-    const [itemsToRender, setItemsToRender] = useState(5);
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [itemsToRender, setItemsToRender] = useState(5)
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const appliedFiltersCount = appliedFilters?.length ?? 0
 
-    const filteredOptions = labels?.filter((label) => label.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredOptions = labels?.filter((label) => label.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
     const handleViewToggle = () => {
-        if (!filteredOptions) return;
+        if (!filteredOptions) return
 
-        if (itemsToRender === filteredOptions.length) setItemsToRender(5);
-        else setItemsToRender(filteredOptions.length);
-    };
+        if (itemsToRender === filteredOptions.length) setItemsToRender(5)
+        else setItemsToRender(filteredOptions.length)
+    }
 
     return (
         <>
@@ -79,5 +76,5 @@ export const FilterLabels: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

@@ -1,48 +1,43 @@
-import { useState } from "react";
-import { observer } from "mobx-react-lite";
-import { Search, X } from "lucide-react";
-
-import { useApplication } from "@hooks/store";
-
+import { useState } from "react"
 import {
     FilterAssignees,
-    FilterMentions,
     FilterCreatedBy,
+    FilterCycle,
     FilterLabels,
+    FilterMentions,
+    FilterModule,
     FilterPriority,
     FilterProjects,
     FilterStartDate,
     FilterState,
     FilterStateGroup,
     FilterTargetDate,
-    FilterCycle,
-    FilterModule,
-} from "@components/issues";
-
-import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";
-
-import { ILayoutDisplayFiltersOptions } from "@constants/issue";
+} from "@components/issues"
+import { ILayoutDisplayFiltersOptions } from "@constants/issue"
+import { useApplication } from "@hooks/store"
+import { Search, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types"
 
 type Props = {
-    filters: IIssueFilterOptions;
-    handleFiltersUpdate: (key: keyof IIssueFilterOptions, value: string | string[]) => void;
-    layoutDisplayFiltersOptions: ILayoutDisplayFiltersOptions | undefined;
-    labels?: IIssueLabel[] | undefined;
-    memberIds?: string[] | undefined;
-    states?: IState[] | undefined;
-};
+    filters: IIssueFilterOptions
+    handleFiltersUpdate: (key: keyof IIssueFilterOptions, value: string | string[]) => void
+    layoutDisplayFiltersOptions: ILayoutDisplayFiltersOptions | undefined
+    labels?: IIssueLabel[] | undefined
+    memberIds?: string[] | undefined
+    states?: IState[] | undefined
+}
 
 export const FilterSelection: React.FC<Props> = observer((props) => {
-    const { filters, handleFiltersUpdate, layoutDisplayFiltersOptions, labels, memberIds, states } = props;
+    const { filters, handleFiltersUpdate, layoutDisplayFiltersOptions, labels, memberIds, states } = props
 
     const {
         router: { moduleId, cycleId },
-    } = useApplication();
+    } = useApplication()
     // states
-    const [filtersSearchQuery, setFiltersSearchQuery] = useState("");
+    const [filtersSearchQuery, setFiltersSearchQuery] = useState("")
 
-    const isFilterEnabled = (filter: keyof IIssueFilterOptions) =>
-        layoutDisplayFiltersOptions?.filters.includes(filter);
+    const isFilterEnabled = (filter: keyof IIssueFilterOptions) => layoutDisplayFiltersOptions?.filters.includes(filter)
 
     return (
         <div className="flex h-full w-full flex-col overflow-hidden">
@@ -207,5 +202,5 @@ export const FilterSelection: React.FC<Props> = observer((props) => {
                 )}
             </div>
         </div>
-    );
-});
+    )
+})

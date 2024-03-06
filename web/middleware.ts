@@ -1,7 +1,7 @@
-import { authRoutes, wipRoutes } from "@/constants/routes";
-import { isJwtTokenValid } from "@/utils/Authentication/jwt";
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server"
+import { NextResponse } from "next/server"
+import { isJwtTokenValid } from "@/utils/Authentication/jwt"
+import { authRoutes, wipRoutes } from "@/constants/routes"
 
 export const config = {
     matcher: [
@@ -14,23 +14,21 @@ export const config = {
          */
         "/((?!_next/static|_next/image|favicon.ico|logo.svg).*)",
     ],
-};
+}
 
 export async function middleware(request: NextRequest) {
-    const refreshToken = request.cookies.get("refreshToken")?.value ?? "";
-    const requestedPath = request.nextUrl.pathname;
+    const refreshToken = request.cookies.get("refreshToken")?.value ?? ""
+    const requestedPath = request.nextUrl.pathname
     if (isJwtTokenValid(refreshToken)) {
         if (authRoutes.includes(requestedPath))
             // Redirect to home if user is already logged in
-            return NextResponse.redirect(new URL("/", request.nextUrl.origin));
+            return NextResponse.redirect(new URL("/", request.nextUrl.origin))
         else if (wipRoutes.includes(requestedPath))
             // Redirect to WIP page if user is already logged in
-            return NextResponse.redirect(new URL("/wip", request.nextUrl.origin));
+            return NextResponse.redirect(new URL("/wip", request.nextUrl.origin))
         // If user is already logged in, continue to the requested page
-        else return null;
+        else return null
     }
-    if (authRoutes.includes(requestedPath)) return null;
-    return NextResponse.redirect(
-        new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin)
-    );
+    if (authRoutes.includes(requestedPath)) return null
+    return NextResponse.redirect(new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin))
 }

@@ -1,21 +1,19 @@
-import { action, makeObservable, observable, runInAction } from "mobx";
-
-import { IAppConfig } from "@servcy/types";
-
-import { AppConfigService } from "@services/app_config.service";
+import { AppConfigService } from "@services/app_config.service"
+import { action, makeObservable, observable, runInAction } from "mobx"
+import { IAppConfig } from "@servcy/types"
 
 export interface IAppConfigStore {
     // observables
-    envConfig: IAppConfig | null;
+    envConfig: IAppConfig | null
     // actions
-    fetchAppConfig: () => Promise<any>;
+    fetchAppConfig: () => Promise<any>
 }
 
 export class AppConfigStore implements IAppConfigStore {
     // observables
-    envConfig: IAppConfig | null = null;
+    envConfig: IAppConfig | null = null
     // service
-    appConfigService;
+    appConfigService
 
     constructor() {
         makeObservable(this, {
@@ -23,8 +21,8 @@ export class AppConfigStore implements IAppConfigStore {
             envConfig: observable.ref,
             // actions
             fetchAppConfig: action,
-        });
-        this.appConfigService = new AppConfigService();
+        })
+        this.appConfigService = new AppConfigService()
     }
 
     /**
@@ -33,8 +31,8 @@ export class AppConfigStore implements IAppConfigStore {
     fetchAppConfig = async () =>
         await this.appConfigService.envConfig().then((config) => {
             runInAction(() => {
-                this.envConfig = config;
-            });
-            return config;
-        });
+                this.envConfig = config
+            })
+            return config
+        })
 }

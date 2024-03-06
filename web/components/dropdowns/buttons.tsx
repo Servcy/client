@@ -1,37 +1,35 @@
-import { cn } from "@helpers/common.helper";
-
-import { TButtonVariants } from "./types";
-
-import { BACKGROUND_BUTTON_VARIANTS, BORDER_BUTTON_VARIANTS } from "./constants";
-import { Tooltip } from "@servcy/ui";
+import { cn } from "@helpers/common.helper"
+import { Tooltip } from "@servcy/ui"
+import { BACKGROUND_BUTTON_VARIANTS, BORDER_BUTTON_VARIANTS } from "./constants"
+import { TButtonVariants } from "./types"
 
 export type DropdownButtonProps = {
-    children: React.ReactNode;
-    className?: string;
-    isActive: boolean;
-    tooltipContent: string | React.ReactNode;
-    tooltipHeading: string;
-    showTooltip: boolean;
-    variant: TButtonVariants;
-};
+    children: React.ReactNode
+    className?: string
+    isActive: boolean
+    tooltipContent: string | React.ReactNode
+    tooltipHeading: string
+    showTooltip: boolean
+    variant: TButtonVariants
+}
 
 type ButtonProps = {
-    children: React.ReactNode;
-    className?: string;
-    isActive: boolean;
-    tooltipContent: string | React.ReactNode;
-    tooltipHeading: string;
-    showTooltip: boolean;
-};
+    children: React.ReactNode
+    className?: string
+    isActive: boolean
+    tooltipContent: string | React.ReactNode
+    tooltipHeading: string
+    showTooltip: boolean
+}
 
 export const DropdownButton: React.FC<DropdownButtonProps> = (props) => {
-    const { children, className, isActive, tooltipContent, tooltipHeading, showTooltip, variant } = props;
+    const { children, className, isActive, tooltipContent, tooltipHeading, showTooltip, variant } = props
 
     const ButtonToRender: React.FC<ButtonProps> = BORDER_BUTTON_VARIANTS.includes(variant)
         ? BorderButton
         : BACKGROUND_BUTTON_VARIANTS.includes(variant)
           ? BackgroundButton
-          : TransparentButton;
+          : TransparentButton
 
     return (
         <ButtonToRender
@@ -43,11 +41,11 @@ export const DropdownButton: React.FC<DropdownButtonProps> = (props) => {
         >
             {children}
         </ButtonToRender>
-    );
-};
+    )
+}
 
 const BorderButton: React.FC<ButtonProps> = (props) => {
-    const { children, className, isActive, tooltipContent, tooltipHeading, showTooltip } = props;
+    const { children, className, isActive, tooltipContent, tooltipHeading, showTooltip } = props
 
     return (
         <Tooltip tooltipHeading={tooltipHeading} tooltipContent={tooltipContent} disabled={!showTooltip}>
@@ -61,11 +59,11 @@ const BorderButton: React.FC<ButtonProps> = (props) => {
                 {children}
             </div>
         </Tooltip>
-    );
-};
+    )
+}
 
 const BackgroundButton: React.FC<ButtonProps> = (props) => {
-    const { children, className, tooltipContent, tooltipHeading, showTooltip } = props;
+    const { children, className, tooltipContent, tooltipHeading, showTooltip } = props
 
     return (
         <Tooltip tooltipHeading={tooltipHeading} tooltipContent={tooltipContent} disabled={!showTooltip}>
@@ -78,11 +76,11 @@ const BackgroundButton: React.FC<ButtonProps> = (props) => {
                 {children}
             </div>
         </Tooltip>
-    );
-};
+    )
+}
 
 const TransparentButton: React.FC<ButtonProps> = (props) => {
-    const { children, className, isActive, tooltipContent, tooltipHeading, showTooltip } = props;
+    const { children, className, isActive, tooltipContent, tooltipHeading, showTooltip } = props
 
     return (
         <Tooltip tooltipHeading={tooltipHeading} tooltipContent={tooltipContent} disabled={!showTooltip}>
@@ -96,5 +94,5 @@ const TransparentButton: React.FC<ButtonProps> = (props) => {
                 {children}
             </div>
         </Tooltip>
-    );
-};
+    )
+}

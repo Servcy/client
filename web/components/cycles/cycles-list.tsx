@@ -1,34 +1,30 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-
-import { useUser } from "@hooks/store";
-
-import { CyclePeekOverview, CyclesListItem } from "@components/cycles";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-
-import { Loader } from "@servcy/ui";
-
-import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { FC } from "react"
+import { CyclePeekOverview, CyclesListItem } from "@components/cycles"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import { Loader } from "@servcy/ui"
 
 export interface ICyclesList {
-    cycleIds: string[];
-    filter: string;
-    workspaceSlug: string;
-    projectId: string;
+    cycleIds: string[]
+    filter: string
+    workspaceSlug: string
+    projectId: string
 }
 
 export const CyclesList: FC<ICyclesList> = observer((props) => {
-    const { cycleIds, filter, workspaceSlug, projectId } = props;
+    const { cycleIds, filter, workspaceSlug, projectId } = props
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
 
-    const emptyStateDetail = CYCLE_EMPTY_STATE_DETAILS[filter as keyof typeof CYCLE_EMPTY_STATE_DETAILS];
+    const emptyStateDetail = CYCLE_EMPTY_STATE_DETAILS[filter as keyof typeof CYCLE_EMPTY_STATE_DETAILS]
 
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("cycle", filter, isLightMode);
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("cycle", filter, isLightMode)
 
     return (
         <>
@@ -70,5 +66,5 @@ export const CyclesList: FC<ICyclesList> = observer((props) => {
                 </Loader>
             )}
         </>
-    );
-});
+    )
+})

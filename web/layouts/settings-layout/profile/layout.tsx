@@ -1,17 +1,16 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react"
+import { CommandPalette } from "@components/command-palette"
 // layout
-import { UserAuthWrapper } from "@layouts/auth-layout";
-import { ProfileLayoutSidebar } from "@layouts/settings-layout";
-
-import { CommandPalette } from "@components/command-palette";
+import { UserAuthWrapper } from "@layouts/auth-layout"
+import { ProfileLayoutSidebar } from "@layouts/settings-layout"
 
 interface IProfileSettingsLayout {
-    children: ReactNode;
-    header?: ReactNode;
+    children: ReactNode
+    header?: ReactNode
 }
 
 export const ProfileSettingsLayout: FC<IProfileSettingsLayout> = (props) => {
-    const { children, header } = props;
+    const { children, header } = props
 
     return (
         <>
@@ -26,5 +25,5 @@ export const ProfileSettingsLayout: FC<IProfileSettingsLayout> = (props) => {
                 </div>
             </UserAuthWrapper>
         </>
-    );
-};
+    )
+}

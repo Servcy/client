@@ -1,28 +1,23 @@
-import { observer } from "mobx-react-lite";
-
-import { useUser, useWorkspace } from "@hooks/store";
-
-import { AppLayout } from "@layouts/app-layout";
-import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-
-import { PageHead } from "@components/core";
-import { WorkspaceSettingHeader } from "@components/headers";
-import IntegrationGuide from "@components/integration/guide";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import { PageHead } from "@components/core"
+import { WorkspaceSettingHeader } from "@components/headers"
+import IntegrationGuide from "@components/integration/guide"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useUser, useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+import { observer } from "mobx-react-lite"
+import { NextPageWithLayout } from "@/types/types"
 
 const ImportsPage: NextPageWithLayout = observer(() => {
     // store hooks
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { currentWorkspace } = useWorkspace();
+    } = useUser()
+    const { currentWorkspace } = useWorkspace()
 
     // derived values
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN;
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Imports` : undefined;
+    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Imports` : undefined
 
     if (!isAdmin)
         return (
@@ -32,7 +27,7 @@ const ImportsPage: NextPageWithLayout = observer(() => {
                     <p className="text-sm text-custom-text-300">You are not authorized to access this page.</p>
                 </div>
             </>
-        );
+        )
 
     return (
         <>
@@ -44,15 +39,15 @@ const ImportsPage: NextPageWithLayout = observer(() => {
                 <IntegrationGuide />
             </section>
         </>
-    );
-});
+    )
+})
 
 ImportsPage.getWrapper = function getWrapper(page: React.ReactElement) {
     return (
         <AppLayout header={<WorkspaceSettingHeader title="Import Settings" />}>
             <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default ImportsPage;
+export default ImportsPage

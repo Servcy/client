@@ -1,32 +1,28 @@
-import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
-
-import { DateRangeDropdown, ProjectDropdown } from "@components/dropdowns";
-
-import { Button, Input, TextArea } from "@servcy/ui";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { ICycle } from "@servcy/types";
+import { useEffect } from "react"
+import { DateRangeDropdown, ProjectDropdown } from "@components/dropdowns"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { Controller, useForm } from "react-hook-form"
+import { ICycle } from "@servcy/types"
+import { Button, Input, TextArea } from "@servcy/ui"
 
 type Props = {
-    handleFormSubmit: (values: Partial<ICycle>, dirtyFields: any) => Promise<void>;
-    handleClose: () => void;
-    status: boolean;
-    projectId: string;
-    setActiveProject: (projectId: string) => void;
-    data?: ICycle | null;
-};
+    handleFormSubmit: (values: Partial<ICycle>, dirtyFields: any) => Promise<void>
+    handleClose: () => void
+    status: boolean
+    projectId: string
+    setActiveProject: (projectId: string) => void
+    data?: ICycle | null
+}
 
 const defaultValues: Partial<ICycle> = {
     name: "",
     description: "",
     start_date: null,
     end_date: null,
-};
+}
 
 export const CycleForm: React.FC<Props> = (props) => {
-    const { handleFormSubmit, handleClose, status, projectId, setActiveProject, data } = props;
+    const { handleFormSubmit, handleClose, status, projectId, setActiveProject, data } = props
     // form data
     const {
         formState: { errors, isSubmitting, dirtyFields },
@@ -41,14 +37,14 @@ export const CycleForm: React.FC<Props> = (props) => {
             start_date: data?.start_date || null,
             end_date: data?.end_date || null,
         },
-    });
+    })
 
     useEffect(() => {
         reset({
             ...defaultValues,
             ...data,
-        });
-    }, [data, reset]);
+        })
+    }, [data, reset])
 
     return (
         <form onSubmit={handleSubmit((formData) => handleFormSubmit(formData, dirtyFields))}>
@@ -62,8 +58,8 @@ export const CycleForm: React.FC<Props> = (props) => {
                                 <ProjectDropdown
                                     value={value}
                                     onChange={(val) => {
-                                        onChange(val);
-                                        setActiveProject(val);
+                                        onChange(val)
+                                        setActiveProject(val)
                                     }}
                                     buttonVariant="background-with-text"
                                     tabIndex={7}
@@ -143,10 +139,8 @@ export const CycleForm: React.FC<Props> = (props) => {
                                                 onSelect={(val) => {
                                                     onChangeStartDate(
                                                         val?.from ? renderFormattedPayloadDate(val.from) : null
-                                                    );
-                                                    onChangeEndDate(
-                                                        val?.to ? renderFormattedPayloadDate(val.to) : null
-                                                    );
+                                                    )
+                                                    onChangeEndDate(val?.to ? renderFormattedPayloadDate(val.to) : null)
                                                 }}
                                                 placeholder={{
                                                     from: "Start date",
@@ -174,5 +168,5 @@ export const CycleForm: React.FC<Props> = (props) => {
                 </Button>
             </div>
         </form>
-    );
-};
+    )
+}

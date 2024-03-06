@@ -1,31 +1,28 @@
-import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
+import { useRouter } from "next/router"
+import { useMemo, useState } from "react"
+import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@constants/fetch-keys"
+import { NotificationService } from "@services/notification.service"
 // swr
-import useSWR from "swr";
-import useSWRInfinite from "swr/infinite";
-
-import { NotificationService } from "@services/notification.service";
-
-import useToast from "./use-toast";
-
-import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@constants/fetch-keys";
+import useSWR from "swr"
+import useSWRInfinite from "swr/infinite"
 // type
-import type { IMarkAllAsReadPayload, NotificationCount, NotificationType } from "@servcy/types";
+import type { IMarkAllAsReadPayload, NotificationCount, NotificationType } from "@servcy/types"
+import useToast from "./use-toast"
 
-const PER_PAGE = 30;
+const PER_PAGE = 30
 
-const userNotificationServices = new NotificationService();
+const userNotificationServices = new NotificationService()
 
 const useUserNotification = () => {
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
-    const [snoozed, setSnoozed] = useState<boolean>(false);
-    const [archived, setArchived] = useState<boolean>(false);
-    const [readNotification, setReadNotification] = useState<boolean>(false);
-    const [fetchNotifications, setFetchNotifications] = useState<boolean>(false);
-    const [selectedNotificationForSnooze, setSelectedNotificationForSnooze] = useState<string | null>(null);
-    const [selectedTab, setSelectedTab] = useState<NotificationType>("assigned");
+    const [snoozed, setSnoozed] = useState<boolean>(false)
+    const [archived, setArchived] = useState<boolean>(false)
+    const [readNotification, setReadNotification] = useState<boolean>(false)
+    const [fetchNotifications, setFetchNotifications] = useState<boolean>(false)
+    const [selectedNotificationForSnooze, setSelectedNotificationForSnooze] = useState<string | null>(null)
+    const [selectedTab, setSelectedTab] = useState<NotificationType>("assigned")
 
     const params = useMemo(
         () => ({
@@ -36,7 +33,7 @@ const useUserNotification = () => {
             per_page: PER_PAGE,
         }),
         [archived, readNotification, selectedTab, snoozed]
-    );
+    )
 
     const {
         data: paginatedData,
@@ -50,161 +47,161 @@ const useUserNotification = () => {
             ? (index, prevData) => getPaginatedNotificationKey(index, prevData, workspaceSlug.toString(), params)
             : () => null,
         async (url: string) => await userNotificationServices.getNotifications(url)
-    );
+    )
 
-    const isLoadingMore = isLoading || (size > 0 && paginatedData && typeof paginatedData[size - 1] === "undefined");
-    const isEmpty = paginatedData?.[0]?.results?.length === 0;
-    const notifications = paginatedData ? paginatedData.map((d) => d.results).flat() : undefined;
-    const hasMore = isEmpty || (paginatedData && paginatedData[paginatedData.length - 1].next_page_results);
-    const isRefreshing = isValidating && paginatedData && paginatedData.length === size;
+    const isLoadingMore = isLoading || (size > 0 && paginatedData && typeof paginatedData[size - 1] === "undefined")
+    const isEmpty = paginatedData?.[0]?.results?.length === 0
+    const notifications = paginatedData ? paginatedData.map((d) => d.results).flat() : undefined
+    const hasMore = isEmpty || (paginatedData && paginatedData[paginatedData.length - 1].next_page_results)
+    const isRefreshing = isValidating && paginatedData && paginatedData.length === size
 
     const { data: notificationCount, mutate: mutateNotificationCount } = useSWR(
         workspaceSlug ? UNREAD_NOTIFICATIONS_COUNT(workspaceSlug.toString()) : null,
         () => (workspaceSlug ? userNotificationServices.getUnreadNotificationsCount(workspaceSlug.toString()) : null)
-    );
+    )
 
     const handleReadMutation = (action: "read" | "unread") => {
-        const notificationCountNumber = action === "read" ? -1 : 1;
+        const notificationCountNumber = action === "read" ? -1 : 1
 
         mutateNotificationCount((prev: any) => {
-            if (!prev) return prev;
+            if (!prev) return prev
 
             const notificationType: keyof NotificationCount =
                 selectedTab === "assigned"
                     ? "my_issues"
                     : selectedTab === "created"
                       ? "created_issues"
-                      : "watching_issues";
+                      : "watching_issues"
 
             return {
                 ...prev,
                 [notificationType]: prev[notificationType] + notificationCountNumber,
-            };
-        }, false);
-    };
+            }
+        }, false)
+    }
 
     const mutateNotification = (notificationId: string, value: Object) => {
         notificationMutate((previousNotifications: any) => {
-            if (!previousNotifications) return previousNotifications;
+            if (!previousNotifications) return previousNotifications
 
             const notificationIndex = Math.floor(
                 previousNotifications
                     .map((d: any) => d.results)
                     .flat()
                     .findIndex((notification: any) => notification.id === notificationId) / PER_PAGE
-            );
+            )
 
             let notificationIndexInPage = previousNotifications[notificationIndex].results.findIndex(
                 (notification: any) => notification.id === notificationId
-            );
+            )
 
-            if (notificationIndexInPage === -1) return previousNotifications;
+            if (notificationIndexInPage === -1) return previousNotifications
 
-            notificationIndexInPage = notificationIndexInPage === -1 ? 0 : notificationIndexInPage % PER_PAGE;
+            notificationIndexInPage = notificationIndexInPage === -1 ? 0 : notificationIndexInPage % PER_PAGE
 
-            if (notificationIndex === -1) return previousNotifications;
+            if (notificationIndex === -1) return previousNotifications
 
-            if (notificationIndexInPage === -1) return previousNotifications;
+            if (notificationIndexInPage === -1) return previousNotifications
 
-            const key = Object.keys(value)[0];
-            (previousNotifications[notificationIndex].results[notificationIndexInPage] as any)[key] = (value as any)[
+            const key = Object.keys(value)[0]
+            ;(previousNotifications[notificationIndex].results[notificationIndexInPage] as any)[key] = (value as any)[
                 key
-            ];
+            ]
 
-            return previousNotifications;
-        }, false);
-    };
+            return previousNotifications
+        }, false)
+    }
 
     const removeNotification = (notificationId: string) => {
         notificationMutate((previousNotifications: any) => {
-            if (!previousNotifications) return previousNotifications;
+            if (!previousNotifications) return previousNotifications
 
             const notificationIndex = Math.floor(
                 previousNotifications
                     .map((d: any) => d.results)
                     .flat()
                     .findIndex((notification: any) => notification.id === notificationId) / PER_PAGE
-            );
+            )
 
             let notificationIndexInPage = previousNotifications[notificationIndex].results.findIndex(
                 (notification: any) => notification.id === notificationId
-            );
+            )
 
-            if (notificationIndexInPage === -1) return previousNotifications;
+            if (notificationIndexInPage === -1) return previousNotifications
 
-            notificationIndexInPage = notificationIndexInPage === -1 ? 0 : notificationIndexInPage % PER_PAGE;
+            notificationIndexInPage = notificationIndexInPage === -1 ? 0 : notificationIndexInPage % PER_PAGE
 
-            if (notificationIndex === -1) return previousNotifications;
+            if (notificationIndex === -1) return previousNotifications
 
-            if (notificationIndexInPage === -1) return previousNotifications;
+            if (notificationIndexInPage === -1) return previousNotifications
 
-            previousNotifications[notificationIndex].results.splice(notificationIndexInPage, 1);
+            previousNotifications[notificationIndex].results.splice(notificationIndexInPage, 1)
 
-            return previousNotifications;
-        }, false);
-    };
+            return previousNotifications
+        }, false)
+    }
 
     const markNotificationReadStatus = async (notificationId: string) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
-        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null;
+        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null
 
-        handleReadMutation(isRead ? "unread" : "read");
-        mutateNotification(notificationId, { read_at: isRead ? null : new Date() });
+        handleReadMutation(isRead ? "unread" : "read")
+        mutateNotification(notificationId, { read_at: isRead ? null : new Date() })
 
-        if (readNotification) removeNotification(notificationId);
+        if (readNotification) removeNotification(notificationId)
 
         if (isRead) {
             await userNotificationServices
                 .markUserNotificationAsUnread(workspaceSlug.toString(), notificationId)
                 .catch(() => {
-                    throw new Error("Something went wrong");
+                    throw new Error("Something went wrong")
                 })
                 .finally(() => {
-                    mutateNotificationCount();
-                });
+                    mutateNotificationCount()
+                })
         } else {
             await userNotificationServices
                 .markUserNotificationAsRead(workspaceSlug.toString(), notificationId)
                 .catch(() => {
-                    throw new Error("Something went wrong");
+                    throw new Error("Something went wrong")
                 })
                 .finally(() => {
-                    mutateNotificationCount();
-                });
+                    mutateNotificationCount()
+                })
         }
-    };
+    }
 
     const markNotificationAsRead = async (notificationId: string) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
-        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null;
+        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null
 
-        if (isRead) return;
+        if (isRead) return
 
-        mutateNotification(notificationId, { read_at: new Date() });
-        handleReadMutation("read");
+        mutateNotification(notificationId, { read_at: new Date() })
+        handleReadMutation("read")
 
         await userNotificationServices
             .markUserNotificationAsRead(workspaceSlug.toString(), notificationId)
             .catch(() => {
-                throw new Error("Something went wrong");
-            });
+                throw new Error("Something went wrong")
+            })
 
-        mutateNotificationCount();
-    };
+        mutateNotificationCount()
+    }
 
     const markNotificationArchivedStatus = async (notificationId: string) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
         const isArchived =
-            notifications?.find((notification) => notification.id === notificationId)?.archived_at !== null;
+            notifications?.find((notification) => notification.id === notificationId)?.archived_at !== null
 
         if (!isArchived) {
-            handleReadMutation("read");
-            removeNotification(notificationId);
+            handleReadMutation("read")
+            removeNotification(notificationId)
         } else {
             if (archived) {
-                removeNotification(notificationId);
+                removeNotification(notificationId)
             }
         }
 
@@ -212,32 +209,32 @@ const useUserNotification = () => {
             await userNotificationServices
                 .markUserNotificationAsUnarchived(workspaceSlug.toString(), notificationId)
                 .catch(() => {
-                    throw new Error("Something went wrong");
+                    throw new Error("Something went wrong")
                 })
                 .finally(() => {
-                    notificationMutate();
-                    mutateNotificationCount();
-                });
+                    notificationMutate()
+                    mutateNotificationCount()
+                })
         } else {
             await userNotificationServices
                 .markUserNotificationAsArchived(workspaceSlug.toString(), notificationId)
                 .catch(() => {
-                    throw new Error("Something went wrong");
+                    throw new Error("Something went wrong")
                 })
                 .finally(() => {
-                    notificationMutate();
-                    mutateNotificationCount();
-                });
+                    notificationMutate()
+                    mutateNotificationCount()
+                })
         }
-    };
+    }
 
     const markSnoozeNotification = async (notificationId: string, dateTime?: Date) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         const isSnoozed =
-            notifications?.find((notification) => notification.id === notificationId)?.snoozed_till !== null;
+            notifications?.find((notification) => notification.id === notificationId)?.snoozed_till !== null
 
-        mutateNotification(notificationId, { snoozed_till: isSnoozed ? null : dateTime });
+        mutateNotification(notificationId, { snoozed_till: isSnoozed ? null : dateTime })
 
         if (isSnoozed) {
             await userNotificationServices
@@ -245,30 +242,30 @@ const useUserNotification = () => {
                     snoozed_till: null,
                 })
                 .finally(() => {
-                    notificationMutate();
-                });
+                    notificationMutate()
+                })
         } else {
             await userNotificationServices
                 .patchUserNotification(workspaceSlug.toString(), notificationId, {
                     snoozed_till: dateTime,
                 })
                 .catch(() => {
-                    new Error("Something went wrong");
+                    new Error("Something went wrong")
                 })
                 .finally(() => {
-                    notificationMutate();
-                });
+                    notificationMutate()
+                })
         }
-    };
+    }
 
     const markAllNotificationsAsRead = async () => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
-        let markAsReadParams: IMarkAllAsReadPayload;
+        let markAsReadParams: IMarkAllAsReadPayload
 
-        if (snoozed) markAsReadParams = { archived: false, snoozed: true };
-        else if (archived) markAsReadParams = { archived: true, snoozed: false };
-        else markAsReadParams = { archived: false, snoozed: false, type: selectedTab };
+        if (snoozed) markAsReadParams = { archived: false, snoozed: true }
+        else if (archived) markAsReadParams = { archived: true, snoozed: false }
+        else markAsReadParams = { archived: false, snoozed: false, type: selectedTab }
 
         await userNotificationServices
             .markAllNotificationsAsRead(workspaceSlug.toString(), markAsReadParams)
@@ -277,20 +274,20 @@ const useUserNotification = () => {
                     type: "success",
                     title: "Success!",
                     message: "All Notifications marked as read.",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Something went wrong. Please try again.",
-                });
+                })
             })
             .finally(() => {
-                notificationMutate();
-                mutateNotificationCount();
-            });
-    };
+                notificationMutate()
+                mutateNotificationCount()
+            })
+    }
 
     return {
         notifications,
@@ -321,7 +318,7 @@ const useUserNotification = () => {
         setFetchNotifications,
         markNotificationAsRead,
         markAllNotificationsAsRead,
-    };
-};
+    }
+}
 
-export default useUserNotification;
+export default useUserNotification

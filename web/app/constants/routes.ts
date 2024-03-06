@@ -1,8 +1,8 @@
-import { AiOutlineApi, AiOutlineHome, AiOutlineInbox } from "react-icons/ai";
+import { AiOutlineApi, AiOutlineHome, AiOutlineInbox } from "react-icons/ai"
 
-export const authRoutes = ["/login"];
+export const authRoutes = ["/login"]
 
-export const wipRoutes = ["/calendar", "/documents", "/payments", "/time-tracking", "/reports"];
+export const wipRoutes = ["/calendar", "/documents", "/payments", "/time-tracking", "/reports"]
 
 export const sidebarOptions = [
     {
@@ -20,4 +20,4 @@ export const sidebarOptions = [
         href: "/inbox",
         icon: AiOutlineInbox,
     },
-];
+]

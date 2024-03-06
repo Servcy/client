@@ -1,13 +1,13 @@
-import React from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React from "react"
 
 export const ProfilePreferenceSettingsSidebar = () => {
-    const router = useRouter();
+    const router = useRouter()
 
     const profilePreferenceLinks: Array<{
-        label: string;
-        href: string;
+        label: string
+        href: string
     }> = [
         {
             label: "Theme",
@@ -17,7 +17,7 @@ export const ProfilePreferenceSettingsSidebar = () => {
             label: "Email",
             href: `/profile/preferences/email`,
         },
-    ];
+    ]
     return (
         <div className="hidden md:flex w-96 flex-col gap-6 px-8 py-12">
             <div className="flex flex-col gap-4">
@@ -43,5 +43,5 @@ export const ProfilePreferenceSettingsSidebar = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

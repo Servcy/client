@@ -1,13 +1,13 @@
-import { Component } from "lucide-react";
+import { Component } from "lucide-react"
 
 interface ILabelName {
-    name: string;
-    color: string;
-    isGroup: boolean;
+    name: string
+    color: string
+    isGroup: boolean
 }
 
 export const LabelName = (props: ILabelName) => {
-    const { name, color, isGroup } = props;
+    const { name, color, isGroup } = props
 
     return (
         <div className="flex items-center gap-3">
@@ -23,5 +23,5 @@ export const LabelName = (props: ILabelName) => {
             )}
             <h6 className="text-sm">{name}</h6>
         </div>
-    );
-};
+    )
+}

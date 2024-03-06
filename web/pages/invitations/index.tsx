@@ -1,66 +1,58 @@
-import { CheckCircle2 } from "lucide-react";
-import { observer } from "mobx-react-lite";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
-import useSWR, { mutate } from "swr";
-
-import { UserService } from "@services/user.service";
-import { WorkspaceService } from "@services/workspace.service";
-
-import { useEventTracker, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { UserAuthWrapper } from "@layouts/auth-layout";
-import DefaultLayout from "@layouts/DefaultLayout";
-
-import { Button } from "@servcy/ui";
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { ReactElement, useState } from "react"
+import { EmptyState } from "@components/common"
+import { PageHead } from "@components/core"
+import { MEMBER_ACCEPTED } from "@constants/event-tracker"
+import { ROLE } from "@constants/workspace"
+import { truncateText } from "@helpers/string.helper"
+import { getUserRole } from "@helpers/user.helper"
+import { useEventTracker, useUser } from "@hooks/store"
+import { UserAuthWrapper } from "@layouts/auth-layout"
+import DefaultLayout from "@layouts/DefaultLayout"
+import { UserService } from "@services/user.service"
+import { WorkspaceService } from "@services/workspace.service"
+import { CheckCircle2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
 // images
-import emptyInvitation from "public/empty-state/invitation.svg";
-import ServcyLogo from "public/logo.svg";
+import emptyInvitation from "public/empty-state/invitation.svg"
+import ServcyLogo from "public/logo.svg"
+import toast from "react-hot-toast"
+import useSWR, { mutate } from "swr"
+import type { IWorkspaceMemberInvitation } from "@servcy/types"
+import { Button } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
-import { truncateText } from "@helpers/string.helper";
-import { getUserRole } from "@helpers/user.helper";
-
-import { NextPageWithLayout } from "@/types/types";
-import type { IWorkspaceMemberInvitation } from "@servcy/types";
-
-import { MEMBER_ACCEPTED } from "@constants/event-tracker";
-import { ROLE } from "@constants/workspace";
-
-import { EmptyState } from "@components/common";
-import { PageHead } from "@components/core";
-
-const workspaceService = new WorkspaceService();
-const userService = new UserService();
+const workspaceService = new WorkspaceService()
+const userService = new UserService()
 
 const UserInvitationsPage: NextPageWithLayout = observer(() => {
     // states
-    const [invitationsRespond, setInvitationsRespond] = useState<string[]>([]);
-    const [isJoiningWorkspaces, setIsJoiningWorkspaces] = useState(false);
+    const [invitationsRespond, setInvitationsRespond] = useState<string[]>([])
+    const [isJoiningWorkspaces, setIsJoiningWorkspaces] = useState(false)
     // store hooks
-    const { captureEvent, joinWorkspaceMetricGroup } = useEventTracker();
-    const { currentUser, currentUserSettings } = useUser();
+    const { captureEvent, joinWorkspaceMetricGroup } = useEventTracker()
+    const { currentUser, currentUserSettings } = useUser()
     // router
-    const router = useRouter();
+    const router = useRouter()
 
     const { data: invitations } = useSWR("USER_WORKSPACE_INVITATIONS", () =>
         workspaceService.userWorkspaceInvitations()
-    );
+    )
 
     const redirectWorkspaceSlug =
         currentUserSettings?.workspace?.last_workspace_slug ||
         currentUserSettings?.workspace?.fallback_workspace_slug ||
-        "";
+        ""
 
     const handleInvitation = (workspace_invitation: IWorkspaceMemberInvitation, action: "accepted" | "withdraw") => {
         if (action === "accepted") {
-            setInvitationsRespond((prevData) => [...prevData, workspace_invitation.id]);
+            setInvitationsRespond((prevData) => [...prevData, workspace_invitation.id])
         } else if (action === "withdraw") {
-            setInvitationsRespond((prevData) => prevData.filter((item: string) => item !== workspace_invitation.id));
+            setInvitationsRespond((prevData) => prevData.filter((item: string) => item !== workspace_invitation.id))
         }
-    };
+    }
 
     const submitInvitations = () => {
         if (invitationsRespond.length === 0) {
@@ -68,20 +60,20 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                 type: "error",
                 title: "Error!",
                 message: "Please select at least one invitation.",
-            });
-            return;
+            })
+            return
         }
 
-        setIsJoiningWorkspaces(true);
+        setIsJoiningWorkspaces(true)
 
         workspaceService
             .joinWorkspaces({ invitations: invitationsRespond })
             .then((res) => {
-                mutate("USER_WORKSPACES");
-                const firstInviteId = invitationsRespond[0];
-                const invitation = invitations?.find((i) => i.id === firstInviteId);
-                const redirectWorkspace = invitations?.find((i) => i.id === firstInviteId)?.workspace;
-                joinWorkspaceMetricGroup(redirectWorkspace?.id);
+                mutate("USER_WORKSPACES")
+                const firstInviteId = invitationsRespond[0]
+                const invitation = invitations?.find((i) => i.id === firstInviteId)
+                const redirectWorkspace = invitations?.find((i) => i.id === firstInviteId)?.workspace
+                joinWorkspaceMetricGroup(redirectWorkspace?.id)
                 captureEvent(MEMBER_ACCEPTED, {
                     member_id: invitation?.id,
                     role: getUserRole(invitation?.role!),
@@ -89,21 +81,21 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                     accepted_from: "App",
                     state: "SUCCESS",
                     element: "Workspace invitations page",
-                });
+                })
                 userService
                     .updateUser({ last_workspace_id: redirectWorkspace?.id })
                     .then(() => {
-                        setIsJoiningWorkspaces(false);
-                        router.push(`/${redirectWorkspace?.slug}`);
+                        setIsJoiningWorkspaces(false)
+                        router.push(`/${redirectWorkspace?.slug}`)
                     })
                     .catch(() => {
                         toast.error({
                             type: "error",
                             title: "Error!",
                             message: "Something went wrong, Please try again.",
-                        });
-                        setIsJoiningWorkspaces(false);
-                    });
+                        })
+                        setIsJoiningWorkspaces(false)
+                    })
             })
             .catch(() => {
                 captureEvent(MEMBER_ACCEPTED, {
@@ -111,15 +103,15 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                     accepted_from: "App",
                     state: "FAILED",
                     element: "Workspace invitations page",
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Something went wrong, Please try again.",
-                });
-                setIsJoiningWorkspaces(false);
-            });
-    };
+                })
+                setIsJoiningWorkspaces(false)
+            })
+    }
 
     return (
         <>
@@ -144,7 +136,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                                 <h4 className="text-2xl font-semibold">Join a workspace</h4>
                                 <div className="max-h-[37vh] space-y-4 overflow-y-auto md:w-3/5">
                                     {invitations.map((invitation) => {
-                                        const isSelected = invitationsRespond.includes(invitation.id);
+                                        const isSelected = invitationsRespond.includes(invitation.id)
 
                                         return (
                                             <div
@@ -190,7 +182,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                                                     <CheckCircle2 className="h-5 w-5" />
                                                 </span>
                                             </div>
-                                        );
+                                        )
                                     })}
                                 </div>
                                 <div className="flex items-center gap-3">
@@ -230,15 +222,15 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                 ) : null}
             </div>
         </>
-    );
-});
+    )
+})
 
 UserInvitationsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <UserAuthWrapper>
             <DefaultLayout>{page}</DefaultLayout>
         </UserAuthWrapper>
-    );
-};
+    )
+}
 
-export default UserInvitationsPage;
+export default UserInvitationsPage

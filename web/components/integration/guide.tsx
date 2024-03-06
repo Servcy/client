@@ -1,61 +1,53 @@
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import useSWR, { mutate } from "swr";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { DeleteImportModal, GithubImporterRoot, JiraImporterRoot, SingleImport } from "@components/integration"
+import { ImportExportSettingsLoader } from "@components/ui"
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys"
+import { IMPORTERS_LIST } from "@constants/workspace"
+import { useUser } from "@hooks/store"
+import useUserAuth from "@hooks/use-user-auth"
+import { IntegrationService } from "@services/integrations"
+import { RefreshCw } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR, { mutate } from "swr"
+import { IImporterService } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
-import { useUser } from "@hooks/store";
-import useUserAuth from "@hooks/use-user-auth";
-
-import { IntegrationService } from "@services/integrations";
-
-import { DeleteImportModal, GithubImporterRoot, JiraImporterRoot, SingleImport } from "@components/integration";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-
-import { Button } from "@servcy/ui";
-import { ImportExportSettingsLoader } from "@components/ui";
-
-import { RefreshCw } from "lucide-react";
-
-import { IImporterService } from "@servcy/types";
-
-import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
-
-import { IMPORTERS_LIST } from "@constants/workspace";
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-
-const integrationService = new IntegrationService();
+const integrationService = new IntegrationService()
 
 const IntegrationGuide = observer(() => {
     // states
-    const [refreshing, setRefreshing] = useState(false);
-    const [deleteImportModal, setDeleteImportModal] = useState(false);
-    const [importToDelete, setImportToDelete] = useState<IImporterService | null>(null);
+    const [refreshing, setRefreshing] = useState(false)
+    const [deleteImportModal, setDeleteImportModal] = useState(false)
+    const [importToDelete, setImportToDelete] = useState<IImporterService | null>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug, provider } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, provider } = router.query
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { currentUser, currentUserLoader } = useUser();
+    const { currentUser, currentUserLoader } = useUser()
     // custom hooks
-    const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
+    const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader })
 
     const { data: importerServices } = useSWR(
         workspaceSlug ? IMPORTER_SERVICES_LIST(workspaceSlug as string) : null,
         workspaceSlug ? () => integrationService.getImporterServicesList(workspaceSlug as string) : null
-    );
+    )
 
-    const emptyStateDetail = WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS["import"];
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("workspace-settings", "imports", isLightMode);
+    const emptyStateDetail = WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS["import"]
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("workspace-settings", "imports", isLightMode)
 
     const handleDeleteImport = (importService: IImporterService) => {
-        setImportToDelete(importService);
-        setDeleteImportModal(true);
-    };
+        setImportToDelete(importService)
+        setDeleteImportModal(true)
+    }
 
     return (
         <>
@@ -106,10 +98,10 @@ const IntegrationGuide = observer(() => {
                                         type="button"
                                         className="flex flex-shrink-0 items-center gap-1 rounded bg-custom-background-80 px-1.5 py-1 text-xs outline-none"
                                         onClick={() => {
-                                            setRefreshing(true);
+                                            setRefreshing(true)
                                             mutate(IMPORTER_SERVICES_LIST(workspaceSlug as string)).then(() =>
                                                 setRefreshing(false)
-                                            );
+                                            )
                                         }}
                                     >
                                         <RefreshCw className={`h-3 w-3 ${refreshing ? "animate-spin" : ""}`} />{" "}
@@ -154,7 +146,7 @@ const IntegrationGuide = observer(() => {
                 {provider && provider === "jira" && <JiraImporterRoot />}
             </div>
         </>
-    );
-});
+    )
+})
 
-export default IntegrationGuide;
+export default IntegrationGuide

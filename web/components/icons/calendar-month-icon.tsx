@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const CalendarMonthIcon: React.FC<Props> = ({ width = "24", height = "24", className }) => (
     <svg
@@ -16,4 +15,4 @@ export const CalendarMonthIcon: React.FC<Props> = ({ width = "24", height = "24"
             fill="rgb(var(--color-text-200))"
         />
     </svg>
-);
+)

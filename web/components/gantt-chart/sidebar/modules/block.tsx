@@ -1,31 +1,26 @@
-import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd";
-import { observer } from "mobx-react";
-import { MoreVertical } from "lucide-react";
-
-import { useGanttChart } from "@components/gantt-chart/hooks";
-
-import { ModuleGanttSidebarBlock } from "@components/modules";
-
-import { cn } from "@helpers/common.helper";
-import { findTotalDaysInRange } from "@helpers/date-time.helper";
-
-import { IGanttBlock } from "@components/gantt-chart/types";
-
-import { BLOCK_HEIGHT } from "@components/gantt-chart/constants";
+import { BLOCK_HEIGHT } from "@components/gantt-chart/constants"
+import { useGanttChart } from "@components/gantt-chart/hooks"
+import { IGanttBlock } from "@components/gantt-chart/types"
+import { ModuleGanttSidebarBlock } from "@components/modules"
+import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
+import { cn } from "@helpers/common.helper"
+import { findTotalDaysInRange } from "@helpers/date-time.helper"
+import { MoreVertical } from "lucide-react"
+import { observer } from "mobx-react"
 
 type Props = {
-    block: IGanttBlock;
-    enableReorder: boolean;
-    provided: DraggableProvided;
-    snapshot: DraggableStateSnapshot;
-};
+    block: IGanttBlock
+    enableReorder: boolean
+    provided: DraggableProvided
+    snapshot: DraggableStateSnapshot
+}
 
 export const ModulesSidebarBlock: React.FC<Props> = observer((props) => {
-    const { block, enableReorder, provided, snapshot } = props;
+    const { block, enableReorder, provided, snapshot } = props
     // store hooks
-    const { updateActiveBlockId, isBlockActive } = useGanttChart();
+    const { updateActiveBlockId, isBlockActive } = useGanttChart()
 
-    const duration = findTotalDaysInRange(block.start_date, block.target_date);
+    const duration = findTotalDaysInRange(block.start_date, block.target_date)
 
     return (
         <div
@@ -68,5 +63,5 @@ export const ModulesSidebarBlock: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

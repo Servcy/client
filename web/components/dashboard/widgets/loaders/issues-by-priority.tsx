@@ -1,4 +1,4 @@
-import { Loader } from "@servcy/ui";
+import { Loader } from "@servcy/ui"
 
 export const IssuesByPriorityWidgetLoader = () => (
     <Loader className="bg-custom-background-100 rounded-xl p-6">
@@ -11,4 +11,4 @@ export const IssuesByPriorityWidgetLoader = () => (
             <Loader.Item height="119px" width="6%" />
         </div>
     </Loader>
-);
+)

@@ -1,36 +1,34 @@
-import concat from "lodash/concat";
-import set from "lodash/set";
-import uniq from "lodash/uniq";
-import update from "lodash/update";
-import { action, makeObservable, observable, runInAction } from "mobx";
-import { computedFn } from "mobx-utils";
-
-import { InboxService } from "@services/inbox/inbox.service";
-
-import { TInbox, TInboxDetailIdMap, TInboxDetailMap } from "@servcy/types";
-import { RootStore } from "@store/root.store";
+import { InboxService } from "@services/inbox/inbox.service"
+import { RootStore } from "@store/root.store"
+import concat from "lodash/concat"
+import set from "lodash/set"
+import uniq from "lodash/uniq"
+import update from "lodash/update"
+import { action, makeObservable, observable, runInAction } from "mobx"
+import { computedFn } from "mobx-utils"
+import { TInbox, TInboxDetailIdMap, TInboxDetailMap } from "@servcy/types"
 
 export interface IInbox {
     // observables
-    inboxes: TInboxDetailIdMap;
-    inboxMap: TInboxDetailMap;
+    inboxes: TInboxDetailIdMap
+    inboxMap: TInboxDetailMap
 
-    getInboxesByProjectId: (projectId: string) => string[] | undefined;
-    getInboxById: (inboxId: string) => TInbox | undefined;
+    getInboxesByProjectId: (projectId: string) => string[] | undefined
+    getInboxById: (inboxId: string) => TInbox | undefined
     // fetch actions
-    fetchInboxes: (workspaceSlug: string, projectId: string) => Promise<TInbox[]>;
-    fetchInboxById: (workspaceSlug: string, projectId: string, inboxId: string) => Promise<TInbox>;
-    updateInbox: (workspaceSlug: string, projectId: string, inboxId: string, data: Partial<TInbox>) => Promise<TInbox>;
+    fetchInboxes: (workspaceSlug: string, projectId: string) => Promise<TInbox[]>
+    fetchInboxById: (workspaceSlug: string, projectId: string, inboxId: string) => Promise<TInbox>
+    updateInbox: (workspaceSlug: string, projectId: string, inboxId: string, data: Partial<TInbox>) => Promise<TInbox>
 }
 
 export class Inbox implements IInbox {
     // observables
-    inboxes: TInboxDetailIdMap = {};
-    inboxMap: TInboxDetailMap = {};
+    inboxes: TInboxDetailIdMap = {}
+    inboxMap: TInboxDetailMap = {}
     // root store
-    rootStore;
+    rootStore
 
-    inboxService;
+    inboxService
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
@@ -41,73 +39,73 @@ export class Inbox implements IInbox {
             fetchInboxes: action,
             fetchInboxById: action,
             updateInbox: action,
-        });
+        })
         // root store
-        this.rootStore = _rootStore;
+        this.rootStore = _rootStore
 
-        this.inboxService = new InboxService();
+        this.inboxService = new InboxService()
     }
 
     getInboxesByProjectId = computedFn((projectId: string) => {
-        if (!projectId) return undefined;
-        return this.inboxes?.[projectId] ?? undefined;
-    });
+        if (!projectId) return undefined
+        return this.inboxes?.[projectId] ?? undefined
+    })
 
     getInboxById = computedFn((inboxId: string) => {
-        if (!inboxId) return undefined;
-        return this.inboxMap[inboxId] ?? undefined;
-    });
+        if (!inboxId) return undefined
+        return this.inboxMap[inboxId] ?? undefined
+    })
 
     // actions
     fetchInboxes = async (workspaceSlug: string, projectId: string) => {
         try {
-            const response = await this.inboxService.fetchInboxes(workspaceSlug, projectId);
+            const response = await this.inboxService.fetchInboxes(workspaceSlug, projectId)
 
-            const _inboxIds = response.map((inbox) => inbox.id);
+            const _inboxIds = response.map((inbox) => inbox.id)
             runInAction(() => {
                 response.forEach((inbox) => {
-                    set(this.inboxMap, inbox.id, inbox);
-                });
-                set(this.inboxes, projectId, _inboxIds);
-            });
+                    set(this.inboxMap, inbox.id, inbox)
+                })
+                set(this.inboxes, projectId, _inboxIds)
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     fetchInboxById = async (workspaceSlug: string, projectId: string, inboxId: string) => {
         try {
-            const response = await this.inboxService.fetchInboxById(workspaceSlug, projectId, inboxId);
+            const response = await this.inboxService.fetchInboxById(workspaceSlug, projectId, inboxId)
 
             runInAction(() => {
-                set(this.inboxMap, inboxId, response);
+                set(this.inboxMap, inboxId, response)
                 update(this.inboxes, projectId, (inboxIds: string[] = []) => {
-                    if (inboxIds.includes(inboxId)) return inboxIds;
-                    return uniq(concat(inboxIds, inboxId));
-                });
-            });
+                    if (inboxIds.includes(inboxId)) return inboxIds
+                    return uniq(concat(inboxIds, inboxId))
+                })
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     updateInbox = async (workspaceSlug: string, projectId: string, inboxId: string, data: Partial<TInbox>) => {
         try {
-            const response = await this.inboxService.updateInbox(workspaceSlug, projectId, inboxId, data);
+            const response = await this.inboxService.updateInbox(workspaceSlug, projectId, inboxId, data)
 
             runInAction(() => {
                 Object.keys(response).forEach((key) => {
-                    set(this.inboxMap, [inboxId, key], response[key as keyof TInbox]);
-                });
-            });
+                    set(this.inboxMap, [inboxId, key], response[key as keyof TInbox])
+                })
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 }

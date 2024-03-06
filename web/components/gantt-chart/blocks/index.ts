@@ -1,1 +1,1 @@
-export * from "./blocks-list";
+export * from "./blocks-list"

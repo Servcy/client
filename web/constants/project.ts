@@ -1,7 +1,6 @@
-import { Globe2, Lock, LucideIcon } from "lucide-react";
-import { SettingIcon } from "@components/icons";
-
-import { Props } from "@components/icons/types";
+import { SettingIcon } from "@components/icons"
+import { Props } from "@components/icons/types"
+import { Globe2, Lock, LucideIcon } from "lucide-react"
 
 export enum EUserProjectRoles {
     GUEST = 5,
@@ -11,10 +10,10 @@ export enum EUserProjectRoles {
 }
 
 export const NETWORK_CHOICES: {
-    key: 0 | 2;
-    label: string;
-    description: string;
-    icon: LucideIcon;
+    key: 0 | 2
+    label: string
+    description: string
+    icon: LucideIcon
 }[] = [
     {
         key: 0,
@@ -28,7 +27,7 @@ export const NETWORK_CHOICES: {
         description: "Anyone in the workspace can join",
         icon: Globe2,
     },
-];
+]
 
 export const GROUP_CHOICES = {
     backlog: "Backlog",
@@ -36,7 +35,7 @@ export const GROUP_CHOICES = {
     started: "Started",
     completed: "Completed",
     cancelled: "Cancelled",
-};
+}
 
 export const MONTHS = [
     "January",
@@ -51,9 +50,9 @@ export const MONTHS = [
     "October",
     "November",
     "December",
-];
+]
 
-export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 export const PROJECT_AUTOMATION_MONTHS = [
     { label: "1 month", value: 1 },
@@ -61,7 +60,7 @@ export const PROJECT_AUTOMATION_MONTHS = [
     { label: "6 months", value: 6 },
     { label: "9 months", value: 9 },
     { label: "12 months", value: 12 },
-];
+]
 
 export const PROJECT_UNSPLASH_COVERS = [
     "https://images.unsplash.com/photo-1531045535792-b515d59c3d1f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
@@ -80,15 +79,15 @@ export const PROJECT_UNSPLASH_COVERS = [
     "https://images.unsplash.com/photo-1693868769698-6c7440636a09?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=870&q=80",
     "https://images.unsplash.com/photo-1691230995681-480d86cbc135?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=870&q=80",
     "https://images.unsplash.com/photo-1675351066828-6fc770b90dd2?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=870&q=80",
-];
+]
 
 export const PROJECT_SETTINGS_LINKS: {
-    key: string;
-    label: string;
-    href: string;
-    access: EUserProjectRoles;
-    highlight: (pathname: string, baseUrl: string) => boolean;
-    Icon: React.FC<Props>;
+    key: string
+    label: string
+    href: string
+    access: EUserProjectRoles
+    highlight: (pathname: string, baseUrl: string) => boolean
+    Icon: React.FC<Props>
 }[] = [
     {
         key: "general",
@@ -154,4 +153,4 @@ export const PROJECT_SETTINGS_LINKS: {
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/automations`,
         Icon: SettingIcon,
     },
-];
+]

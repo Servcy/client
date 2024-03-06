@@ -1,27 +1,24 @@
-import { FC } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Copy } from "lucide-react";
-
-import { Button, Input } from "@servcy/ui";
-
-import { IFormattedInstanceConfiguration } from "@servcy/types";
-
-import { useApplication } from "@hooks/store";
-import toast from "react-hot-toast";
+import { FC } from "react"
+import { useApplication } from "@hooks/store"
+import { Copy } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IFormattedInstanceConfiguration } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 export interface IInstanceGoogleConfigForm {
-    config: IFormattedInstanceConfiguration;
+    config: IFormattedInstanceConfiguration
 }
 
 export interface GoogleConfigFormValues {
-    GOOGLE_CLIENT_ID: string;
-    GOOGLE_CLIENT_SECRET: string;
+    GOOGLE_CLIENT_ID: string
+    GOOGLE_CLIENT_SECRET: string
 }
 
 export const InstanceGoogleConfigForm: FC<IInstanceGoogleConfigForm> = (props) => {
-    const { config } = props;
+    const { config } = props
     // store hooks
-    const { instance: instanceStore } = useApplication();
+    const { instance: instanceStore } = useApplication()
     // toast
 
     // form data
@@ -34,10 +31,10 @@ export const InstanceGoogleConfigForm: FC<IInstanceGoogleConfigForm> = (props) =
             GOOGLE_CLIENT_ID: config["GOOGLE_CLIENT_ID"],
             GOOGLE_CLIENT_SECRET: config["GOOGLE_CLIENT_SECRET"],
         },
-    });
+    })
 
     const onSubmit = async (formData: GoogleConfigFormValues) => {
-        const payload: Partial<GoogleConfigFormValues> = { ...formData };
+        const payload: Partial<GoogleConfigFormValues> = { ...formData }
 
         await instanceStore
             .updateInstanceConfigurations(payload)
@@ -48,10 +45,10 @@ export const InstanceGoogleConfigForm: FC<IInstanceGoogleConfigForm> = (props) =
                     message: "Google Configuration Settings updated successfully",
                 })
             )
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
-    const originURL = typeof window !== "undefined" ? window.location.origin : "";
+    const originURL = typeof window !== "undefined" ? window.location.origin : ""
 
     return (
         <div className="flex flex-col gap-8">
@@ -93,12 +90,12 @@ export const InstanceGoogleConfigForm: FC<IInstanceGoogleConfigForm> = (props) =
                         variant="neutral-primary"
                         className="flex items-center justify-between py-2"
                         onClick={() => {
-                            navigator.clipboard.writeText(originURL);
+                            navigator.clipboard.writeText(originURL)
                             toast.error({
                                 message: "The Origin URL has been successfully copied to your clipboard",
                                 type: "success",
                                 title: "Copied to clipboard",
-                            });
+                            })
                         }}
                     >
                         <p className="text-sm font-medium">{originURL}</p>
@@ -126,5 +123,5 @@ export const InstanceGoogleConfigForm: FC<IInstanceGoogleConfigForm> = (props) =
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

@@ -1,33 +1,31 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { StateGroupIcon } from "@servcy/ui";
-import { STATE_GROUPS } from "@constants/state";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { STATE_GROUPS } from "@constants/state"
+import { observer } from "mobx-react-lite"
+import { StateGroupIcon } from "@servcy/ui"
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string) => void;
-    searchQuery: string;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string) => void
+    searchQuery: string
+}
 
 export const FilterStateGroup: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, searchQuery } = props;
+    const { appliedFilters, handleUpdate, searchQuery } = props
 
-    const [itemsToRender, setItemsToRender] = useState(5);
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [itemsToRender, setItemsToRender] = useState(5)
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const appliedFiltersCount = appliedFilters?.length ?? 0
 
-    const filteredOptions = Object.values(STATE_GROUPS).filter((s) => s.key.includes(searchQuery.toLowerCase()));
+    const filteredOptions = Object.values(STATE_GROUPS).filter((s) => s.key.includes(searchQuery.toLowerCase()))
 
     const handleViewToggle = () => {
-        if (!filteredOptions) return;
+        if (!filteredOptions) return
 
-        if (itemsToRender === filteredOptions.length) setItemsToRender(5);
-        else setItemsToRender(filteredOptions.length);
-    };
+        if (itemsToRender === filteredOptions.length) setItemsToRender(5)
+        else setItemsToRender(filteredOptions.length)
+    }
 
     return (
         <>
@@ -65,5 +63,5 @@ export const FilterStateGroup: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

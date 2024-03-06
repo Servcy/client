@@ -1,28 +1,28 @@
-import { action, makeObservable, observable, computed, runInAction } from "mobx";
-import { ParsedUrlQuery } from "node:querystring";
+import { ParsedUrlQuery } from "node:querystring"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
 
 export interface IRouterStore {
     // observables
-    query: ParsedUrlQuery;
+    query: ParsedUrlQuery
     // actions
-    setQuery: (query: ParsedUrlQuery) => void;
+    setQuery: (query: ParsedUrlQuery) => void
     // computed
-    workspaceSlug: string | undefined;
-    projectId: string | undefined;
-    cycleId: string | undefined;
-    moduleId: string | undefined;
-    viewId: string | undefined;
-    globalViewId: string | undefined;
-    userId: string | undefined;
-    peekId: string | undefined;
-    issueId: string | undefined;
-    inboxId: string | undefined;
-    webhookId: string | undefined;
+    workspaceSlug: string | undefined
+    projectId: string | undefined
+    cycleId: string | undefined
+    moduleId: string | undefined
+    viewId: string | undefined
+    globalViewId: string | undefined
+    userId: string | undefined
+    peekId: string | undefined
+    issueId: string | undefined
+    inboxId: string | undefined
+    webhookId: string | undefined
 }
 
 export class RouterStore implements IRouterStore {
     // observables
-    query: ParsedUrlQuery = {};
+    query: ParsedUrlQuery = {}
 
     constructor() {
         makeObservable(this, {
@@ -42,7 +42,7 @@ export class RouterStore implements IRouterStore {
             issueId: computed,
             inboxId: computed,
             webhookId: computed,
-        });
+        })
     }
 
     /**
@@ -51,16 +51,16 @@ export class RouterStore implements IRouterStore {
      */
     setQuery = (query: ParsedUrlQuery) => {
         runInAction(() => {
-            this.query = query;
-        });
-    };
+            this.query = query
+        })
+    }
 
     /**
      * Returns the workspace slug from the query
      * @returns string|undefined
      */
     get workspaceSlug() {
-        return this.query?.workspaceSlug?.toString();
+        return this.query?.workspaceSlug?.toString()
     }
 
     /**
@@ -68,7 +68,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get projectId() {
-        return this.query?.projectId?.toString();
+        return this.query?.projectId?.toString()
     }
 
     /**
@@ -76,7 +76,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get moduleId() {
-        return this.query?.moduleId?.toString();
+        return this.query?.moduleId?.toString()
     }
 
     /**
@@ -84,7 +84,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get cycleId() {
-        return this.query?.cycleId?.toString();
+        return this.query?.cycleId?.toString()
     }
 
     /**
@@ -92,7 +92,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get viewId() {
-        return this.query?.viewId?.toString();
+        return this.query?.viewId?.toString()
     }
 
     /**
@@ -100,7 +100,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get globalViewId() {
-        return this.query?.globalViewId?.toString();
+        return this.query?.globalViewId?.toString()
     }
 
     /**
@@ -108,7 +108,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get userId() {
-        return this.query?.userId?.toString();
+        return this.query?.userId?.toString()
     }
 
     /**
@@ -116,7 +116,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get peekId() {
-        return this.query?.peekId?.toString();
+        return this.query?.peekId?.toString()
     }
 
     /**
@@ -124,7 +124,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get issueId() {
-        return this.query?.issueId?.toString();
+        return this.query?.issueId?.toString()
     }
 
     /**
@@ -132,7 +132,7 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get inboxId() {
-        return this.query?.inboxId?.toString();
+        return this.query?.inboxId?.toString()
     }
 
     /**
@@ -140,6 +140,6 @@ export class RouterStore implements IRouterStore {
      * @returns string|undefined
      */
     get webhookId() {
-        return this.query?.webhookId?.toString();
+        return this.query?.webhookId?.toString()
     }
 }

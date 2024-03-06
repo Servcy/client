@@ -1,41 +1,41 @@
-import { useEffect, useRef, useState } from "react";
-import { Combobox } from "@headlessui/react";
-import { observer } from "mobx-react";
-//components
-import { Avatar } from "@servcy/ui";
+import { useEffect, useRef, useState } from "react"
+import { Combobox } from "@headlessui/react"
 //store
-import { useApplication, useMember, useUser } from "@hooks/store";
-//hooks
-import { usePopper } from "react-popper";
-//icon
-import { Check, Search } from "lucide-react";
+import { useApplication, useMember, useUser } from "@hooks/store"
 //types
-import { Placement } from "@popperjs/core";
+import { Placement } from "@popperjs/core"
+//icon
+import { Check, Search } from "lucide-react"
+import { observer } from "mobx-react"
+//hooks
+import { usePopper } from "react-popper"
+//components
+import { Avatar } from "@servcy/ui"
 
 interface Props {
-    projectId?: string;
-    referenceElement: HTMLButtonElement | null;
-    placement: Placement | undefined;
-    isOpen: boolean;
+    projectId?: string
+    referenceElement: HTMLButtonElement | null
+    placement: Placement | undefined
+    isOpen: boolean
 }
 
 export const MemberOptions = observer((props: Props) => {
-    const { projectId, referenceElement, placement, isOpen } = props;
+    const { projectId, referenceElement, placement, isOpen } = props
 
-    const [query, setQuery] = useState("");
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [query, setQuery] = useState("")
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
 
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
+    } = useApplication()
     const {
         getUserDetails,
         project: { getProjectMemberIds, fetchProjectMembers },
         workspace: { workspaceMemberIds },
-    } = useMember();
-    const { currentUser } = useUser();
+    } = useMember()
+    const { currentUser } = useUser()
 
     // popper-js init
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -48,29 +48,29 @@ export const MemberOptions = observer((props: Props) => {
                 },
             },
         ],
-    });
+    })
 
     useEffect(() => {
         if (isOpen) {
-            onOpen();
-            inputRef.current && inputRef.current.focus();
+            onOpen()
+            inputRef.current && inputRef.current.focus()
         }
-    }, [isOpen]);
+    }, [isOpen])
 
-    const memberIds = projectId ? getProjectMemberIds(projectId) : workspaceMemberIds;
+    const memberIds = projectId ? getProjectMemberIds(projectId) : workspaceMemberIds
     const onOpen = () => {
-        if (!memberIds && workspaceSlug && projectId) fetchProjectMembers(workspaceSlug, projectId);
-    };
+        if (!memberIds && workspaceSlug && projectId) fetchProjectMembers(workspaceSlug, projectId)
+    }
 
     const searchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (query !== "" && e.key === "Escape") {
-            e.stopPropagation();
-            setQuery("");
+            e.stopPropagation()
+            setQuery("")
         }
-    };
+    }
 
     const options = memberIds?.map((userId) => {
-        const userDetails = getUserDetails(userId);
+        const userDetails = getUserDetails(userId)
 
         return {
             value: userId,
@@ -83,11 +83,11 @@ export const MemberOptions = observer((props: Props) => {
                     </span>
                 </div>
             ),
-        };
-    });
+        }
+    })
 
     const filteredOptions =
-        query === "" ? options : options?.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()));
+        query === "" ? options : options?.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()))
 
     return (
         <Combobox.Options className="fixed z-10" static>
@@ -140,5 +140,5 @@ export const MemberOptions = observer((props: Props) => {
                 </div>
             </div>
         </Combobox.Options>
-    );
-});
+    )
+})

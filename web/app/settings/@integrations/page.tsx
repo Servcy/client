@@ -1,48 +1,44 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-
-import { getQueryParams } from "@/utils/Shared";
-
-import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal";
-import { Button, Card, Skeleton } from "antd";
-import Image from "next/image.js";
-import { AiFillSetting } from "react-icons/ai";
-
-import { fetchIntegrations } from "@/apis/integration";
-
-import { Integration } from "@/types/apps/integration";
+import Image from "next/image.js"
+import { useEffect, useState } from "react"
+import { fetchIntegrations } from "@/apis/integration"
+import { Button, Card, Skeleton } from "antd"
+import toast from "react-hot-toast"
+import { AiFillSetting } from "react-icons/ai"
+import { Integration } from "@/types/apps/integration"
+import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal"
+import { getQueryParams } from "@/utils/Shared"
 
 export default function IntegrationSettings(): JSX.Element {
-    const [integrations, setIntegrations] = useState<Integration[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-    const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
+    const [integrations, setIntegrations] = useState<Integration[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
+    const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
+    const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null)
 
     useEffect(() => {
-        setLoading(true);
-        const queryParams: Record<string, string> = getQueryParams(window.location.search);
+        setLoading(true)
+        const queryParams: Record<string, string> = getQueryParams(window.location.search)
         fetchIntegrations()
             .then((integrations) => {
-                setIntegrations(integrations);
+                setIntegrations(integrations)
                 if (queryParams["integration"]) {
                     const integration = integrations.find(
                         (integration: Integration) => integration.name === queryParams["integration"]
-                    );
+                    )
                     if (integration) {
-                        setSelectedIntegration(integration);
-                        setIsModalVisible(true);
+                        setSelectedIntegration(integration)
+                        setIsModalVisible(true)
                     }
                 }
             })
             .catch((error) => {
-                toast.error(error.response.data.detail);
+                toast.error(error.response.data.detail)
             })
             .finally(() => {
-                setLoading(false);
-            });
-    }, []);
+                setLoading(false)
+            })
+    }, [])
 
     return (
         <div className="xs:grid-cols-1 grid flex-auto gap-3 overflow-y-scroll rounded-lg bg-servcy-white p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
@@ -87,8 +83,8 @@ export default function IntegrationSettings(): JSX.Element {
                                     className="!text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                                     size="middle"
                                     onClick={() => {
-                                        setSelectedIntegration(integration);
-                                        setIsModalVisible(true);
+                                        setSelectedIntegration(integration)
+                                        setIsModalVisible(true)
                                     }}
                                     icon={<AiFillSetting />}
                                 >
@@ -101,12 +97,12 @@ export default function IntegrationSettings(): JSX.Element {
             {isModalVisible && selectedIntegration !== null && (
                 <IntegrationConfigurationModal
                     onClose={() => {
-                        setIsModalVisible(false);
-                        setSelectedIntegration(null);
+                        setIsModalVisible(false)
+                        setSelectedIntegration(null)
                     }}
                     selectedIntegration={selectedIntegration}
                 />
             )}
         </div>
-    );
+    )
 }

@@ -1,28 +1,24 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useCycle, useMember, useModule, useProject } from "@hooks/store";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { NETWORK_CHOICES } from "@constants/project";
+import { useRouter } from "next/router"
+import { NETWORK_CHOICES } from "@constants/project"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useCycle, useMember, useModule, useProject } from "@hooks/store"
+import { observer } from "mobx-react-lite"
 
 export const CustomAnalyticsSidebarHeader = observer(() => {
-    const router = useRouter();
-    const { projectId, cycleId, moduleId } = router.query;
+    const router = useRouter()
+    const { projectId, cycleId, moduleId } = router.query
 
-    const { getProjectById } = useProject();
-    const { getCycleById } = useCycle();
-    const { getModuleById } = useModule();
-    const { getUserDetails } = useMember();
+    const { getProjectById } = useProject()
+    const { getCycleById } = useCycle()
+    const { getModuleById } = useModule()
+    const { getUserDetails } = useMember()
 
-    const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined;
-    const moduleDetails = moduleId ? getModuleById(moduleId.toString()) : undefined;
-    const projectDetails = projectId ? getProjectById(projectId.toString()) : undefined;
-    const cycleOwnerDetails = cycleDetails ? getUserDetails(cycleDetails.owned_by_id) : undefined;
-    const moduleLeadDetails =
-        moduleDetails && moduleDetails.lead_id ? getUserDetails(moduleDetails.lead_id) : undefined;
+    const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined
+    const moduleDetails = moduleId ? getModuleById(moduleId.toString()) : undefined
+    const projectDetails = projectId ? getProjectById(projectId.toString()) : undefined
+    const cycleOwnerDetails = cycleDetails ? getUserDetails(cycleDetails.owned_by_id) : undefined
+    const moduleLeadDetails = moduleDetails && moduleDetails.lead_id ? getUserDetails(moduleDetails.lead_id) : undefined
 
     return (
         <>
@@ -109,5 +105,5 @@ export const CustomAnalyticsSidebarHeader = observer(() => {
                 )
             ) : null}
         </>
-    );
-});
+    )
+})

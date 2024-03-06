@@ -1,24 +1,21 @@
-import { observer } from "mobx-react-lite";
-import { Control, Controller, UseFormSetValue } from "react-hook-form";
-
-import { useProject } from "@hooks/store";
-
-import { SelectProject, SelectSegment, SelectXAxis, SelectYAxis } from "@components/analytics";
-
-import { IAnalyticsParams } from "@servcy/types";
+import { SelectProject, SelectSegment, SelectXAxis, SelectYAxis } from "@components/analytics"
+import { useProject } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Control, Controller, UseFormSetValue } from "react-hook-form"
+import { IAnalyticsParams } from "@servcy/types"
 
 type Props = {
-    control: Control<IAnalyticsParams, any>;
-    setValue: UseFormSetValue<IAnalyticsParams>;
-    params: IAnalyticsParams;
-    fullScreen: boolean;
-    isProjectLevel: boolean;
-};
+    control: Control<IAnalyticsParams, any>
+    setValue: UseFormSetValue<IAnalyticsParams>
+    params: IAnalyticsParams
+    fullScreen: boolean
+    isProjectLevel: boolean
+}
 
 export const CustomAnalyticsSelectBar: React.FC<Props> = observer((props) => {
-    const { control, setValue, params, fullScreen, isProjectLevel } = props;
+    const { control, setValue, params, fullScreen, isProjectLevel } = props
 
-    const { workspaceProjectIds: workspaceProjectIds } = useProject();
+    const { workspaceProjectIds: workspaceProjectIds } = useProject()
 
     return (
         <div
@@ -59,9 +56,9 @@ export const CustomAnalyticsSelectBar: React.FC<Props> = observer((props) => {
                         <SelectXAxis
                             value={value}
                             onChange={(val: string) => {
-                                if (params.segment === val) setValue("segment", null);
+                                if (params.segment === val) setValue("segment", null)
 
-                                onChange(val);
+                                onChange(val)
                             }}
                             params={params}
                         />
@@ -79,5 +76,5 @@ export const CustomAnalyticsSelectBar: React.FC<Props> = observer((props) => {
                 />
             </div>
         </div>
-    );
-});
+    )
+})

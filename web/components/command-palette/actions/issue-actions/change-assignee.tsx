@@ -1,36 +1,34 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Command } from "cmdk";
-import { Check } from "lucide-react";
+import { useRouter } from "next/router"
+import { EIssuesStoreType } from "@constants/issue"
 // mobx store
-import { useIssues, useMember } from "@hooks/store";
-
-import { Avatar } from "@servcy/ui";
-
-import { TIssue } from "@servcy/types";
-import { EIssuesStoreType } from "@constants/issue";
+import { useIssues, useMember } from "@hooks/store"
+import { Command } from "cmdk"
+import { Check } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { Avatar } from "@servcy/ui"
 
 type Props = {
-    closePalette: () => void;
-    issue: TIssue;
-};
+    closePalette: () => void
+    issue: TIssue
+}
 
 export const ChangeIssueAssignee: React.FC<Props> = observer((props) => {
-    const { closePalette, issue } = props;
+    const { closePalette, issue } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store
     const {
         issues: { updateIssue },
-    } = useIssues(EIssuesStoreType.PROJECT);
+    } = useIssues(EIssuesStoreType.PROJECT)
     const {
         project: { projectMemberIds, getProjectMemberDetails },
-    } = useMember();
+    } = useMember()
 
     const options =
         projectMemberIds?.map((userId) => {
-            const memberDetails = getProjectMemberDetails(userId);
+            const memberDetails = getProjectMemberDetails(userId)
 
             return {
                 value: `${memberDetails?.member?.id}`,
@@ -52,27 +50,27 @@ export const ChangeIssueAssignee: React.FC<Props> = observer((props) => {
                         )}
                     </>
                 ),
-            };
-        }) ?? [];
+            }
+        }) ?? []
 
     const handleUpdateIssue = async (formData: Partial<TIssue>) => {
-        if (!workspaceSlug || !projectId || !issue) return;
+        if (!workspaceSlug || !projectId || !issue) return
 
-        const payload = { ...formData };
+        const payload = { ...formData }
         await updateIssue(workspaceSlug.toString(), projectId.toString(), issue.id, payload).catch((e) => {
-            console.error(e);
-        });
-    };
+            console.error(e)
+        })
+    }
 
     const handleIssueAssignees = (assignee: string) => {
-        const updatedAssignees = issue.assignee_ids ?? [];
+        const updatedAssignees = issue.assignee_ids ?? []
 
-        if (updatedAssignees.includes(assignee)) updatedAssignees.splice(updatedAssignees.indexOf(assignee), 1);
-        else updatedAssignees.push(assignee);
+        if (updatedAssignees.includes(assignee)) updatedAssignees.splice(updatedAssignees.indexOf(assignee), 1)
+        else updatedAssignees.push(assignee)
 
-        handleUpdateIssue({ assignee_ids: updatedAssignees });
-        closePalette();
-    };
+        handleUpdateIssue({ assignee_ids: updatedAssignees })
+        closePalette()
+    }
 
     return (
         <>
@@ -86,5 +84,5 @@ export const ChangeIssueAssignee: React.FC<Props> = observer((props) => {
                 </Command.Item>
             ))}
         </>
-    );
-});
+    )
+})

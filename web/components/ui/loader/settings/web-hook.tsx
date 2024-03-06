@@ -17,4 +17,4 @@ export const WebhookSettingsLoader = () => (
             </div>
         </div>
     </div>
-);
+)

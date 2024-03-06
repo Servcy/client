@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const HeartbeatIcon: React.FC<Props> = ({
     width = "24",
@@ -24,4 +23,4 @@ export const HeartbeatIcon: React.FC<Props> = ({
             strokeLinejoin="round"
         />
     </svg>
-);
+)

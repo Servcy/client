@@ -1,22 +1,17 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-import { useDropzone } from "react-dropzone";
-import { Tab, Popover } from "@headlessui/react";
-import { Control, Controller } from "react-hook-form";
-
-import { useApplication, useWorkspace } from "@hooks/store";
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
-
-import { FileService } from "@services/file.service";
-
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { Button, Input, Loader } from "@servcy/ui";
-
-import { MAX_FILE_SIZE } from "@constants/common";
+import Image from "next/image"
+import { useRouter } from "next/router"
+import React, { useCallback, useEffect, useRef, useState } from "react"
+import { MAX_FILE_SIZE } from "@constants/common"
+import { Popover, Tab } from "@headlessui/react"
+import { useApplication, useWorkspace } from "@hooks/store"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { FileService } from "@services/file.service"
+import { observer } from "mobx-react-lite"
+import { useDropzone } from "react-dropzone"
+import { Control, Controller } from "react-hook-form"
+import useSWR from "swr"
+import { Button, Input, Loader } from "@servcy/ui"
 
 const tabOptions = [
     {
@@ -31,39 +26,39 @@ const tabOptions = [
         key: "upload",
         title: "Upload",
     },
-];
+]
 
 type Props = {
-    label: string | React.ReactNode;
-    value: string | null;
-    control: Control<any>;
-    onChange: (data: string) => void;
-    disabled?: boolean;
-    tabIndex?: number;
-};
+    label: string | React.ReactNode
+    value: string | null
+    control: Control<any>
+    onChange: (data: string) => void
+    disabled?: boolean
+    tabIndex?: number
+}
 
-const fileService = new FileService();
+const fileService = new FileService()
 
 export const ImagePickerPopover: React.FC<Props> = observer((props) => {
-    const { label, value, control, onChange, disabled = false, tabIndex } = props;
+    const { label, value, control, onChange, disabled = false, tabIndex } = props
     // states
-    const [image, setImage] = useState<File | null>(null);
-    const [isImageUploading, setIsImageUploading] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [searchParams, setSearchParams] = useState("");
+    const [image, setImage] = useState<File | null>(null)
+    const [isImageUploading, setIsImageUploading] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
+    const [searchParams, setSearchParams] = useState("")
     const [formData, setFormData] = useState({
         search: "",
-    });
+    })
     // refs
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         config: { envConfig },
-    } = useApplication();
-    const { currentWorkspace } = useWorkspace();
+    } = useApplication()
+    const { currentWorkspace } = useWorkspace()
 
     const { data: unsplashImages, error: unsplashError } = useSWR(
         `UNSPLASH_IMAGES_${searchParams}`,
@@ -72,18 +67,18 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
         }
-    );
+    )
 
     const { data: projectCoverImages } = useSWR(`PROJECT_COVER_IMAGES`, () => fileService.getProjectCoverImages(), {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
-    });
+    })
 
-    const imagePickerRef = useRef<HTMLDivElement>(null);
+    const imagePickerRef = useRef<HTMLDivElement>(null)
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
-        setImage(acceptedFiles[0]);
-    }, []);
+        setImage(acceptedFiles[0])
+    }, [])
 
     const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
         onDrop,
@@ -91,61 +86,61 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
             "image/*": [".png", ".jpg", ".jpeg", ".svg", ".webp"],
         },
         maxSize: envConfig?.file_size_limit ?? MAX_FILE_SIZE,
-    });
+    })
 
     const handleSubmit = async () => {
-        setIsImageUploading(true);
+        setIsImageUploading(true)
 
-        if (!image || !workspaceSlug) return;
+        if (!image || !workspaceSlug) return
 
-        const formData = new FormData();
-        formData.append("asset", image);
-        formData.append("attributes", JSON.stringify({}));
+        const formData = new FormData()
+        formData.append("asset", image)
+        formData.append("attributes", JSON.stringify({}))
 
         fileService
             .uploadFile(workspaceSlug.toString(), formData)
             .then((res) => {
-                const oldValue = value;
-                const isUnsplashImage = oldValue?.split("/")[2] === "images.unsplash.com";
+                const oldValue = value
+                const isUnsplashImage = oldValue?.split("/")[2] === "images.unsplash.com"
 
-                const imageUrl = res.asset;
-                onChange(imageUrl);
-                setIsImageUploading(false);
-                setImage(null);
-                setIsOpen(false);
+                const imageUrl = res.asset
+                onChange(imageUrl)
+                setIsImageUploading(false)
+                setImage(null)
+                setIsOpen(false)
 
-                if (isUnsplashImage) return;
+                if (isUnsplashImage) return
 
-                if (oldValue && currentWorkspace) fileService.deleteFile(currentWorkspace.id, oldValue);
+                if (oldValue && currentWorkspace) fileService.deleteFile(currentWorkspace.id, oldValue)
             })
             .catch((err) => {
-                console.error(err);
-            });
-    };
+                console.error(err)
+            })
+    }
 
     useEffect(() => {
-        if (!unsplashImages || value !== null) return;
+        if (!unsplashImages || value !== null) return
 
-        onChange(unsplashImages[0].urls.regular);
-    }, [value, onChange, unsplashImages]);
+        onChange(unsplashImages[0].urls.regular)
+    }, [value, onChange, unsplashImages])
 
     const handleClose = () => {
-        if (isOpen) setIsOpen(false);
-    };
+        if (isOpen) setIsOpen(false)
+    }
 
     const toggleDropdown = () => {
-        setIsOpen((prevIsOpen) => !prevIsOpen);
-    };
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+    }
 
-    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose);
+    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        toggleDropdown();
-    };
+        e.stopPropagation()
+        e.preventDefault()
+        toggleDropdown()
+    }
 
-    useOutsideClickDetector(ref, handleClose);
+    useOutsideClickDetector(ref, handleClose)
 
     return (
         <Popover className="relative z-[2]" ref={ref} tabIndex={tabIndex} onKeyDown={handleKeyDown}>
@@ -169,9 +164,9 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                         <Tab.Group>
                             <Tab.List as="span" className="inline-block rounded bg-custom-background-80 p-1">
                                 {tabOptions.map((tab) => {
-                                    if (!unsplashImages && unsplashError && tab.key === "unsplash") return null;
+                                    if (!unsplashImages && unsplashError && tab.key === "unsplash") return null
                                     if (projectCoverImages && projectCoverImages.length === 0 && tab.key === "images")
-                                        return null;
+                                        return null
 
                                     return (
                                         <Tab
@@ -184,7 +179,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                                         >
                                             {tab.title}
                                         </Tab>
-                                    );
+                                    )
                                 })}
                             </Tab.List>
                             <Tab.Panels className="h-full w-full flex-1 overflow-y-auto overflow-x-hidden">
@@ -225,8 +220,8 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                                                             key={image.id}
                                                             className="relative col-span-2 aspect-video md:col-span-1"
                                                             onClick={() => {
-                                                                setIsOpen(false);
-                                                                onChange(image.urls.regular);
+                                                                setIsOpen(false)
+                                                                onChange(image.urls.regular)
                                                             }}
                                                         >
                                                             <img
@@ -266,8 +261,8 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                                                             key={image}
                                                             className="relative col-span-2 aspect-video md:col-span-1"
                                                             onClick={() => {
-                                                                setIsOpen(false);
-                                                                onChange(image);
+                                                                setIsOpen(false)
+                                                                onChange(image)
                                                             }}
                                                         >
                                                             <img
@@ -355,8 +350,8 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                                             <Button
                                                 variant="neutral-primary"
                                                 onClick={() => {
-                                                    setIsOpen(false);
-                                                    setImage(null);
+                                                    setIsOpen(false)
+                                                    setImage(null)
                                                 }}
                                             >
                                                 Cancel
@@ -379,5 +374,5 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                 </Popover.Panel>
             )}
         </Popover>
-    );
-});
+    )
+})

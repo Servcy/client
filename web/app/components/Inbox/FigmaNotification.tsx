@@ -1,8 +1,8 @@
-import type { Comment, FigmaNotificationProps, Mention } from "@/types/integrations/figma";
-import { HiExternalLink } from "react-icons/hi";
+import { HiExternalLink } from "react-icons/hi"
+import type { Comment, FigmaNotificationProps, Mention } from "@/types/integrations/figma"
 
 const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; cause: string }) => {
-    const link = `https://www.figma.com/file/${data.file_key}`;
+    const link = `https://www.figma.com/file/${data.file_key}`
     return (
         <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
             {["FILE_UPDATE", "FILE_DELETE"].includes(data.event_type) ? null : data.event_type === "LIBRARY_PUBLISH" ? (
@@ -85,7 +85,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                 <div className="min-h-[75px]">
                     {data.comment.map((comment: Comment, index1: number) => {
                         if (comment.text) {
-                            const lines = comment.text.split("\\n");
+                            const lines = comment.text.split("\\n")
                             return (
                                 <span key={index1}>
                                     {lines.map((line, index2) => (
@@ -96,9 +96,9 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                                         </>
                                     ))}
                                 </span>
-                            );
+                            )
                         } else if (comment.mention && data.mentions) {
-                            const handle = data.mentions.find((mention: Mention) => mention.id === comment.mention);
+                            const handle = data.mentions.find((mention: Mention) => mention.id === comment.mention)
                             if (handle) {
                                 return (
                                     <>
@@ -107,10 +107,10 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                                         </span>
                                         {data.comment && index1 !== data.comment.length - 1 ? " " : null}
                                     </>
-                                );
+                                )
                             }
                         }
-                        return null;
+                        return null
                     })}
                 </div>
             ) : null}
@@ -138,7 +138,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default FigmaNotification;
+export default FigmaNotification

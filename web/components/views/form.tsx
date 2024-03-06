@@ -1,37 +1,32 @@
-import { useEffect } from "react";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-
-import { useLabel, useMember, useProjectState } from "@hooks/store";
-
-import { AppliedFiltersList, FilterSelection, FiltersDropdown } from "@components/issues";
-
-import { Button, Input, TextArea } from "@servcy/ui";
-
-import { IProjectView, IIssueFilterOptions } from "@servcy/types";
-
-import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
+import { useEffect } from "react"
+import { AppliedFiltersList, FiltersDropdown, FilterSelection } from "@components/issues"
+import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { useLabel, useMember, useProjectState } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import { IIssueFilterOptions, IProjectView } from "@servcy/types"
+import { Button, Input, TextArea } from "@servcy/ui"
 
 type Props = {
-    data?: IProjectView | null;
-    handleClose: () => void;
-    handleFormSubmit: (values: IProjectView) => Promise<void>;
-    preLoadedData?: Partial<IProjectView> | null;
-};
+    data?: IProjectView | null
+    handleClose: () => void
+    handleFormSubmit: (values: IProjectView) => Promise<void>
+    preLoadedData?: Partial<IProjectView> | null
+}
 
 const defaultValues: Partial<IProjectView> = {
     name: "",
     description: "",
-};
+}
 
 export const ProjectViewForm: React.FC<Props> = observer((props) => {
-    const { handleFormSubmit, handleClose, data, preLoadedData } = props;
+    const { handleFormSubmit, handleClose, data, preLoadedData } = props
     // store hooks
-    const { projectStates } = useProjectState();
-    const { projectLabels } = useLabel();
+    const { projectStates } = useProjectState()
+    const { projectLabels } = useLabel()
     const {
         project: { projectMemberIds },
-    } = useMember();
+    } = useMember()
     // form info
     const {
         control,
@@ -42,16 +37,16 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
         watch,
     } = useForm<IProjectView>({
         defaultValues,
-    });
+    })
 
-    const selectedFilters: IIssueFilterOptions = {};
+    const selectedFilters: IIssueFilterOptions = {}
     Object.entries(watch("filters") ?? {}).forEach(([key, value]) => {
-        if (!value) return;
+        if (!value) return
 
-        if (Array.isArray(value) && value.length === 0) return;
+        if (Array.isArray(value) && value.length === 0) return
 
-        selectedFilters[key as keyof IIssueFilterOptions] = value;
-    });
+        selectedFilters[key as keyof IIssueFilterOptions] = value
+    })
 
     // for removing filters from a key
     const handleRemoveFilter = (key: keyof IIssueFilterOptions, value: string | null) => {
@@ -60,51 +55,51 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
             setValue("filters", {
                 ...selectedFilters,
                 [key]: null,
-            });
-            return;
+            })
+            return
         }
 
-        const newValues = selectedFilters?.[key] ?? [];
+        const newValues = selectedFilters?.[key] ?? []
 
         if (Array.isArray(value)) {
             value.forEach((val) => {
-                if (newValues.includes(val)) newValues.splice(newValues.indexOf(val), 1);
-            });
+                if (newValues.includes(val)) newValues.splice(newValues.indexOf(val), 1)
+            })
         } else {
-            if (selectedFilters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
+            if (selectedFilters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
         }
 
         setValue("filters", {
             ...selectedFilters,
             [key]: newValues,
-        });
-    };
+        })
+    }
 
     const handleCreateUpdateView = async (formData: IProjectView) => {
         await handleFormSubmit({
             name: formData.name,
             description: formData.description,
             filters: formData.filters,
-        } as IProjectView);
+        } as IProjectView)
 
         reset({
             ...defaultValues,
-        });
-    };
+        })
+    }
 
     const clearAllFilters = () => {
-        if (!selectedFilters) return;
+        if (!selectedFilters) return
 
-        setValue("filters", {});
-    };
+        setValue("filters", {})
+    }
 
     useEffect(() => {
         reset({
             ...defaultValues,
             ...preLoadedData,
             ...data,
-        });
-    }, [data, preLoadedData, reset]);
+        })
+    }, [data, preLoadedData, reset])
 
     return (
         <form onSubmit={handleSubmit(handleCreateUpdateView)}>
@@ -166,22 +161,22 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
                                     <FilterSelection
                                         filters={filters ?? {}}
                                         handleFiltersUpdate={(key, value) => {
-                                            const newValues = filters?.[key] ?? [];
+                                            const newValues = filters?.[key] ?? []
 
                                             if (Array.isArray(value)) {
                                                 value.forEach((val) => {
-                                                    if (!newValues.includes(val)) newValues.push(val);
-                                                });
+                                                    if (!newValues.includes(val)) newValues.push(val)
+                                                })
                                             } else {
                                                 if (filters?.[key]?.includes(value))
-                                                    newValues.splice(newValues.indexOf(value), 1);
-                                                else newValues.push(value);
+                                                    newValues.splice(newValues.indexOf(value), 1)
+                                                else newValues.push(value)
                                             }
 
                                             onChange({
                                                 ...filters,
                                                 [key]: newValues,
-                                            });
+                                            })
                                         }}
                                         layoutDisplayFiltersOptions={ISSUE_DISPLAY_FILTERS_BY_LAYOUT.issues.list}
                                         labels={projectLabels ?? undefined}
@@ -220,5 +215,5 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
                 </Button>
             </div>
         </form>
-    );
-});
+    )
+})

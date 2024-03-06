@@ -1,28 +1,23 @@
-import { observer } from "mobx-react-lite";
-
-import { useUser, useWorkspace } from "@hooks/store";
-
-import { AppLayout } from "@layouts/app-layout";
-import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // component
-import { PageHead } from "@components/core";
-import { WorkspaceSettingHeader } from "@components/headers";
-
-import { Button } from "@servcy/ui";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import { PageHead } from "@components/core"
+import { WorkspaceSettingHeader } from "@components/headers"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useUser, useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+import { observer } from "mobx-react-lite"
+import { Button } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const BillingSettingsPage: NextPageWithLayout = observer(() => {
     // store hooks
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { currentWorkspace } = useWorkspace();
+    } = useUser()
+    const { currentWorkspace } = useWorkspace()
     // derived values
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN;
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Billing & Plans` : undefined;
+    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Billing & Plans` : undefined
 
     if (!isAdmin)
         return (
@@ -32,7 +27,7 @@ const BillingSettingsPage: NextPageWithLayout = observer(() => {
                     <p className="text-sm text-custom-text-300">You are not authorized to access this page.</p>
                 </div>
             </>
-        );
+        )
 
     return (
         <>
@@ -54,15 +49,15 @@ const BillingSettingsPage: NextPageWithLayout = observer(() => {
                 </div>
             </section>
         </>
-    );
-});
+    )
+})
 
 BillingSettingsPage.getWrapper = function getWrapper(page: React.ReactElement) {
     return (
         <AppLayout header={<WorkspaceSettingHeader title="Billing & Plans Settings" />}>
             <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default BillingSettingsPage;
+export default BillingSettingsPage

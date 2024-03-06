@@ -1,12 +1,12 @@
-import { Input } from "@servcy/ui";
+import { Input } from "@servcy/ui"
 
 type Props = {
-    value: string;
-    onChange: (value: string) => void;
-    hasError: boolean;
-};
+    value: string
+    onChange: (value: string) => void
+    hasError: boolean
+}
 export const WebhookInput: React.FC<Props> = (props) => {
-    const { value, onChange, hasError } = props;
+    const { value, onChange, hasError } = props
 
     return (
         <>
@@ -22,5 +22,5 @@ export const WebhookInput: React.FC<Props> = (props) => {
                 autoFocus
             />
         </>
-    );
-};
+    )
+}

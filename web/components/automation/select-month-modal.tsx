@@ -1,25 +1,23 @@
-import React from "react";
-import { useRouter } from "next/router";
-// react-hook-form
-import { Controller, useForm } from "react-hook-form";
+import { useRouter } from "next/router"
+import React from "react"
 // headless ui
-import { Dialog, Transition } from "@headlessui/react";
-
-import { Button, Input } from "@servcy/ui";
-
-import type { IProject } from "@servcy/types";
+import { Dialog, Transition } from "@headlessui/react"
+// react-hook-form
+import { Controller, useForm } from "react-hook-form"
+import type { IProject } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    type: "auto-close" | "auto-archive";
-    initialValues: Partial<IProject>;
-    handleClose: () => void;
-    handleChange: (formData: Partial<IProject>) => Promise<void>;
-};
+    isOpen: boolean
+    type: "auto-close" | "auto-archive"
+    initialValues: Partial<IProject>
+    handleClose: () => void
+    handleChange: (formData: Partial<IProject>) => Promise<void>
+}
 
 export const SelectMonthModal: React.FC<Props> = ({ type, initialValues, isOpen, handleClose, handleChange }) => {
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     const {
         formState: { errors, isSubmitting },
@@ -28,18 +26,18 @@ export const SelectMonthModal: React.FC<Props> = ({ type, initialValues, isOpen,
         reset,
     } = useForm<IProject>({
         defaultValues: initialValues,
-    });
+    })
 
     const onClose = () => {
-        handleClose();
-        reset(initialValues);
-    };
+        handleClose()
+        reset(initialValues)
+    }
 
     const onSubmit = (formData: Partial<IProject>) => {
-        if (!workspaceSlug && !projectId) return;
-        handleChange(formData);
-        onClose();
-    };
+        if (!workspaceSlug && !projectId) return
+        handleChange(formData)
+        onClose()
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -168,5 +166,5 @@ export const SelectMonthModal: React.FC<Props> = ({ type, initialValues, isOpen,
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

@@ -24,4 +24,4 @@ export const EmailSettingsLoader = () => (
             </div>
         </div>
     </div>
-);
+)

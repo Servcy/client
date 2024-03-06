@@ -1,44 +1,39 @@
-import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-
-import { AuthService } from "@services/auth.service";
-import toast from "react-hot-toast";
-import { useEventTracker } from "@hooks/store";
-
-import { Button, Input } from "@servcy/ui";
-
-import { checkEmailValidity } from "@helpers/string.helper";
-
-import { ESignUpSteps } from "@components/account";
-import { PASSWORD_CREATE_SELECTED, PASSWORD_CREATE_SKIPPED, SETUP_PASSWORD } from "@constants/event-tracker";
-
-import { Eye, EyeOff } from "lucide-react";
+import React, { useState } from "react"
+import { ESignUpSteps } from "@components/account"
+import { PASSWORD_CREATE_SELECTED, PASSWORD_CREATE_SKIPPED, SETUP_PASSWORD } from "@constants/event-tracker"
+import { checkEmailValidity } from "@helpers/string.helper"
+import { useEventTracker } from "@hooks/store"
+import { AuthService } from "@services/auth.service"
+import { Eye, EyeOff } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    email: string;
-    handleStepChange: (step: ESignUpSteps) => void;
-    handleSignInRedirection: () => Promise<void>;
-};
+    email: string
+    handleStepChange: (step: ESignUpSteps) => void
+    handleSignInRedirection: () => Promise<void>
+}
 
 type TCreatePasswordFormValues = {
-    email: string;
-    password: string;
-};
+    email: string
+    password: string
+}
 
 const defaultValues: TCreatePasswordFormValues = {
     email: "",
     password: "",
-};
+}
 
-const authService = new AuthService();
+const authService = new AuthService()
 
 export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
-    const { email, handleSignInRedirection } = props;
+    const { email, handleSignInRedirection } = props
     // states
-    const [isGoingToWorkspace, setIsGoingToWorkspace] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+    const [isGoingToWorkspace, setIsGoingToWorkspace] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
     // store hooks
-    const { captureEvent } = useEventTracker();
+    const { captureEvent } = useEventTracker()
 
     // form info
     const {
@@ -52,12 +47,12 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
         },
         mode: "onChange",
         reValidateMode: "onChange",
-    });
+    })
 
     const handleCreatePassword = async (formData: TCreatePasswordFormValues) => {
         const payload = {
             password: formData.password,
-        };
+        }
 
         await authService
             .setPassword(payload)
@@ -66,32 +61,32 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
                     type: "success",
                     title: "Success!",
                     message: "Password created successfully.",
-                });
+                })
                 captureEvent(SETUP_PASSWORD, {
                     state: "SUCCESS",
                     first_time: true,
-                });
-                await handleSignInRedirection();
+                })
+                await handleSignInRedirection()
             })
             .catch((err) => {
                 captureEvent(SETUP_PASSWORD, {
                     state: "FAILED",
                     first_time: true,
-                });
-                toast.error("Something went wrong. Please try again.");
-            });
-    };
+                })
+                toast.error("Something went wrong. Please try again.")
+            })
+    }
 
     const handleGoToWorkspace = async () => {
-        setIsGoingToWorkspace(true);
+        setIsGoingToWorkspace(true)
         await handleSignInRedirection().finally(() => {
             captureEvent(PASSWORD_CREATE_SKIPPED, {
                 state: "SUCCESS",
                 first_time: true,
-            });
-            setIsGoingToWorkspace(false);
-        });
-    };
+            })
+            setIsGoingToWorkspace(false)
+        })
+    }
 
     return (
         <>
@@ -187,5 +182,5 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
                 </div>
             </form>
         </>
-    );
-};
+    )
+}

@@ -1,19 +1,17 @@
-import { FC, ReactNode } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-import useSWRImmutable from "swr/immutable";
-
-import { useUser, useWorkspace } from "@hooks/store";
-
-import { Spinner } from "@servcy/ui";
+import { useRouter } from "next/router"
+import { FC, ReactNode } from "react"
+import { useUser, useWorkspace } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import useSWRImmutable from "swr/immutable"
+import { Spinner } from "@servcy/ui"
 
 export interface IUserAuthWrapper {
-    children: ReactNode;
+    children: ReactNode
 }
 
 export const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
-    const { children } = props;
+    const { children } = props
     // store hooks
     const {
         currentUser,
@@ -21,26 +19,26 @@ export const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
         fetchCurrentUser,
         fetchCurrentUserInstanceAdminStatus,
         fetchCurrentUserSettings,
-    } = useUser();
-    const { fetchWorkspaces } = useWorkspace();
+    } = useUser()
+    const { fetchWorkspaces } = useWorkspace()
     // router
-    const router = useRouter();
+    const router = useRouter()
     // fetching user information
     useSWR("CURRENT_USER_DETAILS", () => fetchCurrentUser(), {
         shouldRetryOnError: false,
-    });
+    })
     // fetching current user instance admin status
     useSWRImmutable("CURRENT_USER_INSTANCE_ADMIN_STATUS", () => fetchCurrentUserInstanceAdminStatus(), {
         shouldRetryOnError: false,
-    });
+    })
     // fetching user settings
     useSWR("CURRENT_USER_SETTINGS", () => fetchCurrentUserSettings(), {
         shouldRetryOnError: false,
-    });
+    })
     // fetching all workspaces
     useSWR("USER_WORKSPACES_LIST", () => fetchWorkspaces(), {
         shouldRetryOnError: false,
-    });
+    })
 
     if (!currentUser && !currentUserError) {
         return (
@@ -49,14 +47,14 @@ export const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
                     <Spinner />
                 </div>
             </div>
-        );
+        )
     }
 
     if (currentUserError) {
-        const redirectTo = router.asPath;
-        router.push(`/?next_path=${redirectTo}`);
-        return null;
+        const redirectTo = router.asPath
+        router.push(`/?next_path=${redirectTo}`)
+        return null
     }
 
-    return <>{children}</>;
-});
+    return <>{children}</>
+})

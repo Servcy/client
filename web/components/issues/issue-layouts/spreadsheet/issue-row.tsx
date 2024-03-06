@@ -1,41 +1,35 @@
-import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { ChevronRight, MoreHorizontal } from "lucide-react";
-
-import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet";
-
-import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
-import RenderIfVisible from "@components/core/render-if-visible-HOC";
-import { IssueColumn } from "./issue-column";
-
-import { ControlLink, Tooltip } from "@servcy/ui";
-
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-import { useIssueDetail, useProject } from "@hooks/store";
+import { useRouter } from "next/router"
+import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react"
+import RenderIfVisible from "@components/core/render-if-visible-HOC"
+import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet"
 // helper
-import { cn } from "@helpers/common.helper";
-
-import { IIssueDisplayProperties, TIssue } from "@servcy/types";
-import { EIssueActions } from "../types";
+import { cn } from "@helpers/common.helper"
+import { useIssueDetail, useProject } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { ChevronRight, MoreHorizontal } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayProperties, TIssue } from "@servcy/types"
+import { ControlLink, Tooltip } from "@servcy/ui"
+import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
+import { EIssueActions } from "../types"
+import { IssueColumn } from "./issue-column"
 
 interface Props {
-    displayProperties: IIssueDisplayProperties;
-    isEstimateEnabled: boolean;
+    displayProperties: IIssueDisplayProperties
+    isEstimateEnabled: boolean
     quickActions: (
         issue: TIssue,
         customActionButton?: React.ReactElement,
         portalElement?: HTMLDivElement | null
-    ) => React.ReactNode;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>;
-    portalElement: React.MutableRefObject<HTMLDivElement | null>;
-    nestingLevel: number;
-    issueId: string;
-    isScrolled: MutableRefObject<boolean>;
-    containerRef: MutableRefObject<HTMLTableElement | null>;
-    issueIds: string[];
+    ) => React.ReactNode
+    canEditProperties: (projectId: string | undefined) => boolean
+    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>
+    portalElement: React.MutableRefObject<HTMLDivElement | null>
+    nestingLevel: number
+    issueId: string
+    isScrolled: MutableRefObject<boolean>
+    containerRef: MutableRefObject<HTMLTableElement | null>
+    issueIds: string[]
 }
 
 export const SpreadsheetIssueRow = observer((props: Props) => {
@@ -51,12 +45,12 @@ export const SpreadsheetIssueRow = observer((props: Props) => {
         isScrolled,
         containerRef,
         issueIds,
-    } = props;
+    } = props
 
-    const [isExpanded, setExpanded] = useState<boolean>(false);
-    const { subIssues: subIssuesStore } = useIssueDetail();
+    const [isExpanded, setExpanded] = useState<boolean>(false)
+    const { subIssues: subIssuesStore } = useIssueDetail()
 
-    const subIssues = subIssuesStore.subIssuesByIssueId(issueId);
+    const subIssues = subIssuesStore.subIssuesByIssueId(issueId)
 
     return (
         <>
@@ -103,25 +97,25 @@ export const SpreadsheetIssueRow = observer((props: Props) => {
                     />
                 ))}
         </>
-    );
-});
+    )
+})
 
 interface IssueRowDetailsProps {
-    displayProperties: IIssueDisplayProperties;
-    isEstimateEnabled: boolean;
+    displayProperties: IIssueDisplayProperties
+    isEstimateEnabled: boolean
     quickActions: (
         issue: TIssue,
         customActionButton?: React.ReactElement,
         portalElement?: HTMLDivElement | null
-    ) => React.ReactNode;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>;
-    portalElement: React.MutableRefObject<HTMLDivElement | null>;
-    nestingLevel: number;
-    issueId: string;
-    isScrolled: MutableRefObject<boolean>;
-    isExpanded: boolean;
-    setExpanded: Dispatch<SetStateAction<boolean>>;
+    ) => React.ReactNode
+    canEditProperties: (projectId: string | undefined) => boolean
+    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>
+    portalElement: React.MutableRefObject<HTMLDivElement | null>
+    nestingLevel: number
+    issueId: string
+    isScrolled: MutableRefObject<boolean>
+    isExpanded: boolean
+    setExpanded: Dispatch<SetStateAction<boolean>>
 }
 
 const IssueRowDetails = observer((props: IssueRowDetailsProps) => {
@@ -137,37 +131,37 @@ const IssueRowDetails = observer((props: IssueRowDetailsProps) => {
         isScrolled,
         isExpanded,
         setExpanded,
-    } = props;
+    } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     //hooks
-    const { getProjectIdentifierById } = useProject();
-    const { peekIssue, setPeekIssue } = useIssueDetail();
+    const { getProjectIdentifierById } = useProject()
+    const { peekIssue, setPeekIssue } = useIssueDetail()
     // states
-    const [isMenuActive, setIsMenuActive] = useState(false);
-    const menuActionRef = useRef<HTMLDivElement | null>(null);
+    const [isMenuActive, setIsMenuActive] = useState(false)
+    const menuActionRef = useRef<HTMLDivElement | null>(null)
 
     const handleIssuePeekOverview = (issue: TIssue) => {
         if (workspaceSlug && issue && issue.project_id && issue.id)
-            setPeekIssue({ workspaceSlug: workspaceSlug.toString(), projectId: issue.project_id, issueId: issue.id });
-    };
+            setPeekIssue({ workspaceSlug: workspaceSlug.toString(), projectId: issue.project_id, issueId: issue.id })
+    }
 
-    const { subIssues: subIssuesStore, issue } = useIssueDetail();
+    const { subIssues: subIssuesStore, issue } = useIssueDetail()
 
-    const issueDetail = issue.getIssueById(issueId);
+    const issueDetail = issue.getIssueById(issueId)
 
-    const paddingLeft = `${nestingLevel * 54}px`;
+    const paddingLeft = `${nestingLevel * 54}px`
 
-    useOutsideClickDetector(menuActionRef, () => setIsMenuActive(false));
+    useOutsideClickDetector(menuActionRef, () => setIsMenuActive(false))
 
     const handleToggleExpand = () => {
         setExpanded((prevState) => {
             if (!prevState && workspaceSlug && issueDetail)
-                subIssuesStore.fetchSubIssues(workspaceSlug.toString(), issueDetail.project_id, issueDetail.id);
-            return !prevState;
-        });
-    };
+                subIssuesStore.fetchSubIssues(workspaceSlug.toString(), issueDetail.project_id, issueDetail.id)
+            return !prevState
+        })
+    }
 
     const customActionButton = (
         <div
@@ -179,10 +173,10 @@ const IssueRowDetails = observer((props: IssueRowDetailsProps) => {
         >
             <MoreHorizontal className="h-3.5 w-3.5" />
         </div>
-    );
-    if (!issueDetail) return null;
+    )
+    if (!issueDetail) return null
 
-    const disableUserActions = !canEditProperties(issueDetail.project_id);
+    const disableUserActions = !canEditProperties(issueDetail.project_id)
 
     return (
         <>
@@ -267,5 +261,5 @@ const IssueRowDetails = observer((props: IssueRowDetailsProps) => {
                 />
             ))}
         </>
-    );
-});
+    )
+})

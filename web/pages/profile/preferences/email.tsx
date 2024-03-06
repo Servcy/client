@@ -1,27 +1,23 @@
-import { ReactElement } from "react";
-import useSWR from "swr";
-
-import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
-
-import { EmailSettingsLoader } from "@components/ui";
-
-import { PageHead } from "@components/core";
-import { EmailNotificationForm } from "@components/profile/preferences";
-
-import { UserService } from "@services/user.service";
+import { ReactElement } from "react"
+import { PageHead } from "@components/core"
+import { EmailNotificationForm } from "@components/profile/preferences"
+import { EmailSettingsLoader } from "@components/ui"
+import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences"
+import { UserService } from "@services/user.service"
+import useSWR from "swr"
 // type
-import { NextPageWithLayout } from "@/types/types";
+import { NextPageWithLayout } from "@/types/types"
 
-const userService = new UserService();
+const userService = new UserService()
 
 const ProfilePreferencesThemePage: NextPageWithLayout = () => {
     // fetching user email notification settings
     const { data, isLoading } = useSWR("CURRENT_USER_EMAIL_NOTIFICATION_SETTINGS", () =>
         userService.currentUserEmailNotificationSettings()
-    );
+    )
 
     if (!data || isLoading) {
-        return <EmailSettingsLoader />;
+        return <EmailSettingsLoader />
     }
 
     return (
@@ -31,11 +27,11 @@ const ProfilePreferencesThemePage: NextPageWithLayout = () => {
                 <EmailNotificationForm data={data} />
             </div>
         </>
-    );
-};
+    )
+}
 
 ProfilePreferencesThemePage.getWrapper = function getWrapper(page: ReactElement) {
-    return <ProfilePreferenceSettingsLayout>{page}</ProfilePreferenceSettingsLayout>;
-};
+    return <ProfilePreferenceSettingsLayout>{page}</ProfilePreferenceSettingsLayout>
+}
 
-export default ProfilePreferencesThemePage;
+export default ProfilePreferencesThemePage

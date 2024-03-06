@@ -1,46 +1,43 @@
-import { useState, Fragment } from "react";
-import { useRouter } from "next/router";
-import { Transition, Dialog } from "@headlessui/react";
-
-import { useProject, useUser } from "@hooks/store";
-
-import { Button } from "@servcy/ui";
-
-import type { IProject } from "@servcy/types";
+import { useRouter } from "next/router"
+import { Fragment, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProject, useUser } from "@hooks/store"
+import type { IProject } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 // type
 type TJoinProjectModalProps = {
-    isOpen: boolean;
-    workspaceSlug: string;
-    project: IProject;
-    handleClose: () => void;
-};
+    isOpen: boolean
+    workspaceSlug: string
+    project: IProject
+    handleClose: () => void
+}
 
 export const JoinProjectModal: React.FC<TJoinProjectModalProps> = (props) => {
-    const { handleClose, isOpen, project, workspaceSlug } = props;
+    const { handleClose, isOpen, project, workspaceSlug } = props
     // states
-    const [isJoiningLoading, setIsJoiningLoading] = useState(false);
+    const [isJoiningLoading, setIsJoiningLoading] = useState(false)
     // store hooks
     const {
         membership: { joinProject },
-    } = useUser();
-    const { fetchProjects } = useProject();
+    } = useUser()
+    const { fetchProjects } = useProject()
     // router
-    const router = useRouter();
+    const router = useRouter()
 
     const handleJoin = () => {
-        setIsJoiningLoading(true);
+        setIsJoiningLoading(true)
 
         joinProject(workspaceSlug, [project.id])
             .then(() => {
-                router.push(`/${workspaceSlug}/projects/${project.id}/issues`);
-                fetchProjects(workspaceSlug);
-                handleClose();
+                router.push(`/${workspaceSlug}/projects/${project.id}/issues`)
+                fetchProjects(workspaceSlug)
+                handleClose()
             })
             .finally(() => {
-                setIsJoiningLoading(false);
-            });
-    };
+                setIsJoiningLoading(false)
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -104,5 +101,5 @@ export const JoinProjectModal: React.FC<TJoinProjectModalProps> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

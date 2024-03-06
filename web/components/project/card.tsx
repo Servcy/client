@@ -1,80 +1,74 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { LinkIcon, Lock, Pencil, Star } from "lucide-react";
-import Link from "next/link";
-
-import { useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { DeleteProjectModal, JoinProjectModal } from "@components/project";
-
-import { Avatar, AvatarGroup, Button, Tooltip } from "@servcy/ui";
-
-import { copyTextToClipboard } from "@helpers/string.helper";
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import type { IProject } from "@servcy/types";
-
-import { EUserProjectRoles } from "@constants/project";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { DeleteProjectModal, JoinProjectModal } from "@components/project"
+import { EUserProjectRoles } from "@constants/project"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+import { useProject } from "@hooks/store"
+import { LinkIcon, Lock, Pencil, Star } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import type { IProject } from "@servcy/types"
+import { Avatar, AvatarGroup, Button, Tooltip } from "@servcy/ui"
 
 export type ProjectCardProps = {
-    project: IProject;
-};
+    project: IProject
+}
 
 export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
-    const { project } = props;
+    const { project } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     // states
-    const [deleteProjectModalOpen, setDeleteProjectModal] = useState(false);
-    const [joinProjectModalOpen, setJoinProjectModal] = useState(false);
+    const [deleteProjectModalOpen, setDeleteProjectModal] = useState(false)
+    const [joinProjectModalOpen, setJoinProjectModal] = useState(false)
     // store hooks
-    const { addProjectToFavorites, removeProjectFromFavorites } = useProject();
+    const { addProjectToFavorites, removeProjectFromFavorites } = useProject()
 
-    project.member_role;
-    const isOwner = project.member_role === EUserProjectRoles.ADMIN;
-    const isMember = project.member_role === EUserProjectRoles.MEMBER;
+    project.member_role
+    const isOwner = project.member_role === EUserProjectRoles.ADMIN
+    const isMember = project.member_role === EUserProjectRoles.MEMBER
 
     const handleAddToFavorites = () => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleRemoveFromFavorites = () => {
-        if (!workspaceSlug || !project) return;
+        if (!workspaceSlug || !project) return
 
         removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleCopyText = () => {
-        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
+        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
 
         copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${project.id}/issues`).then(() => {
             toast.error({
                 type: "success",
                 title: "Link Copied!",
                 message: "Project link copied to clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
 
-    const projectMembersIds = project.members?.map((member) => member.member_id);
+    const projectMembersIds = project.members?.map((member) => member.member_id)
 
     return (
         <>
@@ -97,8 +91,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
             {/* Card Information */}
             <div
                 onClick={() => {
-                    if (project.is_member) router.push(`/${workspaceSlug?.toString()}/projects/${project.id}/issues`);
-                    else setJoinProjectModal(true);
+                    if (project.is_member) router.push(`/${workspaceSlug?.toString()}/projects/${project.id}/issues`)
+                    else setJoinProjectModal(true)
                 }}
                 className="flex cursor-pointer flex-col rounded border border-custom-border-200 bg-custom-background-100"
             >
@@ -139,9 +133,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                             <button
                                 className="flex h-6 w-6 items-center justify-center rounded bg-white/10"
                                 onClick={(e) => {
-                                    e.stopPropagation();
-                                    e.preventDefault();
-                                    handleCopyText();
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                    handleCopyText()
                                 }}
                             >
                                 <LinkIcon className="h-3 w-3 text-white" />
@@ -150,13 +144,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                                 className="flex h-6 w-6 items-center justify-center rounded bg-white/10"
                                 onClick={(e) => {
                                     if (project.is_favorite) {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        handleRemoveFromFavorites();
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        handleRemoveFromFavorites()
                                     } else {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        handleAddToFavorites();
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        handleAddToFavorites()
                                     }
                                 }}
                             >
@@ -184,9 +178,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                                 <div className="flex cursor-pointer items-center gap-2 text-custom-text-200">
                                     <AvatarGroup showTooltip={false}>
                                         {projectMembersIds.map((memberId) => {
-                                            const member = project.members?.find((m) => m.member_id === memberId);
+                                            const member = project.members?.find((m) => m.member_id === memberId)
 
-                                            if (!member) return null;
+                                            if (!member) return null
 
                                             return (
                                                 <Avatar
@@ -194,7 +188,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                                                     name={member.member__display_name}
                                                     src={member.member__avatar}
                                                 />
-                                            );
+                                            )
                                         })}
                                     </AvatarGroup>
                                 </div>
@@ -206,7 +200,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                             <Link
                                 className="flex items-center justify-center rounded p-1 text-custom-text-400 hover:bg-custom-background-80 hover:text-custom-text-200"
                                 onClick={(e) => {
-                                    e.stopPropagation();
+                                    e.stopPropagation()
                                 }}
                                 href={`/${workspaceSlug}/projects/${project.id}/settings`}
                             >
@@ -220,9 +214,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                                     variant="link-primary"
                                     className="!p-0 font-semibold"
                                     onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        setJoinProjectModal(true);
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        setJoinProjectModal(true)
                                     }}
                                 >
                                     Join
@@ -233,5 +227,5 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

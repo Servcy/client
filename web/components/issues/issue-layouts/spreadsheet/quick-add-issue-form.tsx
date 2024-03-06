@@ -1,44 +1,40 @@
-import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { observer } from "mobx-react-lite";
-import { PlusIcon } from "lucide-react";
-
-import { useEventTracker, useProject, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-import useKeypress from "@hooks/use-key-press";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { createIssuePayload } from "@helpers/issue.helper";
-
-import { TIssue } from "@servcy/types";
-
-import { ISSUE_CREATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { useEffect, useRef, useState } from "react"
+import { ISSUE_CREATED } from "@constants/event-tracker"
+import { createIssuePayload } from "@helpers/issue.helper"
+import { useEventTracker, useProject, useWorkspace } from "@hooks/store"
+import useKeypress from "@hooks/use-key-press"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { PlusIcon } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { TIssue } from "@servcy/types"
 
 type Props = {
-    formKey: keyof TIssue;
-    groupId?: string;
-    subGroupId?: string | null;
-    prePopulatedData?: Partial<TIssue>;
+    formKey: keyof TIssue
+    groupId?: string
+    subGroupId?: string | null
+    prePopulatedData?: Partial<TIssue>
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-};
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+}
 
 const defaultValues: Partial<TIssue> = {
     name: "",
-};
+}
 
 const Inputs = (props: any) => {
-    const { register, setFocus, projectDetails } = props;
+    const { register, setFocus, projectDetails } = props
 
     useEffect(() => {
-        setFocus("name");
-    }, [setFocus]);
+        setFocus("name")
+    }, [setFocus])
 
     return (
         <>
@@ -53,17 +49,17 @@ const Inputs = (props: any) => {
                 className="w-full rounded-md bg-transparent py-3 text-sm leading-5 text-custom-text-200 outline-none"
             />
         </>
-    );
-};
+    )
+}
 
 export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) => {
-    const { formKey, prePopulatedData, quickAddCallback, viewId } = props;
+    const { formKey, prePopulatedData, quickAddCallback, viewId } = props
     // store hooks
-    const { currentWorkspace } = useWorkspace();
-    const { currentProjectDetails } = useProject();
-    const { captureIssueEvent } = useEventTracker();
+    const { currentWorkspace } = useWorkspace()
+    const { currentProjectDetails } = useProject()
+    const { captureIssueEvent } = useEventTracker()
     // router
-    const router = useRouter();
+    const router = useRouter()
     // form info
     const {
         reset,
@@ -71,40 +67,40 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
         setFocus,
         register,
         formState: { errors, isSubmitting },
-    } = useForm<TIssue>({ defaultValues });
+    } = useForm<TIssue>({ defaultValues })
 
     // ref
-    const ref = useRef<HTMLFormElement>(null);
+    const ref = useRef<HTMLFormElement>(null)
 
     // states
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
 
-    const handleClose = () => setIsOpen(false);
+    const handleClose = () => setIsOpen(false)
 
-    useKeypress("Escape", handleClose);
-    useOutsideClickDetector(ref, handleClose);
-
-    useEffect(() => {
-        setFocus("name");
-    }, [setFocus, isOpen]);
+    useKeypress("Escape", handleClose)
+    useOutsideClickDetector(ref, handleClose)
 
     useEffect(() => {
-        if (!isOpen) reset({ ...defaultValues });
-    }, [isOpen, reset]);
+        setFocus("name")
+    }, [setFocus, isOpen])
 
     useEffect(() => {
-        if (!errors) return;
+        if (!isOpen) reset({ ...defaultValues })
+    }, [isOpen, reset])
+
+    useEffect(() => {
+        if (!errors) return
 
         Object.keys(errors).forEach((key) => {
-            const error = errors[key as keyof TIssue];
+            const error = errors[key as keyof TIssue]
 
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: error?.message?.toString() || "Some error occurred. Please try again.",
-            });
-        });
-    }, [errors, setToastAlert]);
+            })
+        })
+    }, [errors, setToastAlert])
 
     // const onSubmitHandler = async (formData: TIssue) => {
     //   if (isSubmitting || !workspaceSlug || !projectId) return;
@@ -148,14 +144,14 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
     // };
 
     const onSubmitHandler = async (formData: TIssue) => {
-        if (isSubmitting || !currentWorkspace || !currentProjectDetails) return;
+        if (isSubmitting || !currentWorkspace || !currentProjectDetails) return
 
-        reset({ ...defaultValues });
+        reset({ ...defaultValues })
 
         const payload = createIssuePayload(currentProjectDetails.id, {
             ...(prePopulatedData ?? {}),
             ...formData,
-        });
+        })
 
         try {
             quickAddCallback &&
@@ -169,27 +165,27 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
                         eventName: ISSUE_CREATED,
                         payload: { ...res, state: "SUCCESS", element: "Spreadsheet quick add" },
                         path: router.asPath,
-                    });
-                }));
+                    })
+                }))
             toast.error({
                 type: "success",
                 title: "Success!",
                 message: "Issue created successfully.",
-            });
+            })
         } catch (err: any) {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Spreadsheet quick add" },
                 path: router.asPath,
-            });
-            console.error(err);
+            })
+            console.error(err)
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: err?.message || "Some error occurred. Please try again.",
-            });
+            })
         }
-    };
+    }
 
     return (
         <div>
@@ -229,5 +225,5 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

@@ -1,44 +1,40 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { AlertTriangle } from "lucide-react";
-
-import { useEventTracker, useProjectState } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import type { IState } from "@servcy/types";
-
-import { STATE_DELETED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { STATE_DELETED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useEventTracker, useProjectState } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import type { IState } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    data: IState | null;
-};
+    isOpen: boolean
+    onClose: () => void
+    data: IState | null
+}
 
 export const DeleteStateModal: React.FC<Props> = observer((props) => {
-    const { isOpen, onClose, data } = props;
+    const { isOpen, onClose, data } = props
     // states
-    const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+    const [isDeleteLoading, setIsDeleteLoading] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { captureProjectStateEvent } = useEventTracker();
-    const { deleteState } = useProjectState();
+    const { captureProjectStateEvent } = useEventTracker()
+    const { deleteState } = useProjectState()
 
     const handleClose = () => {
-        onClose();
-        setIsDeleteLoading(false);
-    };
+        onClose()
+        setIsDeleteLoading(false)
+    }
 
     const handleDeletion = async () => {
-        if (!workspaceSlug || !data) return;
+        if (!workspaceSlug || !data) return
 
-        setIsDeleteLoading(true);
+        setIsDeleteLoading(true)
 
         await deleteState(workspaceSlug.toString(), data.project_id, data.id)
             .then(() => {
@@ -48,8 +44,8 @@ export const DeleteStateModal: React.FC<Props> = observer((props) => {
                         ...data,
                         state: "SUCCESS",
                     },
-                });
-                handleClose();
+                })
+                handleClose()
             })
             .catch((err) => {
                 if (err.status === 400)
@@ -58,25 +54,25 @@ export const DeleteStateModal: React.FC<Props> = observer((props) => {
                         title: "Error!",
                         message:
                             "This state contains some issues within it, please move them to some other state to delete this state.",
-                    });
+                    })
                 else
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: "State could not be deleted. Please try again.",
-                    });
+                    })
                 captureProjectStateEvent({
                     eventName: STATE_DELETED,
                     payload: {
                         ...data,
                         state: "FAILED",
                     },
-                });
+                })
             })
             .finally(() => {
-                setIsDeleteLoading(false);
-            });
-    };
+                setIsDeleteLoading(false)
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -150,5 +146,5 @@ export const DeleteStateModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

@@ -1,21 +1,18 @@
-import React, { FC } from "react";
-import { Controller, useForm } from "react-hook-form";
-
-import { Button, Checkbox } from "@servcy/ui";
-import toast from "react-hot-toast";
-
-import { UserService } from "@services/user.service";
-
-import { IUserEmailNotificationSettings } from "@servcy/types";
+import React, { FC } from "react"
+import { UserService } from "@services/user.service"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IUserEmailNotificationSettings } from "@servcy/types"
+import { Button, Checkbox } from "@servcy/ui"
 
 interface IEmailNotificationFormProps {
-    data: IUserEmailNotificationSettings;
+    data: IUserEmailNotificationSettings
 }
 
-const userService = new UserService();
+const userService = new UserService()
 
 export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) => {
-    const { data } = props;
+    const { data } = props
     // toast
 
     // form data
@@ -29,17 +26,17 @@ export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) =>
         defaultValues: {
             ...data,
         },
-    });
+    })
 
     const onSubmit = async (formData: IUserEmailNotificationSettings) => {
         // Get the dirty fields from the form data and create a payload
-        let payload = {};
+        let payload = {}
         Object.keys(dirtyFields).forEach((key) => {
             payload = {
                 ...payload,
                 [key]: formData[key as keyof IUserEmailNotificationSettings],
-            };
-        });
+            }
+        })
         await userService
             .updateCurrentUserEmailNotificationSettings(payload)
             .then(() =>
@@ -49,8 +46,8 @@ export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) =>
                     message: "Email Notification Settings updated successfully",
                 })
             )
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
     return (
         <>
@@ -99,8 +96,8 @@ export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) =>
                                     checked={value}
                                     intermediate={!value && watch("issue_completed")}
                                     onChange={() => {
-                                        setValue("issue_completed", !value);
-                                        onChange(!value);
+                                        setValue("issue_completed", !value)
+                                        onChange(!value)
                                     }}
                                     className="mx-2"
                                 />
@@ -166,5 +163,5 @@ export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) =>
                 </Button>
             </div>
         </>
-    );
-};
+    )
+}

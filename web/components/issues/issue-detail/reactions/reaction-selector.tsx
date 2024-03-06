@@ -1,21 +1,20 @@
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
+import { Fragment } from "react"
+import { Popover, Transition } from "@headlessui/react"
 // helper
-import { renderEmoji } from "@helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper"
+import { SmilePlus } from "lucide-react"
 
-import { SmilePlus } from "lucide-react";
-
-const reactionEmojis = ["128077", "128078", "128516", "128165", "128533", "129505", "9992", "128064"];
+const reactionEmojis = ["128077", "128078", "128516", "128165", "128533", "129505", "9992", "128064"]
 
 interface Props {
-    size?: "sm" | "md" | "lg";
-    position?: "top" | "bottom";
-    value?: string | string[] | null;
-    onSelect: (emoji: string) => void;
+    size?: "sm" | "md" | "lg"
+    position?: "top" | "bottom"
+    value?: string | string[] | null
+    onSelect: (emoji: string) => void
 }
 
 export const ReactionSelector: React.FC<Props> = (props) => {
-    const { onSelect, position, size } = props;
+    const { onSelect, position, size } = props
 
     return (
         <Popover className="relative">
@@ -55,8 +54,8 @@ export const ReactionSelector: React.FC<Props> = (props) => {
                                             key={emoji}
                                             type="button"
                                             onClick={() => {
-                                                onSelect(emoji);
-                                                closePopover();
+                                                onSelect(emoji)
+                                                closePopover()
                                             }}
                                             className="flex select-none items-center justify-between rounded-md p-1 text-sm hover:bg-custom-sidebar-background-90"
                                         >
@@ -70,5 +69,5 @@ export const ReactionSelector: React.FC<Props> = (props) => {
                 </>
             )}
         </Popover>
-    );
-};
+    )
+}

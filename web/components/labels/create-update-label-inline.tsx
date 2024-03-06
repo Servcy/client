@@ -1,40 +1,36 @@
-import React, { forwardRef, useEffect } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { TwitterPicker } from "react-color";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Popover, Transition } from "@headlessui/react";
-
-import { useLabel } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, Input } from "@servcy/ui";
-
-import { IIssueLabel } from "@servcy/types";
-
-import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "@constants/label";
+import { useRouter } from "next/router"
+import React, { forwardRef, useEffect } from "react"
+import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "@constants/label"
+import { Popover, Transition } from "@headlessui/react"
+import { useLabel } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TwitterPicker } from "react-color"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IIssueLabel } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    labelForm: boolean;
-    setLabelForm: React.Dispatch<React.SetStateAction<boolean>>;
-    isUpdating: boolean;
-    labelToUpdate?: IIssueLabel;
-    onClose?: () => void;
-};
+    labelForm: boolean
+    setLabelForm: React.Dispatch<React.SetStateAction<boolean>>
+    isUpdating: boolean
+    labelToUpdate?: IIssueLabel
+    onClose?: () => void
+}
 
 const defaultValues: Partial<IIssueLabel> = {
     name: "",
     color: "rgb(var(--color-text-200))",
-};
+}
 
 export const CreateUpdateLabelInline = observer(
     forwardRef<HTMLFormElement, Props>(function CreateUpdateLabelInline(props, ref) {
-        const { labelForm, setLabelForm, isUpdating, labelToUpdate, onClose } = props;
+        const { labelForm, setLabelForm, isUpdating, labelToUpdate, onClose } = props
         // router
-        const router = useRouter();
-        const { workspaceSlug, projectId } = router.query;
+        const router = useRouter()
+        const { workspaceSlug, projectId } = router.query
         // store hooks
-        const { createLabel, updateLabel } = useLabel();
+        const { createLabel, updateLabel } = useLabel()
 
         // form info
         const {
@@ -47,79 +43,79 @@ export const CreateUpdateLabelInline = observer(
             setFocus,
         } = useForm<IIssueLabel>({
             defaultValues,
-        });
+        })
 
         const handleClose = () => {
-            setLabelForm(false);
-            reset(defaultValues);
-            if (onClose) onClose();
-        };
+            setLabelForm(false)
+            reset(defaultValues)
+            if (onClose) onClose()
+        }
 
         const handleLabelCreate: SubmitHandler<IIssueLabel> = async (formData) => {
-            if (!workspaceSlug || !projectId || isSubmitting) return;
+            if (!workspaceSlug || !projectId || isSubmitting) return
 
             await createLabel(workspaceSlug.toString(), projectId.toString(), formData)
                 .then(() => {
-                    handleClose();
-                    reset(defaultValues);
+                    handleClose()
+                    reset(defaultValues)
                 })
                 .catch((error) => {
                     toast.error({
                         title: "Oops!",
                         type: "error",
                         message: error?.error ?? "Error while adding the label",
-                    });
-                    reset(formData);
-                });
-        };
+                    })
+                    reset(formData)
+                })
+        }
 
         const handleLabelUpdate: SubmitHandler<IIssueLabel> = async (formData) => {
-            if (!workspaceSlug || !projectId || isSubmitting) return;
+            if (!workspaceSlug || !projectId || isSubmitting) return
 
             await updateLabel(workspaceSlug.toString(), projectId.toString(), labelToUpdate?.id!, formData)
                 .then(() => {
-                    reset(defaultValues);
-                    handleClose();
+                    reset(defaultValues)
+                    handleClose()
                 })
                 .catch((error) => {
                     toast.error({
                         title: "Oops!",
                         type: "error",
                         message: error?.error ?? "Error while updating the label",
-                    });
-                    reset(formData);
-                });
-        };
+                    })
+                    reset(formData)
+                })
+        }
 
         /**
          * For settings focus on name input
          */
         useEffect(() => {
-            setFocus("name");
-        }, [setFocus, labelForm]);
+            setFocus("name")
+        }, [setFocus, labelForm])
 
         useEffect(() => {
-            if (!labelToUpdate) return;
+            if (!labelToUpdate) return
 
-            setValue("name", labelToUpdate.name);
-            setValue("color", labelToUpdate.color && labelToUpdate.color !== "" ? labelToUpdate.color : "#000");
-        }, [labelToUpdate, setValue]);
+            setValue("name", labelToUpdate.name)
+            setValue("color", labelToUpdate.color && labelToUpdate.color !== "" ? labelToUpdate.color : "#000")
+        }, [labelToUpdate, setValue])
 
         useEffect(() => {
             if (labelToUpdate) {
-                setValue("color", labelToUpdate.color && labelToUpdate.color !== "" ? labelToUpdate.color : "#000");
-                return;
+                setValue("color", labelToUpdate.color && labelToUpdate.color !== "" ? labelToUpdate.color : "#000")
+                return
             }
 
-            setValue("color", getRandomLabelColor());
-        }, [labelToUpdate, setValue]);
+            setValue("color", getRandomLabelColor())
+        }, [labelToUpdate, setValue])
 
         return (
             <form
                 ref={ref}
                 onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSubmit(isUpdating ? handleLabelUpdate : handleLabelCreate)();
+                    e.preventDefault()
+                    handleSubmit(isUpdating ? handleLabelUpdate : handleLabelCreate)()
                 }}
                 className={`flex w-full scroll-m-8 items-center gap-2 bg-custom-background-100 ${labelForm ? "" : "hidden"}`}
             >
@@ -197,6 +193,6 @@ export const CreateUpdateLabelInline = observer(
                     {isUpdating ? (isSubmitting ? "Updating" : "Update") : isSubmitting ? "Adding" : "Add"}
                 </Button>
             </form>
-        );
+        )
     })
-);
+)

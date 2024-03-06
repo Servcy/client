@@ -1,50 +1,43 @@
-import { useCallback, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import Link from "next/link";
-
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useCallback, useState } from "react"
+import { ProjectAnalyticsModal } from "@components/analytics"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { CycleMobileHeader } from "@components/cycles/cycle-mobile-header"
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+import { cn } from "@helpers/common.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { truncateText } from "@helpers/string.helper"
 import {
     useApplication,
-    useEventTracker,
     useCycle,
+    useEventTracker,
+    useIssues,
     useLabel,
     useMember,
     useProject,
     useProjectState,
     useUser,
-    useIssues,
-} from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
-import { ProjectAnalyticsModal } from "@components/analytics";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-
-import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui";
-
-import { ArrowRight, Plus, PanelRight } from "lucide-react";
-
-import { truncateText } from "@helpers/string.helper";
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
-
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
-import { EUserProjectRoles } from "@constants/project";
-import { cn } from "@helpers/common.helper";
-import { CycleMobileHeader } from "@components/cycles/cycle-mobile-header";
+} from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { ArrowRight, PanelRight, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
+import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui"
 
 const CycleDropdownOption: React.FC<{ cycleId: string }> = ({ cycleId }) => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { getCycleById } = useCycle();
+    const { getCycleById } = useCycle()
     // derived values
-    const cycle = getCycleById(cycleId);
+    const cycle = getCycleById(cycleId)
 
-    if (!cycle) return null;
+    if (!cycle) return null
 
     return (
         <CustomMenu.MenuItem key={cycle.id}>
@@ -56,94 +49,94 @@ const CycleDropdownOption: React.FC<{ cycleId: string }> = ({ cycleId }) => {
                 {truncateText(cycle.name, 40)}
             </Link>
         </CustomMenu.MenuItem>
-    );
-};
+    )
+}
 
 export const CycleIssuesHeader: React.FC = observer(() => {
     // states
-    const [analyticsModal, setAnalyticsModal] = useState(false);
+    const [analyticsModal, setAnalyticsModal] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     const { workspaceSlug, projectId, cycleId } = router.query as {
-        workspaceSlug: string;
-        projectId: string;
-        cycleId: string;
-    };
+        workspaceSlug: string
+        projectId: string
+        cycleId: string
+    }
     // store hooks
     const {
         issuesFilter: { issueFilters, updateFilters },
-    } = useIssues(EIssuesStoreType.CYCLE);
-    const { currentProjectCycleIds, getCycleById } = useCycle();
+    } = useIssues(EIssuesStoreType.CYCLE)
+    const { currentProjectCycleIds, getCycleById } = useCycle()
     const {
         commandPalette: { toggleCreateIssueModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
-    const { projectStates } = useProjectState();
-    const { projectLabels } = useLabel();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
+    const { projectStates } = useProjectState()
+    const { projectLabels } = useLabel()
     const {
         project: { projectMemberIds },
-    } = useMember();
+    } = useMember()
 
-    const activeLayout = issueFilters?.displayFilters?.layout;
+    const activeLayout = issueFilters?.displayFilters?.layout
 
-    const { setValue, storedValue } = useLocalStorage("cycle_sidebar_collapsed", "false");
+    const { setValue, storedValue } = useLocalStorage("cycle_sidebar_collapsed", "false")
 
-    const isSidebarCollapsed = storedValue ? (storedValue === "true" ? true : false) : false;
+    const isSidebarCollapsed = storedValue ? (storedValue === "true" ? true : false) : false
     const toggleSidebar = () => {
-        setValue(`${!isSidebarCollapsed}`);
-    };
+        setValue(`${!isSidebarCollapsed}`)
+    }
 
     const handleLayoutChange = useCallback(
         (layout: TIssueLayouts) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout }, cycleId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout }, cycleId)
         },
         [workspaceSlug, projectId, cycleId, updateFilters]
-    );
+    )
 
     const handleFiltersUpdate = useCallback(
         (key: keyof IIssueFilterOptions, value: string | string[]) => {
-            if (!workspaceSlug || !projectId) return;
-            const newValues = issueFilters?.filters?.[key] ?? [];
+            if (!workspaceSlug || !projectId) return
+            const newValues = issueFilters?.filters?.[key] ?? []
 
             if (Array.isArray(value)) {
                 value.forEach((val) => {
-                    if (!newValues.includes(val)) newValues.push(val);
-                });
+                    if (!newValues.includes(val)) newValues.push(val)
+                })
             } else {
-                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
-                else newValues.push(value);
+                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                else newValues.push(value)
             }
 
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues }, cycleId);
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues }, cycleId)
         },
         [workspaceSlug, projectId, cycleId, issueFilters, updateFilters]
-    );
+    )
 
     const handleDisplayFilters = useCallback(
         (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter, cycleId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter, cycleId)
         },
         [workspaceSlug, projectId, cycleId, updateFilters]
-    );
+    )
 
     const handleDisplayProperties = useCallback(
         (property: Partial<IIssueDisplayProperties>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property, cycleId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property, cycleId)
         },
         [workspaceSlug, projectId, cycleId, updateFilters]
-    );
+    )
 
     // derived values
-    const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined;
+    const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined
     const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return (
         <>
@@ -258,8 +251,8 @@ export const CycleIssuesHeader: React.FC = observer(() => {
                                 </Button>
                                 <Button
                                     onClick={() => {
-                                        setTrackElement("Cycle issues page");
-                                        toggleCreateIssueModal(true, EIssuesStoreType.CYCLE);
+                                        setTrackElement("Cycle issues page")
+                                        toggleCreateIssueModal(true, EIssuesStoreType.CYCLE)
                                     }}
                                     size="sm"
                                     prependIcon={<Plus />}
@@ -291,5 +284,5 @@ export const CycleIssuesHeader: React.FC = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

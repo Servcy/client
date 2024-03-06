@@ -1,58 +1,50 @@
-import React, { useState } from "react";
-
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-
-import useSWR, { mutate } from "swr";
-
-// react-hook-form
-import { useForm } from "react-hook-form";
-
-import { IntegrationService, GithubIntegrationService } from "@services/integrations";
-import toast from "react-hot-toast";
-
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useState } from "react"
 import {
     GithubImportConfigure,
-    GithubImportData,
-    GithubRepoDetails,
-    GithubImportUsers,
     GithubImportConfirm,
-} from "@components/integration";
-
-import { UserGroupIcon } from "@servcy/ui";
-import { ArrowLeft, Check, List, Settings, UploadCloud } from "lucide-react";
+    GithubImportData,
+    GithubImportUsers,
+    GithubRepoDetails,
+} from "@components/integration"
+import { APP_INTEGRATIONS, IMPORTER_SERVICES_LIST, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
+import { GithubIntegrationService, IntegrationService } from "@services/integrations"
+import { ArrowLeft, Check, List, Settings, UploadCloud } from "lucide-react"
 // images
-import GithubLogo from "public/services/github.png";
+import GithubLogo from "public/services/github.png"
+// react-hook-form
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import useSWR, { mutate } from "swr"
+import { IGithubRepoCollaborator, IGithubServiceImportFormData } from "@servcy/types"
+import { UserGroupIcon } from "@servcy/ui"
 
-import { IGithubRepoCollaborator, IGithubServiceImportFormData } from "@servcy/types";
-
-import { APP_INTEGRATIONS, IMPORTER_SERVICES_LIST, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";
-
-export type TIntegrationSteps = "import-configure" | "import-data" | "repo-details" | "import-users" | "import-confirm";
+export type TIntegrationSteps = "import-configure" | "import-data" | "repo-details" | "import-users" | "import-confirm"
 export interface IIntegrationData {
-    state: TIntegrationSteps;
+    state: TIntegrationSteps
 }
 
 export interface IUserDetails {
-    username: string;
-    import: any;
-    email: string;
+    username: string
+    import: any
+    email: string
 }
 
 export type TFormValues = {
-    github: any;
-    project: string | null;
-    sync: boolean;
-    collaborators: IGithubRepoCollaborator[];
-    users: IUserDetails[];
-};
+    github: any
+    project: string | null
+    sync: boolean
+    collaborators: IGithubRepoCollaborator[]
+    users: IUserDetails[]
+}
 
 const defaultFormValues = {
     github: null,
     project: null,
     sync: false,
-};
+}
 
 const integrationWorkflowData = [
     {
@@ -76,51 +68,51 @@ const integrationWorkflowData = [
         key: "import-confirm",
         icon: Check,
     },
-];
+]
 
-const integrationService = new IntegrationService();
-const githubIntegrationService = new GithubIntegrationService();
+const integrationService = new IntegrationService()
+const githubIntegrationService = new GithubIntegrationService()
 
 export const GithubImporterRoot: React.FC = () => {
     const [currentStep, setCurrentStep] = useState<IIntegrationData>({
         state: "import-configure",
-    });
-    const [users, setUsers] = useState<IUserDetails[]>([]);
+    })
+    const [users, setUsers] = useState<IUserDetails[]>([])
 
-    const router = useRouter();
-    const { workspaceSlug, provider } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, provider } = router.query
 
     const { handleSubmit, control, setValue, watch } = useForm<TFormValues>({
         defaultValues: defaultFormValues,
-    });
+    })
 
-    const { data: appIntegrations } = useSWR(APP_INTEGRATIONS, () => integrationService.getAppIntegrationsList());
+    const { data: appIntegrations } = useSWR(APP_INTEGRATIONS, () => integrationService.getAppIntegrationsList())
 
     const { data: workspaceIntegrations } = useSWR(
         workspaceSlug ? WORKSPACE_INTEGRATIONS(workspaceSlug as string) : null,
         workspaceSlug ? () => integrationService.getWorkspaceIntegrationsList(workspaceSlug as string) : null
-    );
+    )
 
     const activeIntegrationState = () => {
-        const currentElementIndex = integrationWorkflowData.findIndex((i) => i?.key === currentStep?.state);
+        const currentElementIndex = integrationWorkflowData.findIndex((i) => i?.key === currentStep?.state)
 
-        return currentElementIndex;
-    };
+        return currentElementIndex
+    }
 
     const handleStepChange = (value: TIntegrationSteps) => {
-        setCurrentStep((prevData) => ({ ...prevData, state: value }));
-    };
+        setCurrentStep((prevData) => ({ ...prevData, state: value }))
+    }
 
     // current integration from all the integrations available
     const integration =
-        appIntegrations && appIntegrations.length > 0 && appIntegrations.find((i) => i.provider === provider);
+        appIntegrations && appIntegrations.length > 0 && appIntegrations.find((i) => i.provider === provider)
 
     // current integration from workspace integrations
     const workspaceIntegration =
-        integration && workspaceIntegrations?.find((i: any) => i.integration_detail.id === integration.id);
+        integration && workspaceIntegrations?.find((i: any) => i.integration_detail.id === integration.id)
 
     const createGithubImporterService = async (formData: TFormValues) => {
-        if (!formData.github || !formData.project) return;
+        if (!formData.github || !formData.project) return
 
         const payload: IGithubServiceImportFormData = {
             metadata: {
@@ -136,13 +128,13 @@ export const GithubImporterRoot: React.FC = () => {
                 sync: formData.sync,
             },
             project_id: formData.project,
-        };
+        }
 
         await githubIntegrationService
             .createGithubServiceImport(workspaceSlug as string, payload)
             .then(() => {
-                router.push(`/${workspaceSlug}/settings/imports`);
-                mutate(IMPORTER_SERVICES_LIST(workspaceSlug as string));
+                router.push(`/${workspaceSlug}/settings/imports`)
+                mutate(IMPORTER_SERVICES_LIST(workspaceSlug as string))
             })
             .catch(() =>
                 toast.error({
@@ -150,8 +142,8 @@ export const GithubImporterRoot: React.FC = () => {
                     title: "Error!",
                     message: "Import was unsuccessful. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     return (
         <form onSubmit={handleSubmit(createGithubImporterService)}>
@@ -245,5 +237,5 @@ export const GithubImporterRoot: React.FC = () => {
                 </div>
             </div>
         </form>
-    );
-};
+    )
+}

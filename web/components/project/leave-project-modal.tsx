@@ -1,45 +1,41 @@
-import { FC, Fragment } from "react";
-import { useRouter } from "next/router";
-import { Controller, useForm } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
-import { AlertTriangleIcon } from "lucide-react";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, Input } from "@servcy/ui";
-
-import { IProject } from "@servcy/types";
-
-import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { FC, Fragment } from "react"
+import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useEventTracker, useUser } from "@hooks/store"
+import { AlertTriangleIcon } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IProject } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type FormData = {
-    projectName: string;
-    confirmLeave: string;
-};
+    projectName: string
+    confirmLeave: string
+}
 
 const defaultValues: FormData = {
     projectName: "",
     confirmLeave: "",
-};
+}
 
 export interface ILeaveProjectModal {
-    project: IProject;
-    isOpen: boolean;
-    onClose: () => void;
+    project: IProject
+    isOpen: boolean
+    onClose: () => void
 }
 
 export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
-    const { project, isOpen, onClose } = props;
+    const { project, isOpen, onClose } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { captureEvent } = useEventTracker();
+    const { captureEvent } = useEventTracker()
     const {
         membership: { leaveProject },
-    } = useUser();
+    } = useUser()
     // toast
 
     const {
@@ -47,61 +43,61 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
         formState: { errors, isSubmitting },
         handleSubmit,
         reset,
-    } = useForm({ defaultValues });
+    } = useForm({ defaultValues })
 
     const handleClose = () => {
-        reset({ ...defaultValues });
-        onClose();
-    };
+        reset({ ...defaultValues })
+        onClose()
+    }
 
     const onSubmit = async (data: any) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         if (data) {
             if (data.projectName === project?.name) {
                 if (data.confirmLeave === "Leave Project") {
                     return leaveProject(workspaceSlug.toString(), project.id)
                         .then(() => {
-                            handleClose();
-                            router.push(`/${workspaceSlug}/projects`);
+                            handleClose()
+                            router.push(`/${workspaceSlug}/projects`)
                             captureEvent(PROJECT_MEMBER_LEAVE, {
                                 state: "SUCCESS",
                                 element: "Project settings members page",
-                            });
+                            })
                         })
                         .catch(() => {
                             toast.error({
                                 type: "error",
                                 title: "Error!",
                                 message: "Something went wrong please try again later.",
-                            });
+                            })
                             captureEvent(PROJECT_MEMBER_LEAVE, {
                                 state: "FAILED",
                                 element: "Project settings members page",
-                            });
-                        });
+                            })
+                        })
                 } else {
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: "Please confirm leaving the project by typing the 'Leave Project'.",
-                    });
+                    })
                 }
             } else {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Please enter the project name as shown in the description.",
-                });
+                })
             }
         } else {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Please fill all fields.",
-            });
+            })
         }
-    };
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -215,5 +211,5 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

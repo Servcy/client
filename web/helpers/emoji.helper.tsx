@@ -13,29 +13,29 @@ export const getRandomEmoji = () => {
         "128512",
         "128522",
         "128578",
-    ];
+    ]
 
-    return emojis[Math.floor(Math.random() * emojis.length)];
-};
+    return emojis[Math.floor(Math.random() * emojis.length)]
+}
 
 export const renderEmoji = (
     emoji:
         | string
         | {
-              name: string;
-              color: string;
+              name: string
+              color: string
           }
 ) => {
-    if (!emoji) return;
+    if (!emoji) return
 
     if (typeof emoji === "object")
         return (
             <span style={{ fontSize: "16px", color: emoji.color }} className="material-symbols-rounded">
                 {emoji.name}
             </span>
-        );
-    else return isNaN(parseInt(emoji)) ? emoji : String.fromCodePoint(parseInt(emoji));
-};
+        )
+    else return isNaN(parseInt(emoji)) ? emoji : String.fromCodePoint(parseInt(emoji))
+}
 
 export const groupReactions: (reactions: any[], key: string) => { [key: string]: any[] } = (
     reactions: any,
@@ -44,13 +44,13 @@ export const groupReactions: (reactions: any[], key: string) => { [key: string]:
     const groupedReactions = reactions.reduce(
         (acc: any, reaction: any) => {
             if (!acc[reaction[key]]) {
-                acc[reaction[key]] = [];
+                acc[reaction[key]] = []
             }
-            acc[reaction[key]].push(reaction);
-            return acc;
+            acc[reaction[key]].push(reaction)
+            return acc
         },
         {} as { [key: string]: any[] }
-    );
+    )
 
-    return groupedReactions;
-};
+    return groupedReactions
+}

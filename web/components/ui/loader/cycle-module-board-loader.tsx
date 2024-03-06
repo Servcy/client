@@ -35,4 +35,4 @@ export const CycleModuleBoardLayout = () => (
             </div>
         </div>
     </div>
-);
+)

@@ -1,18 +1,16 @@
-import { observer } from "mobx-react-lite";
-
-import { PriorityIcon } from "@servcy/ui";
-import { X } from "lucide-react";
-
-import { TIssuePriorities } from "@servcy/types";
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TIssuePriorities } from "@servcy/types"
+import { PriorityIcon } from "@servcy/ui"
 
 type Props = {
-    handleRemove: (val: string) => void;
-    values: string[];
-    editable: boolean | undefined;
-};
+    handleRemove: (val: string) => void
+    values: string[]
+    editable: boolean | undefined
+}
 
 export const AppliedPriorityFilters: React.FC<Props> = observer((props) => {
-    const { handleRemove, values, editable } = props;
+    const { handleRemove, values, editable } = props
 
     return (
         <>
@@ -32,5 +30,5 @@ export const AppliedPriorityFilters: React.FC<Props> = observer((props) => {
                 </div>
             ))}
         </>
-    );
-});
+    )
+})

@@ -1,32 +1,31 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
+import { FC } from "react"
+import { useIssueDetail, useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
 // computed
-import { IssueLinkDetail } from "./link-detail";
+import { IssueLinkDetail } from "./link-detail"
+import { TLinkOperations } from "./root"
 
-import { useIssueDetail, useUser } from "@hooks/store";
-import { TLinkOperations } from "./root";
-
-export type TLinkOperationsModal = Exclude<TLinkOperations, "create">;
+export type TLinkOperationsModal = Exclude<TLinkOperations, "create">
 
 export type TIssueLinkList = {
-    issueId: string;
-    linkOperations: TLinkOperationsModal;
-};
+    issueId: string
+    linkOperations: TLinkOperationsModal
+}
 
 export const IssueLinkList: FC<TIssueLinkList> = observer((props) => {
     // props
-    const { issueId, linkOperations } = props;
+    const { issueId, linkOperations } = props
 
     const {
         link: { getLinksByIssueId },
-    } = useIssueDetail();
+    } = useIssueDetail()
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
-    const issueLinks = getLinksByIssueId(issueId);
+    const issueLinks = getLinksByIssueId(issueId)
 
-    if (!issueLinks) return <></>;
+    if (!issueLinks) return <></>
 
     return (
         <div className="space-y-2">
@@ -40,5 +39,5 @@ export const IssueLinkList: FC<TIssueLinkList> = observer((props) => {
                     />
                 ))}
         </div>
-    );
-});
+    )
+})

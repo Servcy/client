@@ -1,47 +1,43 @@
-import { useState, useRef } from "react";
-import { observer } from "mobx-react-lite";
-import { Draggable } from "@hello-pangea/dnd";
-import { MoreHorizontal } from "lucide-react";
-
-import { Tooltip, ControlLink } from "@servcy/ui";
-
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { cn } from "@helpers/common.helper";
-
-import { TIssue, TIssueMap } from "@servcy/types";
-import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store";
+import { useRef, useState } from "react"
+import { Draggable } from "@hello-pangea/dnd"
+import { cn } from "@helpers/common.helper"
+import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { MoreHorizontal } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TIssue, TIssueMap } from "@servcy/types"
+import { ControlLink, Tooltip } from "@servcy/ui"
 
 type Props = {
-    issues: TIssueMap | undefined;
-    issueIdList: string[] | null;
-    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode;
-    showAllIssues?: boolean;
-    isDragDisabled?: boolean;
-};
+    issues: TIssueMap | undefined
+    issueIdList: string[] | null
+    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
+    showAllIssues?: boolean
+    isDragDisabled?: boolean
+}
 
 export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
-    const { issues, issueIdList, quickActions, showAllIssues = false, isDragDisabled = false } = props;
+    const { issues, issueIdList, quickActions, showAllIssues = false, isDragDisabled = false } = props
 
     const {
         router: { workspaceSlug, projectId },
-    } = useApplication();
-    const { getProjectIdentifierById } = useProject();
-    const { getProjectStates } = useProjectState();
-    const { peekIssue, setPeekIssue } = useIssueDetail();
+    } = useApplication()
+    const { getProjectIdentifierById } = useProject()
+    const { getProjectStates } = useProjectState()
+    const { peekIssue, setPeekIssue } = useIssueDetail()
     // states
-    const [isMenuActive, setIsMenuActive] = useState(false);
+    const [isMenuActive, setIsMenuActive] = useState(false)
 
-    const menuActionRef = useRef<HTMLDivElement | null>(null);
+    const menuActionRef = useRef<HTMLDivElement | null>(null)
 
     const handleIssuePeekOverview = (issue: TIssue) =>
         workspaceSlug &&
         issue &&
         issue.project_id &&
         issue.id &&
-        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id });
+        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id })
 
-    useOutsideClickDetector(menuActionRef, () => setIsMenuActive(false));
+    useOutsideClickDetector(menuActionRef, () => setIsMenuActive(false))
 
     const customActionButton = (
         <div
@@ -53,17 +49,17 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
         >
             <MoreHorizontal className="h-3.5 w-3.5" />
         </div>
-    );
+    )
 
     return (
         <>
             {issueIdList?.slice(0, showAllIssues ? issueIdList.length : 4).map((issueId, index) => {
-                if (!issues?.[issueId]) return null;
+                if (!issues?.[issueId]) return null
 
-                const issue = issues?.[issueId];
+                const issue = issues?.[issueId]
 
                 const stateColor =
-                    getProjectStates(issue?.project_id)?.find((state) => state?.id == issue?.state_id)?.color || "";
+                    getProjectStates(issue?.project_id)?.find((state) => state?.id == issue?.state_id)?.color || ""
 
                 return (
                     <Draggable key={issue.id} draggableId={issue.id} index={index} isDragDisabled={isDragDisabled}>
@@ -120,8 +116,8 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                                             <div
                                                 className={`hidden h-5 w-5 group-hover/calendar-block:block ${isMenuActive ? "!block" : ""}`}
                                                 onClick={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
+                                                    e.preventDefault()
+                                                    e.stopPropagation()
                                                 }}
                                             >
                                                 {quickActions(issue, customActionButton)}
@@ -132,8 +128,8 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                             </div>
                         )}
                     </Draggable>
-                );
+                )
             })}
         </>
-    );
-});
+    )
+})

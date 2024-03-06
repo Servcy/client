@@ -1,33 +1,29 @@
-import { useEffect } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-
-import { useDashboard, useMember, useUser } from "@hooks/store";
-
-import { RecentCollaboratorsEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
-
-import { Avatar } from "@servcy/ui";
-
-import { TRecentCollaboratorsWidgetResponse } from "@servcy/types";
+import Link from "next/link"
+import { useEffect } from "react"
+import { RecentCollaboratorsEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
+import { useDashboard, useMember, useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TRecentCollaboratorsWidgetResponse } from "@servcy/types"
+import { Avatar } from "@servcy/ui"
 
 type CollaboratorListItemProps = {
-    issueCount: number;
-    userId: string;
-    workspaceSlug: string;
-};
+    issueCount: number
+    userId: string
+    workspaceSlug: string
+}
 
-const WIDGET_KEY = "recent_collaborators";
+const WIDGET_KEY = "recent_collaborators"
 
 const CollaboratorListItem: React.FC<CollaboratorListItemProps> = observer((props) => {
-    const { issueCount, userId, workspaceSlug } = props;
+    const { issueCount, userId, workspaceSlug } = props
     // store hooks
-    const { currentUser } = useUser();
-    const { getUserDetails } = useMember();
+    const { currentUser } = useUser()
+    const { getUserDetails } = useMember()
     // derived values
-    const userDetails = getUserDetails(userId);
-    const isCurrentUser = userId === currentUser?.id;
+    const userDetails = getUserDetails(userId)
+    const isCurrentUser = userId === currentUser?.id
 
-    if (!userDetails) return null;
+    if (!userDetails) return null
 
     return (
         <Link href={`/${workspaceSlug}/profile/${userId}`} className="group text-center">
@@ -47,23 +43,23 @@ const CollaboratorListItem: React.FC<CollaboratorListItemProps> = observer((prop
                 {issueCount} active issue{issueCount > 1 ? "s" : ""}
             </p>
         </Link>
-    );
-});
+    )
+})
 
 export const RecentCollaboratorsWidget: React.FC<WidgetProps> = observer((props) => {
-    const { dashboardId, workspaceSlug } = props;
+    const { dashboardId, workspaceSlug } = props
     // store hooks
-    const { fetchWidgetStats, getWidgetStats } = useDashboard();
-    const widgetStats = getWidgetStats<TRecentCollaboratorsWidgetResponse[]>(workspaceSlug, dashboardId, WIDGET_KEY);
+    const { fetchWidgetStats, getWidgetStats } = useDashboard()
+    const widgetStats = getWidgetStats<TRecentCollaboratorsWidgetResponse[]>(workspaceSlug, dashboardId, WIDGET_KEY)
 
     useEffect(() => {
         fetchWidgetStats(workspaceSlug, dashboardId, {
             widget_key: WIDGET_KEY,
-        });
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
-    if (!widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />;
+    if (!widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />
 
     return (
         <div className="bg-custom-background-100 rounded-xl border-[0.5px] border-custom-border-200 w-full hover:shadow-custom-shadow-4xl duration-300">
@@ -90,5 +86,5 @@ export const RecentCollaboratorsWidget: React.FC<WidgetProps> = observer((props)
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

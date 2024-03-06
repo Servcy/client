@@ -1,18 +1,16 @@
-import { APIService } from "@services/api.service";
-
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
 import type {
     IMarkAllAsReadPayload,
     INotificationParams,
     IUserNotification,
     NotificationCount,
     PaginatedUserNotification,
-} from "@servcy/types";
-
-import { API_BASE_URL } from "@helpers/common.helper";
+} from "@servcy/types"
 
 export class NotificationService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async getUserNotifications(workspaceSlug: string, params: INotificationParams): Promise<IUserNotification[]> {
@@ -21,48 +19,48 @@ export class NotificationService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getUserNotificationDetailById(workspaceSlug: string, notificationId: string): Promise<IUserNotification> {
         return this.get(`/api/workspaces/${workspaceSlug}/users/notifications/${notificationId}/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async markUserNotificationAsRead(workspaceSlug: string, notificationId: string): Promise<IUserNotification> {
         return this.post(`/api/workspaces/${workspaceSlug}/users/notifications/${notificationId}/read/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async markUserNotificationAsUnread(workspaceSlug: string, notificationId: string): Promise<IUserNotification> {
         return this.delete(`/api/workspaces/${workspaceSlug}/users/notifications/${notificationId}/read/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async markUserNotificationAsArchived(workspaceSlug: string, notificationId: string): Promise<IUserNotification> {
         return this.post(`/api/workspaces/${workspaceSlug}/users/notifications/${notificationId}/archive/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async markUserNotificationAsUnarchived(workspaceSlug: string, notificationId: string): Promise<IUserNotification> {
         return this.delete(`/api/workspaces/${workspaceSlug}/users/notifications/${notificationId}/archive/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async patchUserNotification(
@@ -73,24 +71,24 @@ export class NotificationService extends APIService {
         return this.patch(`/api/workspaces/${workspaceSlug}/users/notifications/${notificationId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async deleteUserNotification(workspaceSlug: string, notificationId: string): Promise<any> {
         return this.delete(`/api/workspaces/${workspaceSlug}/users/notifications/${notificationId}/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async subscribeToIssueNotifications(workspaceSlug: string, projectId: string, issueId: string): Promise<any> {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/subscribe/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getIssueNotificationSubscriptionStatus(
@@ -98,37 +96,37 @@ export class NotificationService extends APIService {
         projectId: string,
         issueId: string
     ): Promise<{
-        subscribed: boolean;
+        subscribed: boolean
     }> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/subscribe/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async unsubscribeFromIssueNotifications(workspaceSlug: string, projectId: string, issueId: string): Promise<any> {
         return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/subscribe/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getUnreadNotificationsCount(workspaceSlug: string): Promise<NotificationCount> {
         return this.get(`/api/workspaces/${workspaceSlug}/users/notifications/unread/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getNotifications(url: string): Promise<PaginatedUserNotification> {
         return this.get(url)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async markAllNotificationsAsRead(workspaceSlug: string, payload: IMarkAllAsReadPayload): Promise<any> {
@@ -137,7 +135,7 @@ export class NotificationService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

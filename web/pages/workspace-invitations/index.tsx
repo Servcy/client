@@ -1,41 +1,34 @@
-import { Boxes, Check, Share2, Star, User2, X } from "lucide-react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
-import useSWR from "swr";
+import { useRouter } from "next/router"
+import { ReactElement } from "react"
+import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space"
+import { WORKSPACE_INVITATION } from "@constants/fetch-keys"
+import { useUser } from "@hooks/store"
+import DefaultLayout from "@layouts/DefaultLayout"
+import { WorkspaceService } from "@services/workspace.service"
+import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { Spinner } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
-import { useUser } from "@hooks/store";
-
-import { WorkspaceService } from "@services/workspace.service";
-
-import DefaultLayout from "@layouts/DefaultLayout";
-
-import { Spinner } from "@servcy/ui";
-
-import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { WORKSPACE_INVITATION } from "@constants/fetch-keys";
-
-const workspaceService = new WorkspaceService();
+const workspaceService = new WorkspaceService()
 
 const WorkspaceInvitationPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { invitation_id, email, slug } = router.query;
+    const router = useRouter()
+    const { invitation_id, email, slug } = router.query
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
 
     const { data: invitationDetail, error } = useSWR(
         invitation_id && slug && WORKSPACE_INVITATION(invitation_id.toString()),
         invitation_id && slug
             ? () => workspaceService.getWorkspaceInvitation(slug.toString(), invitation_id.toString())
             : null
-    );
+    )
 
     const handleAccept = () => {
-        if (!invitationDetail) return;
+        if (!invitationDetail) return
         workspaceService
             .joinWorkspace(invitationDetail.workspace.slug, invitationDetail.id, {
                 accepted: true,
@@ -43,26 +36,26 @@ const WorkspaceInvitationPage: NextPageWithLayout = observer(() => {
             })
             .then(() => {
                 if (email === currentUser?.email) {
-                    router.push("/invitations");
+                    router.push("/invitations")
                 } else {
-                    router.push("/");
+                    router.push("/")
                 }
             })
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
     const handleReject = () => {
-        if (!invitationDetail) return;
+        if (!invitationDetail) return
         workspaceService
             .joinWorkspace(invitationDetail.workspace.slug, invitationDetail.id, {
                 accepted: false,
                 email: invitationDetail.email,
             })
             .then(() => {
-                router.push("/");
+                router.push("/")
             })
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
     return (
         <div className="flex h-full w-full flex-col items-center justify-center px-3">
@@ -119,11 +112,11 @@ const WorkspaceInvitationPage: NextPageWithLayout = observer(() => {
                 </div>
             )}
         </div>
-    );
-});
+    )
+})
 
 WorkspaceInvitationPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <DefaultLayout>{page}</DefaultLayout>;
-};
+    return <DefaultLayout>{page}</DefaultLayout>
+}
 
-export default WorkspaceInvitationPage;
+export default WorkspaceInvitationPage

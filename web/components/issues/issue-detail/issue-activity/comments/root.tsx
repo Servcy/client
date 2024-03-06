@@ -1,28 +1,25 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueCommentCard } from "./comment-card";
-
-import { TActivityOperations } from "../root";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TActivityOperations } from "../root"
+import { IssueCommentCard } from "./comment-card"
 
 type TIssueCommentRoot = {
-    workspaceSlug: string;
-    issueId: string;
-    activityOperations: TActivityOperations;
-    showAccessSpecifier?: boolean;
-};
+    workspaceSlug: string
+    issueId: string
+    activityOperations: TActivityOperations
+    showAccessSpecifier?: boolean
+}
 
 export const IssueCommentRoot: FC<TIssueCommentRoot> = observer((props) => {
-    const { workspaceSlug, issueId, activityOperations, showAccessSpecifier } = props;
+    const { workspaceSlug, issueId, activityOperations, showAccessSpecifier } = props
 
     const {
         comment: { getCommentsByIssueId },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const commentIds = getCommentsByIssueId(issueId);
-    if (!commentIds) return <></>;
+    const commentIds = getCommentsByIssueId(issueId)
+    if (!commentIds) return <></>
 
     return (
         <div>
@@ -36,5 +33,5 @@ export const IssueCommentRoot: FC<TIssueCommentRoot> = observer((props) => {
                 />
             ))}
         </div>
-    );
-});
+    )
+})

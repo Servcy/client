@@ -1,66 +1,60 @@
-import { useCallback, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useLabel, useMember, useUser, useIssues } from "@hooks/store";
-
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues";
-import { CreateUpdateWorkspaceViewModal } from "@components/workspace";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-
-import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui";
-
-import { List, PlusIcon, Sheet } from "lucide-react";
-
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types";
-
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useCallback, useState } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues"
+import { CreateUpdateWorkspaceViewModal } from "@components/workspace"
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useIssues, useLabel, useMember, useUser } from "@hooks/store"
+import { List, PlusIcon, Sheet } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types"
+import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui"
 
 const GLOBAL_VIEW_LAYOUTS = [
     { key: "list", title: "List", link: "/workspace-views", icon: List },
     { key: "spreadsheet", title: "Spreadsheet", link: "/workspace-views/all-issues", icon: Sheet },
-];
+]
 
 type Props = {
-    activeLayout: "list" | "spreadsheet";
-};
+    activeLayout: "list" | "spreadsheet"
+}
 
 export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
-    const { activeLayout } = props;
+    const { activeLayout } = props
     // states
-    const [createViewModal, setCreateViewModal] = useState(false);
+    const [createViewModal, setCreateViewModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, globalViewId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, globalViewId } = router.query
     // store hooks
     const {
         issuesFilter: { filters, updateFilters },
-    } = useIssues(EIssuesStoreType.GLOBAL);
+    } = useIssues(EIssuesStoreType.GLOBAL)
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { workspaceLabels } = useLabel();
+    } = useUser()
+    const { workspaceLabels } = useLabel()
     const {
         workspace: { workspaceMemberIds },
-    } = useMember();
+    } = useMember()
 
-    const issueFilters = globalViewId ? filters[globalViewId.toString()] : undefined;
+    const issueFilters = globalViewId ? filters[globalViewId.toString()] : undefined
 
     const handleFiltersUpdate = useCallback(
         (key: keyof IIssueFilterOptions, value: string | string[]) => {
-            if (!workspaceSlug || !globalViewId) return;
-            const newValues = issueFilters?.filters?.[key] ?? [];
+            if (!workspaceSlug || !globalViewId) return
+            const newValues = issueFilters?.filters?.[key] ?? []
 
             if (Array.isArray(value)) {
                 value.forEach((val) => {
-                    if (!newValues.includes(val)) newValues.push(val);
-                });
+                    if (!newValues.includes(val)) newValues.push(val)
+                })
             } else {
-                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
-                else newValues.push(value);
+                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                else newValues.push(value)
             }
 
             updateFilters(
@@ -69,40 +63,40 @@ export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
                 EIssueFilterType.FILTERS,
                 { [key]: newValues },
                 globalViewId.toString()
-            );
+            )
         },
         [workspaceSlug, issueFilters, updateFilters, globalViewId]
-    );
+    )
 
     const handleDisplayFilters = useCallback(
         (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-            if (!workspaceSlug || !globalViewId) return;
+            if (!workspaceSlug || !globalViewId) return
             updateFilters(
                 workspaceSlug.toString(),
                 undefined,
                 EIssueFilterType.DISPLAY_FILTERS,
                 updatedDisplayFilter,
                 globalViewId.toString()
-            );
+            )
         },
         [workspaceSlug, updateFilters, globalViewId]
-    );
+    )
 
     const handleDisplayProperties = useCallback(
         (property: Partial<IIssueDisplayProperties>) => {
-            if (!workspaceSlug || !globalViewId) return;
+            if (!workspaceSlug || !globalViewId) return
             updateFilters(
                 workspaceSlug.toString(),
                 undefined,
                 EIssueFilterType.DISPLAY_PROPERTIES,
                 property,
                 globalViewId.toString()
-            );
+            )
         },
         [workspaceSlug, updateFilters, globalViewId]
-    );
+    )
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
 
     return (
         <>
@@ -188,5 +182,5 @@ export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

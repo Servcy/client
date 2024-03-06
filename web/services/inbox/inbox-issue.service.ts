@@ -1,12 +1,10 @@
-import { APIService } from "@services/api.service";
-
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import type { TInboxDetailedStatus, TInboxIssueExtendedDetail, TInboxIssueFilterOptions, TIssue } from "@servcy/types";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import type { TInboxDetailedStatus, TInboxIssueExtendedDetail, TInboxIssueFilterOptions, TIssue } from "@servcy/types"
 
 export class InboxIssueService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async fetchInboxIssues(
@@ -23,8 +21,8 @@ export class InboxIssueService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async fetchInboxIssueById(
@@ -38,8 +36,8 @@ export class InboxIssueService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async createInboxIssue(
@@ -47,8 +45,8 @@ export class InboxIssueService extends APIService {
         projectId: string,
         inboxId: string,
         data: {
-            source: string;
-            issue: Partial<TIssue>;
+            source: string
+            issue: Partial<TIssue>
         }
     ): Promise<TInboxIssueExtendedDetail> {
         return this.post(
@@ -57,8 +55,8 @@ export class InboxIssueService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async updateInboxIssue(
@@ -74,8 +72,8 @@ export class InboxIssueService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async removeInboxIssue(
@@ -89,8 +87,8 @@ export class InboxIssueService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async updateInboxIssueStatus(
@@ -106,7 +104,7 @@ export class InboxIssueService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

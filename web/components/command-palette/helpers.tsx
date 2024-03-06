@@ -1,19 +1,19 @@
-import { ContrastIcon, DiceIcon, LayersIcon, PhotoFilterIcon } from "@servcy/ui";
-import { Briefcase, FileText, LayoutGrid } from "lucide-react";
+import { Briefcase, FileText, LayoutGrid } from "lucide-react"
 import {
     IWorkspaceDefaultSearchResult,
     IWorkspaceIssueSearchResult,
     IWorkspaceProjectSearchResult,
     IWorkspaceSearchResult,
-} from "@servcy/types";
+} from "@servcy/types"
+import { ContrastIcon, DiceIcon, LayersIcon, PhotoFilterIcon } from "@servcy/ui"
 
 export const commandGroups: {
     [key: string]: {
-        icon: JSX.Element;
-        itemName: (item: any) => React.ReactNode;
-        path: (item: any) => string;
-        title: string;
-    };
+        icon: JSX.Element
+        itemName: (item: any) => React.ReactNode
+        path: (item: any) => string
+        title: string
+    }
 } = {
     cycle: {
         icon: <ContrastIcon className="h-3 w-3" />,
@@ -86,4 +86,4 @@ export const commandGroups: {
         path: (workspace: IWorkspaceSearchResult) => `/${workspace?.slug}/`,
         title: "Workspaces",
     },
-};
+}

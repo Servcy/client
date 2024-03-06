@@ -1,25 +1,22 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-
-import { useApplication } from "@hooks/store";
-
-import { TIssue } from "@servcy/types";
-
-import { cn } from "@helpers/common.helper";
+import { useRouter } from "next/router"
+import React from "react"
+import { cn } from "@helpers/common.helper"
+import { useApplication } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
 
 type Props = {
-    issue: TIssue;
-};
+    issue: TIssue
+}
 
 export const SpreadsheetSubIssueColumn: React.FC<Props> = observer((props: Props) => {
-    const { issue } = props;
+    const { issue } = props
     // router
-    const router = useRouter();
+    const router = useRouter()
 
     const {
         router: { workspaceSlug },
-    } = useApplication();
+    } = useApplication()
 
     const redirectToIssueDetail = () => {
         router.push({
@@ -27,8 +24,8 @@ export const SpreadsheetSubIssueColumn: React.FC<Props> = observer((props: Props
                 issue.id
             }`,
             hash: "sub-issues",
-        });
-    };
+        })
+    }
 
     return (
         <div
@@ -42,5 +39,5 @@ export const SpreadsheetSubIssueColumn: React.FC<Props> = observer((props: Props
         >
             {issue?.sub_issues_count} {issue?.sub_issues_count === 1 ? "sub-issue" : "sub-issues"}
         </div>
-    );
-});
+    )
+})

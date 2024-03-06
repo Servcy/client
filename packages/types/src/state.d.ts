@@ -1,26 +1,26 @@
-import { IProject, IProjectLite, IWorkspaceLite } from "@servcy/types";
+import { IProject, IProjectLite, IWorkspaceLite } from "@servcy/types"
 
-export type TStateGroups = "backlog" | "unstarted" | "started" | "completed" | "cancelled";
+export type TStateGroups = "backlog" | "unstarted" | "started" | "completed" | "cancelled"
 
 export interface IState {
-    readonly id: string;
-    color: string;
-    default: boolean;
-    description: string;
-    group: TStateGroups;
-    name: string;
-    project_id: string;
-    sequence: number;
-    workspace_id: string;
+    readonly id: string
+    color: string
+    default: boolean
+    description: string
+    group: TStateGroups
+    name: string
+    project_id: string
+    sequence: number
+    workspace_id: string
 }
 
 export interface IStateLite {
-    color: string;
-    group: TStateGroups;
-    id: string;
-    name: string;
+    color: string
+    group: TStateGroups
+    id: string
+    name: string
 }
 
 export interface IStateResponse {
-    [key: string]: IState[];
+    [key: string]: IState[]
 }

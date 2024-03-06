@@ -1,18 +1,15 @@
-import cn from "classnames";
-
-import { InboxItem, PaginationDetails } from "@/types/apps/inbox";
-import type { ColumnsType } from "antd/es/table";
-import React, { Dispatch, SetStateAction } from "react";
-
-import { SyncOutlined } from "@ant-design/icons";
-import { Avatar, Button, ConfigProvider, Spin, Table, Tooltip } from "antd";
-import Image from "next/image";
-import toast from "react-hot-toast";
-import { HiArchiveBoxArrowDown } from "react-icons/hi2";
-import { MdOutlineBlock } from "react-icons/md";
-import Cause from "./Cause";
-
-import { disableNotificationType } from "@/apis/integration";
+import Image from "next/image"
+import React, { Dispatch, SetStateAction } from "react"
+import { disableNotificationType } from "@/apis/integration"
+import { SyncOutlined } from "@ant-design/icons"
+import { Avatar, Button, ConfigProvider, Spin, Table, Tooltip } from "antd"
+import type { ColumnsType } from "antd/es/table"
+import cn from "classnames"
+import toast from "react-hot-toast"
+import { HiArchiveBoxArrowDown } from "react-icons/hi2"
+import { MdOutlineBlock } from "react-icons/md"
+import { InboxItem, PaginationDetails } from "@/types/apps/inbox"
+import Cause from "./Cause"
 
 const InboxItems = ({
     setPage,
@@ -28,37 +25,37 @@ const InboxItems = ({
     readItem,
     activeTab,
 }: {
-    setPage: Dispatch<SetStateAction<number>>;
-    page: number;
-    readItem: (id: string | undefined) => void;
-    inboxItems: InboxItem[];
-    inboxPagination: PaginationDetails;
-    loading: boolean;
-    activeTab: string;
-    archiveItems: (_: React.Key[]) => void;
-    deleteItems: (_: number[]) => void;
-    setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>;
-    setSelectedRowIndex: Dispatch<SetStateAction<number>>;
-    setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>;
+    setPage: Dispatch<SetStateAction<number>>
+    page: number
+    readItem: (id: string | undefined) => void
+    inboxItems: InboxItem[]
+    inboxPagination: PaginationDetails
+    loading: boolean
+    activeTab: string
+    archiveItems: (_: React.Key[]) => void
+    deleteItems: (_: number[]) => void
+    setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
+    setSelectedRowIndex: Dispatch<SetStateAction<number>>
+    setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
 }) => {
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[]) => {
-            setSelectedItemIds(selectedRowKeys);
+            setSelectedItemIds(selectedRowKeys)
         },
         getCheckboxProps: (record: InboxItem) => ({
             name: record.id,
         }),
-    };
+    }
 
     const disableNotificationTypeHandler = (event: string, user_integration_id: number) => {
         disableNotificationType({ event, user_integration_id })
             .then(() => {
-                toast.success("Notification type disabled successfully");
+                toast.success("Notification type disabled successfully")
             })
             .catch(() => {
-                toast.error("Error in disabling notification type");
-            });
-    };
+                toast.error("Error in disabling notification type")
+            })
+    }
 
     const columns: ColumnsType<InboxItem> = [
         {
@@ -68,9 +65,9 @@ const InboxItems = ({
                 <button
                     className="cursor-pointer text-left"
                     onClick={() => {
-                        setSelectedRowIndex(index);
-                        setIsInboxItemModalVisible(true);
-                        !row.is_read && readItem(row.id);
+                        setSelectedRowIndex(index)
+                        setIsInboxItemModalVisible(true)
+                        !row.is_read && readItem(row.id)
                     }}
                 >
                     {title}
@@ -139,8 +136,8 @@ const InboxItems = ({
                             })}
                             size="small"
                             onClick={() => {
-                                if (activeTab !== "archived") archiveItems([parseInt(id)]);
-                                else deleteItems([parseInt(id)]);
+                                if (activeTab !== "archived") archiveItems([parseInt(id)])
+                                else deleteItems([parseInt(id)])
                             }}
                             icon={<HiArchiveBoxArrowDown className="mt-1" />}
                         />
@@ -153,7 +150,7 @@ const InboxItems = ({
                                 size="small"
                                 icon={<MdOutlineBlock className="mt-1" />}
                                 onClick={() => {
-                                    disableNotificationTypeHandler(record.body, record.user_integration_id);
+                                    disableNotificationTypeHandler(record.body, record.user_integration_id)
                                 }}
                             />
                         </Tooltip>
@@ -161,7 +158,7 @@ const InboxItems = ({
                 </div>
             ),
         },
-    ];
+    ]
 
     return (
         <ConfigProvider
@@ -214,12 +211,12 @@ const InboxItems = ({
                     pageSize: 50,
                     total: inboxPagination.total_items,
                     onChange: (page) => {
-                        setPage(page);
+                        setPage(page)
                     },
                 }}
             />
         </ConfigProvider>
-    );
-};
+    )
+}
 
-export default InboxItems;
+export default InboxItems

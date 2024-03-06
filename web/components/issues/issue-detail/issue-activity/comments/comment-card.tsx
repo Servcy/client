@@ -1,49 +1,43 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Check, Globe2, Lock, Pencil, Trash2, X } from "lucide-react";
+import { FC, useEffect, useRef, useState } from "react"
+import { isEmptyHtmlString } from "@helpers/string.helper"
+import { useIssueDetail, useMention, useUser, useWorkspace } from "@hooks/store"
+import { FileService } from "@services/file.service"
+import { Check, Globe2, Lock, Pencil, Trash2, X } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { LiteReadOnlyEditorWithRef, LiteTextEditorWithRef } from "@servcy/lite-text-editor"
+import { TIssueComment } from "@servcy/types"
+import { CustomMenu } from "@servcy/ui"
+import { IssueCommentReaction } from "../../reactions/issue-comment"
+import { TActivityOperations } from "../root"
+import { IssueCommentBlock } from "./comment-block"
 
-import { useIssueDetail, useMention, useUser, useWorkspace } from "@hooks/store";
-
-import { IssueCommentBlock } from "./comment-block";
-import { LiteTextEditorWithRef, LiteReadOnlyEditorWithRef } from "@servcy/lite-text-editor";
-import { IssueCommentReaction } from "../../reactions/issue-comment";
-
-import { CustomMenu } from "@servcy/ui";
-
-import { FileService } from "@services/file.service";
-
-import { TIssueComment } from "@servcy/types";
-import { TActivityOperations } from "../root";
-
-import { isEmptyHtmlString } from "@helpers/string.helper";
-
-const fileService = new FileService();
+const fileService = new FileService()
 
 type TIssueCommentCard = {
-    workspaceSlug: string;
-    commentId: string;
-    activityOperations: TActivityOperations;
-    ends: "top" | "bottom" | undefined;
-    showAccessSpecifier?: boolean;
-};
+    workspaceSlug: string
+    commentId: string
+    activityOperations: TActivityOperations
+    ends: "top" | "bottom" | undefined
+    showAccessSpecifier?: boolean
+}
 
 export const IssueCommentCard: FC<TIssueCommentCard> = (props) => {
-    const { workspaceSlug, commentId, activityOperations, ends, showAccessSpecifier = false } = props;
+    const { workspaceSlug, commentId, activityOperations, ends, showAccessSpecifier = false } = props
 
     const {
         comment: { getCommentById },
-    } = useIssueDetail();
-    const { currentUser } = useUser();
-    const { mentionHighlights, mentionSuggestions } = useMention();
+    } = useIssueDetail()
+    const { currentUser } = useUser()
+    const { mentionHighlights, mentionSuggestions } = useMention()
     // refs
-    const editorRef = useRef<any>(null);
-    const showEditorRef = useRef<any>(null);
+    const editorRef = useRef<any>(null)
+    const showEditorRef = useRef<any>(null)
     // state
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(false)
 
-    const comment = getCommentById(commentId);
-    const workspaceStore = useWorkspace();
-    const workspaceId = workspaceStore.getWorkspaceBySlug(comment?.workspace_detail?.slug as string)?.id as string;
+    const comment = getCommentById(commentId)
+    const workspaceStore = useWorkspace()
+    const workspaceId = workspaceStore.getWorkspaceBySlug(comment?.workspace_detail?.slug as string)?.id as string
 
     const {
         formState: { isSubmitting },
@@ -53,29 +47,29 @@ export const IssueCommentCard: FC<TIssueCommentCard> = (props) => {
         setValue,
     } = useForm<Partial<TIssueComment>>({
         defaultValues: { comment_html: comment?.comment_html },
-    });
+    })
 
     const onEnter = (formData: Partial<TIssueComment>) => {
-        if (isSubmitting || !comment) return;
-        setIsEditing(false);
+        if (isSubmitting || !comment) return
+        setIsEditing(false)
 
-        activityOperations.updateComment(comment.id, formData);
+        activityOperations.updateComment(comment.id, formData)
 
-        editorRef.current?.setEditorValue(formData.comment_html);
-        showEditorRef.current?.setEditorValue(formData.comment_html);
-    };
+        editorRef.current?.setEditorValue(formData.comment_html)
+        showEditorRef.current?.setEditorValue(formData.comment_html)
+    }
 
     useEffect(() => {
-        isEditing && setFocus("comment_html");
-    }, [isEditing, setFocus]);
+        isEditing && setFocus("comment_html")
+    }, [isEditing, setFocus])
 
     const isEmpty =
         watch("comment_html") === "" ||
         watch("comment_html")?.trim() === "" ||
         watch("comment_html") === "<p></p>" ||
-        isEmptyHtmlString(watch("comment_html") ?? "");
+        isEmptyHtmlString(watch("comment_html") ?? "")
 
-    if (!comment || !currentUser) return <></>;
+    if (!comment || !currentUser) return <></>
     return (
         <IssueCommentBlock
             commentId={commentId}
@@ -130,7 +124,7 @@ export const IssueCommentCard: FC<TIssueCommentCard> = (props) => {
                     <div
                         onKeyDown={(e) => {
                             if (e.key === "Enter" && !e.shiftKey && !isEmpty) {
-                                handleSubmit(onEnter)(e);
+                                handleSubmit(onEnter)(e)
                             }
                         }}
                     >
@@ -198,5 +192,5 @@ export const IssueCommentCard: FC<TIssueCommentCard> = (props) => {
                 </div>
             </>
         </IssueCommentBlock>
-    );
-};
+    )
+}

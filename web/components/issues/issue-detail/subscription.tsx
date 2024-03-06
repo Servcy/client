@@ -1,60 +1,58 @@
-import { Bell, BellOff } from "lucide-react";
-import { observer } from "mobx-react-lite";
-import { FC, useState } from "react";
-
-import { Button, Loader } from "@servcy/ui";
-
-import { useIssueDetail } from "@hooks/store";
-import toast from "react-hot-toast";
-import isNil from "lodash/isNil";
+import { FC, useState } from "react"
+import { useIssueDetail } from "@hooks/store"
+import isNil from "lodash/isNil"
+import { Bell, BellOff } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { Button, Loader } from "@servcy/ui"
 
 export type TIssueSubscription = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+}
 
 export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
-    const { workspaceSlug, projectId, issueId } = props;
+    const { workspaceSlug, projectId, issueId } = props
 
     const {
         subscription: { getSubscriptionByIssueId },
         createSubscription,
         removeSubscription,
-    } = useIssueDetail();
+    } = useIssueDetail()
 
     // state
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
 
-    const isSubscribed = getSubscriptionByIssueId(issueId);
+    const isSubscribed = getSubscriptionByIssueId(issueId)
 
     const handleSubscription = async () => {
-        setLoading(true);
+        setLoading(true)
         try {
-            if (isSubscribed) await removeSubscription(workspaceSlug, projectId, issueId);
-            else await createSubscription(workspaceSlug, projectId, issueId);
+            if (isSubscribed) await removeSubscription(workspaceSlug, projectId, issueId)
+            else await createSubscription(workspaceSlug, projectId, issueId)
             toast.error({
                 type: "success",
                 title: `Issue ${isSubscribed ? `unsubscribed` : `subscribed`} successfully.!`,
                 message: `Issue ${isSubscribed ? `unsubscribed` : `subscribed`} successfully.!`,
-            });
-            setLoading(false);
+            })
+            setLoading(false)
         } catch (error) {
-            setLoading(false);
+            setLoading(false)
             toast.error({
                 type: "error",
                 title: "Error",
                 message: "Something went wrong. Please try again later.",
-            });
+            })
         }
-    };
+    }
 
     if (isNil(isSubscribed))
         return (
             <Loader>
                 <Loader.Item width="106px" height="28px" />
             </Loader>
-        );
+        )
 
     return (
         <div>
@@ -76,5 +74,5 @@ export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
                 )}
             </Button>
         </div>
-    );
-});
+    )
+})

@@ -1,4 +1,4 @@
-import { getRandomLength } from "../utils";
+import { getRandomLength } from "../utils"
 
 export const ActivitySettingsLoader = () => (
     <div className="flex flex-col gap-3 animate-pulse">
@@ -9,4 +9,4 @@ export const ActivitySettingsLoader = () => (
             </div>
         ))}
     </div>
-);
+)

@@ -1,50 +1,47 @@
-import { useEffect, useState } from "react";
-
-import { Integration, IntegrationEvent, UserIntegration } from "@/types/apps/integration";
-
-import { Card, Checkbox, Modal } from "antd";
-import FigmaConfiguration from "./FigmaConfiguration";
-import GithubConfiguration from "./GithubConfiguration";
-import GoogleConfiguration from "./GoogleConfiguration";
-import MicrosoftConfiguration from "./MicrosoftConfiguration";
-
+import { useEffect, useState } from "react"
 import {
     disableIntegrationEvent,
     enableIntegrationEvent,
     fetchIntegrationEvents,
     fetchUserIntegrations,
-} from "@/apis/integration";
+} from "@/apis/integration"
+import { Card, Checkbox, Modal } from "antd"
+import { Integration, IntegrationEvent, UserIntegration } from "@/types/apps/integration"
+import FigmaConfiguration from "./FigmaConfiguration"
+import GithubConfiguration from "./GithubConfiguration"
+import GoogleConfiguration from "./GoogleConfiguration"
+import MicrosoftConfiguration from "./MicrosoftConfiguration"
 
 export default function IntegrationConfigurationModal({
     selectedIntegration,
     onClose,
 }: {
-    selectedIntegration: Integration;
-    onClose: () => void;
+    selectedIntegration: Integration
+    onClose: () => void
 }) {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [events, setEvents] = useState<IntegrationEvent[]>([]);
-    const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([]);
+    const [loading, setLoading] = useState<boolean>(false)
+    const [events, setEvents] = useState<IntegrationEvent[]>([])
+    const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([])
 
     useEffect(() => {
-        setLoading(true);
+        setLoading(true)
         fetchUserIntegrations(selectedIntegration.name)
             .then((response) => {
-                setUserIntegrations(response);
+                setUserIntegrations(response)
             })
             .catch((error) => {
-                console.error("Error fetching user integrations", error);
-            });
+                console.error("Error fetching user integrations", error)
+            })
         fetchIntegrationEvents(String(selectedIntegration.id))
             .then((events) => {
-                setEvents(JSON.parse(events));
+                setEvents(JSON.parse(events))
             })
             .finally(() => {
                 setTimeout(() => {
-                    setLoading(false);
-                }, 1000);
-            });
-    }, [selectedIntegration.id, selectedIntegration.name]);
+                    setLoading(false)
+                }, 1000)
+            })
+    }, [selectedIntegration.id, selectedIntegration.name])
 
     const handleEnableEvent = (event: IntegrationEvent) => {
         enableIntegrationEvent({
@@ -57,13 +54,13 @@ export default function IntegrationConfigurationModal({
                         return {
                             ...e,
                             is_disabled: false,
-                        };
+                        }
                     }
-                    return e;
+                    return e
                 })
-            );
-        });
-    };
+            )
+        })
+    }
 
     const handleDisableEvent = (event: IntegrationEvent) => {
         disableIntegrationEvent({
@@ -76,13 +73,13 @@ export default function IntegrationConfigurationModal({
                         return {
                             ...e,
                             is_disabled: true,
-                        };
+                        }
                     }
-                    return e;
+                    return e
                 })
-            );
-        });
-    };
+            )
+        })
+    }
 
     return (
         <Modal
@@ -133,9 +130,9 @@ export default function IntegrationConfigurationModal({
                                     checked={!event.is_disabled}
                                     onChange={(e) => {
                                         if (e.target.checked) {
-                                            handleEnableEvent(event);
+                                            handleEnableEvent(event)
                                         } else {
-                                            handleDisableEvent(event);
+                                            handleDisableEvent(event)
                                         }
                                     }}
                                 />
@@ -166,5 +163,5 @@ export default function IntegrationConfigurationModal({
                 </Card>
             )}
         </Modal>
-    );
+    )
 }

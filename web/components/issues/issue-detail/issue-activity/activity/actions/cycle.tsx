@@ -1,24 +1,21 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react"
+import { ContrastIcon } from "@servcy/ui"
+import { IssueActivityBlockComponent } from "./"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent } from "./";
-
-import { ContrastIcon } from "@servcy/ui";
-
-type TIssueCycleActivity = { activityId: string; ends: "top" | "bottom" | undefined };
+type TIssueCycleActivity = { activityId: string; ends: "top" | "bottom" | undefined }
 
 export const IssueCycleActivity: FC<TIssueCycleActivity> = observer((props) => {
-    const { activityId, ends } = props;
+    const { activityId, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             icon={<ContrastIcon className="h-4 w-4 flex-shrink-0 text-[#6b7280]" />}
@@ -65,5 +62,5 @@ export const IssueCycleActivity: FC<TIssueCycleActivity> = observer((props) => {
                 )}
             </>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

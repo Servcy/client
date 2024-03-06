@@ -1,60 +1,58 @@
-import { useEffect, useState, Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { AlertTriangle } from "lucide-react";
-
-import { Button } from "@servcy/ui";
-import toast from "react-hot-toast";
-
-import { useIssues } from "@hooks/store/use-issues";
-import { TIssue } from "@servcy/types";
-import { useProject } from "@hooks/store";
+import { Fragment, useEffect, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProject } from "@hooks/store"
+import { useIssues } from "@hooks/store/use-issues"
+import { AlertTriangle } from "lucide-react"
+import toast from "react-hot-toast"
+import { TIssue } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    handleClose: () => void;
-    dataId?: string | null | undefined;
-    data?: TIssue;
-    onSubmit?: () => Promise<void>;
-};
+    isOpen: boolean
+    handleClose: () => void
+    dataId?: string | null | undefined
+    data?: TIssue
+    onSubmit?: () => Promise<void>
+}
 
 export const DeleteIssueModal: React.FC<Props> = (props) => {
-    const { dataId, data, isOpen, handleClose, onSubmit } = props;
+    const { dataId, data, isOpen, handleClose, onSubmit } = props
 
-    const { issueMap } = useIssues();
+    const { issueMap } = useIssues()
 
-    const [isDeleting, setIsDeleting] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false)
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
 
     useEffect(() => {
-        setIsDeleting(false);
-    }, [isOpen]);
+        setIsDeleting(false)
+    }, [isOpen])
 
-    if (!dataId && !data) return null;
+    if (!dataId && !data) return null
 
-    const issue = data ? data : issueMap[dataId!];
+    const issue = data ? data : issueMap[dataId!]
 
     const onClose = () => {
-        setIsDeleting(false);
-        handleClose();
-    };
+        setIsDeleting(false)
+        handleClose()
+    }
 
     const handleIssueDelete = async () => {
-        setIsDeleting(true);
+        setIsDeleting(true)
         if (onSubmit)
             await onSubmit()
                 .then(() => {
-                    onClose();
+                    onClose()
                 })
                 .catch(() => {
                     toast.error({
                         title: "Error",
                         type: "error",
                         message: "Failed to delete issue",
-                    });
+                    })
                 })
-                .finally(() => setIsDeleting(false));
-    };
+                .finally(() => setIsDeleting(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -123,5 +121,5 @@ export const DeleteIssueModal: React.FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

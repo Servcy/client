@@ -1,41 +1,36 @@
-import { FC, useEffect, useState } from "react";
-import { observer } from "mobx-react";
-
-import { useGanttChart } from "../hooks/use-gantt-chart";
-
-import { GanttChartHeader, GanttChartMainContent } from "@components/gantt-chart";
+import { FC, useEffect, useState } from "react"
+import { GanttChartHeader, GanttChartMainContent } from "@components/gantt-chart"
+import { cn } from "@helpers/common.helper"
+import { observer } from "mobx-react"
+import { SIDEBAR_WIDTH } from "../constants"
+// data
+import { currentViewDataWithView } from "../data"
+import { useGanttChart } from "../hooks/use-gantt-chart"
+import { ChartDataType, IBlockUpdateData, IGanttBlock, TGanttViews } from "../types"
 // views
 import {
     generateMonthChart,
-    getNumberOfDaysBetweenTwoDatesInMonth,
     getMonthChartItemPositionWidthInMonth,
-} from "../views";
-
-import { cn } from "@helpers/common.helper";
-
-import { ChartDataType, IBlockUpdateData, IGanttBlock, TGanttViews } from "../types";
-// data
-import { currentViewDataWithView } from "../data";
-
-import { SIDEBAR_WIDTH } from "../constants";
+    getNumberOfDaysBetweenTwoDatesInMonth,
+} from "../views"
 
 type ChartViewRootProps = {
-    border: boolean;
-    title: string;
-    loaderTitle: string;
-    blocks: IGanttBlock[] | null;
-    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void;
-    blockToRender: (data: any) => React.ReactNode;
-    sidebarToRender: (props: any) => React.ReactNode;
-    enableBlockLeftResize: boolean;
-    enableBlockRightResize: boolean;
-    enableBlockMove: boolean;
-    enableReorder: boolean;
-    enableAddBlock: boolean;
-    bottomSpacing: boolean;
-    showAllBlocks: boolean;
-    quickAdd?: React.JSX.Element | undefined;
-};
+    border: boolean
+    title: string
+    loaderTitle: string
+    blocks: IGanttBlock[] | null
+    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void
+    blockToRender: (data: any) => React.ReactNode
+    sidebarToRender: (props: any) => React.ReactNode
+    enableBlockLeftResize: boolean
+    enableBlockRightResize: boolean
+    enableBlockMove: boolean
+    enableReorder: boolean
+    enableAddBlock: boolean
+    bottomSpacing: boolean
+    showAllBlocks: boolean
+    quickAdd?: React.JSX.Element | undefined
+}
 
 export const ChartViewRoot: FC<ChartViewRootProps> = observer((props) => {
     const {
@@ -54,14 +49,14 @@ export const ChartViewRoot: FC<ChartViewRootProps> = observer((props) => {
         bottomSpacing,
         showAllBlocks,
         quickAdd,
-    } = props;
+    } = props
     // states
-    const [itemsContainerWidth, setItemsContainerWidth] = useState(0);
-    const [fullScreenMode, setFullScreenMode] = useState(false);
-    const [chartBlocks, setChartBlocks] = useState<IGanttBlock[] | null>(null);
+    const [itemsContainerWidth, setItemsContainerWidth] = useState(0)
+    const [fullScreenMode, setFullScreenMode] = useState(false)
+    const [chartBlocks, setChartBlocks] = useState<IGanttBlock[] | null>(null)
 
     const { currentView, currentViewData, renderView, updateCurrentView, updateCurrentViewData, updateRenderView } =
-        useGanttChart();
+        useGanttChart()
 
     // rendering the block structure
     const renderBlockStructure = (view: any, blocks: IGanttBlock[] | null) =>
@@ -70,72 +65,72 @@ export const ChartViewRoot: FC<ChartViewRootProps> = observer((props) => {
                   ...block,
                   position: getMonthChartItemPositionWidthInMonth(view, block),
               }))
-            : [];
+            : []
 
     useEffect(() => {
-        if (!currentViewData || !blocks) return;
-        setChartBlocks(() => renderBlockStructure(currentViewData, blocks));
-    }, [currentViewData, blocks]);
+        if (!currentViewData || !blocks) return
+        setChartBlocks(() => renderBlockStructure(currentViewData, blocks))
+    }, [currentViewData, blocks])
 
     const updateCurrentViewRenderPayload = (side: null | "left" | "right", view: TGanttViews) => {
-        const selectedCurrentView: TGanttViews = view;
+        const selectedCurrentView: TGanttViews = view
         const selectedCurrentViewData: ChartDataType | undefined =
             selectedCurrentView && selectedCurrentView === currentViewData?.key
                 ? currentViewData
-                : currentViewDataWithView(view);
+                : currentViewDataWithView(view)
 
-        if (selectedCurrentViewData === undefined) return;
+        if (selectedCurrentViewData === undefined) return
 
-        let currentRender: any;
-        if (selectedCurrentView === "month") currentRender = generateMonthChart(selectedCurrentViewData, side);
+        let currentRender: any
+        if (selectedCurrentView === "month") currentRender = generateMonthChart(selectedCurrentViewData, side)
 
         // updating the prevData, currentData and nextData
         if (currentRender.payload.length > 0) {
-            updateCurrentViewData(currentRender.state);
+            updateCurrentViewData(currentRender.state)
 
             if (side === "left") {
-                updateCurrentView(selectedCurrentView);
-                updateRenderView([...currentRender.payload, ...renderView]);
-                updatingCurrentLeftScrollPosition(currentRender.scrollWidth);
-                setItemsContainerWidth(itemsContainerWidth + currentRender.scrollWidth);
+                updateCurrentView(selectedCurrentView)
+                updateRenderView([...currentRender.payload, ...renderView])
+                updatingCurrentLeftScrollPosition(currentRender.scrollWidth)
+                setItemsContainerWidth(itemsContainerWidth + currentRender.scrollWidth)
             } else if (side === "right") {
-                updateCurrentView(view);
-                updateRenderView([...renderView, ...currentRender.payload]);
-                setItemsContainerWidth(itemsContainerWidth + currentRender.scrollWidth);
+                updateCurrentView(view)
+                updateRenderView([...renderView, ...currentRender.payload])
+                setItemsContainerWidth(itemsContainerWidth + currentRender.scrollWidth)
             } else {
-                updateCurrentView(view);
-                updateRenderView(currentRender.payload);
-                setItemsContainerWidth(currentRender.scrollWidth);
+                updateCurrentView(view)
+                updateRenderView(currentRender.payload)
+                setItemsContainerWidth(currentRender.scrollWidth)
                 setTimeout(() => {
-                    handleScrollToCurrentSelectedDate(currentRender.state, currentRender.state.data.currentDate);
-                }, 50);
+                    handleScrollToCurrentSelectedDate(currentRender.state, currentRender.state.data.currentDate)
+                }, 50)
             }
         }
-    };
+    }
 
-    const handleToday = () => updateCurrentViewRenderPayload(null, currentView);
+    const handleToday = () => updateCurrentViewRenderPayload(null, currentView)
 
     // handling the scroll positioning from left and right
     useEffect(() => {
-        handleToday();
+        handleToday()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
     const updatingCurrentLeftScrollPosition = (width: number) => {
-        const scrollContainer = document.querySelector("#gantt-container") as HTMLDivElement;
-        if (!scrollContainer) return;
+        const scrollContainer = document.querySelector("#gantt-container") as HTMLDivElement
+        if (!scrollContainer) return
 
-        scrollContainer.scrollLeft = width + scrollContainer?.scrollLeft;
-        setItemsContainerWidth(width + scrollContainer?.scrollLeft);
-    };
+        scrollContainer.scrollLeft = width + scrollContainer?.scrollLeft
+        setItemsContainerWidth(width + scrollContainer?.scrollLeft)
+    }
 
     const handleScrollToCurrentSelectedDate = (currentState: ChartDataType, date: Date) => {
-        const scrollContainer = document.querySelector("#gantt-container") as HTMLDivElement;
-        if (!scrollContainer) return;
+        const scrollContainer = document.querySelector("#gantt-container") as HTMLDivElement
+        if (!scrollContainer) return
 
-        const clientVisibleWidth: number = scrollContainer?.clientWidth;
-        let scrollWidth: number = 0;
-        let daysDifference: number = 0;
+        const clientVisibleWidth: number = scrollContainer?.clientWidth
+        let scrollWidth: number = 0
+        let daysDifference: number = 0
 
         // if (currentView === "hours")
         //   daysDifference = getNumberOfDaysBetweenTwoDatesInMonth(currentState.data.startDate, date);
@@ -146,7 +141,7 @@ export const ChartViewRoot: FC<ChartViewRootProps> = observer((props) => {
         // if (currentView === "bi_week")
         //   daysDifference = getNumberOfDaysBetweenTwoDatesInMonth(currentState.data.startDate, date);
         if (currentView === "month")
-            daysDifference = getNumberOfDaysBetweenTwoDatesInMonth(currentState.data.startDate, date);
+            daysDifference = getNumberOfDaysBetweenTwoDatesInMonth(currentState.data.startDate, date)
         // if (currentView === "quarter")
         //   daysDifference = getNumberOfDaysBetweenTwoDatesInQuarter(currentState.data.startDate, date);
         // if (currentView === "year")
@@ -155,10 +150,10 @@ export const ChartViewRoot: FC<ChartViewRootProps> = observer((props) => {
         scrollWidth =
             daysDifference * currentState.data.width -
             (clientVisibleWidth / 2 - currentState.data.width) +
-            SIDEBAR_WIDTH / 2;
+            SIDEBAR_WIDTH / 2
 
-        scrollContainer.scrollLeft = scrollWidth;
-    };
+        scrollContainer.scrollLeft = scrollWidth
+    }
 
     return (
         <div
@@ -195,5 +190,5 @@ export const ChartViewRoot: FC<ChartViewRootProps> = observer((props) => {
                 quickAdd={quickAdd}
             />
         </div>
-    );
-});
+    )
+})

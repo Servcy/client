@@ -1,14 +1,13 @@
-images;
-import CSVLogo from "public/services/csv.svg";
-import ExcelLogo from "public/services/excel.svg";
-import GithubLogo from "public/services/github.png";
-import JiraLogo from "public/services/jira.svg";
-import JSONLogo from "public/services/json.svg";
+import { SettingIcon } from "@components/icons"
+import { Props } from "@components/icons/types"
+import CSVLogo from "public/services/csv.svg"
+import ExcelLogo from "public/services/excel.svg"
+import GithubLogo from "public/services/github.png"
+import JiraLogo from "public/services/jira.svg"
+import JSONLogo from "public/services/json.svg"
+import { TStaticViewTypes } from "@servcy/types"
 
-import { TStaticViewTypes } from "@servcy/types";
-import { Props } from "@components/icons/types";
-
-import { SettingIcon } from "@components/icons";
+images
 
 export enum EUserWorkspaceRoles {
     GUEST = 5,
@@ -22,9 +21,9 @@ export const ROLE = {
     10: "Viewer",
     15: "Member",
     20: "Admin",
-};
+}
 
-export const ORGANIZATION_SIZE = ["Just myself", "2-10", "11-50", "51-200", "201-500", "500+"];
+export const ORGANIZATION_SIZE = ["Just myself", "2-10", "11-50", "51-200", "201-500", "500+"]
 
 export const USER_ROLES = [
     { value: "Product / Project Manager", label: "Product / Project Manager" },
@@ -37,7 +36,7 @@ export const USER_ROLES = [
     { value: "Student / Professor", label: "Student / Professor" },
     { value: "Human Resources", label: "Human Resources" },
     { value: "Other", label: "Other" },
-];
+]
 
 export const IMPORTERS_LIST = [
     {
@@ -54,7 +53,7 @@ export const IMPORTERS_LIST = [
         description: "Import issues and epics from Jira projects and epics.",
         logo: JiraLogo,
     },
-];
+]
 
 export const EXPORTERS_LIST = [
     {
@@ -78,11 +77,11 @@ export const EXPORTERS_LIST = [
         description: "Export issues to a JSON file.",
         logo: JSONLogo,
     },
-];
+]
 
 export const DEFAULT_GLOBAL_VIEWS_LIST: {
-    key: TStaticViewTypes;
-    label: string;
+    key: TStaticViewTypes
+    label: string
 }[] = [
     {
         key: "all-issues",
@@ -100,7 +99,7 @@ export const DEFAULT_GLOBAL_VIEWS_LIST: {
         key: "subscribed",
         label: "Subscribed",
     },
-];
+]
 
 export const RESTRICTED_URLS = [
     "404",
@@ -115,15 +114,15 @@ export const RESTRICTED_URLS = [
     "profile",
     "spaces",
     "workspace-invitations",
-];
+]
 
 export const WORKSPACE_SETTINGS_LINKS: {
-    key: string;
-    label: string;
-    href: string;
-    access: EUserWorkspaceRoles;
-    highlight: (pathname: string, baseUrl: string) => boolean;
-    Icon: React.FC<Props>;
+    key: string
+    label: string
+    href: string
+    access: EUserWorkspaceRoles
+    highlight: (pathname: string, baseUrl: string) => boolean
+    Icon: React.FC<Props>
 }[] = [
     {
         key: "general",
@@ -189,4 +188,4 @@ export const WORKSPACE_SETTINGS_LINKS: {
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/api-tokens`,
         Icon: SettingIcon,
     },
-];
+]

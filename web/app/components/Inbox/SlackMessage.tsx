@@ -1,17 +1,16 @@
-import { getCleanLink } from "@/utils/Shared";
-import cn from "classnames";
-import Image from "next/image";
-import { HiExternalLink, HiPaperClip } from "react-icons/hi";
-
-import { SlackMessageElementProps, SlackMessageProps } from "@/types/integrations/slack";
+import Image from "next/image"
+import cn from "classnames"
+import { HiExternalLink, HiPaperClip } from "react-icons/hi"
+import { SlackMessageElementProps, SlackMessageProps } from "@/types/integrations/slack"
+import { getCleanLink } from "@/utils/Shared"
 
 const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string }) => {
-    const link = `https://servcy.slack.com/archives/${data.channel}/p${data.ts.replace(".", "")}`;
-    const { real_name, image_32 } = JSON.parse(cause);
-    const cleanImageLink = getCleanLink(image_32);
+    const link = `https://servcy.slack.com/archives/${data.channel}/p${data.ts.replace(".", "")}`
+    const { real_name, image_32 } = JSON.parse(cause)
+    const cleanImageLink = getCleanLink(image_32)
 
     const renderElements = (elements?: SlackMessageElementProps[]) => {
-        if (!elements) return null;
+        if (!elements) return null
         return elements.map((element: SlackMessageElementProps, index: number) => {
             switch (element.type) {
                 case "text":
@@ -37,18 +36,18 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                         >
                             {element.text}
                         </span>
-                    );
+                    )
                 case "link":
                     return (
                         <a key={index} href={element.url} className="text-servcy-wheat hover:text-servcy-silver">
                             {element.text}
                         </a>
-                    );
+                    )
                 case "user": {
                     if (data["x-servcy-mentions"] && data["x-servcy-mentions"].length > 0) {
                         const mentioned_profile = data["x-servcy-mentions"].find(
                             (mention) => mention.id === element.user_id
-                        );
+                        )
                         if (mentioned_profile)
                             return (
                                 <>
@@ -62,9 +61,9 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                                     />
                                     @{mentioned_profile.name}
                                 </>
-                            );
+                            )
                     }
-                    return <span key={index}>@{element.user_id}</span>;
+                    return <span key={index}>@{element.user_id}</span>
                 }
                 case "rich_text_section":
                     return (
@@ -75,7 +74,7 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                         >
                             {renderElements(element.elements)}
                         </span>
-                    );
+                    )
                 case "rich_text_preformatted":
                     return (
                         <pre
@@ -84,7 +83,7 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                         >
                             {renderElements(element.elements)}
                         </pre>
-                    );
+                    )
                 case "rich_text_quote":
                     return (
                         <blockquote
@@ -96,7 +95,7 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                         >
                             {renderElements(element.elements)}
                         </blockquote>
-                    );
+                    )
                 case "rich_text_list":
                     return element.style === "ordered" ? (
                         <ol
@@ -124,24 +123,24 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                                 <li key={listItemIndex}>{renderElements(listItem.elements)}</li>
                             ))}
                         </ul>
-                    );
+                    )
                 default:
-                    return null;
+                    return null
             }
-        });
-    };
+        })
+    }
 
     const renderMessageBlocks = (blocks: SlackMessageProps["blocks"]) => {
-        if (!blocks) return null;
+        if (!blocks) return null
         return blocks.map((block, index) => {
             switch (block.type) {
                 case "rich_text":
-                    return <div key={index}>{renderElements(block.elements)}</div>;
+                    return <div key={index}>{renderElements(block.elements)}</div>
                 default:
-                    return null;
+                    return null
             }
-        });
-    };
+        })
+    }
 
     return (
         <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
@@ -197,7 +196,7 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SlackMessage;
+export default SlackMessage

@@ -1,33 +1,30 @@
-import { Fragment, useState } from "react";
-
+import { Fragment, useState } from "react"
 // headless ui
-import { Menu, Transition } from "@headlessui/react";
-
-import { Loader } from "@servcy/ui";
-
-import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { Menu, Transition } from "@headlessui/react"
+import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
+import { Loader } from "@servcy/ui"
 
 type MultiLevelDropdownProps = {
-    label: string;
+    label: string
     options: {
-        id: string;
+        id: string
         children?: {
-            id: string;
-            label: string | JSX.Element;
-            value: any;
-            selected?: boolean;
-            element?: JSX.Element;
-        }[];
-        hasChildren: boolean;
-        label: string;
-        onClick?: () => void;
-        selected?: boolean;
-        value: any;
-    }[];
-    onSelect: (value: any) => void;
-    direction?: "left" | "right";
-    height?: "sm" | "md" | "rg" | "lg";
-};
+            id: string
+            label: string | JSX.Element
+            value: any
+            selected?: boolean
+            element?: JSX.Element
+        }[]
+        hasChildren: boolean
+        label: string
+        onClick?: () => void
+        selected?: boolean
+        value: any
+    }[]
+    onSelect: (value: any) => void
+    direction?: "left" | "right"
+    height?: "sm" | "md" | "rg" | "lg"
+}
 
 export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
     label,
@@ -36,7 +33,7 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
     direction = "right",
     height = "md",
 }) => {
-    const [openChildFor, setOpenChildFor] = useState<string | null>(null);
+    const [openChildFor, setOpenChildFor] = useState<string | null>(null)
 
     return (
         <>
@@ -73,14 +70,14 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
                                             as="button"
                                             onClick={(e: any) => {
                                                 if (option.hasChildren) {
-                                                    e.stopPropagation();
-                                                    e.preventDefault();
+                                                    e.stopPropagation()
+                                                    e.preventDefault()
 
-                                                    if (option.onClick) option.onClick();
+                                                    if (option.onClick) option.onClick()
 
-                                                    if (openChildFor === option.id) setOpenChildFor(null);
-                                                    else setOpenChildFor(option.id);
-                                                } else onSelect(option.value);
+                                                    if (openChildFor === option.id) setOpenChildFor(null)
+                                                    else setOpenChildFor(option.id)
+                                                } else onSelect(option.value)
                                             }}
                                             className="w-full"
                                         >
@@ -130,7 +127,7 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
                                                             </p> //if no children found, show this message.
                                                         ) : (
                                                             option.children.map((child) => {
-                                                                if (child.element) return child.element;
+                                                                if (child.element) return child.element
                                                                 else
                                                                     return (
                                                                         <button
@@ -148,7 +145,7 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
                                                                                 className={`h-3.5 w-3.5 opacity-0 ${child.selected ? "opacity-100" : ""}`}
                                                                             />
                                                                         </button>
-                                                                    );
+                                                                    )
                                                             })
                                                         )}
                                                     </div>
@@ -170,5 +167,5 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
                 )}
             </Menu>
         </>
-    );
-};
+    )
+}

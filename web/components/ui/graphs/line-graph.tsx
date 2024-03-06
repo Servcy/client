@@ -1,15 +1,12 @@
 // nivo
-import { ResponsiveLine, LineSvgProps } from "@nivo/line";
-
-import { generateYAxisTickValues } from "@helpers/graph.helper";
-
-import { TGraph } from "./types";
-
-import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";
+import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph"
+import { generateYAxisTickValues } from "@helpers/graph.helper"
+import { LineSvgProps, ResponsiveLine } from "@nivo/line"
+import { TGraph } from "./types"
 
 type Props = {
-    customYAxisTickValues?: number[];
-};
+    customYAxisTickValues?: number[]
+}
 
 export const LineGraph: React.FC<Props & TGraph & LineSvgProps> = ({
     customYAxisTickValues,
@@ -32,4 +29,4 @@ export const LineGraph: React.FC<Props & TGraph & LineSvgProps> = ({
             {...rest}
         />
     </div>
-);
+)

@@ -1,4 +1,4 @@
-import { Loader } from "@servcy/ui";
+import { Loader } from "@servcy/ui"
 
 export const RecentActivityWidgetLoader = () => (
     <Loader className="bg-custom-background-100 rounded-xl p-6 space-y-6">
@@ -15,4 +15,4 @@ export const RecentActivityWidgetLoader = () => (
             </div>
         ))}
     </Loader>
-);
+)

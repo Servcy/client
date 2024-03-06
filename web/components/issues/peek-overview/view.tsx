@@ -1,43 +1,39 @@
-import { FC, useRef, useState } from "react";
-
-import { observer } from "mobx-react-lite";
-
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-import useKeypress from "@hooks/use-key-press";
-import toast from "react-hot-toast";
-// store hooks
-import { useIssueDetail } from "@hooks/store";
-
+import { FC, useRef, useState } from "react"
 import {
+    ArchiveIssueModal,
     DeleteIssueModal,
     IssuePeekOverviewHeader,
-    TPeekModes,
     PeekOverviewIssueDetails,
     PeekOverviewProperties,
     TIssueOperations,
-    ArchiveIssueModal,
-} from "@components/issues";
-import { IssueActivity } from "../issue-detail/issue-activity";
-
-import { Spinner } from "@servcy/ui";
+    TPeekModes,
+} from "@components/issues"
+// store hooks
+import { useIssueDetail } from "@hooks/store"
+import useKeypress from "@hooks/use-key-press"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { Spinner } from "@servcy/ui"
+import { IssueActivity } from "../issue-detail/issue-activity"
 
 interface IIssueView {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    isLoading?: boolean;
-    is_archived: boolean;
-    disabled?: boolean;
-    issueOperations: TIssueOperations;
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    isLoading?: boolean
+    is_archived: boolean
+    disabled?: boolean
+    issueOperations: TIssueOperations
 }
 
 export const IssueView: FC<IIssueView> = observer((props) => {
-    const { workspaceSlug, projectId, issueId, isLoading, is_archived, disabled = false, issueOperations } = props;
+    const { workspaceSlug, projectId, issueId, isLoading, is_archived, disabled = false, issueOperations } = props
     // states
-    const [peekMode, setPeekMode] = useState<TPeekModes>("side-peek");
-    const [isSubmitting, setIsSubmitting] = useState<"submitting" | "submitted" | "saved">("saved");
+    const [peekMode, setPeekMode] = useState<TPeekModes>("side-peek")
+    const [isSubmitting, setIsSubmitting] = useState<"submitting" | "submitted" | "saved">("saved")
     // ref
-    const issuePeekOverviewRef = useRef<HTMLDivElement>(null);
+    const issuePeekOverviewRef = useRef<HTMLDivElement>(null)
     // store hooks
     const {
         setPeekIssue,
@@ -47,34 +43,34 @@ export const IssueView: FC<IIssueView> = observer((props) => {
         toggleDeleteIssueModal,
         toggleArchiveIssueModal,
         issue: { getIssueById },
-    } = useIssueDetail();
-    const issue = getIssueById(issueId);
+    } = useIssueDetail()
+    const issue = getIssueById(issueId)
 
-    const { alerts } = useToast();
+    const { alerts } = useToast()
     // remove peek id
     const removeRoutePeekId = () => {
-        setPeekIssue(undefined);
-    };
+        setPeekIssue(undefined)
+    }
 
     useOutsideClickDetector(issuePeekOverviewRef, () => {
         if (!isAnyModalOpen && (!alerts || alerts.length === 0)) {
-            removeRoutePeekId();
+            removeRoutePeekId()
         }
-    });
+    })
     const handleKeyDown = () => {
         if (!isAnyModalOpen) {
-            removeRoutePeekId();
-            const issueElement = document.getElementById(`issue-${issueId}`);
-            if (issueElement) issueElement?.focus();
+            removeRoutePeekId()
+            const issueElement = document.getElementById(`issue-${issueId}`)
+            if (issueElement) issueElement?.focus()
         }
-    };
-    useKeypress("Escape", handleKeyDown);
+    }
+    useKeypress("Escape", handleKeyDown)
 
     const handleRestore = async () => {
-        if (!issueOperations.restore) return;
-        await issueOperations.restore(workspaceSlug, projectId, issueId);
-        removeRoutePeekId();
-    };
+        if (!issueOperations.restore) return
+        await issueOperations.restore(workspaceSlug, projectId, issueId)
+        removeRoutePeekId()
+    }
 
     return (
         <>
@@ -84,8 +80,8 @@ export const IssueView: FC<IIssueView> = observer((props) => {
                     handleClose={() => toggleArchiveIssueModal(false)}
                     data={issue}
                     onSubmit={async () => {
-                        if (issueOperations.archive) await issueOperations.archive(workspaceSlug, projectId, issueId);
-                        removeRoutePeekId();
+                        if (issueOperations.archive) await issueOperations.archive(workspaceSlug, projectId, issueId)
+                        removeRoutePeekId()
                     }}
                 />
             )}
@@ -94,8 +90,8 @@ export const IssueView: FC<IIssueView> = observer((props) => {
                 <DeleteIssueModal
                     isOpen={isDeleteIssueModalOpen}
                     handleClose={() => {
-                        toggleDeleteIssueModal(false);
-                        removeRoutePeekId();
+                        toggleDeleteIssueModal(false)
+                        removeRoutePeekId()
                     }}
                     data={issue}
                     onSubmit={() => issueOperations.remove(workspaceSlug, projectId, issueId)}
@@ -219,5 +215,5 @@ export const IssueView: FC<IIssueView> = observer((props) => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

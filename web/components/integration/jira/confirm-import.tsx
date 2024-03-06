@@ -1,12 +1,10 @@
-import React from "react";
-
+import React from "react"
 // react hook form
-import { useFormContext } from "react-hook-form";
-
-import { IJiraImporterForm } from "@servcy/types";
+import { useFormContext } from "react-hook-form"
+import { IJiraImporterForm } from "@servcy/types"
 
 export const JiraConfirmImport: React.FC = () => {
-    const { watch } = useFormContext<IJiraImporterForm>();
+    const { watch } = useFormContext<IJiraImporterForm>()
 
     return (
         <div className="h-full w-full overflow-y-auto">
@@ -44,5 +42,5 @@ export const JiraConfirmImport: React.FC = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

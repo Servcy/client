@@ -1,17 +1,14 @@
 // nivo
-import { ResponsiveMarimekko, SvgProps } from "@nivo/marimekko";
-
-import { generateYAxisTickValues } from "@helpers/graph.helper";
-
-import { TGraph } from "./types";
-
-import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";
+import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph"
+import { generateYAxisTickValues } from "@helpers/graph.helper"
+import { ResponsiveMarimekko, SvgProps } from "@nivo/marimekko"
+import { TGraph } from "./types"
 
 type Props = {
-    id: string;
-    value: string;
-    customYAxisTickValues?: number[];
-};
+    id: string
+    value: string
+    customYAxisTickValues?: number[]
+}
 
 export const MarimekkoGraph: React.FC<Props & TGraph & Omit<SvgProps<any>, "height" | "width">> = ({
     id,
@@ -45,4 +42,4 @@ export const MarimekkoGraph: React.FC<Props & TGraph & Omit<SvgProps<any>, "heig
             {...rest}
         />
     </div>
-);
+)

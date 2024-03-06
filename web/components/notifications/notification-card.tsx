@@ -1,39 +1,31 @@
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { Menu } from "@headlessui/react";
-import { ArchiveRestore, Clock, MessageSquare, MoreVertical, User2 } from "lucide-react";
-import toast from "react-hot-toast";
-import { useEventTracker } from "@hooks/store";
-
-import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui";
-
-import { snoozeOptions } from "@constants/notification";
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useEffect, useRef } from "react"
+import { ISSUE_OPENED, NOTIFICATION_ARCHIVED, NOTIFICATION_SNOOZED, NOTIFICATIONS_READ } from "@constants/event-tracker"
+import { snoozeOptions } from "@constants/notification"
+import { Menu } from "@headlessui/react"
+import { calculateTimeAgo, renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
 // helper
-import { replaceUnderscoreIfSnakeCase, truncateText, stripAndTruncateHTML } from "@helpers/string.helper";
-import { calculateTimeAgo, renderFormattedTime, renderFormattedDate } from "@helpers/date-time.helper";
+import { replaceUnderscoreIfSnakeCase, stripAndTruncateHTML, truncateText } from "@helpers/string.helper"
+import { useEventTracker } from "@hooks/store"
+import { ArchiveRestore, Clock, MessageSquare, MoreVertical, User2 } from "lucide-react"
+import toast from "react-hot-toast"
 // type
-import type { IUserNotification, NotificationType } from "@servcy/types";
-
-import {
-    ISSUE_OPENED,
-    NOTIFICATIONS_READ,
-    NOTIFICATION_ARCHIVED,
-    NOTIFICATION_SNOOZED,
-} from "@constants/event-tracker";
+import type { IUserNotification, NotificationType } from "@servcy/types"
+import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui"
 
 type NotificationCardProps = {
-    selectedTab: NotificationType;
-    notification: IUserNotification;
-    isSnoozedTabOpen: boolean;
-    closePopover: () => void;
-    markNotificationReadStatus: (notificationId: string) => Promise<void>;
-    markNotificationReadStatusToggle: (notificationId: string) => Promise<void>;
-    markNotificationArchivedStatus: (notificationId: string) => Promise<void>;
-    setSelectedNotificationForSnooze: (notificationId: string) => void;
-    markSnoozeNotification: (notificationId: string, dateTime?: Date | undefined) => Promise<void>;
-};
+    selectedTab: NotificationType
+    notification: IUserNotification
+    isSnoozedTabOpen: boolean
+    closePopover: () => void
+    markNotificationReadStatus: (notificationId: string) => Promise<void>
+    markNotificationReadStatusToggle: (notificationId: string) => Promise<void>
+    markNotificationArchivedStatus: (notificationId: string) => Promise<void>
+    setSelectedNotificationForSnooze: (notificationId: string) => void
+    markSnoozeNotification: (notificationId: string, dateTime?: Date | undefined) => Promise<void>
+}
 
 export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
     const {
@@ -46,17 +38,17 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
         markNotificationArchivedStatus,
         setSelectedNotificationForSnooze,
         markSnoozeNotification,
-    } = props;
+    } = props
     // store hooks
-    const { captureEvent } = useEventTracker();
+    const { captureEvent } = useEventTracker()
 
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // states
-    const [showSnoozeOptions, setShowSnoozeOptions] = React.useState(false);
+    const [showSnoozeOptions, setShowSnoozeOptions] = React.useState(false)
 
     // refs
-    const snoozeRef = useRef<HTMLDivElement | null>(null);
+    const snoozeRef = useRef<HTMLDivElement | null>(null)
 
     const moreOptions = [
         {
@@ -68,8 +60,8 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                     toast.error({
                         title: notification.read_at ? "Notification marked as read" : "Notification marked as unread",
                         type: "success",
-                    });
-                });
+                    })
+                })
             },
         },
         {
@@ -85,54 +77,54 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                     toast.error({
                         title: notification.archived_at ? "Notification un-archived" : "Notification archived",
                         type: "success",
-                    });
-                });
+                    })
+                })
             },
         },
-    ];
+    ]
 
     const snoozeOptionOnClick = (date: Date | null) => {
         if (!date) {
-            setSelectedNotificationForSnooze(notification.id);
-            return;
+            setSelectedNotificationForSnooze(notification.id)
+            return
         }
         markSnoozeNotification(notification.id, date).then(() => {
             toast.error({
                 title: `Notification snoozed till ${renderFormattedDate(date)}`,
                 type: "success",
-            });
-        });
-    };
+            })
+        })
+    }
 
     // close snooze options on outside click
     useEffect(() => {
         const handleClickOutside = (event: any) => {
             if (snoozeRef.current && !snoozeRef.current?.contains(event.target)) {
-                setShowSnoozeOptions(false);
+                setShowSnoozeOptions(false)
             }
-        };
-        document.addEventListener("mousedown", handleClickOutside, true);
-        document.addEventListener("touchend", handleClickOutside, true);
+        }
+        document.addEventListener("mousedown", handleClickOutside, true)
+        document.addEventListener("touchend", handleClickOutside, true)
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside, true);
-            document.removeEventListener("touchend", handleClickOutside, true);
-        };
-    }, []);
+            document.removeEventListener("mousedown", handleClickOutside, true)
+            document.removeEventListener("touchend", handleClickOutside, true)
+        }
+    }, [])
 
-    const notificationField = notification.data.issue_activity.field;
-    const notificationTriggeredBy = notification.triggered_by_details;
+    const notificationField = notification.data.issue_activity.field
+    const notificationTriggeredBy = notification.triggered_by_details
 
-    if (isSnoozedTabOpen && new Date(notification.snoozed_till!) < new Date()) return null;
+    if (isSnoozedTabOpen && new Date(notification.snoozed_till!) < new Date()) return null
 
     return (
         <Link
             onClick={() => {
-                markNotificationReadStatus(notification.id);
+                markNotificationReadStatus(notification.id)
                 captureEvent(ISSUE_OPENED, {
                     issue_id: notification.data.issue.id,
                     element: "notification",
-                });
-                closePopover();
+                })
+                closePopover()
             }}
             href={`/${workspaceSlug}/projects/${notification.project}/${
                 notificationField === "archived_at" ? "archived-issues" : "issues"
@@ -247,10 +239,10 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                                         {({ close }) => (
                                                             <button
                                                                 onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    e.preventDefault();
-                                                                    item.onClick();
-                                                                    close();
+                                                                    e.stopPropagation()
+                                                                    e.preventDefault()
+                                                                    item.onClick()
+                                                                    close()
                                                                 }}
                                                                 className="flex gap-x-2 items-center p-1.5"
                                                             >
@@ -263,9 +255,9 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                                 <Menu.Item as="div">
                                                     <div
                                                         onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            e.preventDefault();
-                                                            setShowSnoozeOptions(true);
+                                                            e.stopPropagation()
+                                                            e.preventDefault()
+                                                            setShowSnoozeOptions(true)
                                                         }}
                                                         className="flex gap-x-2 items-center p-1.5"
                                                     >
@@ -288,10 +280,10 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                     <p
                                         className="p-1.5"
                                         onClick={(e) => {
-                                            e.stopPropagation();
-                                            e.preventDefault();
-                                            setShowSnoozeOptions(false);
-                                            snoozeOptionOnClick(item.value);
+                                            e.stopPropagation()
+                                            e.preventDefault()
+                                            setShowSnoozeOptions(false)
+                                            snoozeOptionOnClick(item.value)
                                         }}
                                     >
                                         {item.label}
@@ -336,14 +328,14 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                     issue_id: notification.data.issue.id,
                                     tab: selectedTab,
                                     state: "SUCCESS",
-                                });
+                                })
                                 toast.error({
                                     title: notification.read_at
                                         ? "Notification marked as read"
                                         : "Notification marked as unread",
                                     type: "success",
-                                });
-                            });
+                                })
+                            })
                         },
                     },
                     {
@@ -360,14 +352,14 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                     issue_id: notification.data.issue.id,
                                     tab: selectedTab,
                                     state: "SUCCESS",
-                                });
+                                })
                                 toast.error({
                                     title: notification.archived_at
                                         ? "Notification un-archived"
                                         : "Notification archived",
                                     type: "success",
-                                });
-                            });
+                                })
+                            })
                         },
                     },
                 ].map((item) => (
@@ -375,9 +367,9 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                         <button
                             type="button"
                             onClick={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                item.onClick();
+                                e.stopPropagation()
+                                e.preventDefault()
+                                item.onClick()
                             }}
                             key={item.id}
                             className="flex w-full items-center gap-x-2 rounded bg-custom-background-80 p-0.5 text-sm outline-none hover:bg-custom-background-100"
@@ -400,12 +392,12 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                             <CustomMenu.MenuItem
                                 key={item.label}
                                 onClick={(e) => {
-                                    e.stopPropagation();
-                                    e.preventDefault();
+                                    e.stopPropagation()
+                                    e.preventDefault()
 
                                     if (!item.value) {
-                                        setSelectedNotificationForSnooze(notification.id);
-                                        return;
+                                        setSelectedNotificationForSnooze(notification.id)
+                                        return
                                     }
 
                                     markSnoozeNotification(notification.id, item.value).then(() => {
@@ -413,12 +405,12 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                             issue_id: notification.data.issue.id,
                                             tab: selectedTab,
                                             state: "SUCCESS",
-                                        });
+                                        })
                                         toast.error({
                                             title: `Notification snoozed till ${renderFormattedDate(item.value)}`,
                                             type: "success",
-                                        });
-                                    });
+                                        })
+                                    })
                                 }}
                             >
                                 {item.label}
@@ -428,5 +420,5 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                 </Tooltip>
             </div>
         </Link>
-    );
-};
+    )
+}

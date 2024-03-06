@@ -1,41 +1,37 @@
-import { useState, FC } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { ChevronDown, XCircle } from "lucide-react";
-
-import { useMember, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { ConfirmWorkspaceMemberRemove } from "@components/workspace";
-
-import { CustomSelect, Tooltip } from "@servcy/ui";
-
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
+import { useRouter } from "next/router"
+import { FC, useState } from "react"
+import { ConfirmWorkspaceMemberRemove } from "@components/workspace"
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+import { useMember, useUser } from "@hooks/store"
+import { ChevronDown, XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { CustomSelect, Tooltip } from "@servcy/ui"
 
 type Props = {
-    invitationId: string;
-};
+    invitationId: string
+}
 
 export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
-    const { invitationId } = props;
+    const { invitationId } = props
     // states
-    const [removeMemberModal, setRemoveMemberModal] = useState(false);
+    const [removeMemberModal, setRemoveMemberModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         membership: { currentWorkspaceMemberInfo, currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
     const {
         workspace: { updateMemberInvitation, deleteMemberInvitation, getWorkspaceInvitationDetails },
-    } = useMember();
+    } = useMember()
 
     // derived values
-    const invitationDetails = getWorkspaceInvitationDetails(invitationId);
+    const invitationDetails = getWorkspaceInvitationDetails(invitationId)
 
     const handleRemoveInvitation = async () => {
-        if (!workspaceSlug || !invitationDetails) return;
+        if (!workspaceSlug || !invitationDetails) return
 
         await deleteMemberInvitation(workspaceSlug.toString(), invitationDetails.id)
             .then(() => {
@@ -43,7 +39,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                     type: "success",
                     title: "Success",
                     message: "Invitation removed successfully.",
-                });
+                })
             })
             .catch((err) =>
                 toast.error({
@@ -51,21 +47,21 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                     title: "Error",
                     message: err?.error || "Something went wrong. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
-    if (!invitationDetails) return null;
+    if (!invitationDetails) return null
 
     // is the current logged in user admin
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN;
+    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
     // role change access-
     // 1. user cannot change their own role
     // 2. only admin or member can change role
     // 3. user cannot change role of higher role
     const hasRoleChangeAccess =
-        currentWorkspaceRole && [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole);
+        currentWorkspaceRole && [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole)
 
-    if (!currentWorkspaceMemberInfo) return null;
+    if (!currentWorkspaceMemberInfo) return null
 
     return (
         <>
@@ -110,7 +106,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                         }
                         value={invitationDetails.role}
                         onChange={(value: EUserWorkspaceRoles) => {
-                            if (!workspaceSlug || !value) return;
+                            if (!workspaceSlug || !value) return
 
                             updateMemberInvitation(workspaceSlug.toString(), invitationDetails.id, {
                                 role: value,
@@ -119,8 +115,8 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                                     type: "error",
                                     title: "Error!",
                                     message: "An error occurred while updating member role. Please try again.",
-                                });
-                            });
+                                })
+                            })
                         }}
                         disabled={!hasRoleChangeAccess}
                         placement="bottom-end"
@@ -131,13 +127,13 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                                 currentWorkspaceRole !== 20 &&
                                 currentWorkspaceRole < parseInt(key)
                             )
-                                return null;
+                                return null
 
                             return (
                                 <CustomSelect.Option key={key} value={parseInt(key, 10)}>
                                     <>{ROLE[parseInt(key) as keyof typeof ROLE]}</>
                                 </CustomSelect.Option>
-                            );
+                            )
                         })}
                     </CustomSelect>
                     <Tooltip tooltipContent="Remove member" disabled={!isAdmin}>
@@ -154,5 +150,5 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,72 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { Disclosure, Transition } from "@headlessui/react";
-import isEmpty from "lodash/isEmpty";
-
-import { CycleService } from "@services/cycle.service";
-
-import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { SidebarProgressStats } from "@components/core";
-import ProgressChart from "@components/core/sidebar/progress-chart";
-import { CycleDeleteModal } from "@components/cycles/delete-modal";
-
-import { Avatar, CustomMenu, Loader, LayersIcon } from "@servcy/ui";
-
-import { ChevronDown, LinkIcon, Trash2, UserCircle2, AlertCircle, ChevronRight, CalendarClock } from "lucide-react";
-
-import { copyUrlToClipboard } from "@helpers/string.helper";
-import { findHowManyDaysLeft, renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { ICycle } from "@servcy/types";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { CYCLE_UPDATED } from "@constants/event-tracker";
-
-import { CYCLE_STATUS } from "@constants/cycle";
-import { DateRangeDropdown } from "@components/dropdowns";
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { SidebarProgressStats } from "@components/core"
+import ProgressChart from "@components/core/sidebar/progress-chart"
+import { CycleDeleteModal } from "@components/cycles/delete-modal"
+import { DateRangeDropdown } from "@components/dropdowns"
+import { CYCLE_STATUS } from "@constants/cycle"
+import { CYCLE_UPDATED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { Disclosure, Transition } from "@headlessui/react"
+import { findHowManyDaysLeft, renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
+import { CycleService } from "@services/cycle.service"
+import isEmpty from "lodash/isEmpty"
+import { AlertCircle, CalendarClock, ChevronDown, ChevronRight, LinkIcon, Trash2, UserCircle2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { ICycle } from "@servcy/types"
+import { Avatar, CustomMenu, LayersIcon, Loader } from "@servcy/ui"
 
 type Props = {
-    cycleId: string;
-    handleClose: () => void;
-};
+    cycleId: string
+    handleClose: () => void
+}
 
 const defaultValues: Partial<ICycle> = {
     start_date: null,
     end_date: null,
-};
+}
 
-const cycleService = new CycleService();
+const cycleService = new CycleService()
 
 // TODO: refactor the whole component
 export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
-    const { cycleId, handleClose } = props;
+    const { cycleId, handleClose } = props
     // states
-    const [cycleDeleteModal, setCycleDeleteModal] = useState(false);
+    const [cycleDeleteModal, setCycleDeleteModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, peekCycle } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, peekCycle } = router.query
     // store hooks
-    const { setTrackElement, captureCycleEvent } = useEventTracker();
+    const { setTrackElement, captureCycleEvent } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { getCycleById, updateCycleDetails } = useCycle();
-    const { getUserDetails } = useMember();
+    } = useUser()
+    const { getCycleById, updateCycleDetails } = useCycle()
+    const { getUserDetails } = useMember()
     // derived values
-    const cycleDetails = getCycleById(cycleId);
-    const cycleOwnerDetails = cycleDetails ? getUserDetails(cycleDetails.owned_by_id) : undefined;
+    const cycleDetails = getCycleById(cycleId)
+    const cycleOwnerDetails = cycleDetails ? getUserDetails(cycleDetails.owned_by_id) : undefined
 
     // form info
     const { control, reset } = useForm({
         defaultValues,
-    });
+    })
 
     const submitChanges = (data: Partial<ICycle>, changedProperty: string) => {
-        if (!workspaceSlug || !projectId || !cycleId) return;
+        if (!workspaceSlug || !projectId || !cycleId) return
 
         updateCycleDetails(workspaceSlug.toString(), projectId.toString(), cycleId.toString(), data)
             .then((res) => {
@@ -78,7 +69,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                         element: "Right side-peek",
                         state: "SUCCESS",
                     },
-                });
+                })
             })
 
             .catch(() => {
@@ -89,9 +80,9 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                         element: "Right side-peek",
                         state: "FAILED",
                     },
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleCopyText = () => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`)
@@ -100,66 +91,66 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                     type: "success",
                     title: "Link Copied!",
                     message: "Cycle link copied to clipboard.",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Some error occurred",
-                });
-            });
-    };
+                })
+            })
+    }
 
     useEffect(() => {
         if (cycleDetails)
             reset({
                 ...cycleDetails,
-            });
-    }, [cycleDetails, reset]);
+            })
+    }, [cycleDetails, reset])
 
     const dateChecker = async (payload: any) => {
         try {
-            const res = await cycleService.cycleDateCheck(workspaceSlug as string, projectId as string, payload);
-            return res.status;
+            const res = await cycleService.cycleDateCheck(workspaceSlug as string, projectId as string, payload)
+            return res.status
         } catch (err) {
-            return false;
+            return false
         }
-    };
+    }
 
     const handleDateChange = async (startDate: Date | undefined, endDate: Date | undefined) => {
-        if (!startDate || !endDate) return;
+        if (!startDate || !endDate) return
 
-        let isDateValid = false;
+        let isDateValid = false
 
         const payload = {
             start_date: renderFormattedPayloadDate(startDate),
             end_date: renderFormattedPayloadDate(endDate),
-        };
+        }
 
         if (cycleDetails && cycleDetails.start_date && cycleDetails.end_date)
             isDateValid = await dateChecker({
                 ...payload,
                 cycle_id: cycleDetails.id,
-            });
-        else isDateValid = await dateChecker(payload);
+            })
+        else isDateValid = await dateChecker(payload)
 
         if (isDateValid) {
-            submitChanges(payload, "date_range");
+            submitChanges(payload, "date_range")
             toast.error({
                 type: "success",
                 title: "Success!",
                 message: "Cycle updated successfully.",
-            });
+            })
         } else {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message:
                     "You already have a cycle on the given dates, if you want to create a draft cycle, you can do that by removing both the dates.",
-            });
-            reset({ ...cycleDetails });
+            })
+            reset({ ...cycleDetails })
         }
-    };
+    }
 
     // TODO: refactor this
     // const handleFiltersUpdate = useCallback(
@@ -181,11 +172,11 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     //   [workspaceSlug, projectId, cycleId, issueFilters, updateFilters]
     // );
 
-    const cycleStatus = cycleDetails?.status.toLocaleLowerCase();
-    const isCompleted = cycleStatus === "completed";
+    const cycleStatus = cycleDetails?.status.toLocaleLowerCase()
+    const isCompleted = cycleStatus === "completed"
 
-    const isStartValid = new Date(`${cycleDetails?.start_date}`) <= new Date();
-    const isEndValid = new Date(`${cycleDetails?.end_date}`) >= new Date(`${cycleDetails?.start_date}`);
+    const isStartValid = new Date(`${cycleDetails?.start_date}`) <= new Date()
+    const isEndValid = new Date(`${cycleDetails?.end_date}`) >= new Date(`${cycleDetails?.start_date}`)
 
     const progressPercentage = cycleDetails
         ? isCompleted && cycleDetails?.progress_snapshot
@@ -193,7 +184,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                   (cycleDetails.progress_snapshot.completed_issues / cycleDetails.progress_snapshot.total_issues) * 100
               )
             : Math.round((cycleDetails.completed_issues / cycleDetails.total_issues) * 100)
-        : null;
+        : null
 
     if (!cycleDetails)
         return (
@@ -208,9 +199,9 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                     <Loader.Item height="30px" />
                 </div>
             </Loader>
-        );
+        )
 
-    const currentCycle = CYCLE_STATUS.find((status) => status.value === cycleStatus);
+    const currentCycle = CYCLE_STATUS.find((status) => status.value === cycleStatus)
 
     const issueCount =
         isCompleted && !isEmpty(cycleDetails.progress_snapshot)
@@ -219,11 +210,11 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                 : `${cycleDetails.progress_snapshot.completed_issues}/${cycleDetails.progress_snapshot.total_issues}`
             : cycleDetails.total_issues === 0
               ? "0 Issue"
-              : `${cycleDetails.completed_issues}/${cycleDetails.total_issues}`;
+              : `${cycleDetails.completed_issues}/${cycleDetails.total_issues}`
 
-    const daysLeft = findHowManyDaysLeft(cycleDetails.end_date);
+    const daysLeft = findHowManyDaysLeft(cycleDetails.end_date)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
 
     return (
         <>
@@ -255,8 +246,8 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                             <CustomMenu placement="bottom-end" ellipsis>
                                 <CustomMenu.MenuItem
                                     onClick={() => {
-                                        setTrackElement("CYCLE_PAGE_SIDEBAR");
-                                        setCycleDeleteModal(true);
+                                        setTrackElement("CYCLE_PAGE_SIDEBAR")
+                                        setCycleDeleteModal(true)
                                     }}
                                 >
                                     <span className="flex items-center justify-start gap-2">
@@ -323,11 +314,9 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                                                 onSelect={(val) => {
                                                     onChangeStartDate(
                                                         val?.from ? renderFormattedPayloadDate(val.from) : null
-                                                    );
-                                                    onChangeEndDate(
-                                                        val?.to ? renderFormattedPayloadDate(val.to) : null
-                                                    );
-                                                    handleDateChange(val?.from, val?.to);
+                                                    )
+                                                    onChangeEndDate(val?.to ? renderFormattedPayloadDate(val.to) : null)
+                                                    handleDateChange(val?.from, val?.to)
                                                 }}
                                                 placeholder={{
                                                     from: "Start date",
@@ -545,5 +534,5 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                 </div>
             </>
         </>
-    );
-});
+    )
+})

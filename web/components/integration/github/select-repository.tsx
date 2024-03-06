@@ -1,69 +1,65 @@
-import React from "react";
-import { useRouter } from "next/router";
-import useSWRInfinite from "swr/infinite";
-
-import { ProjectService } from "@services/project";
-
-import { CustomSearchSelect } from "@servcy/ui";
-
-import { truncateText } from "@helpers/string.helper";
-
-import { IWorkspaceIntegration } from "@servcy/types";
+import { useRouter } from "next/router"
+import React from "react"
+import { truncateText } from "@helpers/string.helper"
+import { ProjectService } from "@services/project"
+import useSWRInfinite from "swr/infinite"
+import { IWorkspaceIntegration } from "@servcy/types"
+import { CustomSearchSelect } from "@servcy/ui"
 
 type Props = {
-    integration: IWorkspaceIntegration;
-    value: any;
-    label: string | JSX.Element;
-    onChange: (repo: any) => void;
-    characterLimit?: number;
-};
+    integration: IWorkspaceIntegration
+    value: any
+    label: string | JSX.Element
+    onChange: (repo: any) => void
+    characterLimit?: number
+}
 
-const projectService = new ProjectService();
+const projectService = new ProjectService()
 
 export const SelectRepository: React.FC<Props> = (props) => {
-    const { integration, value, label, onChange, characterLimit = 25 } = props;
+    const { integration, value, label, onChange, characterLimit = 25 } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const getKey = (pageIndex: number) => {
-        if (!workspaceSlug || !integration) return;
+        if (!workspaceSlug || !integration) return
 
         return `${process.env["NEXT_PUBLIC_SERVER_URL"]}/api/workspaces/${workspaceSlug}/workspace-integrations/${
             integration.id
-        }/github-repositories/?page=${++pageIndex}`;
-    };
+        }/github-repositories/?page=${++pageIndex}`
+    }
 
     const fetchGithubRepos = async (url: string) => {
-        const data = await projectService.getGithubRepositories(url);
+        const data = await projectService.getGithubRepositories(url)
 
-        return data;
-    };
+        return data
+    }
 
-    const { data: paginatedData, size, setSize, isValidating } = useSWRInfinite(getKey, fetchGithubRepos);
+    const { data: paginatedData, size, setSize, isValidating } = useSWRInfinite(getKey, fetchGithubRepos)
 
-    let userRepositories = (paginatedData ?? []).map((data) => data.repositories).flat();
-    userRepositories = userRepositories.filter((data) => data?.id);
+    let userRepositories = (paginatedData ?? []).map((data) => data.repositories).flat()
+    userRepositories = userRepositories.filter((data) => data?.id)
 
-    const totalCount = paginatedData && paginatedData.length > 0 ? paginatedData[0].total_count : 0;
+    const totalCount = paginatedData && paginatedData.length > 0 ? paginatedData[0].total_count : 0
 
     const options =
         userRepositories.map((repo) => ({
             value: repo.id,
             query: repo.full_name,
             content: <p>{truncateText(repo.full_name, characterLimit)}</p>,
-        })) ?? [];
+        })) ?? []
 
-    if (userRepositories.length < 1) return null;
+    if (userRepositories.length < 1) return null
 
     return (
         <CustomSearchSelect
             value={value}
             options={options}
             onChange={(val: string) => {
-                const repo = userRepositories.find((repo) => repo.id === val);
+                const repo = userRepositories.find((repo) => repo.id === val)
 
-                onChange(repo);
+                onChange(repo)
             }}
             label={label}
             footerOption={
@@ -82,5 +78,5 @@ export const SelectRepository: React.FC<Props> = (props) => {
             }
             optionsClassName="w-full"
         />
-    );
-};
+    )
+}

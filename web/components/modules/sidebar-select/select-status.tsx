@@ -1,20 +1,18 @@
 // react
-import React from "react";
-// react-hook-form
-import { Control, Controller, UseFormWatch } from "react-hook-form";
-
-import { CustomSelect, DoubleCircleIcon } from "@servcy/ui";
-
-import { IModule } from "@servcy/types";
+import React from "react"
 // common
 
-import { MODULE_STATUS } from "@constants/module";
+import { MODULE_STATUS } from "@constants/module"
+// react-hook-form
+import { Control, Controller, UseFormWatch } from "react-hook-form"
+import { IModule } from "@servcy/types"
+import { CustomSelect, DoubleCircleIcon } from "@servcy/ui"
 
 type Props = {
-    control: Control<Partial<IModule>, any>;
-    submitChanges: (formData: Partial<IModule>) => void;
-    watch: UseFormWatch<Partial<IModule>>;
-};
+    control: Control<Partial<IModule>, any>
+    submitChanges: (formData: Partial<IModule>) => void
+    watch: UseFormWatch<Partial<IModule>>
+}
 
 export const SidebarStatusSelect: React.FC<Props> = ({ control, submitChanges, watch }) => (
     <div className="flex flex-wrap items-center py-2">
@@ -43,7 +41,7 @@ export const SidebarStatusSelect: React.FC<Props> = ({ control, submitChanges, w
                         }
                         value={value}
                         onChange={(value: any) => {
-                            submitChanges({ status: value });
+                            submitChanges({ status: value })
                         }}
                     >
                         {MODULE_STATUS.map((option) => (
@@ -62,4 +60,4 @@ export const SidebarStatusSelect: React.FC<Props> = ({ control, submitChanges, w
             />
         </div>
     </div>
-);
+)

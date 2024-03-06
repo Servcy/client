@@ -1,50 +1,46 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
-import { AlertTriangle } from "lucide-react";
-
-import { useEventTracker, usePage } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import { useProjectPages } from "@hooks/store/use-project-page";
-
-import { PAGE_DELETED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { PAGE_DELETED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useEventTracker, usePage } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-page"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { Button } from "@servcy/ui"
 
 type TConfirmPageDeletionProps = {
-    pageId: string;
-    isOpen: boolean;
-    onClose: () => void;
-};
+    pageId: string
+    isOpen: boolean
+    onClose: () => void
+}
 
 export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((props) => {
-    const { pageId, isOpen, onClose } = props;
+    const { pageId, isOpen, onClose } = props
 
     // states
-    const [isDeleting, setIsDeleting] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { deletePage } = useProjectPages();
-    const { capturePageEvent } = useEventTracker();
-    const pageStore = usePage(pageId);
+    const { deletePage } = useProjectPages()
+    const { capturePageEvent } = useEventTracker()
+    const pageStore = usePage(pageId)
 
-    if (!pageStore) return null;
+    if (!pageStore) return null
 
-    const { name } = pageStore;
+    const { name } = pageStore
 
     const handleClose = () => {
-        setIsDeleting(false);
-        onClose();
-    };
+        setIsDeleting(false)
+        onClose()
+    }
 
     const handleDelete = async () => {
-        if (!pageId || !workspaceSlug || !projectId) return;
+        if (!pageId || !workspaceSlug || !projectId) return
 
-        setIsDeleting(true);
+        setIsDeleting(true)
 
         // Delete Page will only delete the page from the archive page map, at this point only archived pages can be deleted
         await deletePage(workspaceSlug.toString(), projectId as string, pageId)
@@ -55,13 +51,13 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
                         ...pageStore,
                         state: "SUCCESS",
                     },
-                });
-                handleClose();
+                })
+                handleClose()
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "Page deleted successfully.",
-                });
+                })
             })
             .catch(() => {
                 capturePageEvent({
@@ -70,17 +66,17 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
                         ...pageStore,
                         state: "FAILED",
                     },
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Page could not be deleted. Please try again.",
-                });
+                })
             })
             .finally(() => {
-                setIsDeleting(false);
-            });
-    };
+                setIsDeleting(false)
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -154,5 +150,5 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

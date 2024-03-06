@@ -1,33 +1,30 @@
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-
-import { ProjectCard } from "@components/project";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-import { ProjectsLoader } from "@components/ui";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { ProjectCard } from "@components/project"
+import { ProjectsLoader } from "@components/ui"
+import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
 
 export const ProjectCardList = observer(() => {
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { commandPalette: commandPaletteStore } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    const { commandPalette: commandPaletteStore } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
         currentUser,
-    } = useUser();
-    const { workspaceProjectIds, searchedProjects, getProjectById } = useProject();
+    } = useUser()
+    const { workspaceProjectIds, searchedProjects, getProjectById } = useProject()
 
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("onboarding", "projects", isLightMode);
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("onboarding", "projects", isLightMode)
 
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
+    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
 
-    if (!workspaceProjectIds) return <ProjectsLoader />;
+    if (!workspaceProjectIds) return <ProjectsLoader />
 
     return (
         <>
@@ -38,11 +35,11 @@ export const ProjectCardList = observer(() => {
                     ) : (
                         <div className="grid grid-cols-1 gap-9 md:grid-cols-2 lg:grid-cols-3">
                             {searchedProjects.map((projectId) => {
-                                const projectDetails = getProjectById(projectId);
+                                const projectDetails = getProjectById(projectId)
 
-                                if (!projectDetails) return;
+                                if (!projectDetails) return
 
-                                return <ProjectCard key={projectDetails.id} project={projectDetails} />;
+                                return <ProjectCard key={projectDetails.id} project={projectDetails} />
                             })}
                         </div>
                     )}
@@ -55,8 +52,8 @@ export const ProjectCardList = observer(() => {
                     primaryButton={{
                         text: WORKSPACE_EMPTY_STATE_DETAILS["projects"].primaryButton.text,
                         onClick: () => {
-                            setTrackElement("Project empty state");
-                            commandPaletteStore.toggleCreateProjectModal(true);
+                            setTrackElement("Project empty state")
+                            commandPaletteStore.toggleCreateProjectModal(true)
                         },
                     }}
                     comicBox={{
@@ -68,5 +65,5 @@ export const ProjectCardList = observer(() => {
                 />
             )}
         </>
-    );
-});
+    )
+})

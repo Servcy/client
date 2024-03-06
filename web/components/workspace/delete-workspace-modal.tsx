@@ -1,37 +1,33 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
-import { AlertTriangle } from "lucide-react";
-
-import { useEventTracker, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, Input } from "@servcy/ui";
-
-import type { IWorkspace } from "@servcy/types";
-
-import { WORKSPACE_DELETED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import React from "react"
+import { WORKSPACE_DELETED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useEventTracker, useWorkspace } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import type { IWorkspace } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    data: IWorkspace | null;
-    onClose: () => void;
-};
+    isOpen: boolean
+    data: IWorkspace | null
+    onClose: () => void
+}
 
 const defaultValues = {
     workspaceName: "",
     confirmDelete: "",
-};
+}
 
 export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
-    const { isOpen, data, onClose } = props;
+    const { isOpen, data, onClose } = props
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { captureWorkspaceEvent } = useEventTracker();
-    const { deleteWorkspace } = useWorkspace();
+    const { captureWorkspaceEvent } = useEventTracker()
+    const { deleteWorkspace } = useWorkspace()
 
     // form info
     const {
@@ -40,26 +36,26 @@ export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
         handleSubmit,
         reset,
         watch,
-    } = useForm({ defaultValues });
+    } = useForm({ defaultValues })
 
-    const canDelete = watch("workspaceName") === data?.name && watch("confirmDelete") === "delete my workspace";
+    const canDelete = watch("workspaceName") === data?.name && watch("confirmDelete") === "delete my workspace"
 
     const handleClose = () => {
         const timer = setTimeout(() => {
-            reset(defaultValues);
-            clearTimeout(timer);
-        }, 350);
+            reset(defaultValues)
+            clearTimeout(timer)
+        }, 350)
 
-        onClose();
-    };
+        onClose()
+    }
 
     const onSubmit = async () => {
-        if (!data || !canDelete) return;
+        if (!data || !canDelete) return
 
         await deleteWorkspace(data.slug)
             .then((res) => {
-                handleClose();
-                router.push("/");
+                handleClose()
+                router.push("/")
                 captureWorkspaceEvent({
                     eventName: WORKSPACE_DELETED,
                     payload: {
@@ -67,19 +63,19 @@ export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
                         state: "SUCCESS",
                         element: "Workspace general settings page",
                     },
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "Workspace deleted successfully.",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Something went wrong. Please try again later.",
-                });
+                })
                 captureWorkspaceEvent({
                     eventName: WORKSPACE_DELETED,
                     payload: {
@@ -87,9 +83,9 @@ export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
                         state: "FAILED",
                         element: "Workspace general settings page",
                     },
-                });
-            });
-    };
+                })
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -212,5 +208,5 @@ export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

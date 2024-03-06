@@ -1,31 +1,29 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useUser } from "@hooks/store";
-
-import { ProfileNavbar, ProfileSidebar } from "@components/profile";
+import { useRouter } from "next/router"
+import { ProfileNavbar, ProfileSidebar } from "@components/profile"
+import { useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
 
 type Props = {
-    children: React.ReactNode;
-    className?: string;
-    showProfileIssuesFilter?: boolean;
-};
+    children: React.ReactNode
+    className?: string
+    showProfileIssuesFilter?: boolean
+}
 
-const AUTHORIZED_ROLES = [20, 15, 10];
+const AUTHORIZED_ROLES = [20, 15, 10]
 
 export const ProfileAuthWrapper: React.FC<Props> = observer((props) => {
-    const { children, className, showProfileIssuesFilter } = props;
-    const router = useRouter();
+    const { children, className, showProfileIssuesFilter } = props
+    const router = useRouter()
 
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
 
-    if (!currentWorkspaceRole) return null;
+    if (!currentWorkspaceRole) return null
 
-    const isAuthorized = AUTHORIZED_ROLES.includes(currentWorkspaceRole);
+    const isAuthorized = AUTHORIZED_ROLES.includes(currentWorkspaceRole)
 
-    const isAuthorizedPath = router.pathname.includes("assigned" || "created" || "subscribed");
+    const isAuthorizedPath = router.pathname.includes("assigned" || "created" || "subscribed")
 
     return (
         <div className="h-full w-full md:flex md:flex-row-reverse md:overflow-hidden">
@@ -41,5 +39,5 @@ export const ProfileAuthWrapper: React.FC<Props> = observer((props) => {
                 )}
             </div>
         </div>
-    );
-});
+    )
+})

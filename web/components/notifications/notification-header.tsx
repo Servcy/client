@@ -1,38 +1,33 @@
-import React from "react";
-import { ArrowLeft, CheckCheck, Clock, ListFilter, MoreVertical, RefreshCw, X } from "lucide-react";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-
-import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui";
-
-import { useEventTracker } from "@hooks/store";
-
-import { getNumberCount } from "@helpers/string.helper";
-// type
-import type { NotificationType, NotificationCount } from "@servcy/types";
-
+import React from "react"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import {
     ARCHIVED_NOTIFICATIONS,
     NOTIFICATIONS_READ,
     SNOOZED_NOTIFICATIONS,
     UNREAD_NOTIFICATIONS,
-} from "@constants/event-tracker";
+} from "@constants/event-tracker"
+import { getNumberCount } from "@helpers/string.helper"
+import { useEventTracker } from "@hooks/store"
+import { ArrowLeft, CheckCheck, Clock, ListFilter, MoreVertical, RefreshCw, X } from "lucide-react"
+// type
+import type { NotificationCount, NotificationType } from "@servcy/types"
+import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui"
 
 type NotificationHeaderProps = {
-    notificationCount?: NotificationCount | null;
-    notificationMutate: () => void;
-    closePopover: () => void;
-    isRefreshing?: boolean;
-    snoozed: boolean;
-    archived: boolean;
-    readNotification: boolean;
-    selectedTab: NotificationType;
-    setSnoozed: React.Dispatch<React.SetStateAction<boolean>>;
-    setArchived: React.Dispatch<React.SetStateAction<boolean>>;
-    setReadNotification: React.Dispatch<React.SetStateAction<boolean>>;
-    setSelectedTab: React.Dispatch<React.SetStateAction<NotificationType>>;
-    markAllNotificationsAsRead: () => Promise<void>;
-};
+    notificationCount?: NotificationCount | null
+    notificationMutate: () => void
+    closePopover: () => void
+    isRefreshing?: boolean
+    snoozed: boolean
+    archived: boolean
+    readNotification: boolean
+    selectedTab: NotificationType
+    setSnoozed: React.Dispatch<React.SetStateAction<boolean>>
+    setArchived: React.Dispatch<React.SetStateAction<boolean>>
+    setReadNotification: React.Dispatch<React.SetStateAction<boolean>>
+    setSelectedTab: React.Dispatch<React.SetStateAction<NotificationType>>
+    markAllNotificationsAsRead: () => Promise<void>
+}
 
 export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => {
     const {
@@ -49,14 +44,14 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
         setReadNotification,
         setSelectedTab,
         markAllNotificationsAsRead,
-    } = props;
+    } = props
     // store hooks
-    const { captureEvent } = useEventTracker();
+    const { captureEvent } = useEventTracker()
 
     const notificationTabs: Array<{
-        label: string;
-        value: NotificationType;
-        unreadCount?: number;
+        label: string
+        value: NotificationType
+        unreadCount?: number
     }> = [
         {
             label: "My Issues",
@@ -73,7 +68,7 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
             value: "watching",
             unreadCount: notificationCount?.watching_issues,
         },
-    ];
+    ]
 
     return (
         <>
@@ -88,7 +83,7 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                         <button
                             type="button"
                             onClick={() => {
-                                notificationMutate();
+                                notificationMutate()
                             }}
                         >
                             <RefreshCw className={`h-3.5 w-3.5 ${isRefreshing ? "animate-spin" : ""}`} />
@@ -98,10 +93,10 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                         <button
                             type="button"
                             onClick={() => {
-                                setSnoozed(false);
-                                setArchived(false);
-                                setReadNotification((prev) => !prev);
-                                captureEvent(UNREAD_NOTIFICATIONS);
+                                setSnoozed(false)
+                                setArchived(false)
+                                setReadNotification((prev) => !prev)
+                                captureEvent(UNREAD_NOTIFICATIONS)
                             }}
                         >
                             <ListFilter className="h-3.5 w-3.5" />
@@ -117,8 +112,8 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                     >
                         <CustomMenu.MenuItem
                             onClick={() => {
-                                markAllNotificationsAsRead();
-                                captureEvent(NOTIFICATIONS_READ);
+                                markAllNotificationsAsRead()
+                                captureEvent(NOTIFICATIONS_READ)
                             }}
                         >
                             <div className="flex items-center gap-2">
@@ -128,10 +123,10 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                         </CustomMenu.MenuItem>
                         <CustomMenu.MenuItem
                             onClick={() => {
-                                setArchived(false);
-                                setReadNotification(false);
-                                setSnoozed((prev) => !prev);
-                                captureEvent(SNOOZED_NOTIFICATIONS);
+                                setArchived(false)
+                                setReadNotification(false)
+                                setSnoozed((prev) => !prev)
+                                captureEvent(SNOOZED_NOTIFICATIONS)
                             }}
                         >
                             <div className="flex items-center gap-2">
@@ -141,10 +136,10 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                         </CustomMenu.MenuItem>
                         <CustomMenu.MenuItem
                             onClick={() => {
-                                setSnoozed(false);
-                                setReadNotification(false);
-                                setArchived((prev) => !prev);
-                                captureEvent(ARCHIVED_NOTIFICATIONS);
+                                setSnoozed(false)
+                                setReadNotification(false)
+                                setArchived((prev) => !prev)
+                                captureEvent(ARCHIVED_NOTIFICATIONS)
                             }}
                         >
                             <div className="flex items-center gap-2">
@@ -167,9 +162,9 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                     <button
                         type="button"
                         onClick={() => {
-                            setSnoozed(false);
-                            setArchived(false);
-                            setReadNotification(false);
+                            setSnoozed(false)
+                            setArchived(false)
+                            setReadNotification(false)
                         }}
                     >
                         <h4 className="flex items-center gap-2 pb-4">
@@ -214,5 +209,5 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                 )}
             </div>
         </>
-    );
-};
+    )
+}

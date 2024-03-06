@@ -1,38 +1,35 @@
-import { observer } from "mobx-react-lite";
-
-import { X } from "lucide-react";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-import { capitalizeFirstLetter } from "@helpers/string.helper";
-
-import { DATE_FILTER_OPTIONS } from "@constants/filters";
+import { DATE_FILTER_OPTIONS } from "@constants/filters"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { capitalizeFirstLetter } from "@helpers/string.helper"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
 
 type Props = {
-    handleRemove: (val: string) => void;
-    values: string[];
-};
+    handleRemove: (val: string) => void
+    values: string[]
+}
 
 export const AppliedDateFilters: React.FC<Props> = observer((props) => {
-    const { handleRemove, values } = props;
+    const { handleRemove, values } = props
 
     const getDateLabel = (value: string): string => {
-        let dateLabel = "";
+        let dateLabel = ""
 
-        const dateDetails = DATE_FILTER_OPTIONS.find((d) => d.value === value);
+        const dateDetails = DATE_FILTER_OPTIONS.find((d) => d.value === value)
 
-        if (dateDetails) dateLabel = dateDetails.name;
+        if (dateDetails) dateLabel = dateDetails.name
         else {
-            const dateParts = value.split(";");
+            const dateParts = value.split(";")
 
             if (dateParts.length === 2) {
-                const [date, time] = dateParts;
+                const [date, time] = dateParts
 
-                dateLabel = `${capitalizeFirstLetter(time)} ${renderFormattedDate(date)}`;
+                dateLabel = `${capitalizeFirstLetter(time)} ${renderFormattedDate(date)}`
             }
         }
 
-        return dateLabel;
-    };
+        return dateLabel
+    }
 
     return (
         <>
@@ -49,5 +46,5 @@ export const AppliedDateFilters: React.FC<Props> = observer((props) => {
                 </div>
             ))}
         </>
-    );
-});
+    )
+})

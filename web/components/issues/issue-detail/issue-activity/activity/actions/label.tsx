@@ -1,24 +1,22 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-import { Tag } from "lucide-react";
+import { FC } from "react"
+import { useIssueDetail, useLabel } from "@hooks/store"
+import { Tag } from "lucide-react"
+import { observer } from "mobx-react"
+import { IssueActivityBlockComponent, IssueLink } from "./"
 
-import { useIssueDetail, useLabel } from "@hooks/store";
-
-import { IssueActivityBlockComponent, IssueLink } from "./";
-
-type TIssueLabelActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
+type TIssueLabelActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }
 
 export const IssueLabelActivity: FC<TIssueLabelActivity> = observer((props) => {
-    const { activityId, showIssue = true, ends } = props;
+    const { activityId, showIssue = true, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
-    const { projectLabels } = useLabel();
+    } = useIssueDetail()
+    const { projectLabels } = useLabel()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             icon={<Tag size={14} color="#6b7280" aria-hidden="true" />}
@@ -60,5 +58,5 @@ export const IssueLabelActivity: FC<TIssueLabelActivity> = observer((props) => {
                 {showIssue && <IssueLink activityId={activityId} />}
             </>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

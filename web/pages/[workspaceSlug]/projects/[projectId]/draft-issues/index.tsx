@@ -1,26 +1,22 @@
-import { PenSquare, X } from "lucide-react";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { PageHead } from "@components/core";
-import { ProjectDraftIssueHeader } from "@components/headers";
-import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/draft-issue-layout-root";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { useProject } from "@hooks/store";
-import { observer } from "mobx-react";
+import { useRouter } from "next/router"
+import { ReactElement } from "react"
+import { PageHead } from "@components/core"
+import { ProjectDraftIssueHeader } from "@components/headers"
+import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/draft-issue-layout-root"
+import { useProject } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { PenSquare, X } from "lucide-react"
+import { observer } from "mobx-react"
+import { NextPageWithLayout } from "@/types/types"
 
 const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     // derived values
-    const project = projectId ? getProjectById(projectId.toString()) : undefined;
-    const pageTitle = project?.name ? `${project?.name} - Draft Issues` : undefined;
+    const project = projectId ? getProjectById(projectId.toString()) : undefined
+    const pageTitle = project?.name ? `${project?.name} - Draft Issues` : undefined
 
     return (
         <>
@@ -40,15 +36,15 @@ const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {
                 <DraftIssueLayoutRoot />
             </div>
         </>
-    );
-});
+    )
+})
 
 ProjectDraftIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<ProjectDraftIssueHeader />} withProjectWrapper>
             {page}
         </AppLayout>
-    );
-};
+    )
+}
 
-export default ProjectDraftIssuesPage;
+export default ProjectDraftIssuesPage

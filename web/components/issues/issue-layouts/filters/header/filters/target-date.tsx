@@ -1,26 +1,24 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-import { DateFilterModal } from "@components/core";
-
-import { DATE_FILTER_OPTIONS } from "@constants/filters";
+import React, { useState } from "react"
+import { DateFilterModal } from "@components/core"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { DATE_FILTER_OPTIONS } from "@constants/filters"
+import { observer } from "mobx-react-lite"
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string | string[]) => void;
-    searchQuery: string;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string | string[]) => void
+    searchQuery: string
+}
 
 export const FilterTargetDate: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, searchQuery } = props;
+    const { appliedFilters, handleUpdate, searchQuery } = props
 
-    const [previewEnabled, setPreviewEnabled] = useState(true);
-    const [isDateFilterModalOpen, setIsDateFilterModalOpen] = useState(false);
+    const [previewEnabled, setPreviewEnabled] = useState(true)
+    const [isDateFilterModalOpen, setIsDateFilterModalOpen] = useState(false)
 
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const appliedFiltersCount = appliedFilters?.length ?? 0
 
-    const filteredOptions = DATE_FILTER_OPTIONS.filter((d) => d.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredOptions = DATE_FILTER_OPTIONS.filter((d) => d.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
     return (
         <>
@@ -63,5 +61,5 @@ export const FilterTargetDate: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

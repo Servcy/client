@@ -1,21 +1,18 @@
-import { FC, useMemo, useState } from "react";
-import { observer } from "mobx-react-lite";
-import { History, LucideIcon, MessageCircle, ListRestart } from "lucide-react";
-
-import { useIssueDetail, useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentRoot, IssueCommentCreate } from "./";
-
-import { TIssueComment } from "@servcy/types";
+import { FC, useMemo, useState } from "react"
+import { useIssueDetail, useProject } from "@hooks/store"
+import { History, ListRestart, LucideIcon, MessageCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { TIssueComment } from "@servcy/types"
+import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentCreate, IssueCommentRoot } from "./"
 
 type TIssueActivity = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+}
 
-type TActivityTabs = "all" | "activity" | "comments";
+type TActivityTabs = "all" | "activity" | "comments"
 
 const activityTabs: { key: TActivityTabs; title: string; icon: LucideIcon }[] = [
     {
@@ -33,82 +30,82 @@ const activityTabs: { key: TActivityTabs; title: string; icon: LucideIcon }[] = 
         title: "Comments",
         icon: MessageCircle,
     },
-];
+]
 
 export type TActivityOperations = {
-    createComment: (data: Partial<TIssueComment>) => Promise<void>;
-    updateComment: (commentId: string, data: Partial<TIssueComment>) => Promise<void>;
-    removeComment: (commentId: string) => Promise<void>;
-};
+    createComment: (data: Partial<TIssueComment>) => Promise<void>
+    updateComment: (commentId: string, data: Partial<TIssueComment>) => Promise<void>
+    removeComment: (commentId: string) => Promise<void>
+}
 
 export const IssueActivity: FC<TIssueActivity> = observer((props) => {
-    const { workspaceSlug, projectId, issueId } = props;
+    const { workspaceSlug, projectId, issueId } = props
 
-    const { createComment, updateComment, removeComment } = useIssueDetail();
+    const { createComment, updateComment, removeComment } = useIssueDetail()
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     // state
-    const [activityTab, setActivityTab] = useState<TActivityTabs>("all");
+    const [activityTab, setActivityTab] = useState<TActivityTabs>("all")
 
     const activityOperations: TActivityOperations = useMemo(
         () => ({
             createComment: async (data: Partial<TIssueComment>) => {
                 try {
-                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields");
-                    await createComment(workspaceSlug, projectId, issueId, data);
+                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
+                    await createComment(workspaceSlug, projectId, issueId, data)
                     toast.error({
                         title: "Comment created successfully.",
                         type: "success",
                         message: "Comment created successfully.",
-                    });
+                    })
                 } catch (error) {
                     toast.error({
                         title: "Comment creation failed.",
                         type: "error",
                         message: "Comment creation failed. Please try again later.",
-                    });
+                    })
                 }
             },
             updateComment: async (commentId: string, data: Partial<TIssueComment>) => {
                 try {
-                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields");
-                    await updateComment(workspaceSlug, projectId, issueId, commentId, data);
+                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
+                    await updateComment(workspaceSlug, projectId, issueId, commentId, data)
                     toast.error({
                         title: "Comment updated successfully.",
                         type: "success",
                         message: "Comment updated successfully.",
-                    });
+                    })
                 } catch (error) {
                     toast.error({
                         title: "Comment update failed.",
                         type: "error",
                         message: "Comment update failed. Please try again later.",
-                    });
+                    })
                 }
             },
             removeComment: async (commentId: string) => {
                 try {
-                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields");
-                    await removeComment(workspaceSlug, projectId, issueId, commentId);
+                    if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
+                    await removeComment(workspaceSlug, projectId, issueId, commentId)
                     toast.error({
                         title: "Comment removed successfully.",
                         type: "success",
                         message: "Comment removed successfully.",
-                    });
+                    })
                 } catch (error) {
                     toast.error({
                         title: "Comment remove failed.",
                         type: "error",
                         message: "Comment remove failed. Please try again later.",
-                    });
+                    })
                 }
             },
         }),
         [workspaceSlug, projectId, issueId, createComment, updateComment, removeComment, setToastAlert]
-    );
+    )
 
-    const project = getProjectById(projectId);
-    if (!project) return <></>;
+    const project = getProjectById(projectId)
+    if (!project) return <></>
 
     return (
         <div className="space-y-3 pt-3">
@@ -172,5 +169,5 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

@@ -1,10 +1,10 @@
-import { getRandomInt } from "../utils";
+import { getRandomInt } from "../utils"
 
 const CalendarDay = () => {
-    const dataCount = getRandomInt(0, 1);
+    const dataCount = getRandomInt(0, 1)
     const dataBlocks = Array.from({ length: dataCount }, (_, index) => (
         <span key={index} className="h-8 w-full bg-custom-background-80 rounded mb-2" />
-    ));
+    ))
 
     return (
         <div className="flex w-full flex-col min-h-[9rem]">
@@ -13,8 +13,8 @@ const CalendarDay = () => {
             </div>
             <div className="flex flex-col gap-2.5 p-2">{dataBlocks}</div>
         </div>
-    );
-};
+    )
+}
 
 export const CalendarLayoutLoader = () => (
     <div className="h-full w-full overflow-y-auto bg-custom-background-100 pt-4 animate-pulse">
@@ -45,4 +45,4 @@ export const CalendarLayoutLoader = () => (
             </div>
         </div>
     </div>
-);
+)

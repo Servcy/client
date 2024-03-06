@@ -1,34 +1,31 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useProject, useUser } from "@hooks/store";
-// component
-import { CustomSelect, Loader, ToggleSwitch } from "@servcy/ui";
-import { SelectMonthModal } from "@components/automation";
+import React, { useState } from "react"
+import { SelectMonthModal } from "@components/automation"
+import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project"
+import { useProject, useUser } from "@hooks/store"
 // icon
-import { ArchiveRestore } from "lucide-react";
-
-import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project";
-
-import { IProject } from "@servcy/types";
+import { ArchiveRestore } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IProject } from "@servcy/types"
+// component
+import { CustomSelect, Loader, ToggleSwitch } from "@servcy/ui"
 
 type Props = {
-    handleChange: (formData: Partial<IProject>) => Promise<void>;
-};
+    handleChange: (formData: Partial<IProject>) => Promise<void>
+}
 
-const initialValues: Partial<IProject> = { archive_in: 1 };
+const initialValues: Partial<IProject> = { archive_in: 1 }
 
 export const AutoArchiveAutomation: React.FC<Props> = observer((props) => {
-    const { handleChange } = props;
+    const { handleChange } = props
     // states
-    const [monthModal, setmonthModal] = useState(false);
+    const [monthModal, setmonthModal] = useState(false)
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
 
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
+    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
 
     return (
         <>
@@ -76,7 +73,7 @@ export const AutoArchiveAutomation: React.FC<Props> = observer((props) => {
                                             currentProjectDetails?.archive_in === 1 ? "month" : "months"
                                         }`}
                                         onChange={(val: number) => {
-                                            handleChange({ archive_in: val });
+                                            handleChange({ archive_in: val })
                                         }}
                                         input
                                         disabled={!isAdmin}
@@ -108,5 +105,5 @@ export const AutoArchiveAutomation: React.FC<Props> = observer((props) => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,15 +1,15 @@
-import { JiraNotificationProps } from "@/types/integrations/jira";
-import Image from "next/image.js";
-import { HiExternalLink } from "react-icons/hi";
-import { remark } from "remark";
-import html from "remark-html";
+import Image from "next/image.js"
+import { HiExternalLink } from "react-icons/hi"
+import { remark } from "remark"
+import html from "remark-html"
+import { JiraNotificationProps } from "@/types/integrations/jira"
 
 const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
-    const projectUrl = data.issue.self.split("/rest/api")[0];
-    const issueKey = data.issue.key;
-    let link = `${projectUrl}/browse/${issueKey}`;
-    let linkLabel = "View issue on Jira";
-    const { displayName } = cause;
+    const projectUrl = data.issue.self.split("/rest/api")[0]
+    const issueKey = data.issue.key
+    let link = `${projectUrl}/browse/${issueKey}`
+    let linkLabel = "View issue on Jira"
+    const { displayName } = cause
 
     const renderTrelloEvent = () => {
         if (data.webhookEvent.startsWith("jira:")) {
@@ -109,11 +109,11 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
                         </div>
                     )}
                 </>
-            );
+            )
         }
         if (data.webhookEvent.startsWith("comment") && data.comment) {
-            linkLabel = "View comment on Jiira";
-            link = `${projectUrl}/browse/${issueKey}?focusedCommentId=${data.comment.id}`;
+            linkLabel = "View comment on Jiira"
+            link = `${projectUrl}/browse/${issueKey}?focusedCommentId=${data.comment.id}`
             return (
                 <>
                     <div className="mb-2 flex w-full">
@@ -233,9 +233,9 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
                         </div>
                     )}
                 </>
-            );
-        } else return <div>Event not supported</div>;
-    };
+            )
+        } else return <div>Event not supported</div>
+    }
 
     return (
         <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
@@ -267,7 +267,7 @@ const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default TrelloNotification;
+export default TrelloNotification

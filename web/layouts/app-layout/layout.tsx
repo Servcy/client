@@ -1,19 +1,17 @@
-import { FC, ReactNode } from "react";
-
-import { UserAuthWrapper, WorkspaceAuthWrapper, ProjectAuthWrapper } from "@layouts/auth-layout";
-
-import { CommandPalette } from "@components/command-palette";
-import { AppSidebar } from "./sidebar";
-import { observer } from "mobx-react-lite";
+import { FC, ReactNode } from "react"
+import { CommandPalette } from "@components/command-palette"
+import { ProjectAuthWrapper, UserAuthWrapper, WorkspaceAuthWrapper } from "@layouts/auth-layout"
+import { observer } from "mobx-react-lite"
+import { AppSidebar } from "./sidebar"
 
 export interface IAppLayout {
-    children: ReactNode;
-    header: ReactNode;
-    withProjectWrapper?: boolean;
+    children: ReactNode
+    header: ReactNode
+    withProjectWrapper?: boolean
 }
 
 export const AppLayout: FC<IAppLayout> = observer((props) => {
-    const { children, header, withProjectWrapper = false } = props;
+    const { children, header, withProjectWrapper = false } = props
 
     return (
         <>
@@ -38,5 +36,5 @@ export const AppLayout: FC<IAppLayout> = observer((props) => {
                 </WorkspaceAuthWrapper>
             </UserAuthWrapper>
         </>
-    );
-});
+    )
+})

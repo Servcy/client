@@ -13,4 +13,4 @@ export const NotificationsLoader = () => (
             </div>
         ))}
     </div>
-);
+)

@@ -1,9 +1,9 @@
 type Props = {
-    width?: string;
-    height?: string;
-    className?: string;
-    color?: string;
-};
+    width?: string
+    height?: string
+    className?: string
+    color?: string
+}
 
 export const StateGroupCancelledIcon: React.FC<Props> = ({
     width = "20",
@@ -31,4 +31,4 @@ export const StateGroupCancelledIcon: React.FC<Props> = ({
             </clipPath>
         </defs>
     </svg>
-);
+)

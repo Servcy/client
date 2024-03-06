@@ -1,36 +1,31 @@
-import { useState } from "react";
-import Image from "next/image";
-import { observer } from "mobx-react-lite";
-import { X } from "lucide-react";
-
-import { useApplication, useEventTracker, useUser } from "@hooks/store";
-
-import { TourSidebar } from "@components/onboarding";
-
-import { Button } from "@servcy/ui";
-
-import ServcyLogo from "public/logo.svg";
-import IssuesTour from "public/onboarding/issues.webp";
-import CyclesTour from "public/onboarding/cycles.webp";
-import ModulesTour from "public/onboarding/modules.webp";
-import ViewsTour from "public/onboarding/views.webp";
-import PagesTour from "public/onboarding/pages.webp";
-
-import { PRODUCT_TOUR_SKIPPED, PRODUCT_TOUR_STARTED } from "@constants/event-tracker";
+import Image from "next/image"
+import { useState } from "react"
+import { TourSidebar } from "@components/onboarding"
+import { PRODUCT_TOUR_SKIPPED, PRODUCT_TOUR_STARTED } from "@constants/event-tracker"
+import { useApplication, useEventTracker, useUser } from "@hooks/store"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import ServcyLogo from "public/logo.svg"
+import CyclesTour from "public/onboarding/cycles.webp"
+import IssuesTour from "public/onboarding/issues.webp"
+import ModulesTour from "public/onboarding/modules.webp"
+import PagesTour from "public/onboarding/pages.webp"
+import ViewsTour from "public/onboarding/views.webp"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    onComplete: () => void;
-};
+    onComplete: () => void
+}
 
-export type TTourSteps = "welcome" | "issues" | "cycles" | "modules" | "views" | "pages";
+export type TTourSteps = "welcome" | "issues" | "cycles" | "modules" | "views" | "pages"
 
 const TOUR_STEPS: {
-    key: TTourSteps;
-    title: string;
-    description: string;
-    image: any;
-    prevStep?: TTourSteps;
-    nextStep?: TTourSteps;
+    key: TTourSteps
+    title: string
+    description: string
+    image: any
+    prevStep?: TTourSteps
+    nextStep?: TTourSteps
 }[] = [
     {
         key: "issues",
@@ -73,19 +68,19 @@ const TOUR_STEPS: {
         image: PagesTour,
         prevStep: "views",
     },
-];
+]
 
 export const TourRoot: React.FC<Props> = observer((props) => {
-    const { onComplete } = props;
+    const { onComplete } = props
     // states
-    const [step, setStep] = useState<TTourSteps>("welcome");
+    const [step, setStep] = useState<TTourSteps>("welcome")
     // store hooks
-    const { commandPalette: commandPaletteStore } = useApplication();
-    const { setTrackElement, captureEvent } = useEventTracker();
-    const { currentUser } = useUser();
+    const { commandPalette: commandPaletteStore } = useApplication()
+    const { setTrackElement, captureEvent } = useEventTracker()
+    const { currentUser } = useUser()
 
-    const currentStepIndex = TOUR_STEPS.findIndex((tourStep) => tourStep.key === step);
-    const currentStep = TOUR_STEPS[currentStepIndex];
+    const currentStepIndex = TOUR_STEPS.findIndex((tourStep) => tourStep.key === step)
+    const currentStep = TOUR_STEPS[currentStepIndex]
 
     return (
         <>
@@ -108,8 +103,8 @@ export const TourRoot: React.FC<Props> = observer((props) => {
                                     <Button
                                         variant="primary"
                                         onClick={() => {
-                                            captureEvent(PRODUCT_TOUR_STARTED);
-                                            setStep("issues");
+                                            captureEvent(PRODUCT_TOUR_STARTED)
+                                            setStep("issues")
                                         }}
                                     >
                                         Take a Product Tour
@@ -118,8 +113,8 @@ export const TourRoot: React.FC<Props> = observer((props) => {
                                         type="button"
                                         className="bg-transparent text-xs font-medium text-custom-primary-100 outline-custom-text-100"
                                         onClick={() => {
-                                            captureEvent(PRODUCT_TOUR_SKIPPED);
-                                            onComplete();
+                                            captureEvent(PRODUCT_TOUR_SKIPPED)
+                                            onComplete()
                                         }}
                                     >
                                         No thanks, I will explore it myself
@@ -173,9 +168,9 @@ export const TourRoot: React.FC<Props> = observer((props) => {
                                     <Button
                                         variant="primary"
                                         onClick={() => {
-                                            setTrackElement("Product tour");
-                                            onComplete();
-                                            commandPaletteStore.toggleCreateProjectModal(true);
+                                            setTrackElement("Product tour")
+                                            onComplete()
+                                            commandPaletteStore.toggleCreateProjectModal(true)
                                         }}
                                     >
                                         Create my first project
@@ -187,5 +182,5 @@ export const TourRoot: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

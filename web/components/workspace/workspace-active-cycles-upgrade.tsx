@@ -1,22 +1,18 @@
-import React from "react";
-import Image from "next/image";
-import { observer } from "mobx-react";
-
-import { useUser } from "@hooks/store";
-
-import { getButtonStyling } from "@servcy/ui";
-
-import { Crown } from "lucide-react";
+import Image from "next/image"
+import React from "react"
+import { WORKSPACE_ACTIVE_CYCLES_DETAILS } from "@constants/cycle"
 // helper
-import { cn } from "@helpers/common.helper";
-
-import { WORKSPACE_ACTIVE_CYCLES_DETAILS } from "@constants/cycle";
+import { cn } from "@helpers/common.helper"
+import { useUser } from "@hooks/store"
+import { Crown } from "lucide-react"
+import { observer } from "mobx-react"
+import { getButtonStyling } from "@servcy/ui"
 
 export const WorkspaceActiveCyclesUpgrade = observer(() => {
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
 
-    const isDarkMode = currentUser?.theme.theme === "dark";
+    const isDarkMode = currentUser?.theme.theme === "dark"
 
     return (
         <div className="flex flex-col gap-10 pt-8 px-8 rounded-xl h-full vertical-scrollbar scrollbar-lg">
@@ -86,5 +82,5 @@ export const WorkspaceActiveCyclesUpgrade = observer(() => {
                 ))}
             </div>
         </div>
-    );
-});
+    )
+})

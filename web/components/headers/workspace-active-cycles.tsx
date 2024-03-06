@@ -1,10 +1,8 @@
-import { observer } from "mobx-react-lite";
-
-import { Breadcrumbs, ContrastIcon } from "@servcy/ui";
-import { BreadcrumbLink } from "@components/common";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-
-import { Crown } from "lucide-react";
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { Crown } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, ContrastIcon } from "@servcy/ui"
 
 export const WorkspaceActiveCycleHeader = observer(() => (
     <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -26,4 +24,4 @@ export const WorkspaceActiveCycleHeader = observer(() => (
             </div>
         </div>
     </div>
-));
+))

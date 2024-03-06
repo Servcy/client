@@ -1,50 +1,43 @@
-import { useCallback, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import Link from "next/link";
-
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useCallback, useState } from "react"
+import { ProjectAnalyticsModal } from "@components/analytics"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
+import { ModuleMobileHeader } from "@components/modules/module-mobile-header"
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+import { cn } from "@helpers/common.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { truncateText } from "@helpers/string.helper"
 import {
     useApplication,
     useEventTracker,
+    useIssues,
     useLabel,
     useMember,
     useModule,
     useProject,
     useProjectState,
     useUser,
-    useIssues,
-} from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
-import { ProjectAnalyticsModal } from "@components/analytics";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-
-import { Breadcrumbs, Button, CustomMenu, DiceIcon, LayersIcon } from "@servcy/ui";
-
-import { ArrowRight, PanelRight, Plus } from "lucide-react";
-
-import { truncateText } from "@helpers/string.helper";
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
-
-import { EIssuesStoreType, EIssueFilterType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
-import { EUserProjectRoles } from "@constants/project";
-import { cn } from "@helpers/common.helper";
-import { ModuleMobileHeader } from "@components/modules/module-mobile-header";
+} from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { ArrowRight, PanelRight, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
+import { Breadcrumbs, Button, CustomMenu, DiceIcon, LayersIcon } from "@servcy/ui"
 
 const ModuleDropdownOption: React.FC<{ moduleId: string }> = ({ moduleId }) => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { getModuleById } = useModule();
+    const { getModuleById } = useModule()
     // derived values
-    const moduleDetail = getModuleById(moduleId);
+    const moduleDetail = getModuleById(moduleId)
 
-    if (!moduleDetail) return null;
+    if (!moduleDetail) return null
 
     return (
         <CustomMenu.MenuItem key={moduleDetail.id}>
@@ -56,94 +49,94 @@ const ModuleDropdownOption: React.FC<{ moduleId: string }> = ({ moduleId }) => {
                 {truncateText(moduleDetail.name, 40)}
             </Link>
         </CustomMenu.MenuItem>
-    );
-};
+    )
+}
 
 export const ModuleIssuesHeader: React.FC = observer(() => {
     // states
-    const [analyticsModal, setAnalyticsModal] = useState(false);
+    const [analyticsModal, setAnalyticsModal] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     const { workspaceSlug, projectId, moduleId } = router.query as {
-        workspaceSlug: string;
-        projectId: string;
-        moduleId: string;
-    };
+        workspaceSlug: string
+        projectId: string
+        moduleId: string
+    }
     // store hooks
     const {
         issuesFilter: { issueFilters, updateFilters },
-    } = useIssues(EIssuesStoreType.MODULE);
-    const { projectModuleIds, getModuleById } = useModule();
+    } = useIssues(EIssuesStoreType.MODULE)
+    const { projectModuleIds, getModuleById } = useModule()
     const {
         commandPalette: { toggleCreateIssueModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
-    const { projectLabels } = useLabel();
-    const { projectStates } = useProjectState();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
+    const { projectLabels } = useLabel()
+    const { projectStates } = useProjectState()
     const {
         project: { projectMemberIds },
-    } = useMember();
+    } = useMember()
 
-    const { setValue, storedValue } = useLocalStorage("module_sidebar_collapsed", "false");
+    const { setValue, storedValue } = useLocalStorage("module_sidebar_collapsed", "false")
 
-    const isSidebarCollapsed = storedValue ? (storedValue === "true" ? true : false) : false;
+    const isSidebarCollapsed = storedValue ? (storedValue === "true" ? true : false) : false
     const toggleSidebar = () => {
-        setValue(`${!isSidebarCollapsed}`);
-    };
+        setValue(`${!isSidebarCollapsed}`)
+    }
 
-    const activeLayout = issueFilters?.displayFilters?.layout;
+    const activeLayout = issueFilters?.displayFilters?.layout
 
     const handleLayoutChange = useCallback(
         (layout: TIssueLayouts) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout }, moduleId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout }, moduleId)
         },
         [workspaceSlug, projectId, moduleId, updateFilters]
-    );
+    )
 
     const handleFiltersUpdate = useCallback(
         (key: keyof IIssueFilterOptions, value: string | string[]) => {
-            if (!workspaceSlug || !projectId) return;
-            const newValues = issueFilters?.filters?.[key] ?? [];
+            if (!workspaceSlug || !projectId) return
+            const newValues = issueFilters?.filters?.[key] ?? []
 
             if (Array.isArray(value)) {
                 value.forEach((val) => {
-                    if (!newValues.includes(val)) newValues.push(val);
-                });
+                    if (!newValues.includes(val)) newValues.push(val)
+                })
             } else {
-                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
-                else newValues.push(value);
+                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                else newValues.push(value)
             }
 
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues }, moduleId);
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues }, moduleId)
         },
         [workspaceSlug, projectId, moduleId, issueFilters, updateFilters]
-    );
+    )
 
     const handleDisplayFilters = useCallback(
         (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter, moduleId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter, moduleId)
         },
         [workspaceSlug, projectId, moduleId, updateFilters]
-    );
+    )
 
     const handleDisplayProperties = useCallback(
         (property: Partial<IIssueDisplayProperties>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property, moduleId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property, moduleId)
         },
         [workspaceSlug, projectId, moduleId, updateFilters]
-    );
+    )
 
     // derived values
-    const moduleDetails = moduleId ? getModuleById(moduleId.toString()) : undefined;
+    const moduleDetails = moduleId ? getModuleById(moduleId.toString()) : undefined
     const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return (
         <>
@@ -266,8 +259,8 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
                                 <Button
                                     className="hidden sm:flex"
                                     onClick={() => {
-                                        setTrackElement("Module issues page");
-                                        toggleCreateIssueModal(true, EIssuesStoreType.MODULE);
+                                        setTrackElement("Module issues page")
+                                        toggleCreateIssueModal(true, EIssuesStoreType.MODULE)
                                     }}
                                     size="sm"
                                     prependIcon={<Plus />}
@@ -296,5 +289,5 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
                 <ModuleMobileHeader />
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,32 +1,27 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { Controller, useForm } from "react-hook-form";
-import { observer } from "mobx-react-lite";
-import { Camera, User2 } from "lucide-react";
-
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
-
-import { Button, Input } from "@servcy/ui";
-import { OnboardingSidebar, OnboardingStepIndicator } from "@components/onboarding";
-import { UserImageUploadModal } from "@components/core";
-
-import { IUser } from "@servcy/types";
-
-import { FileService } from "@services/file.service";
-
-import IssuesSvg from "public/onboarding/onboarding-issues.webp";
-import { USER_DETAILS } from "@constants/event-tracker";
+import Image from "next/image"
+import React, { useState } from "react"
+import { UserImageUploadModal } from "@components/core"
+import { OnboardingSidebar, OnboardingStepIndicator } from "@components/onboarding"
+import { USER_DETAILS } from "@constants/event-tracker"
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+import { FileService } from "@services/file.service"
+import { Camera, User2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import IssuesSvg from "public/onboarding/onboarding-issues.webp"
+import { Controller, useForm } from "react-hook-form"
+import { IUser } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 const defaultValues: Partial<IUser> = {
     first_name: "",
     avatar: "",
     use_case: undefined,
-};
+}
 
 type Props = {
-    user?: IUser;
-    setUserName: (name: string) => void;
-};
+    user?: IUser
+    setUserName: (name: string) => void
+}
 
 const USE_CASES = [
     "Build Products",
@@ -37,21 +32,21 @@ const USE_CASES = [
     "Bug Tracking",
     "Test Case Management",
     "Resource allocation",
-];
+]
 
-const fileService = new FileService();
+const fileService = new FileService()
 
 export const UserDetails: React.FC<Props> = observer((props) => {
-    const { user, setUserName } = props;
+    const { user, setUserName } = props
     // states
-    const [isRemoving, setIsRemoving] = useState(false);
-    const [isImageUploadModalOpen, setIsImageUploadModalOpen] = useState(false);
+    const [isRemoving, setIsRemoving] = useState(false)
+    const [isImageUploadModalOpen, setIsImageUploadModalOpen] = useState(false)
     // store hooks
-    const { updateCurrentUser } = useUser();
-    const { workspaces } = useWorkspace();
-    const { captureEvent } = useEventTracker();
+    const { updateCurrentUser } = useUser()
+    const { workspaces } = useWorkspace()
+    const { captureEvent } = useEventTracker()
     // derived values
-    const workspaceName = workspaces ? Object.values(workspaces)?.[0]?.name : "New Workspace";
+    const workspaceName = workspaces ? Object.values(workspaces)?.[0]?.name : "New Workspace"
     // form info
     const {
         getValues,
@@ -63,10 +58,10 @@ export const UserDetails: React.FC<Props> = observer((props) => {
     } = useForm<IUser>({
         defaultValues,
         mode: "onChange",
-    });
+    })
 
     const onSubmit = async (formData: IUser) => {
-        if (!user) return;
+        if (!user) return
 
         const payload: Partial<IUser> = {
             ...formData,
@@ -77,7 +72,7 @@ export const UserDetails: React.FC<Props> = observer((props) => {
                 ...user.onboarding_step,
                 profile_complete: true,
             },
-        };
+        }
 
         await updateCurrentUser(payload)
             .then(() => {
@@ -85,25 +80,25 @@ export const UserDetails: React.FC<Props> = observer((props) => {
                     use_case: formData.use_case,
                     state: "SUCCESS",
                     element: "Onboarding",
-                });
+                })
             })
             .catch(() => {
                 captureEvent(USER_DETAILS, {
                     use_case: formData.use_case,
                     state: "FAILED",
                     element: "Onboarding",
-                });
-            });
-    };
+                })
+            })
+    }
     const handleDelete = (url: string | null | undefined) => {
-        if (!url) return;
+        if (!url) return
 
-        setIsRemoving(true);
+        setIsRemoving(true)
         fileService.deleteUserFile(url).finally(() => {
-            setValue("avatar", "");
-            setIsRemoving(false);
-        });
-    };
+            setValue("avatar", "")
+            setIsRemoving(false)
+        })
+    }
 
     return (
         <div className="flex h-full w-full space-y-7 overflow-y-auto sm:space-y-10 ">
@@ -130,8 +125,8 @@ export const UserDetails: React.FC<Props> = observer((props) => {
                         isRemoving={isRemoving}
                         handleDelete={() => handleDelete(getValues("avatar"))}
                         onSuccess={(url) => {
-                            onChange(url);
-                            setIsImageUploadModalOpen(false);
+                            onChange(url)
+                            setIsImageUploadModalOpen(false)
                         }}
                         value={value && value.trim() !== "" ? value : null}
                     />
@@ -185,8 +180,8 @@ export const UserDetails: React.FC<Props> = observer((props) => {
                                                 value={value}
                                                 autoFocus={true}
                                                 onChange={(event) => {
-                                                    setUserName(event.target.value);
-                                                    onChange(event);
+                                                    setUserName(event.target.value)
+                                                    onChange(event)
                                                 }}
                                                 ref={ref}
                                                 hasError={Boolean(errors.first_name)}
@@ -247,5 +242,5 @@ export const UserDetails: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

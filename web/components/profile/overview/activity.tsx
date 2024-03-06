@@ -1,36 +1,31 @@
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { observer } from "mobx-react";
+import { useRouter } from "next/router"
+import { ActivityMessage, IssueLink } from "@components/core"
+import { ProfileEmptyState } from "@components/ui"
+import { USER_PROFILE_ACTIVITY } from "@constants/fetch-keys"
+import { calculateTimeAgo } from "@helpers/date-time.helper"
 //hooks
-import { useUser } from "@hooks/store";
-
-import { UserService } from "@services/user.service";
-
-import { ActivityMessage, IssueLink } from "@components/core";
-
-import { ProfileEmptyState } from "@components/ui";
-import { Loader } from "@servcy/ui";
+import { useUser } from "@hooks/store"
+import { UserService } from "@services/user.service"
+import { observer } from "mobx-react"
 // image
-import recentActivityEmptyState from "public/empty-state/recent_activity.svg";
+import recentActivityEmptyState from "public/empty-state/recent_activity.svg"
+import useSWR from "swr"
+import { Loader } from "@servcy/ui"
 
-import { calculateTimeAgo } from "@helpers/date-time.helper";
-
-import { USER_PROFILE_ACTIVITY } from "@constants/fetch-keys";
-
-const userService = new UserService();
+const userService = new UserService()
 
 export const ProfileActivity = observer(() => {
-    const router = useRouter();
-    const { workspaceSlug, userId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, userId } = router.query
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
 
     const { data: userProfileActivity } = useSWR(
         workspaceSlug && userId ? USER_PROFILE_ACTIVITY(workspaceSlug.toString(), userId.toString()) : null,
         workspaceSlug && userId
             ? () => userService.getUserProfileActivity(workspaceSlug.toString(), userId.toString())
             : null
-    );
+    )
 
     return (
         <div className="space-y-2">
@@ -96,5 +91,5 @@ export const ProfileActivity = observer(() => {
                 )}
             </div>
         </div>
-    );
-});
+    )
+})

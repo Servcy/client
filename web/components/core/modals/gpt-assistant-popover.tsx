@@ -1,53 +1,50 @@
-import React, { useEffect, useState, useRef, Fragment } from "react";
-import { useRouter } from "next/router";
-import { Controller, useForm } from "react-hook-form";
-import { AIService } from "@services/ai.service";
-import toast from "react-hot-toast";
-import { usePopper } from "react-popper";
-
-import { Button, Input } from "@servcy/ui";
-
-import { RichReadOnlyEditorWithRef } from "@servcy/rich-text-editor";
-import { Popover, Transition } from "@headlessui/react";
-
-import { Placement } from "@popperjs/core";
+import { useRouter } from "next/router"
+import React, { Fragment, useEffect, useRef, useState } from "react"
+import { Popover, Transition } from "@headlessui/react"
+import { Placement } from "@popperjs/core"
+import { AIService } from "@services/ai.service"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { usePopper } from "react-popper"
+import { RichReadOnlyEditorWithRef } from "@servcy/rich-text-editor"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    projectId: string;
-    handleClose: () => void;
-    onResponse: (response: any) => void;
-    onError?: (error: any) => void;
-    placement?: Placement;
-    prompt?: string;
-    button: JSX.Element;
-    className?: string;
-};
+    isOpen: boolean
+    projectId: string
+    handleClose: () => void
+    onResponse: (response: any) => void
+    onError?: (error: any) => void
+    placement?: Placement
+    prompt?: string
+    button: JSX.Element
+    className?: string
+}
 
 type FormData = {
-    prompt: string;
-    task: string;
-};
+    prompt: string
+    task: string
+}
 
-const aiService = new AIService();
+const aiService = new AIService()
 
 export const GptAssistantPopover: React.FC<Props> = (props) => {
-    const { isOpen, projectId, handleClose, onResponse, onError, placement, prompt, button, className = "" } = props;
+    const { isOpen, projectId, handleClose, onResponse, onError, placement, prompt, button, className = "" } = props
     // states
-    const [response, setResponse] = useState("");
-    const [invalidResponse, setInvalidResponse] = useState(false);
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-    const editorRef = useRef<any>(null);
-    const responseRef = useRef<any>(null);
+    const [response, setResponse] = useState("")
+    const [invalidResponse, setInvalidResponse] = useState(false)
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
+    const editorRef = useRef<any>(null)
+    const responseRef = useRef<any>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     // popper
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: placement ?? "auto",
-    });
+    })
     // form
     const {
         handleSubmit,
@@ -60,121 +57,121 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
             prompt: prompt || "",
             task: "",
         },
-    });
+    })
 
     const onClose = () => {
-        handleClose();
-        setResponse("");
-        setInvalidResponse(false);
-        reset();
-    };
+        handleClose()
+        setResponse("")
+        setInvalidResponse(false)
+        reset()
+    }
 
     const handleServiceError = (err: any) => {
-        const error = err?.data?.error;
+        const error = err?.data?.error
         const errorMessage =
             err?.status === 429
                 ? error || "You have reached the maximum number of requests of 50 requests per month per user."
-                : error || "Some error occurred. Please try again.";
+                : error || "Some error occurred. Please try again."
 
         toast.error({
             type: "error",
             title: "Error!",
             message: errorMessage,
-        });
+        })
 
-        if (onError) onError(err);
-    };
+        if (onError) onError(err)
+    }
 
     const callAIService = async (formData: FormData) => {
         try {
             const res = await aiService.createGptTask(workspaceSlug as string, projectId, {
                 prompt: prompt || "",
                 task: formData.task,
-            });
+            })
 
-            setResponse(res.response_html);
-            setFocus("task");
+            setResponse(res.response_html)
+            setFocus("task")
 
-            setInvalidResponse(res.response === "");
+            setInvalidResponse(res.response === "")
         } catch (err) {
-            handleServiceError(err);
+            handleServiceError(err)
         }
-    };
+    }
 
     const handleInvalidTask = () => {
         toast.error({
             type: "error",
             title: "Error!",
             message: "Please enter some task to get AI assistance.",
-        });
-    };
+        })
+    }
 
     const handleAIResponse = async (formData: FormData) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
         if (formData.task === "") {
-            handleInvalidTask();
-            return;
+            handleInvalidTask()
+            return
         }
 
-        await callAIService(formData);
-    };
+        await callAIService(formData)
+    }
 
     useEffect(() => {
-        if (isOpen) setFocus("task");
-    }, [isOpen, setFocus]);
+        if (isOpen) setFocus("task")
+    }, [isOpen, setFocus])
 
     useEffect(() => {
-        editorRef.current?.setEditorValue(prompt || "");
-    }, [editorRef, prompt]);
+        editorRef.current?.setEditorValue(prompt || "")
+    }, [editorRef, prompt])
 
     useEffect(() => {
-        responseRef.current?.setEditorValue(`<p>${response}</p>`);
-    }, [response, responseRef]);
+        responseRef.current?.setEditorValue(`<p>${response}</p>`)
+    }, [response, responseRef])
 
     useEffect(() => {
         const handleEnterKeyPress = (event: KeyboardEvent) => {
             if (event.key === "Enter" && !event.shiftKey) {
-                event.preventDefault();
-                handleSubmit(handleAIResponse)();
+                event.preventDefault()
+                handleSubmit(handleAIResponse)()
             }
-        };
+        }
 
         const handleEscapeKeyPress = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
-                onClose();
+                onClose()
             }
-        };
+        }
 
         if (isOpen) {
-            window.addEventListener("keydown", handleEnterKeyPress);
-            window.addEventListener("keydown", handleEscapeKeyPress);
+            window.addEventListener("keydown", handleEnterKeyPress)
+            window.addEventListener("keydown", handleEscapeKeyPress)
         }
 
         return () => {
-            window.removeEventListener("keydown", handleEnterKeyPress);
-            window.removeEventListener("keydown", handleEscapeKeyPress);
-        };
+            window.removeEventListener("keydown", handleEnterKeyPress)
+            window.removeEventListener("keydown", handleEscapeKeyPress)
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOpen, handleSubmit, onClose]);
+    }, [isOpen, handleSubmit, onClose])
 
     const responseActionButton = response !== "" && (
         <Button
             variant="primary"
             onClick={() => {
-                onResponse(response);
-                onClose();
+                onResponse(response)
+                onClose()
             }}
         >
             Use this response
         </Button>
-    );
+    )
 
     const generateResponseButtonText = isSubmitting
         ? "Generating response..."
         : response === ""
           ? "Generate response"
-          : "Generate again";
+          : "Generate again"
 
     return (
         <Popover as="div" className={`relative w-min text-left`}>
@@ -269,5 +266,5 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
                 </Popover.Panel>
             </Transition>
         </Popover>
-    );
-};
+    )
+}

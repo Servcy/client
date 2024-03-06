@@ -1,37 +1,31 @@
-import React, { FC, useState, useRef, useEffect, Fragment } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { LayoutPanelTop, Sparkle, X } from "lucide-react";
-// editor
-import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
-
-import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { AIService } from "@services/ai.service";
-import { FileService } from "@services/file.service";
-
-import { GptAssistantPopover } from "@components/core";
-import { ParentIssuesListModal } from "@components/issues";
-import { IssueLabelSelect } from "@components/issues/select";
-import { CreateLabelModal } from "@components/labels";
+import { useRouter } from "next/router"
+import React, { FC, Fragment, useEffect, useRef, useState } from "react"
+import { GptAssistantPopover } from "@components/core"
 import {
     CycleDropdown,
     DateDropdown,
     EstimateDropdown,
+    MemberDropdown,
     ModuleDropdown,
     PriorityDropdown,
     ProjectDropdown,
-    MemberDropdown,
     StateDropdown,
-} from "@components/dropdowns";
-
-import { Button, CustomMenu, Input, Loader, ToggleSwitch } from "@servcy/ui";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import type { TIssue, ISearchIssueResponse } from "@servcy/types";
+} from "@components/dropdowns"
+import { ParentIssuesListModal } from "@components/issues"
+import { IssueLabelSelect } from "@components/issues/select"
+import { CreateLabelModal } from "@components/labels"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store"
+import { AIService } from "@services/ai.service"
+import { FileService } from "@services/file.service"
+import { LayoutPanelTop, Sparkle, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+// editor
+import { RichTextEditorWithRef } from "@servcy/rich-text-editor"
+import type { ISearchIssueResponse, TIssue } from "@servcy/types"
+import { Button, CustomMenu, Input, Loader, ToggleSwitch } from "@servcy/ui"
 
 const defaultValues: Partial<TIssue> = {
     project_id: "",
@@ -47,21 +41,21 @@ const defaultValues: Partial<TIssue> = {
     module_ids: null,
     start_date: null,
     target_date: null,
-};
-
-export interface IssueFormProps {
-    data?: Partial<TIssue>;
-    isCreateMoreToggleEnabled: boolean;
-    onCreateMoreToggleChange: (value: boolean) => void;
-    onChange?: (formData: Partial<TIssue> | null) => void;
-    onClose: () => void;
-    onSubmit: (values: Partial<TIssue>, is_draft_issue?: boolean) => Promise<void>;
-    projectId: string;
-    isDraft: boolean;
 }
 
-const aiService = new AIService();
-const fileService = new FileService();
+export interface IssueFormProps {
+    data?: Partial<TIssue>
+    isCreateMoreToggleEnabled: boolean
+    onCreateMoreToggleChange: (value: boolean) => void
+    onChange?: (formData: Partial<TIssue> | null) => void
+    onClose: () => void
+    onSubmit: (values: Partial<TIssue>, is_draft_issue?: boolean) => Promise<void>
+    projectId: string
+    isDraft: boolean
+}
+
+const aiService = new AIService()
+const fileService = new FileService()
 
 const TAB_INDICES = [
     "name",
@@ -84,9 +78,9 @@ const TAB_INDICES = [
     "submit_button",
     "project_id",
     "remove_parent",
-];
+]
 
-const getTabIndex = (key: string) => TAB_INDICES.findIndex((tabIndex) => tabIndex === key) + 1;
+const getTabIndex = (key: string) => TAB_INDICES.findIndex((tabIndex) => tabIndex === key) + 1
 
 export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
     const {
@@ -98,32 +92,32 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
         isCreateMoreToggleEnabled,
         onCreateMoreToggleChange,
         isDraft,
-    } = props;
+    } = props
     // states
-    const [labelModal, setLabelModal] = useState(false);
-    const [parentIssueListModalOpen, setParentIssueListModalOpen] = useState(false);
-    const [selectedParentIssue, setSelectedParentIssue] = useState<ISearchIssueResponse | null>(null);
-    const [gptAssistantModal, setGptAssistantModal] = useState(false);
-    const [iAmFeelingLucky, setIAmFeelingLucky] = useState(false);
+    const [labelModal, setLabelModal] = useState(false)
+    const [parentIssueListModalOpen, setParentIssueListModalOpen] = useState(false)
+    const [selectedParentIssue, setSelectedParentIssue] = useState<ISearchIssueResponse | null>(null)
+    const [gptAssistantModal, setGptAssistantModal] = useState(false)
+    const [iAmFeelingLucky, setIAmFeelingLucky] = useState(false)
 
     // refs
-    const editorRef = useRef<any>(null);
+    const editorRef = useRef<any>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
-    const workspaceStore = useWorkspace();
-    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
+    const workspaceStore = useWorkspace()
+    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
 
     // store hooks
     const {
         config: { envConfig },
-    } = useApplication();
-    const { getProjectById } = useProject();
-    const { areEstimatesEnabledForProject } = useEstimate();
-    const { mentionHighlights, mentionSuggestions } = useMention();
+    } = useApplication()
+    const { getProjectById } = useProject()
+    const { areEstimatesEnabledForProject } = useEstimate()
+    const { mentionHighlights, mentionSuggestions } = useMention()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
     // form info
     const {
@@ -137,14 +131,14 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
     } = useForm<TIssue>({
         defaultValues: { ...defaultValues, project_id: defaultProjectId, ...data },
         reValidateMode: "onChange",
-    });
+    })
 
-    const projectId = watch("project_id");
+    const projectId = watch("project_id")
 
     //reset few fields on projectId change
     useEffect(() => {
         if (isDirty) {
-            const formData = getValues();
+            const formData = getValues()
 
             reset({
                 ...defaultValues,
@@ -155,40 +149,40 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                 start_date: formData.start_date,
                 target_date: formData.target_date,
                 parent_id: formData.parent_id,
-            });
+            })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [projectId]);
+    }, [projectId])
 
     useEffect(() => {
-        if (data?.description_html) setValue("description_html", data?.description_html);
-    }, [data?.description_html]);
+        if (data?.description_html) setValue("description_html", data?.description_html)
+    }, [data?.description_html])
 
-    const issueName = watch("name");
+    const issueName = watch("name")
 
     const handleFormSubmit = async (formData: Partial<TIssue>, is_draft_issue = false) => {
-        await onSubmit(formData, is_draft_issue);
+        await onSubmit(formData, is_draft_issue)
 
-        setGptAssistantModal(false);
+        setGptAssistantModal(false)
 
         reset({
             ...defaultValues,
             project_id: getValues("project_id"),
-        });
-        editorRef?.current?.clearEditor();
-    };
+        })
+        editorRef?.current?.clearEditor()
+    }
 
     const handleAiAssistance = async (response: string) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        setValue("description_html", `${watch("description_html")}<p>${response}</p>`);
-        editorRef.current?.setEditorValue(`${watch("description_html")}`);
-    };
+        setValue("description_html", `${watch("description_html")}<p>${response}</p>`)
+        editorRef.current?.setEditorValue(`${watch("description_html")}`)
+    }
 
     const handleAutoGenerateDescription = async () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        setIAmFeelingLucky(true);
+        setIAmFeelingLucky(true)
 
         aiService
             .createGptTask(workspaceSlug.toString(), projectId, {
@@ -202,11 +196,11 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                         title: "Error!",
                         message:
                             "Issue title isn't informative enough to generate the description. Please try with a different title.",
-                    });
-                else handleAiAssistance(res.response_html);
+                    })
+                else handleAiAssistance(res.response_html)
             })
             .catch((err) => {
-                const error = err?.data?.error;
+                const error = err?.data?.error
 
                 if (err.status === 429)
                     toast.error({
@@ -215,46 +209,46 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                         message:
                             error ||
                             "You have reached the maximum number of requests of 50 requests per month per user.",
-                    });
+                    })
                 else
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: error || "Some error occurred. Please try again.",
-                    });
+                    })
             })
-            .finally(() => setIAmFeelingLucky(false));
-    };
+            .finally(() => setIAmFeelingLucky(false))
+    }
 
     const handleFormChange = () => {
-        if (!onChange) return;
+        if (!onChange) return
 
-        if (isDirty && (watch("name") || watch("description_html"))) onChange(watch());
-        else onChange(null);
-    };
+        if (isDirty && (watch("name") || watch("description_html"))) onChange(watch())
+        else onChange(null)
+    }
 
-    const startDate = watch("start_date");
-    const targetDate = watch("target_date");
+    const startDate = watch("start_date")
+    const targetDate = watch("target_date")
 
-    const minDate = startDate ? new Date(startDate) : null;
-    minDate?.setDate(minDate.getDate());
+    const minDate = startDate ? new Date(startDate) : null
+    minDate?.setDate(minDate.getDate())
 
-    const maxDate = targetDate ? new Date(targetDate) : null;
-    maxDate?.setDate(maxDate.getDate());
+    const maxDate = targetDate ? new Date(targetDate) : null
+    maxDate?.setDate(maxDate.getDate())
 
-    const projectDetails = getProjectById(projectId);
+    const projectDetails = getProjectById(projectId)
 
     // executing this useEffect when the parent_id coming from the component prop
     useEffect(() => {
-        const parentId = watch("parent_id") || undefined;
-        if (!parentId) return;
-        if (parentId === selectedParentIssue?.id || selectedParentIssue) return;
+        const parentId = watch("parent_id") || undefined
+        if (!parentId) return
+        if (parentId === selectedParentIssue?.id || selectedParentIssue) return
 
-        const issue = getIssueById(parentId);
-        if (!issue) return;
+        const issue = getIssueById(parentId)
+        if (!issue) return
 
-        const projectDetails = getProjectById(issue.project_id);
-        if (!projectDetails) return;
+        const projectDetails = getProjectById(issue.project_id)
+        if (!projectDetails) return
 
         setSelectedParentIssue({
             id: issue.id,
@@ -263,8 +257,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
             project__identifier: projectDetails.identifier,
             project__name: projectDetails.name,
             sequence_id: issue.sequence_id,
-        } as ISearchIssueResponse);
-    }, [watch, getIssueById, getProjectById, selectedParentIssue]);
+        } as ISearchIssueResponse)
+    }, [watch, getIssueById, getProjectById, selectedParentIssue])
 
     return (
         <>
@@ -274,8 +268,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                     handleClose={() => setLabelModal(false)}
                     projectId={projectId}
                     onSuccess={(response) => {
-                        setValue("label_ids", [...watch("label_ids"), response.id]);
-                        handleFormChange();
+                        setValue("label_ids", [...watch("label_ids"), response.id])
+                        handleFormChange()
                     }}
                 />
             )}
@@ -295,8 +289,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                         <ProjectDropdown
                                             value={value}
                                             onChange={(projectId) => {
-                                                onChange(projectId);
-                                                handleFormChange();
+                                                onChange(projectId)
+                                                handleFormChange()
                                             }}
                                             buttonVariant="border-with-text"
                                             // TODO: update tabIndex logic
@@ -329,9 +323,9 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                     type="button"
                                     className="grid place-items-center"
                                     onClick={() => {
-                                        setValue("parent_id", null);
-                                        handleFormChange();
-                                        setSelectedParentIssue(null);
+                                        setValue("parent_id", null)
+                                        handleFormChange()
+                                        setSelectedParentIssue(null)
                                     }}
                                     tabIndex={getTabIndex("remove_parent")}
                                 >
@@ -359,8 +353,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                         type="text"
                                         value={value}
                                         onChange={(e) => {
-                                            onChange(e.target.value);
-                                            handleFormChange();
+                                            onChange(e.target.value)
+                                            handleFormChange()
                                         }}
                                         ref={ref}
                                         hasError={Boolean(errors.name)}
@@ -420,12 +414,12 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                     isOpen={gptAssistantModal}
                                                     projectId={projectId}
                                                     handleClose={() => {
-                                                        setGptAssistantModal((prevData) => !prevData);
+                                                        setGptAssistantModal((prevData) => !prevData)
                                                         // this is done so that the title do not reset after gpt popover closed
-                                                        reset(getValues());
+                                                        reset(getValues())
                                                     }}
                                                     onResponse={(response) => {
-                                                        handleAiAssistance(response);
+                                                        handleAiAssistance(response)
                                                     }}
                                                     placement="top-end"
                                                     button={
@@ -467,8 +461,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                     initialValue={data?.description_html}
                                                     customClassName="min-h-[7rem] border-custom-border-100"
                                                     onChange={(description: Object, description_html: string) => {
-                                                        onChange(description_html);
-                                                        handleFormChange();
+                                                        onChange(description_html)
+                                                        handleFormChange()
                                                     }}
                                                     mentionHighlights={mentionHighlights}
                                                     mentionSuggestions={mentionSuggestions}
@@ -488,8 +482,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                             <StateDropdown
                                                 value={value}
                                                 onChange={(stateId) => {
-                                                    onChange(stateId);
-                                                    handleFormChange();
+                                                    onChange(stateId)
+                                                    handleFormChange()
                                                 }}
                                                 projectId={projectId}
                                                 buttonVariant="border-with-text"
@@ -506,8 +500,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                             <PriorityDropdown
                                                 value={value}
                                                 onChange={(priority) => {
-                                                    onChange(priority);
-                                                    handleFormChange();
+                                                    onChange(priority)
+                                                    handleFormChange()
                                                 }}
                                                 buttonVariant="border-with-text"
                                                 tabIndex={getTabIndex("priority")}
@@ -524,8 +518,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                 projectId={projectId}
                                                 value={value}
                                                 onChange={(assigneeIds) => {
-                                                    onChange(assigneeIds);
-                                                    handleFormChange();
+                                                    onChange(assigneeIds)
+                                                    handleFormChange()
                                                 }}
                                                 buttonVariant={
                                                     value?.length > 0 ? "transparent-without-text" : "border-with-text"
@@ -547,8 +541,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                 setIsOpen={setLabelModal}
                                                 value={value}
                                                 onChange={(labelIds) => {
-                                                    onChange(labelIds);
-                                                    handleFormChange();
+                                                    onChange(labelIds)
+                                                    handleFormChange()
                                                 }}
                                                 projectId={projectId}
                                                 tabIndex={getTabIndex("label_ids")}
@@ -601,8 +595,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                 <CycleDropdown
                                                     projectId={projectId}
                                                     onChange={(cycleId) => {
-                                                        onChange(cycleId);
-                                                        handleFormChange();
+                                                        onChange(cycleId)
+                                                        handleFormChange()
                                                     }}
                                                     value={value}
                                                     buttonVariant="border-with-text"
@@ -622,8 +616,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                     projectId={projectId}
                                                     value={value ?? []}
                                                     onChange={(moduleIds) => {
-                                                        onChange(moduleIds);
-                                                        handleFormChange();
+                                                        onChange(moduleIds)
+                                                        handleFormChange()
                                                     }}
                                                     buttonVariant="border-with-text"
                                                     tabIndex={getTabIndex("module_ids")}
@@ -643,8 +637,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                 <EstimateDropdown
                                                     value={value}
                                                     onChange={(estimatePoint) => {
-                                                        onChange(estimatePoint);
-                                                        handleFormChange();
+                                                        onChange(estimatePoint)
+                                                        handleFormChange()
                                                     }}
                                                     projectId={projectId}
                                                     buttonVariant="border-with-text"
@@ -691,8 +685,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                             <CustomMenu.MenuItem
                                                 className="!p-1"
                                                 onClick={() => {
-                                                    setValue("parent_id", null);
-                                                    handleFormChange();
+                                                    setValue("parent_id", null)
+                                                    handleFormChange()
                                                 }}
                                             >
                                                 Remove parent issue
@@ -715,9 +709,9 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                             isOpen={parentIssueListModalOpen}
                                             handleClose={() => setParentIssueListModalOpen(false)}
                                             onChange={(issue) => {
-                                                onChange(issue.id);
-                                                handleFormChange();
-                                                setSelectedParentIssue(issue);
+                                                onChange(issue.id)
+                                                handleFormChange()
+                                                setSelectedParentIssue(issue)
                                             }}
                                             projectId={projectId}
                                         />
@@ -732,7 +726,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                         className="flex cursor-default items-center gap-1.5"
                         onClick={() => onCreateMoreToggleChange(!isCreateMoreToggleEnabled)}
                         onKeyDown={(e) => {
-                            if (e.key === "Enter") onCreateMoreToggleChange(!isCreateMoreToggleEnabled);
+                            if (e.key === "Enter") onCreateMoreToggleChange(!isCreateMoreToggleEnabled)
                         }}
                         tabIndex={getTabIndex("create_more")}
                     >
@@ -796,5 +790,5 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                 </div>
             </form>
         </>
-    );
-});
+    )
+})

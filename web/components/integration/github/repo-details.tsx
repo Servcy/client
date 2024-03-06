@@ -1,32 +1,25 @@
-import { FC, useEffect } from "react";
-
-import { useRouter } from "next/router";
-
-import useSWR from "swr";
-
+import { useRouter } from "next/router"
+import { FC, useEffect } from "react"
+import { IUserDetails, TFormValues, TIntegrationSteps } from "@components/integration"
+import { GITHUB_REPOSITORY_INFO } from "@constants/fetch-keys"
+import { GithubIntegrationService } from "@services/integrations"
 // react-hook-form
-import { UseFormSetValue } from "react-hook-form";
-
-import { GithubIntegrationService } from "@services/integrations";
-
-import { Button, Loader } from "@servcy/ui";
-
-import { IUserDetails, TFormValues, TIntegrationSteps } from "@components/integration";
-
-import { GITHUB_REPOSITORY_INFO } from "@constants/fetch-keys";
+import { UseFormSetValue } from "react-hook-form"
+import useSWR from "swr"
+import { Button, Loader } from "@servcy/ui"
 
 type Props = {
-    selectedRepo: any;
-    handleStepChange: (value: TIntegrationSteps) => void;
-    setUsers: React.Dispatch<React.SetStateAction<IUserDetails[]>>;
-    setValue: UseFormSetValue<TFormValues>;
-};
+    selectedRepo: any
+    handleStepChange: (value: TIntegrationSteps) => void
+    setUsers: React.Dispatch<React.SetStateAction<IUserDetails[]>>
+    setValue: UseFormSetValue<TFormValues>
+}
 
-const githubIntegrationService = new GithubIntegrationService();
+const githubIntegrationService = new GithubIntegrationService()
 
 export const GithubRepoDetails: FC<Props> = ({ selectedRepo, handleStepChange, setUsers, setValue }) => {
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const { data: repoInfo } = useSWR(
         workspaceSlug && selectedRepo ? GITHUB_REPOSITORY_INFO(workspaceSlug as string, selectedRepo.name) : null,
@@ -37,20 +30,20 @@ export const GithubRepoDetails: FC<Props> = ({ selectedRepo, handleStepChange, s
                       repo: selectedRepo.name,
                   })
             : null
-    );
+    )
 
     useEffect(() => {
-        if (!repoInfo) return;
+        if (!repoInfo) return
 
-        setValue("collaborators", repoInfo.collaborators);
+        setValue("collaborators", repoInfo.collaborators)
 
         const fetchedUsers = repoInfo.collaborators.map((collaborator) => ({
             username: collaborator.login,
             import: "map",
             email: "",
-        }));
-        setUsers(fetchedUsers);
-    }, [repoInfo, setUsers, setValue]);
+        }))
+        setUsers(fetchedUsers)
+    }, [repoInfo, setUsers, setValue])
 
     return (
         <div className="mt-6">
@@ -99,5 +92,5 @@ export const GithubRepoDetails: FC<Props> = ({ selectedRepo, handleStepChange, s
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}

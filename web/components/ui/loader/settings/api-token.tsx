@@ -16,4 +16,4 @@ export const APITokenSettingsLoader = () => (
             ))}
         </div>
     </section>
-);
+)

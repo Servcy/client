@@ -1,17 +1,16 @@
 // next
-import Link from "next/link";
+import Link from "next/link"
 // react
-import React from "react";
-
-import { ChevronRight } from "lucide-react";
+import React from "react"
+import { ChevronRight } from "lucide-react"
 
 type EmptySpaceProps = {
-    title: string;
-    description: string;
-    children: any;
-    Icon?: any;
-    link?: { text: string; href: string };
-};
+    title: string
+    description: string
+    children: any
+    Icon?: any
+    link?: { text: string; href: string }
+}
 
 const EmptySpace: React.FC<EmptySpaceProps> = ({ title, description, children, Icon, link }) => (
     <>
@@ -42,15 +41,15 @@ const EmptySpace: React.FC<EmptySpaceProps> = ({ title, description, children, I
             ) : null}
         </div>
     </>
-);
+)
 
 type EmptySpaceItemProps = {
-    title: string;
-    description?: React.ReactNode | string;
-    Icon: any;
-    action?: () => void;
-    href?: string;
-};
+    title: string
+    description?: React.ReactNode | string
+    Icon: any
+    action?: () => void
+    href?: string
+}
 
 const EmptySpaceItem: React.FC<EmptySpaceItemProps> = ({ title, description, Icon, action, href }) => {
     let spaceItem = (
@@ -71,10 +70,10 @@ const EmptySpaceItem: React.FC<EmptySpaceItemProps> = ({ title, description, Ico
                 />
             </div>
         </div>
-    );
+    )
 
     if (href) {
-        spaceItem = <Link href={href}>{spaceItem}</Link>;
+        spaceItem = <Link href={href}>{spaceItem}</Link>
     }
 
     return (
@@ -83,7 +82,7 @@ const EmptySpaceItem: React.FC<EmptySpaceItemProps> = ({ title, description, Ico
                 {spaceItem}
             </li>
         </>
-    );
-};
+    )
+}
 
-export { EmptySpace, EmptySpaceItem };
+export { EmptySpace, EmptySpaceItem }

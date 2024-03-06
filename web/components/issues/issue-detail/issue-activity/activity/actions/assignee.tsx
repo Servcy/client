@@ -1,24 +1,21 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react"
+import { UserGroupIcon } from "@servcy/ui"
+import { IssueActivityBlockComponent, IssueLink } from "./"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent, IssueLink } from "./";
-
-import { UserGroupIcon } from "@servcy/ui";
-
-type TIssueAssigneeActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
+type TIssueAssigneeActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }
 
 export const IssueAssigneeActivity: FC<TIssueAssigneeActivity> = observer((props) => {
-    const { activityId, ends, showIssue = true } = props;
+    const { activityId, ends, showIssue = true } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             icon={<UserGroupIcon className="h-4 w-4 flex-shrink-0" />}
@@ -39,5 +36,5 @@ export const IssueAssigneeActivity: FC<TIssueAssigneeActivity> = observer((props
                 {showIssue && <IssueLink activityId={activityId} />}.
             </>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

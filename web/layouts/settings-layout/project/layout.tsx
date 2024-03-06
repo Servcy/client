@@ -1,32 +1,28 @@
-import { FC, ReactNode } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import Link from "next/link";
-
-import { useUser } from "@hooks/store";
-
-import { ProjectSettingsSidebar } from "./sidebar";
-import { NotAuthorizedView } from "@components/auth-screens";
-
-import { Button, LayersIcon } from "@servcy/ui";
-
-import { EUserProjectRoles } from "@constants/project";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC, ReactNode } from "react"
+import { NotAuthorizedView } from "@components/auth-screens"
+import { EUserProjectRoles } from "@constants/project"
+import { useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Button, LayersIcon } from "@servcy/ui"
+import { ProjectSettingsSidebar } from "./sidebar"
 
 export interface IProjectSettingLayout {
-    children: ReactNode;
+    children: ReactNode
 }
 
 export const ProjectSettingLayout: FC<IProjectSettingLayout> = observer((props) => {
-    const { children } = props;
+    const { children } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
-    const restrictViewSettings = currentProjectRole && currentProjectRole <= EUserProjectRoles.VIEWER;
+    const restrictViewSettings = currentProjectRole && currentProjectRole <= EUserProjectRoles.VIEWER
 
     return restrictViewSettings ? (
         <NotAuthorizedView
@@ -47,5 +43,5 @@ export const ProjectSettingLayout: FC<IProjectSettingLayout> = observer((props) 
             </div>
             <div className="w-full pl-10 sm:pl-10 md:pl-0 lg:pl-0 overflow-x-hidden overflow-y-scroll">{children}</div>
         </div>
-    );
-});
+    )
+})

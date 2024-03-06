@@ -1,66 +1,61 @@
-import React, { useState } from "react";
-import useSWR, { mutate } from "swr";
+import React, { useState } from "react"
+import { MEMBER_ACCEPTED } from "@constants/event-tracker"
+import { USER_WORKSPACE_INVITATIONS, USER_WORKSPACES } from "@constants/fetch-keys"
+import { ROLE } from "@constants/workspace"
+import { truncateText } from "@helpers/string.helper"
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+import { WorkspaceService } from "@services/workspace.service"
+import { CheckCircle2, Search } from "lucide-react"
+import useSWR, { mutate } from "swr"
+import { IWorkspaceMemberInvitation } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
+import "@hooks/store/use-event-tracker"
 
-import { Button } from "@servcy/ui";
-
-import { truncateText } from "@helpers/string.helper";
-
-import { WorkspaceService } from "@services/workspace.service";
-
-import { USER_WORKSPACES, USER_WORKSPACE_INVITATIONS } from "@constants/fetch-keys";
-import { ROLE } from "@constants/workspace";
-import { MEMBER_ACCEPTED } from "@constants/event-tracker";
-
-import { IWorkspaceMemberInvitation } from "@servcy/types";
-
-import { CheckCircle2, Search } from "lucide-react";
-import {} from "@hooks/store/use-event-tracker";
-import { getUserRole } from "@helpers/user.helper";
+import { getUserRole } from "@helpers/user.helper"
 
 type Props = {
-    handleNextStep: () => void;
-    setTryDiffAccount: () => void;
-};
-const workspaceService = new WorkspaceService();
+    handleNextStep: () => void
+    setTryDiffAccount: () => void
+}
+const workspaceService = new WorkspaceService()
 
 export const Invitations: React.FC<Props> = (props) => {
-    const { handleNextStep, setTryDiffAccount } = props;
+    const { handleNextStep, setTryDiffAccount } = props
     // states
-    const [isJoiningWorkspaces, setIsJoiningWorkspaces] = useState(false);
-    const [invitationsRespond, setInvitationsRespond] = useState<string[]>([]);
+    const [isJoiningWorkspaces, setIsJoiningWorkspaces] = useState(false)
+    const [invitationsRespond, setInvitationsRespond] = useState<string[]>([])
     // store hooks
-    const { captureEvent } = useEventTracker();
-    const { currentUser, updateCurrentUser } = useUser();
-    const { workspaces, fetchWorkspaces } = useWorkspace();
+    const { captureEvent } = useEventTracker()
+    const { currentUser, updateCurrentUser } = useUser()
+    const { workspaces, fetchWorkspaces } = useWorkspace()
 
-    const workspacesList = Object.values(workspaces);
+    const workspacesList = Object.values(workspaces)
 
     const { data: invitations, mutate: mutateInvitations } = useSWR(USER_WORKSPACE_INVITATIONS, () =>
         workspaceService.userWorkspaceInvitations()
-    );
+    )
 
     const handleInvitation = (workspace_invitation: IWorkspaceMemberInvitation, action: "accepted" | "withdraw") => {
         if (action === "accepted") {
-            setInvitationsRespond((prevData) => [...prevData, workspace_invitation.id]);
+            setInvitationsRespond((prevData) => [...prevData, workspace_invitation.id])
         } else if (action === "withdraw") {
-            setInvitationsRespond((prevData) => prevData.filter((item: string) => item !== workspace_invitation.id));
+            setInvitationsRespond((prevData) => prevData.filter((item: string) => item !== workspace_invitation.id))
         }
-    };
+    }
 
     const updateLastWorkspace = async () => {
-        if (!workspacesList) return;
+        if (!workspacesList) return
         await updateCurrentUser({
             last_workspace_id: workspacesList[0]?.id,
-        });
-    };
+        })
+    }
 
     const submitInvitations = async () => {
-        if (invitationsRespond.length <= 0) return;
+        if (invitationsRespond.length <= 0) return
 
-        setIsJoiningWorkspaces(true);
-        const invitation = invitations?.find((invitation) => invitation.id === invitationsRespond[0]);
+        setIsJoiningWorkspaces(true)
+        const invitation = invitations?.find((invitation) => invitation.id === invitationsRespond[0])
 
         await workspaceService
             .joinWorkspaces({ invitations: invitationsRespond })
@@ -72,15 +67,15 @@ export const Invitations: React.FC<Props> = (props) => {
                     accepted_from: "App",
                     state: "SUCCESS",
                     element: "Workspace invitations page",
-                });
-                await fetchWorkspaces();
-                await mutate(USER_WORKSPACES);
-                await updateLastWorkspace();
-                await handleNextStep();
-                await mutateInvitations();
+                })
+                await fetchWorkspaces()
+                await mutate(USER_WORKSPACES)
+                await updateLastWorkspace()
+                await handleNextStep()
+                await mutateInvitations()
             })
             .catch((error) => {
-                console.error(error);
+                console.error(error)
                 captureEvent(MEMBER_ACCEPTED, {
                     member_id: invitation?.id,
                     role: getUserRole(invitation?.role!),
@@ -88,10 +83,10 @@ export const Invitations: React.FC<Props> = (props) => {
                     accepted_from: "App",
                     state: "FAILED",
                     element: "Workspace invitations page",
-                });
+                })
             })
-            .finally(() => setIsJoiningWorkspaces(false));
-    };
+            .finally(() => setIsJoiningWorkspaces(false))
+    }
 
     return invitations && invitations.length > 0 ? (
         <div>
@@ -101,8 +96,8 @@ export const Invitations: React.FC<Props> = (props) => {
                     {invitations &&
                         invitations.length > 0 &&
                         invitations.map((invitation) => {
-                            const isSelected = invitationsRespond.includes(invitation.id);
-                            const invitedWorkspace = workspaces[invitation.workspace.id];
+                            const isSelected = invitationsRespond.includes(invitation.id)
+                            const invitedWorkspace = workspaces[invitation.workspace.id]
                             return (
                                 <div
                                     key={invitation.id}
@@ -142,7 +137,7 @@ export const Invitations: React.FC<Props> = (props) => {
                                         <CheckCircle2 className="h-5 w-5" />
                                     </span>
                                 </div>
-                            );
+                            )
                         })}
                 </div>
 
@@ -171,8 +166,8 @@ export const Invitations: React.FC<Props> = (props) => {
         </div>
     ) : (
         <EmptyInvitation email={currentUser!.email} setTryDiffAccount={setTryDiffAccount} />
-    );
-};
+    )
+}
 
 const EmptyInvitation = ({ email, setTryDiffAccount }: { email: string; setTryDiffAccount: () => void }) => (
     <div className="my-16 items-center justify-center rounded border border-onboarding-border-200 bg-onboarding-background-300/30 px-10 py-5 md:w-4/5 ">
@@ -190,4 +185,4 @@ const EmptyInvitation = ({ email, setTryDiffAccount }: { email: string; setTryDi
             Your right e-mail address could be from a Google or GitHub login.
         </p>
     </div>
-);
+)

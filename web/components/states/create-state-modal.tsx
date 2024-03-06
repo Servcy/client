@@ -1,41 +1,36 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { Controller, useForm } from "react-hook-form";
-import { TwitterPicker } from "react-color";
-import { Dialog, Popover, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-
-import { useProjectState } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
-
-import { ChevronDown } from "lucide-react";
-
-import type { IState } from "@servcy/types";
-
-import { GROUP_CHOICES } from "@constants/project";
+import { useRouter } from "next/router"
+import React from "react"
+import { GROUP_CHOICES } from "@constants/project"
+import { Dialog, Popover, Transition } from "@headlessui/react"
+import { useProjectState } from "@hooks/store"
+import { ChevronDown } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TwitterPicker } from "react-color"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import type { IState } from "@servcy/types"
+import { Button, CustomSelect, Input, TextArea } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    projectId: string;
-    handleClose: () => void;
-};
+    isOpen: boolean
+    projectId: string
+    handleClose: () => void
+}
 
 const defaultValues: Partial<IState> = {
     name: "",
     description: "",
     color: "rgb(var(--color-text-200))",
     group: "backlog",
-};
+}
 
 export const CreateStateModal: React.FC<Props> = observer((props) => {
-    const { isOpen, projectId, handleClose } = props;
+    const { isOpen, projectId, handleClose } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { createState } = useProjectState();
+    const { createState } = useProjectState()
 
     // form info
     const {
@@ -46,26 +41,26 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
         reset,
     } = useForm<IState>({
         defaultValues,
-    });
+    })
 
     const onClose = () => {
-        handleClose();
-        reset(defaultValues);
-    };
+        handleClose()
+        reset(defaultValues)
+    }
 
     const onSubmit = async (formData: IState) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         const payload: IState = {
             ...formData,
-        };
+        }
 
         await createState(workspaceSlug.toString(), projectId.toString(), payload)
             .then(() => {
-                onClose();
+                onClose()
             })
             .catch((err) => {
-                const error = err.response;
+                const error = err.response
 
                 if (typeof error === "object") {
                     Object.keys(error).forEach((key) => {
@@ -73,8 +68,8 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
                             type: "error",
                             title: "Error!",
                             message: Array.isArray(error[key]) ? error[key].join(", ") : error[key],
-                        });
-                    });
+                        })
+                    })
                 } else {
                     toast.error({
                         type: "error",
@@ -83,10 +78,10 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
                             error ?? err.status === 400
                                 ? "Another state exists with the same name. Please try again with another name."
                                 : "State could not be created. Please try again.",
-                    });
+                    })
                 }
-            });
-    };
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -265,5 +260,5 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

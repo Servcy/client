@@ -1,39 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { Combobox, Dialog, Transition } from "@headlessui/react";
-
-import toast from "react-hot-toast";
-
-import { IssueService } from "@services/issue";
-
-import { Button, LayersIcon } from "@servcy/ui";
-
-import { Search } from "lucide-react";
-
-import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys";
-import { useProject, useProjectState } from "@hooks/store";
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys"
+import { Combobox, Dialog, Transition } from "@headlessui/react"
+import { useProject, useProjectState } from "@hooks/store"
+import { IssueService } from "@services/issue"
+import { Search } from "lucide-react"
+import toast from "react-hot-toast"
+import useSWR from "swr"
+import { Button, LayersIcon } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    value?: string | null;
-    onClose: () => void;
-    onSubmit: (issueId: string) => void;
-};
+    isOpen: boolean
+    value?: string | null
+    onClose: () => void
+    onSubmit: (issueId: string) => void
+}
 
-const issueService = new IssueService();
+const issueService = new IssueService()
 
 export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
-    const { isOpen, onClose, onSubmit, value } = props;
+    const { isOpen, onClose, onSubmit, value } = props
 
-    const [query, setQuery] = useState("");
-    const [selectedItem, setSelectedItem] = useState<string>("");
+    const [query, setQuery] = useState("")
+    const [selectedItem, setSelectedItem] = useState<string>("")
 
-    const router = useRouter();
-    const { workspaceSlug, projectId, issueId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, issueId } = router.query
 
-    const { getProjectStates } = useProjectState();
-    const { getProjectById } = useProject();
+    const { getProjectStates } = useProjectState()
+    const { getProjectById } = useProject()
 
     const { data: issues } = useSWR(
         workspaceSlug && projectId ? PROJECT_ISSUES_LIST(workspaceSlug as string, projectId as string) : null,
@@ -43,30 +38,30 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
                       .getIssues(workspaceSlug as string, projectId as string)
                       .then((res) => Object.values(res ?? {}).filter((issue) => issue.id !== issueId))
             : null
-    );
+    )
 
     useEffect(() => {
         if (!value) {
-            setSelectedItem("");
-            return;
-        } else setSelectedItem(value);
-    }, [value]);
+            setSelectedItem("")
+            return
+        } else setSelectedItem(value)
+    }, [value])
 
     const handleClose = () => {
-        onClose();
-    };
+        onClose()
+    }
 
     const handleSubmit = () => {
         if (!selectedItem || selectedItem.length === 0)
             return toast.error({
                 title: "Error",
                 type: "error",
-            });
-        onSubmit(selectedItem);
-        handleClose();
-    };
+            })
+        onSubmit(selectedItem)
+        handleClose()
+    }
 
-    const filteredIssues = (query === "" ? issues : issues?.filter((issue) => issue.name.includes(query))) ?? [];
+    const filteredIssues = (query === "" ? issues : issues?.filter((issue) => issue.name.includes(query))) ?? []
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment} afterLeave={() => setQuery("")} appear>
@@ -99,7 +94,7 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
                                     <Combobox
                                         value={selectedItem}
                                         onChange={(value) => {
-                                            setSelectedItem(value);
+                                            setSelectedItem(value)
                                         }}
                                     >
                                         <div className="relative m-1">
@@ -131,7 +126,7 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
                                                             const stateColor =
                                                                 getProjectStates(issue?.project_id)?.find(
                                                                     (state) => state?.id == issue?.state_id
-                                                                )?.color || "";
+                                                                )?.color || ""
 
                                                             return (
                                                                 <Combobox.Option
@@ -165,7 +160,7 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
                                                                         </span>
                                                                     </div>
                                                                 </Combobox.Option>
-                                                            );
+                                                            )
                                                         })}
                                                     </ul>
                                                 </li>
@@ -201,5 +196,5 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
                 </div>
             </div>
         </Transition.Root>
-    );
-};
+    )
+}

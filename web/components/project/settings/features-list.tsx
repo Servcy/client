@@ -1,17 +1,14 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { ContrastIcon, FileText, Inbox, Layers } from "lucide-react";
-import { DiceIcon, ToggleSwitch } from "@servcy/ui";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { EUserProjectRoles } from "@constants/project"
+import { useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
+import { ContrastIcon, FileText, Inbox, Layers } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IProject } from "@servcy/types"
+import { DiceIcon, ToggleSwitch } from "@servcy/ui"
 
-import { useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { IProject } from "@servcy/types";
-
-import { EUserProjectRoles } from "@constants/project";
-
-type Props = {};
+type Props = {}
 
 const PROJECT_FEATURES_LIST = [
     {
@@ -44,32 +41,32 @@ const PROJECT_FEATURES_LIST = [
         icon: <Inbox className="h-4 w-4 flex-shrink-0 text-fuchsia-500" />,
         property: "inbox_view",
     },
-];
+]
 
 export const ProjectFeaturesList: FC<Props> = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { captureEvent } = useEventTracker();
+    const { captureEvent } = useEventTracker()
     const {
         currentUser,
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails, updateProject } = useProject();
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
+    } = useUser()
+    const { currentProjectDetails, updateProject } = useProject()
+    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
 
     const handleSubmit = async (formData: Partial<IProject>) => {
-        if (!workspaceSlug || !projectId || !currentProjectDetails) return;
+        if (!workspaceSlug || !projectId || !currentProjectDetails) return
         toast.error({
             type: "success",
             title: "Success!",
             message: "Project feature updated successfully.",
-        });
-        updateProject(workspaceSlug.toString(), projectId.toString(), formData);
-    };
+        })
+        updateProject(workspaceSlug.toString(), projectId.toString(), formData)
+    }
 
-    if (!currentUser) return <></>;
+    if (!currentUser) return <></>
 
     return (
         <div>
@@ -93,10 +90,10 @@ export const ProjectFeaturesList: FC<Props> = observer(() => {
                             captureEvent(`Toggle ${feature.title.toLowerCase()}`, {
                                 enabled: !currentProjectDetails?.[feature.property as keyof IProject],
                                 element: "Project settings feature page",
-                            });
+                            })
                             handleSubmit({
                                 [feature.property]: !currentProjectDetails?.[feature.property as keyof IProject],
-                            });
+                            })
                         }}
                         disabled={!isAdmin}
                         size="sm"
@@ -104,5 +101,5 @@ export const ProjectFeaturesList: FC<Props> = observer(() => {
                 </div>
             ))}
         </div>
-    );
-});
+    )
+})

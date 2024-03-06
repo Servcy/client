@@ -1,44 +1,42 @@
-import React, { FC, useEffect, useState } from "react";
-import { Command } from "cmdk";
-import { useTheme } from "next-themes";
-import { Settings } from "lucide-react";
-import { observer } from "mobx-react-lite";
-
-import { useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { THEME_OPTIONS } from "@constants/themes";
+import React, { FC, useEffect, useState } from "react"
+import { THEME_OPTIONS } from "@constants/themes"
+import { useUser } from "@hooks/store"
+import { Command } from "cmdk"
+import { Settings } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
 
 type Props = {
-    closePalette: () => void;
-};
+    closePalette: () => void
+}
 
 export const CommandPaletteThemeActions: FC<Props> = observer((props) => {
-    const { closePalette } = props;
+    const { closePalette } = props
     // states
-    const [mounted, setMounted] = useState(false);
+    const [mounted, setMounted] = useState(false)
     // store
-    const { updateCurrentUserTheme } = useUser();
+    const { updateCurrentUserTheme } = useUser()
 
-    const { setTheme } = useTheme();
+    const { setTheme } = useTheme()
 
     const updateUserTheme = async (newTheme: string) => {
-        setTheme(newTheme);
+        setTheme(newTheme)
 
         return updateCurrentUserTheme(newTheme).catch(() => {
             toast.error({
                 title: "Failed to save user theme settings!",
                 type: "error",
-            });
-        });
-    };
+            })
+        })
+    }
 
     // useEffect only runs on the client, so now we can safely show the UI
     useEffect(() => {
-        setMounted(true);
-    }, []);
+        setMounted(true)
+    }, [])
 
-    if (!mounted) return null;
+    if (!mounted) return null
 
     return (
         <>
@@ -46,8 +44,8 @@ export const CommandPaletteThemeActions: FC<Props> = observer((props) => {
                 <Command.Item
                     key={theme.value}
                     onSelect={() => {
-                        updateUserTheme(theme.value);
-                        closePalette();
+                        updateUserTheme(theme.value)
+                        closePalette()
                     }}
                     className="focus:outline-none"
                 >
@@ -58,5 +56,5 @@ export const CommandPaletteThemeActions: FC<Props> = observer((props) => {
                 </Command.Item>
             ))}
         </>
-    );
-});
+    )
+})

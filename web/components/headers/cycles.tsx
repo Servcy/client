@@ -1,48 +1,44 @@
-import { FC, useCallback } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { List, Plus } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-
-import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-import { EUserProjectRoles } from "@constants/project";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-import { TCycleLayout } from "@servcy/types";
-import { CYCLE_VIEW_LAYOUTS } from "@constants/cycle";
-import useLocalStorage from "@hooks/use-local-storage";
+import { useRouter } from "next/router"
+import { FC, useCallback } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
+import { EUserProjectRoles } from "@constants/project"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { List, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TCycleLayout } from "@servcy/types"
+import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui"
 
 export const CyclesHeader: FC = observer(() => {
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
     const {
         commandPalette: { toggleCreateCycleModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
 
     const canUserCreateCycle =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     const { workspaceSlug } = router.query as {
-        workspaceSlug: string;
-    };
-    const { setValue: setCycleLayout } = useLocalStorage<TCycleLayout>("cycle_layout", "list");
+        workspaceSlug: string
+    }
+    const { setValue: setCycleLayout } = useLocalStorage<TCycleLayout>("cycle_layout", "list")
 
     const handleCurrentLayout = useCallback(
         (_layout: TCycleLayout) => {
-            setCycleLayout(_layout);
+            setCycleLayout(_layout)
         },
         [setCycleLayout]
-    );
+    )
 
     return (
         <div className="relative z-10 items-center justify-between gap-x-2 gap-y-4">
@@ -90,8 +86,8 @@ export const CyclesHeader: FC = observer(() => {
                             size="sm"
                             prependIcon={<Plus />}
                             onClick={() => {
-                                setTrackElement("Cycles page");
-                                toggleCreateCycleModal(true);
+                                setTrackElement("Cycles page")
+                                toggleCreateCycleModal(true)
                             }}
                         >
                             <div className="hidden sm:block">Add</div> Cycle
@@ -117,7 +113,7 @@ export const CyclesHeader: FC = observer(() => {
                         <CustomMenu.MenuItem
                             onClick={() => {
                                 // handleLayoutChange(ISSUE_LAYOUTS[index].key);
-                                handleCurrentLayout(layout.key as TCycleLayout);
+                                handleCurrentLayout(layout.key as TCycleLayout)
                             }}
                             className="flex items-center gap-2"
                         >
@@ -128,5 +124,5 @@ export const CyclesHeader: FC = observer(() => {
                 </CustomMenu>
             </div>
         </div>
-    );
-});
+    )
+})

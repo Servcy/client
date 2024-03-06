@@ -1,14 +1,13 @@
-import { observer } from "mobx-react-lite";
-
-import { DAYS_LIST } from "@constants/calendar";
+import { DAYS_LIST } from "@constants/calendar"
+import { observer } from "mobx-react-lite"
 
 type Props = {
-    isLoading: boolean;
-    showWeekends: boolean;
-};
+    isLoading: boolean
+    showWeekends: boolean
+}
 
 export const CalendarWeekHeader: React.FC<Props> = observer((props) => {
-    const { isLoading, showWeekends } = props;
+    const { isLoading, showWeekends } = props
 
     return (
         <div
@@ -20,7 +19,7 @@ export const CalendarWeekHeader: React.FC<Props> = observer((props) => {
                 <div className="absolute h-[1.5px] w-3/4 animate-[bar-loader_2s_linear_infinite] bg-custom-primary-100" />
             )}
             {Object.values(DAYS_LIST).map((day) => {
-                if (!showWeekends && (day.shortTitle === "Sat" || day.shortTitle === "Sun")) return null;
+                if (!showWeekends && (day.shortTitle === "Sat" || day.shortTitle === "Sun")) return null
 
                 return (
                     <div
@@ -29,8 +28,8 @@ export const CalendarWeekHeader: React.FC<Props> = observer((props) => {
                     >
                         {day.shortTitle}
                     </div>
-                );
+                )
             })}
         </div>
-    );
-});
+    )
+})

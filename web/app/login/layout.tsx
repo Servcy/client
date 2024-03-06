@@ -1,14 +1,16 @@
-"use client";
+"use client"
 
-import { FC, PropsWithChildren, useEffect, useState } from "react";
-import Blocked from "@/components/Shared/blocked";
-import { SyncOutlined } from "@ant-design/icons";
-import { Analytics } from "@vercel/analytics/react";
-import { Spin } from "antd";
-import { Toaster } from "react-hot-toast";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import "@/styles/globals.css";
-import { isMobileDevice } from "@/utils/Shared";
+import { FC, PropsWithChildren, useEffect, useState } from "react"
+import { SyncOutlined } from "@ant-design/icons"
+import { GoogleOAuthProvider } from "@react-oauth/google"
+import { Analytics } from "@vercel/analytics/react"
+import { Spin } from "antd"
+import { Toaster } from "react-hot-toast"
+import Blocked from "@/components/Shared/blocked"
+
+import "@/styles/globals.css"
+
+import { isMobileDevice } from "@/utils/Shared"
 
 const LoginLayout: FC<PropsWithChildren> = function ({ children }) {
     return (
@@ -23,17 +25,17 @@ const LoginLayout: FC<PropsWithChildren> = function ({ children }) {
                 </GoogleOAuthProvider>
             </body>
         </html>
-    );
-};
+    )
+}
 
 const LayoutWrapper: FC<PropsWithChildren> = function ({ children }) {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         setTimeout(() => {
-            setLoading(false);
-        }, 500);
-    }, []);
+            setLoading(false)
+        }, 500)
+    }, [])
 
     if (loading)
         return (
@@ -51,14 +53,14 @@ const LayoutWrapper: FC<PropsWithChildren> = function ({ children }) {
                     }
                 />
             </div>
-        );
+        )
     if (isMobileDevice(navigator.userAgent))
         return (
             <div className="flex h-screen justify-center">
                 <Blocked />
             </div>
-        );
-    return <div className="flex">{children}</div>;
-};
+        )
+    return <div className="flex">{children}</div>
+}
 
-export default LoginLayout;
+export default LoginLayout

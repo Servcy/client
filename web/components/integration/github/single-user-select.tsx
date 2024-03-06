@@ -1,21 +1,17 @@
-import { useRouter } from "next/router";
-import useSWR from "swr";
-
-import { WorkspaceService } from "@services/workspace.service";
-
-import { Avatar, CustomSelect, CustomSearchSelect, Input } from "@servcy/ui";
-
-import { IGithubRepoCollaborator } from "@servcy/types";
-import { IUserDetails } from "./root";
-
-import { WORKSPACE_MEMBERS } from "@constants/fetch-keys";
+import { useRouter } from "next/router"
+import { WORKSPACE_MEMBERS } from "@constants/fetch-keys"
+import { WorkspaceService } from "@services/workspace.service"
+import useSWR from "swr"
+import { IGithubRepoCollaborator } from "@servcy/types"
+import { Avatar, CustomSearchSelect, CustomSelect, Input } from "@servcy/ui"
+import { IUserDetails } from "./root"
 
 type Props = {
-    collaborator: IGithubRepoCollaborator;
-    index: number;
-    users: IUserDetails[];
-    setUsers: React.Dispatch<React.SetStateAction<IUserDetails[]>>;
-};
+    collaborator: IGithubRepoCollaborator
+    index: number
+    users: IUserDetails[]
+    setUsers: React.Dispatch<React.SetStateAction<IUserDetails[]>>
+}
 
 const importOptions = [
     {
@@ -30,18 +26,18 @@ const importOptions = [
         key: false,
         label: "Do not import",
     },
-];
+]
 
-const workspaceService = new WorkspaceService();
+const workspaceService = new WorkspaceService()
 
 export const SingleUserSelect: React.FC<Props> = ({ collaborator, index, users, setUsers }) => {
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const { data: members } = useSWR(
         workspaceSlug ? WORKSPACE_MEMBERS(workspaceSlug.toString()) : null,
         workspaceSlug ? () => workspaceService.fetchWorkspaceMembers(workspaceSlug.toString()) : null
-    );
+    )
 
     const options = members?.map((member) => ({
         value: member.member.display_name,
@@ -52,7 +48,7 @@ export const SingleUserSelect: React.FC<Props> = ({ collaborator, index, users, 
                 {member.member.display_name}
             </div>
         ),
-    }));
+    }))
 
     return (
         <div className="grid grid-cols-3 items-center gap-2 rounded-md bg-custom-background-80 px-2 py-3">
@@ -73,10 +69,10 @@ export const SingleUserSelect: React.FC<Props> = ({ collaborator, index, users, 
                         <div className="text-xs">{importOptions.find((o) => o.key === users[index].import)?.label}</div>
                     }
                     onChange={(val: any) => {
-                        const newUsers = [...users];
-                        newUsers[index].import = val;
-                        newUsers[index].email = "";
-                        setUsers(newUsers);
+                        const newUsers = [...users]
+                        newUsers[index].import = val
+                        newUsers[index].email = ""
+                        setUsers(newUsers)
                     }}
                     optionsClassName="w-full"
                     noChevron
@@ -95,9 +91,9 @@ export const SingleUserSelect: React.FC<Props> = ({ collaborator, index, users, 
                     name={`userEmail${index}`}
                     value={users[index].email}
                     onChange={(e) => {
-                        const newUsers = [...users];
-                        newUsers[index].email = e.target.value;
-                        setUsers(newUsers);
+                        const newUsers = [...users]
+                        newUsers[index].email = e.target.value
+                        setUsers(newUsers)
                     }}
                     placeholder="Enter email of the user"
                     className="w-full py-1 text-xs"
@@ -109,13 +105,13 @@ export const SingleUserSelect: React.FC<Props> = ({ collaborator, index, users, 
                     label={users[index].email !== "" ? users[index].email : "Select user from project"}
                     options={options}
                     onChange={(val: string) => {
-                        const newUsers = [...users];
-                        newUsers[index].email = val;
-                        setUsers(newUsers);
+                        const newUsers = [...users]
+                        newUsers[index].email = val
+                        setUsers(newUsers)
                     }}
                     optionsClassName="w-full"
                 />
             )}
         </div>
-    );
-};
+    )
+}

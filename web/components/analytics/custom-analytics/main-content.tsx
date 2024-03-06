@@ -1,31 +1,26 @@
-import { useRouter } from "next/router";
-import { mutate } from "swr";
-
-import { AnalyticsGraph, AnalyticsTable } from "@components/analytics";
-
-import { Button, Loader } from "@servcy/ui";
-
-import { convertResponseToBarGraphData } from "@helpers/analytics.helper";
-
-import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
-
-import { ANALYTICS } from "@constants/fetch-keys";
+import { useRouter } from "next/router"
+import { AnalyticsGraph, AnalyticsTable } from "@components/analytics"
+import { ANALYTICS } from "@constants/fetch-keys"
+import { convertResponseToBarGraphData } from "@helpers/analytics.helper"
+import { mutate } from "swr"
+import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types"
+import { Button, Loader } from "@servcy/ui"
 
 type Props = {
-    analytics: IAnalyticsResponse | undefined;
-    error: any;
-    fullScreen: boolean;
-    params: IAnalyticsParams;
-};
+    analytics: IAnalyticsResponse | undefined
+    error: any
+    fullScreen: boolean
+    params: IAnalyticsParams
+}
 
 export const CustomAnalyticsMainContent: React.FC<Props> = (props) => {
-    const { analytics, error, fullScreen, params } = props;
+    const { analytics, error, fullScreen, params } = props
 
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
-    const yAxisKey = params.y_axis === "issue_count" ? "count" : "estimate";
-    const barGraphData = convertResponseToBarGraphData(analytics?.distribution, params);
+    const yAxisKey = params.y_axis === "issue_count" ? "count" : "estimate"
+    const barGraphData = convertResponseToBarGraphData(analytics?.distribution, params)
 
     return (
         <>
@@ -73,9 +68,9 @@ export const CustomAnalyticsMainContent: React.FC<Props> = (props) => {
                             <Button
                                 variant="primary"
                                 onClick={() => {
-                                    if (!workspaceSlug) return;
+                                    if (!workspaceSlug) return
 
-                                    mutate(ANALYTICS(workspaceSlug.toString(), params));
+                                    mutate(ANALYTICS(workspaceSlug.toString(), params))
                                 }}
                             >
                                 Refresh
@@ -85,5 +80,5 @@ export const CustomAnalyticsMainContent: React.FC<Props> = (props) => {
                 </div>
             )}
         </>
-    );
-};
+    )
+}

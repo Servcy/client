@@ -1,32 +1,33 @@
 // mobx
-import { action, observable, makeObservable } from "mobx";
+
 // helper
-import { applyTheme, unsetCustomCssVariables } from "@helpers/theme.helper";
+import { applyTheme, unsetCustomCssVariables } from "@helpers/theme.helper"
+import { action, makeObservable, observable } from "mobx"
 
 export interface IThemeStore {
     // observables
-    theme: string | null;
-    sidebarCollapsed: boolean | undefined;
-    profileSidebarCollapsed: boolean | undefined;
-    workspaceAnalyticsSidebarCollapsed: boolean | undefined;
-    issueDetailSidebarCollapsed: boolean | undefined;
+    theme: string | null
+    sidebarCollapsed: boolean | undefined
+    profileSidebarCollapsed: boolean | undefined
+    workspaceAnalyticsSidebarCollapsed: boolean | undefined
+    issueDetailSidebarCollapsed: boolean | undefined
     // actions
-    toggleSidebar: (collapsed?: boolean) => void;
-    setTheme: (theme: any) => void;
-    toggleProfileSidebar: (collapsed?: boolean) => void;
-    toggleWorkspaceAnalyticsSidebar: (collapsed?: boolean) => void;
-    toggleIssueDetailSidebar: (collapsed?: boolean) => void;
+    toggleSidebar: (collapsed?: boolean) => void
+    setTheme: (theme: any) => void
+    toggleProfileSidebar: (collapsed?: boolean) => void
+    toggleWorkspaceAnalyticsSidebar: (collapsed?: boolean) => void
+    toggleIssueDetailSidebar: (collapsed?: boolean) => void
 }
 
 export class ThemeStore implements IThemeStore {
     // observables
-    sidebarCollapsed: boolean | undefined = undefined;
-    theme: string | null = null;
-    profileSidebarCollapsed: boolean | undefined = undefined;
-    workspaceAnalyticsSidebarCollapsed: boolean | undefined = undefined;
-    issueDetailSidebarCollapsed: boolean | undefined = undefined;
+    sidebarCollapsed: boolean | undefined = undefined
+    theme: string | null = null
+    profileSidebarCollapsed: boolean | undefined = undefined
+    workspaceAnalyticsSidebarCollapsed: boolean | undefined = undefined
+    issueDetailSidebarCollapsed: boolean | undefined = undefined
     // root store
-    rootStore;
+    rootStore
 
     constructor(_rootStore: any | null = null) {
         makeObservable(this, {
@@ -43,9 +44,9 @@ export class ThemeStore implements IThemeStore {
             toggleWorkspaceAnalyticsSidebar: action,
             toggleIssueDetailSidebar: action,
             // computed
-        });
+        })
         // root store
-        this.rootStore = _rootStore;
+        this.rootStore = _rootStore
     }
 
     /**
@@ -54,12 +55,12 @@ export class ThemeStore implements IThemeStore {
      */
     toggleSidebar = (collapsed?: boolean) => {
         if (collapsed === undefined) {
-            this.sidebarCollapsed = !this.sidebarCollapsed;
+            this.sidebarCollapsed = !this.sidebarCollapsed
         } else {
-            this.sidebarCollapsed = collapsed;
+            this.sidebarCollapsed = collapsed
         }
-        localStorage.setItem("app_sidebar_collapsed", this.sidebarCollapsed.toString());
-    };
+        localStorage.setItem("app_sidebar_collapsed", this.sidebarCollapsed.toString())
+    }
 
     /**
      * Toggle the profile sidebar collapsed state
@@ -67,12 +68,12 @@ export class ThemeStore implements IThemeStore {
      */
     toggleProfileSidebar = (collapsed?: boolean) => {
         if (collapsed === undefined) {
-            this.profileSidebarCollapsed = !this.profileSidebarCollapsed;
+            this.profileSidebarCollapsed = !this.profileSidebarCollapsed
         } else {
-            this.profileSidebarCollapsed = collapsed;
+            this.profileSidebarCollapsed = collapsed
         }
-        localStorage.setItem("profile_sidebar_collapsed", this.profileSidebarCollapsed.toString());
-    };
+        localStorage.setItem("profile_sidebar_collapsed", this.profileSidebarCollapsed.toString())
+    }
 
     /**
      * Toggle the profile sidebar collapsed state
@@ -80,24 +81,24 @@ export class ThemeStore implements IThemeStore {
      */
     toggleWorkspaceAnalyticsSidebar = (collapsed?: boolean) => {
         if (collapsed === undefined) {
-            this.workspaceAnalyticsSidebarCollapsed = !this.workspaceAnalyticsSidebarCollapsed;
+            this.workspaceAnalyticsSidebarCollapsed = !this.workspaceAnalyticsSidebarCollapsed
         } else {
-            this.workspaceAnalyticsSidebarCollapsed = collapsed;
+            this.workspaceAnalyticsSidebarCollapsed = collapsed
         }
         localStorage.setItem(
             "workspace_analytics_sidebar_collapsed",
             this.workspaceAnalyticsSidebarCollapsed.toString()
-        );
-    };
+        )
+    }
 
     toggleIssueDetailSidebar = (collapsed?: boolean) => {
         if (collapsed === undefined) {
-            this.issueDetailSidebarCollapsed = !this.issueDetailSidebarCollapsed;
+            this.issueDetailSidebarCollapsed = !this.issueDetailSidebarCollapsed
         } else {
-            this.issueDetailSidebarCollapsed = collapsed;
+            this.issueDetailSidebarCollapsed = collapsed
         }
-        localStorage.setItem("issue_detail_sidebar_collapsed", this.issueDetailSidebarCollapsed.toString());
-    };
+        localStorage.setItem("issue_detail_sidebar_collapsed", this.issueDetailSidebarCollapsed.toString())
+    }
 
     /**
      * Sets the user theme and applies it to the platform
@@ -105,23 +106,23 @@ export class ThemeStore implements IThemeStore {
      */
     setTheme = async (_theme: { theme: any }) => {
         try {
-            const currentTheme: string = _theme?.theme?.theme?.toString();
+            const currentTheme: string = _theme?.theme?.theme?.toString()
             // updating the local storage theme value
-            localStorage.setItem("theme", currentTheme);
+            localStorage.setItem("theme", currentTheme)
             // updating the mobx theme value
-            this.theme = currentTheme;
+            this.theme = currentTheme
             // applying the theme to platform if the selected theme is custom
             if (currentTheme === "custom") {
-                const themeSettings = this.rootStore.user.currentUserSettings || null;
+                const themeSettings = this.rootStore.user.currentUserSettings || null
                 applyTheme(
                     themeSettings?.theme?.palette !== ",,,,"
                         ? themeSettings?.theme?.palette
                         : "#0d101b,#c5c5c5,#3f76ff,#0d101b,#c5c5c5",
                     themeSettings?.theme?.darkPalette
-                );
-            } else unsetCustomCssVariables();
+                )
+            } else unsetCustomCssVariables()
         } catch (error) {
-            console.error("setting user theme error", error);
+            console.error("setting user theme error", error)
         }
-    };
+    }
 }

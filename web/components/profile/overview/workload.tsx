@@ -1,10 +1,9 @@
-import { IUserStateDistribution } from "@servcy/types";
-
-import { STATE_GROUPS } from "@constants/state";
+import { STATE_GROUPS } from "@constants/state"
+import { IUserStateDistribution } from "@servcy/types"
 
 type Props = {
-    stateDistribution: IUserStateDistribution[];
-};
+    stateDistribution: IUserStateDistribution[]
+}
 
 export const ProfileWorkload: React.FC<Props> = ({ stateDistribution }) => (
     <div className="space-y-2">
@@ -34,4 +33,4 @@ export const ProfileWorkload: React.FC<Props> = ({ stateDistribution }) => (
             ))}
         </div>
     </div>
-);
+)

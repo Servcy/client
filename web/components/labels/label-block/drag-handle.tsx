@@ -1,13 +1,13 @@
-import { DraggableProvidedDragHandleProps } from "@hello-pangea/dnd";
-import { MoreVertical } from "lucide-react";
+import { DraggableProvidedDragHandleProps } from "@hello-pangea/dnd"
+import { MoreVertical } from "lucide-react"
 
 interface IDragHandle {
-    isDragging: boolean;
-    dragHandleProps: DraggableProvidedDragHandleProps;
+    isDragging: boolean
+    dragHandleProps: DraggableProvidedDragHandleProps
 }
 
 export const DragHandle = (props: IDragHandle) => {
-    const { isDragging, dragHandleProps } = props;
+    const { isDragging, dragHandleProps } = props
 
     return (
         <button
@@ -20,5 +20,5 @@ export const DragHandle = (props: IDragHandle) => {
             <MoreVertical className="h-3.5 w-3.5 stroke-custom-text-400" />
             <MoreVertical className="-ml-5 h-3.5 w-3.5 stroke-custom-text-400" />
         </button>
-    );
-};
+    )
+}

@@ -1,44 +1,42 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react";
-import sortBy from "lodash/sortBy";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-import { useApplication, useModule } from "@hooks/store";
-
-import { Loader, DiceIcon } from "@servcy/ui";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { useApplication, useModule } from "@hooks/store"
+import sortBy from "lodash/sortBy"
+import { observer } from "mobx-react"
+import { DiceIcon, Loader } from "@servcy/ui"
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string) => void;
-    searchQuery: string;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string) => void
+    searchQuery: string
+}
 
 export const FilterModule: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, searchQuery } = props;
+    const { appliedFilters, handleUpdate, searchQuery } = props
 
     const {
         router: { projectId },
-    } = useApplication();
-    const { getModuleById, getProjectModuleIds } = useModule();
+    } = useApplication()
+    const { getModuleById, getProjectModuleIds } = useModule()
 
     // states
-    const [itemsToRender, setItemsToRender] = useState(5);
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [itemsToRender, setItemsToRender] = useState(5)
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const moduleIds = projectId ? getProjectModuleIds(projectId) : undefined;
-    const modules = moduleIds?.map((projectId) => getModuleById(projectId)!) ?? null;
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const moduleIds = projectId ? getProjectModuleIds(projectId) : undefined
+    const modules = moduleIds?.map((projectId) => getModuleById(projectId)!) ?? null
+    const appliedFiltersCount = appliedFilters?.length ?? 0
     const filteredOptions = sortBy(
         modules?.filter((module) => module.name.toLowerCase().includes(searchQuery.toLowerCase())),
         (module) => module.name.toLowerCase()
-    );
+    )
 
     const handleViewToggle = () => {
-        if (!filteredOptions) return;
+        if (!filteredOptions) return
 
-        if (itemsToRender === filteredOptions.length) setItemsToRender(5);
-        else setItemsToRender(filteredOptions.length);
-    };
+        if (itemsToRender === filteredOptions.length) setItemsToRender(5)
+        else setItemsToRender(filteredOptions.length)
+    }
 
     return (
         <>
@@ -84,5 +82,5 @@ export const FilterModule: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

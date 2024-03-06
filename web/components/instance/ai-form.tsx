@@ -1,29 +1,26 @@
-import { FC, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Eye, EyeOff } from "lucide-react";
-
-import { Button, Input } from "@servcy/ui";
-
-import { IFormattedInstanceConfiguration } from "@servcy/types";
-
-import { useApplication } from "@hooks/store";
-import toast from "react-hot-toast";
+import { FC, useState } from "react"
+import { useApplication } from "@hooks/store"
+import { Eye, EyeOff } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IFormattedInstanceConfiguration } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 export interface IInstanceAIForm {
-    config: IFormattedInstanceConfiguration;
+    config: IFormattedInstanceConfiguration
 }
 
 export interface AIFormValues {
-    OPENAI_API_KEY: string;
-    GPT_ENGINE: string;
+    OPENAI_API_KEY: string
+    GPT_ENGINE: string
 }
 
 export const InstanceAIForm: FC<IInstanceAIForm> = (props) => {
-    const { config } = props;
+    const { config } = props
     // states
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
     // store
-    const { instance: instanceStore } = useApplication();
+    const { instance: instanceStore } = useApplication()
     // toast
 
     // form data
@@ -36,10 +33,10 @@ export const InstanceAIForm: FC<IInstanceAIForm> = (props) => {
             OPENAI_API_KEY: config["OPENAI_API_KEY"],
             GPT_ENGINE: config["GPT_ENGINE"],
         },
-    });
+    })
 
     const onSubmit = async (formData: AIFormValues) => {
-        const payload: Partial<AIFormValues> = { ...formData };
+        const payload: Partial<AIFormValues> = { ...formData }
 
         await instanceStore
             .updateInstanceConfigurations(payload)
@@ -50,8 +47,8 @@ export const InstanceAIForm: FC<IInstanceAIForm> = (props) => {
                     message: "AI Settings updated successfully",
                 })
             )
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
     return (
         <>
@@ -144,5 +141,5 @@ export const InstanceAIForm: FC<IInstanceAIForm> = (props) => {
                 </Button>
             </div>
         </>
-    );
-};
+    )
+}

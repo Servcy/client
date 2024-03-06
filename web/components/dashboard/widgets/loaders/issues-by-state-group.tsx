@@ -1,4 +1,4 @@
-import { Loader } from "@servcy/ui";
+import { Loader } from "@servcy/ui"
 
 export const IssuesByStateGroupWidgetLoader = () => (
     <Loader className="bg-custom-background-100 rounded-xl p-6">
@@ -17,4 +17,4 @@ export const IssuesByStateGroupWidgetLoader = () => (
             </div>
         </div>
     </Loader>
-);
+)

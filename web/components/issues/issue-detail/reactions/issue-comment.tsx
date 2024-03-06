@@ -1,73 +1,70 @@
-import { FC, useMemo } from "react";
-import { observer } from "mobx-react-lite";
-
-import { ReactionSelector } from "./reaction-selector";
-
-import { useIssueDetail } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { IUser } from "@servcy/types";
-import { renderEmoji } from "@helpers/emoji.helper";
+import { FC, useMemo } from "react"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IUser } from "@servcy/types"
+import { ReactionSelector } from "./reaction-selector"
 
 export type TIssueCommentReaction = {
-    workspaceSlug: string;
-    projectId: string;
-    commentId: string;
-    currentUser: IUser;
-};
+    workspaceSlug: string
+    projectId: string
+    commentId: string
+    currentUser: IUser
+}
 
 export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) => {
-    const { workspaceSlug, projectId, commentId, currentUser } = props;
+    const { workspaceSlug, projectId, commentId, currentUser } = props
 
     const {
         commentReaction: { getCommentReactionsByCommentId, commentReactionsByUser },
         createCommentReaction,
         removeCommentReaction,
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const reactionIds = getCommentReactionsByCommentId(commentId);
-    const userReactions = commentReactionsByUser(commentId, currentUser.id).map((r) => r.reaction);
+    const reactionIds = getCommentReactionsByCommentId(commentId)
+    const userReactions = commentReactionsByUser(commentId, currentUser.id).map((r) => r.reaction)
 
     const issueCommentReactionOperations = useMemo(
         () => ({
             create: async (reaction: string) => {
                 try {
-                    if (!workspaceSlug || !projectId || !commentId) throw new Error("Missing fields");
-                    await createCommentReaction(workspaceSlug, projectId, commentId, reaction);
+                    if (!workspaceSlug || !projectId || !commentId) throw new Error("Missing fields")
+                    await createCommentReaction(workspaceSlug, projectId, commentId, reaction)
                     toast.error({
                         title: "Reaction created successfully",
                         type: "success",
                         message: "Reaction created successfully",
-                    });
+                    })
                 } catch (error) {
                     toast.error({
                         title: "Reaction creation failed",
                         type: "error",
                         message: "Reaction creation failed",
-                    });
+                    })
                 }
             },
             remove: async (reaction: string) => {
                 try {
                     if (!workspaceSlug || !projectId || !commentId || !currentUser?.id)
-                        throw new Error("Missing fields");
-                    removeCommentReaction(workspaceSlug, projectId, commentId, reaction, currentUser.id);
+                        throw new Error("Missing fields")
+                    removeCommentReaction(workspaceSlug, projectId, commentId, reaction, currentUser.id)
                     toast.error({
                         title: "Reaction removed successfully",
                         type: "success",
                         message: "Reaction removed successfully",
-                    });
+                    })
                 } catch (error) {
                     toast.error({
                         title: "Reaction remove failed",
                         type: "error",
                         message: "Reaction remove failed",
-                    });
+                    })
                 }
             },
             react: async (reaction: string) => {
-                if (userReactions.includes(reaction)) await issueCommentReactionOperations.remove(reaction);
-                else await issueCommentReactionOperations.create(reaction);
+                if (userReactions.includes(reaction)) await issueCommentReactionOperations.remove(reaction)
+                else await issueCommentReactionOperations.create(reaction)
             },
         }),
         [
@@ -80,7 +77,7 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
             setToastAlert,
             userReactions,
         ]
-    );
+    )
 
     return (
         <div className="mt-4 relative flex items-center gap-1.5">
@@ -115,5 +112,5 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
                         )
                 )}
         </div>
-    );
-});
+    )
+})

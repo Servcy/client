@@ -1,70 +1,64 @@
-import { FC, MouseEvent, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { observer } from "mobx-react";
-
-import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles";
-
-import { Avatar, AvatarGroup, CustomMenu, Tooltip, LayersIcon, CycleGroupIcon } from "@servcy/ui";
-
-import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react";
-
-import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper";
-import { copyTextToClipboard } from "@helpers/string.helper";
-
-import { CYCLE_STATUS } from "@constants/cycle";
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC, MouseEvent, useState } from "react"
+import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles"
+import { CYCLE_STATUS } from "@constants/cycle"
+import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
+import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react"
+import { observer } from "mobx-react"
+import toast from "react-hot-toast"
 //.types
-import { TCycleGroups } from "@servcy/types";
+import { TCycleGroups } from "@servcy/types"
+import { Avatar, AvatarGroup, CustomMenu, CycleGroupIcon, LayersIcon, Tooltip } from "@servcy/ui"
 
 export interface ICyclesBoardCard {
-    workspaceSlug: string;
-    projectId: string;
-    cycleId: string;
+    workspaceSlug: string
+    projectId: string
+    cycleId: string
 }
 
 export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
-    const { cycleId, workspaceSlug, projectId } = props;
+    const { cycleId, workspaceSlug, projectId } = props
     // states
-    const [updateModal, setUpdateModal] = useState(false);
-    const [deleteModal, setDeleteModal] = useState(false);
+    const [updateModal, setUpdateModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store
-    const { setTrackElement, captureEvent } = useEventTracker();
+    const { setTrackElement, captureEvent } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { addCycleToFavorites, removeCycleFromFavorites, getCycleById } = useCycle();
-    const { getUserDetails } = useMember();
+    } = useUser()
+    const { addCycleToFavorites, removeCycleFromFavorites, getCycleById } = useCycle()
+    const { getUserDetails } = useMember()
 
     // computed
-    const cycleDetails = getCycleById(cycleId);
+    const cycleDetails = getCycleById(cycleId)
 
-    if (!cycleDetails) return null;
+    if (!cycleDetails) return null
 
-    const cycleStatus = cycleDetails.status.toLocaleLowerCase();
-    const isCompleted = cycleStatus === "completed";
-    const endDate = new Date(cycleDetails.end_date ?? "");
-    const startDate = new Date(cycleDetails.start_date ?? "");
-    const isDateValid = cycleDetails.start_date || cycleDetails.end_date;
+    const cycleStatus = cycleDetails.status.toLocaleLowerCase()
+    const isCompleted = cycleStatus === "completed"
+    const endDate = new Date(cycleDetails.end_date ?? "")
+    const startDate = new Date(cycleDetails.start_date ?? "")
+    const isDateValid = cycleDetails.start_date || cycleDetails.end_date
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
 
-    const currentCycle = CYCLE_STATUS.find((status) => status.value === cycleStatus);
+    const currentCycle = CYCLE_STATUS.find((status) => status.value === cycleStatus)
 
     const cycleTotalIssues =
         cycleDetails.backlog_issues +
         cycleDetails.unstarted_issues +
         cycleDetails.started_issues +
         cycleDetails.completed_issues +
-        cycleDetails.cancelled_issues;
+        cycleDetails.cancelled_issues
 
-    const completionPercentage = (cycleDetails.completed_issues / cycleTotalIssues) * 100;
+    const completionPercentage = (cycleDetails.completed_issues / cycleTotalIssues) * 100
 
     const issueCount = cycleDetails
         ? cycleTotalIssues === 0
@@ -72,25 +66,25 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
             : cycleTotalIssues === cycleDetails.completed_issues
               ? `${cycleTotalIssues} Issue${cycleTotalIssues > 1 ? "s" : ""}`
               : `${cycleDetails.completed_issues}/${cycleTotalIssues} Issues`
-        : "0 Issue";
+        : "0 Issue"
 
     const handleCopyText = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
+        e.preventDefault()
+        e.stopPropagation()
+        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
 
         copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`).then(() => {
             toast.error({
                 type: "success",
                 title: "Link Copied!",
                 message: "Cycle link copied to clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleAddToFavorites = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        if (!workspaceSlug || !projectId) return;
+        e.preventDefault()
+        if (!workspaceSlug || !projectId) return
 
         addCycleToFavorites(workspaceSlug?.toString(), projectId.toString(), cycleId)
             .then(() => {
@@ -98,20 +92,20 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
                     cycle_id: cycleId,
                     element: "Grid layout",
                     state: "SUCCESS",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Couldn't add the cycle to favorites. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleRemoveFromFavorites = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        if (!workspaceSlug || !projectId) return;
+        e.preventDefault()
+        if (!workspaceSlug || !projectId) return
 
         removeCycleFromFavorites(workspaceSlug?.toString(), projectId.toString(), cycleId)
             .then(() => {
@@ -119,43 +113,43 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
                     cycle_id: cycleId,
                     element: "Grid layout",
                     state: "SUCCESS",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Couldn't add the cycle to favorites. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleEditCycle = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setTrackElement("Cycles page grid layout");
-        setUpdateModal(true);
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        setTrackElement("Cycles page grid layout")
+        setUpdateModal(true)
+    }
 
     const handleDeleteCycle = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setTrackElement("Cycles page grid layout");
-        setDeleteModal(true);
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        setTrackElement("Cycles page grid layout")
+        setDeleteModal(true)
+    }
 
     const openCycleOverview = (e: MouseEvent<HTMLButtonElement>) => {
-        const { query } = router;
-        e.preventDefault();
-        e.stopPropagation();
+        const { query } = router
+        e.preventDefault()
+        e.stopPropagation()
 
         router.push({
             pathname: router.pathname,
             query: { ...query, peekCycle: cycleId },
-        });
-    };
+        })
+    }
 
-    const daysLeft = findHowManyDaysLeft(cycleDetails.end_date) ?? 0;
+    const daysLeft = findHowManyDaysLeft(cycleDetails.end_date) ?? 0
 
     return (
         <div>
@@ -217,14 +211,14 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
                                     <div className="flex cursor-default items-center gap-1">
                                         <AvatarGroup showTooltip={false}>
                                             {cycleDetails.assignee_ids.map((assigne_id) => {
-                                                const member = getUserDetails(assigne_id);
+                                                const member = getUserDetails(assigne_id)
                                                 return (
                                                     <Avatar
                                                         key={member?.id}
                                                         name={member?.display_name}
                                                         src={member?.avatar}
                                                     />
-                                                );
+                                                )
                                             })}
                                         </AvatarGroup>
                                     </div>
@@ -302,5 +296,5 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
                 </div>
             </Link>
         </div>
-    );
-});
+    )
+})

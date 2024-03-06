@@ -1,51 +1,44 @@
-import { Search } from "lucide-react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
-
-import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { AppLayout } from "@layouts/app-layout";
-import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-
-import { PageHead } from "@components/core";
-import { WorkspaceSettingHeader } from "@components/headers";
-import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace";
-
-import { Button } from "@servcy/ui";
-
-import { NextPageWithLayout } from "@/types/types";
-import { IWorkspaceBulkInviteFormData } from "@servcy/types";
-
-import { getUserRole } from "@helpers/user.helper";
-
-import { MEMBER_INVITED } from "@constants/event-tracker";
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import { useRouter } from "next/router"
+import { ReactElement, useState } from "react"
+import { PageHead } from "@components/core"
+import { WorkspaceSettingHeader } from "@components/headers"
+import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace"
+import { MEMBER_INVITED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { getUserRole } from "@helpers/user.helper"
+import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+import { Search } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IWorkspaceBulkInviteFormData } from "@servcy/types"
+import { Button } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
     // states
-    const [inviteModal, setInviteModal] = useState(false);
-    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [inviteModal, setInviteModal] = useState(false)
+    const [searchQuery, setSearchQuery] = useState<string>("")
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { captureEvent, setTrackElement } = useEventTracker();
+    const { captureEvent, setTrackElement } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
     const {
         workspace: { inviteMembersToWorkspace },
-    } = useMember();
-    const { currentWorkspace } = useWorkspace();
+    } = useMember()
+    const { currentWorkspace } = useWorkspace()
 
     const handleWorkspaceInvite = (data: IWorkspaceBulkInviteFormData) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         return inviteMembersToWorkspace(workspaceSlug.toString(), data)
             .then(() => {
-                setInviteModal(false);
+                setInviteModal(false)
                 captureEvent(MEMBER_INVITED, {
                     emails: [
                         ...data.emails.map((email) => ({
@@ -56,12 +49,12 @@ const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
                     project_id: undefined,
                     state: "SUCCESS",
                     element: "Workspace settings member page",
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "Invitations sent successfully.",
-                });
+                })
             })
             .catch((err) => {
                 captureEvent(MEMBER_INVITED, {
@@ -74,19 +67,19 @@ const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
                     project_id: undefined,
                     state: "FAILED",
                     element: "Workspace settings member page",
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: `${err.error ?? "Something went wrong. Please try again."}`,
-                });
-            });
-    };
+                })
+            })
+    }
 
     // derived values
     const hasAddMemberPermission =
-        currentWorkspaceRole && [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole);
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Members` : undefined;
+        currentWorkspaceRole && [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole)
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Members` : undefined
 
     return (
         <>
@@ -118,15 +111,15 @@ const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
                 <WorkspaceMembersList searchQuery={searchQuery} />
             </section>
         </>
-    );
-});
+    )
+})
 
 WorkspaceMembersSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<WorkspaceSettingHeader title="Members Settings" />}>
             <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default WorkspaceMembersSettingsPage;
+export default WorkspaceMembersSettingsPage

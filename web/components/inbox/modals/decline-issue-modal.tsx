@@ -1,34 +1,31 @@
-import React, { useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { AlertTriangle } from "lucide-react";
-
-import { Button } from "@servcy/ui";
-
-import type { TIssue } from "@servcy/types";
-import { useProject } from "@hooks/store";
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProject } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import type { TIssue } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    data: TIssue;
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: () => Promise<void>;
-};
+    data: TIssue
+    isOpen: boolean
+    onClose: () => void
+    onSubmit: () => Promise<void>
+}
 
 export const DeclineIssueModal: React.FC<Props> = ({ isOpen, onClose, data, onSubmit }) => {
-    const [isDeclining, setIsDeclining] = useState(false);
+    const [isDeclining, setIsDeclining] = useState(false)
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
 
     const handleClose = () => {
-        setIsDeclining(false);
-        onClose();
-    };
+        setIsDeclining(false)
+        onClose()
+    }
 
     const handleDecline = () => {
-        setIsDeclining(true);
-        onSubmit().finally(() => setIsDeclining(false));
-    };
+        setIsDeclining(true)
+        onSubmit().finally(() => setIsDeclining(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -96,5 +93,5 @@ export const DeclineIssueModal: React.FC<Props> = ({ isOpen, onClose, data, onSu
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

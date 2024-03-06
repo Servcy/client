@@ -1,4 +1,4 @@
-import { Globe2, LayoutGrid, List, Lock } from "lucide-react";
+import { Globe2, LayoutGrid, List, Lock } from "lucide-react"
 
 export const PAGE_VIEW_LAYOUTS = [
     {
@@ -11,7 +11,7 @@ export const PAGE_VIEW_LAYOUTS = [
         icon: LayoutGrid,
         title: "Detailed layout",
     },
-];
+]
 
 export const PAGE_TABS_LIST: { key: string; title: string }[] = [
     {
@@ -38,7 +38,7 @@ export const PAGE_TABS_LIST: { key: string; title: string }[] = [
         key: "archived-pages",
         title: "Archived",
     },
-];
+]
 
 export const PAGE_ACCESS_SPECIFIERS: { key: number; label: string; icon: any }[] = [
     {
@@ -51,4 +51,4 @@ export const PAGE_ACCESS_SPECIFIERS: { key: number; label: string; icon: any }[]
         label: "Private",
         icon: Lock,
     },
-];
+]

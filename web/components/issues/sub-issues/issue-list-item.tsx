@@ -1,30 +1,27 @@
-import React from "react";
-import { ChevronDown, ChevronRight, X, Pencil, Trash, Link as LinkIcon, Loader } from "lucide-react";
-
-import { IssueList } from "./issues-list";
-import { IssueProperty } from "./properties";
-
-import { ControlLink, CustomMenu, Tooltip } from "@servcy/ui";
-
-import { TIssue } from "@servcy/types";
-import { TSubIssueOperations } from "./root";
+import React from "react"
 // import { ISubIssuesRootLoaders, ISubIssuesRootLoadersHandler } from "./root";
-import { useIssueDetail, useProject, useProjectState } from "@hooks/store";
-import { observer } from "mobx-react-lite";
+import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+import { ChevronDown, ChevronRight, Link as LinkIcon, Loader, Pencil, Trash, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { ControlLink, CustomMenu, Tooltip } from "@servcy/ui"
+import { IssueList } from "./issues-list"
+import { IssueProperty } from "./properties"
+import { TSubIssueOperations } from "./root"
 
 export interface ISubIssues {
-    workspaceSlug: string;
-    projectId: string;
-    parentIssueId: string;
-    spacingLeft: number;
-    disabled: boolean;
+    workspaceSlug: string
+    projectId: string
+    parentIssueId: string
+    spacingLeft: number
+    disabled: boolean
     handleIssueCrudState: (
         key: "create" | "existing" | "update" | "delete",
         issueId: string,
         issue?: TIssue | null
-    ) => void;
-    subIssueOperations: TSubIssueOperations;
-    issueId: string;
+    ) => void
+    subIssueOperations: TSubIssueOperations
+    issueId: string
 }
 
 export const IssueListItem: React.FC<ISubIssues> = observer((props) => {
@@ -37,32 +34,32 @@ export const IssueListItem: React.FC<ISubIssues> = observer((props) => {
         disabled,
         handleIssueCrudState,
         subIssueOperations,
-    } = props;
+    } = props
 
     const {
         setPeekIssue,
         issue: { getIssueById },
         subIssues: { subIssueHelpersByIssueId, setSubIssueHelpers },
-    } = useIssueDetail();
-    const project = useProject();
-    const { getProjectStates } = useProjectState();
+    } = useIssueDetail()
+    const project = useProject()
+    const { getProjectStates } = useProjectState()
 
-    const issue = getIssueById(issueId);
-    const projectDetail = (issue && issue.project_id && project.getProjectById(issue.project_id)) || undefined;
+    const issue = getIssueById(issueId)
+    const projectDetail = (issue && issue.project_id && project.getProjectById(issue.project_id)) || undefined
     const currentIssueStateDetail =
         (issue?.project_id && getProjectStates(issue?.project_id)?.find((state) => issue?.state_id == state.id)) ||
-        undefined;
+        undefined
 
-    const subIssueHelpers = subIssueHelpersByIssueId(parentIssueId);
+    const subIssueHelpers = subIssueHelpersByIssueId(parentIssueId)
 
     const handleIssuePeekOverview = (issue: TIssue) =>
         workspaceSlug &&
         issue &&
         issue.project_id &&
         issue.id &&
-        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id });
+        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id })
 
-    if (!issue) return <></>;
+    if (!issue) return <></>
     return (
         <div key={issueId}>
             {issue && (
@@ -82,15 +79,15 @@ export const IssueListItem: React.FC<ISubIssues> = observer((props) => {
                                         className="flex h-full w-full cursor-pointer items-center justify-center rounded-sm transition-all hover:bg-custom-background-80"
                                         onClick={async () => {
                                             if (!subIssueHelpers.issue_visibility.includes(issueId)) {
-                                                setSubIssueHelpers(parentIssueId, "preview_loader", issueId);
+                                                setSubIssueHelpers(parentIssueId, "preview_loader", issueId)
                                                 await subIssueOperations.fetchSubIssues(
                                                     workspaceSlug,
                                                     projectId,
                                                     issueId
-                                                );
-                                                setSubIssueHelpers(parentIssueId, "preview_loader", issueId);
+                                                )
+                                                setSubIssueHelpers(parentIssueId, "preview_loader", issueId)
                                             }
-                                            setSubIssueHelpers(parentIssueId, "issue_visibility", issueId);
+                                            setSubIssueHelpers(parentIssueId, "issue_visibility", issueId)
                                         }}
                                     >
                                         {subIssueHelpers.issue_visibility.includes(issue.id) ? (
@@ -191,7 +188,7 @@ export const IssueListItem: React.FC<ISubIssues> = observer((props) => {
                                             issue.project_id,
                                             parentIssueId,
                                             issue.id
-                                        );
+                                        )
                                     }}
                                 >
                                     <X width={14} strokeWidth={2} />
@@ -216,5 +213,5 @@ export const IssueListItem: React.FC<ISubIssues> = observer((props) => {
                     />
                 )}
         </div>
-    );
-});
+    )
+})

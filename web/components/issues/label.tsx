@@ -1,11 +1,10 @@
-import React from "react";
-
-import { Tooltip } from "@servcy/ui";
+import React from "react"
+import { Tooltip } from "@servcy/ui"
 
 type Props = {
-    labelDetails: any[];
-    maxRender?: number;
-};
+    labelDetails: any[]
+    maxRender?: number
+}
 
 export const ViewIssueLabel: React.FC<Props> = ({ labelDetails, maxRender = 1 }) => (
     <>
@@ -49,4 +48,4 @@ export const ViewIssueLabel: React.FC<Props> = ({ labelDetails, maxRender = 1 })
             ""
         )}
     </>
-);
+)

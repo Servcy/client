@@ -1,50 +1,46 @@
-import { useState, FC, useRef, useEffect, useCallback } from "react";
-import { useRouter } from "next/router";
-import { DragDropContext, Draggable, DropResult, Droppable } from "@hello-pangea/dnd";
-import { Disclosure, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { ChevronDown, ChevronRight, Plus } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { CreateProjectModal, ProjectSidebarListItem } from "@components/project";
-
-import { copyUrlToClipboard } from "@helpers/string.helper";
-import { orderJoinedProjects } from "@helpers/project.helper";
-import { cn } from "@helpers/common.helper";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { IProject } from "@servcy/types";
+import { useRouter } from "next/router"
+import { FC, useCallback, useEffect, useRef, useState } from "react"
+import { CreateProjectModal, ProjectSidebarListItem } from "@components/project"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { Disclosure, Transition } from "@headlessui/react"
+import { DragDropContext, Draggable, Droppable, DropResult } from "@hello-pangea/dnd"
+import { cn } from "@helpers/common.helper"
+import { orderJoinedProjects } from "@helpers/project.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import { ChevronDown, ChevronRight, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IProject } from "@servcy/types"
 
 export const ProjectSidebarList: FC = observer(() => {
     // states
-    const [isFavoriteProjectCreate, setIsFavoriteProjectCreate] = useState(false);
-    const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false); // scroll animation state
+    const [isFavoriteProjectCreate, setIsFavoriteProjectCreate] = useState(false)
+    const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false) // scroll animation state
     // refs
-    const containerRef = useRef<HTMLDivElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null)
 
     const {
         theme: { sidebarCollapsed },
         commandPalette: { toggleCreateProjectModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
     const {
         getProjectById,
         joinedProjectIds: joinedProjects,
         favoriteProjectIds: favoriteProjects,
         updateProjectView,
-    } = useProject();
+    } = useProject()
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // toast
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
 
     const handleCopyText = (projectId: string) => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {
@@ -52,34 +48,34 @@ export const ProjectSidebarList: FC = observer(() => {
                 type: "success",
                 title: "Link Copied!",
                 message: "Project link copied to clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const onDragEnd = (result: DropResult) => {
-        const { source, destination, draggableId } = result;
-        if (!destination || !workspaceSlug) return;
-        if (source.index === destination.index) return;
+        const { source, destination, draggableId } = result
+        if (!destination || !workspaceSlug) return
+        if (source.index === destination.index) return
 
-        const joinedProjectsList: IProject[] = [];
+        const joinedProjectsList: IProject[] = []
         joinedProjects.map((projectId) => {
-            const _project = getProjectById(projectId);
-            if (_project) joinedProjectsList.push(_project);
-        });
-        if (joinedProjectsList.length <= 0) return;
+            const _project = getProjectById(projectId)
+            if (_project) joinedProjectsList.push(_project)
+        })
+        if (joinedProjectsList.length <= 0) return
 
-        const updatedSortOrder = orderJoinedProjects(source.index, destination.index, draggableId, joinedProjectsList);
+        const updatedSortOrder = orderJoinedProjects(source.index, destination.index, draggableId, joinedProjectsList)
         if (updatedSortOrder != undefined)
             updateProjectView(workspaceSlug.toString(), draggableId, { sort_order: updatedSortOrder }).catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Something went wrong. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
-    const isCollapsed = sidebarCollapsed || false;
+    const isCollapsed = sidebarCollapsed || false
 
     /**
      * Implementing scroll animation styles based on the scroll length of the container
@@ -87,20 +83,20 @@ export const ProjectSidebarList: FC = observer(() => {
     useEffect(() => {
         const handleScroll = () => {
             if (containerRef.current) {
-                const scrollTop = containerRef.current.scrollTop;
-                setIsScrolled(scrollTop > 0);
+                const scrollTop = containerRef.current.scrollTop
+                setIsScrolled(scrollTop > 0)
             }
-        };
-        const currentContainerRef = containerRef.current;
+        }
+        const currentContainerRef = containerRef.current
         if (currentContainerRef) {
-            currentContainerRef.addEventListener("scroll", handleScroll);
+            currentContainerRef.addEventListener("scroll", handleScroll)
         }
         return () => {
             if (currentContainerRef) {
-                currentContainerRef.removeEventListener("scroll", handleScroll);
+                currentContainerRef.removeEventListener("scroll", handleScroll)
             }
-        };
-    }, []);
+        }
+    }, [])
 
     return (
         <>
@@ -108,7 +104,7 @@ export const ProjectSidebarList: FC = observer(() => {
                 <CreateProjectModal
                     isOpen={isProjectModalOpen}
                     onClose={() => {
-                        setIsProjectModalOpen(false);
+                        setIsProjectModalOpen(false)
                     }}
                     setToFavorite={isFavoriteProjectCreate}
                     workspaceSlug={workspaceSlug.toString()}
@@ -146,9 +142,9 @@ export const ProjectSidebarList: FC = observer(() => {
                                                             <button
                                                                 className="opacity-0 group-hover:opacity-100"
                                                                 onClick={() => {
-                                                                    setTrackElement("APP_SIDEBAR_FAVORITES_BLOCK");
-                                                                    setIsFavoriteProjectCreate(true);
-                                                                    setIsProjectModalOpen(true);
+                                                                    setTrackElement("APP_SIDEBAR_FAVORITES_BLOCK")
+                                                                    setIsFavoriteProjectCreate(true)
+                                                                    setIsProjectModalOpen(true)
                                                                 }}
                                                             >
                                                                 <Plus className="h-3 w-3" />
@@ -230,9 +226,9 @@ export const ProjectSidebarList: FC = observer(() => {
                                                             <button
                                                                 className="opacity-0 group-hover:opacity-100"
                                                                 onClick={() => {
-                                                                    setTrackElement("Sidebar");
-                                                                    setIsFavoriteProjectCreate(false);
-                                                                    setIsProjectModalOpen(true);
+                                                                    setTrackElement("Sidebar")
+                                                                    setIsFavoriteProjectCreate(false)
+                                                                    setIsProjectModalOpen(true)
                                                                 }}
                                                             >
                                                                 <Plus className="h-3 w-3" />
@@ -290,8 +286,8 @@ export const ProjectSidebarList: FC = observer(() => {
                         type="button"
                         className="flex w-full items-center gap-2 px-3 text-sm text-custom-sidebar-text-200"
                         onClick={() => {
-                            setTrackElement("Sidebar");
-                            toggleCreateProjectModal(true);
+                            setTrackElement("Sidebar")
+                            toggleCreateProjectModal(true)
                         }}
                     >
                         <Plus className="h-5 w-5" />
@@ -300,5 +296,5 @@ export const ProjectSidebarList: FC = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

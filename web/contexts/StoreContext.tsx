@@ -1,18 +1,18 @@
-import { RootStore } from "@store/root.store";
-import { createContext } from "react";
+import { createContext } from "react"
+import { RootStore } from "@store/root.store"
 
-let rootStore = new RootStore();
+let rootStore = new RootStore()
 
-export const StoreContext = createContext<RootStore>(rootStore);
+export const StoreContext = createContext<RootStore>(rootStore)
 
 const initializeStore = () => {
-    const _rootStore = rootStore ?? new RootStore();
-    if (typeof window === "undefined") return _rootStore;
-    if (!rootStore) rootStore = _rootStore;
-    return _rootStore;
-};
+    const _rootStore = rootStore ?? new RootStore()
+    if (typeof window === "undefined") return _rootStore
+    if (!rootStore) rootStore = _rootStore
+    return _rootStore
+}
 
 export const StoreProvider = ({ children }: any) => {
-    const store = initializeStore();
-    return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
-};
+    const store = initializeStore()
+    return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+}

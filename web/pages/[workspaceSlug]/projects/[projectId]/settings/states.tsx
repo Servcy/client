@@ -1,12 +1,10 @@
-import { ReactElement } from "react";
+import { ReactElement } from "react"
+import { ProjectSettingHeader } from "@components/headers"
+import { ProjectSettingStateList } from "@components/states"
 // layout
-import { AppLayout } from "@layouts/app-layout";
-import { ProjectSettingLayout } from "@layouts/settings-layout";
-
-import { ProjectSettingHeader } from "@components/headers";
-import { ProjectSettingStateList } from "@components/states";
-
-import { NextPageWithLayout } from "@/types/types";
+import { AppLayout } from "@layouts/app-layout"
+import { ProjectSettingLayout } from "@layouts/settings-layout"
+import { NextPageWithLayout } from "@/types/types"
 
 const StatesSettingsPage: NextPageWithLayout = () => (
     <div className="w-full gap-10 overflow-y-auto py-8 pr-9">
@@ -15,14 +13,14 @@ const StatesSettingsPage: NextPageWithLayout = () => (
         </div>
         <ProjectSettingStateList />
     </div>
-);
+)
 
 StatesSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout withProjectWrapper header={<ProjectSettingHeader title="States Settings" />}>
             <ProjectSettingLayout>{page}</ProjectSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default StatesSettingsPage;
+export default StatesSettingsPage

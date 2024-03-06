@@ -1,5 +1,4 @@
-import { Calendar, GanttChartSquare, Kanban, List, Sheet } from "lucide-react";
-
+import { Calendar, GanttChartSquare, Kanban, List, Sheet } from "lucide-react"
 import {
     IIssueDisplayProperties,
     IIssueFilterOptions,
@@ -9,7 +8,7 @@ import {
     TIssueOrderByOptions,
     TIssuePriorities,
     TIssueTypeFilters,
-} from "@servcy/types";
+} from "@servcy/types"
 
 export enum EIssuesStoreType {
     GLOBAL = "GLOBAL",
@@ -28,7 +27,7 @@ export type TCreateModalStoreTypes =
     | EIssuesStoreType.PROJECT_VIEW
     | EIssuesStoreType.PROFILE
     | EIssuesStoreType.CYCLE
-    | EIssuesStoreType.MODULE;
+    | EIssuesStoreType.MODULE
 
 export enum EIssueFilterType {
     FILTERS = "filters",
@@ -38,19 +37,19 @@ export enum EIssueFilterType {
 }
 
 export const ISSUE_PRIORITIES: {
-    key: TIssuePriorities;
-    title: string;
+    key: TIssuePriorities
+    title: string
 }[] = [
     { key: "urgent", title: "Urgent" },
     { key: "high", title: "High" },
     { key: "medium", title: "Medium" },
     { key: "low", title: "Low" },
     { key: "none", title: "None" },
-];
+]
 
 export const ISSUE_GROUP_BY_OPTIONS: {
-    key: TIssueGroupByOptions;
-    title: string;
+    key: TIssueGroupByOptions
+    title: string
 }[] = [
     { key: "state", title: "States" },
     { key: "state_detail.group", title: "State Groups" },
@@ -62,11 +61,11 @@ export const ISSUE_GROUP_BY_OPTIONS: {
     { key: "assignees", title: "Assignees" },
     { key: "created_by", title: "Created By" },
     { key: null, title: "None" },
-];
+]
 
 export const ISSUE_ORDER_BY_OPTIONS: {
-    key: TIssueOrderByOptions;
-    title: string;
+    key: TIssueOrderByOptions
+    title: string
 }[] = [
     { key: "sort_order", title: "Manual" },
     { key: "-created_at", title: "Last Created" },
@@ -74,21 +73,21 @@ export const ISSUE_ORDER_BY_OPTIONS: {
     { key: "start_date", title: "Start Date" },
     { key: "target_date", title: "Due Date" },
     { key: "-priority", title: "Priority" },
-];
+]
 
 export const ISSUE_FILTER_OPTIONS: {
-    key: TIssueTypeFilters;
-    title: string;
+    key: TIssueTypeFilters
+    title: string
 }[] = [
     { key: null, title: "All" },
     { key: "active", title: "Active Issues" },
     { key: "backlog", title: "Backlog Issues" },
     // { key: "draft", title: "Draft Issues" },
-];
+]
 
 export const ISSUE_DISPLAY_PROPERTIES: {
-    key: keyof IIssueDisplayProperties;
-    title: string;
+    key: keyof IIssueDisplayProperties
+    title: string
 }[] = [
     { key: "assignee", title: "Assignee" },
     { key: "start_date", title: "Start date" },
@@ -103,45 +102,45 @@ export const ISSUE_DISPLAY_PROPERTIES: {
     { key: "estimate", title: "Estimate" },
     { key: "modules", title: "Modules" },
     { key: "cycle", title: "Cycle" },
-];
+]
 
 export const ISSUE_EXTRA_OPTIONS: {
-    key: TIssueExtraOptions;
-    title: string;
+    key: TIssueExtraOptions
+    title: string
 }[] = [
     { key: "sub_issue", title: "Show sub-issues" }, // in spreadsheet its always false
     { key: "show_empty_groups", title: "Show empty groups" }, // filter on front-end
-];
+]
 
 export const ISSUE_LAYOUTS: {
-    key: TIssueLayouts;
-    title: string;
-    icon: any;
+    key: TIssueLayouts
+    title: string
+    icon: any
 }[] = [
     { key: "list", title: "List Layout", icon: List },
     { key: "kanban", title: "Kanban Layout", icon: Kanban },
     { key: "calendar", title: "Calendar Layout", icon: Calendar },
     { key: "spreadsheet", title: "Spreadsheet Layout", icon: Sheet },
     { key: "gantt_chart", title: "Gantt Chart Layout", icon: GanttChartSquare },
-];
+]
 
 export interface ILayoutDisplayFiltersOptions {
-    filters: (keyof IIssueFilterOptions)[];
-    display_properties: boolean;
+    filters: (keyof IIssueFilterOptions)[]
+    display_properties: boolean
     display_filters: {
-        group_by?: TIssueGroupByOptions[];
-        sub_group_by?: TIssueGroupByOptions[];
-        order_by?: TIssueOrderByOptions[];
-        type?: TIssueTypeFilters[];
-    };
+        group_by?: TIssueGroupByOptions[]
+        sub_group_by?: TIssueGroupByOptions[]
+        order_by?: TIssueOrderByOptions[]
+        type?: TIssueTypeFilters[]
+    }
     extra_options: {
-        access: boolean;
-        values: TIssueExtraOptions[];
-    };
+        access: boolean
+        values: TIssueExtraOptions[]
+    }
 }
 
 export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
-    [pageType: string]: { [layoutType: string]: ILayoutDisplayFiltersOptions };
+    [pageType: string]: { [layoutType: string]: ILayoutDisplayFiltersOptions }
 } = {
     profile_issues: {
         list: {
@@ -396,7 +395,7 @@ export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
             },
         },
     },
-};
+}
 
 export enum EIssueListRow {
     HEADER = "HEADER",
@@ -406,33 +405,33 @@ export enum EIssueListRow {
 }
 
 export const getValueFromObject = (object: Object, key: string): string | number | boolean | null => {
-    const keys = key ? key.split(".") : [];
+    const keys = key ? key.split(".") : []
 
-    let value: any = object;
-    if (!value || keys.length === 0) return null;
+    let value: any = object
+    if (!value || keys.length === 0) return null
 
-    for (const _key of keys) value = value?.[_key];
-    return value;
-};
+    for (const _key of keys) value = value?.[_key]
+    return value
+}
 
 // issue reactions
-export const issueReactionEmojis = ["128077", "128078", "128516", "128165", "128533", "129505", "9992", "128064"];
+export const issueReactionEmojis = ["128077", "128078", "128516", "128165", "128533", "129505", "9992", "128064"]
 
 export const groupReactionEmojis = (reactions: any) => {
-    let _groupedEmojis: any = {};
+    let _groupedEmojis: any = {}
 
     issueReactionEmojis.map((_r) => {
-        _groupedEmojis = { ..._groupedEmojis, [_r]: [] };
-    });
+        _groupedEmojis = { ..._groupedEmojis, [_r]: [] }
+    })
 
     if (reactions && reactions.length > 0) {
         reactions.map((_reaction: any) => {
             _groupedEmojis = {
                 ..._groupedEmojis,
                 [_reaction.reaction]: [..._groupedEmojis[_reaction.reaction], _reaction],
-            };
-        });
+            }
+        })
     }
 
-    return _groupedEmojis;
-};
+    return _groupedEmojis
+}

@@ -1,16 +1,14 @@
-import React from "react";
-import Image from "next/image";
-
-import { Button } from "@servcy/ui";
-
-import EmptyWebhook from "public/empty-state/web-hook.svg";
+import Image from "next/image"
+import React from "react"
+import EmptyWebhook from "public/empty-state/web-hook.svg"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    onClick: () => void;
-};
+    onClick: () => void
+}
 
 export const WebhooksEmptyState: React.FC<Props> = (props) => {
-    const { onClick } = props;
+    const { onClick } = props
     return (
         <div
             className={`mx-auto flex w-full items-center justify-center rounded-sm border border-custom-border-200 bg-custom-background-90 px-16 py-10 lg:w-3/4`}
@@ -26,5 +24,5 @@ export const WebhooksEmptyState: React.FC<Props> = (props) => {
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}

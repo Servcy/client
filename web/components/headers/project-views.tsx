@@ -1,32 +1,28 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Plus } from "lucide-react";
-
-import { useApplication, useProject, useUser } from "@hooks/store";
-
-import { Breadcrumbs, PhotoFilterIcon, Button } from "@servcy/ui";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { EUserProjectRoles } from "@constants/project";
+import { useRouter } from "next/router"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { EUserProjectRoles } from "@constants/project"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useApplication, useProject, useUser } from "@hooks/store"
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, Button, PhotoFilterIcon } from "@servcy/ui"
 
 export const ProjectViewsHeader: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         commandPalette: { toggleCreateViewModal },
-    } = useApplication();
+    } = useApplication()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
 
     const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return (
         <>
@@ -87,5 +83,5 @@ export const ProjectViewsHeader: React.FC = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Combobox, Dialog, Transition } from "@headlessui/react";
-import { Rocket, Search, X } from "lucide-react";
-
-import { ProjectService } from "@services/project";
-import toast from "react-hot-toast";
-import useDebounce from "@hooks/use-debounce";
-
-import { Button, LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
-
-import { ISearchIssueResponse, TProjectIssuesSearchParams } from "@servcy/types";
+import React, { useEffect, useState } from "react"
+import { Combobox, Dialog, Transition } from "@headlessui/react"
+import useDebounce from "@hooks/use-debounce"
+import { ProjectService } from "@services/project"
+import { Rocket, Search, X } from "lucide-react"
+import toast from "react-hot-toast"
+import { ISearchIssueResponse, TProjectIssuesSearchParams } from "@servcy/types"
+import { Button, LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui"
 
 type Props = {
-    workspaceSlug: string | undefined;
-    projectId: string | undefined;
-    isOpen: boolean;
-    handleClose: () => void;
-    searchParams: Partial<TProjectIssuesSearchParams>;
-    handleOnSubmit: (data: ISearchIssueResponse[]) => Promise<void>;
-    workspaceLevelToggle?: boolean;
-};
+    workspaceSlug: string | undefined
+    projectId: string | undefined
+    isOpen: boolean
+    handleClose: () => void
+    searchParams: Partial<TProjectIssuesSearchParams>
+    handleOnSubmit: (data: ISearchIssueResponse[]) => Promise<void>
+    workspaceLevelToggle?: boolean
+}
 
-const projectService = new ProjectService();
+const projectService = new ProjectService()
 
 export const ExistingIssuesListModal: React.FC<Props> = (props) => {
     const {
@@ -31,23 +28,23 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
         searchParams,
         handleOnSubmit,
         workspaceLevelToggle = false,
-    } = props;
+    } = props
     // states
-    const [searchTerm, setSearchTerm] = useState("");
-    const [issues, setIssues] = useState<ISearchIssueResponse[]>([]);
-    const [selectedIssues, setSelectedIssues] = useState<ISearchIssueResponse[]>([]);
-    const [isSearching, setIsSearching] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isWorkspaceLevel, setIsWorkspaceLevel] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("")
+    const [issues, setIssues] = useState<ISearchIssueResponse[]>([])
+    const [selectedIssues, setSelectedIssues] = useState<ISearchIssueResponse[]>([])
+    const [isSearching, setIsSearching] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isWorkspaceLevel, setIsWorkspaceLevel] = useState(false)
 
-    const debouncedSearchTerm: string = useDebounce(searchTerm, 500);
+    const debouncedSearchTerm: string = useDebounce(searchTerm, 500)
 
     const handleClose = () => {
-        onClose();
-        setSearchTerm("");
-        setSelectedIssues([]);
-        setIsWorkspaceLevel(false);
-    };
+        onClose()
+        setSearchTerm("")
+        setSelectedIssues([])
+        setIsWorkspaceLevel(false)
+    }
 
     const onSubmit = async () => {
         if (selectedIssues.length === 0) {
@@ -55,26 +52,26 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                 type: "error",
                 title: "Error!",
                 message: "Please select at least one issue.",
-            });
+            })
 
-            return;
+            return
         }
 
-        setIsSubmitting(true);
+        setIsSubmitting(true)
 
-        await handleOnSubmit(selectedIssues).finally(() => setIsSubmitting(false));
+        await handleOnSubmit(selectedIssues).finally(() => setIsSubmitting(false))
 
-        handleClose();
+        handleClose()
 
         toast.error({
             title: "Success",
             type: "success",
             message: `Issue${selectedIssues.length > 1 ? "s" : ""} added successfully`,
-        });
-    };
+        })
+    }
 
     useEffect(() => {
-        if (!isOpen || !workspaceSlug || !projectId) return;
+        if (!isOpen || !workspaceSlug || !projectId) return
 
         projectService
             .projectIssuesSearch(workspaceSlug as string, projectId as string, {
@@ -83,8 +80,8 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                 workspace_search: isWorkspaceLevel,
             })
             .then((res) => setIssues(res))
-            .finally(() => setIsSearching(false));
-    }, [debouncedSearchTerm, isOpen, isWorkspaceLevel, projectId, searchParams, workspaceSlug]);
+            .finally(() => setIsSearching(false))
+    }, [debouncedSearchTerm, isOpen, isWorkspaceLevel, projectId, searchParams, workspaceSlug])
 
     return (
         <>
@@ -117,8 +114,8 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                                     as="div"
                                     onChange={(val: ISearchIssueResponse) => {
                                         if (selectedIssues.some((i) => i.id === val.id))
-                                            setSelectedIssues((prevData) => prevData.filter((i) => i.id !== val.id));
-                                        else setSelectedIssues((prevData) => [...prevData, val]);
+                                            setSelectedIssues((prevData) => prevData.filter((i) => i.id !== val.id))
+                                        else setSelectedIssues((prevData) => [...prevData, val])
                                     }}
                                 >
                                     <div className="relative m-1">
@@ -228,7 +225,7 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                                                 className={`text-sm text-custom-text-100 ${issues.length > 0 ? "p-2" : ""}`}
                                             >
                                                 {issues.map((issue) => {
-                                                    const selected = selectedIssues.some((i) => i.id === issue.id);
+                                                    const selected = selectedIssues.some((i) => i.id === issue.id)
 
                                                     return (
                                                         <Combobox.Option
@@ -267,7 +264,7 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                                                                 <Rocket className="h-4 w-4" />
                                                             </a>
                                                         </Combobox.Option>
-                                                    );
+                                                    )
                                                 })}
                                             </ul>
                                         )}
@@ -289,5 +286,5 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                 </Dialog>
             </Transition.Root>
         </>
-    );
-};
+    )
+}

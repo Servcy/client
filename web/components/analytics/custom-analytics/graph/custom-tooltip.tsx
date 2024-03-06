@@ -1,48 +1,47 @@
 // nivo
-import { BarTooltipProps } from "@nivo/bar";
-import { DATE_KEYS } from "@constants/analytics";
-import { renderMonthAndYear } from "@helpers/analytics.helper";
-
-import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
+import { DATE_KEYS } from "@constants/analytics"
+import { renderMonthAndYear } from "@helpers/analytics.helper"
+import { BarTooltipProps } from "@nivo/bar"
+import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types"
 
 type Props = {
-    datum: BarTooltipProps<any>;
-    analytics: IAnalyticsResponse;
-    params: IAnalyticsParams;
-};
+    datum: BarTooltipProps<any>
+    analytics: IAnalyticsResponse
+    params: IAnalyticsParams
+}
 
 export const CustomTooltip: React.FC<Props> = ({ datum, analytics, params }) => {
-    let tooltipValue: string | number = "";
+    let tooltipValue: string | number = ""
 
     const renderAssigneeName = (assigneeId: string): string => {
-        const assignee = analytics.extras.assignee_details.find((a) => a.assignees__id === assigneeId);
+        const assignee = analytics.extras.assignee_details.find((a) => a.assignees__id === assigneeId)
 
-        if (!assignee) return "No assignee";
+        if (!assignee) return "No assignee"
 
-        return assignee.assignees__display_name || "No assignee";
-    };
+        return assignee.assignees__display_name || "No assignee"
+    }
 
     if (params.segment) {
-        if (DATE_KEYS.includes(params.segment)) tooltipValue = renderMonthAndYear(datum.id);
+        if (DATE_KEYS.includes(params.segment)) tooltipValue = renderMonthAndYear(datum.id)
         else if (params.segment === "labels__id") {
-            const label = analytics.extras.label_details.find((l) => l.labels__id === datum.id);
-            tooltipValue = label && label.labels__name ? label.labels__name : "None";
+            const label = analytics.extras.label_details.find((l) => l.labels__id === datum.id)
+            tooltipValue = label && label.labels__name ? label.labels__name : "None"
         } else if (params.segment === "state_id") {
-            const state = analytics.extras.state_details.find((s) => s.state_id === datum.id);
-            tooltipValue = state && state.state__name ? state.state__name : "None";
+            const state = analytics.extras.state_details.find((s) => s.state_id === datum.id)
+            tooltipValue = state && state.state__name ? state.state__name : "None"
         } else if (params.segment === "issue_cycle__cycle_id") {
-            const cycle = analytics.extras.cycle_details.find((c) => c.issue_cycle__cycle_id === datum.id);
-            tooltipValue = cycle && cycle.issue_cycle__cycle__name ? cycle.issue_cycle__cycle__name : "None";
+            const cycle = analytics.extras.cycle_details.find((c) => c.issue_cycle__cycle_id === datum.id)
+            tooltipValue = cycle && cycle.issue_cycle__cycle__name ? cycle.issue_cycle__cycle__name : "None"
         } else if (params.segment === "issue_module__module_id") {
-            const selectedModule = analytics.extras.module_details.find((m) => m.issue_module__module_id === datum.id);
+            const selectedModule = analytics.extras.module_details.find((m) => m.issue_module__module_id === datum.id)
             tooltipValue =
                 selectedModule && selectedModule.issue_module__module__name
                     ? selectedModule.issue_module__module__name
-                    : "None";
-        } else tooltipValue = datum.id;
+                    : "None"
+        } else tooltipValue = datum.id
     } else {
-        if (DATE_KEYS.includes(params.x_axis)) tooltipValue = datum.indexValue;
-        else tooltipValue = datum.id === "count" ? "Issue count" : "Estimate";
+        if (DATE_KEYS.includes(params.x_axis)) tooltipValue = datum.indexValue
+        else tooltipValue = datum.id === "count" ? "Issue count" : "Estimate"
     }
 
     return (
@@ -68,5 +67,5 @@ export const CustomTooltip: React.FC<Props> = ({ datum, analytics, params }) => 
             </span>
             <span>{datum.value}</span>
         </div>
-    );
-};
+    )
+}

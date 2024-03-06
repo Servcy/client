@@ -1,13 +1,13 @@
-import { Disclosure, Transition } from "@headlessui/react";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { Button } from "@servcy/ui";
+import { Disclosure, Transition } from "@headlessui/react"
+import { ChevronDown, ChevronUp } from "lucide-react"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    openDeleteModal: () => void;
-};
+    openDeleteModal: () => void
+}
 
 export const WebhookDeleteSection: React.FC<Props> = (props) => {
-    const { openDeleteModal } = props;
+    const { openDeleteModal } = props
 
     return (
         <Disclosure as="div" className="border-t border-custom-border-200">
@@ -48,5 +48,5 @@ export const WebhookDeleteSection: React.FC<Props> = (props) => {
                 </div>
             )}
         </Disclosure>
-    );
-};
+    )
+}

@@ -1,4 +1,9 @@
-import { FC, Fragment } from "react";
+import { FC, Fragment } from "react"
+// component
+import { Popover, Transition } from "@headlessui/react"
+import { Palette } from "lucide-react"
+// react-color
+import { ColorResult, SketchPicker } from "react-color"
 // react-form
 import {
     Control,
@@ -9,51 +14,44 @@ import {
     UseFormRegister,
     UseFormSetValue,
     UseFormWatch,
-} from "react-hook-form";
-// react-color
-import { ColorResult, SketchPicker } from "react-color";
-// component
-import { Popover, Transition } from "@headlessui/react";
-import { Input } from "@servcy/ui";
-
-import { Palette } from "lucide-react";
-
-import { IUserTheme } from "@servcy/types";
+} from "react-hook-form"
+import { IUserTheme } from "@servcy/types"
+import { Input } from "@servcy/ui"
 
 type Props = {
-    name: keyof IUserTheme;
-    position?: "left" | "right";
-    watch: UseFormWatch<any>;
-    setValue: UseFormSetValue<any>;
-    control: Control<IUserTheme, any>;
-    error: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
-    register: UseFormRegister<any>;
-};
+    name: keyof IUserTheme
+    position?: "left" | "right"
+    watch: UseFormWatch<any>
+    setValue: UseFormSetValue<any>
+    control: Control<IUserTheme, any>
+    error: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
+    register: UseFormRegister<any>
+}
 
 export const ColorPickerInput: FC<Props> = (props) => {
-    const { name, position = "left", watch, setValue, error, control } = props;
+    const { name, position = "left", watch, setValue, error, control } = props
 
     const handleColorChange = (newColor: ColorResult) => {
-        const { hex } = newColor;
-        setValue(name, hex);
-    };
+        const { hex } = newColor
+        setValue(name, hex)
+    }
 
     const getColorText = (colorName: keyof IUserTheme) => {
         switch (colorName) {
             case "background":
-                return "Background";
+                return "Background"
             case "text":
-                return "Text";
+                return "Text"
             case "primary":
-                return "Primary(Theme)";
+                return "Primary(Theme)"
             case "sidebarBackground":
-                return "Sidebar Background";
+                return "Sidebar Background"
             case "sidebarText":
-                return "Sidebar Text";
+                return "Sidebar Text"
             default:
-                return "Color";
+                return "Color"
         }
-    };
+    }
 
     return (
         <div className="relative">
@@ -124,5 +122,5 @@ export const ColorPickerInput: FC<Props> = (props) => {
                 </Popover>
             </div>
         </div>
-    );
-};
+    )
+}

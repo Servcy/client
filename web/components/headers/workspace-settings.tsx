@@ -1,24 +1,21 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-
-import { Breadcrumbs, CustomMenu } from "@servcy/ui";
-import { Settings } from "lucide-react";
-
-import { observer } from "mobx-react-lite";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { WORKSPACE_SETTINGS_LINKS } from "@constants/workspace";
-import { BreadcrumbLink } from "@components/common";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
+import { Settings } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, CustomMenu } from "@servcy/ui"
 
 export interface IWorkspaceSettingHeader {
-    title: string;
+    title: string
 }
 
 export const WorkspaceSettingHeader: FC<IWorkspaceSettingHeader> = observer((props) => {
-    const { title } = props;
-    const router = useRouter();
+    const { title } = props
+    const router = useRouter()
 
-    const { workspaceSlug } = router.query;
+    const { workspaceSlug } = router.query
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -63,5 +60,5 @@ export const WorkspaceSettingHeader: FC<IWorkspaceSettingHeader> = observer((pro
                 </CustomMenu>
             </div>
         </div>
-    );
-});
+    )
+})

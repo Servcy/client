@@ -1,25 +1,22 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueListItem } from "./issue-list-item";
-
-import { TIssue } from "@servcy/types";
-import { TSubIssueOperations } from "./root";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { IssueListItem } from "./issue-list-item"
+import { TSubIssueOperations } from "./root"
 
 export interface IIssueList {
-    workspaceSlug: string;
-    projectId: string;
-    parentIssueId: string;
-    spacingLeft: number;
-    disabled: boolean;
+    workspaceSlug: string
+    projectId: string
+    parentIssueId: string
+    spacingLeft: number
+    disabled: boolean
     handleIssueCrudState: (
         key: "create" | "existing" | "update" | "delete",
         issueId: string,
         issue?: TIssue | null
-    ) => void;
-    subIssueOperations: TSubIssueOperations;
+    ) => void
+    subIssueOperations: TSubIssueOperations
 }
 
 export const IssueList: FC<IIssueList> = observer((props) => {
@@ -31,13 +28,13 @@ export const IssueList: FC<IIssueList> = observer((props) => {
         disabled,
         handleIssueCrudState,
         subIssueOperations,
-    } = props;
+    } = props
 
     const {
         subIssues: { subIssuesByIssueId },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const subIssueIds = subIssuesByIssueId(parentIssueId);
+    const subIssueIds = subIssuesByIssueId(parentIssueId)
 
     return (
         <>
@@ -65,5 +62,5 @@ export const IssueList: FC<IIssueList> = observer((props) => {
                 />
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,12 +1,11 @@
-import Image from "next/image";
-import { useTheme } from "next-themes";
-
-import { Lightbulb } from "lucide-react";
+import Image from "next/image"
+import { Lightbulb } from "lucide-react"
+import { useTheme } from "next-themes"
 // images
-import latestFeatures from "public/onboarding/onboarding-pages.svg";
+import latestFeatures from "public/onboarding/onboarding-pages.svg"
 
 export const LatestFeatureBlock = () => {
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
 
     return (
         <>
@@ -32,5 +31,5 @@ export const LatestFeatureBlock = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}

@@ -1,38 +1,33 @@
-import { observer } from "mobx-react-lite";
-
-import { useIssues, useUser } from "@hooks/store";
-
-import { CalendarHeader, CalendarWeekDays, CalendarWeekHeader } from "@components/issues";
-
-import { Spinner } from "@servcy/ui";
-
-import { ICalendarWeek } from "./types";
-import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types";
-
-import { EUserProjectRoles } from "@constants/project";
-import { useCalendarView } from "@hooks/store/use-calendar-view";
-import { EIssuesStoreType } from "@constants/issue";
-import { ICycleIssuesFilter } from "@store/issue/cycle";
-import { IModuleIssuesFilter } from "@store/issue/module";
-import { IProjectIssuesFilter } from "@store/issue/project";
-import { IProjectViewIssuesFilter } from "@store/issue/project-views";
+import { CalendarHeader, CalendarWeekDays, CalendarWeekHeader } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+import { useIssues, useUser } from "@hooks/store"
+import { useCalendarView } from "@hooks/store/use-calendar-view"
+import { ICycleIssuesFilter } from "@store/issue/cycle"
+import { IModuleIssuesFilter } from "@store/issue/module"
+import { IProjectIssuesFilter } from "@store/issue/project"
+import { IProjectViewIssuesFilter } from "@store/issue/project-views"
+import { observer } from "mobx-react-lite"
+import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types"
+import { Spinner } from "@servcy/ui"
+import { ICalendarWeek } from "./types"
 
 type Props = {
-    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter;
-    issues: TIssueMap | undefined;
-    groupedIssueIds: TGroupedIssues;
-    layout: "month" | "week" | undefined;
-    showWeekends: boolean;
-    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode;
+    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter
+    issues: TIssueMap | undefined
+    groupedIssueIds: TGroupedIssues
+    layout: "month" | "week" | undefined
+    showWeekends: boolean
+    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-    readOnly?: boolean;
-};
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+    readOnly?: boolean
+}
 
 export const CalendarChart: React.FC<Props> = observer((props) => {
     const {
@@ -45,29 +40,29 @@ export const CalendarChart: React.FC<Props> = observer((props) => {
         quickAddCallback,
         viewId,
         readOnly = false,
-    } = props;
+    } = props
     // store hooks
     const {
         issues: { viewFlags },
-    } = useIssues(EIssuesStoreType.PROJECT);
-    const issueCalendarView = useCalendarView();
+    } = useIssues(EIssuesStoreType.PROJECT)
+    const issueCalendarView = useCalendarView()
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
-    const { enableIssueCreation } = viewFlags || {};
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const { enableIssueCreation } = viewFlags || {}
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
-    const calendarPayload = issueCalendarView.calendarPayload;
+    const calendarPayload = issueCalendarView.calendarPayload
 
-    const allWeeksOfActiveMonth = issueCalendarView.allWeeksOfActiveMonth;
+    const allWeeksOfActiveMonth = issueCalendarView.allWeeksOfActiveMonth
 
     if (!calendarPayload)
         return (
             <div className="grid h-full w-full place-items-center">
                 <Spinner />
             </div>
-        );
+        )
 
     return (
         <>
@@ -114,5 +109,5 @@ export const CalendarChart: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

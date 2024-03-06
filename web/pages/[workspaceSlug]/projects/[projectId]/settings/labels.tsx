@@ -1,20 +1,16 @@
-import { observer } from "mobx-react";
-import { ReactElement } from "react";
-
-import { AppLayout } from "@layouts/app-layout";
-import { ProjectSettingLayout } from "@layouts/settings-layout";
-
-import { PageHead } from "@components/core";
-import { ProjectSettingHeader } from "@components/headers";
-import { ProjectSettingsLabelList } from "@components/labels";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { useProject } from "@hooks/store";
+import { ReactElement } from "react"
+import { PageHead } from "@components/core"
+import { ProjectSettingHeader } from "@components/headers"
+import { ProjectSettingsLabelList } from "@components/labels"
+import { useProject } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { ProjectSettingLayout } from "@layouts/settings-layout"
+import { observer } from "mobx-react"
+import { NextPageWithLayout } from "@/types/types"
 
 const LabelsSettingsPage: NextPageWithLayout = observer(() => {
-    const { currentProjectDetails } = useProject();
-    const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Labels` : undefined;
+    const { currentProjectDetails } = useProject()
+    const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Labels` : undefined
 
     return (
         <>
@@ -23,15 +19,15 @@ const LabelsSettingsPage: NextPageWithLayout = observer(() => {
                 <ProjectSettingsLabelList />
             </div>
         </>
-    );
-});
+    )
+})
 
 LabelsSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout withProjectWrapper header={<ProjectSettingHeader title="Labels Settings" />}>
             <ProjectSettingLayout>{page}</ProjectSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default LabelsSettingsPage;
+export default LabelsSettingsPage

@@ -1,31 +1,29 @@
-import { FC, useRef } from "react";
-import { observer } from "mobx-react-lite";
-
+import { FC, useRef } from "react"
+import { ProjectSidebarList } from "@components/project"
 import {
     WorkspaceHelpSection,
     WorkspaceSidebarDropdown,
     WorkspaceSidebarMenu,
     WorkspaceSidebarQuickAction,
-} from "@components/workspace";
-import { ProjectSidebarList } from "@components/project";
-
-import { useApplication } from "@hooks/store";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
+} from "@components/workspace"
+import { useApplication } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { observer } from "mobx-react-lite"
 
 export interface IAppSidebar {}
 
 export const AppSidebar: FC<IAppSidebar> = observer(() => {
     // store hooks
-    const { theme: themStore } = useApplication();
-    const ref = useRef<HTMLDivElement>(null);
+    const { theme: themStore } = useApplication()
+    const ref = useRef<HTMLDivElement>(null)
 
     useOutsideClickDetector(ref, () => {
         if (themStore.sidebarCollapsed === false) {
             if (window.innerWidth < 768) {
-                themStore.toggleSidebar();
+                themStore.toggleSidebar()
             }
         }
-    });
+    })
 
     return (
         <div
@@ -45,5 +43,5 @@ export const AppSidebar: FC<IAppSidebar> = observer(() => {
                 <WorkspaceHelpSection />
             </div>
         </div>
-    );
-});
+    )
+})

@@ -1,30 +1,28 @@
-import React, { Fragment, useState } from "react";
-import { usePopper } from "react-popper";
-import { Popover, Transition } from "@headlessui/react";
-import { Placement } from "@popperjs/core";
-
-import { Button } from "@servcy/ui";
-
-import { ChevronUp } from "lucide-react";
+import React, { Fragment, useState } from "react"
+import { Popover, Transition } from "@headlessui/react"
+import { Placement } from "@popperjs/core"
+import { ChevronUp } from "lucide-react"
+import { usePopper } from "react-popper"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    children: React.ReactNode;
-    title?: string;
-    placement?: Placement;
-    disabled?: boolean;
-    tabIndex?: number;
-    menuButton?: React.ReactNode;
-};
+    children: React.ReactNode
+    title?: string
+    placement?: Placement
+    disabled?: boolean
+    tabIndex?: number
+    menuButton?: React.ReactNode
+}
 
 export const FiltersDropdown: React.FC<Props> = (props) => {
-    const { children, title = "Dropdown", placement, disabled = false, tabIndex, menuButton } = props;
+    const { children, title = "Dropdown", placement, disabled = false, tabIndex, menuButton } = props
 
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
 
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: placement ?? "auto",
-    });
+    })
 
     return (
         <Popover as="div">
@@ -82,8 +80,8 @@ export const FiltersDropdown: React.FC<Props> = (props) => {
                             </Popover.Panel>
                         </Transition>
                     </>
-                );
+                )
             }}
         </Popover>
-    );
-};
+    )
+}

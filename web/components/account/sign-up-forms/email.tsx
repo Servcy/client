@@ -1,30 +1,26 @@
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { XCircle } from "lucide-react";
-import { observer } from "mobx-react-lite";
-
-import { AuthService } from "@services/auth.service";
-import toast from "react-hot-toast";
-
-import { Button, Input } from "@servcy/ui";
-
-import { checkEmailValidity } from "@helpers/string.helper";
-
-import { IEmailCheckData } from "@servcy/types";
+import React from "react"
+import { checkEmailValidity } from "@helpers/string.helper"
+import { AuthService } from "@services/auth.service"
+import { XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IEmailCheckData } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    onSubmit: () => void;
-    updateEmail: (email: string) => void;
-};
+    onSubmit: () => void
+    updateEmail: (email: string) => void
+}
 
 type TEmailFormValues = {
-    email: string;
-};
+    email: string
+}
 
-const authService = new AuthService();
+const authService = new AuthService()
 
 export const SignUpEmailForm: React.FC<Props> = observer((props) => {
-    const { onSubmit, updateEmail } = props;
+    const { onSubmit, updateEmail } = props
 
     const {
         control,
@@ -36,15 +32,15 @@ export const SignUpEmailForm: React.FC<Props> = observer((props) => {
         },
         mode: "onChange",
         reValidateMode: "onChange",
-    });
+    })
 
     const handleFormSubmit = async (data: TEmailFormValues) => {
         const payload: IEmailCheckData = {
             email: data.email,
-        };
+        }
 
         // update the global email state
-        updateEmail(data.email);
+        updateEmail(data.email)
 
         await authService
             .emailCheck(payload)
@@ -55,8 +51,8 @@ export const SignUpEmailForm: React.FC<Props> = observer((props) => {
                     title: "Error!",
                     message: err?.error ?? "Something went wrong. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     return (
         <>
@@ -111,5 +107,5 @@ export const SignUpEmailForm: React.FC<Props> = observer((props) => {
                 </Button>
             </form>
         </>
-    );
-});
+    )
+})

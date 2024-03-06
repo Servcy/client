@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { TbBarrierBlock } from "react-icons/tb";
+import { TbBarrierBlock } from "react-icons/tb"
 
 export default function WIP(): JSX.Element {
     return (
@@ -12,5 +12,5 @@ export default function WIP(): JSX.Element {
                 </p>
             </div>
         </main>
-    );
+    )
 }

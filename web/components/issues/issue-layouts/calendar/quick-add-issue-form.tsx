@@ -1,46 +1,41 @@
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-import useKeypress from "@hooks/use-key-press";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { createIssuePayload } from "@helpers/issue.helper";
-
-import { PlusIcon } from "lucide-react";
-
-import { TIssue } from "@servcy/types";
-
-import { ISSUE_CREATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { useEffect, useRef, useState } from "react"
+import { ISSUE_CREATED } from "@constants/event-tracker"
+import { createIssuePayload } from "@helpers/issue.helper"
+import { useEventTracker, useProject } from "@hooks/store"
+import useKeypress from "@hooks/use-key-press"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { PlusIcon } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { TIssue } from "@servcy/types"
 
 type Props = {
-    formKey: keyof TIssue;
-    groupId?: string;
-    subGroupId?: string | null;
-    prePopulatedData?: Partial<TIssue>;
+    formKey: keyof TIssue
+    groupId?: string
+    subGroupId?: string | null
+    prePopulatedData?: Partial<TIssue>
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-    onOpen?: () => void;
-};
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+    onOpen?: () => void
+}
 
 const defaultValues: Partial<TIssue> = {
     name: "",
-};
+}
 
 const Inputs = (props: any) => {
-    const { register, setFocus, projectDetails } = props;
+    const { register, setFocus, projectDetails } = props
 
     useEffect(() => {
-        setFocus("name");
-    }, [setFocus]);
+        setFocus("name")
+    }, [setFocus])
 
     return (
         <>
@@ -55,25 +50,25 @@ const Inputs = (props: any) => {
                 className="w-full rounded-md bg-transparent py-1.5 pr-2 text-xs font-medium leading-5 text-custom-text-200 outline-none"
             />
         </>
-    );
-};
+    )
+}
 
 export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
-    const { formKey, prePopulatedData, quickAddCallback, viewId, onOpen } = props;
+    const { formKey, prePopulatedData, quickAddCallback, viewId, onOpen } = props
 
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { getProjectById } = useProject();
-    const { captureIssueEvent } = useEventTracker();
+    const { getProjectById } = useProject()
+    const { captureIssueEvent } = useEventTracker()
     // refs
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null)
     // states
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
 
     // derived values
-    const projectDetail = projectId ? getProjectById(projectId.toString()) : null;
+    const projectDetail = projectId ? getProjectById(projectId.toString()) : null
 
     const {
         reset,
@@ -81,42 +76,42 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
         register,
         setFocus,
         formState: { errors, isSubmitting },
-    } = useForm<TIssue>({ defaultValues });
+    } = useForm<TIssue>({ defaultValues })
 
     const handleClose = () => {
-        setIsOpen(false);
-    };
+        setIsOpen(false)
+    }
 
-    useKeypress("Escape", handleClose);
-    useOutsideClickDetector(ref, handleClose);
-
-    useEffect(() => {
-        if (!isOpen) reset({ ...defaultValues });
-    }, [isOpen, reset]);
+    useKeypress("Escape", handleClose)
+    useOutsideClickDetector(ref, handleClose)
 
     useEffect(() => {
-        if (!errors) return;
+        if (!isOpen) reset({ ...defaultValues })
+    }, [isOpen, reset])
+
+    useEffect(() => {
+        if (!errors) return
 
         Object.keys(errors).forEach((key) => {
-            const error = errors[key as keyof TIssue];
+            const error = errors[key as keyof TIssue]
 
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: error?.message?.toString() || "Some error occurred. Please try again.",
-            });
-        });
-    }, [errors, setToastAlert]);
+            })
+        })
+    }, [errors, setToastAlert])
 
     const onSubmitHandler = async (formData: TIssue) => {
-        if (isSubmitting || !workspaceSlug || !projectId) return;
+        if (isSubmitting || !workspaceSlug || !projectId) return
 
-        reset({ ...defaultValues });
+        reset({ ...defaultValues })
 
         const payload = createIssuePayload(projectId.toString(), {
             ...(prePopulatedData ?? {}),
             ...formData,
-        });
+        })
 
         try {
             quickAddCallback &&
@@ -132,32 +127,32 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
                         eventName: ISSUE_CREATED,
                         payload: { ...res, state: "SUCCESS", element: "Calendar quick add" },
                         path: router.asPath,
-                    });
-                }));
+                    })
+                }))
             toast.error({
                 type: "success",
                 title: "Success!",
                 message: "Issue created successfully.",
-            });
+            })
         } catch (err: any) {
-            console.error(err);
+            console.error(err)
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Calendar quick add" },
                 path: router.asPath,
-            });
+            })
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: err?.message || "Some error occurred. Please try again.",
-            });
+            })
         }
-    };
+    }
 
     const handleOpen = () => {
-        setIsOpen(true);
-        if (onOpen) onOpen();
-    };
+        setIsOpen(true)
+        if (onOpen) onOpen()
+    }
 
     return (
         <>
@@ -195,5 +190,5 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

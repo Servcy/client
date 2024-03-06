@@ -1,9 +1,9 @@
 type Props = {
-    width?: string;
-    height?: string;
-    className?: string;
-    color?: string;
-};
+    width?: string
+    height?: string
+    className?: string
+    color?: string
+}
 
 export const StateGroupUnstartedIcon: React.FC<Props> = ({
     width = "20",
@@ -21,4 +21,4 @@ export const StateGroupUnstartedIcon: React.FC<Props> = ({
     >
         <circle cx="8" cy="8" r="7.4" stroke={color} strokeWidth="1.2" />
     </svg>
-);
+)

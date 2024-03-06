@@ -1,9 +1,9 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react"
 
 type Props = {
-    bannerName: string;
-    description?: string;
-};
+    bannerName: string
+    description?: string
+}
 
 export const IntegrationAndImportExportBanner: React.FC<Props> = ({ bannerName, description }) => (
     <div className="flex items-start gap-3 border-b border-custom-border-100 py-3.5">
@@ -15,4 +15,4 @@ export const IntegrationAndImportExportBanner: React.FC<Props> = ({ bannerName, 
             </div>
         )}
     </div>
-);
+)

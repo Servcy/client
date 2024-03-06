@@ -1,4 +1,4 @@
-import { IIssueFilterOptions } from "@servcy/types";
+import { IIssueFilterOptions } from "@servcy/types"
 
 export const calculateTotalFilters = (filters: IIssueFilterOptions): number =>
     filters && Object.keys(filters).length > 0
@@ -11,4 +11,4 @@ export const calculateTotalFilters = (filters: IIssueFilterOptions): number =>
                       : 0
               )
               .reduce((curr, prev) => curr + prev, 0)
-        : 0;
+        : 0

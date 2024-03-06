@@ -1,44 +1,40 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { useForm, Controller } from "react-hook-form";
-import { TwitterPicker } from "react-color";
-import { Popover, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useProjectState } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, CustomSelect, Input, Tooltip } from "@servcy/ui";
-
-import type { IState } from "@servcy/types";
-
-import { GROUP_CHOICES } from "@constants/project";
-import { STATE_CREATED, STATE_UPDATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
+import { STATE_CREATED, STATE_UPDATED } from "@constants/event-tracker"
+import { GROUP_CHOICES } from "@constants/project"
+import { Popover, Transition } from "@headlessui/react"
+import { useEventTracker, useProjectState } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TwitterPicker } from "react-color"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import type { IState } from "@servcy/types"
+import { Button, CustomSelect, Input, Tooltip } from "@servcy/ui"
 
 type Props = {
-    data: IState | null;
-    onClose: () => void;
-    groupLength: number;
-    selectedGroup: StateGroup | null;
-};
+    data: IState | null
+    onClose: () => void
+    groupLength: number
+    selectedGroup: StateGroup | null
+}
 
-export type StateGroup = "backlog" | "unstarted" | "started" | "completed" | "cancelled" | null;
+export type StateGroup = "backlog" | "unstarted" | "started" | "completed" | "cancelled" | null
 
 const defaultValues: Partial<IState> = {
     name: "",
     description: "",
     color: "rgb(var(--color-text-200))",
     group: "backlog",
-};
+}
 
 export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
-    const { data, onClose, selectedGroup, groupLength } = props;
+    const { data, onClose, selectedGroup, groupLength } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { captureProjectStateEvent, setTrackElement } = useEventTracker();
-    const { createState, updateState } = useProjectState();
+    const { captureProjectStateEvent, setTrackElement } = useEventTracker()
+    const { createState, updateState } = useProjectState()
 
     // form info
     const {
@@ -49,43 +45,43 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
         control,
     } = useForm<IState>({
         defaultValues,
-    });
+    })
 
     /**
      * @description pre-populate form with data if data is present
      */
     useEffect(() => {
-        if (!data) return;
-        reset(data);
-    }, [data, reset]);
+        if (!data) return
+        reset(data)
+    }, [data, reset])
 
     /**
      * @description pre-populate form with default values if data is not present
      */
     useEffect(() => {
-        if (data) return;
+        if (data) return
         reset({
             ...defaultValues,
             group: selectedGroup ?? "backlog",
-        });
-    }, [selectedGroup, data, reset]);
+        })
+    }, [selectedGroup, data, reset])
 
     const handleClose = () => {
-        onClose();
-        reset({ name: "", color: "#000000", group: "backlog" });
-    };
+        onClose()
+        reset({ name: "", color: "#000000", group: "backlog" })
+    }
 
     const handleCreate = async (formData: IState) => {
-        if (!workspaceSlug || !projectId || isSubmitting) return;
+        if (!workspaceSlug || !projectId || isSubmitting) return
 
         await createState(workspaceSlug.toString(), projectId.toString(), formData)
             .then((res) => {
-                handleClose();
+                handleClose()
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "State created successfully.",
-                });
+                })
                 captureProjectStateEvent({
                     eventName: STATE_CREATED,
                     payload: {
@@ -93,7 +89,7 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                         state: "SUCCESS",
                         element: "Project settings states page",
                     },
-                });
+                })
             })
             .catch((error) => {
                 if (error.status === 400)
@@ -101,13 +97,13 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                         type: "error",
                         title: "Error!",
                         message: "State with that name already exists. Please try again with another name.",
-                    });
+                    })
                 else
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: "State could not be created. Please try again.",
-                    });
+                    })
 
                 captureProjectStateEvent({
                     eventName: STATE_CREATED,
@@ -116,16 +112,16 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                         state: "FAILED",
                         element: "Project settings states page",
                     },
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleUpdate = async (formData: IState) => {
-        if (!workspaceSlug || !projectId || !data || isSubmitting) return;
+        if (!workspaceSlug || !projectId || !data || isSubmitting) return
 
         await updateState(workspaceSlug.toString(), projectId.toString(), data.id, formData)
             .then((res) => {
-                handleClose();
+                handleClose()
                 captureProjectStateEvent({
                     eventName: STATE_UPDATED,
                     payload: {
@@ -133,12 +129,12 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                         state: "SUCCESS",
                         element: "Project settings states page",
                     },
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "State updated successfully.",
-                });
+                })
             })
             .catch((error) => {
                 if (error.status === 400)
@@ -146,13 +142,13 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                         type: "error",
                         title: "Error!",
                         message: "Another state exists with the same name. Please try again with another name.",
-                    });
+                    })
                 else
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: "State could not be updated. Please try again.",
-                    });
+                    })
                 captureProjectStateEvent({
                     eventName: STATE_UPDATED,
                     payload: {
@@ -160,14 +156,14 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                         state: "FAILED",
                         element: "Project settings states page",
                     },
-                });
-            });
-    };
+                })
+            })
+    }
 
     const onSubmit = async (formData: IState) => {
-        if (data) await handleUpdate(formData);
-        else await handleCreate(formData);
-    };
+        if (data) await handleUpdate(formData)
+        else await handleCreate(formData)
+    }
 
     return (
         <form
@@ -290,12 +286,12 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                 type="submit"
                 loading={isSubmitting}
                 onClick={() => {
-                    setTrackElement("PROJECT_SETTINGS_STATE_PAGE");
+                    setTrackElement("PROJECT_SETTINGS_STATE_PAGE")
                 }}
                 size="sm"
             >
                 {data ? (isSubmitting ? "Updating" : "Update") : isSubmitting ? "Creating" : "Create"}
             </Button>
         </form>
-    );
-});
+    )
+})

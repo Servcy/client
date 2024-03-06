@@ -1,36 +1,31 @@
-import { useEffect } from "react";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-
-import { useLabel, useMember } from "@hooks/store";
-
-import { AppliedFiltersList, FilterSelection, FiltersDropdown } from "@components/issues";
-
-import { Button, Input, TextArea } from "@servcy/ui";
-
-import { IIssueFilterOptions, IWorkspaceView } from "@servcy/types";
-
-import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
+import { useEffect } from "react"
+import { AppliedFiltersList, FiltersDropdown, FilterSelection } from "@components/issues"
+import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { useLabel, useMember } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import { IIssueFilterOptions, IWorkspaceView } from "@servcy/types"
+import { Button, Input, TextArea } from "@servcy/ui"
 
 type Props = {
-    handleFormSubmit: (values: Partial<IWorkspaceView>) => Promise<void>;
-    handleClose: () => void;
-    data?: IWorkspaceView;
-    preLoadedData?: Partial<IWorkspaceView>;
-};
+    handleFormSubmit: (values: Partial<IWorkspaceView>) => Promise<void>
+    handleClose: () => void
+    data?: IWorkspaceView
+    preLoadedData?: Partial<IWorkspaceView>
+}
 
 const defaultValues: Partial<IWorkspaceView> = {
     name: "",
     description: "",
-};
+}
 
 export const WorkspaceViewForm: React.FC<Props> = observer((props) => {
-    const { handleFormSubmit, handleClose, data, preLoadedData } = props;
+    const { handleFormSubmit, handleClose, data, preLoadedData } = props
     // store hooks
-    const { workspaceLabels } = useLabel();
+    const { workspaceLabels } = useLabel()
     const {
         workspace: { workspaceMemberIds },
-    } = useMember();
+    } = useMember()
 
     const {
         formState: { errors, isSubmitting },
@@ -41,34 +36,34 @@ export const WorkspaceViewForm: React.FC<Props> = observer((props) => {
         watch,
     } = useForm<IWorkspaceView>({
         defaultValues,
-    });
+    })
 
     const handleCreateUpdateView = async (formData: Partial<IWorkspaceView>) => {
-        await handleFormSubmit(formData);
+        await handleFormSubmit(formData)
 
         reset({
             ...defaultValues,
-        });
-    };
+        })
+    }
 
     useEffect(() => {
         reset({
             ...defaultValues,
             ...preLoadedData,
             ...data,
-        });
-    }, [data, preLoadedData, reset]);
+        })
+    }, [data, preLoadedData, reset])
 
-    const selectedFilters: IIssueFilterOptions = watch("filters");
+    const selectedFilters: IIssueFilterOptions = watch("filters")
 
     // filters whose value not null or empty array
-    let appliedFilters: IIssueFilterOptions | undefined = undefined;
+    let appliedFilters: IIssueFilterOptions | undefined = undefined
     Object.entries(selectedFilters ?? {}).forEach(([key, value]) => {
-        if (!value) return;
-        if (Array.isArray(value) && value.length === 0) return;
-        if (!appliedFilters) appliedFilters = {};
-        appliedFilters[key as keyof IIssueFilterOptions] = value;
-    });
+        if (!value) return
+        if (Array.isArray(value) && value.length === 0) return
+        if (!appliedFilters) appliedFilters = {}
+        appliedFilters[key as keyof IIssueFilterOptions] = value
+    })
 
     const handleRemoveFilter = (key: keyof IIssueFilterOptions, value: string | null) => {
         // To clear all filters of any particular filter key.
@@ -76,24 +71,24 @@ export const WorkspaceViewForm: React.FC<Props> = observer((props) => {
             setValue("filters", {
                 ...selectedFilters,
                 [key]: [],
-            });
-            return;
+            })
+            return
         }
 
-        let newValues = selectedFilters?.[key] ?? [];
-        newValues = newValues.filter((val) => val !== value);
+        let newValues = selectedFilters?.[key] ?? []
+        newValues = newValues.filter((val) => val !== value)
 
         setValue("filters", {
             ...selectedFilters,
             [key]: newValues,
-        });
-    };
+        })
+    }
 
     const clearAllFilters = () => {
-        if (!selectedFilters) return;
+        if (!selectedFilters) return
 
-        setValue("filters", {});
-    };
+        setValue("filters", {})
+    }
 
     return (
         <form onSubmit={handleSubmit(handleCreateUpdateView)}>
@@ -154,22 +149,22 @@ export const WorkspaceViewForm: React.FC<Props> = observer((props) => {
                                     <FilterSelection
                                         filters={filters ?? {}}
                                         handleFiltersUpdate={(key, value) => {
-                                            const newValues = filters?.[key] ?? [];
+                                            const newValues = filters?.[key] ?? []
 
                                             if (Array.isArray(value)) {
                                                 value.forEach((val) => {
-                                                    if (!newValues.includes(val)) newValues.push(val);
-                                                });
+                                                    if (!newValues.includes(val)) newValues.push(val)
+                                                })
                                             } else {
                                                 if (filters?.[key]?.includes(value))
-                                                    newValues.splice(newValues.indexOf(value), 1);
-                                                else newValues.push(value);
+                                                    newValues.splice(newValues.indexOf(value), 1)
+                                                else newValues.push(value)
                                             }
 
                                             onChange({
                                                 ...filters,
                                                 [key]: newValues,
-                                            });
+                                            })
                                         }}
                                         layoutDisplayFiltersOptions={
                                             ISSUE_DISPLAY_FILTERS_BY_LAYOUT.my_issues.spreadsheet
@@ -210,5 +205,5 @@ export const WorkspaceViewForm: React.FC<Props> = observer((props) => {
                 </Button>
             </div>
         </form>
-    );
-});
+    )
+})

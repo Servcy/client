@@ -1,40 +1,34 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useProjectState } from "@hooks/store";
-
-import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem } from "@components/states";
-
-import { Loader } from "@servcy/ui";
-
-import { Plus } from "lucide-react";
-
-import { orderStateGroups } from "@helpers/state.helper";
-import { sortByField } from "@helpers/array.helper";
-
-import { STATES_LIST } from "@constants/fetch-keys";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem } from "@components/states"
+import { STATES_LIST } from "@constants/fetch-keys"
+import { sortByField } from "@helpers/array.helper"
+import { orderStateGroups } from "@helpers/state.helper"
+import { useEventTracker, useProjectState } from "@hooks/store"
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { Loader } from "@servcy/ui"
 
 export const ProjectSettingStateList: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store
-    const { setTrackElement } = useEventTracker();
-    const { groupedProjectStates, projectStates, fetchProjectStates } = useProjectState();
+    const { setTrackElement } = useEventTracker()
+    const { groupedProjectStates, projectStates, fetchProjectStates } = useProjectState()
     // state
-    const [activeGroup, setActiveGroup] = useState<StateGroup>(null);
-    const [selectedState, setSelectedState] = useState<string | null>(null);
-    const [selectDeleteState, setSelectDeleteState] = useState<string | null>(null);
+    const [activeGroup, setActiveGroup] = useState<StateGroup>(null)
+    const [selectedState, setSelectedState] = useState<string | null>(null)
+    const [selectDeleteState, setSelectDeleteState] = useState<string | null>(null)
 
     useSWR(
         workspaceSlug && projectId ? STATES_LIST(projectId.toString()) : null,
         workspaceSlug && projectId ? () => fetchProjectStates(workspaceSlug.toString(), projectId.toString()) : null
-    );
+    )
 
     // derived values
-    const orderedStateGroups = orderStateGroups(groupedProjectStates!);
+    const orderedStateGroups = orderStateGroups(groupedProjectStates!)
 
     return (
         <>
@@ -55,8 +49,8 @@ export const ProjectSettingStateList: React.FC = observer(() => {
                                         type="button"
                                         className="flex items-center gap-2 px-2 text-custom-primary-100 outline-none hover:text-custom-primary-200"
                                         onClick={() => {
-                                            setTrackElement("PROJECT_SETTINGS_STATES_PAGE");
-                                            setActiveGroup(group as keyof StateGroup);
+                                            setTrackElement("PROJECT_SETTINGS_STATES_PAGE")
+                                            setActiveGroup(group as keyof StateGroup)
                                         }}
                                     >
                                         <Plus className="h-4 w-4" />
@@ -68,8 +62,8 @@ export const ProjectSettingStateList: React.FC = observer(() => {
                                             data={null}
                                             groupLength={orderedStateGroups[group].length}
                                             onClose={() => {
-                                                setActiveGroup(null);
-                                                setSelectedState(null);
+                                                setActiveGroup(null)
+                                                setSelectedState(null)
                                             }}
                                             selectedGroup={group as keyof StateGroup}
                                         />
@@ -91,8 +85,8 @@ export const ProjectSettingStateList: React.FC = observer(() => {
                                             >
                                                 <CreateUpdateStateInline
                                                     onClose={() => {
-                                                        setActiveGroup(null);
-                                                        setSelectedState(null);
+                                                        setActiveGroup(null)
+                                                        setSelectedState(null)
                                                     }}
                                                     groupLength={orderedStateGroups[group].length}
                                                     data={
@@ -184,5 +178,5 @@ export const ProjectSettingStateList: React.FC = observer(() => {
         )}
       </div> */}
         </>
-    );
-});
+    )
+})

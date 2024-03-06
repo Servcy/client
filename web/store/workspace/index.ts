@@ -1,45 +1,43 @@
-import set from "lodash/set";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import { RootStore } from "../root.store";
-
-import { IWorkspace } from "@servcy/types";
-
-import { WorkspaceService } from "@services/workspace.service";
+import { WorkspaceService } from "@services/workspace.service"
+import set from "lodash/set"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { IWorkspace } from "@servcy/types"
+import { RootStore } from "../root.store"
 // sub-stores
-import { ApiTokenStore, IApiTokenStore } from "./api-token.store";
-import { IWebhookStore, WebhookStore } from "./webhook.store";
+import { ApiTokenStore, IApiTokenStore } from "./api-token.store"
+import { IWebhookStore, WebhookStore } from "./webhook.store"
 
 export interface IWorkspaceRootStore {
     // observables
-    workspaces: Record<string, IWorkspace>;
+    workspaces: Record<string, IWorkspace>
     // computed
-    currentWorkspace: IWorkspace | null;
-    workspacesCreatedByCurrentUser: IWorkspace[] | null;
+    currentWorkspace: IWorkspace | null
+    workspacesCreatedByCurrentUser: IWorkspace[] | null
     // computed actions
-    getWorkspaceBySlug: (workspaceSlug: string) => IWorkspace | null;
-    getWorkspaceById: (workspaceId: string) => IWorkspace | null;
+    getWorkspaceBySlug: (workspaceSlug: string) => IWorkspace | null
+    getWorkspaceById: (workspaceId: string) => IWorkspace | null
     // fetch actions
-    fetchWorkspaces: () => Promise<IWorkspace[]>;
+    fetchWorkspaces: () => Promise<IWorkspace[]>
     // crud actions
-    createWorkspace: (data: Partial<IWorkspace>) => Promise<IWorkspace>;
-    updateWorkspace: (workspaceSlug: string, data: Partial<IWorkspace>) => Promise<IWorkspace>;
-    deleteWorkspace: (workspaceSlug: string) => Promise<void>;
+    createWorkspace: (data: Partial<IWorkspace>) => Promise<IWorkspace>
+    updateWorkspace: (workspaceSlug: string, data: Partial<IWorkspace>) => Promise<IWorkspace>
+    deleteWorkspace: (workspaceSlug: string) => Promise<void>
     // sub-stores
-    webhook: IWebhookStore;
-    apiToken: IApiTokenStore;
+    webhook: IWebhookStore
+    apiToken: IApiTokenStore
 }
 
 export class WorkspaceRootStore implements IWorkspaceRootStore {
     // observables
-    workspaces: Record<string, IWorkspace> = {};
+    workspaces: Record<string, IWorkspace> = {}
 
-    workspaceService;
+    workspaceService
     // root store
-    router;
-    user;
+    router
+    user
     // sub-stores
-    webhook: IWebhookStore;
-    apiToken: IApiTokenStore;
+    webhook: IWebhookStore
+    apiToken: IApiTokenStore
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
@@ -56,36 +54,36 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
             createWorkspace: action,
             updateWorkspace: action,
             deleteWorkspace: action,
-        });
+        })
 
-        this.workspaceService = new WorkspaceService();
+        this.workspaceService = new WorkspaceService()
         // root store
-        this.router = _rootStore.app.router;
-        this.user = _rootStore.user;
+        this.router = _rootStore.app.router
+        this.user = _rootStore.user
         // sub-stores
-        this.webhook = new WebhookStore(_rootStore);
-        this.apiToken = new ApiTokenStore(_rootStore);
+        this.webhook = new WebhookStore(_rootStore)
+        this.apiToken = new ApiTokenStore(_rootStore)
     }
 
     /**
      * computed value of current workspace based on workspace slug saved in the query store
      */
     get currentWorkspace() {
-        const workspaceSlug = this.router.workspaceSlug;
-        if (!workspaceSlug) return null;
-        const workspaceDetails = Object.values(this.workspaces ?? {})?.find((w) => w.slug === workspaceSlug);
-        return workspaceDetails || null;
+        const workspaceSlug = this.router.workspaceSlug
+        if (!workspaceSlug) return null
+        const workspaceDetails = Object.values(this.workspaces ?? {})?.find((w) => w.slug === workspaceSlug)
+        return workspaceDetails || null
     }
 
     /**
      * computed value of all the workspaces created by the current logged in user
      */
     get workspacesCreatedByCurrentUser() {
-        if (!this.workspaces) return null;
-        const user = this.user.currentUser;
-        if (!user) return null;
-        const userWorkspaces = Object.values(this.workspaces ?? {})?.filter((w) => w.created_by === user?.id);
-        return userWorkspaces || null;
+        if (!this.workspaces) return null
+        const user = this.user.currentUser
+        if (!user) return null
+        const userWorkspaces = Object.values(this.workspaces ?? {})?.filter((w) => w.created_by === user?.id)
+        return userWorkspaces || null
     }
 
     /**
@@ -93,26 +91,26 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
      * @param workspaceSlug
      */
     getWorkspaceBySlug = (workspaceSlug: string) =>
-        Object.values(this.workspaces ?? {})?.find((w) => w.slug == workspaceSlug) || null;
+        Object.values(this.workspaces ?? {})?.find((w) => w.slug == workspaceSlug) || null
 
     /**
      * get workspace info from the array of workspaces in the store using workspace id
      * @param workspaceId
      */
-    getWorkspaceById = (workspaceId: string) => this.workspaces?.[workspaceId] || null; // TODO: use undefined instead of null
+    getWorkspaceById = (workspaceId: string) => this.workspaces?.[workspaceId] || null // TODO: use undefined instead of null
 
     /**
      * fetch user workspaces from API
      */
     fetchWorkspaces = async () => {
-        const workspaceResponse = await this.workspaceService.userWorkspaces();
+        const workspaceResponse = await this.workspaceService.userWorkspaces()
         runInAction(() => {
             workspaceResponse.forEach((workspace) => {
-                set(this.workspaces, [workspace.id], workspace);
-            });
-        });
-        return workspaceResponse;
-    };
+                set(this.workspaces, [workspace.id], workspace)
+            })
+        })
+        return workspaceResponse
+    }
 
     /**
      * create workspace using the workspace data
@@ -121,10 +119,10 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
     createWorkspace = async (data: Partial<IWorkspace>) =>
         await this.workspaceService.createWorkspace(data).then((response) => {
             runInAction(() => {
-                this.workspaces = set(this.workspaces, response.id, response);
-            });
-            return response;
-        });
+                this.workspaces = set(this.workspaces, response.id, response)
+            })
+            return response
+        })
 
     /**
      * update workspace using the workspace slug and new workspace data
@@ -134,10 +132,10 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
     updateWorkspace = async (workspaceSlug: string, data: Partial<IWorkspace>) =>
         await this.workspaceService.updateWorkspace(workspaceSlug, data).then((response) => {
             runInAction(() => {
-                set(this.workspaces, response.id, response);
-            });
-            return response;
-        });
+                set(this.workspaces, response.id, response)
+            })
+            return response
+        })
 
     /**
      * delete workspace using the workspace slug
@@ -145,11 +143,11 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
      */
     deleteWorkspace = async (workspaceSlug: string) =>
         await this.workspaceService.deleteWorkspace(workspaceSlug).then(() => {
-            const updatedWorkspacesList = this.workspaces;
-            const workspaceId = this.getWorkspaceBySlug(workspaceSlug)?.id;
-            delete updatedWorkspacesList[`${workspaceId}`];
+            const updatedWorkspacesList = this.workspaces
+            const workspaceId = this.getWorkspaceBySlug(workspaceSlug)?.id
+            delete updatedWorkspacesList[`${workspaceId}`]
             runInAction(() => {
-                this.workspaces = updatedWorkspacesList;
-            });
-        });
+                this.workspaces = updatedWorkspacesList
+            })
+        })
 }

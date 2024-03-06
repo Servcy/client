@@ -1,46 +1,41 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { useDropzone } from "react-dropzone";
-import { Transition, Dialog } from "@headlessui/react";
-
-import { useApplication, useWorkspace } from "@hooks/store";
-
-import { FileService } from "@services/file.service";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import { UserCircle2 } from "lucide-react";
-
-import { MAX_FILE_SIZE } from "@constants/common";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { MAX_FILE_SIZE } from "@constants/common"
+import { Dialog, Transition } from "@headlessui/react"
+import { useApplication, useWorkspace } from "@hooks/store"
+import { FileService } from "@services/file.service"
+import { UserCircle2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useDropzone } from "react-dropzone"
+import toast from "react-hot-toast"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    handleRemove?: () => void;
-    isOpen: boolean;
-    isRemoving: boolean;
-    onClose: () => void;
-    onSuccess: (url: string) => void;
-    value: string | null;
-};
+    handleRemove?: () => void
+    isOpen: boolean
+    isRemoving: boolean
+    onClose: () => void
+    onSuccess: (url: string) => void
+    value: string | null
+}
 
-const fileService = new FileService();
+const fileService = new FileService()
 
 export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
-    const { value, onSuccess, isOpen, onClose, isRemoving, handleRemove } = props;
+    const { value, onSuccess, isOpen, onClose, isRemoving, handleRemove } = props
     // states
-    const [image, setImage] = useState<File | null>(null);
-    const [isImageUploading, setIsImageUploading] = useState(false);
+    const [image, setImage] = useState<File | null>(null)
+    const [isImageUploading, setIsImageUploading] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const {
         config: { envConfig },
-    } = useApplication();
-    const { currentWorkspace } = useWorkspace();
+    } = useApplication()
+    const { currentWorkspace } = useWorkspace()
 
-    const onDrop = (acceptedFiles: File[]) => setImage(acceptedFiles[0]);
+    const onDrop = (acceptedFiles: File[]) => setImage(acceptedFiles[0])
 
     const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
         onDrop,
@@ -49,34 +44,34 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
         },
         maxSize: envConfig?.file_size_limit ?? MAX_FILE_SIZE,
         multiple: false,
-    });
+    })
 
     const handleClose = () => {
-        setImage(null);
-        setIsImageUploading(false);
-        onClose();
-    };
+        setImage(null)
+        setIsImageUploading(false)
+        onClose()
+    }
 
     const handleSubmit = async () => {
-        if (!image || (!workspaceSlug && router.pathname !== "/onboarding")) return;
+        if (!image || (!workspaceSlug && router.pathname !== "/onboarding")) return
 
-        setIsImageUploading(true);
+        setIsImageUploading(true)
 
-        const formData = new FormData();
-        formData.append("asset", image);
-        formData.append("attributes", JSON.stringify({}));
+        const formData = new FormData()
+        formData.append("asset", image)
+        formData.append("attributes", JSON.stringify({}))
 
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         fileService
             .uploadFile(workspaceSlug.toString(), formData)
             .then((res) => {
-                const imageUrl = res.asset;
+                const imageUrl = res.asset
 
-                onSuccess(imageUrl);
-                setImage(null);
+                onSuccess(imageUrl)
+                setImage(null)
 
-                if (value && currentWorkspace) fileService.deleteFile(currentWorkspace.id, value);
+                if (value && currentWorkspace) fileService.deleteFile(currentWorkspace.id, value)
             })
             .catch((err) =>
                 toast.error({
@@ -85,8 +80,8 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
                     message: err?.error ?? "Something went wrong. Please try again.",
                 })
             )
-            .finally(() => setIsImageUploading(false));
-    };
+            .finally(() => setIsImageUploading(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -201,5 +196,5 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

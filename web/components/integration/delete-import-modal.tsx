@@ -1,49 +1,41 @@
-import React, { useState } from "react";
-
-import { useRouter } from "next/router";
-
-import { mutate } from "swr";
-
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys"
 // headless ui
-import { Dialog, Transition } from "@headlessui/react";
-
-import { IntegrationService } from "@services/integrations/integration.service";
-import toast from "react-hot-toast";
-
-import { Button, Input } from "@servcy/ui";
-
-import { AlertTriangle } from "lucide-react";
-
-import { IUser, IImporterService } from "@servcy/types";
-
-import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
+import { Dialog, Transition } from "@headlessui/react"
+import { IntegrationService } from "@services/integrations/integration.service"
+import { AlertTriangle } from "lucide-react"
+import toast from "react-hot-toast"
+import { mutate } from "swr"
+import { IImporterService, IUser } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    handleClose: () => void;
-    data: IImporterService | null;
-    user: IUser | null;
-};
+    isOpen: boolean
+    handleClose: () => void
+    data: IImporterService | null
+    user: IUser | null
+}
 
-const integrationService = new IntegrationService();
+const integrationService = new IntegrationService()
 
 export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }) => {
-    const [deleteLoading, setDeleteLoading] = useState(false);
-    const [confirmDeleteImport, setConfirmDeleteImport] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false)
+    const [confirmDeleteImport, setConfirmDeleteImport] = useState(false)
 
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const handleDeletion = () => {
-        if (!workspaceSlug || !data) return;
+        if (!workspaceSlug || !data) return
 
-        setDeleteLoading(true);
+        setDeleteLoading(true)
 
         mutate<IImporterService[]>(
             IMPORTER_SERVICES_LIST(workspaceSlug as string),
             (prevData) => (prevData ?? []).filter((i) => i.id !== data.id),
             false
-        );
+        )
 
         integrationService
             .deleteImporterService(workspaceSlug as string, data.service, data.id)
@@ -55,12 +47,12 @@ export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }
                 })
             )
             .finally(() => {
-                setDeleteLoading(false);
-                handleClose();
-            });
-    };
+                setDeleteLoading(false)
+                handleClose()
+            })
+    }
 
-    if (!data) return <></>;
+    if (!data) return <></>
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -119,8 +111,8 @@ export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }
                                             type="text"
                                             name="typeDelete"
                                             onChange={(e) => {
-                                                if (e.target.value === "delete import") setConfirmDeleteImport(true);
-                                                else setConfirmDeleteImport(false);
+                                                if (e.target.value === "delete import") setConfirmDeleteImport(true)
+                                                else setConfirmDeleteImport(false)
                                             }}
                                             placeholder="Enter 'delete import'"
                                             className="mt-2 w-full"
@@ -148,5 +140,5 @@ export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

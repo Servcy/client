@@ -1,33 +1,28 @@
-import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd";
-import { observer } from "mobx-react";
-import { MoreVertical } from "lucide-react";
-
-import { useIssueDetail } from "@hooks/store";
-import { useGanttChart } from "@components/gantt-chart/hooks";
-
-import { IssueGanttSidebarBlock } from "@components/issues";
-
-import { cn } from "@helpers/common.helper";
-import { findTotalDaysInRange } from "@helpers/date-time.helper";
-
-import { IGanttBlock } from "../../types";
-
-import { BLOCK_HEIGHT } from "../../constants";
+import { useGanttChart } from "@components/gantt-chart/hooks"
+import { IssueGanttSidebarBlock } from "@components/issues"
+import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
+import { cn } from "@helpers/common.helper"
+import { findTotalDaysInRange } from "@helpers/date-time.helper"
+import { useIssueDetail } from "@hooks/store"
+import { MoreVertical } from "lucide-react"
+import { observer } from "mobx-react"
+import { BLOCK_HEIGHT } from "../../constants"
+import { IGanttBlock } from "../../types"
 
 type Props = {
-    block: IGanttBlock;
-    enableReorder: boolean;
-    provided: DraggableProvided;
-    snapshot: DraggableStateSnapshot;
-};
+    block: IGanttBlock
+    enableReorder: boolean
+    provided: DraggableProvided
+    snapshot: DraggableStateSnapshot
+}
 
 export const IssuesSidebarBlock: React.FC<Props> = observer((props) => {
-    const { block, enableReorder, provided, snapshot } = props;
+    const { block, enableReorder, provided, snapshot } = props
     // store hooks
-    const { updateActiveBlockId, isBlockActive } = useGanttChart();
-    const { peekIssue } = useIssueDetail();
+    const { updateActiveBlockId, isBlockActive } = useGanttChart()
+    const { peekIssue } = useIssueDetail()
 
-    const duration = findTotalDaysInRange(block.start_date, block.target_date);
+    const duration = findTotalDaysInRange(block.start_date, block.target_date)
 
     return (
         <div
@@ -73,5 +68,5 @@ export const IssuesSidebarBlock: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

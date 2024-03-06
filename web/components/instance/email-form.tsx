@@ -1,34 +1,31 @@
-import { FC, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-
-import { Button, Input, ToggleSwitch } from "@servcy/ui";
-import { Eye, EyeOff } from "lucide-react";
-
-import { IFormattedInstanceConfiguration } from "@servcy/types";
-
-import { useApplication } from "@hooks/store";
-import toast from "react-hot-toast";
+import { FC, useState } from "react"
+import { useApplication } from "@hooks/store"
+import { Eye, EyeOff } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IFormattedInstanceConfiguration } from "@servcy/types"
+import { Button, Input, ToggleSwitch } from "@servcy/ui"
 
 export interface IInstanceEmailForm {
-    config: IFormattedInstanceConfiguration;
+    config: IFormattedInstanceConfiguration
 }
 
 export interface EmailFormValues {
-    EMAIL_HOST: string;
-    EMAIL_PORT: string;
-    EMAIL_HOST_USER: string;
-    EMAIL_HOST_PASSWORD: string;
-    EMAIL_USE_TLS: string;
+    EMAIL_HOST: string
+    EMAIL_PORT: string
+    EMAIL_HOST_USER: string
+    EMAIL_HOST_PASSWORD: string
+    EMAIL_USE_TLS: string
     // EMAIL_USE_SSL: string;
-    EMAIL_FROM: string;
+    EMAIL_FROM: string
 }
 
 export const InstanceEmailForm: FC<IInstanceEmailForm> = (props) => {
-    const { config } = props;
+    const { config } = props
     // states
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
     // store hooks
-    const { instance: instanceStore } = useApplication();
+    const { instance: instanceStore } = useApplication()
     // toast
 
     // form data
@@ -47,10 +44,10 @@ export const InstanceEmailForm: FC<IInstanceEmailForm> = (props) => {
             // EMAIL_USE_SSL: config["EMAIL_USE_SSL"],
             EMAIL_FROM: config["EMAIL_FROM"],
         },
-    });
+    })
 
     const onSubmit = async (formData: EmailFormValues) => {
-        const payload: Partial<EmailFormValues> = { ...formData };
+        const payload: Partial<EmailFormValues> = { ...formData }
 
         await instanceStore
             .updateInstanceConfigurations(payload)
@@ -61,8 +58,8 @@ export const InstanceEmailForm: FC<IInstanceEmailForm> = (props) => {
                     message: "Email Settings updated successfully",
                 })
             )
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
     return (
         <>
@@ -214,7 +211,7 @@ export const InstanceEmailForm: FC<IInstanceEmailForm> = (props) => {
                                 <ToggleSwitch
                                     value={Boolean(parseInt(value))}
                                     onChange={() => {
-                                        Boolean(parseInt(value)) === true ? onChange("0") : onChange("1");
+                                        Boolean(parseInt(value)) === true ? onChange("0") : onChange("1")
                                     }}
                                     size="sm"
                                 />
@@ -256,5 +253,5 @@ export const InstanceEmailForm: FC<IInstanceEmailForm> = (props) => {
                 </Button>
             </div>
         </>
-    );
-};
+    )
+}

@@ -1,31 +1,27 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { FileText, Plus } from "lucide-react";
-
-import { useApplication, usePage, useProject } from "@hooks/store";
-
-import { Breadcrumbs, Button } from "@servcy/ui";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useApplication, usePage, useProject } from "@hooks/store"
+import { FileText, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, Button } from "@servcy/ui"
 
 export interface IPagesHeaderProps {
-    showButton?: boolean;
+    showButton?: boolean
 }
 
 export const PageDetailsHeader: FC<IPagesHeaderProps> = observer((props) => {
-    const { showButton = false } = props;
+    const { showButton = false } = props
 
-    const router = useRouter();
-    const { workspaceSlug, pageId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, pageId } = router.query
 
-    const { commandPalette: commandPaletteStore } = useApplication();
-    const { currentProjectDetails } = useProject();
+    const { commandPalette: commandPaletteStore } = useApplication()
+    const { currentProjectDetails } = useProject()
 
-    const pageDetails = usePage(pageId as string);
+    const pageDetails = usePage(pageId as string)
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -99,5 +95,5 @@ export const PageDetailsHeader: FC<IPagesHeaderProps> = observer((props) => {
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

@@ -1,4 +1,4 @@
-import { getRandomInt, getRandomLength } from "../utils";
+import { getRandomInt, getRandomLength } from "../utils"
 
 const ListItemRow = () => (
     <div className="flex items-center justify-between h-11 p-3 border-b border-custom-border-200">
@@ -18,7 +18,7 @@ const ListItemRow = () => (
             ))}
         </div>
     </div>
-);
+)
 
 const ListSection = ({ itemCount }: { itemCount: number }) => (
     <div className="flex flex-shrink-0 flex-col">
@@ -34,7 +34,7 @@ const ListSection = ({ itemCount }: { itemCount: number }) => (
             ))}
         </div>
     </div>
-);
+)
 
 export const ListLayoutLoader = () => (
     <div className="flex flex-shrink-0 flex-col animate-pulse">
@@ -42,4 +42,4 @@ export const ListLayoutLoader = () => (
             <ListSection key={index} itemCount={itemCount} />
         ))}
     </div>
-);
+)

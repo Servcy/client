@@ -1,51 +1,46 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react";
-
-import { useEventTracker, useMember, useModule, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules";
-
-import { Avatar, AvatarGroup, CustomMenu, LayersIcon, Tooltip } from "@servcy/ui";
-
-import { copyUrlToClipboard } from "@helpers/string.helper";
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { MODULE_STATUS } from "@constants/module";
-import { EUserProjectRoles } from "@constants/project";
-import { MODULE_FAVORITED, MODULE_UNFAVORITED } from "@constants/event-tracker";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules"
+import { MODULE_FAVORITED, MODULE_UNFAVORITED } from "@constants/event-tracker"
+import { MODULE_STATUS } from "@constants/module"
+import { EUserProjectRoles } from "@constants/project"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useEventTracker, useMember, useModule, useUser } from "@hooks/store"
+import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { Avatar, AvatarGroup, CustomMenu, LayersIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
-    moduleId: string;
-};
+    moduleId: string
+}
 
 export const ModuleCardItem: React.FC<Props> = observer((props) => {
-    const { moduleId } = props;
+    const { moduleId } = props
     // states
-    const [editModal, setEditModal] = useState(false);
-    const [deleteModal, setDeleteModal] = useState(false);
+    const [editModal, setEditModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { getModuleById, addModuleToFavorites, removeModuleFromFavorites } = useModule();
-    const { getUserDetails } = useMember();
-    const { setTrackElement, captureEvent } = useEventTracker();
+    } = useUser()
+    const { getModuleById, addModuleToFavorites, removeModuleFromFavorites } = useModule()
+    const { getUserDetails } = useMember()
+    const { setTrackElement, captureEvent } = useEventTracker()
     // derived values
-    const moduleDetails = getModuleById(moduleId);
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const moduleDetails = getModuleById(moduleId)
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
     const handleAddToFavorites = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        if (!workspaceSlug || !projectId) return;
+        e.stopPropagation()
+        e.preventDefault()
+        if (!workspaceSlug || !projectId) return
 
         addModuleToFavorites(workspaceSlug.toString(), projectId.toString(), moduleId)
             .then(() => {
@@ -53,21 +48,21 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
                     module_id: moduleId,
                     element: "Grid layout",
                     state: "SUCCESS",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Couldn't add the module to favorites. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleRemoveFromFavorites = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        if (!workspaceSlug || !projectId) return;
+        e.stopPropagation()
+        e.preventDefault()
+        if (!workspaceSlug || !projectId) return
 
         removeModuleFromFavorites(workspaceSlug.toString(), projectId.toString(), moduleId)
             .then(() => {
@@ -75,73 +70,73 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
                     module_id: moduleId,
                     element: "Grid layout",
                     state: "SUCCESS",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Couldn't remove the module from favorites. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleCopyText = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
+        e.stopPropagation()
+        e.preventDefault()
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`).then(() => {
             toast.error({
                 type: "success",
                 title: "Link Copied!",
                 message: "Module link copied to clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleEditModule = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setTrackElement("Modules page grid layout");
-        setEditModal(true);
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        setTrackElement("Modules page grid layout")
+        setEditModal(true)
+    }
 
     const handleDeleteModule = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setTrackElement("Modules page grid layout");
-        setDeleteModal(true);
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        setTrackElement("Modules page grid layout")
+        setDeleteModal(true)
+    }
 
     const openModuleOverview = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        const { query } = router;
+        e.stopPropagation()
+        e.preventDefault()
+        const { query } = router
 
         router.push({
             pathname: router.pathname,
             query: { ...query, peekModule: moduleId },
-        });
-    };
+        })
+    }
 
-    if (!moduleDetails) return null;
+    if (!moduleDetails) return null
 
     const moduleTotalIssues =
         moduleDetails.backlog_issues +
         moduleDetails.unstarted_issues +
         moduleDetails.started_issues +
         moduleDetails.completed_issues +
-        moduleDetails.cancelled_issues;
+        moduleDetails.cancelled_issues
 
-    const completionPercentage = (moduleDetails.completed_issues / moduleTotalIssues) * 100;
+    const completionPercentage = (moduleDetails.completed_issues / moduleTotalIssues) * 100
 
-    const endDate = new Date(moduleDetails.target_date ?? "");
-    const startDate = new Date(moduleDetails.start_date ?? "");
+    const endDate = new Date(moduleDetails.target_date ?? "")
+    const startDate = new Date(moduleDetails.start_date ?? "")
 
-    const isDateValid = moduleDetails.target_date || moduleDetails.start_date;
+    const isDateValid = moduleDetails.target_date || moduleDetails.start_date
 
     // const areYearsEqual = startDate.getFullYear() === endDate.getFullYear();
 
-    const moduleStatus = MODULE_STATUS.find((status) => status.value === moduleDetails.status);
+    const moduleStatus = MODULE_STATUS.find((status) => status.value === moduleDetails.status)
 
     const issueCount = module
         ? !moduleTotalIssues || moduleTotalIssues === 0
@@ -149,7 +144,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
             : moduleTotalIssues === moduleDetails.completed_issues
               ? `${moduleTotalIssues} Issue${moduleTotalIssues > 1 ? "s" : ""}`
               : `${moduleDetails.completed_issues}/${moduleTotalIssues} Issues`
-        : "0 Issue";
+        : "0 Issue"
 
     return (
         <>
@@ -200,14 +195,14 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
                                     <div className="flex cursor-default items-center gap-1">
                                         <AvatarGroup showTooltip={false}>
                                             {moduleDetails.member_ids.map((member_id) => {
-                                                const member = getUserDetails(member_id);
+                                                const member = getUserDetails(member_id)
                                                 return (
                                                     <Avatar
                                                         key={member?.id}
                                                         name={member?.display_name}
                                                         src={member?.avatar}
                                                     />
-                                                );
+                                                )
                                             })}
                                         </AvatarGroup>
                                     </div>
@@ -290,5 +285,5 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
                 </div>
             </Link>
         </>
-    );
-});
+    )
+})

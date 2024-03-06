@@ -1,10 +1,10 @@
-import { TCalendarLayouts } from "@servcy/types";
+import { TCalendarLayouts } from "@servcy/types"
 
 export const MONTHS_LIST: {
     [monthNumber: number]: {
-        shortTitle: string;
-        title: string;
-    };
+        shortTitle: string
+        title: string
+    }
 } = {
     1: {
         shortTitle: "Jan",
@@ -54,13 +54,13 @@ export const MONTHS_LIST: {
         shortTitle: "Dec",
         title: "December",
     },
-};
+}
 
 export const DAYS_LIST: {
     [dayIndex: number]: {
-        shortTitle: string;
-        title: string;
-    };
+        shortTitle: string
+        title: string
+    }
 } = {
     1: {
         shortTitle: "Sun",
@@ -90,13 +90,13 @@ export const DAYS_LIST: {
         shortTitle: "Sat",
         title: "Saturday",
     },
-};
+}
 
 export const CALENDAR_LAYOUTS: {
     [layout in TCalendarLayouts]: {
-        key: TCalendarLayouts;
-        title: string;
-    };
+        key: TCalendarLayouts
+        title: string
+    }
 } = {
     month: {
         key: "month",
@@ -106,4 +106,4 @@ export const CALENDAR_LAYOUTS: {
         key: "week",
         title: "Week layout",
     },
-};
+}

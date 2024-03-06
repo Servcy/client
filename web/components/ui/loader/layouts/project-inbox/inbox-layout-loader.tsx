@@ -1,7 +1,6 @@
-import React from "react";
-
-import { InboxSidebarLoader } from "./inbox-sidebar-loader";
-import { Loader } from "@servcy/ui";
+import React from "react"
+import { Loader } from "@servcy/ui"
+import { InboxSidebarLoader } from "./inbox-sidebar-loader"
 
 export const InboxLayoutLoader = () => (
     <div className="relative flex h-full overflow-hidden">
@@ -23,4 +22,4 @@ export const InboxLayoutLoader = () => (
             </Loader>
         </div>
     </div>
-);
+)

@@ -1,27 +1,24 @@
-import { Expand, Shrink } from "lucide-react";
-
-import { cn } from "@helpers/common.helper";
-
-import { IGanttBlock, TGanttViews } from "../types";
-
-import { VIEWS_LIST } from "@components/gantt-chart/data";
-import { useGanttChart } from "../hooks/use-gantt-chart";
-import { observer } from "mobx-react";
+import { VIEWS_LIST } from "@components/gantt-chart/data"
+import { cn } from "@helpers/common.helper"
+import { Expand, Shrink } from "lucide-react"
+import { observer } from "mobx-react"
+import { useGanttChart } from "../hooks/use-gantt-chart"
+import { IGanttBlock, TGanttViews } from "../types"
 
 type Props = {
-    blocks: IGanttBlock[] | null;
-    fullScreenMode: boolean;
-    handleChartView: (view: TGanttViews) => void;
-    handleToday: () => void;
-    loaderTitle: string;
-    title: string;
-    toggleFullScreenMode: () => void;
-};
+    blocks: IGanttBlock[] | null
+    fullScreenMode: boolean
+    handleChartView: (view: TGanttViews) => void
+    handleToday: () => void
+    loaderTitle: string
+    title: string
+    toggleFullScreenMode: () => void
+}
 
 export const GanttChartHeader: React.FC<Props> = observer((props) => {
-    const { blocks, fullScreenMode, handleChartView, handleToday, loaderTitle, title, toggleFullScreenMode } = props;
+    const { blocks, fullScreenMode, handleChartView, handleToday, loaderTitle, title, toggleFullScreenMode } = props
     // chart hook
-    const { currentView } = useGanttChart();
+    const { currentView } = useGanttChart()
 
     return (
         <div className="relative flex w-full flex-shrink-0 flex-wrap items-center gap-2 whitespace-nowrap px-2.5 py-2 z-10">
@@ -63,5 +60,5 @@ export const GanttChartHeader: React.FC<Props> = observer((props) => {
                 {fullScreenMode ? <Shrink className="h-4 w-4" /> : <Expand className="h-4 w-4" />}
             </button>
         </div>
-    );
-});
+    )
+})

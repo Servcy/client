@@ -1,29 +1,25 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react";
-
-import { useApplication, useModule } from "@hooks/store";
-
-import { Tooltip, ModuleStatusIcon } from "@servcy/ui";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { MODULE_STATUS } from "@constants/module";
+import { useRouter } from "next/router"
+import { MODULE_STATUS } from "@constants/module"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { useApplication, useModule } from "@hooks/store"
+import { observer } from "mobx-react"
+import { ModuleStatusIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
-    moduleId: string;
-};
+    moduleId: string
+}
 
 export const ModuleGanttBlock: React.FC<Props> = observer((props) => {
-    const { moduleId } = props;
+    const { moduleId } = props
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { getModuleById } = useModule();
+    } = useApplication()
+    const { getModuleById } = useModule()
     // derived values
-    const moduleDetails = getModuleById(moduleId);
+    const moduleDetails = getModuleById(moduleId)
 
     return (
         <div
@@ -51,20 +47,20 @@ export const ModuleGanttBlock: React.FC<Props> = observer((props) => {
                 </div>
             </Tooltip>
         </div>
-    );
-});
+    )
+})
 
 export const ModuleGanttSidebarBlock: React.FC<Props> = observer((props) => {
-    const { moduleId } = props;
+    const { moduleId } = props
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { getModuleById } = useModule();
+    } = useApplication()
+    const { getModuleById } = useModule()
     // derived values
-    const moduleDetails = getModuleById(moduleId);
+    const moduleDetails = getModuleById(moduleId)
 
     return (
         <div
@@ -76,5 +72,5 @@ export const ModuleGanttSidebarBlock: React.FC<Props> = observer((props) => {
             <ModuleStatusIcon status={moduleDetails?.status ?? "backlog"} height="16px" width="16px" />
             <h6 className="flex-grow truncate text-sm font-medium">{moduleDetails?.name}</h6>
         </div>
-    );
-});
+    )
+})

@@ -1,84 +1,79 @@
-import { useCallback, useState } from "react";
-import router from "next/router";
-
-import { CustomMenu } from "@servcy/ui";
-
-import { Calendar, ChevronDown, Kanban, List } from "lucide-react";
-
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue";
-
-import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store";
-
-import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "./issue-layouts";
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
-import { ProjectAnalyticsModal } from "@components/analytics";
+import router from "next/router"
+import { useCallback, useState } from "react"
+import { ProjectAnalyticsModal } from "@components/analytics"
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue"
+import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store"
+import { Calendar, ChevronDown, Kanban, List } from "lucide-react"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
+import { CustomMenu } from "@servcy/ui"
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "./issue-layouts"
 
 export const IssuesMobileHeader = () => {
     const layouts = [
         { key: "list", title: "List", icon: List },
         { key: "kanban", title: "Kanban", icon: Kanban },
         { key: "calendar", title: "Calendar", icon: Calendar },
-    ];
-    const [analyticsModal, setAnalyticsModal] = useState(false);
+    ]
+    const [analyticsModal, setAnalyticsModal] = useState(false)
     const { workspaceSlug, projectId } = router.query as {
-        workspaceSlug: string;
-        projectId: string;
-    };
-    const { currentProjectDetails } = useProject();
-    const { projectStates } = useProjectState();
-    const { projectLabels } = useLabel();
+        workspaceSlug: string
+        projectId: string
+    }
+    const { currentProjectDetails } = useProject()
+    const { projectStates } = useProjectState()
+    const { projectLabels } = useLabel()
 
     // store hooks
     const {
         issuesFilter: { issueFilters, updateFilters },
-    } = useIssues(EIssuesStoreType.PROJECT);
+    } = useIssues(EIssuesStoreType.PROJECT)
     const {
         project: { projectMemberIds },
-    } = useMember();
-    const activeLayout = issueFilters?.displayFilters?.layout;
+    } = useMember()
+    const activeLayout = issueFilters?.displayFilters?.layout
 
     const handleLayoutChange = useCallback(
         (layout: TIssueLayouts) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout });
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout })
         },
         [workspaceSlug, projectId, updateFilters]
-    );
+    )
 
     const handleFiltersUpdate = useCallback(
         (key: keyof IIssueFilterOptions, value: string | string[]) => {
-            if (!workspaceSlug || !projectId) return;
-            const newValues = issueFilters?.filters?.[key] ?? [];
+            if (!workspaceSlug || !projectId) return
+            const newValues = issueFilters?.filters?.[key] ?? []
 
             if (Array.isArray(value)) {
                 value.forEach((val) => {
-                    if (!newValues.includes(val)) newValues.push(val);
-                });
+                    if (!newValues.includes(val)) newValues.push(val)
+                })
             } else {
-                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
-                else newValues.push(value);
+                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                else newValues.push(value)
             }
 
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues });
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues })
         },
         [workspaceSlug, projectId, issueFilters, updateFilters]
-    );
+    )
 
     const handleDisplayFilters = useCallback(
         (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter)
         },
         [workspaceSlug, projectId, updateFilters]
-    );
+    )
 
     const handleDisplayProperties = useCallback(
         (property: Partial<IIssueDisplayProperties>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property)
         },
         [workspaceSlug, projectId, updateFilters]
-    );
+    )
 
     return (
         <>
@@ -101,7 +96,7 @@ export const IssuesMobileHeader = () => {
                     {layouts.map((layout, index) => (
                         <CustomMenu.MenuItem
                             onClick={() => {
-                                handleLayoutChange(ISSUE_LAYOUTS[index].key);
+                                handleLayoutChange(ISSUE_LAYOUTS[index].key)
                             }}
                             className="flex items-center gap-2"
                         >
@@ -164,5 +159,5 @@ export const IssuesMobileHeader = () => {
                 </button>
             </div>
         </>
-    );
-};
+    )
+}

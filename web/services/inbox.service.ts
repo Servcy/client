@@ -1,36 +1,34 @@
-import { APIService } from "@services/api.service";
-
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import type { IInbox, IInboxIssue, IInboxQueryParams, TInboxStatus } from "@servcy/types";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import type { IInbox, IInboxIssue, IInboxQueryParams, TInboxStatus } from "@servcy/types"
 
 export class InboxService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async getInboxes(workspaceSlug: string, projectId: string): Promise<IInbox[]> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/inboxes/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getInboxById(workspaceSlug: string, projectId: string, inboxId: string): Promise<IInbox> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/inboxes/${inboxId}/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async patchInbox(workspaceSlug: string, projectId: string, inboxId: string, data: Partial<IInbox>): Promise<any> {
         return this.patch(`/api/workspaces/${workspaceSlug}/projects/${projectId}/inboxes/${inboxId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getInboxIssues(
@@ -44,8 +42,8 @@ export class InboxService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getInboxIssueById(
@@ -59,8 +57,8 @@ export class InboxService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async deleteInboxIssue(
@@ -74,8 +72,8 @@ export class InboxService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async markInboxStatus(
@@ -91,8 +89,8 @@ export class InboxService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async patchInboxIssue(
@@ -108,8 +106,8 @@ export class InboxService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async createInboxIssue(workspaceSlug: string, projectId: string, inboxId: string, data: any): Promise<IInboxIssue> {
@@ -119,7 +117,7 @@ export class InboxService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

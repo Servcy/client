@@ -1,14 +1,14 @@
-export const THEMES = ["light", "dark", "light-contrast", "dark-contrast", "custom"];
+export const THEMES = ["light", "dark", "light-contrast", "dark-contrast", "custom"]
 
 export interface I_THEME_OPTION {
-    value: string;
-    label: string;
-    type: string;
+    value: string
+    label: string
+    type: string
     icon: {
-        border: string;
-        color1: string;
-        color2: string;
-    };
+        border: string
+        color1: string
+        color2: string
+    }
 }
 
 export const THEME_OPTIONS: I_THEME_OPTION[] = [
@@ -72,4 +72,4 @@ export const THEME_OPTIONS: I_THEME_OPTION[] = [
             color2: "#FF5151",
         },
     },
-];
+]

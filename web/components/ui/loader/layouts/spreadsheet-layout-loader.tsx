@@ -1,4 +1,4 @@
-import { getRandomLength } from "../utils";
+import { getRandomLength } from "../utils"
 
 export const SpreadsheetLayoutLoader = () => (
     <div className="horizontal-scroll-enable h-full w-full animate-pulse">
@@ -37,4 +37,4 @@ export const SpreadsheetLayoutLoader = () => (
             </tbody>
         </table>
     </div>
-);
+)

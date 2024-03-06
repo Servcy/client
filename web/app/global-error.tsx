@@ -1,22 +1,22 @@
-"use client";
+"use client"
 
-import DefaultLayout from "@layouts/DefaultLayout";
-import { Button } from "@servcy/ui";
-import { AuthService } from "@services/auth.service";
-import { useRouter } from "next/router";
-import toast from "react-hot-toast";
+import { useRouter } from "next/router"
+import DefaultLayout from "@layouts/DefaultLayout"
+import { AuthService } from "@services/auth.service"
+import toast from "react-hot-toast"
+import { Button } from "@servcy/ui"
 
-const authService = new AuthService();
+const authService = new AuthService()
 
 const CustomErrorComponent = () => {
-    const router = useRouter();
+    const router = useRouter()
 
     const logOut = async () => {
         await authService
             .logOut()
             .catch(() => toast.error("Failed to sign out. Please try again."))
-            .finally(() => router.push("/"));
-    };
+            .finally(() => router.push("/"))
+    }
 
     return (
         <DefaultLayout>
@@ -44,7 +44,7 @@ const CustomErrorComponent = () => {
                 </div>
             </div>
         </DefaultLayout>
-    );
-};
+    )
+}
 
-export default CustomErrorComponent;
+export default CustomErrorComponent

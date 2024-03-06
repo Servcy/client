@@ -1,18 +1,15 @@
-import { ChevronDown } from "lucide-react";
-
-import { CustomMenu } from "@servcy/ui";
-
-import { TDurationFilterOptions } from "@servcy/types";
-
-import { DURATION_FILTER_OPTIONS } from "@constants/dashboard";
+import { DURATION_FILTER_OPTIONS } from "@constants/dashboard"
+import { ChevronDown } from "lucide-react"
+import { TDurationFilterOptions } from "@servcy/types"
+import { CustomMenu } from "@servcy/ui"
 
 type Props = {
-    onChange: (value: TDurationFilterOptions) => void;
-    value: TDurationFilterOptions;
-};
+    onChange: (value: TDurationFilterOptions) => void
+    value: TDurationFilterOptions
+}
 
 export const DurationFilterDropdown: React.FC<Props> = (props) => {
-    const { onChange, value } = props;
+    const { onChange, value } = props
 
     return (
         <CustomMenu
@@ -32,5 +29,5 @@ export const DurationFilterDropdown: React.FC<Props> = (props) => {
                 </CustomMenu.MenuItem>
             ))}
         </CustomMenu>
-    );
-};
+    )
+}

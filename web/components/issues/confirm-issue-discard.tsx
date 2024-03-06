@@ -1,32 +1,30 @@
-import React, { useState } from "react";
-
+import React, { useState } from "react"
 // headless ui
-import { Dialog, Transition } from "@headlessui/react";
-
-import { Button } from "@servcy/ui";
+import { Dialog, Transition } from "@headlessui/react"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    handleClose: () => void;
-    onDiscard: () => void;
-    onConfirm: () => Promise<void>;
-};
+    isOpen: boolean
+    handleClose: () => void
+    onDiscard: () => void
+    onConfirm: () => Promise<void>
+}
 
 export const ConfirmIssueDiscard: React.FC<Props> = (props) => {
-    const { isOpen, handleClose, onDiscard, onConfirm } = props;
+    const { isOpen, handleClose, onDiscard, onConfirm } = props
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
     const onClose = () => {
-        handleClose();
-        setIsLoading(false);
-    };
+        handleClose()
+        setIsLoading(false)
+    }
 
     const handleDeletion = async () => {
-        setIsLoading(true);
-        await onConfirm();
-        setIsLoading(false);
-    };
+        setIsLoading(true)
+        await onConfirm()
+        setIsLoading(false)
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -98,5 +96,5 @@ export const ConfirmIssueDiscard: React.FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

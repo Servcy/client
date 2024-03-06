@@ -1,12 +1,10 @@
-import { observer } from "mobx-react-lite";
-
-import { useWebhook } from "@hooks/store";
-
-import { WebhooksListItem } from "./webhooks-list-item";
+import { useWebhook } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { WebhooksListItem } from "./webhooks-list-item"
 
 export const WebhooksList = observer(() => {
     // store hooks
-    const { webhooks } = useWebhook();
+    const { webhooks } = useWebhook()
 
     return (
         <div className="h-full w-full overflow-y-auto">
@@ -14,5 +12,5 @@ export const WebhooksList = observer(() => {
                 <WebhooksListItem key={webhook.id} webhook={webhook} />
             ))}
         </div>
-    );
-});
+    )
+})

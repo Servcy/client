@@ -1,7 +1,3 @@
-import { observer } from "mobx-react-lite";
-
-import { useApplication, useDashboard } from "@hooks/store";
-
 import {
     AssignedIssuesWidget,
     CreatedIssuesWidget,
@@ -12,12 +8,13 @@ import {
     RecentCollaboratorsWidget,
     RecentProjectsWidget,
     WidgetProps,
-} from "@components/dashboard";
-
-import { TWidgetKeys } from "@servcy/types";
+} from "@components/dashboard"
+import { useApplication, useDashboard } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TWidgetKeys } from "@servcy/types"
 
 const WIDGETS_LIST: {
-    [key in TWidgetKeys]: { component: React.FC<WidgetProps>; fullWidth: boolean };
+    [key in TWidgetKeys]: { component: React.FC<WidgetProps>; fullWidth: boolean }
 } = {
     overview_stats: { component: OverviewStatsWidget, fullWidth: true },
     assigned_issues: { component: AssignedIssuesWidget, fullWidth: false },
@@ -27,35 +24,35 @@ const WIDGETS_LIST: {
     recent_activity: { component: RecentActivityWidget, fullWidth: false },
     recent_projects: { component: RecentProjectsWidget, fullWidth: false },
     recent_collaborators: { component: RecentCollaboratorsWidget, fullWidth: true },
-};
+}
 
 export const DashboardWidgets = observer(() => {
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { homeDashboardId, homeDashboardWidgets } = useDashboard();
+    } = useApplication()
+    const { homeDashboardId, homeDashboardWidgets } = useDashboard()
 
     const doesWidgetExist = (widgetKey: TWidgetKeys) =>
-        Boolean(homeDashboardWidgets?.find((widget) => widget.key === widgetKey));
+        Boolean(homeDashboardWidgets?.find((widget) => widget.key === widgetKey))
 
-    if (!workspaceSlug || !homeDashboardId) return null;
+    if (!workspaceSlug || !homeDashboardId) return null
 
     return (
         <div className="grid lg:grid-cols-2 gap-7">
             {Object.entries(WIDGETS_LIST).map(([key, widget]) => {
-                const WidgetComponent = widget.component;
+                const WidgetComponent = widget.component
                 // if the widget doesn't exist, return null
-                if (!doesWidgetExist(key as TWidgetKeys)) return null;
+                if (!doesWidgetExist(key as TWidgetKeys)) return null
                 // if the widget is full width, return it in a 2 column grid
                 if (widget.fullWidth)
                     return (
                         <div key={key} className="lg:col-span-2">
                             <WidgetComponent dashboardId={homeDashboardId} workspaceSlug={workspaceSlug} />
                         </div>
-                    );
-                else return <WidgetComponent key={key} dashboardId={homeDashboardId} workspaceSlug={workspaceSlug} />;
+                    )
+                else return <WidgetComponent key={key} dashboardId={homeDashboardId} workspaceSlug={workspaceSlug} />
             })}
         </div>
-    );
-});
+    )
+})

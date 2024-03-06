@@ -1,12 +1,10 @@
-import { APIService } from "@services/api.service";
-
-import { TIssue } from "@servcy/types";
-
-import { API_BASE_URL } from "@helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { TIssue } from "@servcy/types"
 
 export class IssueArchiveService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async getArchivedIssues(workspaceSlug: string, projectId: string, queries?: any): Promise<any> {
@@ -15,8 +13,8 @@ export class IssueArchiveService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async archiveIssue(
@@ -24,21 +22,21 @@ export class IssueArchiveService extends APIService {
         projectId: string,
         issueId: string
     ): Promise<{
-        archived_at: string;
+        archived_at: string
     }> {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/archive/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async restoreIssue(workspaceSlug: string, projectId: string, issueId: string): Promise<any> {
         return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/archive/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async retrieveArchivedIssue(
@@ -52,7 +50,7 @@ export class IssueArchiveService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

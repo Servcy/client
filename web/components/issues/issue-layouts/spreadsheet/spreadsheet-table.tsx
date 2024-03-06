@@ -1,29 +1,29 @@
-import { observer } from "mobx-react-lite";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef } from "react"
+import { useTableKeyboardNavigation } from "@hooks/use-table-keyboard-navigation"
+import { observer } from "mobx-react-lite"
 //types
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssue } from "@servcy/types";
-import { EIssueActions } from "../types";
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssue } from "@servcy/types"
+import { EIssueActions } from "../types"
 //components
-import { SpreadsheetIssueRow } from "./issue-row";
-import { SpreadsheetHeader } from "./spreadsheet-header";
-import { useTableKeyboardNavigation } from "@hooks/use-table-keyboard-navigation";
+import { SpreadsheetIssueRow } from "./issue-row"
+import { SpreadsheetHeader } from "./spreadsheet-header"
 
 type Props = {
-    displayProperties: IIssueDisplayProperties;
-    displayFilters: IIssueDisplayFilterOptions;
-    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void;
-    issueIds: string[];
-    isEstimateEnabled: boolean;
+    displayProperties: IIssueDisplayProperties
+    displayFilters: IIssueDisplayFilterOptions
+    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void
+    issueIds: string[]
+    isEstimateEnabled: boolean
     quickActions: (
         issue: TIssue,
         customActionButton?: React.ReactElement,
         portalElement?: HTMLDivElement | null
-    ) => React.ReactNode;
-    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    portalElement: React.MutableRefObject<HTMLDivElement | null>;
-    containerRef: MutableRefObject<HTMLTableElement | null>;
-};
+    ) => React.ReactNode
+    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>
+    canEditProperties: (projectId: string | undefined) => boolean
+    portalElement: React.MutableRefObject<HTMLDivElement | null>
+    containerRef: MutableRefObject<HTMLTableElement | null>
+}
 
 export const SpreadsheetTable = observer((props: Props) => {
     const {
@@ -37,45 +37,45 @@ export const SpreadsheetTable = observer((props: Props) => {
         handleIssues,
         canEditProperties,
         containerRef,
-    } = props;
+    } = props
 
     // states
-    const isScrolled = useRef(false);
+    const isScrolled = useRef(false)
 
     const handleScroll = () => {
-        if (!containerRef.current) return;
-        const scrollLeft = containerRef.current.scrollLeft;
+        if (!containerRef.current) return
+        const scrollLeft = containerRef.current.scrollLeft
 
-        const columnShadow = "8px 22px 22px 10px rgba(0, 0, 0, 0.05)"; // shadow for regular columns
-        const headerShadow = "8px -22px 22px 10px rgba(0, 0, 0, 0.05)"; // shadow for headers
+        const columnShadow = "8px 22px 22px 10px rgba(0, 0, 0, 0.05)" // shadow for regular columns
+        const headerShadow = "8px -22px 22px 10px rgba(0, 0, 0, 0.05)" // shadow for headers
 
         //The shadow styles are added this way to avoid re-render of all the rows of table, which could be costly
         if (scrollLeft > 0 !== isScrolled.current) {
-            const firtColumns = containerRef.current.querySelectorAll("table tr td:first-child, th:first-child");
+            const firtColumns = containerRef.current.querySelectorAll("table tr td:first-child, th:first-child")
 
             for (let i = 0; i < firtColumns.length; i++) {
-                const shadow = i === 0 ? headerShadow : columnShadow;
+                const shadow = i === 0 ? headerShadow : columnShadow
                 if (scrollLeft > 0) {
-                    (firtColumns[i] as HTMLElement).style.boxShadow = shadow;
+                    ;(firtColumns[i] as HTMLElement).style.boxShadow = shadow
                 } else {
-                    (firtColumns[i] as HTMLElement).style.boxShadow = "none";
+                    ;(firtColumns[i] as HTMLElement).style.boxShadow = "none"
                 }
             }
-            isScrolled.current = scrollLeft > 0;
+            isScrolled.current = scrollLeft > 0
         }
-    };
+    }
 
     useEffect(() => {
-        const currentContainerRef = containerRef.current;
+        const currentContainerRef = containerRef.current
 
-        if (currentContainerRef) currentContainerRef.addEventListener("scroll", handleScroll);
+        if (currentContainerRef) currentContainerRef.addEventListener("scroll", handleScroll)
 
         return () => {
-            if (currentContainerRef) currentContainerRef.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+            if (currentContainerRef) currentContainerRef.removeEventListener("scroll", handleScroll)
+        }
+    }, [])
 
-    const handleKeyBoardNavigation = useTableKeyboardNavigation();
+    const handleKeyBoardNavigation = useTableKeyboardNavigation()
 
     return (
         <table className="overflow-y-auto" onKeyDown={handleKeyBoardNavigation}>
@@ -104,5 +104,5 @@ export const SpreadsheetTable = observer((props: Props) => {
                 ))}
             </tbody>
         </table>
-    );
-});
+    )
+})

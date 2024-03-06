@@ -1,34 +1,31 @@
-import { useRef } from "react";
-import { useRouter } from "next/router";
-
-import { IIssueDisplayProperties, TIssue } from "@servcy/types";
-import { EIssueActions } from "../types";
-
-import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet";
-
-import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
-import { useEventTracker } from "@hooks/store";
-import { observer } from "mobx-react";
+import { useRouter } from "next/router"
+import { useRef } from "react"
+import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet"
+import { useEventTracker } from "@hooks/store"
+import { observer } from "mobx-react"
+import { IIssueDisplayProperties, TIssue } from "@servcy/types"
+import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
+import { EIssueActions } from "../types"
 
 type Props = {
-    displayProperties: IIssueDisplayProperties;
-    issueDetail: TIssue;
-    disableUserActions: boolean;
-    property: keyof IIssueDisplayProperties;
-    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>;
-    isEstimateEnabled: boolean;
-};
+    displayProperties: IIssueDisplayProperties
+    issueDetail: TIssue
+    disableUserActions: boolean
+    property: keyof IIssueDisplayProperties
+    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>
+    isEstimateEnabled: boolean
+}
 
 export const IssueColumn = observer((props: Props) => {
-    const { displayProperties, issueDetail, disableUserActions, property, handleIssues, isEstimateEnabled } = props;
+    const { displayProperties, issueDetail, disableUserActions, property, handleIssues, isEstimateEnabled } = props
     // router
-    const router = useRouter();
-    const tableCellRef = useRef<HTMLTableCellElement | null>(null);
-    const { captureIssueEvent } = useEventTracker();
+    const router = useRouter()
+    const tableCellRef = useRef<HTMLTableCellElement | null>(null)
+    const { captureIssueEvent } = useEventTracker()
 
-    const shouldRenderProperty = property === "estimate" ? isEstimateEnabled : true;
+    const shouldRenderProperty = property === "estimate" ? isEstimateEnabled : true
 
-    const { Column } = SPREADSHEET_PROPERTY_DETAILS[property];
+    const { Column } = SPREADSHEET_PROPERTY_DETAILS[property]
 
     return (
         <WithDisplayPropertiesHOC
@@ -54,15 +51,15 @@ export const IssueColumn = observer((props: Props) => {
                                 },
                                 updates: updates,
                                 path: router.asPath,
-                            });
+                            })
                         })
                     }
                     disabled={disableUserActions}
                     onClose={() => {
-                        tableCellRef?.current?.focus();
+                        tableCellRef?.current?.focus()
                     }}
                 />
             </td>
         </WithDisplayPropertiesHOC>
-    );
-});
+    )
+})

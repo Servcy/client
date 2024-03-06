@@ -1,23 +1,21 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-import { MessageSquare } from "lucide-react";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { MessageSquare } from "lucide-react"
+import { observer } from "mobx-react"
+import { IssueActivityBlockComponent } from "./"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent } from "./";
-
-type TIssueNameActivity = { activityId: string; ends: "top" | "bottom" | undefined };
+type TIssueNameActivity = { activityId: string; ends: "top" | "bottom" | undefined }
 
 export const IssueNameActivity: FC<TIssueNameActivity> = observer((props) => {
-    const { activityId, ends } = props;
+    const { activityId, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             icon={<MessageSquare size={14} color="#6b7280" aria-hidden="true" />}
@@ -26,5 +24,5 @@ export const IssueNameActivity: FC<TIssueNameActivity> = observer((props) => {
         >
             <>set the name to {activity.new_value}.</>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

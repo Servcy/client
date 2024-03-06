@@ -1,22 +1,19 @@
-import { useState } from "react";
-import { add } from "date-fns";
-import { Controller, useForm } from "react-hook-form";
-import { DateDropdown } from "@components/dropdowns";
-import { Calendar } from "lucide-react";
-import toast from "react-hot-toast";
-
-import { Button, CustomSelect, Input, TextArea, ToggleSwitch } from "@servcy/ui";
-
-import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { IApiToken } from "@servcy/types";
+import { useState } from "react"
+import { DateDropdown } from "@components/dropdowns"
+import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { add } from "date-fns"
+import { Calendar } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IApiToken } from "@servcy/types"
+import { Button, CustomSelect, Input, TextArea, ToggleSwitch } from "@servcy/ui"
 
 type Props = {
-    handleClose: () => void;
-    neverExpires: boolean;
-    toggleNeverExpires: () => void;
-    onSubmit: (data: Partial<IApiToken>) => Promise<void>;
-};
+    handleClose: () => void
+    neverExpires: boolean
+    toggleNeverExpires: () => void
+    onSubmit: (data: Partial<IApiToken>) => Promise<void>
+}
 
 const EXPIRY_DATE_OPTIONS = [
     {
@@ -39,32 +36,32 @@ const EXPIRY_DATE_OPTIONS = [
         label: "1 year",
         value: { years: 1 },
     },
-];
+]
 
 const defaultValues: Partial<IApiToken> = {
     label: "",
     description: "",
     expired_at: null,
-};
+}
 
 const getExpiryDate = (val: string): string | null => {
-    const today = new Date();
+    const today = new Date()
 
-    const dateToAdd = EXPIRY_DATE_OPTIONS.find((option) => option.key === val)?.value;
+    const dateToAdd = EXPIRY_DATE_OPTIONS.find((option) => option.key === val)?.value
 
     if (dateToAdd) {
-        const expiryDate = add(today, dateToAdd);
+        const expiryDate = add(today, dateToAdd)
 
-        return renderFormattedDate(expiryDate);
+        return renderFormattedDate(expiryDate)
     }
 
-    return null;
-};
+    return null
+}
 
 export const CreateApiTokenForm: React.FC<Props> = (props) => {
-    const { handleClose, neverExpires, toggleNeverExpires, onSubmit } = props;
+    const { handleClose, neverExpires, toggleNeverExpires, onSubmit } = props
     // states
-    const [customDate, setCustomDate] = useState<Date | null>(null);
+    const [customDate, setCustomDate] = useState<Date | null>(null)
 
     // form
     const {
@@ -73,7 +70,7 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
         handleSubmit,
         reset,
         watch,
-    } = useForm<IApiToken>({ defaultValues });
+    } = useForm<IApiToken>({ defaultValues })
 
     const handleFormSubmit = async (data: IApiToken) => {
         // if never expires is toggled off, and the user has not selected a custom date or a predefined date, show an error
@@ -82,33 +79,32 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
                 type: "error",
                 title: "Error!",
                 message: "Please select an expiration date.",
-            });
+            })
 
         const payload: Partial<IApiToken> = {
             label: data.label,
             description: data.description,
-        };
+        }
 
         // if never expires is toggled on, set expired_at to null
-        if (neverExpires) payload.expired_at = null;
+        if (neverExpires) payload.expired_at = null
         // if never expires is toggled off, and the user has selected a custom date, set expired_at to the custom date
-        else if (data.expired_at === "custom")
-            payload.expired_at = renderFormattedPayloadDate(customDate ?? new Date());
+        else if (data.expired_at === "custom") payload.expired_at = renderFormattedPayloadDate(customDate ?? new Date())
         // if never expires is toggled off, and the user has selected a predefined date, set expired_at to the predefined date
         else {
-            const expiryDate = getExpiryDate(data.expired_at ?? "");
+            const expiryDate = getExpiryDate(data.expired_at ?? "")
 
-            if (expiryDate) payload.expired_at = renderFormattedPayloadDate(expiryDate);
+            if (expiryDate) payload.expired_at = renderFormattedPayloadDate(expiryDate)
         }
 
         await onSubmit(payload).then(() => {
-            reset(defaultValues);
-            setCustomDate(null);
-        });
-    };
+            reset(defaultValues)
+            setCustomDate(null)
+        })
+    }
 
-    const today = new Date();
-    const tomorrow = add(today, { days: 1 });
+    const today = new Date()
+    const tomorrow = add(today, { days: 1 })
 
     return (
         <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -159,7 +155,7 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
                                 control={control}
                                 name="expired_at"
                                 render={({ field: { onChange, value } }) => {
-                                    const selectedOption = EXPIRY_DATE_OPTIONS.find((option) => option.key === value);
+                                    const selectedOption = EXPIRY_DATE_OPTIONS.find((option) => option.key === value)
 
                                     return (
                                         <CustomSelect
@@ -188,7 +184,7 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
                                             ))}
                                             <CustomSelect.Option value="custom">Custom</CustomSelect.Option>
                                         </CustomSelect>
-                                    );
+                                    )
                                 }}
                             />
                             {watch("expired_at") === "custom" && (
@@ -234,5 +230,5 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
                 </div>
             </div>
         </form>
-    );
-};
+    )
+}

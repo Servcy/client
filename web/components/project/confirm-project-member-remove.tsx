@@ -1,42 +1,39 @@
-import React, { useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { AlertTriangle } from "lucide-react";
-
-import { useUser } from "@hooks/store";
-
-import { Button } from "@servcy/ui";
-
-import { IUserLite } from "@servcy/types";
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useUser } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IUserLite } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    data: IUserLite;
-    onSubmit: () => Promise<void>;
-    isOpen: boolean;
-    onClose: () => void;
-};
+    data: IUserLite
+    onSubmit: () => Promise<void>
+    isOpen: boolean
+    onClose: () => void
+}
 
 export const ConfirmProjectMemberRemove: React.FC<Props> = observer((props) => {
-    const { data, onSubmit, isOpen, onClose } = props;
+    const { data, onSubmit, isOpen, onClose } = props
     // states
-    const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+    const [isDeleteLoading, setIsDeleteLoading] = useState(false)
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
 
     const handleClose = () => {
-        onClose();
-        setIsDeleteLoading(false);
-    };
+        onClose()
+        setIsDeleteLoading(false)
+    }
 
     const handleDeletion = async () => {
-        setIsDeleteLoading(true);
+        setIsDeleteLoading(true)
 
-        await onSubmit();
+        await onSubmit()
 
-        handleClose();
-    };
+        handleClose()
+    }
 
-    const isCurrentUser = currentUser?.id === data?.id;
+    const isCurrentUser = currentUser?.id === data?.id
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -113,5 +110,5 @@ export const ConfirmProjectMemberRemove: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

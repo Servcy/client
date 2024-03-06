@@ -15,4 +15,4 @@ export const ViewListLoader = () => (
             </div>
         ))}
     </div>
-);
+)

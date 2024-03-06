@@ -1,31 +1,29 @@
-import { useRouter } from "next/router";
-import { Command } from "cmdk";
-
-import { useUser } from "@hooks/store";
-import Link from "next/link";
-
-import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
+import { useUser } from "@hooks/store"
+import { Command } from "cmdk"
 
 type Props = {
-    closePalette: () => void;
-};
+    closePalette: () => void
+}
 
 export const CommandPaletteWorkspaceSettingsActions: React.FC<Props> = (props) => {
-    const { closePalette } = props;
+    const { closePalette } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // mobx store
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
     // derived values
-    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST;
+    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST
 
     const redirect = (path: string) => {
-        closePalette();
-        router.push(path);
-    };
+        closePalette()
+        router.push(path)
+    }
 
     return (
         <>
@@ -47,5 +45,5 @@ export const CommandPaletteWorkspaceSettingsActions: React.FC<Props> = (props) =
                     )
             )}
         </>
-    );
-};
+    )
+}

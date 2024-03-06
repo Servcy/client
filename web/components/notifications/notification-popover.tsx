@@ -1,28 +1,25 @@
-import React, { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { Bell } from "lucide-react";
-import { observer } from "mobx-react-lite";
-
-import { useApplication } from "@hooks/store";
-import useUserNotification from "@hooks/use-user-notifications";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { EmptyState } from "@components/common";
-import { SnoozeNotificationModal, NotificationCard, NotificationHeader } from "@components/notifications";
-import { Tooltip } from "@servcy/ui";
-import { NotificationsLoader } from "@components/ui";
+import React, { Fragment } from "react"
+import { EmptyState } from "@components/common"
+import { NotificationCard, NotificationHeader, SnoozeNotificationModal } from "@components/notifications"
+import { NotificationsLoader } from "@components/ui"
+import { Popover, Transition } from "@headlessui/react"
+import { getNumberCount } from "@helpers/string.helper"
+import { useApplication } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import useUserNotification from "@hooks/use-user-notifications"
+import { Bell } from "lucide-react"
+import { observer } from "mobx-react-lite"
 // images
-import emptyNotification from "public/empty-state/notification.svg";
-
-import { getNumberCount } from "@helpers/string.helper";
+import emptyNotification from "public/empty-state/notification.svg"
+import { Tooltip } from "@servcy/ui"
 
 export const NotificationPopover = observer(() => {
     // states
-    const [isActive, setIsActive] = React.useState(false);
+    const [isActive, setIsActive] = React.useState(false)
     // store hooks
-    const { theme: themeStore } = useApplication();
+    const { theme: themeStore } = useApplication()
     // refs
-    const notificationPopoverRef = React.useRef<HTMLDivElement | null>(null);
+    const notificationPopoverRef = React.useRef<HTMLDivElement | null>(null)
 
     const {
         notifications,
@@ -49,12 +46,12 @@ export const NotificationPopover = observer(() => {
         isRefreshing,
         setFetchNotifications,
         markAllNotificationsAsRead,
-    } = useUserNotification();
-    const isSidebarCollapsed = themeStore.sidebarCollapsed;
+    } = useUserNotification()
+    const isSidebarCollapsed = themeStore.sidebarCollapsed
     useOutsideClickDetector(notificationPopoverRef, () => {
         // if snooze modal is open, then don't close the popover
-        if (selectedNotificationForSnooze === null) setIsActive(false);
-    });
+        if (selectedNotificationForSnooze === null) setIsActive(false)
+    })
 
     return (
         <>
@@ -82,9 +79,9 @@ export const NotificationPopover = observer(() => {
                                     : "text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80"
                             } ${isSidebarCollapsed ? "justify-center" : ""}`}
                             onClick={() => {
-                                if (window.innerWidth < 768) themeStore.toggleSidebar();
-                                if (!isActive) setFetchNotifications(true);
-                                setIsActive(!isActive);
+                                if (window.innerWidth < 768) themeStore.toggleSidebar()
+                                if (!isActive) setFetchNotifications(true)
+                                setIsActive(!isActive)
                             }}
                         >
                             <Bell className="h-4 w-4" />
@@ -179,7 +176,7 @@ export const NotificationPopover = observer(() => {
                                                 className="my-6 flex w-full items-center justify-center text-sm font-medium text-custom-primary-100"
                                                 disabled={isLoadingMore}
                                                 onClick={() => {
-                                                    setSize((prev) => prev + 1);
+                                                    setSize((prev) => prev + 1)
                                                 }}
                                             >
                                                 Load More
@@ -203,5 +200,5 @@ export const NotificationPopover = observer(() => {
                 </>
             </Popover>
         </>
-    );
-});
+    )
+})

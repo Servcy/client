@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { Disclosure, Transition } from "@headlessui/react";
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { LinkModal, LinksList, SidebarProgressStats } from "@components/core"
+import ProgressChart from "@components/core/sidebar/progress-chart"
+import { DateRangeDropdown, MemberDropdown } from "@components/dropdowns"
+import { DeleteModuleModal } from "@components/modules"
+import { MODULE_LINK_CREATED, MODULE_LINK_DELETED, MODULE_LINK_UPDATED, MODULE_UPDATED } from "@constants/event-tracker"
+import { MODULE_STATUS } from "@constants/module"
+import { EUserProjectRoles } from "@constants/project"
+import { Disclosure, Transition } from "@headlessui/react"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useEventTracker, useModule, useUser } from "@hooks/store"
 import {
     AlertCircle,
     CalendarClock,
@@ -13,30 +21,12 @@ import {
     Plus,
     Trash2,
     UserCircle2,
-} from "lucide-react";
-
-import { useModule, useUser, useEventTracker } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { LinkModal, LinksList, SidebarProgressStats } from "@components/core";
-import { DeleteModuleModal } from "@components/modules";
-import ProgressChart from "@components/core/sidebar/progress-chart";
-import { DateRangeDropdown, MemberDropdown } from "@components/dropdowns";
-
-import { CustomMenu, Loader, LayersIcon, CustomSelect, ModuleStatusIcon, UserGroupIcon } from "@servcy/ui";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-import { copyUrlToClipboard } from "@helpers/string.helper";
-
-import { ILinkDetails, IModule, ModuleLink } from "@servcy/types";
-import { MODULE_STATUS } from "@constants/module";
-import { EUserProjectRoles } from "@constants/project";
-import {
-    MODULE_LINK_CREATED,
-    MODULE_LINK_DELETED,
-    MODULE_LINK_UPDATED,
-    MODULE_UPDATED,
-} from "@constants/event-tracker";
+} from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { ILinkDetails, IModule, ModuleLink } from "@servcy/types"
+import { CustomMenu, CustomSelect, LayersIcon, Loader, ModuleStatusIcon, UserGroupIcon } from "@servcy/ui"
 
 const defaultValues: Partial<IModule> = {
     lead_id: "",
@@ -44,37 +34,37 @@ const defaultValues: Partial<IModule> = {
     start_date: null,
     target_date: null,
     status: "backlog",
-};
+}
 
 type Props = {
-    moduleId: string;
-    handleClose: () => void;
-};
+    moduleId: string
+    handleClose: () => void
+}
 
 // TODO: refactor this component
 export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
-    const { moduleId, handleClose } = props;
+    const { moduleId, handleClose } = props
     // states
-    const [moduleDeleteModal, setModuleDeleteModal] = useState(false);
-    const [moduleLinkModal, setModuleLinkModal] = useState(false);
-    const [selectedLinkToUpdate, setSelectedLinkToUpdate] = useState<ILinkDetails | null>(null);
+    const [moduleDeleteModal, setModuleDeleteModal] = useState(false)
+    const [moduleLinkModal, setModuleLinkModal] = useState(false)
+    const [selectedLinkToUpdate, setSelectedLinkToUpdate] = useState<ILinkDetails | null>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, peekModule } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, peekModule } = router.query
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { getModuleById, updateModuleDetails, createModuleLink, updateModuleLink, deleteModuleLink } = useModule();
-    const { setTrackElement, captureModuleEvent, captureEvent } = useEventTracker();
-    const moduleDetails = getModuleById(moduleId);
+    } = useUser()
+    const { getModuleById, updateModuleDetails, createModuleLink, updateModuleLink, deleteModuleLink } = useModule()
+    const { setTrackElement, captureModuleEvent, captureEvent } = useEventTracker()
+    const moduleDetails = getModuleById(moduleId)
 
     const { reset, control } = useForm({
         defaultValues,
-    });
+    })
 
     const submitChanges = (data: Partial<IModule>) => {
-        if (!workspaceSlug || !projectId || !moduleId) return;
+        if (!workspaceSlug || !projectId || !moduleId) return
         updateModuleDetails(workspaceSlug.toString(), projectId.toString(), moduleId.toString(), data)
             .then((res) => {
                 captureModuleEvent({
@@ -85,91 +75,91 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                         element: "Right side-peek",
                         state: "SUCCESS",
                     },
-                });
+                })
             })
             .catch(() => {
                 captureModuleEvent({
                     eventName: MODULE_UPDATED,
                     payload: { ...data, state: "FAILED" },
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleCreateLink = async (formData: ModuleLink) => {
-        if (!workspaceSlug || !projectId || !moduleId) return;
+        if (!workspaceSlug || !projectId || !moduleId) return
 
-        const payload = { metadata: {}, ...formData };
+        const payload = { metadata: {}, ...formData }
 
         createModuleLink(workspaceSlug.toString(), projectId.toString(), moduleId.toString(), payload)
             .then(() => {
                 captureEvent(MODULE_LINK_CREATED, {
                     module_id: moduleId,
                     state: "SUCCESS",
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Module link created",
                     message: "Module link created successfully.",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Some error occurred",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleUpdateLink = async (formData: ModuleLink, linkId: string) => {
-        if (!workspaceSlug || !projectId || !module) return;
+        if (!workspaceSlug || !projectId || !module) return
 
-        const payload = { metadata: {}, ...formData };
+        const payload = { metadata: {}, ...formData }
 
         updateModuleLink(workspaceSlug.toString(), projectId.toString(), moduleId.toString(), linkId, payload)
             .then(() => {
                 captureEvent(MODULE_LINK_UPDATED, {
                     module_id: moduleId,
                     state: "SUCCESS",
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Module link updated",
                     message: "Module link updated successfully.",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Some error occurred",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleDeleteLink = async (linkId: string) => {
-        if (!workspaceSlug || !projectId || !module) return;
+        if (!workspaceSlug || !projectId || !module) return
 
         deleteModuleLink(workspaceSlug.toString(), projectId.toString(), moduleId.toString(), linkId)
             .then(() => {
                 captureEvent(MODULE_LINK_DELETED, {
                     module_id: moduleId,
                     state: "SUCCESS",
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Module link deleted",
                     message: "Module link deleted successfully.",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Some error occurred",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleCopyText = () => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`)
@@ -178,47 +168,47 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     type: "success",
                     title: "Link copied",
                     message: "Module link copied to clipboard",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Some error occurred",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleDateChange = async (startDate: Date | undefined, targetDate: Date | undefined) => {
         submitChanges({
             start_date: startDate ? renderFormattedPayloadDate(startDate) : null,
             target_date: targetDate ? renderFormattedPayloadDate(targetDate) : null,
-        });
+        })
         toast.error({
             type: "success",
             title: "Success!",
             message: "Module updated successfully.",
-        });
-    };
+        })
+    }
 
     useEffect(() => {
         if (moduleDetails)
             reset({
                 ...moduleDetails,
-            });
-    }, [moduleDetails, reset]);
+            })
+    }, [moduleDetails, reset])
 
-    const isStartValid = new Date(`${moduleDetails?.start_date}`) <= new Date();
-    const isEndValid = new Date(`${moduleDetails?.target_date}`) >= new Date(`${moduleDetails?.start_date}`);
+    const isStartValid = new Date(`${moduleDetails?.start_date}`) <= new Date()
+    const isEndValid = new Date(`${moduleDetails?.target_date}`) >= new Date(`${moduleDetails?.start_date}`)
 
     const progressPercentage = moduleDetails
         ? Math.round((moduleDetails.completed_issues / moduleDetails.total_issues) * 100)
-        : null;
+        : null
 
     const handleEditLink = (link: ILinkDetails) => {
-        setSelectedLinkToUpdate(link);
-        setModuleLinkModal(true);
-    };
+        setSelectedLinkToUpdate(link)
+        setModuleLinkModal(true)
+    }
 
     if (!moduleDetails)
         return (
@@ -233,24 +223,22 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     <Loader.Item height="30px" />
                 </div>
             </Loader>
-        );
+        )
 
-    const moduleStatus = MODULE_STATUS.find((status) => status.value === moduleDetails.status);
+    const moduleStatus = MODULE_STATUS.find((status) => status.value === moduleDetails.status)
 
     const issueCount =
-        moduleDetails.total_issues === 0
-            ? "0 Issue"
-            : `${moduleDetails.completed_issues}/${moduleDetails.total_issues}`;
+        moduleDetails.total_issues === 0 ? "0 Issue" : `${moduleDetails.completed_issues}/${moduleDetails.total_issues}`
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
     return (
         <>
             <LinkModal
                 isOpen={moduleLinkModal}
                 handleClose={() => {
-                    setModuleLinkModal(false);
-                    setSelectedLinkToUpdate(null);
+                    setModuleLinkModal(false)
+                    setSelectedLinkToUpdate(null)
                 }}
                 data={selectedLinkToUpdate}
                 status={selectedLinkToUpdate ? true : false}
@@ -281,8 +269,8 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                             <CustomMenu placement="bottom-end" ellipsis>
                                 <CustomMenu.MenuItem
                                     onClick={() => {
-                                        setTrackElement("Module peek-overview");
-                                        setModuleDeleteModal(true);
+                                        setTrackElement("Module peek-overview")
+                                        setModuleDeleteModal(true)
                                     }}
                                 >
                                     <span className="flex items-center justify-start gap-2">
@@ -317,7 +305,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                     }
                                     value={value}
                                     onChange={(value: any) => {
-                                        submitChanges({ status: value });
+                                        submitChanges({ status: value })
                                     }}
                                     disabled={!isEditingAllowed}
                                 >
@@ -369,9 +357,9 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                             onSelect={(val) => {
                                                 onChangeStartDate(
                                                     val?.from ? renderFormattedPayloadDate(val.from) : null
-                                                );
-                                                onChangeEndDate(val?.to ? renderFormattedPayloadDate(val.to) : null);
-                                                handleDateChange(val?.from, val?.to);
+                                                )
+                                                onChangeEndDate(val?.to ? renderFormattedPayloadDate(val.to) : null)
+                                                handleDateChange(val?.from, val?.to)
                                             }}
                                             placeholder={{
                                                 from: "Start date",
@@ -399,7 +387,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                     <MemberDropdown
                                         value={value ?? null}
                                         onChange={(val) => {
-                                            submitChanges({ lead_id: val });
+                                            submitChanges({ lead_id: val })
                                         }}
                                         projectId={projectId?.toString() ?? ""}
                                         multiple={false}
@@ -423,7 +411,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                     <MemberDropdown
                                         value={value ?? []}
                                         onChange={(val: string[]) => {
-                                            submitChanges({ member_ids: val });
+                                            submitChanges({ member_ids: val })
                                         }}
                                         multiple
                                         projectId={projectId?.toString() ?? ""}
@@ -624,5 +612,5 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                 </div>
             </>
         </>
-    );
-});
+    )
+})

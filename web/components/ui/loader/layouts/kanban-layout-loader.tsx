@@ -15,4 +15,4 @@ export const KanbanLayoutLoader = ({ cardsInEachColumn = [2, 3, 2, 4, 3] }: { ca
             </div>
         ))}
     </div>
-);
+)

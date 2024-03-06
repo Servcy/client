@@ -1,63 +1,59 @@
-import { FC, useState, useEffect } from "react";
-
-import { Loader } from "@servcy/ui";
-import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor";
+import { FC, useEffect, useState } from "react"
 // store hooks
-import { useMention, useWorkspace } from "@hooks/store";
+import { useMention, useWorkspace } from "@hooks/store"
+import useDebounce from "@hooks/use-debounce"
+import { FileService } from "@services/file.service"
+import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor"
+import { Loader } from "@servcy/ui"
+import { TIssueOperations } from "./issue-detail"
 
-import { FileService } from "@services/file.service";
-const fileService = new FileService();
-
-import { TIssueOperations } from "./issue-detail";
-
-import useDebounce from "@hooks/use-debounce";
+const fileService = new FileService()
 
 export type IssueDescriptionInputProps = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    value: string | undefined;
-    initialValue: string | undefined;
-    disabled?: boolean;
-    issueOperations: TIssueOperations;
-    setIsSubmitting: (value: "submitting" | "submitted" | "saved") => void;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    value: string | undefined
+    initialValue: string | undefined
+    disabled?: boolean
+    issueOperations: TIssueOperations
+    setIsSubmitting: (value: "submitting" | "submitted" | "saved") => void
+}
 
 export const IssueDescriptionInput: FC<IssueDescriptionInputProps> = (props) => {
-    const { workspaceSlug, projectId, issueId, value, initialValue, disabled, issueOperations, setIsSubmitting } =
-        props;
+    const { workspaceSlug, projectId, issueId, value, initialValue, disabled, issueOperations, setIsSubmitting } = props
     // states
-    const [descriptionHTML, setDescriptionHTML] = useState(value);
+    const [descriptionHTML, setDescriptionHTML] = useState(value)
     // store hooks
-    const { mentionHighlights, mentionSuggestions } = useMention();
-    const { getWorkspaceBySlug } = useWorkspace();
+    const { mentionHighlights, mentionSuggestions } = useMention()
+    const { getWorkspaceBySlug } = useWorkspace()
 
-    const debouncedValue = useDebounce(descriptionHTML, 1500);
+    const debouncedValue = useDebounce(descriptionHTML, 1500)
     // computed values
-    const workspaceId = getWorkspaceBySlug(workspaceSlug)?.id as string;
+    const workspaceId = getWorkspaceBySlug(workspaceSlug)?.id as string
 
     useEffect(() => {
-        setDescriptionHTML(value);
-    }, [value]);
+        setDescriptionHTML(value)
+    }, [value])
 
     useEffect(() => {
         if (debouncedValue && debouncedValue !== value) {
             issueOperations
                 .update(workspaceSlug, projectId, issueId, { description_html: debouncedValue }, false)
                 .finally(() => {
-                    setIsSubmitting("submitted");
-                });
+                    setIsSubmitting("submitted")
+                })
         }
         // DO NOT Add more dependencies here. It will cause multiple requests to be sent.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [debouncedValue]);
+    }, [debouncedValue])
 
     if (!descriptionHTML) {
         return (
             <Loader>
                 <Loader.Item height="150px" />
             </Loader>
-        );
+        )
     }
 
     if (disabled) {
@@ -68,7 +64,7 @@ export const IssueDescriptionInput: FC<IssueDescriptionInputProps> = (props) => 
                 noBorder={disabled}
                 mentionHighlights={mentionHighlights}
             />
-        );
+        )
     }
 
     return (
@@ -82,11 +78,11 @@ export const IssueDescriptionInput: FC<IssueDescriptionInputProps> = (props) => 
             dragDropEnabled
             customClassName="min-h-[150px] shadow-sm"
             onChange={(description: Object, description_html: string) => {
-                setIsSubmitting("submitting");
-                setDescriptionHTML(description_html === "" ? "<p></p>" : description_html);
+                setIsSubmitting("submitting")
+                setDescriptionHTML(description_html === "" ? "<p></p>" : description_html)
             }}
             mentionSuggestions={mentionSuggestions}
             mentionHighlights={mentionHighlights}
         />
-    );
-};
+    )
+}

@@ -1,14 +1,12 @@
-import { LineGraph, ProfileEmptyState } from "@components/ui";
+import { LineGraph, ProfileEmptyState } from "@components/ui"
+import { MONTHS_LIST } from "@constants/calendar"
 // image
-import emptyGraph from "public/empty-state/empty_graph.svg";
-
-import { IDefaultAnalyticsResponse } from "@servcy/types";
-
-import { MONTHS_LIST } from "@constants/calendar";
+import emptyGraph from "public/empty-state/empty_graph.svg"
+import { IDefaultAnalyticsResponse } from "@servcy/types"
 
 type Props = {
-    defaultAnalytics: IDefaultAnalyticsResponse;
-};
+    defaultAnalytics: IDefaultAnalyticsResponse
+}
 
 export const AnalyticsYearWiseIssues: React.FC<Props> = ({ defaultAnalytics }) => (
     <div className="rounded-[10px] border border-custom-border-200 py-3">
@@ -56,4 +54,4 @@ export const AnalyticsYearWiseIssues: React.FC<Props> = ({ defaultAnalytics }) =
             </div>
         )}
     </div>
-);
+)

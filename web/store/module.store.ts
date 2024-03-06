@@ -1,70 +1,68 @@
-import set from "lodash/set";
-import sortBy from "lodash/sortBy";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-import { computedFn } from "mobx-utils";
-
-import { ModuleService } from "@services/module.service";
-import { ProjectService } from "@services/project";
-
-import { ILinkDetails, IModule } from "@servcy/types";
-import { RootStore } from "@store/root.store";
+import { ModuleService } from "@services/module.service"
+import { ProjectService } from "@services/project"
+import { RootStore } from "@store/root.store"
+import set from "lodash/set"
+import sortBy from "lodash/sortBy"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { computedFn } from "mobx-utils"
+import { ILinkDetails, IModule } from "@servcy/types"
 
 export interface IModuleStore {
     //Loaders
-    loader: boolean;
-    fetchedMap: Record<string, boolean>;
+    loader: boolean
+    fetchedMap: Record<string, boolean>
     // observables
-    moduleMap: Record<string, IModule>;
+    moduleMap: Record<string, IModule>
     // computed
-    projectModuleIds: string[] | null;
+    projectModuleIds: string[] | null
     // computed actions
-    getModuleById: (moduleId: string) => IModule | null;
-    getModuleNameById: (moduleId: string) => string;
-    getProjectModuleIds: (projectId: string) => string[] | null;
+    getModuleById: (moduleId: string) => IModule | null
+    getModuleNameById: (moduleId: string) => string
+    getProjectModuleIds: (projectId: string) => string[] | null
     // actions
     // fetch
-    fetchWorkspaceModules: (workspaceSlug: string) => Promise<IModule[]>;
-    fetchModules: (workspaceSlug: string, projectId: string) => Promise<undefined | IModule[]>;
-    fetchModuleDetails: (workspaceSlug: string, projectId: string, moduleId: string) => Promise<IModule>;
+    fetchWorkspaceModules: (workspaceSlug: string) => Promise<IModule[]>
+    fetchModules: (workspaceSlug: string, projectId: string) => Promise<undefined | IModule[]>
+    fetchModuleDetails: (workspaceSlug: string, projectId: string, moduleId: string) => Promise<IModule>
     // crud
-    createModule: (workspaceSlug: string, projectId: string, data: Partial<IModule>) => Promise<IModule>;
+    createModule: (workspaceSlug: string, projectId: string, data: Partial<IModule>) => Promise<IModule>
     updateModuleDetails: (
         workspaceSlug: string,
         projectId: string,
         moduleId: string,
         data: Partial<IModule>
-    ) => Promise<IModule>;
-    deleteModule: (workspaceSlug: string, projectId: string, moduleId: string) => Promise<void>;
+    ) => Promise<IModule>
+    deleteModule: (workspaceSlug: string, projectId: string, moduleId: string) => Promise<void>
     createModuleLink: (
         workspaceSlug: string,
         projectId: string,
         moduleId: string,
         data: Partial<ILinkDetails>
-    ) => Promise<ILinkDetails>;
+    ) => Promise<ILinkDetails>
     updateModuleLink: (
         workspaceSlug: string,
         projectId: string,
         moduleId: string,
         linkId: string,
         data: Partial<ILinkDetails>
-    ) => Promise<ILinkDetails>;
-    deleteModuleLink: (workspaceSlug: string, projectId: string, moduleId: string, linkId: string) => Promise<void>;
+    ) => Promise<ILinkDetails>
+    deleteModuleLink: (workspaceSlug: string, projectId: string, moduleId: string, linkId: string) => Promise<void>
     // favorites
-    addModuleToFavorites: (workspaceSlug: string, projectId: string, moduleId: string) => Promise<void>;
-    removeModuleFromFavorites: (workspaceSlug: string, projectId: string, moduleId: string) => Promise<void>;
+    addModuleToFavorites: (workspaceSlug: string, projectId: string, moduleId: string) => Promise<void>
+    removeModuleFromFavorites: (workspaceSlug: string, projectId: string, moduleId: string) => Promise<void>
 }
 
 export class ModulesStore implements IModuleStore {
     // observables
-    loader: boolean = false;
-    moduleMap: Record<string, IModule> = {};
+    loader: boolean = false
+    moduleMap: Record<string, IModule> = {}
     //loaders
-    fetchedMap: Record<string, boolean> = {};
+    fetchedMap: Record<string, boolean> = {}
     // root store
-    rootStore;
+    rootStore
 
-    projectService;
-    moduleService;
+    projectService
+    moduleService
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
@@ -86,12 +84,12 @@ export class ModulesStore implements IModuleStore {
             deleteModuleLink: action,
             addModuleToFavorites: action,
             removeModuleFromFavorites: action,
-        });
+        })
 
-        this.rootStore = _rootStore;
+        this.rootStore = _rootStore
 
-        this.projectService = new ProjectService();
-        this.moduleService = new ModuleService();
+        this.projectService = new ProjectService()
+        this.moduleService = new ModuleService()
     }
 
     // computed
@@ -99,12 +97,12 @@ export class ModulesStore implements IModuleStore {
      * get all module ids for the current project
      */
     get projectModuleIds() {
-        const projectId = this.rootStore.app.router.projectId;
-        if (!projectId || !this.fetchedMap[projectId]) return null;
-        let projectModules = Object.values(this.moduleMap).filter((m) => m.project_id === projectId);
-        projectModules = sortBy(projectModules, [(m) => m.sort_order]);
-        const projectModuleIds = projectModules.map((m) => m.id);
-        return projectModuleIds || null;
+        const projectId = this.rootStore.app.router.projectId
+        if (!projectId || !this.fetchedMap[projectId]) return null
+        let projectModules = Object.values(this.moduleMap).filter((m) => m.project_id === projectId)
+        projectModules = sortBy(projectModules, [(m) => m.sort_order])
+        const projectModuleIds = projectModules.map((m) => m.id)
+        return projectModuleIds || null
     }
 
     /**
@@ -112,27 +110,27 @@ export class ModulesStore implements IModuleStore {
      * @param moduleId
      * @returns IModule | null
      */
-    getModuleById = computedFn((moduleId: string) => this.moduleMap?.[moduleId] || null);
+    getModuleById = computedFn((moduleId: string) => this.moduleMap?.[moduleId] || null)
 
     /**
      * @description get module by id
      * @param moduleId
      * @returns IModule | null
      */
-    getModuleNameById = computedFn((moduleId: string) => this.moduleMap?.[moduleId]?.name);
+    getModuleNameById = computedFn((moduleId: string) => this.moduleMap?.[moduleId]?.name)
 
     /**
      * @description returns list of module ids of the project id passed as argument
      * @param projectId
      */
     getProjectModuleIds = computedFn((projectId: string) => {
-        if (!this.fetchedMap[projectId]) return null;
+        if (!this.fetchedMap[projectId]) return null
 
-        let projectModules = Object.values(this.moduleMap).filter((m) => m.project_id === projectId);
-        projectModules = sortBy(projectModules, [(m) => m.sort_order]);
-        const projectModuleIds = projectModules.map((m) => m.id);
-        return projectModuleIds;
-    });
+        let projectModules = Object.values(this.moduleMap).filter((m) => m.project_id === projectId)
+        projectModules = sortBy(projectModules, [(m) => m.sort_order])
+        const projectModuleIds = projectModules.map((m) => m.id)
+        return projectModuleIds
+    })
 
     /**
      * @description fetch all modules
@@ -143,11 +141,11 @@ export class ModulesStore implements IModuleStore {
         await this.moduleService.getWorkspaceModules(workspaceSlug).then((response) => {
             runInAction(() => {
                 response.forEach((module) => {
-                    set(this.moduleMap, [module.id], { ...this.moduleMap[module.id], ...module });
-                });
-            });
-            return response;
-        });
+                    set(this.moduleMap, [module.id], { ...this.moduleMap[module.id], ...module })
+                })
+            })
+            return response
+        })
 
     /**
      * @description fetch all modules
@@ -157,22 +155,22 @@ export class ModulesStore implements IModuleStore {
      */
     fetchModules = async (workspaceSlug: string, projectId: string) => {
         try {
-            this.loader = true;
+            this.loader = true
             await this.moduleService.getModules(workspaceSlug, projectId).then((response) => {
                 runInAction(() => {
                     response.forEach((module) => {
-                        set(this.moduleMap, [module.id], { ...this.moduleMap[module.id], ...module });
-                    });
-                    set(this.fetchedMap, projectId, true);
-                    this.loader = false;
-                });
-                return response;
-            });
+                        set(this.moduleMap, [module.id], { ...this.moduleMap[module.id], ...module })
+                    })
+                    set(this.fetchedMap, projectId, true)
+                    this.loader = false
+                })
+                return response
+            })
         } catch (error) {
-            this.loader = false;
-            return undefined;
+            this.loader = false
+            return undefined
         }
-    };
+    }
 
     /**
      * @description fetch module details
@@ -184,10 +182,10 @@ export class ModulesStore implements IModuleStore {
     fetchModuleDetails = async (workspaceSlug: string, projectId: string, moduleId: string) =>
         await this.moduleService.getModuleDetails(workspaceSlug, projectId, moduleId).then((response) => {
             runInAction(() => {
-                set(this.moduleMap, [moduleId], response);
-            });
-            return response;
-        });
+                set(this.moduleMap, [moduleId], response)
+            })
+            return response
+        })
 
     /**
      * @description creates a new module
@@ -199,10 +197,10 @@ export class ModulesStore implements IModuleStore {
     createModule = async (workspaceSlug: string, projectId: string, data: Partial<IModule>) =>
         await this.moduleService.createModule(workspaceSlug, projectId, data).then((response) => {
             runInAction(() => {
-                set(this.moduleMap, [response?.id], response);
-            });
-            return response;
-        });
+                set(this.moduleMap, [response?.id], response)
+            })
+            return response
+        })
 
     /**
      * @description updates module details
@@ -218,22 +216,22 @@ export class ModulesStore implements IModuleStore {
         moduleId: string,
         data: Partial<IModule>
     ) => {
-        const originalModuleDetails = this.getModuleById(moduleId);
+        const originalModuleDetails = this.getModuleById(moduleId)
         try {
             runInAction(() => {
-                set(this.moduleMap, [moduleId], { ...originalModuleDetails, ...data });
-            });
-            const response = await this.moduleService.patchModule(workspaceSlug, projectId, moduleId, data);
-            this.fetchModuleDetails(workspaceSlug, projectId, moduleId);
-            return response;
+                set(this.moduleMap, [moduleId], { ...originalModuleDetails, ...data })
+            })
+            const response = await this.moduleService.patchModule(workspaceSlug, projectId, moduleId, data)
+            this.fetchModuleDetails(workspaceSlug, projectId, moduleId)
+            return response
         } catch (error) {
-            console.error("Failed to update module in module store", error);
+            console.error("Failed to update module in module store", error)
             runInAction(() => {
-                set(this.moduleMap, [moduleId], { ...originalModuleDetails });
-            });
-            throw error;
+                set(this.moduleMap, [moduleId], { ...originalModuleDetails })
+            })
+            throw error
         }
-    };
+    }
 
     /**
      * @description deletes a module
@@ -242,14 +240,14 @@ export class ModulesStore implements IModuleStore {
      * @param moduleId
      */
     deleteModule = async (workspaceSlug: string, projectId: string, moduleId: string) => {
-        const moduleDetails = this.getModuleById(moduleId);
-        if (!moduleDetails) return;
+        const moduleDetails = this.getModuleById(moduleId)
+        if (!moduleDetails) return
         await this.moduleService.deleteModule(workspaceSlug, projectId, moduleId).then(() => {
             runInAction(() => {
-                delete this.moduleMap[moduleId];
-            });
-        });
-    };
+                delete this.moduleMap[moduleId]
+            })
+        })
+    }
 
     /**
      * @description creates a new module link
@@ -267,10 +265,10 @@ export class ModulesStore implements IModuleStore {
     ) =>
         await this.moduleService.createModuleLink(workspaceSlug, projectId, moduleId, data).then((response) => {
             runInAction(() => {
-                set(this.moduleMap, [moduleId, "link_module"], [response]);
-            });
-            return response;
-        });
+                set(this.moduleMap, [moduleId, "link_module"], [response])
+            })
+            return response
+        })
 
     /**
      * @description updates module link details
@@ -288,30 +286,24 @@ export class ModulesStore implements IModuleStore {
         linkId: string,
         data: Partial<ILinkDetails>
     ) => {
-        const originalModuleDetails = this.getModuleById(moduleId);
+        const originalModuleDetails = this.getModuleById(moduleId)
         try {
             const linkModules = originalModuleDetails?.link_module.map((link) =>
                 link.id === linkId ? { ...link, ...data } : link
-            );
+            )
             runInAction(() => {
-                set(this.moduleMap, [moduleId, "link_module"], linkModules);
-            });
-            const response = await this.moduleService.updateModuleLink(
-                workspaceSlug,
-                projectId,
-                moduleId,
-                linkId,
-                data
-            );
-            return response;
+                set(this.moduleMap, [moduleId, "link_module"], linkModules)
+            })
+            const response = await this.moduleService.updateModuleLink(workspaceSlug, projectId, moduleId, linkId, data)
+            return response
         } catch (error) {
-            console.error("Failed to update module link in module store", error);
+            console.error("Failed to update module link in module store", error)
             runInAction(() => {
-                set(this.moduleMap, [moduleId, "link_module"], originalModuleDetails?.link_module);
-            });
-            throw error;
+                set(this.moduleMap, [moduleId, "link_module"], originalModuleDetails?.link_module)
+            })
+            throw error
         }
-    };
+    }
 
     /**
      * @description deletes a module link
@@ -322,12 +314,12 @@ export class ModulesStore implements IModuleStore {
      */
     deleteModuleLink = async (workspaceSlug: string, projectId: string, moduleId: string, linkId: string) =>
         await this.moduleService.deleteModuleLink(workspaceSlug, projectId, moduleId, linkId).then(() => {
-            const moduleDetails = this.getModuleById(moduleId);
-            const linkModules = moduleDetails?.link_module.filter((link) => link.id !== linkId);
+            const moduleDetails = this.getModuleById(moduleId)
+            const linkModules = moduleDetails?.link_module.filter((link) => link.id !== linkId)
             runInAction(() => {
-                set(this.moduleMap, [moduleId, "link_module"], linkModules);
-            });
-        });
+                set(this.moduleMap, [moduleId, "link_module"], linkModules)
+            })
+        })
 
     /**
      * @description adds a module to favorites
@@ -338,21 +330,21 @@ export class ModulesStore implements IModuleStore {
      */
     addModuleToFavorites = async (workspaceSlug: string, projectId: string, moduleId: string) => {
         try {
-            const moduleDetails = this.getModuleById(moduleId);
-            if (moduleDetails?.is_favorite) return;
+            const moduleDetails = this.getModuleById(moduleId)
+            if (moduleDetails?.is_favorite) return
             runInAction(() => {
-                set(this.moduleMap, [moduleId, "is_favorite"], true);
-            });
+                set(this.moduleMap, [moduleId, "is_favorite"], true)
+            })
             await this.moduleService.addModuleToFavorites(workspaceSlug, projectId, {
                 module: moduleId,
-            });
+            })
         } catch (error) {
-            console.error("Failed to add module to favorites in module store", error);
+            console.error("Failed to add module to favorites in module store", error)
             runInAction(() => {
-                set(this.moduleMap, [moduleId, "is_favorite"], false);
-            });
+                set(this.moduleMap, [moduleId, "is_favorite"], false)
+            })
         }
-    };
+    }
 
     /**
      * @description removes a module from favorites
@@ -363,17 +355,17 @@ export class ModulesStore implements IModuleStore {
      */
     removeModuleFromFavorites = async (workspaceSlug: string, projectId: string, moduleId: string) => {
         try {
-            const moduleDetails = this.getModuleById(moduleId);
-            if (!moduleDetails?.is_favorite) return;
+            const moduleDetails = this.getModuleById(moduleId)
+            if (!moduleDetails?.is_favorite) return
             runInAction(() => {
-                set(this.moduleMap, [moduleId, "is_favorite"], false);
-            });
-            await this.moduleService.removeModuleFromFavorites(workspaceSlug, projectId, moduleId);
+                set(this.moduleMap, [moduleId, "is_favorite"], false)
+            })
+            await this.moduleService.removeModuleFromFavorites(workspaceSlug, projectId, moduleId)
         } catch (error) {
-            console.error("Failed to remove module from favorites in module store", error);
+            console.error("Failed to remove module from favorites in module store", error)
             runInAction(() => {
-                set(this.moduleMap, [moduleId, "is_favorite"], true);
-            });
+                set(this.moduleMap, [moduleId, "is_favorite"], true)
+            })
         }
-    };
+    }
 }

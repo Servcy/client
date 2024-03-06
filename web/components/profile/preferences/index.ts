@@ -1,1 +1,1 @@
-export * from "./email-notification-form";
+export * from "./email-notification-form"

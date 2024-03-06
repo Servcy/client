@@ -1,60 +1,57 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-
-import { Integration, UserIntegration } from "@/types/apps/integration";
-
-import { Button, Input, Select } from "antd";
-import Image from "next/image.js";
-import { MdOutlineSyncAlt } from "react-icons/md";
-
+import Image from "next/image.js"
+import { useEffect, useState } from "react"
 import {
     configureUserIntegration as configureUserIntegrationApi,
     fetchUserIntegrations as fetchUserIntegrationsApi,
-} from "@/apis/integration";
+} from "@/apis/integration"
+import { Button, Input, Select } from "antd"
+import toast from "react-hot-toast"
+import { MdOutlineSyncAlt } from "react-icons/md"
+import { Integration, UserIntegration } from "@/types/apps/integration"
 
 export default function GoogleConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [saving, setSaving] = useState<boolean>(false);
-    const [whitelistedEmails, setWhitelistedEmails] = useState<Set<string>>(new Set([""]));
-    const [userIntegrationId, setUserIntegrationId] = useState<number>(0);
-    const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([]);
+    const [loading, setLoading] = useState<boolean>(false)
+    const [saving, setSaving] = useState<boolean>(false)
+    const [whitelistedEmails, setWhitelistedEmails] = useState<Set<string>>(new Set([""]))
+    const [userIntegrationId, setUserIntegrationId] = useState<number>(0)
+    const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([])
 
     useEffect(() => {
-        setLoading(true);
-        setUserIntegrationId(selectedIntegration.id);
+        setLoading(true)
+        setUserIntegrationId(selectedIntegration.id)
         fetchUserIntegrationsApi("Gmail")
             .then((response) => {
-                setUserIntegrations(response);
+                setUserIntegrations(response)
                 if (response.length === 1) {
-                    setUserIntegrationId(response[0].id);
+                    setUserIntegrationId(response[0].id)
                     response[0].configuration &&
-                        setWhitelistedEmails(new Set(response[0].configuration.whitelisted_emails));
+                        setWhitelistedEmails(new Set(response[0].configuration.whitelisted_emails))
                 }
             })
             .catch((error) => {
-                toast.error(error.response.data.detail);
+                toast.error(error.response.data.detail)
             })
             .finally(() => {
-                setLoading(false);
-            });
-    }, [selectedIntegration.id]);
+                setLoading(false)
+            })
+    }, [selectedIntegration.id])
 
     useEffect(() => {
-        const userIntegration = userIntegrations.find((userIntegration) => userIntegration.id === userIntegrationId);
+        const userIntegration = userIntegrations.find((userIntegration) => userIntegration.id === userIntegrationId)
         if (userIntegration) {
-            if (!userIntegration.configuration) setWhitelistedEmails(new Set([""]));
-            else setWhitelistedEmails(new Set(userIntegration.configuration.whitelisted_emails));
+            if (!userIntegration.configuration) setWhitelistedEmails(new Set([""]))
+            else setWhitelistedEmails(new Set(userIntegration.configuration.whitelisted_emails))
         }
-    }, [userIntegrationId, userIntegrations]);
+    }, [userIntegrationId, userIntegrations])
 
     const configureGoogle = async () => {
-        const nonEmptyWhitelistedEmails = new Set(whitelistedEmails);
-        nonEmptyWhitelistedEmails.delete("");
+        const nonEmptyWhitelistedEmails = new Set(whitelistedEmails)
+        nonEmptyWhitelistedEmails.delete("")
         if (nonEmptyWhitelistedEmails.size === 0) {
-            toast.error("Please enter atleast one email ID");
-            return;
+            toast.error("Please enter atleast one email ID")
+            return
         }
-        setSaving(true);
+        setSaving(true)
         configureUserIntegrationApi(
             userIntegrationId,
             {
@@ -63,15 +60,15 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
             "Gmail"
         )
             .then(() => {
-                toast.success("Email IDs configured successfully");
+                toast.success("Email IDs configured successfully")
             })
             .catch((error: any) => {
-                toast.error(error?.response?.data?.detail || "Something went wrong!");
+                toast.error(error?.response?.data?.detail || "Something went wrong!")
             })
             .finally(() => {
-                setSaving(false);
-            });
-    };
+                setSaving(false)
+            })
+    }
 
     return (
         <div className="flex min-h-[300px] flex-col rounded-lg border border-servcy-gray bg-servcy-black p-6 text-servcy-white shadow-md md:flex-row">
@@ -103,7 +100,7 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                         placeholder="Select Account"
                         value={userIntegrationId}
                         onChange={(e: any) => {
-                            setUserIntegrationId(Number.parseInt(e.target.value));
+                            setUserIntegrationId(Number.parseInt(e.target.value))
                         }}
                     >
                         {userIntegrations.length === 0 ? (
@@ -152,10 +149,10 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                                         placeholder="Enter email ID"
                                         className="my-3 p-1"
                                         onChange={(e) => {
-                                            const newWhitelistedEmails = new Set(whitelistedEmails);
-                                            newWhitelistedEmails.delete(emailId);
-                                            newWhitelistedEmails.add(e.target.value);
-                                            setWhitelistedEmails(newWhitelistedEmails);
+                                            const newWhitelistedEmails = new Set(whitelistedEmails)
+                                            newWhitelistedEmails.delete(emailId)
+                                            newWhitelistedEmails.add(e.target.value)
+                                            setWhitelistedEmails(newWhitelistedEmails)
                                         }}
                                     />
                                 </div>
@@ -169,10 +166,10 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                                     size="small"
                                     className="text-sm font-thin !text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                                     onClick={() => {
-                                        if (whitelistedEmails.has("")) return;
-                                        const newWhitelistedEmails = new Set(whitelistedEmails);
-                                        newWhitelistedEmails.add("");
-                                        setWhitelistedEmails(newWhitelistedEmails);
+                                        if (whitelistedEmails.has("")) return
+                                        const newWhitelistedEmails = new Set(whitelistedEmails)
+                                        newWhitelistedEmails.add("")
+                                        setWhitelistedEmails(newWhitelistedEmails)
                                     }}
                                     disabled={saving}
                                 >
@@ -192,5 +189,5 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                 </form>
             </div>
         </div>
-    );
+    )
 }

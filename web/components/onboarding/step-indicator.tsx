@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export const OnboardingStepIndicator = ({ step }: { step: number }) => (
     <div className="flex items-center justify-center">
@@ -16,4 +16,4 @@ export const OnboardingStepIndicator = ({ step }: { step: number }) => (
             }`}
         />
     </div>
-);
+)

@@ -1,5 +1,9 @@
 //ui
-import { CustomMenu } from "@servcy/ui";
+
+//constants
+import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet"
+//hooks
+import useLocalStorage from "@hooks/use-local-storage"
 import {
     ArrowDownWideNarrow,
     ArrowUpNarrowWide,
@@ -8,40 +12,37 @@ import {
     Eraser,
     ListFilter,
     MoveRight,
-} from "lucide-react";
-//hooks
-import useLocalStorage from "@hooks/use-local-storage";
+} from "lucide-react"
 //types
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueOrderByOptions } from "@servcy/types";
-//constants
-import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet";
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueOrderByOptions } from "@servcy/types"
+import { CustomMenu } from "@servcy/ui"
 
 interface Props {
-    property: keyof IIssueDisplayProperties;
-    displayFilters: IIssueDisplayFilterOptions;
-    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void;
-    onClose: () => void;
+    property: keyof IIssueDisplayProperties
+    displayFilters: IIssueDisplayFilterOptions
+    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void
+    onClose: () => void
 }
 
 export const HeaderColumn = (props: Props) => {
-    const { displayFilters, handleDisplayFilterUpdate, property, onClose } = props;
+    const { displayFilters, handleDisplayFilterUpdate, property, onClose } = props
 
     const { storedValue: selectedMenuItem, setValue: setSelectedMenuItem } = useLocalStorage(
         "spreadsheetViewSorting",
         ""
-    );
+    )
     const { storedValue: activeSortingProperty, setValue: setActiveSortingProperty } = useLocalStorage(
         "spreadsheetViewActiveSortingProperty",
         ""
-    );
-    const propertyDetails = SPREADSHEET_PROPERTY_DETAILS[property];
+    )
+    const propertyDetails = SPREADSHEET_PROPERTY_DETAILS[property]
 
     const handleOrderBy = (order: TIssueOrderByOptions, itemKey: string) => {
-        handleDisplayFilterUpdate({ order_by: order });
+        handleDisplayFilterUpdate({ order_by: order })
 
-        setSelectedMenuItem(`${order}_${itemKey}`);
-        setActiveSortingProperty(order === "-created_at" ? "" : itemKey);
-    };
+        setSelectedMenuItem(`${order}_${itemKey}`)
+        setActiveSortingProperty(order === "-created_at" ? "" : itemKey)
+    }
 
     return (
         <CustomMenu
@@ -124,5 +125,5 @@ export const HeaderColumn = (props: Props) => {
                     </CustomMenu.MenuItem>
                 )}
         </CustomMenu>
-    );
-};
+    )
+}

@@ -1,27 +1,25 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { ProjectAnalyticsModalHeader, ProjectAnalyticsModalMainContent } from "@components/analytics";
-
-import { ICycle, IModule, IProject } from "@servcy/types";
+import React, { useState } from "react"
+import { ProjectAnalyticsModalHeader, ProjectAnalyticsModalMainContent } from "@components/analytics"
+import { Dialog, Transition } from "@headlessui/react"
+import { observer } from "mobx-react-lite"
+import { ICycle, IModule, IProject } from "@servcy/types"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    cycleDetails?: ICycle | undefined;
-    moduleDetails?: IModule | undefined;
-    projectDetails?: IProject | undefined;
-};
+    isOpen: boolean
+    onClose: () => void
+    cycleDetails?: ICycle | undefined
+    moduleDetails?: IModule | undefined
+    projectDetails?: IProject | undefined
+}
 
 export const ProjectAnalyticsModal: React.FC<Props> = observer((props) => {
-    const { isOpen, onClose, cycleDetails, moduleDetails, projectDetails } = props;
+    const { isOpen, onClose, cycleDetails, moduleDetails, projectDetails } = props
 
-    const [fullScreen, setFullScreen] = useState(false);
+    const [fullScreen, setFullScreen] = useState(false)
 
     const handleClose = () => {
-        onClose();
-    };
+        onClose()
+    }
 
     return (
         <Transition.Root appear show={isOpen} as={React.Fragment}>
@@ -64,5 +62,5 @@ export const ProjectAnalyticsModal: React.FC<Props> = observer((props) => {
                 </Transition.Child>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

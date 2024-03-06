@@ -1,58 +1,54 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-
-import { useLabel } from "@hooks/store";
-
-import { AlertTriangle } from "lucide-react";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import type { IIssueLabel } from "@servcy/types";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useLabel } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import type { IIssueLabel } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    data: IIssueLabel | null;
-};
+    isOpen: boolean
+    onClose: () => void
+    data: IIssueLabel | null
+}
 
 export const DeleteLabelModal: React.FC<Props> = observer((props) => {
-    const { isOpen, onClose, data } = props;
+    const { isOpen, onClose, data } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { deleteLabel } = useLabel();
+    const { deleteLabel } = useLabel()
     // states
-    const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+    const [isDeleteLoading, setIsDeleteLoading] = useState(false)
 
     const handleClose = () => {
-        onClose();
-        setIsDeleteLoading(false);
-    };
+        onClose()
+        setIsDeleteLoading(false)
+    }
 
     const handleDeletion = async () => {
-        if (!workspaceSlug || !projectId || !data) return;
+        if (!workspaceSlug || !projectId || !data) return
 
-        setIsDeleteLoading(true);
+        setIsDeleteLoading(true)
 
         await deleteLabel(workspaceSlug.toString(), projectId.toString(), data.id)
             .then(() => {
-                handleClose();
+                handleClose()
             })
             .catch((err) => {
-                setIsDeleteLoading(false);
+                setIsDeleteLoading(false)
 
-                const error = err?.error || "Label could not be deleted. Please try again.";
+                const error = err?.error || "Label could not be deleted. Please try again."
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: error,
-                });
-            });
-    };
+                })
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -125,5 +121,5 @@ export const DeleteLabelModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

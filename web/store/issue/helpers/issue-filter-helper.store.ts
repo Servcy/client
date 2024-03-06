@@ -1,5 +1,7 @@
-import isEmpty from "lodash/isEmpty";
-
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+// lib
+import { storage } from "@wrappers/LocalStorageWrapper"
+import isEmpty from "lodash/isEmpty"
 import {
     IIssueDisplayFilterOptions,
     IIssueDisplayProperties,
@@ -9,33 +11,29 @@ import {
     TIssueKanbanFilters,
     TIssueParams,
     TStaticViewTypes,
-} from "@servcy/types";
-
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-// lib
-import { storage } from "@wrappers/LocalStorageWrapper";
+} from "@servcy/types"
 
 interface ILocalStoreIssueFilters {
-    key: EIssuesStoreType;
-    workspaceSlug: string;
-    viewId: string | undefined; // It can be projectId, moduleId, cycleId, projectViewId
-    userId: string | undefined;
-    filters: IIssueFilters;
+    key: EIssuesStoreType
+    workspaceSlug: string
+    viewId: string | undefined // It can be projectId, moduleId, cycleId, projectViewId
+    userId: string | undefined
+    filters: IIssueFilters
 }
 
 export interface IIssueFilterHelperStore {
-    computedIssueFilters(filters: IIssueFilters): IIssueFilters;
+    computedIssueFilters(filters: IIssueFilters): IIssueFilters
     computedFilteredParams(
         filters: IIssueFilterOptions,
         displayFilters: IIssueDisplayFilterOptions,
         filteredParams: TIssueParams[]
-    ): Partial<Record<TIssueParams, string | boolean>>;
-    computedFilters(filters: IIssueFilterOptions): IIssueFilterOptions;
+    ): Partial<Record<TIssueParams, string | boolean>>
+    computedFilters(filters: IIssueFilterOptions): IIssueFilterOptions
     computedDisplayFilters(
         displayFilters: IIssueDisplayFilterOptions,
         defaultValues?: IIssueDisplayFilterOptions
-    ): IIssueDisplayFilterOptions;
-    computedDisplayProperties(filters: IIssueDisplayProperties): IIssueDisplayProperties;
+    ): IIssueDisplayFilterOptions
+    computedDisplayProperties(filters: IIssueDisplayProperties): IIssueDisplayProperties
 }
 
 export class IssueFilterHelperStore implements IIssueFilterHelperStore {
@@ -51,7 +49,7 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
         displayFilters: isEmpty(filters?.displayFilters) ? undefined : filters?.displayFilters,
         displayProperties: isEmpty(filters?.displayProperties) ? undefined : filters?.displayProperties,
         kanbanFilters: isEmpty(filters?.kanbanFilters) ? undefined : filters?.kanbanFilters,
-    });
+    })
 
     /**
      * @description This method is used to convert the filters array params to string params
@@ -83,18 +81,18 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
             // display filters
             type: displayFilters?.type || undefined,
             sub_issue: displayFilters?.sub_issue ?? true,
-        };
+        }
 
-        const issueFiltersParams: Partial<Record<TIssueParams, boolean | string>> = {};
+        const issueFiltersParams: Partial<Record<TIssueParams, boolean | string>> = {}
         Object.keys(computedFilters).forEach((key) => {
-            const _key = key as TIssueParams;
-            const _value: string | boolean | string[] | undefined = computedFilters[_key];
+            const _key = key as TIssueParams
+            const _value: string | boolean | string[] | undefined = computedFilters[_key]
             if (_value != undefined && acceptableParamsByLayout.includes(_key))
-                issueFiltersParams[_key] = Array.isArray(_value) ? _value.join(",") : _value;
-        });
+                issueFiltersParams[_key] = Array.isArray(_value) ? _value.join(",") : _value
+        })
 
-        return issueFiltersParams;
-    };
+        return issueFiltersParams
+    }
 
     /**
      * @description This method is used to apply the filters on the issues
@@ -115,7 +113,7 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
         target_date: filters?.target_date || null,
         project: filters?.project || null,
         subscriber: filters?.subscriber || null,
-    });
+    })
 
     /**
      * This PR is to get the filters of the fixed global views
@@ -124,31 +122,31 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
      * @returns filterOptions based on views
      */
     getComputedFiltersBasedOnViews = (currentUserId: string | undefined, type: TStaticViewTypes) => {
-        const noFilters = this.computedFilters({});
+        const noFilters = this.computedFilters({})
 
-        if (!currentUserId) return noFilters;
+        if (!currentUserId) return noFilters
 
         switch (type) {
             case "assigned":
                 return {
                     ...noFilters,
                     assignees: [currentUserId],
-                };
+                }
             case "created":
                 return {
                     ...noFilters,
                     created_by: [currentUserId],
-                };
+                }
             case "subscribed":
                 return {
                     ...noFilters,
                     subscriber: [currentUserId],
-                };
+                }
             case "all-issues":
             default:
-                return noFilters;
+                return noFilters
         }
-    };
+    }
 
     /**
      * @description This method is used to apply the display filters on the issues
@@ -159,7 +157,7 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
         displayFilters: IIssueDisplayFilterOptions,
         defaultValues?: IIssueDisplayFilterOptions
     ): IIssueDisplayFilterOptions => {
-        const filters = displayFilters || defaultValues;
+        const filters = displayFilters || defaultValues
 
         return {
             calendar: {
@@ -173,8 +171,8 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
             type: filters?.type || null,
             sub_issue: filters?.sub_issue || false,
             show_empty_groups: filters?.show_empty_groups || false,
-        };
-    };
+        }
+    }
 
     /**
      * @description This method is used to apply the display properties on the issues
@@ -197,7 +195,7 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
         updated_on: displayProperties?.updated_on ?? true,
         modules: displayProperties?.modules ?? true,
         cycle: displayProperties?.cycle ?? true,
-    });
+    })
 
     /**
      * This Method returns true if the display properties changed requires a server side update
@@ -205,18 +203,18 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
      * @returns
      */
     requiresServerUpdate = (displayFilters: IIssueDisplayFilterOptions) => {
-        const SERVER_DISPLAY_FILTERS = ["sub_issue", "type"];
-        const displayFilterKeys = Object.keys(displayFilters);
+        const SERVER_DISPLAY_FILTERS = ["sub_issue", "type"]
+        const displayFilterKeys = Object.keys(displayFilters)
 
         return SERVER_DISPLAY_FILTERS.some((serverDisplayfilter: string) =>
             displayFilterKeys.includes(serverDisplayfilter)
-        );
-    };
+        )
+    }
 
     handleIssuesLocalFilters = {
         fetchFiltersFromStorage: () => {
-            const _filters = storage.get("issue_local_filters");
-            return _filters ? JSON.parse(_filters) : [];
+            const _filters = storage.get("issue_local_filters")
+            return _filters ? JSON.parse(_filters) : []
         },
 
         get: (
@@ -225,17 +223,17 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
             viewId: string | undefined, // It can be projectId, moduleId, cycleId, projectViewId
             userId: string | undefined
         ) => {
-            const storageFilters = this.handleIssuesLocalFilters.fetchFiltersFromStorage();
+            const storageFilters = this.handleIssuesLocalFilters.fetchFiltersFromStorage()
             const currentFilterIndex = storageFilters.findIndex(
                 (filter: ILocalStoreIssueFilters) =>
                     filter.key === currentView &&
                     filter.workspaceSlug === workspaceSlug &&
                     filter.viewId === viewId &&
                     filter.userId === userId
-            );
-            if (!currentFilterIndex && currentFilterIndex.length < 0) return undefined;
+            )
+            if (!currentFilterIndex && currentFilterIndex.length < 0) return undefined
 
-            return storageFilters[currentFilterIndex]?.filters || {};
+            return storageFilters[currentFilterIndex]?.filters || {}
         },
 
         set: (
@@ -246,14 +244,14 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
             userId: string | undefined,
             filters: Partial<IIssueFiltersResponse & { kanban_filters: TIssueKanbanFilters }>
         ) => {
-            const storageFilters = this.handleIssuesLocalFilters.fetchFiltersFromStorage();
+            const storageFilters = this.handleIssuesLocalFilters.fetchFiltersFromStorage()
             const currentFilterIndex = storageFilters.findIndex(
                 (filter: ILocalStoreIssueFilters) =>
                     filter.key === currentView &&
                     filter.workspaceSlug === workspaceSlug &&
                     filter.viewId === viewId &&
                     filter.userId === userId
-            );
+            )
 
             if (currentFilterIndex < 0)
                 storageFilters.push({
@@ -262,7 +260,7 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
                     viewId: viewId,
                     userId: userId,
                     filters: filters,
-                });
+                })
             else
                 storageFilters[currentFilterIndex] = {
                     ...storageFilters[currentFilterIndex],
@@ -270,9 +268,9 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
                         ...storageFilters[currentFilterIndex].filters,
                         [filterType]: filters[filterType],
                     },
-                };
+                }
 
-            storage.set("issue_local_filters", JSON.stringify(storageFilters));
+            storage.set("issue_local_filters", JSON.stringify(storageFilters))
         },
-    };
+    }
 }

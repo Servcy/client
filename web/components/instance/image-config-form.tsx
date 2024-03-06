@@ -1,28 +1,25 @@
-import { FC, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Eye, EyeOff } from "lucide-react";
-
-import { Button, Input } from "@servcy/ui";
-
-import { IFormattedInstanceConfiguration } from "@servcy/types";
-
-import { useApplication } from "@hooks/store";
-import toast from "react-hot-toast";
+import { FC, useState } from "react"
+import { useApplication } from "@hooks/store"
+import { Eye, EyeOff } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IFormattedInstanceConfiguration } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 export interface IInstanceImageConfigForm {
-    config: IFormattedInstanceConfiguration;
+    config: IFormattedInstanceConfiguration
 }
 
 export interface ImageConfigFormValues {
-    UNSPLASH_ACCESS_KEY: string;
+    UNSPLASH_ACCESS_KEY: string
 }
 
 export const InstanceImageConfigForm: FC<IInstanceImageConfigForm> = (props) => {
-    const { config } = props;
+    const { config } = props
     // states
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
     // store hooks
-    const { instance: instanceStore } = useApplication();
+    const { instance: instanceStore } = useApplication()
     // toast
 
     // form data
@@ -34,10 +31,10 @@ export const InstanceImageConfigForm: FC<IInstanceImageConfigForm> = (props) => 
         defaultValues: {
             UNSPLASH_ACCESS_KEY: config["UNSPLASH_ACCESS_KEY"],
         },
-    });
+    })
 
     const onSubmit = async (formData: ImageConfigFormValues) => {
-        const payload: Partial<ImageConfigFormValues> = { ...formData };
+        const payload: Partial<ImageConfigFormValues> = { ...formData }
 
         await instanceStore
             .updateInstanceConfigurations(payload)
@@ -48,8 +45,8 @@ export const InstanceImageConfigForm: FC<IInstanceImageConfigForm> = (props) => 
                     message: "Image Configuration Settings updated successfully",
                 })
             )
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
     return (
         <>
@@ -110,5 +107,5 @@ export const InstanceImageConfigForm: FC<IInstanceImageConfigForm> = (props) => 
                 </Button>
             </div>
         </>
-    );
-};
+    )
+}

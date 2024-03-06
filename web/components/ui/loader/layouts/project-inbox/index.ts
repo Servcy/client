@@ -1,2 +1,2 @@
-export * from "./inbox-layout-loader";
-export * from "./inbox-sidebar-loader";
+export * from "./inbox-layout-loader"
+export * from "./inbox-sidebar-loader"

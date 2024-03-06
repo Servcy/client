@@ -9,9 +9,9 @@ export const LABEL_COLOR_OPTIONS = [
     "#EB144C",
     "#F78DA7",
     "#9900EF",
-];
+]
 
 export const getRandomLabelColor = () => {
-    const randomIndex = Math.floor(Math.random() * LABEL_COLOR_OPTIONS.length);
-    return LABEL_COLOR_OPTIONS[randomIndex];
-};
+    const randomIndex = Math.floor(Math.random() * LABEL_COLOR_OPTIONS.length)
+    return LABEL_COLOR_OPTIONS[randomIndex]
+}

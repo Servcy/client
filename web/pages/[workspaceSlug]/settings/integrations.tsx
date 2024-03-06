@@ -1,42 +1,34 @@
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
-import useSWR from "swr";
+import { useRouter } from "next/router"
+import { ReactElement } from "react"
+import { PageHead } from "@components/core"
+import { WorkspaceSettingHeader } from "@components/headers"
+import { SingleIntegrationCard } from "@components/integration"
+import { IntegrationAndImportExportBanner, IntegrationsSettingsLoader } from "@components/ui"
+import { APP_INTEGRATIONS } from "@constants/fetch-keys"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useUser, useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+import { IntegrationService } from "@services/integrations"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { NextPageWithLayout } from "@/types/types"
 
-import { useUser, useWorkspace } from "@hooks/store";
-
-import { IntegrationService } from "@services/integrations";
-
-import { AppLayout } from "@layouts/app-layout";
-import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-
-import { PageHead } from "@components/core";
-import { WorkspaceSettingHeader } from "@components/headers";
-import { SingleIntegrationCard } from "@components/integration";
-
-import { IntegrationAndImportExportBanner, IntegrationsSettingsLoader } from "@components/ui";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { APP_INTEGRATIONS } from "@constants/fetch-keys";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-
-const integrationService = new IntegrationService();
+const integrationService = new IntegrationService()
 
 const WorkspaceIntegrationsPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { currentWorkspace } = useWorkspace();
+    } = useUser()
+    const { currentWorkspace } = useWorkspace()
 
     // derived values
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN;
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Integrations` : undefined;
+    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Integrations` : undefined
 
     if (!isAdmin)
         return (
@@ -46,11 +38,11 @@ const WorkspaceIntegrationsPage: NextPageWithLayout = observer(() => {
                     <p className="text-sm text-custom-text-300">You are not authorized to access this page.</p>
                 </div>
             </>
-        );
+        )
 
     const { data: appIntegrations } = useSWR(workspaceSlug && isAdmin ? APP_INTEGRATIONS : null, () =>
         workspaceSlug && isAdmin ? integrationService.getAppIntegrationsList() : null
-    );
+    )
 
     return (
         <>
@@ -68,15 +60,15 @@ const WorkspaceIntegrationsPage: NextPageWithLayout = observer(() => {
                 </div>
             </section>
         </>
-    );
-});
+    )
+})
 
 WorkspaceIntegrationsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<WorkspaceSettingHeader title="Integrations Settings" />}>
             <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default WorkspaceIntegrationsPage;
+export default WorkspaceIntegrationsPage

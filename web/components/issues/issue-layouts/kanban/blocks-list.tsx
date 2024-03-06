@@ -1,23 +1,22 @@
-import { MutableRefObject, memo } from "react";
+import { memo, MutableRefObject } from "react"
+import { KanbanIssueBlock } from "@components/issues"
 //types
-import { TIssue, IIssueDisplayProperties, IIssueMap } from "@servcy/types";
-import { EIssueActions } from "../types";
-
-import { KanbanIssueBlock } from "@components/issues";
+import { IIssueDisplayProperties, IIssueMap, TIssue } from "@servcy/types"
+import { EIssueActions } from "../types"
 
 interface IssueBlocksListProps {
-    sub_group_id: string;
-    columnId: string;
-    issuesMap: IIssueMap;
-    peekIssueId?: string;
-    issueIds: string[];
-    displayProperties: IIssueDisplayProperties | undefined;
-    isDragDisabled: boolean;
-    handleIssues: (issue: TIssue, action: EIssueActions) => void;
-    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>;
-    isDragStarted?: boolean;
+    sub_group_id: string
+    columnId: string
+    issuesMap: IIssueMap
+    peekIssueId?: string
+    issueIds: string[]
+    displayProperties: IIssueDisplayProperties | undefined
+    isDragDisabled: boolean
+    handleIssues: (issue: TIssue, action: EIssueActions) => void
+    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
+    canEditProperties: (projectId: string | undefined) => boolean
+    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>
+    isDragStarted?: boolean
 }
 
 const KanbanIssueBlocksListMemo: React.FC<IssueBlocksListProps> = (props) => {
@@ -34,18 +33,18 @@ const KanbanIssueBlocksListMemo: React.FC<IssueBlocksListProps> = (props) => {
         canEditProperties,
         scrollableContainerRef,
         isDragStarted,
-    } = props;
+    } = props
 
     return (
         <>
             {issueIds && issueIds.length > 0 ? (
                 <>
                     {issueIds.map((issueId, index) => {
-                        if (!issueId) return null;
+                        if (!issueId) return null
 
-                        let draggableId = issueId;
-                        if (columnId) draggableId = `${draggableId}__${columnId}`;
-                        if (sub_group_id) draggableId = `${draggableId}__${sub_group_id}`;
+                        let draggableId = issueId
+                        if (columnId) draggableId = `${draggableId}__${columnId}`
+                        if (sub_group_id) draggableId = `${draggableId}__${sub_group_id}`
 
                         return (
                             <KanbanIssueBlock
@@ -64,12 +63,12 @@ const KanbanIssueBlocksListMemo: React.FC<IssueBlocksListProps> = (props) => {
                                 isDragStarted={isDragStarted}
                                 issueIds={issueIds} //passing to force render for virtualization whenever parent rerenders
                             />
-                        );
+                        )
                     })}
                 </>
             ) : null}
         </>
-    );
-};
+    )
+}
 
-export const KanbanIssueBlocksList = memo(KanbanIssueBlocksListMemo);
+export const KanbanIssueBlocksList = memo(KanbanIssueBlocksListMemo)

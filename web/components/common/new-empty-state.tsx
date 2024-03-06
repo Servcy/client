@@ -1,26 +1,24 @@
-import React, { useState } from "react";
-
-import Image from "next/image";
-
-import { Button } from "@servcy/ui";
+import Image from "next/image"
+import React, { useState } from "react"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    title: string;
-    description?: React.ReactNode;
-    image: any;
+    title: string
+    description?: React.ReactNode
+    image: any
     comicBox?: {
-        direction: "left" | "right";
-        title: string;
-        description: string;
-        extraPadding?: boolean;
-    };
+        direction: "left" | "right"
+        title: string
+        description: string
+        extraPadding?: boolean
+    }
     primaryButton?: {
-        icon?: any;
-        text: string;
-        onClick: () => void;
-    };
-    disabled?: boolean;
-};
+        icon?: any
+        text: string
+        onClick: () => void
+    }
+    disabled?: boolean
+}
 
 export const NewEmptyState: React.FC<Props> = ({
     title,
@@ -30,15 +28,15 @@ export const NewEmptyState: React.FC<Props> = ({
     disabled = false,
     comicBox,
 }) => {
-    const [isHovered, setIsHovered] = useState(false);
+    const [isHovered, setIsHovered] = useState(false)
 
     const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
+        setIsHovered(true)
+    }
 
     const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
+        setIsHovered(false)
+    }
     return (
         <div className="flex items-center justify-center overflow-y-auto">
             <div className=" flex h-full w-full flex-col items-center justify-center ">
@@ -108,5 +106,5 @@ export const NewEmptyState: React.FC<Props> = ({
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

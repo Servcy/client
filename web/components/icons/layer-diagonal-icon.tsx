@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const LayerDiagonalIcon: React.FC<Props> = ({
     width = "24",
@@ -23,4 +22,4 @@ export const LayerDiagonalIcon: React.FC<Props> = ({
             strokeWidth="0.25"
         />
     </svg>
-);
+)

@@ -1,70 +1,67 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { AlertTriangle } from "lucide-react";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { GLOBAL_VIEW_DELETED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
 // store hooks
-import { useGlobalView, useEventTracker } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import { IWorkspaceView } from "@servcy/types";
-
-import { GLOBAL_VIEW_DELETED } from "@constants/event-tracker";
+import { useEventTracker, useGlobalView } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IWorkspaceView } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    data: IWorkspaceView;
-    isOpen: boolean;
-    onClose: () => void;
-};
+    data: IWorkspaceView
+    isOpen: boolean
+    onClose: () => void
+}
 
 export const DeleteGlobalViewModal: React.FC<Props> = observer((props) => {
-    const { data, isOpen, onClose } = props;
+    const { data, isOpen, onClose } = props
     // states
-    const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+    const [isDeleteLoading, setIsDeleteLoading] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { deleteGlobalView } = useGlobalView();
-    const { captureEvent } = useEventTracker();
+    const { deleteGlobalView } = useGlobalView()
+    const { captureEvent } = useEventTracker()
 
     const handleClose = () => {
-        onClose();
-    };
+        onClose()
+    }
 
     const handleDeletion = async () => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
-        setIsDeleteLoading(true);
+        setIsDeleteLoading(true)
 
         await deleteGlobalView(workspaceSlug.toString(), data.id)
             .then(() => {
                 captureEvent(GLOBAL_VIEW_DELETED, {
                     view_id: data.id,
                     state: "SUCCESS",
-                });
+                })
             })
             .catch(() => {
                 captureEvent(GLOBAL_VIEW_DELETED, {
                     view_id: data.id,
                     state: "FAILED",
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Something went wrong while deleting the view. Please try again.",
-                });
+                })
             })
             .finally(() => {
-                setIsDeleteLoading(false);
-                handleClose();
-            });
+                setIsDeleteLoading(false)
+                handleClose()
+            })
 
         // remove filters from local storage
-        localStorage.removeItem(`global_view_filters/${data.id}`);
-    };
+        localStorage.removeItem(`global_view_filters/${data.id}`)
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -138,5 +135,5 @@ export const DeleteGlobalViewModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

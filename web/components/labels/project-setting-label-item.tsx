@@ -1,42 +1,39 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { useRouter } from "next/router";
-import { DraggableProvidedDragHandleProps, DraggableStateSnapshot } from "@hello-pangea/dnd";
-import { X, Pencil } from "lucide-react";
-
-import { useLabel } from "@hooks/store";
-
-import { IIssueLabel } from "@servcy/types";
-
-import { ICustomMenuItem, LabelItemBlock } from "./label-block/label-item-block";
-import { CreateUpdateLabelInline } from "./create-update-label-inline";
+import { useRouter } from "next/router"
+import React, { Dispatch, SetStateAction, useState } from "react"
+import { DraggableProvidedDragHandleProps, DraggableStateSnapshot } from "@hello-pangea/dnd"
+import { useLabel } from "@hooks/store"
+import { Pencil, X } from "lucide-react"
+import { IIssueLabel } from "@servcy/types"
+import { CreateUpdateLabelInline } from "./create-update-label-inline"
+import { ICustomMenuItem, LabelItemBlock } from "./label-block/label-item-block"
 
 type Props = {
-    label: IIssueLabel;
-    handleLabelDelete: (label: IIssueLabel) => void;
-    draggableSnapshot: DraggableStateSnapshot;
-    dragHandleProps: DraggableProvidedDragHandleProps;
-    setIsUpdating: Dispatch<SetStateAction<boolean>>;
-    isChild: boolean;
-};
+    label: IIssueLabel
+    handleLabelDelete: (label: IIssueLabel) => void
+    draggableSnapshot: DraggableStateSnapshot
+    dragHandleProps: DraggableProvidedDragHandleProps
+    setIsUpdating: Dispatch<SetStateAction<boolean>>
+    isChild: boolean
+}
 
 export const ProjectSettingLabelItem: React.FC<Props> = (props) => {
-    const { label, setIsUpdating, handleLabelDelete, draggableSnapshot, dragHandleProps, isChild } = props;
-    const { combineTargetFor, isDragging } = draggableSnapshot;
+    const { label, setIsUpdating, handleLabelDelete, draggableSnapshot, dragHandleProps, isChild } = props
+    const { combineTargetFor, isDragging } = draggableSnapshot
     // states
-    const [isEditLabelForm, setEditLabelForm] = useState(false);
+    const [isEditLabelForm, setEditLabelForm] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { updateLabel } = useLabel();
+    const { updateLabel } = useLabel()
 
     const removeFromGroup = (label: IIssueLabel) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
         updateLabel(workspaceSlug.toString(), projectId.toString(), label.id, {
             parent: null,
-        });
-    };
+        })
+    }
 
     const customMenuItems: ICustomMenuItem[] = [
         {
@@ -49,14 +46,14 @@ export const ProjectSettingLabelItem: React.FC<Props> = (props) => {
         {
             CustomIcon: Pencil,
             onClick: () => {
-                setEditLabelForm(true);
-                setIsUpdating(true);
+                setEditLabelForm(true)
+                setIsUpdating(true)
             },
             isVisible: true,
             text: "Edit label",
             key: "edit_label",
         },
-    ];
+    ]
 
     return (
         <div
@@ -71,8 +68,8 @@ export const ProjectSettingLabelItem: React.FC<Props> = (props) => {
                     isUpdating
                     labelToUpdate={label}
                     onClose={() => {
-                        setEditLabelForm(false);
-                        setIsUpdating(false);
+                        setEditLabelForm(false)
+                        setIsUpdating(false)
                     }}
                 />
             ) : (
@@ -85,5 +82,5 @@ export const ProjectSettingLabelItem: React.FC<Props> = (props) => {
                 />
             )}
         </div>
-    );
-};
+    )
+}

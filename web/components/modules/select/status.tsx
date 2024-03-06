@@ -1,19 +1,15 @@
-import React from "react";
-
+import React from "react"
+import { MODULE_STATUS } from "@constants/module"
 // react hook form
-import { Controller, FieldError, Control } from "react-hook-form";
-
-import { CustomSelect, DoubleCircleIcon, ModuleStatusIcon } from "@servcy/ui";
-
-import type { IModule } from "@servcy/types";
-
-import { MODULE_STATUS } from "@constants/module";
+import { Control, Controller, FieldError } from "react-hook-form"
+import type { IModule } from "@servcy/types"
+import { CustomSelect, DoubleCircleIcon, ModuleStatusIcon } from "@servcy/ui"
 
 type Props = {
-    control: Control<IModule, any>;
-    error?: FieldError;
-    tabIndex?: number;
-};
+    control: Control<IModule, any>
+    error?: FieldError
+    tabIndex?: number
+}
 
 export const ModuleStatusSelect: React.FC<Props> = ({ control, error, tabIndex }) => (
     <Controller
@@ -52,4 +48,4 @@ export const ModuleStatusSelect: React.FC<Props> = ({ control, error, tabIndex }
             </CustomSelect>
         )}
     />
-);
+)

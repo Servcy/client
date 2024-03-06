@@ -1,58 +1,57 @@
-import { action, makeObservable, observable, runInAction } from "mobx";
-
-import { AuthService } from "@services/auth.service";
-import { UserService } from "@services/user.service";
+import { AuthService } from "@services/auth.service"
+import { UserService } from "@services/user.service"
+import { action, makeObservable, observable, runInAction } from "mobx"
 // interfaces
-import { IUser, IUserSettings } from "@servcy/types";
+import { IUser, IUserSettings } from "@servcy/types"
 // store
-import { RootStore } from "../root.store";
-import { IUserMembershipStore, UserMembershipStore } from "./user-membership.store";
+import { RootStore } from "../root.store"
+import { IUserMembershipStore, UserMembershipStore } from "./user-membership.store"
 
 export interface IUserRootStore {
     // states
-    currentUserError: any | null;
-    currentUserLoader: boolean;
+    currentUserError: any | null
+    currentUserLoader: boolean
     // observables
-    isUserLoggedIn: boolean | null;
-    currentUser: IUser | null;
-    isUserInstanceAdmin: boolean | null;
-    currentUserSettings: IUserSettings | null;
-    dashboardInfo: any;
+    isUserLoggedIn: boolean | null
+    currentUser: IUser | null
+    isUserInstanceAdmin: boolean | null
+    currentUserSettings: IUserSettings | null
+    dashboardInfo: any
     // fetch actions
-    fetchCurrentUser: () => Promise<IUser>;
-    fetchCurrentUserInstanceAdminStatus: () => Promise<boolean>;
-    fetchCurrentUserSettings: () => Promise<IUserSettings>;
-    fetchUserDashboardInfo: (workspaceSlug: string, month: number) => Promise<any>;
+    fetchCurrentUser: () => Promise<IUser>
+    fetchCurrentUserInstanceAdminStatus: () => Promise<boolean>
+    fetchCurrentUserSettings: () => Promise<IUserSettings>
+    fetchUserDashboardInfo: (workspaceSlug: string, month: number) => Promise<any>
     // crud actions
-    updateUserOnBoard: () => Promise<void>;
-    updateTourCompleted: () => Promise<void>;
-    updateCurrentUser: (data: Partial<IUser>) => Promise<IUser>;
-    updateCurrentUserTheme: (theme: string) => Promise<IUser>;
+    updateUserOnBoard: () => Promise<void>
+    updateTourCompleted: () => Promise<void>
+    updateCurrentUser: (data: Partial<IUser>) => Promise<IUser>
+    updateCurrentUserTheme: (theme: string) => Promise<IUser>
 
-    deactivateAccount: () => Promise<void>;
-    signOut: () => Promise<void>;
+    deactivateAccount: () => Promise<void>
+    signOut: () => Promise<void>
 
-    membership: IUserMembershipStore;
+    membership: IUserMembershipStore
 }
 
 export class UserRootStore implements IUserRootStore {
     // states
-    currentUserError: any | null = null;
-    currentUserLoader: boolean = false;
+    currentUserError: any | null = null
+    currentUserLoader: boolean = false
     // observables
-    isUserLoggedIn: boolean | null = null;
-    currentUser: IUser | null = null;
-    isUserInstanceAdmin: boolean | null = null;
-    currentUserSettings: IUserSettings | null = null;
+    isUserLoggedIn: boolean | null = null
+    currentUser: IUser | null = null
+    isUserInstanceAdmin: boolean | null = null
+    currentUserSettings: IUserSettings | null = null
 
-    dashboardInfo: any = null;
-    membership: UserMembershipStore;
+    dashboardInfo: any = null
+    membership: UserMembershipStore
 
     // root store
-    rootStore;
+    rootStore
 
-    userService;
-    authService;
+    userService
+    authService
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
@@ -75,11 +74,11 @@ export class UserRootStore implements IUserRootStore {
             updateCurrentUserTheme: action,
             deactivateAccount: action,
             signOut: action,
-        });
-        this.rootStore = _rootStore;
-        this.userService = new UserService();
-        this.authService = new AuthService();
-        this.membership = new UserMembershipStore(_rootStore);
+        })
+        this.rootStore = _rootStore
+        this.userService = new UserService()
+        this.authService = new AuthService()
+        this.membership = new UserMembershipStore(_rootStore)
     }
 
     /**
@@ -88,23 +87,23 @@ export class UserRootStore implements IUserRootStore {
      */
     fetchCurrentUser = async () => {
         try {
-            this.currentUserLoader = true;
-            const response = await this.userService.currentUser();
+            this.currentUserLoader = true
+            const response = await this.userService.currentUser()
             runInAction(() => {
-                this.isUserLoggedIn = true;
-                this.currentUser = response;
-                this.currentUserError = null;
-                this.currentUserLoader = false;
-            });
-            return response;
+                this.isUserLoggedIn = true
+                this.currentUser = response
+                this.currentUserError = null
+                this.currentUserLoader = false
+            })
+            return response
         } catch (error) {
             runInAction(() => {
-                this.currentUserLoader = false;
-                this.currentUserError = error;
-            });
-            throw error;
+                this.currentUserLoader = false
+                this.currentUserError = error
+            })
+            throw error
         }
-    };
+    }
 
     /**
      * Fetches the current user instance admin status
@@ -113,10 +112,10 @@ export class UserRootStore implements IUserRootStore {
     fetchCurrentUserInstanceAdminStatus = async () =>
         await this.userService.currentUserInstanceAdminStatus().then((response) => {
             runInAction(() => {
-                this.isUserInstanceAdmin = response.is_instance_admin;
-            });
-            return response.is_instance_admin;
-        });
+                this.isUserInstanceAdmin = response.is_instance_admin
+            })
+            return response.is_instance_admin
+        })
 
     /**
      * Fetches the current user settings
@@ -125,10 +124,10 @@ export class UserRootStore implements IUserRootStore {
     fetchCurrentUserSettings = async () =>
         await this.userService.currentUserSettings().then((response) => {
             runInAction(() => {
-                this.currentUserSettings = response;
-            });
-            return response;
-        });
+                this.currentUserSettings = response
+            })
+            return response
+        })
 
     /**
      * Fetches the current user dashboard info
@@ -136,15 +135,15 @@ export class UserRootStore implements IUserRootStore {
      */
     fetchUserDashboardInfo = async (workspaceSlug: string, month: number) => {
         try {
-            const response = await this.userService.userWorkspaceDashboard(workspaceSlug, month);
+            const response = await this.userService.userWorkspaceDashboard(workspaceSlug, month)
             runInAction(() => {
-                this.dashboardInfo = response;
-            });
-            return response;
+                this.dashboardInfo = response
+            })
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     /**
      * Updates the user onboarding status
@@ -156,16 +155,16 @@ export class UserRootStore implements IUserRootStore {
                 this.currentUser = {
                     ...this.currentUser,
                     is_onboarded: true,
-                } as IUser;
-            });
-            const user = this.currentUser ?? undefined;
-            if (!user) return;
-            await this.userService.updateUserOnBoard();
+                } as IUser
+            })
+            const user = this.currentUser ?? undefined
+            if (!user) return
+            await this.userService.updateUserOnBoard()
         } catch (error) {
-            this.fetchCurrentUser();
-            throw error;
+            this.fetchCurrentUser()
+            throw error
         }
-    };
+    }
 
     /**
      * Updates the user tour completed status
@@ -178,16 +177,16 @@ export class UserRootStore implements IUserRootStore {
                     this.currentUser = {
                         ...this.currentUser,
                         is_tour_completed: true,
-                    } as IUser;
-                });
-                const response = await this.userService.updateUserTourCompleted();
-                return response;
+                    } as IUser
+                })
+                const response = await this.userService.updateUserTourCompleted()
+                return response
             }
         } catch (error) {
-            this.fetchCurrentUser();
-            throw error;
+            this.fetchCurrentUser()
+            throw error
         }
-    };
+    }
 
     /**
      * Updates the current user
@@ -200,18 +199,18 @@ export class UserRootStore implements IUserRootStore {
                 this.currentUser = {
                     ...this.currentUser,
                     ...data,
-                } as IUser;
-            });
-            const response = await this.userService.updateUser(data);
+                } as IUser
+            })
+            const response = await this.userService.updateUser(data)
             runInAction(() => {
-                this.currentUser = response;
-            });
-            return response;
+                this.currentUser = response
+            })
+            return response
         } catch (error) {
-            this.fetchCurrentUser();
-            throw error;
+            this.fetchCurrentUser()
+            throw error
         }
-    };
+    }
 
     /**
      * Updates the current user theme
@@ -227,16 +226,16 @@ export class UserRootStore implements IUserRootStore {
                         ...this.currentUser?.theme,
                         theme,
                     },
-                } as IUser;
-            });
+                } as IUser
+            })
             const response = await this.userService.updateUser({
                 theme: { ...this.currentUser?.theme, theme },
-            } as IUser);
-            return response;
+            } as IUser)
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     /**
      * Deactivates the current user
@@ -245,14 +244,14 @@ export class UserRootStore implements IUserRootStore {
     deactivateAccount = async () =>
         await this.userService.deactivateAccount().then(() => {
             runInAction(() => {
-                this.currentUser = null;
-                this.currentUserError = null;
-                this.isUserLoggedIn = false;
-            });
-            this.membership = new UserMembershipStore(this.rootStore);
-            this.rootStore.eventTracker.resetSession();
-            this.rootStore.resetOnSignout();
-        });
+                this.currentUser = null
+                this.currentUserError = null
+                this.isUserLoggedIn = false
+            })
+            this.membership = new UserMembershipStore(this.rootStore)
+            this.rootStore.eventTracker.resetSession()
+            this.rootStore.resetOnSignout()
+        })
 
     /**
      * Signs out the current user
@@ -261,11 +260,11 @@ export class UserRootStore implements IUserRootStore {
     signOut = async () =>
         await this.authService.signOut().then(() => {
             runInAction(() => {
-                this.currentUser = null;
-                this.isUserLoggedIn = false;
-            });
-            this.membership = new UserMembershipStore(this.rootStore);
-            this.rootStore.eventTracker.resetSession();
-            this.rootStore.resetOnSignout();
-        });
+                this.currentUser = null
+                this.isUserLoggedIn = false
+            })
+            this.membership = new UserMembershipStore(this.rootStore)
+            this.rootStore.eventTracker.resetSession()
+            this.rootStore.resetOnSignout()
+        })
 }

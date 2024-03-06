@@ -1,54 +1,48 @@
-import { Fragment, ReactNode, useEffect, useRef, useState } from "react";
-import { observer } from "mobx-react-lite";
-import { Combobox } from "@headlessui/react";
-import { ChevronDown, X } from "lucide-react";
-
-import { useModule } from "@hooks/store";
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { DropdownButton } from "../buttons";
-
-import { DiceIcon, Tooltip } from "@servcy/ui";
-
-import { cn } from "@helpers/common.helper";
-
-import { TDropdownProps } from "../types";
-
-import { BUTTON_VARIANTS_WITHOUT_TEXT } from "../constants";
-import { ModuleOptions } from "./module-options";
+import { Fragment, ReactNode, useEffect, useRef, useState } from "react"
+import { Combobox } from "@headlessui/react"
+import { cn } from "@helpers/common.helper"
+import { useModule } from "@hooks/store"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { ChevronDown, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { DiceIcon, Tooltip } from "@servcy/ui"
+import { DropdownButton } from "../buttons"
+import { BUTTON_VARIANTS_WITHOUT_TEXT } from "../constants"
+import { TDropdownProps } from "../types"
+import { ModuleOptions } from "./module-options"
 
 type Props = TDropdownProps & {
-    button?: ReactNode;
-    dropdownArrow?: boolean;
-    dropdownArrowClassName?: string;
-    projectId: string;
-    showCount?: boolean;
-    onClose?: () => void;
+    button?: ReactNode
+    dropdownArrow?: boolean
+    dropdownArrowClassName?: string
+    projectId: string
+    showCount?: boolean
+    onClose?: () => void
 } & (
         | {
-              multiple: false;
-              onChange: (val: string | null) => void;
-              value: string | null;
+              multiple: false
+              onChange: (val: string | null) => void
+              value: string | null
           }
         | {
-              multiple: true;
-              onChange: (val: string[]) => void;
-              value: string[];
+              multiple: true
+              onChange: (val: string[]) => void
+              value: string[]
           }
-    );
+    )
 
 type ButtonContentProps = {
-    disabled: boolean;
-    dropdownArrow: boolean;
-    dropdownArrowClassName: string;
-    hideIcon: boolean;
-    hideText: boolean;
-    onChange: (moduleIds: string[]) => void;
-    placeholder: string;
-    showCount: boolean;
-    value: string | string[] | null;
-};
+    disabled: boolean
+    dropdownArrow: boolean
+    dropdownArrowClassName: string
+    hideIcon: boolean
+    hideText: boolean
+    onChange: (moduleIds: string[]) => void
+    placeholder: string
+    showCount: boolean
+    value: string | string[] | null
+}
 
 const ButtonContent: React.FC<ButtonContentProps> = (props) => {
     const {
@@ -61,9 +55,9 @@ const ButtonContent: React.FC<ButtonContentProps> = (props) => {
         placeholder,
         showCount,
         value,
-    } = props;
+    } = props
     // store hooks
-    const { getModuleById } = useModule();
+    const { getModuleById } = useModule()
 
     if (Array.isArray(value))
         return (
@@ -82,7 +76,7 @@ const ButtonContent: React.FC<ButtonContentProps> = (props) => {
                 ) : value.length > 0 ? (
                     <div className="flex items-center gap-2 py-0.5 max-w-full flex-grow truncate flex-wrap">
                         {value.map((moduleId) => {
-                            const moduleDetails = getModuleById(moduleId);
+                            const moduleDetails = getModuleById(moduleId)
                             return (
                                 <div
                                     key={moduleId}
@@ -102,8 +96,8 @@ const ButtonContent: React.FC<ButtonContentProps> = (props) => {
                                                 type="button"
                                                 className="flex-shrink-0"
                                                 onClick={() => {
-                                                    const newModuleIds = value.filter((m) => m !== moduleId);
-                                                    onChange(newModuleIds);
+                                                    const newModuleIds = value.filter((m) => m !== moduleId)
+                                                    onChange(newModuleIds)
                                                 }}
                                             >
                                                 <X className="h-2.5 w-2.5 text-custom-text-300 hover:text-red-500" />
@@ -111,7 +105,7 @@ const ButtonContent: React.FC<ButtonContentProps> = (props) => {
                                         </Tooltip>
                                     )}
                                 </div>
-                            );
+                            )
                         })}
                     </div>
                 ) : (
@@ -127,7 +121,7 @@ const ButtonContent: React.FC<ButtonContentProps> = (props) => {
                     />
                 )}
             </>
-        );
+        )
     else
         return (
             <>
@@ -140,8 +134,8 @@ const ButtonContent: React.FC<ButtonContentProps> = (props) => {
                     />
                 )}
             </>
-        );
-};
+        )
+}
 
 export const ModuleDropdown: React.FC<Props> = observer((props) => {
     const {
@@ -164,55 +158,55 @@ export const ModuleDropdown: React.FC<Props> = observer((props) => {
         showTooltip = false,
         tabIndex,
         value,
-    } = props;
+    } = props
     // states
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
     // refs
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
     // popper-js refs
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
 
-    const { getModuleNameById } = useModule();
+    const { getModuleNameById } = useModule()
 
     const handleClose = () => {
-        if (!isOpen) return;
-        setIsOpen(false);
-        onClose && onClose();
-    };
+        if (!isOpen) return
+        setIsOpen(false)
+        onClose && onClose()
+    }
 
     const toggleDropdown = () => {
-        setIsOpen((prevIsOpen) => !prevIsOpen);
-        if (isOpen) onClose && onClose();
-    };
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+        if (isOpen) onClose && onClose()
+    }
 
     const dropdownOnChange = (val: string & string[]) => {
-        onChange(val);
-        if (!multiple) handleClose();
-    };
+        onChange(val)
+        if (!multiple) handleClose()
+    }
 
-    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose);
+    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        toggleDropdown();
-    };
+        e.stopPropagation()
+        e.preventDefault()
+        toggleDropdown()
+    }
 
-    useOutsideClickDetector(dropdownRef, handleClose);
+    useOutsideClickDetector(dropdownRef, handleClose)
 
     const comboboxProps: any = {
         value,
         onChange: dropdownOnChange,
         disabled,
-    };
-    if (multiple) comboboxProps.multiple = true;
+    }
+    if (multiple) comboboxProps.multiple = true
 
     useEffect(() => {
         if (isOpen && inputRef.current) {
-            inputRef.current.focus();
+            inputRef.current.focus()
         }
-    }, [isOpen]);
+    }, [isOpen])
 
     return (
         <Combobox
@@ -291,5 +285,5 @@ export const ModuleDropdown: React.FC<Props> = observer((props) => {
                 />
             )}
         </Combobox>
-    );
-});
+    )
+})

@@ -1,13 +1,11 @@
-import useSWR from "swr";
 // fetch keys
-import { COMMENT_REACTION_LIST } from "@constants/fetch-keys";
+import { COMMENT_REACTION_LIST } from "@constants/fetch-keys"
+import { groupReactions } from "@helpers/emoji.helper"
+import { IssueReactionService } from "@services/issue"
+import useSWR from "swr"
+import { useUser } from "./store"
 
-import { IssueReactionService } from "@services/issue";
-
-import { groupReactions } from "@helpers/emoji.helper";
-import { useUser } from "./store";
-
-const issueReactionService = new IssueReactionService();
+const issueReactionService = new IssueReactionService()
 
 const useCommentReaction = (
     workspaceSlug?: string | string[] | null,
@@ -30,11 +28,11 @@ const useCommentReaction = (
                       commendId.toString()
                   )
             : null
-    );
+    )
 
-    const user = useUser();
+    const user = useUser()
 
-    const groupedReactions = groupReactions(commentReactions || [], "reaction");
+    const groupedReactions = groupReactions(commentReactions || [], "reaction")
 
     /**
      * @description Use this function to create user's reaction to an issue. This function will mutate the reactions state.
@@ -43,17 +41,17 @@ const useCommentReaction = (
      */
 
     const handleReactionCreate = async (reaction: string) => {
-        if (!workspaceSlug || !projectId || !commendId) return;
+        if (!workspaceSlug || !projectId || !commendId) return
 
         const data = await issueReactionService.createIssueCommentReaction(
             workspaceSlug.toString(),
             projectId.toString(),
             commendId.toString(),
             { reaction }
-        );
+        )
 
-        mutateCommentReactions((prev: any) => [...(prev || []), data]);
-    };
+        mutateCommentReactions((prev: any) => [...(prev || []), data])
+    }
 
     /**
      * @description Use this function to delete user's reaction from an issue. This function will mutate the reactions state.
@@ -62,23 +60,23 @@ const useCommentReaction = (
      */
 
     const handleReactionDelete = async (reaction: string) => {
-        if (!workspaceSlug || !projectId || !commendId) return;
+        if (!workspaceSlug || !projectId || !commendId) return
 
         mutateCommentReactions(
             (prevData: any) =>
                 prevData?.filter((r: any) => r.actor !== user?.currentUser?.id || r.reaction !== reaction) || [],
             false
-        );
+        )
 
         await issueReactionService.deleteIssueCommentReaction(
             workspaceSlug.toString(),
             projectId.toString(),
             commendId.toString(),
             reaction
-        );
+        )
 
-        mutateCommentReactions();
-    };
+        mutateCommentReactions()
+    }
 
     return {
         isLoading: !commentReactions && !error,
@@ -87,7 +85,7 @@ const useCommentReaction = (
         handleReactionCreate,
         handleReactionDelete,
         mutateCommentReactions,
-    } as const;
-};
+    } as const
+}
 
-export default useCommentReaction;
+export default useCommentReaction

@@ -4,19 +4,17 @@ import {
     StateGroupCompletedIcon,
     StateGroupStartedIcon,
     StateGroupUnstartedIcon,
-} from "@components/icons";
-
-import { TStateGroups } from "@servcy/types";
-
-import { STATE_GROUPS } from "@constants/state";
+} from "@components/icons"
+import { STATE_GROUPS } from "@constants/state"
+import { TStateGroups } from "@servcy/types"
 
 type Props = {
-    className?: string;
-    color?: string;
-    height?: string;
-    stateGroup: TStateGroups;
-    width?: string;
-};
+    className?: string
+    color?: string
+    height?: string
+    stateGroup: TStateGroups
+    width?: string
+}
 
 export const StateGroupIcon: React.FC<Props> = ({
     className = "",
@@ -33,7 +31,7 @@ export const StateGroupIcon: React.FC<Props> = ({
                 color={color ?? STATE_GROUPS["backlog"].color}
                 className={`flex-shrink-0 ${className}`}
             />
-        );
+        )
     else if (stateGroup === "cancelled")
         return (
             <StateGroupCancelledIcon
@@ -42,7 +40,7 @@ export const StateGroupIcon: React.FC<Props> = ({
                 color={color ?? STATE_GROUPS["cancelled"].color}
                 className={`flex-shrink-0 ${className}`}
             />
-        );
+        )
     else if (stateGroup === "completed")
         return (
             <StateGroupCompletedIcon
@@ -51,7 +49,7 @@ export const StateGroupIcon: React.FC<Props> = ({
                 color={color ?? STATE_GROUPS["completed"].color}
                 className={`flex-shrink-0 ${className}`}
             />
-        );
+        )
     else if (stateGroup === "started")
         return (
             <StateGroupStartedIcon
@@ -60,7 +58,7 @@ export const StateGroupIcon: React.FC<Props> = ({
                 color={color ?? STATE_GROUPS["started"].color}
                 className={`flex-shrink-0 ${className}`}
             />
-        );
+        )
     else
         return (
             <StateGroupUnstartedIcon
@@ -69,5 +67,5 @@ export const StateGroupIcon: React.FC<Props> = ({
                 color={color ?? STATE_GROUPS["unstarted"].color}
                 className={`flex-shrink-0 ${className}`}
             />
-        );
-};
+        )
+}

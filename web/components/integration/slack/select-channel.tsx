@@ -1,43 +1,38 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import useSWR, { mutate } from "swr";
-import { observer } from "mobx-react-lite";
-
-import { useApplication } from "@hooks/store";
-import useIntegrationPopup from "@hooks/use-integration-popup";
-
-import { AppInstallationService } from "@services/app_installation.service";
-
-import { Loader } from "@servcy/ui";
-
-import { IWorkspaceIntegration, ISlackIntegration } from "@servcy/types";
-
-import { SLACK_CHANNEL_INFO } from "@constants/fetch-keys";
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import { SLACK_CHANNEL_INFO } from "@constants/fetch-keys"
+import { useApplication } from "@hooks/store"
+import useIntegrationPopup from "@hooks/use-integration-popup"
+import { AppInstallationService } from "@services/app_installation.service"
+import { observer } from "mobx-react-lite"
+import useSWR, { mutate } from "swr"
+import { ISlackIntegration, IWorkspaceIntegration } from "@servcy/types"
+import { Loader } from "@servcy/ui"
 
 type Props = {
-    integration: IWorkspaceIntegration;
-};
+    integration: IWorkspaceIntegration
+}
 
-const appInstallationService = new AppInstallationService();
+const appInstallationService = new AppInstallationService()
 
 export const SelectChannel: React.FC<Props> = observer(({ integration }) => {
     // store hooks
     const {
         config: { envConfig },
-    } = useApplication();
+    } = useApplication()
     // states
-    const [slackChannelAvailabilityToggle, setSlackChannelAvailabilityToggle] = useState<boolean>(false);
-    const [slackChannel, setSlackChannel] = useState<ISlackIntegration | null>(null);
+    const [slackChannelAvailabilityToggle, setSlackChannelAvailabilityToggle] = useState<boolean>(false)
+    const [slackChannel, setSlackChannel] = useState<ISlackIntegration | null>(null)
 
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     const { startAuth } = useIntegrationPopup({
         provider: "slackChannel",
         stateParams: integration.id,
         github_app_name: envConfig?.github_client_id || "",
         slack_client_id: envConfig?.slack_client_id || "",
-    });
+    })
 
     const { data: projectIntegration } = useSWR(
         workspaceSlug && projectId && integration.id
@@ -51,30 +46,30 @@ export const SelectChannel: React.FC<Props> = observer(({ integration }) => {
                       integration.id as string
                   )
                 : null
-    );
+    )
 
     useEffect(() => {
         if (projectId && projectIntegration && projectIntegration.length > 0) {
             const projectSlackIntegrationCheck: ISlackIntegration | undefined = projectIntegration.find(
                 (_slack: ISlackIntegration) => _slack.project === projectId
-            );
+            )
             if (projectSlackIntegrationCheck) {
-                setSlackChannel(() => projectSlackIntegrationCheck);
-                setSlackChannelAvailabilityToggle(true);
+                setSlackChannel(() => projectSlackIntegrationCheck)
+                setSlackChannelAvailabilityToggle(true)
             }
         }
-    }, [projectIntegration, projectId]);
+    }, [projectIntegration, projectId])
 
     const handleDelete = async () => {
-        if (!workspaceSlug || !projectId) return;
-        if (projectIntegration.length === 0) return;
+        if (!workspaceSlug || !projectId) return
+        if (projectIntegration.length === 0) return
         mutate(SLACK_CHANNEL_INFO(workspaceSlug?.toString(), projectId?.toString()), (prevData: any) => {
-            if (!prevData) return;
-            return prevData.id !== integration.id;
+            if (!prevData) return
+            return prevData.id !== integration.id
         }).then(() => {
-            setSlackChannelAvailabilityToggle(false);
-            setSlackChannel(null);
-        });
+            setSlackChannelAvailabilityToggle(false)
+            setSlackChannel(null)
+        })
         appInstallationService
             .removeSlackChannel(
                 workspaceSlug as string,
@@ -82,12 +77,12 @@ export const SelectChannel: React.FC<Props> = observer(({ integration }) => {
                 integration.id as string,
                 slackChannel?.id
             )
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
     const handleAuth = async () => {
-        await startAuth();
-    };
+        await startAuth()
+    }
 
     return (
         <>
@@ -98,7 +93,7 @@ export const SelectChannel: React.FC<Props> = observer(({ integration }) => {
                     role="switch"
                     aria-checked
                     onClick={() => {
-                        slackChannelAvailabilityToggle ? handleDelete() : handleAuth();
+                        slackChannelAvailabilityToggle ? handleDelete() : handleAuth()
                     }}
                 >
                     <span
@@ -114,5 +109,5 @@ export const SelectChannel: React.FC<Props> = observer(({ integration }) => {
                 </Loader>
             )}
         </>
-    );
-});
+    )
+})

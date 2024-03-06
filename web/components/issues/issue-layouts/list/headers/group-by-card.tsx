@@ -1,61 +1,58 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { ExistingIssuesListModal } from "@components/core"
+import { CreateUpdateIssueModal } from "@components/issues"
+import { TCreateModalStoreTypes } from "@constants/issue"
+import { useEventTracker } from "@hooks/store"
 // lucide icons
-import { CircleDashed, Plus } from "lucide-react";
-
-import { CreateUpdateIssueModal } from "@components/issues";
-import { ExistingIssuesListModal } from "@components/core";
-import { CustomMenu } from "@servcy/ui";
+import { CircleDashed, Plus } from "lucide-react"
 // mobx
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker } from "@hooks/store";
-
-import { TIssue, ISearchIssueResponse } from "@servcy/types";
-import toast from "react-hot-toast";
-import { useState } from "react";
-import { TCreateModalStoreTypes } from "@constants/issue";
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { ISearchIssueResponse, TIssue } from "@servcy/types"
+import { CustomMenu } from "@servcy/ui"
 
 interface IHeaderGroupByCard {
-    icon?: React.ReactNode;
-    title: string;
-    count: number;
-    issuePayload: Partial<TIssue>;
-    disableIssueCreation?: boolean;
-    storeType: TCreateModalStoreTypes;
-    addIssuesToView?: (issueIds: string[]) => Promise<TIssue>;
+    icon?: React.ReactNode
+    title: string
+    count: number
+    issuePayload: Partial<TIssue>
+    disableIssueCreation?: boolean
+    storeType: TCreateModalStoreTypes
+    addIssuesToView?: (issueIds: string[]) => Promise<TIssue>
 }
 
 export const HeaderGroupByCard = observer(
     ({ icon, title, count, issuePayload, disableIssueCreation, storeType, addIssuesToView }: IHeaderGroupByCard) => {
-        const router = useRouter();
-        const { workspaceSlug, projectId, moduleId, cycleId } = router.query;
+        const router = useRouter()
+        const { workspaceSlug, projectId, moduleId, cycleId } = router.query
 
-        const { setTrackElement } = useEventTracker();
+        const { setTrackElement } = useEventTracker()
 
-        const [isOpen, setIsOpen] = useState(false);
+        const [isOpen, setIsOpen] = useState(false)
 
-        const [openExistingIssueListModal, setOpenExistingIssueListModal] = useState(false);
+        const [openExistingIssueListModal, setOpenExistingIssueListModal] = useState(false)
 
-        const isDraftIssue = router.pathname.includes("draft-issue");
+        const isDraftIssue = router.pathname.includes("draft-issue")
 
-        const renderExistingIssueModal = moduleId || cycleId;
-        const ExistingIssuesListModalPayload = moduleId ? { module: moduleId.toString() } : { cycle: true };
+        const renderExistingIssueModal = moduleId || cycleId
+        const ExistingIssuesListModalPayload = moduleId ? { module: moduleId.toString() } : { cycle: true }
 
         const handleAddIssuesToView = async (data: ISearchIssueResponse[]) => {
-            if (!workspaceSlug || !projectId) return;
+            if (!workspaceSlug || !projectId) return
 
-            const issues = data.map((i) => i.id);
+            const issues = data.map((i) => i.id)
 
             try {
-                addIssuesToView && addIssuesToView(issues);
+                addIssuesToView && addIssuesToView(issues)
             } catch (error) {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Selected issues could not be added to the cycle. Please try again.",
-                });
+                })
             }
-        };
+        }
 
         return (
             <>
@@ -80,16 +77,16 @@ export const HeaderGroupByCard = observer(
                             >
                                 <CustomMenu.MenuItem
                                     onClick={() => {
-                                        setTrackElement("List layout");
-                                        setIsOpen(true);
+                                        setTrackElement("List layout")
+                                        setIsOpen(true)
                                     }}
                                 >
                                     <span className="flex items-center justify-start gap-2">Create issue</span>
                                 </CustomMenu.MenuItem>
                                 <CustomMenu.MenuItem
                                     onClick={() => {
-                                        setTrackElement("List layout");
-                                        setOpenExistingIssueListModal(true);
+                                        setTrackElement("List layout")
+                                        setOpenExistingIssueListModal(true)
                                     }}
                                 >
                                     <span className="flex items-center justify-start gap-2">Add an existing issue</span>
@@ -99,8 +96,8 @@ export const HeaderGroupByCard = observer(
                             <div
                                 className="flex h-5 w-5 flex-shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-sm transition-all hover:bg-custom-background-80"
                                 onClick={() => {
-                                    setTrackElement("List layout");
-                                    setIsOpen(true);
+                                    setTrackElement("List layout")
+                                    setIsOpen(true)
                                 }}
                             >
                                 <Plus width={14} strokeWidth={2} />
@@ -127,6 +124,6 @@ export const HeaderGroupByCard = observer(
                     )}
                 </div>
             </>
-        );
+        )
     }
-);
+)

@@ -1,26 +1,24 @@
-import { FC } from "react";
-
-import { ChartViewRoot, IBlockUpdateData, IGanttBlock } from "@components/gantt-chart";
-
-import { GanttStoreProvider } from "@components/gantt-chart/contexts";
+import { FC } from "react"
+import { ChartViewRoot, IBlockUpdateData, IGanttBlock } from "@components/gantt-chart"
+import { GanttStoreProvider } from "@components/gantt-chart/contexts"
 
 type GanttChartRootProps = {
-    border?: boolean;
-    title: string;
-    loaderTitle: string;
-    blocks: IGanttBlock[] | null;
-    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void;
-    blockToRender: (data: any) => React.ReactNode;
-    sidebarToRender: (props: any) => React.ReactNode;
-    quickAdd?: React.JSX.Element | undefined;
-    enableBlockLeftResize?: boolean;
-    enableBlockRightResize?: boolean;
-    enableBlockMove?: boolean;
-    enableReorder?: boolean;
-    enableAddBlock?: boolean;
-    bottomSpacing?: boolean;
-    showAllBlocks?: boolean;
-};
+    border?: boolean
+    title: string
+    loaderTitle: string
+    blocks: IGanttBlock[] | null
+    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void
+    blockToRender: (data: any) => React.ReactNode
+    sidebarToRender: (props: any) => React.ReactNode
+    quickAdd?: React.JSX.Element | undefined
+    enableBlockLeftResize?: boolean
+    enableBlockRightResize?: boolean
+    enableBlockMove?: boolean
+    enableReorder?: boolean
+    enableAddBlock?: boolean
+    bottomSpacing?: boolean
+    showAllBlocks?: boolean
+}
 
 export const GanttChartRoot: FC<GanttChartRootProps> = (props) => {
     const {
@@ -39,7 +37,7 @@ export const GanttChartRoot: FC<GanttChartRootProps> = (props) => {
         bottomSpacing = false,
         showAllBlocks = false,
         quickAdd,
-    } = props;
+    } = props
 
     return (
         <GanttStoreProvider>
@@ -61,5 +59,5 @@ export const GanttChartRoot: FC<GanttChartRootProps> = (props) => {
                 quickAdd={quickAdd}
             />
         </GanttStoreProvider>
-    );
-};
+    )
+}

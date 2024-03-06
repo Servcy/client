@@ -1,33 +1,30 @@
-import { observer } from "mobx-react-lite";
-import { X } from "lucide-react";
-
-import { useCycle } from "@hooks/store";
-
-import { CycleGroupIcon } from "@servcy/ui";
-
-import { TCycleGroups } from "@servcy/types";
+import { useCycle } from "@hooks/store"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TCycleGroups } from "@servcy/types"
+import { CycleGroupIcon } from "@servcy/ui"
 
 type Props = {
-    handleRemove: (val: string) => void;
-    values: string[];
-    editable: boolean | undefined;
-};
+    handleRemove: (val: string) => void
+    values: string[]
+    editable: boolean | undefined
+}
 
 export const AppliedCycleFilters: React.FC<Props> = observer((props) => {
-    const { handleRemove, values, editable } = props;
+    const { handleRemove, values, editable } = props
     // store hooks
-    const { getCycleById } = useCycle();
+    const { getCycleById } = useCycle()
 
     return (
         <>
             {values.map((cycleId) => {
-                const cycleDetails = getCycleById(cycleId) ?? null;
+                const cycleDetails = getCycleById(cycleId) ?? null
 
-                if (!cycleDetails) return null;
+                if (!cycleDetails) return null
 
                 const cycleStatus = (
                     cycleDetails?.status ? cycleDetails?.status.toLocaleLowerCase() : "draft"
-                ) as TCycleGroups;
+                ) as TCycleGroups
 
                 return (
                     <div key={cycleId} className="flex items-center gap-1 rounded bg-custom-background-80 p-1 text-xs">
@@ -43,8 +40,8 @@ export const AppliedCycleFilters: React.FC<Props> = observer((props) => {
                             </button>
                         )}
                     </div>
-                );
+                )
             })}
         </>
-    );
-});
+    )
+})

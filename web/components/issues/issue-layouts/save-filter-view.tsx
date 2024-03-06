@@ -1,19 +1,18 @@
-import { FC, useState } from "react";
-import { Plus } from "lucide-react";
-import { Button } from "@servcy/ui";
-
-import { CreateUpdateProjectViewModal } from "@components/views";
+import { FC, useState } from "react"
+import { CreateUpdateProjectViewModal } from "@components/views"
+import { Plus } from "lucide-react"
+import { Button } from "@servcy/ui"
 
 interface ISaveFilterView {
-    workspaceSlug: string;
-    projectId: string;
-    filterParams: any;
+    workspaceSlug: string
+    projectId: string
+    filterParams: any
 }
 
 export const SaveFilterView: FC<ISaveFilterView> = (props) => {
-    const { workspaceSlug, projectId, filterParams } = props;
+    const { workspaceSlug, projectId, filterParams } = props
 
-    const [viewModal, setViewModal] = useState<boolean>(false);
+    const [viewModal, setViewModal] = useState<boolean>(false)
 
     return (
         <div>
@@ -29,5 +28,5 @@ export const SaveFilterView: FC<ISaveFilterView> = (props) => {
                 Save View
             </Button>
         </div>
-    );
-};
+    )
+}

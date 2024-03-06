@@ -1,50 +1,46 @@
 // nivo
-import { BarDatum } from "@nivo/bar";
-
-import { CustomTooltip } from "./custom-tooltip";
-import { Tooltip } from "@servcy/ui";
-
-import { BarGraph } from "@components/ui";
-
-import { findStringWithMostCharacters } from "@helpers/array.helper";
-import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";
-
-import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
+import { BarGraph } from "@components/ui"
+import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper"
+import { findStringWithMostCharacters } from "@helpers/array.helper"
+import { BarDatum } from "@nivo/bar"
+import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
+import { CustomTooltip } from "./custom-tooltip"
 
 type Props = {
-    analytics: IAnalyticsResponse;
+    analytics: IAnalyticsResponse
     barGraphData: {
-        data: BarDatum[];
-        xAxisKeys: string[];
-    };
-    params: IAnalyticsParams;
-    yAxisKey: "count" | "estimate";
-    fullScreen: boolean;
-};
+        data: BarDatum[]
+        xAxisKeys: string[]
+    }
+    params: IAnalyticsParams
+    yAxisKey: "count" | "estimate"
+    fullScreen: boolean
+}
 
 export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, params, yAxisKey, fullScreen }) => {
     const generateYAxisTickValues = () => {
-        if (!analytics) return [];
+        if (!analytics) return []
 
-        let data: number[] = [];
+        let data: number[] = []
 
         if (params.segment)
             // find the total no of issues in each segment
             data = Object.keys(analytics.distribution).map((segment) => {
-                let totalSegmentIssues = 0;
+                let totalSegmentIssues = 0
 
                 analytics.distribution[segment].map((s) => {
-                    totalSegmentIssues += s[yAxisKey] as number;
-                });
+                    totalSegmentIssues += s[yAxisKey] as number
+                })
 
-                return totalSegmentIssues;
-            });
-        else data = barGraphData.data.map((d) => d[yAxisKey] as number);
+                return totalSegmentIssues
+            })
+        else data = barGraphData.data.map((d) => d[yAxisKey] as number)
 
-        return data;
-    };
+        return data
+    }
 
-    const longestXAxisLabel = findStringWithMostCharacters(barGraphData.data.map((d) => `${d.name}`));
+    const longestXAxisLabel = findStringWithMostCharacters(barGraphData.data.map((d) => `${d.name}`))
 
     return (
         <BarGraph
@@ -75,7 +71,7 @@ export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, param
                         ? (datum) => {
                               const assignee = analytics.extras.assignee_details?.find(
                                   (a) => a?.assignees__id === datum?.value
-                              );
+                              )
 
                               if (assignee?.assignees__avatar && assignee?.assignees__avatar !== "")
                                   return (
@@ -91,7 +87,7 @@ export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, param
                                               />
                                           </g>
                                       </Tooltip>
-                                  );
+                                  )
                               else
                                   return (
                                       <Tooltip tooltipContent={assignee?.assignees__display_name}>
@@ -113,7 +109,7 @@ export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, param
                                               </text>
                                           </g>
                                       </Tooltip>
-                                  );
+                                  )
                           }
                         : (datum) => (
                               <g transform={`translate(${datum.x},${datum.y + 10})`}>
@@ -134,5 +130,5 @@ export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, param
                 axis: {},
             }}
         />
-    );
-};
+    )
+}

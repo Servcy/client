@@ -1,18 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import { mutate } from "swr";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-import { ChevronLeft, LogOut, MoveLeft, Plus, UserPlus } from "lucide-react";
-
-import { useApplication, useUser, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Tooltip } from "@servcy/ui";
-
-import { PROFILE_ACTION_LINKS } from "@constants/profile";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useEffect, useRef, useState } from "react"
+import { PROFILE_ACTION_LINKS } from "@constants/profile"
+import { useApplication, useUser, useWorkspace } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { ChevronLeft, LogOut, MoveLeft, Plus, UserPlus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
+import { mutate } from "swr"
+import { Tooltip } from "@servcy/ui"
 
 const WORKSPACE_ACTION_LINKS = [
     {
@@ -27,73 +24,73 @@ const WORKSPACE_ACTION_LINKS = [
         label: "Invitations",
         href: "/invitations",
     },
-];
+]
 
 export const ProfileLayoutSidebar = observer(() => {
     // states
-    const [isSigningOut, setIsSigningOut] = useState(false);
+    const [isSigningOut, setIsSigningOut] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // next themes
-    const { setTheme } = useTheme();
+    const { setTheme } = useTheme()
     // toast
 
     // store hooks
     const {
         theme: { sidebarCollapsed, toggleSidebar },
-    } = useApplication();
-    const { currentUser, currentUserSettings, signOut } = useUser();
-    const { workspaces } = useWorkspace();
+    } = useApplication()
+    const { currentUser, currentUserSettings, signOut } = useUser()
+    const { workspaces } = useWorkspace()
 
-    const workspacesList = Object.values(workspaces ?? {});
+    const workspacesList = Object.values(workspaces ?? {})
 
     // redirect url for normal mode
     const redirectWorkspaceSlug =
         currentUserSettings?.workspace?.last_workspace_slug ||
         currentUserSettings?.workspace?.fallback_workspace_slug ||
-        "";
+        ""
 
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null)
 
     useOutsideClickDetector(ref, () => {
         if (sidebarCollapsed === false) {
             if (window.innerWidth < 768) {
-                toggleSidebar();
+                toggleSidebar()
             }
         }
-    });
+    })
 
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth <= 768) {
-                toggleSidebar(true);
+                toggleSidebar(true)
             }
-        };
-        handleResize();
-        window.addEventListener("resize", handleResize);
+        }
+        handleResize()
+        window.addEventListener("resize", handleResize)
         return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, [toggleSidebar]);
+            window.removeEventListener("resize", handleResize)
+        }
+    }, [toggleSidebar])
 
     const handleItemClick = () => {
         if (window.innerWidth < 768) {
-            toggleSidebar();
+            toggleSidebar()
         }
-    };
+    }
 
     const handleSignOut = async () => {
-        setIsSigningOut(true);
+        setIsSigningOut(true)
 
         await signOut()
             .then(() => {
-                mutate("CURRENT_USER_DETAILS", null);
-                setTheme("system");
-                router.push("/");
+                mutate("CURRENT_USER_DETAILS", null)
+                setTheme("system")
+                router.push("/")
             })
             .catch(() => toast.error("Failed to sign out. Please try again."))
-            .finally(() => setIsSigningOut(false));
-    };
+            .finally(() => setIsSigningOut(false))
+    }
 
     return (
         <div
@@ -127,7 +124,7 @@ export const ProfileLayoutSidebar = observer(() => {
                     )}
                     <div className="mt-2 h-full space-y-1.5 overflow-y-auto">
                         {PROFILE_ACTION_LINKS.map((link) => {
-                            if (link.key === "change-password" && currentUser?.is_password_autoset) return null;
+                            if (link.key === "change-password" && currentUser?.is_password_autoset) return null
 
                             return (
                                 <Link
@@ -154,7 +151,7 @@ export const ProfileLayoutSidebar = observer(() => {
                                         </div>
                                     </Tooltip>
                                 </Link>
-                            );
+                            )
                         })}
                     </div>
                 </div>
@@ -262,5 +259,5 @@ export const ProfileLayoutSidebar = observer(() => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

@@ -1,26 +1,23 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent } from "./";
+import { FC } from "react"
 // component helpers
-import { issueRelationObject } from "@components/issues/issue-detail/relation-select";
+import { issueRelationObject } from "@components/issues/issue-detail/relation-select"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react"
+import { TIssueRelationTypes } from "@servcy/types"
+import { IssueActivityBlockComponent } from "./"
 
-import { TIssueRelationTypes } from "@servcy/types";
-
-type TIssueRelationActivity = { activityId: string; ends: "top" | "bottom" | undefined };
+type TIssueRelationActivity = { activityId: string; ends: "top" | "bottom" | undefined }
 
 export const IssueRelationActivity: FC<TIssueRelationActivity> = observer((props) => {
-    const { activityId, ends } = props;
+    const { activityId, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             icon={activity.field ? issueRelationObject[activity.field as TIssueRelationTypes].icon(14) : <></>}
@@ -50,5 +47,5 @@ export const IssueRelationActivity: FC<TIssueRelationActivity> = observer((props
                 )}
             </>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

@@ -1,33 +1,27 @@
-import { observer } from "mobx-react-lite";
-import Image from "next/image";
-import React from "react";
-
-import { useApplication, useUser } from "@hooks/store";
-
-import DefaultLayout from "@layouts/DefaultLayout";
-
-import { SignUpRoot } from "@components/account";
-import { PageHead } from "@components/core";
-
-import { Spinner } from "@servcy/ui";
-
-import ServcyLogo from "public/logo.png";
-
-import { NextPageWithLayout } from "@/types/types";
+import Image from "next/image"
+import React from "react"
+import { SignUpRoot } from "@components/account"
+import { PageHead } from "@components/core"
+import { useApplication, useUser } from "@hooks/store"
+import DefaultLayout from "@layouts/DefaultLayout"
+import { observer } from "mobx-react-lite"
+import ServcyLogo from "public/logo.png"
+import { Spinner } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const SignUpPage: NextPageWithLayout = observer(() => {
     // store hooks
     const {
         config: { envConfig },
-    } = useApplication();
-    const { currentUser } = useUser();
+    } = useApplication()
+    const { currentUser } = useUser()
 
     if (currentUser || !envConfig)
         return (
             <div className="grid h-screen place-items-center">
                 <Spinner />
             </div>
-        );
+        )
 
     return (
         <>
@@ -47,11 +41,11 @@ const SignUpPage: NextPageWithLayout = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})
 
 SignUpPage.getWrapper = function getWrapper(page: React.ReactElement) {
-    return <DefaultLayout>{page}</DefaultLayout>;
-};
+    return <DefaultLayout>{page}</DefaultLayout>
+}
 
-export default SignUpPage;
+export default SignUpPage

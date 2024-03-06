@@ -1,13 +1,11 @@
-import isArray from "lodash/isArray";
-import isEmpty from "lodash/isEmpty";
-import pickBy from "lodash/pickBy";
-import set from "lodash/set";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-// base class
-import { IssueFilterHelperStore } from "../helpers/issue-filter-helper.store";
-
-import { handleIssueQueryParamsByLayout } from "@helpers/issue.helper";
-
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+import { handleIssueQueryParamsByLayout } from "@helpers/issue.helper"
+import { IssueFiltersService } from "@services/issue_filter.service"
+import isArray from "lodash/isArray"
+import isEmpty from "lodash/isEmpty"
+import pickBy from "lodash/pickBy"
+import set from "lodash/set"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import {
     IIssueDisplayFilterOptions,
     IIssueDisplayProperties,
@@ -15,39 +13,37 @@ import {
     IIssueFilters,
     TIssueKanbanFilters,
     TIssueParams,
-} from "@servcy/types";
-import { IIssueRootStore } from "../root.store";
-
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-
-import { IssueFiltersService } from "@services/issue_filter.service";
+} from "@servcy/types"
+// base class
+import { IssueFilterHelperStore } from "../helpers/issue-filter-helper.store"
+import { IIssueRootStore } from "../root.store"
 
 export interface IDraftIssuesFilter {
     // observables
-    filters: Record<string, IIssueFilters>; // Record defines projectId as key and IIssueFilters as value
+    filters: Record<string, IIssueFilters> // Record defines projectId as key and IIssueFilters as value
     // computed
-    issueFilters: IIssueFilters | undefined;
-    appliedFilters: Partial<Record<TIssueParams, string | boolean>> | undefined;
+    issueFilters: IIssueFilters | undefined
+    appliedFilters: Partial<Record<TIssueParams, string | boolean>> | undefined
     // action
-    fetchFilters: (workspaceSlug: string, projectId: string) => Promise<void>;
+    fetchFilters: (workspaceSlug: string, projectId: string) => Promise<void>
     updateFilters: (
         workspaceSlug: string,
         projectId: string,
         filterType: EIssueFilterType,
         filters: IIssueFilterOptions | IIssueDisplayFilterOptions | IIssueDisplayProperties | TIssueKanbanFilters
-    ) => Promise<void>;
+    ) => Promise<void>
 }
 
 export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftIssuesFilter {
     // observables
-    filters: { [projectId: string]: IIssueFilters } = {};
+    filters: { [projectId: string]: IIssueFilters } = {}
     // root store
-    rootIssueStore: IIssueRootStore;
+    rootIssueStore: IIssueRootStore
 
-    issueFilterService;
+    issueFilterService
 
     constructor(_rootStore: IIssueRootStore) {
-        super();
+        super()
         makeObservable(this, {
             // observables
             filters: observable,
@@ -57,39 +53,39 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
             // actions
             fetchFilters: action,
             updateFilters: action,
-        });
+        })
         // root store
-        this.rootIssueStore = _rootStore;
+        this.rootIssueStore = _rootStore
 
-        this.issueFilterService = new IssueFiltersService();
+        this.issueFilterService = new IssueFiltersService()
     }
 
     get issueFilters() {
-        const projectId = this.rootIssueStore.projectId;
-        if (!projectId) return undefined;
+        const projectId = this.rootIssueStore.projectId
+        if (!projectId) return undefined
 
-        const displayFilters = this.filters[projectId] || undefined;
-        if (!projectId || isEmpty(displayFilters)) return undefined;
+        const displayFilters = this.filters[projectId] || undefined
+        if (!projectId || isEmpty(displayFilters)) return undefined
 
-        const _filters: IIssueFilters = this.computedIssueFilters(displayFilters);
+        const _filters: IIssueFilters = this.computedIssueFilters(displayFilters)
 
-        return _filters;
+        return _filters
     }
 
     get appliedFilters() {
-        const userFilters = this.issueFilters;
-        if (!userFilters) return undefined;
+        const userFilters = this.issueFilters
+        if (!userFilters) return undefined
 
-        const filteredParams = handleIssueQueryParamsByLayout(userFilters?.displayFilters?.layout, "issues");
-        if (!filteredParams) return undefined;
+        const filteredParams = handleIssueQueryParamsByLayout(userFilters?.displayFilters?.layout, "issues")
+        if (!filteredParams) return undefined
 
         const filteredRouteParams: Partial<Record<TIssueParams, string | boolean>> = this.computedFilteredParams(
             userFilters?.filters as IIssueFilterOptions,
             userFilters?.displayFilters as IIssueDisplayFilterOptions,
             filteredParams
-        );
+        )
 
-        return filteredRouteParams;
+        return filteredRouteParams
     }
 
     fetchFilters = async (workspaceSlug: string, projectId: string) => {
@@ -99,30 +95,30 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                 workspaceSlug,
                 projectId,
                 undefined
-            );
+            )
 
-            const filters: IIssueFilterOptions = this.computedFilters(_filters?.filters);
-            const displayFilters: IIssueDisplayFilterOptions = this.computedDisplayFilters(_filters?.display_filters);
+            const filters: IIssueFilterOptions = this.computedFilters(_filters?.filters)
+            const displayFilters: IIssueDisplayFilterOptions = this.computedDisplayFilters(_filters?.display_filters)
             const displayProperties: IIssueDisplayProperties = this.computedDisplayProperties(
                 _filters?.display_properties
-            );
+            )
             const kanbanFilters = {
                 group_by: [],
                 sub_group_by: [],
-            };
-            kanbanFilters.group_by = _filters?.kanban_filters?.group_by || [];
-            kanbanFilters.sub_group_by = _filters?.kanban_filters?.sub_group_by || [];
+            }
+            kanbanFilters.group_by = _filters?.kanban_filters?.group_by || []
+            kanbanFilters.sub_group_by = _filters?.kanban_filters?.sub_group_by || []
 
             runInAction(() => {
-                set(this.filters, [projectId, "filters"], filters);
-                set(this.filters, [projectId, "displayFilters"], displayFilters);
-                set(this.filters, [projectId, "displayProperties"], displayProperties);
-                set(this.filters, [projectId, "kanbanFilters"], kanbanFilters);
-            });
+                set(this.filters, [projectId, "filters"], filters)
+                set(this.filters, [projectId, "displayFilters"], displayFilters)
+                set(this.filters, [projectId, "displayProperties"], displayProperties)
+                set(this.filters, [projectId, "kanbanFilters"], kanbanFilters)
+            })
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     updateFilters = async (
         workspaceSlug: string,
@@ -131,19 +127,19 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
         filters: IIssueFilterOptions | IIssueDisplayFilterOptions | IIssueDisplayProperties | TIssueKanbanFilters
     ) => {
         try {
-            if (isEmpty(this.filters) || isEmpty(this.filters[projectId]) || isEmpty(filters)) return;
+            if (isEmpty(this.filters) || isEmpty(this.filters[projectId]) || isEmpty(filters)) return
 
             const _filters = {
                 filters: this.filters[projectId].filters as IIssueFilterOptions,
                 displayFilters: this.filters[projectId].displayFilters as IIssueDisplayFilterOptions,
                 displayProperties: this.filters[projectId].displayProperties as IIssueDisplayProperties,
                 kanbanFilters: this.filters[projectId].kanbanFilters as TIssueKanbanFilters,
-            };
+            }
 
             switch (type) {
                 case EIssueFilterType.FILTERS:
-                    const updatedFilters = filters as IIssueFilterOptions;
-                    _filters.filters = { ..._filters.filters, ...updatedFilters };
+                    const updatedFilters = filters as IIssueFilterOptions
+                    _filters.filters = { ..._filters.filters, ...updatedFilters }
 
                     runInAction(() => {
                         Object.keys(updatedFilters).forEach((_key) => {
@@ -151,19 +147,19 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                                 this.filters,
                                 [projectId, "filters", _key],
                                 updatedFilters[_key as keyof IIssueFilterOptions]
-                            );
-                        });
-                    });
-                    const appliedFilters = _filters.filters || {};
+                            )
+                        })
+                    })
+                    const appliedFilters = _filters.filters || {}
                     const filteredFilters = pickBy(
                         appliedFilters,
                         (value) => value && isArray(value) && value.length > 0
-                    );
+                    )
                     this.rootIssueStore.draftIssues.fetchIssues(
                         workspaceSlug,
                         projectId,
                         isEmpty(filteredFilters) ? "init-loader" : "mutation"
-                    );
+                    )
                     this.handleIssuesLocalFilters.set(
                         EIssuesStoreType.DRAFT,
                         type,
@@ -173,29 +169,29 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                         {
                             filters: _filters.filters,
                         }
-                    );
-                    break;
+                    )
+                    break
                 case EIssueFilterType.DISPLAY_FILTERS:
-                    const updatedDisplayFilters = filters as IIssueDisplayFilterOptions;
-                    _filters.displayFilters = { ..._filters.displayFilters, ...updatedDisplayFilters };
+                    const updatedDisplayFilters = filters as IIssueDisplayFilterOptions
+                    _filters.displayFilters = { ..._filters.displayFilters, ...updatedDisplayFilters }
 
                     // set sub_group_by to null if group_by is set to null
                     if (_filters.displayFilters.group_by === null) {
-                        _filters.displayFilters.sub_group_by = null;
-                        updatedDisplayFilters.sub_group_by = null;
+                        _filters.displayFilters.sub_group_by = null
+                        updatedDisplayFilters.sub_group_by = null
                     }
                     // set sub_group_by to null if layout is switched to kanban group_by and sub_group_by are same
                     if (
                         _filters.displayFilters.layout === "kanban" &&
                         _filters.displayFilters.group_by === _filters.displayFilters.sub_group_by
                     ) {
-                        _filters.displayFilters.sub_group_by = null;
-                        updatedDisplayFilters.sub_group_by = null;
+                        _filters.displayFilters.sub_group_by = null
+                        updatedDisplayFilters.sub_group_by = null
                     }
                     // set group_by to state if layout is switched to kanban and group_by is null
                     if (_filters.displayFilters.layout === "kanban" && _filters.displayFilters.group_by === null) {
-                        _filters.displayFilters.group_by = "state";
-                        updatedDisplayFilters.group_by = "state";
+                        _filters.displayFilters.group_by = "state"
+                        updatedDisplayFilters.group_by = "state"
                     }
 
                     runInAction(() => {
@@ -204,12 +200,12 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                                 this.filters,
                                 [projectId, "displayFilters", _key],
                                 updatedDisplayFilters[_key as keyof IIssueDisplayFilterOptions]
-                            );
-                        });
-                    });
+                            )
+                        })
+                    })
 
                     if (this.requiresServerUpdate(updatedDisplayFilters))
-                        this.rootIssueStore.draftIssues.fetchIssues(workspaceSlug, projectId, "mutation");
+                        this.rootIssueStore.draftIssues.fetchIssues(workspaceSlug, projectId, "mutation")
 
                     this.handleIssuesLocalFilters.set(
                         EIssuesStoreType.DRAFT,
@@ -220,12 +216,12 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                         {
                             display_filters: _filters.displayFilters,
                         }
-                    );
+                    )
 
-                    break;
+                    break
                 case EIssueFilterType.DISPLAY_PROPERTIES:
-                    const updatedDisplayProperties = filters as IIssueDisplayProperties;
-                    _filters.displayProperties = { ..._filters.displayProperties, ...updatedDisplayProperties };
+                    const updatedDisplayProperties = filters as IIssueDisplayProperties
+                    _filters.displayProperties = { ..._filters.displayProperties, ...updatedDisplayProperties }
 
                     runInAction(() => {
                         Object.keys(updatedDisplayProperties).forEach((_key) => {
@@ -233,9 +229,9 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                                 this.filters,
                                 [projectId, "displayProperties", _key],
                                 updatedDisplayProperties[_key as keyof IIssueDisplayProperties]
-                            );
-                        });
-                    });
+                            )
+                        })
+                    })
 
                     this.handleIssuesLocalFilters.set(
                         EIssuesStoreType.DRAFT,
@@ -246,14 +242,14 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                         {
                             display_properties: _filters.displayProperties,
                         }
-                    );
-                    break;
+                    )
+                    break
 
                 case EIssueFilterType.KANBAN_FILTERS:
-                    const updatedKanbanFilters = filters as TIssueKanbanFilters;
-                    _filters.kanbanFilters = { ..._filters.kanbanFilters, ...updatedKanbanFilters };
+                    const updatedKanbanFilters = filters as TIssueKanbanFilters
+                    _filters.kanbanFilters = { ..._filters.kanbanFilters, ...updatedKanbanFilters }
 
-                    const currentUserId = this.rootIssueStore.currentUserId;
+                    const currentUserId = this.rootIssueStore.currentUserId
                     if (currentUserId)
                         this.handleIssuesLocalFilters.set(
                             EIssuesStoreType.PROJECT,
@@ -264,7 +260,7 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                             {
                                 kanban_filters: _filters.kanbanFilters,
                             }
-                        );
+                        )
 
                     runInAction(() => {
                         Object.keys(updatedKanbanFilters).forEach((_key) => {
@@ -272,17 +268,17 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
                                 this.filters,
                                 [projectId, "kanbanFilters", _key],
                                 updatedKanbanFilters[_key as keyof TIssueKanbanFilters]
-                            );
-                        });
-                    });
+                            )
+                        })
+                    })
 
-                    break;
+                    break
                 default:
-                    break;
+                    break
             }
         } catch (error) {
-            this.fetchFilters(workspaceSlug, projectId);
-            throw error;
+            this.fetchFilters(workspaceSlug, projectId)
+            throw error
         }
-    };
+    }
 }

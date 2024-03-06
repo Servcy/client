@@ -1,19 +1,16 @@
-import React from "react";
-
-import { Tooltip } from "@servcy/ui";
-
-import { TIssueLayouts } from "@servcy/types";
-
-import { ISSUE_LAYOUTS } from "@constants/issue";
+import React from "react"
+import { ISSUE_LAYOUTS } from "@constants/issue"
+import { TIssueLayouts } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
 
 type Props = {
-    layouts: TIssueLayouts[];
-    onChange: (layout: TIssueLayouts) => void;
-    selectedLayout: TIssueLayouts | undefined;
-};
+    layouts: TIssueLayouts[]
+    onChange: (layout: TIssueLayouts) => void
+    selectedLayout: TIssueLayouts | undefined
+}
 
 export const LayoutSelection: React.FC<Props> = (props) => {
-    const { layouts, onChange, selectedLayout } = props;
+    const { layouts, onChange, selectedLayout } = props
 
     return (
         <div className="flex items-center gap-1 rounded bg-custom-background-80 p-1">
@@ -37,5 +34,5 @@ export const LayoutSelection: React.FC<Props> = (props) => {
                 </Tooltip>
             ))}
         </div>
-    );
-};
+    )
+}

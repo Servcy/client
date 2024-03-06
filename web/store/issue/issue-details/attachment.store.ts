@@ -1,51 +1,49 @@
-import concat from "lodash/concat";
-import pull from "lodash/pull";
-import set from "lodash/set";
-import uniq from "lodash/uniq";
-import update from "lodash/update";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-
-import { IssueAttachmentService } from "@services/issue";
-
-import { TIssueAttachment, TIssueAttachmentIdMap, TIssueAttachmentMap } from "@servcy/types";
-import { IIssueDetail } from "./root.store";
+import { IssueAttachmentService } from "@services/issue"
+import concat from "lodash/concat"
+import pull from "lodash/pull"
+import set from "lodash/set"
+import uniq from "lodash/uniq"
+import update from "lodash/update"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { TIssueAttachment, TIssueAttachmentIdMap, TIssueAttachmentMap } from "@servcy/types"
+import { IIssueDetail } from "./root.store"
 
 export interface IIssueAttachmentStoreActions {
-    addAttachments: (issueId: string, attachments: TIssueAttachment[]) => void;
-    fetchAttachments: (workspaceSlug: string, projectId: string, issueId: string) => Promise<TIssueAttachment[]>;
+    addAttachments: (issueId: string, attachments: TIssueAttachment[]) => void
+    fetchAttachments: (workspaceSlug: string, projectId: string, issueId: string) => Promise<TIssueAttachment[]>
     createAttachment: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         data: FormData
-    ) => Promise<TIssueAttachment>;
+    ) => Promise<TIssueAttachment>
     removeAttachment: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         attachmentId: string
-    ) => Promise<TIssueAttachment>;
+    ) => Promise<TIssueAttachment>
 }
 
 export interface IIssueAttachmentStore extends IIssueAttachmentStoreActions {
     // observables
-    attachments: TIssueAttachmentIdMap;
-    attachmentMap: TIssueAttachmentMap;
+    attachments: TIssueAttachmentIdMap
+    attachmentMap: TIssueAttachmentMap
     // computed
-    issueAttachments: string[] | undefined;
+    issueAttachments: string[] | undefined
 
-    getAttachmentsByIssueId: (issueId: string) => string[] | undefined;
-    getAttachmentById: (attachmentId: string) => TIssueAttachment | undefined;
+    getAttachmentsByIssueId: (issueId: string) => string[] | undefined
+    getAttachmentById: (attachmentId: string) => TIssueAttachment | undefined
 }
 
 export class IssueAttachmentStore implements IIssueAttachmentStore {
     // observables
-    attachments: TIssueAttachmentIdMap = {};
-    attachmentMap: TIssueAttachmentMap = {};
+    attachments: TIssueAttachmentIdMap = {}
+    attachmentMap: TIssueAttachmentMap = {}
     // root store
-    rootIssueDetailStore: IIssueDetail;
+    rootIssueDetailStore: IIssueDetail
 
-    issueAttachmentService;
+    issueAttachmentService
 
     constructor(rootStore: IIssueDetail) {
         makeObservable(this, {
@@ -59,54 +57,52 @@ export class IssueAttachmentStore implements IIssueAttachmentStore {
             fetchAttachments: action,
             createAttachment: action,
             removeAttachment: action,
-        });
+        })
         // root store
-        this.rootIssueDetailStore = rootStore;
+        this.rootIssueDetailStore = rootStore
 
-        this.issueAttachmentService = new IssueAttachmentService();
+        this.issueAttachmentService = new IssueAttachmentService()
     }
 
     // computed
     get issueAttachments() {
-        const issueId = this.rootIssueDetailStore.peekIssue?.issueId;
-        if (!issueId) return undefined;
-        return this.attachments[issueId] ?? undefined;
+        const issueId = this.rootIssueDetailStore.peekIssue?.issueId
+        if (!issueId) return undefined
+        return this.attachments[issueId] ?? undefined
     }
 
     getAttachmentsByIssueId = (issueId: string) => {
-        if (!issueId) return undefined;
-        return this.attachments[issueId] ?? undefined;
-    };
+        if (!issueId) return undefined
+        return this.attachments[issueId] ?? undefined
+    }
 
     getAttachmentById = (attachmentId: string) => {
-        if (!attachmentId) return undefined;
-        return this.attachmentMap[attachmentId] ?? undefined;
-    };
+        if (!attachmentId) return undefined
+        return this.attachmentMap[attachmentId] ?? undefined
+    }
 
     // actions
     addAttachments = (issueId: string, attachments: TIssueAttachment[]) => {
         if (attachments && attachments.length > 0) {
-            const _attachmentIds = attachments.map((attachment) => attachment.id);
+            const _attachmentIds = attachments.map((attachment) => attachment.id)
             runInAction(() => {
-                update(this.attachments, [issueId], (attachmentIds = []) =>
-                    uniq(concat(attachmentIds, _attachmentIds))
-                );
-                attachments.forEach((attachment) => set(this.attachmentMap, attachment.id, attachment));
-            });
+                update(this.attachments, [issueId], (attachmentIds = []) => uniq(concat(attachmentIds, _attachmentIds)))
+                attachments.forEach((attachment) => set(this.attachmentMap, attachment.id, attachment))
+            })
         }
-    };
+    }
 
     fetchAttachments = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            const response = await this.issueAttachmentService.getIssueAttachment(workspaceSlug, projectId, issueId);
+            const response = await this.issueAttachmentService.getIssueAttachment(workspaceSlug, projectId, issueId)
 
-            this.addAttachments(issueId, response);
+            this.addAttachments(issueId, response)
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     createAttachment = async (workspaceSlug: string, projectId: string, issueId: string, data: FormData) => {
         try {
@@ -115,21 +111,21 @@ export class IssueAttachmentStore implements IIssueAttachmentStore {
                 projectId,
                 issueId,
                 data
-            );
+            )
 
             if (response && response.id)
                 runInAction(() => {
                     update(this.attachments, [issueId], (attachmentIds = []) =>
                         uniq(concat(attachmentIds, [response.id]))
-                    );
-                    set(this.attachmentMap, response.id, response);
-                });
+                    )
+                    set(this.attachmentMap, response.id, response)
+                })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     removeAttachment = async (workspaceSlug: string, projectId: string, issueId: string, attachmentId: string) => {
         try {
@@ -138,19 +134,19 @@ export class IssueAttachmentStore implements IIssueAttachmentStore {
                 projectId,
                 issueId,
                 attachmentId
-            );
+            )
 
             runInAction(() => {
                 update(this.attachments, [issueId], (attachmentIds = []) => {
-                    if (attachmentIds.includes(attachmentId)) pull(attachmentIds, attachmentId);
-                    return attachmentIds;
-                });
-                delete this.attachmentMap[attachmentId];
-            });
+                    if (attachmentIds.includes(attachmentId)) pull(attachmentIds, attachmentId)
+                    return attachmentIds
+                })
+                delete this.attachmentMap[attachmentId]
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 }

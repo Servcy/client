@@ -1,36 +1,31 @@
-import { Dispatch, SetStateAction, useEffect, useState, FC } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-
-import { WorkspaceService } from "@services/workspace.service";
-
-import { useEventTracker, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, CustomSelect, Input } from "@servcy/ui";
-
-import { IWorkspace } from "@servcy/types";
-
-import { ORGANIZATION_SIZE, RESTRICTED_URLS } from "@constants/workspace";
-import { WORKSPACE_CREATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react"
+import { WORKSPACE_CREATED } from "@constants/event-tracker"
+import { ORGANIZATION_SIZE, RESTRICTED_URLS } from "@constants/workspace"
+import { useEventTracker, useWorkspace } from "@hooks/store"
+import { WorkspaceService } from "@services/workspace.service"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IWorkspace } from "@servcy/types"
+import { Button, CustomSelect, Input } from "@servcy/ui"
 
 type Props = {
-    onSubmit?: (res: IWorkspace) => Promise<void>;
+    onSubmit?: (res: IWorkspace) => Promise<void>
     defaultValues: {
-        name: string;
-        slug: string;
-        organization_size: string;
-    };
-    setDefaultValues: Dispatch<SetStateAction<any>>;
-    secondaryButton?: React.ReactNode;
+        name: string
+        slug: string
+        organization_size: string
+    }
+    setDefaultValues: Dispatch<SetStateAction<any>>
+    secondaryButton?: React.ReactNode
     primaryButtonText?: {
-        loading: string;
-        default: string;
-    };
-};
+        loading: string
+        default: string
+    }
+}
 
-const workspaceService = new WorkspaceService();
+const workspaceService = new WorkspaceService()
 
 export const CreateWorkspaceForm: FC<Props> = observer((props) => {
     const {
@@ -42,15 +37,15 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
             loading: "Creating...",
             default: "Create Workspace",
         },
-    } = props;
+    } = props
     // states
-    const [slugError, setSlugError] = useState(false);
-    const [invalidSlug, setInvalidSlug] = useState(false);
+    const [slugError, setSlugError] = useState(false)
+    const [invalidSlug, setInvalidSlug] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { captureWorkspaceEvent } = useEventTracker();
-    const { createWorkspace } = useWorkspace();
+    const { captureWorkspaceEvent } = useEventTracker()
+    const { createWorkspace } = useWorkspace()
 
     // form info
     const {
@@ -59,14 +54,14 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
         setValue,
         getValues,
         formState: { errors, isSubmitting, isValid },
-    } = useForm<IWorkspace>({ defaultValues, mode: "onChange" });
+    } = useForm<IWorkspace>({ defaultValues, mode: "onChange" })
 
     const handleCreateWorkspace = async (formData: IWorkspace) => {
         await workspaceService
             .workspaceSlugCheck(formData.slug)
             .then(async (res) => {
                 if (res.status === true && !RESTRICTED_URLS.includes(formData.slug)) {
-                    setSlugError(false);
+                    setSlugError(false)
 
                     await createWorkspace(formData)
                         .then(async (res) => {
@@ -77,14 +72,14 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                                     state: "SUCCESS",
                                     element: "Create workspace page",
                                 },
-                            });
+                            })
                             toast.error({
                                 type: "success",
                                 title: "Success!",
                                 message: "Workspace created successfully.",
-                            });
+                            })
 
-                            if (onSubmit) await onSubmit(res);
+                            if (onSubmit) await onSubmit(res)
                         })
                         .catch(() => {
                             captureWorkspaceEvent({
@@ -93,31 +88,31 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                                     state: "FAILED",
                                     element: "Create workspace page",
                                 },
-                            });
+                            })
                             toast.error({
                                 type: "error",
                                 title: "Error!",
                                 message: "Workspace could not be created. Please try again.",
-                            });
-                        });
-                } else setSlugError(true);
+                            })
+                        })
+                } else setSlugError(true)
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Some error occurred while creating workspace. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     useEffect(
         () => () => {
             // when the component unmounts set the default values to whatever user typed in
-            setDefaultValues(getValues());
+            setDefaultValues(getValues())
         },
         [getValues, setDefaultValues]
-    );
+    )
 
     return (
         <form className="space-y-6 sm:space-y-9" onSubmit={handleSubmit(handleCreateWorkspace)}>
@@ -143,9 +138,9 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                                 type="text"
                                 value={value}
                                 onChange={(e) => {
-                                    onChange(e.target.value);
-                                    setValue("name", e.target.value);
-                                    setValue("slug", e.target.value.toLocaleLowerCase().trim().replace(/ /g, "-"));
+                                    onChange(e.target.value)
+                                    setValue("name", e.target.value)
+                                    setValue("slug", e.target.value.toLocaleLowerCase().trim().replace(/ /g, "-"))
                                 }}
                                 ref={ref}
                                 hasError={Boolean(errors.name)}
@@ -173,10 +168,10 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                                     type="text"
                                     value={value.toLocaleLowerCase().trim().replace(/ /g, "-")}
                                     onChange={(e) => {
-                                        /^[a-zA-Z0-9_-]+$/.test(e.target.value)
+                                        ;/^[a-zA-Z0-9_-]+$/.test(e.target.value)
                                             ? setInvalidSlug(false)
-                                            : setInvalidSlug(true);
-                                        onChange(e.target.value.toLowerCase());
+                                            : setInvalidSlug(true)
+                                        onChange(e.target.value.toLowerCase())
                                     }}
                                     ref={ref}
                                     hasError={Boolean(errors.slug)}
@@ -238,5 +233,5 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                 )}
             </div>
         </form>
-    );
-});
+    )
+})

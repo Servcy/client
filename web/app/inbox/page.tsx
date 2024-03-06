@@ -1,12 +1,15 @@
-"use client";
+"use client"
 
-import cn from "classnames";
-import debounce from "lodash/debounce";
-import { useEffect, useState } from "react";
-
-import InboxItemModal from "@/components/Inbox/InboxItemModal";
-import InboxItems from "@/components/Inbox/InboxItems";
-import { Button, ConfigProvider, Input, Select, Tabs } from "antd";
+import { useEffect, useState } from "react"
+import {
+    archiveItems as archiveItemsApi,
+    deleteItems as deleteItemsApi,
+    fetchInbox as fetchInboxApi,
+    readItem as readItemApi,
+} from "@/apis/inbox"
+import { Button, ConfigProvider, Input, Select, Tabs } from "antd"
+import cn from "classnames"
+import debounce from "lodash/debounce"
 import {
     AiOutlineComment,
     AiOutlineInbox,
@@ -14,20 +17,13 @@ import {
     AiOutlineNotification,
     AiOutlineRead,
     AiOutlineSync,
-} from "react-icons/ai";
-import { GoMention } from "react-icons/go";
-import { HiArchiveBoxArrowDown } from "react-icons/hi2";
-
-import {
-    archiveItems as archiveItemsApi,
-    deleteItems as deleteItemsApi,
-    fetchInbox as fetchInboxApi,
-    readItem as readItemApi,
-} from "@/apis/inbox";
-
-import { InboxItem, PaginationDetails } from "@/types/apps/inbox";
-
-import { integrationInboxCategories } from "@/constants/integrations";
+} from "react-icons/ai"
+import { GoMention } from "react-icons/go"
+import { HiArchiveBoxArrowDown } from "react-icons/hi2"
+import { InboxItem, PaginationDetails } from "@/types/apps/inbox"
+import InboxItemModal from "@/components/Inbox/InboxItemModal"
+import InboxItems from "@/components/Inbox/InboxItems"
+import { integrationInboxCategories } from "@/constants/integrations"
 
 const tabItems = [
     {
@@ -50,111 +46,111 @@ const tabItems = [
         label: "Archived",
         Icon: AiOutlineRead,
     },
-];
+]
 
 export default function Gmail(): JSX.Element {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [search, setSearch] = useState<string>("");
-    const [selectedItemIds, setSelectedItemIds] = useState<React.Key[]>([]);
-    const [inboxItems, setInboxItems] = useState<InboxItem[]>([] as InboxItem[]);
-    const [inboxPagination, setInboxPagination] = useState<PaginationDetails>({} as PaginationDetails);
-    const [activeTab, setActiveTab] = useState<string>("message");
-    const [page, setPage] = useState<number>(1);
+    const [loading, setLoading] = useState<boolean>(false)
+    const [search, setSearch] = useState<string>("")
+    const [selectedItemIds, setSelectedItemIds] = useState<React.Key[]>([])
+    const [inboxItems, setInboxItems] = useState<InboxItem[]>([] as InboxItem[])
+    const [inboxPagination, setInboxPagination] = useState<PaginationDetails>({} as PaginationDetails)
+    const [activeTab, setActiveTab] = useState<string>("message")
+    const [page, setPage] = useState<number>(1)
     const [filters, setFilters] = useState<Record<string, string | boolean>>({
         category: "message",
-    });
-    const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
-    const [isInboxItemModalVisible, setIsInboxItemModalVisible] = useState<boolean>(false);
-    const [filterByIAmMentionedButtonText, setFilterByIAmMentionedButtonText] = useState<string>("For Me");
+    })
+    const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1)
+    const [isInboxItemModalVisible, setIsInboxItemModalVisible] = useState<boolean>(false)
+    const [filterByIAmMentionedButtonText, setFilterByIAmMentionedButtonText] = useState<string>("For Me")
 
     const refetchInboxItems = async () => {
         try {
-            setLoading(true);
+            setLoading(true)
             const response = await fetchInboxApi({
                 filters,
                 search,
                 page,
                 pagination: { page },
-            });
-            setInboxItems(JSON.parse(response.results).items);
-            setInboxPagination(JSON.parse(response.results).details);
+            })
+            setInboxItems(JSON.parse(response.results).items)
+            setInboxPagination(JSON.parse(response.results).details)
         } catch (err) {
-            console.error(err);
+            console.error(err)
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     const archiveItems = async (itemIds: React.Key[]) => {
         try {
             await archiveItemsApi({
                 item_ids: itemIds,
-            });
+            })
             if (itemIds.length === inboxItems.length) {
-                setInboxItems([]);
-                refetchInboxItems();
-            } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))));
+                setInboxItems([])
+                refetchInboxItems()
+            } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))))
         } catch (err) {
-            console.error(err);
+            console.error(err)
         }
-    };
+    }
 
     const readItem = async (itemId: string | undefined) => {
         try {
-            if (!itemId) return;
+            if (!itemId) return
             readItemApi({
                 item_id: Number.parseInt(itemId),
-            });
+            })
             setInboxItems((prevState) =>
                 prevState.map((item) => {
                     if (item.id === itemId.toString()) {
-                        return { ...item, is_read: true };
+                        return { ...item, is_read: true }
                     }
-                    return item;
+                    return item
                 })
-            );
+            )
         } catch (err) {
-            console.error(err);
+            console.error(err)
         }
-    };
+    }
 
     const deleteItems = async (itemIds: number[]) => {
         try {
             deleteItemsApi({
                 item_ids: itemIds,
-            });
+            })
             if (itemIds.length === inboxItems.length) {
-                setInboxItems([]);
-                refetchInboxItems();
-            } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))));
+                setInboxItems([])
+                refetchInboxItems()
+            } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))))
         } catch (err) {
-            console.error(err);
+            console.error(err)
         }
-    };
+    }
 
     useEffect(() => {
         const debouncedFetchInbox = debounce(async () => {
             try {
-                setLoading(true);
+                setLoading(true)
                 const response = await fetchInboxApi({
                     filters,
                     search,
                     page,
                     pagination: { page },
-                });
-                setInboxItems(JSON.parse(response.results).items);
-                setInboxPagination(JSON.parse(response.results).details);
+                })
+                setInboxItems(JSON.parse(response.results).items)
+                setInboxPagination(JSON.parse(response.results).details)
             } catch (err) {
-                console.error(err);
+                console.error(err)
             } finally {
-                setLoading(false);
+                setLoading(false)
             }
-        }, 500);
-        debouncedFetchInbox();
+        }, 500)
+        debouncedFetchInbox()
         return () => {
-            debouncedFetchInbox.cancel();
-        };
-    }, [page, filters, search, activeTab]);
+            debouncedFetchInbox.cancel()
+        }
+    }, [page, filters, search, activeTab])
 
     return (
         <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
@@ -196,12 +192,12 @@ export default function Gmail(): JSX.Element {
                         defaultActiveKey="message"
                         indicatorSize={(origin) => origin - 16}
                         onChange={(key) => {
-                            setFilters((prevState) => ({ ...prevState, category: key }));
-                            setActiveTab(key);
+                            setFilters((prevState) => ({ ...prevState, category: key }))
+                            setActiveTab(key)
                             if (key === "comment") {
-                                setFilterByIAmMentionedButtonText("Mentions Me");
+                                setFilterByIAmMentionedButtonText("Mentions Me")
                             } else {
-                                setFilterByIAmMentionedButtonText("For Me");
+                                setFilterByIAmMentionedButtonText("For Me")
                             }
                         }}
                         tabBarExtraContent={
@@ -214,7 +210,7 @@ export default function Gmail(): JSX.Element {
                                         setFilters((prevState) => ({
                                             ...prevState,
                                             i_am_mentioned: !prevState["i_am_mentioned"],
-                                        }));
+                                        }))
                                     }}
                                     icon={<GoMention />}
                                 >
@@ -225,8 +221,8 @@ export default function Gmail(): JSX.Element {
                                     disabled={inboxItems.length === 0}
                                     onClick={() => {
                                         if (activeTab !== "archived")
-                                            archiveItems(inboxItems.map((item) => parseInt(item.id)));
-                                        else deleteItems(inboxItems.map((item) => parseInt(item.id)));
+                                            archiveItems(inboxItems.map((item) => parseInt(item.id)))
+                                        else deleteItems(inboxItems.map((item) => parseInt(item.id)))
                                     }}
                                     icon={<HiArchiveBoxArrowDown />}
                                 >
@@ -239,11 +235,8 @@ export default function Gmail(): JSX.Element {
                                     disabled={selectedItemIds.length === 0}
                                     onClick={() => {
                                         if (activeTab !== "archived")
-                                            archiveItems(
-                                                selectedItemIds.map((item_id) => parseInt(item_id.toString()))
-                                            );
-                                        else
-                                            deleteItems(selectedItemIds.map((item_id) => parseInt(item_id.toString())));
+                                            archiveItems(selectedItemIds.map((item_id) => parseInt(item_id.toString())))
+                                        else deleteItems(selectedItemIds.map((item_id) => parseInt(item_id.toString())))
                                     }}
                                     icon={<HiArchiveBoxArrowDown />}
                                 >
@@ -253,11 +246,11 @@ export default function Gmail(): JSX.Element {
                                     placeholder="Filter By Source"
                                     allowClear
                                     onClear={() => {
-                                        setFilters((prevState) => ({ ...prevState, source: "" }));
+                                        setFilters((prevState) => ({ ...prevState, source: "" }))
                                     }}
                                     value={filters["source"]}
                                     onChange={(value) => {
-                                        setFilters((prevState) => ({ ...prevState, source: value }));
+                                        setFilters((prevState) => ({ ...prevState, source: value }))
                                     }}
                                     options={Object.entries(integrationInboxCategories)
                                         .filter(([_, value]) => value.includes(activeTab))
@@ -309,5 +302,5 @@ export default function Gmail(): JSX.Element {
                 />
             )}
         </main>
-    );
+    )
 }

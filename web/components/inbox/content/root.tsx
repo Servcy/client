@@ -1,29 +1,26 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-import { Inbox } from "lucide-react";
-
-import { useInboxIssues } from "@hooks/store";
-
-import { InboxIssueActionsHeader } from "@components/inbox";
-import { InboxIssueDetailRoot } from "@components/issues/issue-detail/inbox";
-
-import { Loader } from "@servcy/ui";
+import { FC } from "react"
+import { InboxIssueActionsHeader } from "@components/inbox"
+import { InboxIssueDetailRoot } from "@components/issues/issue-detail/inbox"
+import { useInboxIssues } from "@hooks/store"
+import { Inbox } from "lucide-react"
+import { observer } from "mobx-react"
+import { Loader } from "@servcy/ui"
 
 type TInboxContentRoot = {
-    workspaceSlug: string;
-    projectId: string;
-    inboxId: string;
-    inboxIssueId: string | undefined;
-};
+    workspaceSlug: string
+    projectId: string
+    inboxId: string
+    inboxIssueId: string | undefined
+}
 
 export const InboxContentRoot: FC<TInboxContentRoot> = observer((props) => {
-    const { workspaceSlug, projectId, inboxId, inboxIssueId } = props;
+    const { workspaceSlug, projectId, inboxId, inboxIssueId } = props
 
     const {
         issues: { loader, getInboxIssuesByInboxId },
-    } = useInboxIssues();
+    } = useInboxIssues()
 
-    const inboxIssuesList = inboxId ? getInboxIssuesByInboxId(inboxId) : undefined;
+    const inboxIssuesList = inboxId ? getInboxIssuesByInboxId(inboxId) : undefined
 
     return (
         <>
@@ -83,5 +80,5 @@ export const InboxContentRoot: FC<TInboxContentRoot> = observer((props) => {
                 </>
             )}
         </>
-    );
-});
+    )
+})

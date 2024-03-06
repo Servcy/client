@@ -1,15 +1,14 @@
-import { FC } from "react";
-
-import { Breadcrumbs } from "@servcy/ui";
-import { Settings } from "lucide-react";
-import { BreadcrumbLink } from "@components/common";
+import { FC } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { Settings } from "lucide-react"
+import { Breadcrumbs } from "@servcy/ui"
 
 interface IProfileSettingHeader {
-    title: string;
+    title: string
 }
 
 export const ProfileSettingsHeader: FC<IProfileSettingHeader> = (props) => {
-    const { title } = props;
+    const { title } = props
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -31,5 +30,5 @@ export const ProfileSettingsHeader: FC<IProfileSettingHeader> = (props) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

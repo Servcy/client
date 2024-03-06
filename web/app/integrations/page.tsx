@@ -1,79 +1,74 @@
-"use client";
+"use client"
 
-import { oauthUrlGenerators } from "@/utils/Integration";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-
-import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal";
-import { Button, Card, Input, Select, Skeleton, Tag } from "antd";
-import Image from "next/image.js";
-import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai";
-import { HiArrowsRightLeft } from "react-icons/hi2";
-
-import { fetchIntegrations } from "@/apis/integration";
-
-import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations";
-
-import { Integration } from "@/types/apps/integration";
-
-import { getQueryParams } from "@/utils/Shared";
-import { capitalizeFirstLetter } from "@/utils/Shared/formatters";
+import Image from "next/image.js"
+import { useEffect, useState } from "react"
+import { fetchIntegrations } from "@/apis/integration"
+import { Button, Card, Input, Select, Skeleton, Tag } from "antd"
+import toast from "react-hot-toast"
+import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai"
+import { HiArrowsRightLeft } from "react-icons/hi2"
+import { Integration } from "@/types/apps/integration"
+import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal"
+import { oauthUrlGenerators } from "@/utils/Integration"
+import { getQueryParams } from "@/utils/Shared"
+import { capitalizeFirstLetter } from "@/utils/Shared/formatters"
+import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations"
 
 export default function Integrations(): JSX.Element {
-    const [integrations, setIntegrations] = useState<Integration[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [search, setSearch] = useState<string>("");
-    const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
-    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-    const [category, setCategory] = useState<string>("");
+    const [integrations, setIntegrations] = useState<Integration[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
+    const [search, setSearch] = useState<string>("")
+    const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null)
+    const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
+    const [category, setCategory] = useState<string>("")
 
     useEffect(() => {
-        setLoading(true);
-        const queryParams: Record<string, string> = getQueryParams(window.location.search);
+        setLoading(true)
+        const queryParams: Record<string, string> = getQueryParams(window.location.search)
         fetchIntegrations()
             .then((results) => {
-                setIntegrations(results);
+                setIntegrations(results)
                 if (queryParams["integration"]) {
                     const integration = results.find(
                         (integration: Integration) => integration.id === Number(queryParams["integration"])
-                    );
+                    )
                     if (integration) {
                         setTimeout(() => {
                             // click on the connect button
-                            const connectButton = document.getElementById(`connect-${integration.id}`);
+                            const connectButton = document.getElementById(`connect-${integration.id}`)
                             if (connectButton) {
-                                connectButton.click();
+                                connectButton.click()
                             }
-                        }, 1000);
+                        }, 1000)
                     }
                 }
                 if (queryParams["selectedIntegration"] && queryParams["openConfigurationModal"]) {
                     const integration = results.find(
                         (integration: Integration) =>
                             integration.name === capitalizeFirstLetter(queryParams["selectedIntegration"] ?? "")
-                    );
+                    )
                     if (integration) {
-                        setIsModalVisible(true);
-                        setSelectedIntegration(integration);
+                        setIsModalVisible(true)
+                        setSelectedIntegration(integration)
                     }
                 }
             })
             .catch((error) => {
-                toast.error(error.response.data.detail);
+                toast.error(error.response.data.detail)
             })
             .finally(() => {
-                setLoading(false);
-            });
-    }, []);
+                setLoading(false)
+            })
+    }, [])
 
     const connect = (integration: Integration) => {
-        const oauthUrlGenerator = oauthUrlGenerators[integration.name];
+        const oauthUrlGenerator = oauthUrlGenerators[integration.name]
         if (oauthUrlGenerator) {
-            window.location.href = oauthUrlGenerator(window.location.href);
+            window.location.href = oauthUrlGenerator(window.location.href)
         } else {
-            console.error(`Unknown integration: ${integration.name}`);
+            console.error(`Unknown integration: ${integration.name}`)
         }
-    };
+    }
 
     return (
         <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
@@ -173,8 +168,8 @@ export default function Integrations(): JSX.Element {
                                             size="middle"
                                             icon={<AiOutlineSetting />}
                                             onClick={() => {
-                                                setSelectedIntegration(integration);
-                                                setIsModalVisible(true);
+                                                setSelectedIntegration(integration)
+                                                setIsModalVisible(true)
                                             }}
                                         >
                                             Settings
@@ -188,12 +183,12 @@ export default function Integrations(): JSX.Element {
             {isModalVisible && selectedIntegration !== null && (
                 <IntegrationConfigurationModal
                     onClose={() => {
-                        setIsModalVisible(false);
-                        setSelectedIntegration(null);
+                        setIsModalVisible(false)
+                        setSelectedIntegration(null)
                     }}
                     selectedIntegration={selectedIntegration}
                 />
             )}
         </main>
-    );
+    )
 }

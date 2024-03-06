@@ -1,34 +1,31 @@
-import React, { useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { CheckCircle } from "lucide-react";
-
-import { Button } from "@servcy/ui";
-
-import type { TIssue } from "@servcy/types";
-import { useProject } from "@hooks/store";
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProject } from "@hooks/store"
+import { CheckCircle } from "lucide-react"
+import type { TIssue } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    data: TIssue;
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: () => Promise<void>;
-};
+    data: TIssue
+    isOpen: boolean
+    onClose: () => void
+    onSubmit: () => Promise<void>
+}
 
 export const AcceptIssueModal: React.FC<Props> = ({ isOpen, onClose, data, onSubmit }) => {
-    const [isAccepting, setIsAccepting] = useState(false);
+    const [isAccepting, setIsAccepting] = useState(false)
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
 
     const handleClose = () => {
-        setIsAccepting(false);
-        onClose();
-    };
+        setIsAccepting(false)
+        onClose()
+    }
 
     const handleAccept = () => {
-        setIsAccepting(true);
-        onSubmit().finally(() => setIsAccepting(false));
-    };
+        setIsAccepting(true)
+        onSubmit().finally(() => setIsAccepting(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -96,5 +93,5 @@ export const AcceptIssueModal: React.FC<Props> = ({ isOpen, onClose, data, onSub
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

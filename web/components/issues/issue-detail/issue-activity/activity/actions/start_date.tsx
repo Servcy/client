@@ -1,25 +1,22 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-import { CalendarDays } from "lucide-react";
+import { FC } from "react"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { useIssueDetail } from "@hooks/store"
+import { CalendarDays } from "lucide-react"
+import { observer } from "mobx-react"
+import { IssueActivityBlockComponent, IssueLink } from "./"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent, IssueLink } from "./";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-type TIssueStartDateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
+type TIssueStartDateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }
 
 export const IssueStartDateActivity: FC<TIssueStartDateActivity> = observer((props) => {
-    const { activityId, showIssue = true, ends } = props;
+    const { activityId, showIssue = true, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             icon={<CalendarDays size={14} color="#6b7280" aria-hidden="true" />}
@@ -39,5 +36,5 @@ export const IssueStartDateActivity: FC<TIssueStartDateActivity> = observer((pro
                 {showIssue && <IssueLink activityId={activityId} />}.
             </>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

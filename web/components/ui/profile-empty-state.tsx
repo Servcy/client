@@ -1,12 +1,11 @@
-import React from "react";
-
-import Image from "next/image";
+import Image from "next/image"
+import React from "react"
 
 type Props = {
-    title: string;
-    description?: React.ReactNode;
-    image: any;
-};
+    title: string
+    description?: React.ReactNode
+    image: any
+}
 
 export const ProfileEmptyState: React.FC<Props> = ({ title, description, image }) => (
     <div className={`mx-auto grid h-full w-full place-items-center p-8 `}>
@@ -18,4 +17,4 @@ export const ProfileEmptyState: React.FC<Props> = ({ title, description, image }
             {description && <p className="text-sm text-custom-text-300">{description}</p>}
         </div>
     </div>
-);
+)

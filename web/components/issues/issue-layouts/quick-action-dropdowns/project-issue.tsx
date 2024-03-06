@@ -1,22 +1,18 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { ArchiveIcon, CustomMenu } from "@servcy/ui";
-import { observer } from "mobx-react";
-import { Copy, ExternalLink, Link, Pencil, Trash2 } from "lucide-react";
-import omit from "lodash/omit";
-
-import { useEventTracker, useIssues, useProjectState, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
-
-import { copyUrlToClipboard } from "@helpers/string.helper";
-
-import { TIssue } from "@servcy/types";
-import { IQuickActionProps } from "../list/list-view-types";
-import { EUserProjectRoles } from "@constants/project";
-import { EIssuesStoreType } from "@constants/issue";
-import { STATE_GROUPS } from "@constants/state";
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+import { STATE_GROUPS } from "@constants/state"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useEventTracker, useIssues, useProjectState, useUser } from "@hooks/store"
+import omit from "lodash/omit"
+import { Copy, ExternalLink, Link, Pencil, Trash2 } from "lucide-react"
+import { observer } from "mobx-react"
+import toast from "react-hot-toast"
+import { TIssue } from "@servcy/types"
+import { ArchiveIcon, CustomMenu } from "@servcy/ui"
+import { IQuickActionProps } from "../list/list-view-types"
 
 export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((props) => {
     const {
@@ -27,35 +23,35 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
         customActionButton,
         portalElement,
         readOnly = false,
-    } = props;
+    } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // states
-    const [createUpdateIssueModal, setCreateUpdateIssueModal] = useState(false);
-    const [issueToEdit, setIssueToEdit] = useState<TIssue | undefined>(undefined);
-    const [deleteIssueModal, setDeleteIssueModal] = useState(false);
-    const [archiveIssueModal, setArchiveIssueModal] = useState(false);
+    const [createUpdateIssueModal, setCreateUpdateIssueModal] = useState(false)
+    const [issueToEdit, setIssueToEdit] = useState<TIssue | undefined>(undefined)
+    const [deleteIssueModal, setDeleteIssueModal] = useState(false)
+    const [archiveIssueModal, setArchiveIssueModal] = useState(false)
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { setTrackElement } = useEventTracker();
-    const { issuesFilter } = useIssues(EIssuesStoreType.PROJECT);
-    const { getStateById } = useProjectState();
+    } = useUser()
+    const { setTrackElement } = useEventTracker()
+    const { issuesFilter } = useIssues(EIssuesStoreType.PROJECT)
+    const { getStateById } = useProjectState()
     // derived values
-    const activeLayout = `${issuesFilter.issueFilters?.displayFilters?.layout} layout`;
-    const stateDetails = getStateById(issue.state_id);
+    const activeLayout = `${issuesFilter.issueFilters?.displayFilters?.layout} layout`
+    const stateDetails = getStateById(issue.state_id)
     // auth
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER && !readOnly;
-    const isArchivingAllowed = handleArchive && isEditingAllowed;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER && !readOnly
+    const isArchivingAllowed = handleArchive && isEditingAllowed
     const isInArchivableGroup =
-        !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group);
-    const isDeletingAllowed = isEditingAllowed;
+        !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group)
+    const isDeletingAllowed = isEditingAllowed
 
-    const issueLink = `${workspaceSlug}/projects/${issue.project_id}/issues/${issue.id}`;
+    const issueLink = `${workspaceSlug}/projects/${issue.project_id}/issues/${issue.id}`
 
-    const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank");
+    const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank")
 
     const handleCopyIssueLink = () =>
         copyUrlToClipboard(issueLink).then(() =>
@@ -64,9 +60,9 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
                 title: "Link copied",
                 message: "Issue link copied to clipboard",
             })
-        );
+        )
 
-    const isDraftIssue = router?.asPath?.includes("draft-issues") || false;
+    const isDraftIssue = router?.asPath?.includes("draft-issues") || false
 
     const duplicateIssuePayload = omit(
         {
@@ -75,7 +71,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
             is_draft: isDraftIssue ? false : issue.is_draft,
         },
         ["id"]
-    );
+    )
 
     return (
         <>
@@ -94,12 +90,12 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
             <CreateUpdateIssueModal
                 isOpen={createUpdateIssueModal}
                 onClose={() => {
-                    setCreateUpdateIssueModal(false);
-                    setIssueToEdit(undefined);
+                    setCreateUpdateIssueModal(false)
+                    setIssueToEdit(undefined)
                 }}
                 data={issueToEdit ?? duplicateIssuePayload}
                 onSubmit={async (data) => {
-                    if (issueToEdit && handleUpdate) await handleUpdate({ ...issueToEdit, ...data });
+                    if (issueToEdit && handleUpdate) await handleUpdate({ ...issueToEdit, ...data })
                 }}
                 storeType={EIssuesStoreType.PROJECT}
                 isDraft={isDraftIssue}
@@ -115,9 +111,9 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
                 {isEditingAllowed && (
                     <CustomMenu.MenuItem
                         onClick={() => {
-                            setTrackElement(activeLayout);
-                            setIssueToEdit(issue);
-                            setCreateUpdateIssueModal(true);
+                            setTrackElement(activeLayout)
+                            setIssueToEdit(issue)
+                            setCreateUpdateIssueModal(true)
                         }}
                     >
                         <div className="flex items-center gap-2">
@@ -141,8 +137,8 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
                 {isEditingAllowed && (
                     <CustomMenu.MenuItem
                         onClick={() => {
-                            setTrackElement(activeLayout);
-                            setCreateUpdateIssueModal(true);
+                            setTrackElement(activeLayout)
+                            setCreateUpdateIssueModal(true)
                         }}
                     >
                         <div className="flex items-center gap-2">
@@ -176,8 +172,8 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
                 {isDeletingAllowed && (
                     <CustomMenu.MenuItem
                         onClick={() => {
-                            setTrackElement(activeLayout);
-                            setDeleteIssueModal(true);
+                            setTrackElement(activeLayout)
+                            setDeleteIssueModal(true)
                         }}
                     >
                         <div className="flex items-center gap-2">
@@ -188,5 +184,5 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
                 )}
             </CustomMenu>
         </>
-    );
-});
+    )
+})

@@ -15,4 +15,4 @@ export const DATE_FILTER_OPTIONS = [
         name: "2 months from now",
         value: "2_months;after;fromnow",
     },
-];
+]

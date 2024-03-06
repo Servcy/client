@@ -1,26 +1,26 @@
-import { axiosPost } from "@/utils/Shared/axios";
+import { axiosPost } from "@/utils/Shared/axios"
 
 export const fetchInbox = async (payload: object) => {
-    const response = await axiosPost("/inbox/items", payload);
-    return response;
-};
+    const response = await axiosPost("/inbox/items", payload)
+    return response
+}
 
 export const archiveItems = async (payload: object) => {
-    const response = await axiosPost("/inbox/archive", payload);
-    return response;
-};
+    const response = await axiosPost("/inbox/archive", payload)
+    return response
+}
 
 export const readItem = async (payload: object) => {
-    const response = await axiosPost("/inbox/read", payload);
-    return response;
-};
+    const response = await axiosPost("/inbox/read", payload)
+    return response
+}
 
 export const deleteItems = async (payload: object) => {
-    const response = await axiosPost("/inbox/delete", payload);
-    return response;
-};
+    const response = await axiosPost("/inbox/delete", payload)
+    return response
+}
 
 export const generateReply = async (payload: object) => {
-    const response = await axiosPost("/inbox/assisstant/generate-reply", payload);
-    return response;
-};
+    const response = await axiosPost("/inbox/assisstant/generate-reply", payload)
+    return response
+}

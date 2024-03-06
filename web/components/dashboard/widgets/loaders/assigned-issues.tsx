@@ -1,4 +1,4 @@
-import { Loader } from "@servcy/ui";
+import { Loader } from "@servcy/ui"
 
 export const AssignedIssuesWidgetLoader = () => (
     <Loader className="bg-custom-background-100 p-6 rounded-xl">
@@ -18,4 +18,4 @@ export const AssignedIssuesWidgetLoader = () => (
             <Loader.Item height="11px" width="60%" />
         </div>
     </Loader>
-);
+)

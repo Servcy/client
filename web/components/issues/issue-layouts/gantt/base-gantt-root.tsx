@@ -1,61 +1,56 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useIssues, useUser } from "@hooks/store";
-
-import { GanttQuickAddIssueForm, IssueGanttBlock } from "@components/issues";
-import { GanttChartRoot, IBlockUpdateData, IssueGanttSidebar } from "@components/gantt-chart";
-
-import { renderIssueBlocksStructure } from "@helpers/issue.helper";
-
-import { TIssue, TUnGroupedIssues } from "@servcy/types";
-import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
-import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module";
-import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
-import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views";
-
-import { EUserProjectRoles } from "@constants/project";
-import { EIssueActions } from "../types";
+import { useRouter } from "next/router"
+import React from "react"
+import { GanttChartRoot, IBlockUpdateData, IssueGanttSidebar } from "@components/gantt-chart"
+import { GanttQuickAddIssueForm, IssueGanttBlock } from "@components/issues"
+import { EUserProjectRoles } from "@constants/project"
+import { renderIssueBlocksStructure } from "@helpers/issue.helper"
+import { useIssues, useUser } from "@hooks/store"
+import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
+import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
+import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project"
+import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views"
+import { observer } from "mobx-react-lite"
+import { TIssue, TUnGroupedIssues } from "@servcy/types"
+import { EIssueActions } from "../types"
 
 interface IBaseGanttRoot {
-    issueFiltersStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter;
-    issueStore: IProjectIssues | IModuleIssues | ICycleIssues | IProjectViewIssues;
-    viewId?: string;
+    issueFiltersStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter
+    issueStore: IProjectIssues | IModuleIssues | ICycleIssues | IProjectViewIssues
+    viewId?: string
     issueActions: {
-        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
-        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
-    };
+        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>
+        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>
+    }
 }
 
 export const BaseGanttRoot: React.FC<IBaseGanttRoot> = observer((props: IBaseGanttRoot) => {
-    const { issueFiltersStore, issueStore, viewId } = props;
+    const { issueFiltersStore, issueStore, viewId } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { issueMap } = useIssues();
-    const appliedDisplayFilters = issueFiltersStore.issueFilters?.displayFilters;
+    } = useUser()
+    const { issueMap } = useIssues()
+    const appliedDisplayFilters = issueFiltersStore.issueFilters?.displayFilters
 
-    const issueIds = (issueStore.groupedIssueIds ?? []) as TUnGroupedIssues;
-    const { enableIssueCreation } = issueStore?.viewFlags || {};
+    const issueIds = (issueStore.groupedIssueIds ?? []) as TUnGroupedIssues
+    const { enableIssueCreation } = issueStore?.viewFlags || {}
 
-    const issues = issueIds.map((id) => issueMap?.[id]);
+    const issues = issueIds.map((id) => issueMap?.[id])
 
     const updateIssueBlockStructure = async (issue: TIssue, data: IBlockUpdateData) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
-        const payload: any = { ...data };
-        if (data.sort_order) payload.sort_order = data.sort_order.newSortOrder;
+        const payload: any = { ...data }
+        if (data.sort_order) payload.sort_order = data.sort_order.newSortOrder
 
-        await issueStore.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, payload, viewId);
-    };
+        await issueStore.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, payload, viewId)
+    }
 
-    const isAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
     return (
         <>
@@ -82,5 +77,5 @@ export const BaseGanttRoot: React.FC<IBaseGanttRoot> = observer((props: IBaseGan
                 />
             </div>
         </>
-    );
-});
+    )
+})

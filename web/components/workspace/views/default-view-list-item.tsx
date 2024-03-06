@@ -1,16 +1,15 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { truncateText } from "@helpers/string.helper"
+import { observer } from "mobx-react-lite"
 
-import { truncateText } from "@helpers/string.helper";
-
-type Props = { view: { key: string; label: string } };
+type Props = { view: { key: string; label: string } }
 
 export const GlobalDefaultViewListItem: React.FC<Props> = observer((props) => {
-    const { view } = props;
+    const { view } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     return (
         <div className="group border-b border-custom-border-200 hover:bg-custom-background-90">
@@ -26,5 +25,5 @@ export const GlobalDefaultViewListItem: React.FC<Props> = observer((props) => {
                 </div>
             </Link>
         </div>
-    );
-});
+    )
+})

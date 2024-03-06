@@ -1,49 +1,43 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { observer } from "mobx-react-lite";
-
-import { useProject, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-import { Controller, useForm } from "react-hook-form";
-
-import { MemberSelect } from "@components/project";
-
-import { Loader } from "@servcy/ui";
-
-import { IProject, IUserLite, IWorkspace } from "@servcy/types";
-
-import { PROJECT_MEMBERS } from "@constants/fetch-keys";
-
-import { EUserProjectRoles } from "@constants/project";
+import { useRouter } from "next/router"
+import { useEffect } from "react"
+import { MemberSelect } from "@components/project"
+import { PROJECT_MEMBERS } from "@constants/fetch-keys"
+import { EUserProjectRoles } from "@constants/project"
+import { useProject, useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import useSWR from "swr"
+import { IProject, IUserLite, IWorkspace } from "@servcy/types"
+import { Loader } from "@servcy/ui"
 
 const defaultValues: Partial<IProject> = {
     project_lead: null,
     default_assignee: null,
-};
+}
 
 export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails, fetchProjectDetails, updateProject } = useProject();
+    } = useUser()
+    const { currentProjectDetails, fetchProjectDetails, updateProject } = useProject()
     // derived values
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
+    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
 
     // form info
-    const { reset, control } = useForm<IProject>({ defaultValues });
+    const { reset, control } = useForm<IProject>({ defaultValues })
     // fetching user members
     useSWR(
         workspaceSlug && projectId ? PROJECT_MEMBERS(projectId.toString()) : null,
         workspaceSlug && projectId ? () => fetchProjectDetails(workspaceSlug.toString(), projectId.toString()) : null
-    );
+    )
 
     useEffect(() => {
-        if (!currentProjectDetails) return;
+        if (!currentProjectDetails) return
 
         reset({
             ...currentProjectDetails,
@@ -51,11 +45,11 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                 (currentProjectDetails.default_assignee as IUserLite)?.id ?? currentProjectDetails.default_assignee,
             project_lead: (currentProjectDetails.project_lead as IUserLite)?.id ?? currentProjectDetails.project_lead,
             workspace: (currentProjectDetails.workspace as IWorkspace).id,
-        });
-    }, [currentProjectDetails, reset]);
+        })
+    }, [currentProjectDetails, reset])
 
     const submitChanges = async (formData: Partial<IProject>) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
         reset({
             ...currentProjectDetails,
@@ -63,24 +57,24 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                 (currentProjectDetails?.default_assignee as IUserLite)?.id ?? currentProjectDetails?.default_assignee,
             project_lead: (currentProjectDetails?.project_lead as IUserLite)?.id ?? currentProjectDetails?.project_lead,
             ...formData,
-        });
+        })
 
         await updateProject(workspaceSlug.toString(), projectId.toString(), {
             default_assignee: formData.default_assignee === "none" ? null : formData.default_assignee,
             project_lead: formData.project_lead === "none" ? null : formData.project_lead,
         })
             .then(() => {
-                fetchProjectDetails(workspaceSlug.toString(), projectId.toString());
+                fetchProjectDetails(workspaceSlug.toString(), projectId.toString())
                 toast.error({
                     title: "Success",
                     type: "success",
                     message: "Project updated successfully",
-                });
+                })
             })
             .catch((err) => {
-                console.error(err);
-            });
-    };
+                console.error(err)
+            })
+    }
 
     return (
         <>
@@ -101,7 +95,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                                         <MemberSelect
                                             value={value}
                                             onChange={(val: string) => {
-                                                submitChanges({ project_lead: val });
+                                                submitChanges({ project_lead: val })
                                             }}
                                             isDisabled={!isAdmin}
                                         />
@@ -126,7 +120,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                                         <MemberSelect
                                             value={value}
                                             onChange={(val: string) => {
-                                                submitChanges({ default_assignee: val });
+                                                submitChanges({ default_assignee: val })
                                             }}
                                             isDisabled={!isAdmin}
                                         />
@@ -142,5 +136,5 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

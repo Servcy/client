@@ -1,41 +1,39 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
-import { AlertTriangle } from "lucide-react";
-
-import { useUser } from "@hooks/store";
-
-import { Button } from "@servcy/ui";
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useUser } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: () => Promise<void>;
+    isOpen: boolean
+    onClose: () => void
+    onSubmit: () => Promise<void>
     userDetails: {
-        id: string;
-        display_name: string;
-    };
-};
+        id: string
+        display_name: string
+    }
+}
 
 export const ConfirmWorkspaceMemberRemove: React.FC<Props> = observer((props) => {
-    const { isOpen, onClose, onSubmit, userDetails } = props;
+    const { isOpen, onClose, onSubmit, userDetails } = props
     // states
-    const [isRemoving, setIsRemoving] = useState(false);
+    const [isRemoving, setIsRemoving] = useState(false)
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
 
     const handleClose = () => {
-        onClose();
-        setIsRemoving(false);
-    };
+        onClose()
+        setIsRemoving(false)
+    }
 
     const handleDeletion = async () => {
-        setIsRemoving(true);
+        setIsRemoving(true)
 
-        await onSubmit();
+        await onSubmit()
 
-        handleClose();
-    };
+        handleClose()
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -122,5 +120,5 @@ export const ConfirmWorkspaceMemberRemove: React.FC<Props> = observer((props) =>
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

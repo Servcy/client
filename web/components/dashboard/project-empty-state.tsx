@@ -1,25 +1,21 @@
-import Image from "next/image";
-import { observer } from "mobx-react-lite";
-
-import { useApplication, useEventTracker, useUser } from "@hooks/store";
-
-import { Button } from "@servcy/ui";
-
-import ProjectEmptyStateImage from "public/empty-state/dashboard/project.svg";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import Image from "next/image"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useApplication, useEventTracker, useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import ProjectEmptyStateImage from "public/empty-state/dashboard/project.svg"
+import { Button } from "@servcy/ui"
 
 export const DashboardProjectEmptyState = observer(() => {
     // store hooks
     const {
         commandPalette: { toggleCreateProjectModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
     // derived values
-    const canCreateProject = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN;
+    const canCreateProject = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
 
     return (
         <div className="h-full flex flex-col justify-center lg:w-3/5 mx-auto space-y-4">
@@ -35,8 +31,8 @@ export const DashboardProjectEmptyState = observer(() => {
                     <Button
                         variant="primary"
                         onClick={() => {
-                            setTrackElement("Project empty state");
-                            toggleCreateProjectModal(true);
+                            setTrackElement("Project empty state")
+                            toggleCreateProjectModal(true)
                         }}
                     >
                         Build your first project
@@ -44,5 +40,5 @@ export const DashboardProjectEmptyState = observer(() => {
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

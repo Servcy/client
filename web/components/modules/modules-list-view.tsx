@@ -1,39 +1,35 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-
-import { useApplication, useEventTracker, useModule, useUser } from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { ModuleCardItem, ModuleListItem, ModulePeekOverview, ModulesListGanttChartView } from "@components/modules";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-
-import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
-
-import { EUserProjectRoles } from "@constants/project";
-import { MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { useRouter } from "next/router"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { ModuleCardItem, ModuleListItem, ModulePeekOverview, ModulesListGanttChartView } from "@components/modules"
+import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui"
+import { MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserProjectRoles } from "@constants/project"
+import { useApplication, useEventTracker, useModule, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
 
 export const ModulesListView: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, peekModule } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, peekModule } = router.query
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { commandPalette: commandPaletteStore } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    const { commandPalette: commandPaletteStore } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentProjectRole },
         currentUser,
-    } = useUser();
-    const { projectModuleIds, loader } = useModule();
+    } = useUser()
+    const { projectModuleIds, loader } = useModule()
 
-    const { storedValue: modulesView } = useLocalStorage("modules_view", "grid");
+    const { storedValue: modulesView } = useLocalStorage("modules_view", "grid")
 
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "modules", isLightMode);
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "modules", isLightMode)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
     if (loader || !projectModuleIds)
         return (
@@ -42,7 +38,7 @@ export const ModulesListView: React.FC = observer(() => {
                 {modulesView === "grid" && <CycleModuleBoardLayout />}
                 {modulesView === "gantt_chart" && <GanttLayoutLoader />}
             </>
-        );
+        )
 
     return (
         <>
@@ -98,8 +94,8 @@ export const ModulesListView: React.FC = observer(() => {
                     primaryButton={{
                         text: MODULE_EMPTY_STATE_DETAILS["modules"].primaryButton.text,
                         onClick: () => {
-                            setTrackElement("Module empty state");
-                            commandPaletteStore.toggleCreateModuleModal(true);
+                            setTrackElement("Module empty state")
+                            commandPaletteStore.toggleCreateModuleModal(true)
                         },
                     }}
                     size="lg"
@@ -107,5 +103,5 @@ export const ModulesListView: React.FC = observer(() => {
                 />
             )}
         </>
-    );
-});
+    )
+})

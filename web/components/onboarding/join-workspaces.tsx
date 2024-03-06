@@ -1,23 +1,20 @@
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { observer } from "mobx-react-lite";
-
-import { useUser } from "@hooks/store";
-
-import { Invitations, OnboardingSidebar, OnboardingStepIndicator, Workspace } from "@components/onboarding";
-
-import { IWorkspace, TOnboardingSteps } from "@servcy/types";
+import React from "react"
+import { Invitations, OnboardingSidebar, OnboardingStepIndicator, Workspace } from "@components/onboarding"
+import { useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import { IWorkspace, TOnboardingSteps } from "@servcy/types"
 
 type Props = {
-    finishOnboarding: () => Promise<void>;
-    stepChange: (steps: Partial<TOnboardingSteps>) => Promise<void>;
-    setTryDiffAccount: () => void;
-};
+    finishOnboarding: () => Promise<void>
+    stepChange: (steps: Partial<TOnboardingSteps>) => Promise<void>
+    setTryDiffAccount: () => void
+}
 
 export const JoinWorkspaces: React.FC<Props> = observer((props) => {
-    const { stepChange, setTryDiffAccount } = props;
+    const { stepChange, setTryDiffAccount } = props
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
     // form info
     const {
         handleSubmit,
@@ -31,12 +28,12 @@ export const JoinWorkspaces: React.FC<Props> = observer((props) => {
             slug: "",
         },
         mode: "onChange",
-    });
+    })
 
     const handleNextStep = async () => {
-        if (!currentUser) return;
-        await stepChange({ workspace_join: true, workspace_create: true });
-    };
+        if (!currentUser) return
+        await stepChange({ workspace_join: true, workspace_create: true })
+    }
 
     return (
         <div className="flex w-full">
@@ -83,5 +80,5 @@ export const JoinWorkspaces: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

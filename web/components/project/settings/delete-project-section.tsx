@@ -1,19 +1,16 @@
-import React from "react";
-
-import { Disclosure, Transition } from "@headlessui/react";
-import { Button, Loader } from "@servcy/ui";
-
-import { ChevronDown, ChevronUp } from "lucide-react";
-
-import { IProject } from "@servcy/types";
+import React from "react"
+import { Disclosure, Transition } from "@headlessui/react"
+import { ChevronDown, ChevronUp } from "lucide-react"
+import { IProject } from "@servcy/types"
+import { Button, Loader } from "@servcy/ui"
 
 export interface IDeleteProjectSection {
-    projectDetails: IProject;
-    handleDelete: () => void;
+    projectDetails: IProject
+    handleDelete: () => void
 }
 
 export const DeleteProjectSection: React.FC<IDeleteProjectSection> = (props) => {
-    const { projectDetails, handleDelete } = props;
+    const { projectDetails, handleDelete } = props
 
     return (
         <Disclosure as="div" className="border-t border-custom-border-100">
@@ -63,5 +60,5 @@ export const DeleteProjectSection: React.FC<IDeleteProjectSection> = (props) => 
                 </div>
             )}
         </Disclosure>
-    );
-};
+    )
+}

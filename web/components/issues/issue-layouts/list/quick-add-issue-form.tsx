@@ -1,32 +1,28 @@
-import { FC, useEffect, useState, useRef, use } from "react";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { PlusIcon } from "lucide-react";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-import useKeypress from "@hooks/use-key-press";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { TIssue, IProject } from "@servcy/types";
-
-import { createIssuePayload } from "@helpers/issue.helper";
-
-import { ISSUE_CREATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { FC, use, useEffect, useRef, useState } from "react"
+import { ISSUE_CREATED } from "@constants/event-tracker"
+import { createIssuePayload } from "@helpers/issue.helper"
+import { useEventTracker, useProject } from "@hooks/store"
+import useKeypress from "@hooks/use-key-press"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { PlusIcon } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IProject, TIssue } from "@servcy/types"
 
 interface IInputProps {
-    formKey: string;
-    register: any;
-    setFocus: any;
-    projectDetail: IProject | null;
+    formKey: string
+    register: any
+    setFocus: any
+    projectDetail: IProject | null
 }
 const Inputs: FC<IInputProps> = (props) => {
-    const { formKey, register, setFocus, projectDetail } = props;
+    const { formKey, register, setFocus, projectDetail } = props
 
     useEffect(() => {
-        setFocus(formKey);
-    }, [formKey, setFocus]);
+        setFocus(formKey)
+    }, [formKey, setFocus])
 
     return (
         <div className="flex w-full items-center gap-3">
@@ -41,42 +37,42 @@ const Inputs: FC<IInputProps> = (props) => {
                 className="w-full rounded-md bg-transparent px-2 py-3 text-sm font-medium leading-5 text-custom-text-200 outline-none"
             />
         </div>
-    );
-};
+    )
+}
 
 interface IListQuickAddIssueForm {
-    prePopulatedData?: Partial<TIssue>;
+    prePopulatedData?: Partial<TIssue>
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
+    ) => Promise<TIssue | undefined>
+    viewId?: string
 }
 
 const defaultValues: Partial<TIssue> = {
     name: "",
-};
+}
 
 export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props) => {
-    const { prePopulatedData, quickAddCallback, viewId } = props;
+    const { prePopulatedData, quickAddCallback, viewId } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
-    const { getProjectById } = useProject();
-    const { captureIssueEvent } = useEventTracker();
+    const { getProjectById } = useProject()
+    const { captureIssueEvent } = useEventTracker()
 
-    const projectDetail = (projectId && getProjectById(projectId.toString())) || undefined;
+    const projectDetail = (projectId && getProjectById(projectId.toString())) || undefined
 
-    const ref = useRef<HTMLFormElement>(null);
+    const ref = useRef<HTMLFormElement>(null)
 
-    const [isOpen, setIsOpen] = useState(false);
-    const handleClose = () => setIsOpen(false);
+    const [isOpen, setIsOpen] = useState(false)
+    const handleClose = () => setIsOpen(false)
 
-    useKeypress("Escape", handleClose);
-    useOutsideClickDetector(ref, handleClose);
+    useKeypress("Escape", handleClose)
+    useOutsideClickDetector(ref, handleClose)
 
     const {
         reset,
@@ -84,21 +80,21 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
         setFocus,
         register,
         formState: { errors, isSubmitting },
-    } = useForm<TIssue>({ defaultValues });
+    } = useForm<TIssue>({ defaultValues })
 
     useEffect(() => {
-        if (!isOpen) reset({ ...defaultValues });
-    }, [isOpen, reset]);
+        if (!isOpen) reset({ ...defaultValues })
+    }, [isOpen, reset])
 
     const onSubmitHandler = async (formData: TIssue) => {
-        if (isSubmitting || !workspaceSlug || !projectId) return;
+        if (isSubmitting || !workspaceSlug || !projectId) return
 
-        reset({ ...defaultValues });
+        reset({ ...defaultValues })
 
         const payload = createIssuePayload(projectId.toString(), {
             ...(prePopulatedData ?? {}),
             ...formData,
-        });
+        })
 
         try {
             quickAddCallback &&
@@ -108,27 +104,27 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
                             eventName: ISSUE_CREATED,
                             payload: { ...res, state: "SUCCESS", element: "List quick add" },
                             path: router.asPath,
-                        });
+                        })
                     }
-                ));
+                ))
             toast.error({
                 type: "success",
                 title: "Success!",
                 message: "Issue created successfully.",
-            });
+            })
         } catch (err: any) {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "List quick add" },
                 path: router.asPath,
-            });
+            })
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: err?.message || "Some error occurred. Please try again.",
-            });
+            })
         }
-    };
+    }
 
     return (
         <div
@@ -162,5 +158,5 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

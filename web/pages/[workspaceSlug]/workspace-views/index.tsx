@@ -1,28 +1,21 @@
-import { observer } from "mobx-react";
-import { ReactElement, useState } from "react";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { PageHead } from "@components/core";
-import { GlobalIssuesHeader } from "@components/headers";
-import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspace";
-
-import { Input } from "@servcy/ui";
-
-import { Search } from "lucide-react";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace";
-
-import { useWorkspace } from "@hooks/store";
+import { ReactElement, useState } from "react"
+import { PageHead } from "@components/core"
+import { GlobalIssuesHeader } from "@components/headers"
+import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspace"
+import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
+import { useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { Search } from "lucide-react"
+import { observer } from "mobx-react"
+import { Input } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState("")
     // store
-    const { currentWorkspace } = useWorkspace();
+    const { currentWorkspace } = useWorkspace()
     // derived values
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - All Views` : undefined;
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - All Views` : undefined
 
     return (
         <>
@@ -48,11 +41,11 @@ const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})
 
 WorkspaceViewsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <AppLayout header={<GlobalIssuesHeader activeLayout="list" />}>{page}</AppLayout>;
-};
+    return <AppLayout header={<GlobalIssuesHeader activeLayout="list" />}>{page}</AppLayout>
+}
 
-export default WorkspaceViewsPage;
+export default WorkspaceViewsPage

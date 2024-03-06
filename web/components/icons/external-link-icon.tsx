@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const ExternalLinkIcon: React.FC<Props> = ({ width = "24", height = "24", className, color = "black" }) => (
     <svg
@@ -30,4 +29,4 @@ export const ExternalLinkIcon: React.FC<Props> = ({ width = "24", height = "24",
     //     fill="black"
     //   />
     // </svg>
-);
+)

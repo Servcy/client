@@ -1,37 +1,34 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { useFormContext, useFieldArray, Controller } from "react-hook-form";
-
-import { WorkspaceService } from "@services/workspace.service";
-
-import { Avatar, CustomSelect, CustomSearchSelect, Input, ToggleSwitch } from "@servcy/ui";
-
-import { IJiraImporterForm } from "@servcy/types";
+import { useRouter } from "next/router"
+import { FC } from "react"
 // fetch keys
-import { WORKSPACE_MEMBERS } from "@constants/fetch-keys";
+import { WORKSPACE_MEMBERS } from "@constants/fetch-keys"
+import { WorkspaceService } from "@services/workspace.service"
+import { Controller, useFieldArray, useFormContext } from "react-hook-form"
+import useSWR from "swr"
+import { IJiraImporterForm } from "@servcy/types"
+import { Avatar, CustomSearchSelect, CustomSelect, Input, ToggleSwitch } from "@servcy/ui"
 
-const workspaceService = new WorkspaceService();
+const workspaceService = new WorkspaceService()
 
 export const JiraImportUsers: FC = () => {
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // form info
     const {
         control,
         watch,
         formState: { errors },
-    } = useFormContext<IJiraImporterForm>();
+    } = useFormContext<IJiraImporterForm>()
 
     const { fields } = useFieldArray({
         control,
         name: "data.users",
-    });
+    })
 
     const { data: members } = useSWR(
         workspaceSlug ? WORKSPACE_MEMBERS(workspaceSlug?.toString() ?? "") : null,
         workspaceSlug ? () => workspaceService.fetchWorkspaceMembers(workspaceSlug?.toString() ?? "") : null
-    );
+    )
 
     const options = members?.map((member) => ({
         value: member.member.email,
@@ -42,7 +39,7 @@ export const JiraImportUsers: FC = () => {
                 {member.member.display_name}
             </div>
         ),
-    }));
+    }))
 
     return (
         <div className="h-full w-full space-y-10 divide-y-2 divide-custom-border-200 overflow-y-auto">
@@ -143,5 +140,5 @@ export const JiraImportUsers: FC = () => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}

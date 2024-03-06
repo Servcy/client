@@ -1,25 +1,23 @@
-import { FC, useState, Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { Search, X } from "lucide-react";
-
-import { ShortcutCommandsList } from "@components/command-palette";
-
-import { Input } from "@servcy/ui";
+import { FC, Fragment, useState } from "react"
+import { ShortcutCommandsList } from "@components/command-palette"
+import { Dialog, Transition } from "@headlessui/react"
+import { Search, X } from "lucide-react"
+import { Input } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-};
+    isOpen: boolean
+    onClose: () => void
+}
 
 export const ShortcutsModal: FC<Props> = (props) => {
-    const { isOpen, onClose } = props;
+    const { isOpen, onClose } = props
     // states
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState("")
 
     const handleClose = () => {
-        onClose();
-        setQuery("");
-    };
+        onClose()
+        setQuery("")
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -80,5 +78,5 @@ export const ShortcutsModal: FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

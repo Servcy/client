@@ -1,33 +1,31 @@
-import { FC, useEffect, Fragment } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
+import { FC, Fragment, useEffect } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { Controller, useForm } from "react-hook-form"
+import type { TIssueLinkEditableFields } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
+import { TLinkOperations } from "./root"
 
-import { Button, Input } from "@servcy/ui";
-
-import type { TIssueLinkEditableFields } from "@servcy/types";
-import { TLinkOperations } from "./root";
-
-export type TLinkOperationsModal = Exclude<TLinkOperations, "remove">;
+export type TLinkOperationsModal = Exclude<TLinkOperations, "remove">
 
 export type TIssueLinkCreateFormFieldOptions = TIssueLinkEditableFields & {
-    id?: string;
-};
+    id?: string
+}
 
 export type TIssueLinkCreateEditModal = {
-    isModalOpen: boolean;
-    handleModal: (modalToggle: boolean) => void;
-    linkOperations: TLinkOperationsModal;
-    preloadedData?: TIssueLinkCreateFormFieldOptions | null;
-};
+    isModalOpen: boolean
+    handleModal: (modalToggle: boolean) => void
+    linkOperations: TLinkOperationsModal
+    preloadedData?: TIssueLinkCreateFormFieldOptions | null
+}
 
 const defaultValues: TIssueLinkCreateFormFieldOptions = {
     title: "",
     url: "",
-};
+}
 
 export const IssueLinkCreateUpdateModal: FC<TIssueLinkCreateEditModal> = (props) => {
     // props
-    const { isModalOpen, handleModal, linkOperations, preloadedData } = props;
+    const { isModalOpen, handleModal, linkOperations, preloadedData } = props
 
     // react hook form
     const {
@@ -37,25 +35,25 @@ export const IssueLinkCreateUpdateModal: FC<TIssueLinkCreateEditModal> = (props)
         reset,
     } = useForm<TIssueLinkCreateFormFieldOptions>({
         defaultValues,
-    });
+    })
 
     const onClose = () => {
-        handleModal(false);
+        handleModal(false)
         const timeout = setTimeout(() => {
-            reset(preloadedData ? preloadedData : defaultValues);
-            clearTimeout(timeout);
-        }, 500);
-    };
+            reset(preloadedData ? preloadedData : defaultValues)
+            clearTimeout(timeout)
+        }, 500)
+    }
 
     const handleFormSubmit = async (formData: TIssueLinkCreateFormFieldOptions) => {
-        if (!formData || !formData.id) await linkOperations.create({ title: formData.title, url: formData.url });
-        else await linkOperations.update(formData.id as string, { title: formData.title, url: formData.url });
-        onClose();
-    };
+        if (!formData || !formData.id) await linkOperations.create({ title: formData.title, url: formData.url })
+        else await linkOperations.update(formData.id as string, { title: formData.title, url: formData.url })
+        onClose()
+    }
 
     useEffect(() => {
-        reset({ ...defaultValues, ...preloadedData });
-    }, [preloadedData, reset]);
+        reset({ ...defaultValues, ...preloadedData })
+    }, [preloadedData, reset])
 
     return (
         <Transition.Root show={isModalOpen} as={Fragment}>
@@ -166,5 +164,5 @@ export const IssueLinkCreateUpdateModal: FC<TIssueLinkCreateEditModal> = (props)
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

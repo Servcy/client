@@ -1,52 +1,47 @@
-import React from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { Pencil, X } from "lucide-react";
-
-import { useIssueDetail, useProject } from "@hooks/store";
-
-import { ParentIssuesListModal } from "@components/issues";
-
-import { Tooltip } from "@servcy/ui";
-
-import { cn } from "@helpers/common.helper";
-
-import { TIssueOperations } from "./root";
+import Link from "next/link"
+import React from "react"
+import { ParentIssuesListModal } from "@components/issues"
+import { cn } from "@helpers/common.helper"
+import { useIssueDetail, useProject } from "@hooks/store"
+import { Pencil, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Tooltip } from "@servcy/ui"
+import { TIssueOperations } from "./root"
 
 type TIssueParentSelect = {
-    className?: string;
-    disabled?: boolean;
-    issueId: string;
-    issueOperations: TIssueOperations;
-    projectId: string;
-    workspaceSlug: string;
-};
+    className?: string
+    disabled?: boolean
+    issueId: string
+    issueOperations: TIssueOperations
+    projectId: string
+    workspaceSlug: string
+}
 
 export const IssueParentSelect: React.FC<TIssueParentSelect> = observer((props) => {
-    const { className = "", disabled = false, issueId, issueOperations, projectId, workspaceSlug } = props;
+    const { className = "", disabled = false, issueId, issueOperations, projectId, workspaceSlug } = props
     // store hooks
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { isParentIssueModalOpen, toggleParentIssueModal } = useIssueDetail();
+    } = useIssueDetail()
+    const { isParentIssueModalOpen, toggleParentIssueModal } = useIssueDetail()
     // derived values
-    const issue = getIssueById(issueId);
-    const parentIssue = issue?.parent_id ? getIssueById(issue.parent_id) : undefined;
+    const issue = getIssueById(issueId)
+    const parentIssue = issue?.parent_id ? getIssueById(issue.parent_id) : undefined
     const parentIssueProjectDetails =
-        parentIssue && parentIssue.project_id ? getProjectById(parentIssue.project_id) : undefined;
+        parentIssue && parentIssue.project_id ? getProjectById(parentIssue.project_id) : undefined
 
     const handleParentIssue = async (_issueId: string | null = null) => {
         try {
-            await issueOperations.update(workspaceSlug, projectId, issueId, { parent_id: _issueId });
-            await issueOperations.fetch(workspaceSlug, projectId, issueId);
-            toggleParentIssueModal(false);
+            await issueOperations.update(workspaceSlug, projectId, issueId, { parent_id: _issueId })
+            await issueOperations.fetch(workspaceSlug, projectId, issueId)
+            toggleParentIssueModal(false)
         } catch (error) {
-            console.error("something went wrong while fetching the issue");
+            console.error("something went wrong while fetching the issue")
         }
-    };
+    }
 
-    if (!issue) return <></>;
+    if (!issue) return <></>
 
     return (
         <>
@@ -89,9 +84,9 @@ export const IssueParentSelect: React.FC<TIssueParentSelect> = observer((props) 
                             <Tooltip tooltipContent="Remove" position="bottom">
                                 <span
                                     onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        handleParentIssue(null);
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        handleParentIssue(null)
                                     }}
                                 >
                                     <X className="h-2.5 w-2.5 text-custom-text-300 hover:text-red-500" />
@@ -113,5 +108,5 @@ export const IssueParentSelect: React.FC<TIssueParentSelect> = observer((props) 
                 )}
             </button>
         </>
-    );
-});
+    )
+})

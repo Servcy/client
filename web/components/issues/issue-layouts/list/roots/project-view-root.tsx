@@ -1,35 +1,32 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
+import React from "react"
+import { EIssuesStoreType } from "@constants/issue"
 // store
-import { useIssues } from "@hooks/store";
-
-import { EIssuesStoreType } from "@constants/issue";
-
-import { EIssueActions } from "../../types";
-import { TIssue } from "@servcy/types";
-
-import { BaseListRoot } from "../base-list-root";
-import { ProjectIssueQuickActions } from "../../quick-action-dropdowns";
+import { useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { ProjectIssueQuickActions } from "../../quick-action-dropdowns"
+import { EIssueActions } from "../../types"
+import { BaseListRoot } from "../base-list-root"
 
 export interface IViewListLayout {
     issueActions: {
-        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
-        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>;
-    };
+        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>
+        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>
+    }
 }
 
 export const ProjectViewListLayout: React.FC<IViewListLayout> = observer((props) => {
-    const { issueActions } = props;
+    const { issueActions } = props
     // store
-    const { issuesFilter, issues } = useIssues(EIssuesStoreType.PROJECT_VIEW);
+    const { issuesFilter, issues } = useIssues(EIssuesStoreType.PROJECT_VIEW)
 
-    const router = useRouter();
-    const { workspaceSlug, projectId, viewId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, viewId } = router.query
 
-    if (!workspaceSlug || !projectId) return null;
+    if (!workspaceSlug || !projectId) return null
 
     return (
         <BaseListRoot
@@ -40,5 +37,5 @@ export const ProjectViewListLayout: React.FC<IViewListLayout> = observer((props)
             storeType={EIssuesStoreType.PROJECT_VIEW}
             viewId={viewId?.toString()}
         />
-    );
-});
+    )
+})

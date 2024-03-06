@@ -1,37 +1,33 @@
-import { observer } from "mobx-react";
-import { ReactElement } from "react";
-
-import { AppLayout } from "@layouts/app-layout";
-import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-
-import { useWorkspace } from "@hooks/store";
-
-import { PageHead } from "@components/core";
-import { WorkspaceSettingHeader } from "@components/headers";
-import { WorkspaceDetails } from "@components/workspace";
-
-import { NextPageWithLayout } from "@/types/types";
+import { ReactElement } from "react"
+import { PageHead } from "@components/core"
+import { WorkspaceSettingHeader } from "@components/headers"
+import { WorkspaceDetails } from "@components/workspace"
+import { useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+import { observer } from "mobx-react"
+import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceSettingsPage: NextPageWithLayout = observer(() => {
     // store hooks
-    const { currentWorkspace } = useWorkspace();
+    const { currentWorkspace } = useWorkspace()
     // derived values
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - General Settings` : undefined;
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - General Settings` : undefined
 
     return (
         <>
             <PageHead title={pageTitle} />
             <WorkspaceDetails />
         </>
-    );
-});
+    )
+})
 
 WorkspaceSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<WorkspaceSettingHeader title="General Settings" />}>
             <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default WorkspaceSettingsPage;
+export default WorkspaceSettingsPage

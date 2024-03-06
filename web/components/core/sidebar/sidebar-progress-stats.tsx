@@ -1,41 +1,36 @@
-import React from "react";
-
-import Image from "next/image";
+import Image from "next/image"
+import React from "react"
+import { SingleProgressStats } from "@components/core"
 // headless ui
-import { Tab } from "@headlessui/react";
-
-import useLocalStorage from "@hooks/use-local-storage";
+import { Tab } from "@headlessui/react"
+import useLocalStorage from "@hooks/use-local-storage"
 // images
-import emptyLabel from "public/empty-state/empty_label.svg";
-import emptyMembers from "public/empty-state/empty_members.svg";
-
-import { SingleProgressStats } from "@components/core";
-
-import { Avatar, StateGroupIcon } from "@servcy/ui";
-
+import emptyLabel from "public/empty-state/empty_label.svg"
+import emptyMembers from "public/empty-state/empty_members.svg"
 import {
     IModule,
     TAssigneesDistribution,
     TCompletionChartDistribution,
     TLabelsDistribution,
     TStateGroups,
-} from "@servcy/types";
+} from "@servcy/types"
+import { Avatar, StateGroupIcon } from "@servcy/ui"
 
 type Props = {
     distribution: {
-        assignees: TAssigneesDistribution[];
-        completion_chart: TCompletionChartDistribution;
-        labels: TLabelsDistribution[];
-    };
+        assignees: TAssigneesDistribution[]
+        completion_chart: TCompletionChartDistribution
+        labels: TLabelsDistribution[]
+    }
     groupedIssues: {
-        [key: string]: number;
-    };
-    totalIssues: number;
-    module?: IModule;
-    roundedTab?: boolean;
-    noBackground?: boolean;
-    isPeekView?: boolean;
-};
+        [key: string]: number
+    }
+    totalIssues: number
+    module?: IModule
+    roundedTab?: boolean
+    noBackground?: boolean
+    isPeekView?: boolean
+}
 
 export const SidebarProgressStats: React.FC<Props> = ({
     distribution,
@@ -46,20 +41,20 @@ export const SidebarProgressStats: React.FC<Props> = ({
     noBackground,
     isPeekView = false,
 }) => {
-    const { storedValue: tab, setValue: setTab } = useLocalStorage("tab", "Assignees");
+    const { storedValue: tab, setValue: setTab } = useLocalStorage("tab", "Assignees")
 
     const currentValue = (tab: string | null) => {
         switch (tab) {
             case "Assignees":
-                return 0;
+                return 0
             case "Labels":
-                return 1;
+                return 1
             case "States":
-                return 2;
+                return 2
             default:
-                return 0;
+                return 0
         }
-    };
+    }
 
     return (
         <Tab.Group
@@ -67,13 +62,13 @@ export const SidebarProgressStats: React.FC<Props> = ({
             onChange={(i) => {
                 switch (i) {
                     case 0:
-                        return setTab("Assignees");
+                        return setTab("Assignees")
                     case 1:
-                        return setTab("Labels");
+                        return setTab("Labels")
                     case 2:
-                        return setTab("States");
+                        return setTab("States")
                     default:
-                        return setTab("Assignees");
+                        return setTab("Assignees")
                 }
             }}
         >
@@ -161,7 +156,7 @@ export const SidebarProgressStats: React.FC<Props> = ({
                                             // selected: filters?.assignees?.includes(assignee.assignee_id ?? ""),
                                         })}
                                     />
-                                );
+                                )
                             else
                                 return (
                                     <SingleProgressStats
@@ -183,7 +178,7 @@ export const SidebarProgressStats: React.FC<Props> = ({
                                         completed={assignee.completed_issues}
                                         total={assignee.total_issues}
                                     />
-                                );
+                                )
                         })
                     ) : (
                         <div className="flex h-full flex-col items-center justify-center gap-2">
@@ -257,5 +252,5 @@ export const SidebarProgressStats: React.FC<Props> = ({
                 </Tab.Panel>
             </Tab.Panels>
         </Tab.Group>
-    );
-};
+    )
+}

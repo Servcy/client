@@ -1,19 +1,17 @@
-import { Fragment, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import Link from "next/link";
-import { useTheme } from "next-themes";
-import { Menu, Transition } from "@headlessui/react";
-import { mutate } from "swr";
-import { Check, ChevronDown, CircleUserRound, LogOut, Mails, PlusSquare, Settings, UserCircle2 } from "lucide-react";
-import { usePopper } from "react-popper";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { Fragment, useState } from "react"
+import { Menu, Transition } from "@headlessui/react"
+import { useApplication, useUser, useWorkspace } from "@hooks/store"
+import { Check, ChevronDown, CircleUserRound, LogOut, Mails, PlusSquare, Settings, UserCircle2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
+import { usePopper } from "react-popper"
+import { mutate } from "swr"
+import { IWorkspace } from "@servcy/types"
+import { Avatar, Loader } from "@servcy/ui"
 
-import { useApplication, useUser, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Avatar, Loader } from "@servcy/ui";
-
-import { IWorkspace } from "@servcy/types";
 // Static Data
 const userLinks = (workspaceSlug: string, userId: string) => [
     {
@@ -34,7 +32,7 @@ const userLinks = (workspaceSlug: string, userId: string) => [
         href: `/${workspaceSlug}/settings`,
         icon: Settings,
     },
-];
+]
 const profileLinks = (workspaceSlug: string, userId: string) => [
     {
         name: "View profile",
@@ -46,22 +44,22 @@ const profileLinks = (workspaceSlug: string, userId: string) => [
         icon: Settings,
         link: "/profile",
     },
-];
+]
 export const WorkspaceSidebarDropdown = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         theme: { sidebarCollapsed, toggleSidebar },
-    } = useApplication();
-    const { currentUser, updateCurrentUser, isUserInstanceAdmin, signOut } = useUser();
-    const { currentWorkspace: activeWorkspace, workspaces } = useWorkspace();
+    } = useApplication()
+    const { currentUser, updateCurrentUser, isUserInstanceAdmin, signOut } = useUser()
+    const { currentWorkspace: activeWorkspace, workspaces } = useWorkspace()
 
-    const { setTheme } = useTheme();
+    const { setTheme } = useTheme()
     // popper-js refs
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
     // popper-js init
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: "right",
@@ -73,17 +71,17 @@ export const WorkspaceSidebarDropdown = observer(() => {
                 },
             },
         ],
-    });
+    })
     const handleWorkspaceNavigation = (workspace: IWorkspace) =>
         updateCurrentUser({
             last_workspace_id: workspace?.id,
-        });
+        })
     const handleSignOut = async () => {
         await signOut()
             .then(() => {
-                mutate("CURRENT_USER_DETAILS", null);
-                setTheme("system");
-                router.push("/");
+                mutate("CURRENT_USER_DETAILS", null)
+                setTheme("system")
+                router.push("/")
             })
             .catch(() =>
                 toast.error({
@@ -91,14 +89,14 @@ export const WorkspaceSidebarDropdown = observer(() => {
                     title: "Error!",
                     message: "Failed to sign out. Please try again.",
                 })
-            );
-    };
+            )
+    }
     const handleItemClick = () => {
         if (window.innerWidth < 768) {
-            toggleSidebar();
+            toggleSidebar()
         }
-    };
-    const workspacesList = Object.values(workspaces ?? {});
+    }
+    const workspacesList = Object.values(workspaces ?? {})
     // TODO: fix workspaces list scroll
     return (
         <div className="flex items-center gap-x-3 gap-y-2 px-4 pt-4">
@@ -165,8 +163,8 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                                             key={workspace.id}
                                                             href={`/${workspace.slug}`}
                                                             onClick={() => {
-                                                                handleWorkspaceNavigation(workspace);
-                                                                handleItemClick();
+                                                                handleWorkspaceNavigation(workspace)
+                                                                handleItemClick()
                                                             }}
                                                             className="w-full"
                                                         >
@@ -236,7 +234,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                                     href={link.href}
                                                     className="w-full"
                                                     onClick={() => {
-                                                        if (index > 0) handleItemClick();
+                                                        if (index > 0) handleItemClick()
                                                     }}
                                                 >
                                                     <Menu.Item
@@ -302,7 +300,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                             key={index}
                                             href={link.link}
                                             onClick={() => {
-                                                if (index == 0) handleItemClick();
+                                                if (index == 0) handleItemClick()
                                             }}
                                         >
                                             <Menu.Item key={index} as="div">
@@ -342,5 +340,5 @@ export const WorkspaceSidebarDropdown = observer(() => {
                 </Menu>
             )}
         </div>
-    );
-});
+    )
+})

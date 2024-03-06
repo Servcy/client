@@ -1,21 +1,18 @@
-import { LayersIcon } from "@servcy/ui";
-
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types";
-
-import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet";
-
-import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
-import { SpreadsheetHeaderColumn } from "./spreadsheet-header-column";
+import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types"
+import { LayersIcon } from "@servcy/ui"
+import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
+import { SpreadsheetHeaderColumn } from "./spreadsheet-header-column"
 
 interface Props {
-    displayProperties: IIssueDisplayProperties;
-    displayFilters: IIssueDisplayFilterOptions;
-    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void;
-    isEstimateEnabled: boolean;
+    displayProperties: IIssueDisplayProperties
+    displayFilters: IIssueDisplayFilterOptions
+    handleDisplayFilterUpdate: (data: Partial<IIssueDisplayFilterOptions>) => void
+    isEstimateEnabled: boolean
 }
 
 export const SpreadsheetHeader = (props: Props) => {
-    const { displayProperties, displayFilters, handleDisplayFilterUpdate, isEstimateEnabled } = props;
+    const { displayProperties, displayFilters, handleDisplayFilterUpdate, isEstimateEnabled } = props
 
     return (
         <thead className="sticky top-0 left-0 z-[12] border-b-[0.5px] border-custom-border-100">
@@ -46,5 +43,5 @@ export const SpreadsheetHeader = (props: Props) => {
                 ))}
             </tr>
         </thead>
-    );
-};
+    )
+}

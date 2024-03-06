@@ -1,43 +1,39 @@
-import { FC, useState } from "react";
-import toast from "react-hot-toast";
-import { useIssueDetail, useMember } from "@hooks/store";
-
-import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
-
-import { Pencil, Trash2, LinkIcon } from "lucide-react";
-
-import { IssueLinkCreateUpdateModal, TLinkOperationsModal } from "./create-update-link-modal";
-
-import { calculateTimeAgo } from "@helpers/date-time.helper";
-import { copyTextToClipboard } from "@helpers/string.helper";
+import { FC, useState } from "react"
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+import { useIssueDetail, useMember } from "@hooks/store"
+import { LinkIcon, Pencil, Trash2 } from "lucide-react"
+import toast from "react-hot-toast"
+import { ExternalLinkIcon, Tooltip } from "@servcy/ui"
+import { IssueLinkCreateUpdateModal, TLinkOperationsModal } from "./create-update-link-modal"
 
 export type TIssueLinkDetail = {
-    linkId: string;
-    linkOperations: TLinkOperationsModal;
-    isNotAllowed: boolean;
-};
+    linkId: string
+    linkOperations: TLinkOperationsModal
+    isNotAllowed: boolean
+}
 
 export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
     // props
-    const { linkId, linkOperations, isNotAllowed } = props;
+    const { linkId, linkOperations, isNotAllowed } = props
 
     const {
         toggleIssueLinkModal: toggleIssueLinkModalStore,
         link: { getLinkById },
-    } = useIssueDetail();
-    const { getUserDetails } = useMember();
+    } = useIssueDetail()
+    const { getUserDetails } = useMember()
 
     // state
-    const [isIssueLinkModalOpen, setIsIssueLinkModalOpen] = useState(false);
+    const [isIssueLinkModalOpen, setIsIssueLinkModalOpen] = useState(false)
     const toggleIssueLinkModal = (modalToggle: boolean) => {
-        toggleIssueLinkModalStore(modalToggle);
-        setIsIssueLinkModalOpen(modalToggle);
-    };
+        toggleIssueLinkModalStore(modalToggle)
+        setIsIssueLinkModalOpen(modalToggle)
+    }
 
-    const linkDetail = getLinkById(linkId);
-    if (!linkDetail) return <></>;
+    const linkDetail = getLinkById(linkId)
+    if (!linkDetail) return <></>
 
-    const createdByDetails = getUserDetails(linkDetail.created_by_id);
+    const createdByDetails = getUserDetails(linkDetail.created_by_id)
 
     return (
         <div key={linkId}>
@@ -52,12 +48,12 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
                 <div
                     className="flex w-full items-start justify-between gap-2 cursor-pointer"
                     onClick={() => {
-                        copyTextToClipboard(linkDetail.url);
+                        copyTextToClipboard(linkDetail.url)
                         toast.error({
                             type: "success",
                             title: "Link copied!",
                             message: "Link copied to clipboard",
-                        });
+                        })
                     }}
                 >
                     <div className="flex items-start gap-2 truncate">
@@ -81,9 +77,9 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
                                 type="button"
                                 className="flex items-center justify-center p-1 hover:bg-custom-background-80"
                                 onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    toggleIssueLinkModal(true);
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    toggleIssueLinkModal(true)
                                 }}
                             >
                                 <Pencil className="h-3 w-3 stroke-[1.5] text-custom-text-200" />
@@ -100,9 +96,9 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
                                 type="button"
                                 className="flex items-center justify-center p-1 hover:bg-custom-background-80"
                                 onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    linkOperations.remove(linkDetail.id);
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    linkOperations.remove(linkDetail.id)
                                 }}
                             >
                                 <Trash2 className="h-3 w-3" />
@@ -127,5 +123,5 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

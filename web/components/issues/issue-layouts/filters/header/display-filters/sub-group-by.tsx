@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { IIssueDisplayFilterOptions, TIssueGroupByOptions } from "@servcy/types";
-
-import { ISSUE_GROUP_BY_OPTIONS } from "@constants/issue";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { ISSUE_GROUP_BY_OPTIONS } from "@constants/issue"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, TIssueGroupByOptions } from "@servcy/types"
 
 type Props = {
-    displayFilters: IIssueDisplayFilterOptions;
-    handleUpdate: (val: TIssueGroupByOptions) => void;
-    subGroupByOptions: TIssueGroupByOptions[];
-    ignoreGroupedFilters: Partial<TIssueGroupByOptions>[];
-};
+    displayFilters: IIssueDisplayFilterOptions
+    handleUpdate: (val: TIssueGroupByOptions) => void
+    subGroupByOptions: TIssueGroupByOptions[]
+    ignoreGroupedFilters: Partial<TIssueGroupByOptions>[]
+}
 
 export const FilterSubGroupBy: React.FC<Props> = observer((props) => {
-    const { displayFilters, handleUpdate, subGroupByOptions, ignoreGroupedFilters } = props;
+    const { displayFilters, handleUpdate, subGroupByOptions, ignoreGroupedFilters } = props
 
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const selectedGroupBy = displayFilters.group_by ?? null;
-    const selectedSubGroupBy = displayFilters.sub_group_by ?? null;
+    const selectedGroupBy = displayFilters.group_by ?? null
+    const selectedSubGroupBy = displayFilters.sub_group_by ?? null
 
     return (
         <>
@@ -33,8 +30,8 @@ export const FilterSubGroupBy: React.FC<Props> = observer((props) => {
                 <div>
                     {ISSUE_GROUP_BY_OPTIONS.filter((option) => subGroupByOptions.includes(option.key)).map(
                         (subGroupBy) => {
-                            if (selectedGroupBy !== null && subGroupBy.key === selectedGroupBy) return null;
-                            if (ignoreGroupedFilters.includes(subGroupBy?.key)) return null;
+                            if (selectedGroupBy !== null && subGroupBy.key === selectedGroupBy) return null
+                            if (ignoreGroupedFilters.includes(subGroupBy?.key)) return null
 
                             return (
                                 <FilterOption
@@ -44,11 +41,11 @@ export const FilterSubGroupBy: React.FC<Props> = observer((props) => {
                                     title={subGroupBy.title}
                                     multiple={false}
                                 />
-                            );
+                            )
                         }
                     )}
                 </div>
             )}
         </>
-    );
-});
+    )
+})

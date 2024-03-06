@@ -1,20 +1,18 @@
-import React from "react";
-
-import { CustomSelect, CalendarAfterIcon, CalendarBeforeIcon } from "@servcy/ui";
-
-import { CalendarDays } from "lucide-react";
+import React from "react"
+import { CalendarDays } from "lucide-react"
+import { CalendarAfterIcon, CalendarBeforeIcon, CustomSelect } from "@servcy/ui"
 
 type Props = {
-    title: string;
-    value: string;
-    onChange: (value: string) => void;
-};
+    title: string
+    value: string
+    onChange: (value: string) => void
+}
 
 type DueDate = {
-    name: string;
-    value: string;
-    icon: any;
-};
+    name: string
+    value: string
+    icon: any
+}
 
 const dueDateRange: DueDate[] = [
     {
@@ -32,7 +30,7 @@ const dueDateRange: DueDate[] = [
         value: "range",
         icon: <CalendarDays className="h-4 w-4 " />,
     },
-];
+]
 
 export const DateFilterSelect: React.FC<Props> = ({ title, value, onChange }) => (
     <CustomSelect
@@ -56,4 +54,4 @@ export const DateFilterSelect: React.FC<Props> = ({ title, value, onChange }) =>
             </CustomSelect.Option>
         ))}
     </CustomSelect>
-);
+)

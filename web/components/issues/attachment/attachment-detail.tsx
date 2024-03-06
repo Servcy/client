@@ -1,43 +1,38 @@
-import { FC, useState } from "react";
-import Link from "next/link";
-import { AlertCircle, X } from "lucide-react";
-
-import { useIssueDetail, useMember } from "@hooks/store";
-
-import { Tooltip } from "@servcy/ui";
-
-import { IssueAttachmentDeleteModal } from "./delete-attachment-confirmation-modal";
-
-import { getFileIcon } from "@components/icons";
+import Link from "next/link"
+import { FC, useState } from "react"
+import { getFileIcon } from "@components/icons"
+import { convertBytesToSize, getFileExtension, getFileName } from "@helpers/attachment.helper"
+import { renderFormattedDate } from "@helpers/date-time.helper"
 // helper
-import { truncateText } from "@helpers/string.helper";
-import { renderFormattedDate } from "@helpers/date-time.helper";
-import { convertBytesToSize, getFileExtension, getFileName } from "@helpers/attachment.helper";
+import { truncateText } from "@helpers/string.helper"
+import { useIssueDetail, useMember } from "@hooks/store"
+import { AlertCircle, X } from "lucide-react"
+import { Tooltip } from "@servcy/ui"
+import { IssueAttachmentDeleteModal } from "./delete-attachment-confirmation-modal"
+import { TAttachmentOperations } from "./root"
 
-import { TAttachmentOperations } from "./root";
-
-type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">;
+type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">
 
 type TIssueAttachmentsDetail = {
-    attachmentId: string;
-    handleAttachmentOperations: TAttachmentOperationsRemoveModal;
-    disabled?: boolean;
-};
+    attachmentId: string
+    handleAttachmentOperations: TAttachmentOperationsRemoveModal
+    disabled?: boolean
+}
 
 export const IssueAttachmentsDetail: FC<TIssueAttachmentsDetail> = (props) => {
     // props
-    const { attachmentId, handleAttachmentOperations, disabled } = props;
+    const { attachmentId, handleAttachmentOperations, disabled } = props
     // store hooks
-    const { getUserDetails } = useMember();
+    const { getUserDetails } = useMember()
     const {
         attachment: { getAttachmentById },
-    } = useIssueDetail();
+    } = useIssueDetail()
     // states
-    const [attachmentDeleteModal, setAttachmentDeleteModal] = useState<boolean>(false);
+    const [attachmentDeleteModal, setAttachmentDeleteModal] = useState<boolean>(false)
 
-    const attachment = attachmentId && getAttachmentById(attachmentId);
+    const attachment = attachmentId && getAttachmentById(attachmentId)
 
-    if (!attachment) return <></>;
+    if (!attachment) return <></>
     return (
         <>
             <IssueAttachmentDeleteModal
@@ -83,7 +78,7 @@ export const IssueAttachmentsDetail: FC<TIssueAttachmentsDetail> = (props) => {
                 {!disabled && (
                     <button
                         onClick={() => {
-                            setAttachmentDeleteModal(true);
+                            setAttachmentDeleteModal(true)
                         }}
                     >
                         <X className="h-4 w-4 text-custom-text-200 hover:text-custom-text-100" />
@@ -91,5 +86,5 @@ export const IssueAttachmentsDetail: FC<TIssueAttachmentsDetail> = (props) => {
                 )}
             </div>
         </>
-    );
-};
+    )
+}

@@ -1,11 +1,9 @@
-import { FC, useState, useRef } from "react";
-import { Transition } from "@headlessui/react";
-import Link from "next/link";
-import { HelpCircle, MessagesSquare, MoveLeft } from "lucide-react";
-
-import { useApplication } from "@hooks/store";
-
-import packageJson from "package.json";
+import Link from "next/link"
+import { FC, useRef, useState } from "react"
+import { Transition } from "@headlessui/react"
+import { useApplication } from "@hooks/store"
+import { HelpCircle, MessagesSquare, MoveLeft } from "lucide-react"
+import packageJson from "package.json"
 
 const helpOptions = [
     {
@@ -14,17 +12,17 @@ const helpOptions = [
         onClick: () => (window as any).$crisp.push(["do", "chat:show"]),
         Icon: MessagesSquare,
     },
-];
+]
 
 export const InstanceHelpSection: FC = () => {
     // states
-    const [isNeedHelpOpen, setIsNeedHelpOpen] = useState(false);
+    const [isNeedHelpOpen, setIsNeedHelpOpen] = useState(false)
     // store
     const {
         theme: { sidebarCollapsed, toggleSidebar },
-    } = useApplication();
+    } = useApplication()
     // refs
-    const helpOptionsRef = useRef<HTMLDivElement | null>(null);
+    const helpOptionsRef = useRef<HTMLDivElement | null>(null)
 
     return (
         <div
@@ -90,7 +88,7 @@ export const InstanceHelpSection: FC = () => {
                                                 <span className="text-xs">{name}</span>
                                             </div>
                                         </Link>
-                                    );
+                                    )
                                 else
                                     return (
                                         <button
@@ -104,7 +102,7 @@ export const InstanceHelpSection: FC = () => {
                                             </div>
                                             <span className="text-xs">{name}</span>
                                         </button>
-                                    );
+                                    )
                             })}
                         </div>
                         <div className="px-2 pb-1 pt-2 text-[10px]">Version: v{packageJson.version}</div>
@@ -112,5 +110,5 @@ export const InstanceHelpSection: FC = () => {
                 </Transition>
             </div>
         </div>
-    );
-};
+    )
+}

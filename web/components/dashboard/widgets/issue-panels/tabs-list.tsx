@@ -1,22 +1,19 @@
-import { observer } from "mobx-react";
-import { Tab } from "@headlessui/react";
-
-import { cn } from "@helpers/common.helper";
-
-import { TDurationFilterOptions, TIssuesListTypes } from "@servcy/types";
-
-import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "@constants/dashboard";
+import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "@constants/dashboard"
+import { Tab } from "@headlessui/react"
+import { cn } from "@helpers/common.helper"
+import { observer } from "mobx-react"
+import { TDurationFilterOptions, TIssuesListTypes } from "@servcy/types"
 
 type Props = {
-    durationFilter: TDurationFilterOptions;
-    selectedTab: TIssuesListTypes;
-};
+    durationFilter: TDurationFilterOptions
+    selectedTab: TIssuesListTypes
+}
 
 export const TabsList: React.FC<Props> = observer((props) => {
-    const { durationFilter, selectedTab } = props;
+    const { durationFilter, selectedTab } = props
 
-    const tabsList = durationFilter === "none" ? UNFILTERED_ISSUES_TABS_LIST : FILTERED_ISSUES_TABS_LIST;
-    const selectedTabIndex = tabsList.findIndex((tab) => tab.key === selectedTab);
+    const tabsList = durationFilter === "none" ? UNFILTERED_ISSUES_TABS_LIST : FILTERED_ISSUES_TABS_LIST
+    const selectedTabIndex = tabsList.findIndex((tab) => tab.key === selectedTab)
 
     return (
         <Tab.List
@@ -57,5 +54,5 @@ export const TabsList: React.FC<Props> = observer((props) => {
                 </Tab>
             ))}
         </Tab.List>
-    );
-});
+    )
+})

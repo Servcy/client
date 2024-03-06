@@ -1,29 +1,26 @@
-import { observer } from "mobx-react-lite";
-
-import { useProject } from "@hooks/store";
-
-import { Contrast, LayoutGrid, Users } from "lucide-react";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-import { truncateText } from "@helpers/string.helper";
+import { renderEmoji } from "@helpers/emoji.helper"
+import { truncateText } from "@helpers/string.helper"
+import { useProject } from "@hooks/store"
+import { Contrast, LayoutGrid, Users } from "lucide-react"
+import { observer } from "mobx-react-lite"
 
 type Props = {
-    projectIds: string[];
-};
+    projectIds: string[]
+}
 
 export const CustomAnalyticsSidebarProjectsList: React.FC<Props> = observer((props) => {
-    const { projectIds } = props;
+    const { projectIds } = props
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
 
     return (
         <div className="relative flex flex-col gap-4 h-full">
             <h4 className="font-medium">Selected Projects</h4>
             <div className="relative space-y-6 overflow-hidden overflow-y-auto">
                 {projectIds.map((projectId) => {
-                    const project = getProjectById(projectId);
+                    const project = getProjectById(projectId)
 
-                    if (!project) return;
+                    if (!project) return
 
                     return (
                         <div key={projectId} className="w-full">
@@ -70,9 +67,9 @@ export const CustomAnalyticsSidebarProjectsList: React.FC<Props> = observer((pro
                                 </div>
                             </div>
                         </div>
-                    );
+                    )
                 })}
             </div>
         </div>
-    );
-});
+    )
+})

@@ -1,39 +1,37 @@
-import React, { FC, useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { AlertTriangle } from "lucide-react";
-
-import { useWebhook } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
+import { useRouter } from "next/router"
+import React, { FC, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useWebhook } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import toast from "react-hot-toast"
+import { Button } from "@servcy/ui"
 
 interface IDeleteWebhook {
-    isOpen: boolean;
-    onClose: () => void;
+    isOpen: boolean
+    onClose: () => void
 }
 
 export const DeleteWebhookModal: FC<IDeleteWebhook> = (props) => {
-    const { isOpen, onClose } = props;
+    const { isOpen, onClose } = props
     // states
-    const [isDeleting, setIsDeleting] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // toast
 
     // store hooks
-    const { removeWebhook } = useWebhook();
+    const { removeWebhook } = useWebhook()
 
-    const { workspaceSlug, webhookId } = router.query;
+    const { workspaceSlug, webhookId } = router.query
 
     const handleClose = () => {
-        onClose();
-    };
+        onClose()
+    }
 
     const handleDelete = async () => {
-        if (!workspaceSlug || !webhookId) return;
+        if (!workspaceSlug || !webhookId) return
 
-        setIsDeleting(true);
+        setIsDeleting(true)
 
         removeWebhook(workspaceSlug.toString(), webhookId.toString())
             .then(() => {
@@ -41,8 +39,8 @@ export const DeleteWebhookModal: FC<IDeleteWebhook> = (props) => {
                     type: "success",
                     title: "Success!",
                     message: "Webhook deleted successfully.",
-                });
-                router.replace(`/${workspaceSlug}/settings/webhooks/`);
+                })
+                router.replace(`/${workspaceSlug}/settings/webhooks/`)
             })
             .catch((error) =>
                 toast.error({
@@ -51,8 +49,8 @@ export const DeleteWebhookModal: FC<IDeleteWebhook> = (props) => {
                     message: error?.error ?? "Something went wrong. Please try again.",
                 })
             )
-            .finally(() => setIsDeleting(false));
-    };
+            .finally(() => setIsDeleting(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -109,5 +107,5 @@ export const DeleteWebhookModal: FC<IDeleteWebhook> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

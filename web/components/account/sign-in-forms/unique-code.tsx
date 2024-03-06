@@ -1,50 +1,45 @@
-import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { XCircle } from "lucide-react";
-
-import { AuthService } from "@services/auth.service";
-import { UserService } from "@services/user.service";
-import toast from "react-hot-toast";
-import useTimer from "@hooks/use-timer";
-import { useEventTracker } from "@hooks/store";
-
-import { Button, Input } from "@servcy/ui";
-
-import { checkEmailValidity } from "@helpers/string.helper";
-
-import { IEmailCheckData, IMagicSignInData } from "@servcy/types";
-
-import { CODE_VERIFIED } from "@constants/event-tracker";
+import React, { useState } from "react"
+import { CODE_VERIFIED } from "@constants/event-tracker"
+import { checkEmailValidity } from "@helpers/string.helper"
+import { useEventTracker } from "@hooks/store"
+import useTimer from "@hooks/use-timer"
+import { AuthService } from "@services/auth.service"
+import { UserService } from "@services/user.service"
+import { XCircle } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IEmailCheckData, IMagicSignInData } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    email: string;
-    onSubmit: (isPasswordAutoset: boolean) => Promise<void>;
-    handleEmailClear: () => void;
-    submitButtonText: string;
-};
+    email: string
+    onSubmit: (isPasswordAutoset: boolean) => Promise<void>
+    handleEmailClear: () => void
+    submitButtonText: string
+}
 
 type TUniqueCodeFormValues = {
-    email: string;
-    token: string;
-};
+    email: string
+    token: string
+}
 
 const defaultValues: TUniqueCodeFormValues = {
     email: "",
     token: "",
-};
+}
 
-const authService = new AuthService();
-const userService = new UserService();
+const authService = new AuthService()
+const userService = new UserService()
 
 export const SignInUniqueCodeForm: React.FC<Props> = (props) => {
-    const { email, onSubmit, handleEmailClear, submitButtonText } = props;
+    const { email, onSubmit, handleEmailClear, submitButtonText } = props
     // states
-    const [isRequestingNewCode, setIsRequestingNewCode] = useState(false);
+    const [isRequestingNewCode, setIsRequestingNewCode] = useState(false)
 
     // store hooks
-    const { captureEvent } = useEventTracker();
+    const { captureEvent } = useEventTracker()
     // timer
-    const { timer: resendTimerCode, setTimer: setResendCodeTimer } = useTimer(30);
+    const { timer: resendTimerCode, setTimer: setResendCodeTimer } = useTimer(30)
     // form info
     const {
         control,
@@ -59,51 +54,51 @@ export const SignInUniqueCodeForm: React.FC<Props> = (props) => {
         },
         mode: "onChange",
         reValidateMode: "onChange",
-    });
+    })
 
     const handleUniqueCodeSignIn = async (formData: TUniqueCodeFormValues) => {
         const payload: IMagicSignInData = {
             email: formData.email,
             key: `magic_${formData.email}`,
             token: formData.token,
-        };
+        }
 
         await authService
             .magicSignIn(payload)
             .then(async () => {
                 captureEvent(CODE_VERIFIED, {
                     state: "SUCCESS",
-                });
-                const currentUser = await userService.currentUser();
-                await onSubmit(currentUser.is_password_autoset);
+                })
+                const currentUser = await userService.currentUser()
+                await onSubmit(currentUser.is_password_autoset)
             })
             .catch((err) => {
                 captureEvent(CODE_VERIFIED, {
                     state: "FAILED",
-                });
-                toast.error("Something went wrong. Please try again.");
-            });
-    };
+                })
+                toast.error("Something went wrong. Please try again.")
+            })
+    }
 
     const handleSendNewCode = async (formData: TUniqueCodeFormValues) => {
         const payload: IEmailCheckData = {
             email: formData.email,
-        };
+        }
 
         await authService
             .generateUniqueCode(payload)
             .then(() => {
-                setResendCodeTimer(30);
+                setResendCodeTimer(30)
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "A new unique code has been sent to your email.",
-                });
+                })
 
                 reset({
                     email: formData.email,
                     token: "",
-                });
+                })
             })
             .catch((err) =>
                 toast.error({
@@ -111,18 +106,18 @@ export const SignInUniqueCodeForm: React.FC<Props> = (props) => {
                     title: "Error!",
                     message: err?.error ?? "Something went wrong. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     const handleRequestNewCode = async () => {
-        setIsRequestingNewCode(true);
+        setIsRequestingNewCode(true)
 
         await handleSendNewCode(getValues())
             .then(() => setResendCodeTimer(30))
-            .finally(() => setIsRequestingNewCode(false));
-    };
+            .finally(() => setIsRequestingNewCode(false))
+    }
 
-    const isRequestNewCodeDisabled = isRequestingNewCode || resendTimerCode > 0;
+    const isRequestNewCodeDisabled = isRequestingNewCode || resendTimerCode > 0
 
     return (
         <>
@@ -216,5 +211,5 @@ export const SignInUniqueCodeForm: React.FC<Props> = (props) => {
                 </Button>
             </form>
         </>
-    );
-};
+    )
+}

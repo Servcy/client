@@ -1,32 +1,28 @@
-import { FC, ReactNode } from "react";
-import { Network } from "lucide-react";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { Tooltip } from "@servcy/ui";
-
-import { IssueUser } from "../";
-
-import { renderFormattedTime, renderFormattedDate, calculateTimeAgo } from "@helpers/date-time.helper";
+import { FC, ReactNode } from "react"
+import { calculateTimeAgo, renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
+import { useIssueDetail } from "@hooks/store"
+import { Network } from "lucide-react"
+import { Tooltip } from "@servcy/ui"
+import { IssueUser } from "../"
 
 type TIssueActivityBlockComponent = {
-    icon?: ReactNode;
-    activityId: string;
-    ends: "top" | "bottom" | undefined;
-    children: ReactNode;
-    customUserName?: string;
-};
+    icon?: ReactNode
+    activityId: string
+    ends: "top" | "bottom" | undefined
+    children: ReactNode
+    customUserName?: string
+}
 
 export const IssueActivityBlockComponent: FC<TIssueActivityBlockComponent> = (props) => {
-    const { icon, activityId, ends, children, customUserName } = props;
+    const { icon, activityId, ends, children, customUserName } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <div
             className={`relative flex items-center gap-3 text-xs ${
@@ -49,5 +45,5 @@ export const IssueActivityBlockComponent: FC<TIssueActivityBlockComponent> = (pr
                 </span>
             </div>
         </div>
-    );
-};
+    )
+}

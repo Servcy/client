@@ -1,58 +1,54 @@
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import { ReactElement, useEffect } from "react";
-import useSWR from "swr";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { PageHead } from "@components/core";
-import { ProjectIssueDetailsHeader } from "@components/headers";
-import { IssueDetailRoot } from "@components/issues";
-
-import { Loader } from "@servcy/ui";
-
-import { NextPageWithLayout } from "@/types/types";
+import { useRouter } from "next/router"
+import { ReactElement, useEffect } from "react"
+import { PageHead } from "@components/core"
+import { ProjectIssueDetailsHeader } from "@components/headers"
+import { IssueDetailRoot } from "@components/issues"
 // store hooks
-import { useApplication, useIssueDetail, useProject } from "@hooks/store";
+import { useApplication, useIssueDetail, useProject } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { Loader } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const IssueDetailsPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, issueId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, issueId } = router.query
 
     const {
         fetchIssue,
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getProjectById } = useProject();
-    const { theme: themeStore } = useApplication();
+    } = useIssueDetail()
+    const { getProjectById } = useProject()
+    const { theme: themeStore } = useApplication()
     // fetching issue details
     const { isLoading } = useSWR(
         workspaceSlug && projectId && issueId ? `ISSUE_DETAIL_${workspaceSlug}_${projectId}_${issueId}` : null,
         workspaceSlug && projectId && issueId
             ? () => fetchIssue(workspaceSlug.toString(), projectId.toString(), issueId.toString())
             : null
-    );
+    )
     // derived values
-    const issue = getIssueById(issueId?.toString() || "") || undefined;
-    const project = (issue?.project_id && getProjectById(issue?.project_id)) || undefined;
-    const issueLoader = !issue || isLoading ? true : false;
-    const pageTitle = project && issue ? `${project?.identifier}-${issue?.sequence_id} ${issue?.name}` : undefined;
+    const issue = getIssueById(issueId?.toString() || "") || undefined
+    const project = (issue?.project_id && getProjectById(issue?.project_id)) || undefined
+    const issueLoader = !issue || isLoading ? true : false
+    const pageTitle = project && issue ? `${project?.identifier}-${issue?.sequence_id} ${issue?.name}` : undefined
 
     useEffect(() => {
         const handleToggleIssueDetailSidebar = () => {
             if (window && window.innerWidth < 768) {
-                themeStore.toggleIssueDetailSidebar(true);
+                themeStore.toggleIssueDetailSidebar(true)
             }
             if (window && themeStore.issueDetailSidebarCollapsed && window.innerWidth >= 768) {
-                themeStore.toggleIssueDetailSidebar(false);
+                themeStore.toggleIssueDetailSidebar(false)
             }
-        };
+        }
 
-        window.addEventListener("resize", handleToggleIssueDetailSidebar);
-        handleToggleIssueDetailSidebar();
-        return () => window.removeEventListener("resize", handleToggleIssueDetailSidebar);
-    }, [themeStore]);
+        window.addEventListener("resize", handleToggleIssueDetailSidebar)
+        handleToggleIssueDetailSidebar()
+        return () => window.removeEventListener("resize", handleToggleIssueDetailSidebar)
+    }, [themeStore])
 
     return (
         <>
@@ -84,15 +80,15 @@ const IssueDetailsPage: NextPageWithLayout = observer(() => {
                 )
             )}
         </>
-    );
-});
+    )
+})
 
 IssueDetailsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<ProjectIssueDetailsHeader />} withProjectWrapper>
             {page}
         </AppLayout>
-    );
-};
+    )
+}
 
-export default IssueDetailsPage;
+export default IssueDetailsPage

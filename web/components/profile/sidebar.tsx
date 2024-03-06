@@ -1,51 +1,44 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
-import useSWR from "swr";
-import { Disclosure, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useEffect, useRef } from "react"
+import { USER_PROFILE_PROJECT_SEGREGATION } from "@constants/fetch-keys"
+import { Disclosure, Transition } from "@headlessui/react"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useApplication, useUser } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { UserService } from "@services/user.service"
+import { ChevronDown, Pencil } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { Loader, Tooltip } from "@servcy/ui"
+import { ProfileSidebarTime } from "./time"
 
-import { useApplication, useUser } from "@hooks/store";
-
-import { UserService } from "@services/user.service";
-
-import { ProfileSidebarTime } from "./time";
-
-import { Loader, Tooltip } from "@servcy/ui";
-
-import { ChevronDown, Pencil } from "lucide-react";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { USER_PROFILE_PROJECT_SEGREGATION } from "@constants/fetch-keys";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-import { useEffect, useRef } from "react";
-
-const userService = new UserService();
+const userService = new UserService()
 
 export const ProfileSidebar = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, userId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, userId } = router.query
     // store hooks
-    const { currentUser } = useUser();
-    const { theme: themeStore } = useApplication();
-    const ref = useRef<HTMLDivElement>(null);
+    const { currentUser } = useUser()
+    const { theme: themeStore } = useApplication()
+    const ref = useRef<HTMLDivElement>(null)
 
     const { data: userProjectsData } = useSWR(
         workspaceSlug && userId ? USER_PROFILE_PROJECT_SEGREGATION(workspaceSlug.toString(), userId.toString()) : null,
         workspaceSlug && userId
             ? () => userService.getUserProfileProjectsSegregation(workspaceSlug.toString(), userId.toString())
             : null
-    );
+    )
 
     useOutsideClickDetector(ref, () => {
         if (themeStore.profileSidebarCollapsed === false) {
             if (window.innerWidth < 768) {
-                themeStore.toggleProfileSidebar();
+                themeStore.toggleProfileSidebar()
             }
         }
-    });
+    })
 
     const userDetails = [
         {
@@ -56,22 +49,22 @@ export const ProfileSidebar = observer(() => {
             label: "Timezone",
             value: <ProfileSidebarTime timeZone={userProjectsData?.user_data.user_timezone} />,
         },
-    ];
+    ]
 
     useEffect(() => {
         const handleToggleProfileSidebar = () => {
             if (window && window.innerWidth < 768) {
-                themeStore.toggleProfileSidebar(true);
+                themeStore.toggleProfileSidebar(true)
             }
             if (window && themeStore.profileSidebarCollapsed && window.innerWidth >= 768) {
-                themeStore.toggleProfileSidebar(false);
+                themeStore.toggleProfileSidebar(false)
             }
-        };
+        }
 
-        window.addEventListener("resize", handleToggleProfileSidebar);
-        handleToggleProfileSidebar();
-        return () => window.removeEventListener("resize", handleToggleProfileSidebar);
-    }, [themeStore]);
+        window.addEventListener("resize", handleToggleProfileSidebar)
+        handleToggleProfileSidebar()
+        return () => window.removeEventListener("resize", handleToggleProfileSidebar)
+    }, [themeStore])
 
     return (
         <div
@@ -135,12 +128,12 @@ export const ProfileSidebar = observer(() => {
                                     project.created_issues +
                                     project.assigned_issues +
                                     project.pending_issues +
-                                    project.completed_issues;
+                                    project.completed_issues
 
                                 const completedIssuePercentage =
                                     project.assigned_issues === 0
                                         ? 0
-                                        : Math.round((project.completed_issues / project.assigned_issues) * 100);
+                                        : Math.round((project.completed_issues / project.assigned_issues) * 100)
 
                                 return (
                                     <Disclosure
@@ -276,7 +269,7 @@ export const ProfileSidebar = observer(() => {
                                             </div>
                                         )}
                                     </Disclosure>
-                                );
+                                )
                             })}
                         </div>
                     </div>
@@ -294,5 +287,5 @@ export const ProfileSidebar = observer(() => {
                 </Loader>
             )}
         </div>
-    );
-});
+    )
+})

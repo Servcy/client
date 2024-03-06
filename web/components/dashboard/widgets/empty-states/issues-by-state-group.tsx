@@ -1,14 +1,13 @@
-import Image from "next/image";
-import { useTheme } from "next-themes";
-
-import DarkImage from "public/empty-state/dashboard/dark/issues-by-state-group.svg";
-import LightImage from "public/empty-state/dashboard/light/issues-by-state-group.svg";
+import Image from "next/image"
+import { useTheme } from "next-themes"
+import DarkImage from "public/empty-state/dashboard/dark/issues-by-state-group.svg"
+import LightImage from "public/empty-state/dashboard/light/issues-by-state-group.svg"
 
 export const IssuesByStateGroupEmptyState = () => {
     // next-themes
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
 
-    const image = resolvedTheme === "dark" ? DarkImage : LightImage;
+    const image = resolvedTheme === "dark" ? DarkImage : LightImage
 
     return (
         <div className="text-center space-y-6 flex flex-col items-center">
@@ -21,5 +20,5 @@ export const IssuesByStateGroupEmptyState = () => {
                 will show up here.
             </p>
         </div>
-    );
-};
+    )
+}

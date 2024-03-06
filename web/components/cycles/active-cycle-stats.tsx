@@ -1,32 +1,28 @@
-import React, { Fragment } from "react";
-import { Tab } from "@headlessui/react";
-
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { SingleProgressStats } from "@components/core";
-
-import { Avatar } from "@servcy/ui";
-
-import { ICycle } from "@servcy/types";
+import React, { Fragment } from "react"
+import { SingleProgressStats } from "@components/core"
+import { Tab } from "@headlessui/react"
+import useLocalStorage from "@hooks/use-local-storage"
+import { ICycle } from "@servcy/types"
+import { Avatar } from "@servcy/ui"
 
 type Props = {
-    cycle: ICycle;
-};
+    cycle: ICycle
+}
 
 export const ActiveCycleProgressStats: React.FC<Props> = ({ cycle }) => {
-    const { storedValue: tab, setValue: setTab } = useLocalStorage("activeCycleTab", "Assignees");
+    const { storedValue: tab, setValue: setTab } = useLocalStorage("activeCycleTab", "Assignees")
 
     const currentValue = (tab: string | null) => {
         switch (tab) {
             case "Assignees":
-                return 0;
+                return 0
             case "Labels":
-                return 1;
+                return 1
 
             default:
-                return 0;
+                return 0
         }
-    };
+    }
 
     return (
         <Tab.Group
@@ -35,12 +31,12 @@ export const ActiveCycleProgressStats: React.FC<Props> = ({ cycle }) => {
             onChange={(i) => {
                 switch (i) {
                     case 0:
-                        return setTab("Assignees");
+                        return setTab("Assignees")
                     case 1:
-                        return setTab("Labels");
+                        return setTab("Labels")
 
                     default:
-                        return setTab("Assignees");
+                        return setTab("Assignees")
                 }
             }}
         >
@@ -91,7 +87,7 @@ export const ActiveCycleProgressStats: React.FC<Props> = ({ cycle }) => {
                                         completed={assignee.completed_issues}
                                         total={assignee.total_issues}
                                     />
-                                );
+                                )
                             else
                                 return (
                                     <SingleProgressStats
@@ -113,7 +109,7 @@ export const ActiveCycleProgressStats: React.FC<Props> = ({ cycle }) => {
                                         completed={assignee.completed_issues}
                                         total={assignee.total_issues}
                                     />
-                                );
+                                )
                         })}
                     </Tab.Panel>
 
@@ -147,5 +143,5 @@ export const ActiveCycleProgressStats: React.FC<Props> = ({ cycle }) => {
                 </div>
             )}
         </Tab.Group>
-    );
-};
+    )
+}

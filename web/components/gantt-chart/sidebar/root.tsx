@@ -1,18 +1,17 @@
-import { IBlockUpdateData, IGanttBlock } from "@components/gantt-chart";
-
-import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "../constants";
+import { IBlockUpdateData, IGanttBlock } from "@components/gantt-chart"
+import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "../constants"
 
 type Props = {
-    blocks: IGanttBlock[] | null;
-    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void;
-    enableReorder: boolean;
-    sidebarToRender: (props: any) => React.ReactNode;
-    title: string;
-    quickAdd?: React.JSX.Element | undefined;
-};
+    blocks: IGanttBlock[] | null
+    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void
+    enableReorder: boolean
+    sidebarToRender: (props: any) => React.ReactNode
+    title: string
+    quickAdd?: React.JSX.Element | undefined
+}
 
 export const GanttChartSidebar: React.FC<Props> = (props) => {
-    const { blocks, blockUpdateHandler, enableReorder, sidebarToRender, title, quickAdd } = props;
+    const { blocks, blockUpdateHandler, enableReorder, sidebarToRender, title, quickAdd } = props
 
     return (
         <div
@@ -38,5 +37,5 @@ export const GanttChartSidebar: React.FC<Props> = (props) => {
             </div>
             {quickAdd ? quickAdd : null}
         </div>
-    );
-};
+    )
+}

@@ -1,68 +1,61 @@
-import { FC, MouseEvent, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react";
-
-import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles";
-
-import { CustomMenu, Tooltip, CircularProgressIndicator, CycleGroupIcon, AvatarGroup, Avatar } from "@servcy/ui";
-
-import { Check, Info, LinkIcon, Pencil, Star, Trash2, User2 } from "lucide-react";
-
-import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper";
-import { copyTextToClipboard } from "@helpers/string.helper";
-
-import { CYCLE_STATUS } from "@constants/cycle";
-import { EUserWorkspaceRoles } from "@constants/workspace";
-
-import { TCycleGroups } from "@servcy/types";
-import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC, MouseEvent, useState } from "react"
+import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles"
+import { CYCLE_STATUS } from "@constants/cycle"
+import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
+import { Check, Info, LinkIcon, Pencil, Star, Trash2, User2 } from "lucide-react"
+import { observer } from "mobx-react"
+import toast from "react-hot-toast"
+import { TCycleGroups } from "@servcy/types"
+import { Avatar, AvatarGroup, CircularProgressIndicator, CustomMenu, CycleGroupIcon, Tooltip } from "@servcy/ui"
 
 type TCyclesListItem = {
-    cycleId: string;
-    handleEditCycle?: () => void;
-    handleDeleteCycle?: () => void;
-    handleAddToFavorites?: () => void;
-    handleRemoveFromFavorites?: () => void;
-    workspaceSlug: string;
-    projectId: string;
-};
+    cycleId: string
+    handleEditCycle?: () => void
+    handleDeleteCycle?: () => void
+    handleAddToFavorites?: () => void
+    handleRemoveFromFavorites?: () => void
+    workspaceSlug: string
+    projectId: string
+}
 
 export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
-    const { cycleId, workspaceSlug, projectId } = props;
+    const { cycleId, workspaceSlug, projectId } = props
     // states
-    const [updateModal, setUpdateModal] = useState(false);
-    const [deleteModal, setDeleteModal] = useState(false);
+    const [updateModal, setUpdateModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { setTrackElement, captureEvent } = useEventTracker();
+    const { setTrackElement, captureEvent } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { getCycleById, addCycleToFavorites, removeCycleFromFavorites } = useCycle();
-    const { getUserDetails } = useMember();
+    } = useUser()
+    const { getCycleById, addCycleToFavorites, removeCycleFromFavorites } = useCycle()
+    const { getUserDetails } = useMember()
 
     const handleCopyText = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
+        e.preventDefault()
+        e.stopPropagation()
+        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
 
         copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`).then(() => {
             toast.error({
                 type: "success",
                 title: "Link Copied!",
                 message: "Cycle link copied to clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleAddToFavorites = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        if (!workspaceSlug || !projectId) return;
+        e.preventDefault()
+        if (!workspaceSlug || !projectId) return
 
         addCycleToFavorites(workspaceSlug?.toString(), projectId.toString(), cycleId)
             .then(() => {
@@ -70,20 +63,20 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
                     cycle_id: cycleId,
                     element: "List layout",
                     state: "SUCCESS",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Couldn't add the cycle to favorites. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleRemoveFromFavorites = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        if (!workspaceSlug || !projectId) return;
+        e.preventDefault()
+        if (!workspaceSlug || !projectId) return
 
         removeCycleFromFavorites(workspaceSlug?.toString(), projectId.toString(), cycleId)
             .then(() => {
@@ -91,73 +84,73 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
                     cycle_id: cycleId,
                     element: "List layout",
                     state: "SUCCESS",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Couldn't add the cycle to favorites. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleEditCycle = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setTrackElement("Cycles page list layout");
-        setUpdateModal(true);
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        setTrackElement("Cycles page list layout")
+        setUpdateModal(true)
+    }
 
     const handleDeleteCycle = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setTrackElement("Cycles page list layout");
-        setDeleteModal(true);
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        setTrackElement("Cycles page list layout")
+        setDeleteModal(true)
+    }
 
     const openCycleOverview = (e: MouseEvent<HTMLButtonElement>) => {
-        const { query } = router;
-        e.preventDefault();
-        e.stopPropagation();
+        const { query } = router
+        e.preventDefault()
+        e.stopPropagation()
 
         router.push({
             pathname: router.pathname,
             query: { ...query, peekCycle: cycleId },
-        });
-    };
+        })
+    }
 
-    const cycleDetails = getCycleById(cycleId);
+    const cycleDetails = getCycleById(cycleId)
 
-    if (!cycleDetails) return null;
+    if (!cycleDetails) return null
 
     // computed
     // TODO: change this logic once backend fix the response
-    const cycleStatus = cycleDetails.status ? (cycleDetails.status.toLocaleLowerCase() as TCycleGroups) : "draft";
-    const isCompleted = cycleStatus === "completed";
-    const endDate = new Date(cycleDetails.end_date ?? "");
-    const startDate = new Date(cycleDetails.start_date ?? "");
+    const cycleStatus = cycleDetails.status ? (cycleDetails.status.toLocaleLowerCase() as TCycleGroups) : "draft"
+    const isCompleted = cycleStatus === "completed"
+    const endDate = new Date(cycleDetails.end_date ?? "")
+    const startDate = new Date(cycleDetails.start_date ?? "")
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
 
     const cycleTotalIssues =
         cycleDetails.backlog_issues +
         cycleDetails.unstarted_issues +
         cycleDetails.started_issues +
         cycleDetails.completed_issues +
-        cycleDetails.cancelled_issues;
+        cycleDetails.cancelled_issues
 
-    const renderDate = cycleDetails.start_date || cycleDetails.end_date;
+    const renderDate = cycleDetails.start_date || cycleDetails.end_date
 
     // const areYearsEqual = startDate.getFullYear() === endDate.getFullYear();
 
-    const completionPercentage = (cycleDetails.completed_issues / cycleTotalIssues) * 100;
+    const completionPercentage = (cycleDetails.completed_issues / cycleTotalIssues) * 100
 
-    const progress = isNaN(completionPercentage) ? 0 : Math.floor(completionPercentage);
+    const progress = isNaN(completionPercentage) ? 0 : Math.floor(completionPercentage)
 
-    const currentCycle = CYCLE_STATUS.find((status) => status.value === cycleStatus);
+    const currentCycle = CYCLE_STATUS.find((status) => status.value === cycleStatus)
 
-    const daysLeft = findHowManyDaysLeft(cycleDetails.end_date) ?? 0;
+    const daysLeft = findHowManyDaysLeft(cycleDetails.end_date) ?? 0
 
     return (
         <>
@@ -238,14 +231,14 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
                                     {cycleDetails.assignee_ids?.length > 0 ? (
                                         <AvatarGroup showTooltip={false}>
                                             {cycleDetails.assignee_ids?.map((assigne_id) => {
-                                                const member = getUserDetails(assigne_id);
+                                                const member = getUserDetails(assigne_id)
                                                 return (
                                                     <Avatar
                                                         key={member?.id}
                                                         name={member?.display_name}
                                                         src={member?.avatar}
                                                     />
-                                                );
+                                                )
                                             })}
                                         </AvatarGroup>
                                     ) : (
@@ -299,5 +292,5 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
                 </div>
             </Link>
         </>
-    );
-});
+    )
+})

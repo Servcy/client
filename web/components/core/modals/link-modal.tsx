@@ -1,33 +1,27 @@
-import { FC, useEffect, Fragment } from "react";
-
-// react-hook-form
-import { Controller, useForm } from "react-hook-form";
+import { FC, Fragment, useEffect } from "react"
 // headless ui
-import { Dialog, Transition } from "@headlessui/react";
-
-import { Button, Input } from "@servcy/ui";
-
-import type { IIssueLink, ILinkDetails, ModuleLink } from "@servcy/types";
+import { Dialog, Transition } from "@headlessui/react"
+// react-hook-form
+import { Controller, useForm } from "react-hook-form"
+import type { IIssueLink, ILinkDetails, ModuleLink } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    handleClose: () => void;
-    data?: ILinkDetails | null;
-    status: boolean;
-    createIssueLink: (formData: IIssueLink | ModuleLink) => Promise<ILinkDetails> | Promise<void> | void;
-    updateIssueLink: (
-        formData: IIssueLink | ModuleLink,
-        linkId: string
-    ) => Promise<ILinkDetails> | Promise<void> | void;
-};
+    isOpen: boolean
+    handleClose: () => void
+    data?: ILinkDetails | null
+    status: boolean
+    createIssueLink: (formData: IIssueLink | ModuleLink) => Promise<ILinkDetails> | Promise<void> | void
+    updateIssueLink: (formData: IIssueLink | ModuleLink, linkId: string) => Promise<ILinkDetails> | Promise<void> | void
+}
 
 const defaultValues: IIssueLink | ModuleLink = {
     title: "",
     url: "",
-};
+}
 
 export const LinkModal: FC<Props> = (props) => {
-    const { isOpen, handleClose, createIssueLink, updateIssueLink, status, data } = props;
+    const { isOpen, handleClose, createIssueLink, updateIssueLink, status, data } = props
     // form info
     const {
         formState: { errors, isSubmitting },
@@ -36,36 +30,36 @@ export const LinkModal: FC<Props> = (props) => {
         reset,
     } = useForm<IIssueLink | ModuleLink>({
         defaultValues,
-    });
+    })
 
     const onClose = () => {
-        handleClose();
+        handleClose()
         const timeout = setTimeout(() => {
-            reset(defaultValues);
-            clearTimeout(timeout);
-        }, 500);
-    };
+            reset(defaultValues)
+            clearTimeout(timeout)
+        }, 500)
+    }
 
     const handleFormSubmit = async (formData: IIssueLink | ModuleLink) => {
-        if (!data) await createIssueLink({ title: formData.title, url: formData.url });
-        else await updateIssueLink({ title: formData.title, url: formData.url }, data.id);
-        onClose();
-    };
+        if (!data) await createIssueLink({ title: formData.title, url: formData.url })
+        else await updateIssueLink({ title: formData.title, url: formData.url }, data.id)
+        onClose()
+    }
 
     const handleCreateUpdatePage = async (formData: IIssueLink | ModuleLink) => {
-        await handleFormSubmit(formData);
+        await handleFormSubmit(formData)
 
         reset({
             ...defaultValues,
-        });
-    };
+        })
+    }
 
     useEffect(() => {
         reset({
             ...defaultValues,
             ...data,
-        });
-    }, [data, reset]);
+        })
+    }, [data, reset])
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -176,5 +170,5 @@ export const LinkModal: FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

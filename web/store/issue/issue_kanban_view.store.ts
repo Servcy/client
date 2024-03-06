@@ -1,27 +1,27 @@
-import { action, computed, makeObservable, observable } from "mobx";
-import { computedFn } from "mobx-utils";
-import { IssueRootStore } from "./root.store";
+import { action, computed, makeObservable, observable } from "mobx"
+import { computedFn } from "mobx-utils"
+import { IssueRootStore } from "./root.store"
 
 export interface IIssueKanBanViewStore {
     kanBanToggle: {
-        groupByHeaderMinMax: string[];
-        subgroupByIssuesVisibility: string[];
-    };
+        groupByHeaderMinMax: string[]
+        subgroupByIssuesVisibility: string[]
+    }
     // computed
-    getCanUserDragDrop: (group_by: string | null, sub_group_by: string | null) => boolean;
-    canUserDragDropVertically: boolean;
-    canUserDragDropHorizontally: boolean;
+    getCanUserDragDrop: (group_by: string | null, sub_group_by: string | null) => boolean
+    canUserDragDropVertically: boolean
+    canUserDragDropHorizontally: boolean
     // actions
-    handleKanBanToggle: (toggle: "groupByHeaderMinMax" | "subgroupByIssuesVisibility", value: string) => void;
+    handleKanBanToggle: (toggle: "groupByHeaderMinMax" | "subgroupByIssuesVisibility", value: string) => void
 }
 
 export class IssueKanBanViewStore implements IIssueKanBanViewStore {
     kanBanToggle: {
-        groupByHeaderMinMax: string[];
-        subgroupByIssuesVisibility: string[];
-    } = { groupByHeaderMinMax: [], subgroupByIssuesVisibility: [] };
+        groupByHeaderMinMax: string[]
+        subgroupByIssuesVisibility: string[]
+    } = { groupByHeaderMinMax: [], subgroupByIssuesVisibility: [] }
     // root store
-    rootStore;
+    rootStore
 
     constructor(_rootStore: IssueRootStore) {
         makeObservable(this, {
@@ -32,25 +32,25 @@ export class IssueKanBanViewStore implements IIssueKanBanViewStore {
 
             // actions
             handleKanBanToggle: action,
-        });
+        })
 
-        this.rootStore = _rootStore;
+        this.rootStore = _rootStore
     }
 
     getCanUserDragDrop = computedFn((group_by: string | null, sub_group_by: string | null) => {
         if (group_by && ["state", "priority"].includes(group_by)) {
-            if (!sub_group_by) return true;
-            if (sub_group_by && ["state", "priority"].includes(sub_group_by)) return true;
+            if (!sub_group_by) return true
+            if (sub_group_by && ["state", "priority"].includes(sub_group_by)) return true
         }
-        return false;
-    });
+        return false
+    })
 
     get canUserDragDropVertically() {
-        return false;
+        return false
     }
 
     get canUserDragDropHorizontally() {
-        return false;
+        return false
     }
 
     handleKanBanToggle = (toggle: "groupByHeaderMinMax" | "subgroupByIssuesVisibility", value: string) => {
@@ -59,6 +59,6 @@ export class IssueKanBanViewStore implements IIssueKanBanViewStore {
             [toggle]: this.kanBanToggle[toggle].includes(value)
                 ? this.kanBanToggle[toggle].filter((v) => v !== value)
                 : [...this.kanBanToggle[toggle], value],
-        };
-    };
+        }
+    }
 }

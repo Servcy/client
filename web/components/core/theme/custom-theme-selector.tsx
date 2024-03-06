@@ -1,12 +1,9 @@
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { useTheme } from "next-themes";
-
-import { useUser } from "@hooks/store";
-
-import { Button, InputColorPicker } from "@servcy/ui";
-
-import { IUserTheme } from "@servcy/types";
+import { useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import { Controller, useForm } from "react-hook-form"
+import { IUserTheme } from "@servcy/types"
+import { Button, InputColorPicker } from "@servcy/ui"
 
 const inputRules = {
     required: "Background color is required",
@@ -22,13 +19,13 @@ const inputRules = {
         value: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/,
         message: "Enter a valid hex code of 6 characters",
     },
-};
+}
 
 export const CustomThemeSelector: React.FC = observer(() => {
-    const { currentUser, updateCurrentUser } = useUser();
-    const userTheme = currentUser?.theme;
+    const { currentUser, updateCurrentUser } = useUser()
+    const userTheme = currentUser?.theme
 
-    const { setTheme } = useTheme();
+    const { setTheme } = useTheme()
 
     const {
         control,
@@ -45,7 +42,7 @@ export const CustomThemeSelector: React.FC = observer(() => {
             darkPalette: userTheme?.darkPalette || false,
             palette: userTheme?.palette !== "" ? userTheme?.palette : "",
         },
-    });
+    })
 
     const handleUpdateTheme = async (formData: any) => {
         const payload: IUserTheme = {
@@ -57,20 +54,20 @@ export const CustomThemeSelector: React.FC = observer(() => {
             darkPalette: false,
             palette: `${formData.background},${formData.text},${formData.primary},${formData.sidebarBackground},${formData.sidebarText}`,
             theme: "custom",
-        };
+        }
 
-        setTheme("custom");
+        setTheme("custom")
 
-        return updateCurrentUser({ theme: payload });
-    };
+        return updateCurrentUser({ theme: payload })
+    }
 
     const handleValueChange = (val: string | undefined, onChange: any) => {
-        let hex = val;
+        let hex = val
         // prepend a hashtag if it doesn't exist
-        if (val && val[0] !== "#") hex = `#${val}`;
+        if (val && val[0] !== "#") hex = `#${val}`
 
-        onChange(hex);
-    };
+        onChange(hex)
+    }
 
     return (
         <form onSubmit={handleSubmit(handleUpdateTheme)}>
@@ -226,5 +223,5 @@ export const CustomThemeSelector: React.FC = observer(() => {
                 </Button>
             </div>
         </form>
-    );
-});
+    )
+})

@@ -1,24 +1,21 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { TIssueOrderByOptions } from "@servcy/types";
-
-import { ISSUE_ORDER_BY_OPTIONS } from "@constants/issue";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { ISSUE_ORDER_BY_OPTIONS } from "@constants/issue"
+import { observer } from "mobx-react-lite"
+import { TIssueOrderByOptions } from "@servcy/types"
 
 type Props = {
-    selectedOrderBy: TIssueOrderByOptions | undefined;
-    handleUpdate: (val: TIssueOrderByOptions) => void;
-    orderByOptions: TIssueOrderByOptions[];
-};
+    selectedOrderBy: TIssueOrderByOptions | undefined
+    handleUpdate: (val: TIssueOrderByOptions) => void
+    orderByOptions: TIssueOrderByOptions[]
+}
 
 export const FilterOrderBy: React.FC<Props> = observer((props) => {
-    const { selectedOrderBy, handleUpdate, orderByOptions } = props;
+    const { selectedOrderBy, handleUpdate, orderByOptions } = props
 
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const activeOrderBy = selectedOrderBy ?? "-created_at";
+    const activeOrderBy = selectedOrderBy ?? "-created_at"
 
     return (
         <>
@@ -41,5 +38,5 @@ export const FilterOrderBy: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

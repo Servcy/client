@@ -1,53 +1,53 @@
-import { useEffect, useRef, useState } from "react";
-import { Combobox } from "@headlessui/react";
-import { observer } from "mobx-react";
-//components
-import { ContrastIcon, CycleGroupIcon } from "@servcy/ui";
+import { useEffect, useRef, useState } from "react"
+import { Combobox } from "@headlessui/react"
 //store
-import { useApplication, useCycle } from "@hooks/store";
-//hooks
-import { usePopper } from "react-popper";
-//icon
-import { Check, Search } from "lucide-react";
+import { useApplication, useCycle } from "@hooks/store"
 //types
-import { Placement } from "@popperjs/core";
-import { TCycleGroups } from "@servcy/types";
+import { Placement } from "@popperjs/core"
+//icon
+import { Check, Search } from "lucide-react"
+import { observer } from "mobx-react"
+//hooks
+import { usePopper } from "react-popper"
+import { TCycleGroups } from "@servcy/types"
+//components
+import { ContrastIcon, CycleGroupIcon } from "@servcy/ui"
 
 type DropdownOptions =
     | {
-          value: string | null;
-          query: string;
-          content: JSX.Element;
+          value: string | null
+          query: string
+          content: JSX.Element
       }[]
-    | undefined;
+    | undefined
 
 interface Props {
-    projectId: string;
-    referenceElement: HTMLButtonElement | null;
-    placement: Placement | undefined;
-    isOpen: boolean;
+    projectId: string
+    referenceElement: HTMLButtonElement | null
+    placement: Placement | undefined
+    isOpen: boolean
 }
 
 export const CycleOptions = observer((props: any) => {
-    const { projectId, isOpen, referenceElement, placement } = props;
+    const { projectId, isOpen, referenceElement, placement } = props
 
     //state hooks
-    const [query, setQuery] = useState("");
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [query, setQuery] = useState("")
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
 
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { getProjectCycleIds, fetchAllCycles, getCycleById } = useCycle();
+    } = useApplication()
+    const { getProjectCycleIds, fetchAllCycles, getCycleById } = useCycle()
 
     useEffect(() => {
         if (isOpen) {
-            onOpen();
-            inputRef.current && inputRef.current.focus();
+            onOpen()
+            inputRef.current && inputRef.current.focus()
         }
-    }, [isOpen]);
+    }, [isOpen])
 
     // popper-js init
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -60,27 +60,27 @@ export const CycleOptions = observer((props: any) => {
                 },
             },
         ],
-    });
+    })
 
     const cycleIds = (getProjectCycleIds(projectId) ?? [])?.filter((cycleId) => {
-        const cycleDetails = getCycleById(cycleId);
-        return cycleDetails?.status ? (cycleDetails?.status.toLowerCase() != "completed" ? true : false) : true;
-    });
+        const cycleDetails = getCycleById(cycleId)
+        return cycleDetails?.status ? (cycleDetails?.status.toLowerCase() != "completed" ? true : false) : true
+    })
 
     const onOpen = () => {
-        if (workspaceSlug && !cycleIds) fetchAllCycles(workspaceSlug, projectId);
-    };
+        if (workspaceSlug && !cycleIds) fetchAllCycles(workspaceSlug, projectId)
+    }
 
     const searchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (query !== "" && e.key === "Escape") {
-            e.stopPropagation();
-            setQuery("");
+            e.stopPropagation()
+            setQuery("")
         }
-    };
+    }
 
     const options: DropdownOptions = cycleIds?.map((cycleId) => {
-        const cycleDetails = getCycleById(cycleId);
-        const cycleStatus = cycleDetails?.status ? (cycleDetails.status.toLocaleLowerCase() as TCycleGroups) : "draft";
+        const cycleDetails = getCycleById(cycleId)
+        const cycleStatus = cycleDetails?.status ? (cycleDetails.status.toLocaleLowerCase() as TCycleGroups) : "draft"
 
         return {
             value: cycleId,
@@ -91,8 +91,8 @@ export const CycleOptions = observer((props: any) => {
                     <span className="flex-grow truncate">{cycleDetails?.name}</span>
                 </div>
             ),
-        };
-    });
+        }
+    })
     options?.unshift({
         value: null,
         query: "No cycle",
@@ -102,10 +102,10 @@ export const CycleOptions = observer((props: any) => {
                 <span className="flex-grow truncate">No cycle</span>
             </div>
         ),
-    });
+    })
 
     const filteredOptions =
-        query === "" ? options : options?.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()));
+        query === "" ? options : options?.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()))
 
     return (
         <Combobox.Options className="fixed z-10" static>
@@ -158,5 +158,5 @@ export const CycleOptions = observer((props: any) => {
                 </div>
             </div>
         </Combobox.Options>
-    );
-});
+    )
+})

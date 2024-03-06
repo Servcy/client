@@ -1,25 +1,22 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-import { RotateCcw } from "lucide-react";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { RotateCcw } from "lucide-react"
+import { observer } from "mobx-react"
+import { ArchiveIcon } from "@servcy/ui"
+import { IssueActivityBlockComponent } from "./"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent } from "./";
-
-import { ArchiveIcon } from "@servcy/ui";
-
-type TIssueArchivedAtActivity = { activityId: string; ends: "top" | "bottom" | undefined };
+type TIssueArchivedAtActivity = { activityId: string; ends: "top" | "bottom" | undefined }
 
 export const IssueArchivedAtActivity: FC<TIssueArchivedAtActivity> = observer((props) => {
-    const { activityId, ends } = props;
+    const { activityId, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
 
     return (
         <IssueActivityBlockComponent
@@ -36,5 +33,5 @@ export const IssueArchivedAtActivity: FC<TIssueArchivedAtActivity> = observer((p
         >
             {activity.new_value === "restore" ? "restored the issue" : "archived the issue"}.
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

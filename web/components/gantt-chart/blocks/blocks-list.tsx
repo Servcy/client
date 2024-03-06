@@ -1,23 +1,20 @@
-import { FC } from "react";
-
-import { GanttChartBlock } from "./block";
-
-import { IBlockUpdateData, IGanttBlock } from "../types";
-
-import { HEADER_HEIGHT } from "../constants";
+import { FC } from "react"
+import { HEADER_HEIGHT } from "../constants"
+import { IBlockUpdateData, IGanttBlock } from "../types"
+import { GanttChartBlock } from "./block"
 
 export type GanttChartBlocksProps = {
-    itemsContainerWidth: number;
-    blocks: IGanttBlock[] | null;
-    blockToRender: (data: any) => React.ReactNode;
-    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void;
-    enableBlockLeftResize: boolean;
-    enableBlockRightResize: boolean;
-    enableBlockMove: boolean;
-    enableAddBlock: boolean;
-    ganttContainerRef: React.RefObject<HTMLDivElement>;
-    showAllBlocks: boolean;
-};
+    itemsContainerWidth: number
+    blocks: IGanttBlock[] | null
+    blockToRender: (data: any) => React.ReactNode
+    blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void
+    enableBlockLeftResize: boolean
+    enableBlockRightResize: boolean
+    enableBlockMove: boolean
+    enableAddBlock: boolean
+    ganttContainerRef: React.RefObject<HTMLDivElement>
+    showAllBlocks: boolean
+}
 
 export const GanttChartBlocksList: FC<GanttChartBlocksProps> = (props) => {
     const {
@@ -31,7 +28,7 @@ export const GanttChartBlocksList: FC<GanttChartBlocksProps> = (props) => {
         enableAddBlock,
         ganttContainerRef,
         showAllBlocks,
-    } = props;
+    } = props
 
     return (
         <div
@@ -43,7 +40,7 @@ export const GanttChartBlocksList: FC<GanttChartBlocksProps> = (props) => {
         >
             {blocks?.map((block) => {
                 // hide the block if it doesn't have start and target dates and showAllBlocks is false
-                if (!showAllBlocks && !(block.start_date && block.target_date)) return;
+                if (!showAllBlocks && !(block.start_date && block.target_date)) return
 
                 return (
                     <GanttChartBlock
@@ -56,8 +53,8 @@ export const GanttChartBlocksList: FC<GanttChartBlocksProps> = (props) => {
                         enableAddBlock={enableAddBlock}
                         ganttContainerRef={ganttContainerRef}
                     />
-                );
+                )
             })}
         </div>
-    );
-};
+    )
+}

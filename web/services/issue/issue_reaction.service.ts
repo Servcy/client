@@ -1,12 +1,10 @@
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import { APIService } from "@services/api.service";
-
-import type { TIssueCommentReaction, TIssueReaction } from "@servcy/types";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import type { TIssueCommentReaction, TIssueReaction } from "@servcy/types"
 
 export class IssueReactionService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async createIssueReaction(
@@ -18,16 +16,16 @@ export class IssueReactionService extends APIService {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async listIssueReactions(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueReaction[]> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async deleteIssueReaction(
@@ -41,8 +39,8 @@ export class IssueReactionService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async createIssueCommentReaction(
@@ -57,8 +55,8 @@ export class IssueReactionService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async listIssueCommentReactions(
@@ -69,8 +67,8 @@ export class IssueReactionService extends APIService {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/comments/${commentId}/reactions/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async deleteIssueCommentReaction(
@@ -84,7 +82,7 @@ export class IssueReactionService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

@@ -1,23 +1,21 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
-import { MessageSquare } from "lucide-react";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { MessageSquare } from "lucide-react"
+import { observer } from "mobx-react"
+import { IssueActivityBlockComponent, IssueLink } from "./"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent, IssueLink } from "./";
-
-type TIssueLinkActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
+type TIssueLinkActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }
 
 export const IssueLinkActivity: FC<TIssueLinkActivity> = observer((props) => {
-    const { activityId, showIssue = false, ends } = props;
+    const { activityId, showIssue = false, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             icon={<MessageSquare size={14} color="#6b7280" aria-hidden="true" />}
@@ -66,5 +64,5 @@ export const IssueLinkActivity: FC<TIssueLinkActivity> = observer((props) => {
                 {showIssue && <IssueLink activityId={activityId} />}.
             </>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

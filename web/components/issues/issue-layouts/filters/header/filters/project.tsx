@@ -1,40 +1,36 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { useProject } from "@hooks/store";
-
-import { Loader } from "@servcy/ui";
-
-import { renderEmoji } from "@helpers/emoji.helper";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useProject } from "@hooks/store"
+import { observer } from "mobx-react"
+import { Loader } from "@servcy/ui"
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string) => void;
-    searchQuery: string;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string) => void
+    searchQuery: string
+}
 
 export const FilterProjects: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, searchQuery } = props;
+    const { appliedFilters, handleUpdate, searchQuery } = props
     // states
-    const [itemsToRender, setItemsToRender] = useState(5);
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [itemsToRender, setItemsToRender] = useState(5)
+    const [previewEnabled, setPreviewEnabled] = useState(true)
     // store
-    const { getProjectById, workspaceProjectIds } = useProject();
+    const { getProjectById, workspaceProjectIds } = useProject()
     // derived values
-    const projects = workspaceProjectIds?.map((projectId) => getProjectById(projectId)!) ?? null;
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const projects = workspaceProjectIds?.map((projectId) => getProjectById(projectId)!) ?? null
+    const appliedFiltersCount = appliedFilters?.length ?? 0
     const filteredOptions = projects?.filter((project) =>
         project.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    )
 
     const handleViewToggle = () => {
-        if (!filteredOptions) return;
+        if (!filteredOptions) return
 
-        if (itemsToRender === filteredOptions.length) setItemsToRender(5);
-        else setItemsToRender(filteredOptions.length);
-    };
+        if (itemsToRender === filteredOptions.length) setItemsToRender(5)
+        else setItemsToRender(filteredOptions.length)
+    }
 
     return (
         <>
@@ -94,5 +90,5 @@ export const FilterProjects: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

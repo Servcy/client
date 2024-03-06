@@ -1,39 +1,35 @@
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { useForm } from "react-hook-form";
-import { observer } from "mobx-react-lite";
-
-import { AnalyticsService } from "@services/analytics.service";
-
-import { CustomAnalyticsSelectBar, CustomAnalyticsMainContent, CustomAnalyticsSidebar } from "@components/analytics";
-
-import { IAnalyticsParams } from "@servcy/types";
-
-import { ANALYTICS } from "@constants/fetch-keys";
-import { cn } from "@helpers/common.helper";
-import { useApplication } from "@hooks/store";
+import { useRouter } from "next/router"
+import { CustomAnalyticsMainContent, CustomAnalyticsSelectBar, CustomAnalyticsSidebar } from "@components/analytics"
+import { ANALYTICS } from "@constants/fetch-keys"
+import { cn } from "@helpers/common.helper"
+import { useApplication } from "@hooks/store"
+import { AnalyticsService } from "@services/analytics.service"
+import { observer } from "mobx-react-lite"
+import { useForm } from "react-hook-form"
+import useSWR from "swr"
+import { IAnalyticsParams } from "@servcy/types"
 
 type Props = {
-    additionalParams?: Partial<IAnalyticsParams>;
-    fullScreen: boolean;
-};
+    additionalParams?: Partial<IAnalyticsParams>
+    fullScreen: boolean
+}
 
 const defaultValues: IAnalyticsParams = {
     x_axis: "priority",
     y_axis: "issue_count",
     segment: null,
     project: null,
-};
+}
 
-const analyticsService = new AnalyticsService();
+const analyticsService = new AnalyticsService()
 
 export const CustomAnalytics: React.FC<Props> = observer((props) => {
-    const { additionalParams, fullScreen } = props;
+    const { additionalParams, fullScreen } = props
 
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
-    const { control, watch, setValue } = useForm({ defaultValues });
+    const { control, watch, setValue } = useForm({ defaultValues })
 
     const params: IAnalyticsParams = {
         x_axis: watch("x_axis"),
@@ -41,16 +37,16 @@ export const CustomAnalytics: React.FC<Props> = observer((props) => {
         segment: watch("segment"),
         project: projectId ? [projectId.toString()] : watch("project"),
         ...additionalParams,
-    };
+    }
 
     const { data: analytics, error: analyticsError } = useSWR(
         workspaceSlug ? ANALYTICS(workspaceSlug.toString(), params) : null,
         workspaceSlug ? () => analyticsService.getAnalytics(workspaceSlug.toString(), params) : null
-    );
+    )
 
-    const { theme: themeStore } = useApplication();
+    const { theme: themeStore } = useApplication()
 
-    const isProjectLevel = projectId ? true : false;
+    const isProjectLevel = projectId ? true : false
 
     return (
         <div className={cn("relative w-full h-full flex overflow-hidden", isProjectLevel ? "flex-col-reverse" : "")}>
@@ -82,5 +78,5 @@ export const CustomAnalytics: React.FC<Props> = observer((props) => {
                 <CustomAnalyticsSidebar analytics={analytics} params={params} isProjectLevel={isProjectLevel} />
             </div>
         </div>
-    );
-});
+    )
+})

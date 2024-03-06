@@ -1,9 +1,9 @@
 type Props = {
-    width?: string;
-    height?: string;
-    className?: string;
-    color?: string;
-};
+    width?: string
+    height?: string
+    className?: string
+    color?: string
+}
 
 export const StateGroupStartedIcon: React.FC<Props> = ({
     width = "20",
@@ -43,4 +43,4 @@ export const StateGroupStartedIcon: React.FC<Props> = ({
             </g>
         </g>
     </svg>
-);
+)

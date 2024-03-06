@@ -1,14 +1,14 @@
-import type { NotionComment } from "@/types/integrations/notion";
-import { getCleanLink } from "@/utils/Shared";
-import Image from "next/image";
-import { HiExternalLink } from "react-icons/hi";
+import Image from "next/image"
+import { HiExternalLink } from "react-icons/hi"
+import type { NotionComment } from "@/types/integrations/notion"
+import { getCleanLink } from "@/utils/Shared"
 
 const NotionComment = ({ data, cause }: { data: NotionComment; cause: any }) => {
     const discussionLink = `https://www.notion.so/${data.parent.page_id.split("-").join("")}?d=${data.discussion_id
         .split("-")
-        .join("")}`;
-    const { name, avatar_url } = JSON.parse(cause);
-    const cleanImageLink = getCleanLink(avatar_url);
+        .join("")}`
+    const { name, avatar_url } = JSON.parse(cause)
+    const cleanImageLink = getCleanLink(avatar_url)
     return (
         <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
             <div className="min-h-[75px]">
@@ -27,14 +27,14 @@ const NotionComment = ({ data, cause }: { data: NotionComment; cause: any }) => 
                                 </a>
                                 {index !== data.rich_text.length - 1 ? " " : ""}
                             </>
-                        );
+                        )
                     } else if (content.type === "text" && content.text) {
                         return (
                             <>
                                 {content.text.content}
                                 {index !== data.rich_text.length - 1 ? " " : ""}
                             </>
-                        );
+                        )
                     } else if (content.type === "mention" && content.mention) {
                         return (
                             <>
@@ -49,14 +49,14 @@ const NotionComment = ({ data, cause }: { data: NotionComment; cause: any }) => 
                                 {content.plain_text}
                                 {index !== data.rich_text.length - 1 ? " " : ""}
                             </>
-                        );
+                        )
                     }
                     return (
                         <>
                             {content.plain_text}
                             {index !== data.rich_text.length - 1 ? " " : ""}
                         </>
-                    );
+                    )
                 })}
             </div>
             <div className="flex justify-between">
@@ -93,7 +93,7 @@ const NotionComment = ({ data, cause }: { data: NotionComment; cause: any }) => 
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default NotionComment;
+export default NotionComment

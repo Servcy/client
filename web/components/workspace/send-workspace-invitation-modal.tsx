@@ -1,31 +1,27 @@
-import React, { useEffect } from "react";
-import { observer } from "mobx-react-lite";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
-import { Plus, X } from "lucide-react";
-
-import { useUser } from "@hooks/store";
-
-import { Button, CustomSelect, Input } from "@servcy/ui";
-
-import { IWorkspaceBulkInviteFormData } from "@servcy/types";
-
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
+import React, { useEffect } from "react"
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+import { Dialog, Transition } from "@headlessui/react"
+import { useUser } from "@hooks/store"
+import { Plus, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useFieldArray, useForm } from "react-hook-form"
+import { IWorkspaceBulkInviteFormData } from "@servcy/types"
+import { Button, CustomSelect, Input } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: (data: IWorkspaceBulkInviteFormData) => Promise<void> | undefined;
-};
+    isOpen: boolean
+    onClose: () => void
+    onSubmit: (data: IWorkspaceBulkInviteFormData) => Promise<void> | undefined
+}
 
 type EmailRole = {
-    email: string;
-    role: EUserWorkspaceRoles;
-};
+    email: string
+    role: EUserWorkspaceRoles
+}
 
 type FormValues = {
-    emails: EmailRole[];
-};
+    emails: EmailRole[]
+}
 
 const defaultValues: FormValues = {
     emails: [
@@ -34,49 +30,49 @@ const defaultValues: FormValues = {
             role: 15,
         },
     ],
-};
+}
 
 export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) => {
-    const { isOpen, onClose, onSubmit } = props;
+    const { isOpen, onClose, onSubmit } = props
     // mobx store
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
     // form info
     const {
         control,
         reset,
         handleSubmit,
         formState: { isSubmitting, errors },
-    } = useForm<FormValues>();
+    } = useForm<FormValues>()
 
     const { fields, append, remove } = useFieldArray({
         control,
         name: "emails",
-    });
+    })
 
     const handleClose = () => {
-        onClose();
+        onClose()
 
         const timeout = setTimeout(() => {
-            reset(defaultValues);
-            clearTimeout(timeout);
-        }, 350);
-    };
+            reset(defaultValues)
+            clearTimeout(timeout)
+        }, 350)
+    }
 
     const appendField = () => {
-        append({ email: "", role: 15 });
-    };
+        append({ email: "", role: 15 })
+    }
 
     const onSubmitForm = async (data: FormValues) => {
         await onSubmit(data)?.then(() => {
-            reset(defaultValues);
-        });
-    };
+            reset(defaultValues)
+        })
+    }
 
     useEffect(() => {
-        if (fields.length === 0) append([{ email: "", role: 15 }]);
-    }, [fields, append]);
+        if (fields.length === 0) append([{ email: "", role: 15 }])
+    }, [fields, append])
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -108,7 +104,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
                                 <form
                                     onSubmit={handleSubmit(onSubmitForm)}
                                     onKeyDown={(e) => {
-                                        if (e.code === "Enter") e.preventDefault();
+                                        if (e.code === "Enter") e.preventDefault()
                                     }}
                                 >
                                     <div className="space-y-5">
@@ -191,7 +187,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
                                                                                 >
                                                                                     {value}
                                                                                 </CustomSelect.Option>
-                                                                            );
+                                                                            )
                                                                     })}
                                                                 </CustomSelect>
                                                             )}
@@ -236,5 +232,5 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

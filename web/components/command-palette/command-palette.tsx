@@ -1,42 +1,38 @@
-import React, { useCallback, useEffect, FC } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { observer } from "mobx-react-lite";
-
-import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { CommandModal, ShortcutsModal } from "@components/command-palette";
-import { BulkDeleteIssuesModal } from "@components/core";
-import { CycleCreateUpdateModal } from "@components/cycles";
-import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
-import { CreateUpdateModuleModal } from "@components/modules";
-import { CreateProjectModal } from "@components/project";
-import { CreateUpdateProjectViewModal } from "@components/views";
-import { CreateUpdatePageModal } from "@components/pages";
-
-import { copyTextToClipboard } from "@helpers/string.helper";
-
-import { IssueService } from "@services/issue";
+import { useRouter } from "next/router"
+import React, { FC, useCallback, useEffect } from "react"
+import { CommandModal, ShortcutsModal } from "@components/command-palette"
+import { BulkDeleteIssuesModal } from "@components/core"
+import { CycleCreateUpdateModal } from "@components/cycles"
+import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues"
+import { CreateUpdateModuleModal } from "@components/modules"
+import { CreateUpdatePageModal } from "@components/pages"
+import { CreateProjectModal } from "@components/project"
+import { CreateUpdateProjectViewModal } from "@components/views"
 // fetch keys
-import { ISSUE_DETAILS } from "@constants/fetch-keys";
-import { EIssuesStoreType } from "@constants/issue";
+import { ISSUE_DETAILS } from "@constants/fetch-keys"
+import { EIssuesStoreType } from "@constants/issue"
+import { copyTextToClipboard } from "@helpers/string.helper"
+import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store"
+import { IssueService } from "@services/issue"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import useSWR from "swr"
 
-const issueService = new IssueService();
+const issueService = new IssueService()
 
 export const CommandPalette: FC = observer(() => {
-    const router = useRouter();
-    const { workspaceSlug, projectId, issueId, cycleId, moduleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, issueId, cycleId, moduleId } = router.query
 
     const {
         commandPalette,
         theme: { toggleSidebar },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
-    const { currentUser } = useUser();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
+    const { currentUser } = useUser()
     const {
         issues: { removeIssue },
-    } = useIssues(EIssuesStoreType.PROJECT);
+    } = useIssues(EIssuesStoreType.PROJECT)
 
     const {
         toggleCommandPaletteModal,
@@ -60,79 +56,79 @@ export const CommandPalette: FC = observer(() => {
         toggleDeleteIssueModal,
         isAnyModalOpen,
         createIssueStoreType,
-    } = commandPalette;
+    } = commandPalette
 
     const { data: issueDetails } = useSWR(
         workspaceSlug && projectId && issueId ? ISSUE_DETAILS(issueId as string) : null,
         workspaceSlug && projectId && issueId
             ? () => issueService.retrieve(workspaceSlug as string, projectId as string, issueId as string)
             : null
-    );
+    )
 
     const copyIssueUrlToClipboard = useCallback(() => {
-        if (!issueId) return;
+        if (!issueId) return
 
-        const url = new URL(window.location.href);
+        const url = new URL(window.location.href)
         copyTextToClipboard(url.href)
             .then(() => {
                 toast.error({
                     type: "success",
                     title: "Copied to clipboard",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Some error occurred",
-                });
-            });
-    }, [setToastAlert, issueId]);
+                })
+            })
+    }, [setToastAlert, issueId])
 
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
-            const { key, ctrlKey, metaKey, altKey } = e;
-            if (!key) return;
+            const { key, ctrlKey, metaKey, altKey } = e
+            if (!key) return
 
-            const keyPressed = key.toLowerCase();
-            const cmdClicked = ctrlKey || metaKey;
+            const keyPressed = key.toLowerCase()
+            const cmdClicked = ctrlKey || metaKey
             // if on input, textarea or editor, don't do anything
             if (
                 e.target instanceof HTMLTextAreaElement ||
                 e.target instanceof HTMLInputElement ||
                 (e.target as Element).classList?.contains("ProseMirror")
             )
-                return;
+                return
 
             if (cmdClicked) {
                 if (keyPressed === "k") {
-                    e.preventDefault();
-                    toggleCommandPaletteModal(true);
+                    e.preventDefault()
+                    toggleCommandPaletteModal(true)
                 } else if (keyPressed === "c" && altKey) {
-                    e.preventDefault();
-                    copyIssueUrlToClipboard();
+                    e.preventDefault()
+                    copyIssueUrlToClipboard()
                 } else if (keyPressed === "b") {
-                    e.preventDefault();
-                    toggleSidebar();
+                    e.preventDefault()
+                    toggleSidebar()
                 }
             } else if (!isAnyModalOpen) {
-                setTrackElement("Shortcut key");
+                setTrackElement("Shortcut key")
                 if (keyPressed === "c") {
-                    toggleCreateIssueModal(true);
+                    toggleCreateIssueModal(true)
                 } else if (keyPressed === "p") {
-                    toggleCreateProjectModal(true);
+                    toggleCreateProjectModal(true)
                 } else if (keyPressed === "h") {
-                    toggleShortcutModal(true);
+                    toggleShortcutModal(true)
                 } else if (keyPressed === "v" && workspaceSlug && projectId) {
-                    toggleCreateViewModal(true);
+                    toggleCreateViewModal(true)
                 } else if (keyPressed === "d" && workspaceSlug && projectId) {
-                    toggleCreatePageModal(true);
+                    toggleCreatePageModal(true)
                 } else if (keyPressed === "q" && workspaceSlug && projectId) {
-                    toggleCreateCycleModal(true);
+                    toggleCreateCycleModal(true)
                 } else if (keyPressed === "m" && workspaceSlug && projectId) {
-                    toggleCreateModuleModal(true);
+                    toggleCreateModuleModal(true)
                 } else if (keyPressed === "backspace" || keyPressed === "delete") {
-                    e.preventDefault();
-                    toggleBulkDeleteIssueModal(true);
+                    e.preventDefault()
+                    toggleBulkDeleteIssueModal(true)
                 }
             }
         },
@@ -153,30 +149,30 @@ export const CommandPalette: FC = observer(() => {
             isAnyModalOpen,
             setTrackElement,
         ]
-    );
+    )
 
     useEffect(() => {
-        document.addEventListener("keydown", handleKeyDown);
-        return () => document.removeEventListener("keydown", handleKeyDown);
-    }, [handleKeyDown]);
+        document.addEventListener("keydown", handleKeyDown)
+        return () => document.removeEventListener("keydown", handleKeyDown)
+    }, [handleKeyDown])
 
-    const isDraftIssue = router?.asPath?.includes("draft-issues") || false;
+    const isDraftIssue = router?.asPath?.includes("draft-issues") || false
 
-    if (!currentUser) return null;
+    if (!currentUser) return null
 
     return (
         <>
             <ShortcutsModal
                 isOpen={isShortcutModalOpen}
                 onClose={() => {
-                    toggleShortcutModal(false);
+                    toggleShortcutModal(false)
                 }}
             />
             {workspaceSlug && (
                 <CreateProjectModal
                     isOpen={isCreateProjectModalOpen}
                     onClose={() => {
-                        toggleCreateProjectModal(false);
+                        toggleCreateProjectModal(false)
                     }}
                     workspaceSlug={workspaceSlug.toString()}
                 />
@@ -192,7 +188,7 @@ export const CommandPalette: FC = observer(() => {
                     <CreateUpdateModuleModal
                         isOpen={isCreateModuleModalOpen}
                         onClose={() => {
-                            toggleCreateModuleModal(false);
+                            toggleCreateModuleModal(false)
                         }}
                         workspaceSlug={workspaceSlug.toString()}
                         projectId={projectId.toString()}
@@ -231,8 +227,8 @@ export const CommandPalette: FC = observer(() => {
                     isOpen={isDeleteIssueModalOpen}
                     data={issueDetails}
                     onSubmit={async () => {
-                        await removeIssue(workspaceSlug.toString(), projectId.toString(), issueId.toString());
-                        router.push(`/${workspaceSlug}/projects/${projectId}/issues`);
+                        await removeIssue(workspaceSlug.toString(), projectId.toString(), issueId.toString())
+                        router.push(`/${workspaceSlug}/projects/${projectId}/issues`)
                     }}
                 />
             )}
@@ -240,11 +236,11 @@ export const CommandPalette: FC = observer(() => {
             <BulkDeleteIssuesModal
                 isOpen={isBulkDeleteIssueModalOpen}
                 onClose={() => {
-                    toggleBulkDeleteIssueModal(false);
+                    toggleBulkDeleteIssueModal(false)
                 }}
                 user={currentUser}
             />
             <CommandModal />
         </>
-    );
-});
+    )
+})

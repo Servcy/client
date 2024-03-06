@@ -1,37 +1,34 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { Pencil, Trash2 } from "lucide-react";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { CreateUpdateWorkspaceViewModal, DeleteGlobalViewModal } from "@components/workspace"
+import { calculateTotalFilters } from "@helpers/filter.helper"
+import { truncateText } from "@helpers/string.helper"
 // store hooks
-import { useEventTracker, useGlobalView } from "@hooks/store";
+import { useEventTracker, useGlobalView } from "@hooks/store"
+import { Pencil, Trash2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { CustomMenu } from "@servcy/ui"
 
-import { CreateUpdateWorkspaceViewModal, DeleteGlobalViewModal } from "@components/workspace";
-
-import { CustomMenu } from "@servcy/ui";
-
-import { truncateText } from "@helpers/string.helper";
-import { calculateTotalFilters } from "@helpers/filter.helper";
-
-type Props = { viewId: string };
+type Props = { viewId: string }
 
 export const GlobalViewListItem: React.FC<Props> = observer((props) => {
-    const { viewId } = props;
+    const { viewId } = props
     // states
-    const [updateViewModal, setUpdateViewModal] = useState(false);
-    const [deleteViewModal, setDeleteViewModal] = useState(false);
+    const [updateViewModal, setUpdateViewModal] = useState(false)
+    const [deleteViewModal, setDeleteViewModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { getViewDetailsById } = useGlobalView();
-    const { setTrackElement } = useEventTracker();
+    const { getViewDetailsById } = useGlobalView()
+    const { setTrackElement } = useEventTracker()
     // derived data
-    const view = getViewDetailsById(viewId);
+    const view = getViewDetailsById(viewId)
 
-    if (!view) return null;
+    if (!view) return null
 
-    const totalFilters = calculateTotalFilters(view.filters ?? {});
+    const totalFilters = calculateTotalFilters(view.filters ?? {})
 
     return (
         <>
@@ -63,10 +60,10 @@ export const GlobalViewListItem: React.FC<Props> = observer((props) => {
                                     <CustomMenu ellipsis>
                                         <CustomMenu.MenuItem
                                             onClick={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                setTrackElement("List view");
-                                                setUpdateViewModal(true);
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                setTrackElement("List view")
+                                                setUpdateViewModal(true)
                                             }}
                                         >
                                             <span className="flex items-center justify-start gap-2">
@@ -76,9 +73,9 @@ export const GlobalViewListItem: React.FC<Props> = observer((props) => {
                                         </CustomMenu.MenuItem>
                                         <CustomMenu.MenuItem
                                             onClick={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                setDeleteViewModal(true);
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                setDeleteViewModal(true)
                                             }}
                                         >
                                             <span className="flex items-center justify-start gap-2">
@@ -94,5 +91,5 @@ export const GlobalViewListItem: React.FC<Props> = observer((props) => {
                 </Link>
             </div>
         </>
-    );
-});
+    )
+})

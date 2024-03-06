@@ -1,11 +1,9 @@
-import { Control, Controller } from "react-hook-form";
-
-import { ToggleSwitch } from "@servcy/ui";
-
-import { IWebhook } from "@servcy/types";
+import { Control, Controller } from "react-hook-form"
+import { IWebhook } from "@servcy/types"
+import { ToggleSwitch } from "@servcy/ui"
 
 interface IWebHookToggle {
-    control: Control<IWebhook, any>;
+    control: Control<IWebhook, any>
 }
 
 export const WebhookToggle = ({ control }: IWebHookToggle) => (
@@ -18,11 +16,11 @@ export const WebhookToggle = ({ control }: IWebHookToggle) => (
                 <ToggleSwitch
                     value={value}
                     onChange={(val: boolean) => {
-                        onChange(val);
+                        onChange(val)
                     }}
                     size="sm"
                 />
             )}
         />
     </div>
-);
+)

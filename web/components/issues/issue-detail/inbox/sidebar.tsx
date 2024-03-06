@@ -1,42 +1,39 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import { CalendarCheck2, Signal, Tag } from "lucide-react";
-
-import { useIssueDetail, useProject, useProjectState } from "@hooks/store";
-
-import { IssueLabel, TIssueOperations } from "@components/issues";
-import { DateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "@components/dropdowns";
-
-import { DoubleCircleIcon, StateGroupIcon, UserGroupIcon } from "@servcy/ui";
+import React from "react"
+import { DateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
+import { IssueLabel, TIssueOperations } from "@components/issues"
 // helper
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+import { CalendarCheck2, Signal, Tag } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { DoubleCircleIcon, StateGroupIcon, UserGroupIcon } from "@servcy/ui"
 
 type Props = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    issueOperations: TIssueOperations;
-    is_editable: boolean;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    issueOperations: TIssueOperations
+    is_editable: boolean
+}
 
 export const InboxIssueDetailsSidebar: React.FC<Props> = observer((props) => {
-    const { workspaceSlug, projectId, issueId, issueOperations, is_editable } = props;
+    const { workspaceSlug, projectId, issueId, issueOperations, is_editable } = props
     // store hooks
-    const { getProjectById } = useProject();
-    const { projectStates } = useProjectState();
+    const { getProjectById } = useProject()
+    const { projectStates } = useProjectState()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const issue = getIssueById(issueId);
-    if (!issue) return <></>;
+    const issue = getIssueById(issueId)
+    if (!issue) return <></>
 
-    const projectDetails = issue ? getProjectById(issue.project_id) : null;
+    const projectDetails = issue ? getProjectById(issue.project_id) : null
 
-    const minDate = issue.start_date ? new Date(issue.start_date) : null;
-    minDate?.setDate(minDate.getDate());
+    const minDate = issue.start_date ? new Date(issue.start_date) : null
+    minDate?.setDate(minDate.getDate())
 
-    const currentIssueState = projectStates?.find((s) => s.id === issue.state_id);
+    const currentIssueState = projectStates?.find((s) => s.id === issue.state_id)
 
     return (
         <div className="flex h-full w-full flex-col divide-y-2 divide-custom-border-200 overflow-hidden">
@@ -179,5 +176,5 @@ export const InboxIssueDetailsSidebar: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

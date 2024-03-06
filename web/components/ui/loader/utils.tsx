@@ -4,32 +4,32 @@ import {
     KanbanLayoutLoader,
     ListLayoutLoader,
     SpreadsheetLayoutLoader,
-} from "./layouts";
+} from "./layouts"
 
-export const getRandomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+export const getRandomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
 
 export const getRandomLength = (lengthArray: string[]) => {
-    const randomIndex = Math.floor(Math.random() * lengthArray.length);
-    return `${lengthArray[randomIndex]}`;
-};
+    const randomIndex = Math.floor(Math.random() * lengthArray.length)
+    return `${lengthArray[randomIndex]}`
+}
 
 interface Props {
-    layout: string;
+    layout: string
 }
 export const ActiveLoader: React.FC<Props> = (props) => {
-    const { layout } = props;
+    const { layout } = props
     switch (layout) {
         case "list":
-            return <ListLayoutLoader />;
+            return <ListLayoutLoader />
         case "kanban":
-            return <KanbanLayoutLoader />;
+            return <KanbanLayoutLoader />
         case "spreadsheet":
-            return <SpreadsheetLayoutLoader />;
+            return <SpreadsheetLayoutLoader />
         case "calendar":
-            return <CalendarLayoutLoader />;
+            return <CalendarLayoutLoader />
         case "gantt_chart":
-            return <GanttLayoutLoader />;
+            return <GanttLayoutLoader />
         default:
-            return <KanbanLayoutLoader />;
+            return <KanbanLayoutLoader />
     }
-};
+}

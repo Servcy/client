@@ -1,3 +1,3 @@
-export * from "./custom-analytics";
-export * from "./scope-and-demand";
-export * from "./project-modal";
+export * from "./custom-analytics"
+export * from "./scope-and-demand"
+export * from "./project-modal"

@@ -1,12 +1,11 @@
-import { APIService } from "@services/api.service";
 // helper
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import { IAppConfig } from "@servcy/types";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { IAppConfig } from "@servcy/types"
 
 export class AppConfigService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async envConfig(): Promise<IAppConfig> {
@@ -17,7 +16,7 @@ export class AppConfigService extends APIService {
         })
             .then((response) => response.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

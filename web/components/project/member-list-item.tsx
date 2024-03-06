@@ -1,49 +1,44 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useMember, useProject, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { ConfirmProjectMemberRemove } from "@components/project";
-
-import { CustomSelect, Tooltip } from "@servcy/ui";
-
-import { ChevronDown, Dot, XCircle } from "lucide-react";
-
-import { ROLE } from "@constants/workspace";
-import { EUserProjectRoles } from "@constants/project";
-import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { ConfirmProjectMemberRemove } from "@components/project"
+import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
+import { EUserProjectRoles } from "@constants/project"
+import { ROLE } from "@constants/workspace"
+import { useEventTracker, useMember, useProject, useUser } from "@hooks/store"
+import { ChevronDown, Dot, XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { CustomSelect, Tooltip } from "@servcy/ui"
 
 type Props = {
-    userId: string;
-};
+    userId: string
+}
 
 export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
-    const { userId } = props;
+    const { userId } = props
     // states
-    const [removeMemberModal, setRemoveMemberModal] = useState(false);
+    const [removeMemberModal, setRemoveMemberModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
     const {
         currentUser,
         membership: { currentProjectRole, leaveProject },
-    } = useUser();
-    const { fetchProjects } = useProject();
+    } = useUser()
+    const { fetchProjects } = useProject()
     const {
         project: { removeMemberFromProject, getProjectMemberDetails, updateMember },
-    } = useMember();
-    const { captureEvent } = useEventTracker();
+    } = useMember()
+    const { captureEvent } = useEventTracker()
 
     // derived values
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
-    const userDetails = getProjectMemberDetails(userId);
+    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const userDetails = getProjectMemberDetails(userId)
 
     const handleRemove = async () => {
-        if (!workspaceSlug || !projectId || !userDetails) return;
+        if (!workspaceSlug || !projectId || !userDetails) return
 
         if (userDetails.member.id === currentUser?.id) {
             await leaveProject(workspaceSlug.toString(), projectId.toString())
@@ -51,9 +46,9 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                     captureEvent(PROJECT_MEMBER_LEAVE, {
                         state: "SUCCESS",
                         element: "Project settings members page",
-                    });
-                    await fetchProjects(workspaceSlug.toString());
-                    router.push(`/${workspaceSlug}/projects`);
+                    })
+                    await fetchProjects(workspaceSlug.toString())
+                    router.push(`/${workspaceSlug}/projects`)
                 })
                 .catch((err) =>
                     toast.error({
@@ -61,7 +56,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                         title: "Error",
                         message: err?.error || "Something went wrong. Please try again.",
                     })
-                );
+                )
         } else
             await removeMemberFromProject(workspaceSlug.toString(), projectId.toString(), userDetails.member.id).catch(
                 (err) =>
@@ -70,10 +65,10 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                         title: "Error",
                         message: err?.error || "Something went wrong. Please try again.",
                     })
-            );
-    };
+            )
+    }
 
-    if (!userDetails) return null;
+    if (!userDetails) return null
 
     return (
         <>
@@ -141,13 +136,13 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                         }
                         value={userDetails.role}
                         onChange={(value: EUserProjectRoles) => {
-                            if (!workspaceSlug || !projectId) return;
+                            if (!workspaceSlug || !projectId) return
 
                             updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
                                 role: value,
                             }).catch((err) => {
-                                const error = err.error;
-                                const errorString = Array.isArray(error) ? error[0] : error;
+                                const error = err.error
+                                const errorString = Array.isArray(error) ? error[0] : error
 
                                 toast.error({
                                     type: "error",
@@ -155,8 +150,8 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                                     message:
                                         errorString ??
                                         "An error occurred while updating member role. Please try again.",
-                                });
-                            });
+                                })
+                            })
                         }}
                         disabled={
                             userDetails.member.id === currentUser?.id ||
@@ -166,13 +161,13 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                         placement="bottom-end"
                     >
                         {Object.keys(ROLE).map((key) => {
-                            if (currentProjectRole && !isAdmin && currentProjectRole < parseInt(key)) return null;
+                            if (currentProjectRole && !isAdmin && currentProjectRole < parseInt(key)) return null
 
                             return (
                                 <CustomSelect.Option key={key} value={parseInt(key, 10)}>
                                     <>{ROLE[parseInt(key) as keyof typeof ROLE]}</>
                                 </CustomSelect.Option>
-                            );
+                            )
                         })}
                     </CustomSelect>
                     {(isAdmin || userDetails.member.id === currentUser?.id) && (
@@ -193,5 +188,5 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

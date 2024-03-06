@@ -1,27 +1,25 @@
-import { observer } from "mobx-react-lite";
-import { X } from "lucide-react";
-
-import { useModule } from "@hooks/store";
-
-import { DiceIcon } from "@servcy/ui";
+import { useModule } from "@hooks/store"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { DiceIcon } from "@servcy/ui"
 
 type Props = {
-    handleRemove: (val: string) => void;
-    values: string[];
-    editable: boolean | undefined;
-};
+    handleRemove: (val: string) => void
+    values: string[]
+    editable: boolean | undefined
+}
 
 export const AppliedModuleFilters: React.FC<Props> = observer((props) => {
-    const { handleRemove, values, editable } = props;
+    const { handleRemove, values, editable } = props
     // store hooks
-    const { getModuleById } = useModule();
+    const { getModuleById } = useModule()
 
     return (
         <>
             {values.map((moduleId) => {
-                const moduleDetails = getModuleById(moduleId) ?? null;
+                const moduleDetails = getModuleById(moduleId) ?? null
 
-                if (!moduleDetails) return null;
+                if (!moduleDetails) return null
 
                 return (
                     <div key={moduleId} className="flex items-center gap-1 rounded bg-custom-background-80 p-1 text-xs">
@@ -37,8 +35,8 @@ export const AppliedModuleFilters: React.FC<Props> = observer((props) => {
                             </button>
                         )}
                     </div>
-                );
+                )
             })}
         </>
-    );
-});
+    )
+})

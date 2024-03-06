@@ -1,37 +1,31 @@
-import { useEffect } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { Plus } from "lucide-react";
+import Link from "next/link"
+import { useEffect } from "react"
+import { WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
+import { PROJECT_BACKGROUND_COLORS } from "@constants/dashboard"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useApplication, useDashboard, useEventTracker, useProject, useUser } from "@hooks/store"
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TRecentProjectsWidgetResponse } from "@servcy/types"
+import { Avatar, AvatarGroup } from "@servcy/ui"
 
-import { useApplication, useEventTracker, useDashboard, useProject, useUser } from "@hooks/store";
-
-import { WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
-
-import { Avatar, AvatarGroup } from "@servcy/ui";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { TRecentProjectsWidgetResponse } from "@servcy/types";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { PROJECT_BACKGROUND_COLORS } from "@constants/dashboard";
-
-const WIDGET_KEY = "recent_projects";
+const WIDGET_KEY = "recent_projects"
 
 type ProjectListItemProps = {
-    projectId: string;
-    workspaceSlug: string;
-};
+    projectId: string
+    workspaceSlug: string
+}
 
 const ProjectListItem: React.FC<ProjectListItemProps> = observer((props) => {
-    const { projectId, workspaceSlug } = props;
+    const { projectId, workspaceSlug } = props
     // store hooks
-    const { getProjectById } = useProject();
-    const projectDetails = getProjectById(projectId);
+    const { getProjectById } = useProject()
+    const projectDetails = getProjectById(projectId)
 
-    const randomBgColor = PROJECT_BACKGROUND_COLORS[Math.floor(Math.random() * PROJECT_BACKGROUND_COLORS.length)];
+    const randomBgColor = PROJECT_BACKGROUND_COLORS[Math.floor(Math.random() * PROJECT_BACKGROUND_COLORS.length)]
 
-    if (!projectDetails) return null;
+    if (!projectDetails) return null
 
     return (
         <Link href={`/${workspaceSlug}/projects/${projectId}/issues`} className="group flex items-center gap-8">
@@ -69,32 +63,32 @@ const ProjectListItem: React.FC<ProjectListItemProps> = observer((props) => {
                 </div>
             </div>
         </Link>
-    );
-});
+    )
+})
 
 export const RecentProjectsWidget: React.FC<WidgetProps> = observer((props) => {
-    const { dashboardId, workspaceSlug } = props;
+    const { dashboardId, workspaceSlug } = props
     // store hooks
     const {
         commandPalette: { toggleCreateProjectModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { fetchWidgetStats, getWidgetStats } = useDashboard();
+    } = useUser()
+    const { fetchWidgetStats, getWidgetStats } = useDashboard()
     // derived values
-    const widgetStats = getWidgetStats<TRecentProjectsWidgetResponse>(workspaceSlug, dashboardId, WIDGET_KEY);
-    const canCreateProject = currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
+    const widgetStats = getWidgetStats<TRecentProjectsWidgetResponse>(workspaceSlug, dashboardId, WIDGET_KEY)
+    const canCreateProject = currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
 
     useEffect(() => {
         fetchWidgetStats(workspaceSlug, dashboardId, {
             widget_key: WIDGET_KEY,
-        });
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
-    if (!widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />;
+    if (!widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />
 
     return (
         <div className="bg-custom-background-100 rounded-xl border-[0.5px] border-custom-border-200 w-full py-6 hover:shadow-custom-shadow-4xl duration-300 min-h-96">
@@ -110,10 +104,10 @@ export const RecentProjectsWidget: React.FC<WidgetProps> = observer((props) => {
                         type="button"
                         className="group flex items-center gap-8"
                         onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setTrackElement("Sidebar");
-                            toggleCreateProjectModal(true);
+                            e.preventDefault()
+                            e.stopPropagation()
+                            setTrackElement("Sidebar")
+                            toggleCreateProjectModal(true)
                         }}
                     >
                         <div className="h-[3.375rem] w-[3.375rem] bg-custom-primary-100/20 text-custom-primary-100 grid place-items-center rounded border border-dashed border-custom-primary-60 flex-shrink-0">
@@ -129,5 +123,5 @@ export const RecentProjectsWidget: React.FC<WidgetProps> = observer((props) => {
                 ))}
             </div>
         </div>
-    );
-});
+    )
+})

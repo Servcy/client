@@ -1,70 +1,68 @@
-import { set } from "lodash";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-
-import { ProjectMemberService } from "@services/project";
-import { UserService } from "@services/user.service";
-import { WorkspaceService } from "@services/workspace.service";
+import { EUserProjectRoles } from "@constants/project"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ProjectMemberService } from "@services/project"
+import { UserService } from "@services/user.service"
+import { WorkspaceService } from "@services/workspace.service"
+import { set } from "lodash"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
 // interfaces
-import { IProjectMember, IUserProjectsRole, IWorkspaceMemberMe } from "@servcy/types";
-import { RootStore } from "../root.store";
-
-import { EUserProjectRoles } from "@constants/project";
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import { IProjectMember, IUserProjectsRole, IWorkspaceMemberMe } from "@servcy/types"
+import { RootStore } from "../root.store"
 
 export interface IUserMembershipStore {
     // observables
     workspaceMemberInfo: {
-        [workspaceSlug: string]: IWorkspaceMemberMe;
-    };
+        [workspaceSlug: string]: IWorkspaceMemberMe
+    }
     hasPermissionToWorkspace: {
-        [workspaceSlug: string]: boolean | null;
-    };
+        [workspaceSlug: string]: boolean | null
+    }
     projectMemberInfo: {
-        [projectId: string]: IProjectMember;
-    };
+        [projectId: string]: IProjectMember
+    }
     hasPermissionToProject: {
-        [projectId: string]: boolean | null;
-    };
-    workspaceProjectsRole: { [workspaceSlug: string]: IUserProjectsRole };
+        [projectId: string]: boolean | null
+    }
+    workspaceProjectsRole: { [workspaceSlug: string]: IUserProjectsRole }
     // computed
-    currentProjectMemberInfo: IProjectMember | undefined;
-    currentWorkspaceMemberInfo: IWorkspaceMemberMe | undefined;
-    currentProjectRole: EUserProjectRoles | undefined;
-    currentWorkspaceRole: EUserWorkspaceRoles | undefined;
-    currentWorkspaceAllProjectsRole: IUserProjectsRole | undefined;
+    currentProjectMemberInfo: IProjectMember | undefined
+    currentWorkspaceMemberInfo: IWorkspaceMemberMe | undefined
+    currentProjectRole: EUserProjectRoles | undefined
+    currentWorkspaceRole: EUserWorkspaceRoles | undefined
+    currentWorkspaceAllProjectsRole: IUserProjectsRole | undefined
 
-    hasPermissionToCurrentWorkspace: boolean | undefined;
-    hasPermissionToCurrentProject: boolean | undefined;
+    hasPermissionToCurrentWorkspace: boolean | undefined
+    hasPermissionToCurrentProject: boolean | undefined
     // fetch actions
-    fetchUserWorkspaceInfo: (workspaceSlug: string) => Promise<IWorkspaceMemberMe>;
-    fetchUserProjectInfo: (workspaceSlug: string, projectId: string) => Promise<IProjectMember>;
-    fetchUserWorkspaceProjectsRole: (workspaceSlug: string) => Promise<IUserProjectsRole>;
+    fetchUserWorkspaceInfo: (workspaceSlug: string) => Promise<IWorkspaceMemberMe>
+    fetchUserProjectInfo: (workspaceSlug: string, projectId: string) => Promise<IProjectMember>
+    fetchUserWorkspaceProjectsRole: (workspaceSlug: string) => Promise<IUserProjectsRole>
     // crud actions
-    leaveWorkspace: (workspaceSlug: string) => Promise<void>;
-    joinProject: (workspaceSlug: string, projectIds: string[]) => Promise<any>;
-    leaveProject: (workspaceSlug: string, projectId: string) => Promise<void>;
+    leaveWorkspace: (workspaceSlug: string) => Promise<void>
+    joinProject: (workspaceSlug: string, projectIds: string[]) => Promise<any>
+    leaveProject: (workspaceSlug: string, projectId: string) => Promise<void>
 }
 
 export class UserMembershipStore implements IUserMembershipStore {
     workspaceMemberInfo: {
-        [workspaceSlug: string]: IWorkspaceMemberMe;
-    } = {};
+        [workspaceSlug: string]: IWorkspaceMemberMe
+    } = {}
     hasPermissionToWorkspace: {
-        [workspaceSlug: string]: boolean;
-    } = {};
+        [workspaceSlug: string]: boolean
+    } = {}
     projectMemberInfo: {
-        [projectId: string]: IProjectMember;
-    } = {};
+        [projectId: string]: IProjectMember
+    } = {}
     hasPermissionToProject: {
-        [projectId: string]: boolean;
-    } = {};
-    workspaceProjectsRole: { [workspaceSlug: string]: IUserProjectsRole } = {};
+        [projectId: string]: boolean
+    } = {}
+    workspaceProjectsRole: { [workspaceSlug: string]: IUserProjectsRole } = {}
     // stores
-    router;
+    router
 
-    userService;
-    workspaceService;
-    projectMemberService;
+    userService
+    workspaceService
+    projectMemberService
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
@@ -89,68 +87,68 @@ export class UserMembershipStore implements IUserMembershipStore {
             joinProject: action,
             leaveProject: action,
             fetchUserWorkspaceProjectsRole: action,
-        });
-        this.router = _rootStore.app.router;
+        })
+        this.router = _rootStore.app.router
 
-        this.userService = new UserService();
-        this.workspaceService = new WorkspaceService();
-        this.projectMemberService = new ProjectMemberService();
+        this.userService = new UserService()
+        this.workspaceService = new WorkspaceService()
+        this.projectMemberService = new ProjectMemberService()
     }
 
     /**
      * Returns the current workspace member info
      */
     get currentWorkspaceMemberInfo() {
-        if (!this.router.workspaceSlug) return;
-        return this.workspaceMemberInfo[this.router.workspaceSlug];
+        if (!this.router.workspaceSlug) return
+        return this.workspaceMemberInfo[this.router.workspaceSlug]
     }
 
     /**
      * Returns the current workspace role
      */
     get currentWorkspaceRole() {
-        if (!this.router.workspaceSlug) return;
-        return this.workspaceMemberInfo[this.router.workspaceSlug]?.role;
+        if (!this.router.workspaceSlug) return
+        return this.workspaceMemberInfo[this.router.workspaceSlug]?.role
     }
 
     /**
      * Returns the current project member info
      */
     get currentProjectMemberInfo() {
-        if (!this.router.projectId) return;
-        return this.projectMemberInfo[this.router.projectId];
+        if (!this.router.projectId) return
+        return this.projectMemberInfo[this.router.projectId]
     }
 
     /**
      * Returns the current project role
      */
     get currentProjectRole() {
-        if (!this.router.projectId) return;
-        return this.projectMemberInfo[this.router.projectId]?.role;
+        if (!this.router.projectId) return
+        return this.projectMemberInfo[this.router.projectId]?.role
     }
 
     /**
      * Returns all projects role for the current workspace
      */
     get currentWorkspaceAllProjectsRole() {
-        if (!this.router.workspaceSlug) return;
-        return this.workspaceProjectsRole?.[this.router.workspaceSlug];
+        if (!this.router.workspaceSlug) return
+        return this.workspaceProjectsRole?.[this.router.workspaceSlug]
     }
 
     /**
      * Returns if the user has permission to the current workspace
      */
     get hasPermissionToCurrentWorkspace() {
-        if (!this.router.workspaceSlug) return;
-        return this.hasPermissionToWorkspace[this.router.workspaceSlug];
+        if (!this.router.workspaceSlug) return
+        return this.hasPermissionToWorkspace[this.router.workspaceSlug]
     }
 
     /**
      * Returns if the user has permission to the current project
      */
     get hasPermissionToCurrentProject() {
-        if (!this.router.projectId) return;
-        return this.hasPermissionToProject[this.router.projectId];
+        if (!this.router.projectId) return
+        return this.hasPermissionToProject[this.router.projectId]
     }
 
     /**
@@ -161,11 +159,11 @@ export class UserMembershipStore implements IUserMembershipStore {
     fetchUserWorkspaceInfo = async (workspaceSlug: string) =>
         await this.workspaceService.workspaceMemberMe(workspaceSlug).then((response) => {
             runInAction(() => {
-                set(this.workspaceMemberInfo, [workspaceSlug], response);
-                set(this.hasPermissionToWorkspace, [workspaceSlug], true);
-            });
-            return response;
-        });
+                set(this.workspaceMemberInfo, [workspaceSlug], response)
+                set(this.hasPermissionToWorkspace, [workspaceSlug], true)
+            })
+            return response
+        })
 
     /**
      * Fetches the current user project info
@@ -179,14 +177,14 @@ export class UserMembershipStore implements IUserMembershipStore {
                 this.projectMemberInfo = {
                     ...this.projectMemberInfo,
                     [projectId]: response,
-                };
+                }
                 this.hasPermissionToProject = {
                     ...this.hasPermissionToProject,
                     [projectId]: true,
-                };
-            });
-            return response;
-        });
+                }
+            })
+            return response
+        })
 
     /**
      * Leaves a workspace
@@ -196,10 +194,10 @@ export class UserMembershipStore implements IUserMembershipStore {
     leaveWorkspace = async (workspaceSlug: string) =>
         await this.userService.leaveWorkspace(workspaceSlug).then(() => {
             runInAction(() => {
-                delete this.workspaceMemberInfo[workspaceSlug];
-                delete this.hasPermissionToWorkspace[workspaceSlug];
-            });
-        });
+                delete this.workspaceMemberInfo[workspaceSlug]
+                delete this.hasPermissionToWorkspace[workspaceSlug]
+            })
+        })
 
     /**
      * Joins a project
@@ -209,17 +207,17 @@ export class UserMembershipStore implements IUserMembershipStore {
      */
     joinProject = async (workspaceSlug: string, projectIds: string[]) =>
         await this.userService.joinProject(workspaceSlug, projectIds).then(() => {
-            const newPermissions: { [projectId: string]: boolean } = {};
+            const newPermissions: { [projectId: string]: boolean } = {}
             projectIds.forEach((projectId) => {
-                newPermissions[projectId] = true;
-            });
+                newPermissions[projectId] = true
+            })
             runInAction(() => {
                 this.hasPermissionToProject = {
                     ...this.hasPermissionToProject,
                     ...newPermissions,
-                };
-            });
-        });
+                }
+            })
+        })
 
     /**
      * Leaves a project
@@ -229,15 +227,15 @@ export class UserMembershipStore implements IUserMembershipStore {
      */
     leaveProject = async (workspaceSlug: string, projectId: string) =>
         await this.userService.leaveProject(workspaceSlug, projectId).then(() => {
-            const newPermissions: { [projectId: string]: boolean } = {};
-            newPermissions[projectId] = false;
+            const newPermissions: { [projectId: string]: boolean } = {}
+            newPermissions[projectId] = false
             runInAction(() => {
                 this.hasPermissionToProject = {
                     ...this.hasPermissionToProject,
                     ...newPermissions,
-                };
-            });
-        });
+                }
+            })
+        })
 
     /**
      * Fetches the current user workspace projects role
@@ -247,8 +245,8 @@ export class UserMembershipStore implements IUserMembershipStore {
     fetchUserWorkspaceProjectsRole = async (workspaceSlug: string) =>
         await this.workspaceService.getWorkspaceUserProjectsRole(workspaceSlug).then((response) => {
             runInAction(() => {
-                set(this.workspaceProjectsRole, [workspaceSlug], response);
-            });
-            return response;
-        });
+                set(this.workspaceProjectsRole, [workspaceSlug], response)
+            })
+            return response
+        })
 }

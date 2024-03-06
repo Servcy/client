@@ -1,39 +1,36 @@
-import { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useMember } from "@hooks/store";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { Loader, Avatar } from "@servcy/ui";
+import { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { useMember } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { Avatar, Loader } from "@servcy/ui"
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string) => void;
-    memberIds: string[] | undefined;
-    searchQuery: string;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string) => void
+    memberIds: string[] | undefined
+    searchQuery: string
+}
 
 export const FilterMentions: React.FC<Props> = observer((props: Props) => {
-    const { appliedFilters, handleUpdate, memberIds, searchQuery } = props;
+    const { appliedFilters, handleUpdate, memberIds, searchQuery } = props
     // states
-    const [itemsToRender, setItemsToRender] = useState(5);
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [itemsToRender, setItemsToRender] = useState(5)
+    const [previewEnabled, setPreviewEnabled] = useState(true)
     // store hooks
-    const { getUserDetails } = useMember();
+    const { getUserDetails } = useMember()
 
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const appliedFiltersCount = appliedFilters?.length ?? 0
 
     const filteredOptions = memberIds?.filter((memberId) =>
         getUserDetails(memberId)?.display_name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    )
 
     const handleViewToggle = () => {
-        if (!filteredOptions) return;
+        if (!filteredOptions) return
 
-        if (itemsToRender === filteredOptions.length) setItemsToRender(5);
-        else setItemsToRender(filteredOptions.length);
-    };
+        if (itemsToRender === filteredOptions.length) setItemsToRender(5)
+        else setItemsToRender(filteredOptions.length)
+    }
 
     return (
         <>
@@ -48,9 +45,9 @@ export const FilterMentions: React.FC<Props> = observer((props: Props) => {
                         filteredOptions.length > 0 ? (
                             <>
                                 {filteredOptions.slice(0, itemsToRender).map((memberId) => {
-                                    const member = getUserDetails(memberId);
+                                    const member = getUserDetails(memberId)
 
-                                    if (!member) return null;
+                                    if (!member) return null
                                     return (
                                         <FilterOption
                                             key={`mentions-${member.id}`}
@@ -66,7 +63,7 @@ export const FilterMentions: React.FC<Props> = observer((props: Props) => {
                                             }
                                             title={member.display_name}
                                         />
-                                    );
+                                    )
                                 })}
                                 {filteredOptions.length > 5 && (
                                     <button
@@ -91,5 +88,5 @@ export const FilterMentions: React.FC<Props> = observer((props: Props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

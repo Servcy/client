@@ -52,7 +52,7 @@ export const WORKSPACE_EMPTY_STATE_DETAILS = {
         title: "No updates to issues",
         description: "Updates to any issue you are subscribed to can be seen here",
     },
-};
+}
 
 export const ALL_ISSUES_EMPTY_STATE_DETAILS = {
     "all-issues": {
@@ -80,7 +80,7 @@ export const ALL_ISSUES_EMPTY_STATE_DETAILS = {
         title: "No issues yet",
         description: "Issues that applies to the filters, track all of them here.",
     },
-};
+}
 
 export const SEARCH_EMPTY_STATE_DETAILS = {
     views: {
@@ -102,7 +102,7 @@ export const SEARCH_EMPTY_STATE_DETAILS = {
         title: "No matching members",
         description: "Add them to the project if they are already a part of the workspace",
     },
-};
+}
 
 export const WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS = {
     "api-tokens": {
@@ -126,7 +126,7 @@ export const WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS = {
         title: "No previous imports yet",
         description: "Find all your previous imports here and download them.",
     },
-};
+}
 
 //  profile empty state
 export const PROFILE_EMPTY_STATE_DETAILS = {
@@ -145,7 +145,7 @@ export const PROFILE_EMPTY_STATE_DETAILS = {
         title: "No issues yet",
         description: "Subscribe to issues you are interested in, track all of them here.",
     },
-};
+}
 
 // project empty state
 
@@ -165,7 +165,7 @@ export const PROJECT_SETTINGS_EMPTY_STATE_DETAILS = {
         title: "No estimates added",
         description: "Create a set of estimates to communicate the amount of work per issue.",
     },
-};
+}
 
 export const CYCLE_EMPTY_STATE_DETAILS = {
     cycles: {
@@ -213,7 +213,7 @@ export const CYCLE_EMPTY_STATE_DETAILS = {
         title: "No draft cycles",
         description: "No dates added in cycles? Find them here as drafts.",
     },
-};
+}
 
 export const EMPTY_FILTER_STATE_DETAILS = {
     archived: {
@@ -237,7 +237,7 @@ export const EMPTY_FILTER_STATE_DETAILS = {
             text: "Clear all filters",
         },
     },
-};
+}
 
 export const EMPTY_ISSUE_STATE_DETAILS = {
     archived: {
@@ -269,7 +269,7 @@ export const EMPTY_ISSUE_STATE_DETAILS = {
             text: "Create your first issue",
         },
     },
-};
+}
 
 export const MODULE_EMPTY_STATE_DETAILS = {
     "no-issues": {
@@ -297,7 +297,7 @@ export const MODULE_EMPTY_STATE_DETAILS = {
             text: "Build your first module",
         },
     },
-};
+}
 
 export const VIEW_EMPTY_STATE_DETAILS = {
     "project-views": {
@@ -312,7 +312,7 @@ export const VIEW_EMPTY_STATE_DETAILS = {
             text: "Create your first view",
         },
     },
-};
+}
 
 export const PAGE_EMPTY_STATE_DETAILS = {
     pages: {
@@ -364,4 +364,4 @@ export const PAGE_EMPTY_STATE_DETAILS = {
             text: "Create new page",
         },
     },
-};
+}

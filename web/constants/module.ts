@@ -1,13 +1,12 @@
-import { GanttChartSquare, LayoutGrid, List } from "lucide-react";
-
-import { TModuleStatus } from "@servcy/types";
+import { GanttChartSquare, LayoutGrid, List } from "lucide-react"
+import { TModuleStatus } from "@servcy/types"
 
 export const MODULE_STATUS: {
-    label: string;
-    value: TModuleStatus;
-    color: string;
-    textColor: string;
-    bgColor: string;
+    label: string
+    value: TModuleStatus
+    color: string
+    textColor: string
+    bgColor: string
 }[] = [
     {
         label: "Backlog",
@@ -51,7 +50,7 @@ export const MODULE_STATUS: {
         textColor: "text-red-500",
         bgColor: "bg-red-50",
     },
-];
+]
 
 export const MODULE_VIEW_LAYOUTS: { key: "list" | "grid" | "gantt_chart"; icon: any; title: string }[] = [
     {
@@ -69,4 +68,4 @@ export const MODULE_VIEW_LAYOUTS: { key: "list" | "grid" | "gantt_chart"; icon: 
         icon: GanttChartSquare,
         title: "Gantt layout",
     },
-];
+]

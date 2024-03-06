@@ -1,4 +1,4 @@
-const convertToRGB = (variableName) => `rgba(var(${variableName}))`;
+const convertToRGB = (variableName) => `rgba(var(${variableName}))`
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -386,4 +386,4 @@ module.exports = {
         },
     },
     plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-};
+}

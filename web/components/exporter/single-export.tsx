@@ -1,27 +1,24 @@
-import { useState, FC } from "react";
-
-import { Button } from "@servcy/ui";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { IExportData } from "@servcy/types";
+import { FC, useState } from "react"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { IExportData } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    service: IExportData;
-    refreshing: boolean;
-};
+    service: IExportData
+    refreshing: boolean
+}
 
 export const SingleExport: FC<Props> = ({ service, refreshing }) => {
-    const provider = service.provider;
+    const provider = service.provider
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
     const checkExpiry = (inputDateString: string) => {
-        const currentDate = new Date();
-        const expiryDate = new Date(inputDateString);
-        expiryDate.setDate(expiryDate.getDate() + 7);
-        return expiryDate > currentDate;
-    };
+        const currentDate = new Date()
+        const expiryDate = new Date(inputDateString)
+        expiryDate.setDate(expiryDate.getDate() + 7)
+        return expiryDate > currentDate
+    }
 
     return (
         <div className="flex items-center justify-between gap-2 px-4 py-3">
@@ -76,5 +73,5 @@ export const SingleExport: FC<Props> = ({ service, refreshing }) => {
                 <div className="text-xs text-red-500">Expired</div>
             )}
         </div>
-    );
-};
+    )
+}

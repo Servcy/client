@@ -1,32 +1,29 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-
-import { useIssues } from "@hooks/store";
-import { EIssuesStoreType } from "@constants/issue";
-
-import { TIssue } from "@servcy/types";
-import { EIssueActions } from "../../types";
-
-import { BaseKanBanRoot } from "../base-kanban-root";
-import { ProjectIssueQuickActions } from "../../quick-action-dropdowns";
+import { useRouter } from "next/router"
+import React from "react"
+import { EIssuesStoreType } from "@constants/issue"
+import { useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { ProjectIssueQuickActions } from "../../quick-action-dropdowns"
+import { EIssueActions } from "../../types"
+import { BaseKanBanRoot } from "../base-kanban-root"
 
 export interface IViewKanBanLayout {
     issueActions: {
-        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
-        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>;
-    };
+        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>
+        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>
+    }
 }
 
 export const ProjectViewKanBanLayout: React.FC<IViewKanBanLayout> = observer((props) => {
-    const { issueActions } = props;
+    const { issueActions } = props
     // router
-    const router = useRouter();
-    const { viewId } = router.query;
+    const router = useRouter()
+    const { viewId } = router.query
 
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW);
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW)
 
     return (
         <BaseKanBanRoot
@@ -38,5 +35,5 @@ export const ProjectViewKanBanLayout: React.FC<IViewKanBanLayout> = observer((pr
             storeType={EIssuesStoreType.PROJECT_VIEW}
             viewId={viewId?.toString()}
         />
-    );
-});
+    )
+})

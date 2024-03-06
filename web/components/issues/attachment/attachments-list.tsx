@@ -1,30 +1,27 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { IssueAttachmentsDetail } from "./attachment-detail"
+import { TAttachmentOperations } from "./root"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueAttachmentsDetail } from "./attachment-detail";
-
-import { TAttachmentOperations } from "./root";
-
-type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">;
+type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">
 
 type TIssueAttachmentsList = {
-    issueId: string;
-    handleAttachmentOperations: TAttachmentOperationsRemoveModal;
-    disabled?: boolean;
-};
+    issueId: string
+    handleAttachmentOperations: TAttachmentOperationsRemoveModal
+    disabled?: boolean
+}
 
 export const IssueAttachmentsList: FC<TIssueAttachmentsList> = observer((props) => {
-    const { issueId, handleAttachmentOperations, disabled } = props;
+    const { issueId, handleAttachmentOperations, disabled } = props
     // store hooks
     const {
         attachment: { getAttachmentsByIssueId },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const issueAttachments = getAttachmentsByIssueId(issueId);
+    const issueAttachments = getAttachmentsByIssueId(issueId)
 
-    if (!issueAttachments) return <></>;
+    if (!issueAttachments) return <></>
 
     return (
         <>
@@ -38,5 +35,5 @@ export const IssueAttachmentsList: FC<TIssueAttachmentsList> = observer((props) 
                     />
                 ))}
         </>
-    );
-});
+    )
+})

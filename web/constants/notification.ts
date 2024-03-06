@@ -23,12 +23,12 @@ export const snoozeOptions = [
         label: "Custom",
         value: null,
     },
-];
+]
 
 // Constant for all time values in 30 minutes interval in 12 hours format
 export const allTimeIn30MinutesInterval12HoursFormat: Array<{
-    label: string;
-    value: string;
+    label: string
+    value: string
 }> = [
     { label: "12:00", value: "12:00" },
     { label: "12:30", value: "12:30" },
@@ -54,4 +54,4 @@ export const allTimeIn30MinutesInterval12HoursFormat: Array<{
     { label: "10:30", value: "10:30" },
     { label: "11:00", value: "11:00" },
     { label: "11:30", value: "11:30" },
-];
+]

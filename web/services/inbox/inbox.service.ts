@@ -1,28 +1,26 @@
-import { APIService } from "@services/api.service";
-
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import type { TInbox } from "@servcy/types";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import type { TInbox } from "@servcy/types"
 
 export class InboxService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async fetchInboxes(workspaceSlug: string, projectId: string): Promise<TInbox[]> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/inboxes/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async fetchInboxById(workspaceSlug: string, projectId: string, inboxId: string): Promise<TInbox> {
         return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/inboxes/${inboxId}/`)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async updateInbox(
@@ -34,7 +32,7 @@ export class InboxService extends APIService {
         return this.patch(`/api/workspaces/${workspaceSlug}/projects/${projectId}/inboxes/${inboxId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

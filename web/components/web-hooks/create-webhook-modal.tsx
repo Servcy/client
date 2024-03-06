@@ -1,46 +1,42 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { WebhookForm } from "./form";
-import { GeneratedHookDetails } from "./generated-hook-details";
-import toast from "react-hot-toast";
-
-import { csvDownload } from "@helpers/download.helper";
-
-import { getCurrentHookAsCSV } from "./utils";
-
-import { IWebhook, IWorkspace, TWebhookEventTypes } from "@servcy/types";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { csvDownload } from "@helpers/download.helper"
+import toast from "react-hot-toast"
+import { IWebhook, IWorkspace, TWebhookEventTypes } from "@servcy/types"
+import { WebhookForm } from "./form"
+import { GeneratedHookDetails } from "./generated-hook-details"
+import { getCurrentHookAsCSV } from "./utils"
 
 interface ICreateWebhookModal {
-    currentWorkspace: IWorkspace | null;
-    isOpen: boolean;
-    clearSecretKey: () => void;
+    currentWorkspace: IWorkspace | null
+    isOpen: boolean
+    clearSecretKey: () => void
     createWebhook: (
         workspaceSlug: string,
         data: Partial<IWebhook>
     ) => Promise<{
-        webHook: IWebhook;
-        secretKey: string | null;
-    }>;
-    onClose: () => void;
+        webHook: IWebhook
+        secretKey: string | null
+    }>
+    onClose: () => void
 }
 
 export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
-    const { isOpen, onClose, currentWorkspace, createWebhook, clearSecretKey } = props;
+    const { isOpen, onClose, currentWorkspace, createWebhook, clearSecretKey } = props
     // states
-    const [generatedWebhook, setGeneratedKey] = useState<IWebhook | null>(null);
+    const [generatedWebhook, setGeneratedKey] = useState<IWebhook | null>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // toast
 
     const handleCreateWebhook = async (formData: IWebhook, webhookEventType: TWebhookEventTypes) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         let payload: Partial<IWebhook> = {
             url: formData.url,
-        };
+        }
 
         if (webhookEventType === "all")
             payload = {
@@ -50,7 +46,7 @@ export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
                 module: true,
                 issue: true,
                 issue_comment: true,
-            };
+            }
         else
             payload = {
                 ...payload,
@@ -59,7 +55,7 @@ export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
                 module: formData.module ?? false,
                 issue: formData.issue ?? false,
                 issue_comment: formData.issue_comment ?? false,
-            };
+            }
 
         await createWebhook(workspaceSlug.toString(), payload)
             .then(({ webHook, secretKey }) => {
@@ -67,29 +63,29 @@ export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
                     type: "success",
                     title: "Success!",
                     message: "Webhook created successfully.",
-                });
+                })
 
-                setGeneratedKey(webHook);
+                setGeneratedKey(webHook)
 
-                const csvData = getCurrentHookAsCSV(currentWorkspace, webHook, secretKey ?? undefined);
-                csvDownload(csvData, `webhook-secret-key-${Date.now()}`);
+                const csvData = getCurrentHookAsCSV(currentWorkspace, webHook, secretKey ?? undefined)
+                csvDownload(csvData, `webhook-secret-key-${Date.now()}`)
             })
             .catch((error) => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: error?.error ?? "Something went wrong. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleClose = () => {
-        onClose();
+        onClose()
         setTimeout(() => {
-            clearSecretKey();
-            setGeneratedKey(null);
-        }, 350);
-    };
+            clearSecretKey()
+            setGeneratedKey(null)
+        }, 350)
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -97,7 +93,7 @@ export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
                 as="div"
                 className="relative z-20"
                 onClose={() => {
-                    if (!generatedWebhook) handleClose();
+                    if (!generatedWebhook) handleClose()
                 }}
             >
                 <Transition.Child
@@ -135,5 +131,5 @@ export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

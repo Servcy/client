@@ -1,41 +1,38 @@
-import { FC, Fragment } from "react";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { useProjectView } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { ProjectViewForm } from "@components/views";
-
-import { IProjectView } from "@servcy/types";
+import { FC, Fragment } from "react"
+import { ProjectViewForm } from "@components/views"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProjectView } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IProjectView } from "@servcy/types"
 
 type Props = {
-    data?: IProjectView | null;
-    isOpen: boolean;
-    onClose: () => void;
-    preLoadedData?: Partial<IProjectView> | null;
-    workspaceSlug: string;
-    projectId: string;
-};
+    data?: IProjectView | null
+    isOpen: boolean
+    onClose: () => void
+    preLoadedData?: Partial<IProjectView> | null
+    workspaceSlug: string
+    projectId: string
+}
 
 export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
-    const { data, isOpen, onClose, preLoadedData, workspaceSlug, projectId } = props;
+    const { data, isOpen, onClose, preLoadedData, workspaceSlug, projectId } = props
     // store hooks
-    const { createView, updateView } = useProjectView();
+    const { createView, updateView } = useProjectView()
 
     const handleClose = () => {
-        onClose();
-    };
+        onClose()
+    }
 
     const handleCreateView = async (payload: IProjectView) => {
         await createView(workspaceSlug, projectId, payload)
             .then(() => {
-                handleClose();
+                handleClose()
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "View created successfully.",
-                });
+                })
             })
             .catch(() =>
                 toast.error({
@@ -43,8 +40,8 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
                     title: "Error!",
                     message: "Something went wrong. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     const handleUpdateView = async (payload: IProjectView) => {
         await updateView(workspaceSlug, projectId, data?.id as string, payload)
@@ -55,13 +52,13 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
                     title: "Error!",
                     message: err.detail ?? "Something went wrong. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     const handleFormSubmit = async (formData: IProjectView) => {
-        if (!data) await handleCreateView(formData);
-        else await handleUpdateView(formData);
-    };
+        if (!data) await handleCreateView(formData)
+        else await handleUpdateView(formData)
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -102,5 +99,5 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

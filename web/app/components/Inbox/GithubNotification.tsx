@@ -1,23 +1,23 @@
-import { GithubNotificationProps } from "@/types/integrations/github";
-import { getCleanLink } from "@/utils/Shared";
-import { Tag, Tooltip } from "antd";
-import Image from "next/image";
-import { BiRightArrowAlt } from "react-icons/bi";
-import { HiExternalLink } from "react-icons/hi";
-import { remark } from "remark";
-import html from "remark-html";
+import Image from "next/image"
+import { Tag, Tooltip } from "antd"
+import { BiRightArrowAlt } from "react-icons/bi"
+import { HiExternalLink } from "react-icons/hi"
+import { remark } from "remark"
+import html from "remark-html"
+import { GithubNotificationProps } from "@/types/integrations/github"
+import { getCleanLink } from "@/utils/Shared"
 
 const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps) => {
-    let link = "#null";
-    let linkLabel = "";
-    const { login, avatar_url } = JSON.parse(cause);
-    const cleanImageLink = getCleanLink(avatar_url);
+    let link = "#null"
+    let linkLabel = ""
+    const { login, avatar_url } = JSON.parse(cause)
+    const cleanImageLink = getCleanLink(avatar_url)
 
     const renderGithubEvent = () => {
         switch (data.event) {
             case "pull_request_review_thread": {
-                link = data.thread?.comments[0]?.html_url ?? "#null";
-                linkLabel = "View thread in Github";
+                link = data.thread?.comments[0]?.html_url ?? "#null"
+                linkLabel = "View thread in Github"
                 return (
                     <>
                         <div className="mb-2 flex w-full">
@@ -74,11 +74,11 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                             />
                         </div>
                     </>
-                );
+                )
             }
             case "pull_request_review_comment": {
-                link = data.comment?.html_url ?? "#null";
-                linkLabel = "View comment in Github";
+                link = data.comment?.html_url ?? "#null"
+                linkLabel = "View comment in Github"
                 return (
                     <>
                         <div className="mb-2 flex w-full">
@@ -164,11 +164,11 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                             </div>
                         </div>
                     </>
-                );
+                )
             }
             case "pull_request_review": {
-                link = data.review?.html_url ?? "#null";
-                linkLabel = "View review in Github";
+                link = data.review?.html_url ?? "#null"
+                linkLabel = "View review in Github"
                 return (
                     <>
                         <div className="mb-2 flex w-full">
@@ -239,11 +239,11 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                             </div>
                         )}
                     </>
-                );
+                )
             }
             case "issues": {
-                link = data.issue?.html_url ?? "#null";
-                linkLabel = "View issue in Github";
+                link = data.issue?.html_url ?? "#null"
+                linkLabel = "View issue in Github"
                 return (
                     <>
                         <div className="mb-2 flex w-full">
@@ -387,11 +387,11 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                             </div>
                         </div>
                     </>
-                );
+                )
             }
             case "issue_comment": {
-                link = data.comment?.html_url ?? "#null";
-                linkLabel = "View comment in Github";
+                link = data.comment?.html_url ?? "#null"
+                linkLabel = "View comment in Github"
                 return (
                     <>
                         <div className="mb-2 flex w-full">
@@ -450,11 +450,11 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                             </div>
                         </div>
                     </>
-                );
+                )
             }
             case "pull_request": {
-                link = data.pull_request?.html_url ?? "#null";
-                linkLabel = "View PR in Github";
+                link = data.pull_request?.html_url ?? "#null"
+                linkLabel = "View PR in Github"
                 return (
                     <>
                         <div className="mb-2 flex w-full">
@@ -666,12 +666,12 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                             </div>
                         )}
                     </>
-                );
+                )
             }
             default:
-                return <div>Event not supported</div>;
+                return <div>Event not supported</div>
         }
-    };
+    }
 
     return (
         <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
@@ -713,7 +713,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default GithubNotification;
+export default GithubNotification

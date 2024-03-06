@@ -1,1 +1,1 @@
-export * from "./not-a-member";
+export * from "./not-a-member"

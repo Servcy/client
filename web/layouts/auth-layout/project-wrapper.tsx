@@ -1,13 +1,13 @@
-import { FC, ReactNode } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-
+import { useRouter } from "next/router"
+import { FC, ReactNode } from "react"
+import { JoinProject } from "@components/auth-screens"
+import { EmptyState } from "@components/common"
 import {
     useApplication,
-    useEventTracker,
     useCycle,
     useEstimate,
+    useEventTracker,
+    useInbox,
     useLabel,
     useMember,
     useModule,
@@ -15,96 +15,94 @@ import {
     useProjectState,
     useProjectView,
     useUser,
-    useInbox,
-} from "@hooks/store";
-
-import { Spinner } from "@servcy/ui";
-import { JoinProject } from "@components/auth-screens";
-import { EmptyState } from "@components/common";
+} from "@hooks/store"
+import { observer } from "mobx-react-lite"
 // images
-import emptyProject from "public/empty-state/project.svg";
+import emptyProject from "public/empty-state/project.svg"
+import useSWR from "swr"
+import { Spinner } from "@servcy/ui"
 
 interface IProjectAuthWrapper {
-    children: ReactNode;
+    children: ReactNode
 }
 
 export const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
-    const { children } = props;
+    const { children } = props
     // store
-    const { fetchInboxes } = useInbox();
+    const { fetchInboxes } = useInbox()
     const {
         commandPalette: { toggleCreateProjectModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { fetchUserProjectInfo, projectMemberInfo, hasPermissionToProject },
-    } = useUser();
-    const { getProjectById, fetchProjectDetails, currentProjectDetails } = useProject();
-    const { fetchAllCycles } = useCycle();
-    const { fetchModules } = useModule();
-    const { fetchViews } = useProjectView();
+    } = useUser()
+    const { getProjectById, fetchProjectDetails, currentProjectDetails } = useProject()
+    const { fetchAllCycles } = useCycle()
+    const { fetchModules } = useModule()
+    const { fetchViews } = useProjectView()
     const {
         project: { fetchProjectMembers },
-    } = useMember();
-    const { fetchProjectStates } = useProjectState();
-    const { fetchProjectLabels } = useLabel();
-    const { fetchProjectEstimates } = useEstimate();
+    } = useMember()
+    const { fetchProjectStates } = useProjectState()
+    const { fetchProjectLabels } = useLabel()
+    const { fetchProjectEstimates } = useEstimate()
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     // fetching project details
     useSWR(
         workspaceSlug && projectId ? `PROJECT_DETAILS_${workspaceSlug.toString()}_${projectId.toString()}` : null,
         workspaceSlug && projectId ? () => fetchProjectDetails(workspaceSlug.toString(), projectId.toString()) : null
-    );
+    )
     // fetching user project member information
     useSWR(
         workspaceSlug && projectId ? `PROJECT_MEMBERS_ME_${workspaceSlug}_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchUserProjectInfo(workspaceSlug.toString(), projectId.toString()) : null
-    );
+    )
     // fetching project labels
     useSWR(
         workspaceSlug && projectId ? `PROJECT_LABELS_${workspaceSlug}_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchProjectLabels(workspaceSlug.toString(), projectId.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetching project members
     useSWR(
         workspaceSlug && projectId ? `PROJECT_MEMBERS_${workspaceSlug}_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchProjectMembers(workspaceSlug.toString(), projectId.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetching project states
     useSWR(
         workspaceSlug && projectId ? `PROJECT_STATES_${workspaceSlug}_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchProjectStates(workspaceSlug.toString(), projectId.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetching project estimates
     useSWR(
         workspaceSlug && projectId ? `PROJECT_ESTIMATES_${workspaceSlug}_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchProjectEstimates(workspaceSlug.toString(), projectId.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetching project cycles
     useSWR(
         workspaceSlug && projectId ? `PROJECT_ALL_CYCLES_${workspaceSlug}_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchAllCycles(workspaceSlug.toString(), projectId.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetching project modules
     useSWR(
         workspaceSlug && projectId ? `PROJECT_MODULES_${workspaceSlug}_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchModules(workspaceSlug.toString(), projectId.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetching project views
     useSWR(
         workspaceSlug && projectId ? `PROJECT_VIEWS_${workspaceSlug}_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchViews(workspaceSlug.toString(), projectId.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetching project inboxes if inbox is enabled in project settings
     useSWR(
         workspaceSlug && projectId && currentProjectDetails && currentProjectDetails.inbox_view
@@ -117,9 +115,9 @@ export const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
         }
-    );
+    )
 
-    const projectExists = projectId ? getProjectById(projectId.toString()) : null;
+    const projectExists = projectId ? getProjectById(projectId.toString()) : null
 
     // check if the project member apis is loading
     if (!projectMemberInfo && projectId && hasPermissionToProject[projectId.toString()] === null)
@@ -129,10 +127,10 @@ export const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
                     <Spinner />
                 </div>
             </div>
-        );
+        )
 
     // check if the user don't have permission to access the project
-    if (projectExists && projectId && hasPermissionToProject[projectId.toString()] === false) return <JoinProject />;
+    if (projectExists && projectId && hasPermissionToProject[projectId.toString()] === false) return <JoinProject />
 
     // check if the project info is not found.
     if (!projectExists && projectId && hasPermissionToProject[projectId.toString()] === false)
@@ -145,13 +143,13 @@ export const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
                     primaryButton={{
                         text: "Create Project",
                         onClick: () => {
-                            setTrackElement("Projects page empty state");
-                            toggleCreateProjectModal(true);
+                            setTrackElement("Projects page empty state")
+                            toggleCreateProjectModal(true)
                         },
                     }}
                 />
             </div>
-        );
+        )
 
-    return <>{children}</>;
-});
+    return <>{children}</>
+})

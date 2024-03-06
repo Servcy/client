@@ -1,25 +1,22 @@
-import { FC } from "react";
-import useSWR from "swr";
-
-import { IssueParentSiblingItem } from "./sibling-item";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { TIssue } from "@servcy/types";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import useSWR from "swr"
+import { TIssue } from "@servcy/types"
+import { IssueParentSiblingItem } from "./sibling-item"
 
 export type TIssueParentSiblings = {
-    currentIssue: TIssue;
-    parentIssue: TIssue;
-};
+    currentIssue: TIssue
+    parentIssue: TIssue
+}
 
 export const IssueParentSiblings: FC<TIssueParentSiblings> = (props) => {
-    const { currentIssue, parentIssue } = props;
+    const { currentIssue, parentIssue } = props
 
     const {
         peekIssue,
         fetchSubIssues,
         subIssues: { subIssuesByIssueId },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
     const { isLoading } = useSWR(
         peekIssue && parentIssue && parentIssue.project_id
@@ -28,9 +25,9 @@ export const IssueParentSiblings: FC<TIssueParentSiblings> = (props) => {
         peekIssue && parentIssue && parentIssue.project_id
             ? () => fetchSubIssues(peekIssue?.workspaceSlug, parentIssue.project_id, parentIssue.id)
             : null
-    );
+    )
 
-    const subIssueIds = (parentIssue && subIssuesByIssueId(parentIssue.id)) || undefined;
+    const subIssueIds = (parentIssue && subIssuesByIssueId(parentIssue.id)) || undefined
 
     return (
         <div>
@@ -46,5 +43,5 @@ export const IssueParentSiblings: FC<TIssueParentSiblings> = (props) => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}

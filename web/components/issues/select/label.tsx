@@ -1,87 +1,84 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import { Combobox } from "@headlessui/react";
-import { usePopper } from "react-popper";
-import { observer } from "mobx-react-lite";
-
-import { useLabel } from "@hooks/store";
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { IssueLabelsList } from "@components/ui";
-
-import { Check, Component, Plus, Search, Tag } from "lucide-react";
+import { useRouter } from "next/router"
+import React, { Fragment, useEffect, useRef, useState } from "react"
+import { IssueLabelsList } from "@components/ui"
+import { Combobox } from "@headlessui/react"
+import { useLabel } from "@hooks/store"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { Check, Component, Plus, Search, Tag } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { usePopper } from "react-popper"
 
 type Props = {
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    value: string[];
-    onChange: (value: string[]) => void;
-    projectId: string;
-    label?: JSX.Element;
-    disabled?: boolean;
-    tabIndex?: number;
-};
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    value: string[]
+    onChange: (value: string[]) => void
+    projectId: string
+    label?: JSX.Element
+    disabled?: boolean
+    tabIndex?: number
+}
 
 export const IssueLabelSelect: React.FC<Props> = observer((props) => {
-    const { setIsOpen, value, onChange, projectId, label, disabled = false, tabIndex } = props;
+    const { setIsOpen, value, onChange, projectId, label, disabled = false, tabIndex } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { getProjectLabels, fetchProjectLabels } = useLabel();
+    const { getProjectLabels, fetchProjectLabels } = useLabel()
     // states
-    const [query, setQuery] = useState("");
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [query, setQuery] = useState("")
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     // refs
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
     // popper
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: "bottom-start",
-    });
+    })
 
-    const projectLabels = getProjectLabels(projectId);
+    const projectLabels = getProjectLabels(projectId)
 
     // derived values
     const filteredOptions =
-        query === "" ? projectLabels : projectLabels?.filter((l) => l.name.toLowerCase().includes(query.toLowerCase()));
+        query === "" ? projectLabels : projectLabels?.filter((l) => l.name.toLowerCase().includes(query.toLowerCase()))
 
     const onOpen = () => {
-        if (!projectLabels && workspaceSlug && projectId) fetchProjectLabels(workspaceSlug.toString(), projectId);
-        if (referenceElement) referenceElement.focus();
-    };
+        if (!projectLabels && workspaceSlug && projectId) fetchProjectLabels(workspaceSlug.toString(), projectId)
+        if (referenceElement) referenceElement.focus()
+    }
 
     const handleClose = () => {
-        if (isDropdownOpen) setIsDropdownOpen(false);
-        if (referenceElement) referenceElement.blur();
-    };
+        if (isDropdownOpen) setIsDropdownOpen(false)
+        if (referenceElement) referenceElement.blur()
+    }
 
     const toggleDropdown = () => {
-        if (!isDropdownOpen) onOpen();
-        setIsDropdownOpen((prevIsOpen) => !prevIsOpen);
-    };
+        if (!isDropdownOpen) onOpen()
+        setIsDropdownOpen((prevIsOpen) => !prevIsOpen)
+    }
 
     const dropdownOnChange = (val: string[]) => {
-        onChange(val);
-    };
+        onChange(val)
+    }
 
-    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose);
+    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        toggleDropdown();
-    };
+        e.stopPropagation()
+        e.preventDefault()
+        toggleDropdown()
+    }
 
-    useOutsideClickDetector(dropdownRef, handleClose);
+    useOutsideClickDetector(dropdownRef, handleClose)
 
     useEffect(() => {
         if (isDropdownOpen && inputRef.current) {
-            inputRef.current.focus();
+            inputRef.current.focus()
         }
-    }, [isDropdownOpen]);
+    }, [isDropdownOpen])
 
     return (
         <Combobox
@@ -144,7 +141,7 @@ export const IssueLabelSelect: React.FC<Props> = observer((props) => {
                             {projectLabels && filteredOptions ? (
                                 filteredOptions.length > 0 ? (
                                     filteredOptions.map((label) => {
-                                        const children = projectLabels?.filter((l) => l.parent === label.id);
+                                        const children = projectLabels?.filter((l) => l.parent === label.id)
 
                                         if (children.length === 0) {
                                             if (!label.parent)
@@ -177,7 +174,7 @@ export const IssueLabelSelect: React.FC<Props> = observer((props) => {
                                                             </div>
                                                         )}
                                                     </Combobox.Option>
-                                                );
+                                                )
                                         } else
                                             return (
                                                 <div className="border-y border-custom-border-200">
@@ -217,7 +214,7 @@ export const IssueLabelSelect: React.FC<Props> = observer((props) => {
                                                         ))}
                                                     </div>
                                                 </div>
-                                            );
+                                            )
                                     })
                                 ) : (
                                     <p className="text-custom-text-400 italic py-1 px-1.5">No matching results</p>
@@ -238,5 +235,5 @@ export const IssueLabelSelect: React.FC<Props> = observer((props) => {
                 </Combobox.Options>
             )}
         </Combobox>
-    );
-});
+    )
+})

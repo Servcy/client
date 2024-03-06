@@ -1,41 +1,37 @@
-import { Fragment, useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { AlertTriangle } from "lucide-react";
-
-import { useEventTracker, useCycle } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import { ICycle } from "@servcy/types";
-
-import { CYCLE_DELETED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { Fragment, useState } from "react"
+import { CYCLE_DELETED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useCycle, useEventTracker } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { ICycle } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 interface ICycleDelete {
-    cycle: ICycle;
-    isOpen: boolean;
-    handleClose: () => void;
-    workspaceSlug: string;
-    projectId: string;
+    cycle: ICycle
+    isOpen: boolean
+    handleClose: () => void
+    workspaceSlug: string
+    projectId: string
 }
 
 export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
-    const { isOpen, handleClose, cycle, workspaceSlug, projectId } = props;
+    const { isOpen, handleClose, cycle, workspaceSlug, projectId } = props
     // states
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(false)
     // router
-    const router = useRouter();
-    const { cycleId, peekCycle } = router.query;
+    const router = useRouter()
+    const { cycleId, peekCycle } = router.query
     // store hooks
-    const { captureCycleEvent } = useEventTracker();
-    const { deleteCycle } = useCycle();
+    const { captureCycleEvent } = useEventTracker()
+    const { deleteCycle } = useCycle()
 
     const formSubmit = async () => {
-        if (!cycle) return;
+        if (!cycle) return
 
-        setLoader(true);
+        setLoader(true)
         try {
             await deleteCycle(workspaceSlug, projectId, cycle.id)
                 .then(() => {
@@ -43,32 +39,32 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
                         type: "success",
                         title: "Success!",
                         message: "Cycle deleted successfully.",
-                    });
+                    })
                     captureCycleEvent({
                         eventName: CYCLE_DELETED,
                         payload: { ...cycle, state: "SUCCESS" },
-                    });
+                    })
                 })
                 .catch(() => {
                     captureCycleEvent({
                         eventName: CYCLE_DELETED,
                         payload: { ...cycle, state: "FAILED" },
-                    });
-                });
+                    })
+                })
 
-            if (cycleId || peekCycle) router.push(`/${workspaceSlug}/projects/${projectId}/cycles`);
+            if (cycleId || peekCycle) router.push(`/${workspaceSlug}/projects/${projectId}/cycles`)
 
-            handleClose();
+            handleClose()
         } catch (error) {
             toast.error({
                 type: "error",
                 title: "Warning!",
                 message: "Something went wrong please try again later.",
-            });
+            })
         }
 
-        setLoader(false);
-    };
+        setLoader(false)
+    }
 
     return (
         <div>
@@ -138,5 +134,5 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
                 </Transition.Root>
             </div>
         </div>
-    );
-});
+    )
+})

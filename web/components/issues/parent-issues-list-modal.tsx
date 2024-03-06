@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from "react";
-
-import { useRouter } from "next/router";
-
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
 // headless ui
-import { Combobox, Dialog, Transition } from "@headlessui/react";
-
-import { ProjectService } from "@services/project";
-
-import useDebounce from "@hooks/use-debounce";
-
-import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
-
-import { Rocket, Search } from "lucide-react";
-
-import { ISearchIssueResponse } from "@servcy/types";
+import { Combobox, Dialog, Transition } from "@headlessui/react"
+import useDebounce from "@hooks/use-debounce"
+import { ProjectService } from "@services/project"
+import { Rocket, Search } from "lucide-react"
+import { ISearchIssueResponse } from "@servcy/types"
+import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    handleClose: () => void;
-    value?: any;
-    onChange: (issue: ISearchIssueResponse) => void;
-    projectId: string;
-    issueId?: string;
-};
+    isOpen: boolean
+    handleClose: () => void
+    value?: any
+    onChange: (issue: ISearchIssueResponse) => void
+    projectId: string
+    issueId?: string
+}
 
-const projectService = new ProjectService();
+const projectService = new ProjectService()
 
 export const ParentIssuesListModal: React.FC<Props> = ({
     isOpen,
@@ -34,26 +27,26 @@ export const ParentIssuesListModal: React.FC<Props> = ({
     projectId,
     issueId,
 }) => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [issues, setIssues] = useState<ISearchIssueResponse[]>([]);
-    const [isSearching, setIsSearching] = useState(false);
-    const [isWorkspaceLevel, setIsWorkspaceLevel] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("")
+    const [issues, setIssues] = useState<ISearchIssueResponse[]>([])
+    const [isSearching, setIsSearching] = useState(false)
+    const [isWorkspaceLevel, setIsWorkspaceLevel] = useState(false)
 
-    const debouncedSearchTerm: string = useDebounce(searchTerm, 500);
+    const debouncedSearchTerm: string = useDebounce(searchTerm, 500)
 
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const handleClose = () => {
-        onClose();
-        setSearchTerm("");
-        setIsWorkspaceLevel(false);
-    };
+        onClose()
+        setSearchTerm("")
+        setIsWorkspaceLevel(false)
+    }
 
     useEffect(() => {
-        if (!isOpen || !workspaceSlug || !projectId) return;
+        if (!isOpen || !workspaceSlug || !projectId) return
 
-        setIsSearching(true);
+        setIsSearching(true)
 
         projectService
             .projectIssuesSearch(workspaceSlug as string, projectId as string, {
@@ -63,8 +56,8 @@ export const ParentIssuesListModal: React.FC<Props> = ({
                 workspace_search: isWorkspaceLevel,
             })
             .then((res) => setIssues(res))
-            .finally(() => setIsSearching(false));
-    }, [debouncedSearchTerm, isOpen, issueId, isWorkspaceLevel, projectId, workspaceSlug]);
+            .finally(() => setIsSearching(false))
+    }, [debouncedSearchTerm, isOpen, issueId, isWorkspaceLevel, projectId, workspaceSlug])
 
     return (
         <>
@@ -96,8 +89,8 @@ export const ParentIssuesListModal: React.FC<Props> = ({
                                 <Combobox
                                     value={value}
                                     onChange={(val) => {
-                                        onChange(val);
-                                        handleClose();
+                                        onChange(val)
+                                        handleClose()
                                     }}
                                 >
                                     <div className="relative m-1">
@@ -218,5 +211,5 @@ export const ParentIssuesListModal: React.FC<Props> = ({
                 </Dialog>
             </Transition.Root>
         </>
-    );
-};
+    )
+}

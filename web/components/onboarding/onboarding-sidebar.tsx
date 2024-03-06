@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import { Control, Controller, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import Image from "next/image"
+import React, { useEffect } from "react"
+import { useUser, useWorkspace } from "@hooks/store"
 import {
     BarChart2,
+    Bell,
     Briefcase,
     CheckCircle,
     ChevronDown,
@@ -14,15 +14,12 @@ import {
     PenSquare,
     Search,
     Settings,
-    Bell,
-} from "lucide-react";
-import { Avatar, DiceIcon, PhotoFilterIcon } from "@servcy/ui";
-
-import { useUser, useWorkspace } from "@hooks/store";
-
-import { IWorkspace } from "@servcy/types";
-
-import projectEmoji from "public/emoji/project-emoji.svg";
+} from "lucide-react"
+import { useTheme } from "next-themes"
+import projectEmoji from "public/emoji/project-emoji.svg"
+import { Control, Controller, UseFormSetValue, UseFormWatch } from "react-hook-form"
+import { IWorkspace } from "@servcy/types"
+import { Avatar, DiceIcon, PhotoFilterIcon } from "@servcy/ui"
 
 const workspaceLinks = [
     {
@@ -45,7 +42,7 @@ const workspaceLinks = [
         Icon: Bell,
         name: "Notifications",
     },
-];
+]
 
 const projectLinks = [
     {
@@ -76,52 +73,52 @@ const projectLinks = [
 
         Icon: Settings,
     },
-];
+]
 
 type Props = {
-    workspaceName: string;
-    showProject: boolean;
-    control?: Control<IWorkspace, any>;
-    setValue?: UseFormSetValue<IWorkspace>;
-    watch?: UseFormWatch<IWorkspace>;
-    userFullName?: string;
-};
-var timer: number = 0;
-var lastWorkspaceName: string = "";
+    workspaceName: string
+    showProject: boolean
+    control?: Control<IWorkspace, any>
+    setValue?: UseFormSetValue<IWorkspace>
+    watch?: UseFormWatch<IWorkspace>
+    userFullName?: string
+}
+var timer: number = 0
+var lastWorkspaceName: string = ""
 
 export const OnboardingSidebar: React.FC<Props> = (props) => {
-    const { workspaceName, showProject, control, setValue, watch, userFullName } = props;
+    const { workspaceName, showProject, control, setValue, watch, userFullName } = props
     // store hooks
-    const { currentUser } = useUser();
-    const { workspaces } = useWorkspace();
-    const workspaceDetails = Object.values(workspaces ?? {})?.[0];
+    const { currentUser } = useUser()
+    const { workspaces } = useWorkspace()
+    const workspaceDetails = Object.values(workspaces ?? {})?.[0]
 
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
 
     const handleZoomWorkspace = (value: string) => {
-        if (lastWorkspaceName === value) return;
-        lastWorkspaceName = value;
+        if (lastWorkspaceName === value) return
+        lastWorkspaceName = value
         if (timer > 0) {
-            timer += 2;
-            timer = Math.min(timer, 2);
+            timer += 2
+            timer = Math.min(timer, 2)
         } else {
-            timer = 2;
-            timer = Math.min(timer, 2);
+            timer = 2
+            timer = Math.min(timer, 2)
             const interval = setInterval(() => {
                 if (timer < 0) {
-                    setValue!("name", lastWorkspaceName);
-                    clearInterval(interval);
+                    setValue!("name", lastWorkspaceName)
+                    clearInterval(interval)
                 }
-                timer--;
-            }, 1000);
+                timer--
+            }, 1000)
         }
-    };
+    }
 
     useEffect(() => {
         if (watch) {
-            watch("name");
+            watch("name")
         }
-    });
+    })
 
     return (
         <div className="relative h-full border-r border-onboarding-border-100 ">
@@ -132,9 +129,9 @@ export const OnboardingSidebar: React.FC<Props> = (props) => {
                         name="name"
                         render={({ field: { value } }) => {
                             if (value.length > 0) {
-                                handleZoomWorkspace(value);
+                                handleZoomWorkspace(value)
                             } else {
-                                lastWorkspaceName = "";
+                                lastWorkspaceName = ""
                             }
                             return timer > 0 ? (
                                 <div
@@ -204,7 +201,7 @@ export const OnboardingSidebar: React.FC<Props> = (props) => {
                                         />
                                     </div>
                                 </div>
-                            );
+                            )
                         }}
                     />
                 ) : (
@@ -304,5 +301,5 @@ export const OnboardingSidebar: React.FC<Props> = (props) => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}

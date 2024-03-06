@@ -1,64 +1,60 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { MultiLevelDropdown } from "@components/ui"
+import { INBOX_STATUS } from "@constants/inbox"
+import { ISSUE_PRIORITIES } from "@constants/issue"
 // mobx store
-import { useInboxIssues } from "@hooks/store";
+import { useInboxIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TInboxIssueFilterOptions } from "@servcy/types"
+import { PriorityIcon } from "@servcy/ui"
 
-import { MultiLevelDropdown } from "@components/ui";
-
-import { PriorityIcon } from "@servcy/ui";
-
-import { TInboxIssueFilterOptions } from "@servcy/types";
-
-import { INBOX_STATUS } from "@constants/inbox";
-import { ISSUE_PRIORITIES } from "@constants/issue";
-
-type TInboxIssueFilterSelection = { workspaceSlug: string; projectId: string; inboxId: string };
+type TInboxIssueFilterSelection = { workspaceSlug: string; projectId: string; inboxId: string }
 
 export const InboxIssueFilterSelection: FC<TInboxIssueFilterSelection> = observer((props) => {
-    const { workspaceSlug, projectId, inboxId } = props;
+    const { workspaceSlug, projectId, inboxId } = props
     // router
-    const router = useRouter();
-    const { inboxIssueId } = router.query;
+    const router = useRouter()
+    const { inboxIssueId } = router.query
 
     const {
         filters: { inboxFilters, updateInboxFilters },
-    } = useInboxIssues();
+    } = useInboxIssues()
 
-    const filters = inboxFilters?.filters;
+    const filters = inboxFilters?.filters
 
-    let filtersLength = 0;
+    let filtersLength = 0
     Object.keys(filters ?? {}).forEach((key) => {
-        const filterKey = key as keyof TInboxIssueFilterOptions;
+        const filterKey = key as keyof TInboxIssueFilterOptions
         if (filters?.[filterKey] && Array.isArray(filters[filterKey]))
-            filtersLength += (filters[filterKey] ?? []).length;
-    });
+            filtersLength += (filters[filterKey] ?? []).length
+    })
 
     return (
         <div className="relative">
             <MultiLevelDropdown
                 label="Filters"
                 onSelect={(option) => {
-                    if (!workspaceSlug || !projectId || !inboxId) return;
+                    if (!workspaceSlug || !projectId || !inboxId) return
 
-                    const key = option.key as keyof TInboxIssueFilterOptions;
-                    const currentValue: any[] = filters?.[key] ?? [];
+                    const key = option.key as keyof TInboxIssueFilterOptions
+                    const currentValue: any[] = filters?.[key] ?? []
 
-                    const valueExists = currentValue.includes(option.value);
+                    const valueExists = currentValue.includes(option.value)
 
                     if (valueExists)
                         updateInboxFilters(workspaceSlug.toString(), projectId.toString(), inboxId.toString(), {
                             [option.key]: currentValue.filter((val) => val !== option.value),
-                        });
+                        })
                     else
                         updateInboxFilters(workspaceSlug.toString(), projectId.toString(), inboxId.toString(), {
                             [option.key]: [...currentValue, option.value],
-                        });
+                        })
 
                     if (inboxIssueId) {
                         router.push({
                             pathname: `/${workspaceSlug}/projects/${projectId}/inbox/${inboxId}`,
-                        });
+                        })
                     }
                 }}
                 direction="right"
@@ -114,5 +110,5 @@ export const InboxIssueFilterSelection: FC<TInboxIssueFilterSelection> = observe
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

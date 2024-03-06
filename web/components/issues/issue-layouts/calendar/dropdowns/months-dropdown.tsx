@@ -1,30 +1,28 @@
-import React, { useState } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { usePopper } from "react-popper";
+import React, { useState } from "react"
+import { MONTHS_LIST } from "@constants/calendar"
+import { Popover, Transition } from "@headlessui/react"
 //hooks
-import { useCalendarView } from "@hooks/store";
-
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
-import { MONTHS_LIST } from "@constants/calendar";
-import { ICycleIssuesFilter } from "@store/issue/cycle";
-import { IModuleIssuesFilter } from "@store/issue/module";
-import { IProjectIssuesFilter } from "@store/issue/project";
-import { IProjectViewIssuesFilter } from "@store/issue/project-views";
+import { useCalendarView } from "@hooks/store"
+import { ICycleIssuesFilter } from "@store/issue/cycle"
+import { IModuleIssuesFilter } from "@store/issue/module"
+import { IProjectIssuesFilter } from "@store/issue/project"
+import { IProjectViewIssuesFilter } from "@store/issue/project-views"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { usePopper } from "react-popper"
 
 interface Props {
-    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter;
+    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter
 }
 export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) => {
-    const { issuesFilterStore } = props;
+    const { issuesFilterStore } = props
 
-    const issueCalendarView = useCalendarView();
+    const issueCalendarView = useCalendarView()
 
-    const calendarLayout = issuesFilterStore.issueFilters?.displayFilters?.calendar?.layout ?? "month";
+    const calendarLayout = issuesFilterStore.issueFilters?.displayFilters?.calendar?.layout ?? "month"
 
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
 
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: "auto",
@@ -36,38 +34,38 @@ export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) =
                 },
             },
         ],
-    });
+    })
 
-    const { activeMonthDate } = issueCalendarView.calendarFilters;
+    const { activeMonthDate } = issueCalendarView.calendarFilters
 
     const getWeekLayoutHeader = (): string => {
-        const allDaysOfActiveWeek = issueCalendarView.allDaysOfActiveWeek;
+        const allDaysOfActiveWeek = issueCalendarView.allDaysOfActiveWeek
 
-        if (!allDaysOfActiveWeek) return "Week view";
+        if (!allDaysOfActiveWeek) return "Week view"
 
-        const daysList = Object.keys(allDaysOfActiveWeek);
+        const daysList = Object.keys(allDaysOfActiveWeek)
 
-        const firstDay = new Date(daysList[0]);
-        const lastDay = new Date(daysList[daysList.length - 1]);
+        const firstDay = new Date(daysList[0])
+        const lastDay = new Date(daysList[daysList.length - 1])
 
         if (firstDay.getMonth() === lastDay.getMonth() && firstDay.getFullYear() === lastDay.getFullYear())
-            return `${MONTHS_LIST[firstDay.getMonth() + 1].title} ${firstDay.getFullYear()}`;
+            return `${MONTHS_LIST[firstDay.getMonth() + 1].title} ${firstDay.getFullYear()}`
 
         if (firstDay.getFullYear() !== lastDay.getFullYear()) {
             return `${MONTHS_LIST[firstDay.getMonth() + 1].shortTitle} ${firstDay.getFullYear()} - ${
                 MONTHS_LIST[lastDay.getMonth() + 1].shortTitle
-            } ${lastDay.getFullYear()}`;
+            } ${lastDay.getFullYear()}`
         } else
             return `${MONTHS_LIST[firstDay.getMonth() + 1].shortTitle} - ${
                 MONTHS_LIST[lastDay.getMonth() + 1].shortTitle
-            } ${lastDay.getFullYear()}`;
-    };
+            } ${lastDay.getFullYear()}`
+    }
 
     const handleDateChange = (date: Date) => {
         issueCalendarView.updateCalendarFilters({
             activeMonthDate: date,
-        });
-    };
+        })
+    }
 
     return (
         <Popover className="relative">
@@ -108,8 +106,8 @@ export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) =
                                         activeMonthDate.getFullYear() - 1,
                                         activeMonthDate.getMonth(),
                                         1
-                                    );
-                                    handleDateChange(previousYear);
+                                    )
+                                    handleDateChange(previousYear)
                                 }}
                             >
                                 <ChevronLeft size={14} />
@@ -123,8 +121,8 @@ export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) =
                                         activeMonthDate.getFullYear() + 1,
                                         activeMonthDate.getMonth(),
                                         1
-                                    );
-                                    handleDateChange(nextYear);
+                                    )
+                                    handleDateChange(nextYear)
                                 }}
                             >
                                 <ChevronRight size={14} />
@@ -137,8 +135,8 @@ export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) =
                                     type="button"
                                     className="rounded py-0.5 text-xs hover:bg-custom-background-80"
                                     onClick={() => {
-                                        const newDate = new Date(activeMonthDate.getFullYear(), index, 1);
-                                        handleDateChange(newDate);
+                                        const newDate = new Date(activeMonthDate.getFullYear(), index, 1)
+                                        handleDateChange(newDate)
                                     }}
                                 >
                                     {month.shortTitle}
@@ -149,5 +147,5 @@ export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) =
                 </Popover.Panel>
             </Transition>
         </Popover>
-    );
-});
+    )
+})

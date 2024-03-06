@@ -1,24 +1,21 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react"
+import { LayersIcon } from "@servcy/ui"
+import { IssueActivityBlockComponent } from "./"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent } from "./";
-
-import { LayersIcon } from "@servcy/ui";
-
-type TIssueDefaultActivity = { activityId: string; ends: "top" | "bottom" | undefined };
+type TIssueDefaultActivity = { activityId: string; ends: "top" | "bottom" | undefined }
 
 export const IssueDefaultActivity: FC<TIssueDefaultActivity> = observer((props) => {
-    const { activityId, ends } = props;
+    const { activityId, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             activityId={activityId}
@@ -27,5 +24,5 @@ export const IssueDefaultActivity: FC<TIssueDefaultActivity> = observer((props) 
         >
             <>{activity.verb === "created" ? " created the issue." : " deleted an issue."}</>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

@@ -1,5 +1,4 @@
-import { action, computed, makeObservable, observable } from "mobx";
-
+import { action, computed, makeObservable, observable } from "mobx"
 import {
     TIssue,
     TIssueAttachment,
@@ -8,28 +7,28 @@ import {
     TIssueLink,
     TIssueReaction,
     TIssueRelationTypes,
-} from "@servcy/types";
-import { IIssueRootStore } from "../root.store";
-import { IIssueActivityStore, IIssueActivityStoreActions, IssueActivityStore, TActivityLoader } from "./activity.store";
-import { IIssueAttachmentStore, IIssueAttachmentStoreActions, IssueAttachmentStore } from "./attachment.store";
-import { IIssueCommentStore, IIssueCommentStoreActions, IssueCommentStore, TCommentLoader } from "./comment.store";
+} from "@servcy/types"
+import { IIssueRootStore } from "../root.store"
+import { IIssueActivityStore, IIssueActivityStoreActions, IssueActivityStore, TActivityLoader } from "./activity.store"
+import { IIssueAttachmentStore, IIssueAttachmentStoreActions, IssueAttachmentStore } from "./attachment.store"
 import {
     IIssueCommentReactionStore,
     IIssueCommentReactionStoreActions,
     IssueCommentReactionStore,
-} from "./comment_reaction.store";
-import { IIssueStore, IIssueStoreActions, IssueStore } from "./issue.store";
-import { IIssueLinkStore, IIssueLinkStoreActions, IssueLinkStore } from "./link.store";
-import { IIssueReactionStore, IIssueReactionStoreActions, IssueReactionStore } from "./reaction.store";
-import { IIssueRelationStore, IIssueRelationStoreActions, IssueRelationStore } from "./relation.store";
-import { IIssueSubscriptionStore, IIssueSubscriptionStoreActions, IssueSubscriptionStore } from "./subscription.store";
-import { IIssueSubIssuesStore, IIssueSubIssuesStoreActions, IssueSubIssuesStore } from "./sub_issues.store";
+} from "./comment_reaction.store"
+import { IIssueCommentStore, IIssueCommentStoreActions, IssueCommentStore, TCommentLoader } from "./comment.store"
+import { IIssueStore, IIssueStoreActions, IssueStore } from "./issue.store"
+import { IIssueLinkStore, IIssueLinkStoreActions, IssueLinkStore } from "./link.store"
+import { IIssueReactionStore, IIssueReactionStoreActions, IssueReactionStore } from "./reaction.store"
+import { IIssueRelationStore, IIssueRelationStoreActions, IssueRelationStore } from "./relation.store"
+import { IIssueSubIssuesStore, IIssueSubIssuesStoreActions, IssueSubIssuesStore } from "./sub_issues.store"
+import { IIssueSubscriptionStore, IIssueSubscriptionStoreActions, IssueSubscriptionStore } from "./subscription.store"
 
 export type TPeekIssue = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+}
 
 export interface IIssueDetail
     extends IIssueStoreActions,
@@ -43,55 +42,55 @@ export interface IIssueDetail
         IIssueCommentStoreActions,
         IIssueCommentReactionStoreActions {
     // observables
-    peekIssue: TPeekIssue | undefined;
-    isIssueLinkModalOpen: boolean;
-    isParentIssueModalOpen: boolean;
-    isDeleteIssueModalOpen: boolean;
-    isArchiveIssueModalOpen: boolean;
-    isRelationModalOpen: TIssueRelationTypes | null;
+    peekIssue: TPeekIssue | undefined
+    isIssueLinkModalOpen: boolean
+    isParentIssueModalOpen: boolean
+    isDeleteIssueModalOpen: boolean
+    isArchiveIssueModalOpen: boolean
+    isRelationModalOpen: TIssueRelationTypes | null
     // computed
-    isAnyModalOpen: boolean;
+    isAnyModalOpen: boolean
     // actions
-    setPeekIssue: (peekIssue: TPeekIssue | undefined) => void;
-    toggleIssueLinkModal: (value: boolean) => void;
-    toggleParentIssueModal: (value: boolean) => void;
-    toggleDeleteIssueModal: (value: boolean) => void;
-    toggleArchiveIssueModal: (value: boolean) => void;
-    toggleRelationModal: (value: TIssueRelationTypes | null) => void;
+    setPeekIssue: (peekIssue: TPeekIssue | undefined) => void
+    toggleIssueLinkModal: (value: boolean) => void
+    toggleParentIssueModal: (value: boolean) => void
+    toggleDeleteIssueModal: (value: boolean) => void
+    toggleArchiveIssueModal: (value: boolean) => void
+    toggleRelationModal: (value: TIssueRelationTypes | null) => void
     // store
-    rootIssueStore: IIssueRootStore;
-    issue: IIssueStore;
-    reaction: IIssueReactionStore;
-    attachment: IIssueAttachmentStore;
-    activity: IIssueActivityStore;
-    comment: IIssueCommentStore;
-    commentReaction: IIssueCommentReactionStore;
-    subIssues: IIssueSubIssuesStore;
-    link: IIssueLinkStore;
-    subscription: IIssueSubscriptionStore;
-    relation: IIssueRelationStore;
+    rootIssueStore: IIssueRootStore
+    issue: IIssueStore
+    reaction: IIssueReactionStore
+    attachment: IIssueAttachmentStore
+    activity: IIssueActivityStore
+    comment: IIssueCommentStore
+    commentReaction: IIssueCommentReactionStore
+    subIssues: IIssueSubIssuesStore
+    link: IIssueLinkStore
+    subscription: IIssueSubscriptionStore
+    relation: IIssueRelationStore
 }
 
 export class IssueDetail implements IIssueDetail {
     // observables
-    peekIssue: TPeekIssue | undefined = undefined;
-    isIssueLinkModalOpen: boolean = false;
-    isParentIssueModalOpen: boolean = false;
-    isDeleteIssueModalOpen: boolean = false;
-    isArchiveIssueModalOpen: boolean = false;
-    isRelationModalOpen: TIssueRelationTypes | null = null;
+    peekIssue: TPeekIssue | undefined = undefined
+    isIssueLinkModalOpen: boolean = false
+    isParentIssueModalOpen: boolean = false
+    isDeleteIssueModalOpen: boolean = false
+    isArchiveIssueModalOpen: boolean = false
+    isRelationModalOpen: TIssueRelationTypes | null = null
     // store
-    rootIssueStore: IIssueRootStore;
-    issue: IIssueStore;
-    reaction: IIssueReactionStore;
-    attachment: IIssueAttachmentStore;
-    subIssues: IIssueSubIssuesStore;
-    link: IIssueLinkStore;
-    subscription: IIssueSubscriptionStore;
-    relation: IIssueRelationStore;
-    activity: IIssueActivityStore;
-    comment: IIssueCommentStore;
-    commentReaction: IIssueCommentReactionStore;
+    rootIssueStore: IIssueRootStore
+    issue: IIssueStore
+    reaction: IIssueReactionStore
+    attachment: IIssueAttachmentStore
+    subIssues: IIssueSubIssuesStore
+    link: IIssueLinkStore
+    subscription: IIssueSubscriptionStore
+    relation: IIssueRelationStore
+    activity: IIssueActivityStore
+    comment: IIssueCommentStore
+    commentReaction: IIssueCommentReactionStore
 
     constructor(rootStore: IIssueRootStore) {
         makeObservable(this, {
@@ -111,20 +110,20 @@ export class IssueDetail implements IIssueDetail {
             toggleDeleteIssueModal: action,
             toggleArchiveIssueModal: action,
             toggleRelationModal: action,
-        });
+        })
 
         // store
-        this.rootIssueStore = rootStore;
-        this.issue = new IssueStore(this);
-        this.reaction = new IssueReactionStore(this);
-        this.attachment = new IssueAttachmentStore(this);
-        this.activity = new IssueActivityStore(this);
-        this.comment = new IssueCommentStore(this);
-        this.commentReaction = new IssueCommentReactionStore(this);
-        this.subIssues = new IssueSubIssuesStore(this);
-        this.link = new IssueLinkStore(this);
-        this.subscription = new IssueSubscriptionStore(this);
-        this.relation = new IssueRelationStore(this);
+        this.rootIssueStore = rootStore
+        this.issue = new IssueStore(this)
+        this.reaction = new IssueReactionStore(this)
+        this.attachment = new IssueAttachmentStore(this)
+        this.activity = new IssueActivityStore(this)
+        this.comment = new IssueCommentStore(this)
+        this.commentReaction = new IssueCommentReactionStore(this)
+        this.subIssues = new IssueSubIssuesStore(this)
+        this.link = new IssueLinkStore(this)
+        this.subscription = new IssueSubscriptionStore(this)
+        this.relation = new IssueRelationStore(this)
     }
 
     // computed
@@ -135,16 +134,16 @@ export class IssueDetail implements IIssueDetail {
             this.isDeleteIssueModalOpen ||
             this.isArchiveIssueModalOpen ||
             Boolean(this.isRelationModalOpen)
-        );
+        )
     }
 
     // actions
-    setPeekIssue = (peekIssue: TPeekIssue | undefined) => (this.peekIssue = peekIssue);
-    toggleIssueLinkModal = (value: boolean) => (this.isIssueLinkModalOpen = value);
-    toggleParentIssueModal = (value: boolean) => (this.isParentIssueModalOpen = value);
-    toggleDeleteIssueModal = (value: boolean) => (this.isDeleteIssueModalOpen = value);
-    toggleArchiveIssueModal = (value: boolean) => (this.isArchiveIssueModalOpen = value);
-    toggleRelationModal = (value: TIssueRelationTypes | null) => (this.isRelationModalOpen = value);
+    setPeekIssue = (peekIssue: TPeekIssue | undefined) => (this.peekIssue = peekIssue)
+    toggleIssueLinkModal = (value: boolean) => (this.isIssueLinkModalOpen = value)
+    toggleParentIssueModal = (value: boolean) => (this.isParentIssueModalOpen = value)
+    toggleDeleteIssueModal = (value: boolean) => (this.isDeleteIssueModalOpen = value)
+    toggleArchiveIssueModal = (value: boolean) => (this.isArchiveIssueModalOpen = value)
+    toggleRelationModal = (value: TIssueRelationTypes | null) => (this.isRelationModalOpen = value)
 
     // issue
     fetchIssue = async (
@@ -152,69 +151,69 @@ export class IssueDetail implements IIssueDetail {
         projectId: string,
         issueId: string,
         issueType: "DEFAULT" | "ARCHIVED" | "DRAFT" = "DEFAULT"
-    ) => this.issue.fetchIssue(workspaceSlug, projectId, issueId, issueType);
+    ) => this.issue.fetchIssue(workspaceSlug, projectId, issueId, issueType)
     updateIssue = async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssue>) =>
-        this.issue.updateIssue(workspaceSlug, projectId, issueId, data);
+        this.issue.updateIssue(workspaceSlug, projectId, issueId, data)
     removeIssue = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.issue.removeIssue(workspaceSlug, projectId, issueId);
+        this.issue.removeIssue(workspaceSlug, projectId, issueId)
     archiveIssue = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.issue.archiveIssue(workspaceSlug, projectId, issueId);
+        this.issue.archiveIssue(workspaceSlug, projectId, issueId)
     addIssueToCycle = async (workspaceSlug: string, projectId: string, cycleId: string, issueIds: string[]) =>
-        this.issue.addIssueToCycle(workspaceSlug, projectId, cycleId, issueIds);
+        this.issue.addIssueToCycle(workspaceSlug, projectId, cycleId, issueIds)
     removeIssueFromCycle = async (workspaceSlug: string, projectId: string, cycleId: string, issueId: string) =>
-        this.issue.removeIssueFromCycle(workspaceSlug, projectId, cycleId, issueId);
+        this.issue.removeIssueFromCycle(workspaceSlug, projectId, cycleId, issueId)
     addModulesToIssue = async (workspaceSlug: string, projectId: string, issueId: string, moduleIds: string[]) =>
-        this.issue.addModulesToIssue(workspaceSlug, projectId, issueId, moduleIds);
+        this.issue.addModulesToIssue(workspaceSlug, projectId, issueId, moduleIds)
     removeModulesFromIssue = async (workspaceSlug: string, projectId: string, issueId: string, moduleIds: string[]) =>
-        this.issue.removeModulesFromIssue(workspaceSlug, projectId, issueId, moduleIds);
+        this.issue.removeModulesFromIssue(workspaceSlug, projectId, issueId, moduleIds)
     removeIssueFromModule = async (workspaceSlug: string, projectId: string, moduleId: string, issueId: string) =>
-        this.issue.removeIssueFromModule(workspaceSlug, projectId, moduleId, issueId);
+        this.issue.removeIssueFromModule(workspaceSlug, projectId, moduleId, issueId)
 
     // reactions
-    addReactions = (issueId: string, reactions: TIssueReaction[]) => this.reaction.addReactions(issueId, reactions);
+    addReactions = (issueId: string, reactions: TIssueReaction[]) => this.reaction.addReactions(issueId, reactions)
     fetchReactions = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.reaction.fetchReactions(workspaceSlug, projectId, issueId);
+        this.reaction.fetchReactions(workspaceSlug, projectId, issueId)
     createReaction = async (workspaceSlug: string, projectId: string, issueId: string, reaction: string) =>
-        this.reaction.createReaction(workspaceSlug, projectId, issueId, reaction);
+        this.reaction.createReaction(workspaceSlug, projectId, issueId, reaction)
     removeReaction = async (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         reaction: string,
         userId: string
-    ) => this.reaction.removeReaction(workspaceSlug, projectId, issueId, reaction, userId);
+    ) => this.reaction.removeReaction(workspaceSlug, projectId, issueId, reaction, userId)
 
     // attachments
     addAttachments = (issueId: string, attachments: TIssueAttachment[]) =>
-        this.attachment.addAttachments(issueId, attachments);
+        this.attachment.addAttachments(issueId, attachments)
     fetchAttachments = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.attachment.fetchAttachments(workspaceSlug, projectId, issueId);
+        this.attachment.fetchAttachments(workspaceSlug, projectId, issueId)
     createAttachment = async (workspaceSlug: string, projectId: string, issueId: string, data: FormData) =>
-        this.attachment.createAttachment(workspaceSlug, projectId, issueId, data);
+        this.attachment.createAttachment(workspaceSlug, projectId, issueId, data)
     removeAttachment = async (workspaceSlug: string, projectId: string, issueId: string, attachmentId: string) =>
-        this.attachment.removeAttachment(workspaceSlug, projectId, issueId, attachmentId);
+        this.attachment.removeAttachment(workspaceSlug, projectId, issueId, attachmentId)
 
     // link
-    addLinks = (issueId: string, links: TIssueLink[]) => this.link.addLinks(issueId, links);
+    addLinks = (issueId: string, links: TIssueLink[]) => this.link.addLinks(issueId, links)
     fetchLinks = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.link.fetchLinks(workspaceSlug, projectId, issueId);
+        this.link.fetchLinks(workspaceSlug, projectId, issueId)
     createLink = async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssueLink>) =>
-        this.link.createLink(workspaceSlug, projectId, issueId, data);
+        this.link.createLink(workspaceSlug, projectId, issueId, data)
     updateLink = async (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         linkId: string,
         data: Partial<TIssueLink>
-    ) => this.link.updateLink(workspaceSlug, projectId, issueId, linkId, data);
+    ) => this.link.updateLink(workspaceSlug, projectId, issueId, linkId, data)
     removeLink = async (workspaceSlug: string, projectId: string, issueId: string, linkId: string) =>
-        this.link.removeLink(workspaceSlug, projectId, issueId, linkId);
+        this.link.removeLink(workspaceSlug, projectId, issueId, linkId)
 
     // sub issues
     fetchSubIssues = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.subIssues.fetchSubIssues(workspaceSlug, projectId, issueId);
+        this.subIssues.fetchSubIssues(workspaceSlug, projectId, issueId)
     createSubIssues = async (workspaceSlug: string, projectId: string, parentIssueId: string, data: string[]) =>
-        this.subIssues.createSubIssues(workspaceSlug, projectId, parentIssueId, data);
+        this.subIssues.createSubIssues(workspaceSlug, projectId, parentIssueId, data)
     updateSubIssue = async (
         workspaceSlug: string,
         projectId: string,
@@ -223,72 +222,71 @@ export class IssueDetail implements IIssueDetail {
         issueData: Partial<TIssue>,
         oldIssue?: Partial<TIssue>,
         fromModal?: boolean
-    ) =>
-        this.subIssues.updateSubIssue(workspaceSlug, projectId, parentIssueId, issueId, issueData, oldIssue, fromModal);
+    ) => this.subIssues.updateSubIssue(workspaceSlug, projectId, parentIssueId, issueId, issueData, oldIssue, fromModal)
     removeSubIssue = async (workspaceSlug: string, projectId: string, parentIssueId: string, issueId: string) =>
-        this.subIssues.removeSubIssue(workspaceSlug, projectId, parentIssueId, issueId);
+        this.subIssues.removeSubIssue(workspaceSlug, projectId, parentIssueId, issueId)
     deleteSubIssue = async (workspaceSlug: string, projectId: string, parentIssueId: string, issueId: string) =>
-        this.subIssues.deleteSubIssue(workspaceSlug, projectId, parentIssueId, issueId);
+        this.subIssues.deleteSubIssue(workspaceSlug, projectId, parentIssueId, issueId)
 
     // subscription
     addSubscription = (issueId: string, isSubscribed: boolean | undefined | null) =>
-        this.subscription.addSubscription(issueId, isSubscribed);
+        this.subscription.addSubscription(issueId, isSubscribed)
     fetchSubscriptions = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.subscription.fetchSubscriptions(workspaceSlug, projectId, issueId);
+        this.subscription.fetchSubscriptions(workspaceSlug, projectId, issueId)
     createSubscription = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.subscription.createSubscription(workspaceSlug, projectId, issueId);
+        this.subscription.createSubscription(workspaceSlug, projectId, issueId)
     removeSubscription = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.subscription.removeSubscription(workspaceSlug, projectId, issueId);
+        this.subscription.removeSubscription(workspaceSlug, projectId, issueId)
 
     // relations
     fetchRelations = async (workspaceSlug: string, projectId: string, issueId: string) =>
-        this.relation.fetchRelations(workspaceSlug, projectId, issueId);
+        this.relation.fetchRelations(workspaceSlug, projectId, issueId)
     createRelation = async (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         relationType: TIssueRelationTypes,
         issues: string[]
-    ) => this.relation.createRelation(workspaceSlug, projectId, issueId, relationType, issues);
+    ) => this.relation.createRelation(workspaceSlug, projectId, issueId, relationType, issues)
     removeRelation = async (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         relationType: TIssueRelationTypes,
         relatedIssue: string
-    ) => this.relation.removeRelation(workspaceSlug, projectId, issueId, relationType, relatedIssue);
+    ) => this.relation.removeRelation(workspaceSlug, projectId, issueId, relationType, relatedIssue)
 
     // activity
     fetchActivities = async (workspaceSlug: string, projectId: string, issueId: string, loaderType?: TActivityLoader) =>
-        this.activity.fetchActivities(workspaceSlug, projectId, issueId, loaderType);
+        this.activity.fetchActivities(workspaceSlug, projectId, issueId, loaderType)
 
     // comment
     fetchComments = async (workspaceSlug: string, projectId: string, issueId: string, loaderType?: TCommentLoader) =>
-        this.comment.fetchComments(workspaceSlug, projectId, issueId, loaderType);
+        this.comment.fetchComments(workspaceSlug, projectId, issueId, loaderType)
     createComment = async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssueComment>) =>
-        this.comment.createComment(workspaceSlug, projectId, issueId, data);
+        this.comment.createComment(workspaceSlug, projectId, issueId, data)
     updateComment = async (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         commentId: string,
         data: Partial<TIssueComment>
-    ) => this.comment.updateComment(workspaceSlug, projectId, issueId, commentId, data);
+    ) => this.comment.updateComment(workspaceSlug, projectId, issueId, commentId, data)
     removeComment = async (workspaceSlug: string, projectId: string, issueId: string, commentId: string) =>
-        this.comment.removeComment(workspaceSlug, projectId, issueId, commentId);
+        this.comment.removeComment(workspaceSlug, projectId, issueId, commentId)
 
     // comment reaction
     fetchCommentReactions = async (workspaceSlug: string, projectId: string, commentId: string) =>
-        this.commentReaction.fetchCommentReactions(workspaceSlug, projectId, commentId);
+        this.commentReaction.fetchCommentReactions(workspaceSlug, projectId, commentId)
     applyCommentReactions = async (commentId: string, commentReactions: TIssueCommentReaction[]) =>
-        this.commentReaction.applyCommentReactions(commentId, commentReactions);
+        this.commentReaction.applyCommentReactions(commentId, commentReactions)
     createCommentReaction = async (workspaceSlug: string, projectId: string, commentId: string, reaction: string) =>
-        this.commentReaction.createCommentReaction(workspaceSlug, projectId, commentId, reaction);
+        this.commentReaction.createCommentReaction(workspaceSlug, projectId, commentId, reaction)
     removeCommentReaction = async (
         workspaceSlug: string,
         projectId: string,
         commentId: string,
         reaction: string,
         userId: string
-    ) => this.commentReaction.removeCommentReaction(workspaceSlug, projectId, commentId, reaction, userId);
+    ) => this.commentReaction.removeCommentReaction(workspaceSlug, projectId, commentId, reaction, userId)
 }

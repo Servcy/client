@@ -1,12 +1,6 @@
-import React, { Fragment, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-import size from "lodash/size";
-import isEmpty from "lodash/isEmpty";
-
-import { useCycle, useIssues } from "@hooks/store";
-
+import { useRouter } from "next/router"
+import React, { Fragment, useState } from "react"
+import { TransferIssues, TransferIssuesModal } from "@components/cycles"
 import {
     CycleAppliedFiltersRoot,
     CycleCalendarLayout,
@@ -16,22 +10,24 @@ import {
     CycleListLayout,
     CycleSpreadsheetLayout,
     IssuePeekOverview,
-} from "@components/issues";
-import { TransferIssues, TransferIssuesModal } from "@components/cycles";
-import { ActiveLoader } from "@components/ui";
-
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-
-import { IIssueFilterOptions } from "@servcy/types";
+} from "@components/issues"
+import { ActiveLoader } from "@components/ui"
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+import { useCycle, useIssues } from "@hooks/store"
+import isEmpty from "lodash/isEmpty"
+import size from "lodash/size"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { IIssueFilterOptions } from "@servcy/types"
 
 export const CycleLayoutRoot: React.FC = observer(() => {
-    const router = useRouter();
-    const { workspaceSlug, projectId, cycleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, cycleId } = router.query
     // store hooks
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE);
-    const { getCycleById } = useCycle();
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE)
+    const { getCycleById } = useCycle()
     // state
-    const [transferIssuesModal, setTransferIssuesModal] = useState(false);
+    const [transferIssuesModal, setTransferIssuesModal] = useState(false)
 
     useSWR(
         workspaceSlug && projectId && cycleId
@@ -39,37 +35,37 @@ export const CycleLayoutRoot: React.FC = observer(() => {
             : null,
         async () => {
             if (workspaceSlug && projectId && cycleId) {
-                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString(), cycleId.toString());
+                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString(), cycleId.toString())
                 await issues?.fetchIssues(
                     workspaceSlug.toString(),
                     projectId.toString(),
                     issues?.groupedIssueIds ? "mutation" : "init-loader",
                     cycleId.toString()
-                );
+                )
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
 
-    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout;
+    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout
 
-    const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined;
-    const cycleStatus = cycleDetails?.status?.toLocaleLowerCase() ?? "draft";
+    const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined
+    const cycleStatus = cycleDetails?.status?.toLocaleLowerCase() ?? "draft"
 
-    const userFilters = issuesFilter?.issueFilters?.filters;
+    const userFilters = issuesFilter?.issueFilters?.filters
 
     const issueFilterCount = size(
         Object.fromEntries(
             Object.entries(userFilters ?? {}).filter(([, value]) => value && Array.isArray(value) && value.length > 0)
         )
-    );
+    )
 
     const handleClearAllFilters = () => {
-        if (!workspaceSlug || !projectId || !cycleId) return;
-        const newFilters: IIssueFilterOptions = {};
+        if (!workspaceSlug || !projectId || !cycleId) return
+        const newFilters: IIssueFilterOptions = {}
         Object.keys(userFilters ?? {}).forEach((key) => {
-            newFilters[key as keyof IIssueFilterOptions] = null;
-        });
+            newFilters[key as keyof IIssueFilterOptions] = null
+        })
         issuesFilter.updateFilters(
             workspaceSlug.toString(),
             projectId.toString(),
@@ -78,13 +74,13 @@ export const CycleLayoutRoot: React.FC = observer(() => {
                 ...newFilters,
             },
             cycleId.toString()
-        );
-    };
+        )
+    }
 
-    if (!workspaceSlug || !projectId || !cycleId) return <></>;
+    if (!workspaceSlug || !projectId || !cycleId) return <></>
 
     if (issues?.loader === "init-loader" || !issues?.groupedIssueIds) {
-        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>;
+        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>
     }
 
     return (
@@ -131,5 +127,5 @@ export const CycleLayoutRoot: React.FC = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const CyclesIcon: React.FC<Props> = ({
     width = "24",
@@ -31,4 +30,4 @@ export const CyclesIcon: React.FC<Props> = ({
             strokeLinejoin="round"
         />
     </svg>
-);
+)

@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const ModuleIcon: React.FC<Props> = ({ width = "24", height = "24", className, color = "#F15B5B" }) => (
     <svg
@@ -51,4 +50,4 @@ export const ModuleIcon: React.FC<Props> = ({ width = "24", height = "24", class
             strokeLinejoin="round"
         />
     </svg>
-);
+)

@@ -1,55 +1,50 @@
-import { FC, Fragment } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-
+import { useRouter } from "next/router"
+import { FC, Fragment } from "react"
 import {
-    ListLayout,
     CalendarLayout,
     GanttLayout,
-    KanBanLayout,
-    ProjectAppliedFiltersRoot,
-    ProjectSpreadsheetLayout,
-    ProjectEmptyState,
     IssuePeekOverview,
-} from "@components/issues";
-
-import { Spinner } from "@servcy/ui";
-
-import { useIssues } from "@hooks/store";
-
-import { ActiveLoader } from "@components/ui";
-
-import { EIssuesStoreType } from "@constants/issue";
+    KanBanLayout,
+    ListLayout,
+    ProjectAppliedFiltersRoot,
+    ProjectEmptyState,
+    ProjectSpreadsheetLayout,
+} from "@components/issues"
+import { ActiveLoader } from "@components/ui"
+import { EIssuesStoreType } from "@constants/issue"
+import { useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { Spinner } from "@servcy/ui"
 
 export const ProjectLayoutRoot: FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT);
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT)
 
     useSWR(
         workspaceSlug && projectId ? `PROJECT_ISSUES_${workspaceSlug}_${projectId}` : null,
         async () => {
             if (workspaceSlug && projectId) {
-                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString());
+                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString())
                 await issues?.fetchIssues(
                     workspaceSlug.toString(),
                     projectId.toString(),
                     issues?.groupedIssueIds ? "mutation" : "init-loader"
-                );
+                )
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
 
-    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout;
+    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout
 
-    if (!workspaceSlug || !projectId) return <></>;
+    if (!workspaceSlug || !projectId) return <></>
 
     if (issues?.loader === "init-loader" || !issues?.groupedIssueIds) {
-        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>;
+        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>
     }
 
     return (
@@ -85,5 +80,5 @@ export const ProjectLayoutRoot: FC = observer(() => {
                 </Fragment>
             )}
         </div>
-    );
-});
+    )
+})

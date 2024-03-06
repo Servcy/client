@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { CiWarning } from "react-icons/ci";
+import { CiWarning } from "react-icons/ci"
 
 export default function NotFound(): JSX.Element {
     return (
@@ -13,5 +13,5 @@ export default function NotFound(): JSX.Element {
                 </p>
             </div>
         </main>
-    );
+    )
 }

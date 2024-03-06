@@ -1,27 +1,25 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router"
+import { useMemo } from "react"
+import { CycleIssueQuickActions } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
 //hooks
-import { useCycle, useIssues } from "@hooks/store";
-
-import { CycleIssueQuickActions } from "@components/issues";
-
-import { TIssue } from "@servcy/types";
-import { EIssueActions } from "../../types";
-import { BaseCalendarRoot } from "../base-calendar-root";
-import { EIssuesStoreType } from "@constants/issue";
-import { useMemo } from "react";
+import { useCycle, useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { EIssueActions } from "../../types"
+import { BaseCalendarRoot } from "../base-calendar-root"
 
 export const CycleCalendarLayout: React.FC = observer(() => {
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE);
-    const { currentProjectCompletedCycleIds } = useCycle();
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE)
+    const { currentProjectCompletedCycleIds } = useCycle()
 
-    const router = useRouter();
-    const { workspaceSlug, projectId, cycleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, cycleId } = router.query
 
     const issueActions = useMemo(
         () => ({
             [EIssueActions.UPDATE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !cycleId) return;
+                if (!workspaceSlug || !cycleId) return
 
                 await issues.updateIssue(
                     workspaceSlug.toString(),
@@ -29,35 +27,35 @@ export const CycleCalendarLayout: React.FC = observer(() => {
                     issue.id,
                     issue,
                     cycleId.toString()
-                );
+                )
             },
             [EIssueActions.DELETE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !cycleId) return;
-                await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id, cycleId.toString());
+                if (!workspaceSlug || !cycleId) return
+                await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id, cycleId.toString())
             },
             [EIssueActions.REMOVE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !cycleId || !projectId) return;
+                if (!workspaceSlug || !cycleId || !projectId) return
                 await issues.removeIssueFromCycle(
                     workspaceSlug.toString(),
                     issue.project_id,
                     cycleId.toString(),
                     issue.id
-                );
+                )
             },
             [EIssueActions.ARCHIVE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !cycleId) return;
-                await issues.archiveIssue(workspaceSlug.toString(), issue.project_id, issue.id, cycleId.toString());
+                if (!workspaceSlug || !cycleId) return
+                await issues.archiveIssue(workspaceSlug.toString(), issue.project_id, issue.id, cycleId.toString())
             },
         }),
         [issues, workspaceSlug, cycleId, projectId]
-    );
+    )
 
-    if (!cycleId) return null;
+    if (!cycleId) return null
 
     const isCompletedCycle =
         cycleId && currentProjectCompletedCycleIds
             ? currentProjectCompletedCycleIds.includes(cycleId.toString())
-            : false;
+            : false
 
     return (
         <BaseCalendarRoot
@@ -68,5 +66,5 @@ export const CycleCalendarLayout: React.FC = observer(() => {
             viewId={cycleId.toString()}
             isCompletedCycle={isCompletedCycle}
         />
-    );
-});
+    )
+})

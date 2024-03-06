@@ -1,23 +1,19 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
+import { FC } from "react"
+import { INBOX_STATUS } from "@constants/inbox"
+import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
 // mobx store
-import { useInboxIssues } from "@hooks/store";
+import { useInboxIssues } from "@hooks/store"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TInboxIssueFilterOptions, TIssuePriorities } from "@servcy/types"
+import { PriorityIcon } from "@servcy/ui"
 
-import { X } from "lucide-react";
-import { PriorityIcon } from "@servcy/ui";
-
-import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
-
-import { TInboxIssueFilterOptions, TIssuePriorities } from "@servcy/types";
-
-import { INBOX_STATUS } from "@constants/inbox";
-
-type TInboxIssueAppliedFilter = { workspaceSlug: string; projectId: string; inboxId: string };
+type TInboxIssueAppliedFilter = { workspaceSlug: string; projectId: string; inboxId: string }
 
 export const IssueStatusLabel = ({ status }: { status: number }) => {
-    const issueStatusDetail = INBOX_STATUS.find((s) => s.status === status);
+    const issueStatusDetail = INBOX_STATUS.find((s) => s.status === status)
 
-    if (!issueStatusDetail) return <></>;
+    if (!issueStatusDetail) return <></>
 
     return (
         <div className="relative flex items-center gap-1">
@@ -26,40 +22,40 @@ export const IssueStatusLabel = ({ status }: { status: number }) => {
             </div>
             <div>{issueStatusDetail.title}</div>
         </div>
-    );
-};
+    )
+}
 
 export const InboxIssueAppliedFilter: FC<TInboxIssueAppliedFilter> = observer((props) => {
-    const { workspaceSlug, projectId, inboxId } = props;
+    const { workspaceSlug, projectId, inboxId } = props
 
     const {
         filters: { inboxFilters, updateInboxFilters },
-    } = useInboxIssues();
+    } = useInboxIssues()
 
-    const filters = inboxFilters?.filters;
+    const filters = inboxFilters?.filters
 
     const handleUpdateFilter = (filter: Partial<TInboxIssueFilterOptions>) => {
-        if (!workspaceSlug || !projectId || !inboxId) return;
-        updateInboxFilters(workspaceSlug.toString(), projectId.toString(), inboxId.toString(), filter);
-    };
+        if (!workspaceSlug || !projectId || !inboxId) return
+        updateInboxFilters(workspaceSlug.toString(), projectId.toString(), inboxId.toString(), filter)
+    }
 
     const handleClearAllFilters = () => {
-        const newFilters: TInboxIssueFilterOptions = { priority: [], inbox_status: [] };
-        updateInboxFilters(workspaceSlug.toString(), projectId.toString(), inboxId.toString(), newFilters);
-    };
+        const newFilters: TInboxIssueFilterOptions = { priority: [], inbox_status: [] }
+        updateInboxFilters(workspaceSlug.toString(), projectId.toString(), inboxId.toString(), newFilters)
+    }
 
-    let filtersLength = 0;
+    let filtersLength = 0
     Object.keys(filters ?? {}).forEach((key) => {
-        const filterKey = key as keyof TInboxIssueFilterOptions;
+        const filterKey = key as keyof TInboxIssueFilterOptions
         if (filters?.[filterKey] && Array.isArray(filters[filterKey]))
-            filtersLength += (filters[filterKey] ?? []).length;
-    });
+            filtersLength += (filters[filterKey] ?? []).length
+    })
 
-    if (!filters || filtersLength <= 0) return <></>;
+    if (!filters || filtersLength <= 0) return <></>
     return (
         <div className="relative flex flex-wrap items-center gap-2 p-3 text-[0.65rem] border-b border-custom-border-100">
             {Object.keys(filters).map((key) => {
-                const filterKey = key as keyof TInboxIssueFilterOptions;
+                const filterKey = key as keyof TInboxIssueFilterOptions
 
                 if (filters[filterKey].length > 0)
                     return (
@@ -166,7 +162,7 @@ export const InboxIssueAppliedFilter: FC<TInboxIssueAppliedFilter> = observer((p
                                 </div>
                             )}
                         </div>
-                    );
+                    )
             })}
             <button
                 type="button"
@@ -177,5 +173,5 @@ export const InboxIssueAppliedFilter: FC<TInboxIssueAppliedFilter> = observer((p
                 <X className="h-3 w-3" />
             </button>
         </div>
-    );
-});
+    )
+})

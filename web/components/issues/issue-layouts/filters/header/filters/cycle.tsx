@@ -1,48 +1,45 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react";
-import sortBy from "lodash/sortBy";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-import { useApplication, useCycle } from "@hooks/store";
-
-import { Loader, CycleGroupIcon } from "@servcy/ui";
-
-import { TCycleGroups } from "@servcy/types";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { useApplication, useCycle } from "@hooks/store"
+import sortBy from "lodash/sortBy"
+import { observer } from "mobx-react"
+import { TCycleGroups } from "@servcy/types"
+import { CycleGroupIcon, Loader } from "@servcy/ui"
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string) => void;
-    searchQuery: string;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string) => void
+    searchQuery: string
+}
 
 export const FilterCycle: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, searchQuery } = props;
+    const { appliedFilters, handleUpdate, searchQuery } = props
 
     const {
         router: { projectId },
-    } = useApplication();
-    const { getCycleById, getProjectCycleIds } = useCycle();
+    } = useApplication()
+    const { getCycleById, getProjectCycleIds } = useCycle()
 
     // states
-    const [itemsToRender, setItemsToRender] = useState(5);
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [itemsToRender, setItemsToRender] = useState(5)
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const cycleIds = projectId ? getProjectCycleIds(projectId) : undefined;
-    const cycles = cycleIds?.map((projectId) => getCycleById(projectId)!) ?? null;
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const cycleIds = projectId ? getProjectCycleIds(projectId) : undefined
+    const cycles = cycleIds?.map((projectId) => getCycleById(projectId)!) ?? null
+    const appliedFiltersCount = appliedFilters?.length ?? 0
     const filteredOptions = sortBy(
         cycles?.filter((cycle) => cycle.name.toLowerCase().includes(searchQuery.toLowerCase())),
         (cycle) => cycle.name.toLowerCase()
-    );
+    )
 
     const handleViewToggle = () => {
-        if (!filteredOptions) return;
+        if (!filteredOptions) return
 
-        if (itemsToRender === filteredOptions.length) setItemsToRender(5);
-        else setItemsToRender(filteredOptions.length);
-    };
+        if (itemsToRender === filteredOptions.length) setItemsToRender(5)
+        else setItemsToRender(filteredOptions.length)
+    }
 
-    const cycleStatus = (status: TCycleGroups) => (status ? status.toLocaleLowerCase() : "draft") as TCycleGroups;
+    const cycleStatus = (status: TCycleGroups) => (status ? status.toLocaleLowerCase() : "draft") as TCycleGroups
 
     return (
         <>
@@ -94,5 +91,5 @@ export const FilterCycle: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

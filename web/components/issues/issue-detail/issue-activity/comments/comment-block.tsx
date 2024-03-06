@@ -1,27 +1,25 @@
-import { FC, ReactNode } from "react";
-import { MessageCircle } from "lucide-react";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { calculateTimeAgo } from "@helpers/date-time.helper";
+import { FC, ReactNode } from "react"
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+import { useIssueDetail } from "@hooks/store"
+import { MessageCircle } from "lucide-react"
 
 type TIssueCommentBlock = {
-    commentId: string;
-    ends: "top" | "bottom" | undefined;
-    quickActions: ReactNode;
-    children: ReactNode;
-};
+    commentId: string
+    ends: "top" | "bottom" | undefined
+    quickActions: ReactNode
+    children: ReactNode
+}
 
 export const IssueCommentBlock: FC<TIssueCommentBlock> = (props) => {
-    const { commentId, ends, quickActions, children } = props;
+    const { commentId, ends, quickActions, children } = props
 
     const {
         comment: { getCommentById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const comment = getCommentById(commentId);
+    const comment = getCommentById(commentId)
 
-    if (!comment) return <></>;
+    if (!comment) return <></>
     return (
         <div className={`relative flex gap-3 ${ends === "top" ? `pb-2` : ends === "bottom" ? `pt-2` : `py-2`}`}>
             <div className="absolute left-[13px] top-0 bottom-0 w-0.5 bg-custom-background-80" aria-hidden={true} />
@@ -66,5 +64,5 @@ export const IssueCommentBlock: FC<TIssueCommentBlock> = (props) => {
                 <div className="flex-shrink-0 ">{quickActions}</div>
             </div>
         </div>
-    );
-};
+    )
+}

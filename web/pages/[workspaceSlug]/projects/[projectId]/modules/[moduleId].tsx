@@ -1,50 +1,45 @@
-import { observer } from "mobx-react";
-import { useRouter } from "next/router";
-import { ReactElement } from "react";
-import useSWR from "swr";
-
-import { useModule, useProject } from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { EmptyState } from "@components/common";
-import { PageHead } from "@components/core";
-import { ModuleIssuesHeader } from "@components/headers";
-import { ModuleLayoutRoot } from "@components/issues";
-import { ModuleDetailsSidebar } from "@components/modules";
-
-import emptyModule from "public/empty-state/module.svg";
-
-import { NextPageWithLayout } from "@/types/types";
+import { useRouter } from "next/router"
+import { ReactElement } from "react"
+import { EmptyState } from "@components/common"
+import { PageHead } from "@components/core"
+import { ModuleIssuesHeader } from "@components/headers"
+import { ModuleLayoutRoot } from "@components/issues"
+import { ModuleDetailsSidebar } from "@components/modules"
+import { useModule, useProject } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { AppLayout } from "@layouts/app-layout"
+import { observer } from "mobx-react"
+import emptyModule from "public/empty-state/module.svg"
+import useSWR from "swr"
+import { NextPageWithLayout } from "@/types/types"
 
 const ModuleIssuesPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, moduleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, moduleId } = router.query
     // store hooks
-    const { fetchModuleDetails, getModuleById } = useModule();
-    const { getProjectById } = useProject();
+    const { fetchModuleDetails, getModuleById } = useModule()
+    const { getProjectById } = useProject()
     // local storage
-    const { setValue, storedValue } = useLocalStorage("module_sidebar_collapsed", "false");
-    const isSidebarCollapsed = storedValue ? (storedValue === "true" ? true : false) : false;
+    const { setValue, storedValue } = useLocalStorage("module_sidebar_collapsed", "false")
+    const isSidebarCollapsed = storedValue ? (storedValue === "true" ? true : false) : false
     // fetching module details
     const { error } = useSWR(
         workspaceSlug && projectId && moduleId ? `CURRENT_MODULE_DETAILS_${moduleId.toString()}` : null,
         workspaceSlug && projectId && moduleId
             ? () => fetchModuleDetails(workspaceSlug.toString(), projectId.toString(), moduleId.toString())
             : null
-    );
+    )
     // derived values
-    const projectModule = moduleId ? getModuleById(moduleId.toString()) : undefined;
-    const project = projectId ? getProjectById(projectId.toString()) : undefined;
-    const pageTitle = project?.name && projectModule?.name ? `${project?.name} - ${projectModule?.name}` : undefined;
+    const projectModule = moduleId ? getModuleById(moduleId.toString()) : undefined
+    const project = projectId ? getProjectById(projectId.toString()) : undefined
+    const pageTitle = project?.name && projectModule?.name ? `${project?.name} - ${projectModule?.name}` : undefined
 
     const toggleSidebar = () => {
-        setValue(`${!isSidebarCollapsed}`);
-    };
+        setValue(`${!isSidebarCollapsed}`)
+    }
 
-    if (!workspaceSlug || !projectId || !moduleId) return <></>;
+    if (!workspaceSlug || !projectId || !moduleId) return <></>
 
     return (
         <>
@@ -78,15 +73,15 @@ const ModuleIssuesPage: NextPageWithLayout = observer(() => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})
 
 ModuleIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<ModuleIssuesHeader />} withProjectWrapper>
             {page}
         </AppLayout>
-    );
-};
+    )
+}
 
-export default ModuleIssuesPage;
+export default ModuleIssuesPage

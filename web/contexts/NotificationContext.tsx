@@ -1,21 +1,21 @@
-import { createContext, useCallback, useEffect, useReducer } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { NotificationService } from "@services/notification.service";
-import { UNREAD_NOTIFICATIONS_COUNT, USER_WORKSPACE_NOTIFICATIONS } from "@constants/fetch-keys";
-import type { IUserNotification, NotificationCount, NotificationType } from "@servcy/types";
+import { useRouter } from "next/router"
+import { createContext, useCallback, useEffect, useReducer } from "react"
+import { UNREAD_NOTIFICATIONS_COUNT, USER_WORKSPACE_NOTIFICATIONS } from "@constants/fetch-keys"
+import { NotificationService } from "@services/notification.service"
+import useSWR from "swr"
+import type { IUserNotification, NotificationCount, NotificationType } from "@servcy/types"
 
-const notificationService = new NotificationService();
+const notificationService = new NotificationService()
 
-export const userNotificationContext = createContext<ContextType>({} as ContextType);
+export const userNotificationContext = createContext<ContextType>({} as ContextType)
 
 type UserNotificationProps = {
-    selectedTab: NotificationType;
-    snoozed: boolean;
-    archived: boolean;
-    readNotification: boolean;
-    selectedNotificationForSnooze: string | null;
-};
+    selectedTab: NotificationType
+    snoozed: boolean
+    archived: boolean
+    readNotification: boolean
+    selectedNotificationForSnooze: string | null
+}
 
 type ReducerActionType = {
     type:
@@ -25,32 +25,32 @@ type ReducerActionType = {
         | "SET_ARCHIVED"
         | "SET_READ_NOTIFICATION"
         | "SET_SELECTED_NOTIFICATION_FOR_SNOOZE"
-        | "SET_NOTIFICATIONS";
-    payload?: Partial<ContextType>;
-};
+        | "SET_NOTIFICATIONS"
+    payload?: Partial<ContextType>
+}
 
 type ContextType = UserNotificationProps & {
-    notifications?: IUserNotification[];
-    notificationCount?: NotificationCount | null;
-    setSelectedTab: (tab: NotificationType) => void;
-    setSnoozed: (snoozed: boolean) => void;
-    setArchived: (archived: boolean) => void;
-    setReadNotification: (readNotification: boolean) => void;
-    setSelectedNotificationForSnooze: (notificationId: string | null) => void;
-    markNotificationReadStatus: (notificationId: string) => void;
-    markNotificationArchivedStatus: (notificationId: string) => void;
-    markSnoozeNotification: (notificationId: string, dateTime?: Date) => void;
-};
+    notifications?: IUserNotification[]
+    notificationCount?: NotificationCount | null
+    setSelectedTab: (tab: NotificationType) => void
+    setSnoozed: (snoozed: boolean) => void
+    setArchived: (archived: boolean) => void
+    setReadNotification: (readNotification: boolean) => void
+    setSelectedNotificationForSnooze: (notificationId: string | null) => void
+    markNotificationReadStatus: (notificationId: string) => void
+    markNotificationArchivedStatus: (notificationId: string) => void
+    markSnoozeNotification: (notificationId: string, dateTime?: Date) => void
+}
 
 type StateType = {
-    selectedTab: NotificationType;
-    snoozed: boolean;
-    archived: boolean;
-    readNotification: boolean;
-    selectedNotificationForSnooze: string | null;
-};
+    selectedTab: NotificationType
+    snoozed: boolean
+    archived: boolean
+    readNotification: boolean
+    selectedNotificationForSnooze: string | null
+}
 
-type ReducerFunctionType = (state: StateType, action: ReducerActionType) => StateType;
+type ReducerFunctionType = (state: StateType, action: ReducerActionType) => StateType
 
 export const initialState: StateType = {
     selectedTab: "assigned",
@@ -58,10 +58,10 @@ export const initialState: StateType = {
     archived: false,
     readNotification: false,
     selectedNotificationForSnooze: null,
-};
+}
 
 export const reducer: ReducerFunctionType = (state, action) => {
-    const { type, payload } = action;
+    const { type, payload } = action
 
     switch (type) {
         case "READ_NOTIFICATION_COUNT":
@@ -71,64 +71,64 @@ export const reducer: ReducerFunctionType = (state, action) => {
         case "SET_READ_NOTIFICATION":
         case "SET_SELECTED_NOTIFICATION_FOR_SNOOZE":
         case "SET_NOTIFICATIONS": {
-            return { ...state, ...payload };
+            return { ...state, ...payload }
         }
 
         default:
-            return state;
+            return state
     }
-};
+}
 
 const UserNotificationContextProvider: React.FC<{
-    children: React.ReactNode;
+    children: React.ReactNode
 }> = ({ children }) => {
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, initialState)
 
-    const { selectedTab, snoozed, archived, readNotification } = state;
+    const { selectedTab, snoozed, archived, readNotification } = state
 
     const params = {
         type: snoozed || archived || readNotification ? undefined : selectedTab,
         snoozed,
         archived,
         read: !readNotification ? undefined : false,
-    };
+    }
 
     const { data: notifications, mutate: notificationsMutate } = useSWR(
         workspaceSlug ? USER_WORKSPACE_NOTIFICATIONS(workspaceSlug.toString(), params) : null,
         workspaceSlug ? () => notificationService.getUserNotifications(workspaceSlug.toString(), params) : null
-    );
+    )
 
     const { data: notificationCount, mutate: mutateNotificationCount } = useSWR(
         workspaceSlug ? UNREAD_NOTIFICATIONS_COUNT(workspaceSlug.toString()) : null,
         () => (workspaceSlug ? notificationService.getUnreadNotificationsCount(workspaceSlug.toString()) : null)
-    );
+    )
 
     const handleReadMutation = (action: "read" | "unread") => {
-        const notificationCountNumber = action === "read" ? -1 : 1;
+        const notificationCountNumber = action === "read" ? -1 : 1
 
         mutateNotificationCount((prev: any) => {
-            if (!prev) return prev;
+            if (!prev) return prev
 
             const notificationType: keyof NotificationCount =
                 selectedTab === "assigned"
                     ? "my_issues"
                     : selectedTab === "created"
                       ? "created_issues"
-                      : "watching_issues";
+                      : "watching_issues"
 
             return {
                 ...prev,
                 [notificationType]: prev[notificationType] + notificationCountNumber,
-            };
-        }, false);
-    };
+            }
+        }, false)
+    }
 
     const markNotificationReadStatus = async (notificationId: string) => {
-        if (!workspaceSlug) return;
-        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null;
+        if (!workspaceSlug) return
+        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null
 
         notificationsMutate(
             (previousNotifications: any) =>
@@ -138,74 +138,74 @@ const UserNotificationContextProvider: React.FC<{
                         : notification
                 ),
             false
-        );
+        )
 
-        handleReadMutation(isRead ? "unread" : "read");
+        handleReadMutation(isRead ? "unread" : "read")
 
         if (isRead) {
             await notificationService
                 .markUserNotificationAsUnread(workspaceSlug.toString(), notificationId)
                 .catch(() => {
-                    throw new Error("Something went wrong");
+                    throw new Error("Something went wrong")
                 })
                 .finally(() => {
-                    notificationsMutate();
-                    mutateNotificationCount();
-                });
+                    notificationsMutate()
+                    mutateNotificationCount()
+                })
         } else {
             await notificationService
                 .markUserNotificationAsRead(workspaceSlug.toString(), notificationId)
                 .catch(() => {
-                    throw new Error("Something went wrong");
+                    throw new Error("Something went wrong")
                 })
                 .finally(() => {
-                    notificationsMutate();
-                    mutateNotificationCount();
-                });
+                    notificationsMutate()
+                    mutateNotificationCount()
+                })
         }
-    };
+    }
 
     const markNotificationArchivedStatus = async (notificationId: string) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
         const isArchived =
-            notifications?.find((notification) => notification.id === notificationId)?.archived_at !== null;
+            notifications?.find((notification) => notification.id === notificationId)?.archived_at !== null
 
         if (!isArchived) {
-            handleReadMutation("read");
+            handleReadMutation("read")
         }
 
         if (isArchived) {
             await notificationService
                 .markUserNotificationAsUnarchived(workspaceSlug.toString(), notificationId)
                 .catch(() => {
-                    throw new Error("Something went wrong");
+                    throw new Error("Something went wrong")
                 })
                 .finally(() => {
-                    notificationsMutate();
-                    mutateNotificationCount();
-                });
+                    notificationsMutate()
+                    mutateNotificationCount()
+                })
         } else {
             notificationsMutate(
                 (prev: any) => prev?.filter((prevNotification: any) => prevNotification.id !== notificationId),
                 false
-            );
+            )
             await notificationService
                 .markUserNotificationAsArchived(workspaceSlug.toString(), notificationId)
                 .catch(() => {
-                    throw new Error("Something went wrong");
+                    throw new Error("Something went wrong")
                 })
                 .finally(() => {
-                    notificationsMutate();
-                    mutateNotificationCount();
-                });
+                    notificationsMutate()
+                    mutateNotificationCount()
+                })
         }
-    };
+    }
 
     const markSnoozeNotification = async (notificationId: string, dateTime?: Date) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         const isSnoozed =
-            notifications?.find((notification) => notification.id === notificationId)?.snoozed_till !== null;
+            notifications?.find((notification) => notification.id === notificationId)?.snoozed_till !== null
 
         notificationsMutate(
             (previousNotifications: any) =>
@@ -215,7 +215,7 @@ const UserNotificationContextProvider: React.FC<{
                         : notification
                 ) || [],
             false
-        );
+        )
 
         if (isSnoozed) {
             await notificationService
@@ -223,52 +223,52 @@ const UserNotificationContextProvider: React.FC<{
                     snoozed_till: null,
                 })
                 .finally(() => {
-                    notificationsMutate();
-                });
+                    notificationsMutate()
+                })
         } else {
             await notificationService
                 .patchUserNotification(workspaceSlug.toString(), notificationId, {
                     snoozed_till: dateTime,
                 })
                 .catch(() => {
-                    new Error("Something went wrong");
+                    new Error("Something went wrong")
                 })
                 .finally(() => {
-                    notificationsMutate();
-                });
+                    notificationsMutate()
+                })
         }
-    };
+    }
 
     const setSelectedTab = useCallback((tab: NotificationType) => {
-        dispatch({ type: "SET_SELECTED_TAB", payload: { selectedTab: tab } });
-    }, []);
+        dispatch({ type: "SET_SELECTED_TAB", payload: { selectedTab: tab } })
+    }, [])
 
     const setSnoozed = useCallback((snoozed: boolean) => {
-        dispatch({ type: "SET_SNOOZED", payload: { snoozed } });
-    }, []);
+        dispatch({ type: "SET_SNOOZED", payload: { snoozed } })
+    }, [])
 
     const setArchived = useCallback((archived: boolean) => {
-        dispatch({ type: "SET_ARCHIVED", payload: { archived } });
-    }, []);
+        dispatch({ type: "SET_ARCHIVED", payload: { archived } })
+    }, [])
 
     const setReadNotification = useCallback((readNotification: boolean) => {
-        dispatch({ type: "SET_READ_NOTIFICATION", payload: { readNotification } });
-    }, []);
+        dispatch({ type: "SET_READ_NOTIFICATION", payload: { readNotification } })
+    }, [])
 
     const setSelectedNotificationForSnooze = useCallback((notificationId: string | null) => {
         dispatch({
             type: "SET_SELECTED_NOTIFICATION_FOR_SNOOZE",
             payload: { selectedNotificationForSnooze: notificationId },
-        });
-    }, []);
+        })
+    }, [])
 
     useEffect(() => {
-        dispatch({ type: "SET_NOTIFICATIONS", payload: { notifications } });
-    }, [notifications]);
+        dispatch({ type: "SET_NOTIFICATIONS", payload: { notifications } })
+    }, [notifications])
 
     useEffect(() => {
-        dispatch({ type: "READ_NOTIFICATION_COUNT", payload: { notificationCount } });
-    }, [notificationCount]);
+        dispatch({ type: "READ_NOTIFICATION_COUNT", payload: { notificationCount } })
+    }, [notificationCount])
 
     return (
         <userNotificationContext.Provider
@@ -288,7 +288,7 @@ const UserNotificationContextProvider: React.FC<{
         >
             {children}
         </userNotificationContext.Provider>
-    );
-};
+    )
+}
 
-export default UserNotificationContextProvider;
+export default UserNotificationContextProvider

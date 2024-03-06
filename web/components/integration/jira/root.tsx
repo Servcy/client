@@ -1,35 +1,30 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { mutate } from "swr";
-import { FormProvider, useForm } from "react-hook-form";
-
-import { ArrowLeft, Check, List, Settings } from "lucide-react";
-
-import { JiraImporterService } from "@services/integrations";
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useState } from "react"
 // fetch keys
-import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
-
-import { Button, UserGroupIcon } from "@servcy/ui";
+import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys"
+import { JiraImporterService } from "@services/integrations"
+import { ArrowLeft, Check, List, Settings } from "lucide-react"
+import JiraLogo from "public/services/jira.svg"
+import { FormProvider, useForm } from "react-hook-form"
+import { mutate } from "swr"
+import { IJiraImporterForm } from "@servcy/types"
+import { Button, UserGroupIcon } from "@servcy/ui"
 import {
-    JiraGetImportDetail,
-    JiraProjectDetail,
-    JiraImportUsers,
+    IJiraIntegrationData,
     JiraConfirmImport,
     jiraFormDefaultValues,
+    JiraGetImportDetail,
+    JiraImportUsers,
+    JiraProjectDetail,
     TJiraIntegrationSteps,
-    IJiraIntegrationData,
-} from ".";
-
-import JiraLogo from "public/services/jira.svg";
-
-import { IJiraImporterForm } from "@servcy/types";
+} from "."
 
 const integrationWorkflowData: Array<{
-    title: string;
-    key: TJiraIntegrationSteps;
-    icon: any;
+    title: string
+    key: TJiraIntegrationSteps
+    icon: any
 }> = [
     {
         title: "Configure",
@@ -51,46 +46,46 @@ const integrationWorkflowData: Array<{
         key: "import-confirmation",
         icon: Check,
     },
-];
+]
 
-const jiraImporterService = new JiraImporterService();
+const jiraImporterService = new JiraImporterService()
 
 export const JiraImporterRoot: React.FC = () => {
     const [currentStep, setCurrentStep] = useState<IJiraIntegrationData>({
         state: "import-configure",
-    });
-    const [disableTopBarAfter, setDisableTopBarAfter] = useState<TJiraIntegrationSteps | null>(null);
+    })
+    const [disableTopBarAfter, setDisableTopBarAfter] = useState<TJiraIntegrationSteps | null>(null)
 
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const methods = useForm<IJiraImporterForm>({
         defaultValues: jiraFormDefaultValues,
         mode: "all",
         reValidateMode: "onChange",
-    });
+    })
 
-    const isValid = methods.formState.isValid;
+    const isValid = methods.formState.isValid
 
     const onSubmit = async (data: IJiraImporterForm) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         await jiraImporterService
             .createJiraImporter(workspaceSlug.toString(), data)
             .then(() => {
-                mutate(IMPORTER_SERVICES_LIST(workspaceSlug.toString()));
-                router.push(`/${workspaceSlug}/settings/imports`);
+                mutate(IMPORTER_SERVICES_LIST(workspaceSlug.toString()))
+                router.push(`/${workspaceSlug}/settings/imports`)
             })
             .catch((err) => {
-                console.error(err);
-            });
-    };
+                console.error(err)
+            })
+    }
 
     const activeIntegrationState = () => {
-        const currentElementIndex = integrationWorkflowData.findIndex((i) => i?.key === currentStep?.state);
+        const currentElementIndex = integrationWorkflowData.findIndex((i) => i?.key === currentStep?.state)
 
-        return currentElementIndex;
-    };
+        return currentElementIndex
+    }
 
     return (
         <div className="mt-4 flex h-full flex-col space-y-2">
@@ -114,7 +109,7 @@ export const JiraImporterRoot: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={() => {
-                                        setCurrentStep({ state: integration.key });
+                                        setCurrentStep({ state: integration.key })
                                     }}
                                     disabled={
                                         index > activeIntegrationState() + 1 ||
@@ -173,10 +168,10 @@ export const JiraImporterRoot: React.FC = () => {
                                         onClick={() => {
                                             const currentElementIndex = integrationWorkflowData.findIndex(
                                                 (i) => i?.key === currentStep?.state
-                                            );
+                                            )
                                             setCurrentStep({
                                                 state: integrationWorkflowData[currentElementIndex - 1]?.key,
-                                            });
+                                            })
                                         }}
                                     >
                                         Back
@@ -192,14 +187,14 @@ export const JiraImporterRoot: React.FC = () => {
                                     onClick={() => {
                                         const currentElementIndex = integrationWorkflowData.findIndex(
                                             (i) => i?.key === currentStep?.state
-                                        );
+                                        )
 
                                         if (currentElementIndex === integrationWorkflowData.length - 1) {
-                                            methods.handleSubmit(onSubmit)();
+                                            methods.handleSubmit(onSubmit)()
                                         } else {
                                             setCurrentStep({
                                                 state: integrationWorkflowData[currentElementIndex + 1]?.key,
-                                            });
+                                            })
                                         }
                                     }}
                                 >
@@ -211,5 +206,5 @@ export const JiraImporterRoot: React.FC = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

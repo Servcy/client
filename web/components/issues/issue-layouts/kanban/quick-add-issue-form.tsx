@@ -1,26 +1,22 @@
-import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { observer } from "mobx-react-lite";
-import { PlusIcon } from "lucide-react";
-
-import { useEventTracker, useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-import useKeypress from "@hooks/use-key-press";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { createIssuePayload } from "@helpers/issue.helper";
-
-import { TIssue } from "@servcy/types";
-
-import { ISSUE_CREATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { useEffect, useRef, useState } from "react"
+import { ISSUE_CREATED } from "@constants/event-tracker"
+import { createIssuePayload } from "@helpers/issue.helper"
+import { useEventTracker, useProject } from "@hooks/store"
+import useKeypress from "@hooks/use-key-press"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { PlusIcon } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { TIssue } from "@servcy/types"
 
 const Inputs = (props: any) => {
-    const { register, setFocus, projectDetail } = props;
+    const { register, setFocus, projectDetail } = props
 
     useEffect(() => {
-        setFocus("name");
-    }, [setFocus]);
+        setFocus("name")
+    }, [setFocus])
 
     return (
         <div className="w-full">
@@ -34,45 +30,45 @@ const Inputs = (props: any) => {
                 className="w-full rounded-md bg-transparent px-2 py-1.5 pl-0 text-sm font-medium leading-5 text-custom-text-200 outline-none"
             />
         </div>
-    );
-};
+    )
+}
 
 interface IKanBanQuickAddIssueForm {
-    formKey: keyof TIssue;
-    groupId?: string;
-    subGroupId?: string | null;
-    prePopulatedData?: Partial<TIssue>;
+    formKey: keyof TIssue
+    groupId?: string
+    subGroupId?: string | null
+    prePopulatedData?: Partial<TIssue>
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
+    ) => Promise<TIssue | undefined>
+    viewId?: string
 }
 
 const defaultValues: Partial<TIssue> = {
     name: "",
-};
+}
 
 export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = observer((props) => {
-    const { formKey, prePopulatedData, quickAddCallback, viewId } = props;
+    const { formKey, prePopulatedData, quickAddCallback, viewId } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { getProjectById } = useProject();
-    const { captureIssueEvent } = useEventTracker();
+    const { getProjectById } = useProject()
+    const { captureIssueEvent } = useEventTracker()
 
-    const projectDetail = projectId ? getProjectById(projectId.toString()) : null;
+    const projectDetail = projectId ? getProjectById(projectId.toString()) : null
 
-    const ref = useRef<HTMLFormElement>(null);
+    const ref = useRef<HTMLFormElement>(null)
 
-    const [isOpen, setIsOpen] = useState(false);
-    const handleClose = () => setIsOpen(false);
+    const [isOpen, setIsOpen] = useState(false)
+    const handleClose = () => setIsOpen(false)
 
-    useKeypress("Escape", handleClose);
-    useOutsideClickDetector(ref, handleClose);
+    useKeypress("Escape", handleClose)
+    useOutsideClickDetector(ref, handleClose)
 
     const {
         reset,
@@ -80,21 +76,21 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
         setFocus,
         register,
         formState: { isSubmitting },
-    } = useForm<TIssue>({ defaultValues });
+    } = useForm<TIssue>({ defaultValues })
 
     useEffect(() => {
-        if (!isOpen) reset({ ...defaultValues });
-    }, [isOpen, reset]);
+        if (!isOpen) reset({ ...defaultValues })
+    }, [isOpen, reset])
 
     const onSubmitHandler = async (formData: TIssue) => {
-        if (isSubmitting || !workspaceSlug || !projectId) return;
+        if (isSubmitting || !workspaceSlug || !projectId) return
 
-        reset({ ...defaultValues });
+        reset({ ...defaultValues })
 
         const payload = createIssuePayload(projectId.toString(), {
             ...(prePopulatedData ?? {}),
             ...formData,
-        });
+        })
 
         try {
             quickAddCallback &&
@@ -110,27 +106,27 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
                         eventName: ISSUE_CREATED,
                         payload: { ...res, state: "SUCCESS", element: "Kanban quick add" },
                         path: router.asPath,
-                    });
-                }));
+                    })
+                }))
             toast.error({
                 type: "success",
                 title: "Success!",
                 message: "Issue created successfully.",
-            });
+            })
         } catch (err: any) {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Kanban quick add" },
                 path: router.asPath,
-            });
-            console.error(err);
+            })
+            console.error(err)
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: err?.message || "Some error occurred. Please try again.",
-            });
+            })
         }
-    };
+    }
 
     return (
         <>
@@ -160,5 +156,5 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
                 </div>
             )}
         </>
-    );
-});
+    )
+})

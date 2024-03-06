@@ -1,54 +1,50 @@
-import { useState, FC } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { ChevronDown, Dot, XCircle } from "lucide-react";
-
-import { useEventTracker, useMember, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { ConfirmWorkspaceMemberRemove } from "@components/workspace";
-
-import { CustomSelect, Tooltip } from "@servcy/ui";
-
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
-import { WORKSPACE_MEMBER_lEAVE } from "@constants/event-tracker";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC, useState } from "react"
+import { ConfirmWorkspaceMemberRemove } from "@components/workspace"
+import { WORKSPACE_MEMBER_lEAVE } from "@constants/event-tracker"
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+import { useEventTracker, useMember, useUser } from "@hooks/store"
+import { ChevronDown, Dot, XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { CustomSelect, Tooltip } from "@servcy/ui"
 
 type Props = {
-    memberId: string;
-};
+    memberId: string
+}
 
 export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
-    const { memberId } = props;
+    const { memberId } = props
     // states
-    const [removeMemberModal, setRemoveMemberModal] = useState(false);
+    const [removeMemberModal, setRemoveMemberModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         currentUser,
         currentUserSettings,
         membership: { currentWorkspaceRole, leaveWorkspace },
-    } = useUser();
+    } = useUser()
     const {
         workspace: { updateMember, removeMemberFromWorkspace, getWorkspaceMemberDetails },
-    } = useMember();
-    const { captureEvent } = useEventTracker();
+    } = useMember()
+    const { captureEvent } = useEventTracker()
 
     // derived values
-    const memberDetails = getWorkspaceMemberDetails(memberId);
+    const memberDetails = getWorkspaceMemberDetails(memberId)
 
     const handleLeaveWorkspace = async () => {
-        if (!workspaceSlug || !currentUserSettings) return;
+        if (!workspaceSlug || !currentUserSettings) return
 
         await leaveWorkspace(workspaceSlug.toString())
             .then(() => {
                 captureEvent(WORKSPACE_MEMBER_lEAVE, {
                     state: "SUCCESS",
                     element: "Workspace settings members page",
-                });
-                router.push("/profile");
+                })
+                router.push("/profile")
             })
             .catch((err) =>
                 toast.error({
@@ -56,11 +52,11 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                     title: "Error",
                     message: err?.error || "Something went wrong. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     const handleRemoveMember = async () => {
-        if (!workspaceSlug || !memberDetails) return;
+        if (!workspaceSlug || !memberDetails) return
 
         await removeMemberFromWorkspace(workspaceSlug.toString(), memberDetails.member.id).catch((err) =>
             toast.error({
@@ -68,20 +64,20 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                 title: "Error",
                 message: err?.error || "Something went wrong. Please try again.",
             })
-        );
-    };
+        )
+    }
 
     const handleRemove = async () => {
-        if (memberDetails?.member.id === currentUser?.id) await handleLeaveWorkspace();
-        else await handleRemoveMember();
-    };
+        if (memberDetails?.member.id === currentUser?.id) await handleLeaveWorkspace()
+        else await handleRemoveMember()
+    }
 
-    if (!memberDetails) return null;
+    if (!memberDetails) return null
 
     // is the member current logged in user
-    const isCurrentUser = memberDetails?.member.id === currentUser?.id;
+    const isCurrentUser = memberDetails?.member.id === currentUser?.id
     // is the current logged in user admin
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN;
+    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
     // role change access-
     // 1. user cannot change their own role
     // 2. only admin or member can change role
@@ -90,7 +86,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
         currentWorkspaceRole &&
         !isCurrentUser &&
         [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole) &&
-        memberDetails.role <= currentWorkspaceRole;
+        memberDetails.role <= currentWorkspaceRole
 
     return (
         <>
@@ -159,7 +155,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                         }
                         value={memberDetails.role}
                         onChange={(value: EUserWorkspaceRoles) => {
-                            if (!workspaceSlug || !value) return;
+                            if (!workspaceSlug || !value) return
 
                             updateMember(workspaceSlug.toString(), memberDetails.member.id, {
                                 role: value,
@@ -168,8 +164,8 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                                     type: "error",
                                     title: "Error!",
                                     message: "An error occurred while updating member role. Please try again.",
-                                });
-                            });
+                                })
+                            })
                         }}
                         disabled={!hasRoleChangeAccess}
                         placement="bottom-end"
@@ -180,13 +176,13 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                                 currentWorkspaceRole !== 20 &&
                                 currentWorkspaceRole < parseInt(key)
                             )
-                                return null;
+                                return null
 
                             return (
                                 <CustomSelect.Option key={key} value={parseInt(key, 10)}>
                                     <>{ROLE[parseInt(key) as keyof typeof ROLE]}</>
                                 </CustomSelect.Option>
-                            );
+                            )
                         })}
                     </CustomSelect>
                     <Tooltip
@@ -208,5 +204,5 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

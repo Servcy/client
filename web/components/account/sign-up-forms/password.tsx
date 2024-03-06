@@ -1,38 +1,34 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { Eye, EyeOff, XCircle } from "lucide-react";
-
-import { AuthService } from "@services/auth.service";
-import toast from "react-hot-toast";
-
-import { Button, Input } from "@servcy/ui";
-
-import { checkEmailValidity } from "@helpers/string.helper";
-
-import { IPasswordSignInData } from "@servcy/types";
+import Link from "next/link"
+import React, { useState } from "react"
+import { checkEmailValidity } from "@helpers/string.helper"
+import { AuthService } from "@services/auth.service"
+import { Eye, EyeOff, XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IPasswordSignInData } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    onSubmit: () => Promise<void>;
-};
+    onSubmit: () => Promise<void>
+}
 
 type TPasswordFormValues = {
-    email: string;
-    password: string;
-};
+    email: string
+    password: string
+}
 
 const defaultValues: TPasswordFormValues = {
     email: "",
     password: "",
-};
+}
 
-const authService = new AuthService();
+const authService = new AuthService()
 
 export const SignUpPasswordForm: React.FC<Props> = observer((props) => {
-    const { onSubmit } = props;
+    const { onSubmit } = props
     // states
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
 
     // form info
     const {
@@ -45,13 +41,13 @@ export const SignUpPasswordForm: React.FC<Props> = observer((props) => {
         },
         mode: "onChange",
         reValidateMode: "onChange",
-    });
+    })
 
     const handleFormSubmit = async (formData: TPasswordFormValues) => {
         const payload: IPasswordSignInData = {
             email: formData.email,
             password: formData.password,
-        };
+        }
 
         await authService
             .passwordSignIn(payload)
@@ -62,8 +58,8 @@ export const SignUpPasswordForm: React.FC<Props> = observer((props) => {
                     title: "Error!",
                     message: err?.error ?? "Something went wrong. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     return (
         <>
@@ -162,5 +158,5 @@ export const SignUpPasswordForm: React.FC<Props> = observer((props) => {
                 </p>
             </form>
         </>
-    );
-});
+    )
+})

@@ -1,43 +1,38 @@
-import { Fragment, ReactNode, useEffect, useRef, useState } from "react";
-import { Combobox } from "@headlessui/react";
-import { usePopper } from "react-popper";
-import { Check, ChevronDown, Search } from "lucide-react";
-import { useTheme } from "next-themes";
-
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { PriorityIcon, Tooltip } from "@servcy/ui";
-
-import { cn } from "@helpers/common.helper";
-
-import { TIssuePriorities } from "@servcy/types";
-import { TDropdownProps } from "./types";
-
-import { ISSUE_PRIORITIES } from "@constants/issue";
-import { BACKGROUND_BUTTON_VARIANTS, BORDER_BUTTON_VARIANTS, BUTTON_VARIANTS_WITHOUT_TEXT } from "./constants";
+import { Fragment, ReactNode, useEffect, useRef, useState } from "react"
+import { ISSUE_PRIORITIES } from "@constants/issue"
+import { Combobox } from "@headlessui/react"
+import { cn } from "@helpers/common.helper"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { Check, ChevronDown, Search } from "lucide-react"
+import { useTheme } from "next-themes"
+import { usePopper } from "react-popper"
+import { TIssuePriorities } from "@servcy/types"
+import { PriorityIcon, Tooltip } from "@servcy/ui"
+import { BACKGROUND_BUTTON_VARIANTS, BORDER_BUTTON_VARIANTS, BUTTON_VARIANTS_WITHOUT_TEXT } from "./constants"
+import { TDropdownProps } from "./types"
 
 type Props = TDropdownProps & {
-    button?: ReactNode;
-    dropdownArrow?: boolean;
-    dropdownArrowClassName?: string;
-    highlightUrgent?: boolean;
-    onChange: (val: TIssuePriorities) => void;
-    onClose?: () => void;
-    value: TIssuePriorities;
-};
+    button?: ReactNode
+    dropdownArrow?: boolean
+    dropdownArrowClassName?: string
+    highlightUrgent?: boolean
+    onChange: (val: TIssuePriorities) => void
+    onClose?: () => void
+    value: TIssuePriorities
+}
 
 type ButtonProps = {
-    className?: string;
-    dropdownArrow: boolean;
-    dropdownArrowClassName: string;
-    hideIcon?: boolean;
-    hideText?: boolean;
-    isActive?: boolean;
-    highlightUrgent: boolean;
-    priority: TIssuePriorities;
-    showTooltip: boolean;
-};
+    className?: string
+    dropdownArrow: boolean
+    dropdownArrowClassName: string
+    hideIcon?: boolean
+    hideText?: boolean
+    isActive?: boolean
+    highlightUrgent: boolean
+    priority: TIssuePriorities
+    showTooltip: boolean
+}
 
 const BorderButton = (props: ButtonProps) => {
     const {
@@ -49,9 +44,9 @@ const BorderButton = (props: ButtonProps) => {
         highlightUrgent,
         priority,
         showTooltip,
-    } = props;
+    } = props
 
-    const priorityDetails = ISSUE_PRIORITIES.find((p) => p.key === priority);
+    const priorityDetails = ISSUE_PRIORITIES.find((p) => p.key === priority)
 
     const priorityClasses = {
         urgent: "bg-red-500/20 text-red-950 border-red-500",
@@ -59,7 +54,7 @@ const BorderButton = (props: ButtonProps) => {
         medium: "bg-yellow-500/20 text-yellow-950 border-yellow-500",
         low: "bg-custom-primary-100/20 text-custom-primary-950 border-custom-primary-100",
         none: "hover:bg-custom-background-80 border-custom-border-300",
-    };
+    }
 
     return (
         <Tooltip tooltipHeading="Priority" tooltipContent={priorityDetails?.title ?? "None"} disabled={!showTooltip}>
@@ -108,8 +103,8 @@ const BorderButton = (props: ButtonProps) => {
                 )}
             </div>
         </Tooltip>
-    );
-};
+    )
+}
 
 const BackgroundButton = (props: ButtonProps) => {
     const {
@@ -121,9 +116,9 @@ const BackgroundButton = (props: ButtonProps) => {
         highlightUrgent,
         priority,
         showTooltip,
-    } = props;
+    } = props
 
-    const priorityDetails = ISSUE_PRIORITIES.find((p) => p.key === priority);
+    const priorityDetails = ISSUE_PRIORITIES.find((p) => p.key === priority)
 
     const priorityClasses = {
         urgent: "bg-red-500/20 text-red-950",
@@ -131,7 +126,7 @@ const BackgroundButton = (props: ButtonProps) => {
         medium: "bg-yellow-500/20 text-yellow-950",
         low: "bg-blue-500/20 text-blue-950",
         none: "bg-custom-background-80",
-    };
+    }
 
     return (
         <Tooltip tooltipHeading="Priority" tooltipContent={priorityDetails?.title ?? "None"} disabled={!showTooltip}>
@@ -180,8 +175,8 @@ const BackgroundButton = (props: ButtonProps) => {
                 )}
             </div>
         </Tooltip>
-    );
-};
+    )
+}
 
 const TransparentButton = (props: ButtonProps) => {
     const {
@@ -194,9 +189,9 @@ const TransparentButton = (props: ButtonProps) => {
         highlightUrgent,
         priority,
         showTooltip,
-    } = props;
+    } = props
 
-    const priorityDetails = ISSUE_PRIORITIES.find((p) => p.key === priority);
+    const priorityDetails = ISSUE_PRIORITIES.find((p) => p.key === priority)
 
     const priorityClasses = {
         urgent: "text-red-950",
@@ -204,7 +199,7 @@ const TransparentButton = (props: ButtonProps) => {
         medium: "text-yellow-950",
         low: "text-blue-950",
         none: "hover:text-custom-text-300",
-    };
+    }
 
     return (
         <Tooltip tooltipHeading="Priority" tooltipContent={priorityDetails?.title ?? "None"} disabled={!showTooltip}>
@@ -254,8 +249,8 @@ const TransparentButton = (props: ButtonProps) => {
                 )}
             </div>
         </Tooltip>
-    );
-};
+    )
+}
 
 export const PriorityDropdown: React.FC<Props> = (props) => {
     const {
@@ -275,16 +270,16 @@ export const PriorityDropdown: React.FC<Props> = (props) => {
         showTooltip = false,
         tabIndex,
         value,
-    } = props;
+    } = props
     // states
-    const [query, setQuery] = useState("");
-    const [isOpen, setIsOpen] = useState(false);
+    const [query, setQuery] = useState("")
+    const [isOpen, setIsOpen] = useState(false)
     // refs
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
     // popper-js refs
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
     // popper-js init
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: placement ?? "bottom-start",
@@ -296,10 +291,10 @@ export const PriorityDropdown: React.FC<Props> = (props) => {
                 },
             },
         ],
-    });
+    })
     // next-themes
     // TODO: remove this after new theming implementation
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
 
     const options = ISSUE_PRIORITIES.map((priority) => ({
         value: priority.key,
@@ -310,55 +305,55 @@ export const PriorityDropdown: React.FC<Props> = (props) => {
                 <span className="flex-grow truncate">{priority.title}</span>
             </div>
         ),
-    }));
+    }))
 
     const filteredOptions =
-        query === "" ? options : options.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()));
+        query === "" ? options : options.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()))
 
     const handleClose = () => {
-        if (!isOpen) return;
-        setIsOpen(false);
-        onClose && onClose();
-    };
+        if (!isOpen) return
+        setIsOpen(false)
+        onClose && onClose()
+    }
 
     const toggleDropdown = () => {
-        setIsOpen((prevIsOpen) => !prevIsOpen);
-        if (isOpen) onClose && onClose();
-    };
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+        if (isOpen) onClose && onClose()
+    }
 
     const dropdownOnChange = (val: TIssuePriorities) => {
-        onChange(val);
-        handleClose();
-    };
+        onChange(val)
+        handleClose()
+    }
 
-    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose);
+    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        toggleDropdown();
-    };
+        e.stopPropagation()
+        e.preventDefault()
+        toggleDropdown()
+    }
 
     const searchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (query !== "" && e.key === "Escape") {
-            e.stopPropagation();
-            setQuery("");
+            e.stopPropagation()
+            setQuery("")
         }
-    };
+    }
 
-    useOutsideClickDetector(dropdownRef, handleClose);
+    useOutsideClickDetector(dropdownRef, handleClose)
 
     const ButtonToRender = BORDER_BUTTON_VARIANTS.includes(buttonVariant)
         ? BorderButton
         : BACKGROUND_BUTTON_VARIANTS.includes(buttonVariant)
           ? BackgroundButton
-          : TransparentButton;
+          : TransparentButton
 
     useEffect(() => {
         if (isOpen && inputRef.current) {
-            inputRef.current.focus();
+            inputRef.current.focus()
         }
-    }, [isOpen]);
+    }, [isOpen])
 
     return (
         <Combobox
@@ -465,5 +460,5 @@ export const PriorityDropdown: React.FC<Props> = (props) => {
                 </Combobox.Options>
             )}
         </Combobox>
-    );
-};
+    )
+}

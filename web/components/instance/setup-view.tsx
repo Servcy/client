@@ -1,24 +1,22 @@
-import { useEffect, useCallback } from "react";
-import { observer } from "mobx-react-lite";
-import Image from "next/image";
-
-import { InstanceSetupFormRoot } from "@components/instance";
-
-import { useUser } from "@hooks/store";
+import Image from "next/image"
+import { useCallback, useEffect } from "react"
+import { InstanceSetupFormRoot } from "@components/instance"
+import { useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
 // images
-import ServcyLogo from "public/logo.png";
+import ServcyLogo from "public/logo.png"
 
 export const InstanceSetupView = observer(() => {
     // store hooks
-    const { fetchCurrentUser } = useUser();
+    const { fetchCurrentUser } = useUser()
 
     const mutateUserInfo = useCallback(() => {
-        fetchCurrentUser();
-    }, [fetchCurrentUser]);
+        fetchCurrentUser()
+    }, [fetchCurrentUser])
 
     useEffect(() => {
-        mutateUserInfo();
-    }, [mutateUserInfo]);
+        mutateUserInfo()
+    }, [mutateUserInfo])
 
     return (
         <>
@@ -32,5 +30,5 @@ export const InstanceSetupView = observer(() => {
                 <InstanceSetupFormRoot />
             </div>
         </>
-    );
-});
+    )
+})

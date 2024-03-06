@@ -1,12 +1,10 @@
-import { Triangle } from "lucide-react";
-
-import { IDefaultAnalyticsResponse, TStateGroups } from "@servcy/types";
-
-import { STATE_GROUPS } from "@constants/state";
+import { STATE_GROUPS } from "@constants/state"
+import { Triangle } from "lucide-react"
+import { IDefaultAnalyticsResponse, TStateGroups } from "@servcy/types"
 
 type Props = {
-    defaultAnalytics: IDefaultAnalyticsResponse;
-};
+    defaultAnalytics: IDefaultAnalyticsResponse
+}
 
 export const AnalyticsDemand: React.FC<Props> = ({ defaultAnalytics }) => (
     <div className="space-y-3 rounded-[10px] border border-custom-border-200 p-3">
@@ -17,7 +15,7 @@ export const AnalyticsDemand: React.FC<Props> = ({ defaultAnalytics }) => (
         </div>
         <div className="space-y-6">
             {defaultAnalytics?.open_issues_classified.map((group) => {
-                const percentage = ((group.state_count / defaultAnalytics.total_issues) * 100).toFixed(0);
+                const percentage = ((group.state_count / defaultAnalytics.total_issues) * 100).toFixed(0)
 
                 return (
                     <div key={group.state_group} className="space-y-2">
@@ -46,7 +44,7 @@ export const AnalyticsDemand: React.FC<Props> = ({ defaultAnalytics }) => (
                             />
                         </div>
                     </div>
-                );
+                )
             })}
         </div>
         <div className="!mt-6 flex w-min items-center gap-2 whitespace-nowrap rounded-md border border-custom-border-200 bg-custom-background-80 p-2 text-xs">
@@ -59,4 +57,4 @@ export const AnalyticsDemand: React.FC<Props> = ({ defaultAnalytics }) => (
             </p>
         </div>
     </div>
-);
+)

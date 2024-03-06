@@ -1,27 +1,24 @@
-import { FC } from "react";
-import { Controller, useForm } from "react-hook-form";
-
-import { Button, Input } from "@servcy/ui";
-
-import { IInstance, IInstanceAdmin } from "@servcy/types";
-
-import { useApplication } from "@hooks/store";
-import toast from "react-hot-toast";
+import { FC } from "react"
+import { useApplication } from "@hooks/store"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IInstance, IInstanceAdmin } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 export interface IInstanceGeneralForm {
-    instance: IInstance;
-    instanceAdmins: IInstanceAdmin[];
+    instance: IInstance
+    instanceAdmins: IInstanceAdmin[]
 }
 
 export interface GeneralFormValues {
-    instance_name: string;
+    instance_name: string
     // is_telemetry_enabled: boolean;
 }
 
 export const InstanceGeneralForm: FC<IInstanceGeneralForm> = (props) => {
-    const { instance, instanceAdmins } = props;
+    const { instance, instanceAdmins } = props
     // store hooks
-    const { instance: instanceStore } = useApplication();
+    const { instance: instanceStore } = useApplication()
     // toast
 
     // form data
@@ -34,10 +31,10 @@ export const InstanceGeneralForm: FC<IInstanceGeneralForm> = (props) => {
             instance_name: instance.instance_name,
             // is_telemetry_enabled: instance.is_telemetry_enabled,
         },
-    });
+    })
 
     const onSubmit = async (formData: GeneralFormValues) => {
-        const payload: Partial<GeneralFormValues> = { ...formData };
+        const payload: Partial<GeneralFormValues> = { ...formData }
 
         await instanceStore
             .updateInstanceInfo(payload)
@@ -48,8 +45,8 @@ export const InstanceGeneralForm: FC<IInstanceGeneralForm> = (props) => {
                     message: "Settings updated successfully",
                 })
             )
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
     return (
         <>
@@ -123,5 +120,5 @@ export const InstanceGeneralForm: FC<IInstanceGeneralForm> = (props) => {
                 </Button>
             </div>
         </>
-    );
-};
+    )
+}

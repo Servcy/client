@@ -1,21 +1,19 @@
-import React from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-
-import { useUser } from "@hooks/store";
-
-import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React from "react"
+import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
+import { useUser } from "@hooks/store"
 
 export const WorkspaceSettingsSidebar = () => {
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // mobx store
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
 
-    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST;
+    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST
 
     return (
         <div className="flex w-80 flex-col gap-6 px-5">
@@ -43,5 +41,5 @@ export const WorkspaceSettingsSidebar = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

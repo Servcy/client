@@ -1,22 +1,20 @@
-import Image from "next/image";
-import { useTheme } from "next-themes";
-
-import { TIssuesListTypes } from "@servcy/types";
-
-import { CREATED_ISSUES_EMPTY_STATES } from "@constants/dashboard";
+import Image from "next/image"
+import { CREATED_ISSUES_EMPTY_STATES } from "@constants/dashboard"
+import { useTheme } from "next-themes"
+import { TIssuesListTypes } from "@servcy/types"
 
 type Props = {
-    type: TIssuesListTypes;
-};
+    type: TIssuesListTypes
+}
 
 export const CreatedIssuesEmptyState: React.FC<Props> = (props) => {
-    const { type } = props;
+    const { type } = props
     // next-themes
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
 
-    const typeDetails = CREATED_ISSUES_EMPTY_STATES[type];
+    const typeDetails = CREATED_ISSUES_EMPTY_STATES[type]
 
-    const image = resolvedTheme === "dark" ? typeDetails.darkImage : typeDetails.lightImage;
+    const image = resolvedTheme === "dark" ? typeDetails.darkImage : typeDetails.lightImage
 
     return (
         <div className="text-center space-y-6 flex flex-col items-center">
@@ -25,5 +23,5 @@ export const CreatedIssuesEmptyState: React.FC<Props> = (props) => {
             </div>
             <p className="text-sm font-medium text-custom-text-300 whitespace-pre-line">{typeDetails.title}</p>
         </div>
-    );
-};
+    )
+}

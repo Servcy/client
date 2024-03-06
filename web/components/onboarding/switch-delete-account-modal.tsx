@@ -1,45 +1,44 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { mutate } from "swr";
-import { useTheme } from "next-themes";
-import { Dialog, Transition } from "@headlessui/react";
-import { Trash2 } from "lucide-react";
-
-import { useUser } from "@hooks/store";
-import toast from "react-hot-toast";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useUser } from "@hooks/store"
+import { Trash2 } from "lucide-react"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
+import { mutate } from "swr"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-};
+    isOpen: boolean
+    onClose: () => void
+}
 
 export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
-    const { isOpen, onClose } = props;
+    const { isOpen, onClose } = props
     // states
-    const [switchingAccount, setSwitchingAccount] = useState(false);
-    const [isDeactivating, setIsDeactivating] = useState(false);
+    const [switchingAccount, setSwitchingAccount] = useState(false)
+    const [isDeactivating, setIsDeactivating] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { deactivateAccount, signOut } = useUser();
+    const { deactivateAccount, signOut } = useUser()
 
-    const { resolvedTheme, setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme()
 
     const handleClose = () => {
-        setSwitchingAccount(false);
-        setIsDeactivating(false);
-        onClose();
-    };
+        setSwitchingAccount(false)
+        setIsDeactivating(false)
+        onClose()
+    }
 
     const handleSwitchAccount = async () => {
-        setSwitchingAccount(true);
+        setSwitchingAccount(true)
 
         await signOut()
             .then(() => {
-                mutate("CURRENT_USER_DETAILS", null);
-                setTheme("system");
-                router.push("/");
-                handleClose();
+                mutate("CURRENT_USER_DETAILS", null)
+                setTheme("system")
+                router.push("/")
+                handleClose()
             })
             .catch(() =>
                 toast.error({
@@ -48,11 +47,11 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
                     message: "Failed to sign out. Please try again.",
                 })
             )
-            .finally(() => setSwitchingAccount(false));
-    };
+            .finally(() => setSwitchingAccount(false))
+    }
 
     const handleDeactivateAccount = async () => {
-        setIsDeactivating(true);
+        setIsDeactivating(true)
 
         await deactivateAccount()
             .then(() => {
@@ -60,11 +59,11 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
                     type: "success",
                     title: "Success!",
                     message: "Account deleted successfully.",
-                });
-                mutate("CURRENT_USER_DETAILS", null);
-                setTheme("system");
-                router.push("/");
-                handleClose();
+                })
+                mutate("CURRENT_USER_DETAILS", null)
+                setTheme("system")
+                router.push("/")
+                handleClose()
             })
             .catch((err) =>
                 toast.error({
@@ -73,8 +72,8 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
                     message: err?.error,
                 })
             )
-            .finally(() => setIsDeactivating(false));
-    };
+            .finally(() => setIsDeactivating(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -161,5 +160,5 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

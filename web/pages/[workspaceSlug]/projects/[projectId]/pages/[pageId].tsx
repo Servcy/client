@@ -1,57 +1,50 @@
-import { Sparkle } from "lucide-react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import useSWR from "swr";
+import { useRouter } from "next/router"
+import { ReactElement, useEffect, useRef, useState } from "react"
+import { GptAssistantPopover, PageHead } from "@components/core"
+import { PageDetailsHeader } from "@components/headers/page-details"
+import { IssuePeekOverview } from "@components/issues"
+import { EUserProjectRoles } from "@constants/project"
+import { useApplication, usePage, useUser, useWorkspace } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+import useReloadConfirmations from "@hooks/use-reload-confirmation"
+import { AppLayout } from "@layouts/app-layout"
+import { FileService } from "@services/file.service"
+import { Sparkle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import useSWR from "swr"
+import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor"
+import { IPage } from "@servcy/types"
+import { Spinner } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
-import { useApplication, usePage, useUser, useWorkspace } from "@hooks/store";
-import useReloadConfirmations from "@hooks/use-reload-confirmation";
-import toast from "react-hot-toast";
-
-import { FileService } from "@services/file.service";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { GptAssistantPopover, PageHead } from "@components/core";
-import { PageDetailsHeader } from "@components/headers/page-details";
-
-import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor";
-import { Spinner } from "@servcy/ui";
-
-import { NextPageWithLayout } from "@/types/types";
-import { IPage } from "@servcy/types";
-
-import { IssuePeekOverview } from "@components/issues";
-import { EUserProjectRoles } from "@constants/project";
-import { useProjectPages } from "@hooks/store/use-project-specific-pages";
-
-const fileService = new FileService();
+const fileService = new FileService()
 
 const PageDetailsPage: NextPageWithLayout = observer(() => {
     // states
-    const [gptModalOpen, setGptModal] = useState(false);
+    const [gptModalOpen, setGptModal] = useState(false)
     // refs
-    const editorRef = useRef<any>(null);
+    const editorRef = useRef<any>(null)
     // router
-    const router = useRouter();
+    const router = useRouter()
 
-    const { workspaceSlug, projectId, pageId } = router.query;
-    const workspaceStore = useWorkspace();
-    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string;
+    const { workspaceSlug, projectId, pageId } = router.query
+    const workspaceStore = useWorkspace()
+    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
 
     // store hooks
     const {
         config: { envConfig },
-    } = useApplication();
+    } = useApplication()
     const {
         currentUser,
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
     const { handleSubmit, setValue, watch, getValues, control, reset } = useForm<IPage>({
         defaultValues: { name: "", description_html: "" },
-    });
+    })
 
     const {
         archivePage: archivePageAction,
@@ -61,7 +54,7 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
         projectArchivedPageMap,
         fetchProjectPages,
         fetchArchivedProjectPages,
-    } = useProjectPages();
+    } = useProjectPages()
 
     useSWR(
         workspaceSlug && projectId ? `ALL_PAGES_LIST_${projectId}` : null,
@@ -71,7 +64,7 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
             !projectArchivedPageMap[projectId as string]
             ? () => fetchProjectPages(workspaceSlug.toString(), projectId.toString())
             : null
-    );
+    )
     // fetching archived pages from API
     useSWR(
         workspaceSlug && projectId ? `ALL_ARCHIVED_PAGES_LIST_${projectId}` : null,
@@ -81,32 +74,32 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
             !projectPageMap[projectId as string]
             ? () => fetchArchivedProjectPages(workspaceSlug.toString(), projectId.toString())
             : null
-    );
+    )
 
-    const pageStore = usePage(pageId as string);
+    const pageStore = usePage(pageId as string)
 
-    const { setShowAlert } = useReloadConfirmations(pageStore?.isSubmitting === "submitting");
+    const { setShowAlert } = useReloadConfirmations(pageStore?.isSubmitting === "submitting")
 
     useEffect(
         () => () => {
             if (pageStore) {
-                pageStore.cleanup();
+                pageStore.cleanup()
             }
         },
         [pageStore]
-    );
+    )
 
     if (!pageStore) {
         return (
             <div className="grid h-full w-full place-items-center">
                 <Spinner />
             </div>
-        );
+        )
     }
 
     // We need to get the values of title and description from the page store but we don't have to subscribe to those values
-    const pageTitle = pageStore?.name;
-    const pageDescription = pageStore?.description_html;
+    const pageTitle = pageStore?.name
+    const pageDescription = pageStore?.description_html
     const {
         lockPage: lockPageAction,
         unlockPage: unlockPageAction,
@@ -122,137 +115,137 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
         created_by,
         updated_at,
         updated_by,
-    } = pageStore;
+    } = pageStore
 
     const updatePage = async (formData: IPage) => {
-        if (!workspaceSlug || !projectId || !pageId) return;
-        await updateDescriptionAction(formData.description_html);
-    };
+        if (!workspaceSlug || !projectId || !pageId) return
+        await updateDescriptionAction(formData.description_html)
+    }
 
     const handleAiAssistance = async (response: string) => {
-        if (!workspaceSlug || !projectId || !pageId) return;
+        if (!workspaceSlug || !projectId || !pageId) return
 
-        const newDescription = `${watch("description_html")}<p>${response}</p>`;
-        setValue("description_html", newDescription);
-        editorRef.current?.setEditorValue(newDescription);
-        updateDescriptionAction(newDescription);
-    };
+        const newDescription = `${watch("description_html")}<p>${response}</p>`
+        setValue("description_html", newDescription)
+        editorRef.current?.setEditorValue(newDescription)
+        updateDescriptionAction(newDescription)
+    }
 
     const actionCompleteAlert = ({
         title,
         message,
         type,
     }: {
-        title: string;
-        message: string;
-        type: "success" | "error" | "warning" | "info";
+        title: string
+        message: string
+        type: "success" | "error" | "warning" | "info"
     }) => {
         toast.error({
             title,
             message,
             type,
-        });
-    };
+        })
+    }
 
     const updatePageTitle = (title: string) => {
-        if (!workspaceSlug || !projectId || !pageId) return;
-        updateNameAction(title);
-    };
+        if (!workspaceSlug || !projectId || !pageId) return
+        updateNameAction(title)
+    }
 
     const createPage = async (payload: Partial<IPage>) => {
-        if (!workspaceSlug || !projectId) return;
-        await createPageAction(workspaceSlug as string, projectId as string, payload);
-    };
+        if (!workspaceSlug || !projectId) return
+        await createPageAction(workspaceSlug as string, projectId as string, payload)
+    }
 
     // ================ Page Menu Actions ==================
     const duplicate_page = async () => {
-        const currentPageValues = getValues();
+        const currentPageValues = getValues()
 
         if (!currentPageValues?.description_html) {
             // TODO: We need to get latest data the above variable will give us stale data
-            currentPageValues.description_html = pageDescription as string;
+            currentPageValues.description_html = pageDescription as string
         }
 
         const formData: Partial<IPage> = {
             name: "Copy of " + pageTitle,
             description_html: currentPageValues.description_html,
-        };
+        }
 
         try {
-            await createPage(formData);
+            await createPage(formData)
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be duplicated`,
                 message: `Sorry, page could not be duplicated, please try again later`,
                 type: "error",
-            });
+            })
         }
-    };
+    }
 
     const archivePage = async () => {
-        if (!workspaceSlug || !projectId || !pageId) return;
+        if (!workspaceSlug || !projectId || !pageId) return
         try {
-            await archivePageAction(workspaceSlug as string, projectId as string, pageId as string);
+            await archivePageAction(workspaceSlug as string, projectId as string, pageId as string)
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be archived`,
                 message: `Sorry, page could not be archived, please try again later`,
                 type: "error",
-            });
+            })
         }
-    };
+    }
 
     const unArchivePage = async () => {
-        if (!workspaceSlug || !projectId || !pageId) return;
+        if (!workspaceSlug || !projectId || !pageId) return
         try {
-            await restorePageAction(workspaceSlug as string, projectId as string, pageId as string);
+            await restorePageAction(workspaceSlug as string, projectId as string, pageId as string)
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be restored`,
                 message: `Sorry, page could not be restored, please try again later`,
                 type: "error",
-            });
+            })
         }
-    };
+    }
 
     const lockPage = async () => {
-        if (!workspaceSlug || !projectId || !pageId) return;
+        if (!workspaceSlug || !projectId || !pageId) return
         try {
-            await lockPageAction();
+            await lockPageAction()
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be locked`,
                 message: `Sorry, page could not be locked, please try again later`,
                 type: "error",
-            });
+            })
         }
-    };
+    }
 
     const unlockPage = async () => {
-        if (!workspaceSlug || !projectId || !pageId) return;
+        if (!workspaceSlug || !projectId || !pageId) return
         try {
-            await unlockPageAction();
+            await unlockPageAction()
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be unlocked`,
                 message: `Sorry, page could not be unlocked, please try again later`,
                 type: "error",
-            });
+            })
         }
-    };
+    }
 
     const isPageReadOnly =
         is_locked ||
         archived_at ||
-        (currentProjectRole && [EUserProjectRoles.VIEWER, EUserProjectRoles.GUEST].includes(currentProjectRole));
+        (currentProjectRole && [EUserProjectRoles.VIEWER, EUserProjectRoles.GUEST].includes(currentProjectRole))
 
-    const isCurrentUserOwner = owned_by === currentUser?.id;
+    const isCurrentUserOwner = owned_by === currentUser?.id
 
     const userCanDuplicate =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
-    const userCanArchive = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN;
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const userCanArchive = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN
     const userCanLock =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return pageIdMobx ? (
         <>
@@ -318,9 +311,9 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
                                         onActionCompleteHandler={actionCompleteAlert}
                                         customClassName="tracking-tight self-center h-full w-full right-[0.675rem]"
                                         onChange={(_description_json: Object, description_html: string) => {
-                                            setShowAlert(true);
-                                            onChange(description_html);
-                                            handleSubmit(updatePage)();
+                                            setShowAlert(true)
+                                            onChange(description_html)
+                                            handleSubmit(updatePage)()
                                         }}
                                         duplicationConfig={userCanDuplicate ? { action: duplicate_page } : undefined}
                                         pageArchiveConfig={
@@ -343,12 +336,12 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
                                         isOpen={gptModalOpen}
                                         projectId={projectId.toString()}
                                         handleClose={() => {
-                                            setGptModal((prevData) => !prevData);
+                                            setGptModal((prevData) => !prevData)
                                             // this is done so that the title do not reset after gpt popover closed
-                                            reset(getValues());
+                                            reset(getValues())
                                         }}
                                         onResponse={(response) => {
-                                            handleAiAssistance(response);
+                                            handleAiAssistance(response)
                                         }}
                                         placement="top-end"
                                         button={
@@ -375,15 +368,15 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
         <div className="grid h-full w-full place-items-center">
             <Spinner />
         </div>
-    );
-});
+    )
+})
 
 PageDetailsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<PageDetailsHeader />} withProjectWrapper>
             {page}
         </AppLayout>
-    );
-};
+    )
+}
 
-export default PageDetailsPage;
+export default PageDetailsPage

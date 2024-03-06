@@ -1,5 +1,5 @@
-import { differenceInDays, format, formatDistanceToNow, isAfter, isEqual, isValid, parseISO } from "date-fns";
-import { isNil } from "lodash";
+import { differenceInDays, format, formatDistanceToNow, isAfter, isEqual, isValid, parseISO } from "date-fns"
+import { isNil } from "lodash"
 
 // Format Date Helpers
 /**
@@ -9,15 +9,15 @@ import { isNil } from "lodash";
  * @example renderFormattedDate("2024-01-01") // Jan 01, 2024
  */
 export const renderFormattedDate = (date: string | Date): string | null => {
-    if (!date) return null;
+    if (!date) return null
     // Parse the date to check if it is valid
-    const parsedDate = new Date(date);
+    const parsedDate = new Date(date)
     // Check if the parsed date is valid before formatting
-    if (!isValid(parsedDate)) return null; // Return null for invalid dates
+    if (!isValid(parsedDate)) return null // Return null for invalid dates
     // Format the date in format (MMM dd, yyyy)
-    const formattedDate = format(parsedDate, "MMM dd, yyyy");
-    return formattedDate;
-};
+    const formattedDate = format(parsedDate, "MMM dd, yyyy")
+    return formattedDate
+}
 
 /**
  * @returns {string} formatted date in the format of MMM dd
@@ -26,15 +26,15 @@ export const renderFormattedDate = (date: string | Date): string | null => {
  * @example renderShortDateFormat("2024-01-01") // Jan 01
  */
 export const renderFormattedDateWithoutYear = (date: string | Date): string => {
-    if (!date) return "";
+    if (!date) return ""
     // Parse the date to check if it is valid
-    const parsedDate = new Date(date);
+    const parsedDate = new Date(date)
     // Check if the parsed date is valid before formatting
-    if (!isValid(parsedDate)) return ""; // Return empty string for invalid dates
+    if (!isValid(parsedDate)) return "" // Return empty string for invalid dates
     // Format the date in short format (MMM dd)
-    const formattedDate = format(parsedDate, "MMM dd");
-    return formattedDate;
-};
+    const formattedDate = format(parsedDate, "MMM dd")
+    return formattedDate
+}
 
 /**
  * @returns {string | null} formatted date in the format of yyyy-mm-dd to be used in payload
@@ -43,15 +43,15 @@ export const renderFormattedDateWithoutYear = (date: string | Date): string => {
  * @example renderFormattedPayloadDate("Jan 01, 20224") // "2024-01-01"
  */
 export const renderFormattedPayloadDate = (date: Date | string): string | null => {
-    if (!date) return null;
+    if (!date) return null
     // Parse the date to check if it is valid
-    const parsedDate = new Date(date);
+    const parsedDate = new Date(date)
     // Check if the parsed date is valid before formatting
-    if (!isValid(parsedDate)) return null; // Return null for invalid dates
+    if (!isValid(parsedDate)) return null // Return null for invalid dates
     // Format the date in payload format (yyyy-mm-dd)
-    const formattedDate = format(parsedDate, "yyyy-MM-dd");
-    return formattedDate;
-};
+    const formattedDate = format(parsedDate, "yyyy-MM-dd")
+    return formattedDate
+}
 
 // Format Time Helpers
 /**
@@ -63,20 +63,20 @@ export const renderFormattedPayloadDate = (date: Date | string): string | null =
  * @example renderFormattedTime("2024-01-01 13:00:00", "12-hour") // 01:00 PM
  */
 export const renderFormattedTime = (date: string | Date, timeFormat: "12-hour" | "24-hour" = "24-hour"): string => {
-    if (!date || date === "") return "";
+    if (!date || date === "") return ""
     // Parse the date to check if it is valid
-    const parsedDate = new Date(date);
+    const parsedDate = new Date(date)
     // Check if the parsed date is valid
-    if (!isValid(parsedDate)) return ""; // Return empty string for invalid dates
+    if (!isValid(parsedDate)) return "" // Return empty string for invalid dates
     // Format the date in 12 hour format if in12HourFormat is true
     if (timeFormat === "12-hour") {
-        const formattedTime = format(parsedDate, "hh:mm a");
-        return formattedTime;
+        const formattedTime = format(parsedDate, "hh:mm a")
+        return formattedTime
     }
     // Format the date in 24 hour format
-    const formattedTime = format(parsedDate, "HH:mm");
-    return formattedTime;
-};
+    const formattedTime = format(parsedDate, "HH:mm")
+    return formattedTime
+}
 
 // Date Difference Helpers
 /**
@@ -92,17 +92,17 @@ export const findTotalDaysInRange = (
     endDate: Date | string | undefined | null,
     inclusive: boolean = true
 ): number | undefined => {
-    if (!startDate || !endDate) return undefined;
+    if (!startDate || !endDate) return undefined
     // Parse the dates to check if they are valid
-    const parsedStartDate = new Date(startDate);
-    const parsedEndDate = new Date(endDate);
+    const parsedStartDate = new Date(startDate)
+    const parsedEndDate = new Date(endDate)
     // Check if the parsed dates are valid before calculating the difference
-    if (!isValid(parsedStartDate) || !isValid(parsedEndDate)) return 0; // Return 0 for invalid dates
+    if (!isValid(parsedStartDate) || !isValid(parsedEndDate)) return 0 // Return 0 for invalid dates
     // Calculate the difference in days
-    const diffInDays = differenceInDays(parsedEndDate, parsedStartDate);
+    const diffInDays = differenceInDays(parsedEndDate, parsedStartDate)
     // Return the difference in days based on inclusive flag
-    return inclusive ? diffInDays + 1 : diffInDays;
-};
+    return inclusive ? diffInDays + 1 : diffInDays
+}
 
 /**
  * @returns {number} number of days left from today
@@ -115,10 +115,10 @@ export const findHowManyDaysLeft = (
     date: Date | string | undefined | null,
     inclusive: boolean = true
 ): number | undefined => {
-    if (!date) return undefined;
+    if (!date) return undefined
     // Pass the date to findTotalDaysInRange function to find the total number of days in range from today
-    return findTotalDaysInRange(new Date(), date, inclusive);
-};
+    return findTotalDaysInRange(new Date(), date, inclusive)
+}
 
 // Time Difference Helpers
 /**
@@ -128,14 +128,14 @@ export const findHowManyDaysLeft = (
  * @example calculateTimeAgo("2023-01-01") // 1 year ago
  */
 export const calculateTimeAgo = (time: string | number | Date | null): string => {
-    if (!time) return "";
+    if (!time) return ""
     // Parse the time to check if it is valid
-    const parsedTime = typeof time === "string" || typeof time === "number" ? parseISO(String(time)) : time;
-    if (!parsedTime) return ""; // Return empty string for invalid dates
+    const parsedTime = typeof time === "string" || typeof time === "number" ? parseISO(String(time)) : time
+    if (!parsedTime) return "" // Return empty string for invalid dates
     // Format the time in the form of amount of time passed since the event happened
-    const distance = formatDistanceToNow(parsedTime, { addSuffix: true });
-    return distance;
-};
+    const distance = formatDistanceToNow(parsedTime, { addSuffix: true })
+    return distance
+}
 
 // Date Validation Helpers
 /**
@@ -146,15 +146,15 @@ export const calculateTimeAgo = (time: string | number | Date | null): string =>
  */
 export const isDateGreaterThanToday = (dateStr: string): boolean => {
     // Return false if dateStr is not present
-    if (!dateStr) return false;
+    if (!dateStr) return false
     // Parse the date to check if it is valid
-    const date = parseISO(dateStr);
-    const today = new Date();
+    const date = parseISO(dateStr)
+    const today = new Date()
     // Check if the parsed date is valid
-    if (!isValid(date)) return false; // Return false for invalid dates
+    if (!isValid(date)) return false // Return false for invalid dates
     // Return true if the date is greater than today
-    return isAfter(date, today);
-};
+    return isAfter(date, today)
+}
 
 // Week Related Helpers
 /**
@@ -164,15 +164,15 @@ export const isDateGreaterThanToday = (dateStr: string): boolean => {
  * @example getWeekNumber(new Date("2023-09-01")) // 35
  */
 export const getWeekNumberOfDate = (date: Date): number => {
-    const currentDate = new Date(date);
+    const currentDate = new Date(date)
     // Adjust the starting day to Sunday (0) instead of Monday (1)
-    const startDate = new Date(currentDate.getFullYear(), 0, 1);
+    const startDate = new Date(currentDate.getFullYear(), 0, 1)
     // Calculate the number of days between currentDate and startDate
-    const days = Math.floor((currentDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000));
+    const days = Math.floor((currentDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000))
     // Adjust the calculation for weekNumber
-    const weekNumber = Math.ceil((days + 1) / 7);
-    return weekNumber;
-};
+    const weekNumber = Math.ceil((days + 1) / 7)
+    return weekNumber
+}
 
 /**
  * @returns {boolean} boolean value depending on whether the dates are equal
@@ -186,10 +186,10 @@ export const checkIfDatesAreEqual = (
     date1: Date | string | null | undefined,
     date2: Date | string | null | undefined
 ): boolean => {
-    if (isNil(date1) && isNil(date2)) return true;
-    if (isNil(date1) || isNil(date2)) return false;
+    if (isNil(date1) && isNil(date2)) return true
+    if (isNil(date1) || isNil(date2)) return false
 
-    const parsedDate1 = new Date(date1);
-    const parsedDate2 = new Date(date2);
-    return isEqual(parsedDate1, parsedDate2);
-};
+    const parsedDate1 = new Date(date1)
+    const parsedDate2 = new Date(date2)
+    return isEqual(parsedDate1, parsedDate2)
+}

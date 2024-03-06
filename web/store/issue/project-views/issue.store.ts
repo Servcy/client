@@ -1,76 +1,74 @@
-import pull from "lodash/pull";
-import set from "lodash/set";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import { IssueService } from "@services/issue/issue.service"
+import pull from "lodash/pull"
+import set from "lodash/set"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types"
 // base class
-import { IssueHelperStore } from "../helpers/issue-helper.store";
-
-import { IssueService } from "@services/issue/issue.service";
-
-import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types";
-import { IIssueRootStore } from "../root.store";
+import { IssueHelperStore } from "../helpers/issue-helper.store"
+import { IIssueRootStore } from "../root.store"
 
 export interface IProjectViewIssues {
     // observable
-    loader: TLoader;
-    issues: { [view_id: string]: string[] };
-    viewFlags: ViewFlags;
+    loader: TLoader
+    issues: { [view_id: string]: string[] }
+    viewFlags: ViewFlags
     // computed
-    groupedIssueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined;
+    groupedIssueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined
     // actions
     fetchIssues: (
         workspaceSlug: string,
         projectId: string,
         loadType: TLoader,
         viewId?: string | undefined
-    ) => Promise<TIssue[] | undefined>;
+    ) => Promise<TIssue[] | undefined>
     createIssue: (
         workspaceSlug: string,
         projectId: string,
         data: Partial<TIssue>,
         viewId?: string | undefined
-    ) => Promise<TIssue | undefined>;
+    ) => Promise<TIssue | undefined>
     updateIssue: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         data: Partial<TIssue>,
         viewId?: string | undefined
-    ) => Promise<void>;
+    ) => Promise<void>
     removeIssue: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         viewId?: string | undefined
-    ) => Promise<void>;
+    ) => Promise<void>
     archiveIssue: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         viewId?: string | undefined
-    ) => Promise<void>;
+    ) => Promise<void>
     quickAddIssue: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string | undefined
-    ) => Promise<TIssue | undefined>;
+    ) => Promise<TIssue | undefined>
 }
 
 export class ProjectViewIssues extends IssueHelperStore implements IProjectViewIssues {
-    loader: TLoader = "init-loader";
-    issues: { [view_id: string]: string[] } = {};
+    loader: TLoader = "init-loader"
+    issues: { [view_id: string]: string[] } = {}
     viewFlags = {
         enableQuickAdd: true,
         enableIssueCreation: true,
         enableInlineEditing: true,
-    };
+    }
     // root store
-    rootIssueStore: IIssueRootStore;
+    rootIssueStore: IIssueRootStore
 
-    issueService;
+    issueService
 
     constructor(_rootStore: IIssueRootStore) {
-        super(_rootStore);
+        super(_rootStore)
         makeObservable(this, {
             // observable
             loader: observable.ref,
@@ -84,44 +82,44 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
             removeIssue: action,
             archiveIssue: action,
             quickAddIssue: action,
-        });
+        })
         // root store
-        this.rootIssueStore = _rootStore;
+        this.rootIssueStore = _rootStore
 
-        this.issueService = new IssueService();
+        this.issueService = new IssueService()
     }
 
     get groupedIssueIds() {
-        const viewId = this.rootStore?.viewId;
-        if (!viewId) return undefined;
+        const viewId = this.rootStore?.viewId
+        if (!viewId) return undefined
 
-        const displayFilters = this.rootIssueStore?.projectViewIssuesFilter?.issueFilters?.displayFilters;
-        if (!displayFilters) return undefined;
+        const displayFilters = this.rootIssueStore?.projectViewIssuesFilter?.issueFilters?.displayFilters
+        if (!displayFilters) return undefined
 
-        const subGroupBy = displayFilters?.sub_group_by;
-        const groupBy = displayFilters?.group_by;
-        const orderBy = displayFilters?.order_by;
-        const layout = displayFilters?.layout;
+        const subGroupBy = displayFilters?.sub_group_by
+        const groupBy = displayFilters?.group_by
+        const orderBy = displayFilters?.order_by
+        const layout = displayFilters?.layout
 
-        const viewIssueIds = this.issues[viewId];
-        if (!viewIssueIds) return;
+        const viewIssueIds = this.issues[viewId]
+        if (!viewIssueIds) return
 
-        const _issues = this.rootStore.issues.getIssuesByIds(viewIssueIds, "un-archived");
-        if (!_issues) return [];
+        const _issues = this.rootStore.issues.getIssuesByIds(viewIssueIds, "un-archived")
+        if (!_issues) return []
 
-        let issues: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues = [];
+        let issues: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues = []
 
         if (layout === "list" && orderBy) {
-            if (groupBy) issues = this.groupedIssues(groupBy, orderBy, _issues);
-            else issues = this.unGroupedIssues(orderBy, _issues);
+            if (groupBy) issues = this.groupedIssues(groupBy, orderBy, _issues)
+            else issues = this.unGroupedIssues(orderBy, _issues)
         } else if (layout === "kanban" && groupBy && orderBy) {
-            if (subGroupBy) issues = this.subGroupedIssues(subGroupBy, groupBy, orderBy, _issues);
-            else issues = this.groupedIssues(groupBy, orderBy, _issues);
-        } else if (layout === "calendar") issues = this.groupedIssues("target_date", "target_date", _issues, true);
-        else if (layout === "spreadsheet") issues = this.unGroupedIssues(orderBy ?? "-created_at", _issues);
-        else if (layout === "gantt_chart") issues = this.unGroupedIssues(orderBy ?? "sort_order", _issues);
+            if (subGroupBy) issues = this.subGroupedIssues(subGroupBy, groupBy, orderBy, _issues)
+            else issues = this.groupedIssues(groupBy, orderBy, _issues)
+        } else if (layout === "calendar") issues = this.groupedIssues("target_date", "target_date", _issues, true)
+        else if (layout === "spreadsheet") issues = this.unGroupedIssues(orderBy ?? "-created_at", _issues)
+        else if (layout === "gantt_chart") issues = this.unGroupedIssues(orderBy ?? "sort_order", _issues)
 
-        return issues;
+        return issues
     }
 
     fetchIssues = async (
@@ -131,31 +129,31 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         viewId: string | undefined = undefined
     ) => {
         try {
-            if (!viewId) throw new Error("View Id is required");
+            if (!viewId) throw new Error("View Id is required")
 
-            this.loader = loadType;
+            this.loader = loadType
 
-            const params = this.rootIssueStore?.projectViewIssuesFilter?.appliedFilters;
-            const response = await this.issueService.getIssues(workspaceSlug, projectId, params);
+            const params = this.rootIssueStore?.projectViewIssuesFilter?.appliedFilters
+            const response = await this.issueService.getIssues(workspaceSlug, projectId, params)
 
             runInAction(() => {
                 set(
                     this.issues,
                     [viewId],
                     response.map((issue) => issue.id)
-                );
-                this.loader = undefined;
-            });
+                )
+                this.loader = undefined
+            })
 
-            this.rootIssueStore.issues.addIssue(response);
+            this.rootIssueStore.issues.addIssue(response)
 
-            return response;
+            return response
         } catch (error) {
-            console.error(error);
-            this.loader = undefined;
-            throw error;
+            console.error(error)
+            this.loader = undefined
+            throw error
         }
-    };
+    }
 
     createIssue = async (
         workspaceSlug: string,
@@ -164,20 +162,20 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         viewId: string | undefined = undefined
     ) => {
         try {
-            if (!viewId) throw new Error("View Id is required");
+            if (!viewId) throw new Error("View Id is required")
 
-            const response = await this.rootIssueStore.projectIssues.createIssue(workspaceSlug, projectId, data);
+            const response = await this.rootIssueStore.projectIssues.createIssue(workspaceSlug, projectId, data)
 
             runInAction(() => {
-                this.issues[viewId].push(response.id);
-            });
+                this.issues[viewId].push(response.id)
+            })
 
-            return response;
+            return response
         } catch (error) {
-            this.fetchIssues(workspaceSlug, projectId, "mutation");
-            throw error;
+            this.fetchIssues(workspaceSlug, projectId, "mutation")
+            throw error
         }
-    };
+    }
 
     updateIssue = async (
         workspaceSlug: string,
@@ -187,14 +185,14 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         viewId: string | undefined = undefined
     ) => {
         try {
-            if (!viewId) throw new Error("View Id is required");
+            if (!viewId) throw new Error("View Id is required")
 
-            await this.rootIssueStore.projectIssues.updateIssue(workspaceSlug, projectId, issueId, data);
+            await this.rootIssueStore.projectIssues.updateIssue(workspaceSlug, projectId, issueId, data)
         } catch (error) {
-            this.fetchIssues(workspaceSlug, projectId, "mutation");
-            throw error;
+            this.fetchIssues(workspaceSlug, projectId, "mutation")
+            throw error
         }
-    };
+    }
 
     removeIssue = async (
         workspaceSlug: string,
@@ -203,20 +201,20 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         viewId: string | undefined = undefined
     ) => {
         try {
-            if (!viewId) throw new Error("View Id is required");
+            if (!viewId) throw new Error("View Id is required")
 
-            await this.rootIssueStore.projectIssues.removeIssue(workspaceSlug, projectId, issueId);
+            await this.rootIssueStore.projectIssues.removeIssue(workspaceSlug, projectId, issueId)
 
-            const issueIndex = this.issues[viewId].findIndex((_issueId) => _issueId === issueId);
+            const issueIndex = this.issues[viewId].findIndex((_issueId) => _issueId === issueId)
             if (issueIndex >= 0)
                 runInAction(() => {
-                    this.issues[viewId].splice(issueIndex, 1);
-                });
+                    this.issues[viewId].splice(issueIndex, 1)
+                })
         } catch (error) {
-            this.fetchIssues(workspaceSlug, projectId, "mutation");
-            throw error;
+            this.fetchIssues(workspaceSlug, projectId, "mutation")
+            throw error
         }
-    };
+    }
 
     archiveIssue = async (
         workspaceSlug: string,
@@ -225,18 +223,18 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         viewId: string | undefined = undefined
     ) => {
         try {
-            if (!viewId) throw new Error("View Id is required");
+            if (!viewId) throw new Error("View Id is required")
 
-            await this.rootIssueStore.projectIssues.archiveIssue(workspaceSlug, projectId, issueId);
+            await this.rootIssueStore.projectIssues.archiveIssue(workspaceSlug, projectId, issueId)
 
             runInAction(() => {
-                pull(this.issues[viewId], issueId);
-            });
+                pull(this.issues[viewId], issueId)
+            })
         } catch (error) {
-            this.fetchIssues(workspaceSlug, projectId, "mutation");
-            throw error;
+            this.fetchIssues(workspaceSlug, projectId, "mutation")
+            throw error
         }
-    };
+    }
 
     quickAddIssue = async (
         workspaceSlug: string,
@@ -245,26 +243,26 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         viewId: string | undefined = undefined
     ) => {
         try {
-            if (!viewId) throw new Error("View Id is required");
+            if (!viewId) throw new Error("View Id is required")
 
             runInAction(() => {
-                this.issues[viewId].push(data.id);
-                this.rootIssueStore.issues.addIssue([data]);
-            });
+                this.issues[viewId].push(data.id)
+                this.rootIssueStore.issues.addIssue([data])
+            })
 
-            const response = await this.createIssue(workspaceSlug, projectId, data, viewId);
+            const response = await this.createIssue(workspaceSlug, projectId, data, viewId)
 
-            const quickAddIssueIndex = this.issues[viewId].findIndex((_issueId) => _issueId === data.id);
+            const quickAddIssueIndex = this.issues[viewId].findIndex((_issueId) => _issueId === data.id)
             if (quickAddIssueIndex >= 0)
                 runInAction(() => {
-                    this.issues[viewId].splice(quickAddIssueIndex, 1);
-                    this.rootIssueStore.issues.removeIssue(data.id);
-                });
+                    this.issues[viewId].splice(quickAddIssueIndex, 1)
+                    this.rootIssueStore.issues.removeIssue(data.id)
+                })
 
-            return response;
+            return response
         } catch (error) {
-            this.fetchIssues(workspaceSlug, projectId, "mutation");
-            throw error;
+            this.fetchIssues(workspaceSlug, projectId, "mutation")
+            throw error
         }
-    };
+    }
 }

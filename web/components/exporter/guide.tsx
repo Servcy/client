@@ -1,62 +1,53 @@
-import { useState } from "react";
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { Exporter, SingleExport } from "@components/exporter"
+import { ImportExportSettingsLoader } from "@components/ui"
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EXPORT_SERVICES_LIST } from "@constants/fetch-keys"
+import { EXPORTERS_LIST } from "@constants/workspace"
+import { useUser } from "@hooks/store"
+import useUserAuth from "@hooks/use-user-auth"
+import { IntegrationService } from "@services/integrations"
+import { MoveLeft, MoveRight, RefreshCw } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR, { mutate } from "swr"
+import { Button } from "@servcy/ui"
 
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useTheme } from "next-themes";
-import useSWR, { mutate } from "swr";
-import { observer } from "mobx-react-lite";
-
-import { useUser } from "@hooks/store";
-import useUserAuth from "@hooks/use-user-auth";
-
-import { IntegrationService } from "@services/integrations";
-
-import { Exporter, SingleExport } from "@components/exporter";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-
-import { Button } from "@servcy/ui";
-import { ImportExportSettingsLoader } from "@components/ui";
-
-import { MoveLeft, MoveRight, RefreshCw } from "lucide-react";
-
-import { EXPORT_SERVICES_LIST } from "@constants/fetch-keys";
-
-import { EXPORTERS_LIST } from "@constants/workspace";
-
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-
-const integrationService = new IntegrationService();
+const integrationService = new IntegrationService()
 
 const IntegrationGuide = observer(() => {
     // states
-    const [refreshing, setRefreshing] = useState(false);
-    const per_page = 10;
-    const [cursor, setCursor] = useState<string | undefined>(`10:0:0`);
+    const [refreshing, setRefreshing] = useState(false)
+    const per_page = 10
+    const [cursor, setCursor] = useState<string | undefined>(`10:0:0`)
     // router
-    const router = useRouter();
-    const { workspaceSlug, provider } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, provider } = router.query
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { currentUser, currentUserLoader } = useUser();
+    const { currentUser, currentUserLoader } = useUser()
     // custom hooks
-    const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
+    const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader })
 
     const { data: exporterServices } = useSWR(
         workspaceSlug && cursor ? EXPORT_SERVICES_LIST(workspaceSlug as string, cursor, `${per_page}`) : null,
         workspaceSlug && cursor
             ? () => integrationService.getExportsServicesList(workspaceSlug as string, cursor, per_page)
             : null
-    );
+    )
 
-    const emptyStateDetail = WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS["export"];
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("workspace-settings", "exports", isLightMode);
+    const emptyStateDetail = WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS["export"]
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("workspace-settings", "exports", isLightMode)
 
     const handleCsvClose = () => {
-        router.replace(`/${workspaceSlug?.toString()}/settings/exports`);
-    };
+        router.replace(`/${workspaceSlug?.toString()}/settings/exports`)
+    }
 
     return (
         <>
@@ -109,10 +100,10 @@ const IntegrationGuide = observer(() => {
                                     type="button"
                                     className="flex flex-shrink-0 items-center gap-1 rounded bg-custom-background-80 px-1.5 py-1 text-xs outline-none"
                                     onClick={() => {
-                                        setRefreshing(true);
+                                        setRefreshing(true)
                                         mutate(
                                             EXPORT_SERVICES_LIST(workspaceSlug as string, `${cursor}`, `${per_page}`)
-                                        ).then(() => setRefreshing(false));
+                                        ).then(() => setRefreshing(false))
                                     }}
                                 >
                                     <RefreshCw className={`h-3 w-3 ${refreshing ? "animate-spin" : ""}`} />{" "}
@@ -194,7 +185,7 @@ const IntegrationGuide = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})
 
-export default IntegrationGuide;
+export default IntegrationGuide

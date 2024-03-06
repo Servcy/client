@@ -1,14 +1,13 @@
-import React from "react";
-
-import { CircularProgressIndicator } from "@servcy/ui";
+import React from "react"
+import { CircularProgressIndicator } from "@servcy/ui"
 
 type TSingleProgressStatsProps = {
-    title: any;
-    completed: number;
-    total: number;
-    onClick?: () => void;
-    selected?: boolean;
-};
+    title: any
+    completed: number
+    total: number
+    onClick?: () => void
+    selected?: boolean
+}
 
 export const SingleProgressStats: React.FC<TSingleProgressStatsProps> = ({
     title,
@@ -36,4 +35,4 @@ export const SingleProgressStats: React.FC<TSingleProgressStatsProps> = ({
             <span>of {total}</span>
         </div>
     </div>
-);
+)

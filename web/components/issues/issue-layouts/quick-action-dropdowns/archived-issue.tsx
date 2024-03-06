@@ -1,40 +1,37 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { CustomMenu } from "@servcy/ui";
-import { ExternalLink, Link, RotateCcw, Trash2 } from "lucide-react";
-import toast from "react-hot-toast";
-import { useEventTracker, useIssues, useUser } from "@hooks/store";
-
-import { DeleteIssueModal } from "@components/issues";
-
-import { copyUrlToClipboard } from "@helpers/string.helper";
-
-import { IQuickActionProps } from "../list/list-view-types";
-import { EUserProjectRoles } from "@constants/project";
-import { EIssuesStoreType } from "@constants/issue";
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { DeleteIssueModal } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useEventTracker, useIssues, useUser } from "@hooks/store"
+import { ExternalLink, Link, RotateCcw, Trash2 } from "lucide-react"
+import toast from "react-hot-toast"
+import { CustomMenu } from "@servcy/ui"
+import { IQuickActionProps } from "../list/list-view-types"
 
 export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) => {
-    const { issue, handleDelete, handleRestore, customActionButton, portalElement, readOnly = false } = props;
+    const { issue, handleDelete, handleRestore, customActionButton, portalElement, readOnly = false } = props
     // states
-    const [deleteIssueModal, setDeleteIssueModal] = useState(false);
+    const [deleteIssueModal, setDeleteIssueModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { setTrackElement } = useEventTracker();
-    const { issuesFilter } = useIssues(EIssuesStoreType.ARCHIVED);
+    } = useUser()
+    const { setTrackElement } = useEventTracker()
+    const { issuesFilter } = useIssues(EIssuesStoreType.ARCHIVED)
     // derived values
-    const activeLayout = `${issuesFilter.issueFilters?.displayFilters?.layout} layout`;
+    const activeLayout = `${issuesFilter.issueFilters?.displayFilters?.layout} layout`
     // auth
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER && !readOnly;
-    const isRestoringAllowed = handleRestore && isEditingAllowed;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER && !readOnly
+    const isRestoringAllowed = handleRestore && isEditingAllowed
 
-    const issueLink = `${workspaceSlug}/projects/${issue.project_id}/archived-issues/${issue.id}`;
+    const issueLink = `${workspaceSlug}/projects/${issue.project_id}/archived-issues/${issue.id}`
 
-    const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank");
+    const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank")
     const handleCopyIssueLink = () =>
         copyUrlToClipboard(issueLink).then(() =>
             toast.error({
@@ -42,7 +39,7 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
                 title: "Link copied",
                 message: "Issue link copied to clipboard",
             })
-        );
+        )
 
     return (
         <>
@@ -83,8 +80,8 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
                 {isEditingAllowed && (
                     <CustomMenu.MenuItem
                         onClick={() => {
-                            setTrackElement(activeLayout);
-                            setDeleteIssueModal(true);
+                            setTrackElement(activeLayout)
+                            setDeleteIssueModal(true)
                         }}
                     >
                         <div className="flex items-center gap-2">
@@ -95,5 +92,5 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
                 )}
             </CustomMenu>
         </>
-    );
-};
+    )
+}

@@ -1,43 +1,40 @@
-import { MutableRefObject } from "react";
-import { observer } from "mobx-react-lite";
-
-import { KanBan } from "./default";
-import { HeaderSubGroupByCard } from "./headers/sub-group-by-card";
-import { HeaderGroupByCard } from "./headers/group-by-card";
-
+import { MutableRefObject } from "react"
+import { TCreateModalStoreTypes } from "@constants/issue"
+import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store"
+import { observer } from "mobx-react-lite"
 import {
     GroupByColumnTypes,
     IGroupByColumn,
-    TGroupedIssues,
-    TIssue,
     IIssueDisplayProperties,
     IIssueMap,
+    TGroupedIssues,
+    TIssue,
+    TIssueKanbanFilters,
     TSubGroupedIssues,
     TUnGroupedIssues,
-    TIssueKanbanFilters,
-} from "@servcy/types";
-
-import { EIssueActions } from "../types";
-import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store";
-import { getGroupByColumns } from "../utils";
-import { TCreateModalStoreTypes } from "@constants/issue";
+} from "@servcy/types"
+import { EIssueActions } from "../types"
+import { getGroupByColumns } from "../utils"
+import { KanBan } from "./default"
+import { HeaderGroupByCard } from "./headers/group-by-card"
+import { HeaderSubGroupByCard } from "./headers/sub-group-by-card"
 
 interface ISubGroupSwimlaneHeader {
-    issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues;
-    sub_group_by: string | null;
-    group_by: string | null;
-    list: IGroupByColumn[];
-    kanbanFilters: TIssueKanbanFilters;
-    handleKanbanFilters: (toggle: "group_by" | "sub_group_by", value: string) => void;
+    issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues
+    sub_group_by: string | null
+    group_by: string | null
+    list: IGroupByColumn[]
+    kanbanFilters: TIssueKanbanFilters
+    handleKanbanFilters: (toggle: "group_by" | "sub_group_by", value: string) => void
 }
 
 const getSubGroupHeaderIssuesCount = (issueIds: TSubGroupedIssues, groupById: string) => {
-    let headerCount = 0;
+    let headerCount = 0
     Object.keys(issueIds).map((groupState) => {
-        headerCount = headerCount + (issueIds?.[groupState]?.[groupById]?.length || 0);
-    });
-    return headerCount;
-};
+        headerCount = headerCount + (issueIds?.[groupState]?.[groupById]?.length || 0)
+    })
+    return headerCount
+}
 
 const SubGroupSwimlaneHeader: React.FC<ISubGroupSwimlaneHeader> = ({
     issueIds,
@@ -66,31 +63,31 @@ const SubGroupSwimlaneHeader: React.FC<ISubGroupSwimlaneHeader> = ({
                 </div>
             ))}
     </div>
-);
+)
 
 interface ISubGroupSwimlane extends ISubGroupSwimlaneHeader {
-    issuesMap: IIssueMap;
-    issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues;
-    showEmptyGroup: boolean;
-    displayProperties: IIssueDisplayProperties | undefined;
-    handleIssues: (issue: TIssue, action: EIssueActions) => void;
-    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode;
-    kanbanFilters: TIssueKanbanFilters;
-    handleKanbanFilters: (toggle: "group_by" | "sub_group_by", value: string) => void;
-    isDragStarted?: boolean;
-    disableIssueCreation?: boolean;
-    storeType?: TCreateModalStoreTypes;
-    enableQuickIssueCreate: boolean;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    addIssuesToView?: (issueIds: string[]) => Promise<TIssue>;
+    issuesMap: IIssueMap
+    issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues
+    showEmptyGroup: boolean
+    displayProperties: IIssueDisplayProperties | undefined
+    handleIssues: (issue: TIssue, action: EIssueActions) => void
+    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
+    kanbanFilters: TIssueKanbanFilters
+    handleKanbanFilters: (toggle: "group_by" | "sub_group_by", value: string) => void
+    isDragStarted?: boolean
+    disableIssueCreation?: boolean
+    storeType?: TCreateModalStoreTypes
+    enableQuickIssueCreate: boolean
+    canEditProperties: (projectId: string | undefined) => boolean
+    addIssuesToView?: (issueIds: string[]) => Promise<TIssue>
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>;
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>
 }
 const SubGroupSwimlane: React.FC<ISubGroupSwimlane> = observer((props) => {
     const {
@@ -112,17 +109,17 @@ const SubGroupSwimlane: React.FC<ISubGroupSwimlane> = observer((props) => {
         viewId,
         scrollableContainerRef,
         isDragStarted,
-    } = props;
+    } = props
 
     const calculateIssueCount = (column_id: string) => {
-        let issueCount = 0;
-        const subGroupedIds = issueIds as TSubGroupedIssues;
+        let issueCount = 0
+        const subGroupedIds = issueIds as TSubGroupedIssues
         subGroupedIds?.[column_id] &&
             Object.keys(subGroupedIds?.[column_id])?.forEach((_list: any) => {
-                issueCount += subGroupedIds?.[column_id]?.[_list]?.length || 0;
-            });
-        return issueCount;
-    };
+                issueCount += subGroupedIds?.[column_id]?.[_list]?.length || 0
+            })
+        return issueCount
+    }
 
     return (
         <div className="relative h-max min-h-full w-full">
@@ -171,34 +168,34 @@ const SubGroupSwimlane: React.FC<ISubGroupSwimlane> = observer((props) => {
                     </div>
                 ))}
         </div>
-    );
-});
+    )
+})
 
 export interface IKanBanSwimLanes {
-    issuesMap: IIssueMap;
-    issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues;
-    displayProperties: IIssueDisplayProperties | undefined;
-    sub_group_by: string | null;
-    group_by: string | null;
-    handleIssues: (issue: TIssue, action: EIssueActions) => void;
-    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode;
-    kanbanFilters: TIssueKanbanFilters;
-    handleKanbanFilters: (toggle: "group_by" | "sub_group_by", value: string) => void;
-    showEmptyGroup: boolean;
-    isDragStarted?: boolean;
-    disableIssueCreation?: boolean;
-    storeType?: TCreateModalStoreTypes;
-    addIssuesToView?: (issueIds: string[]) => Promise<TIssue>;
-    enableQuickIssueCreate: boolean;
+    issuesMap: IIssueMap
+    issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues
+    displayProperties: IIssueDisplayProperties | undefined
+    sub_group_by: string | null
+    group_by: string | null
+    handleIssues: (issue: TIssue, action: EIssueActions) => void
+    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
+    kanbanFilters: TIssueKanbanFilters
+    handleKanbanFilters: (toggle: "group_by" | "sub_group_by", value: string) => void
+    showEmptyGroup: boolean
+    isDragStarted?: boolean
+    disableIssueCreation?: boolean
+    storeType?: TCreateModalStoreTypes
+    addIssuesToView?: (issueIds: string[]) => Promise<TIssue>
+    enableQuickIssueCreate: boolean
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>;
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+    canEditProperties: (projectId: string | undefined) => boolean
+    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>
 }
 
 export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
@@ -221,14 +218,14 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         quickAddCallback,
         viewId,
         scrollableContainerRef,
-    } = props;
+    } = props
 
-    const member = useMember();
-    const project = useProject();
-    const label = useLabel();
-    const cycle = useCycle();
-    const _module = useModule();
-    const projectState = useProjectState();
+    const member = useMember()
+    const project = useProject()
+    const label = useLabel()
+    const cycle = useCycle()
+    const _module = useModule()
+    const projectState = useProjectState()
 
     const groupByList = getGroupByColumns(
         group_by as GroupByColumnTypes,
@@ -238,7 +235,7 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         label,
         projectState,
         member
-    );
+    )
     const subGroupByList = getGroupByColumns(
         sub_group_by as GroupByColumnTypes,
         project,
@@ -247,9 +244,9 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         label,
         projectState,
         member
-    );
+    )
 
-    if (!groupByList || !subGroupByList) return null;
+    if (!groupByList || !subGroupByList) return null
 
     return (
         <div className="relative">
@@ -288,5 +285,5 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
                 />
             )}
         </div>
-    );
-});
+    )
+})

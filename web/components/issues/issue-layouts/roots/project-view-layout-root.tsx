@@ -1,10 +1,5 @@
-import React, { Fragment, useMemo } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-// mobx store
-import { useIssues } from "@hooks/store";
-
+import { useRouter } from "next/router"
+import React, { Fragment, useMemo } from "react"
 import {
     IssuePeekOverview,
     ProjectViewAppliedFiltersRoot,
@@ -14,41 +9,43 @@ import {
     ProjectViewKanBanLayout,
     ProjectViewListLayout,
     ProjectViewSpreadsheetLayout,
-} from "@components/issues";
-import { ActiveLoader } from "@components/ui";
-
-import { EIssuesStoreType } from "@constants/issue";
-
-import { TIssue } from "@servcy/types";
-import { EIssueActions } from "../types";
+} from "@components/issues"
+import { ActiveLoader } from "@components/ui"
+import { EIssuesStoreType } from "@constants/issue"
+// mobx store
+import { useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { TIssue } from "@servcy/types"
+import { EIssueActions } from "../types"
 
 export const ProjectViewLayoutRoot: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, viewId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, viewId } = router.query
 
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW);
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW)
 
     useSWR(
         workspaceSlug && projectId && viewId ? `PROJECT_VIEW_ISSUES_${workspaceSlug}_${projectId}_${viewId}` : null,
         async () => {
             if (workspaceSlug && projectId && viewId) {
-                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString(), viewId.toString());
+                await issuesFilter?.fetchFilters(workspaceSlug.toString(), projectId.toString(), viewId.toString())
                 await issues?.fetchIssues(
                     workspaceSlug.toString(),
                     projectId.toString(),
                     issues?.groupedIssueIds ? "mutation" : "init-loader",
                     viewId.toString()
-                );
+                )
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
 
     const issueActions = useMemo(
         () => ({
             [EIssueActions.UPDATE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !projectId) return;
+                if (!workspaceSlug || !projectId) return
 
                 await issues.updateIssue(
                     workspaceSlug.toString(),
@@ -56,23 +53,23 @@ export const ProjectViewLayoutRoot: React.FC = observer(() => {
                     issue.id,
                     issue,
                     viewId?.toString()
-                );
+                )
             },
             [EIssueActions.DELETE]: async (issue: TIssue) => {
-                if (!workspaceSlug || !projectId) return;
+                if (!workspaceSlug || !projectId) return
 
-                await issues.removeIssue(workspaceSlug.toString(), projectId.toString(), issue.id, viewId?.toString());
+                await issues.removeIssue(workspaceSlug.toString(), projectId.toString(), issue.id, viewId?.toString())
             },
         }),
         [issues, workspaceSlug, projectId, viewId]
-    );
+    )
 
-    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout;
+    const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout
 
-    if (!workspaceSlug || !projectId || !viewId) return <></>;
+    if (!workspaceSlug || !projectId || !viewId) return <></>
 
     if (issues?.loader === "init-loader" || !issues?.groupedIssueIds) {
-        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>;
+        return <>{activeLayout && <ActiveLoader layout={activeLayout} />}</>
     }
 
     return (
@@ -104,5 +101,5 @@ export const ProjectViewLayoutRoot: React.FC = observer(() => {
                 </Fragment>
             )}
         </div>
-    );
-});
+    )
+})

@@ -1,10 +1,9 @@
-"use client";
+"use client"
 
-import { useRouter } from "next/navigation.js";
-
-import { Button } from "antd";
-import { useEffect } from "react";
-import { AiOutlineHome, AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai";
+import { useRouter } from "next/navigation.js"
+import { useEffect } from "react"
+import { Button } from "antd"
+import { AiOutlineHome, AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai"
 
 const activationSteps = [
     {
@@ -13,19 +12,19 @@ const activationSteps = [
         cta: "Integrate",
         href: "/integrations",
     },
-];
+]
 
 export default function Index(): JSX.Element {
-    const router = useRouter();
+    const router = useRouter()
 
     const requestNotificationPermission = async () => {
-        if (!("Notification" in window) || Notification.permission === "granted") return;
-        await Notification.requestPermission();
-    };
+        if (!("Notification" in window) || Notification.permission === "granted") return
+        await Notification.requestPermission()
+    }
 
     useEffect(() => {
-        requestNotificationPermission();
-    }, []);
+        requestNotificationPermission()
+    }, [])
 
     return (
         <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
@@ -50,7 +49,7 @@ export default function Index(): JSX.Element {
                             <div className="mt-2 flex flex-row justify-between">
                                 <Button
                                     onClick={() => {
-                                        step.href && router.push(step.href);
+                                        step.href && router.push(step.href)
                                     }}
                                     icon={<AiOutlineRightCircle />}
                                     className="text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
@@ -63,5 +62,5 @@ export default function Index(): JSX.Element {
                 </div>
             </div>
         </main>
-    );
+    )
 }

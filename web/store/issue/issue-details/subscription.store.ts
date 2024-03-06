@@ -1,31 +1,29 @@
-import { action, makeObservable, observable, runInAction } from "mobx";
-import set from "lodash/set";
-
-import { NotificationService } from "@services/notification.service";
-
-import { IIssueDetail } from "./root.store";
+import { NotificationService } from "@services/notification.service"
+import set from "lodash/set"
+import { action, makeObservable, observable, runInAction } from "mobx"
+import { IIssueDetail } from "./root.store"
 
 export interface IIssueSubscriptionStoreActions {
-    addSubscription: (issueId: string, isSubscribed: boolean | undefined | null) => void;
-    fetchSubscriptions: (workspaceSlug: string, projectId: string, issueId: string) => Promise<boolean>;
-    createSubscription: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
-    removeSubscription: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
+    addSubscription: (issueId: string, isSubscribed: boolean | undefined | null) => void
+    fetchSubscriptions: (workspaceSlug: string, projectId: string, issueId: string) => Promise<boolean>
+    createSubscription: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>
+    removeSubscription: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>
 }
 
 export interface IIssueSubscriptionStore extends IIssueSubscriptionStoreActions {
     // observables
-    subscriptionMap: Record<string, Record<string, boolean>>; // Record defines subscriptionId as key and link as value
+    subscriptionMap: Record<string, Record<string, boolean>> // Record defines subscriptionId as key and link as value
 
-    getSubscriptionByIssueId: (issueId: string) => boolean | undefined;
+    getSubscriptionByIssueId: (issueId: string) => boolean | undefined
 }
 
 export class IssueSubscriptionStore implements IIssueSubscriptionStore {
     // observables
-    subscriptionMap: Record<string, Record<string, boolean>> = {};
+    subscriptionMap: Record<string, Record<string, boolean>> = {}
     // root store
-    rootIssueDetail: IIssueDetail;
+    rootIssueDetail: IIssueDetail
 
-    notificationService;
+    notificationService
 
     constructor(rootStore: IIssueDetail) {
         makeObservable(this, {
@@ -36,28 +34,28 @@ export class IssueSubscriptionStore implements IIssueSubscriptionStore {
             fetchSubscriptions: action,
             createSubscription: action,
             removeSubscription: action,
-        });
+        })
         // root store
-        this.rootIssueDetail = rootStore;
+        this.rootIssueDetail = rootStore
 
-        this.notificationService = new NotificationService();
+        this.notificationService = new NotificationService()
     }
 
     getSubscriptionByIssueId = (issueId: string) => {
-        if (!issueId) return undefined;
-        const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
-        if (!currentUserId) return undefined;
-        return this.subscriptionMap[issueId]?.[currentUserId] ?? undefined;
-    };
+        if (!issueId) return undefined
+        const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId
+        if (!currentUserId) return undefined
+        return this.subscriptionMap[issueId]?.[currentUserId] ?? undefined
+    }
 
     addSubscription = (issueId: string, isSubscribed: boolean | undefined | null) => {
-        const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
-        if (!currentUserId) throw new Error("user id not available");
+        const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId
+        if (!currentUserId) throw new Error("user id not available")
 
         runInAction(() => {
-            set(this.subscriptionMap, [issueId, currentUserId], isSubscribed ?? false);
-        });
-    };
+            set(this.subscriptionMap, [issueId, currentUserId], isSubscribed ?? false)
+        })
+    }
 
     fetchSubscriptions = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
@@ -65,45 +63,45 @@ export class IssueSubscriptionStore implements IIssueSubscriptionStore {
                 workspaceSlug,
                 projectId,
                 issueId
-            );
+            )
 
-            this.addSubscription(issueId, subscription?.subscribed);
+            this.addSubscription(issueId, subscription?.subscribed)
 
-            return subscription?.subscribed;
+            return subscription?.subscribed
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     createSubscription = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
-            if (!currentUserId) throw new Error("user id not available");
+            const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId
+            if (!currentUserId) throw new Error("user id not available")
 
             runInAction(() => {
-                set(this.subscriptionMap, [issueId, currentUserId], { subscribed: true });
-            });
+                set(this.subscriptionMap, [issueId, currentUserId], { subscribed: true })
+            })
 
-            await this.notificationService.subscribeToIssueNotifications(workspaceSlug, projectId, issueId);
+            await this.notificationService.subscribeToIssueNotifications(workspaceSlug, projectId, issueId)
         } catch (error) {
-            this.fetchSubscriptions(workspaceSlug, projectId, issueId);
-            throw error;
+            this.fetchSubscriptions(workspaceSlug, projectId, issueId)
+            throw error
         }
-    };
+    }
 
     removeSubscription = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
-            if (!currentUserId) throw new Error("user id not available");
+            const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId
+            if (!currentUserId) throw new Error("user id not available")
 
             runInAction(() => {
-                set(this.subscriptionMap, [issueId, currentUserId], { subscribed: false });
-            });
+                set(this.subscriptionMap, [issueId, currentUserId], { subscribed: false })
+            })
 
-            await this.notificationService.unsubscribeFromIssueNotifications(workspaceSlug, projectId, issueId);
+            await this.notificationService.unsubscribeFromIssueNotifications(workspaceSlug, projectId, issueId)
         } catch (error) {
-            this.fetchSubscriptions(workspaceSlug, projectId, issueId);
-            throw error;
+            this.fetchSubscriptions(workspaceSlug, projectId, issueId)
+            throw error
         }
-    };
+    }
 }

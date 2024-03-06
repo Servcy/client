@@ -1,37 +1,33 @@
-import { observer } from "mobx-react-lite";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
-
-import { useUser } from "@hooks/store";
-
-import { UserAuthWrapper } from "@layouts/auth-layout";
-import DefaultLayout from "@layouts/DefaultLayout";
-
-import { PageHead } from "@components/core";
-import { CreateWorkspaceForm } from "@components/workspace";
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { ReactElement, useState } from "react"
+import { PageHead } from "@components/core"
+import { CreateWorkspaceForm } from "@components/workspace"
+import { useUser } from "@hooks/store"
+import { UserAuthWrapper } from "@layouts/auth-layout"
+import DefaultLayout from "@layouts/DefaultLayout"
+import { observer } from "mobx-react-lite"
 // images
-import ServcyLogo from "public/logo.svg";
-
-import { NextPageWithLayout } from "@/types/types";
-import { IWorkspace } from "@servcy/types";
+import ServcyLogo from "public/logo.svg"
+import { IWorkspace } from "@servcy/types"
+import { NextPageWithLayout } from "@/types/types"
 
 const CreateWorkspacePage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { currentUser, updateCurrentUser } = useUser();
+    const { currentUser, updateCurrentUser } = useUser()
     // states
     const [defaultValues, setDefaultValues] = useState({
         name: "",
         slug: "",
         organization_size: "",
-    });
+    })
 
     const onSubmit = async (workspace: IWorkspace) => {
-        await updateCurrentUser({ last_workspace_id: workspace.id }).then(() => router.push(`/${workspace.slug}`));
-    };
+        await updateCurrentUser({ last_workspace_id: workspace.id }).then(() => router.push(`/${workspace.slug}`))
+    }
 
     return (
         <>
@@ -65,15 +61,15 @@ const CreateWorkspacePage: NextPageWithLayout = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})
 
 CreateWorkspacePage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <UserAuthWrapper>
             <DefaultLayout>{page} </DefaultLayout>
         </UserAuthWrapper>
-    );
-};
+    )
+}
 
-export default CreateWorkspacePage;
+export default CreateWorkspacePage

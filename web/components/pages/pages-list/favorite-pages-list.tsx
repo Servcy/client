@@ -1,14 +1,12 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-
-import { PagesListView } from "@components/pages/pages-list";
-
-import { Loader } from "@servcy/ui";
-import { useProjectPages } from "@hooks/store/use-project-specific-pages";
+import { FC } from "react"
+import { PagesListView } from "@components/pages/pages-list"
+import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+import { observer } from "mobx-react-lite"
+import { Loader } from "@servcy/ui"
 
 export const FavoritePagesList: FC = observer(() => {
-    const projectPageStore = useProjectPages();
-    const { favoriteProjectPageIds } = projectPageStore;
+    const projectPageStore = useProjectPages()
+    const { favoriteProjectPageIds } = projectPageStore
 
     if (!favoriteProjectPageIds)
         return (
@@ -17,7 +15,7 @@ export const FavoritePagesList: FC = observer(() => {
                 <Loader.Item height="40px" />
                 <Loader.Item height="40px" />
             </Loader>
-        );
+        )
 
-    return <PagesListView pageIds={favoriteProjectPageIds} />;
-});
+    return <PagesListView pageIds={favoriteProjectPageIds} />
+})

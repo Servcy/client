@@ -7,7 +7,7 @@ export const integrationCategories: Record<string, string[]> = {
     Figma: ["Inbox"],
     Asana: ["Inbox"],
     Trello: ["Inbox"],
-};
+}
 
 export const integrationInboxCategories: Record<string, string[]> = {
     Github: ["notification", "comment", "archived"],
@@ -19,6 +19,6 @@ export const integrationInboxCategories: Record<string, string[]> = {
     Asana: ["archived", "comment", "notification"],
     Trello: ["archived", "comment", "notification"],
     Jira: ["archived", "comment", "notification"],
-};
+}
 
-export const uniqueIntegrationCategories = [...new Set(Object.values(integrationCategories).flat())];
+export const uniqueIntegrationCategories = [...new Set(Object.values(integrationCategories).flat())]

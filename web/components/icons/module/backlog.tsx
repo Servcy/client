@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
 type Props = {
-    width?: string;
-    height?: string;
-    className?: string;
-    color?: string;
-};
+    width?: string
+    height?: string
+    className?: string
+    color?: string
+}
 
 export const ModuleBacklogIcon: React.FC<Props> = ({ width = "20", height = "20", className }) => (
     <svg
@@ -54,4 +54,4 @@ export const ModuleBacklogIcon: React.FC<Props> = ({ width = "20", height = "20"
             </g>
         </g>
     </svg>
-);
+)

@@ -1,42 +1,42 @@
-import { useRef, useState } from "react";
-import { LucideIcon, X } from "lucide-react";
-import { DraggableProvidedDragHandleProps } from "@hello-pangea/dnd";
-//ui
-import { CustomMenu } from "@servcy/ui";
-//types
-import { IIssueLabel } from "@servcy/types";
+import { useRef, useState } from "react"
+import { DraggableProvidedDragHandleProps } from "@hello-pangea/dnd"
 //hooks
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { LucideIcon, X } from "lucide-react"
+//types
+import { IIssueLabel } from "@servcy/types"
+//ui
+import { CustomMenu } from "@servcy/ui"
 //components
-import { DragHandle } from "./drag-handle";
-import { LabelName } from "./label-name";
+import { DragHandle } from "./drag-handle"
+import { LabelName } from "./label-name"
 
 //types
 export interface ICustomMenuItem {
-    CustomIcon: LucideIcon;
-    onClick: (label: IIssueLabel) => void;
-    isVisible: boolean;
-    text: string;
-    key: string;
+    CustomIcon: LucideIcon
+    onClick: (label: IIssueLabel) => void
+    isVisible: boolean
+    text: string
+    key: string
 }
 
 interface ILabelItemBlock {
-    label: IIssueLabel;
-    isDragging: boolean;
-    customMenuItems: ICustomMenuItem[];
-    dragHandleProps: DraggableProvidedDragHandleProps;
-    handleLabelDelete: (label: IIssueLabel) => void;
-    isLabelGroup?: boolean;
+    label: IIssueLabel
+    isDragging: boolean
+    customMenuItems: ICustomMenuItem[]
+    dragHandleProps: DraggableProvidedDragHandleProps
+    handleLabelDelete: (label: IIssueLabel) => void
+    isLabelGroup?: boolean
 }
 
 export const LabelItemBlock = (props: ILabelItemBlock) => {
-    const { label, isDragging, customMenuItems, dragHandleProps, handleLabelDelete, isLabelGroup } = props;
+    const { label, isDragging, customMenuItems, dragHandleProps, handleLabelDelete, isLabelGroup } = props
     // states
-    const [isMenuActive, setIsMenuActive] = useState(false);
+    const [isMenuActive, setIsMenuActive] = useState(false)
     // refs
-    const actionSectionRef = useRef<HTMLDivElement | null>(null);
+    const actionSectionRef = useRef<HTMLDivElement | null>(null)
 
-    useOutsideClickDetector(actionSectionRef, () => setIsMenuActive(false));
+    useOutsideClickDetector(actionSectionRef, () => setIsMenuActive(false))
 
     return (
         <div className="group flex items-center">
@@ -78,5 +78,5 @@ export const LabelItemBlock = (props: ILabelItemBlock) => {
                 )}
             </div>
         </div>
-    );
-};
+    )
+}

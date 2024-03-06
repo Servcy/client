@@ -1,30 +1,28 @@
-import { FC, MutableRefObject } from "react";
-
-import { IssueBlock } from "@components/issues";
-
-import { TGroupedIssues, TIssue, IIssueDisplayProperties, TIssueMap, TUnGroupedIssues } from "@servcy/types";
-import { EIssueActions } from "../types";
-import RenderIfVisible from "@components/core/render-if-visible-HOC";
+import { FC, MutableRefObject } from "react"
+import RenderIfVisible from "@components/core/render-if-visible-HOC"
+import { IssueBlock } from "@components/issues"
+import { IIssueDisplayProperties, TGroupedIssues, TIssue, TIssueMap, TUnGroupedIssues } from "@servcy/types"
+import { EIssueActions } from "../types"
 
 interface Props {
-    issueIds: TGroupedIssues | TUnGroupedIssues | any;
-    issuesMap: TIssueMap;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>;
-    quickActions: (issue: TIssue) => React.ReactNode;
-    displayProperties: IIssueDisplayProperties | undefined;
-    containerRef: MutableRefObject<HTMLDivElement | null>;
+    issueIds: TGroupedIssues | TUnGroupedIssues | any
+    issuesMap: TIssueMap
+    canEditProperties: (projectId: string | undefined) => boolean
+    handleIssues: (issue: TIssue, action: EIssueActions) => Promise<void>
+    quickActions: (issue: TIssue) => React.ReactNode
+    displayProperties: IIssueDisplayProperties | undefined
+    containerRef: MutableRefObject<HTMLDivElement | null>
 }
 
 export const IssueBlocksList: FC<Props> = (props) => {
     const { issueIds, issuesMap, handleIssues, quickActions, displayProperties, canEditProperties, containerRef } =
-        props;
+        props
 
     return (
         <div className="relative h-full w-full">
             {issueIds && issueIds.length > 0 ? (
                 issueIds.map((issueId: string) => {
-                    if (!issueId) return null;
+                    if (!issueId) return null
                     return (
                         <RenderIfVisible
                             key={`${issueId}`}
@@ -44,11 +42,11 @@ export const IssueBlocksList: FC<Props> = (props) => {
                                 displayProperties={displayProperties}
                             />
                         </RenderIfVisible>
-                    );
+                    )
                 })
             ) : (
                 <div className="bg-custom-background-100 p-3 text-sm text-custom-text-400">No issues</div>
             )}
         </div>
-    );
-};
+    )
+}

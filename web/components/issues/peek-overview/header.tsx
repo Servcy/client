@@ -1,21 +1,17 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react";
-import { MoveRight, MoveDiagonal, Link2, Trash2, RotateCcw } from "lucide-react";
-
-import { ArchiveIcon, CenterPanelIcon, CustomSelect, FullScreenPanelIcon, SidePanelIcon, Tooltip } from "@servcy/ui";
-
-import { copyUrlToClipboard } from "@helpers/string.helper";
-import toast from "react-hot-toast";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { IssueSubscription, IssueUpdateStatus } from "@components/issues"
+import { STATE_GROUPS } from "@constants/state"
+import { cn } from "@helpers/common.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
 // store hooks
-import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
+import { useIssueDetail, useProjectState, useUser } from "@hooks/store"
+import { Link2, MoveDiagonal, MoveRight, RotateCcw, Trash2 } from "lucide-react"
+import { observer } from "mobx-react"
+import toast from "react-hot-toast"
+import { ArchiveIcon, CenterPanelIcon, CustomSelect, FullScreenPanelIcon, SidePanelIcon, Tooltip } from "@servcy/ui"
 
-import { cn } from "@helpers/common.helper";
-
-import { IssueSubscription, IssueUpdateStatus } from "@components/issues";
-import { STATE_GROUPS } from "@constants/state";
-
-export type TPeekModes = "side-peek" | "modal" | "full-screen";
+export type TPeekModes = "side-peek" | "modal" | "full-screen"
 
 const PEEK_OPTIONS: { key: TPeekModes; icon: any; title: string }[] = [
     {
@@ -33,22 +29,22 @@ const PEEK_OPTIONS: { key: TPeekModes; icon: any; title: string }[] = [
         icon: FullScreenPanelIcon,
         title: "Full Screen",
     },
-];
+]
 
 export type PeekOverviewHeaderProps = {
-    peekMode: TPeekModes;
-    setPeekMode: (value: TPeekModes) => void;
-    removeRoutePeekId: () => void;
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    isArchived: boolean;
-    disabled: boolean;
-    toggleDeleteIssueModal: (value: boolean) => void;
-    toggleArchiveIssueModal: (value: boolean) => void;
-    handleRestoreIssue: () => void;
-    isSubmitting: "submitting" | "submitted" | "saved";
-};
+    peekMode: TPeekModes
+    setPeekMode: (value: TPeekModes) => void
+    removeRoutePeekId: () => void
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    isArchived: boolean
+    disabled: boolean
+    toggleDeleteIssueModal: (value: boolean) => void
+    toggleArchiveIssueModal: (value: boolean) => void
+    handleRestoreIssue: () => void
+    isSubmitting: "submitting" | "submitted" | "saved"
+}
 
 export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((props) => {
     const {
@@ -64,43 +60,43 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
         toggleArchiveIssueModal,
         handleRestoreIssue,
         isSubmitting,
-    } = props;
+    } = props
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getStateById } = useProjectState();
+    } = useIssueDetail()
+    const { getStateById } = useProjectState()
 
     // derived values
-    const issueDetails = getIssueById(issueId);
-    const stateDetails = issueDetails ? getStateById(issueDetails?.state_id) : undefined;
-    const currentMode = PEEK_OPTIONS.find((m) => m.key === peekMode);
+    const issueDetails = getIssueById(issueId)
+    const stateDetails = issueDetails ? getStateById(issueDetails?.state_id) : undefined
+    const currentMode = PEEK_OPTIONS.find((m) => m.key === peekMode)
 
-    const issueLink = `${workspaceSlug}/projects/${projectId}/${isArchived ? "archived-issues" : "issues"}/${issueId}`;
+    const issueLink = `${workspaceSlug}/projects/${projectId}/${isArchived ? "archived-issues" : "issues"}/${issueId}`
 
     const handleCopyText = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
+        e.stopPropagation()
+        e.preventDefault()
         copyUrlToClipboard(issueLink).then(() => {
             toast.error({
                 type: "success",
                 title: "Link Copied!",
                 message: "Issue link copied to clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
     const redirectToIssueDetail = () => {
-        router.push({ pathname: `/${issueLink}` });
-        removeRoutePeekId();
-    };
+        router.push({ pathname: `/${issueLink}` })
+        removeRoutePeekId()
+    }
     // auth
-    const isArchivingAllowed = !isArchived && !disabled;
+    const isArchivingAllowed = !isArchived && !disabled
     const isInArchivableGroup =
-        !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group);
-    const isRestoringAllowed = isArchived && !disabled;
+        !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group)
+    const isRestoringAllowed = isArchived && !disabled
 
     return (
         <div
@@ -169,8 +165,8 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
                                     "cursor-not-allowed text-custom-text-400": !isInArchivableGroup,
                                 })}
                                 onClick={() => {
-                                    if (!isInArchivableGroup) return;
-                                    toggleArchiveIssueModal(true);
+                                    if (!isInArchivableGroup) return
+                                    toggleArchiveIssueModal(true)
                                 }}
                             >
                                 <ArchiveIcon className="h-4 w-4" />
@@ -194,5 +190,5 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

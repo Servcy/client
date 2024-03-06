@@ -1,33 +1,31 @@
-import React from "react";
-import Image from "next/image";
-
-import { ComicBoxButton } from "./comic-box-button";
-
-import { Button, getButtonStyling } from "@servcy/ui";
+import Image from "next/image"
+import React from "react"
 // helper
-import { cn } from "@helpers/common.helper";
+import { cn } from "@helpers/common.helper"
+import { Button, getButtonStyling } from "@servcy/ui"
+import { ComicBoxButton } from "./comic-box-button"
 
 type Props = {
-    title: string;
-    description?: string;
-    image: any;
+    title: string
+    description?: string
+    image: any
     primaryButton?: {
-        icon?: any;
-        text: string;
-        onClick: () => void;
-    };
+        icon?: any
+        text: string
+        onClick: () => void
+    }
     secondaryButton?: {
-        icon?: any;
-        text: string;
-        onClick: () => void;
-    };
+        icon?: any
+        text: string
+        onClick: () => void
+    }
     comicBox?: {
-        title: string;
-        description: string;
-    };
-    size?: "sm" | "lg";
-    disabled?: boolean;
-};
+        title: string
+        description: string
+    }
+    size?: "sm" | "lg"
+    disabled?: boolean
+}
 
 export const EmptyState: React.FC<Props> = ({
     title,
@@ -50,7 +48,7 @@ export const EmptyState: React.FC<Props> = ({
                 <h3 className="text-xl font-medium">{title}</h3>
             )}
         </>
-    );
+    )
 
     const secondaryButtonElement = secondaryButton && (
         <Button
@@ -62,7 +60,7 @@ export const EmptyState: React.FC<Props> = ({
         >
             {secondaryButton.text}
         </Button>
-    );
+    )
 
     return (
         <div className="flex items-center justify-center min-h-full min-w-full overflow-y-auto py-10 md:px-20 px-5">
@@ -115,5 +113,5 @@ export const EmptyState: React.FC<Props> = ({
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

@@ -1,16 +1,15 @@
-import { observer } from "mobx-react-lite";
-
-import { StateGroupIcon } from "@servcy/ui";
-import { X } from "lucide-react";
-import { TStateGroups } from "@servcy/types";
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TStateGroups } from "@servcy/types"
+import { StateGroupIcon } from "@servcy/ui"
 
 type Props = {
-    handleRemove: (val: string) => void;
-    values: string[];
-};
+    handleRemove: (val: string) => void
+    values: string[]
+}
 
 export const AppliedStateGroupFilters: React.FC<Props> = observer((props) => {
-    const { handleRemove, values } = props;
+    const { handleRemove, values } = props
 
     return (
         <>
@@ -28,5 +27,5 @@ export const AppliedStateGroupFilters: React.FC<Props> = observer((props) => {
                 </div>
             ))}
         </>
-    );
-});
+    )
+})

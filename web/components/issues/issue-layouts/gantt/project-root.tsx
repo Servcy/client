@@ -1,33 +1,31 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useIssues } from "@hooks/store";
-
-import { BaseGanttRoot } from "./base-gantt-root";
-import { EIssuesStoreType } from "@constants/issue";
-import { EIssueActions } from "../types";
-import { TIssue } from "@servcy/types";
+import { useRouter } from "next/router"
+import React from "react"
+import { EIssuesStoreType } from "@constants/issue"
+import { useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { EIssueActions } from "../types"
+import { BaseGanttRoot } from "./base-gantt-root"
 
 export const GanttLayout: React.FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT);
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT)
 
     const issueActions = {
         [EIssueActions.UPDATE]: async (issue: TIssue) => {
-            if (!workspaceSlug) return;
+            if (!workspaceSlug) return
 
-            await issues.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, issue);
+            await issues.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, issue)
         },
         [EIssueActions.DELETE]: async (issue: TIssue) => {
-            if (!workspaceSlug) return;
+            if (!workspaceSlug) return
 
-            await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id);
+            await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id)
         },
-    };
+    }
 
-    return <BaseGanttRoot issueFiltersStore={issuesFilter} issueStore={issues} issueActions={issueActions} />;
-});
+    return <BaseGanttRoot issueFiltersStore={issuesFilter} issueStore={issues} issueActions={issueActions} />
+})

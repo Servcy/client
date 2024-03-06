@@ -1,33 +1,30 @@
-import { Fragment, useEffect, useRef, useState } from "react";
-import { observer } from "mobx-react-lite";
-import { usePopper } from "react-popper";
-import { Check, ChevronDown, Search, Tags } from "lucide-react";
-
-import { useApplication, useLabel } from "@hooks/store";
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { Combobox } from "@headlessui/react";
-import { Tooltip } from "@servcy/ui";
-
-import { Placement } from "@popperjs/core";
-import { IIssueLabel } from "@servcy/types";
+import { Fragment, useEffect, useRef, useState } from "react"
+import { Combobox } from "@headlessui/react"
+import { useApplication, useLabel } from "@hooks/store"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { Placement } from "@popperjs/core"
+import { Check, ChevronDown, Search, Tags } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { usePopper } from "react-popper"
+import { IIssueLabel } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
 
 export interface IIssuePropertyLabels {
-    projectId: string | null;
-    value: string[];
-    defaultOptions?: any;
-    onChange: (data: string[]) => void;
-    disabled?: boolean;
-    hideDropdownArrow?: boolean;
-    className?: string;
-    buttonClassName?: string;
-    optionsClassName?: string;
-    placement?: Placement;
-    maxRender?: number;
-    noLabelBorder?: boolean;
-    placeholderText?: string;
-    onClose?: () => void;
+    projectId: string | null
+    value: string[]
+    defaultOptions?: any
+    onChange: (data: string[]) => void
+    disabled?: boolean
+    hideDropdownArrow?: boolean
+    className?: string
+    buttonClassName?: string
+    optionsClassName?: string
+    placement?: Placement
+    maxRender?: number
+    noLabelBorder?: boolean
+    placeholderText?: string
+    onClose?: () => void
 }
 
 export const IssuePropertyLabels: React.FC<IIssuePropertyLabels> = observer((props) => {
@@ -46,64 +43,64 @@ export const IssuePropertyLabels: React.FC<IIssuePropertyLabels> = observer((pro
         maxRender = 2,
         noLabelBorder = false,
         placeholderText,
-    } = props;
+    } = props
     // states
-    const [query, setQuery] = useState("");
-    const [isOpen, setIsOpen] = useState(false);
+    const [query, setQuery] = useState("")
+    const [isOpen, setIsOpen] = useState(false)
     // refs
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
     // popper-js refs
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-    const [isLoading, setIsLoading] = useState<Boolean>(false);
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
+    const [isLoading, setIsLoading] = useState<Boolean>(false)
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { fetchProjectLabels, getProjectLabels } = useLabel();
+    } = useApplication()
+    const { fetchProjectLabels, getProjectLabels } = useLabel()
 
-    const storeLabels = getProjectLabels(projectId);
+    const storeLabels = getProjectLabels(projectId)
 
     const onOpen = () => {
         if (!storeLabels && workspaceSlug && projectId)
-            fetchProjectLabels(workspaceSlug, projectId).then(() => setIsLoading(false));
-    };
+            fetchProjectLabels(workspaceSlug, projectId).then(() => setIsLoading(false))
+    }
 
     const handleClose = () => {
-        if (!isOpen) return;
-        setIsOpen(false);
-        onClose && onClose();
-    };
+        if (!isOpen) return
+        setIsOpen(false)
+        onClose && onClose()
+    }
 
     const toggleDropdown = () => {
-        if (!isOpen) onOpen();
-        setIsOpen((prevIsOpen) => !prevIsOpen);
-        if (isOpen) onClose && onClose();
-    };
+        if (!isOpen) onOpen()
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+        if (isOpen) onClose && onClose()
+    }
 
-    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose);
+    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        toggleDropdown();
-    };
+        e.stopPropagation()
+        e.preventDefault()
+        toggleDropdown()
+    }
 
-    useOutsideClickDetector(dropdownRef, handleClose);
+    useOutsideClickDetector(dropdownRef, handleClose)
 
     const searchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (query !== "" && e.key === "Escape") {
-            e.stopPropagation();
-            setQuery("");
+            e.stopPropagation()
+            setQuery("")
         }
-    };
+    }
 
     useEffect(() => {
         if (isOpen && inputRef.current) {
-            inputRef.current.focus();
+            inputRef.current.focus()
         }
-    }, [isOpen]);
+    }, [isOpen])
 
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: placement ?? "bottom-start",
@@ -115,12 +112,12 @@ export const IssuePropertyLabels: React.FC<IIssuePropertyLabels> = observer((pro
                 },
             },
         ],
-    });
+    })
 
-    if (!value) return null;
+    if (!value) return null
 
-    let projectLabels: IIssueLabel[] = defaultOptions;
-    if (storeLabels && storeLabels.length > 0) projectLabels = storeLabels;
+    let projectLabels: IIssueLabel[] = defaultOptions
+    if (storeLabels && storeLabels.length > 0) projectLabels = storeLabels
 
     const options = projectLabels.map((label) => ({
         value: label?.id,
@@ -136,10 +133,10 @@ export const IssuePropertyLabels: React.FC<IIssuePropertyLabels> = observer((pro
                 <div className="line-clamp-1 inline-block truncate">{label?.name}</div>
             </div>
         ),
-    }));
+    }))
 
     const filteredOptions =
-        query === "" ? options : options?.filter((option) => option.query.toLowerCase().includes(query.toLowerCase()));
+        query === "" ? options : options?.filter((option) => option.query.toLowerCase().includes(query.toLowerCase()))
 
     const label = (
         <div className="flex h-5 w-full flex-wrap items-center gap-2 overflow-hidden text-custom-text-200">
@@ -205,7 +202,7 @@ export const IssuePropertyLabels: React.FC<IIssuePropertyLabels> = observer((pro
                 </Tooltip>
             )}
         </div>
-    );
+    )
 
     return (
         <Combobox
@@ -292,5 +289,5 @@ export const IssuePropertyLabels: React.FC<IIssuePropertyLabels> = observer((pro
                 </Combobox.Options>
             )}
         </Combobox>
-    );
-});
+    )
+})

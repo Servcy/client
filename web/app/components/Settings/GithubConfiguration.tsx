@@ -1,4 +1,4 @@
-import { AiFillGithub } from "react-icons/ai";
+import { AiFillGithub } from "react-icons/ai"
 
 export default function GithubConfiguration() {
     return (
@@ -8,5 +8,5 @@ export default function GithubConfiguration() {
                 <span>Install Servcy on Github</span>
             </button>
         </a>
-    );
+    )
 }

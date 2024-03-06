@@ -1,31 +1,28 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-
-import { FilterHeader } from "../helpers/filter-header";
-
-import { IIssueDisplayProperties } from "@servcy/types";
-
-import { ISSUE_DISPLAY_PROPERTIES } from "@constants/issue";
+import { useRouter } from "next/router"
+import React from "react"
+import { ISSUE_DISPLAY_PROPERTIES } from "@constants/issue"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayProperties } from "@servcy/types"
+import { FilterHeader } from "../helpers/filter-header"
 
 type Props = {
-    displayProperties: IIssueDisplayProperties;
-    handleUpdate: (updatedDisplayProperties: Partial<IIssueDisplayProperties>) => void;
-};
+    displayProperties: IIssueDisplayProperties
+    handleUpdate: (updatedDisplayProperties: Partial<IIssueDisplayProperties>) => void
+}
 
 export const FilterDisplayProperties: React.FC<Props> = observer((props) => {
-    const router = useRouter();
-    const { moduleId, cycleId } = router.query;
-    const { displayProperties, handleUpdate } = props;
+    const router = useRouter()
+    const { moduleId, cycleId } = router.query
+    const { displayProperties, handleUpdate } = props
 
-    const [previewEnabled, setPreviewEnabled] = React.useState(true);
+    const [previewEnabled, setPreviewEnabled] = React.useState(true)
 
     const handleDisplayPropertyVisibility = (key: keyof IIssueDisplayProperties): boolean => {
-        const visibility = true;
-        if (key === "modules" && moduleId) return false;
-        if (key === "cycle" && cycleId) return false;
-        return visibility;
-    };
+        const visibility = true
+        if (key === "modules" && moduleId) return false
+        if (key === "cycle" && cycleId) return false
+        return visibility
+    }
 
     return (
         <>
@@ -60,5 +57,5 @@ export const FilterDisplayProperties: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

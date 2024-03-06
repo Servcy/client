@@ -1,23 +1,19 @@
-import { List } from "./default";
-import { FC, useCallback } from "react";
-import { observer } from "mobx-react-lite";
-
-import { TIssue } from "@servcy/types";
-import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
-import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
-import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module";
-import { IProfileIssues, IProfileIssuesFilter } from "@store/issue/profile";
-import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views";
-import { IDraftIssuesFilter, IDraftIssues } from "@store/issue/draft";
-import { IArchivedIssuesFilter, IArchivedIssues } from "@store/issue/archived";
-import { EIssueActions } from "../types";
-
-import { IQuickActionProps } from "./list-view-types";
-
-import { EUserProjectRoles } from "@constants/project";
-import { TCreateModalStoreTypes } from "@constants/issue";
-
-import { useIssues, useUser } from "@hooks/store";
+import { FC, useCallback } from "react"
+import { TCreateModalStoreTypes } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+import { useIssues, useUser } from "@hooks/store"
+import { IArchivedIssues, IArchivedIssuesFilter } from "@store/issue/archived"
+import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
+import { IDraftIssues, IDraftIssuesFilter } from "@store/issue/draft"
+import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
+import { IProfileIssues, IProfileIssuesFilter } from "@store/issue/profile"
+import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project"
+import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
+import { EIssueActions } from "../types"
+import { List } from "./default"
+import { IQuickActionProps } from "./list-view-types"
 
 interface IBaseListRoot {
     issuesFilter:
@@ -27,7 +23,7 @@ interface IBaseListRoot {
         | IProjectViewIssuesFilter
         | IProfileIssuesFilter
         | IDraftIssuesFilter
-        | IArchivedIssuesFilter;
+        | IArchivedIssuesFilter
     issues:
         | IProjectIssues
         | ICycleIssues
@@ -35,20 +31,20 @@ interface IBaseListRoot {
         | IProjectViewIssues
         | IProfileIssues
         | IDraftIssues
-        | IArchivedIssues;
-    QuickActions: FC<IQuickActionProps>;
+        | IArchivedIssues
+    QuickActions: FC<IQuickActionProps>
     issueActions: {
-        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
-        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.RESTORE]?: (issue: TIssue) => Promise<void>;
-    };
-    viewId?: string;
-    storeType: TCreateModalStoreTypes;
-    addIssuesToView?: (issueIds: string[]) => Promise<any>;
-    canEditPropertiesBasedOnProject?: (projectId: string) => boolean;
-    isCompletedCycle?: boolean;
+        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>
+        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.RESTORE]?: (issue: TIssue) => Promise<void>
+    }
+    viewId?: string
+    storeType: TCreateModalStoreTypes
+    addIssuesToView?: (issueIds: string[]) => Promise<any>
+    canEditPropertiesBasedOnProject?: (projectId: string) => boolean
+    isCompletedCycle?: boolean
 }
 
 export const BaseListRoot = observer((props: IBaseListRoot) => {
@@ -62,45 +58,45 @@ export const BaseListRoot = observer((props: IBaseListRoot) => {
         addIssuesToView,
         canEditPropertiesBasedOnProject,
         isCompletedCycle = false,
-    } = props;
+    } = props
     // mobx store
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
-    const { issueMap } = useIssues();
+    const { issueMap } = useIssues()
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
-    const issueIds = issues?.groupedIssueIds || [];
+    const issueIds = issues?.groupedIssueIds || []
 
-    const { enableInlineEditing, enableQuickAdd, enableIssueCreation } = issues?.viewFlags || {};
+    const { enableInlineEditing, enableQuickAdd, enableIssueCreation } = issues?.viewFlags || {}
     const canEditProperties = useCallback(
         (projectId: string | undefined) => {
             const isEditingAllowedBasedOnProject =
                 canEditPropertiesBasedOnProject && projectId
                     ? canEditPropertiesBasedOnProject(projectId)
-                    : isEditingAllowed;
+                    : isEditingAllowed
 
-            return enableInlineEditing && isEditingAllowedBasedOnProject;
+            return enableInlineEditing && isEditingAllowedBasedOnProject
         },
         [canEditPropertiesBasedOnProject, enableInlineEditing, isEditingAllowed]
-    );
+    )
 
-    const displayFilters = issuesFilter?.issueFilters?.displayFilters;
-    const displayProperties = issuesFilter?.issueFilters?.displayProperties;
+    const displayFilters = issuesFilter?.issueFilters?.displayFilters
+    const displayProperties = issuesFilter?.issueFilters?.displayProperties
 
-    const group_by = displayFilters?.group_by || null;
-    const showEmptyGroup = displayFilters?.show_empty_groups ?? false;
+    const group_by = displayFilters?.group_by || null
+    const showEmptyGroup = displayFilters?.show_empty_groups ?? false
 
     const handleIssues = useCallback(
         async (issue: TIssue, action: EIssueActions) => {
             if (issueActions[action]) {
-                await issueActions[action]!(issue);
+                await issueActions[action]!(issue)
             }
         },
         [issueActions]
-    );
+    )
 
     const renderQuickActions = useCallback(
         (issue: TIssue) => (
@@ -132,7 +128,7 @@ export const BaseListRoot = observer((props: IBaseListRoot) => {
         ),
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [handleIssues]
-    );
+    )
 
     return (
         <div className={`relative h-full w-full bg-custom-background-90`}>
@@ -154,5 +150,5 @@ export const BaseListRoot = observer((props: IBaseListRoot) => {
                 isCompletedCycle={isCompletedCycle}
             />
         </div>
-    );
-});
+    )
+})

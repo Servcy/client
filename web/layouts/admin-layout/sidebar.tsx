@@ -1,9 +1,7 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useApplication } from "@hooks/store";
-
-import { InstanceAdminSidebarMenu, InstanceHelpSection, InstanceSidebarDropdown } from "@components/instance";
+import { FC } from "react"
+import { InstanceAdminSidebarMenu, InstanceHelpSection, InstanceSidebarDropdown } from "@components/instance"
+import { useApplication } from "@hooks/store"
+import { observer } from "mobx-react-lite"
 
 export interface IInstanceAdminSidebar {}
 
@@ -11,7 +9,7 @@ export const InstanceAdminSidebar: FC<IInstanceAdminSidebar> = observer(() => {
     // store
     const {
         theme: { sidebarCollapsed },
-    } = useApplication();
+    } = useApplication()
 
     return (
         <div
@@ -25,5 +23,5 @@ export const InstanceAdminSidebar: FC<IInstanceAdminSidebar> = observer(() => {
                 <InstanceHelpSection />
             </div>
         </div>
-    );
-});
+    )
+})

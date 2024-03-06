@@ -1,56 +1,51 @@
-import { FC, useEffect } from "react";
-import { observer } from "mobx-react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-
-import { CalendarDays } from "lucide-react";
-
-import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store";
-
-import { Tooltip, PriorityIcon } from "@servcy/ui";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { InboxIssueStatus } from "@components/inbox/inbox-issue-status";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC, useEffect } from "react"
+import { InboxIssueStatus } from "@components/inbox/inbox-issue-status"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store"
+import { CalendarDays } from "lucide-react"
+import { observer } from "mobx-react"
+import { PriorityIcon, Tooltip } from "@servcy/ui"
 
 type TInboxIssueListItem = {
-    workspaceSlug: string;
-    projectId: string;
-    inboxId: string;
-    issueId: string;
-};
+    workspaceSlug: string
+    projectId: string
+    inboxId: string
+    issueId: string
+}
 
 export const InboxIssueListItem: FC<TInboxIssueListItem> = observer((props) => {
-    const { workspaceSlug, projectId, inboxId, issueId } = props;
+    const { workspaceSlug, projectId, inboxId, issueId } = props
     // router
-    const router = useRouter();
-    const { inboxIssueId } = router.query;
+    const router = useRouter()
+    const { inboxIssueId } = router.query
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     const {
         issues: { getInboxIssueByIssueId },
-    } = useInboxIssues();
+    } = useInboxIssues()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const inboxIssueDetail = getInboxIssueByIssueId(inboxId, issueId);
-    const issue = getIssueById(issueId);
+    const inboxIssueDetail = getInboxIssueByIssueId(inboxId, issueId)
+    const issue = getIssueById(issueId)
 
-    if (!issue || !inboxIssueDetail) return <></>;
+    if (!issue || !inboxIssueDetail) return <></>
 
     useEffect(() => {
         if (issueId === inboxIssueId) {
             setTimeout(() => {
-                const issueItemCard = document.getElementById(`inbox-issue-list-item-${issueId}`);
+                const issueItemCard = document.getElementById(`inbox-issue-list-item-${issueId}`)
                 if (issueItemCard)
                     issueItemCard.scrollIntoView({
                         behavior: "smooth",
                         block: "center",
-                    });
-            }, 200);
+                    })
+            }, 200)
         }
-    }, [issueId, inboxIssueId]);
+    }, [issueId, inboxIssueId])
 
     return (
         <>
@@ -99,5 +94,5 @@ export const InboxIssueListItem: FC<TInboxIssueListItem> = observer((props) => {
                 </div>
             </Link>
         </>
-    );
-});
+    )
+})

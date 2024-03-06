@@ -1,28 +1,23 @@
-import { useRouter } from "next/router";
-
-import useSWR from "swr";
-
-import { AnalyticsService } from "@services/analytics.service";
-
-import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "@components/analytics";
-
-import { Button, Loader } from "@servcy/ui";
-
-import { DEFAULT_ANALYTICS } from "@constants/fetch-keys";
+import { useRouter } from "next/router"
+import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "@components/analytics"
+import { DEFAULT_ANALYTICS } from "@constants/fetch-keys"
+import { AnalyticsService } from "@services/analytics.service"
+import useSWR from "swr"
+import { Button, Loader } from "@servcy/ui"
 
 type Props = {
-    fullScreen?: boolean;
-};
+    fullScreen?: boolean
+}
 
-const analyticsService = new AnalyticsService();
+const analyticsService = new AnalyticsService()
 
 export const ScopeAndDemand: React.FC<Props> = (props) => {
-    const { fullScreen = true } = props;
+    const { fullScreen = true } = props
 
-    const router = useRouter();
-    const { workspaceSlug, projectId, cycleId, moduleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, cycleId, moduleId } = router.query
 
-    const isProjectLevel = projectId ? true : false;
+    const isProjectLevel = projectId ? true : false
 
     const params = isProjectLevel
         ? {
@@ -30,7 +25,7 @@ export const ScopeAndDemand: React.FC<Props> = (props) => {
               cycle: cycleId ? cycleId.toString() : null,
               module: moduleId ? moduleId.toString() : null,
           }
-        : undefined;
+        : undefined
 
     const {
         data: defaultAnalytics,
@@ -39,7 +34,7 @@ export const ScopeAndDemand: React.FC<Props> = (props) => {
     } = useSWR(
         workspaceSlug ? DEFAULT_ANALYTICS(workspaceSlug.toString(), params) : null,
         workspaceSlug ? () => analyticsService.getDefaultAnalytics(workspaceSlug.toString(), params) : null
-    );
+    )
 
     return (
         <>
@@ -101,5 +96,5 @@ export const ScopeAndDemand: React.FC<Props> = (props) => {
                 </div>
             )}
         </>
-    );
-};
+    )
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export const InboxSidebarLoader = () => (
     <div className="h-full w-[340px] border-r border-custom-border-300">
@@ -21,4 +21,4 @@ export const InboxSidebarLoader = () => (
             ))}
         </div>
     </div>
-);
+)

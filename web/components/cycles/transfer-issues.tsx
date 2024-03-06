@@ -1,42 +1,38 @@
-import React from "react";
-
-import { useRouter } from "next/router";
-
-import useSWR from "swr";
-
-import isEmpty from "lodash/isEmpty";
-// component
-import { Button, TransferIcon } from "@servcy/ui";
-// icon
-import { AlertCircle } from "lucide-react";
-
-import { CycleService } from "@services/cycle.service";
+import { useRouter } from "next/router"
+import React from "react"
 // fetch-key
-import { CYCLE_DETAILS } from "@constants/fetch-keys";
+import { CYCLE_DETAILS } from "@constants/fetch-keys"
+import { CycleService } from "@services/cycle.service"
+import isEmpty from "lodash/isEmpty"
+// icon
+import { AlertCircle } from "lucide-react"
+import useSWR from "swr"
+// component
+import { Button, TransferIcon } from "@servcy/ui"
 
 type Props = {
-    handleClick: () => void;
-    disabled?: boolean;
-};
+    handleClick: () => void
+    disabled?: boolean
+}
 
-const cycleService = new CycleService();
+const cycleService = new CycleService()
 
 export const TransferIssues: React.FC<Props> = (props) => {
-    const { handleClick, disabled = false } = props;
+    const { handleClick, disabled = false } = props
 
-    const router = useRouter();
-    const { workspaceSlug, projectId, cycleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, cycleId } = router.query
 
     const { data: cycleDetails } = useSWR(
         cycleId ? CYCLE_DETAILS(cycleId as string) : null,
         workspaceSlug && projectId && cycleId
             ? () => cycleService.getCycleDetails(workspaceSlug as string, projectId as string, cycleId as string)
             : null
-    );
+    )
 
     const transferableIssuesCount = cycleDetails
         ? cycleDetails.backlog_issues + cycleDetails.unstarted_issues + cycleDetails.started_issues
-        : 0;
+        : 0
 
     return (
         <div className="-mt-2 mb-4 flex items-center justify-between px-4 pt-6">
@@ -58,5 +54,5 @@ export const TransferIssues: React.FC<Props> = (props) => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}

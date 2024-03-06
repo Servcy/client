@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const ArrowRightIcon: React.FC<Props> = ({
     width = "24",
@@ -21,4 +20,4 @@ export const ArrowRightIcon: React.FC<Props> = ({
             fill={color}
         />
     </svg>
-);
+)

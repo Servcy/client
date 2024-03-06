@@ -1,25 +1,24 @@
-import { Command } from "cmdk";
-import { MessageSquare, Rocket } from "lucide-react";
-
-import { useApplication } from "@hooks/store";
+import { useApplication } from "@hooks/store"
+import { Command } from "cmdk"
+import { MessageSquare, Rocket } from "lucide-react"
 
 type Props = {
-    closePalette: () => void;
-};
+    closePalette: () => void
+}
 
 export const CommandPaletteHelpActions: React.FC<Props> = (props) => {
-    const { closePalette } = props;
+    const { closePalette } = props
 
     const {
         commandPalette: { toggleShortcutModal },
-    } = useApplication();
+    } = useApplication()
 
     return (
         <Command.Group heading="Help">
             <Command.Item
                 onSelect={() => {
-                    closePalette();
-                    toggleShortcutModal(true);
+                    closePalette()
+                    toggleShortcutModal(true)
                 }}
                 className="focus:outline-none"
             >
@@ -30,8 +29,8 @@ export const CommandPaletteHelpActions: React.FC<Props> = (props) => {
             </Command.Item>
             <Command.Item
                 onSelect={() => {
-                    closePalette();
-                    (window as any)?.$crisp.push(["do", "chat:open"]);
+                    closePalette()
+                    ;(window as any)?.$crisp.push(["do", "chat:open"])
                 }}
                 className="focus:outline-none"
             >
@@ -41,5 +40,5 @@ export const CommandPaletteHelpActions: React.FC<Props> = (props) => {
                 </div>
             </Command.Item>
         </Command.Group>
-    );
-};
+    )
+}

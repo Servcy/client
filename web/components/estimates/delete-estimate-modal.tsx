@@ -1,62 +1,60 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { AlertTriangle } from "lucide-react";
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
 // store hooks
-import { useEstimate } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { IEstimate } from "@servcy/types";
-
-import { Button } from "@servcy/ui";
+import { useEstimate } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IEstimate } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    data: IEstimate | null;
-    handleClose: () => void;
-};
+    isOpen: boolean
+    data: IEstimate | null
+    handleClose: () => void
+}
 
 export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
-    const { isOpen, handleClose, data } = props;
+    const { isOpen, handleClose, data } = props
     // states
-    const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+    const [isDeleteLoading, setIsDeleteLoading] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { deleteEstimate } = useEstimate();
+    const { deleteEstimate } = useEstimate()
 
     const handleEstimateDelete = () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        const estimateId = data?.id!;
+        const estimateId = data?.id!
 
         deleteEstimate(workspaceSlug.toString(), projectId.toString(), estimateId)
             .then(() => {
-                setIsDeleteLoading(false);
-                handleClose();
+                setIsDeleteLoading(false)
+                handleClose()
             })
             .catch((err) => {
-                const error = err?.error;
-                const errorString = Array.isArray(error) ? error[0] : error;
+                const error = err?.error
+                const errorString = Array.isArray(error) ? error[0] : error
 
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: errorString ?? "Estimate could not be deleted. Please try again",
-                });
-            });
-    };
+                })
+            })
+    }
 
     useEffect(() => {
-        setIsDeleteLoading(false);
-    }, [isOpen]);
+        setIsDeleteLoading(false)
+    }, [isOpen])
 
     const onClose = () => {
-        setIsDeleteLoading(false);
-        handleClose();
-    };
+        setIsDeleteLoading(false)
+        handleClose()
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -113,8 +111,8 @@ export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
                                             size="sm"
                                             tabIndex={1}
                                             onClick={() => {
-                                                setIsDeleteLoading(true);
-                                                handleEstimateDelete();
+                                                setIsDeleteLoading(true)
+                                                handleEstimateDelete()
                                             }}
                                             loading={isDeleteLoading}
                                         >
@@ -128,5 +126,5 @@ export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

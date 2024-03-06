@@ -1,38 +1,33 @@
-import React, { FC } from "react";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-
-import { useApplication, useUser } from "@hooks/store";
-import { useProjectPages } from "@hooks/store/use-project-specific-pages";
-
-import { PagesListView } from "@components/pages/pages-list";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-
-import { Loader } from "@servcy/ui";
-
-import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
-
-import { EUserProjectRoles } from "@constants/project";
-import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import React, { FC } from "react"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { PagesListView } from "@components/pages/pages-list"
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserProjectRoles } from "@constants/project"
+import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
+import { useApplication, useUser } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import { Loader } from "@servcy/ui"
 
 export const RecentPagesList: FC = observer(() => {
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { commandPalette: commandPaletteStore } = useApplication();
+    const { commandPalette: commandPaletteStore } = useApplication()
     const {
         membership: { currentProjectRole },
         currentUser,
-    } = useUser();
-    const { recentProjectPages } = useProjectPages();
+    } = useUser()
+    const { recentProjectPages } = useProjectPages()
 
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const EmptyStateImagePath = getEmptyStateImagePath("pages", "recent", isLightMode);
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const EmptyStateImagePath = getEmptyStateImagePath("pages", "recent", isLightMode)
 
     // FIXME: replace any with proper type
-    const isEmpty = recentProjectPages && Object.values(recentProjectPages).every((value: any) => value.length === 0);
+    const isEmpty = recentProjectPages && Object.values(recentProjectPages).every((value: any) => value.length === 0)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
     if (!recentProjectPages) {
         return (
@@ -41,7 +36,7 @@ export const RecentPagesList: FC = observer(() => {
                 <Loader.Item height="40px" />
                 <Loader.Item height="40px" />
             </Loader>
-        );
+        )
     }
 
     return (
@@ -49,7 +44,7 @@ export const RecentPagesList: FC = observer(() => {
             {Object.keys(recentProjectPages).length > 0 && !isEmpty ? (
                 <>
                     {Object.keys(recentProjectPages).map((key) => {
-                        if (recentProjectPages[key]?.length === 0) return null;
+                        if (recentProjectPages[key]?.length === 0) return null
 
                         return (
                             <div key={key}>
@@ -58,7 +53,7 @@ export const RecentPagesList: FC = observer(() => {
                                 </h2>
                                 <PagesListView pageIds={recentProjectPages[key]} />
                             </div>
-                        );
+                        )
                     })}
                 </>
             ) : (
@@ -77,5 +72,5 @@ export const RecentPagesList: FC = observer(() => {
                 </>
             )}
         </>
-    );
-});
+    )
+})

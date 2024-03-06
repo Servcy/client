@@ -1,38 +1,34 @@
-import React, { useCallback } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useEventTracker, useIssues } from "@hooks/store";
-
-import { CycleDropdown } from "@components/dropdowns";
-
-import { TIssue } from "@servcy/types";
-
-import { EIssuesStoreType } from "@constants/issue";
+import { useRouter } from "next/router"
+import React, { useCallback } from "react"
+import { CycleDropdown } from "@components/dropdowns"
+import { EIssuesStoreType } from "@constants/issue"
+import { useEventTracker, useIssues } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
 
 type Props = {
-    issue: TIssue;
-    onClose: () => void;
-    disabled: boolean;
-};
+    issue: TIssue
+    onClose: () => void
+    disabled: boolean
+}
 
 export const SpreadsheetCycleColumn: React.FC<Props> = observer((props) => {
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // props
-    const { issue, disabled, onClose } = props;
+    const { issue, disabled, onClose } = props
 
-    const { captureIssueEvent } = useEventTracker();
+    const { captureIssueEvent } = useEventTracker()
     const {
         issues: { addIssueToCycle, removeIssueFromCycle },
-    } = useIssues(EIssuesStoreType.CYCLE);
+    } = useIssues(EIssuesStoreType.CYCLE)
 
     const handleCycle = useCallback(
         async (cycleId: string | null) => {
-            if (!workspaceSlug || !issue || issue.cycle_id === cycleId) return;
-            if (cycleId) await addIssueToCycle(workspaceSlug.toString(), issue.project_id, cycleId, [issue.id]);
-            else await removeIssueFromCycle(workspaceSlug.toString(), issue.project_id, issue.cycle_id ?? "", issue.id);
+            if (!workspaceSlug || !issue || issue.cycle_id === cycleId) return
+            if (cycleId) await addIssueToCycle(workspaceSlug.toString(), issue.project_id, cycleId, [issue.id])
+            else await removeIssueFromCycle(workspaceSlug.toString(), issue.project_id, issue.cycle_id ?? "", issue.id)
             captureIssueEvent({
                 eventName: "Issue updated",
                 payload: {
@@ -42,10 +38,10 @@ export const SpreadsheetCycleColumn: React.FC<Props> = observer((props) => {
                 },
                 updates: { changed_property: "cycle", change_details: { cycle_id: cycleId } },
                 path: router.asPath,
-            });
+            })
         },
         [workspaceSlug, issue, addIssueToCycle, removeIssueFromCycle, captureIssueEvent, router.asPath]
-    );
+    )
 
     return (
         <div className="h-11 border-b-[0.5px] border-custom-border-200">
@@ -61,5 +57,5 @@ export const SpreadsheetCycleColumn: React.FC<Props> = observer((props) => {
                 onClose={onClose}
             />
         </div>
-    );
-});
+    )
+})

@@ -1,38 +1,36 @@
-import { FC, Fragment, Dispatch, SetStateAction, useState } from "react";
-import { AlertTriangle } from "lucide-react";
+import { Dispatch, FC, Fragment, SetStateAction, useState } from "react"
 // headless ui
-import { Dialog, Transition } from "@headlessui/react";
-
-import { Button } from "@servcy/ui";
+import { Dialog, Transition } from "@headlessui/react"
 // helper
-import { getFileName } from "@helpers/attachment.helper";
+import { getFileName } from "@helpers/attachment.helper"
+import { AlertTriangle } from "lucide-react"
+import type { TIssueAttachment } from "@servcy/types"
+import { Button } from "@servcy/ui"
+import { TAttachmentOperations } from "./root"
 
-import type { TIssueAttachment } from "@servcy/types";
-import { TAttachmentOperations } from "./root";
-
-export type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">;
+export type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">
 
 type Props = {
-    isOpen: boolean;
-    setIsOpen: Dispatch<SetStateAction<boolean>>;
-    data: TIssueAttachment;
-    handleAttachmentOperations: TAttachmentOperationsRemoveModal;
-};
+    isOpen: boolean
+    setIsOpen: Dispatch<SetStateAction<boolean>>
+    data: TIssueAttachment
+    handleAttachmentOperations: TAttachmentOperationsRemoveModal
+}
 
 export const IssueAttachmentDeleteModal: FC<Props> = (props) => {
-    const { isOpen, setIsOpen, data, handleAttachmentOperations } = props;
+    const { isOpen, setIsOpen, data, handleAttachmentOperations } = props
     // state
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(false)
 
     const handleClose = () => {
-        setIsOpen(false);
-        setLoader(false);
-    };
+        setIsOpen(false)
+        setLoader(false)
+    }
 
     const handleDeletion = async (assetId: string) => {
-        setLoader(true);
-        handleAttachmentOperations.remove(assetId).finally(() => handleClose());
-    };
+        setLoader(true)
+        handleAttachmentOperations.remove(assetId).finally(() => handleClose())
+    }
 
     return (
         data && (
@@ -96,7 +94,7 @@ export const IssueAttachmentDeleteModal: FC<Props> = (props) => {
                                             size="sm"
                                             tabIndex={1}
                                             onClick={() => {
-                                                handleDeletion(data.id);
+                                                handleDeletion(data.id)
                                             }}
                                             disabled={loader}
                                         >
@@ -110,5 +108,5 @@ export const IssueAttachmentDeleteModal: FC<Props> = (props) => {
                 </Dialog>
             </Transition.Root>
         )
-    );
-};
+    )
+}

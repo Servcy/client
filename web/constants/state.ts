@@ -1,11 +1,11 @@
-import { TStateGroups } from "@servcy/types";
+import { TStateGroups } from "@servcy/types"
 
 export const STATE_GROUPS: {
     [key in TStateGroups]: {
-        key: TStateGroups;
-        label: string;
-        color: string;
-    };
+        key: TStateGroups
+        label: string
+        color: string
+    }
 } = {
     backlog: {
         key: "backlog",
@@ -32,4 +32,4 @@ export const STATE_GROUPS: {
         label: "Canceled",
         color: "#dc2626",
     },
-};
+}

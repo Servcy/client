@@ -1,30 +1,27 @@
-import { FC } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-
-import { useWebhook } from "@hooks/store";
-
-import { ToggleSwitch } from "@servcy/ui";
-
-import { IWebhook } from "@servcy/types";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { useWebhook } from "@hooks/store"
+import { IWebhook } from "@servcy/types"
+import { ToggleSwitch } from "@servcy/ui"
 
 interface IWebhookListItem {
-    webhook: IWebhook;
+    webhook: IWebhook
 }
 
 export const WebhooksListItem: FC<IWebhookListItem> = (props) => {
-    const { webhook } = props;
+    const { webhook } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { updateWebhook } = useWebhook();
+    const { updateWebhook } = useWebhook()
 
     const handleToggle = () => {
-        if (!workspaceSlug || !webhook.id) return;
+        if (!workspaceSlug || !webhook.id) return
 
-        updateWebhook(workspaceSlug.toString(), webhook.id, { is_active: !webhook.is_active });
-    };
+        updateWebhook(workspaceSlug.toString(), webhook.id, { is_active: !webhook.is_active })
+    }
 
     return (
         <div className="border-b border-custom-border-200">
@@ -35,5 +32,5 @@ export const WebhooksListItem: FC<IWebhookListItem> = (props) => {
                 </span>
             </Link>
         </div>
-    );
-};
+    )
+}

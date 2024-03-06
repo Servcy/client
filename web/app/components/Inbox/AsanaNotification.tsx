@@ -1,23 +1,23 @@
-import { AsanaNotificationProps } from "@/types/integrations/asana";
-import { getCleanLink } from "@/utils/Shared";
-import { Avatar, Tag, Tooltip } from "antd";
-import Image from "next/image";
-import { HiExternalLink } from "react-icons/hi";
-import { remark } from "remark";
-import html from "remark-html";
+import Image from "next/image"
+import { Avatar, Tag, Tooltip } from "antd"
+import { HiExternalLink } from "react-icons/hi"
+import { remark } from "remark"
+import html from "remark-html"
+import { AsanaNotificationProps } from "@/types/integrations/asana"
+import { getCleanLink } from "@/utils/Shared"
 
 const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
-    let link = "#null";
-    let linkLabel = "";
-    const { name, photo } = cause;
+    let link = "#null"
+    let linkLabel = ""
+    const { name, photo } = cause
     const cleanImageLink = photo
         ? getCleanLink(photo.image_60x60 ?? photo.image_128x128 ?? photo.image_21x21 ?? "")
-        : "";
+        : ""
 
     const renderAsanaEvent = () => {
         if (data.comment) {
-            link = `https://app.asana.com/0/0/${data.comment.target.gid}/${data.comment.gid}/f`;
-            linkLabel = "View comment in Asana";
+            link = `https://app.asana.com/0/0/${data.comment.target.gid}/${data.comment.gid}/f`
+            linkLabel = "View comment in Asana"
             return (
                 <>
                     <div className="mb-2 flex w-full">
@@ -53,10 +53,10 @@ const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
                         </div>
                     </div>
                 </>
-            );
+            )
         } else if (data.task) {
-            link = data.task.permalink_url;
-            linkLabel = "View task in Asana";
+            link = data.task.permalink_url
+            linkLabel = "View task in Asana"
             return (
                 <>
                     <div className="mb-2 flex w-full">
@@ -167,10 +167,10 @@ const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
                         </div>
                     )}
                 </>
-            );
+            )
         } else if (data.project) {
-            link = data.project.permalink_url;
-            linkLabel = "View project in Asana";
+            link = data.project.permalink_url
+            linkLabel = "View project in Asana"
             return (
                 <>
                     <div className="mb-2 flex w-full">
@@ -297,11 +297,11 @@ const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
                         </div>
                     )}
                 </>
-            );
+            )
         } else {
-            return <div>Event not supported</div>;
+            return <div>Event not supported</div>
         }
-    };
+    }
 
     return (
         <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
@@ -345,7 +345,7 @@ const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default AsanaNotification;
+export default AsanaNotification

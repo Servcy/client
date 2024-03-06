@@ -1,4 +1,4 @@
-type AllowedInputTypes = "password" | "text" | "number" | "tel";
+type AllowedInputTypes = "password" | "text" | "number" | "tel"
 
 type InputProps = Required<
     Pick<
@@ -16,35 +16,35 @@ type InputProps = Required<
         | "inputMode"
         | "onInput"
     > & {
-        ref: React.RefCallback<HTMLInputElement>;
-        placeholder: string | undefined;
-        className: string | undefined;
-        type: AllowedInputTypes;
+        ref: React.RefCallback<HTMLInputElement>
+        placeholder: string | undefined
+        className: string | undefined
+        type: AllowedInputTypes
     }
->;
+>
 
 export interface NativeEvent {
-    data: string | null;
-    inputType: string;
+    data: string | null
+    inputType: string
 }
 
 export interface OTPInputProps {
     /** Value of the OTP input */
-    value?: string;
+    value?: string
     /** Number of OTP inputs to be rendered */
-    numInputs?: number;
+    numInputs?: number
     /** Whether the first input should be auto focused */
-    shouldAutoFocus?: boolean;
+    shouldAutoFocus?: boolean
     /** Function to render the separator */
-    renderSeparator?: ((index: number) => React.ReactNode) | React.ReactNode;
+    renderSeparator?: ((index: number) => React.ReactNode) | React.ReactNode
     /** Style for the container */
-    containerStyle?: React.CSSProperties | string;
+    containerStyle?: React.CSSProperties | string
     /** Style for the input */
-    inputStyle?: React.CSSProperties | string;
+    inputStyle?: React.CSSProperties | string
     /** The type that will be passed to the input being rendered */
-    inputType?: AllowedInputTypes;
+    inputType?: AllowedInputTypes
     /** Callback to be called when the OTP value changes */
-    onChange: (otp: string, activeInput: number) => void;
+    onChange: (otp: string, activeInput: number) => void
     /** Function to render the input */
-    renderInput: (inputProps: InputProps, index: number) => React.ReactNode;
+    renderInput: (inputProps: InputProps, index: number) => React.ReactNode
 }

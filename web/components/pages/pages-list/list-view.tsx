@@ -1,52 +1,48 @@
-import { FC } from "react";
-import { useRouter } from "next/router";
-import { useTheme } from "next-themes";
-
-import { useApplication, useUser } from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-import { PagesListItem } from "./list-item";
-
-import { Loader } from "@servcy/ui";
-
-import { EUserProjectRoles } from "@constants/project";
-import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserProjectRoles } from "@constants/project"
+import { useApplication, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { useTheme } from "next-themes"
+import { Loader } from "@servcy/ui"
+import { PagesListItem } from "./list-item"
 
 type IPagesListView = {
-    pageIds: string[];
-};
+    pageIds: string[]
+}
 
 export const PagesListView: FC<IPagesListView> = (props) => {
-    const { pageIds: projectPageIds } = props;
+    const { pageIds: projectPageIds } = props
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
     const {
         commandPalette: { toggleCreatePageModal },
-    } = useApplication();
+    } = useApplication()
     const {
         membership: { currentProjectRole },
         currentUser,
-    } = useUser();
+    } = useUser()
     // local storage
-    const { storedValue: pageTab } = useLocalStorage("pageTab", "Recent");
+    const { storedValue: pageTab } = useLocalStorage("pageTab", "Recent")
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     const currentPageTabDetails = pageTab
         ? PAGE_EMPTY_STATE_DETAILS[pageTab as keyof typeof PAGE_EMPTY_STATE_DETAILS]
-        : PAGE_EMPTY_STATE_DETAILS["All"];
+        : PAGE_EMPTY_STATE_DETAILS["All"]
 
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("pages", currentPageTabDetails.key, isLightMode);
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("pages", currentPageTabDetails.key, isLightMode)
 
-    const isButtonVisible = currentPageTabDetails.key !== "archived" && currentPageTabDetails.key !== "favorites";
+    const isButtonVisible = currentPageTabDetails.key !== "archived" && currentPageTabDetails.key !== "favorites"
 
     // here we are only observing the projectPageStore, so that we can re-render the component when the projectPageStore changes
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
     return (
         <>
@@ -83,5 +79,5 @@ export const PagesListView: FC<IPagesListView> = (props) => {
                 </Loader>
             )}
         </>
-    );
-};
+    )
+}

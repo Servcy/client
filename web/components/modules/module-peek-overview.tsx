@@ -1,38 +1,36 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useModule } from "@hooks/store";
-
-import { ModuleDetailsSidebar } from "./sidebar";
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
+import { useModule } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { ModuleDetailsSidebar } from "./sidebar"
 
 type Props = {
-    projectId: string;
-    workspaceSlug: string;
-};
+    projectId: string
+    workspaceSlug: string
+}
 
 export const ModulePeekOverview: React.FC<Props> = observer(({ projectId, workspaceSlug }) => {
     // router
-    const router = useRouter();
-    const { peekModule } = router.query;
+    const router = useRouter()
+    const { peekModule } = router.query
     // refs
-    const ref = React.useRef(null);
+    const ref = React.useRef(null)
     // store hooks
-    const { fetchModuleDetails } = useModule();
+    const { fetchModuleDetails } = useModule()
 
     const handleClose = () => {
-        delete router.query.peekModule;
+        delete router.query.peekModule
         router.push({
             pathname: router.pathname,
             query: { ...router.query },
-        });
-    };
+        })
+    }
 
     useEffect(() => {
-        if (!peekModule) return;
+        if (!peekModule) return
 
-        fetchModuleDetails(workspaceSlug, projectId, peekModule.toString());
-    }, [fetchModuleDetails, peekModule, projectId, workspaceSlug]);
+        fetchModuleDetails(workspaceSlug, projectId, peekModule.toString())
+    }, [fetchModuleDetails, peekModule, projectId, workspaceSlug])
 
     return (
         <>
@@ -49,5 +47,5 @@ export const ModulePeekOverview: React.FC<Props> = observer(({ projectId, worksp
                 </div>
             )}
         </>
-    );
-});
+    )
+})

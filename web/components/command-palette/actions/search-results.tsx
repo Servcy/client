@@ -1,25 +1,23 @@
-import { useRouter } from "next/router";
-import { Command } from "cmdk";
-
-import { commandGroups } from "@components/command-palette";
-
-import { IWorkspaceSearchResults } from "@servcy/types";
+import { useRouter } from "next/router"
+import { commandGroups } from "@components/command-palette"
+import { Command } from "cmdk"
+import { IWorkspaceSearchResults } from "@servcy/types"
 
 type Props = {
-    closePalette: () => void;
-    results: IWorkspaceSearchResults;
-};
+    closePalette: () => void
+    results: IWorkspaceSearchResults
+}
 
 export const CommandPaletteSearchResults: React.FC<Props> = (props) => {
-    const { closePalette, results } = props;
+    const { closePalette, results } = props
 
-    const router = useRouter();
+    const router = useRouter()
 
     return (
         <>
             {Object.keys(results.results).map((key) => {
-                const section = (results.results as any)[key];
-                const currentSection = commandGroups[key];
+                const section = (results.results as any)[key]
+                const currentSection = commandGroups[key]
 
                 if (section.length > 0) {
                     return (
@@ -28,8 +26,8 @@ export const CommandPaletteSearchResults: React.FC<Props> = (props) => {
                                 <Command.Item
                                     key={item.id}
                                     onSelect={() => {
-                                        closePalette();
-                                        router.push(currentSection.path(item));
+                                        closePalette()
+                                        router.push(currentSection.path(item))
                                     }}
                                     value={`${key}-${item?.id}-${item.name}-${item.project__identifier ?? ""}-${item.sequence_id ?? ""}`}
                                     className="focus:outline-none"
@@ -41,9 +39,9 @@ export const CommandPaletteSearchResults: React.FC<Props> = (props) => {
                                 </Command.Item>
                             ))}
                         </Command.Group>
-                    );
+                    )
                 }
             })}
         </>
-    );
-};
+    )
+}

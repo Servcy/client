@@ -1,17 +1,15 @@
-import { FC } from "react";
-
-import { Tooltip } from "@servcy/ui";
-
-import { IIssueLabel } from "@servcy/types";
+import { FC } from "react"
+import { IIssueLabel } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
 
 type IssueLabelsListProps = {
-    labels?: (IIssueLabel | undefined)[];
-    length?: number;
-    showLength?: boolean;
-};
+    labels?: (IIssueLabel | undefined)[]
+    length?: number
+    showLength?: boolean
+}
 
 export const IssueLabelsList: FC<IssueLabelsListProps> = (props) => {
-    const { labels } = props;
+    const { labels } = props
     return (
         <>
             {labels && (
@@ -29,5 +27,5 @@ export const IssueLabelsList: FC<IssueLabelsListProps> = (props) => {
                 </>
             )}
         </>
-    );
-};
+    )
+}

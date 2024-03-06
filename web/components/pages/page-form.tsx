@@ -1,26 +1,23 @@
-import { Controller, useForm } from "react-hook-form";
-
-import { Button, Input, Tooltip } from "@servcy/ui";
-
-import { IPage } from "@servcy/types";
-
-import { PAGE_ACCESS_SPECIFIERS } from "@constants/page";
-import { IPageStore } from "@store/page.store";
+import { PAGE_ACCESS_SPECIFIERS } from "@constants/page"
+import { IPageStore } from "@store/page.store"
+import { Controller, useForm } from "react-hook-form"
+import { IPage } from "@servcy/types"
+import { Button, Input, Tooltip } from "@servcy/ui"
 
 type Props = {
-    handleFormSubmit: (values: IPage) => Promise<void>;
-    handleClose: () => void;
-    pageStore?: IPageStore;
-};
+    handleFormSubmit: (values: IPage) => Promise<void>
+    handleClose: () => void
+    pageStore?: IPageStore
+}
 
 const defaultValues = {
     name: "",
     description: "",
     access: 0,
-};
+}
 
 export const PageForm: React.FC<Props> = (props) => {
-    const { handleFormSubmit, handleClose, pageStore } = props;
+    const { handleFormSubmit, handleClose, pageStore } = props
 
     const {
         formState: { errors, isSubmitting },
@@ -30,9 +27,9 @@ export const PageForm: React.FC<Props> = (props) => {
         defaultValues: pageStore
             ? { name: pageStore.name, description: pageStore.description, access: pageStore.access }
             : defaultValues,
-    });
+    })
 
-    const handleCreateUpdatePage = (formData: IPage) => handleFormSubmit(formData);
+    const handleCreateUpdatePage = (formData: IPage) => handleFormSubmit(formData)
 
     return (
         <form onSubmit={handleSubmit(handleCreateUpdatePage)}>
@@ -120,5 +117,5 @@ export const PageForm: React.FC<Props> = (props) => {
                 </div>
             </div>
         </form>
-    );
-};
+    )
+}

@@ -1,26 +1,22 @@
-import React from "react";
-import useSWR from "swr";
+import React from "react"
+import { MarkdownRenderer } from "@components/ui"
 // headless ui
-import { Dialog, Transition } from "@headlessui/react";
-
-import { WorkspaceService } from "@services/workspace.service";
-
-import { MarkdownRenderer } from "@components/ui";
-import { Loader } from "@servcy/ui";
-
-import { X } from "lucide-react";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
+import { Dialog, Transition } from "@headlessui/react"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { WorkspaceService } from "@services/workspace.service"
+import { X } from "lucide-react"
+import useSWR from "swr"
+import { Loader } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+    isOpen: boolean
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const workspaceService = new WorkspaceService();
+const workspaceService = new WorkspaceService()
 
 export const ProductUpdatesModal: React.FC<Props> = ({ isOpen, setIsOpen }) => {
-    const { data: updates } = useSWR("PRODUCT_UPDATES", () => workspaceService.getProductUpdates());
+    const { data: updates } = useSWR("PRODUCT_UPDATES", () => workspaceService.getProductUpdates())
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -111,5 +107,5 @@ export const ProductUpdatesModal: React.FC<Props> = ({ isOpen, setIsOpen }) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

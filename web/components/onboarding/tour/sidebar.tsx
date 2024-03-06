@@ -1,11 +1,10 @@
-import { ContrastIcon, DiceIcon, LayersIcon, PhotoFilterIcon } from "@servcy/ui";
-import { FileText } from "lucide-react";
-
-import { TTourSteps } from "./root";
+import { FileText } from "lucide-react"
+import { ContrastIcon, DiceIcon, LayersIcon, PhotoFilterIcon } from "@servcy/ui"
+import { TTourSteps } from "./root"
 
 const sidebarOptions: {
-    key: TTourSteps;
-    Icon: any;
+    key: TTourSteps
+    Icon: any
 }[] = [
     {
         key: "issues",
@@ -27,12 +26,12 @@ const sidebarOptions: {
         key: "pages",
         Icon: FileText,
     },
-];
+]
 
 type Props = {
-    step: TTourSteps;
-    setStep: React.Dispatch<React.SetStateAction<TTourSteps>>;
-};
+    step: TTourSteps
+    setStep: React.Dispatch<React.SetStateAction<TTourSteps>>
+}
 
 export const TourSidebar: React.FC<Props> = ({ step, setStep }) => (
     <div className="col-span-3 hidden bg-custom-background-90 p-8 lg:block">
@@ -59,4 +58,4 @@ export const TourSidebar: React.FC<Props> = ({ step, setStep }) => (
             ))}
         </div>
     </div>
-);
+)

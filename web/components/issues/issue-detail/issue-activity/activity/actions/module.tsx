@@ -1,24 +1,21 @@
-import { FC } from "react";
-import { observer } from "mobx-react";
+import { FC } from "react"
+import { useIssueDetail } from "@hooks/store"
+import { observer } from "mobx-react"
+import { DiceIcon } from "@servcy/ui"
+import { IssueActivityBlockComponent } from "./"
 
-import { useIssueDetail } from "@hooks/store";
-
-import { IssueActivityBlockComponent } from "./";
-
-import { DiceIcon } from "@servcy/ui";
-
-type TIssueModuleActivity = { activityId: string; ends: "top" | "bottom" | undefined };
+type TIssueModuleActivity = { activityId: string; ends: "top" | "bottom" | undefined }
 
 export const IssueModuleActivity: FC<TIssueModuleActivity> = observer((props) => {
-    const { activityId, ends } = props;
+    const { activityId, ends } = props
 
     const {
         activity: { getActivityById },
-    } = useIssueDetail();
+    } = useIssueDetail()
 
-    const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId)
 
-    if (!activity) return <></>;
+    if (!activity) return <></>
     return (
         <IssueActivityBlockComponent
             icon={<DiceIcon className="h-4 w-4 flex-shrink-0 text-[#6b7280]" />}
@@ -65,5 +62,5 @@ export const IssueModuleActivity: FC<TIssueModuleActivity> = observer((props) =>
                 )}
             </>
         </IssueActivityBlockComponent>
-    );
-});
+    )
+})

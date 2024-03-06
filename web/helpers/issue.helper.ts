@@ -1,8 +1,9 @@
-import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
-import { v4 as uuidv4 } from "uuid";
-
-import { orderArrayBy } from "@helpers/array.helper";
-
+import { IGanttBlock } from "@components/gantt-chart"
+import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { STATE_GROUPS } from "@constants/state"
+import { orderArrayBy } from "@helpers/array.helper"
+import differenceInCalendarDays from "date-fns/differenceInCalendarDays"
+import { v4 as uuidv4 } from "uuid"
 import {
     TIssue,
     TIssueGroupByOptions,
@@ -10,11 +11,7 @@ import {
     TIssueOrderByOptions,
     TIssueParams,
     TStateGroups,
-} from "@servcy/types";
-import { IGanttBlock } from "@components/gantt-chart";
-
-import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
-import { STATE_GROUPS } from "@constants/state";
+} from "@servcy/types"
 
 type THandleIssuesMutation = (
     formData: Partial<TIssue>,
@@ -24,15 +21,15 @@ type THandleIssuesMutation = (
     orderBy: TIssueOrderByOptions,
     prevData?:
         | {
-              [key: string]: TIssue[];
+              [key: string]: TIssue[]
           }
         | TIssue[]
 ) =>
     | {
-          [key: string]: TIssue[];
+          [key: string]: TIssue[]
       }
     | TIssue[]
-    | undefined;
+    | undefined
 
 export const handleIssuesMutation: THandleIssuesMutation = (
     formData,
@@ -42,29 +39,29 @@ export const handleIssuesMutation: THandleIssuesMutation = (
     orderBy,
     prevData
 ) => {
-    if (!prevData) return prevData;
+    if (!prevData) return prevData
 
     if (Array.isArray(prevData)) {
         const updatedIssue = {
             ...prevData[issueIndex],
             ...formData,
-        };
+        }
 
-        prevData.splice(issueIndex, 1, updatedIssue);
+        prevData.splice(issueIndex, 1, updatedIssue)
 
-        return [...prevData];
+        return [...prevData]
     } else {
-        const oldGroup = prevData[oldGroupTitle ?? ""] ?? [];
+        const oldGroup = prevData[oldGroupTitle ?? ""] ?? []
 
-        let newGroup: TIssue[] = [];
+        let newGroup: TIssue[] = []
 
-        if (selectedGroupBy === "priority") newGroup = prevData[formData.priority ?? ""] ?? [];
-        else if (selectedGroupBy === "state") newGroup = prevData[formData.state_id ?? ""] ?? [];
+        if (selectedGroupBy === "priority") newGroup = prevData[formData.priority ?? ""] ?? []
+        else if (selectedGroupBy === "state") newGroup = prevData[formData.state_id ?? ""] ?? []
 
         const updatedIssue = {
             ...oldGroup[issueIndex],
             ...formData,
-        };
+        }
 
         if (selectedGroupBy !== Object.keys(formData)[0])
             return {
@@ -73,9 +70,9 @@ export const handleIssuesMutation: THandleIssuesMutation = (
                     oldGroup.map((i) => (i.id === updatedIssue.id ? updatedIssue : i)),
                     orderBy
                 ),
-            };
+            }
 
-        const groupThatIsUpdated = selectedGroupBy === "priority" ? formData.priority : formData.state_id;
+        const groupThatIsUpdated = selectedGroupBy === "priority" ? formData.priority : formData.state_id
 
         return {
             ...prevData,
@@ -84,39 +81,39 @@ export const handleIssuesMutation: THandleIssuesMutation = (
                 orderBy
             ),
             [groupThatIsUpdated ?? ""]: orderArrayBy([...newGroup, updatedIssue], orderBy),
-        };
+        }
     }
-};
+}
 
 export const handleIssueQueryParamsByLayout = (
     layout: TIssueLayouts | undefined,
     viewType: "my_issues" | "issues" | "profile_issues" | "archived_issues" | "draft_issues"
 ): TIssueParams[] | null => {
-    const queryParams: TIssueParams[] = [];
+    const queryParams: TIssueParams[] = []
 
-    if (!layout) return null;
+    if (!layout) return null
 
-    const layoutOptions = ISSUE_DISPLAY_FILTERS_BY_LAYOUT[viewType][layout];
+    const layoutOptions = ISSUE_DISPLAY_FILTERS_BY_LAYOUT[viewType][layout]
 
     // add filters query params
     layoutOptions.filters.forEach((option) => {
-        queryParams.push(option);
-    });
+        queryParams.push(option)
+    })
 
     // add display filters query params
     Object.keys(layoutOptions.display_filters).forEach((option) => {
-        queryParams.push(option as TIssueParams);
-    });
+        queryParams.push(option as TIssueParams)
+    })
 
     // add extra options query params
     if (layoutOptions.extra_options.access) {
         layoutOptions.extra_options.values.forEach((option) => {
-            queryParams.push(option);
-        });
+            queryParams.push(option)
+        })
     }
 
-    return queryParams;
-};
+    return queryParams
+}
 
 /**
  *
@@ -138,10 +135,10 @@ export const createIssuePayload: (projectId: string, formData: Partial<TIssue>) 
         tempId: uuidv4(),
         // to be overridden by the form data
         ...formData,
-    } as TIssue;
+    } as TIssue
 
-    return payload;
-};
+    return payload
+}
 
 /**
  * @description check if the issue due date should be highlighted
@@ -153,16 +150,16 @@ export const shouldHighlightIssueDueDate = (
     date: string | Date | null,
     stateGroup: TStateGroups | undefined
 ): boolean => {
-    if (!date || !stateGroup) return false;
+    if (!date || !stateGroup) return false
     // if the issue is completed or cancelled, don't highlight the due date
-    if ([STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateGroup)) return false;
+    if ([STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateGroup)) return false
 
-    const parsedDate = new Date(date);
-    const targetDateDistance = differenceInCalendarDays(parsedDate, new Date());
+    const parsedDate = new Date(date)
+    const targetDateDistance = differenceInCalendarDays(parsedDate, new Date())
 
     // if the issue is overdue, highlight the due date
-    return targetDateDistance <= 0;
-};
+    return targetDateDistance <= 0
+}
 export const renderIssueBlocksStructure = (blocks: TIssue[]): IGanttBlock[] =>
     blocks?.map((block) => ({
         data: block,
@@ -170,4 +167,4 @@ export const renderIssueBlocksStructure = (blocks: TIssue[]): IGanttBlock[] =>
         sort_order: block.sort_order,
         start_date: block.start_date ? new Date(block.start_date) : null,
         target_date: block.target_date ? new Date(block.target_date) : null,
-    }));
+    }))

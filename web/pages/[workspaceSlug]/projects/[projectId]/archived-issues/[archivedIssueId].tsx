@@ -1,44 +1,38 @@
-import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store";
-import { observer } from "mobx-react";
-import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
-import toast from "react-hot-toast";
-import useSWR from "swr";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { PageHead } from "@components/core";
-import { ProjectArchivedIssueDetailsHeader } from "@components/headers";
-import { IssueDetailRoot } from "@components/issues";
-
-import { ArchiveIcon, Button, Loader } from "@servcy/ui";
-
-import { RotateCcw } from "lucide-react";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { EIssuesStoreType } from "@constants/issue";
-import { EUserProjectRoles } from "@constants/project";
+import { useRouter } from "next/router"
+import { ReactElement, useState } from "react"
+import { PageHead } from "@components/core"
+import { ProjectArchivedIssueDetailsHeader } from "@components/headers"
+import { IssueDetailRoot } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { RotateCcw } from "lucide-react"
+import { observer } from "mobx-react"
+import toast from "react-hot-toast"
+import useSWR from "swr"
+import { ArchiveIcon, Button, Loader } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, archivedIssueId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, archivedIssueId } = router.query
     // states
-    const [isRestoring, setIsRestoring] = useState(false);
+    const [isRestoring, setIsRestoring] = useState(false)
 
     const {
         fetchIssue,
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
     const {
         issues: { restoreIssue },
-    } = useIssues(EIssuesStoreType.ARCHIVED);
+    } = useIssues(EIssuesStoreType.ARCHIVED)
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
     const { isLoading } = useSWR(
         workspaceSlug && projectId && archivedIssueId
@@ -47,21 +41,21 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
         workspaceSlug && projectId && archivedIssueId
             ? () => fetchIssue(workspaceSlug.toString(), projectId.toString(), archivedIssueId.toString(), "ARCHIVED")
             : null
-    );
+    )
 
     // derived values
-    const issue = archivedIssueId ? getIssueById(archivedIssueId.toString()) : undefined;
-    const project = issue ? getProjectById(issue?.project_id) : undefined;
-    const pageTitle = project && issue ? `${project?.identifier}-${issue?.sequence_id} ${issue?.name}` : undefined;
+    const issue = archivedIssueId ? getIssueById(archivedIssueId.toString()) : undefined
+    const project = issue ? getProjectById(issue?.project_id) : undefined
+    const pageTitle = project && issue ? `${project?.identifier}-${issue?.sequence_id} ${issue?.name}` : undefined
     // auth
-    const canRestoreIssue = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const canRestoreIssue = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
-    if (!issue) return <></>;
+    if (!issue) return <></>
 
     const handleRestore = async () => {
-        if (!workspaceSlug || !projectId || !archivedIssueId) return;
+        if (!workspaceSlug || !projectId || !archivedIssueId) return
 
-        setIsRestoring(true);
+        setIsRestoring(true)
 
         await restoreIssue(workspaceSlug.toString(), projectId.toString(), archivedIssueId.toString())
             .then(() => {
@@ -73,20 +67,20 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
                         `${getProjectById(issue.project_id)?.identifier}-${
                             issue?.sequence_id
                         } is restored successfully under the project ${getProjectById(issue.project_id)?.name}`,
-                });
-                router.push(`/${workspaceSlug}/projects/${projectId}/issues/${archivedIssueId}`);
+                })
+                router.push(`/${workspaceSlug}/projects/${projectId}/issues/${archivedIssueId}`)
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Something went wrong. Please try again.",
-                });
+                })
             })
-            .finally(() => setIsRestoring(false));
-    };
+            .finally(() => setIsRestoring(false))
+    }
 
-    const issueLoader = !issue || isLoading ? true : false;
+    const issueLoader = !issue || isLoading ? true : false
 
     return (
         <>
@@ -138,15 +132,15 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})
 
 ArchivedIssueDetailsPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<ProjectArchivedIssueDetailsHeader />} withProjectWrapper>
             {page}
         </AppLayout>
-    );
-};
+    )
+}
 
-export default ArchivedIssueDetailsPage;
+export default ArchivedIssueDetailsPage

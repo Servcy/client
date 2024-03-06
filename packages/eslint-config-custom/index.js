@@ -19,4 +19,4 @@ module.exports = {
         "@next/next/no-img-element": "off",
         "@typescript-eslint/no-unused-vars": ["warn"],
     },
-};
+}

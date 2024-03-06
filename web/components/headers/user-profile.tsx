@@ -1,37 +1,36 @@
-import { Breadcrumbs, CustomMenu } from "@servcy/ui";
-import { BreadcrumbLink } from "@components/common";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { cn } from "@helpers/common.helper";
-import { FC } from "react";
-import { useApplication, useUser } from "@hooks/store";
-import { ChevronDown, PanelRight } from "lucide-react";
-import { observer } from "mobx-react-lite";
-import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile"
+import { cn } from "@helpers/common.helper"
+import { useApplication, useUser } from "@hooks/store"
+import { ChevronDown, PanelRight } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, CustomMenu } from "@servcy/ui"
 
 type TUserProfileHeader = {
-    type?: string | undefined;
-};
+    type?: string | undefined
+}
 
 export const UserProfileHeader: FC<TUserProfileHeader> = observer((props) => {
-    const { type = undefined } = props;
+    const { type = undefined } = props
 
-    const router = useRouter();
-    const { workspaceSlug, userId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, userId } = router.query
 
-    const AUTHORIZED_ROLES = [20, 15, 10];
+    const AUTHORIZED_ROLES = [20, 15, 10]
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
 
-    if (!currentWorkspaceRole) return null;
+    if (!currentWorkspaceRole) return null
 
-    const isAuthorized = AUTHORIZED_ROLES.includes(currentWorkspaceRole);
-    const tabsList = isAuthorized ? [...PROFILE_VIEWER_TAB, ...PROFILE_ADMINS_TAB] : PROFILE_VIEWER_TAB;
+    const isAuthorized = AUTHORIZED_ROLES.includes(currentWorkspaceRole)
+    const tabsList = isAuthorized ? [...PROFILE_VIEWER_TAB, ...PROFILE_ADMINS_TAB] : PROFILE_VIEWER_TAB
 
-    const { theme: themStore } = useApplication();
+    const { theme: themStore } = useApplication()
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -76,7 +75,7 @@ export const UserProfileHeader: FC<TUserProfileHeader> = observer((props) => {
                         <button
                             className="transition-all block md:hidden"
                             onClick={() => {
-                                themStore.toggleProfileSidebar();
+                                themStore.toggleProfileSidebar()
                             }}
                         >
                             <PanelRight
@@ -90,5 +89,5 @@ export const UserProfileHeader: FC<TUserProfileHeader> = observer((props) => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

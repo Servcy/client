@@ -1,37 +1,32 @@
-import { useEffect } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { History } from "lucide-react";
+import Link from "next/link"
+import { useEffect } from "react"
+import { ActivityIcon, ActivityMessage, IssueLink } from "@components/core"
+import { RecentActivityEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+import { useDashboard, useUser } from "@hooks/store"
+import { History } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TRecentActivityWidgetResponse } from "@servcy/types"
+import { Avatar } from "@servcy/ui"
 
-import { useDashboard, useUser } from "@hooks/store";
-
-import { ActivityIcon, ActivityMessage, IssueLink } from "@components/core";
-import { RecentActivityEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
-
-import { Avatar } from "@servcy/ui";
-
-import { calculateTimeAgo } from "@helpers/date-time.helper";
-
-import { TRecentActivityWidgetResponse } from "@servcy/types";
-
-const WIDGET_KEY = "recent_activity";
+const WIDGET_KEY = "recent_activity"
 
 export const RecentActivityWidget: React.FC<WidgetProps> = observer((props) => {
-    const { dashboardId, workspaceSlug } = props;
+    const { dashboardId, workspaceSlug } = props
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
     // derived values
-    const { fetchWidgetStats, getWidgetStats } = useDashboard();
-    const widgetStats = getWidgetStats<TRecentActivityWidgetResponse[]>(workspaceSlug, dashboardId, WIDGET_KEY);
+    const { fetchWidgetStats, getWidgetStats } = useDashboard()
+    const widgetStats = getWidgetStats<TRecentActivityWidgetResponse[]>(workspaceSlug, dashboardId, WIDGET_KEY)
 
     useEffect(() => {
         fetchWidgetStats(workspaceSlug, dashboardId, {
             widget_key: WIDGET_KEY,
-        });
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
-    if (!widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />;
+    if (!widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />
 
     return (
         <div className="bg-custom-background-100 rounded-xl border-[0.5px] border-custom-border-200 w-full py-6 hover:shadow-custom-shadow-4xl duration-300 min-h-96">
@@ -92,5 +87,5 @@ export const RecentActivityWidget: React.FC<WidgetProps> = observer((props) => {
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

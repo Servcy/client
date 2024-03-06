@@ -1,27 +1,25 @@
-import { observer } from "mobx-react-lite";
-import { X } from "lucide-react";
-
-import { useProject } from "@hooks/store";
-
-import { renderEmoji } from "@helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useProject } from "@hooks/store"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
 
 type Props = {
-    handleRemove: (val: string) => void;
-    values: string[];
-    editable: boolean | undefined;
-};
+    handleRemove: (val: string) => void
+    values: string[]
+    editable: boolean | undefined
+}
 
 export const AppliedProjectFilters: React.FC<Props> = observer((props) => {
-    const { handleRemove, values, editable } = props;
+    const { handleRemove, values, editable } = props
     // store hooks
-    const { projectMap } = useProject();
+    const { projectMap } = useProject()
 
     return (
         <>
             {values.map((projectId) => {
-                const projectDetails = projectMap?.[projectId] ?? null;
+                const projectDetails = projectMap?.[projectId] ?? null
 
-                if (!projectDetails) return null;
+                if (!projectDetails) return null
 
                 return (
                     <div
@@ -52,8 +50,8 @@ export const AppliedProjectFilters: React.FC<Props> = observer((props) => {
                             </button>
                         )}
                     </div>
-                );
+                )
             })}
         </>
-    );
-});
+    )
+})

@@ -1,75 +1,70 @@
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useDashboard } from "@hooks/store";
-
-import { PieGraph } from "@components/ui";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
 import {
     DurationFilterDropdown,
     IssuesByStateGroupEmptyState,
     WidgetLoader,
     WidgetProps,
-} from "@components/dashboard/widgets";
+} from "@components/dashboard/widgets"
+import { PieGraph } from "@components/ui"
+import { STATE_GROUP_GRAPH_COLORS, STATE_GROUP_GRAPH_GRADIENTS } from "@constants/dashboard"
+import { STATE_GROUPS } from "@constants/state"
+import { getCustomDates } from "@helpers/dashboard.helper"
+import { useDashboard } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssuesByStateGroupsWidgetFilters, TIssuesByStateGroupsWidgetResponse, TStateGroups } from "@servcy/types"
 
-import { getCustomDates } from "@helpers/dashboard.helper";
-
-import { TIssuesByStateGroupsWidgetFilters, TIssuesByStateGroupsWidgetResponse, TStateGroups } from "@servcy/types";
-
-import { STATE_GROUP_GRAPH_COLORS, STATE_GROUP_GRAPH_GRADIENTS } from "@constants/dashboard";
-import { STATE_GROUPS } from "@constants/state";
-
-const WIDGET_KEY = "issues_by_state_groups";
+const WIDGET_KEY = "issues_by_state_groups"
 
 export const IssuesByStateGroupWidget: React.FC<WidgetProps> = observer((props) => {
-    const { dashboardId, workspaceSlug } = props;
+    const { dashboardId, workspaceSlug } = props
     // states
-    const [defaultStateGroup, setDefaultStateGroup] = useState<TStateGroups | null>(null);
-    const [activeStateGroup, setActiveStateGroup] = useState<TStateGroups | null>(null);
+    const [defaultStateGroup, setDefaultStateGroup] = useState<TStateGroups | null>(null)
+    const [activeStateGroup, setActiveStateGroup] = useState<TStateGroups | null>(null)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { fetchWidgetStats, getWidgetDetails, getWidgetStats, updateDashboardWidgetFilters } = useDashboard();
+    const { fetchWidgetStats, getWidgetDetails, getWidgetStats, updateDashboardWidgetFilters } = useDashboard()
     // derived values
-    const widgetDetails = getWidgetDetails(workspaceSlug, dashboardId, WIDGET_KEY);
-    const widgetStats = getWidgetStats<TIssuesByStateGroupsWidgetResponse[]>(workspaceSlug, dashboardId, WIDGET_KEY);
-    const selectedDuration = widgetDetails?.widget_filters.duration ?? "none";
+    const widgetDetails = getWidgetDetails(workspaceSlug, dashboardId, WIDGET_KEY)
+    const widgetStats = getWidgetStats<TIssuesByStateGroupsWidgetResponse[]>(workspaceSlug, dashboardId, WIDGET_KEY)
+    const selectedDuration = widgetDetails?.widget_filters.duration ?? "none"
 
     const handleUpdateFilters = async (filters: Partial<TIssuesByStateGroupsWidgetFilters>) => {
-        if (!widgetDetails) return;
+        if (!widgetDetails) return
 
         await updateDashboardWidgetFilters(workspaceSlug, dashboardId, widgetDetails.id, {
             widgetKey: WIDGET_KEY,
             filters,
-        });
+        })
 
-        const filterDates = getCustomDates(filters.duration ?? selectedDuration);
+        const filterDates = getCustomDates(filters.duration ?? selectedDuration)
         fetchWidgetStats(workspaceSlug, dashboardId, {
             widget_key: WIDGET_KEY,
             ...(filterDates.trim() !== "" ? { target_date: filterDates } : {}),
-        });
-    };
+        })
+    }
 
     // fetch widget stats
     useEffect(() => {
-        const filterDates = getCustomDates(selectedDuration);
+        const filterDates = getCustomDates(selectedDuration)
         fetchWidgetStats(workspaceSlug, dashboardId, {
             widget_key: WIDGET_KEY,
             ...(filterDates.trim() !== "" ? { target_date: filterDates } : {}),
-        });
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
     // set active group for center metric
     useEffect(() => {
-        if (!widgetStats) return;
+        if (!widgetStats) return
 
-        const startedCount = widgetStats?.find((item) => item?.state === "started")?.count ?? 0;
-        const unStartedCount = widgetStats?.find((item) => item?.state === "unstarted")?.count ?? 0;
-        const backlogCount = widgetStats?.find((item) => item?.state === "backlog")?.count ?? 0;
-        const completedCount = widgetStats?.find((item) => item?.state === "completed")?.count ?? 0;
-        const canceledCount = widgetStats?.find((item) => item?.state === "cancelled")?.count ?? 0;
+        const startedCount = widgetStats?.find((item) => item?.state === "started")?.count ?? 0
+        const unStartedCount = widgetStats?.find((item) => item?.state === "unstarted")?.count ?? 0
+        const backlogCount = widgetStats?.find((item) => item?.state === "backlog")?.count ?? 0
+        const completedCount = widgetStats?.find((item) => item?.state === "completed")?.count ?? 0
+        const canceledCount = widgetStats?.find((item) => item?.state === "cancelled")?.count ?? 0
 
         const stateGroup =
             startedCount > 0
@@ -82,25 +77,25 @@ export const IssuesByStateGroupWidget: React.FC<WidgetProps> = observer((props) 
                       ? "completed"
                       : canceledCount > 0
                         ? "cancelled"
-                        : null;
+                        : null
 
-        setActiveStateGroup(stateGroup);
-        setDefaultStateGroup(stateGroup);
-    }, [widgetStats]);
+        setActiveStateGroup(stateGroup)
+        setDefaultStateGroup(stateGroup)
+    }, [widgetStats])
 
-    if (!widgetDetails || !widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />;
+    if (!widgetDetails || !widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />
 
-    const totalCount = widgetStats?.reduce((acc, item) => acc + item?.count, 0);
+    const totalCount = widgetStats?.reduce((acc, item) => acc + item?.count, 0)
     const chartData = widgetStats?.map((item) => ({
         color: STATE_GROUP_GRAPH_COLORS[item?.state as keyof typeof STATE_GROUP_GRAPH_COLORS],
         id: item?.state,
         label: item?.state,
         value: (item?.count / totalCount) * 100,
-    }));
+    }))
 
     const CenteredMetric = ({ dataWithArc, centerX, centerY }: any) => {
-        const data = dataWithArc?.find((datum: any) => datum?.id === activeStateGroup);
-        const percentage = chartData?.find((item) => item.id === activeStateGroup)?.value?.toFixed(0);
+        const data = dataWithArc?.find((datum: any) => datum?.id === activeStateGroup)
+        const percentage = chartData?.find((item) => item.id === activeStateGroup)?.value?.toFixed(0)
 
         return (
             <g>
@@ -126,8 +121,8 @@ export const IssuesByStateGroupWidget: React.FC<WidgetProps> = observer((props) 
                     {data?.id}
                 </text>
             </g>
-        );
-    };
+        )
+    }
 
     return (
         <div className="bg-custom-background-100 rounded-xl border-[0.5px] border-custom-border-200 w-full py-6 hover:shadow-custom-shadow-4xl duration-300 overflow-hidden min-h-96 flex flex-col">
@@ -177,9 +172,9 @@ export const IssuesByStateGroupWidget: React.FC<WidgetProps> = observer((props) 
                                     id: `gradient${p.label}`,
                                 }))}
                                 onClick={(datum, e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    router.push(`/${workspaceSlug}/workspace-views/assigned/?state_group=${datum.id}`);
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    router.push(`/${workspaceSlug}/workspace-views/assigned/?state_group=${datum.id}`)
                                 }}
                                 onMouseEnter={(datum) => setActiveStateGroup(datum.id as TStateGroups)}
                                 onMouseLeave={() => setActiveStateGroup(defaultStateGroup)}
@@ -212,5 +207,5 @@ export const IssuesByStateGroupWidget: React.FC<WidgetProps> = observer((props) 
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

@@ -1,19 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react"
 // headless ui
-import { Tab, Transition, Popover } from "@headlessui/react";
+import { Popover, Tab, Transition } from "@headlessui/react"
+import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper"
+import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 // react colors
-import { TwitterPicker } from "react-color";
-
-import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { Props } from "./types";
+import { TwitterPicker } from "react-color"
 // emojis
-import emojis from "./emojis.json";
-import icons from "./icons.json";
-
-import { getRecentEmojis, saveRecentEmoji } from "./helpers";
-import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper";
+import emojis from "./emojis.json"
+import { getRecentEmojis, saveRecentEmoji } from "./helpers"
+import icons from "./icons.json"
+import { Props } from "./types"
 
 const tabOptions = [
     {
@@ -24,29 +21,29 @@ const tabOptions = [
         key: "icon",
         title: "Icon",
     },
-];
+]
 
 const EmojiIconPicker: React.FC<Props> = (props) => {
-    const { label, value, onChange, onIconColorChange, disabled = false } = props;
+    const { label, value, onChange, onIconColorChange, disabled = false } = props
     // states
-    const [isOpen, setIsOpen] = useState(false);
-    const [openColorPicker, setOpenColorPicker] = useState(false);
-    const [activeColor, setActiveColor] = useState<string>("rgb(var(--color-text-200))");
-    const [recentEmojis, setRecentEmojis] = useState<string[]>([]);
+    const [isOpen, setIsOpen] = useState(false)
+    const [openColorPicker, setOpenColorPicker] = useState(false)
+    const [activeColor, setActiveColor] = useState<string>("rgb(var(--color-text-200))")
+    const [recentEmojis, setRecentEmojis] = useState<string[]>([])
 
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const emojiPickerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        setRecentEmojis(getRecentEmojis());
-    }, []);
+    const buttonRef = useRef<HTMLButtonElement>(null)
+    const emojiPickerRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (!value || value?.length === 0) onChange(getRandomEmoji());
-    }, [value, onChange]);
+        setRecentEmojis(getRecentEmojis())
+    }, [])
 
-    useOutsideClickDetector(emojiPickerRef, () => setIsOpen(false));
-    useDynamicDropdownPosition(isOpen, () => setIsOpen(false), buttonRef, emojiPickerRef);
+    useEffect(() => {
+        if (!value || value?.length === 0) onChange(getRandomEmoji())
+    }, [value, onChange])
+
+    useOutsideClickDetector(emojiPickerRef, () => setIsOpen(false))
+    useDynamicDropdownPosition(isOpen, () => setIsOpen(false), buttonRef, emojiPickerRef)
 
     return (
         <Popover className="relative z-[1]">
@@ -82,7 +79,7 @@ const EmojiIconPicker: React.FC<Props> = (props) => {
                                             <button
                                                 type="button"
                                                 onClick={() => {
-                                                    setOpenColorPicker(false);
+                                                    setOpenColorPicker(false)
                                                 }}
                                                 className={`-my-1 w-1/2 border-b pb-2 text-center text-sm font-medium outline-none transition-colors ${
                                                     selected ? "" : "border-transparent text-custom-text-200"
@@ -106,8 +103,8 @@ const EmojiIconPicker: React.FC<Props> = (props) => {
                                                         type="button"
                                                         className="flex h-4 w-4 select-none items-center justify-between text-sm"
                                                         onClick={() => {
-                                                            onChange(emoji);
-                                                            setIsOpen(false);
+                                                            onChange(emoji)
+                                                            setIsOpen(false)
                                                         }}
                                                     >
                                                         {renderEmoji(emoji)}
@@ -125,9 +122,9 @@ const EmojiIconPicker: React.FC<Props> = (props) => {
                                                     className="mb-1 flex h-4 w-4 select-none items-center text-sm"
                                                     key={emoji}
                                                     onClick={() => {
-                                                        onChange(emoji);
-                                                        saveRecentEmoji(emoji);
-                                                        setIsOpen(false);
+                                                        onChange(emoji)
+                                                        saveRecentEmoji(emoji)
+                                                        setIsOpen(false)
                                                     }}
                                                 >
                                                     {renderEmoji(emoji)}
@@ -172,8 +169,8 @@ const EmojiIconPicker: React.FC<Props> = (props) => {
                                                     className={`!absolute left-4 top-4 z-10 m-2 ${openColorPicker ? "block" : "hidden"}`}
                                                     color={activeColor}
                                                     onChange={(color) => {
-                                                        setActiveColor(color.hex);
-                                                        if (onIconColorChange) onIconColorChange(color.hex);
+                                                        setActiveColor(color.hex)
+                                                        if (onIconColorChange) onIconColorChange(color.hex)
                                                     }}
                                                     triangle="hide"
                                                     width="205px"
@@ -188,8 +185,8 @@ const EmojiIconPicker: React.FC<Props> = (props) => {
                                                     type="button"
                                                     className="mb-1 flex h-4 w-4 select-none items-center text-lg"
                                                     onClick={() => {
-                                                        onChange({ name: icon.name, color: activeColor });
-                                                        setIsOpen(false);
+                                                        onChange({ name: icon.name, color: activeColor })
+                                                        setIsOpen(false)
                                                     }}
                                                 >
                                                     <span
@@ -209,7 +206,7 @@ const EmojiIconPicker: React.FC<Props> = (props) => {
                 </Popover.Panel>
             </Transition>
         </Popover>
-    );
-};
+    )
+}
 
-export default EmojiIconPicker;
+export default EmojiIconPicker

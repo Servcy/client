@@ -1,49 +1,46 @@
-import concat from "lodash/concat";
-import find from "lodash/find";
-import pull from "lodash/pull";
-import set from "lodash/set";
-import update from "lodash/update";
-import { action, makeObservable, observable, runInAction } from "mobx";
-
-import { IssueReactionService } from "@services/issue";
-
-import { TIssueReaction, TIssueReactionIdMap, TIssueReactionMap } from "@servcy/types";
-import { IIssueDetail } from "./root.store";
-
-import { groupReactions } from "@helpers/emoji.helper";
+import { groupReactions } from "@helpers/emoji.helper"
+import { IssueReactionService } from "@services/issue"
+import concat from "lodash/concat"
+import find from "lodash/find"
+import pull from "lodash/pull"
+import set from "lodash/set"
+import update from "lodash/update"
+import { action, makeObservable, observable, runInAction } from "mobx"
+import { TIssueReaction, TIssueReactionIdMap, TIssueReactionMap } from "@servcy/types"
+import { IIssueDetail } from "./root.store"
 
 export interface IIssueReactionStoreActions {
     // actions
-    addReactions: (issueId: string, reactions: TIssueReaction[]) => void;
-    fetchReactions: (workspaceSlug: string, projectId: string, issueId: string) => Promise<TIssueReaction[]>;
-    createReaction: (workspaceSlug: string, projectId: string, issueId: string, reaction: string) => Promise<any>;
+    addReactions: (issueId: string, reactions: TIssueReaction[]) => void
+    fetchReactions: (workspaceSlug: string, projectId: string, issueId: string) => Promise<TIssueReaction[]>
+    createReaction: (workspaceSlug: string, projectId: string, issueId: string, reaction: string) => Promise<any>
     removeReaction: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         reaction: string,
         userId: string
-    ) => Promise<any>;
+    ) => Promise<any>
 }
 
 export interface IIssueReactionStore extends IIssueReactionStoreActions {
     // observables
-    reactions: TIssueReactionIdMap;
-    reactionMap: TIssueReactionMap;
+    reactions: TIssueReactionIdMap
+    reactionMap: TIssueReactionMap
 
-    getReactionsByIssueId: (issueId: string) => { [reaction_id: string]: string[] } | undefined;
-    getReactionById: (reactionId: string) => TIssueReaction | undefined;
-    reactionsByUser: (issueId: string, userId: string) => TIssueReaction[];
+    getReactionsByIssueId: (issueId: string) => { [reaction_id: string]: string[] } | undefined
+    getReactionById: (reactionId: string) => TIssueReaction | undefined
+    reactionsByUser: (issueId: string, userId: string) => TIssueReaction[]
 }
 
 export class IssueReactionStore implements IIssueReactionStore {
     // observables
-    reactions: TIssueReactionIdMap = {};
-    reactionMap: TIssueReactionMap = {};
+    reactions: TIssueReactionIdMap = {}
+    reactionMap: TIssueReactionMap = {}
     // root store
-    rootIssueDetailStore: IIssueDetail;
+    rootIssueDetailStore: IIssueDetail
 
-    issueReactionService;
+    issueReactionService
 
     constructor(rootStore: IIssueDetail) {
         makeObservable(this, {
@@ -55,91 +52,91 @@ export class IssueReactionStore implements IIssueReactionStore {
             fetchReactions: action,
             createReaction: action,
             removeReaction: action,
-        });
+        })
         // root store
-        this.rootIssueDetailStore = rootStore;
+        this.rootIssueDetailStore = rootStore
 
-        this.issueReactionService = new IssueReactionService();
+        this.issueReactionService = new IssueReactionService()
     }
 
     getReactionsByIssueId = (issueId: string) => {
-        if (!issueId) return undefined;
-        return this.reactions[issueId] ?? undefined;
-    };
+        if (!issueId) return undefined
+        return this.reactions[issueId] ?? undefined
+    }
 
     getReactionById = (reactionId: string) => {
-        if (!reactionId) return undefined;
-        return this.reactionMap[reactionId] ?? undefined;
-    };
+        if (!reactionId) return undefined
+        return this.reactionMap[reactionId] ?? undefined
+    }
 
     reactionsByUser = (issueId: string, userId: string) => {
-        if (!issueId || !userId) return [];
+        if (!issueId || !userId) return []
 
-        const reactions = this.getReactionsByIssueId(issueId);
-        if (!reactions) return [];
+        const reactions = this.getReactionsByIssueId(issueId)
+        if (!reactions) return []
 
-        const _userReactions: TIssueReaction[] = [];
+        const _userReactions: TIssueReaction[] = []
         Object.keys(reactions).forEach((reaction) => {
             if (reactions?.[reaction])
                 reactions?.[reaction].map((reactionId) => {
-                    const currentReaction = this.getReactionById(reactionId);
-                    if (currentReaction && currentReaction.actor_id === userId) _userReactions.push(currentReaction);
-                });
-        });
+                    const currentReaction = this.getReactionById(reactionId)
+                    if (currentReaction && currentReaction.actor_id === userId) _userReactions.push(currentReaction)
+                })
+        })
 
-        return _userReactions;
-    };
+        return _userReactions
+    }
 
     addReactions = (issueId: string, reactions: TIssueReaction[]) => {
-        const groupedReactions = groupReactions(reactions || [], "reaction");
+        const groupedReactions = groupReactions(reactions || [], "reaction")
 
-        const issueReactionIdsMap: { [reaction: string]: string[] } = {};
+        const issueReactionIdsMap: { [reaction: string]: string[] } = {}
 
         Object.keys(groupedReactions).map((reactionId) => {
-            const reactionIds = (groupedReactions[reactionId] || []).map((reaction) => reaction.id);
-            issueReactionIdsMap[reactionId] = reactionIds;
-        });
+            const reactionIds = (groupedReactions[reactionId] || []).map((reaction) => reaction.id)
+            issueReactionIdsMap[reactionId] = reactionIds
+        })
 
         runInAction(() => {
-            set(this.reactions, issueId, issueReactionIdsMap);
-            reactions.forEach((reaction) => set(this.reactionMap, reaction.id, reaction));
-        });
-    };
+            set(this.reactions, issueId, issueReactionIdsMap)
+            reactions.forEach((reaction) => set(this.reactionMap, reaction.id, reaction))
+        })
+    }
 
     // actions
     fetchReactions = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            const response = await this.issueReactionService.listIssueReactions(workspaceSlug, projectId, issueId);
+            const response = await this.issueReactionService.listIssueReactions(workspaceSlug, projectId, issueId)
 
-            this.addReactions(issueId, response);
+            this.addReactions(issueId, response)
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     createReaction = async (workspaceSlug: string, projectId: string, issueId: string, reaction: string) => {
         try {
             const response = await this.issueReactionService.createIssueReaction(workspaceSlug, projectId, issueId, {
                 reaction,
-            });
+            })
 
             runInAction(() => {
                 update(this.reactions, [issueId, reaction], (reactionId) => {
-                    if (!reactionId) return [response.id];
-                    return concat(reactionId, response.id);
-                });
-                set(this.reactionMap, response.id, response);
-            });
+                    if (!reactionId) return [response.id]
+                    return concat(reactionId, response.id)
+                })
+                set(this.reactionMap, response.id, response)
+            })
 
             // fetching activity
-            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId);
-            return response;
+            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId)
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     removeReaction = async (
         workspaceSlug: string,
@@ -149,14 +146,14 @@ export class IssueReactionStore implements IIssueReactionStore {
         userId: string
     ) => {
         try {
-            const userReactions = this.reactionsByUser(issueId, userId);
-            const currentReaction = find(userReactions, { actor_id: userId, reaction: reaction });
+            const userReactions = this.reactionsByUser(issueId, userId)
+            const currentReaction = find(userReactions, { actor_id: userId, reaction: reaction })
 
             if (currentReaction && currentReaction.id) {
                 runInAction(() => {
-                    pull(this.reactions[issueId][reaction], currentReaction.id);
-                    delete this.reactionMap[reaction];
-                });
+                    pull(this.reactions[issueId][reaction], currentReaction.id)
+                    delete this.reactionMap[reaction]
+                })
             }
 
             const response = await this.issueReactionService.deleteIssueReaction(
@@ -164,13 +161,13 @@ export class IssueReactionStore implements IIssueReactionStore {
                 projectId,
                 issueId,
                 reaction
-            );
+            )
 
             // fetching activity
-            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId);
-            return response;
+            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId)
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 }

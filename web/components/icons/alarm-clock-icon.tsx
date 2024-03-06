@@ -1,4 +1,4 @@
-import type { Props } from "./types";
+import type { Props } from "./types"
 
 export const AlarmClockIcon: React.FC<Props> = ({
     width = "24",
@@ -20,4 +20,4 @@ export const AlarmClockIcon: React.FC<Props> = ({
             fill="#F7AE59"
         />
     </svg>
-);
+)

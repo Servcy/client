@@ -1,63 +1,59 @@
-import { MutableRefObject, memo } from "react";
-import { Draggable, DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd";
-import { observer } from "mobx-react-lite";
-
-import { useApplication, useIssueDetail, useProject } from "@hooks/store";
-
-import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
-import { IssueProperties } from "../properties/all-properties";
-
-import { Tooltip, ControlLink } from "@servcy/ui";
-
-import { TIssue, IIssueDisplayProperties, IIssueMap } from "@servcy/types";
-import { EIssueActions } from "../types";
+import { memo, MutableRefObject } from "react"
+import RenderIfVisible from "@components/core/render-if-visible-HOC"
+import { Draggable, DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
 // helper
-import { cn } from "@helpers/common.helper";
-import RenderIfVisible from "@components/core/render-if-visible-HOC";
+import { cn } from "@helpers/common.helper"
+import { useApplication, useIssueDetail, useProject } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayProperties, IIssueMap, TIssue } from "@servcy/types"
+import { ControlLink, Tooltip } from "@servcy/ui"
+import { IssueProperties } from "../properties/all-properties"
+import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
+import { EIssueActions } from "../types"
 
 interface IssueBlockProps {
-    peekIssueId?: string;
-    issueId: string;
-    issuesMap: IIssueMap;
-    displayProperties: IIssueDisplayProperties | undefined;
-    isDragDisabled: boolean;
-    draggableId: string;
-    index: number;
-    handleIssues: (issue: TIssue, action: EIssueActions) => void;
-    quickActions: (issue: TIssue) => React.ReactNode;
-    canEditProperties: (projectId: string | undefined) => boolean;
-    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>;
-    isDragStarted?: boolean;
-    issueIds: string[]; //DO NOT REMOVE< needed to force render for virtualization
+    peekIssueId?: string
+    issueId: string
+    issuesMap: IIssueMap
+    displayProperties: IIssueDisplayProperties | undefined
+    isDragDisabled: boolean
+    draggableId: string
+    index: number
+    handleIssues: (issue: TIssue, action: EIssueActions) => void
+    quickActions: (issue: TIssue) => React.ReactNode
+    canEditProperties: (projectId: string | undefined) => boolean
+    scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>
+    isDragStarted?: boolean
+    issueIds: string[] //DO NOT REMOVE< needed to force render for virtualization
 }
 
 interface IssueDetailsBlockProps {
-    issue: TIssue;
-    displayProperties: IIssueDisplayProperties | undefined;
-    handleIssues: (issue: TIssue, action: EIssueActions) => void;
-    quickActions: (issue: TIssue) => React.ReactNode;
-    isReadOnly: boolean;
+    issue: TIssue
+    displayProperties: IIssueDisplayProperties | undefined
+    handleIssues: (issue: TIssue, action: EIssueActions) => void
+    quickActions: (issue: TIssue) => React.ReactNode
+    isReadOnly: boolean
 }
 
 const KanbanIssueDetailsBlock: React.FC<IssueDetailsBlockProps> = observer((props: IssueDetailsBlockProps) => {
-    const { issue, handleIssues, quickActions, isReadOnly, displayProperties } = props;
+    const { issue, handleIssues, quickActions, isReadOnly, displayProperties } = props
 
-    const { getProjectIdentifierById } = useProject();
+    const { getProjectIdentifierById } = useProject()
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { setPeekIssue } = useIssueDetail();
+    } = useApplication()
+    const { setPeekIssue } = useIssueDetail()
 
     const updateIssue = async (issueToUpdate: TIssue) => {
-        if (issueToUpdate) await handleIssues(issueToUpdate, EIssueActions.UPDATE);
-    };
+        if (issueToUpdate) await handleIssues(issueToUpdate, EIssueActions.UPDATE)
+    }
 
     const handleIssuePeekOverview = (issue: TIssue) =>
         workspaceSlug &&
         issue &&
         issue.project_id &&
         issue.id &&
-        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id });
+        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id })
 
     return (
         <>
@@ -101,8 +97,8 @@ const KanbanIssueDetailsBlock: React.FC<IssueDetailsBlockProps> = observer((prop
                 isReadOnly={isReadOnly}
             />
         </>
-    );
-});
+    )
+})
 
 export const KanbanIssueBlock: React.FC<IssueBlockProps> = memo((props) => {
     const {
@@ -119,13 +115,13 @@ export const KanbanIssueBlock: React.FC<IssueBlockProps> = memo((props) => {
         scrollableContainerRef,
         isDragStarted,
         issueIds,
-    } = props;
+    } = props
 
-    const issue = issuesMap[issueId];
+    const issue = issuesMap[issueId]
 
-    if (!issue) return null;
+    if (!issue) return null
 
-    const canEditIssueProperties = canEditProperties(issue.project_id);
+    const canEditIssueProperties = canEditProperties(issue.project_id)
 
     return (
         <Draggable
@@ -173,7 +169,7 @@ export const KanbanIssueBlock: React.FC<IssueBlockProps> = memo((props) => {
                 </div>
             )}
         </Draggable>
-    );
-});
+    )
+})
 
-KanbanIssueBlock.displayName = "KanbanIssueBlock";
+KanbanIssueBlock.displayName = "KanbanIssueBlock"

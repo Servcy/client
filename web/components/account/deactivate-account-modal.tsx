@@ -1,39 +1,37 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { useTheme } from "next-themes";
-import { Dialog, Transition } from "@headlessui/react";
-import { Trash2 } from "lucide-react";
-import { mutate } from "swr";
-
-import { useUser } from "@hooks/store";
-
-import { Button } from "@servcy/ui";
-import toast from "react-hot-toast";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useUser } from "@hooks/store"
+import { Trash2 } from "lucide-react"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
+import { mutate } from "swr"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-};
+    isOpen: boolean
+    onClose: () => void
+}
 
 export const DeactivateAccountModal: React.FC<Props> = (props) => {
-    const { isOpen, onClose } = props;
+    const { isOpen, onClose } = props
 
     // states
-    const [isDeactivating, setIsDeactivating] = useState(false);
+    const [isDeactivating, setIsDeactivating] = useState(false)
 
-    const { deactivateAccount } = useUser();
+    const { deactivateAccount } = useUser()
 
-    const router = useRouter();
+    const router = useRouter()
 
-    const { setTheme } = useTheme();
+    const { setTheme } = useTheme()
 
     const handleClose = () => {
-        setIsDeactivating(false);
-        onClose();
-    };
+        setIsDeactivating(false)
+        onClose()
+    }
 
     const handleDeleteAccount = async () => {
-        setIsDeactivating(true);
+        setIsDeactivating(true)
 
         await deactivateAccount()
             .then(() => {
@@ -41,11 +39,11 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
                     type: "success",
                     title: "Success!",
                     message: "Account deactivated successfully.",
-                });
-                mutate("CURRENT_USER_DETAILS", null);
-                setTheme("system");
-                router.push("/");
-                handleClose();
+                })
+                mutate("CURRENT_USER_DETAILS", null)
+                setTheme("system")
+                router.push("/")
+                handleClose()
             })
             .catch((err) =>
                 toast.error({
@@ -54,8 +52,8 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
                     message: err?.error,
                 })
             )
-            .finally(() => setIsDeactivating(false));
-    };
+            .finally(() => setIsDeactivating(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -123,5 +121,5 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

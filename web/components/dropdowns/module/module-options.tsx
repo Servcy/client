@@ -1,53 +1,53 @@
-import { useEffect, useRef, useState } from "react";
-import { Combobox } from "@headlessui/react";
-import { observer } from "mobx-react";
-//components
-import { DiceIcon } from "@servcy/ui";
+import { useEffect, useRef, useState } from "react"
+import { Combobox } from "@headlessui/react"
+import { cn } from "@helpers/common.helper"
 //store
-import { useApplication, useModule } from "@hooks/store";
-//hooks
-import { usePopper } from "react-popper";
-import { cn } from "@helpers/common.helper";
-//icon
-import { Check, Search } from "lucide-react";
+import { useApplication, useModule } from "@hooks/store"
 //types
-import { Placement } from "@popperjs/core";
+import { Placement } from "@popperjs/core"
+//icon
+import { Check, Search } from "lucide-react"
+import { observer } from "mobx-react"
+//hooks
+import { usePopper } from "react-popper"
+//components
+import { DiceIcon } from "@servcy/ui"
 
 type DropdownOptions =
     | {
-          value: string | null;
-          query: string;
-          content: JSX.Element;
+          value: string | null
+          query: string
+          content: JSX.Element
       }[]
-    | undefined;
+    | undefined
 
 interface Props {
-    projectId: string;
-    referenceElement: HTMLButtonElement | null;
-    placement: Placement | undefined;
-    isOpen: boolean;
-    multiple: boolean;
+    projectId: string
+    referenceElement: HTMLButtonElement | null
+    placement: Placement | undefined
+    isOpen: boolean
+    multiple: boolean
 }
 
 export const ModuleOptions = observer((props: Props) => {
-    const { projectId, isOpen, referenceElement, placement, multiple } = props;
+    const { projectId, isOpen, referenceElement, placement, multiple } = props
 
-    const [query, setQuery] = useState("");
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [query, setQuery] = useState("")
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
+    const inputRef = useRef<HTMLInputElement | null>(null)
 
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { getProjectModuleIds, fetchModules, getModuleById } = useModule();
+    } = useApplication()
+    const { getProjectModuleIds, fetchModules, getModuleById } = useModule()
 
     useEffect(() => {
         if (isOpen) {
-            onOpen();
-            inputRef.current && inputRef.current.focus();
+            onOpen()
+            inputRef.current && inputRef.current.focus()
         }
-    }, [isOpen]);
+    }, [isOpen])
 
     // popper-js init
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -60,23 +60,23 @@ export const ModuleOptions = observer((props: Props) => {
                 },
             },
         ],
-    });
+    })
 
-    const moduleIds = getProjectModuleIds(projectId);
+    const moduleIds = getProjectModuleIds(projectId)
 
     const onOpen = () => {
-        if (workspaceSlug && !moduleIds) fetchModules(workspaceSlug, projectId);
-    };
+        if (workspaceSlug && !moduleIds) fetchModules(workspaceSlug, projectId)
+    }
 
     const searchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (query !== "" && e.key === "Escape") {
-            e.stopPropagation();
-            setQuery("");
+            e.stopPropagation()
+            setQuery("")
         }
-    };
+    }
 
     const options: DropdownOptions = moduleIds?.map((moduleId) => {
-        const moduleDetails = getModuleById(moduleId);
+        const moduleDetails = getModuleById(moduleId)
         return {
             value: moduleId,
             query: `${moduleDetails?.name}`,
@@ -86,8 +86,8 @@ export const ModuleOptions = observer((props: Props) => {
                     <span className="flex-grow truncate">{moduleDetails?.name}</span>
                 </div>
             ),
-        };
-    });
+        }
+    })
     if (!multiple)
         options?.unshift({
             value: null,
@@ -98,10 +98,10 @@ export const ModuleOptions = observer((props: Props) => {
                     <span className="flex-grow truncate">No module</span>
                 </div>
             ),
-        });
+        })
 
     const filteredOptions =
-        query === "" ? options : options?.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()));
+        query === "" ? options : options?.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()))
 
     return (
         <Combobox.Options className="fixed z-10" static>
@@ -159,5 +159,5 @@ export const ModuleOptions = observer((props: Props) => {
                 </div>
             </div>
         </Combobox.Options>
-    );
-});
+    )
+})

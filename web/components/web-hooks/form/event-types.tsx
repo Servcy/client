@@ -1,9 +1,9 @@
-import { TWebhookEventTypes } from "@servcy/types";
+import { TWebhookEventTypes } from "@servcy/types"
 
 type Props = {
-    value: string;
-    onChange: (value: TWebhookEventTypes) => void;
-};
+    value: string
+    onChange: (value: TWebhookEventTypes) => void
+}
 
 const WEBHOOK_EVENT_TYPES: { key: TWebhookEventTypes; label: string }[] = [
     {
@@ -14,10 +14,10 @@ const WEBHOOK_EVENT_TYPES: { key: TWebhookEventTypes; label: string }[] = [
         key: "individual",
         label: "Select individual events",
     },
-];
+]
 
 export const WebhookOptions: React.FC<Props> = (props) => {
-    const { value, onChange } = props;
+    const { value, onChange } = props
 
     return (
         <>
@@ -39,5 +39,5 @@ export const WebhookOptions: React.FC<Props> = (props) => {
                 ))}
             </div>
         </>
-    );
-};
+    )
+}

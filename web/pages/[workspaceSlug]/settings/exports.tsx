@@ -1,29 +1,25 @@
-import { observer } from "mobx-react-lite";
-
-import { useUser, useWorkspace } from "@hooks/store";
+import { PageHead } from "@components/core"
+import ExportGuide from "@components/exporter/guide"
+import { WorkspaceSettingHeader } from "@components/headers"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useUser, useWorkspace } from "@hooks/store"
 // layout
-import { AppLayout } from "@layouts/app-layout";
-import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-
-import { PageHead } from "@components/core";
-import ExportGuide from "@components/exporter/guide";
-import { WorkspaceSettingHeader } from "@components/headers";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+import { observer } from "mobx-react-lite"
+import { NextPageWithLayout } from "@/types/types"
 
 const ExportsPage: NextPageWithLayout = observer(() => {
     // store hooks
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { currentWorkspace } = useWorkspace();
+    } = useUser()
+    const { currentWorkspace } = useWorkspace()
 
     // derived values
     const hasPageAccess =
-        currentWorkspaceRole && [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole);
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Exports` : undefined;
+        currentWorkspaceRole && [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole)
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Exports` : undefined
 
     if (!hasPageAccess)
         return (
@@ -33,7 +29,7 @@ const ExportsPage: NextPageWithLayout = observer(() => {
                     <p className="text-sm text-custom-text-300">You are not authorized to access this page.</p>
                 </div>
             </>
-        );
+        )
 
     return (
         <>
@@ -45,15 +41,15 @@ const ExportsPage: NextPageWithLayout = observer(() => {
                 <ExportGuide />
             </div>
         </>
-    );
-});
+    )
+})
 
 ExportsPage.getWrapper = function getWrapper(page: React.ReactElement) {
     return (
         <AppLayout header={<WorkspaceSettingHeader title="Export Settings" />}>
             <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default ExportsPage;
+export default ExportsPage

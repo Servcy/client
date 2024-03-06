@@ -1,29 +1,26 @@
-import { FC, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Copy, Eye, EyeOff } from "lucide-react";
-
-import { Button, Input } from "@servcy/ui";
-
-import { IFormattedInstanceConfiguration } from "@servcy/types";
-
-import { useApplication } from "@hooks/store";
-import toast from "react-hot-toast";
+import { FC, useState } from "react"
+import { useApplication } from "@hooks/store"
+import { Copy, Eye, EyeOff } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IFormattedInstanceConfiguration } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 export interface IInstanceGithubConfigForm {
-    config: IFormattedInstanceConfiguration;
+    config: IFormattedInstanceConfiguration
 }
 
 export interface GithubConfigFormValues {
-    GITHUB_CLIENT_ID: string;
-    GITHUB_CLIENT_SECRET: string;
+    GITHUB_CLIENT_ID: string
+    GITHUB_CLIENT_SECRET: string
 }
 
 export const InstanceGithubConfigForm: FC<IInstanceGithubConfigForm> = (props) => {
-    const { config } = props;
+    const { config } = props
     // states
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
     // store hooks
-    const { instance: instanceStore } = useApplication();
+    const { instance: instanceStore } = useApplication()
     // toast
 
     // form data
@@ -36,10 +33,10 @@ export const InstanceGithubConfigForm: FC<IInstanceGithubConfigForm> = (props) =
             GITHUB_CLIENT_ID: config["GITHUB_CLIENT_ID"],
             GITHUB_CLIENT_SECRET: config["GITHUB_CLIENT_SECRET"],
         },
-    });
+    })
 
     const onSubmit = async (formData: GithubConfigFormValues) => {
-        const payload: Partial<GithubConfigFormValues> = { ...formData };
+        const payload: Partial<GithubConfigFormValues> = { ...formData }
 
         await instanceStore
             .updateInstanceConfigurations(payload)
@@ -50,10 +47,10 @@ export const InstanceGithubConfigForm: FC<IInstanceGithubConfigForm> = (props) =
                     message: "Github Configuration Settings updated successfully",
                 })
             )
-            .catch((err) => console.error(err));
-    };
+            .catch((err) => console.error(err))
+    }
 
-    const originURL = typeof window !== "undefined" ? window.location.origin : "";
+    const originURL = typeof window !== "undefined" ? window.location.origin : ""
 
     return (
         <div className="flex flex-col gap-8">
@@ -144,12 +141,12 @@ export const InstanceGithubConfigForm: FC<IInstanceGithubConfigForm> = (props) =
                         variant="neutral-primary"
                         className="flex items-center justify-between py-2"
                         onClick={() => {
-                            navigator.clipboard.writeText(originURL);
+                            navigator.clipboard.writeText(originURL)
                             toast.error({
                                 message: "The Origin URL has been successfully copied to your clipboard",
                                 type: "success",
                                 title: "Copied to clipboard",
-                            });
+                            })
                         }}
                     >
                         <p className="text-sm font-medium">{originURL}</p>
@@ -176,5 +173,5 @@ export const InstanceGithubConfigForm: FC<IInstanceGithubConfigForm> = (props) =
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

@@ -1,9 +1,4 @@
-import { observer } from "mobx-react-lite";
-import { X } from "lucide-react";
-import { useRouter } from "next/router";
-
-import { useApplication, useUser } from "@hooks/store";
-
+import { useRouter } from "next/router"
 import {
     AppliedCycleFilters,
     AppliedDateFilters,
@@ -14,49 +9,49 @@ import {
     AppliedProjectFilters,
     AppliedStateFilters,
     AppliedStateGroupFilters,
-} from "@components/issues";
-
-import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
-
-import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";
-
-import { EUserProjectRoles } from "@constants/project";
+} from "@components/issues"
+import { EUserProjectRoles } from "@constants/project"
+import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
+import { useApplication, useUser } from "@hooks/store"
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types"
 
 type Props = {
-    appliedFilters: IIssueFilterOptions;
-    handleClearAllFilters: () => void;
-    handleRemoveFilter: (key: keyof IIssueFilterOptions, value: string | null) => void;
-    labels?: IIssueLabel[] | undefined;
-    states?: IState[] | undefined;
-    alwaysAllowEditing?: boolean;
-};
+    appliedFilters: IIssueFilterOptions
+    handleClearAllFilters: () => void
+    handleRemoveFilter: (key: keyof IIssueFilterOptions, value: string | null) => void
+    labels?: IIssueLabel[] | undefined
+    states?: IState[] | undefined
+    alwaysAllowEditing?: boolean
+}
 
-const membersFilters = ["assignees", "mentions", "created_by", "subscriber"];
-const dateFilters = ["start_date", "target_date"];
+const membersFilters = ["assignees", "mentions", "created_by", "subscriber"]
+const dateFilters = ["start_date", "target_date"]
 
 export const AppliedFiltersList: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleClearAllFilters, handleRemoveFilter, labels, states, alwaysAllowEditing } = props;
+    const { appliedFilters, handleClearAllFilters, handleRemoveFilter, labels, states, alwaysAllowEditing } = props
     // store hooks
     const {
         router: { moduleId, cycleId },
-    } = useApplication();
+    } = useApplication()
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
-    if (!appliedFilters) return null;
+    if (!appliedFilters) return null
 
-    if (Object.keys(appliedFilters).length === 0) return null;
+    if (Object.keys(appliedFilters).length === 0) return null
 
     const isEditingAllowed =
-        alwaysAllowEditing || (currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER);
+        alwaysAllowEditing || (currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER)
 
     return (
         <div className="flex flex-wrap items-stretch gap-2 bg-custom-background-100">
             {Object.entries(appliedFilters).map(([key, value]) => {
-                const filterKey = key as keyof IIssueFilterOptions;
+                const filterKey = key as keyof IIssueFilterOptions
 
-                if (!value) return;
+                if (!value) return
 
                 return (
                     <div
@@ -139,7 +134,7 @@ export const AppliedFiltersList: React.FC<Props> = observer((props) => {
                             )}
                         </div>
                     </div>
-                );
+                )
             })}
             {isEditingAllowed && (
                 <button
@@ -152,5 +147,5 @@ export const AppliedFiltersList: React.FC<Props> = observer((props) => {
                 </button>
             )}
         </div>
-    );
-});
+    )
+})

@@ -1,21 +1,19 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
-
-import { PagesListView } from "@components/pages/pages-list";
-
-import { Loader, Spinner } from "@servcy/ui";
-import { useProjectPages } from "@hooks/store/use-project-specific-pages";
+import { FC } from "react"
+import { PagesListView } from "@components/pages/pages-list"
+import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+import { observer } from "mobx-react-lite"
+import { Loader, Spinner } from "@servcy/ui"
 
 export const ArchivedPagesList: FC = observer(() => {
-    const projectPageStore = useProjectPages();
-    const { archivedPageIds, archivedPageLoader } = projectPageStore;
+    const projectPageStore = useProjectPages()
+    const { archivedPageIds, archivedPageLoader } = projectPageStore
 
     if (archivedPageLoader) {
         return (
             <div className="flex items-center justify-center h-full w-full">
                 <Spinner />
             </div>
-        );
+        )
     }
     if (!archivedPageIds)
         return (
@@ -24,7 +22,7 @@ export const ArchivedPagesList: FC = observer(() => {
                 <Loader.Item height="40px" />
                 <Loader.Item height="40px" />
             </Loader>
-        );
+        )
 
-    return <PagesListView pageIds={archivedPageIds} />;
-});
+    return <PagesListView pageIds={archivedPageIds} />
+})

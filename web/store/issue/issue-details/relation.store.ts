@@ -1,47 +1,45 @@
-import set from "lodash/set";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-
-import { IssueRelationService } from "@services/issue";
-
-import { TIssue, TIssueRelation, TIssueRelationIdMap, TIssueRelationMap, TIssueRelationTypes } from "@servcy/types";
-import { IIssueDetail } from "./root.store";
+import { IssueRelationService } from "@services/issue"
+import set from "lodash/set"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { TIssue, TIssueRelation, TIssueRelationIdMap, TIssueRelationMap, TIssueRelationTypes } from "@servcy/types"
+import { IIssueDetail } from "./root.store"
 
 export interface IIssueRelationStoreActions {
     // actions
-    fetchRelations: (workspaceSlug: string, projectId: string, issueId: string) => Promise<TIssueRelation>;
+    fetchRelations: (workspaceSlug: string, projectId: string, issueId: string) => Promise<TIssueRelation>
     createRelation: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         relationType: TIssueRelationTypes,
         issues: string[]
-    ) => Promise<TIssue[]>;
+    ) => Promise<TIssue[]>
     removeRelation: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         relationType: TIssueRelationTypes,
         related_issue: string
-    ) => Promise<any>;
+    ) => Promise<any>
 }
 
 export interface IIssueRelationStore extends IIssueRelationStoreActions {
     // observables
-    relationMap: TIssueRelationMap; // Record defines relationType as key and reactions as value
+    relationMap: TIssueRelationMap // Record defines relationType as key and reactions as value
     // computed
-    issueRelations: TIssueRelationIdMap | undefined;
+    issueRelations: TIssueRelationIdMap | undefined
 
-    getRelationsByIssueId: (issueId: string) => TIssueRelationIdMap | undefined;
-    getRelationByIssueIdRelationType: (issueId: string, relationType: TIssueRelationTypes) => string[] | undefined;
+    getRelationsByIssueId: (issueId: string) => TIssueRelationIdMap | undefined
+    getRelationByIssueIdRelationType: (issueId: string, relationType: TIssueRelationTypes) => string[] | undefined
 }
 
 export class IssueRelationStore implements IIssueRelationStore {
     // observables
-    relationMap: TIssueRelationMap = {};
+    relationMap: TIssueRelationMap = {}
     // root store
-    rootIssueDetailStore: IIssueDetail;
+    rootIssueDetailStore: IIssueDetail
 
-    issueRelationService;
+    issueRelationService
 
     constructor(rootStore: IIssueDetail) {
         makeObservable(this, {
@@ -53,55 +51,55 @@ export class IssueRelationStore implements IIssueRelationStore {
             fetchRelations: action,
             createRelation: action,
             removeRelation: action,
-        });
+        })
         // root store
-        this.rootIssueDetailStore = rootStore;
+        this.rootIssueDetailStore = rootStore
 
-        this.issueRelationService = new IssueRelationService();
+        this.issueRelationService = new IssueRelationService()
     }
 
     // computed
     get issueRelations() {
-        const issueId = this.rootIssueDetailStore.peekIssue?.issueId;
-        if (!issueId) return undefined;
-        return this.relationMap?.[issueId] ?? undefined;
+        const issueId = this.rootIssueDetailStore.peekIssue?.issueId
+        if (!issueId) return undefined
+        return this.relationMap?.[issueId] ?? undefined
     }
 
     //
     getRelationsByIssueId = (issueId: string) => {
-        if (!issueId) return undefined;
-        return this.relationMap?.[issueId] ?? undefined;
-    };
+        if (!issueId) return undefined
+        return this.relationMap?.[issueId] ?? undefined
+    }
 
     getRelationByIssueIdRelationType = (issueId: string, relationType: TIssueRelationTypes) => {
-        if (!issueId || !relationType) return undefined;
-        return this.relationMap?.[issueId]?.[relationType] ?? undefined;
-    };
+        if (!issueId || !relationType) return undefined
+        return this.relationMap?.[issueId]?.[relationType] ?? undefined
+    }
 
     // actions
     fetchRelations = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            const response = await this.issueRelationService.listIssueRelations(workspaceSlug, projectId, issueId);
+            const response = await this.issueRelationService.listIssueRelations(workspaceSlug, projectId, issueId)
 
             runInAction(() => {
                 Object.keys(response).forEach((key) => {
-                    const relation_key = key as TIssueRelationTypes;
-                    const relation_issues = response[relation_key];
-                    const issues = relation_issues.flat().map((issue) => issue);
-                    if (issues && issues.length > 0) this.rootIssueDetailStore.rootIssueStore.issues.addIssue(issues);
+                    const relation_key = key as TIssueRelationTypes
+                    const relation_issues = response[relation_key]
+                    const issues = relation_issues.flat().map((issue) => issue)
+                    if (issues && issues.length > 0) this.rootIssueDetailStore.rootIssueStore.issues.addIssue(issues)
                     set(
                         this.relationMap,
                         [issueId, relation_key],
                         issues && issues.length > 0 ? issues.map((issue) => issue.id) : []
-                    );
-                });
-            });
+                    )
+                })
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     createRelation = async (
         workspaceSlug: string,
@@ -114,23 +112,23 @@ export class IssueRelationStore implements IIssueRelationStore {
             const response = await this.issueRelationService.createIssueRelations(workspaceSlug, projectId, issueId, {
                 relation_type: relationType,
                 issues,
-            });
+            })
 
             if (response && response.length > 0)
                 runInAction(() => {
                     response.forEach((issue) => {
-                        this.rootIssueDetailStore.rootIssueStore.issues.addIssue([issue]);
-                        this.relationMap[issueId][relationType].push(issue.id);
-                    });
-                });
+                        this.rootIssueDetailStore.rootIssueStore.issues.addIssue([issue])
+                        this.relationMap[issueId][relationType].push(issue.id)
+                    })
+                })
 
             // fetching activity
-            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId);
-            return response;
+            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId)
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     removeRelation = async (
         workspaceSlug: string,
@@ -142,23 +140,23 @@ export class IssueRelationStore implements IIssueRelationStore {
         try {
             const relationIndex = this.relationMap[issueId][relationType].findIndex(
                 (_issueId) => _issueId === related_issue
-            );
+            )
             if (relationIndex >= 0)
                 runInAction(() => {
-                    this.relationMap[issueId][relationType].splice(relationIndex, 1);
-                });
+                    this.relationMap[issueId][relationType].splice(relationIndex, 1)
+                })
 
             const response = await this.issueRelationService.deleteIssueRelation(workspaceSlug, projectId, issueId, {
                 relation_type: relationType,
                 related_issue,
-            });
+            })
 
             // fetching activity
-            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId);
-            return response;
+            this.rootIssueDetailStore.activity.fetchActivities(workspaceSlug, projectId, issueId)
+            return response
         } catch (error) {
-            this.fetchRelations(workspaceSlug, projectId, issueId);
-            throw error;
+            this.fetchRelations(workspaceSlug, projectId, issueId)
+            throw error
         }
-    };
+    }
 }

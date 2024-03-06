@@ -1,32 +1,29 @@
-import { FC, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { Eye, EyeOff, XCircle } from "lucide-react";
+import { FC, useState } from "react"
+import { checkEmailValidity } from "@helpers/string.helper"
+import { useUser } from "@hooks/store"
+import { AuthService } from "@services/auth.service"
+import { Eye, EyeOff, XCircle } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { Button, Input } from "@servcy/ui"
 
-import { useUser } from "@hooks/store";
-
-import { Input, Button } from "@servcy/ui";
-
-import { AuthService } from "@services/auth.service";
-const authService = new AuthService();
-import toast from "react-hot-toast";
-
-import { checkEmailValidity } from "@helpers/string.helper";
+const authService = new AuthService()
 
 interface InstanceSetupEmailFormValues {
-    email: string;
-    password: string;
+    email: string
+    password: string
 }
 
 export interface IInstanceSetupEmailForm {
-    handleNextStep: (email: string) => void;
+    handleNextStep: (email: string) => void
 }
 
 export const InstanceSetupSignInForm: FC<IInstanceSetupEmailForm> = (props) => {
-    const { handleNextStep } = props;
+    const { handleNextStep } = props
     // states
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
     // store hooks
-    const { fetchCurrentUser } = useUser();
+    const { fetchCurrentUser } = useUser()
     // form info
     const {
         control,
@@ -38,24 +35,24 @@ export const InstanceSetupSignInForm: FC<IInstanceSetupEmailForm> = (props) => {
             email: "",
             password: "",
         },
-    });
+    })
 
     const handleFormSubmit = async (formValues: InstanceSetupEmailFormValues) => {
         const payload = {
             email: formValues.email,
             password: formValues.password,
-        };
+        }
 
         await authService
             .instanceAdminSignIn(payload)
             .then(async () => {
-                await fetchCurrentUser();
-                handleNextStep(formValues.email);
+                await fetchCurrentUser()
+                handleNextStep(formValues.email)
             })
             .catch((err) => {
-                toast.error("Something went wrong. Please try again.");
-            });
-    };
+                toast.error("Something went wrong. Please try again.")
+            })
+    }
 
     return (
         <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -133,5 +130,5 @@ export const InstanceSetupSignInForm: FC<IInstanceSetupEmailForm> = (props) => {
                 </Button>
             </div>
         </form>
-    );
-};
+    )
+}

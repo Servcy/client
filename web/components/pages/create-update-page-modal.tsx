@@ -1,36 +1,32 @@
-import React, { FC } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { PageForm } from "./page-form";
-
-import { useEventTracker } from "@hooks/store";
-
-import { IPage } from "@servcy/types";
-import { useProjectPages } from "@hooks/store/use-project-page";
-import { IPageStore } from "@store/page.store";
-
-import { PAGE_CREATED, PAGE_UPDATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import React, { FC } from "react"
+import { PAGE_CREATED, PAGE_UPDATED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useEventTracker } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-page"
+import { IPageStore } from "@store/page.store"
+import { IPage } from "@servcy/types"
+import { PageForm } from "./page-form"
 
 type Props = {
     // data?: IPage | null;
-    pageStore?: IPageStore;
-    handleClose: () => void;
-    isOpen: boolean;
-    projectId: string;
-};
+    pageStore?: IPageStore
+    handleClose: () => void
+    isOpen: boolean
+    projectId: string
+}
 
 export const CreateUpdatePageModal: FC<Props> = (props) => {
-    const { isOpen, handleClose, projectId, pageStore } = props;
+    const { isOpen, handleClose, projectId, pageStore } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { createPage } = useProjectPages();
-    const { capturePageEvent } = useEventTracker();
+    const { createPage } = useProjectPages()
+    const { capturePageEvent } = useEventTracker()
 
     const createProjectPage = async (payload: IPage) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
         await createPage(workspaceSlug.toString(), projectId, payload)
             .then((res) => {
                 capturePageEvent({
@@ -39,7 +35,7 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                         ...res,
                         state: "SUCCESS",
                     },
-                });
+                })
             })
             .catch(() => {
                 capturePageEvent({
@@ -47,19 +43,19 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                     payload: {
                         state: "FAILED",
                     },
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleFormSubmit = async (formData: IPage) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
         try {
             if (pageStore) {
                 if (pageStore.name !== formData.name) {
-                    await pageStore.updateName(formData.name);
+                    await pageStore.updateName(formData.name)
                 }
                 if (pageStore.access !== formData.access) {
-                    formData.access === 1 ? await pageStore.makePrivate() : await pageStore.makePublic();
+                    formData.access === 1 ? await pageStore.makePrivate() : await pageStore.makePublic()
                 }
                 capturePageEvent({
                     eventName: PAGE_UPDATED,
@@ -67,15 +63,15 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                         ...pageStore,
                         state: "SUCCESS",
                     },
-                });
+                })
             } else {
-                await createProjectPage(formData);
+                await createProjectPage(formData)
             }
-            handleClose();
+            handleClose()
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
-    };
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -115,5 +111,5 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

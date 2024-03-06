@@ -1,21 +1,17 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { ArchiveIcon, CustomMenu } from "@servcy/ui";
-import { observer } from "mobx-react";
-import { Copy, ExternalLink, Link, Pencil, Trash2 } from "lucide-react";
-import omit from "lodash/omit";
-import toast from "react-hot-toast";
-import { useEventTracker, useProjectState } from "@hooks/store";
-
-import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
-
-import { copyUrlToClipboard } from "@helpers/string.helper";
-
-import { TIssue } from "@servcy/types";
-import { IQuickActionProps } from "../list/list-view-types";
-
-import { EIssuesStoreType } from "@constants/issue";
-import { STATE_GROUPS } from "@constants/state";
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues"
+import { EIssuesStoreType } from "@constants/issue"
+import { STATE_GROUPS } from "@constants/state"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useEventTracker, useProjectState } from "@hooks/store"
+import omit from "lodash/omit"
+import { Copy, ExternalLink, Link, Pencil, Trash2 } from "lucide-react"
+import { observer } from "mobx-react"
+import toast from "react-hot-toast"
+import { TIssue } from "@servcy/types"
+import { ArchiveIcon, CustomMenu } from "@servcy/ui"
+import { IQuickActionProps } from "../list/list-view-types"
 
 export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props) => {
     const {
@@ -26,30 +22,30 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
         customActionButton,
         portalElement,
         readOnly = false,
-    } = props;
+    } = props
     // states
-    const [createUpdateIssueModal, setCreateUpdateIssueModal] = useState(false);
-    const [issueToEdit, setIssueToEdit] = useState<TIssue | undefined>(undefined);
-    const [deleteIssueModal, setDeleteIssueModal] = useState(false);
-    const [archiveIssueModal, setArchiveIssueModal] = useState(false);
+    const [createUpdateIssueModal, setCreateUpdateIssueModal] = useState(false)
+    const [issueToEdit, setIssueToEdit] = useState<TIssue | undefined>(undefined)
+    const [deleteIssueModal, setDeleteIssueModal] = useState(false)
+    const [archiveIssueModal, setArchiveIssueModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { setTrackElement } = useEventTracker();
-    const { getStateById } = useProjectState();
+    const { setTrackElement } = useEventTracker()
+    const { getStateById } = useProjectState()
 
     // derived values
-    const stateDetails = getStateById(issue.state_id);
-    const isEditingAllowed = !readOnly;
+    const stateDetails = getStateById(issue.state_id)
+    const isEditingAllowed = !readOnly
     // auth
-    const isArchivingAllowed = handleArchive && isEditingAllowed;
+    const isArchivingAllowed = handleArchive && isEditingAllowed
     const isInArchivableGroup =
-        !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group);
+        !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group)
 
-    const issueLink = `${workspaceSlug}/projects/${issue.project_id}/issues/${issue.id}`;
+    const issueLink = `${workspaceSlug}/projects/${issue.project_id}/issues/${issue.id}`
 
-    const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank");
+    const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank")
     const handleCopyIssueLink = () =>
         copyUrlToClipboard(issueLink).then(() =>
             toast.error({
@@ -57,7 +53,7 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
                 title: "Link copied",
                 message: "Issue link copied to clipboard",
             })
-        );
+        )
 
     const duplicateIssuePayload = omit(
         {
@@ -65,7 +61,7 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
             name: `${issue.name} (copy)`,
         },
         ["id"]
-    );
+    )
 
     return (
         <>
@@ -84,12 +80,12 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
             <CreateUpdateIssueModal
                 isOpen={createUpdateIssueModal}
                 onClose={() => {
-                    setCreateUpdateIssueModal(false);
-                    setIssueToEdit(undefined);
+                    setCreateUpdateIssueModal(false)
+                    setIssueToEdit(undefined)
                 }}
                 data={issueToEdit ?? duplicateIssuePayload}
                 onSubmit={async (data) => {
-                    if (issueToEdit && handleUpdate) await handleUpdate({ ...issueToEdit, ...data });
+                    if (issueToEdit && handleUpdate) await handleUpdate({ ...issueToEdit, ...data })
                 }}
                 storeType={EIssuesStoreType.PROJECT}
             />
@@ -104,9 +100,9 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
                 {isEditingAllowed && (
                     <CustomMenu.MenuItem
                         onClick={() => {
-                            setTrackElement("Global issues");
-                            setIssueToEdit(issue);
-                            setCreateUpdateIssueModal(true);
+                            setTrackElement("Global issues")
+                            setIssueToEdit(issue)
+                            setCreateUpdateIssueModal(true)
                         }}
                     >
                         <div className="flex items-center gap-2">
@@ -130,8 +126,8 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
                 {isEditingAllowed && (
                     <CustomMenu.MenuItem
                         onClick={() => {
-                            setTrackElement("Global issues");
-                            setCreateUpdateIssueModal(true);
+                            setTrackElement("Global issues")
+                            setCreateUpdateIssueModal(true)
                         }}
                     >
                         <div className="flex items-center gap-2">
@@ -165,8 +161,8 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
                 {isEditingAllowed && (
                     <CustomMenu.MenuItem
                         onClick={() => {
-                            setTrackElement("Global issues");
-                            setDeleteIssueModal(true);
+                            setTrackElement("Global issues")
+                            setDeleteIssueModal(true)
                         }}
                     >
                         <div className="flex items-center gap-2">
@@ -177,5 +173,5 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
                 )}
             </CustomMenu>
         </>
-    );
-});
+    )
+})

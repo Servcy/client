@@ -1,18 +1,17 @@
-import React from "react";
-import { RefreshCw } from "lucide-react";
-
-import { TIssue } from "@servcy/types";
-import { useProject } from "@hooks/store";
+import React from "react"
+import { useProject } from "@hooks/store"
+import { RefreshCw } from "lucide-react"
+import { TIssue } from "@servcy/types"
 
 type Props = {
-    isSubmitting: "submitting" | "submitted" | "saved";
-    issueDetail?: TIssue;
-};
+    isSubmitting: "submitting" | "submitted" | "saved"
+    issueDetail?: TIssue
+}
 
 export const IssueUpdateStatus: React.FC<Props> = (props) => {
-    const { isSubmitting, issueDetail } = props;
+    const { isSubmitting, issueDetail } = props
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
 
     return (
         <>
@@ -34,5 +33,5 @@ export const IssueUpdateStatus: React.FC<Props> = (props) => {
                 </span>
             </div>
         </>
-    );
-};
+    )
+}

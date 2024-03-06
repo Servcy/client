@@ -1,11 +1,10 @@
-import { API_BASE_URL } from "@helpers/common.helper";
-import { APIService } from "@services/api.service";
-
-import { IJiraImporterForm, IJiraMetadata, IJiraResponse } from "@servcy/types";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { IJiraImporterForm, IJiraMetadata, IJiraResponse } from "@servcy/types"
 
 export class JiraImporterService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async getJiraProjectInfo(workspaceSlug: string, params: IJiraMetadata): Promise<IJiraResponse> {
@@ -14,15 +13,15 @@ export class JiraImporterService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async createJiraImporter(workspaceSlug: string, data: IJiraImporterForm): Promise<IJiraResponse> {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/importers/jira/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

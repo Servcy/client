@@ -1,35 +1,32 @@
-import { useState } from "react";
-import { observer } from "mobx-react-lite";
-import { Droppable } from "@hello-pangea/dnd";
-
-import { CalendarIssueBlocks, ICalendarDate, CalendarQuickAddIssueForm } from "@components/issues";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { MONTHS_LIST } from "@constants/calendar";
-import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types";
-import { ICycleIssuesFilter } from "@store/issue/cycle";
-import { IModuleIssuesFilter } from "@store/issue/module";
-import { IProjectIssuesFilter } from "@store/issue/project";
-import { IProjectViewIssuesFilter } from "@store/issue/project-views";
+import { useState } from "react"
+import { CalendarIssueBlocks, CalendarQuickAddIssueForm, ICalendarDate } from "@components/issues"
+import { MONTHS_LIST } from "@constants/calendar"
+import { Droppable } from "@hello-pangea/dnd"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { ICycleIssuesFilter } from "@store/issue/cycle"
+import { IModuleIssuesFilter } from "@store/issue/module"
+import { IProjectIssuesFilter } from "@store/issue/project"
+import { IProjectViewIssuesFilter } from "@store/issue/project-views"
+import { observer } from "mobx-react-lite"
+import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types"
 
 type Props = {
-    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter;
-    date: ICalendarDate;
-    issues: TIssueMap | undefined;
-    groupedIssueIds: TGroupedIssues;
-    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode;
-    enableQuickIssueCreate?: boolean;
-    disableIssueCreation?: boolean;
+    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter
+    date: ICalendarDate
+    issues: TIssueMap | undefined
+    groupedIssueIds: TGroupedIssues
+    quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
+    enableQuickIssueCreate?: boolean
+    disableIssueCreation?: boolean
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-    readOnly?: boolean;
-};
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+    readOnly?: boolean
+}
 
 export const CalendarDayTile: React.FC<Props> = observer((props) => {
     const {
@@ -43,17 +40,17 @@ export const CalendarDayTile: React.FC<Props> = observer((props) => {
         quickAddCallback,
         viewId,
         readOnly = false,
-    } = props;
-    const [showAllIssues, setShowAllIssues] = useState(false);
-    const calendarLayout = issuesFilterStore?.issueFilters?.displayFilters?.calendar?.layout ?? "month";
+    } = props
+    const [showAllIssues, setShowAllIssues] = useState(false)
+    const calendarLayout = issuesFilterStore?.issueFilters?.displayFilters?.calendar?.layout ?? "month"
 
-    const formattedDatePayload = renderFormattedPayloadDate(date.date);
-    if (!formattedDatePayload) return null;
-    const issueIdList = groupedIssueIds ? groupedIssueIds[formattedDatePayload] : null;
+    const formattedDatePayload = renderFormattedPayloadDate(date.date)
+    if (!formattedDatePayload) return null
+    const issueIdList = groupedIssueIds ? groupedIssueIds[formattedDatePayload] : null
 
-    const totalIssues = issueIdList?.length ?? 0;
+    const totalIssues = issueIdList?.length ?? 0
 
-    const isToday = date.date.toDateString() === new Date().toDateString();
+    const isToday = date.date.toDateString() === new Date().toDateString()
 
     return (
         <>
@@ -137,5 +134,5 @@ export const CalendarDayTile: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

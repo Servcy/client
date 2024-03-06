@@ -1,54 +1,49 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Combobox } from "@headlessui/react";
-import { usePopper } from "react-popper";
-import { Placement } from "@popperjs/core";
-import { DateRange, DayPicker, Matcher } from "react-day-picker";
-import { ArrowRight, CalendarDays } from "lucide-react";
-
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
-
-import { DropdownButton } from "./buttons";
-
-import { Button } from "@servcy/ui";
-
-import { cn } from "@helpers/common.helper";
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { TButtonVariants } from "./types";
+import React, { useEffect, useRef, useState } from "react"
+import { Combobox } from "@headlessui/react"
+import { cn } from "@helpers/common.helper"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { Placement } from "@popperjs/core"
+import { ArrowRight, CalendarDays } from "lucide-react"
+import { DateRange, DayPicker, Matcher } from "react-day-picker"
+import { usePopper } from "react-popper"
+import { Button } from "@servcy/ui"
+import { DropdownButton } from "./buttons"
+import { TButtonVariants } from "./types"
 
 type Props = {
-    applyButtonText?: string;
-    bothRequired?: boolean;
-    buttonClassName?: string;
-    buttonContainerClassName?: string;
-    buttonFromDateClassName?: string;
-    buttonToDateClassName?: string;
-    buttonVariant: TButtonVariants;
-    cancelButtonText?: string;
-    className?: string;
-    disabled?: boolean;
+    applyButtonText?: string
+    bothRequired?: boolean
+    buttonClassName?: string
+    buttonContainerClassName?: string
+    buttonFromDateClassName?: string
+    buttonToDateClassName?: string
+    buttonVariant: TButtonVariants
+    cancelButtonText?: string
+    className?: string
+    disabled?: boolean
     hideIcon?: {
-        from?: boolean;
-        to?: boolean;
-    };
-    icon?: React.ReactNode;
-    minDate?: Date;
-    maxDate?: Date;
-    onSelect: (range: DateRange | undefined) => void;
+        from?: boolean
+        to?: boolean
+    }
+    icon?: React.ReactNode
+    minDate?: Date
+    maxDate?: Date
+    onSelect: (range: DateRange | undefined) => void
     placeholder?: {
-        from?: string;
-        to?: string;
-    };
-    placement?: Placement;
-    required?: boolean;
-    showTooltip?: boolean;
-    tabIndex?: number;
+        from?: string
+        to?: string
+    }
+    placement?: Placement
+    required?: boolean
+    showTooltip?: boolean
+    tabIndex?: number
     value: {
-        from: Date | undefined;
-        to: Date | undefined;
-    };
-};
+        from: Date | undefined
+        to: Date | undefined
+    }
+}
 
 export const DateRangeDropdown: React.FC<Props> = (props) => {
     const {
@@ -79,15 +74,15 @@ export const DateRangeDropdown: React.FC<Props> = (props) => {
         showTooltip = false,
         tabIndex,
         value,
-    } = props;
+    } = props
     // states
-    const [isOpen, setIsOpen] = useState(false);
-    const [dateRange, setDateRange] = useState<DateRange>(value);
+    const [isOpen, setIsOpen] = useState(false)
+    const [dateRange, setDateRange] = useState<DateRange>(value)
     // refs
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
     // popper-js refs
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
     // popper-js init
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: placement ?? "bottom-start",
@@ -99,44 +94,44 @@ export const DateRangeDropdown: React.FC<Props> = (props) => {
                 },
             },
         ],
-    });
+    })
 
     const onOpen = () => {
-        if (referenceElement) referenceElement.focus();
-    };
+        if (referenceElement) referenceElement.focus()
+    }
 
     const handleClose = () => {
-        if (!isOpen) return;
-        setIsOpen(false);
+        if (!isOpen) return
+        setIsOpen(false)
         setDateRange({
             from: value.from,
             to: value.to,
-        });
-        if (referenceElement) referenceElement.blur();
-    };
+        })
+        if (referenceElement) referenceElement.blur()
+    }
 
     const toggleDropdown = () => {
-        if (!isOpen) onOpen();
-        setIsOpen((prevIsOpen) => !prevIsOpen);
-    };
+        if (!isOpen) onOpen()
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+    }
 
-    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose);
+    const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
 
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        toggleDropdown();
-    };
+        e.stopPropagation()
+        e.preventDefault()
+        toggleDropdown()
+    }
 
-    useOutsideClickDetector(dropdownRef, handleClose);
+    useOutsideClickDetector(dropdownRef, handleClose)
 
-    const disabledDays: Matcher[] = [];
-    if (minDate) disabledDays.push({ before: minDate });
-    if (maxDate) disabledDays.push({ after: maxDate });
+    const disabledDays: Matcher[] = []
+    if (minDate) disabledDays.push({ before: minDate })
+    if (maxDate) disabledDays.push({ after: maxDate })
 
     useEffect(() => {
-        setDateRange(value);
-    }, [value]);
+        setDateRange(value)
+    }, [value])
 
     return (
         <Combobox
@@ -146,8 +141,8 @@ export const DateRangeDropdown: React.FC<Props> = (props) => {
             className={cn("h-full", className)}
             onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                    if (!isOpen) handleKeyDown(e);
-                } else handleKeyDown(e);
+                    if (!isOpen) handleKeyDown(e)
+                } else handleKeyDown(e)
             }}
         >
             <Combobox.Button as={React.Fragment}>
@@ -212,11 +207,11 @@ export const DateRangeDropdown: React.FC<Props> = (props) => {
                             selected={dateRange}
                             onSelect={(val) => {
                                 // if both the dates are not required, immediately call onSelect
-                                if (!bothRequired) onSelect(val);
+                                if (!bothRequired) onSelect(val)
                                 setDateRange({
                                     from: val?.from ?? undefined,
                                     to: val?.to ?? undefined,
-                                });
+                                })
                             }}
                             mode="range"
                             disabled={disabledDays}
@@ -232,16 +227,16 @@ export const DateRangeDropdown: React.FC<Props> = (props) => {
                                                 setDateRange({
                                                     from: undefined,
                                                     to: undefined,
-                                                });
-                                                handleClose();
+                                                })
+                                                handleClose()
                                             }}
                                         >
                                             {cancelButtonText}
                                         </Button>
                                         <Button
                                             onClick={() => {
-                                                onSelect(dateRange);
-                                                handleClose();
+                                                onSelect(dateRange)
+                                                handleClose()
                                             }}
                                             // if required, both the dates should be selected
                                             // if not required, either both or none of the dates should be selected
@@ -261,5 +256,5 @@ export const DateRangeDropdown: React.FC<Props> = (props) => {
                 </Combobox.Options>
             )}
         </Combobox>
-    );
-};
+    )
+}

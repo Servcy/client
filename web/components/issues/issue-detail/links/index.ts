@@ -1,4 +1,4 @@
-export * from "./root";
+export * from "./root"
 
-export * from "./links";
-export * from "./link-detail";
+export * from "./links"
+export * from "./link-detail"

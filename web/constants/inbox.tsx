@@ -1,16 +1,15 @@
-import { AlertTriangle, CheckCircle2, Clock, Copy, ExternalLink, LucideIcon, XCircle } from "lucide-react";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { AlertTriangle, CheckCircle2, Clock, Copy, ExternalLink, LucideIcon, XCircle } from "lucide-react"
 
 export const INBOX_STATUS: {
-    key: string;
-    status: number;
-    icon: LucideIcon;
-    title: string;
-    description: (workspaceSlug: string, projectId: string, issueId: string, snoozedTillDate: Date) => JSX.Element;
-    textColor: (snoozeDatePassed: boolean) => string;
-    bgColor: (snoozeDatePassed: boolean) => string;
-    borderColor: (snoozeDatePassed: boolean) => string;
+    key: string
+    status: number
+    icon: LucideIcon
+    title: string
+    description: (workspaceSlug: string, projectId: string, issueId: string, snoozedTillDate: Date) => JSX.Element
+    textColor: (snoozeDatePassed: boolean) => string
+    bgColor: (snoozeDatePassed: boolean) => string
+    borderColor: (snoozeDatePassed: boolean) => string
 }[] = [
     {
         key: "pending",
@@ -80,6 +79,6 @@ export const INBOX_STATUS: {
         bgColor: (snoozeDatePassed: boolean = false) => (snoozeDatePassed ? "" : "bg-gray-500/10"),
         borderColor: (snoozeDatePassed: boolean = false) => (snoozeDatePassed ? "" : "border-gray-500"),
     },
-];
+]
 
-export const INBOX_ISSUE_SOURCE = "in-app";
+export const INBOX_ISSUE_SOURCE = "in-app"

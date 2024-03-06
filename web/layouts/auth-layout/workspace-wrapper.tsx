@@ -1,52 +1,50 @@
-import { FC, ReactNode } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import useSWR from "swr";
-import { observer } from "mobx-react-lite";
-
-import { useLabel, useMember, useProject, useUser } from "@hooks/store";
-
-import { Button, Spinner } from "@servcy/ui";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { FC, ReactNode } from "react"
+import { useLabel, useMember, useProject, useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { Button, Spinner } from "@servcy/ui"
 
 export interface IWorkspaceAuthWrapper {
-    children: ReactNode;
+    children: ReactNode
 }
 
 export const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
-    const { children } = props;
+    const { children } = props
     // store hooks
-    const { membership } = useUser();
-    const { fetchProjects } = useProject();
+    const { membership } = useUser()
+    const { fetchProjects } = useProject()
     const {
         workspace: { fetchWorkspaceMembers },
-    } = useMember();
+    } = useMember()
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // fetching user workspace information
     useSWR(
         workspaceSlug ? `WORKSPACE_MEMBERS_ME_${workspaceSlug}` : null,
         workspaceSlug ? () => membership.fetchUserWorkspaceInfo(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetching workspace projects
     useSWR(
         workspaceSlug ? `WORKSPACE_PROJECTS_${workspaceSlug}` : null,
         workspaceSlug ? () => fetchProjects(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetch workspace members
     useSWR(
         workspaceSlug ? `WORKSPACE_MEMBERS_${workspaceSlug}` : null,
         workspaceSlug ? () => fetchWorkspaceMembers(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
     // fetch workspace user projects role
     useSWR(
         workspaceSlug ? `WORKSPACE_PROJECTS_ROLE_${workspaceSlug}` : null,
         workspaceSlug ? () => membership.fetchUserWorkspaceProjectsRole(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
-    );
+    )
 
     // while data is being loaded
     if (!membership.currentWorkspaceMemberInfo && membership.hasPermissionToCurrentWorkspace === undefined) {
@@ -56,7 +54,7 @@ export const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) 
                     <Spinner />
                 </div>
             </div>
-        );
+        )
     }
     // while user does not have access to view that workspace
     if (
@@ -93,8 +91,8 @@ export const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) 
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 
-    return <>{children}</>;
-});
+    return <>{children}</>
+})

@@ -1,26 +1,23 @@
-import { FC, ReactNode } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useApplication } from "@hooks/store";
-
-import { AdminAuthWrapper, UserAuthWrapper } from "@layouts/auth-layout";
-
-import { InstanceAdminSidebar } from "./sidebar";
-import { InstanceAdminHeader } from "./header";
-import { InstanceSetupView } from "@components/instance";
+import { FC, ReactNode } from "react"
+import { InstanceSetupView } from "@components/instance"
+import { useApplication } from "@hooks/store"
+import { AdminAuthWrapper, UserAuthWrapper } from "@layouts/auth-layout"
+import { observer } from "mobx-react-lite"
+import { InstanceAdminHeader } from "./header"
+import { InstanceAdminSidebar } from "./sidebar"
 
 export interface IInstanceAdminLayout {
-    children: ReactNode;
+    children: ReactNode
 }
 
 export const InstanceAdminLayout: FC<IInstanceAdminLayout> = observer((props) => {
-    const { children } = props;
+    const { children } = props
     // store hooks
     const {
         instance: { instance },
-    } = useApplication();
+    } = useApplication()
 
-    if (instance?.is_setup_done === false) return <InstanceSetupView />;
+    if (instance?.is_setup_done === false) return <InstanceSetupView />
 
     return (
         <>
@@ -40,5 +37,5 @@ export const InstanceAdminLayout: FC<IInstanceAdminLayout> = observer((props) =>
                 </AdminAuthWrapper>
             </UserAuthWrapper>
         </>
-    );
-});
+    )
+})

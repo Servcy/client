@@ -1,41 +1,35 @@
-import { FC } from "react";
-import useSWR from "swr";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { ISSUE_DETAILS } from "@constants/fetch-keys"
+import { cn } from "@helpers/common.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useApplication, useProject } from "@hooks/store"
+import { IssueService } from "@services/issue"
+import { PanelRight } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 
-import { useApplication, useProject } from "@hooks/store";
-
-import { Breadcrumbs, LayersIcon } from "@servcy/ui";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { IssueService } from "@services/issue";
-
-import { ISSUE_DETAILS } from "@constants/fetch-keys";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-import { PanelRight } from "lucide-react";
-import { cn } from "@helpers/common.helper";
-
-const issueService = new IssueService();
+const issueService = new IssueService()
 
 export const ProjectIssueDetailsHeader: FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, issueId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, issueId } = router.query
     // store hooks
-    const { currentProjectDetails, getProjectById } = useProject();
-    const { theme: themeStore } = useApplication();
+    const { currentProjectDetails, getProjectById } = useProject()
+    const { theme: themeStore } = useApplication()
 
     const { data: issueDetails } = useSWR(
         workspaceSlug && projectId && issueId ? ISSUE_DETAILS(issueId as string) : null,
         workspaceSlug && projectId && issueId
             ? () => issueService.retrieve(workspaceSlug as string, projectId as string, issueId as string)
             : null
-    );
+    )
 
-    const isSidebarCollapsed = themeStore.issueDetailSidebarCollapsed;
+    const isSidebarCollapsed = themeStore.issueDetailSidebarCollapsed
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -98,5 +92,5 @@ export const ProjectIssueDetailsHeader: FC = observer(() => {
                 />
             </button>
         </div>
-    );
-});
+    )
+})

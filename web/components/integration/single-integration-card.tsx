@@ -1,29 +1,22 @@
-import { useState } from "react";
-
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import useSWR, { mutate } from "swr";
-
-import { IntegrationService } from "@services/integrations";
-
-import { useApplication, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-import useIntegrationPopup from "@hooks/use-integration-popup";
-
-import { Button, Loader, Tooltip } from "@servcy/ui";
-
-import GithubLogo from "public/services/github.png";
-import SlackLogo from "public/services/slack.png";
-import { CheckCircle } from "lucide-react";
-
-import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types";
-
-import { WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";
+import Image from "next/image"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
+import { useApplication, useUser } from "@hooks/store"
+import useIntegrationPopup from "@hooks/use-integration-popup"
+import { IntegrationService } from "@services/integrations"
+import { CheckCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import GithubLogo from "public/services/github.png"
+import SlackLogo from "public/services/slack.png"
+import toast from "react-hot-toast"
+import useSWR, { mutate } from "swr"
+import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types"
+import { Button, Loader, Tooltip } from "@servcy/ui"
 
 type Props = {
-    integration: IAppIntegration;
-};
+    integration: IAppIntegration
+}
 
 const integrationDetails: { [key: string]: any } = {
     github: {
@@ -36,43 +29,43 @@ const integrationDetails: { [key: string]: any } = {
         installed: "Activate Slack on individual projects to sync with specific channels.",
         notInstalled: "Connect with Slack with your Servcy workspace to sync project issues.",
     },
-};
+}
 
-const integrationService = new IntegrationService();
+const integrationService = new IntegrationService()
 
 export const SingleIntegrationCard: React.FC<Props> = observer(({ integration }) => {
     // states
-    const [deletingIntegration, setDeletingIntegration] = useState(false);
+    const [deletingIntegration, setDeletingIntegration] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
     const {
         config: { envConfig },
-    } = useApplication();
+    } = useApplication()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
+    } = useUser()
 
-    const isUserAdmin = currentWorkspaceRole === 20;
+    const isUserAdmin = currentWorkspaceRole === 20
 
     const { startAuth, isConnecting: isInstalling } = useIntegrationPopup({
         provider: integration.provider,
         github_app_name: envConfig?.github_app_name || "",
         slack_client_id: envConfig?.slack_client_id || "",
-    });
+    })
 
     const { data: workspaceIntegrations } = useSWR(
         workspaceSlug ? WORKSPACE_INTEGRATIONS(workspaceSlug as string) : null,
         () => (workspaceSlug ? integrationService.getWorkspaceIntegrationsList(workspaceSlug as string) : null)
-    );
+    )
 
     const handleRemoveIntegration = async () => {
-        if (!workspaceSlug || !integration || !workspaceIntegrations) return;
+        if (!workspaceSlug || !integration || !workspaceIntegrations) return
 
-        const workspaceIntegrationId = workspaceIntegrations?.find((i) => i.integration === integration.id)?.id;
+        const workspaceIntegrationId = workspaceIntegrations?.find((i) => i.integration === integration.id)?.id
 
-        setDeletingIntegration(true);
+        setDeletingIntegration(true)
 
         await integrationService
             .deleteWorkspaceIntegration(workspaceSlug as string, workspaceIntegrationId ?? "")
@@ -81,27 +74,27 @@ export const SingleIntegrationCard: React.FC<Props> = observer(({ integration })
                     WORKSPACE_INTEGRATIONS(workspaceSlug as string),
                     (prevData) => prevData?.filter((i) => i.id !== workspaceIntegrationId),
                     false
-                );
-                setDeletingIntegration(false);
+                )
+                setDeletingIntegration(false)
 
                 toast.error({
                     type: "success",
                     title: "Deleted successfully!",
                     message: `${integration.title} integration deleted successfully.`,
-                });
+                })
             })
             .catch(() => {
-                setDeletingIntegration(false);
+                setDeletingIntegration(false)
 
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: `${integration.title} integration could not be deleted. Please try again.`,
-                });
-            });
-    };
+                })
+            })
+    }
 
-    const isInstalled = workspaceIntegrations?.find((i: any) => i.integration_detail.id === integration.id);
+    const isInstalled = workspaceIntegrations?.find((i: any) => i.integration_detail.id === integration.id)
 
     return (
         <div className="flex items-center justify-between gap-2 border-b border-custom-border-100 bg-custom-background-100 px-4 py-6">
@@ -136,8 +129,8 @@ export const SingleIntegrationCard: React.FC<Props> = observer(({ integration })
                             className={`${!isUserAdmin ? "hover:cursor-not-allowed" : ""}`}
                             variant="danger"
                             onClick={() => {
-                                if (!isUserAdmin) return;
-                                handleRemoveIntegration();
+                                if (!isUserAdmin) return
+                                handleRemoveIntegration()
                             }}
                             disabled={!isUserAdmin}
                             loading={deletingIntegration}
@@ -154,8 +147,8 @@ export const SingleIntegrationCard: React.FC<Props> = observer(({ integration })
                             className={`${!isUserAdmin ? "hover:cursor-not-allowed" : ""}`}
                             variant="primary"
                             onClick={() => {
-                                if (!isUserAdmin) return;
-                                startAuth();
+                                if (!isUserAdmin) return
+                                startAuth()
                             }}
                             loading={isInstalling}
                         >
@@ -169,5 +162,5 @@ export const SingleIntegrationCard: React.FC<Props> = observer(({ integration })
                 </Loader>
             )}
         </div>
-    );
-});
+    )
+})

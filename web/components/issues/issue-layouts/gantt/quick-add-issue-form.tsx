@@ -1,34 +1,30 @@
-import { useEffect, useState, useRef, FC } from "react";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { observer } from "mobx-react-lite";
-import { PlusIcon } from "lucide-react";
-
-import { useEventTracker, useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-import useKeypress from "@hooks/use-key-press";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-import { createIssuePayload } from "@helpers/issue.helper";
-import { cn } from "@helpers/common.helper";
-
-import { IProject, TIssue } from "@servcy/types";
-
-import { ISSUE_CREATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { FC, useEffect, useRef, useState } from "react"
+import { ISSUE_CREATED } from "@constants/event-tracker"
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { createIssuePayload } from "@helpers/issue.helper"
+import { useEventTracker, useProject } from "@hooks/store"
+import useKeypress from "@hooks/use-key-press"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { PlusIcon } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IProject, TIssue } from "@servcy/types"
 
 interface IInputProps {
-    formKey: string;
-    register: any;
-    setFocus: any;
-    projectDetail: IProject | null;
+    formKey: string
+    register: any
+    setFocus: any
+    projectDetail: IProject | null
 }
 const Inputs: FC<IInputProps> = (props) => {
-    const { formKey, register, setFocus, projectDetail } = props;
+    const { formKey, register, setFocus, projectDetail } = props
 
     useEffect(() => {
-        setFocus(formKey);
-    }, [formKey, setFocus]);
+        setFocus(formKey)
+    }, [formKey, setFocus])
 
     return (
         <div className="flex w-full items-center gap-3">
@@ -43,43 +39,43 @@ const Inputs: FC<IInputProps> = (props) => {
                 className="w-full rounded-md bg-transparent px-2 py-3 text-sm font-medium leading-5 text-custom-text-200 outline-none"
             />
         </div>
-    );
-};
+    )
+}
 
 type IGanttQuickAddIssueForm = {
-    prePopulatedData?: Partial<TIssue>;
-    onSuccess?: (data: TIssue) => Promise<void> | void;
+    prePopulatedData?: Partial<TIssue>
+    onSuccess?: (data: TIssue) => Promise<void> | void
     quickAddCallback?: (
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
         viewId?: string
-    ) => Promise<TIssue | undefined>;
-    viewId?: string;
-};
+    ) => Promise<TIssue | undefined>
+    viewId?: string
+}
 
 const defaultValues: Partial<TIssue> = {
     name: "",
-};
+}
 
 export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observer((props) => {
-    const { prePopulatedData, quickAddCallback, viewId } = props;
+    const { prePopulatedData, quickAddCallback, viewId } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
-    const { getProjectById } = useProject();
-    const { captureIssueEvent } = useEventTracker();
+    const { getProjectById } = useProject()
+    const { captureIssueEvent } = useEventTracker()
 
-    const projectDetail = (projectId && getProjectById(projectId.toString())) || undefined;
+    const projectDetail = (projectId && getProjectById(projectId.toString())) || undefined
 
-    const ref = useRef<HTMLFormElement>(null);
+    const ref = useRef<HTMLFormElement>(null)
 
-    const [isOpen, setIsOpen] = useState(false);
-    const handleClose = () => setIsOpen(false);
+    const [isOpen, setIsOpen] = useState(false)
+    const handleClose = () => setIsOpen(false)
 
-    useKeypress("Escape", handleClose);
-    useOutsideClickDetector(ref, handleClose);
+    useKeypress("Escape", handleClose)
+    useOutsideClickDetector(ref, handleClose)
 
     // form info
     const {
@@ -88,26 +84,26 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
         setFocus,
         register,
         formState: { errors, isSubmitting },
-    } = useForm<TIssue>({ defaultValues });
+    } = useForm<TIssue>({ defaultValues })
 
     useEffect(() => {
-        if (!isOpen) reset({ ...defaultValues });
-    }, [isOpen, reset]);
+        if (!isOpen) reset({ ...defaultValues })
+    }, [isOpen, reset])
 
     const onSubmitHandler = async (formData: TIssue) => {
-        if (isSubmitting || !workspaceSlug || !projectId) return;
+        if (isSubmitting || !workspaceSlug || !projectId) return
 
-        reset({ ...defaultValues });
+        reset({ ...defaultValues })
 
-        const targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() + 1);
+        const targetDate = new Date()
+        targetDate.setDate(targetDate.getDate() + 1)
 
         const payload = createIssuePayload(projectId.toString(), {
             ...(prePopulatedData ?? {}),
             ...formData,
             start_date: renderFormattedPayloadDate(new Date()),
             target_date: renderFormattedPayloadDate(targetDate),
-        });
+        })
 
         try {
             quickAddCallback &&
@@ -117,27 +113,27 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
                             eventName: ISSUE_CREATED,
                             payload: { ...res, state: "SUCCESS", element: "Gantt quick add" },
                             path: router.asPath,
-                        });
+                        })
                     }
-                ));
+                ))
             toast.error({
                 type: "success",
                 title: "Success!",
                 message: "Issue created successfully.",
-            });
+            })
         } catch (err: any) {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Gantt quick add" },
                 path: router.asPath,
-            });
+            })
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: err?.message || "Some error occurred. Please try again.",
-            });
+            })
         }
-    };
+    }
     return (
         <>
             {isOpen ? (
@@ -173,5 +169,5 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
                 </button>
             )}
         </>
-    );
-});
+    )
+})

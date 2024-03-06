@@ -1,37 +1,33 @@
-import { observer } from "mobx-react";
-
-import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store";
-
-import { Tooltip, StateGroupIcon, ControlLink } from "@servcy/ui";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store"
+import { observer } from "mobx-react"
+import { ControlLink, StateGroupIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
-    issueId: string;
-};
+    issueId: string
+}
 
 export const IssueGanttBlock: React.FC<Props> = observer((props) => {
-    const { issueId } = props;
+    const { issueId } = props
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { getProjectStates } = useProjectState();
+    } = useApplication()
+    const { getProjectStates } = useProjectState()
     const {
         issue: { getIssueById },
         setPeekIssue,
-    } = useIssueDetail();
+    } = useIssueDetail()
     // derived values
-    const issueDetails = getIssueById(issueId);
+    const issueDetails = getIssueById(issueId)
     const stateDetails =
-        issueDetails &&
-        getProjectStates(issueDetails?.project_id)?.find((state) => state?.id == issueDetails?.state_id);
+        issueDetails && getProjectStates(issueDetails?.project_id)?.find((state) => state?.id == issueDetails?.state_id)
 
     const handleIssuePeekOverview = () =>
         workspaceSlug &&
         issueDetails &&
         !issueDetails.tempId &&
-        setPeekIssue({ workspaceSlug, projectId: issueDetails.project_id, issueId: issueDetails.id });
+        setPeekIssue({ workspaceSlug, projectId: issueDetails.project_id, issueId: issueDetails.id })
 
     return (
         <div
@@ -59,31 +55,31 @@ export const IssueGanttBlock: React.FC<Props> = observer((props) => {
                 </div>
             </Tooltip>
         </div>
-    );
-});
+    )
+})
 
 // rendering issues on gantt sidebar
 export const IssueGanttSidebarBlock: React.FC<Props> = observer((props) => {
-    const { issueId } = props;
+    const { issueId } = props
     // store hooks
-    const { getStateById } = useProjectState();
-    const { getProjectIdentifierById } = useProject();
+    const { getStateById } = useProjectState()
+    const { getProjectIdentifierById } = useProject()
     const {
         router: { workspaceSlug },
-    } = useApplication();
+    } = useApplication()
     const {
         issue: { getIssueById },
         setPeekIssue,
-    } = useIssueDetail();
+    } = useIssueDetail()
     // derived values
-    const issueDetails = getIssueById(issueId);
-    const projectIdentifier = issueDetails && getProjectIdentifierById(issueDetails?.project_id);
-    const stateDetails = issueDetails && getStateById(issueDetails?.state_id);
+    const issueDetails = getIssueById(issueId)
+    const projectIdentifier = issueDetails && getProjectIdentifierById(issueDetails?.project_id)
+    const stateDetails = issueDetails && getStateById(issueDetails?.state_id)
 
     const handleIssuePeekOverview = () =>
         workspaceSlug &&
         issueDetails &&
-        setPeekIssue({ workspaceSlug, projectId: issueDetails.project_id, issueId: issueDetails.id });
+        setPeekIssue({ workspaceSlug, projectId: issueDetails.project_id, issueId: issueDetails.id })
 
     return (
         <ControlLink
@@ -103,5 +99,5 @@ export const IssueGanttSidebarBlock: React.FC<Props> = observer((props) => {
                 </Tooltip>
             </div>
         </ControlLink>
-    );
-});
+    )
+})

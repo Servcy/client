@@ -1,22 +1,18 @@
-import { BarDatum } from "@nivo/bar";
-
-import { PriorityIcon } from "@servcy/ui";
-
-import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";
-
-import { IAnalyticsParams, IAnalyticsResponse, TIssuePriorities } from "@servcy/types";
-
-import { ANALYTICS_X_AXIS_VALUES, ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics";
+import { ANALYTICS_X_AXIS_VALUES, ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics"
+import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper"
+import { BarDatum } from "@nivo/bar"
+import { IAnalyticsParams, IAnalyticsResponse, TIssuePriorities } from "@servcy/types"
+import { PriorityIcon } from "@servcy/ui"
 
 type Props = {
-    analytics: IAnalyticsResponse;
+    analytics: IAnalyticsResponse
     barGraphData: {
-        data: BarDatum[];
-        xAxisKeys: string[];
-    };
-    params: IAnalyticsParams;
-    yAxisKey: "count" | "estimate";
-};
+        data: BarDatum[]
+        xAxisKeys: string[]
+    }
+    params: IAnalyticsParams
+    yAxisKey: "count" | "estimate"
+}
 
 export const AnalyticsTable: React.FC<Props> = ({ analytics, barGraphData, params, yAxisKey }) => (
     <div className="flow-root">
@@ -115,4 +111,4 @@ export const AnalyticsTable: React.FC<Props> = ({ analytics, barGraphData, param
             </div>
         </div>
     </div>
-);
+)

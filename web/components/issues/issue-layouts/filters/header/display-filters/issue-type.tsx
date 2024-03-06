@@ -1,23 +1,20 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { TIssueTypeFilters } from "@servcy/types";
-
-import { ISSUE_FILTER_OPTIONS } from "@constants/issue";
+import React from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { ISSUE_FILTER_OPTIONS } from "@constants/issue"
+import { observer } from "mobx-react-lite"
+import { TIssueTypeFilters } from "@servcy/types"
 
 type Props = {
-    selectedIssueType: TIssueTypeFilters | undefined;
-    handleUpdate: (val: TIssueTypeFilters) => void;
-};
+    selectedIssueType: TIssueTypeFilters | undefined
+    handleUpdate: (val: TIssueTypeFilters) => void
+}
 
 export const FilterIssueType: React.FC<Props> = observer((props) => {
-    const { selectedIssueType, handleUpdate } = props;
+    const { selectedIssueType, handleUpdate } = props
 
-    const [previewEnabled, setPreviewEnabled] = React.useState(true);
+    const [previewEnabled, setPreviewEnabled] = React.useState(true)
 
-    const activeIssueType = selectedIssueType ?? null;
+    const activeIssueType = selectedIssueType ?? null
 
     return (
         <>
@@ -40,5 +37,5 @@ export const FilterIssueType: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

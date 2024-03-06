@@ -1,30 +1,26 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import { CalendarCheck2 } from "lucide-react";
-
-import { useProjectState } from "@hooks/store";
-
-import { DateDropdown } from "@components/dropdowns";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
-import { cn } from "@helpers/common.helper";
-
-import { TIssue } from "@servcy/types";
+import React from "react"
+import { DateDropdown } from "@components/dropdowns"
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
+import { useProjectState } from "@hooks/store"
+import { CalendarCheck2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TIssue } from "@servcy/types"
 
 type Props = {
-    issue: TIssue;
-    onClose: () => void;
-    onChange: (issue: TIssue, data: Partial<TIssue>, updates: any) => void;
-    disabled: boolean;
-};
+    issue: TIssue
+    onClose: () => void
+    onChange: (issue: TIssue, data: Partial<TIssue>, updates: any) => void
+    disabled: boolean
+}
 
 export const SpreadsheetDueDateColumn: React.FC<Props> = observer((props: Props) => {
-    const { issue, onChange, disabled, onClose } = props;
+    const { issue, onChange, disabled, onClose } = props
     // store hooks
-    const { getStateById } = useProjectState();
+    const { getStateById } = useProjectState()
     // derived values
-    const stateDetails = getStateById(issue.state_id);
+    const stateDetails = getStateById(issue.state_id)
 
     return (
         <div className="h-11 border-b-[0.5px] border-custom-border-200">
@@ -32,7 +28,7 @@ export const SpreadsheetDueDateColumn: React.FC<Props> = observer((props: Props)
                 value={issue.target_date}
                 minDate={issue.start_date ? new Date(issue.start_date) : undefined}
                 onChange={(data) => {
-                    const targetDate = data ? renderFormattedPayloadDate(data) : null;
+                    const targetDate = data ? renderFormattedPayloadDate(data) : null
                     onChange(
                         issue,
                         { target_date: targetDate },
@@ -40,7 +36,7 @@ export const SpreadsheetDueDateColumn: React.FC<Props> = observer((props: Props)
                             changed_property: "target_date",
                             change_details: targetDate,
                         }
-                    );
+                    )
                 }}
                 disabled={disabled}
                 placeholder="Due date"
@@ -54,5 +50,5 @@ export const SpreadsheetDueDateColumn: React.FC<Props> = observer((props: Props)
                 onClose={onClose}
             />
         </div>
-    );
-});
+    )
+})

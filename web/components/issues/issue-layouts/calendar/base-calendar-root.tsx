@@ -1,63 +1,61 @@
-import { FC, useCallback } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { DragDropContext, DropResult } from "@hello-pangea/dnd";
-
-import { CalendarChart } from "@components/issues";
-import toast from "react-hot-toast";
-
-import { TGroupedIssues, TIssue } from "@servcy/types";
-import { IQuickActionProps } from "../list/list-view-types";
-import { EIssueActions } from "../types";
-import { handleDragDrop } from "./utils";
-import { useIssues, useUser } from "@hooks/store";
-import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
-import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module";
-import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
-import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views";
-import { EUserProjectRoles } from "@constants/project";
+import { useRouter } from "next/router"
+import { FC, useCallback } from "react"
+import { CalendarChart } from "@components/issues"
+import { EUserProjectRoles } from "@constants/project"
+import { DragDropContext, DropResult } from "@hello-pangea/dnd"
+import { useIssues, useUser } from "@hooks/store"
+import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
+import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
+import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project"
+import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { TGroupedIssues, TIssue } from "@servcy/types"
+import { IQuickActionProps } from "../list/list-view-types"
+import { EIssueActions } from "../types"
+import { handleDragDrop } from "./utils"
 
 interface IBaseCalendarRoot {
-    issueStore: IProjectIssues | IModuleIssues | ICycleIssues | IProjectViewIssues;
-    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter;
-    QuickActions: FC<IQuickActionProps>;
+    issueStore: IProjectIssues | IModuleIssues | ICycleIssues | IProjectViewIssues
+    issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter
+    QuickActions: FC<IQuickActionProps>
     issueActions: {
-        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
-        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>;
-        [EIssueActions.RESTORE]?: (issue: TIssue) => Promise<void>;
-    };
-    viewId?: string;
-    isCompletedCycle?: boolean;
+        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>
+        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>
+        [EIssueActions.RESTORE]?: (issue: TIssue) => Promise<void>
+    }
+    viewId?: string
+    isCompletedCycle?: boolean
 }
 
 export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
-    const { issueStore, issuesFilterStore, QuickActions, issueActions, viewId, isCompletedCycle = false } = props;
+    const { issueStore, issuesFilterStore, QuickActions, issueActions, viewId, isCompletedCycle = false } = props
 
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
-    const { issueMap } = useIssues();
+    const { issueMap } = useIssues()
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
-    const displayFilters = issuesFilterStore.issueFilters?.displayFilters;
+    const displayFilters = issuesFilterStore.issueFilters?.displayFilters
 
-    const groupedIssueIds = (issueStore.groupedIssueIds ?? {}) as TGroupedIssues;
+    const groupedIssueIds = (issueStore.groupedIssueIds ?? {}) as TGroupedIssues
 
     const onDragEnd = async (result: DropResult) => {
-        if (!result) return;
+        if (!result) return
 
         // return if not dropped on the correct place
-        if (!result.destination) return;
+        if (!result.destination) return
 
         // return if dropped on the same date
-        if (result.destination.droppableId === result.source.droppableId) return;
+        if (result.destination.droppableId === result.source.droppableId) return
 
         if (handleDragDrop) {
             await handleDragDrop(
@@ -74,19 +72,19 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
                     title: "Error",
                     type: "error",
                     message: err.detail ?? "Failed to perform this action",
-                });
-            });
+                })
+            })
         }
-    };
+    }
 
     const handleIssues = useCallback(
         async (date: string, issue: TIssue, action: EIssueActions) => {
             if (issueActions[action]) {
-                await issueActions[action]!(issue);
+                await issueActions[action]!(issue)
             }
         },
         [issueActions]
-    );
+    )
 
     return (
         <>
@@ -138,5 +136,5 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
                 </DragDropContext>
             </div>
         </>
-    );
-});
+    )
+})

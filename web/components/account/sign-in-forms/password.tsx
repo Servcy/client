@@ -1,54 +1,48 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { Eye, EyeOff, XCircle } from "lucide-react";
-
-import { AuthService } from "@services/auth.service";
-import toast from "react-hot-toast";
-import { useApplication, useEventTracker } from "@hooks/store";
-
-import { ESignInSteps, ForgotPasswordPopover } from "@components/account";
-
-import { Button, Input } from "@servcy/ui";
-
-import { checkEmailValidity } from "@helpers/string.helper";
-
-import { IPasswordSignInData } from "@servcy/types";
-
-import { FORGOT_PASSWORD, SIGN_IN_WITH_PASSWORD } from "@constants/event-tracker";
+import Link from "next/link"
+import React, { useState } from "react"
+import { ESignInSteps, ForgotPasswordPopover } from "@components/account"
+import { FORGOT_PASSWORD, SIGN_IN_WITH_PASSWORD } from "@constants/event-tracker"
+import { checkEmailValidity } from "@helpers/string.helper"
+import { useApplication, useEventTracker } from "@hooks/store"
+import { AuthService } from "@services/auth.service"
+import { Eye, EyeOff, XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IPasswordSignInData } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    email: string;
-    handleStepChange: (step: ESignInSteps) => void;
-    handleEmailClear: () => void;
-    onSubmit: () => Promise<void>;
-};
+    email: string
+    handleStepChange: (step: ESignInSteps) => void
+    handleEmailClear: () => void
+    onSubmit: () => Promise<void>
+}
 
 type TPasswordFormValues = {
-    email: string;
-    password: string;
-};
+    email: string
+    password: string
+}
 
 const defaultValues: TPasswordFormValues = {
     email: "",
     password: "",
-};
+}
 
-const authService = new AuthService();
+const authService = new AuthService()
 
 export const SignInPasswordForm: React.FC<Props> = observer((props) => {
-    const { email, handleStepChange, handleEmailClear, onSubmit } = props;
+    const { email, handleStepChange, handleEmailClear, onSubmit } = props
     // states
-    const [isSendingUniqueCode, setIsSendingUniqueCode] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+    const [isSendingUniqueCode, setIsSendingUniqueCode] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
     const {
         config: { envConfig },
-    } = useApplication();
-    const { captureEvent } = useEventTracker();
+    } = useApplication()
+    const { captureEvent } = useEventTracker()
     // derived values
-    const isSmtpConfigured = envConfig?.is_smtp_configured;
+    const isSmtpConfigured = envConfig?.is_smtp_configured
     // form info
     const {
         control,
@@ -63,13 +57,13 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
         },
         mode: "onChange",
         reValidateMode: "onChange",
-    });
+    })
 
     const handleFormSubmit = async (formData: TPasswordFormValues) => {
         const payload: IPasswordSignInData = {
             email: formData.email,
             password: formData.password,
-        };
+        }
 
         await authService
             .passwordSignIn(payload)
@@ -77,8 +71,8 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
                 captureEvent(SIGN_IN_WITH_PASSWORD, {
                     state: "SUCCESS",
                     first_time: false,
-                });
-                await onSubmit();
+                })
+                await onSubmit()
             })
             .catch((err) =>
                 toast.error({
@@ -86,20 +80,20 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
                     title: "Error!",
                     message: err?.error ?? "Something went wrong. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
     const handleSendUniqueCode = async () => {
-        const emailFormValue = getValues("email");
+        const emailFormValue = getValues("email")
 
-        const isEmailValid = checkEmailValidity(emailFormValue);
+        const isEmailValid = checkEmailValidity(emailFormValue)
 
         if (!isEmailValid) {
-            setError("email", { message: "Email is invalid" });
-            return;
+            setError("email", { message: "Email is invalid" })
+            return
         }
 
-        setIsSendingUniqueCode(true);
+        setIsSendingUniqueCode(true)
 
         await authService
             .generateUniqueCode({ email: emailFormValue })
@@ -111,8 +105,8 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
                     message: err?.error ?? "Something went wrong. Please try again.",
                 })
             )
-            .finally(() => setIsSendingUniqueCode(false));
-    };
+            .finally(() => setIsSendingUniqueCode(false))
+    }
 
     return (
         <>
@@ -148,8 +142,8 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
                                     <XCircle
                                         className="absolute right-3 h-5 w-5 stroke-custom-text-400 hover:cursor-pointer"
                                         onClick={() => {
-                                            if (isSmtpConfigured) handleEmailClear();
-                                            else onChange("");
+                                            if (isSmtpConfigured) handleEmailClear()
+                                            else onChange("")
                                         }}
                                     />
                                 )}
@@ -229,5 +223,5 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
                 </div>
             </form>
         </>
-    );
-});
+    )
+})

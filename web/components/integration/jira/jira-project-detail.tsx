@@ -1,51 +1,43 @@
-import React, { useEffect } from "react";
-
 // next
-import { useRouter } from "next/router";
-
-// swr
-import useSWR from "swr";
-
-// react hook form
-import { useFormContext, Controller } from "react-hook-form";
-
-import { JiraImporterService } from "@services/integrations";
-
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
 // fetch keys
-import { JIRA_IMPORTER_DETAIL } from "@constants/fetch-keys";
-
-import { IJiraImporterForm, IJiraMetadata } from "@servcy/types";
-
-import { ToggleSwitch, Spinner } from "@servcy/ui";
-
-import type { IJiraIntegrationData, TJiraIntegrationSteps } from ".";
+import { JIRA_IMPORTER_DETAIL } from "@constants/fetch-keys"
+import { JiraImporterService } from "@services/integrations"
+// react hook form
+import { Controller, useFormContext } from "react-hook-form"
+// swr
+import useSWR from "swr"
+import { IJiraImporterForm, IJiraMetadata } from "@servcy/types"
+import { Spinner, ToggleSwitch } from "@servcy/ui"
+import type { IJiraIntegrationData, TJiraIntegrationSteps } from "."
 
 type Props = {
-    setCurrentStep: React.Dispatch<React.SetStateAction<IJiraIntegrationData>>;
-    setDisableTopBarAfter: React.Dispatch<React.SetStateAction<TJiraIntegrationSteps | null>>;
-};
+    setCurrentStep: React.Dispatch<React.SetStateAction<IJiraIntegrationData>>
+    setDisableTopBarAfter: React.Dispatch<React.SetStateAction<TJiraIntegrationSteps | null>>
+}
 
-const jiraImporterService = new JiraImporterService();
+const jiraImporterService = new JiraImporterService()
 
 export const JiraProjectDetail: React.FC<Props> = (props) => {
-    const { setCurrentStep, setDisableTopBarAfter } = props;
+    const { setCurrentStep, setDisableTopBarAfter } = props
 
     const {
         watch,
         setValue,
         control,
         formState: { errors },
-    } = useFormContext<IJiraImporterForm>();
+    } = useFormContext<IJiraImporterForm>()
 
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
 
     const params: IJiraMetadata = {
         api_token: watch("metadata.api_token"),
         project_key: watch("metadata.project_key"),
         email: watch("metadata.email"),
         cloud_hostname: watch("metadata.cloud_hostname"),
-    };
+    }
 
     const { data: projectInfo, error } = useSWR(
         workspaceSlug &&
@@ -62,13 +54,13 @@ export const JiraProjectDetail: React.FC<Props> = (props) => {
             !errors.metadata?.cloud_hostname
             ? () => jiraImporterService.getJiraProjectInfo(workspaceSlug.toString(), params)
             : null
-    );
+    )
 
     useEffect(() => {
-        if (!projectInfo) return;
+        if (!projectInfo) return
 
-        setValue("data.total_issues", projectInfo.issues);
-        setValue("data.total_labels", projectInfo.labels);
+        setValue("data.total_issues", projectInfo.issues)
+        setValue("data.total_labels", projectInfo.labels)
         setValue(
             "data.users",
             projectInfo.users?.map((user) => ({
@@ -76,27 +68,27 @@ export const JiraProjectDetail: React.FC<Props> = (props) => {
                 import: false,
                 username: user.displayName,
             }))
-        );
-        setValue("data.total_states", projectInfo.states);
-        setValue("data.total_modules", projectInfo.modules);
-    }, [projectInfo, setValue]);
+        )
+        setValue("data.total_states", projectInfo.states)
+        setValue("data.total_modules", projectInfo.modules)
+    }, [projectInfo, setValue])
 
     useEffect(() => {
-        if (error) setDisableTopBarAfter("display-import-data");
-        else setDisableTopBarAfter(null);
-    }, [error, setDisableTopBarAfter]);
+        if (error) setDisableTopBarAfter("display-import-data")
+        else setDisableTopBarAfter(null)
+    }, [error, setDisableTopBarAfter])
 
     useEffect(() => {
-        if (!projectInfo && !error) setDisableTopBarAfter("display-import-data");
-        else if (!error) setDisableTopBarAfter(null);
-    }, [projectInfo, error, setDisableTopBarAfter]);
+        if (!projectInfo && !error) setDisableTopBarAfter("display-import-data")
+        else if (!error) setDisableTopBarAfter(null)
+    }, [projectInfo, error, setDisableTopBarAfter])
 
     if (!projectInfo && !error) {
         return (
             <div className="flex h-full w-full items-center justify-center">
                 <Spinner />
             </div>
-        );
+        )
     }
 
     if (error) {
@@ -114,7 +106,7 @@ export const JiraProjectDetail: React.FC<Props> = (props) => {
                     and check your Jira project details.
                 </p>
             </div>
-        );
+        )
     }
 
     return (
@@ -162,5 +154,5 @@ export const JiraProjectDetail: React.FC<Props> = (props) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

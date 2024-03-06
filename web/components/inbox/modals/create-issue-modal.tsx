@@ -1,30 +1,24 @@
-import { Fragment, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
-import { Controller, useForm } from "react-hook-form";
-import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
-import { Sparkle } from "lucide-react";
-
-import { useApplication, useEventTracker, useWorkspace, useInboxIssues, useMention } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { FileService } from "@services/file.service";
-import { AIService } from "@services/ai.service";
-
-import { PriorityDropdown } from "@components/dropdowns";
-import { GptAssistantPopover } from "@components/core";
-
-import { Button, Input, ToggleSwitch } from "@servcy/ui";
-
-import { TIssue } from "@servcy/types";
-
-import { ISSUE_CREATED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import { Fragment, useRef, useState } from "react"
+import { GptAssistantPopover } from "@components/core"
+import { PriorityDropdown } from "@components/dropdowns"
+import { ISSUE_CREATED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
+import { useApplication, useEventTracker, useInboxIssues, useMention, useWorkspace } from "@hooks/store"
+import { AIService } from "@services/ai.service"
+import { FileService } from "@services/file.service"
+import { Sparkle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { RichTextEditorWithRef } from "@servcy/rich-text-editor"
+import { TIssue } from "@servcy/types"
+import { Button, Input, ToggleSwitch } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-};
+    isOpen: boolean
+    onClose: () => void
+}
 
 const defaultValues: Partial<TIssue> = {
     project_id: "",
@@ -32,39 +26,39 @@ const defaultValues: Partial<TIssue> = {
     description_html: "<p></p>",
     parent_id: null,
     priority: "none",
-};
+}
 
-const aiService = new AIService();
-const fileService = new FileService();
+const aiService = new AIService()
+const fileService = new FileService()
 
 export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
-    const { isOpen, onClose } = props;
+    const { isOpen, onClose } = props
     // states
-    const [createMore, setCreateMore] = useState(false);
-    const [gptAssistantModal, setGptAssistantModal] = useState(false);
-    const [iAmFeelingLucky, setIAmFeelingLucky] = useState(false);
+    const [createMore, setCreateMore] = useState(false)
+    const [gptAssistantModal, setGptAssistantModal] = useState(false)
+    const [iAmFeelingLucky, setIAmFeelingLucky] = useState(false)
     // refs
-    const editorRef = useRef<any>(null);
+    const editorRef = useRef<any>(null)
 
-    const { mentionHighlights, mentionSuggestions } = useMention();
+    const { mentionHighlights, mentionSuggestions } = useMention()
     // router
-    const router = useRouter();
+    const router = useRouter()
     const { workspaceSlug, projectId, inboxId } = router.query as {
-        workspaceSlug: string;
-        projectId: string;
-        inboxId: string;
-    };
-    const workspaceStore = useWorkspace();
-    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string;
+        workspaceSlug: string
+        projectId: string
+        inboxId: string
+    }
+    const workspaceStore = useWorkspace()
+    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
 
     // store hooks
     const {
         issues: { createInboxIssue },
-    } = useInboxIssues();
+    } = useInboxIssues()
     const {
         config: { envConfig },
-    } = useApplication();
-    const { captureIssueEvent } = useEventTracker();
+    } = useApplication()
+    const { captureIssueEvent } = useEventTracker()
 
     const {
         control,
@@ -74,24 +68,24 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
         watch,
         getValues,
         setValue,
-    } = useForm({ defaultValues });
+    } = useForm({ defaultValues })
 
     const handleClose = () => {
-        onClose();
-        reset(defaultValues);
-    };
+        onClose()
+        reset(defaultValues)
+    }
 
-    const issueName = watch("name");
+    const issueName = watch("name")
 
     const handleFormSubmit = async (formData: Partial<TIssue>) => {
-        if (!workspaceSlug || !projectId || !inboxId) return;
+        if (!workspaceSlug || !projectId || !inboxId) return
 
         await createInboxIssue(workspaceSlug.toString(), projectId.toString(), inboxId.toString(), formData)
             .then((res) => {
                 if (!createMore) {
-                    router.push(`/${workspaceSlug}/projects/${projectId}/inbox/${inboxId}?inboxIssueId=${res.id}`);
-                    handleClose();
-                } else reset(defaultValues);
+                    router.push(`/${workspaceSlug}/projects/${projectId}/inbox/${inboxId}?inboxIssueId=${res.id}`)
+                    handleClose()
+                } else reset(defaultValues)
                 captureIssueEvent({
                     eventName: ISSUE_CREATED,
                     payload: {
@@ -100,10 +94,10 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
                         element: "Inbox page",
                     },
                     path: router.pathname,
-                });
+                })
             })
             .catch((error) => {
-                console.error(error);
+                console.error(error)
                 captureIssueEvent({
                     eventName: ISSUE_CREATED,
                     payload: {
@@ -112,22 +106,22 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
                         element: "Inbox page",
                     },
                     path: router.pathname,
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleAiAssistance = async (response: string) => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
         // setValue("description", {});
-        setValue("description_html", `${watch("description_html")}<p>${response}</p>`);
-        editorRef.current?.setEditorValue(`${watch("description_html")}`);
-    };
+        setValue("description_html", `${watch("description_html")}<p>${response}</p>`)
+        editorRef.current?.setEditorValue(`${watch("description_html")}`)
+    }
 
     const handleAutoGenerateDescription = async () => {
-        if (!workspaceSlug || !projectId || !issueName) return;
+        if (!workspaceSlug || !projectId || !issueName) return
 
-        setIAmFeelingLucky(true);
+        setIAmFeelingLucky(true)
 
         aiService
             .createGptTask(workspaceSlug as string, projectId as string, {
@@ -141,11 +135,11 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
                         title: "Error!",
                         message:
                             "Issue title isn't informative enough to generate the description. Please try with a different title.",
-                    });
-                else handleAiAssistance(res.response_html);
+                    })
+                else handleAiAssistance(res.response_html)
             })
             .catch((err) => {
-                const error = err?.data?.error;
+                const error = err?.data?.error
 
                 if (err.status === 429)
                     toast.error({
@@ -154,16 +148,16 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
                         message:
                             error ||
                             "You have reached the maximum number of requests of 50 requests per month per user.",
-                    });
+                    })
                 else
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: error || "Some error occurred. Please try again.",
-                    });
+                    })
             })
-            .finally(() => setIAmFeelingLucky(false));
-    };
+            .finally(() => setIAmFeelingLucky(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -252,12 +246,12 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
                                                                 isOpen={gptAssistantModal}
                                                                 projectId={projectId}
                                                                 handleClose={() => {
-                                                                    setGptAssistantModal((prevData) => !prevData);
+                                                                    setGptAssistantModal((prevData) => !prevData)
                                                                     // this is done so that the title do not reset after gpt popover closed
-                                                                    reset(getValues());
+                                                                    reset(getValues())
                                                                 }}
                                                                 onResponse={(response) => {
-                                                                    handleAiAssistance(response);
+                                                                    handleAiAssistance(response)
                                                                 }}
                                                                 button={
                                                                     <button
@@ -298,7 +292,7 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
                                                                 value={!value || value === "" ? "<p></p>" : value}
                                                                 customClassName="min-h-[150px]"
                                                                 onChange={(description, description_html: string) => {
-                                                                    onChange(description_html);
+                                                                    onChange(description_html)
                                                                 }}
                                                                 mentionSuggestions={mentionSuggestions}
                                                                 mentionHighlights={mentionHighlights}
@@ -349,5 +343,5 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

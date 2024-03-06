@@ -1,22 +1,19 @@
-import React from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-
-import { Loader } from "@servcy/ui";
-
-import { useUser } from "@hooks/store";
-
-import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React from "react"
+import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project"
+import { useUser } from "@hooks/store"
+import { Loader } from "@servcy/ui"
 
 export const ProjectSettingsSidebar = () => {
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // mobx store
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
-    const projectMemberInfo = currentProjectRole || EUserProjectRoles.GUEST;
+    const projectMemberInfo = currentProjectRole || EUserProjectRoles.GUEST
 
     if (!currentProjectRole) {
         return (
@@ -30,7 +27,7 @@ export const ProjectSettingsSidebar = () => {
                     </Loader>
                 </div>
             </div>
-        );
+        )
     }
 
     return (
@@ -57,5 +54,5 @@ export const ProjectSettingsSidebar = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

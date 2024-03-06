@@ -1,25 +1,19 @@
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-
-import { useDashboard } from "@hooks/store";
-
-import { MarimekkoGraph } from "@components/ui";
+import Link from "next/link"
+import { useEffect, useState } from "react"
 import {
     DurationFilterDropdown,
     IssuesByPriorityEmptyState,
     WidgetLoader,
     WidgetProps,
-} from "@components/dashboard/widgets";
-
-import { PriorityIcon } from "@servcy/ui";
-
-import { getCustomDates } from "@helpers/dashboard.helper";
-
-import { TIssuesByPriorityWidgetFilters, TIssuesByPriorityWidgetResponse } from "@servcy/types";
-
-import { PRIORITY_GRAPH_GRADIENTS } from "@constants/dashboard";
-import { ISSUE_PRIORITIES } from "@constants/issue";
+} from "@components/dashboard/widgets"
+import { MarimekkoGraph } from "@components/ui"
+import { PRIORITY_GRAPH_GRADIENTS } from "@constants/dashboard"
+import { ISSUE_PRIORITIES } from "@constants/issue"
+import { getCustomDates } from "@helpers/dashboard.helper"
+import { useDashboard } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TIssuesByPriorityWidgetFilters, TIssuesByPriorityWidgetResponse } from "@servcy/types"
+import { PriorityIcon } from "@servcy/ui"
 
 const TEXT_COLORS = {
     urgent: "#F4A9AA",
@@ -27,12 +21,12 @@ const TEXT_COLORS = {
     medium: "#AB6400",
     low: "#1F2D5C",
     none: "#60646C",
-};
+}
 
 const CustomBar = (props: any) => {
-    const { bar, workspaceSlug } = props;
+    const { bar, workspaceSlug } = props
     // states
-    const [isMouseOver, setIsMouseOver] = useState(false);
+    const [isMouseOver, setIsMouseOver] = useState(false)
 
     return (
         <Link href={`/${workspaceSlug}/workspace-views/assigned?priority=${bar?.id}`}>
@@ -64,47 +58,47 @@ const CustomBar = (props: any) => {
                 </text>
             </g>
         </Link>
-    );
-};
+    )
+}
 
-const WIDGET_KEY = "issues_by_priority";
+const WIDGET_KEY = "issues_by_priority"
 
 export const IssuesByPriorityWidget: React.FC<WidgetProps> = observer((props) => {
-    const { dashboardId, workspaceSlug } = props;
+    const { dashboardId, workspaceSlug } = props
     // store hooks
-    const { fetchWidgetStats, getWidgetDetails, getWidgetStats, updateDashboardWidgetFilters } = useDashboard();
+    const { fetchWidgetStats, getWidgetDetails, getWidgetStats, updateDashboardWidgetFilters } = useDashboard()
     // derived values
-    const widgetDetails = getWidgetDetails(workspaceSlug, dashboardId, WIDGET_KEY);
-    const widgetStats = getWidgetStats<TIssuesByPriorityWidgetResponse[]>(workspaceSlug, dashboardId, WIDGET_KEY);
-    const selectedDuration = widgetDetails?.widget_filters.duration ?? "none";
+    const widgetDetails = getWidgetDetails(workspaceSlug, dashboardId, WIDGET_KEY)
+    const widgetStats = getWidgetStats<TIssuesByPriorityWidgetResponse[]>(workspaceSlug, dashboardId, WIDGET_KEY)
+    const selectedDuration = widgetDetails?.widget_filters.duration ?? "none"
 
     const handleUpdateFilters = async (filters: Partial<TIssuesByPriorityWidgetFilters>) => {
-        if (!widgetDetails) return;
+        if (!widgetDetails) return
 
         await updateDashboardWidgetFilters(workspaceSlug, dashboardId, widgetDetails.id, {
             widgetKey: WIDGET_KEY,
             filters,
-        });
+        })
 
-        const filterDates = getCustomDates(filters.duration ?? selectedDuration);
+        const filterDates = getCustomDates(filters.duration ?? selectedDuration)
         fetchWidgetStats(workspaceSlug, dashboardId, {
             widget_key: WIDGET_KEY,
             ...(filterDates.trim() !== "" ? { target_date: filterDates } : {}),
-        });
-    };
+        })
+    }
 
     useEffect(() => {
-        const filterDates = getCustomDates(selectedDuration);
+        const filterDates = getCustomDates(selectedDuration)
         fetchWidgetStats(workspaceSlug, dashboardId, {
             widget_key: WIDGET_KEY,
             ...(filterDates.trim() !== "" ? { target_date: filterDates } : {}),
-        });
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
-    if (!widgetDetails || !widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />;
+    if (!widgetDetails || !widgetStats) return <WidgetLoader widgetKey={WIDGET_KEY} />
 
-    const totalCount = widgetStats.reduce((acc, item) => acc + item?.count, 0);
+    const totalCount = widgetStats.reduce((acc, item) => acc + item?.count, 0)
     const chartData = widgetStats
         .filter((i) => i.count !== 0)
         .map((item) => ({
@@ -115,10 +109,10 @@ export const IssuesByPriorityWidget: React.FC<WidgetProps> = observer((props) =>
             medium: item?.priority === "medium" ? 1 : 0,
             low: item?.priority === "low" ? 1 : 0,
             none: item?.priority === "none" ? 1 : 0,
-        }));
+        }))
 
     const CustomBarsLayer = (props: any) => {
-        const { bars } = props;
+        const { bars } = props
 
         return (
             <g>
@@ -126,8 +120,8 @@ export const IssuesByPriorityWidget: React.FC<WidgetProps> = observer((props) =>
                     ?.filter((b: any) => b?.value === 1) // render only bars with value 1
                     .map((bar: any) => <CustomBar key={bar?.key} bar={bar} workspaceSlug={workspaceSlug} />)}
             </g>
-        );
-    };
+        )
+    }
 
     return (
         <div className="bg-custom-background-100 rounded-xl border-[0.5px] border-custom-border-200 w-full py-6 hover:shadow-custom-shadow-4xl duration-300 overflow-hidden min-h-96 flex flex-col">
@@ -201,5 +195,5 @@ export const IssuesByPriorityWidget: React.FC<WidgetProps> = observer((props) =>
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

@@ -1,15 +1,13 @@
-import { BarGraph, ProfileEmptyState } from "@components/ui";
-import { Loader } from "@servcy/ui";
+import { BarGraph, ProfileEmptyState } from "@components/ui"
+import { capitalizeFirstLetter } from "@helpers/string.helper"
 // image
-import emptyBarGraph from "public/empty-state/empty_bar_graph.svg";
-
-import { capitalizeFirstLetter } from "@helpers/string.helper";
-
-import { IUserProfileData } from "@servcy/types";
+import emptyBarGraph from "public/empty-state/empty_bar_graph.svg"
+import { IUserProfileData } from "@servcy/types"
+import { Loader } from "@servcy/ui"
 
 type Props = {
-    userProfile: IUserProfileData | undefined;
-};
+    userProfile: IUserProfileData | undefined
+}
 
 export const ProfilePriorityDistribution: React.FC<Props> = ({ userProfile }) => (
     <div className="flex flex-col space-y-2">
@@ -41,11 +39,11 @@ export const ProfilePriorityDistribution: React.FC<Props> = ({ userProfile }) =>
                             </div>
                         )}
                         colors={(datum) => {
-                            if (datum.data.priority === "Urgent") return "#991b1b";
-                            else if (datum.data.priority === "High") return "#ef4444";
-                            else if (datum.data.priority === "Medium") return "#f59e0b";
-                            else if (datum.data.priority === "Low") return "#16a34a";
-                            else return "#e5e5e5";
+                            if (datum.data.priority === "Urgent") return "#991b1b"
+                            else if (datum.data.priority === "High") return "#ef4444"
+                            else if (datum.data.priority === "Medium") return "#f59e0b"
+                            else if (datum.data.priority === "Low") return "#16a34a"
+                            else return "#e5e5e5"
                         }}
                         theme={{
                             axis: {
@@ -84,4 +82,4 @@ export const ProfilePriorityDistribution: React.FC<Props> = ({ userProfile }) =>
             </div>
         )}
     </div>
-);
+)

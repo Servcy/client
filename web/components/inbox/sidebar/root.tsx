@@ -1,28 +1,25 @@
-import { FC } from "react";
-import { Inbox } from "lucide-react";
-import { observer } from "mobx-react";
-
-import { useInboxIssues } from "@hooks/store";
-
-import { InboxSidebarLoader } from "@components/ui";
-
-import { InboxIssueList, InboxIssueFilterSelection, InboxIssueAppliedFilter } from "../";
+import { FC } from "react"
+import { InboxSidebarLoader } from "@components/ui"
+import { useInboxIssues } from "@hooks/store"
+import { Inbox } from "lucide-react"
+import { observer } from "mobx-react"
+import { InboxIssueAppliedFilter, InboxIssueFilterSelection, InboxIssueList } from "../"
 
 type TInboxSidebarRoot = {
-    workspaceSlug: string;
-    projectId: string;
-    inboxId: string;
-};
+    workspaceSlug: string
+    projectId: string
+    inboxId: string
+}
 
 export const InboxSidebarRoot: FC<TInboxSidebarRoot> = observer((props) => {
-    const { workspaceSlug, projectId, inboxId } = props;
+    const { workspaceSlug, projectId, inboxId } = props
     // store hooks
     const {
         issues: { loader },
-    } = useInboxIssues();
+    } = useInboxIssues()
 
     if (loader === "init-loader") {
-        return <InboxSidebarLoader />;
+        return <InboxSidebarLoader />
     }
 
     return (
@@ -46,5 +43,5 @@ export const InboxSidebarRoot: FC<TInboxSidebarRoot> = observer((props) => {
                 <InboxIssueList workspaceSlug={workspaceSlug} projectId={projectId} inboxId={inboxId} />
             </div>
         </div>
-    );
-});
+    )
+})

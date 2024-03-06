@@ -1,34 +1,32 @@
-import React from "react";
-import { observer } from "mobx-react";
-
-import { useInboxIssues } from "@hooks/store";
-
-import { INBOX_STATUS } from "@constants/inbox";
+import React from "react"
+import { INBOX_STATUS } from "@constants/inbox"
+import { useInboxIssues } from "@hooks/store"
+import { observer } from "mobx-react"
 
 type Props = {
-    workspaceSlug: string;
-    projectId: string;
-    inboxId: string;
-    issueId: string;
-    iconSize?: number;
-    showDescription?: boolean;
-};
+    workspaceSlug: string
+    projectId: string
+    inboxId: string
+    issueId: string
+    iconSize?: number
+    showDescription?: boolean
+}
 
 export const InboxIssueStatus: React.FC<Props> = observer((props) => {
-    const { workspaceSlug, projectId, inboxId, issueId, iconSize = 18, showDescription = false } = props;
+    const { workspaceSlug, projectId, inboxId, issueId, iconSize = 18, showDescription = false } = props
 
     const {
         issues: { getInboxIssueByIssueId },
-    } = useInboxIssues();
+    } = useInboxIssues()
 
-    const inboxIssueDetail = getInboxIssueByIssueId(inboxId, issueId);
-    if (!inboxIssueDetail) return <></>;
+    const inboxIssueDetail = getInboxIssueByIssueId(inboxId, issueId)
+    if (!inboxIssueDetail) return <></>
 
-    const inboxIssueStatusDetail = INBOX_STATUS.find((s) => s.status === inboxIssueDetail.status);
-    if (!inboxIssueStatusDetail) return <></>;
+    const inboxIssueStatusDetail = INBOX_STATUS.find((s) => s.status === inboxIssueDetail.status)
+    if (!inboxIssueStatusDetail) return <></>
 
     const isSnoozedDatePassed =
-        inboxIssueDetail.status === 0 && new Date(inboxIssueDetail.snoozed_till ?? "") < new Date();
+        inboxIssueDetail.status === 0 && new Date(inboxIssueDetail.snoozed_till ?? "") < new Date()
 
     return (
         <div
@@ -52,5 +50,5 @@ export const InboxIssueStatus: React.FC<Props> = observer((props) => {
                 <span>{inboxIssueStatusDetail.title}</span>
             )}
         </div>
-    );
-});
+    )
+})

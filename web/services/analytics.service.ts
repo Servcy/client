@@ -1,18 +1,16 @@
-import { APIService } from "@services/api.service";
-
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
 import {
     IAnalyticsParams,
     IAnalyticsResponse,
     IDefaultAnalyticsResponse,
     IExportAnalyticsFormData,
     ISaveAnalyticsFormData,
-} from "@servcy/types";
-
-import { API_BASE_URL } from "@helpers/common.helper";
+} from "@servcy/types"
 
 export class AnalyticsService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async getAnalytics(workspaceSlug: string, params: IAnalyticsParams): Promise<IAnalyticsResponse> {
@@ -24,8 +22,8 @@ export class AnalyticsService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getDefaultAnalytics(
@@ -40,23 +38,23 @@ export class AnalyticsService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async saveAnalytics(workspaceSlug: string, data: ISaveAnalyticsFormData): Promise<any> {
         return this.post(`/api/workspaces/${workspaceSlug}/analytic-view/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async exportAnalytics(workspaceSlug: string, data: IExportAnalyticsFormData): Promise<any> {
         return this.post(`/api/workspaces/${workspaceSlug}/export-analytics/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

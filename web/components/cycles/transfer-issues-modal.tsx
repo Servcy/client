@@ -1,36 +1,35 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import toast from "react-hot-toast";
-import { useCycle, useIssues } from "@hooks/store";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { EIssuesStoreType } from "@constants/issue"
+import { Dialog, Transition } from "@headlessui/react"
+import { useCycle, useIssues } from "@hooks/store"
+import { AlertCircle, Search, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
 //icons
-import { ContrastIcon, TransferIcon } from "@servcy/ui";
-import { AlertCircle, Search, X } from "lucide-react";
-
-import { EIssuesStoreType } from "@constants/issue";
+import { ContrastIcon, TransferIcon } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    handleClose: () => void;
-};
+    isOpen: boolean
+    handleClose: () => void
+}
 
 export const TransferIssuesModal: React.FC<Props> = observer((props) => {
-    const { isOpen, handleClose } = props;
+    const { isOpen, handleClose } = props
     // states
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState("")
 
     // store hooks
-    const { currentProjectIncompleteCycleIds, getCycleById } = useCycle();
+    const { currentProjectIncompleteCycleIds, getCycleById } = useCycle()
     const {
         issues: { transferIssuesFromCycle },
-    } = useIssues(EIssuesStoreType.CYCLE);
+    } = useIssues(EIssuesStoreType.CYCLE)
 
-    const router = useRouter();
-    const { workspaceSlug, projectId, cycleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, cycleId } = router.query
 
     const transferIssue = async (payload: any) => {
-        if (!workspaceSlug || !projectId || !cycleId) return;
+        if (!workspaceSlug || !projectId || !cycleId) return
 
         // TODO: import transferIssuesFromCycle from store
         await transferIssuesFromCycle(workspaceSlug.toString(), projectId.toString(), cycleId.toString(), payload)
@@ -39,22 +38,22 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
                     type: "success",
                     title: "Issues transferred successfully",
                     message: "Issues have been transferred successfully",
-                });
+                })
             })
             .catch(() => {
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "Issues cannot be transfer. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const filteredOptions = currentProjectIncompleteCycleIds?.filter((optionId) => {
-        const cycleDetails = getCycleById(optionId);
+        const cycleDetails = getCycleById(optionId)
 
-        return cycleDetails?.name?.toLowerCase().includes(query?.toLowerCase());
-    });
+        return cycleDetails?.name?.toLowerCase().includes(query?.toLowerCase())
+    })
 
     // useEffect(() => {
     //   const handleKeyDown = (e: KeyboardEvent) => {
@@ -116,9 +115,9 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
                                         {filteredOptions ? (
                                             filteredOptions.length > 0 ? (
                                                 filteredOptions.map((optionId) => {
-                                                    const cycleDetails = getCycleById(optionId);
+                                                    const cycleDetails = getCycleById(optionId)
 
-                                                    if (!cycleDetails) return;
+                                                    if (!cycleDetails) return
 
                                                     return (
                                                         <button
@@ -127,8 +126,8 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
                                                             onClick={() => {
                                                                 transferIssue({
                                                                     new_cycle_id: optionId,
-                                                                });
-                                                                handleClose();
+                                                                })
+                                                                handleClose()
                                                             }}
                                                         >
                                                             <ContrastIcon className="h-5 w-5" />
@@ -139,7 +138,7 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
                                                                 </span>
                                                             </div>
                                                         </button>
-                                                    );
+                                                    )
                                                 })
                                             ) : (
                                                 <div className="flex w-full items-center justify-center gap-4 p-5 text-sm">
@@ -161,5 +160,5 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

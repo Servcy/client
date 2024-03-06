@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const ClockIcon: React.FC<Props> = ({ width = "24", height = "24", className, color }) => (
     <svg
@@ -16,4 +15,4 @@ export const ClockIcon: React.FC<Props> = ({ width = "24", height = "24", classN
             fill={color ? color : "currentColor"}
         />
     </svg>
-);
+)

@@ -1,35 +1,29 @@
-import { observer } from "mobx-react";
-import Link from "next/link";
-import { ReactElement } from "react";
-import useSWR from "swr";
-//hooks
-import { useApplication, useUser } from "@hooks/store";
-
-import { UserService } from "@services/user.service";
-
-import { ProfileSettingsLayout } from "@layouts/settings-layout";
-
-import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/core";
-import { RichReadOnlyEditor } from "@servcy/rich-text-editor";
-
-import { History, MessageSquare } from "lucide-react";
-
-import { ActivitySettingsLoader } from "@components/ui";
-
-import { USER_ACTIVITY } from "@constants/fetch-keys";
+import Link from "next/link"
+import { ReactElement } from "react"
+import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/core"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { ActivitySettingsLoader } from "@components/ui"
+import { USER_ACTIVITY } from "@constants/fetch-keys"
 // helper
-import { calculateTimeAgo } from "@helpers/date-time.helper";
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+//hooks
+import { useApplication, useUser } from "@hooks/store"
+import { ProfileSettingsLayout } from "@layouts/settings-layout"
+import { UserService } from "@services/user.service"
+import { History, MessageSquare } from "lucide-react"
+import { observer } from "mobx-react"
+import useSWR from "swr"
+import { RichReadOnlyEditor } from "@servcy/rich-text-editor"
 // type
-import { NextPageWithLayout } from "@/types/types";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { NextPageWithLayout } from "@/types/types"
 
-const userService = new UserService();
+const userService = new UserService()
 
 const ProfileActivityPage: NextPageWithLayout = observer(() => {
-    const { data: userActivity } = useSWR(USER_ACTIVITY, () => userService.getUserActivity());
+    const { data: userActivity } = useSWR(USER_ACTIVITY, () => userService.getUserActivity())
     // store hooks
-    const { currentUser } = useUser();
-    const { theme: themeStore } = useApplication();
+    const { currentUser } = useUser()
+    const { theme: themeStore } = useApplication()
 
     return (
         <>
@@ -102,7 +96,7 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
                                                 </div>
                                             </div>
                                         </div>
-                                    );
+                                    )
                                 }
 
                                 const message =
@@ -118,7 +112,7 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
                                         </span>
                                     ) : (
                                         <ActivityMessage activity={activityItem} showIssue />
-                                    );
+                                    )
 
                                 if ("field" in activityItem && activityItem.field !== "updated_by") {
                                     return (
@@ -197,7 +191,7 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
                                                 </div>
                                             </div>
                                         </li>
-                                    );
+                                    )
                                 }
                             })}
                         </ul>
@@ -207,11 +201,11 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
                 )}
             </section>
         </>
-    );
-});
+    )
+})
 
 ProfileActivityPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <ProfileSettingsLayout>{page}</ProfileSettingsLayout>;
-};
+    return <ProfileSettingsLayout>{page}</ProfileSettingsLayout>
+}
 
-export default ProfileActivityPage;
+export default ProfileActivityPage

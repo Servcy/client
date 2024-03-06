@@ -1,29 +1,21 @@
-import { Disclosure, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { ReactElement, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-
-import { FileService } from "@services/file.service";
-
-import { useApplication, useUser } from "@hooks/store";
-import useUserAuth from "@hooks/use-user-auth";
-import toast from "react-hot-toast";
-
-import { ProfileSettingsLayout } from "@layouts/settings-layout";
-
-import { DeactivateAccountModal } from "@components/account";
-import { ImagePickerPopover, PageHead, UserImageUploadModal } from "@components/core";
-
-import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servcy/ui";
-
-import { ChevronDown, User2 } from "lucide-react";
-
-import type { NextPageWithLayout } from "@/types/types";
-import type { IUser } from "@servcy/types";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { TIME_ZONES } from "@constants/timezones";
-import { USER_ROLES } from "@constants/workspace";
+import { ReactElement, useEffect, useState } from "react"
+import { DeactivateAccountModal } from "@components/account"
+import { ImagePickerPopover, PageHead, UserImageUploadModal } from "@components/core"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { TIME_ZONES } from "@constants/timezones"
+import { USER_ROLES } from "@constants/workspace"
+import { Disclosure, Transition } from "@headlessui/react"
+import { useApplication, useUser } from "@hooks/store"
+import useUserAuth from "@hooks/use-user-auth"
+import { ProfileSettingsLayout } from "@layouts/settings-layout"
+import { FileService } from "@services/file.service"
+import { ChevronDown, User2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import type { IUser } from "@servcy/types"
+import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servcy/ui"
+import type { NextPageWithLayout } from "@/types/types"
 
 const defaultValues: Partial<IUser> = {
     avatar: "",
@@ -34,16 +26,16 @@ const defaultValues: Partial<IUser> = {
     email: "",
     role: "Product / Project Manager",
     user_timezone: "Asia/Kolkata",
-};
+}
 
-const fileService = new FileService();
+const fileService = new FileService()
 
 const ProfileSettingsPage: NextPageWithLayout = observer(() => {
     // states
-    const [isLoading, setIsLoading] = useState(false);
-    const [isRemoving, setIsRemoving] = useState(false);
-    const [isImageUploadModalOpen, setIsImageUploadModalOpen] = useState(false);
-    const [deactivateAccountModal, setDeactivateAccountModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
+    const [isRemoving, setIsRemoving] = useState(false)
+    const [isImageUploadModalOpen, setIsImageUploadModalOpen] = useState(false)
+    const [deactivateAccountModal, setDeactivateAccountModal] = useState(false)
     // form info
     const {
         handleSubmit,
@@ -51,20 +43,20 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
         watch,
         control,
         formState: { errors },
-    } = useForm<IUser>({ defaultValues });
+    } = useForm<IUser>({ defaultValues })
 
     // store hooks
-    const { currentUser: myProfile, updateCurrentUser, currentUserLoader } = useUser();
+    const { currentUser: myProfile, updateCurrentUser, currentUserLoader } = useUser()
     // custom hooks
-    const {} = useUserAuth({ user: myProfile, isLoading: currentUserLoader });
-    const { theme: themeStore } = useApplication();
+    const {} = useUserAuth({ user: myProfile, isLoading: currentUserLoader })
+    const { theme: themeStore } = useApplication()
 
     useEffect(() => {
-        reset({ ...defaultValues, ...myProfile });
-    }, [myProfile, reset]);
+        reset({ ...defaultValues, ...myProfile })
+    }, [myProfile, reset])
 
     const onSubmit = async (formData: IUser) => {
-        setIsLoading(true);
+        setIsLoading(true)
         const payload: Partial<IUser> = {
             first_name: formData.first_name,
             last_name: formData.last_name,
@@ -73,7 +65,7 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
             role: formData.role,
             display_name: formData.display_name,
             user_timezone: formData.user_timezone,
-        };
+        }
 
         await updateCurrentUser(payload)
             .then(() => {
@@ -81,7 +73,7 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
                     type: "success",
                     title: "Success!",
                     message: "Profile updated successfully.",
-                });
+                })
             })
             .catch(() =>
                 toast.error({
@@ -89,16 +81,16 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
                     title: "Error!",
                     message: "There was some error in updating your profile. Please try again.",
                 })
-            );
+            )
         setTimeout(() => {
-            setIsLoading(false);
-        }, 300);
-    };
+            setIsLoading(false)
+        }, 300)
+    }
 
     const handleDelete = (url: string | null | undefined, updateUser: boolean = false) => {
-        if (!url) return;
+        if (!url) return
 
-        setIsRemoving(true);
+        setIsRemoving(true)
 
         fileService.deleteUserFile(url).then(() => {
             if (updateUser)
@@ -108,32 +100,32 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
                             type: "success",
                             title: "Success!",
                             message: "Profile picture removed successfully.",
-                        });
-                        setIsRemoving(false);
+                        })
+                        setIsRemoving(false)
                     })
                     .catch(() => {
                         toast.error({
                             type: "error",
                             title: "Error!",
                             message: "There was some error in deleting your profile picture. Please try again.",
-                        });
+                        })
                     })
-                    .finally(() => setIsRemoving(false));
-        });
-    };
+                    .finally(() => setIsRemoving(false))
+        })
+    }
 
     const timeZoneOptions = TIME_ZONES.map((timeZone) => ({
         value: timeZone.value,
         query: timeZone.label + " " + timeZone.value,
         content: timeZone.label,
-    }));
+    }))
 
     if (!myProfile)
         return (
             <div className="grid h-full w-full place-items-center px-4 sm:px-0">
                 <Spinner />
             </div>
-        );
+        )
 
     return (
         <>
@@ -153,9 +145,9 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
                                 isRemoving={isRemoving}
                                 handleDelete={() => handleDelete(myProfile?.avatar, true)}
                                 onSuccess={(url) => {
-                                    onChange(url);
-                                    handleSubmit(onSubmit)();
-                                    setIsImageUploadModalOpen(false);
+                                    onChange(url)
+                                    handleSubmit(onSubmit)()
+                                    setIsImageUploadModalOpen(false)
                                 }}
                                 value={value && value.trim() !== "" ? value : null}
                             />
@@ -359,18 +351,18 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
                                             rules={{
                                                 required: "Display name is required.",
                                                 validate: (value) => {
-                                                    if (value.trim().length < 1) return "Display name can't be empty.";
+                                                    if (value.trim().length < 1) return "Display name can't be empty."
 
                                                     if (value.split("  ").length > 1)
-                                                        return "Display name can't have two consecutive spaces.";
+                                                        return "Display name can't have two consecutive spaces."
 
                                                     if (value.replace(/\s/g, "").length < 1)
-                                                        return "Display name must be at least 1 characters long.";
+                                                        return "Display name must be at least 1 characters long."
 
                                                     if (value.replace(/\s/g, "").length > 20)
-                                                        return "Display name must be less than 20 characters long.";
+                                                        return "Display name must be less than 20 characters long."
 
-                                                    return true;
+                                                    return true
                                                 },
                                             }}
                                             render={({ field: { value, onChange, ref } }) => (
@@ -480,11 +472,11 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})
 
 ProfileSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <ProfileSettingsLayout>{page}</ProfileSettingsLayout>;
-};
+    return <ProfileSettingsLayout>{page}</ProfileSettingsLayout>
+}
 
-export default ProfileSettingsPage;
+export default ProfileSettingsPage

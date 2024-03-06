@@ -1,40 +1,38 @@
-import { Fragment, useState } from "react";
-import { observer } from "mobx-react-lite";
-import { usePopper } from "react-popper";
-import { Check, Search, Tag } from "lucide-react";
-
-import { useIssueDetail, useLabel } from "@hooks/store";
-
-import { Combobox } from "@headlessui/react";
+import { Fragment, useState } from "react"
+import { Combobox } from "@headlessui/react"
+import { useIssueDetail, useLabel } from "@hooks/store"
+import { Check, Search, Tag } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { usePopper } from "react-popper"
 
 export interface IIssueLabelSelect {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    onSelect: (_labelIds: string[]) => void;
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    onSelect: (_labelIds: string[]) => void
 }
 
 export const IssueLabelSelect: React.FC<IIssueLabelSelect> = observer((props) => {
-    const { workspaceSlug, projectId, issueId, onSelect } = props;
+    const { workspaceSlug, projectId, issueId, onSelect } = props
     // store hooks
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { fetchProjectLabels, getProjectLabels } = useLabel();
+    } = useIssueDetail()
+    const { fetchProjectLabels, getProjectLabels } = useLabel()
     // states
-    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-    const [isLoading, setIsLoading] = useState<Boolean>(false);
-    const [query, setQuery] = useState("");
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
+    const [isLoading, setIsLoading] = useState<Boolean>(false)
+    const [query, setQuery] = useState("")
 
-    const issue = getIssueById(issueId);
-    const projectLabels = getProjectLabels(projectId);
+    const issue = getIssueById(issueId)
+    const projectLabels = getProjectLabels(projectId)
 
     const fetchLabels = () => {
-        setIsLoading(true);
+        setIsLoading(true)
         if (!projectLabels && workspaceSlug && projectId)
-            fetchProjectLabels(workspaceSlug, projectId).then(() => setIsLoading(false));
-    };
+            fetchProjectLabels(workspaceSlug, projectId).then(() => setIsLoading(false))
+    }
 
     const options = (projectLabels ?? []).map((label) => ({
         value: label.id,
@@ -50,10 +48,10 @@ export const IssueLabelSelect: React.FC<IIssueLabelSelect> = observer((props) =>
                 <div className="line-clamp-1 inline-block truncate">{label.name}</div>
             </div>
         ),
-    }));
+    }))
 
     const filteredOptions =
-        query === "" ? options : options?.filter((option) => option.query.toLowerCase().includes(query.toLowerCase()));
+        query === "" ? options : options?.filter((option) => option.query.toLowerCase().includes(query.toLowerCase()))
 
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: "bottom-start",
@@ -65,9 +63,9 @@ export const IssueLabelSelect: React.FC<IIssueLabelSelect> = observer((props) =>
                 },
             },
         ],
-    });
+    })
 
-    const issueLabels = issue?.label_ids ?? [];
+    const issueLabels = issue?.label_ids ?? []
 
     const label = (
         <div
@@ -78,16 +76,16 @@ export const IssueLabelSelect: React.FC<IIssueLabelSelect> = observer((props) =>
             </div>
             <div className="flex-shrink-0">Select Label</div>
         </div>
-    );
+    )
 
     const searchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (query !== "" && e.key === "Escape") {
-            e.stopPropagation();
-            setQuery("");
+            e.stopPropagation()
+            setQuery("")
         }
-    };
+    }
 
-    if (!issue) return <></>;
+    if (!issue) return <></>
 
     return (
         <>
@@ -167,5 +165,5 @@ export const IssueLabelSelect: React.FC<IIssueLabelSelect> = observer((props) =>
                 </Combobox.Options>
             </Combobox>
         </>
-    );
-});
+    )
+})

@@ -1,9 +1,9 @@
-import { TXAxisValues, TYAxisValues } from "@servcy/types";
+import { TXAxisValues, TYAxisValues } from "@servcy/types"
 
 export const ANALYTICS_TABS = [
     { key: "scope_and_demand", title: "Scope and Demand" },
     { key: "custom", title: "Custom Analytics" },
-];
+]
 
 export const ANALYTICS_X_AXIS_VALUES: { value: TXAxisValues; label: string }[] = [
     {
@@ -54,7 +54,7 @@ export const ANALYTICS_X_AXIS_VALUES: { value: TXAxisValues; label: string }[] =
         value: "created_at",
         label: "Created date",
     },
-];
+]
 
 export const ANALYTICS_Y_AXIS_VALUES: { value: TYAxisValues; label: string }[] = [
     {
@@ -65,6 +65,6 @@ export const ANALYTICS_Y_AXIS_VALUES: { value: TYAxisValues; label: string }[] =
         value: "estimate",
         label: "Estimate",
     },
-];
+]
 
-export const DATE_KEYS = ["completed_at", "target_date", "start_date", "created_at"];
+export const DATE_KEYS = ["completed_at", "target_date", "start_date", "created_at"]

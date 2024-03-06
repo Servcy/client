@@ -1,18 +1,16 @@
-import React from "react";
-import { eachDayOfInterval, isValid } from "date-fns";
-
-import { LineGraph } from "@components/ui";
-
-import { renderFormattedDateWithoutYear } from "@helpers/date-time.helper";
+import React from "react"
+import { LineGraph } from "@components/ui"
+import { renderFormattedDateWithoutYear } from "@helpers/date-time.helper"
+import { eachDayOfInterval, isValid } from "date-fns"
 //types
-import { TCompletionChartDistribution } from "@servcy/types";
+import { TCompletionChartDistribution } from "@servcy/types"
 
 type Props = {
-    distribution: TCompletionChartDistribution;
-    startDate: string | Date;
-    endDate: string | Date;
-    totalIssues: number;
-};
+    distribution: TCompletionChartDistribution
+    startDate: string | Date
+    endDate: string | Date
+    totalIssues: number
+}
 
 const styleById = {
     ideal: {
@@ -22,7 +20,7 @@ const styleById = {
     default: {
         strokeWidth: 1,
     },
-};
+}
 
 const DashedLine = ({ series, lineGenerator, xScale, yScale }: any) =>
     series.map(({ id, data, color }: any) => (
@@ -38,39 +36,39 @@ const DashedLine = ({ series, lineGenerator, xScale, yScale }: any) =>
             stroke={color ?? "#ddd"}
             style={styleById[id as keyof typeof styleById] || styleById.default}
         />
-    ));
+    ))
 
 const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, totalIssues }) => {
     const chartData = Object.keys(distribution ?? []).map((key) => ({
         currentDate: renderFormattedDateWithoutYear(key),
         pending: distribution[key],
-    }));
+    }))
 
     const generateXAxisTickValues = () => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
+        const start = new Date(startDate)
+        const end = new Date(endDate)
 
-        let dates: Date[] = [];
+        let dates: Date[] = []
         if (isValid(start) && isValid(end)) {
-            dates = eachDayOfInterval({ start, end });
+            dates = eachDayOfInterval({ start, end })
         }
 
-        const maxDates = 4;
-        const totalDates = dates.length;
+        const maxDates = 4
+        const totalDates = dates.length
 
-        if (totalDates <= maxDates) return dates.map((d) => renderFormattedDateWithoutYear(d));
+        if (totalDates <= maxDates) return dates.map((d) => renderFormattedDateWithoutYear(d))
         else {
-            const interval = Math.ceil(totalDates / maxDates);
-            const limitedDates = [];
+            const interval = Math.ceil(totalDates / maxDates)
+            const limitedDates = []
 
-            for (let i = 0; i < totalDates; i += interval) limitedDates.push(renderFormattedDateWithoutYear(dates[i]));
+            for (let i = 0; i < totalDates; i += interval) limitedDates.push(renderFormattedDateWithoutYear(dates[i]))
 
             if (!limitedDates.includes(renderFormattedDateWithoutYear(dates[totalDates - 1])))
-                limitedDates.push(renderFormattedDateWithoutYear(dates[totalDates - 1]));
+                limitedDates.push(renderFormattedDateWithoutYear(dates[totalDates - 1]))
 
-            return limitedDates;
+            return limitedDates
         }
-    };
+    }
 
     return (
         <div className="flex w-full items-center justify-center">
@@ -150,7 +148,7 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
                 }}
             />
         </div>
-    );
-};
+    )
+}
 
-export default ProgressChart;
+export default ProgressChart

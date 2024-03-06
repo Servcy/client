@@ -1,35 +1,33 @@
-import isEmpty from "lodash/isEmpty";
-import set from "lodash/set";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
-
-import { InboxService } from "@services/inbox.service";
-
-import { TInbox, TInboxIssueFilterOptions, TInboxIssueFilters, TInboxIssueQueryParams } from "@servcy/types";
-import { RootStore } from "@store/root.store";
+import { InboxService } from "@services/inbox.service"
+import { RootStore } from "@store/root.store"
+import isEmpty from "lodash/isEmpty"
+import set from "lodash/set"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { TInbox, TInboxIssueFilterOptions, TInboxIssueFilters, TInboxIssueQueryParams } from "@servcy/types"
 
 export interface IInboxFilter {
     // observables
-    filters: Record<string, TInboxIssueFilters>; // inbox_id -> TInboxIssueFilters
+    filters: Record<string, TInboxIssueFilters> // inbox_id -> TInboxIssueFilters
     // computed
-    inboxFilters: TInboxIssueFilters | undefined;
-    inboxAppliedFilters: Partial<Record<TInboxIssueQueryParams, string>> | undefined;
+    inboxFilters: TInboxIssueFilters | undefined
+    inboxAppliedFilters: Partial<Record<TInboxIssueQueryParams, string>> | undefined
     // actions
-    fetchInboxFilters: (workspaceSlug: string, projectId: string, inboxId: string) => Promise<TInbox>;
+    fetchInboxFilters: (workspaceSlug: string, projectId: string, inboxId: string) => Promise<TInbox>
     updateInboxFilters: (
         workspaceSlug: string,
         projectId: string,
         inboxId: string,
         filters: Partial<TInboxIssueFilterOptions>
-    ) => Promise<TInbox>;
+    ) => Promise<TInbox>
 }
 
 export class InboxFilter implements IInboxFilter {
     // observables
-    filters: Record<string, TInboxIssueFilters> = {};
+    filters: Record<string, TInboxIssueFilters> = {}
     // root store
-    rootStore;
+    rootStore
 
-    inboxService;
+    inboxService
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
@@ -41,19 +39,19 @@ export class InboxFilter implements IInboxFilter {
             // actions
             fetchInboxFilters: action,
             updateInboxFilters: action,
-        });
+        })
         // root store
-        this.rootStore = _rootStore;
+        this.rootStore = _rootStore
 
-        this.inboxService = new InboxService();
+        this.inboxService = new InboxService()
     }
 
     get inboxFilters() {
-        const inboxId = this.rootStore.app.router.inboxId;
-        if (!inboxId) return undefined;
+        const inboxId = this.rootStore.app.router.inboxId
+        if (!inboxId) return undefined
 
-        const displayFilters = this.filters[inboxId] || undefined;
-        if (isEmpty(displayFilters)) return undefined;
+        const displayFilters = this.filters[inboxId] || undefined
+        if (isEmpty(displayFilters)) return undefined
 
         const _filters: TInboxIssueFilters = {
             filters: {
@@ -62,39 +60,39 @@ export class InboxFilter implements IInboxFilter {
                     ? []
                     : displayFilters?.filters?.inbox_status,
             },
-        };
-        return _filters;
+        }
+        return _filters
     }
 
     get inboxAppliedFilters() {
-        const userFilters = this.inboxFilters;
-        if (!userFilters) return undefined;
+        const userFilters = this.inboxFilters
+        if (!userFilters) return undefined
 
         const filteredParams = {
             priority: userFilters?.filters?.priority?.join(",") || undefined,
             inbox_status: userFilters?.filters?.inbox_status?.join(",") || undefined,
-        };
-        return filteredParams;
+        }
+        return filteredParams
     }
 
     fetchInboxFilters = async (workspaceSlug: string, projectId: string, inboxId: string) => {
         try {
-            const response = await this.rootStore.inbox.inbox.fetchInboxById(workspaceSlug, projectId, inboxId);
+            const response = await this.rootStore.inbox.inbox.fetchInboxById(workspaceSlug, projectId, inboxId)
 
             const filters: TInboxIssueFilterOptions = {
                 priority: response?.view_props?.filters?.priority || [],
                 inbox_status: response?.view_props?.filters?.inbox_status || [],
-            };
+            }
 
             runInAction(() => {
-                set(this.filters, [inboxId], { filters: filters });
-            });
+                set(this.filters, [inboxId], { filters: filters })
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     updateInboxFilters = async (
         workspaceSlug: string,
@@ -105,27 +103,27 @@ export class InboxFilter implements IInboxFilter {
         try {
             runInAction(() => {
                 Object.keys(filters).forEach((_key) => {
-                    const _filterKey = _key as keyof TInboxIssueFilterOptions;
-                    set(this.filters, [inboxId, "filters", _key], filters[_filterKey]);
-                });
-            });
+                    const _filterKey = _key as keyof TInboxIssueFilterOptions
+                    set(this.filters, [inboxId, "filters", _key], filters[_filterKey])
+                })
+            })
 
-            const inboxFilters = this.inboxFilters;
+            const inboxFilters = this.inboxFilters
             let _filters: TInboxIssueFilterOptions = {
                 priority: inboxFilters?.filters?.priority || [],
                 inbox_status: inboxFilters?.filters?.inbox_status || [],
-            };
-            _filters = { ..._filters, ...filters };
+            }
+            _filters = { ..._filters, ...filters }
 
-            this.rootStore.inbox.inboxIssue.fetchInboxIssues(workspaceSlug, projectId, inboxId, "mutation");
+            this.rootStore.inbox.inboxIssue.fetchInboxIssues(workspaceSlug, projectId, inboxId, "mutation")
 
             const response = await this.rootStore.inbox.inbox.updateInbox(workspaceSlug, projectId, inboxId, {
                 view_props: { filters: _filters },
-            });
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 }

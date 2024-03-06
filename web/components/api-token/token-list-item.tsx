@@ -1,22 +1,18 @@
-import { useState } from "react";
-import { XCircle } from "lucide-react";
-
-import { DeleteApiTokenModal } from "@components/api-token";
-
-import { Tooltip } from "@servcy/ui";
-
-import { renderFormattedDate, calculateTimeAgo } from "@helpers/date-time.helper";
-
-import { IApiToken } from "@servcy/types";
+import { useState } from "react"
+import { DeleteApiTokenModal } from "@components/api-token"
+import { calculateTimeAgo, renderFormattedDate } from "@helpers/date-time.helper"
+import { XCircle } from "lucide-react"
+import { IApiToken } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
 
 type Props = {
-    token: IApiToken;
-};
+    token: IApiToken
+}
 
 export const ApiTokenListItem: React.FC<Props> = (props) => {
-    const { token } = props;
+    const { token } = props
     // states
-    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
     return (
         <>
@@ -60,5 +56,5 @@ export const ApiTokenListItem: React.FC<Props> = (props) => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}

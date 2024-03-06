@@ -1,13 +1,12 @@
-import { observer } from "mobx-react-lite";
-import { Combobox } from "@headlessui/react";
-
-import { useProjectState } from "@hooks/store";
+import { Combobox } from "@headlessui/react"
+import { useProjectState } from "@hooks/store"
+import { observer } from "mobx-react-lite"
 
 export const BulkDeleteIssuesModalItem: React.FC<any> = observer((props) => {
-    const { issue, delete_issue_ids, identifier } = props;
-    const { getStateById } = useProjectState();
+    const { issue, delete_issue_ids, identifier } = props
+    const { getStateById } = useProjectState()
 
-    const color = getStateById(issue.state_id)?.color;
+    const color = getStateById(issue.state_id)?.color
 
     return (
         <Combobox.Option
@@ -34,5 +33,5 @@ export const BulkDeleteIssuesModalItem: React.FC<any> = observer((props) => {
                 <span>{issue.name}</span>
             </div>
         </Combobox.Option>
-    );
-});
+    )
+})

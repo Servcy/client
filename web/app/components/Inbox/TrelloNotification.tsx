@@ -1,18 +1,18 @@
-import { TrelloNotificationProps } from "@/types/integrations/trello";
-import { HiExternalLink } from "react-icons/hi";
-import { remark } from "remark";
-import html from "remark-html";
+import { HiExternalLink } from "react-icons/hi"
+import { remark } from "remark"
+import html from "remark-html"
+import { TrelloNotificationProps } from "@/types/integrations/trello"
 
 const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
-    let link = "#null";
-    let linkLabel = "";
-    const { fullName } = cause;
+    let link = "#null"
+    let linkLabel = ""
+    const { fullName } = cause
 
     const renderTrelloEvent = () => {
         switch (data.type) {
             case "createBoard": {
-                linkLabel = "View board on Trello";
-                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null";
+                linkLabel = "View board on Trello"
+                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null"
                 return (
                     data.data.board && (
                         <>
@@ -41,11 +41,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </div>
                         </>
                     )
-                );
+                )
             }
             case "updateBoard": {
-                linkLabel = "View board on Trello";
-                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null";
+                linkLabel = "View board on Trello"
+                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null"
                 return (
                     data.data.board && (
                         <>
@@ -86,11 +86,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             )}
                         </>
                     )
-                );
+                )
             }
             case "convertToCardFromCheckItem": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -146,11 +146,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </div>
                         )}
                     </>
-                );
+                )
             }
             case "createCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -193,11 +193,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </div>
                         )}
                     </>
-                );
+                )
             }
             case "updateCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -260,11 +260,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "addChecklistToCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -302,11 +302,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "createCheckItem": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -360,11 +360,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "updateCheckItem": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
 
                 return (
                     <>
@@ -423,11 +423,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "deleteCheckItem": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -475,11 +475,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "removeChecklistFromCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -517,11 +517,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "updateCheckItemStateOnCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -575,11 +575,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "updateCheckList": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.checklist && (
@@ -621,7 +621,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "updateList": {
                 return (
@@ -661,11 +661,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "addLabelToCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -711,11 +711,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "removeLabelFromCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
 
                 return (
                     <>
@@ -754,11 +754,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "addMemberToCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
 
                 return (
                     <>
@@ -779,11 +779,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "addMemberToBoard": {
-                linkLabel = "View board on Trello";
-                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null";
+                linkLabel = "View board on Trello"
+                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null"
 
                 return (
                     <>
@@ -804,11 +804,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "moveCardFromBoard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
 
                 return (
                     <>
@@ -857,11 +857,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "moveCardToBoard": {
-                linkLabel = "View board on Trello";
-                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null";
+                linkLabel = "View board on Trello"
+                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null"
 
                 return (
                     <>
@@ -910,11 +910,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "moveListFromBoard": {
-                linkLabel = "View board on Trello";
-                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null";
+                linkLabel = "View board on Trello"
+                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.list && (
@@ -962,11 +962,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "moveListToBoard": {
-                linkLabel = "View board on Trello";
-                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null";
+                linkLabel = "View board on Trello"
+                link = data.data.board ? `https://trello.com/b/${data.data.board.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.list && (
@@ -1014,11 +1014,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </>
                         )}
                     </>
-                );
+                )
             }
             case "commentCard": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
                 return (
                     <>
                         {data.data.card && (
@@ -1063,11 +1063,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </div>
                         )}
                     </>
-                );
+                )
             }
             case "updateComment": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
 
                 return (
                     <>
@@ -1113,11 +1113,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </div>
                         )}
                     </>
-                );
+                )
             }
             case "deleteComment": {
-                linkLabel = "View card on Trello";
-                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null";
+                linkLabel = "View card on Trello"
+                link = data.data.card ? `https://trello.com/c/${data.data.card.shortLink}` : "#null"
 
                 return (
                     <>
@@ -1163,11 +1163,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </div>
                         )}
                     </>
-                );
+                )
             }
             case "addAttachmentToCard": {
-                linkLabel = "View attachment on Trello";
-                link = data.data.attachment ? data.data.attachment.url : "#null";
+                linkLabel = "View attachment on Trello"
+                link = data.data.attachment ? data.data.attachment.url : "#null"
 
                 return (
                     <>
@@ -1219,11 +1219,11 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </div>
                         )}
                     </>
-                );
+                )
             }
             case "deleteAttachmentFromCard": {
-                linkLabel = "View attachment on Trello";
-                link = data.data.attachment ? data.data.attachment.url : "#null";
+                linkLabel = "View attachment on Trello"
+                link = data.data.attachment ? data.data.attachment.url : "#null"
 
                 return (
                     <>
@@ -1275,12 +1275,12 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             </div>
                         )}
                     </>
-                );
+                )
             }
             default:
-                return <div>Event not supported</div>;
+                return <div>Event not supported</div>
         }
-    };
+    }
 
     return (
         <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
@@ -1312,7 +1312,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default TrelloNotification;
+export default TrelloNotification

@@ -1,6 +1,5 @@
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { IWebhook, IWorkspace } from "@servcy/types";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { IWebhook, IWorkspace } from "@servcy/types"
 
 export const getCurrentHookAsCSV = (
     currentWorkspace: IWorkspace | null,
@@ -19,4 +18,4 @@ export const getCurrentHookAsCSV = (
     cycle: webhook?.cycle?.toString() || "",
     issue_comment: webhook?.issue_comment?.toString() || "",
     workspace: currentWorkspace?.name || "",
-});
+})

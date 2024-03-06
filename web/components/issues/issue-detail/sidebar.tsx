@@ -1,109 +1,104 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { DateDropdown, EstimateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
 import {
+    ArchiveIssueModal,
+    DeleteIssueModal,
+    IssueCycleSelect,
+    IssueLabel,
+    IssueLinkRoot,
+    IssueModuleSelect,
+    IssueParentSelect,
+    IssueRelationSelect,
+} from "@components/issues"
+import { STATE_GROUPS } from "@constants/state"
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+import { useEstimate, useIssueDetail, useProject, useProjectState, useUser } from "@hooks/store"
+import {
+    CalendarCheck2,
+    CalendarClock,
+    CircleDot,
+    CopyPlus,
+    LayoutPanelTop,
     LinkIcon,
     Signal,
     Tag,
     Trash2,
     Triangle,
-    LayoutPanelTop,
     XCircle,
-    CircleDot,
-    CopyPlus,
-    CalendarClock,
-    CalendarCheck2,
-} from "lucide-react";
-
-import { useEstimate, useIssueDetail, useProject, useProjectState, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import {
-    DeleteIssueModal,
-    IssueLinkRoot,
-    IssueRelationSelect,
-    IssueCycleSelect,
-    IssueModuleSelect,
-    IssueParentSelect,
-    IssueLabel,
-    ArchiveIssueModal,
-} from "@components/issues";
-import { IssueSubscription } from "./subscription";
-import { DateDropdown, EstimateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "@components/dropdowns";
-
-import { ArchiveIcon, ContrastIcon, DiceIcon, DoubleCircleIcon, RelatedIcon, Tooltip, UserGroupIcon } from "@servcy/ui";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-import { copyTextToClipboard } from "@helpers/string.helper";
-import { cn } from "@helpers/common.helper";
-import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
-
-import type { TIssueOperations } from "./root";
-import { STATE_GROUPS } from "@constants/state";
+} from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { ArchiveIcon, ContrastIcon, DiceIcon, DoubleCircleIcon, RelatedIcon, Tooltip, UserGroupIcon } from "@servcy/ui"
+import type { TIssueOperations } from "./root"
+import { IssueSubscription } from "./subscription"
 
 type Props = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    issueOperations: TIssueOperations;
-    is_archived: boolean;
-    is_editable: boolean;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    issueOperations: TIssueOperations
+    is_archived: boolean
+    is_editable: boolean
+}
 
 export const IssueDetailsSidebar: React.FC<Props> = observer((props) => {
-    const { workspaceSlug, projectId, issueId, issueOperations, is_archived, is_editable } = props;
+    const { workspaceSlug, projectId, issueId, issueOperations, is_archived, is_editable } = props
     // states
-    const [deleteIssueModal, setDeleteIssueModal] = useState(false);
-    const [archiveIssueModal, setArchiveIssueModal] = useState(false);
+    const [deleteIssueModal, setDeleteIssueModal] = useState(false)
+    const [archiveIssueModal, setArchiveIssueModal] = useState(false)
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
-    const { getProjectById } = useProject();
-    const { currentUser } = useUser();
-    const { areEstimatesEnabledForCurrentProject } = useEstimate();
+    const { getProjectById } = useProject()
+    const { currentUser } = useUser()
+    const { areEstimatesEnabledForCurrentProject } = useEstimate()
 
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getStateById } = useProjectState();
+    } = useIssueDetail()
+    const { getStateById } = useProjectState()
 
-    const issue = getIssueById(issueId);
-    if (!issue) return <></>;
+    const issue = getIssueById(issueId)
+    if (!issue) return <></>
 
     const handleCopyText = () => {
-        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
+        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
         copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${projectId}/issues/${issue.id}`).then(() => {
             toast.error({
                 type: "success",
                 title: "Link Copied!",
                 message: "Issue link copied to clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleDeleteIssue = async () => {
-        await issueOperations.remove(workspaceSlug, projectId, issueId);
-        router.push(`/${workspaceSlug}/projects/${projectId}/issues`);
-    };
+        await issueOperations.remove(workspaceSlug, projectId, issueId)
+        router.push(`/${workspaceSlug}/projects/${projectId}/issues`)
+    }
 
     const handleArchiveIssue = async () => {
-        if (!issueOperations.archive) return;
-        await issueOperations.archive(workspaceSlug, projectId, issueId);
-        router.push(`/${workspaceSlug}/projects/${projectId}/archived-issues/${issue.id}`);
-    };
+        if (!issueOperations.archive) return
+        await issueOperations.archive(workspaceSlug, projectId, issueId)
+        router.push(`/${workspaceSlug}/projects/${projectId}/archived-issues/${issue.id}`)
+    }
     // derived values
-    const projectDetails = getProjectById(issue.project_id);
-    const stateDetails = getStateById(issue.state_id);
+    const projectDetails = getProjectById(issue.project_id)
+    const stateDetails = getStateById(issue.state_id)
     // auth
-    const isArchivingAllowed = !is_archived && issueOperations.archive && is_editable;
+    const isArchivingAllowed = !is_archived && issueOperations.archive && is_editable
     const isInArchivableGroup =
-        !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group);
+        !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group)
 
-    const minDate = issue.start_date ? new Date(issue.start_date) : null;
-    minDate?.setDate(minDate.getDate());
+    const minDate = issue.start_date ? new Date(issue.start_date) : null
+    minDate?.setDate(minDate.getDate())
 
-    const maxDate = issue.target_date ? new Date(issue.target_date) : null;
-    maxDate?.setDate(maxDate.getDate());
+    const maxDate = issue.target_date ? new Date(issue.target_date) : null
+    maxDate?.setDate(maxDate.getDate())
 
     return (
         <>
@@ -153,8 +148,8 @@ export const IssueDetailsSidebar: React.FC<Props> = observer((props) => {
                                             }
                                         )}
                                         onClick={() => {
-                                            if (!isInArchivableGroup) return;
-                                            setArchiveIssueModal(true);
+                                            if (!isInArchivableGroup) return
+                                            setArchiveIssueModal(true)
                                         }}
                                     >
                                         <ArchiveIcon className="h-4 w-4" />
@@ -465,5 +460,5 @@ export const IssueDetailsSidebar: React.FC<Props> = observer((props) => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

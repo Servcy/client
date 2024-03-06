@@ -1,16 +1,14 @@
-import React from "react";
-import Image from "next/image";
-
-import { Button } from "@servcy/ui";
-
-import emptyApiTokens from "public/empty-state/api-token.svg";
+import Image from "next/image"
+import React from "react"
+import emptyApiTokens from "public/empty-state/api-token.svg"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    onClick: () => void;
-};
+    onClick: () => void
+}
 
 export const ApiTokenEmptyState: React.FC<Props> = (props) => {
-    const { onClick } = props;
+    const { onClick } = props
 
     return (
         <div
@@ -28,5 +26,5 @@ export const ApiTokenEmptyState: React.FC<Props> = (props) => {
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}

@@ -1,9 +1,13 @@
-import { useCallback } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Plus } from "lucide-react";
-import Link from "next/link";
-
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useCallback } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { truncateText } from "@helpers/string.helper"
 import {
     useApplication,
     useEventTracker,
@@ -14,98 +18,88 @@ import {
     useProjectState,
     useProjectView,
     useUser,
-} from "@hooks/store";
-
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-
-import { Breadcrumbs, Button, CustomMenu, PhotoFilterIcon } from "@servcy/ui";
-
-import { truncateText } from "@helpers/string.helper";
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
-
-import { EIssuesStoreType, EIssueFilterType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
-import { EUserProjectRoles } from "@constants/project";
+} from "@hooks/store"
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
+import { Breadcrumbs, Button, CustomMenu, PhotoFilterIcon } from "@servcy/ui"
 
 export const ProjectViewIssuesHeader: React.FC = observer(() => {
     // router
-    const router = useRouter();
+    const router = useRouter()
     const { workspaceSlug, projectId, viewId } = router.query as {
-        workspaceSlug: string;
-        projectId: string;
-        viewId: string;
-    };
+        workspaceSlug: string
+        projectId: string
+        viewId: string
+    }
     // store hooks
     const {
         issuesFilter: { issueFilters, updateFilters },
-    } = useIssues(EIssuesStoreType.PROJECT_VIEW);
-    const { setTrackElement } = useEventTracker();
+    } = useIssues(EIssuesStoreType.PROJECT_VIEW)
+    const { setTrackElement } = useEventTracker()
     const {
         commandPalette: { toggleCreateIssueModal },
-    } = useApplication();
+    } = useApplication()
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
-    const { projectViewIds, getViewById } = useProjectView();
-    const { projectStates } = useProjectState();
-    const { projectLabels } = useLabel();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
+    const { projectViewIds, getViewById } = useProjectView()
+    const { projectStates } = useProjectState()
+    const { projectLabels } = useLabel()
     const {
         project: { projectMemberIds },
-    } = useMember();
+    } = useMember()
 
-    const activeLayout = issueFilters?.displayFilters?.layout;
+    const activeLayout = issueFilters?.displayFilters?.layout
 
     const handleLayoutChange = useCallback(
         (layout: TIssueLayouts) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout }, viewId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, { layout: layout }, viewId)
         },
         [workspaceSlug, projectId, viewId, updateFilters]
-    );
+    )
 
     const handleFiltersUpdate = useCallback(
         (key: keyof IIssueFilterOptions, value: string | string[]) => {
-            if (!workspaceSlug || !projectId) return;
-            const newValues = issueFilters?.filters?.[key] ?? [];
+            if (!workspaceSlug || !projectId) return
+            const newValues = issueFilters?.filters?.[key] ?? []
 
             if (Array.isArray(value)) {
                 value.forEach((val) => {
-                    if (!newValues.includes(val)) newValues.push(val);
-                });
+                    if (!newValues.includes(val)) newValues.push(val)
+                })
             } else {
-                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
-                else newValues.push(value);
+                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                else newValues.push(value)
             }
 
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues }, viewId);
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.FILTERS, { [key]: newValues }, viewId)
         },
         [workspaceSlug, projectId, viewId, issueFilters, updateFilters]
-    );
+    )
 
     const handleDisplayFilters = useCallback(
         (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter, viewId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_FILTERS, updatedDisplayFilter, viewId)
         },
         [workspaceSlug, projectId, viewId, updateFilters]
-    );
+    )
 
     const handleDisplayProperties = useCallback(
         (property: Partial<IIssueDisplayProperties>) => {
-            if (!workspaceSlug || !projectId) return;
-            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property, viewId);
+            if (!workspaceSlug || !projectId) return
+            updateFilters(workspaceSlug, projectId, EIssueFilterType.DISPLAY_PROPERTIES, property, viewId)
         },
         [workspaceSlug, projectId, viewId, updateFilters]
-    );
+    )
 
-    const viewDetails = viewId ? getViewById(viewId.toString()) : null;
+    const viewDetails = viewId ? getViewById(viewId.toString()) : null
 
     const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
+        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return (
         <div className="relative z-[15] flex h-[3.75rem] w-full items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -160,9 +154,9 @@ export const ProjectViewIssuesHeader: React.FC = observer(() => {
                                 placement="bottom-start"
                             >
                                 {projectViewIds?.map((viewId) => {
-                                    const view = getViewById(viewId);
+                                    const view = getViewById(viewId)
 
-                                    if (!view) return;
+                                    if (!view) return
 
                                     return (
                                         <CustomMenu.MenuItem key={viewId}>
@@ -174,7 +168,7 @@ export const ProjectViewIssuesHeader: React.FC = observer(() => {
                                                 {truncateText(view.name, 40)}
                                             </Link>
                                         </CustomMenu.MenuItem>
-                                    );
+                                    )
                                 })}
                             </CustomMenu>
                         }
@@ -214,8 +208,8 @@ export const ProjectViewIssuesHeader: React.FC = observer(() => {
                 {canUserCreateIssue && (
                     <Button
                         onClick={() => {
-                            setTrackElement("PROJECT_VIEW_PAGE_HEADER");
-                            toggleCreateIssueModal(true, EIssuesStoreType.PROJECT_VIEW);
+                            setTrackElement("PROJECT_VIEW_PAGE_HEADER")
+                            toggleCreateIssueModal(true, EIssuesStoreType.PROJECT_VIEW)
                         }}
                         size="sm"
                         prependIcon={<Plus />}
@@ -225,5 +219,5 @@ export const ProjectViewIssuesHeader: React.FC = observer(() => {
                 )}
             </div>
         </div>
-    );
-});
+    )
+})

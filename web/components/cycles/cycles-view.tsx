@@ -1,24 +1,22 @@
-import { FC } from "react";
-import { observer } from "mobx-react-lite";
+import { FC } from "react"
+import { CyclesBoard, CyclesList, CyclesListGanttChartView } from "@components/cycles"
+import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui"
+import { useCycle } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { TCycleLayout, TCycleView } from "@servcy/types"
 
-import { useCycle } from "@hooks/store";
-
-import { CyclesBoard, CyclesList, CyclesListGanttChartView } from "@components/cycles";
-components;
-import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
-
-import { TCycleLayout, TCycleView } from "@servcy/types";
+components
 
 export interface ICyclesView {
-    filter: TCycleView;
-    layout: TCycleLayout;
-    workspaceSlug: string;
-    projectId: string;
-    peekCycle: string | undefined;
+    filter: TCycleView
+    layout: TCycleLayout
+    workspaceSlug: string
+    projectId: string
+    peekCycle: string | undefined
 }
 
 export const CyclesView: FC<ICyclesView> = observer((props) => {
-    const { filter, layout, workspaceSlug, projectId, peekCycle } = props;
+    const { filter, layout, workspaceSlug, projectId, peekCycle } = props
     // store hooks
     const {
         currentProjectCompletedCycleIds,
@@ -26,7 +24,7 @@ export const CyclesView: FC<ICyclesView> = observer((props) => {
         currentProjectUpcomingCycleIds,
         currentProjectCycleIds,
         loader,
-    } = useCycle();
+    } = useCycle()
 
     const cyclesList =
         filter === "completed"
@@ -35,7 +33,7 @@ export const CyclesView: FC<ICyclesView> = observer((props) => {
               ? currentProjectDraftCycleIds
               : filter === "upcoming"
                 ? currentProjectUpcomingCycleIds
-                : currentProjectCycleIds;
+                : currentProjectCycleIds
 
     if (loader || !cyclesList)
         return (
@@ -44,7 +42,7 @@ export const CyclesView: FC<ICyclesView> = observer((props) => {
                 {layout === "board" && <CycleModuleBoardLayout />}
                 {layout === "gantt" && <GanttLayoutLoader />}
             </>
-        );
+        )
 
     return (
         <>
@@ -64,5 +62,5 @@ export const CyclesView: FC<ICyclesView> = observer((props) => {
 
             {layout === "gantt" && <CyclesListGanttChartView cycleIds={cyclesList} workspaceSlug={workspaceSlug} />}
         </>
-    );
-});
+    )
+})

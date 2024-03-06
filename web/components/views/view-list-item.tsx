@@ -1,69 +1,63 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { LinkIcon, PencilIcon, StarIcon, TrashIcon } from "lucide-react";
-
-import { useProjectView, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@components/views";
-
-import { CustomMenu } from "@servcy/ui";
-
-import { calculateTotalFilters } from "@helpers/filter.helper";
-import { copyUrlToClipboard } from "@helpers/string.helper";
-
-import { IProjectView } from "@servcy/types";
-
-import { EUserProjectRoles } from "@constants/project";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@components/views"
+import { EUserProjectRoles } from "@constants/project"
+import { calculateTotalFilters } from "@helpers/filter.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useProjectView, useUser } from "@hooks/store"
+import { LinkIcon, PencilIcon, StarIcon, TrashIcon } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IProjectView } from "@servcy/types"
+import { CustomMenu } from "@servcy/ui"
 
 type Props = {
-    view: IProjectView;
-};
+    view: IProjectView
+}
 
 export const ProjectViewListItem: React.FC<Props> = observer((props) => {
-    const { view } = props;
+    const { view } = props
     // states
-    const [createUpdateViewModal, setCreateUpdateViewModal] = useState(false);
-    const [deleteViewModal, setDeleteViewModal] = useState(false);
+    const [createUpdateViewModal, setCreateUpdateViewModal] = useState(false)
+    const [deleteViewModal, setDeleteViewModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { addViewToFavorites, removeViewFromFavorites } = useProjectView();
+    } = useUser()
+    const { addViewToFavorites, removeViewFromFavorites } = useProjectView()
 
     const handleAddToFavorites = () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        addViewToFavorites(workspaceSlug.toString(), projectId.toString(), view.id);
-    };
+        addViewToFavorites(workspaceSlug.toString(), projectId.toString(), view.id)
+    }
 
     const handleRemoveFromFavorites = () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        removeViewFromFavorites(workspaceSlug.toString(), projectId.toString(), view.id);
-    };
+        removeViewFromFavorites(workspaceSlug.toString(), projectId.toString(), view.id)
+    }
 
     const handleCopyText = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
+        e.stopPropagation()
+        e.preventDefault()
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/views/${view.id}`).then(() => {
             toast.error({
                 type: "success",
                 title: "Link Copied!",
                 message: "View link copied to clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
 
-    const totalFilters = calculateTotalFilters(view.filters ?? {});
+    const totalFilters = calculateTotalFilters(view.filters ?? {})
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
     return (
         <>
@@ -99,9 +93,9 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
                                             <button
                                                 type="button"
                                                 onClick={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    handleRemoveFromFavorites();
+                                                    e.preventDefault()
+                                                    e.stopPropagation()
+                                                    handleRemoveFromFavorites()
                                                 }}
                                                 className="grid place-items-center"
                                             >
@@ -114,9 +108,9 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
                                             <button
                                                 type="button"
                                                 onClick={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    handleAddToFavorites();
+                                                    e.preventDefault()
+                                                    e.stopPropagation()
+                                                    handleAddToFavorites()
                                                 }}
                                                 className="grid place-items-center"
                                             >
@@ -129,9 +123,9 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
                                             <>
                                                 <CustomMenu.MenuItem
                                                     onClick={(e) => {
-                                                        e.preventDefault();
-                                                        e.stopPropagation();
-                                                        setCreateUpdateViewModal(true);
+                                                        e.preventDefault()
+                                                        e.stopPropagation()
+                                                        setCreateUpdateViewModal(true)
                                                     }}
                                                 >
                                                     <span className="flex items-center justify-start gap-2">
@@ -141,9 +135,9 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
                                                 </CustomMenu.MenuItem>
                                                 <CustomMenu.MenuItem
                                                     onClick={(e) => {
-                                                        e.preventDefault();
-                                                        e.stopPropagation();
-                                                        setDeleteViewModal(true);
+                                                        e.preventDefault()
+                                                        e.stopPropagation()
+                                                        setDeleteViewModal(true)
                                                     }}
                                                 >
                                                     <span className="flex items-center justify-start gap-2">
@@ -167,5 +161,5 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
                 </Link>
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,44 +1,41 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Command } from "cmdk";
-import { Check } from "lucide-react";
+import { useRouter } from "next/router"
+import { EIssuesStoreType, ISSUE_PRIORITIES } from "@constants/issue"
 // mobx store
-import { useIssues } from "@hooks/store";
-
-import { PriorityIcon } from "@servcy/ui";
-
-import { TIssue, TIssuePriorities } from "@servcy/types";
-
-import { EIssuesStoreType, ISSUE_PRIORITIES } from "@constants/issue";
+import { useIssues } from "@hooks/store"
+import { Command } from "cmdk"
+import { Check } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { TIssue, TIssuePriorities } from "@servcy/types"
+import { PriorityIcon } from "@servcy/ui"
 
 type Props = {
-    closePalette: () => void;
-    issue: TIssue;
-};
+    closePalette: () => void
+    issue: TIssue
+}
 
 export const ChangeIssuePriority: React.FC<Props> = observer((props) => {
-    const { closePalette, issue } = props;
+    const { closePalette, issue } = props
 
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     const {
         issues: { updateIssue },
-    } = useIssues(EIssuesStoreType.PROJECT);
+    } = useIssues(EIssuesStoreType.PROJECT)
 
     const submitChanges = async (formData: Partial<TIssue>) => {
-        if (!workspaceSlug || !projectId || !issue) return;
+        if (!workspaceSlug || !projectId || !issue) return
 
-        const payload = { ...formData };
+        const payload = { ...formData }
         await updateIssue(workspaceSlug.toString(), projectId.toString(), issue.id, payload).catch((e) => {
-            console.error(e);
-        });
-    };
+            console.error(e)
+        })
+    }
 
     const handleIssueState = (priority: TIssuePriorities) => {
-        submitChanges({ priority });
-        closePalette();
-    };
+        submitChanges({ priority })
+        closePalette()
+    }
 
     return (
         <>
@@ -56,5 +53,5 @@ export const ChangeIssuePriority: React.FC<Props> = observer((props) => {
                 </Command.Item>
             ))}
         </>
-    );
-});
+    )
+})

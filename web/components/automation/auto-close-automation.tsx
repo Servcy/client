@@ -1,31 +1,27 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useProject, useProjectState, useUser } from "@hooks/store";
+import React, { useState } from "react"
 // component
-import { SelectMonthModal } from "@components/automation";
-import { CustomSelect, CustomSearchSelect, ToggleSwitch, StateGroupIcon, DoubleCircleIcon, Loader } from "@servcy/ui";
-
-import { ArchiveX } from "lucide-react";
-
-import { IProject } from "@servcy/types";
-
-import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project";
+import { SelectMonthModal } from "@components/automation"
+import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project"
+import { useProject, useProjectState, useUser } from "@hooks/store"
+import { ArchiveX } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { IProject } from "@servcy/types"
+import { CustomSearchSelect, CustomSelect, DoubleCircleIcon, Loader, StateGroupIcon, ToggleSwitch } from "@servcy/ui"
 
 type Props = {
-    handleChange: (formData: Partial<IProject>) => Promise<void>;
-};
+    handleChange: (formData: Partial<IProject>) => Promise<void>
+}
 
 export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
-    const { handleChange } = props;
+    const { handleChange } = props
     // states
-    const [monthModal, setmonthModal] = useState(false);
+    const [monthModal, setmonthModal] = useState(false)
     // store hooks
     const {
         membership: { currentProjectRole },
-    } = useUser();
-    const { currentProjectDetails } = useProject();
-    const { projectStates } = useProjectState();
+    } = useUser()
+    const { currentProjectDetails } = useProject()
+    const { projectStates } = useProjectState()
 
     // const stateGroups = projectStateStore.groupedProjectStates ?? undefined;
 
@@ -40,21 +36,21 @@ export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
                     {state.name}
                 </div>
             ),
-        }));
+        }))
 
-    const multipleOptions = (options ?? []).length > 1;
+    const multipleOptions = (options ?? []).length > 1
 
-    const defaultState = projectStates?.find((s) => s.group === "cancelled")?.id || null;
+    const defaultState = projectStates?.find((s) => s.group === "cancelled")?.id || null
 
-    const selectedOption = projectStates?.find((s) => s.id === currentProjectDetails?.default_state ?? defaultState);
-    const currentDefaultState = projectStates?.find((s) => s.id === defaultState);
+    const selectedOption = projectStates?.find((s) => s.id === currentProjectDetails?.default_state ?? defaultState)
+    const currentDefaultState = projectStates?.find((s) => s.id === defaultState)
 
     const initialValues: Partial<IProject> = {
         close_in: 1,
         default_state: defaultState,
-    };
+    }
 
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
+    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
 
     return (
         <>
@@ -105,7 +101,7 @@ export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
                                                 currentProjectDetails?.close_in === 1 ? "month" : "months"
                                             }`}
                                             onChange={(val: number) => {
-                                                handleChange({ close_in: val });
+                                                handleChange({ close_in: val })
                                             }}
                                             input
                                             disabled={!isAdmin}
@@ -160,7 +156,7 @@ export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
                                                 </div>
                                             }
                                             onChange={(val: string) => {
-                                                handleChange({ default_state: val });
+                                                handleChange({ default_state: val })
                                             }}
                                             options={options}
                                             disabled={!multipleOptions}
@@ -178,5 +174,5 @@ export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

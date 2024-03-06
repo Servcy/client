@@ -1,12 +1,11 @@
-import { APIService } from "@services/api.service";
-
-import { TIssueComment } from "@servcy/types";
 // helper
-import { API_BASE_URL } from "@helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { TIssueComment } from "@servcy/types"
 
 export class IssueCommentService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async getIssueComments(
@@ -15,7 +14,7 @@ export class IssueCommentService extends APIService {
         issueId: string,
         params:
             | {
-                  created_at__gt: string;
+                  created_at__gt: string
               }
             | {} = {}
     ): Promise<TIssueComment[]> {
@@ -27,8 +26,8 @@ export class IssueCommentService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async createIssueComment(
@@ -40,8 +39,8 @@ export class IssueCommentService extends APIService {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async patchIssueComment(
@@ -57,8 +56,8 @@ export class IssueCommentService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async deleteIssueComment(
@@ -72,7 +71,7 @@ export class IssueCommentService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

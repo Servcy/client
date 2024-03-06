@@ -1,20 +1,18 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-
-import { getQueryParams } from "@/utils/Shared";
-
-import { AiFillApi, AiOutlineArrowRight, AiOutlineSetting } from "react-icons/ai";
+import { useEffect, useState } from "react"
+import { AiFillApi, AiOutlineArrowRight, AiOutlineSetting } from "react-icons/ai"
+import { getQueryParams } from "@/utils/Shared"
 
 export default function SettingsLayout({ integrations }: { integrations: React.ReactNode }) {
-    const [selection, setSelection] = useState<string>("integrations");
+    const [selection, setSelection] = useState<string>("integrations")
 
     useEffect(() => {
-        const queryParams: Record<string, string> = getQueryParams(window.location.search);
+        const queryParams: Record<string, string> = getQueryParams(window.location.search)
         if (queryParams["selection"]) {
-            setSelection(queryParams["selection"]);
+            setSelection(queryParams["selection"])
         }
-    }, []);
+    }, [])
 
     return (
         <main className="order-2 flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
@@ -34,7 +32,7 @@ export default function SettingsLayout({ integrations }: { integrations: React.R
                         <div className="flex flex-col gap-4 text-sm text-servcy-neutral">
                             <button
                                 onClick={() => {
-                                    setSelection("integrations");
+                                    setSelection("integrations")
                                 }}
                                 className="border-1 flex cursor-pointer flex-row rounded-lg border-servcy-black p-2 hover:border-none hover:bg-servcy-wheat hover:text-servcy-black"
                             >
@@ -48,5 +46,5 @@ export default function SettingsLayout({ integrations }: { integrations: React.R
                 {selection === "integrations" && integrations}
             </div>
         </main>
-    );
+    )
 }

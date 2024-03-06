@@ -1,73 +1,66 @@
-import { MouseEvent } from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import useSWR from "swr";
-import { useTheme } from "next-themes";
-
-import { useCycle, useIssues, useMember, useProject, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { SingleProgressStats } from "@components/core";
+import Link from "next/link"
+import { MouseEvent } from "react"
+import { SingleProgressStats } from "@components/core"
+import ProgressChart from "@components/core/sidebar/progress-chart"
+import { ActiveCycleProgressStats } from "@components/cycles"
+import { StateDropdown } from "@components/dropdowns"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { CYCLE_STATE_GROUPS_DETAILS } from "@constants/cycle"
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { CYCLE_ISSUES_WITH_PARAMS } from "@constants/fetch-keys"
+import { EIssuesStoreType } from "@constants/issue"
+import { findHowManyDaysLeft, renderFormattedDate, renderFormattedDateWithoutYear } from "@helpers/date-time.helper"
+import { truncateText } from "@helpers/string.helper"
+import { useCycle, useIssues, useMember, useProject, useUser } from "@hooks/store"
+import { ArrowRight, CalendarCheck, CalendarDays, Star, Target } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
+import useSWR from "swr"
+import { ICycle, TCycleGroups } from "@servcy/types"
 import {
-    AvatarGroup,
-    Loader,
-    Tooltip,
-    LinearProgressIndicator,
-    LayersIcon,
-    StateGroupIcon,
-    PriorityIcon,
     Avatar,
+    AvatarGroup,
     CycleGroupIcon,
-} from "@servcy/ui";
-
-import ProgressChart from "@components/core/sidebar/progress-chart";
-import { ActiveCycleProgressStats } from "@components/cycles";
-import { StateDropdown } from "@components/dropdowns";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-
-import { ArrowRight, CalendarCheck, CalendarDays, Star, Target } from "lucide-react";
-
-import { renderFormattedDate, findHowManyDaysLeft, renderFormattedDateWithoutYear } from "@helpers/date-time.helper";
-import { truncateText } from "@helpers/string.helper";
-
-import { ICycle, TCycleGroups } from "@servcy/types";
-
-import { EIssuesStoreType } from "@constants/issue";
-import { CYCLE_ISSUES_WITH_PARAMS } from "@constants/fetch-keys";
-import { CYCLE_STATE_GROUPS_DETAILS } from "@constants/cycle";
-import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+    LayersIcon,
+    LinearProgressIndicator,
+    Loader,
+    PriorityIcon,
+    StateGroupIcon,
+    Tooltip,
+} from "@servcy/ui"
 
 interface IActiveCycleDetails {
-    workspaceSlug: string;
-    projectId: string;
+    workspaceSlug: string
+    projectId: string
 }
 
 export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props) => {
     // props
-    const { workspaceSlug, projectId } = props;
-    const { resolvedTheme } = useTheme();
+    const { workspaceSlug, projectId } = props
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { currentUser } = useUser();
+    const { currentUser } = useUser()
     const {
         issues: { fetchActiveCycleIssues },
-    } = useIssues(EIssuesStoreType.CYCLE);
+    } = useIssues(EIssuesStoreType.CYCLE)
     const {
         fetchActiveCycle,
         currentProjectActiveCycleId,
         getActiveCycleById,
         addCycleToFavorites,
         removeCycleFromFavorites,
-    } = useCycle();
-    const { currentProjectDetails } = useProject();
-    const { getUserDetails } = useMember();
+    } = useCycle()
+    const { currentProjectDetails } = useProject()
+    const { getUserDetails } = useMember()
 
     const { isLoading } = useSWR(
         workspaceSlug && projectId ? `PROJECT_ACTIVE_CYCLE_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchActiveCycle(workspaceSlug, projectId) : null
-    );
+    )
 
-    const activeCycle = currentProjectActiveCycleId ? getActiveCycleById(currentProjectActiveCycleId) : null;
-    const cycleOwnerDetails = activeCycle ? getUserDetails(activeCycle.owned_by_id) : undefined;
+    const activeCycle = currentProjectActiveCycleId ? getActiveCycleById(currentProjectActiveCycleId) : null
+    const cycleOwnerDetails = activeCycle ? getUserDetails(activeCycle.owned_by_id) : undefined
 
     const { data: activeCycleIssues } = useSWR(
         workspaceSlug && projectId && currentProjectActiveCycleId
@@ -76,19 +69,19 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
         workspaceSlug && projectId && currentProjectActiveCycleId
             ? () => fetchActiveCycleIssues(workspaceSlug, projectId, currentProjectActiveCycleId)
             : null
-    );
+    )
 
-    const emptyStateDetail = CYCLE_EMPTY_STATE_DETAILS["active"];
+    const emptyStateDetail = CYCLE_EMPTY_STATE_DETAILS["active"]
 
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("cycle", "active", isLightMode);
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("cycle", "active", isLightMode)
 
     if (!activeCycle && isLoading)
         return (
             <Loader>
                 <Loader.Item height="250px" />
             </Loader>
-        );
+        )
 
     if (!activeCycle)
         return (
@@ -98,10 +91,10 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                 image={emptyStateImage}
                 size="sm"
             />
-        );
+        )
 
-    const endDate = new Date(activeCycle.end_date ?? "");
-    const startDate = new Date(activeCycle.start_date ?? "");
+    const endDate = new Date(activeCycle.end_date ?? "")
+    const startDate = new Date(activeCycle.start_date ?? "")
 
     const groupedIssues: any = {
         backlog: activeCycle.backlog_issues,
@@ -109,35 +102,35 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
         started: activeCycle.started_issues,
         completed: activeCycle.completed_issues,
         cancelled: activeCycle.cancelled_issues,
-    };
+    }
 
-    const cycleStatus = activeCycle.status.toLowerCase() as TCycleGroups;
+    const cycleStatus = activeCycle.status.toLowerCase() as TCycleGroups
 
     const handleAddToFavorites = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        if (!workspaceSlug || !projectId) return;
+        e.preventDefault()
+        if (!workspaceSlug || !projectId) return
 
         addCycleToFavorites(workspaceSlug?.toString(), projectId.toString(), activeCycle.id).catch(() => {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Couldn't add the cycle to favorites. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const handleRemoveFromFavorites = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        if (!workspaceSlug || !projectId) return;
+        e.preventDefault()
+        if (!workspaceSlug || !projectId) return
 
         removeCycleFromFavorites(workspaceSlug?.toString(), projectId.toString(), activeCycle.id).catch(() => {
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Couldn't add the cycle to favorites. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     const progressIndicatorData = CYCLE_STATE_GROUPS_DETAILS.map((group, index) => ({
         id: index,
@@ -147,9 +140,9 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                 ? ((activeCycle[group.key as keyof ICycle] as number) / activeCycle.total_issues) * 100
                 : 0,
         color: group.color,
-    }));
+    }))
 
-    const daysLeft = findHowManyDaysLeft(activeCycle.end_date) ?? 0;
+    const daysLeft = findHowManyDaysLeft(activeCycle.end_date) ?? 0
 
     return (
         <div className="grid-row-2 grid divide-y rounded-[10px] border border-custom-border-200 bg-custom-background-100 shadow">
@@ -175,7 +168,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                                     {activeCycle.is_favorite ? (
                                         <button
                                             onClick={(e) => {
-                                                handleRemoveFromFavorites(e);
+                                                handleRemoveFromFavorites(e)
                                             }}
                                         >
                                             <Star className="h-4 w-4 fill-orange-400 text-orange-400" />
@@ -183,7 +176,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                                     ) : (
                                         <button
                                             onClick={(e) => {
-                                                handleAddToFavorites(e);
+                                                handleAddToFavorites(e)
                                             }}
                                         >
                                             <Star className="h-4 w-4 " color="rgb(var(--color-text-200))" />
@@ -226,14 +219,14 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                                     <div className="flex items-center gap-1 text-custom-text-200">
                                         <AvatarGroup>
                                             {activeCycle.assignee_ids.map((assigne_id) => {
-                                                const member = getUserDetails(assigne_id);
+                                                const member = getUserDetails(assigne_id)
                                                 return (
                                                     <Avatar
                                                         key={member?.id}
                                                         name={member?.display_name}
                                                         src={member?.avatar}
                                                     />
-                                                );
+                                                )
                                             })}
                                         </AvatarGroup>
                                     </div>
@@ -399,5 +392,5 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

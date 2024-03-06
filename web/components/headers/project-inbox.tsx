@@ -1,26 +1,23 @@
-import { FC, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Plus } from "lucide-react";
-
-import { useProject } from "@hooks/store";
-
-import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
-
-import { CreateInboxIssueModal } from "@components/inbox";
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
+import { useRouter } from "next/router"
+import { FC, useState } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { CreateInboxIssueModal } from "@components/inbox"
 // helper
-import { renderEmoji } from "@helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useProject } from "@hooks/store"
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui"
 
 export const ProjectInboxHeader: FC = observer(() => {
     // states
-    const [createIssueModal, setCreateIssueModal] = useState(false);
+    const [createIssueModal, setCreateIssueModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { currentProjectDetails } = useProject();
+    const { currentProjectDetails } = useProject()
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -76,5 +73,5 @@ export const ProjectInboxHeader: FC = observer(() => {
                 </div>
             )}
         </div>
-    );
-});
+    )
+})

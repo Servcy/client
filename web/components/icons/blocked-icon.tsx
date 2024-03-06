@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const BlockedIcon: React.FC<Props> = ({ width = "24", height = "24", className }) => (
     <svg
@@ -22,4 +21,4 @@ export const BlockedIcon: React.FC<Props> = ({ width = "24", height = "24", clas
             fill="#F76659"
         />
     </svg>
-);
+)

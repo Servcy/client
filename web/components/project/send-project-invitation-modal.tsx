@@ -1,35 +1,31 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { useForm, Controller, useFieldArray } from "react-hook-form";
-import { Dialog, Transition } from "@headlessui/react";
-import { ChevronDown, Plus, X } from "lucide-react";
-
-import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Avatar, Button, CustomSelect, CustomSearchSelect } from "@servcy/ui";
-
-import { getUserRole } from "@helpers/user.helper";
-
-import { ROLE } from "@constants/workspace";
-import { EUserProjectRoles } from "@constants/project";
-import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker";
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
+import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker"
+import { EUserProjectRoles } from "@constants/project"
+import { ROLE } from "@constants/workspace"
+import { Dialog, Transition } from "@headlessui/react"
+import { getUserRole } from "@helpers/user.helper"
+import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
+import { ChevronDown, Plus, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useFieldArray, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { Avatar, Button, CustomSearchSelect, CustomSelect } from "@servcy/ui"
 
 type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    onSuccess?: () => void;
-};
+    isOpen: boolean
+    onClose: () => void
+    onSuccess?: () => void
+}
 
 type member = {
-    role: EUserProjectRoles;
-    member_id: string;
-};
+    role: EUserProjectRoles
+    member_id: string
+}
 
 type FormValues = {
-    members: member[];
-};
+    members: member[]
+}
 
 const defaultValues: FormValues = {
     members: [
@@ -38,56 +34,56 @@ const defaultValues: FormValues = {
             member_id: "",
         },
     ],
-};
+}
 
 export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
-    const { isOpen, onClose, onSuccess } = props;
+    const { isOpen, onClose, onSuccess } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
 
     // store hooks
-    const { captureEvent } = useEventTracker();
+    const { captureEvent } = useEventTracker()
     const {
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
     const {
         project: { projectMemberIds, bulkAddMembersToProject },
         workspace: { workspaceMemberIds, getWorkspaceMemberDetails },
-    } = useMember();
+    } = useMember()
     // form info
     const {
         formState: { errors, isSubmitting },
         reset,
         handleSubmit,
         control,
-    } = useForm<FormValues>();
+    } = useForm<FormValues>()
 
     const { fields, append, remove } = useFieldArray({
         control,
         name: "members",
-    });
+    })
 
     const uninvitedPeople = workspaceMemberIds?.filter((userId) => {
-        const isInvited = projectMemberIds?.find((u) => u === userId);
+        const isInvited = projectMemberIds?.find((u) => u === userId)
 
-        return !isInvited;
-    });
+        return !isInvited
+    })
 
     const onSubmit = async (formData: FormValues) => {
-        if (!workspaceSlug || !projectId || isSubmitting) return;
+        if (!workspaceSlug || !projectId || isSubmitting) return
 
-        const payload = { ...formData };
+        const payload = { ...formData }
 
         await bulkAddMembersToProject(workspaceSlug.toString(), projectId.toString(), payload)
             .then(() => {
-                if (onSuccess) onSuccess();
-                onClose();
+                if (onSuccess) onSuccess()
+                onClose()
                 toast.error({
                     title: "Success",
                     type: "success",
                     message: "Members added successfully.",
-                });
+                })
                 captureEvent(PROJECT_MEMBER_ADDED, {
                     members: [
                         ...payload.members.map((member) => ({
@@ -97,35 +93,35 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                     ],
                     state: "SUCCESS",
                     element: "Project settings members page",
-                });
+                })
             })
             .catch((error) => {
-                console.error(error);
+                console.error(error)
                 captureEvent(PROJECT_MEMBER_ADDED, {
                     state: "FAILED",
                     element: "Project settings members page",
-                });
+                })
             })
             .finally(() => {
-                reset(defaultValues);
-            });
-    };
+                reset(defaultValues)
+            })
+    }
 
     const handleClose = () => {
-        onClose();
+        onClose()
 
         const timeout = setTimeout(() => {
-            reset(defaultValues);
-            clearTimeout(timeout);
-        }, 500);
-    };
+            reset(defaultValues)
+            clearTimeout(timeout)
+        }, 500)
+    }
 
     const appendField = () => {
         append({
             role: 5,
             member_id: "",
-        });
-    };
+        })
+    }
 
     useEffect(() => {
         if (fields.length === 0) {
@@ -134,12 +130,12 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                     role: 5,
                     member_id: "",
                 },
-            ]);
+            ])
         }
-    }, [fields, append]);
+    }, [fields, append])
 
     const options = uninvitedPeople?.map((userId) => {
-        const memberDetails = getWorkspaceMemberDetails(userId);
+        const memberDetails = getWorkspaceMemberDetails(userId)
 
         return {
             value: `${memberDetails?.member.id}`,
@@ -157,8 +153,8 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                     </div>
                 </div>
             ),
-        };
-    });
+        }
+    })
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -213,7 +209,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                             name={`members.${index}.member_id`}
                                                             rules={{ required: "Please select a member" }}
                                                             render={({ field: { value, onChange } }) => {
-                                                                const selectedMember = getWorkspaceMemberDetails(value);
+                                                                const selectedMember = getWorkspaceMemberDetails(value)
 
                                                                 return (
                                                                     <CustomSearchSelect
@@ -249,12 +245,12 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                             </button>
                                                                         }
                                                                         onChange={(val: string) => {
-                                                                            onChange(val);
+                                                                            onChange(val)
                                                                         }}
                                                                         options={options}
                                                                         optionsClassName="w-full"
                                                                     />
-                                                                );
+                                                                )
                                                             }}
                                                         />
                                                         {errors.members && errors.members[index]?.member_id && (
@@ -295,7 +291,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                                 (currentProjectRole ??
                                                                                     EUserProjectRoles.GUEST)
                                                                             )
-                                                                                return null;
+                                                                                return null
 
                                                                             return (
                                                                                 <CustomSelect.Option
@@ -304,7 +300,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                                 >
                                                                                     {label}
                                                                                 </CustomSelect.Option>
-                                                                            );
+                                                                            )
                                                                         })}
                                                                     </CustomSelect>
                                                                 )}
@@ -359,5 +355,5 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

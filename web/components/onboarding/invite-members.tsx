@@ -1,75 +1,67 @@
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import { Listbox, Transition } from "@headlessui/react";
+import Image from "next/image"
+import React, { useEffect, useRef, useState } from "react"
+import { OnboardingStepIndicator } from "@components/onboarding/step-indicator"
+import { MEMBER_INVITED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+import { Listbox, Transition } from "@headlessui/react"
+import { getUserRole } from "@helpers/user.helper"
+import { useEventTracker } from "@hooks/store"
+import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
+import { WorkspaceService } from "@services/workspace.service"
+import { Check, ChevronDown, Plus, XCircle } from "lucide-react"
+import { useTheme } from "next-themes"
+import userDark from "public/onboarding/user-dark.svg"
+import userLight from "public/onboarding/user-light.svg"
+import user1 from "public/users/user-1.png"
+import user2 from "public/users/user-2.png"
 import {
     Control,
     Controller,
     FieldArrayWithId,
+    useFieldArray,
     UseFieldArrayRemove,
+    useForm,
     UseFormGetValues,
     UseFormSetValue,
     UseFormWatch,
-    useFieldArray,
-    useForm,
-} from "react-hook-form";
-import { Check, ChevronDown, Plus, XCircle } from "lucide-react";
-
-import { WorkspaceService } from "@services/workspace.service";
-import toast from "react-hot-toast";
-import { useEventTracker } from "@hooks/store";
-
-import { Button, Input } from "@servcy/ui";
-
-import { OnboardingStepIndicator } from "@components/onboarding/step-indicator";
-
-import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown";
-
-import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
-
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
-import { MEMBER_INVITED } from "@constants/event-tracker";
-
-import { getUserRole } from "@helpers/user.helper";
-
-import user1 from "public/users/user-1.png";
-import user2 from "public/users/user-2.png";
-import userDark from "public/onboarding/user-dark.svg";
-import userLight from "public/onboarding/user-light.svg";
+} from "react-hook-form"
+import toast from "react-hot-toast"
+import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
-    finishOnboarding: () => Promise<void>;
-    stepChange: (steps: Partial<TOnboardingSteps>) => Promise<void>;
-    user: IUser | undefined;
-    workspace: IWorkspace | undefined;
-};
+    finishOnboarding: () => Promise<void>
+    stepChange: (steps: Partial<TOnboardingSteps>) => Promise<void>
+    user: IUser | undefined
+    workspace: IWorkspace | undefined
+}
 
 type EmailRole = {
-    email: string;
-    role: EUserWorkspaceRoles;
-    role_active: boolean;
-};
+    email: string
+    role: EUserWorkspaceRoles
+    role_active: boolean
+}
 
 type FormValues = {
-    emails: EmailRole[];
-};
+    emails: EmailRole[]
+}
 
 type InviteMemberFormProps = {
-    index: number;
-    remove: UseFieldArrayRemove;
-    control: Control<FormValues, any>;
-    setValue: UseFormSetValue<FormValues>;
-    getValues: UseFormGetValues<FormValues>;
-    watch: UseFormWatch<FormValues>;
-    field: FieldArrayWithId<FormValues, "emails", "id">;
-    fields: FieldArrayWithId<FormValues, "emails", "id">[];
-    errors: any;
-    isInvitationDisabled: boolean;
-    setIsInvitationDisabled: (value: boolean) => void;
-};
+    index: number
+    remove: UseFieldArrayRemove
+    control: Control<FormValues, any>
+    setValue: UseFormSetValue<FormValues>
+    getValues: UseFormGetValues<FormValues>
+    watch: UseFormWatch<FormValues>
+    field: FieldArrayWithId<FormValues, "emails", "id">
+    fields: FieldArrayWithId<FormValues, "emails", "id">[]
+    errors: any
+    isInvitationDisabled: boolean
+    setIsInvitationDisabled: (value: boolean) => void
+}
 
-const workspaceService = new WorkspaceService();
-const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+const workspaceService = new WorkspaceService()
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 
 const placeholderEmails = [
     "charlie.taylor@frstflt.com",
@@ -82,7 +74,7 @@ const placeholderEmails = [
     "glenn.curtiss@frstflt.com",
     "thomas.selfridge@frstflt.com",
     "albert.zahm@frstflt.com",
-];
+]
 const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
     const {
         control,
@@ -95,40 +87,40 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
         setValue,
         getValues,
         watch,
-    } = props;
+    } = props
 
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null)
+    const dropdownRef = useRef<HTMLDivElement>(null)
 
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-    useDynamicDropdownPosition(isDropdownOpen, () => setIsDropdownOpen(false), buttonRef, dropdownRef);
+    useDynamicDropdownPosition(isDropdownOpen, () => setIsDropdownOpen(false), buttonRef, dropdownRef)
 
-    const email = watch(`emails.${index}.email`);
+    const email = watch(`emails.${index}.email`)
 
     const emailOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.value === "") {
-            const validEmail = fields.map((_, i) => emailRegex.test(getValues(`emails.${i}.email`))).includes(true);
+            const validEmail = fields.map((_, i) => emailRegex.test(getValues(`emails.${i}.email`))).includes(true)
             if (validEmail) {
-                setIsInvitationDisabled(false);
+                setIsInvitationDisabled(false)
             } else {
-                setIsInvitationDisabled(true);
+                setIsInvitationDisabled(true)
             }
 
             if (getValues(`emails.${index}.role_active`)) {
-                setValue(`emails.${index}.role_active`, false);
+                setValue(`emails.${index}.role_active`, false)
             }
         } else {
             if (!getValues(`emails.${index}.role_active`)) {
-                setValue(`emails.${index}.role_active`, true);
+                setValue(`emails.${index}.role_active`, true)
             }
             if (isInvitationDisabled && emailRegex.test(event.target.value)) {
-                setIsInvitationDisabled(false);
+                setIsInvitationDisabled(false)
             } else if (!isInvitationDisabled && !emailRegex.test(event.target.value)) {
-                setIsInvitationDisabled(true);
+                setIsInvitationDisabled(true)
             }
         }
-    };
+    }
 
     return (
         <div>
@@ -150,8 +142,8 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                                 type="text"
                                 value={value}
                                 onChange={(event) => {
-                                    emailOnChange(event);
-                                    onChange(event);
+                                    emailOnChange(event)
+                                    onChange(event)
                                 }}
                                 ref={ref}
                                 hasError={Boolean(errors.emails?.[index]?.email)}
@@ -171,9 +163,9 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                                 as="div"
                                 value={value}
                                 onChange={(val) => {
-                                    onChange(val);
-                                    setIsDropdownOpen(false);
-                                    setValue(`emails.${index}.role_active`, true);
+                                    onChange(val)
+                                    setIsDropdownOpen(false)
+                                    setValue(`emails.${index}.role_active`, true)
                                 }}
                                 className="w-full flex-shrink-0 text-left"
                             >
@@ -259,17 +251,17 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
 export const InviteMembers: React.FC<Props> = (props) => {
-    const { finishOnboarding, stepChange, workspace } = props;
+    const { finishOnboarding, stepChange, workspace } = props
 
-    const [isInvitationDisabled, setIsInvitationDisabled] = useState(true);
+    const [isInvitationDisabled, setIsInvitationDisabled] = useState(true)
 
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { captureEvent } = useEventTracker();
+    const { captureEvent } = useEventTracker()
 
     const {
         control,
@@ -278,27 +270,27 @@ export const InviteMembers: React.FC<Props> = (props) => {
         setValue,
         handleSubmit,
         formState: { isSubmitting, errors, isValid },
-    } = useForm<FormValues>();
+    } = useForm<FormValues>()
 
     const { fields, append, remove } = useFieldArray({
         control,
         name: "emails",
-    });
+    })
 
     const nextStep = async () => {
         const payload: Partial<TOnboardingSteps> = {
             workspace_invite: true,
-        };
+        }
 
-        await stepChange(payload);
-        await finishOnboarding();
-    };
+        await stepChange(payload)
+        await finishOnboarding()
+    }
 
     const onSubmit = async (formData: FormValues) => {
-        if (!workspace) return;
+        if (!workspace) return
 
-        let payload = { ...formData };
-        payload = { emails: payload.emails.filter((email) => email.email !== "") };
+        let payload = { ...formData }
+        payload = { emails: payload.emails.filter((email) => email.email !== "") }
 
         await workspaceService
             .inviteWorkspace(workspace.slug, {
@@ -318,32 +310,32 @@ export const InviteMembers: React.FC<Props> = (props) => {
                     project_id: undefined,
                     state: "SUCCESS",
                     element: "Onboarding",
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "Invitations sent successfully.",
-                });
+                })
 
-                await nextStep();
+                await nextStep()
             })
             .catch((err) => {
                 captureEvent(MEMBER_INVITED, {
                     project_id: undefined,
                     state: "FAILED",
                     element: "Onboarding",
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: err?.error,
-                });
-            });
-    };
+                })
+            })
+    }
 
     const appendField = () => {
-        append({ email: "", role: 15, role_active: false });
-    };
+        append({ email: "", role: 15, role_active: false })
+    }
 
     useEffect(() => {
         if (fields.length === 0) {
@@ -356,9 +348,9 @@ export const InviteMembers: React.FC<Props> = (props) => {
                 {
                     focusIndex: 0,
                 }
-            );
+            )
         }
-    }, [fields, append]);
+    }, [fields, append])
 
     return (
         <div className="flex w-full py-14 ">
@@ -410,7 +402,7 @@ export const InviteMembers: React.FC<Props> = (props) => {
                     className="mx-auto ml-auto w-full space-y-7 px-7 sm:space-y-10 lg:w-5/6 lg:px-0"
                     onSubmit={handleSubmit(onSubmit)}
                     onKeyDown={(e) => {
-                        if (e.code === "Enter") e.preventDefault();
+                        if (e.code === "Enter") e.preventDefault()
                     }}
                 >
                     <div className="flex items-center justify-between">
@@ -467,5 +459,5 @@ export const InviteMembers: React.FC<Props> = (props) => {
                 </form>
             </div>
         </div>
-    );
-};
+    )
+}

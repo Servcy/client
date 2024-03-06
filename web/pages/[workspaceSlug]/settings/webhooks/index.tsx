@@ -1,59 +1,53 @@
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import useSWR from "swr";
-
-import { useUser, useWebhook, useWorkspace } from "@hooks/store";
-
-import { AppLayout } from "@layouts/app-layout";
-import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-import { WorkspaceSettingHeader } from "@components/headers";
-import { CreateWebhookModal, WebhooksList } from "@components/web-hooks";
-
-import { WebhookSettingsLoader } from "@components/ui";
-import { Button } from "@servcy/ui";
-
-import { NextPageWithLayout } from "@/types/types";
-
-import { PageHead } from "@components/core";
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
+import { PageHead } from "@components/core"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { WorkspaceSettingHeader } from "@components/headers"
+import { WebhookSettingsLoader } from "@components/ui"
+import { CreateWebhookModal, WebhooksList } from "@components/web-hooks"
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { useUser, useWebhook, useWorkspace } from "@hooks/store"
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+import { Button } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const WebhooksListPage: NextPageWithLayout = observer(() => {
     // states
-    const [showCreateWebhookModal, setShowCreateWebhookModal] = useState(false);
+    const [showCreateWebhookModal, setShowCreateWebhookModal] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // mobx store
     const {
         membership: { currentWorkspaceRole },
         currentUser,
-    } = useUser();
-    const { fetchWebhooks, webhooks, clearSecretKey, webhookSecretKey, createWebhook } = useWebhook();
-    const { currentWorkspace } = useWorkspace();
+    } = useUser()
+    const { fetchWebhooks, webhooks, clearSecretKey, webhookSecretKey, createWebhook } = useWebhook()
+    const { currentWorkspace } = useWorkspace()
 
-    const isAdmin = currentWorkspaceRole === 20;
+    const isAdmin = currentWorkspaceRole === 20
 
     useSWR(
         workspaceSlug && isAdmin ? `WEBHOOKS_LIST_${workspaceSlug}` : null,
         workspaceSlug && isAdmin ? () => fetchWebhooks(workspaceSlug.toString()) : null
-    );
+    )
 
-    const emptyStateDetail = WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS["webhooks"];
+    const emptyStateDetail = WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS["webhooks"]
 
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("workspace-settings", "webhooks", isLightMode);
-    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Webhooks` : undefined;
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("workspace-settings", "webhooks", isLightMode)
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Webhooks` : undefined
 
     // clear secret key when modal is closed.
     useEffect(() => {
-        if (!showCreateWebhookModal && webhookSecretKey) clearSecretKey();
-    }, [showCreateWebhookModal, webhookSecretKey, clearSecretKey]);
+        if (!showCreateWebhookModal && webhookSecretKey) clearSecretKey()
+    }, [showCreateWebhookModal, webhookSecretKey, clearSecretKey])
 
     if (!isAdmin)
         return (
@@ -63,9 +57,9 @@ const WebhooksListPage: NextPageWithLayout = observer(() => {
                     <p className="text-sm text-custom-text-300">You are not authorized to access this page.</p>
                 </div>
             </>
-        );
+        )
 
-    if (!webhooks) return <WebhookSettingsLoader />;
+    if (!webhooks) return <WebhookSettingsLoader />
 
     return (
         <>
@@ -77,7 +71,7 @@ const WebhooksListPage: NextPageWithLayout = observer(() => {
                     currentWorkspace={currentWorkspace}
                     isOpen={showCreateWebhookModal}
                     onClose={() => {
-                        setShowCreateWebhookModal(false);
+                        setShowCreateWebhookModal(false)
                     }}
                 />
                 {Object.keys(webhooks).length > 0 ? (
@@ -110,15 +104,15 @@ const WebhooksListPage: NextPageWithLayout = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})
 
 WebhooksListPage.getWrapper = function getWrapper(page: React.ReactElement) {
     return (
         <AppLayout header={<WorkspaceSettingHeader title="Webhook settings" />}>
             <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
         </AppLayout>
-    );
-};
+    )
+}
 
-export default WebhooksListPage;
+export default WebhooksListPage

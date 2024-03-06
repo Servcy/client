@@ -1,46 +1,43 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
+import { useRouter } from "next/router"
+import React from "react"
+import { WorkspaceViewForm } from "@components/workspace"
+import { GLOBAL_VIEW_CREATED, GLOBAL_VIEW_UPDATED } from "@constants/event-tracker"
+import { Dialog, Transition } from "@headlessui/react"
 // store hooks
-import { useEventTracker, useGlobalView } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { WorkspaceViewForm } from "@components/workspace";
-
-import { IWorkspaceView } from "@servcy/types";
-
-import { GLOBAL_VIEW_CREATED, GLOBAL_VIEW_UPDATED } from "@constants/event-tracker";
+import { useEventTracker, useGlobalView } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IWorkspaceView } from "@servcy/types"
 
 type Props = {
-    data?: IWorkspaceView;
-    isOpen: boolean;
-    onClose: () => void;
-    preLoadedData?: Partial<IWorkspaceView>;
-};
+    data?: IWorkspaceView
+    isOpen: boolean
+    onClose: () => void
+    preLoadedData?: Partial<IWorkspaceView>
+}
 
 export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) => {
-    const { isOpen, onClose, data, preLoadedData } = props;
+    const { isOpen, onClose, data, preLoadedData } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug } = router.query;
+    const router = useRouter()
+    const { workspaceSlug } = router.query
     // store hooks
-    const { createGlobalView, updateGlobalView } = useGlobalView();
-    const { captureEvent } = useEventTracker();
+    const { createGlobalView, updateGlobalView } = useGlobalView()
+    const { captureEvent } = useEventTracker()
 
     const handleClose = () => {
-        onClose();
-    };
+        onClose()
+    }
 
     const handleCreateView = async (payload: Partial<IWorkspaceView>) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         const payloadData: Partial<IWorkspaceView> = {
             ...payload,
             filters: {
                 ...payload?.filters,
             },
-        };
+        }
 
         await createGlobalView(workspaceSlug.toString(), payloadData)
             .then((res) => {
@@ -48,38 +45,38 @@ export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) 
                     view_id: res.id,
                     applied_filters: res.filters,
                     state: "SUCCESS",
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "View created successfully.",
-                });
+                })
 
-                router.push(`/${workspaceSlug}/workspace-views/${res.id}`);
-                handleClose();
+                router.push(`/${workspaceSlug}/workspace-views/${res.id}`)
+                handleClose()
             })
             .catch(() => {
                 captureEvent(GLOBAL_VIEW_CREATED, {
                     applied_filters: payload?.filters,
                     state: "FAILED",
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "View could not be created. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleUpdateView = async (payload: Partial<IWorkspaceView>) => {
-        if (!workspaceSlug || !data) return;
+        if (!workspaceSlug || !data) return
 
         const payloadData: Partial<IWorkspaceView> = {
             ...payload,
             query: {
                 ...payload?.filters,
             },
-        };
+        }
 
         await updateGlobalView(workspaceSlug.toString(), data.id, payloadData)
             .then((res) => {
@@ -87,34 +84,34 @@ export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) 
                     view_id: res.id,
                     applied_filters: res.filters,
                     state: "SUCCESS",
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "View updated successfully.",
-                });
-                handleClose();
+                })
+                handleClose()
             })
             .catch(() => {
                 captureEvent(GLOBAL_VIEW_UPDATED, {
                     view_id: data.id,
                     applied_filters: data.filters,
                     state: "FAILED",
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: "View could not be updated. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
 
     const handleFormSubmit = async (formData: Partial<IWorkspaceView>) => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
-        if (!data) await handleCreateView(formData);
-        else await handleUpdateView(formData);
-    };
+        if (!data) await handleCreateView(formData)
+        else await handleUpdateView(formData)
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -155,5 +152,5 @@ export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) 
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

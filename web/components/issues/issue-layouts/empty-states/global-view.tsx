@@ -1,20 +1,17 @@
-import { observer } from "mobx-react-lite";
-import { Plus, PlusIcon } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject } from "@hooks/store";
-
-import { EmptyState } from "@components/common";
-
-import emptyIssue from "public/empty-state/issue.svg";
-import emptyProject from "public/empty-state/project.svg";
+import { EmptyState } from "@components/common"
+import { useApplication, useEventTracker, useProject } from "@hooks/store"
+import { Plus, PlusIcon } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import emptyIssue from "public/empty-state/issue.svg"
+import emptyProject from "public/empty-state/project.svg"
 
 export const GlobalViewEmptyState: React.FC = observer(() => {
     // store hooks
     const {
         commandPalette: { toggleCreateIssueModal, toggleCreateProjectModal },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
-    const { workspaceProjectIds } = useProject();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
+    const { workspaceProjectIds } = useProject()
 
     return (
         <div className="grid h-full w-full place-items-center">
@@ -27,8 +24,8 @@ export const GlobalViewEmptyState: React.FC = observer(() => {
                         icon: <Plus className="h-4 w-4" />,
                         text: "New Project",
                         onClick: () => {
-                            setTrackElement("All issues empty state");
-                            toggleCreateProjectModal(true);
+                            setTrackElement("All issues empty state")
+                            toggleCreateProjectModal(true)
                         },
                     }}
                 />
@@ -41,12 +38,12 @@ export const GlobalViewEmptyState: React.FC = observer(() => {
                         text: "New issue",
                         icon: <PlusIcon className="h-3 w-3" strokeWidth={2} />,
                         onClick: () => {
-                            setTrackElement("All issues empty state");
-                            toggleCreateIssueModal(true);
+                            setTrackElement("All issues empty state")
+                            toggleCreateIssueModal(true)
                         },
                     }}
                 />
             )}
         </div>
-    );
-});
+    )
+})

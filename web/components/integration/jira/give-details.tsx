@@ -1,27 +1,23 @@
-import React from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { useFormContext, Controller } from "react-hook-form";
-import { Plus } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject } from "@hooks/store";
-
-import { CustomSelect, Input } from "@servcy/ui";
-
-import { checkEmailValidity } from "@helpers/string.helper";
-
-import { IJiraImporterForm } from "@servcy/types";
+import Link from "next/link"
+import React from "react"
+import { checkEmailValidity } from "@helpers/string.helper"
+import { useApplication, useEventTracker, useProject } from "@hooks/store"
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useFormContext } from "react-hook-form"
+import { IJiraImporterForm } from "@servcy/types"
+import { CustomSelect, Input } from "@servcy/ui"
 
 export const JiraGetImportDetail: React.FC = observer(() => {
     // store hooks
-    const { commandPalette: commandPaletteStore } = useApplication();
-    const { setTrackElement } = useEventTracker();
-    const { workspaceProjectIds, getProjectById } = useProject();
+    const { commandPalette: commandPaletteStore } = useApplication()
+    const { setTrackElement } = useEventTracker()
+    const { workspaceProjectIds, getProjectById } = useProject()
     // form info
     const {
         control,
         formState: { errors },
-    } = useFormContext<IJiraImporterForm>();
+    } = useFormContext<IJiraImporterForm>()
 
     return (
         <div className="h-full w-full space-y-8 overflow-y-auto">
@@ -188,15 +184,15 @@ export const JiraGetImportDetail: React.FC = observer(() => {
                             >
                                 {workspaceProjectIds && workspaceProjectIds.length > 0 ? (
                                     workspaceProjectIds.map((projectId) => {
-                                        const projectDetails = getProjectById(projectId);
+                                        const projectDetails = getProjectById(projectId)
 
-                                        if (!projectDetails) return;
+                                        if (!projectDetails) return
 
                                         return (
                                             <CustomSelect.Option key={projectId} value={projectId}>
                                                 {projectDetails.name}
                                             </CustomSelect.Option>
-                                        );
+                                        )
                                     })
                                 ) : (
                                     <div className="flex cursor-pointer select-none items-center space-x-2 truncate rounded px-1 py-1.5 text-custom-text-200">
@@ -207,8 +203,8 @@ export const JiraGetImportDetail: React.FC = observer(() => {
                                     <button
                                         type="button"
                                         onClick={() => {
-                                            setTrackElement("Jira import detail page");
-                                            commandPaletteStore.toggleCreateProjectModal(true);
+                                            setTrackElement("Jira import detail page")
+                                            commandPaletteStore.toggleCreateProjectModal(true)
                                         }}
                                         className="flex cursor-pointer select-none items-center space-x-2 truncate rounded px-1 py-1.5 text-custom-text-200"
                                     >
@@ -222,5 +218,5 @@ export const JiraGetImportDetail: React.FC = observer(() => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})

@@ -1,25 +1,21 @@
-import { observer } from "mobx-react-lite";
-import { Search, Plus, Briefcase } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-
-import { Breadcrumbs, Button } from "@servcy/ui";
-
-import { EUserWorkspaceRoles } from "@constants/workspace";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import { Briefcase, Plus, Search } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Breadcrumbs, Button } from "@servcy/ui"
 
 export const ProjectsHeader = observer(() => {
     // store hooks
-    const { commandPalette: commandPaletteStore } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    const { commandPalette: commandPaletteStore } = useApplication()
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { workspaceProjectIds, searchQuery, setSearchQuery } = useProject();
+    } = useUser()
+    const { workspaceProjectIds, searchQuery, setSearchQuery } = useProject()
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -56,8 +52,8 @@ export const ProjectsHeader = observer(() => {
                         prependIcon={<Plus />}
                         size="sm"
                         onClick={() => {
-                            setTrackElement("Projects page");
-                            commandPaletteStore.toggleCreateProjectModal(true);
+                            setTrackElement("Projects page")
+                            commandPaletteStore.toggleCreateProjectModal(true)
                         }}
                         className="items-center"
                     >
@@ -66,5 +62,5 @@ export const ProjectsHeader = observer(() => {
                 )}
             </div>
         </div>
-    );
-});
+    )
+})

@@ -1,44 +1,41 @@
-import { useState, Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-
-import { useProject } from "@hooks/store";
-import { useIssues } from "@hooks/store/use-issues";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import { TIssue } from "@servcy/types";
+import { Fragment, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProject } from "@hooks/store"
+import { useIssues } from "@hooks/store/use-issues"
+import toast from "react-hot-toast"
+import { TIssue } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    data?: TIssue;
-    dataId?: string | null | undefined;
-    handleClose: () => void;
-    isOpen: boolean;
-    onSubmit?: () => Promise<void>;
-};
+    data?: TIssue
+    dataId?: string | null | undefined
+    handleClose: () => void
+    isOpen: boolean
+    onSubmit?: () => Promise<void>
+}
 
 export const ArchiveIssueModal: React.FC<Props> = (props) => {
-    const { dataId, data, isOpen, handleClose, onSubmit } = props;
+    const { dataId, data, isOpen, handleClose, onSubmit } = props
     // states
-    const [isArchiving, setIsArchiving] = useState(false);
+    const [isArchiving, setIsArchiving] = useState(false)
     // store hooks
-    const { getProjectById } = useProject();
-    const { issueMap } = useIssues();
+    const { getProjectById } = useProject()
+    const { issueMap } = useIssues()
 
-    if (!dataId && !data) return null;
+    if (!dataId && !data) return null
 
-    const issue = data ? data : issueMap[dataId!];
-    const projectDetails = getProjectById(issue.project_id);
+    const issue = data ? data : issueMap[dataId!]
+    const projectDetails = getProjectById(issue.project_id)
 
     const onClose = () => {
-        setIsArchiving(false);
-        handleClose();
-    };
+        setIsArchiving(false)
+        handleClose()
+    }
 
     const handleArchiveIssue = async () => {
-        if (!onSubmit) return;
+        if (!onSubmit) return
 
-        setIsArchiving(true);
+        setIsArchiving(true)
         await onSubmit()
             .then(() => onClose())
             .catch(() =>
@@ -48,8 +45,8 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
                     message: "Issue could not be archived. Please try again.",
                 })
             )
-            .finally(() => setIsArchiving(false));
-    };
+            .finally(() => setIsArchiving(false))
+    }
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -106,5 +103,5 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

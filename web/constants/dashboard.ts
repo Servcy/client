@@ -1,19 +1,15 @@
-import { linearGradientDef } from "@nivo/core";
-
-import CompletedIssuesDark from "public/empty-state/dashboard/dark/completed-issues.svg";
-import OverdueIssuesDark from "public/empty-state/dashboard/dark/overdue-issues.svg";
-import UpcomingIssuesDark from "public/empty-state/dashboard/dark/upcoming-issues.svg";
-import CompletedIssuesLight from "public/empty-state/dashboard/light/completed-issues.svg";
-import OverdueIssuesLight from "public/empty-state/dashboard/light/overdue-issues.svg";
-import UpcomingIssuesLight from "public/empty-state/dashboard/light/upcoming-issues.svg";
-
-import { TDurationFilterOptions, TIssuesListTypes, TStateGroups } from "@servcy/types";
-import { Props } from "@components/icons/types";
-
-import { EUserWorkspaceRoles } from "./workspace";
-
-import { ContrastIcon } from "@servcy/ui";
-import { BarChart2, Briefcase, CheckCircle, LayoutGrid } from "lucide-react";
+import { Props } from "@components/icons/types"
+import { linearGradientDef } from "@nivo/core"
+import { BarChart2, Briefcase, CheckCircle, LayoutGrid } from "lucide-react"
+import CompletedIssuesDark from "public/empty-state/dashboard/dark/completed-issues.svg"
+import OverdueIssuesDark from "public/empty-state/dashboard/dark/overdue-issues.svg"
+import UpcomingIssuesDark from "public/empty-state/dashboard/dark/upcoming-issues.svg"
+import CompletedIssuesLight from "public/empty-state/dashboard/light/completed-issues.svg"
+import OverdueIssuesLight from "public/empty-state/dashboard/light/overdue-issues.svg"
+import UpcomingIssuesLight from "public/empty-state/dashboard/light/upcoming-issues.svg"
+import { TDurationFilterOptions, TIssuesListTypes, TStateGroups } from "@servcy/types"
+import { ContrastIcon } from "@servcy/ui"
+import { EUserWorkspaceRoles } from "./workspace"
 
 // gradients for issues by priority widget graph bars
 export const PRIORITY_GRAPH_GRADIENTS = [
@@ -82,7 +78,7 @@ export const PRIORITY_GRAPH_GRADIENTS = [
             y2: 0,
         }
     ),
-];
+]
 
 // colors for issues by state group widget graph arcs
 export const STATE_GROUP_GRAPH_GRADIENTS = [
@@ -106,7 +102,7 @@ export const STATE_GROUP_GRAPH_GRADIENTS = [
         { offset: 0, color: "#C90004" },
         { offset: 100, color: "#FF7679" },
     ]),
-];
+]
 
 export const STATE_GROUP_GRAPH_COLORS: Record<TStateGroups, string> = {
     backlog: "#CDCED6",
@@ -114,12 +110,12 @@ export const STATE_GROUP_GRAPH_COLORS: Record<TStateGroups, string> = {
     started: "#FFC53D",
     completed: "#3E9B4F",
     cancelled: "#E5484D",
-};
+}
 
 // filter duration options
 export const DURATION_FILTER_OPTIONS: {
-    key: TDurationFilterOptions;
-    label: string;
+    key: TDurationFilterOptions
+    label: string
 }[] = [
     {
         key: "none",
@@ -141,7 +137,7 @@ export const DURATION_FILTER_OPTIONS: {
         key: "this_year",
         label: "Due this year",
     },
-];
+]
 
 // random background colors for project cards
 export const PROJECT_BACKGROUND_COLORS = [
@@ -153,12 +149,12 @@ export const PROJECT_BACKGROUND_COLORS = [
     "bg-yellow-500/20",
     "bg-pink-500/20",
     "bg-purple-500/20",
-];
+]
 
 // assigned and created issues widgets tabs list
 export const FILTERED_ISSUES_TABS_LIST: {
-    key: TIssuesListTypes;
-    label: string;
+    key: TIssuesListTypes
+    label: string
 }[] = [
     {
         key: "upcoming",
@@ -172,12 +168,12 @@ export const FILTERED_ISSUES_TABS_LIST: {
         key: "completed",
         label: "Marked completed",
     },
-];
+]
 
 // assigned and created issues widgets tabs list
 export const UNFILTERED_ISSUES_TABS_LIST: {
-    key: TIssuesListTypes;
-    label: string;
+    key: TIssuesListTypes
+    label: string
 }[] = [
     {
         key: "pending",
@@ -187,7 +183,7 @@ export const UNFILTERED_ISSUES_TABS_LIST: {
         key: "completed",
         label: "Marked completed",
     },
-];
+]
 
 export const ASSIGNED_ISSUES_EMPTY_STATES = {
     pending: {
@@ -210,7 +206,7 @@ export const ASSIGNED_ISSUES_EMPTY_STATES = {
         darkImage: CompletedIssuesDark,
         lightImage: CompletedIssuesLight,
     },
-};
+}
 
 export const CREATED_ISSUES_EMPTY_STATES = {
     pending: {
@@ -233,15 +229,15 @@ export const CREATED_ISSUES_EMPTY_STATES = {
         darkImage: CompletedIssuesDark,
         lightImage: CompletedIssuesLight,
     },
-};
+}
 
 export const SIDEBAR_MENU_ITEMS: {
-    key: string;
-    label: string;
-    href: string;
-    access: EUserWorkspaceRoles;
-    highlight: (pathname: string, baseUrl: string) => boolean;
-    Icon: React.FC<Props>;
+    key: string
+    label: string
+    href: string
+    access: EUserWorkspaceRoles
+    highlight: (pathname: string, baseUrl: string) => boolean
+    Icon: React.FC<Props>
 }[] = [
     {
         key: "dashboard",
@@ -283,4 +279,4 @@ export const SIDEBAR_MENU_ITEMS: {
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/active-cycles`,
         Icon: ContrastIcon,
     },
-];
+]

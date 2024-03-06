@@ -1,18 +1,16 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
-
-import { CreateIcon, LayerStackIcon, Loader } from "@servcy/ui";
-import { UserCircle2 } from "lucide-react";
-
-import { IUserProfileData } from "@servcy/types";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { UserCircle2 } from "lucide-react"
+import { IUserProfileData } from "@servcy/types"
+import { CreateIcon, LayerStackIcon, Loader } from "@servcy/ui"
 
 type Props = {
-    userProfile: IUserProfileData | undefined;
-};
+    userProfile: IUserProfileData | undefined
+}
 
 export const ProfileStats: React.FC<Props> = ({ userProfile }) => {
-    const router = useRouter();
-    const { workspaceSlug, userId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, userId } = router.query
 
     const overviewCards = [
         {
@@ -33,7 +31,7 @@ export const ProfileStats: React.FC<Props> = ({ userProfile }) => {
             title: "Issues subscribed",
             value: userProfile?.subscribed_issues ?? "...",
         },
-    ];
+    ]
 
     return (
         <div className="space-y-2">
@@ -62,5 +60,5 @@ export const ProfileStats: React.FC<Props> = ({ userProfile }) => {
                 </Loader>
             )}
         </div>
-    );
-};
+    )
+}

@@ -1,15 +1,12 @@
-import React, { useRef, useState } from "react";
-import Link from "next/link";
-import { Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-
-import { useApplication } from "@hooks/store";
-import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-
-import { HelpCircle, MessagesSquare, MoveLeft, Zap } from "lucide-react";
-import { Tooltip } from "@servcy/ui";
-
-import packageJson from "package.json";
+import Link from "next/link"
+import React, { useRef, useState } from "react"
+import { Transition } from "@headlessui/react"
+import { useApplication } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import { HelpCircle, MessagesSquare, MoveLeft, Zap } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import packageJson from "package.json"
+import { Tooltip } from "@servcy/ui"
 
 const helpOptions = [
     {
@@ -18,10 +15,10 @@ const helpOptions = [
         onClick: () => (window as any).$crisp.push(["do", "chat:show"]),
         Icon: MessagesSquare,
     },
-];
+]
 
 export interface WorkspaceHelpSectionProps {
-    setSidebarActive?: React.Dispatch<React.SetStateAction<boolean>>;
+    setSidebarActive?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observer(() => {
@@ -29,16 +26,16 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
     const {
         theme: { sidebarCollapsed, toggleSidebar },
         commandPalette: { toggleShortcutModal },
-    } = useApplication();
+    } = useApplication()
 
     // states
-    const [isNeedHelpOpen, setIsNeedHelpOpen] = useState(false);
+    const [isNeedHelpOpen, setIsNeedHelpOpen] = useState(false)
     // refs
-    const helpOptionsRef = useRef<HTMLDivElement | null>(null);
+    const helpOptionsRef = useRef<HTMLDivElement | null>(null)
 
-    useOutsideClickDetector(helpOptionsRef, () => setIsNeedHelpOpen(false));
+    useOutsideClickDetector(helpOptionsRef, () => setIsNeedHelpOpen(false))
 
-    const isCollapsed = sidebarCollapsed || false;
+    const isCollapsed = sidebarCollapsed || false
 
     return (
         <>
@@ -127,7 +124,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                                                     <span className="text-xs">{name}</span>
                                                 </span>
                                             </Link>
-                                        );
+                                        )
                                     else
                                         return (
                                             <button
@@ -141,7 +138,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                                                 </div>
                                                 <span className="text-xs">{name}</span>
                                             </button>
-                                        );
+                                        )
                                 })}
                             </div>
                             <div className="px-2 pb-1 pt-2 text-[10px]">Version: v{packageJson.version}</div>
@@ -150,5 +147,5 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

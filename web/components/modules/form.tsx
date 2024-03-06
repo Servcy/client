@@ -1,23 +1,19 @@
-import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
-
-import { ModuleStatusSelect } from "@components/modules";
-import { DateRangeDropdown, ProjectDropdown, MemberDropdown } from "@components/dropdowns";
-
-import { Button, Input, TextArea } from "@servcy/ui";
-
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-
-import { IModule } from "@servcy/types";
+import { useEffect } from "react"
+import { DateRangeDropdown, MemberDropdown, ProjectDropdown } from "@components/dropdowns"
+import { ModuleStatusSelect } from "@components/modules"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { Controller, useForm } from "react-hook-form"
+import { IModule } from "@servcy/types"
+import { Button, Input, TextArea } from "@servcy/ui"
 
 type Props = {
-    handleFormSubmit: (values: Partial<IModule>, dirtyFields: any) => Promise<void>;
-    handleClose: () => void;
-    status: boolean;
-    projectId: string;
-    setActiveProject: React.Dispatch<React.SetStateAction<string | null>>;
-    data?: IModule;
-};
+    handleFormSubmit: (values: Partial<IModule>, dirtyFields: any) => Promise<void>
+    handleClose: () => void
+    status: boolean
+    projectId: string
+    setActiveProject: React.Dispatch<React.SetStateAction<string | null>>
+    data?: IModule
+}
 
 const defaultValues: Partial<IModule> = {
     name: "",
@@ -25,10 +21,10 @@ const defaultValues: Partial<IModule> = {
     status: "backlog",
     lead_id: null,
     member_ids: [],
-};
+}
 
 export const ModuleForm: React.FC<Props> = (props) => {
-    const { handleFormSubmit, handleClose, status, projectId, setActiveProject, data } = props;
+    const { handleFormSubmit, handleClose, status, projectId, setActiveProject, data } = props
     // form info
     const {
         formState: { errors, isSubmitting, dirtyFields },
@@ -44,22 +40,22 @@ export const ModuleForm: React.FC<Props> = (props) => {
             lead_id: data?.lead_id || null,
             member_ids: data?.member_ids || [],
         },
-    });
+    })
 
     const handleCreateUpdateModule = async (formData: Partial<IModule>) => {
-        await handleFormSubmit(formData, dirtyFields);
+        await handleFormSubmit(formData, dirtyFields)
 
         reset({
             ...defaultValues,
-        });
-    };
+        })
+    }
 
     useEffect(() => {
         reset({
             ...defaultValues,
             ...data,
-        });
-    }, [data, reset]);
+        })
+    }, [data, reset])
 
     return (
         <form onSubmit={handleSubmit(handleCreateUpdateModule)}>
@@ -74,8 +70,8 @@ export const ModuleForm: React.FC<Props> = (props) => {
                                     <ProjectDropdown
                                         value={value}
                                         onChange={(val) => {
-                                            onChange(val);
-                                            setActiveProject(val);
+                                            onChange(val)
+                                            setActiveProject(val)
                                         }}
                                         buttonVariant="border-with-text"
                                         tabIndex={10}
@@ -155,8 +151,8 @@ export const ModuleForm: React.FC<Props> = (props) => {
                                             onSelect={(val) => {
                                                 onChangeStartDate(
                                                     val?.from ? renderFormattedPayloadDate(val.from) : null
-                                                );
-                                                onChangeEndDate(val?.to ? renderFormattedPayloadDate(val.to) : null);
+                                                )
+                                                onChangeEndDate(val?.to ? renderFormattedPayloadDate(val.to) : null)
                                             }}
                                             placeholder={{
                                                 from: "Start date",
@@ -229,5 +225,5 @@ export const ModuleForm: React.FC<Props> = (props) => {
                 </Button>
             </div>
         </form>
-    );
-};
+    )
+}

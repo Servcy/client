@@ -1,64 +1,59 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { CreateUpdateEstimateModal, DeleteEstimateModal, EstimateListItem } from "@components/estimates"
+import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { orderArrayBy } from "@helpers/array.helper"
 // store hooks
-import { useEstimate, useProject, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { CreateUpdateEstimateModal, DeleteEstimateModal, EstimateListItem } from "@components/estimates";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-
-import { Button, Loader } from "@servcy/ui";
-
-import { IEstimate } from "@servcy/types";
-
-import { orderArrayBy } from "@helpers/array.helper";
-
-import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { useEstimate, useProject, useUser } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import toast from "react-hot-toast"
+import { IEstimate } from "@servcy/types"
+import { Button, Loader } from "@servcy/ui"
 
 export const EstimatesList: React.FC = observer(() => {
     // states
-    const [estimateFormOpen, setEstimateFormOpen] = useState(false);
-    const [estimateToDelete, setEstimateToDelete] = useState<string | null>(null);
-    const [estimateToUpdate, setEstimateToUpdate] = useState<IEstimate | undefined>();
+    const [estimateFormOpen, setEstimateFormOpen] = useState(false)
+    const [estimateToDelete, setEstimateToDelete] = useState<string | null>(null)
+    const [estimateToUpdate, setEstimateToUpdate] = useState<IEstimate | undefined>()
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { updateProject, currentProjectDetails } = useProject();
-    const { projectEstimates, getProjectEstimateById } = useEstimate();
-    const { currentUser } = useUser();
+    const { updateProject, currentProjectDetails } = useProject()
+    const { projectEstimates, getProjectEstimateById } = useEstimate()
+    const { currentUser } = useUser()
 
     const editEstimate = (estimate: IEstimate) => {
-        setEstimateFormOpen(true);
+        setEstimateFormOpen(true)
         // Order the points array by key before updating the estimate to update state
         setEstimateToUpdate({
             ...estimate,
             points: orderArrayBy(estimate.points, "key"),
-        });
-    };
+        })
+    }
 
     const disableEstimates = () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
         updateProject(workspaceSlug.toString(), projectId.toString(), { estimate: null }).catch((err) => {
-            const error = err?.error;
-            const errorString = Array.isArray(error) ? error[0] : error;
+            const error = err?.error
+            const errorString = Array.isArray(error) ? error[0] : error
 
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: errorString ?? "Estimate could not be disabled. Please try again",
-            });
-        });
-    };
+            })
+        })
+    }
 
-    const emptyStateDetail = PROJECT_SETTINGS_EMPTY_STATE_DETAILS["estimate"];
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const emptyStateImage = getEmptyStateImagePath("project-settings", "estimates", isLightMode);
+    const emptyStateDetail = PROJECT_SETTINGS_EMPTY_STATE_DETAILS["estimate"]
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const emptyStateImage = getEmptyStateImagePath("project-settings", "estimates", isLightMode)
 
     return (
         <>
@@ -66,8 +61,8 @@ export const EstimatesList: React.FC = observer(() => {
                 isOpen={estimateFormOpen}
                 data={estimateToUpdate}
                 handleClose={() => {
-                    setEstimateFormOpen(false);
-                    setEstimateToUpdate(undefined);
+                    setEstimateFormOpen(false)
+                    setEstimateToUpdate(undefined)
                 }}
             />
 
@@ -84,8 +79,8 @@ export const EstimatesList: React.FC = observer(() => {
                         <Button
                             variant="primary"
                             onClick={() => {
-                                setEstimateFormOpen(true);
-                                setEstimateToUpdate(undefined);
+                                setEstimateFormOpen(true)
+                                setEstimateToUpdate(undefined)
                             }}
                             size="sm"
                         >
@@ -131,5 +126,5 @@ export const EstimatesList: React.FC = observer(() => {
                 </Loader>
             )}
         </>
-    );
-});
+    )
+})

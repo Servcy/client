@@ -1,61 +1,56 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
-import xor from "lodash/xor";
-
-import { useIssueDetail } from "@hooks/store";
-
-import { ModuleDropdown } from "@components/dropdowns";
-
-import { Spinner } from "@servcy/ui";
-
-import { cn } from "@helpers/common.helper";
-
-import type { TIssueOperations } from "./root";
+import React, { useState } from "react"
+import { ModuleDropdown } from "@components/dropdowns"
+import { cn } from "@helpers/common.helper"
+import { useIssueDetail } from "@hooks/store"
+import xor from "lodash/xor"
+import { observer } from "mobx-react-lite"
+import { Spinner } from "@servcy/ui"
+import type { TIssueOperations } from "./root"
 
 type TIssueModuleSelect = {
-    className?: string;
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    issueOperations: TIssueOperations;
-    disabled?: boolean;
-};
+    className?: string
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    issueOperations: TIssueOperations
+    disabled?: boolean
+}
 
 export const IssueModuleSelect: React.FC<TIssueModuleSelect> = observer((props) => {
-    const { className = "", workspaceSlug, projectId, issueId, issueOperations, disabled = false } = props;
+    const { className = "", workspaceSlug, projectId, issueId, issueOperations, disabled = false } = props
     // states
-    const [isUpdating, setIsUpdating] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false)
     // store hooks
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
     // derived values
-    const issue = getIssueById(issueId);
-    const disableSelect = disabled || isUpdating;
+    const issue = getIssueById(issueId)
+    const disableSelect = disabled || isUpdating
 
     const handleIssueModuleChange = async (moduleIds: string[]) => {
-        if (!issue || !issue.module_ids) return;
+        if (!issue || !issue.module_ids) return
 
-        setIsUpdating(true);
-        const updatedModuleIds = xor(issue.module_ids, moduleIds);
-        const modulesToAdd: string[] = [];
-        const modulesToRemove: string[] = [];
+        setIsUpdating(true)
+        const updatedModuleIds = xor(issue.module_ids, moduleIds)
+        const modulesToAdd: string[] = []
+        const modulesToRemove: string[] = []
 
         for (const moduleId of updatedModuleIds) {
             if (issue.module_ids.includes(moduleId)) {
-                modulesToRemove.push(moduleId);
+                modulesToRemove.push(moduleId)
             } else {
-                modulesToAdd.push(moduleId);
+                modulesToAdd.push(moduleId)
             }
         }
         if (modulesToRemove.length > 0)
-            await issueOperations.removeModulesFromIssue?.(workspaceSlug, projectId, issueId, modulesToRemove);
+            await issueOperations.removeModulesFromIssue?.(workspaceSlug, projectId, issueId, modulesToRemove)
 
         if (modulesToAdd.length > 0)
-            await issueOperations.addModulesToIssue?.(workspaceSlug, projectId, issueId, modulesToAdd);
+            await issueOperations.addModulesToIssue?.(workspaceSlug, projectId, issueId, modulesToAdd)
 
-        setIsUpdating(false);
-    };
+        setIsUpdating(false)
+    }
 
     return (
         <div className={cn(`flex items-center gap-1 h-full`, className)}>
@@ -77,5 +72,5 @@ export const IssueModuleSelect: React.FC<TIssueModuleSelect> = observer((props) 
             />
             {isUpdating && <Spinner className="h-4 w-4" />}
         </div>
-    );
-});
+    )
+})

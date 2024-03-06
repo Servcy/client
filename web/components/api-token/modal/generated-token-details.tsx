@@ -1,20 +1,17 @@
-import { Copy } from "lucide-react";
-import toast from "react-hot-toast";
-
-import { Button, Tooltip } from "@servcy/ui";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-import { copyTextToClipboard } from "@helpers/string.helper";
-
-import { IApiToken } from "@servcy/types";
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+import { Copy } from "lucide-react"
+import toast from "react-hot-toast"
+import { IApiToken } from "@servcy/types"
+import { Button, Tooltip } from "@servcy/ui"
 
 type Props = {
-    handleClose: () => void;
-    tokenDetails: IApiToken;
-};
+    handleClose: () => void
+    tokenDetails: IApiToken
+}
 
 export const GeneratedTokenDetails: React.FC<Props> = (props) => {
-    const { handleClose, tokenDetails } = props;
+    const { handleClose, tokenDetails } = props
 
     const copyApiToken = (token: string) => {
         copyTextToClipboard(token).then(() =>
@@ -23,8 +20,8 @@ export const GeneratedTokenDetails: React.FC<Props> = (props) => {
                 title: "Success!",
                 message: "Token copied to clipboard.",
             })
-        );
-    };
+        )
+    }
 
     return (
         <div>
@@ -56,5 +53,5 @@ export const GeneratedTokenDetails: React.FC<Props> = (props) => {
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}

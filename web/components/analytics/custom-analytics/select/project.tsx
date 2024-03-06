@@ -1,21 +1,19 @@
-import { observer } from "mobx-react-lite";
-
-import { useProject } from "@hooks/store";
-
-import { CustomSearchSelect } from "@servcy/ui";
+import { useProject } from "@hooks/store"
+import { observer } from "mobx-react-lite"
+import { CustomSearchSelect } from "@servcy/ui"
 
 type Props = {
-    value: string[] | undefined;
-    onChange: (val: string[] | null) => void;
-    projectIds: string[] | undefined;
-};
+    value: string[] | undefined
+    onChange: (val: string[] | null) => void
+    projectIds: string[] | undefined
+}
 
 export const SelectProject: React.FC<Props> = observer((props) => {
-    const { value, onChange, projectIds } = props;
-    const { getProjectById } = useProject();
+    const { value, onChange, projectIds } = props
+    const { getProjectById } = useProject()
 
     const options = projectIds?.map((projectId) => {
-        const projectDetails = getProjectById(projectId);
+        const projectDetails = getProjectById(projectId)
 
         return {
             value: projectDetails?.id,
@@ -28,8 +26,8 @@ export const SelectProject: React.FC<Props> = observer((props) => {
                     <span className="flex-grow truncate">{projectDetails?.name}</span>
                 </div>
             ),
-        };
-    });
+        }
+    })
 
     return (
         <CustomSearchSelect
@@ -46,5 +44,5 @@ export const SelectProject: React.FC<Props> = observer((props) => {
             }
             multiple
         />
-    );
-});
+    )
+})

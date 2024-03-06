@@ -1,47 +1,40 @@
-import { useEffect, useState, FC } from "react";
-import { observer } from "mobx-react-lite";
-import { Controller, useForm } from "react-hook-form";
-import { Disclosure, Transition } from "@headlessui/react";
-import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
-
-import { FileService } from "@services/file.service";
-
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { DeleteWorkspaceModal } from "@components/workspace";
-import { WorkspaceImageUploadModal } from "@components/core";
-
-import { Button, CustomSelect, Input, Spinner } from "@servcy/ui";
-
-import { copyUrlToClipboard } from "@helpers/string.helper";
-
-import { IWorkspace } from "@servcy/types";
-
-import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "@constants/workspace";
-import { WORKSPACE_UPDATED } from "@constants/event-tracker";
+import { FC, useEffect, useState } from "react"
+import { WorkspaceImageUploadModal } from "@components/core"
+import { DeleteWorkspaceModal } from "@components/workspace"
+import { WORKSPACE_UPDATED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "@constants/workspace"
+import { Disclosure, Transition } from "@headlessui/react"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+import { FileService } from "@services/file.service"
+import { ChevronDown, ChevronUp, Pencil } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IWorkspace } from "@servcy/types"
+import { Button, CustomSelect, Input, Spinner } from "@servcy/ui"
 
 const defaultValues: Partial<IWorkspace> = {
     name: "",
     url: "",
     organization_size: "2-10",
     logo: null,
-};
+}
 
-const fileService = new FileService();
+const fileService = new FileService()
 
 export const WorkspaceDetails: FC = observer(() => {
     // states
-    const [isLoading, setIsLoading] = useState(false);
-    const [deleteWorkspaceModal, setDeleteWorkspaceModal] = useState(false);
-    const [isImageRemoving, setIsImageRemoving] = useState(false);
-    const [isImageUploadModalOpen, setIsImageUploadModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
+    const [deleteWorkspaceModal, setDeleteWorkspaceModal] = useState(false)
+    const [isImageRemoving, setIsImageRemoving] = useState(false)
+    const [isImageUploadModalOpen, setIsImageUploadModalOpen] = useState(false)
     // store hooks
-    const { captureWorkspaceEvent } = useEventTracker();
+    const { captureWorkspaceEvent } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { currentWorkspace, updateWorkspace } = useWorkspace();
+    } = useUser()
+    const { currentWorkspace, updateWorkspace } = useWorkspace()
 
     // form info
     const {
@@ -52,18 +45,18 @@ export const WorkspaceDetails: FC = observer(() => {
         formState: { errors },
     } = useForm<IWorkspace>({
         defaultValues: { ...defaultValues, ...currentWorkspace },
-    });
+    })
 
     const onSubmit = async (formData: IWorkspace) => {
-        if (!currentWorkspace) return;
+        if (!currentWorkspace) return
 
-        setIsLoading(true);
+        setIsLoading(true)
 
         const payload: Partial<IWorkspace> = {
             logo: formData.logo,
             name: formData.name,
             organization_size: formData.organization_size,
-        };
+        }
 
         await updateWorkspace(currentWorkspace.slug, payload)
             .then((res) => {
@@ -74,12 +67,12 @@ export const WorkspaceDetails: FC = observer(() => {
                         state: "SUCCESS",
                         element: "Workspace general settings page",
                     },
-                });
+                })
                 toast.error({
                     title: "Success",
                     type: "success",
                     message: "Workspace updated successfully",
-                });
+                })
             })
             .catch((err) => {
                 captureWorkspaceEvent({
@@ -88,22 +81,22 @@ export const WorkspaceDetails: FC = observer(() => {
                         state: "FAILED",
                         element: "Workspace general settings page",
                     },
-                });
-                console.error(err);
-            });
+                })
+                console.error(err)
+            })
         setTimeout(() => {
-            setIsLoading(false);
-        }, 300);
-    };
+            setIsLoading(false)
+        }, 300)
+    }
 
     const handleRemoveLogo = () => {
-        if (!currentWorkspace) return;
+        if (!currentWorkspace) return
 
-        const url = currentWorkspace.logo;
+        const url = currentWorkspace.logo
 
-        if (!url) return;
+        if (!url) return
 
-        setIsImageRemoving(true);
+        setIsImageRemoving(true)
 
         fileService.deleteFile(currentWorkspace.id, url).then(() => {
             updateWorkspace(currentWorkspace.slug, { logo: "" })
@@ -112,43 +105,43 @@ export const WorkspaceDetails: FC = observer(() => {
                         type: "success",
                         title: "Success!",
                         message: "Workspace picture removed successfully.",
-                    });
-                    setIsImageUploadModalOpen(false);
+                    })
+                    setIsImageUploadModalOpen(false)
                 })
                 .catch(() => {
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: "There was some error in deleting your profile picture. Please try again.",
-                    });
+                    })
                 })
-                .finally(() => setIsImageRemoving(false));
-        });
-    };
+                .finally(() => setIsImageRemoving(false))
+        })
+    }
 
     const handleCopyUrl = () => {
-        if (!currentWorkspace) return;
+        if (!currentWorkspace) return
 
         copyUrlToClipboard(`${currentWorkspace.slug}`).then(() => {
             toast.error({
                 type: "success",
                 title: "Workspace URL copied to the clipboard.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     useEffect(() => {
-        if (currentWorkspace) reset({ ...currentWorkspace });
-    }, [currentWorkspace, reset]);
+        if (currentWorkspace) reset({ ...currentWorkspace })
+    }, [currentWorkspace, reset])
 
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN;
+    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
 
     if (!currentWorkspace)
         return (
             <div className="grid h-full w-full place-items-center px-4 sm:px-0">
                 <Spinner />
             </div>
-        );
+        )
 
     return (
         <>
@@ -167,9 +160,9 @@ export const WorkspaceDetails: FC = observer(() => {
                         isRemoving={isImageRemoving}
                         handleRemove={handleRemoveLogo}
                         onSuccess={(imageUrl) => {
-                            onChange(imageUrl);
-                            setIsImageUploadModalOpen(false);
-                            handleSubmit(onSubmit)();
+                            onChange(imageUrl)
+                            setIsImageUploadModalOpen(false)
+                            handleSubmit(onSubmit)()
                         }}
                         value={value}
                     />
@@ -352,5 +345,5 @@ export const WorkspaceDetails: FC = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

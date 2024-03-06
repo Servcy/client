@@ -1,19 +1,16 @@
-import * as DOMPurify from "dompurify";
-
-import { Button, Modal } from "antd";
-import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
-import { HiPaperClip } from "react-icons/hi";
-import AsanaNotification from "./AsanaNotification";
-import FigmaNotification from "./FigmaNotification";
-import GithubNotification from "./GithubNotification";
-import JiraNotification from "./JiraNotification";
-import NotionComment from "./NotionComment";
-import SlackMessage from "./SlackMessage";
-import TrelloNotification from "./TrelloNotification";
-
-import { Attachment, InboxItem } from "@/types/apps/inbox";
-
-import { downloadFile } from "@/utils/Shared/files";
+import { Button, Modal } from "antd"
+import * as DOMPurify from "dompurify"
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa"
+import { HiPaperClip } from "react-icons/hi"
+import { Attachment, InboxItem } from "@/types/apps/inbox"
+import { downloadFile } from "@/utils/Shared/files"
+import AsanaNotification from "./AsanaNotification"
+import FigmaNotification from "./FigmaNotification"
+import GithubNotification from "./GithubNotification"
+import JiraNotification from "./JiraNotification"
+import NotionComment from "./NotionComment"
+import SlackMessage from "./SlackMessage"
+import TrelloNotification from "./TrelloNotification"
 
 const InboxItemModal = ({
     selectedRow,
@@ -23,21 +20,21 @@ const InboxItemModal = ({
     totalInboxItems,
     readItem,
 }: {
-    selectedRow: InboxItem;
-    setIsInboxItemModalVisible: (value: boolean) => void;
-    selectedRowIndex: number;
-    setSelectedRowIndex: (value: number) => void;
-    totalInboxItems: number;
-    readItem: (id: string | undefined) => void;
+    selectedRow: InboxItem
+    setIsInboxItemModalVisible: (value: boolean) => void
+    selectedRowIndex: number
+    setSelectedRowIndex: (value: number) => void
+    totalInboxItems: number
+    readItem: (id: string | undefined) => void
 }) => {
-    let body = selectedRow.body;
+    let body = selectedRow.body
     if (selectedRow.source === "Gmail" && selectedRow.cause !== "None") {
-        body = Buffer.from(body, "base64").toString("utf8");
+        body = Buffer.from(body, "base64").toString("utf8")
     }
     if (selectedRow.is_body_html && selectedRow.cause !== "None") {
-        body = DOMPurify.sanitize(body);
+        body = DOMPurify.sanitize(body)
     }
-    if (selectedRow.source === "Gmail" && selectedRow.cause !== "None" && body.includes("�")) body = selectedRow.body;
+    if (selectedRow.source === "Gmail" && selectedRow.cause !== "None" && body.includes("�")) body = selectedRow.body
 
     return (
         <Modal
@@ -66,7 +63,7 @@ const InboxItemModal = ({
                                                 <button
                                                     key={attachment.name}
                                                     onClick={() => {
-                                                        downloadFile(attachment.name, attachment.data);
+                                                        downloadFile(attachment.name, attachment.data)
                                                     }}
                                                     className="mr-2 flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
                                                 >
@@ -116,8 +113,8 @@ const InboxItemModal = ({
                         <Button
                             className="mr-2 text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
                             onClick={() => {
-                                selectedRowIndex > 0 && setSelectedRowIndex(selectedRowIndex - 1);
-                                !selectedRow.is_read && readItem(selectedRow.id);
+                                selectedRowIndex > 0 && setSelectedRowIndex(selectedRowIndex - 1)
+                                !selectedRow.is_read && readItem(selectedRow.id)
                             }}
                             disabled={selectedRowIndex === 0}
                             shape="circle"
@@ -126,8 +123,8 @@ const InboxItemModal = ({
                         <Button
                             className="text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
                             onClick={() => {
-                                selectedRowIndex < totalInboxItems - 1 && setSelectedRowIndex(selectedRowIndex + 1);
-                                !selectedRow.is_read && readItem(selectedRow.id);
+                                selectedRowIndex < totalInboxItems - 1 && setSelectedRowIndex(selectedRowIndex + 1)
+                                !selectedRow.is_read && readItem(selectedRow.id)
                             }}
                             disabled={selectedRowIndex === totalInboxItems - 1}
                             icon={<FaAngleDoubleRight className="mt-1" />}
@@ -137,7 +134,7 @@ const InboxItemModal = ({
                 </div>
             </div>
         </Modal>
-    );
-};
+    )
+}
 
-export default InboxItemModal;
+export default InboxItemModal

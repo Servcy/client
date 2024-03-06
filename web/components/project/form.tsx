@@ -1,38 +1,32 @@
-import { FC, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { FC, useEffect, useState } from "react"
+import { ImagePickerPopover } from "@components/core"
+import EmojiIconPicker from "@components/emoji-icon-picker"
+import { PROJECT_UPDATED } from "@constants/event-tracker"
+import { NETWORK_CHOICES } from "@constants/project"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useEventTracker, useProject } from "@hooks/store"
+import { ProjectService } from "@services/project"
+import { Lock } from "lucide-react"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IProject, IWorkspace } from "@servcy/types"
+import { Button, CustomSelect, Input, TextArea } from "@servcy/ui"
 
-import { useEventTracker, useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import EmojiIconPicker from "@components/emoji-icon-picker";
-import { ImagePickerPopover } from "@components/core";
-import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
-
-import { Lock } from "lucide-react";
-
-import { IProject, IWorkspace } from "@servcy/types";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { NETWORK_CHOICES } from "@constants/project";
-
-import { ProjectService } from "@services/project";
-import { PROJECT_UPDATED } from "@constants/event-tracker";
 export interface IProjectDetailsForm {
-    project: IProject;
-    workspaceSlug: string;
-    projectId: string;
-    isAdmin: boolean;
+    project: IProject
+    workspaceSlug: string
+    projectId: string
+    isAdmin: boolean
 }
-const projectService = new ProjectService();
+const projectService = new ProjectService()
 export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
-    const { project, workspaceSlug, projectId, isAdmin } = props;
+    const { project, workspaceSlug, projectId, isAdmin } = props
     // states
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
     // store hooks
-    const { captureProjectEvent } = useEventTracker();
-    const { updateProject } = useProject();
+    const { captureProjectEvent } = useEventTracker()
+    const { updateProject } = useProject()
 
     // form info
     const {
@@ -50,7 +44,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
             emoji_and_icon: project.emoji ?? project.icon_prop,
             workspace: (project.workspace as IWorkspace).id,
         },
-    });
+    })
 
     useEffect(() => {
         if (project && projectId !== getValues("id")) {
@@ -58,21 +52,21 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                 ...project,
                 emoji_and_icon: project.emoji ?? project.icon_prop,
                 workspace: (project.workspace as IWorkspace).id,
-            });
+            })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [project, projectId]);
+    }, [project, projectId])
     const handleIdentifierChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-        const alphanumericValue = value.replace(/[^a-zA-Z0-9]/g, "");
-        const formattedValue = alphanumericValue.toUpperCase();
-        setValue("identifier", formattedValue);
-    };
+        const { value } = event.target
+        const alphanumericValue = value.replace(/[^a-zA-Z0-9]/g, "")
+        const formattedValue = alphanumericValue.toUpperCase()
+        setValue("identifier", formattedValue)
+    }
     const handleUpdateChange = async (payload: Partial<IProject>) => {
-        if (!workspaceSlug || !project) return;
+        if (!workspaceSlug || !project) return
         return updateProject(workspaceSlug.toString(), project.id, payload)
             .then((res) => {
-                const changed_properties = Object.keys(dirtyFields);
+                const changed_properties = Object.keys(dirtyFields)
 
                 captureProjectEvent({
                     eventName: PROJECT_UPDATED,
@@ -82,55 +76,55 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                         state: "SUCCESS",
                         element: "Project general settings",
                     },
-                });
+                })
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "Project updated successfully",
-                });
+                })
             })
             .catch((error) => {
                 captureProjectEvent({
                     eventName: PROJECT_UPDATED,
                     payload: { ...payload, state: "FAILED", element: "Project general settings" },
-                });
+                })
                 toast.error({
                     type: "error",
                     title: "Error!",
                     message: error?.error ?? "Project could not be updated. Please try again.",
-                });
-            });
-    };
+                })
+            })
+    }
     const onSubmit = async (formData: IProject) => {
-        if (!workspaceSlug) return;
-        setIsLoading(true);
+        if (!workspaceSlug) return
+        setIsLoading(true)
         const payload: Partial<IProject> = {
             name: formData.name,
             network: formData.network,
             identifier: formData.identifier,
             description: formData.description,
             cover_image: formData.cover_image,
-        };
+        }
         if (typeof formData.emoji_and_icon === "object") {
-            payload.emoji = null;
-            payload.icon_prop = formData.emoji_and_icon;
+            payload.emoji = null
+            payload.icon_prop = formData.emoji_and_icon
         } else {
-            payload.emoji = formData.emoji_and_icon;
-            payload.icon_prop = null;
+            payload.emoji = formData.emoji_and_icon
+            payload.icon_prop = null
         }
         if (project.identifier !== formData.identifier)
             await projectService
                 .checkProjectIdentifierAvailability(workspaceSlug as string, payload.identifier ?? "")
                 .then(async (res) => {
-                    if (res.exists) setError("identifier", { message: "Identifier already exists" });
-                    else await handleUpdateChange(payload);
-                });
-        else await handleUpdateChange(payload);
+                    if (res.exists) setError("identifier", { message: "Identifier already exists" })
+                    else await handleUpdateChange(payload)
+                })
+        else await handleUpdateChange(payload)
         setTimeout(() => {
-            setIsLoading(false);
-        }, 300);
-    };
-    const currentNetwork = NETWORK_CHOICES.find((n) => n.key === project?.network);
+            setIsLoading(false)
+        }, 300)
+    }
+    const currentNetwork = NETWORK_CHOICES.find((n) => n.key === project?.network)
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -274,7 +268,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                             name="network"
                             control={control}
                             render={({ field: { value, onChange } }) => {
-                                const selectedNetwork = NETWORK_CHOICES.find((n) => n.key === value);
+                                const selectedNetwork = NETWORK_CHOICES.find((n) => n.key === value)
 
                                 return (
                                     <CustomSelect
@@ -311,7 +305,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                                             </CustomSelect.Option>
                                         ))}
                                     </CustomSelect>
-                                );
+                                )
                             }}
                         />
                     </div>
@@ -328,5 +322,5 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                 </div>
             </div>
         </form>
-    );
-};
+    )
+}

@@ -1,6 +1,5 @@
-import { FC } from "react";
-
-import { Loader } from "@servcy/ui";
+import { FC } from "react"
+import { Loader } from "@servcy/ui"
 
 export interface IProjectDetailsFormLoader {}
 
@@ -59,4 +58,4 @@ export const ProjectDetailsFormLoader: FC<IProjectDetailsFormLoader> = () => (
             </div>
         </div>
     </>
-);
+)

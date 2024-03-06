@@ -1,20 +1,15 @@
-import React from "react";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { CircleDot, CopyPlus, Pencil, X, XCircle } from "lucide-react";
+import Link from "next/link"
+import React from "react"
+import { ExistingIssuesListModal } from "@components/core"
+import { cn } from "@helpers/common.helper"
+import { useIssueDetail, useIssues, useProject } from "@hooks/store"
+import { CircleDot, CopyPlus, Pencil, X, XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { ISearchIssueResponse, TIssueRelationTypes } from "@servcy/types"
+import { RelatedIcon, Tooltip } from "@servcy/ui"
 
-import { useIssueDetail, useIssues, useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { ExistingIssuesListModal } from "@components/core";
-
-import { RelatedIcon, Tooltip } from "@servcy/ui";
-
-import { cn } from "@helpers/common.helper";
-
-import { TIssueRelationTypes, ISearchIssueResponse } from "@servcy/types";
-
-export type TRelationObject = { className: string; icon: (size: number) => React.ReactElement; placeholder: string };
+export type TRelationObject = { className: string; icon: (size: number) => React.ReactElement; placeholder: string }
 
 export const issueRelationObject: Record<TIssueRelationTypes, TRelationObject> = {
     relates_to: {
@@ -37,31 +32,31 @@ export const issueRelationObject: Record<TIssueRelationTypes, TRelationObject> =
         icon: (size) => <CopyPlus size={size} />,
         placeholder: "None",
     },
-};
+}
 
 type TIssueRelationSelect = {
-    className?: string;
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    relationKey: TIssueRelationTypes;
-    disabled?: boolean;
-};
+    className?: string
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    relationKey: TIssueRelationTypes
+    disabled?: boolean
+}
 
 export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((props) => {
-    const { className = "", workspaceSlug, projectId, issueId, relationKey, disabled = false } = props;
+    const { className = "", workspaceSlug, projectId, issueId, relationKey, disabled = false } = props
 
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     const {
         createRelation,
         removeRelation,
         relation: { getRelationByIssueIdRelationType },
         isRelationModalOpen,
         toggleRelationModal,
-    } = useIssueDetail();
-    const { issueMap } = useIssues();
+    } = useIssueDetail()
+    const { issueMap } = useIssues()
 
-    const relationIssueIds = getRelationByIssueIdRelationType(issueId, relationKey);
+    const relationIssueIds = getRelationByIssueIdRelationType(issueId, relationKey)
 
     const onSubmit = async (data: ISearchIssueResponse[]) => {
         if (data.length === 0) {
@@ -69,8 +64,8 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
                 type: "error",
                 title: "Error!",
                 message: "Please select at least one issue.",
-            });
-            return;
+            })
+            return
         }
 
         await createRelation(
@@ -79,12 +74,12 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
             issueId,
             relationKey,
             data.map((i) => i.id)
-        );
+        )
 
-        toggleRelationModal(null);
-    };
+        toggleRelationModal(null)
+    }
 
-    if (!relationIssueIds) return null;
+    if (!relationIssueIds) return null
 
     return (
         <>
@@ -115,10 +110,10 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
                     {relationIssueIds.length > 0 ? (
                         <div className="flex items-center gap-2 py-0.5 flex-wrap">
                             {relationIssueIds.map((relationIssueId) => {
-                                const currentIssue = issueMap[relationIssueId];
-                                if (!currentIssue) return;
+                                const currentIssue = issueMap[relationIssueId]
+                                if (!currentIssue) return
 
-                                const projectDetails = getProjectById(currentIssue.project_id);
+                                const projectDetails = getProjectById(currentIssue.project_id)
 
                                 return (
                                     <div
@@ -140,15 +135,15 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
                                             <Tooltip tooltipContent="Remove" position="bottom">
                                                 <span
                                                     onClick={(e) => {
-                                                        e.preventDefault();
-                                                        e.stopPropagation();
+                                                        e.preventDefault()
+                                                        e.stopPropagation()
                                                         removeRelation(
                                                             workspaceSlug,
                                                             projectId,
                                                             issueId,
                                                             relationKey,
                                                             relationIssueId
-                                                        );
+                                                        )
                                                     }}
                                                 >
                                                     <X className="h-2.5 w-2.5 text-custom-text-300 hover:text-red-500" />
@@ -156,7 +151,7 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
                                             </Tooltip>
                                         )}
                                     </div>
-                                );
+                                )
                             })}
                         </div>
                     ) : (
@@ -176,5 +171,5 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
                 </div>
             </button>
         </>
-    );
-});
+    )
+})

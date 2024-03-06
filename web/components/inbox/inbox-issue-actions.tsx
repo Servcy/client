@@ -1,91 +1,86 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { DayPicker } from "react-day-picker";
-import { Popover } from "@headlessui/react";
-
-import { useUser, useInboxIssues, useIssueDetail, useWorkspace, useEventTracker } from "@hooks/store";
-import toast from "react-hot-toast";
-
+import { useRouter } from "next/router"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import {
     AcceptIssueModal,
     DeclineIssueModal,
     DeleteInboxIssueModal,
     SelectDuplicateInboxIssueModal,
-} from "@components/inbox";
-
-import { Button } from "@servcy/ui";
-
-import { CheckCircle2, ChevronDown, ChevronUp, Clock, FileStack, Trash2, XCircle } from "lucide-react";
-
-import type { TInboxStatus, TInboxDetailedStatus } from "@servcy/types";
-import { EUserProjectRoles } from "@constants/project";
-import { ISSUE_DELETED } from "@constants/event-tracker";
+} from "@components/inbox"
+import { ISSUE_DELETED } from "@constants/event-tracker"
+import { EUserProjectRoles } from "@constants/project"
+import { Popover } from "@headlessui/react"
+import { useEventTracker, useInboxIssues, useIssueDetail, useUser, useWorkspace } from "@hooks/store"
+import { CheckCircle2, ChevronDown, ChevronUp, Clock, FileStack, Trash2, XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { DayPicker } from "react-day-picker"
+import toast from "react-hot-toast"
+import type { TInboxDetailedStatus, TInboxStatus } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type TInboxIssueActionsHeader = {
-    workspaceSlug: string;
-    projectId: string;
-    inboxId: string;
-    inboxIssueId: string | undefined;
-};
+    workspaceSlug: string
+    projectId: string
+    inboxId: string
+    inboxIssueId: string | undefined
+}
 
 type TInboxIssueOperations = {
-    updateInboxIssueStatus: (data: TInboxStatus) => Promise<void>;
-    removeInboxIssue: () => Promise<void>;
-};
+    updateInboxIssueStatus: (data: TInboxStatus) => Promise<void>
+    removeInboxIssue: () => Promise<void>
+}
 
 export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((props) => {
-    const { workspaceSlug, projectId, inboxId, inboxIssueId } = props;
+    const { workspaceSlug, projectId, inboxId, inboxIssueId } = props
     // router
-    const router = useRouter();
+    const router = useRouter()
 
-    const { captureIssueEvent } = useEventTracker();
-    const { currentWorkspace } = useWorkspace();
+    const { captureIssueEvent } = useEventTracker()
+    const { currentWorkspace } = useWorkspace()
     const {
         issues: { getInboxIssuesByInboxId, getInboxIssueByIssueId, updateInboxIssueStatus, removeInboxIssue },
-    } = useInboxIssues();
+    } = useInboxIssues()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
     const {
         currentUser,
         membership: { currentProjectRole },
-    } = useUser();
+    } = useUser()
 
     // states
-    const [date, setDate] = useState(new Date());
-    const [selectDuplicateIssue, setSelectDuplicateIssue] = useState(false);
-    const [acceptIssueModal, setAcceptIssueModal] = useState(false);
-    const [declineIssueModal, setDeclineIssueModal] = useState(false);
-    const [deleteIssueModal, setDeleteIssueModal] = useState(false);
+    const [date, setDate] = useState(new Date())
+    const [selectDuplicateIssue, setSelectDuplicateIssue] = useState(false)
+    const [acceptIssueModal, setAcceptIssueModal] = useState(false)
+    const [declineIssueModal, setDeclineIssueModal] = useState(false)
+    const [deleteIssueModal, setDeleteIssueModal] = useState(false)
 
     // derived values
-    const inboxIssues = getInboxIssuesByInboxId(inboxId);
-    const issueStatus = (inboxIssueId && inboxId && getInboxIssueByIssueId(inboxId, inboxIssueId)) || undefined;
-    const issue = (inboxIssueId && getIssueById(inboxIssueId)) || undefined;
+    const inboxIssues = getInboxIssuesByInboxId(inboxId)
+    const issueStatus = (inboxIssueId && inboxId && getInboxIssueByIssueId(inboxId, inboxIssueId)) || undefined
+    const issue = (inboxIssueId && getIssueById(inboxIssueId)) || undefined
 
-    const currentIssueIndex = inboxIssues?.findIndex((issue) => issue === inboxIssueId) ?? 0;
+    const currentIssueIndex = inboxIssues?.findIndex((issue) => issue === inboxIssueId) ?? 0
 
     const inboxIssueOperations: TInboxIssueOperations = useMemo(
         () => ({
             updateInboxIssueStatus: async (data: TInboxDetailedStatus) => {
                 try {
                     if (!workspaceSlug || !projectId || !inboxId || !inboxIssueId)
-                        throw new Error("Missing required parameters");
-                    await updateInboxIssueStatus(workspaceSlug, projectId, inboxId, inboxIssueId, data);
+                        throw new Error("Missing required parameters")
+                    await updateInboxIssueStatus(workspaceSlug, projectId, inboxId, inboxIssueId, data)
                 } catch (error) {
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: "Something went wrong while updating inbox status. Please try again.",
-                    });
+                    })
                 }
             },
             removeInboxIssue: async () => {
                 try {
                     if (!workspaceSlug || !projectId || !inboxId || !inboxIssueId || !currentWorkspace)
-                        throw new Error("Missing required parameters");
-                    await removeInboxIssue(workspaceSlug, projectId, inboxId, inboxIssueId);
+                        throw new Error("Missing required parameters")
+                    await removeInboxIssue(workspaceSlug, projectId, inboxId, inboxIssueId)
                     captureIssueEvent({
                         eventName: ISSUE_DELETED,
                         payload: {
@@ -93,16 +88,16 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                             state: "SUCCESS",
                             element: "Inbox page",
                         },
-                    });
+                    })
                     router.push({
                         pathname: `/${workspaceSlug}/projects/${projectId}/inbox/${inboxId}`,
-                    });
+                    })
                 } catch (error) {
                     toast.error({
                         type: "error",
                         title: "Error!",
                         message: "Something went wrong while deleting inbox issue. Please try again.",
-                    });
+                    })
                     captureIssueEvent({
                         eventName: ISSUE_DELETED,
                         payload: {
@@ -110,7 +105,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                             state: "FAILED",
                             element: "Inbox page",
                         },
-                    });
+                    })
                 }
             },
         }),
@@ -126,60 +121,60 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
             captureIssueEvent,
             router,
         ]
-    );
+    )
 
     const handleInboxIssueNavigation = useCallback(
         (direction: "next" | "prev") => {
-            if (!inboxIssues || !inboxIssueId) return;
-            const activeElement = document.activeElement as HTMLElement;
+            if (!inboxIssues || !inboxIssueId) return
+            const activeElement = document.activeElement as HTMLElement
             if (activeElement && (activeElement.classList.contains("tiptap") || activeElement.id === "title-input"))
-                return;
+                return
             const nextIssueIndex =
                 direction === "next"
                     ? (currentIssueIndex + 1) % inboxIssues.length
-                    : (currentIssueIndex - 1 + inboxIssues.length) % inboxIssues.length;
-            const nextIssueId = inboxIssues[nextIssueIndex];
-            if (!nextIssueId) return;
+                    : (currentIssueIndex - 1 + inboxIssues.length) % inboxIssues.length
+            const nextIssueId = inboxIssues[nextIssueIndex]
+            if (!nextIssueId) return
             router.push({
                 pathname: `/${workspaceSlug}/projects/${projectId}/inbox/${inboxId}`,
                 query: {
                     inboxIssueId: nextIssueId,
                 },
-            });
+            })
         },
         [workspaceSlug, projectId, inboxId, inboxIssues, inboxIssueId, currentIssueIndex, router]
-    );
+    )
 
     const onKeyDown = useCallback(
         (e: KeyboardEvent) => {
             if (e.key === "ArrowUp") {
-                handleInboxIssueNavigation("prev");
+                handleInboxIssueNavigation("prev")
             } else if (e.key === "ArrowDown") {
-                handleInboxIssueNavigation("next");
+                handleInboxIssueNavigation("next")
             }
         },
         [handleInboxIssueNavigation]
-    );
+    )
 
     useEffect(() => {
-        document.addEventListener("keydown", onKeyDown);
+        document.addEventListener("keydown", onKeyDown)
 
         return () => {
-            document.removeEventListener("keydown", onKeyDown);
-        };
-    }, [onKeyDown]);
+            document.removeEventListener("keydown", onKeyDown)
+        }
+    }, [onKeyDown])
 
-    const isAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
 
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(today.getDate() + 1)
     useEffect(() => {
-        if (!issueStatus || !issueStatus.snoozed_till) return;
-        setDate(new Date(issueStatus.snoozed_till));
-    }, [issueStatus]);
+        if (!issueStatus || !issueStatus.snoozed_till) return
+        setDate(new Date(issueStatus.snoozed_till))
+    }, [issueStatus])
 
-    if (!issueStatus || !issue || !inboxIssues) return <></>;
+    if (!issueStatus || !issue || !inboxIssues) return <></>
     return (
         <>
             {issue && (
@@ -194,7 +189,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                                     status: 2,
                                     duplicate_to: dupIssueId,
                                 })
-                                .finally(() => setSelectDuplicateIssue(false));
+                                .finally(() => setSelectDuplicateIssue(false))
                         }}
                     />
 
@@ -207,7 +202,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                                 .updateInboxIssueStatus({
                                     status: 1,
                                 })
-                                .finally(() => setAcceptIssueModal(false));
+                                .finally(() => setAcceptIssueModal(false))
                         }}
                     />
 
@@ -220,7 +215,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                                 .updateInboxIssueStatus({
                                     status: -1,
                                 })
-                                .finally(() => setDeclineIssueModal(false));
+                                .finally(() => setDeclineIssueModal(false))
                         }}
                     />
 
@@ -229,7 +224,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                         isOpen={deleteIssueModal}
                         onClose={() => setDeleteIssueModal(false)}
                         onSubmit={async () => {
-                            await inboxIssueOperations.removeInboxIssue().finally(() => setDeclineIssueModal(false));
+                            await inboxIssueOperations.removeInboxIssue().finally(() => setDeclineIssueModal(false))
                         }}
                     />
                 </>
@@ -277,8 +272,8 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                                                     selected={date ? new Date(date) : undefined}
                                                     defaultMonth={date ? new Date(date) : undefined}
                                                     onSelect={(date) => {
-                                                        if (!date) return;
-                                                        setDate(date);
+                                                        if (!date) return
+                                                        setDate(date)
                                                     }}
                                                     mode="single"
                                                     className="border border-custom-border-200 rounded-md p-3"
@@ -291,11 +286,11 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                                                 <Button
                                                     variant="primary"
                                                     onClick={() => {
-                                                        close();
+                                                        close()
                                                         inboxIssueOperations.updateInboxIssueStatus({
                                                             status: 0,
                                                             snoozed_till: new Date(date),
-                                                        });
+                                                        })
                                                     }}
                                                 >
                                                     Snooze
@@ -362,5 +357,5 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
                 </div>
             )}
         </>
-    );
-});
+    )
+})

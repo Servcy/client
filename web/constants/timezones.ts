@@ -2383,4 +2383,4 @@ export const TIME_ZONES = [
         label: "Zulu, GMT",
         value: "Zulu",
     },
-];
+]

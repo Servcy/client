@@ -1,7 +1,4 @@
-import Link from "next/link";
-
-import { useIssueDetail } from "@hooks/store";
-
+import Link from "next/link"
 import {
     AssignedCompletedIssueListItem,
     AssignedIssuesEmptyState,
@@ -12,37 +9,35 @@ import {
     CreatedOverdueIssueListItem,
     CreatedUpcomingIssueListItem,
     IssueListItemProps,
-} from "@components/dashboard/widgets";
-
-import { Loader, getButtonStyling } from "@servcy/ui";
-
-import { cn } from "@helpers/common.helper";
-import { getRedirectionFilters } from "@helpers/dashboard.helper";
-
-import { TAssignedIssuesWidgetResponse, TCreatedIssuesWidgetResponse, TIssue, TIssuesListTypes } from "@servcy/types";
+} from "@components/dashboard/widgets"
+import { cn } from "@helpers/common.helper"
+import { getRedirectionFilters } from "@helpers/dashboard.helper"
+import { useIssueDetail } from "@hooks/store"
+import { TAssignedIssuesWidgetResponse, TCreatedIssuesWidgetResponse, TIssue, TIssuesListTypes } from "@servcy/types"
+import { getButtonStyling, Loader } from "@servcy/ui"
 
 export type WidgetIssuesListProps = {
-    isLoading: boolean;
-    tab: TIssuesListTypes;
-    type: "assigned" | "created";
-    widgetStats: TAssignedIssuesWidgetResponse | TCreatedIssuesWidgetResponse;
-    workspaceSlug: string;
-};
+    isLoading: boolean
+    tab: TIssuesListTypes
+    type: "assigned" | "created"
+    widgetStats: TAssignedIssuesWidgetResponse | TCreatedIssuesWidgetResponse
+    workspaceSlug: string
+}
 
 export const WidgetIssuesList: React.FC<WidgetIssuesListProps> = (props) => {
-    const { isLoading, tab, type, widgetStats, workspaceSlug } = props;
+    const { isLoading, tab, type, widgetStats, workspaceSlug } = props
     // store hooks
-    const { setPeekIssue } = useIssueDetail();
+    const { setPeekIssue } = useIssueDetail()
 
     const handleIssuePeekOverview = (issue: TIssue) =>
-        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id });
+        setPeekIssue({ workspaceSlug, projectId: issue.project_id, issueId: issue.id })
 
-    const filterParams = getRedirectionFilters(tab);
+    const filterParams = getRedirectionFilters(tab)
 
     const ISSUE_LIST_ITEM: {
         [key: string]: {
-            [key in TIssuesListTypes]: React.FC<IssueListItemProps>;
-        };
+            [key in TIssuesListTypes]: React.FC<IssueListItemProps>
+        }
     } = {
         assigned: {
             pending: AssignedUpcomingIssueListItem,
@@ -56,9 +51,9 @@ export const WidgetIssuesList: React.FC<WidgetIssuesListProps> = (props) => {
             overdue: CreatedOverdueIssueListItem,
             completed: CreatedCompletedIssueListItem,
         },
-    };
+    }
 
-    const issuesList = widgetStats.issues;
+    const issuesList = widgetStats.issues
 
     return (
         <>
@@ -91,9 +86,9 @@ export const WidgetIssuesList: React.FC<WidgetIssuesListProps> = (props) => {
                         </div>
                         <div className="px-4 pb-3 mt-2">
                             {issuesList.map((issue) => {
-                                const IssueListItem = ISSUE_LIST_ITEM[type][tab];
+                                const IssueListItem = ISSUE_LIST_ITEM[type][tab]
 
-                                if (!IssueListItem) return null;
+                                if (!IssueListItem) return null
 
                                 return (
                                     <IssueListItem
@@ -102,7 +97,7 @@ export const WidgetIssuesList: React.FC<WidgetIssuesListProps> = (props) => {
                                         workspaceSlug={workspaceSlug}
                                         onClick={handleIssuePeekOverview}
                                     />
-                                );
+                                )
                             })}
                         </div>
                     </>
@@ -125,5 +120,5 @@ export const WidgetIssuesList: React.FC<WidgetIssuesListProps> = (props) => {
                 </Link>
             )}
         </>
-    );
-};
+    )
+}

@@ -1,6 +1,4 @@
-import { ContrastIcon, DiceIcon, DoubleCircleIcon, LayersIcon, UserGroupIcon } from "@servcy/ui";
-import { ISvgIcons } from "@servcy/ui/src/icons/type";
-import { IIssueDisplayProperties, TIssue, TIssueOrderByOptions } from "@servcy/types";
+import { FC } from "react"
 import {
     SpreadsheetAssigneeColumn,
     SpreadsheetAttachmentColumn,
@@ -16,25 +14,27 @@ import {
     SpreadsheetStateColumn,
     SpreadsheetSubIssueColumn,
     SpreadsheetUpdatedOnColumn,
-} from "@components/issues/issue-layouts/spreadsheet";
-import { CalendarCheck2, CalendarClock, CalendarDays, Link2, Paperclip, Signal, Tag, Triangle } from "lucide-react";
-import { FC } from "react";
+} from "@components/issues/issue-layouts/spreadsheet"
+import { CalendarCheck2, CalendarClock, CalendarDays, Link2, Paperclip, Signal, Tag, Triangle } from "lucide-react"
+import { IIssueDisplayProperties, TIssue, TIssueOrderByOptions } from "@servcy/types"
+import { ContrastIcon, DiceIcon, DoubleCircleIcon, LayersIcon, UserGroupIcon } from "@servcy/ui"
+import { ISvgIcons } from "@servcy/ui/src/icons/type"
 
 export const SPREADSHEET_PROPERTY_DETAILS: {
     [key: string]: {
-        title: string;
-        ascendingOrderKey: TIssueOrderByOptions;
-        ascendingOrderTitle: string;
-        descendingOrderKey: TIssueOrderByOptions;
-        descendingOrderTitle: string;
-        icon: FC<ISvgIcons>;
+        title: string
+        ascendingOrderKey: TIssueOrderByOptions
+        ascendingOrderTitle: string
+        descendingOrderKey: TIssueOrderByOptions
+        descendingOrderTitle: string
+        icon: FC<ISvgIcons>
         Column: React.FC<{
-            issue: TIssue;
-            onClose: () => void;
-            onChange: (issue: TIssue, data: Partial<TIssue>, updates: any) => void;
-            disabled: boolean;
-        }>;
-    };
+            issue: TIssue
+            onClose: () => void
+            onChange: (issue: TIssue, data: Partial<TIssue>, updates: any) => void
+            disabled: boolean
+        }>
+    }
 } = {
     assignee: {
         title: "Assignees",
@@ -162,7 +162,7 @@ export const SPREADSHEET_PROPERTY_DETAILS: {
         icon: LayersIcon,
         Column: SpreadsheetSubIssueColumn,
     },
-};
+}
 
 export const SPREADSHEET_PROPERTY_LIST: (keyof IIssueDisplayProperties)[] = [
     "state",
@@ -179,4 +179,4 @@ export const SPREADSHEET_PROPERTY_LIST: (keyof IIssueDisplayProperties)[] = [
     "link",
     "attachment_count",
     "sub_issue_count",
-];
+]

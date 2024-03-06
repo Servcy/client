@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const CalendarBeforeIcon: React.FC<Props> = ({ width = "24", height = "24", className }) => (
     <svg
@@ -34,4 +33,4 @@ export const CalendarBeforeIcon: React.FC<Props> = ({ width = "24", height = "24
             </clipPath>
         </defs>
     </svg>
-);
+)

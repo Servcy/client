@@ -1,27 +1,25 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { Plus } from "lucide-react";
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useEffect, useRef, useState } from "react"
+import { CreateUpdateWorkspaceViewModal } from "@components/workspace"
+import { GLOBAL_VIEW_OPENED } from "@constants/event-tracker"
+import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace"
 // store hooks
-import { useEventTracker, useGlobalView, useUser } from "@hooks/store";
-
-import { CreateUpdateWorkspaceViewModal } from "@components/workspace";
-
-import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace";
-import { GLOBAL_VIEW_OPENED } from "@constants/event-tracker";
+import { useEventTracker, useGlobalView, useUser } from "@hooks/store"
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
 
 const ViewTab = observer((props: { viewId: string }) => {
-    const { viewId } = props;
+    const { viewId } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, globalViewId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, globalViewId } = router.query
     // store hooks
-    const { getViewDetailsById } = useGlobalView();
+    const { getViewDetailsById } = useGlobalView()
 
-    const view = getViewDetailsById(viewId);
+    const view = getViewDetailsById(viewId)
 
-    if (!view) return null;
+    if (!view) return null
 
     return (
         <Link key={viewId} id={`global-view-${viewId}`} href={`/${workspaceSlug}/workspace-views/${viewId}`}>
@@ -35,22 +33,22 @@ const ViewTab = observer((props: { viewId: string }) => {
                 {view.name}
             </span>
         </Link>
-    );
-});
+    )
+})
 
 export const GlobalViewsHeader: React.FC = observer(() => {
     // states
-    const [createViewModal, setCreateViewModal] = useState(false);
-    const containerRef = useRef<HTMLDivElement>(null);
+    const [createViewModal, setCreateViewModal] = useState(false)
+    const containerRef = useRef<HTMLDivElement>(null)
     // router
-    const router = useRouter();
-    const { workspaceSlug, globalViewId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, globalViewId } = router.query
     // store hooks
-    const { currentWorkspaceViews } = useGlobalView();
+    const { currentWorkspaceViews } = useGlobalView()
     const {
         membership: { currentWorkspaceRole },
-    } = useUser();
-    const { captureEvent } = useEventTracker();
+    } = useUser()
+    const { captureEvent } = useEventTracker()
 
     // bring the active view to the centre of the header
     useEffect(() => {
@@ -60,18 +58,18 @@ export const GlobalViewsHeader: React.FC = observer(() => {
                 view_type: ["all-issues", "assigned", "created", "subscribed"].includes(globalViewId.toString())
                     ? "Default"
                     : "Custom",
-            });
-            const activeTabElement = document.querySelector(`#global-view-${globalViewId.toString()}`);
+            })
+            const activeTabElement = document.querySelector(`#global-view-${globalViewId.toString()}`)
             if (activeTabElement && containerRef.current) {
-                const containerRect = containerRef.current.getBoundingClientRect();
-                const activeTabRect = activeTabElement.getBoundingClientRect();
-                const diff = containerRect.right - activeTabRect.right;
-                activeTabElement.scrollIntoView({ behavior: "smooth", inline: diff > 500 ? "center" : "nearest" });
+                const containerRect = containerRef.current.getBoundingClientRect()
+                const activeTabRect = activeTabElement.getBoundingClientRect()
+                const diff = containerRect.right - activeTabRect.right
+                activeTabElement.scrollIntoView({ behavior: "smooth", inline: diff > 500 ? "center" : "nearest" })
             }
         }
-    }, [globalViewId, currentWorkspaceViews, containerRef]);
+    }, [globalViewId, currentWorkspaceViews, containerRef])
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
 
     return (
         <>
@@ -113,5 +111,5 @@ export const GlobalViewsHeader: React.FC = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

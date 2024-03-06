@@ -1,34 +1,31 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { Disclosure, Transition } from "@headlessui/react";
-
-// store
-import { observer } from "mobx-react-lite";
-
-import { ChevronDown, Pencil, Trash2 } from "lucide-react";
-
-import { IIssueLabel } from "@servcy/types";
+import React, { Dispatch, SetStateAction, useState } from "react"
+import { Disclosure, Transition } from "@headlessui/react"
 import {
     Draggable,
     DraggableProvided,
     DraggableProvidedDragHandleProps,
     DraggableStateSnapshot,
     Droppable,
-} from "@hello-pangea/dnd";
-import { ICustomMenuItem, LabelItemBlock } from "./label-block/label-item-block";
-import { CreateUpdateLabelInline } from "./create-update-label-inline";
-import { ProjectSettingLabelItem } from "./project-setting-label-item";
-import useDraggableInPortal from "@hooks/use-draggable-portal";
+} from "@hello-pangea/dnd"
+import useDraggableInPortal from "@hooks/use-draggable-portal"
+import { ChevronDown, Pencil, Trash2 } from "lucide-react"
+// store
+import { observer } from "mobx-react-lite"
+import { IIssueLabel } from "@servcy/types"
+import { CreateUpdateLabelInline } from "./create-update-label-inline"
+import { ICustomMenuItem, LabelItemBlock } from "./label-block/label-item-block"
+import { ProjectSettingLabelItem } from "./project-setting-label-item"
 
 type Props = {
-    label: IIssueLabel;
-    labelChildren: IIssueLabel[];
-    handleLabelDelete: (label: IIssueLabel) => void;
-    dragHandleProps: DraggableProvidedDragHandleProps;
-    draggableSnapshot: DraggableStateSnapshot;
-    isUpdating: boolean;
-    setIsUpdating: Dispatch<SetStateAction<boolean>>;
-    isDropDisabled: boolean;
-};
+    label: IIssueLabel
+    labelChildren: IIssueLabel[]
+    handleLabelDelete: (label: IIssueLabel) => void
+    dragHandleProps: DraggableProvidedDragHandleProps
+    draggableSnapshot: DraggableStateSnapshot
+    isUpdating: boolean
+    setIsUpdating: Dispatch<SetStateAction<boolean>>
+    isDropDisabled: boolean
+}
 
 export const ProjectSettingLabelGroup: React.FC<Props> = observer((props) => {
     const {
@@ -40,18 +37,18 @@ export const ProjectSettingLabelGroup: React.FC<Props> = observer((props) => {
         isUpdating,
         setIsUpdating,
         isDropDisabled,
-    } = props;
+    } = props
 
-    const [isEditLabelForm, setEditLabelForm] = useState(false);
+    const [isEditLabelForm, setEditLabelForm] = useState(false)
 
-    const renderDraggable = useDraggableInPortal();
+    const renderDraggable = useDraggableInPortal()
 
     const customMenuItems: ICustomMenuItem[] = [
         {
             CustomIcon: Pencil,
             onClick: () => {
-                setEditLabelForm(true);
-                setIsUpdating(true);
+                setEditLabelForm(true)
+                setIsUpdating(true)
             },
             isVisible: true,
             text: "Edit label",
@@ -64,7 +61,7 @@ export const ProjectSettingLabelGroup: React.FC<Props> = observer((props) => {
             text: "Delete label",
             key: "delete_label",
         },
-    ];
+    ]
 
     return (
         <Disclosure
@@ -96,8 +93,8 @@ export const ProjectSettingLabelGroup: React.FC<Props> = observer((props) => {
                                                 isUpdating
                                                 labelToUpdate={label}
                                                 onClose={() => {
-                                                    setEditLabelForm(false);
-                                                    setIsUpdating(false);
+                                                    setEditLabelForm(false)
+                                                    setIsUpdating(false)
                                                 }}
                                             />
                                         ) : (
@@ -177,5 +174,5 @@ export const ProjectSettingLabelGroup: React.FC<Props> = observer((props) => {
                 </>
             )}
         </Disclosure>
-    );
-});
+    )
+})

@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const SortIcon: React.FC<Props> = ({ width = "24", height = "24", className, color }) => (
     <svg
@@ -16,4 +15,4 @@ export const SortIcon: React.FC<Props> = ({ width = "24", height = "24", classNa
             fill={color ? color : "currentColor"}
         />
     </svg>
-);
+)

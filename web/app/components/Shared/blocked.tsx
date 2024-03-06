@@ -1,4 +1,4 @@
-import { GoBlocked } from "react-icons/go";
+import { GoBlocked } from "react-icons/go"
 
 export default function Blocked(): JSX.Element {
     return (
@@ -8,5 +8,5 @@ export default function Blocked(): JSX.Element {
                 <p className="mt-2 text-servcy-black">Oops... Servcy is not available for mobile devices yet.</p>
             </div>
         </main>
-    );
+    )
 }

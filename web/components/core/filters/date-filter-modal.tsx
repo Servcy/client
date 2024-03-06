@@ -1,50 +1,47 @@
-import { Fragment } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { DayPicker } from "react-day-picker";
-import { Dialog, Transition } from "@headlessui/react";
-import { X } from "lucide-react";
-
-import { DateFilterSelect } from "./date-filter-select";
-
-import { Button } from "@servcy/ui";
-
-import { renderFormattedPayloadDate, renderFormattedDate } from "@helpers/date-time.helper";
+import { Fragment } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { X } from "lucide-react"
+import { DayPicker } from "react-day-picker"
+import { Controller, useForm } from "react-hook-form"
+import { Button } from "@servcy/ui"
+import { DateFilterSelect } from "./date-filter-select"
 
 type Props = {
-    title: string;
-    handleClose: () => void;
-    isOpen: boolean;
-    onSelect: (val: string[]) => void;
-};
+    title: string
+    handleClose: () => void
+    isOpen: boolean
+    onSelect: (val: string[]) => void
+}
 
 type TFormValues = {
-    filterType: "before" | "after" | "range";
-    date1: Date;
-    date2: Date;
-};
+    filterType: "before" | "after" | "range"
+    date1: Date
+    date2: Date
+}
 
 const defaultValues: TFormValues = {
     filterType: "range",
     date1: new Date(),
     date2: new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()),
-};
+}
 
 export const DateFilterModal: React.FC<Props> = ({ title, handleClose, isOpen, onSelect }) => {
     const { handleSubmit, watch, control } = useForm<TFormValues>({
         defaultValues,
-    });
+    })
 
     const handleFormSubmit = (formData: TFormValues) => {
-        const { filterType, date1, date2 } = formData;
+        const { filterType, date1, date2 } = formData
 
         if (filterType === "range")
-            onSelect([`${renderFormattedPayloadDate(date1)};after`, `${renderFormattedPayloadDate(date2)};before`]);
-        else onSelect([`${renderFormattedPayloadDate(date1)};${filterType}`]);
+            onSelect([`${renderFormattedPayloadDate(date1)};after`, `${renderFormattedPayloadDate(date2)};before`])
+        else onSelect([`${renderFormattedPayloadDate(date1)};${filterType}`])
 
-        handleClose();
-    };
+        handleClose()
+    }
 
-    const isInvalid = watch("filterType") === "range" ? new Date(watch("date1")) > new Date(watch("date2")) : false;
+    const isInvalid = watch("filterType") === "range" ? new Date(watch("date1")) > new Date(watch("date2")) : false
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -144,5 +141,5 @@ export const DateFilterModal: React.FC<Props> = ({ title, handleClose, isOpen, o
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-};
+    )
+}

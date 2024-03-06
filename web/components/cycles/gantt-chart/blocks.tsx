@@ -1,29 +1,26 @@
-import { useRouter } from "next/router";
-import { observer } from "mobx-react";
-
-import { useApplication, useCycle } from "@hooks/store";
-
-import { Tooltip, ContrastIcon } from "@servcy/ui";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
+import { useRouter } from "next/router"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { useApplication, useCycle } from "@hooks/store"
+import { observer } from "mobx-react"
+import { ContrastIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
-    cycleId: string;
-};
+    cycleId: string
+}
 
 export const CycleGanttBlock: React.FC<Props> = observer((props) => {
-    const { cycleId } = props;
+    const { cycleId } = props
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { getCycleById } = useCycle();
+    } = useApplication()
+    const { getCycleById } = useCycle()
     // derived values
-    const cycleDetails = getCycleById(cycleId);
+    const cycleDetails = getCycleById(cycleId)
 
-    const cycleStatus = cycleDetails?.status.toLocaleLowerCase();
+    const cycleStatus = cycleDetails?.status.toLocaleLowerCase()
 
     return (
         <div
@@ -62,22 +59,22 @@ export const CycleGanttBlock: React.FC<Props> = observer((props) => {
                 </div>
             </Tooltip>
         </div>
-    );
-});
+    )
+})
 
 export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
-    const { cycleId } = props;
+    const { cycleId } = props
     // router
-    const router = useRouter();
+    const router = useRouter()
     // store hooks
     const {
         router: { workspaceSlug },
-    } = useApplication();
-    const { getCycleById } = useCycle();
+    } = useApplication()
+    const { getCycleById } = useCycle()
     // derived values
-    const cycleDetails = getCycleById(cycleId);
+    const cycleDetails = getCycleById(cycleId)
 
-    const cycleStatus = cycleDetails?.status.toLocaleLowerCase();
+    const cycleStatus = cycleDetails?.status.toLocaleLowerCase()
 
     return (
         <div
@@ -102,5 +99,5 @@ export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
             />
             <h6 className="flex-grow truncate text-sm font-medium">{cycleDetails?.name}</h6>
         </div>
-    );
-});
+    )
+})

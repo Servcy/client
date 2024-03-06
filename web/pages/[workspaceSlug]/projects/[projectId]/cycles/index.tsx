@@ -1,74 +1,65 @@
-import { Tab } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/router";
-import { Fragment, ReactElement, useCallback, useState } from "react";
-
-import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store";
-import useLocalStorage from "@hooks/use-local-storage";
-
-import { AppLayout } from "@layouts/app-layout";
-
-import { PageHead } from "@components/core";
-import { ActiveCycleDetails, CycleCreateUpdateModal, CyclesView } from "@components/cycles";
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-import { CyclesHeader } from "@components/headers";
-
-import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
-import { Tooltip } from "@servcy/ui";
-
-import { NextPageWithLayout } from "@/types/types";
-import { TCycleLayout, TCycleView } from "@servcy/types";
-
-import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle";
-import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-import { EUserWorkspaceRoles } from "@constants/workspace";
+import { useRouter } from "next/router"
+import { Fragment, ReactElement, useCallback, useState } from "react"
+import { PageHead } from "@components/core"
+import { ActiveCycleDetails, CycleCreateUpdateModal, CyclesView } from "@components/cycles"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { CyclesHeader } from "@components/headers"
+import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui"
+import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+import { Tab } from "@headlessui/react"
+import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+import { AppLayout } from "@layouts/app-layout"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import { TCycleLayout, TCycleView } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
+import { NextPageWithLayout } from "@/types/types"
 
 const ProjectCyclesPage: NextPageWithLayout = observer(() => {
-    const [createModal, setCreateModal] = useState(false);
+    const [createModal, setCreateModal] = useState(false)
     // theme
-    const { resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme()
     // store hooks
-    const { setTrackElement } = useEventTracker();
+    const { setTrackElement } = useEventTracker()
     const {
         membership: { currentProjectRole },
         currentUser,
-    } = useUser();
-    const { currentProjectCycleIds, loader } = useCycle();
-    const { getProjectById } = useProject();
+    } = useUser()
+    const { currentProjectCycleIds, loader } = useCycle()
+    const { getProjectById } = useProject()
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, peekCycle } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, peekCycle } = router.query
     // local storage
-    const { storedValue: cycleTab, setValue: setCycleTab } = useLocalStorage<TCycleView>("cycle_tab", "active");
-    const { storedValue: cycleLayout, setValue: setCycleLayout } = useLocalStorage<TCycleLayout>(
-        "cycle_layout",
-        "list"
-    );
+    const { storedValue: cycleTab, setValue: setCycleTab } = useLocalStorage<TCycleView>("cycle_tab", "active")
+    const { storedValue: cycleLayout, setValue: setCycleLayout } = useLocalStorage<TCycleLayout>("cycle_layout", "list")
     // derived values
-    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "cycles", isLightMode);
-    const totalCycles = currentProjectCycleIds?.length ?? 0;
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER;
-    const project = projectId ? getProjectById(projectId?.toString()) : undefined;
-    const pageTitle = project?.name ? `${project?.name} - Cycles` : undefined;
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
+    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "cycles", isLightMode)
+    const totalCycles = currentProjectCycleIds?.length ?? 0
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
+    const project = projectId ? getProjectById(projectId?.toString()) : undefined
+    const pageTitle = project?.name ? `${project?.name} - Cycles` : undefined
 
     const handleCurrentLayout = useCallback(
         (_layout: TCycleLayout) => {
-            setCycleLayout(_layout);
+            setCycleLayout(_layout)
         },
         [setCycleLayout]
-    );
+    )
 
     const handleCurrentView = useCallback(
         (_view: TCycleView) => {
-            setCycleTab(_view);
-            if (_view === "draft") handleCurrentLayout("list");
+            setCycleTab(_view)
+            if (_view === "draft") handleCurrentLayout("list")
         },
         [handleCurrentLayout, setCycleTab]
-    );
+    )
 
-    if (!workspaceSlug || !projectId) return null;
+    if (!workspaceSlug || !projectId) return null
 
     if (loader)
         return (
@@ -77,7 +68,7 @@ const ProjectCyclesPage: NextPageWithLayout = observer(() => {
                 {cycleLayout === "board" && <CycleModuleBoardLayout />}
                 {cycleLayout === "gantt" && <GanttLayoutLoader />}
             </>
-        );
+        )
 
     return (
         <>
@@ -102,8 +93,8 @@ const ProjectCyclesPage: NextPageWithLayout = observer(() => {
                             primaryButton={{
                                 text: CYCLE_EMPTY_STATE_DETAILS["cycles"].primaryButton.text,
                                 onClick: () => {
-                                    setTrackElement("Cycle empty state");
-                                    setCreateModal(true);
+                                    setTrackElement("Cycle empty state")
+                                    setCreateModal(true)
                                 },
                             }}
                             size="lg"
@@ -139,7 +130,7 @@ const ProjectCyclesPage: NextPageWithLayout = observer(() => {
                                 {cycleTab !== "active" && (
                                     <div className="flex items-center self-end sm:self-center md:self-center lg:self-center gap-1 rounded bg-custom-background-80 p-1">
                                         {CYCLE_VIEW_LAYOUTS.map((layout) => {
-                                            if (layout.key === "gantt" && cycleTab === "draft") return null;
+                                            if (layout.key === "gantt" && cycleTab === "draft") return null
 
                                             return (
                                                 <Tooltip key={layout.key} tooltipContent={layout.title}>
@@ -162,7 +153,7 @@ const ProjectCyclesPage: NextPageWithLayout = observer(() => {
                                                         />
                                                     </button>
                                                 </Tooltip>
-                                            );
+                                            )
                                         })}
                                     </div>
                                 )}
@@ -229,15 +220,15 @@ const ProjectCyclesPage: NextPageWithLayout = observer(() => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})
 
 ProjectCyclesPage.getWrapper = function getWrapper(page: ReactElement) {
     return (
         <AppLayout header={<CyclesHeader />} withProjectWrapper>
             {page}
         </AppLayout>
-    );
-};
+    )
+}
 
-export default ProjectCyclesPage;
+export default ProjectCyclesPage

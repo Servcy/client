@@ -1,18 +1,14 @@
-import { CustomMenu } from "@servcy/ui";
-
-import { Trash2 } from "lucide-react";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { IImporterService } from "@servcy/types";
-
-import { IMPORTERS_LIST } from "@constants/workspace";
+import { IMPORTERS_LIST } from "@constants/workspace"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { Trash2 } from "lucide-react"
+import { IImporterService } from "@servcy/types"
+import { CustomMenu } from "@servcy/ui"
 
 type Props = {
-    service: IImporterService;
-    refreshing: boolean;
-    handleDelete: () => void;
-};
+    service: IImporterService
+    refreshing: boolean
+    handleDelete: () => void
+}
 
 export const SingleImport: React.FC<Props> = ({ service, refreshing, handleDelete }) => (
     <div className="flex items-center justify-between gap-2 px-4 py-3">
@@ -53,4 +49,4 @@ export const SingleImport: React.FC<Props> = ({ service, refreshing, handleDelet
             </CustomMenu.MenuItem>
         </CustomMenu>
     </div>
-);
+)

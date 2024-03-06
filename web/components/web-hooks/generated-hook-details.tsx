@@ -1,16 +1,14 @@
-import { WebhookSecretKey } from "./form";
-
-import { Button } from "@servcy/ui";
-
-import { IWebhook } from "@servcy/types";
+import { IWebhook } from "@servcy/types"
+import { Button } from "@servcy/ui"
+import { WebhookSecretKey } from "./form"
 
 type Props = {
-    handleClose: () => void;
-    webhookDetails: IWebhook;
-};
+    handleClose: () => void
+    webhookDetails: IWebhook
+}
 
 export const GeneratedHookDetails: React.FC<Props> = (props) => {
-    const { handleClose, webhookDetails } = props;
+    const { handleClose, webhookDetails } = props
 
     return (
         <div>
@@ -28,5 +26,5 @@ export const GeneratedHookDetails: React.FC<Props> = (props) => {
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}

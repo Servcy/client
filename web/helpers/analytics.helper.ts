@@ -1,36 +1,33 @@
 // nivo
-import { BarDatum } from "@nivo/bar";
-
-import { addSpaceIfCamelCase, capitalizeFirstLetter, generateRandomColor } from "@helpers/string.helper";
-
-import { IAnalyticsData, IAnalyticsParams, IAnalyticsResponse, TStateGroups } from "@servcy/types";
-
-import { DATE_KEYS } from "@constants/analytics";
-import { MONTHS_LIST } from "@constants/calendar";
-import { STATE_GROUPS } from "@constants/state";
+import { DATE_KEYS } from "@constants/analytics"
+import { MONTHS_LIST } from "@constants/calendar"
+import { STATE_GROUPS } from "@constants/state"
+import { addSpaceIfCamelCase, capitalizeFirstLetter, generateRandomColor } from "@helpers/string.helper"
+import { BarDatum } from "@nivo/bar"
+import { IAnalyticsData, IAnalyticsParams, IAnalyticsResponse, TStateGroups } from "@servcy/types"
 
 export const convertResponseToBarGraphData = (
     response: IAnalyticsData | undefined,
     params: IAnalyticsParams
 ): { data: BarDatum[]; xAxisKeys: string[] } => {
     if (!response || !(typeof response === "object") || Object.keys(response).length === 0)
-        return { data: [], xAxisKeys: [] };
+        return { data: [], xAxisKeys: [] }
 
-    const data: BarDatum[] = [];
+    const data: BarDatum[] = []
 
-    let xAxisKeys: string[] = [];
-    const yAxisKey = params.y_axis === "issue_count" ? "count" : "estimate";
+    let xAxisKeys: string[] = []
+    const yAxisKey = params.y_axis === "issue_count" ? "count" : "estimate"
 
     Object.keys(response).forEach((key) => {
-        const segments: { [key: string]: number } = {};
+        const segments: { [key: string]: number } = {}
 
         if (params.segment) {
             response[key].map((item: any) => {
-                segments[item.segment ?? "None"] = item[yAxisKey] ?? 0;
+                segments[item.segment ?? "None"] = item[yAxisKey] ?? 0
 
                 // store the segment in the xAxisKeys array
-                if (!xAxisKeys.includes(item.segment ?? "None")) xAxisKeys.push(item.segment ?? "None");
-            });
+                if (!xAxisKeys.includes(item.segment ?? "None")) xAxisKeys.push(item.segment ?? "None")
+            })
 
             data.push({
                 name: DATE_KEYS.includes(params.x_axis)
@@ -39,11 +36,11 @@ export const convertResponseToBarGraphData = (
                       ? capitalizeFirstLetter(key)
                       : key,
                 ...segments,
-            });
+            })
         } else {
-            xAxisKeys = [yAxisKey];
+            xAxisKeys = [yAxisKey]
 
-            const item = response[key][0];
+            const item = response[key][0]
 
             data.push({
                 name: DATE_KEYS.includes(params.x_axis)
@@ -52,12 +49,12 @@ export const convertResponseToBarGraphData = (
                       ? capitalizeFirstLetter(item.dimension ?? "None")
                       : item.dimension ?? "None",
                 [yAxisKey]: item[yAxisKey] ?? 0,
-            });
+            })
         }
-    });
+    })
 
-    return { data, xAxisKeys };
-};
+    return { data, xAxisKeys }
+}
 
 export const generateBarColor = (
     value: string,
@@ -65,20 +62,20 @@ export const generateBarColor = (
     params: IAnalyticsParams,
     type: "x_axis" | "segment"
 ): string => {
-    let color: string | undefined = generateRandomColor(value);
+    let color: string | undefined = generateRandomColor(value)
 
-    if (!analytics) return color;
+    if (!analytics) return color
 
     if (params[type] === "state_id")
-        color = analytics?.extras.state_details.find((s) => s.state_id === value)?.state__color;
+        color = analytics?.extras.state_details.find((s) => s.state_id === value)?.state__color
 
     if (params[type] === "labels__id")
-        color = analytics?.extras.label_details.find((l) => l.labels__id === value)?.labels__color ?? undefined;
+        color = analytics?.extras.label_details.find((l) => l.labels__id === value)?.labels__color ?? undefined
 
-    if (params[type] === "state__group") color = STATE_GROUPS[value.toLowerCase() as TStateGroups].color;
+    if (params[type] === "state__group") color = STATE_GROUPS[value.toLowerCase() as TStateGroups].color
 
     if (params[type] === "priority") {
-        const priority = value.toLowerCase();
+        const priority = value.toLowerCase()
 
         color =
             priority === "urgent"
@@ -89,11 +86,11 @@ export const generateBarColor = (
                     ? "#eab308"
                     : priority === "low"
                       ? "#22c55e"
-                      : "#ced4da";
+                      : "#ced4da"
     }
 
-    return color ?? generateRandomColor(value);
-};
+    return color ?? generateRandomColor(value)
+}
 
 export const generateDisplayName = (
     value: string,
@@ -101,41 +98,41 @@ export const generateDisplayName = (
     params: IAnalyticsParams,
     type: "x_axis" | "segment"
 ): string => {
-    let displayName = addSpaceIfCamelCase(value);
+    let displayName = addSpaceIfCamelCase(value)
 
-    if (!analytics) return displayName;
+    if (!analytics) return displayName
 
     if (params[type] === "assignees__id")
         displayName =
             analytics?.extras.assignee_details.find((a) => a.assignees__id === value)?.assignees__display_name ??
-            "No assignee";
+            "No assignee"
 
     if (params[type] === "issue_cycle__cycle_id")
         displayName =
             analytics?.extras.cycle_details.find((c) => c.issue_cycle__cycle_id === value)?.issue_cycle__cycle__name ??
-            "None";
+            "None"
 
     if (params[type] === "issue_module__module_id")
         displayName =
             analytics?.extras.module_details.find((m) => m.issue_module__module_id === value)
-                ?.issue_module__module__name ?? "None";
+                ?.issue_module__module__name ?? "None"
 
     if (params[type] === "labels__id")
-        displayName = analytics?.extras.label_details.find((l) => l.labels__id === value)?.labels__name ?? "None";
+        displayName = analytics?.extras.label_details.find((l) => l.labels__id === value)?.labels__name ?? "None"
 
     if (params[type] === "state_id")
-        displayName = analytics?.extras.state_details.find((s) => s.state_id === value)?.state__name ?? "None";
+        displayName = analytics?.extras.state_details.find((s) => s.state_id === value)?.state__name ?? "None"
 
-    if (DATE_KEYS.includes(params.segment ?? "")) displayName = renderMonthAndYear(value);
+    if (DATE_KEYS.includes(params.segment ?? "")) displayName = renderMonthAndYear(value)
 
-    return displayName;
-};
+    return displayName
+}
 
 export const renderMonthAndYear = (date: string | number | null): string => {
-    if (!date || date === "") return "";
+    if (!date || date === "") return ""
 
-    const monthNumber = parseInt(`${date}`.split("-")[1], 10);
-    const year = `${date}`.split("-")[0];
+    const monthNumber = parseInt(`${date}`.split("-")[1], 10)
+    const year = `${date}`.split("-")[0]
 
-    return (MONTHS_LIST[monthNumber]?.shortTitle ?? "None") + ` ${year}` ?? "";
-};
+    return (MONTHS_LIST[monthNumber]?.shortTitle ?? "None") + ` ${year}` ?? ""
+}

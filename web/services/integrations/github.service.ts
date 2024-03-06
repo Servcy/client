@@ -1,14 +1,12 @@
-import { APIService } from "@services/api.service";
+import { API_BASE_URL } from "@helpers/common.helper"
+import { APIService } from "@services/api.service"
+import { IGithubRepoInfo, IGithubServiceImportFormData } from "@servcy/types"
 
-import { API_BASE_URL } from "@helpers/common.helper";
-
-import { IGithubRepoInfo, IGithubServiceImportFormData } from "@servcy/types";
-
-const integrationServiceType: string = "github";
+const integrationServiceType: string = "github"
 
 export class GithubIntegrationService extends APIService {
     constructor() {
-        super(API_BASE_URL);
+        super(API_BASE_URL)
     }
 
     async listAllRepositories(workspaceSlug: string, integrationSlug: string): Promise<any> {
@@ -17,8 +15,8 @@ export class GithubIntegrationService extends APIService {
         )
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async getGithubRepoInfo(workspaceSlug: string, params: { owner: string; repo: string }): Promise<IGithubRepoInfo> {
@@ -27,15 +25,15 @@ export class GithubIntegrationService extends APIService {
         })
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 
     async createGithubServiceImport(workspaceSlug: string, data: IGithubServiceImportFormData): Promise<any> {
         return this.post(`/api/workspaces/${workspaceSlug}/projects/importers/${integrationServiceType}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data;
-            });
+                throw error?.response?.data
+            })
     }
 }

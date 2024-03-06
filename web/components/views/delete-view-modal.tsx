@@ -1,51 +1,48 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { Dialog, Transition } from "@headlessui/react";
-import { AlertTriangle } from "lucide-react";
-
-import { useProjectView } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button } from "@servcy/ui";
-
-import { IProjectView } from "@servcy/types";
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { useProjectView } from "@hooks/store"
+import { AlertTriangle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IProjectView } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 type Props = {
-    data: IProjectView;
-    isOpen: boolean;
-    onClose: () => void;
-};
+    data: IProjectView
+    isOpen: boolean
+    onClose: () => void
+}
 
 export const DeleteProjectViewModal: React.FC<Props> = observer((props) => {
-    const { data, isOpen, onClose } = props;
+    const { data, isOpen, onClose } = props
     // states
-    const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+    const [isDeleteLoading, setIsDeleteLoading] = useState(false)
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { deleteView } = useProjectView();
+    const { deleteView } = useProjectView()
 
     const handleClose = () => {
-        onClose();
-        setIsDeleteLoading(false);
-    };
+        onClose()
+        setIsDeleteLoading(false)
+    }
 
     const handleDeleteView = async () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
-        setIsDeleteLoading(true);
+        setIsDeleteLoading(true)
 
         await deleteView(workspaceSlug.toString(), projectId.toString(), data.id)
             .then(() => {
-                handleClose();
+                handleClose()
 
                 toast.error({
                     type: "success",
                     title: "Success!",
                     message: "View deleted successfully.",
-                });
+                })
             })
             .catch(() =>
                 toast.error({
@@ -55,9 +52,9 @@ export const DeleteProjectViewModal: React.FC<Props> = observer((props) => {
                 })
             )
             .finally(() => {
-                setIsDeleteLoading(false);
-            });
-    };
+                setIsDeleteLoading(false)
+            })
+    }
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -125,5 +122,5 @@ export const DeleteProjectViewModal: React.FC<Props> = observer((props) => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

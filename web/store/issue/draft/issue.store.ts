@@ -1,47 +1,45 @@
-import concat from "lodash/concat";
-import pull from "lodash/pull";
-import set from "lodash/set";
-import uniq from "lodash/uniq";
-import update from "lodash/update";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import { IssueDraftService } from "@services/issue/issue_draft.service"
+import concat from "lodash/concat"
+import pull from "lodash/pull"
+import set from "lodash/set"
+import uniq from "lodash/uniq"
+import update from "lodash/update"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types"
 // base class
-import { IssueHelperStore } from "../helpers/issue-helper.store";
-
-import { IssueDraftService } from "@services/issue/issue_draft.service";
-
-import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types";
-import { IIssueRootStore } from "../root.store";
+import { IssueHelperStore } from "../helpers/issue-helper.store"
+import { IIssueRootStore } from "../root.store"
 
 export interface IDraftIssues {
     // observable
-    loader: TLoader;
-    issues: { [project_id: string]: string[] };
-    viewFlags: ViewFlags;
+    loader: TLoader
+    issues: { [project_id: string]: string[] }
+    viewFlags: ViewFlags
     // computed
-    groupedIssueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined;
+    groupedIssueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined
     // actions
-    fetchIssues: (workspaceSlug: string, projectId: string, loadType: TLoader) => Promise<TIssue[]>;
-    createIssue: (workspaceSlug: string, projectId: string, data: Partial<TIssue>) => Promise<TIssue>;
-    updateIssue: (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssue>) => Promise<void>;
-    removeIssue: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
-    quickAddIssue: undefined;
+    fetchIssues: (workspaceSlug: string, projectId: string, loadType: TLoader) => Promise<TIssue[]>
+    createIssue: (workspaceSlug: string, projectId: string, data: Partial<TIssue>) => Promise<TIssue>
+    updateIssue: (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssue>) => Promise<void>
+    removeIssue: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>
+    quickAddIssue: undefined
 }
 
 export class DraftIssues extends IssueHelperStore implements IDraftIssues {
-    loader: TLoader = "init-loader";
-    issues: { [project_id: string]: string[] } = {};
+    loader: TLoader = "init-loader"
+    issues: { [project_id: string]: string[] } = {}
     viewFlags = {
         enableQuickAdd: false,
         enableIssueCreation: true,
         enableInlineEditing: true,
-    };
+    }
     // root store
-    rootIssueStore: IIssueRootStore;
+    rootIssueStore: IIssueRootStore
     // service
-    issueDraftService;
+    issueDraftService
 
     constructor(_rootStore: IIssueRootStore) {
-        super(_rootStore);
+        super(_rootStore)
         makeObservable(this, {
             // observable
             loader: observable.ref,
@@ -53,126 +51,126 @@ export class DraftIssues extends IssueHelperStore implements IDraftIssues {
             createIssue: action,
             updateIssue: action,
             removeIssue: action,
-        });
+        })
         // root store
-        this.rootIssueStore = _rootStore;
-        this.issueDraftService = new IssueDraftService();
+        this.rootIssueStore = _rootStore
+        this.issueDraftService = new IssueDraftService()
     }
 
     get getIssues() {
-        const projectId = this.rootIssueStore.projectId;
-        if (!projectId || !this.issues || !this.issues[projectId]) return undefined;
+        const projectId = this.rootIssueStore.projectId
+        if (!projectId || !this.issues || !this.issues[projectId]) return undefined
 
-        return this.issues[projectId];
+        return this.issues[projectId]
     }
 
     get groupedIssueIds() {
-        const projectId = this.rootIssueStore.projectId;
-        if (!projectId) return undefined;
+        const projectId = this.rootIssueStore.projectId
+        if (!projectId) return undefined
 
-        const displayFilters = this.rootIssueStore?.draftIssuesFilter?.issueFilters?.displayFilters;
-        if (!displayFilters) return undefined;
+        const displayFilters = this.rootIssueStore?.draftIssuesFilter?.issueFilters?.displayFilters
+        if (!displayFilters) return undefined
 
-        const subGroupBy = displayFilters?.sub_group_by;
-        const groupBy = displayFilters?.group_by;
-        const orderBy = displayFilters?.order_by;
-        const layout = displayFilters?.layout;
+        const subGroupBy = displayFilters?.sub_group_by
+        const groupBy = displayFilters?.group_by
+        const orderBy = displayFilters?.order_by
+        const layout = displayFilters?.layout
 
-        const draftIssueIds = this.issues[projectId];
-        if (!draftIssueIds) return undefined;
+        const draftIssueIds = this.issues[projectId]
+        if (!draftIssueIds) return undefined
 
-        const _issues = this.rootIssueStore.issues.getIssuesByIds(draftIssueIds, "un-archived");
-        if (!_issues) return [];
+        const _issues = this.rootIssueStore.issues.getIssuesByIds(draftIssueIds, "un-archived")
+        if (!_issues) return []
 
-        let issues: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined = undefined;
+        let issues: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined = undefined
 
         if (layout === "list" && orderBy) {
-            if (groupBy) issues = this.groupedIssues(groupBy, orderBy, _issues);
-            else issues = this.unGroupedIssues(orderBy, _issues);
+            if (groupBy) issues = this.groupedIssues(groupBy, orderBy, _issues)
+            else issues = this.unGroupedIssues(orderBy, _issues)
         } else if (layout === "kanban" && groupBy && orderBy) {
-            if (subGroupBy) issues = this.subGroupedIssues(subGroupBy, groupBy, orderBy, _issues);
-            else issues = this.groupedIssues(groupBy, orderBy, _issues);
+            if (subGroupBy) issues = this.subGroupedIssues(subGroupBy, groupBy, orderBy, _issues)
+            else issues = this.groupedIssues(groupBy, orderBy, _issues)
         }
 
-        return issues;
+        return issues
     }
 
     fetchIssues = async (workspaceSlug: string, projectId: string, loadType: TLoader = "init-loader") => {
         try {
-            this.loader = loadType;
+            this.loader = loadType
 
-            const params = this.rootIssueStore?.draftIssuesFilter?.appliedFilters;
-            const response = await this.issueDraftService.getDraftIssues(workspaceSlug, projectId, params);
+            const params = this.rootIssueStore?.draftIssuesFilter?.appliedFilters
+            const response = await this.issueDraftService.getDraftIssues(workspaceSlug, projectId, params)
 
             runInAction(() => {
                 set(
                     this.issues,
                     [projectId],
                     response.map((issue) => issue.id)
-                );
-                this.loader = undefined;
-            });
+                )
+                this.loader = undefined
+            })
 
-            this.rootIssueStore.issues.addIssue(response);
+            this.rootIssueStore.issues.addIssue(response)
 
-            return response;
+            return response
         } catch (error) {
-            console.error(error);
-            this.loader = undefined;
-            throw error;
+            console.error(error)
+            this.loader = undefined
+            throw error
         }
-    };
+    }
 
     createIssue = async (workspaceSlug: string, projectId: string, data: Partial<TIssue>) => {
         try {
-            const response = await this.issueDraftService.createDraftIssue(workspaceSlug, projectId, data);
+            const response = await this.issueDraftService.createDraftIssue(workspaceSlug, projectId, data)
 
             runInAction(() => {
-                update(this.issues, [projectId], (issueIds = []) => uniq(concat(issueIds, response.id)));
-            });
+                update(this.issues, [projectId], (issueIds = []) => uniq(concat(issueIds, response.id)))
+            })
 
-            this.rootStore.issues.addIssue([response]);
+            this.rootStore.issues.addIssue([response])
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     updateIssue = async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssue>) => {
         try {
-            await this.issueDraftService.updateDraftIssue(workspaceSlug, projectId, issueId, data);
+            await this.issueDraftService.updateDraftIssue(workspaceSlug, projectId, issueId, data)
 
-            this.rootStore.issues.updateIssue(issueId, data);
+            this.rootStore.issues.updateIssue(issueId, data)
 
             if (data.hasOwnProperty("is_draft") && data?.is_draft === false) {
                 runInAction(() => {
                     update(this.issues, [projectId], (issueIds = []) => {
-                        if (issueIds.includes(issueId)) pull(issueIds, issueId);
-                        return issueIds;
-                    });
-                });
+                        if (issueIds.includes(issueId)) pull(issueIds, issueId)
+                        return issueIds
+                    })
+                })
             }
         } catch (error) {
-            this.fetchIssues(workspaceSlug, projectId, "mutation");
-            throw error;
+            this.fetchIssues(workspaceSlug, projectId, "mutation")
+            throw error
         }
-    };
+    }
 
     removeIssue = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            await this.rootIssueStore.projectIssues.removeIssue(workspaceSlug, projectId, issueId);
+            await this.rootIssueStore.projectIssues.removeIssue(workspaceSlug, projectId, issueId)
 
             runInAction(() => {
                 update(this.issues, [projectId], (issueIds = []) => {
-                    if (issueIds.includes(issueId)) pull(issueIds, issueId);
-                    return issueIds;
-                });
-            });
+                    if (issueIds.includes(issueId)) pull(issueIds, issueId)
+                    return issueIds
+                })
+            })
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
-    quickAddIssue: undefined;
+    quickAddIssue: undefined
 }

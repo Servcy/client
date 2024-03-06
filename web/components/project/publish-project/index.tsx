@@ -1,2 +1,2 @@
-export * from "./modal";
-export * from "./popover";
+export * from "./modal"
+export * from "./popover"

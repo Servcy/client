@@ -1,6 +1,5 @@
-import React from "react";
-
-import type { Props } from "./types";
+import React from "react"
+import type { Props } from "./types"
 
 export const PencilScribbleIcon: React.FC<Props> = ({ width = "20", height = "20", className, color = "#000000" }) => (
     <svg width={width} height={height} className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
@@ -9,4 +8,4 @@ export const PencilScribbleIcon: React.FC<Props> = ({ width = "20", height = "20
             fill={color}
         />
     </svg>
-);
+)

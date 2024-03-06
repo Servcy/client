@@ -1,35 +1,33 @@
-import { useRouter } from "next/router";
-import { BarChart2, PanelRight } from "lucide-react";
-
-import { Breadcrumbs } from "@servcy/ui";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-import { useApplication } from "@hooks/store";
-import { observer } from "mobx-react";
-import { cn } from "@helpers/common.helper";
-import { useEffect } from "react";
+import { useRouter } from "next/router"
+import { useEffect } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { cn } from "@helpers/common.helper"
+import { useApplication } from "@hooks/store"
+import { BarChart2, PanelRight } from "lucide-react"
+import { observer } from "mobx-react"
+import { Breadcrumbs } from "@servcy/ui"
 
 export const WorkspaceAnalyticsHeader = observer(() => {
-    const router = useRouter();
-    const { analytics_tab } = router.query;
+    const router = useRouter()
+    const { analytics_tab } = router.query
 
-    const { theme: themeStore } = useApplication();
+    const { theme: themeStore } = useApplication()
 
     useEffect(() => {
         const handleToggleWorkspaceAnalyticsSidebar = () => {
             if (window && window.innerWidth < 768) {
-                themeStore.toggleWorkspaceAnalyticsSidebar(true);
+                themeStore.toggleWorkspaceAnalyticsSidebar(true)
             }
             if (window && themeStore.workspaceAnalyticsSidebarCollapsed && window.innerWidth >= 768) {
-                themeStore.toggleWorkspaceAnalyticsSidebar(false);
+                themeStore.toggleWorkspaceAnalyticsSidebar(false)
             }
-        };
+        }
 
-        window.addEventListener("resize", handleToggleWorkspaceAnalyticsSidebar);
-        handleToggleWorkspaceAnalyticsSidebar();
-        return () => window.removeEventListener("resize", handleToggleWorkspaceAnalyticsSidebar);
-    }, [themeStore]);
+        window.addEventListener("resize", handleToggleWorkspaceAnalyticsSidebar)
+        handleToggleWorkspaceAnalyticsSidebar()
+        return () => window.removeEventListener("resize", handleToggleWorkspaceAnalyticsSidebar)
+    }, [themeStore])
 
     return (
         <>
@@ -54,7 +52,7 @@ export const WorkspaceAnalyticsHeader = observer(() => {
                             <button
                                 className="block md:hidden"
                                 onClick={() => {
-                                    themeStore.toggleWorkspaceAnalyticsSidebar();
+                                    themeStore.toggleWorkspaceAnalyticsSidebar()
                                 }}
                             >
                                 <PanelRight
@@ -71,5 +69,5 @@ export const WorkspaceAnalyticsHeader = observer(() => {
                 </div>
             </div>
         </>
-    );
-});
+    )
+})

@@ -1,37 +1,36 @@
-import { FC } from "react";
-import { X } from "lucide-react";
-
-import { TLabelOperations } from "./root";
-import { useIssueDetail, useLabel } from "@hooks/store";
+import { FC } from "react"
+import { useIssueDetail, useLabel } from "@hooks/store"
+import { X } from "lucide-react"
+import { TLabelOperations } from "./root"
 
 type TLabelListItem = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    labelId: string;
-    labelOperations: TLabelOperations;
-    disabled: boolean;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    labelId: string
+    labelOperations: TLabelOperations
+    disabled: boolean
+}
 
 export const LabelListItem: FC<TLabelListItem> = (props) => {
-    const { workspaceSlug, projectId, issueId, labelId, labelOperations, disabled } = props;
+    const { workspaceSlug, projectId, issueId, labelId, labelOperations, disabled } = props
 
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { getLabelById } = useLabel();
+    } = useIssueDetail()
+    const { getLabelById } = useLabel()
 
-    const issue = getIssueById(issueId);
-    const label = getLabelById(labelId);
+    const issue = getIssueById(issueId)
+    const label = getLabelById(labelId)
 
     const handleLabel = async () => {
         if (issue && !disabled) {
-            const currentLabels = issue.label_ids.filter((_labelId) => _labelId !== labelId);
-            await labelOperations.updateIssue(workspaceSlug, projectId, issueId, { label_ids: currentLabels });
+            const currentLabels = issue.label_ids.filter((_labelId) => _labelId !== labelId)
+            await labelOperations.updateIssue(workspaceSlug, projectId, issueId, { label_ids: currentLabels })
         }
-    };
+    }
 
-    if (!label) return <></>;
+    if (!label) return <></>
     return (
         <div
             key={labelId}
@@ -53,5 +52,5 @@ export const LabelListItem: FC<TLabelListItem> = (props) => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}

@@ -1,35 +1,32 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react";
-
-import { FilterHeader, FilterOption } from "@components/issues";
-
-import { Loader, StateGroupIcon } from "@servcy/ui";
-
-import { IState } from "@servcy/types";
+import React, { useState } from "react"
+import { FilterHeader, FilterOption } from "@components/issues"
+import { observer } from "mobx-react"
+import { IState } from "@servcy/types"
+import { Loader, StateGroupIcon } from "@servcy/ui"
 
 type Props = {
-    appliedFilters: string[] | null;
-    handleUpdate: (val: string) => void;
-    searchQuery: string;
-    states: IState[] | undefined;
-};
+    appliedFilters: string[] | null
+    handleUpdate: (val: string) => void
+    searchQuery: string
+    states: IState[] | undefined
+}
 
 export const FilterState: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, searchQuery, states } = props;
+    const { appliedFilters, handleUpdate, searchQuery, states } = props
 
-    const [itemsToRender, setItemsToRender] = useState(5);
-    const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [itemsToRender, setItemsToRender] = useState(5)
+    const [previewEnabled, setPreviewEnabled] = useState(true)
 
-    const appliedFiltersCount = appliedFilters?.length ?? 0;
+    const appliedFiltersCount = appliedFilters?.length ?? 0
 
-    const filteredOptions = states?.filter((s) => s.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredOptions = states?.filter((s) => s.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
     const handleViewToggle = () => {
-        if (!filteredOptions) return;
+        if (!filteredOptions) return
 
-        if (itemsToRender === filteredOptions.length) setItemsToRender(5);
-        else setItemsToRender(filteredOptions.length);
-    };
+        if (itemsToRender === filteredOptions.length) setItemsToRender(5)
+        else setItemsToRender(filteredOptions.length)
+    }
 
     return (
         <>
@@ -75,5 +72,5 @@ export const FilterState: React.FC<Props> = observer((props) => {
                 </div>
             )}
         </>
-    );
-});
+    )
+})

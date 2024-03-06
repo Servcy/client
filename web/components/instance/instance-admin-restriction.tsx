@@ -1,15 +1,13 @@
-import { FC } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"
+import Link from "next/link"
+import { FC } from "react"
+import { LayoutGrid } from "lucide-react"
 // images
-import AccessDeniedImg from "public/auth/access-denied.svg";
-
-import { Button } from "@servcy/ui";
-
-import { LayoutGrid } from "lucide-react";
+import AccessDeniedImg from "public/auth/access-denied.svg"
+import { Button } from "@servcy/ui"
 
 interface InstanceAdminRestrictionProps {
-    redirectWorkspaceSlug: string;
+    redirectWorkspaceSlug: string
 }
 
 export const InstanceAdminRestriction: FC<InstanceAdminRestrictionProps> = ({ redirectWorkspaceSlug }) => (
@@ -78,4 +76,4 @@ export const InstanceAdminRestriction: FC<InstanceAdminRestrictionProps> = ({ re
             </Link>
         </div>
     </div>
-);
+)

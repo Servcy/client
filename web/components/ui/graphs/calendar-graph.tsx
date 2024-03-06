@@ -1,9 +1,7 @@
 // nivo
-import { ResponsiveCalendar, CalendarSvgProps } from "@nivo/calendar";
-
-import { TGraph } from "./types";
-
-import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";
+import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph"
+import { CalendarSvgProps, ResponsiveCalendar } from "@nivo/calendar"
+import { TGraph } from "./types"
 
 export const CalendarGraph: React.FC<TGraph & Omit<CalendarSvgProps, "height" | "width">> = ({
     height = "400px",
@@ -31,4 +29,4 @@ export const CalendarGraph: React.FC<TGraph & Omit<CalendarSvgProps, "height" | 
             {...rest}
         />
     </div>
-);
+)

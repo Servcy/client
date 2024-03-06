@@ -1,29 +1,27 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import { Ban } from "lucide-react";
-
-import { useMember } from "@hooks/store";
-
-import { Avatar, CustomSearchSelect } from "@servcy/ui";
+import React from "react"
+import { useMember } from "@hooks/store"
+import { Ban } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Avatar, CustomSearchSelect } from "@servcy/ui"
 
 type Props = {
-    value: any;
-    onChange: (val: string) => void;
-    isDisabled?: boolean;
-};
+    value: any
+    onChange: (val: string) => void
+    isDisabled?: boolean
+}
 
 export const MemberSelect: React.FC<Props> = observer((props) => {
-    const { value, onChange, isDisabled = false } = props;
+    const { value, onChange, isDisabled = false } = props
     // store hooks
     const {
         project: { projectMemberIds, getProjectMemberDetails },
-    } = useMember();
+    } = useMember()
 
     const options = projectMemberIds
         ?.map((userId) => {
-            const memberDetails = getProjectMemberDetails(userId);
+            const memberDetails = getProjectMemberDetails(userId)
 
-            if (!memberDetails?.member) return;
+            if (!memberDetails?.member) return
 
             return {
                 value: `${memberDetails?.member.id}`,
@@ -34,16 +32,16 @@ export const MemberSelect: React.FC<Props> = observer((props) => {
                         {memberDetails?.member.display_name}
                     </div>
                 ),
-            };
+            }
         })
         .filter((option) => !!option) as
         | {
-              value: string;
-              query: string;
-              content: React.JSX.Element;
+              value: string
+              query: string
+              content: React.JSX.Element
           }[]
-        | undefined;
-    const selectedOption = getProjectMemberDetails(value);
+        | undefined
+    const selectedOption = getProjectMemberDetails(value)
 
     return (
         <CustomSearchSelect
@@ -84,5 +82,5 @@ export const MemberSelect: React.FC<Props> = observer((props) => {
             onChange={onChange}
             disabled={isDisabled}
         />
-    );
-});
+    )
+})

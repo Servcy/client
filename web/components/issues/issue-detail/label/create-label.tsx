@@ -1,39 +1,36 @@
-import { FC, useState, Fragment, useEffect } from "react";
-import { Plus, X, Loader } from "lucide-react";
-import { Controller, useForm } from "react-hook-form";
-import { TwitterPicker } from "react-color";
-import { Popover, Transition } from "@headlessui/react";
-
-import { useIssueDetail } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Input } from "@servcy/ui";
-
-import { TLabelOperations } from "./root";
-import { IIssueLabel } from "@servcy/types";
+import { FC, Fragment, useEffect, useState } from "react"
+import { Popover, Transition } from "@headlessui/react"
+import { useIssueDetail } from "@hooks/store"
+import { Loader, Plus, X } from "lucide-react"
+import { TwitterPicker } from "react-color"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { IIssueLabel } from "@servcy/types"
+import { Input } from "@servcy/ui"
+import { TLabelOperations } from "./root"
 
 type ILabelCreate = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    labelOperations: TLabelOperations;
-    disabled?: boolean;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    labelOperations: TLabelOperations
+    disabled?: boolean
+}
 
 const defaultValues: Partial<IIssueLabel> = {
     name: "",
     color: "#ff0000",
-};
+}
 
 export const LabelCreate: FC<ILabelCreate> = (props) => {
-    const { workspaceSlug, projectId, issueId, labelOperations, disabled = false } = props;
+    const { workspaceSlug, projectId, issueId, labelOperations, disabled = false } = props
 
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
+    } = useIssueDetail()
     // state
-    const [isCreateToggle, setIsCreateToggle] = useState(false);
-    const handleIsCreateToggle = () => setIsCreateToggle(!isCreateToggle);
+    const [isCreateToggle, setIsCreateToggle] = useState(false)
+    const handleIsCreateToggle = () => setIsCreateToggle(!isCreateToggle)
     // react hook form
     const {
         handleSubmit,
@@ -43,32 +40,32 @@ export const LabelCreate: FC<ILabelCreate> = (props) => {
         setFocus,
     } = useForm<Partial<IIssueLabel>>({
         defaultValues,
-    });
+    })
 
     useEffect(() => {
-        if (!isCreateToggle) return;
+        if (!isCreateToggle) return
 
-        setFocus("name");
-        reset();
-    }, [isCreateToggle, reset, setFocus]);
+        setFocus("name")
+        reset()
+    }, [isCreateToggle, reset, setFocus])
 
     const handleLabel = async (formData: Partial<IIssueLabel>) => {
-        if (!workspaceSlug || !projectId || isSubmitting) return;
+        if (!workspaceSlug || !projectId || isSubmitting) return
 
         try {
-            const issue = getIssueById(issueId);
-            const labelResponse = await labelOperations.createLabel(workspaceSlug, projectId, formData);
-            const currentLabels = [...(issue?.label_ids || []), labelResponse.id];
-            await labelOperations.updateIssue(workspaceSlug, projectId, issueId, { label_ids: currentLabels });
-            reset(defaultValues);
+            const issue = getIssueById(issueId)
+            const labelResponse = await labelOperations.createLabel(workspaceSlug, projectId, formData)
+            const currentLabels = [...(issue?.label_ids || []), labelResponse.id]
+            await labelOperations.updateIssue(workspaceSlug, projectId, issueId, { label_ids: currentLabels })
+            reset(defaultValues)
         } catch (error) {
             toast.error({
                 title: "Label creation failed",
                 type: "error",
                 message: "Label creation failed. Please try again sometime later.",
-            });
+            })
         }
-    };
+    }
 
     return (
         <>
@@ -166,5 +163,5 @@ export const LabelCreate: FC<ILabelCreate> = (props) => {
                 </form>
             )}
         </>
-    );
-};
+    )
+}

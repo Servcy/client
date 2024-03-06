@@ -1,12 +1,11 @@
-import React from "react";
-import toast from "react-hot-toast";
-
-import { AlertTriangle, CheckCircle, Info, X, XCircle } from "lucide-react";
+import React from "react"
+import { AlertTriangle, CheckCircle, Info, X, XCircle } from "lucide-react"
+import toast from "react-hot-toast"
 
 const ToastAlerts = () => {
-    const { alerts, removeAlert } = useToast();
+    const { alerts, removeAlert } = useToast()
 
-    if (!alerts) return null;
+    if (!alerts) return null
 
     return (
         <div className="pointer-events-none fixed right-5 top-5 z-50 h-full w-80 space-y-5 overflow-hidden">
@@ -54,7 +53,7 @@ const ToastAlerts = () => {
                 </div>
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default ToastAlerts;
+export default ToastAlerts

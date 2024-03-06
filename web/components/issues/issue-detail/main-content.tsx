@@ -1,63 +1,59 @@
-import { useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
-
-import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
-import useReloadConfirmations from "@hooks/use-reload-confirmation";
-
-import { IssueAttachmentRoot, IssueUpdateStatus } from "@components/issues";
-import { IssueTitleInput } from "../title-input";
-import { IssueDescriptionInput } from "../description-input";
-import { IssueParentDetail } from "./parent";
-import { IssueReaction } from "./reactions";
-import { SubIssuesRoot } from "../sub-issues";
-import { IssueActivity } from "./issue-activity";
-
-import { StateGroupIcon } from "@servcy/ui";
-
-import { TIssueOperations } from "./root";
+import { useEffect, useState } from "react"
+import { IssueAttachmentRoot, IssueUpdateStatus } from "@components/issues"
+import { useIssueDetail, useProjectState, useUser } from "@hooks/store"
+import useReloadConfirmations from "@hooks/use-reload-confirmation"
+import { observer } from "mobx-react-lite"
+import { StateGroupIcon } from "@servcy/ui"
+import { IssueDescriptionInput } from "../description-input"
+import { SubIssuesRoot } from "../sub-issues"
+import { IssueTitleInput } from "../title-input"
+import { IssueActivity } from "./issue-activity"
+import { IssueParentDetail } from "./parent"
+import { IssueReaction } from "./reactions"
+import { TIssueOperations } from "./root"
 
 type Props = {
-    workspaceSlug: string;
-    projectId: string;
-    issueId: string;
-    issueOperations: TIssueOperations;
-    is_editable: boolean;
-};
+    workspaceSlug: string
+    projectId: string
+    issueId: string
+    issueOperations: TIssueOperations
+    is_editable: boolean
+}
 
 export const IssueMainContent: React.FC<Props> = observer((props) => {
-    const { workspaceSlug, projectId, issueId, issueOperations, is_editable } = props;
+    const { workspaceSlug, projectId, issueId, issueOperations, is_editable } = props
     // states
-    const [isSubmitting, setIsSubmitting] = useState<"submitting" | "submitted" | "saved">("saved");
+    const [isSubmitting, setIsSubmitting] = useState<"submitting" | "submitted" | "saved">("saved")
 
-    const { currentUser } = useUser();
-    const { projectStates } = useProjectState();
+    const { currentUser } = useUser()
+    const { projectStates } = useProjectState()
     const {
         issue: { getIssueById },
-    } = useIssueDetail();
-    const { setShowAlert } = useReloadConfirmations(isSubmitting === "submitting");
+    } = useIssueDetail()
+    const { setShowAlert } = useReloadConfirmations(isSubmitting === "submitting")
 
     useEffect(() => {
         if (isSubmitting === "submitted") {
-            setShowAlert(false);
+            setShowAlert(false)
             setTimeout(async () => {
-                setIsSubmitting("saved");
-            }, 2000);
+                setIsSubmitting("saved")
+            }, 2000)
         } else if (isSubmitting === "submitting") {
-            setShowAlert(true);
+            setShowAlert(true)
         }
-    }, [isSubmitting, setShowAlert, setIsSubmitting]);
+    }, [isSubmitting, setShowAlert, setIsSubmitting])
 
-    const issue = issueId ? getIssueById(issueId) : undefined;
-    if (!issue) return <></>;
+    const issue = issueId ? getIssueById(issueId) : undefined
+    if (!issue) return <></>
 
-    const currentIssueState = projectStates?.find((s) => s.id === issue.state_id);
+    const currentIssueState = projectStates?.find((s) => s.id === issue.state_id)
 
     const issueDescription =
         issue.description_html !== undefined || issue.description_html !== null
             ? issue.description_html != ""
                 ? issue.description_html
                 : "<p></p>"
-            : undefined;
+            : undefined
 
     return (
         <>
@@ -134,5 +130,5 @@ export const IssueMainContent: React.FC<Props> = observer((props) => {
 
             <IssueActivity workspaceSlug={workspaceSlug} projectId={projectId} issueId={issueId} />
         </>
-    );
-});
+    )
+})

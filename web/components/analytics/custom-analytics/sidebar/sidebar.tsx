@@ -1,52 +1,44 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-import { mutate } from "swr";
-
-import { AnalyticsService } from "@services/analytics.service";
-
-import { useCycle, useModule, useProject, useUser, useWorkspace } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { CustomAnalyticsSidebarHeader, CustomAnalyticsSidebarProjectsList } from "@components/analytics";
-
-import { Button, LayersIcon } from "@servcy/ui";
-
-import { CalendarDays, Download, RefreshCw } from "lucide-react";
-
-import { renderFormattedDate } from "@helpers/date-time.helper";
-
-import { IAnalyticsParams, IAnalyticsResponse, IExportAnalyticsFormData, IWorkspace } from "@servcy/types";
-
-import { ANALYTICS } from "@constants/fetch-keys";
-import { cn } from "@helpers/common.helper";
+import { useRouter } from "next/router"
+import { useEffect } from "react"
+import { CustomAnalyticsSidebarHeader, CustomAnalyticsSidebarProjectsList } from "@components/analytics"
+import { ANALYTICS } from "@constants/fetch-keys"
+import { cn } from "@helpers/common.helper"
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { useCycle, useModule, useProject, useUser, useWorkspace } from "@hooks/store"
+import { AnalyticsService } from "@services/analytics.service"
+import { CalendarDays, Download, RefreshCw } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { mutate } from "swr"
+import { IAnalyticsParams, IAnalyticsResponse, IExportAnalyticsFormData, IWorkspace } from "@servcy/types"
+import { Button, LayersIcon } from "@servcy/ui"
 
 type Props = {
-    analytics: IAnalyticsResponse | undefined;
-    params: IAnalyticsParams;
-    isProjectLevel: boolean;
-};
+    analytics: IAnalyticsResponse | undefined
+    params: IAnalyticsParams
+    isProjectLevel: boolean
+}
 
-const analyticsService = new AnalyticsService();
+const analyticsService = new AnalyticsService()
 
 export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
-    const { analytics, params, isProjectLevel = false } = props;
+    const { analytics, params, isProjectLevel = false } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, cycleId, moduleId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, cycleId, moduleId } = router.query
 
     // store hooks
-    const { currentUser } = useUser();
-    const { workspaceProjectIds, getProjectById } = useProject();
-    const { getWorkspaceById } = useWorkspace();
+    const { currentUser } = useUser()
+    const { workspaceProjectIds, getProjectById } = useProject()
+    const { getWorkspaceById } = useWorkspace()
 
-    const { fetchCycleDetails, getCycleById } = useCycle();
-    const { fetchModuleDetails, getModuleById } = useModule();
+    const { fetchCycleDetails, getCycleById } = useCycle()
+    const { fetchModuleDetails, getModuleById } = useModule()
 
-    const projectDetails = projectId ? getProjectById(projectId.toString()) ?? undefined : undefined;
+    const projectDetails = projectId ? getProjectById(projectId.toString()) ?? undefined : undefined
 
     const trackExportAnalytics = () => {
-        if (!currentUser) return;
+        if (!currentUser) return
 
         const eventPayload: any = {
             workspaceSlug: workspaceSlug?.toString(),
@@ -56,52 +48,52 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
                 group: params.segment,
                 project: params.project,
             },
-        };
+        }
 
         if (projectDetails) {
-            const workspaceDetails = projectDetails.workspace as IWorkspace;
+            const workspaceDetails = projectDetails.workspace as IWorkspace
 
-            eventPayload.workspaceId = workspaceDetails.id;
-            eventPayload.workspaceName = workspaceDetails.name;
-            eventPayload.projectId = projectDetails.id;
-            eventPayload.projectIdentifier = projectDetails.identifier;
-            eventPayload.projectName = projectDetails.name;
+            eventPayload.workspaceId = workspaceDetails.id
+            eventPayload.workspaceName = workspaceDetails.name
+            eventPayload.projectId = projectDetails.id
+            eventPayload.projectIdentifier = projectDetails.identifier
+            eventPayload.projectName = projectDetails.name
         }
 
         if (cycleDetails || moduleDetails) {
-            const details = cycleDetails || moduleDetails;
+            const details = cycleDetails || moduleDetails
 
-            const currentProjectDetails = getProjectById(details?.project_id || "");
-            const currentWorkspaceDetails = getWorkspaceById(details?.workspace_id || "");
+            const currentProjectDetails = getProjectById(details?.project_id || "")
+            const currentWorkspaceDetails = getWorkspaceById(details?.workspace_id || "")
 
-            eventPayload.workspaceId = details?.workspace_id;
-            eventPayload.workspaceName = currentWorkspaceDetails?.name;
-            eventPayload.projectId = details?.project_id;
-            eventPayload.projectIdentifier = currentProjectDetails?.identifier;
-            eventPayload.projectName = currentProjectDetails?.name;
+            eventPayload.workspaceId = details?.workspace_id
+            eventPayload.workspaceName = currentWorkspaceDetails?.name
+            eventPayload.projectId = details?.project_id
+            eventPayload.projectIdentifier = currentProjectDetails?.identifier
+            eventPayload.projectName = currentProjectDetails?.name
         }
 
         if (cycleDetails) {
-            eventPayload.cycleId = cycleDetails.id;
-            eventPayload.cycleName = cycleDetails.name;
+            eventPayload.cycleId = cycleDetails.id
+            eventPayload.cycleName = cycleDetails.name
         }
 
         if (moduleDetails) {
-            eventPayload.moduleId = moduleDetails.id;
-            eventPayload.moduleName = moduleDetails.name;
+            eventPayload.moduleId = moduleDetails.id
+            eventPayload.moduleName = moduleDetails.name
         }
-    };
+    }
 
     const exportAnalytics = () => {
-        if (!workspaceSlug) return;
+        if (!workspaceSlug) return
 
         const data: IExportAnalyticsFormData = {
             x_axis: params.x_axis,
             y_axis: params.y_axis,
-        };
+        }
 
-        if (params.segment) data.segment = params.segment;
-        if (params.project) data.project = params.project;
+        if (params.segment) data.segment = params.segment
+        if (params.project) data.project = params.project
 
         analyticsService
             .exportAnalytics(workspaceSlug.toString(), data)
@@ -110,9 +102,9 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
                     type: "success",
                     title: "Success!",
                     message: res.message,
-                });
+                })
 
-                trackExportAnalytics();
+                trackExportAnalytics()
             })
             .catch(() =>
                 toast.error({
@@ -120,27 +112,27 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
                     title: "Error!",
                     message: "There was some error in exporting the analytics. Please try again.",
                 })
-            );
-    };
+            )
+    }
 
-    const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined;
-    const moduleDetails = moduleId ? getModuleById(moduleId.toString()) : undefined;
+    const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined
+    const moduleDetails = moduleId ? getModuleById(moduleId.toString()) : undefined
 
     // fetch cycle details
     useEffect(() => {
-        if (!workspaceSlug || !projectId || !cycleId || cycleDetails) return;
+        if (!workspaceSlug || !projectId || !cycleId || cycleDetails) return
 
-        fetchCycleDetails(workspaceSlug.toString(), projectId.toString(), cycleId.toString());
-    }, [cycleId, cycleDetails, fetchCycleDetails, projectId, workspaceSlug]);
+        fetchCycleDetails(workspaceSlug.toString(), projectId.toString(), cycleId.toString())
+    }, [cycleId, cycleDetails, fetchCycleDetails, projectId, workspaceSlug])
 
     // fetch module details
     useEffect(() => {
-        if (!workspaceSlug || !projectId || !moduleId || moduleDetails) return;
+        if (!workspaceSlug || !projectId || !moduleId || moduleDetails) return
 
-        fetchModuleDetails(workspaceSlug.toString(), projectId.toString(), moduleId.toString());
-    }, [moduleId, moduleDetails, fetchModuleDetails, projectId, workspaceSlug]);
+        fetchModuleDetails(workspaceSlug.toString(), projectId.toString(), moduleId.toString())
+    }, [moduleId, moduleDetails, fetchModuleDetails, projectId, workspaceSlug])
 
-    const selectedProjects = params.project && params.project.length > 0 ? params.project : workspaceProjectIds;
+    const selectedProjects = params.project && params.project.length > 0 ? params.project : workspaceProjectIds
 
     return (
         <div
@@ -183,9 +175,9 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
                     variant="neutral-primary"
                     prependIcon={<RefreshCw className="h-3 md:h-3.5 w-3 md:w-3.5" />}
                     onClick={() => {
-                        if (!workspaceSlug) return;
+                        if (!workspaceSlug) return
 
-                        mutate(ANALYTICS(workspaceSlug.toString(), params));
+                        mutate(ANALYTICS(workspaceSlug.toString(), params))
                     }}
                 >
                     <div className={cn(isProjectLevel ? "hidden md:block" : "")}>Refresh</div>
@@ -195,5 +187,5 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
                 </Button>
             </div>
         </div>
-    );
-});
+    )
+})

@@ -1,48 +1,44 @@
-import React from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
-
-import { useProject } from "@hooks/store";
-import toast from "react-hot-toast";
-
-import { Button, CustomMenu } from "@servcy/ui";
+import { useRouter } from "next/router"
+import React from "react"
+import { orderArrayBy } from "@helpers/array.helper"
+import { useProject } from "@hooks/store"
 //icons
-import { Pencil, Trash2 } from "lucide-react";
-
-import { orderArrayBy } from "@helpers/array.helper";
-
-import { IEstimate } from "@servcy/types";
+import { Pencil, Trash2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { IEstimate } from "@servcy/types"
+import { Button, CustomMenu } from "@servcy/ui"
 
 type Props = {
-    estimate: IEstimate;
-    editEstimate: (estimate: IEstimate) => void;
-    deleteEstimate: (estimateId: string) => void;
-};
+    estimate: IEstimate
+    editEstimate: (estimate: IEstimate) => void
+    deleteEstimate: (estimateId: string) => void
+}
 
 export const EstimateListItem: React.FC<Props> = observer((props) => {
-    const { estimate, editEstimate, deleteEstimate } = props;
+    const { estimate, editEstimate, deleteEstimate } = props
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId } = router.query
     // store hooks
-    const { currentProjectDetails, updateProject } = useProject();
+    const { currentProjectDetails, updateProject } = useProject()
 
     const handleUseEstimate = async () => {
-        if (!workspaceSlug || !projectId) return;
+        if (!workspaceSlug || !projectId) return
 
         await updateProject(workspaceSlug.toString(), projectId.toString(), {
             estimate: estimate.id,
         }).catch((err) => {
-            const error = err?.error;
-            const errorString = Array.isArray(error) ? error[0] : error;
+            const error = err?.error
+            const errorString = Array.isArray(error) ? error[0] : error
 
             toast.error({
                 type: "error",
                 title: "Error!",
                 message: errorString ?? "Estimate points could not be used. Please try again.",
-            });
-        });
-    };
+            })
+        })
+    }
 
     return (
         <>
@@ -70,7 +66,7 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
                         <CustomMenu ellipsis>
                             <CustomMenu.MenuItem
                                 onClick={() => {
-                                    editEstimate(estimate);
+                                    editEstimate(estimate)
                                 }}
                             >
                                 <div className="flex items-center justify-start gap-2">
@@ -81,7 +77,7 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
                             {currentProjectDetails?.estimate !== estimate.id && (
                                 <CustomMenu.MenuItem
                                     onClick={() => {
-                                        deleteEstimate(estimate.id);
+                                        deleteEstimate(estimate.id)
                                     }}
                                 >
                                     <div className="flex items-center justify-start gap-2">
@@ -113,5 +109,5 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
                 )}
             </div>
         </>
-    );
-});
+    )
+})

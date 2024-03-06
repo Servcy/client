@@ -1,15 +1,15 @@
 export type Props = {
-    label: React.ReactNode;
-    value: any;
+    label: React.ReactNode
+    value: any
     onChange: (
         data:
             | string
             | {
-                  name: string;
-                  color: string;
+                  name: string
+                  color: string
               }
-    ) => void;
-    onIconColorChange?: (data: any) => void;
-    disabled?: boolean;
-    tabIndex?: number;
-};
+    ) => void
+    onIconColorChange?: (data: any) => void
+    disabled?: boolean
+    tabIndex?: number
+}

@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
+import Image from "next/image"
+import React from "react"
 // images
-import ServcyLogo from "public/logo.svg";
+import ServcyLogo from "public/logo.svg"
 
 export const InstanceNotReady = () => {
-    const servcyLogo = ServcyLogo;
+    const servcyLogo = ServcyLogo
 
     return (
         <div className="h-screen w-full overflow-y-auto bg-onboarding-gradient-100">
@@ -22,5 +22,5 @@ export const InstanceNotReady = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}

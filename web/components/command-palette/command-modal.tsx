@@ -1,46 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { Command } from "cmdk";
-import { Dialog, Transition } from "@headlessui/react";
-import { observer } from "mobx-react-lite";
-import { FolderPlus, Search, Settings } from "lucide-react";
-
-import { useApplication, useEventTracker, useProject } from "@hooks/store";
-
-import { WorkspaceService } from "@services/workspace.service";
-import { IssueService } from "@services/issue";
-
-import useDebounce from "@hooks/use-debounce";
-
+import { useRouter } from "next/router"
+import React, { useEffect, useState } from "react"
 import {
-    CommandPaletteThemeActions,
     ChangeIssueAssignee,
     ChangeIssuePriority,
     ChangeIssueState,
     CommandPaletteHelpActions,
     CommandPaletteIssueActions,
     CommandPaletteProjectActions,
-    CommandPaletteWorkspaceSettingsActions,
     CommandPaletteSearchResults,
-} from "@components/command-palette";
-import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
+    CommandPaletteThemeActions,
+    CommandPaletteWorkspaceSettingsActions,
+} from "@components/command-palette"
+import { ISSUE_DETAILS } from "@constants/fetch-keys"
+import { Dialog, Transition } from "@headlessui/react"
+import { useApplication, useEventTracker, useProject } from "@hooks/store"
+import useDebounce from "@hooks/use-debounce"
+import { IssueService } from "@services/issue"
+import { WorkspaceService } from "@services/workspace.service"
+import { Command } from "cmdk"
+import { FolderPlus, Search, Settings } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { IWorkspaceSearchResults } from "@servcy/types"
+import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui"
 
-import { IWorkspaceSearchResults } from "@servcy/types";
-
-import { ISSUE_DETAILS } from "@constants/fetch-keys";
-
-const workspaceService = new WorkspaceService();
-const issueService = new IssueService();
+const workspaceService = new WorkspaceService()
+const issueService = new IssueService()
 
 export const CommandModal: React.FC = observer(() => {
-    const { getProjectById } = useProject();
+    const { getProjectById } = useProject()
     // states
-    const [placeholder, setPlaceholder] = useState("Type a command or search...");
-    const [resultsCount, setResultsCount] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isSearching, setIsSearching] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [placeholder, setPlaceholder] = useState("Type a command or search...")
+    const [resultsCount, setResultsCount] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
+    const [isSearching, setIsSearching] = useState(false)
+    const [searchTerm, setSearchTerm] = useState("")
     const [results, setResults] = useState<IWorkspaceSearchResults>({
         results: {
             workspace: [],
@@ -51,9 +45,9 @@ export const CommandModal: React.FC = observer(() => {
             issue_view: [],
             page: [],
         },
-    });
-    const [isWorkspaceLevel, setIsWorkspaceLevel] = useState(false);
-    const [pages, setPages] = useState<string[]>([]);
+    })
+    const [isWorkspaceLevel, setIsWorkspaceLevel] = useState(false)
+    const [pages, setPages] = useState<string[]>([])
 
     const {
         commandPalette: {
@@ -62,16 +56,16 @@ export const CommandModal: React.FC = observer(() => {
             toggleCreateIssueModal,
             toggleCreateProjectModal,
         },
-    } = useApplication();
-    const { setTrackElement } = useEventTracker();
+    } = useApplication()
+    const { setTrackElement } = useEventTracker()
 
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, issueId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, issueId } = router.query
 
-    const page = pages[pages.length - 1];
+    const page = pages[pages.length - 1]
 
-    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+    const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
     // TODO: update this to mobx store
     const { data: issueDetails } = useSWR(
@@ -79,25 +73,25 @@ export const CommandModal: React.FC = observer(() => {
         workspaceSlug && projectId && issueId
             ? () => issueService.retrieve(workspaceSlug.toString(), projectId.toString(), issueId.toString())
             : null
-    );
+    )
 
     const closePalette = () => {
-        toggleCommandPaletteModal(false);
-    };
+        toggleCommandPaletteModal(false)
+    }
 
     const createNewWorkspace = () => {
-        closePalette();
-        router.push("/create-workspace");
-    };
+        closePalette()
+        router.push("/create-workspace")
+    }
 
     useEffect(
         () => {
-            if (!workspaceSlug) return;
+            if (!workspaceSlug) return
 
-            setIsLoading(true);
+            setIsLoading(true)
 
             if (debouncedSearchTerm) {
-                setIsSearching(true);
+                setIsSearching(true)
                 workspaceService
                     .searchWorkspace(workspaceSlug.toString(), {
                         ...(projectId ? { project_id: projectId.toString() } : {}),
@@ -105,17 +99,17 @@ export const CommandModal: React.FC = observer(() => {
                         workspace_search: !projectId ? true : isWorkspaceLevel,
                     })
                     .then((results) => {
-                        setResults(results);
+                        setResults(results)
                         const count = Object.keys(results.results).reduce(
                             (accumulator, key) => (results.results as any)[key].length + accumulator,
                             0
-                        );
-                        setResultsCount(count);
+                        )
+                        setResultsCount(count)
                     })
                     .finally(() => {
-                        setIsLoading(false);
-                        setIsSearching(false);
-                    });
+                        setIsLoading(false)
+                        setIsSearching(false)
+                    })
             } else {
                 setResults({
                     results: {
@@ -127,15 +121,15 @@ export const CommandModal: React.FC = observer(() => {
                         issue_view: [],
                         page: [],
                     },
-                });
-                setIsLoading(false);
-                setIsSearching(false);
+                })
+                setIsLoading(false)
+                setIsSearching(false)
             }
         },
         [debouncedSearchTerm, isWorkspaceLevel, projectId, workspaceSlug] // Only call effect if debounced search term changes
-    );
+    )
 
-    const projectDetails = getProjectById(issueDetails?.project_id ?? "");
+    const projectDetails = getProjectById(issueDetails?.project_id ?? "")
 
     return (
         <Transition.Root show={isCommandPaletteOpen} afterLeave={() => setSearchTerm("")} as={React.Fragment}>
@@ -167,20 +161,20 @@ export const CommandModal: React.FC = observer(() => {
                                 <div className="w-full max-w-2xl">
                                     <Command
                                         filter={(value, search) => {
-                                            if (value.toLowerCase().includes(search.toLowerCase())) return 1;
-                                            return 0;
+                                            if (value.toLowerCase().includes(search.toLowerCase())) return 1
+                                            return 0
                                         }}
                                         onKeyDown={(e) => {
                                             // when search is empty and page is undefined
                                             // when user tries to close the modal with esc
-                                            if (e.key === "Escape" && !page && !searchTerm) closePalette();
+                                            if (e.key === "Escape" && !page && !searchTerm) closePalette()
 
                                             // Escape goes to previous page
                                             // Backspace goes to previous page when search is empty
                                             if (e.key === "Escape" || (e.key === "Backspace" && !searchTerm)) {
-                                                e.preventDefault();
-                                                setPages((pages) => pages.slice(0, -1));
-                                                setPlaceholder("Type a command or search...");
+                                                e.preventDefault()
+                                                setPages((pages) => pages.slice(0, -1))
+                                                setPlaceholder("Type a command or search...")
                                             }
                                         }}
                                     >
@@ -291,9 +285,9 @@ export const CommandModal: React.FC = observer(() => {
                                                     <Command.Group heading="Issue">
                                                         <Command.Item
                                                             onSelect={() => {
-                                                                closePalette();
-                                                                setTrackElement("Command Palette");
-                                                                toggleCreateIssueModal(true);
+                                                                closePalette()
+                                                                setTrackElement("Command Palette")
+                                                                toggleCreateIssueModal(true)
                                                             }}
                                                             className="focus:bg-custom-background-80"
                                                         >
@@ -309,9 +303,9 @@ export const CommandModal: React.FC = observer(() => {
                                                         <Command.Group heading="Project">
                                                             <Command.Item
                                                                 onSelect={() => {
-                                                                    closePalette();
-                                                                    setTrackElement("Command palette");
-                                                                    toggleCreateProjectModal(true);
+                                                                    closePalette()
+                                                                    setTrackElement("Command palette")
+                                                                    toggleCreateProjectModal(true)
                                                                 }}
                                                                 className="focus:outline-none"
                                                             >
@@ -332,9 +326,9 @@ export const CommandModal: React.FC = observer(() => {
                                                     <Command.Group heading="Workspace Settings">
                                                         <Command.Item
                                                             onSelect={() => {
-                                                                setPlaceholder("Search workspace settings...");
-                                                                setSearchTerm("");
-                                                                setPages([...pages, "settings"]);
+                                                                setPlaceholder("Search workspace settings...")
+                                                                setSearchTerm("")
+                                                                setPages([...pages, "settings"])
                                                             }}
                                                             className="focus:outline-none"
                                                         >
@@ -356,9 +350,9 @@ export const CommandModal: React.FC = observer(() => {
                                                         </Command.Item>
                                                         <Command.Item
                                                             onSelect={() => {
-                                                                setPlaceholder("Change interface theme...");
-                                                                setSearchTerm("");
-                                                                setPages([...pages, "change-interface-theme"]);
+                                                                setPlaceholder("Change interface theme...")
+                                                                setSearchTerm("")
+                                                                setPages([...pages, "change-interface-theme"])
                                                             }}
                                                             className="focus:outline-none"
                                                         >
@@ -394,8 +388,8 @@ export const CommandModal: React.FC = observer(() => {
                                             {page === "change-interface-theme" && (
                                                 <CommandPaletteThemeActions
                                                     closePalette={() => {
-                                                        closePalette();
-                                                        setPages((pages) => pages.slice(0, -1));
+                                                        closePalette()
+                                                        setPages((pages) => pages.slice(0, -1))
                                                     }}
                                                 />
                                             )}
@@ -408,5 +402,5 @@ export const CommandModal: React.FC = observer(() => {
                 </div>
             </Dialog>
         </Transition.Root>
-    );
-});
+    )
+})

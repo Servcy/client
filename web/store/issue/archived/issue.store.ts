@@ -1,45 +1,43 @@
-import pull from "lodash/pull";
-import set from "lodash/set";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import { IssueArchiveService } from "@services/issue"
+import pull from "lodash/pull"
+import set from "lodash/set"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types"
 // base class
-import { IssueHelperStore } from "../helpers/issue-helper.store";
-
-import { IssueArchiveService } from "@services/issue";
-
-import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types";
-import { IIssueRootStore } from "../root.store";
+import { IssueHelperStore } from "../helpers/issue-helper.store"
+import { IIssueRootStore } from "../root.store"
 
 export interface IArchivedIssues {
     // observable
-    loader: TLoader;
-    issues: { [project_id: string]: string[] };
-    viewFlags: ViewFlags;
+    loader: TLoader
+    issues: { [project_id: string]: string[] }
+    viewFlags: ViewFlags
     // computed
-    groupedIssueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined;
+    groupedIssueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined
     // actions
-    fetchIssues: (workspaceSlug: string, projectId: string, loadType: TLoader) => Promise<TIssue>;
-    removeIssue: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
-    restoreIssue: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
-    quickAddIssue: undefined;
+    fetchIssues: (workspaceSlug: string, projectId: string, loadType: TLoader) => Promise<TIssue>
+    removeIssue: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>
+    restoreIssue: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>
+    quickAddIssue: undefined
 }
 
 export class ArchivedIssues extends IssueHelperStore implements IArchivedIssues {
-    loader: TLoader = "init-loader";
-    issues: { [project_id: string]: string[] } = {};
+    loader: TLoader = "init-loader"
+    issues: { [project_id: string]: string[] } = {}
     // root store
-    rootIssueStore: IIssueRootStore;
+    rootIssueStore: IIssueRootStore
 
-    archivedIssueService;
+    archivedIssueService
 
     //viewData
     viewFlags = {
         enableQuickAdd: false,
         enableIssueCreation: false,
         enableInlineEditing: true,
-    };
+    }
 
     constructor(_rootStore: IIssueRootStore) {
-        super(_rootStore);
+        super(_rootStore)
         makeObservable(this, {
             // observable
             loader: observable.ref,
@@ -50,94 +48,94 @@ export class ArchivedIssues extends IssueHelperStore implements IArchivedIssues 
             fetchIssues: action,
             removeIssue: action,
             restoreIssue: action,
-        });
+        })
         // root store
-        this.rootIssueStore = _rootStore;
+        this.rootIssueStore = _rootStore
 
-        this.archivedIssueService = new IssueArchiveService();
+        this.archivedIssueService = new IssueArchiveService()
     }
 
     get groupedIssueIds() {
-        const projectId = this.rootIssueStore.projectId;
-        if (!projectId) return undefined;
+        const projectId = this.rootIssueStore.projectId
+        if (!projectId) return undefined
 
-        const displayFilters = this.rootIssueStore?.archivedIssuesFilter?.issueFilters?.displayFilters;
-        if (!displayFilters) return undefined;
+        const displayFilters = this.rootIssueStore?.archivedIssuesFilter?.issueFilters?.displayFilters
+        if (!displayFilters) return undefined
 
-        const groupBy = displayFilters?.group_by;
-        const orderBy = displayFilters?.order_by;
-        const layout = displayFilters?.layout;
+        const groupBy = displayFilters?.group_by
+        const orderBy = displayFilters?.order_by
+        const layout = displayFilters?.layout
 
-        const archivedIssueIds = this.issues[projectId];
-        if (!archivedIssueIds) return undefined;
+        const archivedIssueIds = this.issues[projectId]
+        if (!archivedIssueIds) return undefined
 
-        const _issues = this.rootIssueStore.issues.getIssuesByIds(archivedIssueIds, "archived");
-        if (!_issues) return [];
+        const _issues = this.rootIssueStore.issues.getIssuesByIds(archivedIssueIds, "archived")
+        if (!_issues) return []
 
-        let issues: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined = undefined;
+        let issues: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined = undefined
 
         if (layout === "list" && orderBy) {
-            if (groupBy) issues = this.groupedIssues(groupBy, orderBy, _issues);
-            else issues = this.unGroupedIssues(orderBy, _issues);
+            if (groupBy) issues = this.groupedIssues(groupBy, orderBy, _issues)
+            else issues = this.unGroupedIssues(orderBy, _issues)
         }
 
-        return issues;
+        return issues
     }
 
     fetchIssues = async (workspaceSlug: string, projectId: string, loadType: TLoader = "init-loader") => {
         try {
-            this.loader = loadType;
+            this.loader = loadType
 
-            const params = this.rootIssueStore?.archivedIssuesFilter?.appliedFilters;
-            const response = await this.archivedIssueService.getArchivedIssues(workspaceSlug, projectId, params);
+            const params = this.rootIssueStore?.archivedIssuesFilter?.appliedFilters
+            const response = await this.archivedIssueService.getArchivedIssues(workspaceSlug, projectId, params)
 
             runInAction(() => {
                 set(
                     this.issues,
                     [projectId],
                     response.map((issue: TIssue) => issue.id)
-                );
-                this.loader = undefined;
-            });
+                )
+                this.loader = undefined
+            })
 
-            this.rootIssueStore.issues.addIssue(response);
+            this.rootIssueStore.issues.addIssue(response)
 
-            return response;
+            return response
         } catch (error) {
-            console.error(error);
-            this.loader = undefined;
-            throw error;
+            console.error(error)
+            this.loader = undefined
+            throw error
         }
-    };
+    }
 
     removeIssue = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            await this.rootIssueStore.projectIssues.removeIssue(workspaceSlug, projectId, issueId);
+            await this.rootIssueStore.projectIssues.removeIssue(workspaceSlug, projectId, issueId)
 
             runInAction(() => {
-                pull(this.issues[projectId], issueId);
-            });
+                pull(this.issues[projectId], issueId)
+            })
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
     restoreIssue = async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
-            const response = await this.archivedIssueService.restoreIssue(workspaceSlug, projectId, issueId);
+            const response = await this.archivedIssueService.restoreIssue(workspaceSlug, projectId, issueId)
 
             runInAction(() => {
                 this.rootStore.issues.updateIssue(issueId, {
                     archived_at: null,
-                });
-                pull(this.issues[projectId], issueId);
-            });
+                })
+                pull(this.issues[projectId], issueId)
+            })
 
-            return response;
+            return response
         } catch (error) {
-            throw error;
+            throw error
         }
-    };
+    }
 
-    quickAddIssue: undefined;
+    quickAddIssue: undefined
 }

@@ -1,54 +1,54 @@
-"use client";
+"use client"
 
-import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";
-import OTPInput from "@/components/Login/OTPInput";
-import type { NextPageWithLayout } from "@/types/types";
-import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
-import useSignInRedirection from "@hooks/use-login-redirection";
-import { GoogleLogin } from "@react-oauth/google";
-import { Spinner } from "@servcy/ui";
-import { Button, Input } from "antd";
-import { setCookie } from "cookies-next";
-import { observer } from "mobx-react-lite";
-import Image from "next/image";
-import Link from "next/link.js";
-import { useSearchParams } from "next/navigation";
-import { useUser } from "@hooks/store";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { BiLogIn } from "react-icons/bi";
-import { HiMail } from "react-icons/hi";
-import { RiWhatsappLine } from "react-icons/ri";
+import Image from "next/image"
+import Link from "next/link.js"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
+import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication"
+import { useUser } from "@hooks/store"
+import useSignInRedirection from "@hooks/use-login-redirection"
+import { GoogleLogin } from "@react-oauth/google"
+import { Button, Input } from "antd"
+import { setCookie } from "cookies-next"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import { BiLogIn } from "react-icons/bi"
+import { HiMail } from "react-icons/hi"
+import { RiWhatsappLine } from "react-icons/ri"
+import { Spinner } from "@servcy/ui"
+import type { NextPageWithLayout } from "@/types/types"
+import OTPInput from "@/components/Login/OTPInput"
+import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators"
 
 const Login: NextPageWithLayout = observer(() => {
-    const searchParams = useSearchParams();
-    const [stage, setStage] = useState<number>(0);
-    const [inputType, setInputType] = useState<string>("email");
-    const [input, setInput] = useState<string>("");
-    const [invalidPhone, setInvalidPhone] = useState<boolean>(false);
-    const [otp, setOtp] = useState<string>("");
-    const { isRedirecting, handleRedirection } = useSignInRedirection();
-    const { currentUser } = useUser();
-    const [invalidEmail, setInvalidEmail] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
+    const searchParams = useSearchParams()
+    const [stage, setStage] = useState<number>(0)
+    const [inputType, setInputType] = useState<string>("email")
+    const [input, setInput] = useState<string>("")
+    const [invalidPhone, setInvalidPhone] = useState<boolean>(false)
+    const [otp, setOtp] = useState<string>("")
+    const { isRedirecting, handleRedirection } = useSignInRedirection()
+    const { currentUser } = useUser()
+    const [invalidEmail, setInvalidEmail] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
 
     const sendOtp = async (e: React.MouseEvent | React.KeyboardEvent) => {
         try {
-            e.preventDefault();
-            setLoading(true);
-            const email = document.getElementById("email") as HTMLInputElement;
-            const phone_number = document.getElementById("phone_number") as HTMLInputElement;
+            e.preventDefault()
+            setLoading(true)
+            const email = document.getElementById("email") as HTMLInputElement
+            const phone_number = document.getElementById("phone_number") as HTMLInputElement
             const agree_terms_conditions_and_privacy_policy = document.getElementById(
                 "agree_terms_conditions_and_privacy_policy"
-            ) as HTMLInputElement;
+            ) as HTMLInputElement
             // validate email address and phone number
-            const isEmailValid = validateEmail(email.value);
-            const isPhoneValid = validatePhone(phone_number.value);
-            if (!isPhoneValid) setInvalidEmail(!isEmailValid);
-            else if (!isEmailValid) setInvalidPhone(!isPhoneValid);
-            if ((!isEmailValid && !isPhoneValid) || !agree_terms_conditions_and_privacy_policy.checked) return;
-            setInputType(isEmailValid ? "email" : "phone_number");
-            setInput(isEmailValid ? email.value : phone_number.value.replace("+", ""));
+            const isEmailValid = validateEmail(email.value)
+            const isPhoneValid = validatePhone(phone_number.value)
+            if (!isPhoneValid) setInvalidEmail(!isEmailValid)
+            else if (!isEmailValid) setInvalidPhone(!isPhoneValid)
+            if ((!isEmailValid && !isPhoneValid) || !agree_terms_conditions_and_privacy_policy.checked) return
+            setInputType(isEmailValid ? "email" : "phone_number")
+            setInput(isEmailValid ? email.value : phone_number.value.replace("+", ""))
             await toast.promise(
                 sendOtpApi(
                     isEmailValid ? email.value : phone_number.value.replace("+", ""),
@@ -59,67 +59,67 @@ const Login: NextPageWithLayout = observer(() => {
                     success: "OTP sent successfully",
                     error: "Failed to send OTP",
                 }
-            );
-            setStage(1);
+            )
+            setStage(1)
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     const verifyOtp = async (otp: string) => {
         try {
-            setLoading(true);
-            const otpIsValid = validateOtp(otp);
-            if (!otpIsValid) return;
+            setLoading(true)
+            const otpIsValid = validateOtp(otp)
+            if (!otpIsValid) return
             const tokens = await toast.promise(verifyOtpApi(otp, input, inputType), {
                 loading: "Verifying OTP...",
                 success: "OTP verified successfully",
                 error: "Failed to verify OTP",
-            });
+            })
             setCookie("refreshToken", tokens.refresh_token, {
                 path: "/",
-            });
+            })
             setCookie("accessToken", tokens.access_token, {
                 path: "/",
-            });
-            const nextUrl = searchParams?.get("nextUrl") ?? "/";
-            window.location.href = nextUrl;
+            })
+            const nextUrl = searchParams?.get("nextUrl") ?? "/"
+            window.location.href = nextUrl
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     const googleLogin = async (credential: string) => {
         try {
-            setLoading(true);
+            setLoading(true)
             const tokens = await toast.promise(googleLoginApi(credential), {
                 loading: "Logging in..",
                 success: "Logged in successfully",
                 error: "Failed to login with Google",
-            });
+            })
             setCookie("refreshToken", tokens.refresh_token, {
                 path: "/",
-            });
+            })
             setCookie("accessToken", tokens.access_token, {
                 path: "/",
-            });
-            const nextUrl = searchParams?.get("nextUrl") ?? "/";
-            window.location.href = nextUrl;
+            })
+            const nextUrl = searchParams?.get("nextUrl") ?? "/"
+            window.location.href = nextUrl
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     useEffect(() => {
-        handleRedirection();
-    }, [handleRedirection]);
+        handleRedirection()
+    }, [handleRedirection])
 
     if (isRedirecting || currentUser)
         return (
             <div className="grid h-screen place-items-center">
                 <Spinner />
             </div>
-        );
+        )
 
     return (
         <main className="flex min-h-screen w-full bg-servcy-white">
@@ -136,7 +136,7 @@ const Login: NextPageWithLayout = observer(() => {
                                 prefix={<HiMail className="mr-1" />}
                                 required
                                 onKeyDown={(event) => {
-                                    if (event.code === "Enter") sendOtp(event);
+                                    if (event.code === "Enter") sendOtp(event)
                                 }}
                                 placeholder="name@company.com"
                                 type="email"
@@ -149,7 +149,7 @@ const Login: NextPageWithLayout = observer(() => {
                                 prefix={<RiWhatsappLine className="mr-1" />}
                                 required
                                 onKeyDown={(event) => {
-                                    if (event.code === "Enter") sendOtp(event);
+                                    if (event.code === "Enter") sendOtp(event)
                                 }}
                                 placeholder="+123 456 7890"
                                 type="email"
@@ -196,21 +196,21 @@ const Login: NextPageWithLayout = observer(() => {
                             <div className="flex place-content-center">
                                 <GoogleLogin
                                     onSuccess={(credentialResponse) => {
-                                        const { credential } = credentialResponse;
+                                        const { credential } = credentialResponse
                                         const agree_terms_conditions_and_privacy_policy = document.getElementById(
                                             "agree_terms_conditions_and_privacy_policy"
-                                        ) as HTMLInputElement;
+                                        ) as HTMLInputElement
                                         if (!agree_terms_conditions_and_privacy_policy.checked) {
                                             toast.error(
                                                 "Please agree to our privacy policy and TOS by checking the checkbox"
-                                            );
-                                            return;
+                                            )
+                                            return
                                         }
-                                        if (credential) googleLogin(credential);
-                                        else toast.error("Failed to login with Google");
+                                        if (credential) googleLogin(credential)
+                                        else toast.error("Failed to login with Google")
                                     }}
                                     onError={() => {
-                                        toast.error("Failed to login with Google");
+                                        toast.error("Failed to login with Google")
                                     }}
                                     auto_select
                                     useOneTap
@@ -225,8 +225,8 @@ const Login: NextPageWithLayout = observer(() => {
                                     value: otp,
                                     numInputs: 6,
                                     onChange: (otp: string, activeInput: number) => {
-                                        setOtp(otp);
-                                        if (activeInput === 5) verifyOtp(otp);
+                                        setOtp(otp)
+                                        if (activeInput === 5) verifyOtp(otp)
                                     },
                                     renderInput: (inputProps: any) =>
                                         loading ? (
@@ -249,7 +249,7 @@ const Login: NextPageWithLayout = observer(() => {
                 </form>
             </div>
         </main>
-    );
-});
+    )
+})
 
-export default Login;
+export default Login

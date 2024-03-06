@@ -1,16 +1,15 @@
-import { observer } from "mobx-react-lite";
-
-import { Expand, Shrink, X } from "lucide-react";
+import { Expand, Shrink, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
 
 type Props = {
-    fullScreen: boolean;
-    handleClose: () => void;
-    setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
-    title: string;
-};
+    fullScreen: boolean
+    handleClose: () => void
+    setFullScreen: React.Dispatch<React.SetStateAction<boolean>>
+    title: string
+}
 
 export const ProjectAnalyticsModalHeader: React.FC<Props> = observer((props) => {
-    const { fullScreen, handleClose, setFullScreen, title } = props;
+    const { fullScreen, handleClose, setFullScreen, title } = props
 
     return (
         <div className="flex items-center justify-between gap-4 bg-custom-background-100 px-5 py-4 text-sm">
@@ -32,5 +31,5 @@ export const ProjectAnalyticsModalHeader: React.FC<Props> = observer((props) => 
                 </button>
             </div>
         </div>
-    );
-});
+    )
+})

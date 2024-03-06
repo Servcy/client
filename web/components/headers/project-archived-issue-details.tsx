@@ -1,31 +1,24 @@
-import { FC } from "react";
-import useSWR from "swr";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router"
+import { FC } from "react"
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { ISSUE_DETAILS } from "@constants/fetch-keys"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { useProject } from "@hooks/store"
+import { IssueArchiveService } from "@services/issue"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { TIssue } from "@servcy/types"
+import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 
-import { useProject } from "@hooks/store";
-
-import { Breadcrumbs, LayersIcon } from "@servcy/ui";
-
-import { TIssue } from "@servcy/types";
-
-import { ISSUE_DETAILS } from "@constants/fetch-keys";
-
-import { IssueArchiveService } from "@services/issue";
-
-import { renderEmoji } from "@helpers/emoji.helper";
-
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "@components/common";
-
-const issueArchiveService = new IssueArchiveService();
+const issueArchiveService = new IssueArchiveService()
 
 export const ProjectArchivedIssueDetailsHeader: FC = observer(() => {
     // router
-    const router = useRouter();
-    const { workspaceSlug, projectId, archivedIssueId } = router.query;
+    const router = useRouter()
+    const { workspaceSlug, projectId, archivedIssueId } = router.query
     // store hooks
-    const { currentProjectDetails, getProjectById } = useProject();
+    const { currentProjectDetails, getProjectById } = useProject()
 
     const { data: issueDetails } = useSWR<TIssue | undefined>(
         workspaceSlug && projectId && archivedIssueId ? ISSUE_DETAILS(archivedIssueId as string) : null,
@@ -37,7 +30,7 @@ export const ProjectArchivedIssueDetailsHeader: FC = observer(() => {
                       archivedIssueId as string
                   )
             : null
-    );
+    )
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
@@ -92,5 +85,5 @@ export const ProjectArchivedIssueDetailsHeader: FC = observer(() => {
                 </div>
             </div>
         </div>
-    );
-});
+    )
+})
