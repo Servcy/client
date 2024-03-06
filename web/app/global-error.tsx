@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 // services
 import { AuthService } from "@services/auth.service";
 // hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // layouts
 import DefaultLayout from "@layouts/default-layout";
 // ui
@@ -15,17 +15,11 @@ const authService = new AuthService();
 const CustomErrorComponent = () => {
   const router = useRouter();
 
-  const { setToastAlert } = useToast();
-
   const handleSignOut = async () => {
     await authService
       .signOut()
       .catch(() =>
-        setToastAlert({
-          type: "error",
-          title: "Error!",
-          message: "Failed to sign out. Please try again.",
-        })
+        toast.error("Failed to sign out. Please try again.")
       )
       .finally(() => router.push("/"));
   };
@@ -68,10 +62,5 @@ const CustomErrorComponent = () => {
   );
 };
 
-CustomErrorComponent.getInitialProps = async (contextData: any) => {
-  const { res, err } = contextData;
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  return { statusCode };
-};
 
 export default CustomErrorComponent;
