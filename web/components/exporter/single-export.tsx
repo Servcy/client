@@ -1,7 +1,7 @@
 import { useState, FC } from "react";
 
 import { Button } from "@servcy/ui";
-// helpers
+
 import { renderFormattedDate } from "@helpers/date-time.helper";
 
 import { IExportData } from "@servcy/types";

@@ -13,7 +13,7 @@ import {
 } from "@components/dashboard/widgets";
 
 import { PriorityIcon } from "@servcy/ui";
-// helpers
+
 import { getCustomDates } from "@helpers/dashboard.helper";
 
 import { TIssuesByPriorityWidgetFilters, TIssuesByPriorityWidgetResponse } from "@servcy/types";

@@ -6,7 +6,7 @@ import { ChevronDown, MoreHorizontal } from "lucide-react";
 
 import { useDropdownKeyDown } from "../hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "../hooks/use-outside-click-detector";
-// helpers
+
 import { cn } from "../../helpers";
 
 import { ICustomMenuDropdownProps, ICustomMenuItemProps } from "./helper";

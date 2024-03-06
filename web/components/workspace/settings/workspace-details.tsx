@@ -13,7 +13,7 @@ import { DeleteWorkspaceModal } from "@components/workspace";
 import { WorkspaceImageUploadModal } from "@components/core";
 
 import { Button, CustomSelect, Input, Spinner } from "@servcy/ui";
-// helpers
+
 import { copyUrlToClipboard } from "@helpers/string.helper";
 
 import { IWorkspace } from "@servcy/types";

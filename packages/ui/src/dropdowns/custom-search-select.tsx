@@ -5,7 +5,7 @@ import { Check, ChevronDown, Search } from "lucide-react";
 
 import { useDropdownKeyDown } from "../hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "../hooks/use-outside-click-detector";
-// helpers
+
 import { cn } from "../../helpers";
 
 import { ICustomSearchSelectProps } from "./helper";

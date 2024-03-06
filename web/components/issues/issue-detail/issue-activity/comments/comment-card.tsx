@@ -14,7 +14,7 @@ import { FileService } from "@services/file.service";
 
 import { TIssueComment } from "@servcy/types";
 import { TActivityOperations } from "../root";
-// helpers
+
 import { isEmptyHtmlString } from "@helpers/string.helper";
 
 const fileService = new FileService();

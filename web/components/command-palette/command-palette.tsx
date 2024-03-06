@@ -14,7 +14,7 @@ import { CreateUpdateModuleModal } from "@components/modules";
 import { CreateProjectModal } from "@components/project";
 import { CreateUpdateProjectViewModal } from "@components/views";
 import { CreateUpdatePageModal } from "@components/pages";
-// helpers
+
 import { copyTextToClipboard } from "@helpers/string.helper";
 // services
 import { IssueService } from "@services/issue";

@@ -2,7 +2,7 @@
 import { ChartDataType } from "../types";
 // data
 import { weeks, months } from "../data";
-// helpers
+
 import { getDatesBetweenTwoDates, getWeeksByMonthAndYear } from "./helpers";
 
 const generateMonthDataByMonthAndYearInMonthView = (month: number, year: number) => {

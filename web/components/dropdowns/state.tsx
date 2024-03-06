@@ -11,7 +11,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { DropdownButton } from "./buttons";
 // icons
 import { StateGroupIcon } from "@servcy/ui";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { TDropdownProps } from "./types";

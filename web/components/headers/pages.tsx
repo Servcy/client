@@ -5,7 +5,7 @@ import { FileText, Plus } from "lucide-react";
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 
 import { Breadcrumbs, Button } from "@servcy/ui";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import { EUserProjectRoles } from "@constants/project";

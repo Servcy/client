@@ -9,7 +9,7 @@ import useTimer from "@hooks/use-timer";
 import { useEventTracker } from "@hooks/store";
 
 import { Button, Input } from "@servcy/ui";
-// helpers
+
 import { checkEmailValidity } from "@helpers/string.helper";
 
 import { IEmailCheckData, IMagicSignInData } from "@servcy/types";

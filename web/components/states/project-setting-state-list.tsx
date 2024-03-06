@@ -10,7 +10,7 @@ import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem }
 import { Loader } from "@servcy/ui";
 // icons
 import { Plus } from "lucide-react";
-// helpers
+
 import { orderStateGroups } from "@helpers/state.helper";
 import { sortByField } from "@helpers/array.helper";
 // fetch-keys

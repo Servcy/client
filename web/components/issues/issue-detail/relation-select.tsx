@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { ExistingIssuesListModal } from "@components/core";
 
 import { RelatedIcon, Tooltip } from "@servcy/ui";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { TIssueRelationTypes, ISearchIssueResponse } from "@servcy/types";

@@ -7,7 +7,7 @@ import { useEventTracker, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 import useKeypress from "@hooks/use-keypress";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-// helpers
+
 import { createIssuePayload } from "@helpers/issue.helper";
 // icons
 import { PlusIcon } from "lucide-react";

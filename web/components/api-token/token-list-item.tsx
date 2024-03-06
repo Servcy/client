@@ -4,7 +4,7 @@ import { XCircle } from "lucide-react";
 import { DeleteApiTokenModal } from "@components/api-token";
 
 import { Tooltip } from "@servcy/ui";
-// helpers
+
 import { renderFormattedDate, calculateTimeAgo } from "@helpers/date-time.helper";
 
 import { IApiToken } from "@servcy/types";

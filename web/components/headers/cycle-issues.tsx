@@ -24,7 +24,7 @@ import { BreadcrumbLink } from "@components/common";
 import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui";
 // icons
 import { ArrowRight, Plus, PanelRight } from "lucide-react";
-// helpers
+
 import { truncateText } from "@helpers/string.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
 

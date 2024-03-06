@@ -9,7 +9,7 @@ import { Input, Button } from "@servcy/ui";
 import { AuthService } from "@services/auth.service";
 const authService = new AuthService();
 import toast from "react-hot-toast";
-// helpers
+
 import { checkEmailValidity } from "@helpers/string.helper";
 
 interface InstanceSetupEmailFormValues {

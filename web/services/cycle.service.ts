@@ -2,7 +2,7 @@
 import { APIService } from "@services/api.service";
 
 import type { CycleDateCheckData, ICycle, TIssue } from "@servcy/types";
-// helpers
+
 import { API_BASE_URL } from "@helpers/common.helper";
 
 export class CycleService extends APIService {

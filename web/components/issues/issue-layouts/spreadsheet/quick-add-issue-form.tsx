@@ -8,7 +8,7 @@ import { useEventTracker, useProject, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 import useKeypress from "@hooks/use-keypress";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-// helpers
+
 import { createIssuePayload } from "@helpers/issue.helper";
 
 import { TIssue } from "@servcy/types";

@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { useTheme } from "next-themes";
 
 import { useApplication, useUser } from "@hooks/store";
-// helpers
+
 import { applyTheme, unsetCustomCssVariables } from "@helpers/theme.helper";
 
 interface IStoreWrapper {

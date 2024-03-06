@@ -40,7 +40,7 @@ export interface IPageStore {
   // Reactions
   disposers: Array<() => void>;
 
-  // Helpers
+
   oldName: string;
   cleanup: () => void;
   isSubmitting: "submitting" | "submitted" | "saved";

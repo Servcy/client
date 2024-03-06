@@ -1,7 +1,7 @@
 import { APIService } from "@services/api.service";
 
 import { IGptResponse } from "@servcy/types";
-// helpers
+
 import { API_BASE_URL } from "@helpers/common.helper";
 
 export class AIService extends APIService {

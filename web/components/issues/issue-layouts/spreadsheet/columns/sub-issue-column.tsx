@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useApplication } from "@hooks/store";
 
 import { TIssue } from "@servcy/types";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 type Props = {

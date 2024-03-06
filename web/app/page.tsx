@@ -1,6 +1,6 @@
 "use client";
 
-// Dependencies
+
 import { useRouter } from "next/navigation.js";
 
 import { Button } from "antd";

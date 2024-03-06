@@ -8,7 +8,7 @@ import { RootStore } from "./root.store";
 import { IState } from "@servcy/types";
 // services
 import { ProjectStateService } from "@services/project";
-// helpers
+
 import { sortStates } from "@helpers/state.helper";
 
 export interface IStateStore {

@@ -4,7 +4,7 @@ import { PostHogProvider as PHProvider } from "posthog-js/react";
 import { FC, ReactNode, useEffect, useState } from "react";
 // mobx store provider
 import { IUser } from "@servcy/types";
-// helpers
+
 import { getUserRole } from "@helpers/user.helper";
 
 import { GROUP_WORKSPACE } from "@constants/event-tracker";

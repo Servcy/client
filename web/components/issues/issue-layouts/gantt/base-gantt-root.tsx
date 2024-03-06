@@ -6,7 +6,7 @@ import { useIssues, useUser } from "@hooks/store";
 
 import { GanttQuickAddIssueForm, IssueGanttBlock } from "@components/issues";
 import { GanttChartRoot, IBlockUpdateData, IssueGanttSidebar } from "@components/gantt-chart";
-// helpers
+
 import { renderIssueBlocksStructure } from "@helpers/issue.helper";
 
 import { TIssue, TUnGroupedIssues } from "@servcy/types";

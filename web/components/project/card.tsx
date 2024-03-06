@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { DeleteProjectModal, JoinProjectModal } from "@components/project";
 
 import { Avatar, AvatarGroup, Button, Tooltip } from "@servcy/ui";
-// helpers
+
 import { copyTextToClipboard } from "@helpers/string.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
 

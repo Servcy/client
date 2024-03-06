@@ -6,7 +6,7 @@ import { useIssueDetail } from "@hooks/store";
 import { useGanttChart } from "@components/gantt-chart/hooks";
 
 import { IssueGanttSidebarBlock } from "@components/issues";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 import { findTotalDaysInRange } from "@helpers/date-time.helper";
 

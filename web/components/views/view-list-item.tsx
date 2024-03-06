@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@components/views";
 
 import { CustomMenu } from "@servcy/ui";
-// helpers
+
 import { calculateTotalFilters } from "@helpers/filter.helper";
 import { copyUrlToClipboard } from "@helpers/string.helper";
 

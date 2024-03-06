@@ -5,7 +5,7 @@ import { CalendarCheck2 } from "lucide-react";
 import { useProjectState } from "@hooks/store";
 
 import { DateDropdown } from "@components/dropdowns";
-// helpers
+
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
 import { cn } from "@helpers/common.helper";

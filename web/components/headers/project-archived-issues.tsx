@@ -12,7 +12,7 @@ import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "@components/issues";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types";

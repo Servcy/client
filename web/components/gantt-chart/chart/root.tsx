@@ -10,7 +10,7 @@ import {
   getNumberOfDaysBetweenTwoDatesInMonth,
   getMonthChartItemPositionWidthInMonth,
 } from "../views";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { ChartDataType, IBlockUpdateData, IGanttBlock, TGanttViews } from "../types";

@@ -12,7 +12,7 @@ import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
 import { ImagePickerPopover } from "@components/core";
 import EmojiIconPicker from "@components/emoji-icon-picker";
 import { MemberDropdown } from "@components/dropdowns";
-// helpers
+
 import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper";
 
 import { NETWORK_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project";

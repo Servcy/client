@@ -5,7 +5,7 @@ import { useInboxIssues } from "@hooks/store";
 // icons
 import { X } from "lucide-react";
 import { PriorityIcon } from "@servcy/ui";
-// helpers
+
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
 
 import { TInboxIssueFilterOptions, TIssuePriorities } from "@servcy/types";

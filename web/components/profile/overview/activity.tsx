@@ -12,7 +12,7 @@ import { ProfileEmptyState } from "@components/ui";
 import { Loader } from "@servcy/ui";
 // image
 import recentActivityEmptyState from "public/empty-state/recent_activity.svg";
-// helpers
+
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 // fetch-keys
 import { USER_PROFILE_ACTIVITY } from "@constants/fetch-keys";

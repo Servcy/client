@@ -17,7 +17,7 @@ import {
   WeekChartView,
   YearChartView,
 } from "@components/gantt-chart";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 type Props = {

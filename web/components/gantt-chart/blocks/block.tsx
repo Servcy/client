@@ -4,7 +4,7 @@ import { useGanttChart } from "../hooks";
 import { useIssueDetail } from "@hooks/store";
 
 import { ChartAddBlock, ChartDraggable } from "../helpers";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 

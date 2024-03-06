@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { MessageCircle } from "lucide-react";
 
 import { useIssueDetail } from "@hooks/store";
-// helpers
+
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 
 type TIssueCommentBlock = {
@@ -14,7 +14,7 @@ type TIssueCommentBlock = {
 
 export const IssueCommentBlock: FC<TIssueCommentBlock> = (props) => {
   const { commentId, ends, quickActions, children } = props;
-  
+
   const {
     comment: { getCommentById },
   } = useIssueDetail();

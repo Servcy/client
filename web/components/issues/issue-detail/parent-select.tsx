@@ -8,7 +8,7 @@ import { useIssueDetail, useProject } from "@hooks/store";
 import { ParentIssuesListModal } from "@components/issues";
 
 import { Tooltip } from "@servcy/ui";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { TIssueOperations } from "./root";

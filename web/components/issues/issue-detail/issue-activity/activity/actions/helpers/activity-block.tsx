@@ -6,7 +6,7 @@ import { useIssueDetail } from "@hooks/store";
 import { Tooltip } from "@servcy/ui";
 
 import { IssueUser } from "../";
-// helpers
+
 import { renderFormattedTime, renderFormattedDate, calculateTimeAgo } from "@helpers/date-time.helper";
 
 type TIssueActivityBlockComponent = {

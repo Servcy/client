@@ -8,7 +8,7 @@ import { useApplication, useEventTracker, useDashboard, useProject, useUser } fr
 import { WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
 
 import { Avatar, AvatarGroup } from "@servcy/ui";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import { TRecentProjectsWidgetResponse } from "@servcy/types";

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 import { IGanttBlock } from "@components/gantt-chart";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { SIDEBAR_WIDTH } from "../constants";

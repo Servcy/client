@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useDashboard } from "@hooks/store";
 
 import { WidgetLoader } from "@components/dashboard/widgets";
-// helpers
+
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 
 import { TOverviewStatsWidgetResponse } from "@servcy/types";

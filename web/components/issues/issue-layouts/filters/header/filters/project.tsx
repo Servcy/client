@@ -6,7 +6,7 @@ import { FilterHeader, FilterOption } from "@components/issues";
 import { useProject } from "@hooks/store";
 
 import { Loader } from "@servcy/ui";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 
 type Props = {

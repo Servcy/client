@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 import { useApplication, useEventTracker, useProject } from "@hooks/store";
 
 import { CustomSelect, Input } from "@servcy/ui";
-// helpers
+
 import { checkEmailValidity } from "@helpers/string.helper";
 
 import { IJiraImporterForm } from "@servcy/types";

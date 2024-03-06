@@ -16,7 +16,7 @@ export * from "./link";
 export * from "./attachment";
 export * from "./archived-at";
 
-// helpers
+
 export * from "./helpers/activity-block";
 export * from "./helpers/issue-user";
 export * from "./helpers/issue-link";

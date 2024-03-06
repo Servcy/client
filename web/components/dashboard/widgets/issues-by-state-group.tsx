@@ -12,7 +12,7 @@ import {
   WidgetLoader,
   WidgetProps,
 } from "@components/dashboard/widgets";
-// helpers
+
 import { getCustomDates } from "@helpers/dashboard.helper";
 
 import { TIssuesByStateGroupsWidgetFilters, TIssuesByStateGroupsWidgetResponse, TStateGroups } from "@servcy/types";

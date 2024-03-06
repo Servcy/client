@@ -24,7 +24,7 @@ import ProgressChart from "@components/core/sidebar/progress-chart";
 import { DateRangeDropdown, MemberDropdown } from "@components/dropdowns";
 
 import { CustomMenu, Loader, LayersIcon, CustomSelect, ModuleStatusIcon, UserGroupIcon } from "@servcy/ui";
-// helpers
+
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { copyUrlToClipboard } from "@helpers/string.helper";
 

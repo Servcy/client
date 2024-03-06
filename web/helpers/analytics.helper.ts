@@ -1,6 +1,6 @@
 // nivo
 import { BarDatum } from "@nivo/bar";
-// helpers
+
 import { addSpaceIfCamelCase, capitalizeFirstLetter, generateRandomColor } from "@helpers/string.helper";
 
 import { IAnalyticsData, IAnalyticsParams, IAnalyticsResponse, TStateGroups } from "@servcy/types";

@@ -1,6 +1,6 @@
 import { observable, action, makeObservable, runInAction, computed } from "mobx";
 
-// helpers
+
 import { generateCalendarData } from "@helpers/calendar.helper";
 
 import { ICalendarPayload, ICalendarWeek } from "@components/issues";

@@ -5,7 +5,7 @@ import { CalendarDays } from "lucide-react";
 import { useIssueDetail } from "@hooks/store";
 
 import { IssueActivityBlockComponent, IssueLink } from "./";
-// helpers
+
 import { renderFormattedDate } from "@helpers/date-time.helper";
 
 type TIssueTargetDateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };

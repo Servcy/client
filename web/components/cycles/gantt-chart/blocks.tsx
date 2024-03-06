@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useApplication, useCycle } from "@hooks/store";
 
 import { Tooltip, ContrastIcon } from "@servcy/ui";
-// helpers
+
 import { renderFormattedDate } from "@helpers/date-time.helper";
 
 type Props = {

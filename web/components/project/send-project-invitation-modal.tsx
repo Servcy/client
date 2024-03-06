@@ -9,7 +9,7 @@ import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
 import toast from "react-hot-toast";
 
 import { Avatar, Button, CustomSelect, CustomSearchSelect } from "@servcy/ui";
-// helpers
+
 import { getUserRole } from "@helpers/user.helper";
 
 import { ROLE } from "@constants/workspace";

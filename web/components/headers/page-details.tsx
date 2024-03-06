@@ -6,7 +6,7 @@ import { FileText, Plus } from "lucide-react";
 import { useApplication, usePage, useProject } from "@hooks/store";
 
 import { Breadcrumbs, Button } from "@servcy/ui";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";

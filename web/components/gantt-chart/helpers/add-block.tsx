@@ -3,7 +3,7 @@ import { addDays } from "date-fns";
 import { Plus } from "lucide-react";
 
 import { Tooltip } from "@servcy/ui";
-// helpers
+
 import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper";
 
 import { IBlockUpdateData, IGanttBlock } from "../types";

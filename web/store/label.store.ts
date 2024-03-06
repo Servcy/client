@@ -4,7 +4,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils";
 // services
 import { IssueLabelService } from "@services/issue";
-// helpers
+
 import { buildTree } from "@helpers/array.helper";
 
 import { IIssueLabel, IIssueLabelTree } from "@servcy/types";

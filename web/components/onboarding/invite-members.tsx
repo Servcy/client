@@ -29,7 +29,7 @@ import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
 
 import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
 import { MEMBER_INVITED } from "@constants/event-tracker";
-// helpers
+
 import { getUserRole } from "@helpers/user.helper";
 // assets
 import user1 from "public/users/user-1.png";

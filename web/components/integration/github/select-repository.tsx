@@ -5,7 +5,7 @@ import useSWRInfinite from "swr/infinite";
 import { ProjectService } from "@services/project";
 
 import { CustomSearchSelect } from "@servcy/ui";
-// helpers
+
 import { truncateText } from "@helpers/string.helper";
 
 import { IWorkspaceIntegration } from "@servcy/types";

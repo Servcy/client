@@ -6,7 +6,7 @@ import { MoreHorizontal } from "lucide-react";
 import { Tooltip, ControlLink } from "@servcy/ui";
 
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { TIssue, TIssueMap } from "@servcy/types";
@@ -22,7 +22,7 @@ type Props = {
 
 export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
   const { issues, issueIdList, quickActions, showAllIssues = false, isDragDisabled = false } = props;
-  
+
   const {
     router: { workspaceSlug, projectId },
   } = useApplication();

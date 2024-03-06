@@ -1,6 +1,6 @@
 import { Expand, Shrink } from "lucide-react";
 
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { IGanttBlock, TGanttViews } from "../types";

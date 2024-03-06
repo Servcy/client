@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules";
 
 import { Avatar, AvatarGroup, CircularProgressIndicator, CustomMenu, Tooltip } from "@servcy/ui";
-// helpers
+
 import { copyUrlToClipboard } from "@helpers/string.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
 

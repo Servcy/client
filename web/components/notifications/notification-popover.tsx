@@ -13,7 +13,7 @@ import { Tooltip } from "@servcy/ui";
 import { NotificationsLoader } from "@components/ui";
 // images
 import emptyNotification from "public/empty-state/notification.svg";
-// helpers
+
 import { getNumberCount } from "@helpers/string.helper";
 
 export const NotificationPopover = observer(() => {

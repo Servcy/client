@@ -4,12 +4,12 @@ import { observer } from "mobx-react";
 import { MoveRight, MoveDiagonal, Link2, Trash2, RotateCcw } from "lucide-react";
 
 import { ArchiveIcon, CenterPanelIcon, CustomSelect, FullScreenPanelIcon, SidePanelIcon, Tooltip } from "@servcy/ui";
-// helpers
+
 import { copyUrlToClipboard } from "@helpers/string.helper";
 import toast from "react-hot-toast";
 // store hooks
 import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { IssueSubscription, IssueUpdateStatus } from "@components/issues";

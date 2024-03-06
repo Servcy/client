@@ -2,7 +2,7 @@ import { BarDatum } from "@nivo/bar";
 
 // icons
 import { PriorityIcon } from "@servcy/ui";
-// helpers
+
 import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";
 
 import { IAnalyticsParams, IAnalyticsResponse, TIssuePriorities } from "@servcy/types";

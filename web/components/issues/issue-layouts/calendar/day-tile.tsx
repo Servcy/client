@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Droppable } from "@hello-pangea/dnd";
 
 import { CalendarIssueBlocks, ICalendarDate, CalendarQuickAddIssueForm } from "@components/issues";
-// helpers
+
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 
 import { MONTHS_LIST } from "@constants/calendar";

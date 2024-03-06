@@ -8,7 +8,7 @@ import { CalendarDays } from "lucide-react";
 import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store";
 
 import { Tooltip, PriorityIcon } from "@servcy/ui";
-// helpers
+
 import { renderFormattedDate } from "@helpers/date-time.helper";
 
 import { InboxIssueStatus } from "@components/inbox/inbox-issue-status";

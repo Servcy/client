@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useEventTracker, useIssues, useUser } from "@hooks/store";
 
 import { DeleteIssueModal } from "@components/issues";
-// helpers
+
 import { copyUrlToClipboard } from "@helpers/string.helper";
 
 import { IQuickActionProps } from "../list/list-view-types";

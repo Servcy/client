@@ -5,7 +5,7 @@ import { CustomTooltip } from "./custom-tooltip";
 import { Tooltip } from "@servcy/ui";
 
 import { BarGraph } from "@components/ui";
-// helpers
+
 import { findStringWithMostCharacters } from "@helpers/array.helper";
 import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";
 

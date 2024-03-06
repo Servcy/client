@@ -9,7 +9,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 import { ButtonAvatars } from "./avatar";
 import { DropdownButton } from "../buttons";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { MemberDropdownProps } from "./types";

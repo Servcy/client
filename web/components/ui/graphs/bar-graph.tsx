@@ -1,6 +1,6 @@
 // nivo
 import { ResponsiveBar, BarSvgProps } from "@nivo/bar";
-// helpers
+
 import { generateYAxisTickValues } from "@helpers/graph.helper";
 
 import { TGraph } from "./types";

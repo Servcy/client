@@ -2,7 +2,7 @@
 import { ChartDataType } from "../types";
 // data
 import { weeks, months } from "../data";
-// helpers
+
 import { generateDate, getWeekNumberByDate, getNumberOfDaysInMonth, getDatesBetweenTwoDates } from "./helpers";
 
 type GetAllDaysInMonthInMonthViewType = {

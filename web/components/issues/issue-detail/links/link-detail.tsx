@@ -7,7 +7,7 @@ import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
 import { Pencil, Trash2, LinkIcon } from "lucide-react";
 
 import { IssueLinkCreateUpdateModal, TLinkOperationsModal } from "./create-update-link-modal";
-// helpers
+
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 import { copyTextToClipboard } from "@helpers/string.helper";
 

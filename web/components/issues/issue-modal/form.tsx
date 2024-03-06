@@ -28,7 +28,7 @@ import {
 } from "@components/dropdowns";
 
 import { Button, CustomMenu, Input, Loader, ToggleSwitch } from "@servcy/ui";
-// helpers
+
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 
 import type { TIssue, ISearchIssueResponse } from "@servcy/types";

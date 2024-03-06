@@ -17,7 +17,7 @@ import {
 import { Spinner } from "@servcy/ui";
 
 import { useIssues } from "@hooks/store";
-// helpers
+
 import { ActiveLoader } from "@components/ui";
 
 import { EIssuesStoreType } from "@constants/issue";

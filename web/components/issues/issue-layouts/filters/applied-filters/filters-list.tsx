@@ -15,7 +15,7 @@ import {
   AppliedStateFilters,
   AppliedStateGroupFilters,
 } from "@components/issues";
-// helpers
+
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
 
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";

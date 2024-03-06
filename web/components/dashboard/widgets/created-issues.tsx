@@ -12,7 +12,7 @@ import {
   WidgetLoader,
   WidgetProps,
 } from "@components/dashboard/widgets";
-// helpers
+
 import { getCustomDates, getRedirectionFilters, getTabKey } from "@helpers/dashboard.helper";
 
 import { TCreatedIssuesWidgetFilters, TCreatedIssuesWidgetResponse } from "@servcy/types";

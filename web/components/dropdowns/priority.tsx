@@ -8,7 +8,7 @@ import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // icons
 import { PriorityIcon, Tooltip } from "@servcy/ui";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import { TIssuePriorities } from "@servcy/types";

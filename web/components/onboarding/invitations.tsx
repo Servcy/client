@@ -4,7 +4,7 @@ import useSWR, { mutate } from "swr";
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 
 import { Button } from "@servcy/ui";
-// helpers
+
 import { truncateText } from "@helpers/string.helper";
 // services
 import { WorkspaceService } from "@services/workspace.service";

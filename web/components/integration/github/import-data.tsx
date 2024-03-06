@@ -7,7 +7,7 @@ import { useProject } from "@hooks/store";
 import { SelectRepository, TFormValues, TIntegrationSteps } from "@components/integration";
 
 import { Button, CustomSearchSelect, ToggleSwitch } from "@servcy/ui";
-// helpers
+
 import { truncateText } from "@helpers/string.helper";
 
 import { IWorkspaceIntegration } from "@servcy/types";

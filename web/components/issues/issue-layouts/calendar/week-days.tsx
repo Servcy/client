@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
 import { CalendarDayTile } from "@components/issues";
-// helpers
+
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 
 import { ICalendarDate, ICalendarWeek } from "./types";

@@ -1,6 +1,6 @@
 // nivo
 import { ResponsiveMarimekko, SvgProps } from "@nivo/marimekko";
-// helpers
+
 import { generateYAxisTickValues } from "@helpers/graph.helper";
 
 import { TGraph } from "./types";

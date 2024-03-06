@@ -9,7 +9,7 @@ import { useApplication, useEventTracker, useProject, useUser } from "@hooks/sto
 import toast from "react-hot-toast";
 
 import { CreateProjectModal, ProjectSidebarListItem } from "@components/project";
-// helpers
+
 import { copyUrlToClipboard } from "@helpers/string.helper";
 import { orderJoinedProjects } from "@helpers/project.helper";
 import { cn } from "@helpers/common.helper";

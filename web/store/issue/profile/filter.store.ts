@@ -5,7 +5,7 @@ import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // base class
 import { IssueFilterHelperStore } from "../helpers/issue-filter-helper.store";
-// helpers
+
 import { handleIssueQueryParamsByLayout } from "@helpers/issue.helper";
 
 import {

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 // icons
 import { X } from "lucide-react";
-// helpers
+
 import { renderFormattedDate } from "@helpers/date-time.helper";
 import { capitalizeFirstLetter } from "@helpers/string.helper";
 

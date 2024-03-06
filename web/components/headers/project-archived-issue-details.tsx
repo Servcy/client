@@ -12,7 +12,7 @@ import { TIssue } from "@servcy/types";
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
 // services
 import { IssueArchiveService } from "@services/issue";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";

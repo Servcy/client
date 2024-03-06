@@ -9,7 +9,7 @@ import { ActivityIcon, ActivityMessage, IssueLink } from "@components/core";
 import { RecentActivityEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
 
 import { Avatar } from "@servcy/ui";
-// helpers
+
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 
 import { TRecentActivityWidgetResponse } from "@servcy/types";

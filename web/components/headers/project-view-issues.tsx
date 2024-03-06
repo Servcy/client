@@ -21,7 +21,7 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { BreadcrumbLink } from "@components/common";
 
 import { Breadcrumbs, Button, CustomMenu, PhotoFilterIcon } from "@servcy/ui";
-// helpers
+
 import { truncateText } from "@helpers/string.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
 

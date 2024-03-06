@@ -3,7 +3,7 @@ import cn from "classnames";
 import { InboxItem, PaginationDetails } from "@/types/apps/inbox";
 import type { ColumnsType } from "antd/es/table";
 import React, { Dispatch, SetStateAction } from "react";
-// Compponents
+
 import { SyncOutlined } from "@ant-design/icons";
 import { Avatar, Button, ConfigProvider, Spin, Table, Tooltip } from "antd";
 import Image from "next/image";

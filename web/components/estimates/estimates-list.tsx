@@ -12,7 +12,7 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { Button, Loader } from "@servcy/ui";
 
 import { IEstimate } from "@servcy/types";
-// helpers
+
 import { orderArrayBy } from "@helpers/array.helper";
 
 import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";

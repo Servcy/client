@@ -9,7 +9,7 @@ import { useEventTracker, useIssues, useProjectState, useUser } from "@hooks/sto
 import toast from "react-hot-toast";
 
 import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
-// helpers
+
 import { copyUrlToClipboard } from "@helpers/string.helper";
 
 import { TIssue } from "@servcy/types";

@@ -1,6 +1,6 @@
 // nivo
 import { ResponsiveLine, LineSvgProps } from "@nivo/line";
-// helpers
+
 import { generateYAxisTickValues } from "@helpers/graph.helper";
 
 import { TGraph } from "./types";

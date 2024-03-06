@@ -11,7 +11,7 @@ import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles";
 import { CustomMenu, Tooltip, CircularProgressIndicator, CycleGroupIcon, AvatarGroup, Avatar } from "@servcy/ui";
 // icons
 import { Check, Info, LinkIcon, Pencil, Star, Trash2, User2 } from "lucide-react";
-// helpers
+
 import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper";
 import { copyTextToClipboard } from "@helpers/string.helper";
 

@@ -8,7 +8,7 @@ import type {
   NotificationCount,
   PaginatedUserNotification,
 } from "@servcy/types";
-// helpers
+
 import { API_BASE_URL } from "@helpers/common.helper";
 
 export class NotificationService extends APIService {

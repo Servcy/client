@@ -1,6 +1,6 @@
-// dependencies
+
 import * as DOMPurify from "dompurify";
-// Compponents
+
 import { Button, Modal } from "antd";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { HiPaperClip } from "react-icons/hi";

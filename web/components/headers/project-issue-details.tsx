@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { useApplication, useProject } from "@hooks/store";
 
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 // services
 import { IssueService } from "@services/issue";

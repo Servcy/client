@@ -26,7 +26,7 @@ import { StateDropdown } from "@components/dropdowns";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // icons
 import { ArrowRight, CalendarCheck, CalendarDays, Star, Target } from "lucide-react";
-// helpers
+
 import { renderFormattedDate, findHowManyDaysLeft, renderFormattedDateWithoutYear } from "@helpers/date-time.helper";
 import { truncateText } from "@helpers/string.helper";
 

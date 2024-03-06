@@ -7,7 +7,7 @@ import { useEventTracker, useProjectState } from "@hooks/store";
 import { Tooltip, StateGroupIcon } from "@servcy/ui";
 // icons
 import { Pencil, X, ArrowDown, ArrowUp } from "lucide-react";
-// helpers
+
 import { addSpaceIfCamelCase } from "@helpers/string.helper";
 
 import { IState } from "@servcy/types";

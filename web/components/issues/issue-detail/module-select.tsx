@@ -7,7 +7,7 @@ import { useIssueDetail } from "@hooks/store";
 import { ModuleDropdown } from "@components/dropdowns";
 
 import { Spinner } from "@servcy/ui";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 
 import type { TIssueOperations } from "./root";

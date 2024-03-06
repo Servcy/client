@@ -12,7 +12,7 @@ import { IssueList } from "./issues-list";
 import { ProgressBar } from "./progressbar";
 
 import { CustomMenu } from "@servcy/ui";
-// helpers
+
 import { copyTextToClipboard } from "@helpers/string.helper";
 
 import { IUser, TIssue } from "@servcy/types";

@@ -20,7 +20,7 @@ import { PageDetailsHeader } from "@components/headers/page-details";
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor";
 import { Spinner } from "@servcy/ui";
 // assets
-// helpers
+
 
 import { IPage } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";

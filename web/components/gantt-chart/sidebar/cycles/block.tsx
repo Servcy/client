@@ -5,7 +5,7 @@ import { MoreVertical } from "lucide-react";
 import { useGanttChart } from "@components/gantt-chart/hooks";
 
 import { CycleGanttSidebarBlock } from "@components/cycles";
-// helpers
+
 import { cn } from "@helpers/common.helper";
 import { findTotalDaysInRange } from "@helpers/date-time.helper";
 

@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { useApplication } from "@hooks/store";
 
 import { MAX_FILE_SIZE } from "@constants/common";
-// helpers
+
 import { generateFileName } from "@helpers/attachment.helper";
 
 import { TAttachmentOperations } from "./root";

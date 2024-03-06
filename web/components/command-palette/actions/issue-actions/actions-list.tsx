@@ -7,7 +7,7 @@ import { useApplication, useUser, useIssues } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { DoubleCircleIcon, UserGroupIcon } from "@servcy/ui";
-// helpers
+
 import { copyTextToClipboard } from "@helpers/string.helper";
 
 import { TIssue } from "@servcy/types";

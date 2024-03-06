@@ -6,7 +6,7 @@ import { IStateStore } from "@store/state.store";
 import { ILabelStore } from "@store/label.store";
 import { ICycleStore } from "@store/cycle.store";
 import { IModuleStore } from "@store/module.store";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import { STATE_GROUPS } from "@constants/state";

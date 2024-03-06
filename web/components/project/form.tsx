@@ -11,7 +11,7 @@ import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
 import { Lock } from "lucide-react";
 
 import { IProject, IWorkspace } from "@servcy/types";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
 

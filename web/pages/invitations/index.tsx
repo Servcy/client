@@ -19,7 +19,7 @@ import { Button } from "@servcy/ui";
 // images
 import emptyInvitation from "public/empty-state/invitation.svg";
 import ServcyLogo from "public/logo.svg";
-// helpers
+
 import { truncateText } from "@helpers/string.helper";
 import { getUserRole } from "@helpers/user.helper";
 

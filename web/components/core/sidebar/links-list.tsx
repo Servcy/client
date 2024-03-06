@@ -2,7 +2,7 @@
 import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
 // icons
 import { Pencil, Trash2, LinkIcon } from "lucide-react";
-// helpers
+
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 
 import { ILinkDetails, UserAuth } from "@servcy/types";

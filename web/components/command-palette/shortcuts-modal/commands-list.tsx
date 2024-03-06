@@ -1,5 +1,5 @@
 import { Command } from "lucide-react";
-// helpers
+
 import { substringMatch } from "@helpers/string.helper";
 
 type Props = {

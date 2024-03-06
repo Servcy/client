@@ -9,7 +9,7 @@ import { useEventTracker, useGlobalView } from "@hooks/store";
 import { CreateUpdateWorkspaceViewModal, DeleteGlobalViewModal } from "@components/workspace";
 
 import { CustomMenu } from "@servcy/ui";
-// helpers
+
 import { truncateText } from "@helpers/string.helper";
 import { calculateTotalFilters } from "@helpers/filter.helper";
 

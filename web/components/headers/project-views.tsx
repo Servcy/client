@@ -7,7 +7,7 @@ import { useApplication, useProject, useUser } from "@hooks/store";
 import { Breadcrumbs, PhotoFilterIcon, Button } from "@servcy/ui";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
-// helpers
+
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import { EUserProjectRoles } from "@constants/project";

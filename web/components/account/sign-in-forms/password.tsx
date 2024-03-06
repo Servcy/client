@@ -11,7 +11,7 @@ import { useApplication, useEventTracker } from "@hooks/store";
 import { ESignInSteps, ForgotPasswordPopover } from "@components/account";
 
 import { Button, Input } from "@servcy/ui";
-// helpers
+
 import { checkEmailValidity } from "@helpers/string.helper";
 
 import { IPasswordSignInData } from "@servcy/types";

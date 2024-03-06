@@ -5,7 +5,7 @@ import { mutate } from "swr";
 import { AnalyticsGraph, AnalyticsTable } from "@components/analytics";
 
 import { Button, Loader } from "@servcy/ui";
-// helpers
+
 import { convertResponseToBarGraphData } from "@helpers/analytics.helper";
 
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
