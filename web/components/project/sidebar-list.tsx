@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 
-import { FC, useCallback, useEffect, useRef, useState } from "react"
+import { FC, useEffect, useRef, useState } from "react"
 
 import { Disclosure, Transition } from "@headlessui/react"
 import { DragDropContext, Draggable, Droppable, DropResult } from "@hello-pangea/dnd"
