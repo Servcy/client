@@ -133,7 +133,7 @@ export const Invitations: React.FC<Props> = (props) => {
                                     </div>
                                     <div className="min-w-0 flex-1">
                                         <div className="text-sm font-medium">
-                                            {truncateText(invitedWorkspace?.name, 30)}
+                                            {truncateText(invitedWorkspace?.name ?? "", 30) ?? "Workspace Name"}
                                         </div>
                                         <p className="text-xs text-custom-text-200">{ROLE[invitation.role]}</p>
                                     </div>

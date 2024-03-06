@@ -30,7 +30,7 @@ export const IssueParentDetail: FC<TIssueParentDetail> = (props) => {
 
     const parentIssue = issueMap?.[issue.parent_id || ""] || undefined
 
-    const issueParentState = getProjectStates(parentIssue?.project_id)?.find(
+    const issueParentState = getProjectStates(parentIssue?.project_id ?? "")?.find(
         (state) => state?.id === parentIssue?.state_id
     )
     const stateColor = issueParentState?.color || undefined

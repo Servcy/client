@@ -9,8 +9,6 @@ import { useCycle } from "@hooks/store"
 
 import { TCycleLayout, TCycleView } from "@servcy/types"
 
-components
-
 export interface ICyclesView {
     filter: TCycleView
     layout: TCycleLayout
@@ -34,10 +32,10 @@ export const CyclesView: FC<ICyclesView> = observer((props) => {
         filter === "completed"
             ? currentProjectCompletedCycleIds
             : filter === "draft"
-              ? currentProjectDraftCycleIds
-              : filter === "upcoming"
-                ? currentProjectUpcomingCycleIds
-                : currentProjectCycleIds
+            ? currentProjectDraftCycleIds
+            : filter === "upcoming"
+            ? currentProjectUpcomingCycleIds
+            : currentProjectCycleIds
 
     if (loader || !cyclesList)
         return (

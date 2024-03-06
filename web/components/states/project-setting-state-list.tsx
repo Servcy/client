@@ -67,7 +67,7 @@ export const ProjectSettingStateList: React.FC = observer(() => {
                                     {group === activeGroup && (
                                         <CreateUpdateStateInline
                                             data={null}
-                                            groupLength={orderedStateGroups[group].length}
+                                            groupLength={orderedStateGroups[group]?.length ??0}
                                             onClose={() => {
                                                 setActiveGroup(null)
                                                 setSelectedState(null)
@@ -75,7 +75,7 @@ export const ProjectSettingStateList: React.FC = observer(() => {
                                             selectedGroup={group as keyof StateGroup}
                                         />
                                     )}
-                                    {sortByField(orderedStateGroups[group], "sequence").map((state, index) =>
+                                    {sortByField(orderedStateGroups[group]??[], "sequence").map((state, index) =>
                                         state.id !== selectedState ? (
                                             <StatesListItem
                                                 key={state.id}
@@ -95,7 +95,7 @@ export const ProjectSettingStateList: React.FC = observer(() => {
                                                         setActiveGroup(null)
                                                         setSelectedState(null)
                                                     }}
-                                                    groupLength={orderedStateGroups[group].length}
+                                                    groupLength={orderedStateGroups[group]?.length ?? 0}
                                                     data={
                                                         projectStates?.find((state) => state.id === selectedState) ??
                                                         null

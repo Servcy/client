@@ -34,7 +34,7 @@ export const SPREADSHEET_PROPERTY_DETAILS: {
         Column: React.FC<{
             issue: TIssue
             onClose: () => void
-            onChange: (issue: TIssue, data: Partial<TIssue>, updates: any) => void
+            onChange: (issue: TIssue, data: Partial<TIssue>, updates: any) => void // eslint-disable-line
             disabled: boolean
         }>
     }

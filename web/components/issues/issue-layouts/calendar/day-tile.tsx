@@ -75,7 +75,7 @@ export const CalendarDayTile: React.FC<Props> = observer((props) => {
                             : "bg-custom-background-100"
                     } `}
                 >
-                    {date.date.getDate() === 1 && MONTHS_LIST[date.date.getMonth() + 1].shortTitle + " "}
+                    {date.date.getDate() === 1 && MONTHS_LIST[date.date.getMonth() + 1]?.shortTitle + " "}
                     {isToday ? (
                         <span className="flex items-center justify-center h-5 w-5 rounded-full bg-custom-primary-100 text-white">
                             {date.date.getDate()}
@@ -100,7 +100,7 @@ export const CalendarDayTile: React.FC<Props> = observer((props) => {
                             >
                                 <CalendarIssueBlocks
                                     issues={issues}
-                                    issueIdList={issueIdList}
+                                    issueIdList={issueIdList ?? []}
                                     quickActions={quickActions}
                                     showAllIssues={showAllIssues}
                                     isDragDisabled={readOnly}

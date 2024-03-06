@@ -61,10 +61,10 @@ const getProjectColumns = (project: IProjectStore): IGroupByColumn[] | undefined
             const project = projectMap[projectId]
 
             return {
-                id: project.id,
-                name: project.name,
-                icon: <div className="w-6 h-6">{renderEmoji(project.emoji || "")}</div>,
-                payload: { project_id: project.id },
+                id: project?.id || "",
+                name: project?.name || "",
+                icon: <div className="w-6 h-6">{renderEmoji(project?.emoji || "")}</div>,
+                payload: { project_id: project?.id },
             }
         }) as any
 }

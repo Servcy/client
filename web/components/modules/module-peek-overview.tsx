@@ -23,7 +23,7 @@ export const ModulePeekOverview: React.FC<Props> = observer(({ projectId, worksp
     const { fetchModuleDetails } = useModule()
 
     const handleClose = () => {
-        delete router.query.peekModule
+        delete router.query["peekModule"]
         router.push({
             pathname: router.pathname,
             query: { ...router.query },

@@ -9,7 +9,7 @@ import { useDropzone } from "react-dropzone"
 import { Control, Controller } from "react-hook-form"
 import useSWR from "swr"
 
-import { useApplication, useWorkspace } from "@hooks/store"
+import { useWorkspace } from "@hooks/store"
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
@@ -61,9 +61,6 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
     const router = useRouter()
     const { workspaceSlug } = router.query
     // store hooks
-    const {
-        config: { envConfig },
-    } = useApplication()
     const { currentWorkspace } = useWorkspace()
 
     const { data: unsplashImages, error: unsplashError } = useSWR(
@@ -91,7 +88,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
         accept: {
             "image/*": [".png", ".jpg", ".jpeg", ".svg", ".webp"],
         },
-        maxSize: envConfig?.file_size_limit ?? MAX_FILE_SIZE,
+        maxSize: MAX_FILE_SIZE,
     })
 
     const handleSubmit = async () => {

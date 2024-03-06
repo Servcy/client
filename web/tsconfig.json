@@ -43,7 +43,8 @@
             "@styles/*": ["./styles/*"],
             "@wrappers/*": ["./wrappers/*"],
             "@components/*": ["./components/*"],
-            "@store/*": ["./store/*"]
+            "@store/*": ["./store/*"],
+            "@package.json": ["./package.json"]
         }
     },
     "exclude": [".next", "node_modules"],

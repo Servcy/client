@@ -49,19 +49,19 @@ export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) =
 
         const daysList = Object.keys(allDaysOfActiveWeek)
 
-        const firstDay = new Date(daysList[0])
-        const lastDay = new Date(daysList[daysList.length - 1])
+        const firstDay = new Date(daysList[0] as string)
+        const lastDay = new Date(daysList[daysList.length - 1] as string)
 
         if (firstDay.getMonth() === lastDay.getMonth() && firstDay.getFullYear() === lastDay.getFullYear())
-            return `${MONTHS_LIST[firstDay.getMonth() + 1].title} ${firstDay.getFullYear()}`
+            return `${MONTHS_LIST[firstDay.getMonth() + 1]?.title} ${firstDay.getFullYear()}`
 
         if (firstDay.getFullYear() !== lastDay.getFullYear()) {
-            return `${MONTHS_LIST[firstDay.getMonth() + 1].shortTitle} ${firstDay.getFullYear()} - ${
-                MONTHS_LIST[lastDay.getMonth() + 1].shortTitle
+            return `${MONTHS_LIST[firstDay.getMonth() + 1]?.shortTitle} ${firstDay.getFullYear()} - ${
+                MONTHS_LIST[lastDay.getMonth() + 1]?.shortTitle
             } ${lastDay.getFullYear()}`
         } else
-            return `${MONTHS_LIST[firstDay.getMonth() + 1].shortTitle} - ${
-                MONTHS_LIST[lastDay.getMonth() + 1].shortTitle
+            return `${MONTHS_LIST[firstDay.getMonth() + 1]?.shortTitle} - ${
+                MONTHS_LIST[lastDay.getMonth() + 1]?.shortTitle
             } ${lastDay.getFullYear()}`
     }
 
@@ -81,7 +81,7 @@ export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) =
                     disabled={calendarLayout === "week"}
                 >
                     {calendarLayout === "month"
-                        ? `${MONTHS_LIST[activeMonthDate.getMonth() + 1].title} ${activeMonthDate.getFullYear()}`
+                        ? `${MONTHS_LIST[activeMonthDate.getMonth() + 1]?.title} ${activeMonthDate.getFullYear()}`
                         : getWeekLayoutHeader()}
                 </button>
             </Popover.Button>
@@ -97,8 +97,8 @@ export const CalendarMonthsDropdown: React.FC<Props> = observer((props: Props) =
                 <Popover.Panel className="fixed z-50">
                     <div
                         ref={setPopperElement}
-                        style={styles.popper}
-                        {...attributes.popper}
+                        style={styles['popper']}
+                        {...attributes['popper']}
                         className="w-56 divide-y divide-custom-border-200 rounded border border-custom-border-200 bg-custom-background-100 p-3 shadow-custom-shadow-rg"
                     >
                         <div className="flex items-center justify-between gap-2 pb-3">

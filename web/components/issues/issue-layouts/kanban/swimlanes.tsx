@@ -120,7 +120,7 @@ const SubGroupSwimlane: React.FC<ISubGroupSwimlane> = observer((props) => {
         let issueCount = 0
         const subGroupedIds = issueIds as TSubGroupedIssues
         subGroupedIds?.[column_id] &&
-            Object.keys(subGroupedIds?.[column_id])?.forEach((_list: any) => {
+            Object.keys(subGroupedIds?.[column_id] ?? {})?.forEach((_list: any) => {
                 issueCount += subGroupedIds?.[column_id]?.[_list]?.length || 0
             })
         return issueCount
@@ -150,7 +150,7 @@ const SubGroupSwimlane: React.FC<ISubGroupSwimlane> = observer((props) => {
                             <div className="relative">
                                 <KanBan
                                     issuesMap={issuesMap}
-                                    issueIds={(issueIds as TSubGroupedIssues)?.[_list.id]}
+                                    issueIds={(issueIds as TSubGroupedIssues)?.[_list.id] as TGroupedIssues}
                                     displayProperties={displayProperties}
                                     sub_group_by={sub_group_by}
                                     group_by={group_by}

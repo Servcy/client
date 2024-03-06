@@ -182,7 +182,7 @@ export const IssueDescriptionForm: FC<IssueDetailsProps> = observer((props) => {
                                     setIsSubmitting={setIsSubmitting}
                                     dragDropEnabled
                                     customClassName="min-h-[150px] shadow-sm"
-                                    onChange={(description: Object, description_html: string) => {
+                                    onChange={(_: Object, description_html: string) => {
                                         setShowAlert(true)
                                         setIsSubmitting("submitting")
                                         onChange(description_html)

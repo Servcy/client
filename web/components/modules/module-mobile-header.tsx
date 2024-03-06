@@ -103,7 +103,7 @@ export const ModuleMobileHeader = () => {
                     {layouts.map((layout, index) => (
                         <CustomMenu.MenuItem
                             onClick={() => {
-                                handleLayoutChange(ISSUE_LAYOUTS[index].key)
+                                handleLayoutChange(ISSUE_LAYOUTS[index]?.key as TIssueLayouts)
                             }}
                             className="flex items-center gap-2"
                         >
@@ -127,7 +127,7 @@ export const ModuleMobileHeader = () => {
                             filters={issueFilters?.filters ?? {}}
                             handleFiltersUpdate={handleFiltersUpdate}
                             layoutDisplayFiltersOptions={
-                                activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT.issues[activeLayout] : undefined
+                                activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT["issues"]?.[activeLayout] : undefined
                             }
                             labels={projectLabels}
                             memberIds={projectMemberIds ?? undefined}
@@ -148,7 +148,7 @@ export const ModuleMobileHeader = () => {
                     >
                         <DisplayFiltersSelection
                             layoutDisplayFiltersOptions={
-                                activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT.issues[activeLayout] : undefined
+                                activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT["issues"]?.[activeLayout] : undefined
                             }
                             displayFilters={issueFilters?.displayFilters ?? {}}
                             handleDisplayFiltersUpdate={handleDisplayFilters}

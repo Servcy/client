@@ -63,10 +63,10 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                 const issue = issues?.[issueId]
 
                 const stateColor =
-                    getProjectStates(issue?.project_id)?.find((state) => state?.id == issue?.state_id)?.color || ""
+                    getProjectStates(issue?.project_id ?? "")?.find((state) => state?.id == issue?.state_id)?.color || ""
 
                 return (
-                    <Draggable key={issue.id} draggableId={issue.id} index={index} isDragDisabled={isDragDisabled}>
+                    <Draggable key={issue?.id} draggableId={issue?.id ?? ""} index={index} isDragDisabled={isDragDisabled}>
                         {(provided, snapshot) => (
                             <div
                                 className="relative cursor-pointer p-1 px-2"
@@ -75,9 +75,9 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                                 ref={provided.innerRef}
                             >
                                 <ControlLink
-                                    href={`/${workspaceSlug}/projects/${projectId}/issues/${issue.id}`}
+                                    href={`/${workspaceSlug}/projects/${projectId}/issues/${issue?.id}`}
                                     target="_blank"
-                                    onClick={() => handleIssuePeekOverview(issue)}
+                                    onClick={() => handleIssuePeekOverview(issue as TIssue)}
                                     className="w-full line-clamp-1 cursor-pointer text-sm text-custom-text-100"
                                     disabled={!!issue?.tempId}
                                 >
@@ -99,7 +99,7 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                                                 },
                                                 {
                                                     "border border-custom-primary-70 hover:border-custom-primary-70":
-                                                        peekIssue?.issueId === issue.id,
+                                                        peekIssue?.issueId === issue?.id,
                                                 }
                                             )}
                                         >
@@ -111,10 +111,10 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                                                     }}
                                                 />
                                                 <div className="flex-shrink-0 text-xs text-custom-text-300">
-                                                    {getProjectIdentifierById(issue?.project_id)}-{issue.sequence_id}
+                                                    {getProjectIdentifierById(issue?.project_id as string)}-{issue?.sequence_id}
                                                 </div>
-                                                <Tooltip tooltipHeading="Title" tooltipContent={issue.name}>
-                                                    <div className="truncate text-xs">{issue.name}</div>
+                                                <Tooltip tooltipHeading="Title" tooltipContent={issue?.name}>
+                                                    <div className="truncate text-xs">{issue?.name}</div>
                                                 </Tooltip>
                                             </div>
                                             <div
@@ -124,7 +124,7 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                                                     e.stopPropagation()
                                                 }}
                                             >
-                                                {quickActions(issue, customActionButton)}
+                                                {quickActions(issue as TIssue, customActionButton)}
                                             </div>
                                         </div>
                                     </>

@@ -135,10 +135,10 @@ export class DraftIssuesFilter extends IssueFilterHelperStore implements IDraftI
             if (isEmpty(this.filters) || isEmpty(this.filters[projectId]) || isEmpty(filters)) return
 
             const _filters = {
-                filters: this.filters[projectId].filters as IIssueFilterOptions,
-                displayFilters: this.filters[projectId].displayFilters as IIssueDisplayFilterOptions,
-                displayProperties: this.filters[projectId].displayProperties as IIssueDisplayProperties,
-                kanbanFilters: this.filters[projectId].kanbanFilters as TIssueKanbanFilters,
+                filters: this.filters[projectId]?.filters as IIssueFilterOptions,
+                displayFilters: this.filters[projectId]?.displayFilters as IIssueDisplayFilterOptions,
+                displayProperties: this.filters[projectId]?.displayProperties as IIssueDisplayProperties,
+                kanbanFilters: this.filters[projectId]?.kanbanFilters as TIssueKanbanFilters,
             }
 
             switch (type) {

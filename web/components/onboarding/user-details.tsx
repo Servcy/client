@@ -117,7 +117,7 @@ export const UserDetails: React.FC<Props> = observer((props) => {
                         <OnboardingSidebar
                             userFullName={value.length === 0 ? undefined : value}
                             showProject
-                            workspaceName={workspaceName}
+                            workspaceName={workspaceName ?? "New Workspace"}
                         />
                     )}
                 />

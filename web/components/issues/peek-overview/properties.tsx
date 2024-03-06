@@ -32,8 +32,6 @@ import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
 
 import { ContrastIcon, DiceIcon, DoubleCircleIcon, RelatedIcon, UserGroupIcon } from "@servcy/ui"
 
-icons
-
 interface IPeekOverviewProperties {
     workspaceSlug: string
     projectId: string

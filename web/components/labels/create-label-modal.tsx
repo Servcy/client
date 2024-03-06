@@ -56,7 +56,7 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
     }, [setFocus, isOpen])
 
     useEffect(() => {
-        if (isOpen) setValue("color", getRandomLabelColor())
+        if (isOpen) setValue("color", getRandomLabelColor() ?? "rgb(var(--color-text-200))")
     }, [setValue, isOpen])
 
     const onClose = () => {

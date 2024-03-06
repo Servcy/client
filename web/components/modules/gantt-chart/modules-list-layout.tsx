@@ -32,10 +32,10 @@ export const ModulesListGanttChartView: React.FC = observer(() => {
             const block = moduleMap[blockId]
             return {
                 data: block,
-                id: block.id,
-                sort_order: block.sort_order,
-                start_date: block.start_date ? new Date(block.start_date) : null,
-                target_date: block.target_date ? new Date(block.target_date) : null,
+                id: block?.id || "",
+                sort_order: block?.sort_order || 0,
+                start_date: block?.start_date ? new Date(block?.start_date) : null,
+                target_date: block?.target_date ? new Date(block?.target_date) : null,
             }
         })
 

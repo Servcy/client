@@ -55,8 +55,8 @@ export const HeaderColumn = (props: Props) => {
             customButton={
                 <div className="flex w-full cursor-pointer items-center justify-between gap-1.5 py-2 text-sm text-custom-text-200 hover:text-custom-text-100">
                     <div className="flex items-center gap-1.5">
-                        {<propertyDetails.icon className="h-4 w-4 text-custom-text-400" />}
-                        {propertyDetails.title}
+                        {propertyDetails && (<propertyDetails.icon className="h-4 w-4 text-custom-text-400" />)}
+                        {propertyDetails?.title}
                     </div>
                     <div className="ml-3 flex">
                         {activeSortingProperty === property && (
@@ -72,42 +72,42 @@ export const HeaderColumn = (props: Props) => {
             placement="bottom-start"
             closeOnSelect
         >
-            <CustomMenu.MenuItem onClick={() => handleOrderBy(propertyDetails.ascendingOrderKey, property)}>
+            <CustomMenu.MenuItem onClick={() => handleOrderBy(propertyDetails?.ascendingOrderKey as TIssueOrderByOptions, property)}>
                 <div
                     className={`flex items-center justify-between gap-1.5 px-1 ${
-                        selectedMenuItem === `${propertyDetails.ascendingOrderKey}_${property}`
+                        selectedMenuItem === `${propertyDetails?.ascendingOrderKey}_${property}`
                             ? "text-custom-text-100"
                             : "text-custom-text-200 hover:text-custom-text-100"
                     }`}
                 >
                     <div className="flex items-center gap-2">
                         <ArrowDownWideNarrow className="h-3 w-3 stroke-[1.5]" />
-                        <span>{propertyDetails.ascendingOrderTitle}</span>
+                        <span>{propertyDetails?.ascendingOrderTitle}</span>
                         <MoveRight className="h-3 w-3" />
-                        <span>{propertyDetails.descendingOrderTitle}</span>
+                        <span>{propertyDetails?.descendingOrderTitle}</span>
                     </div>
 
-                    {selectedMenuItem === `${propertyDetails.ascendingOrderKey}_${property}` && (
+                    {selectedMenuItem === `${propertyDetails?.ascendingOrderKey}_${property}` && (
                         <CheckIcon className="h-3 w-3" />
                     )}
                 </div>
             </CustomMenu.MenuItem>
-            <CustomMenu.MenuItem onClick={() => handleOrderBy(propertyDetails.descendingOrderKey, property)}>
+            <CustomMenu.MenuItem onClick={() => handleOrderBy(propertyDetails?.descendingOrderKey as TIssueOrderByOptions, property)}>
                 <div
                     className={`flex items-center justify-between gap-1.5 px-1 ${
-                        selectedMenuItem === `${propertyDetails.descendingOrderKey}_${property}`
+                        selectedMenuItem === `${propertyDetails?.descendingOrderKey}_${property}`
                             ? "text-custom-text-100"
                             : "text-custom-text-200 hover:text-custom-text-100"
                     }`}
                 >
                     <div className="flex items-center gap-2">
                         <ArrowUpNarrowWide className="h-3 w-3 stroke-[1.5]" />
-                        <span>{propertyDetails.descendingOrderTitle}</span>
+                        <span>{propertyDetails?.descendingOrderTitle}</span>
                         <MoveRight className="h-3 w-3" />
-                        <span>{propertyDetails.ascendingOrderTitle}</span>
+                        <span>{propertyDetails?.ascendingOrderTitle}</span>
                     </div>
 
-                    {selectedMenuItem === `${propertyDetails.descendingOrderKey}_${property}` && (
+                    {selectedMenuItem === `${propertyDetails?.descendingOrderKey}_${property}` && (
                         <CheckIcon className="h-3 w-3" />
                     )}
                 </div>

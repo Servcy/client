@@ -192,6 +192,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
                                                                                     {value}
                                                                                 </CustomSelect.Option>
                                                                             )
+                                                                        return null;
                                                                     })}
                                                                 </CustomSelect>
                                                             )}

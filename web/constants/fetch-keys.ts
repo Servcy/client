@@ -1,6 +1,6 @@
 import { objToQueryParams } from "@helpers/string.helper"
 
-import { IAnalyticsParams, IJiraMetadata, INotificationParams } from "@servcy/types"
+import { IAnalyticsParams, INotificationParams } from "@servcy/types"
 
 const paramsToKey = (params: any) => {
     const {
@@ -197,31 +197,6 @@ export const SUB_ISSUES = (issueId: string) => `SUB_ISSUES_${issueId.toUpperCase
 export const ISSUE_ATTACHMENTS = (issueId: string) => `ISSUE_ATTACHMENTS_${issueId.toUpperCase()}`
 export const ARCHIVED_ISSUE_DETAILS = (issueId: string) => `ARCHIVED_ISSUE_DETAILS_${issueId.toUpperCase()}`
 
-// integrations
-export const APP_INTEGRATIONS = "APP_INTEGRATIONS"
-export const WORKSPACE_INTEGRATIONS = (workspaceSlug: string) => `WORKSPACE_INTEGRATIONS_${workspaceSlug.toUpperCase()}`
-
-export const JIRA_IMPORTER_DETAIL = (workspaceSlug: string, params: IJiraMetadata) => {
-    const { api_token, cloud_hostname, email, project_key } = params
-
-    return `JIRA_IMPORTER_DETAIL_${workspaceSlug.toUpperCase()}_${api_token}_${cloud_hostname}_${email}_${project_key}`
-}
-
-//import-export
-export const IMPORTER_SERVICES_LIST = (workspaceSlug: string) => `IMPORTER_SERVICES_LIST_${workspaceSlug.toUpperCase()}`
-
-//export
-export const EXPORT_SERVICES_LIST = (workspaceSlug: string, cursor: string, per_page: string) =>
-    `EXPORTER_SERVICES_LIST_${workspaceSlug.toUpperCase()}_${cursor.toUpperCase()}_${per_page.toUpperCase()}`
-
-// github-importer
-export const GITHUB_REPOSITORY_INFO = (workspaceSlug: string, repoName: string) =>
-    `GITHUB_REPO_INFO_${workspaceSlug.toString().toUpperCase()}_${repoName.toUpperCase()}`
-
-// slack-project-integration
-export const SLACK_CHANNEL_INFO = (workspaceSlug: string, projectId: string) =>
-    `SLACK_CHANNEL_INFO_${workspaceSlug.toString().toUpperCase()}_${projectId.toUpperCase()}`
-
 // Pages
 export const RECENT_PAGES_LIST = (projectId: string) => `RECENT_PAGES_LIST_${projectId.toUpperCase()}`
 export const ALL_PAGES_LIST = (projectId: string) => `ALL_PAGES_LIST_${projectId.toUpperCase()}`
@@ -233,6 +208,7 @@ export const PAGE_DETAILS = (pageId: string) => `PAGE_DETAILS_${pageId.toUpperCa
 export const PAGE_BLOCKS_LIST = (pageId: string) => `PAGE_BLOCK_LIST_${pageId.toUpperCase()}`
 export const PAGE_BLOCK_DETAILS = (pageId: string) => `PAGE_BLOCK_DETAILS_${pageId.toUpperCase()}`
 export const MY_PAGES_LIST = (pageId: string) => `MY_PAGE_LIST_${pageId}`
+
 // estimates
 export const ESTIMATES_LIST = (projectId: string) => `ESTIMATES_LIST_${projectId.toUpperCase()}`
 export const ESTIMATE_DETAILS = (estimateId: string) => `ESTIMATE_DETAILS_${estimateId.toUpperCase()}`
@@ -298,8 +274,3 @@ export const ISSUE_REACTION_LIST = (workspaceSlug: string, projectId: string, is
     `ISSUE_REACTION_LIST_${workspaceSlug.toUpperCase()}_${projectId.toUpperCase()}_${issueId.toUpperCase()}`
 export const COMMENT_REACTION_LIST = (workspaceSlug: string, projectId: string, commendId: string) =>
     `COMMENT_REACTION_LIST_${workspaceSlug.toUpperCase()}_${projectId.toUpperCase()}_${commendId.toUpperCase()}`
-
-// api-tokens
-export const API_TOKENS_LIST = (workspaceSlug: string) => `API_TOKENS_LIST_${workspaceSlug.toUpperCase()}`
-export const API_TOKEN_DETAILS = (workspaceSlug: string, tokenId: string) =>
-    `API_TOKEN_DETAILS_${workspaceSlug.toUpperCase()}_${tokenId.toUpperCase()}`

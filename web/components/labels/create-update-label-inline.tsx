@@ -103,8 +103,7 @@ export const CreateUpdateLabelInline = observer(
                 setValue("color", labelToUpdate.color && labelToUpdate.color !== "" ? labelToUpdate.color : "#000")
                 return
             }
-
-            setValue("color", getRandomLabelColor())
+            setValue("color", getRandomLabelColor() ?? "#000")
         }, [labelToUpdate, setValue])
 
         return (

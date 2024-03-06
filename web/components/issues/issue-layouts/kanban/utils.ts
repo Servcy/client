@@ -19,13 +19,13 @@ const handleSortOrder = (destinationIssues: string[], destinationIndex: number, 
             const destinationIssueId = destinationIssues[destinationIndex]
             currentIssueState = {
                 ...currentIssueState,
-                sort_order: issueMap[destinationIssueId].sort_order - sortOrderDefaultValue,
+                sort_order: (issueMap[destinationIssueId ?? ""]?.sort_order as number) - sortOrderDefaultValue,
             }
         } else if (destinationIndex === destinationIssues.length) {
             const destinationIssueId = destinationIssues[destinationIndex - 1]
             currentIssueState = {
                 ...currentIssueState,
-                sort_order: issueMap[destinationIssueId].sort_order + sortOrderDefaultValue,
+                sort_order: (issueMap[destinationIssueId ?? ""]?.sort_order as number) + sortOrderDefaultValue,
             }
         } else {
             const destinationTopIssueId = destinationIssues[destinationIndex - 1]
@@ -33,7 +33,7 @@ const handleSortOrder = (destinationIssues: string[], destinationIndex: number, 
             currentIssueState = {
                 ...currentIssueState,
                 sort_order:
-                    (issueMap[destinationTopIssueId].sort_order + issueMap[destinationBottomIssueId].sort_order) / 2,
+                    ((issueMap[destinationTopIssueId ?? ""]?.sort_order as number) + (issueMap[destinationBottomIssueId ?? ""]?.sort_order as number)) / 2,
             }
         }
     } else {
@@ -97,8 +97,8 @@ export const handleDragDrop = async (
 
     if (destinationGroupByColumnId === "issue-trash-box") {
         const sourceIssues: string[] = subGroupBy
-            ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId][sourceGroupByColumnId]
-            : (issueWithIds as TGroupedIssues)[sourceGroupByColumnId]
+            ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[sourceGroupByColumnId] as string[]
+            : (issueWithIds as TGroupedIssues)[sourceGroupByColumnId] as string[]
 
         const [removed] = sourceIssues.splice(source.index, 1)
 
@@ -112,15 +112,15 @@ export const handleDragDrop = async (
         //since we are removing an id from array further down
         const sourceIssues = [
             ...(subGroupBy
-                ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId][sourceGroupByColumnId]
-                : (issueWithIds as TGroupedIssues)[sourceGroupByColumnId]),
+                ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[sourceGroupByColumnId] as string[]
+                : (issueWithIds as TGroupedIssues)[sourceGroupByColumnId] as string[]),
         ]
         const destinationIssues = subGroupBy
-            ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId][destinationGroupByColumnId]
+            ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[destinationGroupByColumnId]
             : (issueWithIds as TGroupedIssues)[destinationGroupByColumnId]
 
         const [removed] = sourceIssues.splice(source.index, 1)
-        const removedIssueDetail = issueMap[removed]
+        const removedIssueDetail = issueMap[removed ?? ""]
 
         updateIssue = {
             id: removedIssueDetail?.id,
@@ -131,7 +131,7 @@ export const handleDragDrop = async (
         updateIssue = {
             ...updateIssue,
             ...handleSortOrder(
-                sourceDroppableId === destinationDroppableId ? sourceIssues : destinationIssues,
+                sourceDroppableId === destinationDroppableId ? sourceIssues : destinationIssues as string[],
                 destination.index,
                 issueMap
             ),

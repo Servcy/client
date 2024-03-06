@@ -80,7 +80,7 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
             updateLabelPosition(
                 workspaceSlug?.toString()!,
                 projectId?.toString()!,
-                childLabel,
+                childLabel ?? "",
                 parentLabel,
                 index,
                 prevParentLabel == parentLabel,

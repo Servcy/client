@@ -113,8 +113,8 @@ export const IssueLabelSelect: React.FC<IIssueLabelSelect> = observer((props) =>
                     <div
                         className={`z-10 my-1 w-48 whitespace-nowrap rounded border border-custom-border-300 bg-custom-background-100 py-2.5 text-xs shadow-custom-shadow-rg focus:outline-none`}
                         ref={setPopperElement}
-                        style={styles.popper}
-                        {...attributes.popper}
+                        style={styles['popper']}
+                        {...attributes['popper']}
                     >
                         <div className="px-2">
                             <div className="flex w-full items-center justify-start rounded border border-custom-border-200 bg-custom-background-90 px-2">

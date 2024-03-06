@@ -105,7 +105,7 @@ export const ProfileIssuesFilter = observer(() => {
             <FiltersDropdown title="Filters" placement="bottom-end">
                 <FilterSelection
                     layoutDisplayFiltersOptions={
-                        activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT.profile_issues[activeLayout] : undefined
+                        activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT["profile_issues"]?.[activeLayout] : undefined
                     }
                     filters={issueFilters?.filters ?? {}}
                     handleFiltersUpdate={handleFiltersUpdate}
@@ -118,7 +118,7 @@ export const ProfileIssuesFilter = observer(() => {
             <FiltersDropdown title="Display" placement="bottom-end">
                 <DisplayFiltersSelection
                     layoutDisplayFiltersOptions={
-                        activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT.profile_issues[activeLayout] : undefined
+                        activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT["profile_issues"]?.[activeLayout] : undefined
                     }
                     displayFilters={issueFilters?.displayFilters ?? {}}
                     handleDisplayFiltersUpdate={handleDisplayFilters}

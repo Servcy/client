@@ -8,15 +8,9 @@ export * from "./invitation"
 export * from "./issues"
 export * from "./modules"
 export * from "./views"
-export * from "./integration"
 export * from "./pages"
 export * from "./ai"
 export * from "./estimate"
-export * from "./importer"
-
-// FIXME: Remove this after development and the refactor/mobx-store-issue branch is stable
-export * from "./inbox"
-export * from "./inbox/root"
 
 export * from "./analytics"
 export * from "./calendar"
@@ -26,10 +20,8 @@ export * from "./reaction"
 export * from "./view-props"
 export * from "./workspace-views"
 export * from "./webhook"
-export * from "./issues/base" // TODO: Remove this after development and the refactor/mobx-store-issue branch is stable
+export * from "./issues/base"
 export * from "./auth"
-export * from "./api_token"
-export * from "./instance"
 export * from "./app"
 
 export type NestedKeyOf<ObjectType extends object> = {

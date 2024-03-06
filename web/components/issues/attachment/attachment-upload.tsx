@@ -3,8 +3,6 @@ import { useCallback, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { useDropzone } from "react-dropzone"
 
-import { useApplication } from "@hooks/store"
-
 import { MAX_FILE_SIZE } from "@constants/common"
 
 import { generateFileName } from "@helpers/attachment.helper"
@@ -21,15 +19,11 @@ type Props = {
 
 export const IssueAttachmentUpload: React.FC<Props> = observer((props) => {
     const { workspaceSlug, disabled = false, handleAttachmentOperations } = props
-    // store hooks
-    const {
-        config: { envConfig },
-    } = useApplication()
     // states
     const [isLoading, setIsLoading] = useState(false)
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
-        const currentFile: File = acceptedFiles[0]
+        const currentFile: File = acceptedFiles[0] as File
         if (!currentFile || !workspaceSlug) return
 
         const uploadedFile: File = new File([currentFile], generateFileName(currentFile.name), {
@@ -51,12 +45,12 @@ export const IssueAttachmentUpload: React.FC<Props> = observer((props) => {
 
     const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
         onDrop,
-        maxSize: envConfig?.file_size_limit ?? MAX_FILE_SIZE,
+        maxSize: MAX_FILE_SIZE,
         multiple: false,
         disabled: isLoading || disabled,
     })
 
-    const maxFileSize = envConfig?.file_size_limit ?? MAX_FILE_SIZE
+    const maxFileSize = MAX_FILE_SIZE
 
     const fileError =
         fileRejections.length > 0 ? `Invalid file type or size (max ${maxFileSize / 1024 / 1024} MB)` : null

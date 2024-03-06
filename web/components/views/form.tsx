@@ -183,7 +183,7 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
                                                 [key]: newValues,
                                             })
                                         }}
-                                        layoutDisplayFiltersOptions={ISSUE_DISPLAY_FILTERS_BY_LAYOUT.issues.list}
+                                        layoutDisplayFiltersOptions={ISSUE_DISPLAY_FILTERS_BY_LAYOUT["issues"]?.["list"]}
                                         labels={projectLabels ?? undefined}
                                         memberIds={projectMemberIds ?? undefined}
                                         states={projectStates}
