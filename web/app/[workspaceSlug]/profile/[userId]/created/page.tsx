@@ -1,9 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
-// store
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react-lite"
 
 import { PageHead } from "@components/core"
@@ -13,19 +10,13 @@ import { ProfileIssuesPage } from "@components/profile/profile-issues"
 import { AppLayout } from "@layouts/app-layout"
 import { ProfileAuthWrapper } from "@layouts/user-profile-layout"
 
-const ProfileCreatedIssuesPage: NextPageWithLayout = () => (
-    <>
-        <PageHead title="Profile - Created" />
-        <ProfileIssuesPage type="created" />
-    </>
+const ProfileCreatedIssuesPage: NextPageWithWrapper = () => (
+    <AppLayout header={<UserProfileHeader type="Created" />}>
+        <ProfileAuthWrapper showProfileIssuesFilter>
+            <PageHead title="Profile - Created" />
+            <ProfileIssuesPage type="created" />
+        </ProfileAuthWrapper>
+    </AppLayout>
 )
-
-ProfileCreatedIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<UserProfileHeader type="Created" />}>
-            <ProfileAuthWrapper showProfileIssuesFilter>{page}</ProfileAuthWrapper>
-        </AppLayout>
-    )
-}
 
 export default observer(ProfileCreatedIssuesPage)

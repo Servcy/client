@@ -3,9 +3,7 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -16,7 +14,7 @@ import { useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 
-const ProjectIssuesPage: NextPageWithLayout = observer(() => {
+const ProjectIssuesPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
     const { projectId } = router.query
     // store
@@ -31,7 +29,7 @@ const ProjectIssuesPage: NextPageWithLayout = observer(() => {
     const pageTitle = project?.name ? `${project?.name} - Issues` : undefined
 
     return (
-        <>
+        <AppLayout header={<ProjectIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <Head>
                 <title>{project?.name} - Issues</title>
@@ -39,16 +37,10 @@ const ProjectIssuesPage: NextPageWithLayout = observer(() => {
             <div className="h-full w-full">
                 <ProjectLayoutRoot />
             </div>
-        </>
+        </AppLayout>
     )
 })
 
-ProjectIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectIssuesHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+ProjectIssuesPage.hasWrapper = true
 
 export default ProjectIssuesPage

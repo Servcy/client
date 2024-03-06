@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement, useEffect } from "react"
+import { useEffect } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
@@ -12,14 +12,13 @@ import { PageHead } from "@components/core"
 import { ProjectIssueDetailsHeader } from "@components/headers"
 import { IssueDetailRoot } from "@components/issues"
 
-// store hooks
 import { useApplication, useIssueDetail, useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 
 import { Loader } from "@servcy/ui"
 
-const IssueDetailsPage: NextPageWithLayout = observer(() => {
+const IssueDetailsPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     const { workspaceSlug, projectId, issueId } = router.query
@@ -59,7 +58,7 @@ const IssueDetailsPage: NextPageWithLayout = observer(() => {
     }, [themeStore])
 
     return (
-        <>
+        <AppLayout header={<ProjectIssueDetailsHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {issueLoader ? (
                 <Loader className="flex h-full gap-5 p-5">
@@ -87,16 +86,10 @@ const IssueDetailsPage: NextPageWithLayout = observer(() => {
                     />
                 )
             )}
-        </>
+        </AppLayout>
     )
 })
 
-IssueDetailsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectIssueDetailsHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+IssueDetailsPage.hasWrapper = true
 
 export default IssueDetailsPage

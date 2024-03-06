@@ -1,8 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -13,21 +11,19 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 
-const WorkspaceActiveCyclesPage: NextPageWithLayout = observer(() => {
+const WorkspaceActiveCyclesPage: NextPageWithWrapper = observer(() => {
     const { currentWorkspace } = useWorkspace()
     // derived values
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Active Cycles` : undefined
 
     return (
-        <>
+        <AppLayout header={<WorkspaceActiveCycleHeader />}>
             <PageHead title={pageTitle} />
             <WorkspaceActiveCyclesUpgrade />
-        </>
+        </AppLayout>
     )
 })
 
-WorkspaceActiveCyclesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <AppLayout header={<WorkspaceActiveCycleHeader />}>{page}</AppLayout>
-}
+WorkspaceActiveCyclesPage.hasWrapper = true
 
 export default WorkspaceActiveCyclesPage

@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 import useSWR from "swr"
 
@@ -15,9 +13,10 @@ import { ProjectFeaturesList } from "@components/project"
 import { useProject, useUser } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
+
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-const FeaturesSettingsPage: NextPageWithLayout = observer(() => {
+const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
     const { workspaceSlug, projectId } = router.query
     // store
@@ -35,24 +34,20 @@ const FeaturesSettingsPage: NextPageWithLayout = observer(() => {
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Features` : undefined
 
     return (
-        <>
-            <PageHead title={pageTitle} />
-            <section className={`w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "opacity-60"}`}>
-                <div className="flex items-center border-b border-custom-border-100 py-3.5">
-                    <h3 className="text-xl font-medium">Features</h3>
-                </div>
-                <ProjectFeaturesList />
-            </section>
-        </>
+        <AppLayout header={<ProjectSettingHeader title="Features Settings" />} withProjectWrapper>
+            <ProjectSettingLayout>
+                <PageHead title={pageTitle} />
+                <section className={`w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "opacity-60"}`}>
+                    <div className="flex items-center border-b border-custom-border-100 py-3.5">
+                        <h3 className="text-xl font-medium">Features</h3>
+                    </div>
+                    <ProjectFeaturesList />
+                </section>
+            </ProjectSettingLayout>
+        </AppLayout>
     )
 })
 
-FeaturesSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectSettingHeader title="Features Settings" />} withProjectWrapper>
-            <ProjectSettingLayout>{page}</ProjectSettingLayout>
-        </AppLayout>
-    )
-}
+FeaturesSettingsPage.hasWrapper = true
 
 export default FeaturesSettingsPage

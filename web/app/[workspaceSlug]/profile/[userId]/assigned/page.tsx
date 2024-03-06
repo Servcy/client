@@ -1,8 +1,8 @@
 "use client"
 
-import React, { ReactElement } from "react"
+import React from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 
 import { PageHead } from "@components/core"
 import { UserProfileHeader } from "@components/headers"
@@ -11,19 +11,15 @@ import { ProfileIssuesPage } from "@components/profile/profile-issues"
 import { AppLayout } from "@layouts/app-layout"
 import { ProfileAuthWrapper } from "@layouts/user-profile-layout"
 
-const ProfileAssignedIssuesPage: NextPageWithLayout = () => (
-    <>
-        <PageHead title="Profile - Assigned" />
-        <ProfileIssuesPage type="assigned" />
-    </>
+const ProfileAssignedIssuesPage: NextPageWithWrapper = () => (
+    <AppLayout header={<UserProfileHeader type="Assigned" />}>
+        <ProfileAuthWrapper showProfileIssuesFilter>
+            <PageHead title="Profile - Assigned" />
+            <ProfileIssuesPage type="assigned" />
+        </ProfileAuthWrapper>
+    </AppLayout>
 )
 
-ProfileAssignedIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<UserProfileHeader type="Assigned" />}>
-            <ProfileAuthWrapper showProfileIssuesFilter>{page}</ProfileAuthWrapper>
-        </AppLayout>
-    )
-}
+ProfileAssignedIssuesPage.hasWrapper = true
 
 export default ProfileAssignedIssuesPage

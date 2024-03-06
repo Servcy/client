@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 import emptyView from "public/empty-state/view.svg"
 import useSWR from "swr"
@@ -18,7 +16,7 @@ import { useProject, useProjectView } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 
-const ProjectViewIssuesPage: NextPageWithLayout = observer(() => {
+const ProjectViewIssuesPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     const { workspaceSlug, projectId, viewId } = router.query
@@ -38,7 +36,7 @@ const ProjectViewIssuesPage: NextPageWithLayout = observer(() => {
     )
 
     return (
-        <>
+        <AppLayout header={<ProjectViewIssuesHeader />} withProjectWrapper>
             {error ? (
                 <EmptyState
                     image={emptyView}
@@ -55,16 +53,10 @@ const ProjectViewIssuesPage: NextPageWithLayout = observer(() => {
                     <ProjectViewLayoutRoot />
                 </>
             )}
-        </>
+        </AppLayout>
     )
 })
 
-ProjectViewIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectViewIssuesHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+ProjectViewIssuesPage.hasWrapper = true
 
 export default ProjectViewIssuesPage

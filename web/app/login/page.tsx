@@ -5,7 +5,7 @@ import Link from "next/link.js"
 
 import { useEffect, useState } from "react"
 
-import type { NextPageWithLayout } from "@/types/index"
+import type { NextPageWithWrapper } from "@/types/index"
 import { GoogleLogin } from "@react-oauth/google"
 import { Button, Input } from "antd"
 import { observer } from "mobx-react-lite"
@@ -27,7 +27,7 @@ import { Spinner } from "@servcy/ui"
 
 const authService = new AuthService()
 
-const Login: NextPageWithLayout = observer(() => {
+const Login: NextPageWithWrapper = observer(() => {
     const [stage, setStage] = useState<number>(0)
     const [inputType, setInputType] = useState<string>("email")
     const [input, setInput] = useState<string>("")

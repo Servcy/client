@@ -1,4 +1,3 @@
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-    getWrapper?: (page: ReactElement) => ReactNode
+export type NextPageWithWrapper<P = {}, IP = P> = NextPage<P, IP> & {
     hasWrapper?: boolean
 }

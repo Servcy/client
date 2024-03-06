@@ -1,8 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react-lite"
 
 import { PageHead } from "@components/core"
@@ -12,11 +10,12 @@ import { ProjectSettingHeader } from "@components/headers"
 import { useProject, useUser } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
-import { ProjectSettingLayout } from "@wrappers/settings"
 
 import { EUserProjectRoles } from "@constants/project"
 
-const EstimatesSettingsPage: NextPageWithLayout = observer(() => {
+import { ProjectSettingLayout } from "@wrappers/settings"
+
+const EstimatesSettingsPage: NextPageWithWrapper = observer(() => {
     const {
         membership: { currentProjectRole },
     } = useUser()
@@ -26,23 +25,19 @@ const EstimatesSettingsPage: NextPageWithLayout = observer(() => {
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Estimates` : undefined
 
     return (
-        <>
-            <PageHead title={pageTitle} />
-            <div
-                className={`h-full w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "pointer-events-none opacity-60"}`}
-            >
-                <EstimatesList />
-            </div>
-        </>
+        <AppLayout header={<ProjectSettingHeader title="Estimates Settings" />} withProjectWrapper>
+            <ProjectSettingLayout>
+                <PageHead title={pageTitle} />
+                <div
+                    className={`h-full w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "pointer-events-none opacity-60"}`}
+                >
+                    <EstimatesList />
+                </div>
+            </ProjectSettingLayout>
+        </AppLayout>
     )
 })
 
-EstimatesSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectSettingHeader title="Estimates Settings" />} withProjectWrapper>
-            <ProjectSettingLayout>{page}</ProjectSettingLayout>
-        </AppLayout>
-    )
-}
+EstimatesSettingsPage.hasWrapper = true
 
 export default EstimatesSettingsPage

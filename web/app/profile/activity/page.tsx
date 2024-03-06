@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { History, MessageSquare } from "lucide-react"
 import { observer } from "mobx-react"
 import useSWR from "swr"
@@ -13,11 +13,11 @@ import { ActivitySettingsLoader } from "@components/ui"
 
 import { useApplication, useUser } from "@hooks/store"
 
-import { ProfileSettingsLayout } from "@wrappers/settings"
-
 import { USER_ACTIVITY } from "@constants/fetch-keys"
 
 import { UserService } from "@services/user.service"
+
+import { ProfileSettingsLayout } from "@wrappers/settings"
 
 import { calculateTimeAgo } from "@helpers/date-time.helper"
 
@@ -25,7 +25,7 @@ import { RichReadOnlyEditor } from "@servcy/rich-text-editor"
 
 const userService = new UserService()
 
-const ProfileActivityPage: NextPageWithLayout = observer(() => {
+const ProfileActivityPage: NextPageWithWrapper = observer(() => {
     const { data: userActivity } = useSWR(USER_ACTIVITY, () => userService.getUserActivity())
     // store hooks
     const { currentUser } = useUser()
@@ -200,7 +200,7 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
                                     )
                                 }
 
-                                return null;
+                                return null
                             })}
                         </ul>
                     </div>
@@ -212,6 +212,6 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
     )
 })
 
-ProfileActivityPage.hasWrapper = true;
+ProfileActivityPage.hasWrapper = true
 
 export default ProfileActivityPage

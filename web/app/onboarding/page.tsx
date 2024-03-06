@@ -3,14 +3,13 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
 
-import { ReactElement, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDown } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
-
 import ServcyLogo from "public/logo.png"
 import { Controller, useForm } from "react-hook-form"
 import useSWR from "swr"
@@ -34,7 +33,7 @@ import { Avatar, Spinner } from "@servcy/ui"
 
 const workspaceService = new WorkspaceService()
 
-const OnboardingPage: NextPageWithLayout = observer(() => {
+const OnboardingPage: NextPageWithWrapper = observer(() => {
     // states
     const [step, setStep] = useState<number | null>(null)
     const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
@@ -144,126 +143,122 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
     }, [user, invitations, step, updateCurrentUser, workspacesList])
 
     return (
-        <>
-            <PageHead title="Onboarding" />
-            <SwitchOrDeleteAccountModal
-                isOpen={showDeleteAccountModal}
-                onClose={() => setShowDeleteAccountModal(false)}
-            />
-            {user && step !== null ? (
-                <div className={`fixed flex h-full w-full flex-col bg-onboarding-gradient-100`}>
-                    <div className="flex items-center px-4 py-10 sm:px-7 sm:pb-8 sm:pt-14 md:px-14 lg:pl-28 lg:pr-24">
-                        <div className="flex w-full items-center justify-between font-semibold ">
-                            <div className="flex items-center gap-x-1 text-3xl">
-                                <Image src={ServcyLogo} alt="Servcy Logo" height={30} width={30} />
-                                Servcy
-                            </div>
+        <UserAuthWrapper>
+            <DefaultLayout>
+                <PageHead title="Onboarding" />
+                <SwitchOrDeleteAccountModal
+                    isOpen={showDeleteAccountModal}
+                    onClose={() => setShowDeleteAccountModal(false)}
+                />
+                {user && step !== null ? (
+                    <div className={`fixed flex h-full w-full flex-col bg-onboarding-gradient-100`}>
+                        <div className="flex items-center px-4 py-10 sm:px-7 sm:pb-8 sm:pt-14 md:px-14 lg:pl-28 lg:pr-24">
+                            <div className="flex w-full items-center justify-between font-semibold ">
+                                <div className="flex items-center gap-x-1 text-3xl">
+                                    <Image src={ServcyLogo} alt="Servcy Logo" height={30} width={30} />
+                                    Servcy
+                                </div>
 
-                            <div>
-                                <Controller
-                                    control={control}
-                                    name="full_name"
-                                    render={({ field: { value } }) => (
-                                        <div className="flex items-center gap-x-2 pr-4">
-                                            {step != 1 && (
-                                                <Avatar
-                                                    name={
-                                                        currentUser?.first_name
-                                                            ? `${currentUser?.first_name} ${currentUser?.last_name ?? ""}`
-                                                            : value.length > 0
-                                                              ? value
-                                                              : currentUser?.email
-                                                    }
-                                                    src={currentUser?.avatar}
-                                                    size={35}
-                                                    shape="square"
-                                                    fallbackBackgroundColor="#FCBE1D"
-                                                    className="!text-base capitalize"
-                                                />
-                                            )}
-                                            <div>
+                                <div>
+                                    <Controller
+                                        control={control}
+                                        name="full_name"
+                                        render={({ field: { value } }) => (
+                                            <div className="flex items-center gap-x-2 pr-4">
                                                 {step != 1 && (
-                                                    <p className="text-sm font-medium text-custom-text-200">
-                                                        {currentUser?.first_name
-                                                            ? `${currentUser?.first_name} ${currentUser?.last_name ?? ""}`
-                                                            : value.length > 0
-                                                              ? value
-                                                              : null}
-                                                    </p>
+                                                    <Avatar
+                                                        name={
+                                                            currentUser?.first_name
+                                                                ? `${currentUser?.first_name} ${currentUser?.last_name ?? ""}`
+                                                                : value.length > 0
+                                                                  ? value
+                                                                  : currentUser?.email
+                                                        }
+                                                        src={currentUser?.avatar}
+                                                        size={35}
+                                                        shape="square"
+                                                        fallbackBackgroundColor="#FCBE1D"
+                                                        className="!text-base capitalize"
+                                                    />
                                                 )}
+                                                <div>
+                                                    {step != 1 && (
+                                                        <p className="text-sm font-medium text-custom-text-200">
+                                                            {currentUser?.first_name
+                                                                ? `${currentUser?.first_name} ${currentUser?.last_name ?? ""}`
+                                                                : value.length > 0
+                                                                  ? value
+                                                                  : null}
+                                                        </p>
+                                                    )}
 
-                                                <Menu>
-                                                    <Menu.Button className={"flex items-center gap-x-2"}>
-                                                        <span className="text-base font-medium">{user.email}</span>
-                                                        <ChevronDown className="h-4 w-4 text-custom-text-300" />
-                                                    </Menu.Button>
-                                                    <Transition
-                                                        enter="transition duration-100 ease-out"
-                                                        enterFrom="transform scale-95 opacity-0"
-                                                        enterTo="transform scale-100 opacity-100"
-                                                        leave="transition duration-75 ease-out"
-                                                        leaveFrom="transform scale-100 opacity-100"
-                                                        leaveTo="transform scale-95 opacity-0"
-                                                    >
-                                                        <Menu.Items className={"absolute min-w-full"}>
-                                                            <Menu.Item as="div">
-                                                                <div
-                                                                    className="mr-auto mt-2 rounded-md border border-red-400 bg-onboarding-background-200 p-3 text-base font-normal text-red-400 shadow-sm hover:cursor-pointer"
-                                                                    onClick={() => {
-                                                                        setShowDeleteAccountModal(true)
-                                                                    }}
-                                                                >
-                                                                    Wrong e-mail address?
-                                                                </div>
-                                                            </Menu.Item>
-                                                        </Menu.Items>
-                                                    </Transition>
-                                                </Menu>
+                                                    <Menu>
+                                                        <Menu.Button className={"flex items-center gap-x-2"}>
+                                                            <span className="text-base font-medium">{user.email}</span>
+                                                            <ChevronDown className="h-4 w-4 text-custom-text-300" />
+                                                        </Menu.Button>
+                                                        <Transition
+                                                            enter="transition duration-100 ease-out"
+                                                            enterFrom="transform scale-95 opacity-0"
+                                                            enterTo="transform scale-100 opacity-100"
+                                                            leave="transition duration-75 ease-out"
+                                                            leaveFrom="transform scale-100 opacity-100"
+                                                            leaveTo="transform scale-95 opacity-0"
+                                                        >
+                                                            <Menu.Items className={"absolute min-w-full"}>
+                                                                <Menu.Item as="div">
+                                                                    <div
+                                                                        className="mr-auto mt-2 rounded-md border border-red-400 bg-onboarding-background-200 p-3 text-base font-normal text-red-400 shadow-sm hover:cursor-pointer"
+                                                                        onClick={() => {
+                                                                            setShowDeleteAccountModal(true)
+                                                                        }}
+                                                                    >
+                                                                        Wrong e-mail address?
+                                                                    </div>
+                                                                </Menu.Item>
+                                                            </Menu.Items>
+                                                        </Transition>
+                                                    </Menu>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
-                                />
+                                        )}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mx-auto h-full w-full overflow-auto rounded-t-md border-x border-t border-custom-border-200 bg-onboarding-gradient-100 px-4 pt-4 shadow-sm sm:w-4/5 lg:w-4/5 xl:w-3/4">
+                            <div className={`h-full w-full overflow-auto rounded-t-md bg-onboarding-gradient-200`}>
+                                {step === 1 ? (
+                                    <JoinWorkspaces
+                                        setTryDiffAccount={() => {
+                                            setShowDeleteAccountModal(true)
+                                        }}
+                                        finishOnboarding={finishOnboarding}
+                                        stepChange={stepChange}
+                                    />
+                                ) : step === 2 ? (
+                                    <UserDetails setUserName={(value) => setValue("full_name", value)} user={user} />
+                                ) : (
+                                    <InviteMembers
+                                        finishOnboarding={finishOnboarding}
+                                        stepChange={stepChange}
+                                        user={user}
+                                        workspace={workspacesList?.[0]}
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>
-                    <div className="mx-auto h-full w-full overflow-auto rounded-t-md border-x border-t border-custom-border-200 bg-onboarding-gradient-100 px-4 pt-4 shadow-sm sm:w-4/5 lg:w-4/5 xl:w-3/4">
-                        <div className={`h-full w-full overflow-auto rounded-t-md bg-onboarding-gradient-200`}>
-                            {step === 1 ? (
-                                <JoinWorkspaces
-                                    setTryDiffAccount={() => {
-                                        setShowDeleteAccountModal(true)
-                                    }}
-                                    finishOnboarding={finishOnboarding}
-                                    stepChange={stepChange}
-                                />
-                            ) : step === 2 ? (
-                                <UserDetails setUserName={(value) => setValue("full_name", value)} user={user} />
-                            ) : (
-                                <InviteMembers
-                                    finishOnboarding={finishOnboarding}
-                                    stepChange={stepChange}
-                                    user={user}
-                                    workspace={workspacesList?.[0]}
-                                />
-                            )}
-                        </div>
+                ) : (
+                    <div className="grid h-screen w-full place-items-center">
+                        <Spinner />
                     </div>
-                </div>
-            ) : (
-                <div className="grid h-screen w-full place-items-center">
-                    <Spinner />
-                </div>
-            )}
-        </>
+                )}
+            </DefaultLayout>
+        </UserAuthWrapper>
     )
 })
 
-OnboardingPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <UserAuthWrapper>
-            <DefaultLayout>{page}</DefaultLayout>
-        </UserAuthWrapper>
-    )
-}
+OnboardingPage.hasWrapper = true
 
 export default OnboardingPage

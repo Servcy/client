@@ -6,8 +6,7 @@ import { useRouter } from "next/router"
 
 import { useState } from "react"
 
-import  DefaultLayout from "@layouts/DefaultLayout"
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import ServcyLogo from "public/logo.svg"
 
@@ -16,11 +15,13 @@ import { CreateWorkspaceForm } from "@components/workspace"
 
 import { useUser } from "@hooks/store"
 
+import DefaultLayout from "@layouts/DefaultLayout"
+
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { IWorkspace } from "@servcy/types"
 
-const CreateWorkspacePage: NextPageWithLayout = observer(() => {
+const CreateWorkspacePage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     // store hooks

@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/router"
 
-import { Fragment, ReactElement, useCallback, useState } from "react"
+import { Fragment, useCallback, useState } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -27,7 +27,7 @@ import { EUserWorkspaceRoles } from "@constants/workspace"
 import { TCycleLayout, TCycleView } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
 
-const ProjectCyclesPage: NextPageWithLayout = observer(() => {
+const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
     const [createModal, setCreateModal] = useState(false)
     // theme
     const { resolvedTheme } = useTheme()
@@ -80,7 +80,7 @@ const ProjectCyclesPage: NextPageWithLayout = observer(() => {
         )
 
     return (
-        <>
+        <AppLayout header={<CyclesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <div className="w-full h-full">
                 <CycleCreateUpdateModal
@@ -228,16 +228,10 @@ const ProjectCyclesPage: NextPageWithLayout = observer(() => {
                     </Tab.Group>
                 )}
             </div>
-        </>
+        </AppLayout>
     )
 })
 
-ProjectCyclesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<CyclesHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+ProjectCyclesPage.hasWrapper = true
 
 export default ProjectCyclesPage

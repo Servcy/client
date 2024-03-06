@@ -1,6 +1,6 @@
 "use client"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
@@ -13,7 +13,7 @@ import { ProfilePreferenceSettingsLayout } from "@wrappers/settings/profile/pref
 
 const userService = new UserService()
 
-const ProfilePreferencesEmailPage: NextPageWithLayout = () => {
+const ProfilePreferencesEmailPage: NextPageWithWrapper = () => {
     // fetching user email notification settings
     const { data, isLoading } = useSWR("CURRENT_USER_EMAIL_NOTIFICATION_SETTINGS", () =>
         userService.currentUserEmailNotificationSettings()

@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
@@ -29,7 +27,7 @@ import { IUserStateDistribution, TStateGroups } from "@servcy/types"
 
 const userService = new UserService()
 
-const ProfileOverviewPage: NextPageWithLayout = () => {
+const ProfileOverviewPage: NextPageWithWrapper = () => {
     const router = useRouter()
     const { workspaceSlug, userId } = router.query
 
@@ -48,27 +46,23 @@ const ProfileOverviewPage: NextPageWithLayout = () => {
     })
 
     return (
-        <>
-            <PageHead title="Profile - Summary" />
-            <div className="h-full w-full space-y-7 overflow-y-auto px-5 py-5 md:px-9">
-                <ProfileStats userProfile={userProfile} />
-                <ProfileWorkload stateDistribution={stateDistribution} />
-                <div className="grid grid-cols-1 items-stretch gap-5 xl:grid-cols-2">
-                    <ProfilePriorityDistribution userProfile={userProfile} />
-                    <ProfileStateDistribution stateDistribution={stateDistribution} userProfile={userProfile} />
-                </div>
-                <ProfileActivity />
-            </div>
-        </>
-    )
-}
-
-ProfileOverviewPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
         <AppLayout header={<UserProfileHeader type="Summary" />}>
-            <ProfileAuthWrapper>{page}</ProfileAuthWrapper>
+            <ProfileAuthWrapper>
+                <PageHead title="Profile - Summary" />
+                <div className="h-full w-full space-y-7 overflow-y-auto px-5 py-5 md:px-9">
+                    <ProfileStats userProfile={userProfile} />
+                    <ProfileWorkload stateDistribution={stateDistribution} />
+                    <div className="grid grid-cols-1 items-stretch gap-5 xl:grid-cols-2">
+                        <ProfilePriorityDistribution userProfile={userProfile} />
+                        <ProfileStateDistribution stateDistribution={stateDistribution} userProfile={userProfile} />
+                    </div>
+                    <ProfileActivity />
+                </div>
+            </ProfileAuthWrapper>
         </AppLayout>
     )
 }
+
+ProfileOverviewPage.hasWrapper = true
 
 export default ProfileOverviewPage

@@ -12,7 +12,7 @@ import Router from "next/router"
 
 import { FC, useEffect, useState } from "react"
 
-import type { NextPageWithLayout } from "@/types/index"
+import type { NextPageWithWrapper } from "@/types/index"
 import { SyncOutlined } from "@ant-design/icons"
 import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
@@ -43,7 +43,7 @@ Router.events.on("routeChangeError", NProgress.done)
 Router.events.on("routeChangeComplete", NProgress.done)
 
 type AppRootLayout = AppProps & {
-    Component: NextPageWithLayout
+    Component: NextPageWithWrapper
 }
 
 function RootLayout({ Component, pageProps }: AppRootLayout) {

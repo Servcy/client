@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { PenSquare, X } from "lucide-react"
 import { observer } from "mobx-react"
 
@@ -16,7 +14,7 @@ import { useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 
-const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {
+const ProjectDraftIssuesPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
     const { workspaceSlug, projectId } = router.query
     // store
@@ -26,7 +24,7 @@ const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {
     const pageTitle = project?.name ? `${project?.name} - Draft Issues` : undefined
 
     return (
-        <>
+        <AppLayout header={<ProjectDraftIssueHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <div className="flex h-full w-full flex-col">
                 <div className="gap-1 flex items-center border-b border-custom-border-200 px-4 py-2.5 shadow-sm">
@@ -42,16 +40,10 @@ const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {
                 </div>
                 <DraftIssueLayoutRoot />
             </div>
-        </>
+        </AppLayout>
     )
 })
 
-ProjectDraftIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectDraftIssueHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+ProjectDraftIssuesPage.hasWrapper = true
 
 export default ProjectDraftIssuesPage

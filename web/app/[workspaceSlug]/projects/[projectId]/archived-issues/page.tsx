@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -15,7 +13,7 @@ import { useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 
-const ProjectArchivedIssuesPage: NextPageWithLayout = observer(() => {
+const ProjectArchivedIssuesPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     const { projectId } = router.query
@@ -26,19 +24,13 @@ const ProjectArchivedIssuesPage: NextPageWithLayout = observer(() => {
     const pageTitle = project?.name && `${project?.name} - Archived issues`
 
     return (
-        <>
+        <AppLayout header={<ProjectArchivedIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <ArchivedIssueLayoutRoot />
-        </>
+        </AppLayout>
     )
 })
 
-ProjectArchivedIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectArchivedIssuesHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+ProjectArchivedIssuesPage.hasWrapper = true
 
 export default ProjectArchivedIssuesPage

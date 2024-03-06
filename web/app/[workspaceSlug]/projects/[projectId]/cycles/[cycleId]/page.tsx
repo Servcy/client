@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 import emptyCycle from "public/empty-state/cycle.svg"
 import useSWR from "swr"
@@ -20,7 +18,7 @@ import useLocalStorage from "@hooks/use-local-storage"
 
 import { AppLayout } from "@layouts/app-layout"
 
-const CycleDetailPage: NextPageWithLayout = observer(() => {
+const CycleDetailPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     const { workspaceSlug, projectId, cycleId } = router.query
@@ -48,7 +46,7 @@ const CycleDetailPage: NextPageWithLayout = observer(() => {
     const toggleSidebar = () => setValue(`${!isSidebarCollapsed}`)
 
     return (
-        <>
+        <AppLayout header={<CycleIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {error ? (
                 <EmptyState
@@ -80,16 +78,10 @@ const CycleDetailPage: NextPageWithLayout = observer(() => {
                     </div>
                 </>
             )}
-        </>
+        </AppLayout>
     )
 })
 
-CycleDetailPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<CycleIssuesHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+CycleDetailPage.hasWrapper = true
 
 export default CycleDetailPage

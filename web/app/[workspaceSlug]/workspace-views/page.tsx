@@ -1,8 +1,8 @@
 "use client"
 
-import { ReactElement, useState } from "react"
+import { useState } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { Search } from "lucide-react"
 import { observer } from "mobx-react"
 
@@ -18,7 +18,7 @@ import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 import { Input } from "@servcy/ui"
 
-const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
+const WorkspaceViewsPage: NextPageWithWrapper = observer(() => {
     const [query, setQuery] = useState("")
     // store
     const { currentWorkspace } = useWorkspace()
@@ -26,7 +26,7 @@ const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - All Views` : undefined
 
     return (
-        <>
+        <AppLayout header={<GlobalIssuesHeader activeLayout="list" />}>
             <PageHead title={pageTitle} />
             <div className="flex flex-col h-full w-full overflow-hidden">
                 <div className="flex h-11 w-full items-center gap-2.5  px-5 py-3 overflow-hidden border-b border-custom-border-200">
@@ -48,12 +48,10 @@ const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
                     <GlobalViewsList searchQuery={query} />
                 </div>
             </div>
-        </>
+        </AppLayout>
     )
 })
 
-WorkspaceViewsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <AppLayout header={<GlobalIssuesHeader activeLayout="list" />}>{page}</AppLayout>
-}
+WorkspaceViewsPage.hasWrapper = true
 
 export default WorkspaceViewsPage

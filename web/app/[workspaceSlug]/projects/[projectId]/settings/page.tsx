@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement, useState } from "react"
+import { useState } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
@@ -20,9 +20,10 @@ import {
 import { useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
+
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-const GeneralSettingsPage: NextPageWithLayout = observer(() => {
+const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
     // states
     const [selectProject, setSelectedProject] = useState<string | null>(null)
     // router
@@ -39,49 +40,43 @@ const GeneralSettingsPage: NextPageWithLayout = observer(() => {
     // derived values
     const isAdmin = currentProjectDetails?.member_role === 20
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - General Settings` : undefined
-    // const currentNetwork = NETWORK_CHOICES.find((n) => n.key === projectDetails?.network);
-    // const selectedNetwork = NETWORK_CHOICES.find((n) => n.key === watch("network"));
 
     return (
-        <>
-            <PageHead title={pageTitle} />
-            {currentProjectDetails && (
-                <DeleteProjectModal
-                    project={currentProjectDetails}
-                    isOpen={Boolean(selectProject)}
-                    onClose={() => setSelectedProject(null)}
-                />
-            )}
-
-            <div className={`w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "opacity-60"}`}>
-                {currentProjectDetails && workspaceSlug && projectId && !isLoading ? (
-                    <ProjectDetailsForm
+        <AppLayout header={<ProjectSettingHeader title="General Settings" />} withProjectWrapper>
+            <ProjectSettingLayout>
+                <PageHead title={pageTitle} />
+                {currentProjectDetails && (
+                    <DeleteProjectModal
                         project={currentProjectDetails}
-                        workspaceSlug={workspaceSlug.toString()}
-                        projectId={projectId.toString()}
-                        isAdmin={isAdmin}
+                        isOpen={Boolean(selectProject)}
+                        onClose={() => setSelectedProject(null)}
                     />
-                ) : (
-                    <ProjectDetailsFormLoader />
                 )}
 
-                {isAdmin && (
-                    <DeleteProjectSection
-                        projectDetails={currentProjectDetails}
-                        handleDelete={() => setSelectedProject(currentProjectDetails.id ?? null)}
-                    />
-                )}
-            </div>
-        </>
+                <div className={`w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "opacity-60"}`}>
+                    {currentProjectDetails && workspaceSlug && projectId && !isLoading ? (
+                        <ProjectDetailsForm
+                            project={currentProjectDetails}
+                            workspaceSlug={workspaceSlug.toString()}
+                            projectId={projectId.toString()}
+                            isAdmin={isAdmin}
+                        />
+                    ) : (
+                        <ProjectDetailsFormLoader />
+                    )}
+
+                    {isAdmin && (
+                        <DeleteProjectSection
+                            projectDetails={currentProjectDetails}
+                            handleDelete={() => setSelectedProject(currentProjectDetails.id ?? null)}
+                        />
+                    )}
+                </div>
+            </ProjectSettingLayout>
+        </AppLayout>
     )
 })
 
-GeneralSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectSettingHeader title="General Settings" />} withProjectWrapper>
-            <ProjectSettingLayout>{page}</ProjectSettingLayout>
-        </AppLayout>
-    )
-}
+GeneralSettingsPage.hasWrapper = true
 
 export default GeneralSettingsPage

@@ -1,8 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -12,28 +10,25 @@ import { WorkspaceDetails } from "@components/workspace"
 import { useWorkspace } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
+
 import { WorkspaceSettingLayout } from "@wrappers/settings"
 
-const WorkspaceSettingsPage: NextPageWithLayout = observer(() => {
+const WorkspaceSettingsPage: NextPageWithWrapper = observer(() => {
     // store hooks
     const { currentWorkspace } = useWorkspace()
     // derived values
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - General Settings` : undefined
 
     return (
-        <>
-            <PageHead title={pageTitle} />
-            <WorkspaceDetails />
-        </>
+        <AppLayout header={<WorkspaceSettingHeader title="General Settings" />}>
+            <WorkspaceSettingLayout>
+                <PageHead title={pageTitle} />
+                <WorkspaceDetails />
+            </WorkspaceSettingLayout>
+        </AppLayout>
     )
 })
 
-WorkspaceSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<WorkspaceSettingHeader title="General Settings" />}>
-            <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
-        </AppLayout>
-    )
-}
+WorkspaceSettingsPage.hasWrapper = true
 
 export default WorkspaceSettingsPage

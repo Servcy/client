@@ -1,9 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
-// store
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react-lite"
 
 import { PageHead } from "@components/core"
@@ -13,19 +10,15 @@ import { ProfileIssuesPage } from "@components/profile/profile-issues"
 import { AppLayout } from "@layouts/app-layout"
 import { ProfileAuthWrapper } from "@layouts/user-profile-layout"
 
-const ProfileSubscribedIssuesPage: NextPageWithLayout = () => (
-    <>
-        <PageHead title="Profile - Subscribed" />
-        <ProfileIssuesPage type="subscribed" />
-    </>
+const ProfileSubscribedIssuesPage: NextPageWithWrapper = () => (
+    <AppLayout header={<UserProfileHeader type="Subscribed" />}>
+        <ProfileAuthWrapper showProfileIssuesFilter>
+            <PageHead title="Profile - Subscribed" />
+            <ProfileIssuesPage type="subscribed" />
+        </ProfileAuthWrapper>
+    </AppLayout>
 )
 
-ProfileSubscribedIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<UserProfileHeader type="Subscribed" />}>
-            <ProfileAuthWrapper showProfileIssuesFilter>{page}</ProfileAuthWrapper>
-        </AppLayout>
-    )
-}
+ProfileSubscribedIssuesPage.hasWrapper = true
 
 export default observer(ProfileSubscribedIssuesPage)

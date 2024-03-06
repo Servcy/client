@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -18,7 +16,7 @@ import { AppLayout } from "@layouts/app-layout"
 
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
-const GlobalViewIssuesPage: NextPageWithLayout = observer(() => {
+const GlobalViewIssuesPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     const { globalViewId } = router.query
@@ -36,7 +34,7 @@ const GlobalViewIssuesPage: NextPageWithLayout = observer(() => {
               : undefined
 
     return (
-        <>
+        <AppLayout header={<GlobalIssuesHeader activeLayout="spreadsheet" />}>
             <PageHead title={pageTitle} />
             <div className="h-full overflow-hidden bg-custom-background-100">
                 <div className="flex h-full w-full flex-col border-b border-custom-border-300">
@@ -44,12 +42,10 @@ const GlobalViewIssuesPage: NextPageWithLayout = observer(() => {
                     <AllIssueLayoutRoot />
                 </div>
             </div>
-        </>
+        </AppLayout>
     )
 })
 
-GlobalViewIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <AppLayout header={<GlobalIssuesHeader activeLayout="spreadsheet" />}>{page}</AppLayout>
-}
+GlobalViewIssuesPage.hasWrapper = true
 
 export default GlobalViewIssuesPage

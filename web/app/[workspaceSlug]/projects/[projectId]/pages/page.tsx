@@ -3,9 +3,9 @@
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 
-import { Fragment, ReactElement, useState } from "react"
+import { Fragment, useState } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -21,7 +21,6 @@ import { useApplication, useEventTracker, useProject, useUser } from "@hooks/sto
 import { useProjectPages } from "@hooks/store/use-project-page"
 import useLocalStorage from "@hooks/use-local-storage"
 import useUserAuth from "@hooks/use-user-auth"
-import useSize from "@hooks/use-window-size"
 
 import { AppLayout } from "@layouts/app-layout"
 
@@ -49,7 +48,7 @@ const SharedPagesList = dynamic<any>(() => import("@components/pages").then((a) 
     ssr: false,
 })
 
-const ProjectPagesPage: NextPageWithLayout = observer(() => {
+const ProjectPagesPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     const { workspaceSlug, projectId } = router.query
@@ -78,7 +77,6 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
     } = useProjectPages()
 
     const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader })
-    const [windowWidth] = useSize()
     // local storage
     const { storedValue: pageTab, setValue: setPageTab } = useLocalStorage("pageTab", "Recent")
     // fetching pages from API
@@ -120,32 +118,10 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
     const project = projectId ? getProjectById(projectId.toString()) : undefined
     const pageTitle = project?.name ? `${project?.name} - Pages` : undefined
 
-    const MobileTabList = () => (
-        <Tab.List
-            as="div"
-            className="flex items-center justify-between border-b border-custom-border-200 px-3 pt-3 mb-4"
-        >
-            <div className="flex flex-wrap items-center gap-4">
-                {PAGE_TABS_LIST.map((tab) => (
-                    <Tab
-                        key={tab.key}
-                        className={({ selected }) =>
-                            `text-sm outline-none pb-3 ${
-                                selected ? "border-custom-primary-100 text-custom-primary-100 border-b" : ""
-                            }`
-                        }
-                    >
-                        {tab.title}
-                    </Tab>
-                ))}
-            </div>
-        </Tab.List>
-    )
-
     if (loader || archivedPageLoader) return <PagesLoader />
 
     return (
-        <>
+        <AppLayout header={<PagesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {projectPageIds && archivedPageIds && projectPageIds.length + archivedPageIds.length > 0 ? (
                 <>
@@ -182,28 +158,24 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
                                 }
                             }}
                         >
-                            {windowWidth < 768 ? (
-                                <MobileTabList />
-                            ) : (
-                                <Tab.List as="div" className="mb-6 items-center justify-between hidden md:flex px-6">
-                                    <div className="flex flex-wrap items-center gap-4">
-                                        {PAGE_TABS_LIST.map((tab) => (
-                                            <Tab
-                                                key={tab.key}
-                                                className={({ selected }) =>
-                                                    `rounded-full border px-5 py-1.5 text-sm outline-none ${
-                                                        selected
-                                                            ? "border-custom-primary bg-custom-primary text-white"
-                                                            : "border-custom-border-200 bg-custom-background-100 hover:bg-custom-background-90"
-                                                    }`
-                                                }
-                                            >
-                                                {tab.title}
-                                            </Tab>
-                                        ))}
-                                    </div>
-                                </Tab.List>
-                            )}
+                            <Tab.List as="div" className="mb-6 items-center justify-between hidden md:flex px-6">
+                                <div className="flex flex-wrap items-center gap-4">
+                                    {PAGE_TABS_LIST.map((tab) => (
+                                        <Tab
+                                            key={tab.key}
+                                            className={({ selected }) =>
+                                                `rounded-full border px-5 py-1.5 text-sm outline-none ${
+                                                    selected
+                                                        ? "border-custom-primary bg-custom-primary text-white"
+                                                        : "border-custom-border-200 bg-custom-background-100 hover:bg-custom-background-90"
+                                                }`
+                                            }
+                                        >
+                                            {tab.title}
+                                        </Tab>
+                                    ))}
+                                </div>
+                            </Tab.List>
 
                             <Tab.Panels as={Fragment}>
                                 <Tab.Panel
@@ -251,16 +223,10 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
                     disabled={!isEditingAllowed}
                 />
             )}
-        </>
+        </AppLayout>
     )
 })
 
-ProjectPagesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<PagesHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+ProjectPagesPage.hasWrapper = true
 
 export default ProjectPagesPage

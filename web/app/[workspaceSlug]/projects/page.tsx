@@ -1,8 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -13,22 +11,20 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 
-const ProjectsPage: NextPageWithLayout = observer(() => {
+const ProjectsPage: NextPageWithWrapper = observer(() => {
     // store
     const { currentWorkspace } = useWorkspace()
     // derived values
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Projects` : undefined
 
     return (
-        <>
+        <AppLayout header={<ProjectsHeader />}>
             <PageHead title={pageTitle} />
             <ProjectCardList />
-        </>
+        </AppLayout>
     )
 })
 
-ProjectsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <AppLayout header={<ProjectsHeader />}>{page}</AppLayout>
-}
+ProjectsPage.hasWrapper = true
 
 export default ProjectsPage

@@ -1,8 +1,6 @@
 "use client"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -12,31 +10,28 @@ import { ProjectMemberList, ProjectSettingsMemberDefaults } from "@components/pr
 import { useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
+
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-const MembersSettingsPage: NextPageWithLayout = observer(() => {
+const MembersSettingsPage: NextPageWithWrapper = observer(() => {
     // store
     const { currentProjectDetails } = useProject()
     // derived values
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Members` : undefined
 
     return (
-        <>
-            <PageHead title={pageTitle} />
-            <section className={`w-full overflow-y-auto py-8 pr-9`}>
-                <ProjectSettingsMemberDefaults />
-                <ProjectMemberList />
-            </section>
-        </>
+        <AppLayout header={<ProjectSettingHeader title="Members Settings" />} withProjectWrapper>
+            <ProjectSettingLayout>
+                <PageHead title={pageTitle} />
+                <section className={`w-full overflow-y-auto py-8 pr-9`}>
+                    <ProjectSettingsMemberDefaults />
+                    <ProjectMemberList />
+                </section>
+            </ProjectSettingLayout>
+        </AppLayout>
     )
 })
 
-MembersSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ProjectSettingHeader title="Members Settings" />} withProjectWrapper>
-            <ProjectSettingLayout>{page}</ProjectSettingLayout>
-        </AppLayout>
-    )
-}
+MembersSettingsPage.hasWrapper = true
 
 export default MembersSettingsPage

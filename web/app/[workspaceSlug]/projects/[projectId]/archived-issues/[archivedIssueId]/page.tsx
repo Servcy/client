@@ -4,23 +4,26 @@ import { useRouter } from "next/router"
 
 import { useState } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { RotateCcw } from "lucide-react"
 import { observer } from "mobx-react"
 import toast from "react-hot-toast"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
+import { ProjectArchivedIssueDetailsHeader } from "@components/headers"
 import { IssueDetailRoot } from "@components/issues"
 
 import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store"
+
+import { AppLayout } from "@layouts/app-layout"
 
 import { EIssuesStoreType } from "@constants/issue"
 import { EUserProjectRoles } from "@constants/project"
 
 import { ArchiveIcon, Button, Loader } from "@servcy/ui"
 
-const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
+const ArchivedIssueDetailsPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     const { workspaceSlug, projectId, archivedIssueId } = router.query
@@ -65,10 +68,12 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
 
         await restoreIssue(workspaceSlug.toString(), projectId.toString(), archivedIssueId.toString())
             .then(() => {
-                toast.success(issue &&
+                toast.success(
+                    issue &&
                         `${getProjectById(issue.project_id)?.identifier}-${
                             issue?.sequence_id
-                        } is restored successfully under the project ${getProjectById(issue.project_id)?.name}`)
+                        } is restored successfully under the project ${getProjectById(issue.project_id)?.name}`
+                )
                 router.push(`/${workspaceSlug}/projects/${projectId}/issues/${archivedIssueId}`)
             })
             .catch(() => {
@@ -80,7 +85,7 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
     const issueLoader = !issue || isLoading ? true : false
 
     return (
-        <>
+        <AppLayout header={<ProjectArchivedIssueDetailsHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {issueLoader ? (
                 <Loader className="flex h-full gap-5 p-5">
@@ -128,7 +133,7 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
                     </div>
                 </div>
             )}
-        </>
+        </AppLayout>
     )
 })
 

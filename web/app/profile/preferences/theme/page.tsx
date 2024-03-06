@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
@@ -11,13 +11,13 @@ import { CustomThemeSelector, PageHead, ThemeSwitch } from "@components/core"
 
 import { useUser } from "@hooks/store"
 
-import { ProfilePreferenceSettingsLayout } from "@wrappers/settings/profile/preferences"
-
 import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
+
+import { ProfilePreferenceSettingsLayout } from "@wrappers/settings/profile/preferences"
 
 import { Spinner } from "@servcy/ui"
 
-const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
+const ProfilePreferencesThemePage: NextPageWithWrapper = observer(() => {
     // states
     const [currentTheme, setCurrentTheme] = useState<I_THEME_OPTION | null>(null)
     // store hooks

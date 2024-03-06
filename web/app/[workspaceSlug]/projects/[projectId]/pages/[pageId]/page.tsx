@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
@@ -31,7 +31,7 @@ import { Spinner } from "@servcy/ui"
 
 const fileService = new FileService()
 
-const PageDetailsPage: NextPageWithLayout = observer(() => {
+const PageDetailsPage: NextPageWithWrapper = observer(() => {
     // states
     const [gptModalOpen, setGptModal] = useState(false)
     // refs
@@ -248,7 +248,7 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
         currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return pageIdMobx ? (
-        <>
+        <AppLayout header={<PageDetailsHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <div className="flex h-full flex-col justify-between">
                 <div className="h-full w-full overflow-hidden">
@@ -330,51 +330,47 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
                                     />
                                 )}
                             />
-                                <div className="absolute right-[68px] top-2.5">
-                                    <GptAssistantPopover
-                                        isOpen={gptModalOpen}
-                                        projectId={projectId?.toString() as string}
-                                        handleClose={() => {
-                                            setGptModal((prevData) => !prevData)
-                                            // this is done so that the title do not reset after gpt popover closed
-                                            reset(getValues())
-                                        }}
-                                        onResponse={(response) => {
-                                            handleAiAssistance(response)
-                                        }}
-                                        placement="top-end"
-                                        button={
-                                            <button
-                                                type="button"
-                                                className="flex items-center gap-1 rounded px-1.5 py-1 text-xs hover:bg-custom-background-90"
-                                                onClick={() => setGptModal((prevData) => !prevData)}
-                                            >
-                                                <Sparkle className="h-4 w-4" />
-                                                AI
-                                            </button>
-                                        }
-                                        className="!min-w-[38rem]"
-                                    />
-                                </div>
+                            <div className="absolute right-[68px] top-2.5">
+                                <GptAssistantPopover
+                                    isOpen={gptModalOpen}
+                                    projectId={projectId?.toString() as string}
+                                    handleClose={() => {
+                                        setGptModal((prevData) => !prevData)
+                                        // this is done so that the title do not reset after gpt popover closed
+                                        reset(getValues())
+                                    }}
+                                    onResponse={(response) => {
+                                        handleAiAssistance(response)
+                                    }}
+                                    placement="top-end"
+                                    button={
+                                        <button
+                                            type="button"
+                                            className="flex items-center gap-1 rounded px-1.5 py-1 text-xs hover:bg-custom-background-90"
+                                            onClick={() => setGptModal((prevData) => !prevData)}
+                                        >
+                                            <Sparkle className="h-4 w-4" />
+                                            AI
+                                        </button>
+                                    }
+                                    className="!min-w-[38rem]"
+                                />
+                            </div>
                         </div>
                     )}
                     <IssuePeekOverview />
                 </div>
             </div>
-        </>
+        </AppLayout>
     ) : (
-        <div className="grid h-full w-full place-items-center">
-            <Spinner />
-        </div>
+        <AppLayout header={<PageDetailsHeader />} withProjectWrapper>
+            <div className="grid h-full w-full place-items-center">
+                <Spinner />
+            </div>
+        </AppLayout>
     )
 })
 
-PageDetailsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<PageDetailsHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+PageDetailsPage.hasWrapper = true
 
 export default PageDetailsPage

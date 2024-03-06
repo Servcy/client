@@ -2,9 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { ReactElement } from "react"
-
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { observer } from "mobx-react"
 import emptyModule from "public/empty-state/module.svg"
 import useSWR from "swr"
@@ -20,7 +18,7 @@ import useLocalStorage from "@hooks/use-local-storage"
 
 import { AppLayout } from "@layouts/app-layout"
 
-const ModuleIssuesPage: NextPageWithLayout = observer(() => {
+const ModuleIssuesPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
     const { workspaceSlug, projectId, moduleId } = router.query
@@ -49,7 +47,7 @@ const ModuleIssuesPage: NextPageWithLayout = observer(() => {
     if (!workspaceSlug || !projectId || !moduleId) return <></>
 
     return (
-        <>
+        <AppLayout header={<ModuleIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {error ? (
                 <EmptyState
@@ -79,16 +77,10 @@ const ModuleIssuesPage: NextPageWithLayout = observer(() => {
                     )}
                 </div>
             )}
-        </>
+        </AppLayout>
     )
 })
 
-ModuleIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-    return (
-        <AppLayout header={<ModuleIssuesHeader />} withProjectWrapper>
-            {page}
-        </AppLayout>
-    )
-}
+ModuleIssuesPage.hasWrapper = true
 
 export default ModuleIssuesPage

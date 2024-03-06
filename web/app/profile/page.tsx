@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import type { NextPageWithLayout } from "@/types/index"
+import type { NextPageWithWrapper } from "@/types/index"
 import { Disclosure, Transition } from "@headlessui/react"
 import { ChevronDown, User2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -16,11 +16,11 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { useApplication, useUser } from "@hooks/store"
 import useUserAuth from "@hooks/use-user-auth"
 
-import { ProfileSettingsLayout } from "@wrappers/settings"
-
 import { TIME_ZONES } from "@constants/timezones"
 
 import { FileService } from "@services/file.service"
+
+import { ProfileSettingsLayout } from "@wrappers/settings"
 
 import type { IUser } from "@servcy/types"
 import { Button, CustomSearchSelect, Input, Spinner } from "@servcy/ui"
@@ -37,7 +37,7 @@ const defaultValues: Partial<IUser> = {
 
 const fileService = new FileService()
 
-const ProfileSettingsPage: NextPageWithLayout = observer(() => {
+const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
     // states
     const [isLoading, setIsLoading] = useState(false)
     const [isRemoving, setIsRemoving] = useState(false)
@@ -77,9 +77,7 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
             .then(() => {
                 toast.success("Profile updated successfully.")
             })
-            .catch(() =>
-                toast.error("There was some error in updating your profile. Please try again.")
-            )
+            .catch(() => toast.error("There was some error in updating your profile. Please try again."))
         setTimeout(() => {
             setIsLoading(false)
         }, 300)
@@ -426,6 +424,6 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
     )
 })
 
-ProfileSettingsPage.hasWrapper = true;
+ProfileSettingsPage.hasWrapper = true
 
-
+export default ProfileSettingsPage

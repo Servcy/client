@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/router"
 
-import { Fragment, ReactElement } from "react"
+import { Fragment } from "react"
 
-import { NextPageWithLayout } from "@/types/index"
+import { NextPageWithWrapper } from "@/types/index"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -22,7 +22,7 @@ import { ANALYTICS_TABS } from "@constants/analytics"
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserWorkspaceRoles } from "@constants/workspace"
 
-const AnalyticsPage: NextPageWithLayout = observer(() => {
+const AnalyticsPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
     const { analytics_tab } = router.query
     // theme
@@ -45,7 +45,7 @@ const AnalyticsPage: NextPageWithLayout = observer(() => {
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Analytics` : undefined
 
     return (
-        <>
+        <AppLayout header={<WorkspaceAnalyticsHeader />}>
             <PageHead title={pageTitle} />
             {workspaceProjectIds && workspaceProjectIds.length > 0 ? (
                 <div className="flex h-full flex-col overflow-hidden bg-custom-background-100">
@@ -65,7 +65,7 @@ const AnalyticsPage: NextPageWithLayout = observer(() => {
                                         }`
                                     }
                                     onClick={() => {
-                                        router.query['analytics_tab'] = tab.key
+                                        router.query["analytics_tab"] = tab.key
                                         router.push(router)
                                     }}
                                 >
@@ -103,12 +103,10 @@ const AnalyticsPage: NextPageWithLayout = observer(() => {
                     disabled={!isEditingAllowed}
                 />
             )}
-        </>
+        </AppLayout>
     )
 })
 
-AnalyticsPage.getWrapper = function getWrapper(page: ReactElement) {
-    return <AppLayout header={<WorkspaceAnalyticsHeader />}>{page}</AppLayout>
-}
+AnalyticsPage.hasWrapper = true
 
 export default AnalyticsPage
