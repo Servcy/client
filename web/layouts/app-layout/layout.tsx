@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-// layouts
+
 import { UserAuthWrapper, WorkspaceAuthWrapper, ProjectAuthWrapper } from "@layouts/auth-layout";
 
 import { CommandPalette } from "@components/command-palette";

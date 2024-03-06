@@ -7,7 +7,7 @@ import { ProjectViewsList } from "@components/views";
 import { PageHead } from "@components/core";
 
 import { useProject } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { NextPageWithLayout } from "@lib/types";

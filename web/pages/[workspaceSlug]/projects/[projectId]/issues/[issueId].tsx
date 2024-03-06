@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";

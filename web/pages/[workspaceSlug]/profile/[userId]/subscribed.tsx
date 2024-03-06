@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 // store
 import { observer } from "mobx-react-lite";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { ProfileAuthWrapper } from "@layouts/user-profile-layout";
 

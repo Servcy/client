@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { useGlobalView, useWorkspace } from "@hooks/store";

@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { PageHead } from "@components/core";
 import { ProjectCardList } from "@components/project";
 import { ProjectsHeader } from "@components/headers";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 // type
 import { NextPageWithLayout } from "@lib/types";

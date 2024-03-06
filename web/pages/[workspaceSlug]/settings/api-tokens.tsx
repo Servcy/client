@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { useTheme } from "next-themes";
 // store hooks
 import { useUser, useWorkspace } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // component

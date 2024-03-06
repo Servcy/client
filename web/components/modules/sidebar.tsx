@@ -29,7 +29,6 @@ import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { copyUrlToClipboard } from "@helpers/string.helper";
 
 import { ILinkDetails, IModule, ModuleLink } from "@servcy/types";
-// constant
 import { MODULE_STATUS } from "@constants/module";
 import { EUserProjectRoles } from "@constants/project";
 import {

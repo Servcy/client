@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 
 import { useUser, useWebhook, useWorkspace } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 

@@ -25,7 +25,7 @@ export interface IInboxIssue {
   loader: TLoader;
   inboxIssues: TInboxIssueDetailIdMap;
   inboxIssueMap: TInboxIssueDetailMap;
-  // helper methods
+
   getInboxIssuesByInboxId: (inboxId: string) => string[] | undefined;
   getInboxIssueByIssueId: (inboxId: string, issueId: string) => TInboxIssueDetail | undefined;
   // actions
@@ -95,7 +95,6 @@ export class InboxIssue implements IInboxIssue {
     this.inboxIssueService = new InboxIssueService();
   }
 
-  // helper methods
   getInboxIssuesByInboxId = computedFn((inboxId: string) => {
     if (!inboxId) return undefined;
     return this.inboxIssues?.[inboxId] ?? undefined;

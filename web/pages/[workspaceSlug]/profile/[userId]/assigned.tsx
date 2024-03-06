@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { ProfileAuthWrapper } from "@layouts/user-profile-layout";
 

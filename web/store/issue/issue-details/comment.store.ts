@@ -40,7 +40,7 @@ export interface IIssueCommentStore extends IIssueCommentStoreActions {
   loader: TCommentLoader;
   comments: TIssueCommentIdMap;
   commentMap: TIssueCommentMap;
-  // helper methods
+
   getCommentsByIssueId: (issueId: string) => string[] | undefined;
   getCommentById: (activityId: string) => TIssueComment | undefined;
 }
@@ -73,7 +73,6 @@ export class IssueCommentStore implements IIssueCommentStore {
     this.issueCommentService = new IssueCommentService();
   }
 
-  // helper methods
   getCommentsByIssueId = (issueId: string) => {
     if (!issueId) return undefined;
     return this.comments[issueId] ?? undefined;

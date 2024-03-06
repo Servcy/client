@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { observer } from "mobx-react";
 
 import { useProject, useProjectView } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { ProjectViewLayoutRoot } from "@components/issues";

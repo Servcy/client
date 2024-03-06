@@ -10,7 +10,7 @@ import { useApplication, useEventTracker, useUser, useProject } from "@hooks/sto
 import useLocalStorage from "@hooks/use-local-storage";
 import useUserAuth from "@hooks/use-user-auth";
 import useSize from "@hooks/use-window-size";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { RecentPagesList, CreateUpdatePageModal } from "@components/pages";

@@ -6,7 +6,7 @@ import { Fragment, ReactElement, useCallback, useState } from "react";
 
 import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";

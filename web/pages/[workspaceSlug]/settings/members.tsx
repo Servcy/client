@@ -5,7 +5,7 @@ import { ReactElement, useState } from "react";
 
 import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 

@@ -31,7 +31,7 @@ export interface IIssueLinkStore extends IIssueLinkStoreActions {
   linkMap: TIssueLinkMap;
   // computed
   issueLinks: string[] | undefined;
-  // helper methods
+
   getLinksByIssueId: (issueId: string) => string[] | undefined;
   getLinkById: (linkId: string) => TIssueLink | undefined;
 }
@@ -72,7 +72,6 @@ export class IssueLinkStore implements IIssueLinkStore {
     return this.links[issueId] ?? undefined;
   }
 
-  // helper methods
   getLinksByIssueId = (issueId: string) => {
     if (!issueId) return undefined;
     return this.links[issueId] ?? undefined;

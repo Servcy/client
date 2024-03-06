@@ -1,4 +1,3 @@
-// styles
 // import "./styles/tailwind.css";
 import "src/styles/editor.css";
 import "src/styles/table.css";
@@ -16,7 +15,6 @@ export { EditorContentWrapper } from "src/ui/components/editor-content";
 export { useEditor } from "src/hooks/use-editor";
 export { useReadOnlyEditor } from "src/hooks/use-read-only-editor";
 
-// helper items
 export * from "src/ui/menus/menu-items";
 export * from "src/lib/editor-commands";
 

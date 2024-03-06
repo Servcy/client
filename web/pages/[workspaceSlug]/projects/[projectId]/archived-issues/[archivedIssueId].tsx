@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import useSWR from "swr";
 import toast from "react-hot-toast";
 import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { IssueDetailRoot } from "@components/issues";

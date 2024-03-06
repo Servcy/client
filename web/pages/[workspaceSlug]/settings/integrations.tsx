@@ -6,7 +6,7 @@ import useSWR from "swr";
 import { useUser, useWorkspace } from "@hooks/store";
 
 import { IntegrationService } from "@services/integrations";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 

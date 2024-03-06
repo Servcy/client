@@ -5,7 +5,7 @@ import { Tab } from "@headlessui/react";
 import { useTheme } from "next-themes";
 
 import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";

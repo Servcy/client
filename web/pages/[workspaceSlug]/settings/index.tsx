@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { observer } from "mobx-react";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 

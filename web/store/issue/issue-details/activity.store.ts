@@ -27,7 +27,7 @@ export interface IIssueActivityStore extends IIssueActivityStoreActions {
   loader: TActivityLoader;
   activities: TIssueActivityIdMap;
   activityMap: TIssueActivityMap;
-  // helper methods
+
   getActivitiesByIssueId: (issueId: string) => string[] | undefined;
   getActivityById: (activityId: string) => TIssueActivity | undefined;
   getActivityCommentByIssueId: (issueId: string) => TIssueActivityComment[] | undefined;
@@ -58,7 +58,6 @@ export class IssueActivityStore implements IIssueActivityStore {
     this.issueActivityService = new IssueActivityService();
   }
 
-  // helper methods
   getActivitiesByIssueId = (issueId: string) => {
     if (!issueId) return undefined;
     return this.activities[issueId] ?? undefined;

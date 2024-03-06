@@ -14,7 +14,7 @@ export interface IInbox {
   // observables
   inboxes: TInboxDetailIdMap;
   inboxMap: TInboxDetailMap;
-  // helper methods
+
   getInboxesByProjectId: (projectId: string) => string[] | undefined;
   getInboxById: (inboxId: string) => TInbox | undefined;
   // fetch actions
@@ -48,7 +48,6 @@ export class Inbox implements IInbox {
     this.inboxService = new InboxService();
   }
 
-  // helper methods
   getInboxesByProjectId = computedFn((projectId: string) => {
     if (!projectId) return undefined;
     return this.inboxes?.[projectId] ?? undefined;

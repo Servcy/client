@@ -8,7 +8,7 @@ import { FileService } from "@services/file.service";
 import { useApplication, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 import useUserAuth from "@hooks/use-user-auth";
-// layouts
+
 import { ProfileSettingsLayout } from "@layouts/settings-layout";
 
 import { DeactivateAccountModal } from "@components/account";

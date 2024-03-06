@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { observer } from "mobx-react-lite";
 
 import { useApplication } from "@hooks/store";
-// layouts
+
 import { AdminAuthWrapper, UserAuthWrapper } from "@layouts/auth-layout";
 
 import { InstanceAdminSidebar } from "./sidebar";

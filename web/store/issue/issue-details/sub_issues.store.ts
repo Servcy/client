@@ -43,7 +43,7 @@ export interface IIssueSubIssuesStore extends IIssueSubIssuesStoreActions {
   subIssuesStateDistribution: TIssueSubIssuesStateDistributionMap;
   subIssues: TIssueSubIssuesIdMap;
   subIssueHelpers: Record<string, TSubIssueHelpers>; // parent_issue_id -> TSubIssueHelpers
-  // helper methods
+
   stateDistributionByIssueId: (issueId: string) => TSubIssuesStateDistribution | undefined;
   subIssuesByIssueId: (issueId: string) => string[] | undefined;
   subIssueHelpersByIssueId: (issueId: string) => TSubIssueHelpers;
@@ -81,7 +81,6 @@ export class IssueSubIssuesStore implements IIssueSubIssuesStore {
     this.issueService = new IssueService();
   }
 
-  // helper methods
   stateDistributionByIssueId = (issueId: string) => {
     if (!issueId) return undefined;
     return this.subIssuesStateDistribution[issueId] ?? undefined;

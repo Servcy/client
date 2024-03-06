@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 
 import { useCycle, useProject } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";

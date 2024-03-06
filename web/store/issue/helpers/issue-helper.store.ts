@@ -15,7 +15,6 @@ import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 export type TIssueDisplayFilterOptions = Exclude<TIssueGroupByOptions, null> | "target_date";
 
 export type TIssueHelperStore = {
-  // helper methods
   groupedIssues(
     groupBy: TIssueDisplayFilterOptions,
     orderBy: TIssueOrderByOptions,

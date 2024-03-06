@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import { useApplication, useUser } from "@hooks/store";
 
 import { UserService } from "@services/user.service";
-// layouts
+
 import { ProfileSettingsLayout } from "@layouts/settings-layout";
 
 import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/core";

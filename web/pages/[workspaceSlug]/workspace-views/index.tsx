@@ -1,6 +1,6 @@
 import React, { useState, ReactElement } from "react";
 import { observer } from "mobx-react";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";

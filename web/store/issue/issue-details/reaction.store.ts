@@ -30,7 +30,7 @@ export interface IIssueReactionStore extends IIssueReactionStoreActions {
   // observables
   reactions: TIssueReactionIdMap;
   reactionMap: TIssueReactionMap;
-  // helper methods
+
   getReactionsByIssueId: (issueId: string) => { [reaction_id: string]: string[] } | undefined;
   getReactionById: (reactionId: string) => TIssueReaction | undefined;
   reactionsByUser: (issueId: string, userId: string) => TIssueReaction[];
@@ -62,7 +62,6 @@ export class IssueReactionStore implements IIssueReactionStore {
     this.issueReactionService = new IssueReactionService();
   }
 
-  // helper methods
   getReactionsByIssueId = (issueId: string) => {
     if (!issueId) return undefined;
     return this.reactions[issueId] ?? undefined;

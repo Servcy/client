@@ -15,7 +15,7 @@ export interface IIssueSubscriptionStoreActions {
 export interface IIssueSubscriptionStore extends IIssueSubscriptionStoreActions {
   // observables
   subscriptionMap: Record<string, Record<string, boolean>>; // Record defines subscriptionId as key and link as value
-  // helper methods
+
   getSubscriptionByIssueId: (issueId: string) => boolean | undefined;
 }
 
@@ -43,7 +43,6 @@ export class IssueSubscriptionStore implements IIssueSubscriptionStore {
     this.notificationService = new NotificationService();
   }
 
-  // helper methods
   getSubscriptionByIssueId = (issueId: string) => {
     if (!issueId) return undefined;
     const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;

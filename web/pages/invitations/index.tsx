@@ -11,7 +11,7 @@ import { WorkspaceService } from "@services/workspace.service";
 
 import { useEventTracker, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// layouts
+
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import DefaultLayout from "@layouts/default-layout";
 

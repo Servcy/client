@@ -30,7 +30,6 @@ export interface IIssueStoreActions {
 }
 
 export interface IIssueStore extends IIssueStoreActions {
-  // helper methods
   getIssueById: (issueId: string) => TIssue | undefined;
 }
 
@@ -52,7 +51,6 @@ export class IssueStore implements IIssueStore {
     this.issueDraftService = new IssueDraftService();
   }
 
-  // helper methods
   getIssueById = computedFn((issueId: string) => {
     if (!issueId) return undefined;
     return this.rootIssueDetailStore.rootIssueStore.issues.getIssueById(issueId) ?? undefined;

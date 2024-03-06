@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import Head from "next/head";
 import { AppProps } from "next/app";
-// styles
+
 import "@styles/globals.css";
 import "@styles/command-pallette.css";
 import "@styles/nprogress.css";

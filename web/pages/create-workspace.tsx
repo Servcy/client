@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 
 import { useUser } from "@hooks/store";
-// layouts
+
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import DefaultLayout from "@layouts/default-layout";
 

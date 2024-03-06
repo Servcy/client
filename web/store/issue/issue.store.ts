@@ -16,7 +16,7 @@ export type IIssueStore = {
   addIssue(issues: TIssue[], shouldReplace?: boolean): void;
   updateIssue(issueId: string, issue: Partial<TIssue>): void;
   removeIssue(issueId: string): void;
-  // helper methods
+
   getIssueById(issueId: string): undefined | TIssue;
   getIssuesByIds(issueIds: string[], type: "archived" | "un-archived"): undefined | Record<string, TIssue>; // Record defines issue_id as key and TIssue as value
 };
@@ -94,7 +94,6 @@ export class IssueStore implements IIssueStore {
     });
   };
 
-  // helper methods
   /**
    * @description This method will return the issue from the issuesMap
    * @param {string} issueId

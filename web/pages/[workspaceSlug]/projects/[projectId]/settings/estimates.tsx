@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { observer } from "mobx-react-lite";
 
 import { useUser, useProject } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 

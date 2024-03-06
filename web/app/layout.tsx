@@ -9,7 +9,7 @@ import { Spin } from "antd";
 import { Toaster } from "react-hot-toast";
 
 import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google";
-// Styles
+
 import "@/styles/globals.css";
 
 import { isMobileDevice } from "@/utils/Shared";

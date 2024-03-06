@@ -3,7 +3,7 @@ import Image from "next/image";
 import { observer } from "mobx-react-lite";
 
 import { useApplication, useUser } from "@hooks/store";
-// layouts
+
 import DefaultLayout from "@layouts/default-layout";
 
 import { SignUpRoot } from "@components/account";

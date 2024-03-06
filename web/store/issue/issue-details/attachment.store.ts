@@ -33,7 +33,7 @@ export interface IIssueAttachmentStore extends IIssueAttachmentStoreActions {
   attachmentMap: TIssueAttachmentMap;
   // computed
   issueAttachments: string[] | undefined;
-  // helper methods
+
   getAttachmentsByIssueId: (issueId: string) => string[] | undefined;
   getAttachmentById: (attachmentId: string) => TIssueAttachment | undefined;
 }
@@ -73,7 +73,6 @@ export class IssueAttachmentStore implements IIssueAttachmentStore {
     return this.attachments[issueId] ?? undefined;
   }
 
-  // helper methods
   getAttachmentsByIssueId = (issueId: string) => {
     if (!issueId) return undefined;
     return this.attachments[issueId] ?? undefined;

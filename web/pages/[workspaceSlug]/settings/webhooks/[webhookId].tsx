@@ -4,7 +4,7 @@ import { useState } from "react";
 import useSWR from "swr";
 
 import { useUser, useWebhook, useWorkspace } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 import toast from "react-hot-toast";

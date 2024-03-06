@@ -10,7 +10,7 @@ import useReloadConfirmations from "@hooks/use-reload-confirmation";
 import toast from "react-hot-toast";
 
 import { FileService } from "@services/file.service";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { GptAssistantPopover, PageHead } from "@components/core";
@@ -19,10 +19,8 @@ import { PageDetailsHeader } from "@components/headers/page-details";
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor";
 import { Spinner } from "@servcy/ui";
 
-
 import { IPage } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
-
 
 import { IssuePeekOverview } from "@components/issues";
 import { EUserProjectRoles } from "@constants/project";

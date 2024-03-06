@@ -19,7 +19,6 @@ import { Button, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link.js";
 
-
 export default function Login(): JSX.Element {
   const searchParams = useSearchParams();
   const [stage, setStage] = useState<number>(0);

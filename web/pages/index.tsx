@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-// layouts
+
 import DefaultLayout from "@layouts/default-layout";
 
 import { SignInView } from "@components/page-views";

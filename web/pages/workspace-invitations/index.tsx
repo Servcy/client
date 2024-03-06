@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 import { useUser } from "@hooks/store";
 
 import { WorkspaceService } from "@services/workspace.service";
-// layouts
+
 import DefaultLayout from "@layouts/default-layout";
 
 import { Spinner } from "@servcy/ui";

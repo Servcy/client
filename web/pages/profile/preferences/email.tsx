@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import useSWR from "swr";
-// layouts
+
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
 
 import { EmailSettingsLoader } from "@components/ui";

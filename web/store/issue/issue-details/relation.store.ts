@@ -30,7 +30,7 @@ export interface IIssueRelationStore extends IIssueRelationStoreActions {
   relationMap: TIssueRelationMap; // Record defines relationType as key and reactions as value
   // computed
   issueRelations: TIssueRelationIdMap | undefined;
-  // helper methods
+
   getRelationsByIssueId: (issueId: string) => TIssueRelationIdMap | undefined;
   getRelationByIssueIdRelationType: (issueId: string, relationType: TIssueRelationTypes) => string[] | undefined;
 }
@@ -67,7 +67,7 @@ export class IssueRelationStore implements IIssueRelationStore {
     return this.relationMap?.[issueId] ?? undefined;
   }
 
-  // // helper methods
+  //
   getRelationsByIssueId = (issueId: string) => {
     if (!issueId) return undefined;
     return this.relationMap?.[issueId] ?? undefined;

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
 import { useProject, useUser } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 import toast from "react-hot-toast";

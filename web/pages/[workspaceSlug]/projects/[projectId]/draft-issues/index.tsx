@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { useRouter } from "next/router";
 import { X, PenSquare } from "lucide-react";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/draft-issue-layout-root";

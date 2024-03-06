@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 import useSWR from "swr";
 
 import { useUser } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 

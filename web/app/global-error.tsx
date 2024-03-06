@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 import { AuthService } from "@services/auth.service";
-// layouts
+
 import DefaultLayout from "@layouts/default-layout";
 
 import { Button } from "@servcy/ui";

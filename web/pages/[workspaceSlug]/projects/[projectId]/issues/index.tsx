@@ -7,7 +7,7 @@ import { ProjectLayoutRoot } from "@components/issues";
 import { ProjectIssuesHeader } from "@components/headers";
 
 import { NextPageWithLayout } from "@lib/types";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { useProject } from "@hooks/store";

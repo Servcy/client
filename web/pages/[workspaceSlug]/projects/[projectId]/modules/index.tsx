@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { useRouter } from "next/router";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";

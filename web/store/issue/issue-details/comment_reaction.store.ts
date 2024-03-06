@@ -39,7 +39,7 @@ export interface IIssueCommentReactionStore extends IIssueCommentReactionStoreAc
   // observables
   commentReactions: TIssueCommentReactionIdMap;
   commentReactionMap: TIssueCommentReactionMap;
-  // helper methods
+
   getCommentReactionsByCommentId: (commentId: string) => { [reaction_id: string]: string[] } | undefined;
   getCommentReactionById: (reactionId: string) => TIssueCommentReaction | undefined;
   commentReactionsByUser: (commentId: string, userId: string) => TIssueCommentReaction[];
@@ -71,7 +71,6 @@ export class IssueCommentReactionStore implements IIssueCommentReactionStore {
     this.issueReactionService = new IssueReactionService();
   }
 
-  // helper methods
   getCommentReactionsByCommentId = (commentId: string) => {
     if (!commentId) return undefined;
     return this.commentReactions[commentId] ?? undefined;

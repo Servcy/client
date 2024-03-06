@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
 import { useUser, useWorkspace } from "@hooks/store";
-// layouts
+
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // component

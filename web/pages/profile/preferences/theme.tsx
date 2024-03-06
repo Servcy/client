@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 
 import { useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// layouts
+
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
 
 import { CustomThemeSelector, ThemeSwitch, PageHead } from "@components/core";

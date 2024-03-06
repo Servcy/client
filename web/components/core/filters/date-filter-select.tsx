@@ -4,7 +4,6 @@ import { CustomSelect, CalendarAfterIcon, CalendarBeforeIcon } from "@servcy/ui"
 
 import { CalendarDays } from "lucide-react";
 
-
 type Props = {
   title: string;
   value: string;
