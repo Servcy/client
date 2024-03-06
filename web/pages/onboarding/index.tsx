@@ -14,7 +14,7 @@ import useUserAuth from "@hooks/use-user-auth";
 import { WorkspaceService } from "@services/workspace.service";
 
 import { UserAuthWrapper } from "@layouts/auth-layout";
-import DefaultLayout from "@layouts/default-layout";
+import DefaultLayout from "@layouts/DefaultLayout";
 
 import { PageHead } from "@components/core";
 import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding";

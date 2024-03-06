@@ -13,7 +13,7 @@ import { useEventTracker, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { UserAuthWrapper } from "@layouts/auth-layout";
-import DefaultLayout from "@layouts/default-layout";
+import DefaultLayout from "@layouts/DefaultLayout";
 
 import { Button } from "@servcy/ui";
 // images

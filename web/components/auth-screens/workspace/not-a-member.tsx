@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import DefaultLayout from "@layouts/default-layout";
+import DefaultLayout from "@layouts/DefaultLayout";
 
 import { Button } from "@servcy/ui";
 

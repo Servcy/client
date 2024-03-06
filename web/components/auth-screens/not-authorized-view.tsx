@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 
 import { useUser } from "@hooks/store";
 
-import DefaultLayout from "@layouts/default-layout";
+import DefaultLayout from "@layouts/DefaultLayout";
 // images
 import ProjectNotAuthorizedImg from "public/auth/project-not-authorized.svg";
 import WorkspaceNotAuthorizedImg from "public/auth/workspace-not-authorized.svg";

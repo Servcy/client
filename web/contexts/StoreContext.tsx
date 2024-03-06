@@ -1,6 +1,5 @@
-import { createContext } from "react";
-// mobx store
 import { RootStore } from "@store/root.store";
+import { createContext } from "react";
 
 let rootStore = new RootStore();
 

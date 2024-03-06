@@ -1,22 +1,23 @@
 "use client";
 
+import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";
+import OTPInput from "@/components/Login/OTPInput";
+import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
+import type { NextPageWithLayout } from "@lib/types";
+import { GoogleLogin } from "@react-oauth/google";
+import { Button, Input } from "antd";
 import { setCookie } from "cookies-next";
+import { observer } from "mobx-react-lite";
+import Image from "next/image";
+import Link from "next/link.js";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { BiLogIn } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
 import { RiWhatsappLine } from "react-icons/ri";
-import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
-import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";
-import OTPInput from "@/components/Login/OTPInput";
-import { GoogleLogin } from "@react-oauth/google";
-import { Button, Input } from "antd";
-import Image from "next/image";
-import Link from "next/link.js";
-import LoginLayout from '@layouts/LoginLayout';
 
-export default function Login(): JSX.Element {
+const Login: NextPageWithLayout = observer(() => {
   const searchParams = useSearchParams();
   const [stage, setStage] = useState<number>(0);
   const [inputType, setInputType] = useState<string>("email");
@@ -76,7 +77,7 @@ export default function Login(): JSX.Element {
       setCookie("accessToken", tokens.access_token, {
         path: "/",
       });
-      const nextUrl = searchParams.get("nextUrl") ?? "/";
+      const nextUrl = searchParams?.get("nextUrl") ?? "/";
       window.location.href = nextUrl;
     } finally {
       setLoading(false);
@@ -97,7 +98,7 @@ export default function Login(): JSX.Element {
       setCookie("accessToken", tokens.access_token, {
         path: "/",
       });
-      const nextUrl = searchParams.get("nextUrl") ?? "/";
+      const nextUrl = searchParams?.get("nextUrl") ?? "/";
       window.location.href = nextUrl;
     } finally {
       setLoading(false);
@@ -225,8 +226,6 @@ export default function Login(): JSX.Element {
       </div>
     </main>
   );
-}
+});
 
-Login.getLayout = function getLayout(page: JSX.Element) {
-  return <LoginLayout>{page}</LoginLayout>;
-};
+export default Login;

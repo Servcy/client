@@ -1,12 +1,9 @@
+import { IUser } from "@servcy/types";
 import { useRouter } from "next/router";
 import posthog from "posthog-js";
 import { PostHogProvider as PHProvider } from "posthog-js/react";
 import { FC, ReactNode, useEffect, useState } from "react";
-// mobx store provider
-import { IUser } from "@servcy/types";
-
 import { getUserRole } from "@helpers/user.helper";
-
 import { GROUP_WORKSPACE } from "@constants/event-tracker";
 
 export interface IPosthogWrapper {
@@ -41,8 +38,7 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
     }
   }, [user, workspaceRole, projectRole]);
 
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     // Join workspace group on workspace change
@@ -58,7 +54,7 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
     const handleRouteChange = () => {
       posthog?.capture("$pageview");
     };
-    posthog.init(process.env["NEXT_PUBLIC_POSTHOG_ID"], {
+    posthog.init(process.env["NEXT_PUBLIC_POSTHOG_ID"] ?? "", {
       api_host: process.env["NEXT_PUBLIC_POSTHOG_HOST"],
       autocapture: false,
       capture_pageview: false,

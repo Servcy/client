@@ -1,16 +1,13 @@
 "use client";
-import { FC, PropsWithChildren, useEffect, useState } from "react";
 
+import { FC, PropsWithChildren, useEffect, useState } from "react";
 import Blocked from "@/components/Shared/blocked";
 import { SyncOutlined } from "@ant-design/icons";
 import { Analytics } from "@vercel/analytics/react";
 import { Spin } from "antd";
 import { Toaster } from "react-hot-toast";
-
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
 import "@/styles/globals.css";
-
 import { isMobileDevice } from "@/utils/Shared";
 
 const LoginLayout: FC<PropsWithChildren> = function ({ children }) {
@@ -19,17 +16,17 @@ const LoginLayout: FC<PropsWithChildren> = function ({ children }) {
       <body>
         <Toaster />
         <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
-          <ContentWithSidebar>
+          <LayoutWrapper>
             {children}
             <Analytics />
-          </ContentWithSidebar>
+          </LayoutWrapper>
         </GoogleOAuthProvider>
       </body>
     </html>
   );
 };
 
-const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
+const LayoutWrapper: FC<PropsWithChildren> = function ({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

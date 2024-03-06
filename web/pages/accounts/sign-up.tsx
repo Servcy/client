@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 
 import { useApplication, useUser } from "@hooks/store";
 
-import DefaultLayout from "@layouts/default-layout";
+import DefaultLayout from "@layouts/DefaultLayout";
 
 import { SignUpRoot } from "@components/account";
 import { PageHead } from "@components/core";

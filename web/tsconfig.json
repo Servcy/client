@@ -42,6 +42,7 @@
       "@helpers/*": ["./helpers/*"],
       "@layouts/*": ["./layouts/*"],
       "@styles/*": ["./styles/*"],
+      "@wrappers/*": ["./wrappers/*"],
       "@components/*": ["./components/*"],
       "@store/*": ["./store/*"]
     }

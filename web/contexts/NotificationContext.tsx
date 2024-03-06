@@ -1,12 +1,8 @@
 import { createContext, useCallback, useEffect, useReducer } from "react";
-
 import { useRouter } from "next/router";
 import useSWR from "swr";
-
 import { NotificationService } from "@services/notification.service";
-
 import { UNREAD_NOTIFICATIONS_COUNT, USER_WORKSPACE_NOTIFICATIONS } from "@constants/fetch-keys";
-// type
 import type { IUserNotification, NotificationCount, NotificationType } from "@servcy/types";
 
 const notificationService = new NotificationService();

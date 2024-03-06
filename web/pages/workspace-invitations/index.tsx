@@ -8,7 +8,7 @@ import { useUser } from "@hooks/store";
 
 import { WorkspaceService } from "@services/workspace.service";
 
-import DefaultLayout from "@layouts/default-layout";
+import DefaultLayout from "@layouts/DefaultLayout";
 
 import { Spinner } from "@servcy/ui";
 
