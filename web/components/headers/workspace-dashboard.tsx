@@ -1,4 +1,4 @@
-import { LayoutGrid, Zap } from "lucide-react"
+import { LayoutGrid } from "lucide-react"
 
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"

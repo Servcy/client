@@ -79,13 +79,13 @@ export const AnalyticsTable: React.FC<Props> = ({ analytics, barGraphData, param
                                     }`}
                                 >
                                     {params.x_axis === "priority" ? (
-                                        <PriorityIcon priority={item.name as TIssuePriorities} />
+                                        <PriorityIcon priority={item["name"] as TIssuePriorities} />
                                     ) : (
                                         <span
                                             className="h-3 w-3 rounded"
                                             style={{
                                                 backgroundColor: generateBarColor(
-                                                    `${item.name}`,
+                                                    `${item["name"]}`,
                                                     analytics,
                                                     params,
                                                     "x_axis"
@@ -93,7 +93,7 @@ export const AnalyticsTable: React.FC<Props> = ({ analytics, barGraphData, param
                                             }}
                                         />
                                     )}
-                                    {generateDisplayName(`${item.name}`, analytics, params, "x_axis")}
+                                    {generateDisplayName(`${item["name"]}`, analytics, params, "x_axis")}
                                 </td>
                                 {params.segment ? (
                                     barGraphData.xAxisKeys.map((key, index) => (

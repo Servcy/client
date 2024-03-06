@@ -33,7 +33,7 @@ import { renderEmoji } from "@helpers/emoji.helper"
 import { truncateText } from "@helpers/string.helper"
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
-import { Breadcrumbs, Button, CustomMenu, DiceIcon, LayersIcon } from "@servcy/ui"
+import { Breadcrumbs, Button, CustomMenu, DiceIcon } from "@servcy/ui"
 
 const ModuleDropdownOption: React.FC<{ moduleId: string }> = ({ moduleId }) => {
     // router
@@ -232,7 +232,7 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
                                     filters={issueFilters?.filters ?? {}}
                                     handleFiltersUpdate={handleFiltersUpdate}
                                     layoutDisplayFiltersOptions={
-                                        activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT.issues[activeLayout] : undefined
+                                        activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT["issues"][activeLayout] : undefined
                                     }
                                     labels={projectLabels}
                                     memberIds={projectMemberIds ?? undefined}
@@ -242,7 +242,7 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
                             <FiltersDropdown title="Display" placement="bottom-end">
                                 <DisplayFiltersSelection
                                     layoutDisplayFiltersOptions={
-                                        activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT.issues[activeLayout] : undefined
+                                        activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT["issues"][activeLayout] : undefined
                                     }
                                     displayFilters={issueFilters?.displayFilters ?? {}}
                                     handleDisplayFiltersUpdate={handleDisplayFilters}
