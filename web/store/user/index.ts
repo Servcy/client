@@ -32,7 +32,7 @@ export interface IUserRootStore {
     updateCurrentUserTheme: (theme: string) => Promise<IUser>
 
     deactivateAccount: () => Promise<void>
-    signOut: () => Promise<void>
+    logOut: () => Promise<void>
 
     membership: IUserMembershipStore
 }
@@ -76,7 +76,7 @@ export class UserRootStore implements IUserRootStore {
             updateCurrentUser: action,
             updateCurrentUserTheme: action,
             deactivateAccount: action,
-            signOut: action,
+            logOut: action,
         })
         this.rootStore = _rootStore
         this.userService = new UserService()
@@ -260,8 +260,8 @@ export class UserRootStore implements IUserRootStore {
      * Signs out the current user
      * @returns Promise<void>
      */
-    signOut = async () =>
-        await this.authService.signOut().then(() => {
+    logOut = async () =>
+        await this.authService.logOut().then(() => {
             runInAction(() => {
                 this.currentUser = null
                 this.isUserLoggedIn = false

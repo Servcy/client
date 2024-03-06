@@ -2,24 +2,34 @@
 
 import { useRouter } from "next/router"
 
+import { googleLogout } from "@react-oauth/google"
+import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
+import { mutate } from "swr"
+
+import { useUser } from "@hooks/store"
 
 import DefaultLayout from "@layouts/DefaultLayout"
 
-import { AuthService } from "@services/auth.service"
-
 import { Button } from "@servcy/ui"
-
-const authService = new AuthService()
 
 const CustomErrorComponent = () => {
     const router = useRouter()
+    const { logOut } = useUser()
+    const { setTheme } = useTheme()
 
-    const logOut = async () => {
-        await authService
-            .logOut()
-            .catch(() => toast.error("Failed to sign out. Please try again."))
-            .finally(() => router.push("/"))
+    const logOutHandler = async () => {
+        try {
+            await logOut()
+                .then(() => {
+                    mutate("CURRENT_USER_DETAILS", null)
+                    setTheme("system")
+                    router.push("/login")
+                })
+                .catch(() => toast.error("Failed to sign out. Please try again."))
+            googleLogout()
+        } finally {
+        }
     }
 
     return (
@@ -41,7 +51,7 @@ const CustomErrorComponent = () => {
                         <Button variant="primary" size="md" onClick={() => router.reload()}>
                             Refresh
                         </Button>
-                        <Button variant="neutral-primary" size="md" onClick={logOut}>
+                        <Button variant="neutral-primary" size="md" onClick={logOutHandler}>
                             Sign out
                         </Button>
                     </div>

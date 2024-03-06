@@ -15,10 +15,10 @@ import { SyncOutlined } from "@ant-design/icons"
 import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
 import { Spin } from "antd"
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider, useTheme } from "next-themes"
 import NProgress from "nprogress"
 import toast, { Toaster } from "react-hot-toast"
-import { SWRConfig } from "swr"
+import { mutate, SWRConfig } from "swr"
 
 import { useUser, useWorkspace } from "@hooks/store"
 
@@ -28,8 +28,6 @@ import InstanceLayout from "@layouts/instance-layout"
 
 import { SWR_CONFIG } from "@constants/swr-config"
 import { THEMES } from "@constants/themes"
-
-import { AuthService } from "@services/auth.service"
 
 import { isMobileDevice } from "@/utils/Shared"
 
@@ -44,12 +42,11 @@ Router.events.on("routeChangeStart", NProgress.start)
 Router.events.on("routeChangeError", NProgress.done)
 Router.events.on("routeChangeComplete", NProgress.done)
 
-const authService = new AuthService()
-
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     const {
         currentUser,
         membership: { currentProjectRole, currentWorkspaceRole },
+        logOut,
     } = useUser()
     const { currentWorkspace } = useWorkspace()
 
@@ -70,7 +67,7 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
                                             projectRole={currentProjectRole}
                                         >
                                             <SWRConfig value={SWR_CONFIG}>
-                                                <LayoutWrapper>
+                                                <LayoutWrapper logOut={logOut}>
                                                     {children}
                                                     <Analytics />
                                                 </LayoutWrapper>
@@ -87,23 +84,25 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     )
 }
 
-const LayoutWrapper: FC<PropsWithChildren> = function ({ children }) {
+const LayoutWrapper: FC<{ children: React.ReactNode; logOut: () => Promise<void> }> = function ({ children, logOut }) {
     const [loading, setLoading] = useState(true)
     const router = useRouter()
-
-    const logOut = async () => {
+    const { setTheme } = useTheme()
+    const logOutHandler = async () => {
         try {
             setLoading(true)
-            await authService
-                .logOut()
+            await logOut()
+                .then(() => {
+                    mutate("CURRENT_USER_DETAILS", null)
+                    setTheme("system")
+                    router.push("/login")
+                })
                 .catch(() => toast.error("Failed to sign out. Please try again."))
-                .finally(() => router.push("/login"))
             googleLogout()
         } finally {
             setLoading(false)
         }
     }
-
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
@@ -137,7 +136,7 @@ const LayoutWrapper: FC<PropsWithChildren> = function ({ children }) {
         <div className="flex">
             {children}
             <div className="order-1">
-                <SideBar logOut={logOut} />
+                <SideBar logOut={logOutHandler} />
             </div>
         </div>
     )
