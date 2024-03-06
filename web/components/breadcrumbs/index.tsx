@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-// icons
+
 import { MoveLeft } from "lucide-react";
 
 type BreadcrumbsProps = {

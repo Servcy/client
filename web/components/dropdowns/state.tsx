@@ -9,7 +9,7 @@ import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 import { DropdownButton } from "./buttons";
-// icons
+
 import { StateGroupIcon } from "@servcy/ui";
 
 import { cn } from "@helpers/common.helper";

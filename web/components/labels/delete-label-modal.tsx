@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 
 import { useLabel } from "@hooks/store";
-// icons
+
 import { AlertTriangle } from "lucide-react";
 import toast from "react-hot-toast";
 

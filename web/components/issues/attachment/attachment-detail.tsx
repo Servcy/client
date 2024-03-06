@@ -7,7 +7,7 @@ import { useIssueDetail, useMember } from "@hooks/store";
 import { Tooltip } from "@servcy/ui";
 
 import { IssueAttachmentDeleteModal } from "./delete-attachment-confirmation-modal";
-// icons
+
 import { getFileIcon } from "@components/icons";
 // helper
 import { truncateText } from "@helpers/string.helper";

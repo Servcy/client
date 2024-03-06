@@ -11,7 +11,7 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { BreadcrumbLink } from "@components/common";
 
 import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui";
-// icons
+
 import { List, PlusIcon, Sheet } from "lucide-react";
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types";

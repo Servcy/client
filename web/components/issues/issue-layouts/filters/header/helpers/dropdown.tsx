@@ -4,7 +4,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { Placement } from "@popperjs/core";
 
 import { Button } from "@servcy/ui";
-// icons
+
 import { ChevronUp } from "lucide-react";
 
 type Props = {

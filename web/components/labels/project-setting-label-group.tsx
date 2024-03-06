@@ -3,7 +3,7 @@ import { Disclosure, Transition } from "@headlessui/react";
 
 // store
 import { observer } from "mobx-react-lite";
-// icons
+
 import { ChevronDown, Pencil, Trash2 } from "lucide-react";
 
 import { IIssueLabel } from "@servcy/types";

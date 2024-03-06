@@ -8,7 +8,7 @@ import { useEventTracker, useProjectState } from "@hooks/store";
 import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem } from "@components/states";
 
 import { Loader } from "@servcy/ui";
-// icons
+
 import { Plus } from "lucide-react";
 
 import { orderStateGroups } from "@helpers/state.helper";

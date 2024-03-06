@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useProject, useUser } from "@hooks/store";
 
 import { Button } from "@servcy/ui";
-// icons
+
 import { ClipboardList } from "lucide-react";
 // images
 import JoinProjectImg from "public/auth/project-not-authorized.svg";

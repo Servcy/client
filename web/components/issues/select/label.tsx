@@ -9,7 +9,7 @@ import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 import { IssueLabelsList } from "@components/ui";
-// icons
+
 import { Check, Component, Plus, Search, Tag } from "lucide-react";
 
 type Props = {

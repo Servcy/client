@@ -14,7 +14,7 @@ import { ROLE } from "@constants/workspace";
 import { MEMBER_ACCEPTED } from "@constants/event-tracker";
 
 import { IWorkspaceMemberInvitation } from "@servcy/types";
-// icons
+
 import { CheckCircle2, Search } from "lucide-react";
 import {} from "@hooks/store/use-event-tracker";
 import { getUserRole } from "@helpers/user.helper";

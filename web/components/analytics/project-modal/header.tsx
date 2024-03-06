@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-// icons
+
 import { Expand, Shrink, X } from "lucide-react";
 
 type Props = {

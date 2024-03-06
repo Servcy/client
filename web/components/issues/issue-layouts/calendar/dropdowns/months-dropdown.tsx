@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { usePopper } from "react-popper";
 //hooks
 import { useCalendarView } from "@hooks/store";
-// icons
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { MONTHS_LIST } from "@constants/calendar";

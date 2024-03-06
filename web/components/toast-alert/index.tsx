@@ -1,6 +1,6 @@
 import React from "react";
 import toast from "react-hot-toast";
-// icons
+
 import { AlertTriangle, CheckCircle, Info, X, XCircle } from "lucide-react";
 
 const ToastAlerts = () => {

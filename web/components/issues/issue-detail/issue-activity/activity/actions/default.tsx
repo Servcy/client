@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useIssueDetail } from "@hooks/store";
 
 import { IssueActivityBlockComponent } from "./";
-// icons
+
 import { LayersIcon } from "@servcy/ui";
 
 type TIssueDefaultActivity = { activityId: string; ends: "top" | "bottom" | undefined };

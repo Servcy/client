@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import router from "next/router";
 
 import { CustomMenu } from "@servcy/ui";
-// icons
+
 import { Calendar, ChevronDown, Kanban, List } from "lucide-react";
 
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue";

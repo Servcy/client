@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import { useApplication } from "@hooks/store";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-// icons
+
 import { HelpCircle, MessagesSquare, MoveLeft, Zap } from "lucide-react";
 import { Tooltip } from "@servcy/ui";
 // assets

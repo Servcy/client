@@ -30,7 +30,7 @@ import {
 } from "@components/issues";
 import { IssueSubscription } from "./subscription";
 import { DateDropdown, EstimateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "@components/dropdowns";
-// icons
+
 import { ArchiveIcon, ContrastIcon, DiceIcon, DoubleCircleIcon, RelatedIcon, Tooltip, UserGroupIcon } from "@servcy/ui";
 
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";

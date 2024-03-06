@@ -6,7 +6,7 @@ import { useIssueDetail, useProject, useProjectState } from "@hooks/store";
 
 import { IssueLabel, TIssueOperations } from "@components/issues";
 import { DateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "@components/dropdowns";
-// icons
+
 import { DoubleCircleIcon, StateGroupIcon, UserGroupIcon } from "@servcy/ui";
 // helper
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";

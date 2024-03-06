@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Breadcrumbs, ContrastIcon } from "@servcy/ui";
 import { BreadcrumbLink } from "@components/common";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-// icons
+
 import { Crown } from "lucide-react";
 
 export const WorkspaceActiveCycleHeader = observer(() => (

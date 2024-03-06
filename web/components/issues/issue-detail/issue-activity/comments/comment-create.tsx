@@ -8,7 +8,7 @@ import { FileService } from "@services/file.service";
 
 import { TActivityOperations } from "../root";
 import { TIssueComment } from "@servcy/types";
-// icons
+
 import { Globe2, Lock } from "lucide-react";
 import { useMention, useWorkspace } from "@hooks/store";
 

@@ -9,7 +9,7 @@ import { useProjectState } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
-// icons
+
 import { ChevronDown } from "lucide-react";
 
 import type { IState } from "@servcy/types";

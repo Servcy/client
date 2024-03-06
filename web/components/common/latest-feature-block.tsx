@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
-// icons
+
 import { Lightbulb } from "lucide-react";
 // images
 import latestFeatures from "public/onboarding/onboarding-pages.svg";

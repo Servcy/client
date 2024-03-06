@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { CustomAnalyticsSidebarHeader, CustomAnalyticsSidebarProjectsList } from "@components/analytics";
 
 import { Button, LayersIcon } from "@servcy/ui";
-// icons
+
 import { CalendarDays, Download, RefreshCw } from "lucide-react";
 
 import { renderFormattedDate } from "@helpers/date-time.helper";

@@ -10,7 +10,7 @@ import { ProjectService } from "@services/project";
 import useDebounce from "@hooks/use-debounce";
 
 import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
-// icons
+
 import { Rocket, Search } from "lucide-react";
 
 import { ISearchIssueResponse } from "@servcy/types";

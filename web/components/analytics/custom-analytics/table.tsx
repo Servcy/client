@@ -1,6 +1,6 @@
 import { BarDatum } from "@nivo/bar";
 
-// icons
+
 import { PriorityIcon } from "@servcy/ui";
 
 import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";

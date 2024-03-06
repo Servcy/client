@@ -3,7 +3,7 @@ import React from "react";
 
 import { Disclosure, Transition } from "@headlessui/react";
 import { Button, Loader } from "@servcy/ui";
-// icons
+
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import { IProject } from "@servcy/types";

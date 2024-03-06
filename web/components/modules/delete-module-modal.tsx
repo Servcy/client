@@ -7,7 +7,7 @@ import { useEventTracker, useModule } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { Button } from "@servcy/ui";
-// icons
+
 import { AlertTriangle } from "lucide-react";
 
 import type { IModule } from "@servcy/types";

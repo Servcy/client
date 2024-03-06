@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 
 
 import { FilterHeader, FilterOption } from "@components/issues";
-// icons
+
 import { StateGroupIcon } from "@servcy/ui";
 import { STATE_GROUPS } from "@constants/state";
 

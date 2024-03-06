@@ -1,7 +1,7 @@
 import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// icons
+
 import { ChevronRight, MoreHorizontal } from "lucide-react";
 
 import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet";

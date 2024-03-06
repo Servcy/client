@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useIssueDetail } from "@hooks/store";
 
 import { IssueActivityBlockComponent } from "./";
-// icons
+
 import { DiceIcon } from "@servcy/ui";
 
 type TIssueModuleActivity = { activityId: string; ends: "top" | "bottom" | undefined };

@@ -11,7 +11,7 @@ import { UserService } from "@services/user.service";
 import { ProfileSidebarTime } from "./time";
 
 import { Loader, Tooltip } from "@servcy/ui";
-// icons
+
 import { ChevronDown, Pencil } from "lucide-react";
 
 import { renderFormattedDate } from "@helpers/date-time.helper";

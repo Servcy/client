@@ -7,7 +7,7 @@ import { usePopper } from "react-popper";
 import { useCalendarView } from "@hooks/store";
 
 import { ToggleSwitch } from "@servcy/ui";
-// icons
+
 import { Check, ChevronUp } from "lucide-react";
 
 import { TCalendarLayouts } from "@servcy/types";

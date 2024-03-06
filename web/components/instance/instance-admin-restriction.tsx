@@ -5,7 +5,7 @@ import Image from "next/image";
 import AccessDeniedImg from "public/auth/access-denied.svg";
 
 import { Button } from "@servcy/ui";
-// icons
+
 import { LayoutGrid } from "lucide-react";
 
 interface InstanceAdminRestrictionProps {

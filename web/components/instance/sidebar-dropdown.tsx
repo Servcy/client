@@ -6,7 +6,7 @@ import Link from "next/link";
 import { mutate } from "swr";
 
 import { Menu, Transition } from "@headlessui/react";
-// icons
+
 import { LogIn, LogOut, Settings, UserCog2 } from "lucide-react";
 
 import { useApplication, useUser } from "@hooks/store";

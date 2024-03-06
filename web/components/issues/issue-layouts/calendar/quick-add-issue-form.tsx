@@ -9,7 +9,7 @@ import useKeypress from "@hooks/use-keypress";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 import { createIssuePayload } from "@helpers/issue.helper";
-// icons
+
 import { PlusIcon } from "lucide-react";
 
 import { TIssue } from "@servcy/types";

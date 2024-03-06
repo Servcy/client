@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
 import { useProject } from "@hooks/store";
-// icons
+
 import { Contrast, LayoutGrid, Users } from "lucide-react";
 
 import { renderEmoji } from "@helpers/emoji.helper";

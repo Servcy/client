@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import useIntegrationPopup from "@hooks/use-integration-popup";
 
 import { Button, Loader, Tooltip } from "@servcy/ui";
-// icons
+
 import GithubLogo from "public/services/github.png";
 import SlackLogo from "public/services/slack.png";
 import { CheckCircle } from "lucide-react";

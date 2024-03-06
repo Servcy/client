@@ -5,7 +5,7 @@ import { useProject, useProjectState, useUser } from "@hooks/store";
 // component
 import { SelectMonthModal } from "@components/automation";
 import { CustomSelect, CustomSearchSelect, ToggleSwitch, StateGroupIcon, DoubleCircleIcon, Loader } from "@servcy/ui";
-// icons
+
 import { ArchiveX } from "lucide-react";
 
 import { IProject } from "@servcy/types";

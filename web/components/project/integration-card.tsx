@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
 import { SelectRepository, SelectChannel } from "@components/integration";
-// icons
+
 import GithubLogo from "public/logos/github-square.png";
 import SlackLogo from "public/services/slack.png";
 

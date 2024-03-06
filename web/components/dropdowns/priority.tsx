@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-// icons
+
 import { PriorityIcon, Tooltip } from "@servcy/ui";
 
 import { cn } from "@helpers/common.helper";

@@ -22,7 +22,7 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { BreadcrumbLink } from "@components/common";
 
 import { Breadcrumbs, Button, CustomMenu, DiceIcon, LayersIcon } from "@servcy/ui";
-// icons
+
 import { ArrowRight, PanelRight, Plus } from "lucide-react";
 
 import { truncateText } from "@helpers/string.helper";

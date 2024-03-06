@@ -1,4 +1,4 @@
-// icons
+
 import {
   ModuleBacklogIcon,
   ModuleCancelledIcon,

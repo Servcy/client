@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useIssueDetail } from "@hooks/store";
 
 import { IssueActivityBlockComponent, IssueLink } from "./";
-// icons
+
 import { DoubleCircleIcon } from "@servcy/ui";
 
 type TIssueStateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };

@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { useUser } from "@hooks/store";
 
 import { getButtonStyling } from "@servcy/ui";
-// icons
+
 import { Crown } from "lucide-react";
 // helper
 import { cn } from "@helpers/common.helper";

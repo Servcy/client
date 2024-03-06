@@ -6,7 +6,7 @@ import { Menu } from "@headlessui/react";
 import { ArchiveRestore, Clock, MessageSquare, MoreVertical, User2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
-// icons
+
 import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui";
 
 import { snoozeOptions } from "@constants/notification";

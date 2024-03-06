@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";
-// icons
+
 import { SmilePlus } from "lucide-react";
 
 const reactionEmojis = ["128077", "128078", "128516", "128165", "128533", "129505", "9992", "128064"];

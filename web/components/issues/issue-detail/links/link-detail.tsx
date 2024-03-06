@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { useIssueDetail, useMember } from "@hooks/store";
 
 import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
-// icons
+
 import { Pencil, Trash2, LinkIcon } from "lucide-react";
 
 import { IssueLinkCreateUpdateModal, TLinkOperationsModal } from "./create-update-link-modal";

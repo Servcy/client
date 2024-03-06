@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useEventTracker, useProjectState } from "@hooks/store";
 
 import { Tooltip, StateGroupIcon } from "@servcy/ui";
-// icons
+
 import { Pencil, X, ArrowDown, ArrowUp } from "lucide-react";
 
 import { addSpaceIfCamelCase } from "@helpers/string.helper";

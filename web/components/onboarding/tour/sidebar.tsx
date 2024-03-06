@@ -1,4 +1,4 @@
-// icons
+
 import { ContrastIcon, DiceIcon, LayersIcon, PhotoFilterIcon } from "@servcy/ui";
 import { FileText } from "lucide-react";
 

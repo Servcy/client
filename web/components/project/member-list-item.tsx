@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { ConfirmProjectMemberRemove } from "@components/project";
 
 import { CustomSelect, Tooltip } from "@servcy/ui";
-// icons
+
 import { ChevronDown, Dot, XCircle } from "lucide-react";
 
 import { ROLE } from "@constants/workspace";
