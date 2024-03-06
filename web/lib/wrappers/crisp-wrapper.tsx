@@ -26,6 +26,7 @@ const CrispWrapper: FC<ICrispWrapper> = (props) => {
         var s = d.createElement("script");
         s.src = "https://client.crisp.chat/l.js";
         s.async = true;
+        // @ts-ignore
         d.getElementsByTagName("head")[0].appendChild(s);
         window.$crisp.push(["set", "user:email", [user.email]]);
         window.$crisp.push(["do", "chat:hide"]);

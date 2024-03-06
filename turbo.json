@@ -1,12 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": [
+    "NODE_ENV",
     "NEXT_PUBLIC_CRISP_ID",
     "NEXT_PUBLIC_POSTHOG_KEY",
     "NEXT_PUBLIC_POSTHOG_HOST",
     "NEXT_PUBLIC_SERVER_URL",
     "NEXT_PUBLIC_CLIENT_URL",
-    "NODE_ENV",
+    "NEXT_PUBLIC_CLARITY_KEY",
     "NEXT_PUBLIC_GOOGLE_CLIENT_ID",
     "NEXT_PUBLIC_MICROSOFT_CLIENT_ID",
     "NEXT_PUBLIC_NOTION_CLIENT_ID",

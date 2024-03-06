@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-import { Briefcase, Circle, ExternalLink, Plus } from "lucide-react";
+import { Briefcase, Plus } from "lucide-react";
 
 import {
   useApplication,
@@ -98,7 +98,6 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
     [workspaceSlug, projectId, updateFilters]
   );
 
-  const deployUrl = process.env["NEXT_PUBLIC_DEPLOY_URL"];
   const canUserCreateIssue =
     currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
 
@@ -154,18 +153,6 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
                 />
               </Breadcrumbs>
             </div>
-            {currentProjectDetails?.is_deployed && deployUrl && (
-              <a
-                href={`${deployUrl}/${workspaceSlug}/${currentProjectDetails?.id}`}
-                className="group flex items-center gap-1.5 rounded bg-custom-primary-100/10 px-2.5 py-1 text-xs font-medium text-custom-primary-100"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Circle className="h-1.5 w-1.5 fill-custom-primary-100" strokeWidth={2} />
-                Public
-                <ExternalLink className="hidden h-3 w-3 group-hover:block" strokeWidth={2} />
-              </a>
-            )}
           </div>
           <div className="items-center gap-2 hidden md:flex">
             <LayoutSelection

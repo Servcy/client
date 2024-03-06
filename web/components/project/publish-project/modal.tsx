@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
-import { Check, CircleDot, Globe2 } from "lucide-react";
+import { Check, Globe2 } from "lucide-react";
 
 import { useProjectPublish } from "@hooks/store";
 import toast from "react-hot-toast";
@@ -44,9 +44,6 @@ const viewOptions: {
 }[] = [
   { key: "list", label: "List" },
   { key: "kanban", label: "Kanban" },
-  // { key: "calendar", label: "Calendar" },
-  // { key: "gantt", label: "Gantt" },
-  // { key: "spreadsheet", label: "Spreadsheet" },
 ];
 
 export const PublishProjectModal: React.FC<Props> = observer((props) => {
@@ -55,10 +52,6 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
   const [isUnPublishing, setIsUnPublishing] = useState(false);
   const [isUpdateRequired, setIsUpdateRequired] = useState(false);
 
-  let servcy_deploy_url = process.env["NEXT_PUBLIC_DEPLOY_URL"];
-
-  if (typeof window !== "undefined" && !servcy_deploy_url)
-    servcy_deploy_url = window.location.protocol + "//" + window.location.host + "/spaces";
   // router
   const router = useRouter();
   const { workspaceSlug } = router.query;
@@ -138,7 +131,6 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
     return publishProject(workspaceSlug.toString(), project.id, payload)
       .then((res) => {
         handleClose();
-        // window.open(`${servcy_deploy_url}/${workspaceSlug}/${project.id}`, "_blank");
         return res;
       })
       .catch((err) => err);
@@ -149,12 +141,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
 
     await updateProjectSettingsAsync(workspaceSlug.toString(), project.id, payload.id ?? "", payload)
       .then((res) => {
-        toast.error({
-          type: "success",
-          title: "Success!",
-          message: "Publish settings updated successfully!",
-        });
-
+        toast.error("Publish settings updated successfully!");
         handleClose();
         return res;
       })
@@ -174,44 +161,13 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
         handleClose();
         return res;
       })
-      .catch(() =>
-        toast.error({
-          type: "error",
-          title: "Error!",
-          message: "Something went wrong while un-publishing the project.",
-        })
-      )
+      .catch(() => toast.error("Something went wrong while un-publishing the project."))
       .finally(() => setIsUnPublishing(false));
-  };
-
-  const CopyLinkToClipboard = ({ copy_link }: { copy_link: string }) => {
-    const [status, setStatus] = useState(false);
-
-    const copyText = () => {
-      navigator.clipboard.writeText(copy_link);
-      setStatus(true);
-      setTimeout(() => {
-        setStatus(false);
-      }, 1000);
-    };
-
-    return (
-      <div
-        className="flex h-[30px] min-w-[30px] cursor-pointer items-center justify-center rounded border border-custom-border-100 bg-custom-background-100 px-2 text-xs hover:bg-custom-background-90"
-        onClick={() => copyText()}
-      >
-        {status ? "Copied" : "Copy Link"}
-      </div>
-    );
   };
 
   const handleFormSubmit = async (formData: FormData) => {
     if (!formData.views || formData.views.length === 0) {
-      toast.error({
-        type: "error",
-        title: "Error!",
-        message: "Please select at least one view layout to publish the project.",
-      });
+      toast.error("Please select at least one view layout to publish the project.");
       return;
     }
 
@@ -314,25 +270,6 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                     </Loader>
                   ) : (
                     <div className="px-6">
-                      {project.is_deployed && (
-                        <>
-                          <div className="relative flex items-center gap-2 rounded-md border border-custom-border-100 bg-custom-background-80 px-3 py-2">
-                            <div className="flex-grow truncate text-sm">
-                              {`${servcy_deploy_url}/${workspaceSlug}/${project.id}`}
-                            </div>
-                            <div className="relative flex flex-shrink-0 items-center gap-1">
-                              <CopyLinkToClipboard copy_link={`${servcy_deploy_url}/${workspaceSlug}/${project.id}`} />
-                            </div>
-                          </div>
-                          <div className="mt-3 flex items-center gap-1 text-custom-primary-100">
-                            <div className="flex h-5 w-5 items-center overflow-hidden">
-                              <CircleDot className="h-5 w-5" />
-                            </div>
-                            <div className="text-sm">This project is live on web</div>
-                          </div>
-                        </>
-                      )}
-
                       <div className="mt-6 space-y-4">
                         <div className="relative flex items-center justify-between gap-2">
                           <div className="text-sm">Views</div>

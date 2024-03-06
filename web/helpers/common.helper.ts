@@ -9,13 +9,9 @@ export const debounce = (func: any, wait: number, immediate: boolean = false) =>
       timeout = null;
       if (!immediate) func(...args);
     };
-
     const callNow = immediate && !timeout;
-
     clearTimeout(timeout);
-
     timeout = setTimeout(later, wait);
-
     if (callNow) func(...args);
   };
 };
