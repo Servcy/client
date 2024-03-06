@@ -15,12 +15,12 @@ export interface IPosthogWrapper {
   currentWorkspaceId: string | undefined;
   workspaceRole: number | undefined;
   projectRole: number | undefined;
-  posthogAPIKey: string | null;
+  posthogAPIKey: string;
   posthogHost: string | null;
 }
 
 const PostHogProvider: FC<IPosthogWrapper> = (props) => {
-  const { children, user, workspaceRole, currentWorkspaceId, projectRole, posthogAPIKey, posthogHost } = props;
+  const { children, user, workspaceRole, currentWorkspaceId, projectRole } = props;
   // states
   const [lastWorkspaceId, setLastWorkspaceId] = useState(currentWorkspaceId);
   // router
@@ -42,14 +42,7 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
   }, [user, workspaceRole, projectRole]);
 
   useEffect(() => {
-    if (posthogAPIKey && posthogHost) {
-      posthog.init(posthogAPIKey, {
-        api_host: posthogHost || "https://app.posthog.com",
-        autocapture: false,
-        capture_pageview: false, // Disable automatic pageview capture, as we capture manually
-      });
-    }
-  }, [posthogAPIKey, posthogHost]);
+  }, []);
 
   useEffect(() => {
     // Join workspace group on workspace change
@@ -58,25 +51,26 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
       posthog?.identify(user.email);
       posthog?.group(GROUP_WORKSPACE, currentWorkspaceId);
     }
-  }, [currentWorkspaceId, user]);
+  }, [currentWorkspaceId, lastWorkspaceId, user]);
 
   useEffect(() => {
     // Track page views
     const handleRouteChange = () => {
       posthog?.capture("$pageview");
     };
+    posthog.init(process.env["NEXT_PUBLIC_POSTHOG_ID"], {
+      api_host: process.env["NEXT_PUBLIC_POSTHOG_HOST"],
+      autocapture: false,
+      capture_pageview: false,
+    });
     router.events.on("routeChangeComplete", handleRouteChange);
-
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (posthogAPIKey) {
-    return <PHProvider client={posthog}>{children}</PHProvider>;
-  }
-  return <>{children}</>;
+  return <PHProvider client={posthog}>{children}</PHProvider>;
 };
 
 export default PostHogProvider;

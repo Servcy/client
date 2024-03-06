@@ -4,20 +4,17 @@ import { setCookie } from "cookies-next";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
 import { BiLogIn } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
 import { RiWhatsappLine } from "react-icons/ri";
-
 import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
-
 import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";
-
 import OTPInput from "@/components/Login/OTPInput";
 import { GoogleLogin } from "@react-oauth/google";
 import { Button, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link.js";
+import LoginLayout from '@layouts/LoginLayout';
 
 export default function Login(): JSX.Element {
   const searchParams = useSearchParams();
@@ -229,3 +226,7 @@ export default function Login(): JSX.Element {
     </main>
   );
 }
+
+Login.getLayout = function getLayout(page: JSX.Element) {
+  return <LoginLayout>{page}</LoginLayout>;
+};
