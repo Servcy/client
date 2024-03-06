@@ -1,19 +1,13 @@
 import { useEffect, useRef, useState } from "react"
 
 import { Combobox } from "@headlessui/react"
-//types
-import { Placement } from "@popperjs/core"
-//icon
 import { Check, Search } from "lucide-react"
 import { observer } from "mobx-react"
-//hooks
 import { usePopper } from "react-popper"
 
-//store
 import { useApplication, useCycle } from "@hooks/store"
 
 import { TCycleGroups } from "@servcy/types"
-//components
 import { ContrastIcon, CycleGroupIcon } from "@servcy/ui"
 
 type DropdownOptions =
@@ -23,13 +17,6 @@ type DropdownOptions =
           content: JSX.Element
       }[]
     | undefined
-
-interface Props {
-    projectId: string
-    referenceElement: HTMLButtonElement | null
-    placement: Placement | undefined
-    isOpen: boolean
-}
 
 export const CycleOptions = observer((props: any) => {
     const { projectId, isOpen, referenceElement, placement } = props
@@ -115,8 +102,8 @@ export const CycleOptions = observer((props: any) => {
             <div
                 className="my-1 w-48 rounded border-[0.5px] border-custom-border-300 bg-custom-background-100 px-2 py-2.5 text-xs shadow-custom-shadow-rg focus:outline-none"
                 ref={setPopperElement}
-                style={styles.popper}
-                {...attributes.popper}
+                style={styles?.["popper"] ?? ""}
+                {...attributes?.["popper"] ?? {}}
             >
                 <div className="flex items-center gap-1.5 rounded border border-custom-border-100 bg-custom-background-90 px-2">
                     <Search className="h-3.5 w-3.5 text-custom-text-400" strokeWidth={1.5} />

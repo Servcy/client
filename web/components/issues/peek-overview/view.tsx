@@ -50,14 +50,13 @@ export const IssueView: FC<IIssueView> = observer((props) => {
     } = useIssueDetail()
     const issue = getIssueById(issueId)
 
-    const { alerts } = useToast()
     // remove peek id
     const removeRoutePeekId = () => {
         setPeekIssue(undefined)
     }
 
     useOutsideClickDetector(issuePeekOverviewRef, () => {
-        if (!isAnyModalOpen && (!alerts || alerts.length === 0)) {
+        if (!isAnyModalOpen) {
             removeRoutePeekId()
         }
     })

@@ -7,7 +7,7 @@ import { UserCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useDropzone } from "react-dropzone"
 
-import { useApplication, useWorkspace } from "@hooks/store"
+import { useWorkspace } from "@hooks/store"
 
 import { MAX_FILE_SIZE } from "@constants/common"
 
@@ -35,9 +35,6 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
     const router = useRouter()
     const { workspaceSlug } = router.query
 
-    const {
-        config: { envConfig },
-    } = useApplication()
     const { currentWorkspace } = useWorkspace()
 
     const onDrop = (acceptedFiles: File[]) => setImage(acceptedFiles[0])
@@ -47,7 +44,7 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
         accept: {
             "image/*": [".png", ".jpg", ".jpeg", ".svg", ".webp"],
         },
-        maxSize: envConfig?.file_size_limit ?? MAX_FILE_SIZE,
+        maxSize: MAX_FILE_SIZE,
         multiple: false,
     })
 
