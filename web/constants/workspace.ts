@@ -9,8 +9,6 @@ import { Props } from "@components/icons/types"
 
 import { TStaticViewTypes } from "@servcy/types"
 
-images
-
 export enum EUserWorkspaceRoles {
     GUEST = 5,
     VIEWER = 10,
@@ -101,20 +99,7 @@ export const DEFAULT_GLOBAL_VIEWS_LIST: {
     },
 ]
 
-export const RESTRICTED_URLS = [
-    "404",
-    "accounts",
-    "api",
-    "create-workspace",
-    "error",
-    "god-mode",
-    "installations",
-    "invitations",
-    "onboarding",
-    "profile",
-    "spaces",
-    "workspace-invitations",
-]
+export const RESTRICTED_URLS = ["404", "accounts", "api", "error", "invitations", "onboarding", "profile", "workspace"]
 
 export const WORKSPACE_SETTINGS_LINKS: {
     key: string
