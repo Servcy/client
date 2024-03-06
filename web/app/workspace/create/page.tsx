@@ -80,6 +80,6 @@ CreateWorkspacePage.getWrapper = function getWrapper(page: ReactElement) {
     )
 }
 
-CreateWorkspacePage.hasWrapper = true;
+CreateWorkspacePage.hasWrapper = true
 
 export default CreateWorkspacePage

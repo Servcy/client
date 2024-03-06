@@ -15,7 +15,7 @@ import { capitalizeFirstLetter } from "@/utils/Shared/formatters"
 export default function IntegrationOauth(): JSX.Element {
     const params = useParams()
     const router = useRouter()
-    const slug = params?.['slug']
+    const slug = params?.["slug"]
 
     useEffect(() => {
         if (typeof slug !== "string") return

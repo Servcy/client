@@ -142,9 +142,7 @@ const LayoutWrapper: FC<{ children: React.ReactNode; logOut: () => Promise<void>
         )
     return (
         <div className="flex">
-            <main className="order-2 flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
-                {children}
-            </main>
+            <main className="order-2 flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">{children}</main>
             <div className="order-1">
                 <SideBar logOut={logOutHandler} />
             </div>
