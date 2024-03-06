@@ -44,8 +44,8 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
   const { currentUser, currentUserSettings } = useUser();
   // router
   const router = useRouter();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const { data: invitations } = useSWR("USER_WORKSPACE_INVITATIONS", () => workspaceService.userWorkspaceInvitations());
 
@@ -64,7 +64,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
 
   const submitInvitations = () => {
     if (invitationsRespond.length === 0) {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Please select at least one invitation.",
@@ -97,7 +97,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
             router.push(`/${redirectWorkspace?.slug}`);
           })
           .catch(() => {
-            setToastAlert({
+            toast.error({
               type: "error",
               title: "Error!",
               message: "Something went wrong, Please try again.",
@@ -112,7 +112,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
           state: "FAILED",
           element: "Workspace invitations page",
         });
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong, Please try again.",

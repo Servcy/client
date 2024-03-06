@@ -6,8 +6,7 @@ import { useProject, useUser } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { AutoArchiveAutomation, AutoCloseAutomation } from "components/automation";
 import { PageHead } from "components/core";
@@ -22,8 +21,8 @@ const AutomationSettingsPage: NextPageWithLayout = observer(() => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // store hooks
   const {
     membership: { currentProjectRole },
@@ -34,7 +33,7 @@ const AutomationSettingsPage: NextPageWithLayout = observer(() => {
     if (!workspaceSlug || !projectId || !projectDetails) return;
 
     await updateProject(workspaceSlug.toString(), projectId.toString(), formData).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Something went wrong. Please try again.",

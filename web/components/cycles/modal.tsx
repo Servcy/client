@@ -32,8 +32,8 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
   const { captureCycleEvent } = useEventTracker();
   const { workspaceProjectIds } = useProject();
   const { createCycle, updateCycleDetails } = useCycle();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const { setValue: setCycleTab } = useLocalStorage<TCycleView>("cycle_tab", "active");
 
@@ -43,7 +43,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
     const selectedProjectId = payload.project_id ?? projectId.toString();
     await createCycle(workspaceSlug, selectedProjectId, payload)
       .then((res) => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Cycle created successfully.",
@@ -54,7 +54,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
         });
       })
       .catch((err) => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err.detail ?? "Error in creating cycle. Please try again.",
@@ -77,7 +77,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
           eventName: CYCLE_UPDATED,
           payload: { ...res, changed_properties: changed_properties, state: "SUCCESS" },
         });
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Cycle updated successfully.",
@@ -88,7 +88,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
           eventName: CYCLE_UPDATED,
           payload: { ...payload, state: "FAILED" },
         });
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err.detail ?? "Error in updating cycle. Please try again.",
@@ -138,7 +138,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
       }
       handleClose();
     } else
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "You already have a cycle on the given dates, if you want to create a draft cycle, remove the dates.",

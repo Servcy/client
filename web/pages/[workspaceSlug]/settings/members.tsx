@@ -39,8 +39,8 @@ const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
     workspace: { inviteMembersToWorkspace },
   } = useMember();
   const { currentWorkspace } = useWorkspace();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleWorkspaceInvite = (data: IWorkspaceBulkInviteFormData) => {
     if (!workspaceSlug) return;
@@ -59,7 +59,7 @@ const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
           state: "SUCCESS",
           element: "Workspace settings member page",
         });
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Invitations sent successfully.",
@@ -77,7 +77,7 @@ const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
           state: "FAILED",
           element: "Workspace settings member page",
         });
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: `${err.error ?? "Something went wrong. Please try again."}`,

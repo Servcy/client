@@ -36,8 +36,8 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
   const { captureModuleEvent } = useEventTracker();
   const { workspaceProjectIds } = useProject();
   const { createModule, updateModuleDetails } = useModule();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleClose = () => {
     reset(defaultValues);
@@ -55,7 +55,7 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
     await createModule(workspaceSlug.toString(), selectedProjectId, payload)
       .then((res) => {
         handleClose();
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Module created successfully.",
@@ -66,7 +66,7 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
         });
       })
       .catch((err) => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err.detail ?? "Module could not be created. Please try again.",
@@ -86,7 +86,7 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
       .then((res) => {
         handleClose();
 
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Module updated successfully.",
@@ -97,7 +97,7 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
         });
       })
       .catch((err) => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err.detail ?? "Module could not be updated. Please try again.",

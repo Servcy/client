@@ -27,8 +27,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
   // router
   const router = useRouter();
   const { workspaceSlug } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // states
   const [deleteProjectModalOpen, setDeleteProjectModal] = useState(false);
   const [joinProjectModalOpen, setJoinProjectModal] = useState(false);
@@ -43,7 +43,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     if (!workspaceSlug) return;
 
     addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Couldn't remove the project from favorites. Please try again.",
@@ -55,7 +55,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     if (!workspaceSlug || !project) return;
 
     removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Couldn't remove the project from favorites. Please try again.",
@@ -67,7 +67,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
 
     copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${project.id}/issues`).then(() => {
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Link Copied!",
         message: "Project link copied to clipboard.",

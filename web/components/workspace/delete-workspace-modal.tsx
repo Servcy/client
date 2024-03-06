@@ -32,8 +32,8 @@ export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
   // store hooks
   const { captureWorkspaceEvent } = useEventTracker();
   const { deleteWorkspace } = useWorkspace();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     control,
@@ -69,14 +69,14 @@ export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
             element: "Workspace general settings page",
           },
         });
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Workspace deleted successfully.",
         });
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong. Please try again later.",

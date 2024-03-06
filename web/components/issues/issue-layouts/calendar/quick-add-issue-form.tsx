@@ -71,8 +71,8 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
   const ref = useRef<HTMLDivElement>(null);
   // states
   const [isOpen, setIsOpen] = useState(false);
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   // derived values
   const projectDetail = projectId ? getProjectById(projectId.toString()) : null;
@@ -102,7 +102,7 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
     Object.keys(errors).forEach((key) => {
       const error = errors[key as keyof TIssue];
 
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: error?.message?.toString() || "Some error occurred. Please try again.",
@@ -136,7 +136,7 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
             path: router.asPath,
           });
         }));
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Success!",
         message: "Issue created successfully.",
@@ -148,7 +148,7 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
         payload: { ...payload, state: "FAILED", element: "Calendar quick add" },
         path: router.asPath,
       });
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: err?.message || "Some error occurred. Please try again.",

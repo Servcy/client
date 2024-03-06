@@ -4,8 +4,7 @@ import { ArchiveIcon, CustomMenu } from "@servcy/ui";
 import { observer } from "mobx-react";
 import { Copy, ExternalLink, Link, Pencil, Trash2 } from "lucide-react";
 import omit from "lodash/omit";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useEventTracker, useProjectState } from "@hooks/store";
 // components
 import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "components/issues";
@@ -39,8 +38,8 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
   // store hooks
   const { setTrackElement } = useEventTracker();
   const { getStateById } = useProjectState();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // derived values
   const stateDetails = getStateById(issue.state_id);
   const isEditingAllowed = !readOnly;
@@ -54,7 +53,7 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
   const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank");
   const handleCopyIssueLink = () =>
     copyUrlToClipboard(issueLink).then(() =>
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Link copied",
         message: "Issue link copied to clipboard",

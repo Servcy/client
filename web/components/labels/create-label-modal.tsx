@@ -64,7 +64,7 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
     reset(defaultValues);
   };
 
-  const { setToastAlert } = useToast();
+
 
   const onSubmit = async (formData: IIssueLabel) => {
     if (!workspaceSlug) return;
@@ -75,7 +75,7 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
         if (onSuccess) onSuccess(res);
       })
       .catch((error) => {
-        setToastAlert({
+        toast.error({
           title: "Oops!",
           type: "error",
           message: error?.error ?? "Error while adding the label",

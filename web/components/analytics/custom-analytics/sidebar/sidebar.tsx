@@ -34,8 +34,8 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId, cycleId, moduleId } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // store hooks
   const { currentUser } = useUser();
   const { workspaceProjectIds, getProjectById } = useProject();
@@ -107,7 +107,7 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
     analyticsService
       .exportAnalytics(workspaceSlug.toString(), data)
       .then((res) => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: res.message,
@@ -116,7 +116,7 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
         trackExportAnalytics();
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "There was some error in exporting the analytics. Please try again.",

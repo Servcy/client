@@ -29,8 +29,8 @@ export const DeleteGlobalViewModal: React.FC<Props> = observer((props) => {
   // store hooks
   const { deleteGlobalView } = useGlobalView();
   const { captureEvent } = useEventTracker();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleClose = () => {
     onClose();
@@ -53,7 +53,7 @@ export const DeleteGlobalViewModal: React.FC<Props> = observer((props) => {
           view_id: data.id,
           state: "FAILED",
         });
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong while deleting the view. Please try again.",

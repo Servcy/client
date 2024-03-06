@@ -54,7 +54,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
     !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group);
   const isDeletingAllowed = isEditingAllowed;
 
-  const { setToastAlert } = useToast();
+
 
   const issueLink = `${workspaceSlug}/projects/${issue.project_id}/issues/${issue.id}`;
 
@@ -62,7 +62,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
 
   const handleCopyIssueLink = () =>
     copyUrlToClipboard(issueLink).then(() =>
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Link copied",
         message: "Issue link copied to clipboard",

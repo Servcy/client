@@ -39,8 +39,8 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
   // store hooks
   const { captureProjectStateEvent, setTrackElement } = useEventTracker();
   const { createState, updateState } = useProjectState();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     handleSubmit,
@@ -82,7 +82,7 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
     await createState(workspaceSlug.toString(), projectId.toString(), formData)
       .then((res) => {
         handleClose();
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "State created successfully.",
@@ -98,13 +98,13 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
       })
       .catch((error) => {
         if (error.status === 400)
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "State with that name already exists. Please try again with another name.",
           });
         else
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "State could not be created. Please try again.",
@@ -135,7 +135,7 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
             element: "Project settings states page",
           },
         });
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "State updated successfully.",
@@ -143,13 +143,13 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
       })
       .catch((error) => {
         if (error.status === 400)
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "Another state exists with the same name. Please try again with another name.",
           });
         else
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "State could not be updated. Please try again.",

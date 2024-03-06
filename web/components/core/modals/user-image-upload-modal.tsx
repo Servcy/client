@@ -6,8 +6,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { useApplication } from "@hooks/store";
 // services
 import { FileService } from "@services/file.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
 // icons
@@ -32,8 +31,8 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
   // states
   const [image, setImage] = useState<File | null>(null);
   const [isImageUploading, setIsImageUploading] = useState(false);
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // store hooks
   const {
     config: { envConfig },
@@ -76,7 +75,7 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
         if (value) fileService.deleteUserFile(value);
       })
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err?.error ?? "Something went wrong. Please try again.",

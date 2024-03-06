@@ -6,8 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Combobox, Dialog, Transition } from "@headlessui/react";
 // services
 import { IssueService } from "@services/issue";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, LayersIcon } from "@servcy/ui";
 // icons
@@ -55,7 +54,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
       : null
   );
 
-  const { setToastAlert } = useToast();
+
 
   const {
     handleSubmit,
@@ -79,7 +78,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
     if (!workspaceSlug || !projectId) return;
 
     if (!data.delete_issue_ids || data.delete_issue_ids.length === 0) {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Please select at least one issue.",
@@ -91,7 +90,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
 
     await removeBulkIssues(workspaceSlug as string, projectId as string, data.delete_issue_ids)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Issues deleted successfully!",
@@ -99,7 +98,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
         handleClose();
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong. Please try again.",

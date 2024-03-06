@@ -3,8 +3,7 @@ import { add } from "date-fns";
 import { Controller, useForm } from "react-hook-form";
 import { DateDropdown } from "components/dropdowns";
 import { Calendar } from "lucide-react";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, CustomSelect, Input, TextArea, ToggleSwitch } from "@servcy/ui";
 // helpers
@@ -66,8 +65,8 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
   const { handleClose, neverExpires, toggleNeverExpires, onSubmit } = props;
   // states
   const [customDate, setCustomDate] = useState<Date | null>(null);
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form
   const {
     control,
@@ -80,7 +79,7 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
   const handleFormSubmit = async (data: IApiToken) => {
     // if never expires is toggled off, and the user has not selected a custom date or a predefined date, show an error
     if (!neverExpires && (!data.expired_at || (data.expired_at === "custom" && !customDate)))
-      return setToastAlert({
+      return toast.error({
         type: "error",
         title: "Error!",
         message: "Please select an expiration date.",

@@ -8,8 +8,7 @@ import { mutate } from "swr";
 import { useUser } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 
 type Props = {
   isOpen: boolean;
@@ -26,7 +25,7 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
 
   const router = useRouter();
 
-  const { setToastAlert } = useToast();
+
   const { setTheme } = useTheme();
 
   const handleClose = () => {
@@ -39,7 +38,7 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
 
     await deactivateAccount()
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Account deactivated successfully.",
@@ -50,7 +49,7 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
         handleClose();
       })
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err?.error,

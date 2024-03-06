@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 // services
 import { AuthService } from "@services/auth.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
 // ui
 import { Button, Input } from "@servcy/ui";
@@ -41,8 +40,8 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   // store hooks
   const { captureEvent } = useEventTracker();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     control,
@@ -65,7 +64,7 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
     await authService
       .setPassword(payload)
       .then(async () => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Password created successfully.",
@@ -81,11 +80,7 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
           state: "FAILED",
           first_time: true,
         });
-        setToastAlert({
-          type: "error",
-          title: "Error!",
-          message: err?.error ?? "Something went wrong. Please try again.",
-        });
+        toast.error("Something went wrong. Please try again.")
       });
   };
 

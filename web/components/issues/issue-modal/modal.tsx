@@ -89,8 +89,8 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
   };
   // router
   const router = useRouter();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // local storage
   const { storedValue: localStorageDraftIssues, setValue: setLocalStorageDraftIssue } = useLocalStorage<
     Record<string, Partial<TIssue>>
@@ -187,7 +187,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
       if (payload.module_ids && payload.module_ids.length > 0 && storeType !== EIssuesStoreType.MODULE)
         await addIssueToModule(response, payload.module_ids);
 
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Success!",
         message: "Issue created successfully.",
@@ -200,7 +200,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
       !createMore && handleClose();
       return response;
     } catch (error) {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Issue could not be created. Please try again.",
@@ -221,7 +221,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
         ? await draftIssues.updateIssue(workspaceSlug, payload.project_id, data.id, payload)
         : await currentIssueStore.updateIssue(workspaceSlug, payload.project_id, data.id, payload, viewId);
 
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Success!",
         message: "Issue updated successfully.",
@@ -233,7 +233,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
       });
       handleClose();
     } catch (error) {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Issue could not be created. Please try again.",

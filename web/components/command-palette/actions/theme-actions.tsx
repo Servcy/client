@@ -21,13 +21,13 @@ export const CommandPaletteThemeActions: FC<Props> = observer((props) => {
   const { updateCurrentUserTheme } = useUser();
   // hooks
   const { setTheme } = useTheme();
-  const { setToastAlert } = useToast();
+
 
   const updateUserTheme = async (newTheme: string) => {
     setTheme(newTheme);
 
     return updateCurrentUserTheme(newTheme).catch(() => {
-      setToastAlert({
+      toast.error({
         title: "Failed to save user theme settings!",
         type: "error",
       });

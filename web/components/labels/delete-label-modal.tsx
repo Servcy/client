@@ -6,8 +6,7 @@ import { observer } from "mobx-react-lite";
 import { useLabel } from "@hooks/store";
 // icons
 import { AlertTriangle } from "lucide-react";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
 // types
@@ -29,7 +28,7 @@ export const DeleteLabelModal: React.FC<Props> = observer((props) => {
   // states
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   // hooks
-  const { setToastAlert } = useToast();
+
 
   const handleClose = () => {
     onClose();
@@ -49,7 +48,7 @@ export const DeleteLabelModal: React.FC<Props> = observer((props) => {
         setIsDeleteLoading(false);
 
         const error = err?.error || "Label could not be deleted. Please try again.";
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: error,

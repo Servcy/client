@@ -51,7 +51,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
     currentUser,
     membership: { currentProjectRole },
   } = useUser();
-  const { setToastAlert } = useToast();
+
 
   // states
   const [date, setDate] = useState(new Date());
@@ -74,7 +74,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
           if (!workspaceSlug || !projectId || !inboxId || !inboxIssueId) throw new Error("Missing required parameters");
           await updateInboxIssueStatus(workspaceSlug, projectId, inboxId, inboxIssueId, data);
         } catch (error) {
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "Something went wrong while updating inbox status. Please try again.",
@@ -98,7 +98,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
             pathname: `/${workspaceSlug}/projects/${projectId}/inbox/${inboxId}`,
           });
         } catch (error) {
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "Something went wrong while deleting inbox issue. Please try again.",

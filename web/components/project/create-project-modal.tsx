@@ -32,11 +32,11 @@ interface IIsGuestCondition {
 }
 
 const IsGuestCondition: FC<IIsGuestCondition> = ({ onClose }) => {
-  const { setToastAlert } = useToast();
+
 
   useEffect(() => {
     onClose();
-    setToastAlert({
+    toast.error({
       title: "Error",
       type: "error",
       message: "You don't have permission to create project.",
@@ -70,7 +70,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
   // states
   const [isChangeInIdentifierRequired, setIsChangeInIdentifierRequired] = useState(true);
   // toast
-  const { setToastAlert } = useToast();
+
   // form info
   const cover_image = PROJECT_UNSPLASH_COVERS[Math.floor(Math.random() * PROJECT_UNSPLASH_COVERS.length)];
   const {
@@ -108,7 +108,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
     if (!workspaceSlug) return;
 
     addProjectToFavorites(workspaceSlug.toString(), projectId).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Couldn't remove the project from favorites. Please try again.",
@@ -137,7 +137,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
           eventName: PROJECT_CREATED,
           payload: newPayload,
         });
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Project created successfully.",
@@ -149,7 +149,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
       })
       .catch((err) => {
         Object.keys(err.data).map((key) => {
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: err.data[key],

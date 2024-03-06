@@ -25,7 +25,7 @@ export const InstanceGithubConfigForm: FC<IInstanceGithubConfigForm> = (props) =
   // store hooks
   const { instance: instanceStore } = useApplication();
   // toast
-  const { setToastAlert } = useToast();
+
   // form data
   const {
     handleSubmit,
@@ -44,7 +44,7 @@ export const InstanceGithubConfigForm: FC<IInstanceGithubConfigForm> = (props) =
     await instanceStore
       .updateInstanceConfigurations(payload)
       .then(() =>
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "Github Configuration Settings updated successfully",
@@ -145,7 +145,7 @@ export const InstanceGithubConfigForm: FC<IInstanceGithubConfigForm> = (props) =
             className="flex items-center justify-between py-2"
             onClick={() => {
               navigator.clipboard.writeText(originURL);
-              setToastAlert({
+              toast.error({
                 message: "The Origin URL has been successfully copied to your clipboard",
                 type: "success",
                 title: "Copied to clipboard",

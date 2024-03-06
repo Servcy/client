@@ -4,8 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 // components
 import { WebhookForm } from "./form";
 import { GeneratedHookDetails } from "./generated-hook-details";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // helpers
 import { csvDownload } from "@helpers/download.helper";
 // utils
@@ -35,7 +34,7 @@ export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
   const router = useRouter();
   const { workspaceSlug } = router.query;
   // toast
-  const { setToastAlert } = useToast();
+
 
   const handleCreateWebhook = async (formData: IWebhook, webhookEventType: TWebhookEventTypes) => {
     if (!workspaceSlug) return;
@@ -65,7 +64,7 @@ export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
 
     await createWebhook(workspaceSlug.toString(), payload)
       .then(({ webHook, secretKey }) => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Webhook created successfully.",
@@ -77,7 +76,7 @@ export const CreateWebhookModal: React.FC<ICreateWebhookModal> = (props) => {
         csvDownload(csvData, `webhook-secret-key-${Date.now()}`);
       })
       .catch((error) => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: error?.error ?? "Something went wrong. Please try again.",

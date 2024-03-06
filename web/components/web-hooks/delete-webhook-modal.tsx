@@ -20,7 +20,7 @@ export const DeleteWebhookModal: FC<IDeleteWebhook> = (props) => {
   // router
   const router = useRouter();
   // toast
-  const { setToastAlert } = useToast();
+
   // store hooks
   const { removeWebhook } = useWebhook();
 
@@ -37,7 +37,7 @@ export const DeleteWebhookModal: FC<IDeleteWebhook> = (props) => {
 
     removeWebhook(workspaceSlug.toString(), webhookId.toString())
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Webhook deleted successfully.",
@@ -45,7 +45,7 @@ export const DeleteWebhookModal: FC<IDeleteWebhook> = (props) => {
         router.replace(`/${workspaceSlug}/settings/webhooks/`);
       })
       .catch((error) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: error?.error ?? "Something went wrong. Please try again.",

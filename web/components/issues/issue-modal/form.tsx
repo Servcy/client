@@ -125,8 +125,8 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
   const {
     issue: { getIssueById },
   } = useIssueDetail();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     formState: { errors, isDirty, isSubmitting },
@@ -199,7 +199,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
       })
       .then((res) => {
         if (res.response === "")
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message:
@@ -211,13 +211,13 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
         const error = err?.data?.error;
 
         if (err.status === 429)
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: error || "You have reached the maximum number of requests of 50 requests per month per user.",
           });
         else
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: error || "Some error occurred. Please try again.",

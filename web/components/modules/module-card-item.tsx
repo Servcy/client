@@ -30,8 +30,8 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // store hooks
   const {
     membership: { currentProjectRole },
@@ -57,7 +57,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
         });
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Couldn't add the module to favorites. Please try again.",
@@ -79,7 +79,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
         });
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Couldn't remove the module from favorites. Please try again.",
@@ -91,7 +91,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
     e.stopPropagation();
     e.preventDefault();
     copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`).then(() => {
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Link Copied!",
         message: "Module link copied to clipboard.",

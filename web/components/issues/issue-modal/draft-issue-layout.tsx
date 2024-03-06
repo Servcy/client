@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
 // services
 import { IssueDraftService } from "@services/issue";
@@ -43,8 +42,8 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
   // router
   const router = useRouter();
   const { workspaceSlug } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // store hooks
   const { captureIssueEvent } = useEventTracker();
 
@@ -61,7 +60,7 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
     await issueDraftService
       .createDraftIssue(workspaceSlug.toString(), projectId.toString(), payload)
       .then((res) => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Draft Issue created successfully.",
@@ -76,7 +75,7 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
         onClose(false);
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Issue could not be created. Please try again.",

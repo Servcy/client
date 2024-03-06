@@ -1,10 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 // services
 import { AuthService } from "@services/auth.service";
-// hooks
-import toast from "react-hot-toast";
 // layouts
 import DefaultLayout from "@layouts/default-layout";
 // ui

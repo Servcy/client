@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef, Fragment } from "react";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form"; // services
 import { AIService } from "@services/ai.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { usePopper } from "react-popper";
 // ui
 import { Button, Input } from "@servcy/ui";
@@ -44,8 +43,8 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
   // router
   const router = useRouter();
   const { workspaceSlug } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // popper
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: placement ?? "auto",
@@ -78,7 +77,7 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
         ? error || "You have reached the maximum number of requests of 50 requests per month per user."
         : error || "Some error occurred. Please try again.";
 
-    setToastAlert({
+    toast.error({
       type: "error",
       title: "Error!",
       message: errorMessage,
@@ -104,7 +103,7 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
   };
 
   const handleInvalidTask = () => {
-    setToastAlert({
+    toast.error({
       type: "error",
       title: "Error!",
       message: "Please enter some task to get AI assistance.",

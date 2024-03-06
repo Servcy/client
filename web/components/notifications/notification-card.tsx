@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Menu } from "@headlessui/react";
 import { ArchiveRestore, Clock, MessageSquare, MoreVertical, User2 } from "lucide-react";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
 // icons
 import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui";
@@ -55,8 +54,8 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
   const { workspaceSlug } = router.query;
   // states
   const [showSnoozeOptions, setShowSnoozeOptions] = React.useState(false);
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // refs
   const snoozeRef = useRef<HTMLDivElement | null>(null);
 
@@ -67,7 +66,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
       icon: <MessageSquare className="h-3.5 w-3.5 text-custom-text-300" />,
       onClick: () => {
         markNotificationReadStatusToggle(notification.id).then(() => {
-          setToastAlert({
+          toast.error({
             title: notification.read_at ? "Notification marked as read" : "Notification marked as unread",
             type: "success",
           });
@@ -84,7 +83,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
       ),
       onClick: () => {
         markNotificationArchivedStatus(notification.id).then(() => {
-          setToastAlert({
+          toast.error({
             title: notification.archived_at ? "Notification un-archived" : "Notification archived",
             type: "success",
           });
@@ -99,7 +98,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
       return;
     }
     markSnoozeNotification(notification.id, date).then(() => {
-      setToastAlert({
+      toast.error({
         title: `Notification snoozed till ${renderFormattedDate(date)}`,
         type: "success",
       });
@@ -335,7 +334,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                   tab: selectedTab,
                   state: "SUCCESS",
                 });
-                setToastAlert({
+                toast.error({
                   title: notification.read_at ? "Notification marked as read" : "Notification marked as unread",
                   type: "success",
                 });
@@ -357,7 +356,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                   tab: selectedTab,
                   state: "SUCCESS",
                 });
-                setToastAlert({
+                toast.error({
                   title: notification.archived_at ? "Notification un-archived" : "Notification archived",
                   type: "success",
                 });
@@ -408,7 +407,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                       tab: selectedTab,
                       state: "SUCCESS",
                     });
-                    setToastAlert({
+                    toast.error({
                       title: `Notification snoozed till ${renderFormattedDate(item.value)}`,
                       type: "success",
                     });

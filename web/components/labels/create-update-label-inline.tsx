@@ -35,8 +35,8 @@ export const CreateUpdateLabelInline = observer(
     const { workspaceSlug, projectId } = router.query;
     // store hooks
     const { createLabel, updateLabel } = useLabel();
-    // toast alert
-    const { setToastAlert } = useToast();
+
+
     // form info
     const {
       handleSubmit,
@@ -65,7 +65,7 @@ export const CreateUpdateLabelInline = observer(
           reset(defaultValues);
         })
         .catch((error) => {
-          setToastAlert({
+          toast.error({
             title: "Oops!",
             type: "error",
             message: error?.error ?? "Error while adding the label",
@@ -83,7 +83,7 @@ export const CreateUpdateLabelInline = observer(
           handleClose();
         })
         .catch((error) => {
-          setToastAlert({
+          toast.error({
             title: "Oops!",
             type: "error",
             message: error?.error ?? "Error while updating the label",

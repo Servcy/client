@@ -51,8 +51,8 @@ export const ModuleEmptyState: React.FC<Props> = observer((props) => {
     membership: { currentProjectRole: userRole },
     currentUser,
   } = useUser();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleAddIssuesToModule = async (data: ISearchIssueResponse[]) => {
     if (!workspaceSlug || !projectId || !moduleId) return;
@@ -61,7 +61,7 @@ export const ModuleEmptyState: React.FC<Props> = observer((props) => {
     await issues
       .addIssuesToModule(workspaceSlug.toString(), projectId?.toString(), moduleId.toString(), issueIds)
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Selected issues could not be added to the module. Please try again.",

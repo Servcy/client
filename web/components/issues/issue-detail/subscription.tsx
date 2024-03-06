@@ -22,7 +22,7 @@ export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
     createSubscription,
     removeSubscription,
   } = useIssueDetail();
-  const { setToastAlert } = useToast();
+
   // state
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +33,7 @@ export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
     try {
       if (isSubscribed) await removeSubscription(workspaceSlug, projectId, issueId);
       else await createSubscription(workspaceSlug, projectId, issueId);
-      setToastAlert({
+      toast.error({
         type: "success",
         title: `Issue ${isSubscribed ? `unsubscribed` : `subscribed`} successfully.!`,
         message: `Issue ${isSubscribed ? `unsubscribed` : `subscribed`} successfully.!`,
@@ -41,7 +41,7 @@ export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error",
         message: "Something went wrong. Please try again later.",

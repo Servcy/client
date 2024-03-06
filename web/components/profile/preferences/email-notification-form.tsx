@@ -2,8 +2,7 @@ import React, { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
 // ui
 import { Button, Checkbox } from "@servcy/ui";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // services
 import { UserService } from "@services/user.service";
 // types
@@ -19,7 +18,7 @@ const userService = new UserService();
 export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) => {
   const { data } = props;
   // toast
-  const { setToastAlert } = useToast();
+
   // form data
   const {
     handleSubmit,
@@ -45,7 +44,7 @@ export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) =>
     await userService
       .updateCurrentUserEmailNotificationSettings(payload)
       .then(() =>
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "Email Notification Settings updated successfully",

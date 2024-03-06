@@ -10,8 +10,7 @@ import useSWR, { mutate } from "swr";
 import { useForm } from "react-hook-form";
 // services
 import { IntegrationService, GithubIntegrationService } from "@services/integrations";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import {
   GithubImportConfigure,
@@ -92,7 +91,7 @@ export const GithubImporterRoot: React.FC = () => {
   const router = useRouter();
   const { workspaceSlug, provider } = router.query;
 
-  const { setToastAlert } = useToast();
+
 
   const { handleSubmit, control, setValue, watch } = useForm<TFormValues>({
     defaultValues: defaultFormValues,
@@ -149,7 +148,7 @@ export const GithubImporterRoot: React.FC = () => {
         mutate(IMPORTER_SERVICES_LIST(workspaceSlug as string));
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Import was unsuccessful. Please try again.",

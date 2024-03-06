@@ -10,8 +10,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { LogIn, LogOut, Settings, UserCog2 } from "lucide-react";
 // hooks
 import { useApplication, useUser } from "@hooks/store";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Avatar, Tooltip } from "@servcy/ui";
 
@@ -35,7 +34,7 @@ export const InstanceSidebarDropdown = observer(() => {
   } = useApplication();
   const { signOut, currentUser, currentUserSettings } = useUser();
   // hooks
-  const { setToastAlert } = useToast();
+
   const { setTheme } = useTheme();
 
   // redirect url for normal mode
@@ -53,7 +52,7 @@ export const InstanceSidebarDropdown = observer(() => {
         router.push("/");
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Failed to sign out. Please try again.",

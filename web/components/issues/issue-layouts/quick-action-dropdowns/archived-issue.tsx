@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { CustomMenu } from "@servcy/ui";
 import { ExternalLink, Link, RotateCcw, Trash2 } from "lucide-react";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useEventTracker, useIssues, useUser } from "@hooks/store";
 // components
 import { DeleteIssueModal } from "components/issues";
@@ -32,15 +31,15 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
   // auth
   const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER && !readOnly;
   const isRestoringAllowed = handleRestore && isEditingAllowed;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const issueLink = `${workspaceSlug}/projects/${issue.project_id}/archived-issues/${issue.id}`;
 
   const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank");
   const handleCopyIssueLink = () =>
     copyUrlToClipboard(issueLink).then(() =>
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Link copied",
         message: "Issue link copied to clipboard",

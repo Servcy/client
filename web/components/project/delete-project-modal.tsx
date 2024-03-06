@@ -33,8 +33,8 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     control,
@@ -67,7 +67,7 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
           eventName: PROJECT_DELETED,
           payload: { ...project, state: "SUCCESS", element: "Project general settings" },
         });
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Project deleted successfully.",
@@ -78,7 +78,7 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
           eventName: PROJECT_DELETED,
           payload: { ...project, state: "FAILED", element: "Project general settings" },
         });
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong. Please try again later.",

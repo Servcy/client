@@ -31,8 +31,8 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
   // store hooks
   const { captureCycleEvent } = useEventTracker();
   const { deleteCycle } = useCycle();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const formSubmit = async () => {
     if (!cycle) return;
@@ -41,7 +41,7 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
     try {
       await deleteCycle(workspaceSlug, projectId, cycle.id)
         .then(() => {
-          setToastAlert({
+          toast.error({
             type: "success",
             title: "Success!",
             message: "Cycle deleted successfully.",
@@ -62,7 +62,7 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
 
       handleClose();
     } catch (error) {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Warning!",
         message: "Something went wrong please try again later.",

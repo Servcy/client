@@ -26,8 +26,8 @@ export const DeleteProjectViewModal: React.FC<Props> = observer((props) => {
   const { workspaceSlug, projectId } = router.query;
   // store hooks
   const { deleteView } = useProjectView();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleClose = () => {
     onClose();
@@ -43,14 +43,14 @@ export const DeleteProjectViewModal: React.FC<Props> = observer((props) => {
       .then(() => {
         handleClose();
 
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "View deleted successfully.",
         });
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "View could not be deleted. Please try again.",

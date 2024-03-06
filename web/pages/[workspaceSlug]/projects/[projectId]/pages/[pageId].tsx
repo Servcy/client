@@ -53,8 +53,8 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
     currentUser,
     membership: { currentProjectRole },
   } = useUser();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const { handleSubmit, setValue, watch, getValues, control, reset } = useForm<IPage>({
     defaultValues: { name: "", description_html: "" },
@@ -148,7 +148,7 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
     message: string;
     type: "success" | "error" | "warning" | "info";
   }) => {
-    setToastAlert({
+    toast.error({
       title,
       message,
       type,

@@ -2,8 +2,7 @@ import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
 import useSWR from "swr";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
@@ -35,7 +34,7 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
   const {
     issues: { restoreIssue },
   } = useIssues(EIssuesStoreType.ARCHIVED);
-  const { setToastAlert } = useToast();
+
   const { getProjectById } = useProject();
   const {
     membership: { currentProjectRole },
@@ -66,7 +65,7 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
 
     await restoreIssue(workspaceSlug.toString(), projectId.toString(), archivedIssueId.toString())
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success",
           message:
@@ -78,7 +77,7 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
         router.push(`/${workspaceSlug}/projects/${projectId}/issues/${archivedIssueId}`);
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong. Please try again.",

@@ -60,14 +60,14 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
     toggleRelationModal,
   } = useIssueDetail();
   const { issueMap } = useIssues();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const relationIssueIds = getRelationByIssueIdRelationType(issueId, relationKey);
 
   const onSubmit = async (data: ISearchIssueResponse[]) => {
     if (data.length === 0) {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Please select at least one issue.",

@@ -24,8 +24,8 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
   // store hooks
   const { getProjectById } = useProject();
   const { issueMap } = useIssues();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   if (!dataId && !data) return null;
 
@@ -44,7 +44,7 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
     await onSubmit()
       .then(() => onClose())
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Issue could not be archived. Please try again.",

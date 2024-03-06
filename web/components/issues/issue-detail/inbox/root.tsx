@@ -34,7 +34,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
     fetchComments,
   } = useIssueDetail();
   const { captureIssueEvent } = useEventTracker();
-  const { setToastAlert } = useToast();
+
   const {
     membership: { currentProjectRole },
   } = useUser();
@@ -58,7 +58,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
         try {
           await updateInboxIssue(workspaceSlug, projectId, inboxId, issueId, data);
           if (showToast) {
-            setToastAlert({
+            toast.error({
               title: "Issue updated successfully",
               type: "success",
               message: "Issue updated successfully",
@@ -74,7 +74,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
             path: router.asPath,
           });
         } catch (error) {
-          setToastAlert({
+          toast.error({
             title: "Issue update failed",
             type: "error",
             message: "Issue update failed",
@@ -93,7 +93,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
       remove: async (workspaceSlug: string, projectId: string, issueId: string) => {
         try {
           await removeInboxIssue(workspaceSlug, projectId, inboxId, issueId);
-          setToastAlert({
+          toast.error({
             title: "Issue deleted successfully",
             type: "success",
             message: "Issue deleted successfully",
@@ -109,7 +109,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
             payload: { id: issueId, state: "FAILED", element: "Inbox" },
             path: router.asPath,
           });
-          setToastAlert({
+          toast.error({
             title: "Issue delete failed",
             type: "error",
             message: "Issue delete failed",

@@ -5,8 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Eye, EyeOff, XCircle } from "lucide-react";
 // services
 import { AuthService } from "@services/auth.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useApplication, useEventTracker } from "@hooks/store";
 // components
 import { ESignInSteps, ForgotPasswordPopover } from "components/account";
@@ -43,8 +42,8 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
   // states
   const [isSendingUniqueCode, setIsSendingUniqueCode] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   const {
     config: { envConfig },
   } = useApplication();
@@ -83,7 +82,7 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
         await onSubmit();
       })
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err?.error ?? "Something went wrong. Please try again.",
@@ -107,7 +106,7 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
       .generateUniqueCode({ email: emailFormValue })
       .then(() => handleStepChange(ESignInSteps.USE_UNIQUE_CODE_FROM_PASSWORD))
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err?.error ?? "Something went wrong. Please try again.",

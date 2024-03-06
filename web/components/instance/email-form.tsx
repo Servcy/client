@@ -30,7 +30,7 @@ export const InstanceEmailForm: FC<IInstanceEmailForm> = (props) => {
   // store hooks
   const { instance: instanceStore } = useApplication();
   // toast
-  const { setToastAlert } = useToast();
+
   // form data
   const {
     handleSubmit,
@@ -55,7 +55,7 @@ export const InstanceEmailForm: FC<IInstanceEmailForm> = (props) => {
     await instanceStore
       .updateInstanceConfigurations(payload)
       .then(() =>
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "Email Settings updated successfully",

@@ -52,8 +52,8 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
     control,
     formState: { errors },
   } = useForm<IUser>({ defaultValues });
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // store hooks
   const { currentUser: myProfile, updateCurrentUser, currentUserLoader } = useUser();
   // custom hooks
@@ -78,14 +78,14 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
 
     await updateCurrentUser(payload)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Profile updated successfully.",
         });
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "There was some error in updating your profile. Please try again.",
@@ -105,7 +105,7 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
       if (updateUser)
         updateCurrentUser({ avatar: "" })
           .then(() => {
-            setToastAlert({
+            toast.error({
               type: "success",
               title: "Success!",
               message: "Profile picture removed successfully.",
@@ -113,7 +113,7 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
             setIsRemoving(false);
           })
           .catch(() => {
-            setToastAlert({
+            toast.error({
               type: "error",
               title: "Error!",
               message: "There was some error in deleting your profile picture. Please try again.",

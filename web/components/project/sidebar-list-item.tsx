@@ -93,8 +93,8 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId: URLProjectId } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // derived values
   const project = getProjectById(projectId);
 
@@ -113,7 +113,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     if (!workspaceSlug || !project) return;
 
     addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Couldn't remove the project from favorites. Please try again.",
@@ -125,7 +125,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     if (!workspaceSlug || !project) return;
 
     removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Couldn't remove the project from favorites. Please try again.",

@@ -35,8 +35,8 @@ export const Workspace: React.FC<Props> = (props) => {
   const { updateCurrentUser } = useUser();
   const { createWorkspace, fetchWorkspaces, workspaces } = useWorkspace();
   const { captureWorkspaceEvent } = useEventTracker();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleCreateWorkspace = async (formData: IWorkspace) => {
     if (isSubmitting) return;
@@ -49,7 +49,7 @@ export const Workspace: React.FC<Props> = (props) => {
 
           await createWorkspace(formData)
             .then(async (res) => {
-              setToastAlert({
+              toast.error({
                 type: "success",
                 title: "Success!",
                 message: "Workspace created successfully.",
@@ -75,7 +75,7 @@ export const Workspace: React.FC<Props> = (props) => {
                   element: "Onboarding",
                 },
               });
-              setToastAlert({
+              toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Workspace could not be created. Please try again.",
@@ -84,7 +84,7 @@ export const Workspace: React.FC<Props> = (props) => {
         } else setSlugError(true);
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Some error occurred while creating workspace. Please try again.",

@@ -9,8 +9,7 @@ import { Check, ChevronDown, CircleUserRound, LogOut, Mails, PlusSquare, Setting
 import { usePopper } from "react-popper";
 // hooks
 import { useApplication, useUser, useWorkspace } from "@hooks/store";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Avatar, Loader } from "@servcy/ui";
 // types
@@ -59,7 +58,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
   const { currentUser, updateCurrentUser, isUserInstanceAdmin, signOut } = useUser();
   const { currentWorkspace: activeWorkspace, workspaces } = useWorkspace();
   // hooks
-  const { setToastAlert } = useToast();
+
   const { setTheme } = useTheme();
   // popper-js refs
   const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
@@ -88,7 +87,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
         router.push("/");
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Failed to sign out. Please try again.",

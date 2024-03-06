@@ -45,7 +45,7 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
   const { workspaceSlug, projectId, issueId } = props;
   // hooks
   const { createComment, updateComment, removeComment } = useIssueDetail();
-  const { setToastAlert } = useToast();
+
   const { getProjectById } = useProject();
   // state
   const [activityTab, setActivityTab] = useState<TActivityTabs>("all");
@@ -56,13 +56,13 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
         try {
           if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields");
           await createComment(workspaceSlug, projectId, issueId, data);
-          setToastAlert({
+          toast.error({
             title: "Comment created successfully.",
             type: "success",
             message: "Comment created successfully.",
           });
         } catch (error) {
-          setToastAlert({
+          toast.error({
             title: "Comment creation failed.",
             type: "error",
             message: "Comment creation failed. Please try again later.",
@@ -73,13 +73,13 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
         try {
           if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields");
           await updateComment(workspaceSlug, projectId, issueId, commentId, data);
-          setToastAlert({
+          toast.error({
             title: "Comment updated successfully.",
             type: "success",
             message: "Comment updated successfully.",
           });
         } catch (error) {
-          setToastAlert({
+          toast.error({
             title: "Comment update failed.",
             type: "error",
             message: "Comment update failed. Please try again later.",
@@ -90,13 +90,13 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
         try {
           if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields");
           await removeComment(workspaceSlug, projectId, issueId, commentId);
-          setToastAlert({
+          toast.error({
             title: "Comment removed successfully.",
             type: "success",
             message: "Comment removed successfully.",
           });
         } catch (error) {
-          setToastAlert({
+          toast.error({
             title: "Comment remove failed.",
             type: "error",
             message: "Comment remove failed. Please try again later.",

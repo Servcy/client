@@ -31,8 +31,8 @@ export const EstimatesList: React.FC = observer(() => {
   const { updateProject, currentProjectDetails } = useProject();
   const { projectEstimates, getProjectEstimateById } = useEstimate();
   const { currentUser } = useUser();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const editEstimate = (estimate: IEstimate) => {
     setEstimateFormOpen(true);
@@ -50,7 +50,7 @@ export const EstimatesList: React.FC = observer(() => {
       const error = err?.error;
       const errorString = Array.isArray(error) ? error[0] : error;
 
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: errorString ?? "Estimate could not be disabled. Please try again",

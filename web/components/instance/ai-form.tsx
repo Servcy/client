@@ -25,7 +25,7 @@ export const InstanceAIForm: FC<IInstanceAIForm> = (props) => {
   // store
   const { instance: instanceStore } = useApplication();
   // toast
-  const { setToastAlert } = useToast();
+
   // form data
   const {
     handleSubmit,
@@ -44,7 +44,7 @@ export const InstanceAIForm: FC<IInstanceAIForm> = (props) => {
     await instanceStore
       .updateInstanceConfigurations(payload)
       .then(() =>
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "AI Settings updated successfully",

@@ -54,8 +54,8 @@ export const SingleIntegrationCard: React.FC<Props> = observer(({ integration })
   const {
     membership: { currentWorkspaceRole },
   } = useUser();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const isUserAdmin = currentWorkspaceRole === 20;
 
@@ -87,7 +87,7 @@ export const SingleIntegrationCard: React.FC<Props> = observer(({ integration })
         );
         setDeletingIntegration(false);
 
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Deleted successfully!",
           message: `${integration.title} integration deleted successfully.`,
@@ -96,7 +96,7 @@ export const SingleIntegrationCard: React.FC<Props> = observer(({ integration })
       .catch(() => {
         setDeletingIntegration(false);
 
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: `${integration.title} integration could not be deleted. Please try again.`,

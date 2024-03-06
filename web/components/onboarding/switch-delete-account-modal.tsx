@@ -25,7 +25,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
 
   const { resolvedTheme, setTheme } = useTheme();
 
-  const { setToastAlert } = useToast();
+
 
   const handleClose = () => {
     setSwitchingAccount(false);
@@ -44,7 +44,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
         handleClose();
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Failed to sign out. Please try again.",
@@ -58,7 +58,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
 
     await deactivateAccount()
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Account deleted successfully.",
@@ -69,7 +69,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
         handleClose();
       })
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err?.error,

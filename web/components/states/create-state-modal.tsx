@@ -37,8 +37,8 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
   const { workspaceSlug } = router.query;
   // store hooks
   const { createState } = useProjectState();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     formState: { errors, isSubmitting },
@@ -71,14 +71,14 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
 
         if (typeof error === "object") {
           Object.keys(error).forEach((key) => {
-            setToastAlert({
+            toast.error({
               type: "error",
               title: "Error!",
               message: Array.isArray(error[key]) ? error[key].join(", ") : error[key],
             });
           });
         } else {
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message:

@@ -46,8 +46,8 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
   const [iAmFeelingLucky, setIAmFeelingLucky] = useState(false);
   // refs
   const editorRef = useRef<any>(null);
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   const { mentionHighlights, mentionSuggestions } = useMention();
   // router
   const router = useRouter();
@@ -138,7 +138,7 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
       })
       .then((res) => {
         if (res.response === "")
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message:
@@ -150,13 +150,13 @@ export const CreateInboxIssueModal: React.FC<Props> = observer((props) => {
         const error = err?.data?.error;
 
         if (err.status === 429)
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: error || "You have reached the maximum number of requests of 50 requests per month per user.",
           });
         else
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: error || "Some error occurred. Please try again.",

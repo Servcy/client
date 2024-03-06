@@ -41,7 +41,7 @@ export const IntegrationCard: React.FC<Props> = ({ integration }) => {
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
 
-  const { setToastAlert } = useToast();
+
 
   const { data: syncedGithubRepository } = useSWR(
     projectId ? PROJECT_GITHUB_REPOSITORY(projectId as string) : null,
@@ -71,7 +71,7 @@ export const IntegrationCard: React.FC<Props> = ({ integration }) => {
       .then(() => {
         mutate(PROJECT_GITHUB_REPOSITORY(projectId as string));
 
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: `${login}/${name} repository synced with the project successfully.`,
@@ -79,7 +79,7 @@ export const IntegrationCard: React.FC<Props> = ({ integration }) => {
       })
       .catch((err) => {
         console.error(err);
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Repository could not be synced with the project. Please try again.",

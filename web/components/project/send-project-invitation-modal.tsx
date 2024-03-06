@@ -45,8 +45,8 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // store hooks
   const { captureEvent } = useEventTracker();
   const {
@@ -84,7 +84,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
       .then(() => {
         if (onSuccess) onSuccess();
         onClose();
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "Members added successfully.",

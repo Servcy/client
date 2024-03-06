@@ -8,8 +8,7 @@ import { mutate } from "swr";
 import { Dialog, Transition } from "@headlessui/react";
 // services
 import { IntegrationService } from "@services/integrations/integration.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
 // icons
@@ -36,7 +35,7 @@ export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }
   const router = useRouter();
   const { workspaceSlug } = router.query;
 
-  const { setToastAlert } = useToast();
+
 
   const handleDeletion = () => {
     if (!workspaceSlug || !data) return;
@@ -52,7 +51,7 @@ export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }
     integrationService
       .deleteImporterService(workspaceSlug as string, data.service, data.id)
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong. Please try again.",

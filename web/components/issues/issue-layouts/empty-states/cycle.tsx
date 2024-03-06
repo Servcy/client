@@ -53,7 +53,7 @@ export const CycleEmptyState: React.FC<Props> = observer((props) => {
     currentUser,
   } = useUser();
 
-  const { setToastAlert } = useToast();
+
 
   const handleAddIssuesToCycle = async (data: ISearchIssueResponse[]) => {
     if (!workspaceSlug || !projectId || !cycleId) return;
@@ -61,7 +61,7 @@ export const CycleEmptyState: React.FC<Props> = observer((props) => {
     const issueIds = data.map((i) => i.id);
 
     await issues.addIssueToCycle(workspaceSlug.toString(), projectId, cycleId.toString(), issueIds).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Selected issues could not be added to the cycle. Please try again.",

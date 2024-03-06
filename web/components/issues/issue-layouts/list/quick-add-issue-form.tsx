@@ -77,7 +77,7 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
 
   useKeypress("Escape", handleClose);
   useOutsideClickDetector(ref, handleClose);
-  const { setToastAlert } = useToast();
+
 
   const {
     reset,
@@ -110,7 +110,7 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
             path: router.asPath,
           });
         }));
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Success!",
         message: "Issue created successfully.",
@@ -121,7 +121,7 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
         payload: { ...payload, state: "FAILED", element: "List quick add" },
         path: router.asPath,
       });
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: err?.message || "Some error occurred. Please try again.",

@@ -73,7 +73,7 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
 
   useKeypress("Escape", handleClose);
   useOutsideClickDetector(ref, handleClose);
-  const { setToastAlert } = useToast();
+
 
   const {
     reset,
@@ -113,7 +113,7 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
             path: router.asPath,
           });
         }));
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Success!",
         message: "Issue created successfully.",
@@ -125,7 +125,7 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
         path: router.asPath,
       });
       console.error(err);
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: err?.message || "Some error occurred. Please try again.",

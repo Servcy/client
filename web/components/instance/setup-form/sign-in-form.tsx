@@ -8,8 +8,7 @@ import { Input, Button } from "@servcy/ui";
 // services
 import { AuthService } from "@services/auth.service";
 const authService = new AuthService();
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // helpers
 import { checkEmailValidity } from "@helpers/string.helper";
 
@@ -41,7 +40,7 @@ export const InstanceSetupSignInForm: FC<IInstanceSetupEmailForm> = (props) => {
     },
   });
   // hooks
-  const { setToastAlert } = useToast();
+
 
   const handleFormSubmit = async (formValues: InstanceSetupEmailFormValues) => {
     const payload = {
@@ -56,11 +55,7 @@ export const InstanceSetupSignInForm: FC<IInstanceSetupEmailForm> = (props) => {
         handleNextStep(formValues.email);
       })
       .catch((err) => {
-        setToastAlert({
-          type: "error",
-          title: "Error!",
-          message: err?.error ?? "Something went wrong. Please try again.",
-        });
+        toast.error("Something went wrong. Please try again.")
       });
   };
 

@@ -7,8 +7,7 @@ import { useUser, useWebhook, useWorkspace } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { PageHead } from "components/core";
 import { WorkspaceSettingHeader } from "components/headers";
@@ -32,7 +31,7 @@ const WebhookDetailsPage: NextPageWithLayout = observer(() => {
   const { currentWebhook, fetchWebhookById, updateWebhook } = useWebhook();
   const { currentWorkspace } = useWorkspace();
   // toast
-  const { setToastAlert } = useToast();
+
 
   // TODO: fix this error
   // useEffect(() => {
@@ -62,14 +61,14 @@ const WebhookDetailsPage: NextPageWithLayout = observer(() => {
     };
     await updateWebhook(workspaceSlug.toString(), formData.id, payload)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Webhook updated successfully.",
         });
       })
       .catch((error) => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: error?.error ?? "Something went wrong. Please try again.",

@@ -3,8 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
 // ui
 import { Button } from "@servcy/ui";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // types
 import { useIssues } from "@hooks/store/use-issues";
 import { TIssue } from "@servcy/types";
@@ -25,7 +24,7 @@ export const DeleteIssueModal: React.FC<Props> = (props) => {
 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const { setToastAlert } = useToast();
+
   // hooks
   const { getProjectById } = useProject();
 
@@ -50,7 +49,7 @@ export const DeleteIssueModal: React.FC<Props> = (props) => {
           onClose();
         })
         .catch(() => {
-          setToastAlert({
+          toast.error({
             title: "Error",
             type: "error",
             message: "Failed to delete issue",

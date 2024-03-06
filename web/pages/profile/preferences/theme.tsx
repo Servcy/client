@@ -24,7 +24,7 @@ const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
   const userTheme = currentUser?.theme;
   // hooks
   const { setTheme } = useTheme();
-  const { setToastAlert } = useToast();
+
 
   useEffect(() => {
     if (userTheme) {
@@ -38,7 +38,7 @@ const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
   const handleThemeChange = (themeOption: I_THEME_OPTION) => {
     setTheme(themeOption.value);
     updateCurrentUserTheme(themeOption.value).catch(() => {
-      setToastAlert({
+      toast.error({
         title: "Failed to Update the theme",
         type: "error",
       });

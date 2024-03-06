@@ -6,8 +6,7 @@ import { MoveRight, MoveDiagonal, Link2, Trash2, RotateCcw } from "lucide-react"
 import { ArchiveIcon, CenterPanelIcon, CustomSelect, FullScreenPanelIcon, SidePanelIcon, Tooltip } from "@servcy/ui";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // store hooks
 import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
 // helpers
@@ -75,7 +74,7 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
   } = useIssueDetail();
   const { getStateById } = useProjectState();
   // hooks
-  const { setToastAlert } = useToast();
+
   // derived values
   const issueDetails = getIssueById(issueId);
   const stateDetails = issueDetails ? getStateById(issueDetails?.state_id) : undefined;
@@ -87,7 +86,7 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
     e.stopPropagation();
     e.preventDefault();
     copyUrlToClipboard(issueLink).then(() => {
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Link Copied!",
         message: "Issue link copied to clipboard.",

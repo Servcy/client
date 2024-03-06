@@ -60,8 +60,8 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
   } = useCycle();
   const { currentProjectDetails } = useProject();
   const { getUserDetails } = useMember();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const { isLoading } = useSWR(
     workspaceSlug && projectId ? `PROJECT_ACTIVE_CYCLE_${projectId}` : null,
@@ -120,7 +120,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
     if (!workspaceSlug || !projectId) return;
 
     addCycleToFavorites(workspaceSlug?.toString(), projectId.toString(), activeCycle.id).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Couldn't add the cycle to favorites. Please try again.",
@@ -133,7 +133,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
     if (!workspaceSlug || !projectId) return;
 
     removeCycleFromFavorites(workspaceSlug?.toString(), projectId.toString(), activeCycle.id).catch(() => {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Couldn't add the cycle to favorites. Please try again.",

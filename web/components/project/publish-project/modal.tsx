@@ -71,8 +71,8 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
     unPublishProject,
     fetchSettingsLoader,
   } = useProjectPublish();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     control,
@@ -150,7 +150,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
 
     await updateProjectSettingsAsync(workspaceSlug.toString(), project.id, payload.id ?? "", payload)
       .then((res) => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Publish settings updated successfully!",
@@ -176,7 +176,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
         return res;
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong while un-publishing the project.",
@@ -208,7 +208,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
 
   const handleFormSubmit = async (formData: FormData) => {
     if (!formData.views || formData.views.length === 0) {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Please select at least one view layout to publish the project.",

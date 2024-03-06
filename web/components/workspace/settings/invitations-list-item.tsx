@@ -30,8 +30,8 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
   const {
     workspace: { updateMemberInvitation, deleteMemberInvitation, getWorkspaceInvitationDetails },
   } = useMember();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // derived values
   const invitationDetails = getWorkspaceInvitationDetails(invitationId);
 
@@ -40,14 +40,14 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
 
     await deleteMemberInvitation(workspaceSlug.toString(), invitationDetails.id)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success",
           message: "Invitation removed successfully.",
         });
       })
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error",
           message: err?.error || "Something went wrong. Please try again.",
@@ -116,7 +116,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
               updateMemberInvitation(workspaceSlug.toString(), invitationDetails.id, {
                 role: value,
               }).catch(() => {
-                setToastAlert({
+                toast.error({
                   type: "error",
                   title: "Error!",
                   message: "An error occurred while updating member role. Please try again.",

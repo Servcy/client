@@ -37,7 +37,7 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
     [toggleIssueLinkModalStore]
   );
 
-  const { setToastAlert } = useToast();
+
 
   const handleLinkOperations: TLinkOperations = useMemo(
     () => ({
@@ -45,14 +45,14 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
         try {
           if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields");
           await createLink(workspaceSlug, projectId, issueId, data);
-          setToastAlert({
+          toast.error({
             message: "The link has been successfully created",
             type: "success",
             title: "Link created",
           });
           toggleIssueLinkModal(false);
         } catch (error) {
-          setToastAlert({
+          toast.error({
             message: "The link could not be created",
             type: "error",
             title: "Link not created",
@@ -63,14 +63,14 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
         try {
           if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields");
           await updateLink(workspaceSlug, projectId, issueId, linkId, data);
-          setToastAlert({
+          toast.error({
             message: "The link has been successfully updated",
             type: "success",
             title: "Link updated",
           });
           toggleIssueLinkModal(false);
         } catch (error) {
-          setToastAlert({
+          toast.error({
             message: "The link could not be updated",
             type: "error",
             title: "Link not updated",
@@ -81,14 +81,14 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
         try {
           if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields");
           await removeLink(workspaceSlug, projectId, issueId, linkId);
-          setToastAlert({
+          toast.error({
             message: "The link has been successfully removed",
             type: "success",
             title: "Link removed",
           });
           toggleIssueLinkModal(false);
         } catch (error) {
-          setToastAlert({
+          toast.error({
             message: "The link could not be removed",
             type: "error",
             title: "Link not removed",

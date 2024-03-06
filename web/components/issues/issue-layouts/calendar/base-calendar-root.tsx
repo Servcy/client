@@ -4,8 +4,7 @@ import { observer } from "mobx-react-lite";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 // components
 import { CalendarChart } from "components/issues";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // types
 import { TGroupedIssues, TIssue } from "@servcy/types";
 import { IQuickActionProps } from "../list/list-view-types";
@@ -41,7 +40,7 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
   const { workspaceSlug, projectId } = router.query;
 
   // hooks
-  const { setToastAlert } = useToast();
+
   const { issueMap } = useIssues();
   const {
     membership: { currentProjectRole },
@@ -73,7 +72,7 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
         groupedIssueIds,
         viewId
       ).catch((err) => {
-        setToastAlert({
+        toast.error({
           title: "Error",
           type: "error",
           message: err.detail ?? "Failed to perform this action",

@@ -22,8 +22,8 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
   const { data, isOpen, onClose, preLoadedData, workspaceSlug, projectId } = props;
   // store hooks
   const { createView, updateView } = useProjectView();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleClose = () => {
     onClose();
@@ -33,14 +33,14 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
     await createView(workspaceSlug, projectId, payload)
       .then(() => {
         handleClose();
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "View created successfully.",
         });
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong. Please try again.",
@@ -52,7 +52,7 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
     await updateView(workspaceSlug, projectId, data?.id as string, payload)
       .then(() => handleClose())
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err.detail ?? "Something went wrong. Please try again.",

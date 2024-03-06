@@ -16,8 +16,7 @@ import {
 import { Check, ChevronDown, Plus, XCircle } from "lucide-react";
 // services
 import { WorkspaceService } from "@services/workspace.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
 // ui
 import { Button, Input } from "@servcy/ui";
@@ -269,7 +268,7 @@ export const InviteMembers: React.FC<Props> = (props) => {
 
   const [isInvitationDisabled, setIsInvitationDisabled] = useState(true);
 
-  const { setToastAlert } = useToast();
+
   const { resolvedTheme } = useTheme();
   // store hooks
   const { captureEvent } = useEventTracker();
@@ -322,7 +321,7 @@ export const InviteMembers: React.FC<Props> = (props) => {
           state: "SUCCESS",
           element: "Onboarding",
         });
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Invitations sent successfully.",
@@ -336,7 +335,7 @@ export const InviteMembers: React.FC<Props> = (props) => {
           state: "FAILED",
           element: "Onboarding",
         });
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err?.error,

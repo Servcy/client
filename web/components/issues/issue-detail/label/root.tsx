@@ -27,7 +27,7 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
   // hooks
   const { updateIssue } = useIssueDetail();
   const { createLabel } = useLabel();
-  const { setToastAlert } = useToast();
+
 
   const labelOperations: TLabelOperations = useMemo(
     () => ({
@@ -36,13 +36,13 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
           if (onLabelUpdate) onLabelUpdate(data.label_ids || []);
           else await updateIssue(workspaceSlug, projectId, issueId, data);
           if (!isInboxIssue)
-            setToastAlert({
+            toast.error({
               title: "Issue updated successfully",
               type: "success",
               message: "Issue updated successfully",
             });
         } catch (error) {
-          setToastAlert({
+          toast.error({
             title: "Issue update failed",
             type: "error",
             message: "Issue update failed",
@@ -53,14 +53,14 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
         try {
           const labelResponse = await createLabel(workspaceSlug, projectId, data);
           if (!isInboxIssue)
-            setToastAlert({
+            toast.error({
               title: "Label created successfully",
               type: "success",
               message: "Label created successfully",
             });
           return labelResponse;
         } catch (error) {
-          setToastAlert({
+          toast.error({
             title: "Label creation failed",
             type: "error",
             message: "Label creation failed",

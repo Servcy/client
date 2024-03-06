@@ -6,8 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useProject } from "@hooks/store";
 // services
 import { ProjectExportService } from "@services/project";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, CustomSearchSelect } from "@servcy/ui";
 // types
@@ -34,8 +33,8 @@ export const Exporter: React.FC<Props> = observer((props) => {
   const { workspaceSlug } = router.query;
   // store hooks
   const { workspaceProjectIds, getProjectById } = useProject();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const options = workspaceProjectIds?.map((projectId) => {
     const projectDetails = getProjectById(projectId);
@@ -71,7 +70,7 @@ export const Exporter: React.FC<Props> = observer((props) => {
           mutateServices();
           router.push(`/${workspaceSlug}/settings/exports`);
           setExportLoading(false);
-          setToastAlert({
+          toast.error({
             type: "success",
             title: "Export Successful",
             message: `You will be able to download the exported ${
@@ -81,7 +80,7 @@ export const Exporter: React.FC<Props> = observer((props) => {
         })
         .catch(() => {
           setExportLoading(false);
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "Export was unsuccessful. Please try again.",

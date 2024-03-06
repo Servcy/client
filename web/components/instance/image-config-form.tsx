@@ -24,7 +24,7 @@ export const InstanceImageConfigForm: FC<IInstanceImageConfigForm> = (props) => 
   // store hooks
   const { instance: instanceStore } = useApplication();
   // toast
-  const { setToastAlert } = useToast();
+
   // form data
   const {
     handleSubmit,
@@ -42,7 +42,7 @@ export const InstanceImageConfigForm: FC<IInstanceImageConfigForm> = (props) => 
     await instanceStore
       .updateInstanceConfigurations(payload)
       .then(() =>
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "Image Configuration Settings updated successfully",

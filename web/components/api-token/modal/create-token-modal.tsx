@@ -4,8 +4,7 @@ import { mutate } from "swr";
 import { Dialog, Transition } from "@headlessui/react";
 // services
 import { APITokenService } from "@services/api_token.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { CreateApiTokenForm, GeneratedTokenDetails } from "components/api-token";
 // helpers
@@ -32,8 +31,8 @@ export const CreateApiTokenModal: React.FC<Props> = (props) => {
   // router
   const router = useRouter();
   const { workspaceSlug } = router.query;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleClose = () => {
     onClose();
@@ -76,7 +75,7 @@ export const CreateApiTokenModal: React.FC<Props> = (props) => {
         );
       })
       .catch((err) => {
-        setToastAlert({
+        toast.error({
           message: err.message,
           type: "error",
           title: "Error",

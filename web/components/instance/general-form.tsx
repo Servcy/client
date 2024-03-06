@@ -23,7 +23,7 @@ export const InstanceGeneralForm: FC<IInstanceGeneralForm> = (props) => {
   // store hooks
   const { instance: instanceStore } = useApplication();
   // toast
-  const { setToastAlert } = useToast();
+
   // form data
   const {
     handleSubmit,
@@ -42,7 +42,7 @@ export const InstanceGeneralForm: FC<IInstanceGeneralForm> = (props) => {
     await instanceStore
       .updateInstanceInfo(payload)
       .then(() =>
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "Settings updated successfully",

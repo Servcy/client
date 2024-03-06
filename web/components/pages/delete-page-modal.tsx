@@ -32,8 +32,8 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
   const { capturePageEvent } = useEventTracker();
   const pageStore = usePage(pageId);
 
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   if (!pageStore) return null;
 
@@ -60,7 +60,7 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
           },
         });
         handleClose();
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Page deleted successfully.",
@@ -74,7 +74,7 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
             state: "FAILED",
           },
         });
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Page could not be deleted. Please try again.",

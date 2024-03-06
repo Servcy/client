@@ -43,13 +43,13 @@ export const ProjectSidebarList: FC = observer(() => {
   const router = useRouter();
   const { workspaceSlug } = router.query;
   // toast
-  const { setToastAlert } = useToast();
+
 
   const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
 
   const handleCopyText = (projectId: string) => {
     copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Link Copied!",
         message: "Project link copied to clipboard.",
@@ -72,7 +72,7 @@ export const ProjectSidebarList: FC = observer(() => {
     const updatedSortOrder = orderJoinedProjects(source.index, destination.index, draggableId, joinedProjectsList);
     if (updatedSortOrder != undefined)
       updateProjectView(workspaceSlug.toString(), draggableId, { sort_order: updatedSortOrder }).catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Something went wrong. Please try again.",

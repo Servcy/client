@@ -4,8 +4,7 @@ import { mutate } from "swr";
 import { Dialog, Transition } from "@headlessui/react";
 // services
 import { APITokenService } from "@services/api_token.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
 // types
@@ -26,7 +25,7 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
   // states
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
   // hooks
-  const { setToastAlert } = useToast();
+
   // router
   const router = useRouter();
   const { workspaceSlug } = router.query;
@@ -44,7 +43,7 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
     apiTokenService
       .deleteApiToken(workspaceSlug.toString(), tokenId)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Token deleted successfully.",
@@ -59,7 +58,7 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
         handleClose();
       })
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error",
           message: err?.message ?? "Something went wrong. Please try again.",

@@ -4,8 +4,7 @@ import { Command } from "cmdk";
 import { LinkIcon, Signal, Trash2, UserMinus2, UserPlus2 } from "lucide-react";
 // hooks
 import { useApplication, useUser, useIssues } from "@hooks/store";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { DoubleCircleIcon, UserGroupIcon } from "@servcy/ui";
 // helpers
@@ -37,7 +36,7 @@ export const CommandPaletteIssueActions: React.FC<Props> = observer((props) => {
   } = useApplication();
   const { currentUser } = useUser();
 
-  const { setToastAlert } = useToast();
+
 
   const handleUpdateIssue = async (formData: Partial<TIssue>) => {
     if (!workspaceSlug || !projectId || !issueDetails) return;
@@ -71,13 +70,13 @@ export const CommandPaletteIssueActions: React.FC<Props> = observer((props) => {
     const url = new URL(window.location.href);
     copyTextToClipboard(url.href)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Copied to clipboard",
         });
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Some error occurred",
         });

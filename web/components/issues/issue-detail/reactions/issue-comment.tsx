@@ -25,7 +25,7 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
     createCommentReaction,
     removeCommentReaction,
   } = useIssueDetail();
-  const { setToastAlert } = useToast();
+
 
   const reactionIds = getCommentReactionsByCommentId(commentId);
   const userReactions = commentReactionsByUser(commentId, currentUser.id).map((r) => r.reaction);
@@ -36,13 +36,13 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
         try {
           if (!workspaceSlug || !projectId || !commentId) throw new Error("Missing fields");
           await createCommentReaction(workspaceSlug, projectId, commentId, reaction);
-          setToastAlert({
+          toast.error({
             title: "Reaction created successfully",
             type: "success",
             message: "Reaction created successfully",
           });
         } catch (error) {
-          setToastAlert({
+          toast.error({
             title: "Reaction creation failed",
             type: "error",
             message: "Reaction creation failed",
@@ -53,13 +53,13 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
         try {
           if (!workspaceSlug || !projectId || !commentId || !currentUser?.id) throw new Error("Missing fields");
           removeCommentReaction(workspaceSlug, projectId, commentId, reaction, currentUser.id);
-          setToastAlert({
+          toast.error({
             title: "Reaction removed successfully",
             type: "success",
             message: "Reaction removed successfully",
           });
         } catch (error) {
-          setToastAlert({
+          toast.error({
             title: "Reaction remove failed",
             type: "error",
             message: "Reaction remove failed",

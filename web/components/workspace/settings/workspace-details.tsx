@@ -43,8 +43,8 @@ export const WorkspaceDetails: FC = observer(() => {
     membership: { currentWorkspaceRole },
   } = useUser();
   const { currentWorkspace, updateWorkspace } = useWorkspace();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     handleSubmit,
@@ -77,7 +77,7 @@ export const WorkspaceDetails: FC = observer(() => {
             element: "Workspace general settings page",
           },
         });
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "Workspace updated successfully",
@@ -110,7 +110,7 @@ export const WorkspaceDetails: FC = observer(() => {
     fileService.deleteFile(currentWorkspace.id, url).then(() => {
       updateWorkspace(currentWorkspace.slug, { logo: "" })
         .then(() => {
-          setToastAlert({
+          toast.error({
             type: "success",
             title: "Success!",
             message: "Workspace picture removed successfully.",
@@ -118,7 +118,7 @@ export const WorkspaceDetails: FC = observer(() => {
           setIsImageUploadModalOpen(false);
         })
         .catch(() => {
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "There was some error in deleting your profile picture. Please try again.",
@@ -132,7 +132,7 @@ export const WorkspaceDetails: FC = observer(() => {
     if (!currentWorkspace) return;
 
     copyUrlToClipboard(`${currentWorkspace.slug}`).then(() => {
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Workspace URL copied to the clipboard.",
       });

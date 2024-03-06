@@ -37,7 +37,7 @@ export const ProfileLayoutSidebar = observer(() => {
   // next themes
   const { setTheme } = useTheme();
   // toast
-  const { setToastAlert } = useToast();
+
   // store hooks
   const {
     theme: { sidebarCollapsed, toggleSidebar },
@@ -92,7 +92,7 @@ export const ProfileLayoutSidebar = observer(() => {
         router.push("/");
       })
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Failed to sign out. Please try again.",

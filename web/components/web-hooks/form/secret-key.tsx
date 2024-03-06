@@ -30,21 +30,21 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
   const { currentWorkspace } = useWorkspace();
   const { currentWebhook, regenerateSecretKey, webhookSecretKey } = useWebhook();
   // hooks
-  const { setToastAlert } = useToast();
+
 
   const handleCopySecretKey = () => {
     if (!webhookSecretKey) return;
 
     copyTextToClipboard(webhookSecretKey)
       .then(() =>
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "Secret key copied to clipboard.",
         })
       )
       .catch(() =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Error occurred while copying secret key.",
@@ -59,7 +59,7 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
 
     regenerateSecretKey(workspaceSlug.toString(), data.id)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Success!",
           message: "New key regenerated successfully.",
@@ -71,7 +71,7 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
         }
       })
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err?.error ?? "Something went wrong. Please try again.",

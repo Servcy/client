@@ -63,7 +63,7 @@ export const CommandPalette: FC = observer(() => {
     createIssueStoreType,
   } = commandPalette;
 
-  const { setToastAlert } = useToast();
+
 
   const { data: issueDetails } = useSWR(
     workspaceSlug && projectId && issueId ? ISSUE_DETAILS(issueId as string) : null,
@@ -78,13 +78,13 @@ export const CommandPalette: FC = observer(() => {
     const url = new URL(window.location.href);
     copyTextToClipboard(url.href)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Copied to clipboard",
         });
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Some error occurred",
         });

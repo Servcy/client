@@ -70,7 +70,7 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
   // hooks
   const { getProjectById } = useProject();
   const { captureIssueEvent } = useEventTracker();
-  const { setToastAlert } = useToast();
+
 
   const projectDetail = (projectId && getProjectById(projectId.toString())) || undefined;
 
@@ -119,7 +119,7 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
             path: router.asPath,
           });
         }));
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Success!",
         message: "Issue created successfully.",
@@ -130,7 +130,7 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
         payload: { ...payload, state: "FAILED", element: "Gantt quick add" },
         path: router.asPath,
       });
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: err?.message || "Some error occurred. Please try again.",

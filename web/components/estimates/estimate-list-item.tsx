@@ -27,7 +27,7 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
   // store hooks
   const { currentProjectDetails, updateProject } = useProject();
   // hooks
-  const { setToastAlert } = useToast();
+
 
   const handleUseEstimate = async () => {
     if (!workspaceSlug || !projectId) return;
@@ -38,7 +38,7 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
       const error = err?.error;
       const errorString = Array.isArray(error) ? error[0] : error;
 
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: errorString ?? "Estimate points could not be used. Please try again.",

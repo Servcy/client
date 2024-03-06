@@ -24,7 +24,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
   // hooks
   const { createAttachment, removeAttachment } = useIssueDetail();
   const { captureIssueEvent } = useEventTracker();
-  const { setToastAlert } = useToast();
+
 
   const handleAttachmentOperations: TAttachmentOperations = useMemo(
     () => ({
@@ -32,7 +32,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
         try {
           if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields");
           const res = await createAttachment(workspaceSlug, projectId, issueId, data);
-          setToastAlert({
+          toast.error({
             message: "The attachment has been successfully uploaded",
             type: "success",
             title: "Attachment uploaded",
@@ -50,7 +50,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
             eventName: "Issue attachment added",
             payload: { id: issueId, state: "FAILED", element: "Issue detail page" },
           });
-          setToastAlert({
+          toast.error({
             message: "The attachment could not be uploaded",
             type: "error",
             title: "Attachment not uploaded",
@@ -61,7 +61,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
         try {
           if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields");
           await removeAttachment(workspaceSlug, projectId, issueId, attachmentId);
-          setToastAlert({
+          toast.error({
             message: "The attachment has been successfully removed",
             type: "success",
             title: "Attachment removed",
@@ -83,7 +83,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
               change_details: "",
             },
           });
-          setToastAlert({
+          toast.error({
             message: "The Attachment could not be removed",
             type: "error",
             title: "Attachment not removed",

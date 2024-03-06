@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useIssueDetail, useMember } from "@hooks/store";
 // ui
 import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
@@ -27,7 +26,7 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
     link: { getLinkById },
   } = useIssueDetail();
   const { getUserDetails } = useMember();
-  const { setToastAlert } = useToast();
+
 
   // state
   const [isIssueLinkModalOpen, setIsIssueLinkModalOpen] = useState(false);
@@ -55,7 +54,7 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
           className="flex w-full items-start justify-between gap-2 cursor-pointer"
           onClick={() => {
             copyTextToClipboard(linkDetail.url);
-            setToastAlert({
+            toast.error({
               type: "success",
               title: "Link copied!",
               message: "Link copied to clipboard",

@@ -51,8 +51,8 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
   // store hooks
   const { captureWorkspaceEvent } = useEventTracker();
   const { createWorkspace } = useWorkspace();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const {
     handleSubmit,
@@ -79,7 +79,7 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                   element: "Create workspace page",
                 },
               });
-              setToastAlert({
+              toast.error({
                 type: "success",
                 title: "Success!",
                 message: "Workspace created successfully.",
@@ -95,7 +95,7 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                   element: "Create workspace page",
                 },
               });
-              setToastAlert({
+              toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Workspace could not be created. Please try again.",
@@ -104,7 +104,7 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
         } else setSlugError(true);
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Some error occurred while creating workspace. Please try again.",

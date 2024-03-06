@@ -4,8 +4,7 @@ import { XCircle } from "lucide-react";
 import { observer } from "mobx-react-lite";
 // services
 import { AuthService } from "@services/auth.service";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
 // helpers
@@ -27,7 +26,7 @@ const authService = new AuthService();
 export const SignInEmailForm: React.FC<Props> = observer((props) => {
   const { onSubmit, updateEmail } = props;
   // hooks
-  const { setToastAlert } = useToast();
+
   const {
     control,
     formState: { errors, isSubmitting, isValid },
@@ -52,7 +51,7 @@ export const SignInEmailForm: React.FC<Props> = observer((props) => {
       .emailCheck(payload)
       .then((res) => onSubmit(res.is_password_autoset))
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: err?.error ?? "Something went wrong. Please try again.",

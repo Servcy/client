@@ -35,8 +35,8 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
     workspace: { updateMember, removeMemberFromWorkspace, getWorkspaceMemberDetails },
   } = useMember();
   const { captureEvent } = useEventTracker();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // derived values
   const memberDetails = getWorkspaceMemberDetails(memberId);
 
@@ -52,7 +52,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
         router.push("/profile");
       })
       .catch((err) =>
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error",
           message: err?.error || "Something went wrong. Please try again.",
@@ -64,7 +64,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
     if (!workspaceSlug || !memberDetails) return;
 
     await removeMemberFromWorkspace(workspaceSlug.toString(), memberDetails.member.id).catch((err) =>
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error",
         message: err?.error || "Something went wrong. Please try again.",
@@ -165,7 +165,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
               updateMember(workspaceSlug.toString(), memberDetails.member.id, {
                 role: value,
               }).catch(() => {
-                setToastAlert({
+                toast.error({
                   type: "error",
                   title: "Error!",
                   message: "An error occurred while updating member role. Please try again.",

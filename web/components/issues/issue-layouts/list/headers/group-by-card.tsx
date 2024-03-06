@@ -38,7 +38,7 @@ export const HeaderGroupByCard = observer(
 
     const isDraftIssue = router.pathname.includes("draft-issue");
 
-    const { setToastAlert } = useToast();
+
 
     const renderExistingIssueModal = moduleId || cycleId;
     const ExistingIssuesListModalPayload = moduleId ? { module: moduleId.toString() } : { cycle: true };
@@ -51,7 +51,7 @@ export const HeaderGroupByCard = observer(
       try {
         addIssuesToView && addIssuesToView(issues);
       } catch (error) {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Selected issues could not be added to the cycle. Please try again.",

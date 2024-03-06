@@ -34,7 +34,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
   // derived values
   const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
   // hooks
-  const { setToastAlert } = useToast();
+
   // form info
   const { reset, control } = useForm<IProject>({ defaultValues });
   // fetching user members
@@ -72,7 +72,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
     })
       .then(() => {
         fetchProjectDetails(workspaceSlug.toString(), projectId.toString());
-        setToastAlert({
+        toast.error({
           title: "Success",
           type: "success",
           message: "Project updated successfully",

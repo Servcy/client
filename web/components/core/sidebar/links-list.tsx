@@ -6,8 +6,7 @@ import { Pencil, Trash2, LinkIcon } from "lucide-react";
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 // types
 import { ILinkDetails, UserAuth } from "@servcy/types";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { observer } from "mobx-react";
 import { useMeasure } from "@nivo/core";
 import { useMember } from "@hooks/store";
@@ -21,14 +20,14 @@ type Props = {
 
 export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, handleEditLink, userAuth }) => {
   // toast
-  const { setToastAlert } = useToast();
+
   const { getUserDetails } = useMember();
 
   const isNotAllowed = userAuth.isGuest || userAuth.isViewer;
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    setToastAlert({
+    toast.error({
       message: "The URL has been successfully copied to your clipboard",
       type: "success",
       title: "Copied to clipboard",

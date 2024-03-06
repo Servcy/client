@@ -26,8 +26,8 @@ export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
   const { workspaceSlug, projectId } = router.query;
   // store hooks
   const { deleteEstimate } = useEstimate();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleEstimateDelete = () => {
     if (!workspaceSlug || !projectId) return;
@@ -43,7 +43,7 @@ export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
         const error = err?.error;
         const errorString = Array.isArray(error) ? error[0] : error;
 
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: errorString ?? "Estimate could not be deleted. Please try again",

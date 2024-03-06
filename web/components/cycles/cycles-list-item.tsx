@@ -45,8 +45,8 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
   } = useUser();
   const { getCycleById, addCycleToFavorites, removeCycleFromFavorites } = useCycle();
   const { getUserDetails } = useMember();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const handleCopyText = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -54,7 +54,7 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
     const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
 
     copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`).then(() => {
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Link Copied!",
         message: "Cycle link copied to clipboard.",
@@ -75,7 +75,7 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
         });
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Couldn't add the cycle to favorites. Please try again.",
@@ -96,7 +96,7 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
         });
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Couldn't add the cycle to favorites. Please try again.",

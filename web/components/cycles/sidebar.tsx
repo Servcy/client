@@ -60,8 +60,8 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
   // derived values
   const cycleDetails = getCycleById(cycleId);
   const cycleOwnerDetails = cycleDetails ? getUserDetails(cycleDetails.owned_by_id) : undefined;
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
   // form info
   const { control, reset } = useForm({
     defaultValues,
@@ -98,14 +98,14 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
   const handleCopyText = () => {
     copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`)
       .then(() => {
-        setToastAlert({
+        toast.error({
           type: "success",
           title: "Link Copied!",
           message: "Cycle link copied to clipboard.",
         });
       })
       .catch(() => {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Some error occurred",
         });
@@ -147,13 +147,13 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
 
     if (isDateValid) {
       submitChanges(payload, "date_range");
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Success!",
         message: "Cycle updated successfully.",
       });
     } else {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message:

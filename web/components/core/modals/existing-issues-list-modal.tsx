@@ -3,8 +3,7 @@ import { Combobox, Dialog, Transition } from "@headlessui/react";
 import { Rocket, Search, X } from "lucide-react";
 // services
 import { ProjectService } from "@services/project";
-// hooks
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import useDebounce from "@hooks/use-debounce";
 // ui
 import { Button, LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
@@ -43,7 +42,7 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
 
   const debouncedSearchTerm: string = useDebounce(searchTerm, 500);
 
-  const { setToastAlert } = useToast();
+
 
   const handleClose = () => {
     onClose();
@@ -54,7 +53,7 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
 
   const onSubmit = async () => {
     if (selectedIssues.length === 0) {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Please select at least one issue.",
@@ -69,7 +68,7 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
 
     handleClose();
 
-    setToastAlert({
+    toast.error({
       title: "Success",
       type: "success",
       message: `Issue${selectedIssues.length > 1 ? "s" : ""} added successfully`,

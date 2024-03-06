@@ -41,7 +41,7 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
     membership: { leaveProject },
   } = useUser();
   // toast
-  const { setToastAlert } = useToast();
+
 
   const {
     control,
@@ -71,7 +71,7 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
               });
             })
             .catch(() => {
-              setToastAlert({
+              toast.error({
                 type: "error",
                 title: "Error!",
                 message: "Something went wrong please try again later.",
@@ -82,21 +82,21 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
               });
             });
         } else {
-          setToastAlert({
+          toast.error({
             type: "error",
             title: "Error!",
             message: "Please confirm leaving the project by typing the 'Leave Project'.",
           });
         }
       } else {
-        setToastAlert({
+        toast.error({
           type: "error",
           title: "Error!",
           message: "Please enter the project name as shown in the description.",
         });
       }
     } else {
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: "Please fill all fields.",

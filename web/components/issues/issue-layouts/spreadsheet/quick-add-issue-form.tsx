@@ -84,7 +84,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
   // hooks
   useKeypress("Escape", handleClose);
   useOutsideClickDetector(ref, handleClose);
-  const { setToastAlert } = useToast();
+
 
   useEffect(() => {
     setFocus("name");
@@ -100,7 +100,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
     Object.keys(errors).forEach((key) => {
       const error = errors[key as keyof TIssue];
 
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: error?.message?.toString() || "Some error occurred. Please try again.",
@@ -130,7 +130,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
   //       payload
   //     );
 
-  //     setToastAlert({
+  //     toast.error({
   //       type: "success",
   //       title: "Success!",
   //       message: "Issue created successfully.",
@@ -140,7 +140,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
   //       const error = err?.[key];
   //       const errorTitle = error ? (Array.isArray(error) ? error.join(", ") : error) : null;
 
-  //       setToastAlert({
+  //       toast.error({
   //         type: "error",
   //         title: "Error!",
   //         message: errorTitle || "Some error occurred. Please try again.",
@@ -170,7 +170,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
             });
           }
         ));
-      setToastAlert({
+      toast.error({
         type: "success",
         title: "Success!",
         message: "Issue created successfully.",
@@ -182,7 +182,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
         path: router.asPath,
       });
       console.error(err);
-      setToastAlert({
+      toast.error({
         type: "error",
         title: "Error!",
         message: err?.message || "Some error occurred. Please try again.",

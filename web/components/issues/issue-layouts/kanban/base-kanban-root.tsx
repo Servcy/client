@@ -80,8 +80,8 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
   } = useUser();
   const { captureIssueEvent } = useEventTracker();
   const { issueMap } = useIssues();
-  // toast alert
-  const { setToastAlert } = useToast();
+
+
 
   const issueIds = issues?.groupedIssueIds || [];
 
@@ -159,7 +159,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
           issueIds,
           viewId
         ).catch((err) => {
-          setToastAlert({
+          toast.error({
             title: "Error",
             type: "error",
             message: err.detail ?? "Failed to perform this action",
