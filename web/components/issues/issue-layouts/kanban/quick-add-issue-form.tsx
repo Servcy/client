@@ -114,11 +114,7 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
                         path: router.asPath,
                     })
                 }))
-            toast.error({
-                type: "success",
-                title: "Success!",
-                message: "Issue created successfully.",
-            })
+            toast.success("Issue created successfully.")
         } catch (err: any) {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
@@ -126,9 +122,7 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
                 path: router.asPath,
             })
             console.error(err)
-            toast.error({
-                message: err?.message || "Some error occurred. Please try again.",
-            })
+            toast.error(err?.message || "Some error occurred. Please try again.")
         }
     }
 

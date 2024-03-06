@@ -118,9 +118,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
         if (!workspaceSlug || !projectId) return
 
         addCycleToFavorites(workspaceSlug?.toString(), projectId.toString(), activeCycle.id).catch(() => {
-            toast.error({
-                message: "Couldn't add the cycle to favorites. Please try again.",
-            })
+            toast.error("Couldn't add the cycle to favorites. Please try again.")
         })
     }
 
@@ -129,9 +127,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
         if (!workspaceSlug || !projectId) return
 
         removeCycleFromFavorites(workspaceSlug?.toString(), projectId.toString(), activeCycle.id).catch(() => {
-            toast.error({
-                message: "Couldn't add the cycle to favorites. Please try again.",
-            })
+            toast.error("Couldn't add the cycle to favorites. Please try again.")
         })
     }
 
@@ -272,7 +268,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                                                 <span
                                                     className="block h-3 w-3 rounded-full "
                                                     style={{
-                                                        backgroundColor: CYCLE_STATE_GROUPS_DETAILS[index].color,
+                                                        backgroundColor: CYCLE_STATE_GROUPS_DETAILS[index]?.color,
                                                     }}
                                                 />
                                                 <span className="text-xs capitalize">{group}</span>

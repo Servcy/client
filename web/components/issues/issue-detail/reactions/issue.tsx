@@ -71,7 +71,7 @@ export const IssueReaction: FC<TIssueReaction> = observer((props) => {
                 else await issueReactionOperations.create(reaction)
             },
         }),
-        [workspaceSlug, projectId, issueId, currentUser, createReaction, removeReaction, setToastAlert, userReactions]
+        [workspaceSlug, projectId, issueId, currentUser, createReaction, removeReaction, userReactions]
     )
 
     return (

@@ -6,7 +6,7 @@ import { ContrastIcon, FileText, Inbox, Layers } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
-import { useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
+import { useEventTracker, useProject, useUser } from "@hooks/store"
 
 import { EUserProjectRoles } from "@constants/project"
 
@@ -63,11 +63,7 @@ export const ProjectFeaturesList: FC<Props> = observer(() => {
 
     const handleSubmit = async (formData: Partial<IProject>) => {
         if (!workspaceSlug || !projectId || !currentProjectDetails) return
-        toast.error({
-            type: "success",
-            title: "Success!",
-            message: "Project feature updated successfully.",
-        })
+        toast.success("Project feature updated successfully.")
         updateProject(workspaceSlug.toString(), projectId.toString(), formData)
     }
 

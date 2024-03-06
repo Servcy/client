@@ -101,11 +101,9 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
         Object.keys(errors).forEach((key) => {
             const error = errors[key as keyof TIssue]
 
-            toast.error({
-                message: error?.message?.toString() || "Some error occurred. Please try again.",
-            })
+            toast.error(error?.message?.toString() || "Some error occurred. Please try again.")
         })
-    }, [errors, setToastAlert])
+    }, [errors])
 
     const onSubmitHandler = async (formData: TIssue) => {
         if (isSubmitting || !workspaceSlug || !projectId) return
@@ -133,11 +131,7 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
                         path: router.asPath,
                     })
                 }))
-            toast.error({
-                type: "success",
-                title: "Success!",
-                message: "Issue created successfully.",
-            })
+            toast.success("Issue created successfully.")
         } catch (err: any) {
             console.error(err)
             captureIssueEvent({
@@ -145,9 +139,7 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
                 payload: { ...payload, state: "FAILED", element: "Calendar quick add" },
                 path: router.asPath,
             })
-            toast.error({
-                message: err?.message || "Some error occurred. Please try again.",
-            })
+            toast.error(err?.message || "Some error occurred. Please try again.")
         }
     }
 

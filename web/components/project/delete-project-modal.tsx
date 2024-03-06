@@ -7,7 +7,7 @@ import { AlertTriangle } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-import { useEventTracker, useProject, useWorkspace } from "@hooks/store"
+import { useEventTracker, useProject } from "@hooks/store"
 
 import { PROJECT_DELETED } from "@constants/event-tracker"
 
@@ -29,7 +29,6 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
     const { isOpen, project, onClose } = props
     // store hooks
     const { captureProjectEvent } = useEventTracker()
-    const { currentWorkspace } = useWorkspace()
     const { deleteProject } = useProject()
     // router
     const router = useRouter()
@@ -67,20 +66,14 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
                     eventName: PROJECT_DELETED,
                     payload: { ...project, state: "SUCCESS", element: "Project general settings" },
                 })
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Project deleted successfully.",
-                })
+                toast.success("Project deleted successfully.")
             })
             .catch(() => {
                 captureProjectEvent({
                     eventName: PROJECT_DELETED,
                     payload: { ...project, state: "FAILED", element: "Project general settings" },
                 })
-                toast.error({
-                    message: "Something went wrong. Please try again later.",
-                })
+                toast.error("Something went wrong. Please try again later.")
             })
     }
 

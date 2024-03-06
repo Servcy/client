@@ -95,7 +95,7 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
                 }
             },
         }),
-        [workspaceSlug, projectId, issueId, createLink, updateLink, removeLink, setToastAlert, toggleIssueLinkModal]
+        [workspaceSlug, projectId, issueId, createLink, updateLink, removeLink, toggleIssueLinkModal]
     )
 
     return (

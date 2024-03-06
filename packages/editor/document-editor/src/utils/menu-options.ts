@@ -20,7 +20,6 @@ export interface MenuOptionsProps {
 
 export const getMenuOptions = ({
   editor,
-  router,
   duplicationConfig,
   pageLockConfig,
   pageArchiveConfig,
@@ -41,13 +40,6 @@ export const getMenuOptions = ({
       },
       label: "Copy markdown",
     },
-    // {
-    //   key: 2,
-    //   type: "close_page",
-    //   Icon: XCircle,
-    //   action: () => router.back(),
-    //   label: "Close page",
-    // },
     {
       key: 3,
       type: "copy_page_link",
@@ -84,6 +76,7 @@ export const getMenuOptions = ({
             onActionCompleteHandler({
               title: "Copy Failed",
               message: "Sorry, page cannot be copied, please try again later.",
+              type: "error",
             });
           });
       },
@@ -112,6 +105,7 @@ export const getMenuOptions = ({
             onActionCompleteHandler({
               title: `Page cannot be ${state}`,
               message: `Sorry, page cannot be ${state}, please try again later`,
+              type: "error",
             });
           });
       },

@@ -79,9 +79,7 @@ const ProfileActivityPage: NextPageWithWrapper = observer(() => {
                                                 <div className="min-w-0 flex-1">
                                                     <div>
                                                         <div className="text-xs">
-                                                            {activityItem.actor_detail.is_bot
-                                                                ? activityItem.actor_detail.first_name + " Bot"
-                                                                : activityItem.actor_detail.display_name}
+                                                            {activityItem.actor_detail.display_name}
                                                         </div>
                                                         <p className="mt-0.5 text-xs text-custom-text-200">
                                                             Commented {calculateTimeAgo(activityItem.created_at)}
@@ -167,10 +165,6 @@ const ProfileActivityPage: NextPageWithWrapper = observer(() => {
                                                                 activityItem.new_value !== "restore" ? (
                                                                     <span className="text-gray font-medium">
                                                                         Servcy
-                                                                    </span>
-                                                                ) : activityItem.actor_detail.is_bot ? (
-                                                                    <span className="text-gray font-medium">
-                                                                        {activityItem.actor_detail.first_name} Bot
                                                                     </span>
                                                                 ) : (
                                                                     <Link

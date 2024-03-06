@@ -319,12 +319,7 @@ export const InviteMembers: React.FC<Props> = (props) => {
                     state: "SUCCESS",
                     element: "Onboarding",
                 })
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Invitations sent successfully.",
-                })
-
+                toast.success("Invitations sent successfully.")
                 await nextStep()
             })
             .catch((err) => {
@@ -333,9 +328,7 @@ export const InviteMembers: React.FC<Props> = (props) => {
                     state: "FAILED",
                     element: "Onboarding",
                 })
-                toast.error({
-                    message: err?.error,
-                })
+                toast.error(err?.error)
             })
     }
 

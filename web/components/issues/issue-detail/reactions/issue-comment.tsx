@@ -36,17 +36,9 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
                 try {
                     if (!workspaceSlug || !projectId || !commentId) throw new Error("Missing fields")
                     await createCommentReaction(workspaceSlug, projectId, commentId, reaction)
-                    toast.error({
-                        title: "Reaction created successfully",
-                        type: "success",
-                        message: "Reaction created successfully",
-                    })
+                    toast.success("Reaction created successfully")
                 } catch (error) {
-                    toast.error({
-                        title: "Reaction creation failed",
-                        
-                        message: "Reaction creation failed",
-                    })
+                    toast.error("Reaction creation failed")
                 }
             },
             remove: async (reaction: string) => {
@@ -54,17 +46,9 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
                     if (!workspaceSlug || !projectId || !commentId || !currentUser?.id)
                         throw new Error("Missing fields")
                     removeCommentReaction(workspaceSlug, projectId, commentId, reaction, currentUser.id)
-                    toast.error({
-                        title: "Reaction removed successfully",
-                        type: "success",
-                        message: "Reaction removed successfully",
-                    })
+                    toast.success("Reaction removed successfully")
                 } catch (error) {
-                    toast.error({
-                        title: "Reaction remove failed",
-                        
-                        message: "Reaction remove failed",
-                    })
+                    toast.error("Reaction remove failed")
                 }
             },
             react: async (reaction: string) => {
@@ -79,7 +63,6 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
             currentUser,
             createCommentReaction,
             removeCommentReaction,
-            setToastAlert,
             userReactions,
         ]
     )
@@ -96,7 +79,7 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
             {reactionIds &&
                 Object.keys(reactionIds || {}).map(
                     (reaction) =>
-                        reactionIds[reaction]?.length > 0 && (
+                        (reactionIds[reaction]?.length ?? 0) > 0 && (
                             <>
                                 <button
                                     type="button"
@@ -110,7 +93,7 @@ export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) 
                                 >
                                     <span>{renderEmoji(reaction)}</span>
                                     <span className={userReactions.includes(reaction) ? "text-custom-primary-100" : ""}>
-                                        {(reactionIds || {})[reaction].length}{" "}
+                                        {(reactionIds || {})[reaction]?.length}{" "}
                                     </span>
                                 </button>
                             </>

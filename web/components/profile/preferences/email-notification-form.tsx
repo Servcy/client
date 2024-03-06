@@ -42,13 +42,7 @@ export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) =>
         })
         await userService
             .updateCurrentUserEmailNotificationSettings(payload)
-            .then(() =>
-                toast.error({
-                    title: "Success",
-                    type: "success",
-                    message: "Email Notification Settings updated successfully",
-                })
-            )
+            .then(() => toast.success("Email Notification Settings updated successfully"))
             .catch((err) => console.error(err))
     }
 

@@ -99,9 +99,7 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
     }
 
     const handleInvalidTask = () => {
-        toast.error({
-            message: "Please enter some task to get AI assistance.",
-        })
+        toast.error("Please enter some task to get AI assistance.")
     }
 
     const handleAIResponse = async (formData: FormData) => {
@@ -190,8 +188,8 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
                     as="div"
                     className={`fixed z-10 flex flex-col w-full max-w-full min-w-[50rem] space-y-4 overflow-hidden rounded-[10px] border border-custom-border-200 bg-custom-background-100 p-4 shadow ${className}`}
                     ref={setPopperElement}
-                    style={styles.popper}
-                    {...attributes.popper}
+                    style={styles?.["popper"]}
+                    {...attributes?.["popper"]}
                 >
                     <div className="vertical-scroll-enable max-h-72 space-y-4 overflow-y-auto">
                         {prompt && (

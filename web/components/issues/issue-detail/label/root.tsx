@@ -69,7 +69,7 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
                 }
             },
         }),
-        [updateIssue, createLabel, setToastAlert, onLabelUpdate]
+        [updateIssue, createLabel, onLabelUpdate]
     )
 
     return (

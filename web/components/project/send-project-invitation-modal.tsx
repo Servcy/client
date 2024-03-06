@@ -8,13 +8,11 @@ import { observer } from "mobx-react-lite"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
+import { useEventTracker, useMember, useUser } from "@hooks/store"
 
 import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker"
 import { EUserProjectRoles } from "@constants/project"
 import { ROLE } from "@constants/workspace"
-
-import { getUserRole } from "@helpers/user.helper"
 
 import { Avatar, Button, CustomSearchSelect, CustomSelect } from "@servcy/ui"
 
@@ -85,11 +83,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
             .then(() => {
                 if (onSuccess) onSuccess()
                 onClose()
-                toast.error({
-                    title: "Success",
-                    type: "success",
-                    message: "Members added successfully.",
-                })
+                toast.success("Members added successfully.")
                 captureEvent(PROJECT_MEMBER_ADDED, {
                     members: [
                         ...payload.members.map((member) => ({

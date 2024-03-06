@@ -105,7 +105,7 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                 }
             },
         }),
-        [workspaceSlug, projectId, issueId, createComment, updateComment, removeComment, setToastAlert]
+        [workspaceSlug, projectId, issueId, createComment, updateComment, removeComment]
     )
 
     const project = getProjectById(projectId)

@@ -48,7 +48,7 @@ export const Workspace: React.FC<Props> = (props) => {
                         .then(async (res) => {
                             toast.error({
                                 type: "success",
-                                title: "Success!",
+                                
                                 message: "Workspace created successfully.",
                             })
                             captureWorkspaceEvent({

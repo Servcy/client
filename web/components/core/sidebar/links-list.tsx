@@ -1,4 +1,3 @@
-import { useMeasure } from "@nivo/core"
 import { LinkIcon, Pencil, Trash2 } from "lucide-react"
 import { observer } from "mobx-react"
 import toast from "react-hot-toast"
@@ -26,11 +25,7 @@ export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, h
 
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text)
-        toast.error({
-            message: "The URL has been successfully copied to your clipboard",
-            type: "success",
-            title: "Copied to clipboard",
-        })
+        toast.success("Copied to clipboard")
     }
 
     return (
@@ -98,9 +93,7 @@ export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, h
                                 {createdByDetails && (
                                     <>
                                         by{" "}
-                                        {createdByDetails?.is_bot
-                                            ? createdByDetails?.first_name + " Bot"
-                                            : createdByDetails?.display_name}
+                                        {createdByDetails?.display_name}
                                     </>
                                 )}
                             </p>

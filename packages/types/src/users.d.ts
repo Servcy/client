@@ -57,7 +57,6 @@ export interface IUserLite {
     email?: string
     first_name: string
     id: string
-    is_bot: boolean
     last_name: string
 }
 

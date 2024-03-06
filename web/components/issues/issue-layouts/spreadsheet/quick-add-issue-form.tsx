@@ -100,52 +100,9 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
         Object.keys(errors).forEach((key) => {
             const error = errors[key as keyof TIssue]
 
-            toast.error({
-                message: error?.message?.toString() || "Some error occurred. Please try again.",
-            })
+            toast.error(error?.message?.toString() || "Some error occurred. Please try again.")
         })
-    }, [errors, setToastAlert])
-
-    // const onSubmitHandler = async (formData: TIssue) => {
-    //   if (isSubmitting || !workspaceSlug || !projectId) return;
-
-    //   // resetting the form so that user can add another issue quickly
-    //   reset({ ...defaultValues });
-
-    //   const payload = createIssuePayload(workspaceDetail!, projectDetails!, {
-    //     ...(prePopulatedData ?? {}),
-    //     ...formData,
-    //   });
-
-    //   try {
-    //     quickAddStore.createIssue(
-    //       workspaceSlug.toString(),
-    //       projectId.toString(),
-    //       {
-    //         group_id: groupId ?? null,
-    //         sub_group_id: null,
-    //       },
-    //       payload
-    //     );
-
-    //     toast.error({
-    //       type: "success",
-    //       title: "Success!",
-    //       message: "Issue created successfully.",
-    //     });
-    //   } catch (err: any) {
-    //     Object.keys(err || {}).forEach((key) => {
-    //       const error = err?.[key];
-    //       const errorTitle = error ? (Array.isArray(error) ? error.join(", ") : error) : null;
-
-    //       toast.error({
-    //         
-    //         title: "Error!",
-    //         message: errorTitle || "Some error occurred. Please try again.",
-    //       });
-    //     });
-    //   }
-    // };
+    }, [errors])
 
     const onSubmitHandler = async (formData: TIssue) => {
         if (isSubmitting || !currentWorkspace || !currentProjectDetails) return
@@ -171,11 +128,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
                         path: router.asPath,
                     })
                 }))
-            toast.error({
-                type: "success",
-                title: "Success!",
-                message: "Issue created successfully.",
-            })
+            toast.success("Issue created successfully.")
         } catch (err: any) {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
@@ -183,9 +136,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
                 path: router.asPath,
             })
             console.error(err)
-            toast.error({
-                message: err?.message || "Some error occurred. Please try again.",
-            })
+            toast.error(err?.message || "Some error occurred. Please try again.")
         }
     }
 

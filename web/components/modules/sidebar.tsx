@@ -103,16 +103,10 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     module_id: moduleId,
                     state: "SUCCESS",
                 })
-                toast.error({
-                    type: "success",
-                    title: "Module link created",
-                    message: "Module link created successfully.",
-                })
+                toast.success("Module link created successfully.")
             })
             .catch(() => {
-                toast.error({
-                    message: "Some error occurred",
-                })
+                toast.error("Some error occurred")
             })
     }
 
@@ -127,16 +121,10 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     module_id: moduleId,
                     state: "SUCCESS",
                 })
-                toast.error({
-                    type: "success",
-                    title: "Module link updated",
-                    message: "Module link updated successfully.",
-                })
+                toast.success("Module link updated successfully.")
             })
             .catch(() => {
-                toast.error({
-                    message: "Some error occurred",
-                })
+                toast.error("Some error occurred")
             })
     }
 
@@ -149,32 +137,20 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     module_id: moduleId,
                     state: "SUCCESS",
                 })
-                toast.error({
-                    type: "success",
-                    title: "Module link deleted",
-                    message: "Module link deleted successfully.",
-                })
+                toast.success("Module link deleted successfully.")
             })
             .catch(() => {
-                toast.error({
-                    message: "Some error occurred",
-                })
+                toast.error("Some error occurred")
             })
     }
 
     const handleCopyText = () => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`)
             .then(() => {
-                toast.error({
-                    type: "success",
-                    title: "Link copied",
-                    message: "Module link copied to clipboard",
-                })
+                toast.success("Module link copied to clipboard")
             })
             .catch(() => {
-                toast.error({
-                    message: "Some error occurred",
-                })
+                toast.error("Some error occurred")
             })
     }
 
@@ -183,11 +159,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
             start_date: startDate ? renderFormattedPayloadDate(startDate) : null,
             target_date: targetDate ? renderFormattedPayloadDate(targetDate) : null,
         })
-        toast.error({
-            type: "success",
-            title: "Success!",
-            message: "Module updated successfully.",
-        })
+        toast.success("Module date range updated successfully.")
     }
 
     useEffect(() => {

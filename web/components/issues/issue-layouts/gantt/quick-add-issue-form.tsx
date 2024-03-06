@@ -122,20 +122,14 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
                         })
                     }
                 ))
-            toast.error({
-                type: "success",
-                title: "Success!",
-                message: "Issue created successfully.",
-            })
+            toast.success("Issue created successfully.")
         } catch (err: any) {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Gantt quick add" },
                 path: router.asPath,
             })
-            toast.error({
-                message: err?.message || "Some error occurred. Please try again.",
-            })
+            toast.error(err?.message || "Some error occurred. Please try again.")
         }
     }
     return (

@@ -62,11 +62,7 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
         await issueDraftService
             .createDraftIssue(workspaceSlug.toString(), projectId.toString(), payload)
             .then((res) => {
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Draft Issue created successfully.",
-                })
+                toast.success("Draft Issue created successfully.")
                 captureIssueEvent({
                     eventName: "Draft issue created",
                     payload: { ...res, state: "SUCCESS" },
@@ -77,10 +73,7 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
                 onClose(false)
             })
             .catch(() => {
-                toast.error({
-                    title: "Error!",
-                    message: "Issue could not be created. Please try again.",
-                })
+                toast.error("Issue could not be created. Please try again.")
                 captureIssueEvent({
                     eventName: "Draft issue created",
                     payload: { ...payload, state: "FAILED" },

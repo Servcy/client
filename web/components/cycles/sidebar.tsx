@@ -95,17 +95,10 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     const handleCopyText = () => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`)
             .then(() => {
-                toast.error({
-                    type: "success",
-                    title: "Link Copied!",
-                    message: "Cycle link copied to clipboard.",
-                })
+                toast.success("Cycle link copied to clipboard.")
             })
             .catch(() => {
-                toast.error({
-                    
-                    title: "Some error occurred",
-                })
+                toast.error("Some error occurred")
             })
     }
 
@@ -144,16 +137,9 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
 
         if (isDateValid) {
             submitChanges(payload, "date_range")
-            toast.error({
-                type: "success",
-                title: "Success!",
-                message: "Cycle updated successfully.",
-            })
+            toast.success("Cycle updated successfully.")
         } else {
-            toast.error({
-                message:
-                    "You already have a cycle on the given dates, if you want to create a draft cycle, you can do that by removing both the dates.",
-            })
+            toast.error("You already have a cycle on the given dates, if you want to create a draft cycle, you can do that by removing both the dates.")
             reset({ ...cycleDetails })
         }
     }

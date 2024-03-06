@@ -63,10 +63,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
             icon: <MessageSquare className="h-3.5 w-3.5 text-custom-text-300" />,
             onClick: () => {
                 markNotificationReadStatusToggle(notification.id).then(() => {
-                    toast.error({
-                        title: notification.read_at ? "Notification marked as read" : "Notification marked as unread",
-                        type: "success",
-                    })
+                    toast.success(notification.read_at ? "Notification marked as read" : "Notification marked as unread")
                 })
             },
         },
@@ -80,10 +77,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
             ),
             onClick: () => {
                 markNotificationArchivedStatus(notification.id).then(() => {
-                    toast.error({
-                        title: notification.archived_at ? "Notification un-archived" : "Notification archived",
-                        type: "success",
-                    })
+                    toast.success(notification.archived_at ? "Notification un-archived" : "Notification archived")
                 })
             },
         },
@@ -95,10 +89,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
             return
         }
         markSnoozeNotification(notification.id, date).then(() => {
-            toast.error({
-                title: `Notification snoozed till ${renderFormattedDate(date)}`,
-                type: "success",
-            })
+            toast.success(`Notification snoozed till ${renderFormattedDate(date)}`)
         })
     }
 
@@ -156,9 +147,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                 ) : (
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-custom-background-80">
                         <span className="text-lg font-medium text-custom-text-100">
-                            {notificationTriggeredBy.is_bot ? (
-                                notificationTriggeredBy.first_name?.[0]?.toUpperCase()
-                            ) : notificationTriggeredBy.display_name?.[0] ? (
+                            {notificationTriggeredBy.display_name?.[0] ? (
                                 notificationTriggeredBy.display_name?.[0]?.toUpperCase()
                             ) : (
                                 <User2 className="h-4 w-4" />
@@ -172,9 +161,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                     {!notification.message ? (
                         <div className="w-full break-words text-sm">
                             <span className="font-semibold">
-                                {notificationTriggeredBy.is_bot
-                                    ? notificationTriggeredBy.first_name
-                                    : notificationTriggeredBy.display_name}{" "}
+                                {notificationTriggeredBy.display_name}{" "}
                             </span>
                             {!["comment", "archived_at"].includes(notificationField) &&
                                 notification.data.issue_activity.verb}{" "}
@@ -335,12 +322,9 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                     tab: selectedTab,
                                     state: "SUCCESS",
                                 })
-                                toast.error({
-                                    title: notification.read_at
+                                toast.success(notification.read_at
                                         ? "Notification marked as read"
-                                        : "Notification marked as unread",
-                                    type: "success",
-                                })
+                                        : "Notification marked as unread")
                             })
                         },
                     },
@@ -359,12 +343,9 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                     tab: selectedTab,
                                     state: "SUCCESS",
                                 })
-                                toast.error({
-                                    title: notification.archived_at
+                                toast.success(notification.archived_at
                                         ? "Notification un-archived"
-                                        : "Notification archived",
-                                    type: "success",
-                                })
+                                        : "Notification archived")
                             })
                         },
                     },
@@ -412,10 +393,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                             tab: selectedTab,
                                             state: "SUCCESS",
                                         })
-                                        toast.error({
-                                            title: `Notification snoozed till ${renderFormattedDate(item.value)}`,
-                                            type: "success",
-                                        })
+                                        toast.success(`Notification snoozed till ${renderFormattedDate(item.value)}`)
                                     })
                                 }}
                             >

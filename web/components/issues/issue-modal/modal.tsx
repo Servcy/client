@@ -190,7 +190,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
 
             toast.error({
                 type: "success",
-                title: "Success!",
+                
                 message: "Issue created successfully.",
             })
             captureIssueEvent({
@@ -222,7 +222,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
 
             toast.error({
                 type: "success",
-                title: "Success!",
+                
                 message: "Issue updated successfully.",
             })
             captureIssueEvent({

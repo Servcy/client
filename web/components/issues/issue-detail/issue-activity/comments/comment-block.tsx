@@ -30,21 +30,13 @@ export const IssueCommentBlock: FC<TIssueCommentBlock> = (props) => {
                 {comment.actor_detail.avatar && comment.actor_detail.avatar !== "" ? (
                     <img
                         src={comment.actor_detail.avatar}
-                        alt={
-                            comment.actor_detail.is_bot
-                                ? comment.actor_detail.first_name + " Bot"
-                                : comment.actor_detail.display_name
-                        }
+                        alt={comment.actor_detail.display_name}
                         height={30}
                         width={30}
                         className="grid h-7 w-7 place-items-center rounded-full border-2 border-custom-border-200"
                     />
                 ) : (
-                    <>
-                        {comment.actor_detail.is_bot
-                            ? comment.actor_detail.first_name.charAt(0)
-                            : comment.actor_detail.display_name.charAt(0)}
-                    </>
+                    <>{comment.actor_detail.display_name.charAt(0)}</>
                 )}
                 <div className="absolute top-2 left-4 w-5 h-5 rounded-full overflow-hidden flex justify-center items-center bg-custom-background-80">
                     <MessageCircle className="w-3 h-3" color="#6b7280" />
@@ -53,11 +45,7 @@ export const IssueCommentBlock: FC<TIssueCommentBlock> = (props) => {
             <div className="w-full relative flex ">
                 <div className="w-full space-y-1">
                     <div>
-                        <div className="text-xs capitalize">
-                            {comment.actor_detail.is_bot
-                                ? comment.actor_detail.first_name + " Bot"
-                                : comment.actor_detail.display_name}
-                        </div>
+                        <div className="text-xs capitalize">{comment.actor_detail.display_name}</div>
                         <div className="text-xs text-custom-text-200">
                             commented {calculateTimeAgo(comment.created_at)}
                         </div>

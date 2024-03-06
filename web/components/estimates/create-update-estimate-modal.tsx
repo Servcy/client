@@ -68,12 +68,9 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 const error = err?.error
                 const errorString = Array.isArray(error) ? error[0] : error
 
-                toast.error({
-                    message:
-                        errorString ?? err.status === 400
+                toast.error(errorString ?? err.status === 400
                             ? "Estimate with that name already exists. Please try again with another name."
-                            : "Estimate could not be created. Please try again.",
-                })
+                            : "Estimate could not be created. Please try again.")
             })
     }
 
@@ -88,17 +85,13 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 const error = err?.error
                 const errorString = Array.isArray(error) ? error[0] : error
 
-                toast.error({
-                    message: errorString ?? "Estimate could not be updated. Please try again.",
-                })
+                toast.error(errorString ?? "Estimate could not be updated. Please try again.")
             })
     }
 
     const onSubmit = async (formData: FormValues) => {
         if (!formData.name || formData.name === "") {
-            toast.error({
-                message: "Estimate title cannot be empty.",
-            })
+            toast.error("Estimate title cannot be empty.")
             return
         }
 
@@ -110,9 +103,7 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
             formData.value5 === "" ||
             formData.value6 === ""
         ) {
-            toast.error({
-                message: "Estimate point cannot be empty.",
-            })
+            toast.error("Estimate point cannot be empty.")
             return
         }
 
@@ -124,9 +115,7 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
             formData.value5.length > 20 ||
             formData.value6.length > 20
         ) {
-            toast.error({
-                message: "Estimate point cannot have more than 20 characters.",
-            })
+            toast.error("Estimate point cannot have more than 20 characters.")
             return
         }
 
@@ -140,9 +129,7 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 formData.value6,
             ])
         ) {
-            toast.error({
-                message: "Estimate points cannot have duplicate values.",
-            })
+            toast.error("Estimate points cannot have duplicate values.")
             return
         }
 
@@ -162,7 +149,7 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
 
             if (data)
                 payload.estimate_points.push({
-                    id: data.points[i].id,
+                    id: data.points[i]?.id,
                     ...point,
                 })
             else payload.estimate_points.push({ ...point })

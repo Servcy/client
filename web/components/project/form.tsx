@@ -84,20 +84,14 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                         element: "Project general settings",
                     },
                 })
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Project updated successfully",
-                })
+                toast.success("Project updated successfully")
             })
             .catch((error) => {
                 captureProjectEvent({
                     eventName: PROJECT_UPDATED,
                     payload: { ...payload, state: "FAILED", element: "Project general settings" },
                 })
-                toast.error({
-                    message: error?.error ?? "Project could not be updated. Please try again.",
-                })
+                toast.error(error?.error ?? "Project could not be updated. Please try again.")
             })
     }
     const onSubmit = async (formData: IProject) => {

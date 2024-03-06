@@ -61,9 +61,7 @@ export const RecentActivityWidget: React.FC<WidgetProps> = observer((props) => {
                                     />
                                 ) : (
                                     <div className="grid h-7 w-7 place-items-center rounded-full border-2 border-white bg-gray-700 text-xs text-white">
-                                        {activity.actor_detail.is_bot
-                                            ? activity.actor_detail.first_name.charAt(0)
-                                            : activity.actor_detail.display_name.charAt(0)}
+                                        {activity.actor_detail.display_name.charAt(0)}
                                     </div>
                                 )}
                             </div>

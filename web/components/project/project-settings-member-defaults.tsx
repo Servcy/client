@@ -14,7 +14,7 @@ import { useProject, useUser } from "@hooks/store"
 import { PROJECT_MEMBERS } from "@constants/fetch-keys"
 import { EUserProjectRoles } from "@constants/project"
 
-import { IProject, IUserLite, IWorkspace } from "@servcy/types"
+import { IProject, IUser, IUserLite, IWorkspace } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 
 const defaultValues: Partial<IProject> = {
@@ -48,7 +48,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
         reset({
             ...currentProjectDetails,
             default_assignee:
-                (currentProjectDetails.default_assignee as IUserLite)?.id ?? currentProjectDetails.default_assignee,
+                (currentProjectDetails.default_assignee as IUser)?.id ?? currentProjectDetails.default_assignee,
             project_lead: (currentProjectDetails.project_lead as IUserLite)?.id ?? currentProjectDetails.project_lead,
             workspace: (currentProjectDetails.workspace as IWorkspace).id,
         })
@@ -60,7 +60,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
         reset({
             ...currentProjectDetails,
             default_assignee:
-                (currentProjectDetails?.default_assignee as IUserLite)?.id ?? currentProjectDetails?.default_assignee,
+                (currentProjectDetails?.default_assignee as IUser)?.id ?? currentProjectDetails?.default_assignee,
             project_lead: (currentProjectDetails?.project_lead as IUserLite)?.id ?? currentProjectDetails?.project_lead,
             ...formData,
         })
@@ -71,11 +71,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
         })
             .then(() => {
                 fetchProjectDetails(workspaceSlug.toString(), projectId.toString())
-                toast.error({
-                    title: "Success",
-                    type: "success",
-                    message: "Project updated successfully",
-                })
+                toast.success("Project updated successfully")
             })
             .catch((err) => {
                 console.error(err)

@@ -11,7 +11,7 @@ import { IRouterStore } from "@store/application/router.store"
 import { RootStore } from "@store/root.store"
 import { IUserRootStore } from "@store/user"
 
-import { IWorkspaceBulkInviteFormData, IWorkspaceMember, IWorkspaceMemberInvitation } from "@servcy/types"
+import { IUserLite, IWorkspaceBulkInviteFormData, IWorkspaceMember, IWorkspaceMemberInvitation } from "@servcy/types"
 
 import { IMemberRootStore } from "."
 
@@ -101,7 +101,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
             (m) => this.memberRoot?.memberMap?.[m.member]?.display_name?.toLowerCase(),
         ])
         //filter out bots
-        const memberIds = members.filter((m) => !this.memberRoot?.memberMap?.[m.member]?.is_bot).map((m) => m.member)
+        const memberIds = members.map((m) => m.member)
         return memberIds
     }
 
@@ -114,7 +114,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
     get workspaceMemberInvitationIds() {
         const workspaceSlug = this.routerStore.workspaceSlug
         if (!workspaceSlug) return null
-        return this.workspaceMemberInvitations?.[workspaceSlug]?.map((inv) => inv.id)
+        return this.workspaceMemberInvitations?.[workspaceSlug]?.map((inv) => inv.id) ?? []
     }
 
     /**
@@ -168,7 +168,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
         const memberDetails: IWorkspaceMember = {
             id: workspaceMember.id,
             role: workspaceMember.role,
-            member: this.memberRoot?.memberMap?.[workspaceMember.member],
+            member: this.memberRoot?.memberMap?.[workspaceMember.member] ?? {} as IUserLite,
         }
         return memberDetails
     })
@@ -282,7 +282,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
         invitationId: string,
         data: Partial<IWorkspaceMemberInvitation>
     ) => {
-        const originalMemberInvitations = [...this.workspaceMemberInvitations?.[workspaceSlug]] // in case of error, we will revert back to original members
+        const originalMemberInvitations = [...(this.workspaceMemberInvitations?.[workspaceSlug] ?? [])] // in case of error, we will revert back to original members
         try {
             const memberInvitations = originalMemberInvitations?.map((invitation) => ({
                 ...invitation,
@@ -310,9 +310,9 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
     deleteMemberInvitation = async (workspaceSlug: string, invitationId: string) =>
         await this.workspaceService.deleteWorkspaceInvitations(workspaceSlug.toString(), invitationId).then(() => {
             runInAction(() => {
-                this.workspaceMemberInvitations[workspaceSlug] = this.workspaceMemberInvitations[workspaceSlug].filter(
+                this.workspaceMemberInvitations[workspaceSlug] = this.workspaceMemberInvitations[workspaceSlug]?.filter(
                     (inv) => inv.id !== invitationId
-                )
+                ) ?? []
             })
         })
 }

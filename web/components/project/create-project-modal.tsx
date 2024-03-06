@@ -34,12 +34,8 @@ interface IIsGuestCondition {
 const IsGuestCondition: FC<IIsGuestCondition> = ({ onClose }) => {
     useEffect(() => {
         onClose()
-        toast.error({
-            title: "Error",
-            
-            message: "You don't have permission to create project.",
-        })
-    }, [onClose, setToastAlert])
+        toast.error("You don't have permission to create project.")
+    }, [onClose])
 
     return null
 }
@@ -58,13 +54,13 @@ export interface ICreateProjectForm {
 }
 
 export const CreateProjectModal: FC<Props> = observer((props) => {
-    const { isOpen, onClose, setToFavorite = false, workspaceSlug } = props
+    const { isOpen, onClose, workspaceSlug } = props
     // store
     const { captureProjectEvent } = useEventTracker()
     const {
         membership: { currentWorkspaceRole },
     } = useUser()
-    const { addProjectToFavorites, createProject } = useProject()
+    const { createProject } = useProject()
     // states
     const [isChangeInIdentifierRequired, setIsChangeInIdentifierRequired] = useState(true)
     // toast
@@ -102,16 +98,6 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
         reset()
     }
 
-    const handleAddToFavorites = (projectId: string) => {
-        if (!workspaceSlug) return
-
-        addProjectToFavorites(workspaceSlug.toString(), projectId).catch(() => {
-            toast.error({
-                message: "Couldn't remove the project from favorites. Please try again.",
-            })
-        })
-    }
-
     const onSubmit = async (formData: ICreateProjectForm) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { emoji_and_icon, project_lead_member, ...payload } = formData
@@ -133,30 +119,12 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                     eventName: PROJECT_CREATED,
                     payload: newPayload,
                 })
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Project created successfully.",
-                })
-                if (setToFavorite) {
-                    handleAddToFavorites(res.id)
-                }
+                toast.success("Project created successfully.")
                 handleClose()
             })
             .catch((err) => {
                 Object.keys(err.data).map((key) => {
-                    toast.error({
-                        
-                        title: "Error!",
-                        message: err.data[key],
-                    })
-                    captureProjectEvent({
-                        eventName: PROJECT_CREATED,
-                        payload: {
-                            ...payload,
-                            state: "FAILED",
-                        },
-                    })
+                    toast.error(err.data[key])
                 })
             })
     }

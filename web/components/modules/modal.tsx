@@ -54,20 +54,14 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
         await createModule(workspaceSlug.toString(), selectedProjectId, payload)
             .then((res) => {
                 handleClose()
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Module created successfully.",
-                })
+                toast.success("Module created successfully.")
                 captureModuleEvent({
                     eventName: MODULE_CREATED,
                     payload: { ...res, state: "SUCCESS" },
                 })
             })
             .catch((err) => {
-                toast.error({
-                    message: err.detail ?? "Module could not be created. Please try again.",
-                })
+                toast.error(err.detail ?? "Module could not be created. Please try again.")
                 captureModuleEvent({
                     eventName: MODULE_CREATED,
                     payload: { ...data, state: "FAILED" },
@@ -82,21 +76,14 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
         await updateModuleDetails(workspaceSlug.toString(), selectedProjectId, data.id, payload)
             .then((res) => {
                 handleClose()
-
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Module updated successfully.",
-                })
+                toast.success("Module updated successfully.")
                 captureModuleEvent({
                     eventName: MODULE_UPDATED,
                     payload: { ...res, changed_properties: Object.keys(dirtyFields), state: "SUCCESS" },
                 })
             })
             .catch((err) => {
-                toast.error({
-                    message: err.detail ?? "Module could not be updated. Please try again.",
-                })
+                toast.error(err.detail ?? "Module could not be updated. Please try again.")
                 captureModuleEvent({
                     eventName: MODULE_UPDATED,
                     payload: { ...data, state: "FAILED" },

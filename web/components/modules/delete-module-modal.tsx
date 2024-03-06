@@ -45,20 +45,14 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
             .then(() => {
                 if (moduleId || peekModule) router.push(`/${workspaceSlug}/projects/${data.project_id}/modules`)
                 handleClose()
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Module deleted successfully.",
-                })
+                toast.success("Module deleted successfully.")
                 captureModuleEvent({
                     eventName: MODULE_DELETED,
                     payload: { ...data, state: "SUCCESS" },
                 })
             })
             .catch(() => {
-                toast.error({
-                    message: "Module could not be deleted. Please try again.",
-                })
+                toast.error("Module could not be deleted. Please try again.")
                 captureModuleEvent({
                     eventName: MODULE_DELETED,
                     payload: { ...data, state: "FAILED" },
