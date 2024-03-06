@@ -14,7 +14,7 @@ import { CycleDetailsSidebar } from "@components/cycles";
 import { CycleLayoutRoot } from "@components/issues/issue-layouts";
 
 import { EmptyState } from "@components/common";
-// assets
+
 import emptyCycle from "public/empty-state/cycle.svg";
 
 import { NextPageWithLayout } from "@lib/types";

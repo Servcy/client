@@ -4,7 +4,7 @@ import Link from "next/link";
 import { HelpCircle, MessagesSquare, MoveLeft } from "lucide-react";
 
 import { useApplication } from "@hooks/store";
-// assets
+
 import packageJson from "package.json";
 
 const helpOptions = [

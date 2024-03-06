@@ -8,7 +8,7 @@ import { useApplication, useEventTracker, useUser } from "@hooks/store";
 import { TourSidebar } from "@components/onboarding";
 
 import { Button } from "@servcy/ui";
-// assets
+
 import ServcyLogo from "public/logo.svg";
 import IssuesTour from "public/onboarding/issues.webp";
 import CyclesTour from "public/onboarding/cycles.webp";

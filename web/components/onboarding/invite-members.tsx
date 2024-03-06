@@ -31,7 +31,7 @@ import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
 import { MEMBER_INVITED } from "@constants/event-tracker";
 
 import { getUserRole } from "@helpers/user.helper";
-// assets
+
 import user1 from "public/users/user-1.png";
 import user2 from "public/users/user-2.png";
 import userDark from "public/onboarding/user-dark.svg";

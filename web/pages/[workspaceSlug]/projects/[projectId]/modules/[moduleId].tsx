@@ -13,7 +13,7 @@ import { ModuleLayoutRoot } from "@components/issues";
 import { ModuleIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 import { EmptyState } from "@components/common";
-// assets
+
 import emptyModule from "public/empty-state/module.svg";
 
 import { NextPageWithLayout } from "@lib/types";

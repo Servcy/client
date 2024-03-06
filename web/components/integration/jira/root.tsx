@@ -21,7 +21,7 @@ import {
   TJiraIntegrationSteps,
   IJiraIntegrationData,
 } from ".";
-// assets
+
 import JiraLogo from "public/services/jira.svg";
 
 import { IJiraImporterForm } from "@servcy/types";

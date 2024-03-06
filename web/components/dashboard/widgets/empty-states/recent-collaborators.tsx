@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
-// assets
+
 import DarkImage1 from "public/empty-state/dashboard/dark/recent-collaborators-1.svg";
 import DarkImage2 from "public/empty-state/dashboard/dark/recent-collaborators-2.svg";
 import DarkImage3 from "public/empty-state/dashboard/dark/recent-collaborators-3.svg";

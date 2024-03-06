@@ -8,7 +8,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 import { HelpCircle, MessagesSquare, MoveLeft, Zap } from "lucide-react";
 import { Tooltip } from "@servcy/ui";
-// assets
+
 import packageJson from "package.json";
 
 const helpOptions = [

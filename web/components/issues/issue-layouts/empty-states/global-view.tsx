@@ -4,7 +4,7 @@ import { Plus, PlusIcon } from "lucide-react";
 import { useApplication, useEventTracker, useProject } from "@hooks/store";
 
 import { EmptyState } from "@components/common";
-// assets
+
 import emptyIssue from "public/empty-state/issue.svg";
 import emptyProject from "public/empty-state/project.svg";
 

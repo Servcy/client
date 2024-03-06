@@ -12,7 +12,7 @@ import { ProjectViewIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 
 import { EmptyState } from "@components/common";
-// assets
+
 import emptyView from "public/empty-state/view.svg";
 
 import { NextPageWithLayout } from "@lib/types";

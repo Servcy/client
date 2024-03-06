@@ -21,7 +21,7 @@ import { Avatar, DiceIcon, PhotoFilterIcon } from "@servcy/ui";
 import { useUser, useWorkspace } from "@hooks/store";
 
 import { IWorkspace } from "@servcy/types";
-// assets
+
 import projectEmoji from "public/emoji/project-emoji.svg";
 
 const workspaceLinks = [

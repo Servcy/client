@@ -10,7 +10,7 @@ import { SignUpRoot } from "@components/account";
 import { PageHead } from "@components/core";
 
 import { Spinner } from "@servcy/ui";
-// assets
+
 import ServcyLogo from "public/logo.png";
 
 import { NextPageWithLayout } from "@lib/types";

@@ -1,5 +1,5 @@
 import { linearGradientDef } from "@nivo/core";
-// assets
+
 import CompletedIssuesDark from "public/empty-state/dashboard/dark/completed-issues.svg";
 import OverdueIssuesDark from "public/empty-state/dashboard/dark/overdue-issues.svg";
 import UpcomingIssuesDark from "public/empty-state/dashboard/dark/upcoming-issues.svg";
