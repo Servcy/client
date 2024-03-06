@@ -11,7 +11,7 @@ import { InboxLayoutLoader } from "@components/ui";
 
 import { ProjectInboxHeader } from "@components/headers";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const ProjectInboxPage: NextPageWithLayout = observer(() => {
   const router = useRouter();

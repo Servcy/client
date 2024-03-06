@@ -16,7 +16,7 @@ import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/
 import { Button } from "@servcy/ui";
 
 import { IWorkspaceBulkInviteFormData } from "@servcy/types";
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { getUserRole } from "@helpers/user.helper";
 

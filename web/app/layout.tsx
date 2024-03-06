@@ -1,39 +1,81 @@
 "use client";
-import { FC, PropsWithChildren, useEffect, useState } from "react";
-
+import dynamic from "next/dynamic";
+import { logout as logoutApi } from "@/apis/logout";
 import Blocked from "@/components/Shared/blocked";
+import Router from "next/router";
+import NProgress from "nprogress";
 import SideBar from "@/components/Shared/sidebar";
+import "@/styles/globals.css";
+import { isMobileDevice } from "@/utils/Shared";
 import { SyncOutlined } from "@ant-design/icons";
+import { SWR_CONFIG } from "@constants/swr-config";
+import { THEMES } from "@constants/themes";
+import { useUser, useWorkspace } from "@hooks/store";
+import { StoreProvider } from "@contexts/StoreContext";
+import InstanceLayout from "@layouts/instance-layout";
+import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google";
 import { Analytics } from "@vercel/analytics/react";
 import { Spin } from "antd";
-import { Toaster } from "react-hot-toast";
-
-import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google";
-
-import "@/styles/globals.css";
-
-import { isMobileDevice } from "@/utils/Shared";
 import { deleteCookie, getCookie } from "cookies-next";
+import { ThemeProvider } from "next-themes";
+import { FC, PropsWithChildren, useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { SWRConfig } from "swr";
 
-import { logout as logoutApi } from "@/apis/logout";
+
+// dynamic imports
+const StoreWrapper = dynamic(() => import("@wrappers/StoreWrapper"), { ssr: false });
+const PostHogProvider = dynamic(() => import("@contexts/PosthogContext"), { ssr: false });
+const CrispWrapper = dynamic(() => import("@wrappers/CrispWrapper"), { ssr: false });
+
+// nprogress
+NProgress.configure({ showSpinner: false });
+Router.events.on("routeChangeStart", NProgress.start);
+Router.events.on("routeChangeError", NProgress.done);
+Router.events.on("routeChangeComplete", NProgress.done);
 
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {
+  const {
+    currentUser,
+    membership: { currentProjectRole, currentWorkspaceRole },
+  } = useUser();
+  const { currentWorkspace } = useWorkspace();
+
   return (
     <html lang="en">
       <body>
         <Toaster />
         <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
-          <ContentWithSidebar>
-            {children}
-            <Analytics />
-          </ContentWithSidebar>
+          <StoreProvider>
+            <ThemeProvider themes={THEMES} defaultTheme="system">
+              <InstanceLayout>
+                <StoreWrapper>
+                  <CrispWrapper user={currentUser}>
+                    <PostHogProvider
+                      user={currentUser}
+                      currentWorkspaceId={currentWorkspace?.id}
+                      workspaceRole={currentWorkspaceRole}
+                      projectRole={currentProjectRole}
+                    >
+                      <SWRConfig value={SWR_CONFIG}>
+                        <LayoutWrapper>
+                          {children}
+                          <Analytics />
+                        </LayoutWrapper>
+                      </SWRConfig>
+                    </PostHogProvider>
+                  </CrispWrapper>
+                </StoreWrapper>
+              </InstanceLayout>
+            </ThemeProvider>
+          </StoreProvider>
         </GoogleOAuthProvider>
       </body>
     </html>
   );
 };
 
-const ContentWithSidebar: FC<PropsWithChildren> = function ({ children }) {
+const LayoutWrapper: FC<PropsWithChildren> = function ({ children }) {
   const [loading, setLoading] = useState(true);
 
   const logout = async () => {

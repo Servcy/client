@@ -10,7 +10,7 @@ import { PageHead } from "@components/core";
 import { ProjectSettingHeader } from "@components/headers";
 import { EstimatesList } from "@components/estimates";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { EUserProjectRoles } from "@constants/project";
 

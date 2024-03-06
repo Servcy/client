@@ -7,7 +7,7 @@ import { PageHead } from "@components/core";
 import { ModulesListView } from "@components/modules";
 import { ModulesListHeader } from "@components/headers";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { useProject } from "@hooks/store";
 import { observer } from "mobx-react";

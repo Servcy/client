@@ -7,7 +7,7 @@ import { WorkspaceActiveCyclesUpgrade } from "@components/workspace";
 
 import { AppLayout } from "@layouts/app-layout";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { useWorkspace } from "@hooks/store";
 

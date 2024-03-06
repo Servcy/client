@@ -18,7 +18,7 @@ import { Tooltip } from "@servcy/ui";
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
 
 import { TCycleLayout, TCycleView } from "@servcy/types";
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle";
 import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";

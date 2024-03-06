@@ -8,7 +8,7 @@ import { PageHead } from "@components/core";
 import { ProjectSettingHeader } from "@components/headers";
 import { ProjectMemberList, ProjectSettingsMemberDefaults } from "@components/project";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { useProject } from "@hooks/store";
 

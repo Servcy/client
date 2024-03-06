@@ -15,7 +15,7 @@ import { ArchiveIcon, Button, Loader } from "@servcy/ui";
 
 import { RotateCcw } from "lucide-react";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { EIssuesStoreType } from "@constants/issue";
 import { EUserProjectRoles } from "@constants/project";

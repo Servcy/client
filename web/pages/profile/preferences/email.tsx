@@ -10,7 +10,7 @@ import { PageHead } from "@components/core";
 
 import { UserService } from "@services/user.service";
 // type
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const userService = new UserService();
 

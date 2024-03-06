@@ -3,7 +3,7 @@
 import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";
 import OTPInput from "@/components/Login/OTPInput";
 import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
-import type { NextPageWithLayout } from "@lib/types";
+import type { NextPageWithLayout } from "@/types/types";
 import { GoogleLogin } from "@react-oauth/google";
 import { Button, Input } from "antd";
 import { setCookie } from "cookies-next";

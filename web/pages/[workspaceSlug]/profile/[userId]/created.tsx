@@ -8,7 +8,7 @@ import { ProfileAuthWrapper } from "@layouts/user-profile-layout";
 import { UserProfileHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 import { ProfileIssuesPage } from "@components/profile/profile-issues";
 
 const ProfileCreatedIssuesPage: NextPageWithLayout = () => (

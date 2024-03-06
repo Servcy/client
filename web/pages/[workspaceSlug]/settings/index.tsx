@@ -10,7 +10,7 @@ import { WorkspaceSettingHeader } from "@components/headers";
 import { WorkspaceDetails } from "@components/workspace";
 import { PageHead } from "@components/core";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const WorkspaceSettingsPage: NextPageWithLayout = observer(() => {
   // store hooks

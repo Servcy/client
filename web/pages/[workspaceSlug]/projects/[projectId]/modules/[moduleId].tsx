@@ -16,7 +16,7 @@ import { EmptyState } from "@components/common";
 
 import emptyModule from "public/empty-state/module.svg";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const ModuleIssuesPage: NextPageWithLayout = observer(() => {
   // router

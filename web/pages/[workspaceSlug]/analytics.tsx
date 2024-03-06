@@ -17,7 +17,7 @@ import { ANALYTICS_TABS } from "@constants/analytics";
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 // type
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const AnalyticsPage: NextPageWithLayout = observer(() => {
   const router = useRouter();

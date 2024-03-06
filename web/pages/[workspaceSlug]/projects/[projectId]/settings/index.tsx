@@ -17,7 +17,7 @@ import {
   ProjectDetailsFormLoader,
 } from "@components/project";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const GeneralSettingsPage: NextPageWithLayout = observer(() => {
   // states

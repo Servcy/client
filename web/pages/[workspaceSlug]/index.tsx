@@ -7,7 +7,7 @@ import { PageHead } from "@components/core";
 import { WorkspaceDashboardView } from "@components/page-views";
 import { WorkspaceDashboardHeader } from "@components/headers/workspace-dashboard";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { useWorkspace } from "@hooks/store";
 

@@ -18,7 +18,7 @@ import {
 } from "@components/profile";
 
 import { IUserStateDistribution, TStateGroups } from "@servcy/types";
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { USER_PROFILE_DATA } from "@constants/fetch-keys";
 import { GROUP_CHOICES } from "@constants/project";

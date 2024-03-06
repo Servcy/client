@@ -14,7 +14,7 @@ import { Spinner } from "@servcy/ui";
 
 import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { WORKSPACE_INVITATION } from "@constants/fetch-keys";
 

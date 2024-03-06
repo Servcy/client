@@ -17,7 +17,7 @@ import { EmptyState } from "@components/common";
 
 import emptyCycle from "public/empty-state/cycle.svg";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const CycleDetailPage: NextPageWithLayout = observer(() => {
   // router

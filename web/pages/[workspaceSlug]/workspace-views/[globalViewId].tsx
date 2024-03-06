@@ -11,7 +11,7 @@ import { AllIssueLayoutRoot } from "@components/issues";
 import { GlobalIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace";
 

@@ -5,7 +5,7 @@ import { AppInstallationService } from "@services/app_installation.service";
 
 import { Spinner } from "@servcy/ui";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const appInstallationService = new AppInstallationService();
 

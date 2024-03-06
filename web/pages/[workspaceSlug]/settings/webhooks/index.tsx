@@ -16,7 +16,7 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { Button } from "@servcy/ui";
 import { WebhookSettingsLoader } from "@components/ui";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PageHead } from "@components/core";

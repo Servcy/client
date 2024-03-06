@@ -12,7 +12,7 @@ import { PageHead } from "@components/core";
 import { ProjectInboxHeader } from "@components/headers";
 import { InboxSidebarRoot, InboxContentRoot } from "@components/inbox";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const ProjectInboxPage: NextPageWithLayout = observer(() => {
   const router = useRouter();

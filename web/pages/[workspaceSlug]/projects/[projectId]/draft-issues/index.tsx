@@ -8,7 +8,7 @@ import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/dra
 import { PageHead } from "@components/core";
 import { ProjectDraftIssueHeader } from "@components/headers";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { useProject } from "@hooks/store";
 import { observer } from "mobx-react";

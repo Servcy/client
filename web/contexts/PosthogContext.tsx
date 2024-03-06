@@ -12,8 +12,6 @@ export interface IPosthogWrapper {
   currentWorkspaceId: string | undefined;
   workspaceRole: number | undefined;
   projectRole: number | undefined;
-  posthogAPIKey: string;
-  posthogHost: string | null;
 }
 
 const PostHogProvider: FC<IPosthogWrapper> = (props) => {

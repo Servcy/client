@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import { ProjectLayoutRoot } from "@components/issues";
 import { ProjectIssuesHeader } from "@components/headers";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { AppLayout } from "@layouts/app-layout";
 

@@ -18,7 +18,7 @@ import { APITokenSettingsLoader } from "@components/ui";
 
 import { APITokenService } from "@services/api_token.service";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { API_TOKENS_LIST } from "@constants/fetch-keys";
 import { EUserWorkspaceRoles } from "@constants/workspace";

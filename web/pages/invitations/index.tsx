@@ -24,7 +24,7 @@ import { truncateText } from "@helpers/string.helper";
 import { getUserRole } from "@helpers/user.helper";
 
 import type { IWorkspaceMemberInvitation } from "@servcy/types";
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { MEMBER_ACCEPTED } from "@constants/event-tracker";
 import { ROLE } from "@constants/workspace";

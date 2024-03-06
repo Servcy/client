@@ -20,7 +20,7 @@ import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/do
 import { Spinner } from "@servcy/ui";
 
 import { IPage } from "@servcy/types";
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { IssuePeekOverview } from "@components/issues";
 import { EUserProjectRoles } from "@constants/project";

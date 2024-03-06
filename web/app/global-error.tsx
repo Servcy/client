@@ -1,12 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-
 import { AuthService } from "@services/auth.service";
-
-import DefaultLayout from "@layouts/default-layout";
-
+import DefaultLayout from "@layouts/DefaultLayout";
 import { Button } from "@servcy/ui";
 
 const authService = new AuthService();

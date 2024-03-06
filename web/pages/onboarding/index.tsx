@@ -24,7 +24,7 @@ import { Avatar, Spinner } from "@servcy/ui";
 import ServcyLogo from "public/logo.png";
 
 import { IUser, TOnboardingSteps } from "@servcy/types";
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker";
 

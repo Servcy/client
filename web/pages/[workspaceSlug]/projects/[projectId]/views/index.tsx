@@ -10,7 +10,7 @@ import { useProject } from "@hooks/store";
 
 import { AppLayout } from "@layouts/app-layout";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const ProjectViewsPage: NextPageWithLayout = observer(() => {
   // router

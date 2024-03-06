@@ -15,7 +15,7 @@ import { EmptyState } from "@components/common";
 
 import emptyView from "public/empty-state/view.svg";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const ProjectViewIssuesPage: NextPageWithLayout = observer(() => {
   // router

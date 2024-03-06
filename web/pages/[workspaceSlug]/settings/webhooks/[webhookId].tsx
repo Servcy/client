@@ -16,7 +16,7 @@ import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "@componen
 import { Spinner } from "@servcy/ui";
 
 import { IWebhook } from "@servcy/types";
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const WebhookDetailsPage: NextPageWithLayout = observer(() => {
   // states

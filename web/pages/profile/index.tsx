@@ -19,7 +19,7 @@ import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servc
 import { ChevronDown, User2 } from "lucide-react";
 
 import type { IUser } from "@servcy/types";
-import type { NextPageWithLayout } from "@lib/types";
+import type { NextPageWithLayout } from "@/types/types";
 
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { TIME_ZONES } from "@constants/timezones";

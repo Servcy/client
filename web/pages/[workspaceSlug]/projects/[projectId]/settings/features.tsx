@@ -12,7 +12,7 @@ import { PageHead } from "@components/core";
 import { ProjectSettingHeader } from "@components/headers";
 import { ProjectFeaturesList } from "@components/project";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const FeaturesSettingsPage: NextPageWithLayout = observer(() => {
   const router = useRouter();

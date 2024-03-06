@@ -13,7 +13,7 @@ import { Spinner } from "@servcy/ui";
 
 import ServcyLogo from "public/logo.png";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const SignUpPage: NextPageWithLayout = observer(() => {
   // store hooks

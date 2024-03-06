@@ -10,7 +10,7 @@ import { PageHead } from "@components/core";
 
 import { Button } from "@servcy/ui";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { EUserWorkspaceRoles } from "@constants/workspace";
 

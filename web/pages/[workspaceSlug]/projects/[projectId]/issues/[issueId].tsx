@@ -11,7 +11,7 @@ import { IssueDetailRoot } from "@components/issues";
 
 import { Loader } from "@servcy/ui";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 // store hooks
 import { useApplication, useIssueDetail, useProject } from "@hooks/store";
 

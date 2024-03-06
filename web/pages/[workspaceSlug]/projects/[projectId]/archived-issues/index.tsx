@@ -9,7 +9,7 @@ import { ArchivedIssueLayoutRoot } from "@components/issues";
 import { ProjectArchivedIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { useProject } from "@hooks/store";
 

@@ -7,7 +7,7 @@ import { ProjectsHeader } from "@components/headers";
 
 import { AppLayout } from "@layouts/app-layout";
 // type
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 import { useWorkspace } from "@hooks/store";
 
 const ProjectsPage: NextPageWithLayout = observer(() => {

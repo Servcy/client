@@ -9,7 +9,7 @@ import IntegrationGuide from "@components/integration/guide";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { EUserWorkspaceRoles } from "@constants/workspace";
 

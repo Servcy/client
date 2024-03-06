@@ -18,7 +18,7 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { PagesHeader } from "@components/headers";
 import { PagesLoader } from "@components/ui";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { PAGE_TABS_LIST } from "@constants/page";
 import { useProjectPages } from "@hooks/store/use-project-page";

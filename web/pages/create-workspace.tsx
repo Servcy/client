@@ -15,7 +15,7 @@ import { CreateWorkspaceForm } from "@components/workspace";
 import ServcyLogo from "public/logo.svg";
 
 import { IWorkspace } from "@servcy/types";
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 const CreateWorkspacePage: NextPageWithLayout = observer(() => {
   // router

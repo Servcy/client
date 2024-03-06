@@ -20,7 +20,7 @@ import { USER_ACTIVITY } from "@constants/fetch-keys";
 // helper
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 // type
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 
 const userService = new UserService();

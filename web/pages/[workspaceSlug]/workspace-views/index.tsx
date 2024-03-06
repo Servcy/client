@@ -11,7 +11,7 @@ import { Input } from "@servcy/ui";
 
 import { Search } from "lucide-react";
 
-import { NextPageWithLayout } from "@lib/types";
+import { NextPageWithLayout } from "@/types/types";
 
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace";
 
