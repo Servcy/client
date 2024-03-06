@@ -33,7 +33,7 @@ export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, param
             data = Object.keys(analytics.distribution).map((segment) => {
                 let totalSegmentIssues = 0
 
-                analytics.distribution[segment].map((s) => {
+                analytics.distribution[segment]?.map((s) => {
                     totalSegmentIssues += s[yAxisKey] as number
                 })
 
@@ -44,7 +44,7 @@ export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, param
         return data
     }
 
-    const longestXAxisLabel = findStringWithMostCharacters(barGraphData.data.map((d) => `${d.name}`))
+    const longestXAxisLabel = findStringWithMostCharacters(barGraphData.data.map((d) => `${d["name"]}`))
 
     return (
         <BarGraph
@@ -105,7 +105,7 @@ export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, param
                                                                 analytics,
                                                                 params,
                                                                 "x_axis"
-                                                            )[0].toUpperCase()
+                                                            )[0]?.toUpperCase()
                                                           : "?"
                                                       : datum.value && datum.value !== "None"
                                                         ? `${datum.value}`.toUpperCase()[0]
