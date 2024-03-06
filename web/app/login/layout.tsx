@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast"
 
 import Blocked from "@components/shared/blocked"
 
-import "@/styles/globals.css"
+import "@styles/global.css"
 
 import { isMobileDevice } from "@helpers/common.helper"
 
