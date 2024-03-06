@@ -57,7 +57,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
     } = useApplication()
-    const { currentUser, updateCurrentUser, isUserInstanceAdmin, signOut } = useUser()
+    const { currentUser, updateCurrentUser, isUserInstanceAdmin, logOut } = useUser()
     const { currentWorkspace: activeWorkspace, workspaces } = useWorkspace()
 
     const { setTheme } = useTheme()
@@ -81,19 +81,13 @@ export const WorkspaceSidebarDropdown = observer(() => {
             last_workspace_id: workspace?.id,
         })
     const handleSignOut = async () => {
-        await signOut()
+        await logOut()
             .then(() => {
                 mutate("CURRENT_USER_DETAILS", null)
                 setTheme("system")
                 router.push("/")
             })
-            .catch(() =>
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Failed to sign out. Please try again.",
-                })
-            )
+            .catch(() => toast.error("Failed to sign out. Please try again."))
     }
     const handleItemClick = () => {
         if (window.innerWidth < 768) {
@@ -222,7 +216,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                         )}
                                     </div>
                                     <div className="flex w-full flex-col items-start justify-start gap-2 px-4 py-2 text-sm">
-                                        <Link href="/create-workspace" className="w-full">
+                                        <Link href="/workspace/create" className="w-full">
                                             <Menu.Item
                                                 as="div"
                                                 className="flex items-center gap-2 rounded px-2 py-1 text-sm text-custom-sidebar-text-100 hover:bg-custom-sidebar-background-80 font-medium"
@@ -293,8 +287,8 @@ export const WorkspaceSidebarDropdown = observer(() => {
                             className="absolute left-0 z-20 mt-1 flex w-52 origin-top-left  flex-col divide-y
           divide-custom-sidebar-border-200 rounded-md border border-custom-sidebar-border-200 bg-custom-sidebar-background-100 px-1 py-2 text-xs shadow-lg outline-none"
                             ref={setPopperElement}
-                            style={styles.popper}
-                            {...attributes.popper}
+                            style={styles["popper"]}
+                            {...attributes["popper"]}
                         >
                             <div className="flex flex-col gap-2.5 pb-2">
                                 <span className="px-2 text-custom-sidebar-text-200">{currentUser?.email}</span>

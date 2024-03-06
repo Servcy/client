@@ -57,7 +57,7 @@ export class GlobalViewStore implements IGlobalViewStore {
      * @description returns list of views for current workspace
      */
     get currentWorkspaceViews() {
-        const currentWorkspaceDetails = this.rootStore.workspaceRoot.currentWorkspace
+        const currentWorkspaceDetails = this.rootStore.workspace.currentWorkspace
         if (!currentWorkspaceDetails) return null
 
         return (
@@ -73,7 +73,7 @@ export class GlobalViewStore implements IGlobalViewStore {
      * @returns
      */
     getSearchedViews = computedFn((searchQuery: string) => {
-        const currentWorkspaceDetails = this.rootStore.workspaceRoot.currentWorkspace
+        const currentWorkspaceDetails = this.rootStore.workspace.currentWorkspace
         if (!currentWorkspaceDetails) return null
 
         return (

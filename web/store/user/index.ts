@@ -22,7 +22,6 @@ export interface IUserRootStore {
     dashboardInfo: any
     // fetch actions
     fetchCurrentUser: () => Promise<IUser>
-    fetchCurrentUserInstanceAdminStatus: () => Promise<boolean>
     fetchCurrentUserSettings: () => Promise<IUserSettings>
     fetchUserDashboardInfo: (workspaceSlug: string, month: number) => Promise<any>
     // crud actions
@@ -68,7 +67,6 @@ export class UserRootStore implements IUserRootStore {
             dashboardInfo: observable,
             // action
             fetchCurrentUser: action,
-            fetchCurrentUserInstanceAdminStatus: action,
             fetchCurrentUserSettings: action,
             fetchUserDashboardInfo: action,
             updateUserOnBoard: action,
@@ -107,18 +105,6 @@ export class UserRootStore implements IUserRootStore {
             throw error
         }
     }
-
-    /**
-     * Fetches the current user instance admin status
-     * @returns Promise<boolean>
-     */
-    fetchCurrentUserInstanceAdminStatus = async () =>
-        await this.userService.currentUserInstanceAdminStatus().then((response) => {
-            runInAction(() => {
-                this.isUserInstanceAdmin = response.is_instance_admin
-            })
-            return response.is_instance_admin
-        })
 
     /**
      * Fetches the current user settings

@@ -14,7 +14,6 @@ export const getWorkspaceEventPayload = (payload: any) => ({
     workspace_id: payload.id,
     created_at: payload.created_at,
     updated_at: payload.updated_at,
-    organization_size: payload.organization_size,
     first_time: payload.first_time,
     state: payload.state,
     element: payload.element,

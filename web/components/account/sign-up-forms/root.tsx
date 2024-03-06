@@ -13,7 +13,7 @@ import {
 } from "@components/account"
 
 import { useApplication, useEventTracker } from "@hooks/store"
-import useSignInRedirection from "@hooks/use-login-redirection"
+import useLoginRedirection from "@hooks/use-login-redirection"
 
 import { NAVIGATE_TO_SIGNIN } from "@constants/event-tracker"
 
@@ -31,7 +31,7 @@ export const SignUpRoot = observer(() => {
     const [signInStep, setSignInStep] = useState<ESignUpSteps | null>(null)
     const [email, setEmail] = useState("")
     // sign in redirection hook
-    const { handleRedirection } = useSignInRedirection()
+    const { handleRedirection } = useLoginRedirection()
     // mobx store
     const {
         config: { envConfig },
@@ -83,7 +83,7 @@ export const SignUpRoot = observer(() => {
                     {signInStep === ESignUpSteps.OPTIONAL_SET_PASSWORD && (
                         <SignUpOptionalSetPasswordForm
                             email={email}
-                            handleSignInRedirection={handleRedirection}
+                            handleLoginRedirection={handleRedirection}
                             handleStepChange={(step) => setSignInStep(step)}
                         />
                     )}
@@ -91,7 +91,7 @@ export const SignUpRoot = observer(() => {
             </div>
             {isOAuthEnabled && signInStep && OAUTH_ENABLED_STEPS.includes(signInStep) && (
                 <>
-                    <OAuthOptions handleSignInRedirection={handleRedirection} type="sign_up" />
+                    <OAuthOptions handleLoginRedirection={handleRedirection} type="sign_up" />
                     <p className="text-xs text-onboarding-text-300 text-center mt-6">
                         Already using Servcy?{" "}
                         <Link

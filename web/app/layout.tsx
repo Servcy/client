@@ -5,11 +5,12 @@ import SideBar from "@/components/Shared/sidebar"
 
 import "@/styles/globals.css"
 
+import { AppProps } from "next/app"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/navigation"
 import Router from "next/router"
 
-import { FC, PropsWithChildren, useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { SyncOutlined } from "@ant-design/icons"
 import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google"
@@ -24,10 +25,10 @@ import { useUser, useWorkspace } from "@hooks/store"
 
 import { StoreProvider } from "@contexts/StoreContext"
 
-import InstanceLayout from "@layouts/instance-layout"
-
 import { SWR_CONFIG } from "@constants/swr-config"
 import { THEMES } from "@constants/themes"
+
+import type { NextPageWithLayout } from "@/types/types"
 
 import { isMobileDevice } from "@/utils/Shared"
 
@@ -42,40 +43,52 @@ Router.events.on("routeChangeStart", NProgress.start)
 Router.events.on("routeChangeError", NProgress.done)
 Router.events.on("routeChangeComplete", NProgress.done)
 
-const RootLayout: FC<PropsWithChildren> = function ({ children }) {
+type AppRootLayout = AppProps & {
+    Component: NextPageWithLayout
+}
+
+function RootLayout({ Component, pageProps }: AppRootLayout) {
     const {
         currentUser,
         membership: { currentProjectRole, currentWorkspaceRole },
         logOut,
     } = useUser()
     const { currentWorkspace } = useWorkspace()
+    // For mobile devices web app is not supported
+    if (isMobileDevice(navigator.userAgent))
+        return (
+            <div className="flex h-screen justify-center">
+                <Blocked />
+            </div>
+        )
+    const wrappedComponent = Component.hasWrapper ? (
+        <Component {...pageProps} />
+    ) : (
+        <LayoutWrapper logOut={logOut}>
+            <Component {...pageProps} />
+        </LayoutWrapper>
+    )
 
     return (
         <html lang="en">
             <body>
                 <Toaster />
+                <Analytics />
                 <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
                     <StoreProvider>
                         <ThemeProvider themes={THEMES} defaultTheme="system">
-                            <InstanceLayout>
-                                <StoreWrapper>
-                                    <CrispWrapper user={currentUser}>
-                                        <PostHogProvider
-                                            user={currentUser}
-                                            currentWorkspaceId={currentWorkspace?.id}
-                                            workspaceRole={currentWorkspaceRole}
-                                            projectRole={currentProjectRole}
-                                        >
-                                            <SWRConfig value={SWR_CONFIG}>
-                                                <LayoutWrapper logOut={logOut}>
-                                                    {children}
-                                                    <Analytics />
-                                                </LayoutWrapper>
-                                            </SWRConfig>
-                                        </PostHogProvider>
-                                    </CrispWrapper>
-                                </StoreWrapper>
-                            </InstanceLayout>
+                            <StoreWrapper>
+                                <CrispWrapper user={currentUser}>
+                                    <PostHogProvider
+                                        user={currentUser}
+                                        currentWorkspaceId={currentWorkspace?.id}
+                                        workspaceRole={currentWorkspaceRole}
+                                        projectRole={currentProjectRole}
+                                    >
+                                        <SWRConfig value={SWR_CONFIG}>{wrappedComponent}</SWRConfig>
+                                    </PostHogProvider>
+                                </CrispWrapper>
+                            </StoreWrapper>
                         </ThemeProvider>
                     </StoreProvider>
                 </GoogleOAuthProvider>
@@ -103,6 +116,7 @@ const LayoutWrapper: FC<{ children: React.ReactNode; logOut: () => Promise<void>
             setLoading(false)
         }
     }
+
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
@@ -126,15 +140,11 @@ const LayoutWrapper: FC<{ children: React.ReactNode; logOut: () => Promise<void>
                 />
             </div>
         )
-    if (isMobileDevice(navigator.userAgent))
-        return (
-            <div className="flex h-screen justify-center">
-                <Blocked />
-            </div>
-        )
     return (
         <div className="flex">
-            {children}
+            <main className="order-2 flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
+                {children}
+            </main>
             <div className="order-1">
                 <SideBar logOut={logOutHandler} />
             </div>

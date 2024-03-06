@@ -61,7 +61,7 @@ export class EventTrackerStore implements IEventTrackerStore {
      * @description: Returns the necessary property for the event tracking
      */
     get getRequiredProperties() {
-        const currentWorkspaceDetails = this.rootStore.workspaceRoot.currentWorkspace
+        const currentWorkspaceDetails = this.rootStore.workspace.currentWorkspace
         const currentProjectDetails = this.rootStore.projectRoot.project.currentProjectDetails
         return {
             workspace_id: currentWorkspaceDetails?.id,

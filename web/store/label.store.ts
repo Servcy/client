@@ -81,7 +81,7 @@ export class LabelStore implements ILabelStore {
      * Returns the labelMap belongs to a specific workspace
      */
     get workspaceLabels() {
-        const currentWorkspaceDetails = this.rootStore.workspaceRoot.currentWorkspace
+        const currentWorkspaceDetails = this.rootStore.workspace.currentWorkspace
         const worksapceSlug = this.rootStore.app.router.workspaceSlug || ""
         if (!currentWorkspaceDetails || !this.fetchedMap[worksapceSlug]) return
         return sortBy(

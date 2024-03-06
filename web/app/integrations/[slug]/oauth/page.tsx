@@ -15,7 +15,7 @@ import { capitalizeFirstLetter } from "@/utils/Shared/formatters"
 export default function IntegrationOauth(): JSX.Element {
     const params = useParams()
     const router = useRouter()
-    const { slug } = params
+    const slug = params?.['slug']
 
     useEffect(() => {
         if (typeof slug !== "string") return
@@ -50,7 +50,7 @@ export default function IntegrationOauth(): JSX.Element {
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <main className="order-2 h-screen w-full bg-servcy-white">
+        <>
             <div className="flex h-full w-full flex-col items-center justify-center">
                 <Spin
                     className="m-auto"
@@ -65,6 +65,6 @@ export default function IntegrationOauth(): JSX.Element {
                     }
                 />
             </div>
-        </main>
+        </>
     )
 }

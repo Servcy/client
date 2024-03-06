@@ -9,19 +9,18 @@ import toast from "react-hot-toast"
 import { useEventTracker, useWorkspace } from "@hooks/store"
 
 import { WORKSPACE_CREATED } from "@constants/event-tracker"
-import { ORGANIZATION_SIZE, RESTRICTED_URLS } from "@constants/workspace"
+import { RESTRICTED_URLS } from "@constants/workspace"
 
 import { WorkspaceService } from "@services/workspace.service"
 
 import { IWorkspace } from "@servcy/types"
-import { Button, CustomSelect, Input } from "@servcy/ui"
+import { Button, Input } from "@servcy/ui"
 
 type Props = {
     onSubmit?: (res: IWorkspace) => Promise<void>
     defaultValues: {
         name: string
         slug: string
-        organization_size: string
     }
     setDefaultValues: Dispatch<SetStateAction<any>>
     secondaryButton?: React.ReactNode
@@ -79,11 +78,7 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                                     element: "Create workspace page",
                                 },
                             })
-                            toast.error({
-                                type: "success",
-                                title: "Success!",
-                                message: "Workspace created successfully.",
-                            })
+                            toast.success("Workspace created successfully.")
 
                             if (onSubmit) await onSubmit(res)
                         })
@@ -95,20 +90,12 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                                     element: "Create workspace page",
                                 },
                             })
-                            toast.error({
-                                type: "error",
-                                title: "Error!",
-                                message: "Workspace could not be created. Please try again.",
-                            })
+                            toast.error("Workspace could not be created. Please try again.")
                         })
                 } else setSlugError(true)
             })
             .catch(() => {
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Some error occurred while creating workspace. Please try again.",
-                })
+                toast.error("Some error occurred while creating workspace. Please try again.")
             })
     }
 
@@ -191,39 +178,6 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                     {invalidSlug && (
                         <span className="text-sm text-red-500">{`URL can only contain ( - ), ( _ ) & alphanumeric characters.`}</span>
                     )}
-                </div>
-                <div className="space-y-1 text-sm">
-                    <span>What size is your organization?</span>
-                    <div className="w-full">
-                        <Controller
-                            name="organization_size"
-                            control={control}
-                            rules={{ required: "This field is required" }}
-                            render={({ field: { value, onChange } }) => (
-                                <CustomSelect
-                                    value={value}
-                                    onChange={onChange}
-                                    label={
-                                        ORGANIZATION_SIZE.find((c) => c === value) ?? (
-                                            <span className="text-custom-text-400">Select organization size</span>
-                                        )
-                                    }
-                                    buttonClassName="!border-[0.5px] !border-custom-border-200 !shadow-none"
-                                    input
-                                    optionsClassName="w-full"
-                                >
-                                    {ORGANIZATION_SIZE.map((item) => (
-                                        <CustomSelect.Option key={item} value={item}>
-                                            {item}
-                                        </CustomSelect.Option>
-                                    ))}
-                                </CustomSelect>
-                            )}
-                        />
-                        {errors.organization_size && (
-                            <span className="text-sm text-red-500">{errors.organization_size.message}</span>
-                        )}
-                    </div>
                 </div>
             </div>
 

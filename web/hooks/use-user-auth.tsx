@@ -18,7 +18,7 @@ const useUserAuth = (props: Props) => {
     const [isRouteAccess, setIsRouteAccess] = useState(true)
     // router
     const router = useRouter()
-    const { next_path } = router.query
+    const { nextUrl } = router.query
 
     const isValidURL = (url: string): boolean => {
         const disallowedSchemes = /^(https?|ftp):\/\//i
@@ -84,9 +84,9 @@ const useUserAuth = (props: Props) => {
             if (!isLoading) {
                 setIsRouteAccess(() => true)
                 if (user) {
-                    if (next_path) {
-                        if (isValidURL(next_path.toString())) {
-                            router.push(next_path.toString())
+                    if (nextUrl) {
+                        if (isValidURL(nextUrl.toString())) {
+                            router.push(nextUrl.toString())
                             return
                         } else {
                             router.push("/")
@@ -104,7 +104,7 @@ const useUserAuth = (props: Props) => {
                 }
             }
         }
-    }, [user, isLoading, routeAuth, router, next_path])
+    }, [user, isLoading, routeAuth, router, nextUrl])
 
     return {
         isLoading: isRouteAccess,

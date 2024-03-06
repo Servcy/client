@@ -2,14 +2,11 @@
 
 import Image from "next/image"
 import Link from "next/link.js"
-import { useSearchParams } from "next/navigation"
 
 import { useEffect, useState } from "react"
 
-import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication"
 import { GoogleLogin } from "@react-oauth/google"
 import { Button, Input } from "antd"
-import { setCookie } from "cookies-next"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 import { BiLogIn } from "react-icons/bi"
@@ -17,7 +14,9 @@ import { HiMail } from "react-icons/hi"
 import { RiWhatsappLine } from "react-icons/ri"
 
 import { useUser } from "@hooks/store"
-import useSignInRedirection from "@hooks/use-login-redirection"
+import useLoginRedirection from "@hooks/use-login-redirection"
+
+import { AuthService } from "@services/auth.service"
 
 import { Spinner } from "@servcy/ui"
 
@@ -27,14 +26,15 @@ import OTPInput from "@/components/Login/OTPInput"
 
 import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators"
 
+const authService = new AuthService()
+
 const Login: NextPageWithLayout = observer(() => {
-    const searchParams = useSearchParams()
     const [stage, setStage] = useState<number>(0)
     const [inputType, setInputType] = useState<string>("email")
     const [input, setInput] = useState<string>("")
     const [invalidPhone, setInvalidPhone] = useState<boolean>(false)
     const [otp, setOtp] = useState<string>("")
-    const { isRedirecting, handleRedirection } = useSignInRedirection()
+    const { isRedirecting, handleRedirection } = useLoginRedirection()
     const { currentUser } = useUser()
     const [invalidEmail, setInvalidEmail] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
@@ -57,7 +57,7 @@ const Login: NextPageWithLayout = observer(() => {
             setInputType(isEmailValid ? "email" : "phone_number")
             setInput(isEmailValid ? email.value : phone_number.value.replace("+", ""))
             await toast.promise(
-                sendOtpApi(
+                authService.sendOtp(
                     isEmailValid ? email.value : phone_number.value.replace("+", ""),
                     isEmailValid ? "email" : "phone_number"
                 ),
@@ -78,19 +78,12 @@ const Login: NextPageWithLayout = observer(() => {
             setLoading(true)
             const otpIsValid = validateOtp(otp)
             if (!otpIsValid) return
-            const tokens = await toast.promise(verifyOtpApi(otp, input, inputType), {
+            await toast.promise(authService.verifyOtp(otp, input, inputType), {
                 loading: "Verifying OTP...",
                 success: "OTP verified successfully",
                 error: "Failed to verify OTP",
             })
-            setCookie("refreshToken", tokens.refresh_token, {
-                path: "/",
-            })
-            setCookie("accessToken", tokens.access_token, {
-                path: "/",
-            })
-            const nextUrl = searchParams?.get("nextUrl") ?? "/"
-            window.location.href = nextUrl
+            handleRedirection()
         } finally {
             setLoading(false)
         }
@@ -99,19 +92,12 @@ const Login: NextPageWithLayout = observer(() => {
     const googleLogin = async (credential: string) => {
         try {
             setLoading(true)
-            const tokens = await toast.promise(googleLoginApi(credential), {
+            await toast.promise(authService.googleLogin(credential), {
                 loading: "Logging in..",
                 success: "Logged in successfully",
                 error: "Failed to login with Google",
             })
-            setCookie("refreshToken", tokens.refresh_token, {
-                path: "/",
-            })
-            setCookie("accessToken", tokens.access_token, {
-                path: "/",
-            })
-            const nextUrl = searchParams?.get("nextUrl") ?? "/"
-            window.location.href = nextUrl
+            handleRedirection()
         } finally {
             setLoading(false)
         }

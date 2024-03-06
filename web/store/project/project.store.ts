@@ -92,7 +92,7 @@ export class ProjectStore implements IProjectStore {
      * Returns searched projects based on search query
      */
     get searchedProjects() {
-        const workspaceDetails = this.rootStore.workspaceRoot.currentWorkspace
+        const workspaceDetails = this.rootStore.workspace.currentWorkspace
         if (!workspaceDetails) return []
         const workspaceProjects = Object.values(this.projectMap).filter(
             (p) =>
@@ -107,7 +107,7 @@ export class ProjectStore implements IProjectStore {
      * Returns project IDs belong to the current workspace
      */
     get workspaceProjectIds() {
-        const workspaceDetails = this.rootStore.workspaceRoot.currentWorkspace
+        const workspaceDetails = this.rootStore.workspace.currentWorkspace
         if (!workspaceDetails) return null
         const workspaceProjects = Object.values(this.projectMap).filter((p) => p.workspace === workspaceDetails.id)
         const projectIds = workspaceProjects.map((p) => p.id)
@@ -126,7 +126,7 @@ export class ProjectStore implements IProjectStore {
      * Returns joined project IDs belong to the current workspace
      */
     get joinedProjectIds() {
-        const currentWorkspace = this.rootStore.workspaceRoot.currentWorkspace
+        const currentWorkspace = this.rootStore.workspace.currentWorkspace
         if (!currentWorkspace) return []
 
         let projects = Object.values(this.projectMap ?? {})
@@ -142,7 +142,7 @@ export class ProjectStore implements IProjectStore {
      * Returns favorite project IDs belong to the current workspace
      */
     get favoriteProjectIds() {
-        const currentWorkspace = this.rootStore.workspaceRoot.currentWorkspace
+        const currentWorkspace = this.rootStore.workspace.currentWorkspace
         if (!currentWorkspace) return []
 
         let projects = Object.values(this.projectMap ?? {})

@@ -19,7 +19,7 @@ import { Button, Input } from "@servcy/ui"
 type Props = {
     email: string
     handleStepChange: (step: ESignUpSteps) => void
-    handleSignInRedirection: () => Promise<void>
+    handleLoginRedirection: () => Promise<void>
 }
 
 type TCreatePasswordFormValues = {
@@ -35,7 +35,7 @@ const defaultValues: TCreatePasswordFormValues = {
 const authService = new AuthService()
 
 export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
-    const { email, handleSignInRedirection } = props
+    const { email, handleLoginRedirection } = props
     // states
     const [isGoingToWorkspace, setIsGoingToWorkspace] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
@@ -73,7 +73,7 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
                     state: "SUCCESS",
                     first_time: true,
                 })
-                await handleSignInRedirection()
+                await handleLoginRedirection()
             })
             .catch((err) => {
                 captureEvent(SETUP_PASSWORD, {
@@ -86,7 +86,7 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
 
     const handleGoToWorkspace = async () => {
         setIsGoingToWorkspace(true)
-        await handleSignInRedirection().finally(() => {
+        await handleLoginRedirection().finally(() => {
             captureEvent(PASSWORD_CREATE_SKIPPED, {
                 state: "SUCCESS",
                 first_time: true,

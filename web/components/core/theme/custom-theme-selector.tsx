@@ -38,7 +38,7 @@ export const CustomThemeSelector: React.FC = observer(() => {
         defaultValues: {
             background: userTheme?.background !== "" ? userTheme?.background : "#0d101b",
             text: userTheme?.text !== "" ? userTheme?.text : "#c5c5c5",
-            primary: userTheme?.primary !== "" ? userTheme?.primary : "#3f76ff",
+            primary: userTheme?.primary !== "" ? userTheme?.primary : "#4D7E3E",
             sidebarBackground: userTheme?.sidebarBackground !== "" ? userTheme?.sidebarBackground : "#0d101b",
             sidebarText: userTheme?.sidebarText !== "" ? userTheme?.sidebarText : "#c5c5c5",
             darkPalette: userTheme?.darkPalette || false,
@@ -143,7 +143,7 @@ export const CustomThemeSelector: React.FC = observer(() => {
                                             name="primary"
                                             value={value}
                                             onChange={(val) => handleValueChange(val, onChange)}
-                                            placeholder="#3f76ff"
+                                            placeholder="#4D7E3E"
                                             className="w-full"
                                             style={{
                                                 backgroundColor: watch("primary"),

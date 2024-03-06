@@ -22,7 +22,7 @@ export const NotAuthorizedView: React.FC<Props> = observer((props) => {
     const { actionButton, type } = props
     const { currentUser } = useUser()
     const { query } = useRouter()
-    const { next_path } = query
+    const { nextUrl } = query
 
     return (
         <DefaultLayout>
@@ -43,7 +43,7 @@ export const NotAuthorizedView: React.FC<Props> = observer((props) => {
                     {currentUser ? (
                         <p>
                             You have signed in as {currentUser.email}. <br />
-                            <Link href={`/?next_path=${next_path}`}>
+                            <Link href={`/?nextUrl=${nextUrl}`}>
                                 <span className="font-medium text-custom-text-100">Sign in</span>
                             </Link>{" "}
                             with different account that has access to this page.
@@ -51,7 +51,7 @@ export const NotAuthorizedView: React.FC<Props> = observer((props) => {
                     ) : (
                         <p>
                             You need to{" "}
-                            <Link href={`/?next_path=${next_path}`}>
+                            <Link href={`/?nextUrl=${nextUrl}`}>
                                 <span className="font-medium text-custom-text-100">Sign in</span>
                             </Link>{" "}
                             with an account that has access to this page.

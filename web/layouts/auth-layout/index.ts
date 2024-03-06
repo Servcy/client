@@ -1,4 +1,3 @@
-export * from "./user-wrapper"
+export * from "../../wrappers/UserAuthWrapper"
 export * from "./workspace-wrapper"
 export * from "./project-wrapper"
-export * from "./admin-wrapper"

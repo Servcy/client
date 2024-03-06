@@ -4,7 +4,6 @@ import { FC, ReactNode, useEffect, useState } from "react"
 
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
-import useSWR from "swr"
 
 import { useApplication, useUser } from "@hooks/store"
 
@@ -22,13 +21,10 @@ const StoreWrapper: FC<IStoreWrapper> = observer((props) => {
     const router = useRouter()
     // store hooks
     const {
-        config: { fetchAppConfig },
         theme: { sidebarCollapsed, toggleSidebar },
         router: { setQuery },
     } = useApplication()
     const { currentUser } = useUser()
-    // fetching application Config
-    useSWR("APP_CONFIG", () => fetchAppConfig(), { revalidateIfStale: false, revalidateOnFocus: false })
     // theme
     const { setTheme } = useTheme()
 

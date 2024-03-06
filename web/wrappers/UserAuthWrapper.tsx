@@ -4,7 +4,6 @@ import { FC, ReactNode } from "react"
 
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
-import useSWRImmutable from "swr/immutable"
 
 import { useUser, useWorkspace } from "@hooks/store"
 
@@ -17,22 +16,12 @@ export interface IUserAuthWrapper {
 export const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
     const { children } = props
     // store hooks
-    const {
-        currentUser,
-        currentUserError,
-        fetchCurrentUser,
-        fetchCurrentUserInstanceAdminStatus,
-        fetchCurrentUserSettings,
-    } = useUser()
+    const { currentUser, currentUserError, fetchCurrentUser, fetchCurrentUserSettings } = useUser()
     const { fetchWorkspaces } = useWorkspace()
     // router
     const router = useRouter()
     // fetching user information
     useSWR("CURRENT_USER_DETAILS", () => fetchCurrentUser(), {
-        shouldRetryOnError: false,
-    })
-    // fetching current user instance admin status
-    useSWRImmutable("CURRENT_USER_INSTANCE_ADMIN_STATUS", () => fetchCurrentUserInstanceAdminStatus(), {
         shouldRetryOnError: false,
     })
     // fetching user settings
@@ -56,7 +45,7 @@ export const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
 
     if (currentUserError) {
         const redirectTo = router.asPath
-        router.push(`/?next_path=${redirectTo}`)
+        router.push(`/?nextUrl=${redirectTo}`)
         return null
     }
 

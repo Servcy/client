@@ -15,7 +15,7 @@ export const STATE_GROUPS: {
     unstarted: {
         key: "unstarted",
         label: "Unstarted",
-        color: "#3f76ff",
+        color: "#4D7E3E",
     },
     started: {
         key: "started",

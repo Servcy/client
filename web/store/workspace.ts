@@ -5,12 +5,9 @@ import { WorkspaceService } from "@services/workspace.service"
 
 import { IWorkspace } from "@servcy/types"
 
-import { RootStore } from "../root.store"
-// sub-stores
-import { ApiTokenStore, IApiTokenStore } from "./api-token.store"
-import { IWebhookStore, WebhookStore } from "./webhook.store"
+import { RootStore } from "./root.store"
 
-export interface IWorkspaceRootStore {
+export interface StoreIWorkspaceStore {
     // observables
     workspaces: Record<string, IWorkspace>
     // computed
@@ -25,12 +22,9 @@ export interface IWorkspaceRootStore {
     createWorkspace: (data: Partial<IWorkspace>) => Promise<IWorkspace>
     updateWorkspace: (workspaceSlug: string, data: Partial<IWorkspace>) => Promise<IWorkspace>
     deleteWorkspace: (workspaceSlug: string) => Promise<void>
-    // sub-stores
-    webhook: IWebhookStore
-    apiToken: IApiTokenStore
 }
 
-export class WorkspaceRootStore implements IWorkspaceRootStore {
+export class WorkspaceStore implements StoreIWorkspaceStore {
     // observables
     workspaces: Record<string, IWorkspace> = {}
 
@@ -38,9 +32,6 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
     // root store
     router
     user
-    // sub-stores
-    webhook: IWebhookStore
-    apiToken: IApiTokenStore
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
@@ -63,9 +54,6 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
         // root store
         this.router = _rootStore.app.router
         this.user = _rootStore.user
-        // sub-stores
-        this.webhook = new WebhookStore(_rootStore)
-        this.apiToken = new ApiTokenStore(_rootStore)
     }
 
     /**

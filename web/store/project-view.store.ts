@@ -86,7 +86,7 @@ export class ProjectViewStore implements IProjectViewStore {
     /**
      * Returns view details by id
      */
-    getViewById = computedFn((viewId: string) => this.viewMap?.[viewId] ?? null)
+    getViewById = computedFn((viewId: string) => this.viewMap?.[viewId] ?? ({} as IProjectView))
 
     /**
      * Fetches views for current project

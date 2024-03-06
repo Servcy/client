@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -29,7 +31,6 @@ const CreateWorkspacePage: NextPageWithLayout = observer(() => {
     const [defaultValues, setDefaultValues] = useState({
         name: "",
         slug: "",
-        organization_size: "",
     })
 
     const onSubmit = async (workspace: IWorkspace) => {
@@ -78,5 +79,7 @@ CreateWorkspacePage.getWrapper = function getWrapper(page: ReactElement) {
         </UserAuthWrapper>
     )
 }
+
+CreateWorkspacePage.hasWrapper = true;
 
 export default CreateWorkspacePage

@@ -14,7 +14,7 @@ import {
 import { LatestFeatureBlock } from "@components/common"
 
 import { useApplication, useEventTracker } from "@hooks/store"
-import useSignInRedirection from "@hooks/use-login-redirection"
+import useLoginRedirection from "@hooks/use-login-redirection"
 
 import { NAVIGATE_TO_SIGNUP } from "@constants/event-tracker"
 
@@ -31,7 +31,7 @@ export const SignInRoot = observer(() => {
     const [signInStep, setSignInStep] = useState<ESignInSteps | null>(null)
     const [email, setEmail] = useState("")
     // sign in redirection hook
-    const { handleRedirection } = useSignInRedirection()
+    const { handleRedirection } = useLoginRedirection()
     // mobx store
     const {
         config: { envConfig },
@@ -108,14 +108,14 @@ export const SignInRoot = observer(() => {
                         />
                     )}
                     {signInStep === ESignInSteps.OPTIONAL_SET_PASSWORD && (
-                        <SignInOptionalSetPasswordForm email={email} handleSignInRedirection={handleRedirection} />
+                        <SignInOptionalSetPasswordForm email={email} handleLoginRedirection={handleRedirection} />
                     )}
                 </>
             </div>
             {isOAuthEnabled &&
                 (signInStep === ESignInSteps.EMAIL || (!isSmtpConfigured && signInStep === ESignInSteps.PASSWORD)) && (
                     <>
-                        <OAuthOptions handleSignInRedirection={handleRedirection} type="sign_in" />
+                        <OAuthOptions handleLoginRedirection={handleRedirection} type="sign_in" />
                         <p className="text-xs text-onboarding-text-300 text-center mt-6">
                             Don{"'"}t have an account?{" "}
                             <Link

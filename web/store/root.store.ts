@@ -7,7 +7,6 @@ import { DashboardStore, IDashboardStore } from "./dashboard.store"
 import { EstimateStore, IEstimateStore } from "./estimate.store"
 import { EventTrackerStore, IEventTrackerStore } from "./event-tracker.store"
 import { GlobalViewStore, IGlobalViewStore } from "./global-view.store"
-import { IInboxRootStore, InboxRootStore } from "./inbox/root.store"
 import { IIssueRootStore, IssueRootStore } from "./issue/root.store"
 import { ILabelStore, LabelStore } from "./label.store"
 import { IMemberRootStore, MemberRootStore } from "./member"
@@ -18,7 +17,7 @@ import { IProjectPageStore, ProjectPageStore } from "./project-page.store"
 import { IProjectViewStore, ProjectViewStore } from "./project-view.store"
 import { IStateStore, StateStore } from "./state.store"
 import { IUserRootStore, UserRootStore } from "./user"
-import { IWorkspaceRootStore, WorkspaceRootStore } from "./workspace"
+import { StoreIWorkspaceStore, WorkspaceStore } from "./workspace"
 
 enableStaticRendering(typeof window === "undefined")
 
@@ -26,7 +25,7 @@ export class RootStore {
     app: IAppRootStore
     eventTracker: IEventTrackerStore
     user: IUserRootStore
-    workspaceRoot: IWorkspaceRootStore
+    workspace: StoreIWorkspaceStore
     projectRoot: IProjectRootStore
     memberRoot: IMemberRootStore
     cycle: ICycleStore
@@ -34,7 +33,6 @@ export class RootStore {
     projectView: IProjectViewStore
     globalView: IGlobalViewStore
     issue: IIssueRootStore
-    inbox: IInboxRootStore
     state: IStateStore
     label: ILabelStore
     estimate: IEstimateStore
@@ -46,16 +44,15 @@ export class RootStore {
         this.app = new AppRootStore(this)
         this.eventTracker = new EventTrackerStore(this)
         this.user = new UserRootStore(this)
-        this.workspaceRoot = new WorkspaceRootStore(this)
         this.projectRoot = new ProjectRootStore(this)
         this.memberRoot = new MemberRootStore(this)
         // independent stores
+        this.workspace = new WorkspaceStore(this)
         this.cycle = new CycleStore(this)
         this.module = new ModulesStore(this)
         this.projectView = new ProjectViewStore(this)
         this.globalView = new GlobalViewStore(this)
         this.issue = new IssueRootStore(this)
-        this.inbox = new InboxRootStore(this)
         this.state = new StateStore(this)
         this.label = new LabelStore(this)
         this.estimate = new EstimateStore(this)
@@ -65,16 +62,15 @@ export class RootStore {
     }
 
     resetOnSignout() {
-        this.workspaceRoot = new WorkspaceRootStore(this)
         this.projectRoot = new ProjectRootStore(this)
         this.memberRoot = new MemberRootStore(this)
         // independent stores
+        this.workspace = new WorkspaceStore(this)
         this.cycle = new CycleStore(this)
         this.module = new ModulesStore(this)
         this.projectView = new ProjectViewStore(this)
         this.globalView = new GlobalViewStore(this)
         this.issue = new IssueRootStore(this)
-        this.inbox = new InboxRootStore(this)
         this.state = new StateStore(this)
         this.label = new LabelStore(this)
         this.estimate = new EstimateStore(this)

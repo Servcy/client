@@ -25,8 +25,6 @@ export const ROLE = {
     20: "Admin",
 }
 
-export const ORGANIZATION_SIZE = ["Just myself", "2-10", "11-50", "51-200", "201-500", "500+"]
-
 export const USER_ROLES = [
     { value: "Product / Project Manager", label: "Product / Project Manager" },
     { value: "Development / Engineering", label: "Development / Engineering" },

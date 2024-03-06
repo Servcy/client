@@ -1,6 +1,3 @@
-// mobx
-
-// helper
 import { action, makeObservable, observable } from "mobx"
 
 import { applyTheme, unsetCustomCssVariables } from "@helpers/theme.helper"
@@ -118,7 +115,7 @@ export class ThemeStore implements IThemeStore {
                 applyTheme(
                     themeSettings?.theme?.palette !== ",,,,"
                         ? themeSettings?.theme?.palette
-                        : "#0d101b,#c5c5c5,#3f76ff,#0d101b,#c5c5c5",
+                        : "#0d101b,#c5c5c5,#4D7E3E,#0d101b,#c5c5c5",
                     themeSettings?.theme?.darkPalette
                 )
             } else unsetCustomCssVariables()

@@ -1,19 +1,10 @@
-import { refreshTokens as refreshTokensApi } from "@/apis/authentication"
 import Axios from "axios"
-import { getCookie, setCookie } from "cookies-next"
-
-import { isJwtTokenValid } from "@/utils/Authentication/jwt"
+import Cookies from "js-cookie"
 
 const SERVER_URL = process.env["NEXT_PUBLIC_SERVER_URL"]
 
 export const refreshTokens = async () => {
-    let accessToken = String(getCookie("accessToken") ?? "")
-    let refreshToken = String(getCookie("refreshToken") ?? "")
-    if (isJwtTokenValid(refreshToken) && !isJwtTokenValid(accessToken)) {
-        await refreshTokensApi(refreshToken, setCookie)
-        accessToken = String(getCookie("accessToken") ?? "")
-        refreshToken = String(getCookie("refreshToken") ?? "")
-    }
+    const accessToken = String(Cookies.get("accessToken") ?? "")
     return accessToken
 }
 

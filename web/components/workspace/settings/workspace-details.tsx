@@ -12,19 +12,18 @@ import { DeleteWorkspaceModal } from "@components/workspace"
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
 
 import { WORKSPACE_UPDATED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "@constants/workspace"
+import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { FileService } from "@services/file.service"
 
 import { copyUrlToClipboard } from "@helpers/string.helper"
 
 import { IWorkspace } from "@servcy/types"
-import { Button, CustomSelect, Input, Spinner } from "@servcy/ui"
+import { Button, Input, Spinner } from "@servcy/ui"
 
 const defaultValues: Partial<IWorkspace> = {
     name: "",
     url: "",
-    organization_size: "2-10",
     logo: null,
 }
 
@@ -62,7 +61,6 @@ export const WorkspaceDetails: FC = observer(() => {
         const payload: Partial<IWorkspace> = {
             logo: formData.logo,
             name: formData.name,
-            organization_size: formData.organization_size,
         }
 
         await updateWorkspace(currentWorkspace.slug, payload)
@@ -75,11 +73,7 @@ export const WorkspaceDetails: FC = observer(() => {
                         element: "Workspace general settings page",
                     },
                 })
-                toast.error({
-                    title: "Success",
-                    type: "success",
-                    message: "Workspace updated successfully",
-                })
+                toast.success("Workspace updated successfully")
             })
             .catch((err) => {
                 captureWorkspaceEvent({
@@ -108,19 +102,11 @@ export const WorkspaceDetails: FC = observer(() => {
         fileService.deleteFile(currentWorkspace.id, url).then(() => {
             updateWorkspace(currentWorkspace.slug, { logo: "" })
                 .then(() => {
-                    toast.error({
-                        type: "success",
-                        title: "Success!",
-                        message: "Workspace picture removed successfully.",
-                    })
+                    toast.success("Workspace picture removed successfully.")
                     setIsImageUploadModalOpen(false)
                 })
                 .catch(() => {
-                    toast.error({
-                        type: "error",
-                        title: "Error!",
-                        message: "There was some error in deleting your profile picture. Please try again.",
-                    })
+                    toast.error("There was some error in deleting your profile picture. Please try again.")
                 })
                 .finally(() => setIsImageRemoving(false))
         })
@@ -130,10 +116,7 @@ export const WorkspaceDetails: FC = observer(() => {
         if (!currentWorkspace) return
 
         copyUrlToClipboard(`${currentWorkspace.slug}`).then(() => {
-            toast.error({
-                type: "success",
-                title: "Workspace URL copied to the clipboard.",
-            })
+            toast.success("Workspace URL copied to the clipboard.")
         })
     }
 
@@ -245,31 +228,6 @@ export const WorkspaceDetails: FC = observer(() => {
                                         className="w-full rounded-md font-medium"
                                         disabled={!isAdmin}
                                     />
-                                )}
-                            />
-                        </div>
-
-                        <div className="flex flex-col gap-1 ">
-                            <h4 className="text-sm">Company size</h4>
-                            <Controller
-                                name="organization_size"
-                                control={control}
-                                render={({ field: { value, onChange } }) => (
-                                    <CustomSelect
-                                        value={value}
-                                        onChange={onChange}
-                                        label={ORGANIZATION_SIZE.find((c) => c === value) ?? "Select organization size"}
-                                        optionsClassName="w-full"
-                                        buttonClassName="!border-[0.5px] !border-custom-border-200 !shadow-none"
-                                        input
-                                        disabled={!isAdmin}
-                                    >
-                                        {ORGANIZATION_SIZE.map((item) => (
-                                            <CustomSelect.Option key={item} value={item}>
-                                                {item}
-                                            </CustomSelect.Option>
-                                        ))}
-                                    </CustomSelect>
                                 )}
                             />
                         </div>

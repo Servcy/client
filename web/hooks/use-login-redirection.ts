@@ -6,19 +6,19 @@ import { useUser } from "@hooks/store"
 
 import { IUser, IUserSettings } from "@servcy/types"
 
-type UseSignInRedirectionProps = {
+type UseLoginRedirectionProps = {
     error: any | null
     isRedirecting: boolean
     handleRedirection: () => Promise<void>
 }
 
-const useSignInRedirection = (): UseSignInRedirectionProps => {
+const useLoginRedirection = (): UseLoginRedirectionProps => {
     // states
     const [isRedirecting, setIsRedirecting] = useState(true)
     const [error, setError] = useState<any | null>(null)
     // router
     const router = useRouter()
-    const { next_path } = router.query
+    const { nextUrl } = router.query
     // mobx store
     const { fetchCurrentUser, fetchCurrentUserSettings } = useUser()
 
@@ -27,7 +27,7 @@ const useSignInRedirection = (): UseSignInRedirectionProps => {
         return !disallowedSchemes.test(url)
     }
 
-    const handleSignInRedirection = useCallback(
+    const handleLoginRedirection = useCallback(
         async (user: IUser) => {
             try {
                 // if the user is not onboarded, redirect them to the onboarding page
@@ -35,10 +35,10 @@ const useSignInRedirection = (): UseSignInRedirectionProps => {
                     router.push("/onboarding")
                     return
                 }
-                // if next_path is provided, redirect the user to that url
-                if (next_path) {
-                    if (isValidURL(next_path.toString())) {
-                        router.push(next_path.toString())
+                // if nextUrl is provided, redirect the user to that url
+                if (nextUrl) {
+                    if (isValidURL(nextUrl.toString())) {
+                        router.push(nextUrl.toString())
                         return
                     } else {
                         router.push("/")
@@ -53,22 +53,22 @@ const useSignInRedirection = (): UseSignInRedirectionProps => {
                 const workspaceSlug =
                     userSettings?.workspace?.last_workspace_slug || userSettings?.workspace?.fallback_workspace_slug
 
-                // Redirect based on workspace details or to profile if not available
+                // Redirect based on workspace details or to the root path
                 if (workspaceSlug) router.push(`/${workspaceSlug}`)
-                else router.push("/profile")
+                else router.push("/")
             } catch (error) {
-                console.error("Error in handleSignInRedirection:", error)
+                console.error("Error in handleLoginRedirection:", error)
                 setError(error)
             }
         },
-        [fetchCurrentUserSettings, router, next_path]
+        [fetchCurrentUserSettings, router, nextUrl]
     )
 
     const updateUserInfo = useCallback(async () => {
         setIsRedirecting(true)
         await fetchCurrentUser()
             .then(async (user) => {
-                await handleSignInRedirection(user)
+                await handleLoginRedirection(user)
                     .catch((err) => setError(err))
                     .finally(() => setIsRedirecting(false))
             })
@@ -76,7 +76,7 @@ const useSignInRedirection = (): UseSignInRedirectionProps => {
                 setError(err)
                 setIsRedirecting(false)
             })
-    }, [fetchCurrentUser, handleSignInRedirection])
+    }, [fetchCurrentUser, handleLoginRedirection])
 
     return {
         error,
@@ -85,4 +85,4 @@ const useSignInRedirection = (): UseSignInRedirectionProps => {
     }
 }
 
-export default useSignInRedirection
+export default useLoginRedirection

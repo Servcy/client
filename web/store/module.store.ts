@@ -120,7 +120,7 @@ export class ModulesStore implements IModuleStore {
      * @param moduleId
      * @returns IModule | null
      */
-    getModuleNameById = computedFn((moduleId: string) => this.moduleMap?.[moduleId]?.name)
+    getModuleNameById = computedFn((moduleId: string) => this.moduleMap?.[moduleId]?.name || "")
 
     /**
      * @description returns list of module ids of the project id passed as argument

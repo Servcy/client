@@ -36,7 +36,7 @@ export const CycleGanttBlock: React.FC<Props> = observer((props) => {
                         : cycleStatus === "upcoming"
                           ? "#f7ae59"
                           : cycleStatus === "completed"
-                            ? "#3f76ff"
+                            ? "#4D7E3E"
                             : cycleStatus === "draft"
                               ? "rgb(var(--color-text-200))"
                               : "",
@@ -95,7 +95,7 @@ export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
                         : cycleStatus === "upcoming"
                           ? "#f7ae59"
                           : cycleStatus === "completed"
-                            ? "#3f76ff"
+                            ? "#4D7E3E"
                             : cycleStatus === "draft"
                               ? "rgb(var(--color-text-200))"
                               : ""

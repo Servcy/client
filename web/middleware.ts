@@ -1,5 +1,4 @@
-import type { NextRequest } from "next/server"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
 import { isJwtTokenValid } from "@/utils/Authentication/jwt"
 
@@ -19,9 +18,9 @@ export const config = {
 }
 
 export async function middleware(request: NextRequest) {
-    const refreshToken = request.cookies.get("refreshToken")?.value ?? ""
+    const accessToken = request.cookies.get("accessToken")?.value ?? ""
     const requestedPath = request.nextUrl.pathname
-    if (isJwtTokenValid(refreshToken)) {
+    if (isJwtTokenValid(accessToken)) {
         if (authRoutes.includes(requestedPath))
             // Redirect to home if user is already logged in
             return NextResponse.redirect(new URL("/", request.nextUrl.origin))

@@ -157,7 +157,7 @@ export default function Gmail(): JSX.Element {
     }, [page, filters, search, activeTab])
 
     return (
-        <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
+        <>
             <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
                 <div className="flex">
                     <AiOutlineInbox className="my-auto mr-2" size="24" />
@@ -305,6 +305,6 @@ export default function Gmail(): JSX.Element {
                     totalInboxItems={inboxItems.length}
                 />
             )}
-        </main>
+        </>
     )
 }

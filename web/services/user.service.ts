@@ -3,7 +3,6 @@ import { APIService } from "@services/api.service"
 import { API_BASE_URL } from "@helpers/common.helper"
 
 import type {
-    IInstanceAdminStatus,
     IUser,
     IUserActivityResponse,
     IUserEmailNotificationSettings,
@@ -17,13 +16,6 @@ import type {
 export class UserService extends APIService {
     constructor() {
         super(API_BASE_URL)
-    }
-
-    currentUserConfig() {
-        return {
-            url: `${this.baseURL}/api/users/me/`,
-            headers: this.getHeaders(),
-        }
     }
 
     async userIssues(
@@ -45,15 +37,7 @@ export class UserService extends APIService {
     }
 
     async currentUser(): Promise<IUser> {
-        return this.get("/api/users/me/")
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response
-            })
-    }
-
-    async currentUserInstanceAdminStatus(): Promise<IInstanceAdminStatus> {
-        return this.get("/api/users/me/instance-admin/")
+        return this.get("/iam/users/me/")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -61,7 +45,7 @@ export class UserService extends APIService {
     }
 
     async currentUserSettings(): Promise<IUserSettings> {
-        return this.get("/api/users/me/settings/")
+        return this.get("/iam/users/me/settings/")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -69,7 +53,7 @@ export class UserService extends APIService {
     }
 
     async currentUserEmailNotificationSettings(): Promise<IUserEmailNotificationSettings> {
-        return this.get("/api/users/me/notification-preferences/")
+        return this.get("/notification/users/me/notification-preferences/")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -77,7 +61,7 @@ export class UserService extends APIService {
     }
 
     async updateUser(data: Partial<IUser>): Promise<any> {
-        return this.patch("/api/users/me/", data)
+        return this.patch("/iam/users/me/", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -85,7 +69,7 @@ export class UserService extends APIService {
     }
 
     async updateUserOnBoard(): Promise<any> {
-        return this.patch("/api/users/me/onboard/", {
+        return this.patch("/iam/users/me/onboard/", {
             is_onboarded: true,
         })
             .then((response) => response?.data)
@@ -95,7 +79,7 @@ export class UserService extends APIService {
     }
 
     async updateUserTourCompleted(): Promise<any> {
-        return this.patch("/api/users/me/tour-completed/", {
+        return this.patch("/iam/users/me/tour-completed/", {
             is_tour_completed: true,
         })
             .then((response) => response?.data)
@@ -105,7 +89,7 @@ export class UserService extends APIService {
     }
 
     async updateCurrentUserEmailNotificationSettings(data: Partial<IUserEmailNotificationSettings>): Promise<any> {
-        return this.patch("/api/users/me/notification-preferences/", data)
+        return this.patch("/notification/users/me/notification-preferences/", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -113,7 +97,7 @@ export class UserService extends APIService {
     }
 
     async getUserActivity(): Promise<IUserActivityResponse> {
-        return this.get(`/api/users/me/activities/`)
+        return this.get(`/iam/users/me/activities/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -121,19 +105,11 @@ export class UserService extends APIService {
     }
 
     async userWorkspaceDashboard(workspaceSlug: string, month: number): Promise<IUserWorkspaceDashboard> {
-        return this.get(`/api/users/me/workspaces/${workspaceSlug}/dashboard/`, {
+        return this.get(`/iam/users/me/workspaces/${workspaceSlug}/dashboard/`, {
             params: {
                 month: month,
             },
         })
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async changePassword(data: { old_password: string; new_password: string; confirm_password: string }): Promise<any> {
-        return this.post(`/api/users/me/change-password/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -178,7 +154,7 @@ export class UserService extends APIService {
     }
 
     async deactivateAccount() {
-        return this.delete(`/api/users/me/`)
+        return this.delete(`/iam/users/me/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -194,7 +170,7 @@ export class UserService extends APIService {
     }
 
     async joinProject(workspaceSlug: string, project_ids: string[]): Promise<any> {
-        return this.post(`/api/users/me/workspaces/${workspaceSlug}/projects/invitations/`, { project_ids })
+        return this.post(`/project/users/me/workspaces/${workspaceSlug}/projects/invitations/`, { project_ids })
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
