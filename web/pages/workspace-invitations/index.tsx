@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
+import useSWR from "swr";
 
 import { useUser } from "@hooks/store";
 
@@ -122,7 +122,7 @@ const WorkspaceInvitationPage: NextPageWithLayout = observer(() => {
   );
 });
 
-WorkspaceInvitationPage.getLayout = function getLayout(page: ReactElement) {
+WorkspaceInvitationPage.getWrapper = function getWrapper(page: ReactElement) {
   return <DefaultLayout>{page}</DefaultLayout>;
 };
 

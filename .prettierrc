@@ -1,0 +1,20 @@
+{
+    "printWidth": 120,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "importOrder": [
+        "^components/(.*)$",
+        "^hooks/(.*)$",
+        "^contexts/(.*)$",
+        "^styles/(.*)$",
+        "^layouts/(.*)$",
+        "^constants/(.*)$",
+        "^services/(.*)$",
+        "^wrappers/(.*)$",
+        "^helpers/(.*)$",
+        "^@servcy/(.*)$",
+        "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
+}

@@ -1,7 +1,7 @@
+import { observer } from "mobx-react";
+import Link from "next/link";
 import { ReactElement } from "react";
 import useSWR from "swr";
-import Link from "next/link";
-import { observer } from "mobx-react";
 //hooks
 import { useApplication, useUser } from "@hooks/store";
 
@@ -191,7 +191,7 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProfileActivityPage.getLayout = function getLayout(page: ReactElement) {
+ProfileActivityPage.getWrapper = function getWrapper(page: ReactElement) {
   return <ProfileSettingsLayout>{page}</ProfileSettingsLayout>;
 };
 

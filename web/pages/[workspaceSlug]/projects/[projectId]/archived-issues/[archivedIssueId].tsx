@@ -1,15 +1,15 @@
-import { useState, ReactElement } from "react";
-import { useRouter } from "next/router";
-import { observer } from "mobx-react";
-import useSWR from "swr";
-import toast from "react-hot-toast";
 import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store";
+import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement, useState } from "react";
+import toast from "react-hot-toast";
+import useSWR from "swr";
 
 import { AppLayout } from "@layouts/app-layout";
 
-import { IssueDetailRoot } from "@components/issues";
-import { ProjectArchivedIssueDetailsHeader } from "@components/headers";
 import { PageHead } from "@components/core";
+import { ProjectArchivedIssueDetailsHeader } from "@components/headers";
+import { IssueDetailRoot } from "@components/issues";
 
 import { ArchiveIcon, Button, Loader } from "@servcy/ui";
 
@@ -141,7 +141,7 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ArchivedIssueDetailsPage.getLayout = function getLayout(page: ReactElement) {
+ArchivedIssueDetailsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectArchivedIssueDetailsHeader />} withProjectWrapper>
       {page}

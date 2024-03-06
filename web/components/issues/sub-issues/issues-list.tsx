@@ -9,61 +9,61 @@ import { TIssue } from "@servcy/types";
 import { TSubIssueOperations } from "./root";
 
 export interface IIssueList {
-  workspaceSlug: string;
-  projectId: string;
-  parentIssueId: string;
-  spacingLeft: number;
-  disabled: boolean;
-  handleIssueCrudState: (
-    key: "create" | "existing" | "update" | "delete",
-    issueId: string,
-    issue?: TIssue | null
-  ) => void;
-  subIssueOperations: TSubIssueOperations;
+    workspaceSlug: string;
+    projectId: string;
+    parentIssueId: string;
+    spacingLeft: number;
+    disabled: boolean;
+    handleIssueCrudState: (
+        key: "create" | "existing" | "update" | "delete",
+        issueId: string,
+        issue?: TIssue | null
+    ) => void;
+    subIssueOperations: TSubIssueOperations;
 }
 
 export const IssueList: FC<IIssueList> = observer((props) => {
-  const {
-    workspaceSlug,
-    projectId,
-    parentIssueId,
-    spacingLeft = 10,
-    disabled,
-    handleIssueCrudState,
-    subIssueOperations,
-  } = props;
+    const {
+        workspaceSlug,
+        projectId,
+        parentIssueId,
+        spacingLeft = 10,
+        disabled,
+        handleIssueCrudState,
+        subIssueOperations,
+    } = props;
 
-  const {
-    subIssues: { subIssuesByIssueId },
-  } = useIssueDetail();
+    const {
+        subIssues: { subIssuesByIssueId },
+    } = useIssueDetail();
 
-  const subIssueIds = subIssuesByIssueId(parentIssueId);
+    const subIssueIds = subIssuesByIssueId(parentIssueId);
 
-  return (
-    <>
-      <div className="relative">
-        {subIssueIds &&
-          subIssueIds.length > 0 &&
-          subIssueIds.map((issueId) => (
-            <>
-              <IssueListItem
-                workspaceSlug={workspaceSlug}
-                projectId={projectId}
-                parentIssueId={parentIssueId}
-                issueId={issueId}
-                spacingLeft={spacingLeft}
-                disabled={disabled}
-                handleIssueCrudState={handleIssueCrudState}
-                subIssueOperations={subIssueOperations}
-              />
-            </>
-          ))}
+    return (
+        <>
+            <div className="relative">
+                {subIssueIds &&
+                    subIssueIds.length > 0 &&
+                    subIssueIds.map((issueId) => (
+                        <>
+                            <IssueListItem
+                                workspaceSlug={workspaceSlug}
+                                projectId={projectId}
+                                parentIssueId={parentIssueId}
+                                issueId={issueId}
+                                spacingLeft={spacingLeft}
+                                disabled={disabled}
+                                handleIssueCrudState={handleIssueCrudState}
+                                subIssueOperations={subIssueOperations}
+                            />
+                        </>
+                    ))}
 
-        <div
-          className={`absolute bottom-0 top-0  ${spacingLeft > 10 ? `border-l border-custom-border-100` : ``}`}
-          style={{ left: `${spacingLeft - 12}px` }}
-        />
-      </div>
-    </>
-  );
+                <div
+                    className={`absolute bottom-0 top-0  ${spacingLeft > 10 ? `border-l border-custom-border-100` : ``}`}
+                    style={{ left: `${spacingLeft - 12}px` }}
+                />
+            </div>
+        </>
+    );
 });

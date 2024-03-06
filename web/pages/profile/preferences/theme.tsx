@@ -1,13 +1,13 @@
-import { useEffect, useState, ReactElement } from "react";
+import { NextPageWithLayout } from "@/types/types";
+import { CustomThemeSelector, PageHead, ThemeSwitch } from "@components/core";
+import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes";
+import { useUser } from "@hooks/store";
+import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
+import { Spinner } from "@servcy/ui";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
-import { useUser } from "@hooks/store";
+import { ReactElement, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
-import { CustomThemeSelector, ThemeSwitch, PageHead } from "@components/core";
-import { Spinner } from "@servcy/ui";
-import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes";
-import { NextPageWithLayout } from "@/types/types";
 
 const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
   // states
@@ -66,7 +66,7 @@ const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProfilePreferencesThemePage.getLayout = function getLayout(page: ReactElement) {
+ProfilePreferencesThemePage.getWrapper = function getWrapper(page: ReactElement) {
   return <ProfilePreferenceSettingsLayout>{page}</ProfilePreferenceSettingsLayout>;
 };
 

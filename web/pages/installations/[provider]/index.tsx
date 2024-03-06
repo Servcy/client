@@ -1,5 +1,5 @@
-import React, { useEffect, ReactElement } from "react";
 import { useRouter } from "next/router";
+import { ReactElement, useEffect } from "react";
 
 import { AppInstallationService } from "@services/app_installation.service";
 
@@ -68,7 +68,7 @@ const AppPostInstallation: NextPageWithLayout = () => {
   );
 };
 
-AppPostInstallation.getLayout = function getLayout(page: ReactElement) {
+AppPostInstallation.getWrapper = function getWrapper(page: ReactElement) {
   return <div>{page}</div>;
 };
 

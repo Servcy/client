@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
 import useSWR from "swr";
 
 import { useUser, useWorkspace } from "@hooks/store";
@@ -10,9 +10,9 @@ import { IntegrationService } from "@services/integrations";
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 
-import { SingleIntegrationCard } from "@components/integration";
-import { WorkspaceSettingHeader } from "@components/headers";
 import { PageHead } from "@components/core";
+import { WorkspaceSettingHeader } from "@components/headers";
+import { SingleIntegrationCard } from "@components/integration";
 
 import { IntegrationAndImportExportBanner, IntegrationsSettingsLoader } from "@components/ui";
 
@@ -71,7 +71,7 @@ const WorkspaceIntegrationsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-WorkspaceIntegrationsPage.getLayout = function getLayout(page: ReactElement) {
+WorkspaceIntegrationsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="Integrations Settings" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

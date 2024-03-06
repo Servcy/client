@@ -15,35 +15,35 @@ import { useMemo } from "react";
 export interface IKanBanLayout {}
 
 export const DraftKanBanLayout: React.FC = observer(() => {
-  const router = useRouter();
-  const { workspaceSlug } = router.query;
+    const router = useRouter();
+    const { workspaceSlug } = router.query;
 
-  // store
-  const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT);
+    // store
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT);
 
-  const issueActions = useMemo(
-    () => ({
-      [EIssueActions.UPDATE]: async (issue: TIssue) => {
-        if (!workspaceSlug) return;
+    const issueActions = useMemo(
+        () => ({
+            [EIssueActions.UPDATE]: async (issue: TIssue) => {
+                if (!workspaceSlug) return;
 
-        await issues.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, issue);
-      },
-      [EIssueActions.DELETE]: async (issue: TIssue) => {
-        if (!workspaceSlug) return;
+                await issues.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, issue);
+            },
+            [EIssueActions.DELETE]: async (issue: TIssue) => {
+                if (!workspaceSlug) return;
 
-        await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id);
-      },
-    }),
-    [issues, workspaceSlug]
-  );
+                await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id);
+            },
+        }),
+        [issues, workspaceSlug]
+    );
 
-  return (
-    <BaseKanBanRoot
-      issueActions={issueActions}
-      issuesFilter={issuesFilter}
-      issues={issues}
-      showLoader={true}
-      QuickActions={ProjectIssueQuickActions}
-    />
-  );
+    return (
+        <BaseKanBanRoot
+            issueActions={issueActions}
+            issuesFilter={issuesFilter}
+            issues={issues}
+            showLoader={true}
+            QuickActions={ProjectIssueQuickActions}
+        />
+    );
 });

@@ -1,13 +1,13 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
 import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 
 import { ArchivedIssueLayoutRoot } from "@components/issues";
 
-import { ProjectArchivedIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
+import { ProjectArchivedIssuesHeader } from "@components/headers";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -31,7 +31,7 @@ const ProjectArchivedIssuesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectArchivedIssuesPage.getLayout = function getLayout(page: ReactElement) {
+ProjectArchivedIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectArchivedIssuesHeader />} withProjectWrapper>
       {page}

@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 
 import { useEventTracker, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
-import useKeypress from "@hooks/use-keypress";
+import useKeypress from "@hooks/use-key-press";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 import { TIssue, IProject } from "@servcy/types";
@@ -16,144 +16,151 @@ import { createIssuePayload } from "@helpers/issue.helper";
 import { ISSUE_CREATED } from "@constants/event-tracker";
 
 interface IInputProps {
-  formKey: string;
-  register: any;
-  setFocus: any;
-  projectDetail: IProject | null;
+    formKey: string;
+    register: any;
+    setFocus: any;
+    projectDetail: IProject | null;
 }
 const Inputs: FC<IInputProps> = (props) => {
-  const { formKey, register, setFocus, projectDetail } = props;
+    const { formKey, register, setFocus, projectDetail } = props;
 
-  useEffect(() => {
-    setFocus(formKey);
-  }, [formKey, setFocus]);
+    useEffect(() => {
+        setFocus(formKey);
+    }, [formKey, setFocus]);
 
-  return (
-    <div className="flex w-full items-center gap-3">
-      <div className="text-xs font-medium text-custom-text-400">{projectDetail?.identifier ?? "..."}</div>
-      <input
-        type="text"
-        autoComplete="off"
-        placeholder="Issue Title"
-        {...register(formKey, {
-          required: "Issue title is required.",
-        })}
-        className="w-full rounded-md bg-transparent px-2 py-3 text-sm font-medium leading-5 text-custom-text-200 outline-none"
-      />
-    </div>
-  );
+    return (
+        <div className="flex w-full items-center gap-3">
+            <div className="text-xs font-medium text-custom-text-400">{projectDetail?.identifier ?? "..."}</div>
+            <input
+                type="text"
+                autoComplete="off"
+                placeholder="Issue Title"
+                {...register(formKey, {
+                    required: "Issue title is required.",
+                })}
+                className="w-full rounded-md bg-transparent px-2 py-3 text-sm font-medium leading-5 text-custom-text-200 outline-none"
+            />
+        </div>
+    );
 };
 
 interface IListQuickAddIssueForm {
-  prePopulatedData?: Partial<TIssue>;
-  quickAddCallback?: (
-    workspaceSlug: string,
-    projectId: string,
-    data: TIssue,
-    viewId?: string
-  ) => Promise<TIssue | undefined>;
-  viewId?: string;
+    prePopulatedData?: Partial<TIssue>;
+    quickAddCallback?: (
+        workspaceSlug: string,
+        projectId: string,
+        data: TIssue,
+        viewId?: string
+    ) => Promise<TIssue | undefined>;
+    viewId?: string;
 }
 
 const defaultValues: Partial<TIssue> = {
-  name: "",
+    name: "",
 };
 
 export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props) => {
-  const { prePopulatedData, quickAddCallback, viewId } = props;
-  // router
-  const router = useRouter();
-  const { workspaceSlug, projectId } = router.query;
+    const { prePopulatedData, quickAddCallback, viewId } = props;
+    // router
+    const router = useRouter();
+    const { workspaceSlug, projectId } = router.query;
 
-  const { getProjectById } = useProject();
-  const { captureIssueEvent } = useEventTracker();
+    const { getProjectById } = useProject();
+    const { captureIssueEvent } = useEventTracker();
 
-  const projectDetail = (projectId && getProjectById(projectId.toString())) || undefined;
+    const projectDetail = (projectId && getProjectById(projectId.toString())) || undefined;
 
-  const ref = useRef<HTMLFormElement>(null);
+    const ref = useRef<HTMLFormElement>(null);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClose = () => setIsOpen(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const handleClose = () => setIsOpen(false);
 
-  useKeypress("Escape", handleClose);
-  useOutsideClickDetector(ref, handleClose);
+    useKeypress("Escape", handleClose);
+    useOutsideClickDetector(ref, handleClose);
 
-  const {
-    reset,
-    handleSubmit,
-    setFocus,
-    register,
-    formState: { errors, isSubmitting },
-  } = useForm<TIssue>({ defaultValues });
+    const {
+        reset,
+        handleSubmit,
+        setFocus,
+        register,
+        formState: { errors, isSubmitting },
+    } = useForm<TIssue>({ defaultValues });
 
-  useEffect(() => {
-    if (!isOpen) reset({ ...defaultValues });
-  }, [isOpen, reset]);
+    useEffect(() => {
+        if (!isOpen) reset({ ...defaultValues });
+    }, [isOpen, reset]);
 
-  const onSubmitHandler = async (formData: TIssue) => {
-    if (isSubmitting || !workspaceSlug || !projectId) return;
+    const onSubmitHandler = async (formData: TIssue) => {
+        if (isSubmitting || !workspaceSlug || !projectId) return;
 
-    reset({ ...defaultValues });
+        reset({ ...defaultValues });
 
-    const payload = createIssuePayload(projectId.toString(), {
-      ...(prePopulatedData ?? {}),
-      ...formData,
-    });
+        const payload = createIssuePayload(projectId.toString(), {
+            ...(prePopulatedData ?? {}),
+            ...formData,
+        });
 
-    try {
-      quickAddCallback &&
-        (await quickAddCallback(workspaceSlug.toString(), projectId.toString(), { ...payload }, viewId).then((res) => {
-          captureIssueEvent({
-            eventName: ISSUE_CREATED,
-            payload: { ...res, state: "SUCCESS", element: "List quick add" },
-            path: router.asPath,
-          });
-        }));
-      toast.error({
-        type: "success",
-        title: "Success!",
-        message: "Issue created successfully.",
-      });
-    } catch (err: any) {
-      captureIssueEvent({
-        eventName: ISSUE_CREATED,
-        payload: { ...payload, state: "FAILED", element: "List quick add" },
-        path: router.asPath,
-      });
-      toast.error({
-        type: "error",
-        title: "Error!",
-        message: err?.message || "Some error occurred. Please try again.",
-      });
-    }
-  };
+        try {
+            quickAddCallback &&
+                (await quickAddCallback(workspaceSlug.toString(), projectId.toString(), { ...payload }, viewId).then(
+                    (res) => {
+                        captureIssueEvent({
+                            eventName: ISSUE_CREATED,
+                            payload: { ...res, state: "SUCCESS", element: "List quick add" },
+                            path: router.asPath,
+                        });
+                    }
+                ));
+            toast.error({
+                type: "success",
+                title: "Success!",
+                message: "Issue created successfully.",
+            });
+        } catch (err: any) {
+            captureIssueEvent({
+                eventName: ISSUE_CREATED,
+                payload: { ...payload, state: "FAILED", element: "List quick add" },
+                path: router.asPath,
+            });
+            toast.error({
+                type: "error",
+                title: "Error!",
+                message: err?.message || "Some error occurred. Please try again.",
+            });
+        }
+    };
 
-  return (
-    <div
-      className={`border-b border-t border-custom-border-200 bg-custom-background-100 ${
-        errors && errors?.name && errors?.name?.message ? `border-red-500 bg-red-500/10` : ``
-      }`}
-    >
-      {isOpen ? (
-        <div className="shadow-custom-shadow-sm">
-          <form
-            ref={ref}
-            onSubmit={handleSubmit(onSubmitHandler)}
-            className="flex w-full items-center gap-x-3 border-[0.5px] border-t-0 border-custom-border-100 bg-custom-background-100 px-3"
-          >
-            <Inputs formKey={"name"} register={register} setFocus={setFocus} projectDetail={projectDetail ?? null} />
-          </form>
-          <div className="px-3 py-2 text-xs italic text-custom-text-200">{`Press 'Enter' to add another issue`}</div>
-        </div>
-      ) : (
+    return (
         <div
-          className="flex w-full cursor-pointer items-center gap-2 p-3 py-3 text-custom-primary-100"
-          onClick={() => setIsOpen(true)}
+            className={`border-b border-t border-custom-border-200 bg-custom-background-100 ${
+                errors && errors?.name && errors?.name?.message ? `border-red-500 bg-red-500/10` : ``
+            }`}
         >
-          <PlusIcon className="h-3.5 w-3.5 stroke-2" />
-          <span className="text-sm font-medium text-custom-primary-100">New Issue</span>
+            {isOpen ? (
+                <div className="shadow-custom-shadow-sm">
+                    <form
+                        ref={ref}
+                        onSubmit={handleSubmit(onSubmitHandler)}
+                        className="flex w-full items-center gap-x-3 border-[0.5px] border-t-0 border-custom-border-100 bg-custom-background-100 px-3"
+                    >
+                        <Inputs
+                            formKey={"name"}
+                            register={register}
+                            setFocus={setFocus}
+                            projectDetail={projectDetail ?? null}
+                        />
+                    </form>
+                    <div className="px-3 py-2 text-xs italic text-custom-text-200">{`Press 'Enter' to add another issue`}</div>
+                </div>
+            ) : (
+                <div
+                    className="flex w-full cursor-pointer items-center gap-2 p-3 py-3 text-custom-primary-100"
+                    onClick={() => setIsOpen(true)}
+                >
+                    <PlusIcon className="h-3.5 w-3.5 stroke-2" />
+                    <span className="text-sm font-medium text-custom-primary-100">New Issue</span>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 });

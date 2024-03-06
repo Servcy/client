@@ -6,5 +6,5 @@ import PngFileIcon from "public/attachment/png-icon.png";
 import type { ImageIconPros } from "./types";
 
 export const PngIcon: React.FC<ImageIconPros> = ({ width, height }) => (
-  <Image src={PngFileIcon} height={height} width={width} alt="PngFileIcon" />
+    <Image src={PngFileIcon} height={height} width={width} alt="PngFileIcon" />
 );

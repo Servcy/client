@@ -1,7 +1,7 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
+import useSWR from "swr";
 
 import { useCycle, useProject } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
@@ -9,8 +9,8 @@ import useLocalStorage from "@hooks/use-local-storage";
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";
-import { CycleIssuesHeader } from "@components/headers";
 import { CycleDetailsSidebar } from "@components/cycles";
+import { CycleIssuesHeader } from "@components/headers";
 import { CycleLayoutRoot } from "@components/issues/issue-layouts";
 
 import { EmptyState } from "@components/common";
@@ -83,7 +83,7 @@ const CycleDetailPage: NextPageWithLayout = observer(() => {
   );
 });
 
-CycleDetailPage.getLayout = function getLayout(page: ReactElement) {
+CycleDetailPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<CycleIssuesHeader />} withProjectWrapper>
       {page}

@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 
 import { useUser, useWebhook, useWorkspace } from "@hooks/store";
 
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 
-import { WorkspaceSettingHeader } from "@components/headers";
-import { WebhooksList, CreateWebhookModal } from "@components/web-hooks";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
+import { WorkspaceSettingHeader } from "@components/headers";
+import { CreateWebhookModal, WebhooksList } from "@components/web-hooks";
 
-import { Button } from "@servcy/ui";
 import { WebhookSettingsLoader } from "@components/ui";
+import { Button } from "@servcy/ui";
 
 import { NextPageWithLayout } from "@/types/types";
 
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PageHead } from "@components/core";
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 const WebhooksListPage: NextPageWithLayout = observer(() => {
   // states
@@ -113,7 +113,7 @@ const WebhooksListPage: NextPageWithLayout = observer(() => {
   );
 });
 
-WebhooksListPage.getLayout = function getLayout(page: React.ReactElement) {
+WebhooksListPage.getWrapper = function getWrapper(page: React.ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="Webhook settings" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

@@ -5,9 +5,9 @@ import { useUser, useWorkspace } from "@hooks/store";
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 
-import { WorkspaceSettingHeader } from "@components/headers";
-import ExportGuide from "@components/exporter/guide";
 import { PageHead } from "@components/core";
+import ExportGuide from "@components/exporter/guide";
+import { WorkspaceSettingHeader } from "@components/headers";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -48,7 +48,7 @@ const ExportsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ExportsPage.getLayout = function getLayout(page: React.ReactElement) {
+ExportsPage.getWrapper = function getWrapper(page: React.ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="Export Settings" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

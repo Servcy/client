@@ -14,8 +14,8 @@ import { CreateWorkspaceForm } from "@components/workspace";
 // images
 import ServcyLogo from "public/logo.svg";
 
-import { IWorkspace } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { IWorkspace } from "@servcy/types";
 
 const CreateWorkspacePage: NextPageWithLayout = observer(() => {
   // router
@@ -68,7 +68,7 @@ const CreateWorkspacePage: NextPageWithLayout = observer(() => {
   );
 });
 
-CreateWorkspacePage.getLayout = function getLayout(page: ReactElement) {
+CreateWorkspacePage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <UserAuthWrapper>
       <DefaultLayout>{page} </DefaultLayout>

@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
 import { observer } from "mobx-react";
+import { ReactElement } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
@@ -29,7 +29,7 @@ const MembersSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-MembersSettingsPage.getLayout = function getLayout(page: ReactElement) {
+MembersSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectSettingHeader title="Members Settings" />} withProjectWrapper>
       <ProjectSettingLayout>{page}</ProjectSettingLayout>

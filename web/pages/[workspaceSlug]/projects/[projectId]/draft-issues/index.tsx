@@ -1,12 +1,12 @@
-import { ReactElement } from "react";
+import { PenSquare, X } from "lucide-react";
 import { useRouter } from "next/router";
-import { X, PenSquare } from "lucide-react";
+import { ReactElement } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 
-import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/draft-issue-layout-root";
 import { PageHead } from "@components/core";
 import { ProjectDraftIssueHeader } from "@components/headers";
+import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/draft-issue-layout-root";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -43,7 +43,7 @@ const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectDraftIssuesPage.getLayout = function getLayout(page: ReactElement) {
+ProjectDraftIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectDraftIssueHeader />} withProjectWrapper>
       {page}

@@ -1,11 +1,11 @@
-import { ReactElement } from "react";
 import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";
-import { ModulesListView } from "@components/modules";
 import { ModulesListHeader } from "@components/headers";
+import { ModulesListView } from "@components/modules";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -29,7 +29,7 @@ const ProjectModulesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectModulesPage.getLayout = function getLayout(page: ReactElement) {
+ProjectModulesPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ModulesListHeader />} withProjectWrapper>
       {page}

@@ -8,37 +8,37 @@ import { TIssueTypeFilters } from "@servcy/types";
 import { ISSUE_FILTER_OPTIONS } from "@constants/issue";
 
 type Props = {
-  selectedIssueType: TIssueTypeFilters | undefined;
-  handleUpdate: (val: TIssueTypeFilters) => void;
+    selectedIssueType: TIssueTypeFilters | undefined;
+    handleUpdate: (val: TIssueTypeFilters) => void;
 };
 
 export const FilterIssueType: React.FC<Props> = observer((props) => {
-  const { selectedIssueType, handleUpdate } = props;
+    const { selectedIssueType, handleUpdate } = props;
 
-  const [previewEnabled, setPreviewEnabled] = React.useState(true);
+    const [previewEnabled, setPreviewEnabled] = React.useState(true);
 
-  const activeIssueType = selectedIssueType ?? null;
+    const activeIssueType = selectedIssueType ?? null;
 
-  return (
-    <>
-      <FilterHeader
-        title="Issue Type"
-        isPreviewEnabled={previewEnabled}
-        handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
-      />
-      {previewEnabled && (
-        <div>
-          {ISSUE_FILTER_OPTIONS.map((issueType) => (
-            <FilterOption
-              key={issueType?.key}
-              isChecked={activeIssueType === issueType?.key ? true : false}
-              onClick={() => handleUpdate(issueType?.key)}
-              title={issueType.title}
-              multiple={false}
+    return (
+        <>
+            <FilterHeader
+                title="Issue Type"
+                isPreviewEnabled={previewEnabled}
+                handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
             />
-          ))}
-        </div>
-      )}
-    </>
-  );
+            {previewEnabled && (
+                <div>
+                    {ISSUE_FILTER_OPTIONS.map((issueType) => (
+                        <FilterOption
+                            key={issueType?.key}
+                            isChecked={activeIssueType === issueType?.key ? true : false}
+                            onClick={() => handleUpdate(issueType?.key)}
+                            title={issueType.title}
+                            multiple={false}
+                        />
+                    ))}
+                </div>
+            )}
+        </>
+    );
 });

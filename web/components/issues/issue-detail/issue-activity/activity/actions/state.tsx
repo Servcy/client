@@ -10,26 +10,26 @@ import { DoubleCircleIcon } from "@servcy/ui";
 type TIssueStateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
 
 export const IssueStateActivity: FC<TIssueStateActivity> = observer((props) => {
-  const { activityId, showIssue = true, ends } = props;
+    const { activityId, showIssue = true, ends } = props;
 
-  const {
-    activity: { getActivityById },
-  } = useIssueDetail();
+    const {
+        activity: { getActivityById },
+    } = useIssueDetail();
 
-  const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId);
 
-  if (!activity) return <></>;
-  return (
-    <IssueActivityBlockComponent
-      icon={<DoubleCircleIcon className="h-4 w-4 flex-shrink-0" />}
-      activityId={activityId}
-      ends={ends}
-    >
-      <>
-        set the state to <span className="font-medium text-custom-text-100">{activity.new_value}</span>
-        {showIssue ? ` for ` : ``}
-        {showIssue && <IssueLink activityId={activityId} />}.
-      </>
-    </IssueActivityBlockComponent>
-  );
+    if (!activity) return <></>;
+    return (
+        <IssueActivityBlockComponent
+            icon={<DoubleCircleIcon className="h-4 w-4 flex-shrink-0" />}
+            activityId={activityId}
+            ends={ends}
+        >
+            <>
+                set the state to <span className="font-medium text-custom-text-100">{activity.new_value}</span>
+                {showIssue ? ` for ` : ``}
+                {showIssue && <IssueLink activityId={activityId} />}.
+            </>
+        </IssueActivityBlockComponent>
+    );
 });

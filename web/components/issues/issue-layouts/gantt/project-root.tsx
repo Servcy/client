@@ -10,24 +10,24 @@ import { EIssueActions } from "../types";
 import { TIssue } from "@servcy/types";
 
 export const GanttLayout: React.FC = observer(() => {
-  // router
-  const router = useRouter();
-  const { workspaceSlug } = router.query;
-  // store hooks
-  const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT);
+    // router
+    const router = useRouter();
+    const { workspaceSlug } = router.query;
+    // store hooks
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT);
 
-  const issueActions = {
-    [EIssueActions.UPDATE]: async (issue: TIssue) => {
-      if (!workspaceSlug) return;
+    const issueActions = {
+        [EIssueActions.UPDATE]: async (issue: TIssue) => {
+            if (!workspaceSlug) return;
 
-      await issues.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, issue);
-    },
-    [EIssueActions.DELETE]: async (issue: TIssue) => {
-      if (!workspaceSlug) return;
+            await issues.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, issue);
+        },
+        [EIssueActions.DELETE]: async (issue: TIssue) => {
+            if (!workspaceSlug) return;
 
-      await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id);
-    },
-  };
+            await issues.removeIssue(workspaceSlug.toString(), issue.project_id, issue.id);
+        },
+    };
 
-  return <BaseGanttRoot issueFiltersStore={issuesFilter} issueStore={issues} issueActions={issueActions} />;
+    return <BaseGanttRoot issueFiltersStore={issuesFilter} issueStore={issues} issueActions={issueActions} />;
 });

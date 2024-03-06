@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
 import { observer } from "mobx-react-lite";
+import Image from "next/image";
+import React from "react";
 
 import { useApplication, useUser } from "@hooks/store";
 
@@ -50,7 +50,7 @@ const SignUpPage: NextPageWithLayout = observer(() => {
   );
 });
 
-SignUpPage.getLayout = function getLayout(page: React.ReactElement) {
+SignUpPage.getWrapper = function getWrapper(page: React.ReactElement) {
   return <DefaultLayout>{page}</DefaultLayout>;
 };
 

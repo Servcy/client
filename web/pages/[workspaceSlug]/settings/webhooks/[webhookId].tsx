@@ -15,8 +15,8 @@ import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "@componen
 
 import { Spinner } from "@servcy/ui";
 
-import { IWebhook } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { IWebhook } from "@servcy/types";
 
 const WebhookDetailsPage: NextPageWithLayout = observer(() => {
   // states
@@ -104,7 +104,7 @@ const WebhookDetailsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-WebhookDetailsPage.getLayout = function getLayout(page: React.ReactElement) {
+WebhookDetailsPage.getWrapper = function getWrapper(page: React.ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="Webhook settings" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

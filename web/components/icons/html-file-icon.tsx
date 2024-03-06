@@ -6,5 +6,5 @@ import HtmlFileIcon from "public/attachment/html-icon.png";
 import type { ImageIconPros } from "./types";
 
 export const HtmlIcon: React.FC<ImageIconPros> = ({ width, height }) => (
-  <Image src={HtmlFileIcon} height={height} width={width} alt="HtmlFileIcon" />
+    <Image src={HtmlFileIcon} height={height} width={width} alt="HtmlFileIcon" />
 );

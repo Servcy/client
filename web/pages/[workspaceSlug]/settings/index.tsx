@@ -1,14 +1,14 @@
-import { ReactElement } from "react";
 import { observer } from "mobx-react";
+import { ReactElement } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 
 import { useWorkspace } from "@hooks/store";
 
+import { PageHead } from "@components/core";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { WorkspaceDetails } from "@components/workspace";
-import { PageHead } from "@components/core";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -26,7 +26,7 @@ const WorkspaceSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-WorkspaceSettingsPage.getLayout = function getLayout(page: ReactElement) {
+WorkspaceSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="General Settings" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

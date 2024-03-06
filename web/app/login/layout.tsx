@@ -11,54 +11,54 @@ import "@/styles/globals.css";
 import { isMobileDevice } from "@/utils/Shared";
 
 const LoginLayout: FC<PropsWithChildren> = function ({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <Toaster />
-        <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
-          <LayoutWrapper>
-            {children}
-            <Analytics />
-          </LayoutWrapper>
-        </GoogleOAuthProvider>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body>
+                <Toaster />
+                <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
+                    <LayoutWrapper>
+                        {children}
+                        <Analytics />
+                    </LayoutWrapper>
+                </GoogleOAuthProvider>
+            </body>
+        </html>
+    );
 };
 
 const LayoutWrapper: FC<PropsWithChildren> = function ({ children }) {
-  const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 500);
+    }, []);
 
-  if (loading)
-    return (
-      <div className="flex h-screen justify-center">
-        <Spin
-          className="order-2 m-auto"
-          size="large"
-          indicator={
-            <SyncOutlined
-              spin
-              style={{
-                color: "#26542F",
-              }}
-            />
-          }
-        />
-      </div>
-    );
-  if (isMobileDevice(navigator.userAgent))
-    return (
-      <div className="flex h-screen justify-center">
-        <Blocked />
-      </div>
-    );
-  return <div className="flex">{children}</div>;
+    if (loading)
+        return (
+            <div className="flex h-screen justify-center">
+                <Spin
+                    className="order-2 m-auto"
+                    size="large"
+                    indicator={
+                        <SyncOutlined
+                            spin
+                            style={{
+                                color: "#26542F",
+                            }}
+                        />
+                    }
+                />
+            </div>
+        );
+    if (isMobileDevice(navigator.userAgent))
+        return (
+            <div className="flex h-screen justify-center">
+                <Blocked />
+            </div>
+        );
+    return <div className="flex">{children}</div>;
 };
 
 export default LoginLayout;

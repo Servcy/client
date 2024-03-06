@@ -13,29 +13,29 @@ import { TIssue } from "@servcy/types";
 import { EIssuesStoreType } from "@constants/issue";
 
 export interface IViewSpreadsheetLayout {
-  issueActions: {
-    [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
-    [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
-    [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
-    [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>;
-  };
+    issueActions: {
+        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
+        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
+        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
+        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>;
+    };
 }
 
 export const ProjectViewSpreadsheetLayout: React.FC<IViewSpreadsheetLayout> = observer((props) => {
-  const { issueActions } = props;
-  // router
-  const router = useRouter();
-  const { viewId } = router.query;
+    const { issueActions } = props;
+    // router
+    const router = useRouter();
+    const { viewId } = router.query;
 
-  const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW);
+    const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW);
 
-  return (
-    <BaseSpreadsheetRoot
-      issueStore={issues}
-      issueFiltersStore={issuesFilter}
-      issueActions={issueActions}
-      QuickActions={ProjectIssueQuickActions}
-      viewId={viewId?.toString()}
-    />
-  );
+    return (
+        <BaseSpreadsheetRoot
+            issueStore={issues}
+            issueFiltersStore={issuesFilter}
+            issueActions={issueActions}
+            QuickActions={ProjectIssueQuickActions}
+            viewId={viewId?.toString()}
+        />
+    );
 });

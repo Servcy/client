@@ -13,32 +13,32 @@ import { BaseListRoot } from "../base-list-root";
 import { ProjectIssueQuickActions } from "../../quick-action-dropdowns";
 
 export interface IViewListLayout {
-  issueActions: {
-    [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
-    [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
-    [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
-    [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>;
-  };
+    issueActions: {
+        [EIssueActions.DELETE]: (issue: TIssue) => Promise<void>;
+        [EIssueActions.UPDATE]?: (issue: TIssue) => Promise<void>;
+        [EIssueActions.REMOVE]?: (issue: TIssue) => Promise<void>;
+        [EIssueActions.ARCHIVE]?: (issue: TIssue) => Promise<void>;
+    };
 }
 
 export const ProjectViewListLayout: React.FC<IViewListLayout> = observer((props) => {
-  const { issueActions } = props;
-  // store
-  const { issuesFilter, issues } = useIssues(EIssuesStoreType.PROJECT_VIEW);
+    const { issueActions } = props;
+    // store
+    const { issuesFilter, issues } = useIssues(EIssuesStoreType.PROJECT_VIEW);
 
-  const router = useRouter();
-  const { workspaceSlug, projectId, viewId } = router.query;
+    const router = useRouter();
+    const { workspaceSlug, projectId, viewId } = router.query;
 
-  if (!workspaceSlug || !projectId) return null;
+    if (!workspaceSlug || !projectId) return null;
 
-  return (
-    <BaseListRoot
-      issuesFilter={issuesFilter}
-      issues={issues}
-      QuickActions={ProjectIssueQuickActions}
-      issueActions={issueActions}
-      storeType={EIssuesStoreType.PROJECT_VIEW}
-      viewId={viewId?.toString()}
-    />
-  );
+    return (
+        <BaseListRoot
+            issuesFilter={issuesFilter}
+            issues={issues}
+            QuickActions={ProjectIssueQuickActions}
+            issueActions={issueActions}
+            storeType={EIssuesStoreType.PROJECT_VIEW}
+            viewId={viewId?.toString()}
+        />
+    );
 });

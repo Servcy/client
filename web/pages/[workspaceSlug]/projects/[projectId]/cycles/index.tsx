@@ -14,11 +14,11 @@ import { ActiveCycleDetails, CycleCreateUpdateModal, CyclesView } from "@compone
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { CyclesHeader } from "@components/headers";
 
-import { Tooltip } from "@servcy/ui";
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
+import { Tooltip } from "@servcy/ui";
 
-import { TCycleLayout, TCycleView } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { TCycleLayout, TCycleView } from "@servcy/types";
 
 import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle";
 import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
@@ -220,7 +220,7 @@ const ProjectCyclesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectCyclesPage.getLayout = function getLayout(page: ReactElement) {
+ProjectCyclesPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<CyclesHeader />} withProjectWrapper>
       {page}

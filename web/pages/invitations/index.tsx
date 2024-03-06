@@ -23,8 +23,8 @@ import ServcyLogo from "public/logo.svg";
 import { truncateText } from "@helpers/string.helper";
 import { getUserRole } from "@helpers/user.helper";
 
-import type { IWorkspaceMemberInvitation } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import type { IWorkspaceMemberInvitation } from "@servcy/types";
 
 import { MEMBER_ACCEPTED } from "@constants/event-tracker";
 import { ROLE } from "@constants/workspace";
@@ -224,7 +224,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-UserInvitationsPage.getLayout = function getLayout(page: ReactElement) {
+UserInvitationsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <UserAuthWrapper>
       <DefaultLayout>{page}</DefaultLayout>

@@ -1,11 +1,11 @@
-import { ReactElement } from "react";
 import { observer } from "mobx-react";
+import { ReactElement } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";
-import { WorkspaceDashboardView } from "@components/page-views";
 import { WorkspaceDashboardHeader } from "@components/headers/workspace-dashboard";
+import { WorkspaceDashboardView } from "@components/page-views";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -24,7 +24,7 @@ const WorkspacePage: NextPageWithLayout = observer(() => {
   );
 });
 
-WorkspacePage.getLayout = function getLayout(page: ReactElement) {
+WorkspacePage.getWrapper = function getWrapper(page: ReactElement) {
   return <AppLayout header={<WorkspaceDashboardHeader />}>{page}</AppLayout>;
 };
 

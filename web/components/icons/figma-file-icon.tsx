@@ -6,5 +6,5 @@ import FigmaFileIcon from "public/attachment/figma-icon.png";
 import type { ImageIconPros } from "./types";
 
 export const FigmaIcon: React.FC<ImageIconPros> = ({ width, height }) => (
-  <Image src={FigmaFileIcon} height={height} width={width} alt="FigmaFileIcon" />
+    <Image src={FigmaFileIcon} height={height} width={width} alt="FigmaFileIcon" />
 );

@@ -7,17 +7,17 @@ import { Loader } from "@servcy/ui";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 
 export const FavoritePagesList: FC = observer(() => {
-  const projectPageStore = useProjectPages();
-  const { favoriteProjectPageIds } = projectPageStore;
+    const projectPageStore = useProjectPages();
+    const { favoriteProjectPageIds } = projectPageStore;
 
-  if (!favoriteProjectPageIds)
-    return (
-      <Loader className="space-y-4">
-        <Loader.Item height="40px" />
-        <Loader.Item height="40px" />
-        <Loader.Item height="40px" />
-      </Loader>
-    );
+    if (!favoriteProjectPageIds)
+        return (
+            <Loader className="space-y-4">
+                <Loader.Item height="40px" />
+                <Loader.Item height="40px" />
+                <Loader.Item height="40px" />
+            </Loader>
+        );
 
-  return <PagesListView pageIds={favoriteProjectPageIds} />;
+    return <PagesListView pageIds={favoriteProjectPageIds} />;
 });

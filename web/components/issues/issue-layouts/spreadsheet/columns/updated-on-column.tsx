@@ -6,14 +6,14 @@ import { renderFormattedDate } from "@helpers/date-time.helper";
 import { TIssue } from "@servcy/types";
 
 type Props = {
-  issue: TIssue;
+    issue: TIssue;
 };
 
 export const SpreadsheetUpdatedOnColumn: React.FC<Props> = observer((props: Props) => {
-  const { issue } = props;
-  return (
-    <div className="flex h-11 w-full items-center justify-center text-xs border-b-[0.5px] border-custom-border-200 hover:bg-custom-background-80">
-      {renderFormattedDate(issue.updated_at)}
-    </div>
-  );
+    const { issue } = props;
+    return (
+        <div className="flex h-11 w-full items-center justify-center text-xs border-b-[0.5px] border-custom-border-200 hover:bg-custom-background-80">
+            {renderFormattedDate(issue.updated_at)}
+        </div>
+    );
 });

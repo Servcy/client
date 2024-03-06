@@ -1,15 +1,15 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
+import useSWR from "swr";
 
 import { useProject, useProjectView } from "@hooks/store";
 
 import { AppLayout } from "@layouts/app-layout";
 
-import { ProjectViewLayoutRoot } from "@components/issues";
-import { ProjectViewIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
+import { ProjectViewIssuesHeader } from "@components/headers";
+import { ProjectViewLayoutRoot } from "@components/issues";
 
 import { EmptyState } from "@components/common";
 
@@ -58,7 +58,7 @@ const ProjectViewIssuesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectViewIssuesPage.getLayout = function getLayout(page: ReactElement) {
+ProjectViewIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectViewIssuesHeader />} withProjectWrapper>
       {page}

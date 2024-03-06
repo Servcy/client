@@ -1,14 +1,14 @@
-import { ReactElement } from "react";
 import { observer } from "mobx-react-lite";
+import { ReactElement } from "react";
 
-import { useUser, useProject } from "@hooks/store";
+import { useProject, useUser } from "@hooks/store";
 
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 
 import { PageHead } from "@components/core";
-import { ProjectSettingHeader } from "@components/headers";
 import { EstimatesList } from "@components/estimates";
+import { ProjectSettingHeader } from "@components/headers";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -33,7 +33,7 @@ const EstimatesSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-EstimatesSettingsPage.getLayout = function getLayout(page: ReactElement) {
+EstimatesSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectSettingHeader title="Estimates Settings" />} withProjectWrapper>
       <ProjectSettingLayout>{page}</ProjectSettingLayout>

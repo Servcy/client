@@ -1,18 +1,18 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
+import useSWR from "swr";
 
 import { useModule, useProject } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
 
 import { AppLayout } from "@layouts/app-layout";
 
-import { ModuleDetailsSidebar } from "@components/modules";
-import { ModuleLayoutRoot } from "@components/issues";
-import { ModuleIssuesHeader } from "@components/headers";
-import { PageHead } from "@components/core";
 import { EmptyState } from "@components/common";
+import { PageHead } from "@components/core";
+import { ModuleIssuesHeader } from "@components/headers";
+import { ModuleLayoutRoot } from "@components/issues";
+import { ModuleDetailsSidebar } from "@components/modules";
 
 import emptyModule from "public/empty-state/module.svg";
 
@@ -81,7 +81,7 @@ const ModuleIssuesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ModuleIssuesPage.getLayout = function getLayout(page: ReactElement) {
+ModuleIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ModuleIssuesHeader />} withProjectWrapper>
       {page}

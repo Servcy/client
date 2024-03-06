@@ -1,3 +1,3 @@
 export interface JwtToken {
-  exp: number;
+    exp: number;
 }

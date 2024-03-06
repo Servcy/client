@@ -17,8 +17,8 @@ import {
   ProfileWorkload,
 } from "@components/profile";
 
-import { IUserStateDistribution, TStateGroups } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { IUserStateDistribution, TStateGroups } from "@servcy/types";
 
 import { USER_PROFILE_DATA } from "@constants/fetch-keys";
 import { GROUP_CHOICES } from "@constants/project";
@@ -57,7 +57,7 @@ const ProfileOverviewPage: NextPageWithLayout = () => {
   );
 };
 
-ProfileOverviewPage.getLayout = function getLayout(page: ReactElement) {
+ProfileOverviewPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<UserProfileHeader type="Summary" />}>
       <ProfileAuthWrapper>{page}</ProfileAuthWrapper>

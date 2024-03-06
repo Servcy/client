@@ -1,74 +1,74 @@
 {
-  "name": "servcy-client",
-  "version": "0.0.0",
-  "homepage": "https://github.com/Servcy/Client",
-  "bugs": "https://github.com/Servcy/Client/issues",
-  "private": true,
-  "license": "AGPL-3.0",
-  "author": "Megham Garg <meghamgarg@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Servcy/Client.git"
-  },
-  "workspaces": [
-    "web",
-    "packages/editor/*",
-    "packages/eslint-config-custom",
-    "packages/tailwind-config-custom",
-    "packages/tsconfig",
-    "packages/ui",
-    "packages/types"
-  ],
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --concurrency=13",
-    "start": "turbo run start",
-    "lint": "turbo run lint",
-    "clean": "turbo run clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.15",
-    "eslint-config-custom": "*",
-    "postcss": "^8.4.29",
-    "prettier": "latest",
-    "prettier-plugin-tailwindcss": "^0.5.4",
-    "tailwindcss": "^3.3.3",
-    "turbo": "^1.11.3"
-  },
-  "resolutions": {
-    "@types/react": "18.2.42"
-  },
-  "packageManager": "yarn@1.22.19",
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "next/core-web-vitals",
-      "plugin:@typescript-eslint/strict",
-      "plugin:jsx-a11y/recommended",
-      "plugin:prettier/recommended",
-      "plugin:react/recommended",
-      "plugin:react-hooks/recommended",
-      "plugin:tailwindcss/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "project": "./tsconfig.json"
+    "name": "servcy-client",
+    "version": "0.0.0",
+    "homepage": "https://github.com/Servcy/Client",
+    "bugs": "https://github.com/Servcy/Client/issues",
+    "private": true,
+    "license": "AGPL-3.0",
+    "author": "Megham Garg <meghamgarg@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Servcy/Client.git"
     },
-    "root": true,
-    "rules": {
-      "no-undef": "off",
-      "no-unused-vars": "off",
-      "react/react-in-jsx-scope": "off",
-      "tailwindcss/classnames-order": [
-        "warn",
-        {
-          "officialSorting": true
+    "workspaces": [
+        "web",
+        "packages/editor/*",
+        "packages/eslint-config-custom",
+        "packages/tailwind-config-custom",
+        "packages/tsconfig",
+        "packages/ui",
+        "packages/types"
+    ],
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev --concurrency=13",
+        "start": "turbo run start",
+        "lint": "turbo run lint",
+        "clean": "turbo run clean",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.15",
+        "eslint-config-custom": "*",
+        "postcss": "^8.4.29",
+        "prettier": "latest",
+        "prettier-plugin-tailwindcss": "^0.5.4",
+        "tailwindcss": "^3.3.3",
+        "turbo": "^1.11.3"
+    },
+    "resolutions": {
+        "@types/react": "18.2.42"
+    },
+    "packageManager": "yarn@1.22.19",
+    "eslintConfig": {
+        "extends": [
+            "eslint:recommended",
+            "next/core-web-vitals",
+            "plugin:@typescript-eslint/strict",
+            "plugin:jsx-a11y/recommended",
+            "plugin:prettier/recommended",
+            "plugin:react/recommended",
+            "plugin:react-hooks/recommended",
+            "plugin:tailwindcss/recommended"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+            "ecmaFeatures": {
+                "jsx": true
+            },
+            "project": "./tsconfig.json"
+        },
+        "root": true,
+        "rules": {
+            "no-undef": "off",
+            "no-unused-vars": "off",
+            "react/react-in-jsx-scope": "off",
+            "tailwindcss/classnames-order": [
+                "warn",
+                {
+                    "officialSorting": true
+                }
+            ]
         }
-      ]
     }
-  }
 }

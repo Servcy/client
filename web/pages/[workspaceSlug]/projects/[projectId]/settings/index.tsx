@@ -1,7 +1,7 @@
-import { useState, ReactElement } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
+import { ReactElement, useState } from "react";
+import useSWR from "swr";
 
 import { useProject } from "@hooks/store";
 
@@ -73,7 +73,7 @@ const GeneralSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-GeneralSettingsPage.getLayout = function getLayout(page: ReactElement) {
+GeneralSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectSettingHeader title="General Settings" />} withProjectWrapper>
       <ProjectSettingLayout>{page}</ProjectSettingLayout>

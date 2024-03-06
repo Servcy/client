@@ -6,5 +6,5 @@ import DefaultFileIcon from "public/attachment/default-icon.png";
 import type { ImageIconPros } from "./types";
 
 export const DefaultIcon: React.FC<ImageIconPros> = ({ width, height }) => (
-  <Image src={DefaultFileIcon} height={height} width={width} alt="DefaultFileIcon" />
+    <Image src={DefaultFileIcon} height={height} width={width} alt="DefaultFileIcon" />
 );

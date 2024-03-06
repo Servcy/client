@@ -1,14 +1,14 @@
 .border-1 {
-  border: 1px solid;
+    border: 1px solid;
 }
 
 .rounded-tr td:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding-left: 20px !important;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding-left: 20px !important;
 }
 
 .rounded-tr td:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }

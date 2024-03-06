@@ -23,8 +23,8 @@ import { Avatar, Spinner } from "@servcy/ui";
 // images
 import ServcyLogo from "public/logo.png";
 
-import { IUser, TOnboardingSteps } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { IUser, TOnboardingSteps } from "@servcy/types";
 
 import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker";
 
@@ -252,7 +252,7 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
   );
 });
 
-OnboardingPage.getLayout = function getLayout(page: ReactElement) {
+OnboardingPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <UserAuthWrapper>
       <DefaultLayout>{page}</DefaultLayout>

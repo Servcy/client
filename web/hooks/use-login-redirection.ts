@@ -65,7 +65,6 @@ const useSignInRedirection = (): UseSignInRedirectionProps => {
 
   const updateUserInfo = useCallback(async () => {
     setIsRedirecting(true);
-
     await fetchCurrentUser()
       .then(async (user) => {
         await handleSignInRedirection(user)

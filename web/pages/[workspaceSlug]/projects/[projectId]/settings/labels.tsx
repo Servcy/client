@@ -1,12 +1,12 @@
-import { ReactElement } from "react";
 import { observer } from "mobx-react";
+import { ReactElement } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 
 import { PageHead } from "@components/core";
-import { ProjectSettingsLabelList } from "@components/labels";
 import { ProjectSettingHeader } from "@components/headers";
+import { ProjectSettingsLabelList } from "@components/labels";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -26,7 +26,7 @@ const LabelsSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-LabelsSettingsPage.getLayout = function getLayout(page: ReactElement) {
+LabelsSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout withProjectWrapper header={<ProjectSettingHeader title="Labels Settings" />}>
       <ProjectSettingLayout>{page}</ProjectSettingLayout>

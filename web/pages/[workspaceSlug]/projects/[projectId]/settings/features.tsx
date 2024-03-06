@@ -1,7 +1,7 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
+import useSWR from "swr";
 
 import { useProject, useUser } from "@hooks/store";
 
@@ -44,7 +44,7 @@ const FeaturesSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-FeaturesSettingsPage.getLayout = function getLayout(page: ReactElement) {
+FeaturesSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectSettingHeader title="Features Settings" />} withProjectWrapper>
       <ProjectSettingLayout>{page}</ProjectSettingLayout>

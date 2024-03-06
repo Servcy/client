@@ -87,7 +87,7 @@ const UserNotificationContextProvider: React.FC<{
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { selectedTab, snoozed, archived, readNotification, selectedNotificationForSnooze } = state;
+  const { selectedTab, snoozed, archived, readNotification } = state;
 
   const params = {
     type: snoozed || archived || readNotification ? undefined : selectedTab,

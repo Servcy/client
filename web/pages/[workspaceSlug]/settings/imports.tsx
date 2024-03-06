@@ -2,12 +2,12 @@ import { observer } from "mobx-react-lite";
 
 import { useUser, useWorkspace } from "@hooks/store";
 
-import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 import { AppLayout } from "@layouts/app-layout";
+import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 
-import IntegrationGuide from "@components/integration/guide";
-import { WorkspaceSettingHeader } from "@components/headers";
 import { PageHead } from "@components/core";
+import { WorkspaceSettingHeader } from "@components/headers";
+import IntegrationGuide from "@components/integration/guide";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -47,7 +47,7 @@ const ImportsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ImportsPage.getLayout = function getLayout(page: React.ReactElement) {
+ImportsPage.getWrapper = function getWrapper(page: React.ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="Import Settings" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

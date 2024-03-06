@@ -1,11 +1,11 @@
-import React, { useState, ReactElement } from "react";
 import { observer } from "mobx-react";
+import { ReactElement, useState } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 
 import { PageHead } from "@components/core";
-import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspace";
 import { GlobalIssuesHeader } from "@components/headers";
+import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspace";
 
 import { Input } from "@servcy/ui";
 
@@ -51,7 +51,7 @@ const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-WorkspaceViewsPage.getLayout = function getLayout(page: ReactElement) {
+WorkspaceViewsPage.getWrapper = function getWrapper(page: ReactElement) {
   return <AppLayout header={<GlobalIssuesHeader activeLayout="list" />}>{page}</AppLayout>;
 };
 

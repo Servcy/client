@@ -6,8 +6,8 @@ import { Controller, useForm } from "react-hook-form";
 import { FileService } from "@services/file.service";
 
 import { useApplication, useUser } from "@hooks/store";
-import toast from "react-hot-toast";
 import useUserAuth from "@hooks/use-user-auth";
+import toast from "react-hot-toast";
 
 import { ProfileSettingsLayout } from "@layouts/settings-layout";
 
@@ -18,8 +18,8 @@ import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servc
 
 import { ChevronDown, User2 } from "lucide-react";
 
-import type { IUser } from "@servcy/types";
 import type { NextPageWithLayout } from "@/types/types";
+import type { IUser } from "@servcy/types";
 
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { TIME_ZONES } from "@constants/timezones";
@@ -457,7 +457,7 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProfileSettingsPage.getLayout = function getLayout(page: ReactElement) {
+ProfileSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return <ProfileSettingsLayout>{page}</ProfileSettingsLayout>;
 };
 

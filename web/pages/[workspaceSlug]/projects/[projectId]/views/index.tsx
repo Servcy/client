@@ -1,10 +1,10 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
 import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
+import { PageHead } from "@components/core";
 import { ProjectViewsHeader } from "@components/headers";
 import { ProjectViewsList } from "@components/views";
-import { PageHead } from "@components/core";
 
 import { useProject } from "@hooks/store";
 
@@ -30,7 +30,7 @@ const ProjectViewsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectViewsPage.getLayout = function getLayout(page: ReactElement) {
+ProjectViewsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectViewsHeader />} withProjectWrapper>
       {page}

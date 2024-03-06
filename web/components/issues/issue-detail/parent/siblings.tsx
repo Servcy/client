@@ -8,43 +8,43 @@ import { useIssueDetail } from "@hooks/store";
 import { TIssue } from "@servcy/types";
 
 export type TIssueParentSiblings = {
-  currentIssue: TIssue;
-  parentIssue: TIssue;
+    currentIssue: TIssue;
+    parentIssue: TIssue;
 };
 
 export const IssueParentSiblings: FC<TIssueParentSiblings> = (props) => {
-  const { currentIssue, parentIssue } = props;
+    const { currentIssue, parentIssue } = props;
 
-  const {
-    peekIssue,
-    fetchSubIssues,
-    subIssues: { subIssuesByIssueId },
-  } = useIssueDetail();
+    const {
+        peekIssue,
+        fetchSubIssues,
+        subIssues: { subIssuesByIssueId },
+    } = useIssueDetail();
 
-  const { isLoading } = useSWR(
-    peekIssue && parentIssue && parentIssue.project_id
-      ? `ISSUE_PARENT_CHILD_ISSUES_${peekIssue?.workspaceSlug}_${parentIssue.project_id}_${parentIssue.id}`
-      : null,
-    peekIssue && parentIssue && parentIssue.project_id
-      ? () => fetchSubIssues(peekIssue?.workspaceSlug, parentIssue.project_id, parentIssue.id)
-      : null
-  );
+    const { isLoading } = useSWR(
+        peekIssue && parentIssue && parentIssue.project_id
+            ? `ISSUE_PARENT_CHILD_ISSUES_${peekIssue?.workspaceSlug}_${parentIssue.project_id}_${parentIssue.id}`
+            : null,
+        peekIssue && parentIssue && parentIssue.project_id
+            ? () => fetchSubIssues(peekIssue?.workspaceSlug, parentIssue.project_id, parentIssue.id)
+            : null
+    );
 
-  const subIssueIds = (parentIssue && subIssuesByIssueId(parentIssue.id)) || undefined;
+    const subIssueIds = (parentIssue && subIssuesByIssueId(parentIssue.id)) || undefined;
 
-  return (
-    <div>
-      {isLoading ? (
-        <div className="flex items-center gap-2 whitespace-nowrap px-1 py-1 text-left text-xs text-custom-text-200">
-          Loading
+    return (
+        <div>
+            {isLoading ? (
+                <div className="flex items-center gap-2 whitespace-nowrap px-1 py-1 text-left text-xs text-custom-text-200">
+                    Loading
+                </div>
+            ) : subIssueIds && subIssueIds.length > 0 ? (
+                subIssueIds.map((issueId) => currentIssue.id != issueId && <IssueParentSiblingItem issueId={issueId} />)
+            ) : (
+                <div className="flex items-center gap-2 whitespace-nowrap px-1 py-1 text-left text-xs text-custom-text-200">
+                    No sibling issues
+                </div>
+            )}
         </div>
-      ) : subIssueIds && subIssueIds.length > 0 ? (
-        subIssueIds.map((issueId) => currentIssue.id != issueId && <IssueParentSiblingItem issueId={issueId} />)
-      ) : (
-        <div className="flex items-center gap-2 whitespace-nowrap px-1 py-1 text-left text-xs text-custom-text-200">
-          No sibling issues
-        </div>
-      )}
-    </div>
-  );
+    );
 };

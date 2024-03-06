@@ -5,8 +5,8 @@ import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profil
 
 import { EmailSettingsLoader } from "@components/ui";
 
-import { EmailNotificationForm } from "@components/profile/preferences";
 import { PageHead } from "@components/core";
+import { EmailNotificationForm } from "@components/profile/preferences";
 
 import { UserService } from "@services/user.service";
 // type
@@ -34,7 +34,7 @@ const ProfilePreferencesThemePage: NextPageWithLayout = () => {
   );
 };
 
-ProfilePreferencesThemePage.getLayout = function getLayout(page: ReactElement) {
+ProfilePreferencesThemePage.getWrapper = function getWrapper(page: ReactElement) {
   return <ProfilePreferenceSettingsLayout>{page}</ProfilePreferenceSettingsLayout>;
 };
 

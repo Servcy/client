@@ -8,38 +8,38 @@ import { TIssueOrderByOptions } from "@servcy/types";
 import { ISSUE_ORDER_BY_OPTIONS } from "@constants/issue";
 
 type Props = {
-  selectedOrderBy: TIssueOrderByOptions | undefined;
-  handleUpdate: (val: TIssueOrderByOptions) => void;
-  orderByOptions: TIssueOrderByOptions[];
+    selectedOrderBy: TIssueOrderByOptions | undefined;
+    handleUpdate: (val: TIssueOrderByOptions) => void;
+    orderByOptions: TIssueOrderByOptions[];
 };
 
 export const FilterOrderBy: React.FC<Props> = observer((props) => {
-  const { selectedOrderBy, handleUpdate, orderByOptions } = props;
+    const { selectedOrderBy, handleUpdate, orderByOptions } = props;
 
-  const [previewEnabled, setPreviewEnabled] = useState(true);
+    const [previewEnabled, setPreviewEnabled] = useState(true);
 
-  const activeOrderBy = selectedOrderBy ?? "-created_at";
+    const activeOrderBy = selectedOrderBy ?? "-created_at";
 
-  return (
-    <>
-      <FilterHeader
-        title="Order by"
-        isPreviewEnabled={previewEnabled}
-        handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
-      />
-      {previewEnabled && (
-        <div>
-          {ISSUE_ORDER_BY_OPTIONS.filter((option) => orderByOptions.includes(option.key)).map((orderBy) => (
-            <FilterOption
-              key={orderBy?.key}
-              isChecked={activeOrderBy === orderBy?.key ? true : false}
-              onClick={() => handleUpdate(orderBy.key)}
-              title={orderBy.title}
-              multiple={false}
+    return (
+        <>
+            <FilterHeader
+                title="Order by"
+                isPreviewEnabled={previewEnabled}
+                handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
             />
-          ))}
-        </div>
-      )}
-    </>
-  );
+            {previewEnabled && (
+                <div>
+                    {ISSUE_ORDER_BY_OPTIONS.filter((option) => orderByOptions.includes(option.key)).map((orderBy) => (
+                        <FilterOption
+                            key={orderBy?.key}
+                            isChecked={activeOrderBy === orderBy?.key ? true : false}
+                            onClick={() => handleUpdate(orderBy.key)}
+                            title={orderBy.title}
+                            multiple={false}
+                        />
+                    ))}
+                </div>
+            )}
+        </>
+    );
 });

@@ -4,33 +4,33 @@ import Link from "next/link";
 import { useIssueDetail } from "@hooks/store";
 
 type TIssueUser = {
-  activityId: string;
-  customUserName?: string;
+    activityId: string;
+    customUserName?: string;
 };
 
 export const IssueUser: FC<TIssueUser> = (props) => {
-  const { activityId, customUserName } = props;
+    const { activityId, customUserName } = props;
 
-  const {
-    activity: { getActivityById },
-  } = useIssueDetail();
+    const {
+        activity: { getActivityById },
+    } = useIssueDetail();
 
-  const activity = getActivityById(activityId);
+    const activity = getActivityById(activityId);
 
-  if (!activity) return <></>;
+    if (!activity) return <></>;
 
-  return (
-    <>
-      {customUserName ? (
-        <span className="text-custom-text-100 font-medium">{customUserName}</span>
-      ) : (
-        <Link
-          href={`/${activity?.workspace_detail?.slug}/profile/${activity?.actor_detail?.id}`}
-          className="hover:underline text-custom-text-100 font-medium"
-        >
-          {activity.actor_detail?.display_name}
-        </Link>
-      )}
-    </>
-  );
+    return (
+        <>
+            {customUserName ? (
+                <span className="text-custom-text-100 font-medium">{customUserName}</span>
+            ) : (
+                <Link
+                    href={`/${activity?.workspace_detail?.slug}/profile/${activity?.actor_detail?.id}`}
+                    className="hover:underline text-custom-text-100 font-medium"
+                >
+                    {activity.actor_detail?.display_name}
+                </Link>
+            )}
+        </>
+    );
 };

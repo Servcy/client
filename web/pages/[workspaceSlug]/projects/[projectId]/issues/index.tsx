@@ -1,17 +1,17 @@
-import { ReactElement } from "react";
+import { observer } from "mobx-react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { observer } from "mobx-react";
+import { ReactElement } from "react";
 
-import { ProjectLayoutRoot } from "@components/issues";
 import { ProjectIssuesHeader } from "@components/headers";
+import { ProjectLayoutRoot } from "@components/issues";
 
 import { NextPageWithLayout } from "@/types/types";
 
 import { AppLayout } from "@layouts/app-layout";
 
-import { useProject } from "@hooks/store";
 import { PageHead } from "@components/core";
+import { useProject } from "@hooks/store";
 
 const ProjectIssuesPage: NextPageWithLayout = observer(() => {
   const router = useRouter();
@@ -40,7 +40,7 @@ const ProjectIssuesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectIssuesPage.getLayout = function getLayout(page: ReactElement) {
+ProjectIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectIssuesHeader />} withProjectWrapper>
       {page}

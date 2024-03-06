@@ -19,8 +19,8 @@ import { IntegrationCard } from "@components/project";
 
 import { IntegrationsSettingsLoader } from "@components/ui";
 
-import { IProject } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { IProject } from "@servcy/types";
 
 import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PROJECT_DETAILS, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";
@@ -89,7 +89,7 @@ const ProjectIntegrationsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectIntegrationsPage.getLayout = function getLayout(page: ReactElement) {
+ProjectIntegrationsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout withProjectWrapper header={<ProjectSettingHeader title="Integrations Settings" />}>
       <ProjectSettingLayout>{page}</ProjectSettingLayout>

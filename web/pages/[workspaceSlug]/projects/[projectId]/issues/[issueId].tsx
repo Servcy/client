@@ -1,7 +1,7 @@
-import React, { ReactElement, useEffect } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
+import { ReactElement, useEffect } from "react";
+import useSWR from "swr";
 
 import { AppLayout } from "@layouts/app-layout";
 
@@ -87,7 +87,7 @@ const IssueDetailsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-IssueDetailsPage.getLayout = function getLayout(page: ReactElement) {
+IssueDetailsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectIssueDetailsHeader />} withProjectWrapper>
       {page}

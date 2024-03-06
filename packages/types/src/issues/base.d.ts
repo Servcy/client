@@ -10,13 +10,13 @@ export * from "./activity/base";
 export type TLoader = "init-loader" | "mutation" | undefined;
 
 export type TGroupedIssues = {
-  [group_id: string]: string[];
+    [group_id: string]: string[];
 };
 
 export type TSubGroupedIssues = {
-  [sub_grouped_id: string]: {
-    [group_id: string]: string[];
-  };
+    [sub_grouped_id: string]: {
+        [group_id: string]: string[];
+    };
 };
 
 export type TUnGroupedIssues = string[];

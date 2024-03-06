@@ -19,8 +19,8 @@ import { PageDetailsHeader } from "@components/headers/page-details";
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor";
 import { Spinner } from "@servcy/ui";
 
-import { IPage } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { IPage } from "@servcy/types";
 
 import { IssuePeekOverview } from "@components/issues";
 import { EUserProjectRoles } from "@constants/project";
@@ -366,7 +366,7 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-PageDetailsPage.getLayout = function getLayout(page: ReactElement) {
+PageDetailsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<PageDetailsHeader />} withProjectWrapper>
       {page}

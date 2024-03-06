@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
 import { observer } from "mobx-react";
+import { ReactElement } from "react";
 
 import { PageHead } from "@components/core";
-import { ProjectCardList } from "@components/project";
 import { ProjectsHeader } from "@components/headers";
+import { ProjectCardList } from "@components/project";
 
 import { AppLayout } from "@layouts/app-layout";
 // type
@@ -24,7 +24,7 @@ const ProjectsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectsPage.getLayout = function getLayout(page: ReactElement) {
+ProjectsPage.getWrapper = function getWrapper(page: ReactElement) {
   return <AppLayout header={<ProjectsHeader />}>{page}</AppLayout>;
 };
 

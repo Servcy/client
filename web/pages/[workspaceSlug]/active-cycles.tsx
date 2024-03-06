@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
 import { observer } from "mobx-react";
+import { ReactElement } from "react";
 
 import { PageHead } from "@components/core";
 import { WorkspaceActiveCycleHeader } from "@components/headers";
@@ -24,7 +24,7 @@ const WorkspaceActiveCyclesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-WorkspaceActiveCyclesPage.getLayout = function getLayout(page: ReactElement) {
+WorkspaceActiveCyclesPage.getWrapper = function getWrapper(page: ReactElement) {
   return <AppLayout header={<WorkspaceActiveCycleHeader />}>{page}</AppLayout>;
 };
 

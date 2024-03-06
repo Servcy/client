@@ -1,30 +1,30 @@
-import { useState, Fragment, ReactElement } from "react";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import { Tab } from "@headlessui/react";
-import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import { Fragment, ReactElement, useState } from "react";
+import useSWR from "swr";
 
-import { useApplication, useEventTracker, useUser, useProject } from "@hooks/store";
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
 import useUserAuth from "@hooks/use-user-auth";
 import useSize from "@hooks/use-window-size";
 
 import { AppLayout } from "@layouts/app-layout";
 
-import { RecentPagesList, CreateUpdatePageModal } from "@components/pages";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { PagesHeader } from "@components/headers";
+import { CreateUpdatePageModal, RecentPagesList } from "@components/pages";
 import { PagesLoader } from "@components/ui";
 
 import { NextPageWithLayout } from "@/types/types";
 
-import { PAGE_TABS_LIST } from "@constants/page";
-import { useProjectPages } from "@hooks/store/use-project-page";
-import { EUserWorkspaceRoles } from "@constants/workspace";
-import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PageHead } from "@components/core";
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { PAGE_TABS_LIST } from "@constants/page";
+import { EUserWorkspaceRoles } from "@constants/workspace";
+import { useProjectPages } from "@hooks/store/use-project-page";
 
 const AllPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.AllPagesList), {
   ssr: false,
@@ -238,7 +238,7 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectPagesPage.getLayout = function getLayout(page: ReactElement) {
+ProjectPagesPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<PagesHeader />} withProjectWrapper>
       {page}

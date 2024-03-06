@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-import useSWR from "swr";
 import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import useSWR from "swr";
 // store hooks
 import { useUser, useWorkspace } from "@hooks/store";
 
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // component
-import { WorkspaceSettingHeader } from "@components/headers";
 import { ApiTokenListItem, CreateApiTokenModal } from "@components/api-token";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
+import { WorkspaceSettingHeader } from "@components/headers";
 
-import { Button } from "@servcy/ui";
 import { APITokenSettingsLoader } from "@components/ui";
+import { Button } from "@servcy/ui";
 
 import { APITokenService } from "@services/api_token.service";
 
 import { NextPageWithLayout } from "@/types/types";
 
+import { PageHead } from "@components/core";
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { API_TOKENS_LIST } from "@constants/fetch-keys";
 import { EUserWorkspaceRoles } from "@constants/workspace";
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-import { PageHead } from "@components/core";
 
 const apiTokenService = new APITokenService();
 
@@ -109,7 +109,7 @@ const ApiTokensPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ApiTokensPage.getLayout = function getLayout(page: React.ReactElement) {
+ApiTokensPage.getWrapper = function getWrapper(page: React.ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="API Tokens" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

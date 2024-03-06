@@ -12,8 +12,8 @@ import { AutoArchiveAutomation, AutoCloseAutomation } from "@components/automati
 import { PageHead } from "@components/core";
 import { ProjectSettingHeader } from "@components/headers";
 
-import { IProject } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { IProject } from "@servcy/types";
 
 import { EUserProjectRoles } from "@constants/project";
 
@@ -58,7 +58,7 @@ const AutomationSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-AutomationSettingsPage.getLayout = function getLayout(page: ReactElement) {
+AutomationSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectSettingHeader title="Automations Settings" />} withProjectWrapper>
       <ProjectSettingLayout>{page}</ProjectSettingLayout>

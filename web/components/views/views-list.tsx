@@ -15,72 +15,72 @@ import { EUserProjectRoles } from "@constants/project";
 import { VIEW_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 export const ProjectViewsList = observer(() => {
-  // states
-  const [query, setQuery] = useState("");
-  // theme
-  const { resolvedTheme } = useTheme();
-  // store hooks
-  const {
-    commandPalette: { toggleCreateViewModal },
-  } = useApplication();
-  const {
-    membership: { currentProjectRole },
-    currentUser,
-  } = useUser();
-  const { projectViewIds, getViewById, loader } = useProjectView();
+    // states
+    const [query, setQuery] = useState("");
+    // theme
+    const { resolvedTheme } = useTheme();
+    // store hooks
+    const {
+        commandPalette: { toggleCreateViewModal },
+    } = useApplication();
+    const {
+        membership: { currentProjectRole },
+        currentUser,
+    } = useUser();
+    const { projectViewIds, getViewById, loader } = useProjectView();
 
-  if (loader || !projectViewIds) return <ViewListLoader />;
+    if (loader || !projectViewIds) return <ViewListLoader />;
 
-  const viewsList = projectViewIds.map((viewId) => getViewById(viewId));
+    const viewsList = projectViewIds.map((viewId) => getViewById(viewId));
 
-  const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
-  const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "views", isLightMode);
+    const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light";
+    const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "views", isLightMode);
 
-  const filteredViewsList = viewsList.filter((v) => v?.name.toLowerCase().includes(query.toLowerCase()));
+    const filteredViewsList = viewsList.filter((v) => v?.name.toLowerCase().includes(query.toLowerCase()));
 
-  const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER;
 
-  return (
-    <>
-      {viewsList.length > 0 ? (
-        <div className="flex h-full w-full flex-col">
-          <div className="flex w-full flex-col flex-shrink-0 overflow-hidden">
-            <div className="flex w-full items-center gap-2.5 border-b border-custom-border-200 px-5 py-3">
-              <Search className="text-custom-text-200" size={14} strokeWidth={2} />
-              <Input
-                className="w-full bg-transparent !p-0 text-xs leading-5 text-custom-text-200 placeholder:text-custom-text-400 focus:outline-none"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search"
-                mode="true-transparent"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col h-full w-full vertical-scrollbar scrollbar-lg">
-            {filteredViewsList.length > 0 ? (
-              filteredViewsList.map((view) => <ProjectViewListItem key={view.id} view={view} />)
+    return (
+        <>
+            {viewsList.length > 0 ? (
+                <div className="flex h-full w-full flex-col">
+                    <div className="flex w-full flex-col flex-shrink-0 overflow-hidden">
+                        <div className="flex w-full items-center gap-2.5 border-b border-custom-border-200 px-5 py-3">
+                            <Search className="text-custom-text-200" size={14} strokeWidth={2} />
+                            <Input
+                                className="w-full bg-transparent !p-0 text-xs leading-5 text-custom-text-200 placeholder:text-custom-text-400 focus:outline-none"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                placeholder="Search"
+                                mode="true-transparent"
+                            />
+                        </div>
+                    </div>
+                    <div className="flex flex-col h-full w-full vertical-scrollbar scrollbar-lg">
+                        {filteredViewsList.length > 0 ? (
+                            filteredViewsList.map((view) => <ProjectViewListItem key={view.id} view={view} />)
+                        ) : (
+                            <p className="mt-10 text-center text-sm text-custom-text-300">No results found</p>
+                        )}
+                    </div>
+                </div>
             ) : (
-              <p className="mt-10 text-center text-sm text-custom-text-300">No results found</p>
+                <EmptyState
+                    title={VIEW_EMPTY_STATE_DETAILS["project-views"].title}
+                    description={VIEW_EMPTY_STATE_DETAILS["project-views"].description}
+                    image={EmptyStateImagePath}
+                    comicBox={{
+                        title: VIEW_EMPTY_STATE_DETAILS["project-views"].comicBox.title,
+                        description: VIEW_EMPTY_STATE_DETAILS["project-views"].comicBox.description,
+                    }}
+                    primaryButton={{
+                        text: VIEW_EMPTY_STATE_DETAILS["project-views"].primaryButton.text,
+                        onClick: () => toggleCreateViewModal(true),
+                    }}
+                    size="lg"
+                    disabled={!isEditingAllowed}
+                />
             )}
-          </div>
-        </div>
-      ) : (
-        <EmptyState
-          title={VIEW_EMPTY_STATE_DETAILS["project-views"].title}
-          description={VIEW_EMPTY_STATE_DETAILS["project-views"].description}
-          image={EmptyStateImagePath}
-          comicBox={{
-            title: VIEW_EMPTY_STATE_DETAILS["project-views"].comicBox.title,
-            description: VIEW_EMPTY_STATE_DETAILS["project-views"].comicBox.description,
-          }}
-          primaryButton={{
-            text: VIEW_EMPTY_STATE_DETAILS["project-views"].primaryButton.text,
-            onClick: () => toggleCreateViewModal(true),
-          }}
-          size="lg"
-          disabled={!isEditingAllowed}
-        />
-      )}
-    </>
-  );
+        </>
+    );
 });

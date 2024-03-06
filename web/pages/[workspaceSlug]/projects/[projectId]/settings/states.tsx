@@ -3,8 +3,8 @@ import { ReactElement } from "react";
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 
-import { ProjectSettingStateList } from "@components/states";
 import { ProjectSettingHeader } from "@components/headers";
+import { ProjectSettingStateList } from "@components/states";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -17,7 +17,7 @@ const StatesSettingsPage: NextPageWithLayout = () => (
   </div>
 );
 
-StatesSettingsPage.getLayout = function getLayout(page: ReactElement) {
+StatesSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout withProjectWrapper header={<ProjectSettingHeader title="States Settings" />}>
       <ProjectSettingLayout>{page}</ProjectSettingLayout>

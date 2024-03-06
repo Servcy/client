@@ -1,15 +1,15 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
 import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
 
 import { AppLayout } from "@layouts/app-layout";
 
 import { useGlobalView, useWorkspace } from "@hooks/store";
 
-import { GlobalViewsHeader } from "@components/workspace";
-import { AllIssueLayoutRoot } from "@components/issues";
-import { GlobalIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
+import { GlobalIssuesHeader } from "@components/headers";
+import { AllIssueLayoutRoot } from "@components/issues";
+import { GlobalViewsHeader } from "@components/workspace";
 
 import { NextPageWithLayout } from "@/types/types";
 
@@ -45,7 +45,7 @@ const GlobalViewIssuesPage: NextPageWithLayout = observer(() => {
   );
 });
 
-GlobalViewIssuesPage.getLayout = function getLayout(page: ReactElement) {
+GlobalViewIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
   return <AppLayout header={<GlobalIssuesHeader activeLayout="spreadsheet" />}>{page}</AppLayout>;
 };
 

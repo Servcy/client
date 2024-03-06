@@ -5,19 +5,19 @@ export const authRoutes = ["/login"];
 export const wipRoutes = ["/calendar", "/documents", "/payments", "/time-tracking", "/reports"];
 
 export const sidebarOptions = [
-  {
-    name: "Dashboard",
-    href: "/",
-    icon: AiOutlineHome,
-  },
-  {
-    name: "Integrations",
-    href: "/integrations",
-    icon: AiOutlineApi,
-  },
-  {
-    name: "Inbox",
-    href: "/inbox",
-    icon: AiOutlineInbox,
-  },
+    {
+        name: "Dashboard",
+        href: "/",
+        icon: AiOutlineHome,
+    },
+    {
+        name: "Integrations",
+        href: "/integrations",
+        icon: AiOutlineApi,
+    },
+    {
+        name: "Inbox",
+        href: "/inbox",
+        icon: AiOutlineInbox,
+    },
 ];

@@ -15,8 +15,8 @@ import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/
 
 import { Button } from "@servcy/ui";
 
-import { IWorkspaceBulkInviteFormData } from "@servcy/types";
 import { NextPageWithLayout } from "@/types/types";
+import { IWorkspaceBulkInviteFormData } from "@servcy/types";
 
 import { getUserRole } from "@helpers/user.helper";
 
@@ -121,7 +121,7 @@ const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-WorkspaceMembersSettingsPage.getLayout = function getLayout(page: ReactElement) {
+WorkspaceMembersSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="Members Settings" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

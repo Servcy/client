@@ -5,8 +5,8 @@ import { useUser, useWorkspace } from "@hooks/store";
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // component
-import { WorkspaceSettingHeader } from "@components/headers";
 import { PageHead } from "@components/core";
+import { WorkspaceSettingHeader } from "@components/headers";
 
 import { Button } from "@servcy/ui";
 
@@ -57,7 +57,7 @@ const BillingSettingsPage: NextPageWithLayout = observer(() => {
   );
 });
 
-BillingSettingsPage.getLayout = function getLayout(page: React.ReactElement) {
+BillingSettingsPage.getWrapper = function getWrapper(page: React.ReactElement) {
   return (
     <AppLayout header={<WorkspaceSettingHeader title="Billing & Plans Settings" />}>
       <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>

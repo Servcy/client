@@ -1,7 +1,7 @@
-import { ReactElement } from "react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import { observer } from "mobx-react";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
+import useSWR from "swr";
 
 import { useInbox, useProject } from "@hooks/store";
 
@@ -40,7 +40,7 @@ const ProjectInboxPage: NextPageWithLayout = observer(() => {
   );
 });
 
-ProjectInboxPage.getLayout = function getLayout(page: ReactElement) {
+ProjectInboxPage.getWrapper = function getWrapper(page: ReactElement) {
   return (
     <AppLayout header={<ProjectInboxHeader />} withProjectWrapper>
       {page}
