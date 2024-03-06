@@ -6,7 +6,7 @@ import { computedFn } from "mobx-utils";
 // types
 import { TIssue } from "@servcy/types";
 //services
-import { IssueService } from "services/issue";
+import { IssueService } from "@services/issue";
 
 export type IIssueStore = {
   // observables

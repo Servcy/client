@@ -5,7 +5,7 @@ import { Transition, Dialog } from "@headlessui/react";
 // hooks
 import { useApplication } from "hooks/store";
 // services
-import { FileService } from "services/file.service";
+import { FileService } from "@services/file.service";
 // hooks
 import useToast from "hooks/use-toast";
 // ui

@@ -9,8 +9,8 @@ import { Sparkle } from "lucide-react";
 import { useApplication, useEventTracker, useWorkspace, useInboxIssues, useMention } from "hooks/store";
 import useToast from "hooks/use-toast";
 // services
-import { FileService } from "services/file.service";
-import { AIService } from "services/ai.service";
+import { FileService } from "@services/file.service";
+import { AIService } from "@services/ai.service";
 // components
 import { PriorityDropdown } from "components/dropdowns";
 import { GptAssistantPopover } from "components/core";

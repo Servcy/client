@@ -5,7 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Disclosure, Transition } from "@headlessui/react";
 import isEmpty from "lodash/isEmpty";
 // services
-import { CycleService } from "services/cycle.service";
+import { CycleService } from "@services/cycle.service";
 // hooks
 import { useEventTracker, useCycle, useUser, useMember } from "hooks/store";
 import useToast from "hooks/use-toast";

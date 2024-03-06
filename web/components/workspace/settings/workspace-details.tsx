@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 // services
-import { FileService } from "services/file.service";
+import { FileService } from "@services/file.service";
 // hooks
 import { useEventTracker, useUser, useWorkspace } from "hooks/store";
 import useToast from "hooks/use-toast";

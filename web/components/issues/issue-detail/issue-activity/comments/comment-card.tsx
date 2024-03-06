@@ -10,7 +10,7 @@ import { IssueCommentReaction } from "../../reactions/issue-comment";
 // ui
 import { CustomMenu } from "@servcy/ui";
 // services
-import { FileService } from "services/file.service";
+import { FileService } from "@services/file.service";
 // types
 import { TIssueComment } from "@servcy/types";
 import { TActivityOperations } from "../root";

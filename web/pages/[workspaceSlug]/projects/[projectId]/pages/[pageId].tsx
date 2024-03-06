@@ -10,7 +10,7 @@ import { useApplication, usePage, useUser, useWorkspace } from "hooks/store";
 import useReloadConfirmations from "hooks/use-reload-confirmation";
 import useToast from "hooks/use-toast";
 // services
-import { FileService } from "services/file.service";
+import { FileService } from "@services/file.service";
 // layouts
 import { AppLayout } from "layouts/app-layout";
 // components

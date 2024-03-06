@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 // services
-import { CycleService } from "services/cycle.service";
+import { CycleService } from "@services/cycle.service";
 // hooks
 import { useEventTracker, useCycle, useProject } from "hooks/store";
 import useToast from "hooks/use-toast";

@@ -3,12 +3,12 @@ import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
 // services
-import { IssueLabelService } from "services/issue";
+import { IssueLabelService } from "@services/issue";
 // helpers
 import { buildTree } from "helpers/array.helper";
 // types
 import { IIssueLabel, IIssueLabelTree } from "@servcy/types";
-import { RootStore } from "store/root.store";
+import { RootStore } from "@store/root.store";
 
 export interface ILabelStore {
   //Loaders

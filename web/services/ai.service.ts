@@ -1,4 +1,4 @@
-import { APIService } from "services/api.service";
+import { APIService } from "@services/api.service";
 // types
 import { IGptResponse } from "@servcy/types";
 // helpers

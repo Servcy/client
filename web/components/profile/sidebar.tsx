@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 // hooks
 import { useApplication, useUser } from "hooks/store";
 // services
-import { UserService } from "services/user.service";
+import { UserService } from "@services/user.service";
 // components
 import { ProfileSidebarTime } from "./time";
 // ui

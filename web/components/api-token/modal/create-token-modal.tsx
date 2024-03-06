@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { mutate } from "swr";
 import { Dialog, Transition } from "@headlessui/react";
 // services
-import { APITokenService } from "services/api_token.service";
+import { APITokenService } from "@services/api_token.service";
 // hooks
 import useToast from "hooks/use-toast";
 // components

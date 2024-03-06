@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Controller, useForm } from "react-hook-form";
 import { Eye, EyeOff, XCircle } from "lucide-react";
 // services
-import { AuthService } from "services/auth.service";
+import { AuthService } from "@services/auth.service";
 // hooks
 import useToast from "hooks/use-toast";
 import { useApplication, useEventTracker } from "hooks/store";

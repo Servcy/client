@@ -10,7 +10,7 @@ import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor";
 import { TIssue } from "@servcy/types";
 import { TIssueOperations } from "./issue-detail";
 // services
-import { FileService } from "services/file.service";
+import { FileService } from "@services/file.service";
 import { useMention, useWorkspace } from "hooks/store";
 import { observer } from "mobx-react";
 

@@ -15,7 +15,7 @@ import {
 } from "react-hook-form";
 import { Check, ChevronDown, Plus, XCircle } from "lucide-react";
 // services
-import { WorkspaceService } from "services/workspace.service";
+import { WorkspaceService } from "@services/workspace.service";
 // hooks
 import useToast from "hooks/use-toast";
 import { useEventTracker } from "hooks/store";

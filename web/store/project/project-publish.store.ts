@@ -3,7 +3,7 @@ import set from "lodash/set";
 // types
 import { ProjectRootStore } from "./";
 // services
-import { ProjectPublishService } from "services/project";
+import { ProjectPublishService } from "@services/project";
 
 export type TProjectPublishViews = "list" | "gantt" | "kanban" | "calendar" | "spreadsheet";
 

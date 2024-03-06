@@ -6,8 +6,8 @@ import { computedFn } from "mobx-utils";
 import { IProject } from "@servcy/types";
 import { RootStore } from "../root.store";
 // services
-import { IssueLabelService, IssueService } from "services/issue";
-import { ProjectService, ProjectStateService } from "services/project";
+import { IssueLabelService, IssueService } from "@services/issue";
+import { ProjectService, ProjectStateService } from "@services/project";
 export interface IProjectStore {
   // observables
   searchQuery: string;

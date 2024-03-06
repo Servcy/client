@@ -33,7 +33,12 @@
     "target": "ESNext",
     "paths": {
       "@/*": ["./app/*"],
-      "@/stories/*": ["./stories/*"]
+      "@stories/*": ["./stories/*"],
+      "@services/*": ["./services/*"],
+      "@lib/*": ["./lib/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@layouts/*": ["./hooks/*"],
+      "@store/*": ["./store/*"]
     }
   },
   "exclude": [".next", "node_modules"],

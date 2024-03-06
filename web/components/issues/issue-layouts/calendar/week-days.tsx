@@ -6,10 +6,10 @@ import { renderFormattedPayloadDate } from "helpers/date-time.helper";
 // types
 import { ICalendarDate, ICalendarWeek } from "./types";
 import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types";
-import { ICycleIssuesFilter } from "store/issue/cycle";
-import { IModuleIssuesFilter } from "store/issue/module";
-import { IProjectIssuesFilter } from "store/issue/project";
-import { IProjectViewIssuesFilter } from "store/issue/project-views";
+import { ICycleIssuesFilter } from "@store/issue/cycle";
+import { IModuleIssuesFilter } from "@store/issue/module";
+import { IProjectIssuesFilter } from "@store/issue/project";
+import { IProjectViewIssuesFilter } from "@store/issue/project-views";
 
 type Props = {
   issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter;

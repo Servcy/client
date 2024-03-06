@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
 // services
-import { AuthService } from "services/auth.service";
+import { AuthService } from "@services/auth.service";
 // hooks
 import useToast from "hooks/use-toast";
 import useTimer from "hooks/use-timer";

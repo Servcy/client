@@ -6,7 +6,7 @@ import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
 // services
-import { InboxIssueService } from "services/inbox/inbox-issue.service";
+import { InboxIssueService } from "@services/inbox/inbox-issue.service";
 // types
 import type {
   TInboxDetailedStatus,
@@ -16,7 +16,7 @@ import type {
   TInboxIssueExtendedDetail,
   TIssue,
 } from "@servcy/types";
-import { RootStore } from "store/root.store";
+import { RootStore } from "@store/root.store";
 
 type TLoader = "init-loader" | "mutation" | undefined;
 

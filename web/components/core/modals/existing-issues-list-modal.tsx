@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Combobox, Dialog, Transition } from "@headlessui/react";
 import { Rocket, Search, X } from "lucide-react";
 // services
-import { ProjectService } from "services/project";
+import { ProjectService } from "@services/project";
 // hooks
 import useToast from "hooks/use-toast";
 import useDebounce from "hooks/use-debounce";

@@ -6,7 +6,7 @@ import { useUser } from "hooks/store";
 // ui
 import { Input, Button } from "@servcy/ui";
 // services
-import { AuthService } from "services/auth.service";
+import { AuthService } from "@services/auth.service";
 const authService = new AuthService();
 // hooks
 import useToast from "hooks/use-toast";

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useSWR from "swr";
 // services
-import { UserService } from "services/user.service";
+import { UserService } from "@services/user.service";
 // constants
 import { CURRENT_USER } from "constants/fetch-keys";
 // types

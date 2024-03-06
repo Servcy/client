@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import useToast from "hooks/use-toast";
 import { useEventTracker } from "hooks/store";
 // services
-import { IssueDraftService } from "services/issue";
+import { IssueDraftService } from "@services/issue";
 // components
 import { IssueFormRoot } from "components/issues/issue-modal/form";
 import { ConfirmIssueDiscard } from "components/issues";

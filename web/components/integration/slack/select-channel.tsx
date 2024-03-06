@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { useApplication } from "hooks/store";
 import useIntegrationPopup from "hooks/use-integration-popup";
 // services
-import { AppInstallationService } from "services/app_installation.service";
+import { AppInstallationService } from "@services/app_installation.service";
 // ui
 import { Loader } from "@servcy/ui";
 // types

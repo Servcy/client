@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 import { useUser } from "hooks/store";
 import useUserAuth from "hooks/use-user-auth";
 // services
-import { IntegrationService } from "services/integrations";
+import { IntegrationService } from "@services/integrations";
 // components
 import { Exporter, SingleExport } from "components/exporter";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";

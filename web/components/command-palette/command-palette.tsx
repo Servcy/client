@@ -17,7 +17,7 @@ import { CreateUpdatePageModal } from "components/pages";
 // helpers
 import { copyTextToClipboard } from "helpers/string.helper";
 // services
-import { IssueService } from "services/issue";
+import { IssueService } from "@services/issue";
 // fetch keys
 import { ISSUE_DETAILS } from "constants/fetch-keys";
 import { EIssuesStoreType } from "constants/issue";

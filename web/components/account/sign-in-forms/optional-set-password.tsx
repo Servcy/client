@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 // services
-import { AuthService } from "services/auth.service";
+import { AuthService } from "@services/auth.service";
 // hooks
 import useToast from "hooks/use-toast";
 import { useEventTracker } from "hooks/store";

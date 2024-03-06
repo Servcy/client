@@ -1,11 +1,11 @@
 import { Avatar, CycleGroupIcon, DiceIcon, PriorityIcon, StateGroupIcon } from "@servcy/ui";
 // stores
-import { IMemberRootStore } from "store/member";
-import { IProjectStore } from "store/project/project.store";
-import { IStateStore } from "store/state.store";
-import { ILabelStore } from "store/label.store";
-import { ICycleStore } from "store/cycle.store";
-import { IModuleStore } from "store/module.store";
+import { IMemberRootStore } from "@store/member";
+import { IProjectStore } from "@store/project/project.store";
+import { IStateStore } from "@store/state.store";
+import { ILabelStore } from "@store/label.store";
+import { ICycleStore } from "@store/cycle.store";
+import { IModuleStore } from "@store/module.store";
 // helpers
 import { renderEmoji } from "helpers/emoji.helper";
 // constants

@@ -5,7 +5,7 @@ import { Button, Input, Tooltip } from "@servcy/ui";
 import { IPage } from "@servcy/types";
 // constants
 import { PAGE_ACCESS_SPECIFIERS } from "constants/page";
-import { IPageStore } from "store/page.store";
+import { IPageStore } from "@store/page.store";
 
 type Props = {
   handleFormSubmit: (values: IPage) => Promise<void>;

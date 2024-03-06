@@ -11,7 +11,7 @@ import { TIssue } from "@servcy/types";
 // constants
 import { ISSUE_DETAILS } from "constants/fetch-keys";
 // services
-import { IssueArchiveService } from "services/issue";
+import { IssueArchiveService } from "@services/issue";
 // helpers
 import { renderEmoji } from "helpers/emoji.helper";
 // components

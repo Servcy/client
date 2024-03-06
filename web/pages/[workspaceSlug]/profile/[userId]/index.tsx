@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import useSWR from "swr";
 // services
-import { UserService } from "services/user.service";
+import { UserService } from "@services/user.service";
 // layouts
 import { AppLayout } from "layouts/app-layout";
 import { ProfileAuthWrapper } from "layouts/user-profile-layout";

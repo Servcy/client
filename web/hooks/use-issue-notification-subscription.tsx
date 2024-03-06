@@ -3,7 +3,7 @@ import useSWR from "swr";
 // hooks
 import useUserAuth from "hooks/use-user-auth";
 // services
-import { NotificationService } from "services/notification.service";
+import { NotificationService } from "@services/notification.service";
 // types
 import { IUser } from "@servcy/types";
 

@@ -5,7 +5,7 @@ import uniq from "lodash/uniq";
 import update from "lodash/update";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // services
-import { IssueAttachmentService } from "services/issue";
+import { IssueAttachmentService } from "@services/issue";
 // types
 import { TIssueAttachment, TIssueAttachmentIdMap, TIssueAttachmentMap } from "@servcy/types";
 import { IIssueDetail } from "./root.store";

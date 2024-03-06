@@ -2,10 +2,10 @@ import isEmpty from "lodash/isEmpty";
 import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // services
-import { InboxService } from "services/inbox.service";
+import { InboxService } from "@services/inbox.service";
 // types
 import { TInbox, TInboxIssueFilterOptions, TInboxIssueFilters, TInboxIssueQueryParams } from "@servcy/types";
-import { RootStore } from "store/root.store";
+import { RootStore } from "@store/root.store";
 
 export interface IInboxFilter {
   // observables

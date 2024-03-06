@@ -3,7 +3,7 @@ import { createContext, useCallback, useEffect, useReducer } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 // services
-import { NotificationService } from "services/notification.service";
+import { NotificationService } from "@services/notification.service";
 // fetch-keys
 import { UNREAD_NOTIFICATIONS_COUNT, USER_WORKSPACE_NOTIFICATIONS } from "constants/fetch-keys";
 // type

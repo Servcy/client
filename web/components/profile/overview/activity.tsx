@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 //hooks
 import { useUser } from "hooks/store";
 // services
-import { UserService } from "services/user.service";
+import { UserService } from "@services/user.service";
 // components
 import { ActivityMessage, IssueLink } from "components/core";
 // ui

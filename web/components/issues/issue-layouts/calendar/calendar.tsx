@@ -12,10 +12,10 @@ import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types";
 import { EUserProjectRoles } from "constants/project";
 import { useCalendarView } from "hooks/store/use-calendar-view";
 import { EIssuesStoreType } from "constants/issue";
-import { ICycleIssuesFilter } from "store/issue/cycle";
-import { IModuleIssuesFilter } from "store/issue/module";
-import { IProjectIssuesFilter } from "store/issue/project";
-import { IProjectViewIssuesFilter } from "store/issue/project-views";
+import { ICycleIssuesFilter } from "@store/issue/cycle";
+import { IModuleIssuesFilter } from "@store/issue/module";
+import { IProjectIssuesFilter } from "@store/issue/project";
+import { IProjectViewIssuesFilter } from "@store/issue/project-views";
 
 type Props = {
   issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter;

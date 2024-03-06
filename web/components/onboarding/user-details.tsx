@@ -12,7 +12,7 @@ import { UserImageUploadModal } from "components/core";
 // types
 import { IUser } from "@servcy/types";
 // services
-import { FileService } from "services/file.service";
+import { FileService } from "@services/file.service";
 // assets
 import IssuesSvg from "public/onboarding/onboarding-issues.webp";
 import { USER_DETAILS } from "constants/event-tracker";

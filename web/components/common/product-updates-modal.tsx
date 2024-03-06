@@ -3,7 +3,7 @@ import useSWR from "swr";
 // headless ui
 import { Dialog, Transition } from "@headlessui/react";
 // services
-import { WorkspaceService } from "services/workspace.service";
+import { WorkspaceService } from "@services/workspace.service";
 // components
 import { MarkdownRenderer } from "components/ui";
 import { Loader } from "@servcy/ui";

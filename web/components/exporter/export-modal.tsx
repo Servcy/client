@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 // hooks
 import { useProject } from "hooks/store";
 // services
-import { ProjectExportService } from "services/project";
+import { ProjectExportService } from "@services/project";
 // hooks
 import useToast from "hooks/use-toast";
 // ui

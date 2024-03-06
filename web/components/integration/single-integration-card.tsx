@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR, { mutate } from "swr";
 // services
-import { IntegrationService } from "services/integrations";
+import { IntegrationService } from "@services/integrations";
 // hooks
 import { useApplication, useUser } from "hooks/store";
 import useToast from "hooks/use-toast";

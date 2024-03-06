@@ -9,7 +9,7 @@ import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 // helpers
 import { renderEmoji } from "helpers/emoji.helper";
 // services
-import { IssueService } from "services/issue";
+import { IssueService } from "@services/issue";
 // constants
 import { ISSUE_DETAILS } from "constants/fetch-keys";
 // components

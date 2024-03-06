@@ -1,7 +1,7 @@
 import React, { useEffect, ReactElement } from "react";
 import { useRouter } from "next/router";
 // services
-import { AppInstallationService } from "services/app_installation.service";
+import { AppInstallationService } from "@services/app_installation.service";
 // ui
 import { Spinner } from "@servcy/ui";
 // types

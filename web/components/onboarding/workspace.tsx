@@ -8,7 +8,7 @@ import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
 import { useEventTracker, useUser, useWorkspace } from "hooks/store";
 import useToast from "hooks/use-toast";
 // services
-import { WorkspaceService } from "services/workspace.service";
+import { WorkspaceService } from "@services/workspace.service";
 // constants
 import { RESTRICTED_URLS } from "constants/workspace";
 import { WORKSPACE_CREATED } from "constants/event-tracker";

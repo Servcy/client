@@ -1,5 +1,5 @@
 // services
-import { APIService } from "services/api.service";
+import { APIService } from "@services/api.service";
 // types
 import type { IIssueFiltersResponse } from "@servcy/types";
 import { API_BASE_URL } from "helpers/common.helper";

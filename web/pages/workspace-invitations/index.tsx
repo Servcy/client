@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 // hooks
 import { useUser } from "hooks/store";
 // services
-import { WorkspaceService } from "services/workspace.service";
+import { WorkspaceService } from "@services/workspace.service";
 // layouts
 import DefaultLayout from "layouts/default-layout";
 // ui

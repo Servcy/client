@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 
 // services
-import { AnalyticsService } from "services/analytics.service";
+import { AnalyticsService } from "@services/analytics.service";
 // components
 import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "components/analytics";
 // ui

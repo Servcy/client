@@ -9,7 +9,7 @@ import { useTheme } from "next-themes";
 import { useUser } from "hooks/store";
 import useUserAuth from "hooks/use-user-auth";
 // services
-import { IntegrationService } from "services/integrations";
+import { IntegrationService } from "@services/integrations";
 // components
 import { DeleteImportModal, GithubImporterRoot, JiraImporterRoot, SingleImport } from "components/integration";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";

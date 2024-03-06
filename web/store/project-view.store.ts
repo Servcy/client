@@ -2,8 +2,8 @@ import { set } from "lodash";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
 // services
-import { ViewService } from "services/view.service";
-import { RootStore } from "store/root.store";
+import { ViewService } from "@services/view.service";
+import { RootStore } from "@store/root.store";
 // types
 import { IProjectView } from "@servcy/types";
 

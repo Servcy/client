@@ -21,7 +21,7 @@ import { IIssueRootStore } from "../root.store";
 // constants
 import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
 // services
-import { WorkspaceService } from "services/workspace.service";
+import { WorkspaceService } from "@services/workspace.service";
 
 type TWorkspaceFilters = "all-issues" | "assigned" | "created" | "subscribed" | string;
 export interface IWorkspaceIssuesFilter {

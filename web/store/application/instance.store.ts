@@ -2,7 +2,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 // types
 import { IFormattedInstanceConfiguration, IInstance, IInstanceAdmin, IInstanceConfiguration } from "@servcy/types";
 // services
-import { InstanceService } from "services/instance.service";
+import { InstanceService } from "@services/instance.service";
 
 export interface IInstanceStore {
   // issues

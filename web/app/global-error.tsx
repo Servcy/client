@@ -1,7 +1,6 @@
-import * as Sentry from "@sentry/nextjs";
+"use client";
 
-import { useRouter } from "next/router";
-
+import { useRouter } from "next/navigation";
 // services
 import { AuthService } from "@services/auth.service";
 // hooks
@@ -10,7 +9,6 @@ import useToast from "hooks/use-toast";
 import DefaultLayout from "layouts/default-layout";
 // ui
 import { Button } from "@servcy/ui";
-
 // services
 const authService = new AuthService();
 
@@ -71,12 +69,8 @@ const CustomErrorComponent = () => {
 };
 
 CustomErrorComponent.getInitialProps = async (contextData: any) => {
-  await Sentry.captureUnderscoreErrorException(contextData);
-
   const { res, err } = contextData;
-
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-
   return { statusCode };
 };
 

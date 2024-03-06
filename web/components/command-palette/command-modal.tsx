@@ -8,8 +8,8 @@ import { FolderPlus, Search, Settings } from "lucide-react";
 // hooks
 import { useApplication, useEventTracker, useProject } from "hooks/store";
 // services
-import { WorkspaceService } from "services/workspace.service";
-import { IssueService } from "services/issue";
+import { WorkspaceService } from "@services/workspace.service";
+import { IssueService } from "@services/issue";
 // hooks
 import useDebounce from "hooks/use-debounce";
 // components

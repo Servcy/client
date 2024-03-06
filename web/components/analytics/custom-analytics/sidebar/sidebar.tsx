@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { mutate } from "swr";
 // services
-import { AnalyticsService } from "services/analytics.service";
+import { AnalyticsService } from "@services/analytics.service";
 // hooks
 import { useCycle, useModule, useProject, useUser, useWorkspace } from "hooks/store";
 import useToast from "hooks/use-toast";

@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 import useSWR, { mutate } from "swr";
 // services
-import { UserService } from "services/user.service";
-import { WorkspaceService } from "services/workspace.service";
+import { UserService } from "@services/user.service";
+import { WorkspaceService } from "@services/workspace.service";
 // hooks
 import { useEventTracker, useUser } from "hooks/store";
 import useToast from "hooks/use-toast";

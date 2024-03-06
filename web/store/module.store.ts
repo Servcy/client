@@ -3,11 +3,11 @@ import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
 // services
-import { ModuleService } from "services/module.service";
-import { ProjectService } from "services/project";
+import { ModuleService } from "@services/module.service";
+import { ProjectService } from "@services/project";
 // types
 import { ILinkDetails, IModule } from "@servcy/types";
-import { RootStore } from "store/root.store";
+import { RootStore } from "@store/root.store";
 
 export interface IModuleStore {
   //Loaders

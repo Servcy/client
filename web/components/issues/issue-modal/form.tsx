@@ -9,8 +9,8 @@ import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
 import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "hooks/store";
 import useToast from "hooks/use-toast";
 // services
-import { AIService } from "services/ai.service";
-import { FileService } from "services/file.service";
+import { AIService } from "@services/ai.service";
+import { FileService } from "@services/file.service";
 // components
 import { GptAssistantPopover } from "components/core";
 import { ParentIssuesListModal } from "components/issues";

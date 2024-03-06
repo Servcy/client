@@ -20,7 +20,7 @@ import { IIssueRootStore } from "../root.store";
 // constants
 import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
 // services
-import { ViewService } from "services/view.service";
+import { ViewService } from "@services/view.service";
 
 export interface IProjectViewIssuesFilter {
   // observables

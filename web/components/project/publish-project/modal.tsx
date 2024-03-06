@@ -12,7 +12,7 @@ import { Button, Loader, ToggleSwitch } from "@servcy/ui";
 import { CustomPopover } from "./popover";
 // types
 import { IProject } from "@servcy/types";
-import { IProjectPublishSettings, TProjectPublishViews } from "store/project/project-publish.store";
+import { IProjectPublishSettings, TProjectPublishViews } from "@store/project/project-publish.store";
 
 type Props = {
   isOpen: boolean;

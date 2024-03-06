@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import useSWRInfinite from "swr/infinite";
 // services
-import { ProjectService } from "services/project";
+import { ProjectService } from "@services/project";
 // ui
 import { CustomSearchSelect } from "@servcy/ui";
 // helpers

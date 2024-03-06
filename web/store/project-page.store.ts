@@ -1,9 +1,9 @@
 import { set } from "lodash";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // services
-import { PageService } from "services/page.service";
+import { PageService } from "@services/page.service";
 // store
-import { IPageStore, PageStore } from "store/page.store";
+import { IPageStore, PageStore } from "@store/page.store";
 // types
 import { IPage, IRecentPages } from "@servcy/types";
 import { isThisWeek, isToday, isYesterday } from "date-fns";

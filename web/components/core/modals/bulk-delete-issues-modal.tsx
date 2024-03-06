@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Combobox, Dialog, Transition } from "@headlessui/react";
 // services
-import { IssueService } from "services/issue";
+import { IssueService } from "@services/issue";
 // hooks
 import useToast from "hooks/use-toast";
 // ui

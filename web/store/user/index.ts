@@ -1,7 +1,7 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 // services
-import { AuthService } from "services/auth.service";
-import { UserService } from "services/user.service";
+import { AuthService } from "@services/auth.service";
+import { UserService } from "@services/user.service";
 // interfaces
 import { IUser, IUserSettings } from "@servcy/types";
 // store

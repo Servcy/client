@@ -4,8 +4,8 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 // base class
 import { IssueHelperStore } from "../helpers/issue-helper.store";
 // services
-import { IssueArchiveService, IssueService } from "services/issue";
-import { WorkspaceService } from "services/workspace.service";
+import { IssueArchiveService, IssueService } from "@services/issue";
+import { WorkspaceService } from "@services/workspace.service";
 // types
 import { TIssue, TLoader, TUnGroupedIssues, ViewFlags } from "@servcy/types";
 import { IIssueRootStore } from "../root.store";

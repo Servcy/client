@@ -1,4 +1,4 @@
-import { APIService } from "services/api.service";
+import { APIService } from "@services/api.service";
 // helpers
 import { TIssue } from "@servcy/types";
 import { API_BASE_URL } from "helpers/common.helper";

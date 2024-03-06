@@ -17,7 +17,7 @@ import { renderFormattedDate } from "helpers/date-time.helper";
 // constants
 import { NETWORK_CHOICES } from "constants/project";
 // services
-import { ProjectService } from "services/project";
+import { ProjectService } from "@services/project";
 import { PROJECT_UPDATED } from "constants/event-tracker";
 export interface IProjectDetailsForm {
   project: IProject;

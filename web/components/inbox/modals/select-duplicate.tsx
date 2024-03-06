@@ -6,7 +6,7 @@ import { Combobox, Dialog, Transition } from "@headlessui/react";
 // hooks
 import useToast from "hooks/use-toast";
 // services
-import { IssueService } from "services/issue";
+import { IssueService } from "@services/issue";
 // ui
 import { Button, LayersIcon } from "@servcy/ui";
 // icons

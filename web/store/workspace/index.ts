@@ -4,7 +4,7 @@ import { RootStore } from "../root.store";
 // types
 import { IWorkspace } from "@servcy/types";
 // services
-import { WorkspaceService } from "services/workspace.service";
+import { WorkspaceService } from "@services/workspace.service";
 // sub-stores
 import { ApiTokenStore, IApiTokenStore } from "./api-token.store";
 import { IWebhookStore, WebhookStore } from "./webhook.store";

@@ -3,14 +3,14 @@ import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
 // services
-import { ProjectMemberService } from "services/project";
+import { ProjectMemberService } from "@services/project";
 // types
 import { IProjectBulkAddFormData, IProjectMember, IProjectMembership, IUserLite } from "@servcy/types";
-import { RootStore } from "store/root.store";
+import { RootStore } from "@store/root.store";
 // constants
 import { EUserProjectRoles } from "constants/project";
-import { IRouterStore } from "store/application/router.store";
-import { IUserRootStore } from "store/user";
+import { IRouterStore } from "@store/application/router.store";
+import { IUserRootStore } from "@store/user";
 import { IMemberRootStore } from ".";
 
 interface IProjectMemberDetails {

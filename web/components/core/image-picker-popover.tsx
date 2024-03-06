@@ -10,7 +10,7 @@ import { Control, Controller } from "react-hook-form";
 import { useApplication, useWorkspace } from "hooks/store";
 import { useDropdownKeyDown } from "hooks/use-dropdown-key-down";
 // services
-import { FileService } from "services/file.service";
+import { FileService } from "@services/file.service";
 // hooks
 import useOutsideClickDetector from "hooks/use-outside-click-detector";
 // components

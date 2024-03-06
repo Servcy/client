@@ -4,14 +4,14 @@ import { useContext } from "react";
 import { StoreContext } from "contexts/store-context";
 // types
 import { TIssueMap } from "@servcy/types";
-import { IArchivedIssues, IArchivedIssuesFilter } from "store/issue/archived";
-import { ICycleIssues, ICycleIssuesFilter } from "store/issue/cycle";
-import { IDraftIssues, IDraftIssuesFilter } from "store/issue/draft";
-import { IModuleIssues, IModuleIssuesFilter } from "store/issue/module";
-import { IProfileIssues, IProfileIssuesFilter } from "store/issue/profile";
-import { IProjectIssues, IProjectIssuesFilter } from "store/issue/project";
-import { IProjectViewIssues, IProjectViewIssuesFilter } from "store/issue/project-views";
-import { IWorkspaceIssues, IWorkspaceIssuesFilter } from "store/issue/workspace";
+import { IArchivedIssues, IArchivedIssuesFilter } from "@store/issue/archived";
+import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
+import { IDraftIssues, IDraftIssuesFilter } from "@store/issue/draft";
+import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module";
+import { IProfileIssues, IProfileIssuesFilter } from "@store/issue/profile";
+import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
+import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views";
+import { IWorkspaceIssues, IWorkspaceIssuesFilter } from "@store/issue/workspace";
 // constants
 import { EIssuesStoreType } from "constants/issue";
 

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
 // services
-import { NotificationService } from "services/notification.service";
+import { NotificationService } from "@services/notification.service";
 // hooks
 import useToast from "./use-toast";
 // fetch-keys

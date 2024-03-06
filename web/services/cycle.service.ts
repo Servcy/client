@@ -1,5 +1,5 @@
 // services
-import { APIService } from "services/api.service";
+import { APIService } from "@services/api.service";
 // types
 import type { CycleDateCheckData, ICycle, TIssue } from "@servcy/types";
 // helpers

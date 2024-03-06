@@ -5,7 +5,7 @@ import { RootStore } from "../root.store";
 import { IStateStore, StateStore } from "../state.store";
 // issues data store
 import { ICycle, IIssueLabel, IModule, IProject, IState, IUserLite } from "@servcy/types";
-import { IWorkspaceMembership } from "store/member/workspace-member.store";
+import { IWorkspaceMembership } from "@store/member/workspace-member.store";
 import { ArchivedIssues, ArchivedIssuesFilter, IArchivedIssues, IArchivedIssuesFilter } from "./archived";
 import { CycleIssues, CycleIssuesFilter, ICycleIssues, ICycleIssuesFilter } from "./cycle";
 import { DraftIssues, DraftIssuesFilter, IDraftIssues, IDraftIssuesFilter } from "./draft";

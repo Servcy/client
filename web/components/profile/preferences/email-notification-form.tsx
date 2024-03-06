@@ -5,7 +5,7 @@ import { Button, Checkbox } from "@servcy/ui";
 // hooks
 import useToast from "hooks/use-toast";
 // services
-import { UserService } from "services/user.service";
+import { UserService } from "@services/user.service";
 // types
 import { IUserEmailNotificationSettings } from "@servcy/types";
 

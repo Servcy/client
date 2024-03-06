@@ -1,9 +1,9 @@
 import { set } from "lodash";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // services
-import { ProjectMemberService } from "services/project";
-import { UserService } from "services/user.service";
-import { WorkspaceService } from "services/workspace.service";
+import { ProjectMemberService } from "@services/project";
+import { UserService } from "@services/user.service";
+import { WorkspaceService } from "@services/workspace.service";
 // interfaces
 import { IProjectMember, IUserProjectsRole, IWorkspaceMemberMe } from "@servcy/types";
 import { RootStore } from "../root.store";

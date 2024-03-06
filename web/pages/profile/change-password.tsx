@@ -5,7 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 // hooks
 import { useApplication, useUser } from "hooks/store";
 // services
-import { UserService } from "services/user.service";
+import { UserService } from "@services/user.service";
 // components
 import { PageHead } from "components/core";
 // hooks

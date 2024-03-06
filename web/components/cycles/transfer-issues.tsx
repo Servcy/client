@@ -10,7 +10,7 @@ import { Button, TransferIcon } from "@servcy/ui";
 // icon
 import { AlertCircle } from "lucide-react";
 // services
-import { CycleService } from "services/cycle.service";
+import { CycleService } from "@services/cycle.service";
 // fetch-key
 import { CYCLE_DETAILS } from "constants/fetch-keys";
 
