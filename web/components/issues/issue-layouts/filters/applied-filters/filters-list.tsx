@@ -1,5 +1,3 @@
-import { useRouter } from "next/router"
-
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 

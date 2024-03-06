@@ -6,7 +6,6 @@ import { Dialog, Transition } from "@headlessui/react"
 import { UserCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useDropzone } from "react-dropzone"
-import toast from "react-hot-toast"
 
 import { useApplication, useWorkspace } from "@hooks/store"
 

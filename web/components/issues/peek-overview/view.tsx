@@ -1,7 +1,6 @@
 import { FC, useRef, useState } from "react"
 
 import { observer } from "mobx-react-lite"
-import toast from "react-hot-toast"
 
 import {
     ArchiveIssueModal,
