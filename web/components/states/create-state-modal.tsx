@@ -72,9 +72,11 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
                         toast.error(Array.isArray(error[key]) ? error[key].join(", ") : error[key])
                     })
                 } else {
-                    toast.error(error ?? err.status === 400
-                                ? "Another state exists with the same name. Please try again with another name."
-                                : "State could not be created. Please try again.")
+                    toast.error(
+                        error ?? err.status === 400
+                            ? "Another state exists with the same name. Please try again with another name."
+                            : "State could not be created. Please try again."
+                    )
                 }
             })
     }

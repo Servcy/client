@@ -15,11 +15,10 @@ import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/
 
 import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { MEMBER_INVITED } from "@constants/event-tracker"
 import { EUserWorkspaceRoles } from "@constants/workspace"
 
+import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingLayout } from "@wrappers/settings"
 
 import { getUserRole } from "@helpers/user.helper"

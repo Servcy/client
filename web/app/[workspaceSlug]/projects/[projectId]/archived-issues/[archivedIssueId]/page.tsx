@@ -16,10 +16,10 @@ import { IssueDetailRoot } from "@components/issues"
 
 import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { EIssuesStoreType } from "@constants/issue"
 import { EUserProjectRoles } from "@constants/project"
+
+import { AppWrapper } from "@wrappers/app"
 
 import { ArchiveIcon, Button, Loader } from "@servcy/ui"
 

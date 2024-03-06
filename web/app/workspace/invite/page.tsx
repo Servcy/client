@@ -11,11 +11,11 @@ import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space"
 
 import { useUser } from "@hooks/store"
 
-import DefaultWrapper from "@wrappers/DefaultWrapper"
-
 import { WORKSPACE_INVITATION } from "@constants/fetch-keys"
 
 import { WorkspaceService } from "@services/workspace.service"
+
+import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import { Spinner } from "@servcy/ui"
 

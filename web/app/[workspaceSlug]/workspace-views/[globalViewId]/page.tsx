@@ -12,9 +12,9 @@ import { GlobalViewsHeader } from "@components/workspace"
 
 import { useGlobalView, useWorkspace } from "@hooks/store"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
+
+import { AppWrapper } from "@wrappers/app"
 
 const GlobalViewIssuesPage: NextPageWithWrapper = observer(() => {
     // router

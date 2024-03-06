@@ -9,10 +9,9 @@ import { ProjectSettingHeader } from "@components/headers"
 
 import { useProject, useUser } from "@hooks/store"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { EUserProjectRoles } from "@constants/project"
 
+import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
 const EstimatesSettingsPage: NextPageWithWrapper = observer(() => {

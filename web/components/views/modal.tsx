@@ -34,17 +34,13 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
                 handleClose()
                 toast.success("View created successfully.")
             })
-            .catch(() =>
-                toast.error("Something went wrong. Please try again.")
-            )
+            .catch(() => toast.error("Something went wrong. Please try again."))
     }
 
     const handleUpdateView = async (payload: IProjectView) => {
         await updateView(workspaceSlug, projectId, data?.id as string, payload)
             .then(() => handleClose())
-            .catch((err) =>
-                toast.error(err.detail ?? "Something went wrong. Please try again.")
-            )
+            .catch((err) => toast.error(err.detail ?? "Something went wrong. Please try again."))
     }
 
     const handleFormSubmit = async (formData: IProjectView) => {

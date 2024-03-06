@@ -10,7 +10,6 @@ import { WorkspaceDetails } from "@components/workspace"
 import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
-
 import { WorkspaceSettingLayout } from "@wrappers/settings"
 
 const WorkspaceSettingsPage: NextPageWithWrapper = observer(() => {

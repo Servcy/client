@@ -45,9 +45,7 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
                 router.push("/")
                 handleClose()
             })
-            .catch((err) =>
-                toast.error(err?.error)
-            )
+            .catch((err) => toast.error(err?.error))
             .finally(() => setIsDeactivating(false))
     }
 

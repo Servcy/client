@@ -90,12 +90,7 @@ export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, h
                             <p className="mt-0.5 stroke-[1.5] text-xs text-custom-text-300">
                                 Added {calculateTimeAgo(link.created_at)}
                                 <br />
-                                {createdByDetails && (
-                                    <>
-                                        by{" "}
-                                        {createdByDetails?.display_name}
-                                    </>
-                                )}
+                                {createdByDetails && <>by {createdByDetails?.display_name}</>}
                             </p>
                         </div>
                     </div>

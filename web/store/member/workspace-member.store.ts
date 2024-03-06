@@ -168,7 +168,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
         const memberDetails: IWorkspaceMember = {
             id: workspaceMember.id,
             role: workspaceMember.role,
-            member: this.memberRoot?.memberMap?.[workspaceMember.member] ?? {} as IUserLite,
+            member: this.memberRoot?.memberMap?.[workspaceMember.member] ?? ({} as IUserLite),
         }
         return memberDetails
     })
@@ -310,9 +310,8 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
     deleteMemberInvitation = async (workspaceSlug: string, invitationId: string) =>
         await this.workspaceService.deleteWorkspaceInvitations(workspaceSlug.toString(), invitationId).then(() => {
             runInAction(() => {
-                this.workspaceMemberInvitations[workspaceSlug] = this.workspaceMemberInvitations[workspaceSlug]?.filter(
-                    (inv) => inv.id !== invitationId
-                ) ?? []
+                this.workspaceMemberInvitations[workspaceSlug] =
+                    this.workspaceMemberInvitations[workspaceSlug]?.filter((inv) => inv.id !== invitationId) ?? []
             })
         })
 }

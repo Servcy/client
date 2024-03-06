@@ -129,31 +129,26 @@ export const ProfileLayoutSidebar = observer(() => {
                     )}
                     <div className="mt-2 h-full space-y-1.5 overflow-y-auto">
                         {PROFILE_ACTION_LINKS.map((link) => (
-                                <Link
-                                    key={link.key}
-                                    href={link.href}
-                                    className="block w-full"
-                                    onClick={handleItemClick}
+                            <Link key={link.key} href={link.href} className="block w-full" onClick={handleItemClick}>
+                                <Tooltip
+                                    tooltipContent={link.label}
+                                    position="right"
+                                    className="ml-2"
+                                    disabled={!sidebarCollapsed}
                                 >
-                                    <Tooltip
-                                        tooltipContent={link.label}
-                                        position="right"
-                                        className="ml-2"
-                                        disabled={!sidebarCollapsed}
+                                    <div
+                                        className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium outline-none ${
+                                            link.highlight(router.pathname)
+                                                ? "bg-custom-primary-100/10 text-custom-primary-100"
+                                                : "text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80"
+                                        } ${sidebarCollapsed ? "justify-center" : ""}`}
                                     >
-                                        <div
-                                            className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium outline-none ${
-                                                link.highlight(router.pathname)
-                                                    ? "bg-custom-primary-100/10 text-custom-primary-100"
-                                                    : "text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80"
-                                            } ${sidebarCollapsed ? "justify-center" : ""}`}
-                                        >
-                                            {<link.Icon className="h-4 w-4" />}
-                                            {!sidebarCollapsed && link.label}
-                                        </div>
-                                    </Tooltip>
-                                </Link>
-                            ))}
+                                        {<link.Icon className="h-4 w-4" />}
+                                        {!sidebarCollapsed && link.label}
+                                    </div>
+                                </Tooltip>
+                            </Link>
+                        ))}
                     </div>
                 </div>
                 <div className="flex flex-col overflow-x-hidden px-4">

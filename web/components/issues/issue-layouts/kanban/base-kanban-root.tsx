@@ -229,7 +229,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
             issueIds,
             viewId
         ).finally(() => {
-            handleIssues(issueMap[dragState.draggedIssueId!] ?? {} as TIssue, EIssueActions.DELETE)
+            handleIssues(issueMap[dragState.draggedIssueId!] ?? ({} as TIssue), EIssueActions.DELETE)
             setDeleteIssueModal(false)
             setDragState({})
             captureIssueEvent({

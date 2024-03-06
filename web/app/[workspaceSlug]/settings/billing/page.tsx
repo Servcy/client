@@ -8,10 +8,9 @@ import { WorkspaceSettingHeader } from "@components/headers"
 
 import { useUser, useWorkspace } from "@hooks/store"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { EUserWorkspaceRoles } from "@constants/workspace"
 
+import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingLayout } from "@wrappers/settings"
 
 import { Button } from "@servcy/ui"

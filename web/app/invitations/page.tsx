@@ -19,14 +19,13 @@ import { PageHead } from "@components/core"
 
 import { useEventTracker, useUser } from "@hooks/store"
 
-import DefaultWrapper from "@wrappers/DefaultWrapper"
-
 import { MEMBER_ACCEPTED } from "@constants/event-tracker"
 import { ROLE } from "@constants/workspace"
 
 import { UserService } from "@services/user.service"
 import { WorkspaceService } from "@services/workspace.service"
 
+import DefaultWrapper from "@wrappers/DefaultWrapper"
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { truncateText } from "@helpers/string.helper"

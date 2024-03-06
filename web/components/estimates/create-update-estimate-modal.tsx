@@ -68,9 +68,11 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 const error = err?.error
                 const errorString = Array.isArray(error) ? error[0] : error
 
-                toast.error(errorString ?? err.status === 400
-                            ? "Estimate with that name already exists. Please try again with another name."
-                            : "Estimate could not be created. Please try again.")
+                toast.error(
+                    errorString ?? err.status === 400
+                        ? "Estimate with that name already exists. Please try again with another name."
+                        : "Estimate could not be created. Please try again."
+                )
             })
     }
 

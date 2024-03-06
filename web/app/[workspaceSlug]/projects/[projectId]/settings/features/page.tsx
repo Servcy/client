@@ -13,7 +13,6 @@ import { ProjectFeaturesList } from "@components/project"
 import { useProject, useUser } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
-
 import { ProjectSettingLayout } from "@wrappers/settings"
 
 const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {

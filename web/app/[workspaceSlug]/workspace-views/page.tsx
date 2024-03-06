@@ -12,9 +12,9 @@ import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspac
 
 import { useWorkspace } from "@hooks/store"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
+
+import { AppWrapper } from "@wrappers/app"
 
 import { Input } from "@servcy/ui"
 

@@ -120,7 +120,9 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
             }
             handleClose()
         } else
-            toast.error("You already have a cycle on the given dates, if you want to create a draft cycle, remove the dates.")
+            toast.error(
+                "You already have a cycle on the given dates, if you want to create a draft cycle, remove the dates."
+            )
     }
 
     useEffect(() => {

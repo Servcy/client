@@ -16,7 +16,6 @@ import { CreateWorkspaceForm } from "@components/workspace"
 import { useUser } from "@hooks/store"
 
 import DefaultWrapper from "@wrappers/DefaultWrapper"
-
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { IWorkspace } from "@servcy/types"

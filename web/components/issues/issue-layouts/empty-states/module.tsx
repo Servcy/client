@@ -59,9 +59,7 @@ export const ModuleEmptyState: React.FC<Props> = observer((props) => {
         const issueIds = data.map((i) => i.id)
         await issues
             .addIssuesToModule(workspaceSlug.toString(), projectId?.toString(), moduleId.toString(), issueIds)
-            .catch(() =>
-                toast.error("Selected issues could not be added to the module. Please try again.")
-            )
+            .catch(() => toast.error("Selected issues could not be added to the module. Please try again."))
     }
 
     const emptyStateDetail = MODULE_EMPTY_STATE_DETAILS["no-issues"]

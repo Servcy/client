@@ -72,9 +72,7 @@ export const Workspace: React.FC<Props> = (props) => {
                         })
                 } else setSlugError(true)
             })
-            .catch(() =>
-                toast.error("Some error occurred while creating workspace. Please try again.")
-            )
+            .catch(() => toast.error("Some error occurred while creating workspace. Please try again."))
     }
 
     const completeStep = async () => {

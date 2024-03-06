@@ -65,7 +65,8 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
             const interval = Math.ceil(totalDates / maxDates)
             const limitedDates = []
 
-            for (let i = 0; i < totalDates; i += interval) limitedDates.push(renderFormattedDateWithoutYear(dates[i] ?? ""))
+            for (let i = 0; i < totalDates; i += interval)
+                limitedDates.push(renderFormattedDateWithoutYear(dates[i] ?? ""))
 
             if (!limitedDates.includes(renderFormattedDateWithoutYear(dates[totalDates - 1] ?? "")))
                 limitedDates.push(renderFormattedDateWithoutYear(dates[totalDates - 1] ?? ""))

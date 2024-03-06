@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { useMemo, useState } from "react"
 
+import toast from "react-hot-toast"
 import useSWR from "swr"
 import useSWRInfinite from "swr/infinite"
 
@@ -10,8 +11,6 @@ import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@consta
 import { NotificationService } from "@services/notification.service"
 
 import type { IMarkAllAsReadPayload, NotificationCount, NotificationType } from "@servcy/types"
-
-import toast from "react-hot-toast";
 
 const PER_PAGE = 30
 
@@ -108,9 +107,9 @@ const useUserNotification = () => {
             if (notificationIndexInPage === -1) return previousNotifications
 
             const key = Object.keys(value)[0]
-            ;(previousNotifications[notificationIndex].results[notificationIndexInPage] as any)[key as keyof typeof value] = (value as any)[
+            ;(previousNotifications[notificationIndex].results[notificationIndexInPage] as any)[
                 key as keyof typeof value
-            ]
+            ] = (value as any)[key as keyof typeof value]
 
             return previousNotifications
         }, false)

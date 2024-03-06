@@ -43,9 +43,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
             .then(() => {
                 toast.success("Invitation removed successfully.")
             })
-            .catch((err) =>
-                toast.error(err?.error || "Something went wrong. Please try again.")
-            )
+            .catch((err) => toast.error(err?.error || "Something went wrong. Please try again."))
     }
 
     if (!invitationDetails) return null

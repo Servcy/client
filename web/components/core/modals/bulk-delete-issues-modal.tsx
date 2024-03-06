@@ -88,9 +88,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
                 toast.success("Issues deleted successfully!")
                 handleClose()
             })
-            .catch(() =>
-                toast.error("Something went wrong. Please try again.")
-            )
+            .catch(() => toast.error("Something went wrong. Please try again."))
     }
 
     const projectDetails = getProjectById(projectId as string)

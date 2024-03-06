@@ -63,7 +63,9 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
             icon: <MessageSquare className="h-3.5 w-3.5 text-custom-text-300" />,
             onClick: () => {
                 markNotificationReadStatusToggle(notification.id).then(() => {
-                    toast.success(notification.read_at ? "Notification marked as read" : "Notification marked as unread")
+                    toast.success(
+                        notification.read_at ? "Notification marked as read" : "Notification marked as unread"
+                    )
                 })
             },
         },
@@ -160,9 +162,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                 <div className="flex items-start">
                     {!notification.message ? (
                         <div className="w-full break-words text-sm">
-                            <span className="font-semibold">
-                                {notificationTriggeredBy.display_name}{" "}
-                            </span>
+                            <span className="font-semibold">{notificationTriggeredBy.display_name} </span>
                             {!["comment", "archived_at"].includes(notificationField) &&
                                 notification.data.issue_activity.verb}{" "}
                             {notificationField === "comment"
@@ -322,9 +322,11 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                     tab: selectedTab,
                                     state: "SUCCESS",
                                 })
-                                toast.success(notification.read_at
+                                toast.success(
+                                    notification.read_at
                                         ? "Notification marked as read"
-                                        : "Notification marked as unread")
+                                        : "Notification marked as unread"
+                                )
                             })
                         },
                     },
@@ -343,9 +345,9 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                                     tab: selectedTab,
                                     state: "SUCCESS",
                                 })
-                                toast.success(notification.archived_at
-                                        ? "Notification un-archived"
-                                        : "Notification archived")
+                                toast.success(
+                                    notification.archived_at ? "Notification un-archived" : "Notification archived"
+                                )
                             })
                         },
                     },

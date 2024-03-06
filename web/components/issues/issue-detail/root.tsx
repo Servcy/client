@@ -301,7 +301,21 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                 }
             },
         }),
-        [fetchIssue, updateIssue, captureIssueEvent, router.asPath, is_archived, removeArchivedIssue, removeIssue, archiveIssue, addIssueToCycle, removeIssueFromCycle, addModulesToIssue, removeIssueFromModule, removeModulesFromIssue]
+        [
+            fetchIssue,
+            updateIssue,
+            captureIssueEvent,
+            router.asPath,
+            is_archived,
+            removeArchivedIssue,
+            removeIssue,
+            archiveIssue,
+            addIssueToCycle,
+            removeIssueFromCycle,
+            addModulesToIssue,
+            removeIssueFromModule,
+            removeModulesFromIssue,
+        ]
     )
 
     // issue details

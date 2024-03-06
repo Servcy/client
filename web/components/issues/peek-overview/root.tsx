@@ -101,8 +101,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
             ) => {
                 try {
                     await updateIssue(workspaceSlug, projectId, issueId, data)
-                    if (showToast)
-                        toast.success("Issue updated successfully")
+                    if (showToast) toast.success("Issue updated successfully")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { ...data, issueId, state: "SUCCESS", element: "Issue peek-overview" },

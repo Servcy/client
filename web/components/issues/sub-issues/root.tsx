@@ -194,7 +194,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         },
                         path: router.asPath,
                     })
-                    toast.error( "Error updating sub-issue")
+                    toast.error("Error updating sub-issue")
                 }
             },
             removeSubIssue: async (
@@ -256,7 +256,16 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                 }
             },
         }),
-        [fetchSubIssues, createSubIssues, setSubIssueHelpers, updateSubIssue, captureIssueEvent, router.asPath, removeSubIssue, deleteSubIssue]
+        [
+            fetchSubIssues,
+            createSubIssues,
+            setSubIssueHelpers,
+            updateSubIssue,
+            captureIssueEvent,
+            router.asPath,
+            removeSubIssue,
+            deleteSubIssue,
+        ]
     )
 
     const issue = getIssueById(parentIssueId)

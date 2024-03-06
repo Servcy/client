@@ -79,9 +79,7 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
 
                 if (value && currentWorkspace) fileService.deleteFile(currentWorkspace.id, value)
             })
-            .catch((err) =>
-            err?.error ?? "Something went wrong. Please try again."
-            )
+            .catch((err) => err?.error ?? "Something went wrong. Please try again.")
             .finally(() => setIsImageUploading(false))
     }
 

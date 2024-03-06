@@ -18,11 +18,11 @@ import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from
 import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
 import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserWorkspaceRoles } from "@constants/workspace"
+
+import { AppWrapper } from "@wrappers/app"
 
 import { TCycleLayout, TCycleView } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"

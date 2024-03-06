@@ -112,12 +112,7 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
                     <p className="mt-0.5 stroke-[1.5] text-xs text-custom-text-300">
                         Added {calculateTimeAgo(linkDetail.created_at)}
                         <br />
-                        {createdByDetails && (
-                            <>
-                                by{" "}
-                                {createdByDetails?.display_name}
-                            </>
-                        )}
+                        {createdByDetails && <>by {createdByDetails?.display_name}</>}
                     </p>
                 </div>
             </div>

@@ -20,7 +20,6 @@ import {
 import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
-
 import { ProjectSettingLayout } from "@wrappers/settings"
 
 const GeneralSettingsPage: NextPageWithWrapper = observer(() => {

@@ -52,9 +52,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                 })
                 router.push("/profile")
             })
-            .catch((err) =>
-                toast.error(err?.error || "Something went wrong. Please try again.")
-            )
+            .catch((err) => toast.error(err?.error || "Something went wrong. Please try again."))
     }
 
     const handleRemoveMember = async () => {

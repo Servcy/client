@@ -22,11 +22,11 @@ import { useProjectPages } from "@hooks/store/use-project-page"
 import useLocalStorage from "@hooks/use-local-storage"
 import useUserAuth from "@hooks/use-user-auth"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { PAGE_TABS_LIST } from "@constants/page"
 import { EUserWorkspaceRoles } from "@constants/workspace"
+
+import { AppWrapper } from "@wrappers/app"
 
 const AllPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.AllPagesList), {
     ssr: false,

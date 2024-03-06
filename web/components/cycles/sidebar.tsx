@@ -139,7 +139,9 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
             submitChanges(payload, "date_range")
             toast.success("Cycle updated successfully.")
         } else {
-            toast.error("You already have a cycle on the given dates, if you want to create a draft cycle, you can do that by removing both the dates.")
+            toast.error(
+                "You already have a cycle on the given dates, if you want to create a draft cycle, you can do that by removing both the dates."
+            )
             reset({ ...cycleDetails })
         }
     }

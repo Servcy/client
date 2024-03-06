@@ -10,7 +10,6 @@ import { ProjectSettingsLabelList } from "@components/labels"
 import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
-
 import { ProjectSettingLayout } from "@wrappers/settings"
 
 const LabelsSettingsPage: NextPageWithWrapper = observer(() => {

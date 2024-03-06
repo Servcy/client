@@ -55,9 +55,7 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
 
     const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank")
     const handleCopyIssueLink = () =>
-        copyUrlToClipboard(issueLink).then(() =>
-            toast.success("Issue link copied to clipboard")
-        )
+        copyUrlToClipboard(issueLink).then(() => toast.success("Issue link copied to clipboard"))
 
     const duplicateIssuePayload = omit(
         {

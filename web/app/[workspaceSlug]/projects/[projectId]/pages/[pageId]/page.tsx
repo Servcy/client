@@ -19,11 +19,11 @@ import { usePage, useUser, useWorkspace } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-specific-pages"
 import useReloadConfirmations from "@hooks/use-reload-confirmation"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { EUserProjectRoles } from "@constants/project"
 
 import { FileService } from "@services/file.service"
+
+import { AppWrapper } from "@wrappers/app"
 
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor"
 import { IPage } from "@servcy/types"

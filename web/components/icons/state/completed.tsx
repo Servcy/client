@@ -5,9 +5,12 @@ type Props = {
     color?: string
 }
 
-export const StateGroupCompletedIcon: React.FC<Props> = (
-    { width = "20", height = "20", className, color = "#4d7e3e" }
-) => (
+export const StateGroupCompletedIcon: React.FC<Props> = ({
+    width = "20",
+    height = "20",
+    className,
+    color = "#4d7e3e",
+}) => (
     <svg
         height={height}
         width={width}
