@@ -11,7 +11,7 @@ import { ToggleSwitch } from "@servcy/ui";
 import { Check, ChevronUp } from "lucide-react";
 
 import { TCalendarLayouts } from "@servcy/types";
-// constants
+
 import { CALENDAR_LAYOUTS } from "@constants/calendar";
 import { EIssueFilterType } from "@constants/issue";
 import { ICycleIssuesFilter } from "@store/issue/cycle";

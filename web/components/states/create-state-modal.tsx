@@ -13,7 +13,7 @@ import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
 import { ChevronDown } from "lucide-react";
 
 import type { IState } from "@servcy/types";
-// constants
+
 import { GROUP_CHOICES } from "@constants/project";
 
 

@@ -11,7 +11,7 @@ import { PageHead } from "@components/core";
 import { Button } from "@servcy/ui";
 
 import { NextPageWithLayout } from "@lib/types";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 
 const BillingSettingsPage: NextPageWithLayout = observer(() => {

@@ -15,7 +15,7 @@ import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon, Tooltip } from "@serv
 import { List, PlusIcon, Sheet } from "lucide-react";
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types";
-// constants
+
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 import { EUserWorkspaceRoles } from "@constants/workspace";
 

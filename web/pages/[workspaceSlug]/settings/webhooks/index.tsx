@@ -17,7 +17,7 @@ import { Button } from "@servcy/ui";
 import { WebhookSettingsLoader } from "@components/ui";
 
 import { NextPageWithLayout } from "@lib/types";
-// constants
+
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PageHead } from "@components/core";
 

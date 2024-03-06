@@ -10,7 +10,7 @@ import useLocalStorage from "@hooks/use-local-storage";
 import { CycleForm } from "@components/cycles";
 
 import type { CycleDateCheckData, ICycle, TCycleView } from "@servcy/types";
-// constants
+
 import { CYCLE_CREATED, CYCLE_UPDATED } from "@constants/event-tracker";
 
 type CycleModalProps = {

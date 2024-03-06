@@ -13,7 +13,7 @@ import { cn } from "@helpers/common.helper";
 
 import { TIssuePriorities } from "@servcy/types";
 import { TDropdownProps } from "./types";
-// constants
+
 import { ISSUE_PRIORITIES } from "@constants/issue";
 import { BACKGROUND_BUTTON_VARIANTS, BORDER_BUTTON_VARIANTS, BUTTON_VARIANTS_WITHOUT_TEXT } from "./constants";
 

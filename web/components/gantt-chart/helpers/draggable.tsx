@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { IGanttBlock } from "@components/gantt-chart";
 // helpers
 import { cn } from "@helpers/common.helper";
-// constants
+
 import { SIDEBAR_WIDTH } from "../constants";
 import { useGanttChart } from "../hooks/use-gantt-chart";
 import { observer } from "mobx-react";

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Loader } from "@servcy/ui";
 
 import { useUser } from "@hooks/store";
-// constants
+
 import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project";
 
 export const ProjectSettingsSidebar = () => {

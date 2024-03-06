@@ -11,7 +11,7 @@ import { ProjectSettingHeader } from "@components/headers";
 import { EstimatesList } from "@components/estimates";
 
 import { NextPageWithLayout } from "@lib/types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 
 const EstimatesSettingsPage: NextPageWithLayout = observer(() => {

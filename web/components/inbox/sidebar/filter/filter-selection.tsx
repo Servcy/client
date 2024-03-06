@@ -9,7 +9,7 @@ import { MultiLevelDropdown } from "@components/ui";
 import { PriorityIcon } from "@servcy/ui";
 
 import { TInboxIssueFilterOptions } from "@servcy/types";
-// constants
+
 import { INBOX_STATUS } from "@constants/inbox";
 import { ISSUE_PRIORITIES } from "@constants/issue";
 

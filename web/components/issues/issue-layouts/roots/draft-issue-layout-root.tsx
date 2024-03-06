@@ -12,7 +12,7 @@ import { IssuePeekOverview } from "@components/issues/peek-overview";
 import { ActiveLoader } from "@components/ui";
 
 import { DraftKanBanLayout } from "../kanban/roots/draft-issue-root";
-// constants
+
 import { EIssuesStoreType } from "@constants/issue";
 
 export const DraftIssueLayoutRoot: React.FC = observer(() => {

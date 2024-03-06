@@ -8,7 +8,7 @@ import useLocalStorage from "@hooks/use-local-storage";
 import { Breadcrumbs, Button, Tooltip, DiceIcon, CustomMenu } from "@servcy/ui";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";
-// constants
+
 import { MODULE_VIEW_LAYOUTS } from "@constants/module";
 import { EUserProjectRoles } from "@constants/project";
 

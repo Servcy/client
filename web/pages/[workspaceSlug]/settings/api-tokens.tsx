@@ -19,7 +19,7 @@ import { APITokenSettingsLoader } from "@components/ui";
 import { APITokenService } from "@services/api_token.service";
 
 import { NextPageWithLayout } from "@lib/types";
-// constants
+
 import { API_TOKENS_LIST } from "@constants/fetch-keys";
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";

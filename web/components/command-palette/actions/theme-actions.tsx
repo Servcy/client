@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 
 import { useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// constants
+
 import { THEME_OPTIONS } from "@constants/themes";
 
 type Props = {

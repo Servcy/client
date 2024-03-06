@@ -11,7 +11,7 @@ import { DashboardWidgets } from "@components/dashboard";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 
 import { Spinner } from "@servcy/ui";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { PRODUCT_TOUR_COMPLETED } from "@constants/event-tracker";
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state";

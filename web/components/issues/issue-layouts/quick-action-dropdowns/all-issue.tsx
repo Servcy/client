@@ -13,7 +13,7 @@ import { copyUrlToClipboard } from "@helpers/string.helper";
 
 import { TIssue } from "@servcy/types";
 import { IQuickActionProps } from "../list/list-view-types";
-// constants
+
 import { EIssuesStoreType } from "@constants/issue";
 import { STATE_GROUPS } from "@constants/state";
 

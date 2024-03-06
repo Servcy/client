@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { Button } from "@servcy/ui";
 
 import { ICycle } from "@servcy/types";
-// constants
+
 import { CYCLE_DELETED } from "@constants/event-tracker";
 
 interface ICycleDelete {

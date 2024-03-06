@@ -1,6 +1,6 @@
 
 import { IBlockUpdateData, IGanttBlock } from "@components/gantt-chart";
-// constants
+
 import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "../constants";
 
 type Props = {

@@ -9,7 +9,7 @@ import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // services
 import { WorkspaceService } from "@services/workspace.service";
-// constants
+
 import { RESTRICTED_URLS } from "@constants/workspace";
 import { WORKSPACE_CREATED } from "@constants/event-tracker";
 

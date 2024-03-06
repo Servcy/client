@@ -4,7 +4,7 @@ import { Search, Plus, Briefcase } from "lucide-react";
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 
 import { Breadcrumbs, Button } from "@servcy/ui";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";

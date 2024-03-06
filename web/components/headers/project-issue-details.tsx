@@ -10,7 +10,7 @@ import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 import { renderEmoji } from "@helpers/emoji.helper";
 // services
 import { IssueService } from "@services/issue";
-// constants
+
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
 
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";

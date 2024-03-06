@@ -5,7 +5,7 @@ import { useCycle, useMember, useModule, useProject } from "@hooks/store";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
-// constants
+
 import { NETWORK_CHOICES } from "@constants/project";
 
 export const CustomAnalyticsSidebarHeader = observer(() => {

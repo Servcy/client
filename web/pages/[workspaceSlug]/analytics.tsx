@@ -12,7 +12,7 @@ import { PageHead } from "@components/core";
 import { CustomAnalytics, ScopeAndDemand } from "@components/analytics";
 import { WorkspaceAnalyticsHeader } from "@components/headers";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// constants
+
 import { ANALYTICS_TABS } from "@constants/analytics";
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state";

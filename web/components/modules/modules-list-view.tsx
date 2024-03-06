@@ -9,7 +9,7 @@ import { ModuleCardItem, ModuleListItem, ModulePeekOverview, ModulesListGanttCha
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 

@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import { useInboxIssues } from "@hooks/store";
-// constants
+
 import { INBOX_STATUS } from "@constants/inbox";
 
 type Props = {

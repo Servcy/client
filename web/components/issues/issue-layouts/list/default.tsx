@@ -15,7 +15,7 @@ import {
   IGroupByColumn,
 } from "@servcy/types";
 import { EIssueActions } from "../types";
-// constants
+
 import { TCreateModalStoreTypes } from "@constants/issue";
 import { getGroupByColumns } from "../utils";
 

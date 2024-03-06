@@ -4,7 +4,7 @@ import { BarDatum } from "@nivo/bar";
 import { addSpaceIfCamelCase, capitalizeFirstLetter, generateRandomColor } from "@helpers/string.helper";
 
 import { IAnalyticsData, IAnalyticsParams, IAnalyticsResponse, TStateGroups } from "@servcy/types";
-// constants
+
 import { DATE_KEYS } from "@constants/analytics";
 import { MONTHS_LIST } from "@constants/calendar";
 import { STATE_GROUPS } from "@constants/state";

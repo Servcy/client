@@ -7,7 +7,7 @@ import { useApplication, useEventTracker, useProject, useUser } from "@hooks/sto
 import { Breadcrumbs, Button } from "@servcy/ui";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";

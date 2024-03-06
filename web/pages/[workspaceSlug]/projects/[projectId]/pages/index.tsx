@@ -19,7 +19,7 @@ import { PagesHeader } from "@components/headers";
 import { PagesLoader } from "@components/ui";
 
 import { NextPageWithLayout } from "@lib/types";
-// constants
+
 import { PAGE_TABS_LIST } from "@constants/page";
 import { useProjectPages } from "@hooks/store/use-project-page";
 import { EUserWorkspaceRoles } from "@constants/workspace";

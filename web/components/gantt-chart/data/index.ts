@@ -1,7 +1,7 @@
 
 import { WeekMonthDataType, ChartDataType, TGanttViews } from "../types";
 
-// constants
+
 export const weeks: WeekMonthDataType[] = [
   { key: 0, shortTitle: "sun", title: "sunday" },
   { key: 1, shortTitle: "mon", title: "monday" },

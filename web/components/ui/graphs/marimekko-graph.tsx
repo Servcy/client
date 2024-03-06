@@ -4,7 +4,7 @@ import { ResponsiveMarimekko, SvgProps } from "@nivo/marimekko";
 import { generateYAxisTickValues } from "@helpers/graph.helper";
 
 import { TGraph } from "./types";
-// constants
+
 import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";
 
 type Props = {

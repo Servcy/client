@@ -4,7 +4,7 @@ import { Expand, Shrink } from "lucide-react";
 import { cn } from "@helpers/common.helper";
 
 import { IGanttBlock, TGanttViews } from "../types";
-// constants
+
 import { VIEWS_LIST } from "@components/gantt-chart/data";
 import { useGanttChart } from "../hooks/use-gantt-chart";
 import { observer } from "mobx-react";

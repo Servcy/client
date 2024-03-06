@@ -13,7 +13,7 @@ import { CreateProjectModal, ProjectSidebarListItem } from "@components/project"
 import { copyUrlToClipboard } from "@helpers/string.helper";
 import { orderJoinedProjects } from "@helpers/project.helper";
 import { cn } from "@helpers/common.helper";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { IProject } from "@servcy/types";
 

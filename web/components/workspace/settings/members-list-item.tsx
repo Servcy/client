@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { ConfirmWorkspaceMemberRemove } from "@components/workspace";
 
 import { CustomSelect, Tooltip } from "@servcy/ui";
-// constants
+
 import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
 import { WORKSPACE_MEMBER_lEAVE } from "@constants/event-tracker";
 

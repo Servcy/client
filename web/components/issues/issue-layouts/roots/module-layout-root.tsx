@@ -17,7 +17,7 @@ import {
   ModuleSpreadsheetLayout,
 } from "@components/issues";
 import { ActiveLoader } from "@components/ui";
-// constants
+
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 
 import { IIssueFilterOptions } from "@servcy/types";

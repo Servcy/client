@@ -7,7 +7,7 @@ import { useCycle, useIssues } from "@hooks/store";
 import { CycleIssueQuickActions } from "@components/issues";
 
 import { TIssue } from "@servcy/types";
-// constants
+
 import { BaseListRoot } from "../base-list-root";
 import { EIssueActions } from "../../types";
 import { EIssuesStoreType } from "@constants/issue";

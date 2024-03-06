@@ -15,7 +15,7 @@ import { copyTextToClipboard } from "@helpers/string.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import type { IProject } from "@servcy/types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 
 export type ProjectCardProps = {

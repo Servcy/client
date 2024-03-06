@@ -4,7 +4,7 @@ import router from "next/router";
 import { CustomMenu } from "@servcy/ui";
 // icons
 import { Calendar, ChevronDown, Kanban, List } from "lucide-react";
-// constants
+
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue";
 
 import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store";

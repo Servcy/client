@@ -13,7 +13,7 @@ import { Button, Input } from "@servcy/ui";
 import { checkEmailValidity } from "@helpers/string.helper";
 
 import { IEmailCheckData, IMagicSignInData } from "@servcy/types";
-// constants
+
 import { CODE_VERIFIED } from "@constants/event-tracker";
 
 type Props = {

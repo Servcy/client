@@ -3,7 +3,7 @@ import { FC } from "react";
 import { GanttChartBlock } from "./block";
 
 import { IBlockUpdateData, IGanttBlock } from "../types";
-// constants
+
 import { HEADER_HEIGHT } from "../constants";
 
 export type GanttChartBlocksProps = {

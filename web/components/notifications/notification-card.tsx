@@ -8,14 +8,14 @@ import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
 // icons
 import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui";
-// constants
+
 import { snoozeOptions } from "@constants/notification";
 // helper
 import { replaceUnderscoreIfSnakeCase, truncateText, stripAndTruncateHTML } from "@helpers/string.helper";
 import { calculateTimeAgo, renderFormattedTime, renderFormattedDate } from "@helpers/date-time.helper";
 // type
 import type { IUserNotification, NotificationType } from "@servcy/types";
-// constants
+
 import {
   ISSUE_OPENED,
   NOTIFICATIONS_READ,

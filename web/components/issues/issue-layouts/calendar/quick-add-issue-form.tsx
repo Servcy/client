@@ -13,7 +13,7 @@ import { createIssuePayload } from "@helpers/issue.helper";
 import { PlusIcon } from "lucide-react";
 
 import { TIssue } from "@servcy/types";
-// constants
+
 import { ISSUE_CREATED } from "@constants/event-tracker";
 
 type Props = {

@@ -10,7 +10,7 @@ import { useEventTracker } from "@hooks/store";
 import { getNumberCount } from "@helpers/string.helper";
 // type
 import type { NotificationType, NotificationCount } from "@servcy/types";
-// constants
+
 import {
   ARCHIVED_NOTIFICATIONS,
   NOTIFICATIONS_READ,

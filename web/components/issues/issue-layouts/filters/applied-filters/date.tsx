@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";
 import { capitalizeFirstLetter } from "@helpers/string.helper";
-// constants
+
 import { DATE_FILTER_OPTIONS } from "@constants/filters";
 
 type Props = {

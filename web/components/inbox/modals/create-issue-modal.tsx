@@ -18,7 +18,7 @@ import { GptAssistantPopover } from "@components/core";
 import { Button, Input, ToggleSwitch } from "@servcy/ui";
 
 import { TIssue } from "@servcy/types";
-// constants
+
 import { ISSUE_CREATED } from "@constants/event-tracker";
 
 type Props = {

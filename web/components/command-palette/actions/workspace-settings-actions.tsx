@@ -3,7 +3,7 @@ import { Command } from "cmdk";
 
 import { useUser } from "@hooks/store";
 import Link from "next/link";
-// constants
+
 import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace";
 
 type Props = {

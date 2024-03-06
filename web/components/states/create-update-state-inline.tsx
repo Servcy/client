@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { Button, CustomSelect, Input, Tooltip } from "@servcy/ui";
 
 import type { IState } from "@servcy/types";
-// constants
+
 import { GROUP_CHOICES } from "@constants/project";
 import { STATE_CREATED, STATE_UPDATED } from "@constants/event-tracker";
 

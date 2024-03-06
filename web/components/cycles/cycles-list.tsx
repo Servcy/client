@@ -8,7 +8,7 @@ import { CyclePeekOverview, CyclesListItem } from "@components/cycles";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 
 import { Loader } from "@servcy/ui";
-// constants
+
 import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 export interface ICyclesList {

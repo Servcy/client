@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store";
 
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 import { EMPTY_FILTER_STATE_DETAILS, EMPTY_ISSUE_STATE_DETAILS } from "@constants/empty-state";

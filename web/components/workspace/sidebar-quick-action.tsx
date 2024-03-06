@@ -6,7 +6,7 @@ import { useApplication, useEventTracker, useProject, useUser } from "@hooks/sto
 import useLocalStorage from "@hooks/use-local-storage";
 
 import { CreateUpdateIssueModal } from "@components/issues";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { EIssuesStoreType } from "@constants/issue";
 

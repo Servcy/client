@@ -7,7 +7,7 @@ import { CustomSelect, DoubleCircleIcon } from "@servcy/ui";
 
 import { IModule } from "@servcy/types";
 // common
-// constants
+
 import { MODULE_STATUS } from "@constants/module";
 
 type Props = {

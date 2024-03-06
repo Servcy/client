@@ -12,7 +12,7 @@ import { Input } from "@servcy/ui";
 import { Search } from "lucide-react";
 
 import { NextPageWithLayout } from "@lib/types";
-// constants
+
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace";
 
 import { useWorkspace } from "@hooks/store";

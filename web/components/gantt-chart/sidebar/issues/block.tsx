@@ -11,7 +11,7 @@ import { cn } from "@helpers/common.helper";
 import { findTotalDaysInRange } from "@helpers/date-time.helper";
 
 import { IGanttBlock } from "../../types";
-// constants
+
 import { BLOCK_HEIGHT } from "../../constants";
 
 type Props = {

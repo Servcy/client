@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 import { CustomMenu } from "@servcy/ui";
 
 import { TDurationFilterOptions } from "@servcy/types";
-// constants
+
 import { DURATION_FILTER_OPTIONS } from "@constants/dashboard";
 
 type Props = {

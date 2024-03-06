@@ -7,7 +7,7 @@ import { useIssues } from "@hooks/store";
 import { ModuleIssueQuickActions } from "@components/issues";
 
 import { TIssue } from "@servcy/types";
-// constants
+
 import { EIssueActions } from "../../types";
 import { BaseKanBanRoot } from "../base-kanban-root";
 import { EIssuesStoreType } from "@constants/issue";

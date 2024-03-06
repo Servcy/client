@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 import { useEventTracker, useGlobalView, useUser } from "@hooks/store";
 
 import { CreateUpdateWorkspaceViewModal } from "@components/workspace";
-// constants
+
 import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace";
 import { GLOBAL_VIEW_OPENED } from "@constants/event-tracker";
 

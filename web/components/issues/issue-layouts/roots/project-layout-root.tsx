@@ -19,7 +19,7 @@ import { Spinner } from "@servcy/ui";
 import { useIssues } from "@hooks/store";
 // helpers
 import { ActiveLoader } from "@components/ui";
-// constants
+
 import { EIssuesStoreType } from "@constants/issue";
 
 export const ProjectLayoutRoot: FC = observer(() => {

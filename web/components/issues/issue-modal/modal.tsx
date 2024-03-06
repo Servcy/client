@@ -20,7 +20,7 @@ import { DraftIssueLayout } from "./draft-issue-layout";
 import { IssueFormRoot } from "./form";
 
 import type { TIssue } from "@servcy/types";
-// constants
+
 import { EIssuesStoreType, TCreateModalStoreTypes } from "@constants/issue";
 import { ISSUE_CREATED, ISSUE_UPDATED } from "@constants/event-tracker";
 

@@ -16,7 +16,7 @@ import { cn } from "@helpers/common.helper";
 import { ChartDataType, IBlockUpdateData, IGanttBlock, TGanttViews } from "../types";
 // data
 import { currentViewDataWithView } from "../data";
-// constants
+
 import { SIDEBAR_WIDTH } from "../constants";
 
 type ChartViewRootProps = {

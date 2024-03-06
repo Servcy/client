@@ -1,5 +1,5 @@
 import { FC } from "react";
-// constants
+
 import { THEME_OPTIONS, I_THEME_OPTION } from "@constants/themes";
 
 import { CustomSelect } from "@servcy/ui";

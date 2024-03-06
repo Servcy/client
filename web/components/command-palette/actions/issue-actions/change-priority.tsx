@@ -8,7 +8,7 @@ import { useIssues } from "@hooks/store";
 import { PriorityIcon } from "@servcy/ui";
 
 import { TIssue, TIssuePriorities } from "@servcy/types";
-// constants
+
 import { EIssuesStoreType, ISSUE_PRIORITIES } from "@constants/issue";
 
 type Props = {

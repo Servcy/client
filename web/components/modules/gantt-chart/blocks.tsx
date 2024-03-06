@@ -6,7 +6,7 @@ import { useApplication, useModule } from "@hooks/store";
 import { Tooltip, ModuleStatusIcon } from "@servcy/ui";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";
-// constants
+
 import { MODULE_STATUS } from "@constants/module";
 
 type Props = {

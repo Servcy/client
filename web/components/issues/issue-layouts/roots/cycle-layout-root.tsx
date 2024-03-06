@@ -19,7 +19,7 @@ import {
 } from "@components/issues";
 import { TransferIssues, TransferIssuesModal } from "@components/cycles";
 import { ActiveLoader } from "@components/ui";
-// constants
+
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 
 import { IIssueFilterOptions } from "@servcy/types";

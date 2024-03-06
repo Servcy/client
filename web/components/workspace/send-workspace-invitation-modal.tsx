@@ -9,7 +9,7 @@ import { useUser } from "@hooks/store";
 import { Button, CustomSelect, Input } from "@servcy/ui";
 
 import { IWorkspaceBulkInviteFormData } from "@servcy/types";
-// constants
+
 import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
 
 type Props = {

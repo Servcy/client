@@ -11,7 +11,7 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { Loader } from "@servcy/ui";
 // helpers
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 

@@ -8,11 +8,11 @@ import { useEventTracker, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 import useKeypress from "@hooks/use-keypress";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-// constants
+
 import { TIssue, IProject } from "@servcy/types";
 
 import { createIssuePayload } from "@helpers/issue.helper";
-// constants
+
 import { ISSUE_CREATED } from "@constants/event-tracker";
 
 interface IInputProps {

@@ -10,7 +10,7 @@ import { cn } from "@helpers/common.helper";
 import { findTotalDaysInRange } from "@helpers/date-time.helper";
 
 import { IGanttBlock } from "@components/gantt-chart/types";
-// constants
+
 import { BLOCK_HEIGHT } from "@components/gantt-chart/constants";
 
 type Props = {

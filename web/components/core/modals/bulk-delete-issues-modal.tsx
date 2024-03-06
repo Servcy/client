@@ -19,7 +19,7 @@ import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys";
 import { useIssues, useProject } from "@hooks/store";
 
 import { BulkDeleteIssuesModalItem } from "./bulk-delete-issues-modal-item";
-// constants
+
 import { EIssuesStoreType } from "@constants/issue";
 
 type FormInput = {

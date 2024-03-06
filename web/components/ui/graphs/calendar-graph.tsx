@@ -2,7 +2,7 @@
 import { ResponsiveCalendar, CalendarSvgProps } from "@nivo/calendar";
 
 import { TGraph } from "./types";
-// constants
+
 import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";
 
 export const CalendarGraph: React.FC<TGraph & Omit<CalendarSvgProps, "height" | "width">> = ({

@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { ModuleForm } from "@components/modules";
 
 import type { IModule } from "@servcy/types";
-// constants
+
 import { MODULE_CREATED, MODULE_UPDATED } from "@constants/event-tracker";
 
 type Props = {

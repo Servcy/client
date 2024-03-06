@@ -16,7 +16,7 @@ import {
 import { getCustomDates } from "@helpers/dashboard.helper";
 
 import { TIssuesByStateGroupsWidgetFilters, TIssuesByStateGroupsWidgetResponse, TStateGroups } from "@servcy/types";
-// constants
+
 import { STATE_GROUP_GRAPH_COLORS, STATE_GROUP_GRAPH_GRADIENTS } from "@constants/dashboard";
 import { STATE_GROUPS } from "@constants/state";
 

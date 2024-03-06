@@ -5,7 +5,7 @@ import Link from "next/link";
 
 
 import { ProfileIssuesFilter } from "@components/profile";
-// constants
+
 import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile";
 
 type Props = {

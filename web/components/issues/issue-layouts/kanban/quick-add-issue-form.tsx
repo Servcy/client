@@ -12,7 +12,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { createIssuePayload } from "@helpers/issue.helper";
 
 import { TIssue } from "@servcy/types";
-// constants
+
 import { ISSUE_CREATED } from "@constants/event-tracker";
 
 const Inputs = (props: any) => {

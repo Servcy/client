@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useIssues } from "@hooks/store";
 
 import { BaseGanttRoot } from "./base-gantt-root";
-// constants
+
 import { EIssuesStoreType } from "@constants/issue";
 
 import { EIssueActions } from "../types";

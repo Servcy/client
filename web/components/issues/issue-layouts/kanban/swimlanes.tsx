@@ -16,7 +16,7 @@ import {
   TUnGroupedIssues,
   TIssueKanbanFilters,
 } from "@servcy/types";
-// constants
+
 import { EIssueActions } from "../types";
 import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store";
 import { getGroupByColumns } from "../utils";

@@ -7,7 +7,7 @@ import { useCycle, useIssues } from "@hooks/store";
 //icons
 import { ContrastIcon, TransferIcon } from "@servcy/ui";
 import { AlertCircle, Search, X } from "lucide-react";
-// constants
+
 import { EIssuesStoreType } from "@constants/issue";
 
 type Props = {

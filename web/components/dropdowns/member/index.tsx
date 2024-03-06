@@ -13,7 +13,7 @@ import { DropdownButton } from "../buttons";
 import { cn } from "@helpers/common.helper";
 
 import { MemberDropdownProps } from "./types";
-// constants
+
 import { BUTTON_VARIANTS_WITH_TEXT } from "../constants";
 import { MemberOptions } from "./member-options";
 

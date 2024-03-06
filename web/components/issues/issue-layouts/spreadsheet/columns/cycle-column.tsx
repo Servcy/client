@@ -7,7 +7,7 @@ import { useEventTracker, useIssues } from "@hooks/store";
 import { CycleDropdown } from "@components/dropdowns";
 
 import { TIssue } from "@servcy/types";
-// constants
+
 import { EIssuesStoreType } from "@constants/issue";
 
 type Props = {

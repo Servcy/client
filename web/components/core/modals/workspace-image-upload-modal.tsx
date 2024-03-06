@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { Button } from "@servcy/ui";
 // icons
 import { UserCircle2 } from "lucide-react";
-// constants
+
 import { MAX_FILE_SIZE } from "@constants/common";
 
 type Props = {

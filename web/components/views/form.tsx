@@ -9,7 +9,7 @@ import { AppliedFiltersList, FilterSelection, FiltersDropdown } from "@component
 import { Button, Input, TextArea } from "@servcy/ui";
 
 import { IProjectView, IIssueFilterOptions } from "@servcy/types";
-// constants
+
 import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 
 type Props = {

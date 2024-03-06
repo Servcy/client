@@ -2,7 +2,7 @@
 import { LayersIcon } from "@servcy/ui";
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types";
-// constants
+
 import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet";
 
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";

@@ -7,7 +7,7 @@ import { PriorityIcon } from "@servcy/ui";
 
 import { FilterHeader, FilterOption } from "@components/issues";
 
-// constants
+
 import { ISSUE_PRIORITIES } from "@constants/issue";
 
 type Props = {

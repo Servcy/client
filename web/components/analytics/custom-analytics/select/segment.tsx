@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { CustomSelect } from "@servcy/ui";
 
 import { IAnalyticsParams, TXAxisValues } from "@servcy/types";
-// constants
+
 import { ANALYTICS_X_AXIS_VALUES } from "@constants/analytics";
 
 type Props = {

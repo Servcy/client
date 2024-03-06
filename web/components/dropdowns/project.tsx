@@ -14,7 +14,7 @@ import { cn } from "@helpers/common.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import { TDropdownProps } from "./types";
-// constants
+
 import { BUTTON_VARIANTS_WITH_TEXT } from "./constants";
 
 type Props = TDropdownProps & {

@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { Button, Input } from "@servcy/ui";
 
 import type { IIssueLabel, IState } from "@servcy/types";
-// constants
+
 import { LABEL_COLOR_OPTIONS, getRandomLabelColor } from "@constants/label";
 
 

@@ -17,7 +17,7 @@ import { Button, CustomSelect, Input, Spinner } from "@servcy/ui";
 import { copyUrlToClipboard } from "@helpers/string.helper";
 
 import { IWorkspace } from "@servcy/types";
-// constants
+
 import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "@constants/workspace";
 import { WORKSPACE_UPDATED } from "@constants/event-tracker";
 

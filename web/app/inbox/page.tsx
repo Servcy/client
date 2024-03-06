@@ -26,7 +26,7 @@ import {
 } from "@/apis/inbox";
 
 import { InboxItem, PaginationDetails } from "@/types/apps/inbox";
-// constants
+
 import { integrationInboxCategories } from "@/constants/integrations";
 
 const tabItems = [

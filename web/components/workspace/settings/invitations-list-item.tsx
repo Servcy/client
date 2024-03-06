@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { ConfirmWorkspaceMemberRemove } from "@components/workspace";
 
 import { CustomSelect, Tooltip } from "@servcy/ui";
-// constants
+
 import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
 
 type Props = {

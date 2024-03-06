@@ -20,7 +20,7 @@ import {
 } from "@components/issues";
 
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";
-// constants
+
 import { ILayoutDisplayFiltersOptions } from "@constants/issue";
 
 type Props = {

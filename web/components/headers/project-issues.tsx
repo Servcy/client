@@ -21,7 +21,7 @@ import { BreadcrumbLink } from "@components/common";
 import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
-// constants
+
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";

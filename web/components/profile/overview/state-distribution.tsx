@@ -4,7 +4,7 @@ import { ProfileEmptyState, PieGraph } from "@components/ui";
 import stateGraph from "public/empty-state/state_graph.svg";
 
 import { IUserProfileData, IUserStateDistribution } from "@servcy/types";
-// constants
+
 import { STATE_GROUPS } from "@constants/state";
 
 type Props = {

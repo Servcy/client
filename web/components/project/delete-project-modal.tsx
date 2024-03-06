@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { Button, Input } from "@servcy/ui";
 
 import type { IProject } from "@servcy/types";
-// constants
+
 import { PROJECT_DELETED } from "@constants/event-tracker";
 
 type DeleteProjectModal = {

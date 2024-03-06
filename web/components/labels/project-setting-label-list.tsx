@@ -25,7 +25,7 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { Button, Loader } from "@servcy/ui";
 
 import { IIssueLabel } from "@servcy/types";
-// constants
+
 import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 const LABELS_ROOT = "labels.root";

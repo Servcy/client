@@ -8,7 +8,7 @@ import { GanttChartRoot, IBlockUpdateData, CycleGanttSidebar } from "@components
 import { CycleGanttBlock } from "@components/cycles";
 
 import { ICycle } from "@servcy/types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 
 type Props = {

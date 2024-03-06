@@ -13,7 +13,7 @@ import { renderFormattedDate } from "@helpers/date-time.helper";
 import { cn } from "@helpers/common.helper";
 
 import { TDropdownProps } from "./types";
-// constants
+
 import { BUTTON_VARIANTS_WITH_TEXT } from "./constants";
 
 type Props = TDropdownProps & {

@@ -14,7 +14,7 @@ import { Check, Info, LinkIcon, Pencil, Star, Trash2, User2 } from "lucide-react
 // helpers
 import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper";
 import { copyTextToClipboard } from "@helpers/string.helper";
-// constants
+
 import { CYCLE_STATUS } from "@constants/cycle";
 import { EUserWorkspaceRoles } from "@constants/workspace";
 

@@ -10,7 +10,7 @@ import {
   TIssueParams,
   TStaticViewTypes,
 } from "@servcy/types";
-// constants
+
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 // lib
 import { storage } from "@lib/local-storage";

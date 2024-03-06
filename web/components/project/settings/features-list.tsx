@@ -8,7 +8,7 @@ import { useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store
 import toast from "react-hot-toast";
 
 import { IProject } from "@servcy/types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 
 type Props = {};

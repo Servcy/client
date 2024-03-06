@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { Button, CustomSelect, Input } from "@servcy/ui";
 
 import { IWorkspace } from "@servcy/types";
-// constants
+
 import { ORGANIZATION_SIZE, RESTRICTED_URLS } from "@constants/workspace";
 import { WORKSPACE_CREATED } from "@constants/event-tracker";
 

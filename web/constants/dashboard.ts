@@ -9,7 +9,7 @@ import UpcomingIssuesLight from "public/empty-state/dashboard/light/upcoming-iss
 
 import { TDurationFilterOptions, TIssuesListTypes, TStateGroups } from "@servcy/types";
 import { Props } from "@components/icons/types";
-// constants
+
 import { EUserWorkspaceRoles } from "./workspace";
 // icons
 import { ContrastIcon } from "@servcy/ui";

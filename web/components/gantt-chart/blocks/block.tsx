@@ -9,7 +9,7 @@ import { cn } from "@helpers/common.helper";
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 
 import { IBlockUpdateData, IGanttBlock } from "../types";
-// constants
+
 import { BLOCK_HEIGHT } from "../constants";
 
 type Props = {

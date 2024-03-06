@@ -5,7 +5,7 @@ import { Droppable } from "@hello-pangea/dnd";
 import { CalendarIssueBlocks, ICalendarDate, CalendarQuickAddIssueForm } from "@components/issues";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// constants
+
 import { MONTHS_LIST } from "@constants/calendar";
 import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types";
 import { ICycleIssuesFilter } from "@store/issue/cycle";

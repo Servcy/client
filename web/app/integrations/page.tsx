@@ -11,7 +11,7 @@ import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
-// constants
+
 import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations";
 
 import { Integration } from "@/types/apps/integration";

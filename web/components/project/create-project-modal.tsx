@@ -14,9 +14,9 @@ import EmojiIconPicker from "@components/emoji-icon-picker";
 import { MemberDropdown } from "@components/dropdowns";
 // helpers
 import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper";
-// constants
+
 import { NETWORK_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { PROJECT_CREATED } from "@constants/event-tracker";
 

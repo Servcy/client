@@ -9,7 +9,7 @@ import { CustomSelect, CustomSearchSelect, ToggleSwitch, StateGroupIcon, DoubleC
 import { ArchiveX } from "lucide-react";
 
 import { IProject } from "@servcy/types";
-// constants
+
 import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project";
 
 type Props = {

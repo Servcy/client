@@ -9,7 +9,7 @@ import { SpreadsheetView } from "./spreadsheet-view";
 import { TIssue, IIssueDisplayFilterOptions, TUnGroupedIssues } from "@servcy/types";
 import { EIssueActions } from "../types";
 import { IQuickActionProps } from "../list/list-view-types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { ICycleIssuesFilter, ICycleIssues } from "@store/issue/cycle";
 import { IModuleIssuesFilter, IModuleIssues } from "@store/issue/module";

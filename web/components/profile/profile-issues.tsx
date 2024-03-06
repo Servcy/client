@@ -11,7 +11,7 @@ import { KanbanLayoutLoader, ListLayoutLoader } from "@components/ui";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 
 import { useIssues, useUser } from "@hooks/store";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { EIssuesStoreType } from "@constants/issue";
 import { PROFILE_EMPTY_STATE_DETAILS } from "@constants/empty-state";

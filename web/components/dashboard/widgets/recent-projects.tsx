@@ -12,7 +12,7 @@ import { Avatar, AvatarGroup } from "@servcy/ui";
 import { renderEmoji } from "@helpers/emoji.helper";
 
 import { TRecentProjectsWidgetResponse } from "@servcy/types";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { PROJECT_BACKGROUND_COLORS } from "@constants/dashboard";
 

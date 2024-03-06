@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { Button } from "@servcy/ui";
 
 import { IWorkspaceView } from "@servcy/types";
-// constants
+
 import { GLOBAL_VIEW_DELETED } from "@constants/event-tracker";
 
 type Props = {

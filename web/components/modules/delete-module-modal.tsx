@@ -11,7 +11,7 @@ import { Button } from "@servcy/ui";
 import { AlertTriangle } from "lucide-react";
 
 import type { IModule } from "@servcy/types";
-// constants
+
 import { MODULE_DELETED } from "@constants/event-tracker";
 
 type Props = {

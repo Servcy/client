@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { Button, Input } from "@servcy/ui";
 
 import type { IWorkspace } from "@servcy/types";
-// constants
+
 import { WORKSPACE_DELETED } from "@constants/event-tracker";
 
 type Props = {

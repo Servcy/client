@@ -4,7 +4,7 @@ import { LineGraph, ProfileEmptyState } from "@components/ui";
 import emptyGraph from "public/empty-state/empty_graph.svg";
 
 import { IDefaultAnalyticsResponse } from "@servcy/types";
-// constants
+
 import { MONTHS_LIST } from "@constants/calendar";
 
 type Props = {

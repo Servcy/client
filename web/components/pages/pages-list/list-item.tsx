@@ -19,7 +19,7 @@ import { renderFormattedTime, renderFormattedDate } from "@helpers/date-time.hel
 import { CustomMenu, Tooltip } from "@servcy/ui";
 
 import { CreateUpdatePageModal, DeletePageModal } from "@components/pages";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { useRouter } from "next/router";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";

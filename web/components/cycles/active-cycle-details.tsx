@@ -31,7 +31,7 @@ import { renderFormattedDate, findHowManyDaysLeft, renderFormattedDateWithoutYea
 import { truncateText } from "@helpers/string.helper";
 
 import { ICycle, TCycleGroups } from "@servcy/types";
-// constants
+
 import { EIssuesStoreType } from "@constants/issue";
 import { CYCLE_ISSUES_WITH_PARAMS } from "@constants/fetch-keys";
 import { CYCLE_STATE_GROUPS_DETAILS } from "@constants/cycle";

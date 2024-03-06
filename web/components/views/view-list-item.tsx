@@ -15,7 +15,7 @@ import { calculateTotalFilters } from "@helpers/filter.helper";
 import { copyUrlToClipboard } from "@helpers/string.helper";
 
 import { IProjectView } from "@servcy/types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 
 type Props = {

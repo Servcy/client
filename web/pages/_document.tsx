@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-// constants
+
 import {
   SITE_NAME,
   SITE_DESCRIPTION,

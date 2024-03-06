@@ -9,7 +9,7 @@ import { ProjectSettingsSidebar } from "./sidebar";
 import { NotAuthorizedView } from "@components/auth-screens";
 
 import { Button, LayersIcon } from "@servcy/ui";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 
 export interface IProjectSettingLayout {

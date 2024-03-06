@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 
 import { FilterHeader, FilterOption } from "@components/issues";
 import { DateFilterModal } from "@components/core";
-// constants
+
 import { DATE_FILTER_OPTIONS } from "@constants/filters";
 
 type Props = {

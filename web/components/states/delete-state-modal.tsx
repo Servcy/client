@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { Button } from "@servcy/ui";
 
 import type { IState } from "@servcy/types";
-// constants
+
 import { STATE_DELETED } from "@constants/event-tracker";
 
 type Props = {

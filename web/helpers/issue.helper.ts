@@ -12,7 +12,7 @@ import {
   TStateGroups,
 } from "@servcy/types";
 import { IGanttBlock } from "@components/gantt-chart";
-// constants
+
 import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 import { STATE_GROUPS } from "@constants/state";
 

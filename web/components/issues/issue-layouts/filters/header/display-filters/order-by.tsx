@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { FilterHeader, FilterOption } from "@components/issues";
 
 import { TIssueOrderByOptions } from "@servcy/types";
-// constants
+
 import { ISSUE_ORDER_BY_OPTIONS } from "@constants/issue";
 
 type Props = {

@@ -14,7 +14,7 @@ import { DiceIcon, Tooltip } from "@servcy/ui";
 import { cn } from "@helpers/common.helper";
 
 import { TDropdownProps } from "../types";
-// constants
+
 import { BUTTON_VARIANTS_WITHOUT_TEXT } from "../constants";
 import { ModuleOptions } from "./module-options";
 

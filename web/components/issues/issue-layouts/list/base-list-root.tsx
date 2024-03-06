@@ -13,7 +13,7 @@ import { IArchivedIssuesFilter, IArchivedIssues } from "@store/issue/archived";
 import { EIssueActions } from "../types";
 
 import { IQuickActionProps } from "./list-view-types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { TCreateModalStoreTypes } from "@constants/issue";
 

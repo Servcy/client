@@ -6,7 +6,7 @@ import { PriorityIcon } from "@servcy/ui";
 import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";
 
 import { IAnalyticsParams, IAnalyticsResponse, TIssuePriorities } from "@servcy/types";
-// constants
+
 import { ANALYTICS_X_AXIS_VALUES, ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics";
 
 type Props = {

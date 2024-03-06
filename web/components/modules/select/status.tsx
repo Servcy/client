@@ -6,7 +6,7 @@ import { Controller, FieldError, Control } from "react-hook-form";
 import { CustomSelect, DoubleCircleIcon, ModuleStatusIcon } from "@servcy/ui";
 
 import type { IModule } from "@servcy/types";
-// constants
+
 import { MODULE_STATUS } from "@constants/module";
 
 type Props = {

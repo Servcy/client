@@ -9,7 +9,7 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { PagesListItem } from "./list-item";
 
 import { Loader } from "@servcy/ui";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 

@@ -8,7 +8,7 @@ import { Spinner } from "@servcy/ui";
 
 import { ICalendarWeek } from "./types";
 import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { useCalendarView } from "@hooks/store/use-calendar-view";
 import { EIssuesStoreType } from "@constants/issue";

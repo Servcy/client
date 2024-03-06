@@ -17,7 +17,7 @@ import {
   TIssueParams,
 } from "@servcy/types";
 import { IIssueRootStore } from "../root.store";
-// constants
+
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 // services
 import { ViewService } from "@services/view.service";

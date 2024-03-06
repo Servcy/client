@@ -10,7 +10,7 @@ import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profil
 import { CustomThemeSelector, ThemeSwitch, PageHead } from "@components/core";
 
 import { Spinner } from "@servcy/ui";
-// constants
+
 import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes";
 // type
 import { NextPageWithLayout } from "@lib/types";

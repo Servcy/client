@@ -17,7 +17,7 @@ import { PriorityIcon } from "@servcy/ui";
 import { getCustomDates } from "@helpers/dashboard.helper";
 
 import { TIssuesByPriorityWidgetFilters, TIssuesByPriorityWidgetResponse } from "@servcy/types";
-// constants
+
 import { PRIORITY_GRAPH_GRADIENTS } from "@constants/dashboard";
 import { ISSUE_PRIORITIES } from "@constants/issue";
 

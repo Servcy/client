@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 
 import { TIssuesListTypes } from "@servcy/types";
-// constants
+
 import { CREATED_ISSUES_EMPTY_STATES } from "@constants/dashboard";
 
 type Props = {

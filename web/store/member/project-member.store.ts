@@ -7,7 +7,7 @@ import { ProjectMemberService } from "@services/project";
 
 import { IProjectBulkAddFormData, IProjectMember, IProjectMembership, IUserLite } from "@servcy/types";
 import { RootStore } from "@store/root.store";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { IRouterStore } from "@store/application/router.store";
 import { IUserRootStore } from "@store/user";

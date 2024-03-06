@@ -25,7 +25,7 @@ import {
   TUnGroupedIssues,
   TIssueKanbanFilters,
 } from "@servcy/types";
-// constants
+
 import { EIssueActions } from "../types";
 import { getGroupByColumns } from "../utils";
 import { TCreateModalStoreTypes } from "@constants/issue";

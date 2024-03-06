@@ -5,7 +5,7 @@ import { Tab } from "@headlessui/react";
 import { CustomAnalytics, ScopeAndDemand } from "@components/analytics";
 
 import { ICycle, IModule, IProject } from "@servcy/types";
-// constants
+
 import { ANALYTICS_TABS } from "@constants/analytics";
 
 type Props = {

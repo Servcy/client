@@ -13,7 +13,7 @@ import { Avatar, AvatarGroup, CustomMenu, LayersIcon, Tooltip } from "@servcy/ui
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
-// constants
+
 import { MODULE_STATUS } from "@constants/module";
 import { EUserProjectRoles } from "@constants/project";
 import { MODULE_FAVORITED, MODULE_UNFAVORITED } from "@constants/event-tracker";

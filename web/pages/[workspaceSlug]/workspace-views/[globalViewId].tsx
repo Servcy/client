@@ -12,7 +12,7 @@ import { GlobalIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 
 import { NextPageWithLayout } from "@lib/types";
-// constants
+
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace";
 
 const GlobalViewIssuesPage: NextPageWithLayout = observer(() => {

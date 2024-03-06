@@ -16,7 +16,7 @@ import { SpreadsheetLayoutLoader } from "@components/ui";
 
 import { TIssue, IIssueDisplayFilterOptions } from "@servcy/types";
 import { EIssueActions } from "../types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 import { EUserWorkspaceRoles } from "@constants/workspace";

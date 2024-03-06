@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // icons
 import { ChevronRight, MoreHorizontal } from "lucide-react";
-// constants
+
 import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet";
 
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";

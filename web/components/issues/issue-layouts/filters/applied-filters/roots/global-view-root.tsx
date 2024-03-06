@@ -11,7 +11,7 @@ import { AppliedFiltersList } from "@components/issues";
 import { IIssueFilterOptions, TStaticViewTypes } from "@servcy/types";
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace";
-// constants
+
 import { GLOBAL_VIEW_UPDATED } from "@constants/event-tracker";
 
 type Props = {

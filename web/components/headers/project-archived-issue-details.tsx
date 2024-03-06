@@ -8,7 +8,7 @@ import { useProject } from "@hooks/store";
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 
 import { TIssue } from "@servcy/types";
-// constants
+
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
 // services
 import { IssueArchiveService } from "@services/issue";

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { useUser } from "@hooks/store";
-// constants
+
 import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace";
 
 export const WorkspaceSettingsSidebar = () => {

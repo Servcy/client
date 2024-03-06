@@ -8,7 +8,7 @@ import { ICycleStore } from "@store/cycle.store";
 import { IModuleStore } from "@store/module.store";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
-// constants
+
 import { STATE_GROUPS } from "@constants/state";
 import { ISSUE_PRIORITIES } from "@constants/issue";
 

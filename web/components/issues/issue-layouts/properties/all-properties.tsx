@@ -24,7 +24,7 @@ import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
 import { cn } from "@helpers/common.helper";
 
 import { TIssue, IIssueDisplayProperties, TIssuePriorities } from "@servcy/types";
-// constants
+
 import { ISSUE_UPDATED } from "@constants/event-tracker";
 import { EIssuesStoreType } from "@constants/issue";
 

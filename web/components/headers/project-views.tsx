@@ -9,7 +9,7 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { BreadcrumbLink } from "@components/common";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 
 export const ProjectViewsHeader: React.FC = observer(() => {

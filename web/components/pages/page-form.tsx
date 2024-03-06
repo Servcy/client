@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Button, Input, Tooltip } from "@servcy/ui";
 
 import { IPage } from "@servcy/types";
-// constants
+
 import { PAGE_ACCESS_SPECIFIERS } from "@constants/page";
 import { IPageStore } from "@store/page.store";
 

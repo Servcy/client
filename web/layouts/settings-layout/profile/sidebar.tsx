@@ -10,7 +10,7 @@ import { useApplication, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { Tooltip } from "@servcy/ui";
-// constants
+
 import { PROFILE_ACTION_LINKS } from "@constants/profile";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 

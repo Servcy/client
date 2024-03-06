@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { Avatar, Button, CustomSelect, CustomSearchSelect } from "@servcy/ui";
 // helpers
 import { getUserRole } from "@helpers/user.helper";
-// constants
+
 import { ROLE } from "@constants/workspace";
 import { EUserProjectRoles } from "@constants/project";
 import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker";

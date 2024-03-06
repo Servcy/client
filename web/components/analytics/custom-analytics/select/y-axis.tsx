@@ -2,7 +2,7 @@
 import { CustomSelect } from "@servcy/ui";
 
 import { TYAxisValues } from "@servcy/types";
-// constants
+
 import { ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics";
 
 type Props = {

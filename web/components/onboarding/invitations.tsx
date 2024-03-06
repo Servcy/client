@@ -8,7 +8,7 @@ import { Button } from "@servcy/ui";
 import { truncateText } from "@helpers/string.helper";
 // services
 import { WorkspaceService } from "@services/workspace.service";
-// constants
+
 import { USER_WORKSPACES, USER_WORKSPACE_INVITATIONS } from "@constants/fetch-keys";
 import { ROLE } from "@constants/workspace";
 import { MEMBER_ACCEPTED } from "@constants/event-tracker";

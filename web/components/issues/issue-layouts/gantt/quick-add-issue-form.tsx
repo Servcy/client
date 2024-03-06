@@ -14,7 +14,7 @@ import { createIssuePayload } from "@helpers/issue.helper";
 import { cn } from "@helpers/common.helper";
 
 import { IProject, TIssue } from "@servcy/types";
-// constants
+
 import { ISSUE_CREATED } from "@constants/event-tracker";
 
 interface IInputProps {

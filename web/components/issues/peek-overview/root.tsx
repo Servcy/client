@@ -7,7 +7,7 @@ import { useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/stor
 import { IssueView } from "@components/issues";
 
 import { TIssue } from "@servcy/types";
-// constants
+
 import { EUserProjectRoles } from "@constants/project";
 import { EIssuesStoreType } from "@constants/issue";
 import { ISSUE_UPDATED, ISSUE_DELETED, ISSUE_ARCHIVED, ISSUE_RESTORED } from "@constants/event-tracker";

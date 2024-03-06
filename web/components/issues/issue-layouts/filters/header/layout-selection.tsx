@@ -4,7 +4,7 @@ import React from "react";
 import { Tooltip } from "@servcy/ui";
 
 import { TIssueLayouts } from "@servcy/types";
-// constants
+
 import { ISSUE_LAYOUTS } from "@constants/issue";
 
 type Props = {

@@ -6,7 +6,7 @@ import { Trash2 } from "lucide-react";
 import { renderFormattedDate } from "@helpers/date-time.helper";
 
 import { IImporterService } from "@servcy/types";
-// constants
+
 import { IMPORTERS_LIST } from "@constants/workspace";
 
 type Props = {

@@ -4,7 +4,7 @@ import { Tab } from "@headlessui/react";
 import { cn } from "@helpers/common.helper";
 
 import { TDurationFilterOptions, TIssuesListTypes } from "@servcy/types";
-// constants
+
 import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "@constants/dashboard";
 
 type Props = {

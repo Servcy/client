@@ -15,7 +15,7 @@ import { Button, Input } from "@servcy/ui";
 import { checkEmailValidity } from "@helpers/string.helper";
 
 import { IPasswordSignInData } from "@servcy/types";
-// constants
+
 import { FORGOT_PASSWORD, SIGN_IN_WITH_PASSWORD } from "@constants/event-tracker";
 
 type Props = {

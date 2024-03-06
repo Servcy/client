@@ -15,7 +15,7 @@ import CyclesTour from "public/onboarding/cycles.webp";
 import ModulesTour from "public/onboarding/modules.webp";
 import ViewsTour from "public/onboarding/views.webp";
 import PagesTour from "public/onboarding/pages.webp";
-// constants
+
 import { PRODUCT_TOUR_SKIPPED, PRODUCT_TOUR_STARTED } from "@constants/event-tracker";
 
 type Props = {

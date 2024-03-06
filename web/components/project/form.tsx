@@ -14,7 +14,7 @@ import { IProject, IWorkspace } from "@servcy/types";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
-// constants
+
 import { NETWORK_CHOICES } from "@constants/project";
 // services
 import { ProjectService } from "@services/project";

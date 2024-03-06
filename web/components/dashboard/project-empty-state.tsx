@@ -6,7 +6,7 @@ import { useApplication, useEventTracker, useUser } from "@hooks/store";
 import { Button } from "@servcy/ui";
 // assets
 import ProjectEmptyStateImage from "public/empty-state/dashboard/project.svg";
-// constants
+
 import { EUserWorkspaceRoles } from "@constants/workspace";
 
 export const DashboardProjectEmptyState = observer(() => {
