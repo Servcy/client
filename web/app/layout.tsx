@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google";
 // Styles
 import "@/styles/globals.css";
-// Utils
+
 import { isMobileDevice } from "@/utils/Shared";
 import { deleteCookie, getCookie } from "cookies-next";
 // APIs

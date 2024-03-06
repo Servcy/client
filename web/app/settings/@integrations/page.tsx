@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// Utils
+
 import { getQueryParams } from "@/utils/Shared";
 
 import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal";

@@ -15,7 +15,7 @@ import { fetchIntegrations } from "@/apis/integration";
 import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations";
 
 import { Integration } from "@/types/apps/integration";
-// Utils
+
 import { getQueryParams } from "@/utils/Shared";
 import { capitalizeFirstLetter } from "@/utils/Shared/formatters";
 

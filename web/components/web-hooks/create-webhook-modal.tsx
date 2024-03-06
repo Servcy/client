@@ -7,7 +7,7 @@ import { GeneratedHookDetails } from "./generated-hook-details";
 import toast from "react-hot-toast";
 // helpers
 import { csvDownload } from "@helpers/download.helper";
-// utils
+
 import { getCurrentHookAsCSV } from "./utils";
 
 import { IWebhook, IWorkspace, TWebhookEventTypes } from "@servcy/types";

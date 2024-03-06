@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// Utils
+
 import { getQueryParams } from "@/utils/Shared";
 
 import { AiFillApi, AiOutlineArrowRight, AiOutlineSetting } from "react-icons/ai";

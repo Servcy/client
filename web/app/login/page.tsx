@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { BiLogIn } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
 import { RiWhatsappLine } from "react-icons/ri";
-// Utils
+
 import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
 // APIs
 import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";

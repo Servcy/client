@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 // helpers
 import { copyTextToClipboard } from "@helpers/string.helper";
 import { csvDownload } from "@helpers/download.helper";
-// utils
+
 import { getCurrentHookAsCSV } from "../utils";
 
 import { IWebhook } from "@servcy/types";

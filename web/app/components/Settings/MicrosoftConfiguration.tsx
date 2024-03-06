@@ -11,7 +11,7 @@ import {
   configureUserIntegration as configureUserIntegrationApi,
   fetchUserIntegrations as fetchUserIntegrationsApi,
 } from "@/apis/integration";
-// Utils
+
 
 export default function MicrosoftConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
   const [loading, setLoading] = useState<boolean>(false);

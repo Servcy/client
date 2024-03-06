@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // Styles
 import "@/styles/globals.css";
-// Utils
+
 import { isMobileDevice } from "@/utils/Shared";
 
 const LoginLayout: FC<PropsWithChildren> = function ({ children }) {

@@ -13,7 +13,7 @@ import SlackMessage from "./SlackMessage";
 import TrelloNotification from "./TrelloNotification";
 
 import { Attachment, InboxItem } from "@/types/apps/inbox";
-// Utils
+
 import { downloadFile } from "@/utils/Shared/files";
 
 const InboxItemModal = ({

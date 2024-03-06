@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 import { SyncOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-// Utils
+
 import { getQueryParams } from "@/utils/Shared";
 import { capitalizeFirstLetter } from "@/utils/Shared/formatters";
 // APIs
