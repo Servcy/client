@@ -30,9 +30,14 @@ import { copyUrlToClipboard } from "@helpers/string.helper";
 // types
 import { ILinkDetails, IModule, ModuleLink } from "@servcy/types";
 // constant
-import { MODULE_STATUS } from "constants/module";
-import { EUserProjectRoles } from "constants/project";
-import { MODULE_LINK_CREATED, MODULE_LINK_DELETED, MODULE_LINK_UPDATED, MODULE_UPDATED } from "constants/event-tracker";
+import { MODULE_STATUS } from "@constants/module";
+import { EUserProjectRoles } from "@constants/project";
+import {
+  MODULE_LINK_CREATED,
+  MODULE_LINK_DELETED,
+  MODULE_LINK_UPDATED,
+  MODULE_UPDATED,
+} from "@constants/event-tracker";
 
 const defaultValues: Partial<IModule> = {
   lead_id: "",

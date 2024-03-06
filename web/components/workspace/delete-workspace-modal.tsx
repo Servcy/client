@@ -12,7 +12,7 @@ import { Button, Input } from "@servcy/ui";
 // types
 import type { IWorkspace } from "@servcy/types";
 // constants
-import { WORKSPACE_DELETED } from "constants/event-tracker";
+import { WORKSPACE_DELETED } from "@constants/event-tracker";
 
 type Props = {
   isOpen: boolean;

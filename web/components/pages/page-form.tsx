@@ -4,7 +4,7 @@ import { Button, Input, Tooltip } from "@servcy/ui";
 // types
 import { IPage } from "@servcy/types";
 // constants
-import { PAGE_ACCESS_SPECIFIERS } from "constants/page";
+import { PAGE_ACCESS_SPECIFIERS } from "@constants/page";
 import { IPageStore } from "@store/page.store";
 
 type Props = {

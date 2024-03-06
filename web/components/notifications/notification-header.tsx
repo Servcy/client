@@ -16,7 +16,7 @@ import {
   NOTIFICATIONS_READ,
   SNOOZED_NOTIFICATIONS,
   UNREAD_NOTIFICATIONS,
-} from "constants/event-tracker";
+} from "@constants/event-tracker";
 
 type NotificationHeaderProps = {
   notificationCount?: NotificationCount | null;

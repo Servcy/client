@@ -22,8 +22,8 @@ import type { IUser } from "@servcy/types";
 import type { NextPageWithLayout } from "@lib/types";
 // constants
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { TIME_ZONES } from "constants/timezones";
-import { USER_ROLES } from "constants/workspace";
+import { TIME_ZONES } from "@constants/timezones";
+import { USER_ROLES } from "@constants/workspace";
 
 const defaultValues: Partial<IUser> = {
   avatar: "",

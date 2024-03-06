@@ -9,7 +9,7 @@ import { CustomAnalyticsSelectBar, CustomAnalyticsMainContent, CustomAnalyticsSi
 // types
 import { IAnalyticsParams } from "@servcy/types";
 // fetch-keys
-import { ANALYTICS } from "constants/fetch-keys";
+import { ANALYTICS } from "@constants/fetch-keys";
 import { cn } from "@helpers/common.helper";
 import { useApplication } from "@hooks/store";
 

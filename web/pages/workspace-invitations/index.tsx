@@ -16,7 +16,7 @@ import { EmptySpace, EmptySpaceItem } from "components/ui/empty-space";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { WORKSPACE_INVITATION } from "constants/fetch-keys";
+import { WORKSPACE_INVITATION } from "@constants/fetch-keys";
 
 // services
 const workspaceService = new WorkspaceService();

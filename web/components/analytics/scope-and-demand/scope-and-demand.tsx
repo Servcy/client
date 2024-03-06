@@ -9,7 +9,7 @@ import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWis
 // ui
 import { Button, Loader } from "@servcy/ui";
 // fetch-keys
-import { DEFAULT_ANALYTICS } from "constants/fetch-keys";
+import { DEFAULT_ANALYTICS } from "@constants/fetch-keys";
 
 type Props = {
   fullScreen?: boolean;

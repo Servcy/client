@@ -12,9 +12,9 @@ import { Avatar, Button, CustomSelect, CustomSearchSelect } from "@servcy/ui";
 // helpers
 import { getUserRole } from "@helpers/user.helper";
 // constants
-import { ROLE } from "constants/workspace";
-import { EUserProjectRoles } from "constants/project";
-import { PROJECT_MEMBER_ADDED } from "constants/event-tracker";
+import { ROLE } from "@constants/workspace";
+import { EUserProjectRoles } from "@constants/project";
+import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker";
 
 type Props = {
   isOpen: boolean;

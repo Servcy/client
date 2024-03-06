@@ -20,10 +20,10 @@ import { PagesLoader } from "components/ui";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { PAGE_TABS_LIST } from "constants/page";
+import { PAGE_TABS_LIST } from "@constants/page";
 import { useProjectPages } from "@hooks/store/use-project-page";
-import { EUserWorkspaceRoles } from "constants/workspace";
-import { PAGE_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { EUserWorkspaceRoles } from "@constants/workspace";
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PageHead } from "components/core";
 
 const AllPagesList = dynamic<any>(() => import("components/pages").then((a) => a.AllPagesList), {

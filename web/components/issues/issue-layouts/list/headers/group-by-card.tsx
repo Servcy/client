@@ -13,7 +13,7 @@ import { useEventTracker } from "@hooks/store";
 import { TIssue, ISearchIssueResponse } from "@servcy/types";
 import useToast from "@hooks/use-toast";
 import { useState } from "react";
-import { TCreateModalStoreTypes } from "constants/issue";
+import { TCreateModalStoreTypes } from "@constants/issue";
 
 interface IHeaderGroupByCard {
   icon?: React.ReactNode;

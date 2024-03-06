@@ -7,7 +7,7 @@ import { CustomSelect, DoubleCircleIcon, ModuleStatusIcon } from "@servcy/ui";
 // types
 import type { IModule } from "@servcy/types";
 // constants
-import { MODULE_STATUS } from "constants/module";
+import { MODULE_STATUS } from "@constants/module";
 
 type Props = {
   control: Control<IModule, any>;

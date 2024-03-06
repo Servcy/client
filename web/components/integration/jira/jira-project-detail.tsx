@@ -13,7 +13,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { JiraImporterService } from "@services/integrations";
 
 // fetch keys
-import { JIRA_IMPORTER_DETAIL } from "constants/fetch-keys";
+import { JIRA_IMPORTER_DETAIL } from "@constants/fetch-keys";
 
 import { IJiraImporterForm, IJiraMetadata } from "@servcy/types";
 

@@ -15,9 +15,9 @@ import { copyUrlToClipboard } from "@helpers/string.helper";
 import { TIssue } from "@servcy/types";
 import { IQuickActionProps } from "../list/list-view-types";
 // constant
-import { EUserProjectRoles } from "constants/project";
-import { EIssuesStoreType } from "constants/issue";
-import { STATE_GROUPS } from "constants/state";
+import { EUserProjectRoles } from "@constants/project";
+import { EIssuesStoreType } from "@constants/issue";
+import { STATE_GROUPS } from "@constants/state";
 
 export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((props) => {
   const {

@@ -19,7 +19,7 @@ import { CheckCircle } from "lucide-react";
 // types
 import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types";
 // fetch-keys
-import { WORKSPACE_INTEGRATIONS } from "constants/fetch-keys";
+import { WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";
 
 type Props = {
   integration: IAppIntegration;

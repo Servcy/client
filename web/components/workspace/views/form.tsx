@@ -10,7 +10,7 @@ import { Button, Input, TextArea } from "@servcy/ui";
 // types
 import { IIssueFilterOptions, IWorkspaceView } from "@servcy/types";
 // constants
-import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "constants/issue";
+import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 
 type Props = {
   handleFormSubmit: (values: Partial<IWorkspaceView>) => Promise<void>;

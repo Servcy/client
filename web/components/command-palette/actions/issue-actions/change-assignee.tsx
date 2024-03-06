@@ -8,7 +8,7 @@ import { useIssues, useMember } from "@hooks/store";
 import { Avatar } from "@servcy/ui";
 // types
 import { TIssue } from "@servcy/types";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 type Props = {
   closePalette: () => void;

@@ -18,8 +18,8 @@ import { copyUrlToClipboard } from "@helpers/string.helper";
 // types
 import { IWorkspace } from "@servcy/types";
 // constants
-import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "constants/workspace";
-import { WORKSPACE_UPDATED } from "constants/event-tracker";
+import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "@constants/workspace";
+import { WORKSPACE_UPDATED } from "@constants/event-tracker";
 
 const defaultValues: Partial<IWorkspace> = {
   name: "",

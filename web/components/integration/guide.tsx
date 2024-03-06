@@ -21,10 +21,10 @@ import { RefreshCw } from "lucide-react";
 // types
 import { IImporterService } from "@servcy/types";
 // fetch-keys
-import { IMPORTER_SERVICES_LIST } from "constants/fetch-keys";
+import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
 // constants
-import { IMPORTERS_LIST } from "constants/workspace";
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { IMPORTERS_LIST } from "@constants/workspace";
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 // services
 const integrationService = new IntegrationService();

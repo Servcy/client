@@ -11,7 +11,7 @@ import { renderEmoji } from "@helpers/emoji.helper";
 // services
 import { IssueService } from "@services/issue";
 // constants
-import { ISSUE_DETAILS } from "constants/fetch-keys";
+import { ISSUE_DETAILS } from "@constants/fetch-keys";
 // components
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "components/common";

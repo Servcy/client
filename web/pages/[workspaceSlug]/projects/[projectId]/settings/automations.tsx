@@ -16,7 +16,7 @@ import { ProjectSettingHeader } from "components/headers";
 import { IProject } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 const AutomationSettingsPage: NextPageWithLayout = observer(() => {
   // router

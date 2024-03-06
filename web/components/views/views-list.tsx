@@ -11,8 +11,8 @@ import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 import { Input } from "@servcy/ui";
 import { ViewListLoader } from "components/ui";
 // constants
-import { EUserProjectRoles } from "constants/project";
-import { VIEW_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { EUserProjectRoles } from "@constants/project";
+import { VIEW_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 export const ProjectViewsList = observer(() => {
   // states

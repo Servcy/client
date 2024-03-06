@@ -14,7 +14,7 @@ import useLocalStorage from "@hooks/use-local-storage";
 //types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueOrderByOptions } from "@servcy/types";
 //constants
-import { SPREADSHEET_PROPERTY_DETAILS } from "constants/spreadsheet";
+import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet";
 
 interface Props {
   property: keyof IIssueDisplayProperties;

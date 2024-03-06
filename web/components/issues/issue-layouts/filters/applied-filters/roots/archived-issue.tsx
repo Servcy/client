@@ -6,7 +6,7 @@ import { useIssues, useLabel, useProjectState } from "@hooks/store";
 import { AppliedFiltersList, SaveFilterView } from "components/issues";
 // types
 import { IIssueFilterOptions } from "@servcy/types";
-import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 
 export const ArchivedIssueAppliedFiltersRoot: React.FC = observer(() => {
   // router

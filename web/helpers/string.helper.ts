@@ -3,7 +3,7 @@ import {
   MODULE_ISSUES_WITH_PARAMS,
   PROJECT_ISSUES_LIST_WITH_PARAMS,
   VIEW_ISSUES,
-} from "constants/fetch-keys";
+} from "@constants/fetch-keys";
 import * as DOMPurify from "dompurify";
 
 export const addSpaceIfCamelCase = (str: string) => {

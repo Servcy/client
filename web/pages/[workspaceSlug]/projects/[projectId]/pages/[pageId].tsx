@@ -27,7 +27,7 @@ import { NextPageWithLayout } from "@lib/types";
 // fetch-keys
 // constants
 import { IssuePeekOverview } from "components/issues";
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 
 // services

@@ -9,8 +9,8 @@ import { TIssue } from "@servcy/types";
 // constants
 import { EIssueActions } from "../../types";
 import { BaseKanBanRoot } from "../base-kanban-root";
-import { EUserProjectRoles } from "constants/project";
-import { EIssuesStoreType } from "constants/issue";
+import { EUserProjectRoles } from "@constants/project";
+import { EIssuesStoreType } from "@constants/issue";
 import { useMemo } from "react";
 
 export const ProfileIssuesKanBanLayout: React.FC = observer(() => {

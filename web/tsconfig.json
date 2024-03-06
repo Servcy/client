@@ -38,8 +38,10 @@
       "@lib/*": ["./lib/*"],
       "@hooks/*": ["./hooks/*"],
       "@contexts/*": ["./contexts/*"],
+      "@constants/*": ["./constants/*"],
       "@helpers/*": ["./helpers/*"],
       "@layouts/*": ["./hooks/*"],
+      "@styles/*": ["./styles/*"],
       "@store/*": ["./store/*"]
     }
   },

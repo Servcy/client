@@ -9,7 +9,7 @@ import { PriorityIcon } from "@servcy/ui";
 // types
 import { TIssue, TIssuePriorities } from "@servcy/types";
 // constants
-import { EIssuesStoreType, ISSUE_PRIORITIES } from "constants/issue";
+import { EIssuesStoreType, ISSUE_PRIORITIES } from "@constants/issue";
 
 type Props = {
   closePalette: () => void;

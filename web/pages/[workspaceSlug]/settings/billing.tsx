@@ -12,7 +12,7 @@ import { Button } from "@servcy/ui";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 
 const BillingSettingsPage: NextPageWithLayout = observer(() => {
   // store hooks

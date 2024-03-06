@@ -14,7 +14,7 @@ import {
   SignInOptionalSetPasswordForm,
 } from "components/account";
 // constants
-import { NAVIGATE_TO_SIGNUP } from "constants/event-tracker";
+import { NAVIGATE_TO_SIGNUP } from "@constants/event-tracker";
 
 export enum ESignInSteps {
   EMAIL = "EMAIL",

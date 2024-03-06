@@ -25,8 +25,8 @@ import { cn } from "@helpers/common.helper";
 // types
 import { TIssue, IIssueDisplayProperties, TIssuePriorities } from "@servcy/types";
 // constants
-import { ISSUE_UPDATED } from "constants/event-tracker";
-import { EIssuesStoreType } from "constants/issue";
+import { ISSUE_UPDATED } from "@constants/event-tracker";
+import { EIssuesStoreType } from "@constants/issue";
 
 export interface IIssueProperties {
   issue: TIssue;

@@ -13,8 +13,8 @@ import { renderEmoji } from "@helpers/emoji.helper";
 // types
 import { TRecentProjectsWidgetResponse } from "@servcy/types";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
-import { PROJECT_BACKGROUND_COLORS } from "constants/dashboard";
+import { EUserWorkspaceRoles } from "@constants/workspace";
+import { PROJECT_BACKGROUND_COLORS } from "@constants/dashboard";
 
 const WIDGET_KEY = "recent_projects";
 

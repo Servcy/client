@@ -10,7 +10,7 @@ import { ArchiveX } from "lucide-react";
 // types
 import { IProject } from "@servcy/types";
 // constants
-import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "constants/project";
+import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project";
 
 type Props = {
   handleChange: (formData: Partial<IProject>) => Promise<void>;

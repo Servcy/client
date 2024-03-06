@@ -9,7 +9,7 @@ import {
 // types
 import { TStateGroups } from "@servcy/types";
 // constants
-import { STATE_GROUPS } from "constants/state";
+import { STATE_GROUPS } from "@constants/state";
 
 type Props = {
   className?: string;

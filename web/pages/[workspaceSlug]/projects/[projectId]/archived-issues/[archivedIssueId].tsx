@@ -18,8 +18,8 @@ import { RotateCcw } from "lucide-react";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { EIssuesStoreType } from "constants/issue";
-import { EUserProjectRoles } from "constants/project";
+import { EIssuesStoreType } from "@constants/issue";
+import { EUserProjectRoles } from "@constants/project";
 
 const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
   // router

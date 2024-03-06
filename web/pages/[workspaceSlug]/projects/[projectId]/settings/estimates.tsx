@@ -12,7 +12,7 @@ import { EstimatesList } from "components/estimates";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 const EstimatesSettingsPage: NextPageWithLayout = observer(() => {
   const {

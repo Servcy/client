@@ -32,10 +32,10 @@ import { truncateText } from "@helpers/string.helper";
 // types
 import { ICycle, TCycleGroups } from "@servcy/types";
 // constants
-import { EIssuesStoreType } from "constants/issue";
-import { CYCLE_ISSUES_WITH_PARAMS } from "constants/fetch-keys";
-import { CYCLE_STATE_GROUPS_DETAILS } from "constants/cycle";
-import { CYCLE_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { EIssuesStoreType } from "@constants/issue";
+import { CYCLE_ISSUES_WITH_PARAMS } from "@constants/fetch-keys";
+import { CYCLE_STATE_GROUPS_DETAILS } from "@constants/cycle";
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 interface IActiveCycleDetails {
   workspaceSlug: string;

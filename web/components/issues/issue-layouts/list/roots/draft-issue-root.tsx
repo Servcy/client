@@ -10,7 +10,7 @@ import { TIssue } from "@servcy/types";
 import { EIssueActions } from "../../types";
 // constants
 import { BaseListRoot } from "../base-list-root";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 export const DraftIssueListLayout: FC = observer(() => {
   const router = useRouter();

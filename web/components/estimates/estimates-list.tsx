@@ -15,7 +15,7 @@ import { IEstimate } from "@servcy/types";
 // helpers
 import { orderArrayBy } from "@helpers/array.helper";
 // constants
-import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 export const EstimatesList: React.FC = observer(() => {
   // states

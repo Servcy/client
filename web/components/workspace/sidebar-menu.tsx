@@ -10,9 +10,9 @@ import { NotificationPopover } from "components/notifications";
 import { Tooltip } from "@servcy/ui";
 import { Crown } from "lucide-react";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
-import { SIDEBAR_MENU_ITEMS } from "constants/dashboard";
-import { SIDEBAR_CLICKED } from "constants/event-tracker";
+import { EUserWorkspaceRoles } from "@constants/workspace";
+import { SIDEBAR_MENU_ITEMS } from "@constants/dashboard";
+import { SIDEBAR_CLICKED } from "@constants/event-tracker";
 // helper
 import { cn } from "@helpers/common.helper";
 

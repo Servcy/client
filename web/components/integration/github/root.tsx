@@ -28,7 +28,7 @@ import GithubLogo from "public/services/github.png";
 // types
 import { IGithubRepoCollaborator, IGithubServiceImportFormData } from "@servcy/types";
 // fetch-keys
-import { APP_INTEGRATIONS, IMPORTER_SERVICES_LIST, WORKSPACE_INTEGRATIONS } from "constants/fetch-keys";
+import { APP_INTEGRATIONS, IMPORTER_SERVICES_LIST, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";
 
 export type TIntegrationSteps = "import-configure" | "import-data" | "repo-details" | "import-users" | "import-confirm";
 export interface IIntegrationData {

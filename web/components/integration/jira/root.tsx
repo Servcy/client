@@ -9,7 +9,7 @@ import { ArrowLeft, Check, List, Settings } from "lucide-react";
 // services
 import { JiraImporterService } from "@services/integrations";
 // fetch keys
-import { IMPORTER_SERVICES_LIST } from "constants/fetch-keys";
+import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
 // components
 import { Button, UserGroupIcon } from "@servcy/ui";
 import {

@@ -18,9 +18,9 @@ import { IntegrationAndImportExportBanner, IntegrationsSettingsLoader } from "co
 // types
 import { NextPageWithLayout } from "@lib/types";
 // fetch-keys
-import { APP_INTEGRATIONS } from "constants/fetch-keys";
+import { APP_INTEGRATIONS } from "@constants/fetch-keys";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 
 const integrationService = new IntegrationService();
 

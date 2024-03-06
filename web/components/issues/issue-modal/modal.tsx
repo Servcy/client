@@ -21,8 +21,8 @@ import { IssueFormRoot } from "./form";
 // types
 import type { TIssue } from "@servcy/types";
 // constants
-import { EIssuesStoreType, TCreateModalStoreTypes } from "constants/issue";
-import { ISSUE_CREATED, ISSUE_UPDATED } from "constants/event-tracker";
+import { EIssuesStoreType, TCreateModalStoreTypes } from "@constants/issue";
+import { ISSUE_CREATED, ISSUE_UPDATED } from "@constants/event-tracker";
 
 export interface IssuesModalProps {
   data?: Partial<TIssue>;

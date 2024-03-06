@@ -28,7 +28,7 @@ import {
 // constants
 import { EIssueActions } from "../types";
 import { getGroupByColumns } from "../utils";
-import { TCreateModalStoreTypes } from "constants/issue";
+import { TCreateModalStoreTypes } from "@constants/issue";
 import { MutableRefObject } from "react";
 
 export interface IGroupByKanBan {

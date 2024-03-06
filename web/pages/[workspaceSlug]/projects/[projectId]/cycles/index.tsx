@@ -20,9 +20,9 @@ import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from
 import { TCycleLayout, TCycleView } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "constants/cycle";
-import { CYCLE_EMPTY_STATE_DETAILS } from "constants/empty-state";
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle";
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 
 const ProjectCyclesPage: NextPageWithLayout = observer(() => {
   const [createModal, setCreateModal] = useState(false);

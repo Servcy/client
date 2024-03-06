@@ -11,8 +11,8 @@ import { DeleteIssueModal } from "components/issues";
 import { copyUrlToClipboard } from "@helpers/string.helper";
 // types
 import { IQuickActionProps } from "../list/list-view-types";
-import { EUserProjectRoles } from "constants/project";
-import { EIssuesStoreType } from "constants/issue";
+import { EUserProjectRoles } from "@constants/project";
+import { EIssuesStoreType } from "@constants/issue";
 
 export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) => {
   const { issue, handleDelete, handleRestore, customActionButton, portalElement, readOnly = false } = props;

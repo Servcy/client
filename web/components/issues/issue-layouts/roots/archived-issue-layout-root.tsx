@@ -11,7 +11,7 @@ import {
   ProjectArchivedEmptyState,
   IssuePeekOverview,
 } from "components/issues";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 // ui
 import { ListLayoutLoader } from "components/ui";
 

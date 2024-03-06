@@ -10,8 +10,8 @@ import useToast from "@hooks/use-toast";
 // services
 import { WorkspaceService } from "@services/workspace.service";
 // constants
-import { RESTRICTED_URLS } from "constants/workspace";
-import { WORKSPACE_CREATED } from "constants/event-tracker";
+import { RESTRICTED_URLS } from "@constants/workspace";
+import { WORKSPACE_CREATED } from "@constants/event-tracker";
 
 type Props = {
   stepChange: (steps: Partial<TOnboardingSteps>) => Promise<void>;

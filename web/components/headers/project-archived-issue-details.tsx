@@ -9,7 +9,7 @@ import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 // types
 import { TIssue } from "@servcy/types";
 // constants
-import { ISSUE_DETAILS } from "constants/fetch-keys";
+import { ISSUE_DETAILS } from "@constants/fetch-keys";
 // services
 import { IssueArchiveService } from "@services/issue";
 // helpers

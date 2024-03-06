@@ -9,7 +9,7 @@ import { CycleGanttBlock } from "components/cycles";
 // types
 import { ICycle } from "@servcy/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 type Props = {
   workspaceSlug: string;

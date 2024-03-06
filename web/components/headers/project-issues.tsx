@@ -22,10 +22,10 @@ import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
 // types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 // constants
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "constants/issue";
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 import { useIssues } from "@hooks/store/use-issues";
 import { IssuesMobileHeader } from "components/issues/issues-mobile-header";
 

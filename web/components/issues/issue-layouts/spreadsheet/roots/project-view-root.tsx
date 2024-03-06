@@ -10,7 +10,7 @@ import { ProjectIssueQuickActions } from "../../quick-action-dropdowns";
 import { EIssueActions } from "../../types";
 import { TIssue } from "@servcy/types";
 // constants
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 export interface IViewSpreadsheetLayout {
   issueActions: {

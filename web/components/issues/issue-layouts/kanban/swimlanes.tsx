@@ -20,7 +20,7 @@ import {
 import { EIssueActions } from "../types";
 import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store";
 import { getGroupByColumns } from "../utils";
-import { TCreateModalStoreTypes } from "constants/issue";
+import { TCreateModalStoreTypes } from "@constants/issue";
 
 interface ISubGroupSwimlaneHeader {
   issueIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues;

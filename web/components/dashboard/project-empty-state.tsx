@@ -7,7 +7,7 @@ import { Button } from "@servcy/ui";
 // assets
 import ProjectEmptyStateImage from "public/empty-state/dashboard/project.svg";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 
 export const DashboardProjectEmptyState = observer(() => {
   // store hooks

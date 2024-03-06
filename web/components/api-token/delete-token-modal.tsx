@@ -11,7 +11,7 @@ import { Button } from "@servcy/ui";
 // types
 import { IApiToken } from "@servcy/types";
 // fetch-keys
-import { API_TOKENS_LIST } from "constants/fetch-keys";
+import { API_TOKENS_LIST } from "@constants/fetch-keys";
 
 type Props = {
   isOpen: boolean;

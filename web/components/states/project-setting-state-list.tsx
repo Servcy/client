@@ -14,7 +14,7 @@ import { Plus } from "lucide-react";
 import { orderStateGroups } from "@helpers/state.helper";
 import { sortByField } from "@helpers/array.helper";
 // fetch-keys
-import { STATES_LIST } from "constants/fetch-keys";
+import { STATES_LIST } from "@constants/fetch-keys";
 
 export const ProjectSettingStateList: React.FC = observer(() => {
   // router

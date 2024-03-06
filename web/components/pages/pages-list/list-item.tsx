@@ -20,7 +20,7 @@ import { CustomMenu, Tooltip } from "@servcy/ui";
 // components
 import { CreateUpdatePageModal, DeletePageModal } from "components/pages";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 import { useRouter } from "next/router";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 import { useMember, usePage, useUser } from "@hooks/store";

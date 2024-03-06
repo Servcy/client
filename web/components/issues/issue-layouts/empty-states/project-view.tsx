@@ -6,7 +6,7 @@ import { useApplication, useEventTracker } from "@hooks/store";
 import { EmptyState } from "components/common";
 // assets
 import emptyIssue from "public/empty-state/issue.svg";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 export const ProjectViewEmptyState: React.FC = observer(() => {
   // store hooks

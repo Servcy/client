@@ -10,7 +10,7 @@ import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
 // types
 import { TInboxIssueFilterOptions, TIssuePriorities } from "@servcy/types";
 // constants
-import { INBOX_STATUS } from "constants/inbox";
+import { INBOX_STATUS } from "@constants/inbox";
 
 type TInboxIssueAppliedFilter = { workspaceSlug: string; projectId: string; inboxId: string };
 

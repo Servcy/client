@@ -12,7 +12,7 @@ import { AlertCircle } from "lucide-react";
 // services
 import { CycleService } from "@services/cycle.service";
 // fetch-key
-import { CYCLE_DETAILS } from "constants/fetch-keys";
+import { CYCLE_DETAILS } from "@constants/fetch-keys";
 
 type Props = {
   handleClick: () => void;

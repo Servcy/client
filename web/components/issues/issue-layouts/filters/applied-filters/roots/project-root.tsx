@@ -6,8 +6,8 @@ import { useIssues } from "@hooks/store/use-issues";
 // components
 import { AppliedFiltersList, SaveFilterView } from "components/issues";
 // constants
-import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
-import { EUserProjectRoles } from "constants/project";
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
+import { EUserProjectRoles } from "@constants/project";
 // types
 import { IIssueFilterOptions } from "@servcy/types";
 

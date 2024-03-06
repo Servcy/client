@@ -10,7 +10,7 @@ import { ConfirmWorkspaceMemberRemove } from "components/workspace";
 // ui
 import { CustomSelect, Tooltip } from "@servcy/ui";
 // constants
-import { EUserWorkspaceRoles, ROLE } from "constants/workspace";
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
 
 type Props = {
   invitationId: string;

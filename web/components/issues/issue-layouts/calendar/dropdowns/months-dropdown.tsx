@@ -7,7 +7,7 @@ import { useCalendarView } from "@hooks/store";
 // icons
 import { ChevronLeft, ChevronRight } from "lucide-react";
 // constants
-import { MONTHS_LIST } from "constants/calendar";
+import { MONTHS_LIST } from "@constants/calendar";
 import { ICycleIssuesFilter } from "@store/issue/cycle";
 import { IModuleIssuesFilter } from "@store/issue/module";
 import { IProjectIssuesFilter } from "@store/issue/project";

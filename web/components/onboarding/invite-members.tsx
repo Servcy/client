@@ -28,8 +28,8 @@ import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown";
 // types
 import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
 // constants
-import { EUserWorkspaceRoles, ROLE } from "constants/workspace";
-import { MEMBER_INVITED } from "constants/event-tracker";
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
+import { MEMBER_INVITED } from "@constants/event-tracker";
 // helpers
 import { getUserRole } from "@helpers/user.helper";
 // assets

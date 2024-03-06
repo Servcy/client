@@ -14,7 +14,7 @@ import { PlusIcon } from "lucide-react";
 // types
 import { TIssue } from "@servcy/types";
 // constants
-import { ISSUE_CREATED } from "constants/event-tracker";
+import { ISSUE_CREATED } from "@constants/event-tracker";
 
 type Props = {
   formKey: keyof TIssue;

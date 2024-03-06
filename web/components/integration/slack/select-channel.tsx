@@ -12,7 +12,7 @@ import { Loader } from "@servcy/ui";
 // types
 import { IWorkspaceIntegration, ISlackIntegration } from "@servcy/types";
 // fetch-keys
-import { SLACK_CHANNEL_INFO } from "constants/fetch-keys";
+import { SLACK_CHANNEL_INFO } from "@constants/fetch-keys";
 
 type Props = {
   integration: IWorkspaceIntegration;

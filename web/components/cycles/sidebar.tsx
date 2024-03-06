@@ -23,10 +23,10 @@ import { findHowManyDaysLeft, renderFormattedPayloadDate } from "@helpers/date-t
 // types
 import { ICycle } from "@servcy/types";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
-import { CYCLE_UPDATED } from "constants/event-tracker";
+import { EUserWorkspaceRoles } from "@constants/workspace";
+import { CYCLE_UPDATED } from "@constants/event-tracker";
 // fetch-keys
-import { CYCLE_STATUS } from "constants/cycle";
+import { CYCLE_STATUS } from "@constants/cycle";
 import { DateRangeDropdown } from "components/dropdowns";
 
 type Props = {

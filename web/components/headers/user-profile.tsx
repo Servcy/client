@@ -8,7 +8,7 @@ import { FC } from "react";
 import { useApplication, useUser } from "@hooks/store";
 import { ChevronDown, PanelRight } from "lucide-react";
 import { observer } from "mobx-react-lite";
-import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "constants/profile";
+import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile";
 import Link from "next/link";
 import { useRouter } from "next/router";
 

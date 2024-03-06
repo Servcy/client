@@ -26,7 +26,7 @@ import ServcyLogo from "public/logo.png";
 import { IUser, TOnboardingSteps } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { USER_ONBOARDING_COMPLETED } from "constants/event-tracker";
+import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker";
 
 // services
 const workspaceService = new WorkspaceService();

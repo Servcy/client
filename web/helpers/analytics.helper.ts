@@ -5,9 +5,9 @@ import { addSpaceIfCamelCase, capitalizeFirstLetter, generateRandomColor } from 
 // types
 import { IAnalyticsData, IAnalyticsParams, IAnalyticsResponse, TStateGroups } from "@servcy/types";
 // constants
-import { DATE_KEYS } from "constants/analytics";
-import { MONTHS_LIST } from "constants/calendar";
-import { STATE_GROUPS } from "constants/state";
+import { DATE_KEYS } from "@constants/analytics";
+import { MONTHS_LIST } from "@constants/calendar";
+import { STATE_GROUPS } from "@constants/state";
 
 export const convertResponseToBarGraphData = (
   response: IAnalyticsData | undefined,

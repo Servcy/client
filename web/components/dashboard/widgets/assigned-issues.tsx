@@ -17,7 +17,7 @@ import { getCustomDates, getRedirectionFilters, getTabKey } from "@helpers/dashb
 // types
 import { TAssignedIssuesWidgetFilters, TAssignedIssuesWidgetResponse } from "@servcy/types";
 // constants
-import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "constants/dashboard";
+import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "@constants/dashboard";
 
 const WIDGET_KEY = "assigned_issues";
 

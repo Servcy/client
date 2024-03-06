@@ -6,7 +6,7 @@ import { CustomAnalytics, ScopeAndDemand } from "components/analytics";
 // types
 import { ICycle, IModule, IProject } from "@servcy/types";
 // constants
-import { ANALYTICS_TABS } from "constants/analytics";
+import { ANALYTICS_TABS } from "@constants/analytics";
 
 type Props = {
   fullScreen: boolean;

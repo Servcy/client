@@ -11,7 +11,7 @@ import { BreadcrumbLink } from "components/common";
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "constants/issue";
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 
 export const ProjectDraftIssueHeader: FC = observer(() => {

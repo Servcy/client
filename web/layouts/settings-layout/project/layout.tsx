@@ -10,7 +10,7 @@ import { NotAuthorizedView } from "components/auth-screens";
 // ui
 import { Button, LayersIcon } from "@servcy/ui";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 export interface IProjectSettingLayout {
   children: ReactNode;

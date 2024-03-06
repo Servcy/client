@@ -8,7 +8,7 @@ import { Breadcrumbs, Button } from "@servcy/ui";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 // components
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "components/common";

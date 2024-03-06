@@ -12,9 +12,9 @@ import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 // hooks
 import { useIssues, useUser } from "@hooks/store";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
-import { EIssuesStoreType } from "constants/issue";
-import { PROFILE_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { EUserWorkspaceRoles } from "@constants/workspace";
+import { EIssuesStoreType } from "@constants/issue";
+import { PROFILE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 interface IProfileIssuesPage {
   type: "assigned" | "subscribed" | "created";

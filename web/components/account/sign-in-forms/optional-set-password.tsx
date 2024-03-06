@@ -11,7 +11,7 @@ import { Button, Input } from "@servcy/ui";
 import { checkEmailValidity } from "@helpers/string.helper";
 // icons
 import { Eye, EyeOff } from "lucide-react";
-import { PASSWORD_CREATE_SELECTED, PASSWORD_CREATE_SKIPPED } from "constants/event-tracker";
+import { PASSWORD_CREATE_SELECTED, PASSWORD_CREATE_SKIPPED } from "@constants/event-tracker";
 
 type Props = {
   email: string;

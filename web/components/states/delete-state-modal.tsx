@@ -11,7 +11,7 @@ import { Button } from "@servcy/ui";
 // types
 import type { IState } from "@servcy/types";
 // constants
-import { STATE_DELETED } from "constants/event-tracker";
+import { STATE_DELETED } from "@constants/event-tracker";
 
 type Props = {
   isOpen: boolean;

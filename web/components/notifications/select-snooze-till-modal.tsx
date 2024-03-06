@@ -5,7 +5,7 @@ import { DateDropdown } from "components/dropdowns";
 import { Transition, Dialog } from "@headlessui/react";
 import { X } from "lucide-react";
 // constants
-import { allTimeIn30MinutesInterval12HoursFormat } from "constants/notification";
+import { allTimeIn30MinutesInterval12HoursFormat } from "@constants/notification";
 // hooks
 import useToast from "@hooks/use-toast";
 // ui

@@ -8,7 +8,7 @@ import { WorkspaceService } from "@services/workspace.service";
 import { IWorkspaceBulkInviteFormData, IWorkspaceMember, IWorkspaceMemberInvitation } from "@servcy/types";
 import { RootStore } from "@store/root.store";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 import { IRouterStore } from "@store/application/router.store";
 import { IUserRootStore } from "@store/user";
 import { IMemberRootStore } from ".";

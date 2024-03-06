@@ -10,7 +10,7 @@ import { BreadcrumbLink } from "components/common";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 export const ProjectViewsHeader: React.FC = observer(() => {
   // router

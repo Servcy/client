@@ -10,8 +10,8 @@ import { PriorityIcon } from "@servcy/ui";
 // types
 import { TInboxIssueFilterOptions } from "@servcy/types";
 // constants
-import { INBOX_STATUS } from "constants/inbox";
-import { ISSUE_PRIORITIES } from "constants/issue";
+import { INBOX_STATUS } from "@constants/inbox";
+import { ISSUE_PRIORITIES } from "@constants/issue";
 
 type TInboxIssueFilterSelection = { workspaceSlug: string; projectId: string; inboxId: string };
 

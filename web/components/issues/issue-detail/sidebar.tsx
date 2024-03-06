@@ -39,7 +39,7 @@ import { cn } from "@helpers/common.helper";
 import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
 // types
 import type { TIssueOperations } from "./root";
-import { STATE_GROUPS } from "constants/state";
+import { STATE_GROUPS } from "@constants/state";
 
 type Props = {
   workspaceSlug: string;

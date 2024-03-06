@@ -15,7 +15,7 @@ import { IUser } from "@servcy/types";
 import { FileService } from "@services/file.service";
 // assets
 import IssuesSvg from "public/onboarding/onboarding-issues.webp";
-import { USER_DETAILS } from "constants/event-tracker";
+import { USER_DETAILS } from "@constants/event-tracker";
 
 const defaultValues: Partial<IUser> = {
   first_name: "",

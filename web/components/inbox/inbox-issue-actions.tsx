@@ -19,8 +19,8 @@ import { Button } from "@servcy/ui";
 import { CheckCircle2, ChevronDown, ChevronUp, Clock, FileStack, Trash2, XCircle } from "lucide-react";
 // types
 import type { TInboxStatus, TInboxDetailedStatus } from "@servcy/types";
-import { EUserProjectRoles } from "constants/project";
-import { ISSUE_DELETED } from "constants/event-tracker";
+import { EUserProjectRoles } from "@constants/project";
+import { ISSUE_DELETED } from "@constants/event-tracker";
 
 type TInboxIssueActionsHeader = {
   workspaceSlug: string;

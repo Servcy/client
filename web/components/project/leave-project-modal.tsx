@@ -12,7 +12,7 @@ import { Button, Input } from "@servcy/ui";
 // types
 import { IProject } from "@servcy/types";
 // constants
-import { PROJECT_MEMBER_LEAVE } from "constants/event-tracker";
+import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker";
 
 type FormData = {
   projectName: string;

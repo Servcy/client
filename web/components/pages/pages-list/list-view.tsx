@@ -10,8 +10,8 @@ import { PagesListItem } from "./list-item";
 // ui
 import { Loader } from "@servcy/ui";
 // constants
-import { EUserProjectRoles } from "constants/project";
-import { PAGE_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { EUserProjectRoles } from "@constants/project";
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 type IPagesListView = {
   pageIds: string[];

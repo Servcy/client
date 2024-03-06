@@ -3,7 +3,7 @@ import { Triangle } from "lucide-react";
 // types
 import { IDefaultAnalyticsResponse, TStateGroups } from "@servcy/types";
 // constants
-import { STATE_GROUPS } from "constants/state";
+import { STATE_GROUPS } from "@constants/state";
 
 type Props = {
   defaultAnalytics: IDefaultAnalyticsResponse;

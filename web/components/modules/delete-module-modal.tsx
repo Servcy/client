@@ -12,7 +12,7 @@ import { AlertTriangle } from "lucide-react";
 // types
 import type { IModule } from "@servcy/types";
 // constants
-import { MODULE_DELETED } from "constants/event-tracker";
+import { MODULE_DELETED } from "@constants/event-tracker";
 
 type Props = {
   data: IModule;

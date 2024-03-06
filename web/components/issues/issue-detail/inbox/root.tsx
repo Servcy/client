@@ -11,7 +11,7 @@ import useToast from "@hooks/use-toast";
 import { TIssue } from "@servcy/types";
 import { TIssueOperations } from "../root";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 export type TInboxIssueDetailRoot = {
   workspaceSlug: string;

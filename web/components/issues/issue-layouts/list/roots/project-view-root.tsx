@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 // store
 import { useIssues } from "@hooks/store";
 // constants
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 // types
 import { EIssueActions } from "../../types";
 import { TIssue } from "@servcy/types";

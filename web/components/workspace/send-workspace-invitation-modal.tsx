@@ -10,7 +10,7 @@ import { Button, CustomSelect, Input } from "@servcy/ui";
 // types
 import { IWorkspaceBulkInviteFormData } from "@servcy/types";
 // constants
-import { EUserWorkspaceRoles, ROLE } from "constants/workspace";
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
 
 type Props = {
   isOpen: boolean;

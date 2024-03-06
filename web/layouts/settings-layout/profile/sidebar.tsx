@@ -11,7 +11,7 @@ import useToast from "@hooks/use-toast";
 // ui
 import { Tooltip } from "@servcy/ui";
 // constants
-import { PROFILE_ACTION_LINKS } from "constants/profile";
+import { PROFILE_ACTION_LINKS } from "@constants/profile";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 const WORKSPACE_ACTION_LINKS = [

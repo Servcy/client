@@ -13,7 +13,7 @@ import { TIssue, IProject } from "@servcy/types";
 // types
 import { createIssuePayload } from "@helpers/issue.helper";
 // constants
-import { ISSUE_CREATED } from "constants/event-tracker";
+import { ISSUE_CREATED } from "@constants/event-tracker";
 
 interface IInputProps {
   formKey: string;

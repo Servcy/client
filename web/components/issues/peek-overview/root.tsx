@@ -9,9 +9,9 @@ import { IssueView } from "components/issues";
 // types
 import { TIssue } from "@servcy/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
-import { EIssuesStoreType } from "constants/issue";
-import { ISSUE_UPDATED, ISSUE_DELETED, ISSUE_ARCHIVED, ISSUE_RESTORED } from "constants/event-tracker";
+import { EUserProjectRoles } from "@constants/project";
+import { EIssuesStoreType } from "@constants/issue";
+import { ISSUE_UPDATED, ISSUE_DELETED, ISSUE_ARCHIVED, ISSUE_RESTORED } from "@constants/event-tracker";
 
 interface IIssuePeekOverview {
   is_archived?: boolean;

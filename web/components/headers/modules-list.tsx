@@ -9,8 +9,8 @@ import { Breadcrumbs, Button, Tooltip, DiceIcon, CustomMenu } from "@servcy/ui";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";
 // constants
-import { MODULE_VIEW_LAYOUTS } from "constants/module";
-import { EUserProjectRoles } from "constants/project";
+import { MODULE_VIEW_LAYOUTS } from "@constants/module";
+import { EUserProjectRoles } from "@constants/project";
 // components
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "components/common";

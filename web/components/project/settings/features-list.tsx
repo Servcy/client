@@ -9,7 +9,7 @@ import useToast from "@hooks/use-toast";
 // types
 import { IProject } from "@servcy/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 type Props = {};
 

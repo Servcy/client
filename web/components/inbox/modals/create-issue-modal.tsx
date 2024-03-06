@@ -19,7 +19,7 @@ import { Button, Input, ToggleSwitch } from "@servcy/ui";
 // types
 import { TIssue } from "@servcy/types";
 // constants
-import { ISSUE_CREATED } from "constants/event-tracker";
+import { ISSUE_CREATED } from "@constants/event-tracker";
 
 type Props = {
   isOpen: boolean;

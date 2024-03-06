@@ -9,7 +9,7 @@ import { Avatar, CustomSelect, CustomSearchSelect, Input, ToggleSwitch } from "@
 // types
 import { IJiraImporterForm } from "@servcy/types";
 // fetch keys
-import { WORKSPACE_MEMBERS } from "constants/fetch-keys";
+import { WORKSPACE_MEMBERS } from "@constants/fetch-keys";
 
 const workspaceService = new WorkspaceService();
 

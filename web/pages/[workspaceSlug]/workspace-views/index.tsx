@@ -13,7 +13,7 @@ import { Search } from "lucide-react";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { DEFAULT_GLOBAL_VIEWS_LIST } from "constants/workspace";
+import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace";
 // hooks
 import { useWorkspace } from "@hooks/store";
 

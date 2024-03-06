@@ -11,7 +11,7 @@ import { Button } from "@servcy/ui";
 // types
 import { useProjectPages } from "@hooks/store/use-project-page";
 // constants
-import { PAGE_DELETED } from "constants/event-tracker";
+import { PAGE_DELETED } from "@constants/event-tracker";
 
 type TConfirmPageDeletionProps = {
   pageId: string;

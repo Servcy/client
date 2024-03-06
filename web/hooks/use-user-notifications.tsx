@@ -8,7 +8,7 @@ import { NotificationService } from "@services/notification.service";
 // hooks
 import useToast from "./use-toast";
 // fetch-keys
-import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "constants/fetch-keys";
+import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@constants/fetch-keys";
 // type
 import type { IMarkAllAsReadPayload, NotificationCount, NotificationType } from "@servcy/types";
 

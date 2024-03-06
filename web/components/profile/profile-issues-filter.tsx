@@ -6,7 +6,7 @@ import { DisplayFiltersSelection, FilterSelection, FiltersDropdown, LayoutSelect
 // hooks
 import { useIssues, useLabel } from "@hooks/store";
 // constants
-import { EIssuesStoreType, EIssueFilterType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "constants/issue";
+import { EIssuesStoreType, EIssueFilterType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 
 export const ProfileIssuesFilter = observer(() => {

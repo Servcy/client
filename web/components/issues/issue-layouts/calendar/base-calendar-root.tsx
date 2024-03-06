@@ -16,7 +16,7 @@ import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module";
 import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
 import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views";
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 interface IBaseCalendarRoot {
   issueStore: IProjectIssues | IModuleIssues | ICycleIssues | IProjectViewIssues;

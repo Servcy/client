@@ -10,7 +10,7 @@ import { IPage } from "@servcy/types";
 import { useProjectPages } from "@hooks/store/use-project-page";
 import { IPageStore } from "@store/page.store";
 // constants
-import { PAGE_CREATED, PAGE_UPDATED } from "constants/event-tracker";
+import { PAGE_CREATED, PAGE_UPDATED } from "@constants/event-tracker";
 
 type Props = {
   // data?: IPage | null;

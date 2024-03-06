@@ -5,7 +5,7 @@ import { useIssues } from "@hooks/store";
 // components
 import { BaseGanttRoot } from "./base-gantt-root";
 // constants
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 // types
 import { EIssueActions } from "../types";
 import { TIssue } from "@servcy/types";

@@ -12,8 +12,8 @@ import { Loader } from "@servcy/ui";
 // helpers
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
 // constants
-import { EUserProjectRoles } from "constants/project";
-import { PAGE_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { EUserProjectRoles } from "@constants/project";
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 export const RecentPagesList: FC = observer(() => {
   // theme

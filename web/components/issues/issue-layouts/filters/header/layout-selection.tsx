@@ -5,7 +5,7 @@ import { Tooltip } from "@servcy/ui";
 // types
 import { TIssueLayouts } from "@servcy/types";
 // constants
-import { ISSUE_LAYOUTS } from "constants/issue";
+import { ISSUE_LAYOUTS } from "@constants/issue";
 
 type Props = {
   layouts: TIssueLayouts[];

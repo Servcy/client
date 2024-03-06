@@ -7,7 +7,7 @@ import { ProjectIssueQuickActions } from "components/issues";
 import { BaseCalendarRoot } from "../base-calendar-root";
 import { EIssueActions } from "../../types";
 import { TIssue } from "@servcy/types";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 import { useMemo } from "react";
 
 export const CalendarLayout: React.FC = observer(() => {

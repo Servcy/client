@@ -3,7 +3,7 @@ import { useTheme } from "next-themes";
 // types
 import { TIssuesListTypes } from "@servcy/types";
 // constants
-import { ASSIGNED_ISSUES_EMPTY_STATES } from "constants/dashboard";
+import { ASSIGNED_ISSUES_EMPTY_STATES } from "@constants/dashboard";
 
 type Props = {
   type: TIssuesListTypes;

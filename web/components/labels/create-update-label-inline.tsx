@@ -12,7 +12,7 @@ import { Button, Input } from "@servcy/ui";
 // types
 import { IIssueLabel } from "@servcy/types";
 // fetch-keys
-import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "constants/label";
+import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "@constants/label";
 
 type Props = {
   labelForm: boolean;

@@ -10,8 +10,8 @@ import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 // ui
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "components/ui";
 // constants
-import { EUserProjectRoles } from "constants/project";
-import { MODULE_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { EUserProjectRoles } from "@constants/project";
+import { MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 export const ModulesListView: React.FC = observer(() => {
   // router

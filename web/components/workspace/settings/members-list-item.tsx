@@ -11,8 +11,8 @@ import { ConfirmWorkspaceMemberRemove } from "components/workspace";
 // ui
 import { CustomSelect, Tooltip } from "@servcy/ui";
 // constants
-import { EUserWorkspaceRoles, ROLE } from "constants/workspace";
-import { WORKSPACE_MEMBER_lEAVE } from "constants/event-tracker";
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";
+import { WORKSPACE_MEMBER_lEAVE } from "@constants/event-tracker";
 
 type Props = {
   memberId: string;

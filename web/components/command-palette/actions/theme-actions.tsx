@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 import { useUser } from "@hooks/store";
 import useToast from "@hooks/use-toast";
 // constants
-import { THEME_OPTIONS } from "constants/themes";
+import { THEME_OPTIONS } from "@constants/themes";
 
 type Props = {
   closePalette: () => void;

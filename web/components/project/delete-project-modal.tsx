@@ -11,7 +11,7 @@ import { Button, Input } from "@servcy/ui";
 // types
 import type { IProject } from "@servcy/types";
 // constants
-import { PROJECT_DELETED } from "constants/event-tracker";
+import { PROJECT_DELETED } from "@constants/event-tracker";
 
 type DeleteProjectModal = {
   isOpen: boolean;

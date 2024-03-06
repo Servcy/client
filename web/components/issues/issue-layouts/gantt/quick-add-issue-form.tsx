@@ -15,7 +15,7 @@ import { cn } from "@helpers/common.helper";
 // types
 import { IProject, TIssue } from "@servcy/types";
 // constants
-import { ISSUE_CREATED } from "constants/event-tracker";
+import { ISSUE_CREATED } from "@constants/event-tracker";
 
 interface IInputProps {
   formKey: string;

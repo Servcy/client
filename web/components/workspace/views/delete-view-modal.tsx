@@ -11,7 +11,7 @@ import { Button } from "@servcy/ui";
 // types
 import { IWorkspaceView } from "@servcy/types";
 // constants
-import { GLOBAL_VIEW_DELETED } from "constants/event-tracker";
+import { GLOBAL_VIEW_DELETED } from "@constants/event-tracker";
 
 type Props = {
   data: IWorkspaceView;

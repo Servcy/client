@@ -20,8 +20,8 @@ import { NextPageWithLayout } from "@lib/types";
 // helpers
 import { getUserRole } from "@helpers/user.helper";
 // constants
-import { MEMBER_INVITED } from "constants/event-tracker";
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { MEMBER_INVITED } from "@constants/event-tracker";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 
 const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
   // states

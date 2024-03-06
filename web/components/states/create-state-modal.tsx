@@ -14,7 +14,7 @@ import { ChevronDown } from "lucide-react";
 // types
 import type { IState } from "@servcy/types";
 // constants
-import { GROUP_CHOICES } from "constants/project";
+import { GROUP_CHOICES } from "@constants/project";
 
 // types
 type Props = {

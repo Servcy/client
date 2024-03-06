@@ -8,7 +8,7 @@ import { BaseSpreadsheetRoot } from "../base-spreadsheet-root";
 import { EIssueActions } from "../../types";
 import { TIssue } from "@servcy/types";
 import { CycleIssueQuickActions } from "../../quick-action-dropdowns";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 export const CycleSpreadsheetLayout: React.FC = observer(() => {
   const router = useRouter();

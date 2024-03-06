@@ -17,7 +17,7 @@ import {
 } from "components/issues";
 import { ActiveLoader } from "components/ui";
 // constants
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 // types
 import { TIssue } from "@servcy/types";
 import { EIssueActions } from "../types";

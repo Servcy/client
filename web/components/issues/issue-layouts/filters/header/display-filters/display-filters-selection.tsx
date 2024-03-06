@@ -12,7 +12,7 @@ import {
 } from "components/issues";
 // types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueGroupByOptions } from "@servcy/types";
-import { ILayoutDisplayFiltersOptions } from "constants/issue";
+import { ILayoutDisplayFiltersOptions } from "@constants/issue";
 
 type Props = {
   displayFilters: IIssueDisplayFilterOptions;

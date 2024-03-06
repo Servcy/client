@@ -15,7 +15,7 @@ import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module";
 import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
 import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 import { EIssueActions } from "../types";
 
 interface IBaseGanttRoot {

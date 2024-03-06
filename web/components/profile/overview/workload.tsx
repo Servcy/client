@@ -1,7 +1,7 @@
 // types
 import { IUserStateDistribution } from "@servcy/types";
 // constants
-import { STATE_GROUPS } from "constants/state";
+import { STATE_GROUPS } from "@constants/state";
 
 type Props = {
   stateDistribution: IUserStateDistribution[];

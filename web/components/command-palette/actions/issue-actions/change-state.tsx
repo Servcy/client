@@ -9,7 +9,7 @@ import { Spinner, StateGroupIcon } from "@servcy/ui";
 import { Check } from "lucide-react";
 // types
 import { TIssue } from "@servcy/types";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 type Props = {
   closePalette: () => void;

@@ -12,8 +12,8 @@ import { Check, ChevronUp } from "lucide-react";
 // types
 import { TCalendarLayouts } from "@servcy/types";
 // constants
-import { CALENDAR_LAYOUTS } from "constants/calendar";
-import { EIssueFilterType } from "constants/issue";
+import { CALENDAR_LAYOUTS } from "@constants/calendar";
+import { EIssueFilterType } from "@constants/issue";
 import { ICycleIssuesFilter } from "@store/issue/cycle";
 import { IModuleIssuesFilter } from "@store/issue/module";
 import { IProjectIssuesFilter } from "@store/issue/project";

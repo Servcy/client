@@ -11,7 +11,7 @@ import { PageHead } from "components/core";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 
 const ImportsPage: NextPageWithLayout = observer(() => {
   // store hooks

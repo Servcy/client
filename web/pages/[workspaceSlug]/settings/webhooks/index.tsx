@@ -18,7 +18,7 @@ import { WebhookSettingsLoader } from "components/ui";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PageHead } from "components/core";
 
 const WebhooksListPage: NextPageWithLayout = observer(() => {

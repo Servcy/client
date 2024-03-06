@@ -5,7 +5,7 @@ import emptyGraph from "public/empty-state/empty_graph.svg";
 // types
 import { IDefaultAnalyticsResponse } from "@servcy/types";
 // constants
-import { MONTHS_LIST } from "constants/calendar";
+import { MONTHS_LIST } from "@constants/calendar";
 
 type Props = {
   defaultAnalytics: IDefaultAnalyticsResponse;

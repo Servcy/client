@@ -30,8 +30,8 @@ import { renderEmoji } from "@helpers/emoji.helper";
 // types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 // constants
-import { EIssuesStoreType, EIssueFilterType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "constants/issue";
-import { EUserProjectRoles } from "constants/project";
+import { EIssuesStoreType, EIssueFilterType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
+import { EUserProjectRoles } from "@constants/project";
 import { cn } from "@helpers/common.helper";
 import { ModuleMobileHeader } from "components/modules/module-mobile-header";
 

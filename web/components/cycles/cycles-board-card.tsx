@@ -15,9 +15,9 @@ import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react";
 import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper";
 import { copyTextToClipboard } from "@helpers/string.helper";
 // constants
-import { CYCLE_STATUS } from "constants/cycle";
-import { EUserWorkspaceRoles } from "constants/workspace";
-import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "constants/event-tracker";
+import { CYCLE_STATUS } from "@constants/cycle";
+import { EUserWorkspaceRoles } from "@constants/workspace";
+import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker";
 //.types
 import { TCycleGroups } from "@servcy/types";
 

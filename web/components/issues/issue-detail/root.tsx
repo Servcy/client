@@ -14,9 +14,9 @@ import useToast from "@hooks/use-toast";
 // types
 import { TIssue } from "@servcy/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
-import { EIssuesStoreType } from "constants/issue";
-import { ISSUE_UPDATED, ISSUE_DELETED, ISSUE_ARCHIVED } from "constants/event-tracker";
+import { EUserProjectRoles } from "@constants/project";
+import { EIssuesStoreType } from "@constants/issue";
+import { ISSUE_UPDATED, ISSUE_DELETED, ISSUE_ARCHIVED } from "@constants/event-tracker";
 import { observer } from "mobx-react";
 
 export type TIssueOperations = {

@@ -8,8 +8,8 @@ import { WorkspaceService } from "@services/workspace.service";
 import { IProjectMember, IUserProjectsRole, IWorkspaceMemberMe } from "@servcy/types";
 import { RootStore } from "../root.store";
 // constants
-import { EUserProjectRoles } from "constants/project";
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { EUserProjectRoles } from "@constants/project";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 
 export interface IUserMembershipStore {
   // observables

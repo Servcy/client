@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 // hooks
 import { useApplication } from "@hooks/store";
 // constants
-import { MAX_FILE_SIZE } from "constants/common";
+import { MAX_FILE_SIZE } from "@constants/common";
 // helpers
 import { generateFileName } from "@helpers/attachment.helper";
 // types

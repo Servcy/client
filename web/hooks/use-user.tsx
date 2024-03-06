@@ -4,7 +4,7 @@ import useSWR from "swr";
 // services
 import { UserService } from "@services/user.service";
 // constants
-import { CURRENT_USER } from "constants/fetch-keys";
+import { CURRENT_USER } from "@constants/fetch-keys";
 // types
 import type { IUser } from "@servcy/types";
 

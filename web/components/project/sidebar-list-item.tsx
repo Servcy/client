@@ -29,7 +29,7 @@ import { renderEmoji } from "@helpers/emoji.helper";
 // components
 import { CustomMenu, Tooltip, ArchiveIcon, PhotoFilterIcon, DiceIcon, ContrastIcon, LayersIcon } from "@servcy/ui";
 import { LeaveProjectModal, PublishProjectModal } from "components/project";
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 type Props = {
   projectId: string;

@@ -13,7 +13,7 @@ import { Button, Input } from "@servcy/ui";
 // types
 import type { IIssueLabel, IState } from "@servcy/types";
 // constants
-import { LABEL_COLOR_OPTIONS, getRandomLabelColor } from "constants/label";
+import { LABEL_COLOR_OPTIONS, getRandomLabelColor } from "@constants/label";
 
 // types
 type Props = {

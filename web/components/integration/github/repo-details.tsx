@@ -13,7 +13,7 @@ import { Button, Loader } from "@servcy/ui";
 // types
 import { IUserDetails, TFormValues, TIntegrationSteps } from "components/integration";
 // fetch-keys
-import { GITHUB_REPOSITORY_INFO } from "constants/fetch-keys";
+import { GITHUB_REPOSITORY_INFO } from "@constants/fetch-keys";
 
 type Props = {
   selectedRepo: any;

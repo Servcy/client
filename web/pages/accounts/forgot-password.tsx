@@ -21,7 +21,7 @@ import ServcyLogo from "public/logo.png";
 import { checkEmailValidity } from "@helpers/string.helper";
 // type
 import { NextPageWithLayout } from "@lib/types";
-import { FORGOT_PASS_LINK } from "constants/event-tracker";
+import { FORGOT_PASS_LINK } from "@constants/event-tracker";
 
 type TForgotPasswordFormValues = {
   email: string;

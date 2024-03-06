@@ -7,7 +7,7 @@ import {
   TWITTER_USER_NAME,
   SITE_KEYWORDS,
   SITE_TITLE,
-} from "constants/seo-variables";
+} from "@constants/seo-variables";
 import Script from "next/script";
 
 class MyDocument extends Document {

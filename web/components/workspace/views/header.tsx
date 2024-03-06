@@ -8,8 +8,8 @@ import { useEventTracker, useGlobalView, useUser } from "@hooks/store";
 // components
 import { CreateUpdateWorkspaceViewModal } from "components/workspace";
 // constants
-import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "constants/workspace";
-import { GLOBAL_VIEW_OPENED } from "constants/event-tracker";
+import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace";
+import { GLOBAL_VIEW_OPENED } from "@constants/event-tracker";
 
 const ViewTab = observer((props: { viewId: string }) => {
   const { viewId } = props;

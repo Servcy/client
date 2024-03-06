@@ -5,7 +5,7 @@ import { FilterHeader, FilterOption } from "components/issues";
 // types
 import { IIssueDisplayFilterOptions, TIssueGroupByOptions } from "@servcy/types";
 // constants
-import { ISSUE_GROUP_BY_OPTIONS } from "constants/issue";
+import { ISSUE_GROUP_BY_OPTIONS } from "@constants/issue";
 
 type Props = {
   displayFilters: IIssueDisplayFilterOptions;

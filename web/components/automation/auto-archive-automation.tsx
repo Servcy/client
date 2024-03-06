@@ -8,7 +8,7 @@ import { SelectMonthModal } from "components/automation";
 // icon
 import { ArchiveRestore } from "lucide-react";
 // constants
-import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "constants/project";
+import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project";
 // types
 import { IProject } from "@servcy/types";
 

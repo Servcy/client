@@ -17,7 +17,7 @@ import { checkEmailValidity } from "@helpers/string.helper";
 // types
 import { IPasswordSignInData } from "@servcy/types";
 // constants
-import { FORGOT_PASSWORD, SIGN_IN_WITH_PASSWORD } from "constants/event-tracker";
+import { FORGOT_PASSWORD, SIGN_IN_WITH_PASSWORD } from "@constants/event-tracker";
 
 type Props = {
   email: string;

@@ -13,7 +13,7 @@ import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
 import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views";
 import { IWorkspaceIssues, IWorkspaceIssuesFilter } from "@store/issue/workspace";
 // constants
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 type defaultIssueStore = {
   issueMap: TIssueMap;

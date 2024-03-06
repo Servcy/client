@@ -9,7 +9,7 @@ import { AppliedFiltersList } from "components/issues";
 import { Button } from "@servcy/ui";
 // types
 import { IIssueFilterOptions } from "@servcy/types";
-import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 
 export const ProjectViewAppliedFiltersRoot: React.FC = observer(() => {
   // router

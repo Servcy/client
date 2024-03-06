@@ -18,8 +18,8 @@ import { getCustomDates } from "@helpers/dashboard.helper";
 // types
 import { TIssuesByPriorityWidgetFilters, TIssuesByPriorityWidgetResponse } from "@servcy/types";
 // constants
-import { PRIORITY_GRAPH_GRADIENTS } from "constants/dashboard";
-import { ISSUE_PRIORITIES } from "constants/issue";
+import { PRIORITY_GRAPH_GRADIENTS } from "@constants/dashboard";
+import { ISSUE_PRIORITIES } from "@constants/issue";
 
 const TEXT_COLORS = {
   urgent: "#F4A9AA",

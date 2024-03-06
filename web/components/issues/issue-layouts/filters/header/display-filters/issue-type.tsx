@@ -6,7 +6,7 @@ import { FilterHeader, FilterOption } from "components/issues";
 // types
 import { TIssueTypeFilters } from "@servcy/types";
 // constants
-import { ISSUE_FILTER_OPTIONS } from "constants/issue";
+import { ISSUE_FILTER_OPTIONS } from "@constants/issue";
 
 type Props = {
   selectedIssueType: TIssueTypeFilters | undefined;

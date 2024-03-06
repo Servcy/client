@@ -9,7 +9,7 @@ import { BaseCalendarRoot } from "../base-calendar-root";
 import { TIssue } from "@servcy/types";
 import { EIssueActions } from "../../types";
 // constants
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 export interface IViewCalendarLayout {
   issueActions: {

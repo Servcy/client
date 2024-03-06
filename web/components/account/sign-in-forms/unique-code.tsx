@@ -15,7 +15,7 @@ import { checkEmailValidity } from "@helpers/string.helper";
 // types
 import { IEmailCheckData, IMagicSignInData } from "@servcy/types";
 // constants
-import { CODE_VERIFIED } from "constants/event-tracker";
+import { CODE_VERIFIED } from "@constants/event-tracker";
 
 type Props = {
   email: string;

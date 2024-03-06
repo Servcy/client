@@ -7,8 +7,8 @@ import values from "lodash/values";
 import { TIssue, TIssueGroupByOptions, TIssueMap, TIssueOrderByOptions } from "@servcy/types";
 import { IIssueRootStore } from "../root.store";
 // constants
-import { ISSUE_PRIORITIES } from "constants/issue";
-import { STATE_GROUPS } from "constants/state";
+import { ISSUE_PRIORITIES } from "@constants/issue";
+import { STATE_GROUPS } from "@constants/state";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 

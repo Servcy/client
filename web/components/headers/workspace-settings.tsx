@@ -7,7 +7,7 @@ import { Settings } from "lucide-react";
 import { observer } from "mobx-react-lite";
 // components
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { WORKSPACE_SETTINGS_LINKS } from "constants/workspace";
+import { WORKSPACE_SETTINGS_LINKS } from "@constants/workspace";
 import { BreadcrumbLink } from "components/common";
 
 export interface IWorkspaceSettingHeader {

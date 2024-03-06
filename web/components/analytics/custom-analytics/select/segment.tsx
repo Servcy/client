@@ -5,7 +5,7 @@ import { CustomSelect } from "@servcy/ui";
 // types
 import { IAnalyticsParams, TXAxisValues } from "@servcy/types";
 // constants
-import { ANALYTICS_X_AXIS_VALUES } from "constants/analytics";
+import { ANALYTICS_X_AXIS_VALUES } from "@constants/analytics";
 
 type Props = {
   value: TXAxisValues | null | undefined;

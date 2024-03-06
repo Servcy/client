@@ -17,7 +17,7 @@ import { AlertTriangle } from "lucide-react";
 // types
 import { IUser, IImporterService } from "@servcy/types";
 // fetch-keys
-import { IMPORTER_SERVICES_LIST } from "constants/fetch-keys";
+import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
 
 type Props = {
   isOpen: boolean;

@@ -16,7 +16,7 @@ import { renderEmoji } from "@helpers/emoji.helper";
 // types
 import type { IProject } from "@servcy/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 export type ProjectCardProps = {
   project: IProject;

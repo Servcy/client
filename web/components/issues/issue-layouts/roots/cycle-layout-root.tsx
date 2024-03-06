@@ -20,7 +20,7 @@ import {
 import { TransferIssues, TransferIssuesModal } from "components/cycles";
 import { ActiveLoader } from "components/ui";
 // constants
-import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 // types
 import { IIssueFilterOptions } from "@servcy/types";
 

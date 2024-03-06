@@ -16,7 +16,7 @@ import { History, MessageSquare } from "lucide-react";
 // ui
 import { ActivitySettingsLoader } from "components/ui";
 // fetch-keys
-import { USER_ACTIVITY } from "constants/fetch-keys";
+import { USER_ACTIVITY } from "@constants/fetch-keys";
 // helper
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 // type

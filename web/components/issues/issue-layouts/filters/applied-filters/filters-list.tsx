@@ -20,7 +20,7 @@ import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
 // types
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 type Props = {
   appliedFilters: IIssueFilterOptions;

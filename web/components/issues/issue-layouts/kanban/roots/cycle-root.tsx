@@ -10,7 +10,7 @@ import { TIssue } from "@servcy/types";
 import { EIssueActions } from "../../types";
 // components
 import { BaseKanBanRoot } from "../base-kanban-root";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 export interface ICycleKanBanLayout {}
 

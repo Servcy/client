@@ -11,9 +11,9 @@ import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 // types
 import { ISearchIssueResponse, TIssueLayouts } from "@servcy/types";
 // constants
-import { EUserProjectRoles } from "constants/project";
-import { EIssuesStoreType } from "constants/issue";
-import { EMPTY_FILTER_STATE_DETAILS, MODULE_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { EUserProjectRoles } from "@constants/project";
+import { EIssuesStoreType } from "@constants/issue";
+import { EMPTY_FILTER_STATE_DETAILS, MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 type Props = {
   workspaceSlug: string | undefined;

@@ -9,10 +9,10 @@ import { Button } from "@servcy/ui";
 import { AppliedFiltersList } from "components/issues";
 // types
 import { IIssueFilterOptions, TStaticViewTypes } from "@servcy/types";
-import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
-import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "constants/workspace";
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
+import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace";
 // constants
-import { GLOBAL_VIEW_UPDATED } from "constants/event-tracker";
+import { GLOBAL_VIEW_UPDATED } from "@constants/event-tracker";
 
 type Props = {
   globalViewId: string;

@@ -9,7 +9,7 @@ import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 // ui
 import { Loader } from "@servcy/ui";
 // constants
-import { CYCLE_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
 export interface ICyclesList {
   cycleIds: string[];

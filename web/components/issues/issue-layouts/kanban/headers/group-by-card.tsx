@@ -13,7 +13,7 @@ import { useEventTracker } from "@hooks/store";
 import { observer } from "mobx-react-lite";
 // types
 import { TIssue, ISearchIssueResponse, TIssueKanbanFilters } from "@servcy/types";
-import { TCreateModalStoreTypes } from "constants/issue";
+import { TCreateModalStoreTypes } from "@constants/issue";
 
 interface IHeaderGroupByCard {
   sub_group_by: string | null;

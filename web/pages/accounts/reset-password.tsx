@@ -24,7 +24,7 @@ import { NextPageWithLayout } from "@lib/types";
 // icons
 import { Eye, EyeOff } from "lucide-react";
 // constants
-import { NEW_PASS_CREATED } from "constants/event-tracker";
+import { NEW_PASS_CREATED } from "@constants/event-tracker";
 
 type TResetPasswordFormValues = {
   email: string;

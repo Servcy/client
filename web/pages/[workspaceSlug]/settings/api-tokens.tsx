@@ -20,9 +20,9 @@ import { APITokenService } from "@services/api_token.service";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { API_TOKENS_LIST } from "constants/fetch-keys";
-import { EUserWorkspaceRoles } from "constants/workspace";
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "constants/empty-state";
+import { API_TOKENS_LIST } from "@constants/fetch-keys";
+import { EUserWorkspaceRoles } from "@constants/workspace";
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PageHead } from "components/core";
 
 const apiTokenService = new APITokenService();

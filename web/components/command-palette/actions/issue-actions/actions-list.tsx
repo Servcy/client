@@ -12,7 +12,7 @@ import { DoubleCircleIcon, UserGroupIcon } from "@servcy/ui";
 import { copyTextToClipboard } from "@helpers/string.helper";
 // types
 import { TIssue } from "@servcy/types";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 type Props = {
   closePalette: () => void;

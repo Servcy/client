@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 // icons
 import { ChevronRight, MoreHorizontal } from "lucide-react";
 // constants
-import { SPREADSHEET_PROPERTY_LIST } from "constants/spreadsheet";
+import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet";
 // components
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
 import RenderIfVisible from "components/core/render-if-visible-HOC";

@@ -13,9 +13,9 @@ import { Loader } from "@servcy/ui";
 // types
 import { IProject, IUserLite, IWorkspace } from "@servcy/types";
 // fetch-keys
-import { PROJECT_MEMBERS } from "constants/fetch-keys";
+import { PROJECT_MEMBERS } from "@constants/fetch-keys";
 // constants
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 
 const defaultValues: Partial<IProject> = {
   project_lead: null,

@@ -4,7 +4,7 @@ import { CustomMenu } from "@servcy/ui";
 // types
 import { TDurationFilterOptions } from "@servcy/types";
 // constants
-import { DURATION_FILTER_OPTIONS } from "constants/dashboard";
+import { DURATION_FILTER_OPTIONS } from "@constants/dashboard";
 
 type Props = {
   onChange: (value: TDurationFilterOptions) => void;

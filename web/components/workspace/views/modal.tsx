@@ -10,7 +10,7 @@ import { WorkspaceViewForm } from "components/workspace";
 // types
 import { IWorkspaceView } from "@servcy/types";
 // constants
-import { GLOBAL_VIEW_CREATED, GLOBAL_VIEW_UPDATED } from "constants/event-tracker";
+import { GLOBAL_VIEW_CREATED, GLOBAL_VIEW_UPDATED } from "@constants/event-tracker";
 
 type Props = {
   data?: IWorkspaceView;

@@ -13,7 +13,7 @@ import { createIssuePayload } from "@helpers/issue.helper";
 // types
 import { TIssue } from "@servcy/types";
 // constants
-import { ISSUE_CREATED } from "constants/event-tracker";
+import { ISSUE_CREATED } from "@constants/event-tracker";
 
 const Inputs = (props: any) => {
   const { register, setFocus, projectDetail } = props;

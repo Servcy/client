@@ -15,11 +15,11 @@ import { Check, Info, LinkIcon, Pencil, Star, Trash2, User2 } from "lucide-react
 import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper";
 import { copyTextToClipboard } from "@helpers/string.helper";
 // constants
-import { CYCLE_STATUS } from "constants/cycle";
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { CYCLE_STATUS } from "@constants/cycle";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 // types
 import { TCycleGroups } from "@servcy/types";
-import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "constants/event-tracker";
+import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker";
 
 type TCyclesListItem = {
   cycleId: string;

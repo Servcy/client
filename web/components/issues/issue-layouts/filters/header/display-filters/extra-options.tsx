@@ -6,7 +6,7 @@ import { FilterOption } from "components/issues";
 // types
 import { IIssueDisplayFilterOptions, TIssueExtraOptions } from "@servcy/types";
 // constants
-import { ISSUE_EXTRA_OPTIONS } from "constants/issue";
+import { ISSUE_EXTRA_OPTIONS } from "@constants/issue";
 
 type Props = {
   selectedExtraOptions: {

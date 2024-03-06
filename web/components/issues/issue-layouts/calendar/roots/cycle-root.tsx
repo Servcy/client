@@ -8,7 +8,7 @@ import { CycleIssueQuickActions } from "components/issues";
 import { TIssue } from "@servcy/types";
 import { EIssueActions } from "../../types";
 import { BaseCalendarRoot } from "../base-calendar-root";
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 import { useMemo } from "react";
 
 export const CycleCalendarLayout: React.FC = observer(() => {

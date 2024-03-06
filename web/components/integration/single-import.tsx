@@ -7,7 +7,7 @@ import { renderFormattedDate } from "@helpers/date-time.helper";
 // types
 import { IImporterService } from "@servcy/types";
 // constants
-import { IMPORTERS_LIST } from "constants/workspace";
+import { IMPORTERS_LIST } from "@constants/workspace";
 
 type Props = {
   service: IImporterService;

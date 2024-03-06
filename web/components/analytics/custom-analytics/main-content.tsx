@@ -10,7 +10,7 @@ import { convertResponseToBarGraphData } from "@helpers/analytics.helper";
 // types
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
 // fetch-keys
-import { ANALYTICS } from "constants/fetch-keys";
+import { ANALYTICS } from "@constants/fetch-keys";
 
 type Props = {
   analytics: IAnalyticsResponse | undefined;

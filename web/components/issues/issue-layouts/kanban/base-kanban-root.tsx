@@ -16,7 +16,7 @@ import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
 import { KanBan } from "./default";
 import { KanBanSwimLanes } from "./swimlanes";
 import { DeleteIssueModal } from "components/issues";
-import { EUserProjectRoles } from "constants/project";
+import { EUserProjectRoles } from "@constants/project";
 import { useIssues } from "@hooks/store/use-issues";
 import { handleDragDrop } from "./utils";
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
@@ -24,8 +24,8 @@ import { IDraftIssues, IDraftIssuesFilter } from "@store/issue/draft";
 import { IProfileIssues, IProfileIssuesFilter } from "@store/issue/profile";
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module";
 import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views";
-import { EIssueFilterType, TCreateModalStoreTypes } from "constants/issue";
-import { ISSUE_DELETED } from "constants/event-tracker";
+import { EIssueFilterType, TCreateModalStoreTypes } from "@constants/issue";
+import { ISSUE_DELETED } from "@constants/event-tracker";
 
 export interface IBaseKanBanLayout {
   issues: IProjectIssues | ICycleIssues | IDraftIssues | IModuleIssues | IProjectViewIssues | IProfileIssues;

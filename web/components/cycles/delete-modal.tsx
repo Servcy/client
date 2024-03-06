@@ -11,7 +11,7 @@ import { Button } from "@servcy/ui";
 // types
 import { ICycle } from "@servcy/types";
 // constants
-import { CYCLE_DELETED } from "constants/event-tracker";
+import { CYCLE_DELETED } from "@constants/event-tracker";
 
 interface ICycleDelete {
   cycle: ICycle;

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { IIssueDisplayProperties, TIssue } from "@servcy/types";
 import { EIssueActions } from "../types";
 // constants
-import { SPREADSHEET_PROPERTY_DETAILS } from "constants/spreadsheet";
+import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet";
 // components
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
 import { useEventTracker } from "@hooks/store";

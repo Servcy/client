@@ -12,9 +12,9 @@ import { CustomSelect, Tooltip } from "@servcy/ui";
 // icons
 import { ChevronDown, Dot, XCircle } from "lucide-react";
 // constants
-import { ROLE } from "constants/workspace";
-import { EUserProjectRoles } from "constants/project";
-import { PROJECT_MEMBER_LEAVE } from "constants/event-tracker";
+import { ROLE } from "@constants/workspace";
+import { EUserProjectRoles } from "@constants/project";
+import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker";
 
 type Props = {
   userId: string;

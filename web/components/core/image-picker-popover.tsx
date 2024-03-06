@@ -16,7 +16,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // components
 import { Button, Input, Loader } from "@servcy/ui";
 // constants
-import { MAX_FILE_SIZE } from "constants/common";
+import { MAX_FILE_SIZE } from "@constants/common";
 
 const tabOptions = [
   {

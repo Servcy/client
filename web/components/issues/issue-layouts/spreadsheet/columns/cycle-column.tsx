@@ -8,7 +8,7 @@ import { CycleDropdown } from "components/dropdowns";
 // types
 import { TIssue } from "@servcy/types";
 // constants
-import { EIssuesStoreType } from "constants/issue";
+import { EIssuesStoreType } from "@constants/issue";
 
 type Props = {
   issue: TIssue;

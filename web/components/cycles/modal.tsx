@@ -11,7 +11,7 @@ import { CycleForm } from "components/cycles";
 // types
 import type { CycleDateCheckData, ICycle, TCycleView } from "@servcy/types";
 // constants
-import { CYCLE_CREATED, CYCLE_UPDATED } from "constants/event-tracker";
+import { CYCLE_CREATED, CYCLE_UPDATED } from "@constants/event-tracker";
 
 type CycleModalProps = {
   isOpen: boolean;

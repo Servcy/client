@@ -14,7 +14,7 @@ import { copyUrlToClipboard } from "@helpers/string.helper";
 import { orderJoinedProjects } from "@helpers/project.helper";
 import { cn } from "@helpers/common.helper";
 // constants
-import { EUserWorkspaceRoles } from "constants/workspace";
+import { EUserWorkspaceRoles } from "@constants/workspace";
 import { IProject } from "@servcy/types";
 
 export const ProjectSidebarList: FC = observer(() => {

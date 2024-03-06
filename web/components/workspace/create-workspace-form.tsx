@@ -12,8 +12,8 @@ import { Button, CustomSelect, Input } from "@servcy/ui";
 // types
 import { IWorkspace } from "@servcy/types";
 // constants
-import { ORGANIZATION_SIZE, RESTRICTED_URLS } from "constants/workspace";
-import { WORKSPACE_CREATED } from "constants/event-tracker";
+import { ORGANIZATION_SIZE, RESTRICTED_URLS } from "@constants/workspace";
+import { WORKSPACE_CREATED } from "@constants/event-tracker";
 
 type Props = {
   onSubmit?: (res: IWorkspace) => Promise<void>;

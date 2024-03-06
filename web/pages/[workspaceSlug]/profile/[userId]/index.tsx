@@ -20,8 +20,8 @@ import {
 import { IUserStateDistribution, TStateGroups } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // constants
-import { USER_PROFILE_DATA } from "constants/fetch-keys";
-import { GROUP_CHOICES } from "constants/project";
+import { USER_PROFILE_DATA } from "@constants/fetch-keys";
+import { GROUP_CHOICES } from "@constants/project";
 
 // services
 const userService = new UserService();

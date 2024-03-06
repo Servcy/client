@@ -13,7 +13,7 @@ import {
 } from "components/account";
 import Link from "next/link";
 // constants
-import { NAVIGATE_TO_SIGNIN } from "constants/event-tracker";
+import { NAVIGATE_TO_SIGNIN } from "@constants/event-tracker";
 
 export enum ESignUpSteps {
   EMAIL = "EMAIL",
