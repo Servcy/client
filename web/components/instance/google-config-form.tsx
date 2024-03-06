@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Copy } from "lucide-react";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import { IFormattedInstanceConfiguration } from "@servcy/types";

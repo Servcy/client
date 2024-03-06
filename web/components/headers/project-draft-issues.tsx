@@ -7,7 +7,7 @@ import { useIssues, useLabel, useMember, useProject, useProjectState } from "@ho
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
-// ui
+
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";

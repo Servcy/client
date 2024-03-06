@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useProject } from "@hooks/store";
 // icons
 import { AlertTriangle } from "lucide-react";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import type { TIssue } from "@servcy/types";

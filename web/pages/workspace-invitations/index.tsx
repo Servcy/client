@@ -9,7 +9,7 @@ import { useUser } from "@hooks/store";
 import { WorkspaceService } from "@services/workspace.service";
 // layouts
 import DefaultLayout from "@layouts/default-layout";
-// ui
+
 import { Spinner } from "@servcy/ui";
 // icons
 import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space";

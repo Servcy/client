@@ -12,7 +12,7 @@ import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { ApiTokenListItem, CreateApiTokenModal } from "@components/api-token";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Button } from "@servcy/ui";
 import { APITokenSettingsLoader } from "@components/ui";
 // services

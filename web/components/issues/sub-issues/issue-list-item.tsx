@@ -3,7 +3,7 @@ import { ChevronDown, ChevronRight, X, Pencil, Trash, Link as LinkIcon, Loader }
 
 import { IssueList } from "./issues-list";
 import { IssueProperty } from "./properties";
-// ui
+
 import { ControlLink, CustomMenu, Tooltip } from "@servcy/ui";
 
 import { TIssue } from "@servcy/types";

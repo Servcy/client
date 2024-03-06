@@ -2,7 +2,7 @@ import Image from "next/image";
 import { observer } from "mobx-react-lite";
 
 import { useApplication, useEventTracker, useUser } from "@hooks/store";
-// ui
+
 import { Button } from "@servcy/ui";
 // assets
 import ProjectEmptyStateImage from "public/empty-state/dashboard/project.svg";

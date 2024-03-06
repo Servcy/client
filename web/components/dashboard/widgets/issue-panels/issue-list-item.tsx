@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import isToday from "date-fns/isToday";
 
 import { useIssueDetail, useMember, useProject } from "@hooks/store";
-// ui
+
 import { Avatar, AvatarGroup, ControlLink, PriorityIcon } from "@servcy/ui";
 // helpers
 import { findTotalDaysInRange, renderFormattedDate } from "@helpers/date-time.helper";

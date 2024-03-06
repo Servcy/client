@@ -13,7 +13,7 @@ import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 import { SingleIntegrationCard } from "@components/integration";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { PageHead } from "@components/core";
-// ui
+
 import { IntegrationAndImportExportBanner, IntegrationsSettingsLoader } from "@components/ui";
 
 import { NextPageWithLayout } from "@lib/types";

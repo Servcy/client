@@ -7,7 +7,7 @@ import { useLabel } from "@hooks/store";
 // icons
 import { AlertTriangle } from "lucide-react";
 import toast from "react-hot-toast";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import type { IIssueLabel } from "@servcy/types";

@@ -1,5 +1,5 @@
 import React from "react";
-// ui
+
 import { Tooltip } from "../tooltip";
 
 import { TAvatarSize, getSizeInfo, isAValidNumber } from "./avatar";

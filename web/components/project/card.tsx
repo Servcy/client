@@ -8,7 +8,7 @@ import { useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { DeleteProjectModal, JoinProjectModal } from "@components/project";
-// ui
+
 import { Avatar, AvatarGroup, Button, Tooltip } from "@servcy/ui";
 // helpers
 import { copyTextToClipboard } from "@helpers/string.helper";

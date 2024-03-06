@@ -4,7 +4,7 @@ import { Command } from "cmdk";
 import { Check } from "lucide-react";
 // mobx store
 import { useIssues } from "@hooks/store";
-// ui
+
 import { PriorityIcon } from "@servcy/ui";
 
 import { TIssue, TIssuePriorities } from "@servcy/types";

@@ -1,4 +1,4 @@
-// ui
+
 import { CustomMenu } from "@servcy/ui";
 // icons
 import { Trash2 } from "lucide-react";
@@ -26,12 +26,12 @@ export const SingleImport: React.FC<Props> = ({ service, refreshing, handleDelet
         </span>
         <span
           className={`rounded px-2 py-0.5 text-xs capitalize ${service.status === "completed"
-              ? "bg-green-500/20 text-green-500"
-              : service.status === "processing"
-                ? "bg-yellow-500/20 text-yellow-500"
-                : service.status === "failed"
-                  ? "bg-red-500/20 text-red-500"
-                  : ""
+            ? "bg-green-500/20 text-green-500"
+            : service.status === "processing"
+              ? "bg-yellow-500/20 text-yellow-500"
+              : service.status === "failed"
+                ? "bg-red-500/20 text-red-500"
+                : ""
             }`}
         >
           {refreshing ? "Refreshing..." : service.status}

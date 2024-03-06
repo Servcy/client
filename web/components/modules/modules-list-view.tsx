@@ -7,7 +7,7 @@ import useLocalStorage from "@hooks/use-local-storage";
 
 import { ModuleCardItem, ModuleListItem, ModulePeekOverview, ModulesListGanttChartView } from "@components/modules";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
 // constants
 import { EUserProjectRoles } from "@constants/project";
@@ -68,8 +68,8 @@ export const ModulesListView: React.FC = observer(() => {
               <div className="flex h-full w-full justify-between">
                 <div
                   className={`grid h-full w-full grid-cols-1 gap-6 overflow-y-auto p-8 ${peekModule
-                      ? "lg:grid-cols-1 xl:grid-cols-2 3xl:grid-cols-3"
-                      : "lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4"
+                    ? "lg:grid-cols-1 xl:grid-cols-2 3xl:grid-cols-3"
+                    : "lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4"
                     } auto-rows-max transition-all vertical-scrollbar scrollbar-lg`}
                 >
                   {projectModuleIds.map((moduleId) => (

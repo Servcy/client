@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 
 import { useEventTracker, useProjectState } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, CustomSelect, Input, Tooltip } from "@servcy/ui";
 
 import type { IState } from "@servcy/types";

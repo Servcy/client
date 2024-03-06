@@ -7,7 +7,7 @@ import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 
 import { PagesListView } from "@components/pages/pages-list";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Loader } from "@servcy/ui";
 // helpers
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";

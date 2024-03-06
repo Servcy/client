@@ -1,7 +1,7 @@
 import { FC, useEffect, Fragment } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import type { TIssueLinkEditableFields } from "@servcy/types";

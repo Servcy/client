@@ -2,7 +2,7 @@ import { FC, Fragment, Dispatch, SetStateAction, useState } from "react";
 import { AlertTriangle } from "lucide-react";
 // headless ui
 import { Dialog, Transition } from "@headlessui/react";
-// ui
+
 import { Button } from "@servcy/ui";
 // helper
 import { getFileName } from "@helpers/attachment.helper";

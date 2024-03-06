@@ -3,7 +3,7 @@ import { mutate } from "swr";
 
 
 import { AnalyticsGraph, AnalyticsTable } from "@components/analytics";
-// ui
+
 import { Button, Loader } from "@servcy/ui";
 // helpers
 import { convertResponseToBarGraphData } from "@helpers/analytics.helper";

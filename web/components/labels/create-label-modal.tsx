@@ -8,7 +8,7 @@ import { ChevronDown } from "lucide-react";
 
 import { useLabel } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import type { IIssueLabel, IState } from "@servcy/types";

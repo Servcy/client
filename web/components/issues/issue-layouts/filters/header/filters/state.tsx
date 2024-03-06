@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 import { FilterHeader, FilterOption } from "@components/issues";
-// ui
+
 import { Loader, StateGroupIcon } from "@servcy/ui";
 
 import { IState } from "@servcy/types";

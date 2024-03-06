@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 // constants
 import { allTimeIn30MinutesInterval12HoursFormat } from "@constants/notification";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, CustomSelect } from "@servcy/ui";
 
 import type { IUserNotification } from "@servcy/types";
@@ -214,8 +214,8 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
                                   setValue("period", "AM");
                                 }}
                                 className={`flex h-full w-1/2 cursor-pointer items-center justify-center text-center ${watch("period") === "AM"
-                                    ? "bg-custom-primary-100/90 text-custom-primary-0"
-                                    : "bg-custom-background-80"
+                                  ? "bg-custom-primary-100/90 text-custom-primary-0"
+                                  : "bg-custom-background-80"
                                   }`}
                               >
                                 AM
@@ -225,8 +225,8 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
                                   setValue("period", "PM");
                                 }}
                                 className={`flex h-full w-1/2 cursor-pointer items-center justify-center text-center ${watch("period") === "PM"
-                                    ? "bg-custom-primary-100/90 text-custom-primary-0"
-                                    : "bg-custom-background-80"
+                                  ? "bg-custom-primary-100/90 text-custom-primary-0"
+                                  : "bg-custom-background-80"
                                   }`}
                               >
                                 PM

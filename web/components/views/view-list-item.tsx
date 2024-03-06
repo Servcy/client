@@ -8,7 +8,7 @@ import { useProjectView, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@components/views";
-// ui
+
 import { CustomMenu } from "@servcy/ui";
 // helpers
 import { calculateTotalFilters } from "@helpers/filter.helper";

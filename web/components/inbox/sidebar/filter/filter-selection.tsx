@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 // mobx store
 import { useInboxIssues } from "@hooks/store";
-// ui
+
 import { MultiLevelDropdown } from "@components/ui";
 // icons
 import { PriorityIcon } from "@servcy/ui";

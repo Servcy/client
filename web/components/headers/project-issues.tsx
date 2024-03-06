@@ -17,7 +17,7 @@ import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelect
 import { ProjectAnalyticsModal } from "@components/analytics";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
-// ui
+
 import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";

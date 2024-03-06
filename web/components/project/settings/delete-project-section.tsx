@@ -1,6 +1,6 @@
 import React from "react";
 
-// ui
+
 import { Disclosure, Transition } from "@headlessui/react";
 import { Button, Loader } from "@servcy/ui";
 // icons

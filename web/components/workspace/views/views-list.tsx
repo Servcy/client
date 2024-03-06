@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { useGlobalView } from "@hooks/store";
 
 import { GlobalViewListItem } from "@components/workspace";
-// ui
+
 import { ViewListLoader } from "@components/ui";
 
 type Props = {

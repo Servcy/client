@@ -18,7 +18,7 @@ import { Check, ChevronDown, Plus, XCircle } from "lucide-react";
 import { WorkspaceService } from "@services/workspace.service";
 import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import { OnboardingStepIndicator } from "@components/onboarding/step-indicator";
@@ -185,21 +185,19 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                   className="flex h-11 w-full items-center justify-between gap-1 rounded-md px-2.5 py-2 text-xs duration-300"
                 >
                   <span
-                    className={`text-xs ${
-                      !getValues(`emails.${index}.role_active`)
+                    className={`text-xs ${!getValues(`emails.${index}.role_active`)
                         ? "text-onboarding-text-400"
                         : "text-onboarding-text-100"
-                    } sm:text-sm`}
+                      } sm:text-sm`}
                   >
                     {ROLE[value]}
                   </span>
 
                   <ChevronDown
-                    className={`h-4 w-4 ${
-                      !getValues(`emails.${index}.role_active`)
+                    className={`h-4 w-4 ${!getValues(`emails.${index}.role_active`)
                         ? "stroke-onboarding-text-400"
                         : "stroke-onboarding-text-100"
-                    }`}
+                      }`}
                   />
                 </Listbox.Button>
 
@@ -223,8 +221,7 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                           key={key}
                           value={parseInt(key)}
                           className={({ active, selected }) =>
-                            `cursor-pointer select-none truncate rounded px-1 py-1.5 ${
-                              active || selected ? "bg-onboarding-background-400/40" : ""
+                            `cursor-pointer select-none truncate rounded px-1 py-1.5 ${active || selected ? "bg-onboarding-background-400/40" : ""
                             } ${selected ? "text-onboarding-text-100" : "text-custom-text-200"}`
                           }
                         >

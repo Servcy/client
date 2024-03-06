@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 import { useIssueDetail, useProject, useProjectState } from "@hooks/store";
-// ui icons
+icons
 import { DiceIcon, DoubleCircleIcon, UserGroupIcon, ContrastIcon, RelatedIcon } from "@servcy/ui";
 import {
   IssueLinkRoot,

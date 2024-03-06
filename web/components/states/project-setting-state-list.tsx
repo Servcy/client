@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { useEventTracker, useProjectState } from "@hooks/store";
 
 import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem } from "@components/states";
-// ui
+
 import { Loader } from "@servcy/ui";
 // icons
 import { Plus } from "lucide-react";

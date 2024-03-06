@@ -13,7 +13,7 @@ import {
   ProjectEmptyState,
   IssuePeekOverview,
 } from "@components/issues";
-// ui
+
 import { Spinner } from "@servcy/ui";
 
 import { useIssues } from "@hooks/store";

@@ -6,7 +6,7 @@ import { Popover, Transition } from "@headlessui/react";
 
 import { useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Input } from "@servcy/ui";
 
 import { TLabelOperations } from "./root";

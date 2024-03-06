@@ -13,7 +13,7 @@ import { ProfileSettingsLayout } from "@layouts/settings-layout";
 
 import { DeactivateAccountModal } from "@components/account";
 import { ImagePickerPopover, PageHead, UserImageUploadModal } from "@components/core";
-// ui
+
 import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servcy/ui";
 // icons
 import { ChevronDown, User2 } from "lucide-react";
@@ -57,7 +57,7 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
   // store hooks
   const { currentUser: myProfile, updateCurrentUser, currentUserLoader } = useUser();
   // custom hooks
-  const {} = useUserAuth({ user: myProfile, isLoading: currentUserLoader });
+  const { } = useUserAuth({ user: myProfile, isLoading: currentUserLoader });
   const { theme: themeStore } = useApplication();
 
   useEffect(() => {
@@ -299,9 +299,8 @@ const ProfileSettingsPage: NextPageWithLayout = observer(() => {
                           ref={ref}
                           hasError={Boolean(errors.email)}
                           placeholder="Enter your email"
-                          className={`w-full rounded-md cursor-not-allowed !bg-custom-background-80 ${
-                            errors.email ? "border-red-500" : ""
-                          }`}
+                          className={`w-full rounded-md cursor-not-allowed !bg-custom-background-80 ${errors.email ? "border-red-500" : ""
+                            }`}
                           disabled
                         />
                       )}

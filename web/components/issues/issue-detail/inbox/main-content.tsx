@@ -10,7 +10,7 @@ import { IssueDescriptionInput } from "../../description-input";
 import { IssueReaction } from "../reactions";
 import { IssueActivity } from "../issue-activity";
 import { InboxIssueStatus } from "../../../inbox/inbox-issue-status";
-// ui
+
 import { StateGroupIcon } from "@servcy/ui";
 
 type Props = {

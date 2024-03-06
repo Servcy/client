@@ -6,7 +6,7 @@ import { AlertTriangle } from "lucide-react";
 
 import { useEventTracker, useProject, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import type { IProject } from "@servcy/types";

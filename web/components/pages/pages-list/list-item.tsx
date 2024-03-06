@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { copyUrlToClipboard } from "@helpers/string.helper";
 import { renderFormattedTime, renderFormattedDate } from "@helpers/date-time.helper";
-// ui
+
 import { CustomMenu, Tooltip } from "@servcy/ui";
 
 import { CreateUpdatePageModal, DeletePageModal } from "@components/pages";

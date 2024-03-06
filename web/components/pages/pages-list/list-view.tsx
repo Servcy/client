@@ -7,7 +7,7 @@ import useLocalStorage from "@hooks/use-local-storage";
 
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { PagesListItem } from "./list-item";
-// ui
+
 import { Loader } from "@servcy/ui";
 // constants
 import { EUserProjectRoles } from "@constants/project";

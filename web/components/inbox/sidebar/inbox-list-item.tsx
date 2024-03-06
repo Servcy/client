@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { CalendarDays } from "lucide-react";
 
 import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store";
-// ui
+
 import { Tooltip, PriorityIcon } from "@servcy/ui";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";

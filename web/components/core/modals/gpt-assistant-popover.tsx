@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form"; // services
 import { AIService } from "@services/ai.service";
 import toast from "react-hot-toast";
 import { usePopper } from "react-popper";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import { RichReadOnlyEditorWithRef } from "@servcy/rich-text-editor";
@@ -242,9 +242,8 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
                 value={value}
                 onChange={onChange}
                 ref={ref}
-                placeholder={`${
-                  prompt && prompt !== "" ? "Tell AI what action to perform on this content..." : "Ask AI anything..."
-                }`}
+                placeholder={`${prompt && prompt !== "" ? "Tell AI what action to perform on this content..." : "Ask AI anything..."
+                  }`}
                 className="w-full"
               />
             )}

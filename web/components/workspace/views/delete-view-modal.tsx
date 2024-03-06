@@ -6,7 +6,7 @@ import { AlertTriangle } from "lucide-react";
 // store hooks
 import { useGlobalView, useEventTracker } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { IWorkspaceView } from "@servcy/types";

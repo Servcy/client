@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { AuthService } from "@services/auth.service";
 // layouts
 import DefaultLayout from "@layouts/default-layout";
-// ui
+
 import { Button } from "@servcy/ui";
 // services
 const authService = new AuthService();

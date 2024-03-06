@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { List, Plus } from "lucide-react";
 
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-// ui
+
 import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";

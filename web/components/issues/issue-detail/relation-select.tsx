@@ -7,7 +7,7 @@ import { useIssueDetail, useIssues, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { ExistingIssuesListModal } from "@components/core";
-// ui
+
 import { RelatedIcon, Tooltip } from "@servcy/ui";
 // helpers
 import { cn } from "@helpers/common.helper";

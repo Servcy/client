@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
 // headless ui
 import { Dialog, Transition } from "@headlessui/react";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import type { IProject } from "@servcy/types";

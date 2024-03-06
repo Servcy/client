@@ -16,7 +16,7 @@ import { AppLayout } from "@layouts/app-layout";
 
 import { GptAssistantPopover, PageHead } from "@components/core";
 import { PageDetailsHeader } from "@components/headers/page-details";
-// ui
+
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor";
 import { Spinner } from "@servcy/ui";
 // assets
@@ -280,10 +280,10 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
               pageArchiveConfig={
                 userCanArchive
                   ? {
-                      action: archived_at ? unArchivePage : archivePage,
-                      is_archived: archived_at ? true : false,
-                      archived_at: archived_at ? new Date(archived_at) : undefined,
-                    }
+                    action: archived_at ? unArchivePage : archivePage,
+                    is_archived: archived_at ? true : false,
+                    archived_at: archived_at ? new Date(archived_at) : undefined,
+                  }
                   : undefined
               }
             />
@@ -323,9 +323,9 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
                     pageArchiveConfig={
                       userCanArchive
                         ? {
-                            is_archived: archived_at ? true : false,
-                            action: archived_at ? unArchivePage : archivePage,
-                          }
+                          is_archived: archived_at ? true : false,
+                          action: archived_at ? unArchivePage : archivePage,
+                        }
                         : undefined
                     }
                     pageLockConfig={userCanLock ? { is_locked: false, action: lockPage } : undefined}

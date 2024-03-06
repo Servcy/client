@@ -8,7 +8,7 @@ import { useApplication, useWorkspace } from "@hooks/store";
 // services
 import { FileService } from "@services/file.service";
 import toast from "react-hot-toast";
-// ui
+
 import { Button } from "@servcy/ui";
 // icons
 import { UserCircle2 } from "lucide-react";
@@ -126,11 +126,10 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
                     <div className="flex items-center justify-center gap-3">
                       <div
                         {...getRootProps()}
-                        className={`relative grid h-80 w-80 cursor-pointer place-items-center rounded-lg p-12 text-center focus:outline-none focus:ring-2 focus:ring-custom-primary focus:ring-offset-2 ${
-                          (image === null && isDragActive) || !value
+                        className={`relative grid h-80 w-80 cursor-pointer place-items-center rounded-lg p-12 text-center focus:outline-none focus:ring-2 focus:ring-custom-primary focus:ring-offset-2 ${(image === null && isDragActive) || !value
                             ? "border-2 border-dashed border-custom-border-200 hover:bg-custom-background-90"
                             : ""
-                        }`}
+                          }`}
                       >
                         {image !== null || (value && value !== "") ? (
                           <>

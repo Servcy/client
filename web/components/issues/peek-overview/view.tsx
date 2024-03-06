@@ -19,7 +19,7 @@ import {
   ArchiveIssueModal,
 } from "@components/issues";
 import { IssueActivity } from "../issue-detail/issue-activity";
-// ui
+
 import { Spinner } from "@servcy/ui";
 
 interface IIssueView {

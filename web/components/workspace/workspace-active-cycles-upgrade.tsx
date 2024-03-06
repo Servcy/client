@@ -3,7 +3,7 @@ import Image from "next/image";
 import { observer } from "mobx-react";
 
 import { useUser } from "@hooks/store";
-// ui
+
 import { getButtonStyling } from "@servcy/ui";
 // icons
 import { Crown } from "lucide-react";

@@ -1,7 +1,7 @@
 import { useEffect, useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
-// ui
+
 import { Button } from "@servcy/ui";
 import toast from "react-hot-toast";
 

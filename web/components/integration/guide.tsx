@@ -13,7 +13,7 @@ import { IntegrationService } from "@services/integrations";
 
 import { DeleteImportModal, GithubImporterRoot, JiraImporterRoot, SingleImport } from "@components/integration";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Button } from "@servcy/ui";
 import { ImportExportSettingsLoader } from "@components/ui";
 // icons
@@ -42,7 +42,7 @@ const IntegrationGuide = observer(() => {
   // store hooks
   const { currentUser, currentUserLoader } = useUser();
   // custom hooks
-  const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
+  const { } = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
 
   const { data: importerServices } = useSWR(
     workspaceSlug ? IMPORTER_SERVICES_LIST(workspaceSlug as string) : null,

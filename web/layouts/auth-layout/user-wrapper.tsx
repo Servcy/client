@@ -5,7 +5,7 @@ import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
 
 import { useUser, useWorkspace } from "@hooks/store";
-// ui
+
 import { Spinner } from "@servcy/ui";
 
 export interface IUserAuthWrapper {

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { AlertTriangle } from "lucide-react";
 
 import { useUser } from "@hooks/store";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { IUserLite } from "@servcy/types";

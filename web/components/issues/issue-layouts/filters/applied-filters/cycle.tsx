@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { X } from "lucide-react";
 
 import { useCycle } from "@hooks/store";
-// ui
+
 import { CycleGroupIcon } from "@servcy/ui";
 
 import { TCycleGroups } from "@servcy/types";

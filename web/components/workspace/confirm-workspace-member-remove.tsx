@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
 
 import { useUser } from "@hooks/store";
-// ui
+
 import { Button } from "@servcy/ui";
 
 type Props = {

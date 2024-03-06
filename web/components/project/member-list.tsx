@@ -5,7 +5,7 @@ import { Search } from "lucide-react";
 import { useEventTracker, useMember } from "@hooks/store";
 
 import { ProjectMemberListItem, SendProjectInvitationModal } from "@components/project";
-// ui
+
 import { Button } from "@servcy/ui";
 import { MembersSettingsLoader } from "@components/ui";
 

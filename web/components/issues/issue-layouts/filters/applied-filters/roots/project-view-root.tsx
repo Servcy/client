@@ -5,7 +5,7 @@ import isEqual from "lodash/isEqual";
 import { useIssues, useLabel, useProjectState, useProjectView } from "@hooks/store";
 
 import { AppliedFiltersList } from "@components/issues";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { IIssueFilterOptions } from "@servcy/types";

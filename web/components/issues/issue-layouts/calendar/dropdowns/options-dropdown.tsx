@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { usePopper } from "react-popper";
 
 import { useCalendarView } from "@hooks/store";
-// ui
+
 import { ToggleSwitch } from "@servcy/ui";
 // icons
 import { Check, ChevronUp } from "lucide-react";

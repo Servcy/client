@@ -9,7 +9,7 @@ import { UserGreetingsView } from "@components/user";
 import { IssuePeekOverview } from "@components/issues";
 import { DashboardWidgets } from "@components/dashboard";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Spinner } from "@servcy/ui";
 // constants
 import { EUserWorkspaceRoles } from "@constants/workspace";

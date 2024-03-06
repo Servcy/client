@@ -9,7 +9,7 @@ import { Dialog, Transition } from "@headlessui/react";
 // services
 import { IntegrationService } from "@services/integrations/integration.service";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 // icons
 import { AlertTriangle } from "lucide-react";

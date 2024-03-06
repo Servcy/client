@@ -16,7 +16,7 @@ import { PageHead } from "@components/core";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { ProjectSettingHeader } from "@components/headers";
 import { IntegrationCard } from "@components/project";
-// ui
+
 import { IntegrationsSettingsLoader } from "@components/ui";
 
 import { IProject } from "@servcy/types";

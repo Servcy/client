@@ -8,7 +8,7 @@ import { UserService } from "@services/user.service";
 import toast from "react-hot-toast";
 import useTimer from "@hooks/use-timer";
 import { useEventTracker } from "@hooks/store";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 // helpers
 import { checkEmailValidity } from "@helpers/string.helper";
@@ -190,8 +190,8 @@ export const SignUpUniqueCodeForm: React.FC<Props> = (props) => {
               type="button"
               onClick={handleRequestNewCode}
               className={`text-xs ${isRequestNewCodeDisabled
-                  ? "text-onboarding-text-300"
-                  : "text-onboarding-text-200 hover:text-custom-primary-100"
+                ? "text-onboarding-text-300"
+                : "text-onboarding-text-200 hover:text-custom-primary-100"
                 }`}
               disabled={isRequestNewCodeDisabled}
             >

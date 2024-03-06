@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import { ComicBoxButton } from "./comic-box-button";
-// ui
+
 import { Button, getButtonStyling } from "@servcy/ui";
 // helper
 import { cn } from "@helpers/common.helper";

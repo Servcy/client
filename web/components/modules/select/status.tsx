@@ -2,7 +2,7 @@ import React from "react";
 
 // react hook form
 import { Controller, FieldError, Control } from "react-hook-form";
-// ui
+
 import { CustomSelect, DoubleCircleIcon, ModuleStatusIcon } from "@servcy/ui";
 
 import type { IModule } from "@servcy/types";

@@ -8,7 +8,7 @@ import { useEstimate } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { IEstimate } from "@servcy/types";
-// ui
+
 import { Button } from "@servcy/ui";
 
 type Props = {

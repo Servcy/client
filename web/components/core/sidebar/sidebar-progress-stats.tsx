@@ -10,7 +10,7 @@ import emptyLabel from "public/empty-state/empty_label.svg";
 import emptyMembers from "public/empty-state/empty_members.svg";
 
 import { SingleProgressStats } from "@components/core";
-// ui
+
 import { Avatar, StateGroupIcon } from "@servcy/ui";
 
 import {
@@ -79,19 +79,16 @@ export const SidebarProgressStats: React.FC<Props> = ({
     >
       <Tab.List
         as="div"
-        className={`flex w-full items-center justify-between gap-2 rounded-md ${
-          noBackground ? "" : "bg-custom-background-90"
-        } p-0.5
+        className={`flex w-full items-center justify-between gap-2 rounded-md ${noBackground ? "" : "bg-custom-background-90"
+          } p-0.5
         ${module ? "text-xs" : "text-sm"}`}
       >
         <Tab
           className={({ selected }) =>
-            `w-full  ${
-              roundedTab ? "rounded-3xl border border-custom-border-200" : "rounded"
-            } px-3 py-1 text-custom-text-100 ${
-              selected
-                ? "bg-custom-background-100 text-custom-text-300 shadow-custom-shadow-2xs"
-                : "text-custom-text-400 hover:text-custom-text-300"
+            `w-full  ${roundedTab ? "rounded-3xl border border-custom-border-200" : "rounded"
+            } px-3 py-1 text-custom-text-100 ${selected
+              ? "bg-custom-background-100 text-custom-text-300 shadow-custom-shadow-2xs"
+              : "text-custom-text-400 hover:text-custom-text-300"
             }`
           }
         >
@@ -99,12 +96,10 @@ export const SidebarProgressStats: React.FC<Props> = ({
         </Tab>
         <Tab
           className={({ selected }) =>
-            `w-full ${
-              roundedTab ? "rounded-3xl border border-custom-border-200" : "rounded"
-            } px-3 py-1 text-custom-text-100 ${
-              selected
-                ? "bg-custom-background-100 text-custom-text-300 shadow-custom-shadow-2xs"
-                : "text-custom-text-400 hover:text-custom-text-300"
+            `w-full ${roundedTab ? "rounded-3xl border border-custom-border-200" : "rounded"
+            } px-3 py-1 text-custom-text-100 ${selected
+              ? "bg-custom-background-100 text-custom-text-300 shadow-custom-shadow-2xs"
+              : "text-custom-text-400 hover:text-custom-text-300"
             }`
           }
         >
@@ -112,12 +107,10 @@ export const SidebarProgressStats: React.FC<Props> = ({
         </Tab>
         <Tab
           className={({ selected }) =>
-            `w-full ${
-              roundedTab ? "rounded-3xl border border-custom-border-200" : "rounded"
-            } px-3 py-1  text-custom-text-100 ${
-              selected
-                ? "bg-custom-background-100 text-custom-text-300 shadow-custom-shadow-2xs"
-                : "text-custom-text-400 hover:text-custom-text-300"
+            `w-full ${roundedTab ? "rounded-3xl border border-custom-border-200" : "rounded"
+            } px-3 py-1  text-custom-text-100 ${selected
+              ? "bg-custom-background-100 text-custom-text-300 shadow-custom-shadow-2xs"
+              : "text-custom-text-400 hover:text-custom-text-300"
             }`
           }
         >

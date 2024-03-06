@@ -7,7 +7,7 @@ import useSignInRedirection from "@hooks/use-sign-in-redirection";
 
 import { SignInRoot } from "@components/account";
 import { PageHead } from "@components/core";
-// ui
+
 import { Spinner } from "@servcy/ui";
 // images
 import ServcyLogo from "public/logo.png";

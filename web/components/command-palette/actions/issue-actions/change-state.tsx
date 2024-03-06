@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Command } from "cmdk";
 
 import { useProjectState, useIssues } from "@hooks/store";
-// ui
+
 import { Spinner, StateGroupIcon } from "@servcy/ui";
 // icons
 import { Check } from "lucide-react";

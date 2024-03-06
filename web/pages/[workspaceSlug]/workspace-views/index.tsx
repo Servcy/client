@@ -6,7 +6,7 @@ import { AppLayout } from "@layouts/app-layout";
 import { PageHead } from "@components/core";
 import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspace";
 import { GlobalIssuesHeader } from "@components/headers";
-// ui
+
 import { Input } from "@servcy/ui";
 // icons
 import { Search } from "lucide-react";

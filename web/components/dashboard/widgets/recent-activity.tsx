@@ -7,7 +7,7 @@ import { useDashboard, useUser } from "@hooks/store";
 
 import { ActivityIcon, ActivityMessage, IssueLink } from "@components/core";
 import { RecentActivityEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
-// ui
+
 import { Avatar } from "@servcy/ui";
 // helpers
 import { calculateTimeAgo } from "@helpers/date-time.helper";

@@ -7,7 +7,7 @@ import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // component
 import { WorkspaceSettingHeader } from "@components/headers";
 import { PageHead } from "@components/core";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { NextPageWithLayout } from "@lib/types";

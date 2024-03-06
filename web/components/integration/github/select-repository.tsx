@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWRInfinite from "swr/infinite";
 // services
 import { ProjectService } from "@services/project";
-// ui
+
 import { CustomSearchSelect } from "@servcy/ui";
 // helpers
 import { truncateText } from "@helpers/string.helper";

@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 
 import { useCycle, useIssues, useMember, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { SingleProgressStats } from "@components/core";
 import {
   AvatarGroup,
@@ -318,7 +318,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                     <div className="flex items-center gap-1.5 flex-shrink-0">
                       <StateDropdown
                         value={issue.state_id ?? undefined}
-                        onChange={() => {}}
+                        onChange={() => { }}
                         projectId={projectId?.toString() ?? ""}
                         disabled={true}
                         buttonVariant="background-with-text"

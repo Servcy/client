@@ -21,7 +21,7 @@ import {
   ProjectSettingLabelItem,
 } from "@components/labels";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Button, Loader } from "@servcy/ui";
 
 import { IIssueLabel } from "@servcy/types";

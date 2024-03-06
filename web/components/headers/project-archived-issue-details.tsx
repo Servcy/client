@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useProject } from "@hooks/store";
-// ui
+
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 
 import { TIssue } from "@servcy/types";
@@ -31,11 +31,11 @@ export const ProjectArchivedIssueDetailsHeader: FC = observer(() => {
     workspaceSlug && projectId && archivedIssueId ? ISSUE_DETAILS(archivedIssueId as string) : null,
     workspaceSlug && projectId && archivedIssueId
       ? () =>
-          issueArchiveService.retrieveArchivedIssue(
-            workspaceSlug as string,
-            projectId as string,
-            archivedIssueId as string
-          )
+        issueArchiveService.retrieveArchivedIssue(
+          workspaceSlug as string,
+          projectId as string,
+          archivedIssueId as string
+        )
       : null
   );
 

@@ -2,7 +2,7 @@ import { Command } from "cmdk";
 import { ContrastIcon, FileText } from "lucide-react";
 
 import { useApplication, useEventTracker } from "@hooks/store";
-// ui
+
 import { DiceIcon, PhotoFilterIcon } from "@servcy/ui";
 
 type Props = {

@@ -7,7 +7,7 @@ import { useUser } from "@hooks/store";
 
 import { ProjectSettingsSidebar } from "./sidebar";
 import { NotAuthorizedView } from "@components/auth-screens";
-// ui
+
 import { Button, LayersIcon } from "@servcy/ui";
 // constants
 import { EUserProjectRoles } from "@constants/project";

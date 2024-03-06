@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import { useEventTracker, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Spinner } from "@servcy/ui";
 
 import { TIssue } from "@servcy/types";

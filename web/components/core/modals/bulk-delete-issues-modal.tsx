@@ -7,7 +7,7 @@ import { Combobox, Dialog, Transition } from "@headlessui/react";
 // services
 import { IssueService } from "@services/issue";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, LayersIcon } from "@servcy/ui";
 // icons
 import { Search } from "lucide-react";
@@ -39,7 +39,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  
+
   const { getProjectById } = useProject();
   const {
     issues: { removeBulkIssues },
@@ -112,10 +112,10 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
     query === ""
       ? Object.values(issues ?? {})
       : Object.values(issues ?? {})?.filter(
-          (issue) =>
-            issue.name.toLowerCase().includes(query.toLowerCase()) ||
-            `${projectDetails?.identifier}-${issue.sequence_id}`.toLowerCase().includes(query.toLowerCase())
-        ) ?? [];
+        (issue) =>
+          issue.name.toLowerCase().includes(query.toLowerCase()) ||
+          `${projectDetails?.identifier}-${issue.sequence_id}`.toLowerCase().includes(query.toLowerCase())
+      ) ?? [];
 
   return (
     <Transition.Root show={isOpen} as={React.Fragment} afterLeave={() => setQuery("")} appear>

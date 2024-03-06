@@ -10,7 +10,7 @@ import { AppLayout } from "@layouts/app-layout";
 import { IssueDetailRoot } from "@components/issues";
 import { ProjectArchivedIssueDetailsHeader } from "@components/headers";
 import { PageHead } from "@components/core";
-// ui
+
 import { ArchiveIcon, Button, Loader } from "@servcy/ui";
 // icons
 import { RotateCcw } from "lucide-react";
@@ -70,8 +70,7 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
           title: "Success",
           message:
             issue &&
-            `${getProjectById(issue.project_id)?.identifier}-${
-              issue?.sequence_id
+            `${getProjectById(issue.project_id)?.identifier}-${issue?.sequence_id
             } is restored successfully under the project ${getProjectById(issue.project_id)?.name}`,
         });
         router.push(`/${workspaceSlug}/projects/${projectId}/issues/${archivedIssueId}`);

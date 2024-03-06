@@ -6,7 +6,7 @@ import { AlertTriangle } from "lucide-react";
 
 import { useEventTracker, usePage } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { useProjectPages } from "@hooks/store/use-project-page";

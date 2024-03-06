@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useDashboard, useMember, useUser } from "@hooks/store";
 
 import { RecentCollaboratorsEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
-// ui
+
 import { Avatar } from "@servcy/ui";
 
 import { TRecentCollaboratorsWidgetResponse } from "@servcy/types";

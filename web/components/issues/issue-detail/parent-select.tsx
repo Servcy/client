@@ -6,7 +6,7 @@ import { Pencil, X } from "lucide-react";
 import { useIssueDetail, useProject } from "@hooks/store";
 
 import { ParentIssuesListModal } from "@components/issues";
-// ui
+
 import { Tooltip } from "@servcy/ui";
 // helpers
 import { cn } from "@helpers/common.helper";

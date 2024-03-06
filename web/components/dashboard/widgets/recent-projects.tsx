@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 import { useApplication, useEventTracker, useDashboard, useProject, useUser } from "@hooks/store";
 
 import { WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
-// ui
+
 import { Avatar, AvatarGroup } from "@servcy/ui";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";

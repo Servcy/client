@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import { useInbox, useProject } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// ui
+
 import { InboxLayoutLoader } from "@components/ui";
 
 import { ProjectInboxHeader } from "@components/headers";

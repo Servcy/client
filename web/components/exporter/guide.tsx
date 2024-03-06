@@ -14,7 +14,7 @@ import { IntegrationService } from "@services/integrations";
 
 import { Exporter, SingleExport } from "@components/exporter";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Button } from "@servcy/ui";
 import { ImportExportSettingsLoader } from "@components/ui";
 // icons
@@ -116,8 +116,8 @@ const IntegrationGuide = observer(() => {
                   disabled={!exporterServices?.prev_page_results}
                   onClick={() => exporterServices?.prev_page_results && setCursor(exporterServices?.prev_cursor)}
                   className={`flex items-center rounded border border-custom-primary-100 px-1 text-custom-primary-100 ${exporterServices?.prev_page_results
-                      ? "cursor-pointer hover:bg-custom-primary-100 hover:text-white"
-                      : "cursor-not-allowed opacity-75"
+                    ? "cursor-pointer hover:bg-custom-primary-100 hover:text-white"
+                    : "cursor-not-allowed opacity-75"
                     }`}
                 >
                   <MoveLeft className="h-4 w-4" />
@@ -127,8 +127,8 @@ const IntegrationGuide = observer(() => {
                   disabled={!exporterServices?.next_page_results}
                   onClick={() => exporterServices?.next_page_results && setCursor(exporterServices?.next_cursor)}
                   className={`flex items-center rounded border border-custom-primary-100 px-1 text-custom-primary-100 ${exporterServices?.next_page_results
-                      ? "cursor-pointer hover:bg-custom-primary-100 hover:text-white"
-                      : "cursor-not-allowed opacity-75"
+                    ? "cursor-pointer hover:bg-custom-primary-100 hover:text-white"
+                    : "cursor-not-allowed opacity-75"
                     }`}
                 >
                   <div className="pl-1">Next</div>

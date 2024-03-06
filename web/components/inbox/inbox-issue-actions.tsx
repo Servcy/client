@@ -13,7 +13,7 @@ import {
   DeleteInboxIssueModal,
   SelectDuplicateInboxIssueModal,
 } from "@components/inbox";
-// ui
+
 import { Button } from "@servcy/ui";
 // icons
 import { CheckCircle2, ChevronDown, ChevronUp, Clock, FileStack, Trash2, XCircle } from "lucide-react";

@@ -11,7 +11,7 @@ import {
   WidgetLoader,
   WidgetProps,
 } from "@components/dashboard/widgets";
-// ui
+
 import { PriorityIcon } from "@servcy/ui";
 // helpers
 import { getCustomDates } from "@helpers/dashboard.helper";

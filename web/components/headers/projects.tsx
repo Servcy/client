@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { Search, Plus, Briefcase } from "lucide-react";
 
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-// ui
+
 import { Breadcrumbs, Button } from "@servcy/ui";
 // constants
 import { EUserWorkspaceRoles } from "@constants/workspace";

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useRouter } from "next/router";
-// ui
+
 import { Breadcrumbs, CustomMenu } from "@servcy/ui";
 import { Settings } from "lucide-react";
 

@@ -7,7 +7,7 @@ import { Popover, Transition } from "@headlessui/react";
 
 import { useLabel } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import { IIssueLabel } from "@servcy/types";

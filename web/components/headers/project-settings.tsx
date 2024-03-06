@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// ui
+
 import { Breadcrumbs, CustomMenu } from "@servcy/ui";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";

@@ -1,5 +1,5 @@
 import { DragDropContext, Draggable, DropResult, Droppable } from "@hello-pangea/dnd";
-// ui
+
 import { Loader } from "@servcy/ui";
 
 import { CyclesSidebarBlock } from "./block";

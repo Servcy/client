@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useCycle, useIssues } from "@hooks/store";
-// ui
+
 import { CycleIssueQuickActions } from "@components/issues";
 
 import { TIssue } from "@servcy/types";
@@ -12,7 +12,7 @@ import { EIssueActions } from "../../types";
 import { BaseKanBanRoot } from "../base-kanban-root";
 import { EIssuesStoreType } from "@constants/issue";
 
-export interface ICycleKanBanLayout {}
+export interface ICycleKanBanLayout { }
 
 export const CycleKanBanLayout: React.FC = observer(() => {
   const router = useRouter();

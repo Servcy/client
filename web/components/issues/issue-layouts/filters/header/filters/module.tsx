@@ -4,7 +4,7 @@ import sortBy from "lodash/sortBy";
 
 import { FilterHeader, FilterOption } from "@components/issues";
 import { useApplication, useModule } from "@hooks/store";
-// ui
+
 import { Loader, DiceIcon } from "@servcy/ui";
 
 type Props = {

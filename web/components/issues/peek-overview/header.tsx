@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
 import { MoveRight, MoveDiagonal, Link2, Trash2, RotateCcw } from "lucide-react";
-// ui
+
 import { ArchiveIcon, CenterPanelIcon, CustomSelect, FullScreenPanelIcon, SidePanelIcon, Tooltip } from "@servcy/ui";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
@@ -131,8 +131,8 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
                 <CustomSelect.Option key={mode.key} value={mode.key}>
                   <div
                     className={`flex items-center gap-1.5 ${currentMode.key === mode.key
-                        ? "text-custom-text-200"
-                        : "text-custom-text-400 hover:text-custom-text-200"
+                      ? "text-custom-text-200"
+                      : "text-custom-text-400 hover:text-custom-text-200"
                       }`}
                   >
                     <mode.icon className="-my-1 h-4 w-4 flex-shrink-0" />

@@ -10,7 +10,7 @@ import { usePopper } from "react-popper";
 
 import { useApplication, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Avatar, Loader } from "@servcy/ui";
 
 import { IWorkspace } from "@servcy/types";

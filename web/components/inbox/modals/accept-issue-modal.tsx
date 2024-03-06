@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 // icons
 import { CheckCircle } from "lucide-react";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import type { TIssue } from "@servcy/types";

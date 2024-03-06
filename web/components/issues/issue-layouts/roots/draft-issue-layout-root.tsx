@@ -10,7 +10,7 @@ import { DraftIssueListLayout } from "../list/roots/draft-issue-root";
 import { ProjectDraftEmptyState } from "../empty-states";
 import { IssuePeekOverview } from "@components/issues/peek-overview";
 import { ActiveLoader } from "@components/ui";
-// ui
+
 import { DraftKanBanLayout } from "../kanban/roots/draft-issue-root";
 // constants
 import { EIssuesStoreType } from "@constants/issue";

@@ -10,7 +10,7 @@ import { ExistingIssuesListModal } from "@components/core";
 import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
 import { IssueList } from "./issues-list";
 import { ProgressBar } from "./progressbar";
-// ui
+
 import { CustomMenu } from "@servcy/ui";
 // helpers
 import { copyTextToClipboard } from "@helpers/string.helper";

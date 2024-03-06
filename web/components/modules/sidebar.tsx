@@ -22,7 +22,7 @@ import { LinkModal, LinksList, SidebarProgressStats } from "@components/core";
 import { DeleteModuleModal } from "@components/modules";
 import ProgressChart from "@components/core/sidebar/progress-chart";
 import { DateRangeDropdown, MemberDropdown } from "@components/dropdowns";
-// ui
+
 import { CustomMenu, Loader, LayersIcon, CustomSelect, ModuleStatusIcon, UserGroupIcon } from "@servcy/ui";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
@@ -296,9 +296,8 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                 <CustomSelect
                   customButton={
                     <span
-                      className={`flex h-6 w-20 items-center justify-center rounded-sm text-center text-xs ${
-                        isEditingAllowed ? "cursor-pointer" : "cursor-not-allowed"
-                      }`}
+                      className={`flex h-6 w-20 items-center justify-center rounded-sm text-center text-xs ${isEditingAllowed ? "cursor-pointer" : "cursor-not-allowed"
+                        }`}
                       style={{
                         color: moduleStatus ? moduleStatus.color : "#a3a3a2",
                         backgroundColor: moduleStatus ? `${moduleStatus.color}20` : "#a3a3a220",

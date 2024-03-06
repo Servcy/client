@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { Controller, useForm } from "react-hook-form";
 
 import { MemberSelect } from "@components/project";
-// ui
+
 import { Loader } from "@servcy/ui";
 
 import { IProject, IUserLite, IWorkspace } from "@servcy/types";

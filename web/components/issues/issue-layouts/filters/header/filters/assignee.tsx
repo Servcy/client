@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useMember } from "@hooks/store";
 
 import { FilterHeader, FilterOption } from "@components/issues";
-// ui
+
 import { Avatar, Loader } from "@servcy/ui";
 
 type Props = {

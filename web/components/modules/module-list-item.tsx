@@ -8,7 +8,7 @@ import { useModule, useUser, useEventTracker, useMember } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules";
-// ui
+
 import { Avatar, AvatarGroup, CircularProgressIndicator, CustomMenu, Tooltip } from "@servcy/ui";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
-// ui
+
 import { Button, Checkbox } from "@servcy/ui";
 import toast from "react-hot-toast";
 // services

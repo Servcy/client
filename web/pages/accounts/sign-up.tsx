@@ -8,7 +8,7 @@ import DefaultLayout from "@layouts/default-layout";
 
 import { SignUpRoot } from "@components/account";
 import { PageHead } from "@components/core";
-// ui
+
 import { Spinner } from "@servcy/ui";
 // assets
 import ServcyLogo from "public/logo.png";

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useEventTracker, useProjectState } from "@hooks/store";
-// ui
+
 import { Tooltip, StateGroupIcon } from "@servcy/ui";
 // icons
 import { Pencil, X, ArrowDown, ArrowUp } from "lucide-react";

@@ -7,7 +7,7 @@ import { ChevronDown, Plus, X } from "lucide-react";
 
 import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Avatar, Button, CustomSelect, CustomSearchSelect } from "@servcy/ui";
 // helpers
 import { getUserRole } from "@helpers/user.helper";
@@ -144,9 +144,8 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
 
     return {
       value: `${memberDetails?.member.id}`,
-      query: `${memberDetails?.member.first_name} ${
-        memberDetails?.member.last_name
-      } ${memberDetails?.member.display_name.toLowerCase()}`,
+      query: `${memberDetails?.member.first_name} ${memberDetails?.member.last_name
+        } ${memberDetails?.member.display_name.toLowerCase()}`,
       content: (
         <div className="flex w-full items-center gap-2">
           <div className="flex-shrink-0 pt-0.5">

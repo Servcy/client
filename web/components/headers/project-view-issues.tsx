@@ -19,7 +19,7 @@ import {
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
-// ui
+
 import { Breadcrumbs, Button, CustomMenu, PhotoFilterIcon } from "@servcy/ui";
 // helpers
 import { truncateText } from "@helpers/string.helper";

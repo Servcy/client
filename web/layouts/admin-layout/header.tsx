@@ -1,7 +1,7 @@
 import { FC } from "react";
 // mobx
 import { observer } from "mobx-react-lite";
-// ui
+
 import { Breadcrumbs } from "@servcy/ui";
 // icons
 import { Settings } from "lucide-react";

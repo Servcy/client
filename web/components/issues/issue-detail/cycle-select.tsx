@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useIssueDetail } from "@hooks/store";
 
 import { CycleDropdown } from "@components/dropdowns";
-// ui
+
 import { Spinner } from "@servcy/ui";
 // helpers
 import { cn } from "@helpers/common.helper";

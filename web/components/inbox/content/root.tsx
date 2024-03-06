@@ -6,7 +6,7 @@ import { useInboxIssues } from "@hooks/store";
 
 import { InboxIssueActionsHeader } from "@components/inbox";
 import { InboxIssueDetailRoot } from "@components/issues/issue-detail/inbox";
-// ui
+
 import { Loader } from "@servcy/ui";
 
 type TInboxContentRoot = {

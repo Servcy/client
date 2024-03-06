@@ -1,6 +1,6 @@
 import React from "react";
 import { eachDayOfInterval, isValid } from "date-fns";
-// ui
+
 import { LineGraph } from "@components/ui";
 // helpers
 import { renderFormattedDateWithoutYear } from "@helpers/date-time.helper";
@@ -89,11 +89,11 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
             data:
               chartData.length > 0
                 ? chartData.map((item, index) => ({
-                    index,
-                    x: item.currentDate,
-                    y: item.pending,
-                    color: "#3F76FF",
-                  }))
+                  index,
+                  x: item.currentDate,
+                  y: item.pending,
+                  color: "#3F76FF",
+                }))
                 : [],
             enableArea: true,
           },
@@ -104,15 +104,15 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
             data:
               chartData.length > 0
                 ? [
-                    {
-                      x: chartData[0].currentDate,
-                      y: totalIssues,
-                    },
-                    {
-                      x: chartData[chartData.length - 1].currentDate,
-                      y: 0,
-                    },
-                  ]
+                  {
+                    x: chartData[0].currentDate,
+                    y: totalIssues,
+                  },
+                  {
+                    x: chartData[chartData.length - 1].currentDate,
+                    y: 0,
+                  },
+                ]
                 : [],
           },
         ]}

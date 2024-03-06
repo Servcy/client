@@ -12,7 +12,7 @@ import {
   IssuePeekOverview,
 } from "@components/issues";
 import { EIssuesStoreType } from "@constants/issue";
-// ui
+
 import { ListLayoutLoader } from "@components/ui";
 
 export const ArchivedIssueLayoutRoot: React.FC = observer(() => {

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-// ui
+
 import { Button } from "@servcy/ui";
 // assets
 import emptyApiTokens from "public/empty-state/api-token.svg";

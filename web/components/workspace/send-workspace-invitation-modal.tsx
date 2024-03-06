@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Plus, X } from "lucide-react";
 
 import { useUser } from "@hooks/store";
-// ui
+
 import { Button, CustomSelect, Input } from "@servcy/ui";
 
 import { IWorkspaceBulkInviteFormData } from "@servcy/types";

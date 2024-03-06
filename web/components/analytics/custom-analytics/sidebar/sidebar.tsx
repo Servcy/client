@@ -9,7 +9,7 @@ import { useCycle, useModule, useProject, useUser, useWorkspace } from "@hooks/s
 import toast from "react-hot-toast";
 
 import { CustomAnalyticsSidebarHeader, CustomAnalyticsSidebarProjectsList } from "@components/analytics";
-// ui
+
 import { Button, LayersIcon } from "@servcy/ui";
 // icons
 import { CalendarDays, Download, RefreshCw } from "lucide-react";

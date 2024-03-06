@@ -4,7 +4,7 @@ import sortBy from "lodash/sortBy";
 
 import { FilterHeader, FilterOption } from "@components/issues";
 import { useApplication, useCycle } from "@hooks/store";
-// ui
+
 import { Loader, CycleGroupIcon } from "@servcy/ui";
 
 import { TCycleGroups } from "@servcy/types";

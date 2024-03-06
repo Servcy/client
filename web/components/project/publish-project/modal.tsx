@@ -7,7 +7,7 @@ import { Check, CircleDot, Globe2 } from "lucide-react";
 
 import { useProjectPublish } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, Loader, ToggleSwitch } from "@servcy/ui";
 import { CustomPopover } from "./popover";
 
@@ -357,8 +357,8 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                                     <div
                                       key={option.key}
                                       className={`relative m-1 flex cursor-pointer items-center justify-between gap-2 rounded-sm p-1 px-2 text-custom-text-200 ${value.includes(option.key)
-                                          ? "bg-custom-background-80 text-custom-text-100"
-                                          : "hover:bg-custom-background-80 hover:text-custom-text-100"
+                                        ? "bg-custom-background-80 text-custom-text-100"
+                                        : "hover:bg-custom-background-80 hover:text-custom-text-100"
                                         }`}
                                       onClick={() => {
                                         const _views =

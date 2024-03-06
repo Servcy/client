@@ -1,4 +1,4 @@
-// ui
+
 import { Loader } from "@servcy/ui";
 
 export const RecentActivityWidgetLoader = () => (

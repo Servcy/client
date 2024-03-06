@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store";
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
-// ui
+
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 
 import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "@components/issues";

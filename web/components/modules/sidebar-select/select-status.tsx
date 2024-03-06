@@ -2,7 +2,7 @@
 import React from "react";
 // react-hook-form
 import { Control, Controller, UseFormWatch } from "react-hook-form";
-// ui
+
 import { CustomSelect, DoubleCircleIcon } from "@servcy/ui";
 
 import { IModule } from "@servcy/types";

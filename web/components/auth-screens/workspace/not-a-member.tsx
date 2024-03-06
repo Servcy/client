@@ -2,7 +2,7 @@ import Link from "next/link";
 
 // layouts
 import DefaultLayout from "@layouts/default-layout";
-// ui
+
 import { Button } from "@servcy/ui";
 
 export const NotAWorkspaceMember = () => (

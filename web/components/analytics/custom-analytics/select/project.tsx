@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
 import { useProject } from "@hooks/store";
-// ui
+
 import { CustomSearchSelect } from "@servcy/ui";
 
 type Props = {
@@ -37,9 +37,9 @@ export const SelectProject: React.FC<Props> = observer((props) => {
       label={
         value && value.length > 0
           ? projectIds
-              ?.filter((p) => value.includes(p))
-              .map((p) => getProjectById(p)?.name)
-              .join(", ")
+            ?.filter((p) => value.includes(p))
+            .map((p) => getProjectById(p)?.name)
+            .join(", ")
           : "All projects"
       }
       multiple

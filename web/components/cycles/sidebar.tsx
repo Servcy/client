@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import { SidebarProgressStats } from "@components/core";
 import ProgressChart from "@components/core/sidebar/progress-chart";
 import { CycleDeleteModal } from "@components/cycles/delete-modal";
-// ui
+
 import { Avatar, CustomMenu, Loader, LayersIcon } from "@servcy/ui";
 // icons
 import { ChevronDown, LinkIcon, Trash2, UserCircle2, AlertCircle, ChevronRight, CalendarClock } from "lucide-react";
@@ -192,8 +192,8 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
   const progressPercentage = cycleDetails
     ? isCompleted && cycleDetails?.progress_snapshot
       ? Math.round(
-          (cycleDetails.progress_snapshot.completed_issues / cycleDetails.progress_snapshot.total_issues) * 100
-        )
+        (cycleDetails.progress_snapshot.completed_issues / cycleDetails.progress_snapshot.total_issues) * 100
+      )
       : Math.round((cycleDetails.completed_issues / cycleDetails.total_issues) * 100)
     : null;
 

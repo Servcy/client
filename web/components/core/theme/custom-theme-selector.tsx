@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useTheme } from "next-themes";
 
 import { useUser } from "@hooks/store";
-// ui
+
 import { Button, InputColorPicker } from "@servcy/ui";
 
 import { IUserTheme } from "@servcy/types";

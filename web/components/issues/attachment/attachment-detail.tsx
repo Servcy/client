@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AlertCircle, X } from "lucide-react";
 
 import { useIssueDetail, useMember } from "@hooks/store";
-// ui
+
 import { Tooltip } from "@servcy/ui";
 
 import { IssueAttachmentDeleteModal } from "./delete-attachment-confirmation-modal";
@@ -60,9 +60,8 @@ export const IssueAttachmentsDetail: FC<TIssueAttachmentsDetail> = (props) => {
                   <span className="text-sm">{truncateText(`${getFileName(attachment.attributes.name)}`, 10)}</span>
                 </Tooltip>
                 <Tooltip
-                  tooltipContent={`${
-                    getUserDetails(attachment.updated_by)?.display_name ?? ""
-                  } uploaded on ${renderFormattedDate(attachment.updated_at)}`}
+                  tooltipContent={`${getUserDetails(attachment.updated_by)?.display_name ?? ""
+                    } uploaded on ${renderFormattedDate(attachment.updated_at)}`}
                 >
                   <span>
                     <AlertCircle className="h-3 w-3" />

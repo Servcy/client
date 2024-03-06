@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
 
 import { CustomThemeSelector, ThemeSwitch, PageHead } from "@components/core";
-// ui
+
 import { Spinner } from "@servcy/ui";
 // constants
 import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes";

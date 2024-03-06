@@ -9,7 +9,7 @@ import { useApplication, useUser } from "@hooks/store";
 import { UserService } from "@services/user.service";
 
 import { ProfileSidebarTime } from "./time";
-// ui
+
 import { Loader, Tooltip } from "@servcy/ui";
 // icons
 import { ChevronDown, Pencil } from "lucide-react";
@@ -163,10 +163,10 @@ export const ProfileSidebar = observer(() => {
                               <Tooltip tooltipContent="Completion percentage" position="left">
                                 <div
                                   className={`rounded px-1 py-0.5 text-xs font-medium ${completedIssuePercentage <= 35
-                                      ? "bg-red-500/10 text-red-500"
-                                      : completedIssuePercentage <= 70
-                                        ? "bg-yellow-500/10 text-yellow-500"
-                                        : "bg-green-500/10 text-green-500"
+                                    ? "bg-red-500/10 text-red-500"
+                                    : completedIssuePercentage <= 70
+                                      ? "bg-yellow-500/10 text-yellow-500"
+                                      : "bg-green-500/10 text-green-500"
                                     }`}
                                 >
                                   {completedIssuePercentage}%

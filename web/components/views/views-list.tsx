@@ -7,7 +7,7 @@ import { useApplication, useProjectView, useUser } from "@hooks/store";
 
 import { ProjectViewListItem } from "@components/views";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Input } from "@servcy/ui";
 import { ViewListLoader } from "@components/ui";
 // constants

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react";
 
 import { useApplication, useCycle } from "@hooks/store";
-// ui
+
 import { Tooltip, ContrastIcon } from "@servcy/ui";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";
@@ -82,8 +82,7 @@ export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
     >
       <ContrastIcon
         className="h-5 w-5 flex-shrink-0"
-        color={`${
-          cycleStatus === "current"
+        color={`${cycleStatus === "current"
             ? "#09a953"
             : cycleStatus === "upcoming"
               ? "#f7ae59"
@@ -92,7 +91,7 @@ export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
                 : cycleStatus === "draft"
                   ? "rgb(var(--color-text-200))"
                   : ""
-        }`}
+          }`}
       />
       <h6 className="flex-grow truncate text-sm font-medium">{cycleDetails?.name}</h6>
     </div>

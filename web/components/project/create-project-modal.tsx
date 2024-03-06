@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 
 import { useEventTracker, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
 
 import { ImagePickerPopover } from "@components/core";

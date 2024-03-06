@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { FilterHeader, FilterOption } from "@components/issues";
 
 import { useProject } from "@hooks/store";
-// ui
+
 import { Loader } from "@servcy/ui";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";

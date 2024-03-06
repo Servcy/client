@@ -8,7 +8,7 @@ import { AppLayout } from "@layouts/app-layout";
 import { PageHead } from "@components/core";
 import { ProjectIssueDetailsHeader } from "@components/headers";
 import { IssueDetailRoot } from "@components/issues";
-// ui
+
 import { Loader } from "@servcy/ui";
 
 import { NextPageWithLayout } from "@lib/types";

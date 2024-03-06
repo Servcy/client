@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useProject } from "@hooks/store";
 import { useIssues } from "@hooks/store/use-issues";
 import toast from "react-hot-toast";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { TIssue } from "@servcy/types";

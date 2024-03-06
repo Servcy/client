@@ -8,7 +8,7 @@ import { useEventTracker, useMember, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { ConfirmWorkspaceMemberRemove } from "@components/workspace";
-// ui
+
 import { CustomSelect, Tooltip } from "@servcy/ui";
 // constants
 import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";

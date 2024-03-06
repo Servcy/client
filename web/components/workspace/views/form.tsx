@@ -5,7 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useLabel, useMember } from "@hooks/store";
 
 import { AppliedFiltersList, FilterSelection, FiltersDropdown } from "@components/issues";
-// ui
+
 import { Button, Input, TextArea } from "@servcy/ui";
 
 import { IIssueFilterOptions, IWorkspaceView } from "@servcy/types";

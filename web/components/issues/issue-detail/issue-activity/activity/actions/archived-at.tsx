@@ -5,7 +5,7 @@ import { RotateCcw } from "lucide-react";
 import { useIssueDetail } from "@hooks/store";
 
 import { IssueActivityBlockComponent } from "./";
-// ui
+
 import { ArchiveIcon } from "@servcy/ui";
 
 type TIssueArchivedAtActivity = { activityId: string; ends: "top" | "bottom" | undefined };

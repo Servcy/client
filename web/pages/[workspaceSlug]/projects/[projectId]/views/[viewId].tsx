@@ -10,7 +10,7 @@ import { AppLayout } from "@layouts/app-layout";
 import { ProjectViewLayoutRoot } from "@components/issues";
 import { ProjectViewIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
-// ui
+
 import { EmptyState } from "@components/common";
 // assets
 import emptyView from "public/empty-state/view.svg";

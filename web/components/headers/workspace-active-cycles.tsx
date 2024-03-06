@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-// ui
+
 import { Breadcrumbs, ContrastIcon } from "@servcy/ui";
 import { BreadcrumbLink } from "@components/common";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";

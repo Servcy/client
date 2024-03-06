@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 
 import { useProject } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, CustomMenu } from "@servcy/ui";
 //icons
 import { Pencil, Trash2 } from "lucide-react";

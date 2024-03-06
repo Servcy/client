@@ -18,7 +18,7 @@ import DefaultLayout from "@layouts/default-layout";
 
 import { PageHead } from "@components/core";
 import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding";
-// ui
+
 import { Avatar, Spinner } from "@servcy/ui";
 // images
 import ServcyLogo from "public/logo.png";
@@ -42,7 +42,7 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
   const { currentUser, currentUserLoader, updateCurrentUser, updateUserOnBoard } = useUser();
   const { workspaces, fetchWorkspaces } = useWorkspace();
   // custom hooks
-  const {} = useUserAuth({ routeAuth: "onboarding", user: currentUser, isLoading: currentUserLoader });
+  const { } = useUserAuth({ routeAuth: "onboarding", user: currentUser, isLoading: currentUserLoader });
 
   const user = currentUser ?? undefined;
   const workspacesList = Object.values(workspaces ?? {});

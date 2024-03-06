@@ -3,7 +3,7 @@ import { BarDatum } from "@nivo/bar";
 
 import { CustomTooltip } from "./custom-tooltip";
 import { Tooltip } from "@servcy/ui";
-// ui
+
 import { BarGraph } from "@components/ui";
 // helpers
 import { findStringWithMostCharacters } from "@helpers/array.helper";
@@ -73,55 +73,55 @@ export const AnalyticsGraph: React.FC<Props> = ({ analytics, barGraphData, param
         renderTick:
           params.x_axis === "assignees__id"
             ? (datum) => {
-                const assignee = analytics.extras.assignee_details?.find((a) => a?.assignees__id === datum?.value);
+              const assignee = analytics.extras.assignee_details?.find((a) => a?.assignees__id === datum?.value);
 
-                if (assignee?.assignees__avatar && assignee?.assignees__avatar !== "")
-                  return (
-                    <Tooltip tooltipContent={assignee?.assignees__display_name}>
-                      <g transform={`translate(${datum.x},${datum.y})`}>
-                        <image
-                          x={-8}
-                          y={10}
-                          width={16}
-                          height={16}
-                          xlinkHref={assignee?.assignees__avatar}
-                          style={{ clipPath: "circle(50%)" }}
-                        />
-                      </g>
-                    </Tooltip>
-                  );
-                else
-                  return (
-                    <Tooltip tooltipContent={assignee?.assignees__display_name}>
-                      <g transform={`translate(${datum.x},${datum.y})`}>
-                        <circle cy={18} r={8} fill="#374151" />
-                        <text x={0} y={21} textAnchor="middle" fontSize={9} fill="#ffffff">
-                          {params.x_axis === "assignees__id"
-                            ? datum.value && datum.value !== "None"
-                              ? generateDisplayName(datum.value, analytics, params, "x_axis")[0].toUpperCase()
-                              : "?"
-                            : datum.value && datum.value !== "None"
-                              ? `${datum.value}`.toUpperCase()[0]
-                              : "?"}
-                        </text>
-                      </g>
-                    </Tooltip>
-                  );
-              }
+              if (assignee?.assignees__avatar && assignee?.assignees__avatar !== "")
+                return (
+                  <Tooltip tooltipContent={assignee?.assignees__display_name}>
+                    <g transform={`translate(${datum.x},${datum.y})`}>
+                      <image
+                        x={-8}
+                        y={10}
+                        width={16}
+                        height={16}
+                        xlinkHref={assignee?.assignees__avatar}
+                        style={{ clipPath: "circle(50%)" }}
+                      />
+                    </g>
+                  </Tooltip>
+                );
+              else
+                return (
+                  <Tooltip tooltipContent={assignee?.assignees__display_name}>
+                    <g transform={`translate(${datum.x},${datum.y})`}>
+                      <circle cy={18} r={8} fill="#374151" />
+                      <text x={0} y={21} textAnchor="middle" fontSize={9} fill="#ffffff">
+                        {params.x_axis === "assignees__id"
+                          ? datum.value && datum.value !== "None"
+                            ? generateDisplayName(datum.value, analytics, params, "x_axis")[0].toUpperCase()
+                            : "?"
+                          : datum.value && datum.value !== "None"
+                            ? `${datum.value}`.toUpperCase()[0]
+                            : "?"}
+                      </text>
+                    </g>
+                  </Tooltip>
+                );
+            }
             : (datum) => (
-                <g transform={`translate(${datum.x},${datum.y + 10})`}>
-                  <text
-                    x={0}
-                    y={datum.y}
-                    textAnchor={`${barGraphData.data.length > 7 ? "end" : "middle"}`}
-                    fontSize={10}
-                    fill="rgb(var(--color-text-200))"
-                    className={`${barGraphData.data.length > 7 ? "-rotate-45" : ""}`}
-                  >
-                    {generateDisplayName(datum.value, analytics, params, "x_axis")}
-                  </text>
-                </g>
-              ),
+              <g transform={`translate(${datum.x},${datum.y + 10})`}>
+                <text
+                  x={0}
+                  y={datum.y}
+                  textAnchor={`${barGraphData.data.length > 7 ? "end" : "middle"}`}
+                  fontSize={10}
+                  fill="rgb(var(--color-text-200))"
+                  className={`${barGraphData.data.length > 7 ? "-rotate-45" : ""}`}
+                >
+                  {generateDisplayName(datum.value, analytics, params, "x_axis")}
+                </text>
+              </g>
+            ),
       }}
       theme={{
         axis: {},

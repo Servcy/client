@@ -1,5 +1,5 @@
 import { FC } from "react";
-// ui
+
 import { Tooltip } from "@servcy/ui";
 
 import { IIssueLabel } from "@servcy/types";

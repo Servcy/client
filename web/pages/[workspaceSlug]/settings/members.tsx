@@ -12,7 +12,7 @@ import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 import { PageHead } from "@components/core";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { IWorkspaceBulkInviteFormData } from "@servcy/types";

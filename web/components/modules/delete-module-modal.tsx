@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import { useEventTracker, useModule } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button } from "@servcy/ui";
 // icons
 import { AlertTriangle } from "lucide-react";

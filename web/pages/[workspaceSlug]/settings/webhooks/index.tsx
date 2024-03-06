@@ -12,7 +12,7 @@ import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { WebhooksList, CreateWebhookModal } from "@components/web-hooks";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Button } from "@servcy/ui";
 import { WebhookSettingsLoader } from "@components/ui";
 

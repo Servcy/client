@@ -8,7 +8,7 @@ import useSWR from "swr";
 import { UseFormSetValue } from "react-hook-form";
 // services
 import { GithubIntegrationService } from "@services/integrations";
-// ui
+
 import { Button, Loader } from "@servcy/ui";
 
 import { IUserDetails, TFormValues, TIntegrationSteps } from "@components/integration";

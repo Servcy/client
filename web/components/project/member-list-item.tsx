@@ -7,7 +7,7 @@ import { useEventTracker, useMember, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { ConfirmProjectMemberRemove } from "@components/project";
-// ui
+
 import { CustomSelect, Tooltip } from "@servcy/ui";
 // icons
 import { ChevronDown, Dot, XCircle } from "lucide-react";

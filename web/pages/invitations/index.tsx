@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 // layouts
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import DefaultLayout from "@layouts/default-layout";
-// ui
+
 import { Button } from "@servcy/ui";
 // images
 import emptyInvitation from "public/empty-state/invitation.svg";
@@ -149,11 +149,10 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                     return (
                       <div
                         key={invitation.id}
-                        className={`flex cursor-pointer items-center gap-2 rounded border px-3.5 py-5 ${
-                          isSelected
+                        className={`flex cursor-pointer items-center gap-2 rounded border px-3.5 py-5 ${isSelected
                             ? "border-custom-primary-100"
                             : "border-custom-border-200 hover:bg-custom-background-80"
-                        }`}
+                          }`}
                         onClick={() => handleInvitation(invitation, isSelected ? "withdraw" : "accepted")}
                       >
                         <div className="flex-shrink-0">

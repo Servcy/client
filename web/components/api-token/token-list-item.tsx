@@ -2,7 +2,7 @@ import { useState } from "react";
 import { XCircle } from "lucide-react";
 
 import { DeleteApiTokenModal } from "@components/api-token";
-// ui
+
 import { Tooltip } from "@servcy/ui";
 // helpers
 import { renderFormattedDate, calculateTimeAgo } from "@helpers/date-time.helper";
@@ -33,9 +33,8 @@ export const ApiTokenListItem: React.FC<Props> = (props) => {
         <div className="flex w-4/5 items-center">
           <h5 className="truncate text-sm font-medium">{token.label}</h5>
           <span
-            className={`${
-              token.is_active ? "bg-green-500/10 text-green-500" : "bg-custom-background-80 text-custom-text-400"
-            } ml-2 flex h-4 max-h-fit items-center rounded-sm px-2 text-xs font-medium`}
+            className={`${token.is_active ? "bg-green-500/10 text-green-500" : "bg-custom-background-80 text-custom-text-400"
+              } ml-2 flex h-4 max-h-fit items-center rounded-sm px-2 text-xs font-medium`}
           >
             {token.is_active ? "Active" : "Expired"}
           </span>

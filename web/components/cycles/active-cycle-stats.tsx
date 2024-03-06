@@ -4,7 +4,7 @@ import { Tab } from "@headlessui/react";
 import useLocalStorage from "@hooks/use-local-storage";
 
 import { SingleProgressStats } from "@components/core";
-// ui
+
 import { Avatar } from "@servcy/ui";
 
 import { ICycle } from "@servcy/types";
@@ -50,8 +50,7 @@ export const ActiveCycleProgressStats: React.FC<Props> = ({ cycle }) => {
       >
         <Tab
           className={({ selected }) =>
-            `rounded-3xl border border-custom-border-200 px-3 py-1 text-custom-text-100 ${
-              selected ? " bg-custom-primary text-white" : "  hover:bg-custom-background-80"
+            `rounded-3xl border border-custom-border-200 px-3 py-1 text-custom-text-100 ${selected ? " bg-custom-primary text-white" : "  hover:bg-custom-background-80"
             }`
           }
         >
@@ -59,8 +58,7 @@ export const ActiveCycleProgressStats: React.FC<Props> = ({ cycle }) => {
         </Tab>
         <Tab
           className={({ selected }) =>
-            `rounded-3xl border border-custom-border-200 px-3 py-1 text-custom-text-100 ${
-              selected ? " bg-custom-primary text-white" : "  hover:bg-custom-background-80"
+            `rounded-3xl border border-custom-border-200 px-3 py-1 text-custom-text-100 ${selected ? " bg-custom-primary text-white" : "  hover:bg-custom-background-80"
             }`
           }
         >

@@ -6,7 +6,7 @@ import { Combobox, Dialog, Transition } from "@headlessui/react";
 import toast from "react-hot-toast";
 // services
 import { IssueService } from "@services/issue";
-// ui
+
 import { Button, LayersIcon } from "@servcy/ui";
 // icons
 import { Search } from "lucide-react";
@@ -34,7 +34,7 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
   const router = useRouter();
   const { workspaceSlug, projectId, issueId } = router.query;
 
-  
+
   const { getProjectStates } = useProjectState();
   const { getProjectById } = useProject();
 
@@ -42,9 +42,9 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
     workspaceSlug && projectId ? PROJECT_ISSUES_LIST(workspaceSlug as string, projectId as string) : null,
     workspaceSlug && projectId
       ? () =>
-          issueService
-            .getIssues(workspaceSlug as string, projectId as string)
-            .then((res) => Object.values(res ?? {}).filter((issue) => issue.id !== issueId))
+        issueService
+          .getIssues(workspaceSlug as string, projectId as string)
+          .then((res) => Object.values(res ?? {}).filter((issue) => issue.id !== issueId))
       : null
   );
 
@@ -139,8 +139,7 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
                                   as="div"
                                   value={issue.id}
                                   className={({ active, selected }) =>
-                                    `flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-custom-text-200 ${
-                                      active || selected ? "bg-custom-background-80 text-custom-text-100" : ""
+                                    `flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-custom-text-200 ${active || selected ? "bg-custom-background-80 text-custom-text-100" : ""
                                     } `
                                   }
                                 >

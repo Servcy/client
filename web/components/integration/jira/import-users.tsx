@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 // services
 import { WorkspaceService } from "@services/workspace.service";
-// ui
+
 import { Avatar, CustomSelect, CustomSearchSelect, Input, ToggleSwitch } from "@servcy/ui";
 
 import { IJiraImporterForm } from "@servcy/types";

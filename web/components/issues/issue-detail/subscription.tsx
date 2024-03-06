@@ -1,7 +1,7 @@
 import { Bell, BellOff } from "lucide-react";
 import { observer } from "mobx-react-lite";
 import { FC, useState } from "react";
-// UI
+
 import { Button, Loader } from "@servcy/ui";
 
 import { useIssueDetail } from "@hooks/store";
@@ -16,7 +16,7 @@ export type TIssueSubscription = {
 
 export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
   const { workspaceSlug, projectId, issueId } = props;
-  
+
   const {
     subscription: { getSubscriptionByIssueId },
     createSubscription,

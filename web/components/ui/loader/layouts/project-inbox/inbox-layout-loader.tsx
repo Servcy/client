@@ -1,5 +1,5 @@
 import React from "react";
-// ui
+
 import { InboxSidebarLoader } from "./inbox-sidebar-loader";
 import { Loader } from "@servcy/ui";
 

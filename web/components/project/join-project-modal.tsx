@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Transition, Dialog } from "@headlessui/react";
 
 import { useProject, useUser } from "@hooks/store";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import type { IProject } from "@servcy/types";

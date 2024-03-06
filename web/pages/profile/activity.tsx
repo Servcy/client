@@ -13,7 +13,7 @@ import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor";
 // icons
 import { History, MessageSquare } from "lucide-react";
-// ui
+
 import { ActivitySettingsLoader } from "@components/ui";
 // fetch-keys
 import { USER_ACTIVITY } from "@constants/fetch-keys";

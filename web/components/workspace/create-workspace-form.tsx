@@ -7,7 +7,7 @@ import { WorkspaceService } from "@services/workspace.service";
 
 import { useEventTracker, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, CustomSelect, Input } from "@servcy/ui";
 
 import { IWorkspace } from "@servcy/types";

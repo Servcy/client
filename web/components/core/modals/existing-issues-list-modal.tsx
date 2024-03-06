@@ -5,7 +5,7 @@ import { Rocket, Search, X } from "lucide-react";
 import { ProjectService } from "@services/project";
 import toast from "react-hot-toast";
 import useDebounce from "@hooks/use-debounce";
-// ui
+
 import { Button, LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
 
 import { ISearchIssueResponse, TProjectIssuesSearchParams } from "@servcy/types";

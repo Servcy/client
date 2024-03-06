@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Plus } from "lucide-react";
 
 import { useProject } from "@hooks/store";
-// ui
+
 import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
 
 import { CreateInboxIssueModal } from "@components/inbox";

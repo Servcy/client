@@ -11,7 +11,7 @@ import { LogIn, LogOut, Settings, UserCog2 } from "lucide-react";
 
 import { useApplication, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Avatar, Tooltip } from "@servcy/ui";
 
 // Static Data

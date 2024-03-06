@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Search, X } from "lucide-react";
 
 import { ShortcutCommandsList } from "@components/command-palette";
-// ui
+
 import { Input } from "@servcy/ui";
 
 type Props = {

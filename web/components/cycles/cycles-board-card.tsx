@@ -7,7 +7,7 @@ import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
 import toast from "react-hot-toast";
 
 import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles";
-// ui
+
 import { Avatar, AvatarGroup, CustomMenu, Tooltip, LayersIcon, CycleGroupIcon } from "@servcy/ui";
 // icons
 import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react";

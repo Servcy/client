@@ -7,7 +7,7 @@ import { useUser } from "@hooks/store";
 import { UserService } from "@services/user.service";
 
 import { ActivityMessage, IssueLink } from "@components/core";
-// ui
+
 import { ProfileEmptyState } from "@components/ui";
 import { Loader } from "@servcy/ui";
 // image

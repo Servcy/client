@@ -8,7 +8,7 @@ import { Combobox, Dialog, Transition } from "@headlessui/react";
 import { ProjectService } from "@services/project";
 
 import useDebounce from "@hooks/use-debounce";
-// ui
+
 import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
 // icons
 import { Rocket, Search } from "lucide-react";

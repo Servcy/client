@@ -11,7 +11,7 @@ import { IssueParentDetail } from "./parent";
 import { IssueReaction } from "./reactions";
 import { SubIssuesRoot } from "../sub-issues";
 import { IssueActivity } from "./issue-activity";
-// ui
+
 import { StateGroupIcon } from "@servcy/ui";
 
 import { TIssueOperations } from "./root";

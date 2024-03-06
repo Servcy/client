@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Ban } from "lucide-react";
 
 import { useMember } from "@hooks/store";
-// ui
+
 import { Avatar, CustomSearchSelect } from "@servcy/ui";
 
 type Props = {
@@ -38,10 +38,10 @@ export const MemberSelect: React.FC<Props> = observer((props) => {
     })
     .filter((option) => !!option) as
     | {
-        value: string;
-        query: string;
-        content: React.JSX.Element;
-      }[]
+      value: string;
+      query: string;
+      content: React.JSX.Element;
+    }[]
     | undefined;
   const selectedOption = getProjectMemberDetails(value);
 

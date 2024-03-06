@@ -2,7 +2,7 @@ import { FC } from "react";
 
 // react-hook-form
 import { UseFormWatch } from "react-hook-form";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { TFormValues, TIntegrationSteps } from "@components/integration";

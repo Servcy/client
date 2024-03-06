@@ -5,7 +5,7 @@ import { AlertTriangle } from "lucide-react";
 
 import { useWebhook } from "@hooks/store";
 import toast from "react-hot-toast";
-// ui
+
 import { Button } from "@servcy/ui";
 
 interface IDeleteWebhook {

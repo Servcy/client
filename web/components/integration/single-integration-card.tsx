@@ -10,7 +10,7 @@ import { IntegrationService } from "@services/integrations";
 import { useApplication, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 import useIntegrationPopup from "@hooks/use-integration-popup";
-// ui
+
 import { Button, Loader, Tooltip } from "@servcy/ui";
 // icons
 import GithubLogo from "public/services/github.png";

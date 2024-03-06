@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useCycle } from "@hooks/store";
 
 import { CyclesBoard, CyclesList, CyclesListGanttChartView } from "@components/cycles";
-// ui components
+components
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
 
 import { TCycleLayout, TCycleView } from "@servcy/types";

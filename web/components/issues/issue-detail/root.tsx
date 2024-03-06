@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { IssuePeekOverview } from "@components/issues";
 import { IssueMainContent } from "./main-content";
 import { IssueDetailsSidebar } from "./sidebar";
-// ui
+
 import { EmptyState } from "@components/common";
 // images
 import emptyIssue from "public/empty-state/issue.svg";

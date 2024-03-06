@@ -11,7 +11,7 @@ import {
   WebhookSecretKey,
   WebhookToggle,
 } from "@components/web-hooks";
-// ui
+
 import { Button } from "@servcy/ui";
 
 import { IWebhook, TWebhookEventTypes } from "@servcy/types";

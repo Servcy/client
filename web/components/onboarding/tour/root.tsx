@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import { useApplication, useEventTracker, useUser } from "@hooks/store";
 
 import { TourSidebar } from "@components/onboarding";
-// ui
+
 import { Button } from "@servcy/ui";
 // assets
 import ServcyLogo from "public/logo.svg";

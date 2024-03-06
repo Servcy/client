@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import useSWR from "swr";
 // layouts
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
-// ui
+
 import { EmailSettingsLoader } from "@components/ui";
 
 import { EmailNotificationForm } from "@components/profile/preferences";

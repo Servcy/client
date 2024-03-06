@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react";
 
 import { useApplication, useModule } from "@hooks/store";
-// ui
+
 import { Tooltip, ModuleStatusIcon } from "@servcy/ui";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";

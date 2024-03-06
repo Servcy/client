@@ -1,5 +1,5 @@
 import { FC } from "react";
-// ui
+
 import { Breadcrumbs } from "@servcy/ui";
 import { Settings } from "lucide-react";
 import { BreadcrumbLink } from "@components/common";

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 
 import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store";
-// ui
+
 import { Tooltip, StateGroupIcon, ControlLink } from "@servcy/ui";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";

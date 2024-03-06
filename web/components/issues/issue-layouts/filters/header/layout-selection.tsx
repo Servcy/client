@@ -1,6 +1,6 @@
 import React from "react";
 
-// ui
+
 import { Tooltip } from "@servcy/ui";
 
 import { TIssueLayouts } from "@servcy/types";

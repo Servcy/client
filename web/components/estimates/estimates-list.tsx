@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 import { CreateUpdateEstimateModal, DeleteEstimateModal, EstimateListItem } from "@components/estimates";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// ui
+
 import { Button, Loader } from "@servcy/ui";
 
 import { IEstimate } from "@servcy/types";

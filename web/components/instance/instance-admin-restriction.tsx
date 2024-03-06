@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 // images
 import AccessDeniedImg from "public/auth/access-denied.svg";
-// ui
+
 import { Button } from "@servcy/ui";
 // icons
 import { LayoutGrid } from "lucide-react";

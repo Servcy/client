@@ -13,7 +13,7 @@ import {
   CreatedUpcomingIssueListItem,
   IssueListItemProps,
 } from "@components/dashboard/widgets";
-// ui
+
 import { Loader, getButtonStyling } from "@servcy/ui";
 // helpers
 import { cn } from "@helpers/common.helper";

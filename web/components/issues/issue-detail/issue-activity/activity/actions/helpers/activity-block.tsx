@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { Network } from "lucide-react";
 
 import { useIssueDetail } from "@hooks/store";
-// ui
+
 import { Tooltip } from "@servcy/ui";
 
 import { IssueUser } from "../";

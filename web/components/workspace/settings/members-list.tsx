@@ -6,7 +6,7 @@ import useSWR from "swr";
 import { useMember } from "@hooks/store";
 
 import { WorkspaceInvitationsListItem, WorkspaceMembersListItem } from "@components/workspace";
-// ui
+
 import { MembersSettingsLoader } from "@components/ui";
 
 export const WorkspaceMembersList: FC<{ searchQuery: string }> = observer((props) => {

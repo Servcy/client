@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import toast from "react-hot-toast";
 import { useIssueDetail, useMember } from "@hooks/store";
-// ui
+
 import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
 // icons
 import { Pencil, Trash2, LinkIcon } from "lucide-react";

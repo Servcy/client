@@ -4,7 +4,7 @@ import { FC, useEffect, Fragment } from "react";
 import { Controller, useForm } from "react-hook-form";
 // headless ui
 import { Dialog, Transition } from "@headlessui/react";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import type { IIssueLink, ILinkDetails, ModuleLink } from "@servcy/types";

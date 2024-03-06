@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 
 import { IInstance, IInstanceAdmin } from "@servcy/types";

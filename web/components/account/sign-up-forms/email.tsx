@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 // services
 import { AuthService } from "@services/auth.service";
 import toast from "react-hot-toast";
-// ui
+
 import { Button, Input } from "@servcy/ui";
 // helpers
 import { checkEmailValidity } from "@helpers/string.helper";

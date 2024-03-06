@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MinusCircle } from "lucide-react";
 // component
 import { IssueParentSiblings } from "./siblings";
-// ui
+
 import { CustomMenu } from "@servcy/ui";
 
 import { useIssues, useProject, useProjectState } from "@hooks/store";

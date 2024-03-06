@@ -6,7 +6,7 @@ import { Trash2 } from "lucide-react";
 import { mutate } from "swr";
 
 import { useUser } from "@hooks/store";
-// ui
+
 import { Button } from "@servcy/ui";
 import toast from "react-hot-toast";
 

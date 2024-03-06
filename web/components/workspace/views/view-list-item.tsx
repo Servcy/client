@@ -7,7 +7,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { useEventTracker, useGlobalView } from "@hooks/store";
 
 import { CreateUpdateWorkspaceViewModal, DeleteGlobalViewModal } from "@components/workspace";
-// ui
+
 import { CustomMenu } from "@servcy/ui";
 // helpers
 import { truncateText } from "@helpers/string.helper";

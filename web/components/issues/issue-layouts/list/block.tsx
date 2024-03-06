@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { IssueProperties } from "../properties/all-properties";
 
 import { useApplication, useIssueDetail, useProject } from "@hooks/store";
-// ui
+
 import { Spinner, Tooltip, ControlLink } from "@servcy/ui";
 // helper
 import { cn } from "@helpers/common.helper";
@@ -22,7 +22,7 @@ interface IssueBlockProps {
 
 export const IssueBlock: React.FC<IssueBlockProps> = observer((props: IssueBlockProps) => {
   const { issuesMap, issueId, handleIssues, quickActions, displayProperties, canEditProperties } = props;
-  
+
   const {
     router: { workspaceSlug },
   } = useApplication();
@@ -70,9 +70,8 @@ export const IssueBlock: React.FC<IssueBlockProps> = observer((props: IssueBlock
         </Tooltip>
       ) : (
         <ControlLink
-          href={`/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
-            issue.id
-          }`}
+          href={`/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${issue.id
+            }`}
           target="_blank"
           onClick={() => handleIssuePeekOverview(issue)}
           className="w-full line-clamp-1 cursor-pointer text-sm text-custom-text-100"

@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowLeft, CheckCheck, Clock, ListFilter, MoreVertical, RefreshCw, X } from "lucide-react";
 
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
-// ui
+
 import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui";
 
 import { useEventTracker } from "@hooks/store";
@@ -191,16 +191,16 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                 key={tab.value}
                 onClick={() => setSelectedTab(tab.value)}
                 className={`whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium outline-none ${tab.value === selectedTab
-                    ? "border-custom-primary-100 text-custom-primary-100"
-                    : "border-transparent text-custom-text-200"
+                  ? "border-custom-primary-100 text-custom-primary-100"
+                  : "border-transparent text-custom-text-200"
                   }`}
               >
                 {tab.label}
                 {tab.unreadCount && tab.unreadCount > 0 ? (
                   <span
                     className={`ml-2 rounded-full px-2 py-0.5 text-xs ${tab.value === selectedTab
-                        ? "bg-custom-primary-100 text-white"
-                        : "bg-custom-background-80 text-custom-text-200"
+                      ? "bg-custom-primary-100 text-white"
+                      : "bg-custom-background-80 text-custom-text-200"
                       }`}
                   >
                     {getNumberCount(tab.unreadCount)}

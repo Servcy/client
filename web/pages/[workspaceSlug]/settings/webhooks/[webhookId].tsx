@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { PageHead } from "@components/core";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "@components/web-hooks";
-// ui
+
 import { Spinner } from "@servcy/ui";
 
 import { IWebhook } from "@servcy/types";

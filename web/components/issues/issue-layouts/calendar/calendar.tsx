@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useIssues, useUser } from "@hooks/store";
 
 import { CalendarHeader, CalendarWeekDays, CalendarWeekHeader } from "@components/issues";
-// ui
+
 import { Spinner } from "@servcy/ui";
 
 import { ICalendarWeek } from "./types";
