@@ -4,7 +4,6 @@ import { API_BASE_URL } from "@helpers/common.helper"
 
 import {
     ILastActiveWorkspaceDetails,
-    IProductUpdateResponse,
     IUserProjectsRole,
     IWorkspace,
     IWorkspaceBulkInviteFormData,
