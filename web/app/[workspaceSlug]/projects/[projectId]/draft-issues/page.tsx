@@ -12,7 +12,7 @@ import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/dra
 
 import { useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const ProjectDraftIssuesPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
@@ -24,7 +24,7 @@ const ProjectDraftIssuesPage: NextPageWithWrapper = observer(() => {
     const pageTitle = project?.name ? `${project?.name} - Draft Issues` : undefined
 
     return (
-        <AppLayout header={<ProjectDraftIssueHeader />} withProjectWrapper>
+        <AppWrapper header={<ProjectDraftIssueHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <div className="flex h-full w-full flex-col">
                 <div className="gap-1 flex items-center border-b border-custom-border-200 px-4 py-2.5 shadow-sm">
@@ -40,7 +40,7 @@ const ProjectDraftIssuesPage: NextPageWithWrapper = observer(() => {
                 </div>
                 <DraftIssueLayoutRoot />
             </div>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

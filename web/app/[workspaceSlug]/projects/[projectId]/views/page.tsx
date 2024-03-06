@@ -11,7 +11,7 @@ import { ProjectViewsList } from "@components/views"
 
 import { useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const ProjectViewsPage: NextPageWithWrapper = observer(() => {
     // router
@@ -24,10 +24,10 @@ const ProjectViewsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = project?.name ? `${project?.name} - Views` : undefined
 
     return (
-        <AppLayout header={<ProjectViewsHeader />} withProjectWrapper>
+        <AppWrapper header={<ProjectViewsHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <ProjectViewsList />
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

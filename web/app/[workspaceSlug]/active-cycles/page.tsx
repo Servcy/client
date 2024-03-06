@@ -9,7 +9,7 @@ import { WorkspaceActiveCyclesUpgrade } from "@components/workspace"
 
 import { useWorkspace } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const WorkspaceActiveCyclesPage: NextPageWithWrapper = observer(() => {
     const { currentWorkspace } = useWorkspace()
@@ -17,10 +17,10 @@ const WorkspaceActiveCyclesPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Active Cycles` : undefined
 
     return (
-        <AppLayout header={<WorkspaceActiveCycleHeader />}>
+        <AppWrapper header={<WorkspaceActiveCycleHeader />}>
             <PageHead title={pageTitle} />
             <WorkspaceActiveCyclesUpgrade />
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

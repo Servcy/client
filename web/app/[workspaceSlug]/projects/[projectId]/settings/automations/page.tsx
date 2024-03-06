@@ -12,7 +12,7 @@ import { ProjectSettingHeader } from "@components/headers"
 
 import { useProject, useUser } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { EUserProjectRoles } from "@constants/project"
 
@@ -44,7 +44,7 @@ const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = projectDetails?.name ? `${projectDetails?.name} - Automations` : undefined
 
     return (
-        <AppLayout header={<ProjectSettingHeader title="Automations Settings" />} withProjectWrapper>
+        <AppWrapper header={<ProjectSettingHeader title="Automations Settings" />} withProjectWrapper>
             <ProjectSettingLayout>
                 <PageHead title={pageTitle} />
                 <section className={`w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "opacity-60"}`}>
@@ -55,7 +55,7 @@ const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
                     <AutoCloseAutomation handleChange={handleChange} />
                 </section>
             </ProjectSettingLayout>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

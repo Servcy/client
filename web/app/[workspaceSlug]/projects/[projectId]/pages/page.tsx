@@ -22,7 +22,7 @@ import { useProjectPages } from "@hooks/store/use-project-page"
 import useLocalStorage from "@hooks/use-local-storage"
 import useUserAuth from "@hooks/use-user-auth"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { PAGE_TABS_LIST } from "@constants/page"
@@ -121,7 +121,7 @@ const ProjectPagesPage: NextPageWithWrapper = observer(() => {
     if (loader || archivedPageLoader) return <PagesLoader />
 
     return (
-        <AppLayout header={<PagesHeader />} withProjectWrapper>
+        <AppWrapper header={<PagesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {projectPageIds && archivedPageIds && projectPageIds.length + archivedPageIds.length > 0 ? (
                 <>
@@ -223,7 +223,7 @@ const ProjectPagesPage: NextPageWithWrapper = observer(() => {
                     disabled={!isEditingAllowed}
                 />
             )}
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

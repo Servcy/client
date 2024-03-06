@@ -16,7 +16,7 @@ import { IssueDetailRoot } from "@components/issues"
 
 import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { EIssuesStoreType } from "@constants/issue"
 import { EUserProjectRoles } from "@constants/project"
@@ -85,7 +85,7 @@ const ArchivedIssueDetailsPage: NextPageWithWrapper = observer(() => {
     const issueLoader = !issue || isLoading ? true : false
 
     return (
-        <AppLayout header={<ProjectArchivedIssueDetailsHeader />} withProjectWrapper>
+        <AppWrapper header={<ProjectArchivedIssueDetailsHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {issueLoader ? (
                 <Loader className="flex h-full gap-5 p-5">
@@ -133,7 +133,7 @@ const ArchivedIssueDetailsPage: NextPageWithWrapper = observer(() => {
                     </div>
                 </div>
             )}
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

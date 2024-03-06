@@ -19,7 +19,7 @@ import { PageHead } from "@components/core"
 
 import { useEventTracker, useUser } from "@hooks/store"
 
-import DefaultLayout from "@layouts/DefaultLayout"
+import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import { MEMBER_ACCEPTED } from "@constants/event-tracker"
 import { ROLE } from "@constants/workspace"
@@ -114,7 +114,7 @@ const UserInvitationsPage: NextPageWithWrapper = observer(() => {
 
     return (
         <UserAuthWrapper>
-            <DefaultLayout>
+            <DefaultWrapper>
                 <PageHead title="Invitations" />
                 <div className="flex h-full flex-col gap-y-2 overflow-hidden sm:flex-row sm:gap-y-0">
                     <div className="relative h-1/6 flex-shrink-0 sm:w-2/12 md:w-3/12 lg:w-1/5">
@@ -224,7 +224,7 @@ const UserInvitationsPage: NextPageWithWrapper = observer(() => {
                         )
                     ) : null}
                 </div>
-            </DefaultLayout>
+            </DefaultWrapper>
         </UserAuthWrapper>
     )
 })

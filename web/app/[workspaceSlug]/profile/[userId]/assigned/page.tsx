@@ -8,16 +8,16 @@ import { PageHead } from "@components/core"
 import { UserProfileHeader } from "@components/headers"
 import { ProfileIssuesPage } from "@components/profile/profile-issues"
 
-import { AppLayout } from "@layouts/app-layout"
-import { ProfileAuthWrapper } from "@layouts/user-profile-layout"
+import { AppWrapper } from "@wrappers/app"
+import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
 
 const ProfileAssignedIssuesPage: NextPageWithWrapper = () => (
-    <AppLayout header={<UserProfileHeader type="Assigned" />}>
+    <AppWrapper header={<UserProfileHeader type="Assigned" />}>
         <ProfileAuthWrapper showProfileIssuesFilter>
             <PageHead title="Profile - Assigned" />
             <ProfileIssuesPage type="assigned" />
         </ProfileAuthWrapper>
-    </AppLayout>
+    </AppWrapper>
 )
 
 ProfileAssignedIssuesPage.hasWrapper = true

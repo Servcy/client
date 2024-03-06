@@ -15,8 +15,8 @@ import {
     ProfileWorkload,
 } from "@components/profile"
 
-import { AppLayout } from "@layouts/app-layout"
-import { ProfileAuthWrapper } from "@layouts/user-profile-layout"
+import { AppWrapper } from "@wrappers/app"
+import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
 
 import { USER_PROFILE_DATA } from "@constants/fetch-keys"
 import { GROUP_CHOICES } from "@constants/project"
@@ -46,7 +46,7 @@ const ProfileOverviewPage: NextPageWithWrapper = () => {
     })
 
     return (
-        <AppLayout header={<UserProfileHeader type="Summary" />}>
+        <AppWrapper header={<UserProfileHeader type="Summary" />}>
             <ProfileAuthWrapper>
                 <PageHead title="Profile - Summary" />
                 <div className="h-full w-full space-y-7 overflow-y-auto px-5 py-5 md:px-9">
@@ -59,7 +59,7 @@ const ProfileOverviewPage: NextPageWithWrapper = () => {
                     <ProfileActivity />
                 </div>
             </ProfileAuthWrapper>
-        </AppLayout>
+        </AppWrapper>
     )
 }
 

@@ -11,7 +11,7 @@ import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space"
 
 import { useUser } from "@hooks/store"
 
-import DefaultLayout from "@layouts/DefaultLayout"
+import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import { WORKSPACE_INVITATION } from "@constants/fetch-keys"
 
@@ -66,7 +66,7 @@ const WorkspaceInvitationPage: NextPageWithWrapper = observer(() => {
     }
 
     return (
-        <DefaultLayout>
+        <DefaultWrapper>
             <div className="flex h-full w-full flex-col items-center justify-center px-3">
                 {invitationDetail ? (
                     <>
@@ -121,7 +121,7 @@ const WorkspaceInvitationPage: NextPageWithWrapper = observer(() => {
                     </div>
                 )}
             </div>
-        </DefaultLayout>
+        </DefaultWrapper>
     )
 })
 

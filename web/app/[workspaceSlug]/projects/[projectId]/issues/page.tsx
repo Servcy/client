@@ -12,7 +12,7 @@ import { ProjectLayoutRoot } from "@components/issues"
 
 import { useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const ProjectIssuesPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
@@ -29,7 +29,7 @@ const ProjectIssuesPage: NextPageWithWrapper = observer(() => {
     const pageTitle = project?.name ? `${project?.name} - Issues` : undefined
 
     return (
-        <AppLayout header={<ProjectIssuesHeader />} withProjectWrapper>
+        <AppWrapper header={<ProjectIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <Head>
                 <title>{project?.name} - Issues</title>
@@ -37,7 +37,7 @@ const ProjectIssuesPage: NextPageWithWrapper = observer(() => {
             <div className="h-full w-full">
                 <ProjectLayoutRoot />
             </div>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

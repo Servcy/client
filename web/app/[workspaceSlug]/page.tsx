@@ -9,7 +9,7 @@ import { WorkspaceDashboardView } from "@components/page-views"
 
 import { useWorkspace } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const WorkspacePage: NextPageWithWrapper = observer(() => {
     const { currentWorkspace } = useWorkspace()
@@ -17,10 +17,10 @@ const WorkspacePage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Dashboard` : undefined
 
     return (
-        <AppLayout header={<WorkspaceDashboardHeader />}>
+        <AppWrapper header={<WorkspaceDashboardHeader />}>
             <PageHead title={pageTitle} />
             <WorkspaceDashboardView />
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

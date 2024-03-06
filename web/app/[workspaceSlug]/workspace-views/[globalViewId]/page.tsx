@@ -12,7 +12,7 @@ import { GlobalViewsHeader } from "@components/workspace"
 
 import { useGlobalView, useWorkspace } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
@@ -34,7 +34,7 @@ const GlobalViewIssuesPage: NextPageWithWrapper = observer(() => {
               : undefined
 
     return (
-        <AppLayout header={<GlobalIssuesHeader activeLayout="spreadsheet" />}>
+        <AppWrapper header={<GlobalIssuesHeader activeLayout="spreadsheet" />}>
             <PageHead title={pageTitle} />
             <div className="h-full overflow-hidden bg-custom-background-100">
                 <div className="flex h-full w-full flex-col border-b border-custom-border-300">
@@ -42,7 +42,7 @@ const GlobalViewIssuesPage: NextPageWithWrapper = observer(() => {
                     <AllIssueLayoutRoot />
                 </div>
             </div>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

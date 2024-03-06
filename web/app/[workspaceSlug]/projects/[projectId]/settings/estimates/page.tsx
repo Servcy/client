@@ -9,7 +9,7 @@ import { ProjectSettingHeader } from "@components/headers"
 
 import { useProject, useUser } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { EUserProjectRoles } from "@constants/project"
 
@@ -25,7 +25,7 @@ const EstimatesSettingsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Estimates` : undefined
 
     return (
-        <AppLayout header={<ProjectSettingHeader title="Estimates Settings" />} withProjectWrapper>
+        <AppWrapper header={<ProjectSettingHeader title="Estimates Settings" />} withProjectWrapper>
             <ProjectSettingLayout>
                 <PageHead title={pageTitle} />
                 <div
@@ -34,7 +34,7 @@ const EstimatesSettingsPage: NextPageWithWrapper = observer(() => {
                     <EstimatesList />
                 </div>
             </ProjectSettingLayout>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

@@ -9,7 +9,7 @@ import { ProjectMemberList, ProjectSettingsMemberDefaults } from "@components/pr
 
 import { useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { ProjectSettingLayout } from "@wrappers/settings"
 
@@ -20,7 +20,7 @@ const MembersSettingsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Members` : undefined
 
     return (
-        <AppLayout header={<ProjectSettingHeader title="Members Settings" />} withProjectWrapper>
+        <AppWrapper header={<ProjectSettingHeader title="Members Settings" />} withProjectWrapper>
             <ProjectSettingLayout>
                 <PageHead title={pageTitle} />
                 <section className={`w-full overflow-y-auto py-8 pr-9`}>
@@ -28,7 +28,7 @@ const MembersSettingsPage: NextPageWithWrapper = observer(() => {
                     <ProjectMemberList />
                 </section>
             </ProjectSettingLayout>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

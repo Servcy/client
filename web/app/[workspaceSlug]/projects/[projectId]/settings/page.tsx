@@ -19,7 +19,7 @@ import {
 
 import { useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { ProjectSettingLayout } from "@wrappers/settings"
 
@@ -42,7 +42,7 @@ const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - General Settings` : undefined
 
     return (
-        <AppLayout header={<ProjectSettingHeader title="General Settings" />} withProjectWrapper>
+        <AppWrapper header={<ProjectSettingHeader title="General Settings" />} withProjectWrapper>
             <ProjectSettingLayout>
                 <PageHead title={pageTitle} />
                 {currentProjectDetails && (
@@ -73,7 +73,7 @@ const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
                     )}
                 </div>
             </ProjectSettingLayout>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

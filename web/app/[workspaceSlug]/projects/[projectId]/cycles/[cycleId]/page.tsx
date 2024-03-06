@@ -16,7 +16,7 @@ import { CycleLayoutRoot } from "@components/issues/issue-layouts"
 import { useCycle, useProject } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const CycleDetailPage: NextPageWithWrapper = observer(() => {
     // router
@@ -46,7 +46,7 @@ const CycleDetailPage: NextPageWithWrapper = observer(() => {
     const toggleSidebar = () => setValue(`${!isSidebarCollapsed}`)
 
     return (
-        <AppLayout header={<CycleIssuesHeader />} withProjectWrapper>
+        <AppWrapper header={<CycleIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {error ? (
                 <EmptyState
@@ -78,7 +78,7 @@ const CycleDetailPage: NextPageWithWrapper = observer(() => {
                     </div>
                 </>
             )}
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

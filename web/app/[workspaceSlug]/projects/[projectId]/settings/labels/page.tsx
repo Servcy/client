@@ -9,7 +9,7 @@ import { ProjectSettingsLabelList } from "@components/labels"
 
 import { useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { ProjectSettingLayout } from "@wrappers/settings"
 
@@ -18,14 +18,14 @@ const LabelsSettingsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Labels` : undefined
 
     return (
-        <AppLayout withProjectWrapper header={<ProjectSettingHeader title="Labels Settings" />}>
+        <AppWrapper withProjectWrapper header={<ProjectSettingHeader title="Labels Settings" />}>
             <ProjectSettingLayout>
                 <PageHead title={pageTitle} />
                 <div className="h-full w-full gap-10 overflow-y-auto py-8 pr-9">
                     <ProjectSettingsLabelList />
                 </div>
             </ProjectSettingLayout>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

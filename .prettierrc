@@ -5,7 +5,11 @@
     "semi": false,
     "singleQuote": false,
     "trailingComma": "es5",
-    "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+    "importOrderParserPlugins": [
+        "typescript",
+        "jsx",
+        "decorators-legacy"
+    ],
     "importOrder": [
         "^(next/(.*)$)|^(next$)",
         "",
@@ -23,8 +27,6 @@
         "",
         "^@styles/(.*)$",
         "",
-        "^@layouts/(.*)$",
-        "",
         "^@constants/(.*)$",
         "",
         "^@services/(.*)$",
@@ -41,5 +43,7 @@
         "",
         "^[./]"
     ],
-    "plugins": ["@ianvs/prettier-plugin-sort-imports"]
+    "plugins": [
+        "@ianvs/prettier-plugin-sort-imports"
+    ]
 }

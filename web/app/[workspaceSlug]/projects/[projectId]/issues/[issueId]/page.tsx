@@ -14,7 +14,7 @@ import { IssueDetailRoot } from "@components/issues"
 
 import { useApplication, useIssueDetail, useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { Loader } from "@servcy/ui"
 
@@ -58,7 +58,7 @@ const IssueDetailsPage: NextPageWithWrapper = observer(() => {
     }, [themeStore])
 
     return (
-        <AppLayout header={<ProjectIssueDetailsHeader />} withProjectWrapper>
+        <AppWrapper header={<ProjectIssueDetailsHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {issueLoader ? (
                 <Loader className="flex h-full gap-5 p-5">
@@ -86,7 +86,7 @@ const IssueDetailsPage: NextPageWithWrapper = observer(() => {
                     />
                 )
             )}
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

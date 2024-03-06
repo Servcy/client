@@ -4,9 +4,9 @@ import { observer } from "mobx-react-lite"
 
 import { CommandPalette } from "@components/command-palette"
 
-import { ProjectAuthWrapper, WorkspaceAuthWrapper } from "@layouts/auth-layout"
-
+import ProjectAuthWrapper from "@wrappers/ProjectAuthWrapper"
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
+import WorkspaceAuthWrapper from "@wrappers/WorkspaceAuthWrapper"
 
 import { AppSidebar } from "./sidebar"
 
@@ -16,7 +16,7 @@ export interface IAppLayout {
     withProjectWrapper?: boolean
 }
 
-export const AppLayout: FC<IAppLayout> = observer((props) => {
+export const AppWrapper: FC<IAppLayout> = observer((props) => {
     const { children, header, withProjectWrapper = false } = props
 
     return (

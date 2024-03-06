@@ -19,7 +19,7 @@ import { usePage, useUser, useWorkspace } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-specific-pages"
 import useReloadConfirmations from "@hooks/use-reload-confirmation"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { EUserProjectRoles } from "@constants/project"
 
@@ -248,7 +248,7 @@ const PageDetailsPage: NextPageWithWrapper = observer(() => {
         currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
     return pageIdMobx ? (
-        <AppLayout header={<PageDetailsHeader />} withProjectWrapper>
+        <AppWrapper header={<PageDetailsHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <div className="flex h-full flex-col justify-between">
                 <div className="h-full w-full overflow-hidden">
@@ -361,13 +361,13 @@ const PageDetailsPage: NextPageWithWrapper = observer(() => {
                     <IssuePeekOverview />
                 </div>
             </div>
-        </AppLayout>
+        </AppWrapper>
     ) : (
-        <AppLayout header={<PageDetailsHeader />} withProjectWrapper>
+        <AppWrapper header={<PageDetailsHeader />} withProjectWrapper>
             <div className="grid h-full w-full place-items-center">
                 <Spinner />
             </div>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

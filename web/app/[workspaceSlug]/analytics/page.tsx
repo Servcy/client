@@ -16,7 +16,7 @@ import { WorkspaceAnalyticsHeader } from "@components/headers"
 
 import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { ANALYTICS_TABS } from "@constants/analytics"
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
@@ -45,7 +45,7 @@ const AnalyticsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Analytics` : undefined
 
     return (
-        <AppLayout header={<WorkspaceAnalyticsHeader />}>
+        <AppWrapper header={<WorkspaceAnalyticsHeader />}>
             <PageHead title={pageTitle} />
             {workspaceProjectIds && workspaceProjectIds.length > 0 ? (
                 <div className="flex h-full flex-col overflow-hidden bg-custom-background-100">
@@ -103,7 +103,7 @@ const AnalyticsPage: NextPageWithWrapper = observer(() => {
                     disabled={!isEditingAllowed}
                 />
             )}
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

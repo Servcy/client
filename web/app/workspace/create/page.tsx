@@ -15,7 +15,7 @@ import { CreateWorkspaceForm } from "@components/workspace"
 
 import { useUser } from "@hooks/store"
 
-import DefaultLayout from "@layouts/DefaultLayout"
+import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
@@ -38,7 +38,7 @@ const CreateWorkspacePage: NextPageWithWrapper = observer(() => {
 
     return (
         <UserAuthWrapper>
-            <DefaultLayout gradient={true}>
+            <DefaultWrapper gradient={true}>
                 <PageHead title="Create Workspace" />
                 <div className="flex h-full flex-col gap-y-2 overflow-hidden sm:flex-row sm:gap-y-0">
                     <div className="relative h-1/6 flex-shrink-0 sm:w-2/12 md:w-3/12 lg:w-1/5">
@@ -68,7 +68,7 @@ const CreateWorkspacePage: NextPageWithWrapper = observer(() => {
                         </div>
                     </div>
                 </div>
-            </DefaultLayout>
+            </DefaultWrapper>
         </UserAuthWrapper>
     )
 })

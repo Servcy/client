@@ -12,7 +12,7 @@ import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspac
 
 import { useWorkspace } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
@@ -26,7 +26,7 @@ const WorkspaceViewsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - All Views` : undefined
 
     return (
-        <AppLayout header={<GlobalIssuesHeader activeLayout="list" />}>
+        <AppWrapper header={<GlobalIssuesHeader activeLayout="list" />}>
             <PageHead title={pageTitle} />
             <div className="flex flex-col h-full w-full overflow-hidden">
                 <div className="flex h-11 w-full items-center gap-2.5  px-5 py-3 overflow-hidden border-b border-custom-border-200">
@@ -48,7 +48,7 @@ const WorkspaceViewsPage: NextPageWithWrapper = observer(() => {
                     <GlobalViewsList searchQuery={query} />
                 </div>
             </div>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

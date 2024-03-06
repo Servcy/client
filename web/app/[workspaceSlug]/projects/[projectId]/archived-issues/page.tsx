@@ -11,7 +11,7 @@ import { ArchivedIssueLayoutRoot } from "@components/issues"
 
 import { useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const ProjectArchivedIssuesPage: NextPageWithWrapper = observer(() => {
     // router
@@ -24,10 +24,10 @@ const ProjectArchivedIssuesPage: NextPageWithWrapper = observer(() => {
     const pageTitle = project?.name && `${project?.name} - Archived issues`
 
     return (
-        <AppLayout header={<ProjectArchivedIssuesHeader />} withProjectWrapper>
+        <AppWrapper header={<ProjectArchivedIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <ArchivedIssueLayoutRoot />
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

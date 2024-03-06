@@ -6,7 +6,7 @@ import { FC, ReactNode } from "react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
-import { useLabel, useMember, useProject, useUser } from "@hooks/store"
+import { useMember, useProject, useUser } from "@hooks/store"
 
 import { Button, Spinner } from "@servcy/ui"
 
@@ -14,7 +14,7 @@ export interface IWorkspaceAuthWrapper {
     children: ReactNode
 }
 
-export const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
+const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
     const { children } = props
     // store hooks
     const { membership } = useUser()
@@ -100,3 +100,5 @@ export const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) 
 
     return <>{children}</>
 })
+
+export default WorkspaceAuthWrapper

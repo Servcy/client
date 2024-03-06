@@ -8,7 +8,7 @@ import { WorkspaceSettingHeader } from "@components/headers"
 
 import { useUser, useWorkspace } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { EUserWorkspaceRoles } from "@constants/workspace"
 
@@ -37,7 +37,7 @@ const BillingSettingsPage: NextPageWithWrapper = observer(() => {
         )
 
     return (
-        <AppLayout header={<WorkspaceSettingHeader title="Billing & Plans Settings" />}>
+        <AppWrapper header={<WorkspaceSettingHeader title="Billing & Plans Settings" />}>
             <WorkspaceSettingLayout>
                 <PageHead title={pageTitle} />
                 <section className="w-full overflow-y-auto py-8 pr-9">
@@ -57,7 +57,7 @@ const BillingSettingsPage: NextPageWithWrapper = observer(() => {
                     </div>
                 </section>
             </WorkspaceSettingLayout>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

@@ -40,7 +40,6 @@
             "@contexts/*": ["./contexts/*"],
             "@constants/*": ["./constants/*"],
             "@helpers/*": ["./helpers/*"],
-            "@layouts/*": ["./layouts/*"],
             "@styles/*": ["./styles/*"],
             "@wrappers/*": ["./wrappers/*"],
             "@components/*": ["./components/*"],

@@ -20,7 +20,7 @@ import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
 import useUserAuth from "@hooks/use-user-auth"
 
-import DefaultLayout from "@layouts/DefaultLayout"
+import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
 
@@ -144,7 +144,7 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
 
     return (
         <UserAuthWrapper>
-            <DefaultLayout>
+            <DefaultWrapper>
                 <PageHead title="Onboarding" />
                 <SwitchOrDeleteAccountModal
                     isOpen={showDeleteAccountModal}
@@ -254,7 +254,7 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
                         <Spinner />
                     </div>
                 )}
-            </DefaultLayout>
+            </DefaultWrapper>
         </UserAuthWrapper>
     )
 })

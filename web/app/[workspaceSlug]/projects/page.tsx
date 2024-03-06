@@ -9,7 +9,7 @@ import { ProjectCardList } from "@components/project"
 
 import { useWorkspace } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const ProjectsPage: NextPageWithWrapper = observer(() => {
     // store
@@ -18,10 +18,10 @@ const ProjectsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Projects` : undefined
 
     return (
-        <AppLayout header={<ProjectsHeader />}>
+        <AppWrapper header={<ProjectsHeader />}>
             <PageHead title={pageTitle} />
             <ProjectCardList />
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

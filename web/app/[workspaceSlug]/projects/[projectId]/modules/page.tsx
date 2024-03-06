@@ -11,7 +11,7 @@ import { ModulesListView } from "@components/modules"
 
 import { useProject } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const ProjectModulesPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
@@ -23,10 +23,10 @@ const ProjectModulesPage: NextPageWithWrapper = observer(() => {
     const pageTitle = project?.name ? `${project?.name} - Modules` : undefined
 
     return (
-        <AppLayout header={<ModulesListHeader />} withProjectWrapper>
+        <AppWrapper header={<ModulesListHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <ModulesListView />
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

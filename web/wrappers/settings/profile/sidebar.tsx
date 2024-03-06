@@ -44,7 +44,7 @@ export const ProfileLayoutSidebar = observer(() => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
     } = useApplication()
-    const { currentUser, currentUserSettings, signOut } = useUser()
+    const { currentUserSettings, logOut } = useUser()
     const { workspaces } = useWorkspace()
 
     const workspacesList = Object.values(workspaces ?? {})
@@ -87,7 +87,7 @@ export const ProfileLayoutSidebar = observer(() => {
     const handleSignOut = async () => {
         setIsSigningOut(true)
 
-        await signOut()
+        await logOut()
             .then(() => {
                 mutate("CURRENT_USER_DETAILS", null)
                 setTheme("system")
@@ -128,10 +128,7 @@ export const ProfileLayoutSidebar = observer(() => {
                         </h6>
                     )}
                     <div className="mt-2 h-full space-y-1.5 overflow-y-auto">
-                        {PROFILE_ACTION_LINKS.map((link) => {
-                            if (link.key === "change-password" && currentUser?.is_password_autoset) return null
-
-                            return (
+                        {PROFILE_ACTION_LINKS.map((link) => (
                                 <Link
                                     key={link.key}
                                     href={link.href}
@@ -156,8 +153,7 @@ export const ProfileLayoutSidebar = observer(() => {
                                         </div>
                                     </Tooltip>
                                 </Link>
-                            )
-                        })}
+                            ))}
                     </div>
                 </div>
                 <div className="flex flex-col overflow-x-hidden px-4">

@@ -29,7 +29,7 @@ export const ProfilePreferenceSettingsLayout: FC<IProfilePreferenceSettingsLayou
     const showMenuItem = () => {
         const item = router.asPath.split("/")
         let splittedItem = item[item.length - 1]
-        splittedItem = splittedItem.replace(splittedItem[0], splittedItem[0].toUpperCase())
+        splittedItem = splittedItem?.replace(splittedItem[0] ?? "", (splittedItem[0] ?? "").toUpperCase())
         return splittedItem
     }
 

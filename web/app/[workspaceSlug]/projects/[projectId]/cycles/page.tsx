@@ -18,7 +18,7 @@ import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from
 import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
 import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
@@ -80,7 +80,7 @@ const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
         )
 
     return (
-        <AppLayout header={<CyclesHeader />} withProjectWrapper>
+        <AppWrapper header={<CyclesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <div className="w-full h-full">
                 <CycleCreateUpdateModal
@@ -228,7 +228,7 @@ const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
                     </Tab.Group>
                 )}
             </div>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

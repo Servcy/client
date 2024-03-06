@@ -12,7 +12,7 @@ import { ProjectFeaturesList } from "@components/project"
 
 import { useProject, useUser } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { ProjectSettingLayout } from "@wrappers/settings"
 
@@ -34,7 +34,7 @@ const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Features` : undefined
 
     return (
-        <AppLayout header={<ProjectSettingHeader title="Features Settings" />} withProjectWrapper>
+        <AppWrapper header={<ProjectSettingHeader title="Features Settings" />} withProjectWrapper>
             <ProjectSettingLayout>
                 <PageHead title={pageTitle} />
                 <section className={`w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "opacity-60"}`}>
@@ -44,7 +44,7 @@ const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
                     <ProjectFeaturesList />
                 </section>
             </ProjectSettingLayout>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

@@ -16,7 +16,7 @@ import { ModuleDetailsSidebar } from "@components/modules"
 import { useModule, useProject } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const ModuleIssuesPage: NextPageWithWrapper = observer(() => {
     // router
@@ -47,7 +47,7 @@ const ModuleIssuesPage: NextPageWithWrapper = observer(() => {
     if (!workspaceSlug || !projectId || !moduleId) return <></>
 
     return (
-        <AppLayout header={<ModuleIssuesHeader />} withProjectWrapper>
+        <AppWrapper header={<ModuleIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
             {error ? (
                 <EmptyState
@@ -77,7 +77,7 @@ const ModuleIssuesPage: NextPageWithWrapper = observer(() => {
                     )}
                 </div>
             )}
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

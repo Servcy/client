@@ -14,7 +14,7 @@ type Props = {
 
 const AUTHORIZED_ROLES = [20, 15, 10]
 
-export const ProfileAuthWrapper: React.FC<Props> = observer((props) => {
+const ProfileAuthWrapper: React.FC<Props> = observer((props) => {
     const { children, className, showProfileIssuesFilter } = props
     const router = useRouter()
 
@@ -44,3 +44,5 @@ export const ProfileAuthWrapper: React.FC<Props> = observer((props) => {
         </div>
     )
 })
+
+export default ProfileAuthWrapper

@@ -30,7 +30,7 @@ interface IProjectAuthWrapper {
     children: ReactNode
 }
 
-export const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
+const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
     const { children } = props
     // store
     const { fetchInboxes } = useInbox()
@@ -157,3 +157,5 @@ export const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
 
     return <>{children}</>
 })
+
+export default ProjectAuthWrapper

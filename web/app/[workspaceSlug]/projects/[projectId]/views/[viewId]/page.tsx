@@ -14,7 +14,7 @@ import { ProjectViewLayoutRoot } from "@components/issues"
 
 import { useProject, useProjectView } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 const ProjectViewIssuesPage: NextPageWithWrapper = observer(() => {
     // router
@@ -36,7 +36,7 @@ const ProjectViewIssuesPage: NextPageWithWrapper = observer(() => {
     )
 
     return (
-        <AppLayout header={<ProjectViewIssuesHeader />} withProjectWrapper>
+        <AppWrapper header={<ProjectViewIssuesHeader />} withProjectWrapper>
             {error ? (
                 <EmptyState
                     image={emptyView}
@@ -53,7 +53,7 @@ const ProjectViewIssuesPage: NextPageWithWrapper = observer(() => {
                     <ProjectViewLayoutRoot />
                 </>
             )}
-        </AppLayout>
+        </AppWrapper>
     )
 })
 

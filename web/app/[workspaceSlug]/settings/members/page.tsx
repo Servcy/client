@@ -15,7 +15,7 @@ import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/
 
 import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
 
-import { AppLayout } from "@layouts/app-layout"
+import { AppWrapper } from "@wrappers/app"
 
 import { MEMBER_INVITED } from "@constants/event-tracker"
 import { EUserWorkspaceRoles } from "@constants/workspace"
@@ -85,7 +85,7 @@ const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Members` : undefined
 
     return (
-        <AppLayout header={<WorkspaceSettingHeader title="Members Settings" />}>
+        <AppWrapper header={<WorkspaceSettingHeader title="Members Settings" />}>
             <WorkspaceSettingLayout>
                 <PageHead title={pageTitle} />
                 <SendWorkspaceInvitationModal
@@ -115,7 +115,7 @@ const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {
                     <WorkspaceMembersList searchQuery={searchQuery} />
                 </section>
             </WorkspaceSettingLayout>
-        </AppLayout>
+        </AppWrapper>
     )
 })
 
