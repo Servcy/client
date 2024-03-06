@@ -17,7 +17,7 @@ import {
 } from "react-icons/ai";
 import { GoMention } from "react-icons/go";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
-// APIs
+
 import {
   archiveItems as archiveItemsApi,
   deleteItems as deleteItemsApi,

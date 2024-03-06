@@ -7,7 +7,7 @@ import FigmaConfiguration from "./FigmaConfiguration";
 import GithubConfiguration from "./GithubConfiguration";
 import GoogleConfiguration from "./GoogleConfiguration";
 import MicrosoftConfiguration from "./MicrosoftConfiguration";
-// Apis
+
 import {
   disableIntegrationEvent,
   enableIntegrationEvent,

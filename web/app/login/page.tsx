@@ -10,7 +10,7 @@ import { HiMail } from "react-icons/hi";
 import { RiWhatsappLine } from "react-icons/ri";
 
 import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
-// APIs
+
 import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";
 
 import OTPInput from "@/components/Login/OTPInput";

@@ -9,7 +9,7 @@ import { Spin } from "antd";
 
 import { getQueryParams } from "@/utils/Shared";
 import { capitalizeFirstLetter } from "@/utils/Shared/formatters";
-// APIs
+
 import { integrationOauth as integrationOauthApi } from "@/apis/integration";
 
 export default function IntegrationOauth(): JSX.Element {

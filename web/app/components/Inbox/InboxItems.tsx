@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { HiArchiveBoxArrowDown } from "react-icons/hi2";
 import { MdOutlineBlock } from "react-icons/md";
 import Cause from "./Cause";
-// APIs
+
 import { disableNotificationType } from "@/apis/integration";
 
 const InboxItems = ({

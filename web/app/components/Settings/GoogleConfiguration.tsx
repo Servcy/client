@@ -6,7 +6,7 @@ import { Integration, UserIntegration } from "@/types/apps/integration";
 import { Button, Input, Select } from "antd";
 import Image from "next/image.js";
 import { MdOutlineSyncAlt } from "react-icons/md";
-// Apis
+
 import {
   configureUserIntegration as configureUserIntegrationApi,
   fetchUserIntegrations as fetchUserIntegrationsApi,

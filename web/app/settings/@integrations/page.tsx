@@ -9,7 +9,7 @@ import IntegrationConfigurationModal from "@/components/Settings/IntegrationConf
 import { Button, Card, Skeleton } from "antd";
 import Image from "next/image.js";
 import { AiFillSetting } from "react-icons/ai";
-// APIs
+
 import { fetchIntegrations } from "@/apis/integration";
 
 import { Integration } from "@/types/apps/integration";

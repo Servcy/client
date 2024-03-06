@@ -14,7 +14,7 @@ import "@/styles/globals.css";
 
 import { isMobileDevice } from "@/utils/Shared";
 import { deleteCookie, getCookie } from "cookies-next";
-// APIs
+
 import { logout as logoutApi } from "@/apis/logout";
 
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {

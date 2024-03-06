@@ -9,7 +9,7 @@ import { Button, Card, Input, Select, Skeleton, Tag } from "antd";
 import Image from "next/image.js";
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai";
 import { HiArrowsRightLeft } from "react-icons/hi2";
-// APIs
+
 import { fetchIntegrations } from "@/apis/integration";
 
 import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations";
