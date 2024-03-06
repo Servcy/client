@@ -3,7 +3,7 @@
 import Blocked from "@components/shared/blocked"
 import SideBar from "@components/shared/sidebar"
 
-import "@styles/globals.css"
+import "@styles/global.css"
 
 import { AppProps } from "next/app"
 import dynamic from "next/dynamic"
