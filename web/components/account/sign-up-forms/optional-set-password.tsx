@@ -30,7 +30,6 @@ const defaultValues: TCreatePasswordFormValues = {
   password: "",
 };
 
-
 const authService = new AuthService();
 
 export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
@@ -40,7 +39,6 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   // store hooks
   const { captureEvent } = useEventTracker();
-
 
   // form info
   const {
@@ -80,7 +78,7 @@ export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {
           state: "FAILED",
           first_time: true,
         });
-        toast.error("Something went wrong. Please try again.")
+        toast.error("Something went wrong. Please try again.");
       });
   };
 

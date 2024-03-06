@@ -29,8 +29,9 @@ export const SelectRepository: React.FC<Props> = (props) => {
   const getKey = (pageIndex: number) => {
     if (!workspaceSlug || !integration) return;
 
-    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/workspaces/${workspaceSlug}/workspace-integrations/${integration.id
-      }/github-repositories/?page=${++pageIndex}`;
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/workspaces/${workspaceSlug}/workspace-integrations/${
+      integration.id
+    }/github-repositories/?page=${++pageIndex}`;
   };
 
   const fetchGithubRepos = async (url: string) => {

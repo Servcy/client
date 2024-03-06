@@ -32,8 +32,6 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
   const { captureCycleEvent } = useEventTracker();
   const { deleteCycle } = useCycle();
 
-
-
   const formSubmit = async () => {
     if (!cycle) return;
 

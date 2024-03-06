@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 
-
 import { CustomSelect } from "@servcy/ui";
 
 import { IAnalyticsParams, TXAxisValues } from "@servcy/types";

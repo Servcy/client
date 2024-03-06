@@ -52,7 +52,6 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
   const { captureWorkspaceEvent } = useEventTracker();
   const { createWorkspace } = useWorkspace();
 
-
   // form info
   const {
     handleSubmit,

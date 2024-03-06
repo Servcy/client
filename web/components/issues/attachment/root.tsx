@@ -25,7 +25,6 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
   const { createAttachment, removeAttachment } = useIssueDetail();
   const { captureIssueEvent } = useEventTracker();
 
-
   const handleAttachmentOperations: TAttachmentOperations = useMemo(
     () => ({
       create: async (data: FormData) => {

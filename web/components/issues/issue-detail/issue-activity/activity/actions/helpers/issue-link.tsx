@@ -22,10 +22,11 @@ export const IssueLink: FC<TIssueLink> = (props) => {
     <Tooltip tooltipContent={activity.issue_detail ? activity.issue_detail.name : "This issue has been deleted"}>
       <a
         aria-disabled={activity.issue === null}
-        href={`${activity.issue_detail
+        href={`${
+          activity.issue_detail
             ? `/${activity.workspace_detail?.slug}/projects/${activity.project}/issues/${activity.issue}`
             : "#"
-          }`}
+        }`}
         target={activity.issue === null ? "_self" : "_blank"}
         rel={activity.issue === null ? "" : "noopener noreferrer"}
         className="inline-flex items-center gap-1 font-medium text-custom-text-100 hover:underline"

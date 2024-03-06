@@ -16,7 +16,7 @@ export type TIssueLinkList = {
 export const IssueLinkList: FC<TIssueLinkList> = observer((props) => {
   // props
   const { issueId, linkOperations } = props;
-  
+
   const {
     link: { getLinksByIssueId },
   } = useIssueDetail();

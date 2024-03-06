@@ -12,7 +12,7 @@ import { EIssueActions } from "../../types";
 import { BaseKanBanRoot } from "../base-kanban-root";
 import { EIssuesStoreType } from "@constants/issue";
 
-export interface ICycleKanBanLayout { }
+export interface ICycleKanBanLayout {}
 
 export const CycleKanBanLayout: React.FC = observer(() => {
   const router = useRouter();

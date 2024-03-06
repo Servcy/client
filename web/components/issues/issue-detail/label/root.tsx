@@ -24,10 +24,9 @@ export type TLabelOperations = {
 
 export const IssueLabel: FC<TIssueLabel> = observer((props) => {
   const { workspaceSlug, projectId, issueId, disabled = false, isInboxIssue = false, onLabelUpdate } = props;
-  
+
   const { updateIssue } = useIssueDetail();
   const { createLabel } = useLabel();
-
 
   const labelOperations: TLabelOperations = useMemo(
     () => ({

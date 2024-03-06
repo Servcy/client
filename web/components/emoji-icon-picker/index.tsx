@@ -84,8 +84,9 @@ const EmojiIconPicker: React.FC<Props> = (props) => {
                         onClick={() => {
                           setOpenColorPicker(false);
                         }}
-                        className={`-my-1 w-1/2 border-b pb-2 text-center text-sm font-medium outline-none transition-colors ${selected ? "" : "border-transparent text-custom-text-200"
-                          }`}
+                        className={`-my-1 w-1/2 border-b pb-2 text-center text-sm font-medium outline-none transition-colors ${
+                          selected ? "" : "border-transparent text-custom-text-200"
+                        }`}
                       >
                         {tab.title}
                       </button>

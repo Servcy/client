@@ -21,7 +21,6 @@ type CycleModalProps = {
   projectId: string;
 };
 
-
 const cycleService = new CycleService();
 
 export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
@@ -32,8 +31,6 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
   const { captureCycleEvent } = useEventTracker();
   const { workspaceProjectIds } = useProject();
   const { createCycle, updateCycleDetails } = useCycle();
-
-
 
   const { setValue: setCycleTab } = useLocalStorage<TCycleView>("cycle_tab", "active");
 

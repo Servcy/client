@@ -40,8 +40,6 @@ const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
   } = useMember();
   const { currentWorkspace } = useWorkspace();
 
-
-
   const handleWorkspaceInvite = (data: IWorkspaceBulkInviteFormData) => {
     if (!workspaceSlug) return;
 

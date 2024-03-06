@@ -1,4 +1,3 @@
-
 import { APIService } from "@services/api.service";
 
 import type { ILinkDetails, IModule, ModuleLink, TIssue } from "@servcy/types";

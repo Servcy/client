@@ -10,7 +10,7 @@ import { useApplication, useUser, useWorkspace } from "@hooks/store";
 import { THEMES } from "@constants/themes";
 // layouts
 import InstanceLayout from "@layouts/instance-layout";
-// contexts
+
 import { ToastContextProvider } from "@contexts/toast.context";
 import { SWRConfig } from "swr";
 

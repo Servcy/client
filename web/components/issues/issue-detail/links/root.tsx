@@ -25,7 +25,7 @@ export type TIssueLinkRoot = {
 export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
   // props
   const { workspaceSlug, projectId, issueId, disabled = false } = props;
-  
+
   const { toggleIssueLinkModal: toggleIssueLinkModalStore, createLink, updateLink, removeLink } = useIssueDetail();
   // state
   const [isIssueLinkModal, setIsIssueLinkModal] = useState(false);
@@ -36,8 +36,6 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
     },
     [toggleIssueLinkModalStore]
   );
-
-
 
   const handleLinkOperations: TLinkOperations = useMemo(
     () => ({

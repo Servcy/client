@@ -28,7 +28,6 @@ import { NextPageWithLayout } from "@lib/types";
 
 import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker";
 
-
 const workspaceService = new WorkspaceService();
 
 const OnboardingPage: NextPageWithLayout = observer(() => {
@@ -42,7 +41,7 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
   const { currentUser, currentUserLoader, updateCurrentUser, updateUserOnBoard } = useUser();
   const { workspaces, fetchWorkspaces } = useWorkspace();
   // custom hooks
-  const { } = useUserAuth({ routeAuth: "onboarding", user: currentUser, isLoading: currentUserLoader });
+  const {} = useUserAuth({ routeAuth: "onboarding", user: currentUser, isLoading: currentUserLoader });
 
   const user = currentUser ?? undefined;
   const workspacesList = Object.values(workspaces ?? {});

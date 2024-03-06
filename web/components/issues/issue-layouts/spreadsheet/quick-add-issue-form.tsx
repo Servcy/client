@@ -81,10 +81,8 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
 
   const handleClose = () => setIsOpen(false);
 
-
   useKeypress("Escape", handleClose);
   useOutsideClickDetector(ref, handleClose);
-
 
   useEffect(() => {
     setFocus("name");

@@ -43,7 +43,7 @@ export type TActivityOperations = {
 
 export const IssueActivity: FC<TIssueActivity> = observer((props) => {
   const { workspaceSlug, projectId, issueId } = props;
-  
+
   const { createComment, updateComment, removeComment } = useIssueDetail();
 
   const { getProjectById } = useProject();

@@ -55,7 +55,6 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
   // states
   const [showSnoozeOptions, setShowSnoozeOptions] = React.useState(false);
 
-
   // refs
   const snoozeRef = useRef<HTMLDivElement | null>(null);
 

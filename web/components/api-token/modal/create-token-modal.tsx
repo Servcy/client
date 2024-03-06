@@ -20,7 +20,6 @@ type Props = {
   onClose: () => void;
 };
 
-
 const apiTokenService = new APITokenService();
 
 export const CreateApiTokenModal: React.FC<Props> = (props) => {
@@ -31,8 +30,6 @@ export const CreateApiTokenModal: React.FC<Props> = (props) => {
   // router
   const router = useRouter();
   const { workspaceSlug } = router.query;
-
-
 
   const handleClose = () => {
     onClose();

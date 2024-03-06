@@ -34,7 +34,6 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
   const { captureProjectEvent } = useEventTracker();
   const { updateProject } = useProject();
 
-
   // form info
   const {
     handleSubmit,

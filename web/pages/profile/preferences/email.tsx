@@ -12,7 +12,6 @@ import { UserService } from "@services/user.service";
 // type
 import { NextPageWithLayout } from "@lib/types";
 
-
 const userService = new UserService();
 
 const ProfilePreferencesThemePage: NextPageWithLayout = () => {

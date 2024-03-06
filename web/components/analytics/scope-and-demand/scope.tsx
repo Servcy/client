@@ -1,4 +1,3 @@
-
 import { BarGraph, ProfileEmptyState } from "@components/ui";
 // image
 import emptyBarGraph from "public/empty-state/empty_bar_graph.svg";

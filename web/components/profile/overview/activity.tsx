@@ -17,7 +17,6 @@ import { calculateTimeAgo } from "@helpers/date-time.helper";
 // fetch-keys
 import { USER_PROFILE_ACTIVITY } from "@constants/fetch-keys";
 
-
 const userService = new UserService();
 
 export const ProfileActivity = observer(() => {

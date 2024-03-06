@@ -35,7 +35,6 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
   const router = useRouter();
   const { workspaceSlug, projectId, cycleId, moduleId } = router.query;
 
-
   // store hooks
   const { currentUser } = useUser();
   const { workspaceProjectIds, getProjectById } = useProject();

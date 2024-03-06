@@ -16,8 +16,6 @@ type Props = {
 export const GeneratedTokenDetails: React.FC<Props> = (props) => {
   const { handleClose, tokenDetails } = props;
 
-
-
   const copyApiToken = (token: string) => {
     copyTextToClipboard(token).then(() =>
       toast.error({

@@ -34,8 +34,6 @@ export const Exporter: React.FC<Props> = observer((props) => {
   // store hooks
   const { workspaceProjectIds, getProjectById } = useProject();
 
-
-
   const options = workspaceProjectIds?.map((projectId) => {
     const projectDetails = getProjectById(projectId);
 
@@ -73,8 +71,9 @@ export const Exporter: React.FC<Props> = observer((props) => {
           toast.error({
             type: "success",
             title: "Export Successful",
-            message: `You will be able to download the exported ${provider === "csv" ? "CSV" : provider === "xlsx" ? "Excel" : provider === "json" ? "JSON" : ""
-              } from the previous export.`,
+            message: `You will be able to download the exported ${
+              provider === "csv" ? "CSV" : provider === "xlsx" ? "Excel" : provider === "json" ? "JSON" : ""
+            } from the previous export.`,
           });
         })
         .catch(() => {
@@ -139,12 +138,12 @@ export const Exporter: React.FC<Props> = observer((props) => {
                       label={
                         value && value.length > 0
                           ? value
-                            .map((projectId) => {
-                              const projectDetails = getProjectById(projectId);
+                              .map((projectId) => {
+                                const projectDetails = getProjectById(projectId);
 
-                              return projectDetails?.identifier;
-                            })
-                            .join(", ")
+                                return projectDetails?.identifier;
+                              })
+                              .join(", ")
                           : "All projects"
                       }
                       onOpen={() => setIsSelectOpen(true)}

@@ -15,17 +15,17 @@ const useUserIssueNotificationSubscription = (
   projectId?: string | string[] | null,
   issueId?: string | string[] | null
 ) => {
-  const { } = useUserAuth({ user: user, isLoading: false });
+  const {} = useUserAuth({ user: user, isLoading: false });
 
   const { data, error, mutate } = useSWR(
     workspaceSlug && projectId && issueId ? `SUBSCRIPTION_STATUE_${workspaceSlug}_${projectId}_${issueId}` : null,
     workspaceSlug && projectId && issueId
       ? () =>
-        userNotificationServices.getIssueNotificationSubscriptionStatus(
-          workspaceSlug.toString(),
-          projectId.toString(),
-          issueId.toString()
-        )
+          userNotificationServices.getIssueNotificationSubscriptionStatus(
+            workspaceSlug.toString(),
+            projectId.toString(),
+            issueId.toString()
+          )
       : null
   );
 

@@ -27,7 +27,6 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
   } = useIssueDetail();
   const { getUserDetails } = useMember();
 
-
   // state
   const [isIssueLinkModalOpen, setIsIssueLinkModalOpen] = useState(false);
   const toggleIssueLinkModal = (modalToggle: boolean) => {

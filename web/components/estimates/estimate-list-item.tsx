@@ -27,8 +27,6 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
   // store hooks
   const { currentProjectDetails, updateProject } = useProject();
 
-
-
   const handleUseEstimate = async () => {
     if (!workspaceSlug || !projectId) return;
 

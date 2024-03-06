@@ -60,8 +60,9 @@ export const InboxIssueListItem: FC<TInboxIssueListItem> = observer((props) => {
         href={`/${workspaceSlug}/projects/${projectId}/inbox/${inboxId}?inboxIssueId=${issueId}`}
       >
         <div
-          className={`relative min-h-[5rem]select-none space-y-3 border-b border-custom-border-200 px-4 py-2 hover:bg-custom-primary/5 cursor-pointer ${inboxIssueId === issueId ? "bg-custom-primary/5" : " "
-            } ${inboxIssueDetail.status !== -2 ? "opacity-60" : ""}`}
+          className={`relative min-h-[5rem]select-none space-y-3 border-b border-custom-border-200 px-4 py-2 hover:bg-custom-primary/5 cursor-pointer ${
+            inboxIssueId === issueId ? "bg-custom-primary/5" : " "
+          } ${inboxIssueDetail.status !== -2 ? "opacity-60" : ""}`}
         >
           <div className="flex items-center justify-between gap-x-2">
             <div className="relative flex items-center gap-x-2 overflow-hidden">

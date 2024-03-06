@@ -138,7 +138,8 @@ export const IssueLabelSelect: React.FC<IIssueLabelSelect> = observer((props) =>
                     key={option.value}
                     value={option.value}
                     className={({ selected }) =>
-                      `flex cursor-pointer select-none items-center justify-between gap-2 truncate rounded px-1 py-1.5 hover:bg-custom-background-80 ${selected ? "text-custom-text-100" : "text-custom-text-200"
+                      `flex cursor-pointer select-none items-center justify-between gap-2 truncate rounded px-1 py-1.5 hover:bg-custom-background-80 ${
+                        selected ? "text-custom-text-100" : "text-custom-text-200"
                       }`
                     }
                   >

@@ -28,7 +28,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
   const router = useRouter();
   const { workspaceSlug } = router.query;
 
-
   // states
   const [deleteProjectModalOpen, setDeleteProjectModal] = useState(false);
   const [joinProjectModalOpen, setJoinProjectModal] = useState(false);

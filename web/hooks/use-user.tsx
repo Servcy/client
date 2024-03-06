@@ -8,7 +8,6 @@ import { CURRENT_USER } from "@constants/fetch-keys";
 
 import type { IUser } from "@servcy/types";
 
-
 const userService = new UserService();
 
 export default function useUser({ redirectTo = "", redirectIfFound = false, options = {} } = {}) {

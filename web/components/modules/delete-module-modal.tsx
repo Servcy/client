@@ -31,8 +31,6 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
   const { captureModuleEvent } = useEventTracker();
   const { deleteModule } = useModule();
 
-
-
   const handleClose = () => {
     onClose();
     setIsDeleteLoading(false);

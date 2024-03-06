@@ -1,4 +1,3 @@
-
 import { useCurrentTime } from "@hooks/use-current-time";
 
 type Props = {

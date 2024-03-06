@@ -172,8 +172,9 @@ const IssueRowDetails = observer((props: IssueRowDetailsProps) => {
   const customActionButton = (
     <div
       ref={menuActionRef}
-      className={`w-full cursor-pointer rounded p-1 text-custom-sidebar-text-400 hover:bg-custom-background-80 ${isMenuActive ? "bg-custom-background-80 text-custom-text-100" : "text-custom-text-200"
-        }`}
+      className={`w-full cursor-pointer rounded p-1 text-custom-sidebar-text-400 hover:bg-custom-background-80 ${
+        isMenuActive ? "bg-custom-background-80 text-custom-text-100" : "text-custom-text-200"
+      }`}
       onClick={() => setIsMenuActive(!isMenuActive)}
     >
       <MoreHorizontal className="h-3.5 w-3.5" />
@@ -208,8 +209,9 @@ const IssueRowDetails = observer((props: IssueRowDetailsProps) => {
           >
             <div className="relative flex cursor-pointer items-center text-center text-xs hover:text-custom-text-100">
               <span
-                className={`flex items-center justify-center font-medium  group-hover:opacity-0 ${isMenuActive ? "opacity-0" : "opacity-100"
-                  }`}
+                className={`flex items-center justify-center font-medium  group-hover:opacity-0 ${
+                  isMenuActive ? "opacity-0" : "opacity-100"
+                }`}
               >
                 {getProjectIdentifierById(issueDetail.project_id)}-{issueDetail.sequence_id}
               </span>

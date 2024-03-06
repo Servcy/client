@@ -1,4 +1,3 @@
-
 import { TWebhookEventTypes } from "@servcy/types";
 
 type Props = {

@@ -24,13 +24,13 @@ type THandleIssuesMutation = (
   orderBy: TIssueOrderByOptions,
   prevData?:
     | {
-      [key: string]: TIssue[];
-    }
+        [key: string]: TIssue[];
+      }
     | TIssue[]
 ) =>
   | {
-    [key: string]: TIssue[];
-  }
+      [key: string]: TIssue[];
+    }
   | TIssue[]
   | undefined;
 

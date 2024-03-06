@@ -25,7 +25,6 @@ type Props = {
   user: IUser | null;
 };
 
-
 const integrationService = new IntegrationService();
 
 export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }) => {
@@ -34,8 +33,6 @@ export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }
 
   const router = useRouter();
   const { workspaceSlug } = router.query;
-
-
 
   const handleDeletion = () => {
     if (!workspaceSlug || !data) return;

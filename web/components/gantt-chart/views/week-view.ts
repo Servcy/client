@@ -1,4 +1,3 @@
-
 import { ChartDataType } from "../types";
 // data
 import { weeks, months } from "../data";

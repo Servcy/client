@@ -52,8 +52,6 @@ export const ModuleEmptyState: React.FC<Props> = observer((props) => {
     currentUser,
   } = useUser();
 
-
-
   const handleAddIssuesToModule = async (data: ISearchIssueResponse[]) => {
     if (!workspaceSlug || !projectId || !moduleId) return;
 

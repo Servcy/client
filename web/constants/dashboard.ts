@@ -121,27 +121,27 @@ export const DURATION_FILTER_OPTIONS: {
   key: TDurationFilterOptions;
   label: string;
 }[] = [
-    {
-      key: "none",
-      label: "None",
-    },
-    {
-      key: "today",
-      label: "Due today",
-    },
-    {
-      key: "this_week",
-      label: " Due this week",
-    },
-    {
-      key: "this_month",
-      label: "Due this month",
-    },
-    {
-      key: "this_year",
-      label: "Due this year",
-    },
-  ];
+  {
+    key: "none",
+    label: "None",
+  },
+  {
+    key: "today",
+    label: "Due today",
+  },
+  {
+    key: "this_week",
+    label: " Due this week",
+  },
+  {
+    key: "this_month",
+    label: "Due this month",
+  },
+  {
+    key: "this_year",
+    label: "Due this year",
+  },
+];
 
 // random background colors for project cards
 export const PROJECT_BACKGROUND_COLORS = [
@@ -160,34 +160,34 @@ export const FILTERED_ISSUES_TABS_LIST: {
   key: TIssuesListTypes;
   label: string;
 }[] = [
-    {
-      key: "upcoming",
-      label: "Upcoming",
-    },
-    {
-      key: "overdue",
-      label: "Overdue",
-    },
-    {
-      key: "completed",
-      label: "Marked completed",
-    },
-  ];
+  {
+    key: "upcoming",
+    label: "Upcoming",
+  },
+  {
+    key: "overdue",
+    label: "Overdue",
+  },
+  {
+    key: "completed",
+    label: "Marked completed",
+  },
+];
 
 // assigned and created issues widgets tabs list
 export const UNFILTERED_ISSUES_TABS_LIST: {
   key: TIssuesListTypes;
   label: string;
 }[] = [
-    {
-      key: "pending",
-      label: "Pending",
-    },
-    {
-      key: "completed",
-      label: "Marked completed",
-    },
-  ];
+  {
+    key: "pending",
+    label: "Pending",
+  },
+  {
+    key: "completed",
+    label: "Marked completed",
+  },
+];
 
 export const ASSIGNED_ISSUES_EMPTY_STATES = {
   pending: {
@@ -243,44 +243,44 @@ export const SIDEBAR_MENU_ITEMS: {
   highlight: (pathname: string, baseUrl: string) => boolean;
   Icon: React.FC<Props>;
 }[] = [
-    {
-      key: "dashboard",
-      label: "Dashboard",
-      href: ``,
-      access: EUserWorkspaceRoles.GUEST,
-      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}`,
-      Icon: LayoutGrid,
-    },
-    {
-      key: "analytics",
-      label: "Analytics",
-      href: `/analytics`,
-      access: EUserWorkspaceRoles.MEMBER,
-      highlight: (pathname: string, baseUrl: string) => pathname.includes(`${baseUrl}/analytics`),
-      Icon: BarChart2,
-    },
-    {
-      key: "projects",
-      label: "Projects",
-      href: `/projects`,
-      access: EUserWorkspaceRoles.GUEST,
-      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/projects`,
-      Icon: Briefcase,
-    },
-    {
-      key: "all-issues",
-      label: "All Issues",
-      href: `/workspace-views/all-issues`,
-      access: EUserWorkspaceRoles.GUEST,
-      highlight: (pathname: string, baseUrl: string) => pathname.includes(`${baseUrl}/workspace-views`),
-      Icon: CheckCircle,
-    },
-    {
-      key: "active-cycles",
-      label: "Active Cycles",
-      href: `/active-cycles`,
-      access: EUserWorkspaceRoles.GUEST,
-      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/active-cycles`,
-      Icon: ContrastIcon,
-    },
-  ];
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    href: ``,
+    access: EUserWorkspaceRoles.GUEST,
+    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}`,
+    Icon: LayoutGrid,
+  },
+  {
+    key: "analytics",
+    label: "Analytics",
+    href: `/analytics`,
+    access: EUserWorkspaceRoles.MEMBER,
+    highlight: (pathname: string, baseUrl: string) => pathname.includes(`${baseUrl}/analytics`),
+    Icon: BarChart2,
+  },
+  {
+    key: "projects",
+    label: "Projects",
+    href: `/projects`,
+    access: EUserWorkspaceRoles.GUEST,
+    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/projects`,
+    Icon: Briefcase,
+  },
+  {
+    key: "all-issues",
+    label: "All Issues",
+    href: `/workspace-views/all-issues`,
+    access: EUserWorkspaceRoles.GUEST,
+    highlight: (pathname: string, baseUrl: string) => pathname.includes(`${baseUrl}/workspace-views`),
+    Icon: CheckCircle,
+  },
+  {
+    key: "active-cycles",
+    label: "Active Cycles",
+    href: `/active-cycles`,
+    access: EUserWorkspaceRoles.GUEST,
+    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/active-cycles`,
+    Icon: ContrastIcon,
+  },
+];

@@ -58,7 +58,6 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
       deleteWorkspace: action,
     });
 
-
     this.workspaceService = new WorkspaceService();
     // root store
     this.router = _rootStore.app.router;

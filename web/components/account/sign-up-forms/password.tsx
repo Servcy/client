@@ -34,7 +34,6 @@ export const SignUpPasswordForm: React.FC<Props> = observer((props) => {
   // states
   const [showPassword, setShowPassword] = useState(false);
 
-
   // form info
   const {
     control,

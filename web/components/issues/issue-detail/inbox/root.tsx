@@ -24,7 +24,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
   const { workspaceSlug, projectId, inboxId, issueId } = props;
   // router
   const router = useRouter();
-  
+
   const {
     issues: { fetchInboxIssueById, updateInboxIssue, removeInboxIssue },
   } = useInboxIssues();

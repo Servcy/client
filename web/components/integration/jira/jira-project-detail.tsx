@@ -9,14 +9,12 @@ import useSWR from "swr";
 // react hook form
 import { useFormContext, Controller } from "react-hook-form";
 
-
 import { JiraImporterService } from "@services/integrations";
 
 // fetch keys
 import { JIRA_IMPORTER_DETAIL } from "@constants/fetch-keys";
 
 import { IJiraImporterForm, IJiraMetadata } from "@servcy/types";
-
 
 import { ToggleSwitch, Spinner } from "@servcy/ui";
 
@@ -26,7 +24,6 @@ type Props = {
   setCurrentStep: React.Dispatch<React.SetStateAction<IJiraIntegrationData>>;
   setDisableTopBarAfter: React.Dispatch<React.SetStateAction<TJiraIntegrationSteps | null>>;
 };
-
 
 const jiraImporterService = new JiraImporterService();
 

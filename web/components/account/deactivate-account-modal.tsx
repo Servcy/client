@@ -25,7 +25,6 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
 
   const router = useRouter();
 
-
   const { setTheme } = useTheme();
 
   const handleClose = () => {

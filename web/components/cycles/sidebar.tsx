@@ -39,7 +39,6 @@ const defaultValues: Partial<ICycle> = {
   end_date: null,
 };
 
-
 const cycleService = new CycleService();
 
 // TODO: refactor the whole component
@@ -60,7 +59,6 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
   // derived values
   const cycleDetails = getCycleById(cycleId);
   const cycleOwnerDetails = cycleDetails ? getUserDetails(cycleDetails.owned_by_id) : undefined;
-
 
   // form info
   const { control, reset } = useForm({
@@ -192,8 +190,8 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
   const progressPercentage = cycleDetails
     ? isCompleted && cycleDetails?.progress_snapshot
       ? Math.round(
-        (cycleDetails.progress_snapshot.completed_issues / cycleDetails.progress_snapshot.total_issues) * 100
-      )
+          (cycleDetails.progress_snapshot.completed_issues / cycleDetails.progress_snapshot.total_issues) * 100
+        )
       : Math.round((cycleDetails.completed_issues / cycleDetails.total_issues) * 100)
     : null;
 

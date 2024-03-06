@@ -1,4 +1,3 @@
-
 import { APIService } from "@services/api.service";
 // type
 import type { IIssueDisplayProperties, TIssue, TIssueActivity, TIssueLink, TIssueSubIssues } from "@servcy/types";

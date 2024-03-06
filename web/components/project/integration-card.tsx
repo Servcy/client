@@ -4,7 +4,6 @@ import Image from "next/image";
 
 import useSWR, { mutate } from "swr";
 
-
 import { ProjectService } from "@services/project";
 
 import { useRouter } from "next/router";
@@ -34,14 +33,11 @@ const integrationDetails: { [key: string]: any } = {
   },
 };
 
-
 const projectService = new ProjectService();
 
 export const IntegrationCard: React.FC<Props> = ({ integration }) => {
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-
-
 
   const { data: syncedGithubRepository } = useSWR(
     projectId ? PROJECT_GITHUB_REPOSITORY(projectId as string) : null,

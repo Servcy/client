@@ -15,8 +15,8 @@ export class IssueActivityService extends APIService {
     issueId: string,
     params:
       | {
-        created_at__gt: string;
-      }
+          created_at__gt: string;
+        }
       | {} = {}
   ): Promise<TIssueActivity[]> {
     return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`, {

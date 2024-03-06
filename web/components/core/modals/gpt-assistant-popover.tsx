@@ -44,7 +44,6 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
   const router = useRouter();
   const { workspaceSlug } = router.query;
 
-
   // popper
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: placement ?? "auto",
@@ -242,8 +241,9 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
                 value={value}
                 onChange={onChange}
                 ref={ref}
-                placeholder={`${prompt && prompt !== "" ? "Tell AI what action to perform on this content..." : "Ask AI anything..."
-                  }`}
+                placeholder={`${
+                  prompt && prompt !== "" ? "Tell AI what action to perform on this content..." : "Ask AI anything..."
+                }`}
                 className="w-full"
               />
             )}

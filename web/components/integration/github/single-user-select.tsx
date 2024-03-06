@@ -32,7 +32,6 @@ const importOptions = [
   },
 ];
 
-
 const workspaceService = new WorkspaceService();
 
 export const SingleUserSelect: React.FC<Props> = ({ collaborator, index, users, setUsers }) => {

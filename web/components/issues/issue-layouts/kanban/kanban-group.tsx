@@ -63,7 +63,7 @@ export const KanbanGroup = (props: IKanbanGroup) => {
     scrollableContainerRef,
     isDragStarted,
   } = props;
-  
+
   const projectState = useProjectState();
 
   const prePopulateQuickAddData = (

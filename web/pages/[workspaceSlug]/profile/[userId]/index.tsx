@@ -23,7 +23,6 @@ import { NextPageWithLayout } from "@lib/types";
 import { USER_PROFILE_DATA } from "@constants/fetch-keys";
 import { GROUP_CHOICES } from "@constants/project";
 
-
 const userService = new UserService();
 
 const ProfileOverviewPage: NextPageWithLayout = () => {

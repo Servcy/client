@@ -12,7 +12,6 @@ interface IEmailNotificationFormProps {
   data: IUserEmailNotificationSettings;
 }
 
-
 const userService = new UserService();
 
 export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) => {

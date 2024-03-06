@@ -45,7 +45,6 @@ export const CycleIssueQuickActions: React.FC<IQuickActionProps> = observer((pro
   } = useUser();
   const { getStateById } = useProjectState();
 
-
   // derived values
   const stateDetails = getStateById(issue.state_id);
   // auth

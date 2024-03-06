@@ -1,4 +1,3 @@
-
 import { APIService } from "@services/api.service";
 
 import type {
@@ -32,8 +31,8 @@ export class UserService extends APIService {
     params: any
   ): Promise<
     | {
-      [key: string]: TIssue[];
-    }
+        [key: string]: TIssue[];
+      }
     | TIssue[]
   > {
     return this.get(`/api/workspaces/${workspaceSlug}/my-issues/`, {

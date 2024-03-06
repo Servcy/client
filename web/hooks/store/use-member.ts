@@ -1,7 +1,6 @@
 import { useContext } from "react";
 // mobx store
 import { StoreContext } from "@contexts/store-context";
-;
 import { IMemberRootStore } from "@store/member";
 
 export const useMember = (): IMemberRootStore => {

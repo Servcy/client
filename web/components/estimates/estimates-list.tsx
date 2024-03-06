@@ -32,8 +32,6 @@ export const EstimatesList: React.FC = observer(() => {
   const { projectEstimates, getProjectEstimateById } = useEstimate();
   const { currentUser } = useUser();
 
-
-
   const editEstimate = (estimate: IEstimate) => {
     setEstimateFormOpen(true);
     // Order the points array by key before updating the estimate to update state

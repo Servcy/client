@@ -130,14 +130,15 @@ export const Avatar: React.FC<Props> = (props) => {
   return (
     <Tooltip tooltipContent={fallbackText ?? name ?? "?"} disabled={!showTooltip}>
       <div
-        className={`${!isAValidNumber(size) ? sizeInfo.avatarSize : ""
-          } grid place-items-center overflow-hidden ${getBorderRadius(shape)}`}
+        className={`${
+          !isAValidNumber(size) ? sizeInfo.avatarSize : ""
+        } grid place-items-center overflow-hidden ${getBorderRadius(shape)}`}
         style={
           isAValidNumber(size)
             ? {
-              height: `${size}px`,
-              width: `${size}px`,
-            }
+                height: `${size}px`,
+                width: `${size}px`,
+              }
             : {}
         }
         tabIndex={-1}

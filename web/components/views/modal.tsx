@@ -23,8 +23,6 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
   // store hooks
   const { createView, updateView } = useProjectView();
 
-
-
   const handleClose = () => {
     onClose();
   };

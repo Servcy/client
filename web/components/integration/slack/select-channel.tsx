@@ -46,10 +46,10 @@ export const SelectChannel: React.FC<Props> = observer(({ integration }) => {
     () =>
       workspaceSlug && projectId && integration.id
         ? appInstallationService.getSlackChannelDetail(
-          workspaceSlug as string,
-          projectId as string,
-          integration.id as string
-        )
+            workspaceSlug as string,
+            projectId as string,
+            integration.id as string
+          )
         : null
   );
 
@@ -98,8 +98,9 @@ export const SelectChannel: React.FC<Props> = observer(({ integration }) => {
         >
           <span
             aria-hidden="true"
-            className={`inline-block h-2 w-2 transform self-center rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${slackChannelAvailabilityToggle ? "translate-x-3" : "translate-x-0"
-              }`}
+            className={`inline-block h-2 w-2 transform self-center rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+              slackChannelAvailabilityToggle ? "translate-x-3" : "translate-x-0"
+            }`}
           />
         </button>
       ) : (

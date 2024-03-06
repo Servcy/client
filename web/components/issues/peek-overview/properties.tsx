@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 import { useIssueDetail, useProject, useProjectState } from "@hooks/store";
-icons
+icons;
 import { DiceIcon, DoubleCircleIcon, UserGroupIcon, ContrastIcon, RelatedIcon } from "@servcy/ui";
 import {
   IssueLinkRoot,
@@ -147,8 +147,8 @@ export const PeekOverviewProperties: FC<IPeekOverviewProperties> = observer((pro
             buttonClassName={`text-sm ${issue?.start_date ? "" : "text-custom-text-400"}`}
             hideIcon
             clearIconClassName="h-3 w-3 hidden group-hover:inline"
-          // TODO: add this logic
-          // showPlaceholderIcon
+            // TODO: add this logic
+            // showPlaceholderIcon
           />
         </div>
 
@@ -177,8 +177,8 @@ export const PeekOverviewProperties: FC<IPeekOverviewProperties> = observer((pro
             })}
             hideIcon
             clearIconClassName="h-3 w-3 hidden group-hover:inline !text-custom-text-100"
-          // TODO: add this logic
-          // showPlaceholderIcon
+            // TODO: add this logic
+            // showPlaceholderIcon
           />
         </div>
 

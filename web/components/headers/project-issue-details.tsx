@@ -18,7 +18,6 @@ import { BreadcrumbLink } from "@components/common";
 import { PanelRight } from "lucide-react";
 import { cn } from "@helpers/common.helper";
 
-
 const issueService = new IssueService();
 
 export const ProjectIssueDetailsHeader: FC = observer(() => {

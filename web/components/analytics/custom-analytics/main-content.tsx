@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { mutate } from "swr";
 
-
 import { AnalyticsGraph, AnalyticsTable } from "@components/analytics";
 
 import { Button, Loader } from "@servcy/ui";

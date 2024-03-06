@@ -61,8 +61,6 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
   } = useIssueDetail();
   const { issueMap } = useIssues();
 
-
-
   const relationIssueIds = getRelationByIssueIdRelationType(issueId, relationKey);
 
   const onSubmit = async (data: ISearchIssueResponse[]) => {

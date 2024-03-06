@@ -152,7 +152,8 @@ export const IssueLabelSelect: React.FC<Props> = observer((props) => {
                           <Combobox.Option
                             key={label.id}
                             className={({ active }) =>
-                              `${active ? "bg-custom-background-80" : ""
+                              `${
+                                active ? "bg-custom-background-80" : ""
                               } group flex w-full cursor-pointer select-none items-center gap-2 truncate rounded px-1 py-1.5 text-custom-text-200`
                             }
                             value={label.id}
@@ -186,7 +187,8 @@ export const IssueLabelSelect: React.FC<Props> = observer((props) => {
                               <Combobox.Option
                                 key={child.id}
                                 className={({ active }) =>
-                                  `${active ? "bg-custom-background-80" : ""
+                                  `${
+                                    active ? "bg-custom-background-80" : ""
                                   } group flex min-w-[14rem] cursor-pointer select-none items-center gap-2 truncate rounded px-1 py-1.5 text-custom-text-200`
                                 }
                                 value={child.id}

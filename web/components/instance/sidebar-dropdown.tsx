@@ -34,7 +34,6 @@ export const InstanceSidebarDropdown = observer(() => {
   } = useApplication();
   const { signOut, currentUser, currentUserSettings } = useUser();
 
-
   const { setTheme } = useTheme();
 
   // redirect url for normal mode
@@ -64,8 +63,9 @@ export const InstanceSidebarDropdown = observer(() => {
     <div className="flex max-h-[3.75rem] items-center gap-x-5 gap-y-2 border-b border-custom-sidebar-border-200 px-4 py-3.5">
       <div className="h-full w-full truncate">
         <div
-          className={`flex flex-grow items-center gap-x-2 truncate rounded py-1 ${sidebarCollapsed ? "justify-center" : ""
-            }`}
+          className={`flex flex-grow items-center gap-x-2 truncate rounded py-1 ${
+            sidebarCollapsed ? "justify-center" : ""
+          }`}
         >
           <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded bg-custom-sidebar-background-80">
             <UserCog2 className="h-5 w-5 text-custom-text-200" />

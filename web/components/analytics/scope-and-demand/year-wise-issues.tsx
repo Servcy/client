@@ -1,4 +1,3 @@
-
 import { LineGraph, ProfileEmptyState } from "@components/ui";
 // image
 import emptyGraph from "public/empty-state/empty_graph.svg";

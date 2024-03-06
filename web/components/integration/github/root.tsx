@@ -78,7 +78,6 @@ const integrationWorkflowData = [
   },
 ];
 
-
 const integrationService = new IntegrationService();
 const githubIntegrationService = new GithubIntegrationService();
 
@@ -90,8 +89,6 @@ export const GithubImporterRoot: React.FC = () => {
 
   const router = useRouter();
   const { workspaceSlug, provider } = router.query;
-
-
 
   const { handleSubmit, control, setValue, watch } = useForm<TFormValues>({
     defaultValues: defaultFormValues,

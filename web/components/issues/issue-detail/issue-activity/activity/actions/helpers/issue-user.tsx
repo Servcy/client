@@ -10,7 +10,7 @@ type TIssueUser = {
 
 export const IssueUser: FC<TIssueUser> = (props) => {
   const { activityId, customUserName } = props;
-  
+
   const {
     activity: { getActivityById },
   } = useIssueDetail();

@@ -44,7 +44,6 @@ export const ProjectSidebarList: FC = observer(() => {
   const { workspaceSlug } = router.query;
   // toast
 
-
   const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER;
 
   const handleCopyText = (projectId: string) => {
@@ -171,8 +170,8 @@ export const ProjectSidebarList: FC = observer(() => {
                                 key={projectId}
                                 draggableId={projectId}
                                 index={index}
-                              // FIXME refactor the Draggable to a different component
-                              //isDragDisabled={!project.is_member}
+                                // FIXME refactor the Draggable to a different component
+                                //isDragDisabled={!project.is_member}
                               >
                                 {(provided, snapshot) => (
                                   <div ref={provided.innerRef} {...provided.draggableProps}>

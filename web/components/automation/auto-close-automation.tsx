@@ -99,8 +99,9 @@ export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
                   <div className="w-1/2">
                     <CustomSelect
                       value={currentProjectDetails?.close_in}
-                      label={`${currentProjectDetails?.close_in} ${currentProjectDetails?.close_in === 1 ? "month" : "months"
-                        }`}
+                      label={`${currentProjectDetails?.close_in} ${
+                        currentProjectDetails?.close_in === 1 ? "month" : "months"
+                      }`}
                       onChange={(val: number) => {
                         handleChange({ close_in: val });
                       }}

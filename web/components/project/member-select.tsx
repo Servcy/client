@@ -38,10 +38,10 @@ export const MemberSelect: React.FC<Props> = observer((props) => {
     })
     .filter((option) => !!option) as
     | {
-      value: string;
-      query: string;
-      content: React.JSX.Element;
-    }[]
+        value: string;
+        query: string;
+        content: React.JSX.Element;
+      }[]
     | undefined;
   const selectedOption = getProjectMemberDetails(value);
 

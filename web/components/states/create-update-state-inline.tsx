@@ -40,7 +40,6 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
   const { captureProjectStateEvent, setTrackElement } = useEventTracker();
   const { createState, updateState } = useProjectState();
 
-
   // form info
   const {
     handleSubmit,
@@ -180,8 +179,9 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
           {({ open }) => (
             <>
               <Popover.Button
-                className={`group inline-flex items-center text-base font-medium focus:outline-none ${open ? "text-custom-text-100" : "text-custom-text-200"
-                  }`}
+                className={`group inline-flex items-center text-base font-medium focus:outline-none ${
+                  open ? "text-custom-text-100" : "text-custom-text-200"
+                }`}
               >
                 {watch("color") && watch("color") !== "" && (
                   <span

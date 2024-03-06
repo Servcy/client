@@ -39,7 +39,6 @@ export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props
   const { setTrackElement } = useEventTracker();
   const { getStateById } = useProjectState();
 
-
   // derived values
   const stateDetails = getStateById(issue.state_id);
   const isEditingAllowed = !readOnly;

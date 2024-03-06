@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-
 import { PriorityIcon } from "@servcy/ui";
 
-
 import { FilterHeader, FilterOption } from "@components/issues";
-
 
 import { ISSUE_PRIORITIES } from "@constants/issue";
 

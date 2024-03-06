@@ -33,7 +33,6 @@ const defaultValues: TUniqueCodeFormValues = {
   token: "",
 };
 
-
 const authService = new AuthService();
 const userService = new UserService();
 
@@ -43,7 +42,6 @@ export const SignUpUniqueCodeForm: React.FC<Props> = (props) => {
   const [isRequestingNewCode, setIsRequestingNewCode] = useState(false);
   // store hooks
   const { captureEvent } = useEventTracker();
-
 
   // timer
   const { timer: resendTimerCode, setTimer: setResendCodeTimer } = useTimer(30);
@@ -83,7 +81,7 @@ export const SignUpUniqueCodeForm: React.FC<Props> = (props) => {
         captureEvent(CODE_VERIFIED, {
           state: "FAILED",
         });
-        toast.error("Something went wrong. Please try again.")
+        toast.error("Something went wrong. Please try again.");
       });
   };
 
@@ -189,10 +187,11 @@ export const SignUpUniqueCodeForm: React.FC<Props> = (props) => {
             <button
               type="button"
               onClick={handleRequestNewCode}
-              className={`text-xs ${isRequestNewCodeDisabled
-                ? "text-onboarding-text-300"
-                : "text-onboarding-text-200 hover:text-custom-primary-100"
-                }`}
+              className={`text-xs ${
+                isRequestNewCodeDisabled
+                  ? "text-onboarding-text-300"
+                  : "text-onboarding-text-200 hover:text-custom-primary-100"
+              }`}
               disabled={isRequestNewCodeDisabled}
             >
               {resendTimerCode > 0

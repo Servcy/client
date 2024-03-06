@@ -42,7 +42,6 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
   const { addCycleToFavorites, removeCycleFromFavorites, getCycleById } = useCycle();
   const { getUserDetails } = useMember();
 
-
   // computed
   const cycleDetails = getCycleById(cycleId);
 

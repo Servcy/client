@@ -26,7 +26,6 @@ const authService = new AuthService();
 export const SignInEmailForm: React.FC<Props> = observer((props) => {
   const { onSubmit, updateEmail } = props;
 
-
   const {
     control,
     formState: { errors, isSubmitting, isValid },

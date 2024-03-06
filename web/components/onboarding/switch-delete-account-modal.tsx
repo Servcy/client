@@ -25,8 +25,6 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
 
   const { resolvedTheme, setTheme } = useTheme();
 
-
-
   const handleClose = () => {
     setSwitchingAccount(false);
     setIsDeactivating(false);

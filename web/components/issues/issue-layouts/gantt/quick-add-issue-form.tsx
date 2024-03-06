@@ -71,7 +71,6 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
   const { getProjectById } = useProject();
   const { captureIssueEvent } = useEventTracker();
 
-
   const projectDetail = (projectId && getProjectById(projectId.toString())) || undefined;
 
   const ref = useRef<HTMLFormElement>(null);

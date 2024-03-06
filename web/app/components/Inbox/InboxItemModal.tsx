@@ -1,4 +1,3 @@
-
 import * as DOMPurify from "dompurify";
 
 import { Button, Modal } from "antd";

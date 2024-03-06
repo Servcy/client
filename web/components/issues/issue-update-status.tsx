@@ -22,8 +22,9 @@ export const IssueUpdateStatus: React.FC<Props> = (props) => {
         </h4>
       )}
       <div
-        className={`flex items-center gap-x-2 transition-all duration-300 ${isSubmitting === "saved" ? "fadeOut" : "fadeIn"
-          }`}
+        className={`flex items-center gap-x-2 transition-all duration-300 ${
+          isSubmitting === "saved" ? "fadeOut" : "fadeIn"
+        }`}
       >
         {isSubmitting !== "submitted" && isSubmitting !== "saved" && (
           <RefreshCw className="h-4 w-4 stroke-custom-text-300" />

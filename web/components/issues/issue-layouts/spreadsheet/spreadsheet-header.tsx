@@ -1,4 +1,3 @@
-
 import { LayersIcon } from "@servcy/ui";
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types";

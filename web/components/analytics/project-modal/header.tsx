@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 
-
 import { Expand, Shrink, X } from "lucide-react";
 
 type Props = {

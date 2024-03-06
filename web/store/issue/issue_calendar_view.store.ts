@@ -1,6 +1,5 @@
 import { observable, action, makeObservable, runInAction, computed } from "mobx";
 
-
 import { generateCalendarData } from "@helpers/calendar.helper";
 
 import { ICalendarPayload, ICalendarWeek } from "@components/issues";
@@ -19,10 +18,10 @@ export interface ICalendarStore {
 
   // computed
   allWeeksOfActiveMonth:
-  | {
-    [weekNumber: string]: ICalendarWeek;
-  }
-  | undefined;
+    | {
+        [weekNumber: string]: ICalendarWeek;
+      }
+    | undefined;
   activeWeekNumber: number;
   allDaysOfActiveWeek: ICalendarWeek | undefined;
 }

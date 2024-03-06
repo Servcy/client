@@ -16,7 +16,6 @@ type Props = {
 export const FilterModule: React.FC<Props> = observer((props) => {
   const { appliedFilters, handleUpdate, searchQuery } = props;
 
-
   const {
     router: { projectId },
   } = useApplication();

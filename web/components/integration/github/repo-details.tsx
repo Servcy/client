@@ -22,7 +22,6 @@ type Props = {
   setValue: UseFormSetValue<TFormValues>;
 };
 
-
 const githubIntegrationService = new GithubIntegrationService();
 
 export const GithubRepoDetails: FC<Props> = ({ selectedRepo, handleStepChange, setUsers, setValue }) => {
@@ -33,10 +32,10 @@ export const GithubRepoDetails: FC<Props> = ({ selectedRepo, handleStepChange, s
     workspaceSlug && selectedRepo ? GITHUB_REPOSITORY_INFO(workspaceSlug as string, selectedRepo.name) : null,
     workspaceSlug && selectedRepo
       ? () =>
-        githubIntegrationService.getGithubRepoInfo(workspaceSlug as string, {
-          owner: selectedRepo.owner.login,
-          repo: selectedRepo.name,
-        })
+          githubIntegrationService.getGithubRepoInfo(workspaceSlug as string, {
+            owner: selectedRepo.owner.login,
+            repo: selectedRepo.name,
+          })
       : null
   );
 

@@ -17,7 +17,6 @@ type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-
 const workspaceService = new WorkspaceService();
 
 export const ProductUpdatesModal: React.FC<Props> = ({ isOpen, setIsOpen }) => {

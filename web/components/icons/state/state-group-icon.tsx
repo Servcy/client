@@ -1,4 +1,3 @@
-
 import {
   StateGroupBacklogIcon,
   StateGroupCancelledIcon,

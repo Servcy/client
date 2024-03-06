@@ -36,8 +36,6 @@ export const CommandPaletteIssueActions: React.FC<Props> = observer((props) => {
   } = useApplication();
   const { currentUser } = useUser();
 
-
-
   const handleUpdateIssue = async (formData: Partial<TIssue>) => {
     if (!workspaceSlug || !projectId || !issueDetails) return;
 

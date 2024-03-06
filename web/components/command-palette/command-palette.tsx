@@ -22,7 +22,6 @@ import { IssueService } from "@services/issue";
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
 import { EIssuesStoreType } from "@constants/issue";
 
-
 const issueService = new IssueService();
 
 export const CommandPalette: FC = observer(() => {
@@ -62,8 +61,6 @@ export const CommandPalette: FC = observer(() => {
     isAnyModalOpen,
     createIssueStoreType,
   } = commandPalette;
-
-
 
   const { data: issueDetails } = useSWR(
     workspaceSlug && projectId && issueId ? ISSUE_DETAILS(issueId as string) : null,

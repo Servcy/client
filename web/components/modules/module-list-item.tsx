@@ -31,7 +31,6 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
 
-
   // store hooks
   const {
     membership: { currentProjectRole },

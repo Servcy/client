@@ -1,4 +1,3 @@
-
 import { RootStore } from "@store/root.store";
 import { IInbox, Inbox } from "./inbox.store";
 import { IInboxIssue, InboxIssue } from "./inbox_issue.store";

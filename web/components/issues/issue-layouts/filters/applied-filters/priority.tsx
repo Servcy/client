@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 
-
 import { PriorityIcon } from "@servcy/ui";
 import { X } from "lucide-react";
 

@@ -30,8 +30,6 @@ export const DeleteGlobalViewModal: React.FC<Props> = observer((props) => {
   const { deleteGlobalView } = useGlobalView();
   const { captureEvent } = useEventTracker();
 
-
-
   const handleClose = () => {
     onClose();
   };

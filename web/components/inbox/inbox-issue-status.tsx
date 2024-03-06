@@ -16,7 +16,7 @@ type Props = {
 
 export const InboxIssueStatus: React.FC<Props> = observer((props) => {
   const { workspaceSlug, projectId, inboxId, issueId, iconSize = 18, showDescription = false } = props;
-  
+
   const {
     issues: { getInboxIssueByIssueId },
   } = useInboxIssues();

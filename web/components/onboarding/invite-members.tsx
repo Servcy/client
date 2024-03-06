@@ -68,7 +68,6 @@ type InviteMemberFormProps = {
   setIsInvitationDisabled: (value: boolean) => void;
 };
 
-
 const workspaceService = new WorkspaceService();
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -185,19 +184,21 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                   className="flex h-11 w-full items-center justify-between gap-1 rounded-md px-2.5 py-2 text-xs duration-300"
                 >
                   <span
-                    className={`text-xs ${!getValues(`emails.${index}.role_active`)
+                    className={`text-xs ${
+                      !getValues(`emails.${index}.role_active`)
                         ? "text-onboarding-text-400"
                         : "text-onboarding-text-100"
-                      } sm:text-sm`}
+                    } sm:text-sm`}
                   >
                     {ROLE[value]}
                   </span>
 
                   <ChevronDown
-                    className={`h-4 w-4 ${!getValues(`emails.${index}.role_active`)
+                    className={`h-4 w-4 ${
+                      !getValues(`emails.${index}.role_active`)
                         ? "stroke-onboarding-text-400"
                         : "stroke-onboarding-text-100"
-                      }`}
+                    }`}
                   />
                 </Listbox.Button>
 
@@ -221,7 +222,8 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                           key={key}
                           value={parseInt(key)}
                           className={({ active, selected }) =>
-                            `cursor-pointer select-none truncate rounded px-1 py-1.5 ${active || selected ? "bg-onboarding-background-400/40" : ""
+                            `cursor-pointer select-none truncate rounded px-1 py-1.5 ${
+                              active || selected ? "bg-onboarding-background-400/40" : ""
                             } ${selected ? "text-onboarding-text-100" : "text-custom-text-200"}`
                           }
                         >
@@ -264,7 +266,6 @@ export const InviteMembers: React.FC<Props> = (props) => {
   const { finishOnboarding, stepChange, workspace } = props;
 
   const [isInvitationDisabled, setIsInvitationDisabled] = useState(true);
-
 
   const { resolvedTheme } = useTheme();
   // store hooks

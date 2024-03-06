@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 
-
 import { ProjectAnalyticsModalHeader, ProjectAnalyticsModalMainContent } from "@components/analytics";
 
 import { ICycle, IModule, IProject } from "@servcy/types";

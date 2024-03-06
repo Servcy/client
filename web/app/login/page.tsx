@@ -147,7 +147,7 @@ export default function Login(): JSX.Element {
                   id="agree_terms_conditions_and_privacy_policy"
                   type="checkbox"
                   checked
-                  onChange={() => { }}
+                  onChange={() => {}}
                   className="mr-2 accent-servcy-light"
                 />
                 <span className="text-sm font-normal">

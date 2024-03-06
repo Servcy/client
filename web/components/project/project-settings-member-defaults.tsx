@@ -34,7 +34,6 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
   // derived values
   const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
 
-
   // form info
   const { reset, control } = useForm<IProject>({ defaultValues });
   // fetching user members

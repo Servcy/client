@@ -61,8 +61,6 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
   const { currentProjectDetails } = useProject();
   const { getUserDetails } = useMember();
 
-
-
   const { isLoading } = useSWR(
     workspaceSlug && projectId ? `PROJECT_ACTIVE_CYCLE_${projectId}` : null,
     workspaceSlug && projectId ? () => fetchActiveCycle(workspaceSlug, projectId) : null
@@ -318,7 +316,7 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
                     <div className="flex items-center gap-1.5 flex-shrink-0">
                       <StateDropdown
                         value={issue.state_id ?? undefined}
-                        onChange={() => { }}
+                        onChange={() => {}}
                         projectId={projectId?.toString() ?? ""}
                         disabled={true}
                         buttonVariant="background-with-text"

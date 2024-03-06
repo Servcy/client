@@ -1,4 +1,3 @@
-
 import { TButtonVariants } from "./types";
 
 export const BORDER_BUTTON_VARIANTS: TButtonVariants[] = ["border-with-text", "border-without-text"];

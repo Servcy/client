@@ -22,7 +22,7 @@ export const IssueTitleInput: FC<IssueTitleInputProps> = observer((props) => {
   const { disabled, value, workspaceSlug, isSubmitting, setIsSubmitting, issueId, issueOperations, projectId } = props;
   // states
   const [title, setTitle] = useState("");
-  
+
   const debouncedValue = useDebounce(title, 1500);
 
   useEffect(() => {

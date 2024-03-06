@@ -43,7 +43,6 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
   const router = useRouter();
   const { workspaceSlug } = router.query;
 
-
   // store hooks
   const { captureIssueEvent } = useEventTracker();
 

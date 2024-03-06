@@ -54,8 +54,6 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
       : null
   );
 
-
-
   const {
     handleSubmit,
     watch,
@@ -112,10 +110,10 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
     query === ""
       ? Object.values(issues ?? {})
       : Object.values(issues ?? {})?.filter(
-        (issue) =>
-          issue.name.toLowerCase().includes(query.toLowerCase()) ||
-          `${projectDetails?.identifier}-${issue.sequence_id}`.toLowerCase().includes(query.toLowerCase())
-      ) ?? [];
+          (issue) =>
+            issue.name.toLowerCase().includes(query.toLowerCase()) ||
+            `${projectDetails?.identifier}-${issue.sequence_id}`.toLowerCase().includes(query.toLowerCase())
+        ) ?? [];
 
   return (
     <Transition.Root show={isOpen} as={React.Fragment} afterLeave={() => setQuery("")} appear>

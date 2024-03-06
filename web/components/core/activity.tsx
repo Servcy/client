@@ -35,8 +35,9 @@ export const IssueLink = ({ activity }: { activity: IIssueActivity }) => {
       {activity?.issue_detail ? (
         <a
           aria-disabled={activity.issue === null}
-          href={`${`/${workspaceSlug ?? activity.workspace_detail?.slug}/projects/${activity.project}/issues/${activity.issue
-            }`}`}
+          href={`${`/${workspaceSlug ?? activity.workspace_detail?.slug}/projects/${activity.project}/issues/${
+            activity.issue
+          }`}`}
           target={activity.issue === null ? "_self" : "_blank"}
           rel={activity.issue === null ? "" : "noopener noreferrer"}
           className="inline-flex items-center gap-1 font-medium text-custom-text-100 hover:underline"
@@ -59,8 +60,9 @@ const UserLink = ({ activity }: { activity: IIssueActivity }) => {
 
   return (
     <a
-      href={`/${workspaceSlug ?? activity.workspace_detail?.slug}/profile/${activity.new_identifier ?? activity.old_identifier
-        }`}
+      href={`/${workspaceSlug ?? activity.workspace_detail?.slug}/profile/${
+        activity.new_identifier ?? activity.old_identifier
+      }`}
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center font-medium text-custom-text-100 hover:underline"

@@ -99,12 +99,12 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
 
                 const message =
                   activityItem.verb === "created" &&
-                    activityItem.field !== "cycles" &&
-                    activityItem.field !== "modules" &&
-                    activityItem.field !== "attachment" &&
-                    activityItem.field !== "link" &&
-                    activityItem.field !== "estimate" &&
-                    !activityItem.field ? (
+                  activityItem.field !== "cycles" &&
+                  activityItem.field !== "modules" &&
+                  activityItem.field !== "attachment" &&
+                  activityItem.field !== "link" &&
+                  activityItem.field !== "estimate" &&
+                  !activityItem.field ? (
                     <span>
                       created <IssueLink activity={activityItem} />
                     </span>

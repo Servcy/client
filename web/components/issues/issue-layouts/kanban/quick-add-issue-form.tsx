@@ -74,7 +74,6 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
   useKeypress("Escape", handleClose);
   useOutsideClickDetector(ref, handleClose);
 
-
   const {
     reset,
     handleSubmit,

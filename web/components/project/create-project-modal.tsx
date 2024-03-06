@@ -32,8 +32,6 @@ interface IIsGuestCondition {
 }
 
 const IsGuestCondition: FC<IIsGuestCondition> = ({ onClose }) => {
-
-
   useEffect(() => {
     onClose();
     toast.error({

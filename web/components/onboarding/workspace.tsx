@@ -23,7 +23,6 @@ type Props = {
   isSubmitting: boolean;
 };
 
-
 const workspaceService = new WorkspaceService();
 
 export const Workspace: React.FC<Props> = (props) => {
@@ -35,8 +34,6 @@ export const Workspace: React.FC<Props> = (props) => {
   const { updateCurrentUser } = useUser();
   const { createWorkspace, fetchWorkspaces, workspaces } = useWorkspace();
   const { captureWorkspaceEvent } = useEventTracker();
-
-
 
   const handleCreateWorkspace = async (formData: IWorkspace) => {
     if (isSubmitting) return;
@@ -151,8 +148,9 @@ export const Workspace: React.FC<Props> = (props) => {
           name="slug"
           render={({ field: { value, ref, onChange } }) => (
             <div
-              className={`relative flex items-center rounded-md border bg-onboarding-background-200 px-3 ${invalidSlug ? "border-red-500" : "border-onboarding-border-100"
-                } `}
+              className={`relative flex items-center rounded-md border bg-onboarding-background-200 px-3 ${
+                invalidSlug ? "border-red-500" : "border-onboarding-border-100"
+              } `}
             >
               <span className="whitespace-nowrap text-sm">{window && window.location.host}/</span>
               <Input

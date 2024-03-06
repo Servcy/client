@@ -37,8 +37,6 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
   const { workspaceProjectIds } = useProject();
   const { createModule, updateModuleDetails } = useModule();
 
-
-
   const handleClose = () => {
     reset(defaultValues);
     onClose();

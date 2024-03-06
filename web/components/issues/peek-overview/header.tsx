@@ -74,7 +74,6 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
   } = useIssueDetail();
   const { getStateById } = useProjectState();
 
-
   // derived values
   const issueDetails = getIssueById(issueId);
   const stateDetails = issueDetails ? getStateById(issueDetails?.state_id) : undefined;
@@ -105,8 +104,9 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
 
   return (
     <div
-      className={`relative flex items-center justify-between p-4 ${currentMode?.key === "full-screen" ? "border-b border-custom-border-200" : ""
-        }`}
+      className={`relative flex items-center justify-between p-4 ${
+        currentMode?.key === "full-screen" ? "border-b border-custom-border-200" : ""
+      }`}
     >
       <div className="flex items-center gap-4">
         <button onClick={removeRoutePeekId}>
@@ -130,10 +130,11 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
               {PEEK_OPTIONS.map((mode) => (
                 <CustomSelect.Option key={mode.key} value={mode.key}>
                   <div
-                    className={`flex items-center gap-1.5 ${currentMode.key === mode.key
-                      ? "text-custom-text-200"
-                      : "text-custom-text-400 hover:text-custom-text-200"
-                      }`}
+                    className={`flex items-center gap-1.5 ${
+                      currentMode.key === mode.key
+                        ? "text-custom-text-200"
+                        : "text-custom-text-400 hover:text-custom-text-200"
+                    }`}
                   >
                     <mode.icon className="-my-1 h-4 w-4 flex-shrink-0" />
                     {mode.title}

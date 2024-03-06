@@ -45,8 +45,6 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
   // router
   const router = useRouter();
 
-
-
   const { data: invitations } = useSWR("USER_WORKSPACE_INVITATIONS", () => workspaceService.userWorkspaceInvitations());
 
   const redirectWorkspaceSlug =
@@ -149,10 +147,11 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
                     return (
                       <div
                         key={invitation.id}
-                        className={`flex cursor-pointer items-center gap-2 rounded border px-3.5 py-5 ${isSelected
+                        className={`flex cursor-pointer items-center gap-2 rounded border px-3.5 py-5 ${
+                          isSelected
                             ? "border-custom-primary-100"
                             : "border-custom-border-200 hover:bg-custom-background-80"
-                          }`}
+                        }`}
                         onClick={() => handleInvitation(invitation, isSelected ? "withdraw" : "accepted")}
                       >
                         <div className="flex-shrink-0">

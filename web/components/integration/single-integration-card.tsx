@@ -38,7 +38,6 @@ const integrationDetails: { [key: string]: any } = {
   },
 };
 
-
 const integrationService = new IntegrationService();
 
 export const SingleIntegrationCard: React.FC<Props> = observer(({ integration }) => {
@@ -54,8 +53,6 @@ export const SingleIntegrationCard: React.FC<Props> = observer(({ integration })
   const {
     membership: { currentWorkspaceRole },
   } = useUser();
-
-
 
   const isUserAdmin = currentWorkspaceRole === 20;
 

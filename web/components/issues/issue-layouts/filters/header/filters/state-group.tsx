@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-
 import { FilterHeader, FilterOption } from "@components/issues";
 
 import { StateGroupIcon } from "@servcy/ui";
 import { STATE_GROUPS } from "@constants/state";
-
 
 type Props = {
   appliedFilters: string[] | null;

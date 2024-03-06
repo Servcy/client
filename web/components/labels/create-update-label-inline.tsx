@@ -36,7 +36,6 @@ export const CreateUpdateLabelInline = observer(
     // store hooks
     const { createLabel, updateLabel } = useLabel();
 
-
     // form info
     const {
       handleSubmit,
@@ -129,8 +128,9 @@ export const CreateUpdateLabelInline = observer(
             {({ open }) => (
               <>
                 <Popover.Button
-                  className={`group inline-flex items-center text-base font-medium focus:outline-none ${open ? "text-custom-text-100" : "text-custom-text-200"
-                    }`}
+                  className={`group inline-flex items-center text-base font-medium focus:outline-none ${
+                    open ? "text-custom-text-100" : "text-custom-text-200"
+                  }`}
                 >
                   <span
                     className="h-4 w-4 rounded-full"

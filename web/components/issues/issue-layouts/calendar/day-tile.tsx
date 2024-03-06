@@ -60,15 +60,17 @@ export const CalendarDayTile: React.FC<Props> = observer((props) => {
       <div className="group relative flex h-full w-full flex-col bg-custom-background-90">
         {/* header */}
         <div
-          className={`flex items-center justify-end flex-shrink-0 px-2 py-1.5 text-right text-xs ${calendarLayout === "month" // if month layout, highlight current month days
+          className={`flex items-center justify-end flex-shrink-0 px-2 py-1.5 text-right text-xs ${
+            calendarLayout === "month" // if month layout, highlight current month days
               ? date.is_current_month
                 ? "font-medium"
                 : "text-custom-text-300"
               : "font-medium" // if week layout, highlight all days
-            } ${date.date.getDay() === 0 || date.date.getDay() === 6
+          } ${
+            date.date.getDay() === 0 || date.date.getDay() === 6
               ? "bg-custom-background-90"
               : "bg-custom-background-100"
-            } `}
+          } `}
         >
           {date.date.getDate() === 1 && MONTHS_LIST[date.date.getMonth() + 1].shortTitle + " "}
           {isToday ? (
@@ -85,10 +87,11 @@ export const CalendarDayTile: React.FC<Props> = observer((props) => {
           <Droppable droppableId={formattedDatePayload} isDropDisabled={readOnly}>
             {(provided, snapshot) => (
               <div
-                className={`h-full w-full select-none overflow-y-auto ${snapshot.isDraggingOver || date.date.getDay() === 0 || date.date.getDay() === 6
+                className={`h-full w-full select-none overflow-y-auto ${
+                  snapshot.isDraggingOver || date.date.getDay() === 0 || date.date.getDay() === 6
                     ? "bg-custom-background-90"
                     : "bg-custom-background-100"
-                  } ${calendarLayout === "month" ? "min-h-[5rem]" : ""}`}
+                } ${calendarLayout === "month" ? "min-h-[5rem]" : ""}`}
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >

@@ -18,7 +18,6 @@ import { NextPageWithLayout } from "@lib/types";
 
 import { WORKSPACE_INVITATION } from "@constants/fetch-keys";
 
-
 const workspaceService = new WorkspaceService();
 
 const WorkspaceInvitationPage: NextPageWithLayout = observer(() => {

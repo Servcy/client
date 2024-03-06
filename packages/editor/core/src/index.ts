@@ -6,15 +6,12 @@ import "src/styles/github-dark.css";
 
 export { isCellSelection } from "src/ui/extensions/table/table/utilities/is-cell-selection";
 
-
 export * from "src/lib/utils";
 export * from "src/ui/extensions/table/table";
 export { startImageUpload } from "src/ui/plugins/upload-image";
 
-
 export { EditorContainer } from "src/ui/components/editor-container";
 export { EditorContentWrapper } from "src/ui/components/editor-content";
-
 
 export { useEditor } from "src/hooks/use-editor";
 export { useReadOnlyEditor } from "src/hooks/use-read-only-editor";
@@ -22,7 +19,6 @@ export { useReadOnlyEditor } from "src/hooks/use-read-only-editor";
 // helper items
 export * from "src/ui/menus/menu-items";
 export * from "src/lib/editor-commands";
-
 
 export type { DeleteImage } from "src/types/delete-image";
 export type { UploadImage } from "src/types/upload-image";

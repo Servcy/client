@@ -135,8 +135,9 @@ export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
                 <span>
                   <Tooltip tooltipContent={layout.title}>
                     <div
-                      className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${activeLayout === layout.key ? "bg-custom-background-100 shadow-custom-shadow-2xs" : ""
-                        }`}
+                      className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${
+                        activeLayout === layout.key ? "bg-custom-background-100 shadow-custom-shadow-2xs" : ""
+                      }`}
                     >
                       <layout.icon
                         size={14}

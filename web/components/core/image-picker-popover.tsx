@@ -42,7 +42,6 @@ type Props = {
   tabIndex?: number;
 };
 
-
 const fileService = new FileService();
 
 export const ImagePickerPopover: React.FC<Props> = observer((props) => {
@@ -177,7 +176,8 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                     <Tab
                       key={tab.key}
                       className={({ selected }) =>
-                        `rounded px-4 py-1 text-center text-sm outline-none transition-colors ${selected ? "bg-custom-primary text-white" : "text-custom-text-100"
+                        `rounded px-4 py-1 text-center text-sm outline-none transition-colors ${
+                          selected ? "bg-custom-primary text-white" : "text-custom-text-100"
                         }`
                       }
                     >
@@ -291,10 +291,11 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                     <div className="flex w-full flex-1 items-center gap-3">
                       <div
                         {...getRootProps()}
-                        className={`relative grid h-full w-full cursor-pointer place-items-center rounded-lg p-12 text-center focus:outline-none focus:ring-2 focus:ring-custom-primary focus:ring-offset-2 ${(image === null && isDragActive) || !value
+                        className={`relative grid h-full w-full cursor-pointer place-items-center rounded-lg p-12 text-center focus:outline-none focus:ring-2 focus:ring-custom-primary focus:ring-offset-2 ${
+                          (image === null && isDragActive) || !value
                             ? "border-2 border-dashed border-custom-border-200 hover:bg-custom-background-90"
                             : ""
-                          }`}
+                        }`}
                       >
                         <button
                           type="button"

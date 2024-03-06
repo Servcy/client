@@ -19,9 +19,8 @@ export const CommandPaletteThemeActions: FC<Props> = observer((props) => {
   const [mounted, setMounted] = useState(false);
   // store
   const { updateCurrentUserTheme } = useUser();
-  
-  const { setTheme } = useTheme();
 
+  const { setTheme } = useTheme();
 
   const updateUserTheme = async (newTheme: string) => {
     setTheme(newTheme);

@@ -58,22 +58,22 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
     value: NotificationType;
     unreadCount?: number;
   }> = [
-      {
-        label: "My Issues",
-        value: "assigned",
-        unreadCount: notificationCount?.my_issues,
-      },
-      {
-        label: "Created by me",
-        value: "created",
-        unreadCount: notificationCount?.created_issues,
-      },
-      {
-        label: "Subscribed",
-        value: "watching",
-        unreadCount: notificationCount?.watching_issues,
-      },
-    ];
+    {
+      label: "My Issues",
+      value: "assigned",
+      unreadCount: notificationCount?.my_issues,
+    },
+    {
+      label: "Created by me",
+      value: "created",
+      unreadCount: notificationCount?.created_issues,
+    },
+    {
+      label: "Subscribed",
+      value: "watching",
+      unreadCount: notificationCount?.watching_issues,
+    },
+  ];
 
   return (
     <>
@@ -190,18 +190,20 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = (props) => 
                 type="button"
                 key={tab.value}
                 onClick={() => setSelectedTab(tab.value)}
-                className={`whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium outline-none ${tab.value === selectedTab
-                  ? "border-custom-primary-100 text-custom-primary-100"
-                  : "border-transparent text-custom-text-200"
-                  }`}
+                className={`whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium outline-none ${
+                  tab.value === selectedTab
+                    ? "border-custom-primary-100 text-custom-primary-100"
+                    : "border-transparent text-custom-text-200"
+                }`}
               >
                 {tab.label}
                 {tab.unreadCount && tab.unreadCount > 0 ? (
                   <span
-                    className={`ml-2 rounded-full px-2 py-0.5 text-xs ${tab.value === selectedTab
-                      ? "bg-custom-primary-100 text-white"
-                      : "bg-custom-background-80 text-custom-text-200"
-                      }`}
+                    className={`ml-2 rounded-full px-2 py-0.5 text-xs ${
+                      tab.value === selectedTab
+                        ? "bg-custom-primary-100 text-white"
+                        : "bg-custom-background-80 text-custom-text-200"
+                    }`}
                   >
                     {getNumberCount(tab.unreadCount)}
                   </span>

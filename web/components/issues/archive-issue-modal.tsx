@@ -25,8 +25,6 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
   const { getProjectById } = useProject();
   const { issueMap } = useIssues();
 
-
-
   if (!dataId && !data) return null;
 
   const issue = data ? data : issueMap[dataId!];

@@ -25,7 +25,6 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
   // states
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
 
-
   // router
   const router = useRouter();
   const { workspaceSlug } = router.query;

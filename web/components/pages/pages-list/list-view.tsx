@@ -66,9 +66,9 @@ export const PagesListView: FC<IPagesListView> = (props) => {
               primaryButton={
                 isButtonVisible
                   ? {
-                    text: "Create new page",
-                    onClick: () => toggleCreatePageModal(true),
-                  }
+                      text: "Create new page",
+                      onClick: () => toggleCreatePageModal(true),
+                    }
                   : undefined
               }
               disabled={!isEditingAllowed}

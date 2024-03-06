@@ -16,7 +16,7 @@ type Props = {
 
 export const SpreadsheetLabelColumn: React.FC<Props> = observer((props: Props) => {
   const { issue, onChange, disabled, onClose } = props;
-  
+
   const { labelMap } = useLabel();
 
   const defaultLabelOptions = issue?.label_ids?.map((id) => labelMap[id]) || [];

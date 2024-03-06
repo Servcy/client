@@ -32,7 +32,7 @@ export const IssueList: FC<IIssueList> = observer((props) => {
     handleIssueCrudState,
     subIssueOperations,
   } = props;
-  
+
   const {
     subIssues: { subIssuesByIssueId },
   } = useIssueDetail();

@@ -27,8 +27,6 @@ export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
   // store hooks
   const { deleteEstimate } = useEstimate();
 
-
-
   const handleEstimateDelete = () => {
     if (!workspaceSlug || !projectId) return;
 

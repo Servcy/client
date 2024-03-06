@@ -1,4 +1,3 @@
-
 import Image from "next/image.js";
 
 import { sidebarOptions } from "@/constants/routes";

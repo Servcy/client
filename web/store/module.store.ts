@@ -90,7 +90,6 @@ export class ModulesStore implements IModuleStore {
 
     this.rootStore = _rootStore;
 
-
     this.projectService = new ProjectService();
     this.moduleService = new ModuleService();
   }

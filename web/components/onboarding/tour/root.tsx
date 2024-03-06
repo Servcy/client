@@ -32,48 +32,48 @@ const TOUR_STEPS: {
   prevStep?: TTourSteps;
   nextStep?: TTourSteps;
 }[] = [
-    {
-      key: "issues",
-      title: "Plan with issues",
-      description:
-        "The issue is the building block of the Servcy. Most concepts in Servcy are either associated with issues and their properties.",
-      image: IssuesTour,
-      nextStep: "cycles",
-    },
-    {
-      key: "cycles",
-      title: "Move with cycles",
-      description:
-        "Cycles help you and your team to progress faster, similar to the sprints commonly used in agile development.",
-      image: CyclesTour,
-      prevStep: "issues",
-      nextStep: "modules",
-    },
-    {
-      key: "modules",
-      title: "Break into modules",
-      description: "Modules break your big thing into Projects or Features, to help you organize better.",
-      image: ModulesTour,
-      prevStep: "cycles",
-      nextStep: "views",
-    },
-    {
-      key: "views",
-      title: "Views",
-      description:
-        "Create custom filters to display only the issues that matter to you. Save and share your filters in just a few clicks.",
-      image: ViewsTour,
-      prevStep: "modules",
-      nextStep: "pages",
-    },
-    {
-      key: "pages",
-      title: "Document with pages",
-      description: "Use Pages to quickly jot down issues when you're in a meeting or starting a day.",
-      image: PagesTour,
-      prevStep: "views",
-    },
-  ];
+  {
+    key: "issues",
+    title: "Plan with issues",
+    description:
+      "The issue is the building block of the Servcy. Most concepts in Servcy are either associated with issues and their properties.",
+    image: IssuesTour,
+    nextStep: "cycles",
+  },
+  {
+    key: "cycles",
+    title: "Move with cycles",
+    description:
+      "Cycles help you and your team to progress faster, similar to the sprints commonly used in agile development.",
+    image: CyclesTour,
+    prevStep: "issues",
+    nextStep: "modules",
+  },
+  {
+    key: "modules",
+    title: "Break into modules",
+    description: "Modules break your big thing into Projects or Features, to help you organize better.",
+    image: ModulesTour,
+    prevStep: "cycles",
+    nextStep: "views",
+  },
+  {
+    key: "views",
+    title: "Views",
+    description:
+      "Create custom filters to display only the issues that matter to you. Save and share your filters in just a few clicks.",
+    image: ViewsTour,
+    prevStep: "modules",
+    nextStep: "pages",
+  },
+  {
+    key: "pages",
+    title: "Document with pages",
+    description: "Use Pages to quickly jot down issues when you're in a meeting or starting a day.",
+    image: PagesTour,
+    prevStep: "views",
+  },
+];
 
 export const TourRoot: React.FC<Props> = observer((props) => {
   const { onComplete } = props;
@@ -141,8 +141,9 @@ export const TourRoot: React.FC<Props> = observer((props) => {
           <TourSidebar step={step} setStep={setStep} />
           <div className="col-span-10 h-full overflow-hidden lg:col-span-7">
             <div
-              className={`flex h-1/2 items-end overflow-hidden bg-custom-primary-100 sm:h-3/5 ${currentStepIndex % 2 === 0 ? "justify-end" : "justify-start"
-                }`}
+              className={`flex h-1/2 items-end overflow-hidden bg-custom-primary-100 sm:h-3/5 ${
+                currentStepIndex % 2 === 0 ? "justify-end" : "justify-start"
+              }`}
             >
               <Image src={currentStep?.image} alt={currentStep?.title} />
             </div>

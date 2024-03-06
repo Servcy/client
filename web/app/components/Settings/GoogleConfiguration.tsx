@@ -12,7 +12,6 @@ import {
   fetchUserIntegrations as fetchUserIntegrationsApi,
 } from "@/apis/integration";
 
-
 export default function GoogleConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [saving, setSaving] = useState<boolean>(false);

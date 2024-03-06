@@ -78,7 +78,6 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
   useKeypress("Escape", handleClose);
   useOutsideClickDetector(ref, handleClose);
 
-
   const {
     reset,
     handleSubmit,
@@ -131,8 +130,9 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
 
   return (
     <div
-      className={`border-b border-t border-custom-border-200 bg-custom-background-100 ${errors && errors?.name && errors?.name?.message ? `border-red-500 bg-red-500/10` : ``
-        }`}
+      className={`border-b border-t border-custom-border-200 bg-custom-background-100 ${
+        errors && errors?.name && errors?.name?.message ? `border-red-500 bg-red-500/10` : ``
+      }`}
     >
       {isOpen ? (
         <div className="shadow-custom-shadow-sm">

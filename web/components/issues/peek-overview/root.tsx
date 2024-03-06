@@ -49,7 +49,6 @@ export type TIssuePeekOperations = {
 export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
   const { is_archived = false, is_draft = false } = props;
 
-
   // router
   const router = useRouter();
   const {

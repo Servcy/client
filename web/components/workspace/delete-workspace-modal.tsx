@@ -33,7 +33,6 @@ export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
   const { captureWorkspaceEvent } = useEventTracker();
   const { deleteWorkspace } = useWorkspace();
 
-
   // form info
   const {
     control,

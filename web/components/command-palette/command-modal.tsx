@@ -30,12 +30,10 @@ import { IWorkspaceSearchResults } from "@servcy/types";
 // fetch-keys
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
 
-
 const workspaceService = new WorkspaceService();
 const issueService = new IssueService();
 
 export const CommandModal: React.FC = observer(() => {
-
   const { getProjectById } = useProject();
   // states
   const [placeholder, setPlaceholder] = useState("Type a command or search...");

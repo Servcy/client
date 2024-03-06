@@ -1,4 +1,3 @@
-
 import { getWeekNumberOfDate, renderFormattedPayloadDate } from "@helpers/date-time.helper";
 
 import { ICalendarDate, ICalendarPayload } from "@components/issues";

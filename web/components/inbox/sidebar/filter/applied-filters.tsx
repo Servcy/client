@@ -76,7 +76,8 @@ export const InboxIssueAppliedFilter: FC<TInboxIssueAppliedFilter> = observer((p
                       {filters.priority?.map((priority) => (
                         <div
                           key={priority}
-                          className={`inline-flex items-center gap-x-1 rounded-full px-2 py-0.5 capitalize ${priority === "urgent"
+                          className={`inline-flex items-center gap-x-1 rounded-full px-2 py-0.5 capitalize ${
+                            priority === "urgent"
                               ? "bg-red-500/20 text-red-500"
                               : priority === "high"
                                 ? "bg-orange-500/20 text-orange-500"
@@ -85,7 +86,7 @@ export const InboxIssueAppliedFilter: FC<TInboxIssueAppliedFilter> = observer((p
                                   : priority === "low"
                                     ? "bg-green-500/20 text-green-500"
                                     : "bg-custom-background-90 text-custom-text-200"
-                            }`}
+                          }`}
                         >
                           <div className="relative flex items-center gap-1">
                             <div>

@@ -34,7 +34,6 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
 
-
   // form info
   const {
     control,

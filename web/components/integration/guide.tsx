@@ -26,7 +26,6 @@ import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
 import { IMPORTERS_LIST } from "@constants/workspace";
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
-
 const integrationService = new IntegrationService();
 
 const IntegrationGuide = observer(() => {
@@ -42,7 +41,7 @@ const IntegrationGuide = observer(() => {
   // store hooks
   const { currentUser, currentUserLoader } = useUser();
   // custom hooks
-  const { } = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
+  const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
 
   const { data: importerServices } = useSWR(
     workspaceSlug ? IMPORTER_SERVICES_LIST(workspaceSlug as string) : null,

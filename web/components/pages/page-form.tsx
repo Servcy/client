@@ -79,13 +79,15 @@ export const PageForm: React.FC<Props> = (props) => {
                     <button
                       type="button"
                       onClick={() => onChange(access.key)}
-                      className={`grid aspect-square place-items-center rounded-sm p-1 hover:bg-custom-background-90 ${value === access.key ? "bg-custom-background-90" : ""
-                        }`}
+                      className={`grid aspect-square place-items-center rounded-sm p-1 hover:bg-custom-background-90 ${
+                        value === access.key ? "bg-custom-background-90" : ""
+                      }`}
                       tabIndex={2 + index}
                     >
                       <access.icon
-                        className={`h-3.5 w-3.5 ${value === access.key ? "text-custom-text-100" : "text-custom-text-400"
-                          }`}
+                        className={`h-3.5 w-3.5 ${
+                          value === access.key ? "text-custom-text-100" : "text-custom-text-400"
+                        }`}
                         strokeWidth={2}
                       />
                     </button>

@@ -26,7 +26,6 @@ import { EXPORTERS_LIST } from "@constants/workspace";
 
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
-
 const integrationService = new IntegrationService();
 
 const IntegrationGuide = observer(() => {
@@ -42,7 +41,7 @@ const IntegrationGuide = observer(() => {
   // store hooks
   const { currentUser, currentUserLoader } = useUser();
   // custom hooks
-  const { } = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
+  const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
 
   const { data: exporterServices } = useSWR(
     workspaceSlug && cursor ? EXPORT_SERVICES_LIST(workspaceSlug as string, cursor, `${per_page}`) : null,
@@ -115,10 +114,11 @@ const IntegrationGuide = observer(() => {
                 <button
                   disabled={!exporterServices?.prev_page_results}
                   onClick={() => exporterServices?.prev_page_results && setCursor(exporterServices?.prev_cursor)}
-                  className={`flex items-center rounded border border-custom-primary-100 px-1 text-custom-primary-100 ${exporterServices?.prev_page_results
-                    ? "cursor-pointer hover:bg-custom-primary-100 hover:text-white"
-                    : "cursor-not-allowed opacity-75"
-                    }`}
+                  className={`flex items-center rounded border border-custom-primary-100 px-1 text-custom-primary-100 ${
+                    exporterServices?.prev_page_results
+                      ? "cursor-pointer hover:bg-custom-primary-100 hover:text-white"
+                      : "cursor-not-allowed opacity-75"
+                  }`}
                 >
                   <MoveLeft className="h-4 w-4" />
                   <div className="pr-1">Prev</div>
@@ -126,10 +126,11 @@ const IntegrationGuide = observer(() => {
                 <button
                   disabled={!exporterServices?.next_page_results}
                   onClick={() => exporterServices?.next_page_results && setCursor(exporterServices?.next_cursor)}
-                  className={`flex items-center rounded border border-custom-primary-100 px-1 text-custom-primary-100 ${exporterServices?.next_page_results
-                    ? "cursor-pointer hover:bg-custom-primary-100 hover:text-white"
-                    : "cursor-not-allowed opacity-75"
-                    }`}
+                  className={`flex items-center rounded border border-custom-primary-100 px-1 text-custom-primary-100 ${
+                    exporterServices?.next_page_results
+                      ? "cursor-pointer hover:bg-custom-primary-100 hover:text-white"
+                      : "cursor-not-allowed opacity-75"
+                  }`}
                 >
                   <div className="pl-1">Next</div>
                   <MoveRight className="h-4 w-4" />

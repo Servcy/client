@@ -54,8 +54,6 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
     !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group);
   const isDeletingAllowed = isEditingAllowed;
 
-
-
   const issueLink = `${workspaceSlug}/projects/${issue.project_id}/issues/${issue.id}`;
 
   const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank");

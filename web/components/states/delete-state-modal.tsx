@@ -30,8 +30,6 @@ export const DeleteStateModal: React.FC<Props> = observer((props) => {
   const { captureProjectStateEvent } = useEventTracker();
   const { deleteState } = useProjectState();
 
-
-
   const handleClose = () => {
     onClose();
     setIsDeleteLoading(false);

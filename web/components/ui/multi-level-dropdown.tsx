@@ -46,8 +46,9 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
             <div>
               <Menu.Button
                 onClick={() => setOpenChildFor(null)}
-                className={`group flex items-center justify-between gap-2 rounded-md border border-custom-border-200 px-3 py-1.5 text-xs shadow-sm duration-300 hover:bg-custom-background-90 hover:text-custom-text-100 focus:outline-none ${open ? "bg-custom-background-90 text-custom-text-100" : "text-custom-text-200"
-                  }`}
+                className={`group flex items-center justify-between gap-2 rounded-md border border-custom-border-200 px-3 py-1.5 text-xs shadow-sm duration-300 hover:bg-custom-background-90 hover:text-custom-text-100 focus:outline-none ${
+                  open ? "bg-custom-background-90 text-custom-text-100" : "text-custom-text-200"
+                }`}
               >
                 {label}
                 <ChevronDown className="h-3 w-3" aria-hidden="true" />
@@ -86,9 +87,11 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
                       {({ active }) => (
                         <>
                           <div
-                            className={`${active || option.selected ? "bg-custom-background-80" : ""
-                              } flex items-center gap-1 rounded px-1 py-1.5 text-custom-text-200 ${direction === "right" ? "justify-between" : ""
-                              }`}
+                            className={`${
+                              active || option.selected ? "bg-custom-background-80" : ""
+                            } flex items-center gap-1 rounded px-1 py-1.5 text-custom-text-200 ${
+                              direction === "right" ? "justify-between" : ""
+                            }`}
                           >
                             {direction === "left" && option.hasChildren && <ChevronLeft className="h-3.5 w-3.5" />}
                             <span>{option.label}</span>
@@ -99,8 +102,10 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
                     </Menu.Item>
                     {option.hasChildren && option.id === openChildFor && (
                       <div
-                        className={`min-w-36 absolute top-0 origin-top-right select-none overflow-y-scroll whitespace-nowrap rounded-md border border-custom-border-300 bg-custom-background-90 shadow-lg focus:outline-none ${direction === "left" ? "right-full -translate-x-1" : "left-full translate-x-1"
-                          } ${height === "sm"
+                        className={`min-w-36 absolute top-0 origin-top-right select-none overflow-y-scroll whitespace-nowrap rounded-md border border-custom-border-300 bg-custom-background-90 shadow-lg focus:outline-none ${
+                          direction === "left" ? "right-full -translate-x-1" : "left-full translate-x-1"
+                        } ${
+                          height === "sm"
                             ? "max-h-28"
                             : height === "md"
                               ? "max-h-44"
@@ -109,7 +114,7 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
                                 : height === "lg"
                                   ? "max-h-80"
                                   : ""
-                          }`}
+                        }`}
                       >
                         {option.children ? (
                           <div className="space-y-1 p-1">
@@ -124,8 +129,9 @@ export const MultiLevelDropdown: React.FC<MultiLevelDropdownProps> = ({
                                       key={child.id}
                                       type="button"
                                       onClick={() => onSelect(child.value)}
-                                      className={`${child.selected ? "bg-custom-background-80" : ""
-                                        } flex w-full items-center justify-between break-words rounded px-1 py-1.5 text-left text-custom-text-200 hover:bg-custom-background-80`}
+                                      className={`${
+                                        child.selected ? "bg-custom-background-80" : ""
+                                      } flex w-full items-center justify-between break-words rounded px-1 py-1.5 text-left text-custom-text-200 hover:bg-custom-background-80`}
                                     >
                                       {child.label}{" "}
                                       <Check

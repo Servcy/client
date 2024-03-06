@@ -1,4 +1,3 @@
-
 import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
 
 import { Pencil, Trash2, LinkIcon } from "lucide-react";

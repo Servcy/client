@@ -32,8 +32,6 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
   const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER && !readOnly;
   const isRestoringAllowed = handleRestore && isEditingAllowed;
 
-
-
   const issueLink = `${workspaceSlug}/projects/${issue.project_id}/archived-issues/${issue.id}`;
 
   const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank");

@@ -43,7 +43,6 @@ export const SignInPasswordForm: React.FC<Props> = observer((props) => {
   const [isSendingUniqueCode, setIsSendingUniqueCode] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-
   const {
     config: { envConfig },
   } = useApplication();

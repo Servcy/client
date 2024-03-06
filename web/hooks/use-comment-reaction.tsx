@@ -7,8 +7,6 @@ import { IssueReactionService } from "@services/issue";
 import { groupReactions } from "@helpers/emoji.helper";
 import { useUser } from "./store";
 
-
-
 const issueReactionService = new IssueReactionService();
 
 const useCommentReaction = (

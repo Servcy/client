@@ -5,7 +5,6 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import useSWR from "swr";
 
-
 import { useApplication, usePage, useUser, useWorkspace } from "@hooks/store";
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
 import toast from "react-hot-toast";
@@ -21,7 +20,6 @@ import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/do
 import { Spinner } from "@servcy/ui";
 // assets
 
-
 import { IPage } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // fetch-keys
@@ -29,7 +27,6 @@ import { NextPageWithLayout } from "@lib/types";
 import { IssuePeekOverview } from "@components/issues";
 import { EUserProjectRoles } from "@constants/project";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";
-
 
 const fileService = new FileService();
 
@@ -53,8 +50,6 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
     currentUser,
     membership: { currentProjectRole },
   } = useUser();
-
-
 
   const { handleSubmit, setValue, watch, getValues, control, reset } = useForm<IPage>({
     defaultValues: { name: "", description_html: "" },
@@ -280,10 +275,10 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
               pageArchiveConfig={
                 userCanArchive
                   ? {
-                    action: archived_at ? unArchivePage : archivePage,
-                    is_archived: archived_at ? true : false,
-                    archived_at: archived_at ? new Date(archived_at) : undefined,
-                  }
+                      action: archived_at ? unArchivePage : archivePage,
+                      is_archived: archived_at ? true : false,
+                      archived_at: archived_at ? new Date(archived_at) : undefined,
+                    }
                   : undefined
               }
             />
@@ -323,9 +318,9 @@ const PageDetailsPage: NextPageWithLayout = observer(() => {
                     pageArchiveConfig={
                       userCanArchive
                         ? {
-                          is_archived: archived_at ? true : false,
-                          action: archived_at ? unArchivePage : archivePage,
-                        }
+                            is_archived: archived_at ? true : false,
+                            action: archived_at ? unArchivePage : archivePage,
+                          }
                         : undefined
                     }
                     pageLockConfig={userCanLock ? { is_locked: false, action: lockPage } : undefined}

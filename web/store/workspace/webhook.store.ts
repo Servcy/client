@@ -59,7 +59,6 @@ export class WebhookStore implements IWebhookStore {
       clearSecretKey: action,
     });
 
-
     this.webhookService = new WebhookService();
     // root store
     this.rootStore = _rootStore;

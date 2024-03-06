@@ -52,7 +52,6 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
     membership: { currentProjectRole },
   } = useUser();
 
-
   // states
   const [date, setDate] = useState(new Date());
   const [selectDuplicateIssue, setSelectDuplicateIssue] = useState(false);

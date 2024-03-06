@@ -23,7 +23,6 @@ type Props = {
   value: string | null;
 };
 
-
 const fileService = new FileService();
 
 export const UserImageUploadModal: React.FC<Props> = observer((props) => {
@@ -31,7 +30,6 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
   // states
   const [image, setImage] = useState<File | null>(null);
   const [isImageUploading, setIsImageUploading] = useState(false);
-
 
   // store hooks
   const {
@@ -119,10 +117,11 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
                     <div className="flex items-center justify-center gap-3">
                       <div
                         {...getRootProps()}
-                        className={`relative grid h-80 w-80 cursor-pointer place-items-center rounded-lg p-12 text-center focus:outline-none focus:ring-2 focus:ring-custom-primary focus:ring-offset-2 ${(image === null && isDragActive) || !value
+                        className={`relative grid h-80 w-80 cursor-pointer place-items-center rounded-lg p-12 text-center focus:outline-none focus:ring-2 focus:ring-custom-primary focus:ring-offset-2 ${
+                          (image === null && isDragActive) || !value
                             ? "border-2 border-dashed border-custom-border-200 hover:bg-custom-background-90"
                             : ""
-                          }`}
+                        }`}
                       >
                         {image !== null || (value && value !== "") ? (
                           <>

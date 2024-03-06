@@ -14,7 +14,7 @@ export type TIssueParentSiblings = {
 
 export const IssueParentSiblings: FC<TIssueParentSiblings> = (props) => {
   const { currentIssue, parentIssue } = props;
-  
+
   const {
     peekIssue,
     fetchSubIssues,

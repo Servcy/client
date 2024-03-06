@@ -1,4 +1,3 @@
-
 import { TIssuePriorities } from "@servcy/types";
 
 type Props = {

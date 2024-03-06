@@ -43,10 +43,11 @@ export const ProjectSettingsSidebar = () => {
               projectMemberInfo >= link.access && (
                 <Link key={link.key} href={`/${workspaceSlug}/projects/${projectId}${link.href}`}>
                   <div
-                    className={`rounded-md px-4 py-2 text-sm font-medium ${link.highlight(router.asPath, `/${workspaceSlug}/projects/${projectId}`)
+                    className={`rounded-md px-4 py-2 text-sm font-medium ${
+                      link.highlight(router.asPath, `/${workspaceSlug}/projects/${projectId}`)
                         ? "bg-custom-primary-100/10 text-custom-primary-100"
                         : "text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80 focus:bg-custom-sidebar-background-80"
-                      }`}
+                    }`}
                   >
                     {link.label}
                   </div>

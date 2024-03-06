@@ -15,7 +15,6 @@ import type { IIssueLabel, IState } from "@servcy/types";
 
 import { LABEL_COLOR_OPTIONS, getRandomLabelColor } from "@constants/label";
 
-
 type Props = {
   isOpen: boolean;
   projectId: string;
@@ -63,8 +62,6 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
     handleClose();
     reset(defaultValues);
   };
-
-
 
   const onSubmit = async (formData: IIssueLabel) => {
     if (!workspaceSlug) return;
@@ -121,8 +118,9 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
                         {({ open, close }) => (
                           <>
                             <Popover.Button
-                              className={`group inline-flex items-center rounded-sm py-2 text-base font-medium hover:text-custom-text-100 focus:outline-none ${open ? "text-custom-text-100" : "text-custom-text-200"
-                                }`}
+                              className={`group inline-flex items-center rounded-sm py-2 text-base font-medium hover:text-custom-text-100 focus:outline-none ${
+                                open ? "text-custom-text-100" : "text-custom-text-200"
+                              }`}
                             >
                               {watch("color") && watch("color") !== "" && (
                                 <span
@@ -133,8 +131,9 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
                                 />
                               )}
                               <ChevronDown
-                                className={`ml-2 h-5 w-5 group-hover:text-custom-text-200 ${open ? "text-gray-600" : "text-gray-400"
-                                  }`}
+                                className={`ml-2 h-5 w-5 group-hover:text-custom-text-200 ${
+                                  open ? "text-gray-600" : "text-gray-400"
+                                }`}
                                 aria-hidden="true"
                               />
                             </Popover.Button>

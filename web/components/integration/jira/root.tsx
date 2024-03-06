@@ -53,7 +53,6 @@ const integrationWorkflowData: Array<{
   },
 ];
 
-
 const jiraImporterService = new JiraImporterService();
 
 export const JiraImporterRoot: React.FC = () => {

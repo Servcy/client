@@ -28,7 +28,6 @@ const defaultValues: Partial<IIssueLabel> = {
 export const LabelCreate: FC<ILabelCreate> = (props) => {
   const { workspaceSlug, projectId, issueId, labelOperations, disabled = false } = props;
 
-
   const {
     issue: { getIssueById },
   } = useIssueDetail();

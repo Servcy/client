@@ -7,7 +7,6 @@ import { Spinner } from "@servcy/ui";
 
 import { NextPageWithLayout } from "@lib/types";
 
-
 const appInstallationService = new AppInstallationService();
 
 const AppPostInstallation: NextPageWithLayout = () => {

@@ -25,7 +25,6 @@ const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
 
   const { setTheme } = useTheme();
 
-
   useEffect(() => {
     if (userTheme) {
       const userThemeOption = THEME_OPTIONS.find((t) => t.value === userTheme?.theme);

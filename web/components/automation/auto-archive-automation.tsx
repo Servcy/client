@@ -72,8 +72,9 @@ export const AutoArchiveAutomation: React.FC<Props> = observer((props) => {
                 <div className="w-1/2">
                   <CustomSelect
                     value={currentProjectDetails?.archive_in}
-                    label={`${currentProjectDetails?.archive_in} ${currentProjectDetails?.archive_in === 1 ? "month" : "months"
-                      }`}
+                    label={`${currentProjectDetails?.archive_in} ${
+                      currentProjectDetails?.archive_in === 1 ? "month" : "months"
+                    }`}
                     onChange={(val: number) => {
                       handleChange({ archive_in: val });
                     }}

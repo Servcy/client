@@ -1,6 +1,4 @@
-
 import { WeekMonthDataType, ChartDataType, TGanttViews } from "../types";
-
 
 export const weeks: WeekMonthDataType[] = [
   { key: 0, shortTitle: "sun", title: "sunday" },
@@ -52,7 +50,6 @@ export const datePreview = (date: Date, includeTime: boolean = false) => {
   return `${charCapitalize(month?.shortTitle)} ${day}, ${year}${includeTime ? `, ${timePreview(date)}` : ``}`;
 };
 
-// context data
 export const VIEWS_LIST: ChartDataType[] = [
   // {
   //   key: "hours",

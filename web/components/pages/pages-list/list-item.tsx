@@ -212,8 +212,9 @@ export const PagesListItem: FC<IPagesListItem> = observer(({ pageId, projectId }
                 )}
                 {userCanChangeAccess && (
                   <Tooltip
-                    tooltipContent={`${access ? "This page is only visible to you" : "This page can be viewed by anyone in the project"
-                      }`}
+                    tooltipContent={`${
+                      access ? "This page is only visible to you" : "This page can be viewed by anyone in the project"
+                    }`}
                   >
                     {access ? (
                       <button type="button" onClick={handleMakePublic}>

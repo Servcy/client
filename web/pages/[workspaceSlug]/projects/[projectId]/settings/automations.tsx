@@ -22,7 +22,6 @@ const AutomationSettingsPage: NextPageWithLayout = observer(() => {
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
 
-
   // store hooks
   const {
     membership: { currentProjectRole },

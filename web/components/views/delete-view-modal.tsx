@@ -27,8 +27,6 @@ export const DeleteProjectViewModal: React.FC<Props> = observer((props) => {
   // store hooks
   const { deleteView } = useProjectView();
 
-
-
   const handleClose = () => {
     onClose();
     setIsDeleteLoading(false);

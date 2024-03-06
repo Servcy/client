@@ -39,7 +39,7 @@ export interface IIssueFilterHelperStore {
 }
 
 export class IssueFilterHelperStore implements IIssueFilterHelperStore {
-  constructor() { }
+  constructor() {}
 
   /**
    * @description This method is used to apply the display filters on the issues

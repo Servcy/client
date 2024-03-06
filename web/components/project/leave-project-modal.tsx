@@ -42,7 +42,6 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
   } = useUser();
   // toast
 
-
   const {
     control,
     formState: { errors, isSubmitting },

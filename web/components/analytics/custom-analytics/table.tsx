@@ -1,6 +1,5 @@
 import { BarDatum } from "@nivo/bar";
 
-
 import { PriorityIcon } from "@servcy/ui";
 
 import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";
@@ -34,8 +33,9 @@ export const AnalyticsTable: React.FC<Props> = ({ analytics, barGraphData, param
                   <th
                     key={`segment-${key}`}
                     scope="col"
-                    className={`px-2.5 py-3 text-left font-medium ${params.segment === "priority" || params.segment === "state__group" ? "capitalize" : ""
-                      }`}
+                    className={`px-2.5 py-3 text-left font-medium ${
+                      params.segment === "priority" || params.segment === "state__group" ? "capitalize" : ""
+                    }`}
                   >
                     <div className="flex items-center gap-2">
                       {params.segment === "priority" ? (
@@ -63,8 +63,9 @@ export const AnalyticsTable: React.FC<Props> = ({ analytics, barGraphData, param
             {barGraphData.data.map((item, index) => (
               <tr key={`table-row-${index}`} className="divide-x divide-custom-border-200 text-xs text-custom-text-200">
                 <td
-                  className={`flex items-center gap-2 whitespace-nowrap px-2.5 py-2 font-medium ${params.x_axis === "priority" || params.x_axis === "state__group" ? "capitalize" : ""
-                    }`}
+                  className={`flex items-center gap-2 whitespace-nowrap px-2.5 py-2 font-medium ${
+                    params.x_axis === "priority" || params.x_axis === "state__group" ? "capitalize" : ""
+                  }`}
                 >
                   {params.x_axis === "priority" ? (
                     <PriorityIcon priority={item.name as TIssuePriorities} />

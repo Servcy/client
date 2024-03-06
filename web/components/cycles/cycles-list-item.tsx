@@ -46,8 +46,6 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
   const { getCycleById, addCycleToFavorites, removeCycleFromFavorites } = useCycle();
   const { getUserDetails } = useMember();
 
-
-
   const handleCopyText = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();

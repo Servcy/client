@@ -18,13 +18,12 @@ export type TIssueReaction = {
 
 export const IssueReaction: FC<TIssueReaction> = observer((props) => {
   const { workspaceSlug, projectId, issueId, currentUser } = props;
-  
+
   const {
     reaction: { getReactionsByIssueId, reactionsByUser },
     createReaction,
     removeReaction,
   } = useIssueDetail();
-
 
   const reactionIds = getReactionsByIssueId(issueId);
   const userReactions = reactionsByUser(issueId, currentUser.id).map((r) => r.reaction);

@@ -28,7 +28,6 @@ const defaultValues: Partial<IWorkspace> = {
   logo: null,
 };
 
-
 const fileService = new FileService();
 
 export const WorkspaceDetails: FC = observer(() => {
@@ -43,7 +42,6 @@ export const WorkspaceDetails: FC = observer(() => {
     membership: { currentWorkspaceRole },
   } = useUser();
   const { currentWorkspace, updateWorkspace } = useWorkspace();
-
 
   // form info
   const {
@@ -198,8 +196,9 @@ export const WorkspaceDetails: FC = observer(() => {
           </div>
           <div className="flex flex-col gap-1">
             <h3 className="text-lg font-semibold leading-6">{watch("name")}</h3>
-            <button type="button" onClick={handleCopyUrl} className="text-sm tracking-tight">{`${typeof window !== "undefined" && window.location.origin.replace("http://", "").replace("https://", "")
-              }/${currentWorkspace.slug}`}</button>
+            <button type="button" onClick={handleCopyUrl} className="text-sm tracking-tight">{`${
+              typeof window !== "undefined" && window.location.origin.replace("http://", "").replace("https://", "")
+            }/${currentWorkspace.slug}`}</button>
             {isAdmin && (
               <button
                 className="flex items-center gap-1.5 text-left text-xs font-medium text-custom-primary-100"
@@ -284,9 +283,10 @@ export const WorkspaceDetails: FC = observer(() => {
                     id="url"
                     name="url"
                     type="url"
-                    value={`${typeof window !== "undefined" &&
+                    value={`${
+                      typeof window !== "undefined" &&
                       window.location.origin.replace("http://", "").replace("https://", "")
-                      }/${currentWorkspace.slug}`}
+                    }/${currentWorkspace.slug}`}
                     onChange={onChange}
                     ref={ref}
                     hasError={Boolean(errors.url)}

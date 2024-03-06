@@ -33,7 +33,7 @@ export const IssueActivityList: FC<TIssueActivityList> = observer((props) => {
 
   const {
     activity: { getActivityById },
-    comment: { },
+    comment: {},
   } = useIssueDetail();
 
   const componentDefaultProps = { activityId, ends };

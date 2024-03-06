@@ -9,7 +9,6 @@ import { Button, Input } from "@servcy/ui";
 
 import type { IProject } from "@servcy/types";
 
-
 type Props = {
   isOpen: boolean;
   type: "auto-close" | "auto-archive";

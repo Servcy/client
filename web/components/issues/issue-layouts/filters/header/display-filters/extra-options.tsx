@@ -1,7 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 
-
 import { FilterOption } from "@components/issues";
 
 import { IIssueDisplayFilterOptions, TIssueExtraOptions } from "@servcy/types";

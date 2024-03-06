@@ -40,8 +40,6 @@ export const InstanceSetupSignInForm: FC<IInstanceSetupEmailForm> = (props) => {
     },
   });
 
-
-
   const handleFormSubmit = async (formValues: InstanceSetupEmailFormValues) => {
     const payload = {
       email: formValues.email,
@@ -55,7 +53,7 @@ export const InstanceSetupSignInForm: FC<IInstanceSetupEmailForm> = (props) => {
         handleNextStep(formValues.email);
       })
       .catch((err) => {
-        toast.error("Something went wrong. Please try again.")
+        toast.error("Something went wrong. Please try again.");
       });
   };
 

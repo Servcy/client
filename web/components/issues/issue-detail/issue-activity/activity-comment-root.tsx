@@ -17,7 +17,7 @@ type TIssueActivityCommentRoot = {
 
 export const IssueActivityCommentRoot: FC<TIssueActivityCommentRoot> = observer((props) => {
   const { workspaceSlug, issueId, activityOperations, showAccessSpecifier } = props;
-  
+
   const {
     activity: { getActivityCommentByIssueId },
     comment: {},

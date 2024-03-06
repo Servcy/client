@@ -2,7 +2,6 @@ import { action, computed, makeObservable, observable } from "mobx";
 import { computedFn } from "mobx-utils";
 import { IssueRootStore } from "./root.store";
 
-
 export interface IIssueKanBanViewStore {
   kanBanToggle: {
     groupByHeaderMinMax: string[];

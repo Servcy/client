@@ -90,7 +90,6 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
   // router
   const router = useRouter();
 
-
   // local storage
   const { storedValue: localStorageDraftIssues, setValue: setLocalStorageDraftIssue } = useLocalStorage<
     Record<string, Partial<TIssue>>

@@ -17,9 +17,7 @@ const CustomErrorComponent = () => {
   const handleSignOut = async () => {
     await authService
       .signOut()
-      .catch(() =>
-        toast.error("Failed to sign out. Please try again.")
-      )
+      .catch(() => toast.error("Failed to sign out. Please try again."))
       .finally(() => router.push("/"));
   };
 
@@ -60,6 +58,5 @@ const CustomErrorComponent = () => {
     </DefaultLayout>
   );
 };
-
 
 export default CustomErrorComponent;

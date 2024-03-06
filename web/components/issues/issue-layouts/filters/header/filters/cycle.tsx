@@ -18,7 +18,6 @@ type Props = {
 export const FilterCycle: React.FC<Props> = observer((props) => {
   const { appliedFilters, handleUpdate, searchQuery } = props;
 
-
   const {
     router: { projectId },
   } = useApplication();

@@ -32,7 +32,6 @@ const WebhookDetailsPage: NextPageWithLayout = observer(() => {
   const { currentWorkspace } = useWorkspace();
   // toast
 
-
   // TODO: fix this error
   // useEffect(() => {
   //   if (isCreated !== "true") clearSecretKey();

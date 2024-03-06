@@ -29,8 +29,6 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
   const router = useRouter();
   const { workspaceSlug, projectId, cycleId } = router.query;
 
-
-
   const transferIssue = async (payload: any) => {
     if (!workspaceSlug || !projectId || !cycleId) return;
 

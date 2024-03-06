@@ -46,7 +46,6 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
 
-
   // store hooks
   const { captureEvent } = useEventTracker();
   const {
@@ -144,8 +143,9 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
 
     return {
       value: `${memberDetails?.member.id}`,
-      query: `${memberDetails?.member.first_name} ${memberDetails?.member.last_name
-        } ${memberDetails?.member.display_name.toLowerCase()}`,
+      query: `${memberDetails?.member.first_name} ${
+        memberDetails?.member.last_name
+      } ${memberDetails?.member.display_name.toLowerCase()}`,
       content: (
         <div className="flex w-full items-center gap-2">
           <div className="flex-shrink-0 pt-0.5">
