@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication } from "@hooks/store";
 import useIntegrationPopup from "@hooks/use-integration-popup";
 // ui
@@ -17,7 +17,7 @@ export const GithubAuth: React.FC<Props> = observer(({ workspaceIntegration, pro
   const {
     config: { envConfig },
   } = useApplication();
-  // hooks
+  
   const { startAuth, isConnecting } = useIntegrationPopup({
     provider,
     github_app_name: envConfig?.github_app_name || "",

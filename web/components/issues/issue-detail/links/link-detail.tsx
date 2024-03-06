@@ -20,7 +20,7 @@ export type TIssueLinkDetail = {
 export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
   // props
   const { linkId, linkOperations, isNotAllowed } = props;
-  // hooks
+  
   const {
     toggleIssueLinkModal: toggleIssueLinkModalStore,
     link: { getLinkById },

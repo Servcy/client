@@ -2,14 +2,14 @@ import React from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR from "swr";
-// hooks
+
 import { useIssues } from "@hooks/store";
 // components
 import { DraftIssueAppliedFiltersRoot } from "../filters/applied-filters/roots/draft-issue";
 import { DraftIssueListLayout } from "../list/roots/draft-issue-root";
 import { ProjectDraftEmptyState } from "../empty-states";
-import { IssuePeekOverview } from "components/issues/peek-overview";
-import { ActiveLoader } from "components/ui";
+import { IssuePeekOverview } from "@components/issues/peek-overview";
+import { ActiveLoader } from "@components/ui";
 // ui
 import { DraftKanBanLayout } from "../kanban/roots/draft-issue-root";
 // constants
@@ -19,7 +19,7 @@ export const DraftIssueLayoutRoot: React.FC = observer(() => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  // hooks
+
   const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT);
 
   useSWR(

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 import { AlertTriangle } from "lucide-react";
-// hooks
+
 import { useUser } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";

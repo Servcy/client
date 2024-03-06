@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 // components
 import { PageForm } from "./page-form";
-// hooks
+
 import { useEventTracker } from "@hooks/store";
 // types
 import { IPage } from "@servcy/types";

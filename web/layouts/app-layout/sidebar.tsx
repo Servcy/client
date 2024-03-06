@@ -6,9 +6,9 @@ import {
   WorkspaceSidebarDropdown,
   WorkspaceSidebarMenu,
   WorkspaceSidebarQuickAction,
-} from "components/workspace";
-import { ProjectSidebarList } from "components/project";
-// hooks
+} from "@components/workspace";
+import { ProjectSidebarList } from "@components/project";
+
 import { useApplication } from "@hooks/store";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 

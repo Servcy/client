@@ -2,12 +2,12 @@ import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { PlusIcon } from "lucide-react";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { ExistingIssuesListModal } from "components/core";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { ExistingIssuesListModal } from "@components/core";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // types
 import { ISearchIssueResponse, TIssueLayouts } from "@servcy/types";
 // constants

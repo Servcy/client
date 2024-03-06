@@ -4,7 +4,7 @@ import Router from "next/router";
 import NProgress from "nprogress";
 import { observer } from "mobx-react-lite";
 import { ThemeProvider } from "next-themes";
-// hooks
+
 import { useApplication, useUser, useWorkspace } from "@hooks/store";
 // constants
 import { THEMES } from "@constants/themes";

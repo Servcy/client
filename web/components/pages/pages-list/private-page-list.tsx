@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 // components
-import { PagesListView } from "components/pages/pages-list";
+import { PagesListView } from "@components/pages/pages-list";
 // ui
 import { Loader } from "@servcy/ui";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";

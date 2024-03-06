@@ -2,18 +2,18 @@ import React, { useCallback, useEffect, FC } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { CommandModal, ShortcutsModal } from "components/command-palette";
-import { BulkDeleteIssuesModal } from "components/core";
-import { CycleCreateUpdateModal } from "components/cycles";
-import { CreateUpdateIssueModal, DeleteIssueModal } from "components/issues";
-import { CreateUpdateModuleModal } from "components/modules";
-import { CreateProjectModal } from "components/project";
-import { CreateUpdateProjectViewModal } from "components/views";
-import { CreateUpdatePageModal } from "components/pages";
+import { CommandModal, ShortcutsModal } from "@components/command-palette";
+import { BulkDeleteIssuesModal } from "@components/core";
+import { CycleCreateUpdateModal } from "@components/cycles";
+import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
+import { CreateUpdateModuleModal } from "@components/modules";
+import { CreateProjectModal } from "@components/project";
+import { CreateUpdateProjectViewModal } from "@components/views";
+import { CreateUpdatePageModal } from "@components/pages";
 // helpers
 import { copyTextToClipboard } from "@helpers/string.helper";
 // services

@@ -1,11 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssues, useUser } from "@hooks/store";
 // components
-import { GanttQuickAddIssueForm, IssueGanttBlock } from "components/issues";
-import { GanttChartRoot, IBlockUpdateData, IssueGanttSidebar } from "components/gantt-chart";
+import { GanttQuickAddIssueForm, IssueGanttBlock } from "@components/issues";
+import { GanttChartRoot, IBlockUpdateData, IssueGanttSidebar } from "@components/gantt-chart";
 // helpers
 import { renderIssueBlocksStructure } from "@helpers/issue.helper";
 // types

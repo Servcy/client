@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useCycle, useUser } from "@hooks/store";
 // components
-import { GanttChartRoot, IBlockUpdateData, CycleGanttSidebar } from "components/gantt-chart";
-import { CycleGanttBlock } from "components/cycles";
+import { GanttChartRoot, IBlockUpdateData, CycleGanttSidebar } from "@components/gantt-chart";
+import { CycleGanttBlock } from "@components/cycles";
 // types
 import { ICycle } from "@servcy/types";
 // constants

@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 // components
-import { PriorityDropdown } from "components/dropdowns";
+import { PriorityDropdown } from "@components/dropdowns";
 // types
 import { TIssue } from "@servcy/types";
 

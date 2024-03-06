@@ -1,5 +1,5 @@
 import Link from "next/link";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // components
 import {
@@ -12,7 +12,7 @@ import {
   CreatedOverdueIssueListItem,
   CreatedUpcomingIssueListItem,
   IssueListItemProps,
-} from "components/dashboard/widgets";
+} from "@components/dashboard/widgets";
 // ui
 import { Loader, getButtonStyling } from "@servcy/ui";
 // helpers

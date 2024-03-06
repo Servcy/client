@@ -1,13 +1,13 @@
 import { useEffect, useState, ReactElement } from "react";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // layouts
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
 // components
-import { CustomThemeSelector, ThemeSwitch, PageHead } from "components/core";
+import { CustomThemeSelector, ThemeSwitch, PageHead } from "@components/core";
 // ui
 import { Spinner } from "@servcy/ui";
 // constants
@@ -22,7 +22,7 @@ const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
   const { currentUser, updateCurrentUserTheme } = useUser();
   // computed
   const userTheme = currentUser?.theme;
-  // hooks
+
   const { setTheme } = useTheme();
 
 

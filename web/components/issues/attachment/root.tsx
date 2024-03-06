@@ -1,5 +1,5 @@
 import { FC, useMemo } from "react";
-// hooks
+
 import { useEventTracker, useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
@@ -21,7 +21,7 @@ export type TAttachmentOperations = {
 export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
   // props
   const { workspaceSlug, projectId, issueId, disabled = false } = props;
-  // hooks
+  
   const { createAttachment, removeAttachment } = useIssueDetail();
   const { captureIssueEvent } = useEventTracker();
 

@@ -6,12 +6,12 @@ import { CustomMenu } from "@servcy/ui";
 import { Calendar, ChevronDown, Kanban, List } from "lucide-react";
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue";
-// hooks
+
 import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store";
 // layouts
 import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "./issue-layouts";
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
-import { ProjectAnalyticsModal } from "components/analytics";
+import { ProjectAnalyticsModal } from "@components/analytics";
 
 export const IssuesMobileHeader = () => {
   const layouts = [

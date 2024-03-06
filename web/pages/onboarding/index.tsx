@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import useSWR from "swr";
-// hooks
+
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 import useUserAuth from "@hooks/use-user-auth";
 // services
@@ -16,8 +16,8 @@ import { WorkspaceService } from "@services/workspace.service";
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import DefaultLayout from "@layouts/default-layout";
 // components
-import { PageHead } from "components/core";
-import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "components/onboarding";
+import { PageHead } from "@components/core";
+import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding";
 // ui
 import { Avatar, Spinner } from "@servcy/ui";
 // images

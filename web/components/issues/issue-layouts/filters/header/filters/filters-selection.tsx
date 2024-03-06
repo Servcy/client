@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Search, X } from "lucide-react";
-// hooks
+
 import { useApplication } from "@hooks/store";
 // components
 import {
@@ -17,7 +17,7 @@ import {
   FilterTargetDate,
   FilterCycle,
   FilterModule,
-} from "components/issues";
+} from "@components/issues";
 // types
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";
 // constants
@@ -34,7 +34,7 @@ type Props = {
 
 export const FilterSelection: React.FC<Props> = observer((props) => {
   const { filters, handleFiltersUpdate, layoutDisplayFiltersOptions, labels, memberIds, states } = props;
-  // hooks
+
   const {
     router: { moduleId, cycleId },
   } = useApplication();

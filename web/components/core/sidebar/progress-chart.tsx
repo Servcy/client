@@ -1,7 +1,7 @@
 import React from "react";
 import { eachDayOfInterval, isValid } from "date-fns";
 // ui
-import { LineGraph } from "components/ui";
+import { LineGraph } from "@components/ui";
 // helpers
 import { renderFormattedDateWithoutYear } from "@helpers/date-time.helper";
 //types

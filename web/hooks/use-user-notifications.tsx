@@ -5,7 +5,7 @@ import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
 // services
 import { NotificationService } from "@services/notification.service";
-// hooks
+
 import useToast from "./use-toast";
 // fetch-keys
 import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@constants/fetch-keys";

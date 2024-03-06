@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useWebhook } from "@hooks/store";
 // components
 import {
@@ -10,7 +10,7 @@ import {
   WebhookOptions,
   WebhookSecretKey,
   WebhookToggle,
-} from "components/web-hooks";
+} from "@components/web-hooks";
 // ui
 import { Button } from "@servcy/ui";
 // types

@@ -1,7 +1,7 @@
 import { Fragment, FC } from "react";
 import { useRouter } from "next/router";
 import { useForm, Controller } from "react-hook-form";
-import { DateDropdown } from "components/dropdowns";
+import { DateDropdown } from "@components/dropdowns";
 import { Transition, Dialog } from "@headlessui/react";
 import { X } from "lucide-react";
 // constants

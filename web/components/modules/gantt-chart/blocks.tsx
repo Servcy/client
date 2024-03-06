@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
-// hooks
+
 import { useApplication, useModule } from "@hooks/store";
 // ui
 import { Tooltip, ModuleStatusIcon } from "@servcy/ui";

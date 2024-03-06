@@ -4,11 +4,11 @@ import { ArchiveIcon, CustomMenu } from "@servcy/ui";
 import { observer } from "mobx-react";
 import { Copy, ExternalLink, Link, Pencil, Trash2 } from "lucide-react";
 import omit from "lodash/omit";
-// hooks
+
 import { useEventTracker, useIssues, useProjectState, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "components/issues";
+import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
 // types

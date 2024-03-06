@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// hooks
+
 import { useGlobalView, useWorkspace } from "@hooks/store";
 // components
-import { GlobalViewsHeader } from "components/workspace";
-import { AllIssueLayoutRoot } from "components/issues";
-import { GlobalIssuesHeader } from "components/headers";
-import { PageHead } from "components/core";
+import { GlobalViewsHeader } from "@components/workspace";
+import { AllIssueLayoutRoot } from "@components/issues";
+import { GlobalIssuesHeader } from "@components/headers";
+import { PageHead } from "@components/core";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants

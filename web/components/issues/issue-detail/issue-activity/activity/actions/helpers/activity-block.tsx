@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Network } from "lucide-react";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // ui
 import { Tooltip } from "@servcy/ui";
@@ -19,7 +19,7 @@ type TIssueActivityBlockComponent = {
 
 export const IssueActivityBlockComponent: FC<TIssueActivityBlockComponent> = (props) => {
   const { icon, activityId, ends, children, customUserName } = props;
-  // hooks
+  
   const {
     activity: { getActivityById },
   } = useIssueDetail();

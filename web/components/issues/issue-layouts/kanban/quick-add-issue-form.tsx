@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 import { PlusIcon } from "lucide-react";
-// hooks
+
 import { useEventTracker, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 import useKeypress from "@hooks/use-keypress";

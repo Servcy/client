@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-// hooks
+
 import { useEventTracker, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import EmojiIconPicker from "components/emoji-icon-picker";
-import { ImagePickerPopover } from "components/core";
+import EmojiIconPicker from "@components/emoji-icon-picker";
+import { ImagePickerPopover } from "@components/core";
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
 // icons
 import { Lock } from "lucide-react";

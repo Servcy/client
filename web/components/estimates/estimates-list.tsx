@@ -6,8 +6,8 @@ import { useTheme } from "next-themes";
 import { useEstimate, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { CreateUpdateEstimateModal, DeleteEstimateModal, EstimateListItem } from "components/estimates";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { CreateUpdateEstimateModal, DeleteEstimateModal, EstimateListItem } from "@components/estimates";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Button, Loader } from "@servcy/ui";
 // types

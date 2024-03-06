@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { observer } from "mobx-react";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // components
 import { IssueActivityBlockComponent, IssueLink } from "./";
@@ -11,7 +11,7 @@ type TIssueStateActivity = { activityId: string; showIssue?: boolean; ends: "top
 
 export const IssueStateActivity: FC<TIssueStateActivity> = observer((props) => {
   const { activityId, showIssue = true, ends } = props;
-  // hooks
+  
   const {
     activity: { getActivityById },
   } = useIssueDetail();

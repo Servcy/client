@@ -2,10 +2,10 @@ import { FC, useEffect } from "react";
 import { observer } from "mobx-react";
 // store hooks
 import { useIssueDetail, useProject, useUser } from "@hooks/store";
-// hooks
+
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
 // components
-import { TIssueOperations } from "components/issues";
+import { TIssueOperations } from "@components/issues";
 import { IssueReaction } from "../issue-detail/reactions";
 import { IssueTitleInput } from "../title-input";
 import { IssueDescriptionInput } from "../description-input";
@@ -28,7 +28,7 @@ export const PeekOverviewIssueDetails: FC<IPeekOverviewIssueDetails> = observer(
   const {
     issue: { getIssueById },
   } = useIssueDetail();
-  // hooks
+
   const { setShowAlert } = useReloadConfirmations(isSubmitting === "submitting");
 
   useEffect(() => {

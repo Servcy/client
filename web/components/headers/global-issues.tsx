@@ -2,13 +2,13 @@ import { useCallback, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useLabel, useMember, useUser, useIssues } from "@hooks/store";
 // components
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "components/issues";
-import { CreateUpdateWorkspaceViewModal } from "components/workspace";
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "components/common";
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues";
+import { CreateUpdateWorkspaceViewModal } from "@components/workspace";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { BreadcrumbLink } from "@components/common";
 // ui
 import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui";
 // icons

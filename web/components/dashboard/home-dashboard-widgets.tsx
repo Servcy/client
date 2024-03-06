@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useDashboard } from "@hooks/store";
 // components
 import {
@@ -12,7 +12,7 @@ import {
   RecentCollaboratorsWidget,
   RecentProjectsWidget,
   WidgetProps,
-} from "components/dashboard";
+} from "@components/dashboard";
 // types
 import { TWidgetKeys } from "@servcy/types";
 

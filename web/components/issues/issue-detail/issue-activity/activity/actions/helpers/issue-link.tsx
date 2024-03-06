@@ -1,5 +1,5 @@
 import { FC } from "react";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // ui
 import { Tooltip } from "@servcy/ui";
@@ -10,7 +10,7 @@ type TIssueLink = {
 
 export const IssueLink: FC<TIssueLink> = (props) => {
   const { activityId } = props;
-  // hooks
+  
   const {
     activity: { getActivityById },
   } = useIssueDetail();

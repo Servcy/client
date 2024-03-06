@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useDashboard } from "@hooks/store";
 // components
-import { MarimekkoGraph } from "components/ui";
+import { MarimekkoGraph } from "@components/ui";
 import {
   DurationFilterDropdown,
   IssuesByPriorityEmptyState,
   WidgetLoader,
   WidgetProps,
-} from "components/dashboard/widgets";
+} from "@components/dashboard/widgets";
 // ui
 import { PriorityIcon } from "@servcy/ui";
 // helpers

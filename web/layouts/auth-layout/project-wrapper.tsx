@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR from "swr";
-// hooks
+
 import {
   useApplication,
   useEventTracker,
@@ -19,8 +19,8 @@ import {
 } from "@hooks/store";
 // components
 import { Spinner } from "@servcy/ui";
-import { JoinProject } from "components/auth-screens";
-import { EmptyState } from "components/common";
+import { JoinProject } from "@components/auth-screens";
+import { EmptyState } from "@components/common";
 // images
 import emptyProject from "public/empty-state/project.svg";
 

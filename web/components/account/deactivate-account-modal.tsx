@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { Dialog, Transition } from "@headlessui/react";
 import { Trash2 } from "lucide-react";
 import { mutate } from "swr";
-// hooks
+
 import { useUser } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";

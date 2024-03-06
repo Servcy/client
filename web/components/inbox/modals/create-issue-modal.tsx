@@ -5,15 +5,15 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Controller, useForm } from "react-hook-form";
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
 import { Sparkle } from "lucide-react";
-// hooks
+
 import { useApplication, useEventTracker, useWorkspace, useInboxIssues, useMention } from "@hooks/store";
 import toast from "react-hot-toast";
 // services
 import { FileService } from "@services/file.service";
 import { AIService } from "@services/ai.service";
 // components
-import { PriorityDropdown } from "components/dropdowns";
-import { GptAssistantPopover } from "components/core";
+import { PriorityDropdown } from "@components/dropdowns";
+import { GptAssistantPopover } from "@components/core";
 // ui
 import { Button, Input, ToggleSwitch } from "@servcy/ui";
 // types

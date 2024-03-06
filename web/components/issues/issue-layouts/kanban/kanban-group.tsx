@@ -1,6 +1,6 @@
 import { MutableRefObject } from "react";
 import { Droppable } from "@hello-pangea/dnd";
-// hooks
+
 import { useProjectState } from "@hooks/store";
 //components
 import { KanbanIssueBlocksList, KanBanQuickAddIssueForm } from ".";
@@ -63,7 +63,7 @@ export const KanbanGroup = (props: IKanbanGroup) => {
     scrollableContainerRef,
     isDragStarted,
   } = props;
-  // hooks
+  
   const projectState = useProjectState();
 
   const prePopulateQuickAddData = (

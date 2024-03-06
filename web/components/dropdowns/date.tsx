@@ -3,7 +3,7 @@ import { Combobox } from "@headlessui/react";
 import { DayPicker, Matcher } from "react-day-picker";
 import { usePopper } from "react-popper";
 import { CalendarDays, X } from "lucide-react";
-// hooks
+
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // components

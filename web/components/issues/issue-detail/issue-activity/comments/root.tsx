@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // components
 import { IssueCommentCard } from "./comment-card";
@@ -16,7 +16,7 @@ type TIssueCommentRoot = {
 
 export const IssueCommentRoot: FC<TIssueCommentRoot> = observer((props) => {
   const { workspaceSlug, issueId, activityOperations, showAccessSpecifier } = props;
-  // hooks
+  
   const {
     comment: { getCommentsByIssueId },
   } = useIssueDetail();

@@ -9,19 +9,19 @@ import { UserService } from "@services/user.service";
 // layouts
 import { ProfileSettingsLayout } from "@layouts/settings-layout";
 // components
-import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "components/core";
+import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/core";
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor";
 // icons
 import { History, MessageSquare } from "lucide-react";
 // ui
-import { ActivitySettingsLoader } from "components/ui";
+import { ActivitySettingsLoader } from "@components/ui";
 // fetch-keys
 import { USER_ACTIVITY } from "@constants/fetch-keys";
 // helper
 import { calculateTimeAgo } from "@helpers/date-time.helper";
 // type
 import { NextPageWithLayout } from "@lib/types";
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 
 const userService = new UserService();
 

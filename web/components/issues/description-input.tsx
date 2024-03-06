@@ -9,7 +9,7 @@ import { FileService } from "@services/file.service";
 const fileService = new FileService();
 // types
 import { TIssueOperations } from "./issue-detail";
-// hooks
+
 import useDebounce from "@hooks/use-debounce";
 
 export type IssueDescriptionInputProps = {
@@ -30,7 +30,7 @@ export const IssueDescriptionInput: FC<IssueDescriptionInputProps> = (props) => 
   // store hooks
   const { mentionHighlights, mentionSuggestions } = useMention();
   const { getWorkspaceBySlug } = useWorkspace();
-  // hooks
+  
   const debouncedValue = useDebounce(descriptionHTML, 1500);
   // computed values
   const workspaceId = getWorkspaceBySlug(workspaceSlug)?.id as string;

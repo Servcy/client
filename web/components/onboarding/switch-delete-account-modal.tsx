@@ -4,7 +4,7 @@ import { mutate } from "swr";
 import { useTheme } from "next-themes";
 import { Dialog, Transition } from "@headlessui/react";
 import { Trash2 } from "lucide-react";
-// hooks
+
 import { useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 

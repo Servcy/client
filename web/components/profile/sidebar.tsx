@@ -3,7 +3,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import { Disclosure, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useUser } from "@hooks/store";
 // services
 import { UserService } from "@services/user.service";

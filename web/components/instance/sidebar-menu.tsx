@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Image, BrainCog, Cog, Lock, Mail } from "lucide-react";
-// hooks
+
 import { useApplication } from "@hooks/store";
 // ui
 import { Tooltip } from "@servcy/ui";

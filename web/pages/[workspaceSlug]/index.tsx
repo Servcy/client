@@ -3,12 +3,12 @@ import { observer } from "mobx-react";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { PageHead } from "components/core";
-import { WorkspaceDashboardView } from "components/page-views";
-import { WorkspaceDashboardHeader } from "components/headers/workspace-dashboard";
+import { PageHead } from "@components/core";
+import { WorkspaceDashboardView } from "@components/page-views";
+import { WorkspaceDashboardHeader } from "@components/headers/workspace-dashboard";
 // types
 import { NextPageWithLayout } from "@lib/types";
-// hooks
+
 import { useWorkspace } from "@hooks/store";
 
 const WorkspacePage: NextPageWithLayout = observer(() => {

@@ -3,7 +3,7 @@ import { Command } from "cmdk";
 import { useTheme } from "next-themes";
 import { Settings } from "lucide-react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // constants
@@ -19,7 +19,7 @@ export const CommandPaletteThemeActions: FC<Props> = observer((props) => {
   const [mounted, setMounted] = useState(false);
   // store
   const { updateCurrentUserTheme } = useUser();
-  // hooks
+  
   const { setTheme } = useTheme();
 
 

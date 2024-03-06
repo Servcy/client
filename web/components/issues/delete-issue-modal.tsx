@@ -25,7 +25,7 @@ export const DeleteIssueModal: React.FC<Props> = (props) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
 
-  // hooks
+  
   const { getProjectById } = useProject();
 
   useEffect(() => {

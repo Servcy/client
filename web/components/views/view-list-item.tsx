@@ -3,11 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { LinkIcon, PencilIcon, StarIcon, TrashIcon } from "lucide-react";
-// hooks
+
 import { useProjectView, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "components/views";
+import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@components/views";
 // ui
 import { CustomMenu } from "@servcy/ui";
 // helpers

@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { usePopper } from "react-popper";
 import { Check, Search, Tag } from "lucide-react";
-// hooks
+
 import { useIssueDetail, useLabel } from "@hooks/store";
 // components
 import { Combobox } from "@headlessui/react";

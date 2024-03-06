@@ -3,15 +3,15 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
 // components
-import { ProjectLayoutRoot } from "components/issues";
-import { ProjectIssuesHeader } from "components/headers";
+import { ProjectLayoutRoot } from "@components/issues";
+import { ProjectIssuesHeader } from "@components/headers";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// hooks
+
 import { useProject } from "@hooks/store";
-import { PageHead } from "components/core";
+import { PageHead } from "@components/core";
 
 const ProjectIssuesPage: NextPageWithLayout = observer(() => {
   const router = useRouter();

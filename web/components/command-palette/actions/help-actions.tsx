@@ -1,6 +1,6 @@
 import { Command } from "cmdk";
 import { MessageSquare, Rocket } from "lucide-react";
-// hooks
+
 import { useApplication } from "@hooks/store";
 
 type Props = {

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication } from "@hooks/store";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // icons

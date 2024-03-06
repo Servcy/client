@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 // services
 import { CycleService } from "@services/cycle.service";
-// hooks
+
 import { useEventTracker, useCycle, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 import useLocalStorage from "@hooks/use-local-storage";
 // components
-import { CycleForm } from "components/cycles";
+import { CycleForm } from "@components/cycles";
 // types
 import type { CycleDateCheckData, ICycle, TCycleView } from "@servcy/types";
 // constants

@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useUser } from "@hooks/store";
 // components
-import { ProfileNavbar, ProfileSidebar } from "components/profile";
+import { ProfileNavbar, ProfileSidebar } from "@components/profile";
 
 type Props = {
   children: React.ReactNode;

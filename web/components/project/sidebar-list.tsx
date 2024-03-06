@@ -4,11 +4,11 @@ import { DragDropContext, Draggable, DropResult, Droppable } from "@hello-pangea
 import { Disclosure, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 import { ChevronDown, ChevronRight, Plus } from "lucide-react";
-// hooks
+
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { CreateProjectModal, ProjectSidebarListItem } from "components/project";
+import { CreateProjectModal, ProjectSidebarListItem } from "@components/project";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
 import { orderJoinedProjects } from "@helpers/project.helper";

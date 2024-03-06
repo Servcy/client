@@ -3,7 +3,7 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import useSWR from "swr";
-// hooks
+
 import { useUser } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
@@ -12,12 +12,12 @@ import { ProjectSettingLayout } from "@layouts/settings-layout";
 import { IntegrationService } from "@services/integrations";
 import { ProjectService } from "@services/project";
 // components
-import { PageHead } from "components/core";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
-import { ProjectSettingHeader } from "components/headers";
-import { IntegrationCard } from "components/project";
+import { PageHead } from "@components/core";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
+import { ProjectSettingHeader } from "@components/headers";
+import { IntegrationCard } from "@components/project";
 // ui
-import { IntegrationsSettingsLoader } from "components/ui";
+import { IntegrationsSettingsLoader } from "@components/ui";
 // types
 import { IProject } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";

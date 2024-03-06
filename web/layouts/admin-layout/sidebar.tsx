@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication } from "@hooks/store";
 // components
-import { InstanceAdminSidebarMenu, InstanceHelpSection, InstanceSidebarDropdown } from "components/instance";
+import { InstanceAdminSidebarMenu, InstanceHelpSection, InstanceSidebarDropdown } from "@components/instance";
 
 export interface IInstanceAdminSidebar {}
 

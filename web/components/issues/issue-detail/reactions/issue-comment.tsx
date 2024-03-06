@@ -2,7 +2,7 @@ import { FC, useMemo } from "react";
 import { observer } from "mobx-react-lite";
 // components
 import { ReactionSelector } from "./reaction-selector";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
 // types
@@ -19,7 +19,7 @@ export type TIssueCommentReaction = {
 export const IssueCommentReaction: FC<TIssueCommentReaction> = observer((props) => {
   const { workspaceSlug, projectId, commentId, currentUser } = props;
 
-  // hooks
+  
   const {
     commentReaction: { getCommentReactionsByCommentId, commentReactionsByUser },
     createCommentReaction,

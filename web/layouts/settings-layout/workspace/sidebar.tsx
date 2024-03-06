@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-// hooks
+
 import { useUser } from "@hooks/store";
 // constants
 import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace";

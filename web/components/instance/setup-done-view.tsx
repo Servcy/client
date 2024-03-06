@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-// hooks
+
 import { useApplication } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";

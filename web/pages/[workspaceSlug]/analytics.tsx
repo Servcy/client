@@ -3,15 +3,15 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Tab } from "@headlessui/react";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { PageHead } from "components/core";
-import { CustomAnalytics, ScopeAndDemand } from "components/analytics";
-import { WorkspaceAnalyticsHeader } from "components/headers";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { PageHead } from "@components/core";
+import { CustomAnalytics, ScopeAndDemand } from "@components/analytics";
+import { WorkspaceAnalyticsHeader } from "@components/headers";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // constants
 import { ANALYTICS_TABS } from "@constants/analytics";
 import { EUserWorkspaceRoles } from "@constants/workspace";

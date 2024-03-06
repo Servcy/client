@@ -15,8 +15,8 @@ import {
   ModuleKanBanLayout,
   ModuleListLayout,
   ModuleSpreadsheetLayout,
-} from "components/issues";
-import { ActiveLoader } from "components/ui";
+} from "@components/issues";
+import { ActiveLoader } from "@components/ui";
 // constants
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 // types
@@ -26,7 +26,7 @@ export const ModuleLayoutRoot: React.FC = observer(() => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId, moduleId } = router.query;
-  // hooks
+
   const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE);
 
   useSWR(

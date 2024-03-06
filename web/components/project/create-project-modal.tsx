@@ -3,15 +3,15 @@ import { useForm, Controller } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 import { X } from "lucide-react";
-// hooks
+
 import { useEventTracker, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
 // components
-import { ImagePickerPopover } from "components/core";
-import EmojiIconPicker from "components/emoji-icon-picker";
-import { MemberDropdown } from "components/dropdowns";
+import { ImagePickerPopover } from "@components/core";
+import EmojiIconPicker from "@components/emoji-icon-picker";
+import { MemberDropdown } from "@components/dropdowns";
 // helpers
 import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper";
 // constants

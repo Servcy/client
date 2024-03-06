@@ -1,14 +1,14 @@
 import { FC, useMemo } from "react";
 import { useRouter } from "next/router";
 // components
-import { IssuePeekOverview } from "components/issues";
+import { IssuePeekOverview } from "@components/issues";
 import { IssueMainContent } from "./main-content";
 import { IssueDetailsSidebar } from "./sidebar";
 // ui
-import { EmptyState } from "components/common";
+import { EmptyState } from "@components/common";
 // images
 import emptyIssue from "public/empty-state/issue.svg";
-// hooks
+
 import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // types
@@ -59,7 +59,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
   const { workspaceSlug, projectId, issueId, is_archived = false } = props;
   // router
   const router = useRouter();
-  // hooks
+
   const {
     issue: { getIssueById },
     fetchIssue,

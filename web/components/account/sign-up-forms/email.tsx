@@ -25,7 +25,7 @@ const authService = new AuthService();
 
 export const SignUpEmailForm: React.FC<Props> = observer((props) => {
   const { onSubmit, updateEmail } = props;
-  // hooks
+  
 
   const {
     control,

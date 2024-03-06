@@ -2,7 +2,7 @@ import { FC, useRef, useState } from "react";
 
 import { observer } from "mobx-react-lite";
 
-// hooks
+
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import useKeypress from "@hooks/use-keypress";
 import toast from "react-hot-toast";
@@ -17,7 +17,7 @@ import {
   PeekOverviewProperties,
   TIssueOperations,
   ArchiveIssueModal,
-} from "components/issues";
+} from "@components/issues";
 import { IssueActivity } from "../issue-detail/issue-activity";
 // ui
 import { Spinner } from "@servcy/ui";
@@ -50,7 +50,7 @@ export const IssueView: FC<IIssueView> = observer((props) => {
     issue: { getIssueById },
   } = useIssueDetail();
   const issue = getIssueById(issueId);
-  // hooks
+
   const { alerts } = useToast();
   // remove peek id
   const removeRoutePeekId = () => {

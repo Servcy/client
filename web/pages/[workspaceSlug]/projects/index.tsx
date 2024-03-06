@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 import { observer } from "mobx-react";
 // components
-import { PageHead } from "components/core";
-import { ProjectCardList } from "components/project";
-import { ProjectsHeader } from "components/headers";
+import { PageHead } from "@components/core";
+import { ProjectCardList } from "@components/project";
+import { ProjectsHeader } from "@components/headers";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // type

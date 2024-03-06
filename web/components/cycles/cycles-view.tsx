@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useCycle } from "@hooks/store";
 // components
-import { CyclesBoard, CyclesList, CyclesListGanttChartView } from "components/cycles";
+import { CyclesBoard, CyclesList, CyclesListGanttChartView } from "@components/cycles";
 // ui components
-import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "components/ui";
+import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
 // types
 import { TCycleLayout, TCycleView } from "@servcy/types";
 

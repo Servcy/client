@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useDashboard } from "@hooks/store";
 // components
-import { PieGraph } from "components/ui";
+import { PieGraph } from "@components/ui";
 import {
   DurationFilterDropdown,
   IssuesByStateGroupEmptyState,
   WidgetLoader,
   WidgetProps,
-} from "components/dashboard/widgets";
+} from "@components/dashboard/widgets";
 // helpers
 import { getCustomDates } from "@helpers/dashboard.helper";
 // types

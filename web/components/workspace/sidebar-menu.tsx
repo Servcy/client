@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useEventTracker, useUser } from "@hooks/store";
 // components
-import { NotificationPopover } from "components/notifications";
+import { NotificationPopover } from "@components/notifications";
 // ui
 import { Tooltip } from "@servcy/ui";
 import { Crown } from "lucide-react";

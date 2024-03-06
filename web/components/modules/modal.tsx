@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
-// hooks
+
 import { useEventTracker, useModule, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { ModuleForm } from "components/modules";
+import { ModuleForm } from "@components/modules";
 // types
 import type { IModule } from "@servcy/types";
 // constants

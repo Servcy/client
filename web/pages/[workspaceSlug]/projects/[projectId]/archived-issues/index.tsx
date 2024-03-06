@@ -4,13 +4,13 @@ import { observer } from "mobx-react";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // contexts
-import { ArchivedIssueLayoutRoot } from "components/issues";
+import { ArchivedIssueLayoutRoot } from "@components/issues";
 // components
-import { ProjectArchivedIssuesHeader } from "components/headers";
-import { PageHead } from "components/core";
+import { ProjectArchivedIssuesHeader } from "@components/headers";
+import { PageHead } from "@components/core";
 // types
 import { NextPageWithLayout } from "@lib/types";
-// hooks
+
 import { useProject } from "@hooks/store";
 
 const ProjectArchivedIssuesPage: NextPageWithLayout = observer(() => {

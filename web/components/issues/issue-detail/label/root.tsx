@@ -2,7 +2,7 @@ import { FC, useMemo } from "react";
 import { observer } from "mobx-react-lite";
 // components
 import { LabelList, LabelCreate, IssueLabelSelectRoot } from "./";
-// hooks
+
 import { useIssueDetail, useLabel } from "@hooks/store";
 // types
 import { IIssueLabel, TIssue } from "@servcy/types";
@@ -24,7 +24,7 @@ export type TLabelOperations = {
 
 export const IssueLabel: FC<TIssueLabel> = observer((props) => {
   const { workspaceSlug, projectId, issueId, disabled = false, isInboxIssue = false, onLabelUpdate } = props;
-  // hooks
+  
   const { updateIssue } = useIssueDetail();
   const { createLabel } = useLabel();
 

@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Check, Globe2, Lock, Pencil, Trash2, X } from "lucide-react";
-// hooks
+
 import { useIssueDetail, useMention, useUser, useWorkspace } from "@hooks/store";
 // components
 import { IssueCommentBlock } from "./comment-block";
@@ -29,7 +29,7 @@ type TIssueCommentCard = {
 
 export const IssueCommentCard: FC<TIssueCommentCard> = (props) => {
   const { workspaceSlug, commentId, activityOperations, ends, showAccessSpecifier = false } = props;
-  // hooks
+  
   const {
     comment: { getCommentById },
   } = useIssueDetail();

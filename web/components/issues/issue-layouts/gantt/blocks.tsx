@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-// hooks
+
 import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store";
 // ui
 import { Tooltip, StateGroupIcon, ControlLink } from "@servcy/ui";

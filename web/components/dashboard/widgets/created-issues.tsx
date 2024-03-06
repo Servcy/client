@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import { Tab } from "@headlessui/react";
-// hooks
+
 import { useDashboard } from "@hooks/store";
 // components
 import {
@@ -11,7 +11,7 @@ import {
   WidgetIssuesList,
   WidgetLoader,
   WidgetProps,
-} from "components/dashboard/widgets";
+} from "@components/dashboard/widgets";
 // helpers
 import { getCustomDates, getRedirectionFilters, getTabKey } from "@helpers/dashboard.helper";
 // types

@@ -1,7 +1,7 @@
 import { MutableRefObject, memo } from "react";
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useIssueDetail, useProject } from "@hooks/store";
 // components
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
@@ -13,7 +13,7 @@ import { TIssue, IIssueDisplayProperties, IIssueMap } from "@servcy/types";
 import { EIssueActions } from "../types";
 // helper
 import { cn } from "@helpers/common.helper";
-import RenderIfVisible from "components/core/render-if-visible-HOC";
+import RenderIfVisible from "@components/core/render-if-visible-HOC";
 
 interface IssueBlockProps {
   peekIssueId?: string;
@@ -41,7 +41,7 @@ interface IssueDetailsBlockProps {
 
 const KanbanIssueDetailsBlock: React.FC<IssueDetailsBlockProps> = observer((props: IssueDetailsBlockProps) => {
   const { issue, handleIssues, quickActions, isReadOnly, displayProperties } = props;
-  // hooks
+
   const { getProjectIdentifierById } = useProject();
   const {
     router: { workspaceSlug },

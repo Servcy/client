@@ -1,10 +1,10 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { CalendarCheck2 } from "lucide-react";
-// hooks
+
 import { useProjectState } from "@hooks/store";
 // components
-import { DateDropdown } from "components/dropdowns";
+import { DateDropdown } from "@components/dropdowns";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";

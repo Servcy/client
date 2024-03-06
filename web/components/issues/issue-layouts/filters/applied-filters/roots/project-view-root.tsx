@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import isEqual from "lodash/isEqual";
-// hooks
+
 import { useIssues, useLabel, useProjectState, useProjectView } from "@hooks/store";
 // components
-import { AppliedFiltersList } from "components/issues";
+import { AppliedFiltersList } from "@components/issues";
 // ui
 import { Button } from "@servcy/ui";
 // types

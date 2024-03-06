@@ -1,10 +1,10 @@
 import React from "react";
 import { ArrowLeft, CheckCheck, Clock, ListFilter, MoreVertical, RefreshCw, X } from "lucide-react";
 // components
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 // ui
 import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui";
-// hooks
+
 import { useEventTracker } from "@hooks/store";
 // helpers
 import { getNumberCount } from "@helpers/string.helper";

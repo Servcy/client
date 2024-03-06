@@ -3,13 +3,13 @@ import React from "react";
 import Image from "next/image";
 // headless ui
 import { Tab } from "@headlessui/react";
-// hooks
+
 import useLocalStorage from "@hooks/use-local-storage";
 // images
 import emptyLabel from "public/empty-state/empty_label.svg";
 import emptyMembers from "public/empty-state/empty_members.svg";
 // components
-import { SingleProgressStats } from "components/core";
+import { SingleProgressStats } from "@components/core";
 // ui
 import { Avatar, StateGroupIcon } from "@servcy/ui";
 // types

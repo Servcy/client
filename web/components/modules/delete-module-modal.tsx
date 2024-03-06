@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useEventTracker, useModule } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui

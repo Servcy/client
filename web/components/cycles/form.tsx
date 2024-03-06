@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 // components
-import { DateRangeDropdown, ProjectDropdown } from "components/dropdowns";
+import { DateRangeDropdown, ProjectDropdown } from "@components/dropdowns";
 // ui
 import { Button, Input, TextArea } from "@servcy/ui";
 // helpers

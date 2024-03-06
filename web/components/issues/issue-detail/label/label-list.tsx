@@ -1,7 +1,7 @@
 import { FC } from "react";
 // components
 import { LabelListItem } from "./label-list-item";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // types
 import { TLabelOperations } from "./root";
@@ -16,7 +16,7 @@ type TLabelList = {
 
 export const LabelList: FC<TLabelList> = (props) => {
   const { workspaceSlug, projectId, issueId, labelOperations, disabled } = props;
-  // hooks
+  
   const {
     issue: { getIssueById },
   } = useIssueDetail();

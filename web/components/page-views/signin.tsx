@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import Image from "next/image";
-// hooks
+
 import { useApplication, useUser } from "@hooks/store";
 import useSignInRedirection from "@hooks/use-sign-in-redirection";
 // components
-import { SignInRoot } from "components/account";
-import { PageHead } from "components/core";
+import { SignInRoot } from "@components/account";
+import { PageHead } from "@components/core";
 // ui
 import { Spinner } from "@servcy/ui";
 // images

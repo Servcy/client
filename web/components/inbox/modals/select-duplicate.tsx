@@ -34,7 +34,7 @@ export const SelectDuplicateInboxIssueModal: React.FC<Props> = (props) => {
   const router = useRouter();
   const { workspaceSlug, projectId, issueId } = router.query;
 
-  // hooks
+  
   const { getProjectStates } = useProjectState();
   const { getProjectById } = useProject();
 

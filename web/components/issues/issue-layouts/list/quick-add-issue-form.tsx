@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { PlusIcon } from "lucide-react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useEventTracker, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 import useKeypress from "@hooks/use-keypress";
@@ -64,7 +64,7 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  // hooks
+  
   const { getProjectById } = useProject();
   const { captureIssueEvent } = useEventTracker();
 

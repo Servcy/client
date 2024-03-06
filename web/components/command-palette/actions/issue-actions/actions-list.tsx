@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Command } from "cmdk";
 import { LinkIcon, Signal, Trash2, UserMinus2, UserPlus2 } from "lucide-react";
-// hooks
+
 import { useApplication, useUser, useIssues } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui

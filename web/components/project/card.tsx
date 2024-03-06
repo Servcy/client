@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { LinkIcon, Lock, Pencil, Star } from "lucide-react";
 import Link from "next/link";
-// hooks
+
 import { useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { DeleteProjectModal, JoinProjectModal } from "components/project";
+import { DeleteProjectModal, JoinProjectModal } from "@components/project";
 // ui
 import { Avatar, AvatarGroup, Button, Tooltip } from "@servcy/ui";
 // helpers

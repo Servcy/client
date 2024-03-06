@@ -2,14 +2,14 @@ import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Search } from "lucide-react";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useApplication, useProjectView, useUser } from "@hooks/store";
 // components
-import { ProjectViewListItem } from "components/views";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { ProjectViewListItem } from "@components/views";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Input } from "@servcy/ui";
-import { ViewListLoader } from "components/ui";
+import { ViewListLoader } from "@components/ui";
 // constants
 import { EUserProjectRoles } from "@constants/project";
 import { VIEW_EMPTY_STATE_DETAILS } from "@constants/empty-state";

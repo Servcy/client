@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
-// hooks
+
 import { useUser } from "@hooks/store";
 // layouts
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import DefaultLayout from "@layouts/default-layout";
 // components
-import { PageHead } from "components/core";
-import { CreateWorkspaceForm } from "components/workspace";
+import { PageHead } from "@components/core";
+import { CreateWorkspaceForm } from "@components/workspace";
 // images
 import ServcyLogo from "public/logo.svg";
 // types

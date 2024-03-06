@@ -2,10 +2,10 @@ import { ReactElement } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
 // components
-import { ProjectViewsHeader } from "components/headers";
-import { ProjectViewsList } from "components/views";
-import { PageHead } from "components/core";
-// hooks
+import { ProjectViewsHeader } from "@components/headers";
+import { ProjectViewsList } from "@components/views";
+import { PageHead } from "@components/core";
+
 import { useProject } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";

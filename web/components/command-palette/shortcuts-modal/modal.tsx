@@ -2,7 +2,7 @@ import { FC, useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Search, X } from "lucide-react";
 // components
-import { ShortcutCommandsList } from "components/command-palette";
+import { ShortcutCommandsList } from "@components/command-palette";
 // ui
 import { Input } from "@servcy/ui";
 

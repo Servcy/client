@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useEventTracker, useIssues } from "@hooks/store";
 // components
-import { CycleDropdown } from "components/dropdowns";
+import { CycleDropdown } from "@components/dropdowns";
 // types
 import { TIssue } from "@servcy/types";
 // constants
@@ -22,7 +22,7 @@ export const SpreadsheetCycleColumn: React.FC<Props> = observer((props) => {
   const { workspaceSlug } = router.query;
   // props
   const { issue, disabled, onClose } = props;
-  // hooks
+
   const { captureIssueEvent } = useEventTracker();
   const {
     issues: { addIssueToCycle, removeIssueFromCycle },

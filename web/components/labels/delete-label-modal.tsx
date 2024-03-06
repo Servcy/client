@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useLabel } from "@hooks/store";
 // icons
 import { AlertTriangle } from "lucide-react";
@@ -27,7 +27,7 @@ export const DeleteLabelModal: React.FC<Props> = observer((props) => {
   const { deleteLabel } = useLabel();
   // states
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
-  // hooks
+  
 
 
   const handleClose = () => {

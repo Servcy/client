@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { PageHead } from "components/core";
-import { ModulesListView } from "components/modules";
-import { ModulesListHeader } from "components/headers";
+import { PageHead } from "@components/core";
+import { ModulesListView } from "@components/modules";
+import { ModulesListHeader } from "@components/headers";
 // types
 import { NextPageWithLayout } from "@lib/types";
-// hooks
+
 import { useProject } from "@hooks/store";
 import { observer } from "mobx-react";
 

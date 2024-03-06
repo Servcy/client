@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 import sortBy from "lodash/sortBy";
 // components
-import { FilterHeader, FilterOption } from "components/issues";
+import { FilterHeader, FilterOption } from "@components/issues";
 import { useApplication, useModule } from "@hooks/store";
 // ui
 import { Loader, DiceIcon } from "@servcy/ui";
@@ -16,7 +16,7 @@ type Props = {
 export const FilterModule: React.FC<Props> = observer((props) => {
   const { appliedFilters, handleUpdate, searchQuery } = props;
 
-  // hooks
+
   const {
     router: { projectId },
   } = useApplication();

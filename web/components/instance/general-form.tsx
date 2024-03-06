@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Button, Input } from "@servcy/ui";
 // types
 import { IInstance, IInstanceAdmin } from "@servcy/types";
-// hooks
+
 import { useApplication } from "@hooks/store";
 import toast from "react-hot-toast";
 

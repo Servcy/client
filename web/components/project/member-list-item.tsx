@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useEventTracker, useMember, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { ConfirmProjectMemberRemove } from "components/project";
+import { ConfirmProjectMemberRemove } from "@components/project";
 // ui
 import { CustomSelect, Tooltip } from "@servcy/ui";
 // icons

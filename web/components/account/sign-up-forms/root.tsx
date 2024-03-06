@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useEventTracker } from "@hooks/store";
 import useSignInRedirection from "@hooks/use-sign-in-redirection";
 // components
@@ -10,7 +10,7 @@ import {
   SignUpOptionalSetPasswordForm,
   SignUpPasswordForm,
   SignUpUniqueCodeForm,
-} from "components/account";
+} from "@components/account";
 import Link from "next/link";
 // constants
 import { NAVIGATE_TO_SIGNIN } from "@constants/event-tracker";

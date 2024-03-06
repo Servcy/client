@@ -11,7 +11,7 @@ import { GithubIntegrationService } from "@services/integrations";
 // ui
 import { Button, Loader } from "@servcy/ui";
 // types
-import { IUserDetails, TFormValues, TIntegrationSteps } from "components/integration";
+import { IUserDetails, TFormValues, TIntegrationSteps } from "@components/integration";
 // fetch-keys
 import { GITHUB_REPOSITORY_INFO } from "@constants/fetch-keys";
 

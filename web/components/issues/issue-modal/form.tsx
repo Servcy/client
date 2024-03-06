@@ -5,17 +5,17 @@ import { Controller, useForm } from "react-hook-form";
 import { LayoutPanelTop, Sparkle, X } from "lucide-react";
 // editor
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
-// hooks
+
 import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // services
 import { AIService } from "@services/ai.service";
 import { FileService } from "@services/file.service";
 // components
-import { GptAssistantPopover } from "components/core";
-import { ParentIssuesListModal } from "components/issues";
-import { IssueLabelSelect } from "components/issues/select";
-import { CreateLabelModal } from "components/labels";
+import { GptAssistantPopover } from "@components/core";
+import { ParentIssuesListModal } from "@components/issues";
+import { IssueLabelSelect } from "@components/issues/select";
+import { CreateLabelModal } from "@components/labels";
 import {
   CycleDropdown,
   DateDropdown,
@@ -25,7 +25,7 @@ import {
   ProjectDropdown,
   MemberDropdown,
   StateDropdown,
-} from "components/dropdowns";
+} from "@components/dropdowns";
 // ui
 import { Button, CustomMenu, Input, Loader, ToggleSwitch } from "@servcy/ui";
 // helpers

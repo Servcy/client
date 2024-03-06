@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import toast from "react-hot-toast";
 import { useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
 // components
-import { IssueView } from "components/issues";
+import { IssueView } from "@components/issues";
 // types
 import { TIssue } from "@servcy/types";
 // constants
@@ -48,7 +48,7 @@ export type TIssuePeekOperations = {
 
 export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
   const { is_archived = false, is_draft = false } = props;
-  // hooks
+
 
   // router
   const router = useRouter();

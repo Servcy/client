@@ -7,7 +7,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { mutate } from "swr";
 import { Check, ChevronDown, CircleUserRound, LogOut, Mails, PlusSquare, Settings, UserCircle2 } from "lucide-react";
 import { usePopper } from "react-popper";
-// hooks
+
 import { useApplication, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
@@ -57,7 +57,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
   } = useApplication();
   const { currentUser, updateCurrentUser, isUserInstanceAdmin, signOut } = useUser();
   const { currentWorkspace: activeWorkspace, workspaces } = useWorkspace();
-  // hooks
+  
 
   const { setTheme } = useTheme();
   // popper-js refs

@@ -18,7 +18,7 @@ import { renderFormattedTime, renderFormattedDate } from "@helpers/date-time.hel
 // ui
 import { CustomMenu, Tooltip } from "@servcy/ui";
 // components
-import { CreateUpdatePageModal, DeletePageModal } from "components/pages";
+import { CreateUpdatePageModal, DeletePageModal } from "@components/pages";
 // constants
 import { EUserProjectRoles } from "@constants/project";
 import { useRouter } from "next/router";

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useProject, useUser } from "@hooks/store";
 // component
 import { CustomSelect, Loader, ToggleSwitch } from "@servcy/ui";
-import { SelectMonthModal } from "components/automation";
+import { SelectMonthModal } from "@components/automation";
 // icon
 import { ArchiveRestore } from "lucide-react";
 // constants

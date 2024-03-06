@@ -15,7 +15,7 @@ type TLabelListItem = {
 
 export const LabelListItem: FC<TLabelListItem> = (props) => {
   const { workspaceSlug, projectId, issueId, labelId, labelOperations, disabled } = props;
-  // hooks
+  
   const {
     issue: { getIssueById },
   } = useIssueDetail();

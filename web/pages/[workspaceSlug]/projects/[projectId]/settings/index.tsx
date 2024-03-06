@@ -2,20 +2,20 @@ import { useState, ReactElement } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useProject } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 // components
-import { PageHead } from "components/core";
-import { ProjectSettingHeader } from "components/headers";
+import { PageHead } from "@components/core";
+import { ProjectSettingHeader } from "@components/headers";
 import {
   DeleteProjectModal,
   DeleteProjectSection,
   ProjectDetailsForm,
   ProjectDetailsFormLoader,
-} from "components/project";
+} from "@components/project";
 // types
 import { NextPageWithLayout } from "@lib/types";
 

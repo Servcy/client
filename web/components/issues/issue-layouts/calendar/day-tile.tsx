@@ -2,7 +2,7 @@ import { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Droppable } from "@hello-pangea/dnd";
 // components
-import { CalendarIssueBlocks, ICalendarDate, CalendarQuickAddIssueForm } from "components/issues";
+import { CalendarIssueBlocks, ICalendarDate, CalendarQuickAddIssueForm } from "@components/issues";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // constants

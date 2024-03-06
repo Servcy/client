@@ -1,14 +1,14 @@
 import { FC, useState } from "react";
 import Link from "next/link";
 import { AlertCircle, X } from "lucide-react";
-// hooks
+
 import { useIssueDetail, useMember } from "@hooks/store";
 // ui
 import { Tooltip } from "@servcy/ui";
 // components
 import { IssueAttachmentDeleteModal } from "./delete-attachment-confirmation-modal";
 // icons
-import { getFileIcon } from "components/icons";
+import { getFileIcon } from "@components/icons";
 // helper
 import { truncateText } from "@helpers/string.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";

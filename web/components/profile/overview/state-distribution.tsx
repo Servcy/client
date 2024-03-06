@@ -1,5 +1,5 @@
 // ui
-import { ProfileEmptyState, PieGraph } from "components/ui";
+import { ProfileEmptyState, PieGraph } from "@components/ui";
 // image
 import stateGraph from "public/empty-state/state_graph.svg";
 // types

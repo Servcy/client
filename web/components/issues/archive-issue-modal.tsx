@@ -1,6 +1,6 @@
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-// hooks
+
 import { useProject } from "@hooks/store";
 import { useIssues } from "@hooks/store/use-issues";
 import toast from "react-hot-toast";

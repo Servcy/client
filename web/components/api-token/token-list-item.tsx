@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { XCircle } from "lucide-react";
 // components
-import { DeleteApiTokenModal } from "components/api-token";
+import { DeleteApiTokenModal } from "@components/api-token";
 // ui
 import { Tooltip } from "@servcy/ui";
 // helpers

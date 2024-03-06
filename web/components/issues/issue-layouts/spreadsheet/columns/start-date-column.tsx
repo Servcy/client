@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { CalendarClock } from "lucide-react";
 // components
-import { DateDropdown } from "components/dropdowns";
+import { DateDropdown } from "@components/dropdowns";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // types

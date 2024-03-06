@@ -11,7 +11,7 @@ type Props = {
 
 export const IssueUpdateStatus: React.FC<Props> = (props) => {
   const { isSubmitting, issueDetail } = props;
-  // hooks
+  
   const { getProjectById } = useProject();
 
   return (

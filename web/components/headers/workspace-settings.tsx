@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 // ui
 import { Breadcrumbs, CustomMenu } from "@servcy/ui";
 import { Settings } from "lucide-react";
-// hooks
+
 import { observer } from "mobx-react-lite";
 // components
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { WORKSPACE_SETTINGS_LINKS } from "@constants/workspace";
-import { BreadcrumbLink } from "components/common";
+import { BreadcrumbLink } from "@components/common";
 
 export interface IWorkspaceSettingHeader {
   title: string;

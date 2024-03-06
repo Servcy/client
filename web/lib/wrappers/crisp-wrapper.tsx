@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect } from "react";
-// hooks
+
 import { IUser } from "@servcy/types";
 
 declare global {

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { observer } from "mobx-react";
 import { LayoutPanelTop } from "lucide-react";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // components
 import { IssueActivityBlockComponent, IssueLink } from "./";
@@ -10,7 +10,7 @@ type TIssueParentActivity = { activityId: string; showIssue?: boolean; ends: "to
 
 export const IssueParentActivity: FC<TIssueParentActivity> = observer((props) => {
   const { activityId, showIssue = true, ends } = props;
-  // hooks
+  
   const {
     activity: { getActivityById },
   } = useIssueDetail();

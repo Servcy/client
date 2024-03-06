@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
 import { Control, Controller, UseFormWatch } from "react-hook-form";
-// hooks
+
 import { useProject } from "@hooks/store";
 // components
-import { SelectRepository, TFormValues, TIntegrationSteps } from "components/integration";
+import { SelectRepository, TFormValues, TIntegrationSteps } from "@components/integration";
 // ui
 import { Button, CustomSearchSelect, ToggleSwitch } from "@servcy/ui";
 // helpers

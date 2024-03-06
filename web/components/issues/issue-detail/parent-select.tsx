@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import { Pencil, X } from "lucide-react";
-// hooks
+
 import { useIssueDetail, useProject } from "@hooks/store";
 // components
-import { ParentIssuesListModal } from "components/issues";
+import { ParentIssuesListModal } from "@components/issues";
 // ui
 import { Tooltip } from "@servcy/ui";
 // helpers

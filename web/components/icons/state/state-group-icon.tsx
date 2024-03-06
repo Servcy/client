@@ -5,7 +5,7 @@ import {
   StateGroupCompletedIcon,
   StateGroupStartedIcon,
   StateGroupUnstartedIcon,
-} from "components/icons";
+} from "@components/icons";
 // types
 import { TStateGroups } from "@servcy/types";
 // constants

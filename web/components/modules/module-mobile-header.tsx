@@ -1,7 +1,7 @@
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 import { CustomMenu } from "@servcy/ui";
-import { ProjectAnalyticsModal } from "components/analytics";
-import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "components/issues";
+import { ProjectAnalyticsModal } from "@components/analytics";
+import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "@components/issues";
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue";
 import { useIssues, useLabel, useMember, useModule, useProjectState } from "@hooks/store";
 import { Calendar, ChevronDown, Kanban, List } from "lucide-react";

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR, { mutate } from "swr";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication } from "@hooks/store";
 import useIntegrationPopup from "@hooks/use-integration-popup";
 // services

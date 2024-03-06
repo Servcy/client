@@ -14,14 +14,14 @@ import {
   Trash2,
   UserCircle2,
 } from "lucide-react";
-// hooks
+
 import { useModule, useUser, useEventTracker } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { LinkModal, LinksList, SidebarProgressStats } from "components/core";
-import { DeleteModuleModal } from "components/modules";
-import ProgressChart from "components/core/sidebar/progress-chart";
-import { DateRangeDropdown, MemberDropdown } from "components/dropdowns";
+import { LinkModal, LinksList, SidebarProgressStats } from "@components/core";
+import { DeleteModuleModal } from "@components/modules";
+import ProgressChart from "@components/core/sidebar/progress-chart";
+import { DateRangeDropdown, MemberDropdown } from "@components/dropdowns";
 // ui
 import { CustomMenu, Loader, LayersIcon, CustomSelect, ModuleStatusIcon, UserGroupIcon } from "@servcy/ui";
 // helpers

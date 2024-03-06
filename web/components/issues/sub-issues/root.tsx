@@ -2,12 +2,12 @@ import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Plus, ChevronRight, ChevronDown, Loader } from "lucide-react";
-// hooks
+
 import { useEventTracker, useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { ExistingIssuesListModal } from "components/core";
-import { CreateUpdateIssueModal, DeleteIssueModal } from "components/issues";
+import { ExistingIssuesListModal } from "@components/core";
+import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
 import { IssueList } from "./issues-list";
 import { ProgressBar } from "./progressbar";
 // ui

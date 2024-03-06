@@ -3,8 +3,8 @@ import { ReactElement } from "react";
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 // components
-import { ProjectSettingStateList } from "components/states";
-import { ProjectSettingHeader } from "components/headers";
+import { ProjectSettingStateList } from "@components/states";
+import { ProjectSettingHeader } from "@components/headers";
 // types
 import { NextPageWithLayout } from "@lib/types";
 

@@ -17,7 +17,7 @@ type Props = {
 
 export const DeclineIssueModal: React.FC<Props> = ({ isOpen, onClose, data, onSubmit }) => {
   const [isDeclining, setIsDeclining] = useState(false);
-  // hooks
+  
   const { getProjectById } = useProject();
 
   const handleClose = () => {

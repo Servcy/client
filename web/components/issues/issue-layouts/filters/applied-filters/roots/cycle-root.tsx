@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssues, useLabel, useProjectState } from "@hooks/store";
 // components
-import { AppliedFiltersList, SaveFilterView } from "components/issues";
+import { AppliedFiltersList, SaveFilterView } from "@components/issues";
 // types
 import { IIssueFilterOptions } from "@servcy/types";
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";

@@ -2,14 +2,14 @@ import { FC, useState } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Plus } from "lucide-react";
-// hooks
+
 import { useProject } from "@hooks/store";
 // ui
 import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
 // components
-import { CreateInboxIssueModal } from "components/inbox";
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "components/common";
+import { CreateInboxIssueModal } from "@components/inbox";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { BreadcrumbLink } from "@components/common";
 // helper
 import { renderEmoji } from "@helpers/emoji.helper";
 

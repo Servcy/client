@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useApplication, useUser } from "@hooks/store";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 // components
-import { PagesListView } from "components/pages/pages-list";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { PagesListView } from "@components/pages/pages-list";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Loader } from "@servcy/ui";
 // helpers

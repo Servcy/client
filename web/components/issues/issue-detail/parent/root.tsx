@@ -5,7 +5,7 @@ import { MinusCircle } from "lucide-react";
 import { IssueParentSiblings } from "./siblings";
 // ui
 import { CustomMenu } from "@servcy/ui";
-// hooks
+
 import { useIssues, useProject, useProjectState } from "@hooks/store";
 // types
 import { TIssueOperations } from "../root";
@@ -21,7 +21,7 @@ export type TIssueParentDetail = {
 
 export const IssueParentDetail: FC<TIssueParentDetail> = (props) => {
   const { workspaceSlug, projectId, issueId, issue, issueOperations } = props;
-  // hooks
+  
   const { issueMap } = useIssues();
   const { getProjectById } = useProject();
   const { getProjectStates } = useProjectState();

@@ -12,7 +12,7 @@ import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
 // helpers
 import { cn } from "@helpers/common.helper";
 // components
-import { IssueSubscription, IssueUpdateStatus } from "components/issues";
+import { IssueSubscription, IssueUpdateStatus } from "@components/issues";
 import { STATE_GROUPS } from "@constants/state";
 
 export type TPeekModes = "side-peek" | "modal" | "full-screen";
@@ -73,7 +73,7 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
     issue: { getIssueById },
   } = useIssueDetail();
   const { getStateById } = useProjectState();
-  // hooks
+
 
   // derived values
   const issueDetails = getIssueById(issueId);

@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { CalendarCheck2, CalendarClock, Layers, Link, Paperclip } from "lucide-react";
 import xor from "lodash/xor";
-// hooks
+
 import { useEventTracker, useEstimate, useLabel, useIssues, useProjectState } from "@hooks/store";
 // components
 import { IssuePropertyLabels } from "../properties/labels";
@@ -17,7 +17,7 @@ import {
   ModuleDropdown,
   CycleDropdown,
   StateDropdown,
-} from "components/dropdowns";
+} from "@components/dropdowns";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";

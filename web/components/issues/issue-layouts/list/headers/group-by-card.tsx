@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 // lucide icons
 import { CircleDashed, Plus } from "lucide-react";
 // components
-import { CreateUpdateIssueModal } from "components/issues";
-import { ExistingIssuesListModal } from "components/core";
+import { CreateUpdateIssueModal } from "@components/issues";
+import { ExistingIssuesListModal } from "@components/core";
 import { CustomMenu } from "@servcy/ui";
 // mobx
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useEventTracker } from "@hooks/store";
 // types
 import { TIssue, ISearchIssueResponse } from "@servcy/types";
@@ -29,7 +29,7 @@ export const HeaderGroupByCard = observer(
   ({ icon, title, count, issuePayload, disableIssueCreation, storeType, addIssuesToView }: IHeaderGroupByCard) => {
     const router = useRouter();
     const { workspaceSlug, projectId, moduleId, cycleId } = router.query;
-    // hooks
+
     const { setTrackElement } = useEventTracker();
 
     const [isOpen, setIsOpen] = useState(false);

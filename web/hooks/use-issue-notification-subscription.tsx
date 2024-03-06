@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import useSWR from "swr";
-// hooks
+
 import useUserAuth from "@hooks/use-user-auth";
 // services
 import { NotificationService } from "@services/notification.service";

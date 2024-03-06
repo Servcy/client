@@ -9,7 +9,7 @@ import {
   FilterIssueType,
   FilterOrderBy,
   FilterSubGroupBy,
-} from "components/issues";
+} from "@components/issues";
 // types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueGroupByOptions } from "@servcy/types";
 import { ILayoutDisplayFiltersOptions } from "@constants/issue";

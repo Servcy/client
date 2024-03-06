@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
-// hooks
+
 import { useApplication } from "@hooks/store";
 // types
 import { TIssue } from "@servcy/types";
@@ -16,7 +16,7 @@ export const SpreadsheetSubIssueColumn: React.FC<Props> = observer((props: Props
   const { issue } = props;
   // router
   const router = useRouter();
-  // hooks
+  
   const {
     router: { workspaceSlug },
   } = useApplication();

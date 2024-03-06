@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { observer } from "mobx-react";
 import { Inbox } from "lucide-react";
-// hooks
+
 import { useInboxIssues } from "@hooks/store";
 // components
-import { InboxIssueActionsHeader } from "components/inbox";
-import { InboxIssueDetailRoot } from "components/issues/issue-detail/inbox";
+import { InboxIssueActionsHeader } from "@components/inbox";
+import { InboxIssueDetailRoot } from "@components/issues/issue-detail/inbox";
 // ui
 import { Loader } from "@servcy/ui";
 
@@ -18,7 +18,7 @@ type TInboxContentRoot = {
 
 export const InboxContentRoot: FC<TInboxContentRoot> = observer((props) => {
   const { workspaceSlug, projectId, inboxId, inboxIssueId } = props;
-  // hooks
+
   const {
     issues: { loader, getInboxIssuesByInboxId },
   } = useInboxIssues();

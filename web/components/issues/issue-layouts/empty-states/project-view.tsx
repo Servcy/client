@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { PlusIcon } from "lucide-react";
-// hooks
+
 import { useApplication, useEventTracker } from "@hooks/store";
 // components
-import { EmptyState } from "components/common";
+import { EmptyState } from "@components/common";
 // assets
 import emptyIssue from "public/empty-state/issue.svg";
 import { EIssuesStoreType } from "@constants/issue";

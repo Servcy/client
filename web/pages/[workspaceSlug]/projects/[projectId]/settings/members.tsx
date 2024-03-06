@@ -4,12 +4,12 @@ import { observer } from "mobx-react";
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 // components
-import { PageHead } from "components/core";
-import { ProjectSettingHeader } from "components/headers";
-import { ProjectMemberList, ProjectSettingsMemberDefaults } from "components/project";
+import { PageHead } from "@components/core";
+import { ProjectSettingHeader } from "@components/headers";
+import { ProjectMemberList, ProjectSettingsMemberDefaults } from "@components/project";
 // types
 import { NextPageWithLayout } from "@lib/types";
-// hooks
+
 import { useProject } from "@hooks/store";
 
 const MembersSettingsPage: NextPageWithLayout = observer(() => {

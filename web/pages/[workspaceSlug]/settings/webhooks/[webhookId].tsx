@@ -2,16 +2,16 @@ import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
-// hooks
+
 import { useUser, useWebhook, useWorkspace } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 import toast from "react-hot-toast";
 // components
-import { PageHead } from "components/core";
-import { WorkspaceSettingHeader } from "components/headers";
-import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "components/web-hooks";
+import { PageHead } from "@components/core";
+import { WorkspaceSettingHeader } from "@components/headers";
+import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "@components/web-hooks";
 // ui
 import { Spinner } from "@servcy/ui";
 // types

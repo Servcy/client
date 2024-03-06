@@ -6,7 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { APITokenService } from "@services/api_token.service";
 import toast from "react-hot-toast";
 // components
-import { CreateApiTokenForm, GeneratedTokenDetails } from "components/api-token";
+import { CreateApiTokenForm, GeneratedTokenDetails } from "@components/api-token";
 // helpers
 import { csvDownload } from "@helpers/download.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";

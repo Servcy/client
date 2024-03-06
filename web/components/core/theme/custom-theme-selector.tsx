@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Controller, useForm } from "react-hook-form";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useUser } from "@hooks/store";
 // ui
 import { Button, InputColorPicker } from "@servcy/ui";
@@ -27,7 +27,7 @@ const inputRules = {
 export const CustomThemeSelector: React.FC = observer(() => {
   const { currentUser, updateCurrentUser } = useUser();
   const userTheme = currentUser?.theme;
-  // hooks
+  
   const { setTheme } = useTheme();
 
   const {

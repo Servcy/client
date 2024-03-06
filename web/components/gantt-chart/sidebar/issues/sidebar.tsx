@@ -4,7 +4,7 @@ import { IssuesSidebarBlock } from "./block";
 // ui
 import { Loader } from "@servcy/ui";
 // types
-import { IGanttBlock, IBlockUpdateData } from "components/gantt-chart/types";
+import { IGanttBlock, IBlockUpdateData } from "@components/gantt-chart/types";
 
 type Props = {
   blockUpdateHandler: (block: any, payload: IBlockUpdateData) => void;

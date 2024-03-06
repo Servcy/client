@@ -7,7 +7,7 @@ import omit from "lodash/omit";
 import toast from "react-hot-toast";
 import { useIssues, useEventTracker, useUser, useProjectState } from "@hooks/store";
 // components
-import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "components/issues";
+import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
 // types

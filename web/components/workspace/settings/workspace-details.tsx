@@ -5,12 +5,12 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 // services
 import { FileService } from "@services/file.service";
-// hooks
+
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { DeleteWorkspaceModal } from "components/workspace";
-import { WorkspaceImageUploadModal } from "components/core";
+import { DeleteWorkspaceModal } from "@components/workspace";
+import { WorkspaceImageUploadModal } from "@components/core";
 // ui
 import { Button, CustomSelect, Input, Spinner } from "@servcy/ui";
 // helpers

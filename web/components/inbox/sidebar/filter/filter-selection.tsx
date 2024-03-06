@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 // mobx store
 import { useInboxIssues } from "@hooks/store";
 // ui
-import { MultiLevelDropdown } from "components/ui";
+import { MultiLevelDropdown } from "@components/ui";
 // icons
 import { PriorityIcon } from "@servcy/ui";
 // types
@@ -20,7 +20,7 @@ export const InboxIssueFilterSelection: FC<TInboxIssueFilterSelection> = observe
   // router
   const router = useRouter();
   const { inboxIssueId } = router.query;
-  // hooks
+
   const {
     filters: { inboxFilters, updateInboxFilters },
   } = useInboxIssues();

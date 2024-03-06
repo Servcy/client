@@ -6,11 +6,11 @@ import useSWR, { mutate } from "swr";
 
 // services
 import { ProjectService } from "@services/project";
-// hooks
+
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 // components
-import { SelectRepository, SelectChannel } from "components/integration";
+import { SelectRepository, SelectChannel } from "@components/integration";
 // icons
 import GithubLogo from "public/logos/github-square.png";
 import SlackLogo from "public/services/slack.png";

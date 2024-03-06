@@ -4,12 +4,12 @@ import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // components
-import { ProfileIssuesListLayout } from "components/issues/issue-layouts/list/roots/profile-issues-root";
-import { ProfileIssuesKanBanLayout } from "components/issues/issue-layouts/kanban/roots/profile-issues-root";
-import { IssuePeekOverview, ProfileIssuesAppliedFiltersRoot } from "components/issues";
-import { KanbanLayoutLoader, ListLayoutLoader } from "components/ui";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
-// hooks
+import { ProfileIssuesListLayout } from "@components/issues/issue-layouts/list/roots/profile-issues-root";
+import { ProfileIssuesKanBanLayout } from "@components/issues/issue-layouts/kanban/roots/profile-issues-root";
+import { IssuePeekOverview, ProfileIssuesAppliedFiltersRoot } from "@components/issues";
+import { KanbanLayoutLoader, ListLayoutLoader } from "@components/ui";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
+
 import { useIssues, useUser } from "@hooks/store";
 // constants
 import { EUserWorkspaceRoles } from "@constants/workspace";

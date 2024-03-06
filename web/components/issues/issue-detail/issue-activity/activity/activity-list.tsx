@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // components
 import {
@@ -30,7 +30,7 @@ type TIssueActivityList = {
 
 export const IssueActivityList: FC<TIssueActivityList> = observer((props) => {
   const { activityId, ends } = props;
-  // hooks
+  
   const {
     activity: { getActivityById },
     comment: {},

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 // components
-import { CalendarChart } from "components/issues";
+import { CalendarChart } from "@components/issues";
 import toast from "react-hot-toast";
 // types
 import { TGroupedIssues, TIssue } from "@servcy/types";
@@ -39,7 +39,7 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
 
-  // hooks
+
 
   const { issueMap } = useIssues();
   const {

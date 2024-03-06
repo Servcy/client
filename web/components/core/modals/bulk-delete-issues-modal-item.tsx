@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { Combobox } from "@headlessui/react";
-// hooks
+
 import { useProjectState } from "@hooks/store";
 
 export const BulkDeleteIssuesModalItem: React.FC<any> = observer((props) => {

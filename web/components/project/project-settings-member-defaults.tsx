@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 import { Controller, useForm } from "react-hook-form";
 
-import { MemberSelect } from "components/project";
+import { MemberSelect } from "@components/project";
 // ui
 import { Loader } from "@servcy/ui";
 // types
@@ -33,7 +33,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
   const { currentProjectDetails, fetchProjectDetails, updateProject } = useProject();
   // derived values
   const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN;
-  // hooks
+
 
   // form info
   const { reset, control } = useForm<IProject>({ defaultValues });

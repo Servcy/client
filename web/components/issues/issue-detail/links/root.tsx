@@ -1,6 +1,6 @@
 import { FC, useCallback, useMemo, useState } from "react";
 import { Plus } from "lucide-react";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
@@ -25,7 +25,7 @@ export type TIssueLinkRoot = {
 export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
   // props
   const { workspaceSlug, projectId, issueId, disabled = false } = props;
-  // hooks
+  
   const { toggleIssueLinkModal: toggleIssueLinkModalStore, createLink, updateLink, removeLink } = useIssueDetail();
   // state
   const [isIssueLinkModal, setIsIssueLinkModal] = useState(false);

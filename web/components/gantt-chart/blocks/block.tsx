@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-// hooks
+
 import { useGanttChart } from "../hooks";
 import { useIssueDetail } from "@hooks/store";
 // components

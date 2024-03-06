@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { Combobox } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useLabel } from "@hooks/store";
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // ui
-import { IssueLabelsList } from "components/ui";
+import { IssueLabelsList } from "@components/ui";
 // icons
 import { Check, Component, Plus, Search, Tag } from "lucide-react";
 

@@ -12,13 +12,13 @@ import {
   ProjectSpreadsheetLayout,
   ProjectEmptyState,
   IssuePeekOverview,
-} from "components/issues";
+} from "@components/issues";
 // ui
 import { Spinner } from "@servcy/ui";
-// hooks
+
 import { useIssues } from "@hooks/store";
 // helpers
-import { ActiveLoader } from "components/ui";
+import { ActiveLoader } from "@components/ui";
 // constants
 import { EIssuesStoreType } from "@constants/issue";
 
@@ -26,7 +26,7 @@ export const ProjectLayoutRoot: FC = observer(() => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  // hooks
+
   const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT);
 
   useSWR(

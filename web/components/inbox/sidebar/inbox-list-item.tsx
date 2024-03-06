@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 // icons
 import { CalendarDays } from "lucide-react";
-// hooks
+
 import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store";
 // ui
 import { Tooltip, PriorityIcon } from "@servcy/ui";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";
 // components
-import { InboxIssueStatus } from "components/inbox/inbox-issue-status";
+import { InboxIssueStatus } from "@components/inbox/inbox-issue-status";
 
 type TInboxIssueListItem = {
   workspaceSlug: string;
@@ -25,7 +25,7 @@ export const InboxIssueListItem: FC<TInboxIssueListItem> = observer((props) => {
   // router
   const router = useRouter();
   const { inboxIssueId } = router.query;
-  // hooks
+
   const { getProjectById } = useProject();
   const {
     issues: { getInboxIssueByIssueId },

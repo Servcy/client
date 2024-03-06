@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useProject, useProjectState, useUser } from "@hooks/store";
 // component
-import { SelectMonthModal } from "components/automation";
+import { SelectMonthModal } from "@components/automation";
 import { CustomSelect, CustomSearchSelect, ToggleSwitch, StateGroupIcon, DoubleCircleIcon, Loader } from "@servcy/ui";
 // icons
 import { ArchiveX } from "lucide-react";

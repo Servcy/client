@@ -7,9 +7,9 @@ import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { IssueDetailRoot } from "components/issues";
-import { ProjectArchivedIssueDetailsHeader } from "components/headers";
-import { PageHead } from "components/core";
+import { IssueDetailRoot } from "@components/issues";
+import { ProjectArchivedIssueDetailsHeader } from "@components/headers";
+import { PageHead } from "@components/core";
 // ui
 import { ArchiveIcon, Button, Loader } from "@servcy/ui";
 // icons
@@ -26,7 +26,7 @@ const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
   const { workspaceSlug, projectId, archivedIssueId } = router.query;
   // states
   const [isRestoring, setIsRestoring] = useState(false);
-  // hooks
+
   const {
     fetchIssue,
     issue: { getIssueById },

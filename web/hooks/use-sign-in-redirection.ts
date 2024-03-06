@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
-// hooks
+
 import { useUser } from "@hooks/store";
 // types
 import { IUser, IUserSettings } from "@servcy/types";

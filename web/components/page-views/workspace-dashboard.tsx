@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useTheme } from "next-themes";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useEventTracker, useDashboard, useProject, useUser } from "@hooks/store";
 // components
-import { TourRoot } from "components/onboarding";
-import { UserGreetingsView } from "components/user";
-import { IssuePeekOverview } from "components/issues";
-import { DashboardWidgets } from "components/dashboard";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { TourRoot } from "@components/onboarding";
+import { UserGreetingsView } from "@components/user";
+import { IssuePeekOverview } from "@components/issues";
+import { DashboardWidgets } from "@components/dashboard";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Spinner } from "@servcy/ui";
 // constants

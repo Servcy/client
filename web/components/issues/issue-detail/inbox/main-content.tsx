@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
 // components
-import { IssueUpdateStatus, TIssueOperations } from "components/issues";
+import { IssueUpdateStatus, TIssueOperations } from "@components/issues";
 import { IssueTitleInput } from "../../title-input";
 import { IssueDescriptionInput } from "../../description-input";
 import { IssueReaction } from "../reactions";
@@ -26,7 +26,7 @@ export const InboxIssueMainContent: React.FC<Props> = observer((props) => {
   const { workspaceSlug, projectId, inboxId, issueId, issueOperations, is_editable } = props;
   // states
   const [isSubmitting, setIsSubmitting] = useState<"submitting" | "submitted" | "saved">("saved");
-  // hooks
+
   const { currentUser } = useUser();
   const { projectStates } = useProjectState();
   const {

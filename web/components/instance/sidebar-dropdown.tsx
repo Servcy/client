@@ -8,7 +8,7 @@ import { mutate } from "swr";
 import { Menu, Transition } from "@headlessui/react";
 // icons
 import { LogIn, LogOut, Settings, UserCog2 } from "lucide-react";
-// hooks
+
 import { useApplication, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
@@ -33,7 +33,7 @@ export const InstanceSidebarDropdown = observer(() => {
     router: { workspaceSlug },
   } = useApplication();
   const { signOut, currentUser, currentUserSettings } = useUser();
-  // hooks
+  
 
   const { setTheme } = useTheme();
 

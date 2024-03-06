@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { X } from "lucide-react";
 import { useRouter } from "next/router";
-// hooks
+
 import { useApplication, useUser } from "@hooks/store";
 // components
 import {
@@ -14,7 +14,7 @@ import {
   AppliedProjectFilters,
   AppliedStateFilters,
   AppliedStateGroupFilters,
-} from "components/issues";
+} from "@components/issues";
 // helpers
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
 // types

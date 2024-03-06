@@ -24,7 +24,7 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
   const { isOpen, onClose, tokenId } = props;
   // states
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
-  // hooks
+  
 
   // router
   const router = useRouter();

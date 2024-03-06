@@ -4,9 +4,9 @@ import useSWR from "swr";
 // store hooks
 import { useGlobalView } from "@hooks/store";
 // components
-import { GlobalViewListItem } from "components/workspace";
+import { GlobalViewListItem } from "@components/workspace";
 // ui
-import { ViewListLoader } from "components/ui";
+import { ViewListLoader } from "@components/ui";
 
 type Props = {
   searchQuery: string;

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useDropzone } from "react-dropzone";
-// hooks
+
 import { useApplication } from "@hooks/store";
 // constants
 import { MAX_FILE_SIZE } from "@constants/common";

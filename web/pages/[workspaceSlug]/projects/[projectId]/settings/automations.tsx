@@ -1,16 +1,16 @@
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
-// hooks
+
 import { useProject, useUser } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 import toast from "react-hot-toast";
 // components
-import { AutoArchiveAutomation, AutoCloseAutomation } from "components/automation";
-import { PageHead } from "components/core";
-import { ProjectSettingHeader } from "components/headers";
+import { AutoArchiveAutomation, AutoCloseAutomation } from "@components/automation";
+import { PageHead } from "@components/core";
+import { ProjectSettingHeader } from "@components/headers";
 // types
 import { IProject } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";

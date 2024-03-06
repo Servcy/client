@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 import { Check, CircleDot, Globe2 } from "lucide-react";
-// hooks
+
 import { useProjectPublish } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui

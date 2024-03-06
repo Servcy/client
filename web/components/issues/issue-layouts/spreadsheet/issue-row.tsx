@@ -7,11 +7,11 @@ import { ChevronRight, MoreHorizontal } from "lucide-react";
 import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet";
 // components
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
-import RenderIfVisible from "components/core/render-if-visible-HOC";
+import RenderIfVisible from "@components/core/render-if-visible-HOC";
 import { IssueColumn } from "./issue-column";
 // ui
 import { ControlLink, Tooltip } from "@servcy/ui";
-// hooks
+
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { useIssueDetail, useProject } from "@hooks/store";
 // helper

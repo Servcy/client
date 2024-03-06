@@ -1,11 +1,11 @@
 import { Expand, Shrink } from "lucide-react";
-// hooks
+
 // helpers
 import { cn } from "@helpers/common.helper";
 // types
 import { IGanttBlock, TGanttViews } from "../types";
 // constants
-import { VIEWS_LIST } from "components/gantt-chart/data";
+import { VIEWS_LIST } from "@components/gantt-chart/data";
 import { useGanttChart } from "../hooks/use-gantt-chart";
 import { observer } from "mobx-react";
 

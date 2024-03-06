@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useUser } from "@hooks/store";
 // components
-import { CyclePeekOverview, CyclesListItem } from "components/cycles";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { CyclePeekOverview, CyclesListItem } from "@components/cycles";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Loader } from "@servcy/ui";
 // constants

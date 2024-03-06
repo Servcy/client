@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import useSWR, { mutate } from "swr";
 // services
 import { IntegrationService } from "@services/integrations";
-// hooks
+
 import { useApplication, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 import useIntegrationPopup from "@hooks/use-integration-popup";

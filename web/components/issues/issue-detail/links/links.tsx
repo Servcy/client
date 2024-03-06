@@ -2,7 +2,7 @@ import { FC } from "react";
 import { observer } from "mobx-react-lite";
 // computed
 import { IssueLinkDetail } from "./link-detail";
-// hooks
+
 import { useIssueDetail, useUser } from "@hooks/store";
 import { TLinkOperations } from "./root";
 
@@ -16,7 +16,7 @@ export type TIssueLinkList = {
 export const IssueLinkList: FC<TIssueLinkList> = observer((props) => {
   // props
   const { issueId, linkOperations } = props;
-  // hooks
+  
   const {
     link: { getLinksByIssueId },
   } = useIssueDetail();

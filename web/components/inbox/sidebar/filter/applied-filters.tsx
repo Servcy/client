@@ -31,7 +31,7 @@ export const IssueStatusLabel = ({ status }: { status: number }) => {
 
 export const InboxIssueAppliedFilter: FC<TInboxIssueAppliedFilter> = observer((props) => {
   const { workspaceSlug, projectId, inboxId } = props;
-  // hooks
+  
   const {
     filters: { inboxFilters, updateInboxFilters },
   } = useInboxIssues();

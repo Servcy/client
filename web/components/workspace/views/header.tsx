@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 // store hooks
 import { useEventTracker, useGlobalView, useUser } from "@hooks/store";
 // components
-import { CreateUpdateWorkspaceViewModal } from "components/workspace";
+import { CreateUpdateWorkspaceViewModal } from "@components/workspace";
 // constants
 import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace";
 import { GLOBAL_VIEW_OPENED } from "@constants/event-tracker";

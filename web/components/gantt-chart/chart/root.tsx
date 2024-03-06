@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react";
-// hooks
+
 import { useGanttChart } from "../hooks/use-gantt-chart";
 // components
-import { GanttChartHeader, GanttChartMainContent } from "components/gantt-chart";
+import { GanttChartHeader, GanttChartMainContent } from "@components/gantt-chart";
 // views
 import {
   generateMonthChart,
@@ -59,7 +59,7 @@ export const ChartViewRoot: FC<ChartViewRootProps> = observer((props) => {
   const [itemsContainerWidth, setItemsContainerWidth] = useState(0);
   const [fullScreenMode, setFullScreenMode] = useState(false);
   const [chartBlocks, setChartBlocks] = useState<IGanttBlock[] | null>(null);
-  // hooks
+
   const { currentView, currentViewData, renderView, updateCurrentView, updateCurrentViewData, updateRenderView } =
     useGanttChart();
 

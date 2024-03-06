@@ -6,9 +6,9 @@ import JiraLogo from "public/services/jira.svg";
 import JSONLogo from "public/services/json.svg";
 // types
 import { TStaticViewTypes } from "@servcy/types";
-import { Props } from "components/icons/types";
+import { Props } from "@components/icons/types";
 // icons
-import { SettingIcon } from "components/icons";
+import { SettingIcon } from "@components/icons";
 
 export enum EUserWorkspaceRoles {
   GUEST = 5,

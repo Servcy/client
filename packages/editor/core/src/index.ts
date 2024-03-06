@@ -15,7 +15,7 @@ export { startImageUpload } from "src/ui/plugins/upload-image";
 export { EditorContainer } from "src/ui/components/editor-container";
 export { EditorContentWrapper } from "src/ui/components/editor-content";
 
-// hooks
+
 export { useEditor } from "src/hooks/use-editor";
 export { useReadOnlyEditor } from "src/hooks/use-read-only-editor";
 

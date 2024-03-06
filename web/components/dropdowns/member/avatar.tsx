@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useMember } from "@hooks/store";
 // ui
 import { Avatar, AvatarGroup, UserGroupIcon } from "@servcy/ui";

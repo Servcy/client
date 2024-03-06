@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useSWR, { mutate } from "swr";
-// hooks
+
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 // components
 import { Button } from "@servcy/ui";

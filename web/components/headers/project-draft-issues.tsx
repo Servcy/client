@@ -1,12 +1,12 @@
 import { FC, useCallback } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store";
 // components
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "components/issues";
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "components/common";
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { BreadcrumbLink } from "@components/common";
 // ui
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 // helper

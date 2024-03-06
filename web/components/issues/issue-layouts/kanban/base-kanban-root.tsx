@@ -2,7 +2,7 @@ import { FC, useCallback, useRef, useState } from "react";
 import { DragDropContext, DragStart, DraggableLocation, DropResult, Droppable } from "@hello-pangea/dnd";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useEventTracker, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
@@ -15,7 +15,7 @@ import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
 //components
 import { KanBan } from "./default";
 import { KanBanSwimLanes } from "./swimlanes";
-import { DeleteIssueModal } from "components/issues";
+import { DeleteIssueModal } from "@components/issues";
 import { EUserProjectRoles } from "@constants/project";
 import { useIssues } from "@hooks/store/use-issues";
 import { handleDragDrop } from "./utils";

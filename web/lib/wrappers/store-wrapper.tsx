@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useApplication, useUser } from "@hooks/store";
 // helpers
 import { applyTheme, unsetCustomCssVariables } from "@helpers/theme.helper";

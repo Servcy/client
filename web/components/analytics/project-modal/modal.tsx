@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 
 // components
-import { ProjectAnalyticsModalHeader, ProjectAnalyticsModalMainContent } from "components/analytics";
+import { ProjectAnalyticsModalHeader, ProjectAnalyticsModalMainContent } from "@components/analytics";
 // types
 import { ICycle, IModule, IProject } from "@servcy/types";
 

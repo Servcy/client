@@ -3,12 +3,12 @@ import Image from "next/image";
 import { Controller, useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 import { Camera, User2 } from "lucide-react";
-// hooks
+
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 // components
 import { Button, Input } from "@servcy/ui";
-import { OnboardingSidebar, OnboardingStepIndicator } from "components/onboarding";
-import { UserImageUploadModal } from "components/core";
+import { OnboardingSidebar, OnboardingStepIndicator } from "@components/onboarding";
+import { UserImageUploadModal } from "@components/core";
 // types
 import { IUser } from "@servcy/types";
 // services

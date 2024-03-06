@@ -3,11 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { ChevronDown, Dot, XCircle } from "lucide-react";
-// hooks
+
 import { useEventTracker, useMember, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { ConfirmWorkspaceMemberRemove } from "components/workspace";
+import { ConfirmWorkspaceMemberRemove } from "@components/workspace";
 // ui
 import { CustomSelect, Tooltip } from "@servcy/ui";
 // constants

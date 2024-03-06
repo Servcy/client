@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Tab, Transition, Popover } from "@headlessui/react";
 // react colors
 import { TwitterPicker } from "react-color";
-// hooks
+
 import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // types

@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useApplication, useUser } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
 // components
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { PagesListItem } from "./list-item";
 // ui
 import { Loader } from "@servcy/ui";

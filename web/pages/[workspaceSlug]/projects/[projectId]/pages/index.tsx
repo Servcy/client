@@ -5,7 +5,7 @@ import { Tab } from "@headlessui/react";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useApplication, useEventTracker, useUser, useProject } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
 import useUserAuth from "@hooks/use-user-auth";
@@ -13,10 +13,10 @@ import useSize from "@hooks/use-window-size";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { RecentPagesList, CreateUpdatePageModal } from "components/pages";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
-import { PagesHeader } from "components/headers";
-import { PagesLoader } from "components/ui";
+import { RecentPagesList, CreateUpdatePageModal } from "@components/pages";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
+import { PagesHeader } from "@components/headers";
+import { PagesLoader } from "@components/ui";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants
@@ -24,25 +24,25 @@ import { PAGE_TABS_LIST } from "@constants/page";
 import { useProjectPages } from "@hooks/store/use-project-page";
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state";
-import { PageHead } from "components/core";
+import { PageHead } from "@components/core";
 
-const AllPagesList = dynamic<any>(() => import("components/pages").then((a) => a.AllPagesList), {
+const AllPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.AllPagesList), {
   ssr: false,
 });
 
-const FavoritePagesList = dynamic<any>(() => import("components/pages").then((a) => a.FavoritePagesList), {
+const FavoritePagesList = dynamic<any>(() => import("@components/pages").then((a) => a.FavoritePagesList), {
   ssr: false,
 });
 
-const PrivatePagesList = dynamic<any>(() => import("components/pages").then((a) => a.PrivatePagesList), {
+const PrivatePagesList = dynamic<any>(() => import("@components/pages").then((a) => a.PrivatePagesList), {
   ssr: false,
 });
 
-const ArchivedPagesList = dynamic<any>(() => import("components/pages").then((a) => a.ArchivedPagesList), {
+const ArchivedPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.ArchivedPagesList), {
   ssr: false,
 });
 
-const SharedPagesList = dynamic<any>(() => import("components/pages").then((a) => a.SharedPagesList), {
+const SharedPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.SharedPagesList), {
   ssr: false,
 });
 
@@ -67,7 +67,7 @@ const ProjectPagesPage: NextPageWithLayout = observer(() => {
   const { getProjectById } = useProject();
   const { fetchProjectPages, fetchArchivedProjectPages, loader, archivedPageLoader, projectPageIds, archivedPageIds } =
     useProjectPages();
-  // hooks
+
   const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader });
   const [windowWidth] = useSize();
   // local storage

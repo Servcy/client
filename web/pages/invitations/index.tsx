@@ -8,7 +8,7 @@ import useSWR, { mutate } from "swr";
 // services
 import { UserService } from "@services/user.service";
 import { WorkspaceService } from "@services/workspace.service";
-// hooks
+
 import { useEventTracker, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // layouts
@@ -29,8 +29,8 @@ import { NextPageWithLayout } from "@lib/types";
 import { MEMBER_ACCEPTED } from "@constants/event-tracker";
 import { ROLE } from "@constants/workspace";
 // components
-import { EmptyState } from "components/common";
-import { PageHead } from "components/core";
+import { EmptyState } from "@components/common";
+import { PageHead } from "@components/core";
 // services
 const workspaceService = new WorkspaceService();
 const userService = new UserService();

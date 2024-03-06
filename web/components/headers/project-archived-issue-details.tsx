@@ -2,7 +2,7 @@ import { FC } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useProject } from "@hooks/store";
 // ui
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
@@ -15,8 +15,8 @@ import { IssueArchiveService } from "@services/issue";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
 // components
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "components/common";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { BreadcrumbLink } from "@components/common";
 
 const issueArchiveService = new IssueArchiveService();
 

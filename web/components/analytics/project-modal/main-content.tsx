@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { Tab } from "@headlessui/react";
 // components
-import { CustomAnalytics, ScopeAndDemand } from "components/analytics";
+import { CustomAnalytics, ScopeAndDemand } from "@components/analytics";
 // types
 import { ICycle, IModule, IProject } from "@servcy/types";
 // constants

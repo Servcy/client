@@ -2,7 +2,7 @@ import { FC } from "react";
 import Link from "next/link";
 // ui
 import { CustomMenu, LayersIcon } from "@servcy/ui";
-// hooks
+
 import { useIssueDetail, useProject } from "@hooks/store";
 
 type TIssueParentSiblingItem = {
@@ -11,7 +11,7 @@ type TIssueParentSiblingItem = {
 
 export const IssueParentSiblingItem: FC<TIssueParentSiblingItem> = (props) => {
   const { issueId } = props;
-  // hooks
+  
   const { getProjectById } = useProject();
   const {
     peekIssue,

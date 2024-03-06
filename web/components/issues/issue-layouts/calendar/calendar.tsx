@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssues, useUser } from "@hooks/store";
 // components
-import { CalendarHeader, CalendarWeekDays, CalendarWeekHeader } from "components/issues";
+import { CalendarHeader, CalendarWeekDays, CalendarWeekHeader } from "@components/issues";
 // ui
 import { Spinner } from "@servcy/ui";
 // types

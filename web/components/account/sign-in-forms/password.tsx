@@ -8,7 +8,7 @@ import { AuthService } from "@services/auth.service";
 import toast from "react-hot-toast";
 import { useApplication, useEventTracker } from "@hooks/store";
 // components
-import { ESignInSteps, ForgotPasswordPopover } from "components/account";
+import { ESignInSteps, ForgotPasswordPopover } from "@components/account";
 // ui
 import { Button, Input } from "@servcy/ui";
 // helpers

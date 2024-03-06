@@ -6,9 +6,9 @@ import { useUser } from "@hooks/store";
 // services
 import { UserService } from "@services/user.service";
 // components
-import { ActivityMessage, IssueLink } from "components/core";
+import { ActivityMessage, IssueLink } from "@components/core";
 // ui
-import { ProfileEmptyState } from "components/ui";
+import { ProfileEmptyState } from "@components/ui";
 import { Loader } from "@servcy/ui";
 // image
 import recentActivityEmptyState from "public/empty-state/recent_activity.svg";

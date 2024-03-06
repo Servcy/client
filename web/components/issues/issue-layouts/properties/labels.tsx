@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { usePopper } from "react-popper";
 import { Check, ChevronDown, Search, Tags } from "lucide-react";
-// hooks
+
 import { useApplication, useLabel } from "@hooks/store";
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";

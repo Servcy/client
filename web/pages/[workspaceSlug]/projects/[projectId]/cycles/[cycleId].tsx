@@ -2,18 +2,18 @@ import { ReactElement } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react";
-// hooks
+
 import { useCycle, useProject } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { PageHead } from "components/core";
-import { CycleIssuesHeader } from "components/headers";
-import { CycleDetailsSidebar } from "components/cycles";
-import { CycleLayoutRoot } from "components/issues/issue-layouts";
+import { PageHead } from "@components/core";
+import { CycleIssuesHeader } from "@components/headers";
+import { CycleDetailsSidebar } from "@components/cycles";
+import { CycleLayoutRoot } from "@components/issues/issue-layouts";
 // ui
-import { EmptyState } from "components/common";
+import { EmptyState } from "@components/common";
 // assets
 import emptyCycle from "public/empty-state/cycle.svg";
 // types
@@ -26,7 +26,7 @@ const CycleDetailPage: NextPageWithLayout = observer(() => {
   // store hooks
   const { fetchCycleDetails, getCycleById } = useCycle();
   const { getProjectById } = useProject();
-  // hooks
+
   const { setValue, storedValue } = useLocalStorage("cycle_sidebar_collapsed", "false");
   // fetching cycle details
   const { error } = useSWR(

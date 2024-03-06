@@ -2,7 +2,7 @@ import { FC } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useProject } from "@hooks/store";
 // ui
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
@@ -13,8 +13,8 @@ import { IssueService } from "@services/issue";
 // constants
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
 // components
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { BreadcrumbLink } from "components/common";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { BreadcrumbLink } from "@components/common";
 import { PanelRight } from "lucide-react";
 import { cn } from "@helpers/common.helper";
 

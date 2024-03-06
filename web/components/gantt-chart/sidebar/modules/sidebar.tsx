@@ -4,7 +4,7 @@ import { Loader } from "@servcy/ui";
 // components
 import { ModulesSidebarBlock } from "./block";
 // types
-import { IBlockUpdateData, IGanttBlock } from "components/gantt-chart";
+import { IBlockUpdateData, IGanttBlock } from "@components/gantt-chart";
 
 type Props = {
   title: string;

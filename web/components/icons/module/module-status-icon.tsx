@@ -6,7 +6,7 @@ import {
   ModuleInProgressIcon,
   ModulePausedIcon,
   ModulePlannedIcon,
-} from "components/icons";
+} from "@components/icons";
 // types
 import { TModuleStatus } from "@servcy/types";
 

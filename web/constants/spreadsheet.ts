@@ -16,7 +16,7 @@ import {
   SpreadsheetStateColumn,
   SpreadsheetSubIssueColumn,
   SpreadsheetUpdatedOnColumn,
-} from "components/issues/issue-layouts/spreadsheet";
+} from "@components/issues/issue-layouts/spreadsheet";
 import { CalendarCheck2, CalendarClock, CalendarDays, Link2, Paperclip, Signal, Tag, Triangle } from "lucide-react";
 import { FC } from "react";
 

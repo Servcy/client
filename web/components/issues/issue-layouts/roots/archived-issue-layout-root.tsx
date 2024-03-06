@@ -10,16 +10,16 @@ import {
   ArchivedIssueAppliedFiltersRoot,
   ProjectArchivedEmptyState,
   IssuePeekOverview,
-} from "components/issues";
+} from "@components/issues";
 import { EIssuesStoreType } from "@constants/issue";
 // ui
-import { ListLayoutLoader } from "components/ui";
+import { ListLayoutLoader } from "@components/ui";
 
 export const ArchivedIssueLayoutRoot: React.FC = observer(() => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  // hooks
+
   const { issues, issuesFilter } = useIssues(EIssuesStoreType.ARCHIVED);
 
   useSWR(

@@ -3,7 +3,7 @@ import { observable, action, makeObservable, runInAction, computed } from "mobx"
 // helpers
 import { generateCalendarData } from "@helpers/calendar.helper";
 // types
-import { ICalendarPayload, ICalendarWeek } from "components/issues";
+import { ICalendarPayload, ICalendarWeek } from "@components/issues";
 import { getWeekNumberOfDate } from "@helpers/date-time.helper";
 
 export interface ICalendarStore {

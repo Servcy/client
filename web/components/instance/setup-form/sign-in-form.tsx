@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Eye, EyeOff, XCircle } from "lucide-react";
-// hooks
+
 import { useUser } from "@hooks/store";
 // ui
 import { Input, Button } from "@servcy/ui";
@@ -39,7 +39,7 @@ export const InstanceSetupSignInForm: FC<IInstanceSetupEmailForm> = (props) => {
       password: "",
     },
   });
-  // hooks
+  
 
 
   const handleFormSubmit = async (formValues: InstanceSetupEmailFormValues) => {

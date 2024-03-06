@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-// hooks
+
 import {
   useCycle,
   useIssueDetail,

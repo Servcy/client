@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useUser, useWorkspace } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // component
-import { WorkspaceSettingHeader } from "components/headers";
-import { PageHead } from "components/core";
+import { WorkspaceSettingHeader } from "@components/headers";
+import { PageHead } from "@components/core";
 // ui
 import { Button } from "@servcy/ui";
 // types

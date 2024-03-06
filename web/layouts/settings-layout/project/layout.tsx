@@ -2,11 +2,11 @@ import { FC, ReactNode } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import Link from "next/link";
-// hooks
+
 import { useUser } from "@hooks/store";
 // components
 import { ProjectSettingsSidebar } from "./sidebar";
-import { NotAuthorizedView } from "components/auth-screens";
+import { NotAuthorizedView } from "@components/auth-screens";
 // ui
 import { Button, LayersIcon } from "@servcy/ui";
 // constants

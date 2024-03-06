@@ -9,7 +9,7 @@ import { Button, Input } from "@servcy/ui";
 // helpers
 import { checkEmailValidity } from "@helpers/string.helper";
 // constants
-import { ESignUpSteps } from "components/account";
+import { ESignUpSteps } from "@components/account";
 import { PASSWORD_CREATE_SELECTED, PASSWORD_CREATE_SKIPPED, SETUP_PASSWORD } from "@constants/event-tracker";
 // icons
 import { Eye, EyeOff } from "lucide-react";

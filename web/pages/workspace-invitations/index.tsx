@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useUser } from "@hooks/store";
 // services
 import { WorkspaceService } from "@services/workspace.service";
@@ -12,7 +12,7 @@ import DefaultLayout from "@layouts/default-layout";
 // ui
 import { Spinner } from "@servcy/ui";
 // icons
-import { EmptySpace, EmptySpaceItem } from "components/ui/empty-space";
+import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space";
 // types
 import { NextPageWithLayout } from "@lib/types";
 // constants

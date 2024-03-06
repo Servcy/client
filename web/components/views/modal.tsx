@@ -1,11 +1,11 @@
 import { FC, Fragment } from "react";
 import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
-// hooks
+
 import { useProjectView } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { ProjectViewForm } from "components/views";
+import { ProjectViewForm } from "@components/views";
 // types
 import { IProjectView } from "@servcy/types";
 

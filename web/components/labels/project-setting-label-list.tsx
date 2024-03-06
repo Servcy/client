@@ -10,7 +10,7 @@ import {
   Droppable,
 } from "@hello-pangea/dnd";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useLabel, useUser } from "@hooks/store";
 import useDraggableInPortal from "@hooks/use-draggable-portal";
 // components
@@ -19,8 +19,8 @@ import {
   DeleteLabelModal,
   ProjectSettingLabelGroup,
   ProjectSettingLabelItem,
-} from "components/labels";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+} from "@components/labels";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Button, Loader } from "@servcy/ui";
 // types

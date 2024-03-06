@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import useSWR from "swr";
-// hooks
+
 
 import { useApplication, usePage, useUser, useWorkspace } from "@hooks/store";
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
@@ -14,8 +14,8 @@ import { FileService } from "@services/file.service";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { GptAssistantPopover, PageHead } from "components/core";
-import { PageDetailsHeader } from "components/headers/page-details";
+import { GptAssistantPopover, PageHead } from "@components/core";
+import { PageDetailsHeader } from "@components/headers/page-details";
 // ui
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor";
 import { Spinner } from "@servcy/ui";
@@ -26,7 +26,7 @@ import { IPage } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // fetch-keys
 // constants
-import { IssuePeekOverview } from "components/issues";
+import { IssuePeekOverview } from "@components/issues";
 import { EUserProjectRoles } from "@constants/project";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 

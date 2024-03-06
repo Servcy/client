@@ -18,7 +18,7 @@ import {
   GithubRepoDetails,
   GithubImportUsers,
   GithubImportConfirm,
-} from "components/integration";
+} from "@components/integration";
 // icons
 import { UserGroupIcon } from "@servcy/ui";
 import { ArrowLeft, Check, List, Settings, UploadCloud } from "lucide-react";

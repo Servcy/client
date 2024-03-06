@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { add } from "date-fns";
 import { Controller, useForm } from "react-hook-form";
-import { DateDropdown } from "components/dropdowns";
+import { DateDropdown } from "@components/dropdowns";
 import { Calendar } from "lucide-react";
 import toast from "react-hot-toast";
 // ui

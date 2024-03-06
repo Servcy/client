@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useDropzone } from "react-dropzone";
 import { Transition, Dialog } from "@headlessui/react";
-// hooks
+
 import { useApplication } from "@hooks/store";
 // services
 import { FileService } from "@services/file.service";

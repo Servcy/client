@@ -17,7 +17,7 @@ import {
   Bell,
 } from "lucide-react";
 import { Avatar, DiceIcon, PhotoFilterIcon } from "@servcy/ui";
-// hooks
+
 import { useUser, useWorkspace } from "@hooks/store";
 // types
 import { IWorkspace } from "@servcy/types";

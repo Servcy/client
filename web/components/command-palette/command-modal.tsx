@@ -5,12 +5,12 @@ import { Command } from "cmdk";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 import { FolderPlus, Search, Settings } from "lucide-react";
-// hooks
+
 import { useApplication, useEventTracker, useProject } from "@hooks/store";
 // services
 import { WorkspaceService } from "@services/workspace.service";
 import { IssueService } from "@services/issue";
-// hooks
+
 import useDebounce from "@hooks/use-debounce";
 // components
 import {
@@ -23,7 +23,7 @@ import {
   CommandPaletteProjectActions,
   CommandPaletteWorkspaceSettingsActions,
   CommandPaletteSearchResults,
-} from "components/command-palette";
+} from "@components/command-palette";
 import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
 // types
 import { IWorkspaceSearchResults } from "@servcy/types";
@@ -35,7 +35,7 @@ const workspaceService = new WorkspaceService();
 const issueService = new IssueService();
 
 export const CommandModal: React.FC = observer(() => {
-  // hooks
+
   const { getProjectById } = useProject();
   // states
   const [placeholder, setPlaceholder] = useState("Type a command or search...");

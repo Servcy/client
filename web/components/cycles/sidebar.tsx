@@ -6,13 +6,13 @@ import { Disclosure, Transition } from "@headlessui/react";
 import isEmpty from "lodash/isEmpty";
 // services
 import { CycleService } from "@services/cycle.service";
-// hooks
+
 import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { SidebarProgressStats } from "components/core";
-import ProgressChart from "components/core/sidebar/progress-chart";
-import { CycleDeleteModal } from "components/cycles/delete-modal";
+import { SidebarProgressStats } from "@components/core";
+import ProgressChart from "@components/core/sidebar/progress-chart";
+import { CycleDeleteModal } from "@components/cycles/delete-modal";
 // ui
 import { Avatar, CustomMenu, Loader, LayersIcon } from "@servcy/ui";
 // icons
@@ -27,7 +27,7 @@ import { EUserWorkspaceRoles } from "@constants/workspace";
 import { CYCLE_UPDATED } from "@constants/event-tracker";
 // fetch-keys
 import { CYCLE_STATUS } from "@constants/cycle";
-import { DateRangeDropdown } from "components/dropdowns";
+import { DateRangeDropdown } from "@components/dropdowns";
 
 type Props = {
   cycleId: string;

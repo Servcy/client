@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { observer } from "mobx-react";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // components
 import { IssueActivityBlockComponent } from "./";
 // component helpers
-import { issueRelationObject } from "components/issues/issue-detail/relation-select";
+import { issueRelationObject } from "@components/issues/issue-detail/relation-select";
 // types
 import { TIssueRelationTypes } from "@servcy/types";
 
@@ -13,7 +13,7 @@ type TIssueRelationActivity = { activityId: string; ends: "top" | "bottom" | und
 
 export const IssueRelationActivity: FC<TIssueRelationActivity> = observer((props) => {
   const { activityId, ends } = props;
-  // hooks
+
   const {
     activity: { getActivityById },
   } = useIssueDetail();

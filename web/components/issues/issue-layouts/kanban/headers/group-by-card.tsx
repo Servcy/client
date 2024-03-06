@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { useRouter } from "next/router";
 // components
 import { CustomMenu } from "@servcy/ui";
-import { ExistingIssuesListModal } from "components/core";
-import { CreateUpdateIssueModal } from "components/issues";
+import { ExistingIssuesListModal } from "@components/core";
+import { CreateUpdateIssueModal } from "@components/issues";
 // lucide icons
 import { Minimize2, Maximize2, Circle, Plus } from "lucide-react";
 import toast from "react-hot-toast";
@@ -47,7 +47,7 @@ export const HeaderGroupByCard: FC<IHeaderGroupByCard> = observer((props) => {
   // states
   const [isOpen, setIsOpen] = React.useState(false);
   const [openExistingIssueListModal, setOpenExistingIssueListModal] = React.useState(false);
-  // hooks
+
   const { setTrackElement } = useEventTracker();
   // router
   const router = useRouter();

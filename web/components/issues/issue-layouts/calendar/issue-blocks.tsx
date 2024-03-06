@@ -4,7 +4,7 @@ import { Draggable } from "@hello-pangea/dnd";
 import { MoreHorizontal } from "lucide-react";
 // components
 import { Tooltip, ControlLink } from "@servcy/ui";
-// hooks
+
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // helpers
 import { cn } from "@helpers/common.helper";
@@ -22,7 +22,7 @@ type Props = {
 
 export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
   const { issues, issueIdList, quickActions, showAllIssues = false, isDragDisabled = false } = props;
-  // hooks
+  
   const {
     router: { workspaceSlug, projectId },
   } = useApplication();

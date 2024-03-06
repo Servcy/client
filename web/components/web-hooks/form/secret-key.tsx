@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Button, Tooltip } from "@servcy/ui";
 import { Copy, Eye, EyeOff, RefreshCw } from "lucide-react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useWebhook, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // helpers
@@ -29,7 +29,7 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
   // store hooks
   const { currentWorkspace } = useWorkspace();
   const { currentWebhook, regenerateSecretKey, webhookSecretKey } = useWebhook();
-  // hooks
+  
 
 
   const handleCopySecretKey = () => {

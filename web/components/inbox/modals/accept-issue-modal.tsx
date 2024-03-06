@@ -17,7 +17,7 @@ type Props = {
 
 export const AcceptIssueModal: React.FC<Props> = ({ isOpen, onClose, data, onSubmit }) => {
   const [isAccepting, setIsAccepting] = useState(false);
-  // hooks
+  
   const { getProjectById } = useProject();
 
   const handleClose = () => {

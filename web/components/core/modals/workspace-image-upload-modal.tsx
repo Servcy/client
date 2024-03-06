@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { useDropzone } from "react-dropzone";
 import { Transition, Dialog } from "@headlessui/react";
-// hooks
+
 import { useApplication, useWorkspace } from "@hooks/store";
 // services
 import { FileService } from "@services/file.service";

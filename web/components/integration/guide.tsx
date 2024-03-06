@@ -5,17 +5,17 @@ import { useRouter } from "next/router";
 import useSWR, { mutate } from "swr";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useUser } from "@hooks/store";
 import useUserAuth from "@hooks/use-user-auth";
 // services
 import { IntegrationService } from "@services/integrations";
 // components
-import { DeleteImportModal, GithubImporterRoot, JiraImporterRoot, SingleImport } from "components/integration";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { DeleteImportModal, GithubImporterRoot, JiraImporterRoot, SingleImport } from "@components/integration";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Button } from "@servcy/ui";
-import { ImportExportSettingsLoader } from "components/ui";
+import { ImportExportSettingsLoader } from "@components/ui";
 // icons
 import { RefreshCw } from "lucide-react";
 // types

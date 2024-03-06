@@ -14,7 +14,7 @@ import {
   CalendarClock,
   CalendarCheck2,
 } from "lucide-react";
-// hooks
+
 import { useEstimate, useIssueDetail, useProject, useProjectState, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
@@ -27,9 +27,9 @@ import {
   IssueParentSelect,
   IssueLabel,
   ArchiveIssueModal,
-} from "components/issues";
+} from "@components/issues";
 import { IssueSubscription } from "./subscription";
-import { DateDropdown, EstimateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "components/dropdowns";
+import { DateDropdown, EstimateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "@components/dropdowns";
 // icons
 import { ArchiveIcon, ContrastIcon, DiceIcon, DoubleCircleIcon, RelatedIcon, Tooltip, UserGroupIcon } from "@servcy/ui";
 // helpers

@@ -5,11 +5,11 @@ import { observer } from "mobx-react-lite";
 import { AppLayout } from "@layouts/app-layout";
 import { ProfileAuthWrapper } from "@layouts/user-profile-layout";
 // components
-import { UserProfileHeader } from "components/headers";
-import { PageHead } from "components/core";
+import { UserProfileHeader } from "@components/headers";
+import { PageHead } from "@components/core";
 // types
 import { NextPageWithLayout } from "@lib/types";
-import { ProfileIssuesPage } from "components/profile/profile-issues";
+import { ProfileIssuesPage } from "@components/profile/profile-issues";
 
 const ProfileCreatedIssuesPage: NextPageWithLayout = () => (
   <>

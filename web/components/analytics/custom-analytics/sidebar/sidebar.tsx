@@ -4,11 +4,11 @@ import { observer } from "mobx-react-lite";
 import { mutate } from "swr";
 // services
 import { AnalyticsService } from "@services/analytics.service";
-// hooks
+
 import { useCycle, useModule, useProject, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { CustomAnalyticsSidebarHeader, CustomAnalyticsSidebarProjectsList } from "components/analytics";
+import { CustomAnalyticsSidebarHeader, CustomAnalyticsSidebarProjectsList } from "@components/analytics";
 // ui
 import { Button, LayersIcon } from "@servcy/ui";
 // icons

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // components
 import { IssueListItem } from "./issue-list-item";
@@ -32,7 +32,7 @@ export const IssueList: FC<IIssueList> = observer((props) => {
     handleIssueCrudState,
     subIssueOperations,
   } = props;
-  // hooks
+  
   const {
     subIssues: { subIssuesByIssueId },
   } = useIssueDetail();

@@ -2,16 +2,16 @@ import { ReactElement } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react";
-// hooks
+
 import { useProject, useProjectView } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { ProjectViewLayoutRoot } from "components/issues";
-import { ProjectViewIssuesHeader } from "components/headers";
-import { PageHead } from "components/core";
+import { ProjectViewLayoutRoot } from "@components/issues";
+import { ProjectViewIssuesHeader } from "@components/headers";
+import { PageHead } from "@components/core";
 // ui
-import { EmptyState } from "components/common";
+import { EmptyState } from "@components/common";
 // assets
 import emptyView from "public/empty-state/view.svg";
 // types

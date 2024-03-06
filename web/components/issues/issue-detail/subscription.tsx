@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { FC, useState } from "react";
 // UI
 import { Button, Loader } from "@servcy/ui";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
 import isNil from "lodash/isNil";
@@ -16,7 +16,7 @@ export type TIssueSubscription = {
 
 export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
   const { workspaceSlug, projectId, issueId } = props;
-  // hooks
+  
   const {
     subscription: { getSubscriptionByIssueId },
     createSubscription,

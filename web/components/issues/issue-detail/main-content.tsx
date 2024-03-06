@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
 // components
-import { IssueAttachmentRoot, IssueUpdateStatus } from "components/issues";
+import { IssueAttachmentRoot, IssueUpdateStatus } from "@components/issues";
 import { IssueTitleInput } from "../title-input";
 import { IssueDescriptionInput } from "../description-input";
 import { IssueParentDetail } from "./parent";
@@ -28,7 +28,7 @@ export const IssueMainContent: React.FC<Props> = observer((props) => {
   const { workspaceSlug, projectId, issueId, issueOperations, is_editable } = props;
   // states
   const [isSubmitting, setIsSubmitting] = useState<"submitting" | "submitted" | "saved">("saved");
-  // hooks
+
   const { currentUser } = useUser();
   const { projectStates } = useProjectState();
   const {

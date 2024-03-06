@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useCycle, useMember, useModule, useProject } from "@hooks/store";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";

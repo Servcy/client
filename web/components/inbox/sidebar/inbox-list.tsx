@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { observer } from "mobx-react";
-// hooks
+
 import { useInboxIssues } from "@hooks/store";
 // components
 import { InboxIssueListItem } from "../";
@@ -9,7 +9,7 @@ type TInboxIssueList = { workspaceSlug: string; projectId: string; inboxId: stri
 
 export const InboxIssueList: FC<TInboxIssueList> = observer((props) => {
   const { workspaceSlug, projectId, inboxId } = props;
-  // hooks
+  
   const {
     issues: { getInboxIssuesByInboxId },
   } = useInboxIssues();

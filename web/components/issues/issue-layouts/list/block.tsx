@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 // components
 import { IssueProperties } from "../properties/all-properties";
-// hooks
+
 import { useApplication, useIssueDetail, useProject } from "@hooks/store";
 // ui
 import { Spinner, Tooltip, ControlLink } from "@servcy/ui";
@@ -22,7 +22,7 @@ interface IssueBlockProps {
 
 export const IssueBlock: React.FC<IssueBlockProps> = observer((props: IssueBlockProps) => {
   const { issuesMap, issueId, handleIssues, quickActions, displayProperties, canEditProperties } = props;
-  // hooks
+  
   const {
     router: { workspaceSlug },
   } = useApplication();

@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangleIcon } from "lucide-react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useEventTracker, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui

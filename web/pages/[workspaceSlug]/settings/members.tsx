@@ -2,16 +2,16 @@ import { Search } from "lucide-react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
-// hooks
+
 import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // components
-import { PageHead } from "components/core";
-import { WorkspaceSettingHeader } from "components/headers";
-import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "components/workspace";
+import { PageHead } from "@components/core";
+import { WorkspaceSettingHeader } from "@components/headers";
+import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace";
 // ui
 import { Button } from "@servcy/ui";
 // types

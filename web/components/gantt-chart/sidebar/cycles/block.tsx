@@ -1,17 +1,17 @@
 import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd";
 import { observer } from "mobx-react";
 import { MoreVertical } from "lucide-react";
-// hooks
-import { useGanttChart } from "components/gantt-chart/hooks";
+
+import { useGanttChart } from "@components/gantt-chart/hooks";
 // components
-import { CycleGanttSidebarBlock } from "components/cycles";
+import { CycleGanttSidebarBlock } from "@components/cycles";
 // helpers
 import { cn } from "@helpers/common.helper";
 import { findTotalDaysInRange } from "@helpers/date-time.helper";
 // types
-import { IGanttBlock } from "components/gantt-chart/types";
+import { IGanttBlock } from "@components/gantt-chart/types";
 // constants
-import { BLOCK_HEIGHT } from "components/gantt-chart/constants";
+import { BLOCK_HEIGHT } from "@components/gantt-chart/constants";
 
 type Props = {
   block: IGanttBlock;

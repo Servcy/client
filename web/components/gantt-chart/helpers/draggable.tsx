@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
-// hooks
-import { IGanttBlock } from "components/gantt-chart";
+
+import { IGanttBlock } from "@components/gantt-chart";
 // helpers
 import { cn } from "@helpers/common.helper";
 // constants

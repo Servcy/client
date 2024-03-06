@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { DayPicker } from "react-day-picker";
 import { Popover } from "@headlessui/react";
-// hooks
+
 import { useUser, useInboxIssues, useIssueDetail, useWorkspace, useEventTracker } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
@@ -12,7 +12,7 @@ import {
   DeclineIssueModal,
   DeleteInboxIssueModal,
   SelectDuplicateInboxIssueModal,
-} from "components/inbox";
+} from "@components/inbox";
 // ui
 import { Button } from "@servcy/ui";
 // icons
@@ -38,7 +38,7 @@ export const InboxIssueActionsHeader: FC<TInboxIssueActionsHeader> = observer((p
   const { workspaceSlug, projectId, inboxId, inboxIssueId } = props;
   // router
   const router = useRouter();
-  // hooks
+
   const { captureIssueEvent } = useEventTracker();
   const { currentWorkspace } = useWorkspace();
   const {

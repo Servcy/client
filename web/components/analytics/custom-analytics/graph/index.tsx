@@ -4,7 +4,7 @@ import { BarDatum } from "@nivo/bar";
 import { CustomTooltip } from "./custom-tooltip";
 import { Tooltip } from "@servcy/ui";
 // ui
-import { BarGraph } from "components/ui";
+import { BarGraph } from "@components/ui";
 // helpers
 import { findStringWithMostCharacters } from "@helpers/array.helper";
 import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";

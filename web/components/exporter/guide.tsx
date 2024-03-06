@@ -6,17 +6,17 @@ import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import useSWR, { mutate } from "swr";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useUser } from "@hooks/store";
 import useUserAuth from "@hooks/use-user-auth";
 // services
 import { IntegrationService } from "@services/integrations";
 // components
-import { Exporter, SingleExport } from "components/exporter";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { Exporter, SingleExport } from "@components/exporter";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Button } from "@servcy/ui";
-import { ImportExportSettingsLoader } from "components/ui";
+import { ImportExportSettingsLoader } from "@components/ui";
 // icons
 import { MoveLeft, MoveRight, RefreshCw } from "lucide-react";
 // fetch-keys

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { usePopper } from "react-popper";
 import { Combobox } from "@headlessui/react";
 import { Check, ChevronDown, Search } from "lucide-react";
-// hooks
+
 import { useDropdownKeyDown } from "../hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "../hooks/use-outside-click-detector";
 // helpers

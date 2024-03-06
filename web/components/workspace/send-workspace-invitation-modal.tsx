@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 import { Plus, X } from "lucide-react";
-// hooks
+
 import { useUser } from "@hooks/store";
 // ui
 import { Button, CustomSelect, Input } from "@servcy/ui";

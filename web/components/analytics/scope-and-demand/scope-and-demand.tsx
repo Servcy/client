@@ -5,7 +5,7 @@ import useSWR from "swr";
 // services
 import { AnalyticsService } from "@services/analytics.service";
 // components
-import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "components/analytics";
+import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "@components/analytics";
 // ui
 import { Button, Loader } from "@servcy/ui";
 // fetch-keys

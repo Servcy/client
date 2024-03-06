@@ -3,10 +3,10 @@ import useSWR from "swr";
 // layouts
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
 // ui
-import { EmailSettingsLoader } from "components/ui";
+import { EmailSettingsLoader } from "@components/ui";
 // components
-import { EmailNotificationForm } from "components/profile/preferences";
-import { PageHead } from "components/core";
+import { EmailNotificationForm } from "@components/profile/preferences";
+import { PageHead } from "@components/core";
 // services
 import { UserService } from "@services/user.service";
 // type

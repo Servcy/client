@@ -5,9 +5,9 @@ import { observer } from "mobx-react-lite";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 // components
-import { PageHead } from "components/core";
-import { ProjectIssueDetailsHeader } from "components/headers";
-import { IssueDetailRoot } from "components/issues";
+import { PageHead } from "@components/core";
+import { ProjectIssueDetailsHeader } from "@components/headers";
+import { IssueDetailRoot } from "@components/issues";
 // ui
 import { Loader } from "@servcy/ui";
 // types
@@ -19,7 +19,7 @@ const IssueDetailsPage: NextPageWithLayout = observer(() => {
   // router
   const router = useRouter();
   const { workspaceSlug, projectId, issueId } = router.query;
-  // hooks
+
   const {
     fetchIssue,
     issue: { getIssueById },

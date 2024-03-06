@@ -5,7 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { TwitterPicker } from "react-color";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { ChevronDown } from "lucide-react";
-// hooks
+
 import { useLabel } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui

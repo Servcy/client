@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 // components
-import { ProfileIssuesFilter } from "components/profile";
+import { ProfileIssuesFilter } from "@components/profile";
 // constants
 import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile";
 

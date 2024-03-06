@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { TwitterPicker } from "react-color";
 import { Popover, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useEventTracker, useProjectState } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui

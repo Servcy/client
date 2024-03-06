@@ -1,10 +1,10 @@
 import { FC, useMemo } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssues } from "@hooks/store";
 // components
-import { ArchivedIssueQuickActions } from "components/issues";
+import { ArchivedIssueQuickActions } from "@components/issues";
 // types
 import { TIssue } from "@servcy/types";
 // constants

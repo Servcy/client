@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 import { AlertTriangle } from "lucide-react";
-// hooks
+
 import { useEventTracker, useCycle } from "@hooks/store";
 import toast from "react-hot-toast";
 // components

@@ -2,11 +2,11 @@ import { FC, MouseEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
-// hooks
+
 import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { CycleCreateUpdateModal, CycleDeleteModal } from "components/cycles";
+import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles";
 // ui
 import { CustomMenu, Tooltip, CircularProgressIndicator, CycleGroupIcon, AvatarGroup, Avatar } from "@servcy/ui";
 // icons

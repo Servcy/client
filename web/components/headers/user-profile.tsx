@@ -1,8 +1,8 @@
 // ui
 import { Breadcrumbs, CustomMenu } from "@servcy/ui";
-import { BreadcrumbLink } from "components/common";
+import { BreadcrumbLink } from "@components/common";
 // components
-import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { cn } from "@helpers/common.helper";
 import { FC } from "react";
 import { useApplication, useUser } from "@hooks/store";

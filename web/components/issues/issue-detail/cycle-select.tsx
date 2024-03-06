@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 // components
-import { CycleDropdown } from "components/dropdowns";
+import { CycleDropdown } from "@components/dropdowns";
 // ui
 import { Spinner } from "@servcy/ui";
 // helpers

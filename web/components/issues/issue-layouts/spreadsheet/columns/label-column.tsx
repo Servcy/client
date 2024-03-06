@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 // components
 import { IssuePropertyLabels } from "../../properties";
-// hooks
+
 import { useLabel } from "@hooks/store";
 // types
 import { TIssue } from "@servcy/types";
@@ -16,7 +16,7 @@ type Props = {
 
 export const SpreadsheetLabelColumn: React.FC<Props> = observer((props: Props) => {
   const { issue, onChange, disabled, onClose } = props;
-  // hooks
+  
   const { labelMap } = useLabel();
 
   const defaultLabelOptions = issue?.label_ids?.map((id) => labelMap[id]) || [];

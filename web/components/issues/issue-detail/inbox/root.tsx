@@ -4,7 +4,7 @@ import useSWR from "swr";
 // components
 import { InboxIssueMainContent } from "./main-content";
 import { InboxIssueDetailsSidebar } from "./sidebar";
-// hooks
+
 import { useEventTracker, useInboxIssues, useIssueDetail, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // types
@@ -24,7 +24,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
   const { workspaceSlug, projectId, inboxId, issueId } = props;
   // router
   const router = useRouter();
-  // hooks
+  
   const {
     issues: { fetchInboxIssueById, updateInboxIssue, removeInboxIssue },
   } = useInboxIssues();

@@ -18,7 +18,7 @@ import {
   MoreHorizontal,
   Inbox,
 } from "lucide-react";
-// hooks
+
 import { useApplication, useEventTracker, useInbox, useProject } from "@hooks/store";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import toast from "react-hot-toast";
@@ -28,7 +28,7 @@ import { getNumberCount } from "@helpers/string.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
 // components
 import { CustomMenu, Tooltip, ArchiveIcon, PhotoFilterIcon, DiceIcon, ContrastIcon, LayersIcon } from "@servcy/ui";
-import { LeaveProjectModal, PublishProjectModal } from "components/project";
+import { LeaveProjectModal, PublishProjectModal } from "@components/project";
 import { EUserProjectRoles } from "@constants/project";
 
 type Props = {

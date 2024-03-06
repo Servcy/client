@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { TextArea } from "@servcy/ui";
 // types
 import { TIssueOperations } from "./issue-detail";
-// hooks
+
 import useDebounce from "@hooks/use-debounce";
 
 export type IssueTitleInputProps = {
@@ -22,7 +22,7 @@ export const IssueTitleInput: FC<IssueTitleInputProps> = observer((props) => {
   const { disabled, value, workspaceSlug, isSubmitting, setIsSubmitting, issueId, issueOperations, projectId } = props;
   // states
   const [title, setTitle] = useState("");
-  // hooks
+  
   const debouncedValue = useDebounce(title, 1500);
 
   useEffect(() => {

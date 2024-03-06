@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
-// hooks
+
 import { useApplication, useCycle } from "@hooks/store";
 // ui
 import { Tooltip, ContrastIcon } from "@servcy/ui";

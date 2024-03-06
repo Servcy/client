@@ -6,7 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useEventTracker, useGlobalView } from "@hooks/store";
 import toast from "react-hot-toast";
 // components
-import { WorkspaceViewForm } from "components/workspace";
+import { WorkspaceViewForm } from "@components/workspace";
 // types
 import { IWorkspaceView } from "@servcy/types";
 // constants

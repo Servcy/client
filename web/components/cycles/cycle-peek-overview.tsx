@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useCycle } from "@hooks/store";
 // components
 import { CycleDetailsSidebar } from "./sidebar";

@@ -4,7 +4,7 @@ import { Control, Controller, FieldErrors, UseFormHandleSubmit, UseFormSetValue 
 import { Button, Input } from "@servcy/ui";
 // types
 import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
-// hooks
+
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // services

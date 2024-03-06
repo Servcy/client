@@ -3,11 +3,11 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useCycle, useIssues, useMember, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
-import { SingleProgressStats } from "components/core";
+import { SingleProgressStats } from "@components/core";
 import {
   AvatarGroup,
   Loader,
@@ -20,10 +20,10 @@ import {
   CycleGroupIcon,
 } from "@servcy/ui";
 // components
-import ProgressChart from "components/core/sidebar/progress-chart";
-import { ActiveCycleProgressStats } from "components/cycles";
-import { StateDropdown } from "components/dropdowns";
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import ProgressChart from "@components/core/sidebar/progress-chart";
+import { ActiveCycleProgressStats } from "@components/cycles";
+import { StateDropdown } from "@components/dropdowns";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // icons
 import { ArrowRight, CalendarCheck, CalendarDays, Star, Target } from "lucide-react";
 // helpers

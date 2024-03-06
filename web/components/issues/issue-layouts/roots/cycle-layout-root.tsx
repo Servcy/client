@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 import size from "lodash/size";
 import isEmpty from "lodash/isEmpty";
-// hooks
+
 import { useCycle, useIssues } from "@hooks/store";
 // components
 import {
@@ -16,9 +16,9 @@ import {
   CycleListLayout,
   CycleSpreadsheetLayout,
   IssuePeekOverview,
-} from "components/issues";
-import { TransferIssues, TransferIssuesModal } from "components/cycles";
-import { ActiveLoader } from "components/ui";
+} from "@components/issues";
+import { TransferIssues, TransferIssuesModal } from "@components/cycles";
+import { ActiveLoader } from "@components/ui";
 // constants
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 // types

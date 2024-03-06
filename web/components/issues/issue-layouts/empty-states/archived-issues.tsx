@@ -2,10 +2,10 @@ import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import size from "lodash/size";
 import { useTheme } from "next-themes";
-// hooks
+
 import { useIssues, useUser } from "@hooks/store";
 // components
-import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // constants
 import { EUserProjectRoles } from "@constants/project";
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";

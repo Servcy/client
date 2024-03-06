@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { observer } from "mobx-react-lite";
-// hooks
+
 import { useApplication, useEventTracker, useUser } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";

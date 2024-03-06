@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-// hooks
+
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
 import debounce from "lodash/debounce";
 // components
@@ -43,7 +43,7 @@ export const IssueDescriptionForm: FC<IssueDetailsProps> = observer((props) => {
   const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug)?.id as string;
   // states
   const [characterLimit, setCharacterLimit] = useState(false);
-  // hooks
+  
   const { setShowAlert } = useReloadConfirmations();
   // store hooks
   const { mentionHighlights, mentionSuggestions } = useMention();

@@ -3,7 +3,7 @@ import { Plus, X, Loader } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { TwitterPicker } from "react-color";
 import { Popover, Transition } from "@headlessui/react";
-// hooks
+
 import { useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
@@ -27,7 +27,7 @@ const defaultValues: Partial<IIssueLabel> = {
 
 export const LabelCreate: FC<ILabelCreate> = (props) => {
   const { workspaceSlug, projectId, issueId, labelOperations, disabled = false } = props;
-  // hooks
+  
 
   const {
     issue: { getIssueById },
