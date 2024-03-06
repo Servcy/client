@@ -65,10 +65,10 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
             const interval = Math.ceil(totalDates / maxDates)
             const limitedDates = []
 
-            for (let i = 0; i < totalDates; i += interval) limitedDates.push(renderFormattedDateWithoutYear(dates[i]))
+            for (let i = 0; i < totalDates; i += interval) limitedDates.push(renderFormattedDateWithoutYear(dates[i] ?? ""))
 
-            if (!limitedDates.includes(renderFormattedDateWithoutYear(dates[totalDates - 1])))
-                limitedDates.push(renderFormattedDateWithoutYear(dates[totalDates - 1]))
+            if (!limitedDates.includes(renderFormattedDateWithoutYear(dates[totalDates - 1] ?? "")))
+                limitedDates.push(renderFormattedDateWithoutYear(dates[totalDates - 1] ?? ""))
 
             return limitedDates
         }
@@ -87,14 +87,14 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
                 data={[
                     {
                         id: "pending",
-                        color: "#3F76FF",
+                        color: "#3f76ff",
                         data:
                             chartData.length > 0
                                 ? chartData.map((item, index) => ({
                                       index,
                                       x: item.currentDate,
                                       y: item.pending,
-                                      color: "#3F76FF",
+                                      color: "#3f76ff",
                                   }))
                                 : [],
                         enableArea: true,
@@ -107,11 +107,11 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
                             chartData.length > 0
                                 ? [
                                       {
-                                          x: chartData[0].currentDate,
+                                          x: chartData[0]?.currentDate,
                                           y: totalIssues,
                                       },
                                       {
-                                          x: chartData[chartData.length - 1].currentDate,
+                                          x: chartData[chartData.length - 1]?.currentDate,
                                           y: 0,
                                       },
                                   ]
@@ -124,7 +124,7 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
                 }}
                 enablePoints={false}
                 enableArea
-                colors={(datum) => datum.color ?? "#3F76FF"}
+                colors={(datum) => datum.color ?? "#3f76ff"}
                 customYAxisTickValues={[0, totalIssues]}
                 gridXValues={
                     chartData.length > 0
@@ -134,9 +134,9 @@ const ProgressChart: React.FC<Props> = ({ distribution, startDate, endDate, tota
                 enableSlices="x"
                 sliceTooltip={(datum) => (
                     <div className="rounded-md border border-custom-border-200 bg-custom-background-80 p-2 text-xs">
-                        {datum.slice.points[0].data.yFormatted}
+                        {datum.slice.points[0]?.data.yFormatted}
                         <span className="text-custom-text-200"> issues pending on </span>
-                        {datum.slice.points[0].data.xFormatted}
+                        {datum.slice.points[0]?.data.xFormatted}
                     </div>
                 )}
                 theme={{

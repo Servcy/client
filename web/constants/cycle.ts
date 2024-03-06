@@ -84,7 +84,7 @@ export const CYCLE_STATUS: {
     {
         label: "Completed",
         value: "completed",
-        color: "#16A34A",
+        color: "#4D7E3E",
         textColor: "text-green-600",
         bgColor: "bg-green-50",
     },

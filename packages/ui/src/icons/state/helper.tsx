@@ -12,8 +12,8 @@ export const STATE_GROUP_COLORS: {
   [key in TStateGroups]: string;
 } = {
   backlog: "#d9d9d9",
-  unstarted: "#4D7E3E",
+  unstarted: "#3F76FF",
   started: "#f59e0b",
-  completed: "#16a34a",
+  completed: "#4d7e3e",
   cancelled: "#dc2626",
 };

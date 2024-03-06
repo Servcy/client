@@ -4,7 +4,7 @@ import { ISvgIcons } from "../type";
 
 export const CompletedGroupIcon: React.FC<ISvgIcons> = ({
   className = "",
-  color = "#16a34a",
+  color = "#4d7e3e",
   height = "20",
   width = "20",
   ...rest

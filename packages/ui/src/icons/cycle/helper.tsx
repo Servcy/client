@@ -13,6 +13,6 @@ export const CYCLE_GROUP_COLORS: {
 } = {
   current: "#F59E0B",
   upcoming: "#3F76FF",
-  completed: "#16A34A",
+  completed: "#4D7E3E",
   draft: "#525252",
 };

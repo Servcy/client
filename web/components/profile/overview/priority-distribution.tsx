@@ -45,7 +45,7 @@ export const ProfilePriorityDistribution: React.FC<Props> = ({ userProfile }) =>
                             if (datum.data.priority === "Urgent") return "#991b1b"
                             else if (datum.data.priority === "High") return "#ef4444"
                             else if (datum.data.priority === "Medium") return "#f59e0b"
-                            else if (datum.data.priority === "Low") return "#16a34a"
+                            else if (datum.data.priority === "Low") return "#4d7e3e"
                             else return "#e5e5e5"
                         }}
                         theme={{

@@ -32,7 +32,7 @@ export const CycleGanttBlock: React.FC<Props> = observer((props) => {
             style={{
                 backgroundColor:
                     cycleStatus === "current"
-                        ? "#09a953"
+                        ? "#3f76ff"
                         : cycleStatus === "upcoming"
                           ? "#f7ae59"
                           : cycleStatus === "completed"
@@ -91,7 +91,7 @@ export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
                 className="h-5 w-5 flex-shrink-0"
                 color={`${
                     cycleStatus === "current"
-                        ? "#09a953"
+                        ? "#3f76ff"
                         : cycleStatus === "upcoming"
                           ? "#f7ae59"
                           : cycleStatus === "completed"

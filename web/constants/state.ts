@@ -15,7 +15,7 @@ export const STATE_GROUPS: {
     unstarted: {
         key: "unstarted",
         label: "Unstarted",
-        color: "#4D7E3E",
+        color: "#3F76FF",
     },
     started: {
         key: "started",
@@ -25,7 +25,7 @@ export const STATE_GROUPS: {
     completed: {
         key: "completed",
         label: "Completed",
-        color: "#16a34a",
+        color: "#4d7e3e",
     },
     cancelled: {
         key: "cancelled",

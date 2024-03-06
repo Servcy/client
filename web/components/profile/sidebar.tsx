@@ -214,7 +214,7 @@ export const ProfileSidebar = observer(() => {
                                                                 <div
                                                                     className="h-1 rounded"
                                                                     style={{
-                                                                        backgroundColor: "#4D7E3E",
+                                                                        backgroundColor: "#3f76ff",
                                                                         width: `${(project.assigned_issues / totalIssues) * 100}%`,
                                                                     }}
                                                                 />
@@ -228,7 +228,7 @@ export const ProfileSidebar = observer(() => {
                                                                 <div
                                                                     className="h-1 rounded"
                                                                     style={{
-                                                                        backgroundColor: "#16a34a",
+                                                                        backgroundColor: "#4d7e3e",
                                                                         width: `${(project.completed_issues / totalIssues) * 100}%`,
                                                                     }}
                                                                 />
@@ -246,7 +246,7 @@ export const ProfileSidebar = observer(() => {
                                                             </div>
                                                             <div className="flex items-center justify-between gap-2">
                                                                 <div className="flex items-center gap-2">
-                                                                    <div className="h-2.5 w-2.5 rounded-sm bg-[#4D7E3E]" />
+                                                                    <div className="h-2.5 w-2.5 rounded-sm bg-[#3f76ff]" />
                                                                     Assigned
                                                                 </div>
                                                                 <div className="font-medium">
@@ -264,7 +264,7 @@ export const ProfileSidebar = observer(() => {
                                                             </div>
                                                             <div className="flex items-center justify-between gap-2">
                                                                 <div className="flex items-center gap-2">
-                                                                    <div className="h-2.5 w-2.5 rounded-sm bg-[#16a34a]" />
+                                                                    <div className="h-2.5 w-2.5 rounded-sm bg-[#4d7e3e]" />
                                                                     Completed
                                                                 </div>
                                                                 <div className="font-medium">
