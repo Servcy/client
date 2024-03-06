@@ -40,8 +40,9 @@
       "@contexts/*": ["./contexts/*"],
       "@constants/*": ["./constants/*"],
       "@helpers/*": ["./helpers/*"],
-      "@layouts/*": ["./hooks/*"],
+      "@layouts/*": ["./layouts/*"],
       "@styles/*": ["./styles/*"],
+      "@components/*": ["./components/*"],
       "@store/*": ["./store/*"]
     }
   },
