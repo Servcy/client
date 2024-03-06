@@ -66,9 +66,7 @@ export const IssueRelationSelect: React.FC<TIssueRelationSelect> = observer((pro
 
     const onSubmit = async (data: ISearchIssueResponse[]) => {
         if (data.length === 0) {
-            toast.error({
-                message: "Please select at least one issue.",
-            })
+            toast.error("Please select at least one issue.")
             return
         }
 

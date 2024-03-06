@@ -69,21 +69,12 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
 
                 if (typeof error === "object") {
                     Object.keys(error).forEach((key) => {
-                        toast.error({
-                            
-                            title: "Error!",
-                            message: Array.isArray(error[key]) ? error[key].join(", ") : error[key],
-                        })
+                        toast.error(Array.isArray(error[key]) ? error[key].join(", ") : error[key])
                     })
                 } else {
-                    toast.error({
-                        
-                        title: "Error!",
-                        message:
-                            error ?? err.status === 400
+                    toast.error(error ?? err.status === 400
                                 ? "Another state exists with the same name. Please try again with another name."
-                                : "State could not be created. Please try again.",
-                    })
+                                : "State could not be created. Please try again.")
                 }
             })
     }

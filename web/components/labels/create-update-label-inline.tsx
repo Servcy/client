@@ -65,11 +65,7 @@ export const CreateUpdateLabelInline = observer(
                     reset(defaultValues)
                 })
                 .catch((error) => {
-                    toast.error({
-                        title: "Oops!",
-                        
-                        message: error?.error ?? "Error while adding the label",
-                    })
+                    toast.error(error?.error ?? "Error while adding the label")
                     reset(formData)
                 })
         }
@@ -83,11 +79,7 @@ export const CreateUpdateLabelInline = observer(
                     handleClose()
                 })
                 .catch((error) => {
-                    toast.error({
-                        title: "Oops!",
-                        
-                        message: error?.error ?? "Error while updating the label",
-                    })
+                    toast.error(error?.error ?? "Error while updating the label")
                     reset(formData)
                 })
         }

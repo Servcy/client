@@ -43,9 +43,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
         if (!workspaceSlug) return
 
         addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
-            toast.error({
-                message: "Couldn't remove the project from favorites. Please try again.",
-            })
+            toast.error("Couldn't remove the project from favorites. Please try again.")
         })
     }
 
@@ -53,9 +51,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
         if (!workspaceSlug || !project) return
 
         removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
-            toast.error({
-                message: "Couldn't remove the project from favorites. Please try again.",
-            })
+            toast.error("Couldn't remove the project from favorites. Please try again.")
         })
     }
 
@@ -63,11 +59,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
         const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
 
         copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${project.id}/issues`).then(() => {
-            toast.error({
-                type: "success",
-                title: "Link Copied!",
-                message: "Project link copied to clipboard.",
-            })
+            toast.success("Project link copied to clipboard.")
         })
     }
 

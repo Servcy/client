@@ -32,11 +32,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     const res = await createAttachment(workspaceSlug, projectId, issueId, data)
-                    toast.error({
-                        message: "The attachment has been successfully uploaded",
-                        type: "success",
-                        title: "Attachment uploaded",
-                    })
+                    toast.success("The attachment has been successfully uploaded")
                     captureIssueEvent({
                         eventName: "Issue attachment added",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -50,22 +46,14 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                         eventName: "Issue attachment added",
                         payload: { id: issueId, state: "FAILED", element: "Issue detail page" },
                     })
-                    toast.error({
-                        message: "The attachment could not be uploaded",
-
-                        title: "Attachment not uploaded",
-                    })
+                    toast.error("The attachment could not be uploaded")
                 }
             },
             remove: async (attachmentId: string) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     await removeAttachment(workspaceSlug, projectId, issueId, attachmentId)
-                    toast.error({
-                        message: "The attachment has been successfully removed",
-                        type: "success",
-                        title: "Attachment removed",
-                    })
+                    toast.error("The attachment has been successfully removed")
                     captureIssueEvent({
                         eventName: "Issue attachment deleted",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -83,15 +71,11 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                             change_details: "",
                         },
                     })
-                    toast.error({
-                        message: "The Attachment could not be removed",
-
-                        title: "Attachment not removed",
-                    })
+                    toast.error("The Attachment could not be removed")
                 }
             },
         }),
-        [workspaceSlug, projectId, issueId, createAttachment, removeAttachment]
+        [workspaceSlug, projectId, issueId, createAttachment, captureIssueEvent, removeAttachment]
     )
 
     return (

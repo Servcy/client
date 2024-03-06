@@ -58,9 +58,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error({
-                    message: "Couldn't add the module to favorites. Please try again.",
-                })
+                toast.error("Couldn't add the module to favorites. Please try again.")
             })
     }
 
@@ -78,9 +76,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error({
-                    message: "Couldn't remove the module from favorites. Please try again.",
-                })
+                toast.error("Couldn't remove the module from favorites. Please try again.")
             })
     }
 
@@ -88,11 +84,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
         e.stopPropagation()
         e.preventDefault()
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`).then(() => {
-            toast.error({
-                type: "success",
-                title: "Link Copied!",
-                message: "Module link copied to clipboard.",
-            })
+            toast.success("Module link copied to clipboard.")
         })
     }
 

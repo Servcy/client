@@ -130,22 +130,14 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
             copyText: (text: string) => {
                 const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
                 copyTextToClipboard(`${originURL}/${text}`).then(() => {
-                    toast.error({
-                        type: "success",
-                        title: "Link Copied!",
-                        message: "Issue link copied to clipboard.",
-                    })
+                    toast.success("Issue link copied to clipboard.")
                 })
             },
             fetchSubIssues: async (workspaceSlug: string, projectId: string, parentIssueId: string) => {
                 try {
                     await fetchSubIssues(workspaceSlug, projectId, parentIssueId)
                 } catch (error) {
-                    toast.error({
-                        
-                        title: "Error fetching sub-issues",
-                        message: "Error fetching sub-issues",
-                    })
+                    toast.error("Error fetching sub-issues")
                 }
             },
             addSubIssue: async (
@@ -156,17 +148,9 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
             ) => {
                 try {
                     await createSubIssues(workspaceSlug, projectId, parentIssueId, issueIds)
-                    toast.error({
-                        type: "success",
-                        title: "Sub-issues added successfully",
-                        message: "Sub-issues added successfully",
-                    })
+                    toast.success("Sub-issues added successfully")
                 } catch (error) {
-                    toast.error({
-                        
-                        title: "Error adding sub-issue",
-                        message: "Error adding sub-issue",
-                    })
+                    toast.error("Error adding sub-issue")
                 }
             },
             updateSubIssue: async (
@@ -198,11 +182,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         },
                         path: router.asPath,
                     })
-                    toast.error({
-                        type: "success",
-                        title: "Sub-issue updated successfully",
-                        message: "Sub-issue updated successfully",
-                    })
+                    toast.success("Sub-issue updated successfully")
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
                 } catch (error) {
                     captureIssueEvent({
@@ -214,11 +194,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         },
                         path: router.asPath,
                     })
-                    toast.error({
-                        
-                        title: "Error updating sub-issue",
-                        message: "Error updating sub-issue",
-                    })
+                    toast.error( "Error updating sub-issue")
                 }
             },
             removeSubIssue: async (
@@ -230,11 +206,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                 try {
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
                     await removeSubIssue(workspaceSlug, projectId, parentIssueId, issueId)
-                    toast.error({
-                        type: "success",
-                        title: "Sub-issue removed successfully",
-                        message: "Sub-issue removed successfully",
-                    })
+                    toast.success("Sub-issue removed successfully")
                     captureIssueEvent({
                         eventName: "Sub-issue removed",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -255,11 +227,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         },
                         path: router.asPath,
                     })
-                    toast.error({
-                        
-                        title: "Error removing sub-issue",
-                        message: "Error removing sub-issue",
-                    })
+                    toast.error("Error removing sub-issue")
                 }
             },
             deleteSubIssue: async (
@@ -271,11 +239,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                 try {
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
                     await deleteSubIssue(workspaceSlug, projectId, parentIssueId, issueId)
-                    toast.error({
-                        type: "success",
-                        title: "Issue deleted successfully",
-                        message: "Issue deleted successfully",
-                    })
+                    toast.error("Issue deleted successfully")
                     captureIssueEvent({
                         eventName: "Sub-issue deleted",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -288,23 +252,11 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         payload: { id: issueId, state: "FAILED", element: "Issue detail page" },
                         path: router.asPath,
                     })
-                    toast.error({
-                        
-                        title: "Error deleting issue",
-                        message: "Error deleting issue",
-                    })
+                    toast.error("Error deleting issue")
                 }
             },
         }),
-        [
-            fetchSubIssues,
-            createSubIssues,
-            updateSubIssue,
-            removeSubIssue,
-            deleteSubIssue,
-            setToastAlert,
-            setSubIssueHelpers,
-        ]
+        [fetchSubIssues, createSubIssues, setSubIssueHelpers, updateSubIssue, captureIssueEvent, router.asPath, removeSubIssue, deleteSubIssue]
     )
 
     const issue = getIssueById(parentIssueId)

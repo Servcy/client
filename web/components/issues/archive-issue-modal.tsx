@@ -28,7 +28,7 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
     if (!dataId && !data) return null
 
     const issue = data ? data : issueMap[dataId!]
-    const projectDetails = getProjectById(issue.project_id)
+    const projectDetails = getProjectById(issue?.project_id ?? "")
 
     const onClose = () => {
         setIsArchiving(false)
@@ -42,9 +42,7 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
         await onSubmit()
             .then(() => onClose())
             .catch(() =>
-                toast.error({
-                    message: "Issue could not be archived. Please try again.",
-                })
+                toast.error("Issue could not be archived. Please try again.")
             )
             .finally(() => setIsArchiving(false))
     }
@@ -78,7 +76,7 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
                             <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-custom-background-100 text-left shadow-custom-shadow-md transition-all sm:my-8 sm:w-full sm:max-w-lg">
                                 <div className="px-5 py-4">
                                     <h3 className="text-xl font-medium 2xl:text-2xl">
-                                        Archive issue {projectDetails?.identifier} {issue.sequence_id}
+                                        Archive issue {projectDetails?.identifier} {issue?.sequence_id}
                                     </h3>
                                     <p className="text-sm text-custom-text-200 mt-3">
                                         Are you sure you want to archive the issue? All your archived issues can be

@@ -51,11 +51,7 @@ export const ProjectSidebarList: FC = observer(() => {
 
     const handleCopyText = (projectId: string) => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {
-            toast.error({
-                type: "success",
-                title: "Link Copied!",
-                message: "Project link copied to clipboard.",
-            })
+            toast.success("Project link copied to clipboard.")
         })
     }
 

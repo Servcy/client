@@ -14,7 +14,6 @@ import {
     useIssues,
     useModule,
     useProject,
-    useWorkspace,
 } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
@@ -131,7 +130,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
         // if data is not present, set active project to the project
         // in the url. This has the least priority.
         if (workspaceProjectIds && workspaceProjectIds.length > 0 && !activeProjectId)
-            setActiveProjectId(projectId ?? workspaceProjectIds?.[0])
+            setActiveProjectId(projectId ?? workspaceProjectIds?.[0] ?? null)
 
         // clearing up the description state when we leave the component
         return () => setDescription(undefined)
@@ -188,11 +187,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             if (payload.module_ids && payload.module_ids.length > 0 && storeType !== EIssuesStoreType.MODULE)
                 await addIssueToModule(response, payload.module_ids)
 
-            toast.error({
-                type: "success",
-                
-                message: "Issue created successfully.",
-            })
+            toast.success("Issue created successfully.")
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...response, state: "SUCCESS" },
@@ -201,30 +196,25 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             !createMore && handleClose()
             return response
         } catch (error) {
-            toast.error({
-                message: "Issue could not be created. Please try again.",
-            })
+            toast.error("Issue could not be created. Please try again.")
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED" },
                 path: router.asPath,
             })
         }
+        return undefined
     }
 
     const handleUpdateIssue = async (payload: Partial<TIssue>): Promise<TIssue | undefined> => {
-        if (!workspaceSlug || !payload.project_id || !data?.id) return
+        if (!workspaceSlug || !payload.project_id || !data?.id) return undefined
 
         try {
             isDraft
                 ? await draftIssues.updateIssue(workspaceSlug, payload.project_id, data.id, payload)
                 : await currentIssueStore.updateIssue(workspaceSlug, payload.project_id, data.id, payload, viewId)
 
-            toast.error({
-                type: "success",
-                
-                message: "Issue updated successfully.",
-            })
+            toast.success("Issue updated successfully.")
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...payload, issueId: data.id, state: "SUCCESS" },
@@ -232,15 +222,14 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             })
             handleClose()
         } catch (error) {
-            toast.error({
-                message: "Issue could not be created. Please try again.",
-            })
+            toast.error("Issue could not be created. Please try again.")
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...payload, state: "FAILED" },
                 path: router.asPath,
             })
         }
+        return undefined
     }
 
     const handleFormSubmit = async (formData: Partial<TIssue>, is_draft_issue: boolean = false) => {

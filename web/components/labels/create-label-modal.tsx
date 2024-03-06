@@ -73,11 +73,7 @@ export const CreateLabelModal: React.FC<Props> = observer((props) => {
                 if (onSuccess) onSuccess(res)
             })
             .catch((error) => {
-                toast.error({
-                    title: "Oops!",
-                    
-                    message: error?.error ?? "Error while adding the label",
-                })
+                toast.error(error?.error ?? "Error while adding the label")
                 reset(formData)
             })
     }

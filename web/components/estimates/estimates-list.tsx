@@ -49,10 +49,7 @@ export const EstimatesList: React.FC = observer(() => {
         updateProject(workspaceSlug.toString(), projectId.toString(), { estimate: null }).catch((err) => {
             const error = err?.error
             const errorString = Array.isArray(error) ? error[0] : error
-
-            toast.error({
-                message: errorString ?? "Estimate could not be disabled. Please try again",
-            })
+            toast.error(errorString ?? "Estimate could not be disabled. Please try again")
         })
     }
 

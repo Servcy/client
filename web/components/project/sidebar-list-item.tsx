@@ -83,7 +83,7 @@ const navigation = (workspaceSlug: string, projectId: string) => [
 
 export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { projectId, provided, snapshot, handleCopyText, shortContextMenu = false, disableDrag } = props
+    const { projectId, provided, snapshot, handleCopyText, disableDrag } = props
     // store hooks
     const { theme: themeStore } = useApplication()
     const { setTrackElement } = useEventTracker()
@@ -115,9 +115,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
         if (!workspaceSlug || !project) return
 
         addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
-            toast.error({
-                message: "Couldn't remove the project from favorites. Please try again.",
-            })
+            toast.error("Couldn't remove the project from favorites. Please try again.")
         })
     }
 
@@ -125,9 +123,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
         if (!workspaceSlug || !project) return
 
         removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
-            toast.error({
-                message: "Couldn't remove the project from favorites. Please try again.",
-            })
+            toast.error("Couldn't remove the project from favorites. Please try again.")
         })
     }
 

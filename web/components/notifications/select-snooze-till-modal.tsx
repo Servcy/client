@@ -67,8 +67,8 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
         const minutes = today.getMinutes()
 
         return timeStamps.filter((optionTime) => {
-            let optionHours = parseInt(optionTime.value.split(":")[0])
-            const optionMinutes = parseInt(optionTime.value.split(":")[1])
+            let optionHours = parseInt(optionTime.value.split(":")[0] as string)
+            const optionMinutes = parseInt(optionTime.value.split(":")[1] as string)
 
             const period = watch("period")
 
@@ -88,9 +88,9 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
 
         const time = formData.time.split(":")
         const hours = parseInt(
-            `${period === "AM" ? time[0] : parseInt(time[0]) + 12 === 24 ? "00" : parseInt(time[0]) + 12}`
+            `${period === "AM" ? time[0] : parseInt(time[0] ?? "") + 12 === 24 ? "00" : parseInt(time[0] ?? "") + 12}`
         )
-        const minutes = parseInt(time[1])
+        const minutes = parseInt(time[1] ?? "")
 
         const dateTime = new Date(formData.date)
         dateTime.setHours(hours)
@@ -99,11 +99,7 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
         await handleSubmitSnooze(notification.id, dateTime).then(() => {
             handleClose()
             onSuccess()
-            toast.error({
-                title: "Notification snoozed",
-                message: "Notification snoozed successfully",
-                type: "success",
-            })
+            toast.success("Notification snoozed successfully")
         })
     }
 

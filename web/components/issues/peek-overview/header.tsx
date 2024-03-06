@@ -88,11 +88,7 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
         e.stopPropagation()
         e.preventDefault()
         copyUrlToClipboard(issueLink).then(() => {
-            toast.error({
-                type: "success",
-                title: "Link Copied!",
-                message: "Issue link copied to clipboard.",
-            })
+            toast.success("Issue link copied to clipboard.")
         })
     }
     const redirectToIssueDetail = () => {

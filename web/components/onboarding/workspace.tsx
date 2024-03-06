@@ -46,11 +46,7 @@ export const Workspace: React.FC<Props> = (props) => {
 
                     await createWorkspace(formData)
                         .then(async (res) => {
-                            toast.error({
-                                type: "success",
-                                
-                                message: "Workspace created successfully.",
-                            })
+                            toast.success("Workspace created successfully.")
                             captureWorkspaceEvent({
                                 eventName: WORKSPACE_CREATED,
                                 payload: {
@@ -72,18 +68,12 @@ export const Workspace: React.FC<Props> = (props) => {
                                     element: "Onboarding",
                                 },
                             })
-                            toast.error({
-                                
-                                title: "Error!",
-                                message: "Workspace could not be created. Please try again.",
-                            })
+                            toast.error("Workspace could not be created. Please try again.")
                         })
                 } else setSlugError(true)
             })
             .catch(() =>
-                toast.error({
-                    message: "Some error occurred while creating workspace. Please try again.",
-                })
+                toast.error("Some error occurred while creating workspace. Please try again.")
             )
     }
 

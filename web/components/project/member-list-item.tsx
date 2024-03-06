@@ -57,20 +57,13 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                     router.push(`/${workspaceSlug}/projects`)
                 })
                 .catch((err) =>
-                    toast.error({
-                        
-                        title: "Error",
-                        message: err?.error || "Something went wrong. Please try again.",
-                    })
+                    toast.error(err?.error || "Something went wrong. Please try again.")
                 )
         } else
             await removeMemberFromProject(workspaceSlug.toString(), projectId.toString(), userDetails.member.id).catch(
                 (err) =>
-                    toast.error({
-                        
-                        title: "Error",
-                        message: err?.error || "Something went wrong. Please try again.",
-                    })
+                    toast.error(err?.error || "Something went wrong. Please try again.",
+                    )
             )
     }
 
@@ -150,11 +143,8 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                                 const error = err.error
                                 const errorString = Array.isArray(error) ? error[0] : error
 
-                                toast.error({
-                                    message:
-                                        errorString ??
-                                        "An error occurred while updating member role. Please try again.",
-                                })
+                                toast.error(errorString ??
+                                        "An error occurred while updating member role. Please try again.")
                             })
                         }}
                         disabled={
