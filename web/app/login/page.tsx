@@ -18,7 +18,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { Button, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link.js";
-// Context
+
 
 export default function Login(): JSX.Element {
   const searchParams = useSearchParams();

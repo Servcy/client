@@ -6,7 +6,7 @@ import { SyncOutlined } from "@ant-design/icons";
 import { Analytics } from "@vercel/analytics/react";
 import { Spin } from "antd";
 import { Toaster } from "react-hot-toast";
-// Context
+
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // Styles
 import "@/styles/globals.css";

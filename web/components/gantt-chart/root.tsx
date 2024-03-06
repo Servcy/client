@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { ChartViewRoot, IBlockUpdateData, IGanttBlock } from "@components/gantt-chart";
-// context
+
 import { GanttStoreProvider } from "@components/gantt-chart/contexts";
 
 type GanttChartRootProps = {
