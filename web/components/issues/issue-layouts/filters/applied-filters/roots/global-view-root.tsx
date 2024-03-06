@@ -1,11 +1,16 @@
 import { useRouter } from "next/router"
+
+import isEqual from "lodash/isEqual"
+import { observer } from "mobx-react-lite"
+
 import { AppliedFiltersList } from "@components/issues"
+
+import { useEventTracker, useGlobalView, useIssues, useLabel, useUser } from "@hooks/store"
+
 import { GLOBAL_VIEW_UPDATED } from "@constants/event-tracker"
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace"
-import { useEventTracker, useGlobalView, useIssues, useLabel, useUser } from "@hooks/store"
-import isEqual from "lodash/isEqual"
-import { observer } from "mobx-react-lite"
+
 import { IIssueFilterOptions, TStaticViewTypes } from "@servcy/types"
 //ui
 import { Button } from "@servcy/ui"

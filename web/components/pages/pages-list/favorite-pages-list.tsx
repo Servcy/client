@@ -1,7 +1,11 @@
 import { FC } from "react"
-import { PagesListView } from "@components/pages/pages-list"
-import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+
 import { observer } from "mobx-react-lite"
+
+import { PagesListView } from "@components/pages/pages-list"
+
+import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+
 import { Loader } from "@servcy/ui"
 
 export const FavoritePagesList: FC = observer(() => {

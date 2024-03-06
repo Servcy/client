@@ -1,7 +1,10 @@
 import React, { FC } from "react"
-import { UserService } from "@services/user.service"
+
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { UserService } from "@services/user.service"
+
 import { IUserEmailNotificationSettings } from "@servcy/types"
 import { Button, Checkbox } from "@servcy/ui"
 

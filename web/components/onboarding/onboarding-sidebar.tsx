@@ -1,6 +1,7 @@
 import Image from "next/image"
+
 import React, { useEffect } from "react"
-import { useUser, useWorkspace } from "@hooks/store"
+
 import {
     BarChart2,
     Bell,
@@ -18,6 +19,9 @@ import {
 import { useTheme } from "next-themes"
 import projectEmoji from "public/emoji/project-emoji.svg"
 import { Control, Controller, UseFormSetValue, UseFormWatch } from "react-hook-form"
+
+import { useUser, useWorkspace } from "@hooks/store"
+
 import { IWorkspace } from "@servcy/types"
 import { Avatar, DiceIcon, PhotoFilterIcon } from "@servcy/ui"
 

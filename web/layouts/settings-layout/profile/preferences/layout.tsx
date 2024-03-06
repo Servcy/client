@@ -1,12 +1,19 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { FC, ReactNode } from "react"
+
+import { ChevronDown } from "lucide-react"
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
 import { useApplication } from "@hooks/store"
+
 // layout
 import { ProfileSettingsLayout } from "@layouts/settings-layout"
-import { ChevronDown } from "lucide-react"
+
 import { CustomMenu } from "@servcy/ui"
+
 import { ProfilePreferenceSettingsSidebar } from "./sidebar"
 
 interface IProfilePreferenceSettingsLayout {

@@ -1,12 +1,19 @@
 import Link from "next/link"
+
 import { useEffect } from "react"
-import { WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
-import { PROJECT_BACKGROUND_COLORS } from "@constants/dashboard"
-import { EUserWorkspaceRoles } from "@constants/workspace"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { useApplication, useDashboard, useEventTracker, useProject, useUser } from "@hooks/store"
+
 import { Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
+
+import { useApplication, useDashboard, useEventTracker, useProject, useUser } from "@hooks/store"
+
+import { PROJECT_BACKGROUND_COLORS } from "@constants/dashboard"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { TRecentProjectsWidgetResponse } from "@servcy/types"
 import { Avatar, AvatarGroup } from "@servcy/ui"
 

@@ -1,11 +1,16 @@
 import Link from "next/link"
+
 import React, { useState } from "react"
-import { checkEmailValidity } from "@helpers/string.helper"
-import { AuthService } from "@services/auth.service"
+
 import { Eye, EyeOff, XCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { AuthService } from "@services/auth.service"
+
+import { checkEmailValidity } from "@helpers/string.helper"
+
 import { IPasswordSignInData } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

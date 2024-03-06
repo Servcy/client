@@ -1,6 +1,9 @@
-import { PAGE_ACCESS_SPECIFIERS } from "@constants/page"
-import { IPageStore } from "@store/page.store"
 import { Controller, useForm } from "react-hook-form"
+
+import { PAGE_ACCESS_SPECIFIERS } from "@constants/page"
+
+import { IPageStore } from "@store/page.store"
+
 import { IPage } from "@servcy/types"
 import { Button, Input, Tooltip } from "@servcy/ui"
 

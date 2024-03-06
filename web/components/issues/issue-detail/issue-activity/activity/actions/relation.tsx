@@ -1,9 +1,14 @@
 import { FC } from "react"
+
+import { observer } from "mobx-react"
+
 // component helpers
 import { issueRelationObject } from "@components/issues/issue-detail/relation-select"
+
 import { useIssueDetail } from "@hooks/store"
-import { observer } from "mobx-react"
+
 import { TIssueRelationTypes } from "@servcy/types"
+
 import { IssueActivityBlockComponent } from "./"
 
 type TIssueRelationActivity = { activityId: string; ends: "top" | "bottom" | undefined }

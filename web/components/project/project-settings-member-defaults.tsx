@@ -1,13 +1,19 @@
 import { useRouter } from "next/router"
+
 import { useEffect } from "react"
-import { MemberSelect } from "@components/project"
-import { PROJECT_MEMBERS } from "@constants/fetch-keys"
-import { EUserProjectRoles } from "@constants/project"
-import { useProject, useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import useSWR from "swr"
+
+import { MemberSelect } from "@components/project"
+
+import { useProject, useUser } from "@hooks/store"
+
+import { PROJECT_MEMBERS } from "@constants/fetch-keys"
+import { EUserProjectRoles } from "@constants/project"
+
 import { IProject, IUserLite, IWorkspace } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 

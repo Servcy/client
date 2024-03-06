@@ -1,7 +1,11 @@
 import { useRouter } from "next/router"
+
 import { ReactElement, useEffect } from "react"
+
 import { AppInstallationService } from "@services/app_installation.service"
+
 import { Spinner } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const appInstallationService = new AppInstallationService()

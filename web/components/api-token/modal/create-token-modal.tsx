@@ -1,13 +1,20 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { CreateApiTokenForm, GeneratedTokenDetails } from "@components/api-token"
-import { API_TOKENS_LIST } from "@constants/fetch-keys"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { csvDownload } from "@helpers/download.helper"
-import { APITokenService } from "@services/api_token.service"
 import toast from "react-hot-toast"
 import { mutate } from "swr"
+
+import { CreateApiTokenForm, GeneratedTokenDetails } from "@components/api-token"
+
+import { API_TOKENS_LIST } from "@constants/fetch-keys"
+
+import { APITokenService } from "@services/api_token.service"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { csvDownload } from "@helpers/download.helper"
+
 import { IApiToken } from "@servcy/types"
 
 type Props = {

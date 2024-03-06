@@ -1,14 +1,18 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { Fragment, useState } from "react"
+
 import { Menu, Transition } from "@headlessui/react"
-import { useApplication, useUser, useWorkspace } from "@hooks/store"
 import { Check, ChevronDown, CircleUserRound, LogOut, Mails, PlusSquare, Settings, UserCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
 import { usePopper } from "react-popper"
 import { mutate } from "swr"
+
+import { useApplication, useUser, useWorkspace } from "@hooks/store"
+
 import { IWorkspace } from "@servcy/types"
 import { Avatar, Loader } from "@servcy/ui"
 

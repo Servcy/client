@@ -1,6 +1,9 @@
 import React from "react"
-import { renderFormattedDate } from "@helpers/date-time.helper"
+
 import { observer } from "mobx-react-lite"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+
 import { TIssue } from "@servcy/types"
 
 type Props = {

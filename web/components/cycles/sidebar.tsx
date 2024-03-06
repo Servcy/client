@@ -1,22 +1,30 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect, useState } from "react"
-import { SidebarProgressStats } from "@components/core"
-import ProgressChart from "@components/core/sidebar/progress-chart"
-import { CycleDeleteModal } from "@components/cycles/delete-modal"
-import { DateRangeDropdown } from "@components/dropdowns"
-import { CYCLE_STATUS } from "@constants/cycle"
-import { CYCLE_UPDATED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { Disclosure, Transition } from "@headlessui/react"
-import { findHowManyDaysLeft, renderFormattedPayloadDate } from "@helpers/date-time.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
-import { CycleService } from "@services/cycle.service"
 import isEmpty from "lodash/isEmpty"
 import { AlertCircle, CalendarClock, ChevronDown, ChevronRight, LinkIcon, Trash2, UserCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { SidebarProgressStats } from "@components/core"
+import ProgressChart from "@components/core/sidebar/progress-chart"
+import { CycleDeleteModal } from "@components/cycles/delete-modal"
+import { DateRangeDropdown } from "@components/dropdowns"
+
+import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
+
+import { CYCLE_STATUS } from "@constants/cycle"
+import { CYCLE_UPDATED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
+import { CycleService } from "@services/cycle.service"
+
+import { findHowManyDaysLeft, renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { ICycle } from "@servcy/types"
 import { Avatar, CustomMenu, LayersIcon, Loader } from "@servcy/ui"
 

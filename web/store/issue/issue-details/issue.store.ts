@@ -1,7 +1,10 @@
-import { IssueArchiveService, IssueDraftService, IssueService } from "@services/issue"
 import { makeObservable } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { IssueArchiveService, IssueDraftService, IssueService } from "@services/issue"
+
 import { TIssue } from "@servcy/types"
+
 import { IIssueDetail } from "./root.store"
 
 export interface IIssueStoreActions {

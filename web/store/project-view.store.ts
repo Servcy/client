@@ -1,8 +1,11 @@
-import { ViewService } from "@services/view.service"
-import { RootStore } from "@store/root.store"
 import { set } from "lodash"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { ViewService } from "@services/view.service"
+
+import { RootStore } from "@store/root.store"
+
 import { IProjectView } from "@servcy/types"
 
 export interface IProjectViewStore {

@@ -1,6 +1,9 @@
 import { useRouter } from "next/router"
-import { commandGroups } from "@components/command-palette"
+
 import { Command } from "cmdk"
+
+import { commandGroups } from "@components/command-palette"
+
 import { IWorkspaceSearchResults } from "@servcy/types"
 
 type Props = {

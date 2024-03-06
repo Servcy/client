@@ -1,17 +1,23 @@
 import { ChangeEvent, FC, Fragment, useEffect, useState } from "react"
-import { ImagePickerPopover } from "@components/core"
-import { MemberDropdown } from "@components/dropdowns"
-import EmojiIconPicker from "@components/emoji-icon-picker"
-import { PROJECT_CREATED } from "@constants/event-tracker"
-import { NETWORK_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper"
-import { useEventTracker, useProject, useUser } from "@hooks/store"
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { ImagePickerPopover } from "@components/core"
+import { MemberDropdown } from "@components/dropdowns"
+import EmojiIconPicker from "@components/emoji-icon-picker"
+
+import { useEventTracker, useProject, useUser } from "@hooks/store"
+
+import { PROJECT_CREATED } from "@constants/event-tracker"
+import { NETWORK_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
+import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper"
+
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui"
 
 type Props = {

@@ -1,13 +1,17 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React from "react"
-import { useUser } from "@hooks/store"
-import DefaultLayout from "@layouts/DefaultLayout"
+
 import { observer } from "mobx-react-lite"
 // images
 import ProjectNotAuthorizedImg from "public/auth/project-not-authorized.svg"
 import WorkspaceNotAuthorizedImg from "public/auth/workspace-not-authorized.svg"
+
+import { useUser } from "@hooks/store"
+
+import DefaultLayout from "@layouts/DefaultLayout"
 
 type Props = {
     actionButton?: React.ReactNode

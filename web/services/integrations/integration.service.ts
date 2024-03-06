@@ -1,6 +1,8 @@
 // helper
-import { API_BASE_URL } from "@helpers/common.helper"
 import { APIService } from "@services/api.service"
+
+import { API_BASE_URL } from "@helpers/common.helper"
+
 import { IAppIntegration, IExportServiceResponse, IImporterService, IWorkspaceIntegration } from "@servcy/types"
 
 export class IntegrationService extends APIService {

@@ -6,6 +6,7 @@ import {
     ModulePausedIcon,
     ModulePlannedIcon,
 } from "@components/icons"
+
 import { TModuleStatus } from "@servcy/types"
 
 type Props = {

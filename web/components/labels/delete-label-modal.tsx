@@ -1,10 +1,14 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useLabel } from "@hooks/store"
 import { AlertTriangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useLabel } from "@hooks/store"
+
 import type { IIssueLabel } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

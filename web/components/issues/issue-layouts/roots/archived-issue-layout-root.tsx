@@ -1,5 +1,10 @@
 import { useRouter } from "next/router"
+
 import React, { Fragment } from "react"
+
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import {
     ArchivedIssueAppliedFiltersRoot,
     ArchivedIssueListLayout,
@@ -7,11 +12,11 @@ import {
     ProjectArchivedEmptyState,
 } from "@components/issues"
 import { ListLayoutLoader } from "@components/ui"
-import { EIssuesStoreType } from "@constants/issue"
+
 // mobx store
 import { useIssues } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
+import { EIssuesStoreType } from "@constants/issue"
 
 export const ArchivedIssueLayoutRoot: React.FC = observer(() => {
     // router

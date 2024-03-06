@@ -1,12 +1,14 @@
+import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
+import { MoreVertical } from "lucide-react"
+import { observer } from "mobx-react"
+
 import { BLOCK_HEIGHT } from "@components/gantt-chart/constants"
 import { useGanttChart } from "@components/gantt-chart/hooks"
 import { IGanttBlock } from "@components/gantt-chart/types"
 import { ModuleGanttSidebarBlock } from "@components/modules"
-import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
+
 import { cn } from "@helpers/common.helper"
 import { findTotalDaysInRange } from "@helpers/date-time.helper"
-import { MoreVertical } from "lucide-react"
-import { observer } from "mobx-react"
 
 type Props = {
     block: IGanttBlock

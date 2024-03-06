@@ -1,12 +1,19 @@
 import Image from "next/image"
+
 import React from "react"
-import { SignUpRoot } from "@components/account"
-import { PageHead } from "@components/core"
-import { useApplication, useUser } from "@hooks/store"
-import DefaultLayout from "@layouts/DefaultLayout"
+
 import { observer } from "mobx-react-lite"
 import ServcyLogo from "public/logo.png"
+
+import { SignUpRoot } from "@components/account"
+import { PageHead } from "@components/core"
+
+import { useApplication, useUser } from "@hooks/store"
+
+import DefaultLayout from "@layouts/DefaultLayout"
+
 import { Spinner } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const SignUpPage: NextPageWithLayout = observer(() => {

@@ -1,15 +1,22 @@
 import { FC, useEffect, useState } from "react"
-import { ImagePickerPopover } from "@components/core"
-import EmojiIconPicker from "@components/emoji-icon-picker"
-import { PROJECT_UPDATED } from "@constants/event-tracker"
-import { NETWORK_CHOICES } from "@constants/project"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { useEventTracker, useProject } from "@hooks/store"
-import { ProjectService } from "@services/project"
+
 import { Lock } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { ImagePickerPopover } from "@components/core"
+import EmojiIconPicker from "@components/emoji-icon-picker"
+
+import { useEventTracker, useProject } from "@hooks/store"
+
+import { PROJECT_UPDATED } from "@constants/event-tracker"
+import { NETWORK_CHOICES } from "@constants/project"
+
+import { ProjectService } from "@services/project"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { IProject, IWorkspace } from "@servcy/types"
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui"
 

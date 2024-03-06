@@ -1,8 +1,12 @@
 import React, { useState } from "react"
-import { FilterHeader, FilterOption } from "@components/issues"
-import { useApplication, useCycle } from "@hooks/store"
+
 import sortBy from "lodash/sortBy"
 import { observer } from "mobx-react"
+
+import { FilterHeader, FilterOption } from "@components/issues"
+
+import { useApplication, useCycle } from "@hooks/store"
+
 import { TCycleGroups } from "@servcy/types"
 import { CycleGroupIcon, Loader } from "@servcy/ui"
 

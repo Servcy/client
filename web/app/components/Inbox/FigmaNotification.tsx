@@ -1,4 +1,5 @@
 import { HiExternalLink } from "react-icons/hi"
+
 import type { Comment, FigmaNotificationProps, Mention } from "@/types/integrations/figma"
 
 const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; cause: string }) => {

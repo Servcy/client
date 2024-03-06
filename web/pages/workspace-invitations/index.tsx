@@ -1,14 +1,23 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
-import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space"
-import { WORKSPACE_INVITATION } from "@constants/fetch-keys"
-import { useUser } from "@hooks/store"
-import DefaultLayout from "@layouts/DefaultLayout"
-import { WorkspaceService } from "@services/workspace.service"
+
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
+
+import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space"
+
+import { useUser } from "@hooks/store"
+
+import DefaultLayout from "@layouts/DefaultLayout"
+
+import { WORKSPACE_INVITATION } from "@constants/fetch-keys"
+
+import { WorkspaceService } from "@services/workspace.service"
+
 import { Spinner } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const workspaceService = new WorkspaceService()

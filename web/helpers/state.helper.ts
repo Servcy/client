@@ -1,4 +1,5 @@
 import { STATE_GROUPS } from "@constants/state"
+
 import { IState, IStateResponse } from "@servcy/types"
 
 export const orderStateGroups = (unorderedStateGroups: IStateResponse | undefined): IStateResponse | undefined => {

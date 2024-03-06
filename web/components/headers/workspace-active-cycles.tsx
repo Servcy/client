@@ -1,7 +1,9 @@
-import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import { Crown } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
 import { Breadcrumbs, ContrastIcon } from "@servcy/ui"
 
 export const WorkspaceActiveCycleHeader = observer(() => (

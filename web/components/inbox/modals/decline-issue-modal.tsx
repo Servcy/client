@@ -1,7 +1,10 @@
 import React, { useState } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useProject } from "@hooks/store"
 import { AlertTriangle } from "lucide-react"
+
+import { useProject } from "@hooks/store"
+
 import type { TIssue } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

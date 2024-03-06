@@ -1,5 +1,10 @@
 import { useRouter } from "next/router"
+
 import { ReactElement, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { ProjectSettingHeader } from "@components/headers"
 import {
@@ -8,11 +13,12 @@ import {
     ProjectDetailsForm,
     ProjectDetailsFormLoader,
 } from "@components/project"
+
 import { useProject } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
 import { ProjectSettingLayout } from "@layouts/settings-layout"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const GeneralSettingsPage: NextPageWithLayout = observer(() => {

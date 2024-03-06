@@ -1,9 +1,7 @@
 import { useRouter } from "next/router"
+
 import { useEffect } from "react"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { capitalizeFirstLetter } from "@helpers/string.helper"
-// store hooks
-import { useEstimate, useLabel } from "@hooks/store"
+
 import {
     ArchiveIcon,
     Calendar,
@@ -20,6 +18,13 @@ import {
     UsersIcon,
 } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+// store hooks
+import { useEstimate, useLabel } from "@hooks/store"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { capitalizeFirstLetter } from "@helpers/string.helper"
+
 import { IIssueActivity } from "@servcy/types"
 import { BlockedIcon, BlockerIcon, DiceIcon, LayersIcon, RelatedIcon, Tooltip } from "@servcy/ui"
 

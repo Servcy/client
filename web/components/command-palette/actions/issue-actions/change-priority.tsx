@@ -1,10 +1,14 @@
 import { useRouter } from "next/router"
-import { EIssuesStoreType, ISSUE_PRIORITIES } from "@constants/issue"
-// mobx store
-import { useIssues } from "@hooks/store"
+
 import { Command } from "cmdk"
 import { Check } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+// mobx store
+import { useIssues } from "@hooks/store"
+
+import { EIssuesStoreType, ISSUE_PRIORITIES } from "@constants/issue"
+
 import { TIssue, TIssuePriorities } from "@servcy/types"
 import { PriorityIcon } from "@servcy/ui"
 

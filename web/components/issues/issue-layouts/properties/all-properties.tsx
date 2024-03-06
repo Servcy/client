@@ -1,5 +1,11 @@
 import { useRouter } from "next/router"
+
 import { useCallback, useMemo } from "react"
+
+import xor from "lodash/xor"
+import { CalendarCheck2, CalendarClock, Layers, Link, Paperclip } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import {
     CycleDropdown,
     DateDropdown,
@@ -9,17 +15,19 @@ import {
     PriorityDropdown,
     StateDropdown,
 } from "@components/dropdowns"
+
+import { useEstimate, useEventTracker, useIssues, useLabel, useProjectState } from "@hooks/store"
+
 import { ISSUE_UPDATED } from "@constants/event-tracker"
 import { EIssuesStoreType } from "@constants/issue"
+
 import { cn } from "@helpers/common.helper"
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
 import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
-import { useEstimate, useEventTracker, useIssues, useLabel, useProjectState } from "@hooks/store"
-import xor from "lodash/xor"
-import { CalendarCheck2, CalendarClock, Layers, Link, Paperclip } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
 import { IIssueDisplayProperties, TIssue, TIssuePriorities } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
+
 import { IssuePropertyLabels } from "../properties/labels"
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
 

@@ -1,5 +1,7 @@
-import { RootStore } from "@store/root.store"
 import { computed, makeObservable } from "mobx"
+
+import { RootStore } from "@store/root.store"
+
 // editor
 import { IMentionHighlight, IMentionSuggestion } from "@servcy/lite-text-editor"
 

@@ -1,10 +1,15 @@
 import { ReactElement } from "react"
+
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { EmailNotificationForm } from "@components/profile/preferences"
 import { EmailSettingsLoader } from "@components/ui"
+
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences"
+
 import { UserService } from "@services/user.service"
-import useSWR from "swr"
+
 // type
 import { NextPageWithLayout } from "@/types/types"
 

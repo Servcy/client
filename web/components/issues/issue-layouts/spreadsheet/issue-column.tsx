@@ -1,9 +1,15 @@
 import { useRouter } from "next/router"
+
 import { useRef } from "react"
-import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet"
-import { useEventTracker } from "@hooks/store"
+
 import { observer } from "mobx-react"
+
+import { useEventTracker } from "@hooks/store"
+
+import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet"
+
 import { IIssueDisplayProperties, TIssue } from "@servcy/types"
+
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
 import { EIssueActions } from "../types"
 

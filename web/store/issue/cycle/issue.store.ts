@@ -1,12 +1,15 @@
-import { CycleService } from "@services/cycle.service"
-import { IssueService } from "@services/issue"
 import concat from "lodash/concat"
 import pull from "lodash/pull"
 import set from "lodash/set"
 import uniq from "lodash/uniq"
 import update from "lodash/update"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
+import { CycleService } from "@services/cycle.service"
+import { IssueService } from "@services/issue"
+
 import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types"
+
 // base class
 import { IssueHelperStore } from "../helpers/issue-helper.store"
 import { IIssueRootStore } from "../root.store"

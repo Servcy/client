@@ -1,10 +1,15 @@
 import Link from "next/link"
+
 import React from "react"
-import { checkEmailValidity } from "@helpers/string.helper"
-import { useApplication, useEventTracker, useProject } from "@hooks/store"
+
 import { Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useFormContext } from "react-hook-form"
+
+import { useApplication, useEventTracker, useProject } from "@hooks/store"
+
+import { checkEmailValidity } from "@helpers/string.helper"
+
 import { IJiraImporterForm } from "@servcy/types"
 import { CustomSelect, Input } from "@servcy/ui"
 

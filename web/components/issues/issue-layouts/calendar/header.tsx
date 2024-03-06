@@ -1,11 +1,14 @@
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import { CalendarMonthsDropdown, CalendarOptionsDropdown } from "@components/issues"
+
 import { useCalendarView } from "@hooks/store/use-calendar-view"
+
 import { ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssuesFilter } from "@store/issue/module"
 import { IProjectIssuesFilter } from "@store/issue/project"
 import { IProjectViewIssuesFilter } from "@store/issue/project-views"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { observer } from "mobx-react-lite"
 
 interface ICalendarHeader {
     issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter

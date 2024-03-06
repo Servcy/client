@@ -1,16 +1,22 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+import emptyCycle from "public/empty-state/cycle.svg"
+import useSWR from "swr"
+
 import { EmptyState } from "@components/common"
 import { PageHead } from "@components/core"
 import { CycleDetailsSidebar } from "@components/cycles"
 import { CycleIssuesHeader } from "@components/headers"
 import { CycleLayoutRoot } from "@components/issues/issue-layouts"
+
 import { useCycle, useProject } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
+
 import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react"
-import emptyCycle from "public/empty-state/cycle.svg"
-import useSWR from "swr"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const CycleDetailPage: NextPageWithLayout = observer(() => {

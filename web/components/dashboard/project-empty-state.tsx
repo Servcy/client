@@ -1,8 +1,12 @@
 import Image from "next/image"
-import { EUserWorkspaceRoles } from "@constants/workspace"
-import { useApplication, useEventTracker, useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import ProjectEmptyStateImage from "public/empty-state/dashboard/project.svg"
+
+import { useApplication, useEventTracker, useUser } from "@hooks/store"
+
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { Button } from "@servcy/ui"
 
 export const DashboardProjectEmptyState = observer(() => {

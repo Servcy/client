@@ -1,4 +1,5 @@
 import { FC, Fragment } from "react"
+
 // component
 import { Popover, Transition } from "@headlessui/react"
 import { Palette } from "lucide-react"
@@ -15,6 +16,7 @@ import {
     UseFormSetValue,
     UseFormWatch,
 } from "react-hook-form"
+
 import { IUserTheme } from "@servcy/types"
 import { Input } from "@servcy/ui"
 

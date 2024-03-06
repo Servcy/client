@@ -1,5 +1,7 @@
 import { FC } from "react"
+
 import { useIssueDetail } from "@hooks/store"
+
 import { Tooltip } from "@servcy/ui"
 
 type TIssueLink = {

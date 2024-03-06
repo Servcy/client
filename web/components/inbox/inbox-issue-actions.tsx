@@ -1,19 +1,25 @@
 import { useRouter } from "next/router"
+
 import { FC, useCallback, useEffect, useMemo, useState } from "react"
+
+import { Popover } from "@headlessui/react"
+import { CheckCircle2, ChevronDown, ChevronUp, Clock, FileStack, Trash2, XCircle } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { DayPicker } from "react-day-picker"
+import toast from "react-hot-toast"
+
 import {
     AcceptIssueModal,
     DeclineIssueModal,
     DeleteInboxIssueModal,
     SelectDuplicateInboxIssueModal,
 } from "@components/inbox"
+
+import { useEventTracker, useInboxIssues, useIssueDetail, useUser, useWorkspace } from "@hooks/store"
+
 import { ISSUE_DELETED } from "@constants/event-tracker"
 import { EUserProjectRoles } from "@constants/project"
-import { Popover } from "@headlessui/react"
-import { useEventTracker, useInboxIssues, useIssueDetail, useUser, useWorkspace } from "@hooks/store"
-import { CheckCircle2, ChevronDown, ChevronUp, Clock, FileStack, Trash2, XCircle } from "lucide-react"
-import { observer } from "mobx-react-lite"
-import { DayPicker } from "react-day-picker"
-import toast from "react-hot-toast"
+
 import type { TInboxDetailedStatus, TInboxStatus } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

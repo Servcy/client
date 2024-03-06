@@ -1,10 +1,12 @@
 //services
-import { IssueService } from "@services/issue"
 import isEmpty from "lodash/isEmpty"
 import set from "lodash/set"
 // store
 import { action, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { IssueService } from "@services/issue"
+
 import { TIssue } from "@servcy/types"
 
 export type IIssueStore = {

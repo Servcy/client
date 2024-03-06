@@ -1,12 +1,19 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useProject, useUser } from "@hooks/store"
+
 import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project"
+
 // helper
 import { renderEmoji } from "@helpers/emoji.helper"
-import { useProject, useUser } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { Breadcrumbs, CustomMenu } from "@servcy/ui"
 
 export interface IProjectSettingHeader {

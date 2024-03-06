@@ -1,14 +1,19 @@
 import { useState } from "react"
-import { ExistingIssuesListModal } from "@components/core"
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { CYCLE_EMPTY_STATE_DETAILS, EMPTY_FILTER_STATE_DETAILS } from "@constants/empty-state"
-import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
-import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store"
+
 import { PlusIcon } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
+
+import { ExistingIssuesListModal } from "@components/core"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+
+import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store"
+
+import { CYCLE_EMPTY_STATE_DETAILS, EMPTY_FILTER_STATE_DETAILS } from "@constants/empty-state"
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+
 import { ISearchIssueResponse, TIssueLayouts } from "@servcy/types"
 
 type Props = {

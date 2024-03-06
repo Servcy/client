@@ -1,6 +1,8 @@
-import { useCycle } from "@hooks/store"
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { useCycle } from "@hooks/store"
+
 import { TCycleGroups } from "@servcy/types"
 import { CycleGroupIcon } from "@servcy/ui"
 

@@ -1,13 +1,18 @@
 import { useState } from "react"
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { ViewListLoader } from "@components/ui"
-import { ProjectViewListItem } from "@components/views"
-import { VIEW_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserProjectRoles } from "@constants/project"
-import { useApplication, useProjectView, useUser } from "@hooks/store"
+
 import { Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
+
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { ViewListLoader } from "@components/ui"
+import { ProjectViewListItem } from "@components/views"
+
+import { useApplication, useProjectView, useUser } from "@hooks/store"
+
+import { VIEW_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserProjectRoles } from "@constants/project"
+
 import { Input } from "@servcy/ui"
 
 export const ProjectViewsList = observer(() => {

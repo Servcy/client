@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
+
 import React from "react"
-import { IssuePeekOverview } from "@components/issues/peek-overview"
-import { ActiveLoader } from "@components/ui"
-import { EIssuesStoreType } from "@constants/issue"
-import { useIssues } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
+
+import { IssuePeekOverview } from "@components/issues/peek-overview"
+import { ActiveLoader } from "@components/ui"
+
+import { useIssues } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { ProjectDraftEmptyState } from "../empty-states"
 import { DraftIssueAppliedFiltersRoot } from "../filters/applied-filters/roots/draft-issue"
 import { DraftKanBanLayout } from "../kanban/roots/draft-issue-root"

@@ -1,5 +1,7 @@
-import { useWebhook } from "@hooks/store"
 import { observer } from "mobx-react-lite"
+
+import { useWebhook } from "@hooks/store"
+
 import { WebhooksListItem } from "./webhooks-list-item"
 
 export const WebhooksList = observer(() => {

@@ -1,6 +1,9 @@
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store"
 import { observer } from "mobx-react"
+
+import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+
 import { ControlLink, StateGroupIcon, Tooltip } from "@servcy/ui"
 
 type Props = {

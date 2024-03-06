@@ -1,7 +1,10 @@
 import { FC, MutableRefObject } from "react"
+
 import RenderIfVisible from "@components/core/render-if-visible-HOC"
 import { IssueBlock } from "@components/issues"
+
 import { IIssueDisplayProperties, TGroupedIssues, TIssue, TIssueMap, TUnGroupedIssues } from "@servcy/types"
+
 import { EIssueActions } from "../types"
 
 interface Props {

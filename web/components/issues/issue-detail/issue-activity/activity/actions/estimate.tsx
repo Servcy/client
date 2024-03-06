@@ -1,7 +1,10 @@
 import { FC } from "react"
-import { useEstimate, useIssueDetail } from "@hooks/store"
+
 import { Triangle } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { useEstimate, useIssueDetail } from "@hooks/store"
+
 import { IssueActivityBlockComponent, IssueLink } from "./"
 
 type TIssueEstimateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }

@@ -1,11 +1,16 @@
 import React from "react"
+
+import { CalendarCheck2 } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import { DateDropdown } from "@components/dropdowns"
+
+import { useProjectState } from "@hooks/store"
+
 import { cn } from "@helpers/common.helper"
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
 import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
-import { useProjectState } from "@hooks/store"
-import { CalendarCheck2 } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
 import { TIssue } from "@servcy/types"
 
 type Props = {

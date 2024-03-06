@@ -1,12 +1,19 @@
 import React, { useState } from "react"
-import { ESignUpSteps } from "@components/account"
-import { PASSWORD_CREATE_SELECTED, PASSWORD_CREATE_SKIPPED, SETUP_PASSWORD } from "@constants/event-tracker"
-import { checkEmailValidity } from "@helpers/string.helper"
-import { useEventTracker } from "@hooks/store"
-import { AuthService } from "@services/auth.service"
+
 import { Eye, EyeOff } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { ESignUpSteps } from "@components/account"
+
+import { useEventTracker } from "@hooks/store"
+
+import { PASSWORD_CREATE_SELECTED, PASSWORD_CREATE_SKIPPED, SETUP_PASSWORD } from "@constants/event-tracker"
+
+import { AuthService } from "@services/auth.service"
+
+import { checkEmailValidity } from "@helpers/string.helper"
+
 import { Button, Input } from "@servcy/ui"
 
 type Props = {

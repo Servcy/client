@@ -1,14 +1,20 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+import emptyView from "public/empty-state/view.svg"
+import useSWR from "swr"
+
 import { EmptyState } from "@components/common"
 import { PageHead } from "@components/core"
 import { ProjectViewIssuesHeader } from "@components/headers"
 import { ProjectViewLayoutRoot } from "@components/issues"
+
 import { useProject, useProjectView } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react"
-import emptyView from "public/empty-state/view.svg"
-import useSWR from "swr"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const ProjectViewIssuesPage: NextPageWithLayout = observer(() => {

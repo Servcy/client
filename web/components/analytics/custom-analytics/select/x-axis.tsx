@@ -1,5 +1,7 @@
 import { useRouter } from "next/router"
+
 import { ANALYTICS_X_AXIS_VALUES } from "@constants/analytics"
+
 import { IAnalyticsParams, TXAxisValues } from "@servcy/types"
 import { CustomSelect } from "@servcy/ui"
 

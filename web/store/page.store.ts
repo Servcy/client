@@ -1,6 +1,9 @@
-import { PageService } from "@services/page.service"
 import { action, makeObservable, observable, reaction, runInAction } from "mobx"
+
+import { PageService } from "@services/page.service"
+
 import { IIssueLabel, IPage } from "@servcy/types"
+
 import { RootStore } from "./root.store"
 
 export interface IPageStore {

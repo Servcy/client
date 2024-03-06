@@ -1,5 +1,7 @@
 import Link from "next/link"
+
 import { FC } from "react"
+
 import { useIssueDetail } from "@hooks/store"
 
 type TIssueUser = {

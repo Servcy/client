@@ -1,14 +1,20 @@
 import { Fragment, ReactNode, useEffect, useRef, useState } from "react"
-import { ISSUE_PRIORITIES } from "@constants/issue"
+
 import { Combobox } from "@headlessui/react"
-import { cn } from "@helpers/common.helper"
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 import { Check, ChevronDown, Search } from "lucide-react"
 import { useTheme } from "next-themes"
 import { usePopper } from "react-popper"
+
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { ISSUE_PRIORITIES } from "@constants/issue"
+
+import { cn } from "@helpers/common.helper"
+
 import { TIssuePriorities } from "@servcy/types"
 import { PriorityIcon, Tooltip } from "@servcy/ui"
+
 import { BACKGROUND_BUTTON_VARIANTS, BORDER_BUTTON_VARIANTS, BUTTON_VARIANTS_WITHOUT_TEXT } from "./constants"
 import { TDropdownProps } from "./types"
 

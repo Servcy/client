@@ -1,8 +1,12 @@
 import { useEffect } from "react"
+
+import { Controller, useForm } from "react-hook-form"
+
 import { DateRangeDropdown, MemberDropdown, ProjectDropdown } from "@components/dropdowns"
 import { ModuleStatusSelect } from "@components/modules"
+
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
-import { Controller, useForm } from "react-hook-form"
+
 import { IModule } from "@servcy/types"
 import { Button, Input, TextArea } from "@servcy/ui"
 

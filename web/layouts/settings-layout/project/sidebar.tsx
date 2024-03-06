@@ -1,8 +1,12 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React from "react"
-import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project"
+
 import { useUser } from "@hooks/store"
+
+import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project"
+
 import { Loader } from "@servcy/ui"
 
 export const ProjectSettingsSidebar = () => {

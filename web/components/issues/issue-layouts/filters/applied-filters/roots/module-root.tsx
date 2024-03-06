@@ -1,8 +1,13 @@
 import { useRouter } from "next/router"
-import { AppliedFiltersList, SaveFilterView } from "@components/issues"
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
-import { useIssues, useLabel, useProjectState } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { AppliedFiltersList, SaveFilterView } from "@components/issues"
+
+import { useIssues, useLabel, useProjectState } from "@hooks/store"
+
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const ModuleAppliedFiltersRoot: React.FC = observer(() => {

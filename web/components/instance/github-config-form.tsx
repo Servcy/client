@@ -1,8 +1,11 @@
 import { FC, useState } from "react"
-import { useApplication } from "@hooks/store"
+
 import { Copy, Eye, EyeOff } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useApplication } from "@hooks/store"
+
 import { IFormattedInstanceConfiguration } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

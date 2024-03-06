@@ -1,13 +1,7 @@
 import { useRouter } from "next/router"
+
 import React, { useRef, useState } from "react"
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import {
-    CreateUpdateLabelInline,
-    DeleteLabelModal,
-    ProjectSettingLabelGroup,
-    ProjectSettingLabelItem,
-} from "@components/labels"
-import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+
 import {
     DragDropContext,
     Draggable,
@@ -16,10 +10,22 @@ import {
     Droppable,
     DropResult,
 } from "@hello-pangea/dnd"
-import { useLabel, useUser } from "@hooks/store"
-import useDraggableInPortal from "@hooks/use-draggable-portal"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
+
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import {
+    CreateUpdateLabelInline,
+    DeleteLabelModal,
+    ProjectSettingLabelGroup,
+    ProjectSettingLabelItem,
+} from "@components/labels"
+
+import { useLabel, useUser } from "@hooks/store"
+import useDraggableInPortal from "@hooks/use-draggable-portal"
+
+import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+
 import { IIssueLabel } from "@servcy/types"
 import { Button, Loader } from "@servcy/ui"
 

@@ -1,17 +1,25 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { useEffect, useRef } from "react"
-import { USER_PROFILE_PROJECT_SEGREGATION } from "@constants/fetch-keys"
+
 import { Disclosure, Transition } from "@headlessui/react"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { useApplication, useUser } from "@hooks/store"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
-import { UserService } from "@services/user.service"
 import { ChevronDown, Pencil } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
+
+import { useApplication, useUser } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { USER_PROFILE_PROJECT_SEGREGATION } from "@constants/fetch-keys"
+
+import { UserService } from "@services/user.service"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { Loader, Tooltip } from "@servcy/ui"
+
 import { ProfileSidebarTime } from "./time"
 
 const userService = new UserService()

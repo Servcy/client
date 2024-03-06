@@ -1,16 +1,23 @@
 import { useRouter } from "next/router"
+
 import { FC, useMemo } from "react"
-import { EmptyState } from "@components/common"
-import { IssuePeekOverview } from "@components/issues"
-import { ISSUE_ARCHIVED, ISSUE_DELETED, ISSUE_UPDATED } from "@constants/event-tracker"
-import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
-import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store"
+
 import { observer } from "mobx-react"
 // images
 import emptyIssue from "public/empty-state/issue.svg"
 import toast from "react-hot-toast"
+
+import { EmptyState } from "@components/common"
+import { IssuePeekOverview } from "@components/issues"
+
+import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store"
+
+import { ISSUE_ARCHIVED, ISSUE_DELETED, ISSUE_UPDATED } from "@constants/event-tracker"
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+
 import { TIssue } from "@servcy/types"
+
 import { IssueMainContent } from "./main-content"
 import { IssueDetailsSidebar } from "./sidebar"
 

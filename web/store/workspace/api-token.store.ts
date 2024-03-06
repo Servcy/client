@@ -1,8 +1,11 @@
 // mobx
-import { APITokenService } from "@services/api_token.service"
 import { action, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { APITokenService } from "@services/api_token.service"
+
 import { IApiToken } from "@servcy/types"
+
 import { RootStore } from "../root.store"
 
 export interface IApiTokenStore {

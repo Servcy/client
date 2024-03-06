@@ -1,6 +1,9 @@
-import { ANALYTICS_X_AXIS_VALUES, ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics"
-import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper"
 import { BarDatum } from "@nivo/bar"
+
+import { ANALYTICS_X_AXIS_VALUES, ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics"
+
+import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper"
+
 import { IAnalyticsParams, IAnalyticsResponse, TIssuePriorities } from "@servcy/types"
 import { PriorityIcon } from "@servcy/ui"
 

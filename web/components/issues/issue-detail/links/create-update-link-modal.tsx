@@ -1,8 +1,11 @@
 import { FC, Fragment, useEffect } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
 import { Controller, useForm } from "react-hook-form"
+
 import type { TIssueLinkEditableFields } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
+
 import { TLinkOperations } from "./root"
 
 export type TLinkOperationsModal = Exclude<TLinkOperations, "remove">

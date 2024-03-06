@@ -1,14 +1,21 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@components/views"
-import { EUserProjectRoles } from "@constants/project"
-import { calculateTotalFilters } from "@helpers/filter.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useProjectView, useUser } from "@hooks/store"
+
 import { LinkIcon, PencilIcon, StarIcon, TrashIcon } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@components/views"
+
+import { useProjectView, useUser } from "@hooks/store"
+
+import { EUserProjectRoles } from "@constants/project"
+
+import { calculateTotalFilters } from "@helpers/filter.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { IProjectView } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
 

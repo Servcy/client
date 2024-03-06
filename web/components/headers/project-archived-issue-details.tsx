@@ -1,13 +1,21 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
-import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { ISSUE_DETAILS } from "@constants/fetch-keys"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { useProject } from "@hooks/store"
-import { IssueArchiveService } from "@services/issue"
+
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
+
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useProject } from "@hooks/store"
+
+import { ISSUE_DETAILS } from "@constants/fetch-keys"
+
+import { IssueArchiveService } from "@services/issue"
+
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { TIssue } from "@servcy/types"
 import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 

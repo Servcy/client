@@ -1,6 +1,8 @@
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
+
 import { isJwtTokenValid } from "@/utils/Authentication/jwt"
+
 import { authRoutes, wipRoutes } from "@/constants/routes"
 
 export const config = {

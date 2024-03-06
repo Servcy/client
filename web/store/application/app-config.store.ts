@@ -1,5 +1,7 @@
-import { AppConfigService } from "@services/app_config.service"
 import { action, makeObservable, observable, runInAction } from "mobx"
+
+import { AppConfigService } from "@services/app_config.service"
+
 import { IAppConfig } from "@servcy/types"
 
 export interface IAppConfigStore {

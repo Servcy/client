@@ -1,7 +1,10 @@
 import Image from "next/image.js"
+
 import { useState } from "react"
+
 import cn from "classnames"
 import { AiOutlinePoweroff, AiOutlineSetting } from "react-icons/ai"
+
 import { sidebarOptions } from "@/constants/routes"
 
 export default function SideBar({ logOut }: { logOut: () => Promise<void> }): JSX.Element {

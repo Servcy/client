@@ -1,10 +1,13 @@
 // react
 import React from "react"
+
+// react-hook-form
+import { Control, Controller, UseFormWatch } from "react-hook-form"
+
 // common
 
 import { MODULE_STATUS } from "@constants/module"
-// react-hook-form
-import { Control, Controller, UseFormWatch } from "react-hook-form"
+
 import { IModule } from "@servcy/types"
 import { CustomSelect, DoubleCircleIcon } from "@servcy/ui"
 

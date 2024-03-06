@@ -1,9 +1,14 @@
 import { useEffect } from "react"
-import { AppliedFiltersList, FiltersDropdown, FilterSelection } from "@components/issues"
-import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { useLabel, useMember } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
+
+import { AppliedFiltersList, FiltersDropdown, FilterSelection } from "@components/issues"
+
+import { useLabel, useMember } from "@hooks/store"
+
+import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+
 import { IIssueFilterOptions, IWorkspaceView } from "@servcy/types"
 import { Button, Input, TextArea } from "@servcy/ui"
 

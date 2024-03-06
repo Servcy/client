@@ -1,9 +1,14 @@
 import { FC, useMemo } from "react"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { useIssueDetail } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useIssueDetail } from "@hooks/store"
+
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { IUser } from "@servcy/types"
+
 import { ReactionSelector } from "./reaction-selector"
 
 export type TIssueReaction = {

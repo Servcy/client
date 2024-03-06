@@ -1,12 +1,17 @@
 import { useRouter } from "next/router"
+
 import { FC, Fragment } from "react"
-import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useEventTracker, useUser } from "@hooks/store"
 import { AlertTriangleIcon } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useUser } from "@hooks/store"
+
+import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
+
 import { IProject } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

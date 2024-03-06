@@ -1,10 +1,14 @@
-import { sortStates } from "@helpers/state.helper"
-import { ProjectStateService } from "@services/project"
 import groupBy from "lodash/groupBy"
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { ProjectStateService } from "@services/project"
+
+import { sortStates } from "@helpers/state.helper"
+
 import { IState } from "@servcy/types"
+
 // store
 import { RootStore } from "./root.store"
 

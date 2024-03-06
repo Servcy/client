@@ -1,8 +1,11 @@
 import { Fragment, useState } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
+import toast from "react-hot-toast"
+
 import { useProject } from "@hooks/store"
 import { useIssues } from "@hooks/store/use-issues"
-import toast from "react-hot-toast"
+
 import { TIssue } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

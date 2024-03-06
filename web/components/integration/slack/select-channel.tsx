@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
+
 import { useEffect, useState } from "react"
-import { SLACK_CHANNEL_INFO } from "@constants/fetch-keys"
-import { useApplication } from "@hooks/store"
-import useIntegrationPopup from "@hooks/use-integration-popup"
-import { AppInstallationService } from "@services/app_installation.service"
+
 import { observer } from "mobx-react-lite"
 import useSWR, { mutate } from "swr"
+
+import { useApplication } from "@hooks/store"
+import useIntegrationPopup from "@hooks/use-integration-popup"
+
+import { SLACK_CHANNEL_INFO } from "@constants/fetch-keys"
+
+import { AppInstallationService } from "@services/app_installation.service"
+
 import { ISlackIntegration, IWorkspaceIntegration } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 

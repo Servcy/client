@@ -1,4 +1,5 @@
 import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import type { IProjectMember, IUser, IUserLite, IWorkspaceViewProps } from "@servcy/types"
 
 export interface IWorkspace {

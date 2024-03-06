@@ -1,7 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+
 import { AiFillApi, AiOutlineArrowRight, AiOutlineSetting } from "react-icons/ai"
+
 import { getQueryParams } from "@/utils/Shared"
 
 export default function SettingsLayout({ integrations }: { integrations: React.ReactNode }) {

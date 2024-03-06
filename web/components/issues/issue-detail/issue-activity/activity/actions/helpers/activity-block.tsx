@@ -1,8 +1,13 @@
 import { FC, ReactNode } from "react"
-import { calculateTimeAgo, renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
-import { useIssueDetail } from "@hooks/store"
+
 import { Network } from "lucide-react"
+
+import { useIssueDetail } from "@hooks/store"
+
+import { calculateTimeAgo, renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
+
 import { Tooltip } from "@servcy/ui"
+
 import { IssueUser } from "../"
 
 type TIssueActivityBlockComponent = {

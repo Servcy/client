@@ -1,7 +1,10 @@
 import Image from "next/image"
+
 import React from "react"
+
 // image
 import CMDIcon from "public/mac-command.svg"
+
 // type
 import type { ImageIconPros } from "./types"
 

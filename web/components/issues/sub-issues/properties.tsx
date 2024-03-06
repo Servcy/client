@@ -1,6 +1,9 @@
 import React from "react"
+
 import { MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
+
 import { useIssueDetail } from "@hooks/store"
+
 import { TSubIssueOperations } from "./root"
 
 export interface IIssueProperty {

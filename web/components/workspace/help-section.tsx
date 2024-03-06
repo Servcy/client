@@ -1,11 +1,15 @@
 import Link from "next/link"
+
 import React, { useRef, useState } from "react"
+
 import { Transition } from "@headlessui/react"
-import { useApplication } from "@hooks/store"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 import { HelpCircle, MessagesSquare, MoveLeft, Zap } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import packageJson from "package.json"
+
+import { useApplication } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
 import { Tooltip } from "@servcy/ui"
 
 const helpOptions = [

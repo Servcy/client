@@ -1,17 +1,22 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect } from "react"
+
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { IssuePeekOverview, ProfileIssuesAppliedFiltersRoot } from "@components/issues"
 import { ProfileIssuesKanBanLayout } from "@components/issues/issue-layouts/kanban/roots/profile-issues-root"
 import { ProfileIssuesListLayout } from "@components/issues/issue-layouts/list/roots/profile-issues-root"
 import { KanbanLayoutLoader, ListLayoutLoader } from "@components/ui"
+
+import { useIssues, useUser } from "@hooks/store"
+
 import { PROFILE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EIssuesStoreType } from "@constants/issue"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-import { useIssues, useUser } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
-import useSWR from "swr"
 
 interface IProfileIssuesPage {
     type: "assigned" | "subscribed" | "created"

@@ -1,6 +1,7 @@
-import { useApplication } from "@hooks/store"
 import { Command } from "cmdk"
 import { MessageSquare, Rocket } from "lucide-react"
+
+import { useApplication } from "@hooks/store"
 
 type Props = {
     closePalette: () => void

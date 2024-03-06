@@ -1,21 +1,30 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { ProjectSettingHeader } from "@components/headers"
 import { IntegrationCard } from "@components/project"
 import { IntegrationsSettingsLoader } from "@components/ui"
-import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { PROJECT_DETAILS, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
+
 import { useUser } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
 import { ProjectSettingLayout } from "@layouts/settings-layout"
+
+import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { PROJECT_DETAILS, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
+
 import { IntegrationService } from "@services/integrations"
 import { ProjectService } from "@services/project"
-import { observer } from "mobx-react"
-import { useTheme } from "next-themes"
-import useSWR from "swr"
+
 import { IProject } from "@servcy/types"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const integrationService = new IntegrationService()

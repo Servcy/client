@@ -1,12 +1,18 @@
 import React, { useState } from "react"
+
+import { CheckCircle2, Search } from "lucide-react"
+import useSWR, { mutate } from "swr"
+
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+
 import { MEMBER_ACCEPTED } from "@constants/event-tracker"
 import { USER_WORKSPACE_INVITATIONS, USER_WORKSPACES } from "@constants/fetch-keys"
 import { ROLE } from "@constants/workspace"
-import { truncateText } from "@helpers/string.helper"
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+
 import { WorkspaceService } from "@services/workspace.service"
-import { CheckCircle2, Search } from "lucide-react"
-import useSWR, { mutate } from "swr"
+
+import { truncateText } from "@helpers/string.helper"
+
 import { IWorkspaceMemberInvitation } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

@@ -1,7 +1,10 @@
 import { FC, Fragment, useState } from "react"
-import { ShortcutCommandsList } from "@components/command-palette"
+
 import { Dialog, Transition } from "@headlessui/react"
 import { Search, X } from "lucide-react"
+
+import { ShortcutCommandsList } from "@components/command-palette"
+
 import { Input } from "@servcy/ui"
 
 type Props = {

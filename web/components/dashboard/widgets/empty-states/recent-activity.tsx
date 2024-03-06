@@ -1,4 +1,5 @@
 import Image from "next/image"
+
 import { useTheme } from "next-themes"
 import DarkImage from "public/empty-state/dashboard/dark/recent-activity.svg"
 import LightImage from "public/empty-state/dashboard/light/recent-activity.svg"

@@ -1,9 +1,14 @@
 import Link from "next/link"
+
 import { FC } from "react"
-import { useIssues, useProject, useProjectState } from "@hooks/store"
+
 import { MinusCircle } from "lucide-react"
+
+import { useIssues, useProject, useProjectState } from "@hooks/store"
+
 import { TIssue } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
+
 import { TIssueOperations } from "../root"
 // component
 import { IssueParentSiblings } from "./siblings"

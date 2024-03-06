@@ -1,6 +1,9 @@
 import React from "react"
-import { useProject } from "@hooks/store"
+
 import { RefreshCw } from "lucide-react"
+
+import { useProject } from "@hooks/store"
+
 import { TIssue } from "@servcy/types"
 
 type Props = {

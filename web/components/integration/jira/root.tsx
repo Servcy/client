@@ -1,16 +1,22 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-// fetch keys
-import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys"
-import { JiraImporterService } from "@services/integrations"
+
 import { ArrowLeft, Check, List, Settings } from "lucide-react"
 import JiraLogo from "public/services/jira.svg"
 import { FormProvider, useForm } from "react-hook-form"
 import { mutate } from "swr"
+
+// fetch keys
+import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys"
+
+import { JiraImporterService } from "@services/integrations"
+
 import { IJiraImporterForm } from "@servcy/types"
 import { Button, UserGroupIcon } from "@servcy/ui"
+
 import {
     IJiraIntegrationData,
     JiraConfirmImport,

@@ -1,6 +1,8 @@
 import { useContext } from "react"
+
 // mobx store
 import { StoreContext } from "@contexts/StoreContext"
+
 import { IGlobalViewStore } from "@store/global-view.store"
 
 export const useGlobalView = (): IGlobalViewStore => {

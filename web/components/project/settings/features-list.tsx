@@ -1,10 +1,15 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
-import { EUserProjectRoles } from "@constants/project"
-import { useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
+
 import { ContrastIcon, FileText, Inbox, Layers } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
+
+import { EUserProjectRoles } from "@constants/project"
+
 import { IProject } from "@servcy/types"
 import { DiceIcon, ToggleSwitch } from "@servcy/ui"
 

@@ -1,11 +1,13 @@
 "use client"
 
 import { FC, PropsWithChildren, useEffect, useState } from "react"
+
 import { SyncOutlined } from "@ant-design/icons"
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
 import { Spin } from "antd"
 import { Toaster } from "react-hot-toast"
+
 import Blocked from "@/components/Shared/blocked"
 
 import "@/styles/globals.css"

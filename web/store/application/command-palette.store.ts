@@ -1,7 +1,9 @@
+import { action, computed, makeObservable, observable } from "mobx"
+
 import { EIssuesStoreType, TCreateModalStoreTypes } from "@constants/issue"
+
 import { PageService } from "@services/page.service"
 import { ProjectService } from "@services/project"
-import { action, computed, makeObservable, observable } from "mobx"
 
 export interface ModalData {
     store: EIssuesStoreType

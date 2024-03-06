@@ -1,6 +1,9 @@
 import Image from "next/image"
+
 import React from "react"
+
 import EmptyWebhook from "public/empty-state/web-hook.svg"
+
 import { Button } from "@servcy/ui"
 
 type Props = {

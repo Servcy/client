@@ -1,5 +1,11 @@
 import { useRouter } from "next/router"
+
 import React, { FC, useCallback, useEffect } from "react"
+
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+import useSWR from "swr"
+
 import { CommandModal, ShortcutsModal } from "@components/command-palette"
 import { BulkDeleteIssuesModal } from "@components/core"
 import { CycleCreateUpdateModal } from "@components/cycles"
@@ -8,15 +14,16 @@ import { CreateUpdateModuleModal } from "@components/modules"
 import { CreateUpdatePageModal } from "@components/pages"
 import { CreateProjectModal } from "@components/project"
 import { CreateUpdateProjectViewModal } from "@components/views"
+
+import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store"
+
 // fetch keys
 import { ISSUE_DETAILS } from "@constants/fetch-keys"
 import { EIssuesStoreType } from "@constants/issue"
-import { copyTextToClipboard } from "@helpers/string.helper"
-import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store"
+
 import { IssueService } from "@services/issue"
-import { observer } from "mobx-react-lite"
-import toast from "react-hot-toast"
-import useSWR from "swr"
+
+import { copyTextToClipboard } from "@helpers/string.helper"
 
 const issueService = new IssueService()
 

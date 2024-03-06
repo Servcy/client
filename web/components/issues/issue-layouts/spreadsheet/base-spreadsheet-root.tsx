@@ -1,14 +1,21 @@
 import { useRouter } from "next/router"
+
 import { FC, useCallback } from "react"
+
+import { observer } from "mobx-react-lite"
+
+import { useUser } from "@hooks/store"
+
 import { EIssueFilterType } from "@constants/issue"
 import { EUserProjectRoles } from "@constants/project"
-import { useUser } from "@hooks/store"
+
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
 import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project"
 import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views"
-import { observer } from "mobx-react-lite"
+
 import { IIssueDisplayFilterOptions, TIssue, TUnGroupedIssues } from "@servcy/types"
+
 import { IQuickActionProps } from "../list/list-view-types"
 import { EIssueActions } from "../types"
 // views

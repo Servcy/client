@@ -1,8 +1,12 @@
 import { FC } from "react"
+
+import { observer } from "mobx-react"
+
 import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "@components/gantt-chart/constants"
 import { useGanttChart } from "@components/gantt-chart/hooks/use-gantt-chart"
+
 import { cn } from "@helpers/common.helper"
-import { observer } from "mobx-react"
+
 import { IMonthBlock } from "../../views"
 
 export const MonthChartView: FC<any> = observer(() => {

@@ -1,7 +1,11 @@
 import { FC, useEffect, useState } from "react"
-import { GanttChartHeader, GanttChartMainContent } from "@components/gantt-chart"
-import { cn } from "@helpers/common.helper"
+
 import { observer } from "mobx-react"
+
+import { GanttChartHeader, GanttChartMainContent } from "@components/gantt-chart"
+
+import { cn } from "@helpers/common.helper"
+
 import { SIDEBAR_WIDTH } from "../constants"
 // data
 import { currentViewDataWithView } from "../data"

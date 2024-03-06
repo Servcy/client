@@ -1,18 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { ReactElement, useState } from "react"
-import { EmptyState } from "@components/common"
-import { PageHead } from "@components/core"
-import { MEMBER_ACCEPTED } from "@constants/event-tracker"
-import { ROLE } from "@constants/workspace"
-import { truncateText } from "@helpers/string.helper"
-import { getUserRole } from "@helpers/user.helper"
-import { useEventTracker, useUser } from "@hooks/store"
-import { UserAuthWrapper } from "@layouts/auth-layout"
-import DefaultLayout from "@layouts/DefaultLayout"
-import { UserService } from "@services/user.service"
-import { WorkspaceService } from "@services/workspace.service"
+
 import { CheckCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 // images
@@ -20,8 +11,27 @@ import emptyInvitation from "public/empty-state/invitation.svg"
 import ServcyLogo from "public/logo.svg"
 import toast from "react-hot-toast"
 import useSWR, { mutate } from "swr"
+
+import { EmptyState } from "@components/common"
+import { PageHead } from "@components/core"
+
+import { useEventTracker, useUser } from "@hooks/store"
+
+import { UserAuthWrapper } from "@layouts/auth-layout"
+import DefaultLayout from "@layouts/DefaultLayout"
+
+import { MEMBER_ACCEPTED } from "@constants/event-tracker"
+import { ROLE } from "@constants/workspace"
+
+import { UserService } from "@services/user.service"
+import { WorkspaceService } from "@services/workspace.service"
+
+import { truncateText } from "@helpers/string.helper"
+import { getUserRole } from "@helpers/user.helper"
+
 import type { IWorkspaceMemberInvitation } from "@servcy/types"
 import { Button } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const workspaceService = new WorkspaceService()

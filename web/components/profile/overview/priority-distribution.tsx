@@ -1,7 +1,10 @@
-import { BarGraph, ProfileEmptyState } from "@components/ui"
-import { capitalizeFirstLetter } from "@helpers/string.helper"
 // image
 import emptyBarGraph from "public/empty-state/empty_bar_graph.svg"
+
+import { BarGraph, ProfileEmptyState } from "@components/ui"
+
+import { capitalizeFirstLetter } from "@helpers/string.helper"
+
 import { IUserProfileData } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 

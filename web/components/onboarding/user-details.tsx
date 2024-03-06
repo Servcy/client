@@ -1,14 +1,21 @@
 import Image from "next/image"
+
 import React, { useState } from "react"
-import { UserImageUploadModal } from "@components/core"
-import { OnboardingSidebar, OnboardingStepIndicator } from "@components/onboarding"
-import { USER_DETAILS } from "@constants/event-tracker"
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
-import { FileService } from "@services/file.service"
+
 import { Camera, User2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import IssuesSvg from "public/onboarding/onboarding-issues.webp"
 import { Controller, useForm } from "react-hook-form"
+
+import { UserImageUploadModal } from "@components/core"
+import { OnboardingSidebar, OnboardingStepIndicator } from "@components/onboarding"
+
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+
+import { USER_DETAILS } from "@constants/event-tracker"
+
+import { FileService } from "@services/file.service"
+
 import { IUser } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

@@ -1,12 +1,18 @@
 import { FC, useEffect, useRef, useState } from "react"
-import { isEmptyHtmlString } from "@helpers/string.helper"
-import { useIssueDetail, useMention, useUser, useWorkspace } from "@hooks/store"
-import { FileService } from "@services/file.service"
+
 import { Check, Globe2, Lock, Pencil, Trash2, X } from "lucide-react"
 import { useForm } from "react-hook-form"
+
+import { useIssueDetail, useMention, useUser, useWorkspace } from "@hooks/store"
+
+import { FileService } from "@services/file.service"
+
+import { isEmptyHtmlString } from "@helpers/string.helper"
+
 import { LiteReadOnlyEditorWithRef, LiteTextEditorWithRef } from "@servcy/lite-text-editor"
 import { TIssueComment } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
+
 import { IssueCommentReaction } from "../../reactions/issue-comment"
 import { TActivityOperations } from "../root"
 import { IssueCommentBlock } from "./comment-block"

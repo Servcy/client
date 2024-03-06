@@ -1,14 +1,21 @@
 import { useRouter } from "next/router"
+
 import { FC, useCallback, useEffect, useMemo, useState } from "react"
-import { ExistingIssuesListModal } from "@components/core"
-import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues"
-import { copyTextToClipboard } from "@helpers/string.helper"
-import { useEventTracker, useIssueDetail } from "@hooks/store"
+
 import { ChevronDown, ChevronRight, Loader, Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { ExistingIssuesListModal } from "@components/core"
+import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues"
+
+import { useEventTracker, useIssueDetail } from "@hooks/store"
+
+import { copyTextToClipboard } from "@helpers/string.helper"
+
 import { IUser, TIssue } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
+
 import { IssueList } from "./issues-list"
 import { ProgressBar } from "./progressbar"
 

@@ -1,4 +1,5 @@
 import { FC } from "react"
+
 import type { Props } from "./types"
 
 export const CommandIcon: FC<Props> = ({

@@ -1,10 +1,15 @@
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+
 import { PageHead } from "@components/core"
 import { ProjectsHeader } from "@components/headers"
 import { ProjectCardList } from "@components/project"
+
 import { useWorkspace } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react"
+
 // type
 import { NextPageWithLayout } from "@/types/types"
 

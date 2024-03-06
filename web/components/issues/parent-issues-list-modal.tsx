@@ -1,10 +1,15 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect, useState } from "react"
+
 // headless ui
 import { Combobox, Dialog, Transition } from "@headlessui/react"
-import useDebounce from "@hooks/use-debounce"
-import { ProjectService } from "@services/project"
 import { Rocket, Search } from "lucide-react"
+
+import useDebounce from "@hooks/use-debounce"
+
+import { ProjectService } from "@services/project"
+
 import { ISearchIssueResponse } from "@servcy/types"
 import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui"
 

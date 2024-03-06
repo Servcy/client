@@ -1,8 +1,12 @@
 import Image from "next/image"
+
 import React from "react"
+
 // helper
 import { cn } from "@helpers/common.helper"
+
 import { Button, getButtonStyling } from "@servcy/ui"
+
 import { ComicBoxButton } from "./comic-box-button"
 
 type Props = {

@@ -1,12 +1,16 @@
-import { groupReactions } from "@helpers/emoji.helper"
-import { IssueReactionService } from "@services/issue"
 import concat from "lodash/concat"
 import find from "lodash/find"
 import pull from "lodash/pull"
 import set from "lodash/set"
 import update from "lodash/update"
 import { action, makeObservable, observable, runInAction } from "mobx"
+
+import { IssueReactionService } from "@services/issue"
+
+import { groupReactions } from "@helpers/emoji.helper"
+
 import { TIssueCommentReaction, TIssueCommentReactionIdMap, TIssueCommentReactionMap } from "@servcy/types"
+
 import { IIssueDetail } from "./root.store"
 
 export interface IIssueCommentReactionStoreActions {

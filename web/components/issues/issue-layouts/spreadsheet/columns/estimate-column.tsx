@@ -1,5 +1,7 @@
-import { EstimateDropdown } from "@components/dropdowns"
 import { observer } from "mobx-react-lite"
+
+import { EstimateDropdown } from "@components/dropdowns"
+
 import { TIssue } from "@servcy/types"
 
 type Props = {

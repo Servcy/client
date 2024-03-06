@@ -1,12 +1,19 @@
 import { ReactElement, useEffect, useState } from "react"
-import { CustomThemeSelector, PageHead, ThemeSwitch } from "@components/core"
-import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
-import { useUser } from "@hooks/store"
-import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences"
+
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
+
+import { CustomThemeSelector, PageHead, ThemeSwitch } from "@components/core"
+
+import { useUser } from "@hooks/store"
+
+import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences"
+
+import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
+
 import { Spinner } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {

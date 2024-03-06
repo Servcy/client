@@ -1,9 +1,13 @@
 import { useRouter } from "next/router"
+
 import { FC, ReactNode } from "react"
-import { useUser, useWorkspace } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 import useSWRImmutable from "swr/immutable"
+
+import { useUser, useWorkspace } from "@hooks/store"
+
 import { Spinner } from "@servcy/ui"
 
 export interface IUserAuthWrapper {

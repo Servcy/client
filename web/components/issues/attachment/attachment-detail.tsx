@@ -1,13 +1,20 @@
 import Link from "next/link"
+
 import { FC, useState } from "react"
+
+import { AlertCircle, X } from "lucide-react"
+
 import { getFileIcon } from "@components/icons"
+
+import { useIssueDetail, useMember } from "@hooks/store"
+
 import { convertBytesToSize, getFileExtension, getFileName } from "@helpers/attachment.helper"
 import { renderFormattedDate } from "@helpers/date-time.helper"
 // helper
 import { truncateText } from "@helpers/string.helper"
-import { useIssueDetail, useMember } from "@hooks/store"
-import { AlertCircle, X } from "lucide-react"
+
 import { Tooltip } from "@servcy/ui"
+
 import { IssueAttachmentDeleteModal } from "./delete-attachment-confirmation-modal"
 import { TAttachmentOperations } from "./root"
 

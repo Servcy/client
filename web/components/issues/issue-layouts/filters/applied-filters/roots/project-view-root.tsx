@@ -1,9 +1,14 @@
 import { useRouter } from "next/router"
-import { AppliedFiltersList } from "@components/issues"
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
-import { useIssues, useLabel, useProjectState, useProjectView } from "@hooks/store"
+
 import isEqual from "lodash/isEqual"
 import { observer } from "mobx-react-lite"
+
+import { AppliedFiltersList } from "@components/issues"
+
+import { useIssues, useLabel, useProjectState, useProjectView } from "@hooks/store"
+
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+
 import { IIssueFilterOptions } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

@@ -1,5 +1,7 @@
 import { FC } from "react"
+
 import { useCurrentTime } from "@hooks/use-current-time"
+
 import { IUser } from "@servcy/types"
 
 export interface IUserGreetingsView {

@@ -1,9 +1,11 @@
 import { Fragment, useState } from "react"
+
 import { Combobox } from "@headlessui/react"
-import { useIssueDetail, useLabel } from "@hooks/store"
 import { Check, Search, Tag } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { usePopper } from "react-popper"
+
+import { useIssueDetail, useLabel } from "@hooks/store"
 
 export interface IIssueLabelSelect {
     workspaceSlug: string

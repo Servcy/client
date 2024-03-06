@@ -1,11 +1,18 @@
 import { useRouter } from "next/router"
+
 import { useMemo } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { CycleIssueQuickActions } from "@components/issues"
-import { EIssuesStoreType } from "@constants/issue"
+
 //hooks
 import { useCycle, useIssues } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { TIssue } from "@servcy/types"
+
 import { EIssueActions } from "../../types"
 import { BaseCalendarRoot } from "../base-calendar-root"
 

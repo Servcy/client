@@ -1,18 +1,5 @@
 import { FC } from "react"
-import { DateDropdown, EstimateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
-import {
-    IssueCycleSelect,
-    IssueLabel,
-    IssueLinkRoot,
-    IssueModuleSelect,
-    IssueParentSelect,
-    IssueRelationSelect,
-    TIssueOperations,
-} from "@components/issues"
-import { cn } from "@helpers/common.helper"
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
-import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
-import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+
 import {
     CalendarCheck2,
     CalendarClock,
@@ -25,6 +12,24 @@ import {
     XCircle,
 } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { DateDropdown, EstimateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
+import {
+    IssueCycleSelect,
+    IssueLabel,
+    IssueLinkRoot,
+    IssueModuleSelect,
+    IssueParentSelect,
+    IssueRelationSelect,
+    TIssueOperations,
+} from "@components/issues"
+
+import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
+
 import { ContrastIcon, DiceIcon, DoubleCircleIcon, RelatedIcon, UserGroupIcon } from "@servcy/ui"
 
 icons

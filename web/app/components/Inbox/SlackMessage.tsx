@@ -1,7 +1,10 @@
 import Image from "next/image"
+
 import cn from "classnames"
 import { HiExternalLink, HiPaperClip } from "react-icons/hi"
+
 import { SlackMessageElementProps, SlackMessageProps } from "@/types/integrations/slack"
+
 import { getCleanLink } from "@/utils/Shared"
 
 const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string }) => {

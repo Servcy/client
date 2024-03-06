@@ -1,8 +1,12 @@
 // fetch keys
-import { COMMENT_REACTION_LIST } from "@constants/fetch-keys"
-import { groupReactions } from "@helpers/emoji.helper"
-import { IssueReactionService } from "@services/issue"
 import useSWR from "swr"
+
+import { COMMENT_REACTION_LIST } from "@constants/fetch-keys"
+
+import { IssueReactionService } from "@services/issue"
+
+import { groupReactions } from "@helpers/emoji.helper"
+
 import { useUser } from "./store"
 
 const issueReactionService = new IssueReactionService()

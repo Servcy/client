@@ -1,4 +1,5 @@
 import { EUserProjectRoles } from "@constants/project"
+
 import { IIssueActivity, IIssueLite, TStateGroups } from "."
 
 export interface IUser {

@@ -1,11 +1,16 @@
 import { useRouter } from "next/router"
-import { EIssuesStoreType } from "@constants/issue"
-import { copyTextToClipboard } from "@helpers/string.helper"
-import { useApplication, useIssues, useUser } from "@hooks/store"
+
 import { Command } from "cmdk"
 import { LinkIcon, Signal, Trash2, UserMinus2, UserPlus2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useApplication, useIssues, useUser } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+
+import { copyTextToClipboard } from "@helpers/string.helper"
+
 import { TIssue } from "@servcy/types"
 import { DoubleCircleIcon, UserGroupIcon } from "@servcy/ui"
 

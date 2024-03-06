@@ -1,7 +1,10 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useApplication } from "@hooks/store"
+
 import { BrainCog, Cog, Image, Lock, Mail } from "lucide-react"
+
+import { useApplication } from "@hooks/store"
+
 import { Tooltip } from "@servcy/ui"
 
 const INSTANCE_ADMIN_LINKS = [

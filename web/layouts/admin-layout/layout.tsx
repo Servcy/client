@@ -1,8 +1,13 @@
 import { FC, ReactNode } from "react"
-import { InstanceSetupView } from "@components/instance"
-import { useApplication } from "@hooks/store"
-import { AdminAuthWrapper, UserAuthWrapper } from "@layouts/auth-layout"
+
 import { observer } from "mobx-react-lite"
+
+import { InstanceSetupView } from "@components/instance"
+
+import { useApplication } from "@hooks/store"
+
+import { AdminAuthWrapper, UserAuthWrapper } from "@layouts/auth-layout"
+
 import { InstanceAdminHeader } from "./header"
 import { InstanceAdminSidebar } from "./sidebar"
 

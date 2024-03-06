@@ -1,13 +1,19 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { ProjectSettingHeader } from "@components/headers"
 import { ProjectFeaturesList } from "@components/project"
+
 import { useProject, useUser } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
 import { ProjectSettingLayout } from "@layouts/settings-layout"
-import { observer } from "mobx-react"
-import useSWR from "swr"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const FeaturesSettingsPage: NextPageWithLayout = observer(() => {

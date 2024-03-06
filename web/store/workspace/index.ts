@@ -1,7 +1,10 @@
-import { WorkspaceService } from "@services/workspace.service"
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
+import { WorkspaceService } from "@services/workspace.service"
+
 import { IWorkspace } from "@servcy/types"
+
 import { RootStore } from "../root.store"
 // sub-stores
 import { ApiTokenStore, IApiTokenStore } from "./api-token.store"

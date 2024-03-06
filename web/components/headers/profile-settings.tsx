@@ -1,6 +1,9 @@
 import { FC } from "react"
-import { BreadcrumbLink } from "@components/common"
+
 import { Settings } from "lucide-react"
+
+import { BreadcrumbLink } from "@components/common"
+
 import { Breadcrumbs } from "@servcy/ui"
 
 interface IProfileSettingHeader {

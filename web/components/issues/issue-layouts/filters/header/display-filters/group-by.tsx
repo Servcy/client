@@ -1,7 +1,11 @@
 import React, { useState } from "react"
-import { FilterHeader, FilterOption } from "@components/issues"
-import { ISSUE_GROUP_BY_OPTIONS } from "@constants/issue"
+
 import { observer } from "mobx-react-lite"
+
+import { FilterHeader, FilterOption } from "@components/issues"
+
+import { ISSUE_GROUP_BY_OPTIONS } from "@constants/issue"
+
 import { IIssueDisplayFilterOptions, TIssueGroupByOptions } from "@servcy/types"
 
 type Props = {

@@ -1,8 +1,13 @@
 import Link from "next/link"
+
 import { useEffect } from "react"
-import { RecentCollaboratorsEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
-import { useDashboard, useMember, useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { RecentCollaboratorsEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
+
+import { useDashboard, useMember, useUser } from "@hooks/store"
+
 import { TRecentCollaboratorsWidgetResponse } from "@servcy/types"
 import { Avatar } from "@servcy/ui"
 

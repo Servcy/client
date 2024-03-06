@@ -1,6 +1,9 @@
 import React from "react"
-import { MemberDropdown } from "@components/dropdowns"
+
 import { observer } from "mobx-react-lite"
+
+import { MemberDropdown } from "@components/dropdowns"
+
 import { TIssue } from "@servcy/types"
 
 type Props = {

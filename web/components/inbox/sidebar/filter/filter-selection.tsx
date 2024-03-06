@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { MultiLevelDropdown } from "@components/ui"
-import { INBOX_STATUS } from "@constants/inbox"
-import { ISSUE_PRIORITIES } from "@constants/issue"
+
 // mobx store
 import { useInboxIssues } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
+import { INBOX_STATUS } from "@constants/inbox"
+import { ISSUE_PRIORITIES } from "@constants/issue"
+
 import { TInboxIssueFilterOptions } from "@servcy/types"
 import { PriorityIcon } from "@servcy/ui"
 

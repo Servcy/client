@@ -1,5 +1,13 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect, useState } from "react"
+
+import { Dialog, Transition } from "@headlessui/react"
+import { Command } from "cmdk"
+import { FolderPlus, Search, Settings } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import {
     ChangeIssueAssignee,
     ChangeIssuePriority,
@@ -11,16 +19,15 @@ import {
     CommandPaletteThemeActions,
     CommandPaletteWorkspaceSettingsActions,
 } from "@components/command-palette"
-import { ISSUE_DETAILS } from "@constants/fetch-keys"
-import { Dialog, Transition } from "@headlessui/react"
+
 import { useApplication, useEventTracker, useProject } from "@hooks/store"
 import useDebounce from "@hooks/use-debounce"
+
+import { ISSUE_DETAILS } from "@constants/fetch-keys"
+
 import { IssueService } from "@services/issue"
 import { WorkspaceService } from "@services/workspace.service"
-import { Command } from "cmdk"
-import { FolderPlus, Search, Settings } from "lucide-react"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
 import { IWorkspaceSearchResults } from "@servcy/types"
 import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui"
 

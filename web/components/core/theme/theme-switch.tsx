@@ -1,5 +1,7 @@
 import { FC } from "react"
+
 import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
+
 import { CustomSelect } from "@servcy/ui"
 
 type Props = {

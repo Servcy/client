@@ -1,5 +1,7 @@
 import { MutableRefObject } from "react"
-import { TCreateModalStoreTypes } from "@constants/issue"
+
+import { observer } from "mobx-react-lite"
+
 import {
     useCycle,
     useIssueDetail,
@@ -10,7 +12,9 @@ import {
     useProject,
     useProjectState,
 } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
+import { TCreateModalStoreTypes } from "@constants/issue"
+
 import {
     GroupByColumnTypes,
     IGroupByColumn,
@@ -22,6 +26,7 @@ import {
     TSubGroupedIssues,
     TUnGroupedIssues,
 } from "@servcy/types"
+
 import { EIssueActions } from "../types"
 import { getGroupByColumns } from "../utils"
 import { HeaderGroupByCard } from "./headers/group-by-card"

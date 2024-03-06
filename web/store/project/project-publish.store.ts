@@ -1,6 +1,8 @@
-import { ProjectPublishService } from "@services/project"
 import set from "lodash/set"
 import { action, makeObservable, observable, runInAction } from "mobx"
+
+import { ProjectPublishService } from "@services/project"
+
 import { ProjectRootStore } from "./"
 
 export type TProjectPublishViews = "list" | "gantt" | "kanban" | "calendar" | "spreadsheet"

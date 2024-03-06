@@ -1,7 +1,10 @@
+import { observer } from "mobx-react"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { cn } from "@helpers/common.helper"
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
-import { useIssueDetail } from "@hooks/store"
-import { observer } from "mobx-react"
+
 import { BLOCK_HEIGHT } from "../constants"
 import { ChartAddBlock, ChartDraggable } from "../helpers"
 import { useGanttChart } from "../hooks"

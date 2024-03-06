@@ -1,7 +1,10 @@
-import { VIEWS_LIST } from "@components/gantt-chart/data"
-import { cn } from "@helpers/common.helper"
 import { Expand, Shrink } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { VIEWS_LIST } from "@components/gantt-chart/data"
+
+import { cn } from "@helpers/common.helper"
+
 import { useGanttChart } from "../hooks/use-gantt-chart"
 import { IGanttBlock, TGanttViews } from "../types"
 

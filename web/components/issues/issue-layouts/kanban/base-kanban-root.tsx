@@ -1,22 +1,30 @@
 import { useRouter } from "next/router"
+
 import { FC, useCallback, useRef, useState } from "react"
+
+import { DragDropContext, DraggableLocation, DragStart, Droppable, DropResult } from "@hello-pangea/dnd"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+
 import { DeleteIssueModal } from "@components/issues"
+
+import { useEventTracker, useUser } from "@hooks/store"
+import { useIssues } from "@hooks/store/use-issues"
+
 import { ISSUE_DELETED } from "@constants/event-tracker"
 import { EIssueFilterType, TCreateModalStoreTypes } from "@constants/issue"
 import { EUserProjectRoles } from "@constants/project"
-import { DragDropContext, DraggableLocation, DragStart, Droppable, DropResult } from "@hello-pangea/dnd"
-import { useEventTracker, useUser } from "@hooks/store"
-import { useIssues } from "@hooks/store/use-issues"
+
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
 import { IDraftIssues, IDraftIssuesFilter } from "@store/issue/draft"
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
 import { IProfileIssues, IProfileIssuesFilter } from "@store/issue/profile"
 import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project"
 import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views"
-import { observer } from "mobx-react-lite"
-import toast from "react-hot-toast"
+
 import { TIssue } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
+
 import { IQuickActionProps } from "../list/list-view-types"
 import { EIssueActions } from "../types"
 //components

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+
 import {
     disableIntegrationEvent,
     enableIntegrationEvent,
@@ -6,7 +7,9 @@ import {
     fetchUserIntegrations,
 } from "@/apis/integration"
 import { Card, Checkbox, Modal } from "antd"
+
 import { Integration, IntegrationEvent, UserIntegration } from "@/types/apps/integration"
+
 import FigmaConfiguration from "./FigmaConfiguration"
 import GithubConfiguration from "./GithubConfiguration"
 import GoogleConfiguration from "./GoogleConfiguration"

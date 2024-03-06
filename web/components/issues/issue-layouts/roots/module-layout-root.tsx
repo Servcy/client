@@ -1,5 +1,11 @@
 import { useRouter } from "next/router"
+
 import React, { Fragment } from "react"
+
+import size from "lodash/size"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import {
     IssuePeekOverview,
     ModuleAppliedFiltersRoot,
@@ -11,12 +17,12 @@ import {
     ModuleSpreadsheetLayout,
 } from "@components/issues"
 import { ActiveLoader } from "@components/ui"
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+
 // mobx store
 import { useIssues } from "@hooks/store"
-import size from "lodash/size"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const ModuleLayoutRoot: React.FC = observer(() => {

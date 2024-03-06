@@ -1,9 +1,13 @@
 import { useRouter } from "next/router"
+
+import { observer } from "mobx-react-lite"
+
 import { GanttChartRoot, IBlockUpdateData, ModuleGanttSidebar } from "@components/gantt-chart"
 import { ModuleGanttBlock } from "@components/modules"
+
 // mobx store
 import { useModule, useProject } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { IModule } from "@servcy/types"
 
 export const ModulesListGanttChartView: React.FC = observer(() => {

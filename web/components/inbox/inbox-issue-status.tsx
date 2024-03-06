@@ -1,7 +1,10 @@
 import React from "react"
-import { INBOX_STATUS } from "@constants/inbox"
-import { useInboxIssues } from "@hooks/store"
+
 import { observer } from "mobx-react"
+
+import { useInboxIssues } from "@hooks/store"
+
+import { INBOX_STATUS } from "@constants/inbox"
 
 type Props = {
     workspaceSlug: string

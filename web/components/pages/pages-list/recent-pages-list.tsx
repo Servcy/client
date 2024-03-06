@@ -1,13 +1,19 @@
 import React, { FC } from "react"
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { PagesListView } from "@components/pages/pages-list"
-import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserProjectRoles } from "@constants/project"
-import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
-import { useApplication, useUser } from "@hooks/store"
-import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
+
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+import { PagesListView } from "@components/pages/pages-list"
+
+import { useApplication, useUser } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserProjectRoles } from "@constants/project"
+
+import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
+
 import { Loader } from "@servcy/ui"
 
 export const RecentPagesList: FC = observer(() => {

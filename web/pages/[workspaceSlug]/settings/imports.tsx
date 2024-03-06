@@ -1,11 +1,16 @@
+import { observer } from "mobx-react-lite"
+
 import { PageHead } from "@components/core"
 import { WorkspaceSettingHeader } from "@components/headers"
 import IntegrationGuide from "@components/integration/guide"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { useUser, useWorkspace } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
 import { WorkspaceSettingLayout } from "@layouts/settings-layout"
-import { observer } from "mobx-react-lite"
+
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const ImportsPage: NextPageWithLayout = observer(() => {

@@ -1,7 +1,10 @@
-import { findTotalDaysInRange, renderFormattedDate } from "@helpers/date-time.helper"
-import { useIssueDetail, useMember, useProject } from "@hooks/store"
 import isToday from "date-fns/isToday"
 import { observer } from "mobx-react-lite"
+
+import { useIssueDetail, useMember, useProject } from "@hooks/store"
+
+import { findTotalDaysInRange, renderFormattedDate } from "@helpers/date-time.helper"
+
 import { TIssue, TWidgetIssue } from "@servcy/types"
 import { Avatar, AvatarGroup, ControlLink, PriorityIcon } from "@servcy/ui"
 

@@ -1,9 +1,12 @@
 import { FC, useState } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import isNil from "lodash/isNil"
 import { Bell, BellOff } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { Button, Loader } from "@servcy/ui"
 
 export type TIssueSubscription = {

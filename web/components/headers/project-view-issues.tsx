@@ -1,13 +1,15 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { useCallback } from "react"
+
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { truncateText } from "@helpers/string.helper"
+
 import {
     useApplication,
     useEventTracker,
@@ -19,8 +21,13 @@ import {
     useProjectView,
     useUser,
 } from "@hooks/store"
-import { Plus } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+
+import { renderEmoji } from "@helpers/emoji.helper"
+import { truncateText } from "@helpers/string.helper"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
 import { Breadcrumbs, Button, CustomMenu, PhotoFilterIcon } from "@servcy/ui"
 

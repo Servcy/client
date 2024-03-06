@@ -1,9 +1,13 @@
 import { FC } from "react"
-import { InboxIssueActionsHeader } from "@components/inbox"
-import { InboxIssueDetailRoot } from "@components/issues/issue-detail/inbox"
-import { useInboxIssues } from "@hooks/store"
+
 import { Inbox } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { InboxIssueActionsHeader } from "@components/inbox"
+import { InboxIssueDetailRoot } from "@components/issues/issue-detail/inbox"
+
+import { useInboxIssues } from "@hooks/store"
+
 import { Loader } from "@servcy/ui"
 
 type TInboxContentRoot = {

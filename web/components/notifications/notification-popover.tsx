@@ -1,16 +1,21 @@
 import React, { Fragment } from "react"
-import { EmptyState } from "@components/common"
-import { NotificationCard, NotificationHeader, SnoozeNotificationModal } from "@components/notifications"
-import { NotificationsLoader } from "@components/ui"
+
 import { Popover, Transition } from "@headlessui/react"
-import { getNumberCount } from "@helpers/string.helper"
-import { useApplication } from "@hooks/store"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
-import useUserNotification from "@hooks/use-user-notifications"
 import { Bell } from "lucide-react"
 import { observer } from "mobx-react-lite"
 // images
 import emptyNotification from "public/empty-state/notification.svg"
+
+import { EmptyState } from "@components/common"
+import { NotificationCard, NotificationHeader, SnoozeNotificationModal } from "@components/notifications"
+import { NotificationsLoader } from "@components/ui"
+
+import { useApplication } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import useUserNotification from "@hooks/use-user-notifications"
+
+import { getNumberCount } from "@helpers/string.helper"
+
 import { Tooltip } from "@servcy/ui"
 
 export const NotificationPopover = observer(() => {

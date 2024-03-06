@@ -1,10 +1,15 @@
 import React, { useRef } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { SpreadsheetQuickAddIssueForm } from "@components/issues"
+
 //hooks
 import { useProject } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssue } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
+
 import { EIssueActions } from "../types"
 import { SpreadsheetTable } from "./spreadsheet-table"
 

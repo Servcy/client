@@ -1,15 +1,23 @@
 import { useRouter } from "next/router"
+
 import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react"
-import RenderIfVisible from "@components/core/render-if-visible-HOC"
-import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet"
-// helper
-import { cn } from "@helpers/common.helper"
-import { useIssueDetail, useProject } from "@hooks/store"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
 import { ChevronRight, MoreHorizontal } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import RenderIfVisible from "@components/core/render-if-visible-HOC"
+
+import { useIssueDetail, useProject } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet"
+
+// helper
+import { cn } from "@helpers/common.helper"
+
 import { IIssueDisplayProperties, TIssue } from "@servcy/types"
 import { ControlLink, Tooltip } from "@servcy/ui"
+
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
 import { EIssueActions } from "../types"
 import { IssueColumn } from "./issue-column"

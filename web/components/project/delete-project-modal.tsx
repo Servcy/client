@@ -1,11 +1,16 @@
 import { useRouter } from "next/router"
+
 import React from "react"
-import { PROJECT_DELETED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useEventTracker, useProject, useWorkspace } from "@hooks/store"
 import { AlertTriangle } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useProject, useWorkspace } from "@hooks/store"
+
+import { PROJECT_DELETED } from "@constants/event-tracker"
+
 import type { IProject } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

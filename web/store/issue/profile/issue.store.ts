@@ -1,8 +1,11 @@
-import { UserService } from "@services/user.service"
 import pull from "lodash/pull"
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
+import { UserService } from "@services/user.service"
+
 import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types"
+
 // base class
 import { IssueHelperStore } from "../helpers/issue-helper.store"
 import { IIssueRootStore } from "../root.store"

@@ -1,11 +1,15 @@
 import { useRouter } from "next/router"
+
 import React, { Fragment, useEffect, useRef, useState } from "react"
+
 import { Popover, Transition } from "@headlessui/react"
 import { Placement } from "@popperjs/core"
-import { AIService } from "@services/ai.service"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { usePopper } from "react-popper"
+
+import { AIService } from "@services/ai.service"
+
 import { RichReadOnlyEditorWithRef } from "@servcy/rich-text-editor"
 import { Button, Input } from "@servcy/ui"
 

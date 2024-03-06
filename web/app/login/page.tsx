@@ -3,10 +3,10 @@
 import Image from "next/image"
 import Link from "next/link.js"
 import { useSearchParams } from "next/navigation"
+
 import { useEffect, useState } from "react"
+
 import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication"
-import { useUser } from "@hooks/store"
-import useSignInRedirection from "@hooks/use-login-redirection"
 import { GoogleLogin } from "@react-oauth/google"
 import { Button, Input } from "antd"
 import { setCookie } from "cookies-next"
@@ -15,9 +15,16 @@ import toast from "react-hot-toast"
 import { BiLogIn } from "react-icons/bi"
 import { HiMail } from "react-icons/hi"
 import { RiWhatsappLine } from "react-icons/ri"
+
+import { useUser } from "@hooks/store"
+import useSignInRedirection from "@hooks/use-login-redirection"
+
 import { Spinner } from "@servcy/ui"
+
 import type { NextPageWithLayout } from "@/types/types"
+
 import OTPInput from "@/components/Login/OTPInput"
+
 import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators"
 
 const Login: NextPageWithLayout = observer(() => {

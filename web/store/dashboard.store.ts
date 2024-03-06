@@ -1,8 +1,11 @@
-import { DashboardService } from "@services/dashboard.service"
-import { RootStore } from "@store/root.store"
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { DashboardService } from "@services/dashboard.service"
+
+import { RootStore } from "@store/root.store"
+
 import {
     THomeDashboardResponse,
     TWidget,

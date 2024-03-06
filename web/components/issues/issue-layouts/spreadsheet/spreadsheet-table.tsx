@@ -1,8 +1,12 @@
 import { MutableRefObject, useEffect, useRef } from "react"
-import { useTableKeyboardNavigation } from "@hooks/use-table-keyboard-navigation"
+
 import { observer } from "mobx-react-lite"
+
+import { useTableKeyboardNavigation } from "@hooks/use-table-keyboard-navigation"
+
 //types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssue } from "@servcy/types"
+
 import { EIssueActions } from "../types"
 //components
 import { SpreadsheetIssueRow } from "./issue-row"

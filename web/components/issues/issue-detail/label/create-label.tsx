@@ -1,12 +1,16 @@
 import { FC, Fragment, useEffect, useState } from "react"
+
 import { Popover, Transition } from "@headlessui/react"
-import { useIssueDetail } from "@hooks/store"
 import { Loader, Plus, X } from "lucide-react"
 import { TwitterPicker } from "react-color"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { IIssueLabel } from "@servcy/types"
 import { Input } from "@servcy/ui"
+
 import { TLabelOperations } from "./root"
 
 type ILabelCreate = {

@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
+
 import { useEffect } from "react"
-import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { cn } from "@helpers/common.helper"
-import { useApplication } from "@hooks/store"
+
 import { BarChart2, PanelRight } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useApplication } from "@hooks/store"
+
+import { cn } from "@helpers/common.helper"
+
 import { Breadcrumbs } from "@servcy/ui"
 
 export const WorkspaceAnalyticsHeader = observer(() => {

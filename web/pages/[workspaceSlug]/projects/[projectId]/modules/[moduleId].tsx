@@ -1,16 +1,22 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+import emptyModule from "public/empty-state/module.svg"
+import useSWR from "swr"
+
 import { EmptyState } from "@components/common"
 import { PageHead } from "@components/core"
 import { ModuleIssuesHeader } from "@components/headers"
 import { ModuleLayoutRoot } from "@components/issues"
 import { ModuleDetailsSidebar } from "@components/modules"
+
 import { useModule, useProject } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
+
 import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react"
-import emptyModule from "public/empty-state/module.svg"
-import useSWR from "swr"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const ModuleIssuesPage: NextPageWithLayout = observer(() => {

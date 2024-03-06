@@ -1,11 +1,18 @@
 import router from "next/router"
+
 import { useCallback, useState } from "react"
-import { ProjectAnalyticsModal } from "@components/analytics"
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue"
-import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store"
+
 import { Calendar, ChevronDown, Kanban, List } from "lucide-react"
+
+import { ProjectAnalyticsModal } from "@components/analytics"
+
+import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store"
+
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
+
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "./issue-layouts"
 
 export const IssuesMobileHeader = () => {

@@ -1,7 +1,10 @@
 import { FC } from "react"
-import { IUserDetails, SingleUserSelect, TFormValues, TIntegrationSteps } from "@components/integration"
+
 // react-hook-form
 import { UseFormWatch } from "react-hook-form"
+
+import { IUserDetails, SingleUserSelect, TFormValues, TIntegrationSteps } from "@components/integration"
+
 import { Button } from "@servcy/ui"
 
 type Props = {

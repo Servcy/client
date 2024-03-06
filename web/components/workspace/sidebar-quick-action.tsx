@@ -1,11 +1,16 @@
 import { useRef, useState } from "react"
-import { CreateUpdateIssueModal } from "@components/issues"
-import { EIssuesStoreType } from "@constants/issue"
-import { EUserWorkspaceRoles } from "@constants/workspace"
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
-import useLocalStorage from "@hooks/use-local-storage"
+
 import { ChevronUp, PenSquare, Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { CreateUpdateIssueModal } from "@components/issues"
+
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { TIssue } from "@servcy/types"
 
 export const WorkspaceSidebarQuickAction = observer(() => {

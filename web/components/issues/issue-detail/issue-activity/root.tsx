@@ -1,9 +1,13 @@
 import { FC, useMemo, useState } from "react"
-import { useIssueDetail, useProject } from "@hooks/store"
+
 import { History, ListRestart, LucideIcon, MessageCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useIssueDetail, useProject } from "@hooks/store"
+
 import { TIssueComment } from "@servcy/types"
+
 import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentCreate, IssueCommentRoot } from "./"
 
 type TIssueActivity = {

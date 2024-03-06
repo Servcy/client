@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+
 import {
     archiveItems as archiveItemsApi,
     deleteItems as deleteItemsApi,
@@ -20,9 +21,12 @@ import {
 } from "react-icons/ai"
 import { GoMention } from "react-icons/go"
 import { HiArchiveBoxArrowDown } from "react-icons/hi2"
+
 import { InboxItem, PaginationDetails } from "@/types/apps/inbox"
+
 import InboxItemModal from "@/components/Inbox/InboxItemModal"
 import InboxItems from "@/components/Inbox/InboxItems"
+
 import { integrationInboxCategories } from "@/constants/integrations"
 
 const tabItems = [

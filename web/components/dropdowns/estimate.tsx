@@ -1,13 +1,17 @@
 import { Fragment, ReactNode, useEffect, useRef, useState } from "react"
+
 import { Combobox } from "@headlessui/react"
-import { cn } from "@helpers/common.helper"
-import { useApplication, useEstimate } from "@hooks/store"
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 import sortBy from "lodash/sortBy"
 import { Check, ChevronDown, Search, Triangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { usePopper } from "react-popper"
+
+import { useApplication, useEstimate } from "@hooks/store"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { cn } from "@helpers/common.helper"
+
 import { DropdownButton } from "./buttons"
 import { BUTTON_VARIANTS_WITH_TEXT } from "./constants"
 import { TDropdownProps } from "./types"

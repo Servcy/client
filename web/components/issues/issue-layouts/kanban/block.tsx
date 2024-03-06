@@ -1,12 +1,18 @@
 import { memo, MutableRefObject } from "react"
-import RenderIfVisible from "@components/core/render-if-visible-HOC"
+
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
+import { observer } from "mobx-react-lite"
+
+import RenderIfVisible from "@components/core/render-if-visible-HOC"
+
+import { useApplication, useIssueDetail, useProject } from "@hooks/store"
+
 // helper
 import { cn } from "@helpers/common.helper"
-import { useApplication, useIssueDetail, useProject } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { IIssueDisplayProperties, IIssueMap, TIssue } from "@servcy/types"
 import { ControlLink, Tooltip } from "@servcy/ui"
+
 import { IssueProperties } from "../properties/all-properties"
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
 import { EIssueActions } from "../types"

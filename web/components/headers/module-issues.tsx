@@ -1,16 +1,17 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { useCallback, useState } from "react"
+
+import { ArrowRight, PanelRight, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import { ProjectAnalyticsModal } from "@components/analytics"
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
 import { ModuleMobileHeader } from "@components/modules/module-mobile-header"
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
-import { cn } from "@helpers/common.helper"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { truncateText } from "@helpers/string.helper"
+
 import {
     useApplication,
     useEventTracker,
@@ -23,8 +24,14 @@ import {
     useUser,
 } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
-import { ArrowRight, PanelRight, Plus } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+
+import { cn } from "@helpers/common.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { truncateText } from "@helpers/string.helper"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
 import { Breadcrumbs, Button, CustomMenu, DiceIcon, LayersIcon } from "@servcy/ui"
 

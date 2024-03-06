@@ -1,7 +1,11 @@
 import { FC } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { TIssue } from "@servcy/types"
+
 import { IssueListItem } from "./issue-list-item"
 import { TSubIssueOperations } from "./root"
 

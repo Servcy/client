@@ -1,8 +1,13 @@
 import React, { useState } from "react"
-import { FilterHeader, FilterOption } from "@components/issues"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { useProject } from "@hooks/store"
+
 import { observer } from "mobx-react"
+
+import { FilterHeader, FilterOption } from "@components/issues"
+
+import { useProject } from "@hooks/store"
+
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { Loader } from "@servcy/ui"
 
 type Props = {

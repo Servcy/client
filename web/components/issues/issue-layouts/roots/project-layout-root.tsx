@@ -1,5 +1,10 @@
 import { useRouter } from "next/router"
+
 import { FC, Fragment } from "react"
+
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import {
     CalendarLayout,
     GanttLayout,
@@ -11,10 +16,11 @@ import {
     ProjectSpreadsheetLayout,
 } from "@components/issues"
 import { ActiveLoader } from "@components/ui"
-import { EIssuesStoreType } from "@constants/issue"
+
 import { useIssues } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { Spinner } from "@servcy/ui"
 
 export const ProjectLayoutRoot: FC = observer(() => {

@@ -1,10 +1,16 @@
 import Link from "next/link"
+
 import { useEffect } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { WidgetLoader } from "@components/dashboard/widgets"
+
+import { useDashboard } from "@hooks/store"
+
 import { cn } from "@helpers/common.helper"
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
-import { useDashboard } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { TOverviewStatsWidgetResponse } from "@servcy/types"
 
 export type WidgetProps = {

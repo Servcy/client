@@ -1,7 +1,10 @@
 // nivo
-import { DATE_KEYS } from "@constants/analytics"
-import { renderMonthAndYear } from "@helpers/analytics.helper"
 import { BarTooltipProps } from "@nivo/bar"
+
+import { DATE_KEYS } from "@constants/analytics"
+
+import { renderMonthAndYear } from "@helpers/analytics.helper"
+
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types"
 
 type Props = {

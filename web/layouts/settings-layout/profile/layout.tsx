@@ -1,5 +1,7 @@
 import { FC, ReactNode } from "react"
+
 import { CommandPalette } from "@components/command-palette"
+
 // layout
 import { UserAuthWrapper } from "@layouts/auth-layout"
 import { ProfileLayoutSidebar } from "@layouts/settings-layout"

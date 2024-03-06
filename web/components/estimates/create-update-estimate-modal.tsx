@@ -1,12 +1,17 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { checkDuplicates } from "@helpers/array.helper"
-// store hooks
-import { useEstimate } from "@hooks/store"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+// store hooks
+import { useEstimate } from "@hooks/store"
+
+import { checkDuplicates } from "@helpers/array.helper"
+
 import { IEstimate, IEstimateFormData } from "@servcy/types"
 import { Button, Input, TextArea } from "@servcy/ui"
 

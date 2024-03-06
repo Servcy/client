@@ -1,9 +1,13 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { FC, ReactNode } from "react"
-import { useLabel, useMember, useProject, useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
+
+import { useLabel, useMember, useProject, useUser } from "@hooks/store"
+
 import { Button, Spinner } from "@servcy/ui"
 
 export interface IWorkspaceAuthWrapper {

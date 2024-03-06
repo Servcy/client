@@ -1,15 +1,21 @@
 // next
 import { useRouter } from "next/router"
+
 import React, { useEffect } from "react"
-// fetch keys
-import { JIRA_IMPORTER_DETAIL } from "@constants/fetch-keys"
-import { JiraImporterService } from "@services/integrations"
+
 // react hook form
 import { Controller, useFormContext } from "react-hook-form"
 // swr
 import useSWR from "swr"
+
+// fetch keys
+import { JIRA_IMPORTER_DETAIL } from "@constants/fetch-keys"
+
+import { JiraImporterService } from "@services/integrations"
+
 import { IJiraImporterForm, IJiraMetadata } from "@servcy/types"
 import { Spinner, ToggleSwitch } from "@servcy/ui"
+
 import type { IJiraIntegrationData, TJiraIntegrationSteps } from "."
 
 type Props = {

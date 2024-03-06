@@ -1,8 +1,12 @@
 import React from "react"
-import { CustomAnalytics, ScopeAndDemand } from "@components/analytics"
-import { ANALYTICS_TABS } from "@constants/analytics"
+
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
+
+import { CustomAnalytics, ScopeAndDemand } from "@components/analytics"
+
+import { ANALYTICS_TABS } from "@constants/analytics"
+
 import { ICycle, IModule, IProject } from "@servcy/types"
 
 type Props = {

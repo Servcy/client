@@ -1,16 +1,23 @@
 import { FC, useEffect, useState } from "react"
-import { WorkspaceImageUploadModal } from "@components/core"
-import { DeleteWorkspaceModal } from "@components/workspace"
-import { WORKSPACE_UPDATED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "@constants/workspace"
+
 import { Disclosure, Transition } from "@headlessui/react"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
-import { FileService } from "@services/file.service"
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { WorkspaceImageUploadModal } from "@components/core"
+import { DeleteWorkspaceModal } from "@components/workspace"
+
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+
+import { WORKSPACE_UPDATED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "@constants/workspace"
+
+import { FileService } from "@services/file.service"
+
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { IWorkspace } from "@servcy/types"
 import { Button, CustomSelect, Input, Spinner } from "@servcy/ui"
 

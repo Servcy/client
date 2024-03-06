@@ -1,10 +1,14 @@
-import { PageService } from "@services/page.service"
-// store
-import { IPageStore, PageStore } from "@store/page.store"
 import { isThisWeek, isToday, isYesterday } from "date-fns"
 import { set } from "lodash"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
+import { PageService } from "@services/page.service"
+
+// store
+import { IPageStore, PageStore } from "@store/page.store"
+
 import { IPage, IRecentPages } from "@servcy/types"
+
 import { RootStore } from "./root.store"
 
 export interface IProjectPageStore {

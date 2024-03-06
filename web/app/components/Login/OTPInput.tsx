@@ -1,4 +1,5 @@
 import React from "react"
+
 import type { NativeEvent, OTPInputProps } from "@/types/auth/otpInput"
 
 const isStyleObject = (obj: unknown) => typeof obj === "object" && obj !== null

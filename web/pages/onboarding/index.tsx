@@ -1,15 +1,9 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
+
 import { ReactElement, useEffect, useState } from "react"
-import { PageHead } from "@components/core"
-import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding"
-import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
+
 import { Menu, Transition } from "@headlessui/react"
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
-import useUserAuth from "@hooks/use-user-auth"
-import { UserAuthWrapper } from "@layouts/auth-layout"
-import DefaultLayout from "@layouts/DefaultLayout"
-import { WorkspaceService } from "@services/workspace.service"
 import { ChevronDown } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -17,8 +11,23 @@ import { useTheme } from "next-themes"
 import ServcyLogo from "public/logo.png"
 import { Controller, useForm } from "react-hook-form"
 import useSWR from "swr"
+
+import { PageHead } from "@components/core"
+import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding"
+
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+import useUserAuth from "@hooks/use-user-auth"
+
+import { UserAuthWrapper } from "@layouts/auth-layout"
+import DefaultLayout from "@layouts/DefaultLayout"
+
+import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
+
+import { WorkspaceService } from "@services/workspace.service"
+
 import { IUser, TOnboardingSteps } from "@servcy/types"
 import { Avatar, Spinner } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const workspaceService = new WorkspaceService()

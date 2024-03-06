@@ -1,6 +1,9 @@
 import Link from "next/link"
+
 import { FC } from "react"
+
 import { useIssueDetail, useProject } from "@hooks/store"
+
 import { CustomMenu, LayersIcon } from "@servcy/ui"
 
 type TIssueParentSiblingItem = {

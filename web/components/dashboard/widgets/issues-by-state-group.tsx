@@ -1,6 +1,10 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { useEffect, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import {
     DurationFilterDropdown,
     IssuesByStateGroupEmptyState,
@@ -8,11 +12,14 @@ import {
     WidgetProps,
 } from "@components/dashboard/widgets"
 import { PieGraph } from "@components/ui"
+
+import { useDashboard } from "@hooks/store"
+
 import { STATE_GROUP_GRAPH_COLORS, STATE_GROUP_GRAPH_GRADIENTS } from "@constants/dashboard"
 import { STATE_GROUPS } from "@constants/state"
+
 import { getCustomDates } from "@helpers/dashboard.helper"
-import { useDashboard } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { TIssuesByStateGroupsWidgetFilters, TIssuesByStateGroupsWidgetResponse, TStateGroups } from "@servcy/types"
 
 const WIDGET_KEY = "issues_by_state_groups"

@@ -1,8 +1,13 @@
 import { useRouter } from "next/router"
+
 import React from "react"
-import { ISSUE_DISPLAY_PROPERTIES } from "@constants/issue"
+
 import { observer } from "mobx-react-lite"
+
+import { ISSUE_DISPLAY_PROPERTIES } from "@constants/issue"
+
 import { IIssueDisplayProperties } from "@servcy/types"
+
 import { FilterHeader } from "../helpers/filter-header"
 
 type Props = {

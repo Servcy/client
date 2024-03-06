@@ -1,4 +1,5 @@
 import { action, computed, makeObservable, observable } from "mobx"
+
 import {
     TIssue,
     TIssueAttachment,
@@ -8,6 +9,7 @@ import {
     TIssueReaction,
     TIssueRelationTypes,
 } from "@servcy/types"
+
 import { IIssueRootStore } from "../root.store"
 import { IIssueActivityStore, IIssueActivityStoreActions, IssueActivityStore, TActivityLoader } from "./activity.store"
 import { IIssueAttachmentStore, IIssueAttachmentStoreActions, IssueAttachmentStore } from "./attachment.store"

@@ -1,16 +1,23 @@
 import { useRouter } from "next/router"
+
 import { FC, useCallback, useEffect, useRef, useState } from "react"
-import { CreateProjectModal, ProjectSidebarListItem } from "@components/project"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { Disclosure, Transition } from "@headlessui/react"
 import { DragDropContext, Draggable, Droppable, DropResult } from "@hello-pangea/dnd"
-import { cn } from "@helpers/common.helper"
-import { orderJoinedProjects } from "@helpers/project.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 import { ChevronDown, ChevronRight, Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { CreateProjectModal, ProjectSidebarListItem } from "@components/project"
+
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
+import { cn } from "@helpers/common.helper"
+import { orderJoinedProjects } from "@helpers/project.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { IProject } from "@servcy/types"
 
 export const ProjectSidebarList: FC = observer(() => {

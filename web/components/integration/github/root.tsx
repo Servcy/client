@@ -1,16 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import {
-    GithubImportConfigure,
-    GithubImportConfirm,
-    GithubImportData,
-    GithubImportUsers,
-    GithubRepoDetails,
-} from "@components/integration"
-import { APP_INTEGRATIONS, IMPORTER_SERVICES_LIST, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
-import { GithubIntegrationService, IntegrationService } from "@services/integrations"
+
 import { ArrowLeft, Check, List, Settings, UploadCloud } from "lucide-react"
 // images
 import GithubLogo from "public/services/github.png"
@@ -18,6 +11,19 @@ import GithubLogo from "public/services/github.png"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import useSWR, { mutate } from "swr"
+
+import {
+    GithubImportConfigure,
+    GithubImportConfirm,
+    GithubImportData,
+    GithubImportUsers,
+    GithubRepoDetails,
+} from "@components/integration"
+
+import { APP_INTEGRATIONS, IMPORTER_SERVICES_LIST, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
+
+import { GithubIntegrationService, IntegrationService } from "@services/integrations"
+
 import { IGithubRepoCollaborator, IGithubServiceImportFormData } from "@servcy/types"
 import { UserGroupIcon } from "@servcy/ui"
 

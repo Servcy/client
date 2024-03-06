@@ -1,11 +1,15 @@
 import { Dispatch, FC, Fragment, SetStateAction, useState } from "react"
+
 // headless ui
 import { Dialog, Transition } from "@headlessui/react"
+import { AlertTriangle } from "lucide-react"
+
 // helper
 import { getFileName } from "@helpers/attachment.helper"
-import { AlertTriangle } from "lucide-react"
+
 import type { TIssueAttachment } from "@servcy/types"
 import { Button } from "@servcy/ui"
+
 import { TAttachmentOperations } from "./root"
 
 export type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">

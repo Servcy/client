@@ -1,5 +1,9 @@
 import Link from "next/link"
+
 import { useEffect, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import {
     DurationFilterDropdown,
     IssuesByPriorityEmptyState,
@@ -7,11 +11,14 @@ import {
     WidgetProps,
 } from "@components/dashboard/widgets"
 import { MarimekkoGraph } from "@components/ui"
+
+import { useDashboard } from "@hooks/store"
+
 import { PRIORITY_GRAPH_GRADIENTS } from "@constants/dashboard"
 import { ISSUE_PRIORITIES } from "@constants/issue"
+
 import { getCustomDates } from "@helpers/dashboard.helper"
-import { useDashboard } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { TIssuesByPriorityWidgetFilters, TIssuesByPriorityWidgetResponse } from "@servcy/types"
 import { PriorityIcon } from "@servcy/ui"
 

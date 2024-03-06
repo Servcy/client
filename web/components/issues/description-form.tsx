@@ -1,13 +1,18 @@
 import { ChangeEvent, FC, useCallback, useEffect, useState } from "react"
-import { useMention, useWorkspace } from "@hooks/store"
-import useReloadConfirmations from "@hooks/use-reload-confirmation"
-import { FileService } from "@services/file.service"
+
 import debounce from "lodash/debounce"
 import { observer } from "mobx-react"
 import { Controller, useForm } from "react-hook-form"
+
+import { useMention, useWorkspace } from "@hooks/store"
+import useReloadConfirmations from "@hooks/use-reload-confirmation"
+
+import { FileService } from "@services/file.service"
+
 import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor"
 import { TIssue } from "@servcy/types"
 import { Loader, TextArea } from "@servcy/ui"
+
 import { TIssueOperations } from "./issue-detail"
 
 export interface IssueDescriptionFormValues {

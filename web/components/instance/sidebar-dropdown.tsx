@@ -1,13 +1,17 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { Fragment } from "react"
+
 import { Menu, Transition } from "@headlessui/react"
-import { useApplication, useUser } from "@hooks/store"
 import { LogIn, LogOut, Settings, UserCog2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
 import { mutate } from "swr"
+
+import { useApplication, useUser } from "@hooks/store"
+
 import { Avatar, Tooltip } from "@servcy/ui"
 
 // Static Data

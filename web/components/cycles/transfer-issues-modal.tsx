@@ -1,11 +1,16 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { EIssuesStoreType } from "@constants/issue"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useCycle, useIssues } from "@hooks/store"
 import { AlertCircle, Search, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useCycle, useIssues } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 //icons
 import { ContrastIcon, TransferIcon } from "@servcy/ui"
 

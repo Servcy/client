@@ -1,4 +1,7 @@
 import { FC, useRef } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { ProjectSidebarList } from "@components/project"
 import {
     WorkspaceHelpSection,
@@ -6,9 +9,9 @@ import {
     WorkspaceSidebarMenu,
     WorkspaceSidebarQuickAction,
 } from "@components/workspace"
+
 import { useApplication } from "@hooks/store"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
-import { observer } from "mobx-react-lite"
 
 export interface IAppSidebar {}
 

@@ -1,4 +1,5 @@
 import React from "react"
+
 import type { Props } from "./types"
 
 export const CyclesIcon: React.FC<Props> = ({

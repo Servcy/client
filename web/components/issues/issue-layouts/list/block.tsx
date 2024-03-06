@@ -1,9 +1,13 @@
 // helper
-import { cn } from "@helpers/common.helper"
-import { useApplication, useIssueDetail, useProject } from "@hooks/store"
 import { observer } from "mobx-react-lite"
+
+import { useApplication, useIssueDetail, useProject } from "@hooks/store"
+
+import { cn } from "@helpers/common.helper"
+
 import { IIssueDisplayProperties, TIssue, TIssueMap } from "@servcy/types"
 import { ControlLink, Spinner, Tooltip } from "@servcy/ui"
+
 import { IssueProperties } from "../properties/all-properties"
 import { EIssueActions } from "../types"
 

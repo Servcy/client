@@ -1,7 +1,10 @@
 import React from "react"
-import { useMember } from "@hooks/store"
+
 import { Ban } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { useMember } from "@hooks/store"
+
 import { Avatar, CustomSearchSelect } from "@servcy/ui"
 
 type Props = {

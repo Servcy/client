@@ -1,4 +1,7 @@
 import { useRef } from "react"
+
+import { observer } from "mobx-react"
+
 import {
     BiWeekChartView,
     DayChartView,
@@ -13,8 +16,9 @@ import {
     WeekChartView,
     YearChartView,
 } from "@components/gantt-chart"
+
 import { cn } from "@helpers/common.helper"
-import { observer } from "mobx-react"
+
 import { useGanttChart } from "../hooks/use-gantt-chart"
 
 type Props = {

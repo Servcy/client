@@ -1,9 +1,14 @@
 import { useRouter } from "next/router"
+
 import { FC, ReactNode } from "react"
-import { InstanceNotReady } from "@components/instance"
-import { useApplication } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
+
+import { InstanceNotReady } from "@components/instance"
+
+import { useApplication } from "@hooks/store"
+
 import { Spinner } from "@servcy/ui"
 
 type Props = {

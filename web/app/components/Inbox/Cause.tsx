@@ -1,5 +1,7 @@
 import Image from "next/image"
+
 import Avatar from "antd/es/avatar/avatar.js"
+
 import { getCleanLink } from "@/utils/Shared"
 
 const Cause = ({ cause, source }: { cause: any; source: string }) => {

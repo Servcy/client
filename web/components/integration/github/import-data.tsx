@@ -1,9 +1,14 @@
 import { FC } from "react"
-import { SelectRepository, TFormValues, TIntegrationSteps } from "@components/integration"
-import { truncateText } from "@helpers/string.helper"
-import { useProject } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import { Control, Controller, UseFormWatch } from "react-hook-form"
+
+import { SelectRepository, TFormValues, TIntegrationSteps } from "@components/integration"
+
+import { useProject } from "@hooks/store"
+
+import { truncateText } from "@helpers/string.helper"
+
 import { IWorkspaceIntegration } from "@servcy/types"
 import { Button, CustomSearchSelect, ToggleSwitch } from "@servcy/ui"
 

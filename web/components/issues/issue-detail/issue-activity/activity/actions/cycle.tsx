@@ -1,7 +1,11 @@
 import { FC } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import { observer } from "mobx-react"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { ContrastIcon } from "@servcy/ui"
+
 import { IssueActivityBlockComponent } from "./"
 
 type TIssueCycleActivity = { activityId: string; ends: "top" | "bottom" | undefined }

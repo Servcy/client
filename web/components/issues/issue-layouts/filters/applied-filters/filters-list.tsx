@@ -1,4 +1,8 @@
 import { useRouter } from "next/router"
+
+import { X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import {
     AppliedCycleFilters,
     AppliedDateFilters,
@@ -10,11 +14,13 @@ import {
     AppliedStateFilters,
     AppliedStateGroupFilters,
 } from "@components/issues"
-import { EUserProjectRoles } from "@constants/project"
-import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
+
 import { useApplication, useUser } from "@hooks/store"
-import { X } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
+import { EUserProjectRoles } from "@constants/project"
+
+import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
+
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types"
 
 type Props = {

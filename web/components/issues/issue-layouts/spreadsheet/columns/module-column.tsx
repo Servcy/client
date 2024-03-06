@@ -1,10 +1,16 @@
 import { useRouter } from "next/router"
+
 import React, { useCallback } from "react"
-import { ModuleDropdown } from "@components/dropdowns"
-import { EIssuesStoreType } from "@constants/issue"
-import { useEventTracker, useIssues } from "@hooks/store"
+
 import xor from "lodash/xor"
 import { observer } from "mobx-react-lite"
+
+import { ModuleDropdown } from "@components/dropdowns"
+
+import { useEventTracker, useIssues } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { TIssue } from "@servcy/types"
 
 type Props = {

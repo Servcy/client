@@ -1,6 +1,8 @@
-import { useModule } from "@hooks/store"
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { useModule } from "@hooks/store"
+
 import { DiceIcon } from "@servcy/ui"
 
 type Props = {

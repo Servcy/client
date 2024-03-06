@@ -1,14 +1,20 @@
 import { useRouter } from "next/router"
+
 import { useState } from "react"
-import { ExistingIssuesListModal } from "@components/core"
-import { CreateUpdateIssueModal } from "@components/issues"
-import { TCreateModalStoreTypes } from "@constants/issue"
-import { useEventTracker } from "@hooks/store"
+
 // lucide icons
 import { CircleDashed, Plus } from "lucide-react"
 // mobx
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { ExistingIssuesListModal } from "@components/core"
+import { CreateUpdateIssueModal } from "@components/issues"
+
+import { useEventTracker } from "@hooks/store"
+
+import { TCreateModalStoreTypes } from "@constants/issue"
+
 import { ISearchIssueResponse, TIssue } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
 

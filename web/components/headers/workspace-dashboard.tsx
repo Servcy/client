@@ -1,6 +1,8 @@
+import { LayoutGrid, Zap } from "lucide-react"
+
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { LayoutGrid, Zap } from "lucide-react"
+
 import { Breadcrumbs } from "@servcy/ui"
 
 export const WorkspaceDashboardHeader = () => (

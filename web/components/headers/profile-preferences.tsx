@@ -1,4 +1,5 @@
 import { BreadcrumbLink } from "@components/common"
+
 import { Breadcrumbs } from "@servcy/ui"
 
 export const ProfilePreferencesHeader = () => (

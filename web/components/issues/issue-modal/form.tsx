@@ -1,5 +1,12 @@
 import { useRouter } from "next/router"
+
 import React, { FC, Fragment, useEffect, useRef, useState } from "react"
+
+import { LayoutPanelTop, Sparkle, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+
 import { GptAssistantPopover } from "@components/core"
 import {
     CycleDropdown,
@@ -14,14 +21,14 @@ import {
 import { ParentIssuesListModal } from "@components/issues"
 import { IssueLabelSelect } from "@components/issues/select"
 import { CreateLabelModal } from "@components/labels"
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+
 import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store"
+
 import { AIService } from "@services/ai.service"
 import { FileService } from "@services/file.service"
-import { LayoutPanelTop, Sparkle, X } from "lucide-react"
-import { observer } from "mobx-react-lite"
-import { Controller, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
+
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+
 // editor
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor"
 import type { ISearchIssueResponse, TIssue } from "@servcy/types"

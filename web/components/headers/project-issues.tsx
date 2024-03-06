@@ -1,14 +1,16 @@
 import { useRouter } from "next/router"
+
 import { useCallback, useState } from "react"
+
+import { Briefcase, Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import { ProjectAnalyticsModal } from "@components/analytics"
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
 import { IssuesMobileHeader } from "@components/issues/issues-mobile-header"
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
-// helper
-import { renderEmoji } from "@helpers/emoji.helper"
+
 import {
     useApplication,
     useEventTracker,
@@ -19,8 +21,13 @@ import {
     useUser,
 } from "@hooks/store"
 import { useIssues } from "@hooks/store/use-issues"
-import { Briefcase, Plus } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+
+// helper
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
 import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui"
 

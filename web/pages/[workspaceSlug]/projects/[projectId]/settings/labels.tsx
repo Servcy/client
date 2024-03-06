@@ -1,11 +1,16 @@
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+
 import { PageHead } from "@components/core"
 import { ProjectSettingHeader } from "@components/headers"
 import { ProjectSettingsLabelList } from "@components/labels"
+
 import { useProject } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
 import { ProjectSettingLayout } from "@layouts/settings-layout"
-import { observer } from "mobx-react"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const LabelsSettingsPage: NextPageWithLayout = observer(() => {

@@ -1,8 +1,11 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
-import { useUser } from "@hooks/store"
+
 import { Command } from "cmdk"
+
+import { useUser } from "@hooks/store"
+
+import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
 
 type Props = {
     closePalette: () => void

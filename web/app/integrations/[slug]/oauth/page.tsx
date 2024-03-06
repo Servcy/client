@@ -1,11 +1,14 @@
 "use client"
 
 import { useParams, useRouter } from "next/navigation"
+
 import { useEffect } from "react"
+
 import { integrationOauth as integrationOauthApi } from "@/apis/integration"
 import { SyncOutlined } from "@ant-design/icons"
 import { Spin } from "antd"
 import toast from "react-hot-toast"
+
 import { getQueryParams } from "@/utils/Shared"
 import { capitalizeFirstLetter } from "@/utils/Shared/formatters"
 

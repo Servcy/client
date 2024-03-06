@@ -1,5 +1,12 @@
 import { useRouter } from "next/router"
+
 import React, { Fragment, useState } from "react"
+
+import isEmpty from "lodash/isEmpty"
+import size from "lodash/size"
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import { TransferIssues, TransferIssuesModal } from "@components/cycles"
 import {
     CycleAppliedFiltersRoot,
@@ -12,12 +19,11 @@ import {
     IssuePeekOverview,
 } from "@components/issues"
 import { ActiveLoader } from "@components/ui"
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+
 import { useCycle, useIssues } from "@hooks/store"
-import isEmpty from "lodash/isEmpty"
-import size from "lodash/size"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const CycleLayoutRoot: React.FC = observer(() => {

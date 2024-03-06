@@ -1,6 +1,9 @@
 import { FC, useMemo } from "react"
-import { useEventTracker, useIssueDetail } from "@hooks/store"
+
 import toast from "react-hot-toast"
+
+import { useEventTracker, useIssueDetail } from "@hooks/store"
+
 import { IssueAttachmentUpload } from "./attachment-upload"
 import { IssueAttachmentsList } from "./attachments-list"
 

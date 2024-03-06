@@ -1,7 +1,10 @@
 import { FC } from "react"
-import { InstanceAdminSidebarMenu, InstanceHelpSection, InstanceSidebarDropdown } from "@components/instance"
-import { useApplication } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { InstanceAdminSidebarMenu, InstanceHelpSection, InstanceSidebarDropdown } from "@components/instance"
+
+import { useApplication } from "@hooks/store"
 
 export interface IInstanceAdminSidebar {}
 

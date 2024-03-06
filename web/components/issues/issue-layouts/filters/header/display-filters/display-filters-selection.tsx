@@ -1,4 +1,7 @@
 import React from "react"
+
+import { observer } from "mobx-react-lite"
+
 import {
     FilterDisplayProperties,
     FilterExtraOptions,
@@ -7,8 +10,9 @@ import {
     FilterOrderBy,
     FilterSubGroupBy,
 } from "@components/issues"
+
 import { ILayoutDisplayFiltersOptions } from "@constants/issue"
-import { observer } from "mobx-react-lite"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueGroupByOptions } from "@servcy/types"
 
 type Props = {

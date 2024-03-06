@@ -1,6 +1,9 @@
 import { FC } from "react"
-import { useIssueDetail, useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { useIssueDetail, useUser } from "@hooks/store"
+
 // computed
 import { IssueLinkDetail } from "./link-detail"
 import { TLinkOperations } from "./root"

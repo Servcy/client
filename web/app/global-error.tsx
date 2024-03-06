@@ -1,9 +1,13 @@
 "use client"
 
 import { useRouter } from "next/router"
-import DefaultLayout from "@layouts/DefaultLayout"
-import { AuthService } from "@services/auth.service"
+
 import toast from "react-hot-toast"
+
+import DefaultLayout from "@layouts/DefaultLayout"
+
+import { AuthService } from "@services/auth.service"
+
 import { Button } from "@servcy/ui"
 
 const authService = new AuthService()

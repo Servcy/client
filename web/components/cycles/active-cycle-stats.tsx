@@ -1,7 +1,11 @@
 import React, { Fragment } from "react"
-import { SingleProgressStats } from "@components/core"
+
 import { Tab } from "@headlessui/react"
+
+import { SingleProgressStats } from "@components/core"
+
 import useLocalStorage from "@hooks/use-local-storage"
+
 import { ICycle } from "@servcy/types"
 import { Avatar } from "@servcy/ui"
 

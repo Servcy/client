@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { IssueAttachmentRoot, IssueUpdateStatus } from "@components/issues"
+
 import { useIssueDetail, useProjectState, useUser } from "@hooks/store"
 import useReloadConfirmations from "@hooks/use-reload-confirmation"
-import { observer } from "mobx-react-lite"
+
 import { StateGroupIcon } from "@servcy/ui"
+
 import { IssueDescriptionInput } from "../description-input"
 import { SubIssuesRoot } from "../sub-issues"
 import { IssueTitleInput } from "../title-input"

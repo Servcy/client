@@ -1,11 +1,15 @@
 import { Fragment, useRef, useState } from "react"
+
 import { Combobox } from "@headlessui/react"
-import { cn } from "@helpers/common.helper"
+import { ChevronDown } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import { useMember } from "@hooks/store"
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
-import { ChevronDown } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
+import { cn } from "@helpers/common.helper"
+
 import { DropdownButton } from "../buttons"
 import { BUTTON_VARIANTS_WITH_TEXT } from "../constants"
 import { ButtonAvatars } from "./avatar"

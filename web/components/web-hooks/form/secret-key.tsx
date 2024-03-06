@@ -1,13 +1,19 @@
 import { useRouter } from "next/router"
+
 import { FC, useState } from "react"
-import { csvDownload } from "@helpers/download.helper"
-import { copyTextToClipboard } from "@helpers/string.helper"
-import { useWebhook, useWorkspace } from "@hooks/store"
+
 import { Copy, Eye, EyeOff, RefreshCw } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useWebhook, useWorkspace } from "@hooks/store"
+
+import { csvDownload } from "@helpers/download.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+
 import { IWebhook } from "@servcy/types"
 import { Button, Tooltip } from "@servcy/ui"
+
 import { getCurrentHookAsCSV } from "../utils"
 
 type Props = {

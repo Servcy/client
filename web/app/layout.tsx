@@ -8,21 +8,29 @@ import "@/styles/globals.css"
 import dynamic from "next/dynamic"
 import { useRouter } from "next/navigation"
 import Router from "next/router"
+
 import { FC, PropsWithChildren, useEffect, useState } from "react"
+
 import { SyncOutlined } from "@ant-design/icons"
-import { SWR_CONFIG } from "@constants/swr-config"
-import { THEMES } from "@constants/themes"
-import { StoreProvider } from "@contexts/StoreContext"
-import { useUser, useWorkspace } from "@hooks/store"
-import InstanceLayout from "@layouts/instance-layout"
 import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google"
-import { AuthService } from "@services/auth.service"
 import { Analytics } from "@vercel/analytics/react"
 import { Spin } from "antd"
 import { ThemeProvider } from "next-themes"
 import NProgress from "nprogress"
 import toast, { Toaster } from "react-hot-toast"
 import { SWRConfig } from "swr"
+
+import { useUser, useWorkspace } from "@hooks/store"
+
+import { StoreProvider } from "@contexts/StoreContext"
+
+import InstanceLayout from "@layouts/instance-layout"
+
+import { SWR_CONFIG } from "@constants/swr-config"
+import { THEMES } from "@constants/themes"
+
+import { AuthService } from "@services/auth.service"
+
 import { isMobileDevice } from "@/utils/Shared"
 
 // dynamic imports

@@ -1,9 +1,15 @@
 import { useRouter } from "next/router"
+
 import { useCallback } from "react"
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { useIssues, useLabel } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues"
+
+import { useIssues, useLabel } from "@hooks/store"
+
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
 
 export const ProfileIssuesFilter = observer(() => {

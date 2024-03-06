@@ -1,8 +1,11 @@
-import { ProjectEstimateService } from "@services/project"
-import { RootStore } from "@store/root.store"
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { ProjectEstimateService } from "@services/project"
+
+import { RootStore } from "@store/root.store"
+
 import { IEstimate, IEstimateFormData } from "@servcy/types"
 
 export interface IEstimateStore {

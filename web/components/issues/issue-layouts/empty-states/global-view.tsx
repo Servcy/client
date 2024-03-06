@@ -1,9 +1,11 @@
-import { EmptyState } from "@components/common"
-import { useApplication, useEventTracker, useProject } from "@hooks/store"
 import { Plus, PlusIcon } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import emptyIssue from "public/empty-state/issue.svg"
 import emptyProject from "public/empty-state/project.svg"
+
+import { EmptyState } from "@components/common"
+
+import { useApplication, useEventTracker, useProject } from "@hooks/store"
 
 export const GlobalViewEmptyState: React.FC = observer(() => {
     // store hooks

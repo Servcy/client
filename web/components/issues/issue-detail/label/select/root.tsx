@@ -1,4 +1,5 @@
 import { FC } from "react"
+
 import { TLabelOperations } from "../root"
 import { IssueLabelSelect } from "./label-select"
 

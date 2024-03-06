@@ -1,7 +1,10 @@
 import { FC } from "react"
-import { useIssueDetail, useLabel } from "@hooks/store"
+
 import { Tag } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { useIssueDetail, useLabel } from "@hooks/store"
+
 import { IssueActivityBlockComponent, IssueLink } from "./"
 
 type TIssueLabelActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { ModuleForm } from "@components/modules"
-import { MODULE_CREATED, MODULE_UPDATED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useEventTracker, useModule, useProject } from "@hooks/store"
 import { observer } from "mobx-react-lite"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { ModuleForm } from "@components/modules"
+
+import { useEventTracker, useModule, useProject } from "@hooks/store"
+
+import { MODULE_CREATED, MODULE_UPDATED } from "@constants/event-tracker"
+
 import type { IModule } from "@servcy/types"
 
 type Props = {

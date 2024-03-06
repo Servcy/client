@@ -1,13 +1,19 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
+
 import React from "react"
-import { SelectChannel, SelectRepository } from "@components/integration"
-import { PROJECT_GITHUB_REPOSITORY } from "@constants/fetch-keys"
-import { ProjectService } from "@services/project"
+
 import GithubLogo from "public/logos/github-square.png"
 import SlackLogo from "public/services/slack.png"
 import toast from "react-hot-toast"
 import useSWR, { mutate } from "swr"
+
+import { SelectChannel, SelectRepository } from "@components/integration"
+
+import { PROJECT_GITHUB_REPOSITORY } from "@constants/fetch-keys"
+
+import { ProjectService } from "@services/project"
+
 import { IWorkspaceIntegration } from "@servcy/types"
 
 type Props = {

@@ -1,16 +1,22 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
+
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import { MAX_FILE_SIZE } from "@constants/common"
+
 import { Popover, Tab } from "@headlessui/react"
-import { useApplication, useWorkspace } from "@hooks/store"
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
-import { FileService } from "@services/file.service"
 import { observer } from "mobx-react-lite"
 import { useDropzone } from "react-dropzone"
 import { Control, Controller } from "react-hook-form"
 import useSWR from "swr"
+
+import { useApplication, useWorkspace } from "@hooks/store"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { MAX_FILE_SIZE } from "@constants/common"
+
+import { FileService } from "@services/file.service"
+
 import { Button, Input, Loader } from "@servcy/ui"
 
 const tabOptions = [

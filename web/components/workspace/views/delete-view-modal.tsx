@@ -1,12 +1,17 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { GLOBAL_VIEW_DELETED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-// store hooks
-import { useEventTracker, useGlobalView } from "@hooks/store"
 import { AlertTriangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+// store hooks
+import { useEventTracker, useGlobalView } from "@hooks/store"
+
+import { GLOBAL_VIEW_DELETED } from "@constants/event-tracker"
+
 import { IWorkspaceView } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

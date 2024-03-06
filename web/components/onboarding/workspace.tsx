@@ -1,10 +1,15 @@
 import { useState } from "react"
-import { WORKSPACE_CREATED } from "@constants/event-tracker"
-import { RESTRICTED_URLS } from "@constants/workspace"
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
-import { WorkspaceService } from "@services/workspace.service"
+
 import { Control, Controller, FieldErrors, UseFormHandleSubmit, UseFormSetValue } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+
+import { WORKSPACE_CREATED } from "@constants/event-tracker"
+import { RESTRICTED_URLS } from "@constants/workspace"
+
+import { WorkspaceService } from "@services/workspace.service"
+
 import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

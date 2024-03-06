@@ -1,8 +1,11 @@
 import React, { useState } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useUser } from "@hooks/store"
 import { AlertTriangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { useUser } from "@hooks/store"
+
 import { Button } from "@servcy/ui"
 
 type Props = {

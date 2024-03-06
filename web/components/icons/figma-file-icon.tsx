@@ -1,7 +1,10 @@
 import Image from "next/image"
+
 import React from "react"
+
 // image
 import FigmaFileIcon from "public/attachment/figma-icon.png"
+
 // type
 import type { ImageIconPros } from "./types"
 

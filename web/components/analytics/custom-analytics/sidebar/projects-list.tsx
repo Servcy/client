@@ -1,8 +1,10 @@
-import { renderEmoji } from "@helpers/emoji.helper"
-import { truncateText } from "@helpers/string.helper"
-import { useProject } from "@hooks/store"
 import { Contrast, LayoutGrid, Users } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { useProject } from "@hooks/store"
+
+import { renderEmoji } from "@helpers/emoji.helper"
+import { truncateText } from "@helpers/string.helper"
 
 type Props = {
     projectIds: string[]

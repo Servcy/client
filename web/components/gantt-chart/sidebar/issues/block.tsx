@@ -1,11 +1,15 @@
-import { useGanttChart } from "@components/gantt-chart/hooks"
-import { IssueGanttSidebarBlock } from "@components/issues"
 import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
-import { cn } from "@helpers/common.helper"
-import { findTotalDaysInRange } from "@helpers/date-time.helper"
-import { useIssueDetail } from "@hooks/store"
 import { MoreVertical } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { useGanttChart } from "@components/gantt-chart/hooks"
+import { IssueGanttSidebarBlock } from "@components/issues"
+
+import { useIssueDetail } from "@hooks/store"
+
+import { cn } from "@helpers/common.helper"
+import { findTotalDaysInRange } from "@helpers/date-time.helper"
+
 import { BLOCK_HEIGHT } from "../../constants"
 import { IGanttBlock } from "../../types"
 

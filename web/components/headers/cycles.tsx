@@ -1,14 +1,21 @@
 import { useRouter } from "next/router"
+
 import { FC, useCallback } from "react"
-import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
-import { EUserProjectRoles } from "@constants/project"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
-import useLocalStorage from "@hooks/use-local-storage"
+
 import { List, Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+
+import { CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
+import { EUserProjectRoles } from "@constants/project"
+
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { TCycleLayout } from "@servcy/types"
 import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui"
 

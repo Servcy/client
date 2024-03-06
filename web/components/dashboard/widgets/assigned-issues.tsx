@@ -1,5 +1,10 @@
 import Link from "next/link"
+
 import { useEffect, useState } from "react"
+
+import { Tab } from "@headlessui/react"
+import { observer } from "mobx-react-lite"
+
 import {
     DurationFilterDropdown,
     TabsList,
@@ -7,11 +12,13 @@ import {
     WidgetLoader,
     WidgetProps,
 } from "@components/dashboard/widgets"
-import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "@constants/dashboard"
-import { Tab } from "@headlessui/react"
-import { getCustomDates, getRedirectionFilters, getTabKey } from "@helpers/dashboard.helper"
+
 import { useDashboard } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
+import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "@constants/dashboard"
+
+import { getCustomDates, getRedirectionFilters, getTabKey } from "@helpers/dashboard.helper"
+
 import { TAssignedIssuesWidgetFilters, TAssignedIssuesWidgetResponse } from "@servcy/types"
 
 const WIDGET_KEY = "assigned_issues"

@@ -1,5 +1,9 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { UserProfileHeader } from "@components/headers"
 import {
@@ -9,13 +13,17 @@ import {
     ProfileStats,
     ProfileWorkload,
 } from "@components/profile"
-import { USER_PROFILE_DATA } from "@constants/fetch-keys"
-import { GROUP_CHOICES } from "@constants/project"
+
 import { AppLayout } from "@layouts/app-layout"
 import { ProfileAuthWrapper } from "@layouts/user-profile-layout"
+
+import { USER_PROFILE_DATA } from "@constants/fetch-keys"
+import { GROUP_CHOICES } from "@constants/project"
+
 import { UserService } from "@services/user.service"
-import useSWR from "swr"
+
 import { IUserStateDistribution, TStateGroups } from "@servcy/types"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const userService = new UserService()

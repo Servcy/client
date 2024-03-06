@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react"
-import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper"
+
 import { addDays } from "date-fns"
 import { Plus } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper"
+
 import { Tooltip } from "@servcy/ui"
+
 import { useGanttChart } from "../hooks/use-gantt-chart"
 import { IBlockUpdateData, IGanttBlock } from "../types"
 

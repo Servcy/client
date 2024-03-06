@@ -1,9 +1,13 @@
 import { FC, useEffect } from "react"
+
+import { observer } from "mobx-react"
+
 import { TIssueOperations } from "@components/issues"
+
 // store hooks
 import { useIssueDetail, useProject, useUser } from "@hooks/store"
 import useReloadConfirmations from "@hooks/use-reload-confirmation"
-import { observer } from "mobx-react"
+
 import { IssueDescriptionInput } from "../description-input"
 import { IssueReaction } from "../issue-detail/reactions"
 import { IssueTitleInput } from "../title-input"

@@ -1,7 +1,10 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { FC } from "react"
+
 import { useWebhook } from "@hooks/store"
+
 import { IWebhook } from "@servcy/types"
 import { ToggleSwitch } from "@servcy/ui"
 

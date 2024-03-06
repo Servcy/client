@@ -1,11 +1,14 @@
-import { IssueAttachmentService } from "@services/issue"
 import concat from "lodash/concat"
 import pull from "lodash/pull"
 import set from "lodash/set"
 import uniq from "lodash/uniq"
 import update from "lodash/update"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
+import { IssueAttachmentService } from "@services/issue"
+
 import { TIssueAttachment, TIssueAttachmentIdMap, TIssueAttachmentMap } from "@servcy/types"
+
 import { IIssueDetail } from "./root.store"
 
 export interface IIssueAttachmentStoreActions {

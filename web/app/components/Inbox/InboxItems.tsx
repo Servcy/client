@@ -1,5 +1,7 @@
 import Image from "next/image"
+
 import React, { Dispatch, SetStateAction } from "react"
+
 import { disableNotificationType } from "@/apis/integration"
 import { SyncOutlined } from "@ant-design/icons"
 import { Avatar, Button, ConfigProvider, Spin, Table, Tooltip } from "antd"
@@ -8,7 +10,9 @@ import cn from "classnames"
 import toast from "react-hot-toast"
 import { HiArchiveBoxArrowDown } from "react-icons/hi2"
 import { MdOutlineBlock } from "react-icons/md"
+
 import { InboxItem, PaginationDetails } from "@/types/apps/inbox"
+
 import Cause from "./Cause"
 
 const InboxItems = ({

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react"
+
 import { Combobox } from "@headlessui/react"
-//store
-import { useApplication, useMember, useUser } from "@hooks/store"
 //types
 import { Placement } from "@popperjs/core"
 //icon
@@ -9,6 +8,10 @@ import { Check, Search } from "lucide-react"
 import { observer } from "mobx-react"
 //hooks
 import { usePopper } from "react-popper"
+
+//store
+import { useApplication, useMember, useUser } from "@hooks/store"
+
 //components
 import { Avatar } from "@servcy/ui"
 

@@ -1,10 +1,14 @@
 // nivo
+import { BarDatum } from "@nivo/bar"
+
 import { BarGraph } from "@components/ui"
+
 import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper"
 import { findStringWithMostCharacters } from "@helpers/array.helper"
-import { BarDatum } from "@nivo/bar"
+
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
+
 import { CustomTooltip } from "./custom-tooltip"
 
 type Props = {

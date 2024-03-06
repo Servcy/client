@@ -1,5 +1,7 @@
-import { DURATION_FILTER_OPTIONS } from "@constants/dashboard"
 import { ChevronDown } from "lucide-react"
+
+import { DURATION_FILTER_OPTIONS } from "@constants/dashboard"
+
 import { TDurationFilterOptions } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
 

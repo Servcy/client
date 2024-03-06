@@ -1,10 +1,16 @@
 import { useRouter } from "next/router"
+
 import React, { useMemo } from "react"
-import { EIssuesStoreType } from "@constants/issue"
+
+import { observer } from "mobx-react-lite"
+
 // mobx store
 import { useIssues } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { TIssue } from "@servcy/types"
+
 import { ModuleIssueQuickActions } from "../../quick-action-dropdowns"
 import { EIssueActions } from "../../types"
 import { BaseSpreadsheetRoot } from "../base-spreadsheet-root"

@@ -1,8 +1,12 @@
 import React, { useState } from "react"
-import { FilterHeader, FilterOption } from "@components/issues"
-import { useApplication, useModule } from "@hooks/store"
+
 import sortBy from "lodash/sortBy"
 import { observer } from "mobx-react"
+
+import { FilterHeader, FilterOption } from "@components/issues"
+
+import { useApplication, useModule } from "@hooks/store"
+
 import { DiceIcon, Loader } from "@servcy/ui"
 
 type Props = {

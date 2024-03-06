@@ -1,6 +1,8 @@
-import { API_BASE_URL } from "@helpers/common.helper"
 import { APIService } from "@services/api.service"
+
 import { IProjectPublishSettings } from "@store/project/project-publish.store"
+
+import { API_BASE_URL } from "@helpers/common.helper"
 
 export class ProjectPublishService extends APIService {
     constructor() {

@@ -1,16 +1,8 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect, useState } from "react"
-import { LinkModal, LinksList, SidebarProgressStats } from "@components/core"
-import ProgressChart from "@components/core/sidebar/progress-chart"
-import { DateRangeDropdown, MemberDropdown } from "@components/dropdowns"
-import { DeleteModuleModal } from "@components/modules"
-import { MODULE_LINK_CREATED, MODULE_LINK_DELETED, MODULE_LINK_UPDATED, MODULE_UPDATED } from "@constants/event-tracker"
-import { MODULE_STATUS } from "@constants/module"
-import { EUserProjectRoles } from "@constants/project"
+
 import { Disclosure, Transition } from "@headlessui/react"
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useEventTracker, useModule, useUser } from "@hooks/store"
 import {
     AlertCircle,
     CalendarClock,
@@ -25,6 +17,21 @@ import {
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { LinkModal, LinksList, SidebarProgressStats } from "@components/core"
+import ProgressChart from "@components/core/sidebar/progress-chart"
+import { DateRangeDropdown, MemberDropdown } from "@components/dropdowns"
+import { DeleteModuleModal } from "@components/modules"
+
+import { useEventTracker, useModule, useUser } from "@hooks/store"
+
+import { MODULE_LINK_CREATED, MODULE_LINK_DELETED, MODULE_LINK_UPDATED, MODULE_UPDATED } from "@constants/event-tracker"
+import { MODULE_STATUS } from "@constants/module"
+import { EUserProjectRoles } from "@constants/project"
+
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { ILinkDetails, IModule, ModuleLink } from "@servcy/types"
 import { CustomMenu, CustomSelect, LayersIcon, Loader, ModuleStatusIcon, UserGroupIcon } from "@servcy/ui"
 

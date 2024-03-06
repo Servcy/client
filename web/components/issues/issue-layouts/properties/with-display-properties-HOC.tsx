@@ -1,5 +1,7 @@
 import { ReactNode } from "react"
+
 import { observer } from "mobx-react-lite"
+
 import { IIssueDisplayProperties } from "@servcy/types"
 
 interface IWithDisplayPropertiesHOC {

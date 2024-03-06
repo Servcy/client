@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
+
 import { FC, useState } from "react"
-import { ConfirmWorkspaceMemberRemove } from "@components/workspace"
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
-import { useMember, useUser } from "@hooks/store"
+
 import { ChevronDown, XCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { ConfirmWorkspaceMemberRemove } from "@components/workspace"
+
+import { useMember, useUser } from "@hooks/store"
+
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+
 import { CustomSelect, Tooltip } from "@servcy/ui"
 
 type Props = {

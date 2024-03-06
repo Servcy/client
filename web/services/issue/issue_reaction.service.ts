@@ -1,5 +1,7 @@
-import { API_BASE_URL } from "@helpers/common.helper"
 import { APIService } from "@services/api.service"
+
+import { API_BASE_URL } from "@helpers/common.helper"
+
 import type { TIssueCommentReaction, TIssueReaction } from "@servcy/types"
 
 export class IssueReactionService extends APIService {

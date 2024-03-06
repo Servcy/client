@@ -1,5 +1,7 @@
-import { API_BASE_URL } from "@helpers/common.helper"
 import { APIService } from "@services/api.service"
+
+import { API_BASE_URL } from "@helpers/common.helper"
+
 import type { CycleDateCheckData, ICycle, TIssue } from "@servcy/types"
 
 export class CycleService extends APIService {

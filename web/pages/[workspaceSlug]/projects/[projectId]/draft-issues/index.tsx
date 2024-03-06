@@ -1,12 +1,18 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { PenSquare, X } from "lucide-react"
+import { observer } from "mobx-react"
+
 import { PageHead } from "@components/core"
 import { ProjectDraftIssueHeader } from "@components/headers"
 import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/draft-issue-layout-root"
+
 import { useProject } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
-import { PenSquare, X } from "lucide-react"
-import { observer } from "mobx-react"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {

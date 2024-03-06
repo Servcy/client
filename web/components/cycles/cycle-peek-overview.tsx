@@ -1,7 +1,11 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect } from "react"
-import { useCycle } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { useCycle } from "@hooks/store"
+
 import { CycleDetailsSidebar } from "./sidebar"
 
 type Props = {

@@ -1,10 +1,16 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { CycleGanttBlock } from "@components/cycles"
 import { CycleGanttSidebar, GanttChartRoot, IBlockUpdateData } from "@components/gantt-chart"
-import { EUserProjectRoles } from "@constants/project"
+
 import { useCycle, useUser } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
+import { EUserProjectRoles } from "@constants/project"
+
 import { ICycle } from "@servcy/types"
 
 type Props = {

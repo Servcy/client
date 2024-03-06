@@ -1,6 +1,8 @@
 // helper
-import { API_BASE_URL } from "@helpers/common.helper"
 import { APIService } from "@services/api.service"
+
+import { API_BASE_URL } from "@helpers/common.helper"
+
 import { TIssueActivity } from "@servcy/types"
 
 export class IssueActivityService extends APIService {

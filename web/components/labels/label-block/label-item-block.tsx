@@ -1,12 +1,16 @@
 import { useRef, useState } from "react"
+
 import { DraggableProvidedDragHandleProps } from "@hello-pangea/dnd"
+import { LucideIcon, X } from "lucide-react"
+
 //hooks
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
-import { LucideIcon, X } from "lucide-react"
+
 //types
 import { IIssueLabel } from "@servcy/types"
 //ui
 import { CustomMenu } from "@servcy/ui"
+
 //components
 import { DragHandle } from "./drag-handle"
 import { LabelName } from "./label-name"

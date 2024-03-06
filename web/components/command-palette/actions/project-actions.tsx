@@ -1,6 +1,8 @@
-import { useApplication, useEventTracker } from "@hooks/store"
 import { Command } from "cmdk"
 import { ContrastIcon, FileText } from "lucide-react"
+
+import { useApplication, useEventTracker } from "@hooks/store"
+
 import { DiceIcon, PhotoFilterIcon } from "@servcy/ui"
 
 type Props = {

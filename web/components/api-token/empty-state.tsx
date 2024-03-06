@@ -1,6 +1,9 @@
 import Image from "next/image"
+
 import React from "react"
+
 import emptyApiTokens from "public/empty-state/api-token.svg"
+
 import { Button } from "@servcy/ui"
 
 type Props = {

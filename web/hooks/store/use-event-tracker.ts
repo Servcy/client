@@ -1,6 +1,8 @@
 import { useContext } from "react"
+
 // mobx store
 import { StoreContext } from "@contexts/StoreContext"
+
 import { IEventTrackerStore } from "@store/event-tracker.store"
 
 export const useEventTracker = (): IEventTrackerStore => {

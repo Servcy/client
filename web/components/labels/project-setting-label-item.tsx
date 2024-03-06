@@ -1,9 +1,14 @@
 import { useRouter } from "next/router"
+
 import React, { Dispatch, SetStateAction, useState } from "react"
+
 import { DraggableProvidedDragHandleProps, DraggableStateSnapshot } from "@hello-pangea/dnd"
-import { useLabel } from "@hooks/store"
 import { Pencil, X } from "lucide-react"
+
+import { useLabel } from "@hooks/store"
+
 import { IIssueLabel } from "@servcy/types"
+
 import { CreateUpdateLabelInline } from "./create-update-label-inline"
 import { ICustomMenuItem, LabelItemBlock } from "./label-block/label-item-block"
 

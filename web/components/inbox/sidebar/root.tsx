@@ -1,8 +1,12 @@
 import { FC } from "react"
-import { InboxSidebarLoader } from "@components/ui"
-import { useInboxIssues } from "@hooks/store"
+
 import { Inbox } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { InboxSidebarLoader } from "@components/ui"
+
+import { useInboxIssues } from "@hooks/store"
+
 import { InboxIssueAppliedFilter, InboxIssueFilterSelection, InboxIssueList } from "../"
 
 type TInboxSidebarRoot = {

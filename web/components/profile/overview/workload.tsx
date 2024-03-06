@@ -1,4 +1,5 @@
 import { STATE_GROUPS } from "@constants/state"
+
 import { IUserStateDistribution } from "@servcy/types"
 
 type Props = {

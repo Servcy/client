@@ -1,9 +1,13 @@
 import { useState } from "react"
-import { ProjectMemberListItem, SendProjectInvitationModal } from "@components/project"
-import { MembersSettingsLoader } from "@components/ui"
-import { useEventTracker, useMember } from "@hooks/store"
+
 import { Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { ProjectMemberListItem, SendProjectInvitationModal } from "@components/project"
+import { MembersSettingsLoader } from "@components/ui"
+
+import { useEventTracker, useMember } from "@hooks/store"
+
 import { Button } from "@servcy/ui"
 
 export const ProjectMemberList: React.FC = observer(() => {

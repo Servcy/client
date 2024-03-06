@@ -1,23 +1,32 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
+
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+
 // component
 import { ApiTokenListItem, CreateApiTokenModal } from "@components/api-token"
 import { PageHead } from "@components/core"
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { WorkspaceSettingHeader } from "@components/headers"
 import { APITokenSettingsLoader } from "@components/ui"
+
+// store hooks
+import { useUser, useWorkspace } from "@hooks/store"
+
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { API_TOKENS_LIST } from "@constants/fetch-keys"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-// store hooks
-import { useUser, useWorkspace } from "@hooks/store"
-import { AppLayout } from "@layouts/app-layout"
-import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+
 import { APITokenService } from "@services/api_token.service"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
-import useSWR from "swr"
+
 import { Button } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const apiTokenService = new APITokenService()

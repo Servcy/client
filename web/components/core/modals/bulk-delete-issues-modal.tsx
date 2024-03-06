@@ -1,19 +1,26 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-// fetch keys
-import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys"
-import { EIssuesStoreType } from "@constants/issue"
+
 import { Combobox, Dialog, Transition } from "@headlessui/react"
-// store hooks
-import { useIssues, useProject } from "@hooks/store"
-import { IssueService } from "@services/issue"
 import { Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { SubmitHandler, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import useSWR from "swr"
+
+// store hooks
+import { useIssues, useProject } from "@hooks/store"
+
+// fetch keys
+import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys"
+import { EIssuesStoreType } from "@constants/issue"
+
+import { IssueService } from "@services/issue"
+
 import { IUser, TIssue } from "@servcy/types"
 import { Button, LayersIcon } from "@servcy/ui"
+
 import { BulkDeleteIssuesModalItem } from "./bulk-delete-issues-modal-item"
 
 type FormInput = {

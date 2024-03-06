@@ -1,8 +1,12 @@
 import { FC, useCallback, useMemo, useState } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import { Plus } from "lucide-react"
 import toast from "react-hot-toast"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { TIssueLink } from "@servcy/types"
+
 import { IssueLinkCreateUpdateModal } from "./create-update-link-modal"
 import { IssueLinkList } from "./links"
 

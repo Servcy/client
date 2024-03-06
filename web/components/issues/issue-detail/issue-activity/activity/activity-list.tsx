@@ -1,6 +1,9 @@
 import { FC } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { useIssueDetail } from "@hooks/store"
+
 import {
     IssueArchivedAtActivity,
     IssueAssigneeActivity,

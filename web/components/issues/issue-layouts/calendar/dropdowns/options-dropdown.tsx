@@ -1,16 +1,22 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
+
+import { Popover, Transition } from "@headlessui/react"
+import { Check, ChevronUp } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { usePopper } from "react-popper"
+
+import { useCalendarView } from "@hooks/store"
+
 import { CALENDAR_LAYOUTS } from "@constants/calendar"
 import { EIssueFilterType } from "@constants/issue"
-import { Popover, Transition } from "@headlessui/react"
-import { useCalendarView } from "@hooks/store"
+
 import { ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssuesFilter } from "@store/issue/module"
 import { IProjectIssuesFilter } from "@store/issue/project"
 import { IProjectViewIssuesFilter } from "@store/issue/project-views"
-import { Check, ChevronUp } from "lucide-react"
-import { observer } from "mobx-react-lite"
-import { usePopper } from "react-popper"
+
 import { TCalendarLayouts } from "@servcy/types"
 import { ToggleSwitch } from "@servcy/ui"
 

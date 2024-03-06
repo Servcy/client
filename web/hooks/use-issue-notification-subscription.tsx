@@ -1,7 +1,11 @@
 import { useCallback } from "react"
-import useUserAuth from "@hooks/use-user-auth"
-import { NotificationService } from "@services/notification.service"
+
 import useSWR from "swr"
+
+import useUserAuth from "@hooks/use-user-auth"
+
+import { NotificationService } from "@services/notification.service"
+
 import { IUser } from "@servcy/types"
 
 const userNotificationServices = new NotificationService()

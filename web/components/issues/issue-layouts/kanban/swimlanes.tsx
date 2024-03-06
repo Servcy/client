@@ -1,7 +1,11 @@
 import { MutableRefObject } from "react"
-import { TCreateModalStoreTypes } from "@constants/issue"
-import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store"
+
+import { TCreateModalStoreTypes } from "@constants/issue"
+
 import {
     GroupByColumnTypes,
     IGroupByColumn,
@@ -13,6 +17,7 @@ import {
     TSubGroupedIssues,
     TUnGroupedIssues,
 } from "@servcy/types"
+
 import { EIssueActions } from "../types"
 import { getGroupByColumns } from "../utils"
 import { KanBan } from "./default"

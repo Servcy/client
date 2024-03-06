@@ -1,17 +1,23 @@
 "use client"
 
 import Image from "next/image.js"
+
 import { useEffect, useState } from "react"
+
 import { fetchIntegrations } from "@/apis/integration"
 import { Button, Card, Input, Select, Skeleton, Tag } from "antd"
 import toast from "react-hot-toast"
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai"
 import { HiArrowsRightLeft } from "react-icons/hi2"
+
 import { Integration } from "@/types/apps/integration"
+
 import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal"
+
 import { oauthUrlGenerators } from "@/utils/Integration"
 import { getQueryParams } from "@/utils/Shared"
 import { capitalizeFirstLetter } from "@/utils/Shared/formatters"
+
 import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations"
 
 export default function Integrations(): JSX.Element {

@@ -1,10 +1,17 @@
 import { useRouter } from "next/router"
+
 import { FC, useMemo } from "react"
-import { ProjectIssueQuickActions } from "@components/issues"
-import { EIssuesStoreType } from "@constants/issue"
-import { useIssues } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { ProjectIssueQuickActions } from "@components/issues"
+
+import { useIssues } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { TIssue } from "@servcy/types"
+
 import { EIssueActions } from "../../types"
 import { BaseListRoot } from "../base-list-root"
 

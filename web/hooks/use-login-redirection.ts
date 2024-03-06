@@ -1,6 +1,9 @@
 import { useRouter } from "next/router"
+
 import { useCallback, useState } from "react"
+
 import { useUser } from "@hooks/store"
+
 import { IUser, IUserSettings } from "@servcy/types"
 
 type UseSignInRedirectionProps = {

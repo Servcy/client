@@ -1,12 +1,19 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
+
+import { useTheme } from "next-themes"
+
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserProjectRoles } from "@constants/project"
+
 import { useApplication, useUser } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
-import { useTheme } from "next-themes"
+
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { EUserProjectRoles } from "@constants/project"
+
 import { Loader } from "@servcy/ui"
+
 import { PagesListItem } from "./list-item"
 
 type IPagesListView = {

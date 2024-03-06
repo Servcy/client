@@ -1,7 +1,10 @@
-import { PieGraph, ProfileEmptyState } from "@components/ui"
-import { STATE_GROUPS } from "@constants/state"
 // image
 import stateGraph from "public/empty-state/state_graph.svg"
+
+import { PieGraph, ProfileEmptyState } from "@components/ui"
+
+import { STATE_GROUPS } from "@constants/state"
+
 import { IUserProfileData, IUserStateDistribution } from "@servcy/types"
 
 type Props = {

@@ -1,7 +1,10 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React from "react"
+
 import { ProfileIssuesFilter } from "@components/profile"
+
 import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile"
 
 type Props = {

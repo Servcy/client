@@ -1,22 +1,29 @@
 import Link from "next/link"
+
 import { MouseEvent } from "react"
-import { SingleProgressStats } from "@components/core"
-import ProgressChart from "@components/core/sidebar/progress-chart"
-import { ActiveCycleProgressStats } from "@components/cycles"
-import { StateDropdown } from "@components/dropdowns"
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { CYCLE_STATE_GROUPS_DETAILS } from "@constants/cycle"
-import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { CYCLE_ISSUES_WITH_PARAMS } from "@constants/fetch-keys"
-import { EIssuesStoreType } from "@constants/issue"
-import { findHowManyDaysLeft, renderFormattedDate, renderFormattedDateWithoutYear } from "@helpers/date-time.helper"
-import { truncateText } from "@helpers/string.helper"
-import { useCycle, useIssues, useMember, useProject, useUser } from "@hooks/store"
+
 import { ArrowRight, CalendarCheck, CalendarDays, Star, Target } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
 import useSWR from "swr"
+
+import { SingleProgressStats } from "@components/core"
+import ProgressChart from "@components/core/sidebar/progress-chart"
+import { ActiveCycleProgressStats } from "@components/cycles"
+import { StateDropdown } from "@components/dropdowns"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+
+import { useCycle, useIssues, useMember, useProject, useUser } from "@hooks/store"
+
+import { CYCLE_STATE_GROUPS_DETAILS } from "@constants/cycle"
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { CYCLE_ISSUES_WITH_PARAMS } from "@constants/fetch-keys"
+import { EIssuesStoreType } from "@constants/issue"
+
+import { findHowManyDaysLeft, renderFormattedDate, renderFormattedDateWithoutYear } from "@helpers/date-time.helper"
+import { truncateText } from "@helpers/string.helper"
+
 import { ICycle, TCycleGroups } from "@servcy/types"
 import {
     Avatar,

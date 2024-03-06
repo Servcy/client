@@ -1,6 +1,9 @@
 import { FC } from "react"
-import { useIssueDetail, useLabel } from "@hooks/store"
+
 import { X } from "lucide-react"
+
+import { useIssueDetail, useLabel } from "@hooks/store"
+
 import { TLabelOperations } from "./root"
 
 type TLabelListItem = {

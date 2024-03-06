@@ -1,8 +1,12 @@
 import React from "react"
-import { Invitations, OnboardingSidebar, OnboardingStepIndicator, Workspace } from "@components/onboarding"
-import { useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
+
+import { Invitations, OnboardingSidebar, OnboardingStepIndicator, Workspace } from "@components/onboarding"
+
+import { useUser } from "@hooks/store"
+
 import { IWorkspace, TOnboardingSteps } from "@servcy/types"
 
 type Props = {

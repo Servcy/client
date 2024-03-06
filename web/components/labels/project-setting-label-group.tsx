@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
+
 import { Disclosure, Transition } from "@headlessui/react"
 import {
     Draggable,
@@ -7,11 +8,14 @@ import {
     DraggableStateSnapshot,
     Droppable,
 } from "@hello-pangea/dnd"
-import useDraggableInPortal from "@hooks/use-draggable-portal"
 import { ChevronDown, Pencil, Trash2 } from "lucide-react"
 // store
 import { observer } from "mobx-react-lite"
+
+import useDraggableInPortal from "@hooks/use-draggable-portal"
+
 import { IIssueLabel } from "@servcy/types"
+
 import { CreateUpdateLabelInline } from "./create-update-label-inline"
 import { ICustomMenuItem, LabelItemBlock } from "./label-block/label-item-block"
 import { ProjectSettingLabelItem } from "./project-setting-label-item"

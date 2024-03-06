@@ -1,9 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
+
 import { FC } from "react"
+
 import { LayoutGrid } from "lucide-react"
 // images
 import AccessDeniedImg from "public/auth/access-denied.svg"
+
 import { Button } from "@servcy/ui"
 
 interface InstanceAdminRestrictionProps {

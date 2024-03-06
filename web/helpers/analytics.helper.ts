@@ -1,9 +1,12 @@
 // nivo
+import { BarDatum } from "@nivo/bar"
+
 import { DATE_KEYS } from "@constants/analytics"
 import { MONTHS_LIST } from "@constants/calendar"
 import { STATE_GROUPS } from "@constants/state"
+
 import { addSpaceIfCamelCase, capitalizeFirstLetter, generateRandomColor } from "@helpers/string.helper"
-import { BarDatum } from "@nivo/bar"
+
 import { IAnalyticsData, IAnalyticsParams, IAnalyticsResponse, TStateGroups } from "@servcy/types"
 
 export const convertResponseToBarGraphData = (

@@ -1,7 +1,9 @@
 import { FC } from "react"
-import { useApplication } from "@hooks/store"
+
 import { Menu } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { useApplication } from "@hooks/store"
 
 type Props = {
     onClick?: () => void

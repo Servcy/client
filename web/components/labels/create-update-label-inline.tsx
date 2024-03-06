@@ -1,12 +1,17 @@
 import { useRouter } from "next/router"
+
 import React, { forwardRef, useEffect } from "react"
-import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "@constants/label"
+
 import { Popover, Transition } from "@headlessui/react"
-import { useLabel } from "@hooks/store"
 import { observer } from "mobx-react-lite"
 import { TwitterPicker } from "react-color"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useLabel } from "@hooks/store"
+
+import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "@constants/label"
+
 import { IIssueLabel } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

@@ -1,6 +1,9 @@
 import { FC } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { TActivityOperations } from "../root"
 import { IssueCommentCard } from "./comment-card"
 

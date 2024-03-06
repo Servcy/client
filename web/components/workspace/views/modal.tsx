@@ -1,12 +1,18 @@
 import { useRouter } from "next/router"
+
 import React from "react"
-import { WorkspaceViewForm } from "@components/workspace"
-import { GLOBAL_VIEW_CREATED, GLOBAL_VIEW_UPDATED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-// store hooks
-import { useEventTracker, useGlobalView } from "@hooks/store"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { WorkspaceViewForm } from "@components/workspace"
+
+// store hooks
+import { useEventTracker, useGlobalView } from "@hooks/store"
+
+import { GLOBAL_VIEW_CREATED, GLOBAL_VIEW_UPDATED } from "@constants/event-tracker"
+
 import { IWorkspaceView } from "@servcy/types"
 
 type Props = {

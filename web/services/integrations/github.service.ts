@@ -1,5 +1,7 @@
-import { API_BASE_URL } from "@helpers/common.helper"
 import { APIService } from "@services/api.service"
+
+import { API_BASE_URL } from "@helpers/common.helper"
+
 import { IGithubRepoInfo, IGithubServiceImportFormData } from "@servcy/types"
 
 const integrationServiceType: string = "github"

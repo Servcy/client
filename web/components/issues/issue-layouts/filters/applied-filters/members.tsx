@@ -1,6 +1,8 @@
-import { useMember } from "@hooks/store"
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { useMember } from "@hooks/store"
+
 import { Avatar } from "@servcy/ui"
 
 type Props = {

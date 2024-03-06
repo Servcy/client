@@ -1,11 +1,16 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { MODULE_DELETED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useEventTracker, useModule } from "@hooks/store"
 import { AlertTriangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useModule } from "@hooks/store"
+
+import { MODULE_DELETED } from "@constants/event-tracker"
+
 import type { IModule } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

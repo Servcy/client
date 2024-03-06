@@ -1,6 +1,7 @@
+import { Globe2, Lock, LucideIcon } from "lucide-react"
+
 import { SettingIcon } from "@components/icons"
 import { Props } from "@components/icons/types"
-import { Globe2, Lock, LucideIcon } from "lucide-react"
 
 export enum EUserProjectRoles {
     GUEST = 5,

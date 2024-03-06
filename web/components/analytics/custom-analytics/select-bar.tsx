@@ -1,7 +1,10 @@
-import { SelectProject, SelectSegment, SelectXAxis, SelectYAxis } from "@components/analytics"
-import { useProject } from "@hooks/store"
 import { observer } from "mobx-react-lite"
 import { Control, Controller, UseFormSetValue } from "react-hook-form"
+
+import { SelectProject, SelectSegment, SelectXAxis, SelectYAxis } from "@components/analytics"
+
+import { useProject } from "@hooks/store"
+
 import { IAnalyticsParams } from "@servcy/types"
 
 type Props = {

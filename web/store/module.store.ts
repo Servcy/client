@@ -1,10 +1,13 @@
-import { ModuleService } from "@services/module.service"
-import { ProjectService } from "@services/project"
-import { RootStore } from "@store/root.store"
 import set from "lodash/set"
 import sortBy from "lodash/sortBy"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { ModuleService } from "@services/module.service"
+import { ProjectService } from "@services/project"
+
+import { RootStore } from "@store/root.store"
+
 import { ILinkDetails, IModule } from "@servcy/types"
 
 export interface IModuleStore {

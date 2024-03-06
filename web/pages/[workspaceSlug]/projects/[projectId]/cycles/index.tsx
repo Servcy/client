@@ -1,21 +1,29 @@
 import { useRouter } from "next/router"
+
 import { Fragment, ReactElement, useCallback, useState } from "react"
+
+import { Tab } from "@headlessui/react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+
 import { PageHead } from "@components/core"
 import { ActiveCycleDetails, CycleCreateUpdateModal, CyclesView } from "@components/cycles"
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { CyclesHeader } from "@components/headers"
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui"
+
+import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store"
+import useLocalStorage from "@hooks/use-local-storage"
+
+import { AppLayout } from "@layouts/app-layout"
+
 import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
 import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-import { Tab } from "@headlessui/react"
-import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store"
-import useLocalStorage from "@hooks/use-local-storage"
-import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
+
 import { TCycleLayout, TCycleView } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const ProjectCyclesPage: NextPageWithLayout = observer(() => {

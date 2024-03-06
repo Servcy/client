@@ -1,10 +1,16 @@
 import { useRouter } from "next/router"
+
 import { FC, useMemo } from "react"
-import { EUserProjectRoles } from "@constants/project"
-import { useEventTracker, useInboxIssues, useIssueDetail, useUser } from "@hooks/store"
+
 import toast from "react-hot-toast"
 import useSWR from "swr"
+
+import { useEventTracker, useInboxIssues, useIssueDetail, useUser } from "@hooks/store"
+
+import { EUserProjectRoles } from "@constants/project"
+
 import { TIssue } from "@servcy/types"
+
 import { TIssueOperations } from "../root"
 import { InboxIssueMainContent } from "./main-content"
 import { InboxIssueDetailsSidebar } from "./sidebar"

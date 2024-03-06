@@ -1,6 +1,8 @@
 import { useContext } from "react"
+
 // mobx store
 import { StoreContext } from "@contexts/StoreContext"
+
 import { IStateStore } from "@store/state.store"
 
 export const useProjectState = (): IStateStore => {

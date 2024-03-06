@@ -1,10 +1,14 @@
 import { FC, useEffect, useState } from "react"
+
 // store hooks
 import { useMention, useWorkspace } from "@hooks/store"
 import useDebounce from "@hooks/use-debounce"
+
 import { FileService } from "@services/file.service"
+
 import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor"
 import { Loader } from "@servcy/ui"
+
 import { TIssueOperations } from "./issue-detail"
 
 const fileService = new FileService()

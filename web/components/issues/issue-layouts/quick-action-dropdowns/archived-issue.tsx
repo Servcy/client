@@ -1,13 +1,21 @@
 import { useRouter } from "next/router"
+
 import { useState } from "react"
-import { DeleteIssueModal } from "@components/issues"
-import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useEventTracker, useIssues, useUser } from "@hooks/store"
+
 import { ExternalLink, Link, RotateCcw, Trash2 } from "lucide-react"
 import toast from "react-hot-toast"
+
+import { DeleteIssueModal } from "@components/issues"
+
+import { useEventTracker, useIssues, useUser } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { CustomMenu } from "@servcy/ui"
+
 import { IQuickActionProps } from "../list/list-view-types"
 
 export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) => {

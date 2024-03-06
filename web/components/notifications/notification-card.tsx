@@ -1,16 +1,22 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React, { useEffect, useRef } from "react"
+
+import { Menu } from "@headlessui/react"
+import { ArchiveRestore, Clock, MessageSquare, MoreVertical, User2 } from "lucide-react"
+import toast from "react-hot-toast"
+
+import { useEventTracker } from "@hooks/store"
+
 import { ISSUE_OPENED, NOTIFICATION_ARCHIVED, NOTIFICATION_SNOOZED, NOTIFICATIONS_READ } from "@constants/event-tracker"
 import { snoozeOptions } from "@constants/notification"
-import { Menu } from "@headlessui/react"
+
 import { calculateTimeAgo, renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
 // helper
 import { replaceUnderscoreIfSnakeCase, stripAndTruncateHTML, truncateText } from "@helpers/string.helper"
-import { useEventTracker } from "@hooks/store"
-import { ArchiveRestore, Clock, MessageSquare, MoreVertical, User2 } from "lucide-react"
-import toast from "react-hot-toast"
+
 // type
 import type { IUserNotification, NotificationType } from "@servcy/types"
 import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui"

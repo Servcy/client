@@ -1,4 +1,5 @@
 import { enableStaticRendering } from "mobx-react-lite"
+
 // root stores
 import { AppRootStore, IAppRootStore } from "./application"
 import { CycleStore, ICycleStore } from "./cycle.store"

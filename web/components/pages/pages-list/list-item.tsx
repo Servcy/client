@@ -1,12 +1,8 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { FC, useState } from "react"
-import { CreateUpdatePageModal, DeletePageModal } from "@components/pages"
-import { EUserProjectRoles } from "@constants/project"
-import { renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useMember, usePage, useUser } from "@hooks/store"
-import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+
 import {
     AlertCircle,
     Archive,
@@ -20,6 +16,17 @@ import {
     Trash2,
 } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { CreateUpdatePageModal, DeletePageModal } from "@components/pages"
+
+import { useMember, usePage, useUser } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-specific-pages"
+
+import { EUserProjectRoles } from "@constants/project"
+
+import { renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { IIssueLabel } from "@servcy/types"
 import { CustomMenu, Tooltip } from "@servcy/ui"
 

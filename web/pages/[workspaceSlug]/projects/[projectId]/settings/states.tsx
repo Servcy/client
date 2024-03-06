@@ -1,9 +1,12 @@
 import { ReactElement } from "react"
+
 import { ProjectSettingHeader } from "@components/headers"
 import { ProjectSettingStateList } from "@components/states"
+
 // layout
 import { AppLayout } from "@layouts/app-layout"
 import { ProjectSettingLayout } from "@layouts/settings-layout"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const StatesSettingsPage: NextPageWithLayout = () => (

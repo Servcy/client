@@ -1,4 +1,8 @@
 import React, { FC, useEffect, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+import { Controller, useForm } from "react-hook-form"
+
 import {
     WebhookIndividualEventOptions,
     WebhookInput,
@@ -6,9 +10,9 @@ import {
     WebhookSecretKey,
     WebhookToggle,
 } from "@components/web-hooks"
+
 import { useWebhook } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-import { Controller, useForm } from "react-hook-form"
+
 import { IWebhook, TWebhookEventTypes } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

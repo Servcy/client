@@ -1,7 +1,11 @@
 import React from "react"
-import { FilterHeader, FilterOption } from "@components/issues"
-import { ISSUE_FILTER_OPTIONS } from "@constants/issue"
+
 import { observer } from "mobx-react-lite"
+
+import { FilterHeader, FilterOption } from "@components/issues"
+
+import { ISSUE_FILTER_OPTIONS } from "@constants/issue"
+
 import { TIssueTypeFilters } from "@servcy/types"
 
 type Props = {

@@ -1,9 +1,13 @@
 import { useRouter } from "next/router"
+
+import { observer } from "mobx-react-lite"
+
+import { useCycle, useMember, useModule, useProject } from "@hooks/store"
+
 import { NETWORK_CHOICES } from "@constants/project"
+
 import { renderFormattedDate } from "@helpers/date-time.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
-import { useCycle, useMember, useModule, useProject } from "@hooks/store"
-import { observer } from "mobx-react-lite"
 
 export const CustomAnalyticsSidebarHeader = observer(() => {
     const router = useRouter()

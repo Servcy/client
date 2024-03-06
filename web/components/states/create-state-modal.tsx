@@ -1,13 +1,18 @@
 import { useRouter } from "next/router"
+
 import React from "react"
-import { GROUP_CHOICES } from "@constants/project"
+
 import { Dialog, Popover, Transition } from "@headlessui/react"
-import { useProjectState } from "@hooks/store"
 import { ChevronDown } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { TwitterPicker } from "react-color"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useProjectState } from "@hooks/store"
+
+import { GROUP_CHOICES } from "@constants/project"
+
 import type { IState } from "@servcy/types"
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui"
 

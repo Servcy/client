@@ -1,10 +1,14 @@
 import Image from "next/image"
+
 import React, { useState } from "react"
-import { useApplication } from "@hooks/store"
+
 import { UserCog2 } from "lucide-react"
 // images
 import instanceSetupDone from "public/instance-setup-done.webp"
 import ServcyLogo from "public/logo.svg"
+
+import { useApplication } from "@hooks/store"
+
 import { Button } from "@servcy/ui"
 
 export const InstanceSetupDone = () => {

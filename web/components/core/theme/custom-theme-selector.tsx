@@ -1,7 +1,9 @@
-import { useUser } from "@hooks/store"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import { Controller, useForm } from "react-hook-form"
+
+import { useUser } from "@hooks/store"
+
 import { IUserTheme } from "@servcy/types"
 import { Button, InputColorPicker } from "@servcy/ui"
 

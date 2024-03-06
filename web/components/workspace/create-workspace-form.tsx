@@ -1,12 +1,18 @@
 import { useRouter } from "next/router"
+
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react"
-import { WORKSPACE_CREATED } from "@constants/event-tracker"
-import { ORGANIZATION_SIZE, RESTRICTED_URLS } from "@constants/workspace"
-import { useEventTracker, useWorkspace } from "@hooks/store"
-import { WorkspaceService } from "@services/workspace.service"
+
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useWorkspace } from "@hooks/store"
+
+import { WORKSPACE_CREATED } from "@constants/event-tracker"
+import { ORGANIZATION_SIZE, RESTRICTED_URLS } from "@constants/workspace"
+
+import { WorkspaceService } from "@services/workspace.service"
+
 import { IWorkspace } from "@servcy/types"
 import { Button, CustomSelect, Input } from "@servcy/ui"
 

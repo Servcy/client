@@ -1,10 +1,14 @@
 import { useRef, useState } from "react"
+
 import { Draggable } from "@hello-pangea/dnd"
-import { cn } from "@helpers/common.helper"
-import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 import { MoreHorizontal } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { cn } from "@helpers/common.helper"
+
 import { TIssue, TIssueMap } from "@servcy/types"
 import { ControlLink, Tooltip } from "@servcy/ui"
 

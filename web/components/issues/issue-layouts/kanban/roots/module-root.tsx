@@ -1,11 +1,18 @@
 import { useRouter } from "next/router"
+
 import React, { useMemo } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { ModuleIssueQuickActions } from "@components/issues"
-import { EIssuesStoreType } from "@constants/issue"
+
 // hook
 import { useIssues } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { TIssue } from "@servcy/types"
+
 import { EIssueActions } from "../../types"
 import { BaseKanBanRoot } from "../base-kanban-root"
 

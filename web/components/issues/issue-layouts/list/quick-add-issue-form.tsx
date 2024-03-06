@@ -1,14 +1,20 @@
 import { useRouter } from "next/router"
+
 import { FC, use, useEffect, useRef, useState } from "react"
-import { ISSUE_CREATED } from "@constants/event-tracker"
-import { createIssuePayload } from "@helpers/issue.helper"
-import { useEventTracker, useProject } from "@hooks/store"
-import useKeypress from "@hooks/use-key-press"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
 import { PlusIcon } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useProject } from "@hooks/store"
+import useKeypress from "@hooks/use-key-press"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { ISSUE_CREATED } from "@constants/event-tracker"
+
+import { createIssuePayload } from "@helpers/issue.helper"
+
 import { IProject, TIssue } from "@servcy/types"
 
 interface IInputProps {

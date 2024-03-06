@@ -1,5 +1,7 @@
-import { useMember } from "@hooks/store"
 import { observer } from "mobx-react-lite"
+
+import { useMember } from "@hooks/store"
+
 import { Avatar, AvatarGroup, UserGroupIcon } from "@servcy/ui"
 
 type AvatarProps = {

@@ -1,8 +1,12 @@
 import { FC } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import { RotateCcw } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { ArchiveIcon } from "@servcy/ui"
+
 import { IssueActivityBlockComponent } from "./"
 
 type TIssueArchivedAtActivity = { activityId: string; ends: "top" | "bottom" | undefined }

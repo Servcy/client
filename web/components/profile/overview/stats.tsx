@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { UserCircle2 } from "lucide-react"
+
 import { IUserProfileData } from "@servcy/types"
 import { CreateIcon, LayerStackIcon, Loader } from "@servcy/ui"
 

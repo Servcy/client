@@ -1,7 +1,10 @@
 import { useRouter } from "next/router"
-import { ProfileNavbar, ProfileSidebar } from "@components/profile"
-import { useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { ProfileNavbar, ProfileSidebar } from "@components/profile"
+
+import { useUser } from "@hooks/store"
 
 type Props = {
     children: React.ReactNode

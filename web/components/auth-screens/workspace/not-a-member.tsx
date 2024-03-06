@@ -1,5 +1,7 @@
 import Link from "next/link"
+
 import DefaultLayout from "@layouts/DefaultLayout"
+
 import { Button } from "@servcy/ui"
 
 export const NotAWorkspaceMember = () => (

@@ -1,4 +1,7 @@
 import { FC } from "react"
+
+import { CalendarCheck2, CalendarClock, CalendarDays, Link2, Paperclip, Signal, Tag, Triangle } from "lucide-react"
+
 import {
     SpreadsheetAssigneeColumn,
     SpreadsheetAttachmentColumn,
@@ -15,7 +18,7 @@ import {
     SpreadsheetSubIssueColumn,
     SpreadsheetUpdatedOnColumn,
 } from "@components/issues/issue-layouts/spreadsheet"
-import { CalendarCheck2, CalendarClock, CalendarDays, Link2, Paperclip, Signal, Tag, Triangle } from "lucide-react"
+
 import { IIssueDisplayProperties, TIssue, TIssueOrderByOptions } from "@servcy/types"
 import { ContrastIcon, DiceIcon, DoubleCircleIcon, LayersIcon, UserGroupIcon } from "@servcy/ui"
 import { ISvgIcons } from "@servcy/ui/src/icons/type"

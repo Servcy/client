@@ -1,7 +1,11 @@
 import { FC, ReactNode } from "react"
-import { CommandPalette } from "@components/command-palette"
-import { ProjectAuthWrapper, UserAuthWrapper, WorkspaceAuthWrapper } from "@layouts/auth-layout"
+
 import { observer } from "mobx-react-lite"
+
+import { CommandPalette } from "@components/command-palette"
+
+import { ProjectAuthWrapper, UserAuthWrapper, WorkspaceAuthWrapper } from "@layouts/auth-layout"
+
 import { AppSidebar } from "./sidebar"
 
 export interface IAppLayout {

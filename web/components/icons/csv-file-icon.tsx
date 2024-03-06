@@ -1,7 +1,10 @@
 import Image from "next/image"
+
 import React from "react"
+
 // image
 import CSVFileIcon from "public/attachment/csv-icon.png"
+
 // type
 import type { ImageIconPros } from "./types"
 

@@ -1,5 +1,6 @@
-import { substringMatch } from "@helpers/string.helper"
 import { Command } from "lucide-react"
+
+import { substringMatch } from "@helpers/string.helper"
 
 type Props = {
     searchQuery: string

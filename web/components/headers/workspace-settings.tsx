@@ -1,10 +1,15 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
-import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
+
 import { Settings } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
+
 import { Breadcrumbs, CustomMenu } from "@servcy/ui"
 
 export interface IWorkspaceSettingHeader {

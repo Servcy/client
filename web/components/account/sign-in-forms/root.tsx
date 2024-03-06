@@ -1,5 +1,9 @@
 import Link from "next/link"
+
 import React, { useEffect, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import {
     OAuthOptions,
     SignInEmailForm,
@@ -8,10 +12,11 @@ import {
     SignInUniqueCodeForm,
 } from "@components/account"
 import { LatestFeatureBlock } from "@components/common"
-import { NAVIGATE_TO_SIGNUP } from "@constants/event-tracker"
+
 import { useApplication, useEventTracker } from "@hooks/store"
 import useSignInRedirection from "@hooks/use-login-redirection"
-import { observer } from "mobx-react-lite"
+
+import { NAVIGATE_TO_SIGNUP } from "@constants/event-tracker"
 
 export enum ESignInSteps {
     EMAIL = "EMAIL",

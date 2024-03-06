@@ -1,13 +1,8 @@
 import Image from "next/image"
+
 import React, { useEffect, useRef, useState } from "react"
-import { OnboardingStepIndicator } from "@components/onboarding/step-indicator"
-import { MEMBER_INVITED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+
 import { Listbox, Transition } from "@headlessui/react"
-import { getUserRole } from "@helpers/user.helper"
-import { useEventTracker } from "@hooks/store"
-import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
-import { WorkspaceService } from "@services/workspace.service"
 import { Check, ChevronDown, Plus, XCircle } from "lucide-react"
 import { useTheme } from "next-themes"
 import userDark from "public/onboarding/user-dark.svg"
@@ -26,6 +21,19 @@ import {
     UseFormWatch,
 } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { OnboardingStepIndicator } from "@components/onboarding/step-indicator"
+
+import { useEventTracker } from "@hooks/store"
+import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
+
+import { MEMBER_INVITED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+
+import { WorkspaceService } from "@services/workspace.service"
+
+import { getUserRole } from "@helpers/user.helper"
+
 import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

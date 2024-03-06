@@ -1,6 +1,9 @@
 import { MutableRefObject } from "react"
+
 import { Droppable } from "@hello-pangea/dnd"
+
 import { useProjectState } from "@hooks/store"
+
 //types
 import {
     IIssueDisplayProperties,
@@ -10,6 +13,7 @@ import {
     TSubGroupedIssues,
     TUnGroupedIssues,
 } from "@servcy/types"
+
 //components
 import { KanbanIssueBlocksList, KanBanQuickAddIssueForm } from "."
 import { EIssueActions } from "../types"

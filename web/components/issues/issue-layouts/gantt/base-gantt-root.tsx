@@ -1,16 +1,25 @@
 import { useRouter } from "next/router"
+
 import React from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { GanttChartRoot, IBlockUpdateData, IssueGanttSidebar } from "@components/gantt-chart"
 import { GanttQuickAddIssueForm, IssueGanttBlock } from "@components/issues"
-import { EUserProjectRoles } from "@constants/project"
-import { renderIssueBlocksStructure } from "@helpers/issue.helper"
+
 import { useIssues, useUser } from "@hooks/store"
+
+import { EUserProjectRoles } from "@constants/project"
+
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
 import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project"
 import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views"
-import { observer } from "mobx-react-lite"
+
+import { renderIssueBlocksStructure } from "@helpers/issue.helper"
+
 import { TIssue, TUnGroupedIssues } from "@servcy/types"
+
 import { EIssueActions } from "../types"
 
 interface IBaseGanttRoot {

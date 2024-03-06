@@ -1,5 +1,6 @@
-import { DAYS_LIST } from "@constants/calendar"
 import { observer } from "mobx-react-lite"
+
+import { DAYS_LIST } from "@constants/calendar"
 
 type Props = {
     isLoading: boolean

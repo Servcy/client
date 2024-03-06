@@ -1,9 +1,14 @@
 import { useRouter } from "next/router"
-import { WORKSPACE_MEMBERS } from "@constants/fetch-keys"
-import { WorkspaceService } from "@services/workspace.service"
+
 import useSWR from "swr"
+
+import { WORKSPACE_MEMBERS } from "@constants/fetch-keys"
+
+import { WorkspaceService } from "@services/workspace.service"
+
 import { IGithubRepoCollaborator } from "@servcy/types"
 import { Avatar, CustomSearchSelect, CustomSelect, Input } from "@servcy/ui"
+
 import { IUserDetails } from "./root"
 
 type Props = {

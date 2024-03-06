@@ -1,5 +1,7 @@
-import { STATE_GROUPS } from "@constants/state"
 import { Triangle } from "lucide-react"
+
+import { STATE_GROUPS } from "@constants/state"
+
 import { IDefaultAnalyticsResponse, TStateGroups } from "@servcy/types"
 
 type Props = {

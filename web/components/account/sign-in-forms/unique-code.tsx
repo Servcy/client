@@ -1,13 +1,19 @@
 import React, { useState } from "react"
-import { CODE_VERIFIED } from "@constants/event-tracker"
-import { checkEmailValidity } from "@helpers/string.helper"
-import { useEventTracker } from "@hooks/store"
-import useTimer from "@hooks/use-timer"
-import { AuthService } from "@services/auth.service"
-import { UserService } from "@services/user.service"
+
 import { XCircle } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker } from "@hooks/store"
+import useTimer from "@hooks/use-timer"
+
+import { CODE_VERIFIED } from "@constants/event-tracker"
+
+import { AuthService } from "@services/auth.service"
+import { UserService } from "@services/user.service"
+
+import { checkEmailValidity } from "@helpers/string.helper"
+
 import { IEmailCheckData, IMagicSignInData } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

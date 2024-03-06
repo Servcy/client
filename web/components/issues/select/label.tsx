@@ -1,13 +1,17 @@
 import { useRouter } from "next/router"
+
 import React, { Fragment, useEffect, useRef, useState } from "react"
-import { IssueLabelsList } from "@components/ui"
+
 import { Combobox } from "@headlessui/react"
-import { useLabel } from "@hooks/store"
-import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 import { Check, Component, Plus, Search, Tag } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { usePopper } from "react-popper"
+
+import { IssueLabelsList } from "@components/ui"
+
+import { useLabel } from "@hooks/store"
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
 type Props = {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>

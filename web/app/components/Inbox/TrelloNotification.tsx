@@ -1,6 +1,7 @@
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"
+
 import { TrelloNotificationProps } from "@/types/integrations/trello"
 
 const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {

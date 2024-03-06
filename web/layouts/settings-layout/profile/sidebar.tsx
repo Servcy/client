@@ -1,14 +1,19 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { useEffect, useRef, useState } from "react"
-import { PROFILE_ACTION_LINKS } from "@constants/profile"
-import { useApplication, useUser, useWorkspace } from "@hooks/store"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
 import { ChevronLeft, LogOut, MoveLeft, Plus, UserPlus } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
 import { mutate } from "swr"
+
+import { useApplication, useUser, useWorkspace } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { PROFILE_ACTION_LINKS } from "@constants/profile"
+
 import { Tooltip } from "@servcy/ui"
 
 const WORKSPACE_ACTION_LINKS = [

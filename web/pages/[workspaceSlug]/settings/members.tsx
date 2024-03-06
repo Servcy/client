@@ -1,19 +1,28 @@
 import { useRouter } from "next/router"
+
 import { ReactElement, useState } from "react"
-import { PageHead } from "@components/core"
-import { WorkspaceSettingHeader } from "@components/headers"
-import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace"
-import { MEMBER_INVITED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles } from "@constants/workspace"
-import { getUserRole } from "@helpers/user.helper"
-import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
-import { AppLayout } from "@layouts/app-layout"
-import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+
 import { Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { PageHead } from "@components/core"
+import { WorkspaceSettingHeader } from "@components/headers"
+import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace"
+
+import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
+
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+
+import { MEMBER_INVITED } from "@constants/event-tracker"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
+import { getUserRole } from "@helpers/user.helper"
+
 import { IWorkspaceBulkInviteFormData } from "@servcy/types"
 import { Button } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {

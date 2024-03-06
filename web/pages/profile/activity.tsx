@@ -1,19 +1,29 @@
 import Link from "next/link"
+
 import { ReactElement } from "react"
-import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/core"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { ActivitySettingsLoader } from "@components/ui"
-import { USER_ACTIVITY } from "@constants/fetch-keys"
-// helper
-import { calculateTimeAgo } from "@helpers/date-time.helper"
-//hooks
-import { useApplication, useUser } from "@hooks/store"
-import { ProfileSettingsLayout } from "@layouts/settings-layout"
-import { UserService } from "@services/user.service"
+
 import { History, MessageSquare } from "lucide-react"
 import { observer } from "mobx-react"
 import useSWR from "swr"
+
+import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/core"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { ActivitySettingsLoader } from "@components/ui"
+
+//hooks
+import { useApplication, useUser } from "@hooks/store"
+
+import { ProfileSettingsLayout } from "@layouts/settings-layout"
+
+import { USER_ACTIVITY } from "@constants/fetch-keys"
+
+import { UserService } from "@services/user.service"
+
+// helper
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor"
+
 // type
 import { NextPageWithLayout } from "@/types/types"
 

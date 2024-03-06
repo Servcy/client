@@ -1,6 +1,8 @@
 import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types"
 import { LayersIcon } from "@servcy/ui"
+
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
 import { SpreadsheetHeaderColumn } from "./spreadsheet-header-column"
 

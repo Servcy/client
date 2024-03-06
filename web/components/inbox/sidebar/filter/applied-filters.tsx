@@ -1,10 +1,15 @@
 import { FC } from "react"
-import { INBOX_STATUS } from "@constants/inbox"
-import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
-// mobx store
-import { useInboxIssues } from "@hooks/store"
+
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+// mobx store
+import { useInboxIssues } from "@hooks/store"
+
+import { INBOX_STATUS } from "@constants/inbox"
+
+import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
+
 import { TInboxIssueFilterOptions, TIssuePriorities } from "@servcy/types"
 import { PriorityIcon } from "@servcy/ui"
 

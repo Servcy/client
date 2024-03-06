@@ -1,5 +1,7 @@
-import { useProject } from "@hooks/store"
 import { observer } from "mobx-react-lite"
+
+import { useProject } from "@hooks/store"
+
 import { CustomSearchSelect } from "@servcy/ui"
 
 type Props = {

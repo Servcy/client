@@ -1,10 +1,14 @@
 import React from "react"
-// import { ISubIssuesRootLoaders, ISubIssuesRootLoadersHandler } from "./root";
-import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+
 import { ChevronDown, ChevronRight, Link as LinkIcon, Loader, Pencil, Trash, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+// import { ISubIssuesRootLoaders, ISubIssuesRootLoadersHandler } from "./root";
+import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+
 import { TIssue } from "@servcy/types"
 import { ControlLink, CustomMenu, Tooltip } from "@servcy/ui"
+
 import { IssueList } from "./issues-list"
 import { IssueProperty } from "./properties"
 import { TSubIssueOperations } from "./root"

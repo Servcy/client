@@ -1,6 +1,9 @@
 import Image from "next/image"
-import { ASSIGNED_ISSUES_EMPTY_STATES } from "@constants/dashboard"
+
 import { useTheme } from "next-themes"
+
+import { ASSIGNED_ISSUES_EMPTY_STATES } from "@constants/dashboard"
+
 import { TIssuesListTypes } from "@servcy/types"
 
 type Props = {

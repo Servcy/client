@@ -1,10 +1,14 @@
 import { FC } from "react"
-import { CyclePeekOverview, CyclesBoardCard } from "@components/cycles"
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
+
+import { CyclePeekOverview, CyclesBoardCard } from "@components/cycles"
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+
+import { useUser } from "@hooks/store"
+
+import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 
 export interface ICyclesBoard {
     cycleIds: string[]

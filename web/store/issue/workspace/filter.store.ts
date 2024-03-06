@@ -1,11 +1,15 @@
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
-import { handleIssueQueryParamsByLayout } from "@helpers/issue.helper"
-import { WorkspaceService } from "@services/workspace.service"
 import isArray from "lodash/isArray"
 import isEmpty from "lodash/isEmpty"
 import pickBy from "lodash/pickBy"
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+
+import { WorkspaceService } from "@services/workspace.service"
+
+import { handleIssueQueryParamsByLayout } from "@helpers/issue.helper"
+
 import {
     IIssueDisplayFilterOptions,
     IIssueDisplayProperties,
@@ -15,6 +19,7 @@ import {
     TIssueParams,
     TStaticViewTypes,
 } from "@servcy/types"
+
 // base class
 import { IssueFilterHelperStore } from "../helpers/issue-filter-helper.store"
 import { IIssueRootStore } from "../root.store"

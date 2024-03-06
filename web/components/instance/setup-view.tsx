@@ -1,10 +1,14 @@
 import Image from "next/image"
+
 import { useCallback, useEffect } from "react"
-import { InstanceSetupFormRoot } from "@components/instance"
-import { useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 // images
 import ServcyLogo from "public/logo.png"
+
+import { InstanceSetupFormRoot } from "@components/instance"
+
+import { useUser } from "@hooks/store"
 
 export const InstanceSetupView = observer(() => {
     // store hooks

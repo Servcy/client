@@ -1,13 +1,19 @@
 import { useRouter } from "next/router"
+
 import { FC, useState } from "react"
+
+import { Plus } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import { CreateInboxIssueModal } from "@components/inbox"
+
+import { useProject } from "@hooks/store"
+
 // helper
 import { renderEmoji } from "@helpers/emoji.helper"
-import { useProject } from "@hooks/store"
-import { Plus } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
 import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui"
 
 export const ProjectInboxHeader: FC = observer(() => {

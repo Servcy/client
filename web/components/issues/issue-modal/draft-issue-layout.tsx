@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { ConfirmIssueDiscard } from "@components/issues"
-import { IssueFormRoot } from "@components/issues/issue-modal/form"
-import { useEventTracker } from "@hooks/store"
-import { IssueDraftService } from "@services/issue"
+
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { ConfirmIssueDiscard } from "@components/issues"
+import { IssueFormRoot } from "@components/issues/issue-modal/form"
+
+import { useEventTracker } from "@hooks/store"
+
+import { IssueDraftService } from "@services/issue"
+
 import type { TIssue } from "@servcy/types"
 
 export interface DraftIssueProps {

@@ -1,16 +1,23 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules"
-import { MODULE_FAVORITED, MODULE_UNFAVORITED } from "@constants/event-tracker"
-import { MODULE_STATUS } from "@constants/module"
-import { EUserProjectRoles } from "@constants/project"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useEventTracker, useMember, useModule, useUser } from "@hooks/store"
+
 import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules"
+
+import { useEventTracker, useMember, useModule, useUser } from "@hooks/store"
+
+import { MODULE_FAVORITED, MODULE_UNFAVORITED } from "@constants/event-tracker"
+import { MODULE_STATUS } from "@constants/module"
+import { EUserProjectRoles } from "@constants/project"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { Avatar, AvatarGroup, CustomMenu, LayersIcon, Tooltip } from "@servcy/ui"
 
 type Props = {

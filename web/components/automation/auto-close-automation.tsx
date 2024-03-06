@@ -1,10 +1,15 @@
 import React, { useState } from "react"
-// component
-import { SelectMonthModal } from "@components/automation"
-import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project"
-import { useProject, useProjectState, useUser } from "@hooks/store"
+
 import { ArchiveX } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+// component
+import { SelectMonthModal } from "@components/automation"
+
+import { useProject, useProjectState, useUser } from "@hooks/store"
+
+import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project"
+
 import { IProject } from "@servcy/types"
 import { CustomSearchSelect, CustomSelect, DoubleCircleIcon, Loader, StateGroupIcon, ToggleSwitch } from "@servcy/ui"
 

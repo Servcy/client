@@ -1,10 +1,15 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
-// fetch keys
-import { WORKSPACE_MEMBERS } from "@constants/fetch-keys"
-import { WorkspaceService } from "@services/workspace.service"
+
 import { Controller, useFieldArray, useFormContext } from "react-hook-form"
 import useSWR from "swr"
+
+// fetch keys
+import { WORKSPACE_MEMBERS } from "@constants/fetch-keys"
+
+import { WorkspaceService } from "@services/workspace.service"
+
 import { IJiraImporterForm } from "@servcy/types"
 import { Avatar, CustomSearchSelect, CustomSelect, Input, ToggleSwitch } from "@servcy/ui"
 

@@ -1,7 +1,11 @@
 import { FC } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import useSWR from "swr"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { TIssue } from "@servcy/types"
+
 import { IssueParentSiblingItem } from "./sibling-item"
 
 export type TIssueParentSiblings = {

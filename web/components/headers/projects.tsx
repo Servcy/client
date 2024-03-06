@@ -1,9 +1,13 @@
-import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { EUserWorkspaceRoles } from "@constants/workspace"
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 import { Briefcase, Plus, Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { Breadcrumbs, Button } from "@servcy/ui"
 
 export const ProjectsHeader = observer(() => {

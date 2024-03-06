@@ -1,12 +1,17 @@
 import { useRouter } from "next/router"
-import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { EMPTY_FILTER_STATE_DETAILS, EMPTY_ISSUE_STATE_DETAILS } from "@constants/empty-state"
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
-import { useIssues, useUser } from "@hooks/store"
+
 import size from "lodash/size"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
+
+import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
+
+import { useIssues, useUser } from "@hooks/store"
+
+import { EMPTY_FILTER_STATE_DETAILS, EMPTY_ISSUE_STATE_DETAILS } from "@constants/empty-state"
+import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+
 import { IIssueFilterOptions } from "@servcy/types"
 
 interface EmptyStateProps {

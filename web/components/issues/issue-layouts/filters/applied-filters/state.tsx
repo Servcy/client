@@ -1,5 +1,6 @@
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
 import { IState } from "@servcy/types"
 import { StateGroupIcon } from "@servcy/ui"
 

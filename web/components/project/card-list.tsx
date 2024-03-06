@@ -1,11 +1,14 @@
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { ProjectCard } from "@components/project"
 import { ProjectsLoader } from "@components/ui"
+
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
 
 export const ProjectCardList = observer(() => {
     // theme

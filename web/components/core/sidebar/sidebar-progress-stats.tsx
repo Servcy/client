@@ -1,12 +1,17 @@
 import Image from "next/image"
+
 import React from "react"
-import { SingleProgressStats } from "@components/core"
+
 // headless ui
 import { Tab } from "@headlessui/react"
-import useLocalStorage from "@hooks/use-local-storage"
 // images
 import emptyLabel from "public/empty-state/empty_label.svg"
 import emptyMembers from "public/empty-state/empty_members.svg"
+
+import { SingleProgressStats } from "@components/core"
+
+import useLocalStorage from "@hooks/use-local-storage"
+
 import {
     IModule,
     TAssigneesDistribution,

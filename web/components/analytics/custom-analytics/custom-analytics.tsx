@@ -1,12 +1,19 @@
 import { useRouter } from "next/router"
-import { CustomAnalyticsMainContent, CustomAnalyticsSelectBar, CustomAnalyticsSidebar } from "@components/analytics"
-import { ANALYTICS } from "@constants/fetch-keys"
-import { cn } from "@helpers/common.helper"
-import { useApplication } from "@hooks/store"
-import { AnalyticsService } from "@services/analytics.service"
+
 import { observer } from "mobx-react-lite"
 import { useForm } from "react-hook-form"
 import useSWR from "swr"
+
+import { CustomAnalyticsMainContent, CustomAnalyticsSelectBar, CustomAnalyticsSidebar } from "@components/analytics"
+
+import { useApplication } from "@hooks/store"
+
+import { ANALYTICS } from "@constants/fetch-keys"
+
+import { AnalyticsService } from "@services/analytics.service"
+
+import { cn } from "@helpers/common.helper"
+
 import { IAnalyticsParams } from "@servcy/types"
 
 type Props = {

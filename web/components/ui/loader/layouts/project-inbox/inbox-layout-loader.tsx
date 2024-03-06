@@ -1,5 +1,7 @@
 import React from "react"
+
 import { Loader } from "@servcy/ui"
+
 import { InboxSidebarLoader } from "./inbox-sidebar-loader"
 
 export const InboxLayoutLoader = () => (

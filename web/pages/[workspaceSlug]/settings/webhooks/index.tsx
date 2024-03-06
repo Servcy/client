@@ -1,18 +1,26 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { WorkspaceSettingHeader } from "@components/headers"
 import { WebhookSettingsLoader } from "@components/ui"
 import { CreateWebhookModal, WebhooksList } from "@components/web-hooks"
-import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+
 import { useUser, useWebhook, useWorkspace } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
 import { WorkspaceSettingLayout } from "@layouts/settings-layout"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
-import useSWR from "swr"
+
+import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+
 import { Button } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const WebhooksListPage: NextPageWithLayout = observer(() => {

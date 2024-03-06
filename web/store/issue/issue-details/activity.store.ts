@@ -1,11 +1,14 @@
-import { IssueActivityService } from "@services/issue"
 import concat from "lodash/concat"
 import set from "lodash/set"
 import sortBy from "lodash/sortBy"
 import uniq from "lodash/uniq"
 import update from "lodash/update"
 import { action, makeObservable, observable, runInAction } from "mobx"
+
+import { IssueActivityService } from "@services/issue"
+
 import { TIssueActivity, TIssueActivityComment, TIssueActivityIdMap, TIssueActivityMap } from "@servcy/types"
+
 import { IIssueDetail } from "./root.store"
 
 export type TActivityLoader = "fetch" | "mutate" | undefined

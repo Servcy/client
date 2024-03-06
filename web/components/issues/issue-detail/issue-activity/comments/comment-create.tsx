@@ -1,12 +1,18 @@
 import { FC, useRef } from "react"
-import { isEmptyHtmlString } from "@helpers/string.helper"
-import { useMention, useWorkspace } from "@hooks/store"
-import { FileService } from "@services/file.service"
+
 import { Globe2, Lock } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
+
+import { useMention, useWorkspace } from "@hooks/store"
+
+import { FileService } from "@services/file.service"
+
+import { isEmptyHtmlString } from "@helpers/string.helper"
+
 import { LiteTextEditorWithRef } from "@servcy/lite-text-editor"
 import { TIssueComment } from "@servcy/types"
 import { Button } from "@servcy/ui"
+
 import { TActivityOperations } from "../root"
 
 const fileService = new FileService()

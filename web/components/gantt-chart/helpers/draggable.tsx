@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from "react"
-import { IGanttBlock } from "@components/gantt-chart"
-import { cn } from "@helpers/common.helper"
+
 import { ArrowRight } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { IGanttBlock } from "@components/gantt-chart"
+
+import { cn } from "@helpers/common.helper"
+
 import { SIDEBAR_WIDTH } from "../constants"
 import { useGanttChart } from "../hooks/use-gantt-chart"
 

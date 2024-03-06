@@ -1,4 +1,5 @@
 import Link from "next/link"
+
 import {
     AssignedCompletedIssueListItem,
     AssignedIssuesEmptyState,
@@ -10,9 +11,12 @@ import {
     CreatedUpcomingIssueListItem,
     IssueListItemProps,
 } from "@components/dashboard/widgets"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { cn } from "@helpers/common.helper"
 import { getRedirectionFilters } from "@helpers/dashboard.helper"
-import { useIssueDetail } from "@hooks/store"
+
 import { TAssignedIssuesWidgetResponse, TCreatedIssuesWidgetResponse, TIssue, TIssuesListTypes } from "@servcy/types"
 import { getButtonStyling, Loader } from "@servcy/ui"
 

@@ -1,6 +1,8 @@
-import { NotificationService } from "@services/notification.service"
 import set from "lodash/set"
 import { action, makeObservable, observable, runInAction } from "mobx"
+
+import { NotificationService } from "@services/notification.service"
+
 import { IIssueDetail } from "./root.store"
 
 export interface IIssueSubscriptionStoreActions {

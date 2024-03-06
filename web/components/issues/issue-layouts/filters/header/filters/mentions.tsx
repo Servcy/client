@@ -1,7 +1,11 @@
 import { useState } from "react"
-import { FilterHeader, FilterOption } from "@components/issues"
-import { useMember } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { FilterHeader, FilterOption } from "@components/issues"
+
+import { useMember } from "@hooks/store"
+
 import { Avatar, Loader } from "@servcy/ui"
 
 type Props = {

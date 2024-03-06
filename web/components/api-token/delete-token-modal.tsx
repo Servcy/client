@@ -1,10 +1,15 @@
 import { useRouter } from "next/router"
+
 import { FC, Fragment, useState } from "react"
-import { API_TOKENS_LIST } from "@constants/fetch-keys"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { APITokenService } from "@services/api_token.service"
 import toast from "react-hot-toast"
 import { mutate } from "swr"
+
+import { API_TOKENS_LIST } from "@constants/fetch-keys"
+
+import { APITokenService } from "@services/api_token.service"
+
 import { IApiToken } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

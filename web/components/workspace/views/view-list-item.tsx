@@ -1,13 +1,19 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { useState } from "react"
-import { CreateUpdateWorkspaceViewModal, DeleteGlobalViewModal } from "@components/workspace"
-import { calculateTotalFilters } from "@helpers/filter.helper"
-import { truncateText } from "@helpers/string.helper"
-// store hooks
-import { useEventTracker, useGlobalView } from "@hooks/store"
+
 import { Pencil, Trash2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { CreateUpdateWorkspaceViewModal, DeleteGlobalViewModal } from "@components/workspace"
+
+// store hooks
+import { useEventTracker, useGlobalView } from "@hooks/store"
+
+import { calculateTotalFilters } from "@helpers/filter.helper"
+import { truncateText } from "@helpers/string.helper"
+
 import { CustomMenu } from "@servcy/ui"
 
 type Props = { viewId: string }

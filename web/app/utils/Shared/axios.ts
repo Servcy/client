@@ -1,6 +1,7 @@
 import { refreshTokens as refreshTokensApi } from "@/apis/authentication"
 import Axios from "axios"
 import { getCookie, setCookie } from "cookies-next"
+
 import { isJwtTokenValid } from "@/utils/Authentication/jwt"
 
 const SERVER_URL = process.env["NEXT_PUBLIC_SERVER_URL"]

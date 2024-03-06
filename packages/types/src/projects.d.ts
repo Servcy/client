@@ -1,4 +1,5 @@
 import { EUserProjectRoles } from "@constants/project"
+
 import type { IUser, IUserLite, IWorkspace, IWorkspaceLite, TStateGroups } from "."
 
 export interface IProject {

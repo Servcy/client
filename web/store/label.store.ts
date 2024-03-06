@@ -1,10 +1,14 @@
-import { buildTree } from "@helpers/array.helper"
-import { IssueLabelService } from "@services/issue"
-import { RootStore } from "@store/root.store"
 import set from "lodash/set"
 import sortBy from "lodash/sortBy"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { IssueLabelService } from "@services/issue"
+
+import { RootStore } from "@store/root.store"
+
+import { buildTree } from "@helpers/array.helper"
+
 import { IIssueLabel, IIssueLabelTree } from "@servcy/types"
 
 export interface ILabelStore {

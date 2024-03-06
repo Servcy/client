@@ -1,12 +1,17 @@
 import React, { useState } from "react"
-import { MAX_FILE_SIZE } from "@constants/common"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useApplication } from "@hooks/store"
-import { FileService } from "@services/file.service"
 import { UserCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useDropzone } from "react-dropzone"
 import toast from "react-hot-toast"
+
+import { useApplication } from "@hooks/store"
+
+import { MAX_FILE_SIZE } from "@constants/common"
+
+import { FileService } from "@services/file.service"
+
 import { Button } from "@servcy/ui"
 
 type Props = {

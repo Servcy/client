@@ -1,15 +1,22 @@
 import { useRouter } from "next/router"
-import { ActivityMessage, IssueLink } from "@components/core"
-import { ProfileEmptyState } from "@components/ui"
-import { USER_PROFILE_ACTIVITY } from "@constants/fetch-keys"
-import { calculateTimeAgo } from "@helpers/date-time.helper"
-//hooks
-import { useUser } from "@hooks/store"
-import { UserService } from "@services/user.service"
+
 import { observer } from "mobx-react"
 // image
 import recentActivityEmptyState from "public/empty-state/recent_activity.svg"
 import useSWR from "swr"
+
+import { ActivityMessage, IssueLink } from "@components/core"
+import { ProfileEmptyState } from "@components/ui"
+
+//hooks
+import { useUser } from "@hooks/store"
+
+import { USER_PROFILE_ACTIVITY } from "@constants/fetch-keys"
+
+import { UserService } from "@services/user.service"
+
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+
 import { Loader } from "@servcy/ui"
 
 const userService = new UserService()

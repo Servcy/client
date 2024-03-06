@@ -1,14 +1,21 @@
 import { useRouter } from "next/router"
+
 import { ReactElement, useEffect } from "react"
+
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { ProjectIssueDetailsHeader } from "@components/headers"
 import { IssueDetailRoot } from "@components/issues"
+
 // store hooks
 import { useApplication, useIssueDetail, useProject } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
 import { Loader } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const IssueDetailsPage: NextPageWithLayout = observer(() => {

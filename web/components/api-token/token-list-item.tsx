@@ -1,7 +1,11 @@
 import { useState } from "react"
-import { DeleteApiTokenModal } from "@components/api-token"
-import { calculateTimeAgo, renderFormattedDate } from "@helpers/date-time.helper"
+
 import { XCircle } from "lucide-react"
+
+import { DeleteApiTokenModal } from "@components/api-token"
+
+import { calculateTimeAgo, renderFormattedDate } from "@helpers/date-time.helper"
+
 import { IApiToken } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
 

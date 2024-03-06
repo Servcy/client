@@ -1,7 +1,10 @@
-import { IssueService } from "@services/issue"
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
+import { IssueService } from "@services/issue"
+
 import { TIssueLink, TIssueLinkIdMap, TIssueLinkMap } from "@servcy/types"
+
 import { IIssueDetail } from "./root.store"
 
 export interface IIssueLinkStoreActions {

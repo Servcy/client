@@ -1,16 +1,23 @@
 import { useRouter } from "next/router"
+
 import { useState } from "react"
-import { PageHead } from "@components/core"
-import { WorkspaceSettingHeader } from "@components/headers"
-import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "@components/web-hooks"
-import { useUser, useWebhook, useWorkspace } from "@hooks/store"
-import { AppLayout } from "@layouts/app-layout"
-import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 import useSWR from "swr"
+
+import { PageHead } from "@components/core"
+import { WorkspaceSettingHeader } from "@components/headers"
+import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "@components/web-hooks"
+
+import { useUser, useWebhook, useWorkspace } from "@hooks/store"
+
+import { AppLayout } from "@layouts/app-layout"
+import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+
 import { IWebhook } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const WebhookDetailsPage: NextPageWithLayout = observer(() => {

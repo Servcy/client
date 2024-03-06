@@ -1,10 +1,14 @@
 import { useRouter } from "next/router"
-import { EIssuesStoreType } from "@constants/issue"
-// mobx store
-import { useIssues, useMember } from "@hooks/store"
+
 import { Command } from "cmdk"
 import { Check } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+// mobx store
+import { useIssues, useMember } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { TIssue } from "@servcy/types"
 import { Avatar } from "@servcy/ui"
 

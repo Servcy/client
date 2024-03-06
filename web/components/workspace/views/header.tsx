@@ -1,13 +1,18 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React, { useEffect, useRef, useState } from "react"
-import { CreateUpdateWorkspaceViewModal } from "@components/workspace"
-import { GLOBAL_VIEW_OPENED } from "@constants/event-tracker"
-import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace"
-// store hooks
-import { useEventTracker, useGlobalView, useUser } from "@hooks/store"
+
 import { Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { CreateUpdateWorkspaceViewModal } from "@components/workspace"
+
+// store hooks
+import { useEventTracker, useGlobalView, useUser } from "@hooks/store"
+
+import { GLOBAL_VIEW_OPENED } from "@constants/event-tracker"
+import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace"
 
 const ViewTab = observer((props: { viewId: string }) => {
     const { viewId } = props

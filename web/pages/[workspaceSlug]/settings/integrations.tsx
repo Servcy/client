@@ -1,17 +1,25 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { WorkspaceSettingHeader } from "@components/headers"
 import { SingleIntegrationCard } from "@components/integration"
 import { IntegrationAndImportExportBanner, IntegrationsSettingsLoader } from "@components/ui"
-import { APP_INTEGRATIONS } from "@constants/fetch-keys"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { useUser, useWorkspace } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
 import { WorkspaceSettingLayout } from "@layouts/settings-layout"
+
+import { APP_INTEGRATIONS } from "@constants/fetch-keys"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { IntegrationService } from "@services/integrations"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const integrationService = new IntegrationService()

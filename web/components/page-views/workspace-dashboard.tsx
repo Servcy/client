@@ -1,15 +1,20 @@
 import { useEffect } from "react"
+
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+
 import { DashboardWidgets } from "@components/dashboard"
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { IssuePeekOverview } from "@components/issues"
 import { TourRoot } from "@components/onboarding"
 import { UserGreetingsView } from "@components/user"
+
+import { useApplication, useDashboard, useEventTracker, useProject, useUser } from "@hooks/store"
+
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { PRODUCT_TOUR_COMPLETED } from "@constants/event-tracker"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-import { useApplication, useDashboard, useEventTracker, useProject, useUser } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
+
 import { Spinner } from "@servcy/ui"
 
 export const WorkspaceDashboardView = observer(() => {

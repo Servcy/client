@@ -1,8 +1,9 @@
 // mobx
 
 // helper
-import { applyTheme, unsetCustomCssVariables } from "@helpers/theme.helper"
 import { action, makeObservable, observable } from "mobx"
+
+import { applyTheme, unsetCustomCssVariables } from "@helpers/theme.helper"
 
 export interface IThemeStore {
     // observables

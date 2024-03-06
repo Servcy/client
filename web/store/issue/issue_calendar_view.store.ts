@@ -1,7 +1,9 @@
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
 import { ICalendarPayload, ICalendarWeek } from "@components/issues"
+
 import { generateCalendarData } from "@helpers/calendar.helper"
 import { getWeekNumberOfDate } from "@helpers/date-time.helper"
-import { action, computed, makeObservable, observable, runInAction } from "mobx"
 
 export interface ICalendarStore {
     calendarFilters: {

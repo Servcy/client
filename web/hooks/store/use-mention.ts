@@ -1,6 +1,8 @@
 import { useContext } from "react"
+
 // mobx store
 import { StoreContext } from "@contexts/StoreContext"
+
 import { IMentionStore } from "@store/mention.store"
 
 export const useMention = (): IMentionStore => {

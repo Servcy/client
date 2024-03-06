@@ -1,4 +1,5 @@
 import { DraggableLocation } from "@hello-pangea/dnd"
+
 import { ICycleIssues } from "@store/issue/cycle"
 import { IDraftIssues } from "@store/issue/draft"
 import { IModuleIssues } from "@store/issue/module"
@@ -6,6 +7,7 @@ import { IProfileIssues } from "@store/issue/profile"
 import { IProjectIssues } from "@store/issue/project"
 import { IProjectViewIssues } from "@store/issue/project-views"
 import { IWorkspaceIssues } from "@store/issue/workspace"
+
 import { IIssueMap, TGroupedIssues, TSubGroupedIssues, TUnGroupedIssues } from "@servcy/types"
 
 const handleSortOrder = (destinationIssues: string[], destinationIndex: number, issueMap: IIssueMap) => {

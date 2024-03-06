@@ -1,9 +1,6 @@
 //ui
 
 //constants
-import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet"
-//hooks
-import useLocalStorage from "@hooks/use-local-storage"
 import {
     ArrowDownWideNarrow,
     ArrowUpNarrowWide,
@@ -13,6 +10,12 @@ import {
     ListFilter,
     MoveRight,
 } from "lucide-react"
+
+//hooks
+import useLocalStorage from "@hooks/use-local-storage"
+
+import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet"
+
 //types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueOrderByOptions } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"

@@ -1,12 +1,17 @@
 import { useRouter } from "next/router"
+
 import React from "react"
-import { WORKSPACE_DELETED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useEventTracker, useWorkspace } from "@hooks/store"
 import { AlertTriangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useWorkspace } from "@hooks/store"
+
+import { WORKSPACE_DELETED } from "@constants/event-tracker"
+
 import type { IWorkspace } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

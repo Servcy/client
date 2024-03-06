@@ -1,5 +1,7 @@
-import { API_BASE_URL } from "@helpers/common.helper"
 import { APIService } from "@services/api.service"
+
+import { API_BASE_URL } from "@helpers/common.helper"
+
 import { IJiraImporterForm, IJiraMetadata, IJiraResponse } from "@servcy/types"
 
 export class JiraImporterService extends APIService {

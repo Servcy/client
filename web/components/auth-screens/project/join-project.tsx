@@ -1,10 +1,14 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
+
 import { useState } from "react"
-import { useProject, useUser } from "@hooks/store"
+
 import { ClipboardList } from "lucide-react"
 // images
 import JoinProjectImg from "public/auth/project-not-authorized.svg"
+
+import { useProject, useUser } from "@hooks/store"
+
 import { Button } from "@servcy/ui"
 
 export const JoinProject: React.FC = () => {

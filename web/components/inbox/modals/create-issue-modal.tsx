@@ -1,16 +1,23 @@
 import { useRouter } from "next/router"
+
 import { Fragment, useRef, useState } from "react"
-import { GptAssistantPopover } from "@components/core"
-import { PriorityDropdown } from "@components/dropdowns"
-import { ISSUE_CREATED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useApplication, useEventTracker, useInboxIssues, useMention, useWorkspace } from "@hooks/store"
-import { AIService } from "@services/ai.service"
-import { FileService } from "@services/file.service"
 import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { GptAssistantPopover } from "@components/core"
+import { PriorityDropdown } from "@components/dropdowns"
+
+import { useApplication, useEventTracker, useInboxIssues, useMention, useWorkspace } from "@hooks/store"
+
+import { ISSUE_CREATED } from "@constants/event-tracker"
+
+import { AIService } from "@services/ai.service"
+import { FileService } from "@services/file.service"
+
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor"
 import { TIssue } from "@servcy/types"
 import { Button, Input, ToggleSwitch } from "@servcy/ui"

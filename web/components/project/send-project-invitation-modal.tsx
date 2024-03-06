@@ -1,15 +1,21 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect } from "react"
-import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker"
-import { EUserProjectRoles } from "@constants/project"
-import { ROLE } from "@constants/workspace"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { getUserRole } from "@helpers/user.helper"
-import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
 import { ChevronDown, Plus, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
+
+import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker"
+import { EUserProjectRoles } from "@constants/project"
+import { ROLE } from "@constants/workspace"
+
+import { getUserRole } from "@helpers/user.helper"
+
 import { Avatar, Button, CustomSearchSelect, CustomSelect } from "@servcy/ui"
 
 type Props = {

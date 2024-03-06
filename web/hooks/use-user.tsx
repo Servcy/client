@@ -1,8 +1,13 @@
 import { useRouter } from "next/router"
+
 import { useEffect } from "react"
-import { CURRENT_USER } from "@constants/fetch-keys"
-import { UserService } from "@services/user.service"
+
 import useSWR from "swr"
+
+import { CURRENT_USER } from "@constants/fetch-keys"
+
+import { UserService } from "@services/user.service"
+
 import type { IUser } from "@servcy/types"
 
 const userService = new UserService()

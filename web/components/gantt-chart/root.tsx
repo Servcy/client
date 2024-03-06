@@ -1,4 +1,5 @@
 import { FC } from "react"
+
 import { ChartViewRoot, IBlockUpdateData, IGanttBlock } from "@components/gantt-chart"
 import { GanttStoreProvider } from "@components/gantt-chart/contexts"
 

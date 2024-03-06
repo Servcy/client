@@ -1,7 +1,10 @@
 import React, { useState } from "react"
-import { ProjectAnalyticsModalHeader, ProjectAnalyticsModalMainContent } from "@components/analytics"
+
 import { Dialog, Transition } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
+
+import { ProjectAnalyticsModalHeader, ProjectAnalyticsModalMainContent } from "@components/analytics"
+
 import { ICycle, IModule, IProject } from "@servcy/types"
 
 type Props = {

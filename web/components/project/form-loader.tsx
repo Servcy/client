@@ -1,4 +1,5 @@
 import { FC } from "react"
+
 import { Loader } from "@servcy/ui"
 
 export interface IProjectDetailsFormLoader {}

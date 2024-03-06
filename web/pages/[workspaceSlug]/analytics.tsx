@@ -1,17 +1,24 @@
 import { useRouter } from "next/router"
+
 import { Fragment, ReactElement } from "react"
+
+import { Tab } from "@headlessui/react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+
 import { CustomAnalytics, ScopeAndDemand } from "@components/analytics"
 import { PageHead } from "@components/core"
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { WorkspaceAnalyticsHeader } from "@components/headers"
+
+import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
+
+import { AppLayout } from "@layouts/app-layout"
+
 import { ANALYTICS_TABS } from "@constants/analytics"
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-import { Tab } from "@headlessui/react"
-import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
-import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
+
 // type
 import { NextPageWithLayout } from "@/types/types"
 

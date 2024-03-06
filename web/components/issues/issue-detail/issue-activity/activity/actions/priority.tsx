@@ -1,7 +1,10 @@
 import { FC } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import { Signal } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { IssueActivityBlockComponent, IssueLink } from "./"
 
 type TIssuePriorityActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }

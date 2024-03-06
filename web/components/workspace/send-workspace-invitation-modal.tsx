@@ -1,10 +1,14 @@
 import React, { useEffect } from "react"
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useUser } from "@hooks/store"
 import { Plus, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
+
+import { useUser } from "@hooks/store"
+
+import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+
 import { IWorkspaceBulkInviteFormData } from "@servcy/types"
 import { Button, CustomSelect, Input } from "@servcy/ui"
 

@@ -1,10 +1,13 @@
 import Image from "next/image"
+
 import { Tag, Tooltip } from "antd"
 import { BiRightArrowAlt } from "react-icons/bi"
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"
+
 import { GithubNotificationProps } from "@/types/integrations/github"
+
 import { getCleanLink } from "@/utils/Shared"
 
 const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps) => {

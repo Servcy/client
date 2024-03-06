@@ -1,13 +1,20 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { FC } from "react"
-import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile"
-import { cn } from "@helpers/common.helper"
-import { useApplication, useUser } from "@hooks/store"
+
 import { ChevronDown, PanelRight } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useApplication, useUser } from "@hooks/store"
+
+import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile"
+
+import { cn } from "@helpers/common.helper"
+
 import { Breadcrumbs, CustomMenu } from "@servcy/ui"
 
 type TUserProfileHeader = {

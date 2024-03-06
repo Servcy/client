@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
+
 import { FC, useEffect } from "react"
-import { IUserDetails, TFormValues, TIntegrationSteps } from "@components/integration"
-import { GITHUB_REPOSITORY_INFO } from "@constants/fetch-keys"
-import { GithubIntegrationService } from "@services/integrations"
+
 // react-hook-form
 import { UseFormSetValue } from "react-hook-form"
 import useSWR from "swr"
+
+import { IUserDetails, TFormValues, TIntegrationSteps } from "@components/integration"
+
+import { GITHUB_REPOSITORY_INFO } from "@constants/fetch-keys"
+
+import { GithubIntegrationService } from "@services/integrations"
+
 import { Button, Loader } from "@servcy/ui"
 
 type Props = {

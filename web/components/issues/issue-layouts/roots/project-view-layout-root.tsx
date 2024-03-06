@@ -1,5 +1,10 @@
 import { useRouter } from "next/router"
+
 import React, { Fragment, useMemo } from "react"
+
+import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+
 import {
     IssuePeekOverview,
     ProjectViewAppliedFiltersRoot,
@@ -11,12 +16,14 @@ import {
     ProjectViewSpreadsheetLayout,
 } from "@components/issues"
 import { ActiveLoader } from "@components/ui"
-import { EIssuesStoreType } from "@constants/issue"
+
 // mobx store
 import { useIssues } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-import useSWR from "swr"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { TIssue } from "@servcy/types"
+
 import { EIssueActions } from "../types"
 
 export const ProjectViewLayoutRoot: React.FC = observer(() => {

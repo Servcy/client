@@ -1,3 +1,5 @@
+import { observer } from "mobx-react-lite"
+
 import {
     AssignedIssuesWidget,
     CreatedIssuesWidget,
@@ -9,8 +11,9 @@ import {
     RecentProjectsWidget,
     WidgetProps,
 } from "@components/dashboard"
+
 import { useApplication, useDashboard } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { TWidgetKeys } from "@servcy/types"
 
 const WIDGETS_LIST: {

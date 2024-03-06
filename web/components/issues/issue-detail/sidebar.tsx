@@ -1,22 +1,7 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { DateDropdown, EstimateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
-import {
-    ArchiveIssueModal,
-    DeleteIssueModal,
-    IssueCycleSelect,
-    IssueLabel,
-    IssueLinkRoot,
-    IssueModuleSelect,
-    IssueParentSelect,
-    IssueRelationSelect,
-} from "@components/issues"
-import { STATE_GROUPS } from "@constants/state"
-import { cn } from "@helpers/common.helper"
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
-import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
-import { copyTextToClipboard } from "@helpers/string.helper"
-import { useEstimate, useIssueDetail, useProject, useProjectState, useUser } from "@hooks/store"
+
 import {
     CalendarCheck2,
     CalendarClock,
@@ -32,7 +17,30 @@ import {
 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { DateDropdown, EstimateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
+import {
+    ArchiveIssueModal,
+    DeleteIssueModal,
+    IssueCycleSelect,
+    IssueLabel,
+    IssueLinkRoot,
+    IssueModuleSelect,
+    IssueParentSelect,
+    IssueRelationSelect,
+} from "@components/issues"
+
+import { useEstimate, useIssueDetail, useProject, useProjectState, useUser } from "@hooks/store"
+
+import { STATE_GROUPS } from "@constants/state"
+
+import { cn } from "@helpers/common.helper"
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { shouldHighlightIssueDueDate } from "@helpers/issue.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+
 import { ArchiveIcon, ContrastIcon, DiceIcon, DoubleCircleIcon, RelatedIcon, Tooltip, UserGroupIcon } from "@servcy/ui"
+
 import type { TIssueOperations } from "./root"
 import { IssueSubscription } from "./subscription"
 

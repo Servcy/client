@@ -1,11 +1,17 @@
 import Link from "next/link"
+
 import { useEffect } from "react"
-import { ActivityIcon, ActivityMessage, IssueLink } from "@components/core"
-import { RecentActivityEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
-import { calculateTimeAgo } from "@helpers/date-time.helper"
-import { useDashboard, useUser } from "@hooks/store"
+
 import { History } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { ActivityIcon, ActivityMessage, IssueLink } from "@components/core"
+import { RecentActivityEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
+
+import { useDashboard, useUser } from "@hooks/store"
+
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+
 import { TRecentActivityWidgetResponse } from "@servcy/types"
 import { Avatar } from "@servcy/ui"
 

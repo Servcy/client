@@ -1,11 +1,18 @@
 import Link from "next/link"
+
 import React from "react"
-import { ParentIssuesListModal } from "@components/issues"
-import { cn } from "@helpers/common.helper"
-import { useIssueDetail, useProject } from "@hooks/store"
+
 import { Pencil, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { ParentIssuesListModal } from "@components/issues"
+
+import { useIssueDetail, useProject } from "@hooks/store"
+
+import { cn } from "@helpers/common.helper"
+
 import { Tooltip } from "@servcy/ui"
+
 import { TIssueOperations } from "./root"
 
 type TIssueParentSelect = {

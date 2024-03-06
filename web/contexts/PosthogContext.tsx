@@ -1,9 +1,14 @@
 import { useRouter } from "next/router"
+
 import { FC, ReactNode, useEffect, useState } from "react"
-import { GROUP_WORKSPACE } from "@constants/event-tracker"
-import { getUserRole } from "@helpers/user.helper"
+
 import posthog from "posthog-js"
 import { PostHogProvider as PHProvider } from "posthog-js/react"
+
+import { GROUP_WORKSPACE } from "@constants/event-tracker"
+
+import { getUserRole } from "@helpers/user.helper"
+
 import { IUser } from "@servcy/types"
 
 export interface IPosthogWrapper {

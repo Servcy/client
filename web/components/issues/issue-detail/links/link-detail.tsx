@@ -1,10 +1,15 @@
 import { FC, useState } from "react"
-import { calculateTimeAgo } from "@helpers/date-time.helper"
-import { copyTextToClipboard } from "@helpers/string.helper"
-import { useIssueDetail, useMember } from "@hooks/store"
+
 import { LinkIcon, Pencil, Trash2 } from "lucide-react"
 import toast from "react-hot-toast"
+
+import { useIssueDetail, useMember } from "@hooks/store"
+
+import { calculateTimeAgo } from "@helpers/date-time.helper"
+import { copyTextToClipboard } from "@helpers/string.helper"
+
 import { ExternalLinkIcon, Tooltip } from "@servcy/ui"
+
 import { IssueLinkCreateUpdateModal, TLinkOperationsModal } from "./create-update-link-modal"
 
 export type TIssueLinkDetail = {

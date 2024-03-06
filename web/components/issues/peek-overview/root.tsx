@@ -1,12 +1,18 @@
 import { useRouter } from "next/router"
+
 import { FC, useEffect, useMemo, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+
 import { IssueView } from "@components/issues"
+
+import { useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store"
+
 import { ISSUE_ARCHIVED, ISSUE_DELETED, ISSUE_RESTORED, ISSUE_UPDATED } from "@constants/event-tracker"
 import { EIssuesStoreType } from "@constants/issue"
 import { EUserProjectRoles } from "@constants/project"
-import { useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-import toast from "react-hot-toast"
+
 import { TIssue } from "@servcy/types"
 
 interface IIssuePeekOverview {

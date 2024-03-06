@@ -1,12 +1,18 @@
 import { useRouter } from "next/router"
+
 import { useMemo, useState } from "react"
-import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@constants/fetch-keys"
-import { NotificationService } from "@services/notification.service"
+
 // swr
 import useSWR from "swr"
 import useSWRInfinite from "swr/infinite"
+
+import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@constants/fetch-keys"
+
+import { NotificationService } from "@services/notification.service"
+
 // type
 import type { IMarkAllAsReadPayload, NotificationCount, NotificationType } from "@servcy/types"
+
 import useToast from "./use-toast"
 
 const PER_PAGE = 30

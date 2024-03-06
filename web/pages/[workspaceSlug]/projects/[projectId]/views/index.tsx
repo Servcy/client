@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+
 import { PageHead } from "@components/core"
 import { ProjectViewsHeader } from "@components/headers"
 import { ProjectViewsList } from "@components/views"
+
 import { useProject } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const ProjectViewsPage: NextPageWithLayout = observer(() => {

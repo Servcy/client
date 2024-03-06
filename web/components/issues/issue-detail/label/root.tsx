@@ -1,8 +1,12 @@
 import { FC, useMemo } from "react"
-import { useIssueDetail, useLabel } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useIssueDetail, useLabel } from "@hooks/store"
+
 import { IIssueLabel, TIssue } from "@servcy/types"
+
 import { IssueLabelSelectRoot, LabelCreate, LabelList } from "./"
 
 export type TIssueLabel = {

@@ -1,14 +1,20 @@
 import React from "react"
+
+import { ArrowLeft, CheckCheck, Clock, ListFilter, MoreVertical, RefreshCw, X } from "lucide-react"
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useEventTracker } from "@hooks/store"
+
 import {
     ARCHIVED_NOTIFICATIONS,
     NOTIFICATIONS_READ,
     SNOOZED_NOTIFICATIONS,
     UNREAD_NOTIFICATIONS,
 } from "@constants/event-tracker"
+
 import { getNumberCount } from "@helpers/string.helper"
-import { useEventTracker } from "@hooks/store"
-import { ArrowLeft, CheckCheck, Clock, ListFilter, MoreVertical, RefreshCw, X } from "lucide-react"
+
 // type
 import type { NotificationCount, NotificationType } from "@servcy/types"
 import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui"

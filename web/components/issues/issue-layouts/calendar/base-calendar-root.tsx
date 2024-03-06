@@ -1,16 +1,24 @@
 import { useRouter } from "next/router"
+
 import { FC, useCallback } from "react"
-import { CalendarChart } from "@components/issues"
-import { EUserProjectRoles } from "@constants/project"
+
 import { DragDropContext, DropResult } from "@hello-pangea/dnd"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+
+import { CalendarChart } from "@components/issues"
+
 import { useIssues, useUser } from "@hooks/store"
+
+import { EUserProjectRoles } from "@constants/project"
+
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
 import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project"
 import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/project-views"
-import { observer } from "mobx-react-lite"
-import toast from "react-hot-toast"
+
 import { TGroupedIssues, TIssue } from "@servcy/types"
+
 import { IQuickActionProps } from "../list/list-view-types"
 import { EIssueActions } from "../types"
 import { handleDragDrop } from "./utils"

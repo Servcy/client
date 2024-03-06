@@ -1,4 +1,8 @@
 import { FC, useRef, useState } from "react"
+
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+
 import {
     ArchiveIssueModal,
     DeleteIssueModal,
@@ -8,13 +12,14 @@ import {
     TIssueOperations,
     TPeekModes,
 } from "@components/issues"
+
 // store hooks
 import { useIssueDetail } from "@hooks/store"
 import useKeypress from "@hooks/use-key-press"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
-import { observer } from "mobx-react-lite"
-import toast from "react-hot-toast"
+
 import { Spinner } from "@servcy/ui"
+
 import { IssueActivity } from "../issue-detail/issue-activity"
 
 interface IIssueView {

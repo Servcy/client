@@ -1,11 +1,14 @@
-import { IssueDraftService } from "@services/issue/issue_draft.service"
 import concat from "lodash/concat"
 import pull from "lodash/pull"
 import set from "lodash/set"
 import uniq from "lodash/uniq"
 import update from "lodash/update"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
+import { IssueDraftService } from "@services/issue/issue_draft.service"
+
 import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types"
+
 // base class
 import { IssueHelperStore } from "../helpers/issue-helper.store"
 import { IIssueRootStore } from "../root.store"

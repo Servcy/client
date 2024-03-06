@@ -1,10 +1,16 @@
 import React, { useState } from "react"
-import { ModuleDropdown } from "@components/dropdowns"
-import { cn } from "@helpers/common.helper"
-import { useIssueDetail } from "@hooks/store"
+
 import xor from "lodash/xor"
 import { observer } from "mobx-react-lite"
+
+import { ModuleDropdown } from "@components/dropdowns"
+
+import { useIssueDetail } from "@hooks/store"
+
+import { cn } from "@helpers/common.helper"
+
 import { Spinner } from "@servcy/ui"
+
 import type { TIssueOperations } from "./root"
 
 type TIssueModuleSelect = {

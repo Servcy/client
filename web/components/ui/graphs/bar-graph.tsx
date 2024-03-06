@@ -1,7 +1,10 @@
 // nivo
-import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph"
-import { generateYAxisTickValues } from "@helpers/graph.helper"
 import { BarSvgProps, ResponsiveBar } from "@nivo/bar"
+
+import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph"
+
+import { generateYAxisTickValues } from "@helpers/graph.helper"
+
 import { TGraph } from "./types"
 
 type Props = {

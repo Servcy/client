@@ -1,10 +1,15 @@
 import { FC, useState } from "react"
-import { checkEmailValidity } from "@helpers/string.helper"
-import { useUser } from "@hooks/store"
-import { AuthService } from "@services/auth.service"
+
 import { Eye, EyeOff, XCircle } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useUser } from "@hooks/store"
+
+import { AuthService } from "@services/auth.service"
+
+import { checkEmailValidity } from "@helpers/string.helper"
+
 import { Button, Input } from "@servcy/ui"
 
 const authService = new AuthService()

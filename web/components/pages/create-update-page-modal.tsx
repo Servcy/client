@@ -1,11 +1,18 @@
 import { useRouter } from "next/router"
+
 import React, { FC } from "react"
-import { PAGE_CREATED, PAGE_UPDATED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
+
 import { useEventTracker } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-page"
+
+import { PAGE_CREATED, PAGE_UPDATED } from "@constants/event-tracker"
+
 import { IPageStore } from "@store/page.store"
+
 import { IPage } from "@servcy/types"
+
 import { PageForm } from "./page-form"
 
 type Props = {

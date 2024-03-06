@@ -1,5 +1,7 @@
 import Image from "next/image"
+
 import React from "react"
+
 // images
 import ServcyLogo from "public/logo.svg"
 

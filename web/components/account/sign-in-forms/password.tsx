@@ -1,14 +1,22 @@
 import Link from "next/link"
+
 import React, { useState } from "react"
-import { ESignInSteps, ForgotPasswordPopover } from "@components/account"
-import { FORGOT_PASSWORD, SIGN_IN_WITH_PASSWORD } from "@constants/event-tracker"
-import { checkEmailValidity } from "@helpers/string.helper"
-import { useApplication, useEventTracker } from "@hooks/store"
-import { AuthService } from "@services/auth.service"
+
 import { Eye, EyeOff, XCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { ESignInSteps, ForgotPasswordPopover } from "@components/account"
+
+import { useApplication, useEventTracker } from "@hooks/store"
+
+import { FORGOT_PASSWORD, SIGN_IN_WITH_PASSWORD } from "@constants/event-tracker"
+
+import { AuthService } from "@services/auth.service"
+
+import { checkEmailValidity } from "@helpers/string.helper"
+
 import { IPasswordSignInData } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

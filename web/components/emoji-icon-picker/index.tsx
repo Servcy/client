@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react"
+
 // headless ui
 import { Popover, Tab, Transition } from "@headlessui/react"
-import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper"
-import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 // react colors
 import { TwitterPicker } from "react-color"
+
+import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper"
+
 // emojis
 import emojis from "./emojis.json"
 import { getRecentEmojis, saveRecentEmoji } from "./helpers"

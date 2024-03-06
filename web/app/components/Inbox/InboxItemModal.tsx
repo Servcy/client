@@ -2,8 +2,11 @@ import { Button, Modal } from "antd"
 import * as DOMPurify from "dompurify"
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa"
 import { HiPaperClip } from "react-icons/hi"
+
 import { Attachment, InboxItem } from "@/types/apps/inbox"
+
 import { downloadFile } from "@/utils/Shared/files"
+
 import AsanaNotification from "./AsanaNotification"
 import FigmaNotification from "./FigmaNotification"
 import GithubNotification from "./GithubNotification"

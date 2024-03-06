@@ -1,12 +1,17 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys"
+
 // headless ui
 import { Dialog, Transition } from "@headlessui/react"
-import { IntegrationService } from "@services/integrations/integration.service"
 import { AlertTriangle } from "lucide-react"
 import toast from "react-hot-toast"
 import { mutate } from "swr"
+
+import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys"
+
+import { IntegrationService } from "@services/integrations/integration.service"
+
 import { IImporterService, IUser } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 

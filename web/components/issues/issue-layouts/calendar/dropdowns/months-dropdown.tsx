@@ -1,15 +1,19 @@
 import React, { useState } from "react"
-import { MONTHS_LIST } from "@constants/calendar"
+
 import { Popover, Transition } from "@headlessui/react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import { usePopper } from "react-popper"
+
 //hooks
 import { useCalendarView } from "@hooks/store"
+
+import { MONTHS_LIST } from "@constants/calendar"
+
 import { ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssuesFilter } from "@store/issue/module"
 import { IProjectIssuesFilter } from "@store/issue/project"
 import { IProjectViewIssuesFilter } from "@store/issue/project-views"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { observer } from "mobx-react-lite"
-import { usePopper } from "react-popper"
 
 interface Props {
     issuesFilterStore: IProjectIssuesFilter | IModuleIssuesFilter | ICycleIssuesFilter | IProjectViewIssuesFilter

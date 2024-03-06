@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react"
-import { CycleForm } from "@components/cycles"
-import { CYCLE_CREATED, CYCLE_UPDATED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
+import toast from "react-hot-toast"
+
+import { CycleForm } from "@components/cycles"
+
 import { useCycle, useEventTracker, useProject } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
+
+import { CYCLE_CREATED, CYCLE_UPDATED } from "@constants/event-tracker"
+
 import { CycleService } from "@services/cycle.service"
-import toast from "react-hot-toast"
+
 import type { CycleDateCheckData, ICycle, TCycleView } from "@servcy/types"
 
 type CycleModalProps = {

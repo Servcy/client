@@ -1,9 +1,13 @@
-import { IGanttBlock } from "@components/gantt-chart"
-import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { STATE_GROUPS } from "@constants/state"
-import { orderArrayBy } from "@helpers/array.helper"
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays"
 import { v4 as uuidv4 } from "uuid"
+
+import { IGanttBlock } from "@components/gantt-chart"
+
+import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { STATE_GROUPS } from "@constants/state"
+
+import { orderArrayBy } from "@helpers/array.helper"
+
 import {
     TIssue,
     TIssueGroupByOptions,

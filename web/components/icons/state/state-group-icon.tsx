@@ -5,7 +5,9 @@ import {
     StateGroupStartedIcon,
     StateGroupUnstartedIcon,
 } from "@components/icons"
+
 import { STATE_GROUPS } from "@constants/state"
+
 import { TStateGroups } from "@servcy/types"
 
 type Props = {

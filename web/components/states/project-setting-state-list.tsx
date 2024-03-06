@@ -1,13 +1,20 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem } from "@components/states"
-import { STATES_LIST } from "@constants/fetch-keys"
-import { sortByField } from "@helpers/array.helper"
-import { orderStateGroups } from "@helpers/state.helper"
-import { useEventTracker, useProjectState } from "@hooks/store"
+
 import { Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
+
+import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem } from "@components/states"
+
+import { useEventTracker, useProjectState } from "@hooks/store"
+
+import { STATES_LIST } from "@constants/fetch-keys"
+
+import { sortByField } from "@helpers/array.helper"
+import { orderStateGroups } from "@helpers/state.helper"
+
 import { Loader } from "@servcy/ui"
 
 export const ProjectSettingStateList: React.FC = observer(() => {

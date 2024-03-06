@@ -1,9 +1,12 @@
 import Image from "next/image"
+
 import { Avatar, Tag, Tooltip } from "antd"
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"
+
 import { AsanaNotificationProps } from "@/types/integrations/asana"
+
 import { getCleanLink } from "@/utils/Shared"
 
 const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {

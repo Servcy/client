@@ -1,16 +1,24 @@
 import { useRouter } from "next/router"
+
 import { useState } from "react"
-import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues"
-import { EIssuesStoreType } from "@constants/issue"
-import { STATE_GROUPS } from "@constants/state"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-import { useEventTracker, useProjectState } from "@hooks/store"
+
 import omit from "lodash/omit"
 import { Copy, ExternalLink, Link, Pencil, Trash2 } from "lucide-react"
 import { observer } from "mobx-react"
 import toast from "react-hot-toast"
+
+import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues"
+
+import { useEventTracker, useProjectState } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+import { STATE_GROUPS } from "@constants/state"
+
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { TIssue } from "@servcy/types"
 import { ArchiveIcon, CustomMenu } from "@servcy/ui"
+
 import { IQuickActionProps } from "../list/list-view-types"
 
 export const AllIssueQuickActions: React.FC<IQuickActionProps> = observer((props) => {

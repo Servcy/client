@@ -1,4 +1,5 @@
 import { FC, ReactNode, useEffect } from "react"
+
 import { IUser } from "@servcy/types"
 
 declare global {

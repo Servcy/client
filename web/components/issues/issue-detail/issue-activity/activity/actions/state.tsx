@@ -1,7 +1,11 @@
 import { FC } from "react"
-import { useIssueDetail } from "@hooks/store"
+
 import { observer } from "mobx-react"
+
+import { useIssueDetail } from "@hooks/store"
+
 import { DoubleCircleIcon } from "@servcy/ui"
+
 import { IssueActivityBlockComponent, IssueLink } from "./"
 
 type TIssueStateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined }

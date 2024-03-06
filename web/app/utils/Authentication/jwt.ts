@@ -1,4 +1,5 @@
 import jwtDecode from "jwt-decode"
+
 import type { JwtToken } from "@/types/auth/jwt"
 
 export const isJwtTokenValid = (token: string) => {

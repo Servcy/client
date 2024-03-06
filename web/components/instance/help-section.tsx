@@ -1,9 +1,12 @@
 import Link from "next/link"
+
 import { FC, useRef, useState } from "react"
+
 import { Transition } from "@headlessui/react"
-import { useApplication } from "@hooks/store"
 import { HelpCircle, MessagesSquare, MoveLeft } from "lucide-react"
 import packageJson from "package.json"
+
+import { useApplication } from "@hooks/store"
 
 const helpOptions = [
     {

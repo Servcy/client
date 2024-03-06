@@ -1,7 +1,10 @@
 import { useRef } from "react"
+
 import { observer } from "mobx-react"
+
 //types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types"
+
 //components
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC"
 import { HeaderColumn } from "./columns/header-column"

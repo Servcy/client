@@ -1,8 +1,13 @@
 import { useRouter } from "next/router"
-import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "@components/analytics"
-import { DEFAULT_ANALYTICS } from "@constants/fetch-keys"
-import { AnalyticsService } from "@services/analytics.service"
+
 import useSWR from "swr"
+
+import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "@components/analytics"
+
+import { DEFAULT_ANALYTICS } from "@constants/fetch-keys"
+
+import { AnalyticsService } from "@services/analytics.service"
+
 import { Button, Loader } from "@servcy/ui"
 
 type Props = {

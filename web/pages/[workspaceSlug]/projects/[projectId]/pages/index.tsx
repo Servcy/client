@@ -1,24 +1,31 @@
 import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
+
 import { Fragment, ReactElement, useState } from "react"
+
+import { Tab } from "@headlessui/react"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { PagesHeader } from "@components/headers"
 import { CreateUpdatePageModal, RecentPagesList } from "@components/pages"
 import { PagesLoader } from "@components/ui"
-import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { PAGE_TABS_LIST } from "@constants/page"
-import { EUserWorkspaceRoles } from "@constants/workspace"
-import { Tab } from "@headlessui/react"
+
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-page"
 import useLocalStorage from "@hooks/use-local-storage"
 import useUserAuth from "@hooks/use-user-auth"
 import useSize from "@hooks/use-window-size"
+
 import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
-import useSWR from "swr"
+
+import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { PAGE_TABS_LIST } from "@constants/page"
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const AllPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.AllPagesList), {

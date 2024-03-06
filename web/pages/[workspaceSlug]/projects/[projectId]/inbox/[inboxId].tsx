@@ -1,13 +1,19 @@
 import { useRouter } from "next/router"
+
 import { ReactElement } from "react"
+
+import { observer } from "mobx-react"
+import useSWR from "swr"
+
 import { PageHead } from "@components/core"
 import { ProjectInboxHeader } from "@components/headers"
 import { InboxContentRoot, InboxSidebarRoot } from "@components/inbox"
 import { InboxLayoutLoader } from "@components/ui"
+
 import { useInboxIssues, useProject } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
-import { observer } from "mobx-react"
-import useSWR from "swr"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const ProjectInboxPage: NextPageWithLayout = observer(() => {

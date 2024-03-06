@@ -1,4 +1,8 @@
 import { useState } from "react"
+
+import { Search, X } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import {
     FilterAssignees,
     FilterCreatedBy,
@@ -13,10 +17,11 @@ import {
     FilterStateGroup,
     FilterTargetDate,
 } from "@components/issues"
-import { ILayoutDisplayFiltersOptions } from "@constants/issue"
+
 import { useApplication } from "@hooks/store"
-import { Search, X } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
+import { ILayoutDisplayFiltersOptions } from "@constants/issue"
+
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types"
 
 type Props = {

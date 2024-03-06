@@ -1,14 +1,20 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { useState } from "react"
-import { ConfirmProjectMemberRemove } from "@components/project"
-import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
-import { EUserProjectRoles } from "@constants/project"
-import { ROLE } from "@constants/workspace"
-import { useEventTracker, useMember, useProject, useUser } from "@hooks/store"
+
 import { ChevronDown, Dot, XCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { ConfirmProjectMemberRemove } from "@components/project"
+
+import { useEventTracker, useMember, useProject, useUser } from "@hooks/store"
+
+import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
+import { EUserProjectRoles } from "@constants/project"
+import { ROLE } from "@constants/workspace"
+
 import { CustomSelect, Tooltip } from "@servcy/ui"
 
 type Props = {

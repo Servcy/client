@@ -1,16 +1,23 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { ReactElement, useState } from "react"
-import { PageHead } from "@components/core"
-import { CreateWorkspaceForm } from "@components/workspace"
-import { useUser } from "@hooks/store"
-import { UserAuthWrapper } from "@layouts/auth-layout"
-import DefaultLayout from "@layouts/DefaultLayout"
+
 import { observer } from "mobx-react-lite"
 // images
 import ServcyLogo from "public/logo.svg"
+
+import { PageHead } from "@components/core"
+import { CreateWorkspaceForm } from "@components/workspace"
+
+import { useUser } from "@hooks/store"
+
+import { UserAuthWrapper } from "@layouts/auth-layout"
+import DefaultLayout from "@layouts/DefaultLayout"
+
 import { IWorkspace } from "@servcy/types"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const CreateWorkspacePage: NextPageWithLayout = observer(() => {

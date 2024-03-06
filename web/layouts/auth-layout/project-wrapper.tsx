@@ -1,7 +1,15 @@
 import { useRouter } from "next/router"
+
 import { FC, ReactNode } from "react"
+
+import { observer } from "mobx-react-lite"
+// images
+import emptyProject from "public/empty-state/project.svg"
+import useSWR from "swr"
+
 import { JoinProject } from "@components/auth-screens"
 import { EmptyState } from "@components/common"
+
 import {
     useApplication,
     useCycle,
@@ -16,10 +24,7 @@ import {
     useProjectView,
     useUser,
 } from "@hooks/store"
-import { observer } from "mobx-react-lite"
-// images
-import emptyProject from "public/empty-state/project.svg"
-import useSWR from "swr"
+
 import { Spinner } from "@servcy/ui"
 
 interface IProjectAuthWrapper {

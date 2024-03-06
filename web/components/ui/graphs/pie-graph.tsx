@@ -1,6 +1,8 @@
 // nivo
-import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph"
 import { PieSvgProps, ResponsivePie } from "@nivo/pie"
+
+import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph"
+
 import { TGraph } from "./types"
 
 export const PieGraph: React.FC<TGraph & Omit<PieSvgProps<any>, "height" | "width">> = ({

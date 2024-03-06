@@ -1,16 +1,22 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
+
 import { useState } from "react"
-import { WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
-import { useApplication, useUser } from "@hooks/store"
-import useIntegrationPopup from "@hooks/use-integration-popup"
-import { IntegrationService } from "@services/integrations"
+
 import { CheckCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import GithubLogo from "public/services/github.png"
 import SlackLogo from "public/services/slack.png"
 import toast from "react-hot-toast"
 import useSWR, { mutate } from "swr"
+
+import { useApplication, useUser } from "@hooks/store"
+import useIntegrationPopup from "@hooks/use-integration-popup"
+
+import { WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys"
+
+import { IntegrationService } from "@services/integrations"
+
 import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types"
 import { Button, Loader, Tooltip } from "@servcy/ui"
 

@@ -1,4 +1,5 @@
 import { GanttChartSquare, LayoutGrid, List } from "lucide-react"
+
 import { TModuleStatus } from "@servcy/types"
 
 export const MODULE_STATUS: {

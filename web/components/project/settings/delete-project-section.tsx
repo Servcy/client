@@ -1,6 +1,8 @@
 import React from "react"
+
 import { Disclosure, Transition } from "@headlessui/react"
 import { ChevronDown, ChevronUp } from "lucide-react"
+
 import { IProject } from "@servcy/types"
 import { Button, Loader } from "@servcy/ui"
 

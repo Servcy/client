@@ -1,5 +1,7 @@
 import React from "react"
+
 import { ISSUE_LAYOUTS } from "@constants/issue"
+
 import { TIssueLayouts } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
 

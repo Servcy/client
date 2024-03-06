@@ -1,11 +1,16 @@
 import React from "react"
-import { DateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
-import { IssueLabel, TIssueOperations } from "@components/issues"
-// helper
-import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
-import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+
 import { CalendarCheck2, Signal, Tag } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { DateDropdown, MemberDropdown, PriorityDropdown, StateDropdown } from "@components/dropdowns"
+import { IssueLabel, TIssueOperations } from "@components/issues"
+
+import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+
+// helper
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+
 import { DoubleCircleIcon, StateGroupIcon, UserGroupIcon } from "@servcy/ui"
 
 type Props = {

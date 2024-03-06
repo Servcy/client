@@ -1,21 +1,28 @@
 import { useRouter } from "next/router"
+
 import React, { Fragment, useCallback, useMemo } from "react"
+
+import isEmpty from "lodash/isEmpty"
+import { observer } from "mobx-react-lite"
+import { useTheme } from "next-themes"
+import useSWR from "swr"
+
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { GlobalViewsAppliedFiltersRoot, IssuePeekOverview } from "@components/issues"
 import { SpreadsheetView } from "@components/issues/issue-layouts"
 import { AllIssueQuickActions } from "@components/issues/issue-layouts/quick-action-dropdowns"
 import { SpreadsheetLayoutLoader } from "@components/ui"
+
+import { useApplication, useEventTracker, useGlobalView, useIssues, useProject, useUser } from "@hooks/store"
+import { useWorkspaceIssueProperties } from "@hooks/use-workspace-issue-properties"
+
 import { ALL_ISSUES_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
 import { EUserProjectRoles } from "@constants/project"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-import { useApplication, useEventTracker, useGlobalView, useIssues, useProject, useUser } from "@hooks/store"
-import { useWorkspaceIssueProperties } from "@hooks/use-workspace-issue-properties"
-import isEmpty from "lodash/isEmpty"
-import { observer } from "mobx-react-lite"
-import { useTheme } from "next-themes"
-import useSWR from "swr"
+
 import { IIssueDisplayFilterOptions, TIssue } from "@servcy/types"
+
 import { EIssueActions } from "../types"
 
 export const AllIssueLayoutRoot: React.FC = observer(() => {

@@ -1,8 +1,11 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect, useState } from "react"
-import { ISSUE_CREATED, ISSUE_UPDATED } from "@constants/event-tracker"
-import { EIssuesStoreType, TCreateModalStoreTypes } from "@constants/issue"
+
 import { Dialog, Transition } from "@headlessui/react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+
 import {
     useApplication,
     useCycle,
@@ -14,9 +17,12 @@ import {
     useWorkspace,
 } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
-import { observer } from "mobx-react-lite"
-import toast from "react-hot-toast"
+
+import { ISSUE_CREATED, ISSUE_UPDATED } from "@constants/event-tracker"
+import { EIssuesStoreType, TCreateModalStoreTypes } from "@constants/issue"
+
 import type { TIssue } from "@servcy/types"
+
 import { DraftIssueLayout } from "./draft-issue-layout"
 import { IssueFormRoot } from "./form"
 

@@ -1,11 +1,17 @@
 import { useRouter } from "next/router"
-import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { EUserProjectRoles } from "@constants/project"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { useApplication, useProject, useUser } from "@hooks/store"
+
 import { Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { BreadcrumbLink } from "@components/common"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useApplication, useProject, useUser } from "@hooks/store"
+
+import { EUserProjectRoles } from "@constants/project"
+
+import { renderEmoji } from "@helpers/emoji.helper"
+
 import { Breadcrumbs, Button, PhotoFilterIcon } from "@servcy/ui"
 
 export const ProjectViewsHeader: React.FC = observer(() => {

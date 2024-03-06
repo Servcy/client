@@ -1,13 +1,18 @@
 "use client"
 
 import Image from "next/image.js"
+
 import { useEffect, useState } from "react"
+
 import { fetchIntegrations } from "@/apis/integration"
 import { Button, Card, Skeleton } from "antd"
 import toast from "react-hot-toast"
 import { AiFillSetting } from "react-icons/ai"
+
 import { Integration } from "@/types/apps/integration"
+
 import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal"
+
 import { getQueryParams } from "@/utils/Shared"
 
 export default function IntegrationSettings(): JSX.Element {

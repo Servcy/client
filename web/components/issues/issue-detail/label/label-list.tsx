@@ -1,5 +1,7 @@
 import { FC } from "react"
+
 import { useIssueDetail } from "@hooks/store"
+
 import { LabelListItem } from "./label-list-item"
 import { TLabelOperations } from "./root"
 

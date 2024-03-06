@@ -1,7 +1,10 @@
+import isEmpty from "lodash/isEmpty"
+
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+
 // lib
 import { storage } from "@wrappers/LocalStorageWrapper"
-import isEmpty from "lodash/isEmpty"
+
 import {
     IIssueDisplayFilterOptions,
     IIssueDisplayProperties,

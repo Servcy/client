@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from "react"
+
 import { Popover, Transition } from "@headlessui/react"
 import { Placement } from "@popperjs/core"
 import { ChevronUp } from "lucide-react"
 import { usePopper } from "react-popper"
+
 import { Button } from "@servcy/ui"
 
 type Props = {

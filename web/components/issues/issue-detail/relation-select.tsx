@@ -1,11 +1,17 @@
 import Link from "next/link"
+
 import React from "react"
-import { ExistingIssuesListModal } from "@components/core"
-import { cn } from "@helpers/common.helper"
-import { useIssueDetail, useIssues, useProject } from "@hooks/store"
+
 import { CircleDot, CopyPlus, Pencil, X, XCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { ExistingIssuesListModal } from "@components/core"
+
+import { useIssueDetail, useIssues, useProject } from "@hooks/store"
+
+import { cn } from "@helpers/common.helper"
+
 import { ISearchIssueResponse, TIssueRelationTypes } from "@servcy/types"
 import { RelatedIcon, Tooltip } from "@servcy/ui"
 

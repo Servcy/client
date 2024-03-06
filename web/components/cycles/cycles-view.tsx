@@ -1,8 +1,12 @@
 import { FC } from "react"
+
+import { observer } from "mobx-react-lite"
+
 import { CyclesBoard, CyclesList, CyclesListGanttChartView } from "@components/cycles"
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui"
+
 import { useCycle } from "@hooks/store"
-import { observer } from "mobx-react-lite"
+
 import { TCycleLayout, TCycleView } from "@servcy/types"
 
 components

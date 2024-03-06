@@ -1,14 +1,21 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
-import { IssueSubscription, IssueUpdateStatus } from "@components/issues"
-import { STATE_GROUPS } from "@constants/state"
-import { cn } from "@helpers/common.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
-// store hooks
-import { useIssueDetail, useProjectState, useUser } from "@hooks/store"
+
 import { Link2, MoveDiagonal, MoveRight, RotateCcw, Trash2 } from "lucide-react"
 import { observer } from "mobx-react"
 import toast from "react-hot-toast"
+
+import { IssueSubscription, IssueUpdateStatus } from "@components/issues"
+
+// store hooks
+import { useIssueDetail, useProjectState, useUser } from "@hooks/store"
+
+import { STATE_GROUPS } from "@constants/state"
+
+import { cn } from "@helpers/common.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
+
 import { ArchiveIcon, CenterPanelIcon, CustomSelect, FullScreenPanelIcon, SidePanelIcon, Tooltip } from "@servcy/ui"
 
 export type TPeekModes = "side-peek" | "modal" | "full-screen"

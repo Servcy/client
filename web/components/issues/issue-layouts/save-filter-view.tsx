@@ -1,6 +1,9 @@
 import { FC, useState } from "react"
-import { CreateUpdateProjectViewModal } from "@components/views"
+
 import { Plus } from "lucide-react"
+
+import { CreateUpdateProjectViewModal } from "@components/views"
+
 import { Button } from "@servcy/ui"
 
 interface ISaveFilterView {

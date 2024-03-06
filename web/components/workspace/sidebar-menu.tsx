@@ -1,15 +1,22 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import React from "react"
+
+import { Crown } from "lucide-react"
+import { observer } from "mobx-react-lite"
+
 import { NotificationPopover } from "@components/notifications"
+
+import { useApplication, useEventTracker, useUser } from "@hooks/store"
+
 import { SIDEBAR_MENU_ITEMS } from "@constants/dashboard"
 import { SIDEBAR_CLICKED } from "@constants/event-tracker"
 import { EUserWorkspaceRoles } from "@constants/workspace"
+
 // helper
 import { cn } from "@helpers/common.helper"
-import { useApplication, useEventTracker, useUser } from "@hooks/store"
-import { Crown } from "lucide-react"
-import { observer } from "mobx-react-lite"
+
 import { Tooltip } from "@servcy/ui"
 
 export const WorkspaceSidebarMenu = observer(() => {

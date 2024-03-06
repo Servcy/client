@@ -1,6 +1,9 @@
 import { FC } from "react"
-import { useInboxIssues } from "@hooks/store"
+
 import { observer } from "mobx-react"
+
+import { useInboxIssues } from "@hooks/store"
+
 import { InboxIssueListItem } from "../"
 
 type TInboxIssueList = { workspaceSlug: string; projectId: string; inboxId: string }

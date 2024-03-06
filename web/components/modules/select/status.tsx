@@ -1,7 +1,10 @@
 import React from "react"
-import { MODULE_STATUS } from "@constants/module"
+
 // react hook form
 import { Control, Controller, FieldError } from "react-hook-form"
+
+import { MODULE_STATUS } from "@constants/module"
+
 import type { IModule } from "@servcy/types"
 import { CustomSelect, DoubleCircleIcon, ModuleStatusIcon } from "@servcy/ui"
 

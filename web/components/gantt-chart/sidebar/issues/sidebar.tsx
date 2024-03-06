@@ -1,6 +1,9 @@
-import { IBlockUpdateData, IGanttBlock } from "@components/gantt-chart/types"
 import { DragDropContext, Draggable, Droppable, DropResult } from "@hello-pangea/dnd"
+
+import { IBlockUpdateData, IGanttBlock } from "@components/gantt-chart/types"
+
 import { Loader } from "@servcy/ui"
+
 import { IssuesSidebarBlock } from "./block"
 
 type Props = {

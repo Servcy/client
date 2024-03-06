@@ -1,7 +1,11 @@
 import React from "react"
-import { useLabel } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { useLabel } from "@hooks/store"
+
 import { TIssue } from "@servcy/types"
+
 import { IssuePropertyLabels } from "../../properties"
 
 type Props = {

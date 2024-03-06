@@ -1,10 +1,16 @@
 import router from "next/router"
+
 import { useCallback, useState } from "react"
+
+import { Calendar, ChevronDown, Kanban, List } from "lucide-react"
+
 import { ProjectAnalyticsModal } from "@components/analytics"
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues"
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue"
+
 import { useIssues, useLabel, useMember, useModule, useProjectState } from "@hooks/store"
-import { Calendar, ChevronDown, Kanban, List } from "lucide-react"
+
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue"
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
 

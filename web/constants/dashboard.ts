@@ -1,4 +1,3 @@
-import { Props } from "@components/icons/types"
 import { linearGradientDef } from "@nivo/core"
 import { BarChart2, Briefcase, CheckCircle, LayoutGrid } from "lucide-react"
 import CompletedIssuesDark from "public/empty-state/dashboard/dark/completed-issues.svg"
@@ -7,8 +6,12 @@ import UpcomingIssuesDark from "public/empty-state/dashboard/dark/upcoming-issue
 import CompletedIssuesLight from "public/empty-state/dashboard/light/completed-issues.svg"
 import OverdueIssuesLight from "public/empty-state/dashboard/light/overdue-issues.svg"
 import UpcomingIssuesLight from "public/empty-state/dashboard/light/upcoming-issues.svg"
+
+import { Props } from "@components/icons/types"
+
 import { TDurationFilterOptions, TIssuesListTypes, TStateGroups } from "@servcy/types"
 import { ContrastIcon } from "@servcy/ui"
+
 import { EUserWorkspaceRoles } from "./workspace"
 
 // gradients for issues by priority widget graph bars

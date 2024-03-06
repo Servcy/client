@@ -1,9 +1,13 @@
 import { FC, Fragment } from "react"
-import { ProjectViewForm } from "@components/views"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useProjectView } from "@hooks/store"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { ProjectViewForm } from "@components/views"
+
+import { useProjectView } from "@hooks/store"
+
 import { IProjectView } from "@servcy/types"
 
 type Props = {

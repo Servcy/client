@@ -1,11 +1,15 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useUser } from "@hooks/store"
 import { Trash2 } from "lucide-react"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
 import { mutate } from "swr"
+
+import { useUser } from "@hooks/store"
+
 import { Button } from "@servcy/ui"
 
 type Props = {

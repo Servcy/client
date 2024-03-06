@@ -1,11 +1,18 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { FC, ReactNode } from "react"
-import { NotAuthorizedView } from "@components/auth-screens"
-import { EUserProjectRoles } from "@constants/project"
-import { useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { NotAuthorizedView } from "@components/auth-screens"
+
+import { useUser } from "@hooks/store"
+
+import { EUserProjectRoles } from "@constants/project"
+
 import { Button, LayersIcon } from "@servcy/ui"
+
 import { ProjectSettingsSidebar } from "./sidebar"
 
 export interface IProjectSettingLayout {

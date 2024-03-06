@@ -1,12 +1,17 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
-import { PAGE_DELETED } from "@constants/event-tracker"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useEventTracker, usePage } from "@hooks/store"
-import { useProjectPages } from "@hooks/store/use-project-page"
 import { AlertTriangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useEventTracker, usePage } from "@hooks/store"
+import { useProjectPages } from "@hooks/store/use-project-page"
+
+import { PAGE_DELETED } from "@constants/event-tracker"
+
 import { Button } from "@servcy/ui"
 
 type TConfirmPageDeletionProps = {

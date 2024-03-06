@@ -1,12 +1,18 @@
 // component
+import { observer } from "mobx-react-lite"
+
 import { PageHead } from "@components/core"
 import { WorkspaceSettingHeader } from "@components/headers"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { useUser, useWorkspace } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
 import { WorkspaceSettingLayout } from "@layouts/settings-layout"
-import { observer } from "mobx-react-lite"
+
+import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { Button } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const BillingSettingsPage: NextPageWithLayout = observer(() => {

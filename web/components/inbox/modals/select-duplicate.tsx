@@ -1,12 +1,18 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect, useState } from "react"
-import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys"
+
 import { Combobox, Dialog, Transition } from "@headlessui/react"
-import { useProject, useProjectState } from "@hooks/store"
-import { IssueService } from "@services/issue"
 import { Search } from "lucide-react"
 import toast from "react-hot-toast"
 import useSWR from "swr"
+
+import { useProject, useProjectState } from "@hooks/store"
+
+import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys"
+
+import { IssueService } from "@services/issue"
+
 import { Button, LayersIcon } from "@servcy/ui"
 
 type Props = {

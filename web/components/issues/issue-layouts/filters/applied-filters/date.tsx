@@ -1,8 +1,10 @@
-import { DATE_FILTER_OPTIONS } from "@constants/filters"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { capitalizeFirstLetter } from "@helpers/string.helper"
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+
+import { DATE_FILTER_OPTIONS } from "@constants/filters"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+import { capitalizeFirstLetter } from "@helpers/string.helper"
 
 type Props = {
     handleRemove: (val: string) => void

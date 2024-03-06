@@ -1,6 +1,9 @@
 import Image from "next/image"
+
 import { HiExternalLink } from "react-icons/hi"
+
 import type { NotionComment } from "@/types/integrations/notion"
+
 import { getCleanLink } from "@/utils/Shared"
 
 const NotionComment = ({ data, cause }: { data: NotionComment; cause: any }) => {

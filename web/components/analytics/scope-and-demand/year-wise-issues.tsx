@@ -1,7 +1,10 @@
-import { LineGraph, ProfileEmptyState } from "@components/ui"
-import { MONTHS_LIST } from "@constants/calendar"
 // image
 import emptyGraph from "public/empty-state/empty_graph.svg"
+
+import { LineGraph, ProfileEmptyState } from "@components/ui"
+
+import { MONTHS_LIST } from "@constants/calendar"
+
 import { IDefaultAnalyticsResponse } from "@servcy/types"
 
 type Props = {

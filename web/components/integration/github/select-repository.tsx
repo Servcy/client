@@ -1,8 +1,13 @@
 import { useRouter } from "next/router"
+
 import React from "react"
-import { truncateText } from "@helpers/string.helper"
-import { ProjectService } from "@services/project"
+
 import useSWRInfinite from "swr/infinite"
+
+import { ProjectService } from "@services/project"
+
+import { truncateText } from "@helpers/string.helper"
+
 import { IWorkspaceIntegration } from "@servcy/types"
 import { CustomSearchSelect } from "@servcy/ui"
 

@@ -1,6 +1,9 @@
-import { RootStore } from "@store/root.store"
 import { action, makeObservable, observable } from "mobx"
+
+import { RootStore } from "@store/root.store"
+
 import { IUserLite } from "@servcy/types"
+
 import { IProjectMemberStore, ProjectMemberStore } from "./project-member.store"
 import { IWorkspaceMemberStore, WorkspaceMemberStore } from "./workspace-member.store"
 

@@ -1,20 +1,28 @@
 import { ReactElement, useEffect, useState } from "react"
-import { DeactivateAccountModal } from "@components/account"
-import { ImagePickerPopover, PageHead, UserImageUploadModal } from "@components/core"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { TIME_ZONES } from "@constants/timezones"
-import { USER_ROLES } from "@constants/workspace"
+
 import { Disclosure, Transition } from "@headlessui/react"
-import { useApplication, useUser } from "@hooks/store"
-import useUserAuth from "@hooks/use-user-auth"
-import { ProfileSettingsLayout } from "@layouts/settings-layout"
-import { FileService } from "@services/file.service"
 import { ChevronDown, User2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { DeactivateAccountModal } from "@components/account"
+import { ImagePickerPopover, PageHead, UserImageUploadModal } from "@components/core"
+import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+
+import { useApplication, useUser } from "@hooks/store"
+import useUserAuth from "@hooks/use-user-auth"
+
+import { ProfileSettingsLayout } from "@layouts/settings-layout"
+
+import { TIME_ZONES } from "@constants/timezones"
+import { USER_ROLES } from "@constants/workspace"
+
+import { FileService } from "@services/file.service"
+
 import type { IUser } from "@servcy/types"
 import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servcy/ui"
+
 import type { NextPageWithLayout } from "@/types/types"
 
 const defaultValues: Partial<IUser> = {

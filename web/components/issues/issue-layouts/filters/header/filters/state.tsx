@@ -1,6 +1,9 @@
 import React, { useState } from "react"
-import { FilterHeader, FilterOption } from "@components/issues"
+
 import { observer } from "mobx-react"
+
+import { FilterHeader, FilterOption } from "@components/issues"
+
 import { IState } from "@servcy/types"
 import { Loader, StateGroupIcon } from "@servcy/ui"
 

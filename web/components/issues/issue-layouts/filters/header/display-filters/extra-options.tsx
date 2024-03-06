@@ -1,7 +1,11 @@
 import React from "react"
-import { FilterOption } from "@components/issues"
-import { ISSUE_EXTRA_OPTIONS } from "@constants/issue"
+
 import { observer } from "mobx-react-lite"
+
+import { FilterOption } from "@components/issues"
+
+import { ISSUE_EXTRA_OPTIONS } from "@constants/issue"
+
 import { IIssueDisplayFilterOptions, TIssueExtraOptions } from "@servcy/types"
 
 type Props = {

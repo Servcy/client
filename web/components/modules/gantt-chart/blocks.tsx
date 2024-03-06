@@ -1,8 +1,13 @@
 import { useRouter } from "next/router"
-import { MODULE_STATUS } from "@constants/module"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { useApplication, useModule } from "@hooks/store"
+
 import { observer } from "mobx-react"
+
+import { useApplication, useModule } from "@hooks/store"
+
+import { MODULE_STATUS } from "@constants/module"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+
 import { ModuleStatusIcon, Tooltip } from "@servcy/ui"
 
 type Props = {

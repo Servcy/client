@@ -1,7 +1,10 @@
 import { FC, ReactNode } from "react"
-import { InstanceAdminRestriction } from "@components/instance"
-import { useApplication, useUser } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { InstanceAdminRestriction } from "@components/instance"
+
+import { useApplication, useUser } from "@hooks/store"
 
 export interface IAdminAuthWrapper {
     children: ReactNode

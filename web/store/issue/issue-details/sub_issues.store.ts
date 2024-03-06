@@ -1,9 +1,11 @@
-import { IssueService } from "@services/issue"
 import concat from "lodash/concat"
 import pull from "lodash/pull"
 import set from "lodash/set"
 import update from "lodash/update"
 import { action, makeObservable, observable, runInAction } from "mobx"
+
+import { IssueService } from "@services/issue"
+
 import {
     TIssue,
     TIssueSubIssues,
@@ -11,6 +13,7 @@ import {
     TIssueSubIssuesStateDistributionMap,
     TSubIssuesStateDistribution,
 } from "@servcy/types"
+
 import { IIssueDetail } from "./root.store"
 
 export interface IIssueSubIssuesStoreActions {

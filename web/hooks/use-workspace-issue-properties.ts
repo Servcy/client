@@ -1,4 +1,5 @@
 import useSWR from "swr"
+
 import { useCycle, useEstimate, useLabel, useModule, useProjectState } from "./store"
 
 export const useWorkspaceIssueProperties = (workspaceSlug: string | string[] | undefined) => {

@@ -1,9 +1,15 @@
 import { useRouter } from "next/router"
+
 import React, { useCallback } from "react"
-import { CycleDropdown } from "@components/dropdowns"
-import { EIssuesStoreType } from "@constants/issue"
-import { useEventTracker, useIssues } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
+
+import { CycleDropdown } from "@components/dropdowns"
+
+import { useEventTracker, useIssues } from "@hooks/store"
+
+import { EIssuesStoreType } from "@constants/issue"
+
 import { TIssue } from "@servcy/types"
 
 type Props = {

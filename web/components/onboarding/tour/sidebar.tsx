@@ -1,5 +1,7 @@
 import { FileText } from "lucide-react"
+
 import { ContrastIcon, DiceIcon, LayersIcon, PhotoFilterIcon } from "@servcy/ui"
+
 import { TTourSteps } from "./root"
 
 const sidebarOptions: {

@@ -1,5 +1,3 @@
-import { InboxIssueService } from "@services/inbox/inbox-issue.service"
-import { RootStore } from "@store/root.store"
 import concat from "lodash/concat"
 import pull from "lodash/pull"
 import set from "lodash/set"
@@ -7,6 +5,11 @@ import uniq from "lodash/uniq"
 import update from "lodash/update"
 import { action, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
+
+import { InboxIssueService } from "@services/inbox/inbox-issue.service"
+
+import { RootStore } from "@store/root.store"
+
 import type {
     TInboxDetailedStatus,
     TInboxIssueDetail,

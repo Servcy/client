@@ -1,12 +1,16 @@
+import { set } from "lodash"
+import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
 import { EUserProjectRoles } from "@constants/project"
 import { EUserWorkspaceRoles } from "@constants/workspace"
+
 import { ProjectMemberService } from "@services/project"
 import { UserService } from "@services/user.service"
 import { WorkspaceService } from "@services/workspace.service"
-import { set } from "lodash"
-import { action, computed, makeObservable, observable, runInAction } from "mobx"
+
 // interfaces
 import { IProjectMember, IUserProjectsRole, IWorkspaceMemberMe } from "@servcy/types"
+
 import { RootStore } from "../root.store"
 
 export interface IUserMembershipStore {

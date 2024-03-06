@@ -1,3 +1,6 @@
+import { action, computed, makeObservable, observable } from "mobx"
+import posthog from "posthog-js"
+
 import {
     EventProps,
     getCycleEventPayload,
@@ -11,8 +14,7 @@ import {
     IssueEventProps,
     WORKSPACE_CREATED,
 } from "@constants/event-tracker"
-import { action, computed, makeObservable, observable } from "mobx"
-import posthog from "posthog-js"
+
 // stores
 import { RootStore } from "./root.store"
 

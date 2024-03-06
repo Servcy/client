@@ -1,7 +1,11 @@
 import React, { useState } from "react"
-import { FilterHeader, FilterOption } from "@components/issues"
-import { ISSUE_PRIORITIES } from "@constants/issue"
+
 import { observer } from "mobx-react-lite"
+
+import { FilterHeader, FilterOption } from "@components/issues"
+
+import { ISSUE_PRIORITIES } from "@constants/issue"
+
 import { PriorityIcon } from "@servcy/ui"
 
 type Props = {

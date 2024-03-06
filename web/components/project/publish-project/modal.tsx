@@ -1,14 +1,20 @@
 import { useRouter } from "next/router"
+
 import { Fragment, useEffect, useState } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useProjectPublish } from "@hooks/store"
-import { IProjectPublishSettings, TProjectPublishViews } from "@store/project/project-publish.store"
 import { Check, Globe2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useProjectPublish } from "@hooks/store"
+
+import { IProjectPublishSettings, TProjectPublishViews } from "@store/project/project-publish.store"
+
 import { IProject } from "@servcy/types"
 import { Button, Loader, ToggleSwitch } from "@servcy/ui"
+
 import { CustomPopover } from "./popover"
 
 type Props = {

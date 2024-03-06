@@ -1,7 +1,11 @@
 import { FC, useCallback, useEffect, useState } from "react"
-import useDebounce from "@hooks/use-debounce"
+
 import { observer } from "mobx-react"
+
+import useDebounce from "@hooks/use-debounce"
+
 import { TextArea } from "@servcy/ui"
+
 import { TIssueOperations } from "./issue-detail"
 
 export type IssueTitleInputProps = {

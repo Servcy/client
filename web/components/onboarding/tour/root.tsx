@@ -1,8 +1,7 @@
 import Image from "next/image"
+
 import { useState } from "react"
-import { TourSidebar } from "@components/onboarding"
-import { PRODUCT_TOUR_SKIPPED, PRODUCT_TOUR_STARTED } from "@constants/event-tracker"
-import { useApplication, useEventTracker, useUser } from "@hooks/store"
+
 import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import ServcyLogo from "public/logo.svg"
@@ -11,6 +10,13 @@ import IssuesTour from "public/onboarding/issues.webp"
 import ModulesTour from "public/onboarding/modules.webp"
 import PagesTour from "public/onboarding/pages.webp"
 import ViewsTour from "public/onboarding/views.webp"
+
+import { TourSidebar } from "@components/onboarding"
+
+import { useApplication, useEventTracker, useUser } from "@hooks/store"
+
+import { PRODUCT_TOUR_SKIPPED, PRODUCT_TOUR_STARTED } from "@constants/event-tracker"
+
 import { Button } from "@servcy/ui"
 
 type Props = {

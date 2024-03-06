@@ -1,7 +1,10 @@
 import { memo, MutableRefObject } from "react"
+
 import { KanbanIssueBlock } from "@components/issues"
+
 //types
 import { IIssueDisplayProperties, IIssueMap, TIssue } from "@servcy/types"
+
 import { EIssueActions } from "../types"
 
 interface IssueBlocksListProps {

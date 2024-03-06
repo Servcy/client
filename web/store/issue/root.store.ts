@@ -1,8 +1,11 @@
-import { IWorkspaceMembership } from "@store/member/workspace-member.store"
 import isEmpty from "lodash/isEmpty"
 import { autorun, makeObservable, observable } from "mobx"
+
+import { IWorkspaceMembership } from "@store/member/workspace-member.store"
+
 // issues data store
 import { ICycle, IIssueLabel, IModule, IProject, IState, IUserLite } from "@servcy/types"
+
 // root store
 import { RootStore } from "../root.store"
 import { IStateStore, StateStore } from "../state.store"

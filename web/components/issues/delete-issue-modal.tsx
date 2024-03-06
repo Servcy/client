@@ -1,9 +1,12 @@
 import { Fragment, useEffect, useState } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useProject } from "@hooks/store"
-import { useIssues } from "@hooks/store/use-issues"
 import { AlertTriangle } from "lucide-react"
 import toast from "react-hot-toast"
+
+import { useProject } from "@hooks/store"
+import { useIssues } from "@hooks/store/use-issues"
+
 import { TIssue } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

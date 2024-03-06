@@ -1,10 +1,14 @@
 import { useRouter } from "next/router"
+
 import React, { useState } from "react"
+
 import { Dialog, Transition } from "@headlessui/react"
-import { useProjectView } from "@hooks/store"
 import { AlertTriangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { useProjectView } from "@hooks/store"
+
 import { IProjectView } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

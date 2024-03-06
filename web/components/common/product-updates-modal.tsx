@@ -1,11 +1,16 @@
 import React from "react"
-import { MarkdownRenderer } from "@components/ui"
+
 // headless ui
 import { Dialog, Transition } from "@headlessui/react"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { WorkspaceService } from "@services/workspace.service"
 import { X } from "lucide-react"
 import useSWR from "swr"
+
+import { MarkdownRenderer } from "@components/ui"
+
+import { WorkspaceService } from "@services/workspace.service"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+
 import { Loader } from "@servcy/ui"
 
 type Props = {

@@ -1,11 +1,14 @@
-import { IssueCommentService } from "@services/issue"
 import concat from "lodash/concat"
 import pull from "lodash/pull"
 import set from "lodash/set"
 import uniq from "lodash/uniq"
 import update from "lodash/update"
 import { action, makeObservable, observable, runInAction } from "mobx"
+
+import { IssueCommentService } from "@services/issue"
+
 import { TIssueComment, TIssueCommentIdMap, TIssueCommentMap } from "@servcy/types"
+
 import { IIssueDetail } from "./root.store"
 
 export type TCommentLoader = "fetch" | "create" | "update" | "delete" | "mutate" | undefined

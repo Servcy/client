@@ -1,8 +1,13 @@
 import { useRouter } from "next/router"
-import { AnalyticsGraph, AnalyticsTable } from "@components/analytics"
-import { ANALYTICS } from "@constants/fetch-keys"
-import { convertResponseToBarGraphData } from "@helpers/analytics.helper"
+
 import { mutate } from "swr"
+
+import { AnalyticsGraph, AnalyticsTable } from "@components/analytics"
+
+import { ANALYTICS } from "@constants/fetch-keys"
+
+import { convertResponseToBarGraphData } from "@helpers/analytics.helper"
+
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types"
 import { Button, Loader } from "@servcy/ui"
 

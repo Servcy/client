@@ -1,7 +1,9 @@
 import Image from "next/image.js"
+
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"
+
 import { JiraNotificationProps } from "@/types/integrations/jira"
 
 const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {

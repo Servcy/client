@@ -1,13 +1,18 @@
 import { useRouter } from "next/router"
+
 import React, { useEffect } from "react"
-import { STATE_CREATED, STATE_UPDATED } from "@constants/event-tracker"
-import { GROUP_CHOICES } from "@constants/project"
+
 import { Popover, Transition } from "@headlessui/react"
-import { useEventTracker, useProjectState } from "@hooks/store"
 import { observer } from "mobx-react-lite"
 import { TwitterPicker } from "react-color"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+
+import { useEventTracker, useProjectState } from "@hooks/store"
+
+import { STATE_CREATED, STATE_UPDATED } from "@constants/event-tracker"
+import { GROUP_CHOICES } from "@constants/project"
+
 import type { IState } from "@servcy/types"
 import { Button, CustomSelect, Input, Tooltip } from "@servcy/ui"
 

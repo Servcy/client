@@ -1,15 +1,21 @@
+import { observer } from "mobx-react-lite"
+
 import { CalendarHeader, CalendarWeekDays, CalendarWeekHeader } from "@components/issues"
-import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
+
 import { useIssues, useUser } from "@hooks/store"
 import { useCalendarView } from "@hooks/store/use-calendar-view"
+
+import { EIssuesStoreType } from "@constants/issue"
+import { EUserProjectRoles } from "@constants/project"
+
 import { ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssuesFilter } from "@store/issue/module"
 import { IProjectIssuesFilter } from "@store/issue/project"
 import { IProjectViewIssuesFilter } from "@store/issue/project-views"
-import { observer } from "mobx-react-lite"
+
 import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
+
 import { ICalendarWeek } from "./types"
 
 type Props = {

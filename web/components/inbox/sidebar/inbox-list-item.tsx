@@ -1,11 +1,17 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { FC, useEffect } from "react"
-import { InboxIssueStatus } from "@components/inbox/inbox-issue-status"
-import { renderFormattedDate } from "@helpers/date-time.helper"
-import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store"
+
 import { CalendarDays } from "lucide-react"
 import { observer } from "mobx-react"
+
+import { InboxIssueStatus } from "@components/inbox/inbox-issue-status"
+
+import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store"
+
+import { renderFormattedDate } from "@helpers/date-time.helper"
+
 import { PriorityIcon, Tooltip } from "@servcy/ui"
 
 type TInboxIssueListItem = {

@@ -1,10 +1,14 @@
 import { useRouter } from "next/router"
+
 import { FC } from "react"
-import { MembersSettingsLoader } from "@components/ui"
-import { WorkspaceInvitationsListItem, WorkspaceMembersListItem } from "@components/workspace"
-import { useMember } from "@hooks/store"
+
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
+
+import { MembersSettingsLoader } from "@components/ui"
+import { WorkspaceInvitationsListItem, WorkspaceMembersListItem } from "@components/workspace"
+
+import { useMember } from "@hooks/store"
 
 export const WorkspaceMembersList: FC<{ searchQuery: string }> = observer((props) => {
     const { searchQuery } = props

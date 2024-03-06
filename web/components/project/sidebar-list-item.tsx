@@ -1,15 +1,10 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+
 import { useRef, useState } from "react"
-import { LeaveProjectModal, PublishProjectModal } from "@components/project"
-import { EUserProjectRoles } from "@constants/project"
+
 import { Disclosure, Transition } from "@headlessui/react"
 import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
-import { cn } from "@helpers/common.helper"
-import { renderEmoji } from "@helpers/emoji.helper"
-import { getNumberCount } from "@helpers/string.helper"
-import { useApplication, useEventTracker, useInbox, useProject } from "@hooks/store"
-import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 import {
     ChevronDown,
     FileText,
@@ -25,6 +20,18 @@ import {
 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
+
+import { LeaveProjectModal, PublishProjectModal } from "@components/project"
+
+import { useApplication, useEventTracker, useInbox, useProject } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { EUserProjectRoles } from "@constants/project"
+
+import { cn } from "@helpers/common.helper"
+import { renderEmoji } from "@helpers/emoji.helper"
+import { getNumberCount } from "@helpers/string.helper"
+
 import { ArchiveIcon, ContrastIcon, CustomMenu, DiceIcon, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui"
 
 type Props = {

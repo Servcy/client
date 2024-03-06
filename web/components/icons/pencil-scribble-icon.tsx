@@ -1,4 +1,5 @@
 import React from "react"
+
 import type { Props } from "./types"
 
 export const PencilScribbleIcon: React.FC<Props> = ({ width = "20", height = "20", className, color = "#000000" }) => (

@@ -1,13 +1,20 @@
 import { ReactElement, useState } from "react"
+
+import { Search } from "lucide-react"
+import { observer } from "mobx-react"
+
 import { PageHead } from "@components/core"
 import { GlobalIssuesHeader } from "@components/headers"
 import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspace"
-import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
+
 import { useWorkspace } from "@hooks/store"
+
 import { AppLayout } from "@layouts/app-layout"
-import { Search } from "lucide-react"
-import { observer } from "mobx-react"
+
+import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
+
 import { Input } from "@servcy/ui"
+
 import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
