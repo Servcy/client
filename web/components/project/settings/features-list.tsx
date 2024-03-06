@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 
 import { FC } from "react"
 
-import { ContrastIcon, FileText, Inbox, Layers } from "lucide-react"
+import { ContrastIcon, FileText, Layers } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
@@ -39,13 +39,7 @@ const PROJECT_FEATURES_LIST = [
         description: "Pages are enabled for all the projects in this workspace. Access it from the sidebar.",
         icon: <FileText className="h-4 w-4 flex-shrink-0 text-red-400" />,
         property: "page_view",
-    },
-    {
-        title: "Inbox",
-        description: "Inbox are enabled for all the projects in this workspace. Access it from the issues views page.",
-        icon: <Inbox className="h-4 w-4 flex-shrink-0 text-fuchsia-500" />,
-        property: "inbox_view",
-    },
+    }
 ]
 
 export const ProjectFeaturesList: FC<Props> = observer(() => {

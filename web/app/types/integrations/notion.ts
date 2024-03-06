@@ -1,4 +1,4 @@
-export interface NotionComment {
+export interface NotionCommentProps {
     object: string
     id: string
     parent: {

@@ -23,14 +23,12 @@ import toast from "react-hot-toast"
 
 import { LeaveProjectModal, PublishProjectModal } from "@components/project"
 
-import { useApplication, useEventTracker, useInbox, useProject } from "@hooks/store"
+import { useApplication, useEventTracker, useProject } from "@hooks/store"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
 import { EUserProjectRoles } from "@constants/project"
 
-import { cn } from "@helpers/common.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
-import { getNumberCount } from "@helpers/string.helper"
 
 import { ArchiveIcon, ContrastIcon, CustomMenu, DiceIcon, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui"
 
@@ -88,7 +86,6 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     const { theme: themeStore } = useApplication()
     const { setTrackElement } = useEventTracker()
     const { addProjectToFavorites, removeProjectFromFavorites, getProjectById } = useProject()
-    const { getInboxesByProjectId, getInboxById } = useInbox()
     // states
     const [leaveProjectModalOpen, setLeaveProjectModal] = useState(false)
     const [publishModalOpen, setPublishModal] = useState(false)
@@ -107,9 +104,6 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     const isCollapsed = themeStore.sidebarCollapsed
 
     const actionSectionRef = useRef<HTMLDivElement | null>(null)
-
-    const inboxesMap = project?.inbox_view ? getInboxesByProjectId(projectId) : undefined
-    const inboxDetails = inboxesMap && inboxesMap.length > 0 ? getInboxById(inboxesMap[0]) : undefined
 
     const handleAddToFavorites = () => {
         if (!workspaceSlug || !project) return
@@ -333,8 +327,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                         (item.name === "Cycles" && !project.cycle_view) ||
                                         (item.name === "Modules" && !project.module_view) ||
                                         (item.name === "Views" && !project.issue_views_view) ||
-                                        (item.name === "Pages" && !project.page_view) ||
-                                        (item.name === "Inbox" && !project.inbox_view)
+                                        (item.name === "Pages" && !project.page_view)
                                     )
                                         return
 
@@ -354,41 +347,10 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                                                 : "text-custom-sidebar-text-300 hover:bg-custom-sidebar-background-80 focus:bg-custom-sidebar-background-80"
                                                         } ${isCollapsed ? "justify-center" : ""}`}
                                                     >
-                                                        {item.name === "Inbox" && inboxDetails ? (
-                                                            <>
-                                                                <div className="flex items-center justify-center relative">
-                                                                    {inboxDetails?.pending_issue_count > 0 && (
-                                                                        <span
-                                                                            className={cn(
-                                                                                "absolute -right-1.5 -top-1 px-0.5 h-3.5 w-3.5 flex items-center tracking-tight justify-center rounded-full text-[0.5rem] border-[0.5px] border-custom-sidebar-border-200 bg-custom-background-80 text-custom-text-100",
-                                                                                {
-                                                                                    "text-[0.375rem] leading-5":
-                                                                                        inboxDetails?.pending_issue_count >=
-                                                                                        100,
-                                                                                },
-                                                                                {
-                                                                                    "border-none bg-custom-primary-300 text-white":
-                                                                                        router.asPath.includes(
-                                                                                            item.href
-                                                                                        ),
-                                                                                }
-                                                                            )}
-                                                                        >
-                                                                            {getNumberCount(
-                                                                                inboxDetails?.pending_issue_count
-                                                                            )}
-                                                                        </span>
-                                                                    )}
-                                                                    <item.Icon className="h-4 w-4 stroke-[1.5]" />
-                                                                </div>
-                                                                {!isCollapsed && item.name}
-                                                            </>
-                                                        ) : (
-                                                            <>
-                                                                <item.Icon className="h-4 w-4 stroke-[1.5]" />
-                                                                {!isCollapsed && item.name}
-                                                            </>
-                                                        )}
+                                                        <>
+                                                            <item.Icon className="h-4 w-4 stroke-[1.5]" />
+                                                            {!isCollapsed && item.name}
+                                                        </>
                                                     </div>
                                                 </Tooltip>
                                             </span>
