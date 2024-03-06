@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import useSWR from "swr";
 
 import useUserAuth from "@hooks/use-user-auth";
-// services
+
 import { NotificationService } from "@services/notification.service";
 
 import { IUser } from "@servcy/types";

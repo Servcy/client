@@ -15,7 +15,7 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 
 import { Button } from "@servcy/ui";
 import { APITokenSettingsLoader } from "@components/ui";
-// services
+
 import { APITokenService } from "@services/api_token.service";
 
 import { NextPageWithLayout } from "@lib/types";

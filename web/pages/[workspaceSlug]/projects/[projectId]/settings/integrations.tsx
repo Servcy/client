@@ -8,7 +8,7 @@ import { useUser } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
-// services
+
 import { IntegrationService } from "@services/integrations";
 import { ProjectService } from "@services/project";
 
@@ -25,7 +25,7 @@ import { NextPageWithLayout } from "@lib/types";
 import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 import { PROJECT_DETAILS, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";
 
-// services
+
 const integrationService = new IntegrationService();
 const projectService = new ProjectService();
 

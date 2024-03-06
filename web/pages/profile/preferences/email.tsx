@@ -7,12 +7,12 @@ import { EmailSettingsLoader } from "@components/ui";
 
 import { EmailNotificationForm } from "@components/profile/preferences";
 import { PageHead } from "@components/core";
-// services
+
 import { UserService } from "@services/user.service";
 // type
 import { NextPageWithLayout } from "@lib/types";
 
-// services
+
 const userService = new UserService();
 
 const ProfilePreferencesThemePage: NextPageWithLayout = () => {

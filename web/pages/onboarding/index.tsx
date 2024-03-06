@@ -10,7 +10,7 @@ import useSWR from "swr";
 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 import useUserAuth from "@hooks/use-user-auth";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 // layouts
 import { UserAuthWrapper } from "@layouts/auth-layout";
@@ -28,7 +28,7 @@ import { NextPageWithLayout } from "@lib/types";
 
 import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker";
 
-// services
+
 const workspaceService = new WorkspaceService();
 
 const OnboardingPage: NextPageWithLayout = observer(() => {

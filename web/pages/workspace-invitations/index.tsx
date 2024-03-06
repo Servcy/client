@@ -5,7 +5,7 @@ import { Boxes, Check, Share2, Star, User2, X } from "lucide-react";
 import { observer } from "mobx-react-lite";
 
 import { useUser } from "@hooks/store";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 // layouts
 import DefaultLayout from "@layouts/default-layout";
@@ -18,7 +18,7 @@ import { NextPageWithLayout } from "@lib/types";
 
 import { WORKSPACE_INVITATION } from "@constants/fetch-keys";
 
-// services
+
 const workspaceService = new WorkspaceService();
 
 const WorkspaceInvitationPage: NextPageWithLayout = observer(() => {

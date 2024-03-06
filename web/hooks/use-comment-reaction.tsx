@@ -1,14 +1,14 @@
 import useSWR from "swr";
 // fetch keys
 import { COMMENT_REACTION_LIST } from "@constants/fetch-keys";
-// services
+
 import { IssueReactionService } from "@services/issue";
 
 import { groupReactions } from "@helpers/emoji.helper";
 import { useUser } from "./store";
 
 
-// services
+
 const issueReactionService = new IssueReactionService();
 
 const useCommentReaction = (

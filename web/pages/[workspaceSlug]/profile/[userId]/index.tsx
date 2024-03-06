@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import useSWR from "swr";
-// services
+
 import { UserService } from "@services/user.service";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
@@ -23,7 +23,7 @@ import { NextPageWithLayout } from "@lib/types";
 import { USER_PROFILE_DATA } from "@constants/fetch-keys";
 import { GROUP_CHOICES } from "@constants/project";
 
-// services
+
 const userService = new UserService();
 
 const ProfileOverviewPage: NextPageWithLayout = () => {

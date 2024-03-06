@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 // swr
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
-// services
+
 import { NotificationService } from "@services/notification.service";
 
 import useToast from "./use-toast";

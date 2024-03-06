@@ -9,7 +9,7 @@ import useSWR from "swr";
 import { useApplication, usePage, useUser, useWorkspace } from "@hooks/store";
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
 import toast from "react-hot-toast";
-// services
+
 import { FileService } from "@services/file.service";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
@@ -30,7 +30,7 @@ import { IssuePeekOverview } from "@components/issues";
 import { EUserProjectRoles } from "@constants/project";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 
-// services
+
 const fileService = new FileService();
 
 const PageDetailsPage: NextPageWithLayout = observer(() => {

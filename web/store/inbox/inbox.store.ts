@@ -4,7 +4,7 @@ import uniq from "lodash/uniq";
 import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { InboxService } from "@services/inbox/inbox.service";
 
 import { TInbox, TInboxDetailIdMap, TInboxDetailMap } from "@servcy/types";
@@ -29,7 +29,7 @@ export class Inbox implements IInbox {
   inboxMap: TInboxDetailMap = {};
   // root store
   rootStore;
-  // services
+
   inboxService;
 
   constructor(_rootStore: RootStore) {
@@ -44,7 +44,7 @@ export class Inbox implements IInbox {
     });
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.inboxService = new InboxService();
   }
 

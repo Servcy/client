@@ -1,7 +1,7 @@
 import isEmpty from "lodash/isEmpty";
 import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { InboxService } from "@services/inbox.service";
 
 import { TInbox, TInboxIssueFilterOptions, TInboxIssueFilters, TInboxIssueQueryParams } from "@servcy/types";
@@ -28,7 +28,7 @@ export class InboxFilter implements IInboxFilter {
   filters: Record<string, TInboxIssueFilters> = {};
   // root store
   rootStore;
-  // services
+
   inboxService;
 
   constructor(_rootStore: RootStore) {
@@ -44,7 +44,7 @@ export class InboxFilter implements IInboxFilter {
     });
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.inboxService = new InboxService();
   }
 

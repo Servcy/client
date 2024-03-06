@@ -4,7 +4,7 @@ import Link from "next/link";
 import { observer } from "mobx-react";
 //hooks
 import { useApplication, useUser } from "@hooks/store";
-// services
+
 import { UserService } from "@services/user.service";
 // layouts
 import { ProfileSettingsLayout } from "@layouts/settings-layout";

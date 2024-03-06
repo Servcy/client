@@ -1,13 +1,13 @@
 import React, { useEffect, ReactElement } from "react";
 import { useRouter } from "next/router";
-// services
+
 import { AppInstallationService } from "@services/app_installation.service";
 
 import { Spinner } from "@servcy/ui";
 
 import { NextPageWithLayout } from "@lib/types";
 
-// services
+
 const appInstallationService = new AppInstallationService();
 
 const AppPostInstallation: NextPageWithLayout = () => {

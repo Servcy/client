@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 
 import { useUser, useWorkspace } from "@hooks/store";
-// services
+
 import { IntegrationService } from "@services/integrations";
 // layouts
 import { AppLayout } from "@layouts/app-layout";

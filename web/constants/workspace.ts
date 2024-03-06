@@ -1,4 +1,4 @@
-// services images
+ images
 import CSVLogo from "public/services/csv.svg";
 import ExcelLogo from "public/services/excel.svg";
 import GithubLogo from "public/services/github.png";

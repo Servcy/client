@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 import useSWR, { mutate } from "swr";
-// services
+
 import { UserService } from "@services/user.service";
 import { WorkspaceService } from "@services/workspace.service";
 
@@ -31,7 +31,7 @@ import { ROLE } from "@constants/workspace";
 
 import { EmptyState } from "@components/common";
 import { PageHead } from "@components/core";
-// services
+
 const workspaceService = new WorkspaceService();
 const userService = new UserService();
 

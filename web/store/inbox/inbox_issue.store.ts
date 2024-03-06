@@ -5,7 +5,7 @@ import uniq from "lodash/uniq";
 import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { InboxIssueService } from "@services/inbox/inbox-issue.service";
 
 import type {
@@ -71,7 +71,7 @@ export class InboxIssue implements IInboxIssue {
   inboxIssueMap: TInboxIssueDetailMap = {};
   // root store
   rootStore;
-  // services
+
   inboxIssueService;
 
   constructor(_rootStore: RootStore) {
@@ -91,7 +91,7 @@ export class InboxIssue implements IInboxIssue {
 
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.inboxIssueService = new InboxIssueService();
   }
 

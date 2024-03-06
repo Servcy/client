@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 
 import { IUser } from "@servcy/types";

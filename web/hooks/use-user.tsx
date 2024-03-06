@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useSWR from "swr";
-// services
+
 import { UserService } from "@services/user.service";
 
 import { CURRENT_USER } from "@constants/fetch-keys";
 
 import type { IUser } from "@servcy/types";
 
-// services
+
 const userService = new UserService();
 
 export default function useUser({ redirectTo = "", redirectIfFound = false, options = {} } = {}) {

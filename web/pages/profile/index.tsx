@@ -2,7 +2,7 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 import { ReactElement, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-// services
+
 import { FileService } from "@services/file.service";
 
 import { useApplication, useUser } from "@hooks/store";
