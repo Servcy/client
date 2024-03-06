@@ -8,7 +8,7 @@ import toast from "react-hot-toast"
 import { ExistingIssuesListModal } from "@components/core"
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 
-import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store"
+import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store"
 
 import { CYCLE_EMPTY_STATE_DETAILS, EMPTY_FILTER_STATE_DETAILS } from "@constants/empty-state"
 import { EIssuesStoreType } from "@constants/issue"
@@ -44,7 +44,6 @@ export const CycleEmptyState: React.FC<Props> = observer((props) => {
     const { resolvedTheme } = useTheme()
     // store hooks
     const { issues } = useIssues(EIssuesStoreType.CYCLE)
-    const { updateIssue, fetchIssue } = useIssueDetail()
     const {
         commandPalette: { toggleCreateIssueModal },
     } = useApplication()
@@ -60,9 +59,7 @@ export const CycleEmptyState: React.FC<Props> = observer((props) => {
         const issueIds = data.map((i) => i.id)
 
         await issues.addIssueToCycle(workspaceSlug.toString(), projectId, cycleId.toString(), issueIds).catch(() => {
-            toast.error({
-                message: "Selected issues could not be added to the cycle. Please try again.",
-            })
+            toast.error("Selected issues could not be added to the cycle. Please try again.")
         })
     }
 

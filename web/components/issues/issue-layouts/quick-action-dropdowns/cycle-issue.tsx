@@ -66,11 +66,7 @@ export const CycleIssueQuickActions: React.FC<IQuickActionProps> = observer((pro
 
     const handleCopyIssueLink = () =>
         copyUrlToClipboard(issueLink).then(() =>
-            toast.error({
-                type: "success",
-                title: "Link copied",
-                message: "Issue link copied to clipboard",
-            })
+            toast.success("Issue link copied to clipboard")
         )
 
     const duplicateIssuePayload = omit(

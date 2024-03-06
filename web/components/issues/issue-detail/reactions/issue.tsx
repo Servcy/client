@@ -36,34 +36,18 @@ export const IssueReaction: FC<TIssueReaction> = observer((props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
                     await createReaction(workspaceSlug, projectId, issueId, reaction)
-                    toast.error({
-                        title: "Reaction created successfully",
-                        type: "success",
-                        message: "Reaction created successfully",
-                    })
+                    toast.success("Reaction created successfully")
                 } catch (error) {
-                    toast.error({
-                        title: "Reaction creation failed",
-                        
-                        message: "Reaction creation failed",
-                    })
+                    toast.error("Reaction creation failed")
                 }
             },
             remove: async (reaction: string) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId || !currentUser?.id) throw new Error("Missing fields")
                     await removeReaction(workspaceSlug, projectId, issueId, reaction, currentUser.id)
-                    toast.error({
-                        title: "Reaction removed successfully",
-                        type: "success",
-                        message: "Reaction removed successfully",
-                    })
+                    toast.success("Reaction removed successfully")
                 } catch (error) {
-                    toast.error({
-                        title: "Reaction remove failed",
-                        
-                        message: "Reaction remove failed",
-                    })
+                    toast.error("Reaction remove failed")
                 }
             },
             react: async (reaction: string) => {
@@ -81,7 +65,7 @@ export const IssueReaction: FC<TIssueReaction> = observer((props) => {
             {reactionIds &&
                 Object.keys(reactionIds || {}).map(
                     (reaction) =>
-                        reactionIds[reaction]?.length > 0 && (
+                        (reactionIds[reaction]?.length ?? 0) > 0 && (
                             <>
                                 <button
                                     type="button"
@@ -95,7 +79,7 @@ export const IssueReaction: FC<TIssueReaction> = observer((props) => {
                                 >
                                     <span>{renderEmoji(reaction)}</span>
                                     <span className={userReactions.includes(reaction) ? "text-custom-primary-100" : ""}>
-                                        {(reactionIds || {})[reaction].length}{" "}
+                                        {(reactionIds || {})[reaction]?.length}{" "}
                                     </span>
                                 </button>
                             </>

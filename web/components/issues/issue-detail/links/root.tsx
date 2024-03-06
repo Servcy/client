@@ -44,54 +44,30 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     await createLink(workspaceSlug, projectId, issueId, data)
-                    toast.error({
-                        message: "The link has been successfully created",
-                        type: "success",
-                        title: "Link created",
-                    })
+                    toast.success("The link has been successfully created")
                     toggleIssueLinkModal(false)
                 } catch (error) {
-                    toast.error({
-                        message: "The link could not be created",
-
-                        title: "Link not created",
-                    })
+                    toast.error("The link could not be created")
                 }
             },
             update: async (linkId: string, data: Partial<TIssueLink>) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     await updateLink(workspaceSlug, projectId, issueId, linkId, data)
-                    toast.error({
-                        message: "The link has been successfully updated",
-                        type: "success",
-                        title: "Link updated",
-                    })
+                    toast.success("The link has been successfully updated")
                     toggleIssueLinkModal(false)
                 } catch (error) {
-                    toast.error({
-                        message: "The link could not be updated",
-
-                        title: "Link not updated",
-                    })
+                    toast.error("The link could not be updated")
                 }
             },
             remove: async (linkId: string) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     await removeLink(workspaceSlug, projectId, issueId, linkId)
-                    toast.error({
-                        message: "The link has been successfully removed",
-                        type: "success",
-                        title: "Link removed",
-                    })
+                    toast.success("The link has been successfully removed")
                     toggleIssueLinkModal(false)
                 } catch (error) {
-                    toast.error({
-                        message: "The link could not be removed",
-
-                        title: "Link not removed",
-                    })
+                    toast.error("The link could not be removed")
                 }
             },
         }),

@@ -22,7 +22,7 @@ import { ParentIssuesListModal } from "@components/issues"
 import { IssueLabelSelect } from "@components/issues/select"
 import { CreateLabelModal } from "@components/labels"
 
-import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store"
+import { useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store"
 
 import { AIService } from "@services/ai.service"
 import { FileService } from "@services/file.service"
@@ -115,10 +115,6 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
     const workspaceStore = useWorkspace()
     const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
 
-    // store hooks
-    const {
-        config: { envConfig },
-    } = useApplication()
     const { getProjectById } = useProject()
     const { areEstimatesEnabledForProject } = useEstimate()
     const { mentionHighlights, mentionSuggestions } = useMention()
@@ -198,31 +194,17 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
             })
             .then((res) => {
                 if (res.response === "")
-                    toast.error({
-                        
-                        title: "Error!",
-                        message:
-                            "Issue title isn't informative enough to generate the description. Please try with a different title.",
-                    })
+                    toast.error("Issue title isn't informative enough to generate the description. Please try with a different title.")
                 else handleAiAssistance(res.response_html)
             })
             .catch((err) => {
                 const error = err?.data?.error
 
                 if (err.status === 429)
-                    toast.error({
-                        
-                        title: "Error!",
-                        message:
-                            error ||
-                            "You have reached the maximum number of requests of 50 requests per month per user.",
-                    })
+                    toast.error(error ||
+                            "You have reached the maximum number of requests of 50 requests per month per user.")
                 else
-                    toast.error({
-                        
-                        title: "Error!",
-                        message: error || "Some error occurred. Please try again.",
-                    })
+                    toast.error(error || "Some error occurred. Please try again.")
             })
             .finally(() => setIAmFeelingLucky(false))
     }
@@ -396,8 +378,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                     <Fragment>
                                         <div className="absolute bottom-3.5 right-3.5 z-10 border-0.5 flex items-center gap-2">
                                             {issueName &&
-                                                issueName.trim() !== "" &&
-                                                envConfig?.has_openai_configured && (
+                                                issueName.trim() !== "" && (
                                                     <button
                                                         type="button"
                                                         className={`flex items-center gap-1 rounded px-1.5 py-1 text-xs bg-custom-background-80 ${
@@ -416,7 +397,6 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                         )}
                                                     </button>
                                                 )}
-                                            {envConfig?.has_openai_configured && (
                                                 <GptAssistantPopover
                                                     isOpen={gptAssistantModal}
                                                     projectId={projectId}
@@ -443,7 +423,6 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                         </button>
                                                     }
                                                 />
-                                            )}
                                         </div>
                                         <Controller
                                             name="description_html"
@@ -467,7 +446,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                     }
                                                     initialValue={data?.description_html}
                                                     customClassName="min-h-[7rem] border-custom-border-100"
-                                                    onChange={(description: Object, description_html: string) => {
+                                                    onChange={(_: Object, description_html: string) => {
                                                         onChange(description_html)
                                                         handleFormChange()
                                                     }}

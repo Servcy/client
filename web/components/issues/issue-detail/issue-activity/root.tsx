@@ -57,51 +57,27 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
                     await createComment(workspaceSlug, projectId, issueId, data)
-                    toast.error({
-                        title: "Comment created successfully.",
-                        type: "success",
-                        message: "Comment created successfully.",
-                    })
+                    toast.success("Comment created successfully.")
                 } catch (error) {
-                    toast.error({
-                        title: "Comment creation failed.",
-
-                        message: "Comment creation failed. Please try again later.",
-                    })
+                    toast.error("Comment creation failed. Please try again later.")
                 }
             },
             updateComment: async (commentId: string, data: Partial<TIssueComment>) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
                     await updateComment(workspaceSlug, projectId, issueId, commentId, data)
-                    toast.error({
-                        title: "Comment updated successfully.",
-                        type: "success",
-                        message: "Comment updated successfully.",
-                    })
+                    toast.success("Comment updated successfully.")
                 } catch (error) {
-                    toast.error({
-                        title: "Comment update failed.",
-
-                        message: "Comment update failed. Please try again later.",
-                    })
+                    toast.error("Comment update failed. Please try again later.")
                 }
             },
             removeComment: async (commentId: string) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
                     await removeComment(workspaceSlug, projectId, issueId, commentId)
-                    toast.error({
-                        title: "Comment removed successfully.",
-                        type: "success",
-                        message: "Comment removed successfully.",
-                    })
+                    toast.success("Comment removed successfully.")
                 } catch (error) {
-                    toast.error({
-                        title: "Comment remove failed.",
-
-                        message: "Comment remove failed. Please try again later.",
-                    })
+                    toast.error("Comment remove failed. Please try again later.")
                 }
             },
         }),

@@ -76,11 +76,7 @@ export const IssueDetailsSidebar: React.FC<Props> = observer((props) => {
     const handleCopyText = () => {
         const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
         copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${projectId}/issues/${issue.id}`).then(() => {
-            toast.error({
-                type: "success",
-                title: "Link Copied!",
-                message: "Issue link copied to clipboard.",
-            })
+            toast.success("Issue link copied to clipboard.")
         })
     }
 

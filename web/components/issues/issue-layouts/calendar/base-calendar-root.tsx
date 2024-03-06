@@ -76,17 +76,13 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
                 groupedIssueIds,
                 viewId
             ).catch((err) => {
-                toast.error({
-                    title: "Error",
-                    
-                    message: err.detail ?? "Failed to perform this action",
-                })
+                toast.error(err.detail ?? "Failed to perform this action")
             })
         }
     }
 
     const handleIssues = useCallback(
-        async (date: string, issue: TIssue, action: EIssueActions) => {
+        async (_: string, issue: TIssue, action: EIssueActions) => {
             if (issueActions[action]) {
                 await issueActions[action]!(issue)
             }

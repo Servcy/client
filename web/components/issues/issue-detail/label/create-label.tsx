@@ -63,11 +63,7 @@ export const LabelCreate: FC<ILabelCreate> = (props) => {
             await labelOperations.updateIssue(workspaceSlug, projectId, issueId, { label_ids: currentLabels })
             reset(defaultValues)
         } catch (error) {
-            toast.error({
-                title: "Label creation failed",
-                
-                message: "Label creation failed. Please try again sometime later.",
-            })
+            toast.error("Label creation failed. Please try again sometime later.")
         }
     }
 

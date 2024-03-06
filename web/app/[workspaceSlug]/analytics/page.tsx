@@ -16,11 +16,11 @@ import { WorkspaceAnalyticsHeader } from "@components/headers"
 
 import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store"
 
-import { AppWrapper } from "@wrappers/app"
-
 import { ANALYTICS_TABS } from "@constants/analytics"
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserWorkspaceRoles } from "@constants/workspace"
+
+import { AppWrapper } from "@wrappers/app"
 
 const AnalyticsPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()

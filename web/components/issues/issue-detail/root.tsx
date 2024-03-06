@@ -191,11 +191,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                         },
                         path: router.asPath,
                     })
-                    toast.error({
-                        title: "Cycle add to issue failed",
-                        
-                        message: "Cycle add to issue failed",
-                    })
+                    toast.error("Cycle add to issue failed")
                 }
             },
             removeIssueFromCycle: async (
@@ -206,11 +202,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             ) => {
                 try {
                     const response = await removeIssueFromCycle(workspaceSlug, projectId, cycleId, issueId)
-                    toast.error({
-                        title: "Cycle removed from issue successfully",
-                        type: "success",
-                        message: "Cycle removed from issue successfully",
-                    })
+                    toast.success("Cycle removed from issue successfully")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { ...response, state: "SUCCESS", element: "Issue detail page" },
@@ -241,11 +233,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             ) => {
                 try {
                     const response = await addModulesToIssue(workspaceSlug, projectId, issueId, moduleIds)
-                    toast.error({
-                        title: "Module added to issue successfully",
-                        type: "success",
-                        message: "Module added to issue successfully",
-                    })
+                    toast.success("Module added to issue successfully")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { ...response, state: "SUCCESS", element: "Issue detail page" },
@@ -265,11 +253,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                         },
                         path: router.asPath,
                     })
-                    toast.error({
-                        title: "Module add to issue failed",
-                        
-                        message: "Module add to issue failed",
-                    })
+                    toast.error("Module add to issue failed")
                 }
             },
             removeIssueFromModule: async (
@@ -300,11 +284,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                         },
                         path: router.asPath,
                     })
-                    toast.error({
-                        title: "Module remove from issue failed",
-                        
-                        message: "Module remove from issue failed",
-                    })
+                    toast.error("Module remove from issue failed")
                 }
             },
             removeModulesFromIssue: async (
@@ -321,19 +301,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                 }
             },
         }),
-        [
-            is_archived,
-            fetchIssue,
-            updateIssue,
-            removeIssue,
-            archiveIssue,
-            removeArchivedIssue,
-            addIssueToCycle,
-            removeIssueFromCycle,
-            addModulesToIssue,
-            removeIssueFromModule,
-            removeModulesFromIssue,
-        ]
+        [fetchIssue, updateIssue, captureIssueEvent, router.asPath, is_archived, removeArchivedIssue, removeIssue, archiveIssue, addIssueToCycle, removeIssueFromCycle, addModulesToIssue, removeIssueFromModule, removeModulesFromIssue]
     )
 
     // issue details

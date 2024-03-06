@@ -35,36 +35,18 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
                 try {
                     if (onLabelUpdate) onLabelUpdate(data.label_ids || [])
                     else await updateIssue(workspaceSlug, projectId, issueId, data)
-                    if (!isInboxIssue)
-                        toast.error({
-                            title: "Issue updated successfully",
-                            type: "success",
-                            message: "Issue updated successfully",
-                        })
+                    if (!isInboxIssue) toast.success("Issue updated successfully")
                 } catch (error) {
-                    toast.error({
-                        title: "Issue update failed",
-
-                        message: "Issue update failed",
-                    })
+                    toast.error("Issue update failed")
                 }
             },
             createLabel: async (workspaceSlug: string, projectId: string, data: Partial<IIssueLabel>) => {
                 try {
                     const labelResponse = await createLabel(workspaceSlug, projectId, data)
-                    if (!isInboxIssue)
-                        toast.error({
-                            title: "Label created successfully",
-                            type: "success",
-                            message: "Label created successfully",
-                        })
+                    if (!isInboxIssue) toast.success("Label created successfully")
                     return labelResponse
                 } catch (error) {
-                    toast.error({
-                        title: "Label creation failed",
-
-                        message: "Label creation failed",
-                    })
+                    toast.error("Label creation failed")
                     return error
                 }
             },

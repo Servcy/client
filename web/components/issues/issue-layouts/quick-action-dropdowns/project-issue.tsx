@@ -63,11 +63,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
 
     const handleCopyIssueLink = () =>
         copyUrlToClipboard(issueLink).then(() =>
-            toast.error({
-                type: "success",
-                title: "Link copied",
-                message: "Issue link copied to clipboard",
-            })
+            toast.error("Issue link copied to clipboard")
         )
 
     const isDraftIssue = router?.asPath?.includes("draft-issues") || false

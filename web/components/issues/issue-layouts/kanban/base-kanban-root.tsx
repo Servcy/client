@@ -167,11 +167,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
                     issueIds,
                     viewId
                 ).catch((err) => {
-                    toast.error({
-                        title: "Error",
-                        
-                        message: err.detail ?? "Failed to perform this action",
-                    })
+                    toast.error(err.detail ?? "Failed to perform this action")
                 })
             }
         }
@@ -233,7 +229,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
             issueIds,
             viewId
         ).finally(() => {
-            handleIssues(issueMap[dragState.draggedIssueId!], EIssueActions.DELETE)
+            handleIssues(issueMap[dragState.draggedIssueId!] ?? {} as TIssue, EIssueActions.DELETE)
             setDeleteIssueModal(false)
             setDragState({})
             captureIssueEvent({

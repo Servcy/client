@@ -60,11 +60,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
                 try {
                     await updateInboxIssue(workspaceSlug, projectId, inboxId, issueId, data)
                     if (showToast) {
-                        toast.error({
-                            title: "Issue updated successfully",
-                            type: "success",
-                            message: "Issue updated successfully",
-                        })
+                        toast.success("Issue updated successfully")
                     }
                     captureIssueEvent({
                         eventName: "Inbox issue updated",
@@ -76,11 +72,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
                         path: router.asPath,
                     })
                 } catch (error) {
-                    toast.error({
-                        title: "Issue update failed",
-
-                        message: "Issue update failed",
-                    })
+                    toast.error("Issue update failed")
                     captureIssueEvent({
                         eventName: "Inbox issue updated",
                         payload: { state: "SUCCESS", element: "Inbox" },
@@ -95,11 +87,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
             remove: async (workspaceSlug: string, projectId: string, issueId: string) => {
                 try {
                     await removeInboxIssue(workspaceSlug, projectId, inboxId, issueId)
-                    toast.error({
-                        title: "Issue deleted successfully",
-                        type: "success",
-                        message: "Issue deleted successfully",
-                    })
+                    toast.success("Issue deleted successfully")
                     captureIssueEvent({
                         eventName: "Inbox issue deleted",
                         payload: { id: issueId, state: "SUCCESS", element: "Inbox" },
@@ -111,11 +99,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
                         payload: { id: issueId, state: "FAILED", element: "Inbox" },
                         path: router.asPath,
                     })
-                    toast.error({
-                        title: "Issue delete failed",
-
-                        message: "Issue delete failed",
-                    })
+                    toast.error("Issue delete failed")
                 }
             },
         }),

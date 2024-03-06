@@ -15,13 +15,13 @@ import {
     ProfileWorkload,
 } from "@components/profile"
 
-import { AppWrapper } from "@wrappers/app"
-import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
-
 import { USER_PROFILE_DATA } from "@constants/fetch-keys"
 import { GROUP_CHOICES } from "@constants/project"
 
 import { UserService } from "@services/user.service"
+
+import { AppWrapper } from "@wrappers/app"
+import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
 
 import { IUserStateDistribution, TStateGroups } from "@servcy/types"
 
