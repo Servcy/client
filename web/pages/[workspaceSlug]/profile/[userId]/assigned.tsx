@@ -10,18 +10,18 @@ import { NextPageWithLayout } from "@/types/types";
 import { ProfileIssuesPage } from "@components/profile/profile-issues";
 
 const ProfileAssignedIssuesPage: NextPageWithLayout = () => (
-  <>
-    <PageHead title="Profile - Assigned" />
-    <ProfileIssuesPage type="assigned" />
-  </>
+    <>
+        <PageHead title="Profile - Assigned" />
+        <ProfileIssuesPage type="assigned" />
+    </>
 );
 
 ProfileAssignedIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-  return (
-    <AppLayout header={<UserProfileHeader type="Assigned" />}>
-      <ProfileAuthWrapper showProfileIssuesFilter>{page}</ProfileAuthWrapper>
-    </AppLayout>
-  );
+    return (
+        <AppLayout header={<UserProfileHeader type="Assigned" />}>
+            <ProfileAuthWrapper showProfileIssuesFilter>{page}</ProfileAuthWrapper>
+        </AppLayout>
+    );
 };
 
 export default ProfileAssignedIssuesPage;

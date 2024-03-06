@@ -5,7 +5,7 @@ import { StoreContext } from "@contexts/StoreContext";
 import { IGlobalViewStore } from "@store/global-view.store";
 
 export const useGlobalView = (): IGlobalViewStore => {
-  const context = useContext(StoreContext);
-  if (context === undefined) throw new Error("useGlobalView must be used within StoreProvider");
-  return context.globalView;
+    const context = useContext(StoreContext);
+    if (context === undefined) throw new Error("useGlobalView must be used within StoreProvider");
+    return context.globalView;
 };

@@ -13,25 +13,25 @@ import { NextPageWithLayout } from "@/types/types";
 import { useProject } from "@hooks/store";
 
 const LabelsSettingsPage: NextPageWithLayout = observer(() => {
-  const { currentProjectDetails } = useProject();
-  const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Labels` : undefined;
+    const { currentProjectDetails } = useProject();
+    const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Labels` : undefined;
 
-  return (
-    <>
-      <PageHead title={pageTitle} />
-      <div className="h-full w-full gap-10 overflow-y-auto py-8 pr-9">
-        <ProjectSettingsLabelList />
-      </div>
-    </>
-  );
+    return (
+        <>
+            <PageHead title={pageTitle} />
+            <div className="h-full w-full gap-10 overflow-y-auto py-8 pr-9">
+                <ProjectSettingsLabelList />
+            </div>
+        </>
+    );
 });
 
 LabelsSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
-  return (
-    <AppLayout withProjectWrapper header={<ProjectSettingHeader title="Labels Settings" />}>
-      <ProjectSettingLayout>{page}</ProjectSettingLayout>
-    </AppLayout>
-  );
+    return (
+        <AppLayout withProjectWrapper header={<ProjectSettingHeader title="Labels Settings" />}>
+            <ProjectSettingLayout>{page}</ProjectSettingLayout>
+        </AppLayout>
+    );
 };
 
 export default LabelsSettingsPage;

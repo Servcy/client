@@ -13,25 +13,25 @@ import { WorkspaceDetails } from "@components/workspace";
 import { NextPageWithLayout } from "@/types/types";
 
 const WorkspaceSettingsPage: NextPageWithLayout = observer(() => {
-  // store hooks
-  const { currentWorkspace } = useWorkspace();
-  // derived values
-  const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - General Settings` : undefined;
+    // store hooks
+    const { currentWorkspace } = useWorkspace();
+    // derived values
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - General Settings` : undefined;
 
-  return (
-    <>
-      <PageHead title={pageTitle} />
-      <WorkspaceDetails />
-    </>
-  );
+    return (
+        <>
+            <PageHead title={pageTitle} />
+            <WorkspaceDetails />
+        </>
+    );
 });
 
 WorkspaceSettingsPage.getWrapper = function getWrapper(page: ReactElement) {
-  return (
-    <AppLayout header={<WorkspaceSettingHeader title="General Settings" />}>
-      <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
-    </AppLayout>
-  );
+    return (
+        <AppLayout header={<WorkspaceSettingHeader title="General Settings" />}>
+            <WorkspaceSettingLayout>{page}</WorkspaceSettingLayout>
+        </AppLayout>
+    );
 };
 
 export default WorkspaceSettingsPage;

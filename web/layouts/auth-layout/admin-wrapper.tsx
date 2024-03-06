@@ -6,26 +6,26 @@ import { useApplication, useUser } from "@hooks/store";
 import { InstanceAdminRestriction } from "@components/instance";
 
 export interface IAdminAuthWrapper {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 export const AdminAuthWrapper: FC<IAdminAuthWrapper> = observer(({ children }) => {
-  // store hooks
-  const {
-    router: { workspaceSlug },
-  } = useApplication();
-  const { isUserInstanceAdmin, currentUserSettings } = useUser();
-  // redirect url
-  const redirectWorkspaceSlug =
-    workspaceSlug ||
-    currentUserSettings?.workspace?.last_workspace_slug ||
-    currentUserSettings?.workspace?.fallback_workspace_slug ||
-    "";
+    // store hooks
+    const {
+        router: { workspaceSlug },
+    } = useApplication();
+    const { isUserInstanceAdmin, currentUserSettings } = useUser();
+    // redirect url
+    const redirectWorkspaceSlug =
+        workspaceSlug ||
+        currentUserSettings?.workspace?.last_workspace_slug ||
+        currentUserSettings?.workspace?.fallback_workspace_slug ||
+        "";
 
-  // if user does not have admin access to the instance
-  if (isUserInstanceAdmin !== undefined && isUserInstanceAdmin === false) {
-    return <InstanceAdminRestriction redirectWorkspaceSlug={redirectWorkspaceSlug} />;
-  }
+    // if user does not have admin access to the instance
+    if (isUserInstanceAdmin !== undefined && isUserInstanceAdmin === false) {
+        return <InstanceAdminRestriction redirectWorkspaceSlug={redirectWorkspaceSlug} />;
+    }
 
-  return <>{children}</>;
+    return <>{children}</>;
 });

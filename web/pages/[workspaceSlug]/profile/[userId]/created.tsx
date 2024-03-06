@@ -12,18 +12,18 @@ import { NextPageWithLayout } from "@/types/types";
 import { ProfileIssuesPage } from "@components/profile/profile-issues";
 
 const ProfileCreatedIssuesPage: NextPageWithLayout = () => (
-  <>
-    <PageHead title="Profile - Created" />
-    <ProfileIssuesPage type="created" />
-  </>
+    <>
+        <PageHead title="Profile - Created" />
+        <ProfileIssuesPage type="created" />
+    </>
 );
 
 ProfileCreatedIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-  return (
-    <AppLayout header={<UserProfileHeader type="Created" />}>
-      <ProfileAuthWrapper showProfileIssuesFilter>{page}</ProfileAuthWrapper>
-    </AppLayout>
-  );
+    return (
+        <AppLayout header={<UserProfileHeader type="Created" />}>
+            <ProfileAuthWrapper showProfileIssuesFilter>{page}</ProfileAuthWrapper>
+        </AppLayout>
+    );
 };
 
 export default observer(ProfileCreatedIssuesPage);

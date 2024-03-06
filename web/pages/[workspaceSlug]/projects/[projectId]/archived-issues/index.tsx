@@ -14,29 +14,29 @@ import { NextPageWithLayout } from "@/types/types";
 import { useProject } from "@hooks/store";
 
 const ProjectArchivedIssuesPage: NextPageWithLayout = observer(() => {
-  // router
-  const router = useRouter();
-  const { projectId } = router.query;
-  // store hooks
-  const { getProjectById } = useProject();
-  // derived values
-  const project = projectId ? getProjectById(projectId.toString()) : undefined;
-  const pageTitle = project?.name && `${project?.name} - Archived issues`;
+    // router
+    const router = useRouter();
+    const { projectId } = router.query;
+    // store hooks
+    const { getProjectById } = useProject();
+    // derived values
+    const project = projectId ? getProjectById(projectId.toString()) : undefined;
+    const pageTitle = project?.name && `${project?.name} - Archived issues`;
 
-  return (
-    <>
-      <PageHead title={pageTitle} />
-      <ArchivedIssueLayoutRoot />
-    </>
-  );
+    return (
+        <>
+            <PageHead title={pageTitle} />
+            <ArchivedIssueLayoutRoot />
+        </>
+    );
 });
 
 ProjectArchivedIssuesPage.getWrapper = function getWrapper(page: ReactElement) {
-  return (
-    <AppLayout header={<ProjectArchivedIssuesHeader />} withProjectWrapper>
-      {page}
-    </AppLayout>
-  );
+    return (
+        <AppLayout header={<ProjectArchivedIssuesHeader />} withProjectWrapper>
+            {page}
+        </AppLayout>
+    );
 };
 
 export default ProjectArchivedIssuesPage;

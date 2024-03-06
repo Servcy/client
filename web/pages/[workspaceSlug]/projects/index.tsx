@@ -11,21 +11,21 @@ import { NextPageWithLayout } from "@/types/types";
 import { useWorkspace } from "@hooks/store";
 
 const ProjectsPage: NextPageWithLayout = observer(() => {
-  // store
-  const { currentWorkspace } = useWorkspace();
-  // derived values
-  const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Projects` : undefined;
+    // store
+    const { currentWorkspace } = useWorkspace();
+    // derived values
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Projects` : undefined;
 
-  return (
-    <>
-      <PageHead title={pageTitle} />
-      <ProjectCardList />
-    </>
-  );
+    return (
+        <>
+            <PageHead title={pageTitle} />
+            <ProjectCardList />
+        </>
+    );
 });
 
 ProjectsPage.getWrapper = function getWrapper(page: ReactElement) {
-  return <AppLayout header={<ProjectsHeader />}>{page}</AppLayout>;
+    return <AppLayout header={<ProjectsHeader />}>{page}</AppLayout>;
 };
 
 export default ProjectsPage;

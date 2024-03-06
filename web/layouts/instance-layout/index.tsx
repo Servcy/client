@@ -9,37 +9,37 @@ import { Spinner } from "@servcy/ui";
 import { InstanceNotReady } from "@components/instance";
 
 type Props = {
-  children: ReactNode;
+    children: ReactNode;
 };
 
 const InstanceLayout: FC<Props> = observer(({ children }) => {
-  // store
-  const {
-    instance: { fetchInstanceInfo, instance },
-  } = useApplication();
+    // store
+    const {
+        instance: { fetchInstanceInfo, instance },
+    } = useApplication();
 
-  const router = useRouter();
-  const isGodMode = router.pathname.includes("god-mode");
+    const router = useRouter();
+    const isGodMode = router.pathname.includes("god-mode");
 
-  useSWR("INSTANCE_INFO", () => fetchInstanceInfo(), {
-    revalidateOnFocus: false,
-  });
+    useSWR("INSTANCE_INFO", () => fetchInstanceInfo(), {
+        revalidateOnFocus: false,
+    });
 
-  return (
-    <div className="h-screen w-full overflow-hidden">
-      {instance ? (
-        !instance.is_setup_done && !isGodMode ? (
-          <InstanceNotReady />
-        ) : (
-          children
-        )
-      ) : (
-        <div className="flex h-full w-full items-center justify-center">
-          <Spinner />
+    return (
+        <div className="h-screen w-full overflow-hidden">
+            {instance ? (
+                !instance.is_setup_done && !isGodMode ? (
+                    <InstanceNotReady />
+                ) : (
+                    children
+                )
+            ) : (
+                <div className="flex h-full w-full items-center justify-center">
+                    <Spinner />
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 });
 
 export default InstanceLayout;

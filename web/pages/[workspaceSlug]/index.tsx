@@ -12,20 +12,20 @@ import { NextPageWithLayout } from "@/types/types";
 import { useWorkspace } from "@hooks/store";
 
 const WorkspacePage: NextPageWithLayout = observer(() => {
-  const { currentWorkspace } = useWorkspace();
-  // derived values
-  const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Dashboard` : undefined;
+    const { currentWorkspace } = useWorkspace();
+    // derived values
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Dashboard` : undefined;
 
-  return (
-    <>
-      <PageHead title={pageTitle} />
-      <WorkspaceDashboardView />
-    </>
-  );
+    return (
+        <>
+            <PageHead title={pageTitle} />
+            <WorkspaceDashboardView />
+        </>
+    );
 });
 
 WorkspacePage.getWrapper = function getWrapper(page: ReactElement) {
-  return <AppLayout header={<WorkspaceDashboardHeader />}>{page}</AppLayout>;
+    return <AppLayout header={<WorkspaceDashboardHeader />}>{page}</AppLayout>;
 };
 
 export default WorkspacePage;

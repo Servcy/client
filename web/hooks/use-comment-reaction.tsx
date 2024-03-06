@@ -10,84 +10,84 @@ import { useUser } from "./store";
 const issueReactionService = new IssueReactionService();
 
 const useCommentReaction = (
-  workspaceSlug?: string | string[] | null,
-  projectId?: string | string[] | null,
-  commendId?: string | string[] | null
+    workspaceSlug?: string | string[] | null,
+    projectId?: string | string[] | null,
+    commendId?: string | string[] | null
 ) => {
-  const {
-    data: commentReactions,
-    mutate: mutateCommentReactions,
-    error,
-  } = useSWR(
-    workspaceSlug && projectId && commendId
-      ? COMMENT_REACTION_LIST(workspaceSlug.toString(), projectId.toString(), commendId.toString())
-      : null,
-    workspaceSlug && projectId && commendId
-      ? () =>
-          issueReactionService.listIssueCommentReactions(
+    const {
+        data: commentReactions,
+        mutate: mutateCommentReactions,
+        error,
+    } = useSWR(
+        workspaceSlug && projectId && commendId
+            ? COMMENT_REACTION_LIST(workspaceSlug.toString(), projectId.toString(), commendId.toString())
+            : null,
+        workspaceSlug && projectId && commendId
+            ? () =>
+                  issueReactionService.listIssueCommentReactions(
+                      workspaceSlug.toString(),
+                      projectId.toString(),
+                      commendId.toString()
+                  )
+            : null
+    );
+
+    const user = useUser();
+
+    const groupedReactions = groupReactions(commentReactions || [], "reaction");
+
+    /**
+     * @description Use this function to create user's reaction to an issue. This function will mutate the reactions state.
+     * @param {string} reaction
+     * @example handleReactionDelete("123") // 123 -> is emoji hexa-code
+     */
+
+    const handleReactionCreate = async (reaction: string) => {
+        if (!workspaceSlug || !projectId || !commendId) return;
+
+        const data = await issueReactionService.createIssueCommentReaction(
             workspaceSlug.toString(),
             projectId.toString(),
-            commendId.toString()
-          )
-      : null
-  );
+            commendId.toString(),
+            { reaction }
+        );
 
-  const user = useUser();
+        mutateCommentReactions((prev: any) => [...(prev || []), data]);
+    };
 
-  const groupedReactions = groupReactions(commentReactions || [], "reaction");
+    /**
+     * @description Use this function to delete user's reaction from an issue. This function will mutate the reactions state.
+     * @param {string} reaction
+     * @example handleReactionDelete("123") // 123 -> is emoji hexa-code
+     */
 
-  /**
-   * @description Use this function to create user's reaction to an issue. This function will mutate the reactions state.
-   * @param {string} reaction
-   * @example handleReactionDelete("123") // 123 -> is emoji hexa-code
-   */
+    const handleReactionDelete = async (reaction: string) => {
+        if (!workspaceSlug || !projectId || !commendId) return;
 
-  const handleReactionCreate = async (reaction: string) => {
-    if (!workspaceSlug || !projectId || !commendId) return;
+        mutateCommentReactions(
+            (prevData: any) =>
+                prevData?.filter((r: any) => r.actor !== user?.currentUser?.id || r.reaction !== reaction) || [],
+            false
+        );
 
-    const data = await issueReactionService.createIssueCommentReaction(
-      workspaceSlug.toString(),
-      projectId.toString(),
-      commendId.toString(),
-      { reaction }
-    );
+        await issueReactionService.deleteIssueCommentReaction(
+            workspaceSlug.toString(),
+            projectId.toString(),
+            commendId.toString(),
+            reaction
+        );
 
-    mutateCommentReactions((prev: any) => [...(prev || []), data]);
-  };
+        mutateCommentReactions();
+    };
 
-  /**
-   * @description Use this function to delete user's reaction from an issue. This function will mutate the reactions state.
-   * @param {string} reaction
-   * @example handleReactionDelete("123") // 123 -> is emoji hexa-code
-   */
-
-  const handleReactionDelete = async (reaction: string) => {
-    if (!workspaceSlug || !projectId || !commendId) return;
-
-    mutateCommentReactions(
-      (prevData: any) =>
-        prevData?.filter((r: any) => r.actor !== user?.currentUser?.id || r.reaction !== reaction) || [],
-      false
-    );
-
-    await issueReactionService.deleteIssueCommentReaction(
-      workspaceSlug.toString(),
-      projectId.toString(),
-      commendId.toString(),
-      reaction
-    );
-
-    mutateCommentReactions();
-  };
-
-  return {
-    isLoading: !commentReactions && !error,
-    commentReactions,
-    groupedReactions,
-    handleReactionCreate,
-    handleReactionDelete,
-    mutateCommentReactions,
-  } as const;
+    return {
+        isLoading: !commentReactions && !error,
+        commentReactions,
+        groupedReactions,
+        handleReactionCreate,
+        handleReactionDelete,
+        mutateCommentReactions,
+    } as const;
 };
 
 export default useCommentReaction;

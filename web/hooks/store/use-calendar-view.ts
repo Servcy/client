@@ -5,7 +5,7 @@ import { StoreContext } from "@contexts/StoreContext";
 import { ICalendarStore } from "@store/issue/issue_calendar_view.store";
 
 export const useCalendarView = (): ICalendarStore => {
-  const context = useContext(StoreContext);
-  if (context === undefined) throw new Error("useLabel must be used within StoreProvider");
-  return context.issue.issueCalendarView;
+    const context = useContext(StoreContext);
+    if (context === undefined) throw new Error("useLabel must be used within StoreProvider");
+    return context.issue.issueCalendarView;
 };

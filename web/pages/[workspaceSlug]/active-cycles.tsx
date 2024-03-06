@@ -12,20 +12,20 @@ import { NextPageWithLayout } from "@/types/types";
 import { useWorkspace } from "@hooks/store";
 
 const WorkspaceActiveCyclesPage: NextPageWithLayout = observer(() => {
-  const { currentWorkspace } = useWorkspace();
-  // derived values
-  const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Active Cycles` : undefined;
+    const { currentWorkspace } = useWorkspace();
+    // derived values
+    const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Active Cycles` : undefined;
 
-  return (
-    <>
-      <PageHead title={pageTitle} />
-      <WorkspaceActiveCyclesUpgrade />
-    </>
-  );
+    return (
+        <>
+            <PageHead title={pageTitle} />
+            <WorkspaceActiveCyclesUpgrade />
+        </>
+    );
 });
 
 WorkspaceActiveCyclesPage.getWrapper = function getWrapper(page: ReactElement) {
-  return <AppLayout header={<WorkspaceActiveCycleHeader />}>{page}</AppLayout>;
+    return <AppLayout header={<WorkspaceActiveCycleHeader />}>{page}</AppLayout>;
 };
 
 export default WorkspaceActiveCyclesPage;

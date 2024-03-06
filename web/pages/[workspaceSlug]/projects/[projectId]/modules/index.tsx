@@ -13,28 +13,28 @@ import { useProject } from "@hooks/store";
 import { observer } from "mobx-react";
 
 const ProjectModulesPage: NextPageWithLayout = observer(() => {
-  const router = useRouter();
-  const { projectId } = router.query;
-  // store
-  const { getProjectById } = useProject();
-  // derived values
-  const project = projectId ? getProjectById(projectId.toString()) : undefined;
-  const pageTitle = project?.name ? `${project?.name} - Modules` : undefined;
+    const router = useRouter();
+    const { projectId } = router.query;
+    // store
+    const { getProjectById } = useProject();
+    // derived values
+    const project = projectId ? getProjectById(projectId.toString()) : undefined;
+    const pageTitle = project?.name ? `${project?.name} - Modules` : undefined;
 
-  return (
-    <>
-      <PageHead title={pageTitle} />
-      <ModulesListView />
-    </>
-  );
+    return (
+        <>
+            <PageHead title={pageTitle} />
+            <ModulesListView />
+        </>
+    );
 });
 
 ProjectModulesPage.getWrapper = function getWrapper(page: ReactElement) {
-  return (
-    <AppLayout header={<ModulesListHeader />} withProjectWrapper>
-      {page}
-    </AppLayout>
-  );
+    return (
+        <AppLayout header={<ModulesListHeader />} withProjectWrapper>
+            {page}
+        </AppLayout>
+    );
 };
 
 export default ProjectModulesPage;

@@ -4,7 +4,7 @@ import { StoreContext } from "@contexts/StoreContext";
 import { IMemberRootStore } from "@store/member";
 
 export const useMember = (): IMemberRootStore => {
-  const context = useContext(StoreContext);
-  if (context === undefined) throw new Error("useMember must be used within StoreProvider");
-  return context.memberRoot;
+    const context = useContext(StoreContext);
+    if (context === undefined) throw new Error("useMember must be used within StoreProvider");
+    return context.memberRoot;
 };

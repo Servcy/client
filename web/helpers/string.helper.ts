@@ -1,17 +1,17 @@
 import {
-  CYCLE_ISSUES_WITH_PARAMS,
-  MODULE_ISSUES_WITH_PARAMS,
-  PROJECT_ISSUES_LIST_WITH_PARAMS,
-  VIEW_ISSUES,
+    CYCLE_ISSUES_WITH_PARAMS,
+    MODULE_ISSUES_WITH_PARAMS,
+    PROJECT_ISSUES_LIST_WITH_PARAMS,
+    VIEW_ISSUES,
 } from "@constants/fetch-keys";
 import * as DOMPurify from "dompurify";
 
 export const addSpaceIfCamelCase = (str: string) => {
-  if (str === undefined || str === null) return "";
+    if (str === undefined || str === null) return "";
 
-  if (typeof str !== "string") str = `${str}`;
+    if (typeof str !== "string") str = `${str}`;
 
-  return str.replace(/([a-z])([A-Z])/g, "$1 $2");
+    return str.replace(/([a-z])([A-Z])/g, "$1 $2");
 };
 
 export const replaceUnderscoreIfSnakeCase = (str: string) => str.replace(/_/g, " ");
@@ -19,48 +19,48 @@ export const replaceUnderscoreIfSnakeCase = (str: string) => str.replace(/_/g, "
 export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export const truncateText = (str: string, length: number) => {
-  if (!str || str === "") return "";
+    if (!str || str === "") return "";
 
-  return str.length > length ? `${str.substring(0, length)}...` : str;
+    return str.length > length ? `${str.substring(0, length)}...` : str;
 };
 
 export const createSimilarString = (str: string) => {
-  const shuffled = str
-    .split("")
-    .sort(() => Math.random() - 0.5)
-    .join("");
+    const shuffled = str
+        .split("")
+        .sort(() => Math.random() - 0.5)
+        .join("");
 
-  return shuffled;
+    return shuffled;
 };
 
 const fallbackCopyTextToClipboard = (text: string) => {
-  var textArea = document.createElement("textarea");
-  textArea.value = text;
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
 
-  // Avoid scrolling to bottom
-  textArea.style.top = "0";
-  textArea.style.left = "0";
-  textArea.style.position = "fixed";
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
 
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
 
-  try {
-    // FIXME: Even though we are using this as a fallback, execCommand is deprecated 👎. We should find a better way to do this.
-    // https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
-    var successful = document.execCommand("copy");
-  } catch (err) {}
+    try {
+        // FIXME: Even though we are using this as a fallback, execCommand is deprecated 👎. We should find a better way to do this.
+        // https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
+        var successful = document.execCommand("copy");
+    } catch (err) {}
 
-  document.body.removeChild(textArea);
+    document.body.removeChild(textArea);
 };
 
 export const copyTextToClipboard = async (text: string) => {
-  if (!navigator.clipboard) {
-    fallbackCopyTextToClipboard(text);
-    return;
-  }
-  await navigator.clipboard.writeText(text);
+    if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(text);
+        return;
+    }
+    await navigator.clipboard.writeText(text);
 };
 
 /**
@@ -71,40 +71,40 @@ export const copyTextToClipboard = async (text: string) => {
  * copied URL: origin_url/path
  */
 export const copyUrlToClipboard = async (path: string) => {
-  const originUrl = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
+    const originUrl = typeof window !== "undefined" && window.location.origin ? window.location.origin : "";
 
-  await copyTextToClipboard(`${originUrl}/${path}`);
+    await copyTextToClipboard(`${originUrl}/${path}`);
 };
 
 export const generateRandomColor = (string: string): string => {
-  if (!string) return "rgb(var(--color-primary-100))";
+    if (!string) return "rgb(var(--color-primary-100))";
 
-  string = `${string}`;
+    string = `${string}`;
 
-  const uniqueId = string.length.toString() + string; // Unique identifier based on string length
-  const combinedString = uniqueId + string;
+    const uniqueId = string.length.toString() + string; // Unique identifier based on string length
+    const combinedString = uniqueId + string;
 
-  const hash = Array.from(combinedString).reduce((acc, char) => {
-    const charCode = char.charCodeAt(0);
-    return (acc << 5) - acc + charCode;
-  }, 0);
+    const hash = Array.from(combinedString).reduce((acc, char) => {
+        const charCode = char.charCodeAt(0);
+        return (acc << 5) - acc + charCode;
+    }, 0);
 
-  const hue = hash % 360;
-  const saturation = 70; // Higher saturation for pastel colors
-  const lightness = 60; // Mid-range lightness for pastel colors
+    const hue = hash % 360;
+    const saturation = 70; // Higher saturation for pastel colors
+    const lightness = 60; // Mid-range lightness for pastel colors
 
-  const randomColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    const randomColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 
-  return randomColor;
+    return randomColor;
 };
 
 export const getFirstCharacters = (str: string) => {
-  const words = str.trim().split(" ");
-  if (words.length === 1) {
-    return words[0].charAt(0);
-  } else {
-    return words[0].charAt(0) + words[1].charAt(0);
-  }
+    const words = str.trim().split(" ");
+    if (words.length === 1) {
+        return words[0].charAt(0);
+    } else {
+        return words[0].charAt(0) + words[1].charAt(0);
+    }
 };
 
 /**
@@ -118,8 +118,8 @@ export const getFirstCharacters = (str: string) => {
  */
 
 export const stripHTML = (html: string) => {
-  const strippedText = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, ""); // Remove script tags
-  return strippedText.replace(/<[^>]*>/g, ""); // Remove all other HTML tags
+    const strippedText = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, ""); // Remove script tags
+    return strippedText.replace(/<[^>]*>/g, ""); // Remove all other HTML tags
 };
 
 /**
@@ -143,43 +143,43 @@ export const stripAndTruncateHTML = (html: string, length: number = 55) => trunc
  */
 
 export const getNumberCount = (number: number): string => {
-  if (number > 99) {
-    return "99+";
-  }
-  return number.toString();
+    if (number > 99) {
+        return "99+";
+    }
+    return number.toString();
 };
 
 export const objToQueryParams = (obj: any) => {
-  const params = new URLSearchParams();
+    const params = new URLSearchParams();
 
-  for (const [key, value] of Object.entries(obj)) {
-    if (value !== undefined && value !== null) params.append(key, value as string);
-  }
+    for (const [key, value] of Object.entries(obj)) {
+        if (value !== undefined && value !== null) params.append(key, value as string);
+    }
 
-  return params.toString();
+    return params.toString();
 };
 
 export const getFetchKeysForIssueMutation = (options: {
-  cycleId?: string | string[];
-  moduleId?: string | string[];
-  viewId?: string | string[];
-  projectId: string;
-  viewGanttParams: any;
-  ganttParams: any;
+    cycleId?: string | string[];
+    moduleId?: string | string[];
+    viewId?: string | string[];
+    projectId: string;
+    viewGanttParams: any;
+    ganttParams: any;
 }) => {
-  const { cycleId, moduleId, viewId, projectId, viewGanttParams, ganttParams } = options;
+    const { cycleId, moduleId, viewId, projectId, viewGanttParams, ganttParams } = options;
 
-  const ganttFetchKey = cycleId
-    ? { ganttFetchKey: CYCLE_ISSUES_WITH_PARAMS(cycleId.toString(), ganttParams) }
-    : moduleId
-      ? { ganttFetchKey: MODULE_ISSUES_WITH_PARAMS(moduleId.toString(), ganttParams) }
-      : viewId
-        ? { ganttFetchKey: VIEW_ISSUES(viewId.toString(), viewGanttParams) }
-        : { ganttFetchKey: PROJECT_ISSUES_LIST_WITH_PARAMS(projectId?.toString() ?? "", ganttParams) };
+    const ganttFetchKey = cycleId
+        ? { ganttFetchKey: CYCLE_ISSUES_WITH_PARAMS(cycleId.toString(), ganttParams) }
+        : moduleId
+          ? { ganttFetchKey: MODULE_ISSUES_WITH_PARAMS(moduleId.toString(), ganttParams) }
+          : viewId
+            ? { ganttFetchKey: VIEW_ISSUES(viewId.toString(), viewGanttParams) }
+            : { ganttFetchKey: PROJECT_ISSUES_LIST_WITH_PARAMS(projectId?.toString() ?? "", ganttParams) };
 
-  return {
-    ...ganttFetchKey,
-  };
+    return {
+        ...ganttFetchKey,
+    };
 };
 
 /**
@@ -191,21 +191,21 @@ export const getFetchKeysForIssueMutation = (options: {
  * @example substringMatch("hello world", "hoe") => false
  */
 export const substringMatch = (text: string, searchQuery: string): boolean => {
-  try {
-    let searchIndex = 0;
+    try {
+        let searchIndex = 0;
 
-    for (let i = 0; i < text.length; i++) {
-      if (text[i].toLowerCase() === searchQuery[searchIndex]?.toLowerCase()) searchIndex++;
+        for (let i = 0; i < text.length; i++) {
+            if (text[i].toLowerCase() === searchQuery[searchIndex]?.toLowerCase()) searchIndex++;
 
-      // All characters of searchQuery found in order
-      if (searchIndex === searchQuery.length) return true;
+            // All characters of searchQuery found in order
+            if (searchIndex === searchQuery.length) return true;
+        }
+
+        // Not all characters of searchQuery found in order
+        return false;
+    } catch (error) {
+        return false;
     }
-
-    // Not all characters of searchQuery found in order
-    return false;
-  } catch (error) {
-    return false;
-  }
 };
 
 /**
@@ -216,19 +216,19 @@ export const substringMatch = (text: string, searchQuery: string): boolean => {
  * @example checkEmailIsValid("example@servcy.com") => true
  */
 export const checkEmailValidity = (email: string): boolean => {
-  if (!email) return false;
+    if (!email) return false;
 
-  const isEmailValid =
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-      email
-    );
+    const isEmailValid =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            email
+        );
 
-  return isEmailValid;
+    return isEmailValid;
 };
 
 export const isEmptyHtmlString = (htmlString: string) => {
-  // Remove HTML tags using regex
-  const cleanText = DOMPurify.sanitize(htmlString, { ALLOWED_TAGS: [] });
-  // Trim the string and check if it's empty
-  return cleanText.trim() === "";
+    // Remove HTML tags using regex
+    const cleanText = DOMPurify.sanitize(htmlString, { ALLOWED_TAGS: [] });
+    // Trim the string and check if it's empty
+    return cleanText.trim() === "";
 };

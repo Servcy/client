@@ -5,7 +5,7 @@ import { StoreContext } from "@contexts/StoreContext";
 import { IWebhookStore } from "@store/workspace/webhook.store";
 
 export const useWebhook = (): IWebhookStore => {
-  const context = useContext(StoreContext);
-  if (context === undefined) throw new Error("useWebhook must be used within StoreProvider");
-  return context.workspaceRoot.webhook;
+    const context = useContext(StoreContext);
+    if (context === undefined) throw new Error("useWebhook must be used within StoreProvider");
+    return context.workspaceRoot.webhook;
 };
