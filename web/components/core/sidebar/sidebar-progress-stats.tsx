@@ -4,7 +4,7 @@ import Image from "next/image";
 // headless ui
 import { Tab } from "@headlessui/react";
 // hooks
-import useLocalStorage from "hooks/use-local-storage";
+import useLocalStorage from "@hooks/use-local-storage";
 // images
 import emptyLabel from "public/empty-state/empty_label.svg";
 import emptyMembers from "public/empty-state/empty_members.svg";

@@ -6,13 +6,13 @@ import { XCircle } from "lucide-react";
 import { AuthService } from "@services/auth.service";
 import { UserService } from "@services/user.service";
 // hooks
-import useToast from "hooks/use-toast";
-import useTimer from "hooks/use-timer";
-import { useEventTracker } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import useTimer from "@hooks/use-timer";
+import { useEventTracker } from "@hooks/store";
 // ui
 import { Button, Input } from "@servcy/ui";
 // helpers
-import { checkEmailValidity } from "helpers/string.helper";
+import { checkEmailValidity } from "@helpers/string.helper";
 // types
 import { IEmailCheckData, IMagicSignInData } from "@servcy/types";
 // constants

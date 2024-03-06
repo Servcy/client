@@ -9,7 +9,7 @@ import { Dialog, Transition } from "@headlessui/react";
 // services
 import { IntegrationService } from "@services/integrations/integration.service";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
 // icons

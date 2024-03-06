@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useUser } from "hooks/store";
+import { useApplication, useUser } from "@hooks/store";
 // layouts
-import DefaultLayout from "layouts/default-layout";
+import DefaultLayout from "@layouts/default-layout";
 // components
 import { SignUpRoot } from "components/account";
 import { PageHead } from "components/core";
@@ -13,7 +13,7 @@ import { Spinner } from "@servcy/ui";
 // assets
 import ServcyLogo from "public/logo.png";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const SignUpPage: NextPageWithLayout = observer(() => {
   // store hooks

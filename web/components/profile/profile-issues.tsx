@@ -10,7 +10,7 @@ import { IssuePeekOverview, ProfileIssuesAppliedFiltersRoot } from "components/i
 import { KanbanLayoutLoader, ListLayoutLoader } from "components/ui";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 // hooks
-import { useIssues, useUser } from "hooks/store";
+import { useIssues, useUser } from "@hooks/store";
 // constants
 import { EUserWorkspaceRoles } from "constants/workspace";
 import { EIssuesStoreType } from "constants/issue";

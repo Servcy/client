@@ -3,7 +3,7 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import { Tab } from "@headlessui/react";
 // hooks
-import { useDashboard } from "hooks/store";
+import { useDashboard } from "@hooks/store";
 // components
 import {
   DurationFilterDropdown,
@@ -13,7 +13,7 @@ import {
   WidgetProps,
 } from "components/dashboard/widgets";
 // helpers
-import { getCustomDates, getRedirectionFilters, getTabKey } from "helpers/dashboard.helper";
+import { getCustomDates, getRedirectionFilters, getTabKey } from "@helpers/dashboard.helper";
 // types
 import { TCreatedIssuesWidgetFilters, TCreatedIssuesWidgetResponse } from "@servcy/types";
 // constants

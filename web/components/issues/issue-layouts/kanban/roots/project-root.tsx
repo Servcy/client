@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { useMemo } from "react";
 // mobx store
-import { useIssues } from "hooks/store/use-issues";
+import { useIssues } from "@hooks/store/use-issues";
 // components
 import { ProjectIssueQuickActions } from "components/issues";
 import { BaseKanBanRoot } from "../base-kanban-root";

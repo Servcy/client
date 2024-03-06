@@ -2,11 +2,11 @@ import { ReactElement } from "react";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // layouts
-import { InstanceAdminLayout } from "layouts/admin-layout";
+import { InstanceAdminLayout } from "@layouts/admin-layout";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // hooks
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 // ui
 import { Loader } from "@servcy/ui";
 // icons

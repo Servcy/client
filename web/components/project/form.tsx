@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 // hooks
-import { useEventTracker, useProject } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useProject } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import EmojiIconPicker from "components/emoji-icon-picker";
 import { ImagePickerPopover } from "components/core";
@@ -12,8 +12,8 @@ import { Lock } from "lucide-react";
 // types
 import { IProject, IWorkspace } from "@servcy/types";
 // helpers
-import { renderEmoji } from "helpers/emoji.helper";
-import { renderFormattedDate } from "helpers/date-time.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
 // constants
 import { NETWORK_CHOICES } from "constants/project";
 // services

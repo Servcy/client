@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 // helpers
-import { renderFormattedDate } from "helpers/date-time.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
 // types
 import { TIssue } from "@servcy/types";
 

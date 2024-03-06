@@ -2,15 +2,15 @@ import { ReactElement } from "react";
 import { useRouter } from "next/router";
 import { X, PenSquare } from "lucide-react";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { DraftIssueLayoutRoot } from "components/issues/issue-layouts/roots/draft-issue-layout-root";
 import { PageHead } from "components/core";
 import { ProjectDraftIssueHeader } from "components/headers";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 import { observer } from "mobx-react";
 
 const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {

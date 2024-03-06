@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 // components
 import { Spinner } from "@servcy/ui";
 import { InstanceNotReady } from "components/instance";

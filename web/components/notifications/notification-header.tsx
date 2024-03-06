@@ -5,9 +5,9 @@ import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-ham
 // ui
 import { ArchiveIcon, CustomMenu, Tooltip } from "@servcy/ui";
 // hooks
-import { useEventTracker } from "hooks/store";
+import { useEventTracker } from "@hooks/store";
 // helpers
-import { getNumberCount } from "helpers/string.helper";
+import { getNumberCount } from "@helpers/string.helper";
 // type
 import type { NotificationType, NotificationCount } from "@servcy/types";
 // constants

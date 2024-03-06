@@ -9,7 +9,7 @@ import { ControlLink, CustomMenu, Tooltip } from "@servcy/ui";
 import { TIssue } from "@servcy/types";
 import { TSubIssueOperations } from "./root";
 // import { ISubIssuesRootLoaders, ISubIssuesRootLoadersHandler } from "./root";
-import { useIssueDetail, useProject, useProjectState } from "hooks/store";
+import { useIssueDetail, useProject, useProjectState } from "@hooks/store";
 import { observer } from "mobx-react-lite";
 
 export interface ISubIssues {

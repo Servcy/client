@@ -3,7 +3,7 @@ import { CustomMenu } from "@servcy/ui";
 // icons
 import { Trash2 } from "lucide-react";
 // helpers
-import { renderFormattedDate } from "helpers/date-time.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
 // types
 import { IImporterService } from "@servcy/types";
 // constants

@@ -1,9 +1,9 @@
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 // hooks
-import { useProject } from "hooks/store";
-import { useIssues } from "hooks/store/use-issues";
-import useToast from "hooks/use-toast";
+import { useProject } from "@hooks/store";
+import { useIssues } from "@hooks/store/use-issues";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button } from "@servcy/ui";
 // types

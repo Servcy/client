@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react";
 // hooks
-import { useProject, useProjectView } from "hooks/store";
+import { useProject, useProjectView } from "@hooks/store";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { ProjectViewLayoutRoot } from "components/issues";
 import { ProjectViewIssuesHeader } from "components/headers";
@@ -15,7 +15,7 @@ import { EmptyState } from "components/common";
 // assets
 import emptyView from "public/empty-state/view.svg";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const ProjectViewIssuesPage: NextPageWithLayout = observer(() => {
   // router

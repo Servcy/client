@@ -3,8 +3,8 @@ import { DragDropContext, DragStart, DraggableLocation, DropResult, Droppable } 
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useEventTracker, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Spinner } from "@servcy/ui";
 // types
@@ -17,7 +17,7 @@ import { KanBan } from "./default";
 import { KanBanSwimLanes } from "./swimlanes";
 import { DeleteIssueModal } from "components/issues";
 import { EUserProjectRoles } from "constants/project";
-import { useIssues } from "hooks/store/use-issues";
+import { useIssues } from "@hooks/store/use-issues";
 import { handleDragDrop } from "./utils";
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
 import { IDraftIssues, IDraftIssuesFilter } from "@store/issue/draft";

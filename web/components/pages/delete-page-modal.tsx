@@ -4,12 +4,12 @@ import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
 // hooks
-import { useEventTracker, usePage } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, usePage } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button } from "@servcy/ui";
 // types
-import { useProjectPages } from "hooks/store/use-project-page";
+import { useProjectPages } from "@hooks/store/use-project-page";
 // constants
 import { PAGE_DELETED } from "constants/event-tracker";
 

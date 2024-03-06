@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 // services
 import { ProjectExportService } from "@services/project";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, CustomSearchSelect } from "@servcy/ui";
 // types

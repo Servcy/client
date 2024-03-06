@@ -2,11 +2,11 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 // hooks
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 // types
 import { TIssue } from "@servcy/types";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 
 type Props = {
   issue: TIssue;

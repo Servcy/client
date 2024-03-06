@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { GanttChartSquare, LayoutGrid, List, Plus } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useProject, useUser } from "hooks/store";
-import useLocalStorage from "hooks/use-local-storage";
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
+import useLocalStorage from "@hooks/use-local-storage";
 // ui
 import { Breadcrumbs, Button, Tooltip, DiceIcon, CustomMenu } from "@servcy/ui";
 // helper
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // constants
 import { MODULE_VIEW_LAYOUTS } from "constants/module";
 import { EUserProjectRoles } from "constants/project";

@@ -2,8 +2,8 @@ import { FC, useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import useToast from "hooks/use-toast";
-import { useEventTracker, useIssueDetail, useIssues, useUser } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
 // components
 import { IssueView } from "components/issues";
 // types

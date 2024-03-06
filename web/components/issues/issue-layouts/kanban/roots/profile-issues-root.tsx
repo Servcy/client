@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useIssues, useUser } from "hooks/store";
+import { useIssues, useUser } from "@hooks/store";
 // components
 import { ProjectIssueQuickActions } from "components/issues";
 // types

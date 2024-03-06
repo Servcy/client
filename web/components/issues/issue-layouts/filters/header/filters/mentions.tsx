@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useMember } from "hooks/store";
+import { useMember } from "@hooks/store";
 // components
 import { FilterHeader, FilterOption } from "components/issues";
 // ui

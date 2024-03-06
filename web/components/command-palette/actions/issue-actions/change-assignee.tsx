@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Command } from "cmdk";
 import { Check } from "lucide-react";
 // mobx store
-import { useIssues, useMember } from "hooks/store";
+import { useIssues, useMember } from "@hooks/store";
 // ui
 import { Avatar } from "@servcy/ui";
 // types

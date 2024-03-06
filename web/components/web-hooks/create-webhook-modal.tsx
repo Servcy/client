@@ -5,9 +5,9 @@ import { Dialog, Transition } from "@headlessui/react";
 import { WebhookForm } from "./form";
 import { GeneratedHookDetails } from "./generated-hook-details";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // helpers
-import { csvDownload } from "helpers/download.helper";
+import { csvDownload } from "@helpers/download.helper";
 // utils
 import { getCurrentHookAsCSV } from "./utils";
 // types

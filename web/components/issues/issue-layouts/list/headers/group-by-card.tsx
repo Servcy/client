@@ -8,10 +8,10 @@ import { CustomMenu } from "@servcy/ui";
 // mobx
 import { observer } from "mobx-react-lite";
 // hooks
-import { useEventTracker } from "hooks/store";
+import { useEventTracker } from "@hooks/store";
 // types
 import { TIssue, ISearchIssueResponse } from "@servcy/types";
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 import { useState } from "react";
 import { TCreateModalStoreTypes } from "constants/issue";
 

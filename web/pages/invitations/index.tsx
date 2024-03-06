@@ -9,22 +9,22 @@ import useSWR, { mutate } from "swr";
 import { UserService } from "@services/user.service";
 import { WorkspaceService } from "@services/workspace.service";
 // hooks
-import { useEventTracker, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // layouts
-import { UserAuthWrapper } from "layouts/auth-layout";
-import DefaultLayout from "layouts/default-layout";
+import { UserAuthWrapper } from "@layouts/auth-layout";
+import DefaultLayout from "@layouts/default-layout";
 // ui
 import { Button } from "@servcy/ui";
 // images
 import emptyInvitation from "public/empty-state/invitation.svg";
 import ServcyLogo from "public/logo.svg";
 // helpers
-import { truncateText } from "helpers/string.helper";
-import { getUserRole } from "helpers/user.helper";
+import { truncateText } from "@helpers/string.helper";
+import { getUserRole } from "@helpers/user.helper";
 // types
 import type { IWorkspaceMemberInvitation } from "@servcy/types";
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // constants
 import { MEMBER_ACCEPTED } from "constants/event-tracker";
 import { ROLE } from "constants/workspace";

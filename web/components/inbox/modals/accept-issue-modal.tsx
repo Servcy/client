@@ -6,7 +6,7 @@ import { CheckCircle } from "lucide-react";
 import { Button } from "@servcy/ui";
 // types
 import type { TIssue } from "@servcy/types";
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 
 type Props = {
   data: TIssue;

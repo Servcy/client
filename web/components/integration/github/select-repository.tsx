@@ -6,7 +6,7 @@ import { ProjectService } from "@services/project";
 // ui
 import { CustomSearchSelect } from "@servcy/ui";
 // helpers
-import { truncateText } from "helpers/string.helper";
+import { truncateText } from "@helpers/string.helper";
 // types
 import { IWorkspaceIntegration } from "@servcy/types";
 

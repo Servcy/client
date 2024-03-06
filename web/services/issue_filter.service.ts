@@ -2,7 +2,7 @@
 import { APIService } from "@services/api.service";
 // types
 import type { IIssueFiltersResponse } from "@servcy/types";
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 
 export class IssueFiltersService extends APIService {
   constructor() {

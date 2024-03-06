@@ -5,7 +5,7 @@ import { ComicBoxButton } from "./comic-box-button";
 // ui
 import { Button, getButtonStyling } from "@servcy/ui";
 // helper
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 
 type Props = {
   title: string;

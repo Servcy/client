@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useIssueDetail, useProjectState, useUser } from "hooks/store";
-import useReloadConfirmations from "hooks/use-reload-confirmation";
+import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
+import useReloadConfirmations from "@hooks/use-reload-confirmation";
 // components
 import { IssueUpdateStatus, TIssueOperations } from "components/issues";
 import { IssueTitleInput } from "../../title-input";

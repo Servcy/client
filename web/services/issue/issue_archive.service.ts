@@ -2,7 +2,7 @@ import { APIService } from "@services/api.service";
 // types
 import { TIssue } from "@servcy/types";
 // constants
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 
 export class IssueArchiveService extends APIService {
   constructor() {

@@ -5,8 +5,8 @@ import { Button, Input } from "@servcy/ui";
 // types
 import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
 // hooks
-import { useEventTracker, useUser, useWorkspace } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // services
 import { WorkspaceService } from "@services/workspace.service";
 // constants

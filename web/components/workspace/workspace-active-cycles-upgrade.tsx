@@ -2,13 +2,13 @@ import React from "react";
 import Image from "next/image";
 import { observer } from "mobx-react";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // ui
 import { getButtonStyling } from "@servcy/ui";
 // icons
 import { Crown } from "lucide-react";
 // helper
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // constants
 import { WORKSPACE_ACTIVE_CYCLES_DETAILS } from "constants/cycle";
 

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 import { APIService } from "@services/api.service";
 // types
 import { IJiraImporterForm, IJiraMetadata, IJiraResponse } from "@servcy/types";

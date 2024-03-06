@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 // hooks
 import { useGanttChart } from "components/gantt-chart/hooks/use-gantt-chart";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { IMonthBlock } from "../../views";
 // constants

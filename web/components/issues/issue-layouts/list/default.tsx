@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { IssueBlocksList, ListQuickAddIssueForm } from "components/issues";
 import { HeaderGroupByCard } from "./headers/group-by-card";
 // hooks
-import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "hooks/store";
+import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store";
 // types
 import {
   GroupByColumnTypes,

@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // store hooks
-import { useEstimate, useProject, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEstimate, useProject, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { CreateUpdateEstimateModal, DeleteEstimateModal, EstimateListItem } from "components/estimates";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
@@ -13,7 +13,7 @@ import { Button, Loader } from "@servcy/ui";
 // types
 import { IEstimate } from "@servcy/types";
 // helpers
-import { orderArrayBy } from "helpers/array.helper";
+import { orderArrayBy } from "@helpers/array.helper";
 // constants
 import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "constants/empty-state";
 

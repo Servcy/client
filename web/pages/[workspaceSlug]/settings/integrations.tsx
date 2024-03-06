@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 // hooks
-import { useUser, useWorkspace } from "hooks/store";
+import { useUser, useWorkspace } from "@hooks/store";
 // services
 import { IntegrationService } from "@services/integrations";
 // layouts
-import { AppLayout } from "layouts/app-layout";
-import { WorkspaceSettingLayout } from "layouts/settings-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // components
 import { SingleIntegrationCard } from "components/integration";
 import { WorkspaceSettingHeader } from "components/headers";
@@ -16,7 +16,7 @@ import { PageHead } from "components/core";
 // ui
 import { IntegrationAndImportExportBanner, IntegrationsSettingsLoader } from "components/ui";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // fetch-keys
 import { APP_INTEGRATIONS } from "constants/fetch-keys";
 // constants

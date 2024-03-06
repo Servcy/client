@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Inbox } from "lucide-react";
 import { observer } from "mobx-react";
 // hooks
-import { useInboxIssues } from "hooks/store";
+import { useInboxIssues } from "@hooks/store";
 // ui
 import { InboxSidebarLoader } from "components/ui";
 // components

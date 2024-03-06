@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Menu } from "lucide-react";
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 import { observer } from "mobx-react";
 
 type Props = {

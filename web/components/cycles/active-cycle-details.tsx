@@ -4,8 +4,8 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 import { useTheme } from "next-themes";
 // hooks
-import { useCycle, useIssues, useMember, useProject, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useCycle, useIssues, useMember, useProject, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { SingleProgressStats } from "components/core";
 import {
@@ -27,8 +27,8 @@ import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 // icons
 import { ArrowRight, CalendarCheck, CalendarDays, Star, Target } from "lucide-react";
 // helpers
-import { renderFormattedDate, findHowManyDaysLeft, renderFormattedDateWithoutYear } from "helpers/date-time.helper";
-import { truncateText } from "helpers/string.helper";
+import { renderFormattedDate, findHowManyDaysLeft, renderFormattedDateWithoutYear } from "@helpers/date-time.helper";
+import { truncateText } from "@helpers/string.helper";
 // types
 import { ICycle, TCycleGroups } from "@servcy/types";
 // constants

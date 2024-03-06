@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Check, Globe2, Lock, Pencil, Trash2, X } from "lucide-react";
 // hooks
-import { useIssueDetail, useMention, useUser, useWorkspace } from "hooks/store";
+import { useIssueDetail, useMention, useUser, useWorkspace } from "@hooks/store";
 // components
 import { IssueCommentBlock } from "./comment-block";
 import { LiteTextEditorWithRef, LiteReadOnlyEditorWithRef } from "@servcy/lite-text-editor";
@@ -15,7 +15,7 @@ import { FileService } from "@services/file.service";
 import { TIssueComment } from "@servcy/types";
 import { TActivityOperations } from "../root";
 // helpers
-import { isEmptyHtmlString } from "helpers/string.helper";
+import { isEmptyHtmlString } from "@helpers/string.helper";
 
 const fileService = new FileService();
 

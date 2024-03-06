@@ -7,7 +7,7 @@ import { X } from "lucide-react";
 // constants
 import { allTimeIn30MinutesInterval12HoursFormat } from "constants/notification";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, CustomSelect } from "@servcy/ui";
 // types

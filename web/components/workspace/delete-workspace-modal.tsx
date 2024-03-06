@@ -5,8 +5,8 @@ import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
 // hooks
-import { useEventTracker, useWorkspace } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useWorkspace } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
 // types

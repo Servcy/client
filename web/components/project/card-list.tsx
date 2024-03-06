@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // hooks
-import { useApplication, useEventTracker, useProject, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 // components
 import { ProjectCard } from "components/project";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";

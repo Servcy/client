@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useWebhook } from "hooks/store";
+import { useWebhook } from "@hooks/store";
 // components
 import {
   WebhookIndividualEventOptions,

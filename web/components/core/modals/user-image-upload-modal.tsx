@@ -3,11 +3,11 @@ import { observer } from "mobx-react-lite";
 import { useDropzone } from "react-dropzone";
 import { Transition, Dialog } from "@headlessui/react";
 // hooks
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 // services
 import { FileService } from "@services/file.service";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button } from "@servcy/ui";
 // icons

@@ -7,8 +7,8 @@ import isEmpty from "lodash/isEmpty";
 // services
 import { CycleService } from "@services/cycle.service";
 // hooks
-import { useEventTracker, useCycle, useUser, useMember } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { SidebarProgressStats } from "components/core";
 import ProgressChart from "components/core/sidebar/progress-chart";
@@ -18,8 +18,8 @@ import { Avatar, CustomMenu, Loader, LayersIcon } from "@servcy/ui";
 // icons
 import { ChevronDown, LinkIcon, Trash2, UserCircle2, AlertCircle, ChevronRight, CalendarClock } from "lucide-react";
 // helpers
-import { copyUrlToClipboard } from "helpers/string.helper";
-import { findHowManyDaysLeft, renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
+import { findHowManyDaysLeft, renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // types
 import { ICycle } from "@servcy/types";
 // constants

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 // layouts
-import { UserAuthWrapper, WorkspaceAuthWrapper, ProjectAuthWrapper } from "layouts/auth-layout";
+import { UserAuthWrapper, WorkspaceAuthWrapper, ProjectAuthWrapper } from "@layouts/auth-layout";
 // components
 import { CommandPalette } from "components/command-palette";
 import { AppSidebar } from "./sidebar";

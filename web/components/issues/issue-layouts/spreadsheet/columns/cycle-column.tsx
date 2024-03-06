@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useEventTracker, useIssues } from "hooks/store";
+import { useEventTracker, useIssues } from "@hooks/store";
 // components
 import { CycleDropdown } from "components/dropdowns";
 // types

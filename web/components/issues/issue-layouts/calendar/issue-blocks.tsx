@@ -5,12 +5,12 @@ import { MoreHorizontal } from "lucide-react";
 // components
 import { Tooltip, ControlLink } from "@servcy/ui";
 // hooks
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { TIssue, TIssueMap } from "@servcy/types";
-import { useApplication, useIssueDetail, useProject, useProjectState } from "hooks/store";
+import { useApplication, useIssueDetail, useProject, useProjectState } from "@hooks/store";
 
 type Props = {
   issues: TIssueMap | undefined;

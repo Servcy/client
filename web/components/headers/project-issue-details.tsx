@@ -3,11 +3,11 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useProject } from "hooks/store";
+import { useApplication, useProject } from "@hooks/store";
 // ui
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 // helpers
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // services
 import { IssueService } from "@services/issue";
 // constants
@@ -16,7 +16,7 @@ import { ISSUE_DETAILS } from "constants/fetch-keys";
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "components/common";
 import { PanelRight } from "lucide-react";
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 
 // services
 const issueService = new IssueService();

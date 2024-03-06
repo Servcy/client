@@ -3,14 +3,14 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import { History } from "lucide-react";
 // hooks
-import { useDashboard, useUser } from "hooks/store";
+import { useDashboard, useUser } from "@hooks/store";
 // components
 import { ActivityIcon, ActivityMessage, IssueLink } from "components/core";
 import { RecentActivityEmptyState, WidgetLoader, WidgetProps } from "components/dashboard/widgets";
 // ui
 import { Avatar } from "@servcy/ui";
 // helpers
-import { calculateTimeAgo } from "helpers/date-time.helper";
+import { calculateTimeAgo } from "@helpers/date-time.helper";
 // types
 import { TRecentActivityWidgetResponse } from "@servcy/types";
 

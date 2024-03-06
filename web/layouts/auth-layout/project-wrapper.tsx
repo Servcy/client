@@ -16,7 +16,7 @@ import {
   useProjectView,
   useUser,
   useInbox,
-} from "hooks/store";
+} from "@hooks/store";
 // components
 import { Spinner } from "@servcy/ui";
 import { JoinProject } from "components/auth-screens";

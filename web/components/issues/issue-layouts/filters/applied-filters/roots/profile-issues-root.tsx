@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useIssues, useLabel } from "hooks/store";
+import { useIssues, useLabel } from "@hooks/store";
 // components
 import { AppliedFiltersList } from "components/issues";
 // types
 import { IIssueFilterOptions } from "@servcy/types";
 import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
-import { useWorkspaceIssueProperties } from "hooks/use-workspace-issue-properties";
+import { useWorkspaceIssueProperties } from "@hooks/use-workspace-issue-properties";
 
 export const ProfileIssuesAppliedFiltersRoot: React.FC = observer(() => {
   // router

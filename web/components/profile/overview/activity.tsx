@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react";
 //hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // services
 import { UserService } from "@services/user.service";
 // components
@@ -13,7 +13,7 @@ import { Loader } from "@servcy/ui";
 // image
 import recentActivityEmptyState from "public/empty-state/recent_activity.svg";
 // helpers
-import { calculateTimeAgo } from "helpers/date-time.helper";
+import { calculateTimeAgo } from "@helpers/date-time.helper";
 // fetch-keys
 import { USER_PROFILE_ACTIVITY } from "constants/fetch-keys";
 

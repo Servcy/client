@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 // mobx store
-import { useIssues } from "hooks/store";
+import { useIssues } from "@hooks/store";
 // components
 import { BaseSpreadsheetRoot } from "../base-spreadsheet-root";
 import { ProjectIssueQuickActions } from "../../quick-action-dropdowns";

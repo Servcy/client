@@ -3,7 +3,7 @@ import Image from "next/image";
 import { observer } from "mobx-react-lite";
 import { X } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useUser } from "@hooks/store";
 // components
 import { TourSidebar } from "components/onboarding";
 // ui

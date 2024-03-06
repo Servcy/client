@@ -2,7 +2,7 @@ import { MutableRefObject, memo } from "react";
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useIssueDetail, useProject } from "hooks/store";
+import { useApplication, useIssueDetail, useProject } from "@hooks/store";
 // components
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
 import { IssueProperties } from "../properties/all-properties";
@@ -12,7 +12,7 @@ import { Tooltip, ControlLink } from "@servcy/ui";
 import { TIssue, IIssueDisplayProperties, IIssueMap } from "@servcy/types";
 import { EIssueActions } from "../types";
 // helper
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 import RenderIfVisible from "components/core/render-if-visible-HOC";
 
 interface IssueBlockProps {

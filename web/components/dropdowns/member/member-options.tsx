@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 //components
 import { Avatar } from "@servcy/ui";
 //store
-import { useApplication, useMember, useUser } from "hooks/store";
+import { useApplication, useMember, useUser } from "@hooks/store";
 //hooks
 import { usePopper } from "react-popper";
 //icon

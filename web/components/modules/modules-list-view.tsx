@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // hooks
-import { useApplication, useEventTracker, useModule, useUser } from "hooks/store";
-import useLocalStorage from "hooks/use-local-storage";
+import { useApplication, useEventTracker, useModule, useUser } from "@hooks/store";
+import useLocalStorage from "@hooks/use-local-storage";
 // components
 import { ModuleCardItem, ModuleListItem, ModulePeekOverview, ModulesListGanttChartView } from "components/modules";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";

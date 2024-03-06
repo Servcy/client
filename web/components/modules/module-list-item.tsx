@@ -4,15 +4,15 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Check, Info, LinkIcon, Pencil, Star, Trash2, User2 } from "lucide-react";
 // hooks
-import { useModule, useUser, useEventTracker, useMember } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useModule, useUser, useEventTracker, useMember } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { CreateUpdateModuleModal, DeleteModuleModal } from "components/modules";
 // ui
 import { Avatar, AvatarGroup, CircularProgressIndicator, CustomMenu, Tooltip } from "@servcy/ui";
 // helpers
-import { copyUrlToClipboard } from "helpers/string.helper";
-import { renderFormattedDate } from "helpers/date-time.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
 // constants
 import { MODULE_STATUS } from "constants/module";
 import { EUserProjectRoles } from "constants/project";

@@ -8,7 +8,7 @@ import useSWR, { mutate } from "swr";
 import { ProjectService } from "@services/project";
 // hooks
 import { useRouter } from "next/router";
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // components
 import { SelectRepository, SelectChannel } from "components/integration";
 // icons

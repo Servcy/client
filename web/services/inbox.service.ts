@@ -1,6 +1,6 @@
 import { APIService } from "@services/api.service";
 // helpers
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 // types
 import type { IInbox, IInboxIssue, IInboxQueryParams, TInboxStatus } from "@servcy/types";
 

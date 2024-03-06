@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 // components
 import { IssuePropertyLabels } from "../../properties";
 // hooks
-import { useLabel } from "hooks/store";
+import { useLabel } from "@hooks/store";
 // types
 import { TIssue } from "@servcy/types";
 

@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { ChevronUp, PenSquare, Search } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useProject, useUser } from "hooks/store";
-import useLocalStorage from "hooks/use-local-storage";
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
+import useLocalStorage from "@hooks/use-local-storage";
 // components
 import { CreateUpdateIssueModal } from "components/issues";
 // constants

@@ -3,13 +3,13 @@ import { observer } from "mobx-react-lite";
 import { Command } from "cmdk";
 import { LinkIcon, Signal, Trash2, UserMinus2, UserPlus2 } from "lucide-react";
 // hooks
-import { useApplication, useUser, useIssues } from "hooks/store";
+import { useApplication, useUser, useIssues } from "@hooks/store";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { DoubleCircleIcon, UserGroupIcon } from "@servcy/ui";
 // helpers
-import { copyTextToClipboard } from "helpers/string.helper";
+import { copyTextToClipboard } from "@helpers/string.helper";
 // types
 import { TIssue } from "@servcy/types";
 import { EIssuesStoreType } from "constants/issue";

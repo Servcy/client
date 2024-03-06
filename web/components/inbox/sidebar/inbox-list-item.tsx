@@ -5,11 +5,11 @@ import { useRouter } from "next/router";
 // icons
 import { CalendarDays } from "lucide-react";
 // hooks
-import { useInboxIssues, useIssueDetail, useProject } from "hooks/store";
+import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store";
 // ui
 import { Tooltip, PriorityIcon } from "@servcy/ui";
 // helpers
-import { renderFormattedDate } from "helpers/date-time.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
 // components
 import { InboxIssueStatus } from "components/inbox/inbox-issue-status";
 

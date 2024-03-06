@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { FileText, Plus } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useProject, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 // ui
 import { Breadcrumbs, Button } from "@servcy/ui";
 // helpers
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // constants
 import { EUserProjectRoles } from "constants/project";
 // components

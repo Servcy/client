@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 // helper
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // icons
 import { SmilePlus } from "lucide-react";
 

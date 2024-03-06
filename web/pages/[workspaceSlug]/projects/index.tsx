@@ -5,10 +5,10 @@ import { PageHead } from "components/core";
 import { ProjectCardList } from "components/project";
 import { ProjectsHeader } from "components/headers";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // type
-import { NextPageWithLayout } from "lib/types";
-import { useWorkspace } from "hooks/store";
+import { NextPageWithLayout } from "@lib/types";
+import { useWorkspace } from "@hooks/store";
 
 const ProjectsPage: NextPageWithLayout = observer(() => {
   // store

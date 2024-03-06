@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { X } from "lucide-react";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 // helpers
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 
 type Props = {
   handleRemove: (val: string) => void;

@@ -4,7 +4,7 @@ import { CalendarClock } from "lucide-react";
 // components
 import { DateDropdown } from "components/dropdowns";
 // helpers
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // types
 import { TIssue } from "@servcy/types";
 

@@ -4,8 +4,8 @@ import { observer } from "mobx-react-lite";
 import { DayPicker } from "react-day-picker";
 import { Popover } from "@headlessui/react";
 // hooks
-import { useUser, useInboxIssues, useIssueDetail, useWorkspace, useEventTracker } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useUser, useInboxIssues, useIssueDetail, useWorkspace, useEventTracker } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import {
   AcceptIssueModal,

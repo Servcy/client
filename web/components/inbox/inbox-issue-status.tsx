@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 // hooks
-import { useInboxIssues } from "hooks/store";
+import { useInboxIssues } from "@hooks/store";
 // constants
 import { INBOX_STATUS } from "constants/inbox";
 

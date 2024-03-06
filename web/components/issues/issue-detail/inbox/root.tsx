@@ -5,8 +5,8 @@ import useSWR from "swr";
 import { InboxIssueMainContent } from "./main-content";
 import { InboxIssueDetailsSidebar } from "./sidebar";
 // hooks
-import { useEventTracker, useInboxIssues, useIssueDetail, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useInboxIssues, useIssueDetail, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // types
 import { TIssue } from "@servcy/types";
 import { TIssueOperations } from "../root";

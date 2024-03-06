@@ -6,13 +6,13 @@ import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 import { ChevronLeft, LogOut, MoveLeft, Plus, UserPlus } from "lucide-react";
 // hooks
-import { useApplication, useUser, useWorkspace } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useApplication, useUser, useWorkspace } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Tooltip } from "@servcy/ui";
 // constants
 import { PROFILE_ACTION_LINKS } from "constants/profile";
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 const WORKSPACE_ACTION_LINKS = [
   {

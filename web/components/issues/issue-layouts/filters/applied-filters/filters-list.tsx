@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { X } from "lucide-react";
 import { useRouter } from "next/router";
 // hooks
-import { useApplication, useUser } from "hooks/store";
+import { useApplication, useUser } from "@hooks/store";
 // components
 import {
   AppliedCycleFilters,
@@ -16,7 +16,7 @@ import {
   AppliedStateGroupFilters,
 } from "components/issues";
 // helpers
-import { replaceUnderscoreIfSnakeCase } from "helpers/string.helper";
+import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
 // types
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";
 // constants

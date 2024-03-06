@@ -5,8 +5,8 @@ import { mutate } from "swr";
 // services
 import { AnalyticsService } from "@services/analytics.service";
 // hooks
-import { useCycle, useModule, useProject, useUser, useWorkspace } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useCycle, useModule, useProject, useUser, useWorkspace } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { CustomAnalyticsSidebarHeader, CustomAnalyticsSidebarProjectsList } from "components/analytics";
 // ui
@@ -14,12 +14,12 @@ import { Button, LayersIcon } from "@servcy/ui";
 // icons
 import { CalendarDays, Download, RefreshCw } from "lucide-react";
 // helpers
-import { renderFormattedDate } from "helpers/date-time.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
 // types
 import { IAnalyticsParams, IAnalyticsResponse, IExportAnalyticsFormData, IWorkspace } from "@servcy/types";
 // fetch-keys
 import { ANALYTICS } from "constants/fetch-keys";
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 
 type Props = {
   analytics: IAnalyticsResponse | undefined;

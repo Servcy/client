@@ -1,15 +1,15 @@
 import { observer } from "mobx-react-lite";
 // hooks
-import { useUser, useWorkspace } from "hooks/store";
+import { useUser, useWorkspace } from "@hooks/store";
 // layout
-import { AppLayout } from "layouts/app-layout";
-import { WorkspaceSettingLayout } from "layouts/settings-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // components
 import { WorkspaceSettingHeader } from "components/headers";
 import ExportGuide from "components/exporter/guide";
 import { PageHead } from "components/core";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // constants
 import { EUserWorkspaceRoles } from "constants/workspace";
 

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useIssueDetail } from "hooks/store";
+import { useIssueDetail } from "@hooks/store";
 // components
 import { CycleDropdown } from "components/dropdowns";
 // ui
 import { Spinner } from "@servcy/ui";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import type { TIssueOperations } from "./root";
 

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Search, Plus, Briefcase } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useProject, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 // ui
 import { Breadcrumbs, Button } from "@servcy/ui";
 // constants

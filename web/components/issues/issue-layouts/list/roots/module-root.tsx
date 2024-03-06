@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // mobx store
-import { useIssues } from "hooks/store";
+import { useIssues } from "@hooks/store";
 // components
 import { ModuleIssueQuickActions } from "components/issues";
 // types

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 // hooks
-import { useProject, useUser } from "hooks/store";
+import { useProject, useUser } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";
 // icons

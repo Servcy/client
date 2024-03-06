@@ -3,11 +3,11 @@ import { observer } from "mobx-react-lite";
 // components
 import { ReactionSelector } from "./reaction-selector";
 // hooks
-import { useIssueDetail } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useIssueDetail } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // types
 import { IUser } from "@servcy/types";
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 
 export type TIssueCommentReaction = {
   workspaceSlug: string;

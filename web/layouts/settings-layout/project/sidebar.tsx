@@ -4,7 +4,7 @@ import Link from "next/link";
 // ui
 import { Loader } from "@servcy/ui";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // constants
 import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "constants/project";
 

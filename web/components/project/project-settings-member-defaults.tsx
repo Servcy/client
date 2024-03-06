@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useProject, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useProject, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 import { Controller, useForm } from "react-hook-form";
 
 import { MemberSelect } from "components/project";

@@ -3,7 +3,7 @@ import { APIService } from "@services/api.service";
 // type
 import type { IIssueDisplayProperties, TIssue, TIssueActivity, TIssueLink, TIssueSubIssues } from "@servcy/types";
 // helper
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 
 export class IssueService extends APIService {
   constructor() {

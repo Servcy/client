@@ -6,7 +6,7 @@ import { CustomMenu } from "@servcy/ui";
 //types
 import { IIssueLabel } from "@servcy/types";
 //hooks
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 //components
 import { DragHandle } from "./drag-handle";
 import { LabelName } from "./label-name";

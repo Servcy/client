@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 // hooks
-import { useIssues } from "hooks/store";
+import { useIssues } from "@hooks/store";
 // constant
 import { EIssuesStoreType } from "constants/issue";
 // types

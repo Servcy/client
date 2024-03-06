@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import Link from "next/link";
 // hooks
-import { useDashboard } from "hooks/store";
+import { useDashboard } from "@hooks/store";
 // components
 import { WidgetLoader } from "components/dashboard/widgets";
 // helpers
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // types
 import { TOverviewStatsWidgetResponse } from "@servcy/types";
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 
 export type WidgetProps = {
   dashboardId: string;

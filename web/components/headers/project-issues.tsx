@@ -11,7 +11,7 @@ import {
   useProjectState,
   useUser,
   useMember,
-} from "hooks/store";
+} from "@hooks/store";
 // components
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "components/issues";
 import { ProjectAnalyticsModal } from "components/analytics";
@@ -24,9 +24,9 @@ import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOption
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "constants/issue";
 // helper
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 import { EUserProjectRoles } from "constants/project";
-import { useIssues } from "hooks/store/use-issues";
+import { useIssues } from "@hooks/store/use-issues";
 import { IssuesMobileHeader } from "components/issues/issues-mobile-header";
 
 export const ProjectIssuesHeader: React.FC = observer(() => {

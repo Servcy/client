@@ -3,7 +3,7 @@ import useSWR from "swr";
 // components
 import { IssueParentSiblingItem } from "./sibling-item";
 // hooks
-import { useIssueDetail } from "hooks/store";
+import { useIssueDetail } from "@hooks/store";
 // types
 import { TIssue } from "@servcy/types";
 

@@ -11,8 +11,8 @@ import {
 } from "@hello-pangea/dnd";
 import { useTheme } from "next-themes";
 // hooks
-import { useLabel, useUser } from "hooks/store";
-import useDraggableInPortal from "hooks/use-draggable-portal";
+import { useLabel, useUser } from "@hooks/store";
+import useDraggableInPortal from "@hooks/use-draggable-portal";
 // components
 import {
   CreateUpdateLabelInline,

@@ -4,8 +4,8 @@ import { Rocket, Search, X } from "lucide-react";
 // services
 import { ProjectService } from "@services/project";
 // hooks
-import useToast from "hooks/use-toast";
-import useDebounce from "hooks/use-debounce";
+import useToast from "@hooks/use-toast";
+import useDebounce from "@hooks/use-debounce";
 // ui
 import { Button, LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
 // types

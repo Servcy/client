@@ -10,7 +10,7 @@ import { Loader } from "@servcy/ui";
 // icons
 import { X } from "lucide-react";
 // helpers
-import { renderFormattedDate } from "helpers/date-time.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
 
 type Props = {
   isOpen: boolean;

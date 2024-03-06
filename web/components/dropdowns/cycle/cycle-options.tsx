@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 //components
 import { ContrastIcon, CycleGroupIcon } from "@servcy/ui";
 //store
-import { useApplication, useCycle } from "hooks/store";
+import { useApplication, useCycle } from "@hooks/store";
 //hooks
 import { usePopper } from "react-popper";
 //icon

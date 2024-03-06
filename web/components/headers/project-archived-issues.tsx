@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { ArrowLeft } from "lucide-react";
 // hooks
-import { useIssues, useLabel, useMember, useProject, useProjectState } from "hooks/store";
+import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store";
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "constants/issue";
 // ui
@@ -13,7 +13,7 @@ import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "compo
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "components/common";
 // helpers
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // types
 import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types";
 

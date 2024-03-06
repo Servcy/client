@@ -12,9 +12,9 @@ import {
   useProject,
   useWorkspace,
   useIssueDetail,
-} from "hooks/store";
-import useToast from "hooks/use-toast";
-import useLocalStorage from "hooks/use-local-storage";
+} from "@hooks/store";
+import useToast from "@hooks/use-toast";
+import useLocalStorage from "@hooks/use-local-storage";
 // components
 import { DraftIssueLayout } from "./draft-issue-layout";
 import { IssueFormRoot } from "./form";

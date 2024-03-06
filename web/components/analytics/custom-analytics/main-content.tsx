@@ -6,7 +6,7 @@ import { AnalyticsGraph, AnalyticsTable } from "components/analytics";
 // ui
 import { Button, Loader } from "@servcy/ui";
 // helpers
-import { convertResponseToBarGraphData } from "helpers/analytics.helper";
+import { convertResponseToBarGraphData } from "@helpers/analytics.helper";
 // types
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
 // fetch-keys

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
 // hooks
-import { useUser, useWorkspace } from "hooks/store";
+import { useUser, useWorkspace } from "@hooks/store";
 // ui
 import { Spinner } from "@servcy/ui";
 

@@ -1,15 +1,15 @@
 import { ReactElement } from "react";
 import { observer } from "mobx-react";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { PageHead } from "components/core";
 import { WorkspaceDashboardView } from "components/page-views";
 import { WorkspaceDashboardHeader } from "components/headers/workspace-dashboard";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // hooks
-import { useWorkspace } from "hooks/store";
+import { useWorkspace } from "@hooks/store";
 
 const WorkspacePage: NextPageWithLayout = observer(() => {
   const { currentWorkspace } = useWorkspace();

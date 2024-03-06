@@ -6,22 +6,22 @@ import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // hooks
-import { useApplication, useEventTracker, useUser, useProject } from "hooks/store";
-import useLocalStorage from "hooks/use-local-storage";
-import useUserAuth from "hooks/use-user-auth";
-import useSize from "hooks/use-window-size";
+import { useApplication, useEventTracker, useUser, useProject } from "@hooks/store";
+import useLocalStorage from "@hooks/use-local-storage";
+import useUserAuth from "@hooks/use-user-auth";
+import useSize from "@hooks/use-window-size";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { RecentPagesList, CreateUpdatePageModal } from "components/pages";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 import { PagesHeader } from "components/headers";
 import { PagesLoader } from "components/ui";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // constants
 import { PAGE_TABS_LIST } from "constants/page";
-import { useProjectPages } from "hooks/store/use-project-page";
+import { useProjectPages } from "@hooks/store/use-project-page";
 import { EUserWorkspaceRoles } from "constants/workspace";
 import { PAGE_EMPTY_STATE_DETAILS } from "constants/empty-state";
 import { PageHead } from "components/core";

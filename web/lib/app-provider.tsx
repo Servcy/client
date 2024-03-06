@@ -5,20 +5,20 @@ import NProgress from "nprogress";
 import { observer } from "mobx-react-lite";
 import { ThemeProvider } from "next-themes";
 // hooks
-import { useApplication, useUser, useWorkspace } from "hooks/store";
+import { useApplication, useUser, useWorkspace } from "@hooks/store";
 // constants
 import { THEMES } from "constants/themes";
 // layouts
-import InstanceLayout from "layouts/instance-layout";
+import InstanceLayout from "@layouts/instance-layout";
 // contexts
-import { ToastContextProvider } from "contexts/toast.context";
+import { ToastContextProvider } from "@contexts/toast.context";
 import { SWRConfig } from "swr";
 // constants
 import { SWR_CONFIG } from "constants/swr-config";
 // dynamic imports
-const StoreWrapper = dynamic(() => import("lib/wrappers/store-wrapper"), { ssr: false });
-const PostHogProvider = dynamic(() => import("lib/posthog-provider"), { ssr: false });
-const CrispWrapper = dynamic(() => import("lib/wrappers/crisp-wrapper"), { ssr: false });
+const StoreWrapper = dynamic(() => import("@lib/wrappers/store-wrapper"), { ssr: false });
+const PostHogProvider = dynamic(() => import("@lib/posthog-provider"), { ssr: false });
+const CrispWrapper = dynamic(() => import("@lib/wrappers/crisp-wrapper"), { ssr: false });
 
 // nprogress
 NProgress.configure({ showSpinner: false });

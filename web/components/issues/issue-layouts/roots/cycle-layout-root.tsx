@@ -5,7 +5,7 @@ import useSWR from "swr";
 import size from "lodash/size";
 import isEmpty from "lodash/isEmpty";
 // hooks
-import { useCycle, useIssues } from "hooks/store";
+import { useCycle, useIssues } from "@hooks/store";
 // components
 import {
   CycleAppliedFiltersRoot,

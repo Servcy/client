@@ -5,8 +5,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangleIcon } from "lucide-react";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useEventTracker, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
 // types

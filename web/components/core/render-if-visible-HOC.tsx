@@ -1,4 +1,4 @@
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 import React, { useState, useRef, useEffect, ReactNode, MutableRefObject } from "react";
 
 type Props = {

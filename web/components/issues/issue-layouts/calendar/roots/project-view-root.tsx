@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useIssues } from "hooks/store";
+import { useIssues } from "@hooks/store";
 // components
 import { ProjectIssueQuickActions } from "components/issues";
 import { BaseCalendarRoot } from "../base-calendar-root";

@@ -4,8 +4,8 @@ import { FC, useState } from "react";
 // UI
 import { Button, Loader } from "@servcy/ui";
 // hooks
-import { useIssueDetail } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useIssueDetail } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 import isNil from "lodash/isNil";
 
 export type TIssueSubscription = {

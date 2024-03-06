@@ -6,8 +6,8 @@ import { Controller, useForm } from "react-hook-form";
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
 import { Sparkle } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useWorkspace, useInboxIssues, useMention } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useApplication, useEventTracker, useWorkspace, useInboxIssues, useMention } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // services
 import { FileService } from "@services/file.service";
 import { AIService } from "@services/ai.service";

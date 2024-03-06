@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import useSWR, { mutate } from "swr";
 // hooks
-import { useEventTracker, useUser, useWorkspace } from "hooks/store";
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 // components
 import { Button } from "@servcy/ui";
 // helpers
-import { truncateText } from "helpers/string.helper";
+import { truncateText } from "@helpers/string.helper";
 // services
 import { WorkspaceService } from "@services/workspace.service";
 // constants
@@ -16,8 +16,8 @@ import { MEMBER_ACCEPTED } from "constants/event-tracker";
 import { IWorkspaceMemberInvitation } from "@servcy/types";
 // icons
 import { CheckCircle2, Search } from "lucide-react";
-import {} from "hooks/store/use-event-tracker";
-import { getUserRole } from "helpers/user.helper";
+import {} from "@hooks/store/use-event-tracker";
+import { getUserRole } from "@helpers/user.helper";
 
 type Props = {
   handleNextStep: () => void;

@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 // layouts
-import { AppLayout } from "layouts/app-layout";
-import { ProjectSettingLayout } from "layouts/settings-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { ProjectSettingLayout } from "@layouts/settings-layout";
 // components
 import { PageHead } from "components/core";
 import { ProjectSettingHeader } from "components/headers";
@@ -17,7 +17,7 @@ import {
   ProjectDetailsFormLoader,
 } from "components/project";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const GeneralSettingsPage: NextPageWithLayout = observer(() => {
   // states

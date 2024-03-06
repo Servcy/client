@@ -2,7 +2,7 @@ import { FC } from "react";
 import { observer } from "mobx-react";
 import { Inbox } from "lucide-react";
 // hooks
-import { useInboxIssues } from "hooks/store";
+import { useInboxIssues } from "@hooks/store";
 // components
 import { InboxIssueActionsHeader } from "components/inbox";
 import { InboxIssueDetailRoot } from "components/issues/issue-detail/inbox";

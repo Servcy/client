@@ -3,14 +3,14 @@ import { FC, useState, useEffect } from "react";
 import { Loader } from "@servcy/ui";
 import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor";
 // store hooks
-import { useMention, useWorkspace } from "hooks/store";
+import { useMention, useWorkspace } from "@hooks/store";
 // services
 import { FileService } from "@services/file.service";
 const fileService = new FileService();
 // types
 import { TIssueOperations } from "./issue-detail";
 // hooks
-import useDebounce from "hooks/use-debounce";
+import useDebounce from "@hooks/use-debounce";
 
 export type IssueDescriptionInputProps = {
   workspaceSlug: string;

@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 // store hooks
-import { useEventTracker, useGlobalView } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useGlobalView } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { WorkspaceViewForm } from "components/workspace";
 // types

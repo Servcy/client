@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 // hooks
 import { IGanttBlock } from "components/gantt-chart";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // constants
 import { SIDEBAR_WIDTH } from "../constants";
 import { useGanttChart } from "../hooks/use-gantt-chart";

@@ -3,13 +3,13 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import { Pencil, X } from "lucide-react";
 // hooks
-import { useIssueDetail, useProject } from "hooks/store";
+import { useIssueDetail, useProject } from "@hooks/store";
 // components
 import { ParentIssuesListModal } from "components/issues";
 // ui
 import { Tooltip } from "@servcy/ui";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { TIssueOperations } from "./root";
 

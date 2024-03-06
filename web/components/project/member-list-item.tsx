@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useEventTracker, useMember, useProject, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useMember, useProject, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { ConfirmProjectMemberRemove } from "components/project";
 // ui

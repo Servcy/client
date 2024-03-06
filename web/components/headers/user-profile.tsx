@@ -3,9 +3,9 @@ import { Breadcrumbs, CustomMenu } from "@servcy/ui";
 import { BreadcrumbLink } from "components/common";
 // components
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 import { FC } from "react";
-import { useApplication, useUser } from "hooks/store";
+import { useApplication, useUser } from "@hooks/store";
 import { ChevronDown, PanelRight } from "lucide-react";
 import { observer } from "mobx-react-lite";
 import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "constants/profile";

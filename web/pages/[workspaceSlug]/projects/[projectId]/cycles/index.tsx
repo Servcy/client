@@ -4,10 +4,10 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { Fragment, ReactElement, useCallback, useState } from "react";
 // hooks
-import { useCycle, useEventTracker, useProject, useUser } from "hooks/store";
-import useLocalStorage from "hooks/use-local-storage";
+import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store";
+import useLocalStorage from "@hooks/use-local-storage";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { PageHead } from "components/core";
 import { ActiveCycleDetails, CycleCreateUpdateModal, CyclesView } from "components/cycles";
@@ -18,7 +18,7 @@ import { Tooltip } from "@servcy/ui";
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "components/ui";
 // types
 import { TCycleLayout, TCycleView } from "@servcy/types";
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // constants
 import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "constants/cycle";
 import { CYCLE_EMPTY_STATE_DETAILS } from "constants/empty-state";

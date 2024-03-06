@@ -4,7 +4,7 @@ import { Loader } from "@servcy/ui";
 // image
 import emptyBarGraph from "public/empty-state/empty_bar_graph.svg";
 // helpers
-import { capitalizeFirstLetter } from "helpers/string.helper";
+import { capitalizeFirstLetter } from "@helpers/string.helper";
 // types
 import { IUserProfileData } from "@servcy/types";
 

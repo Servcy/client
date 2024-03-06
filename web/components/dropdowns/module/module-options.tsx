@@ -4,10 +4,10 @@ import { observer } from "mobx-react";
 //components
 import { DiceIcon } from "@servcy/ui";
 //store
-import { useApplication, useModule } from "hooks/store";
+import { useApplication, useModule } from "@hooks/store";
 //hooks
 import { usePopper } from "react-popper";
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 //icon
 import { Check, Search } from "lucide-react";
 //types

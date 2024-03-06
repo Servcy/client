@@ -13,8 +13,8 @@ import {
   useProjectState,
   useUser,
   useIssues,
-} from "hooks/store";
-import useLocalStorage from "hooks/use-local-storage";
+} from "@hooks/store";
+import useLocalStorage from "@hooks/use-local-storage";
 // components
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "components/issues";
 import { ProjectAnalyticsModal } from "components/analytics";
@@ -25,14 +25,14 @@ import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui";
 // icons
 import { ArrowRight, Plus, PanelRight } from "lucide-react";
 // helpers
-import { truncateText } from "helpers/string.helper";
-import { renderEmoji } from "helpers/emoji.helper";
+import { truncateText } from "@helpers/string.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "constants/issue";
 import { EUserProjectRoles } from "constants/project";
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 import { CycleMobileHeader } from "components/cycles/cycle-mobile-header";
 
 const CycleDropdownOption: React.FC<{ cycleId: string }> = ({ cycleId }) => {

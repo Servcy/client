@@ -4,14 +4,14 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import { Pencil, Trash2 } from "lucide-react";
 // store hooks
-import { useEventTracker, useGlobalView } from "hooks/store";
+import { useEventTracker, useGlobalView } from "@hooks/store";
 // components
 import { CreateUpdateWorkspaceViewModal, DeleteGlobalViewModal } from "components/workspace";
 // ui
 import { CustomMenu } from "@servcy/ui";
 // helpers
-import { truncateText } from "helpers/string.helper";
-import { calculateTotalFilters } from "helpers/filter.helper";
+import { truncateText } from "@helpers/string.helper";
+import { calculateTotalFilters } from "@helpers/filter.helper";
 
 type Props = { viewId: string };
 

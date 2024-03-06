@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Plus, ChevronRight, ChevronDown, Loader } from "lucide-react";
 // hooks
-import { useEventTracker, useIssueDetail } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useIssueDetail } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { ExistingIssuesListModal } from "components/core";
 import { CreateUpdateIssueModal, DeleteIssueModal } from "components/issues";
@@ -13,7 +13,7 @@ import { ProgressBar } from "./progressbar";
 // ui
 import { CustomMenu } from "@servcy/ui";
 // helpers
-import { copyTextToClipboard } from "helpers/string.helper";
+import { copyTextToClipboard } from "@helpers/string.helper";
 // types
 import { IUser, TIssue } from "@servcy/types";
 

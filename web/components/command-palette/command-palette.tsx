@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useEventTracker, useIssues, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { CommandModal, ShortcutsModal } from "components/command-palette";
 import { BulkDeleteIssuesModal } from "components/core";
@@ -15,7 +15,7 @@ import { CreateProjectModal } from "components/project";
 import { CreateUpdateProjectViewModal } from "components/views";
 import { CreateUpdatePageModal } from "components/pages";
 // helpers
-import { copyTextToClipboard } from "helpers/string.helper";
+import { copyTextToClipboard } from "@helpers/string.helper";
 // services
 import { IssueService } from "@services/issue";
 // fetch keys

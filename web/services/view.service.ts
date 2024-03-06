@@ -2,7 +2,7 @@ import { APIService } from "@services/api.service";
 // types
 import { IProjectView } from "@servcy/types";
 // helpers
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 
 export class ViewService extends APIService {
   constructor() {

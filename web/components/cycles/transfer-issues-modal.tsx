@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 // hooks
-import useToast from "hooks/use-toast";
-import { useCycle, useIssues } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useCycle, useIssues } from "@hooks/store";
 //icons
 import { ContrastIcon, TransferIcon } from "@servcy/ui";
 import { AlertCircle, Search, X } from "lucide-react";

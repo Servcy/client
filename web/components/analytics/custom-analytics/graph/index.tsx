@@ -6,8 +6,8 @@ import { Tooltip } from "@servcy/ui";
 // ui
 import { BarGraph } from "components/ui";
 // helpers
-import { findStringWithMostCharacters } from "helpers/array.helper";
-import { generateBarColor, generateDisplayName } from "helpers/analytics.helper";
+import { findStringWithMostCharacters } from "@helpers/array.helper";
+import { generateBarColor, generateDisplayName } from "@helpers/analytics.helper";
 // types
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
 

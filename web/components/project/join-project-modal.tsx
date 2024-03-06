@@ -2,7 +2,7 @@ import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import { Transition, Dialog } from "@headlessui/react";
 // hooks
-import { useProject, useUser } from "hooks/store";
+import { useProject, useUser } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";
 // types

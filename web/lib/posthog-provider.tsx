@@ -5,7 +5,7 @@ import { FC, ReactNode, useEffect, useState } from "react";
 // mobx store provider
 import { IUser } from "@servcy/types";
 // helpers
-import { getUserRole } from "helpers/user.helper";
+import { getUserRole } from "@helpers/user.helper";
 // constants
 import { GROUP_WORKSPACE } from "constants/event-tracker";
 

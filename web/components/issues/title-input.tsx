@@ -5,7 +5,7 @@ import { TextArea } from "@servcy/ui";
 // types
 import { TIssueOperations } from "./issue-detail";
 // hooks
-import useDebounce from "hooks/use-debounce";
+import useDebounce from "@hooks/use-debounce";
 
 export type IssueTitleInputProps = {
   disabled?: boolean;

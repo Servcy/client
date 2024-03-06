@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useEventTracker, useProjectState } from "hooks/store";
+import { useEventTracker, useProjectState } from "@hooks/store";
 // ui
 import { Tooltip, StateGroupIcon } from "@servcy/ui";
 // icons
 import { Pencil, X, ArrowDown, ArrowUp } from "lucide-react";
 // helpers
-import { addSpaceIfCamelCase } from "helpers/string.helper";
+import { addSpaceIfCamelCase } from "@helpers/string.helper";
 // types
 import { IState } from "@servcy/types";
 

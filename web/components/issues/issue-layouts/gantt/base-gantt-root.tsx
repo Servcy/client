@@ -2,12 +2,12 @@ import React from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useIssues, useUser } from "hooks/store";
+import { useIssues, useUser } from "@hooks/store";
 // components
 import { GanttQuickAddIssueForm, IssueGanttBlock } from "components/issues";
 import { GanttChartRoot, IBlockUpdateData, IssueGanttSidebar } from "components/gantt-chart";
 // helpers
-import { renderIssueBlocksStructure } from "helpers/issue.helper";
+import { renderIssueBlocksStructure } from "@helpers/issue.helper";
 // types
 import { TIssue, TUnGroupedIssues } from "@servcy/types";
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";

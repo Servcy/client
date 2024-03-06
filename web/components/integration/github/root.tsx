@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 // services
 import { IntegrationService, GithubIntegrationService } from "@services/integrations";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // components
 import {
   GithubImportConfigure,

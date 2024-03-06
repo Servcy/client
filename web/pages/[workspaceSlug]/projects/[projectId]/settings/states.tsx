@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
 // layout
-import { AppLayout } from "layouts/app-layout";
-import { ProjectSettingLayout } from "layouts/settings-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { ProjectSettingLayout } from "@layouts/settings-layout";
 // components
 import { ProjectSettingStateList } from "components/states";
 import { ProjectSettingHeader } from "components/headers";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const StatesSettingsPage: NextPageWithLayout = () => (
   <div className="w-full gap-10 overflow-y-auto py-8 pr-9">

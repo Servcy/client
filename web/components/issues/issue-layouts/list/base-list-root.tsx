@@ -17,7 +17,7 @@ import { IQuickActionProps } from "./list-view-types";
 import { EUserProjectRoles } from "constants/project";
 import { TCreateModalStoreTypes } from "constants/issue";
 // hooks
-import { useIssues, useUser } from "hooks/store";
+import { useIssues, useUser } from "@hooks/store";
 
 interface IBaseListRoot {
   issuesFilter:

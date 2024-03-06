@@ -37,6 +37,8 @@
       "@services/*": ["./services/*"],
       "@lib/*": ["./lib/*"],
       "@hooks/*": ["./hooks/*"],
+      "@contexts/*": ["./contexts/*"],
+      "@helpers/*": ["./helpers/*"],
       "@layouts/*": ["./hooks/*"],
       "@store/*": ["./store/*"]
     }

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import useToast from "hooks/use-toast";
-import { useEventTracker } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useEventTracker } from "@hooks/store";
 // services
 import { IssueDraftService } from "@services/issue";
 // components

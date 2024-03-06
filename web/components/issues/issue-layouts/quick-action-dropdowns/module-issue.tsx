@@ -5,12 +5,12 @@ import { observer } from "mobx-react";
 import { Copy, ExternalLink, Link, Pencil, Trash2, XCircle } from "lucide-react";
 import omit from "lodash/omit";
 // hooks
-import useToast from "hooks/use-toast";
-import { useIssues, useEventTracker, useUser, useProjectState } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useIssues, useEventTracker, useUser, useProjectState } from "@hooks/store";
 // components
 import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "components/issues";
 // helpers
-import { copyUrlToClipboard } from "helpers/string.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
 // types
 import { TIssue } from "@servcy/types";
 import { IQuickActionProps } from "../list/list-view-types";

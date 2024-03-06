@@ -5,8 +5,8 @@ import { TwitterPicker } from "react-color";
 import { Popover, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useEventTracker, useProjectState } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useProjectState } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, CustomSelect, Input, Tooltip } from "@servcy/ui";
 // types

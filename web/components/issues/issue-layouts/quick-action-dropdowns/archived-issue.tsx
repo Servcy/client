@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { CustomMenu } from "@servcy/ui";
 import { ExternalLink, Link, RotateCcw, Trash2 } from "lucide-react";
 // hooks
-import useToast from "hooks/use-toast";
-import { useEventTracker, useIssues, useUser } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useEventTracker, useIssues, useUser } from "@hooks/store";
 // components
 import { DeleteIssueModal } from "components/issues";
 // helpers
-import { copyUrlToClipboard } from "helpers/string.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
 // types
 import { IQuickActionProps } from "../list/list-view-types";
 import { EUserProjectRoles } from "constants/project";

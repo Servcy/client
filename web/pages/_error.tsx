@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 // services
 import { AuthService } from "@services/auth.service";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // layouts
-import DefaultLayout from "layouts/default-layout";
+import DefaultLayout from "@layouts/default-layout";
 // ui
 import { Button } from "@servcy/ui";
 

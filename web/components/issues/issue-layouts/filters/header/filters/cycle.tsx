@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import sortBy from "lodash/sortBy";
 // components
 import { FilterHeader, FilterOption } from "components/issues";
-import { useApplication, useCycle } from "hooks/store";
+import { useApplication, useCycle } from "@hooks/store";
 // ui
 import { Loader, CycleGroupIcon } from "@servcy/ui";
 // types

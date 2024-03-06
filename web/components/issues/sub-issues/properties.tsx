@@ -1,6 +1,6 @@
 import React from "react";
 // hooks
-import { useIssueDetail } from "hooks/store";
+import { useIssueDetail } from "@hooks/store";
 // components
 import { PriorityDropdown, MemberDropdown, StateDropdown } from "components/dropdowns";
 // types

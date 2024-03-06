@@ -3,7 +3,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 import { usePopper } from "react-popper";
 //hooks
-import { useCalendarView } from "hooks/store";
+import { useCalendarView } from "@hooks/store";
 // icons
 import { ChevronLeft, ChevronRight } from "lucide-react";
 // constants

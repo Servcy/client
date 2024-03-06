@@ -2,7 +2,7 @@
 import { APIService } from "@services/api.service";
 // types
 import type { ILinkDetails, IModule, ModuleLink, TIssue } from "@servcy/types";
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 
 export class ModuleService extends APIService {
   constructor() {

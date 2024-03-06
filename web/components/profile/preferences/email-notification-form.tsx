@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 // ui
 import { Button, Checkbox } from "@servcy/ui";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // services
 import { UserService } from "@services/user.service";
 // types

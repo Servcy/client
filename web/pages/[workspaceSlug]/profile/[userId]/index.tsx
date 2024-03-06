@@ -4,8 +4,8 @@ import useSWR from "swr";
 // services
 import { UserService } from "@services/user.service";
 // layouts
-import { AppLayout } from "layouts/app-layout";
-import { ProfileAuthWrapper } from "layouts/user-profile-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { ProfileAuthWrapper } from "@layouts/user-profile-layout";
 // components
 import { PageHead } from "components/core";
 import { UserProfileHeader } from "components/headers";
@@ -18,7 +18,7 @@ import {
 } from "components/profile";
 // types
 import { IUserStateDistribution, TStateGroups } from "@servcy/types";
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // constants
 import { USER_PROFILE_DATA } from "constants/fetch-keys";
 import { GROUP_CHOICES } from "constants/project";

@@ -12,7 +12,7 @@ import {
   CalendarCheck2,
 } from "lucide-react";
 // hooks
-import { useIssueDetail, useProject, useProjectState } from "hooks/store";
+import { useIssueDetail, useProject, useProjectState } from "@hooks/store";
 // ui icons
 import { DiceIcon, DoubleCircleIcon, UserGroupIcon, ContrastIcon, RelatedIcon } from "@servcy/ui";
 import {
@@ -26,10 +26,10 @@ import {
 } from "components/issues";
 import { DateDropdown, EstimateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "components/dropdowns";
 // components
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // helpers
-import { cn } from "helpers/common.helper";
-import { shouldHighlightIssueDueDate } from "helpers/issue.helper";
+import { cn } from "@helpers/common.helper";
+import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
 
 interface IPeekOverviewProperties {
   workspaceSlug: string;

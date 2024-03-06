@@ -4,9 +4,9 @@ import { observer } from "mobx-react-lite";
 // ui
 import { Breadcrumbs, CustomMenu } from "@servcy/ui";
 // helper
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // hooks
-import { useProject, useUser } from "hooks/store";
+import { useProject, useUser } from "@hooks/store";
 // constants
 import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "constants/project";
 // components

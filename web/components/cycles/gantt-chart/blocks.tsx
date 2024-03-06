@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
 // hooks
-import { useApplication, useCycle } from "hooks/store";
+import { useApplication, useCycle } from "@hooks/store";
 // ui
 import { Tooltip, ContrastIcon } from "@servcy/ui";
 // helpers
-import { renderFormattedDate } from "helpers/date-time.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
 
 type Props = {
   cycleId: string;

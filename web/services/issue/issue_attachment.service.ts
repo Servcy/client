@@ -1,6 +1,6 @@
 import { APIService } from "@services/api.service";
 // helper
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 // types
 import { TIssueAttachment } from "@servcy/types";
 

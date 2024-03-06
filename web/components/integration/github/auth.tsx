@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication } from "hooks/store";
-import useIntegrationPopup from "hooks/use-integration-popup";
+import { useApplication } from "@hooks/store";
+import useIntegrationPopup from "@hooks/use-integration-popup";
 // ui
 import { Button } from "@servcy/ui";
 // types

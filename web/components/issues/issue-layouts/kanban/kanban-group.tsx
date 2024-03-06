@@ -1,7 +1,7 @@
 import { MutableRefObject } from "react";
 import { Droppable } from "@hello-pangea/dnd";
 // hooks
-import { useProjectState } from "hooks/store";
+import { useProjectState } from "@hooks/store";
 //components
 import { KanbanIssueBlocksList, KanBanQuickAddIssueForm } from ".";
 //types

@@ -10,7 +10,7 @@ import { IssueReactionService } from "@services/issue";
 import { TIssueReaction, TIssueReactionIdMap, TIssueReactionMap } from "@servcy/types";
 import { IIssueDetail } from "./root.store";
 // helpers
-import { groupReactions } from "helpers/emoji.helper";
+import { groupReactions } from "@helpers/emoji.helper";
 
 export interface IIssueReactionStoreActions {
   // actions

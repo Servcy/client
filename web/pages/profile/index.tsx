@@ -5,11 +5,11 @@ import { Controller, useForm } from "react-hook-form";
 // services
 import { FileService } from "@services/file.service";
 // hooks
-import { useApplication, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
-import useUserAuth from "hooks/use-user-auth";
+import { useApplication, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
+import useUserAuth from "@hooks/use-user-auth";
 // layouts
-import { ProfileSettingsLayout } from "layouts/settings-layout";
+import { ProfileSettingsLayout } from "@layouts/settings-layout";
 // components
 import { DeactivateAccountModal } from "components/account";
 import { ImagePickerPopover, PageHead, UserImageUploadModal } from "components/core";
@@ -19,7 +19,7 @@ import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servc
 import { ChevronDown, User2 } from "lucide-react";
 // types
 import type { IUser } from "@servcy/types";
-import type { NextPageWithLayout } from "lib/types";
+import type { NextPageWithLayout } from "@lib/types";
 // constants
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { TIME_ZONES } from "constants/timezones";

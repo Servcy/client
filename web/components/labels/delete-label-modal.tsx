@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useLabel } from "hooks/store";
+import { useLabel } from "@hooks/store";
 // icons
 import { AlertTriangle } from "lucide-react";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button } from "@servcy/ui";
 // types

@@ -6,7 +6,7 @@ import { EIssueActions } from "../types";
 //components
 import { SpreadsheetIssueRow } from "./issue-row";
 import { SpreadsheetHeader } from "./spreadsheet-header";
-import { useTableKeyboardNavigation } from "hooks/use-table-keyboard-navigation";
+import { useTableKeyboardNavigation } from "@hooks/use-table-keyboard-navigation";
 
 type Props = {
   displayProperties: IIssueDisplayProperties;

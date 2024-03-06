@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import sortBy from "lodash/sortBy";
 // components
 import { FilterHeader, FilterOption } from "components/issues";
-import { useApplication, useModule } from "hooks/store";
+import { useApplication, useModule } from "@hooks/store";
 // ui
 import { Loader, DiceIcon } from "@servcy/ui";
 

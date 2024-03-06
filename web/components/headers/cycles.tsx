@@ -3,18 +3,18 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { List, Plus } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useProject, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 // ui
 import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui";
 // helpers
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 import { EUserProjectRoles } from "constants/project";
 // components
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "components/common";
 import { TCycleLayout } from "@servcy/types";
 import { CYCLE_VIEW_LAYOUTS } from "constants/cycle";
-import useLocalStorage from "hooks/use-local-storage";
+import useLocalStorage from "@hooks/use-local-storage";
 
 export const CyclesHeader: FC = observer(() => {
   // router

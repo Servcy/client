@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 // hooks
-import useReloadConfirmations from "hooks/use-reload-confirmation";
+import useReloadConfirmations from "@hooks/use-reload-confirmation";
 import debounce from "lodash/debounce";
 // components
 import { Loader, TextArea } from "@servcy/ui";
@@ -11,7 +11,7 @@ import { TIssue } from "@servcy/types";
 import { TIssueOperations } from "./issue-detail";
 // services
 import { FileService } from "@services/file.service";
-import { useMention, useWorkspace } from "hooks/store";
+import { useMention, useWorkspace } from "@hooks/store";
 import { observer } from "mobx-react";
 
 export interface IssueDescriptionFormValues {

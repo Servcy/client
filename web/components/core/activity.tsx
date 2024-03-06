@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 // store hooks
-import { useEstimate, useLabel } from "hooks/store";
+import { useEstimate, useLabel } from "@hooks/store";
 // icons
 import { Tooltip, BlockedIcon, BlockerIcon, RelatedIcon, LayersIcon, DiceIcon } from "@servcy/ui";
 import {
@@ -21,8 +21,8 @@ import {
   UsersIcon,
 } from "lucide-react";
 // helpers
-import { renderFormattedDate } from "helpers/date-time.helper";
-import { capitalizeFirstLetter } from "helpers/string.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
+import { capitalizeFirstLetter } from "@helpers/string.helper";
 // types
 import { IIssueActivity } from "@servcy/types";
 

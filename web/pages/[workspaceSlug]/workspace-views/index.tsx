@@ -1,7 +1,7 @@
 import React, { useState, ReactElement } from "react";
 import { observer } from "mobx-react";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { PageHead } from "components/core";
 import { GlobalDefaultViewListItem, GlobalViewsList } from "components/workspace";
@@ -11,11 +11,11 @@ import { Input } from "@servcy/ui";
 // icons
 import { Search } from "lucide-react";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // constants
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "constants/workspace";
 // hooks
-import { useWorkspace } from "hooks/store";
+import { useWorkspace } from "@hooks/store";
 
 const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
   const [query, setQuery] = useState("");

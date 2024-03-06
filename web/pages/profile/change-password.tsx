@@ -3,19 +3,19 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Controller, useForm } from "react-hook-form";
 // hooks
-import { useApplication, useUser } from "hooks/store";
+import { useApplication, useUser } from "@hooks/store";
 // services
 import { UserService } from "@services/user.service";
 // components
 import { PageHead } from "components/core";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // layout
-import { ProfileSettingsLayout } from "layouts/settings-layout";
+import { ProfileSettingsLayout } from "@layouts/settings-layout";
 // ui
 import { Button, Input, Spinner } from "@servcy/ui";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 
 interface FormValues {

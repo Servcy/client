@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 // store hooks
-import { useGlobalView } from "hooks/store";
+import { useGlobalView } from "@hooks/store";
 // components
 import { GlobalViewListItem } from "components/workspace";
 // ui

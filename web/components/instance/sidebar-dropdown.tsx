@@ -9,9 +9,9 @@ import { Menu, Transition } from "@headlessui/react";
 // icons
 import { LogIn, LogOut, Settings, UserCog2 } from "lucide-react";
 // hooks
-import { useApplication, useUser } from "hooks/store";
+import { useApplication, useUser } from "@hooks/store";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { Avatar, Tooltip } from "@servcy/ui";
 

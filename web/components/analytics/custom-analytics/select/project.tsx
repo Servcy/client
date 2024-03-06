@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 // ui
 import { CustomSearchSelect } from "@servcy/ui";
 

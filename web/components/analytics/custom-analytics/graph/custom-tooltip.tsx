@@ -1,7 +1,7 @@
 // nivo
 import { BarTooltipProps } from "@nivo/bar";
 import { DATE_KEYS } from "constants/analytics";
-import { renderMonthAndYear } from "helpers/analytics.helper";
+import { renderMonthAndYear } from "@helpers/analytics.helper";
 // types
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
 

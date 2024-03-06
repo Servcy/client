@@ -10,7 +10,7 @@ import {
   MoveRight,
 } from "lucide-react";
 //hooks
-import useLocalStorage from "hooks/use-local-storage";
+import useLocalStorage from "@hooks/use-local-storage";
 //types
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueOrderByOptions } from "@servcy/types";
 //constants

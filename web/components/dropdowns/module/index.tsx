@@ -3,15 +3,15 @@ import { observer } from "mobx-react-lite";
 import { Combobox } from "@headlessui/react";
 import { ChevronDown, X } from "lucide-react";
 // hooks
-import { useModule } from "hooks/store";
-import { useDropdownKeyDown } from "hooks/use-dropdown-key-down";
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import { useModule } from "@hooks/store";
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // components
 import { DropdownButton } from "../buttons";
 // icons
 import { DiceIcon, Tooltip } from "@servcy/ui";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { TDropdownProps } from "../types";
 // constants

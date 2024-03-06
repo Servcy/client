@@ -6,15 +6,15 @@ import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 // services
 import { FileService } from "@services/file.service";
 // hooks
-import { useEventTracker, useUser, useWorkspace } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { DeleteWorkspaceModal } from "components/workspace";
 import { WorkspaceImageUploadModal } from "components/core";
 // ui
 import { Button, CustomSelect, Input, Spinner } from "@servcy/ui";
 // helpers
-import { copyUrlToClipboard } from "helpers/string.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
 // types
 import { IWorkspace } from "@servcy/types";
 // constants

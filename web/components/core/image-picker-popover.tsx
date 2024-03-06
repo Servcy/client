@@ -7,12 +7,12 @@ import { useDropzone } from "react-dropzone";
 import { Tab, Popover } from "@headlessui/react";
 import { Control, Controller } from "react-hook-form";
 // hooks
-import { useApplication, useWorkspace } from "hooks/store";
-import { useDropdownKeyDown } from "hooks/use-dropdown-key-down";
+import { useApplication, useWorkspace } from "@hooks/store";
+import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 // services
 import { FileService } from "@services/file.service";
 // hooks
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // components
 import { Button, Input, Loader } from "@servcy/ui";
 // constants

@@ -3,9 +3,9 @@ import { Popover, Transition } from "@headlessui/react";
 import { Bell } from "lucide-react";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication } from "hooks/store";
-import useUserNotification from "hooks/use-user-notifications";
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import { useApplication } from "@hooks/store";
+import useUserNotification from "@hooks/use-user-notifications";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // components
 import { EmptyState } from "components/common";
 import { SnoozeNotificationModal, NotificationCard, NotificationHeader } from "components/notifications";
@@ -14,7 +14,7 @@ import { NotificationsLoader } from "components/ui";
 // images
 import emptyNotification from "public/empty-state/notification.svg";
 // helpers
-import { getNumberCount } from "helpers/string.helper";
+import { getNumberCount } from "@helpers/string.helper";
 
 export const NotificationPopover = observer(() => {
   // states

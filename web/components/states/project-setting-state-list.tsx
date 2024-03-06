@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useEventTracker, useProjectState } from "hooks/store";
+import { useEventTracker, useProjectState } from "@hooks/store";
 // components
 import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem } from "components/states";
 // ui
@@ -11,8 +11,8 @@ import { Loader } from "@servcy/ui";
 // icons
 import { Plus } from "lucide-react";
 // helpers
-import { orderStateGroups } from "helpers/state.helper";
-import { sortByField } from "helpers/array.helper";
+import { orderStateGroups } from "@helpers/state.helper";
+import { sortByField } from "@helpers/array.helper";
 // fetch-keys
 import { STATES_LIST } from "constants/fetch-keys";
 

@@ -4,8 +4,8 @@ import { observer } from "mobx-react-lite";
 import { ContrastIcon, FileText, Inbox, Layers } from "lucide-react";
 import { DiceIcon, ToggleSwitch } from "@servcy/ui";
 // hooks
-import { useEventTracker, useProject, useUser, useWorkspace } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // types
 import { IProject } from "@servcy/types";
 // constants

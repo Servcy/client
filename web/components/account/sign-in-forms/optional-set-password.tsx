@@ -3,12 +3,12 @@ import { Controller, useForm } from "react-hook-form";
 // services
 import { AuthService } from "@services/auth.service";
 // hooks
-import useToast from "hooks/use-toast";
-import { useEventTracker } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useEventTracker } from "@hooks/store";
 // ui
 import { Button, Input } from "@servcy/ui";
 // helpers
-import { checkEmailValidity } from "helpers/string.helper";
+import { checkEmailValidity } from "@helpers/string.helper";
 // icons
 import { Eye, EyeOff } from "lucide-react";
 import { PASSWORD_CREATE_SELECTED, PASSWORD_CREATE_SKIPPED } from "constants/event-tracker";

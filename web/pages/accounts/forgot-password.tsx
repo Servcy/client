@@ -5,11 +5,11 @@ import { Controller, useForm } from "react-hook-form";
 // services
 import { AuthService } from "@services/auth.service";
 // hooks
-import useToast from "hooks/use-toast";
-import useTimer from "hooks/use-timer";
-import { useEventTracker } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import useTimer from "@hooks/use-timer";
+import { useEventTracker } from "@hooks/store";
 // layouts
-import DefaultLayout from "layouts/default-layout";
+import DefaultLayout from "@layouts/default-layout";
 // components
 import { LatestFeatureBlock } from "components/common";
 import { PageHead } from "components/core";
@@ -18,9 +18,9 @@ import { Button, Input } from "@servcy/ui";
 // images
 import ServcyLogo from "public/logo.png";
 // helpers
-import { checkEmailValidity } from "helpers/string.helper";
+import { checkEmailValidity } from "@helpers/string.helper";
 // type
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 import { FORGOT_PASS_LINK } from "constants/event-tracker";
 
 type TForgotPasswordFormValues = {

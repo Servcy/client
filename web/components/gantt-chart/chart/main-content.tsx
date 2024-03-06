@@ -18,7 +18,7 @@ import {
   YearChartView,
 } from "components/gantt-chart";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 
 type Props = {
   blocks: IGanttBlock[] | null;

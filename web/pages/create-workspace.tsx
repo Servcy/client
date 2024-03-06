@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // layouts
-import { UserAuthWrapper } from "layouts/auth-layout";
-import DefaultLayout from "layouts/default-layout";
+import { UserAuthWrapper } from "@layouts/auth-layout";
+import DefaultLayout from "@layouts/default-layout";
 // components
 import { PageHead } from "components/core";
 import { CreateWorkspaceForm } from "components/workspace";
@@ -15,7 +15,7 @@ import { CreateWorkspaceForm } from "components/workspace";
 import ServcyLogo from "public/logo.svg";
 // types
 import { IWorkspace } from "@servcy/types";
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const CreateWorkspacePage: NextPageWithLayout = observer(() => {
   // router

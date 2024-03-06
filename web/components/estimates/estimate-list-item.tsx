@@ -2,14 +2,14 @@ import React from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useProject } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useProject } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, CustomMenu } from "@servcy/ui";
 //icons
 import { Pencil, Trash2 } from "lucide-react";
 // helpers
-import { orderArrayBy } from "helpers/array.helper";
+import { orderArrayBy } from "@helpers/array.helper";
 // types
 import { IEstimate } from "@servcy/types";
 

@@ -17,21 +17,21 @@ import { Check, ChevronDown, Plus, XCircle } from "lucide-react";
 // services
 import { WorkspaceService } from "@services/workspace.service";
 // hooks
-import useToast from "hooks/use-toast";
-import { useEventTracker } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useEventTracker } from "@hooks/store";
 // ui
 import { Button, Input } from "@servcy/ui";
 // components
 import { OnboardingStepIndicator } from "components/onboarding/step-indicator";
 // hooks
-import useDynamicDropdownPosition from "hooks/use-dynamic-dropdown";
+import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown";
 // types
 import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
 // constants
 import { EUserWorkspaceRoles, ROLE } from "constants/workspace";
 import { MEMBER_INVITED } from "constants/event-tracker";
 // helpers
-import { getUserRole } from "helpers/user.helper";
+import { getUserRole } from "@helpers/user.helper";
 // assets
 import user1 from "public/users/user-1.png";
 import user2 from "public/users/user-2.png";

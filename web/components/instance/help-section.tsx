@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react";
 import Link from "next/link";
 import { HelpCircle, MessagesSquare, MoveLeft } from "lucide-react";
 // hooks
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 // assets
 import packageJson from "package.json";
 

@@ -1,7 +1,7 @@
 import { APIService } from "@services/api.service";
 // helpers
 import { TIssue } from "@servcy/types";
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 
 export class IssueDraftService extends APIService {
   constructor() {

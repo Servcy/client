@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Search } from "lucide-react";
 import { useTheme } from "next-themes";
 // hooks
-import { useApplication, useProjectView, useUser } from "hooks/store";
+import { useApplication, useProjectView, useUser } from "@hooks/store";
 // components
 import { ProjectViewListItem } from "components/views";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";

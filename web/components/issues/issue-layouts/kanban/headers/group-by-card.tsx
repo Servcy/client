@@ -7,8 +7,8 @@ import { CreateUpdateIssueModal } from "components/issues";
 // lucide icons
 import { Minimize2, Maximize2, Circle, Plus } from "lucide-react";
 // hooks
-import useToast from "hooks/use-toast";
-import { useEventTracker } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useEventTracker } from "@hooks/store";
 // mobx
 import { observer } from "mobx-react-lite";
 // types

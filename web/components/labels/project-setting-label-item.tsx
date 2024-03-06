@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { DraggableProvidedDragHandleProps, DraggableStateSnapshot } from "@hello-pangea/dnd";
 import { X, Pencil } from "lucide-react";
 // hooks
-import { useLabel } from "hooks/store";
+import { useLabel } from "@hooks/store";
 // types
 import { IIssueLabel } from "@servcy/types";
 // components

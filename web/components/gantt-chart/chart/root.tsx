@@ -11,7 +11,7 @@ import {
   getMonthChartItemPositionWidthInMonth,
 } from "../views";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { ChartDataType, IBlockUpdateData, IGanttBlock, TGanttViews } from "../types";
 // data

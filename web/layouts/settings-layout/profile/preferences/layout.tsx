@@ -1,13 +1,13 @@
 import { FC, ReactNode } from "react";
 // layout
-import { ProfileSettingsLayout } from "layouts/settings-layout";
+import { ProfileSettingsLayout } from "@layouts/settings-layout";
 import { ProfilePreferenceSettingsSidebar } from "./sidebar";
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { CustomMenu } from "@servcy/ui";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 
 interface IProfilePreferenceSettingsLayout {
   children: ReactNode;

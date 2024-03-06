@@ -4,15 +4,15 @@ import { observer } from "mobx-react-lite";
 import { LinkIcon, Lock, Pencil, Star } from "lucide-react";
 import Link from "next/link";
 // hooks
-import { useProject } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useProject } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { DeleteProjectModal, JoinProjectModal } from "components/project";
 // ui
 import { Avatar, AvatarGroup, Button, Tooltip } from "@servcy/ui";
 // helpers
-import { copyTextToClipboard } from "helpers/string.helper";
-import { renderEmoji } from "helpers/emoji.helper";
+import { copyTextToClipboard } from "@helpers/string.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // types
 import type { IProject } from "@servcy/types";
 // constants

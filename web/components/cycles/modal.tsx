@@ -3,9 +3,9 @@ import { Dialog, Transition } from "@headlessui/react";
 // services
 import { CycleService } from "@services/cycle.service";
 // hooks
-import { useEventTracker, useCycle, useProject } from "hooks/store";
-import useToast from "hooks/use-toast";
-import useLocalStorage from "hooks/use-local-storage";
+import { useEventTracker, useCycle, useProject } from "@hooks/store";
+import useToast from "@hooks/use-toast";
+import useLocalStorage from "@hooks/use-local-storage";
 // components
 import { CycleForm } from "components/cycles";
 // types

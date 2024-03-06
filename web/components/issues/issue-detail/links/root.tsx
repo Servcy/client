@@ -1,8 +1,8 @@
 import { FC, useCallback, useMemo, useState } from "react";
 import { Plus } from "lucide-react";
 // hooks
-import { useIssueDetail } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useIssueDetail } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { IssueLinkCreateUpdateModal } from "./create-update-link-modal";
 import { IssueLinkList } from "./links";

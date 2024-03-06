@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 // services
 import { APITokenService } from "@services/api_token.service";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button } from "@servcy/ui";
 // types

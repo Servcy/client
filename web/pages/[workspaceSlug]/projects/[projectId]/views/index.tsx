@@ -6,11 +6,11 @@ import { ProjectViewsHeader } from "components/headers";
 import { ProjectViewsList } from "components/views";
 import { PageHead } from "components/core";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const ProjectViewsPage: NextPageWithLayout = observer(() => {
   // router

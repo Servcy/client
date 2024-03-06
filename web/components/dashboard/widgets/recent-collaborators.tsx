@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useDashboard, useMember, useUser } from "hooks/store";
+import { useDashboard, useMember, useUser } from "@hooks/store";
 // components
 import { RecentCollaboratorsEmptyState, WidgetLoader, WidgetProps } from "components/dashboard/widgets";
 // ui

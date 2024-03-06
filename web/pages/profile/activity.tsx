@@ -3,11 +3,11 @@ import useSWR from "swr";
 import Link from "next/link";
 import { observer } from "mobx-react";
 //hooks
-import { useApplication, useUser } from "hooks/store";
+import { useApplication, useUser } from "@hooks/store";
 // services
 import { UserService } from "@services/user.service";
 // layouts
-import { ProfileSettingsLayout } from "layouts/settings-layout";
+import { ProfileSettingsLayout } from "@layouts/settings-layout";
 // components
 import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "components/core";
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor";
@@ -18,9 +18,9 @@ import { ActivitySettingsLoader } from "components/ui";
 // fetch-keys
 import { USER_ACTIVITY } from "constants/fetch-keys";
 // helper
-import { calculateTimeAgo } from "helpers/date-time.helper";
+import { calculateTimeAgo } from "@helpers/date-time.helper";
 // type
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 
 const userService = new UserService();

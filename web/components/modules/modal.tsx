@@ -3,8 +3,8 @@ import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 // hooks
-import { useEventTracker, useModule, useProject } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useModule, useProject } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { ModuleForm } from "components/modules";
 // types

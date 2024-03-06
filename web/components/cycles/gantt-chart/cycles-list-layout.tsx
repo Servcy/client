@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useCycle, useUser } from "hooks/store";
+import { useCycle, useUser } from "@hooks/store";
 // components
 import { GanttChartRoot, IBlockUpdateData, CycleGanttSidebar } from "components/gantt-chart";
 import { CycleGanttBlock } from "components/cycles";

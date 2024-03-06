@@ -1,6 +1,6 @@
 import { useContext } from "react";
 // mobx store
-import { StoreContext } from "contexts/store-context";
+import { StoreContext } from "@contexts/store-context";
 // types
 import { IProjectViewStore } from "@store/project-view.store";
 

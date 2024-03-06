@@ -4,15 +4,15 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { LinkIcon, PencilIcon, StarIcon, TrashIcon } from "lucide-react";
 // hooks
-import { useProjectView, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useProjectView, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "components/views";
 // ui
 import { CustomMenu } from "@servcy/ui";
 // helpers
-import { calculateTotalFilters } from "helpers/filter.helper";
-import { copyUrlToClipboard } from "helpers/string.helper";
+import { calculateTotalFilters } from "@helpers/filter.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
 // types
 import { IProjectView } from "@servcy/types";
 // constants

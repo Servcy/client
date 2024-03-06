@@ -7,9 +7,9 @@ import useSWR, { mutate } from "swr";
 // services
 import { IntegrationService } from "@services/integrations";
 // hooks
-import { useApplication, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
-import useIntegrationPopup from "hooks/use-integration-popup";
+import { useApplication, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
+import useIntegrationPopup from "@hooks/use-integration-popup";
 // ui
 import { Button, Loader, Tooltip } from "@servcy/ui";
 // icons

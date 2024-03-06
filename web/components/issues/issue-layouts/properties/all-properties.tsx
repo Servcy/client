@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { CalendarCheck2, CalendarClock, Layers, Link, Paperclip } from "lucide-react";
 import xor from "lodash/xor";
 // hooks
-import { useEventTracker, useEstimate, useLabel, useIssues, useProjectState } from "hooks/store";
+import { useEventTracker, useEstimate, useLabel, useIssues, useProjectState } from "@hooks/store";
 // components
 import { IssuePropertyLabels } from "../properties/labels";
 import { Tooltip } from "@servcy/ui";
@@ -19,9 +19,9 @@ import {
   StateDropdown,
 } from "components/dropdowns";
 // helpers
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
-import { shouldHighlightIssueDueDate } from "helpers/issue.helper";
-import { cn } from "helpers/common.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
+import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { TIssue, IIssueDisplayProperties, TIssuePriorities } from "@servcy/types";
 // constants

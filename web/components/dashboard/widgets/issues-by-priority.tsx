@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useDashboard } from "hooks/store";
+import { useDashboard } from "@hooks/store";
 // components
 import { MarimekkoGraph } from "components/ui";
 import {
@@ -14,7 +14,7 @@ import {
 // ui
 import { PriorityIcon } from "@servcy/ui";
 // helpers
-import { getCustomDates } from "helpers/dashboard.helper";
+import { getCustomDates } from "@helpers/dashboard.helper";
 // types
 import { TIssuesByPriorityWidgetFilters, TIssuesByPriorityWidgetResponse } from "@servcy/types";
 // constants

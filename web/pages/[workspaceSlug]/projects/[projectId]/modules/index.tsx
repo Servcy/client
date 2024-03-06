@@ -1,15 +1,15 @@
 import { ReactElement } from "react";
 import { useRouter } from "next/router";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { PageHead } from "components/core";
 import { ModulesListView } from "components/modules";
 import { ModulesListHeader } from "components/headers";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 import { observer } from "mobx-react";
 
 const ProjectModulesPage: NextPageWithLayout = observer(() => {

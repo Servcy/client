@@ -1,5 +1,5 @@
 // helpers
-import { getWeekNumberOfDate, renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { getWeekNumberOfDate, renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // types
 import { ICalendarDate, ICalendarPayload } from "components/issues";
 

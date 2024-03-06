@@ -4,12 +4,12 @@ import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 // store hooks
-import { useEstimate } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEstimate } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, Input, TextArea } from "@servcy/ui";
 // helpers
-import { checkDuplicates } from "helpers/array.helper";
+import { checkDuplicates } from "@helpers/array.helper";
 // types
 import { IEstimate, IEstimateFormData } from "@servcy/types";
 

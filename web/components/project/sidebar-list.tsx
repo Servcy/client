@@ -5,14 +5,14 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 import { ChevronDown, ChevronRight, Plus } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useProject, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { CreateProjectModal, ProjectSidebarListItem } from "components/project";
 // helpers
-import { copyUrlToClipboard } from "helpers/string.helper";
-import { orderJoinedProjects } from "helpers/project.helper";
-import { cn } from "helpers/common.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
+import { orderJoinedProjects } from "@helpers/project.helper";
+import { cn } from "@helpers/common.helper";
 // constants
 import { EUserWorkspaceRoles } from "constants/workspace";
 import { IProject } from "@servcy/types";

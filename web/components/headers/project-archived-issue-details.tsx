@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 // ui
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 // types
@@ -13,7 +13,7 @@ import { ISSUE_DETAILS } from "constants/fetch-keys";
 // services
 import { IssueArchiveService } from "@services/issue";
 // helpers
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // components
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "components/common";

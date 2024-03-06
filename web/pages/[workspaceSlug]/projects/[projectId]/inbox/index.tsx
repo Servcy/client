@@ -3,15 +3,15 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react";
 // hooks
-import { useInbox, useProject } from "hooks/store";
+import { useInbox, useProject } from "@hooks/store";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // ui
 import { InboxLayoutLoader } from "components/ui";
 // components
 import { ProjectInboxHeader } from "components/headers";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const ProjectInboxPage: NextPageWithLayout = observer(() => {
   const router = useRouter();

@@ -2,7 +2,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // components
 import { Invitations, OnboardingSidebar, OnboardingStepIndicator, Workspace } from "components/onboarding";
 // types

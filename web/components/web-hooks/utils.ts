@@ -1,5 +1,5 @@
 // helpers
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // types
 import { IWebhook, IWorkspace } from "@servcy/types";
 

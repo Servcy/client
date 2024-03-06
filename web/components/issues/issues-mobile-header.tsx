@@ -7,7 +7,7 @@ import { Calendar, ChevronDown, Kanban, List } from "lucide-react";
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "constants/issue";
 // hooks
-import { useIssues, useLabel, useMember, useProject, useProjectState } from "hooks/store";
+import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store";
 // layouts
 import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "./issue-layouts";
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";

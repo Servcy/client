@@ -6,8 +6,8 @@ import { useGanttChart } from "components/gantt-chart/hooks";
 // components
 import { CycleGanttSidebarBlock } from "components/cycles";
 // helpers
-import { cn } from "helpers/common.helper";
-import { findTotalDaysInRange } from "helpers/date-time.helper";
+import { cn } from "@helpers/common.helper";
+import { findTotalDaysInRange } from "@helpers/date-time.helper";
 // types
 import { IGanttBlock } from "components/gantt-chart/types";
 // constants

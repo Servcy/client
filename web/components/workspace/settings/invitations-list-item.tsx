@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { ChevronDown, XCircle } from "lucide-react";
 // hooks
-import { useMember, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useMember, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { ConfirmWorkspaceMemberRemove } from "components/workspace";
 // ui

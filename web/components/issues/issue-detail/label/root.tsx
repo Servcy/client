@@ -3,10 +3,10 @@ import { observer } from "mobx-react-lite";
 // components
 import { LabelList, LabelCreate, IssueLabelSelectRoot } from "./";
 // hooks
-import { useIssueDetail, useLabel } from "hooks/store";
+import { useIssueDetail, useLabel } from "@hooks/store";
 // types
 import { IIssueLabel, TIssue } from "@servcy/types";
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 
 export type TIssueLabel = {
   workspaceSlug: string;

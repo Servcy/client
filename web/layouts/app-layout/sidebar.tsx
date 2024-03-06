@@ -9,8 +9,8 @@ import {
 } from "components/workspace";
 import { ProjectSidebarList } from "components/project";
 // hooks
-import { useApplication } from "hooks/store";
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import { useApplication } from "@hooks/store";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
 export interface IAppSidebar {}
 

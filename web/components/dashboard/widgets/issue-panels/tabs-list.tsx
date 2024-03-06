@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { Tab } from "@headlessui/react";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { TDurationFilterOptions, TIssuesListTypes } from "@servcy/types";
 // constants

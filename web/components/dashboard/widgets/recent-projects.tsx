@@ -3,13 +3,13 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import { Plus } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useDashboard, useProject, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useDashboard, useProject, useUser } from "@hooks/store";
 // components
 import { WidgetLoader, WidgetProps } from "components/dashboard/widgets";
 // ui
 import { Avatar, AvatarGroup } from "@servcy/ui";
 // helpers
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // types
 import { TRecentProjectsWidgetResponse } from "@servcy/types";
 // constants

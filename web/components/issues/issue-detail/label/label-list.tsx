@@ -2,7 +2,7 @@ import { FC } from "react";
 // components
 import { LabelListItem } from "./label-list-item";
 // hooks
-import { useIssueDetail } from "hooks/store";
+import { useIssueDetail } from "@hooks/store";
 // types
 import { TLabelOperations } from "./root";
 

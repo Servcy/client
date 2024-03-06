@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 import { PlusIcon } from "lucide-react";
 // hooks
-import { useEventTracker, useProject } from "hooks/store";
-import useToast from "hooks/use-toast";
-import useKeypress from "hooks/use-keypress";
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import { useEventTracker, useProject } from "@hooks/store";
+import useToast from "@hooks/use-toast";
+import useKeypress from "@hooks/use-keypress";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // helpers
-import { createIssuePayload } from "helpers/issue.helper";
+import { createIssuePayload } from "@helpers/issue.helper";
 // types
 import { TIssue } from "@servcy/types";
 // constants

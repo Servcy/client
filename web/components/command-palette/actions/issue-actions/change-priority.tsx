@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Command } from "cmdk";
 import { Check } from "lucide-react";
 // mobx store
-import { useIssues } from "hooks/store";
+import { useIssues } from "@hooks/store";
 // ui
 import { PriorityIcon } from "@servcy/ui";
 // types

@@ -5,9 +5,9 @@ import { Breadcrumbs } from "@servcy/ui";
 // components
 import { SidebarHamburgerToggle } from "components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "components/common";
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 import { observer } from "mobx-react";
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 import { useEffect } from "react";
 
 export const WorkspaceAnalyticsHeader = observer(() => {

@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import useSWR from "swr";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // layouts
-import { AppLayout } from "layouts/app-layout";
-import { ProjectSettingLayout } from "layouts/settings-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { ProjectSettingLayout } from "@layouts/settings-layout";
 // services
 import { IntegrationService } from "@services/integrations";
 import { ProjectService } from "@services/project";
@@ -20,7 +20,7 @@ import { IntegrationCard } from "components/project";
 import { IntegrationsSettingsLoader } from "components/ui";
 // types
 import { IProject } from "@servcy/types";
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // fetch-keys
 import { PROJECT_SETTINGS_EMPTY_STATE_DETAILS } from "constants/empty-state";
 import { PROJECT_DETAILS, WORKSPACE_INTEGRATIONS } from "constants/fetch-keys";

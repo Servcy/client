@@ -1,5 +1,5 @@
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { TButtonVariants } from "./types";
 // constants

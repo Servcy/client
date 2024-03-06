@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useDashboard } from "hooks/store";
+import { useDashboard } from "@hooks/store";
 // components
 import { PieGraph } from "components/ui";
 import {
@@ -13,7 +13,7 @@ import {
   WidgetProps,
 } from "components/dashboard/widgets";
 // helpers
-import { getCustomDates } from "helpers/dashboard.helper";
+import { getCustomDates } from "@helpers/dashboard.helper";
 // types
 import { TIssuesByStateGroupsWidgetFilters, TIssuesByStateGroupsWidgetResponse, TStateGroups } from "@servcy/types";
 // constants

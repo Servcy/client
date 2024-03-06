@@ -1,6 +1,6 @@
 import { FC } from "react";
 // hooks
-import { useIssueDetail } from "hooks/store";
+import { useIssueDetail } from "@hooks/store";
 // ui
 import { Tooltip } from "@servcy/ui";
 

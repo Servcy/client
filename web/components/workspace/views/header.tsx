@@ -4,7 +4,7 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import { Plus } from "lucide-react";
 // store hooks
-import { useEventTracker, useGlobalView, useUser } from "hooks/store";
+import { useEventTracker, useGlobalView, useUser } from "@hooks/store";
 // components
 import { CreateUpdateWorkspaceViewModal } from "components/workspace";
 // constants

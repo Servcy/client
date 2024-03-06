@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Tab } from "@headlessui/react";
 // hooks
-import useLocalStorage from "hooks/use-local-storage";
+import useLocalStorage from "@hooks/use-local-storage";
 // components
 import { SingleProgressStats } from "components/core";
 // ui

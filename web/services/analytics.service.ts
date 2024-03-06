@@ -9,7 +9,7 @@ import {
   ISaveAnalyticsFormData,
 } from "@servcy/types";
 // helpers
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 
 export class AnalyticsService extends APIService {
   constructor() {

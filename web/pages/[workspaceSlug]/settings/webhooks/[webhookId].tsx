@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
 // hooks
-import { useUser, useWebhook, useWorkspace } from "hooks/store";
+import { useUser, useWebhook, useWorkspace } from "@hooks/store";
 // layouts
-import { AppLayout } from "layouts/app-layout";
-import { WorkspaceSettingLayout } from "layouts/settings-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // components
 import { PageHead } from "components/core";
 import { WorkspaceSettingHeader } from "components/headers";
@@ -17,7 +17,7 @@ import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "component
 import { Spinner } from "@servcy/ui";
 // types
 import { IWebhook } from "@servcy/types";
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const WebhookDetailsPage: NextPageWithLayout = observer(() => {
   // states

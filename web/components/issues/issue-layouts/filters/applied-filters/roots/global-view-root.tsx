@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import isEqual from "lodash/isEqual";
 // hooks
-import { useEventTracker, useGlobalView, useIssues, useLabel, useUser } from "hooks/store";
+import { useEventTracker, useGlobalView, useIssues, useLabel, useUser } from "@hooks/store";
 //ui
 import { Button } from "@servcy/ui";
 // components

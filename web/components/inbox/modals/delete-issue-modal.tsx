@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 // icons
 import { AlertTriangle } from "lucide-react";
 // ui

@@ -10,7 +10,7 @@ import { IIssueRootStore } from "../root.store";
 import { ISSUE_PRIORITIES } from "constants/issue";
 import { STATE_GROUPS } from "constants/state";
 // helpers
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 
 export type TIssueDisplayFilterOptions = Exclude<TIssueGroupByOptions, null> | "target_date";
 

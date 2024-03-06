@@ -2,10 +2,10 @@ import { useEffect, useState, ReactElement } from "react";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // hooks
-import { useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // layouts
-import { ProfilePreferenceSettingsLayout } from "layouts/settings-layout/profile/preferences";
+import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
 // components
 import { CustomThemeSelector, ThemeSwitch, PageHead } from "components/core";
 // ui
@@ -13,7 +13,7 @@ import { Spinner } from "@servcy/ui";
 // constants
 import { I_THEME_OPTION, THEME_OPTIONS } from "constants/themes";
 // type
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
   // states

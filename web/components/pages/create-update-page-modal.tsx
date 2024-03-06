@@ -4,10 +4,10 @@ import { Dialog, Transition } from "@headlessui/react";
 // components
 import { PageForm } from "./page-form";
 // hooks
-import { useEventTracker } from "hooks/store";
+import { useEventTracker } from "@hooks/store";
 // types
 import { IPage } from "@servcy/types";
-import { useProjectPages } from "hooks/store/use-project-page";
+import { useProjectPages } from "@hooks/store/use-project-page";
 import { IPageStore } from "@store/page.store";
 // constants
 import { PAGE_CREATED, PAGE_UPDATED } from "constants/event-tracker";

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { X } from "lucide-react";
 // hooks
-import { useModule } from "hooks/store";
+import { useModule } from "@hooks/store";
 // ui
 import { DiceIcon } from "@servcy/ui";
 

@@ -2,8 +2,8 @@ import { observer } from "mobx-react-lite";
 // services
 import { AuthService } from "@services/auth.service";
 // hooks
-import { useApplication } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useApplication } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { GitHubSignInButton, GoogleSignInButton } from "components/account";
 

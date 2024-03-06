@@ -4,11 +4,11 @@ import { AlertTriangle } from "lucide-react";
 // ui
 import { Button } from "@servcy/ui";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // types
-import { useIssues } from "hooks/store/use-issues";
+import { useIssues } from "@hooks/store/use-issues";
 import { TIssue } from "@servcy/types";
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 
 type Props = {
   isOpen: boolean;

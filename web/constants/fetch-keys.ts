@@ -1,5 +1,5 @@
 import { IAnalyticsParams, IJiraMetadata, INotificationParams } from "@servcy/types";
-import { objToQueryParams } from "helpers/string.helper";
+import { objToQueryParams } from "@helpers/string.helper";
 
 const paramsToKey = (params: any) => {
   const {

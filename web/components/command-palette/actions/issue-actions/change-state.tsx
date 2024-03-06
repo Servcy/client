@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { Command } from "cmdk";
 // hooks
-import { useProjectState, useIssues } from "hooks/store";
+import { useProjectState, useIssues } from "@hooks/store";
 // ui
 import { Spinner, StateGroupIcon } from "@servcy/ui";
 // icons

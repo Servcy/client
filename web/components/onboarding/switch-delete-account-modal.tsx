@@ -5,8 +5,8 @@ import { useTheme } from "next-themes";
 import { Dialog, Transition } from "@headlessui/react";
 import { Trash2 } from "lucide-react";
 // hooks
-import { useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 
 type Props = {
   isOpen: boolean;

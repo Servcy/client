@@ -1,5 +1,5 @@
 import { IApiToken } from "@servcy/types";
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 import { APIService } from "./api.service";
 
 export class APITokenService extends APIService {

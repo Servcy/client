@@ -8,7 +8,7 @@ import { SpreadsheetTable } from "./spreadsheet-table";
 import { TIssue, IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types";
 import { EIssueActions } from "../types";
 //hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 
 type Props = {
   displayProperties: IIssueDisplayProperties;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 // hooks
-import { useIssueDetail } from "hooks/store";
+import { useIssueDetail } from "@hooks/store";
 // components
 import {
   AssignedCompletedIssueListItem,
@@ -16,8 +16,8 @@ import {
 // ui
 import { Loader, getButtonStyling } from "@servcy/ui";
 // helpers
-import { cn } from "helpers/common.helper";
-import { getRedirectionFilters } from "helpers/dashboard.helper";
+import { cn } from "@helpers/common.helper";
+import { getRedirectionFilters } from "@helpers/dashboard.helper";
 // types
 import { TAssignedIssuesWidgetResponse, TCreatedIssuesWidgetResponse, TIssue, TIssuesListTypes } from "@servcy/types";
 

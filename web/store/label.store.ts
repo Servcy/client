@@ -5,7 +5,7 @@ import { computedFn } from "mobx-utils";
 // services
 import { IssueLabelService } from "@services/issue";
 // helpers
-import { buildTree } from "helpers/array.helper";
+import { buildTree } from "@helpers/array.helper";
 // types
 import { IIssueLabel, IIssueLabelTree } from "@servcy/types";
 import { RootStore } from "@store/root.store";

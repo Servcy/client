@@ -12,10 +12,10 @@ import { IssueColumn } from "./issue-column";
 // ui
 import { ControlLink, Tooltip } from "@servcy/ui";
 // hooks
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
-import { useIssueDetail, useProject } from "hooks/store";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
+import { useIssueDetail, useProject } from "@hooks/store";
 // helper
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // types
 import { IIssueDisplayProperties, TIssue } from "@servcy/types";
 import { EIssueActions } from "../types";

@@ -6,11 +6,11 @@ import { observer } from "mobx-react";
 import { ProjectLayoutRoot } from "components/issues";
 import { ProjectIssuesHeader } from "components/headers";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // hooks
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 import { PageHead } from "components/core";
 
 const ProjectIssuesPage: NextPageWithLayout = observer(() => {

@@ -5,7 +5,7 @@ import Image from "next/image";
 // components
 import { PageHead } from "components/core";
 // layouts
-import DefaultLayout from "layouts/default-layout";
+import DefaultLayout from "@layouts/default-layout";
 // ui
 import { Button } from "@servcy/ui";
 // images

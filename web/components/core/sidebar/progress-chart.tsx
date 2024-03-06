@@ -3,7 +3,7 @@ import { eachDayOfInterval, isValid } from "date-fns";
 // ui
 import { LineGraph } from "components/ui";
 // helpers
-import { renderFormattedDateWithoutYear } from "helpers/date-time.helper";
+import { renderFormattedDateWithoutYear } from "@helpers/date-time.helper";
 //types
 import { TCompletionChartDistribution } from "@servcy/types";
 

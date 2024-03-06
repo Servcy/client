@@ -5,7 +5,7 @@ import { DateRangeDropdown, ProjectDropdown } from "components/dropdowns";
 // ui
 import { Button, Input, TextArea } from "@servcy/ui";
 // helpers
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // types
 import { ICycle } from "@servcy/types";
 

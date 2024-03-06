@@ -1,6 +1,6 @@
 import { FC } from "react";
 // hooks
-import { useCurrentTime } from "hooks/use-current-time";
+import { useCurrentTime } from "@hooks/use-current-time";
 // types
 import { IUser } from "@servcy/types";
 

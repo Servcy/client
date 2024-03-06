@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import size from "lodash/size";
 import { useTheme } from "next-themes";
 // hooks
-import { useApplication, useEventTracker, useIssues, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store";
 // components
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
 // constants

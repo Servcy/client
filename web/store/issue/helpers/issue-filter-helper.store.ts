@@ -13,7 +13,7 @@ import {
 // constants
 import { EIssueFilterType, EIssuesStoreType } from "constants/issue";
 // lib
-import { storage } from "lib/local-storage";
+import { storage } from "@lib/local-storage";
 
 interface ILocalStoreIssueFilters {
   key: EIssuesStoreType;

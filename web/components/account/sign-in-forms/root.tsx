@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useEventTracker } from "hooks/store";
-import useSignInRedirection from "hooks/use-sign-in-redirection";
+import { useApplication, useEventTracker } from "@hooks/store";
+import useSignInRedirection from "@hooks/use-sign-in-redirection";
 // components
 import { LatestFeatureBlock } from "components/common";
 import {

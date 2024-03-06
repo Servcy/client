@@ -2,7 +2,7 @@ import { FC, useCallback } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // views
 import { SpreadsheetView } from "./spreadsheet-view";
 // types

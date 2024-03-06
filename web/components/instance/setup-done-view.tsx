@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 // hooks
-import { useApplication } from "hooks/store";
+import { useApplication } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";
 import { UserCog2 } from "lucide-react";

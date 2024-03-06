@@ -2,7 +2,7 @@ import { FC } from "react";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // components
 import { CyclePeekOverview, CyclesBoardCard } from "components/cycles";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";

@@ -6,14 +6,14 @@ import { Eye, EyeOff, XCircle } from "lucide-react";
 // services
 import { AuthService } from "@services/auth.service";
 // hooks
-import useToast from "hooks/use-toast";
-import { useApplication, useEventTracker } from "hooks/store";
+import useToast from "@hooks/use-toast";
+import { useApplication, useEventTracker } from "@hooks/store";
 // components
 import { ESignInSteps, ForgotPasswordPopover } from "components/account";
 // ui
 import { Button, Input } from "@servcy/ui";
 // helpers
-import { checkEmailValidity } from "helpers/string.helper";
+import { checkEmailValidity } from "@helpers/string.helper";
 // types
 import { IPasswordSignInData } from "@servcy/types";
 // constants

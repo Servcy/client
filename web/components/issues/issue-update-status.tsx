@@ -2,7 +2,7 @@ import React from "react";
 import { RefreshCw } from "lucide-react";
 // types
 import { TIssue } from "@servcy/types";
-import { useProject } from "hooks/store";
+import { useProject } from "@hooks/store";
 
 type Props = {
   isSubmitting: "submitting" | "submitted" | "saved";

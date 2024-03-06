@@ -16,7 +16,7 @@ import {
 // ui
 import { Spinner } from "@servcy/ui";
 // hooks
-import { useIssues } from "hooks/store";
+import { useIssues } from "@hooks/store";
 // helpers
 import { ActiveLoader } from "components/ui";
 // constants

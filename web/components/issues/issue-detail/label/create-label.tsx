@@ -4,8 +4,8 @@ import { Controller, useForm } from "react-hook-form";
 import { TwitterPicker } from "react-color";
 import { Popover, Transition } from "@headlessui/react";
 // hooks
-import { useIssueDetail } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useIssueDetail } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Input } from "@servcy/ui";
 // types

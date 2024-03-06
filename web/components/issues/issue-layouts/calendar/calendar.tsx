@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 // hooks
-import { useIssues, useUser } from "hooks/store";
+import { useIssues, useUser } from "@hooks/store";
 // components
 import { CalendarHeader, CalendarWeekDays, CalendarWeekHeader } from "components/issues";
 // ui
@@ -10,7 +10,7 @@ import { ICalendarWeek } from "./types";
 import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types";
 // constants
 import { EUserProjectRoles } from "constants/project";
-import { useCalendarView } from "hooks/store/use-calendar-view";
+import { useCalendarView } from "@hooks/store/use-calendar-view";
 import { EIssuesStoreType } from "constants/issue";
 import { ICycleIssuesFilter } from "@store/issue/cycle";
 import { IModuleIssuesFilter } from "@store/issue/module";

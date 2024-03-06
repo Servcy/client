@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useTheme } from "next-themes";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useEventTracker, useDashboard, useProject, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useDashboard, useProject, useUser } from "@hooks/store";
 // components
 import { TourRoot } from "components/onboarding";
 import { UserGreetingsView } from "components/user";

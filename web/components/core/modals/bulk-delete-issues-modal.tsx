@@ -7,7 +7,7 @@ import { Combobox, Dialog, Transition } from "@headlessui/react";
 // services
 import { IssueService } from "@services/issue";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button, LayersIcon } from "@servcy/ui";
 // icons
@@ -17,7 +17,7 @@ import { IUser, TIssue } from "@servcy/types";
 // fetch keys
 import { PROJECT_ISSUES_LIST } from "constants/fetch-keys";
 // store hooks
-import { useIssues, useProject } from "hooks/store";
+import { useIssues, useProject } from "@hooks/store";
 // components
 import { BulkDeleteIssuesModalItem } from "./bulk-delete-issues-modal-item";
 // constants

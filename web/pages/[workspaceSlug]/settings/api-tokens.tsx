@@ -4,10 +4,10 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 import { useTheme } from "next-themes";
 // store hooks
-import { useUser, useWorkspace } from "hooks/store";
+import { useUser, useWorkspace } from "@hooks/store";
 // layouts
-import { AppLayout } from "layouts/app-layout";
-import { WorkspaceSettingLayout } from "layouts/settings-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // component
 import { WorkspaceSettingHeader } from "components/headers";
 import { ApiTokenListItem, CreateApiTokenModal } from "components/api-token";
@@ -18,7 +18,7 @@ import { APITokenSettingsLoader } from "components/ui";
 // services
 import { APITokenService } from "@services/api_token.service";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // constants
 import { API_TOKENS_LIST } from "constants/fetch-keys";
 import { EUserWorkspaceRoles } from "constants/workspace";

@@ -4,7 +4,7 @@ import Image from "next/image";
 // components
 import { InstanceSetupFormRoot } from "components/instance";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 // images
 import ServcyLogo from "public/logo.png";
 

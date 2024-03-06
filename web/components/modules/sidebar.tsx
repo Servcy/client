@@ -15,8 +15,8 @@ import {
   UserCircle2,
 } from "lucide-react";
 // hooks
-import { useModule, useUser, useEventTracker } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useModule, useUser, useEventTracker } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { LinkModal, LinksList, SidebarProgressStats } from "components/core";
 import { DeleteModuleModal } from "components/modules";
@@ -25,8 +25,8 @@ import { DateRangeDropdown, MemberDropdown } from "components/dropdowns";
 // ui
 import { CustomMenu, Loader, LayersIcon, CustomSelect, ModuleStatusIcon, UserGroupIcon } from "@servcy/ui";
 // helpers
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
-import { copyUrlToClipboard } from "helpers/string.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
 // types
 import { ILinkDetails, IModule, ModuleLink } from "@servcy/types";
 // constant

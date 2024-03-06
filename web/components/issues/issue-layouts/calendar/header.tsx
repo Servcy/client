@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { CalendarMonthsDropdown, CalendarOptionsDropdown } from "components/issues";
 // icons
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useCalendarView } from "hooks/store/use-calendar-view";
+import { useCalendarView } from "@hooks/store/use-calendar-view";
 import { ICycleIssuesFilter } from "@store/issue/cycle";
 import { IModuleIssuesFilter } from "@store/issue/module";
 import { IProjectIssuesFilter } from "@store/issue/project";

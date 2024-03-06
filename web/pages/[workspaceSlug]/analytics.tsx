@@ -4,9 +4,9 @@ import { observer } from "mobx-react-lite";
 import { Tab } from "@headlessui/react";
 import { useTheme } from "next-themes";
 // hooks
-import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "hooks/store";
+import { useApplication, useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { PageHead } from "components/core";
 import { CustomAnalytics, ScopeAndDemand } from "components/analytics";
@@ -17,7 +17,7 @@ import { ANALYTICS_TABS } from "constants/analytics";
 import { EUserWorkspaceRoles } from "constants/workspace";
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "constants/empty-state";
 // type
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 
 const AnalyticsPage: NextPageWithLayout = observer(() => {
   const router = useRouter();

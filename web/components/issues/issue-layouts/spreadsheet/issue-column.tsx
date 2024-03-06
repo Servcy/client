@@ -7,7 +7,7 @@ import { EIssueActions } from "../types";
 import { SPREADSHEET_PROPERTY_DETAILS } from "constants/spreadsheet";
 // components
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
-import { useEventTracker } from "hooks/store";
+import { useEventTracker } from "@hooks/store";
 import { observer } from "mobx-react";
 
 type Props = {

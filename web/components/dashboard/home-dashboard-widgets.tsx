@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useDashboard } from "hooks/store";
+import { useApplication, useDashboard } from "@hooks/store";
 // components
 import {
   AssignedIssuesWidget,

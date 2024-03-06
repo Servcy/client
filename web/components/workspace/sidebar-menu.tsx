@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useEventTracker, useUser } from "hooks/store";
+import { useApplication, useEventTracker, useUser } from "@hooks/store";
 // components
 import { NotificationPopover } from "components/notifications";
 // ui
@@ -14,7 +14,7 @@ import { EUserWorkspaceRoles } from "constants/workspace";
 import { SIDEBAR_MENU_ITEMS } from "constants/dashboard";
 import { SIDEBAR_CLICKED } from "constants/event-tracker";
 // helper
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 
 export const WorkspaceSidebarMenu = observer(() => {
   // store hooks

@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { observer } from "mobx-react";
 // hooks
-import { useEventTracker, useCycle, useUser, useMember } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { CycleCreateUpdateModal, CycleDeleteModal } from "components/cycles";
 // ui
@@ -12,8 +12,8 @@ import { Avatar, AvatarGroup, CustomMenu, Tooltip, LayersIcon, CycleGroupIcon } 
 // icons
 import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react";
 // helpers
-import { findHowManyDaysLeft, renderFormattedDate } from "helpers/date-time.helper";
-import { copyTextToClipboard } from "helpers/string.helper";
+import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper";
+import { copyTextToClipboard } from "@helpers/string.helper";
 // constants
 import { CYCLE_STATUS } from "constants/cycle";
 import { EUserWorkspaceRoles } from "constants/workspace";

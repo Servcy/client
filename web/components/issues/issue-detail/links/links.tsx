@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 // computed
 import { IssueLinkDetail } from "./link-detail";
 // hooks
-import { useIssueDetail, useUser } from "hooks/store";
+import { useIssueDetail, useUser } from "@hooks/store";
 import { TLinkOperations } from "./root";
 
 export type TLinkOperationsModal = Exclude<TLinkOperations, "create">;

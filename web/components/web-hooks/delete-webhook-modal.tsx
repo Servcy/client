@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
 // hooks
-import { useWebhook } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useWebhook } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // ui
 import { Button } from "@servcy/ui";
 

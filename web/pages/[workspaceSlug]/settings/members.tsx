@@ -3,11 +3,11 @@ import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 // hooks
-import { useEventTracker, useMember, useUser, useWorkspace } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // layouts
-import { AppLayout } from "layouts/app-layout";
-import { WorkspaceSettingLayout } from "layouts/settings-layout";
+import { AppLayout } from "@layouts/app-layout";
+import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 // components
 import { PageHead } from "components/core";
 import { WorkspaceSettingHeader } from "components/headers";
@@ -16,9 +16,9 @@ import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "components/w
 import { Button } from "@servcy/ui";
 // types
 import { IWorkspaceBulkInviteFormData } from "@servcy/types";
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // helpers
-import { getUserRole } from "helpers/user.helper";
+import { getUserRole } from "@helpers/user.helper";
 // constants
 import { MEMBER_INVITED } from "constants/event-tracker";
 import { EUserWorkspaceRoles } from "constants/workspace";

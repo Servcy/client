@@ -6,8 +6,8 @@ import { LayoutPanelTop, Sparkle, X } from "lucide-react";
 // editor
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
 // hooks
-import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // services
 import { AIService } from "@services/ai.service";
 import { FileService } from "@services/file.service";
@@ -29,7 +29,7 @@ import {
 // ui
 import { Button, CustomMenu, Input, Loader, ToggleSwitch } from "@servcy/ui";
 // helpers
-import { renderFormattedPayloadDate } from "helpers/date-time.helper";
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // types
 import type { TIssue, ISearchIssueResponse } from "@servcy/types";
 

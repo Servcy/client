@@ -2,8 +2,8 @@ import { FC, useMemo, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { History, LucideIcon, MessageCircle, ListRestart } from "lucide-react";
 // hooks
-import { useIssueDetail, useProject } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useIssueDetail, useProject } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentRoot, IssueCommentCreate } from "./";
 // types

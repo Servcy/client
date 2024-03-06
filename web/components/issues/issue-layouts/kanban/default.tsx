@@ -9,7 +9,7 @@ import {
   useModule,
   useProject,
   useProjectState,
-} from "hooks/store";
+} from "@hooks/store";
 // components
 import { HeaderGroupByCard } from "./headers/group-by-card";
 import { KanbanGroup } from "./kanban-group";

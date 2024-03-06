@@ -6,13 +6,13 @@ import { Controller, useForm } from "react-hook-form";
 import useSWR from "swr";
 // hooks
 
-import { useApplication, usePage, useUser, useWorkspace } from "hooks/store";
-import useReloadConfirmations from "hooks/use-reload-confirmation";
-import useToast from "hooks/use-toast";
+import { useApplication, usePage, useUser, useWorkspace } from "@hooks/store";
+import useReloadConfirmations from "@hooks/use-reload-confirmation";
+import useToast from "@hooks/use-toast";
 // services
 import { FileService } from "@services/file.service";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { GptAssistantPopover, PageHead } from "components/core";
 import { PageDetailsHeader } from "components/headers/page-details";
@@ -23,12 +23,12 @@ import { Spinner } from "@servcy/ui";
 // helpers
 // types
 import { IPage } from "@servcy/types";
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // fetch-keys
 // constants
 import { IssuePeekOverview } from "components/issues";
 import { EUserProjectRoles } from "constants/project";
-import { useProjectPages } from "hooks/store/use-project-specific-pages";
+import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 
 // services
 const fileService = new FileService();

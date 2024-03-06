@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 // hooks
-import { useIssues } from "hooks/store";
+import { useIssues } from "@hooks/store";
 // components
 import { DraftIssueAppliedFiltersRoot } from "../filters/applied-filters/roots/draft-issue";
 import { DraftIssueListLayout } from "../list/roots/draft-issue-root";

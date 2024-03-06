@@ -5,13 +5,13 @@ import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 // components
 import { CalendarChart } from "components/issues";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // types
 import { TGroupedIssues, TIssue } from "@servcy/types";
 import { IQuickActionProps } from "../list/list-view-types";
 import { EIssueActions } from "../types";
 import { handleDragDrop } from "./utils";
-import { useIssues, useUser } from "hooks/store";
+import { useIssues, useUser } from "@hooks/store";
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module";
 import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";

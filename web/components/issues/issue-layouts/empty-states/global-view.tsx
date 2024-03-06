@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Plus, PlusIcon } from "lucide-react";
 // hooks
-import { useApplication, useEventTracker, useProject } from "hooks/store";
+import { useApplication, useEventTracker, useProject } from "@hooks/store";
 // components
 import { EmptyState } from "components/common";
 // assets

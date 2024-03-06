@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // layouts
-import { AppLayout } from "layouts/app-layout";
+import { AppLayout } from "@layouts/app-layout";
 // components
 import { PageHead } from "components/core";
 import { ProjectIssueDetailsHeader } from "components/headers";
@@ -11,9 +11,9 @@ import { IssueDetailRoot } from "components/issues";
 // ui
 import { Loader } from "@servcy/ui";
 // types
-import { NextPageWithLayout } from "lib/types";
+import { NextPageWithLayout } from "@lib/types";
 // store hooks
-import { useApplication, useIssueDetail, useProject } from "hooks/store";
+import { useApplication, useIssueDetail, useProject } from "@hooks/store";
 
 const IssueDetailsPage: NextPageWithLayout = observer(() => {
   // router

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Command } from "cmdk";
 // hooks
-import { useUser } from "hooks/store";
+import { useUser } from "@hooks/store";
 import Link from "next/link";
 // constants
 import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "constants/workspace";

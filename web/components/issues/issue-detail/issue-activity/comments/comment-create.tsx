@@ -10,9 +10,9 @@ import { TActivityOperations } from "../root";
 import { TIssueComment } from "@servcy/types";
 // icons
 import { Globe2, Lock } from "lucide-react";
-import { useMention, useWorkspace } from "hooks/store";
+import { useMention, useWorkspace } from "@hooks/store";
 // helpers
-import { isEmptyHtmlString } from "helpers/string.helper";
+import { isEmptyHtmlString } from "@helpers/string.helper";
 
 const fileService = new FileService();
 

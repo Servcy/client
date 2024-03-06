@@ -7,8 +7,8 @@ import { useTheme } from "next-themes";
 import useSWR, { mutate } from "swr";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useUser } from "hooks/store";
-import useUserAuth from "hooks/use-user-auth";
+import { useUser } from "@hooks/store";
+import useUserAuth from "@hooks/use-user-auth";
 // services
 import { IntegrationService } from "@services/integrations";
 // components

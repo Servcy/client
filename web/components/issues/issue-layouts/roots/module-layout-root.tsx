@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 import size from "lodash/size";
 // mobx store
-import { useIssues } from "hooks/store";
+import { useIssues } from "@hooks/store";
 // components
 import {
   IssuePeekOverview,

@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { PagesListView } from "components/pages/pages-list";
 // ui
 import { Loader } from "@servcy/ui";
-import { useProjectPages } from "hooks/store/use-project-specific-pages";
+import { useProjectPages } from "@hooks/store/use-project-specific-pages";
 
 export const PrivatePagesList: FC = observer(() => {
   const projectPageStore = useProjectPages();

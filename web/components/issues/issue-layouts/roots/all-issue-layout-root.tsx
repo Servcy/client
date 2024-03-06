@@ -5,8 +5,8 @@ import useSWR from "swr";
 import isEmpty from "lodash/isEmpty";
 import { useTheme } from "next-themes";
 // hooks
-import { useApplication, useEventTracker, useGlobalView, useIssues, useProject, useUser } from "hooks/store";
-import { useWorkspaceIssueProperties } from "hooks/use-workspace-issue-properties";
+import { useApplication, useEventTracker, useGlobalView, useIssues, useProject, useUser } from "@hooks/store";
+import { useWorkspaceIssueProperties } from "@hooks/use-workspace-issue-properties";
 // components
 import { GlobalViewsAppliedFiltersRoot, IssuePeekOverview } from "components/issues";
 import { SpreadsheetView } from "components/issues/issue-layouts";

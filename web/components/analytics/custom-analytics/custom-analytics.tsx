@@ -10,8 +10,8 @@ import { CustomAnalyticsSelectBar, CustomAnalyticsMainContent, CustomAnalyticsSi
 import { IAnalyticsParams } from "@servcy/types";
 // fetch-keys
 import { ANALYTICS } from "constants/fetch-keys";
-import { cn } from "helpers/common.helper";
-import { useApplication } from "hooks/store";
+import { cn } from "@helpers/common.helper";
+import { useApplication } from "@hooks/store";
 
 type Props = {
   additionalParams?: Partial<IAnalyticsParams>;

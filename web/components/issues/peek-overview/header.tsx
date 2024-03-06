@@ -5,13 +5,13 @@ import { MoveRight, MoveDiagonal, Link2, Trash2, RotateCcw } from "lucide-react"
 // ui
 import { ArchiveIcon, CenterPanelIcon, CustomSelect, FullScreenPanelIcon, SidePanelIcon, Tooltip } from "@servcy/ui";
 // helpers
-import { copyUrlToClipboard } from "helpers/string.helper";
+import { copyUrlToClipboard } from "@helpers/string.helper";
 // hooks
-import useToast from "hooks/use-toast";
+import useToast from "@hooks/use-toast";
 // store hooks
-import { useIssueDetail, useProjectState, useUser } from "hooks/store";
+import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
 // helpers
-import { cn } from "helpers/common.helper";
+import { cn } from "@helpers/common.helper";
 // components
 import { IssueSubscription, IssueUpdateStatus } from "components/issues";
 import { STATE_GROUPS } from "constants/state";

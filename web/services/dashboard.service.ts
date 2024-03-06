@@ -1,6 +1,6 @@
 import { APIService } from "@services/api.service";
 // helpers
-import { API_BASE_URL } from "helpers/common.helper";
+import { API_BASE_URL } from "@helpers/common.helper";
 // types
 import { THomeDashboardResponse, TWidget, TWidgetStatsRequestParams, TWidgetStatsResponse } from "@servcy/types";
 

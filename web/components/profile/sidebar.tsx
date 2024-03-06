@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { Disclosure, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 // hooks
-import { useApplication, useUser } from "hooks/store";
+import { useApplication, useUser } from "@hooks/store";
 // services
 import { UserService } from "@services/user.service";
 // components
@@ -14,11 +14,11 @@ import { Loader, Tooltip } from "@servcy/ui";
 // icons
 import { ChevronDown, Pencil } from "lucide-react";
 // helpers
-import { renderFormattedDate } from "helpers/date-time.helper";
-import { renderEmoji } from "helpers/emoji.helper";
+import { renderFormattedDate } from "@helpers/date-time.helper";
+import { renderEmoji } from "@helpers/emoji.helper";
 // fetch-keys
 import { USER_PROFILE_PROJECT_SEGREGATION } from "constants/fetch-keys";
-import useOutsideClickDetector from "hooks/use-outside-click-detector";
+import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { useEffect, useRef } from "react";
 
 // services

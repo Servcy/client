@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import xor from "lodash/xor";
 // hooks
-import { useEventTracker, useIssues } from "hooks/store";
+import { useEventTracker, useIssues } from "@hooks/store";
 // components
 import { ModuleDropdown } from "components/dropdowns";
 // types

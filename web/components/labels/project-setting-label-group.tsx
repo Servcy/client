@@ -17,7 +17,7 @@ import {
 import { ICustomMenuItem, LabelItemBlock } from "./label-block/label-item-block";
 import { CreateUpdateLabelInline } from "./create-update-label-inline";
 import { ProjectSettingLabelItem } from "./project-setting-label-item";
-import useDraggableInPortal from "hooks/use-draggable-portal";
+import useDraggableInPortal from "@hooks/use-draggable-portal";
 
 type Props = {
   label: IIssueLabel;

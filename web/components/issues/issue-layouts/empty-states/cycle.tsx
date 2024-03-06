@@ -3,8 +3,8 @@ import { observer } from "mobx-react-lite";
 import { PlusIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 // hooks
-import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "hooks/store";
-import useToast from "hooks/use-toast";
+import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
+import useToast from "@hooks/use-toast";
 // components
 import { ExistingIssuesListModal } from "components/core";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";
