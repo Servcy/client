@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
@@ -23,8 +24,6 @@ import { GROUP_CHOICES } from "@constants/project"
 import { UserService } from "@services/user.service"
 
 import { IUserStateDistribution, TStateGroups } from "@servcy/types"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const userService = new UserService()
 

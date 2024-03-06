@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react"
 
+import { Integration, IntegrationEvent, UserIntegration } from "@/types/apps/integration"
+import { Card, Checkbox, Modal } from "antd"
+
+import FigmaConfiguration from "@components/settings/FigmaConfiguration"
+import GithubConfiguration from "@components/settings/GithubConfiguration"
+import GoogleConfiguration from "@components/settings/GoogleConfiguration"
+import MicrosoftConfiguration from "@components/settings/MicrosoftConfiguration"
+
 import {
     disableIntegrationEvent,
     enableIntegrationEvent,
     fetchIntegrationEvents,
     fetchUserIntegrations,
-} from "@/apis/integration"
-import { Card, Checkbox, Modal } from "antd"
-
-import { Integration, IntegrationEvent, UserIntegration } from "@/types/apps/integration"
-
-import FigmaConfiguration from "./FigmaConfiguration"
-import GithubConfiguration from "./GithubConfiguration"
-import GoogleConfiguration from "./GoogleConfiguration"
-import MicrosoftConfiguration from "./MicrosoftConfiguration"
+} from "@services/integration"
 
 export default function IntegrationConfigurationModal({
     selectedIntegration,

@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import React, { useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import useSWR from "swr"
@@ -26,8 +27,6 @@ import { EUserWorkspaceRoles } from "@constants/workspace"
 import { APITokenService } from "@services/api_token.service"
 
 import { Button } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const apiTokenService = new APITokenService()
 

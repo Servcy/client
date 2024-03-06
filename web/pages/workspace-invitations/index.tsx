@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
@@ -17,8 +18,6 @@ import { WORKSPACE_INVITATION } from "@constants/fetch-keys"
 import { WorkspaceService } from "@services/workspace.service"
 
 import { Spinner } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const workspaceService = new WorkspaceService()
 

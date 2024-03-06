@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react"
 import useSWR from "swr"
 
@@ -11,8 +12,6 @@ import { InboxLayoutLoader } from "@components/ui"
 import { useInbox, useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const ProjectInboxPage: NextPageWithLayout = observer(() => {
     const router = useRouter()

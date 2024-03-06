@@ -5,6 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./login.css";
+@import "./border.css";
+@import "./font.css";
+@import "./backgrounds.css";
+@import "./elements.css";
+
 @layer components {
     .text-1\.5xl {
         font-size: 1.375rem;
@@ -690,7 +696,6 @@ div.web-view-spinner div.bar12 {
 }
 
 /* scrollbar lg size */
-
 .scrollbar-lg::-webkit-scrollbar {
     height: 16px;
     width: 16px;

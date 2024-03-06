@@ -1,12 +1,11 @@
 import Image from "next/image"
 
+import { GithubNotificationProps } from "@/types/integrations/github"
 import { Tag, Tooltip } from "antd"
 import { BiRightArrowAlt } from "react-icons/bi"
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"
-
-import { GithubNotificationProps } from "@/types/integrations/github"
 
 import { getCleanLink } from "@helpers/common.helper"
 

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { isJwtTokenValid } from "@helpers/jwt.helper"
+import { authRoutes, wipRoutes } from "@constants/routes"
 
-import { authRoutes, wipRoutes } from "@/constants/routes"
+import { isJwtTokenValid } from "@helpers/jwt.helper"
 
 export const config = {
     matcher: [

@@ -1,13 +1,13 @@
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
+
 import { ProjectSettingHeader } from "@components/headers"
 import { ProjectSettingStateList } from "@components/states"
 
 // layout
 import { AppLayout } from "@layouts/app-layout"
 import { ProjectSettingLayout } from "@layouts/settings-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const StatesSettingsPage: NextPageWithLayout = () => (
     <div className="w-full gap-10 overflow-y-auto py-8 pr-9">

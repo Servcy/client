@@ -1,5 +1,6 @@
 import { ReactElement, useEffect, useState } from "react"
 
+import type { NextPageWithLayout } from "@/types/index"
 import { Disclosure, Transition } from "@headlessui/react"
 import { ChevronDown, User2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -22,8 +23,6 @@ import { FileService } from "@services/file.service"
 
 import type { IUser } from "@servcy/types"
 import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servcy/ui"
-
-import type { NextPageWithLayout } from "@/types/types"
 
 const defaultValues: Partial<IUser> = {
     avatar: "",

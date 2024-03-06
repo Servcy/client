@@ -4,16 +4,16 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import { fetchIntegrations } from "@/apis/integration"
+import { Integration } from "@/types/apps/integration"
 import { Button, Card, Skeleton } from "antd"
 import toast from "react-hot-toast"
 import { AiFillSetting } from "react-icons/ai"
 
+import IntegrationConfigurationModal from "@components/settings/IntegrationConfigurationModal"
+
+import { fetchIntegrations } from "@services/integration"
+
 import { getQueryParams } from "@helpers/common.helper"
-
-import { Integration } from "@/types/apps/integration"
-
-import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal"
 
 export default function IntegrationSettings(): JSX.Element {
     const [integrations, setIntegrations] = useState<Integration[]>([])

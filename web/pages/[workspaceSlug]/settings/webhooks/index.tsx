@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import React, { useEffect, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import useSWR from "swr"
@@ -20,8 +21,6 @@ import { WorkspaceSettingLayout } from "@layouts/settings-layout"
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 
 import { Button } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const WebhooksListPage: NextPageWithLayout = observer(() => {
     // states

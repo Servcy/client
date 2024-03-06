@@ -1,9 +1,9 @@
 "use client"
 
-import Blocked from "@/components/Shared/blocked"
-import SideBar from "@/components/Shared/sidebar"
+import Blocked from "@components/shared/blocked"
+import SideBar from "@components/shared/sidebar"
 
-import "@/styles/globals.css"
+import "@styles/globals.css"
 
 import { AppProps } from "next/app"
 import dynamic from "next/dynamic"
@@ -12,6 +12,7 @@ import Router from "next/router"
 
 import { FC, useEffect, useState } from "react"
 
+import type { NextPageWithLayout } from "@/types/index"
 import { SyncOutlined } from "@ant-design/icons"
 import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
@@ -27,8 +28,6 @@ import { StoreProvider } from "@contexts/StoreContext"
 
 import { SWR_CONFIG } from "@constants/swr-config"
 import { THEMES } from "@constants/themes"
-
-import type { NextPageWithLayout } from "@/types/types"
 
 import { isMobileDevice } from "@helpers/common.helper"
 

@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 
 import { Fragment, ReactElement, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -25,8 +26,6 @@ import { AppLayout } from "@layouts/app-layout"
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { PAGE_TABS_LIST } from "@constants/page"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const AllPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.AllPagesList), {
     ssr: false,

@@ -1,9 +1,8 @@
 import Image from "next/image"
 
+import { SlackMessageElementProps, SlackMessageProps } from "@/types/integrations/slack"
 import cn from "classnames"
 import { HiExternalLink, HiPaperClip } from "react-icons/hi"
-
-import { SlackMessageElementProps, SlackMessageProps } from "@/types/integrations/slack"
 
 import { getCleanLink } from "@helpers/common.helper"
 

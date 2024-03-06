@@ -1,5 +1,6 @@
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -9,8 +10,6 @@ import { WorkspaceActiveCyclesUpgrade } from "@components/workspace"
 import { useWorkspace } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceActiveCyclesPage: NextPageWithLayout = observer(() => {
     const { currentWorkspace } = useWorkspace()

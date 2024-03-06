@@ -1,6 +1,5 @@
-import { HiExternalLink } from "react-icons/hi"
-
 import type { Comment, FigmaNotificationProps, Mention } from "@/types/integrations/figma"
+import { HiExternalLink } from "react-icons/hi"
 
 const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; cause: string }) => {
     const link = `https://www.figma.com/file/${data.file_key}`

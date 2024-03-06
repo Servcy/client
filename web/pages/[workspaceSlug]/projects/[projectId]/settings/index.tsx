@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
@@ -18,8 +19,6 @@ import { useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 import { ProjectSettingLayout } from "@layouts/settings-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const GeneralSettingsPage: NextPageWithLayout = observer(() => {
     // states

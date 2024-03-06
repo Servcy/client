@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement, useEffect, useRef, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
@@ -25,8 +26,6 @@ import { FileService } from "@services/file.service"
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor"
 import { IPage } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const fileService = new FileService()
 

@@ -1,28 +1,31 @@
-import InboxOutlined from "@ant-design/icons/lib/icons/InboxOutlined"
 import { Upload } from "antd"
 import axios from "axios"
+import Cookies from "js-cookie"
 import toast from "react-hot-toast"
 
-import { refreshTokens } from "@helpers/axios.helper"
-
-const Dragger = Upload.Dragger
-
-const DragDrop = ({
+const UploadButton = ({
     onSave,
     beforeUpload,
     onRemove,
+    showUploadList = true,
+    setUploading,
+    children,
 }: {
+    showUploadList?: boolean
     onSave: (_: any, __: string) => void
     beforeUpload: (_: any) => boolean
     onRemove: (_: any) => void
+    setUploading: (_: boolean) => void
+    children: React.ReactNode
 }) => {
     const props = {
         multiple: true,
+        showUploadList,
         beforeUpload,
         customRequest: async (options: any) => {
             const { onSuccess, onError, file } = options
             const fmData = new FormData()
-            const accessToken = await refreshTokens()
+            const accessToken = Cookies.get("accessToken")
             const config = {
                 headers: {
                     "content-type": "multipart/form-data",
@@ -31,12 +34,15 @@ const DragDrop = ({
             }
             fmData.append("file", file)
             try {
+                setUploading(true)
                 const res = await axios.post(`${process.env["NEXT_PUBLIC_SERVER_URL"]}/document/upload`, fmData, config)
                 onSuccess("Ok")
                 onSave(res.data, file.name)
             } catch (err: any) {
                 toast.error(err?.response?.data?.detail || "Some error occoured.")
                 onError({ err: new Error("Some error") })
+            } finally {
+                setUploading(false)
             }
         },
         onChange(info: any) {
@@ -49,14 +55,7 @@ const DragDrop = ({
         onRemove,
     }
 
-    return (
-        <Dragger {...props}>
-            <p>
-                <InboxOutlined />
-            </p>
-            <p>Click or drag file to this area to upload</p>
-        </Dragger>
-    )
+    return <Upload {...props}>{children}</Upload>
 }
 
-export default DragDrop
+export default UploadButton

@@ -8,7 +8,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { Spin } from "antd"
 import { Toaster } from "react-hot-toast"
 
-import Blocked from "@/components/Shared/blocked"
+import Blocked from "@components/shared/blocked"
 
 import "@/styles/globals.css"
 

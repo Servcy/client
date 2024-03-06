@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
@@ -19,8 +20,6 @@ import { APP_INTEGRATIONS } from "@constants/fetch-keys"
 import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { IntegrationService } from "@services/integrations"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const integrationService = new IntegrationService()
 

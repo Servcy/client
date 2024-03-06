@@ -1,5 +1,6 @@
 import { ReactElement, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { Search } from "lucide-react"
 import { observer } from "mobx-react"
 
@@ -14,8 +15,6 @@ import { AppLayout } from "@layouts/app-layout"
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 import { Input } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceViewsPage: NextPageWithLayout = observer(() => {
     const [query, setQuery] = useState("")

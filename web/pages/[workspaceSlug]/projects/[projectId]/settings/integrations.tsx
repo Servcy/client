@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react"
 import { useTheme } from "next-themes"
 import useSWR from "swr"
@@ -24,8 +25,6 @@ import { IntegrationService } from "@services/integrations"
 import { ProjectService } from "@services/project"
 
 import { IProject } from "@servcy/types"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const integrationService = new IntegrationService()
 const projectService = new ProjectService()

@@ -6,6 +6,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 // images
 import ServcyLogo from "public/logo.svg"
@@ -19,8 +20,6 @@ import { UserAuthWrapper } from "@layouts/auth-layout"
 import DefaultLayout from "@layouts/DefaultLayout"
 
 import { IWorkspace } from "@servcy/types"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const CreateWorkspacePage: NextPageWithLayout = observer(() => {
     // router

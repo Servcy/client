@@ -1,5 +1,6 @@
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 
 import { PageHead } from "@components/core"
@@ -12,8 +13,6 @@ import { AppLayout } from "@layouts/app-layout"
 import { ProjectSettingLayout } from "@layouts/settings-layout"
 
 import { EUserProjectRoles } from "@constants/project"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const EstimatesSettingsPage: NextPageWithLayout = observer(() => {
     const {

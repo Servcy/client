@@ -5,6 +5,7 @@ import Link from "next/link.js"
 
 import { useEffect, useState } from "react"
 
+import type { NextPageWithLayout } from "@/types/index"
 import { GoogleLogin } from "@react-oauth/google"
 import { Button, Input } from "antd"
 import { observer } from "mobx-react-lite"
@@ -12,6 +13,8 @@ import toast from "react-hot-toast"
 import { BiLogIn } from "react-icons/bi"
 import { HiMail } from "react-icons/hi"
 import { RiWhatsappLine } from "react-icons/ri"
+
+import OTPInput from "@components/login/OTPInput"
 
 import { useUser } from "@hooks/store"
 import useLoginRedirection from "@hooks/use-login-redirection"
@@ -21,10 +24,6 @@ import { AuthService } from "@services/auth.service"
 import { validateEmail, validateOtp, validatePhone } from "@helpers/validation.helper"
 
 import { Spinner } from "@servcy/ui"
-
-import type { NextPageWithLayout } from "@/types/types"
-
-import OTPInput from "@/components/Login/OTPInput"
 
 const authService = new AuthService()
 

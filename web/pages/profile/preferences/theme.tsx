@@ -1,5 +1,6 @@
 import { ReactElement, useEffect, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
@@ -13,8 +14,6 @@ import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profil
 import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
 
 import { Spinner } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const ProfilePreferencesThemePage: NextPageWithLayout = observer(() => {
     // states

@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
@@ -17,8 +18,6 @@ import { ProjectSettingLayout } from "@layouts/settings-layout"
 import { EUserProjectRoles } from "@constants/project"
 
 import { IProject } from "@servcy/types"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const AutomationSettingsPage: NextPageWithLayout = observer(() => {
     // router

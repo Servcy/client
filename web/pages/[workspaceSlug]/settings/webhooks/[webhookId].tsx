@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 import useSWR from "swr"
@@ -17,8 +18,6 @@ import { WorkspaceSettingLayout } from "@layouts/settings-layout"
 
 import { IWebhook } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const WebhookDetailsPage: NextPageWithLayout = observer(() => {
     // states

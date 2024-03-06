@@ -2,15 +2,15 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import {
-    configureUserIntegration as configureUserIntegrationApi,
-    fetchUserIntegrations as fetchUserIntegrationsApi,
-} from "@/apis/integration"
+import { Integration, UserIntegration } from "@/types/apps/integration"
 import { Button, Input, Select } from "antd"
 import toast from "react-hot-toast"
 import { MdOutlineSyncAlt } from "react-icons/md"
 
-import { Integration, UserIntegration } from "@/types/apps/integration"
+import {
+    configureUserIntegration as configureUserIntegrationApi,
+    fetchUserIntegrations as fetchUserIntegrationsApi,
+} from "@services/integration"
 
 export default function MicrosoftConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
     const [loading, setLoading] = useState<boolean>(false)

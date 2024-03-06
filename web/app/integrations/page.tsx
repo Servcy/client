@@ -4,21 +4,21 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import { fetchIntegrations } from "@/apis/integration"
+import { Integration } from "@/types/apps/integration"
 import { Button, Card, Input, Select, Skeleton, Tag } from "antd"
 import toast from "react-hot-toast"
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai"
 import { HiArrowsRightLeft } from "react-icons/hi2"
 
-import { Integration } from "@/types/apps/integration"
+import IntegrationConfigurationModal from "@components/settings/IntegrationConfigurationModal"
 
-import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal"
+import { integrationCategories, uniqueIntegrationCategories } from "@constants/integration"
 
-import { oauthUrlGenerators } from "@helpers/integration.helper"
+import { fetchIntegrations } from "@services/integration"
+
 import { getQueryParams } from "@helpers/common.helper"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
-
-import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations"
+import { oauthUrlGenerators } from "@helpers/integration.helper"
 
 export default function Integrations(): JSX.Element {
     const [integrations, setIntegrations] = useState<Integration[]>([])

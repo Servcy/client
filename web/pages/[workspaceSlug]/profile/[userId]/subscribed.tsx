@@ -1,5 +1,6 @@
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 // store
 import { observer } from "mobx-react-lite"
 
@@ -9,8 +10,6 @@ import { ProfileIssuesPage } from "@components/profile/profile-issues"
 
 import { AppLayout } from "@layouts/app-layout"
 import { ProfileAuthWrapper } from "@layouts/user-profile-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const ProfileSubscribedIssuesPage: NextPageWithLayout = () => (
     <>

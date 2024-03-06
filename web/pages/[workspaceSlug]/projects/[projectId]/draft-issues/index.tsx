@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { PenSquare, X } from "lucide-react"
 import { observer } from "mobx-react"
 
@@ -12,8 +13,6 @@ import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/dra
 import { useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const ProjectDraftIssuesPage: NextPageWithLayout = observer(() => {
     const router = useRouter()

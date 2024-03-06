@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { RotateCcw } from "lucide-react"
 import { observer } from "mobx-react"
 import toast from "react-hot-toast"
@@ -19,8 +20,6 @@ import { EIssuesStoreType } from "@constants/issue"
 import { EUserProjectRoles } from "@constants/project"
 
 import { ArchiveIcon, Button, Loader } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const ArchivedIssueDetailsPage: NextPageWithLayout = observer(() => {
     // router

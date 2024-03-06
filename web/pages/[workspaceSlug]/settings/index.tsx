@@ -1,5 +1,6 @@
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -10,8 +11,6 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
 import { WorkspaceSettingLayout } from "@layouts/settings-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceSettingsPage: NextPageWithLayout = observer(() => {
     // store hooks

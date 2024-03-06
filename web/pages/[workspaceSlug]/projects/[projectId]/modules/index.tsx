@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -11,8 +12,6 @@ import { ModulesListView } from "@components/modules"
 import { useProject } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const ProjectModulesPage: NextPageWithLayout = observer(() => {
     const router = useRouter()

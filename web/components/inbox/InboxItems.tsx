@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import React, { Dispatch, SetStateAction } from "react"
 
-import { disableNotificationType } from "@/apis/integration"
+import { InboxItem, PaginationDetails } from "@/types/apps/inbox"
 import { SyncOutlined } from "@ant-design/icons"
 import { Avatar, Button, ConfigProvider, Spin, Table, Tooltip } from "antd"
 import type { ColumnsType } from "antd/es/table"
@@ -11,9 +11,9 @@ import toast from "react-hot-toast"
 import { HiArchiveBoxArrowDown } from "react-icons/hi2"
 import { MdOutlineBlock } from "react-icons/md"
 
-import { InboxItem, PaginationDetails } from "@/types/apps/inbox"
+import Cause from "@components/inbox/Cause"
 
-import Cause from "./Cause"
+import { disableNotificationType } from "@services/integration"
 
 const InboxItems = ({
     setPage,

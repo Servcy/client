@@ -2,6 +2,8 @@ import { useRouter } from "next/router"
 
 import { Fragment, ReactElement } from "react"
 
+// type
+import { NextPageWithLayout } from "@/types/index"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -18,9 +20,6 @@ import { AppLayout } from "@layouts/app-layout"
 import { ANALYTICS_TABS } from "@constants/analytics"
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserWorkspaceRoles } from "@constants/workspace"
-
-// type
-import { NextPageWithLayout } from "@/types/types"
 
 const AnalyticsPage: NextPageWithLayout = observer(() => {
     const router = useRouter()

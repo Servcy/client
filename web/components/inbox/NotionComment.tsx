@@ -1,10 +1,9 @@
 import Image from "next/image"
 
+import type { NotionComment } from "@/types/integrations/notion"
 import { HiExternalLink } from "react-icons/hi"
 
 import { getCleanLink } from "@helpers/common.helper"
-
-import type { NotionComment } from "@/types/integrations/notion"
 
 const NotionComment = ({ data, cause }: { data: NotionComment; cause: any }) => {
     const discussionLink = `https://www.notion.so/${data.parent.page_id.split("-").join("")}?d=${data.discussion_id

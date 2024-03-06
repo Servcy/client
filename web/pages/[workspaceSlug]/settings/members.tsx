@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
@@ -22,8 +23,6 @@ import { getUserRole } from "@helpers/user.helper"
 
 import { IWorkspaceBulkInviteFormData } from "@servcy/types"
 import { Button } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const WorkspaceMembersSettingsPage: NextPageWithLayout = observer(() => {
     // states

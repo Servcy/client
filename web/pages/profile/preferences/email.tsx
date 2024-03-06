@@ -1,5 +1,7 @@
 import { ReactElement } from "react"
 
+// type
+import { NextPageWithLayout } from "@/types/index"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
@@ -9,9 +11,6 @@ import { EmailSettingsLoader } from "@components/ui"
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences"
 
 import { UserService } from "@services/user.service"
-
-// type
-import { NextPageWithLayout } from "@/types/types"
 
 const userService = new UserService()
 

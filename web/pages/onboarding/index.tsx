@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement, useEffect, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDown } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -27,8 +28,6 @@ import { WorkspaceService } from "@services/workspace.service"
 
 import { IUser, TOnboardingSteps } from "@servcy/types"
 import { Avatar, Spinner } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const workspaceService = new WorkspaceService()
 

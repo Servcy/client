@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { Fragment, ReactElement, useCallback, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -23,8 +24,6 @@ import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { TCycleLayout, TCycleView } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const ProjectCyclesPage: NextPageWithLayout = observer(() => {
     const [createModal, setCreateModal] = useState(false)

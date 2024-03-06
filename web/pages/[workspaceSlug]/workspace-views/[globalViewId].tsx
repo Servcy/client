@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -14,8 +15,6 @@ import { useGlobalView, useWorkspace } from "@hooks/store"
 import { AppLayout } from "@layouts/app-layout"
 
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const GlobalViewIssuesPage: NextPageWithLayout = observer(() => {
     // router

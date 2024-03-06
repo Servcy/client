@@ -4,10 +4,11 @@ import { useParams, useRouter } from "next/navigation"
 
 import { useEffect } from "react"
 
-import { integrationOauth as integrationOauthApi } from "@/apis/integration"
 import { SyncOutlined } from "@ant-design/icons"
 import { Spin } from "antd"
 import toast from "react-hot-toast"
+
+import { integrationOauth as integrationOauthApi } from "@services/integration"
 
 import { getQueryParams } from "@helpers/common.helper"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"

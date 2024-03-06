@@ -2,6 +2,8 @@ import Link from "next/link"
 
 import { ReactElement } from "react"
 
+// type
+import { NextPageWithLayout } from "@/types/index"
 import { History, MessageSquare } from "lucide-react"
 import { observer } from "mobx-react"
 import useSWR from "swr"
@@ -23,9 +25,6 @@ import { UserService } from "@services/user.service"
 import { calculateTimeAgo } from "@helpers/date-time.helper"
 
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor"
-
-// type
-import { NextPageWithLayout } from "@/types/types"
 
 const userService = new UserService()
 

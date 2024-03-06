@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react"
 import emptyModule from "public/empty-state/module.svg"
 import useSWR from "swr"
@@ -16,8 +17,6 @@ import { useModule, useProject } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
 import { AppLayout } from "@layouts/app-layout"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const ModuleIssuesPage: NextPageWithLayout = observer(() => {
     // router

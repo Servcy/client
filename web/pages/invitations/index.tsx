@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 
 import { ReactElement, useState } from "react"
 
+import { NextPageWithLayout } from "@/types/index"
 import { CheckCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 // images
@@ -31,8 +32,6 @@ import { getUserRole } from "@helpers/user.helper"
 
 import type { IWorkspaceMemberInvitation } from "@servcy/types"
 import { Button } from "@servcy/ui"
-
-import { NextPageWithLayout } from "@/types/types"
 
 const workspaceService = new WorkspaceService()
 const userService = new UserService()

@@ -1,5 +1,7 @@
 import { ReactElement } from "react"
 
+// type
+import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -9,9 +11,6 @@ import { ProjectCardList } from "@components/project"
 import { useWorkspace } from "@hooks/store"
 
 import { AppLayout } from "@layouts/app-layout"
-
-// type
-import { NextPageWithLayout } from "@/types/types"
 
 const ProjectsPage: NextPageWithLayout = observer(() => {
     // store
