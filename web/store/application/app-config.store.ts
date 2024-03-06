@@ -5,36 +5,36 @@ import { IAppConfig } from "@servcy/types";
 import { AppConfigService } from "@services/app_config.service";
 
 export interface IAppConfigStore {
-  // observables
-  envConfig: IAppConfig | null;
-  // actions
-  fetchAppConfig: () => Promise<any>;
+    // observables
+    envConfig: IAppConfig | null;
+    // actions
+    fetchAppConfig: () => Promise<any>;
 }
 
 export class AppConfigStore implements IAppConfigStore {
-  // observables
-  envConfig: IAppConfig | null = null;
-  // service
-  appConfigService;
+    // observables
+    envConfig: IAppConfig | null = null;
+    // service
+    appConfigService;
 
-  constructor() {
-    makeObservable(this, {
-      // observables
-      envConfig: observable.ref,
-      // actions
-      fetchAppConfig: action,
-    });
-    this.appConfigService = new AppConfigService();
-  }
+    constructor() {
+        makeObservable(this, {
+            // observables
+            envConfig: observable.ref,
+            // actions
+            fetchAppConfig: action,
+        });
+        this.appConfigService = new AppConfigService();
+    }
 
-  /**
-   * Fetches the app config from the API
-   */
-  fetchAppConfig = async () =>
-    await this.appConfigService.envConfig().then((config) => {
-      runInAction(() => {
-        this.envConfig = config;
-      });
-      return config;
-    });
+    /**
+     * Fetches the app config from the API
+     */
+    fetchAppConfig = async () =>
+        await this.appConfigService.envConfig().then((config) => {
+            runInAction(() => {
+                this.envConfig = config;
+            });
+            return config;
+        });
 }

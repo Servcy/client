@@ -8,25 +8,25 @@ import { RouterStore, IRouterStore } from "./router.store";
 import { ThemeStore, IThemeStore } from "./theme.store";
 
 export interface IAppRootStore {
-  config: IAppConfigStore;
-  commandPalette: ICommandPaletteStore;
-  instance: IInstanceStore;
-  theme: IThemeStore;
-  router: IRouterStore;
+    config: IAppConfigStore;
+    commandPalette: ICommandPaletteStore;
+    instance: IInstanceStore;
+    theme: IThemeStore;
+    router: IRouterStore;
 }
 
 export class AppRootStore implements IAppRootStore {
-  config: IAppConfigStore;
-  commandPalette: ICommandPaletteStore;
-  instance: IInstanceStore;
-  theme: IThemeStore;
-  router: IRouterStore;
+    config: IAppConfigStore;
+    commandPalette: ICommandPaletteStore;
+    instance: IInstanceStore;
+    theme: IThemeStore;
+    router: IRouterStore;
 
-  constructor(_rootStore: RootStore) {
-    this.router = new RouterStore();
-    this.config = new AppConfigStore();
-    this.commandPalette = new CommandPaletteStore();
-    this.instance = new InstanceStore();
-    this.theme = new ThemeStore();
-  }
+    constructor(_rootStore: RootStore) {
+        this.router = new RouterStore();
+        this.config = new AppConfigStore();
+        this.commandPalette = new CommandPaletteStore();
+        this.instance = new InstanceStore();
+        this.theme = new ThemeStore();
+    }
 }

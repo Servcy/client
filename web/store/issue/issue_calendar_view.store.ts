@@ -6,107 +6,107 @@ import { ICalendarPayload, ICalendarWeek } from "@components/issues";
 import { getWeekNumberOfDate } from "@helpers/date-time.helper";
 
 export interface ICalendarStore {
-  calendarFilters: {
-    activeMonthDate: Date;
-    activeWeekDate: Date;
-  };
-  calendarPayload: ICalendarPayload | null;
+    calendarFilters: {
+        activeMonthDate: Date;
+        activeWeekDate: Date;
+    };
+    calendarPayload: ICalendarPayload | null;
 
-  // action
-  updateCalendarFilters: (filters: Partial<{ activeMonthDate: Date; activeWeekDate: Date }>) => void;
-  updateCalendarPayload: (date: Date) => void;
+    // action
+    updateCalendarFilters: (filters: Partial<{ activeMonthDate: Date; activeWeekDate: Date }>) => void;
+    updateCalendarPayload: (date: Date) => void;
 
-  // computed
-  allWeeksOfActiveMonth:
-    | {
-        [weekNumber: string]: ICalendarWeek;
-      }
-    | undefined;
-  activeWeekNumber: number;
-  allDaysOfActiveWeek: ICalendarWeek | undefined;
+    // computed
+    allWeeksOfActiveMonth:
+        | {
+              [weekNumber: string]: ICalendarWeek;
+          }
+        | undefined;
+    activeWeekNumber: number;
+    allDaysOfActiveWeek: ICalendarWeek | undefined;
 }
 
 export class CalendarStore implements ICalendarStore {
-  loader: boolean = false;
-  error: any | null = null;
+    loader: boolean = false;
+    error: any | null = null;
 
-  // observables
-  calendarFilters: { activeMonthDate: Date; activeWeekDate: Date } = {
-    activeMonthDate: new Date(),
-    activeWeekDate: new Date(),
-  };
-  calendarPayload: ICalendarPayload | null = null;
+    // observables
+    calendarFilters: { activeMonthDate: Date; activeWeekDate: Date } = {
+        activeMonthDate: new Date(),
+        activeWeekDate: new Date(),
+    };
+    calendarPayload: ICalendarPayload | null = null;
 
-  constructor() {
-    makeObservable(this, {
-      loader: observable.ref,
-      error: observable.ref,
+    constructor() {
+        makeObservable(this, {
+            loader: observable.ref,
+            error: observable.ref,
 
-      // observables
-      calendarFilters: observable.ref,
-      calendarPayload: observable.ref,
+            // observables
+            calendarFilters: observable.ref,
+            calendarPayload: observable.ref,
 
-      // actions
-      updateCalendarFilters: action,
-      updateCalendarPayload: action,
+            // actions
+            updateCalendarFilters: action,
+            updateCalendarPayload: action,
 
-      //computed
-      allWeeksOfActiveMonth: computed,
-      activeWeekNumber: computed,
-      allDaysOfActiveWeek: computed,
-    });
+            //computed
+            allWeeksOfActiveMonth: computed,
+            activeWeekNumber: computed,
+            allDaysOfActiveWeek: computed,
+        });
 
-    this.initCalendar();
-  }
+        this.initCalendar();
+    }
 
-  get allWeeksOfActiveMonth() {
-    if (!this.calendarPayload) return undefined;
+    get allWeeksOfActiveMonth() {
+        if (!this.calendarPayload) return undefined;
 
-    const { activeMonthDate } = this.calendarFilters;
+        const { activeMonthDate } = this.calendarFilters;
 
-    return this.calendarPayload[`y-${activeMonthDate.getFullYear()}`][`m-${activeMonthDate.getMonth()}`];
-  }
+        return this.calendarPayload[`y-${activeMonthDate.getFullYear()}`][`m-${activeMonthDate.getMonth()}`];
+    }
 
-  get activeWeekNumber() {
-    return getWeekNumberOfDate(this.calendarFilters.activeWeekDate);
-  }
+    get activeWeekNumber() {
+        return getWeekNumberOfDate(this.calendarFilters.activeWeekDate);
+    }
 
-  get allDaysOfActiveWeek() {
-    if (!this.calendarPayload) return undefined;
+    get allDaysOfActiveWeek() {
+        if (!this.calendarPayload) return undefined;
 
-    const { activeWeekDate } = this.calendarFilters;
+        const { activeWeekDate } = this.calendarFilters;
 
-    return this.calendarPayload[`y-${activeWeekDate.getFullYear()}`][`m-${activeWeekDate.getMonth()}`][
-      `w-${this.activeWeekNumber - 1}`
-    ];
-  }
+        return this.calendarPayload[`y-${activeWeekDate.getFullYear()}`][`m-${activeWeekDate.getMonth()}`][
+            `w-${this.activeWeekNumber - 1}`
+        ];
+    }
 
-  updateCalendarFilters = (filters: Partial<{ activeMonthDate: Date; activeWeekDate: Date }>) => {
-    this.updateCalendarPayload(filters.activeMonthDate || filters.activeWeekDate || new Date());
+    updateCalendarFilters = (filters: Partial<{ activeMonthDate: Date; activeWeekDate: Date }>) => {
+        this.updateCalendarPayload(filters.activeMonthDate || filters.activeWeekDate || new Date());
 
-    runInAction(() => {
-      this.calendarFilters = {
-        ...this.calendarFilters,
-        ...filters,
-      };
-    });
-  };
+        runInAction(() => {
+            this.calendarFilters = {
+                ...this.calendarFilters,
+                ...filters,
+            };
+        });
+    };
 
-  updateCalendarPayload = (date: Date) => {
-    if (!this.calendarPayload) return null;
+    updateCalendarPayload = (date: Date) => {
+        if (!this.calendarPayload) return null;
 
-    const nextDate = new Date(date);
+        const nextDate = new Date(date);
 
-    runInAction(() => {
-      this.calendarPayload = generateCalendarData(this.calendarPayload, nextDate);
-    });
-  };
+        runInAction(() => {
+            this.calendarPayload = generateCalendarData(this.calendarPayload, nextDate);
+        });
+    };
 
-  initCalendar = () => {
-    const newCalendarPayload = generateCalendarData(null, new Date());
+    initCalendar = () => {
+        const newCalendarPayload = generateCalendarData(null, new Date());
 
-    runInAction(() => {
-      this.calendarPayload = newCalendarPayload;
-    });
-  };
+        runInAction(() => {
+            this.calendarPayload = newCalendarPayload;
+        });
+    };
 }

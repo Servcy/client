@@ -6,104 +6,104 @@ import { NotificationService } from "@services/notification.service";
 import { IIssueDetail } from "./root.store";
 
 export interface IIssueSubscriptionStoreActions {
-  addSubscription: (issueId: string, isSubscribed: boolean | undefined | null) => void;
-  fetchSubscriptions: (workspaceSlug: string, projectId: string, issueId: string) => Promise<boolean>;
-  createSubscription: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
-  removeSubscription: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
+    addSubscription: (issueId: string, isSubscribed: boolean | undefined | null) => void;
+    fetchSubscriptions: (workspaceSlug: string, projectId: string, issueId: string) => Promise<boolean>;
+    createSubscription: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
+    removeSubscription: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>;
 }
 
 export interface IIssueSubscriptionStore extends IIssueSubscriptionStoreActions {
-  // observables
-  subscriptionMap: Record<string, Record<string, boolean>>; // Record defines subscriptionId as key and link as value
+    // observables
+    subscriptionMap: Record<string, Record<string, boolean>>; // Record defines subscriptionId as key and link as value
 
-  getSubscriptionByIssueId: (issueId: string) => boolean | undefined;
+    getSubscriptionByIssueId: (issueId: string) => boolean | undefined;
 }
 
 export class IssueSubscriptionStore implements IIssueSubscriptionStore {
-  // observables
-  subscriptionMap: Record<string, Record<string, boolean>> = {};
-  // root store
-  rootIssueDetail: IIssueDetail;
-
-  notificationService;
-
-  constructor(rootStore: IIssueDetail) {
-    makeObservable(this, {
-      // observables
-      subscriptionMap: observable,
-      // actions
-      addSubscription: action.bound,
-      fetchSubscriptions: action,
-      createSubscription: action,
-      removeSubscription: action,
-    });
+    // observables
+    subscriptionMap: Record<string, Record<string, boolean>> = {};
     // root store
-    this.rootIssueDetail = rootStore;
+    rootIssueDetail: IIssueDetail;
 
-    this.notificationService = new NotificationService();
-  }
+    notificationService;
 
-  getSubscriptionByIssueId = (issueId: string) => {
-    if (!issueId) return undefined;
-    const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
-    if (!currentUserId) return undefined;
-    return this.subscriptionMap[issueId]?.[currentUserId] ?? undefined;
-  };
+    constructor(rootStore: IIssueDetail) {
+        makeObservable(this, {
+            // observables
+            subscriptionMap: observable,
+            // actions
+            addSubscription: action.bound,
+            fetchSubscriptions: action,
+            createSubscription: action,
+            removeSubscription: action,
+        });
+        // root store
+        this.rootIssueDetail = rootStore;
 
-  addSubscription = (issueId: string, isSubscribed: boolean | undefined | null) => {
-    const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
-    if (!currentUserId) throw new Error("user id not available");
-
-    runInAction(() => {
-      set(this.subscriptionMap, [issueId, currentUserId], isSubscribed ?? false);
-    });
-  };
-
-  fetchSubscriptions = async (workspaceSlug: string, projectId: string, issueId: string) => {
-    try {
-      const subscription = await this.notificationService.getIssueNotificationSubscriptionStatus(
-        workspaceSlug,
-        projectId,
-        issueId
-      );
-
-      this.addSubscription(issueId, subscription?.subscribed);
-
-      return subscription?.subscribed;
-    } catch (error) {
-      throw error;
+        this.notificationService = new NotificationService();
     }
-  };
 
-  createSubscription = async (workspaceSlug: string, projectId: string, issueId: string) => {
-    try {
-      const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
-      if (!currentUserId) throw new Error("user id not available");
+    getSubscriptionByIssueId = (issueId: string) => {
+        if (!issueId) return undefined;
+        const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
+        if (!currentUserId) return undefined;
+        return this.subscriptionMap[issueId]?.[currentUserId] ?? undefined;
+    };
 
-      runInAction(() => {
-        set(this.subscriptionMap, [issueId, currentUserId], { subscribed: true });
-      });
+    addSubscription = (issueId: string, isSubscribed: boolean | undefined | null) => {
+        const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
+        if (!currentUserId) throw new Error("user id not available");
 
-      await this.notificationService.subscribeToIssueNotifications(workspaceSlug, projectId, issueId);
-    } catch (error) {
-      this.fetchSubscriptions(workspaceSlug, projectId, issueId);
-      throw error;
-    }
-  };
+        runInAction(() => {
+            set(this.subscriptionMap, [issueId, currentUserId], isSubscribed ?? false);
+        });
+    };
 
-  removeSubscription = async (workspaceSlug: string, projectId: string, issueId: string) => {
-    try {
-      const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
-      if (!currentUserId) throw new Error("user id not available");
+    fetchSubscriptions = async (workspaceSlug: string, projectId: string, issueId: string) => {
+        try {
+            const subscription = await this.notificationService.getIssueNotificationSubscriptionStatus(
+                workspaceSlug,
+                projectId,
+                issueId
+            );
 
-      runInAction(() => {
-        set(this.subscriptionMap, [issueId, currentUserId], { subscribed: false });
-      });
+            this.addSubscription(issueId, subscription?.subscribed);
 
-      await this.notificationService.unsubscribeFromIssueNotifications(workspaceSlug, projectId, issueId);
-    } catch (error) {
-      this.fetchSubscriptions(workspaceSlug, projectId, issueId);
-      throw error;
-    }
-  };
+            return subscription?.subscribed;
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    createSubscription = async (workspaceSlug: string, projectId: string, issueId: string) => {
+        try {
+            const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
+            if (!currentUserId) throw new Error("user id not available");
+
+            runInAction(() => {
+                set(this.subscriptionMap, [issueId, currentUserId], { subscribed: true });
+            });
+
+            await this.notificationService.subscribeToIssueNotifications(workspaceSlug, projectId, issueId);
+        } catch (error) {
+            this.fetchSubscriptions(workspaceSlug, projectId, issueId);
+            throw error;
+        }
+    };
+
+    removeSubscription = async (workspaceSlug: string, projectId: string, issueId: string) => {
+        try {
+            const currentUserId = this.rootIssueDetail.rootIssueStore.currentUserId;
+            if (!currentUserId) throw new Error("user id not available");
+
+            runInAction(() => {
+                set(this.subscriptionMap, [issueId, currentUserId], { subscribed: false });
+            });
+
+            await this.notificationService.unsubscribeFromIssueNotifications(workspaceSlug, projectId, issueId);
+        } catch (error) {
+            this.fetchSubscriptions(workspaceSlug, projectId, issueId);
+            throw error;
+        }
+    };
 }
