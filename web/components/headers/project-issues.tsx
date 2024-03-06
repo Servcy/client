@@ -98,7 +98,7 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
     [workspaceSlug, projectId, updateFilters]
   );
 
-  const deployUrl = process.env.NEXT_PUBLIC_DEPLOY_URL;
+  const deployUrl = process.env["NEXT_PUBLIC_DEPLOY_URL"];
   const canUserCreateIssue =
     currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole);
 

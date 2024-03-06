@@ -20,7 +20,7 @@ const CrispWrapper: FC<ICrispWrapper> = (props) => {
   useEffect(() => {
     if (typeof window && user?.email) {
       window.$crisp = [];
-      window.CRISP_WEBSITE_ID = process.env.NEXT_PUBLIC_CRISP_ID;
+      window.CRISP_WEBSITE_ID = process.env["NEXT_PUBLIC_CRISP_ID"];
       (function () {
         var d = document;
         var s = d.createElement("script");

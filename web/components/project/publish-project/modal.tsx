@@ -55,7 +55,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
   const [isUnPublishing, setIsUnPublishing] = useState(false);
   const [isUpdateRequired, setIsUpdateRequired] = useState(false);
 
-  let servcy_deploy_url = process.env.NEXT_PUBLIC_DEPLOY_URL;
+  let servcy_deploy_url = process.env["NEXT_PUBLIC_DEPLOY_URL"];
 
   if (typeof window !== "undefined" && !servcy_deploy_url)
     servcy_deploy_url = window.location.protocol + "//" + window.location.host + "/spaces";
