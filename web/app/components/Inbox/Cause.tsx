@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import Avatar from "antd/es/avatar/avatar.js"
 
-import { getCleanLink } from "@/utils/Shared"
+import { getCleanLink } from "@helpers/common.helper"
 
 const Cause = ({ cause, source }: { cause: any; source: string }) => {
     if (cause === "None") {

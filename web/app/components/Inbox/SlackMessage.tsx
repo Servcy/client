@@ -5,7 +5,7 @@ import { HiExternalLink, HiPaperClip } from "react-icons/hi"
 
 import { SlackMessageElementProps, SlackMessageProps } from "@/types/integrations/slack"
 
-import { getCleanLink } from "@/utils/Shared"
+import { getCleanLink } from "@helpers/common.helper"
 
 const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string }) => {
     const link = `https://servcy.slack.com/archives/${data.channel}/p${data.ts.replace(".", "")}`

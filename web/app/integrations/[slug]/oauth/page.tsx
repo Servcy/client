@@ -9,8 +9,8 @@ import { SyncOutlined } from "@ant-design/icons"
 import { Spin } from "antd"
 import toast from "react-hot-toast"
 
-import { getQueryParams } from "@/utils/Shared"
-import { capitalizeFirstLetter } from "@/utils/Shared/formatters"
+import { getQueryParams } from "@helpers/common.helper"
+import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 
 export default function IntegrationOauth(): JSX.Element {
     const params = useParams()

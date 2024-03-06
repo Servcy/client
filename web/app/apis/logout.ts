@@ -1,4 +1,4 @@
-import { axiosPost } from "@/utils/Shared/axios"
+import { axiosPost } from "@helpers/axios.helper"
 
 export const logout = async (refreshToken: string) => {
     const response = await axiosPost("/logout", {

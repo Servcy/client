@@ -14,9 +14,9 @@ import { Integration } from "@/types/apps/integration"
 
 import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal"
 
-import { oauthUrlGenerators } from "@/utils/Integration"
-import { getQueryParams } from "@/utils/Shared"
-import { capitalizeFirstLetter } from "@/utils/Shared/formatters"
+import { oauthUrlGenerators } from "@helpers/integration.helper"
+import { getQueryParams } from "@helpers/common.helper"
+import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 
 import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations"
 

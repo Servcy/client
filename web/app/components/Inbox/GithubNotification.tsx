@@ -8,7 +8,7 @@ import html from "remark-html"
 
 import { GithubNotificationProps } from "@/types/integrations/github"
 
-import { getCleanLink } from "@/utils/Shared"
+import { getCleanLink } from "@helpers/common.helper"
 
 const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps) => {
     let link = "#null"

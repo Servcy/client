@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 import { AiFillApi, AiOutlineArrowRight, AiOutlineSetting } from "react-icons/ai"
 
-import { getQueryParams } from "@/utils/Shared"
+import { getQueryParams } from "@helpers/common.helper"
 
 export default function SettingsLayout({ integrations }: { integrations: React.ReactNode }) {
     const [selection, setSelection] = useState<string>("integrations")

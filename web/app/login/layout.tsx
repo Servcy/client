@@ -12,7 +12,7 @@ import Blocked from "@/components/Shared/blocked"
 
 import "@/styles/globals.css"
 
-import { isMobileDevice } from "@/utils/Shared"
+import { isMobileDevice } from "@helpers/common.helper"
 
 const LoginLayout: FC<PropsWithChildren> = function ({ children }) {
     return (

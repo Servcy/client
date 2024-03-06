@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { isJwtTokenValid } from "@/utils/Authentication/jwt"
+import { isJwtTokenValid } from "@helpers/jwt.helper"
 
 import { authRoutes, wipRoutes } from "@/constants/routes"
 

@@ -1,4 +1,4 @@
-import { axiosGet, axiosPost, axiosPut } from "@/utils/Shared/axios"
+import { axiosGet, axiosPost, axiosPut } from "@helpers/axios.helper"
 
 export const fetchIntegrations = async () => {
     const response = await axiosGet("/integration/fetch-integrations", {})

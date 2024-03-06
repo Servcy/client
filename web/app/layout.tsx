@@ -30,7 +30,7 @@ import { THEMES } from "@constants/themes"
 
 import type { NextPageWithLayout } from "@/types/types"
 
-import { isMobileDevice } from "@/utils/Shared"
+import { isMobileDevice } from "@helpers/common.helper"
 
 // dynamic imports
 const StoreWrapper = dynamic(() => import("@wrappers/StoreWrapper"), { ssr: false })

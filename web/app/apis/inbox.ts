@@ -1,4 +1,4 @@
-import { axiosPost } from "@/utils/Shared/axios"
+import { axiosPost } from "@helpers/axios.helper"
 
 export const fetchInbox = async (payload: object) => {
     const response = await axiosPost("/inbox/items", payload)

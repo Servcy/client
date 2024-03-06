@@ -9,11 +9,11 @@ import { Button, Card, Skeleton } from "antd"
 import toast from "react-hot-toast"
 import { AiFillSetting } from "react-icons/ai"
 
+import { getQueryParams } from "@helpers/common.helper"
+
 import { Integration } from "@/types/apps/integration"
 
 import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal"
-
-import { getQueryParams } from "@/utils/Shared"
 
 export default function IntegrationSettings(): JSX.Element {
     const [integrations, setIntegrations] = useState<Integration[]>([])

@@ -18,13 +18,13 @@ import useLoginRedirection from "@hooks/use-login-redirection"
 
 import { AuthService } from "@services/auth.service"
 
+import { validateEmail, validateOtp, validatePhone } from "@helpers/validation.helper"
+
 import { Spinner } from "@servcy/ui"
 
 import type { NextPageWithLayout } from "@/types/types"
 
 import OTPInput from "@/components/Login/OTPInput"
-
-import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators"
 
 const authService = new AuthService()
 
