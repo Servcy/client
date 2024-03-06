@@ -106,20 +106,12 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
         analyticsService
             .exportAnalytics(workspaceSlug.toString(), data)
             .then((res) => {
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: res.message,
-                })
+                toast.success(res.message)
 
                 trackExportAnalytics()
             })
             .catch(() =>
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "There was some error in exporting the analytics. Please try again.",
-                })
+                toast.error("There was some error in exporting the analytics. Please try again.")
             )
     }
 

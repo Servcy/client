@@ -38,8 +38,6 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
             const errorString = Array.isArray(error) ? error[0] : error
 
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: errorString ?? "Estimate points could not be used. Please try again.",
             })
         })

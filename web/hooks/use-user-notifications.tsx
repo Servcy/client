@@ -2,7 +2,6 @@ import { useRouter } from "next/router"
 
 import { useMemo, useState } from "react"
 
-// swr
 import useSWR from "swr"
 import useSWRInfinite from "swr/infinite"
 
@@ -10,10 +9,9 @@ import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@consta
 
 import { NotificationService } from "@services/notification.service"
 
-// type
 import type { IMarkAllAsReadPayload, NotificationCount, NotificationType } from "@servcy/types"
 
-import useToast from "./use-toast"
+import toast from "react-hot-toast";
 
 const PER_PAGE = 30
 
@@ -58,7 +56,7 @@ const useUserNotification = () => {
     const isLoadingMore = isLoading || (size > 0 && paginatedData && typeof paginatedData[size - 1] === "undefined")
     const isEmpty = paginatedData?.[0]?.results?.length === 0
     const notifications = paginatedData ? paginatedData.map((d) => d.results).flat() : undefined
-    const hasMore = isEmpty || (paginatedData && paginatedData[paginatedData.length - 1].next_page_results)
+    const hasMore = isEmpty || (paginatedData && paginatedData[paginatedData.length - 1]?.next_page_results)
     const isRefreshing = isValidating && paginatedData && paginatedData.length === size
 
     const { data: notificationCount, mutate: mutateNotificationCount } = useSWR(
@@ -110,8 +108,8 @@ const useUserNotification = () => {
             if (notificationIndexInPage === -1) return previousNotifications
 
             const key = Object.keys(value)[0]
-            ;(previousNotifications[notificationIndex].results[notificationIndexInPage] as any)[key] = (value as any)[
-                key
+            ;(previousNotifications[notificationIndex].results[notificationIndexInPage] as any)[key as keyof typeof value] = (value as any)[
+                key as keyof typeof value
             ]
 
             return previousNotifications
@@ -276,18 +274,10 @@ const useUserNotification = () => {
         await userNotificationServices
             .markAllNotificationsAsRead(workspaceSlug.toString(), markAsReadParams)
             .then(() => {
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "All Notifications marked as read.",
-                })
+                toast.success("All Notifications marked as read.")
             })
             .catch(() => {
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Something went wrong. Please try again.",
-                })
+                toast.error("Something went wrong. Please try again.")
             })
             .finally(() => {
                 notificationMutate()

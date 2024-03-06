@@ -142,7 +142,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                     await fetchSubIssues(workspaceSlug, projectId, parentIssueId)
                 } catch (error) {
                     toast.error({
-                        type: "error",
+                        
                         title: "Error fetching sub-issues",
                         message: "Error fetching sub-issues",
                     })
@@ -163,7 +163,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                     })
                 } catch (error) {
                     toast.error({
-                        type: "error",
+                        
                         title: "Error adding sub-issue",
                         message: "Error adding sub-issue",
                     })
@@ -215,7 +215,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         path: router.asPath,
                     })
                     toast.error({
-                        type: "error",
+                        
                         title: "Error updating sub-issue",
                         message: "Error updating sub-issue",
                     })
@@ -256,7 +256,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         path: router.asPath,
                     })
                     toast.error({
-                        type: "error",
+                        
                         title: "Error removing sub-issue",
                         message: "Error removing sub-issue",
                     })
@@ -289,7 +289,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         path: router.asPath,
                     })
                     toast.error({
-                        type: "error",
+                        
                         title: "Error deleting issue",
                         message: "Error deleting issue",
                     })

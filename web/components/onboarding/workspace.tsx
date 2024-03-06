@@ -73,7 +73,7 @@ export const Workspace: React.FC<Props> = (props) => {
                                 },
                             })
                             toast.error({
-                                type: "error",
+                                
                                 title: "Error!",
                                 message: "Workspace could not be created. Please try again.",
                             })
@@ -82,8 +82,6 @@ export const Workspace: React.FC<Props> = (props) => {
             })
             .catch(() =>
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Some error occurred while creating workspace. Please try again.",
                 })
             )

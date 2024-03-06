@@ -119,8 +119,6 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
 
         addCycleToFavorites(workspaceSlug?.toString(), projectId.toString(), activeCycle.id).catch(() => {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Couldn't add the cycle to favorites. Please try again.",
             })
         })
@@ -132,8 +130,6 @@ export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props
 
         removeCycleFromFavorites(workspaceSlug?.toString(), projectId.toString(), activeCycle.id).catch(() => {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Couldn't add the cycle to favorites. Please try again.",
             })
         })

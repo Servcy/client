@@ -169,7 +169,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
                 ).catch((err) => {
                     toast.error({
                         title: "Error",
-                        type: "error",
+                        
                         message: err.detail ?? "Failed to perform this action",
                     })
                 })

@@ -101,8 +101,6 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
             const error = errors[key as keyof TIssue]
 
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: error?.message?.toString() || "Some error occurred. Please try again.",
             })
         })
@@ -141,7 +139,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
     //       const errorTitle = error ? (Array.isArray(error) ? error.join(", ") : error) : null;
 
     //       toast.error({
-    //         type: "error",
+    //         
     //         title: "Error!",
     //         message: errorTitle || "Some error occurred. Please try again.",
     //       });
@@ -186,8 +184,6 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
             })
             console.error(err)
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: err?.message || "Some error occurred. Please try again.",
             })
         }

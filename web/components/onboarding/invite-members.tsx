@@ -334,8 +334,6 @@ export const InviteMembers: React.FC<Props> = (props) => {
                     element: "Onboarding",
                 })
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: err?.error,
                 })
             })

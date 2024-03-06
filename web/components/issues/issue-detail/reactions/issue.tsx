@@ -44,7 +44,7 @@ export const IssueReaction: FC<TIssueReaction> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Reaction creation failed",
-                        type: "error",
+                        
                         message: "Reaction creation failed",
                     })
                 }
@@ -61,7 +61,7 @@ export const IssueReaction: FC<TIssueReaction> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Reaction remove failed",
-                        type: "error",
+                        
                         message: "Reaction remove failed",
                     })
                 }

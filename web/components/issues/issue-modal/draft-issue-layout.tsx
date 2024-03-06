@@ -78,7 +78,6 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
             })
             .catch(() => {
                 toast.error({
-                    type: "error",
                     title: "Error!",
                     message: "Issue could not be created. Please try again.",
                 })

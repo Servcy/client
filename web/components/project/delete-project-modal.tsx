@@ -79,8 +79,6 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
                     payload: { ...project, state: "FAILED", element: "Project general settings" },
                 })
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Something went wrong. Please try again later.",
                 })
             })

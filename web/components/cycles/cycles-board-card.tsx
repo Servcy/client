@@ -81,11 +81,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
         const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
 
         copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`).then(() => {
-            toast.error({
-                type: "success",
-                title: "Link Copied!",
-                message: "Cycle link copied to clipboard.",
-            })
+            toast.success("Cycle link copied to clipboard.")
         })
     }
 
@@ -102,11 +98,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Couldn't add the cycle to favorites. Please try again.",
-                })
+                toast.error("Couldn't add the cycle to favorites. Please try again.")
             })
     }
 
@@ -123,11 +115,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Couldn't add the cycle to favorites. Please try again.",
-                })
+                toast.error("Couldn't add the cycle to favorites. Please try again.")
             })
     }
 

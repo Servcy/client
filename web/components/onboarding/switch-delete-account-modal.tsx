@@ -45,8 +45,6 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
             })
             .catch(() =>
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Failed to sign out. Please try again.",
                 })
             )
@@ -70,8 +68,6 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
             })
             .catch((err) =>
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: err?.error,
                 })
             )

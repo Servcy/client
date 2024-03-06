@@ -53,11 +53,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                 router.push("/profile")
             })
             .catch((err) =>
-                toast.error({
-                    type: "error",
-                    title: "Error",
-                    message: err?.error || "Something went wrong. Please try again.",
-                })
+                toast.error(err?.error || "Something went wrong. Please try again.")
             )
     }
 
@@ -65,11 +61,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
         if (!workspaceSlug || !memberDetails) return
 
         await removeMemberFromWorkspace(workspaceSlug.toString(), memberDetails.member.id).catch((err) =>
-            toast.error({
-                type: "error",
-                title: "Error",
-                message: err?.error || "Something went wrong. Please try again.",
-            })
+            toast.error(err?.error || "Something went wrong. Please try again.")
         )
     }
 
@@ -166,11 +158,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                             updateMember(workspaceSlug.toString(), memberDetails.member.id, {
                                 role: value,
                             }).catch(() => {
-                                toast.error({
-                                    type: "error",
-                                    title: "Error!",
-                                    message: "An error occurred while updating member role. Please try again.",
-                                })
+                                toast.error("An error occurred while updating member role. Please try again.")
                             })
                         }}
                         disabled={!hasRoleChangeAccess}

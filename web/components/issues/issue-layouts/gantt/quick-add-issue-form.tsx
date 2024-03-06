@@ -134,8 +134,6 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
                 path: router.asPath,
             })
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: err?.message || "Some error occurred. Please try again.",
             })
         }

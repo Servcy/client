@@ -41,22 +41,14 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
         const selectedProjectId = payload.project_id ?? projectId.toString()
         await createCycle(workspaceSlug, selectedProjectId, payload)
             .then((res) => {
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Cycle created successfully.",
-                })
+                toast.success("Cycle created successfully.")
                 captureCycleEvent({
                     eventName: CYCLE_CREATED,
                     payload: { ...res, state: "SUCCESS" },
                 })
             })
             .catch((err) => {
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: err.detail ?? "Error in creating cycle. Please try again.",
-                })
+                toast.error(err.detail ?? "Error in creating cycle. Please try again.")
                 captureCycleEvent({
                     eventName: CYCLE_CREATED,
                     payload: { ...payload, state: "FAILED" },
@@ -75,22 +67,14 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
                     eventName: CYCLE_UPDATED,
                     payload: { ...res, changed_properties: changed_properties, state: "SUCCESS" },
                 })
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Cycle updated successfully.",
-                })
+                toast.success("Cycle updated successfully.")
             })
             .catch((err) => {
                 captureCycleEvent({
                     eventName: CYCLE_UPDATED,
                     payload: { ...payload, state: "FAILED" },
                 })
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: err.detail ?? "Error in updating cycle. Please try again.",
-                })
+                toast.error(err.detail ?? "Error in updating cycle. Please try again.")
             })
     }
 
@@ -136,12 +120,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
             }
             handleClose()
         } else
-            toast.error({
-                type: "error",
-                title: "Error!",
-                message:
-                    "You already have a cycle on the given dates, if you want to create a draft cycle, remove the dates.",
-            })
+            toast.error("You already have a cycle on the given dates, if you want to create a draft cycle, remove the dates.")
     }
 
     useEffect(() => {

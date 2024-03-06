@@ -32,18 +32,10 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
         await createView(workspaceSlug, projectId, payload)
             .then(() => {
                 handleClose()
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "View created successfully.",
-                })
+                toast.success("View created successfully.")
             })
             .catch(() =>
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Something went wrong. Please try again.",
-                })
+                toast.error("Something went wrong. Please try again.")
             )
     }
 
@@ -51,11 +43,7 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
         await updateView(workspaceSlug, projectId, data?.id as string, payload)
             .then(() => handleClose())
             .catch((err) =>
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: err.detail ?? "Something went wrong. Please try again.",
-                })
+                toast.error(err.detail ?? "Something went wrong. Please try again.")
             )
     }
 

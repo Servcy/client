@@ -53,11 +53,7 @@ export const DeleteGlobalViewModal: React.FC<Props> = observer((props) => {
                     view_id: data.id,
                     state: "FAILED",
                 })
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Something went wrong while deleting the view. Please try again.",
-                })
+                toast.error("Something went wrong while deleting the view. Please try again.")
             })
             .finally(() => {
                 setIsDeleteLoading(false)

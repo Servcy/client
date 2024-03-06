@@ -47,8 +47,6 @@ export const DeleteLabelModal: React.FC<Props> = observer((props) => {
 
                 const error = err?.error || "Label could not be deleted. Please try again."
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: error,
                 })
             })

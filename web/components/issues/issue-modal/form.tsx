@@ -199,7 +199,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
             .then((res) => {
                 if (res.response === "")
                     toast.error({
-                        type: "error",
+                        
                         title: "Error!",
                         message:
                             "Issue title isn't informative enough to generate the description. Please try with a different title.",
@@ -211,7 +211,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
 
                 if (err.status === 429)
                     toast.error({
-                        type: "error",
+                        
                         title: "Error!",
                         message:
                             error ||
@@ -219,7 +219,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                     })
                 else
                     toast.error({
-                        type: "error",
+                        
                         title: "Error!",
                         message: error || "Some error occurred. Please try again.",
                     })

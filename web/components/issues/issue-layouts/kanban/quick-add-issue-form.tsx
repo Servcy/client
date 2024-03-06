@@ -127,8 +127,6 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
             })
             console.error(err)
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: err?.message || "Some error occurred. Please try again.",
             })
         }

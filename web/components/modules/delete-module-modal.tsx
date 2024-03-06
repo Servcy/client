@@ -57,8 +57,6 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
             })
             .catch(() => {
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Module could not be deleted. Please try again.",
                 })
                 captureModuleEvent({

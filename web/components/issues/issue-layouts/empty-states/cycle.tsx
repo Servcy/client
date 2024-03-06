@@ -61,8 +61,6 @@ export const CycleEmptyState: React.FC<Props> = observer((props) => {
 
         await issues.addIssueToCycle(workspaceSlug.toString(), projectId, cycleId.toString(), issueIds).catch(() => {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Selected issues could not be added to the cycle. Please try again.",
             })
         })

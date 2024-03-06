@@ -6,8 +6,6 @@ import { observer } from "mobx-react-lite"
 import { useDropzone } from "react-dropzone"
 import toast from "react-hot-toast"
 
-import { useApplication } from "@hooks/store"
-
 import { MAX_FILE_SIZE } from "@constants/common"
 
 import { FileService } from "@services/file.service"
@@ -31,19 +29,14 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
     const [image, setImage] = useState<File | null>(null)
     const [isImageUploading, setIsImageUploading] = useState(false)
 
-    // store hooks
-    const {
-        config: { envConfig },
-    } = useApplication()
-
-    const onDrop = (acceptedFiles: File[]) => setImage(acceptedFiles[0])
+    const onDrop = (acceptedFiles: File[]) => setImage(acceptedFiles[0] ?? null)
 
     const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
         onDrop,
         accept: {
             "image/*": [".png", ".jpg", ".jpeg", ".svg", ".webp"],
         },
-        maxSize: envConfig?.file_size_limit ?? MAX_FILE_SIZE,
+        maxSize: MAX_FILE_SIZE,
         multiple: false,
     })
 
@@ -73,11 +66,7 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
                 if (value) fileService.deleteUserFile(value)
             })
             .catch((err) =>
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: err?.error ?? "Something went wrong. Please try again.",
-                })
+                toast.error(err?.error ?? "Something went wrong. Please try again.")
             )
             .finally(() => setIsImageUploading(false))
     }
@@ -158,7 +147,7 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
                                         </div>
                                         {fileRejections.length > 0 && (
                                             <p className="text-sm text-red-500">
-                                                {fileRejections[0].errors[0].code === "file-too-large"
+                                                {fileRejections[0]?.errors[0]?.code === "file-too-large"
                                                     ? "The image size cannot exceed 5 MB."
                                                     : "Please upload a file in a valid format."}
                                             </p>

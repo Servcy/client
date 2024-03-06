@@ -50,7 +50,7 @@ export const DeleteIssueModal: React.FC<Props> = (props) => {
                 .catch(() => {
                     toast.error({
                         title: "Error",
-                        type: "error",
+                        
                         message: "Failed to delete issue",
                     })
                 })

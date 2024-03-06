@@ -84,7 +84,6 @@ export const getMenuOptions = ({
             onActionCompleteHandler({
               title: "Copy Failed",
               message: "Sorry, page cannot be copied, please try again later.",
-              type: "error",
             });
           });
       },
@@ -113,7 +112,6 @@ export const getMenuOptions = ({
             onActionCompleteHandler({
               title: `Page cannot be ${state}`,
               message: `Sorry, page cannot be ${state}, please try again later`,
-              type: "error",
             });
           });
       },

@@ -43,8 +43,6 @@ export const ArchiveIssueModal: React.FC<Props> = (props) => {
             .then(() => onClose())
             .catch(() =>
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Issue could not be archived. Please try again.",
                 })
             )

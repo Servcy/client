@@ -39,18 +39,10 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
         // TODO: import transferIssuesFromCycle from store
         await transferIssuesFromCycle(workspaceSlug.toString(), projectId.toString(), cycleId.toString(), payload)
             .then(() => {
-                toast.error({
-                    type: "success",
-                    title: "Issues transferred successfully",
-                    message: "Issues have been transferred successfully",
-                })
+                toast.success("Issues have been transferred successfully")
             })
             .catch(() => {
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Issues cannot be transfer. Please try again.",
-                })
+                toast.error("Issues cannot be transfer. Please try again.")
             })
     }
 

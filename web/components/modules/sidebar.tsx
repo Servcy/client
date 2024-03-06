@@ -111,8 +111,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
             })
             .catch(() => {
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Some error occurred",
                 })
             })
@@ -137,8 +135,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
             })
             .catch(() => {
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Some error occurred",
                 })
             })
@@ -161,8 +157,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
             })
             .catch(() => {
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Some error occurred",
                 })
             })
@@ -179,8 +173,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
             })
             .catch(() => {
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Some error occurred",
                 })
             })

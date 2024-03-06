@@ -65,7 +65,7 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Comment creation failed.",
-                        type: "error",
+
                         message: "Comment creation failed. Please try again later.",
                     })
                 }
@@ -82,7 +82,7 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Comment update failed.",
-                        type: "error",
+
                         message: "Comment update failed. Please try again later.",
                     })
                 }
@@ -99,7 +99,7 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Comment remove failed.",
-                        type: "error",
+
                         message: "Comment remove failed. Please try again later.",
                     })
                 }

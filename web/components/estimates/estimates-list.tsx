@@ -51,8 +51,6 @@ export const EstimatesList: React.FC = observer(() => {
             const errorString = Array.isArray(error) ? error[0] : error
 
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: errorString ?? "Estimate could not be disabled. Please try again",
             })
         })

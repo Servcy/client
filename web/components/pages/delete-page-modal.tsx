@@ -73,7 +73,6 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
                     },
                 })
                 toast.error({
-                    type: "error",
                     title: "Error!",
                     message: "Page could not be deleted. Please try again.",
                 })

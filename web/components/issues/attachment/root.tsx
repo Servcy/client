@@ -52,7 +52,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                     })
                     toast.error({
                         message: "The attachment could not be uploaded",
-                        type: "error",
+
                         title: "Attachment not uploaded",
                     })
                 }
@@ -85,7 +85,7 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                     })
                     toast.error({
                         message: "The Attachment could not be removed",
-                        type: "error",
+
                         title: "Attachment not removed",
                     })
                 }

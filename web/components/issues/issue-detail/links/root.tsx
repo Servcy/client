@@ -53,7 +53,7 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
                 } catch (error) {
                     toast.error({
                         message: "The link could not be created",
-                        type: "error",
+
                         title: "Link not created",
                     })
                 }
@@ -71,7 +71,7 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
                 } catch (error) {
                     toast.error({
                         message: "The link could not be updated",
-                        type: "error",
+
                         title: "Link not updated",
                     })
                 }
@@ -89,7 +89,7 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
                 } catch (error) {
                     toast.error({
                         message: "The link could not be removed",
-                        type: "error",
+
                         title: "Link not removed",
                     })
                 }

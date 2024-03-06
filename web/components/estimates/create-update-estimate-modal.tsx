@@ -69,8 +69,6 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 const errorString = Array.isArray(error) ? error[0] : error
 
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message:
                         errorString ?? err.status === 400
                             ? "Estimate with that name already exists. Please try again with another name."
@@ -91,8 +89,6 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
                 const errorString = Array.isArray(error) ? error[0] : error
 
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: errorString ?? "Estimate could not be updated. Please try again.",
                 })
             })
@@ -101,8 +97,6 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
     const onSubmit = async (formData: FormValues) => {
         if (!formData.name || formData.name === "") {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Estimate title cannot be empty.",
             })
             return
@@ -117,8 +111,6 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
             formData.value6 === ""
         ) {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Estimate point cannot be empty.",
             })
             return
@@ -133,8 +125,6 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
             formData.value6.length > 20
         ) {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Estimate point cannot have more than 20 characters.",
             })
             return
@@ -151,8 +141,6 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
             ])
         ) {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Estimate points cannot have duplicate values.",
             })
             return

@@ -77,11 +77,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
         if (!workspaceSlug || !projectId) return
 
         if (!data.delete_issue_ids || data.delete_issue_ids.length === 0) {
-            toast.error({
-                type: "error",
-                title: "Error!",
-                message: "Please select at least one issue.",
-            })
+            toast.error("Please select at least one issue.")
             return
         }
 
@@ -89,19 +85,11 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
 
         await removeBulkIssues(workspaceSlug as string, projectId as string, data.delete_issue_ids)
             .then(() => {
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "Issues deleted successfully!",
-                })
+                toast.success("Issues deleted successfully!")
                 handleClose()
             })
             .catch(() =>
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Something went wrong. Please try again.",
-                })
+                toast.error("Something went wrong. Please try again.")
             )
     }
 

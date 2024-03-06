@@ -71,8 +71,6 @@ export const HeaderGroupByCard: FC<IHeaderGroupByCard> = observer((props) => {
             addIssuesToView && addIssuesToView(issues)
         } catch (error) {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Selected issues could not be added to the cycle. Please try again.",
             })
         }

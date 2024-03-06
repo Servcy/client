@@ -52,11 +52,7 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
 
     const onSubmit = async () => {
         if (selectedIssues.length === 0) {
-            toast.error({
-                type: "error",
-                title: "Error!",
-                message: "Please select at least one issue.",
-            })
+            toast.error("Please select at least one issue.")
 
             return
         }
@@ -67,11 +63,7 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
 
         handleClose()
 
-        toast.error({
-            title: "Success",
-            type: "success",
-            message: `Issue${selectedIssues.length > 1 ? "s" : ""} added successfully`,
-        })
+        toast.success(`Issue${selectedIssues.length > 1 ? "s" : ""} added successfully`)
     }
 
     useEffect(() => {
@@ -226,7 +218,9 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                                             </Loader>
                                         ) : (
                                             <ul
-                                                className={`text-sm text-custom-text-100 ${issues.length > 0 ? "p-2" : ""}`}
+                                                className={`text-sm text-custom-text-100 ${
+                                                    issues.length > 0 ? "p-2" : ""
+                                                }`}
                                             >
                                                 {issues.map((issue) => {
                                                     const selected = selectedIssues.some((i) => i.id === issue.id)

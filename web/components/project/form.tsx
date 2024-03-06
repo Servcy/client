@@ -96,8 +96,6 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                     payload: { ...payload, state: "FAILED", element: "Project general settings" },
                 })
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: error?.error ?? "Project could not be updated. Please try again.",
                 })
             })

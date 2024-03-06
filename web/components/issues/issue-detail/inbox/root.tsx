@@ -78,7 +78,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
                 } catch (error) {
                     toast.error({
                         title: "Issue update failed",
-                        type: "error",
+
                         message: "Issue update failed",
                     })
                     captureIssueEvent({
@@ -113,7 +113,7 @@ export const InboxIssueDetailRoot: FC<TInboxIssueDetailRoot> = (props) => {
                     })
                     toast.error({
                         title: "Issue delete failed",
-                        type: "error",
+
                         message: "Issue delete failed",
                     })
                 }

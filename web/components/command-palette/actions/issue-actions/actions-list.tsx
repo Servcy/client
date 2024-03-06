@@ -64,21 +64,15 @@ export const CommandPaletteIssueActions: React.FC<Props> = observer((props) => {
     }
 
     const copyIssueUrlToClipboard = () => {
-        if (!router.query.issueId) return
+        if (!router.query["issueId"]) return
 
         const url = new URL(window.location.href)
         copyTextToClipboard(url.href)
             .then(() => {
-                toast.error({
-                    type: "success",
-                    title: "Copied to clipboard",
-                })
+                toast.success("Copied to clipboard")
             })
             .catch(() => {
-                toast.error({
-                    type: "error",
-                    title: "Some error occurred",
-                })
+                toast.error("Some error occurred")
             })
     }
 

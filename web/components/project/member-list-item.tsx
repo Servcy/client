@@ -58,7 +58,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                 })
                 .catch((err) =>
                     toast.error({
-                        type: "error",
+                        
                         title: "Error",
                         message: err?.error || "Something went wrong. Please try again.",
                     })
@@ -67,7 +67,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
             await removeMemberFromProject(workspaceSlug.toString(), projectId.toString(), userDetails.member.id).catch(
                 (err) =>
                     toast.error({
-                        type: "error",
+                        
                         title: "Error",
                         message: err?.error || "Something went wrong. Please try again.",
                     })
@@ -151,8 +151,6 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                                 const errorString = Array.isArray(error) ? error[0] : error
 
                                 toast.error({
-                                    type: "error",
-                                    title: "Error!",
                                     message:
                                         errorString ??
                                         "An error occurred while updating member role. Please try again.",

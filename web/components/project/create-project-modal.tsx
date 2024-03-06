@@ -36,7 +36,7 @@ const IsGuestCondition: FC<IIsGuestCondition> = ({ onClose }) => {
         onClose()
         toast.error({
             title: "Error",
-            type: "error",
+            
             message: "You don't have permission to create project.",
         })
     }, [onClose, setToastAlert])
@@ -107,8 +107,6 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
 
         addProjectToFavorites(workspaceSlug.toString(), projectId).catch(() => {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
             })
         })
@@ -148,7 +146,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
             .catch((err) => {
                 Object.keys(err.data).map((key) => {
                     toast.error({
-                        type: "error",
+                        
                         title: "Error!",
                         message: err.data[key],
                     })

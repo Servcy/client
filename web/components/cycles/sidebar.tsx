@@ -103,7 +103,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
             })
             .catch(() => {
                 toast.error({
-                    type: "error",
+                    
                     title: "Some error occurred",
                 })
             })
@@ -151,8 +151,6 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
             })
         } else {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message:
                     "You already have a cycle on the given dates, if you want to create a draft cycle, you can do that by removing both the dates.",
             })

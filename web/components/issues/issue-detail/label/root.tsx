@@ -44,7 +44,7 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Issue update failed",
-                        type: "error",
+
                         message: "Issue update failed",
                     })
                 }
@@ -62,7 +62,7 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Label creation failed",
-                        type: "error",
+
                         message: "Label creation failed",
                     })
                     return error

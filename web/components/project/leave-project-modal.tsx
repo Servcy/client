@@ -72,7 +72,7 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
                         })
                         .catch(() => {
                             toast.error({
-                                type: "error",
+                                
                                 title: "Error!",
                                 message: "Something went wrong please try again later.",
                             })
@@ -83,22 +83,18 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
                         })
                 } else {
                     toast.error({
-                        type: "error",
+                        
                         title: "Error!",
                         message: "Please confirm leaving the project by typing the 'Leave Project'.",
                     })
                 }
             } else {
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Please enter the project name as shown in the description.",
                 })
             }
         } else {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Please fill all fields.",
             })
         }

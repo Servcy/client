@@ -78,7 +78,7 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
             ).catch((err) => {
                 toast.error({
                     title: "Error",
-                    type: "error",
+                    
                     message: err.detail ?? "Failed to perform this action",
                 })
             })

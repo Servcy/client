@@ -116,8 +116,6 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
 
         addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
             })
         })
@@ -128,8 +126,6 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
 
         removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
             })
         })

@@ -70,14 +70,14 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
                 if (typeof error === "object") {
                     Object.keys(error).forEach((key) => {
                         toast.error({
-                            type: "error",
+                            
                             title: "Error!",
                             message: Array.isArray(error[key]) ? error[key].join(", ") : error[key],
                         })
                     })
                 } else {
                     toast.error({
-                        type: "error",
+                        
                         title: "Error!",
                         message:
                             error ?? err.status === 400

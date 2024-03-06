@@ -78,18 +78,12 @@ export const CommandPalette: FC = observer(() => {
         const url = new URL(window.location.href)
         copyTextToClipboard(url.href)
             .then(() => {
-                toast.error({
-                    type: "success",
-                    title: "Copied to clipboard",
-                })
+                toast.success("Copied to clipboard")
             })
             .catch(() => {
-                toast.error({
-                    type: "error",
-                    title: "Some error occurred",
-                })
+                toast.error("Some error occurred")
             })
-    }, [setToastAlert, issueId])
+    }, [issueId])
 
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {

@@ -74,11 +74,7 @@ export const ProjectSidebarList: FC = observer(() => {
         const updatedSortOrder = orderJoinedProjects(source.index, destination.index, draggableId, joinedProjectsList)
         if (updatedSortOrder != undefined)
             updateProjectView(workspaceSlug.toString(), draggableId, { sort_order: updatedSortOrder }).catch(() => {
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "Something went wrong. Please try again.",
-                })
+                toast.error("Something went wrong. Please try again.")
             })
     }
 

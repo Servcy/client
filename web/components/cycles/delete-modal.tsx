@@ -62,7 +62,7 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
             handleClose()
         } catch (error) {
             toast.error({
-                type: "error",
+                
                 title: "Warning!",
                 message: "Something went wrong please try again later.",
             })

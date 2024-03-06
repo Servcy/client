@@ -52,11 +52,9 @@ export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) 
                     applied_filters: res.filters,
                     state: "SUCCESS",
                 })
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "View created successfully.",
-                })
+                toast.success(
+                    "View created successfully."
+                )
 
                 router.push(`/${workspaceSlug}/workspace-views/${res.id}`)
                 handleClose()
@@ -66,11 +64,9 @@ export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) 
                     applied_filters: payload?.filters,
                     state: "FAILED",
                 })
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "View could not be created. Please try again.",
-                })
+                toast.error(
+                    "View could not be created. Please try again."
+                )
             })
     }
 
@@ -91,11 +87,9 @@ export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) 
                     applied_filters: res.filters,
                     state: "SUCCESS",
                 })
-                toast.error({
-                    type: "success",
-                    title: "Success!",
-                    message: "View updated successfully.",
-                })
+                toast.success(
+                    "View updated successfully."
+                )
                 handleClose()
             })
             .catch(() => {
@@ -104,11 +98,9 @@ export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) 
                     applied_filters: data.filters,
                     state: "FAILED",
                 })
-                toast.error({
-                    type: "error",
-                    title: "Error!",
-                    message: "View could not be updated. Please try again.",
-                })
+                toast.error(
+                    "View could not be updated. Please try again."
+                )
             })
     }
 

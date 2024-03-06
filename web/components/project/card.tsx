@@ -44,8 +44,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
 
         addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
             })
         })
@@ -56,8 +54,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
 
         removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error({
-                type: "error",
-                title: "Error!",
                 message: "Couldn't remove the project from favorites. Please try again.",
             })
         })

@@ -61,8 +61,6 @@ export const ModuleEmptyState: React.FC<Props> = observer((props) => {
             .addIssuesToModule(workspaceSlug.toString(), projectId?.toString(), moduleId.toString(), issueIds)
             .catch(() =>
                 toast.error({
-                    type: "error",
-                    title: "Error!",
                     message: "Selected issues could not be added to the module. Please try again.",
                 })
             )

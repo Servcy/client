@@ -34,19 +34,11 @@ export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
         try {
             if (isSubscribed) await removeSubscription(workspaceSlug, projectId, issueId)
             else await createSubscription(workspaceSlug, projectId, issueId)
-            toast.error({
-                type: "success",
-                title: `Issue ${isSubscribed ? `unsubscribed` : `subscribed`} successfully.!`,
-                message: `Issue ${isSubscribed ? `unsubscribed` : `subscribed`} successfully.!`,
-            })
+            toast.error(`Issue ${isSubscribed ? `unsubscribed` : `subscribed`} successfully.!`)
             setLoading(false)
         } catch (error) {
             setLoading(false)
-            toast.error({
-                type: "error",
-                title: "Error",
-                message: "Something went wrong. Please try again later.",
-            })
+            toast.error("Something went wrong. Please try again later.")
         }
     }
 

@@ -102,11 +102,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                 try {
                     await updateIssue(workspaceSlug, projectId, issueId, data)
                     if (showToast)
-                        toast.error({
-                            title: "Issue updated successfully",
-                            type: "success",
-                            message: "Issue updated successfully",
-                        })
+                        toast.success("Issue updated successfully")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { ...data, issueId, state: "SUCCESS", element: "Issue peek-overview" },
@@ -122,21 +118,13 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         payload: { state: "FAILED", element: "Issue peek-overview" },
                         path: router.asPath,
                     })
-                    toast.error({
-                        title: "Issue update failed",
-                        type: "error",
-                        message: "Issue update failed",
-                    })
+                    toast.error("Issue update failed")
                 }
             },
             remove: async (workspaceSlug: string, projectId: string, issueId: string) => {
                 try {
                     removeIssue(workspaceSlug, projectId, issueId)
-                    toast.error({
-                        title: "Issue deleted successfully",
-                        type: "success",
-                        message: "Issue deleted successfully",
-                    })
+                    toast.success("Issue deleted successfully")
                     captureIssueEvent({
                         eventName: ISSUE_DELETED,
                         payload: { id: issueId, state: "SUCCESS", element: "Issue peek-overview" },
@@ -145,7 +133,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Issue delete failed",
-                        type: "error",
+
                         message: "Issue delete failed",
                     })
                     captureIssueEvent({
@@ -170,7 +158,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                     })
                 } catch (error) {
                     toast.error({
-                        type: "error",
+
                         title: "Error!",
                         message: "Issue could not be archived. Please try again.",
                     })
@@ -196,7 +184,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                     })
                 } catch (error) {
                     toast.error({
-                        type: "error",
+
                         title: "Error!",
                         message: "Issue could not be restored. Please try again.",
                     })
@@ -236,7 +224,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                     })
                     toast.error({
                         title: "Cycle add to issue failed",
-                        type: "error",
+
                         message: "Cycle add to issue failed",
                     })
                 }
@@ -266,7 +254,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Cycle remove from issue failed",
-                        type: "error",
+
                         message: "Cycle remove from issue failed",
                     })
                     captureIssueEvent({
@@ -314,7 +302,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                     })
                     toast.error({
                         title: "Module add to issue failed",
-                        type: "error",
+
                         message: "Module add to issue failed",
                     })
                 }
@@ -353,7 +341,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                     })
                     toast.error({
                         title: "Module remove from issue failed",
-                        type: "error",
+
                         message: "Module remove from issue failed",
                     })
                 }
@@ -374,7 +362,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                 } catch (error) {
                     toast.error({
                         title: "Module remove from issue failed",
-                        type: "error",
+
                         message: "Module remove from issue failed",
                     })
                 }
