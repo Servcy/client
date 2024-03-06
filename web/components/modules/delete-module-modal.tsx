@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 // hooks
 import { useEventTracker, useModule } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
 // icons

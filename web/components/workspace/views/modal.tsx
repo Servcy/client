@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 // store hooks
 import { useEventTracker, useGlobalView } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { WorkspaceViewForm } from "components/workspace";
 // types

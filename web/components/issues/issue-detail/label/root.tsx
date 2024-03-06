@@ -6,7 +6,7 @@ import { LabelList, LabelCreate, IssueLabelSelectRoot } from "./";
 import { useIssueDetail, useLabel } from "@hooks/store";
 // types
 import { IIssueLabel, TIssue } from "@servcy/types";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 
 export type TIssueLabel = {
   workspaceSlug: string;

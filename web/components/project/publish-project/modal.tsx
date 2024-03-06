@@ -6,7 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Check, CircleDot, Globe2 } from "lucide-react";
 // hooks
 import { useProjectPublish } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, Loader, ToggleSwitch } from "@servcy/ui";
 import { CustomPopover } from "./popover";

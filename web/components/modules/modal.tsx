@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 // hooks
 import { useEventTracker, useModule, useProject } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { ModuleForm } from "components/modules";
 // types

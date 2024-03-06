@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { X } from "lucide-react";
 // hooks
 import { useEventTracker, useProject, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
 // components

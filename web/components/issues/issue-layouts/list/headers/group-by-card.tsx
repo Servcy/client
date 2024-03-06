@@ -11,7 +11,7 @@ import { observer } from "mobx-react-lite";
 import { useEventTracker } from "@hooks/store";
 // types
 import { TIssue, ISearchIssueResponse } from "@servcy/types";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { useState } from "react";
 import { TCreateModalStoreTypes } from "@constants/issue";
 

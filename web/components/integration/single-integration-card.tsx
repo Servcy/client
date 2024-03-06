@@ -8,7 +8,7 @@ import useSWR, { mutate } from "swr";
 import { IntegrationService } from "@services/integrations";
 // hooks
 import { useApplication, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import useIntegrationPopup from "@hooks/use-integration-popup";
 // ui
 import { Button, Loader, Tooltip } from "@servcy/ui";

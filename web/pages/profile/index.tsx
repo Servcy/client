@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { FileService } from "@services/file.service";
 // hooks
 import { useApplication, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import useUserAuth from "@hooks/use-user-auth";
 // layouts
 import { ProfileSettingsLayout } from "@layouts/settings-layout";

@@ -10,7 +10,7 @@ import { EmptyState } from "components/common";
 import emptyIssue from "public/empty-state/issue.svg";
 // hooks
 import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // types
 import { TIssue } from "@servcy/types";
 // constants

@@ -6,7 +6,7 @@ import { Button, Input } from "@servcy/ui";
 import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
 // hooks
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // services
 import { WorkspaceService } from "@services/workspace.service";
 // constants

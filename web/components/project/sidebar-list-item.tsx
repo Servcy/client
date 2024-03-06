@@ -21,7 +21,7 @@ import {
 // hooks
 import { useApplication, useEventTracker, useInbox, useProject } from "@hooks/store";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // helpers
 import { cn } from "@helpers/common.helper";
 import { getNumberCount } from "@helpers/string.helper";

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 // hooks
 import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";

@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { Check, Info, LinkIcon, Pencil, Star, Trash2, User2 } from "lucide-react";
 // hooks
 import { useModule, useUser, useEventTracker, useMember } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { CreateUpdateModuleModal, DeleteModuleModal } from "components/modules";
 // ui

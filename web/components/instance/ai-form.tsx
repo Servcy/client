@@ -7,7 +7,7 @@ import { Button, Input } from "@servcy/ui";
 import { IFormattedInstanceConfiguration } from "@servcy/types";
 // hooks
 import { useApplication } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 
 export interface IInstanceAIForm {
   config: IFormattedInstanceConfiguration;

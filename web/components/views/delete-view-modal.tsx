@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
 // hooks
 import { useProjectView } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
 // types

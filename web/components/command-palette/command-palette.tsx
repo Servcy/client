@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // hooks
 import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { CommandModal, ShortcutsModal } from "components/command-palette";
 import { BulkDeleteIssuesModal } from "components/core";

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Plus, ChevronRight, ChevronDown, Loader } from "lucide-react";
 // hooks
 import { useEventTracker, useIssueDetail } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { ExistingIssuesListModal } from "components/core";
 import { CreateUpdateIssueModal, DeleteIssueModal } from "components/issues";

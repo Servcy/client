@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 // hooks
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import useKeypress from "@hooks/use-keypress";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // store hooks
 import { useIssueDetail } from "@hooks/store";
 // components

@@ -6,7 +6,7 @@ import { Button, Input } from "@servcy/ui";
 import { IInstance, IInstanceAdmin } from "@servcy/types";
 // hooks
 import { useApplication } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 
 export interface IInstanceGeneralForm {
   instance: IInstance;

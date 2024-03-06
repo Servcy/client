@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // hooks
 import { useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // layouts
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
 // components

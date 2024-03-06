@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 // store hooks
 import { useEstimate, useProject, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { CreateUpdateEstimateModal, DeleteEstimateModal, EstimateListItem } from "components/estimates";
 import { EmptyState, getEmptyStateImagePath } from "components/empty-state";

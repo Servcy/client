@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { AlertTriangle } from "lucide-react";
 // store hooks
 import { useEstimate } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // types
 import { IEstimate } from "@servcy/types";
 // ui

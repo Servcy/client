@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // hooks
 import { useProject, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import { Controller, useForm } from "react-hook-form";
 
 import { MemberSelect } from "components/project";

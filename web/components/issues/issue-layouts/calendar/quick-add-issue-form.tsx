@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 // hooks
 import { useEventTracker, useProject } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import useKeypress from "@hooks/use-keypress";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // helpers

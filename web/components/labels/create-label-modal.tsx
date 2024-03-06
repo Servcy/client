@@ -7,7 +7,7 @@ import { Dialog, Popover, Transition } from "@headlessui/react";
 import { ChevronDown } from "lucide-react";
 // hooks
 import { useLabel } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
 // types

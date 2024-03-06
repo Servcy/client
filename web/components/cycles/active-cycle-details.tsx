@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { useTheme } from "next-themes";
 // hooks
 import { useCycle, useIssues, useMember, useProject, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { SingleProgressStats } from "components/core";
 import {

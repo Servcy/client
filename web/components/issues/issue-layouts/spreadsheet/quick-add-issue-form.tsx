@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { PlusIcon } from "lucide-react";
 // hooks
 import { useEventTracker, useProject, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import useKeypress from "@hooks/use-keypress";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // helpers

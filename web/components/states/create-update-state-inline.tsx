@@ -6,7 +6,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 // hooks
 import { useEventTracker, useProjectState } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, CustomSelect, Input, Tooltip } from "@servcy/ui";
 // types

@@ -10,7 +10,7 @@ import { UserService } from "@services/user.service";
 import { WorkspaceService } from "@services/workspace.service";
 // hooks
 import { useEventTracker, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // layouts
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import DefaultLayout from "@layouts/default-layout";

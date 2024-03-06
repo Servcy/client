@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { ChevronDown, Dot, XCircle } from "lucide-react";
 // hooks
 import { useEventTracker, useMember, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { ConfirmWorkspaceMemberRemove } from "components/workspace";
 // ui

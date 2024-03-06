@@ -4,7 +4,7 @@ import Link from "next/link";
 import { observer } from "mobx-react";
 // hooks
 import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { CycleCreateUpdateModal, CycleDeleteModal } from "components/cycles";
 // ui

@@ -7,7 +7,7 @@ import { LayoutPanelTop, Sparkle, X } from "lucide-react";
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
 // hooks
 import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // services
 import { AIService } from "@services/ai.service";
 import { FileService } from "@services/file.service";

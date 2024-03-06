@@ -6,7 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ChevronDown, Plus, X } from "lucide-react";
 // hooks
 import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Avatar, Button, CustomSelect, CustomSearchSelect } from "@servcy/ui";
 // helpers

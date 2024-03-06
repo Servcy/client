@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { ChevronDown, ChevronRight, Plus } from "lucide-react";
 // hooks
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { CreateProjectModal, ProjectSidebarListItem } from "components/project";
 // helpers

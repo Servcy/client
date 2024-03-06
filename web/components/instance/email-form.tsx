@@ -7,7 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { IFormattedInstanceConfiguration } from "@servcy/types";
 // hooks
 import { useApplication } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 
 export interface IInstanceEmailForm {
   config: IFormattedInstanceConfiguration;

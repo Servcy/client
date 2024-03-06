@@ -5,7 +5,7 @@ import { DayPicker } from "react-day-picker";
 import { Popover } from "@headlessui/react";
 // hooks
 import { useUser, useInboxIssues, useIssueDetail, useWorkspace, useEventTracker } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import {
   AcceptIssueModal,

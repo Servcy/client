@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 import { ChevronLeft, LogOut, MoveLeft, Plus, UserPlus } from "lucide-react";
-// hooks
+
 import { useApplication, useUser, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Tooltip } from "@servcy/ui";
 // constants
@@ -92,11 +92,7 @@ export const ProfileLayoutSidebar = observer(() => {
         router.push("/");
       })
       .catch(() =>
-        toast.error({
-          type: "error",
-          title: "Error!",
-          message: "Failed to sign out. Please try again.",
-        })
+        toast.error("Failed to sign out. Please try again.")
       )
       .finally(() => setIsSigningOut(false));
   };

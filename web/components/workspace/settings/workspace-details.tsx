@@ -7,7 +7,7 @@ import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 import { FileService } from "@services/file.service";
 // hooks
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { DeleteWorkspaceModal } from "components/workspace";
 import { WorkspaceImageUploadModal } from "components/core";

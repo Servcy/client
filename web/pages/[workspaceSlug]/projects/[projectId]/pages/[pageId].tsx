@@ -8,7 +8,7 @@ import useSWR from "swr";
 
 import { useApplication, usePage, useUser, useWorkspace } from "@hooks/store";
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // services
 import { FileService } from "@services/file.service";
 // layouts

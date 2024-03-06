@@ -5,7 +5,7 @@ import { LinkIcon, Lock, Pencil, Star } from "lucide-react";
 import Link from "next/link";
 // hooks
 import { useProject } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { DeleteProjectModal, JoinProjectModal } from "components/project";
 // ui

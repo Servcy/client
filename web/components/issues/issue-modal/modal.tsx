@@ -13,7 +13,7 @@ import {
   useWorkspace,
   useIssueDetail,
 } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 import useLocalStorage from "@hooks/use-local-storage";
 // components
 import { DraftIssueLayout } from "./draft-issue-layout";

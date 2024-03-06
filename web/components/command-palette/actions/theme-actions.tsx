@@ -5,7 +5,7 @@ import { Settings } from "lucide-react";
 import { observer } from "mobx-react-lite";
 // hooks
 import { useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // constants
 import { THEME_OPTIONS } from "@constants/themes";
 

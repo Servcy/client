@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 // hooks
 import { useModule, useUser, useEventTracker } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { LinkModal, LinksList, SidebarProgressStats } from "components/core";
 import { DeleteModuleModal } from "components/modules";

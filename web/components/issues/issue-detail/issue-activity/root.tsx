@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { History, LucideIcon, MessageCircle, ListRestart } from "lucide-react";
 // hooks
 import { useIssueDetail, useProject } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentRoot, IssueCommentCreate } from "./";
 // types

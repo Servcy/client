@@ -6,7 +6,7 @@ import { AlertTriangleIcon } from "lucide-react";
 import { observer } from "mobx-react-lite";
 // hooks
 import { useEventTracker, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
 // types

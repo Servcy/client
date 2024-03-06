@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { WorkspaceService } from "@services/workspace.service";
 // hooks
 import { useEventTracker, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // ui
 import { Button, CustomSelect, Input } from "@servcy/ui";
 // types

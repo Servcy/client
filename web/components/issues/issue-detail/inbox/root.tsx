@@ -6,7 +6,7 @@ import { InboxIssueMainContent } from "./main-content";
 import { InboxIssueDetailsSidebar } from "./sidebar";
 // hooks
 import { useEventTracker, useInboxIssues, useIssueDetail, useUser } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // types
 import { TIssue } from "@servcy/types";
 import { TIssueOperations } from "../root";

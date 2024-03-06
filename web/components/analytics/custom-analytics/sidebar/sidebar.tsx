@@ -6,7 +6,7 @@ import { mutate } from "swr";
 import { AnalyticsService } from "@services/analytics.service";
 // hooks
 import { useCycle, useModule, useProject, useUser, useWorkspace } from "@hooks/store";
-import useToast from "@hooks/use-toast";
+import toast from "react-hot-toast";
 // components
 import { CustomAnalyticsSidebarHeader, CustomAnalyticsSidebarProjectsList } from "components/analytics";
 // ui
