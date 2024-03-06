@@ -4,7 +4,6 @@ import React from "react"
 
 // headless ui
 import { Tab } from "@headlessui/react"
-// images
 import emptyLabel from "public/empty-state/empty_label.svg"
 import emptyMembers from "public/empty-state/empty_members.svg"
 

@@ -2,7 +2,6 @@ import Image from "next/image"
 
 import { Lightbulb } from "lucide-react"
 import { useTheme } from "next-themes"
-// images
 import latestFeatures from "public/onboarding/onboarding-pages.svg"
 
 export const LatestFeatureBlock = () => {

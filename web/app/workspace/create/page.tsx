@@ -8,7 +8,6 @@ import { useState } from "react"
 
 import { NextPageWithLayout } from "@/types/index"
 import { observer } from "mobx-react-lite"
-// images
 import ServcyLogo from "public/logo.svg"
 
 import { PageHead } from "@components/core"

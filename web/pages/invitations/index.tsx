@@ -7,7 +7,7 @@ import { ReactElement, useState } from "react"
 import { NextPageWithLayout } from "@/types/index"
 import { CheckCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
-// images
+
 import emptyInvitation from "public/empty-state/invitation.svg"
 import ServcyLogo from "public/logo.svg"
 import toast from "react-hot-toast"
@@ -74,7 +74,7 @@ const UserInvitationsPage: NextPageWithLayout = observer(() => {
 
         workspaceService
             .joinWorkspaces({ invitations: invitationsRespond })
-            .then((res) => {
+            .then(() => {
                 mutate("USER_WORKSPACES")
                 const firstInviteId = invitationsRespond[0]
                 const invitation = invitations?.find((i) => i.id === firstInviteId)

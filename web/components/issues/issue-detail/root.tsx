@@ -3,7 +3,6 @@ import { useRouter } from "next/router"
 import { FC, useMemo } from "react"
 
 import { observer } from "mobx-react"
-// images
 import emptyIssue from "public/empty-state/issue.svg"
 import toast from "react-hot-toast"
 

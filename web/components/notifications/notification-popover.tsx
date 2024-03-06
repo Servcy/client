@@ -3,7 +3,6 @@ import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"
 import { Bell } from "lucide-react"
 import { observer } from "mobx-react-lite"
-// images
 import emptyNotification from "public/empty-state/notification.svg"
 
 import { EmptyState } from "@components/common"

@@ -4,7 +4,6 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 
 import { ClipboardList } from "lucide-react"
-// images
 import JoinProjectImg from "public/auth/project-not-authorized.svg"
 
 import { useProject, useUser } from "@hooks/store"

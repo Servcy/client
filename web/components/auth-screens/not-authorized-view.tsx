@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 import React from "react"
 
 import { observer } from "mobx-react-lite"
-// images
 import ProjectNotAuthorizedImg from "public/auth/project-not-authorized.svg"
 import WorkspaceNotAuthorizedImg from "public/auth/workspace-not-authorized.svg"
 

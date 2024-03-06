@@ -8,7 +8,7 @@ import { Menu, Transition } from "@headlessui/react"
 import { ChevronDown } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
-// images
+
 import ServcyLogo from "public/logo.png"
 import { Controller, useForm } from "react-hook-form"
 import useSWR from "swr"
@@ -84,7 +84,6 @@ const OnboardingPage: NextPageWithLayout = observer(() => {
         await updateUserOnBoard()
             .then(() => {
                 captureEvent(USER_ONBOARDING_COMPLETED, {
-                    user_role: user.role,
                     email: user.email,
                     user_id: user.id,
                     status: "SUCCESS",
