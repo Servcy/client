@@ -9,7 +9,7 @@ import { LiteTextEditorWithRef, LiteReadOnlyEditorWithRef } from "@servcy/lite-t
 import { IssueCommentReaction } from "../../reactions/issue-comment";
 
 import { CustomMenu } from "@servcy/ui";
-// services
+
 import { FileService } from "@services/file.service";
 
 import { TIssueComment } from "@servcy/types";

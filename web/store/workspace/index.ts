@@ -3,7 +3,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { RootStore } from "../root.store";
 
 import { IWorkspace } from "@servcy/types";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 // sub-stores
 import { ApiTokenStore, IApiTokenStore } from "./api-token.store";
@@ -32,7 +32,7 @@ export interface IWorkspaceRootStore {
 export class WorkspaceRootStore implements IWorkspaceRootStore {
   // observables
   workspaces: Record<string, IWorkspace> = {};
-  // services
+
   workspaceService;
   // root store
   router;
@@ -58,7 +58,7 @@ export class WorkspaceRootStore implements IWorkspaceRootStore {
       deleteWorkspace: action,
     });
 
-    // services
+
     this.workspaceService = new WorkspaceService();
     // root store
     this.router = _rootStore.app.router;

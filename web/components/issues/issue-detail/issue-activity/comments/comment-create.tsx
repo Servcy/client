@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 
 import { LiteTextEditorWithRef } from "@servcy/lite-text-editor";
 import { Button } from "@servcy/ui";
-// services
+
 import { FileService } from "@services/file.service";
 
 import { TActivityOperations } from "../root";

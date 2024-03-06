@@ -9,7 +9,7 @@ import { observer } from "mobx-react-lite";
 
 import { useUser } from "@hooks/store";
 import useUserAuth from "@hooks/use-user-auth";
-// services
+
 import { IntegrationService } from "@services/integrations";
 
 import { Exporter, SingleExport } from "@components/exporter";
@@ -26,7 +26,7 @@ import { EXPORTERS_LIST } from "@constants/workspace";
 
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
-// services
+
 const integrationService = new IntegrationService();
 
 const IntegrationGuide = observer(() => {

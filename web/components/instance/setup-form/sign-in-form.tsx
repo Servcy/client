@@ -5,7 +5,7 @@ import { Eye, EyeOff, XCircle } from "lucide-react";
 import { useUser } from "@hooks/store";
 
 import { Input, Button } from "@servcy/ui";
-// services
+
 import { AuthService } from "@services/auth.service";
 const authService = new AuthService();
 import toast from "react-hot-toast";

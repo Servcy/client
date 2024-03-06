@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { Transition, Dialog } from "@headlessui/react";
 
 import { useApplication, useWorkspace } from "@hooks/store";
-// services
+
 import { FileService } from "@services/file.service";
 import toast from "react-hot-toast";
 
@@ -24,7 +24,7 @@ type Props = {
   value: string | null;
 };
 
-// services
+
 const fileService = new FileService();
 
 export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {

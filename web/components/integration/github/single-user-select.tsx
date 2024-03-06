@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 
 import { Avatar, CustomSelect, CustomSearchSelect, Input } from "@servcy/ui";
@@ -32,7 +32,7 @@ const importOptions = [
   },
 ];
 
-// services
+
 const workspaceService = new WorkspaceService();
 
 export const SingleUserSelect: React.FC<Props> = ({ collaborator, index, users, setUsers }) => {

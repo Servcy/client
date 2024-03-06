@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Controller, useForm } from "react-hook-form";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
-// services
+
 import { FileService } from "@services/file.service";
 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
@@ -28,7 +28,7 @@ const defaultValues: Partial<IWorkspace> = {
   logo: null,
 };
 
-// services
+
 const fileService = new FileService();
 
 export const WorkspaceDetails: FC = observer(() => {

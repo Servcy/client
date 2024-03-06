@@ -1,6 +1,6 @@
 import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { ProjectEstimateService } from "@services/project";
 
 import { IEstimate, IEstimateFormData } from "@servcy/types";
@@ -42,7 +42,7 @@ export class EstimateStore implements IEstimateStore {
   fetchedMap: Record<string, boolean> = {};
   // root store
   rootStore;
-  // services
+
   estimateService;
 
   constructor(_rootStore: RootStore) {
@@ -64,7 +64,7 @@ export class EstimateStore implements IEstimateStore {
 
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.estimateService = new ProjectEstimateService();
   }
 

@@ -3,7 +3,7 @@ import pull from "lodash/pull";
 import set from "lodash/set";
 import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { IssueService } from "@services/issue";
 
 import {
@@ -58,7 +58,7 @@ export class IssueSubIssuesStore implements IIssueSubIssuesStore {
   subIssueHelpers: Record<string, TSubIssueHelpers> = {};
   // root store
   rootIssueDetailStore: IIssueDetail;
-  // services
+
   issueService;
 
   constructor(rootStore: IIssueDetail) {
@@ -77,7 +77,7 @@ export class IssueSubIssuesStore implements IIssueSubIssuesStore {
     });
     // root store
     this.rootIssueDetailStore = rootStore;
-    // services
+
     this.issueService = new IssueService();
   }
 

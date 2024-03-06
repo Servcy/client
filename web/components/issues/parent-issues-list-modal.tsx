@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 // headless ui
 import { Combobox, Dialog, Transition } from "@headlessui/react";
-// services
+
 import { ProjectService } from "@services/project";
 
 import useDebounce from "@hooks/use-debounce";
@@ -24,7 +24,7 @@ type Props = {
   issueId?: string;
 };
 
-// services
+
 const projectService = new ProjectService();
 
 export const ParentIssuesListModal: React.FC<Props> = ({

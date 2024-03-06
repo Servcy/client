@@ -8,7 +8,7 @@ import { useTheme } from "next-themes";
 
 import { useUser } from "@hooks/store";
 import useUserAuth from "@hooks/use-user-auth";
-// services
+
 import { IntegrationService } from "@services/integrations";
 
 import { DeleteImportModal, GithubImporterRoot, JiraImporterRoot, SingleImport } from "@components/integration";
@@ -26,7 +26,7 @@ import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
 import { IMPORTERS_LIST } from "@constants/workspace";
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";
 
-// services
+
 const integrationService = new IntegrationService();
 
 const IntegrationGuide = observer(() => {

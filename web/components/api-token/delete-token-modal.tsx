@@ -2,7 +2,7 @@ import { useState, Fragment, FC } from "react";
 import { useRouter } from "next/router";
 import { mutate } from "swr";
 import { Dialog, Transition } from "@headlessui/react";
-// services
+
 import { APITokenService } from "@services/api_token.service";
 import toast from "react-hot-toast";
 

@@ -19,7 +19,7 @@ import {
 import { IIssueRootStore } from "../root.store";
 
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-// services
+
 import { ViewService } from "@services/view.service";
 
 export interface IProjectViewIssuesFilter {
@@ -44,7 +44,7 @@ export class ProjectViewIssuesFilter extends IssueFilterHelperStore implements I
   filters: { [viewId: string]: IIssueFilters } = {};
   // root store
   rootIssueStore;
-  // services
+
   issueFilterService;
 
   constructor(_rootStore: IIssueRootStore) {
@@ -61,7 +61,7 @@ export class ProjectViewIssuesFilter extends IssueFilterHelperStore implements I
     });
     // root store
     this.rootIssueStore = _rootStore;
-    // services
+
     this.issueFilterService = new ViewService();
   }
 

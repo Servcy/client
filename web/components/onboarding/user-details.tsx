@@ -11,7 +11,7 @@ import { OnboardingSidebar, OnboardingStepIndicator } from "@components/onboardi
 import { UserImageUploadModal } from "@components/core";
 
 import { IUser } from "@servcy/types";
-// services
+
 import { FileService } from "@services/file.service";
 // assets
 import IssuesSvg from "public/onboarding/onboarding-issues.webp";

@@ -14,7 +14,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { Check, ChevronDown, Plus, XCircle } from "lucide-react";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
@@ -68,7 +68,7 @@ type InviteMemberFormProps = {
   setIsInvitationDisabled: (value: boolean) => void;
 };
 
-// services
+
 const workspaceService = new WorkspaceService();
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 

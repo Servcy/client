@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import useSWR, { mutate } from "swr";
 
-// services
+
 import { ProjectService } from "@services/project";
 
 import { useRouter } from "next/router";
@@ -34,7 +34,7 @@ const integrationDetails: { [key: string]: any } = {
   },
 };
 
-// services
+
 const projectService = new ProjectService();
 
 export const IntegrationCard: React.FC<Props> = ({ integration }) => {

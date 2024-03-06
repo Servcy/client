@@ -4,7 +4,7 @@ import set from "lodash/set";
 import uniq from "lodash/uniq";
 import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { IssueCommentService } from "@services/issue";
 
 import { TIssueComment, TIssueCommentIdMap, TIssueCommentMap } from "@servcy/types";
@@ -52,7 +52,7 @@ export class IssueCommentStore implements IIssueCommentStore {
   commentMap: TIssueCommentMap = {};
   // root store
   rootIssueDetail: IIssueDetail;
-  // services
+
   issueCommentService;
 
   constructor(rootStore: IIssueDetail) {
@@ -69,7 +69,7 @@ export class IssueCommentStore implements IIssueCommentStore {
     });
     // root store
     this.rootIssueDetail = rootStore;
-    // services
+
     this.issueCommentService = new IssueCommentService();
   }
 

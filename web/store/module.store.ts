@@ -2,7 +2,7 @@ import set from "lodash/set";
 import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { ModuleService } from "@services/module.service";
 import { ProjectService } from "@services/project";
 
@@ -62,7 +62,7 @@ export class ModulesStore implements IModuleStore {
   fetchedMap: Record<string, boolean> = {};
   // root store
   rootStore;
-  // services
+
   projectService;
   moduleService;
 
@@ -90,7 +90,7 @@ export class ModulesStore implements IModuleStore {
 
     this.rootStore = _rootStore;
 
-    // services
+
     this.projectService = new ProjectService();
     this.moduleService = new ModuleService();
   }

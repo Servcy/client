@@ -16,7 +16,7 @@ import { renderEmoji } from "@helpers/emoji.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
 
 import { NETWORK_CHOICES } from "@constants/project";
-// services
+
 import { ProjectService } from "@services/project";
 import { PROJECT_UPDATED } from "@constants/event-tracker";
 export interface IProjectDetailsForm {

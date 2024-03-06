@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
-// services
+
 import { AnalyticsService } from "@services/analytics.service";
 
 import { CustomAnalyticsSelectBar, CustomAnalyticsMainContent, CustomAnalyticsSidebar } from "@components/analytics";

@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 import { FolderPlus, Search, Settings } from "lucide-react";
 
 import { useApplication, useEventTracker, useProject } from "@hooks/store";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 import { IssueService } from "@services/issue";
 
@@ -30,7 +30,7 @@ import { IWorkspaceSearchResults } from "@servcy/types";
 // fetch-keys
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
 
-// services
+
 const workspaceService = new WorkspaceService();
 const issueService = new IssueService();
 

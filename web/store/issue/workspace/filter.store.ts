@@ -20,7 +20,7 @@ import {
 import { IIssueRootStore } from "../root.store";
 
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 
 type TWorkspaceFilters = "all-issues" | "assigned" | "created" | "subscribed" | string;
@@ -49,7 +49,7 @@ export class WorkspaceIssuesFilter extends IssueFilterHelperStore implements IWo
   filters: { [viewId: string]: IIssueFilters } = {};
   // root store
   rootIssueStore;
-  // services
+
   issueFilterService;
 
   constructor(_rootStore: IIssueRootStore) {
@@ -69,7 +69,7 @@ export class WorkspaceIssuesFilter extends IssueFilterHelperStore implements IWo
     });
     // root store
     this.rootIssueStore = _rootStore;
-    // services
+
     this.issueFilterService = new WorkspaceService();
   }
 

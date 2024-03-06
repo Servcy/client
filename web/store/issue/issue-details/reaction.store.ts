@@ -4,7 +4,7 @@ import pull from "lodash/pull";
 import set from "lodash/set";
 import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { IssueReactionService } from "@services/issue";
 
 import { TIssueReaction, TIssueReactionIdMap, TIssueReactionMap } from "@servcy/types";
@@ -42,7 +42,7 @@ export class IssueReactionStore implements IIssueReactionStore {
   reactionMap: TIssueReactionMap = {};
   // root store
   rootIssueDetailStore: IIssueDetail;
-  // services
+
   issueReactionService;
 
   constructor(rootStore: IIssueDetail) {
@@ -58,7 +58,7 @@ export class IssueReactionStore implements IIssueReactionStore {
     });
     // root store
     this.rootIssueDetailStore = rootStore;
-    // services
+
     this.issueReactionService = new IssueReactionService();
   }
 

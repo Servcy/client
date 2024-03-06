@@ -8,7 +8,7 @@ import { useApplication, useProject } from "@hooks/store";
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 
 import { renderEmoji } from "@helpers/emoji.helper";
-// services
+
 import { IssueService } from "@services/issue";
 
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
@@ -18,7 +18,7 @@ import { BreadcrumbLink } from "@components/common";
 import { PanelRight } from "lucide-react";
 import { cn } from "@helpers/common.helper";
 
-// services
+
 const issueService = new IssueService();
 
 export const ProjectIssueDetailsHeader: FC = observer(() => {

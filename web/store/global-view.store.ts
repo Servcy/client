@@ -1,7 +1,7 @@
 import { set } from "lodash";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 
 import { IWorkspaceView } from "@servcy/types";
@@ -29,7 +29,7 @@ export class GlobalViewStore implements IGlobalViewStore {
   globalViewMap: Record<string, IWorkspaceView> = {};
   // root store
   rootStore;
-  // services
+
   workspaceService;
 
   constructor(_rootStore: RootStore) {
@@ -48,7 +48,7 @@ export class GlobalViewStore implements IGlobalViewStore {
 
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.workspaceService = new WorkspaceService();
   }
 

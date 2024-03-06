@@ -6,7 +6,7 @@ import { mutate } from "swr";
 
 // headless ui
 import { Dialog, Transition } from "@headlessui/react";
-// services
+
 import { IntegrationService } from "@services/integrations/integration.service";
 import toast from "react-hot-toast";
 
@@ -25,7 +25,7 @@ type Props = {
   user: IUser | null;
 };
 
-// services
+
 const integrationService = new IntegrationService();
 
 export const DeleteImportModal: React.FC<Props> = ({ isOpen, handleClose, data }) => {

@@ -1,7 +1,7 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 
 import { IAppConfig } from "@servcy/types";
-// services
+
 import { AppConfigService } from "@services/app_config.service";
 
 export interface IAppConfigStore {

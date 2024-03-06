@@ -22,7 +22,7 @@ export interface IApiTokenStore {
 export class ApiTokenStore implements IApiTokenStore {
   // observables
   apiTokens: Record<string, IApiToken> | null = null;
-  // services
+
   apiTokenService;
   // root store
   rootStore;
@@ -40,7 +40,7 @@ export class ApiTokenStore implements IApiTokenStore {
     });
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.apiTokenService = new APITokenService();
   }
 

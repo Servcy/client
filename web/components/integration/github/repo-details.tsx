@@ -6,7 +6,7 @@ import useSWR from "swr";
 
 // react-hook-form
 import { UseFormSetValue } from "react-hook-form";
-// services
+
 import { GithubIntegrationService } from "@services/integrations";
 
 import { Button, Loader } from "@servcy/ui";
@@ -22,7 +22,7 @@ type Props = {
   setValue: UseFormSetValue<TFormValues>;
 };
 
-// services
+
 const githubIntegrationService = new GithubIntegrationService();
 
 export const GithubRepoDetails: FC<Props> = ({ selectedRepo, handleStepChange, setUsers, setValue }) => {

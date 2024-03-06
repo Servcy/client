@@ -5,7 +5,7 @@ import update from "lodash/update";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // base class
 import { IssueHelperStore } from "../helpers/issue-helper.store";
-// services
+
 import { IssueArchiveService, IssueService } from "@services/issue";
 
 import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types";
@@ -39,7 +39,7 @@ export class ProjectIssues extends IssueHelperStore implements IProjectIssues {
   };
   // root store
   rootIssueStore: IIssueRootStore;
-  // services
+
   issueService;
   issueArchiveService;
 
@@ -62,7 +62,7 @@ export class ProjectIssues extends IssueHelperStore implements IProjectIssues {
     });
     // root store
     this.rootIssueStore = _rootStore;
-    // services
+
     this.issueService = new IssueService();
     this.issueArchiveService = new IssueArchiveService();
   }

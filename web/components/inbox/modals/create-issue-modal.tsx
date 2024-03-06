@@ -8,7 +8,7 @@ import { Sparkle } from "lucide-react";
 
 import { useApplication, useEventTracker, useWorkspace, useInboxIssues, useMention } from "@hooks/store";
 import toast from "react-hot-toast";
-// services
+
 import { FileService } from "@services/file.service";
 import { AIService } from "@services/ai.service";
 
@@ -34,7 +34,7 @@ const defaultValues: Partial<TIssue> = {
   priority: "none",
 };
 
-// services
+
 const aiService = new AIService();
 const fileService = new FileService();
 

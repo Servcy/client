@@ -3,7 +3,7 @@ import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // base class
 import { IssueHelperStore } from "../helpers/issue-helper.store";
-// services
+
 import { IssueArchiveService } from "@services/issue";
 
 import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types";
@@ -28,7 +28,7 @@ export class ArchivedIssues extends IssueHelperStore implements IArchivedIssues 
   issues: { [project_id: string]: string[] } = {};
   // root store
   rootIssueStore: IIssueRootStore;
-  // services
+
   archivedIssueService;
 
   //viewData
@@ -53,7 +53,7 @@ export class ArchivedIssues extends IssueHelperStore implements IArchivedIssues 
     });
     // root store
     this.rootIssueStore = _rootStore;
-    // services
+
     this.archivedIssueService = new IssueArchiveService();
   }
 

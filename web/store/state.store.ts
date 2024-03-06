@@ -6,7 +6,7 @@ import { computedFn } from "mobx-utils";
 import { RootStore } from "./root.store";
 
 import { IState } from "@servcy/types";
-// services
+
 import { ProjectStateService } from "@services/project";
 
 import { sortStates } from "@helpers/state.helper";

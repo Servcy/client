@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { Combobox, Dialog, Transition } from "@headlessui/react";
 
 import toast from "react-hot-toast";
-// services
+
 import { IssueService } from "@services/issue";
 
 import { Button, LayersIcon } from "@servcy/ui";

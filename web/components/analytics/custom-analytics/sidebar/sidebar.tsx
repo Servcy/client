@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { mutate } from "swr";
-// services
+
 import { AnalyticsService } from "@services/analytics.service";
 
 import { useCycle, useModule, useProject, useUser, useWorkspace } from "@hooks/store";

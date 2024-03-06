@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-// services
+
 import { AuthService } from "@services/auth.service";
 import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
@@ -30,7 +30,7 @@ const defaultValues: TCreatePasswordFormValues = {
   password: "",
 };
 
-// services
+
 const authService = new AuthService();
 
 export const SignUpOptionalSetPasswordForm: React.FC<Props> = (props) => {

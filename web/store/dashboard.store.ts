@@ -1,7 +1,7 @@
 import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { DashboardService } from "@services/dashboard.service";
 
 import {
@@ -65,7 +65,7 @@ export class DashboardStore implements IDashboardStore {
   // stores
   routerStore;
   issueStore;
-  // services
+
   dashboardService;
 
   constructor(_rootStore: RootStore) {
@@ -87,7 +87,7 @@ export class DashboardStore implements IDashboardStore {
     // router store
     this.routerStore = _rootStore.app.router;
     this.issueStore = _rootStore.issue.issues;
-    // services
+
     this.dashboardService = new DashboardService();
   }
 

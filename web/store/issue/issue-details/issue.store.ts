@@ -1,5 +1,5 @@
 import { makeObservable } from "mobx";
-// services
+
 import { IssueArchiveService, IssueDraftService, IssueService } from "@services/issue";
 
 import { TIssue } from "@servcy/types";
@@ -37,7 +37,7 @@ export interface IIssueStore extends IIssueStoreActions {
 export class IssueStore implements IIssueStore {
   // root store
   rootIssueDetailStore: IIssueDetail;
-  // services
+
   issueService;
   issueArchiveService;
   issueDraftService;
@@ -46,7 +46,7 @@ export class IssueStore implements IIssueStore {
     makeObservable(this, {});
     // root store
     this.rootIssueDetailStore = rootStore;
-    // services
+
     this.issueService = new IssueService();
     this.issueArchiveService = new IssueArchiveService();
     this.issueDraftService = new IssueDraftService();

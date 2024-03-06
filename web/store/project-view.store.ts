@@ -1,7 +1,7 @@
 import { set } from "lodash";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { ViewService } from "@services/view.service";
 import { RootStore } from "@store/root.store";
 
@@ -42,7 +42,7 @@ export class ProjectViewStore implements IProjectViewStore {
   fetchedMap: Record<string, boolean> = {};
   // root store
   rootStore;
-  // services
+
   viewService;
 
   constructor(_rootStore: RootStore) {
@@ -66,7 +66,7 @@ export class ProjectViewStore implements IProjectViewStore {
     });
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.viewService = new ViewService();
   }
 

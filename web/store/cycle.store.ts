@@ -7,7 +7,7 @@ import { computedFn } from "mobx-utils";
 import { CycleDateCheckData, ICycle } from "@servcy/types";
 // mobx
 import { RootStore } from "@store/root.store";
-// services
+
 import { CycleService } from "@services/cycle.service";
 import { IssueService } from "@services/issue";
 import { ProjectService } from "@services/project";
@@ -61,7 +61,7 @@ export class CycleStore implements ICycleStore {
   fetchedMap: Record<string, boolean> = {};
   // root store
   rootStore;
-  // services
+
   projectService;
   issueService;
   cycleService;

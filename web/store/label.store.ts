@@ -2,7 +2,7 @@ import set from "lodash/set";
 import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { IssueLabelService } from "@services/issue";
 
 import { buildTree } from "@helpers/array.helper";
@@ -52,7 +52,7 @@ export class LabelStore implements ILabelStore {
   labelMap: Record<string, IIssueLabel> = {};
   //loaders
   fetchedMap: Record<string, boolean> = {};
-  // services
+
   issueLabelService;
 
   constructor(_rootStore: RootStore) {
@@ -72,7 +72,7 @@ export class LabelStore implements ILabelStore {
 
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.issueLabelService = new IssueLabelService();
   }
 

@@ -9,7 +9,7 @@ import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor";
 
 import { TIssue } from "@servcy/types";
 import { TIssueOperations } from "./issue-detail";
-// services
+
 import { FileService } from "@services/file.service";
 import { useMention, useWorkspace } from "@hooks/store";
 import { observer } from "mobx-react";
@@ -43,7 +43,7 @@ export const IssueDescriptionForm: FC<IssueDetailsProps> = observer((props) => {
   const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug)?.id as string;
   // states
   const [characterLimit, setCharacterLimit] = useState(false);
-  
+
   const { setShowAlert } = useReloadConfirmations();
   // store hooks
   const { mentionHighlights, mentionSuggestions } = useMention();

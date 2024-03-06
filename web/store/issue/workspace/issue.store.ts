@@ -3,7 +3,7 @@ import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // base class
 import { IssueHelperStore } from "../helpers/issue-helper.store";
-// services
+
 import { IssueArchiveService, IssueService } from "@services/issue";
 import { WorkspaceService } from "@services/workspace.service";
 
@@ -79,7 +79,7 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
     });
     // root store
     this.rootIssueStore = _rootStore;
-    // services
+
     this.workspaceService = new WorkspaceService();
     this.issueService = new IssueService();
     this.issueArchiveService = new IssueArchiveService();

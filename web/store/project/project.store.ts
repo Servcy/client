@@ -5,7 +5,7 @@ import { computedFn } from "mobx-utils";
 
 import { IProject } from "@servcy/types";
 import { RootStore } from "../root.store";
-// services
+
 import { IssueLabelService, IssueService } from "@services/issue";
 import { ProjectService, ProjectStateService } from "@services/project";
 export interface IProjectStore {
@@ -79,7 +79,7 @@ export class ProjectStore implements IProjectStore {
     });
     // root store
     this.rootStore = _rootStore;
-    // services
+
     this.projectService = new ProjectService();
     this.issueService = new IssueService();
     this.issueLabelService = new IssueLabelService();

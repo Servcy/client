@@ -6,7 +6,7 @@ import { mutate } from "swr";
 import { FormProvider, useForm } from "react-hook-form";
 // icons
 import { ArrowLeft, Check, List, Settings } from "lucide-react";
-// services
+
 import { JiraImporterService } from "@services/integrations";
 // fetch keys
 import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
@@ -53,7 +53,7 @@ const integrationWorkflowData: Array<{
   },
 ];
 
-// services
+
 const jiraImporterService = new JiraImporterService();
 
 export const JiraImporterRoot: React.FC = () => {

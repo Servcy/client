@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Controller, useForm } from "react-hook-form";
 import { Disclosure, Transition } from "@headlessui/react";
 import isEmpty from "lodash/isEmpty";
-// services
+
 import { CycleService } from "@services/cycle.service";
 
 import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
@@ -39,7 +39,7 @@ const defaultValues: Partial<ICycle> = {
   end_date: null,
 };
 
-// services
+
 const cycleService = new CycleService();
 
 // TODO: refactor the whole component

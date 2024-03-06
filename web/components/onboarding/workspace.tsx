@@ -7,7 +7,7 @@ import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 
 import { RESTRICTED_URLS } from "@constants/workspace";
@@ -23,7 +23,7 @@ type Props = {
   isSubmitting: boolean;
 };
 
-// services
+
 const workspaceService = new WorkspaceService();
 
 export const Workspace: React.FC<Props> = (props) => {

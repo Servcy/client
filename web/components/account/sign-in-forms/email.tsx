@@ -2,7 +2,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { XCircle } from "lucide-react";
 import { observer } from "mobx-react-lite";
-// services
+
 import { AuthService } from "@services/auth.service";
 import toast from "react-hot-toast";
 

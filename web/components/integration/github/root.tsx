@@ -8,7 +8,7 @@ import useSWR, { mutate } from "swr";
 
 // react-hook-form
 import { useForm } from "react-hook-form";
-// services
+
 import { IntegrationService, GithubIntegrationService } from "@services/integrations";
 import toast from "react-hot-toast";
 
@@ -78,7 +78,7 @@ const integrationWorkflowData = [
   },
 ];
 
-// services
+
 const integrationService = new IntegrationService();
 const githubIntegrationService = new GithubIntegrationService();
 

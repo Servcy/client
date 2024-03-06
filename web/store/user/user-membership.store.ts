@@ -1,6 +1,6 @@
 import { set } from "lodash";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { ProjectMemberService } from "@services/project";
 import { UserService } from "@services/user.service";
 import { WorkspaceService } from "@services/workspace.service";
@@ -61,7 +61,7 @@ export class UserMembershipStore implements IUserMembershipStore {
   workspaceProjectsRole: { [workspaceSlug: string]: IUserProjectsRole } = {};
   // stores
   router;
-  // services
+
   userService;
   workspaceService;
   projectMemberService;
@@ -91,7 +91,7 @@ export class UserMembershipStore implements IUserMembershipStore {
       fetchUserWorkspaceProjectsRole: action,
     });
     this.router = _rootStore.app.router;
-    // services
+
     this.userService = new UserService();
     this.workspaceService = new WorkspaceService();
     this.projectMemberService = new ProjectMemberService();

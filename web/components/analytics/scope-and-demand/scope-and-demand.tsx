@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import useSWR from "swr";
 
-// services
+
 import { AnalyticsService } from "@services/analytics.service";
 
 import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "@components/analytics";
@@ -15,7 +15,7 @@ type Props = {
   fullScreen?: boolean;
 };
 
-// services
+
 const analyticsService = new AnalyticsService();
 
 export const ScopeAndDemand: React.FC<Props> = (props) => {

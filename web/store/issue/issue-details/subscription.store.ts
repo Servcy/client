@@ -1,6 +1,6 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 import set from "lodash/set";
-// services
+
 import { NotificationService } from "@services/notification.service";
 
 import { IIssueDetail } from "./root.store";
@@ -24,7 +24,7 @@ export class IssueSubscriptionStore implements IIssueSubscriptionStore {
   subscriptionMap: Record<string, Record<string, boolean>> = {};
   // root store
   rootIssueDetail: IIssueDetail;
-  // services
+
   notificationService;
 
   constructor(rootStore: IIssueDetail) {
@@ -39,7 +39,7 @@ export class IssueSubscriptionStore implements IIssueSubscriptionStore {
     });
     // root store
     this.rootIssueDetail = rootStore;
-    // services
+
     this.notificationService = new NotificationService();
   }
 

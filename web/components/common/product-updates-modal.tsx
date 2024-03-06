@@ -2,7 +2,7 @@ import React from "react";
 import useSWR from "swr";
 // headless ui
 import { Dialog, Transition } from "@headlessui/react";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 
 import { MarkdownRenderer } from "@components/ui";
@@ -17,7 +17,7 @@ type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-// services
+
 const workspaceService = new WorkspaceService();
 
 export const ProductUpdatesModal: React.FC<Props> = ({ isOpen, setIsOpen }) => {

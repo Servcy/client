@@ -8,7 +8,7 @@ import { RichTextEditorWithRef } from "@servcy/rich-text-editor";
 
 import { useApplication, useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// services
+
 import { AIService } from "@services/ai.service";
 import { FileService } from "@services/file.service";
 
@@ -60,7 +60,7 @@ export interface IssueFormProps {
   isDraft: boolean;
 }
 
-// services
+
 const aiService = new AIService();
 const fileService = new FileService();
 

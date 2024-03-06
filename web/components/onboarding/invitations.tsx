@@ -6,7 +6,7 @@ import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 import { Button } from "@servcy/ui";
 
 import { truncateText } from "@helpers/string.helper";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 
 import { USER_WORKSPACES, USER_WORKSPACE_INVITATIONS } from "@constants/fetch-keys";

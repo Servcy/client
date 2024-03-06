@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-// services
+
 import { CycleService } from "@services/cycle.service";
 
 import { useEventTracker, useCycle, useProject } from "@hooks/store";
@@ -21,7 +21,7 @@ type CycleModalProps = {
   projectId: string;
 };
 
-// services
+
 const cycleService = new CycleService();
 
 export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {

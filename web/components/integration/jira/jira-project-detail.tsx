@@ -9,7 +9,7 @@ import useSWR from "swr";
 // react hook form
 import { useFormContext, Controller } from "react-hook-form";
 
-// services
+
 import { JiraImporterService } from "@services/integrations";
 
 // fetch keys
@@ -27,7 +27,7 @@ type Props = {
   setDisableTopBarAfter: React.Dispatch<React.SetStateAction<TJiraIntegrationSteps | null>>;
 };
 
-// services
+
 const jiraImporterService = new JiraImporterService();
 
 export const JiraProjectDetail: React.FC<Props> = (props) => {

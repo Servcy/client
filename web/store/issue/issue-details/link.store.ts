@@ -1,6 +1,6 @@
 import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { IssueService } from "@services/issue";
 
 import { TIssueLink, TIssueLinkIdMap, TIssueLinkMap } from "@servcy/types";
@@ -42,7 +42,7 @@ export class IssueLinkStore implements IIssueLinkStore {
   linkMap: TIssueLinkMap = {};
   // root store
   rootIssueDetailStore: IIssueDetail;
-  // services
+
   issueService;
 
   constructor(rootStore: IIssueDetail) {
@@ -61,7 +61,7 @@ export class IssueLinkStore implements IIssueLinkStore {
     });
     // root store
     this.rootIssueDetailStore = rootStore;
-    // services
+
     this.issueService = new IssueService();
   }
 

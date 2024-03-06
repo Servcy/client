@@ -2,7 +2,7 @@ import set from "lodash/set";
 import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { WorkspaceService } from "@services/workspace.service";
 
 import { IWorkspaceBulkInviteFormData, IWorkspaceMember, IWorkspaceMemberInvitation } from "@servcy/types";
@@ -58,7 +58,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
   routerStore: IRouterStore;
   userStore: IUserRootStore;
   memberRoot: IMemberRootStore;
-  // services
+
   workspaceService;
 
   constructor(_memberRoot: IMemberRootStore, _rootStore: RootStore) {
@@ -83,7 +83,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
     this.routerStore = _rootStore.app.router;
     this.userStore = _rootStore.user;
     this.memberRoot = _memberRoot;
-    // services
+
     this.workspaceService = new WorkspaceService();
   }
 

@@ -10,7 +10,7 @@ import { Breadcrumbs, LayersIcon } from "@servcy/ui";
 import { TIssue } from "@servcy/types";
 
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
-// services
+
 import { IssueArchiveService } from "@services/issue";
 
 import { renderEmoji } from "@helpers/emoji.helper";

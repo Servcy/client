@@ -6,7 +6,7 @@ import update from "lodash/update";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // base class
 import { IssueHelperStore } from "../helpers/issue-helper.store";
-// services
+
 import { IssueDraftService } from "@services/issue/issue_draft.service";
 
 import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types";

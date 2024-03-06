@@ -4,7 +4,7 @@ import sortBy from "lodash/sortBy";
 import uniq from "lodash/uniq";
 import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { IssueActivityService } from "@services/issue";
 
 import { TIssueActivity, TIssueActivityComment, TIssueActivityIdMap, TIssueActivityMap } from "@servcy/types";
@@ -40,7 +40,7 @@ export class IssueActivityStore implements IIssueActivityStore {
   activityMap: TIssueActivityMap = {};
   // root store
   rootIssueDetailStore: IIssueDetail;
-  // services
+
   issueActivityService;
 
   constructor(rootStore: IIssueDetail) {
@@ -54,7 +54,7 @@ export class IssueActivityStore implements IIssueActivityStore {
     });
     // root store
     this.rootIssueDetailStore = rootStore;
-    // services
+
     this.issueActivityService = new IssueActivityService();
   }
 

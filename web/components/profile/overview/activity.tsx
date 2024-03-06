@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { observer } from "mobx-react";
 //hooks
 import { useUser } from "@hooks/store";
-// services
+
 import { UserService } from "@services/user.service";
 
 import { ActivityMessage, IssueLink } from "@components/core";
@@ -17,7 +17,7 @@ import { calculateTimeAgo } from "@helpers/date-time.helper";
 // fetch-keys
 import { USER_PROFILE_ACTIVITY } from "@constants/fetch-keys";
 
-// services
+
 const userService = new UserService();
 
 export const ProfileActivity = observer(() => {

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR, { mutate } from "swr";
-// services
+
 import { IntegrationService } from "@services/integrations";
 
 import { useApplication, useUser } from "@hooks/store";
@@ -38,7 +38,7 @@ const integrationDetails: { [key: string]: any } = {
   },
 };
 
-// services
+
 const integrationService = new IntegrationService();
 
 export const SingleIntegrationCard: React.FC<Props> = observer(({ integration }) => {

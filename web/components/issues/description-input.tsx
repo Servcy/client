@@ -4,7 +4,7 @@ import { Loader } from "@servcy/ui";
 import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor";
 // store hooks
 import { useMention, useWorkspace } from "@hooks/store";
-// services
+
 import { FileService } from "@services/file.service";
 const fileService = new FileService();
 
@@ -30,7 +30,7 @@ export const IssueDescriptionInput: FC<IssueDescriptionInputProps> = (props) => 
   // store hooks
   const { mentionHighlights, mentionSuggestions } = useMention();
   const { getWorkspaceBySlug } = useWorkspace();
-  
+
   const debouncedValue = useDebounce(descriptionHTML, 1500);
   // computed values
   const workspaceId = getWorkspaceBySlug(workspaceSlug)?.id as string;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import { useRouter } from "next/router";
-import { Controller, useForm } from "react-hook-form"; // services
+import { Controller, useForm } from "react-hook-form";
 import { AIService } from "@services/ai.service";
 import toast from "react-hot-toast";
 import { usePopper } from "react-popper";

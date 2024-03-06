@@ -5,7 +5,7 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 
 import { useApplication, useUser } from "@hooks/store";
-// services
+
 import { UserService } from "@services/user.service";
 
 import { ProfileSidebarTime } from "./time";
@@ -21,7 +21,7 @@ import { USER_PROFILE_PROJECT_SEGREGATION } from "@constants/fetch-keys";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { useEffect, useRef } from "react";
 
-// services
+
 const userService = new UserService();
 
 export const ProfileSidebar = observer(() => {

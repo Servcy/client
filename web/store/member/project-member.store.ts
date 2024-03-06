@@ -2,7 +2,7 @@ import set from "lodash/set";
 import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// services
+
 import { ProjectMemberService } from "@services/project";
 
 import { IProjectBulkAddFormData, IProjectMember, IProjectMembership, IUserLite } from "@servcy/types";
@@ -56,7 +56,7 @@ export class ProjectMemberStore implements IProjectMemberStore {
   routerStore: IRouterStore;
   userStore: IUserRootStore;
   memberRoot: IMemberRootStore;
-  // services
+
   projectMemberService;
 
   constructor(_memberRoot: IMemberRootStore, _rootStore: RootStore) {
@@ -76,7 +76,7 @@ export class ProjectMemberStore implements IProjectMemberStore {
     this.routerStore = _rootStore.app.router;
     this.userStore = _rootStore.user;
     this.memberRoot = _memberRoot;
-    // services
+
     this.projectMemberService = new ProjectMemberService();
   }
 

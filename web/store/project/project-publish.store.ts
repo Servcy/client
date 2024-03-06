@@ -2,7 +2,7 @@ import { observable, action, makeObservable, runInAction } from "mobx";
 import set from "lodash/set";
 
 import { ProjectRootStore } from "./";
-// services
+
 import { ProjectPublishService } from "@services/project";
 
 export type TProjectPublishViews = "list" | "gantt" | "kanban" | "calendar" | "spreadsheet";
@@ -49,7 +49,7 @@ export class ProjectPublishStore implements IProjectPublishStore {
   projectPublishSettings: IProjectPublishSettings | "not-initialized" = "not-initialized";
   // root store
   projectRootStore: ProjectRootStore;
-  // services
+
   projectPublishService;
 
   constructor(_projectRootStore: ProjectRootStore) {
@@ -69,7 +69,7 @@ export class ProjectPublishStore implements IProjectPublishStore {
     });
     // root store
     this.projectRootStore = _projectRootStore;
-    // services
+
     this.projectPublishService = new ProjectPublishService();
   }
 

@@ -1,5 +1,5 @@
 import { observable, action, makeObservable, computed } from "mobx";
-// services
+
 import { ProjectService } from "@services/project";
 import { PageService } from "@services/page.service";
 import { EIssuesStoreType, TCreateModalStoreTypes } from "@constants/issue";
@@ -84,7 +84,7 @@ export class CommandPaletteStore implements ICommandPaletteStore {
       toggleDeleteIssueModal: action,
       toggleBulkDeleteIssueModal: action,
     });
-    // services
+
     this.projectService = new ProjectService();
     this.pageService = new PageService();
   }

@@ -19,7 +19,7 @@ import {
 import { IIssueRootStore } from "../root.store";
 
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-// services
+
 import { IssueFiltersService } from "@services/issue_filter.service";
 
 export interface IProjectIssuesFilter {
@@ -43,7 +43,7 @@ export class ProjectIssuesFilter extends IssueFilterHelperStore implements IProj
   filters: { [projectId: string]: IIssueFilters } = {};
   // root store
   rootIssueStore: IIssueRootStore;
-  // services
+
   issueFilterService;
 
   constructor(_rootStore: IIssueRootStore) {
@@ -60,7 +60,7 @@ export class ProjectIssuesFilter extends IssueFilterHelperStore implements IProj
     });
     // root store
     this.rootIssueStore = _rootStore;
-    // services
+
     this.issueFilterService = new IssueFiltersService();
   }
 

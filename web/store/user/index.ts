@@ -1,5 +1,5 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
-// services
+
 import { AuthService } from "@services/auth.service";
 import { UserService } from "@services/user.service";
 // interfaces
@@ -50,7 +50,7 @@ export class UserRootStore implements IUserRootStore {
 
   // root store
   rootStore;
-  // services
+
   userService;
   authService;
 

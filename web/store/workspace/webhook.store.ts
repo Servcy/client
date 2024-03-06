@@ -35,7 +35,7 @@ export class WebhookStore implements IWebhookStore {
   // observables
   webhooks: Record<string, IWebhook> | null = null;
   webhookSecretKey: string | null = null;
-  // services
+
   webhookService;
   // root store
   rootStore;
@@ -59,7 +59,7 @@ export class WebhookStore implements IWebhookStore {
       clearSecretKey: action,
     });
 
-    // services
+
     this.webhookService = new WebhookService();
     // root store
     this.rootStore = _rootStore;
