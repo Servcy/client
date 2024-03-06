@@ -3,11 +3,11 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 
 import { useDashboard, useMember, useUser } from "@hooks/store";
-// components
+
 import { RecentCollaboratorsEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
 // ui
 import { Avatar } from "@servcy/ui";
-// types
+
 import { TRecentCollaboratorsWidgetResponse } from "@servcy/types";
 
 type CollaboratorListItemProps = {

@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import { useUser } from "@hooks/store";
 // ui
 import { Button, InputColorPicker } from "@servcy/ui";
-// types
+
 import { IUserTheme } from "@servcy/types";
 
 const inputRules = {
@@ -27,7 +27,7 @@ const inputRules = {
 export const CustomThemeSelector: React.FC = observer(() => {
   const { currentUser, updateCurrentUser } = useUser();
   const userTheme = currentUser?.theme;
-  
+
   const { setTheme } = useTheme();
 
   const {

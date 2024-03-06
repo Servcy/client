@@ -4,7 +4,7 @@ import useSWR from "swr";
 
 // services
 import { AnalyticsService } from "@services/analytics.service";
-// components
+
 import { AnalyticsDemand, AnalyticsLeaderBoard, AnalyticsScope, AnalyticsYearWiseIssues } from "@components/analytics";
 // ui
 import { Button, Loader } from "@servcy/ui";
@@ -28,10 +28,10 @@ export const ScopeAndDemand: React.FC<Props> = (props) => {
 
   const params = isProjectLevel
     ? {
-        project: projectId ? [projectId.toString()] : null,
-        cycle: cycleId ? cycleId.toString() : null,
-        module: moduleId ? moduleId.toString() : null,
-      }
+      project: projectId ? [projectId.toString()] : null,
+      cycle: cycleId ? cycleId.toString() : null,
+      module: moduleId ? moduleId.toString() : null,
+    }
     : undefined;
 
   const {

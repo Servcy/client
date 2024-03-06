@@ -8,13 +8,13 @@ import { useUser, useWebhook, useWorkspace } from "@hooks/store";
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 import toast from "react-hot-toast";
-// components
+
 import { PageHead } from "@components/core";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { DeleteWebhookModal, WebhookDeleteSection, WebhookForm } from "@components/web-hooks";
 // ui
 import { Spinner } from "@servcy/ui";
-// types
+
 import { IWebhook } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 

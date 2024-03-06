@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
-// components
+
 import { IssueAttachmentRoot, IssueUpdateStatus } from "@components/issues";
 import { IssueTitleInput } from "../title-input";
 import { IssueDescriptionInput } from "../description-input";
@@ -13,7 +13,7 @@ import { SubIssuesRoot } from "../sub-issues";
 import { IssueActivity } from "./issue-activity";
 // ui
 import { StateGroupIcon } from "@servcy/ui";
-// types
+
 import { TIssueOperations } from "./root";
 
 type Props = {

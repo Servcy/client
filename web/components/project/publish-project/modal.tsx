@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 // ui
 import { Button, Loader, ToggleSwitch } from "@servcy/ui";
 import { CustomPopover } from "./popover";
-// types
+
 import { IProject } from "@servcy/types";
 import { IProjectPublishSettings, TProjectPublishViews } from "@store/project/project-publish.store";
 
@@ -42,12 +42,12 @@ const viewOptions: {
   key: TProjectPublishViews;
   label: string;
 }[] = [
-  { key: "list", label: "List" },
-  { key: "kanban", label: "Kanban" },
-  // { key: "calendar", label: "Calendar" },
-  // { key: "gantt", label: "Gantt" },
-  // { key: "spreadsheet", label: "Spreadsheet" },
-];
+    { key: "list", label: "List" },
+    { key: "kanban", label: "Kanban" },
+    // { key: "calendar", label: "Calendar" },
+    // { key: "gantt", label: "Gantt" },
+    // { key: "spreadsheet", label: "Spreadsheet" },
+  ];
 
 export const PublishProjectModal: React.FC<Props> = observer((props) => {
   const { isOpen, project, onClose } = props;
@@ -345,9 +345,9 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                                 label={
                                   value.length > 0
                                     ? viewOptions
-                                        .filter((v) => value.includes(v.key))
-                                        .map((v) => v.label)
-                                        .join(", ")
+                                      .filter((v) => value.includes(v.key))
+                                      .map((v) => v.label)
+                                      .join(", ")
                                     : ``
                                 }
                                 placeholder="Select views"
@@ -356,11 +356,10 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                                   {viewOptions.map((option) => (
                                     <div
                                       key={option.key}
-                                      className={`relative m-1 flex cursor-pointer items-center justify-between gap-2 rounded-sm p-1 px-2 text-custom-text-200 ${
-                                        value.includes(option.key)
+                                      className={`relative m-1 flex cursor-pointer items-center justify-between gap-2 rounded-sm p-1 px-2 text-custom-text-200 ${value.includes(option.key)
                                           ? "bg-custom-background-80 text-custom-text-100"
                                           : "hover:bg-custom-background-80 hover:text-custom-text-100"
-                                      }`}
+                                        }`}
                                       onClick={() => {
                                         const _views =
                                           value.length > 0

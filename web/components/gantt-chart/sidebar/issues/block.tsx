@@ -4,12 +4,12 @@ import { MoreVertical } from "lucide-react";
 
 import { useIssueDetail } from "@hooks/store";
 import { useGanttChart } from "@components/gantt-chart/hooks";
-// components
+
 import { IssueGanttSidebarBlock } from "@components/issues";
 // helpers
 import { cn } from "@helpers/common.helper";
 import { findTotalDaysInRange } from "@helpers/date-time.helper";
-// types
+
 import { IGanttBlock } from "../../types";
 // constants
 import { BLOCK_HEIGHT } from "../../constants";

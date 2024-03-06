@@ -8,7 +8,7 @@ import { useApplication, useUser } from "@hooks/store";
 import { UserService } from "@services/user.service";
 // layouts
 import { ProfileSettingsLayout } from "@layouts/settings-layout";
-// components
+
 import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/core";
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor";
 // icons
@@ -99,12 +99,12 @@ const ProfileActivityPage: NextPageWithLayout = observer(() => {
 
                 const message =
                   activityItem.verb === "created" &&
-                  activityItem.field !== "cycles" &&
-                  activityItem.field !== "modules" &&
-                  activityItem.field !== "attachment" &&
-                  activityItem.field !== "link" &&
-                  activityItem.field !== "estimate" &&
-                  !activityItem.field ? (
+                    activityItem.field !== "cycles" &&
+                    activityItem.field !== "modules" &&
+                    activityItem.field !== "attachment" &&
+                    activityItem.field !== "link" &&
+                    activityItem.field !== "estimate" &&
+                    !activityItem.field ? (
                     <span>
                       created <IssueLink activity={activityItem} />
                     </span>

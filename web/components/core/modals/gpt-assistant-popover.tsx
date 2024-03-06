@@ -6,10 +6,10 @@ import toast from "react-hot-toast";
 import { usePopper } from "react-popper";
 // ui
 import { Button, Input } from "@servcy/ui";
-// components
+
 import { RichReadOnlyEditorWithRef } from "@servcy/rich-text-editor";
 import { Popover, Transition } from "@headlessui/react";
-// types
+
 import { Placement } from "@popperjs/core";
 
 type Props = {

@@ -5,7 +5,7 @@ import { ChevronDown, XCircle } from "lucide-react";
 
 import { useMember, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ConfirmWorkspaceMemberRemove } from "@components/workspace";
 // ui
 import { CustomSelect, Tooltip } from "@servcy/ui";
@@ -96,9 +96,8 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
             customButton={
               <div className="item-center flex gap-1 rounded px-2 py-0.5">
                 <span
-                  className={`flex items-center rounded text-xs font-medium ${
-                    hasRoleChangeAccess ? "" : "text-custom-sidebar-text-400"
-                  }`}
+                  className={`flex items-center rounded text-xs font-medium ${hasRoleChangeAccess ? "" : "text-custom-sidebar-text-400"
+                    }`}
                 >
                   {ROLE[invitationDetails.role]}
                 </span>
@@ -141,9 +140,8 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
             <button
               type="button"
               onClick={() => setRemoveMemberModal(true)}
-              className={`pointer-events-none opacity-0 ${
-                isAdmin ? "group-hover:pointer-events-auto group-hover:opacity-100" : ""
-              }`}
+              className={`pointer-events-none opacity-0 ${isAdmin ? "group-hover:pointer-events-auto group-hover:opacity-100" : ""
+                }`}
             >
               <XCircle className="h-3.5 w-3.5 text-red-500" strokeWidth={2} />
             </button>

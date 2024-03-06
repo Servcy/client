@@ -17,7 +17,7 @@ import {
   useUser,
   useInbox,
 } from "@hooks/store";
-// components
+
 import { Spinner } from "@servcy/ui";
 import { JoinProject } from "@components/auth-screens";
 import { EmptyState } from "@components/common";

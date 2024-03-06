@@ -6,7 +6,7 @@ import { AlertTriangle } from "lucide-react";
 import { useUser } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IUserLite } from "@servcy/types";
 
 type Props = {

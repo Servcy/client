@@ -3,12 +3,12 @@ import { Draggable, DraggableProvided, DraggableStateSnapshot } from "@hello-pan
 import { observer } from "mobx-react-lite";
 
 import { useApplication, useIssueDetail, useProject } from "@hooks/store";
-// components
+
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
 import { IssueProperties } from "../properties/all-properties";
 // ui
 import { Tooltip, ControlLink } from "@servcy/ui";
-// types
+
 import { TIssue, IIssueDisplayProperties, IIssueMap } from "@servcy/types";
 import { EIssueActions } from "../types";
 // helper

@@ -6,7 +6,7 @@ import size from "lodash/size";
 import isEmpty from "lodash/isEmpty";
 
 import { useCycle, useIssues } from "@hooks/store";
-// components
+
 import {
   CycleAppliedFiltersRoot,
   CycleCalendarLayout,
@@ -21,7 +21,7 @@ import { TransferIssues, TransferIssuesModal } from "@components/cycles";
 import { ActiveLoader } from "@components/ui";
 // constants
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-// types
+
 import { IIssueFilterOptions } from "@servcy/types";
 
 export const CycleLayoutRoot: React.FC = observer(() => {

@@ -7,7 +7,7 @@ import { useInboxIssues } from "@hooks/store";
 import { MultiLevelDropdown } from "@components/ui";
 // icons
 import { PriorityIcon } from "@servcy/ui";
-// types
+
 import { TInboxIssueFilterOptions } from "@servcy/types";
 // constants
 import { INBOX_STATUS } from "@constants/inbox";

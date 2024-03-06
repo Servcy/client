@@ -2,9 +2,9 @@ import { observer } from "mobx-react-lite";
 import { Control, Controller, UseFormSetValue } from "react-hook-form";
 
 import { useProject } from "@hooks/store";
-// components
+
 import { SelectProject, SelectSegment, SelectXAxis, SelectYAxis } from "@components/analytics";
-// types
+
 import { IAnalyticsParams } from "@servcy/types";
 
 type Props = {

@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
-// components
+
 import { CalendarDayTile } from "@components/issues";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { ICalendarDate, ICalendarWeek } from "./types";
 import { TGroupedIssues, TIssue, TIssueMap } from "@servcy/types";
 import { ICycleIssuesFilter } from "@store/issue/cycle";

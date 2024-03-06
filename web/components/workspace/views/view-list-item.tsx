@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { Pencil, Trash2 } from "lucide-react";
 // store hooks
 import { useEventTracker, useGlobalView } from "@hooks/store";
-// components
+
 import { CreateUpdateWorkspaceViewModal, DeleteGlobalViewModal } from "@components/workspace";
 // ui
 import { CustomMenu } from "@servcy/ui";

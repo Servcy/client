@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Copy, Eye, EyeOff } from "lucide-react";
 // ui
 import { Button, Input } from "@servcy/ui";
-// types
+
 import { IFormattedInstanceConfiguration } from "@servcy/types";
 
 import { useApplication } from "@hooks/store";

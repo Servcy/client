@@ -1,6 +1,6 @@
 // helpers
 import { getWeekNumberOfDate, renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { ICalendarDate, ICalendarPayload } from "@components/issues";
 
 export const formatDate = (date: Date, format: string): string => {

@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 // services
 import { IntegrationService, GithubIntegrationService } from "@services/integrations";
 import toast from "react-hot-toast";
-// components
+
 import {
   GithubImportConfigure,
   GithubImportData,
@@ -24,7 +24,7 @@ import { UserGroupIcon } from "@servcy/ui";
 import { ArrowLeft, Check, List, Settings, UploadCloud } from "lucide-react";
 // images
 import GithubLogo from "public/services/github.png";
-// types
+
 import { IGithubRepoCollaborator, IGithubServiceImportFormData } from "@servcy/types";
 // fetch-keys
 import { APP_INTEGRATIONS, IMPORTER_SERVICES_LIST, WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";

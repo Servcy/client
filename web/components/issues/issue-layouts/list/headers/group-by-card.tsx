@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 // lucide icons
 import { CircleDashed, Plus } from "lucide-react";
-// components
+
 import { CreateUpdateIssueModal } from "@components/issues";
 import { ExistingIssuesListModal } from "@components/core";
 import { CustomMenu } from "@servcy/ui";
@@ -9,7 +9,7 @@ import { CustomMenu } from "@servcy/ui";
 import { observer } from "mobx-react-lite";
 
 import { useEventTracker } from "@hooks/store";
-// types
+
 import { TIssue, ISearchIssueResponse } from "@servcy/types";
 import toast from "react-hot-toast";
 import { useState } from "react";

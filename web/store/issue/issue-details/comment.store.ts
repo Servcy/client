@@ -6,7 +6,7 @@ import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
 // services
 import { IssueCommentService } from "@services/issue";
-// types
+
 import { TIssueComment, TIssueCommentIdMap, TIssueCommentMap } from "@servcy/types";
 import { IIssueDetail } from "./root.store";
 

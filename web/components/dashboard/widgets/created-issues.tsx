@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Tab } from "@headlessui/react";
 
 import { useDashboard } from "@hooks/store";
-// components
+
 import {
   DurationFilterDropdown,
   TabsList,
@@ -14,7 +14,7 @@ import {
 } from "@components/dashboard/widgets";
 // helpers
 import { getCustomDates, getRedirectionFilters, getTabKey } from "@helpers/dashboard.helper";
-// types
+
 import { TCreatedIssuesWidgetFilters, TCreatedIssuesWidgetResponse } from "@servcy/types";
 // constants
 import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "@constants/dashboard";

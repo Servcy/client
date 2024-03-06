@@ -2,7 +2,7 @@ import { MutableRefObject, memo } from "react";
 //types
 import { TIssue, IIssueDisplayProperties, IIssueMap } from "@servcy/types";
 import { EIssueActions } from "../types";
-// components
+
 import { KanbanIssueBlock } from "@components/issues";
 
 interface IssueBlocksListProps {

@@ -2,7 +2,7 @@ import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import { v4 as uuidv4 } from "uuid";
 // helpers
 import { orderArrayBy } from "@helpers/array.helper";
-// types
+
 import {
   TIssue,
   TIssueGroupByOptions,
@@ -24,13 +24,13 @@ type THandleIssuesMutation = (
   orderBy: TIssueOrderByOptions,
   prevData?:
     | {
-        [key: string]: TIssue[];
-      }
+      [key: string]: TIssue[];
+    }
     | TIssue[]
 ) =>
   | {
-      [key: string]: TIssue[];
-    }
+    [key: string]: TIssue[];
+  }
   | TIssue[]
   | undefined;
 

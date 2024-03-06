@@ -9,7 +9,7 @@ import { useEventTracker, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
-// types
+
 import { IProject } from "@servcy/types";
 // constants
 import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker";

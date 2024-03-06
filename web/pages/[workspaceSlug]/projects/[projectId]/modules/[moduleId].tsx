@@ -7,7 +7,7 @@ import { useModule, useProject } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { ModuleDetailsSidebar } from "@components/modules";
 import { ModuleLayoutRoot } from "@components/issues";
 import { ModuleIssuesHeader } from "@components/headers";
@@ -15,7 +15,7 @@ import { PageHead } from "@components/core";
 import { EmptyState } from "@components/common";
 // assets
 import emptyModule from "public/empty-state/module.svg";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 const ModuleIssuesPage: NextPageWithLayout = observer(() => {

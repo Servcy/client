@@ -3,7 +3,7 @@ import { useTheme } from "next-themes";
 import { observer } from "mobx-react-lite";
 
 import { useApplication, useEventTracker, useDashboard, useProject, useUser } from "@hooks/store";
-// components
+
 import { TourRoot } from "@components/onboarding";
 import { UserGreetingsView } from "@components/user";
 import { IssuePeekOverview } from "@components/issues";

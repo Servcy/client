@@ -4,9 +4,9 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import { useProjectView } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ProjectViewForm } from "@components/views";
-// types
+
 import { IProjectView } from "@servcy/types";
 
 type Props = {

@@ -1,4 +1,4 @@
-// types
+
 import {
   TIssue,
   IIssueLabel,

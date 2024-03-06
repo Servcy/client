@@ -4,9 +4,9 @@ import { DraggableProvidedDragHandleProps, DraggableStateSnapshot } from "@hello
 import { X, Pencil } from "lucide-react";
 
 import { useLabel } from "@hooks/store";
-// types
+
 import { IIssueLabel } from "@servcy/types";
-// components
+
 import { ICustomMenuItem, LabelItemBlock } from "./label-block/label-item-block";
 import { CreateUpdateLabelInline } from "./create-update-label-inline";
 

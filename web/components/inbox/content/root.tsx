@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import { Inbox } from "lucide-react";
 
 import { useInboxIssues } from "@hooks/store";
-// components
+
 import { InboxIssueActionsHeader } from "@components/inbox";
 import { InboxIssueDetailRoot } from "@components/issues/issue-detail/inbox";
 // ui

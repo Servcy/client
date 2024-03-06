@@ -12,7 +12,7 @@ import { useEventTracker } from "@hooks/store";
 import { Button, Input } from "@servcy/ui";
 // helpers
 import { checkEmailValidity } from "@helpers/string.helper";
-// types
+
 import { IEmailCheckData, IMagicSignInData } from "@servcy/types";
 // constants
 import { CODE_VERIFIED } from "@constants/event-tracker";
@@ -189,11 +189,10 @@ export const SignUpUniqueCodeForm: React.FC<Props> = (props) => {
             <button
               type="button"
               onClick={handleRequestNewCode}
-              className={`text-xs ${
-                isRequestNewCodeDisabled
+              className={`text-xs ${isRequestNewCodeDisabled
                   ? "text-onboarding-text-300"
                   : "text-onboarding-text-200 hover:text-custom-primary-100"
-              }`}
+                }`}
               disabled={isRequestNewCodeDisabled}
             >
               {resendTimerCode > 0

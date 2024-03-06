@@ -10,7 +10,7 @@ import { useUser } from "@hooks/store";
 import useUserAuth from "@hooks/use-user-auth";
 // services
 import { IntegrationService } from "@services/integrations";
-// components
+
 import { DeleteImportModal, GithubImporterRoot, JiraImporterRoot, SingleImport } from "@components/integration";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
@@ -18,7 +18,7 @@ import { Button } from "@servcy/ui";
 import { ImportExportSettingsLoader } from "@components/ui";
 // icons
 import { RefreshCw } from "lucide-react";
-// types
+
 import { IImporterService } from "@servcy/types";
 // fetch-keys
 import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";

@@ -1,10 +1,10 @@
 import { useRef } from "react";
-// components
+
 import { IssueBlocksList, ListQuickAddIssueForm } from "@components/issues";
 import { HeaderGroupByCard } from "./headers/group-by-card";
 
 import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store";
-// types
+
 import {
   GroupByColumnTypes,
   TGroupedIssues,

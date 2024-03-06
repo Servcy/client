@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { Dialog, Transition } from "@headlessui/react";
 // services
 import { WorkspaceService } from "@services/workspace.service";
-// components
+
 import { MarkdownRenderer } from "@components/ui";
 import { Loader } from "@servcy/ui";
 // icons

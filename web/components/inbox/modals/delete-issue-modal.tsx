@@ -7,7 +7,7 @@ import { useProject } from "@hooks/store";
 import { AlertTriangle } from "lucide-react";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import type { TIssue } from "@servcy/types";
 
 type Props = {

@@ -12,12 +12,12 @@ import useUserAuth from "@hooks/use-user-auth";
 import useSize from "@hooks/use-window-size";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { RecentPagesList, CreateUpdatePageModal } from "@components/pages";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { PagesHeader } from "@components/headers";
 import { PagesLoader } from "@components/ui";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // constants
 import { PAGE_TABS_LIST } from "@constants/page";

@@ -8,9 +8,9 @@ import { useInbox, useProject } from "@hooks/store";
 import { AppLayout } from "@layouts/app-layout";
 // ui
 import { InboxLayoutLoader } from "@components/ui";
-// components
+
 import { ProjectInboxHeader } from "@components/headers";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 const ProjectInboxPage: NextPageWithLayout = observer(() => {

@@ -12,7 +12,7 @@ import { WorkspaceService } from "@services/workspace.service";
 import { IssueService } from "@services/issue";
 
 import useDebounce from "@hooks/use-debounce";
-// components
+
 import {
   CommandPaletteThemeActions,
   ChangeIssueAssignee,
@@ -25,7 +25,7 @@ import {
   CommandPaletteSearchResults,
 } from "@components/command-palette";
 import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
-// types
+
 import { IWorkspaceSearchResults } from "@servcy/types";
 // fetch-keys
 import { ISSUE_DETAILS } from "@constants/fetch-keys";

@@ -2,7 +2,7 @@ import { FC } from "react";
 import { observer } from "mobx-react";
 
 import { useIssueDetail } from "@hooks/store";
-// components
+
 import { IssueActivityBlockComponent } from "./";
 // icons
 import { DiceIcon } from "@servcy/ui";
@@ -11,7 +11,7 @@ type TIssueModuleActivity = { activityId: string; ends: "top" | "bottom" | undef
 
 export const IssueModuleActivity: FC<TIssueModuleActivity> = observer((props) => {
   const { activityId, ends } = props;
-  
+
   const {
     activity: { getActivityById },
   } = useIssueDetail();

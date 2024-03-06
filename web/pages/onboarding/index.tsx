@@ -15,14 +15,14 @@ import { WorkspaceService } from "@services/workspace.service";
 // layouts
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import DefaultLayout from "@layouts/default-layout";
-// components
+
 import { PageHead } from "@components/core";
 import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding";
 // ui
 import { Avatar, Spinner } from "@servcy/ui";
 // images
 import ServcyLogo from "public/logo.png";
-// types
+
 import { IUser, TOnboardingSteps } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // constants

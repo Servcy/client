@@ -10,7 +10,7 @@ import { Controller, useForm } from "react-hook-form";
 import { MemberSelect } from "@components/project";
 // ui
 import { Loader } from "@servcy/ui";
-// types
+
 import { IProject, IUserLite, IWorkspace } from "@servcy/types";
 // fetch-keys
 import { PROJECT_MEMBERS } from "@constants/fetch-keys";

@@ -9,7 +9,7 @@ import { useLabel } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
-// types
+
 import { IIssueLabel } from "@servcy/types";
 // fetch-keys
 import { getRandomLabelColor, LABEL_COLOR_OPTIONS } from "@constants/label";
@@ -129,9 +129,8 @@ export const CreateUpdateLabelInline = observer(
             {({ open }) => (
               <>
                 <Popover.Button
-                  className={`group inline-flex items-center text-base font-medium focus:outline-none ${
-                    open ? "text-custom-text-100" : "text-custom-text-200"
-                  }`}
+                  className={`group inline-flex items-center text-base font-medium focus:outline-none ${open ? "text-custom-text-100" : "text-custom-text-200"
+                    }`}
                 >
                   <span
                     className="h-4 w-4 rounded-full"

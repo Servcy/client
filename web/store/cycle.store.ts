@@ -3,7 +3,7 @@ import set from "lodash/set";
 import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// types
+
 import { CycleDateCheckData, ICycle } from "@servcy/types";
 // mobx
 import { RootStore } from "@store/root.store";

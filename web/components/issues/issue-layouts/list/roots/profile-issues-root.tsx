@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useIssues, useUser } from "@hooks/store";
-// components
+
 import { ProjectIssueQuickActions } from "@components/issues";
-// types
+
 import { TIssue } from "@servcy/types";
 import { EIssueActions } from "../../types";
 // constants

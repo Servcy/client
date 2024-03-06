@@ -1,6 +1,6 @@
 import { FC, useRef } from "react";
 import { observer } from "mobx-react-lite";
-// components
+
 import {
   WorkspaceHelpSection,
   WorkspaceSidebarDropdown,
@@ -12,7 +12,7 @@ import { ProjectSidebarList } from "@components/project";
 import { useApplication } from "@hooks/store";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 
-export interface IAppSidebar {}
+export interface IAppSidebar { }
 
 export const AppSidebar: FC<IAppSidebar> = observer(() => {
   // store hooks

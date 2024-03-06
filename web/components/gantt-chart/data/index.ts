@@ -1,4 +1,4 @@
-// types
+
 import { WeekMonthDataType, ChartDataType, TGanttViews } from "../types";
 
 // constants

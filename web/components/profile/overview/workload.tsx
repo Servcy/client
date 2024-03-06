@@ -1,4 +1,4 @@
-// types
+
 import { IUserStateDistribution } from "@servcy/types";
 // constants
 import { STATE_GROUPS } from "@constants/state";

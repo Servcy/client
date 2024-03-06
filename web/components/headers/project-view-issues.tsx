@@ -15,7 +15,7 @@ import {
   useProjectView,
   useUser,
 } from "@hooks/store";
-// components
+
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
@@ -24,7 +24,7 @@ import { Breadcrumbs, Button, CustomMenu, PhotoFilterIcon } from "@servcy/ui";
 // helpers
 import { truncateText } from "@helpers/string.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
-// types
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 // constants
 import { EIssuesStoreType, EIssueFilterType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";

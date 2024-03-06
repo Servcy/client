@@ -9,7 +9,7 @@ import { Tooltip, StateGroupIcon } from "@servcy/ui";
 import { Pencil, X, ArrowDown, ArrowUp } from "lucide-react";
 // helpers
 import { addSpaceIfCamelCase } from "@helpers/string.helper";
-// types
+
 import { IState } from "@servcy/types";
 
 type Props = {
@@ -99,9 +99,8 @@ export const StatesListItem: React.FC<Props> = observer((props) => {
 
           <button
             type="button"
-            className={`opacity-0 group-hover:opacity-100 ${
-              state.default || groupLength === 1 ? "cursor-not-allowed" : ""
-            } grid place-items-center`}
+            className={`opacity-0 group-hover:opacity-100 ${state.default || groupLength === 1 ? "cursor-not-allowed" : ""
+              } grid place-items-center`}
             onClick={() => {
               setTrackElement("PROJECT_SETTINGS_STATE_PAGE");
               handleDeleteState();

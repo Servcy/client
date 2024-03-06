@@ -3,13 +3,13 @@ import { observer } from "mobx-react-lite";
 import { Control, Controller, UseFormWatch } from "react-hook-form";
 
 import { useProject } from "@hooks/store";
-// components
+
 import { SelectRepository, TFormValues, TIntegrationSteps } from "@components/integration";
 // ui
 import { Button, CustomSearchSelect, ToggleSwitch } from "@servcy/ui";
 // helpers
 import { truncateText } from "@helpers/string.helper";
-// types
+
 import { IWorkspaceIntegration } from "@servcy/types";
 
 type Props = {

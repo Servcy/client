@@ -5,7 +5,7 @@ import { CalendarCheck2, CalendarClock, Layers, Link, Paperclip } from "lucide-r
 import xor from "lodash/xor";
 
 import { useEventTracker, useEstimate, useLabel, useIssues, useProjectState } from "@hooks/store";
-// components
+
 import { IssuePropertyLabels } from "../properties/labels";
 import { Tooltip } from "@servcy/ui";
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
@@ -22,7 +22,7 @@ import {
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
 import { cn } from "@helpers/common.helper";
-// types
+
 import { TIssue, IIssueDisplayProperties, TIssuePriorities } from "@servcy/types";
 // constants
 import { ISSUE_UPDATED } from "@constants/event-tracker";

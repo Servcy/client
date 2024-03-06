@@ -17,7 +17,7 @@ import { JIRA_IMPORTER_DETAIL } from "@constants/fetch-keys";
 
 import { IJiraImporterForm, IJiraMetadata } from "@servcy/types";
 
-// components
+
 import { ToggleSwitch, Spinner } from "@servcy/ui";
 
 import type { IJiraIntegrationData, TJiraIntegrationSteps } from ".";

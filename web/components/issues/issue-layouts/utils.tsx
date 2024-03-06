@@ -11,7 +11,7 @@ import { renderEmoji } from "@helpers/emoji.helper";
 // constants
 import { STATE_GROUPS } from "@constants/state";
 import { ISSUE_PRIORITIES } from "@constants/issue";
-// types
+
 import { GroupByColumnTypes, IGroupByColumn, TCycleGroups } from "@servcy/types";
 import { ContrastIcon } from "lucide-react";
 

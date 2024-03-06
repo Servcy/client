@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
-// types
+
 import { TIssuesListTypes } from "@servcy/types";
 // constants
 import { ASSIGNED_ISSUES_EMPTY_STATES } from "@constants/dashboard";

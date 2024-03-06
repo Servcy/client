@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Check, Globe2, Lock, Pencil, Trash2, X } from "lucide-react";
 
 import { useIssueDetail, useMention, useUser, useWorkspace } from "@hooks/store";
-// components
+
 import { IssueCommentBlock } from "./comment-block";
 import { LiteTextEditorWithRef, LiteReadOnlyEditorWithRef } from "@servcy/lite-text-editor";
 import { IssueCommentReaction } from "../../reactions/issue-comment";
@@ -11,7 +11,7 @@ import { IssueCommentReaction } from "../../reactions/issue-comment";
 import { CustomMenu } from "@servcy/ui";
 // services
 import { FileService } from "@services/file.service";
-// types
+
 import { TIssueComment } from "@servcy/types";
 import { TActivityOperations } from "../root";
 // helpers

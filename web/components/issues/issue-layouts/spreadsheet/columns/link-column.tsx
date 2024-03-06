@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-// types
+
 import { TIssue } from "@servcy/types";
 
 type Props = {

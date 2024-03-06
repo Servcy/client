@@ -10,7 +10,7 @@ import { UseFormSetValue } from "react-hook-form";
 import { GithubIntegrationService } from "@services/integrations";
 // ui
 import { Button, Loader } from "@servcy/ui";
-// types
+
 import { IUserDetails, TFormValues, TIntegrationSteps } from "@components/integration";
 // fetch-keys
 import { GITHUB_REPOSITORY_INFO } from "@constants/fetch-keys";
@@ -33,10 +33,10 @@ export const GithubRepoDetails: FC<Props> = ({ selectedRepo, handleStepChange, s
     workspaceSlug && selectedRepo ? GITHUB_REPOSITORY_INFO(workspaceSlug as string, selectedRepo.name) : null,
     workspaceSlug && selectedRepo
       ? () =>
-          githubIntegrationService.getGithubRepoInfo(workspaceSlug as string, {
-            owner: selectedRepo.owner.login,
-            repo: selectedRepo.name,
-          })
+        githubIntegrationService.getGithubRepoInfo(workspaceSlug as string, {
+          owner: selectedRepo.owner.login,
+          repo: selectedRepo.name,
+        })
       : null
   );
 

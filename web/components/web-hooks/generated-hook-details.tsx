@@ -1,8 +1,8 @@
-// components
+
 import { WebhookSecretKey } from "./form";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IWebhook } from "@servcy/types";
 
 type Props = {

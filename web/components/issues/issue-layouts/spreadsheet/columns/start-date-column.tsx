@@ -1,11 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { CalendarClock } from "lucide-react";
-// components
+
 import { DateDropdown } from "@components/dropdowns";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { TIssue } from "@servcy/types";
 
 type Props = {

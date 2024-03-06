@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 
 import { useMember } from "@hooks/store";
-// components
+
 import { WorkspaceInvitationsListItem, WorkspaceMembersListItem } from "@components/workspace";
 // ui
 import { MembersSettingsLoader } from "@components/ui";
@@ -40,8 +40,8 @@ export const WorkspaceMembersList: FC<{ searchQuery: string }> = observer((props
     <div className="divide-y-[0.5px] divide-custom-border-100">
       {searchedInvitationsIds && searchedInvitationsIds.length > 0
         ? searchedInvitationsIds?.map((invitationId) => (
-            <WorkspaceInvitationsListItem key={invitationId} invitationId={invitationId} />
-          ))
+          <WorkspaceInvitationsListItem key={invitationId} invitationId={invitationId} />
+        ))
         : null}
       {searchedMemberIds && searchedMemberIds.length > 0
         ? searchedMemberIds?.map((memberId) => <WorkspaceMembersListItem key={memberId} memberId={memberId} />)

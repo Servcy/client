@@ -5,10 +5,10 @@ import { observer } from "mobx-react-lite";
 import { useCycle, useIssues } from "@hooks/store";
 // ui
 import { CycleIssueQuickActions } from "@components/issues";
-// types
+
 import { TIssue } from "@servcy/types";
 import { EIssueActions } from "../../types";
-// components
+
 import { BaseKanBanRoot } from "../base-kanban-root";
 import { EIssuesStoreType } from "@constants/issue";
 

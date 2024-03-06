@@ -12,7 +12,7 @@ import { renderEmoji } from "@helpers/emoji.helper";
 import { IssueService } from "@services/issue";
 // constants
 import { ISSUE_DETAILS } from "@constants/fetch-keys";
-// components
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 import { PanelRight } from "lucide-react";

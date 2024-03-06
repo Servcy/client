@@ -7,7 +7,7 @@ import { useProjectState, useIssues } from "@hooks/store";
 import { Spinner, StateGroupIcon } from "@servcy/ui";
 // icons
 import { Check } from "lucide-react";
-// types
+
 import { TIssue } from "@servcy/types";
 import { EIssuesStoreType } from "@constants/issue";
 

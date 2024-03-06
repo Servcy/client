@@ -5,10 +5,10 @@ import { useTheme } from "next-themes";
 
 import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ExistingIssuesListModal } from "@components/core";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// types
+
 import { ISearchIssueResponse, TIssueLayouts } from "@servcy/types";
 // constants
 import { EUserProjectRoles } from "@constants/project";

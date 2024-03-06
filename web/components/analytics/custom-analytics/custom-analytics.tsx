@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 // services
 import { AnalyticsService } from "@services/analytics.service";
-// components
+
 import { CustomAnalyticsSelectBar, CustomAnalyticsMainContent, CustomAnalyticsSidebar } from "@components/analytics";
-// types
+
 import { IAnalyticsParams } from "@servcy/types";
 // fetch-keys
 import { ANALYTICS } from "@constants/fetch-keys";

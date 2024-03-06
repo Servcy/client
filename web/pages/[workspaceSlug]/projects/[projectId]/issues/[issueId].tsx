@@ -4,13 +4,13 @@ import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { PageHead } from "@components/core";
 import { ProjectIssueDetailsHeader } from "@components/headers";
 import { IssueDetailRoot } from "@components/issues";
 // ui
 import { Loader } from "@servcy/ui";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // store hooks
 import { useApplication, useIssueDetail, useProject } from "@hooks/store";

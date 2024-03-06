@@ -1,6 +1,6 @@
 // services
 import { APIService } from "@services/api.service";
-// types
+
 import {
   IAnalyticsParams,
   IAnalyticsResponse,

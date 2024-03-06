@@ -1,7 +1,7 @@
-// components
+
 import { Button } from "@servcy/ui";
 import { GithubAuth, TIntegrationSteps } from "@components/integration";
-// types
+
 import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types";
 
 type Props = {

@@ -7,7 +7,7 @@ import { action, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
 // services
 import { InboxIssueService } from "@services/inbox/inbox-issue.service";
-// types
+
 import type {
   TInboxDetailedStatus,
   TInboxIssueDetail,

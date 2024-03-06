@@ -2,7 +2,7 @@ export * from "./github-importer";
 export * from "./jira-importer";
 
 import { IProjectLite } from "../projects";
-// types
+
 import { IUserLite } from "../users";
 
 export interface IImporterService {

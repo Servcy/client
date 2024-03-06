@@ -5,11 +5,11 @@ import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
 
 import { useWorkspace } from "@hooks/store";
-// components
+
 import { WorkspaceSettingHeader } from "@components/headers";
 import { WorkspaceDetails } from "@components/workspace";
 import { PageHead } from "@components/core";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 const WorkspaceSettingsPage: NextPageWithLayout = observer(() => {

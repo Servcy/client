@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 import { useApplication, useUser } from "@hooks/store";
 // services
 import { UserService } from "@services/user.service";
-// components
+
 import { ProfileSidebarTime } from "./time";
 // ui
 import { Loader, Tooltip } from "@servcy/ui";
@@ -162,13 +162,12 @@ export const ProfileSidebar = observer(() => {
                             {project.assigned_issues > 0 && (
                               <Tooltip tooltipContent="Completion percentage" position="left">
                                 <div
-                                  className={`rounded px-1 py-0.5 text-xs font-medium ${
-                                    completedIssuePercentage <= 35
+                                  className={`rounded px-1 py-0.5 text-xs font-medium ${completedIssuePercentage <= 35
                                       ? "bg-red-500/10 text-red-500"
                                       : completedIssuePercentage <= 70
                                         ? "bg-yellow-500/10 text-yellow-500"
                                         : "bg-green-500/10 text-green-500"
-                                  }`}
+                                    }`}
                                 >
                                   {completedIssuePercentage}%
                                 </div>

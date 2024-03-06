@@ -1,10 +1,10 @@
 import { MutableRefObject } from "react";
 import { observer } from "mobx-react-lite";
-// components
+
 import { KanBan } from "./default";
 import { HeaderSubGroupByCard } from "./headers/sub-group-by-card";
 import { HeaderGroupByCard } from "./headers/group-by-card";
-// types
+
 import {
   GroupByColumnTypes,
   IGroupByColumn,

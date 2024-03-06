@@ -8,11 +8,11 @@ import useLocalStorage from "@hooks/use-local-storage";
 // images
 import emptyLabel from "public/empty-state/empty_label.svg";
 import emptyMembers from "public/empty-state/empty_members.svg";
-// components
+
 import { SingleProgressStats } from "@components/core";
 // ui
 import { Avatar, StateGroupIcon } from "@servcy/ui";
-// types
+
 import {
   IModule,
   TAssigneesDistribution,

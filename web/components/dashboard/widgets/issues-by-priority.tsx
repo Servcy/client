@@ -3,7 +3,7 @@ import Link from "next/link";
 import { observer } from "mobx-react-lite";
 
 import { useDashboard } from "@hooks/store";
-// components
+
 import { MarimekkoGraph } from "@components/ui";
 import {
   DurationFilterDropdown,
@@ -15,7 +15,7 @@ import {
 import { PriorityIcon } from "@servcy/ui";
 // helpers
 import { getCustomDates } from "@helpers/dashboard.helper";
-// types
+
 import { TIssuesByPriorityWidgetFilters, TIssuesByPriorityWidgetResponse } from "@servcy/types";
 // constants
 import { PRIORITY_GRAPH_GRADIENTS } from "@constants/dashboard";

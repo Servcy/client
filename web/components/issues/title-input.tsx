@@ -1,8 +1,8 @@
 import { FC, useState, useEffect, useCallback } from "react";
 import { observer } from "mobx-react";
-// components
+
 import { TextArea } from "@servcy/ui";
-// types
+
 import { TIssueOperations } from "./issue-detail";
 
 import useDebounce from "@hooks/use-debounce";

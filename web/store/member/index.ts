@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
-// types
+
 import { IUserLite } from "@servcy/types";
 import { RootStore } from "@store/root.store";
 import { IProjectMemberStore, ProjectMemberStore } from "./project-member.store";

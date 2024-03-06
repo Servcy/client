@@ -7,11 +7,11 @@ import { useProject, useUser } from "@hooks/store";
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
 import toast from "react-hot-toast";
-// components
+
 import { AutoArchiveAutomation, AutoCloseAutomation } from "@components/automation";
 import { PageHead } from "@components/core";
 import { ProjectSettingHeader } from "@components/headers";
-// types
+
 import { IProject } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // constants

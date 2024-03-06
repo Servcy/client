@@ -3,7 +3,7 @@
 import cn from "classnames";
 import debounce from "lodash/debounce";
 import { useEffect, useState } from "react";
-// Components
+
 import InboxItemModal from "@/components/Inbox/InboxItemModal";
 import InboxItems from "@/components/Inbox/InboxItems";
 import { Button, ConfigProvider, Input, Select, Tabs } from "antd";
@@ -24,7 +24,7 @@ import {
   fetchInbox as fetchInboxApi,
   readItem as readItemApi,
 } from "@/apis/inbox";
-// Types
+
 import { InboxItem, PaginationDetails } from "@/types/apps/inbox";
 // constants
 import { integrationInboxCategories } from "@/constants/integrations";

@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useIssues } from "@hooks/store";
-// components
+
 import { BaseGanttRoot } from "./base-gantt-root";
 // constants
 import { EIssuesStoreType } from "@constants/issue";
-// types
+
 import { EIssueActions } from "../types";
 import { TIssue } from "@servcy/types";
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { useIssueDetail } from "@hooks/store";
-// components
+
 import {
   AssignedCompletedIssueListItem,
   AssignedIssuesEmptyState,
@@ -18,7 +18,7 @@ import { Loader, getButtonStyling } from "@servcy/ui";
 // helpers
 import { cn } from "@helpers/common.helper";
 import { getRedirectionFilters } from "@helpers/dashboard.helper";
-// types
+
 import { TAssignedIssuesWidgetResponse, TCreatedIssuesWidgetResponse, TIssue, TIssuesListTypes } from "@servcy/types";
 
 export type WidgetIssuesListProps = {

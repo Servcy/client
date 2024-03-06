@@ -8,7 +8,7 @@ import { useProjectView } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IProjectView } from "@servcy/types";
 
 type Props = {

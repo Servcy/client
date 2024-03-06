@@ -8,7 +8,7 @@ import { useApplication, usePage, useProject } from "@hooks/store";
 import { Breadcrumbs, Button } from "@servcy/ui";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
-// components
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 

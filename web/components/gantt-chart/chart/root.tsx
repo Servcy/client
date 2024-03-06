@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 
 import { useGanttChart } from "../hooks/use-gantt-chart";
-// components
+
 import { GanttChartHeader, GanttChartMainContent } from "@components/gantt-chart";
 // views
 import {
@@ -12,7 +12,7 @@ import {
 } from "../views";
 // helpers
 import { cn } from "@helpers/common.helper";
-// types
+
 import { ChartDataType, IBlockUpdateData, IGanttBlock, TGanttViews } from "../types";
 // data
 import { currentViewDataWithView } from "../data";

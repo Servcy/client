@@ -1,9 +1,9 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
-// components
+
 import { FilterHeader } from "../helpers/filter-header";
-// types
+
 import { IIssueDisplayProperties } from "@servcy/types";
 // constants
 import { ISSUE_DISPLAY_PROPERTIES } from "@constants/issue";

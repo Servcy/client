@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { useApplication } from "@hooks/store";
 import useUserNotification from "@hooks/use-user-notifications";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-// components
+
 import { EmptyState } from "@components/common";
 import { SnoozeNotificationModal, NotificationCard, NotificationHeader } from "@components/notifications";
 import { Tooltip } from "@servcy/ui";
@@ -69,11 +69,10 @@ export const NotificationPopover = observer(() => {
         <>
           <Tooltip tooltipContent="Notifications" position="right" className="ml-2" disabled={!isSidebarCollapsed}>
             <button
-              className={`group relative flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium outline-none ${
-                isActive
+              className={`group relative flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium outline-none ${isActive
                   ? "bg-custom-primary-100/10 text-custom-primary-100"
                   : "text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80"
-              } ${isSidebarCollapsed ? "justify-center" : ""}`}
+                } ${isSidebarCollapsed ? "justify-center" : ""}`}
               onClick={() => {
                 if (window.innerWidth < 768) themeStore.toggleSidebar();
                 if (!isActive) setFetchNotifications(true);

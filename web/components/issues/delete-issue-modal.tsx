@@ -4,7 +4,7 @@ import { AlertTriangle } from "lucide-react";
 // ui
 import { Button } from "@servcy/ui";
 import toast from "react-hot-toast";
-// types
+
 import { useIssues } from "@hooks/store/use-issues";
 import { TIssue } from "@servcy/types";
 import { useProject } from "@hooks/store";
@@ -25,7 +25,7 @@ export const DeleteIssueModal: React.FC<Props> = (props) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
 
-  
+
   const { getProjectById } = useProject();
 
   useEffect(() => {

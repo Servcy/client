@@ -1,10 +1,10 @@
 import { FC, useMemo } from "react";
 import { observer } from "mobx-react-lite";
-// components
+
 import { LabelList, LabelCreate, IssueLabelSelectRoot } from "./";
 
 import { useIssueDetail, useLabel } from "@hooks/store";
-// types
+
 import { IIssueLabel, TIssue } from "@servcy/types";
 import toast from "react-hot-toast";
 

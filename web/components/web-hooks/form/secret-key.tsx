@@ -11,7 +11,7 @@ import { copyTextToClipboard } from "@helpers/string.helper";
 import { csvDownload } from "@helpers/download.helper";
 // utils
 import { getCurrentHookAsCSV } from "../utils";
-// types
+
 import { IWebhook } from "@servcy/types";
 
 type Props = {
@@ -29,7 +29,7 @@ export const WebhookSecretKey: FC<Props> = observer((props) => {
   // store hooks
   const { currentWorkspace } = useWorkspace();
   const { currentWebhook, regenerateSecretKey, webhookSecretKey } = useWebhook();
-  
+
 
 
   const handleCopySecretKey = () => {

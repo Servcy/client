@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 
 import { useEventTracker, useProjectState } from "@hooks/store";
-// components
+
 import { CreateUpdateStateInline, DeleteStateModal, StateGroup, StatesListItem } from "@components/states";
 // ui
 import { Loader } from "@servcy/ui";

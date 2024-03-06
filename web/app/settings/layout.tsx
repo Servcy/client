@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
-// Components
+
 import { AiFillApi, AiOutlineArrowRight, AiOutlineSetting } from "react-icons/ai";
 
 export default function SettingsLayout({ integrations }: { integrations: React.ReactNode }) {

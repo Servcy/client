@@ -6,7 +6,7 @@ import {
   StateGroupStartedIcon,
   StateGroupUnstartedIcon,
 } from "@components/icons";
-// types
+
 import { TStateGroups } from "@servcy/types";
 // constants
 import { STATE_GROUPS } from "@constants/state";

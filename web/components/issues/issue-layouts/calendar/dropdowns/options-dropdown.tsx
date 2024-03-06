@@ -9,7 +9,7 @@ import { useCalendarView } from "@hooks/store";
 import { ToggleSwitch } from "@servcy/ui";
 // icons
 import { Check, ChevronUp } from "lucide-react";
-// types
+
 import { TCalendarLayouts } from "@servcy/types";
 // constants
 import { CALENDAR_LAYOUTS } from "@constants/calendar";
@@ -100,9 +100,8 @@ export const CalendarOptionsDropdown: React.FC<ICalendarHeader> = observer((prop
             <button
               type="button"
               ref={setReferenceElement}
-              className={`flex items-center gap-1.5 rounded bg-custom-background-80 px-2.5 py-1 text-xs outline-none hover:bg-custom-background-80 ${
-                open ? "text-custom-text-100" : "text-custom-text-200"
-              }`}
+              className={`flex items-center gap-1.5 rounded bg-custom-background-80 px-2.5 py-1 text-xs outline-none hover:bg-custom-background-80 ${open ? "text-custom-text-100" : "text-custom-text-200"
+                }`}
             >
               <div className="font-medium">Options</div>
               <div
@@ -146,7 +145,7 @@ export const CalendarOptionsDropdown: React.FC<ICalendarHeader> = observer((prop
                     onClick={handleToggleWeekends}
                   >
                     Show weekends
-                    <ToggleSwitch value={showWeekends} onChange={() => {}} />
+                    <ToggleSwitch value={showWeekends} onChange={() => { }} />
                   </button>
                 </div>
               </div>

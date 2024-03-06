@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-// components
+
 import { FilterHeader, FilterOption } from "@components/issues";
 // ui
 import { Loader } from "@servcy/ui";
-// types
+
 import { IIssueLabel } from "@servcy/types";
 
 const LabelIcons = ({ color }: { color: string }) => (

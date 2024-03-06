@@ -19,7 +19,7 @@ import {
   Avatar,
   CycleGroupIcon,
 } from "@servcy/ui";
-// components
+
 import ProgressChart from "@components/core/sidebar/progress-chart";
 import { ActiveCycleProgressStats } from "@components/cycles";
 import { StateDropdown } from "@components/dropdowns";
@@ -29,7 +29,7 @@ import { ArrowRight, CalendarCheck, CalendarDays, Star, Target } from "lucide-re
 // helpers
 import { renderFormattedDate, findHowManyDaysLeft, renderFormattedDateWithoutYear } from "@helpers/date-time.helper";
 import { truncateText } from "@helpers/string.helper";
-// types
+
 import { ICycle, TCycleGroups } from "@servcy/types";
 // constants
 import { EIssuesStoreType } from "@constants/issue";

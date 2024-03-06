@@ -10,14 +10,14 @@ import toast from "react-hot-toast";
 import useUserAuth from "@hooks/use-user-auth";
 // layouts
 import { ProfileSettingsLayout } from "@layouts/settings-layout";
-// components
+
 import { DeactivateAccountModal } from "@components/account";
 import { ImagePickerPopover, PageHead, UserImageUploadModal } from "@components/core";
 // ui
 import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servcy/ui";
 // icons
 import { ChevronDown, User2 } from "lucide-react";
-// types
+
 import type { IUser } from "@servcy/types";
 import type { NextPageWithLayout } from "@lib/types";
 // constants

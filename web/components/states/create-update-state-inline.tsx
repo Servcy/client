@@ -9,7 +9,7 @@ import { useEventTracker, useProjectState } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button, CustomSelect, Input, Tooltip } from "@servcy/ui";
-// types
+
 import type { IState } from "@servcy/types";
 // constants
 import { GROUP_CHOICES } from "@constants/project";
@@ -180,9 +180,8 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
           {({ open }) => (
             <>
               <Popover.Button
-                className={`group inline-flex items-center text-base font-medium focus:outline-none ${
-                  open ? "text-custom-text-100" : "text-custom-text-200"
-                }`}
+                className={`group inline-flex items-center text-base font-medium focus:outline-none ${open ? "text-custom-text-100" : "text-custom-text-200"
+                  }`}
               >
                 {watch("color") && watch("color") !== "" && (
                   <span

@@ -8,7 +8,7 @@ import { useEventTracker, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
-// components
+
 import { ImagePickerPopover } from "@components/core";
 import EmojiIconPicker from "@components/emoji-icon-picker";
 import { MemberDropdown } from "@components/dropdowns";

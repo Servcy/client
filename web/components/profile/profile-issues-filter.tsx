@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
-// components
+
 import { DisplayFiltersSelection, FilterSelection, FiltersDropdown, LayoutSelection } from "@components/issues";
 
 import { useIssues, useLabel } from "@hooks/store";

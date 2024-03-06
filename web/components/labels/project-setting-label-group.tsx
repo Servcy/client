@@ -5,7 +5,7 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { observer } from "mobx-react-lite";
 // icons
 import { ChevronDown, Pencil, Trash2 } from "lucide-react";
-// types
+
 import { IIssueLabel } from "@servcy/types";
 import {
   Draggable,
@@ -69,9 +69,8 @@ export const ProjectSettingLabelGroup: React.FC<Props> = observer((props) => {
   return (
     <Disclosure
       as="div"
-      className={`rounded border-[0.5px] border-custom-border-200 text-custom-text-100 ${
-        groupDragSnapshot.combineTargetFor ? "bg-custom-background-80" : "bg-custom-background-100"
-      }`}
+      className={`rounded border-[0.5px] border-custom-border-200 text-custom-text-100 ${groupDragSnapshot.combineTargetFor ? "bg-custom-background-80" : "bg-custom-background-100"
+        }`}
       defaultOpen
     >
       {({ open }) => (

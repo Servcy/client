@@ -4,7 +4,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils";
 // services
 import { WorkspaceService } from "@services/workspace.service";
-// types
+
 import { IWorkspaceBulkInviteFormData, IWorkspaceMember, IWorkspaceMemberInvitation } from "@servcy/types";
 import { RootStore } from "@store/root.store";
 // constants
@@ -127,9 +127,8 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
     const searchedWorkspaceMemberIds = workspaceMemberIds?.filter((userId) => {
       const memberDetails = this.getWorkspaceMemberDetails(userId);
       if (!memberDetails) return false;
-      const memberSearchQuery = `${memberDetails.member.first_name} ${memberDetails.member.last_name} ${
-        memberDetails.member.display_name
-      } ${memberDetails.member.email ?? ""}`;
+      const memberSearchQuery = `${memberDetails.member.first_name} ${memberDetails.member.last_name} ${memberDetails.member.display_name
+        } ${memberDetails.member.email ?? ""}`;
       return memberSearchQuery.toLowerCase()?.includes(searchQuery.toLowerCase());
     });
     return searchedWorkspaceMemberIds;

@@ -1,7 +1,7 @@
 import { FC } from "react";
-// components
+
 import { GanttChartBlock } from "./block";
-// types
+
 import { IBlockUpdateData, IGanttBlock } from "../types";
 // constants
 import { HEADER_HEIGHT } from "../constants";

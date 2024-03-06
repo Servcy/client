@@ -12,7 +12,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { createIssuePayload } from "@helpers/issue.helper";
 import { cn } from "@helpers/common.helper";
-// types
+
 import { IProject, TIssue } from "@servcy/types";
 // constants
 import { ISSUE_CREATED } from "@constants/event-tracker";
@@ -67,7 +67,7 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  
+
   const { getProjectById } = useProject();
   const { captureIssueEvent } = useEventTracker();
 

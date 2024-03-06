@@ -3,11 +3,11 @@ import { observer } from "mobx-react-lite";
 import Link from "next/link";
 
 import { useDashboard } from "@hooks/store";
-// components
+
 import { WidgetLoader } from "@components/dashboard/widgets";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { TOverviewStatsWidgetResponse } from "@servcy/types";
 import { cn } from "@helpers/common.helper";
 

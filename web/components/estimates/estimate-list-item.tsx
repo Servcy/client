@@ -10,7 +10,7 @@ import { Button, CustomMenu } from "@servcy/ui";
 import { Pencil, Trash2 } from "lucide-react";
 // helpers
 import { orderArrayBy } from "@helpers/array.helper";
-// types
+
 import { IEstimate } from "@servcy/types";
 
 type Props = {
@@ -26,7 +26,7 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
   const { workspaceSlug, projectId } = router.query;
   // store hooks
   const { currentProjectDetails, updateProject } = useProject();
-  
+
 
 
   const handleUseEstimate = async () => {

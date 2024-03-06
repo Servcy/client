@@ -9,7 +9,7 @@ import { renderEmoji } from "@helpers/emoji.helper";
 import { useProject, useUser } from "@hooks/store";
 // constants
 import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project";
-// components
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 

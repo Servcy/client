@@ -17,7 +17,7 @@ import { copyUrlToClipboard } from "@helpers/string.helper";
 import { renderFormattedTime, renderFormattedDate } from "@helpers/date-time.helper";
 // ui
 import { CustomMenu, Tooltip } from "@servcy/ui";
-// components
+
 import { CreateUpdatePageModal, DeletePageModal } from "@components/pages";
 // constants
 import { EUserProjectRoles } from "@constants/project";
@@ -212,9 +212,8 @@ export const PagesListItem: FC<IPagesListItem> = observer(({ pageId, projectId }
                 )}
                 {userCanChangeAccess && (
                   <Tooltip
-                    tooltipContent={`${
-                      access ? "This page is only visible to you" : "This page can be viewed by anyone in the project"
-                    }`}
+                    tooltipContent={`${access ? "This page is only visible to you" : "This page can be viewed by anyone in the project"
+                      }`}
                   >
                     {access ? (
                       <button type="button" onClick={handleMakePublic}>

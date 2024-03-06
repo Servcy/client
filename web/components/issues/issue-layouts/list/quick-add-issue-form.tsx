@@ -10,7 +10,7 @@ import useKeypress from "@hooks/use-keypress";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // constants
 import { TIssue, IProject } from "@servcy/types";
-// types
+
 import { createIssuePayload } from "@helpers/issue.helper";
 // constants
 import { ISSUE_CREATED } from "@constants/event-tracker";
@@ -64,7 +64,7 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
   // router
   const router = useRouter();
   const { workspaceSlug, projectId } = router.query;
-  
+
   const { getProjectById } = useProject();
   const { captureIssueEvent } = useEventTracker();
 
@@ -131,9 +131,8 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
 
   return (
     <div
-      className={`border-b border-t border-custom-border-200 bg-custom-background-100 ${
-        errors && errors?.name && errors?.name?.message ? `border-red-500 bg-red-500/10` : ``
-      }`}
+      className={`border-b border-t border-custom-border-200 bg-custom-background-100 ${errors && errors?.name && errors?.name?.message ? `border-red-500 bg-red-500/10` : ``
+        }`}
     >
       {isOpen ? (
         <div className="shadow-custom-shadow-sm">

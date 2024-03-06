@@ -5,11 +5,11 @@ import { observer } from "mobx-react-lite";
 import { Camera, User2 } from "lucide-react";
 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
-// components
+
 import { Button, Input } from "@servcy/ui";
 import { OnboardingSidebar, OnboardingStepIndicator } from "@components/onboarding";
 import { UserImageUploadModal } from "@components/core";
-// types
+
 import { IUser } from "@servcy/types";
 // services
 import { FileService } from "@services/file.service";

@@ -8,13 +8,13 @@ import { useIssues, useLabel, useMember, useProject, useProjectState } from "@ho
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";
 // ui
 import { Breadcrumbs, LayersIcon } from "@servcy/ui";
-// components
+
 import { DisplayFiltersSelection, FilterSelection, FiltersDropdown } from "@components/issues";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
-// types
+
 import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types";
 
 export const ProjectArchivedIssuesHeader: FC = observer(() => {

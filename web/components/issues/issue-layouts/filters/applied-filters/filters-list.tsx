@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import { useRouter } from "next/router";
 
 import { useApplication, useUser } from "@hooks/store";
-// components
+
 import {
   AppliedCycleFilters,
   AppliedDateFilters,
@@ -17,7 +17,7 @@ import {
 } from "@components/issues";
 // helpers
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper";
-// types
+
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";
 // constants
 import { EUserProjectRoles } from "@constants/project";

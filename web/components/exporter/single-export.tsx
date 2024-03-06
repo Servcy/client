@@ -3,7 +3,7 @@ import { useState, FC } from "react";
 import { Button } from "@servcy/ui";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";
-// types
+
 import { IExportData } from "@servcy/types";
 
 type Props = {
@@ -34,8 +34,7 @@ export const SingleExport: FC<Props> = ({ service, refreshing }) => {
             </span>{" "}
           </span>
           <span
-            className={`rounded px-2 py-0.5 text-xs capitalize ${
-              service.status === "completed"
+            className={`rounded px-2 py-0.5 text-xs capitalize ${service.status === "completed"
                 ? "bg-green-500/20 text-green-500"
                 : service.status === "processing"
                   ? "bg-yellow-500/20 text-yellow-500"
@@ -44,7 +43,7 @@ export const SingleExport: FC<Props> = ({ service, refreshing }) => {
                     : service.status === "expired"
                       ? "bg-orange-500/20 text-orange-500"
                       : ""
-            }`}
+              }`}
           >
             {refreshing ? "Refreshing..." : service.status}
           </span>

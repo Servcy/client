@@ -3,7 +3,7 @@ import set from "lodash/set";
 // store
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// types
+
 import { TIssue } from "@servcy/types";
 //services
 import { IssueService } from "@services/issue";

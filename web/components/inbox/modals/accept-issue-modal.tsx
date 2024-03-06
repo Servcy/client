@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { CheckCircle } from "lucide-react";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import type { TIssue } from "@servcy/types";
 import { useProject } from "@hooks/store";
 
@@ -17,7 +17,7 @@ type Props = {
 
 export const AcceptIssueModal: React.FC<Props> = ({ isOpen, onClose, data, onSubmit }) => {
   const [isAccepting, setIsAccepting] = useState(false);
-  
+
   const { getProjectById } = useProject();
 
   const handleClose = () => {

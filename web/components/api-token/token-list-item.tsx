@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { XCircle } from "lucide-react";
-// components
+
 import { DeleteApiTokenModal } from "@components/api-token";
 // ui
 import { Tooltip } from "@servcy/ui";
 // helpers
 import { renderFormattedDate, calculateTimeAgo } from "@helpers/date-time.helper";
-// types
+
 import { IApiToken } from "@servcy/types";
 
 type Props = {

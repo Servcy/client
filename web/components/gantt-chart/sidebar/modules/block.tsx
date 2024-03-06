@@ -3,12 +3,12 @@ import { observer } from "mobx-react";
 import { MoreVertical } from "lucide-react";
 
 import { useGanttChart } from "@components/gantt-chart/hooks";
-// components
+
 import { ModuleGanttSidebarBlock } from "@components/modules";
 // helpers
 import { cn } from "@helpers/common.helper";
 import { findTotalDaysInRange } from "@helpers/date-time.helper";
-// types
+
 import { IGanttBlock } from "@components/gantt-chart/types";
 // constants
 import { BLOCK_HEIGHT } from "@components/gantt-chart/constants";

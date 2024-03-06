@@ -1,10 +1,10 @@
 // ui
 import { LayersIcon } from "@servcy/ui";
-// types
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties } from "@servcy/types";
 // constants
 import { SPREADSHEET_PROPERTY_LIST } from "@constants/spreadsheet";
-// components
+
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
 import { SpreadsheetHeaderColumn } from "./spreadsheet-header-column";
 

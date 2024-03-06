@@ -6,11 +6,11 @@ import { Copy, ExternalLink, Link, Pencil, Trash2, XCircle } from "lucide-react"
 import omit from "lodash/omit";
 import toast from "react-hot-toast";
 import { useEventTracker, useIssues, useProjectState, useUser } from "@hooks/store";
-// components
+
 import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
-// types
+
 import { TIssue } from "@servcy/types";
 import { IQuickActionProps } from "../list/list-view-types";
 // constants

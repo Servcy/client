@@ -4,9 +4,9 @@ import { observer } from "mobx-react-lite";
 import xor from "lodash/xor";
 
 import { useEventTracker, useIssues } from "@hooks/store";
-// components
+
 import { ModuleDropdown } from "@components/dropdowns";
-// types
+
 import { TIssue } from "@servcy/types";
 // constants
 import { EIssuesStoreType } from "@constants/issue";

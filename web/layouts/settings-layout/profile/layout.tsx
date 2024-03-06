@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 // layout
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import { ProfileLayoutSidebar } from "@layouts/settings-layout";
-// components
+
 import { CommandPalette } from "@components/command-palette";
 
 interface IProfileSettingsLayout {

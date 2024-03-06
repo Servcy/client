@@ -13,7 +13,7 @@ import DefaultLayout from "@layouts/default-layout";
 import { Spinner } from "@servcy/ui";
 // icons
 import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // constants
 import { WORKSPACE_INVITATION } from "@constants/fetch-keys";

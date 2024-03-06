@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 // icons
 import { StateGroupIcon } from "@servcy/ui";
 import { X } from "lucide-react";
-// types
+
 import { IState } from "@servcy/types";
 
 type Props = {

@@ -8,7 +8,7 @@ import { useGlobalView, useEventTracker } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IWorkspaceView } from "@servcy/types";
 // constants
 import { GLOBAL_VIEW_DELETED } from "@constants/event-tracker";

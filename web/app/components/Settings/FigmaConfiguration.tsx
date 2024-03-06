@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// Types
+
 import { Integration, UserIntegration } from "@/types/apps/integration";
-// Components
+
 import { Button, Input, Select } from "antd";
 import Image from "next/image.js";
 import { MdOutlineSyncAlt } from "react-icons/md";

@@ -2,11 +2,11 @@ import React, { Fragment } from "react";
 import { Tab } from "@headlessui/react";
 
 import useLocalStorage from "@hooks/use-local-storage";
-// components
+
 import { SingleProgressStats } from "@components/core";
 // ui
 import { Avatar } from "@servcy/ui";
-// types
+
 import { ICycle } from "@servcy/types";
 
 type Props = {

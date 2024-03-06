@@ -2,7 +2,7 @@ import { FC } from "react";
 import { observer } from "mobx-react-lite";
 
 import { useIssueDetail } from "@hooks/store";
-// components
+
 import {
   IssueDefaultActivity,
   IssueNameActivity,
@@ -30,10 +30,10 @@ type TIssueActivityList = {
 
 export const IssueActivityList: FC<TIssueActivityList> = observer((props) => {
   const { activityId, ends } = props;
-  
+
   const {
     activity: { getActivityById },
-    comment: {},
+    comment: { },
   } = useIssueDetail();
 
   const componentDefaultProps = { activityId, ends };

@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-// Components
+
 import { SyncOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 // Utils

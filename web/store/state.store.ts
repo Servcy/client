@@ -4,7 +4,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils";
 // store
 import { RootStore } from "./root.store";
-// types
+
 import { IState } from "@servcy/types";
 // services
 import { ProjectStateService } from "@services/project";

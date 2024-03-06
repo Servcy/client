@@ -1,6 +1,6 @@
 import { FC, useMemo } from "react";
 import { useRouter } from "next/router";
-// components
+
 import { IssuePeekOverview } from "@components/issues";
 import { IssueMainContent } from "./main-content";
 import { IssueDetailsSidebar } from "./sidebar";
@@ -11,7 +11,7 @@ import emptyIssue from "public/empty-state/issue.svg";
 
 import { useApplication, useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// types
+
 import { TIssue } from "@servcy/types";
 // constants
 import { EUserProjectRoles } from "@constants/project";

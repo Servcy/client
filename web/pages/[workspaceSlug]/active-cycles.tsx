@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
 import { observer } from "mobx-react";
-// components
+
 import { PageHead } from "@components/core";
 import { WorkspaceActiveCycleHeader } from "@components/headers";
 import { WorkspaceActiveCyclesUpgrade } from "@components/workspace";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 import { useWorkspace } from "@hooks/store";

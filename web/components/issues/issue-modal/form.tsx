@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 // services
 import { AIService } from "@services/ai.service";
 import { FileService } from "@services/file.service";
-// components
+
 import { GptAssistantPopover } from "@components/core";
 import { ParentIssuesListModal } from "@components/issues";
 import { IssueLabelSelect } from "@components/issues/select";
@@ -30,7 +30,7 @@ import {
 import { Button, CustomMenu, Input, Loader, ToggleSwitch } from "@servcy/ui";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import type { TIssue, ISearchIssueResponse } from "@servcy/types";
 
 const defaultValues: Partial<TIssue> = {

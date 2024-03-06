@@ -1,13 +1,13 @@
 import { FC, useMemo } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-// components
+
 import { InboxIssueMainContent } from "./main-content";
 import { InboxIssueDetailsSidebar } from "./sidebar";
 
 import { useEventTracker, useInboxIssues, useIssueDetail, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// types
+
 import { TIssue } from "@servcy/types";
 import { TIssueOperations } from "../root";
 // constants

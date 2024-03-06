@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { AppInstallationService } from "@services/app_installation.service";
 // ui
 import { Spinner } from "@servcy/ui";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 // services

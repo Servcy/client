@@ -3,7 +3,7 @@ import React from "react";
 // react hook form
 import { useFormContext } from "react-hook-form";
 
-// types
+
 import { IJiraImporterForm } from "@servcy/types";
 
 export const JiraConfirmImport: React.FC = () => {

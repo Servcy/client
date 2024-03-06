@@ -5,7 +5,7 @@ import { Plus, ChevronRight, ChevronDown, Loader } from "lucide-react";
 
 import { useEventTracker, useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ExistingIssuesListModal } from "@components/core";
 import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
 import { IssueList } from "./issues-list";
@@ -14,7 +14,7 @@ import { ProgressBar } from "./progressbar";
 import { CustomMenu } from "@servcy/ui";
 // helpers
 import { copyTextToClipboard } from "@helpers/string.helper";
-// types
+
 import { IUser, TIssue } from "@servcy/types";
 
 export interface ISubIssuesRoot {

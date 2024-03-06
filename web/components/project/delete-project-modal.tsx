@@ -8,7 +8,7 @@ import { useEventTracker, useProject, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
-// types
+
 import type { IProject } from "@servcy/types";
 // constants
 import { PROJECT_DELETED } from "@constants/event-tracker";

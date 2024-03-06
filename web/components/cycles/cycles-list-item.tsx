@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 
 import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles";
 // ui
 import { CustomMenu, Tooltip, CircularProgressIndicator, CycleGroupIcon, AvatarGroup, Avatar } from "@servcy/ui";
@@ -17,7 +17,7 @@ import { copyTextToClipboard } from "@helpers/string.helper";
 // constants
 import { CYCLE_STATUS } from "@constants/cycle";
 import { EUserWorkspaceRoles } from "@constants/workspace";
-// types
+
 import { TCycleGroups } from "@servcy/types";
 import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker";
 

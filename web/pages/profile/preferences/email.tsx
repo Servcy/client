@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
 // ui
 import { EmailSettingsLoader } from "@components/ui";
-// components
+
 import { EmailNotificationForm } from "@components/profile/preferences";
 import { PageHead } from "@components/core";
 // services

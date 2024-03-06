@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 // ui
 import { Button, Input } from "@servcy/ui";
-// types
+
 import type { IIssueLink, ILinkDetails, ModuleLink } from "@servcy/types";
 
 type Props = {

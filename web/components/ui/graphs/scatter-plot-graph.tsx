@@ -1,6 +1,6 @@
 // nivo
 import { ResponsiveScatterPlot, ScatterPlotSvgProps } from "@nivo/scatterplot";
-// types
+
 import { TGraph } from "./types";
 // constants
 import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";

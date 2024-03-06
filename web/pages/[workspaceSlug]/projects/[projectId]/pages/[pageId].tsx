@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import { FileService } from "@services/file.service";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { GptAssistantPopover, PageHead } from "@components/core";
 import { PageDetailsHeader } from "@components/headers/page-details";
 // ui
@@ -21,7 +21,7 @@ import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/do
 import { Spinner } from "@servcy/ui";
 // assets
 // helpers
-// types
+
 import { IPage } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // fetch-keys

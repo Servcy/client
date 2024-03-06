@@ -1,7 +1,7 @@
 import { endOfMonth, endOfWeek, endOfYear, startOfMonth, startOfWeek, startOfYear } from "date-fns";
 // helpers
 import { renderFormattedPayloadDate } from "./date-time.helper";
-// types
+
 import { TDurationFilterOptions, TIssuesListTypes } from "@servcy/types";
 
 /**

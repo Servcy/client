@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useUser } from "@hooks/store";
 // views
 import { SpreadsheetView } from "./spreadsheet-view";
-// types
+
 import { TIssue, IIssueDisplayFilterOptions, TUnGroupedIssues } from "@servcy/types";
 import { EIssueActions } from "../types";
 import { IQuickActionProps } from "../list/list-view-types";

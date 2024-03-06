@@ -3,7 +3,7 @@
 import { oauthUrlGenerators } from "@/utils/Integration";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// Components
+
 import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal";
 import { Button, Card, Input, Select, Skeleton, Tag } from "antd";
 import Image from "next/image.js";
@@ -13,7 +13,7 @@ import { HiArrowsRightLeft } from "react-icons/hi2";
 import { fetchIntegrations } from "@/apis/integration";
 // constants
 import { integrationCategories, uniqueIntegrationCategories } from "@/constants/integrations";
-// Types
+
 import { Integration } from "@/types/apps/integration";
 // Utils
 import { getQueryParams } from "@/utils/Shared";

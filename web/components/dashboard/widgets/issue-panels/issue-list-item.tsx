@@ -6,7 +6,7 @@ import { useIssueDetail, useMember, useProject } from "@hooks/store";
 import { Avatar, AvatarGroup, ControlLink, PriorityIcon } from "@servcy/ui";
 // helpers
 import { findTotalDaysInRange, renderFormattedDate } from "@helpers/date-time.helper";
-// types
+
 import { TIssue, TWidgetIssue } from "@servcy/types";
 
 export type IssueListItemProps = {

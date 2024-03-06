@@ -5,7 +5,7 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { Button, Loader } from "@servcy/ui";
 // icons
 import { ChevronDown, ChevronUp } from "lucide-react";
-// types
+
 import { IProject } from "@servcy/types";
 
 export interface IDeleteProjectSection {

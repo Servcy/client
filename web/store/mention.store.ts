@@ -1,7 +1,7 @@
 import { computed, makeObservable } from "mobx";
 // editor
 import { IMentionHighlight, IMentionSuggestion } from "@servcy/lite-text-editor";
-// types
+
 import { RootStore } from "@store/root.store";
 
 export interface IMentionStore {

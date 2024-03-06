@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import { Button, Input } from "@servcy/ui";
 // icons
 import { AlertTriangle } from "lucide-react";
-// types
+
 import { IUser, IImporterService } from "@servcy/types";
 // fetch-keys
 import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";

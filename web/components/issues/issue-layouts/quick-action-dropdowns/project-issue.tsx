@@ -7,11 +7,11 @@ import omit from "lodash/omit";
 
 import { useEventTracker, useIssues, useProjectState, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
-// types
+
 import { TIssue } from "@servcy/types";
 import { IQuickActionProps } from "../list/list-view-types";
 // constant

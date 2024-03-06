@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 
 import { useUser } from "@hooks/store";
-// components
+
 import { CyclePeekOverview, CyclesListItem } from "@components/cycles";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui

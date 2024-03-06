@@ -1,4 +1,4 @@
-// types
+
 import { IState, IStateResponse } from "@servcy/types";
 import { STATE_GROUPS } from "@constants/state";
 

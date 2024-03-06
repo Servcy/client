@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 
 import { useApplication, useEventTracker, useModule, useUser } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
-// components
+
 import { ModuleCardItem, ModuleListItem, ModulePeekOverview, ModulesListGanttChartView } from "@components/modules";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
@@ -67,11 +67,10 @@ export const ModulesListView: React.FC = observer(() => {
             <div className="h-full w-full">
               <div className="flex h-full w-full justify-between">
                 <div
-                  className={`grid h-full w-full grid-cols-1 gap-6 overflow-y-auto p-8 ${
-                    peekModule
+                  className={`grid h-full w-full grid-cols-1 gap-6 overflow-y-auto p-8 ${peekModule
                       ? "lg:grid-cols-1 xl:grid-cols-2 3xl:grid-cols-3"
                       : "lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4"
-                  } auto-rows-max transition-all vertical-scrollbar scrollbar-lg`}
+                    } auto-rows-max transition-all vertical-scrollbar scrollbar-lg`}
                 >
                   {projectModuleIds.map((moduleId) => (
                     <ModuleCardItem key={moduleId} moduleId={moduleId} />

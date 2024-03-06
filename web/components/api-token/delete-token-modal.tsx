@@ -7,7 +7,7 @@ import { APITokenService } from "@services/api_token.service";
 import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IApiToken } from "@servcy/types";
 // fetch-keys
 import { API_TOKENS_LIST } from "@constants/fetch-keys";
@@ -24,7 +24,7 @@ export const DeleteApiTokenModal: FC<Props> = (props) => {
   const { isOpen, onClose, tokenId } = props;
   // states
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
-  
+
 
   // router
   const router = useRouter();

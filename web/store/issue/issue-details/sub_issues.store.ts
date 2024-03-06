@@ -5,7 +5,7 @@ import update from "lodash/update";
 import { action, makeObservable, observable, runInAction } from "mobx";
 // services
 import { IssueService } from "@services/issue";
-// types
+
 import {
   TIssue,
   TIssueSubIssues,

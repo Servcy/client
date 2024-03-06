@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // Utils
 import { getQueryParams } from "@/utils/Shared";
-// Components
+
 import IntegrationConfigurationModal from "@/components/Settings/IntegrationConfigurationModal";
 import { Button, Card, Skeleton } from "antd";
 import Image from "next/image.js";
 import { AiFillSetting } from "react-icons/ai";
 // APIs
 import { fetchIntegrations } from "@/apis/integration";
-// Types
+
 import { Integration } from "@/types/apps/integration";
 
 export default function IntegrationSettings(): JSX.Element {

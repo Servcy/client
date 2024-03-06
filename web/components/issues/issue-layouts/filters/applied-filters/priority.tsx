@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 // icons
 import { PriorityIcon } from "@servcy/ui";
 import { X } from "lucide-react";
-// types
+
 import { TIssuePriorities } from "@servcy/types";
 
 type Props = {

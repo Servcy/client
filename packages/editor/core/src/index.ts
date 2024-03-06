@@ -11,7 +11,7 @@ export * from "src/lib/utils";
 export * from "src/ui/extensions/table/table";
 export { startImageUpload } from "src/ui/plugins/upload-image";
 
-// components
+
 export { EditorContainer } from "src/ui/components/editor-container";
 export { EditorContentWrapper } from "src/ui/components/editor-content";
 
@@ -23,7 +23,7 @@ export { useReadOnlyEditor } from "src/hooks/use-read-only-editor";
 export * from "src/ui/menus/menu-items";
 export * from "src/lib/editor-commands";
 
-// types
+
 export type { DeleteImage } from "src/types/delete-image";
 export type { UploadImage } from "src/types/upload-image";
 export type { RestoreImage } from "src/types/restore-image";

@@ -2,10 +2,10 @@ import { FC, useCallback } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
-// components
+
 import { CalendarChart } from "@components/issues";
 import toast from "react-hot-toast";
-// types
+
 import { TGroupedIssues, TIssue } from "@servcy/types";
 import { IQuickActionProps } from "../list/list-view-types";
 import { EIssueActions } from "../types";

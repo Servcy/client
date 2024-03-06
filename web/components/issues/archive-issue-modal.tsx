@@ -6,7 +6,7 @@ import { useIssues } from "@hooks/store/use-issues";
 import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { TIssue } from "@servcy/types";
 
 type Props = {

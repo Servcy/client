@@ -3,14 +3,14 @@ import { observer } from "mobx-react";
 import { MessageSquare } from "lucide-react";
 
 import { useIssueDetail } from "@hooks/store";
-// components
+
 import { IssueActivityBlockComponent, IssueLink } from "./";
 
 type TIssueLinkActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
 
 export const IssueLinkActivity: FC<TIssueLinkActivity> = observer((props) => {
   const { activityId, showIssue = false, ends } = props;
-  
+
   const {
     activity: { getActivityById },
   } = useIssueDetail();

@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 import { useIssues, useMember } from "@hooks/store";
 // ui
 import { Avatar } from "@servcy/ui";
-// types
+
 import { TIssue } from "@servcy/types";
 import { EIssuesStoreType } from "@constants/issue";
 

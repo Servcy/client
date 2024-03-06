@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-// components
+
 import { CalendarMonthsDropdown, CalendarOptionsDropdown } from "@components/issues";
 // icons
 import { ChevronLeft, ChevronRight } from "lucide-react";

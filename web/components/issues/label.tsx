@@ -1,5 +1,5 @@
 import React from "react";
-// components
+
 import { Tooltip } from "@servcy/ui";
 
 type Props = {

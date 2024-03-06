@@ -6,9 +6,9 @@ import { AlertTriangle } from "lucide-react";
 
 import { useEventTracker, useCycle } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { Button } from "@servcy/ui";
-// types
+
 import { ICycle } from "@servcy/types";
 // constants
 import { CYCLE_DELETED } from "@constants/event-tracker";

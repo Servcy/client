@@ -8,7 +8,7 @@ import { useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Input } from "@servcy/ui";
-// types
+
 import { TLabelOperations } from "./root";
 import { IIssueLabel } from "@servcy/types";
 
@@ -27,7 +27,7 @@ const defaultValues: Partial<IIssueLabel> = {
 
 export const LabelCreate: FC<ILabelCreate> = (props) => {
   const { workspaceSlug, projectId, issueId, labelOperations, disabled = false } = props;
-  
+
 
   const {
     issue: { getIssueById },

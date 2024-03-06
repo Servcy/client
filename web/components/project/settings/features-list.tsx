@@ -6,7 +6,7 @@ import { DiceIcon, ToggleSwitch } from "@servcy/ui";
 
 import { useEventTracker, useProject, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// types
+
 import { IProject } from "@servcy/types";
 // constants
 import { EUserProjectRoles } from "@constants/project";

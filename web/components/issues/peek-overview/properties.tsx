@@ -25,7 +25,7 @@ import {
   IssueRelationSelect,
 } from "@components/issues";
 import { DateDropdown, EstimateDropdown, PriorityDropdown, MemberDropdown, StateDropdown } from "@components/dropdowns";
-// components
+
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 // helpers
 import { cn } from "@helpers/common.helper";
@@ -147,8 +147,8 @@ export const PeekOverviewProperties: FC<IPeekOverviewProperties> = observer((pro
             buttonClassName={`text-sm ${issue?.start_date ? "" : "text-custom-text-400"}`}
             hideIcon
             clearIconClassName="h-3 w-3 hidden group-hover:inline"
-            // TODO: add this logic
-            // showPlaceholderIcon
+          // TODO: add this logic
+          // showPlaceholderIcon
           />
         </div>
 
@@ -177,8 +177,8 @@ export const PeekOverviewProperties: FC<IPeekOverviewProperties> = observer((pro
             })}
             hideIcon
             clearIconClassName="h-3 w-3 hidden group-hover:inline !text-custom-text-100"
-            // TODO: add this logic
-            // showPlaceholderIcon
+          // TODO: add this logic
+          // showPlaceholderIcon
           />
         </div>
 

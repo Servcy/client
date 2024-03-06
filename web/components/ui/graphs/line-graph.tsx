@@ -2,7 +2,7 @@
 import { ResponsiveLine, LineSvgProps } from "@nivo/line";
 // helpers
 import { generateYAxisTickValues } from "@helpers/graph.helper";
-// types
+
 import { TGraph } from "./types";
 // constants
 import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";

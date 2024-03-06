@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
 
 import { useUser } from "@hooks/store";
-// components
+
 import { CyclePeekOverview, CyclesBoardCard } from "@components/cycles";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // constants
@@ -35,11 +35,10 @@ export const CyclesBoard: FC<ICyclesBoard> = observer((props) => {
         <div className="h-full w-full">
           <div className="flex h-full w-full justify-between">
             <div
-              className={`grid h-full w-full grid-cols-1 gap-6 overflow-y-auto p-8 ${
-                peekCycle
+              className={`grid h-full w-full grid-cols-1 gap-6 overflow-y-auto p-8 ${peekCycle
                   ? "lg:grid-cols-1 xl:grid-cols-2 3xl:grid-cols-3"
                   : "lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4"
-              } auto-rows-max transition-all  vertical-scrollbar scrollbar-lg`}
+                } auto-rows-max transition-all  vertical-scrollbar scrollbar-lg`}
             >
               {cycleIds.map((cycleId) => (
                 <CyclesBoardCard key={cycleId} workspaceSlug={workspaceSlug} projectId={projectId} cycleId={cycleId} />

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useApplication } from "@hooks/store";
 // layouts
 import { AdminAuthWrapper, UserAuthWrapper } from "@layouts/auth-layout";
-// components
+
 import { InstanceAdminSidebar } from "./sidebar";
 import { InstanceAdminHeader } from "./header";
 import { InstanceSetupView } from "@components/instance";

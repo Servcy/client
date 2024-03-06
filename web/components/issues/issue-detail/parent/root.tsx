@@ -7,7 +7,7 @@ import { IssueParentSiblings } from "./siblings";
 import { CustomMenu } from "@servcy/ui";
 
 import { useIssues, useProject, useProjectState } from "@hooks/store";
-// types
+
 import { TIssueOperations } from "../root";
 import { TIssue } from "@servcy/types";
 
@@ -21,7 +21,7 @@ export type TIssueParentDetail = {
 
 export const IssueParentDetail: FC<TIssueParentDetail> = (props) => {
   const { workspaceSlug, projectId, issueId, issue, issueOperations } = props;
-  
+
   const { issueMap } = useIssues();
   const { getProjectById } = useProject();
   const { getProjectStates } = useProjectState();

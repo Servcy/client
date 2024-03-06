@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-// Types
+
 import { Integration, IntegrationEvent, UserIntegration } from "@/types/apps/integration";
-// Components
+
 import { Card, Checkbox, Modal } from "antd";
 import FigmaConfiguration from "./FigmaConfiguration";
 import GithubConfiguration from "./GithubConfiguration";

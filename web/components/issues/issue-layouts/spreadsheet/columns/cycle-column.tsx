@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useEventTracker, useIssues } from "@hooks/store";
-// components
+
 import { CycleDropdown } from "@components/dropdowns";
-// types
+
 import { TIssue } from "@servcy/types";
 // constants
 import { EIssuesStoreType } from "@constants/issue";

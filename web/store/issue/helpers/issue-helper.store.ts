@@ -3,7 +3,7 @@ import indexOf from "lodash/indexOf";
 import isEmpty from "lodash/isEmpty";
 import orderBy from "lodash/orderBy";
 import values from "lodash/values";
-// types
+
 import { TIssue, TIssueGroupByOptions, TIssueMap, TIssueOrderByOptions } from "@servcy/types";
 import { IIssueRootStore } from "../root.store";
 // constants

@@ -9,12 +9,12 @@ import { ProjectService } from "@services/project";
 
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-// components
+
 import { SelectRepository, SelectChannel } from "@components/integration";
 // icons
 import GithubLogo from "public/logos/github-square.png";
 import SlackLogo from "public/services/slack.png";
-// types
+
 import { IWorkspaceIntegration } from "@servcy/types";
 // fetch-keys
 import { PROJECT_GITHUB_REPOSITORY } from "@constants/fetch-keys";

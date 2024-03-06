@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import type { TIssue } from "@servcy/types";
 import { useProject } from "@hooks/store";
 
@@ -17,7 +17,7 @@ type Props = {
 
 export const DeclineIssueModal: React.FC<Props> = ({ isOpen, onClose, data, onSubmit }) => {
   const [isDeclining, setIsDeclining] = useState(false);
-  
+
   const { getProjectById } = useProject();
 
   const handleClose = () => {

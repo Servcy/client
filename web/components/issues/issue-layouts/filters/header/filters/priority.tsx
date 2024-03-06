@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 // ui
 import { PriorityIcon } from "@servcy/ui";
 
-// components
+
 import { FilterHeader, FilterOption } from "@components/issues";
 
 // constants

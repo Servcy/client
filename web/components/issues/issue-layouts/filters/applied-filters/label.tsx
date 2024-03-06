@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 
 // icons
 import { X } from "lucide-react";
-// types
+
 import { IIssueLabel } from "@servcy/types";
 
 type Props = {

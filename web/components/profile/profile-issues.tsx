@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "next-themes";
-// components
+
 import { ProfileIssuesListLayout } from "@components/issues/issue-layouts/list/roots/profile-issues-root";
 import { ProfileIssuesKanBanLayout } from "@components/issues/issue-layouts/kanban/roots/profile-issues-root";
 import { IssuePeekOverview, ProfileIssuesAppliedFiltersRoot } from "@components/issues";

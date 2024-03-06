@@ -15,10 +15,10 @@ import {
 } from "@hooks/store";
 import toast from "react-hot-toast";
 import useLocalStorage from "@hooks/use-local-storage";
-// components
+
 import { DraftIssueLayout } from "./draft-issue-layout";
 import { IssueFormRoot } from "./form";
-// types
+
 import type { TIssue } from "@servcy/types";
 // constants
 import { EIssuesStoreType, TCreateModalStoreTypes } from "@constants/issue";

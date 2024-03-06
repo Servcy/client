@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import { useEventTracker, useMember, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ConfirmProjectMemberRemove } from "@components/project";
 // ui
 import { CustomSelect, Tooltip } from "@servcy/ui";
@@ -128,9 +128,8 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
             customButton={
               <div className="item-center flex gap-1 rounded px-2 py-0.5">
                 <span
-                  className={`flex items-center rounded text-xs font-medium ${
-                    userDetails.member.id !== currentUser?.id ? "" : "text-custom-text-400"
-                  }`}
+                  className={`flex items-center rounded text-xs font-medium ${userDetails.member.id !== currentUser?.id ? "" : "text-custom-text-400"
+                    }`}
                 >
                   {ROLE[userDetails.role]}
                 </span>

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useRouter } from "next/router";
-// components
+
 import { CustomMenu } from "@servcy/ui";
 import { ExistingIssuesListModal } from "@components/core";
 import { CreateUpdateIssueModal } from "@components/issues";
@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
 // mobx
 import { observer } from "mobx-react-lite";
-// types
+
 import { TIssue, ISearchIssueResponse, TIssueKanbanFilters } from "@servcy/types";
 import { TCreateModalStoreTypes } from "@constants/issue";
 

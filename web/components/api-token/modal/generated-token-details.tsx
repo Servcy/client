@@ -5,7 +5,7 @@ import { Button, Tooltip } from "@servcy/ui";
 // helpers
 import { renderFormattedDate } from "@helpers/date-time.helper";
 import { copyTextToClipboard } from "@helpers/string.helper";
-// types
+
 import { IApiToken } from "@servcy/types";
 
 type Props = {

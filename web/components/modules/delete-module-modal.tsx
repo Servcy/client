@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { Button } from "@servcy/ui";
 // icons
 import { AlertTriangle } from "lucide-react";
-// types
+
 import type { IModule } from "@servcy/types";
 // constants
 import { MODULE_DELETED } from "@constants/event-tracker";

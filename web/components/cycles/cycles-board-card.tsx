@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 
 import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles";
 // ui
 import { Avatar, AvatarGroup, CustomMenu, Tooltip, LayersIcon, CycleGroupIcon } from "@servcy/ui";

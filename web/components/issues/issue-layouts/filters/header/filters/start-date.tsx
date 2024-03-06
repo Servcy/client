@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-// components
+
 import { FilterHeader, FilterOption } from "@components/issues";
 import { DateFilterModal } from "@components/core";
 // constants

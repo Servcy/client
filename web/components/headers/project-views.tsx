@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Plus } from "lucide-react";
 
 import { useApplication, useProject, useUser } from "@hooks/store";
-// components
+
 import { Breadcrumbs, PhotoFilterIcon, Button } from "@servcy/ui";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";

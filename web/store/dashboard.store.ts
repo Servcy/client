@@ -3,7 +3,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils";
 // services
 import { DashboardService } from "@services/dashboard.service";
-// types
+
 import {
   THomeDashboardResponse,
   TWidget,

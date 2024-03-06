@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useLabel, useMember, useUser, useIssues } from "@hooks/store";
-// components
+
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues";
 import { CreateUpdateWorkspaceViewModal } from "@components/workspace";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
@@ -13,7 +13,7 @@ import { BreadcrumbLink } from "@components/common";
 import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui";
 // icons
 import { List, PlusIcon, Sheet } from "lucide-react";
-// types
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types";
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";

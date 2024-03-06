@@ -17,7 +17,7 @@ import { Button } from "@servcy/ui";
 import { APITokenSettingsLoader } from "@components/ui";
 // services
 import { APITokenService } from "@services/api_token.service";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // constants
 import { API_TOKENS_LIST } from "@constants/fetch-keys";

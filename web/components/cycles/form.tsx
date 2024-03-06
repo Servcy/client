@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-// components
+
 import { DateRangeDropdown, ProjectDropdown } from "@components/dropdowns";
 // ui
 import { Button, Input, TextArea } from "@servcy/ui";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { ICycle } from "@servcy/types";
 
 type Props = {

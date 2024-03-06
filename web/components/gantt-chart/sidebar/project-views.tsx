@@ -1,9 +1,9 @@
 import { DragDropContext, Draggable, Droppable, DropResult } from "@hello-pangea/dnd";
 // ui
 import { Loader } from "@servcy/ui";
-// components
+
 import { IssuesSidebarBlock } from "./issues/block";
-// types
+
 import { IBlockUpdateData, IGanttBlock } from "@components/gantt-chart/types";
 
 type Props = {

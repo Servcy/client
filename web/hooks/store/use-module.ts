@@ -1,7 +1,7 @@
 import { useContext } from "react";
 // mobx store
 import { StoreContext } from "@contexts/store-context";
-// types
+
 import { IModuleStore } from "@store/module.store";
 
 export const useModule = (): IModuleStore => {

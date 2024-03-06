@@ -5,11 +5,11 @@ import { useFormContext, Controller } from "react-hook-form";
 import { Plus } from "lucide-react";
 
 import { useApplication, useEventTracker, useProject } from "@hooks/store";
-// components
+
 import { CustomSelect, Input } from "@servcy/ui";
 // helpers
 import { checkEmailValidity } from "@helpers/string.helper";
-// types
+
 import { IJiraImporterForm } from "@servcy/types";
 
 export const JiraGetImportDetail: React.FC = observer(() => {

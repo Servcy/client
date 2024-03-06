@@ -5,7 +5,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import { useProject, useUser } from "@hooks/store";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import type { IProject } from "@servcy/types";
 
 // type

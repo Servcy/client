@@ -20,11 +20,11 @@ import toast from "react-hot-toast";
 import { useEventTracker } from "@hooks/store";
 // ui
 import { Button, Input } from "@servcy/ui";
-// components
+
 import { OnboardingStepIndicator } from "@components/onboarding/step-indicator";
 
 import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown";
-// types
+
 import { IUser, IWorkspace, TOnboardingSteps } from "@servcy/types";
 // constants
 import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";

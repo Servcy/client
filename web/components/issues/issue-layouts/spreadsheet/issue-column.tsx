@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
-// types
+
 import { IIssueDisplayProperties, TIssue } from "@servcy/types";
 import { EIssueActions } from "../types";
 // constants
 import { SPREADSHEET_PROPERTY_DETAILS } from "@constants/spreadsheet";
-// components
+
 import { WithDisplayPropertiesHOC } from "../properties/with-display-properties-HOC";
 import { useEventTracker } from "@hooks/store";
 import { observer } from "mobx-react";

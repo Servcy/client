@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useGanttChart } from "@components/gantt-chart/hooks/use-gantt-chart";
 // helpers
 import { cn } from "@helpers/common.helper";
-// types
+
 import { IMonthBlock } from "../../views";
 // constants
 import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "@components/gantt-chart/constants";

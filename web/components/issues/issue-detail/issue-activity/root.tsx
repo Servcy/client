@@ -4,9 +4,9 @@ import { History, LucideIcon, MessageCircle, ListRestart } from "lucide-react";
 
 import { useIssueDetail, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentRoot, IssueCommentCreate } from "./";
-// types
+
 import { TIssueComment } from "@servcy/types";
 
 type TIssueActivity = {

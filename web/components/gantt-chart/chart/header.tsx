@@ -2,7 +2,7 @@ import { Expand, Shrink } from "lucide-react";
 
 // helpers
 import { cn } from "@helpers/common.helper";
-// types
+
 import { IGanttBlock, TGanttViews } from "../types";
 // constants
 import { VIEWS_LIST } from "@components/gantt-chart/data";

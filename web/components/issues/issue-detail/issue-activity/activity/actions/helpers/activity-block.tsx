@@ -4,7 +4,7 @@ import { Network } from "lucide-react";
 import { useIssueDetail } from "@hooks/store";
 // ui
 import { Tooltip } from "@servcy/ui";
-// components
+
 import { IssueUser } from "../";
 // helpers
 import { renderFormattedTime, renderFormattedDate, calculateTimeAgo } from "@helpers/date-time.helper";
@@ -19,7 +19,7 @@ type TIssueActivityBlockComponent = {
 
 export const IssueActivityBlockComponent: FC<TIssueActivityBlockComponent> = (props) => {
   const { icon, activityId, ends, children, customUserName } = props;
-  
+
   const {
     activity: { getActivityById },
   } = useIssueDetail();
@@ -29,9 +29,8 @@ export const IssueActivityBlockComponent: FC<TIssueActivityBlockComponent> = (pr
   if (!activity) return <></>;
   return (
     <div
-      className={`relative flex items-center gap-3 text-xs ${
-        ends === "top" ? `pb-2` : ends === "bottom" ? `pt-2` : `py-2`
-      }`}
+      className={`relative flex items-center gap-3 text-xs ${ends === "top" ? `pb-2` : ends === "bottom" ? `pt-2` : `py-2`
+        }`}
     >
       <div className="absolute left-[13px] top-0 bottom-0 w-0.5 bg-custom-background-80" aria-hidden={true} />
       <div className="flex-shrink-0 ring-6 w-7 h-7 rounded-full overflow-hidden flex justify-center items-center z-[4] bg-custom-background-80 text-custom-text-200">

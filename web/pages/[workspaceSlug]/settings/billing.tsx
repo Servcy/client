@@ -9,7 +9,7 @@ import { WorkspaceSettingHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // constants
 import { EUserWorkspaceRoles } from "@constants/workspace";

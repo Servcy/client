@@ -3,13 +3,13 @@ import { observer } from "mobx-react-lite";
 import { CalendarCheck2 } from "lucide-react";
 
 import { useProjectState } from "@hooks/store";
-// components
+
 import { DateDropdown } from "@components/dropdowns";
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { shouldHighlightIssueDueDate } from "@helpers/issue.helper";
 import { cn } from "@helpers/common.helper";
-// types
+
 import { TIssue } from "@servcy/types";
 
 type Props = {

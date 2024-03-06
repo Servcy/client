@@ -1,7 +1,7 @@
 import { FC } from "react";
 // ui
 import { Tooltip } from "@servcy/ui";
-// types
+
 import { IIssueLabel } from "@servcy/types";
 
 type IssueLabelsListProps = {

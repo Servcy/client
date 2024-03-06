@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { CommandModal, ShortcutsModal } from "@components/command-palette";
 import { BulkDeleteIssuesModal } from "@components/core";
 import { CycleCreateUpdateModal } from "@components/cycles";

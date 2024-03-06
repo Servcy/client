@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 
 import { useApplication, useUser } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
-// components
+
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { PagesListItem } from "./list-item";
 // ui
@@ -66,9 +66,9 @@ export const PagesListView: FC<IPagesListView> = (props) => {
               primaryButton={
                 isButtonVisible
                   ? {
-                      text: "Create new page",
-                      onClick: () => toggleCreatePageModal(true),
-                    }
+                    text: "Create new page",
+                    onClick: () => toggleCreatePageModal(true),
+                  }
                   : undefined
               }
               disabled={!isEditingAllowed}

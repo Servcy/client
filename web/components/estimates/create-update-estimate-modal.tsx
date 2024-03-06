@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { Button, Input, TextArea } from "@servcy/ui";
 // helpers
 import { checkDuplicates } from "@helpers/array.helper";
-// types
+
 import { IEstimate, IEstimateFormData } from "@servcy/types";
 
 type Props = {

@@ -1,4 +1,4 @@
-// types
+
 import { ChartDataType, IGanttBlock } from "../types";
 // data
 import { weeks, months } from "../data";

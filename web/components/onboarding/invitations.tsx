@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useSWR, { mutate } from "swr";
 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
-// components
+
 import { Button } from "@servcy/ui";
 // helpers
 import { truncateText } from "@helpers/string.helper";
@@ -12,7 +12,7 @@ import { WorkspaceService } from "@services/workspace.service";
 import { USER_WORKSPACES, USER_WORKSPACE_INVITATIONS } from "@constants/fetch-keys";
 import { ROLE } from "@constants/workspace";
 import { MEMBER_ACCEPTED } from "@constants/event-tracker";
-// types
+
 import { IWorkspaceMemberInvitation } from "@servcy/types";
 // icons
 import { CheckCircle2, Search } from "lucide-react";

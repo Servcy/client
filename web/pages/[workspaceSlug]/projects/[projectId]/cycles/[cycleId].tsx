@@ -7,7 +7,7 @@ import { useCycle, useProject } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { PageHead } from "@components/core";
 import { CycleIssuesHeader } from "@components/headers";
 import { CycleDetailsSidebar } from "@components/cycles";
@@ -16,7 +16,7 @@ import { CycleLayoutRoot } from "@components/issues/issue-layouts";
 import { EmptyState } from "@components/common";
 // assets
 import emptyCycle from "public/empty-state/cycle.svg";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 const CycleDetailPage: NextPageWithLayout = observer(() => {

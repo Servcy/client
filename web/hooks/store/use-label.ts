@@ -1,7 +1,7 @@
 import { useContext } from "react";
 // mobx store
 import { StoreContext } from "@contexts/store-context";
-// types
+
 import { ILabelStore } from "@store/label.store";
 
 export const useLabel = (): ILabelStore => {

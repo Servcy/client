@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 import { useIssues } from "@hooks/store";
 // ui
 import { PriorityIcon } from "@servcy/ui";
-// types
+
 import { TIssue, TIssuePriorities } from "@servcy/types";
 // constants
 import { EIssuesStoreType, ISSUE_PRIORITIES } from "@constants/issue";

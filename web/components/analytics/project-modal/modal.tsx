@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 
-// components
+
 import { ProjectAnalyticsModalHeader, ProjectAnalyticsModalMainContent } from "@components/analytics";
-// types
+
 import { ICycle, IModule, IProject } from "@servcy/types";
 
 type Props = {

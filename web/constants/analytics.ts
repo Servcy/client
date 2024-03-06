@@ -1,4 +1,4 @@
-// types
+
 import { TXAxisValues, TYAxisValues } from "@servcy/types";
 
 export const ANALYTICS_TABS = [

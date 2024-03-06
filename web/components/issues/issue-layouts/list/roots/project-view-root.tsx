@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 import { useIssues } from "@hooks/store";
 // constants
 import { EIssuesStoreType } from "@constants/issue";
-// types
+
 import { EIssueActions } from "../../types";
 import { TIssue } from "@servcy/types";
-// components
+
 import { BaseListRoot } from "../base-list-root";
 import { ProjectIssueQuickActions } from "../../quick-action-dropdowns";
 

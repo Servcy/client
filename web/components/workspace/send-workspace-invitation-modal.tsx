@@ -7,7 +7,7 @@ import { Plus, X } from "lucide-react";
 import { useUser } from "@hooks/store";
 // ui
 import { Button, CustomSelect, Input } from "@servcy/ui";
-// types
+
 import { IWorkspaceBulkInviteFormData } from "@servcy/types";
 // constants
 import { EUserWorkspaceRoles, ROLE } from "@constants/workspace";

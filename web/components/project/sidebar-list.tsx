@@ -7,7 +7,7 @@ import { ChevronDown, ChevronRight, Plus } from "lucide-react";
 
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { CreateProjectModal, ProjectSidebarListItem } from "@components/project";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
@@ -171,8 +171,8 @@ export const ProjectSidebarList: FC = observer(() => {
                                 key={projectId}
                                 draggableId={projectId}
                                 index={index}
-                                // FIXME refactor the Draggable to a different component
-                                //isDragDisabled={!project.is_member}
+                              // FIXME refactor the Draggable to a different component
+                              //isDragDisabled={!project.is_member}
                               >
                                 {(provided, snapshot) => (
                                   <div ref={provided.innerRef} {...provided.draggableProps}>

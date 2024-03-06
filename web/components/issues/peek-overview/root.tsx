@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import toast from "react-hot-toast";
 import { useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store";
-// components
+
 import { IssueView } from "@components/issues";
-// types
+
 import { TIssue } from "@servcy/types";
 // constants
 import { EUserProjectRoles } from "@constants/project";

@@ -6,7 +6,7 @@ import { action, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
 // services
 import { InboxService } from "@services/inbox/inbox.service";
-// types
+
 import { TInbox, TInboxDetailIdMap, TInboxDetailMap } from "@servcy/types";
 import { RootStore } from "@store/root.store";
 

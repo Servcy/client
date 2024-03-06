@@ -11,13 +11,13 @@ import toast from "react-hot-toast";
 import { Button, LayersIcon } from "@servcy/ui";
 // icons
 import { Search } from "lucide-react";
-// types
+
 import { IUser, TIssue } from "@servcy/types";
 // fetch keys
 import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys";
 // store hooks
 import { useIssues, useProject } from "@hooks/store";
-// components
+
 import { BulkDeleteIssuesModalItem } from "./bulk-delete-issues-modal-item";
 // constants
 import { EIssuesStoreType } from "@constants/issue";

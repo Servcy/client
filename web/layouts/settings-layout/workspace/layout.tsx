@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-// components
+
 import { WorkspaceSettingsSidebar } from "./sidebar";
 
 export interface IWorkspaceSettingLayout {

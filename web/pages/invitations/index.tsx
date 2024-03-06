@@ -22,13 +22,13 @@ import ServcyLogo from "public/logo.svg";
 // helpers
 import { truncateText } from "@helpers/string.helper";
 import { getUserRole } from "@helpers/user.helper";
-// types
+
 import type { IWorkspaceMemberInvitation } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // constants
 import { MEMBER_ACCEPTED } from "@constants/event-tracker";
 import { ROLE } from "@constants/workspace";
-// components
+
 import { EmptyState } from "@components/common";
 import { PageHead } from "@components/core";
 // services

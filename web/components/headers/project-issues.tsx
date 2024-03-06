@@ -12,14 +12,14 @@ import {
   useUser,
   useMember,
 } from "@hooks/store";
-// components
+
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
 import { ProjectAnalyticsModal } from "@components/analytics";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 // ui
 import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
-// types
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";

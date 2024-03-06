@@ -3,12 +3,12 @@ import { observer } from "mobx-react-lite";
 
 import { useLabel, useProjectState, useUser } from "@hooks/store";
 import { useIssues } from "@hooks/store/use-issues";
-// components
+
 import { AppliedFiltersList, SaveFilterView } from "@components/issues";
 // constants
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 import { EUserProjectRoles } from "@constants/project";
-// types
+
 import { IIssueFilterOptions } from "@servcy/types";
 
 export const ProjectAppliedFiltersRoot: React.FC = observer(() => {

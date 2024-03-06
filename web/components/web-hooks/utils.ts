@@ -1,6 +1,6 @@
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { IWebhook, IWorkspace } from "@servcy/types";
 
 export const getCurrentHookAsCSV = (

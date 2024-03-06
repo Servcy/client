@@ -2,10 +2,10 @@ import { ReactElement } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react";
-// components
+
 import { ProjectLayoutRoot } from "@components/issues";
 import { ProjectIssuesHeader } from "@components/headers";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // layouts
 import { AppLayout } from "@layouts/app-layout";

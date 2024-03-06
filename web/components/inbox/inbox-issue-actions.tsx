@@ -6,7 +6,7 @@ import { Popover } from "@headlessui/react";
 
 import { useUser, useInboxIssues, useIssueDetail, useWorkspace, useEventTracker } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import {
   AcceptIssueModal,
   DeclineIssueModal,
@@ -17,7 +17,7 @@ import {
 import { Button } from "@servcy/ui";
 // icons
 import { CheckCircle2, ChevronDown, ChevronUp, Clock, FileStack, Trash2, XCircle } from "lucide-react";
-// types
+
 import type { TInboxStatus, TInboxDetailedStatus } from "@servcy/types";
 import { EUserProjectRoles } from "@constants/project";
 import { ISSUE_DELETED } from "@constants/event-tracker";

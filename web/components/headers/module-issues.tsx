@@ -15,7 +15,7 @@ import {
   useIssues,
 } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
-// components
+
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection, LayoutSelection } from "@components/issues";
 import { ProjectAnalyticsModal } from "@components/analytics";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
@@ -27,7 +27,7 @@ import { ArrowRight, PanelRight, Plus } from "lucide-react";
 // helpers
 import { truncateText } from "@helpers/string.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
-// types
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 // constants
 import { EIssuesStoreType, EIssueFilterType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";

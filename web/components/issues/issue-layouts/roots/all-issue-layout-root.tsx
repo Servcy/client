@@ -7,13 +7,13 @@ import { useTheme } from "next-themes";
 
 import { useApplication, useEventTracker, useGlobalView, useIssues, useProject, useUser } from "@hooks/store";
 import { useWorkspaceIssueProperties } from "@hooks/use-workspace-issue-properties";
-// components
+
 import { GlobalViewsAppliedFiltersRoot, IssuePeekOverview } from "@components/issues";
 import { SpreadsheetView } from "@components/issues/issue-layouts";
 import { AllIssueQuickActions } from "@components/issues/issue-layouts/quick-action-dropdowns";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 import { SpreadsheetLayoutLoader } from "@components/ui";
-// types
+
 import { TIssue, IIssueDisplayFilterOptions } from "@servcy/types";
 import { EIssueActions } from "../types";
 // constants

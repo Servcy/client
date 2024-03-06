@@ -17,7 +17,7 @@ import {
 
 import { useModule, useUser, useEventTracker } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { LinkModal, LinksList, SidebarProgressStats } from "@components/core";
 import { DeleteModuleModal } from "@components/modules";
 import ProgressChart from "@components/core/sidebar/progress-chart";
@@ -27,7 +27,7 @@ import { CustomMenu, Loader, LayersIcon, CustomSelect, ModuleStatusIcon, UserGro
 // helpers
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
 import { copyUrlToClipboard } from "@helpers/string.helper";
-// types
+
 import { ILinkDetails, IModule, ModuleLink } from "@servcy/types";
 // constant
 import { MODULE_STATUS } from "@constants/module";

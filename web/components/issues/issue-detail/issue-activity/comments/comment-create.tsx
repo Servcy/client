@@ -1,11 +1,11 @@
 import { FC, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
-// components
+
 import { LiteTextEditorWithRef } from "@servcy/lite-text-editor";
 import { Button } from "@servcy/ui";
 // services
 import { FileService } from "@services/file.service";
-// types
+
 import { TActivityOperations } from "../root";
 import { TIssueComment } from "@servcy/types";
 // icons

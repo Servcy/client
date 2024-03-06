@@ -10,7 +10,7 @@ import useKeypress from "@hooks/use-keypress";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 // helpers
 import { createIssuePayload } from "@helpers/issue.helper";
-// types
+
 import { TIssue } from "@servcy/types";
 // constants
 import { ISSUE_CREATED } from "@constants/event-tracker";

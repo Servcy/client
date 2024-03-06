@@ -2,7 +2,7 @@ import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 // services
 import { ProjectEstimateService } from "@services/project";
-// types
+
 import { IEstimate, IEstimateFormData } from "@servcy/types";
 import { computedFn } from "mobx-utils";
 import { RootStore } from "@store/root.store";

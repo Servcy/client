@@ -4,7 +4,7 @@ import { useApplication } from "@hooks/store";
 import useIntegrationPopup from "@hooks/use-integration-popup";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IWorkspaceIntegration } from "@servcy/types";
 
 type Props = {
@@ -17,7 +17,7 @@ export const GithubAuth: React.FC<Props> = observer(({ workspaceIntegration, pro
   const {
     config: { envConfig },
   } = useApplication();
-  
+
   const { startAuth, isConnecting } = useIntegrationPopup({
     provider,
     github_app_name: envConfig?.github_app_name || "",

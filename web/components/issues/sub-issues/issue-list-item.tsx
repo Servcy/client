@@ -1,11 +1,11 @@
 import React from "react";
 import { ChevronDown, ChevronRight, X, Pencil, Trash, Link as LinkIcon, Loader } from "lucide-react";
-// components
+
 import { IssueList } from "./issues-list";
 import { IssueProperty } from "./properties";
 // ui
 import { ControlLink, CustomMenu, Tooltip } from "@servcy/ui";
-// types
+
 import { TIssue } from "@servcy/types";
 import { TSubIssueOperations } from "./root";
 // import { ISubIssuesRootLoaders, ISubIssuesRootLoadersHandler } from "./root";

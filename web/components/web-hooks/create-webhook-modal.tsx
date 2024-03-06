@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
-// components
+
 import { WebhookForm } from "./form";
 import { GeneratedHookDetails } from "./generated-hook-details";
 import toast from "react-hot-toast";
@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { csvDownload } from "@helpers/download.helper";
 // utils
 import { getCurrentHookAsCSV } from "./utils";
-// types
+
 import { IWebhook, IWorkspace, TWebhookEventTypes } from "@servcy/types";
 
 interface ICreateWebhookModal {

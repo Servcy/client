@@ -5,7 +5,7 @@ import { AlertCircle, X } from "lucide-react";
 import { useIssueDetail, useMember } from "@hooks/store";
 // ui
 import { Tooltip } from "@servcy/ui";
-// components
+
 import { IssueAttachmentDeleteModal } from "./delete-attachment-confirmation-modal";
 // icons
 import { getFileIcon } from "@components/icons";
@@ -13,7 +13,7 @@ import { getFileIcon } from "@components/icons";
 import { truncateText } from "@helpers/string.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
 import { convertBytesToSize, getFileExtension, getFileName } from "@helpers/attachment.helper";
-// types
+
 import { TAttachmentOperations } from "./root";
 
 type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">;

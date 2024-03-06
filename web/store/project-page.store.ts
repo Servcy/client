@@ -4,7 +4,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { PageService } from "@services/page.service";
 // store
 import { IPageStore, PageStore } from "@store/page.store";
-// types
+
 import { IPage, IRecentPages } from "@servcy/types";
 import { isThisWeek, isToday, isYesterday } from "date-fns";
 import { RootStore } from "./root.store";

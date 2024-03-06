@@ -4,7 +4,7 @@ import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
 import { Pencil, Trash2, LinkIcon } from "lucide-react";
 // helpers
 import { calculateTimeAgo } from "@helpers/date-time.helper";
-// types
+
 import { ILinkDetails, UserAuth } from "@servcy/types";
 import toast from "react-hot-toast";
 import { observer } from "mobx-react";

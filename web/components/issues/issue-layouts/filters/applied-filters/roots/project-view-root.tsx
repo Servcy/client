@@ -3,11 +3,11 @@ import { observer } from "mobx-react-lite";
 import isEqual from "lodash/isEqual";
 
 import { useIssues, useLabel, useProjectState, useProjectView } from "@hooks/store";
-// components
+
 import { AppliedFiltersList } from "@components/issues";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IIssueFilterOptions } from "@servcy/types";
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 

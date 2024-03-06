@@ -2,10 +2,10 @@ import { FC } from "react";
 import { observer } from "mobx-react-lite";
 
 import { useIssueDetail } from "@hooks/store";
-// components
+
 import { IssueActivityList } from "./activity/activity-list";
 import { IssueCommentCard } from "./comments/comment-card";
-// types
+
 import { TActivityOperations } from "./root";
 
 type TIssueActivityCommentRoot = {

@@ -1,11 +1,11 @@
 import { FC, useMemo } from "react";
 import { observer } from "mobx-react-lite";
-// components
+
 import { ReactionSelector } from "./reaction-selector";
 
 import { useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
-// types
+
 import { IUser } from "@servcy/types";
 import { renderEmoji } from "@helpers/emoji.helper";
 

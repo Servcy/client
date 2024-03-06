@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { WorkspaceService } from "@services/workspace.service";
 // ui
 import { Avatar, CustomSelect, CustomSearchSelect, Input } from "@servcy/ui";
-// types
+
 import { IGithubRepoCollaborator } from "@servcy/types";
 import { IUserDetails } from "./root";
 // fetch-keys

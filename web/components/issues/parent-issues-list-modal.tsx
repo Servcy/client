@@ -12,7 +12,7 @@ import useDebounce from "@hooks/use-debounce";
 import { LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
 // icons
 import { Rocket, Search } from "lucide-react";
-// types
+
 import { ISearchIssueResponse } from "@servcy/types";
 
 type Props = {
@@ -117,9 +117,8 @@ export const ParentIssuesListModal: React.FC<Props> = ({
                   <div className="flex p-2 sm:justify-end">
                     <Tooltip tooltipContent="Toggle workspace level search">
                       <div
-                        className={`flex flex-shrink-0 cursor-pointer items-center gap-1 text-xs ${
-                          isWorkspaceLevel ? "text-custom-text-100" : "text-custom-text-200"
-                        }`}
+                        className={`flex flex-shrink-0 cursor-pointer items-center gap-1 text-xs ${isWorkspaceLevel ? "text-custom-text-100" : "text-custom-text-200"
+                          }`}
                       >
                         <ToggleSwitch
                           value={isWorkspaceLevel}
@@ -173,8 +172,7 @@ export const ParentIssuesListModal: React.FC<Props> = ({
                             key={issue.id}
                             value={issue}
                             className={({ active, selected }) =>
-                              `group flex w-full cursor-pointer select-none items-center justify-between gap-2 rounded-md px-3 py-2 text-custom-text-200 ${
-                                active ? "bg-custom-background-80 text-custom-text-100" : ""
+                              `group flex w-full cursor-pointer select-none items-center justify-between gap-2 rounded-md px-3 py-2 text-custom-text-200 ${active ? "bg-custom-background-80 text-custom-text-100" : ""
                               } ${selected ? "text-custom-text-100" : ""}`
                             }
                           >

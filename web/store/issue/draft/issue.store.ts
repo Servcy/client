@@ -8,7 +8,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { IssueHelperStore } from "../helpers/issue-helper.store";
 // services
 import { IssueDraftService } from "@services/issue/issue_draft.service";
-// types
+
 import { TGroupedIssues, TIssue, TLoader, TSubGroupedIssues, TUnGroupedIssues, ViewFlags } from "@servcy/types";
 import { IIssueRootStore } from "../root.store";
 

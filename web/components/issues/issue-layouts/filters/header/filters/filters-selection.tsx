@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Search, X } from "lucide-react";
 
 import { useApplication } from "@hooks/store";
-// components
+
 import {
   FilterAssignees,
   FilterMentions,
@@ -18,7 +18,7 @@ import {
   FilterCycle,
   FilterModule,
 } from "@components/issues";
-// types
+
 import { IIssueFilterOptions, IIssueLabel, IState } from "@servcy/types";
 // constants
 import { ILayoutDisplayFiltersOptions } from "@constants/issue";

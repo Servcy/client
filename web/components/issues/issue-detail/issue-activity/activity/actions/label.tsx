@@ -3,14 +3,14 @@ import { observer } from "mobx-react";
 import { Tag } from "lucide-react";
 
 import { useIssueDetail, useLabel } from "@hooks/store";
-// components
+
 import { IssueActivityBlockComponent, IssueLink } from "./";
 
 type TIssueLabelActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
 
 export const IssueLabelActivity: FC<TIssueLabelActivity> = observer((props) => {
   const { activityId, showIssue = true, ends } = props;
-  
+
   const {
     activity: { getActivityById },
   } = useIssueDetail();

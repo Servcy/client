@@ -8,7 +8,7 @@ import { useDropdownKeyDown } from "../hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "../hooks/use-outside-click-detector";
 // helpers
 import { cn } from "../../helpers";
-// types
+
 import { ICustomMenuDropdownProps, ICustomMenuItemProps } from "./helper";
 
 const CustomMenu = (props: ICustomMenuDropdownProps) => {
@@ -136,9 +136,8 @@ const CustomMenu = (props: ICustomMenuDropdownProps) => {
                       if (menuButtonOnClick) menuButtonOnClick();
                     }}
                     disabled={disabled}
-                    className={`relative grid place-items-center rounded p-1 text-custom-text-200 outline-none hover:text-custom-text-100 ${
-                      disabled ? "cursor-not-allowed" : "cursor-pointer hover:bg-custom-background-80"
-                    } ${buttonClassName}`}
+                    className={`relative grid place-items-center rounded p-1 text-custom-text-200 outline-none hover:text-custom-text-100 ${disabled ? "cursor-not-allowed" : "cursor-pointer hover:bg-custom-background-80"
+                      } ${buttonClassName}`}
                     tabIndex={customButtonTabIndex}
                   >
                     <MoreHorizontal className={`h-3.5 w-3.5 ${verticalEllipsis ? "rotate-90" : ""}`} />
@@ -149,13 +148,11 @@ const CustomMenu = (props: ICustomMenuDropdownProps) => {
                   <button
                     ref={setReferenceElement}
                     type="button"
-                    className={`flex items-center justify-between gap-1 whitespace-nowrap rounded-md px-2.5 py-1 text-xs duration-300 ${
-                      open ? "bg-custom-background-90 text-custom-text-100" : "text-custom-text-200"
-                    } ${noBorder ? "" : "border border-custom-border-300 shadow-sm focus:outline-none"} ${
-                      disabled
+                    className={`flex items-center justify-between gap-1 whitespace-nowrap rounded-md px-2.5 py-1 text-xs duration-300 ${open ? "bg-custom-background-90 text-custom-text-100" : "text-custom-text-200"
+                      } ${noBorder ? "" : "border border-custom-border-300 shadow-sm focus:outline-none"} ${disabled
                         ? "cursor-not-allowed text-custom-text-200"
                         : "cursor-pointer hover:bg-custom-background-80"
-                    } ${buttonClassName}`}
+                      } ${buttonClassName}`}
                     onClick={(e) => {
                       e.stopPropagation();
                       openDropdown();

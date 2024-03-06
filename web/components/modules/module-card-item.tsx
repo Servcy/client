@@ -6,7 +6,7 @@ import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react";
 
 import { useEventTracker, useMember, useModule, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules";
 // ui
 import { Avatar, AvatarGroup, CustomMenu, LayersIcon, Tooltip } from "@servcy/ui";

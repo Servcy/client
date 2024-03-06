@@ -3,10 +3,10 @@ import { Controller, useForm } from "react-hook-form";
 
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
 import debounce from "lodash/debounce";
-// components
+
 import { Loader, TextArea } from "@servcy/ui";
 import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor";
-// types
+
 import { TIssue } from "@servcy/types";
 import { TIssueOperations } from "./issue-detail";
 // services

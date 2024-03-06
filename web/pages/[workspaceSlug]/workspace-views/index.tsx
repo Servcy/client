@@ -2,7 +2,7 @@ import React, { useState, ReactElement } from "react";
 import { observer } from "mobx-react";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { PageHead } from "@components/core";
 import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspace";
 import { GlobalIssuesHeader } from "@components/headers";
@@ -10,7 +10,7 @@ import { GlobalIssuesHeader } from "@components/headers";
 import { Input } from "@servcy/ui";
 // icons
 import { Search } from "lucide-react";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // constants
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace";

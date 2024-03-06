@@ -4,7 +4,7 @@ import { FC } from "react";
 import { UseFormWatch } from "react-hook-form";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { TFormValues, TIntegrationSteps } from "@components/integration";
 
 type Props = {

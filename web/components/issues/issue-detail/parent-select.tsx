@@ -4,13 +4,13 @@ import { observer } from "mobx-react-lite";
 import { Pencil, X } from "lucide-react";
 
 import { useIssueDetail, useProject } from "@hooks/store";
-// components
+
 import { ParentIssuesListModal } from "@components/issues";
 // ui
 import { Tooltip } from "@servcy/ui";
 // helpers
 import { cn } from "@helpers/common.helper";
-// types
+
 import { TIssueOperations } from "./root";
 
 type TIssueParentSelect = {

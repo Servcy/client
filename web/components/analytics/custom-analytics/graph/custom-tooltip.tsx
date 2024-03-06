@@ -2,7 +2,7 @@
 import { BarTooltipProps } from "@nivo/bar";
 import { DATE_KEYS } from "@constants/analytics";
 import { renderMonthAndYear } from "@helpers/analytics.helper";
-// types
+
 import { IAnalyticsParams, IAnalyticsResponse } from "@servcy/types";
 
 type Props = {
@@ -54,15 +54,14 @@ export const CustomTooltip: React.FC<Props> = ({ datum, analytics, params }) => 
         }}
       />
       <span
-        className={`font-medium text-custom-text-200 ${
-          params.segment
+        className={`font-medium text-custom-text-200 ${params.segment
             ? params.segment === "priority" || params.segment === "state__group"
               ? "capitalize"
               : ""
             : params.x_axis === "priority" || params.x_axis === "state__group"
               ? "capitalize"
               : ""
-        }`}
+          }`}
       >
         {params.segment === "assignees__id" ? renderAssigneeName(tooltipValue.toString()) : tooltipValue}:
       </span>

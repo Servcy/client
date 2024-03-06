@@ -3,11 +3,11 @@ import { observer } from "mobx-react-lite";
 import { Controller, useForm } from "react-hook-form";
 
 import { useLabel, useMember } from "@hooks/store";
-// components
+
 import { AppliedFiltersList, FilterSelection, FiltersDropdown } from "@components/issues";
 // ui
 import { Button, Input, TextArea } from "@servcy/ui";
-// types
+
 import { IIssueFilterOptions, IWorkspaceView } from "@servcy/types";
 // constants
 import { ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue";

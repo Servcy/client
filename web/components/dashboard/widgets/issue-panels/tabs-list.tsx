@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { Tab } from "@headlessui/react";
 // helpers
 import { cn } from "@helpers/common.helper";
-// types
+
 import { TDurationFilterOptions, TIssuesListTypes } from "@servcy/types";
 // constants
 import { FILTERED_ISSUES_TABS_LIST, UNFILTERED_ISSUES_TABS_LIST } from "@constants/dashboard";

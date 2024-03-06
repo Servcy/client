@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "@helpers/common.helper";
 // services
 import { APIService } from "@services/api.service";
-// types
+
 import { IPage, IPageBlock, TIssue } from "@servcy/types";
 
 export class PageService extends APIService {

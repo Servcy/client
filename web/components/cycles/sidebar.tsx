@@ -9,7 +9,7 @@ import { CycleService } from "@services/cycle.service";
 
 import { useEventTracker, useCycle, useUser, useMember } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { SidebarProgressStats } from "@components/core";
 import ProgressChart from "@components/core/sidebar/progress-chart";
 import { CycleDeleteModal } from "@components/cycles/delete-modal";
@@ -20,7 +20,7 @@ import { ChevronDown, LinkIcon, Trash2, UserCircle2, AlertCircle, ChevronRight, 
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
 import { findHowManyDaysLeft, renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { ICycle } from "@servcy/types";
 // constants
 import { EUserWorkspaceRoles } from "@constants/workspace";

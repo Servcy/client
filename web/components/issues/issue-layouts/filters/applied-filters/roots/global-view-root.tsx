@@ -5,9 +5,9 @@ import isEqual from "lodash/isEqual";
 import { useEventTracker, useGlobalView, useIssues, useLabel, useUser } from "@hooks/store";
 //ui
 import { Button } from "@servcy/ui";
-// components
+
 import { AppliedFiltersList } from "@components/issues";
-// types
+
 import { IIssueFilterOptions, TStaticViewTypes } from "@servcy/types";
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
 import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace";

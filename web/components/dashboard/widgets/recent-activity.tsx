@@ -4,14 +4,14 @@ import { observer } from "mobx-react-lite";
 import { History } from "lucide-react";
 
 import { useDashboard, useUser } from "@hooks/store";
-// components
+
 import { ActivityIcon, ActivityMessage, IssueLink } from "@components/core";
 import { RecentActivityEmptyState, WidgetLoader, WidgetProps } from "@components/dashboard/widgets";
 // ui
 import { Avatar } from "@servcy/ui";
 // helpers
 import { calculateTimeAgo } from "@helpers/date-time.helper";
-// types
+
 import { TRecentActivityWidgetResponse } from "@servcy/types";
 
 const WIDGET_KEY = "recent_activity";

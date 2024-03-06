@@ -1,7 +1,7 @@
 import { useContext } from "react";
 // mobx store
 import { StoreContext } from "@contexts/store-context";
-// types
+
 import { ICycleStore } from "@store/cycle.store";
 
 export const useCycle = (): ICycleStore => {

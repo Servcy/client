@@ -6,7 +6,7 @@ import { useUser } from "@hooks/store";
 import toast from "react-hot-toast";
 // layouts
 import { ProfilePreferenceSettingsLayout } from "@layouts/settings-layout/profile/preferences";
-// components
+
 import { CustomThemeSelector, ThemeSwitch, PageHead } from "@components/core";
 // ui
 import { Spinner } from "@servcy/ui";

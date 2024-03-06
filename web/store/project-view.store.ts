@@ -4,7 +4,7 @@ import { computedFn } from "mobx-utils";
 // services
 import { ViewService } from "@services/view.service";
 import { RootStore } from "@store/root.store";
-// types
+
 import { IProjectView } from "@servcy/types";
 
 export interface IProjectViewStore {

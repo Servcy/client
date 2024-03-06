@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Search } from "lucide-react";
 
 import { useEventTracker, useMember } from "@hooks/store";
-// components
+
 import { ProjectMemberListItem, SendProjectInvitationModal } from "@components/project";
 // ui
 import { Button } from "@servcy/ui";

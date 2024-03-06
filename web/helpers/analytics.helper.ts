@@ -2,7 +2,7 @@
 import { BarDatum } from "@nivo/bar";
 // helpers
 import { addSpaceIfCamelCase, capitalizeFirstLetter, generateRandomColor } from "@helpers/string.helper";
-// types
+
 import { IAnalyticsData, IAnalyticsParams, IAnalyticsResponse, TStateGroups } from "@servcy/types";
 // constants
 import { DATE_KEYS } from "@constants/analytics";

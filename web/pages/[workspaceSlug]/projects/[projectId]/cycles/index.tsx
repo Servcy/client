@@ -8,7 +8,7 @@ import { useCycle, useEventTracker, useProject, useUser } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { PageHead } from "@components/core";
 import { ActiveCycleDetails, CycleCreateUpdateModal, CyclesView } from "@components/cycles";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
@@ -16,7 +16,7 @@ import { CyclesHeader } from "@components/headers";
 // ui
 import { Tooltip } from "@servcy/ui";
 import { CycleModuleBoardLayout, CycleModuleListLayout, GanttLayoutLoader } from "@components/ui";
-// types
+
 import { TCycleLayout, TCycleView } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // constants

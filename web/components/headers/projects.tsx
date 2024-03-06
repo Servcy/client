@@ -6,7 +6,7 @@ import { useApplication, useEventTracker, useProject, useUser } from "@hooks/sto
 import { Breadcrumbs, Button } from "@servcy/ui";
 // constants
 import { EUserWorkspaceRoles } from "@constants/workspace";
-// components
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 

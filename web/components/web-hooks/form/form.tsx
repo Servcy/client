@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 
 import { useWebhook } from "@hooks/store";
-// components
+
 import {
   WebhookIndividualEventOptions,
   WebhookInput,
@@ -13,7 +13,7 @@ import {
 } from "@components/web-hooks";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IWebhook, TWebhookEventTypes } from "@servcy/types";
 
 type Props = {

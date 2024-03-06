@@ -11,7 +11,7 @@ import { renderEmoji } from "@helpers/emoji.helper";
 // constants
 import { MODULE_VIEW_LAYOUTS } from "@constants/module";
 import { EUserProjectRoles } from "@constants/project";
-// components
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 
@@ -71,16 +71,14 @@ export const ModulesListHeader: React.FC = observer(() => {
               <Tooltip key={layout.key} tooltipContent={layout.title}>
                 <button
                   type="button"
-                  className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${
-                    modulesView == layout.key ? "bg-custom-background-100 shadow-custom-shadow-2xs" : ""
-                  }`}
+                  className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${modulesView == layout.key ? "bg-custom-background-100 shadow-custom-shadow-2xs" : ""
+                    }`}
                   onClick={() => setModulesView(layout.key)}
                 >
                   <layout.icon
                     strokeWidth={2}
-                    className={`h-3.5 w-3.5 ${
-                      modulesView == layout.key ? "text-custom-text-100" : "text-custom-text-200"
-                    }`}
+                    className={`h-3.5 w-3.5 ${modulesView == layout.key ? "text-custom-text-100" : "text-custom-text-200"
+                      }`}
                   />
                 </button>
               </Tooltip>

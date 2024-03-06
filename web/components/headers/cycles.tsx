@@ -9,7 +9,7 @@ import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui";
 // helpers
 import { renderEmoji } from "@helpers/emoji.helper";
 import { EUserProjectRoles } from "@constants/project";
-// components
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 import { TCycleLayout } from "@servcy/types";

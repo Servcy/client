@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { BarChart2, PanelRight } from "lucide-react";
 // ui
 import { Breadcrumbs } from "@servcy/ui";
-// components
+
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";
 import { useApplication } from "@hooks/store";

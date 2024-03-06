@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "@helpers/common.helper";
 // services
 import { APIService } from "@services/api.service";
-// types
+
 import type { IProjectBulkAddFormData, IProjectMember, IProjectMembership } from "@servcy/types";
 
 export class ProjectMemberService extends APIService {

@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { useIssueDetail, useProjectState, useUser } from "@hooks/store";
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
-// components
+
 import { IssueUpdateStatus, TIssueOperations } from "@components/issues";
 import { IssueTitleInput } from "../../title-input";
 import { IssueDescriptionInput } from "../../description-input";

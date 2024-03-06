@@ -4,7 +4,7 @@ import Link from "next/link";
 // ui
 import { CreateIcon, LayerStackIcon, Loader } from "@servcy/ui";
 import { UserCircle2 } from "lucide-react";
-// types
+
 import { IUserProfileData } from "@servcy/types";
 
 type Props = {

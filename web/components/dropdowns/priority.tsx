@@ -10,7 +10,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { PriorityIcon, Tooltip } from "@servcy/ui";
 // helpers
 import { cn } from "@helpers/common.helper";
-// types
+
 import { TIssuePriorities } from "@servcy/types";
 import { TDropdownProps } from "./types";
 // constants
@@ -435,8 +435,7 @@ export const PriorityDropdown: React.FC<Props> = (props) => {
                     key={option.value}
                     value={option.value}
                     className={({ active, selected }) =>
-                      `w-full truncate flex items-center justify-between gap-2 rounded px-1 py-1.5 cursor-pointer select-none ${
-                        active ? "bg-custom-background-80" : ""
+                      `w-full truncate flex items-center justify-between gap-2 rounded px-1 py-1.5 cursor-pointer select-none ${active ? "bg-custom-background-80" : ""
                       } ${selected ? "text-custom-text-100" : "text-custom-text-200"}`
                     }
                   >

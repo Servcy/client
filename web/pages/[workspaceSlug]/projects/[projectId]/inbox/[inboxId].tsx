@@ -6,12 +6,12 @@ import { observer } from "mobx-react";
 import { useProject, useInboxIssues } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { InboxLayoutLoader } from "@components/ui";
 import { PageHead } from "@components/core";
 import { ProjectInboxHeader } from "@components/headers";
 import { InboxSidebarRoot, InboxContentRoot } from "@components/inbox";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 const ProjectInboxPage: NextPageWithLayout = observer(() => {

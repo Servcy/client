@@ -1,7 +1,7 @@
 // icons
 import { Globe2, Lock, LucideIcon } from "lucide-react";
 import { SettingIcon } from "@components/icons";
-// types
+
 import { Props } from "@components/icons/types";
 
 export enum EUserProjectRoles {
@@ -17,19 +17,19 @@ export const NETWORK_CHOICES: {
   description: string;
   icon: LucideIcon;
 }[] = [
-  {
-    key: 0,
-    label: "Private",
-    description: "Accessible only by invite",
-    icon: Lock,
-  },
-  {
-    key: 2,
-    label: "Public",
-    description: "Anyone in the workspace can join",
-    icon: Globe2,
-  },
-];
+    {
+      key: 0,
+      label: "Private",
+      description: "Accessible only by invite",
+      icon: Lock,
+    },
+    {
+      key: 2,
+      label: "Public",
+      description: "Anyone in the workspace can join",
+      icon: Globe2,
+    },
+  ];
 
 export const GROUP_CHOICES = {
   backlog: "Backlog",
@@ -91,68 +91,68 @@ export const PROJECT_SETTINGS_LINKS: {
   highlight: (pathname: string, baseUrl: string) => boolean;
   Icon: React.FC<Props>;
 }[] = [
-  {
-    key: "general",
-    label: "General",
-    href: `/settings`,
-    access: EUserProjectRoles.MEMBER,
-    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings`,
-    Icon: SettingIcon,
-  },
-  {
-    key: "members",
-    label: "Members",
-    href: `/settings/members`,
-    access: EUserProjectRoles.MEMBER,
-    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/members`,
-    Icon: SettingIcon,
-  },
-  {
-    key: "features",
-    label: "Features",
-    href: `/settings/features`,
-    access: EUserProjectRoles.ADMIN,
-    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/features`,
-    Icon: SettingIcon,
-  },
-  {
-    key: "states",
-    label: "States",
-    href: `/settings/states`,
-    access: EUserProjectRoles.MEMBER,
-    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/states`,
-    Icon: SettingIcon,
-  },
-  {
-    key: "labels",
-    label: "Labels",
-    href: `/settings/labels`,
-    access: EUserProjectRoles.MEMBER,
-    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/labels`,
-    Icon: SettingIcon,
-  },
-  {
-    key: "integrations",
-    label: "Integrations",
-    href: `/settings/integrations`,
-    access: EUserProjectRoles.ADMIN,
-    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/integrations`,
-    Icon: SettingIcon,
-  },
-  {
-    key: "estimates",
-    label: "Estimates",
-    href: `/settings/estimates`,
-    access: EUserProjectRoles.ADMIN,
-    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/estimates`,
-    Icon: SettingIcon,
-  },
-  {
-    key: "automations",
-    label: "Automations",
-    href: `/settings/automations`,
-    access: EUserProjectRoles.ADMIN,
-    highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/automations`,
-    Icon: SettingIcon,
-  },
-];
+    {
+      key: "general",
+      label: "General",
+      href: `/settings`,
+      access: EUserProjectRoles.MEMBER,
+      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings`,
+      Icon: SettingIcon,
+    },
+    {
+      key: "members",
+      label: "Members",
+      href: `/settings/members`,
+      access: EUserProjectRoles.MEMBER,
+      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/members`,
+      Icon: SettingIcon,
+    },
+    {
+      key: "features",
+      label: "Features",
+      href: `/settings/features`,
+      access: EUserProjectRoles.ADMIN,
+      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/features`,
+      Icon: SettingIcon,
+    },
+    {
+      key: "states",
+      label: "States",
+      href: `/settings/states`,
+      access: EUserProjectRoles.MEMBER,
+      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/states`,
+      Icon: SettingIcon,
+    },
+    {
+      key: "labels",
+      label: "Labels",
+      href: `/settings/labels`,
+      access: EUserProjectRoles.MEMBER,
+      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/labels`,
+      Icon: SettingIcon,
+    },
+    {
+      key: "integrations",
+      label: "Integrations",
+      href: `/settings/integrations`,
+      access: EUserProjectRoles.ADMIN,
+      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/integrations`,
+      Icon: SettingIcon,
+    },
+    {
+      key: "estimates",
+      label: "Estimates",
+      href: `/settings/estimates`,
+      access: EUserProjectRoles.ADMIN,
+      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/estimates`,
+      Icon: SettingIcon,
+    },
+    {
+      key: "automations",
+      label: "Automations",
+      href: `/settings/automations`,
+      access: EUserProjectRoles.ADMIN,
+      highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/automations`,
+      Icon: SettingIcon,
+    },
+  ];

@@ -7,13 +7,13 @@ import { Eye, EyeOff, XCircle } from "lucide-react";
 import { AuthService } from "@services/auth.service";
 import toast from "react-hot-toast";
 import { useApplication, useEventTracker } from "@hooks/store";
-// components
+
 import { ESignInSteps, ForgotPasswordPopover } from "@components/account";
 // ui
 import { Button, Input } from "@servcy/ui";
 // helpers
 import { checkEmailValidity } from "@helpers/string.helper";
-// types
+
 import { IPasswordSignInData } from "@servcy/types";
 // constants
 import { FORGOT_PASSWORD, SIGN_IN_WITH_PASSWORD } from "@constants/event-tracker";

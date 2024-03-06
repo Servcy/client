@@ -5,7 +5,7 @@ import { Button, Checkbox } from "@servcy/ui";
 import toast from "react-hot-toast";
 // services
 import { UserService } from "@services/user.service";
-// types
+
 import { IUserEmailNotificationSettings } from "@servcy/types";
 
 interface IEmailNotificationFormProps {

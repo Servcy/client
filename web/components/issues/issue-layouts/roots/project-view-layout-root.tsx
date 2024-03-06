@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 // mobx store
 import { useIssues } from "@hooks/store";
-// components
+
 import {
   IssuePeekOverview,
   ProjectViewAppliedFiltersRoot,
@@ -18,7 +18,7 @@ import {
 import { ActiveLoader } from "@components/ui";
 // constants
 import { EIssuesStoreType } from "@constants/issue";
-// types
+
 import { TIssue } from "@servcy/types";
 import { EIssueActions } from "../types";
 

@@ -8,14 +8,14 @@ import { useUser, useWebhook, useWorkspace } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-// components
+
 import { WorkspaceSettingHeader } from "@components/headers";
 import { WebhooksList, CreateWebhookModal } from "@components/web-hooks";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui
 import { Button } from "@servcy/ui";
 import { WebhookSettingsLoader } from "@components/ui";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // constants
 import { WORKSPACE_SETTINGS_EMPTY_STATE_DETAILS } from "@constants/empty-state";

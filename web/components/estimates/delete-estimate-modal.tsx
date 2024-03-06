@@ -6,7 +6,7 @@ import { AlertTriangle } from "lucide-react";
 // store hooks
 import { useEstimate } from "@hooks/store";
 import toast from "react-hot-toast";
-// types
+
 import { IEstimate } from "@servcy/types";
 // ui
 import { Button } from "@servcy/ui";

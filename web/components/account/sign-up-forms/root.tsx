@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { useApplication, useEventTracker } from "@hooks/store";
 import useSignInRedirection from "@hooks/use-sign-in-redirection";
-// components
+
 import {
   OAuthOptions,
   SignUpEmailForm,

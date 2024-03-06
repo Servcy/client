@@ -6,7 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Button } from "@servcy/ui";
 // helper
 import { getFileName } from "@helpers/attachment.helper";
-// types
+
 import type { TIssueAttachment } from "@servcy/types";
 import { TAttachmentOperations } from "./root";
 

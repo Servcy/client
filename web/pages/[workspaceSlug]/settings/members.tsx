@@ -8,13 +8,13 @@ import toast from "react-hot-toast";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-// components
+
 import { PageHead } from "@components/core";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { IWorkspaceBulkInviteFormData } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 // helpers

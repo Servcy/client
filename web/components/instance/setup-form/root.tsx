@@ -1,5 +1,5 @@
 import { useState } from "react";
-// components
+
 import { LatestFeatureBlock } from "@components/common";
 import { InstanceSetupDone, InstanceSetupSignInForm } from "@components/instance";
 

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useDashboard } from "@hooks/store";
-// components
+
 import { PieGraph } from "@components/ui";
 import {
   DurationFilterDropdown,
@@ -14,7 +14,7 @@ import {
 } from "@components/dashboard/widgets";
 // helpers
 import { getCustomDates } from "@helpers/dashboard.helper";
-// types
+
 import { TIssuesByStateGroupsWidgetFilters, TIssuesByStateGroupsWidgetResponse, TStateGroups } from "@servcy/types";
 // constants
 import { STATE_GROUP_GRAPH_COLORS, STATE_GROUP_GRAPH_GRADIENTS } from "@constants/dashboard";

@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
-// components
+
 import { PageForm } from "./page-form";
 
 import { useEventTracker } from "@hooks/store";
-// types
+
 import { IPage } from "@servcy/types";
 import { useProjectPages } from "@hooks/store/use-project-page";
 import { IPageStore } from "@store/page.store";

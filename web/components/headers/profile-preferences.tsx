@@ -1,4 +1,4 @@
-// components
+
 import { Breadcrumbs } from "@servcy/ui";
 import { BreadcrumbLink } from "@components/common";
 

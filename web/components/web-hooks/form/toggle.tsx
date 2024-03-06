@@ -1,7 +1,7 @@
 import { Control, Controller } from "react-hook-form";
 // ui
 import { ToggleSwitch } from "@servcy/ui";
-// types
+
 import { IWebhook } from "@servcy/types";
 
 interface IWebHookToggle {

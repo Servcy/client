@@ -5,7 +5,7 @@ import useSWR from "swr";
 import size from "lodash/size";
 // mobx store
 import { useIssues } from "@hooks/store";
-// components
+
 import {
   IssuePeekOverview,
   ModuleAppliedFiltersRoot,
@@ -19,7 +19,7 @@ import {
 import { ActiveLoader } from "@components/ui";
 // constants
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue";
-// types
+
 import { IIssueFilterOptions } from "@servcy/types";
 
 export const ModuleLayoutRoot: React.FC = observer(() => {

@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { DoubleCircleIcon, UserGroupIcon } from "@servcy/ui";
 // helpers
 import { copyTextToClipboard } from "@helpers/string.helper";
-// types
+
 import { TIssue } from "@servcy/types";
 import { EIssuesStoreType } from "@constants/issue";
 

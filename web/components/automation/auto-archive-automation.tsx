@@ -9,7 +9,7 @@ import { SelectMonthModal } from "@components/automation";
 import { ArchiveRestore } from "lucide-react";
 // constants
 import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project";
-// types
+
 import { IProject } from "@servcy/types";
 
 type Props = {
@@ -72,9 +72,8 @@ export const AutoArchiveAutomation: React.FC<Props> = observer((props) => {
                 <div className="w-1/2">
                   <CustomSelect
                     value={currentProjectDetails?.archive_in}
-                    label={`${currentProjectDetails?.archive_in} ${
-                      currentProjectDetails?.archive_in === 1 ? "month" : "months"
-                    }`}
+                    label={`${currentProjectDetails?.archive_in} ${currentProjectDetails?.archive_in === 1 ? "month" : "months"
+                      }`}
                     onChange={(val: number) => {
                       handleChange({ archive_in: val });
                     }}

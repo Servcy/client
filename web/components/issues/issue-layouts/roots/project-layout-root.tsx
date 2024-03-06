@@ -2,7 +2,7 @@ import { FC, Fragment } from "react";
 import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 import useSWR from "swr";
-// components
+
 import {
   ListLayout,
   CalendarLayout,

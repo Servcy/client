@@ -1,6 +1,6 @@
 // nivo
 import { PieSvgProps, ResponsivePie } from "@nivo/pie";
-// types
+
 import { TGraph } from "./types";
 // constants
 import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";

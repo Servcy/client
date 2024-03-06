@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-// components
+
 import { ComicBoxButton } from "./comic-box-button";
 // ui
 import { Button, getButtonStyling } from "@servcy/ui";
@@ -98,9 +98,8 @@ export const EmptyState: React.FC<Props> = ({
                   />
                 ) : (
                   <div
-                    className={`flex items-center gap-2.5 ${
-                      disabled ? "cursor-not-allowed" : "cursor-pointer"
-                    } ${getButtonStyling("primary", "lg", disabled)}`}
+                    className={`flex items-center gap-2.5 ${disabled ? "cursor-not-allowed" : "cursor-pointer"
+                      } ${getButtonStyling("primary", "lg", disabled)}`}
                     onClick={() => primaryButton.onClick()}
                   >
                     {primaryButton.icon}

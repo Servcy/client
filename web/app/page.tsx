@@ -2,7 +2,7 @@
 
 // Dependencies
 import { useRouter } from "next/navigation.js";
-// Components
+
 import { Button } from "antd";
 import { useEffect } from "react";
 import { AiOutlineHome, AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai";

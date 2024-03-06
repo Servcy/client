@@ -2,9 +2,9 @@ import { FC } from "react";
 import { observer } from "mobx-react-lite";
 
 import { useIssueDetail } from "@hooks/store";
-// components
+
 import { IssueAttachmentsDetail } from "./attachment-detail";
-// types
+
 import { TAttachmentOperations } from "./root";
 
 type TAttachmentOperationsRemoveModal = Exclude<TAttachmentOperations, "create">;

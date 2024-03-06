@@ -5,13 +5,13 @@ import { CircleDot, CopyPlus, Pencil, X, XCircle } from "lucide-react";
 
 import { useIssueDetail, useIssues, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ExistingIssuesListModal } from "@components/core";
 // ui
 import { RelatedIcon, Tooltip } from "@servcy/ui";
 // helpers
 import { cn } from "@helpers/common.helper";
-// types
+
 import { TIssueRelationTypes, ISearchIssueResponse } from "@servcy/types";
 
 export type TRelationObject = { className: string; icon: (size: number) => React.ReactElement; placeholder: string };

@@ -1,7 +1,7 @@
 import set from "lodash/set";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { RootStore } from "../root.store";
-// types
+
 import { IWorkspace } from "@servcy/types";
 // services
 import { WorkspaceService } from "@services/workspace.service";

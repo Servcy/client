@@ -10,10 +10,10 @@ import {
   useProject,
   useProjectState,
 } from "@hooks/store";
-// components
+
 import { HeaderGroupByCard } from "./headers/group-by-card";
 import { KanbanGroup } from "./kanban-group";
-// types
+
 import {
   GroupByColumnTypes,
   IGroupByColumn,

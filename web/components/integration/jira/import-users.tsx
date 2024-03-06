@@ -6,7 +6,7 @@ import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 import { WorkspaceService } from "@services/workspace.service";
 // ui
 import { Avatar, CustomSelect, CustomSearchSelect, Input, ToggleSwitch } from "@servcy/ui";
-// types
+
 import { IJiraImporterForm } from "@servcy/types";
 // fetch keys
 import { WORKSPACE_MEMBERS } from "@constants/fetch-keys";

@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import useDebounce from "@hooks/use-debounce";
 // ui
 import { Button, LayersIcon, Loader, ToggleSwitch, Tooltip } from "@servcy/ui";
-// types
+
 import { ISearchIssueResponse, TProjectIssuesSearchParams } from "@servcy/types";
 
 type Props = {
@@ -163,9 +163,8 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                     {workspaceLevelToggle && (
                       <Tooltip tooltipContent="Toggle workspace level search">
                         <div
-                          className={`flex flex-shrink-0 cursor-pointer items-center gap-1 text-xs ${
-                            isWorkspaceLevel ? "text-custom-text-100" : "text-custom-text-200"
-                          }`}
+                          className={`flex flex-shrink-0 cursor-pointer items-center gap-1 text-xs ${isWorkspaceLevel ? "text-custom-text-100" : "text-custom-text-200"
+                            }`}
                         >
                           <ToggleSwitch
                             value={isWorkspaceLevel}
@@ -225,8 +224,7 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
                               htmlFor={`issue-${issue.id}`}
                               value={issue}
                               className={({ active }) =>
-                                `group flex w-full cursor-pointer select-none items-center justify-between gap-2 rounded-md px-3 py-2 text-custom-text-200 ${
-                                  active ? "bg-custom-background-80 text-custom-text-100" : ""
+                                `group flex w-full cursor-pointer select-none items-center justify-between gap-2 rounded-md px-3 py-2 text-custom-text-200 ${active ? "bg-custom-background-80 text-custom-text-100" : ""
                                 } ${selected ? "text-custom-text-100" : ""}`
                               }
                             >

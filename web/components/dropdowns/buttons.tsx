@@ -1,6 +1,6 @@
 // helpers
 import { cn } from "@helpers/common.helper";
-// types
+
 import { TButtonVariants } from "./types";
 // constants
 import { BACKGROUND_BUTTON_VARIANTS, BORDER_BUTTON_VARIANTS } from "./constants";

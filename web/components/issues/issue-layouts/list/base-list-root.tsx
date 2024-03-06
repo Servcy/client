@@ -1,7 +1,7 @@
 import { List } from "./default";
 import { FC, useCallback } from "react";
 import { observer } from "mobx-react-lite";
-// types
+
 import { TIssue } from "@servcy/types";
 import { IProjectIssues, IProjectIssuesFilter } from "@store/issue/project";
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle";
@@ -11,7 +11,7 @@ import { IProjectViewIssues, IProjectViewIssuesFilter } from "@store/issue/proje
 import { IDraftIssuesFilter, IDraftIssues } from "@store/issue/draft";
 import { IArchivedIssuesFilter, IArchivedIssues } from "@store/issue/archived";
 import { EIssueActions } from "../types";
-// components
+
 import { IQuickActionProps } from "./list-view-types";
 // constants
 import { EUserProjectRoles } from "@constants/project";

@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { Plus, PlusIcon } from "lucide-react";
 
 import { useApplication, useEventTracker, useProject } from "@hooks/store";
-// components
+
 import { EmptyState } from "@components/common";
 // assets
 import emptyIssue from "public/empty-state/issue.svg";

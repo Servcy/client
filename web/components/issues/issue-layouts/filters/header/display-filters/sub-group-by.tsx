@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-// components
+
 import { FilterHeader, FilterOption } from "@components/issues";
-// types
+
 import { IIssueDisplayFilterOptions, TIssueGroupByOptions } from "@servcy/types";
 // constants
 import { ISSUE_GROUP_BY_OPTIONS } from "@constants/issue";

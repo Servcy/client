@@ -1,6 +1,6 @@
 // icons
 import { Calendar, GanttChartSquare, Kanban, List, Sheet } from "lucide-react";
-// types
+
 import {
   IIssueDisplayProperties,
   IIssueFilterOptions,
@@ -42,89 +42,89 @@ export const ISSUE_PRIORITIES: {
   key: TIssuePriorities;
   title: string;
 }[] = [
-  { key: "urgent", title: "Urgent" },
-  { key: "high", title: "High" },
-  { key: "medium", title: "Medium" },
-  { key: "low", title: "Low" },
-  { key: "none", title: "None" },
-];
+    { key: "urgent", title: "Urgent" },
+    { key: "high", title: "High" },
+    { key: "medium", title: "Medium" },
+    { key: "low", title: "Low" },
+    { key: "none", title: "None" },
+  ];
 
 export const ISSUE_GROUP_BY_OPTIONS: {
   key: TIssueGroupByOptions;
   title: string;
 }[] = [
-  { key: "state", title: "States" },
-  { key: "state_detail.group", title: "State Groups" },
-  { key: "priority", title: "Priority" },
-  { key: "project", title: "Project" }, // required this on my issues
-  { key: "cycle", title: "Cycle" }, // required this on my issues
-  { key: "module", title: "Module" }, // required this on my issues
-  { key: "labels", title: "Labels" },
-  { key: "assignees", title: "Assignees" },
-  { key: "created_by", title: "Created By" },
-  { key: null, title: "None" },
-];
+    { key: "state", title: "States" },
+    { key: "state_detail.group", title: "State Groups" },
+    { key: "priority", title: "Priority" },
+    { key: "project", title: "Project" }, // required this on my issues
+    { key: "cycle", title: "Cycle" }, // required this on my issues
+    { key: "module", title: "Module" }, // required this on my issues
+    { key: "labels", title: "Labels" },
+    { key: "assignees", title: "Assignees" },
+    { key: "created_by", title: "Created By" },
+    { key: null, title: "None" },
+  ];
 
 export const ISSUE_ORDER_BY_OPTIONS: {
   key: TIssueOrderByOptions;
   title: string;
 }[] = [
-  { key: "sort_order", title: "Manual" },
-  { key: "-created_at", title: "Last Created" },
-  { key: "-updated_at", title: "Last Updated" },
-  { key: "start_date", title: "Start Date" },
-  { key: "target_date", title: "Due Date" },
-  { key: "-priority", title: "Priority" },
-];
+    { key: "sort_order", title: "Manual" },
+    { key: "-created_at", title: "Last Created" },
+    { key: "-updated_at", title: "Last Updated" },
+    { key: "start_date", title: "Start Date" },
+    { key: "target_date", title: "Due Date" },
+    { key: "-priority", title: "Priority" },
+  ];
 
 export const ISSUE_FILTER_OPTIONS: {
   key: TIssueTypeFilters;
   title: string;
 }[] = [
-  { key: null, title: "All" },
-  { key: "active", title: "Active Issues" },
-  { key: "backlog", title: "Backlog Issues" },
-  // { key: "draft", title: "Draft Issues" },
-];
+    { key: null, title: "All" },
+    { key: "active", title: "Active Issues" },
+    { key: "backlog", title: "Backlog Issues" },
+    // { key: "draft", title: "Draft Issues" },
+  ];
 
 export const ISSUE_DISPLAY_PROPERTIES: {
   key: keyof IIssueDisplayProperties;
   title: string;
 }[] = [
-  { key: "assignee", title: "Assignee" },
-  { key: "start_date", title: "Start date" },
-  { key: "due_date", title: "Due date" },
-  { key: "key", title: "ID" },
-  { key: "labels", title: "Labels" },
-  { key: "priority", title: "Priority" },
-  { key: "state", title: "State" },
-  { key: "sub_issue_count", title: "Sub issue count" },
-  { key: "attachment_count", title: "Attachment count" },
-  { key: "link", title: "Link" },
-  { key: "estimate", title: "Estimate" },
-  { key: "modules", title: "Modules" },
-  { key: "cycle", title: "Cycle" },
-];
+    { key: "assignee", title: "Assignee" },
+    { key: "start_date", title: "Start date" },
+    { key: "due_date", title: "Due date" },
+    { key: "key", title: "ID" },
+    { key: "labels", title: "Labels" },
+    { key: "priority", title: "Priority" },
+    { key: "state", title: "State" },
+    { key: "sub_issue_count", title: "Sub issue count" },
+    { key: "attachment_count", title: "Attachment count" },
+    { key: "link", title: "Link" },
+    { key: "estimate", title: "Estimate" },
+    { key: "modules", title: "Modules" },
+    { key: "cycle", title: "Cycle" },
+  ];
 
 export const ISSUE_EXTRA_OPTIONS: {
   key: TIssueExtraOptions;
   title: string;
 }[] = [
-  { key: "sub_issue", title: "Show sub-issues" }, // in spreadsheet its always false
-  { key: "show_empty_groups", title: "Show empty groups" }, // filter on front-end
-];
+    { key: "sub_issue", title: "Show sub-issues" }, // in spreadsheet its always false
+    { key: "show_empty_groups", title: "Show empty groups" }, // filter on front-end
+  ];
 
 export const ISSUE_LAYOUTS: {
   key: TIssueLayouts;
   title: string;
   icon: any;
 }[] = [
-  { key: "list", title: "List Layout", icon: List },
-  { key: "kanban", title: "Kanban Layout", icon: Kanban },
-  { key: "calendar", title: "Calendar Layout", icon: Calendar },
-  { key: "spreadsheet", title: "Spreadsheet Layout", icon: Sheet },
-  { key: "gantt_chart", title: "Gantt Chart Layout", icon: GanttChartSquare },
-];
+    { key: "list", title: "List Layout", icon: List },
+    { key: "kanban", title: "Kanban Layout", icon: Kanban },
+    { key: "calendar", title: "Calendar Layout", icon: Calendar },
+    { key: "spreadsheet", title: "Spreadsheet Layout", icon: Sheet },
+    { key: "gantt_chart", title: "Gantt Chart Layout", icon: GanttChartSquare },
+  ];
 
 export interface ILayoutDisplayFiltersOptions {
   filters: (keyof IIssueFilterOptions)[];

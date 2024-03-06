@@ -17,7 +17,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { Input } from "@servcy/ui";
 // icons
 import { Palette } from "lucide-react";
-// types
+
 import { IUserTheme } from "@servcy/types";
 
 type Props = {
@@ -86,9 +86,8 @@ export const ColorPickerInput: FC<Props> = (props) => {
             <>
               <Popover.Button
                 type="button"
-                className={`group inline-flex items-center outline-none ${
-                  open ? "text-custom-text-100" : "text-custom-text-200"
-                }`}
+                className={`group inline-flex items-center outline-none ${open ? "text-custom-text-100" : "text-custom-text-200"
+                  }`}
               >
                 {watch(name) && watch(name) !== "" ? (
                   <span
@@ -112,9 +111,8 @@ export const ColorPickerInput: FC<Props> = (props) => {
                 leaveTo="opacity-0 translate-y-1"
               >
                 <Popover.Panel
-                  className={`absolute bottom-8 z-20 mt-1 max-w-xs px-2 sm:px-0 ${
-                    position === "right" ? "left-0" : "right-0"
-                  }`}
+                  className={`absolute bottom-8 z-20 mt-1 max-w-xs px-2 sm:px-0 ${position === "right" ? "left-0" : "right-0"
+                    }`}
                 >
                   <SketchPicker color={watch(name)} onChange={handleColorChange} />
                 </Popover.Panel>

@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { useInboxIssues } from "@hooks/store";
 // ui
 import { InboxSidebarLoader } from "@components/ui";
-// components
+
 import { InboxIssueList, InboxIssueFilterSelection, InboxIssueAppliedFilter } from "../";
 
 type TInboxSidebarRoot = {

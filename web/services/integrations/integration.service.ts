@@ -1,5 +1,5 @@
 import { APIService } from "@services/api.service";
-// types
+
 import { IAppIntegration, IExportServiceResponse, IImporterService, IWorkspaceIntegration } from "@servcy/types";
 // helper
 import { API_BASE_URL } from "@helpers/common.helper";

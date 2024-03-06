@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { Button, CustomSelect, Input, TextArea, ToggleSwitch } from "@servcy/ui";
 // helpers
 import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { IApiToken } from "@servcy/types";
 
 type Props = {
@@ -165,9 +165,8 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
                     <CustomSelect
                       customButton={
                         <div
-                          className={`flex items-center gap-2 rounded border-[0.5px] border-custom-border-300 px-2 py-0.5 ${
-                            neverExpires ? "text-custom-text-400" : ""
-                          }`}
+                          className={`flex items-center gap-2 rounded border-[0.5px] border-custom-border-300 px-2 py-0.5 ${neverExpires ? "text-custom-text-400" : ""
+                            }`}
                         >
                           <Calendar className="h-3 w-3" />
                           {value === "custom"
@@ -220,7 +219,7 @@ export const CreateApiTokenForm: React.FC<Props> = (props) => {
       <div className="mt-5 flex items-center justify-between gap-2">
         <div className="flex cursor-pointer items-center gap-1.5" onClick={toggleNeverExpires}>
           <div className="flex cursor-pointer items-center justify-center">
-            <ToggleSwitch value={neverExpires} onChange={() => {}} size="sm" />
+            <ToggleSwitch value={neverExpires} onChange={() => { }} size="sm" />
           </div>
           <span className="text-xs">Never expires</span>
         </div>

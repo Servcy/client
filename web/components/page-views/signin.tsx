@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { useApplication, useUser } from "@hooks/store";
 import useSignInRedirection from "@hooks/use-sign-in-redirection";
-// components
+
 import { SignInRoot } from "@components/account";
 import { PageHead } from "@components/core";
 // ui

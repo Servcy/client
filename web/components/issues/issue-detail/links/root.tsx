@@ -3,10 +3,10 @@ import { Plus } from "lucide-react";
 
 import { useIssueDetail } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { IssueLinkCreateUpdateModal } from "./create-update-link-modal";
 import { IssueLinkList } from "./links";
-// types
+
 import { TIssueLink } from "@servcy/types";
 
 export type TLinkOperations = {

@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import { useCycle } from "@hooks/store";
 // ui
 import { CycleGroupIcon } from "@servcy/ui";
-// types
+
 import { TCycleGroups } from "@servcy/types";
 
 type Props = {

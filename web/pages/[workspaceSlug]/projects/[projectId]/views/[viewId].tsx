@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import { useProject, useProjectView } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
-// components
+
 import { ProjectViewLayoutRoot } from "@components/issues";
 import { ProjectViewIssuesHeader } from "@components/headers";
 import { PageHead } from "@components/core";
@@ -14,7 +14,7 @@ import { PageHead } from "@components/core";
 import { EmptyState } from "@components/common";
 // assets
 import emptyView from "public/empty-state/view.svg";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 const ProjectViewIssuesPage: NextPageWithLayout = observer(() => {

@@ -1,6 +1,6 @@
 // services
 import { APIService } from "@services/api.service";
-// types
+
 import type { CycleDateCheckData, ICycle, TIssue } from "@servcy/types";
 // helpers
 import { API_BASE_URL } from "@helpers/common.helper";

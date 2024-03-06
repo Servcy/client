@@ -1,6 +1,6 @@
 // ui
 import { CustomSelect } from "@servcy/ui";
-// types
+
 import { TYAxisValues } from "@servcy/types";
 // constants
 import { ANALYTICS_Y_AXIS_VALUES } from "@constants/analytics";

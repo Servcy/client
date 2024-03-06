@@ -12,7 +12,7 @@ import { RiWhatsappLine } from "react-icons/ri";
 import { validateEmail, validateOtp, validatePhone } from "@/utils/Shared/validators";
 // APIs
 import { googleLogin as googleLoginApi, sendOtp as sendOtpApi, verifyOtp as verifyOtpApi } from "@/apis/authentication";
-// Components
+
 import OTPInput from "@/components/Login/OTPInput";
 import { GoogleLogin } from "@react-oauth/google";
 import { Button, Input } from "antd";
@@ -147,7 +147,7 @@ export default function Login(): JSX.Element {
                   id="agree_terms_conditions_and_privacy_policy"
                   type="checkbox"
                   checked
-                  onChange={() => {}}
+                  onChange={() => { }}
                   className="mr-2 accent-servcy-light"
                 />
                 <span className="text-sm font-normal">

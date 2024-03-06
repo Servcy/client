@@ -1,7 +1,7 @@
 import { useContext } from "react";
 // mobx store
 import { StoreContext } from "@contexts/store-context";
-// types
+
 import { IInbox } from "@store/inbox/inbox.store";
 
 export const useInbox = (): IInbox => {

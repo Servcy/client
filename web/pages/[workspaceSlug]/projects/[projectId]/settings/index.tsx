@@ -7,7 +7,7 @@ import { useProject } from "@hooks/store";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { ProjectSettingLayout } from "@layouts/settings-layout";
-// components
+
 import { PageHead } from "@components/core";
 import { ProjectSettingHeader } from "@components/headers";
 import {
@@ -16,7 +16,7 @@ import {
   ProjectDetailsForm,
   ProjectDetailsFormLoader,
 } from "@components/project";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 
 const GeneralSettingsPage: NextPageWithLayout = observer(() => {

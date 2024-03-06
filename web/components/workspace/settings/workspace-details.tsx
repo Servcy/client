@@ -8,14 +8,14 @@ import { FileService } from "@services/file.service";
 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { DeleteWorkspaceModal } from "@components/workspace";
 import { WorkspaceImageUploadModal } from "@components/core";
 // ui
 import { Button, CustomSelect, Input, Spinner } from "@servcy/ui";
 // helpers
 import { copyUrlToClipboard } from "@helpers/string.helper";
-// types
+
 import { IWorkspace } from "@servcy/types";
 // constants
 import { EUserWorkspaceRoles, ORGANIZATION_SIZE } from "@constants/workspace";

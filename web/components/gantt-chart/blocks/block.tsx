@@ -2,12 +2,12 @@ import { observer } from "mobx-react";
 
 import { useGanttChart } from "../hooks";
 import { useIssueDetail } from "@hooks/store";
-// components
+
 import { ChartAddBlock, ChartDraggable } from "../helpers";
 // helpers
 import { cn } from "@helpers/common.helper";
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { IBlockUpdateData, IGanttBlock } from "../types";
 // constants
 import { BLOCK_HEIGHT } from "../constants";

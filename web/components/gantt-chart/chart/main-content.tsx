@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { observer } from "mobx-react";
 
 import { useGanttChart } from "../hooks/use-gantt-chart";
-// components
+
 import {
   BiWeekChartView,
   DayChartView,

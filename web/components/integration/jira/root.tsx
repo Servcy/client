@@ -10,7 +10,7 @@ import { ArrowLeft, Check, List, Settings } from "lucide-react";
 import { JiraImporterService } from "@services/integrations";
 // fetch keys
 import { IMPORTER_SERVICES_LIST } from "@constants/fetch-keys";
-// components
+
 import { Button, UserGroupIcon } from "@servcy/ui";
 import {
   JiraGetImportDetail,
@@ -23,7 +23,7 @@ import {
 } from ".";
 // assets
 import JiraLogo from "public/services/jira.svg";
-// types
+
 import { IJiraImporterForm } from "@servcy/types";
 
 const integrationWorkflowData: Array<{

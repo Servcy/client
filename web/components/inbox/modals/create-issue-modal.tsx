@@ -11,12 +11,12 @@ import toast from "react-hot-toast";
 // services
 import { FileService } from "@services/file.service";
 import { AIService } from "@services/ai.service";
-// components
+
 import { PriorityDropdown } from "@components/dropdowns";
 import { GptAssistantPopover } from "@components/core";
 // ui
 import { Button, Input, ToggleSwitch } from "@servcy/ui";
-// types
+
 import { TIssue } from "@servcy/types";
 // constants
 import { ISSUE_CREATED } from "@constants/event-tracker";

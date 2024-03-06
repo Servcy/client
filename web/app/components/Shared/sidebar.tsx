@@ -1,4 +1,4 @@
-// Components
+
 import Image from "next/image.js";
 // Constants
 import { sidebarOptions } from "@/constants/routes";

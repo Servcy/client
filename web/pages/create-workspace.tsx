@@ -8,12 +8,12 @@ import { useUser } from "@hooks/store";
 // layouts
 import { UserAuthWrapper } from "@layouts/auth-layout";
 import DefaultLayout from "@layouts/default-layout";
-// components
+
 import { PageHead } from "@components/core";
 import { CreateWorkspaceForm } from "@components/workspace";
 // images
 import ServcyLogo from "public/logo.svg";
-// types
+
 import { IWorkspace } from "@servcy/types";
 import { NextPageWithLayout } from "@lib/types";
 

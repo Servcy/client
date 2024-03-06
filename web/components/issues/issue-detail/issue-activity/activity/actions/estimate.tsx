@@ -3,14 +3,14 @@ import { observer } from "mobx-react";
 import { Triangle } from "lucide-react";
 
 import { useEstimate, useIssueDetail } from "@hooks/store";
-// components
+
 import { IssueActivityBlockComponent, IssueLink } from "./";
 
 type TIssueEstimateActivity = { activityId: string; showIssue?: boolean; ends: "top" | "bottom" | undefined };
 
 export const IssueEstimateActivity: FC<TIssueEstimateActivity> = observer((props) => {
   const { activityId, showIssue = true, ends } = props;
-  
+
   const {
     activity: { getActivityById },
   } = useIssueDetail();

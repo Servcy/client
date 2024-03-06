@@ -6,7 +6,7 @@ import { ChevronDown, Dot, XCircle } from "lucide-react";
 
 import { useEventTracker, useMember, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ConfirmWorkspaceMemberRemove } from "@components/workspace";
 // ui
 import { CustomSelect, Tooltip } from "@servcy/ui";
@@ -145,9 +145,8 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
             customButton={
               <div className="item-center flex gap-1 rounded px-2 py-0.5">
                 <span
-                  className={`flex items-center rounded text-xs font-medium ${
-                    hasRoleChangeAccess ? "" : "text-custom-sidebar-text-400"
-                  }`}
+                  className={`flex items-center rounded text-xs font-medium ${hasRoleChangeAccess ? "" : "text-custom-sidebar-text-400"
+                    }`}
                 >
                   {ROLE[memberDetails.role]}
                 </span>

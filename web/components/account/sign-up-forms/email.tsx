@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { Button, Input } from "@servcy/ui";
 // helpers
 import { checkEmailValidity } from "@helpers/string.helper";
-// types
+
 import { IEmailCheckData } from "@servcy/types";
 
 type Props = {
@@ -25,7 +25,7 @@ const authService = new AuthService();
 
 export const SignUpEmailForm: React.FC<Props> = observer((props) => {
   const { onSubmit, updateEmail } = props;
-  
+
 
   const {
     control,

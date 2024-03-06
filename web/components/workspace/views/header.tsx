@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { Plus } from "lucide-react";
 // store hooks
 import { useEventTracker, useGlobalView, useUser } from "@hooks/store";
-// components
+
 import { CreateUpdateWorkspaceViewModal } from "@components/workspace";
 // constants
 import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace";
@@ -26,11 +26,10 @@ const ViewTab = observer((props: { viewId: string }) => {
   return (
     <Link key={viewId} id={`global-view-${viewId}`} href={`/${workspaceSlug}/workspace-views/${viewId}`}>
       <span
-        className={`flex min-w-min flex-shrink-0 whitespace-nowrap border-b-2 p-3 text-sm font-medium outline-none ${
-          viewId === globalViewId
+        className={`flex min-w-min flex-shrink-0 whitespace-nowrap border-b-2 p-3 text-sm font-medium outline-none ${viewId === globalViewId
             ? "border-custom-primary-100 text-custom-primary-100"
             : "border-transparent hover:border-custom-border-200 hover:text-custom-text-400"
-        }`}
+          }`}
       >
         {view.name}
       </span>
@@ -84,11 +83,10 @@ export const GlobalViewsHeader: React.FC = observer(() => {
           {DEFAULT_GLOBAL_VIEWS_LIST.map((tab) => (
             <Link key={tab.key} id={`global-view-${tab.key}`} href={`/${workspaceSlug}/workspace-views/${tab.key}`}>
               <span
-                className={`flex min-w-min flex-shrink-0 whitespace-nowrap border-b-2 p-3 text-sm font-medium outline-none ${
-                  tab.key === globalViewId
+                className={`flex min-w-min flex-shrink-0 whitespace-nowrap border-b-2 p-3 text-sm font-medium outline-none ${tab.key === globalViewId
                     ? "border-custom-primary-100 text-custom-primary-100"
                     : "border-transparent hover:border-custom-border-200 hover:text-custom-text-400"
-                }`}
+                  }`}
               >
                 {tab.label}
               </span>

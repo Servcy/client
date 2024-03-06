@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from "mobx";
-// types
+
 import {
   TIssue,
   TIssueAttachment,
@@ -33,15 +33,15 @@ export type TPeekIssue = {
 
 export interface IIssueDetail
   extends IIssueStoreActions,
-    IIssueReactionStoreActions,
-    IIssueLinkStoreActions,
-    IIssueSubIssuesStoreActions,
-    IIssueSubscriptionStoreActions,
-    IIssueAttachmentStoreActions,
-    IIssueRelationStoreActions,
-    IIssueActivityStoreActions,
-    IIssueCommentStoreActions,
-    IIssueCommentReactionStoreActions {
+  IIssueReactionStoreActions,
+  IIssueLinkStoreActions,
+  IIssueSubIssuesStoreActions,
+  IIssueSubscriptionStoreActions,
+  IIssueAttachmentStoreActions,
+  IIssueRelationStoreActions,
+  IIssueActivityStoreActions,
+  IIssueCommentStoreActions,
+  IIssueCommentReactionStoreActions {
   // observables
   peekIssue: TPeekIssue | undefined;
   isIssueLinkModalOpen: boolean;

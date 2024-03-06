@@ -7,7 +7,7 @@ import { SelectMonthModal } from "@components/automation";
 import { CustomSelect, CustomSearchSelect, ToggleSwitch, StateGroupIcon, DoubleCircleIcon, Loader } from "@servcy/ui";
 // icons
 import { ArchiveX } from "lucide-react";
-// types
+
 import { IProject } from "@servcy/types";
 // constants
 import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project";
@@ -99,9 +99,8 @@ export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
                   <div className="w-1/2">
                     <CustomSelect
                       value={currentProjectDetails?.close_in}
-                      label={`${currentProjectDetails?.close_in} ${
-                        currentProjectDetails?.close_in === 1 ? "month" : "months"
-                      }`}
+                      label={`${currentProjectDetails?.close_in} ${currentProjectDetails?.close_in === 1 ? "month" : "months"
+                        }`}
                       onChange={(val: number) => {
                         handleChange({ close_in: val });
                       }}

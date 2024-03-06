@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { ColorResult, SketchPicker } from "react-color";
-// components
+
 import { Input } from "./input";
 import { usePopper } from "react-popper";
 import { Button } from "../button";

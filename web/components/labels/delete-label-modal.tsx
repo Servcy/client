@@ -9,7 +9,7 @@ import { AlertTriangle } from "lucide-react";
 import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import type { IIssueLabel } from "@servcy/types";
 
 type Props = {
@@ -27,7 +27,7 @@ export const DeleteLabelModal: React.FC<Props> = observer((props) => {
   const { deleteLabel } = useLabel();
   // states
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
-  
+
 
 
   const handleClose = () => {

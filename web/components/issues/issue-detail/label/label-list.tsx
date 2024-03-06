@@ -1,9 +1,9 @@
 import { FC } from "react";
-// components
+
 import { LabelListItem } from "./label-list-item";
 
 import { useIssueDetail } from "@hooks/store";
-// types
+
 import { TLabelOperations } from "./root";
 
 type TLabelList = {

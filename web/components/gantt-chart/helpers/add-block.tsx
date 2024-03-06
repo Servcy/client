@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 import { Tooltip } from "@servcy/ui";
 // helpers
 import { renderFormattedDate, renderFormattedPayloadDate } from "@helpers/date-time.helper";
-// types
+
 import { IBlockUpdateData, IGanttBlock } from "../types";
 import { useGanttChart } from "../hooks/use-gantt-chart";
 import { observer } from "mobx-react";

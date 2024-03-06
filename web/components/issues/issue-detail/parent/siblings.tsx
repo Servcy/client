@@ -1,10 +1,10 @@
 import { FC } from "react";
 import useSWR from "swr";
-// components
+
 import { IssueParentSiblingItem } from "./sibling-item";
 
 import { useIssueDetail } from "@hooks/store";
-// types
+
 import { TIssue } from "@servcy/types";
 
 export type TIssueParentSiblings = {

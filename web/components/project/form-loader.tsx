@@ -1,8 +1,8 @@
 import { FC } from "react";
-// components
+
 import { Loader } from "@servcy/ui";
 
-export interface IProjectDetailsFormLoader {}
+export interface IProjectDetailsFormLoader { }
 
 export const ProjectDetailsFormLoader: FC<IProjectDetailsFormLoader> = () => (
   <>

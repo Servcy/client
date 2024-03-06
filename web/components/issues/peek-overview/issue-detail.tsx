@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useIssueDetail, useProject, useUser } from "@hooks/store";
 
 import useReloadConfirmations from "@hooks/use-reload-confirmation";
-// components
+
 import { TIssueOperations } from "@components/issues";
 import { IssueReaction } from "../issue-detail/reactions";
 import { IssueTitleInput } from "../title-input";

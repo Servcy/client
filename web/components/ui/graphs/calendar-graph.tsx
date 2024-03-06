@@ -1,6 +1,6 @@
 // nivo
 import { ResponsiveCalendar, CalendarSvgProps } from "@nivo/calendar";
-// types
+
 import { TGraph } from "./types";
 // constants
 import { CHARTS_THEME, DEFAULT_MARGIN } from "@constants/graph";

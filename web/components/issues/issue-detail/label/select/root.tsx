@@ -1,7 +1,7 @@
 import { FC } from "react";
-// components
+
 import { IssueLabelSelect } from "./label-select";
-// types
+
 import { TLabelOperations } from "../root";
 
 type TIssueLabelSelectRoot = {

@@ -7,7 +7,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { IssueFilterHelperStore } from "../helpers/issue-filter-helper.store";
 // helpers
 import { handleIssueQueryParamsByLayout } from "@helpers/issue.helper";
-// types
+
 import {
   IIssueDisplayFilterOptions,
   IIssueDisplayProperties,

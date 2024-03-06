@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { useApplication, useProjectView, useUser } from "@hooks/store";
-// components
+
 import { ProjectViewListItem } from "@components/views";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui

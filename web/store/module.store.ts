@@ -5,7 +5,7 @@ import { computedFn } from "mobx-utils";
 // services
 import { ModuleService } from "@services/module.service";
 import { ProjectService } from "@services/project";
-// types
+
 import { ILinkDetails, IModule } from "@servcy/types";
 import { RootStore } from "@store/root.store";
 

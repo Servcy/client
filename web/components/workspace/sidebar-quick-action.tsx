@@ -4,12 +4,12 @@ import { ChevronUp, PenSquare, Search } from "lucide-react";
 
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store";
 import useLocalStorage from "@hooks/use-local-storage";
-// components
+
 import { CreateUpdateIssueModal } from "@components/issues";
 // constants
 import { EUserWorkspaceRoles } from "@constants/workspace";
 import { EIssuesStoreType } from "@constants/issue";
-// types
+
 import { TIssue } from "@servcy/types";
 
 export const WorkspaceSidebarQuickAction = observer(() => {

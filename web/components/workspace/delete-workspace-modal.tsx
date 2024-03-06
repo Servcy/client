@@ -9,7 +9,7 @@ import { useEventTracker, useWorkspace } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button, Input } from "@servcy/ui";
-// types
+
 import type { IWorkspace } from "@servcy/types";
 // constants
 import { WORKSPACE_DELETED } from "@constants/event-tracker";

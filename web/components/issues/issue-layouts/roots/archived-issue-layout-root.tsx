@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import useSWR from "swr";
 // mobx store
 import { useIssues } from "@hooks/store";
-// components
+
 import {
   ArchivedIssueListLayout,
   ArchivedIssueAppliedFiltersRoot,

@@ -11,12 +11,12 @@ import toast from "react-hot-toast";
 import { Button, CustomSelect, Input, TextArea } from "@servcy/ui";
 // icons
 import { ChevronDown } from "lucide-react";
-// types
+
 import type { IState } from "@servcy/types";
 // constants
 import { GROUP_CHOICES } from "@constants/project";
 
-// types
+
 type Props = {
   isOpen: boolean;
   projectId: string;
@@ -177,9 +177,8 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
                           {({ open }) => (
                             <>
                               <Popover.Button
-                                className={`group inline-flex items-center rounded-md bg-custom-background-100 text-base font-medium hover:text-custom-text-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-                                  open ? "text-custom-text-100" : "text-custom-text-200"
-                                }`}
+                                className={`group inline-flex items-center rounded-md bg-custom-background-100 text-base font-medium hover:text-custom-text-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${open ? "text-custom-text-100" : "text-custom-text-200"
+                                  }`}
                               >
                                 <span>Color</span>
                                 {watch("color") && watch("color") !== "" && (
@@ -191,9 +190,8 @@ export const CreateStateModal: React.FC<Props> = observer((props) => {
                                   />
                                 )}
                                 <ChevronDown
-                                  className={`ml-2 h-5 w-5 group-hover:text-custom-text-200 ${
-                                    open ? "text-gray-600" : "text-gray-400"
-                                  }`}
+                                  className={`ml-2 h-5 w-5 group-hover:text-custom-text-200 ${open ? "text-gray-600" : "text-gray-400"
+                                    }`}
                                   aria-hidden="true"
                                 />
                               </Popover.Button>

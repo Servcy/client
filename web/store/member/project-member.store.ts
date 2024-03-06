@@ -4,7 +4,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils";
 // services
 import { ProjectMemberService } from "@services/project";
-// types
+
 import { IProjectBulkAddFormData, IProjectMember, IProjectMembership, IUserLite } from "@servcy/types";
 import { RootStore } from "@store/root.store";
 // constants

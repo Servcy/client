@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { observer } from "mobx-react-lite";
-// components
+
 import { PagesListView } from "@components/pages/pages-list";
 
 // ui

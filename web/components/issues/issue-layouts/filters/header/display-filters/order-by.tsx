@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-// components
+
 import { FilterHeader, FilterOption } from "@components/issues";
-// types
+
 import { TIssueOrderByOptions } from "@servcy/types";
 // constants
 import { ISSUE_ORDER_BY_OPTIONS } from "@constants/issue";

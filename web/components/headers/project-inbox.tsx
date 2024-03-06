@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 import { useProject } from "@hooks/store";
 // ui
 import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui";
-// components
+
 import { CreateInboxIssueModal } from "@components/inbox";
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle";
 import { BreadcrumbLink } from "@components/common";

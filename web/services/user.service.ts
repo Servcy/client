@@ -1,6 +1,6 @@
 // services
 import { APIService } from "@services/api.service";
-// types
+
 import type {
   IInstanceAdminStatus,
   IUser,
@@ -32,8 +32,8 @@ export class UserService extends APIService {
     params: any
   ): Promise<
     | {
-        [key: string]: TIssue[];
-      }
+      [key: string]: TIssue[];
+    }
     | TIssue[]
   > {
     return this.get(`/api/workspaces/${workspaceSlug}/my-issues/`, {

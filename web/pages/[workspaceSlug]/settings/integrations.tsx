@@ -9,13 +9,13 @@ import { IntegrationService } from "@services/integrations";
 // layouts
 import { AppLayout } from "@layouts/app-layout";
 import { WorkspaceSettingLayout } from "@layouts/settings-layout";
-// components
+
 import { SingleIntegrationCard } from "@components/integration";
 import { WorkspaceSettingHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 // ui
 import { IntegrationAndImportExportBanner, IntegrationsSettingsLoader } from "@components/ui";
-// types
+
 import { NextPageWithLayout } from "@lib/types";
 // fetch-keys
 import { APP_INTEGRATIONS } from "@constants/fetch-keys";

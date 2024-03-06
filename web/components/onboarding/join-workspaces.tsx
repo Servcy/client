@@ -3,9 +3,9 @@ import { Controller, useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 
 import { useUser } from "@hooks/store";
-// components
+
 import { Invitations, OnboardingSidebar, OnboardingStepIndicator, Workspace } from "@components/onboarding";
-// types
+
 import { IWorkspace, TOnboardingSteps } from "@servcy/types";
 
 type Props = {

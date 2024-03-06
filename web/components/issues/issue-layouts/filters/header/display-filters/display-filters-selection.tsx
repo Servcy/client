@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 
-// components
+
 import {
   FilterDisplayProperties,
   FilterExtraOptions,
@@ -10,7 +10,7 @@ import {
   FilterOrderBy,
   FilterSubGroupBy,
 } from "@components/issues";
-// types
+
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, TIssueGroupByOptions } from "@servcy/types";
 import { ILayoutDisplayFiltersOptions } from "@constants/issue";
 

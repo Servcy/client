@@ -6,14 +6,14 @@ import { LinkIcon, PencilIcon, StarIcon, TrashIcon } from "lucide-react";
 
 import { useProjectView, useUser } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@components/views";
 // ui
 import { CustomMenu } from "@servcy/ui";
 // helpers
 import { calculateTotalFilters } from "@helpers/filter.helper";
 import { copyUrlToClipboard } from "@helpers/string.helper";
-// types
+
 import { IProjectView } from "@servcy/types";
 // constants
 import { EUserProjectRoles } from "@constants/project";

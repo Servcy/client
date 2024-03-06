@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-// components
+
 import { FilterHeader, FilterOption } from "@components/issues";
 
 import { useProject } from "@hooks/store";

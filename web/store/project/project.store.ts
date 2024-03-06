@@ -2,7 +2,7 @@ import set from "lodash/set";
 import sortBy from "lodash/sortBy";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
-// types
+
 import { IProject } from "@servcy/types";
 import { RootStore } from "../root.store";
 // services

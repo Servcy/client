@@ -7,12 +7,12 @@ import { Check, ChevronDown, Search } from "lucide-react";
 import { useProject } from "@hooks/store";
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down";
 import useOutsideClickDetector from "@hooks/use-outside-click-detector";
-// components
+
 import { DropdownButton } from "./buttons";
 // helpers
 import { cn } from "@helpers/common.helper";
 import { renderEmoji } from "@helpers/emoji.helper";
-// types
+
 import { TDropdownProps } from "./types";
 // constants
 import { BUTTON_VARIANTS_WITH_TEXT } from "./constants";

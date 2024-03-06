@@ -16,7 +16,7 @@ import { Button, Loader, Tooltip } from "@servcy/ui";
 import GithubLogo from "public/services/github.png";
 import SlackLogo from "public/services/slack.png";
 import { CheckCircle } from "lucide-react";
-// types
+
 import { IAppIntegration, IWorkspaceIntegration } from "@servcy/types";
 // fetch-keys
 import { WORKSPACE_INTEGRATIONS } from "@constants/fetch-keys";

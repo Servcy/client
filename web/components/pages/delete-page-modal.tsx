@@ -8,7 +8,7 @@ import { useEventTracker, usePage } from "@hooks/store";
 import toast from "react-hot-toast";
 // ui
 import { Button } from "@servcy/ui";
-// types
+
 import { useProjectPages } from "@hooks/store/use-project-page";
 // constants
 import { PAGE_DELETED } from "@constants/event-tracker";

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-// components
+
 import { FilterHeader, FilterOption } from "@components/issues";
 // ui
 import { Loader, StateGroupIcon } from "@servcy/ui";
-// types
+
 import { IState } from "@servcy/types";
 
 type Props = {

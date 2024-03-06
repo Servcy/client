@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useWebhook } from "@hooks/store";
 // ui
 import { ToggleSwitch } from "@servcy/ui";
-// types
+
 import { IWebhook } from "@servcy/types";
 
 interface IWebhookListItem {

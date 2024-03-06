@@ -5,9 +5,9 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import { useEventTracker, useModule, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
-// components
+
 import { ModuleForm } from "@components/modules";
-// types
+
 import type { IModule } from "@servcy/types";
 // constants
 import { MODULE_CREATED, MODULE_UPDATED } from "@constants/event-tracker";

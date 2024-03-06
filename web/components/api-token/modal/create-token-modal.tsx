@@ -5,12 +5,12 @@ import { Dialog, Transition } from "@headlessui/react";
 // services
 import { APITokenService } from "@services/api_token.service";
 import toast from "react-hot-toast";
-// components
+
 import { CreateApiTokenForm, GeneratedTokenDetails } from "@components/api-token";
 // helpers
 import { csvDownload } from "@helpers/download.helper";
 import { renderFormattedDate } from "@helpers/date-time.helper";
-// types
+
 import { IApiToken } from "@servcy/types";
 // fetch-keys
 import { API_TOKENS_LIST } from "@constants/fetch-keys";

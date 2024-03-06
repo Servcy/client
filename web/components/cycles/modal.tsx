@@ -6,9 +6,9 @@ import { CycleService } from "@services/cycle.service";
 import { useEventTracker, useCycle, useProject } from "@hooks/store";
 import toast from "react-hot-toast";
 import useLocalStorage from "@hooks/use-local-storage";
-// components
+
 import { CycleForm } from "@components/cycles";
-// types
+
 import type { CycleDateCheckData, ICycle, TCycleView } from "@servcy/types";
 // constants
 import { CYCLE_CREATED, CYCLE_UPDATED } from "@constants/event-tracker";

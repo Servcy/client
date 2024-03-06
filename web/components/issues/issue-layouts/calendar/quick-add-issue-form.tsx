@@ -11,7 +11,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector";
 import { createIssuePayload } from "@helpers/issue.helper";
 // icons
 import { PlusIcon } from "lucide-react";
-// types
+
 import { TIssue } from "@servcy/types";
 // constants
 import { ISSUE_CREATED } from "@constants/event-tracker";
@@ -166,9 +166,8 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
       {isOpen && (
         <div
           ref={ref}
-          className={`z-20 w-full transition-all ${
-            isOpen ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0"
-          }`}
+          className={`z-20 w-full transition-all ${isOpen ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0"
+            }`}
         >
           <form
             onSubmit={handleSubmit(onSubmitHandler)}

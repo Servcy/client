@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 
 import { useApplication, useUser } from "@hooks/store";
 import { useProjectPages } from "@hooks/store/use-project-specific-pages";
-// components
+
 import { PagesListView } from "@components/pages/pages-list";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
 // ui

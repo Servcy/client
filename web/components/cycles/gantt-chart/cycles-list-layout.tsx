@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { observer } from "mobx-react-lite";
 
 import { useCycle, useUser } from "@hooks/store";
-// components
+
 import { GanttChartRoot, IBlockUpdateData, CycleGanttSidebar } from "@components/gantt-chart";
 import { CycleGanttBlock } from "@components/cycles";
-// types
+
 import { ICycle } from "@servcy/types";
 // constants
 import { EUserProjectRoles } from "@constants/project";

@@ -1,7 +1,7 @@
 import { makeObservable } from "mobx";
 // services
 import { IssueArchiveService, IssueDraftService, IssueService } from "@services/issue";
-// types
+
 import { TIssue } from "@servcy/types";
 import { computedFn } from "mobx-utils";
 import { IIssueDetail } from "./root.store";

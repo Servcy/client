@@ -2,7 +2,7 @@ import React from "react";
 
 // ui
 import { Tooltip } from "@servcy/ui";
-// types
+
 import { TIssueLayouts } from "@servcy/types";
 // constants
 import { ISSUE_LAYOUTS } from "@constants/issue";
@@ -22,17 +22,15 @@ export const LayoutSelection: React.FC<Props> = (props) => {
         <Tooltip key={layout.key} tooltipContent={layout.title}>
           <button
             type="button"
-            className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${
-              selectedLayout == layout.key ? "bg-custom-background-100 shadow-custom-shadow-2xs" : ""
-            }`}
+            className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${selectedLayout == layout.key ? "bg-custom-background-100 shadow-custom-shadow-2xs" : ""
+              }`}
             onClick={() => onChange(layout.key)}
           >
             <layout.icon
               size={14}
               strokeWidth={2}
-              className={`h-3.5 w-3.5 ${
-                selectedLayout == layout.key ? "text-custom-text-100" : "text-custom-text-200"
-              }`}
+              className={`h-3.5 w-3.5 ${selectedLayout == layout.key ? "text-custom-text-100" : "text-custom-text-200"
+                }`}
             />
           </button>
         </Tooltip>
