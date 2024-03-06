@@ -1,6 +1,6 @@
 
 import { ExternalLinkIcon, Tooltip } from "@servcy/ui";
-// icons
+
 import { Pencil, Trash2, LinkIcon } from "lucide-react";
 
 import { calculateTimeAgo } from "@helpers/date-time.helper";

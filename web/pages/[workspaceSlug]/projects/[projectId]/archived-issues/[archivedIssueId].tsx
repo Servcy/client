@@ -12,7 +12,7 @@ import { ProjectArchivedIssueDetailsHeader } from "@components/headers";
 import { PageHead } from "@components/core";
 
 import { ArchiveIcon, Button, Loader } from "@servcy/ui";
-// icons
+
 import { RotateCcw } from "lucide-react";
 
 import { NextPageWithLayout } from "@lib/types";

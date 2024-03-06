@@ -15,7 +15,7 @@ import ProgressChart from "@components/core/sidebar/progress-chart";
 import { CycleDeleteModal } from "@components/cycles/delete-modal";
 
 import { Avatar, CustomMenu, Loader, LayersIcon } from "@servcy/ui";
-// icons
+
 import { ChevronDown, LinkIcon, Trash2, UserCircle2, AlertCircle, ChevronRight, CalendarClock } from "lucide-react";
 
 import { copyUrlToClipboard } from "@helpers/string.helper";

@@ -15,7 +15,7 @@ import {
 } from "@components/inbox";
 
 import { Button } from "@servcy/ui";
-// icons
+
 import { CheckCircle2, ChevronDown, ChevronUp, Clock, FileStack, Trash2, XCircle } from "lucide-react";
 
 import type { TInboxStatus, TInboxDetailedStatus } from "@servcy/types";

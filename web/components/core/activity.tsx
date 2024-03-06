@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 // store hooks
 import { useEstimate, useLabel } from "@hooks/store";
-// icons
+
 import { Tooltip, BlockedIcon, BlockerIcon, RelatedIcon, LayersIcon, DiceIcon } from "@servcy/ui";
 import {
   TagIcon,

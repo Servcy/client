@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import router from "next/router";
 //components
 import { CustomMenu } from "@servcy/ui";
-// icons
+
 import { Calendar, ChevronDown, Kanban, List } from "lucide-react";
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types";
 

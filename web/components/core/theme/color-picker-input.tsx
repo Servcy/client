@@ -15,7 +15,7 @@ import { ColorResult, SketchPicker } from "react-color";
 // component
 import { Popover, Transition } from "@headlessui/react";
 import { Input } from "@servcy/ui";
-// icons
+
 import { Palette } from "lucide-react";
 
 import { IUserTheme } from "@servcy/types";

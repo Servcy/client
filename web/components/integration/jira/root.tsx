@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { mutate } from "swr";
 import { FormProvider, useForm } from "react-hook-form";
-// icons
+
 import { ArrowLeft, Check, List, Settings } from "lucide-react";
 
 import { JiraImporterService } from "@services/integrations";

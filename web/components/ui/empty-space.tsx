@@ -2,7 +2,7 @@
 import Link from "next/link";
 // react
 import React from "react";
-// icons
+
 import { ChevronRight } from "lucide-react";
 
 type EmptySpaceProps = {

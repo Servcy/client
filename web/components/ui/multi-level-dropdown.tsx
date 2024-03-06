@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
 import { Loader } from "@servcy/ui";
-// icons
+
 import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 type MultiLevelDropdownProps = {

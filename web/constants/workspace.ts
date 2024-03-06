@@ -7,7 +7,7 @@ import JSONLogo from "public/services/json.svg";
 
 import { TStaticViewTypes } from "@servcy/types";
 import { Props } from "@components/icons/types";
-// icons
+
 import { SettingIcon } from "@components/icons";
 
 export enum EUserWorkspaceRoles {

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useInboxIssues } from "@hooks/store";
 
 import { MultiLevelDropdown } from "@components/ui";
-// icons
+
 import { PriorityIcon } from "@servcy/ui";
 
 import { TInboxIssueFilterOptions } from "@servcy/types";

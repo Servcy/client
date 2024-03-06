@@ -9,7 +9,7 @@ import { IssueService } from "@services/issue";
 import toast from "react-hot-toast";
 
 import { Button, LayersIcon } from "@servcy/ui";
-// icons
+
 import { Search } from "lucide-react";
 
 import { IUser, TIssue } from "@servcy/types";

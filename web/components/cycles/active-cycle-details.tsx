@@ -24,7 +24,7 @@ import ProgressChart from "@components/core/sidebar/progress-chart";
 import { ActiveCycleProgressStats } from "@components/cycles";
 import { StateDropdown } from "@components/dropdowns";
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state";
-// icons
+
 import { ArrowRight, CalendarCheck, CalendarDays, Star, Target } from "lucide-react";
 
 import { renderFormattedDate, findHowManyDaysLeft, renderFormattedDateWithoutYear } from "@helpers/date-time.helper";

@@ -1,6 +1,6 @@
 
 import { CustomMenu } from "@servcy/ui";
-// icons
+
 import { Trash2 } from "lucide-react";
 
 import { renderFormattedDate } from "@helpers/date-time.helper";

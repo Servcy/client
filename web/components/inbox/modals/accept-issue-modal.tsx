@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-// icons
+
 import { CheckCircle } from "lucide-react";
 
 import { Button } from "@servcy/ui";

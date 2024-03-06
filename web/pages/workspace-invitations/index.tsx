@@ -11,7 +11,7 @@ import { WorkspaceService } from "@services/workspace.service";
 import DefaultLayout from "@layouts/default-layout";
 
 import { Spinner } from "@servcy/ui";
-// icons
+
 import { EmptySpace, EmptySpaceItem } from "@components/ui/empty-space";
 
 import { NextPageWithLayout } from "@lib/types";

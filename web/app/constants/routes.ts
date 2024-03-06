@@ -1,4 +1,4 @@
-// Icons
+
 import { AiOutlineApi, AiOutlineHome, AiOutlineInbox } from "react-icons/ai";
 
 export const authRoutes = ["/login"];

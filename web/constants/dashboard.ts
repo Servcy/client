@@ -11,7 +11,7 @@ import { TDurationFilterOptions, TIssuesListTypes, TStateGroups } from "@servcy/
 import { Props } from "@components/icons/types";
 
 import { EUserWorkspaceRoles } from "./workspace";
-// icons
+
 import { ContrastIcon } from "@servcy/ui";
 import { BarChart2, Briefcase, CheckCircle, LayoutGrid } from "lucide-react";
 

@@ -1,5 +1,5 @@
 import React from "react";
-// icons
+
 import { Activity, CircleUser, KeyRound, LucideProps, Settings2 } from "lucide-react";
 
 export const PROFILE_ACTION_LINKS: {

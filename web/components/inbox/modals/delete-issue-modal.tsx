@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Dialog, Transition } from "@headlessui/react";
 
 import { useProject } from "@hooks/store";
-// icons
+
 import { AlertTriangle } from "lucide-react";
 
 import { Button } from "@servcy/ui";

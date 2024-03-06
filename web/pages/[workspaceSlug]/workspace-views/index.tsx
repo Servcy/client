@@ -8,7 +8,7 @@ import { GlobalDefaultViewListItem, GlobalViewsList } from "@components/workspac
 import { GlobalIssuesHeader } from "@components/headers";
 
 import { Input } from "@servcy/ui";
-// icons
+
 import { Search } from "lucide-react";
 
 import { NextPageWithLayout } from "@lib/types";

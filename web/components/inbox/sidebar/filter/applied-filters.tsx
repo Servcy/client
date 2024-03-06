@@ -2,7 +2,7 @@ import { FC } from "react";
 import { observer } from "mobx-react-lite";
 // mobx store
 import { useInboxIssues } from "@hooks/store";
-// icons
+
 import { X } from "lucide-react";
 import { PriorityIcon } from "@servcy/ui";
 

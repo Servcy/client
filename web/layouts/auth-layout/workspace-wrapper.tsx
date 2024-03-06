@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { observer } from "mobx-react-lite";
 
 import { useLabel, useMember, useProject, useUser } from "@hooks/store";
-// icons
+
 import { Button, Spinner } from "@servcy/ui";
 
 export interface IWorkspaceAuthWrapper {

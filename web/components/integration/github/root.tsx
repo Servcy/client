@@ -19,7 +19,7 @@ import {
   GithubImportUsers,
   GithubImportConfirm,
 } from "@components/integration";
-// icons
+
 import { UserGroupIcon } from "@servcy/ui";
 import { ArrowLeft, Check, List, Settings, UploadCloud } from "lucide-react";
 // images

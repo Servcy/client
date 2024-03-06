@@ -2,7 +2,7 @@
 import Image from "next/image.js";
 
 import { sidebarOptions } from "@/constants/routes";
-// Icons
+
 import { AiOutlinePoweroff, AiOutlineSetting } from "react-icons/ai";
 
 import cn from "classnames";

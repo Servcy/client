@@ -15,7 +15,7 @@ import { DeactivateAccountModal } from "@components/account";
 import { ImagePickerPopover, PageHead, UserImageUploadModal } from "@components/core";
 
 import { Button, CustomSearchSelect, CustomSelect, Input, Spinner } from "@servcy/ui";
-// icons
+
 import { ChevronDown, User2 } from "lucide-react";
 
 import type { IUser } from "@servcy/types";

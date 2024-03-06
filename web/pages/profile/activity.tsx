@@ -11,7 +11,7 @@ import { ProfileSettingsLayout } from "@layouts/settings-layout";
 
 import { ActivityIcon, ActivityMessage, IssueLink, PageHead } from "@components/core";
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor";
-// icons
+
 import { History, MessageSquare } from "lucide-react";
 
 import { ActivitySettingsLoader } from "@components/ui";

@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { observer } from "mobx-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-// icons
+
 import { CalendarDays } from "lucide-react";
 
 import { useInboxIssues, useIssueDetail, useProject } from "@hooks/store";

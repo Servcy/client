@@ -4,7 +4,7 @@ import { setCookie } from "cookies-next";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-// Icons
+
 import { BiLogIn } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
 import { RiWhatsappLine } from "react-icons/ri";

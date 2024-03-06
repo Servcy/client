@@ -1,4 +1,4 @@
-// icons
+
 import { Globe2, Lock, LucideIcon } from "lucide-react";
 import { SettingIcon } from "@components/icons";
 

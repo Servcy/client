@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { IssueService } from "@services/issue";
 
 import { Button, LayersIcon } from "@servcy/ui";
-// icons
+
 import { Search } from "lucide-react";
 // fetch-keys
 import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys";

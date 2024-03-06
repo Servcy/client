@@ -1,4 +1,4 @@
-// icons
+
 import { Calendar, GanttChartSquare, Kanban, List, Sheet } from "lucide-react";
 
 import {
