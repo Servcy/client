@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { PenSquare, X } from "lucide-react"
 import { observer } from "mobx-react"
 

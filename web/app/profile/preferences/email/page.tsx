@@ -1,6 +1,5 @@
 "use client"
 
-import { NextPageWithWrapper } from "@/types/index"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
@@ -10,6 +9,8 @@ import { EmailSettingsLoader } from "@components/ui"
 import { UserService } from "@services/user.service"
 
 import { ProfilePreferenceSettingsLayout } from "@wrappers/settings/profile/preferences"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const userService = new UserService()
 

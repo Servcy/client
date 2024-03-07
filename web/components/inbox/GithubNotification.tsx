@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import { GithubNotificationProps } from "@/types/integrations/github"
+import type { GithubNotificationProps } from "@servcy/types"
 import { Tag, Tooltip } from "antd"
 import { BiRightArrowAlt } from "react-icons/bi"
 import { HiExternalLink } from "react-icons/hi"

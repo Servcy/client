@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"

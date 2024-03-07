@@ -1,3 +1,5 @@
+import { NextPage } from "next"
+
 export * from "./users"
 export * from "./workspace"
 export * from "./cycles"
@@ -14,6 +16,11 @@ export * from "./estimate"
 
 export * from "./analytics"
 export * from "./calendar"
+export * from "./inbox"
+export * from "./integration"
+export * from "./external"
+export * from "./jwt"
+export * from "./otp-input"
 export * from "./notifications"
 export * from "./waitlist"
 export * from "./reaction"
@@ -31,3 +38,7 @@ export type NestedKeyOf<ObjectType extends object> = {
             : `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
         : `${Key}`
 }[keyof ObjectType & (string | number)]
+
+export type NextPageWithWrapper<P = {}, IP = P> = NextPage<P, IP> & {
+    hasWrapper?: boolean
+}

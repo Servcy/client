@@ -1,4 +1,4 @@
-import { TrelloNotificationProps } from "@/types/integrations/trello"
+import { TrelloNotificationProps } from "@servcy/types"
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"

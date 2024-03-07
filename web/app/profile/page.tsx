@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import type { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Disclosure, Transition } from "@headlessui/react"
 import { ChevronDown, User2 } from "lucide-react"
 import { observer } from "mobx-react-lite"

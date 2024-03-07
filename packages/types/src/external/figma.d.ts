@@ -1,9 +1,9 @@
-export interface Mention {
+export interface FigmaMention {
     id: string
     handle: string
 }
 
-export interface Comment {
+export interface FigmaComment {
     text?: string
     mention?: string
 }
@@ -37,6 +37,6 @@ export interface FigmaNotificationProps {
         key: string
         name: string
     }[]
-    comment?: Comment[]
-    mentions?: Mention[]
+    comment?: FigmaComment[]
+    mentions?: FigmaMention[]
 }

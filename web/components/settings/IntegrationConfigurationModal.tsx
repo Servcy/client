@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 
-import { Integration, IntegrationEvent, UserIntegration } from "@/types/apps/integration"
 import { Card, Checkbox, Modal } from "antd"
 
 import FigmaConfiguration from "@components/settings/FigmaConfiguration"
@@ -15,13 +14,11 @@ import {
     fetchUserIntegrations,
 } from "@services/integration"
 
-export default function IntegrationConfigurationModal({
-    selectedIntegration,
-    onClose,
-}: {
-    selectedIntegration: Integration
-    onClose: () => void
-}) {
+import type { Integration, IntegrationEvent, UserIntegration } from "@servcy/types"
+
+export default function IntegrationConfigurationModal(
+    { selectedIntegration, onClose }: { selectedIntegration: Integration; onClose: () => void }
+) {
     const [loading, setLoading] = useState<boolean>(false)
     const [events, setEvents] = useState<IntegrationEvent[]>([])
     const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([])

@@ -1,20 +1,20 @@
 export interface JiraNotificationData {
-    issue: Issue
+    issue: JiraIssue
     issue_event_type_name: string
-    comment?: Comment
-    changelog?: Changelog
+    comment?: JiraComment
+    changelog?: JiraChangelog
     webhookEvent: string
-    user: User
+    user: JiraUser
     matchedWebhookIds: number[]
     timestamp: number
 }
 
-export interface Changelog {
+export interface JiraChangelog {
     id: string
-    items: Item[]
+    items: JiraItem[]
 }
 
-export interface Item {
+export interface JiraItem {
     field: string
     fieldtype: string
     fieldId: string
@@ -26,77 +26,77 @@ export interface Item {
     tmpToAccountId: string
 }
 
-export interface Issue {
+export interface JiraIssue {
     id: string
     self: string
     key: string
-    fields: Fields
+    fields: JiraFields
 }
 
-export interface Fields {
+export interface JiraFields {
     statuscategorychangedate: string
-    issuetype?: Issuetype
+    issuetype?: JiraIssuetype
     timespent?: string
-    project?: Project
+    project?: JiraProject
     fixVersions: any[]
     aggregatetimespent?: string
     resolution?: string
     resolutiondate?: string
     workratio: number
-    watches: Watches
+    watches: JiraWatches
     lastViewed?: string
-    issuerestriction: Issuerestriction
+    issuerestriction: JiraIssuerestriction
     created: string
-    priority?: Priority
+    priority?: JiraPriority
     labels: any[]
     aggregatetimeoriginalestimate?: string
     timeestimate?: string
     versions: any[]
     issuelinks: any[]
-    assignee?: User
+    assignee?: JiraUser
     updated: string
-    status?: Status
+    status?: JiraStatus
     components: any[]
     timeoriginalestimate?: string
     description?: string
-    timetracking: Timetracking
+    timetracking: JiraTimetracking
     security?: string
     aggregatetimeestimate?: string
     attachment: any[]
     summary: string
-    creator: User
+    creator: JiraUser
     subtasks: any[]
-    reporter: User
-    aggregateprogress: Progress
+    reporter: JiraUser
+    aggregateprogress: JiraProgress
     environment?: string
     duedate?: string
-    progress: Progress
-    votes: Votes
+    progress: JiraProgress
+    votes: JiraVotes
 }
 
-export interface Progress {
+export interface JiraProgress {
     progress: number
     total: number
 }
 
-export interface User {
+export interface JiraUser {
     self: string
     accountId: string
-    avatarUrls: AvatarUrls
+    avatarUrls: JiraAvatarUrls
     displayName: string
     active: boolean
     timeZone: string
     accountType: string
 }
 
-export interface Issuerestriction {
-    issuerestrictions: Timetracking
+export interface JiraIssuerestriction {
+    issuerestrictions: JiraTimetracking
     shouldDisplay: boolean
 }
 
-export interface Timetracking {}
+export interface JiraTimetracking {}
 
-export interface Issuetype {
+export interface JiraIssuetype {
     self: string
     id: string
     description: string
@@ -108,33 +108,33 @@ export interface Issuetype {
     hierarchyLevel: number
 }
 
-export interface Priority {
+export interface JiraPriority {
     self: string
     iconUrl: string
     name: string
     id: string
 }
 
-export interface Project {
+export interface JiraProject {
     self: string
     id: string
     key: string
     name: string
     projectTypeKey: string
     simplified: boolean
-    avatarUrls: AvatarUrls
+    avatarUrls: JiraAvatarUrls
 }
 
-export interface Status {
+export interface JiraStatus {
     self: string
     description: string
     iconUrl: string
     name: string
     id: string
-    statusCategory: StatusCategory
+    statusCategory: JiraStatusCategory
 }
 
-export interface StatusCategory {
+export interface JiraStatusCategory {
     self: string
     id: number
     key: string
@@ -142,40 +142,40 @@ export interface StatusCategory {
     name: string
 }
 
-export interface Votes {
+export interface JiraVotes {
     self: string
     votes: number
     hasVoted: boolean
 }
 
-export interface Watches {
+export interface JiraWatches {
     self: string
     watchCount: number
     isWatching: boolean
 }
 
-export interface Comment {
+export interface JiraComment {
     self: string
     id: string
-    author: Author
+    author: JiraAuthor
     body: string
-    updateAuthor: Author
+    updateAuthor: JiraAuthor
     created: string
     updated: string
     jsdPublic: boolean
 }
 
-export interface Author {
+export interface JiraAuthor {
     self: string
     accountId: string
-    avatarUrls: AvatarUrls
+    avatarUrls: JiraAvatarUrls
     displayName: string
     active: boolean
     timeZone: string
     accountType: string
 }
 
-export interface AvatarUrls {
+export interface JiraAvatarUrls {
     "48x48": string
     "24x24": string
     "16x16": string
@@ -184,5 +184,5 @@ export interface AvatarUrls {
 
 export interface JiraNotificationProps {
     data: JiraNotificationData
-    cause: User
+    cause: JiraUser
 }

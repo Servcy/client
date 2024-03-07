@@ -2,7 +2,7 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import { Integration, UserIntegration } from "@/types/apps/integration"
+import type { Integration, UserIntegration } from "@servcy/types"
 import { Button, Input, Select } from "antd"
 import toast from "react-hot-toast"
 import { MdOutlineSyncAlt } from "react-icons/md"

@@ -1,12 +1,13 @@
 import Image from "next/image"
 
-import { AsanaNotificationProps } from "@/types/integrations/asana"
 import { Avatar, Tag, Tooltip } from "antd"
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"
 
 import { getCleanLink } from "@helpers/common.helper"
+
+import type { AsanaNotificationProps } from "@servcy/types"
 
 const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
     let link = "#null"

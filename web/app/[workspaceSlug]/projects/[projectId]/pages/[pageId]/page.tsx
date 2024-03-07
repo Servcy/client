@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 
 import { useEffect, useRef, useState } from "react"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"

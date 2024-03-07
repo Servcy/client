@@ -2,7 +2,6 @@ import Image from "next/image"
 
 import React, { Dispatch, SetStateAction } from "react"
 
-import { InboxItem, PaginationDetails } from "@/types/apps/inbox"
 import { SyncOutlined } from "@ant-design/icons"
 import { Avatar, Button, ConfigProvider, Spin, Table, Tooltip } from "antd"
 import type { ColumnsType } from "antd/es/table"
@@ -15,33 +14,37 @@ import Cause from "@components/inbox/Cause"
 
 import { disableNotificationType } from "@services/integration"
 
-const InboxItems = ({
-    setPage,
-    page,
-    inboxItems,
-    inboxPagination,
-    archiveItems,
-    setSelectedRowIndex,
-    loading,
-    deleteItems,
-    setIsInboxItemModalVisible,
-    setSelectedItemIds,
-    readItem,
-    activeTab,
-}: {
-    setPage: Dispatch<SetStateAction<number>>
-    page: number
-    readItem: (id: string | undefined) => void
-    inboxItems: InboxItem[]
-    inboxPagination: PaginationDetails
-    loading: boolean
-    activeTab: string
-    archiveItems: (_: React.Key[]) => void
-    deleteItems: (_: number[]) => void
-    setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
-    setSelectedRowIndex: Dispatch<SetStateAction<number>>
-    setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
-}) => {
+import type { InboxItem, PaginationDetails } from "@servcy/types"
+
+const InboxItems = (
+    {
+        setPage,
+        page,
+        inboxItems,
+        inboxPagination,
+        archiveItems,
+        setSelectedRowIndex,
+        loading,
+        deleteItems,
+        setIsInboxItemModalVisible,
+        setSelectedItemIds,
+        readItem,
+        activeTab,
+    }: {
+        setPage: Dispatch<SetStateAction<number>>
+        page: number
+        readItem: (id: string | undefined) => void
+        inboxItems: InboxItem[]
+        inboxPagination: PaginationDetails
+        loading: boolean
+        activeTab: string
+        archiveItems: (_: React.Key[]) => void
+        deleteItems: (_: number[]) => void
+        setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
+        setSelectedRowIndex: Dispatch<SetStateAction<number>>
+        setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
+    }
+) => {
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[]) => {
             setSelectedItemIds(selectedRowKeys)

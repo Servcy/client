@@ -5,7 +5,6 @@ import Link from "next/link.js"
 
 import { useEffect, useState } from "react"
 
-import type { NextPageWithWrapper } from "@/types/index"
 import { GoogleLogin } from "@react-oauth/google"
 import { Button, Input } from "antd"
 import { observer } from "mobx-react-lite"
@@ -23,6 +22,7 @@ import { AuthService } from "@services/auth.service"
 
 import { validateEmail, validateOtp, validatePhone } from "@helpers/validation.helper"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
 
 const authService = new AuthService()

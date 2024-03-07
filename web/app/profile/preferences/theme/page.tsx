@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"

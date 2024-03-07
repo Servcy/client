@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 
 import { Fragment, useState } from "react"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"

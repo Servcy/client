@@ -4,7 +4,7 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import { Integration } from "@/types/apps/integration"
+import type { Integration } from "@servcy/types"
 import { Button, Card, Input, Select, Skeleton, Tag } from "antd"
 import toast from "react-hot-toast"
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai"

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/router"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react"
 import emptyView from "public/empty-state/view.svg"
 import useSWR from "swr"

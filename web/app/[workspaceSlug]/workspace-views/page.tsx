@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Search } from "lucide-react"
 import { observer } from "mobx-react"
 

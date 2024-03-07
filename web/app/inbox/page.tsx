@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 
-import { InboxItem, PaginationDetails } from "@/types/apps/inbox"
 import { Button, ConfigProvider, Input, Select, Tabs } from "antd"
 import cn from "classnames"
 import debounce from "lodash/debounce"
@@ -28,6 +27,8 @@ import {
     fetchInbox as fetchInboxApi,
     readItem as readItemApi,
 } from "@services/inbox"
+
+import type { InboxItem, PaginationDetails } from "@servcy/types"
 
 const tabItems = [
     {

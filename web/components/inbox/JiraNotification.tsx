@@ -1,9 +1,10 @@
 import Image from "next/image.js"
 
-import { JiraNotificationProps } from "@/types/integrations/jira"
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"
+
+import type { JiraNotificationProps } from "@servcy/types"
 
 const TrelloNotification = ({ data, cause }: JiraNotificationProps) => {
     const projectUrl = data.issue.self.split("/rest/api")[0]

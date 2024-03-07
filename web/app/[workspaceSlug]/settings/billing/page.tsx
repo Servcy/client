@@ -1,6 +1,6 @@
 "use client"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react-lite"
 
 import { PageHead } from "@components/core"

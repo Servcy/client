@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import { SlackMessageElementProps, SlackMessageProps } from "@/types/integrations/slack"
+import { SlackMessageElementProps, SlackMessageProps } from "@servcy/types"
 import cn from "classnames"
 import { HiExternalLink, HiPaperClip } from "react-icons/hi"
 

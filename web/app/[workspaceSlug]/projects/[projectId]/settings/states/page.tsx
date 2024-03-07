@@ -1,13 +1,13 @@
 "use client"
 
-import { NextPageWithWrapper } from "@/types/index"
-
 import { ProjectSettingHeader } from "@components/headers"
 import { ProjectSettingStateList } from "@components/states"
 
 // layout
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const StatesSettingsPage: NextPageWithWrapper = () => (
     <AppWrapper withProjectWrapper header={<ProjectSettingHeader title="States Settings" />}>

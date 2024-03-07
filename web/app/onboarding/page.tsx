@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 
 import { useEffect, useState } from "react"
 
-import { NextPageWithWrapper } from "@/types/index"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDown } from "lucide-react"
 import { observer } from "mobx-react-lite"

@@ -1,10 +1,11 @@
-import { Attachment, InboxItem } from "@/types/apps/inbox"
 import { Button, Modal } from "antd"
 import * as DOMPurify from "dompurify"
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa"
 import { HiPaperClip } from "react-icons/hi"
 
 import { downloadFile } from "@helpers/file.helper"
+
+import type { Attachment, InboxItem } from "@servcy/types"
 
 import AsanaNotification from "./AsanaNotification"
 import FigmaNotification from "./FigmaNotification"
@@ -14,21 +15,23 @@ import NotionComment from "./NotionComment"
 import SlackMessage from "./SlackMessage"
 import TrelloNotification from "./TrelloNotification"
 
-const InboxItemModal = ({
-    selectedRow,
-    setIsInboxItemModalVisible,
-    selectedRowIndex,
-    setSelectedRowIndex,
-    totalInboxItems,
-    readItem,
-}: {
-    selectedRow: InboxItem
-    setIsInboxItemModalVisible: (value: boolean) => void
-    selectedRowIndex: number
-    setSelectedRowIndex: (value: number) => void
-    totalInboxItems: number
-    readItem: (id: string | undefined) => void
-}) => {
+const InboxItemModal = (
+    {
+        selectedRow,
+        setIsInboxItemModalVisible,
+        selectedRowIndex,
+        setSelectedRowIndex,
+        totalInboxItems,
+        readItem,
+    }: {
+        selectedRow: InboxItem
+        setIsInboxItemModalVisible: (value: boolean) => void
+        selectedRowIndex: number
+        setSelectedRowIndex: (value: number) => void
+        totalInboxItems: number
+        readItem: (id: string | undefined) => void
+    }
+) => {
     let body = selectedRow.body
     if (selectedRow.source === "Gmail" && selectedRow.cause !== "None") {
         body = Buffer.from(body, "base64").toString("utf8")
