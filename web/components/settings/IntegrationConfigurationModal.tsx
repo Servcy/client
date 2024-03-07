@@ -16,9 +16,13 @@ import {
 
 import type { Integration, IntegrationEvent, UserIntegration } from "@servcy/types"
 
-export default function IntegrationConfigurationModal(
-    { selectedIntegration, onClose }: { selectedIntegration: Integration; onClose: () => void }
-) {
+export default function IntegrationConfigurationModal({
+    selectedIntegration,
+    onClose,
+}: {
+    selectedIntegration: Integration
+    onClose: () => void
+}) {
     const [loading, setLoading] = useState<boolean>(false)
     const [events, setEvents] = useState<IntegrationEvent[]>([])
     const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([])

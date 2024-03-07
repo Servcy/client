@@ -172,7 +172,7 @@ export const WorkspaceViewForm: React.FC<Props> = observer((props) => {
                                             })
                                         }}
                                         layoutDisplayFiltersOptions={
-                                            ISSUE_DISPLAY_FILTERS_BY_LAYOUT["my_issues"]?.['spreadsheet']
+                                            ISSUE_DISPLAY_FILTERS_BY_LAYOUT["my_issues"]?.["spreadsheet"]
                                         }
                                         labels={workspaceLabels ?? undefined}
                                         memberIds={workspaceMemberIds ?? undefined}

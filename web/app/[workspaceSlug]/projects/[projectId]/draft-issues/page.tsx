@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { PenSquare, X } from "lucide-react"
 import { observer } from "mobx-react"
 
@@ -13,6 +12,8 @@ import { DraftIssueLayoutRoot } from "@components/issues/issue-layouts/roots/dra
 import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const ProjectDraftIssuesPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()

@@ -3,7 +3,6 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -13,6 +12,8 @@ import { ProjectLayoutRoot } from "@components/issues"
 import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const ProjectIssuesPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()

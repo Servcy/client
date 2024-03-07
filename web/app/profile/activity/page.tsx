@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { History, MessageSquare } from "lucide-react"
 import { observer } from "mobx-react"
 import useSWR from "swr"
@@ -22,6 +21,7 @@ import { ProfileSettingsLayout } from "@wrappers/settings"
 import { calculateTimeAgo } from "@helpers/date-time.helper"
 
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor"
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const userService = new UserService()
 

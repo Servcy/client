@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react"
 import emptyModule from "public/empty-state/module.svg"
 import useSWR from "swr"
@@ -17,6 +16,8 @@ import { useModule, useProject } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
 import { AppWrapper } from "@wrappers/app"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const ModuleIssuesPage: NextPageWithWrapper = observer(() => {
     // router

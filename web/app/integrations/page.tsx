@@ -4,7 +4,6 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import type { Integration } from "@servcy/types"
 import { Button, Card, Input, Select, Skeleton, Tag } from "antd"
 import toast from "react-hot-toast"
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai"
@@ -19,6 +18,8 @@ import { fetchIntegrations } from "@services/integration"
 import { getQueryParams } from "@helpers/common.helper"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 import { oauthUrlGenerators } from "@helpers/integration.helper"
+
+import type { Integration } from "@servcy/types"
 
 export default function Integrations(): JSX.Element {
     const [integrations, setIntegrations] = useState<Integration[]>([])

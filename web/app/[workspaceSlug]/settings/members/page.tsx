@@ -4,7 +4,6 @@ import { useRouter } from "next/router"
 
 import { useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
@@ -23,6 +22,7 @@ import { WorkspaceSettingLayout } from "@wrappers/settings"
 
 import { getUserRole } from "@helpers/user.helper"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { IWorkspaceBulkInviteFormData } from "@servcy/types"
 import { Button } from "@servcy/ui"
 

@@ -4,7 +4,6 @@ import { useRouter } from "next/router"
 
 import { Fragment } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -21,6 +20,8 @@ import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const AnalyticsPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()

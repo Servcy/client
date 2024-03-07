@@ -1,6 +1,5 @@
 "use client"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react-lite"
 
 import { PageHead } from "@components/core"
@@ -13,6 +12,7 @@ import { EUserWorkspaceRoles } from "@constants/workspace"
 import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingLayout } from "@wrappers/settings"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 const BillingSettingsPage: NextPageWithWrapper = observer(() => {

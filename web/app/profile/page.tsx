@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Disclosure, Transition } from "@headlessui/react"
 import { ChevronDown, User2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -22,7 +21,7 @@ import { FileService } from "@services/file.service"
 
 import { ProfileSettingsLayout } from "@wrappers/settings"
 
-import type { IUser } from "@servcy/types"
+import type { IUser, NextPageWithWrapper } from "@servcy/types"
 import { Button, CustomSearchSelect, Input, Spinner } from "@servcy/ui"
 
 const defaultValues: Partial<IUser> = {

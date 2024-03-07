@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
@@ -17,6 +16,7 @@ import { EUserProjectRoles } from "@constants/project"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { IProject } from "@servcy/types"
 
 const AutomationSettingsPage: NextPageWithWrapper = observer(() => {

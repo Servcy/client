@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
@@ -15,6 +14,7 @@ import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
 
 import { ProfilePreferenceSettingsLayout } from "@wrappers/settings/profile/preferences"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
 
 const ProfilePreferencesThemePage: NextPageWithWrapper = observer(() => {

@@ -6,7 +6,6 @@ import { useRouter } from "next/router"
 
 import { useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react-lite"
 import ServcyLogo from "public/logo.svg"
 
@@ -18,6 +17,7 @@ import { useUser } from "@hooks/store"
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { IWorkspace } from "@servcy/types"
 
 const CreateWorkspacePage: NextPageWithWrapper = observer(() => {

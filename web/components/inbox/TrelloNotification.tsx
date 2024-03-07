@@ -1,7 +1,8 @@
-import { TrelloNotificationProps } from "@servcy/types"
 import { HiExternalLink } from "react-icons/hi"
 import { remark } from "remark"
 import html from "remark-html"
+
+import { TrelloNotificationProps } from "@servcy/types"
 
 const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
     let link = "#null"

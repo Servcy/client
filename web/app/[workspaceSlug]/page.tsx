@@ -1,6 +1,5 @@
 "use client"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -10,6 +9,8 @@ import { WorkspaceDashboardView } from "@components/page-views"
 import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const WorkspacePage: NextPageWithWrapper = observer(() => {
     const { currentWorkspace } = useWorkspace()

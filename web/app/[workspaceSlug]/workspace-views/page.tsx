@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Search } from "lucide-react"
 import { observer } from "mobx-react"
 
@@ -16,6 +15,7 @@ import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Input } from "@servcy/ui"
 
 const WorkspaceViewsPage: NextPageWithWrapper = observer(() => {

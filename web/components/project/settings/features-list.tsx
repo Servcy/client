@@ -39,7 +39,7 @@ const PROJECT_FEATURES_LIST = [
         description: "Pages are enabled for all the projects in this workspace. Access it from the sidebar.",
         icon: <FileText className="h-4 w-4 flex-shrink-0 text-red-400" />,
         property: "page_view",
-    }
+    },
 ]
 
 export const ProjectFeaturesList: FC<Props> = observer(() => {

@@ -4,7 +4,6 @@ import { useRouter } from "next/router"
 
 import { Fragment, useCallback, useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Tab } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -24,6 +23,7 @@ import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { TCycleLayout, TCycleView } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
 

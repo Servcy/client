@@ -6,7 +6,6 @@ import { useRouter } from "next/router"
 
 import { useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { CheckCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import emptyInvitation from "public/empty-state/invitation.svg"
@@ -31,7 +30,7 @@ import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 import { truncateText } from "@helpers/string.helper"
 import { getUserRole } from "@helpers/user.helper"
 
-import type { IWorkspaceMemberInvitation } from "@servcy/types"
+import type { IWorkspaceMemberInvitation, NextPageWithWrapper } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 const workspaceService = new WorkspaceService()

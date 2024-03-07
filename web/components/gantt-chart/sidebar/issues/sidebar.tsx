@@ -32,14 +32,15 @@ export const IssueGanttSidebar: React.FC<Props> = (props) => {
         // update the sort order to the lowest if dropped at the top
         if (destination.index === 0) updatedSortOrder = (blocks[0]?.sort_order as number) - 1000
         // update the sort order to the highest if dropped at the bottom
-        else if (destination.index === blocks.length - 1) updatedSortOrder = (blocks[blocks.length - 1]?.sort_order as number) + 1000
+        else if (destination.index === blocks.length - 1)
+            updatedSortOrder = (blocks[blocks.length - 1]?.sort_order as number) + 1000
         // update the sort order to the average of the two adjacent blocks if dropped in between
         else {
             const destinationSortingOrder = blocks[destination.index]?.sort_order as number
             const relativeDestinationSortingOrder =
                 source.index < destination.index
-                    ? blocks[destination.index + 1]?.sort_order as number
-                    : blocks[destination.index - 1]?.sort_order as number
+                    ? (blocks[destination.index + 1]?.sort_order as number)
+                    : (blocks[destination.index - 1]?.sort_order as number)
 
             updatedSortOrder = (destinationSortingOrder + relativeDestinationSortingOrder) / 2
         }

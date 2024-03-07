@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react"
 import emptyView from "public/empty-state/view.svg"
 import useSWR from "swr"
@@ -15,6 +14,8 @@ import { ProjectViewLayoutRoot } from "@components/issues"
 import { useProject, useProjectView } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const ProjectViewIssuesPage: NextPageWithWrapper = observer(() => {
     // router

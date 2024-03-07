@@ -1,10 +1,11 @@
 import Image from "next/image"
 
-import { SlackMessageElementProps, SlackMessageProps } from "@servcy/types"
 import cn from "classnames"
 import { HiExternalLink, HiPaperClip } from "react-icons/hi"
 
 import { getCleanLink } from "@helpers/common.helper"
+
+import { SlackMessageElementProps, SlackMessageProps } from "@servcy/types"
 
 const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string }) => {
     const link = `https://servcy.slack.com/archives/${data.channel}/p${data.ts.replace(".", "")}`

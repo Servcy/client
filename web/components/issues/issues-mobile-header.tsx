@@ -127,7 +127,7 @@ export const IssuesMobileHeader = () => {
                             filters={issueFilters?.filters ?? {}}
                             handleFiltersUpdate={handleFiltersUpdate}
                             layoutDisplayFiltersOptions={
-                                activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT['issues']?.[activeLayout] : undefined
+                                activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT["issues"]?.[activeLayout] : undefined
                             }
                             labels={projectLabels}
                             memberIds={projectMemberIds ?? undefined}

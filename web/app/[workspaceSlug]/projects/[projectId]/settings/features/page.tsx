@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react"
 import useSWR from "swr"
 
@@ -14,6 +13,8 @@ import { useProject, useUser } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()

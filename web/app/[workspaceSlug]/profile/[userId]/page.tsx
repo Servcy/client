@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
@@ -23,6 +22,7 @@ import { UserService } from "@services/user.service"
 import { AppWrapper } from "@wrappers/app"
 import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { IUserStateDistribution, TStateGroups } from "@servcy/types"
 
 const userService = new UserService()

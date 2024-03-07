@@ -143,9 +143,7 @@ export const IssueCommentCard: FC<TIssueCommentCard> = (props) => {
                             value={watch("comment_html") ?? ""}
                             debouncedUpdatesEnabled={false}
                             customClassName="min-h-[50px] p-3 shadow-sm"
-                            onChange={(_: Object, comment_html: string) =>
-                                setValue("comment_html", comment_html)
-                            }
+                            onChange={(_: Object, comment_html: string) => setValue("comment_html", comment_html)}
                             mentionSuggestions={mentionSuggestions}
                             mentionHighlights={mentionHighlights}
                         />

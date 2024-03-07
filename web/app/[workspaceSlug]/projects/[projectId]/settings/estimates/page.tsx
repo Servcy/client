@@ -1,6 +1,5 @@
 "use client"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react-lite"
 
 import { PageHead } from "@components/core"
@@ -13,6 +12,8 @@ import { EUserProjectRoles } from "@constants/project"
 
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const EstimatesSettingsPage: NextPageWithWrapper = observer(() => {
     const {

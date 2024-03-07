@@ -74,7 +74,7 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
                 const filterKey: any = key
                 const filterValue = filters[key]?.toString() || undefined
                 if (
-                    ISSUE_DISPLAY_FILTERS_BY_LAYOUT['my_issues']?.["spreadsheet"]?.filters.includes(filterKey) &&
+                    ISSUE_DISPLAY_FILTERS_BY_LAYOUT["my_issues"]?.["spreadsheet"]?.filters.includes(filterKey) &&
                     filterKey &&
                     filterValue
                 )

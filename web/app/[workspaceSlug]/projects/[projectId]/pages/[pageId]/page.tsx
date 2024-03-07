@@ -4,7 +4,6 @@ import { useRouter } from "next/router"
 
 import { useEffect, useRef, useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
@@ -26,6 +25,7 @@ import { FileService } from "@services/file.service"
 import { AppWrapper } from "@wrappers/app"
 
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor"
+import type { NextPageWithWrapper } from "@servcy/types"
 import { IPage } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
 

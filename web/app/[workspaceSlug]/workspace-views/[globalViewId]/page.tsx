@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -15,6 +14,8 @@ import { useGlobalView, useWorkspace } from "@hooks/store"
 import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const GlobalViewIssuesPage: NextPageWithWrapper = observer(() => {
     // router

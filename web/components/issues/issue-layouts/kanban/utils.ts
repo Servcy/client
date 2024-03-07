@@ -33,7 +33,7 @@ const handleSortOrder = (destinationIssues: string[], destinationIndex: number, 
             currentIssueState = {
                 ...currentIssueState,
                 sort_order:
-                    (issueMap[destinationTopIssueId]?.sort_order + (issueMap[destinationBottomIssueId]?.sort_order)) / 2,
+                    (issueMap[destinationTopIssueId]?.sort_order + issueMap[destinationBottomIssueId]?.sort_order) / 2,
             }
         }
     } else {
@@ -97,8 +97,8 @@ export const handleDragDrop = async (
 
     if (destinationGroupByColumnId === "issue-trash-box") {
         const sourceIssues: string[] = subGroupBy
-            ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[sourceGroupByColumnId] as string[]
-            : (issueWithIds as TGroupedIssues)[sourceGroupByColumnId] as string[]
+            ? ((issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[sourceGroupByColumnId] as string[])
+            : ((issueWithIds as TGroupedIssues)[sourceGroupByColumnId] as string[])
 
         const [removed] = sourceIssues.splice(source.index, 1)
 
@@ -112,8 +112,8 @@ export const handleDragDrop = async (
         //since we are removing an id from array further down
         const sourceIssues = [
             ...(subGroupBy
-                ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[sourceGroupByColumnId] as string[]
-                : (issueWithIds as TGroupedIssues)[sourceGroupByColumnId] as string[]),
+                ? ((issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[sourceGroupByColumnId] as string[])
+                : ((issueWithIds as TGroupedIssues)[sourceGroupByColumnId] as string[])),
         ]
         const destinationIssues = subGroupBy
             ? (issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[destinationGroupByColumnId]
@@ -131,7 +131,7 @@ export const handleDragDrop = async (
         updateIssue = {
             ...updateIssue,
             ...handleSortOrder(
-                sourceDroppableId === destinationDroppableId ? sourceIssues : destinationIssues as string[],
+                sourceDroppableId === destinationDroppableId ? sourceIssues : (destinationIssues as string[]),
                 destination.index,
                 issueMap
             ),

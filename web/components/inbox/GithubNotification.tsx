@@ -1,6 +1,5 @@
 import Image from "next/image"
 
-import type { GithubNotificationProps } from "@servcy/types"
 import { Tag, Tooltip } from "antd"
 import { BiRightArrowAlt } from "react-icons/bi"
 import { HiExternalLink } from "react-icons/hi"
@@ -8,6 +7,8 @@ import { remark } from "remark"
 import html from "remark-html"
 
 import { getCleanLink } from "@helpers/common.helper"
+
+import type { GithubNotificationProps } from "@servcy/types"
 
 const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps) => {
     let link = "#null"

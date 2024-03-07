@@ -2,7 +2,6 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import type { Integration, UserIntegration } from "@servcy/types"
 import { Button, Input, Select } from "antd"
 import toast from "react-hot-toast"
 import { MdOutlineSyncAlt } from "react-icons/md"
@@ -11,6 +10,8 @@ import {
     configureUserIntegration as configureUserIntegrationApi,
     fetchUserIntegrations as fetchUserIntegrationsApi,
 } from "@services/integration"
+
+import type { Integration, UserIntegration } from "@servcy/types"
 
 export default function MicrosoftConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
     const [loading, setLoading] = useState<boolean>(false)

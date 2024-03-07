@@ -63,10 +63,16 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                 const issue = issues?.[issueId]
 
                 const stateColor =
-                    getProjectStates(issue?.project_id ?? "")?.find((state) => state?.id == issue?.state_id)?.color || ""
+                    getProjectStates(issue?.project_id ?? "")?.find((state) => state?.id == issue?.state_id)?.color ||
+                    ""
 
                 return (
-                    <Draggable key={issue?.id} draggableId={issue?.id ?? ""} index={index} isDragDisabled={isDragDisabled}>
+                    <Draggable
+                        key={issue?.id}
+                        draggableId={issue?.id ?? ""}
+                        index={index}
+                        isDragDisabled={isDragDisabled}
+                    >
                         {(provided, snapshot) => (
                             <div
                                 className="relative cursor-pointer p-1 px-2"
@@ -111,7 +117,8 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                                                     }}
                                                 />
                                                 <div className="flex-shrink-0 text-xs text-custom-text-300">
-                                                    {getProjectIdentifierById(issue?.project_id as string)}-{issue?.sequence_id}
+                                                    {getProjectIdentifierById(issue?.project_id as string)}-
+                                                    {issue?.sequence_id}
                                                 </div>
                                                 <Tooltip tooltipHeading="Title" tooltipContent={issue?.name}>
                                                     <div className="truncate text-xs">{issue?.name}</div>

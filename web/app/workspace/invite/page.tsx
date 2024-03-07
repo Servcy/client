@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/router"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
@@ -17,6 +16,7 @@ import { WorkspaceService } from "@services/workspace.service"
 
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
 
 const workspaceService = new WorkspaceService()

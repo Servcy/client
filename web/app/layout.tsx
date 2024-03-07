@@ -12,7 +12,6 @@ import Router from "next/router"
 
 import { FC, useEffect, useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { SyncOutlined } from "@ant-design/icons"
 import { googleLogout, GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
@@ -30,6 +29,8 @@ import { SWR_CONFIG } from "@constants/swr-config"
 import { THEMES } from "@constants/themes"
 
 import { isMobileDevice } from "@helpers/common.helper"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 // dynamic imports
 const StoreWrapper = dynamic(() => import("@wrappers/StoreWrapper"), { ssr: false })

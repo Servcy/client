@@ -1,6 +1,5 @@
 "use client"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
@@ -11,6 +10,8 @@ import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
+
+import type { NextPageWithWrapper } from "@servcy/types"
 
 const MembersSettingsPage: NextPageWithWrapper = observer(() => {
     // store

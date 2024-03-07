@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 
 import { useEffect, useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDown } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -27,6 +26,7 @@ import { WorkspaceService } from "@services/workspace.service"
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { IUser, TOnboardingSteps } from "@servcy/types"
 import { Avatar, Spinner } from "@servcy/ui"
 

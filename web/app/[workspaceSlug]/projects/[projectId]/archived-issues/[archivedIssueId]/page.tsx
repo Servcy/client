@@ -4,7 +4,6 @@ import { useRouter } from "next/router"
 
 import { useState } from "react"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { RotateCcw } from "lucide-react"
 import { observer } from "mobx-react"
 import toast from "react-hot-toast"
@@ -21,6 +20,7 @@ import { EUserProjectRoles } from "@constants/project"
 
 import { AppWrapper } from "@wrappers/app"
 
+import type { NextPageWithWrapper } from "@servcy/types"
 import { ArchiveIcon, Button, Loader } from "@servcy/ui"
 
 const ArchivedIssueDetailsPage: NextPageWithWrapper = observer(() => {
