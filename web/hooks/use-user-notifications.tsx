@@ -55,7 +55,7 @@ const useUserNotification = () => {
     const isLoadingMore = isLoading || (size > 0 && paginatedData && typeof paginatedData[size - 1] === "undefined")
     const isEmpty = paginatedData?.[0]?.results?.length === 0
     const notifications = paginatedData ? paginatedData.map((d) => d.results).flat() : undefined
-    const hasMore = isEmpty || (paginatedData && paginatedData[paginatedData.length - 1]?.next_page_results)
+    const hasMore = isEmpty || (paginatedData && paginatedData[paginatedData.length - 1].next_page_results)
     const isRefreshing = isValidating && paginatedData && paginatedData.length === size
 
     const { data: notificationCount, mutate: mutateNotificationCount } = useSWR(
@@ -107,9 +107,9 @@ const useUserNotification = () => {
             if (notificationIndexInPage === -1) return previousNotifications
 
             const key = Object.keys(value)[0]
-            ;(previousNotifications[notificationIndex].results[notificationIndexInPage] as any)[
-                key as keyof typeof value
-            ] = (value as any)[key as keyof typeof value]
+            ;(previousNotifications[notificationIndex].results[notificationIndexInPage] as any)[key] = (value as any)[
+                key
+            ]
 
             return previousNotifications
         }, false)
