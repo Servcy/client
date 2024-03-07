@@ -180,7 +180,7 @@ export const NotificationPopover = observer(() => {
                                                 className="my-6 flex w-full items-center justify-center text-sm font-medium text-custom-primary-100"
                                                 disabled={isLoadingMore}
                                                 onClick={() => {
-                                                    setSize((prev) => prev + 1)
+                                                    setSize((prev: number) => prev + 1)
                                                 }}
                                             >
                                                 Load More
