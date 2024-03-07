@@ -103,7 +103,7 @@ export const IssuesMobileHeader = () => {
                     {layouts.map((layout, index) => (
                         <CustomMenu.MenuItem
                             onClick={() => {
-                                handleLayoutChange(ISSUE_LAYOUTS[index]?.key as TIssueLayouts)
+                                handleLayoutChange(ISSUE_LAYOUTS[index]?.key)
                             }}
                             className="flex items-center gap-2"
                         >

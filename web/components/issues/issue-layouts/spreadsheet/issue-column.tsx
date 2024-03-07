@@ -31,7 +31,7 @@ export const IssueColumn = observer((props: Props) => {
 
     const shouldRenderProperty = property === "estimate" ? isEstimateEnabled : true
 
-    const Column = SPREADSHEET_PROPERTY_DETAILS[property]?.Column;
+    const { Column } = SPREADSHEET_PROPERTY_DETAILS[property]
 
     return (
         <WithDisplayPropertiesHOC
@@ -44,7 +44,7 @@ export const IssueColumn = observer((props: Props) => {
                 className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
                 ref={tableCellRef}
             >
-                {Column && (<Column
+                <Column
                     issue={issueDetail}
                     onChange={(issue: TIssue, data: Partial<TIssue>, updates: any) =>
                         handleIssues({ ...issue, ...data }, EIssueActions.UPDATE).then(() => {
@@ -64,7 +64,7 @@ export const IssueColumn = observer((props: Props) => {
                     onClose={() => {
                         tableCellRef?.current?.focus()
                     }}
-                />)}
+                />
             </td>
         </WithDisplayPropertiesHOC>
     )

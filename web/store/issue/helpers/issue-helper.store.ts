@@ -85,8 +85,8 @@ export class IssueHelperStore implements TIssueHelperStore {
             }
 
             for (const group of groupArray) {
-                if (group && _issues[group]) _issues[group]?.push(_issue?.id ?? "")
-                else if (group) _issues[group] = [_issue?.id ?? ""]
+                if (group && _issues[group]) _issues[group]?.push(_issue?.id)
+                else if (group) _issues[group] = [_issue?.id]
             }
         }
 
@@ -130,9 +130,9 @@ export class IssueHelperStore implements TIssueHelperStore {
 
             for (const subGroup of subGroupArray) {
                 for (const group of groupArray) {
-                    if (subGroup && group && _issues?.[subGroup]?.[group]) _issues[subGroup]?.[group]?.push(_issue?.id ?? "")
-                    else if (subGroup && group && _issues[subGroup]) _issues[subGroup][group] = [_issue?.id ?? ""]
-                    else if (subGroup && group) _issues[subGroup] = { [group]: [_issue?.id] }
+                    if (subGroup && group && _issues?.[subGroup]?.[group]) _issues[subGroup][group].push(_issue.id)
+                    else if (subGroup && group && _issues[subGroup]) _issues[subGroup][group] = [_issue.id]
+                    else if (subGroup && group) _issues[subGroup] = { [group]: [_issue.id] }
                 }
             }
         }
