@@ -31,14 +31,14 @@ export const handleDragDrop = async (
         const sourceIssues = issueWithIds[sourceColumnId] || []
 
         const [removed] = sourceIssues.splice(source.index, 1)
-        const removedIssueDetail = issueMap[removed ?? ""]
+        const removedIssueDetail = issueMap[removed]
 
         const updateIssue = {
             id: removedIssueDetail?.id,
             target_date: destinationColumnId,
         }
 
-        if (viewId) return await store?.updateIssue(workspaceSlug, projectId, updateIssue?.id ?? "", updateIssue, viewId)
-        else return await store?.updateIssue(workspaceSlug, projectId, updateIssue?.id ?? "", updateIssue)
+        if (viewId) return await store?.updateIssue(workspaceSlug, projectId, updateIssue?.id, updateIssue, viewId)
+        else return await store?.updateIssue(workspaceSlug, projectId, updateIssue?.id, updateIssue)
     }
 }
