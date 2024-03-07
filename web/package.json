@@ -117,41 +117,5 @@
         "tailwindcss": "^3.2.4",
         "tsconfig": "*",
         "typescript": "^4.9.4"
-    },
-    "config": {
-        "commitizen": {
-            "path": "cz-conventional-changelog"
-        }
-    },
-    "eslintConfig": {
-        "extends": [
-            "eslint:recommended",
-            "next/core-web-vitals",
-            "plugin:@typescript-eslint/strict",
-            "plugin:jsx-a11y/recommended",
-            "plugin:prettier/recommended",
-            "plugin:react/recommended",
-            "plugin:react-hooks/recommended",
-            "plugin:tailwindcss/recommended"
-        ],
-        "parser": "@typescript-eslint/parser",
-        "parserOptions": {
-            "ecmaFeatures": {
-                "jsx": true
-            },
-            "project": "./tsconfig.json"
-        },
-        "root": true,
-        "rules": {
-            "no-undef": "off",
-            "no-unused-vars": "off",
-            "react/react-in-jsx-scope": "off",
-            "tailwindcss/classnames-order": [
-                "warn",
-                {
-                    "officialSorting": true
-                }
-            ]
-        }
     }
 }
