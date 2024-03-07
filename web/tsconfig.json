@@ -38,9 +38,6 @@
       "@store/*": [
         "./store/*"
       ],
-      "@package.json": [
-        "./package.json"
-      ]
     },
     "plugins": [
       {

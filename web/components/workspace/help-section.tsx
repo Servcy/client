@@ -3,7 +3,7 @@ import Link from "next/link"
 import React, { useRef, useState } from "react"
 
 import { Transition } from "@headlessui/react"
-import packageJson from "@package.json"
+import packageJson from "package.json"
 import { HelpCircle, MessagesSquare, MoveLeft, Zap } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
