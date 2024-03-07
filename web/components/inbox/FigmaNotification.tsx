@@ -1,6 +1,6 @@
 import { HiExternalLink } from "react-icons/hi"
 
-import type { Comment, FigmaNotificationProps, Mention } from "@servcy/types"
+import type { FigmaComment, FigmaMention, FigmaNotificationProps } from "@servcy/types"
 
 const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; cause: string }) => {
     const link = `https://www.figma.com/file/${data.file_key}`
@@ -84,12 +84,12 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                 </div>
             ) : data.event_type === "FILE_COMMENT" && data.comment ? (
                 <div className="min-h-[75px]">
-                    {data.comment.map((comment: Comment, index1: number) => {
+                    {data.comment.map((comment: FigmaComment, index1: number) => {
                         if (comment.text) {
                             const lines = comment.text.split("\\n")
                             return (
                                 <span key={index1}>
-                                    {lines.map((line, index2) => (
+                                    {lines.map((line: any, index2: number) => (
                                         <>
                                             <span key={index2}>{line}</span>
                                             {index2 !== lines.length - 1 ? <br /> : null}
@@ -99,7 +99,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                                 </span>
                             )
                         } else if (comment.mention && data.mentions) {
-                            const handle = data.mentions.find((mention: Mention) => mention.id === comment.mention)
+                            const handle = data.mentions.find((mention: FigmaMention) => mention.id === comment.mention)
                             if (handle) {
                                 return (
                                     <>
