@@ -92,9 +92,9 @@ export default function Integrations(): JSX.Element {
                         className="ml-2 max-w-[200px]"
                         placeholder="Filter by usage"
                         allowClear={true}
-                        options={uniqueIntegrationCategories.map((categories) => ({
-                            label: categories,
-                            value: categories,
+                        options={uniqueIntegrationCategories.map((category) => ({
+                            label: category,
+                            value: category,
                         }))}
                         onChange={(value) => setCategory(value)}
                         onClear={() => setCategory("")}
