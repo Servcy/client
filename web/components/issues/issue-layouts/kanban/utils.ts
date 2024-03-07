@@ -19,13 +19,13 @@ const handleSortOrder = (destinationIssues: string[], destinationIndex: number, 
             const destinationIssueId = destinationIssues[destinationIndex]
             currentIssueState = {
                 ...currentIssueState,
-                sort_order: (issueMap[destinationIssueId ?? ""]?.sort_order as number) - sortOrderDefaultValue,
+                sort_order: issueMap[destinationIssueId ?? ""]?.sort_order - sortOrderDefaultValue,
             }
         } else if (destinationIndex === destinationIssues.length) {
             const destinationIssueId = destinationIssues[destinationIndex - 1]
             currentIssueState = {
                 ...currentIssueState,
-                sort_order: (issueMap[destinationIssueId ?? ""]?.sort_order as number) + sortOrderDefaultValue,
+                sort_order: issueMap[destinationIssueId]?.sort_order + sortOrderDefaultValue,
             }
         } else {
             const destinationTopIssueId = destinationIssues[destinationIndex - 1]
@@ -33,7 +33,7 @@ const handleSortOrder = (destinationIssues: string[], destinationIndex: number, 
             currentIssueState = {
                 ...currentIssueState,
                 sort_order:
-                    ((issueMap[destinationTopIssueId ?? ""]?.sort_order as number) + (issueMap[destinationBottomIssueId ?? ""]?.sort_order as number)) / 2,
+                    (issueMap[destinationTopIssueId]?.sort_order + (issueMap[destinationBottomIssueId]?.sort_order)) / 2,
             }
         }
     } else {

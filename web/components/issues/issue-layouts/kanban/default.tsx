@@ -98,7 +98,7 @@ const GroupByKanBan: React.FC<IGroupByKanBan> = observer((props) => {
 
     if (!list) return null
 
-    const groupWithIssues = list.filter((_list) => ((issueIds as TGroupedIssues)?.[_list.id]?.length as number) > 0)
+    const groupWithIssues = list.filter((_list) => (issueIds as TGroupedIssues)?.[_list.id]?.length > 0)
 
     const groupList = showEmptyGroup ? list : groupWithIssues
 

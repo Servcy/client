@@ -26,7 +26,7 @@ export const AppliedDateFilters: React.FC<Props> = observer((props) => {
             if (dateParts.length === 2) {
                 const [date, time] = dateParts
 
-                dateLabel = `${capitalizeFirstLetter(time as string)} ${renderFormattedDate(date as string)}`
+                dateLabel = `${capitalizeFirstLetter(time)} ${renderFormattedDate(date)}`
             }
         }
 
