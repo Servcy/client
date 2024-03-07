@@ -16,8 +16,7 @@ import { EUserProjectRoles } from "@constants/project"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-import type { NextPageWithWrapper } from "@servcy/types"
-import { IProject } from "@servcy/types"
+import type { NextPageWithWrapper, IProject } from "@servcy/types"
 
 const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
     // router
@@ -58,6 +57,6 @@ const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-AutomationSettingsPage.getWrapper = true
+AutomationSettingsPage.hasWrapper = true
 
 export default AutomationSettingsPage

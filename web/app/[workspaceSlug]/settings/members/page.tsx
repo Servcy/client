@@ -22,8 +22,7 @@ import { WorkspaceSettingLayout } from "@wrappers/settings"
 
 import { getUserRole } from "@helpers/user.helper"
 
-import type { NextPageWithWrapper } from "@servcy/types"
-import { IWorkspaceBulkInviteFormData } from "@servcy/types"
+import type { NextPageWithWrapper, IWorkspaceBulkInviteFormData } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {

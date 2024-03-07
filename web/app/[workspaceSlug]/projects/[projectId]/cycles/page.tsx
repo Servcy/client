@@ -23,8 +23,7 @@ import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
-import { TCycleLayout, TCycleView } from "@servcy/types"
+import type { NextPageWithWrapper, TCycleLayout, TCycleView } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
 
 const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
