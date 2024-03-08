@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -23,9 +23,7 @@ export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
     const { isOpen, handleClose, data } = props
     // states
     const [isDeleteLoading, setIsDeleteLoading] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // store hooks
     const { deleteEstimate } = useEstimate()
 

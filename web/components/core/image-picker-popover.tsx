@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useCallback, useEffect, useRef, useState } from "react"
 
@@ -58,8 +58,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
     // refs
     const ref = useRef<HTMLDivElement>(null)
     // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const { currentWorkspace } = useWorkspace()
 

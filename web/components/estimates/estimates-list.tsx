@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -24,9 +24,7 @@ export const EstimatesList: React.FC = observer(() => {
     const [estimateFormOpen, setEstimateFormOpen] = useState(false)
     const [estimateToDelete, setEstimateToDelete] = useState<string | null>(null)
     const [estimateToUpdate, setEstimateToUpdate] = useState<IEstimate | undefined>()
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // theme
     const { resolvedTheme } = useTheme()
     // store hooks

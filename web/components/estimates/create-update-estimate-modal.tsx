@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect } from "react"
 
@@ -36,9 +36,7 @@ type FormValues = typeof defaultValues
 
 export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
     const { handleClose, data, isOpen } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // store hooks
     const { createEstimate, updateEstimate } = useEstimate()
     // form info
