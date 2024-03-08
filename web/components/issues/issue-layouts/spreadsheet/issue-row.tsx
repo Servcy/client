@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react"
 
@@ -140,9 +140,7 @@ const IssueRowDetails = observer((props: IssueRowDetailsProps) => {
         isExpanded,
         setExpanded,
     } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
     //hooks
     const { getProjectIdentifierById } = useProject()
     const { peekIssue, setPeekIssue } = useIssueDetail()

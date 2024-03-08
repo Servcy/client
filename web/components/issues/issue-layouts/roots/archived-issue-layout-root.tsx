@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { Fragment } from "react"
 
@@ -19,9 +19,7 @@ import { useIssues } from "@hooks/store"
 import { EIssuesStoreType } from "@constants/issue"
 
 export const ArchivedIssueLayoutRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.ARCHIVED)
 

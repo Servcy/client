@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import { useEffect, useRef, useState } from "react"
 
@@ -64,8 +64,8 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
     const { currentWorkspace } = useWorkspace()
     const { currentProjectDetails } = useProject()
     const { captureIssueEvent } = useEventTracker()
-    // router
-    const router = useRouter()
+
+    const pathname = usePathname()
     // form info
     const {
         reset,
@@ -125,7 +125,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
                     captureIssueEvent({
                         eventName: ISSUE_CREATED,
                         payload: { ...res, state: "SUCCESS", element: "Spreadsheet quick add" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 }))
             toast.success("Issue created successfully.")
@@ -133,7 +133,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Spreadsheet quick add" },
-                path: router.asPath,
+                path: pathname,
             })
             console.error(err)
             toast.error(err?.message || "Some error occurred. Please try again.")

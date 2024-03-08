@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -18,9 +18,7 @@ import { DraftKanBanLayout } from "../kanban/roots/draft-issue-root"
 import { DraftIssueListLayout } from "../list/roots/draft-issue-root"
 
 export const DraftIssueLayoutRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT)
 

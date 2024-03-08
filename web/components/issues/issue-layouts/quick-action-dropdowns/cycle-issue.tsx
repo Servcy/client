@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useState } from "react"
 
@@ -38,9 +38,7 @@ export const CycleIssueQuickActions: React.FC<IQuickActionProps> = observer((pro
     const [issueToEdit, setIssueToEdit] = useState<TIssue | undefined>(undefined)
     const [deleteIssueModal, setDeleteIssueModal] = useState(false)
     const [archiveIssueModal, setArchiveIssueModal] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, cycleId } = router.query
+    const { workspaceSlug, cycleId } = useParams()
     // store hooks
     const { setTrackElement } = useEventTracker()
     const { issuesFilter } = useIssues(EIssuesStoreType.CYCLE)

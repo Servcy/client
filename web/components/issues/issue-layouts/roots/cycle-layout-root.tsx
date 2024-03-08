@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { Fragment, useState } from "react"
 
@@ -27,8 +27,7 @@ import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const CycleLayoutRoot: React.FC = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug, projectId, cycleId } = router.query
+    const { workspaceSlug, projectId, cycleId } = useParams()
     // store hooks
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE)
     const { getCycleById } = useCycle()

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { Fragment } from "react"
 
@@ -26,9 +26,7 @@ import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const ModuleLayoutRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, moduleId } = router.query
+    const { workspaceSlug, projectId, moduleId } = useParams()
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE)
 

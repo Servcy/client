@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, Fragment } from "react"
 
@@ -24,9 +24,7 @@ import { EIssuesStoreType } from "@constants/issue"
 import { Spinner } from "@servcy/ui"
 
 export const ProjectLayoutRoot: FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT)
 

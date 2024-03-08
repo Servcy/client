@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { Fragment, useCallback, useMemo } from "react"
 
@@ -26,9 +26,8 @@ import { IIssueDisplayFilterOptions, TIssue } from "@servcy/types"
 import { EIssueActions } from "../types"
 
 export const AllIssueLayoutRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, globalViewId } = router.query
+    const params = useParams()
+    const { workspaceSlug, globalViewId } = params
     // theme
     const { resolvedTheme } = useTheme()
     //swr hook for fetching issue properties
@@ -65,7 +64,7 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
             globalViewId &&
             ["all-issues", "assigned", "created", "subscribed"].includes(globalViewId.toString())
         ) {
-            const routerQueryParams = { ...router.query }
+            const routerQueryParams = params
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { ["workspaceSlug"]: _workspaceSlug, ["globalViewId"]: _globalViewId, ...filters } = routerQueryParams
 

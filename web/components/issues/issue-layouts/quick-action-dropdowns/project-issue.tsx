@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import { useState } from "react"
 
@@ -32,9 +32,9 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
         portalElement,
         readOnly = false,
     } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+
+    const pathname = usePathname()
+    const { workspaceSlug } = useParams()
     // states
     const [createUpdateIssueModal, setCreateUpdateIssueModal] = useState(false)
     const [issueToEdit, setIssueToEdit] = useState<TIssue | undefined>(undefined)
@@ -64,7 +64,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
     const handleCopyIssueLink = () =>
         copyUrlToClipboard(issueLink).then(() => toast.error("Issue link copied to clipboard"))
 
-    const isDraftIssue = router?.asPath?.includes("draft-issues") || false
+    const isDraftIssue = pathname?.includes("draft-issues") || false
 
     const duplicateIssuePayload = omit(
         {

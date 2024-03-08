@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, useCallback } from "react"
 
@@ -47,9 +47,7 @@ export const BaseSpreadsheetRoot = observer((props: IBaseSpreadsheetRoot) => {
         canEditPropertiesBasedOnProject,
         isCompletedCycle = false,
     } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query as { workspaceSlug: string; projectId: string }
+    const { workspaceSlug, projectId } = useParams() as { workspaceSlug: string; projectId: string }
     // store hooks
     const {
         membership: { currentProjectRole },

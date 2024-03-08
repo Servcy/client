@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import { useRef } from "react"
 
@@ -23,9 +23,8 @@ type Props = {
 }
 
 export const IssueColumn = observer((props: Props) => {
+    const pathname = usePathname()
     const { displayProperties, issueDetail, disableUserActions, property, handleIssues, isEstimateEnabled } = props
-    // router
-    const router = useRouter()
     const tableCellRef = useRef<HTMLTableCellElement | null>(null)
     const { captureIssueEvent } = useEventTracker()
 
@@ -56,7 +55,7 @@ export const IssueColumn = observer((props: Props) => {
                                     element: "Spreadsheet layout",
                                 },
                                 updates: updates,
-                                path: router.asPath,
+                                path: pathname,
                             })
                         })
                     }
