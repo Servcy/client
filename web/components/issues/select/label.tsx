@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { Fragment, useEffect, useRef, useState } from "react"
 
@@ -25,9 +25,7 @@ type Props = {
 
 export const IssueLabelSelect: React.FC<Props> = observer((props) => {
     const { setIsOpen, value, onChange, projectId, label, disabled = false, tabIndex } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const { getProjectLabels, fetchProjectLabels } = useLabel()
     // states

@@ -1,4 +1,4 @@
-import router from "next/navigation"
+import {useParams} from "next/navigation"
 
 import { useCallback, useState } from "react"
 
@@ -22,7 +22,7 @@ export const IssuesMobileHeader = () => {
         { key: "calendar", title: "Calendar", icon: Calendar },
     ]
     const [analyticsModal, setAnalyticsModal] = useState(false)
-    const { workspaceSlug, projectId } = router.query as {
+    const { workspaceSlug, projectId } = useParams() as {
         workspaceSlug: string
         projectId: string
     }

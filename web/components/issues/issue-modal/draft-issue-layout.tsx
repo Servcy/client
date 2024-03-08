@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -43,8 +43,8 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
     // states
     const [issueDiscardModal, setIssueDiscardModal] = useState(false)
     // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const pathname = usePathname()
+    const { workspaceSlug } = useParams()
 
     // store hooks
     const { captureIssueEvent } = useEventTracker()
@@ -66,7 +66,7 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
                 captureIssueEvent({
                     eventName: "Draft issue created",
                     payload: { ...res, state: "SUCCESS" },
-                    path: router.asPath,
+                    path: pathname,
                 })
                 onChange(null)
                 setIssueDiscardModal(false)
@@ -77,7 +77,7 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
                 captureIssueEvent({
                     eventName: "Draft issue created",
                     payload: { ...payload, state: "FAILED" },
-                    path: router.asPath,
+                    path: pathname,
                 })
             })
     }

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { FC, Fragment, useEffect, useRef, useState } from "react"
 
@@ -109,9 +109,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
 
     // refs
     const editorRef = useRef<any>(null)
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     const workspaceStore = useWorkspace()
     const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
 

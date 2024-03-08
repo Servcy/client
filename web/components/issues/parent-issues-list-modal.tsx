@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -24,14 +24,9 @@ type Props = {
 
 const projectService = new ProjectService()
 
-export const ParentIssuesListModal: React.FC<Props> = ({
-    isOpen,
-    handleClose: onClose,
-    value,
-    onChange,
-    projectId,
-    issueId,
-}) => {
+export const ParentIssuesListModal: React.FC<Props> = (
+    { isOpen, handleClose: onClose, value, onChange, projectId, issueId }
+) => {
     const [searchTerm, setSearchTerm] = useState("")
     const [issues, setIssues] = useState<ISearchIssueResponse[]>([])
     const [isSearching, setIsSearching] = useState(false)
@@ -39,8 +34,7 @@ export const ParentIssuesListModal: React.FC<Props> = ({
 
     const debouncedSearchTerm: string = useDebounce(searchTerm, 500)
 
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
 
     const handleClose = () => {
         onClose()
