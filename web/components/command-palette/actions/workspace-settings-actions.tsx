@@ -13,7 +13,7 @@ type Props = {
 
 export const CommandPaletteWorkspaceSettingsActions: React.FC<Props> = (props) => {
     const { closePalette } = props
-    // router
+
     const router = useRouter()
     const { workspaceSlug } = useParams()
     // mobx store

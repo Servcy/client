@@ -30,7 +30,7 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
     // store hooks
     const { captureProjectEvent } = useEventTracker()
     const { deleteProject } = useProject()
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams()
 

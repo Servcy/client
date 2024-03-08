@@ -18,7 +18,7 @@ import { renderEmoji } from "@helpers/emoji.helper"
 import { Breadcrumbs, Button, CustomMenu, DiceIcon, Tooltip } from "@servcy/ui"
 
 export const ModulesListHeader: React.FC = observer(() => {
-    // router
+
     const router = useRouter()
     const { workspaceSlug } = useParams()
     // store hooks

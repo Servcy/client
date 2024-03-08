@@ -31,7 +31,7 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
     // states
     const [image, setImage] = useState<File | null>(null)
     const [isImageUploading, setIsImageUploading] = useState(false)
-    // router
+
     const pathname = usePathname()
     const { workspaceSlug } = useParams()
 

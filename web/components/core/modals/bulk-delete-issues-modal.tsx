@@ -37,7 +37,7 @@ const issueService = new IssueService()
 
 export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
     const { isOpen, onClose } = props
-    // router
+
     const params = useParams()
     const { workspaceSlug, projectId } = params
 

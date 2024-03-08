@@ -29,7 +29,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
     // states
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
-    // router
+
     const router = useRouter()
     const pathname = usePathname()
     const params = useParams()

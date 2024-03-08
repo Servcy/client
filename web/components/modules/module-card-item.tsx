@@ -29,7 +29,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
     // states
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
-    // router
+
     const pathname = usePathname()
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams()

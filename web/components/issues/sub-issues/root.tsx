@@ -46,7 +46,7 @@ export type TSubIssueOperations = {
 
 export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
     const { workspaceSlug, projectId, parentIssueId, disabled = false } = props
-    // router
+
     const router = useRouter()
     // store hooks
 

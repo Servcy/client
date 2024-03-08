@@ -19,7 +19,7 @@ import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterO
 import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 
 export const ProjectArchivedIssuesHeader: FC = observer(() => {
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams()
     // store hooks

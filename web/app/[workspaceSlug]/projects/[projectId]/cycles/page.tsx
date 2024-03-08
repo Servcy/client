@@ -38,7 +38,7 @@ const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
     } = useUser()
     const { currentProjectCycleIds, loader } = useCycle()
     const { getProjectById } = useProject()
-    // router
+
     const { workspaceSlug, projectId, peekCycle } = useParams()
     // local storage
     const { storedValue: cycleTab, setValue: setCycleTab } = useLocalStorage<TCycleView>("cycle_tab", "active")

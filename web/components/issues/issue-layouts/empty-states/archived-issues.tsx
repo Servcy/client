@@ -26,7 +26,7 @@ interface EmptyStateProps {
 }
 
 export const ProjectArchivedEmptyState: React.FC = observer(() => {
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams()
     // theme

@@ -15,7 +15,7 @@ type Props = {
 
 const useUserAuth = (props: Props) => {
     const { user, isUserLoading } = props
-    // router
+
     const router = useRouter()
     const pathname = usePathname()
 

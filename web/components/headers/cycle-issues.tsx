@@ -60,7 +60,7 @@ const CycleDropdownOption: React.FC<{ cycleId: string }> = ({ cycleId }) => {
 export const CycleIssuesHeader: React.FC = observer(() => {
     // states
     const [analyticsModal, setAnalyticsModal] = useState(false)
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId, cycleId } = useParams() as {
         workspaceSlug: string

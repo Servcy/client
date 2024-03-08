@@ -26,7 +26,7 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
     const { isOpen, handleClose, cycle, workspaceSlug, projectId } = props
     // states
     const [loader, setLoader] = useState(false)
-    // router
+
     const router = useRouter()
     const { cycleId, peekCycle } = useParams()
     // store hooks

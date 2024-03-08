@@ -16,7 +16,7 @@ type Props = {
 
 export const ModuleGanttBlock: React.FC<Props> = observer((props) => {
     const { moduleId } = props
-    // router
+
     const router = useRouter()
     // store hooks
     const {
@@ -57,7 +57,7 @@ export const ModuleGanttBlock: React.FC<Props> = observer((props) => {
 
 export const ModuleGanttSidebarBlock: React.FC<Props> = observer((props) => {
     const { moduleId } = props
-    // router
+
     const router = useRouter()
     // store hooks
     const {

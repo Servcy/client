@@ -18,7 +18,7 @@ const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
     // store hooks
     const { currentUser, currentUserError, fetchCurrentUser, fetchCurrentUserSettings } = useUser()
     const { fetchWorkspaces } = useWorkspace()
-    // router
+
     const router = useRouter()
     const pathname = usePathname()
     // fetching user information

@@ -57,7 +57,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
     })
     // refs
     const ref = useRef<HTMLDivElement>(null)
-    // router
+
     const { workspaceSlug } = useParams()
     // store hooks
     const { currentWorkspace } = useWorkspace()

@@ -49,7 +49,7 @@ const SharedPagesList = dynamic<any>(() => import("@components/pages").then((a) 
 })
 
 const ProjectPagesPage: NextPageWithWrapper = observer(() => {
-    // router
+
     const { workspaceSlug, projectId } = useParams()
     // states
     const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false)

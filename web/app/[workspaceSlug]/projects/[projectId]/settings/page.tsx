@@ -26,7 +26,7 @@ import type { NextPageWithWrapper } from "@servcy/types"
 const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
     // states
     const [selectProject, setSelectedProject] = useState<string | null>(null)
-    // router
+
     const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { currentProjectDetails, fetchProjectDetails } = useProject()

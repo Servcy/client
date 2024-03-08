@@ -16,7 +16,7 @@ const useLoginRedirection = (): UseLoginRedirectionProps => {
     // states
     const [isRedirecting, setIsRedirecting] = useState(true)
     const [error, setError] = useState<any | null>(null)
-    // router
+
     const router = useRouter()
     const params = useParams()
     const { nextUrl } = params

@@ -46,7 +46,7 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
     // states
     const [slugError, setSlugError] = useState(false)
     const [invalidSlug, setInvalidSlug] = useState(false)
-    // router
+
     const router = useRouter()
     // store hooks
     const { captureWorkspaceEvent } = useEventTracker()

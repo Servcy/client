@@ -20,7 +20,7 @@ import { TCycleLayout } from "@servcy/types"
 import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui"
 
 export const CyclesHeader: FC = observer(() => {
-    // router
+
     const router = useRouter()
     // store hooks
     const {

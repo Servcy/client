@@ -29,7 +29,7 @@ export const IssuesByStateGroupWidget: React.FC<WidgetProps> = observer((props) 
     // states
     const [defaultStateGroup, setDefaultStateGroup] = useState<TStateGroups | null>(null)
     const [activeStateGroup, setActiveStateGroup] = useState<TStateGroups | null>(null)
-    // router
+
     const router = useRouter()
     // store hooks
     const { fetchWidgetStats, getWidgetDetails, getWidgetStats, updateDashboardWidgetFilters } = useDashboard()

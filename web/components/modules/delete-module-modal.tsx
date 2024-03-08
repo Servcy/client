@@ -24,7 +24,7 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
     const { data, isOpen, onClose } = props
     // states
     const [isDeleteLoading, setIsDeleteLoading] = useState(false)
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId, moduleId, peekModule } = useParams()
     // store hooks

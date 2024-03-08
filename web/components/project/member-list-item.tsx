@@ -25,7 +25,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
     const { userId } = props
     // states
     const [removeMemberModal, setRemoveMemberModal] = useState(false)
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams()
     // store hooks

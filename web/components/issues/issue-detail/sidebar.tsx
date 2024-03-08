@@ -58,7 +58,7 @@ export const IssueDetailsSidebar: React.FC<Props> = observer((props) => {
     // states
     const [deleteIssueModal, setDeleteIssueModal] = useState(false)
     const [archiveIssueModal, setArchiveIssueModal] = useState(false)
-    // router
+
     const router = useRouter()
     // store hooks
     const { getProjectById } = useProject()

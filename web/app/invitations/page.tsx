@@ -43,7 +43,7 @@ const UserInvitationsPage: NextPageWithWrapper = observer(() => {
     // store hooks
     const { captureEvent, joinWorkspaceMetricGroup } = useEventTracker()
     const { currentUser, currentUserSettings } = useUser()
-    // router
+
     const router = useRouter()
 
     const { data: invitations } = useSWR("USER_WORKSPACE_INVITATIONS", () =>

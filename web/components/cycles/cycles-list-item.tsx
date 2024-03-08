@@ -36,7 +36,7 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
     // states
     const [updateModal, setUpdateModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
-    // router
+
     const pathname = usePathname()
     const router = useRouter()
     // store hooks

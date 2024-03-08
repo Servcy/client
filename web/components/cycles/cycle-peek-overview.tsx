@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, workspaceSlug }) => {
-    // router
+
     const router = useRouter()
     const params = useParams()
     const pathname = usePathname()

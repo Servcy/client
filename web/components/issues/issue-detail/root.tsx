@@ -63,7 +63,7 @@ export type TIssueDetailRoot = {
 
 export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
     const { workspaceSlug, projectId, issueId, is_archived = false } = props
-    // router
+
     const router = useRouter()
 
     const {

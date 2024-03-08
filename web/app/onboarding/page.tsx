@@ -34,7 +34,7 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
     // states
     const [step, setStep] = useState<number | null>(null)
     const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
-    // router
+
     const router = useRouter()
     // store hooks
     const { captureEvent } = useEventTracker()

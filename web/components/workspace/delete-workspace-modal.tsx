@@ -28,7 +28,7 @@ const defaultValues = {
 
 export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
     const { isOpen, data, onClose } = props
-    // router
+
     const router = useRouter()
     // store hooks
     const { captureWorkspaceEvent } = useEventTracker()

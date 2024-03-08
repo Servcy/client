@@ -49,7 +49,7 @@ const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
     const { fetchProjectStates } = useProjectState()
     const { fetchProjectLabels } = useLabel()
     const { fetchProjectEstimates } = useEstimate()
-    // router
+
     const params = useParams()
     const { workspaceSlug, projectId } = params
 

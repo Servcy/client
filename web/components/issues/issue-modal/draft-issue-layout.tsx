@@ -42,7 +42,7 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
     } = props
     // states
     const [issueDiscardModal, setIssueDiscardModal] = useState(false)
-    // router
+
     const pathname = usePathname()
     const { workspaceSlug } = useParams()
 

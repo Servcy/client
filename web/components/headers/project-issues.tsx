@@ -34,7 +34,7 @@ import { Breadcrumbs, Button, LayersIcon } from "@servcy/ui"
 export const ProjectIssuesHeader: React.FC = observer(() => {
     // states
     const [analyticsModal, setAnalyticsModal] = useState(false)
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams() as { workspaceSlug: string; projectId: string }
     // store hooks

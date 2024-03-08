@@ -24,7 +24,7 @@ type Props = {
 
 export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) => {
     const { isOpen, onClose, data, preLoadedData } = props
-    // router
+
     const router = useRouter()
     const { workspaceSlug } = useParams()
     // store hooks

@@ -17,7 +17,7 @@ const StoreWrapper: FC<IStoreWrapper> = observer((props) => {
     const { children } = props
     // states
     const [dom, setDom] = useState<any>()
-    // router
+
     const params = useParams()
     // store hooks
     const {

@@ -66,7 +66,7 @@ export const CommandModal: React.FC = observer(() => {
     } = useApplication()
     const { setTrackElement } = useEventTracker()
 
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId, issueId } = useParams()
 

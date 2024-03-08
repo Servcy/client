@@ -24,7 +24,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
     const { memberId } = props
     // states
     const [removeMemberModal, setRemoveMemberModal] = useState(false)
-    // router
+
     const router = useRouter()
     const { workspaceSlug } = useParams()
     // store hooks

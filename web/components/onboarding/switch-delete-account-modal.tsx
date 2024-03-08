@@ -20,7 +20,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
     // states
     const [switchingAccount, setSwitchingAccount] = useState(false)
     const [isDeactivating, setIsDeactivating] = useState(false)
-    // router
+
     const router = useRouter()
     // store hooks
     const { deactivateAccount, logOut } = useUser()

@@ -26,7 +26,7 @@ export const JoinProjectModal: React.FC<TJoinProjectModalProps> = (props) => {
         membership: { joinProject },
     } = useUser()
     const { fetchProjects } = useProject()
-    // router
+
     const router = useRouter()
 
     const handleJoin = () => {

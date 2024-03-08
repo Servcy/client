@@ -14,7 +14,7 @@ type Props = {
 
 export const CycleGanttBlock: React.FC<Props> = observer((props) => {
     const { cycleId } = props
-    // router
+
     const router = useRouter()
     // store hooks
     const {
@@ -68,7 +68,7 @@ export const CycleGanttBlock: React.FC<Props> = observer((props) => {
 
 export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
     const { cycleId } = props
-    // router
+
     const router = useRouter()
     // store hooks
     const {

@@ -68,7 +68,7 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
         handleRestoreIssue,
         isSubmitting,
     } = props
-    // router
+
     const router = useRouter()
     // store hooks
     const { currentUser } = useUser()

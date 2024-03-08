@@ -33,7 +33,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
     // states
     const [updateModal, setUpdateModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
-    // router
+
     const router = useRouter()
     const pathname = usePathname()
     // store

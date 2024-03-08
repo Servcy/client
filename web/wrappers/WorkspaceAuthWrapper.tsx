@@ -22,7 +22,7 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
     const {
         workspace: { fetchWorkspaceMembers },
     } = useMember()
-    // router
+
     const params = useParams()
     const { workspaceSlug } = params
     // fetching user workspace information

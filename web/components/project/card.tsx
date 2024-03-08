@@ -25,7 +25,7 @@ export type ProjectCardProps = {
 
 export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     const { project } = props
-    // router
+
     const router = useRouter()
     const { workspaceSlug } = useParams()
 

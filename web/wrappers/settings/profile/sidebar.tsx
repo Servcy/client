@@ -34,7 +34,7 @@ const WORKSPACE_ACTION_LINKS = [
 export const ProfileLayoutSidebar = observer(() => {
     // states
     const [isSigningOut, setIsSigningOut] = useState(false)
-    // router
+
     const pathname = usePathname()
     const router = useRouter()
     // next themes

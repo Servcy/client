@@ -23,7 +23,7 @@ import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 const issueService = new IssueService()
 
 export const ProjectIssueDetailsHeader: FC = observer(() => {
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId, issueId } = useParams()
     // store hooks

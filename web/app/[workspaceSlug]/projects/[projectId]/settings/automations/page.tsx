@@ -19,7 +19,7 @@ import { ProjectSettingLayout } from "@wrappers/settings"
 import type { IProject, NextPageWithWrapper } from "@servcy/types"
 
 const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
-    // router
+
     const { workspaceSlug, projectId } = useParams()
 
     // store hooks

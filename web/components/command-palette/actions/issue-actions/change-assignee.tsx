@@ -19,7 +19,7 @@ type Props = {
 
 export const ChangeIssueAssignee: React.FC<Props> = observer((props) => {
     const { closePalette, issue } = props
-    // router
+
     const { workspaceSlug, projectId } = useParams()
     // store
     const {

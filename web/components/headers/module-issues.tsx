@@ -60,7 +60,7 @@ const ModuleDropdownOption: React.FC<{ moduleId: string }> = ({ moduleId }) => {
 export const ModuleIssuesHeader: React.FC = observer(() => {
     // states
     const [analyticsModal, setAnalyticsModal] = useState(false)
-    // router
+
     const router = useRouter()
     const { workspaceSlug, projectId, moduleId } = useParams() as {
         workspaceSlug: string
