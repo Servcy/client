@@ -16,7 +16,7 @@ import { useApplication, useUser } from "@hooks/store"
 
 import { TIME_ZONES } from "@constants/timezones"
 
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { ProfileSettingsLayout } from "@wrappers/settings"
 

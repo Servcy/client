@@ -20,7 +20,7 @@ import useReloadConfirmations from "@hooks/use-reload-confirmation"
 
 import { EUserProjectRoles } from "@constants/project"
 
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { AppWrapper } from "@wrappers/app"
 

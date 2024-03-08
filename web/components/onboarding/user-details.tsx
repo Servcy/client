@@ -14,7 +14,7 @@ import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
 
 import { USER_DETAILS } from "@constants/event-tracker"
 
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { IUser } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"

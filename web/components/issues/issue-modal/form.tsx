@@ -25,7 +25,7 @@ import { CreateLabelModal } from "@components/labels"
 import { useEstimate, useIssueDetail, useMention, useProject, useWorkspace } from "@hooks/store"
 
 import { AIService } from "@services/ai.service"
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
 

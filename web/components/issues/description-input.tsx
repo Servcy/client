@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from "react"
 import { useMention, useWorkspace } from "@hooks/store"
 import useDebounce from "@hooks/use-debounce"
 
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor"
 import { Loader } from "@servcy/ui"

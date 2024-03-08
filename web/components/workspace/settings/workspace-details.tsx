@@ -14,7 +14,7 @@ import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
 import { WORKSPACE_UPDATED } from "@constants/event-tracker"
 import { EUserWorkspaceRoles } from "@constants/workspace"
 
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { copyUrlToClipboard } from "@helpers/string.helper"
 

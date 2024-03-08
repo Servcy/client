@@ -5,7 +5,7 @@ import { Controller, useForm } from "react-hook-form"
 
 import { useMention, useWorkspace } from "@hooks/store"
 
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { isEmptyHtmlString } from "@helpers/string.helper"
 

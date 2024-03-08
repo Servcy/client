@@ -8,7 +8,7 @@ import toast from "react-hot-toast"
 
 import { MAX_FILE_SIZE } from "@constants/common"
 
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { Button } from "@servcy/ui"
 

@@ -7,7 +7,7 @@ import { Controller, useForm } from "react-hook-form"
 import { useMention, useWorkspace } from "@hooks/store"
 import useReloadConfirmations from "@hooks/use-reload-confirmation"
 
-import { FileService } from "@services/file.service"
+import { FileService } from "@services/document.service"
 
 import { RichReadOnlyEditor, RichTextEditor } from "@servcy/rich-text-editor"
 import { TIssue } from "@servcy/types"
