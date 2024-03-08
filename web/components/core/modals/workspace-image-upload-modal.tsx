@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { usePathname, useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -32,8 +32,8 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
     const [image, setImage] = useState<File | null>(null)
     const [isImageUploading, setIsImageUploading] = useState(false)
     // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const pathname = usePathname()
+    const { workspaceSlug }= useParams()
 
     const { currentWorkspace } = useWorkspace()
 
@@ -55,7 +55,7 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
     }
 
     const handleSubmit = async () => {
-        if (!image || (!workspaceSlug && router.pathname !== "/onboarding")) return
+        if (!image || (!workspaceSlug && pathname !== "/onboarding")) return
 
         setIsImageUploading(true)
 

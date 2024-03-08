@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -68,7 +68,7 @@ export const CommandModal: React.FC = observer(() => {
 
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId, issueId } = router.query
+    const { workspaceSlug, projectId, issueId }= useParams()
 
     const page = pages[pages.length - 1]
 

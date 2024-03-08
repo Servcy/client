@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useEffect } from "react"
 
@@ -29,8 +29,7 @@ import { IIssueActivity } from "@servcy/types"
 import { BlockedIcon, BlockerIcon, DiceIcon, LayersIcon, RelatedIcon, Tooltip } from "@servcy/ui"
 
 export const IssueLink = ({ activity }: { activity: IIssueActivity }) => {
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
 
     return (
         <Tooltip tooltipContent={activity?.issue_detail ? activity.issue_detail.name : "This issue has been deleted"}>
@@ -57,8 +56,7 @@ export const IssueLink = ({ activity }: { activity: IIssueActivity }) => {
 }
 
 const UserLink = ({ activity }: { activity: IIssueActivity }) => {
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
 
     return (
         <a
@@ -687,8 +685,7 @@ type ActivityMessageProps = {
 }
 
 export const ActivityMessage = ({ activity, showIssue = false }: ActivityMessageProps) => {
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
 
     return (
         <>
