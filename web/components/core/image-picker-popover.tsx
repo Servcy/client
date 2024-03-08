@@ -97,8 +97,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
         if (!image || !workspaceSlug) return
 
         const formData = new FormData()
-        formData.append("asset", image)
-        formData.append("attributes", JSON.stringify({}))
+        formData.append("file", image)
 
         fileService
             .uploadFile(workspaceSlug.toString(), formData)

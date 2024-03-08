@@ -61,7 +61,7 @@ export class UserService extends APIService {
     }
 
     async updateUser(data: Partial<IUser>): Promise<any> {
-        return this.patch("/iam/users/me", data)
+        return this.patch("/iam/users/me/", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

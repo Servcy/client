@@ -60,8 +60,7 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
         setIsImageUploading(true)
 
         const formData = new FormData()
-        formData.append("asset", image)
-        formData.append("attributes", JSON.stringify({}))
+        formData.append("file", image)
 
         if (!workspaceSlug) return
 

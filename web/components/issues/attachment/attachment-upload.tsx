@@ -30,9 +30,9 @@ export const IssueAttachmentUpload: React.FC<Props> = observer((props) => {
             type: currentFile.type,
         })
         const formData = new FormData()
-        formData.append("asset", uploadedFile)
+        formData.append("file", uploadedFile)
         formData.append(
-            "attributes",
+            "meta_data",
             JSON.stringify({
                 name: uploadedFile.name,
                 size: uploadedFile.size,

@@ -10,10 +10,15 @@ const DragDrop = ({
     onSave,
     beforeUpload,
     onRemove,
+    maxCount = 10,
+    accept = undefined,
+
 }: {
     onSave: (_: any, __: string) => void
     beforeUpload: (_: any) => boolean
     onRemove: (_: any) => void
+    maxCount?: number
+    accept?: string
 }) => {
     const props = {
         multiple: true,
@@ -44,7 +49,8 @@ const DragDrop = ({
                 toast.success(`${info.file.name} file uploaded successfully.`)
             }
         },
-        maxCount: 10,
+        accept,
+        maxCount,
         onRemove,
     }
 
