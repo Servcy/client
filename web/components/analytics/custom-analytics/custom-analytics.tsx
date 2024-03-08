@@ -33,7 +33,7 @@ const analyticsService = new AnalyticsService()
 export const CustomAnalytics: React.FC<Props> = observer((props) => {
     const { additionalParams, fullScreen } = props
 
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
 
     const { control, watch, setValue } = useForm({ defaultValues })
 

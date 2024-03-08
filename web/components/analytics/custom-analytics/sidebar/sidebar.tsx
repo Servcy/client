@@ -31,7 +31,7 @@ const analyticsService = new AnalyticsService()
 
 export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
     const { analytics, params, isProjectLevel = false } = props
-    const { workspaceSlug, projectId, cycleId, moduleId }= useParams()
+    const { workspaceSlug, projectId, cycleId, moduleId } = useParams()
 
     // store hooks
     const { currentUser } = useUser()

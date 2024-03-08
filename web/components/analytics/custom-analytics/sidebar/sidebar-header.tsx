@@ -10,7 +10,7 @@ import { renderFormattedDate } from "@helpers/date-time.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
 
 export const CustomAnalyticsSidebarHeader = observer(() => {
-    const { projectId, cycleId, moduleId }= useParams()
+    const { projectId, cycleId, moduleId } = useParams()
 
     const { getProjectById } = useProject()
     const { getCycleById } = useCycle()

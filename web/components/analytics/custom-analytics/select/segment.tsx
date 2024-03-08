@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const SelectSegment: React.FC<Props> = ({ value, onChange, params }) => {
-    const { cycleId, moduleId }= useParams()
+    const { cycleId, moduleId } = useParams()
 
     return (
         <CustomSelect

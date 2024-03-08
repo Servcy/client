@@ -27,7 +27,7 @@ export const CommandPaletteIssueActions: React.FC<Props> = observer((props) => {
     const { closePalette, issueDetails, pages, setPages, setPlaceholder, setSearchTerm } = props
 
     const params = useParams()
-    const { workspaceSlug, projectId }= params
+    const { workspaceSlug, projectId } = params
 
     const {
         issues: { updateIssue },

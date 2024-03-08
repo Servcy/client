@@ -1,4 +1,4 @@
-import { useRouter, useParams, usePathname } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 
 import React, { FC, useCallback, useEffect } from "react"
 

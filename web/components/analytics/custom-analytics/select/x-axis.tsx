@@ -14,7 +14,7 @@ type Props = {
 export const SelectXAxis: React.FC<Props> = (props) => {
     const { value, onChange, params } = props
 
-    const { cycleId, moduleId }= useParams()
+    const { cycleId, moduleId } = useParams()
 
     return (
         <CustomSelect

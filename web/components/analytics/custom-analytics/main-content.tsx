@@ -21,7 +21,7 @@ type Props = {
 export const CustomAnalyticsMainContent: React.FC<Props> = (props) => {
     const { analytics, error, fullScreen, params } = props
 
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
 
     const yAxisKey = params.y_axis === "issue_count" ? "count" : "estimate"
     const barGraphData = convertResponseToBarGraphData(analytics?.distribution, params)

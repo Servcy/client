@@ -19,7 +19,7 @@ const analyticsService = new AnalyticsService()
 export const ScopeAndDemand: React.FC<Props> = (props) => {
     const { fullScreen = true } = props
 
-    const { workspaceSlug, projectId, cycleId, moduleId }= useParams()
+    const { workspaceSlug, projectId, cycleId, moduleId } = useParams()
 
     const isProjectLevel = projectId ? true : false
 
