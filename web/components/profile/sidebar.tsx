@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useEffect, useRef } from "react"
 
@@ -25,9 +25,7 @@ import { ProfileSidebarTime } from "./time"
 const userService = new UserService()
 
 export const ProfileSidebar = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, userId } = router.query
+    const { workspaceSlug, userId }= useParams()
     // store hooks
     const { currentUser } = useUser()
     const { theme: themeStore } = useApplication()

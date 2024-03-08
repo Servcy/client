@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect } from "react"
 
@@ -24,9 +24,7 @@ interface IProfileIssuesPage {
 
 export const ProfileIssuesPage = observer((props: IProfileIssuesPage) => {
     const { type } = props
-
-    const router = useRouter()
-    const { workspaceSlug, userId } = router.query as {
+    const { workspaceSlug, userId }= useParams() as {
         workspaceSlug: string
         userId: string
     }

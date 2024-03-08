@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react"
 // image
@@ -22,8 +22,7 @@ import { Loader } from "@servcy/ui"
 const userService = new UserService()
 
 export const ProfileActivity = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug, userId } = router.query
+    const { workspaceSlug, userId }= useParams()
     // store hooks
     const { currentUser } = useUser()
 

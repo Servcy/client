@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useCallback } from "react"
 
@@ -13,9 +13,7 @@ import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } f
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
 
 export const ProfileIssuesFilter = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, userId } = router.query
+    const { workspaceSlug, userId }= useParams()
     // store hook
     const {
         issuesFilter: { issueFilters, updateFilters },
