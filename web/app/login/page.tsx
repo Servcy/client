@@ -6,7 +6,8 @@ import Link from "next/link.js"
 import { useEffect, useState } from "react"
 
 import { GoogleLogin } from "@react-oauth/google"
-import { Button, Input } from "antd"
+import { Input } from "antd"
+import { Button } from "@servcy/ui"
 import toast from "react-hot-toast"
 import { BiLogIn } from "react-icons/bi"
 import { HiMail } from "react-icons/hi"
@@ -113,7 +114,7 @@ export default function Login(): JSX.Element {
 
     return (
         <main className="flex min-h-screen w-full bg-servcy-white">
-            <div className="m-auto w-[430px] rounded-lg border border-servcy-black bg-servcy-black p-10 text-center text-servcy-white shadow-md">
+            <div className="m-auto w-[430px] rounded-lg border border-custom-border-200 bg-onboarding-gradient-200 p-10 text-center text-servcy-white shadow-md">
                 <Image src="/logo.svg" alt="Servcy logo" height="64" width="64" className="mx-auto" />
                 <h4 className="my-5 font-semibold">Welcome To Servcy</h4>
                 <form autoComplete="off">
@@ -175,11 +176,10 @@ export default function Login(): JSX.Element {
                                 </span>
                             </div>
                             <Button
-                                type="default"
+                                variant="primary" type="submit" size="md"
                                 onClick={sendOtp}
                                 className="flex w-full items-center justify-center text-center font-medium !text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                                 disabled={loading}
-                                size="large"
                                 loading={loading}
                             >
                                 {!loading && <BiLogIn className="mr-2 inline" />} Send OTP
