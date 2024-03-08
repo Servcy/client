@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import React from "react"
 
@@ -26,9 +26,8 @@ export const WorkspaceSidebarMenu = observer(() => {
     const {
         membership: { currentWorkspaceRole },
     } = useUser()
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const pathname = usePathname()
+    const { workspaceSlug }= useParams()
     // computed
     const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST
 
@@ -60,7 +59,7 @@ export const WorkspaceSidebarMenu = observer(() => {
                                 >
                                     <div
                                         className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium outline-none ${
-                                            link.highlight(router.asPath, `/${workspaceSlug}`)
+                                            link.highlight(pathname, `/${workspaceSlug}`)
                                                 ? "bg-custom-primary-100/10 text-custom-primary-100"
                                                 : "text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80 focus:bg-custom-sidebar-background-80"
                                         } ${themeStore?.sidebarCollapsed ? "justify-center" : ""}`}

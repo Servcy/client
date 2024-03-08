@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { Fragment, useState } from "react"
 
@@ -52,7 +52,7 @@ const profileLinks = (workspaceSlug: string, userId: string) => [
 export const WorkspaceSidebarDropdown = observer(() => {
     // router
     const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const {
         theme: { sidebarCollapsed, toggleSidebar },

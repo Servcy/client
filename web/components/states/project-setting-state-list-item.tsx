@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useState } from "react"
 
@@ -24,9 +24,7 @@ export const StatesListItem: React.FC<Props> = observer((props) => {
     const { index, state, statesList, handleEditState, handleDeleteState } = props
     // states
     const [isSubmitting, setIsSubmitting] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { setTrackElement } = useEventTracker()
     const { markStateAsDefault, moveStatePosition } = useProjectState()
@@ -111,18 +109,24 @@ export const StatesListItem: React.FC<Props> = observer((props) => {
                         {state.default ? (
                             <Tooltip tooltipContent="Cannot delete the default state.">
                                 <X
-                                    className={`h-4 w-4 ${groupLength < 1 ? "text-custom-sidebar-text-400" : "text-red-500"}`}
+                                    className={`h-4 w-4 ${
+                                        groupLength < 1 ? "text-custom-sidebar-text-400" : "text-red-500"
+                                    }`}
                                 />
                             </Tooltip>
                         ) : groupLength === 1 ? (
                             <Tooltip tooltipContent="Cannot have an empty group.">
                                 <X
-                                    className={`h-4 w-4 ${groupLength < 1 ? "text-custom-sidebar-text-400" : "text-red-500"}`}
+                                    className={`h-4 w-4 ${
+                                        groupLength < 1 ? "text-custom-sidebar-text-400" : "text-red-500"
+                                    }`}
                                 />
                             </Tooltip>
                         ) : (
                             <X
-                                className={`h-4 w-4 ${groupLength < 1 ? "text-custom-sidebar-text-400" : "text-red-500"}`}
+                                className={`h-4 w-4 ${
+                                    groupLength < 1 ? "text-custom-sidebar-text-400" : "text-red-500"
+                                }`}
                             />
                         )}
                     </button>

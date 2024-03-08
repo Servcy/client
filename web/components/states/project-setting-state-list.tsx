@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -18,9 +18,7 @@ import { orderStateGroups } from "@helpers/state.helper"
 import { Loader } from "@servcy/ui"
 
 export const ProjectSettingStateList: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // store
     const { setTrackElement } = useEventTracker()
     const { groupedProjectStates, projectStates, fetchProjectStates } = useProjectState()

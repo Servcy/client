@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect } from "react"
 
@@ -34,9 +34,7 @@ const defaultValues: Partial<IState> = {
 
 export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
     const { data, onClose, selectedGroup, groupLength } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { captureProjectStateEvent, setTrackElement } = useEventTracker()
     const { createState, updateState } = useProjectState()

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -31,9 +31,7 @@ const defaultValues: Partial<IState> = {
 
 export const CreateStateModal: React.FC<Props> = observer((props) => {
     const { isOpen, projectId, handleClose } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const { createState } = useProjectState()
 

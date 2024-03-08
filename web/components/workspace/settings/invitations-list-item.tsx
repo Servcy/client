@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, useState } from "react"
 
@@ -22,9 +22,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
     const { invitationId } = props
     // states
     const [removeMemberModal, setRemoveMemberModal] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const {
         membership: { currentWorkspaceMemberInfo, currentWorkspaceRole },

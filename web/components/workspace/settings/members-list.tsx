@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC } from "react"
 
@@ -12,9 +12,7 @@ import { useMember } from "@hooks/store"
 
 export const WorkspaceMembersList: FC<{ searchQuery: string }> = observer((props) => {
     const { searchQuery } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const {
         workspace: {

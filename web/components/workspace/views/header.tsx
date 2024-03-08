@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect, useRef, useState } from "react"
 
@@ -16,9 +16,7 @@ import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/works
 
 const ViewTab = observer((props: { viewId: string }) => {
     const { viewId } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, globalViewId } = router.query
+    const { workspaceSlug, globalViewId } = useParams()
     // store hooks
     const { getViewDetailsById } = useGlobalView()
 
@@ -45,9 +43,7 @@ export const GlobalViewsHeader: React.FC = observer(() => {
     // states
     const [createViewModal, setCreateViewModal] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, globalViewId } = router.query
+    const { workspaceSlug, globalViewId }= useParams()
     // store hooks
     const { currentWorkspaceViews } = useGlobalView()
     const {

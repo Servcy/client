@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -28,9 +28,7 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
     // states
     const [createUpdateViewModal, setCreateUpdateViewModal] = useState(false)
     const [deleteViewModal, setDeleteViewModal] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
 
     // store hooks
     const {

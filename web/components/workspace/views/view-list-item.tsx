@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useState } from "react"
 
@@ -23,9 +23,7 @@ export const GlobalViewListItem: React.FC<Props> = observer((props) => {
     // states
     const [updateViewModal, setUpdateViewModal] = useState(false)
     const [deleteViewModal, setDeleteViewModal] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const { getViewDetailsById } = useGlobalView()
     const { setTrackElement } = useEventTracker()
