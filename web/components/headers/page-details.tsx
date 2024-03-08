@@ -20,7 +20,7 @@ export interface IPagesHeaderProps {
 
 export const PageDetailsHeader: FC<IPagesHeaderProps> = observer((props) => {
     const { showButton = false } = props
-    const { workspaceSlug, pageId }= useParams()
+    const { workspaceSlug, pageId } = useParams()
 
     const { commandPalette: commandPaletteStore } = useApplication()
     const { currentProjectDetails } = useProject()

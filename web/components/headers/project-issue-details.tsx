@@ -1,4 +1,4 @@
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { FC } from "react"
 
@@ -25,7 +25,7 @@ const issueService = new IssueService()
 export const ProjectIssueDetailsHeader: FC = observer(() => {
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId, issueId }= useParams()
+    const { workspaceSlug, projectId, issueId } = useParams()
     // store hooks
     const { currentProjectDetails, getProjectById } = useProject()
     const { theme: themeStore } = useApplication()

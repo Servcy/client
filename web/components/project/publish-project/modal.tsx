@@ -54,7 +54,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
     // states
     const [isUnPublishing, setIsUnPublishing] = useState(false)
     const [isUpdateRequired, setIsUpdateRequired] = useState(false)
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         projectPublishSettings,

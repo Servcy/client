@@ -22,7 +22,7 @@ type Props = {
 
 export const EstimateListItem: React.FC<Props> = observer((props) => {
     const { estimate, editEstimate, deleteEstimate } = props
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { currentProjectDetails, updateProject } = useProject()
 

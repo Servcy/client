@@ -22,7 +22,7 @@ export const ModuleMobileHeader = () => {
         { key: "kanban", title: "Kanban", icon: Kanban },
         { key: "calendar", title: "Calendar", icon: Calendar },
     ]
-    const { workspaceSlug, projectId, moduleId }= useParams() as {
+    const { workspaceSlug, projectId, moduleId } = useParams() as {
         workspaceSlug: string
         projectId: string
         moduleId: string

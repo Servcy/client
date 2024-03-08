@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { usePathname, useParams } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import { useRef, useState } from "react"
 
@@ -91,7 +91,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     const [publishModalOpen, setPublishModal] = useState(false)
     const [isMenuActive, setIsMenuActive] = useState(false)
     const pathname = usePathname()
-    const { workspaceSlug, projectId: URLProjectId }= useParams()
+    const { workspaceSlug, projectId: URLProjectId } = useParams()
 
     // derived values
     const project = getProjectById(projectId)

@@ -19,7 +19,7 @@ import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOption
 import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 
 export const ProjectDraftIssueHeader: FC = observer(() => {
-    const { workspaceSlug, projectId }= useParams() as { workspaceSlug: string; projectId: string }
+    const { workspaceSlug, projectId } = useParams() as { workspaceSlug: string; projectId: string }
     // store hooks
     const {
         issuesFilter: { issueFilters, updateFilters },

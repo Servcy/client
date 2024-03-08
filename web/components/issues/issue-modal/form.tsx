@@ -109,7 +109,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
 
     // refs
     const editorRef = useRef<any>(null)
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     const workspaceStore = useWorkspace()
     const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
 

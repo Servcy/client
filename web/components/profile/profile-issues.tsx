@@ -24,7 +24,7 @@ interface IProfileIssuesPage {
 
 export const ProfileIssuesPage = observer((props: IProfileIssuesPage) => {
     const { type } = props
-    const { workspaceSlug, userId }= useParams() as {
+    const { workspaceSlug, userId } = useParams() as {
         workspaceSlug: string
         userId: string
     }

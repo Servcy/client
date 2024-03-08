@@ -32,7 +32,7 @@ import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOption
 import { Breadcrumbs, Button, CustomMenu, PhotoFilterIcon } from "@servcy/ui"
 
 export const ProjectViewIssuesHeader: React.FC = observer(() => {
-    const { workspaceSlug, projectId, viewId }= useParams() as {
+    const { workspaceSlug, projectId, viewId } = useParams() as {
         workspaceSlug: string
         projectId: string
         viewId: string

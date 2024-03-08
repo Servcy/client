@@ -42,7 +42,7 @@ const defaultValues: FormValues = {
 
 export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
     const { isOpen, onClose, onSuccess } = props
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
 
     // store hooks
     const { captureEvent } = useEventTracker()

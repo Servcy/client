@@ -23,7 +23,7 @@ export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
     const { isOpen, handleClose, data } = props
     // states
     const [isDeleteLoading, setIsDeleteLoading] = useState(false)
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { deleteEstimate } = useEstimate()
 

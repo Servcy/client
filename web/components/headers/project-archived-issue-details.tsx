@@ -22,7 +22,7 @@ import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 const issueArchiveService = new IssueArchiveService()
 
 export const ProjectArchivedIssueDetailsHeader: FC = observer(() => {
-    const { workspaceSlug, projectId, archivedIssueId }= useParams()
+    const { workspaceSlug, projectId, archivedIssueId } = useParams()
     // store hooks
     const { currentProjectDetails, getProjectById } = useProject()
 

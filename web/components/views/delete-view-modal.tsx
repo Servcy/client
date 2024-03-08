@@ -22,7 +22,7 @@ export const DeleteProjectViewModal: React.FC<Props> = observer((props) => {
     const { data, isOpen, onClose } = props
     // states
     const [isDeleteLoading, setIsDeleteLoading] = useState(false)
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { deleteView } = useProjectView()
 

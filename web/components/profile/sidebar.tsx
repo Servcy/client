@@ -25,7 +25,7 @@ import { ProfileSidebarTime } from "./time"
 const userService = new UserService()
 
 export const ProfileSidebar = observer(() => {
-    const { workspaceSlug, userId }= useParams()
+    const { workspaceSlug, userId } = useParams()
     // store hooks
     const { currentUser } = useUser()
     const { theme: themeStore } = useApplication()

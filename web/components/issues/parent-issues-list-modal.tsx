@@ -24,9 +24,14 @@ type Props = {
 
 const projectService = new ProjectService()
 
-export const ParentIssuesListModal: React.FC<Props> = (
-    { isOpen, handleClose: onClose, value, onChange, projectId, issueId }
-) => {
+export const ParentIssuesListModal: React.FC<Props> = ({
+    isOpen,
+    handleClose: onClose,
+    value,
+    onChange,
+    projectId,
+    issueId,
+}) => {
     const [searchTerm, setSearchTerm] = useState("")
     const [issues, setIssues] = useState<ISearchIssueResponse[]>([])
     const [isSearching, setIsSearching] = useState(false)

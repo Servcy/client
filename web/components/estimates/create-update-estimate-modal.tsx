@@ -36,7 +36,7 @@ type FormValues = typeof defaultValues
 
 export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
     const { handleClose, data, isOpen } = props
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { createEstimate, updateEstimate } = useEstimate()
     // form info

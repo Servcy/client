@@ -30,7 +30,7 @@ const defaultValues: Partial<IState> = {
 
 export const CreateLabelModal: React.FC<Props> = observer((props) => {
     const { isOpen, projectId, handleClose, onSuccess } = props
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { createLabel } = useLabel()
     // form info

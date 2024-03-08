@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter, useParams, usePathname } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -32,7 +32,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
     // router
     const pathname = usePathname()
     const router = useRouter()
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
 
     // store hooks
     const {

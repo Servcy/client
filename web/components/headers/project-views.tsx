@@ -15,7 +15,7 @@ import { renderEmoji } from "@helpers/emoji.helper"
 import { Breadcrumbs, Button, PhotoFilterIcon } from "@servcy/ui"
 
 export const ProjectViewsHeader: React.FC = observer(() => {
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         commandPalette: { toggleCreateViewModal },

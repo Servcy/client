@@ -23,7 +23,7 @@ const defaultValues: Partial<IProject> = {
 }
 
 export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const {
         membership: { currentProjectRole },

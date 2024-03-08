@@ -37,7 +37,9 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 </div>
                             )}
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Status:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
+                                    Status:
+                                </div>
                                 <div>{data.data.board.closed ? "Closed" : "Open"}</div>
                             </div>
                         </>
@@ -70,7 +72,9 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 </div>
                             )}
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Status:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
+                                    Status:
+                                </div>
                                 <div>{data.data.board.closed ? "Closed" : "Open"}</div>
                             </div>
                             {data.data.old && (
@@ -128,7 +132,9 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         )}
                         {data.data.board && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Board:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
+                                    Board:
+                                </div>
                                 <div>
                                     {data.data.board.name}{" "}
                                     <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
@@ -142,7 +148,9 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         )}
                         {data.data.list && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">List:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
+                                    List:
+                                </div>
                                 <div>{data.data.list.name}</div>
                             </div>
                         )}
@@ -175,13 +183,17 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         )}
                         {data.data.list && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">List:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
+                                    List:
+                                </div>
                                 <div>{data.data.list.name}</div>
                             </div>
                         )}
                         {data.data.board && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Board:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
+                                    Board:
+                                </div>
                                 <div>
                                     {data.data.board.name}
                                     <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">

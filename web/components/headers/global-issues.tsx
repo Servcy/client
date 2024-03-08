@@ -32,7 +32,7 @@ export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
     const { activeLayout } = props
     // states
     const [createViewModal, setCreateViewModal] = useState(false)
-    const { workspaceSlug, globalViewId }= useParams()
+    const { workspaceSlug, globalViewId } = useParams()
     // store hooks
     const {
         issuesFilter: { filters, updateFilters },

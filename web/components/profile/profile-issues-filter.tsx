@@ -13,7 +13,7 @@ import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } f
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
 
 export const ProfileIssuesFilter = observer(() => {
-    const { workspaceSlug, userId }= useParams()
+    const { workspaceSlug, userId } = useParams()
     // store hook
     const {
         issuesFilter: { issueFilters, updateFilters },

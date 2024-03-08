@@ -39,7 +39,7 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
     const [isDraggingGroup, setIsDraggingGroup] = useState(false)
     // refs
     const scrollToRef = useRef<HTMLFormElement>(null)
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // theme
     const { resolvedTheme } = useTheme()
     // store hooks

@@ -1,4 +1,4 @@
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { useCallback, useState } from "react"
 
@@ -36,7 +36,7 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
     const [analyticsModal, setAnalyticsModal] = useState(false)
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId }= useParams() as { workspaceSlug: string; projectId: string }
+    const { workspaceSlug, projectId } = useParams() as { workspaceSlug: string; projectId: string }
     // store hooks
     const {
         project: { projectMemberIds },

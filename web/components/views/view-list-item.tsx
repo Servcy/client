@@ -28,7 +28,7 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
     // states
     const [createUpdateViewModal, setCreateUpdateViewModal] = useState(false)
     const [deleteViewModal, setDeleteViewModal] = useState(false)
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
 
     // store hooks
     const {

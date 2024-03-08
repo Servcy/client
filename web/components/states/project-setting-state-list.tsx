@@ -18,7 +18,7 @@ import { orderStateGroups } from "@helpers/state.helper"
 import { Loader } from "@servcy/ui"
 
 export const ProjectSettingStateList: React.FC = observer(() => {
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store
     const { setTrackElement } = useEventTracker()
     const { groupedProjectStates, projectStates, fetchProjectStates } = useProjectState()

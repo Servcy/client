@@ -43,7 +43,7 @@ const PROJECT_FEATURES_LIST = [
 ]
 
 export const ProjectFeaturesList: FC<Props> = observer(() => {
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { captureEvent } = useEventTracker()
     const {

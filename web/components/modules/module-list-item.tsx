@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter, useParams, usePathname } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -107,7 +107,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
     const openModuleOverview = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         e.preventDefault()
-        router.push(`${pathname}?peekModule=${moduleId}`);
+        router.push(`${pathname}?peekModule=${moduleId}`)
     }
 
     if (!moduleDetails) return null

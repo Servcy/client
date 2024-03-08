@@ -42,7 +42,11 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                     )
                 case "link":
                     return (
-                        <a key={index} href={element.url} className="text-custom-servcy-wheat hover:text-custom-servcy-silver">
+                        <a
+                            key={index}
+                            href={element.url}
+                            className="text-custom-servcy-wheat hover:text-custom-servcy-silver"
+                        >
                             {element.text}
                         </a>
                     )

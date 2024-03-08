@@ -55,7 +55,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
     const [moduleDeleteModal, setModuleDeleteModal] = useState(false)
     const [moduleLinkModal, setModuleLinkModal] = useState(false)
     const [selectedLinkToUpdate, setSelectedLinkToUpdate] = useState<ILinkDetails | null>(null)
-    const { workspaceSlug, projectId, peekModule }= useParams()
+    const { workspaceSlug, projectId, peekModule } = useParams()
     // store hooks
     const {
         membership: { currentProjectRole },

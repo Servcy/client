@@ -24,7 +24,7 @@ export const DeleteStateModal: React.FC<Props> = observer((props) => {
     const { isOpen, onClose, data } = props
     // states
     const [isDeleteLoading, setIsDeleteLoading] = useState(false)
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { captureProjectStateEvent } = useEventTracker()
     const { deleteState } = useProjectState()

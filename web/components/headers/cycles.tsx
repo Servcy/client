@@ -1,4 +1,4 @@
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { FC, useCallback } from "react"
 
@@ -35,7 +35,7 @@ export const CyclesHeader: FC = observer(() => {
     const canUserCreateCycle =
         currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
 
-    const { workspaceSlug }= useParams() as {
+    const { workspaceSlug } = useParams() as {
         workspaceSlug: string
     }
     const { setValue: setCycleLayout } = useLocalStorage<TCycleLayout>("cycle_layout", "list")

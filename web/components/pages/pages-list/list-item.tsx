@@ -40,7 +40,7 @@ export const PagesListItem: FC<IPagesListItem> = observer(({ pageId, projectId }
     // Now, I am observing only the projectPages, out of the projectPageStore.
     const { archivePage, restorePage } = projectPageStore
     const pageStore = usePage(pageId)
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false)
 
     const [deletePageModal, setDeletePageModal] = useState(false)

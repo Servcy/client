@@ -1,4 +1,4 @@
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { GanttChartSquare, LayoutGrid, List, Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -20,7 +20,7 @@ import { Breadcrumbs, Button, CustomMenu, DiceIcon, Tooltip } from "@servcy/ui"
 export const ModulesListHeader: React.FC = observer(() => {
     // router
     const router = useRouter()
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { commandPalette: commandPaletteStore } = useApplication()
     const { setTrackElement } = useEventTracker()

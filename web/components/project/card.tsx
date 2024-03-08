@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -27,7 +27,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     const { project } = props
     // router
     const router = useRouter()
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
 
     // states
     const [deleteProjectModalOpen, setDeleteProjectModal] = useState(false)

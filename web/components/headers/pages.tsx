@@ -15,7 +15,7 @@ import { renderEmoji } from "@helpers/emoji.helper"
 import { Breadcrumbs, Button } from "@servcy/ui"
 
 export const PagesHeader = observer(() => {
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         commandPalette: { toggleCreatePageModal },

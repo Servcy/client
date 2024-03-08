@@ -47,7 +47,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
     } = props
     // store hooks
     const { captureEvent } = useEventTracker()
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // states
     const [showSnoozeOptions, setShowSnoozeOptions] = React.useState(false)
 

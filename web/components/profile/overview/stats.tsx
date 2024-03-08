@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const ProfileStats: React.FC<Props> = ({ userProfile }) => {
-    const { workspaceSlug, userId }= useParams()
+    const { workspaceSlug, userId } = useParams()
 
     const overviewCards = [
         {

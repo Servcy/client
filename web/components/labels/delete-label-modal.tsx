@@ -20,7 +20,7 @@ type Props = {
 
 export const DeleteLabelModal: React.FC<Props> = observer((props) => {
     const { isOpen, onClose, data } = props
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { deleteLabel } = useLabel()
     // states

@@ -24,7 +24,7 @@ export const EstimatesList: React.FC = observer(() => {
     const [estimateFormOpen, setEstimateFormOpen] = useState(false)
     const [estimateToDelete, setEstimateToDelete] = useState<string | null>(null)
     const [estimateToUpdate, setEstimateToUpdate] = useState<IEstimate | undefined>()
-    const { workspaceSlug, projectId }= useParams()
+    const { workspaceSlug, projectId } = useParams()
     // theme
     const { resolvedTheme } = useTheme()
     // store hooks

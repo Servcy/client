@@ -22,7 +22,7 @@ import { Loader } from "@servcy/ui"
 const userService = new UserService()
 
 export const ProfileActivity = observer(() => {
-    const { workspaceSlug, userId }= useParams()
+    const { workspaceSlug, userId } = useParams()
     // store hooks
     const { currentUser } = useUser()
 

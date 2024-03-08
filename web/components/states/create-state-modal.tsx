@@ -31,7 +31,7 @@ const defaultValues: Partial<IState> = {
 
 export const CreateStateModal: React.FC<Props> = observer((props) => {
     const { isOpen, projectId, handleClose } = props
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { createState } = useProjectState()
 

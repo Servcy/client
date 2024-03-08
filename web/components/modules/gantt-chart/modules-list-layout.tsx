@@ -11,7 +11,7 @@ import { useModule, useProject } from "@hooks/store"
 import { IModule } from "@servcy/types"
 
 export const ModulesListGanttChartView: React.FC = observer(() => {
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store
     const { currentProjectDetails } = useProject()
     const { projectModuleIds, moduleMap, updateModuleDetails } = useModule()

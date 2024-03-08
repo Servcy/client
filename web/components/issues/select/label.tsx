@@ -25,7 +25,7 @@ type Props = {
 
 export const IssueLabelSelect: React.FC<Props> = observer((props) => {
     const { setIsOpen, value, onChange, projectId, label, disabled = false, tabIndex } = props
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { getProjectLabels, fetchProjectLabels } = useLabel()
     // states
