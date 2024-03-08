@@ -2,41 +2,36 @@ import { useEffect, useState } from "react"
 
 import { Card, Checkbox, Modal } from "antd"
 
-import FigmaConfiguration from "@components/settings/FigmaConfiguration"
-import GithubConfiguration from "@components/settings/GithubConfiguration"
-import GoogleConfiguration from "@components/settings/GoogleConfiguration"
-import MicrosoftConfiguration from "@components/settings/MicrosoftConfiguration"
+import FigmaConfiguration from "@components/integrations/FigmaConfiguration"
+import GithubConfiguration from "@components/integrations/GithubConfiguration"
+import GoogleConfiguration from "@components/integrations/GoogleConfiguration"
+import MicrosoftConfiguration from "@components/integrations/MicrosoftConfiguration"
 
-import {
-    disableIntegrationEvent,
-    enableIntegrationEvent,
-    fetchIntegrationEvents,
-    fetchUserIntegrations,
-} from "@services/integration"
+import IntegrationService from "@services/integration.service"
 
 import type { Integration, IntegrationEvent, UserIntegration } from "@servcy/types"
 
-export default function IntegrationConfigurationModal({
-    selectedIntegration,
-    onClose,
-}: {
-    selectedIntegration: Integration
-    onClose: () => void
-}) {
+const integration_service = new IntegrationService()
+
+export default function IntegrationConfigurationModal(
+    { selectedIntegration, onClose }: { selectedIntegration: Integration; onClose: () => void }
+) {
     const [loading, setLoading] = useState<boolean>(false)
     const [events, setEvents] = useState<IntegrationEvent[]>([])
     const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([])
 
     useEffect(() => {
         setLoading(true)
-        fetchUserIntegrations(selectedIntegration.name)
+        integration_service
+            .fetchUserIntegrations(selectedIntegration.name)
             .then((response) => {
                 setUserIntegrations(response)
             })
             .catch((error) => {
                 console.error("Error fetching user integrations", error)
             })
-        fetchIntegrationEvents(String(selectedIntegration.id))
+        integration_service
+            .fetchIntegrationEvents(String(selectedIntegration.id))
             .then((events) => {
                 setEvents(JSON.parse(events))
             })
@@ -48,41 +43,45 @@ export default function IntegrationConfigurationModal({
     }, [selectedIntegration.id, selectedIntegration.name])
 
     const handleEnableEvent = (event: IntegrationEvent) => {
-        enableIntegrationEvent({
-            integration_id: selectedIntegration.id,
-            event_id: event.id,
-        }).then(() => {
-            setEvents((events) =>
-                events.map((e) => {
-                    if (e.id === event.id) {
-                        return {
-                            ...e,
-                            is_disabled: false,
+        integration_service
+            .enableIntegrationEvent({
+                integration_id: selectedIntegration.id,
+                event_id: event.id,
+            })
+            .then(() => {
+                setEvents((events) =>
+                    events.map((e) => {
+                        if (e.id === event.id) {
+                            return {
+                                ...e,
+                                is_disabled: false,
+                            }
                         }
-                    }
-                    return e
-                })
-            )
-        })
+                        return e
+                    })
+                )
+            })
     }
 
     const handleDisableEvent = (event: IntegrationEvent) => {
-        disableIntegrationEvent({
-            integration_id: selectedIntegration.id,
-            event_id: event.id,
-        }).then(() => {
-            setEvents((events) =>
-                events.map((e) => {
-                    if (e.id === event.id) {
-                        return {
-                            ...e,
-                            is_disabled: true,
+        integration_service
+            .disableIntegrationEvent({
+                integration_id: selectedIntegration.id,
+                event_id: event.id,
+            })
+            .then(() => {
+                setEvents((events) =>
+                    events.map((e) => {
+                        if (e.id === event.id) {
+                            return {
+                                ...e,
+                                is_disabled: true,
+                            }
                         }
-                    }
-                    return e
-                })
-            )
-        })
+                        return e
+                    })
+                )
+            })
     }
 
     return (

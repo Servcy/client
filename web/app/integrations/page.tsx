@@ -9,11 +9,10 @@ import toast from "react-hot-toast"
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai"
 import { HiArrowsRightLeft } from "react-icons/hi2"
 
-import IntegrationConfigurationModal from "@components/settings/IntegrationConfigurationModal"
+import IntegrationConfigurationModal from "@components/integrations/IntegrationConfigurationModal"
 
 import { integrationCategories, uniqueIntegrationCategories } from "@constants/integration"
 
-import { fetchIntegrations } from "@services/integration"
 
 import { getQueryParams } from "@helpers/common.helper"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
@@ -27,6 +26,9 @@ import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 import { PageHead } from "@components/core"
 import type { Integration } from "@servcy/types"
 import { Button, Spinner } from "@servcy/ui"
+import  IntegrationService from "@services/integration.service"
+
+const integration_service = new IntegrationService()
 
 export default function Integrations(): JSX.Element {
     const [integrations, setIntegrations] = useState<Integration[]>([])
@@ -40,7 +42,7 @@ export default function Integrations(): JSX.Element {
     useEffect(() => {
         setLoading(true)
         const queryParams: Record<string, string> = getQueryParams(window.location.search)
-        fetchIntegrations()
+        integration_service.fetchIntegrations()
             .then((results) => {
                 setIntegrations(results)
                 if (queryParams["integration"]) {

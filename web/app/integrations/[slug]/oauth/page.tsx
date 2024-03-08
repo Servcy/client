@@ -4,14 +4,15 @@ import { useParams, useRouter } from "next/navigation"
 
 import { useEffect } from "react"
 
-import { SyncOutlined } from "@ant-design/icons"
-import { Spin } from "antd"
-import toast from "react-hot-toast"
+import { Spinner } from "@servcy/ui"
 
-import { integrationOauth as integrationOauthApi } from "@services/integration"
+import toast from "react-hot-toast"
 
 import { getQueryParams } from "@helpers/common.helper"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
+import  IntegrationService from "@services/integration.service"
+
+const integration_service = new IntegrationService()
 
 export default function IntegrationOauth(): JSX.Element {
     const params = useParams()
@@ -29,7 +30,7 @@ export default function IntegrationOauth(): JSX.Element {
                 oauthParams["code"] = token
             }
         }
-        integrationOauthApi(oauthParams, slug)
+        integration_service.integrationOauth(oauthParams, slug)
             .then((response) => {
                 toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`)
                 if (response?.results !== "null") {
@@ -48,24 +49,11 @@ export default function IntegrationOauth(): JSX.Element {
                 toast.error(error?.response?.data?.detail || "Something went wrong!")
                 router.push("/integrations")
             })
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
-        <>
-            <div className="flex h-full w-full flex-col items-center justify-center">
-                <Spin
-                    className="m-auto"
-                    size="large"
-                    indicator={
-                        <SyncOutlined
-                            spin
-                            style={{
-                                color: "#26542F",
-                            }}
-                        />
-                    }
-                />
-            </div>
-        </>
+        <div className="grid h-screen w-full place-items-center">
+            <Spinner />
+        </div>
     )
 }

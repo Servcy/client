@@ -12,37 +12,41 @@ import { MdOutlineBlock } from "react-icons/md"
 
 import Cause from "@components/inbox/Cause"
 
-import { disableNotificationType } from "@services/integration"
+import IntegrationService from "@services/integration.service"
 
 import type { InboxItem, PaginationDetails } from "@servcy/types"
 
-const InboxItems = ({
-    setPage,
-    page,
-    inboxItems,
-    inboxPagination,
-    archiveItems,
-    setSelectedRowIndex,
-    loading,
-    deleteItems,
-    setIsInboxItemModalVisible,
-    setSelectedItemIds,
-    readItem,
-    activeTab,
-}: {
-    setPage: Dispatch<SetStateAction<number>>
-    page: number
-    readItem: (id: string | undefined) => void
-    inboxItems: InboxItem[]
-    inboxPagination: PaginationDetails
-    loading: boolean
-    activeTab: string
-    archiveItems: (_: React.Key[]) => void
-    deleteItems: (_: number[]) => void
-    setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
-    setSelectedRowIndex: Dispatch<SetStateAction<number>>
-    setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
-}) => {
+const integration_service = new IntegrationService()
+
+const InboxItems = (
+    {
+        setPage,
+        page,
+        inboxItems,
+        inboxPagination,
+        archiveItems,
+        setSelectedRowIndex,
+        loading,
+        deleteItems,
+        setIsInboxItemModalVisible,
+        setSelectedItemIds,
+        readItem,
+        activeTab,
+    }: {
+        setPage: Dispatch<SetStateAction<number>>
+        page: number
+        readItem: (id: string | undefined) => void
+        inboxItems: InboxItem[]
+        inboxPagination: PaginationDetails
+        loading: boolean
+        activeTab: string
+        archiveItems: (_: React.Key[]) => void
+        deleteItems: (_: number[]) => void
+        setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
+        setSelectedRowIndex: Dispatch<SetStateAction<number>>
+        setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
+    }
+) => {
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[]) => {
             setSelectedItemIds(selectedRowKeys)
@@ -53,7 +57,8 @@ const InboxItems = ({
     }
 
     const disableNotificationTypeHandler = (event: string, user_integration_id: number) => {
-        disableNotificationType({ event, user_integration_id })
+        integration_service
+            .disableNotificationType({ event, user_integration_id })
             .then(() => {
                 toast.success("Notification type disabled successfully")
             })

@@ -6,10 +6,9 @@ import { Button, Input, Select } from "antd"
 import toast from "react-hot-toast"
 import { MdOutlineSyncAlt } from "react-icons/md"
 
-import {
-    configureUserIntegration as configureUserIntegrationApi,
-    fetchUserIntegrations as fetchUserIntegrationsApi,
-} from "@services/integration"
+import IntegrationService from "@services/integration.service"
+
+const integration_service = new IntegrationService()
 
 import type { Integration, UserIntegration } from "@servcy/types"
 
@@ -23,7 +22,7 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
     useEffect(() => {
         setLoading(true)
         setUserIntegrationId(selectedIntegration.id)
-        fetchUserIntegrationsApi("Gmail")
+        integration_service.fetchUserIntegrations("Gmail")
             .then((response) => {
                 setUserIntegrations(response)
                 if (response.length === 1) {
@@ -56,7 +55,7 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
             return
         }
         setSaving(true)
-        configureUserIntegrationApi(
+        integration_service.configureUserIntegration(
             userIntegrationId,
             {
                 whitelisted_emails: Array.from(nonEmptyWhitelistedEmails),
