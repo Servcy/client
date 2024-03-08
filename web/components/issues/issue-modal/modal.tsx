@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { usePathname } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -88,8 +88,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             viewId: moduleId,
         },
     }
-    // router
-    const router = useRouter()
+    const pathname = usePathname()
 
     // local storage
     const { storedValue: localStorageDraftIssues, setValue: setLocalStorageDraftIssue } = useLocalStorage<
@@ -191,7 +190,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...response, state: "SUCCESS" },
-                path: router.asPath,
+                path: pathname,
             })
             !createMore && handleClose()
             return response
@@ -200,7 +199,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED" },
-                path: router.asPath,
+                path: pathname,
             })
         }
         return undefined
@@ -218,7 +217,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...payload, issueId: data.id, state: "SUCCESS" },
-                path: router.asPath,
+                path: pathname,
             })
             handleClose()
         } catch (error) {
@@ -226,7 +225,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...payload, state: "FAILED" },
-                path: router.asPath,
+                path: pathname,
             })
         }
         return undefined

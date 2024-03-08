@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useRouter, useParams, usePathname } from "next/navigation"
 
 import React, { FC, useCallback, useEffect } from "react"
 
@@ -29,7 +29,9 @@ const issueService = new IssueService()
 
 export const CommandPalette: FC = observer(() => {
     const router = useRouter()
-    const { workspaceSlug, projectId, issueId, cycleId, moduleId } = router.query
+    const pathname = usePathname()
+    const params = useParams()
+    const { workspaceSlug, projectId, issueId, cycleId, moduleId } = params
 
     const {
         commandPalette,
@@ -157,7 +159,7 @@ export const CommandPalette: FC = observer(() => {
         return () => document.removeEventListener("keydown", handleKeyDown)
     }, [handleKeyDown])
 
-    const isDraftIssue = router?.asPath?.includes("draft-issues") || false
+    const isDraftIssue = pathname?.includes("draft-issues") || false
 
     if (!currentUser) return null
 
