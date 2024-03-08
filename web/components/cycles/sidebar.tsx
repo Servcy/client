@@ -47,7 +47,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     const [cycleDeleteModal, setCycleDeleteModal] = useState(false)
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId, peekCycle } = router.query
+    const { workspaceSlug, projectId, peekCycle } = useParams()
     // store hooks
     const { setTrackElement, captureCycleEvent } = useEventTracker()
     const {

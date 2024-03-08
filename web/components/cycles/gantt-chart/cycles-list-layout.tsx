@@ -22,7 +22,7 @@ export const CyclesListGanttChartView: FC<Props> = observer((props) => {
     const { cycleIds } = props
     // router
     const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         membership: { currentProjectRole },

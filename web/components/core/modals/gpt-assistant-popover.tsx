@@ -41,7 +41,7 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
     const editorRef = useRef<any>(null)
     const responseRef = useRef<any>(null)
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
 
     // popper
     const { styles, attributes } = usePopper(referenceElement, popperElement, {

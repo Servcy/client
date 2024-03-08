@@ -1,4 +1,4 @@
-import router from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useCallback, useState } from "react"
 
@@ -24,7 +24,7 @@ export const CycleMobileHeader = () => {
         { key: "calendar", title: "Calendar", icon: Calendar },
     ]
 
-    const { workspaceSlug, projectId, cycleId } = router.query as {
+    const { workspaceSlug, projectId, cycleId } = useParams() as {
         workspaceSlug: string
         projectId: string
         cycleId: string

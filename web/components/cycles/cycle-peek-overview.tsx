@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 
 import React, { useEffect } from "react"
 
@@ -16,18 +16,22 @@ type Props = {
 export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, workspaceSlug }) => {
     // router
     const router = useRouter()
-    const { peekCycle } = router.query
+    const params = useParams()
+    const pathname = usePathname()
+    const { peekCycle } = params
     // refs
     const ref = React.useRef(null)
     // store hooks
     const { fetchCycleDetails } = useCycle()
 
     const handleClose = () => {
-        delete router.query.peekCycle
-        router.push({
-            pathname: router.pathname,
-            query: { ...router.query },
+        delete params["peekCycle"]
+        const searchParams: Record<string, string> = {}
+        Object.keys(params).forEach((key: string) => {
+            searchParams[key] = `${params[key]}`
         })
+        const newPath = `${pathname}?${new URLSearchParams(searchParams).toString()}`
+        router.push(newPath)
     }
 
     useEffect(() => {

@@ -138,7 +138,6 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
         e.preventDefault()
         e.stopPropagation()
         router.push(`${pathname}?peekCycle=${cycleId}`)
-
     }
 
     const daysLeft = findHowManyDaysLeft(cycleDetails.end_date) ?? 0
