@@ -38,7 +38,7 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
     // store hooks
     const { captureEvent } = useEventTracker()
-    const { currentUser, currentUserLoader, updateCurrentUser, updateUserOnBoard } = useUser()
+    const { currentUser, updateCurrentUser, updateUserOnBoard } = useUser()
     const { workspaces, fetchWorkspaces } = useWorkspace()
 
     const user = currentUser ?? undefined

@@ -4,7 +4,7 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import { Button, Card, Input, Select, Skeleton, Tag } from "antd"
+import { Card, Input, Select, Skeleton, Tag } from "antd"
 import toast from "react-hot-toast"
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai"
 import { HiArrowsRightLeft } from "react-icons/hi2"
@@ -19,7 +19,14 @@ import { getQueryParams } from "@helpers/common.helper"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 import { oauthUrlGenerators } from "@helpers/integration.helper"
 
+import { useUser } from "@hooks/store"
+
+import DefaultWrapper from "@wrappers/DefaultWrapper"
+import UserAuthWrapper from "@wrappers/UserAuthWrapper"
+
+import { PageHead } from "@components/core"
 import type { Integration } from "@servcy/types"
+import { Button, Spinner } from "@servcy/ui"
 
 export default function Integrations(): JSX.Element {
     const [integrations, setIntegrations] = useState<Integration[]>([])
@@ -28,6 +35,7 @@ export default function Integrations(): JSX.Element {
     const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null)
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
     const [category, setCategory] = useState<string>("")
+    const { currentUserLoader } = useUser()
 
     useEffect(() => {
         setLoading(true)
@@ -78,124 +86,132 @@ export default function Integrations(): JSX.Element {
     }
 
     return (
-        <>
-            <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
-                <div className="flex flex-row items-center">
-                    <AiOutlineApi size="24" />
-                    <p className="truncate px-2 text-xl max-md:text-lg">Available Integrations</p>
-                    <Input
-                        className="ml-auto max-w-[200px]"
-                        value={search}
-                        placeholder="search by name..."
-                        onChange={(event) => setSearch(event.target.value || "")}
-                    />
-                    <Select
-                        className="ml-2 max-w-[200px]"
-                        placeholder="Filter by usage"
-                        allowClear={true}
-                        options={uniqueIntegrationCategories.map((category) => ({
-                            label: category,
-                            value: category,
-                        }))}
-                        onChange={(value) => setCategory(value)}
-                        onClear={() => setCategory("")}
-                    />
-                </div>
-            </header>
-            <section className="xs:grid-cols-1 grid gap-3 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
-                {loading ? (
-                    <>
-                        <Card className="min-h-[200px] animate-pulse rounded-lg">
-                            <Skeleton avatar paragraph={{ rows: 4 }} />
-                        </Card>
-                        <Card className="min-h-[200px] animate-pulse rounded-lg">
-                            <Skeleton avatar paragraph={{ rows: 4 }} />
-                        </Card>
-                        <Card className="min-h-[200px] animate-pulse rounded-lg">
-                            <Skeleton avatar paragraph={{ rows: 4 }} />
-                        </Card>
-                    </>
+        <UserAuthWrapper>
+            <DefaultWrapper>
+                <PageHead title="Integrations" />
+                {currentUserLoader ? (
+                    <div className="grid h-screen w-full place-items-center">
+                        <Spinner />
+                    </div>
                 ) : (
-                    integrations
-                        .filter(
-                            (integration) =>
-                                (search === "" || integration.name.toLowerCase().includes(search.toLowerCase())) &&
-                                (!category || integrationCategories[integration.name]?.includes(category))
-                        )
-                        .map((integration: Integration) => (
-                            <Card
-                                key={integration.id}
-                                id={`integration-${integration.id}`}
-                                className="min-h-[200px] rounded-lg bg-servcy-black text-servcy-white"
-                            >
-                                <div className="flex flex-row items-center text-servcy-wheat">
-                                    <div className="flex overflow-x-hidden">
-                                        {integration.logo.split(",").map((logo, index) => (
-                                            <Image
-                                                className="my-auto mr-2 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1 last-of-type:mr-5"
-                                                src={logo}
-                                                width={40}
-                                                key={`logo-${index}`}
-                                                height={40}
-                                                alt={integration.name}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className="flex-col pl-4 text-lg font-semibold">{integration.name}</div>
-                                </div>
-                                <div className="mt-2 py-3 pr-3 text-xs">{integration.description}</div>
-                                <div className="mt-2 h-10 py-3 pr-3">
-                                    {integrationCategories[integration.name] !== undefined
-                                        ? integrationCategories[integration.name]?.map(
-                                              (category: string, index: number) => (
-                                                  <Tag
-                                                      key={`category-${index}`}
-                                                      className="mr-1 bg-servcy-wheat font-bold text-servcy-black"
-                                                      bordered={false}
-                                                  >
-                                                      {category.charAt(0).toUpperCase() + category.slice(1)}
-                                                  </Tag>
-                                              )
-                                          )
-                                        : null}
-                                </div>
-                                <div className="mt-6 flex flex-row justify-between">
-                                    <Button
-                                        className="!text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
-                                        size="middle"
-                                        id={`connect-${integration.id}`}
-                                        onClick={() => connect(integration)}
-                                        icon={<HiArrowsRightLeft />}
-                                    >
-                                        Connect
-                                    </Button>
-                                    {integration.is_connected && (
-                                        <Button
-                                            className="!border-servcy-wheat !text-servcy-wheat hover:!border-servcy-white hover:!text-servcy-white"
-                                            size="middle"
-                                            icon={<AiOutlineSetting />}
-                                            onClick={() => {
-                                                setSelectedIntegration(integration)
-                                                setIsModalVisible(true)
-                                            }}
+                    <div className="p-6">
+                        <header className="mb-6 h-[80px] rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 hover:shadow-custom-shadow-4xl p-6">
+                            <div className="flex flex-row items-center">
+                                <AiOutlineApi size="24" />
+                                <p className="truncate px-2 text-xl max-md:text-lg">Available Integrations</p>
+                                <Input
+                                    className="ml-auto max-w-[200px]"
+                                    value={search}
+                                    placeholder="search by name..."
+                                    onChange={(event) => setSearch(event.target.value || "")}
+                                />
+                                <Select
+                                    className="ml-2 max-w-[200px]"
+                                    placeholder="Filter by usage"
+                                    allowClear={true}
+                                    options={uniqueIntegrationCategories.map((category) => ({
+                                        label: category,
+                                        value: category,
+                                    }))}
+                                    onChange={(value) => setCategory(value)}
+                                    onClear={() => setCategory("")}
+                                />
+                            </div>
+                        </header>
+                        <section className="xs:grid-cols-1 grid gap-3 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 max-h-[80vh] overflow-y-scroll">
+                            {loading ? (
+                                <>
+                                    <Card className="min-h-[200px] animate-pulse rounded-l bg-custom-background-90 border-[0.5px] border-custom-border-200 hover:shadow-custom-shadow-4xlg">
+                                        <Skeleton avatar paragraph={{ rows: 4 }} />
+                                    </Card>
+                                    <Card className="min-h-[200px] animate-pulse rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 hover:shadow-custom-shadow-4xl">
+                                        <Skeleton avatar paragraph={{ rows: 4 }} />
+                                    </Card>
+                                    <Card className="min-h-[200px] animate-pulse rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 hover:shadow-custom-shadow-4xl">
+                                        <Skeleton avatar paragraph={{ rows: 4 }} />
+                                    </Card>
+                                </>
+                            ) : (
+                                integrations
+                                    .filter(
+                                        (integration) =>
+                                            (search === "" || integration.name.toLowerCase().includes(search.toLowerCase())) &&
+                                            (!category || integrationCategories[integration.name]?.includes(category))
+                                    )
+                                    .map((integration: Integration) => (
+                                        <Card
+                                            key={integration.id}
+                                            id={`integration-${integration.id}`}
+                                            className="min-h-[200px] rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 hover:shadow-custom-shadow-4xl"
                                         >
-                                            Settings
-                                        </Button>
-                                    )}
-                                </div>
-                            </Card>
-                        ))
+                                            <div className="flex flex-row items-center">
+                                                <div className="flex overflow-x-hidden">
+                                                    {integration.logo.split(",").map((logo, index) => (
+                                                        <Image
+                                                            className="my-auto mr-2 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border-[0.5px] border-custom-border-200 bg-servcy-white p-1 last-of-type:mr-5"
+                                                            src={logo}
+                                                            width={40}
+                                                            key={`logo-${index}`}
+                                                            height={40}
+                                                            alt={integration.name}
+                                                        />
+                                                    ))}
+                                                </div>
+                                                <div className="flex-col pl-4 text-lg font-semibold text-custom-text-200">{integration.name}</div>
+                                            </div>
+                                            <div className="mt-2 py-3 pr-3 text-xs text-custom-text-100">{integration.description}</div>
+                                            <div className="mt-2 h-10 py-3 pr-3">
+                                                {integrationCategories[integration.name] !== undefined
+                                                    ? integrationCategories[integration.name]?.map(
+                                                        (category: string, index: number) => (
+                                                            <Tag
+                                                                key={`category-${index}`}
+                                                                className="mr-1 bg-servcy-wheat font-bold"
+                                                                bordered={false}
+                                                            >
+                                                                {category.charAt(0).toUpperCase() + category.slice(1)}
+                                                            </Tag>
+                                                        )
+                                                    )
+                                                    : null}
+                                            </div>
+                                            <div className="mt-6 flex flex-row justify-between">
+                                                <Button
+                                                    size="md"
+                                                    id={`connect-${integration.id}`}
+                                                    onClick={() => connect(integration)}
+                                                    variant="outline-primary"
+                                                >
+                                                    <HiArrowsRightLeft /> Connect
+                                                </Button>
+                                                {integration.is_connected && (
+                                                    <Button
+                                                        onClick={() => {
+                                                            setSelectedIntegration(integration)
+                                                            setIsModalVisible(true)
+                                                        }}
+                                                        variant="outline-primary"
+                                                    >
+                                                        <AiOutlineSetting /> Settings
+                                                    </Button>
+                                                )}
+                                            </div>
+                                        </Card>
+                                    ))
+                            )}
+                        </section>
+                        {isModalVisible && selectedIntegration !== null && (
+                            <IntegrationConfigurationModal
+                                onClose={() => {
+                                    setIsModalVisible(false)
+                                    setSelectedIntegration(null)
+                                }}
+                                selectedIntegration={selectedIntegration}
+                            />
+                        )}
+                    </div>
                 )}
-            </section>
-            {isModalVisible && selectedIntegration !== null && (
-                <IntegrationConfigurationModal
-                    onClose={() => {
-                        setIsModalVisible(false)
-                        setSelectedIntegration(null)
-                    }}
-                    selectedIntegration={selectedIntegration}
-                />
-            )}
-        </>
+            </DefaultWrapper>
+        </UserAuthWrapper>
     )
 }
