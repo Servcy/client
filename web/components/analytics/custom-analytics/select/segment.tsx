@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { ANALYTICS_X_AXIS_VALUES } from "@constants/analytics"
 
@@ -12,8 +12,7 @@ type Props = {
 }
 
 export const SelectSegment: React.FC<Props> = ({ value, onChange, params }) => {
-    const router = useRouter()
-    const { cycleId, moduleId } = router.query
+    const { cycleId, moduleId }= useParams()
 
     return (
         <CustomSelect

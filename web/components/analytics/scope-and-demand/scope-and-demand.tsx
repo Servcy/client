@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import useSWR from "swr"
 
@@ -19,8 +19,7 @@ const analyticsService = new AnalyticsService()
 export const ScopeAndDemand: React.FC<Props> = (props) => {
     const { fullScreen = true } = props
 
-    const router = useRouter()
-    const { workspaceSlug, projectId, cycleId, moduleId } = router.query
+    const { workspaceSlug, projectId, cycleId, moduleId }= useParams()
 
     const isProjectLevel = projectId ? true : false
 

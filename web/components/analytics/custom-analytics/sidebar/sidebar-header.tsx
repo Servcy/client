@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 
@@ -10,8 +10,7 @@ import { renderFormattedDate } from "@helpers/date-time.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
 
 export const CustomAnalyticsSidebarHeader = observer(() => {
-    const router = useRouter()
-    const { projectId, cycleId, moduleId } = router.query
+    const { projectId, cycleId, moduleId }= useParams()
 
     const { getProjectById } = useProject()
     const { getCycleById } = useCycle()

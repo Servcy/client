@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { Command } from "cmdk"
 
@@ -15,7 +15,7 @@ export const CommandPaletteWorkspaceSettingsActions: React.FC<Props> = (props) =
     const { closePalette } = props
     // router
     const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
     // mobx store
     const {
         membership: { currentWorkspaceRole },

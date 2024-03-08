@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { Command } from "cmdk"
 import { Check } from "lucide-react"
@@ -18,9 +18,7 @@ type Props = {
 
 export const ChangeIssueState: React.FC<Props> = observer((props) => {
     const { closePalette, issue } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const {
         issues: { updateIssue },

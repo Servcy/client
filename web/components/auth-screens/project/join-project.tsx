@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useState } from "react"
 
@@ -19,8 +19,7 @@ export const JoinProject: React.FC = () => {
     } = useUser()
     const { fetchProjects } = useProject()
 
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
 
     const handleJoin = () => {
         if (!workspaceSlug || !projectId) return

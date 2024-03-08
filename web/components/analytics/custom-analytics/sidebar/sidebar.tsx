@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useEffect } from "react"
 
@@ -31,9 +31,7 @@ const analyticsService = new AnalyticsService()
 
 export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
     const { analytics, params, isProjectLevel = false } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, cycleId, moduleId } = router.query
+    const { workspaceSlug, projectId, cycleId, moduleId }= useParams()
 
     // store hooks
     const { currentUser } = useUser()

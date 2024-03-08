@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 import { useForm } from "react-hook-form"
@@ -33,8 +33,7 @@ const analyticsService = new AnalyticsService()
 export const CustomAnalytics: React.FC<Props> = observer((props) => {
     const { additionalParams, fullScreen } = props
 
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
 
     const { control, watch, setValue } = useForm({ defaultValues })
 

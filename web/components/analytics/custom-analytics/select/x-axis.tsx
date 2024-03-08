@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { ANALYTICS_X_AXIS_VALUES } from "@constants/analytics"
 
@@ -14,8 +14,7 @@ type Props = {
 export const SelectXAxis: React.FC<Props> = (props) => {
     const { value, onChange, params } = props
 
-    const router = useRouter()
-    const { cycleId, moduleId } = router.query
+    const { cycleId, moduleId }= useParams()
 
     return (
         <CustomSelect
