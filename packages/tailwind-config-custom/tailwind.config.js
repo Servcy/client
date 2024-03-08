@@ -6,11 +6,10 @@ module.exports = {
     content: {
         relative: true,
         files: [
-            "./components/**/*.tsx",
             "./constants/**/*.{js,ts,jsx,tsx}",
-            "./layouts/**/*.tsx",
-            "./pages/**/*.tsx",
-            "./ui/**/*.tsx",
+            "./app/**/*.{tsx,ts}",
+            "./components/**/*.{tsx,ts}",
+            "./wrappers/**/*.{tsx,ts}",
             "../packages/ui/**/*.{js,ts,jsx,tsx}",
             "../packages/editor/**/src/**/*.{js,ts,jsx,tsx}",
         ],
@@ -42,6 +41,16 @@ module.exports = {
             },
             colors: {
                 custom: {
+                    "servcy-green": "#032123",
+                    "servcy-dark": "#26542F",
+                    "servcy-light": "#5BA959",
+                    "servcy-gray": "#DFE0EC",
+                    "servcy-silver": "#7E84A3",
+                    "servcy-white": "#F7F6FA",
+                    "servcy-black": "#2B3232",
+                    "servcy-cream": "#F1F2EF",
+                    "servcy-neutral": "#7A7A7A",
+                    "servcy-wheat": "#D1BFAE",
                     primary: {
                         0: "rgb(255, 255, 255)",
                         10: convertToRGB("--color-primary-10"),
