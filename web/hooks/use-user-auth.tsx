@@ -1,6 +1,6 @@
-import { useRouter } from "next/router"
+import { useRouter, usePathname } from "next/navigation"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import { WorkspaceService } from "@services/workspace.service"
 
@@ -9,103 +9,51 @@ import { IUser } from "@servcy/types"
 const workspaceService = new WorkspaceService()
 
 type Props = {
-    routeAuth?: "sign-in" | "onboarding" | "admin" | null
     user: IUser | null
-    isLoading: boolean
+    isUserLoading: boolean
 }
 
 const useUserAuth = (props: Props) => {
-    const { routeAuth, user, isLoading } = props
-    // states
-    const [isRouteAccess, setIsRouteAccess] = useState(true)
+    const { user, isUserLoading } = props
     // router
     const router = useRouter()
-    const { nextUrl } = router.query
-
-    const isValidURL = (url: string): boolean => {
-        const disallowedSchemes = /^(https?|ftp):\/\//i
-        return !disallowedSchemes.test(url)
-    }
+    const pathname = usePathname()
 
     useEffect(() => {
         const handleWorkSpaceRedirection = async () => {
             workspaceService.userWorkspaces().then(async (userWorkspaces) => {
                 if (!user) return
-
                 const firstWorkspace = Object.values(userWorkspaces ?? {})?.[0]
                 const lastActiveWorkspace = userWorkspaces.find((workspace) => workspace.id === user?.last_workspace_id)
-
                 if (lastActiveWorkspace) {
                     router.push(`/${lastActiveWorkspace.slug}`)
                     return
-                } else if (firstWorkspace) {
+                }
+                if (firstWorkspace) {
                     router.push(`/${firstWorkspace.slug}`)
                     return
-                } else {
-                    router.push(`/profile`)
-                    return
                 }
+                router.push(`/profile`)
+                return
             })
         }
 
         const handleUserRouteAuthentication = async () => {
-            if (user && user.is_active) {
-                if (routeAuth === "sign-in") {
-                    if (user.is_onboarded) handleWorkSpaceRedirection()
-                    else {
-                        router.push("/onboarding")
-                        return
-                    }
-                } else if (routeAuth === "onboarding") {
-                    if (user.is_onboarded) handleWorkSpaceRedirection()
-                    else {
-                        setIsRouteAccess(() => false)
-                        return
-                    }
-                } else {
-                    if (!user.is_onboarded) {
-                        router.push("/onboarding")
-                        return
-                    } else {
-                        setIsRouteAccess(() => false)
-                        return
-                    }
-                }
-            } else return
-        }
-
-        if (routeAuth === null) {
-            setIsRouteAccess(() => false)
-            return
-        } else {
-            if (!isLoading) {
-                setIsRouteAccess(() => true)
-                if (user) {
-                    if (nextUrl) {
-                        if (isValidURL(nextUrl.toString())) {
-                            router.push(nextUrl.toString())
-                            return
-                        } else {
-                            router.push("/")
-                            return
-                        }
-                    } else handleUserRouteAuthentication()
-                } else {
-                    if (routeAuth === "sign-in") {
-                        setIsRouteAccess(() => false)
-                        return
-                    } else {
-                        router.push("/")
-                        return
-                    }
-                }
+            if (user && user.is_active && user.is_onboarded && pathname === "/onboarding") {
+                handleWorkSpaceRedirection()
+                return
             }
+            if (user && user.is_active && !user.is_onboarded && pathname !== "/onboarding") {
+                router.push("/onboarding")
+                return
+            }
+            return
         }
-    }, [user, isLoading, routeAuth, router, nextUrl])
 
-    return {
-        isLoading: isRouteAccess,
-    }
+        if (user && !isUserLoading) handleUserRouteAuthentication()
+    }, [user, isUserLoading, router])
+
+    return {}
 }
 
 export default useUserAuth

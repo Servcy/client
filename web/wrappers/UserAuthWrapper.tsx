@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { usePathname, useRouter } from "next/navigation"
 
 import { FC, ReactNode } from "react"
 
@@ -20,6 +20,7 @@ const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
     const { fetchWorkspaces } = useWorkspace()
     // router
     const router = useRouter()
+    const pathname = usePathname()
     // fetching user information
     useSWR("CURRENT_USER_DETAILS", () => fetchCurrentUser(), {
         shouldRetryOnError: false,
@@ -44,8 +45,8 @@ const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
     }
 
     if (currentUserError) {
-        const redirectTo = router.asPath
-        router.push(`/?nextUrl=${redirectTo}`)
+        const redirectTo = `/login?nextUrl=${encodeURIComponent(pathname)}`
+        router.replace(redirectTo)
         return null
     }
 

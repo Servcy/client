@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 import { useEffect, useState } from "react"
 
@@ -17,7 +17,6 @@ import { PageHead } from "@components/core"
 import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding"
 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
-import useUserAuth from "@hooks/use-user-auth"
 
 import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
 
@@ -41,8 +40,6 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
     const { captureEvent } = useEventTracker()
     const { currentUser, currentUserLoader, updateCurrentUser, updateUserOnBoard } = useUser()
     const { workspaces, fetchWorkspaces } = useWorkspace()
-    // custom hooks
-    const {} = useUserAuth({ routeAuth: "onboarding", user: currentUser, isLoading: currentUserLoader })
 
     const user = currentUser ?? undefined
     const workspacesList = Object.values(workspaces ?? {})
@@ -138,7 +135,7 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
         }
 
         handleStepChange()
-    }, [user, invitations, step, updateCurrentUser, workspacesList])
+    }, [user, invitations, , updateCurrentUser, workspacesList])
 
     return (
         <UserAuthWrapper>

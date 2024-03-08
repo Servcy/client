@@ -37,7 +37,7 @@ export class UserService extends APIService {
     }
 
     async currentUser(): Promise<IUser> {
-        return this.get("/iam/users/me")
+        return this.get("/iam/users/me/")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -45,7 +45,7 @@ export class UserService extends APIService {
     }
 
     async currentUserSettings(): Promise<IUserSettings> {
-        return this.get("/iam/users/me/settings")
+        return this.get("/iam/users/me/settings/")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response

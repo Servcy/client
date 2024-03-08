@@ -13,7 +13,6 @@ import { ImagePickerPopover, PageHead, UserImageUploadModal } from "@components/
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 
 import { useApplication, useUser } from "@hooks/store"
-import useUserAuth from "@hooks/use-user-auth"
 
 import { TIME_ZONES } from "@constants/timezones"
 
@@ -53,8 +52,6 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
 
     // store hooks
     const { currentUser: myProfile, updateCurrentUser, currentUserLoader } = useUser()
-    // custom hooks
-    const {} = useUserAuth({ user: myProfile, isLoading: currentUserLoader })
     const { theme: themeStore } = useApplication()
 
     useEffect(() => {

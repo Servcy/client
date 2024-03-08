@@ -19,7 +19,6 @@ import { PagesLoader } from "@components/ui"
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-page"
 import useLocalStorage from "@hooks/use-local-storage"
-import useUserAuth from "@hooks/use-user-auth"
 
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { PAGE_TABS_LIST } from "@constants/page"
@@ -76,8 +75,6 @@ const ProjectPagesPage: NextPageWithWrapper = observer(() => {
         projectPageIds,
         archivedPageIds,
     } = useProjectPages()
-
-    const {} = useUserAuth({ user: currentUser, isLoading: currentUserLoader })
     // local storage
     const { storedValue: pageTab, setValue: setPageTab } = useLocalStorage("pageTab", "Recent")
     // fetching pages from API
