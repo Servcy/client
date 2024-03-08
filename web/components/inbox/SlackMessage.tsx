@@ -24,7 +24,7 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                     ) : typeof element.style === "object" && element.style.code ? (
                         <code
                             key={index}
-                            className="border-1 border-servcy-wheat bg-servcy-cream p-0.5 text-servcy-black"
+                            className="border-1 border-custom-servcy-wheat bg-custom-servcy-cream p-0.5 text-custom-servcy-black"
                         >
                             {element.text}
                         </code>
@@ -42,7 +42,7 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                     )
                 case "link":
                     return (
-                        <a key={index} href={element.url} className="text-servcy-wheat hover:text-servcy-silver">
+                        <a key={index} href={element.url} className="text-custom-servcy-wheat hover:text-custom-servcy-silver">
                             {element.text}
                         </a>
                     )
@@ -82,7 +82,7 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                     return (
                         <pre
                             key={index}
-                            className="border-1 my-2 rounded-lg border-servcy-wheat bg-servcy-cream p-1 font-mono text-servcy-black"
+                            className="border-1 my-2 rounded-lg border-custom-servcy-wheat bg-custom-servcy-cream p-1 font-mono text-custom-servcy-black"
                         >
                             {renderElements(element.elements)}
                         </pre>
@@ -146,17 +146,17 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
     }
 
     return (
-        <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
+        <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-custom-servcy-black p-4 text-custom-servcy-white">
             {data.blocks && <div className="mb-4 min-h-[75px]">{renderMessageBlocks(data.blocks)}</div>}
             {data.files ? (
                 <div className="mb-4 grid grid-cols-6 gap-4">
                     {data.files.map((file) => (
-                        <div key={file.id} className="rounded-xl bg-servcy-silver p-3">
+                        <div key={file.id} className="rounded-xl bg-custom-servcy-silver p-3">
                             <a
                                 href={file.url_private}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-servcy-white hover:text-servcy-wheat hover:underline"
+                                className="text-custom-servcy-white hover:text-custom-servcy-wheat hover:underline"
                             >
                                 <HiPaperClip className="mr-1 inline" size="18" />
                                 {file.title || file.name}
@@ -170,12 +170,12 @@ const SlackMessage = ({ data, cause }: { data: SlackMessageProps; cause: string 
                     href={link}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-servcy-wheat hover:text-servcy-silver hover:underline"
+                    className="text-custom-servcy-wheat hover:text-custom-servcy-silver hover:underline"
                 >
                     <HiExternalLink className="mr-1 inline" size="18" />
                     View in Slack
                 </a>
-                <div className="flex flex-col text-xs text-servcy-wheat">
+                <div className="flex flex-col text-xs text-custom-servcy-wheat">
                     <div className="mb-2 flex-row">
                         <Image
                             src={cleanImageLink}

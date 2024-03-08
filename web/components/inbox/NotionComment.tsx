@@ -13,7 +13,7 @@ const NotionComment = ({ data, cause }: { data: NotionCommentProps; cause: any }
     const { name, avatar_url } = JSON.parse(cause)
     const cleanImageLink = getCleanLink(avatar_url)
     return (
-        <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
+        <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-custom-servcy-black p-4 text-custom-servcy-white">
             <div className="min-h-[75px]">
                 {data.rich_text.map((content, index) => {
                     if (content.type === "text" && content.text && content.text.link) {
@@ -67,12 +67,12 @@ const NotionComment = ({ data, cause }: { data: NotionCommentProps; cause: any }
                     href={discussionLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-servcy-wheat hover:text-servcy-silver hover:underline"
+                    className="text-custom-servcy-wheat hover:text-custom-servcy-silver hover:underline"
                 >
                     <HiExternalLink className="mr-1 inline" size="18" />
                     View in Notion
                 </a>
-                <div className="flex flex-col text-xs text-servcy-wheat">
+                <div className="flex flex-col text-xs text-custom-servcy-wheat">
                     <div className="mb-2 flex-row">
                         <Image
                             src={cleanImageLink}

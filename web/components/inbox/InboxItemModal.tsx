@@ -15,21 +15,23 @@ import NotionComment from "./NotionComment"
 import SlackMessage from "./SlackMessage"
 import TrelloNotification from "./TrelloNotification"
 
-const InboxItemModal = ({
-    selectedRow,
-    setIsInboxItemModalVisible,
-    selectedRowIndex,
-    setSelectedRowIndex,
-    totalInboxItems,
-    readItem,
-}: {
-    selectedRow: InboxItem
-    setIsInboxItemModalVisible: (value: boolean) => void
-    selectedRowIndex: number
-    setSelectedRowIndex: (value: number) => void
-    totalInboxItems: number
-    readItem: (id: string | undefined) => void
-}) => {
+const InboxItemModal = (
+    {
+        selectedRow,
+        setIsInboxItemModalVisible,
+        selectedRowIndex,
+        setSelectedRowIndex,
+        totalInboxItems,
+        readItem,
+    }: {
+        selectedRow: InboxItem
+        setIsInboxItemModalVisible: (value: boolean) => void
+        selectedRowIndex: number
+        setSelectedRowIndex: (value: number) => void
+        totalInboxItems: number
+        readItem: (id: string | undefined) => void
+    }
+) => {
     let body = selectedRow.body
     if (selectedRow.source === "Gmail" && selectedRow.cause !== "None") {
         body = Buffer.from(body, "base64").toString("utf8")
@@ -50,7 +52,7 @@ const InboxItemModal = ({
             <div>
                 {/* body */}
                 <div className="grid grid-cols-1">
-                    <div className="border-1 mt-2 rounded-lg border-servcy-black shadow-sm">
+                    <div className="border-1 mt-2 rounded-lg border-custom-servcy-black shadow-sm">
                         {selectedRow.is_body_html ? (
                             <>
                                 <div
@@ -60,7 +62,7 @@ const InboxItemModal = ({
                                     className="max-h-[600px] min-h-48 overflow-y-scroll p-1"
                                 />
                                 {selectedRow.attachments !== "None" && selectedRow.attachments !== "[]" && (
-                                    <div className="mt-4 flex overflow-x-scroll bg-servcy-black p-4">
+                                    <div className="mt-4 flex overflow-x-scroll bg-custom-servcy-black p-4">
                                         {JSON.parse(selectedRow.attachments.replaceAll("'", '"')).map(
                                             (attachment: Attachment) => (
                                                 <button
@@ -68,7 +70,7 @@ const InboxItemModal = ({
                                                     onClick={() => {
                                                         downloadFile(attachment.name, attachment.data)
                                                     }}
-                                                    className="mr-2 flex rounded-xl bg-servcy-silver p-3 text-servcy-cream hover:cursor-pointer"
+                                                    className="mr-2 flex rounded-xl bg-custom-servcy-silver p-3 text-custom-servcy-cream hover:cursor-pointer"
                                                 >
                                                     <HiPaperClip className="mr-1 inline" size="18" />
                                                     <span className="truncate">{attachment.name}</span>
@@ -114,7 +116,7 @@ const InboxItemModal = ({
                 <div className="mt-8 flex justify-between">
                     <div className="flex">
                         <Button
-                            className="mr-2 text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
+                            className="mr-2 text-custom-servcy-black hover:!border-custom-servcy-wheat hover:!text-custom-servcy-wheat"
                             onClick={() => {
                                 selectedRowIndex > 0 && setSelectedRowIndex(selectedRowIndex - 1)
                                 !selectedRow.is_read && readItem(selectedRow.id)
@@ -124,7 +126,7 @@ const InboxItemModal = ({
                             icon={<FaAngleDoubleLeft className="mt-1" />}
                         />
                         <Button
-                            className="text-servcy-black hover:!border-servcy-wheat hover:!text-servcy-wheat"
+                            className="text-custom-servcy-black hover:!border-custom-servcy-wheat hover:!text-custom-servcy-wheat"
                             onClick={() => {
                                 selectedRowIndex < totalInboxItems - 1 && setSelectedRowIndex(selectedRowIndex + 1)
                                 !selectedRow.is_read && readItem(selectedRow.id)

@@ -5,13 +5,13 @@ import type { FigmaComment, FigmaMention, FigmaNotificationProps } from "@servcy
 const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; cause: string }) => {
     const link = `https://www.figma.com/file/${data.file_key}`
     return (
-        <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
+        <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-custom-servcy-black p-4 text-custom-servcy-white">
             {["FILE_UPDATE", "FILE_DELETE"].includes(data.event_type) ? null : data.event_type === "LIBRARY_PUBLISH" ? (
                 <div className="min-h-[75px]">
                     {data.description && <div className="mb-2 font-normal"> {data.description}</div>}
                     {data.created_components && (
                         <div className="mb-4">
-                            <div className="text-xs font-semibold text-servcy-wheat">
+                            <div className="text-xs font-semibold text-custom-servcy-wheat">
                                 Following Components Were Created:
                             </div>
                             <ul className="text-sm">
@@ -23,7 +23,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                     )}
                     {data.modified_components && (
                         <div className="mb-4">
-                            <div className="text-xs font-semibold text-servcy-wheat">
+                            <div className="text-xs font-semibold text-custom-servcy-wheat">
                                 Following Components Were Modified:
                             </div>
                             <ul className="text-sm">
@@ -35,7 +35,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                     )}
                     {data.created_styles && (
                         <div className="mb-4">
-                            <div className="text-xs font-semibold text-servcy-wheat">
+                            <div className="text-xs font-semibold text-custom-servcy-wheat">
                                 Following Styles Were Created:
                             </div>
                             <ul className="text-sm">
@@ -47,7 +47,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                     )}
                     {data.deleted_components && (
                         <div className="mb-4">
-                            <div className="text-xs font-semibold text-servcy-wheat">
+                            <div className="text-xs font-semibold text-custom-servcy-wheat">
                                 Following Components Were Deleted:
                             </div>
                             <ul className="text-sm">
@@ -59,7 +59,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                     )}
                     {data.deleted_styles && (
                         <div className="mb-4">
-                            <div className="text-xs font-semibold text-servcy-wheat">
+                            <div className="text-xs font-semibold text-custom-servcy-wheat">
                                 Following Styles Were Deleted:
                             </div>
                             <ul className="text-sm">
@@ -71,7 +71,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                     )}
                     {data.modified_styles && (
                         <div className="mb-4">
-                            <div className="text-xs font-semibold text-servcy-wheat">
+                            <div className="text-xs font-semibold text-custom-servcy-wheat">
                                 Following Styles Were Modified:
                             </div>
                             <ul className="text-sm">
@@ -103,7 +103,7 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                             if (handle) {
                                 return (
                                     <>
-                                        <span key={index1} className="text-servcy-wheat">
+                                        <span key={index1} className="text-custom-servcy-wheat">
                                             @{handle.handle}
                                         </span>
                                         {data.comment && index1 !== data.comment.length - 1 ? " " : null}
@@ -120,12 +120,12 @@ const FigmaNotification = ({ data, cause }: { data: FigmaNotificationProps; caus
                     href={link}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-servcy-wheat hover:text-servcy-silver hover:underline"
+                    className="text-custom-servcy-wheat hover:text-custom-servcy-silver hover:underline"
                 >
                     <HiExternalLink className="mr-1 inline" size="18" />
                     View in Figma
                 </a>
-                <div className="flex flex-col text-xs text-servcy-wheat">
+                <div className="flex flex-col text-xs text-custom-servcy-wheat">
                     <div className="mb-2 flex-row">{cause}</div>
                     <div className="flex-row">
                         {new Date(data.timestamp).toLocaleString("en-US", {

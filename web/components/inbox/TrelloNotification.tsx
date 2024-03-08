@@ -18,18 +18,18 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     data.data.board && (
                         <>
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                     Board Name:
                                 </div>
                                 <div>{data.data.board.name}</div>
                             </div>
                             {data.data.board.desc && (
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Description:
                                     </div>
                                     <div
-                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-custom-servcy-wheat p-1"
                                         dangerouslySetInnerHTML={{
                                             __html: remark().use(html).processSync(data.data.board.desc).toString(),
                                         }}
@@ -37,7 +37,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 </div>
                             )}
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Status:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Status:</div>
                                 <div>{data.data.board.closed ? "Closed" : "Open"}</div>
                             </div>
                         </>
@@ -51,18 +51,18 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     data.data.board && (
                         <>
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                     Board Name:
                                 </div>
                                 <div>{data.data.board.name}</div>
                             </div>
                             {data.data.board.desc && (
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Description:
                                     </div>
                                     <div
-                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-custom-servcy-wheat p-1"
                                         dangerouslySetInnerHTML={{
                                             __html: remark().use(html).processSync(data.data.board.desc).toString(),
                                         }}
@@ -70,12 +70,12 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 </div>
                             )}
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Status:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Status:</div>
                                 <div>{data.data.board.closed ? "Closed" : "Open"}</div>
                             </div>
                             {data.data.old && (
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Fields Updated:
                                     </div>
                                     <div>
@@ -96,7 +96,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     <>
                         {data.data.card && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                     Card Name:
                                 </div>
                                 <div>{data.data.card.name}</div>
@@ -104,7 +104,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         )}
                         {data.data.checklist && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                     Checklist Name:
                                 </div>
                                 <div>{data.data.checklist.name}</div>
@@ -112,14 +112,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         )}
                         {data.data.cardSource && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                     Source Card:
                                 </div>
                                 <div>
                                     {data.data.cardSource.name}{" "}
                                     <a href={data.data.cardSource.shortLink} target="_blank" rel="noreferrer">
                                         <HiExternalLink
-                                            className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                            className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                             size="18"
                                         />
                                     </a>
@@ -128,12 +128,12 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         )}
                         {data.data.board && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Board:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Board:</div>
                                 <div>
                                     {data.data.board.name}{" "}
                                     <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                         <HiExternalLink
-                                            className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                            className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                             size="18"
                                         />
                                     </a>
@@ -142,7 +142,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         )}
                         {data.data.list && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">List:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">List:</div>
                                 <div>{data.data.list.name}</div>
                             </div>
                         )}
@@ -156,7 +156,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                     <>
                         {data.data.card && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                     Card Name:
                                 </div>
                                 <div>{data.data.card.name}</div>
@@ -166,7 +166,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                             <div className="mb-2 flex w-full">
                                 <div className="mr-2 w-[150px] font-mono font-semibold">Description:</div>
                                 <div
-                                    className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                                    className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-custom-servcy-wheat p-1"
                                     dangerouslySetInnerHTML={{
                                         __html: remark().use(html).processSync(data.data.card.desc).toString(),
                                     }}
@@ -175,18 +175,18 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         )}
                         {data.data.list && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">List:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">List:</div>
                                 <div>{data.data.list.name}</div>
                             </div>
                         )}
                         {data.data.board && (
                             <div className="mb-2 flex w-full">
-                                <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">Board:</div>
+                                <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Board:</div>
                                 <div>
                                     {data.data.board.name}
                                     <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                         <HiExternalLink
-                                            className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                            className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                             size="18"
                                         />
                                     </a>
@@ -204,18 +204,18 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         {data.data.card && (
                             <>
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Card Name:
                                     </div>
                                     <div>{data.data.card.name}</div>
                                 </div>
                                 {data.data.card.desc && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Description:
                                         </div>
                                         <div
-                                            className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                                            className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-custom-servcy-wheat p-1"
                                             dangerouslySetInnerHTML={{
                                                 __html: remark().use(html).processSync(data.data.card.desc).toString(),
                                             }}
@@ -224,7 +224,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.list && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             List:
                                         </div>
                                         <div>{data.data.list.name}</div>
@@ -232,14 +232,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.board && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Board:
                                         </div>
                                         <div>
                                             {data.data.board.name}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -248,7 +248,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.old && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Fields Updated:
                                         </div>
                                         <div>
@@ -271,14 +271,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         {data.data.card && (
                             <>
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Card Name:
                                     </div>
                                     <div>{data.data.card.name}</div>
                                 </div>
                                 {data.data.checklist && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Checklist Name:
                                         </div>
                                         <div>{data.data.checklist.name}</div>
@@ -286,14 +286,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.board && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Board:
                                         </div>
                                         <div>
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -313,7 +313,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         {data.data.card && (
                             <>
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Card Name:
                                     </div>
                                     <div>{data.data.card.name}</div>
@@ -321,13 +321,13 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 {data.data.checkItem && (
                                     <>
                                         <div className="mb-2 flex w-full">
-                                            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                            <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                                 Check Item Name:
                                             </div>
                                             <div>{data.data.checkItem.name}</div>
                                         </div>
                                         <div className="mb-2 flex w-full">
-                                            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                            <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                                 Check Item State:
                                             </div>
                                             <div>{data.data.checkItem.state}</div>
@@ -336,7 +336,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.checklist && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Checklist Name:
                                         </div>
                                         <div>{data.data.checklist.name}</div>
@@ -344,14 +344,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.board && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Board:
                                         </div>
                                         <div>
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -404,7 +404,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -466,7 +466,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -486,14 +486,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         {data.data.card && (
                             <>
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Card Name:
                                     </div>
                                     <div>{data.data.card.name}</div>
                                 </div>
                                 {data.data.checklist && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Checklist Name:
                                         </div>
                                         <div>{data.data.checklist.name}</div>
@@ -501,14 +501,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.board && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Board:
                                         </div>
                                         <div>
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -528,7 +528,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         {data.data.card && (
                             <>
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Card Name:
                                     </div>
                                     <div>{data.data.card.name}</div>
@@ -536,13 +536,13 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 {data.data.checkItem && (
                                     <>
                                         <div className="mb-2 flex w-full">
-                                            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                            <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                                 Check Item Name:
                                             </div>
                                             <div>{data.data.checkItem.name}</div>
                                         </div>
                                         <div className="mb-2 flex w-full">
-                                            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                            <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                                 Check Item State:
                                             </div>
                                             <div>{data.data.checkItem.state}</div>
@@ -551,7 +551,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.checklist && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Checklist Name:
                                         </div>
                                         <div>{data.data.checklist.name}</div>
@@ -559,14 +559,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.board && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Board:
                                         </div>
                                         <div>
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -586,21 +586,21 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         {data.data.checklist && (
                             <>
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Checklist Name:
                                     </div>
                                     <div>{data.data.checklist.name}</div>
                                 </div>
                                 {data.data.board && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Board:
                                         </div>
                                         <div>
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -609,7 +609,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.old && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Fields Updated:
                                         </div>
                                         <div>
@@ -630,7 +630,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         {data.data.list && (
                             <>
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         List Name:
                                     </div>
                                     <div>{data.data.list.name}</div>
@@ -642,7 +642,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -672,7 +672,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                         {data.data.card && (
                             <>
                                 <div className="mb-2 flex w-full">
-                                    <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                    <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                         Card Name:
                                     </div>
                                     <div>{data.data.card.name}</div>
@@ -680,13 +680,13 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 {data.data.label && (
                                     <>
                                         <div className="mb-2 flex w-full">
-                                            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                            <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                                 Label Name:
                                             </div>
                                             <div>{data.data.label.name}</div>
                                         </div>
                                         <div className="mb-2 flex w-full">
-                                            <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                            <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                                 Label Color:
                                             </div>
                                             <div>{data.data.label.color}</div>
@@ -695,14 +695,14 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 )}
                                 {data.data.board && (
                                     <div className="mb-2 flex w-full">
-                                        <div className="mr-2 w-[150px] font-mono font-semibold text-servcy-silver">
+                                        <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">
                                             Board:
                                         </div>
                                         <div>
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -745,7 +745,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                             {data.data.board.name}{" "}
                                             <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                 <HiExternalLink
-                                                    className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                    className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                     size="18"
                                                 />
                                             </a>
@@ -827,7 +827,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                                 {data.data.board.name}{" "}
                                                 <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                     <HiExternalLink
-                                                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                        className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                         size="18"
                                                     />
                                                 </a>
@@ -847,7 +847,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                                     rel="noreferrer"
                                                 >
                                                     <HiExternalLink
-                                                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                        className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                         size="18"
                                                     />
                                                 </a>
@@ -880,7 +880,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                                 {data.data.card.name}{" "}
                                                 <a href={data.data.card.shortLink} target="_blank" rel="noreferrer">
                                                     <HiExternalLink
-                                                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                        className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                         size="18"
                                                     />
                                                 </a>
@@ -900,7 +900,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                                     rel="noreferrer"
                                                 >
                                                     <HiExternalLink
-                                                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                        className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                         size="18"
                                                     />
                                                 </a>
@@ -932,7 +932,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                                 {data.data.board.name}{" "}
                                                 <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                     <HiExternalLink
-                                                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                        className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                         size="18"
                                                     />
                                                 </a>
@@ -952,7 +952,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                                     rel="noreferrer"
                                                 >
                                                     <HiExternalLink
-                                                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                        className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                         size="18"
                                                     />
                                                 </a>
@@ -984,7 +984,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                                 {data.data.board.name}{" "}
                                                 <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                                     <HiExternalLink
-                                                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                        className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                         size="18"
                                                     />
                                                 </a>
@@ -1004,7 +1004,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                                     rel="noreferrer"
                                                 >
                                                     <HiExternalLink
-                                                        className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                        className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                         size="18"
                                                     />
                                                 </a>
@@ -1033,7 +1033,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 <div className="mb-2 flex w-full">
                                     <div className="mr-2 w-[150px] font-mono font-semibold">Comment:</div>
                                     <div
-                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-custom-servcy-wheat p-1"
                                         dangerouslySetInnerHTML={{
                                             __html: remark().use(html).processSync(data.data.text).toString(),
                                         }}
@@ -1049,7 +1049,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                         {data.data.board.name}{" "}
                                         <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                             <HiExternalLink
-                                                className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                 size="18"
                                             />
                                         </a>
@@ -1083,7 +1083,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 <div className="mb-2 flex w-full">
                                     <div className="mr-2 w-[150px] font-mono font-semibold">Comment:</div>
                                     <div
-                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-custom-servcy-wheat p-1"
                                         dangerouslySetInnerHTML={{
                                             __html: remark().use(html).processSync(data.data.text).toString(),
                                         }}
@@ -1099,7 +1099,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                         {data.data.board.name}{" "}
                                         <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                             <HiExternalLink
-                                                className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                 size="18"
                                             />
                                         </a>
@@ -1133,7 +1133,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                 <div className="mb-2 flex w-full">
                                     <div className="mr-2 w-[150px] font-mono font-semibold">Comment:</div>
                                     <div
-                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-servcy-wheat p-1"
+                                        className="border-1 servcy-link-inbox-item-comment max-w-[500px] overflow-scroll rounded-lg border-custom-servcy-wheat p-1"
                                         dangerouslySetInnerHTML={{
                                             __html: remark().use(html).processSync(data.data.text).toString(),
                                         }}
@@ -1149,7 +1149,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                         {data.data.board.name}{" "}
                                         <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                             <HiExternalLink
-                                                className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                 size="18"
                                             />
                                         </a>
@@ -1189,7 +1189,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                     <div>
                                         <a href={data.data.attachment.url} target="_blank" rel="noreferrer">
                                             <HiExternalLink
-                                                className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                 size="18"
                                             />
                                         </a>
@@ -1205,7 +1205,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                         {data.data.board.name}{" "}
                                         <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                             <HiExternalLink
-                                                className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                 size="18"
                                             />
                                         </a>
@@ -1245,7 +1245,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                     <div>
                                         <a href={data.data.attachment.url} target="_blank" rel="noreferrer">
                                             <HiExternalLink
-                                                className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                 size="18"
                                             />
                                         </a>
@@ -1261,7 +1261,7 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
                                         {data.data.board.name}{" "}
                                         <a href={data.data.board.shortLink} target="_blank" rel="noreferrer">
                                             <HiExternalLink
-                                                className="my-auto inline text-servcy-silver hover:text-servcy-wheat"
+                                                className="my-auto inline text-custom-servcy-silver hover:text-custom-servcy-wheat"
                                                 size="18"
                                             />
                                         </a>
@@ -1284,22 +1284,22 @@ const TrelloNotification = ({ data, cause }: TrelloNotificationProps) => {
     }
 
     return (
-        <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-servcy-black p-4 text-servcy-white">
-            <div className="mb-4 min-h-[75px] text-servcy-white">{renderTrelloEvent()}</div>
+        <div className="col-span-2 max-h-[600px] overflow-y-scroll rounded-l-lg bg-custom-servcy-black p-4 text-custom-servcy-white">
+            <div className="mb-4 min-h-[75px] text-custom-servcy-white">{renderTrelloEvent()}</div>
             <div className="flex justify-between">
                 {linkLabel && (
                     <a
                         href={link}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-servcy-wheat hover:text-servcy-silver hover:underline"
+                        className="text-custom-servcy-wheat hover:text-custom-servcy-silver hover:underline"
                     >
                         <HiExternalLink className="mr-1 inline" size="18" />
                         {linkLabel}
                     </a>
                 )}
 
-                <div className="flex flex-col text-xs text-servcy-wheat">
+                <div className="flex flex-col text-xs text-custom-servcy-wheat">
                     <div className="mb-2 flex-row">{fullName}</div>
                     <div className="flex-row">
                         {new Date(data.date).toLocaleString("en-US", {
