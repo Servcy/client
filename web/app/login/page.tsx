@@ -7,7 +7,6 @@ import { useEffect, useState } from "react"
 
 import { GoogleLogin } from "@react-oauth/google"
 import { Input } from "antd"
-import { Button } from "@servcy/ui"
 import toast from "react-hot-toast"
 import { BiLogIn } from "react-icons/bi"
 import { HiMail } from "react-icons/hi"
@@ -22,7 +21,7 @@ import { AuthService } from "@services/auth.service"
 
 import { validateEmail, validateOtp, validatePhone } from "@helpers/validation.helper"
 
-import { Spinner } from "@servcy/ui"
+import { Spinner, Button } from "@servcy/ui"
 
 const authService = new AuthService()
 
