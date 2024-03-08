@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useEffect } from "react"
 
@@ -15,8 +15,7 @@ import { cn } from "@helpers/common.helper"
 import { Breadcrumbs } from "@servcy/ui"
 
 export const WorkspaceAnalyticsHeader = observer(() => {
-    const router = useRouter()
-    const { analytics_tab } = router.query
+    const { analytics_tab } = useParams()
 
     const { theme: themeStore } = useApplication()
 

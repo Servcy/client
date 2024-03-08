@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -15,9 +15,7 @@ import { renderEmoji } from "@helpers/emoji.helper"
 import { Breadcrumbs, Button, PhotoFilterIcon } from "@servcy/ui"
 
 export const ProjectViewsHeader: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const {
         commandPalette: { toggleCreateViewModal },

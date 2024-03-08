@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC } from "react"
 
@@ -20,9 +20,7 @@ export interface IPagesHeaderProps {
 
 export const PageDetailsHeader: FC<IPagesHeaderProps> = observer((props) => {
     const { showButton = false } = props
-
-    const router = useRouter()
-    const { workspaceSlug, pageId } = router.query
+    const { workspaceSlug, pageId }= useParams()
 
     const { commandPalette: commandPaletteStore } = useApplication()
     const { currentProjectDetails } = useProject()

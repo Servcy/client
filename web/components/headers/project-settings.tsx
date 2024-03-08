@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { FC } from "react"
 
@@ -22,9 +22,8 @@ export interface IProjectSettingHeader {
 
 export const ProjectSettingHeader: FC<IProjectSettingHeader> = observer((props) => {
     const { title } = props
-    // router
     const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // store hooks
     const {
         membership: { currentProjectRole },

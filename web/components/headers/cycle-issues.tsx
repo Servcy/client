@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { useCallback, useState } from "react"
 
@@ -36,9 +36,7 @@ import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOption
 import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui"
 
 const CycleDropdownOption: React.FC<{ cycleId: string }> = ({ cycleId }) => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // store hooks
     const { getCycleById } = useCycle()
     // derived values
@@ -64,7 +62,7 @@ export const CycleIssuesHeader: React.FC = observer(() => {
     const [analyticsModal, setAnalyticsModal] = useState(false)
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId, cycleId } = router.query as {
+    const { workspaceSlug, projectId, cycleId }= useParams() as {
         workspaceSlug: string
         projectId: string
         cycleId: string

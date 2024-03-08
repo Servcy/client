@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, useCallback } from "react"
 
@@ -19,9 +19,7 @@ import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOption
 import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 
 export const ProjectDraftIssueHeader: FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query as { workspaceSlug: string; projectId: string }
+    const { workspaceSlug, projectId }= useParams() as { workspaceSlug: string; projectId: string }
     // store hooks
     const {
         issuesFilter: { issueFilters, updateFilters },

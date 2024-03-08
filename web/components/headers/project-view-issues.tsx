@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useCallback } from "react"
 
@@ -32,9 +32,7 @@ import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOption
 import { Breadcrumbs, Button, CustomMenu, PhotoFilterIcon } from "@servcy/ui"
 
 export const ProjectViewIssuesHeader: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, viewId } = router.query as {
+    const { workspaceSlug, projectId, viewId }= useParams() as {
         workspaceSlug: string
         projectId: string
         viewId: string

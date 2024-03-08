@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useCallback, useState } from "react"
 
@@ -32,9 +32,7 @@ export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
     const { activeLayout } = props
     // states
     const [createViewModal, setCreateViewModal] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, globalViewId } = router.query
+    const { workspaceSlug, globalViewId }= useParams()
     // store hooks
     const {
         issuesFilter: { filters, updateFilters },

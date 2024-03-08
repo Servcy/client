@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC } from "react"
 
@@ -22,9 +22,7 @@ import { Breadcrumbs, LayersIcon } from "@servcy/ui"
 const issueArchiveService = new IssueArchiveService()
 
 export const ProjectArchivedIssueDetailsHeader: FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, archivedIssueId } = router.query
+    const { workspaceSlug, projectId, archivedIssueId }= useParams()
     // store hooks
     const { currentProjectDetails, getProjectById } = useProject()
 

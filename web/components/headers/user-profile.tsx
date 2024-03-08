@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC } from "react"
 
@@ -23,9 +23,7 @@ type TUserProfileHeader = {
 
 export const UserProfileHeader: FC<TUserProfileHeader> = observer((props) => {
     const { type = undefined } = props
-
-    const router = useRouter()
-    const { workspaceSlug, userId } = router.query
+    const { workspaceSlug, userId } = useParams()
 
     const AUTHORIZED_ROLES = [20, 15, 10]
     const {
