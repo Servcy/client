@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 
@@ -12,9 +12,8 @@ import { EIssueActions } from "../types"
 import { BaseGanttRoot } from "./base-gantt-root"
 
 export const ModuleGanttLayout: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, moduleId } = router.query
+
+    const { workspaceSlug, moduleId } = useParams()
     // store hooks
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE)
     const { fetchModuleDetails } = useModule()

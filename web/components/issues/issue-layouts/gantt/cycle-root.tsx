@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 
@@ -12,9 +12,8 @@ import { EIssueActions } from "../types"
 import { BaseGanttRoot } from "./base-gantt-root"
 
 export const CycleGanttLayout: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, cycleId } = router.query
+
+    const { workspaceSlug, cycleId } = useParams()
     // store hooks
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE)
     const { fetchCycleDetails } = useCycle()

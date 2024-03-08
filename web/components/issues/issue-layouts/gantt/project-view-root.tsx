@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 
@@ -23,9 +23,8 @@ export const ProjectViewGanttLayout: React.FC<IViewGanttLayout> = observer((prop
     const { issueActions } = props
     // store
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW)
-    // router
-    const router = useRouter()
-    const { viewId } = router.query
+
+    const { viewId } = useParams()
 
     return (
         <BaseGanttRoot

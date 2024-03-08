@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -35,9 +35,8 @@ interface IBaseGanttRoot {
 
 export const BaseGanttRoot: React.FC<IBaseGanttRoot> = observer((props: IBaseGanttRoot) => {
     const { issueFiltersStore, issueStore, viewId } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         membership: { currentProjectRole },

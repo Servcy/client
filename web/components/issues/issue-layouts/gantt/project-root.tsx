@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -14,9 +14,7 @@ import { EIssueActions } from "../types"
 import { BaseGanttRoot } from "./base-gantt-root"
 
 export const GanttLayout: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
     // store hooks
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT)
 

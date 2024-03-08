@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, useEffect, useRef, useState } from "react"
 
@@ -66,9 +66,7 @@ const defaultValues: Partial<TIssue> = {
 
 export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observer((props) => {
     const { prePopulatedData, quickAddCallback, viewId } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
 
     const { getProjectById } = useProject()
     const { captureIssueEvent } = useEventTracker()
@@ -118,7 +116,7 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
                         captureIssueEvent({
                             eventName: ISSUE_CREATED,
                             payload: { ...res, state: "SUCCESS", element: "Gantt quick add" },
-                            path: router.asPath,
+                            path: pathname,
                         })
                     }
                 ))
@@ -127,7 +125,7 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Gantt quick add" },
-                path: router.asPath,
+                path: pathname,
             })
             toast.error(err?.message || "Some error occurred. Please try again.")
         }
