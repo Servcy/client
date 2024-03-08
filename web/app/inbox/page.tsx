@@ -233,24 +233,23 @@ export default function Gmail(): JSX.Element {
                                                 <GoMention className="mr-2" />
                                                 <span>{filterByIAmMentionedButtonText}</span>
                                             </ServcyButton>
-                                            <ServcyButton
-                                                className="mr-2"
+                                            <Button
+                                                className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
                                                 disabled={inboxItems.length === 0}
                                                 onClick={() => {
                                                     if (activeTab !== "archived")
                                                         archiveItems(inboxItems.map((item) => parseInt(item.id)))
                                                     else deleteItems(inboxItems.map((item) => parseInt(item.id)))
                                                 }}
-                                                variant="outline-danger"
+                                                icon={<HiArchiveBoxArrowDown />}
                                             >
-                                                <HiArchiveBoxArrowDown className="mr-2" />
                                                 <span>
                                                     {activeTab === "archived" ? "Delete" : "Archive"} All (
                                                     {inboxItems.length})
                                                 </span>
-                                            </ServcyButton>
-                                            <ServcyButton
-                                                className="mr-2"
+                                            </Button>
+                                            <Button
+                                                className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
                                                 disabled={selectedItemIds.length === 0}
                                                 onClick={() => {
                                                     if (activeTab !== "archived")
@@ -266,11 +265,10 @@ export default function Gmail(): JSX.Element {
                                                             )
                                                         )
                                                 }}
-                                                variant="tertiary-danger"
+                                                icon={<HiArchiveBoxArrowDown />}
                                             >
-                                                <HiArchiveBoxArrowDown className="mr-2" />
                                                 <span>{activeTab === "archived" ? "Delete" : "Archive"} Selected</span>
-                                            </ServcyButton>
+                                            </Button>
                                             <Select
                                                 placeholder="Filter By Source"
                                                 allowClear

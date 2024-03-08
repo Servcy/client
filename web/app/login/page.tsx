@@ -112,8 +112,8 @@ export default function Login(): JSX.Element {
         )
 
     return (
-        <main className="flex min-h-screen w-full bg-servcy-white">
-            <div className="m-auto w-[430px] rounded-lg border border-custom-border-200 bg-onboarding-gradient-200 p-10 text-center text-servcy-white shadow-md">
+        <main className="flex min-h-screen w-full">
+            <div className="m-auto w-[430px] rounded-lg border border-custom-border-200 bg-onboarding-gradient-200 p-10 text-center shadow-md">
                 <Image src="/logo.svg" alt="Servcy logo" height="64" width="64" className="mx-auto" />
                 <h4 className="my-5 font-semibold">Welcome To Servcy</h4>
                 <form autoComplete="off">
@@ -153,12 +153,12 @@ export default function Login(): JSX.Element {
                                     type="checkbox"
                                     checked
                                     onChange={() => {}}
-                                    className="mr-2 accent-servcy-light"
+                                    className="mr-2 accent-custom-servcy-light"
                                 />
                                 <span className="text-sm font-normal">
                                     I agree to Servcys&nbsp;
                                     <Link
-                                        className="text-servcy-light"
+                                        className="text-custom-servcy-light"
                                         href="https://servcy.com/documents/privacy-policy/"
                                         target="_blank"
                                     >
@@ -166,7 +166,7 @@ export default function Login(): JSX.Element {
                                     </Link>
                                     &nbsp;&&nbsp;
                                     <Link
-                                        className="text-servcy-light"
+                                        className="text-custom-servcy-light"
                                         href="https://servcy.com/documents/terms-and-conditions"
                                         target="_blank"
                                     >
@@ -177,9 +177,9 @@ export default function Login(): JSX.Element {
                             <Button
                                 variant="primary"
                                 type="submit"
+                                className="w-full"
                                 size="md"
                                 onClick={sendOtp}
-                                className="flex w-full items-center justify-center text-center font-medium !text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                                 disabled={loading}
                                 loading={loading}
                             >
@@ -223,7 +223,7 @@ export default function Login(): JSX.Element {
                                     },
                                     renderInput: (inputProps: any) =>
                                         loading ? (
-                                            <div className="h-10 w-10 animate-pulse rounded-full bg-servcy-white" />
+                                            <div className="h-10 w-10 animate-pulse rounded-full bg-custom-servcy-white" />
                                         ) : (
                                             <Input
                                                 {...inputProps}
