@@ -177,7 +177,7 @@ export class FileService extends APIService {
     }
 
     async getProjectCoverImages(): Promise<string[]> {
-        return this.get(`/api/project-covers/`)
+        return this.get(`/project/project-covers/`)
             .then((res) => res?.data)
             .catch((err) => {
                 throw err?.response?.data
