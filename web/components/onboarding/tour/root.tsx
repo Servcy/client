@@ -94,7 +94,7 @@ export const TourRoot: React.FC<Props> = observer((props) => {
                 <div className="h-3/4 w-4/5 overflow-hidden rounded-[10px] bg-custom-background-100 md:w-1/2 lg:w-2/5">
                     <div className="h-full overflow-hidden">
                         <div className="grid h-3/5 place-items-center bg-custom-primary-100">
-                            <Image src={ServcyLogo} alt="Servcy White Logo" />
+                            <Image src={ServcyLogo} alt="Servcy White Logo" height="300" width="300" />
                         </div>
                         <div className="flex h-2/5 flex-col overflow-y-auto p-6">
                             <h3 className="font-semibold sm:text-xl">
