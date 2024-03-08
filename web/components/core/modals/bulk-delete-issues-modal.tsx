@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -38,8 +38,8 @@ const issueService = new IssueService()
 export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
     const { isOpen, onClose } = props
     // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const params = useParams()
+    const { workspaceSlug, projectId } = params
 
     const { getProjectById } = useProject()
     const {
