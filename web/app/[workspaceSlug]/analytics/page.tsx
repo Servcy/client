@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { Fragment } from "react"
 

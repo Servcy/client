@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
