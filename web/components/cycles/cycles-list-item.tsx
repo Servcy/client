@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
 import { FC, MouseEvent, useState } from "react"
 
@@ -37,6 +37,7 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
     const [updateModal, setUpdateModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
     // router
+    const pathname = usePathname()
     const router = useRouter()
     // store hooks
     const { setTrackElement, captureEvent } = useEventTracker()
@@ -105,14 +106,9 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
     }
 
     const openCycleOverview = (e: MouseEvent<HTMLButtonElement>) => {
-        const { query } = router
         e.preventDefault()
         e.stopPropagation()
-
-        router.push({
-            pathname: router.pathname,
-            query: { ...query, peekCycle: cycleId },
-        })
+        router.push(`${pathname}?peekCycle=${cycleId}`)
     }
 
     const cycleDetails = getCycleById(cycleId)

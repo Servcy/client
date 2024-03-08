@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 
@@ -16,7 +16,7 @@ const AUTHORIZED_ROLES = [20, 15, 10]
 
 const ProfileAuthWrapper: React.FC<Props> = observer((props) => {
     const { children, className, showProfileIssuesFilter } = props
-    const router = useRouter()
+    const pathname = usePathname()
 
     const {
         membership: { currentWorkspaceRole },
@@ -26,7 +26,7 @@ const ProfileAuthWrapper: React.FC<Props> = observer((props) => {
 
     const isAuthorized = AUTHORIZED_ROLES.includes(currentWorkspaceRole)
 
-    const isAuthorizedPath = router.pathname.includes("assigned" || "created" || "subscribed")
+    const isAuthorizedPath = pathname.includes("assigned" || "created" || "subscribed")
 
     return (
         <div className="h-full w-full md:flex md:flex-row-reverse md:overflow-hidden">

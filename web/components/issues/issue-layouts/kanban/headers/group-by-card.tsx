@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import React, { FC } from "react"
 
@@ -53,11 +53,10 @@ export const HeaderGroupByCard: FC<IHeaderGroupByCard> = observer((props) => {
     const [openExistingIssueListModal, setOpenExistingIssueListModal] = React.useState(false)
 
     const { setTrackElement } = useEventTracker()
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, moduleId, cycleId } = router.query
+    const pathname = usePathname()
+    const { workspaceSlug, projectId, moduleId, cycleId }= useParams()
 
-    const isDraftIssue = router.pathname.includes("draft-issue")
+    const isDraftIssue = pathname.includes("draft-issue")
 
     const renderExistingIssueModal = moduleId || cycleId
     const ExistingIssuesListModalPayload = moduleId ? { module: moduleId.toString() } : { cycle: true }

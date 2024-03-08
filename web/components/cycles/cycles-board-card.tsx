@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 import { FC, MouseEvent, useState } from "react"
 
@@ -35,6 +35,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
     const [deleteModal, setDeleteModal] = useState(false)
     // router
     const router = useRouter()
+    const pathname = usePathname()
     // store
     const { setTrackElement, captureEvent } = useEventTracker()
     const {
@@ -134,14 +135,10 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
     }
 
     const openCycleOverview = (e: MouseEvent<HTMLButtonElement>) => {
-        const { query } = router
         e.preventDefault()
         e.stopPropagation()
+        router.push(`${pathname}?peekCycle=${cycleId}`)
 
-        router.push({
-            pathname: router.pathname,
-            query: { ...query, peekCycle: cycleId },
-        })
     }
 
     const daysLeft = findHowManyDaysLeft(cycleDetails.end_date) ?? 0

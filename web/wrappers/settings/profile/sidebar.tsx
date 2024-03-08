@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
 import { useEffect, useRef, useState } from "react"
 
@@ -35,6 +35,7 @@ export const ProfileLayoutSidebar = observer(() => {
     // states
     const [isSigningOut, setIsSigningOut] = useState(false)
     // router
+    const pathname = usePathname()
     const router = useRouter()
     // next themes
     const { setTheme } = useTheme()
@@ -138,7 +139,7 @@ export const ProfileLayoutSidebar = observer(() => {
                                 >
                                     <div
                                         className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium outline-none ${
-                                            link.highlight(router.pathname)
+                                            link.highlight(pathname)
                                                 ? "bg-custom-primary-100/10 text-custom-primary-100"
                                                 : "text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80"
                                         } ${sidebarCollapsed ? "justify-center" : ""}`}
