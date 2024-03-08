@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import { Button, ConfigProvider, Input, Select, Tabs } from "antd"
+import { Button, ConfigProvider, Input, Select, Tabs, theme } from "antd"
 import cn from "classnames"
 import debounce from "lodash/debounce"
 import {
@@ -72,6 +72,7 @@ export default function Gmail(): JSX.Element {
     const [isInboxItemModalVisible, setIsInboxItemModalVisible] = useState<boolean>(false)
     const [filterByIAmMentionedButtonText, setFilterByIAmMentionedButtonText] = useState<string>("For Me")
     const { currentUserLoader } = useUser()
+    const { darkAlgorithm } = theme
 
     const refetchInboxItems = async () => {
         try {
@@ -141,7 +142,6 @@ export default function Gmail(): JSX.Element {
     useEffect(() => {
         const debouncedFetchInbox = debounce(async () => {
             try {
-                setLoading(true)
                 const response = await inbox_service.fetchInbox({
                     filters,
                     search,
@@ -196,14 +196,15 @@ export default function Gmail(): JSX.Element {
                                 </Button>
                             </div>
                         </header>
-                        <div className="mb-6 min-h-[80px] rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 p-6 text-lg">
+                        <div className="mb-6 max-h-[80vh] rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 overflow-y-scroll p-6 text-lg">
                             <ConfigProvider
                                 theme={{
                                     components: {
                                         Tabs: {
-                                            inkBarColor: "#fff",
+                                            inkBarColor: "rgb(67, 72, 79)",
                                         },
                                     },
+                                    algorithm: darkAlgorithm,
                                 }}
                             >
                                 <Tabs
