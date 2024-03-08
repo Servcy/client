@@ -4,14 +4,11 @@ import Blocked from "@components/shared/blocked"
 
 import "@styles/global.css"
 
-import Router from "next/router"
-
 import { FC, PropsWithChildren } from "react"
 
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "next-themes"
-import NProgress from "nprogress"
 import { Toaster } from "react-hot-toast"
 import { SWRConfig } from "swr"
 
@@ -28,12 +25,6 @@ import CrispWrapper from "@wrappers/CrispWrapper"
 import StoreWrapper from "@wrappers/StoreWrapper"
 
 import { isMobileDevice } from "@helpers/common.helper"
-
-// nprogress
-NProgress.configure({ showSpinner: false })
-Router.events.on("routeChangeStart", NProgress.start)
-Router.events.on("routeChangeError", NProgress.done)
-Router.events.on("routeChangeComplete", NProgress.done)
 
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     const {
