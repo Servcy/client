@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -14,9 +14,7 @@ import { MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { EUserProjectRoles } from "@constants/project"
 
 export const ModulesListView: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, peekModule } = router.query
+    const { workspaceSlug, projectId, peekModule }= useParams()
     // theme
     const { resolvedTheme } = useTheme()
     // store hooks

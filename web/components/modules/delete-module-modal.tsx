@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -26,7 +26,7 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
     const [isDeleteLoading, setIsDeleteLoading] = useState(false)
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId, moduleId, peekModule } = router.query
+    const { workspaceSlug, projectId, moduleId, peekModule }= useParams()
     // store hooks
     const { captureModuleEvent } = useEventTracker()
     const { deleteModule } = useModule()

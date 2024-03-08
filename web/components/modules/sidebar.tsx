@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -55,9 +55,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
     const [moduleDeleteModal, setModuleDeleteModal] = useState(false)
     const [moduleLinkModal, setModuleLinkModal] = useState(false)
     const [selectedLinkToUpdate, setSelectedLinkToUpdate] = useState<ILinkDetails | null>(null)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, peekModule } = router.query
+    const { workspaceSlug, projectId, peekModule }= useParams()
     // store hooks
     const {
         membership: { currentProjectRole },

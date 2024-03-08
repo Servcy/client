@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, Fragment } from "react"
 
@@ -38,9 +38,7 @@ const timeStamps = allTimeIn30MinutesInterval12HoursFormat
 
 export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
     const { isOpen, onClose, notification, onSuccess, onSubmit: handleSubmitSnooze } = props
-
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
 
     const {
         formState: { isSubmitting },

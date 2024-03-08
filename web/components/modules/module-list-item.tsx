@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useParams, usePathname } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -31,7 +31,9 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
     const [deleteModal, setDeleteModal] = useState(false)
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const pathname = usePathname()
+    const params = useParams()
+    const { workspaceSlug, projectId } = params
 
     // store hooks
     const {
@@ -105,12 +107,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
     const openModuleOverview = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         e.preventDefault()
-        const { query } = router
-
-        router.push({
-            pathname: router.pathname,
-            query: { ...query, peekModule: moduleId },
-        })
+        router.push(`${pathname}?peekModule=${moduleId}`);
     }
 
     if (!moduleDetails) return null

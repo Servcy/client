@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect, useRef } from "react"
 
@@ -47,9 +47,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
     } = props
     // store hooks
     const { captureEvent } = useEventTracker()
-
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // states
     const [showSnoozeOptions, setShowSnoozeOptions] = React.useState(false)
 

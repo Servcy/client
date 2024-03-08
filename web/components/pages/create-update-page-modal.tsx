@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { FC } from "react"
 
@@ -25,9 +25,7 @@ type Props = {
 
 export const CreateUpdatePageModal: FC<Props> = (props) => {
     const { isOpen, handleClose, projectId, pageStore } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
     // store hooks
     const { createPage } = useProjectPages()
     const { capturePageEvent } = useEventTracker()

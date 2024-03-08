@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC } from "react"
 
@@ -34,9 +34,7 @@ export const PagesListView: FC<IPagesListView> = (props) => {
     } = useUser()
     // local storage
     const { storedValue: pageTab } = useLocalStorage("pageTab", "Recent")
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
 
     const currentPageTabDetails = pageTab
         ? PAGE_EMPTY_STATE_DETAILS[pageTab as keyof typeof PAGE_EMPTY_STATE_DETAILS]

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -25,9 +25,7 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
 
     // states
     const [isDeleting, setIsDeleting] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { deletePage } = useProjectPages()
     const { capturePageEvent } = useEventTracker()

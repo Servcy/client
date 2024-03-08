@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 
@@ -11,9 +11,7 @@ import { useModule, useProject } from "@hooks/store"
 import { IModule } from "@servcy/types"
 
 export const ModulesListGanttChartView: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store
     const { currentProjectDetails } = useProject()
     const { projectModuleIds, moduleMap, updateModuleDetails } = useModule()

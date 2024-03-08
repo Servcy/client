@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, useState } from "react"
 
@@ -39,12 +39,8 @@ export const PagesListItem: FC<IPagesListItem> = observer(({ pageId, projectId }
     const projectPageStore = useProjectPages()
     // Now, I am observing only the projectPages, out of the projectPageStore.
     const { archivePage, restorePage } = projectPageStore
-
     const pageStore = usePage(pageId)
-
-    // states
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false)
 
     const [deletePageModal, setDeletePageModal] = useState(false)
