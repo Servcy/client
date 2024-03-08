@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -45,8 +45,6 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     const { cycleId, handleClose } = props
     // states
     const [cycleDeleteModal, setCycleDeleteModal] = useState(false)
-    // router
-    const router = useRouter()
     const { workspaceSlug, projectId, peekCycle } = useParams()
     // store hooks
     const { setTrackElement, captureCycleEvent } = useEventTracker()

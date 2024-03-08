@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { Fragment, useState } from "react"
 

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -30,7 +30,6 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
         issues: { transferIssuesFromCycle },
     } = useIssues(EIssuesStoreType.CYCLE)
 
-    const router = useRouter()
     const { workspaceSlug, projectId, cycleId } = useParams()
 
     const transferIssue = async (payload: any) => {

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC } from "react"
 
@@ -20,8 +20,6 @@ type Props = {
 
 export const CyclesListGanttChartView: FC<Props> = observer((props) => {
     const { cycleIds } = props
-    // router
-    const router = useRouter()
     const { workspaceSlug } = useParams()
     // store hooks
     const {
