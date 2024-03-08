@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -24,7 +24,7 @@ const workspaceService = new WorkspaceService()
 const WorkspaceInvitationPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
-    const { invitation_id, email, slug } = router.query
+    const { invitation_id, email, slug } = useParams()
     // store hooks
     const { currentUser } = useUser()
 

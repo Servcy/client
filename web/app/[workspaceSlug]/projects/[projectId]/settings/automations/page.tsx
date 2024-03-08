@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
@@ -20,8 +20,7 @@ import type { IProject, NextPageWithWrapper } from "@servcy/types"
 
 const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
     // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
 
     // store hooks
     const {

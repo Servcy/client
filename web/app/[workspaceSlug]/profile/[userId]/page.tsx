@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import useSWR from "swr"
 
@@ -27,8 +27,8 @@ import type { IUserStateDistribution, NextPageWithWrapper, TStateGroups } from "
 const userService = new UserService()
 
 const ProfileOverviewPage: NextPageWithWrapper = () => {
-    const router = useRouter()
-    const { workspaceSlug, userId } = router.query
+    const params = useParams()
+    const { workspaceSlug, userId } = params
 
     const { data: userProfile } = useSWR(
         workspaceSlug && userId ? USER_PROFILE_DATA(workspaceSlug.toString(), userId.toString()) : null,

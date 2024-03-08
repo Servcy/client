@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, ReactNode } from "react"
 
@@ -21,9 +21,8 @@ export interface IProjectSettingLayout {
 
 export const ProjectSettingLayout: FC<IProjectSettingLayout> = observer((props) => {
     const { children } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const params = useParams()
+    const { workspaceSlug, projectId } = params
     // store hooks
     const {
         membership: { currentProjectRole },

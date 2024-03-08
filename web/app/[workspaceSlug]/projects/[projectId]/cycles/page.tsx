@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { Fragment, useCallback, useState } from "react"
 
@@ -39,8 +39,7 @@ const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
     const { currentProjectCycleIds, loader } = useCycle()
     const { getProjectById } = useProject()
     // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, peekCycle } = router.query
+    const { workspaceSlug, projectId, peekCycle } = useParams()
     // local storage
     const { storedValue: cycleTab, setValue: setCycleTab } = useLocalStorage<TCycleView>("cycle_tab", "active")
     const { storedValue: cycleLayout, setValue: setCycleLayout } = useLocalStorage<TCycleLayout>("cycle_layout", "list")

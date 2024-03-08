@@ -1,7 +1,7 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { Fragment, useState } from "react"
 
@@ -50,8 +50,7 @@ const SharedPagesList = dynamic<any>(() => import("@components/pages").then((a) 
 
 const ProjectPagesPage: NextPageWithWrapper = observer(() => {
     // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // states
     const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false)
     // theme
@@ -59,7 +58,6 @@ const ProjectPagesPage: NextPageWithWrapper = observer(() => {
     // store hooks
     const {
         currentUser,
-        currentUserLoader,
         membership: { currentProjectRole },
     } = useUser()
     const {

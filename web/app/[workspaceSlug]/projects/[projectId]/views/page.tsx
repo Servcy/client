@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react"
 
@@ -16,8 +16,7 @@ import type { NextPageWithWrapper } from "@servcy/types"
 
 const ProjectViewsPage: NextPageWithWrapper = observer(() => {
     // router
-    const router = useRouter()
-    const { projectId } = router.query
+    const { projectId } = useParams()
     // store
     const { getProjectById } = useProject()
     // derived values

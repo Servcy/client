@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { createContext, useCallback, useEffect, useReducer } from "react"
 
@@ -87,8 +87,8 @@ export const reducer: ReducerFunctionType = (state, action) => {
 const UserNotificationContextProvider: React.FC<{
     children: React.ReactNode
 }> = ({ children }) => {
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const routeParams = useParams()
+    const { workspaceSlug } = routeParams
 
     const [state, dispatch] = useReducer(reducer, initialState)
 

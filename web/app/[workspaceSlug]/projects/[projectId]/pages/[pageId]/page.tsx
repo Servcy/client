@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useEffect, useRef, useState } from "react"
 
@@ -35,10 +35,7 @@ const PageDetailsPage: NextPageWithWrapper = observer(() => {
     const [gptModalOpen, setGptModal] = useState(false)
     // refs
     const editorRef = useRef<any>(null)
-    // router
-    const router = useRouter()
-
-    const { workspaceSlug, projectId, pageId } = router.query
+    const { workspaceSlug, projectId, pageId } = useParams()
     const workspaceStore = useWorkspace()
     const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
 

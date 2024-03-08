@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { Fragment } from "react"
 
@@ -25,7 +25,8 @@ import type { NextPageWithWrapper } from "@servcy/types"
 
 const AnalyticsPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
-    const { analytics_tab } = router.query
+    const params = useParams()
+    const { analytics_tab } = params
     // theme
     const { resolvedTheme } = useTheme()
     // store hooks
@@ -66,8 +67,7 @@ const AnalyticsPage: NextPageWithWrapper = observer(() => {
                                         }`
                                     }
                                     onClick={() => {
-                                        router.query["analytics_tab"] = tab.key
-                                        router.push(router)
+                                        router.push(`/${currentWorkspace?.slug}/analytics/${tab.key}`)
                                     }}
                                 >
                                     {tab.title}

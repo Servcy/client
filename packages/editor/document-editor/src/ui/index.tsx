@@ -9,7 +9,6 @@ import { SummarySideBar } from "src/ui/components/summary-side-bar";
 import { DocumentDetails } from "src/types/editor-types";
 import { PageRenderer } from "src/ui/components/page-renderer";
 import { getMenuOptions } from "src/utils/menu-options";
-import { useRouter } from "next/navigation";
 import { FixedMenu } from "src";
 
 interface IDocumentEditor {
@@ -48,9 +47,6 @@ interface IDocumentEditor {
   pageLockConfig?: IPageLockConfig;
   pageArchiveConfig?: IPageArchiveConfig;
 }
-interface DocumentEditorProps extends IDocumentEditor {
-  forwardedRef?: React.Ref<EditorHandle>;
-}
 
 interface EditorHandle {
   clearEditor: () => void;
@@ -81,7 +77,6 @@ const DocumentEditor = ({
 }: IDocumentEditor) => {
   const { markings, updateMarkings } = useEditorMarkings();
   const [sidePeekVisible, setSidePeekVisible] = useState(true);
-  const router = useRouter();
 
   const [hideDragHandleOnMouseLeave, setHideDragHandleOnMouseLeave] = React.useState<() => void>(() => {});
 
@@ -118,7 +113,6 @@ const DocumentEditor = ({
 
   const KanbanMenuOptions = getMenuOptions({
     editor: editor,
-    router: router,
     duplicationConfig: duplicationConfig,
     pageLockConfig: pageLockConfig,
     pageArchiveConfig: pageArchiveConfig,

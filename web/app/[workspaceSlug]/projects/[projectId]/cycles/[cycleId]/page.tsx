@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { observer } from "mobx-react"
 import emptyCycle from "public/empty-state/cycle.svg"
@@ -22,7 +22,7 @@ import type { NextPageWithWrapper } from "@servcy/types"
 const CycleDetailPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId, cycleId } = router.query
+    const { workspaceSlug, projectId, cycleId } = useParams()
     // store hooks
     const { fetchCycleDetails, getCycleById } = useCycle()
     const { getProjectById } = useProject()

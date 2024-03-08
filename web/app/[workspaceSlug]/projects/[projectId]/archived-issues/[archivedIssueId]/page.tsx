@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { useState } from "react"
 
@@ -26,7 +26,8 @@ import { ArchiveIcon, Button, Loader } from "@servcy/ui"
 const ArchivedIssueDetailsPage: NextPageWithWrapper = observer(() => {
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId, archivedIssueId } = router.query
+    const params = useParams()
+    const { workspaceSlug, projectId, archivedIssueId } = params
     // states
     const [isRestoring, setIsRestoring] = useState(false)
 

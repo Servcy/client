@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { observer } from "mobx-react"
 import emptyModule from "public/empty-state/module.svg"
@@ -20,9 +20,9 @@ import { AppWrapper } from "@wrappers/app"
 import type { NextPageWithWrapper } from "@servcy/types"
 
 const ModuleIssuesPage: NextPageWithWrapper = observer(() => {
-    // router
     const router = useRouter()
-    const { workspaceSlug, projectId, moduleId } = router.query
+    const params = useParams()
+    const { workspaceSlug, projectId, moduleId } = params
     // store hooks
     const { fetchModuleDetails, getModuleById } = useModule()
     const { getProjectById } = useProject()

@@ -1,5 +1,4 @@
 import { getEditorClassNames, useReadOnlyEditor } from "@servcy/editor-core";
-import { useRouter } from "next/navigation";
 import { useState, forwardRef, useEffect } from "react";
 import { EditorHeader } from "src/ui/components/editor-header";
 import { PageRenderer } from "src/ui/components/page-renderer";
@@ -52,7 +51,6 @@ const DocumentReadOnlyEditor = ({
   rerenderOnPropsChange,
   onActionCompleteHandler,
 }: DocumentReadOnlyEditorProps) => {
-  const router = useRouter();
   const [sidePeekVisible, setSidePeekVisible] = useState(true);
   const { markings, updateMarkings } = useEditorMarkings();
 
@@ -81,7 +79,6 @@ const DocumentReadOnlyEditor = ({
 
   const KanbanMenuOptions = getMenuOptions({
     editor: editor,
-    router: router,
     pageArchiveConfig: pageArchiveConfig,
     pageLockConfig: pageLockConfig,
     duplicationConfig: pageDuplicationConfig,

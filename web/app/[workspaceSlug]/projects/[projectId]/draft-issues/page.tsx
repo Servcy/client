@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { PenSquare, X } from "lucide-react"
 import { observer } from "mobx-react"
@@ -17,7 +17,8 @@ import type { NextPageWithWrapper } from "@servcy/types"
 
 const ProjectDraftIssuesPage: NextPageWithWrapper = observer(() => {
     const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const params = useParams()
+    const { workspaceSlug, projectId } = params
     // store
     const { getProjectById } = useProject()
     // derived values

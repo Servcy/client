@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useState } from "react"
 
@@ -27,8 +27,7 @@ const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
     // states
     const [selectProject, setSelectedProject] = useState<string | null>(null)
     // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { currentProjectDetails, fetchProjectDetails } = useProject()
     // api call to fetch project details

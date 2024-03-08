@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useMemo, useState } from "react"
 
@@ -46,8 +46,8 @@ interface UseUserNotification {
 }
 
 const useUserNotification = (): UseUserNotification => {
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const params = useParams()
+    const { workspaceSlug } = params
 
     const [snoozed, setSnoozed] = useState<boolean>(false)
     const [archived, setArchived] = useState<boolean>(false)

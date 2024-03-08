@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, ReactNode } from "react"
 
@@ -23,8 +23,8 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
         workspace: { fetchWorkspaceMembers },
     } = useMember()
     // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const params = useParams()
+    const { workspaceSlug } = params
     // fetching user workspace information
     useSWR(
         workspaceSlug ? `WORKSPACE_MEMBERS_ME_${workspaceSlug}` : null,

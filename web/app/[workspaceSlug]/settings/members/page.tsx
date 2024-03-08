@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useState } from "react"
 
@@ -29,9 +29,7 @@ const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {
     // states
     const [inviteModal, setInviteModal] = useState(false)
     const [searchQuery, setSearchQuery] = useState<string>("")
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
     // store hooks
     const { captureEvent } = useEventTracker()
     const {

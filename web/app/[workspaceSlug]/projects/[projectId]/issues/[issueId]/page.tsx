@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useEffect } from "react"
 
@@ -20,8 +20,8 @@ import { Loader } from "@servcy/ui"
 
 const IssueDetailsPage: NextPageWithWrapper = observer(() => {
     // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, issueId } = router.query
+    const params = useParams()
+    const { workspaceSlug, projectId, issueId } = params
 
     const {
         fetchIssue,

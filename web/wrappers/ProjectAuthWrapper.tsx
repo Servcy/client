@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, ReactNode } from "react"
 
@@ -50,8 +50,8 @@ const ProjectAuthWrapper: FC<IProjectAuthWrapper> = observer((props) => {
     const { fetchProjectLabels } = useLabel()
     const { fetchProjectEstimates } = useEstimate()
     // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const params = useParams()
+    const { workspaceSlug, projectId } = params
 
     // fetching project details
     useSWR(

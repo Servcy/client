@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react"
 import useSWR from "swr"
@@ -17,8 +17,7 @@ import { ProjectSettingLayout } from "@wrappers/settings"
 import type { NextPageWithWrapper } from "@servcy/types"
 
 const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // store
     const {
         membership: { fetchUserProjectInfo },

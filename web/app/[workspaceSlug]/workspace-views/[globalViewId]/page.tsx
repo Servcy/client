@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react"
 
@@ -18,9 +18,7 @@ import { AppWrapper } from "@wrappers/app"
 import type { NextPageWithWrapper } from "@servcy/types"
 
 const GlobalViewIssuesPage: NextPageWithWrapper = observer(() => {
-    // router
-    const router = useRouter()
-    const { globalViewId } = router.query
+    const { globalViewId } = useParams()
     // store hooks
     const { currentWorkspace } = useWorkspace()
     const { getViewDetailsById } = useGlobalView()
