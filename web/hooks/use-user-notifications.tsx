@@ -46,8 +46,7 @@ interface UseUserNotification {
 }
 
 const useUserNotification = (): UseUserNotification => {
-    const params = useParams()
-    const { workspaceSlug } = params
+    const { workspaceSlug } = useParams()
 
     const [snoozed, setSnoozed] = useState<boolean>(false)
     const [archived, setArchived] = useState<boolean>(false)
