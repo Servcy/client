@@ -67,8 +67,7 @@ export class FileService extends APIService {
         return async (file: File) => {
             try {
                 const formData = new FormData()
-                formData.append("asset", file)
-                formData.append("attributes", JSON.stringify({}))
+                formData.append("file", file)
 
                 const data = await this.uploadFile(workspaceSlug, formData)
                 return data.asset
@@ -141,8 +140,8 @@ export class FileService extends APIService {
             })
     }
 
-    async uploadUserFile(file: FormData): Promise<any> {
-        return this.post(`/api/users/file-assets/`, file, {
+    async uploadDocument(file: FormData): Promise<any> {
+        return this.post(`/document/upload`, file, {
             headers: {
                 ...this.getHeaders(),
                 "Content-Type": "multipart/form-data",
@@ -154,11 +153,11 @@ export class FileService extends APIService {
             })
     }
 
-    async deleteUserFile(assetUrl: string): Promise<any> {
+    async deleteDocument(assetUrl: string): Promise<any> {
         const lastIndex = assetUrl.lastIndexOf("/")
         const assetId = assetUrl.substring(lastIndex + 1)
 
-        return this.delete(`/api/users/file-assets/${assetId}`)
+        return this.delete(`/document/${assetId}`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -166,7 +165,7 @@ export class FileService extends APIService {
     }
 
     async getUnsplashImages(query?: string): Promise<UnSplashImage[]> {
-        return this.get(`/api/unsplash/`, {
+        return this.get(`/document/unsplash`, {
             params: {
                 query,
             },

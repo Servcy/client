@@ -84,7 +84,7 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
 
         setIsRemoving(true)
 
-        fileService.deleteUserFile(url).then(() => {
+        fileService.deleteDocument(url).then(() => {
             if (updateUser)
                 updateCurrentUser({ avatar: "" })
                     .then(() => {

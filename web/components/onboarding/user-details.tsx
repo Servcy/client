@@ -101,7 +101,7 @@ export const UserDetails: React.FC<Props> = observer((props) => {
         if (!url) return
 
         setIsRemoving(true)
-        fileService.deleteUserFile(url).finally(() => {
+        fileService.deleteDocument(url).finally(() => {
             setValue("avatar", "")
             setIsRemoving(false)
         })
