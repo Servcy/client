@@ -7,7 +7,6 @@ import { useEffect, useState } from "react"
 
 import { GoogleLogin } from "@react-oauth/google"
 import { Button, Input } from "antd"
-import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 import { BiLogIn } from "react-icons/bi"
 import { HiMail } from "react-icons/hi"
@@ -22,12 +21,11 @@ import { AuthService } from "@services/auth.service"
 
 import { validateEmail, validateOtp, validatePhone } from "@helpers/validation.helper"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
 
 const authService = new AuthService()
 
-const Login: NextPageWithWrapper = observer(() => {
+export default function Login(): JSX.Element {
     const [stage, setStage] = useState<number>(0)
     const [inputType, setInputType] = useState<string>("email")
     const [input, setInput] = useState<string>("")
@@ -118,7 +116,7 @@ const Login: NextPageWithWrapper = observer(() => {
             <div className="m-auto w-[430px] rounded-lg border border-servcy-black bg-servcy-black p-10 text-center text-servcy-white shadow-md">
                 <Image src="/logo.svg" alt="Servcy logo" height="64" width="64" className="mx-auto" />
                 <h4 className="my-5 font-semibold">Welcome To Servcy</h4>
-                <form>
+                <form autoComplete="off">
                     {/* email and corresponding otp */}
                     {stage === 0 ? (
                         <>
@@ -131,6 +129,7 @@ const Login: NextPageWithWrapper = observer(() => {
                                     if (event.code === "Enter") sendOtp(event)
                                 }}
                                 placeholder="name@company.com"
+                                autoComplete="off"
                                 type="email"
                                 className="mb-[16px] p-3 text-sm"
                             />
@@ -144,6 +143,7 @@ const Login: NextPageWithWrapper = observer(() => {
                                     if (event.code === "Enter") sendOtp(event)
                                 }}
                                 placeholder="+123 456 7890"
+                                autoComplete="off"
                                 type="email"
                                 className="mb-[16px] p-3 text-sm"
                             />
@@ -242,6 +242,4 @@ const Login: NextPageWithWrapper = observer(() => {
             </div>
         </main>
     )
-})
-
-export default Login
+}

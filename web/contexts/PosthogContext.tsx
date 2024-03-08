@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { usePathname, useSearchParams } from 'next/navigation'
 
 import { FC, ReactNode, useEffect, useState } from "react"
 
@@ -21,10 +21,10 @@ export interface IPosthogWrapper {
 
 const PostHogProvider: FC<IPosthogWrapper> = (props) => {
     const { children, user, workspaceRole, currentWorkspaceId, projectRole } = props
+    const pathame = usePathname()
+    const searchParams = useSearchParams()
     // states
     const [lastWorkspaceId, setLastWorkspaceId] = useState(currentWorkspaceId)
-    // router
-    const router = useRouter()
 
     useEffect(() => {
         if (user) {
@@ -53,7 +53,6 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
     }, [currentWorkspaceId, lastWorkspaceId, user])
 
     useEffect(() => {
-        // Track page views
         const handleRouteChange = () => {
             posthog?.capture("$pageview")
         }
@@ -62,12 +61,8 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
             autocapture: false,
             capture_pageview: false,
         })
-        router.events.on("routeChangeComplete", handleRouteChange)
-        return () => {
-            router.events.off("routeChangeComplete", handleRouteChange)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        handleRouteChange();
+    }, [pathame, searchParams])
 
     return <PHProvider client={posthog}>{children}</PHProvider>
 }

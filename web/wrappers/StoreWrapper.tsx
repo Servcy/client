@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useParams } from "next/navigation"
 
 import { FC, ReactNode, useEffect, useState } from "react"
 
@@ -18,7 +18,7 @@ const StoreWrapper: FC<IStoreWrapper> = observer((props) => {
     // states
     const [dom, setDom] = useState<any>()
     // router
-    const router = useRouter()
+    const params = useParams()
     // store hooks
     const {
         theme: { sidebarCollapsed, toggleSidebar },
@@ -49,9 +49,9 @@ const StoreWrapper: FC<IStoreWrapper> = observer((props) => {
     }, [currentUser, setTheme, dom])
 
     useEffect(() => {
-        if (!router.query) return
-        setQuery(router.query)
-    }, [router.query, setQuery])
+        if (!params) return
+        setQuery(params)
+    }, [params, setQuery])
 
     return <>{children}</>
 })

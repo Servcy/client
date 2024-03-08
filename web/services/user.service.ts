@@ -37,7 +37,7 @@ export class UserService extends APIService {
     }
 
     async currentUser(): Promise<IUser> {
-        return this.get("/iam/users/me/")
+        return this.get("/iam/users/me")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -45,7 +45,7 @@ export class UserService extends APIService {
     }
 
     async currentUserSettings(): Promise<IUserSettings> {
-        return this.get("/iam/users/me/settings/")
+        return this.get("/iam/users/me/settings")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -53,7 +53,7 @@ export class UserService extends APIService {
     }
 
     async currentUserEmailNotificationSettings(): Promise<IUserEmailNotificationSettings> {
-        return this.get("/notification/users/me/notification-preferences/")
+        return this.get("/notification/users/me/notification-preferences")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -61,7 +61,7 @@ export class UserService extends APIService {
     }
 
     async updateUser(data: Partial<IUser>): Promise<any> {
-        return this.patch("/iam/users/me/", data)
+        return this.patch("/iam/users/me", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -69,7 +69,7 @@ export class UserService extends APIService {
     }
 
     async updateUserOnBoard(): Promise<any> {
-        return this.patch("/iam/users/me/onboard/", {
+        return this.patch("/iam/users/me/onboard", {
             is_onboarded: true,
         })
             .then((response) => response?.data)
@@ -79,7 +79,7 @@ export class UserService extends APIService {
     }
 
     async updateUserTourCompleted(): Promise<any> {
-        return this.patch("/iam/users/me/tour-completed/", {
+        return this.patch("/iam/users/me/tour-completed", {
             is_tour_completed: true,
         })
             .then((response) => response?.data)
@@ -89,7 +89,7 @@ export class UserService extends APIService {
     }
 
     async updateCurrentUserEmailNotificationSettings(data: Partial<IUserEmailNotificationSettings>): Promise<any> {
-        return this.patch("/notification/users/me/notification-preferences/", data)
+        return this.patch("/notification/users/me/notification-preferences", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

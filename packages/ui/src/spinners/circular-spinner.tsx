@@ -26,6 +26,5 @@ export const Spinner: React.FC<ISpinner> = ({ height = "32px", width = "32px", c
         fill="currentFill"
       />
     </svg>
-    <span className="sr-only">Loading...</span>
   </div>
 );

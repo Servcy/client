@@ -29,7 +29,7 @@ export default function Index(): JSX.Element {
     }, [])
 
     return (
-        <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3">
+        <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3 text-servcy-black">
             <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
                 <div className="flex flex-row">
                     <AiOutlineHome size="24" className="my-auto mr-2" />

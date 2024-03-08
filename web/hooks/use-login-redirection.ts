@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useRouter, useParams } from "next/navigation"
 
 import { useCallback, useState } from "react"
 
@@ -18,7 +18,8 @@ const useLoginRedirection = (): UseLoginRedirectionProps => {
     const [error, setError] = useState<any | null>(null)
     // router
     const router = useRouter()
-    const { nextUrl } = router.query
+    const params = useParams()
+    const { nextUrl } = params
     // mobx store
     const { fetchCurrentUser, fetchCurrentUserSettings } = useUser()
 
