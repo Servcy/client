@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation.js"
 
 import { useEffect } from "react"
 
-import { Button } from "antd"
+import { Button } from "@servcy/ui"
+
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 import { AiOutlineHome, AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai"
 
@@ -32,20 +33,20 @@ export default function Index(): JSX.Element {
     return (
         <UserAuthWrapper>
             <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll bg-servcy-gray p-3 text-servcy-black">
-                <header className="mb-6 h-[80px] rounded-lg bg-servcy-white p-6">
+                <header className="mb-6 h-[80px] rounded-lg bg-custom-background-100 p-6">
                     <div className="flex flex-row">
                         <AiOutlineHome size="24" className="my-auto mr-2" />
                         <p className="text-xl">Dashboard</p>
                     </div>
                 </header>
-                <div className="mb-6 min-h-[80px] rounded-lg bg-servcy-white p-6 text-lg">
+                <div className="mb-6 min-h-[80px] rounded-lg bg-custom-background-100 p-6 text-lg">
                     <div className="mb-4 flex flex-row">
                         <AiOutlineRocket size="24" className="my-auto mr-2" />
                         Start Your Journey
                     </div>
                     <div className="grid gap-8 lg:grid-cols-3">
                         {activationSteps.map((step, index) => (
-                            <div key={index} className="rounded-lg border bg-servcy-black p-4 text-servcy-white shadow-sm">
+                            <div key={index} className="rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 hover:shadow-custom-shadow-4xl duration-300 p-4">
                                 <div className="mb-4 h-24">
                                     <h5 className="mb-3 font-semibold tracking-tight text-servcy-wheat">{step.title}</h5>
                                     <p className="text-sm font-normal">{step.description}</p>
@@ -55,10 +56,9 @@ export default function Index(): JSX.Element {
                                         onClick={() => {
                                             step.href && router.push(step.href)
                                         }}
-                                        icon={<AiOutlineRightCircle />}
-                                        className="text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
+                                        variant="outline-primary"
                                     >
-                                        {step.cta}
+                                        <AiOutlineRightCircle /> {step.cta}
                                     </Button>
                                 </div>
                             </div>
