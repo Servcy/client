@@ -1,5 +1,4 @@
-import {     const router = useRouter()
-} from "next/navigation"
+import { useParams } from "next/navigation"
 
 import isEqual from "lodash/isEqual"
 import { observer } from "mobx-react-lite"

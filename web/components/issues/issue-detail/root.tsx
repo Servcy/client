@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 import { FC, useMemo } from "react"
 
@@ -65,6 +65,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
     const { workspaceSlug, projectId, issueId, is_archived = false } = props
 
     const router = useRouter()
+    const pathname = usePathname()
 
     const {
         issue: { getIssueById },
@@ -116,7 +117,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: Object.keys(data).join(","),
                             change_details: Object.values(data).join(","),
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 } catch (error) {
                     captureIssueEvent({
@@ -126,7 +127,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: Object.keys(data).join(","),
                             change_details: Object.values(data).join(","),
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.error("Issue update failed")
                 }
@@ -139,14 +140,14 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                     captureIssueEvent({
                         eventName: ISSUE_DELETED,
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 } catch (error) {
                     toast.error("Issue delete failed")
                     captureIssueEvent({
                         eventName: ISSUE_DELETED,
                         payload: { id: issueId, state: "FAILED", element: "Issue detail page" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 }
             },
@@ -157,14 +158,14 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                     captureIssueEvent({
                         eventName: ISSUE_ARCHIVED,
                         payload: { id: issueId, state: "SUCCESS", element: "Issue details page" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 } catch (error) {
                     toast.error("Issue could not be archived. Please try again.")
                     captureIssueEvent({
                         eventName: ISSUE_ARCHIVED,
                         payload: { id: issueId, state: "FAILED", element: "Issue details page" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 }
             },
@@ -179,7 +180,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: "cycle_id",
                             change_details: cycleId,
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 } catch (error) {
                     captureIssueEvent({
@@ -189,7 +190,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: "cycle_id",
                             change_details: cycleId,
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.error("Cycle add to issue failed")
                 }
@@ -210,7 +211,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: "cycle_id",
                             change_details: "",
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 } catch (error) {
                     captureIssueEvent({
@@ -220,7 +221,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: "cycle_id",
                             change_details: "",
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.error("Cycle remove from issue failed")
                 }
@@ -241,7 +242,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: "module_id",
                             change_details: moduleIds,
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 } catch (error) {
                     captureIssueEvent({
@@ -251,7 +252,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: "module_id",
                             change_details: moduleIds,
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.error("Module add to issue failed")
                 }
@@ -272,7 +273,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: "module_id",
                             change_details: "",
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 } catch (error) {
                     captureIssueEvent({
@@ -282,7 +283,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                             changed_property: "module_id",
                             change_details: "",
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.error("Module remove from issue failed")
                 }
@@ -305,7 +306,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             fetchIssue,
             updateIssue,
             captureIssueEvent,
-            router.asPath,
+            pathname,
             is_archived,
             removeArchivedIssue,
             removeIssue,

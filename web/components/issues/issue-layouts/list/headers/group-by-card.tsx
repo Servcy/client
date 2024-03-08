@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { usePathname, useParams } from "next/navigation"
 
 import { useState } from "react"
 
@@ -30,8 +30,8 @@ interface IHeaderGroupByCard {
 
 export const HeaderGroupByCard = observer(
     ({ icon, title, count, issuePayload, disableIssueCreation, storeType, addIssuesToView }: IHeaderGroupByCard) => {
-        const router = useRouter()
-        const { workspaceSlug, projectId, moduleId, cycleId } = router.query
+        const pathname = usePathname()
+        const { workspaceSlug, projectId, moduleId, cycleId } = useParams()
 
         const { setTrackElement } = useEventTracker()
 
@@ -39,7 +39,7 @@ export const HeaderGroupByCard = observer(
 
         const [openExistingIssueListModal, setOpenExistingIssueListModal] = useState(false)
 
-        const isDraftIssue = router.pathname.includes("draft-issue")
+        const isDraftIssue = pathname.includes("draft-issue")
 
         const renderExistingIssueModal = moduleId || cycleId
         const ExistingIssuesListModalPayload = moduleId ? { module: moduleId.toString() } : { cycle: true }

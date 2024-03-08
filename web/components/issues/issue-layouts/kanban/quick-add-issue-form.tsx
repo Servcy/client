@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { usePathname, useParams } from "next/navigation"
 
 import { useEffect, useRef, useState } from "react"
 
@@ -59,9 +59,9 @@ const defaultValues: Partial<TIssue> = {
 
 export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = observer((props) => {
     const { formKey, prePopulatedData, quickAddCallback, viewId } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+
+    const pathname = usePathname()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { getProjectById } = useProject()
     const { captureIssueEvent } = useEventTracker()
@@ -111,7 +111,7 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
                     captureIssueEvent({
                         eventName: ISSUE_CREATED,
                         payload: { ...res, state: "SUCCESS", element: "Kanban quick add" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 }))
             toast.success("Issue created successfully.")
@@ -119,7 +119,7 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Kanban quick add" },
-                path: router.asPath,
+                path: pathname,
             })
             console.error(err)
             toast.error(err?.message || "Some error occurred. Please try again.")

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import { FC, useCallback, useEffect, useMemo, useState } from "react"
 
@@ -46,10 +46,7 @@ export type TSubIssueOperations = {
 
 export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
     const { workspaceSlug, projectId, parentIssueId, disabled = false } = props
-
-    const router = useRouter()
-    // store hooks
-
+    const pathname = usePathname()
     const {
         issue: { getIssueById },
         subIssues: { subIssuesByIssueId, stateDistributionByIssueId, subIssueHelpersByIssueId, setSubIssueHelpers },
@@ -92,7 +89,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
     })
 
     const scrollToSubIssuesView = useCallback(() => {
-        if (router.asPath.split("#")[1] === "sub-issues") {
+        if (pathname.split("#")[1] === "sub-issues") {
             setTimeout(() => {
                 const subIssueDiv = document.getElementById(`sub-issues`)
                 if (subIssueDiv)
@@ -102,13 +99,13 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                     })
             }, 200)
         }
-    }, [router.asPath])
+    }, [pathname])
 
     useEffect(() => {
-        if (router.asPath) {
+        if (pathname) {
             scrollToSubIssuesView()
         }
-    }, [router.asPath, scrollToSubIssuesView])
+    }, [pathname, scrollToSubIssuesView])
 
     const handleIssueCrudState = (
         key: "create" | "existing" | "update" | "delete",
@@ -180,7 +177,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                             changed_property: Object.keys(issueData).join(","),
                             change_details: Object.values(issueData).join(","),
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.success("Sub-issue updated successfully")
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
@@ -192,7 +189,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                             changed_property: Object.keys(issueData).join(","),
                             change_details: Object.values(issueData).join(","),
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.error("Error updating sub-issue")
                 }
@@ -214,7 +211,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                             changed_property: "parent_id",
                             change_details: parentIssueId,
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
                 } catch (error) {
@@ -225,7 +222,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                             changed_property: "parent_id",
                             change_details: parentIssueId,
                         },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.error("Error removing sub-issue")
                 }
@@ -243,14 +240,14 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                     captureIssueEvent({
                         eventName: "Sub-issue deleted",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
                 } catch (error) {
                     captureIssueEvent({
                         eventName: "Sub-issue removed",
                         payload: { id: issueId, state: "FAILED", element: "Issue detail page" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                     toast.error("Error deleting issue")
                 }
@@ -262,7 +259,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
             setSubIssueHelpers,
             updateSubIssue,
             captureIssueEvent,
-            router.asPath,
+            pathname,
             removeSubIssue,
             deleteSubIssue,
         ]

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import { FC, useCallback, useRef, useState } from "react"
 
@@ -76,9 +76,9 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
         canEditPropertiesBasedOnProject,
         isCompletedCycle = false,
     } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+
+    const pathname = usePathname()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const {
         membership: { currentProjectRole },
@@ -235,7 +235,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
             captureIssueEvent({
                 eventName: ISSUE_DELETED,
                 payload: { id: dragState.draggedIssueId!, state: "FAILED", element: "Kanban layout drag & drop" },
-                path: router.asPath,
+                path: pathname,
             })
         })
     }
