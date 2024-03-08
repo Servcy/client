@@ -11,7 +11,6 @@ import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const ArchivedIssueAppliedFiltersRoot: React.FC = observer(() => {
-
     const { workspaceSlug, projectId } = useParams() as { workspaceSlug: string; projectId: string }
     // store hooks
 

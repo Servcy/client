@@ -11,7 +11,6 @@ import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const CycleAppliedFiltersRoot: React.FC = observer(() => {
-
     const { workspaceSlug, projectId, cycleId } = useParams() as {
         workspaceSlug: string
         projectId: string

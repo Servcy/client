@@ -13,7 +13,6 @@ import { IIssueFilterOptions } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 export const ProjectViewAppliedFiltersRoot: React.FC = observer(() => {
-
     const { workspaceSlug, projectId, viewId } = useParams() as {
         workspaceSlug: string
         projectId: string

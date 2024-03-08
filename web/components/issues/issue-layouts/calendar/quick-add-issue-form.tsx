@@ -62,7 +62,6 @@ const Inputs = (props: any) => {
 export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
     const { formKey, prePopulatedData, quickAddCallback, viewId, onOpen } = props
 
-
     const pathname = usePathname()
     const { workspaceSlug, projectId } = useParams()
     // store hooks

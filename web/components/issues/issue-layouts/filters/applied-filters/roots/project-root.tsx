@@ -13,7 +13,6 @@ import { EUserProjectRoles } from "@constants/project"
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const ProjectAppliedFiltersRoot: React.FC = observer(() => {
-
     const { workspaceSlug, projectId } = useParams() as {
         workspaceSlug: string
         projectId: string

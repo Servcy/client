@@ -19,7 +19,6 @@ import type { NextPageWithWrapper } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 
 const IssueDetailsPage: NextPageWithWrapper = observer(() => {
-
     const params = useParams()
     const { workspaceSlug, projectId, issueId } = params
 

@@ -22,7 +22,6 @@ import { Spinner } from "@servcy/ui"
 const workspaceService = new WorkspaceService()
 
 const WorkspaceInvitationPage: NextPageWithWrapper = observer(() => {
-
     const router = useRouter()
     const { invitation_id, email, slug } = useParams()
     // store hooks

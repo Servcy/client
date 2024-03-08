@@ -1,4 +1,4 @@
-import { useRouter, useParams, usePathname } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 
 import { useCallback, useMemo } from "react"
 
@@ -221,9 +221,11 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
     }
 
     const redirectToIssueDetail = () => {
-        router.push(`/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
+        router.push(
+            `/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
                 issue.id
-            }#sub-issues`)
+            }#sub-issues`
+        )
     }
 
     if (!displayProperties) return null

@@ -20,7 +20,6 @@ type Props = {
 }
 
 export const SpreadsheetModuleColumn: React.FC<Props> = observer((props) => {
-
     const pathname = usePathname()
     const { workspaceSlug } = useParams()
     // props

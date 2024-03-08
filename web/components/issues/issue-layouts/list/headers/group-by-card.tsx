@@ -1,4 +1,4 @@
-import { usePathname, useParams } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import { useState } from "react"
 

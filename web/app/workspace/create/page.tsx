@@ -20,7 +20,6 @@ import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 import type { IWorkspace, NextPageWithWrapper } from "@servcy/types"
 
 const CreateWorkspacePage: NextPageWithWrapper = observer(() => {
-
     const router = useRouter()
     // store hooks
     const { currentUser, updateCurrentUser } = useUser()

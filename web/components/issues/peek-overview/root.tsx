@@ -57,7 +57,6 @@ export type TIssuePeekOperations = {
 export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
     const { is_archived = false, is_draft = false } = props
 
-
     const pathname = usePathname()
     const {
         membership: { currentWorkspaceAllProjectsRole },

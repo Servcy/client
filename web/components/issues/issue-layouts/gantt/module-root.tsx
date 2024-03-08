@@ -12,7 +12,6 @@ import { EIssueActions } from "../types"
 import { BaseGanttRoot } from "./base-gantt-root"
 
 export const ModuleGanttLayout: React.FC = observer(() => {
-
     const { workspaceSlug, moduleId } = useParams()
     // store hooks
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE)

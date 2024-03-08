@@ -24,7 +24,6 @@ import type { NextPageWithWrapper } from "@servcy/types"
 import { ArchiveIcon, Button, Loader } from "@servcy/ui"
 
 const ArchivedIssueDetailsPage: NextPageWithWrapper = observer(() => {
-
     const router = useRouter()
     const params = useParams()
     const { workspaceSlug, projectId, archivedIssueId } = params

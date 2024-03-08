@@ -12,7 +12,6 @@ import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const ProfileIssuesAppliedFiltersRoot: React.FC = observer(() => {
-
     const { workspaceSlug, userId } = useParams()
     //swr hook for fetching issue properties
     useWorkspaceIssueProperties(workspaceSlug)

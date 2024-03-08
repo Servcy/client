@@ -20,7 +20,6 @@ import { AppWrapper } from "@wrappers/app"
 import type { NextPageWithWrapper } from "@servcy/types"
 
 const CycleDetailPage: NextPageWithWrapper = observer(() => {
-
     const router = useRouter()
     const { workspaceSlug, projectId, cycleId } = useParams()
     // store hooks

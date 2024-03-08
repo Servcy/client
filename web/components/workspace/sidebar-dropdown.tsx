@@ -50,7 +50,6 @@ const profileLinks = (workspaceSlug: string, userId: string) => [
     },
 ]
 export const WorkspaceSidebarDropdown = observer(() => {
-
     const router = useRouter()
     const { workspaceSlug } = useParams()
     // store hooks
