@@ -187,7 +187,6 @@ export default function MicrosoftConfiguration({ selectedIntegration }: { select
                                 loading={saving}
                                 disabled={saving}
                                 onClick={() => configureMicrosoft()}
-                                className="w-full font-semibold !text-custom-servcy-white hover:!border-custom-servcy-wheat hover:!text-custom-servcy-wheat"
                             >
                                 Submit
                             </Button>

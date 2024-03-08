@@ -152,7 +152,7 @@ export default function Integrations(): JSX.Element {
                                                 <div className="flex overflow-x-hidden">
                                                     {integration.logo.split(",").map((logo, index) => (
                                                         <Image
-                                                            className="my-auto mr-2 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border-[0.5px] border-custom-border-200 bg-servcy-white p-1 last-of-type:mr-5"
+                                                            className="my-auto mr-2 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border-[0.5px] border-custom-border-200 p-1 last-of-type:mr-5"
                                                             src={logo}
                                                             width={40}
                                                             key={`logo-${index}`}
@@ -174,7 +174,7 @@ export default function Integrations(): JSX.Element {
                                                           (category: string, index: number) => (
                                                               <Tag
                                                                   key={`category-${index}`}
-                                                                  className="mr-1 bg-servcy-wheat font-bold"
+                                                                  className="mr-1 font-bold"
                                                                   bordered={false}
                                                               >
                                                                   {category.charAt(0).toUpperCase() + category.slice(1)}
