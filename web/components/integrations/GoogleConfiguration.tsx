@@ -2,7 +2,7 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import { Button, Input, Select } from "antd"
+import { Input, Select } from "antd"
 import toast from "react-hot-toast"
 import { MdOutlineSyncAlt } from "react-icons/md"
 
@@ -11,6 +11,7 @@ import IntegrationService from "@services/integration.service"
 const integration_service = new IntegrationService()
 
 import type { Integration, UserIntegration } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 export default function GoogleConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
     const [loading, setLoading] = useState<boolean>(false)
@@ -74,11 +75,11 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
     }
 
     return (
-        <div className="flex min-h-[300px] flex-col rounded-lg border border-servcy-gray bg-servcy-black p-6 text-servcy-white shadow-md md:flex-row">
+        <div className="flex min-h-[300px] flex-col rounded-lg border border-custom-servcy-gray bg-custom-background-80 p-6 text-custom-servcy-white shadow-md md:flex-row">
             <div className="w-full flex-col p-4">
                 <div className="flex text-xl font-semibold">
                     <Image
-                        className="my-auto h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1"
+                        className="my-auto h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-custom-servcy-gray bg-custom-servcy-white p-1"
                         src="https://servcy-public.s3.amazonaws.com/gmail.svg"
                         width={40}
                         height={40}
@@ -86,7 +87,7 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                     />
                     <MdOutlineSyncAlt className="mx-2 my-auto" color="grey" size={20} />
                     <Image
-                        className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray p-1"
+                        className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-custom-servcy-gray p-1"
                         src="https://servcy-public.s3.amazonaws.com/logo.svg"
                         width={40}
                         height={40}
@@ -95,7 +96,7 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                     <div className="my-auto">Google Integration Setup</div>
                 </div>
                 {loading ? (
-                    <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-servcy-white" />
+                    <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-custom-servcy-white" />
                 ) : (
                     <Select
                         className="mt-8 w-full"
@@ -139,9 +140,9 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                         {loading ? (
                             <>
                                 <span>Whitelisted Email IDs</span>
-                                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white" />
+                                <div className="my-3 h-5 animate-pulse rounded-full bg-custom-servcy-white" />
                                 <span className="mt-5">Email ID</span>
-                                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white" />
+                                <div className="my-3 h-5 animate-pulse rounded-full bg-custom-servcy-white" />
                             </>
                         ) : (
                             Array.from(whitelistedEmails).map((emailId, index) => (
@@ -166,15 +167,15 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                         <>
                             <div className="flex items-center gap-2">
                                 <Button
-                                    size="small"
-                                    className="text-sm font-thin !text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
+                                    size="sm"
                                     onClick={() => {
                                         if (whitelistedEmails.has("")) return
                                         const newWhitelistedEmails = new Set(whitelistedEmails)
                                         newWhitelistedEmails.add("")
                                         setWhitelistedEmails(newWhitelistedEmails)
                                     }}
-                                    disabled={saving}
+                                variant="outline-primary"
+                                disabled={saving}
                                 >
                                     + Add More
                                 </Button>
@@ -183,7 +184,7 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                                 loading={saving}
                                 disabled={saving}
                                 onClick={() => configureGoogle()}
-                                className="w-full font-semibold !text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
+                                variant="primary"
                             >
                                 Submit
                             </Button>

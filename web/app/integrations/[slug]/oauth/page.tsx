@@ -4,13 +4,14 @@ import { useParams, useRouter } from "next/navigation"
 
 import { useEffect } from "react"
 
-import { Spinner } from "@servcy/ui"
-
 import toast from "react-hot-toast"
+
+import IntegrationService from "@services/integration.service"
 
 import { getQueryParams } from "@helpers/common.helper"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
-import  IntegrationService from "@services/integration.service"
+
+import { Spinner } from "@servcy/ui"
 
 const integration_service = new IntegrationService()
 
@@ -30,7 +31,8 @@ export default function IntegrationOauth(): JSX.Element {
                 oauthParams["code"] = token
             }
         }
-        integration_service.integrationOauth(oauthParams, slug)
+        integration_service
+            .integrationOauth(oauthParams, slug)
             .then((response) => {
                 toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`)
                 if (response?.results !== "null") {

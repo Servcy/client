@@ -35,3 +35,4 @@ node_modules
 .turbo
 dist
 web/tsconfig.tsbuildinfo
+dump.rdb

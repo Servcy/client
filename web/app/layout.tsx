@@ -35,7 +35,7 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     const { currentWorkspace } = useWorkspace()
     const {} = useUserAuth({ user: currentUser, isUserLoading: currentUserLoader })
 
-    if (typeof window !== 'undefined' && navigator && isMobileDevice(navigator.userAgent))
+    if (typeof window !== "undefined" && navigator && isMobileDevice(navigator.userAgent))
         return (
             <div className="flex h-screen justify-center">
                 <Blocked />
@@ -57,9 +57,7 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
                                         workspaceRole={currentWorkspaceRole}
                                         projectRole={currentProjectRole}
                                     >
-                                        <SWRConfig value={SWR_CONFIG}>
-                                            {children}
-                                        </SWRConfig>
+                                        <SWRConfig value={SWR_CONFIG}>{children}</SWRConfig>
                                     </PostHogProvider>
                                 </CrispWrapper>
                             </StoreWrapper>

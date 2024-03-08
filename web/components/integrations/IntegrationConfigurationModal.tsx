@@ -93,34 +93,38 @@ export default function IntegrationConfigurationModal(
             width="60vw"
         >
             <Card
-                className="mt-4 rounded-lg bg-servcy-black"
-                title={<div className="text-servcy-cream">Integrated Accounts</div>}
+                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
+                title={<div className="text-custom-text-200">Integrated Accounts</div>}
                 loading={loading}
             >
-                <div className="grid max-h-[400px] grid-cols-2 gap-2 overflow-auto">
-                    {userIntegrations.map((userIntegration) => (
-                        <div
-                            key={userIntegration.id}
-                            className="servcy-card-bg flex items-center justify-between rounded-lg p-4 font-semibold text-servcy-black"
-                        >
-                            <div className="truncate">{userIntegration.account_display_name}</div>
-                            <button
-                                className="ml-4 cursor-not-allowed rounded bg-servcy-black p-2 text-servcy-wheat"
-                                disabled
+                <div className="grid max-h-[400px] grid-cols-2 gap-2 overflow-auto text-custom-text-200">
+                    {userIntegrations.length > 0 ? (
+                        userIntegrations.map((userIntegration) => (
+                            <div
+                                key={userIntegration.id}
+                                className="bg-custom-background-80 flex items-center justify-between rounded-lg p-4 font-semibold"
                             >
-                                Disconnect
-                            </button>
-                        </div>
-                    ))}
+                                <div className="truncate">{userIntegration.account_display_name}</div>
+                                <button
+                                    className="ml-4 cursor-not-allowed rounded p-2 bg-custom-servcy-gray text-custom-text-300"
+                                    disabled
+                                >
+                                    Disconnect
+                                </button>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-left text-custom-text-200">No accounts connected</div>
+                    )}
                 </div>
             </Card>
             {events.length > 0 && (
                 <Card
-                    className="mt-4 min-h-[200px] rounded-lg bg-servcy-black text-servcy-cream"
+                    className="mt-4 min-h-[200px] rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
                     title={
-                        <div className="flex justify-between">
-                            <p className="text-servcy-cream">Events</p>
-                            <p className="text-servcy-wheat">Enable/Disable</p>
+                        <div className="flex justify-between text-custom-text-200">
+                            <p>Events</p>
+                            <p>Enable/Disable</p>
                         </div>
                     }
                     loading={loading}
@@ -139,7 +143,7 @@ export default function IntegrationConfigurationModal(
                                         }
                                     }}
                                 />
-                                <div className="flex flex-col">
+                                <div className="flex flex-col text-custom-text-300">
                                     <p className="font-bold">{event.name}</p>
                                     <p className="text-sm">{event.description}</p>
                                 </div>
@@ -150,8 +154,8 @@ export default function IntegrationConfigurationModal(
             )}
             {["Github", "Figma", "Gmail", "Outlook"].includes(selectedIntegration.name) && (
                 <Card
-                    className="mt-4 rounded-lg bg-servcy-black text-servcy-cream"
-                    title={<div className="text-servcy-cream">Additional Configuration</div>}
+                    className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
+                    title={<div className="text-custom-text-200">Additional Configuration</div>}
                 >
                     {selectedIntegration.name === "Github" && <GithubConfiguration />}
                     {selectedIntegration.name === "Figma" && (
@@ -165,6 +169,30 @@ export default function IntegrationConfigurationModal(
                     )}
                 </Card>
             )}
+            <Card
+                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
+                title={<div className="text-custom-text-200">Additional Configuration</div>}
+            >
+                <GithubConfiguration />
+            </Card>
+            <Card
+                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
+                title={<div className="text-custom-text-200">Additional Configuration</div>}
+            >
+                <GoogleConfiguration selectedIntegration={selectedIntegration} />
+            </Card>
+            <Card
+                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
+                title={<div className="text-custom-text-200">Additional Configuration</div>}
+            >
+                <MicrosoftConfiguration selectedIntegration={selectedIntegration} />
+            </Card>
+            <Card
+                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
+                title={<div className="text-custom-text-200">Additional Configuration</div>}
+            >
+                <FigmaConfiguration selectedIntegration={selectedIntegration} />
+            </Card>
         </Modal>
     )
 }

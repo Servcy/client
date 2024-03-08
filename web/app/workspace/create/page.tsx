@@ -17,7 +17,7 @@ import { useUser } from "@hooks/store"
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
-import type { NextPageWithWrapper, IWorkspace } from "@servcy/types"
+import type { IWorkspace, NextPageWithWrapper } from "@servcy/types"
 
 const CreateWorkspacePage: NextPageWithWrapper = observer(() => {
     // router

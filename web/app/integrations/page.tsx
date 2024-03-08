@@ -9,24 +9,24 @@ import toast from "react-hot-toast"
 import { AiOutlineApi, AiOutlineSetting } from "react-icons/ai"
 import { HiArrowsRightLeft } from "react-icons/hi2"
 
+import { PageHead } from "@components/core"
 import IntegrationConfigurationModal from "@components/integrations/IntegrationConfigurationModal"
+
+import { useUser } from "@hooks/store"
 
 import { integrationCategories, uniqueIntegrationCategories } from "@constants/integration"
 
+import IntegrationService from "@services/integration.service"
+
+import DefaultWrapper from "@wrappers/DefaultWrapper"
+import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { getQueryParams } from "@helpers/common.helper"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 import { oauthUrlGenerators } from "@helpers/integration.helper"
 
-import { useUser } from "@hooks/store"
-
-import DefaultWrapper from "@wrappers/DefaultWrapper"
-import UserAuthWrapper from "@wrappers/UserAuthWrapper"
-
-import { PageHead } from "@components/core"
 import type { Integration } from "@servcy/types"
 import { Button, Spinner } from "@servcy/ui"
-import  IntegrationService from "@services/integration.service"
 
 const integration_service = new IntegrationService()
 
@@ -42,7 +42,8 @@ export default function Integrations(): JSX.Element {
     useEffect(() => {
         setLoading(true)
         const queryParams: Record<string, string> = getQueryParams(window.location.search)
-        integration_service.fetchIntegrations()
+        integration_service
+            .fetchIntegrations()
             .then((results) => {
                 setIntegrations(results)
                 if (queryParams["integration"]) {
@@ -137,7 +138,8 @@ export default function Integrations(): JSX.Element {
                                 integrations
                                     .filter(
                                         (integration) =>
-                                            (search === "" || integration.name.toLowerCase().includes(search.toLowerCase())) &&
+                                            (search === "" ||
+                                                integration.name.toLowerCase().includes(search.toLowerCase())) &&
                                             (!category || integrationCategories[integration.name]?.includes(category))
                                     )
                                     .map((integration: Integration) => (
@@ -159,22 +161,26 @@ export default function Integrations(): JSX.Element {
                                                         />
                                                     ))}
                                                 </div>
-                                                <div className="flex-col pl-4 text-lg font-semibold text-custom-text-200">{integration.name}</div>
+                                                <div className="flex-col pl-4 text-lg font-semibold text-custom-text-200">
+                                                    {integration.name}
+                                                </div>
                                             </div>
-                                            <div className="mt-2 py-3 pr-3 text-xs text-custom-text-100">{integration.description}</div>
+                                            <div className="mt-2 py-3 pr-3 text-xs text-custom-text-100">
+                                                {integration.description}
+                                            </div>
                                             <div className="mt-2 h-10 py-3 pr-3">
                                                 {integrationCategories[integration.name] !== undefined
                                                     ? integrationCategories[integration.name]?.map(
-                                                        (category: string, index: number) => (
-                                                            <Tag
-                                                                key={`category-${index}`}
-                                                                className="mr-1 bg-servcy-wheat font-bold"
-                                                                bordered={false}
-                                                            >
-                                                                {category.charAt(0).toUpperCase() + category.slice(1)}
-                                                            </Tag>
-                                                        )
-                                                    )
+                                                          (category: string, index: number) => (
+                                                              <Tag
+                                                                  key={`category-${index}`}
+                                                                  className="mr-1 bg-servcy-wheat font-bold"
+                                                                  bordered={false}
+                                                              >
+                                                                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                                                              </Tag>
+                                                          )
+                                                      )
                                                     : null}
                                             </div>
                                             <div className="mt-6 flex flex-row justify-between">

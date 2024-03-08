@@ -209,10 +209,13 @@
         color-scheme: dark !important;
 
         --color-background-100: 7, 7, 7;
+        /* rgb(7,7,7) */
         /* primary bg */
         --color-background-90: 11, 11, 11;
+        /* rgb(11,11,11) */
         /* secondary bg */
         --color-background-80: 23, 23, 23;
+        /* rgb(23,23,23) */
         /* tertiary bg */
 
         --color-shadow-2xs: 0px 0px 1px 0px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
@@ -259,9 +262,13 @@
         --color-onboarding-text-400: 105, 110, 119;
 
         --color-onboarding-background-100: 54, 58, 64;
+        /* rgb(54,58,64) */
         --color-onboarding-background-200: 40, 42, 45;
+        /* rgb(40,42,45) */
         --color-onboarding-background-300: 40, 42, 45;
+        /* rgb(40,42,45) */
         --color-onboarding-background-400: 67, 72, 79;
+        /* rgb(67,72,79) */
 
         --color-onboarding-border-100: 54, 58, 64;
         --color-onboarding-border-200: 54, 58, 64;

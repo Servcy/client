@@ -25,7 +25,7 @@ import { FileService } from "@services/file.service"
 import { AppWrapper } from "@wrappers/app"
 
 import { DocumentEditorWithRef, DocumentReadOnlyEditorWithRef } from "@servcy/document-editor"
-import type { NextPageWithWrapper, IPage } from "@servcy/types"
+import type { IPage, NextPageWithWrapper } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
 
 const fileService = new FileService()

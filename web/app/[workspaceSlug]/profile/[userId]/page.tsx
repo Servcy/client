@@ -22,7 +22,7 @@ import { UserService } from "@services/user.service"
 import { AppWrapper } from "@wrappers/app"
 import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
 
-import type { NextPageWithWrapper, IUserStateDistribution, TStateGroups } from "@servcy/types"
+import type { IUserStateDistribution, NextPageWithWrapper, TStateGroups } from "@servcy/types"
 
 const userService = new UserService()
 

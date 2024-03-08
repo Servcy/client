@@ -2,7 +2,7 @@ import Image from "next/image.js"
 
 import { useEffect, useState } from "react"
 
-import { Button, Input, Select } from "antd"
+import { Input, Select } from "antd"
 import toast from "react-hot-toast"
 import { MdOutlineSyncAlt } from "react-icons/md"
 
@@ -12,6 +12,7 @@ import IntegrationService from "@services/integration.service"
 const integration_service = new IntegrationService()
 
 import type { Integration, UserIntegration } from "@servcy/types"
+import { Button } from "@servcy/ui"
 
 export default function FigmaConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
     const [loading, setLoading] = useState<boolean>(false)
@@ -74,11 +75,11 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
     }
 
     return (
-        <div className="flex min-h-[500px] flex-col rounded-lg border border-servcy-gray bg-servcy-black p-6 text-servcy-white shadow-md md:flex-row">
+        <div className="flex min-h-[500px] flex-col rounded-lg border border-custom-servcy-gray bg-custom-background-80 p-6 text-custom-custom-servcy-white shadow-md md:flex-row">
             <div className="w-full flex-col p-4">
                 <div className="flex text-xl font-semibold">
                     <Image
-                        className="my-auto h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray bg-servcy-white p-1"
+                        className="my-auto h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-custom-servcy-gray bg-custom-servcy-white p-1"
                         src="https://servcy-public.s3.amazonaws.com/figma.svg"
                         width={40}
                         height={40}
@@ -86,16 +87,16 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                     />
                     <MdOutlineSyncAlt className="mx-2 my-auto" color="grey" size={20} />
                     <Image
-                        className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-servcy-gray p-1"
+                        className="my-auto mr-5 max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-lg border border-custom-servcy-gray p-1"
                         src="https://servcy-public.s3.amazonaws.com/logo.svg"
                         width={40}
                         height={40}
                         alt="Servcy Logo"
                     />
-                    <div className="my-auto">Figma Integration Setup</div>
+                    <div className="my-auto text-custom-text-100">Figma Integration Setup</div>
                 </div>
                 {loading ? (
-                    <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-servcy-white" />
+                    <div className="mb-2.5 ml-auto mt-8 h-5 animate-pulse rounded-full bg-custom-servcy-white" />
                 ) : (
                     <Select
                         className="mt-8 w-full"
@@ -124,21 +125,21 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                     </Select>
                 )}
                 <section className="mt-8">
-                    <span className="font-sans text-lg font-semibold">
+                    <span className="font-sans text-lg font-semibold text-custom-text-200">
                         To find your team IDs follow listed instructions:
                     </span>
-                    <ul className="mt-4 list-inside font-serif text-sm font-light">
+                    <ul className="mt-4 list-inside font-serif text-sm font-light text-custom-text-200">
                         <li className="mb-4">Login to your figma account in a separate tab</li>
                         <li className="mb-4">Under teams dropdown in your sidebar, you will find all your teams</li>
                         <li className="mb-4">Click on the team you want to integrate with Servcy</li>
                         <li className="mb-4">Copy the team id from the URL in your browser</li>
                         <li>
                             For example if the URL is{" "}
-                            <span className="rounded-lg bg-servcy-white p-1 font-semibold text-servcy-black">
+                            <span className="rounded-lg bg-custom-servcy-white p-1 font-semibold text-custom-servcy-black">
                                 https://www.figma.com/files/team/123/Servcy
                             </span>{" "}
                             then the team id is{" "}
-                            <span className="rounded-lg bg-servcy-white p-1 font-semibold text-servcy-black">123</span>
+                            <span className="rounded-lg bg-custom-servcy-white p-1 font-semibold text-custom-servcy-black">123</span>
                         </li>
                     </ul>
                 </section>
@@ -149,14 +150,14 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                         {loading ? (
                             <>
                                 <span>Team ID</span>
-                                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white" />
-                                <span className="mt-5">Team ID</span>
-                                <div className="my-3 h-5 animate-pulse rounded-full bg-servcy-white" />
+                                <div className="my-3 h-5 animate-pulse rounded-full bg-custom-servcy-white" />
+                                <span className="mt-5 text-custom-text-100">Team ID</span>
+                                <div className="my-3 h-5 animate-pulse rounded-full bg-custom-servcy-white" />
                             </>
                         ) : (
                             Array.from(teamIds).map((teamId, index) => (
                                 <div key={index} className="py-2">
-                                    <span>Team ID</span>
+                                    <span className="text-custom-text-100">Team ID</span>
                                     <Input
                                         value={teamId}
                                         placeholder="Enter team ID"
@@ -176,15 +177,15 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                         <>
                             <div className="flex items-center gap-2">
                                 <Button
-                                    size="small"
-                                    className="text-sm font-thin text-servcy-white hover:!border-servcy-light hover:!text-servcy-light"
+                                    size="sm"
                                     onClick={() => {
                                         if (teamIds.has("")) return
                                         const newTeamIds = new Set(teamIds)
                                         newTeamIds.add("")
                                         setTeamIds(newTeamIds)
                                     }}
-                                    disabled={saving}
+                                variant="outline-primary"
+                                disabled={saving}
                                 >
                                     + Add More
                                 </Button>
@@ -193,7 +194,7 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                                 onClick={() => configureFigma()}
                                 loading={saving}
                                 disabled={saving}
-                                className="w-full font-semibold text-servcy-white hover:!border-servcy-light hover:!text-servcy-light"
+                                variant="primary"
                             >
                                 Submit
                             </Button>

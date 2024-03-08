@@ -25,7 +25,7 @@ import { WorkspaceService } from "@services/workspace.service"
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
-import type { NextPageWithWrapper, IUser, TOnboardingSteps } from "@servcy/types"
+import type { IUser, NextPageWithWrapper, TOnboardingSteps } from "@servcy/types"
 import { Avatar, Spinner } from "@servcy/ui"
 
 const workspaceService = new WorkspaceService()

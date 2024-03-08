@@ -21,7 +21,7 @@ import { AuthService } from "@services/auth.service"
 
 import { validateEmail, validateOtp, validatePhone } from "@helpers/validation.helper"
 
-import { Spinner, Button } from "@servcy/ui"
+import { Button, Spinner } from "@servcy/ui"
 
 const authService = new AuthService()
 
@@ -175,7 +175,9 @@ export default function Login(): JSX.Element {
                                 </span>
                             </div>
                             <Button
-                                variant="primary" type="submit" size="md"
+                                variant="primary"
+                                type="submit"
+                                size="md"
                                 onClick={sendOtp}
                                 className="flex w-full items-center justify-center text-center font-medium !text-servcy-white hover:!border-servcy-wheat hover:!text-servcy-wheat"
                                 disabled={loading}

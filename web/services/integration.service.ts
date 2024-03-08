@@ -9,29 +9,25 @@ class IntegrationService extends APIService {
 
     async fetchIntegrations() {
         const response = await this.get("/integration/fetch-integrations")
-        const results = response.results
+        const results = response.data.results
         return JSON.parse(results)
     }
 
     async fetchUserIntegrations(integration_name: string) {
-        const response = await this.get("/integration/user-integration", {
-            integration_name,
-        })
-        return response.results
+        const response = await this.get(`/integration/user-integration?integration_name=${integration_name}`)
+        return response.data.results
     }
 
     async disconnectUserIntegration(integration_id: string) {
         const response = await this.post("/integration/user-integration", {
             integration_id,
         })
-        return response.results
+        return response.data.results
     }
 
     async fetchIntegrationEvents(integration_id: string) {
-        const response = await this.get("/integration/integration-event/fetch-events", {
-            integration_id,
-        })
-        return response.results
+        const response = await this.get(`/integration/integration-event/fetch-events?integration_id=${integration_id}`)
+        return response.data.results
     }
 
     async configureUserIntegration(id: number, configuration: object, integration_name: string) {
