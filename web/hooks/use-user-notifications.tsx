@@ -10,7 +10,7 @@ import { getPaginatedNotificationKey, UNREAD_NOTIFICATIONS_COUNT } from "@consta
 
 import { NotificationService } from "@services/notification.service"
 
-import type { IUserNotification, IMarkAllAsReadPayload, NotificationCount, NotificationType } from "@servcy/types"
+import type { IMarkAllAsReadPayload, IUserNotification, NotificationCount, NotificationType } from "@servcy/types"
 
 const PER_PAGE = 30
 
@@ -42,10 +42,10 @@ interface UseUserNotification {
     isRefreshing: boolean
     setFetchNotifications: React.Dispatch<React.SetStateAction<boolean>>
     markNotificationAsRead: (notificationId: string) => Promise<void>
-    markAllNotificationsAsRead:  () => Promise<void>
-};
+    markAllNotificationsAsRead: () => Promise<void>
+}
 
-const useUserNotification = () : UseUserNotification => {
+const useUserNotification = (): UseUserNotification => {
     const router = useRouter()
     const { workspaceSlug } = router.query
 
@@ -81,7 +81,8 @@ const useUserNotification = () : UseUserNotification => {
         async (url: string) => await userNotificationServices.getNotifications(url)
     )
 
-    const isLoadingMore = (isLoading || (size > 0 && paginatedData && typeof paginatedData[size - 1] === "undefined")) as boolean
+    const isLoadingMore = (isLoading ||
+        (size > 0 && paginatedData && typeof paginatedData[size - 1] === "undefined")) as boolean
     const isEmpty = paginatedData?.[0]?.results?.length === 0
     const notifications = paginatedData ? paginatedData.map((d) => d.results).flat() : undefined
     const hasMore = (isEmpty || (paginatedData && paginatedData[paginatedData.length - 1].next_page_results)) as boolean

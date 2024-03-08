@@ -12,7 +12,6 @@ const DragDrop = ({
     onRemove,
     maxCount = 10,
     accept = undefined,
-
 }: {
     onSave: (_: any, __: string) => void
     beforeUpload: (_: any) => boolean

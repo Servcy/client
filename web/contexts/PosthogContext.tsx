@@ -1,4 +1,4 @@
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from "next/navigation"
 
 import { FC, ReactNode, useEffect, useState } from "react"
 
@@ -61,7 +61,7 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
             autocapture: false,
             capture_pageview: false,
         })
-        handleRouteChange();
+        handleRouteChange()
     }, [pathame, searchParams])
 
     return <PHProvider client={posthog}>{children}</PHProvider>
