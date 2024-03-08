@@ -27,7 +27,7 @@ export class UserService extends APIService {
           }
         | TIssue[]
     > {
-        return this.get(`/api/workspaces/${workspaceSlug}/my-issues/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/my-issues/`, {
             params,
         })
             .then((response) => response?.data)
@@ -117,7 +117,7 @@ export class UserService extends APIService {
     }
 
     async getUserProfileData(workspaceSlug: string, userId: string): Promise<IUserProfileData> {
-        return this.get(`/api/workspaces/${workspaceSlug}/user-stats/${userId}/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/user-stats/${userId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -128,7 +128,7 @@ export class UserService extends APIService {
         workspaceSlug: string,
         userId: string
     ): Promise<IUserProfileProjectSegregation> {
-        return this.get(`/api/workspaces/${workspaceSlug}/user-profile/${userId}/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/user-profile/${userId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -136,7 +136,7 @@ export class UserService extends APIService {
     }
 
     async getUserProfileActivity(workspaceSlug: string, userId: string): Promise<IUserActivityResponse> {
-        return this.get(`/api/workspaces/${workspaceSlug}/user-activity/${userId}/?per_page=15`)
+        return this.get(`/project/workspaces/${workspaceSlug}/user-activity/${userId}/?per_page=15`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -144,7 +144,7 @@ export class UserService extends APIService {
     }
 
     async getUserProfileIssues(workspaceSlug: string, userId: string, params: any): Promise<TIssue[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/user-issues/${userId}/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/user-issues/${userId}/`, {
             params,
         })
             .then((response) => response?.data)
@@ -162,7 +162,7 @@ export class UserService extends APIService {
     }
 
     async leaveWorkspace(workspaceSlug: string) {
-        return this.post(`/api/workspaces/${workspaceSlug}/members/leave/`)
+        return this.post(`/project/workspaces/${workspaceSlug}/members/leave/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -178,7 +178,7 @@ export class UserService extends APIService {
     }
 
     async leaveProject(workspaceSlug: string, projectId: string) {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/members/leave/`)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/members/leave/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

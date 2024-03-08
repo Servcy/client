@@ -10,7 +10,7 @@ export class ProjectStateService extends APIService {
     }
 
     async createState(workspaceSlug: string, projectId: string, data: any): Promise<IState> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/states/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/states/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -18,7 +18,7 @@ export class ProjectStateService extends APIService {
     }
 
     async markDefault(workspaceSlug: string, projectId: string, stateId: string): Promise<void> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/mark-default/`, {})
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/mark-default/`, {})
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -26,7 +26,7 @@ export class ProjectStateService extends APIService {
     }
 
     async getStates(workspaceSlug: string, projectId: string): Promise<IState[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/states/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/states/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -34,7 +34,7 @@ export class ProjectStateService extends APIService {
     }
 
     async getState(workspaceSlug: string, projectId: string, stateId: string): Promise<any> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -42,7 +42,7 @@ export class ProjectStateService extends APIService {
     }
 
     async updateState(workspaceSlug: string, projectId: string, stateId: string, data: IState): Promise<any> {
-        return this.put(`/api/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/`, data)
+        return this.put(`/project/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -50,7 +50,7 @@ export class ProjectStateService extends APIService {
     }
 
     async patchState(workspaceSlug: string, projectId: string, stateId: string, data: Partial<IState>): Promise<any> {
-        return this.patch(`/api/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/`, data)
+        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -58,7 +58,7 @@ export class ProjectStateService extends APIService {
     }
 
     async deleteState(workspaceSlug: string, projectId: string, stateId: string): Promise<any> {
-        return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/`)
+        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/states/${stateId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -66,7 +66,7 @@ export class ProjectStateService extends APIService {
     }
 
     async getWorkspaceStates(workspaceSlug: string): Promise<IState[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/states/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/states/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

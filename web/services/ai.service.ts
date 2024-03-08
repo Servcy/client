@@ -14,7 +14,7 @@ export class AIService extends APIService {
         projectId: string,
         data: { prompt: string; task: string }
     ): Promise<IGptResponse> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/ai-assistant/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/ai-assistant/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response

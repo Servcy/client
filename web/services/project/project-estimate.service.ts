@@ -17,7 +17,7 @@ export class ProjectEstimateService extends APIService {
         estimate: IEstimate
         estimate_points: IEstimatePoint[]
     }> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/estimates/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/estimates/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -30,7 +30,7 @@ export class ProjectEstimateService extends APIService {
         estimateId: string,
         data: IEstimateFormData
     ): Promise<any> {
-        return this.patch(`/api/workspaces/${workspaceSlug}/projects/${projectId}/estimates/${estimateId}/`, data)
+        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/estimates/${estimateId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -38,7 +38,7 @@ export class ProjectEstimateService extends APIService {
     }
 
     async getEstimateDetails(workspaceSlug: string, projectId: string, estimateId: string): Promise<IEstimate> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/estimates/${estimateId}/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/estimates/${estimateId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -46,7 +46,7 @@ export class ProjectEstimateService extends APIService {
     }
 
     async getEstimatesList(workspaceSlug: string, projectId: string): Promise<IEstimate[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/estimates/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/estimates/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -54,7 +54,7 @@ export class ProjectEstimateService extends APIService {
     }
 
     async deleteEstimate(workspaceSlug: string, projectId: string, estimateId: string): Promise<any> {
-        return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/estimates/${estimateId}/`)
+        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/estimates/${estimateId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -62,7 +62,7 @@ export class ProjectEstimateService extends APIService {
     }
 
     async getWorkspaceEstimatesList(workspaceSlug: string): Promise<IEstimate[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/estimates/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/estimates/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

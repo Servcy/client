@@ -17,7 +17,7 @@ export class IssueAttachmentService extends APIService {
         file: FormData
     ): Promise<TIssueAttachment> {
         return this.post(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-attachments/`,
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-attachments/`,
             file,
             {
                 headers: {
@@ -33,7 +33,7 @@ export class IssueAttachmentService extends APIService {
     }
 
     async getIssueAttachment(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueAttachment[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-attachments/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-attachments/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -47,7 +47,7 @@ export class IssueAttachmentService extends APIService {
         assetId: string
     ): Promise<TIssueAttachment> {
         return this.delete(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-attachments/${assetId}/`
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-attachments/${assetId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {

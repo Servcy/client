@@ -12,7 +12,7 @@ export class IssueService extends APIService {
     }
 
     async createIssue(workspaceSlug: string, projectId: string, data: any): Promise<any> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -20,7 +20,7 @@ export class IssueService extends APIService {
     }
 
     async getIssues(workspaceSlug: string, projectId: string, queries?: any): Promise<TIssue[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/`, {
             params: queries,
         })
             .then((response) => response?.data)
@@ -34,7 +34,7 @@ export class IssueService extends APIService {
         projectId: string,
         queries?: any
     ): Promise<TIssue[] | { [key: string]: TIssue[] }> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/`, {
             params: queries,
         })
             .then((response) => response?.data)
@@ -44,7 +44,7 @@ export class IssueService extends APIService {
     }
 
     async retrieve(workspaceSlug: string, projectId: string, issueId: string, queries?: any): Promise<TIssue> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/`, {
             params: queries,
         })
             .then((response) => response?.data)
@@ -54,7 +54,7 @@ export class IssueService extends APIService {
     }
 
     async retrieveIssues(workspaceSlug: string, projectId: string, issueIds: string[]): Promise<TIssue[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/list/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/list/`, {
             params: { issues: issueIds.join(",") },
         })
             .then((response) => response?.data)
@@ -64,7 +64,7 @@ export class IssueService extends APIService {
     }
 
     async getIssueActivities(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueActivity[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -79,7 +79,7 @@ export class IssueService extends APIService {
             issues: string[]
         }
     ) {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/cycle-issues/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/cycle-issues/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -88,7 +88,7 @@ export class IssueService extends APIService {
 
     async removeIssueFromCycle(workspaceSlug: string, projectId: string, cycleId: string, bridgeId: string) {
         return this.delete(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/cycle-issues/${bridgeId}/`
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/cycle-issues/${bridgeId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -109,7 +109,7 @@ export class IssueService extends APIService {
         }
     ) {
         return this.post(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/`,
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/`,
             data
         )
             .then((response) => response?.data)
@@ -120,7 +120,7 @@ export class IssueService extends APIService {
 
     async deleteIssueRelation(workspaceSlug: string, projectId: string, issueId: string, relationId: string) {
         return this.delete(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/${relationId}/`
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/${relationId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -129,7 +129,7 @@ export class IssueService extends APIService {
     }
 
     async getIssueDisplayProperties(workspaceSlug: string, projectId: string): Promise<any> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issue-display-properties/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issue-display-properties/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -141,7 +141,7 @@ export class IssueService extends APIService {
         projectId: string,
         data: IIssueDisplayProperties
     ): Promise<any> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issue-display-properties/`, {
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issue-display-properties/`, {
             properties: data,
         })
             .then((response) => response?.data)
@@ -151,7 +151,7 @@ export class IssueService extends APIService {
     }
 
     async patchIssue(workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssue>): Promise<any> {
-        return this.patch(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/`, data)
+        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -159,7 +159,7 @@ export class IssueService extends APIService {
     }
 
     async deleteIssue(workspaceSlug: string, projectId: string, issuesId: string): Promise<any> {
-        return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issuesId}/`)
+        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issuesId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -167,7 +167,7 @@ export class IssueService extends APIService {
     }
 
     async bulkDeleteIssues(workspaceSlug: string, projectId: string, data: any): Promise<any> {
-        return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/bulk-delete-issues/`, data)
+        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/bulk-delete-issues/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -175,7 +175,7 @@ export class IssueService extends APIService {
     }
 
     async subIssues(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueSubIssues> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/sub-issues/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/sub-issues/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -188,7 +188,7 @@ export class IssueService extends APIService {
         issueId: string,
         data: { sub_issue_ids: string[] }
     ): Promise<TIssueSubIssues> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/sub-issues/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/sub-issues/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -196,7 +196,7 @@ export class IssueService extends APIService {
     }
 
     async fetchIssueLinks(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueLink[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -209,7 +209,7 @@ export class IssueService extends APIService {
         issueId: string,
         data: Partial<TIssueLink>
     ): Promise<TIssueLink> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -224,7 +224,7 @@ export class IssueService extends APIService {
         data: Partial<TIssueLink>
     ): Promise<TIssueLink> {
         return this.patch(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/${linkId}/`,
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/${linkId}/`,
             data
         )
             .then((response) => response?.data)
@@ -235,7 +235,7 @@ export class IssueService extends APIService {
 
     async deleteIssueLink(workspaceSlug: string, projectId: string, issueId: string, linkId: string): Promise<any> {
         return this.delete(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/${linkId}/`
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/${linkId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {

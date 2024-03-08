@@ -10,7 +10,7 @@ export class IssueRelationService extends APIService {
     }
 
     async listIssueRelations(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueRelation> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -24,7 +24,7 @@ export class IssueRelationService extends APIService {
         data: { relation_type: TIssueRelationTypes; issues: string[] }
     ): Promise<TIssue[]> {
         return this.post(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/`,
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/`,
             data
         )
             .then((response) => response?.data)
@@ -40,7 +40,7 @@ export class IssueRelationService extends APIService {
         data: { relation_type: TIssueRelationTypes; related_issue: string }
     ): Promise<any> {
         return this.post(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/remove-relation/`,
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/remove-relation/`,
             data
         )
             .then((response) => response?.data)

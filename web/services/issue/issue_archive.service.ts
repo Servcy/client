@@ -10,7 +10,7 @@ export class IssueArchiveService extends APIService {
     }
 
     async getArchivedIssues(workspaceSlug: string, projectId: string, queries?: any): Promise<any> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/archived-issues/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/archived-issues/`, {
             params: { ...queries },
         })
             .then((response) => response?.data)
@@ -26,7 +26,7 @@ export class IssueArchiveService extends APIService {
     ): Promise<{
         archived_at: string
     }> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/archive/`)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/archive/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -34,7 +34,7 @@ export class IssueArchiveService extends APIService {
     }
 
     async restoreIssue(workspaceSlug: string, projectId: string, issueId: string): Promise<any> {
-        return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/archive/`)
+        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/archive/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -47,7 +47,7 @@ export class IssueArchiveService extends APIService {
         issueId: string,
         queries?: any
     ): Promise<TIssue> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/archive/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/archive/`, {
             params: queries,
         })
             .then((response) => response?.data)

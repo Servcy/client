@@ -10,7 +10,7 @@ export class ProjectMemberService extends APIService {
     }
 
     async fetchProjectMembers(workspaceSlug: string, projectId: string): Promise<IProjectMembership[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/members/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/members/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -22,7 +22,7 @@ export class ProjectMemberService extends APIService {
         projectId: string,
         data: IProjectBulkAddFormData
     ): Promise<IProjectMembership[]> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/members/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/members/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -30,7 +30,7 @@ export class ProjectMemberService extends APIService {
     }
 
     async projectMemberMe(workspaceSlug: string, projectId: string): Promise<IProjectMember> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/project-members/me/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/project-members/me/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -38,7 +38,7 @@ export class ProjectMemberService extends APIService {
     }
 
     async getProjectMember(workspaceSlug: string, projectId: string, memberId: string): Promise<IProjectMember> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/members/${memberId}/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/members/${memberId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -51,7 +51,7 @@ export class ProjectMemberService extends APIService {
         memberId: string,
         data: Partial<IProjectMember>
     ): Promise<IProjectMember> {
-        return this.patch(`/api/workspaces/${workspaceSlug}/projects/${projectId}/members/${memberId}/`, data)
+        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/members/${memberId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -59,7 +59,7 @@ export class ProjectMemberService extends APIService {
     }
 
     async deleteProjectMember(workspaceSlug: string, projectId: string, memberId: string): Promise<any> {
-        return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/members/${memberId}/`)
+        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/members/${memberId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

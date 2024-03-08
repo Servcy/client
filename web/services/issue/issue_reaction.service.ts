@@ -15,7 +15,7 @@ export class IssueReactionService extends APIService {
         issueId: string,
         data: Partial<TIssueReaction>
     ): Promise<any> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -23,7 +23,7 @@ export class IssueReactionService extends APIService {
     }
 
     async listIssueReactions(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueReaction[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -37,7 +37,7 @@ export class IssueReactionService extends APIService {
         reaction: string
     ): Promise<any> {
         return this.delete(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/${reaction}/`
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/${reaction}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -52,7 +52,7 @@ export class IssueReactionService extends APIService {
         data: Partial<TIssueCommentReaction>
     ): Promise<any> {
         return this.post(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/comments/${commentId}/reactions/`,
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/comments/${commentId}/reactions/`,
             data
         )
             .then((response) => response?.data)
@@ -66,7 +66,7 @@ export class IssueReactionService extends APIService {
         projectId: string,
         commentId: string
     ): Promise<TIssueCommentReaction[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/comments/${commentId}/reactions/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/comments/${commentId}/reactions/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -80,7 +80,7 @@ export class IssueReactionService extends APIService {
         reaction: string
     ): Promise<any> {
         return this.delete(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/comments/${commentId}/reactions/${reaction}/`
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/comments/${commentId}/reactions/${reaction}/`
         )
             .then((response) => response?.data)
             .catch((error) => {

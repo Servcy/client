@@ -15,7 +15,7 @@ export class ProjectService extends APIService {
     }
 
     async createProject(workspaceSlug: string, data: Partial<IProject>): Promise<IProject> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -23,7 +23,7 @@ export class ProjectService extends APIService {
     }
 
     async checkProjectIdentifierAvailability(workspaceSlug: string, data: string): Promise<any> {
-        return this.get(`/api/workspaces/${workspaceSlug}/project-identifiers`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/project-identifiers`, {
             params: {
                 name: data,
             },
@@ -35,7 +35,7 @@ export class ProjectService extends APIService {
     }
 
     async getProjects(workspaceSlug: string): Promise<IProject[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -43,7 +43,7 @@ export class ProjectService extends APIService {
     }
 
     async getProject(workspaceSlug: string, projectId: string): Promise<IProject> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -51,7 +51,7 @@ export class ProjectService extends APIService {
     }
 
     async updateProject(workspaceSlug: string, projectId: string, data: Partial<IProject>): Promise<IProject> {
-        return this.patch(`/api/workspaces/${workspaceSlug}/projects/${projectId}/`, data)
+        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -59,7 +59,7 @@ export class ProjectService extends APIService {
     }
 
     async deleteProject(workspaceSlug: string, projectId: string): Promise<any> {
-        return this.delete(`/api/workspaces/${workspaceSlug}/projects/${projectId}/`)
+        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -73,7 +73,7 @@ export class ProjectService extends APIService {
             sort_order?: number
         }
     ): Promise<any> {
-        await this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/project-views/`, data)
+        await this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/project-views/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -104,7 +104,7 @@ export class ProjectService extends APIService {
         }
     ): Promise<any> {
         return this.post(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/workspace-integrations/${workspaceIntegrationId}/github-repository-sync/`,
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/workspace-integrations/${workspaceIntegrationId}/github-repository-sync/`,
             data
         )
             .then((response) => response?.data)
@@ -115,7 +115,7 @@ export class ProjectService extends APIService {
 
     async getProjectGithubRepository(workspaceSlug: string, projectId: string, integrationId: string): Promise<any> {
         return this.get(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/workspace-integrations/${integrationId}/github-repository-sync/`
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/workspace-integrations/${integrationId}/github-repository-sync/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -124,7 +124,7 @@ export class ProjectService extends APIService {
     }
 
     async getUserProjectFavorites(workspaceSlug: string): Promise<any[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/user-favorite-projects/`)
+        return this.get(`/project/workspaces/${workspaceSlug}/user-favorite-projects/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -132,7 +132,7 @@ export class ProjectService extends APIService {
     }
 
     async addProjectToFavorites(workspaceSlug: string, project: string): Promise<any> {
-        return this.post(`/api/workspaces/${workspaceSlug}/user-favorite-projects/`, { project })
+        return this.post(`/project/workspaces/${workspaceSlug}/user-favorite-projects/`, { project })
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -140,7 +140,7 @@ export class ProjectService extends APIService {
     }
 
     async removeProjectFromFavorites(workspaceSlug: string, projectId: string): Promise<any> {
-        return this.delete(`/api/workspaces/${workspaceSlug}/user-favorite-projects/${projectId}/`)
+        return this.delete(`/project/workspaces/${workspaceSlug}/user-favorite-projects/${projectId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -152,7 +152,7 @@ export class ProjectService extends APIService {
         projectId: string,
         params: TProjectIssuesSearchParams
     ): Promise<ISearchIssueResponse[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/search-issues/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/search-issues/`, {
             params,
         })
             .then((response) => response?.data)

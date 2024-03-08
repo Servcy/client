@@ -20,7 +20,7 @@ export class IssueCommentService extends APIService {
               }
             | {} = {}
     ): Promise<TIssueComment[]> {
-        return this.get(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`, {
+        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`, {
             params: {
                 activity_type: "issue-comment",
                 ...params,
@@ -38,7 +38,7 @@ export class IssueCommentService extends APIService {
         issueId: string,
         data: Partial<TIssueComment>
     ): Promise<any> {
-        return this.post(`/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/`, data)
+        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -53,7 +53,7 @@ export class IssueCommentService extends APIService {
         data: Partial<TIssueComment>
     ): Promise<any> {
         return this.patch(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`,
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`,
             data
         )
             .then((response) => response?.data)
@@ -69,7 +69,7 @@ export class IssueCommentService extends APIService {
         commentId: string
     ): Promise<any> {
         return this.delete(
-            `/api/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/comments/${commentId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
