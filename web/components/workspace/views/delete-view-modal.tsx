@@ -25,7 +25,7 @@ export const DeleteGlobalViewModal: React.FC<Props> = observer((props) => {
     const { data, isOpen, onClose } = props
     // states
     const [isDeleteLoading, setIsDeleteLoading] = useState(false)
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { deleteGlobalView } = useGlobalView()
     const { captureEvent } = useEventTracker()

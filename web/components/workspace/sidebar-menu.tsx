@@ -27,7 +27,7 @@ export const WorkspaceSidebarMenu = observer(() => {
         membership: { currentWorkspaceRole },
     } = useUser()
     const pathname = usePathname()
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // computed
     const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST
 

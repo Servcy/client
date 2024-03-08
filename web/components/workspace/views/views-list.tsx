@@ -15,7 +15,7 @@ type Props = {
 
 export const GlobalViewsList: React.FC<Props> = observer((props) => {
     const { searchQuery } = props
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { fetchAllGlobalViews, currentWorkspaceViews, getSearchedViews } = useGlobalView()
 

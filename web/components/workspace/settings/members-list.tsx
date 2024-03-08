@@ -12,7 +12,7 @@ import { useMember } from "@hooks/store"
 
 export const WorkspaceMembersList: FC<{ searchQuery: string }> = observer((props) => {
     const { searchQuery } = props
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         workspace: {

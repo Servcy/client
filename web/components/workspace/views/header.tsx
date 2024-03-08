@@ -43,7 +43,7 @@ export const GlobalViewsHeader: React.FC = observer(() => {
     // states
     const [createViewModal, setCreateViewModal] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const { workspaceSlug, globalViewId }= useParams()
+    const { workspaceSlug, globalViewId } = useParams()
     // store hooks
     const { currentWorkspaceViews } = useGlobalView()
     const {

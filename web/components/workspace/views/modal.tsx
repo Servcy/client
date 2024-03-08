@@ -1,4 +1,4 @@
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import React from "react"
 
@@ -26,7 +26,7 @@ export const CreateUpdateWorkspaceViewModal: React.FC<Props> = observer((props) 
     const { isOpen, onClose, data, preLoadedData } = props
     // router
     const router = useRouter()
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { createGlobalView, updateGlobalView } = useGlobalView()
     const { captureEvent } = useEventTracker()

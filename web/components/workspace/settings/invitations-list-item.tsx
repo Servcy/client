@@ -22,7 +22,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
     const { invitationId } = props
     // states
     const [removeMemberModal, setRemoveMemberModal] = useState(false)
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         membership: { currentWorkspaceMemberInfo, currentWorkspaceRole },

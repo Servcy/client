@@ -23,7 +23,7 @@ export const GlobalViewListItem: React.FC<Props> = observer((props) => {
     // states
     const [updateViewModal, setUpdateViewModal] = useState(false)
     const [deleteViewModal, setDeleteViewModal] = useState(false)
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const { getViewDetailsById } = useGlobalView()
     const { setTrackElement } = useEventTracker()

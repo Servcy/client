@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter, useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 import { FC, useState } from "react"
 
@@ -26,7 +26,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
     const [removeMemberModal, setRemoveMemberModal] = useState(false)
     // router
     const router = useRouter()
-    const { workspaceSlug }= useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         currentUser,
