@@ -1,5 +1,5 @@
 import { Button, Modal } from "antd"
-import * as DOMPurify from "dompurify"
+import DOMPurify from "dompurify"
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa"
 import { HiPaperClip } from "react-icons/hi"
 

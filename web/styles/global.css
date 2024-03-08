@@ -171,17 +171,9 @@
 
         /* onboarding colors */
         --gradient-onboarding-100: linear-gradient(106deg, #f2f6ff 29.8%, #e1eaff 99.34%);
-        --gradient-onboarding-200: linear-gradient(
-            129deg,
-            rgba(255, 255, 255, 0) -22.23%,
-            rgba(255, 255, 255, 0.8) 62.98%
-        );
+        --gradient-onboarding-200: linear-gradient(129deg, rgba(255, 255, 255, 0) -22.23%, rgba(255, 255, 255, 0.8) 62.98%);
         --gradient-onboarding-300: linear-gradient(164deg, #fff 4.25%, rgba(255, 255, 255, 0.06) 93.5%);
-        --gradient-onboarding-400: linear-gradient(
-            129deg,
-            rgba(255, 255, 255, 0) -22.23%,
-            rgba(255, 255, 255, 0.8) 62.98%
-        );
+        --gradient-onboarding-400: linear-gradient(129deg, rgba(255, 255, 255, 0) -22.23%, rgba(255, 255, 255, 0.8) 62.98%);
 
         --color-onboarding-text-100: 23, 23, 23;
         --color-onboarding-text-200: 58, 58, 58;
@@ -426,16 +418,14 @@ body {
 
 /* emoji icon picker */
 .conical-gradient {
-    background: conic-gradient(
-        from 180deg at 50% 50%,
-        #ff6b00 0deg,
-        #f7ae59 70.5deg,
-        #4d7e3e 151.12deg,
-        #05c3ff 213deg,
-        #18914f 289.87deg,
-        #f6f172 329.25deg,
-        #ff6b00 360deg
-    );
+    background: conic-gradient(from 180deg at 50% 50%,
+            #ff6b00 0deg,
+            #f7ae59 70.5deg,
+            #3f76ff 151.12deg,
+            #05c3ff 213deg,
+            #18914f 289.87deg,
+            #f6f172 329.25deg,
+            #ff6b00 360deg);
 }
 
 /* progress bar */
@@ -696,6 +686,7 @@ div.web-view-spinner div.bar12 {
 }
 
 /* scrollbar lg size */
+
 .scrollbar-lg::-webkit-scrollbar {
     height: 16px;
     width: 16px;
