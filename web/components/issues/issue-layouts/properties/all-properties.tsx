@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useRouter, useParams, usePathname } from "next/navigation"
 
 import { useCallback, useMemo } from "react"
 
@@ -53,9 +53,10 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
     } = useIssues(EIssuesStoreType.CYCLE)
     const { areEstimatesEnabledForCurrentProject } = useEstimate()
     const { getStateById } = useProjectState()
-    // router
+
     const router = useRouter()
-    const { workspaceSlug, cycleId, moduleId } = router.query
+    const pathname = usePathname()
+    const { workspaceSlug, cycleId, moduleId } = useParams()
     const currentLayout = `${activeLayout} layout`
     // derived values
     const stateDetails = getStateById(issue.state_id)
@@ -87,7 +88,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: {
                     changed_property: "state",
                     change_details: stateId,
@@ -101,7 +102,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: {
                     changed_property: "priority",
                     change_details: value,
@@ -115,7 +116,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: {
                     changed_property: "labels",
                     change_details: ids,
@@ -129,7 +130,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: {
                     changed_property: "assignees",
                     change_details: ids,
@@ -154,7 +155,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: { changed_property: "module_ids", change_details: { module_ids: moduleIds } },
             })
         },
@@ -170,11 +171,11 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: { changed_property: "cycle", change_details: { cycle_id: cycleId } },
             })
         },
-        [issue, issueOperations, captureIssueEvent, currentLayout, router.asPath]
+        [issue, issueOperations, captureIssueEvent, currentLayout, pathname]
     )
 
     const handleStartDate = (date: Date | null) => {
@@ -182,7 +183,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: {
                     changed_property: "start_date",
                     change_details: date ? renderFormattedPayloadDate(date) : null,
@@ -196,7 +197,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: {
                     changed_property: "target_date",
                     change_details: date ? renderFormattedPayloadDate(date) : null,
@@ -210,7 +211,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...issue, state: "SUCCESS", element: currentLayout },
-                path: router.asPath,
+                path: pathname,
                 updates: {
                     changed_property: "estimate_point",
                     change_details: value,
@@ -220,12 +221,9 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
     }
 
     const redirectToIssueDetail = () => {
-        router.push({
-            pathname: `/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
+        router.push(`/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
                 issue.id
-            }`,
-            hash: "sub-issues",
-        })
+            }#sub-issues`)
     }
 
     if (!displayProperties) return null

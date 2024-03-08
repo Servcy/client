@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useMemo } from "react"
 
@@ -16,8 +16,7 @@ import { EIssueActions } from "../../types"
 import { BaseSpreadsheetRoot } from "../base-spreadsheet-root"
 
 export const ModuleSpreadsheetLayout: React.FC = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug, moduleId } = router.query as { workspaceSlug: string; moduleId: string }
+    const { workspaceSlug, moduleId } = useParams() as { workspaceSlug: string; moduleId: string }
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE)
 

@@ -16,7 +16,7 @@ type Props = {
 
 export const SpreadsheetSubIssueColumn: React.FC<Props> = observer((props: Props) => {
     const { issue } = props
-    // router
+
     const router = useRouter()
 
     const {
@@ -24,12 +24,9 @@ export const SpreadsheetSubIssueColumn: React.FC<Props> = observer((props: Props
     } = useApplication()
 
     const redirectToIssueDetail = () => {
-        router.push({
-            pathname: `/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
+        router.push(`/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
                 issue.id
-            }`,
-            hash: "sub-issues",
-        })
+            }#sub-issues`)
     }
 
     return (

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -26,9 +26,7 @@ export interface IViewSpreadsheetLayout {
 
 export const ProjectViewSpreadsheetLayout: React.FC<IViewSpreadsheetLayout> = observer((props) => {
     const { issueActions } = props
-    // router
-    const router = useRouter()
-    const { viewId } = router.query
+    const { viewId } = useParams()
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW)
 

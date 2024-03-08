@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import React, { useCallback } from "react"
 
@@ -20,9 +20,9 @@ type Props = {
 }
 
 export const SpreadsheetModuleColumn: React.FC<Props> = observer((props) => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+
+    const pathname = usePathname()
+    const { workspaceSlug } = useParams()
     // props
     const { issue, disabled, onClose } = props
 
@@ -54,10 +54,10 @@ export const SpreadsheetModuleColumn: React.FC<Props> = observer((props) => {
                     element: "Spreadsheet layout",
                 },
                 updates: { changed_property: "module_ids", change_details: { module_ids: moduleIds } },
-                path: router.asPath,
+                path: pathname,
             })
         },
-        [workspaceSlug, issue, addModulesToIssue, removeModulesFromIssue, captureIssueEvent, router.asPath]
+        [workspaceSlug, issue, addModulesToIssue, removeModulesFromIssue, captureIssueEvent, pathname]
     )
 
     return (

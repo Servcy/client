@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useCallback, useMemo } from "react"
 
@@ -16,8 +16,7 @@ import { EIssueActions } from "../../types"
 import { BaseSpreadsheetRoot } from "../base-spreadsheet-root"
 
 export const CycleSpreadsheetLayout: React.FC = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug, cycleId } = router.query as { workspaceSlug: string; cycleId: string }
+    const { workspaceSlug, cycleId } = useParams() as { workspaceSlug: string; cycleId: string }
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE)
     const { currentProjectCompletedCycleIds } = useCycle()
