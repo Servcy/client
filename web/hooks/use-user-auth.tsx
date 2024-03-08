@@ -7,11 +7,13 @@ import { WorkspaceService } from "@services/workspace.service"
 import { IUser } from "@servcy/types"
 
 const workspaceService = new WorkspaceService()
+
 type Props = {
     routeAuth?: "sign-in" | "onboarding" | "admin" | null
     user: IUser | null
     isLoading: boolean
 }
+
 const useUserAuth = (props: Props) => {
     const { routeAuth, user, isLoading } = props
     // states
@@ -69,12 +71,7 @@ const useUserAuth = (props: Props) => {
                         return
                     }
                 }
-            } else {
-                // user is not active and we can redirect to no access page
-                // router.push("/no-access");
-                // remove token
-                return
-            }
+            } else return
         }
 
         if (routeAuth === null) {
@@ -108,8 +105,6 @@ const useUserAuth = (props: Props) => {
 
     return {
         isLoading: isRouteAccess,
-        // assignedIssuesLength: user?.assigned_issues ?? 0,
-        // workspaceInvitesLength: user?.workspace_invites ?? 0,
     }
 }
 
