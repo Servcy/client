@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 import { observer } from "mobx-react"
 import emptyCycle from "public/empty-state/cycle.svg"

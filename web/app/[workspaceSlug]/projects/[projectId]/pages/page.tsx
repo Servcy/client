@@ -1,7 +1,7 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 import { Fragment, useState } from "react"
 

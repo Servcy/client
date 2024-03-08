@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 import { ANALYTICS_X_AXIS_VALUES } from "@constants/analytics"
 

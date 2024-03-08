@@ -9,7 +9,7 @@ import { SummarySideBar } from "src/ui/components/summary-side-bar";
 import { DocumentDetails } from "src/types/editor-types";
 import { PageRenderer } from "src/ui/components/page-renderer";
 import { getMenuOptions } from "src/utils/menu-options";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { FixedMenu } from "src";
 
 interface IDocumentEditor {

@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react"
 

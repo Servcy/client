@@ -1,5 +1,5 @@
 import { getEditorClassNames, useReadOnlyEditor } from "@servcy/editor-core";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState, forwardRef, useEffect } from "react";
 import { EditorHeader } from "src/ui/components/editor-header";
 import { PageRenderer } from "src/ui/components/page-renderer";

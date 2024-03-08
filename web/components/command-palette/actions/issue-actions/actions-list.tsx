@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 import { Command } from "cmdk"
 import { LinkIcon, Signal, Trash2, UserMinus2, UserPlus2 } from "lucide-react"

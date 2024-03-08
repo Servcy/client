@@ -1,4 +1,4 @@
-import router from "next/router"
+import router from "next/navigation"
 
 import { useCallback, useState } from "react"
 
