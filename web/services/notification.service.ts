@@ -116,7 +116,7 @@ export class NotificationService extends APIService {
     }
 
     async getUnreadNotificationsCount(workspaceSlug: string): Promise<NotificationCount> {
-        return this.get(`/project/workspaces/${workspaceSlug}/users/notifications/unread/`)
+        return this.get(`/notification/workspaces/${workspaceSlug}/unread/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
