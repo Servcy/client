@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 
@@ -12,9 +12,8 @@ import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const ProfileIssuesAppliedFiltersRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, userId } = router.query
+
+    const { workspaceSlug, userId } = useParams()
     //swr hook for fetching issue properties
     useWorkspaceIssueProperties(workspaceSlug)
     // store hooks

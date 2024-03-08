@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import isEqual from "lodash/isEqual"
 import { observer } from "mobx-react-lite"
@@ -13,9 +13,8 @@ import { IIssueFilterOptions } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 export const ProjectViewAppliedFiltersRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, viewId } = router.query as {
+
+    const { workspaceSlug, projectId, viewId } = useParams() as {
         workspaceSlug: string
         projectId: string
         viewId: string

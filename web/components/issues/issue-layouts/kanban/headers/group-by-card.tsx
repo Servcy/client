@@ -54,7 +54,7 @@ export const HeaderGroupByCard: FC<IHeaderGroupByCard> = observer((props) => {
 
     const { setTrackElement } = useEventTracker()
     const pathname = usePathname()
-    const { workspaceSlug, projectId, moduleId, cycleId }= useParams()
+    const { workspaceSlug, projectId, moduleId, cycleId } = useParams()
 
     const isDraftIssue = pathname.includes("draft-issue")
 

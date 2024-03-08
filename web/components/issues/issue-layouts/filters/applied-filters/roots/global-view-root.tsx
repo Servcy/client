@@ -1,4 +1,5 @@
-import { useRouter } from "next/navigation"
+import {     const router = useRouter()
+} from "next/navigation"
 
 import isEqual from "lodash/isEqual"
 import { observer } from "mobx-react-lite"
@@ -21,9 +22,8 @@ type Props = {
 
 export const GlobalViewsAppliedFiltersRoot = observer((props: Props) => {
     const { globalViewId } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         issuesFilter: { filters, updateFilters },

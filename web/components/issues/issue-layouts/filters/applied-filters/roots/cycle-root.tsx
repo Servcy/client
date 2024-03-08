@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 
@@ -11,9 +11,8 @@ import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 import { IIssueFilterOptions } from "@servcy/types"
 
 export const CycleAppliedFiltersRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId, cycleId } = router.query as {
+
+    const { workspaceSlug, projectId, cycleId } = useParams() as {
         workspaceSlug: string
         projectId: string
         cycleId: string
