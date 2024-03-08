@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -25,9 +25,7 @@ export interface IViewKanBanLayout {
 
 export const ProjectViewKanBanLayout: React.FC<IViewKanBanLayout> = observer((props) => {
     const { issueActions } = props
-    // router
-    const router = useRouter()
-    const { viewId } = router.query
+    const { viewId } = useParams()
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT_VIEW)
 

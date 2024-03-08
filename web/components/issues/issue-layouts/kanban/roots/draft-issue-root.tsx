@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useMemo } from "react"
 
@@ -18,8 +18,7 @@ import { BaseKanBanRoot } from "../base-kanban-root"
 export interface IKanBanLayout {}
 
 export const DraftKanBanLayout: React.FC = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
 
     // store
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.DRAFT)
