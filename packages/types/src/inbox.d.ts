@@ -7,7 +7,6 @@ export interface InboxItem {
     source: string
     body: string
     is_archived: boolean
-    is_deleted: boolean
     cause: string
     is_body_html: boolean
     account: string
