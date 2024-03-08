@@ -6,13 +6,12 @@ import { Input, Select } from "antd"
 import toast from "react-hot-toast"
 import { MdOutlineSyncAlt } from "react-icons/md"
 
-
 import IntegrationService from "@services/integration.service"
-
-const integration_service = new IntegrationService()
 
 import type { Integration, UserIntegration } from "@servcy/types"
 import { Button } from "@servcy/ui"
+
+const integration_service = new IntegrationService()
 
 export default function FigmaConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
     const [loading, setLoading] = useState<boolean>(false)
@@ -24,7 +23,8 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
     useEffect(() => {
         setLoading(true)
         setUserIntegrationId(selectedIntegration.id)
-        integration_service.fetchUserIntegrations("Figma")
+        integration_service
+            .fetchUserIntegrations("Figma")
             .then((response) => {
                 setUserIntegrations(response)
                 if (response.length === 1) {
@@ -56,13 +56,14 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
             return
         }
         setSaving(true)
-        integration_service.configureUserIntegration(
-            userIntegrationId,
-            {
-                team_ids: Array.from(nonEmptyTeamIds),
-            },
-            "Figma"
-        )
+        integration_service
+            .configureUserIntegration(
+                userIntegrationId,
+                {
+                    team_ids: Array.from(nonEmptyTeamIds),
+                },
+                "Figma"
+            )
             .then(() => {
                 toast.success("Figma configured successfully!")
             })
@@ -139,7 +140,9 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                                 https://www.figma.com/files/team/123/Servcy
                             </span>{" "}
                             then the team id is{" "}
-                            <span className="rounded-lg bg-custom-servcy-white p-1 font-semibold text-custom-servcy-black">123</span>
+                            <span className="rounded-lg bg-custom-servcy-white p-1 font-semibold text-custom-servcy-black">
+                                123
+                            </span>
                         </li>
                     </ul>
                 </section>
@@ -184,8 +187,8 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                                         newTeamIds.add("")
                                         setTeamIds(newTeamIds)
                                     }}
-                                variant="outline-primary"
-                                disabled={saving}
+                                    variant="outline-primary"
+                                    disabled={saving}
                                 >
                                     + Add More
                                 </Button>

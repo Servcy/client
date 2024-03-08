@@ -8,10 +8,10 @@ import { MdOutlineSyncAlt } from "react-icons/md"
 
 import IntegrationService from "@services/integration.service"
 
-const integration_service = new IntegrationService()
-
 import type { Integration, UserIntegration } from "@servcy/types"
 import { Button } from "@servcy/ui"
+
+const integration_service = new IntegrationService()
 
 export default function GoogleConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
     const [loading, setLoading] = useState<boolean>(false)
@@ -23,7 +23,8 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
     useEffect(() => {
         setLoading(true)
         setUserIntegrationId(selectedIntegration.id)
-        integration_service.fetchUserIntegrations("Gmail")
+        integration_service
+            .fetchUserIntegrations("Gmail")
             .then((response) => {
                 setUserIntegrations(response)
                 if (response.length === 1) {
@@ -56,13 +57,14 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
             return
         }
         setSaving(true)
-        integration_service.configureUserIntegration(
-            userIntegrationId,
-            {
-                whitelisted_emails: Array.from(nonEmptyWhitelistedEmails),
-            },
-            "Gmail"
-        )
+        integration_service
+            .configureUserIntegration(
+                userIntegrationId,
+                {
+                    whitelisted_emails: Array.from(nonEmptyWhitelistedEmails),
+                },
+                "Gmail"
+            )
             .then(() => {
                 toast.success("Email IDs configured successfully")
             })
@@ -174,8 +176,8 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                                         newWhitelistedEmails.add("")
                                         setWhitelistedEmails(newWhitelistedEmails)
                                     }}
-                                variant="outline-primary"
-                                disabled={saving}
+                                    variant="outline-primary"
+                                    disabled={saving}
                                 >
                                     + Add More
                                 </Button>

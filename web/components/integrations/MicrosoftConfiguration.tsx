@@ -23,7 +23,8 @@ export default function MicrosoftConfiguration({ selectedIntegration }: { select
     useEffect(() => {
         setLoading(true)
         setUserIntegrationId(selectedIntegration.id)
-        integration_service.fetchUserIntegrations("Outlook")
+        integration_service
+            .fetchUserIntegrations("Outlook")
             .then((response) => {
                 setUserIntegrations(response)
                 if (response.length === 1) {
@@ -56,13 +57,14 @@ export default function MicrosoftConfiguration({ selectedIntegration }: { select
             return
         }
         setSaving(true)
-        integration_service.configureUserIntegration(
-            userIntegrationId,
-            {
-                whitelisted_emails: Array.from(nonEmptyWhitelistedEmails),
-            },
-            "Outlook"
-        )
+        integration_service
+            .configureUserIntegration(
+                userIntegrationId,
+                {
+                    whitelisted_emails: Array.from(nonEmptyWhitelistedEmails),
+                },
+                "Outlook"
+            )
             .then(() => {
                 toast.success("Email IDs configured successfully")
             })
@@ -168,7 +170,7 @@ export default function MicrosoftConfiguration({ selectedIntegration }: { select
                             <div className="flex items-center gap-2">
                                 <Button
                                     size="sm"
-                                    variant='outline-primary'
+                                    variant="outline-primary"
                                     onClick={() => {
                                         if (whitelistedEmails.has("")) return
                                         const newWhitelistedEmails = new Set(whitelistedEmails)
@@ -181,7 +183,7 @@ export default function MicrosoftConfiguration({ selectedIntegration }: { select
                                 </Button>
                             </div>
                             <Button
-                            variant="primary"
+                                variant="primary"
                                 loading={saving}
                                 disabled={saving}
                                 onClick={() => configureMicrosoft()}
