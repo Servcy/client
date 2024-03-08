@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, useMemo } from "react"
 
@@ -17,9 +17,7 @@ import { EIssueActions } from "../../types"
 import { BaseListRoot } from "../base-list-root"
 
 export const ProfileIssuesListLayout: FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, userId } = router.query as { workspaceSlug: string; userId: string }
+    const { workspaceSlug, userId } = useParams() as { workspaceSlug: string; userId: string }
     // store hooks
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROFILE)
 

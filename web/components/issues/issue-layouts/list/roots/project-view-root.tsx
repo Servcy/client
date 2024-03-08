@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -28,9 +28,7 @@ export const ProjectViewListLayout: React.FC<IViewListLayout> = observer((props)
     const { issueActions } = props
     // store
     const { issuesFilter, issues } = useIssues(EIssuesStoreType.PROJECT_VIEW)
-
-    const router = useRouter()
-    const { workspaceSlug, projectId, viewId } = router.query
+    const { workspaceSlug, projectId, viewId } = useParams()
 
     if (!workspaceSlug || !projectId) return null
 

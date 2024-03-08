@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useCallback, useMemo } from "react"
 
@@ -18,8 +18,7 @@ import { BaseListRoot } from "../base-list-root"
 export interface ICycleListLayout {}
 
 export const CycleListLayout: React.FC = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug, projectId, cycleId } = router.query
+    const { workspaceSlug, projectId, cycleId } = useParams()
     // store
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.CYCLE)
     const { currentProjectCompletedCycleIds } = useCycle()

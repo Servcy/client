@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useMemo } from "react"
 
@@ -19,8 +19,7 @@ import { BaseListRoot } from "../base-list-root"
 export interface IModuleListLayout {}
 
 export const ModuleListLayout: React.FC = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug, projectId, moduleId } = router.query
+    const { workspaceSlug, projectId, moduleId } = useParams()
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE)
 
