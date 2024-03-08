@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { Dispatch, SetStateAction, useState } from "react"
 
@@ -26,9 +26,7 @@ export const ProjectSettingLabelItem: React.FC<Props> = (props) => {
     const { combineTargetFor, isDragging } = draggableSnapshot
     // states
     const [isEditLabelForm, setEditLabelForm] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { updateLabel } = useLabel()
 
@@ -64,7 +62,9 @@ export const ProjectSettingLabelItem: React.FC<Props> = (props) => {
         <div
             className={`group relative flex items-center justify-between gap-2 space-y-3 rounded border-[0.5px] border-custom-border-200 ${
                 !isChild && combineTargetFor ? "bg-custom-background-80" : ""
-            } ${isDragging ? "bg-custom-background-80 shadow-custom-shadow-xs" : ""} bg-custom-background-100 px-1 py-2.5`}
+            } ${
+                isDragging ? "bg-custom-background-80 shadow-custom-shadow-xs" : ""
+            } bg-custom-background-100 px-1 py-2.5`}
         >
             {isEditLabelForm ? (
                 <CreateUpdateLabelInline

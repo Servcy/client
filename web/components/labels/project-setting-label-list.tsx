@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useRef, useState } from "react"
 
@@ -39,9 +39,7 @@ export const ProjectSettingsLabelList: React.FC = observer(() => {
     const [isDraggingGroup, setIsDraggingGroup] = useState(false)
     // refs
     const scrollToRef = useRef<HTMLFormElement>(null)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // theme
     const { resolvedTheme } = useTheme()
     // store hooks

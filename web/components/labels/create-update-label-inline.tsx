@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { forwardRef, useEffect } from "react"
 
@@ -31,9 +31,7 @@ const defaultValues: Partial<IIssueLabel> = {
 export const CreateUpdateLabelInline = observer(
     forwardRef<HTMLFormElement, Props>(function CreateUpdateLabelInline(props, ref) {
         const { labelForm, setLabelForm, isUpdating, labelToUpdate, onClose } = props
-        // router
-        const router = useRouter()
-        const { workspaceSlug, projectId } = router.query
+        const { workspaceSlug, projectId }= useParams()
         // store hooks
         const { createLabel, updateLabel } = useLabel()
 
