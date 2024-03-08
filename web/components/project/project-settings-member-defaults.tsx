@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useEffect } from "react"
 
@@ -23,9 +23,7 @@ const defaultValues: Partial<IProject> = {
 }
 
 export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // store hooks
     const {
         membership: { currentProjectRole },

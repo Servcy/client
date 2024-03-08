@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, useEffect, useRef, useState } from "react"
 
@@ -42,9 +42,7 @@ export const ProjectSidebarList: FC = observer(() => {
         favoriteProjectIds: favoriteProjects,
         updateProjectView,
     } = useProject()
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
     // toast
 
     const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER

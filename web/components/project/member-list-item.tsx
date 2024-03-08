@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { useState } from "react"
 
@@ -27,7 +27,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
     const [removeMemberModal, setRemoveMemberModal] = useState(false)
     // router
     const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // store hooks
     const {
         currentUser,

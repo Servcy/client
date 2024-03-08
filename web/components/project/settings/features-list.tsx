@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC } from "react"
 
@@ -43,9 +43,7 @@ const PROJECT_FEATURES_LIST = [
 ]
 
 export const ProjectFeaturesList: FC<Props> = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
     // store hooks
     const { captureEvent } = useEventTracker()
     const {

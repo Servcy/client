@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useEffect } from "react"
 
@@ -42,9 +42,7 @@ const defaultValues: FormValues = {
 
 export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
     const { isOpen, onClose, onSuccess } = props
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId }= useParams()
 
     // store hooks
     const { captureEvent } = useEventTracker()

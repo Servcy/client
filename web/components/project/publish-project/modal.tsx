@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { Fragment, useEffect, useState } from "react"
 
@@ -54,10 +54,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
     // states
     const [isUnPublishing, setIsUnPublishing] = useState(false)
     const [isUpdateRequired, setIsUpdateRequired] = useState(false)
-
-    // router
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const {
         projectPublishSettings,

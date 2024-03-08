@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useParams } from "next/navigation"
 
 import { useRef, useState } from "react"
 
@@ -90,9 +90,8 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     const [leaveProjectModalOpen, setLeaveProjectModal] = useState(false)
     const [publishModalOpen, setPublishModal] = useState(false)
     const [isMenuActive, setIsMenuActive] = useState(false)
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId: URLProjectId } = router.query
+    const pathname = usePathname()
+    const { workspaceSlug, projectId: URLProjectId }= useParams()
 
     // derived values
     const project = getProjectById(projectId)
@@ -342,7 +341,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                                 >
                                                     <div
                                                         className={`group flex items-center gap-2.5 rounded-md px-2 py-1.5 text-xs font-medium outline-none ${
-                                                            router.asPath.includes(item.href)
+                                                            pathname.includes(item.href)
                                                                 ? "bg-custom-primary-100/10 text-custom-primary-100"
                                                                 : "text-custom-sidebar-text-300 hover:bg-custom-sidebar-background-80 focus:bg-custom-sidebar-background-80"
                                                         } ${isCollapsed ? "justify-center" : ""}`}

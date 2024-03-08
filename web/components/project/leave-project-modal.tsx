@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import { FC, Fragment } from "react"
 
@@ -35,7 +35,7 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
     const { project, isOpen, onClose } = props
     // router
     const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug }= useParams()
     // store hooks
     const { captureEvent } = useEventTracker()
     const {
