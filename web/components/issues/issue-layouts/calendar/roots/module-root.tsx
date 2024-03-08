@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useMemo } from "react"
 
@@ -18,8 +18,7 @@ import { BaseCalendarRoot } from "../base-calendar-root"
 
 export const ModuleCalendarLayout: React.FC = observer(() => {
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.MODULE)
-    const router = useRouter()
-    const { workspaceSlug, moduleId } = router.query as {
+    const { workspaceSlug, moduleId } = useParams() as {
         workspaceSlug: string
         projectId: string
         moduleId: string

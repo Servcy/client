@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { useMemo } from "react"
 
@@ -16,8 +16,7 @@ import { EIssueActions } from "../../types"
 import { BaseCalendarRoot } from "../base-calendar-root"
 
 export const CalendarLayout: React.FC = observer(() => {
-    const router = useRouter()
-    const { workspaceSlug } = router.query
+    const { workspaceSlug } = useParams()
 
     const { issues, issuesFilter } = useIssues(EIssuesStoreType.PROJECT)
 

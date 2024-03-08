@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -28,8 +28,7 @@ interface ICalendarHeader {
 export const CalendarOptionsDropdown: React.FC<ICalendarHeader> = observer((props) => {
     const { issuesFilterStore, viewId } = props
 
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
 
     const issueCalendarView = useCalendarView()
 

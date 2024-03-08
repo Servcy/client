@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import { FC, useCallback } from "react"
 
@@ -40,10 +40,7 @@ interface IBaseCalendarRoot {
 
 export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
     const { issueStore, issuesFilterStore, QuickActions, issueActions, viewId, isCompletedCycle = false } = props
-
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
 
     const { issueMap } = useIssues()
     const {

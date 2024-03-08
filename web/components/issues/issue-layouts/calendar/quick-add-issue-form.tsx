@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import { useEffect, useRef, useState } from "react"
 
@@ -63,8 +63,8 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
     const { formKey, prePopulatedData, quickAddCallback, viewId, onOpen } = props
 
     // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const pathname = usePathname()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { getProjectById } = useProject()
     const { captureIssueEvent } = useEventTracker()
@@ -128,7 +128,7 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
                     captureIssueEvent({
                         eventName: ISSUE_CREATED,
                         payload: { ...res, state: "SUCCESS", element: "Calendar quick add" },
-                        path: router.asPath,
+                        path: pathname,
                     })
                 }))
             toast.success("Issue created successfully.")
@@ -137,7 +137,7 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Calendar quick add" },
-                path: router.asPath,
+                path: pathname,
             })
             toast.error(err?.message || "Some error occurred. Please try again.")
         }

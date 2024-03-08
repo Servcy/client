@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -16,8 +16,7 @@ type Props = {
 }
 
 export const FilterDisplayProperties: React.FC<Props> = observer((props) => {
-    const router = useRouter()
-    const { moduleId, cycleId } = router.query
+    const { moduleId, cycleId } = useParams()
     const { displayProperties, handleUpdate } = props
 
     const [previewEnabled, setPreviewEnabled] = React.useState(true)

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import size from "lodash/size"
 import { observer } from "mobx-react-lite"
@@ -26,9 +26,7 @@ interface EmptyStateProps {
 }
 
 export const ProjectEmptyState: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // theme
     const { resolvedTheme } = useTheme()
     // store hooks
