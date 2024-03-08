@@ -50,7 +50,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                                 Action Taken:
                             </div>
                             <div>
-                                <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                                <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                     {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                                 </Tag>
                             </div>
@@ -111,7 +111,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                                 Action Taken:
                             </div>
                             <div>
-                                <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                                <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                     {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                                 </Tag>
                             </div>
@@ -201,7 +201,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                                 Action Taken:
                             </div>
                             <div>
-                                <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                                <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                     {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                                 </Tag>
                             </div>
@@ -223,7 +223,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                                 Review State:
                             </div>
                             <div>
-                                <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                                <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                     {data.review?.state}
                                 </Tag>
                             </div>
@@ -261,7 +261,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                                 Action Taken:
                             </div>
                             <div>
-                                <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                                <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                     {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                                 </Tag>
                             </div>
@@ -270,7 +270,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                             <div className="mb-2 flex w-full">
                                 <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">State:</div>
                                 <div>
-                                    <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                                    <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                         {data.issue.state.charAt(0).toUpperCase() + data.issue.state.slice(1)}
                                     </Tag>
                                 </div>
@@ -411,7 +411,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                                 Action Taken:
                             </div>
                             <div>
-                                <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                                <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                     {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                                 </Tag>
                             </div>
@@ -470,7 +470,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                                     href={data.pull_request?.diff_url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="text-custom-servcy-light hover:text-custom-servcy-wheat"
+                                    className="text-custom-servcy hover:text-custom-servcy-wheat"
                                 >
                                     Diff
                                     <HiExternalLink className="my-auto inline" size="18" />
@@ -618,7 +618,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                                 Action Taken:
                             </div>
                             <div>
-                                <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                                <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                     {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                                 </Tag>
                             </div>
@@ -645,7 +645,7 @@ const GithubNotification = ({ data, cause, timestamp }: GithubNotificationProps)
                         </div>
                         <div className="mb-2 flex w-full">
                             <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Additions:</div>
-                            <div className="text-custom-servcy-light">+ {data.pull_request?.additions}</div>
+                            <div className="text-custom-servcy">+ {data.pull_request?.additions}</div>
                         </div>
                         <div className="mb-2 flex w-full">
                             <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Deletions:</div>

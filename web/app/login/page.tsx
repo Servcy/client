@@ -153,12 +153,12 @@ export default function Login(): JSX.Element {
                                     type="checkbox"
                                     checked
                                     onChange={() => {}}
-                                    className="mr-2 accent-custom-servcy-light"
+                                    className="mr-2 accent-custom-servcy"
                                 />
                                 <span className="text-sm font-normal">
                                     I agree to Servcys&nbsp;
                                     <Link
-                                        className="text-custom-servcy-light"
+                                        className="text-custom-servcy"
                                         href="https://servcy.com/documents/privacy-policy/"
                                         target="_blank"
                                     >
@@ -166,7 +166,7 @@ export default function Login(): JSX.Element {
                                     </Link>
                                     &nbsp;&&nbsp;
                                     <Link
-                                        className="text-custom-servcy-light"
+                                        className="text-custom-servcy"
                                         href="https://servcy.com/documents/terms-and-conditions"
                                         target="_blank"
                                     >

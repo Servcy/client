@@ -35,7 +35,7 @@ const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
                     <div className="mb-2 flex w-full">
                         <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Action:</div>
                         <div>
-                            <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                            <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                 {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                             </Tag>
                         </div>
@@ -71,7 +71,7 @@ const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
                     <div className="mb-2 flex w-full">
                         <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Action:</div>
                         <div>
-                            <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                            <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                 {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                             </Tag>
                         </div>
@@ -195,7 +195,7 @@ const AsanaNotification = ({ data, cause }: AsanaNotificationProps) => {
                     <div className="mb-2 flex w-full">
                         <div className="mr-2 w-[150px] font-mono font-semibold text-custom-servcy-silver">Action:</div>
                         <div>
-                            <Tag className="m-1 bg-custom-servcy-light font-bold text-custom-servcy-white">
+                            <Tag className="m-1 bg-custom-servcy font-bold text-custom-servcy-white">
                                 {data.action.charAt(0).toUpperCase() + data.action.slice(1)}
                             </Tag>
                         </div>

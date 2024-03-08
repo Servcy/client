@@ -42,7 +42,6 @@ module.exports = {
             colors: {
                 custom: {
                     servcy: "#4D7E3E",
-                    "servcy-light": "#5BA959",
                     "servcy-gray": "#DFE0EC",
                     "servcy-silver": "#7E84A3",
                     "servcy-white": "#F7F6FA",
