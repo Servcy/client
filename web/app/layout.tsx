@@ -4,11 +4,14 @@ import Blocked from "@components/shared/blocked"
 
 import "@styles/global.css"
 
-import { FC, PropsWithChildren } from "react"
+import { useParams, usePathname } from "next/navigation"
+
+import { FC, PropsWithChildren, useCallback, useEffect } from "react"
 
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "next-themes"
+import NProgress from "nprogress"
 import { Toaster } from "react-hot-toast"
 import { SWRConfig } from "swr"
 
@@ -26,6 +29,9 @@ import StoreWrapper from "@wrappers/StoreWrapper"
 
 import { isMobileDevice } from "@helpers/common.helper"
 
+// nprogress
+NProgress.configure({ showSpinner: false })
+
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     const {
         currentUser,
@@ -34,6 +40,19 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     } = useUser()
     const { currentWorkspace } = useWorkspace()
     const {} = useUserAuth({ user: currentUser, isUserLoading: currentUserLoader })
+    const params = useParams()
+    const pathname = usePathname()
+    const handleBeforeLoad = useCallback(() => {
+        console.info("Starting progress bar...")
+        NProgress.start()
+    }, [])
+    useEffect(() => {
+        window.addEventListener("beforeunload", handleBeforeLoad)
+        return () => {
+            console.info("Removing progress bar listener...")
+            window.removeEventListener("beforeunload", handleBeforeLoad)
+        }
+    }, [pathname, params, handleBeforeLoad])
 
     if (typeof window !== "undefined" && navigator && isMobileDevice(navigator.userAgent))
         return (
