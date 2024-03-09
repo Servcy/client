@@ -15,9 +15,7 @@ export interface IUserRootStore {
     currentUserError: any | null
     currentUserLoader: boolean
     // observables
-    isUserLoggedIn: boolean | null
     currentUser: IUser | null
-    isUserInstanceAdmin: boolean | null
     currentUserSettings: IUserSettings | null
     dashboardInfo: any
     // fetch actions
@@ -41,9 +39,7 @@ export class UserRootStore implements IUserRootStore {
     currentUserError: any | null = null
     currentUserLoader: boolean = false
     // observables
-    isUserLoggedIn: boolean | null = null
     currentUser: IUser | null = null
-    isUserInstanceAdmin: boolean | null = null
     currentUserSettings: IUserSettings | null = null
 
     dashboardInfo: any = null
@@ -62,7 +58,6 @@ export class UserRootStore implements IUserRootStore {
             currentUserLoader: observable.ref,
             // observable
             currentUser: observable,
-            isUserInstanceAdmin: observable.ref,
             currentUserSettings: observable,
             dashboardInfo: observable,
             // action
@@ -91,7 +86,6 @@ export class UserRootStore implements IUserRootStore {
             this.currentUserLoader = true
             const response = await this.userService.currentUser()
             runInAction(() => {
-                this.isUserLoggedIn = true
                 this.currentUser = response
                 this.currentUserError = null
                 this.currentUserLoader = false
@@ -235,7 +229,6 @@ export class UserRootStore implements IUserRootStore {
             runInAction(() => {
                 this.currentUser = null
                 this.currentUserError = null
-                this.isUserLoggedIn = false
             })
             this.membership = new UserMembershipStore(this.rootStore)
             this.rootStore.eventTracker.resetSession()
@@ -250,7 +243,6 @@ export class UserRootStore implements IUserRootStore {
         await this.authService.logOut().then(() => {
             runInAction(() => {
                 this.currentUser = null
-                this.isUserLoggedIn = false
             })
             this.membership = new UserMembershipStore(this.rootStore)
             this.rootStore.eventTracker.resetSession()

@@ -56,7 +56,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
     } = useApplication()
-    const { currentUser, updateCurrentUser, isUserInstanceAdmin, logOut } = useUser()
+    const { currentUser, updateCurrentUser, logOut } = useUser()
     const { currentWorkspace: activeWorkspace, workspaces } = useWorkspace()
 
     const { setTheme } = useTheme()
@@ -310,7 +310,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                     )
                                 )}
                             </div>
-                            <div className={`pt-2 ${isUserInstanceAdmin ? "pb-2" : ""}`}>
+                            <div className="pt-2">
                                 <Menu.Item
                                     as="button"
                                     type="button"
@@ -321,17 +321,6 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                     Sign out
                                 </Menu.Item>
                             </div>
-                            {isUserInstanceAdmin && (
-                                <div className="p-2 pb-0">
-                                    <Link href="/god-mode">
-                                        <Menu.Item as="button" type="button" className="w-full">
-                                            <span className="flex w-full items-center justify-center rounded bg-custom-primary-100/20 px-2 py-1 text-sm font-medium text-custom-primary-100 hover:bg-custom-primary-100/30 hover:text-custom-primary-200">
-                                                Enter God Mode
-                                            </span>
-                                        </Menu.Item>
-                                    </Link>
-                                </div>
-                            )}
                         </Menu.Items>
                     </Transition>
                 </Menu>
