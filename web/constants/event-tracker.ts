@@ -1,4 +1,4 @@
-import { EAccess } from "./iam.js"
+import { EAccess } from "./iam"
 
 export type IssueEventProps = {
     eventName: string
