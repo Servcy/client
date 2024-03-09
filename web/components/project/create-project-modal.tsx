@@ -13,7 +13,7 @@ import EmojiIconPicker from "@components/emoji-icon-picker"
 import { useEventTracker, useProject, useUser } from "@hooks/store"
 
 import { PROJECT_CREATED } from "@constants/event-tracker"
-import { NETWORK_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project"
+import { ACCESS_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project"
 import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper"
@@ -45,7 +45,7 @@ export interface ICreateProjectForm {
     identifier: string
     description: string
     emoji_and_icon: string
-    network: number
+    access: number
     project_lead_member: string
     project_lead: string
     cover_image: string
@@ -81,13 +81,13 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
             emoji_and_icon: getRandomEmoji(),
             identifier: "",
             name: "",
-            network: 2,
+            access: 0,
             project_lead: undefined,
         },
         reValidateMode: "onChange",
     })
 
-    const currentNetwork = NETWORK_CHOICES.find((n) => n.key === watch("network"))
+    const currentAccess = ACCESS_CHOICES.find((n) => n.key === watch("access"))
 
     if (currentWorkspaceRole && isOpen)
         if (currentWorkspaceRole < EUserWorkspaceRoles.MEMBER) return <IsGuestCondition onClose={onClose} />
@@ -314,7 +314,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
 
                                         <div className="flex flex-wrap items-center gap-2">
                                             <Controller
-                                                name="network"
+                                                name="access"
                                                 control={control}
                                                 render={({ field: { onChange, value } }) => (
                                                     <div className="flex-shrink-0" tabIndex={4}>
@@ -323,14 +323,14 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                             onChange={onChange}
                                                             label={
                                                                 <div className="flex items-center gap-1">
-                                                                    {currentNetwork ? (
+                                                                    {currentAccess ? (
                                                                         <>
-                                                                            <currentNetwork.icon className="h-3 w-3" />
-                                                                            {currentNetwork.label}
+                                                                            <currentAccess.icon className="h-3 w-3" />
+                                                                            {currentAccess.label}
                                                                         </>
                                                                     ) : (
                                                                         <span className="text-custom-text-400">
-                                                                            Select Network
+                                                                            Select Access
                                                                         </span>
                                                                     )}
                                                                 </div>
@@ -339,17 +339,17 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                             noChevron
                                                             tabIndex={4}
                                                         >
-                                                            {NETWORK_CHOICES.map((network) => (
+                                                            {ACCESS_CHOICES.map((access) => (
                                                                 <CustomSelect.Option
-                                                                    key={network.key}
-                                                                    value={network.key}
+                                                                    key={access.key}
+                                                                    value={access.key}
                                                                 >
                                                                     <div className="flex items-start gap-2">
-                                                                        <network.icon className="h-3.5 w-3.5" />
+                                                                        <access.icon className="h-3.5 w-3.5" />
                                                                         <div className="-mt-1">
-                                                                            <p>{network.label}</p>
+                                                                            <p>{access.label}</p>
                                                                             <p className="text-xs text-custom-text-400">
-                                                                                {network.description}
+                                                                                {access.description}
                                                                             </p>
                                                                         </div>
                                                                     </div>

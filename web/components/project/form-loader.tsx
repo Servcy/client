@@ -46,7 +46,7 @@ export const ProjectDetailsFormLoader: FC<IProjectDetailsFormLoader> = () => (
                     </Loader>
                 </div>
                 <div className="flex w-1/2 flex-col gap-1">
-                    <h4 className="text-sm">Network</h4>
+                    <h4 className="text-sm">Access</h4>
                     <Loader className="w-full">
                         <Loader.Item height="46px" width="100%" />
                     </Loader>

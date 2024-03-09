@@ -36,7 +36,7 @@ export interface IProject {
     member_role: EUserProjectRoles | null
     members: IProjectMemberLite[]
     name: string
-    network: number
+    access: number
     project_lead: IUserLite | string | null
     sort_order: number | null
     total_cycles: number

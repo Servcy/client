@@ -10,7 +10,7 @@ import EmojiIconPicker from "@components/emoji-icon-picker"
 import { useEventTracker, useProject } from "@hooks/store"
 
 import { PROJECT_UPDATED } from "@constants/event-tracker"
-import { NETWORK_CHOICES } from "@constants/project"
+import { ACCESS_CHOICES } from "@constants/project"
 
 import { ProjectService } from "@services/project"
 
@@ -99,7 +99,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
         setIsLoading(true)
         const payload: Partial<IProject> = {
             name: formData.name,
-            network: formData.network,
+            access: formData.access,
             identifier: formData.identifier,
             description: formData.description,
             cover_image: formData.cover_image,
@@ -123,7 +123,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
             setIsLoading(false)
         }, 300)
     }
-    const currentNetwork = NETWORK_CHOICES.find((n) => n.key === project?.network)
+    const currentAccess = ACCESS_CHOICES.find((n) => n.key === project?.access)
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -157,8 +157,8 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                             <span className="flex items-center gap-2 text-sm">
                                 <span>{watch("identifier")} .</span>
                                 <span className="flex items-center gap-1.5">
-                                    {project.network === 0 && <Lock className="h-2.5 w-2.5 text-white " />}
-                                    {currentNetwork?.label}
+                                    {project.access === 1 && <Lock className="h-2.5 w-2.5 text-white " />}
+                                    {currentAccess?.label}
                                 </span>
                             </span>
                         </div>
@@ -262,12 +262,12 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                         />
                     </div>
                     <div className="flex w-1/2 flex-col gap-1">
-                        <h4 className="text-sm">Network</h4>
+                        <h4 className="text-sm">Access</h4>
                         <Controller
-                            name="network"
+                            name="access"
                             control={control}
                             render={({ field: { value, onChange } }) => {
-                                const selectedNetwork = NETWORK_CHOICES.find((n) => n.key === value)
+                                const selectedAccess = ACCESS_CHOICES.find((n) => n.key === value)
 
                                 return (
                                     <CustomSelect
@@ -275,13 +275,13 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                                         onChange={onChange}
                                         label={
                                             <div className="flex items-center gap-1">
-                                                {selectedNetwork ? (
+                                                {selectedAccess ? (
                                                     <>
-                                                        <selectedNetwork.icon className="h-3.5 w-3.5" />
-                                                        {selectedNetwork.label}
+                                                        <selectedAccess.icon className="h-3.5 w-3.5" />
+                                                        {selectedAccess.label}
                                                     </>
                                                 ) : (
-                                                    <span className="text-custom-text-400">Select network</span>
+                                                    <span className="text-custom-text-400">Select access</span>
                                                 )}
                                             </div>
                                         }
@@ -290,14 +290,14 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                                         disabled={!isAdmin}
                                         // optionsClassName="w-full"
                                     >
-                                        {NETWORK_CHOICES.map((network) => (
-                                            <CustomSelect.Option key={network.key} value={network.key}>
+                                        {ACCESS_CHOICES.map((access) => (
+                                            <CustomSelect.Option key={access.key} value={access.key}>
                                                 <div className="flex items-start gap-2">
-                                                    <network.icon className="h-3.5 w-3.5" />
+                                                    <access.icon className="h-3.5 w-3.5" />
                                                     <div className="-mt-1">
-                                                        <p>{network.label}</p>
+                                                        <p>{access.label}</p>
                                                         <p className="text-xs text-custom-text-400">
-                                                            {network.description}
+                                                            {access.description}
                                                         </p>
                                                     </div>
                                                 </div>

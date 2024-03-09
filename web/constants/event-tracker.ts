@@ -23,7 +23,7 @@ export const getProjectEventPayload = (payload: any) => ({
     workspace_id: payload.workspace_id,
     project_id: payload.id,
     identifier: payload.identifier,
-    project_visibility: payload.network == 2 ? "Public" : "Private",
+    project_visibility: payload.access == 0 ? "Public" : "Private",
     changed_properties: payload.changed_properties,
     lead_id: payload.project_lead,
     created_at: payload.created_at,

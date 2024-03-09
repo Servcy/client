@@ -4,26 +4,26 @@ import { SettingIcon } from "@components/icons"
 import { Props } from "@components/icons/types"
 
 export enum EUserProjectRoles {
-    GUEST = 5,
-    VIEWER = 10,
-    MEMBER = 15,
-    ADMIN = 20,
+    GUEST = 0,
+    VIEWER = 1,
+    MEMBER = 2,
+    ADMIN = 3,
 }
 
-export const NETWORK_CHOICES: {
-    key: 0 | 2
+export const ACCESS_CHOICES: {
+    key: 0 | 1
     label: string
     description: string
     icon: LucideIcon
 }[] = [
     {
-        key: 0,
+        key: 1,
         label: "Private",
         description: "Accessible only by invite",
         icon: Lock,
     },
     {
-        key: 2,
+        key: 0,
         label: "Public",
         description: "Anyone in the workspace can join",
         icon: Globe2,
