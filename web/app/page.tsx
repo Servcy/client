@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation.js"
+import { useRouter } from 'next-nprogress-bar';
 
 import { useEffect } from "react"
 
