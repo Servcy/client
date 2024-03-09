@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const nextConfig = {
     experimental: {
         appDir: true,
@@ -13,6 +14,10 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "secure.gravatar.com",
+            },
+            {
+                protocol: "https",
+                hostname: "images.unsplash.com",
             },
         ],
     },
