@@ -210,7 +210,6 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
                         role: member.role,
                     })
                 })
-                console.log("megham", this.workspaceMemberMap[workspaceSlug], "run in action completed")
             })
             return response
         })
