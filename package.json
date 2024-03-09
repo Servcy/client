@@ -1,6 +1,5 @@
 {
-    "name": "servcy-client",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "homepage": "https://github.com/Servcy/Client",
     "bugs": "https://github.com/Servcy/Client/issues",
     "private": true,
