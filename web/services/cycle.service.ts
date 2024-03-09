@@ -10,7 +10,7 @@ export class CycleService extends APIService {
     }
 
     async getWorkspaceCycles(workspaceSlug: string): Promise<ICycle[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/cycles/`)
+        return this.get(`/iam/workspaces/${workspaceSlug}/cycles/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

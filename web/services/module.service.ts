@@ -10,7 +10,7 @@ export class ModuleService extends APIService {
     }
 
     async getWorkspaceModules(workspaceSlug: string): Promise<IModule[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/modules/`)
+        return this.get(`/iam/workspaces/${workspaceSlug}/modules/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

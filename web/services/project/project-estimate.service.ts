@@ -62,7 +62,7 @@ export class ProjectEstimateService extends APIService {
     }
 
     async getWorkspaceEstimatesList(workspaceSlug: string): Promise<IEstimate[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/estimates/`)
+        return this.get(`/iam/workspaces/${workspaceSlug}/estimates/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
