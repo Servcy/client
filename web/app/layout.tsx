@@ -14,14 +14,14 @@ import { SWRConfig } from "swr"
 
 import { useUser, useWorkspace } from "@hooks/store"
 
-import PostHogProvider from "@contexts/PosthogContext"
-import ProgressBarProvider from "@contexts/ProgressBarProvider"
+import PostHogProvider from "@contexts/external/PosthogContext"
+import ProgressBarProvider from "@contexts/external/ProgressBarProvider"
 import { StoreProvider } from "@contexts/StoreContext"
 
 import { SWR_CONFIG } from "@constants/swr-config"
 import { THEMES } from "@constants/themes"
 
-import CrispWrapper from "@wrappers/CrispWrapper"
+import CrispWrapper from "@wrappers/external/CrispWrapper"
 import StoreWrapper from "@wrappers/StoreWrapper"
 
 import { isMobileDevice } from "@helpers/common.helper"
