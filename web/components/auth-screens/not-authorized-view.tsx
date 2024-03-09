@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -20,8 +20,7 @@ type Props = {
 export const NotAuthorizedView: React.FC<Props> = observer((props) => {
     const { actionButton, type } = props
     const { currentUser } = useUser()
-    const { query } = useRouter()
-    const { nextUrl } = query
+    const { nextUrl } = useParams()
 
     return (
         <DefaultWrapper>
