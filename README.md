@@ -33,7 +33,7 @@ You are ready to make changes to the code. Do not forget to refresh the browser 
 
 That's it!
 
-## 📚Documentation
+## 📚 Documentation
 
 To see how to Contribute, visit [here](/CONTRIBUTING.md)
 
