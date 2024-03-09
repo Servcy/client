@@ -105,7 +105,6 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
         workspaceSlug && globalViewId ? `WORKSPACE_GLOBAL_VIEW_ISSUES_${workspaceSlug}_${globalViewId}` : null,
         async () => {
             if (workspaceSlug && globalViewId) {
-                await fetchAllGlobalViews(workspaceSlug.toString())
                 await fetchFilters(workspaceSlug.toString(), globalViewId.toString())
                 await fetchIssues(
                     workspaceSlug.toString(),

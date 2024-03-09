@@ -81,8 +81,6 @@ export const EmptyState: React.FC<Props> = ({
                     alt={primaryButton?.text || "button image"}
                     width={384}
                     height={250}
-                    layout="responsive"
-                    lazyBoundary="100%"
                 />
 
                 <div className="relative flex items-center justify-center gap-2 flex-shrink-0 w-full">
