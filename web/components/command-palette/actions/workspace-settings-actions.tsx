@@ -5,7 +5,8 @@ import { Command } from "cmdk"
 
 import { useUser } from "@hooks/store"
 
-import { ERoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
+import { WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
 
 type Props = {
     closePalette: () => void
