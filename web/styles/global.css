@@ -199,13 +199,17 @@
 
         /* onboarding colors */
         --gradient-onboarding-100: linear-gradient(106deg, #f2f6ff 29.8%, #e1eaff 99.34%);
-        --gradient-onboarding-200: linear-gradient(129deg,
-                rgba(255, 255, 255, 0) -22.23%,
-                rgba(255, 255, 255, 0.8) 62.98%);
+        --gradient-onboarding-200: linear-gradient(
+            129deg,
+            rgba(255, 255, 255, 0) -22.23%,
+            rgba(255, 255, 255, 0.8) 62.98%
+        );
         --gradient-onboarding-300: linear-gradient(164deg, #fff 4.25%, rgba(255, 255, 255, 0.06) 93.5%);
-        --gradient-onboarding-400: linear-gradient(129deg,
-                rgba(255, 255, 255, 0) -22.23%,
-                rgba(255, 255, 255, 0.8) 62.98%);
+        --gradient-onboarding-400: linear-gradient(
+            129deg,
+            rgba(255, 255, 255, 0) -22.23%,
+            rgba(255, 255, 255, 0.8) 62.98%
+        );
 
         --color-onboarding-text-100: 23, 23, 23;
         /* rgb(23, 23, 23) */
