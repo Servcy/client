@@ -56,7 +56,7 @@ export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
         default_state: defaultState,
     }
 
-    const isAdmin = currentProjectRole === ERoles.ADMIN
+    const isAdmin = (currentProjectRole ?? 0) >= ERoles.ADMIN
 
     return (
         <>

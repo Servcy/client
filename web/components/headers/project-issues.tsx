@@ -100,7 +100,7 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
         [workspaceSlug, projectId, updateFilters]
     )
 
-    const canUserCreateIssue = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateIssue = (currentProjectRole ?? 0) >= ERoles.MEMBER
 
     return (
         <>

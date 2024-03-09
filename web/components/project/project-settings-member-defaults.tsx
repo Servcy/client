@@ -29,8 +29,6 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
         membership: { currentProjectRole },
     } = useUser()
     const { currentProjectDetails, fetchProjectDetails, updateProject } = useProject()
-    // derived values
-    const isAdmin = currentProjectRole === ERoles.ADMIN
 
     // form info
     const { reset, control } = useForm<IProject>({ defaultValues })
@@ -97,7 +95,12 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                                             onChange={(val: string) => {
                                                 submitChanges({ project_lead: val })
                                             }}
-                                            isDisabled={!isAdmin}
+                                            isDisabled={
+                                                !(
+                                                    currentProjectRole &&
+                                                    [ERoles.ADMIN, ERoles.OWNER].includes(currentProjectRole)
+                                                )
+                                            }
                                         />
                                     )}
                                 />
@@ -122,7 +125,12 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                                             onChange={(val: string) => {
                                                 submitChanges({ default_assignee: val })
                                             }}
-                                            isDisabled={!isAdmin}
+                                            isDisabled={
+                                                !(
+                                                    currentProjectRole &&
+                                                    [ERoles.ADMIN, ERoles.OWNER].includes(currentProjectRole)
+                                                )
+                                            }
                                         />
                                     )}
                                 />

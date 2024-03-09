@@ -76,7 +76,7 @@ const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {
     }
 
     // derived values
-    const hasAddMemberPermission = currentWorkspaceRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentWorkspaceRole)
+    const hasAddMemberPermission = currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Members` : undefined
 
     return (

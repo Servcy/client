@@ -22,7 +22,7 @@ const BillingSettingsPage: NextPageWithWrapper = observer(() => {
     } = useUser()
     const { currentWorkspace } = useWorkspace()
     // derived values
-    const isAdmin = currentWorkspaceRole === ERoles.ADMIN
+    const isAdmin = currentWorkspaceRole && currentWorkspaceRole >= ERoles.ADMIN
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Billing & Plans` : undefined
 
     if (!isAdmin)

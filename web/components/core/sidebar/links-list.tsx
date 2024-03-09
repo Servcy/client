@@ -21,7 +21,7 @@ export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, h
 
     const { getUserDetails } = useMember()
 
-    const isNotAllowed = userAuth.isGuest || userAuth.isViewer
+    const isNotAllowed = userAuth.isGuest
 
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text)

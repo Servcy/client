@@ -25,7 +25,7 @@ export const ProjectViewsHeader: React.FC = observer(() => {
     } = useUser()
     const { currentProjectDetails } = useProject()
 
-    const canUserCreateIssue = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateIssue = (currentProjectRole ?? 0) >= ERoles.MEMBER
 
     return (
         <>

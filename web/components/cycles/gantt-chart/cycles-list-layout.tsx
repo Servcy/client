@@ -52,7 +52,7 @@ export const CyclesListGanttChartView: FC<Props> = observer((props) => {
         return structuredBlocks
     }
 
-    const isAllowed = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
+    const isAllowed = (currentProjectRole ?? 0) >= ERoles.MEMBER
 
     return (
         <div className="h-full w-full overflow-y-auto">

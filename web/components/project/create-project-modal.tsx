@@ -89,8 +89,8 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
 
     const currentAccess = ACCESS_CHOICES.find((n) => n.key === watch("access"))
 
-    if (currentWorkspaceRole && isOpen)
-        if (currentWorkspaceRole < ERoles.MEMBER) return <IsGuestCondition onClose={onClose} />
+    if (isOpen && currentWorkspaceRole && currentWorkspaceRole === ERoles.GUEST)
+        return <IsGuestCondition onClose={onClose} />
 
     const handleClose = () => {
         onClose()

@@ -19,7 +19,7 @@ export const DashboardProjectEmptyState = observer(() => {
         membership: { currentWorkspaceRole },
     } = useUser()
     // derived values
-    const canCreateProject = currentWorkspaceRole === ERoles.ADMIN
+    const canCreateProject = (currentWorkspaceRole ?? 0) >= ERoles.MEMBER
 
     return (
         <div className="h-full flex flex-col justify-center lg:w-3/5 mx-auto space-y-4">

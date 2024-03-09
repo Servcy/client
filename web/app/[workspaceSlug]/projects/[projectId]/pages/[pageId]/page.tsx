@@ -230,14 +230,13 @@ const PageDetailsPage: NextPageWithWrapper = observer(() => {
         }
     }
 
-    const isPageReadOnly =
-        is_locked || archived_at || (currentProjectRole && [ERoles.MEMBER, ERoles.GUEST].includes(currentProjectRole))
+    const isPageReadOnly = is_locked || archived_at || (currentProjectRole && currentProjectRole <= ERoles.MEMBER)
 
     const isCurrentUserOwner = owned_by === currentUser?.id
 
-    const userCanDuplicate = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
-    const userCanArchive = isCurrentUserOwner || currentProjectRole === ERoles.ADMIN
-    const userCanLock = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
+    const userCanDuplicate = currentProjectRole && currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const userCanArchive = isCurrentUserOwner || (currentProjectRole && currentProjectRole >= ERoles.ADMIN)
+    const userCanLock = currentProjectRole && currentProjectRole !== ERoles.GUEST
 
     return pageIdMobx ? (
         <AppWrapper header={<PageDetailsHeader />} withProjectWrapper>
@@ -362,7 +361,5 @@ const PageDetailsPage: NextPageWithWrapper = observer(() => {
         </AppWrapper>
     )
 })
-
-PageDetailsPage.hasWrapper = true
 
 export default PageDetailsPage

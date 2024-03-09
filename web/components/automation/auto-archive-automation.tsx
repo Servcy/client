@@ -31,7 +31,7 @@ export const AutoArchiveAutomation: React.FC<Props> = observer((props) => {
     } = useUser()
     const { currentProjectDetails } = useProject()
 
-    const isAdmin = currentProjectRole === ERoles.ADMIN
+    const isAdmin = (currentProjectRole ?? 0) >= ERoles.ADMIN
 
     return (
         <>

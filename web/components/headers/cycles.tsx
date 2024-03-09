@@ -31,7 +31,7 @@ export const CyclesHeader: FC = observer(() => {
     } = useUser()
     const { currentProjectDetails } = useProject()
 
-    const canUserCreateCycle = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateCycle = (currentProjectRole ?? 0) >= ERoles.MEMBER
 
     const { workspaceSlug } = useParams() as {
         workspaceSlug: string

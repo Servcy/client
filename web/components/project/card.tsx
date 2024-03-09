@@ -36,8 +36,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     const { addProjectToFavorites, removeProjectFromFavorites } = useProject()
 
     project.member_role
-    const isOwner = project.member_role === ERoles.ADMIN
-    const isMember = project.member_role === ERoles.MEMBER
+    const isGuest = project.member_role === ERoles.GUEST
 
     const handleAddToFavorites = () => {
         if (!workspaceSlug) return
@@ -191,7 +190,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                                 <span className="text-sm italic text-custom-text-400">No Member Yet</span>
                             )}
                         </Tooltip>
-                        {(isOwner || isMember) && (
+                        {!isGuest && (
                             <Link
                                 className="flex items-center justify-center rounded p-1 text-custom-text-400 hover:bg-custom-background-80 hover:text-custom-text-200"
                                 onClick={(e) => {

@@ -113,7 +113,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                         {Object.keys(ROLES).map((key) => {
                             if (
                                 currentWorkspaceRole &&
-                                currentWorkspaceRole !== 20 &&
+                                currentWorkspaceRole < ERoles.ADMIN &&
                                 currentWorkspaceRole < parseInt(key)
                             )
                                 return null

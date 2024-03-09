@@ -96,8 +96,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     // derived values
     const project = getProjectById(projectId)
 
-    const isAdmin = project?.member_role === ERoles.ADMIN
-    const isViewerOrGuest = project?.member_role && [ERoles.MEMBER, ERoles.GUEST].includes(project.member_role)
+    const isGuest = project?.member_role === ERoles.GUEST
 
     const isCollapsed = themeStore.sidebarCollapsed
 
@@ -262,17 +261,18 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                     </CustomMenu.MenuItem>
 
                                     {/* publish project settings */}
-                                    {isAdmin && (
-                                        <CustomMenu.MenuItem onClick={() => setPublishModal(true)}>
-                                            <div className="relative flex flex-shrink-0 items-center justify-start gap-2">
-                                                <div className="flex h-4 w-4 cursor-pointer items-center justify-center rounded text-custom-sidebar-text-200 transition-all duration-300 hover:bg-custom-sidebar-background-80">
-                                                    <Share2 className="h-3.5 w-3.5 stroke-[1.5]" />
+                                    {project?.member_role &&
+                                        [ERoles.ADMIN, ERoles.OWNER].includes(project?.member_role) && (
+                                            <CustomMenu.MenuItem onClick={() => setPublishModal(true)}>
+                                                <div className="relative flex flex-shrink-0 items-center justify-start gap-2">
+                                                    <div className="flex h-4 w-4 cursor-pointer items-center justify-center rounded text-custom-sidebar-text-200 transition-all duration-300 hover:bg-custom-sidebar-background-80">
+                                                        <Share2 className="h-3.5 w-3.5 stroke-[1.5]" />
+                                                    </div>
+                                                    <div>{project.is_deployed ? "Publish settings" : "Publish"}</div>
                                                 </div>
-                                                <div>{project.is_deployed ? "Publish settings" : "Publish"}</div>
-                                            </div>
-                                        </CustomMenu.MenuItem>
-                                    )}
-                                    {!isViewerOrGuest && (
+                                            </CustomMenu.MenuItem>
+                                        )}
+                                    {!isGuest && (
                                         <CustomMenu.MenuItem>
                                             <Link href={`/${workspaceSlug}/projects/${project?.id}/archived-issues/`}>
                                                 <div className="flex items-center justify-start gap-2">
@@ -299,7 +299,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                         </Link>
                                     </CustomMenu.MenuItem>
                                     {/* leave project */}
-                                    {isViewerOrGuest && (
+                                    {isGuest && (
                                         <CustomMenu.MenuItem onClick={handleLeaveProject}>
                                             <div className="flex items-center justify-start gap-2">
                                                 <LogOut className="h-3.5 w-3.5 stroke-[1.5]" />

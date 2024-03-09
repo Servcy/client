@@ -76,12 +76,12 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
     const isAdmin = currentWorkspaceRole === ERoles.ADMIN
     // role change access-
     // 1. user cannot change their own role
-    // 2. only admin or member can change role
+    // 2. only admin or owner can change role
     // 3. user cannot change role of higher role
     const hasRoleChangeAccess =
         currentWorkspaceRole &&
         !isCurrentUser &&
-        [ERoles.ADMIN, ERoles.MEMBER].includes(currentWorkspaceRole) &&
+        currentWorkspaceRole >= ERoles.ADMIN &&
         memberDetails.role <= currentWorkspaceRole
 
     return (
@@ -165,7 +165,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                         {Object.keys(ROLES).map((key) => {
                             if (
                                 currentWorkspaceRole &&
-                                currentWorkspaceRole !== 20 &&
+                                currentWorkspaceRole !== ERoles.ADMIN &&
                                 currentWorkspaceRole < parseInt(key)
                             )
                                 return null
