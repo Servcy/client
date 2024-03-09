@@ -236,7 +236,7 @@ const PageDetailsPage: NextPageWithWrapper = observer(() => {
 
     const userCanDuplicate = currentProjectRole && currentProjectRole && currentProjectRole >= ERoles.MEMBER
     const userCanArchive = isCurrentUserOwner || (currentProjectRole && currentProjectRole >= ERoles.ADMIN)
-    const userCanLock = currentProjectRole && currentProjectRole !== ERoles.GUEST
+    const userCanLock = (currentProjectRole ?? 0) > ERoles.GUEST
 
     return pageIdMobx ? (
         <AppWrapper header={<PageDetailsHeader />} withProjectWrapper>
