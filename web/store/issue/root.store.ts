@@ -1,5 +1,5 @@
 import isEmpty from "lodash/isEmpty"
-import { autorun, makeObservable, observable } from "mobx"
+import { autorun, makeObservable, observable, runInAction } from "mobx"
 
 import { IWorkspaceMembership } from "@store/member/workspace-member.store"
 
@@ -156,25 +156,70 @@ export class IssueRootStore implements IIssueRootStore {
         this.rootStore = rootStore
 
         autorun(() => {
-            if (rootStore.user.currentUser?.id) this.currentUserId = rootStore.user.currentUser?.id
-            if (rootStore.app.router.workspaceSlug) this.workspaceSlug = rootStore.app.router.workspaceSlug
-            if (rootStore.app.router.projectId) this.projectId = rootStore.app.router.projectId
-            if (rootStore.app.router.cycleId) this.cycleId = rootStore.app.router.cycleId
-            if (rootStore.app.router.moduleId) this.moduleId = rootStore.app.router.moduleId
-            if (rootStore.app.router.viewId) this.viewId = rootStore.app.router.viewId
-            if (rootStore.app.router.globalViewId) this.globalViewId = rootStore.app.router.globalViewId
-            if (rootStore.app.router.userId) this.userId = rootStore.app.router.userId
-            if (!isEmpty(rootStore?.state?.stateMap)) this.stateMap = rootStore?.state?.stateMap
-            if (!isEmpty(rootStore?.state?.projectStates)) this.stateDetails = rootStore?.state?.projectStates
-            if (!isEmpty(rootStore?.label?.labelMap)) this.labelMap = rootStore?.label?.labelMap
+            if (rootStore.user.currentUser?.id)
+                runInAction(() => {
+                    this.currentUserId = rootStore.user.currentUser?.id
+                })
+            if (rootStore.app.router.workspaceSlug)
+                runInAction(() => {
+                    this.workspaceSlug = rootStore.app.router.workspaceSlug
+                })
+            if (rootStore.app.router.projectId)
+                runInAction(() => {
+                    this.projectId = rootStore.app.router.projectId
+                })
+            if (rootStore.app.router.cycleId)
+                runInAction(() => {
+                    this.cycleId = rootStore.app.router.cycleId
+                })
+            if (rootStore.app.router.moduleId)
+                runInAction(() => {
+                    this.moduleId = rootStore.app.router.moduleId
+                })
+            if (rootStore.app.router.viewId)
+                runInAction(() => {
+                    this.viewId = rootStore.app.router.viewId
+                })
+            if (rootStore.app.router.globalViewId)
+                runInAction(() => {
+                    this.globalViewId = rootStore.app.router.globalViewId
+                })
+            if (rootStore.app.router.userId)
+                runInAction(() => {
+                    this.userId = rootStore.app.router.userId
+                })
+            if (!isEmpty(rootStore?.state?.stateMap))
+                runInAction(() => {
+                    this.stateMap = rootStore?.state?.stateMap
+                })
+            if (!isEmpty(rootStore?.state?.projectStates))
+                runInAction(() => {
+                    this.stateDetails = rootStore?.state?.projectStates
+                })
+            if (!isEmpty(rootStore?.label?.labelMap))
+                runInAction(() => {
+                    this.labelMap = rootStore?.label?.labelMap
+                })
             if (!isEmpty(rootStore?.memberRoot?.workspace?.workspaceMemberMap))
-                this.workSpaceMemberRolesMap = rootStore?.memberRoot?.workspace?.memberMap || undefined
+                runInAction(() => {
+                    this.workSpaceMemberRolesMap = rootStore?.memberRoot?.workspace?.memberMap || undefined
+                })
             if (!isEmpty(rootStore?.memberRoot?.memberMap))
-                this.memberMap = rootStore?.memberRoot?.memberMap || undefined
+                runInAction(() => {
+                    this.memberMap = rootStore?.memberRoot?.memberMap || undefined
+                })
             if (!isEmpty(rootStore?.projectRoot?.project?.projectMap))
-                this.projectMap = rootStore?.projectRoot?.project?.projectMap
-            if (!isEmpty(rootStore?.module?.moduleMap)) this.moduleMap = rootStore?.module?.moduleMap
-            if (!isEmpty(rootStore?.cycle?.cycleMap)) this.cycleMap = rootStore?.cycle?.cycleMap
+                runInAction(() => {
+                    this.projectMap = rootStore?.projectRoot?.project?.projectMap
+                })
+            if (!isEmpty(rootStore?.module?.moduleMap))
+                runInAction(() => {
+                    this.moduleMap = rootStore?.module?.moduleMap
+                })
+            if (!isEmpty(rootStore?.cycle?.cycleMap))
+                runInAction(() => {
+                    this.cycleMap = rootStore?.cycle?.cycleMap
+                })
         })
 
         this.issues = new IssueStore()
