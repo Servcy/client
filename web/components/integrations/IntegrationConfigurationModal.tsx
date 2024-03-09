@@ -11,7 +11,7 @@ import IntegrationService from "@services/integration.service"
 
 import type { Integration, IntegrationEvent, UserIntegration } from "@servcy/types"
 
-const integration_service = new IntegrationService()
+const integrationService = new IntegrationService()
 
 export default function IntegrationConfigurationModal({
     selectedIntegration,
@@ -26,7 +26,7 @@ export default function IntegrationConfigurationModal({
 
     useEffect(() => {
         setLoading(true)
-        integration_service
+        integrationService
             .fetchUserIntegrations(selectedIntegration.name)
             .then((response) => {
                 setUserIntegrations(response)
@@ -34,7 +34,7 @@ export default function IntegrationConfigurationModal({
             .catch((error) => {
                 console.error("Error fetching user integrations", error)
             })
-        integration_service
+        integrationService
             .fetchIntegrationEvents(String(selectedIntegration.id))
             .then((events) => {
                 setEvents(JSON.parse(events))
@@ -47,7 +47,7 @@ export default function IntegrationConfigurationModal({
     }, [selectedIntegration.id, selectedIntegration.name])
 
     const handleEnableEvent = (event: IntegrationEvent) => {
-        integration_service
+        integrationService
             .enableIntegrationEvent({
                 integration_id: selectedIntegration.id,
                 event_id: event.id,
@@ -68,7 +68,7 @@ export default function IntegrationConfigurationModal({
     }
 
     const handleDisableEvent = (event: IntegrationEvent) => {
-        integration_service
+        integrationService
             .disableIntegrationEvent({
                 integration_id: selectedIntegration.id,
                 event_id: event.id,

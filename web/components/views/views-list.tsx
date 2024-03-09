@@ -11,7 +11,7 @@ import { ProjectViewListItem } from "@components/views"
 import { useApplication, useProjectView, useUser } from "@hooks/store"
 
 import { VIEW_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { Input } from "@servcy/ui"
 
@@ -39,7 +39,7 @@ export const ProjectViewsList = observer(() => {
 
     const filteredViewsList = viewsList.filter((v) => v?.name.toLowerCase().includes(query.toLowerCase()))
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

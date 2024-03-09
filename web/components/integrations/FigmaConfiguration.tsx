@@ -11,7 +11,7 @@ import IntegrationService from "@services/integration.service"
 import type { Integration, UserIntegration } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
-const integration_service = new IntegrationService()
+const integrationService = new IntegrationService()
 
 export default function FigmaConfiguration({ selectedIntegration }: { selectedIntegration: Integration }) {
     const [loading, setLoading] = useState<boolean>(false)
@@ -23,7 +23,7 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
     useEffect(() => {
         setLoading(true)
         setUserIntegrationId(selectedIntegration.id)
-        integration_service
+        integrationService
             .fetchUserIntegrations("Figma")
             .then((response) => {
                 setUserIntegrations(response)
@@ -56,7 +56,7 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
             return
         }
         setSaving(true)
-        integration_service
+        integrationService
             .configureUserIntegration(
                 userIntegrationId,
                 {

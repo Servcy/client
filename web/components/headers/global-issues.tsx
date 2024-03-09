@@ -13,8 +13,8 @@ import { CreateUpdateWorkspaceViewModal } from "@components/workspace"
 
 import { useIssues, useLabel, useMember, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types"
 import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui"
@@ -100,7 +100,7 @@ export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
         [workspaceSlug, updateFilters, globalViewId]
     )
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     return (
         <>

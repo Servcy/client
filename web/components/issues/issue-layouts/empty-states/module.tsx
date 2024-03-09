@@ -11,8 +11,8 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store"
 
 import { EMPTY_FILTER_STATE_DETAILS, MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { ERoles } from "@constants/iam"
 import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { ISearchIssueResponse, TIssueLayouts } from "@servcy/types"
 
@@ -72,7 +72,7 @@ export const ModuleEmptyState: React.FC<Props> = observer((props) => {
     )
     const emptyStateImage = getEmptyStateImagePath("module-issues", activeLayout ?? "list", isLightMode)
 
-    const isEditingAllowed = !!userRole && userRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!userRole && userRole >= ERoles.MEMBER
 
     const emptyStateProps: EmptyStateProps = isEmptyFilters
         ? {

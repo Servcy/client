@@ -42,7 +42,9 @@ const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
             workspaceService.userWorkspaces().then(async (userWorkspaces) => {
                 if (!currentUser) return
                 const firstWorkspace = Object.values(userWorkspaces ?? {})?.[0]
-                const lastActiveWorkspace = userWorkspaces.find((workspace) => workspace.id === currentUser?.last_workspace_id)
+                const lastActiveWorkspace = userWorkspaces.find(
+                    (workspace) => workspace.id === currentUser?.last_workspace_id
+                )
                 if (lastActiveWorkspace) {
                     router.push(`/${lastActiveWorkspace.slug}`)
                     return

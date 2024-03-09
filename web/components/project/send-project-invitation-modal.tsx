@@ -11,8 +11,7 @@ import toast from "react-hot-toast"
 import { useEventTracker, useMember, useUser } from "@hooks/store"
 
 import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker"
-import { EUserProjectRoles } from "@constants/project"
-import { ROLE } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { Avatar, Button, CustomSearchSelect, CustomSelect } from "@servcy/ui"
 
@@ -23,7 +22,7 @@ type Props = {
 }
 
 type member = {
-    role: EUserProjectRoles
+    role: ERoles
     member_id: string
 }
 
@@ -86,7 +85,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                     members: [
                         ...payload.members.map((member) => ({
                             member_id: member.member_id,
-                            role: ROLE[member.role],
+                            role: ROLES[member.role],
                         })),
                     ],
                     state: "SUCCESS",
@@ -271,7 +270,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                             <div className="flex w-full items-center justify-between gap-1 rounded-md border border-custom-border-200 px-3 py-2.5 text-left text-sm text-custom-text-200 shadow-sm duration-300 hover:bg-custom-background-80 hover:text-custom-text-100 focus:outline-none">
                                                                                 <span className="capitalize">
                                                                                     {field.value
-                                                                                        ? ROLE[field.value]
+                                                                                        ? ROLES[field.value]
                                                                                         : "Select role"}
                                                                                 </span>
                                                                                 <ChevronDown
@@ -283,11 +282,10 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                         input
                                                                         optionsClassName="w-full"
                                                                     >
-                                                                        {Object.entries(ROLE).map(([key, label]) => {
+                                                                        {Object.entries(ROLES).map(([key, label]) => {
                                                                             if (
                                                                                 parseInt(key) >
-                                                                                (currentProjectRole ??
-                                                                                    EUserProjectRoles.GUEST)
+                                                                                (currentProjectRole ?? ERoles.GUEST)
                                                                             )
                                                                                 return null
 

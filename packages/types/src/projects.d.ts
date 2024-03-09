@@ -1,4 +1,4 @@
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import type { IUser, IUserLite, IWorkspace, IWorkspaceLite, TStateGroups } from "."
 
@@ -33,7 +33,7 @@ export interface IProject {
     is_deployed: boolean
     is_favorite: boolean
     is_member: boolean
-    member_role: EUserProjectRoles | null
+    member_role: ERoles | null
     members: IProjectMemberLite[]
     name: string
     access: number
@@ -77,7 +77,7 @@ export interface IProjectMember {
     project: IProjectLite
     workspace: IWorkspaceLite
     comment: string
-    role: EUserProjectRoles
+    role: ERoles
 
     preferences: ProjectPreferences
 
@@ -93,11 +93,11 @@ export interface IProjectMember {
 export interface IProjectMembership {
     id: string
     member: string
-    role: EUserProjectRoles
+    role: ERoles
 }
 
 export interface IProjectBulkAddFormData {
-    members: { role: EUserProjectRoles; member_id: string }[]
+    members: { role: ERoles; member_id: string }[]
 }
 
 export interface IGithubRepository {

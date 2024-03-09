@@ -1,4 +1,4 @@
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { IIssueActivity, IIssueLite, TStateGroups } from "."
 
@@ -153,7 +153,7 @@ export interface IUserProfileProjectSegregation {
 }
 
 export interface IUserProjectsRole {
-    [projectId: string]: EUserProjectRoles
+    [projectId: string]: ERoles
 }
 
 export interface IUserEmailNotificationSettings {

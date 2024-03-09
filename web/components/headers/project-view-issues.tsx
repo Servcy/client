@@ -22,8 +22,8 @@ import {
     useUser,
 } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 import { truncateText } from "@helpers/string.helper"
@@ -103,8 +103,7 @@ export const ProjectViewIssuesHeader: React.FC = observer(() => {
 
     const viewDetails = viewId ? getViewById(viewId.toString()) : null
 
-    const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateIssue = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
 
     return (
         <div className="relative z-[15] flex h-[3.75rem] w-full items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">

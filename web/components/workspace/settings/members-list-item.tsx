@@ -12,7 +12,7 @@ import { ConfirmWorkspaceMemberRemove } from "@components/workspace"
 import { useEventTracker, useMember, useUser } from "@hooks/store"
 
 import { WORKSPACE_MEMBER_lEAVE } from "@constants/event-tracker"
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+import { ERoles, ROLES } from "@constants/iam"
 
 import { CustomSelect, Tooltip } from "@servcy/ui"
 
@@ -73,7 +73,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
     // is the member current logged in user
     const isCurrentUser = memberDetails?.member.id === currentUser?.id
     // is the current logged in user admin
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const isAdmin = currentWorkspaceRole === ERoles.ADMIN
     // role change access-
     // 1. user cannot change their own role
     // 2. only admin or member can change role
@@ -81,7 +81,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
     const hasRoleChangeAccess =
         currentWorkspaceRole &&
         !isCurrentUser &&
-        [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole) &&
+        [ERoles.ADMIN, ERoles.MEMBER].includes(currentWorkspaceRole) &&
         memberDetails.role <= currentWorkspaceRole
 
     return (
@@ -140,7 +140,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                                         hasRoleChangeAccess ? "" : "text-custom-sidebar-text-400"
                                     }`}
                                 >
-                                    {ROLE[memberDetails.role]}
+                                    {ROLES[memberDetails.role]}
                                 </span>
                                 {hasRoleChangeAccess && (
                                     <span className="grid place-items-center">
@@ -150,7 +150,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                             </div>
                         }
                         value={memberDetails.role}
-                        onChange={(value: EUserWorkspaceRoles) => {
+                        onChange={(value: ERoles) => {
                             if (!workspaceSlug || !value) return
 
                             updateMember(workspaceSlug.toString(), memberDetails.member.id, {
@@ -162,7 +162,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                         disabled={!hasRoleChangeAccess}
                         placement="bottom-end"
                     >
-                        {Object.keys(ROLE).map((key) => {
+                        {Object.keys(ROLES).map((key) => {
                             if (
                                 currentWorkspaceRole &&
                                 currentWorkspaceRole !== 20 &&
@@ -172,7 +172,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
 
                             return (
                                 <CustomSelect.Option key={key} value={parseInt(key, 10)}>
-                                    <>{ROLE[parseInt(key) as keyof typeof ROLE]}</>
+                                    <>{ROLES[parseInt(key) as keyof typeof ROLES]}</>
                                 </CustomSelect.Option>
                             )
                         })}

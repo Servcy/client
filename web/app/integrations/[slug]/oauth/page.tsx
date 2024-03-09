@@ -13,7 +13,7 @@ import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 
 import { Spinner } from "@servcy/ui"
 
-const integration_service = new IntegrationService()
+const integrationService = new IntegrationService()
 
 export default function IntegrationOauth(): JSX.Element {
     const params = useParams()
@@ -31,7 +31,7 @@ export default function IntegrationOauth(): JSX.Element {
                 oauthParams["code"] = token
             }
         }
-        integration_service
+        integrationService
             .integrationOauth(oauthParams, slug)
             .then((response) => {
                 toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`)

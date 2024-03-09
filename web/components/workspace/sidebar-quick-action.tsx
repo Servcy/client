@@ -8,8 +8,8 @@ import { CreateUpdateIssueModal } from "@components/issues"
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
+import { ERoles } from "@constants/iam"
 import { EIssuesStoreType } from "@constants/issue"
-import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { TIssue } from "@servcy/types"
 
@@ -37,7 +37,7 @@ export const WorkspaceSidebarQuickAction = observer(() => {
 
     const isSidebarCollapsed = themeStore.sidebarCollapsed
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     const disabled = joinedProjectIds.length === 0
 

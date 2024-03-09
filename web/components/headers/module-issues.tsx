@@ -25,8 +25,8 @@ import {
 } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { cn } from "@helpers/common.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
@@ -140,8 +140,7 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
 
     // derived values
     const moduleDetails = moduleId ? getModuleById(moduleId.toString()) : undefined
-    const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateIssue = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
 
     return (
         <>

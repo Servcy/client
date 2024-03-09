@@ -10,7 +10,7 @@ import { ConfirmWorkspaceMemberRemove } from "@components/workspace"
 
 import { useMember, useUser } from "@hooks/store"
 
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+import { ERoles, ROLES } from "@constants/iam"
 
 import { CustomSelect, Tooltip } from "@servcy/ui"
 
@@ -47,13 +47,12 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
     if (!invitationDetails) return null
 
     // is the current logged in user admin
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const isAdmin = currentWorkspaceRole === ERoles.ADMIN
     // role change access-
     // 1. user cannot change their own role
     // 2. only admin or member can change role
     // 3. user cannot change role of higher role
-    const hasRoleChangeAccess =
-        currentWorkspaceRole && [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole)
+    const hasRoleChangeAccess = currentWorkspaceRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentWorkspaceRole)
 
     if (!currentWorkspaceMemberInfo) return null
 
@@ -89,7 +88,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                                         hasRoleChangeAccess ? "" : "text-custom-sidebar-text-400"
                                     }`}
                                 >
-                                    {ROLE[invitationDetails.role]}
+                                    {ROLES[invitationDetails.role]}
                                 </span>
                                 {hasRoleChangeAccess && (
                                     <span className="grid place-items-center">
@@ -99,7 +98,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                             </div>
                         }
                         value={invitationDetails.role}
-                        onChange={(value: EUserWorkspaceRoles) => {
+                        onChange={(value: ERoles) => {
                             if (!workspaceSlug || !value) return
 
                             updateMemberInvitation(workspaceSlug.toString(), invitationDetails.id, {
@@ -111,7 +110,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                         disabled={!hasRoleChangeAccess}
                         placement="bottom-end"
                     >
-                        {Object.keys(ROLE).map((key) => {
+                        {Object.keys(ROLES).map((key) => {
                             if (
                                 currentWorkspaceRole &&
                                 currentWorkspaceRole !== 20 &&
@@ -121,7 +120,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
 
                             return (
                                 <CustomSelect.Option key={key} value={parseInt(key, 10)}>
-                                    <>{ROLE[parseInt(key) as keyof typeof ROLE]}</>
+                                    <>{ROLES[parseInt(key) as keyof typeof ROLES]}</>
                                 </CustomSelect.Option>
                             )
                         })}

@@ -8,8 +8,9 @@ import { AppliedFiltersList } from "@components/issues"
 import { useEventTracker, useGlobalView, useIssues, useLabel, useUser } from "@hooks/store"
 
 import { GLOBAL_VIEW_UPDATED } from "@constants/event-tracker"
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
-import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace"
+import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 import { IIssueFilterOptions, TStaticViewTypes } from "@servcy/types"
 //ui
@@ -106,7 +107,7 @@ export const GlobalViewsAppliedFiltersRoot = observer((props: Props) => {
 
     const areFiltersEqual = isEqual(appliedFilters, viewDetails?.filters)
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     const isDefaultView = DEFAULT_GLOBAL_VIEWS_LIST.map((view) => view.key).includes(globalViewId as TStaticViewTypes)
 

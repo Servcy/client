@@ -8,8 +8,8 @@ import { ProjectIssueQuickActions } from "@components/issues"
 
 import { useIssues, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { TIssue } from "@servcy/types"
 
@@ -49,7 +49,7 @@ export const ProfileIssuesKanBanLayout: React.FC = observer(() => {
     const canEditPropertiesBasedOnProject = (projectId: string) => {
         const currentProjectRole = currentWorkspaceAllProjectsRole && currentWorkspaceAllProjectsRole[projectId]
 
-        return !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+        return !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
     }
 
     return (

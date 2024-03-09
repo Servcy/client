@@ -8,7 +8,8 @@ import { SelectMonthModal } from "@components/automation"
 
 import { useProject, useProjectState, useUser } from "@hooks/store"
 
-import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project"
+import { ERoles } from "@constants/iam"
+import { PROJECT_AUTOMATION_MONTHS } from "@constants/project"
 
 import { IProject } from "@servcy/types"
 import { CustomSearchSelect, CustomSelect, DoubleCircleIcon, Loader, StateGroupIcon, ToggleSwitch } from "@servcy/ui"
@@ -55,7 +56,7 @@ export const AutoCloseAutomation: React.FC<Props> = observer((props) => {
         default_state: defaultState,
     }
 
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const isAdmin = currentProjectRole === ERoles.ADMIN
 
     return (
         <>

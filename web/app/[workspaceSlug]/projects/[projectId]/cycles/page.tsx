@@ -19,7 +19,7 @@ import useLocalStorage from "@hooks/use-local-storage"
 
 import { CYCLE_TAB_LIST, CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
 import { CYCLE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 
@@ -47,7 +47,7 @@ const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "cycles", isLightMode)
     const totalCycles = currentProjectCycleIds?.length ?? 0
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
     const project = projectId ? getProjectById(projectId?.toString()) : undefined
     const pageTitle = project?.name ? `${project?.name} - Cycles` : undefined
 

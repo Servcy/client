@@ -12,7 +12,7 @@ import { useApplication, useEventTracker, useProject, useUser } from "@hooks/sto
 import useLocalStorage from "@hooks/use-local-storage"
 
 import { CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 
@@ -31,8 +31,7 @@ export const CyclesHeader: FC = observer(() => {
     } = useUser()
     const { currentProjectDetails } = useProject()
 
-    const canUserCreateCycle =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateCycle = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
 
     const { workspaceSlug } = useParams() as {
         workspaceSlug: string

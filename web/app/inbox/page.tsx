@@ -32,7 +32,7 @@ import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 import type { InboxItem, PaginationDetails } from "@servcy/types"
 import { Button as ServcyButton, Spinner } from "@servcy/ui"
 
-const inbox_service = new InboxService()
+const inboxService = new InboxService()
 
 const tabItems = [
     {
@@ -77,7 +77,7 @@ export default function Gmail(): JSX.Element {
     const refetchInboxItems = async () => {
         try {
             setLoading(true)
-            const response = await inbox_service.fetchInbox({
+            const response = await inboxService.fetchInbox({
                 filters,
                 search,
                 page,
@@ -94,7 +94,7 @@ export default function Gmail(): JSX.Element {
 
     const archiveItems = async (itemIds: React.Key[]) => {
         try {
-            await inbox_service.archiveItems({
+            await inboxService.archiveItems({
                 item_ids: itemIds,
             })
             if (itemIds.length === inboxItems.length) {
@@ -109,7 +109,7 @@ export default function Gmail(): JSX.Element {
     const readItem = async (itemId: string | undefined) => {
         try {
             if (!itemId) return
-            inbox_service.readItem({
+            inboxService.readItem({
                 item_id: Number.parseInt(itemId),
             })
             setInboxItems((prevState) =>
@@ -127,7 +127,7 @@ export default function Gmail(): JSX.Element {
 
     const deleteItems = async (itemIds: number[]) => {
         try {
-            inbox_service.deleteItems({
+            inboxService.deleteItems({
                 item_ids: itemIds,
             })
             if (itemIds.length === inboxItems.length) {
@@ -142,7 +142,7 @@ export default function Gmail(): JSX.Element {
     useEffect(() => {
         const debouncedFetchInbox = debounce(async () => {
             try {
-                const response = await inbox_service.fetchInbox({
+                const response = await inboxService.fetchInbox({
                     filters,
                     search,
                     page,

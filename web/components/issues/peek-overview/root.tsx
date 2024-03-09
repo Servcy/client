@@ -10,8 +10,8 @@ import { IssueView } from "@components/issues"
 import { useEventTracker, useIssueDetail, useIssues, useUser } from "@hooks/store"
 
 import { ISSUE_ARCHIVED, ISSUE_DELETED, ISSUE_RESTORED, ISSUE_UPDATED } from "@constants/event-tracker"
+import { ERoles } from "@constants/iam"
 import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { TIssue } from "@servcy/types"
 
@@ -339,7 +339,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
 
     const currentProjectRole = currentWorkspaceAllProjectsRole?.[peekIssue?.projectId]
     // Check if issue is editable, based on user role
-    const is_editable = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const is_editable = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
     const isLoading = !issue || loader ? true : false
 
     return (

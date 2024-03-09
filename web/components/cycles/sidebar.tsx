@@ -18,7 +18,7 @@ import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
 
 import { CYCLE_STATUS } from "@constants/cycle"
 import { CYCLE_UPDATED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { CycleService } from "@services/cycle.service"
 
@@ -206,7 +206,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
 
     const daysLeft = findHowManyDaysLeft(cycleDetails.end_date)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

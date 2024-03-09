@@ -26,7 +26,7 @@ import { LeaveProjectModal, PublishProjectModal } from "@components/project"
 import { useApplication, useEventTracker, useProject } from "@hooks/store"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 
@@ -96,9 +96,8 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     // derived values
     const project = getProjectById(projectId)
 
-    const isAdmin = project?.member_role === EUserProjectRoles.ADMIN
-    const isViewerOrGuest =
-        project?.member_role && [EUserProjectRoles.VIEWER, EUserProjectRoles.GUEST].includes(project.member_role)
+    const isAdmin = project?.member_role === ERoles.ADMIN
+    const isViewerOrGuest = project?.member_role && [ERoles.VIEWER, ERoles.GUEST].includes(project.member_role)
 
     const isCollapsed = themeStore.sidebarCollapsed
 

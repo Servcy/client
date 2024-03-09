@@ -1,34 +1,7 @@
-import { Globe2, Lock, LucideIcon } from "lucide-react"
-
 import { SettingIcon } from "@components/icons"
 import { Props } from "@components/icons/types"
 
-export enum EUserProjectRoles {
-    GUEST = 0,
-    VIEWER = 1,
-    MEMBER = 2,
-    ADMIN = 3,
-}
-
-export const ACCESS_CHOICES: {
-    key: 0 | 1
-    label: string
-    description: string
-    icon: LucideIcon
-}[] = [
-    {
-        key: 1,
-        label: "Private",
-        description: "Accessible only by invite",
-        icon: Lock,
-    },
-    {
-        key: 0,
-        label: "Public",
-        description: "Anyone in the workspace can join",
-        icon: Globe2,
-    },
-]
+import { ERoles } from "./iam"
 
 export const GROUP_CHOICES = {
     backlog: "Backlog",
@@ -86,7 +59,7 @@ export const PROJECT_SETTINGS_LINKS: {
     key: string
     label: string
     href: string
-    access: EUserProjectRoles
+    access: ERoles
     highlight: (pathname: string, baseUrl: string) => boolean
     Icon: React.FC<Props>
 }[] = [
@@ -94,7 +67,7 @@ export const PROJECT_SETTINGS_LINKS: {
         key: "general",
         label: "General",
         href: `/settings`,
-        access: EUserProjectRoles.MEMBER,
+        access: ERoles.MEMBER,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings`,
         Icon: SettingIcon,
     },
@@ -102,7 +75,7 @@ export const PROJECT_SETTINGS_LINKS: {
         key: "members",
         label: "Members",
         href: `/settings/members`,
-        access: EUserProjectRoles.MEMBER,
+        access: ERoles.MEMBER,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/members`,
         Icon: SettingIcon,
     },
@@ -110,7 +83,7 @@ export const PROJECT_SETTINGS_LINKS: {
         key: "features",
         label: "Features",
         href: `/settings/features`,
-        access: EUserProjectRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/features`,
         Icon: SettingIcon,
     },
@@ -118,7 +91,7 @@ export const PROJECT_SETTINGS_LINKS: {
         key: "states",
         label: "States",
         href: `/settings/states`,
-        access: EUserProjectRoles.MEMBER,
+        access: ERoles.MEMBER,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/states`,
         Icon: SettingIcon,
     },
@@ -126,7 +99,7 @@ export const PROJECT_SETTINGS_LINKS: {
         key: "labels",
         label: "Labels",
         href: `/settings/labels`,
-        access: EUserProjectRoles.MEMBER,
+        access: ERoles.MEMBER,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/labels`,
         Icon: SettingIcon,
     },
@@ -134,7 +107,7 @@ export const PROJECT_SETTINGS_LINKS: {
         key: "integrations",
         label: "Integrations",
         href: `/settings/integrations`,
-        access: EUserProjectRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/integrations`,
         Icon: SettingIcon,
     },
@@ -142,7 +115,7 @@ export const PROJECT_SETTINGS_LINKS: {
         key: "estimates",
         label: "Estimates",
         href: `/settings/estimates`,
-        access: EUserProjectRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/estimates`,
         Icon: SettingIcon,
     },
@@ -150,7 +123,7 @@ export const PROJECT_SETTINGS_LINKS: {
         key: "automations",
         label: "Automations",
         href: `/settings/automations`,
-        access: EUserProjectRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/automations`,
         Icon: SettingIcon,
     },

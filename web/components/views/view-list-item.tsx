@@ -11,7 +11,7 @@ import { CreateUpdateProjectViewModal, DeleteProjectViewModal } from "@component
 
 import { useProjectView, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { calculateTotalFilters } from "@helpers/filter.helper"
 import { copyUrlToClipboard } from "@helpers/string.helper"
@@ -58,7 +58,7 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
 
     const totalFilters = calculateTotalFilters(view.filters ?? {})
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

@@ -5,8 +5,8 @@ import { CalendarHeader, CalendarWeekDays, CalendarWeekHeader } from "@component
 import { useIssues, useUser } from "@hooks/store"
 import { useCalendarView } from "@hooks/store/use-calendar-view"
 
+import { ERoles } from "@constants/iam"
 import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssuesFilter } from "@store/issue/module"
@@ -57,7 +57,7 @@ export const CalendarChart: React.FC<Props> = observer((props) => {
     } = useUser()
 
     const { enableIssueCreation } = viewFlags || {}
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const calendarPayload = issueCalendarView.calendarPayload
 

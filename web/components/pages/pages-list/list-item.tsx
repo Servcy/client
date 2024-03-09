@@ -22,7 +22,7 @@ import { CreateUpdatePageModal, DeletePageModal } from "@components/pages"
 import { useMember, usePage, useUser } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-specific-pages"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { renderFormattedDate, renderFormattedTime } from "@helpers/date-time.helper"
 import { copyUrlToClipboard } from "@helpers/string.helper"
@@ -137,12 +137,11 @@ export const PagesListItem: FC<IPagesListItem> = observer(({ pageId, projectId }
     const isCurrentUserOwner = owned_by === currentUser?.id
 
     const userCanEdit =
-        isCurrentUserOwner ||
-        (currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole))
+        isCurrentUserOwner || (currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole))
     const userCanChangeAccess = isCurrentUserOwner
-    const userCanArchive = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN
-    const userCanDelete = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const userCanArchive = isCurrentUserOwner || currentProjectRole === ERoles.ADMIN
+    const userCanDelete = isCurrentUserOwner || currentProjectRole === ERoles.ADMIN
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

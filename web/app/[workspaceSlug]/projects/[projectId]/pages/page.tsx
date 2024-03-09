@@ -21,8 +21,8 @@ import { useProjectPages } from "@hooks/store/use-project-page"
 import useLocalStorage from "@hooks/use-local-storage"
 
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { ERoles } from "@constants/iam"
 import { PAGE_TABS_LIST } from "@constants/page"
-import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
 
@@ -109,7 +109,7 @@ const ProjectPagesPage: NextPageWithWrapper = observer(() => {
     // derived values
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "pages", isLightMode)
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
     const project = projectId ? getProjectById(projectId.toString()) : undefined
     const pageTitle = project?.name ? `${project?.name} - Pages` : undefined
 

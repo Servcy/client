@@ -13,7 +13,7 @@ import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
 
 import { CYCLE_STATUS } from "@constants/cycle"
 import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper"
 import { copyTextToClipboard } from "@helpers/string.helper"
@@ -122,7 +122,7 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
     const endDate = new Date(cycleDetails.end_date ?? "")
     const startDate = new Date(cycleDetails.start_date ?? "")
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserWorkspaceRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const cycleTotalIssues =
         cycleDetails.backlog_issues +

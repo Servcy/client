@@ -8,7 +8,8 @@ import { SelectMonthModal } from "@components/automation"
 
 import { useProject, useUser } from "@hooks/store"
 
-import { EUserProjectRoles, PROJECT_AUTOMATION_MONTHS } from "@constants/project"
+import { ERoles } from "@constants/iam"
+import { PROJECT_AUTOMATION_MONTHS } from "@constants/project"
 
 import { IProject } from "@servcy/types"
 // component
@@ -30,7 +31,7 @@ export const AutoArchiveAutomation: React.FC<Props> = observer((props) => {
     } = useUser()
     const { currentProjectDetails } = useProject()
 
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const isAdmin = currentProjectRole === ERoles.ADMIN
 
     return (
         <>

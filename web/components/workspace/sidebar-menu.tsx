@@ -12,7 +12,7 @@ import { useApplication, useEventTracker, useUser } from "@hooks/store"
 
 import { SIDEBAR_MENU_ITEMS } from "@constants/dashboard"
 import { SIDEBAR_CLICKED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 // helper
 import { cn } from "@helpers/common.helper"
@@ -29,7 +29,7 @@ export const WorkspaceSidebarMenu = observer(() => {
     const pathname = usePathname()
     const { workspaceSlug } = useParams()
     // computed
-    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST
+    const workspaceMemberInfo = currentWorkspaceRole || ERoles.GUEST
 
     const handleLinkClick = (itemKey: string) => {
         if (window.innerWidth < 768) {

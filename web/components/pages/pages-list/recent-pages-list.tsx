@@ -10,7 +10,7 @@ import { useApplication, useUser } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-specific-pages"
 
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
 
@@ -33,7 +33,7 @@ export const RecentPagesList: FC = observer(() => {
     // FIXME: replace any with proper type
     const isEmpty = recentProjectPages && Object.values(recentProjectPages).every((value: any) => value.length === 0)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     if (!recentProjectPages) {
         return (

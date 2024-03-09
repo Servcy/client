@@ -7,7 +7,7 @@ import { Controller, useFieldArray, useForm } from "react-hook-form"
 
 import { useUser } from "@hooks/store"
 
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+import { ERoles, ROLES } from "@constants/iam"
 
 import { IWorkspaceBulkInviteFormData } from "@servcy/types"
 import { Button, CustomSelect, Input } from "@servcy/ui"
@@ -20,7 +20,7 @@ type Props = {
 
 type EmailRole = {
     email: string
-    role: EUserWorkspaceRoles
+    role: ERoles
 }
 
 type FormValues = {
@@ -172,14 +172,14 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
                                                                     value={value}
                                                                     label={
                                                                         <span className="text-xs sm:text-sm">
-                                                                            {ROLE[value]}
+                                                                            {ROLES[value]}
                                                                         </span>
                                                                     }
                                                                     onChange={onChange}
                                                                     optionsClassName="w-full"
                                                                     input
                                                                 >
-                                                                    {Object.entries(ROLE).map(([key, value]) => {
+                                                                    {Object.entries(ROLES).map(([key, value]) => {
                                                                         if (
                                                                             currentWorkspaceRole &&
                                                                             currentWorkspaceRole >= parseInt(key)

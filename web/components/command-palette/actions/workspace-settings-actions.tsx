@@ -5,7 +5,7 @@ import { Command } from "cmdk"
 
 import { useUser } from "@hooks/store"
 
-import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
+import { ERoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
 
 type Props = {
     closePalette: () => void
@@ -21,7 +21,7 @@ export const CommandPaletteWorkspaceSettingsActions: React.FC<Props> = (props) =
         membership: { currentWorkspaceRole },
     } = useUser()
     // derived values
-    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST
+    const workspaceMemberInfo = currentWorkspaceRole || ERoles.GUEST
 
     const redirect = (path: string) => {
         closePalette()

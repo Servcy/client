@@ -7,8 +7,8 @@ import { AppliedFiltersList, SaveFilterView } from "@components/issues"
 import { useLabel, useProjectState, useUser } from "@hooks/store"
 import { useIssues } from "@hooks/store/use-issues"
 
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { IIssueFilterOptions } from "@servcy/types"
 
@@ -27,7 +27,7 @@ export const ProjectAppliedFiltersRoot: React.FC = observer(() => {
     } = useUser()
     const { projectStates } = useProjectState()
     // derived values
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
     const userFilters = issueFilters?.filters
     // filters whose value not null or empty array
     const appliedFilters: IIssueFilterOptions = {}

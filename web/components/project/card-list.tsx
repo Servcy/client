@@ -8,7 +8,7 @@ import { ProjectsLoader } from "@components/ui"
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 export const ProjectCardList = observer(() => {
     // theme
@@ -25,7 +25,7 @@ export const ProjectCardList = observer(() => {
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("onboarding", "projects", isLightMode)
 
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     if (!workspaceProjectIds) return <ProjectsLoader />
 

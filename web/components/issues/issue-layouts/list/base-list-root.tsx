@@ -4,8 +4,8 @@ import { observer } from "mobx-react-lite"
 
 import { useIssues, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { TCreateModalStoreTypes } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { IArchivedIssues, IArchivedIssuesFilter } from "@store/issue/archived"
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
@@ -72,7 +72,7 @@ export const BaseListRoot = observer((props: IBaseListRoot) => {
 
     const { issueMap } = useIssues()
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const issueIds = issues?.groupedIssueIds || []
 

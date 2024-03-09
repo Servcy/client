@@ -5,7 +5,7 @@ import ProjectEmptyStateImage from "public/empty-state/dashboard/project.svg"
 
 import { useApplication, useEventTracker, useUser } from "@hooks/store"
 
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { Button } from "@servcy/ui"
 
@@ -19,7 +19,7 @@ export const DashboardProjectEmptyState = observer(() => {
         membership: { currentWorkspaceRole },
     } = useUser()
     // derived values
-    const canCreateProject = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const canCreateProject = currentWorkspaceRole === ERoles.ADMIN
 
     return (
         <div className="h-full flex flex-col justify-center lg:w-3/5 mx-auto space-y-4">

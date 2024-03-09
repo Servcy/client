@@ -9,8 +9,8 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
+import { ERoles } from "@constants/iam"
 import { MODULE_VIEW_LAYOUTS } from "@constants/module"
-import { EUserProjectRoles } from "@constants/project"
 
 // helper
 import { renderEmoji } from "@helpers/emoji.helper"
@@ -30,8 +30,7 @@ export const ModulesListHeader: React.FC = observer(() => {
 
     const { storedValue: modulesView, setValue: setModulesView } = useLocalStorage("modules_view", "grid")
 
-    const canUserCreateModule =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateModule = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
     return (
         <div>
             <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">

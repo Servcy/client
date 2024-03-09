@@ -6,7 +6,7 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { Breadcrumbs, Button } from "@servcy/ui"
 
@@ -19,7 +19,7 @@ export const ProjectsHeader = observer(() => {
     } = useUser()
     const { workspaceProjectIds, searchQuery, setSearchQuery } = useProject()
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">

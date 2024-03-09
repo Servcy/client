@@ -16,7 +16,7 @@ import IntegrationService from "@services/integration.service"
 import type { InboxItem, PaginationDetails } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
 
-const integration_service = new IntegrationService()
+const integrationService = new IntegrationService()
 
 const InboxItems = ({
     setPage,
@@ -55,7 +55,7 @@ const InboxItems = ({
     }
     const { darkAlgorithm } = theme
     const disableNotificationTypeHandler = (event: string, user_integration_id: number) => {
-        integration_service
+        integrationService
             .disableNotificationType({ event, user_integration_id })
             .then(() => {
                 toast.success("Notification type disabled successfully")

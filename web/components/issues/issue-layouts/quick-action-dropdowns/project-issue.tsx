@@ -11,8 +11,8 @@ import { ArchiveIssueModal, CreateUpdateIssueModal, DeleteIssueModal } from "@co
 
 import { useEventTracker, useIssues, useProjectState, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 import { STATE_GROUPS } from "@constants/state"
 
 import { copyUrlToClipboard } from "@helpers/string.helper"
@@ -51,7 +51,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
     const activeLayout = `${issuesFilter.issueFilters?.displayFilters?.layout} layout`
     const stateDetails = getStateById(issue.state_id)
     // auth
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER && !readOnly
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER && !readOnly
     const isArchivingAllowed = handleArchive && isEditingAllowed
     const isInArchivableGroup =
         !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group)

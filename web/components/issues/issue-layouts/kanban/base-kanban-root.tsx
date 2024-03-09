@@ -12,8 +12,8 @@ import { useEventTracker, useUser } from "@hooks/store"
 import { useIssues } from "@hooks/store/use-issues"
 
 import { ISSUE_DELETED } from "@constants/event-tracker"
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, TCreateModalStoreTypes } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
 import { IDraftIssues, IDraftIssuesFilter } from "@store/issue/draft"
@@ -107,7 +107,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
     const [dragState, setDragState] = useState<KanbanDragState>({})
     const [deleteIssueModal, setDeleteIssueModal] = useState(false)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const canEditProperties = useCallback(
         (projectId: string | undefined) => {

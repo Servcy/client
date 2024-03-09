@@ -19,7 +19,7 @@ import { PageHead } from "@components/core"
 import { useEventTracker, useUser } from "@hooks/store"
 
 import { MEMBER_ACCEPTED } from "@constants/event-tracker"
-import { ROLE } from "@constants/workspace"
+import { ROLES } from "@constants/iam"
 
 import { UserService } from "@services/user.service"
 import { WorkspaceService } from "@services/workspace.service"
@@ -174,7 +174,7 @@ const UserInvitationsPage: NextPageWithWrapper = observer(() => {
                                                             {truncateText(invitation.workspace.name, 30)}
                                                         </div>
                                                         <p className="text-xs text-custom-text-200">
-                                                            {ROLE[invitation.role]}
+                                                            {ROLES[invitation.role]}
                                                         </p>
                                                     </div>
                                                     <span

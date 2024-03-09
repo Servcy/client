@@ -12,8 +12,7 @@ import { ConfirmProjectMemberRemove } from "@components/project"
 import { useEventTracker, useMember, useProject, useUser } from "@hooks/store"
 
 import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
-import { EUserProjectRoles } from "@constants/project"
-import { ROLE } from "@constants/workspace"
+import { ERoles, ROLES } from "@constants/iam"
 
 import { CustomSelect, Tooltip } from "@servcy/ui"
 
@@ -40,7 +39,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
     const { captureEvent } = useEventTracker()
 
     // derived values
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const isAdmin = currentProjectRole === ERoles.ADMIN
     const userDetails = getProjectMemberDetails(userId)
 
     const handleRemove = async () => {
@@ -120,7 +119,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                                         userDetails.member.id !== currentUser?.id ? "" : "text-custom-text-400"
                                     }`}
                                 >
-                                    {ROLE[userDetails.role]}
+                                    {ROLES[userDetails.role]}
                                 </span>
                                 {userDetails.member.id !== currentUser?.id && (
                                     <span className="grid place-items-center">
@@ -130,7 +129,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                             </div>
                         }
                         value={userDetails.role}
-                        onChange={(value: EUserProjectRoles) => {
+                        onChange={(value: ERoles) => {
                             if (!workspaceSlug || !projectId) return
 
                             updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
@@ -151,12 +150,12 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                         }
                         placement="bottom-end"
                     >
-                        {Object.keys(ROLE).map((key) => {
+                        {Object.keys(ROLES).map((key) => {
                             if (currentProjectRole && !isAdmin && currentProjectRole < parseInt(key)) return null
 
                             return (
                                 <CustomSelect.Option key={key} value={parseInt(key, 10)}>
-                                    <>{ROLE[parseInt(key) as keyof typeof ROLE]}</>
+                                    <>{ROLES[parseInt(key) as keyof typeof ROLES]}</>
                                 </CustomSelect.Option>
                             )
                         })}

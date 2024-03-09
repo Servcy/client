@@ -22,8 +22,8 @@ import {
 } from "@hooks/store"
 import { useIssues } from "@hooks/store/use-issues"
 
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 // helper
 import { renderEmoji } from "@helpers/emoji.helper"
@@ -100,8 +100,7 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
         [workspaceSlug, projectId, updateFilters]
     )
 
-    const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateIssue = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
 
     return (
         <>

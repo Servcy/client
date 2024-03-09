@@ -5,7 +5,8 @@ import React from "react"
 
 import { useUser } from "@hooks/store"
 
-import { EUserWorkspaceRoles, WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
+import { WORKSPACE_SETTINGS_LINKS } from "@constants/workspace"
 
 export const WorkspaceSettingsSidebar = () => {
     const pathname = usePathname()
@@ -16,7 +17,7 @@ export const WorkspaceSettingsSidebar = () => {
         membership: { currentWorkspaceRole },
     } = useUser()
 
-    const workspaceMemberInfo = currentWorkspaceRole || EUserWorkspaceRoles.GUEST
+    const workspaceMemberInfo = currentWorkspaceRole || ERoles.GUEST
 
     return (
         <div className="flex w-80 flex-col gap-6 px-5">

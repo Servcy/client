@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite"
 
 import { useCycle, useMember, useModule, useProject } from "@hooks/store"
 
-import { ACCESS_CHOICES } from "@constants/project"
+import { ACCESS_CHOICES } from "@constants/iam"
 
 import { renderFormattedDate } from "@helpers/date-time.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
@@ -99,9 +99,7 @@ export const CustomAnalyticsSidebarHeader = observer(() => {
                         <div className="mt-4 space-y-4">
                             <div className="flex items-center gap-2 text-xs">
                                 <h6 className="text-custom-text-200">Access</h6>
-                                <span>
-                                    {ACCESS_CHOICES.find((n) => n.key === projectDetails?.access)?.label ?? ""}
-                                </span>
+                                <span>{ACCESS_CHOICES.find((n) => n.key === projectDetails?.access)?.label ?? ""}</span>
                             </div>
                         </div>
                     </div>

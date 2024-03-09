@@ -9,7 +9,7 @@ import { GanttQuickAddIssueForm, IssueGanttBlock } from "@components/issues"
 
 import { useIssues, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
@@ -58,7 +58,7 @@ export const BaseGanttRoot: React.FC<IBaseGanttRoot> = observer((props: IBaseGan
         await issueStore.updateIssue(workspaceSlug.toString(), issue.project_id, issue.id, payload, viewId)
     }
 
-    const isAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

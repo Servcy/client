@@ -10,7 +10,7 @@ import { WidgetLoader, WidgetProps } from "@components/dashboard/widgets"
 import { useApplication, useDashboard, useEventTracker, useProject, useUser } from "@hooks/store"
 
 import { PROJECT_BACKGROUND_COLORS } from "@constants/dashboard"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 
@@ -86,7 +86,7 @@ export const RecentProjectsWidget: React.FC<WidgetProps> = observer((props) => {
     const { fetchWidgetStats, getWidgetStats } = useDashboard()
     // derived values
     const widgetStats = getWidgetStats<TRecentProjectsWidgetResponse>(workspaceSlug, dashboardId, WIDGET_KEY)
-    const canCreateProject = currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const canCreateProject = currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     useEffect(() => {
         fetchWidgetStats(workspaceSlug, dashboardId, {

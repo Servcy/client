@@ -28,7 +28,7 @@ import { oauthUrlGenerators } from "@helpers/integration.helper"
 import type { Integration } from "@servcy/types"
 import { Button, Spinner } from "@servcy/ui"
 
-const integration_service = new IntegrationService()
+const integrationService = new IntegrationService()
 
 export default function Integrations(): JSX.Element {
     const [integrations, setIntegrations] = useState<Integration[]>([])
@@ -42,7 +42,7 @@ export default function Integrations(): JSX.Element {
     useEffect(() => {
         setLoading(true)
         const queryParams: Record<string, string> = getQueryParams(window.location.search)
-        integration_service
+        integrationService
             .fetchIntegrations()
             .then((results) => {
                 setIntegrations(results)

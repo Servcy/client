@@ -7,21 +7,9 @@ import JSONLogo from "public/services/json.svg"
 import { SettingIcon } from "@components/icons"
 import { Props } from "@components/icons/types"
 
+import { ERoles } from "@constants/iam"
+
 import { TStaticViewTypes } from "@servcy/types"
-
-export enum EUserWorkspaceRoles {
-    GUEST = 0,
-    MEMBER = 1,
-    ADMIN = 2,
-    OWNER = 3,
-}
-
-export const ROLE = {
-    0: "Guest",
-    1: "Member",
-    2: "Admin",
-    3: "Owner",
-}
 
 export const IMPORTERS_LIST = [
     {
@@ -92,7 +80,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
     key: string
     label: string
     href: string
-    access: EUserWorkspaceRoles
+    access: ERoles
     highlight: (pathname: string, baseUrl: string) => boolean
     Icon: React.FC<Props>
 }[] = [
@@ -100,7 +88,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
         key: "general",
         label: "General",
         href: `/settings`,
-        access: EUserWorkspaceRoles.GUEST,
+        access: ERoles.GUEST,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings`,
         Icon: SettingIcon,
     },
@@ -108,7 +96,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
         key: "members",
         label: "Members",
         href: `/settings/members`,
-        access: EUserWorkspaceRoles.GUEST,
+        access: ERoles.GUEST,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/members`,
         Icon: SettingIcon,
     },
@@ -116,7 +104,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
         key: "billing-and-plans",
         label: "Billing and plans",
         href: `/settings/billing`,
-        access: EUserWorkspaceRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/billing`,
         Icon: SettingIcon,
     },
@@ -124,7 +112,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
         key: "integrations",
         label: "Integrations",
         href: `/settings/integrations`,
-        access: EUserWorkspaceRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/integrations`,
         Icon: SettingIcon,
     },
@@ -132,7 +120,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
         key: "import",
         label: "Imports",
         href: `/settings/imports`,
-        access: EUserWorkspaceRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/imports`,
         Icon: SettingIcon,
     },
@@ -140,7 +128,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
         key: "export",
         label: "Exports",
         href: `/settings/exports`,
-        access: EUserWorkspaceRoles.MEMBER,
+        access: ERoles.MEMBER,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/exports`,
         Icon: SettingIcon,
     },
@@ -148,7 +136,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
         key: "webhooks",
         label: "Webhooks",
         href: `/settings/webhooks`,
-        access: EUserWorkspaceRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/webhooks`,
         Icon: SettingIcon,
     },
@@ -156,7 +144,7 @@ export const WORKSPACE_SETTINGS_LINKS: {
         key: "api-tokens",
         label: "API tokens",
         href: `/settings/api-tokens`,
-        access: EUserWorkspaceRoles.ADMIN,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/api-tokens`,
         Icon: SettingIcon,
     },

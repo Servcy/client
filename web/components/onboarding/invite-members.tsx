@@ -28,7 +28,7 @@ import { useEventTracker } from "@hooks/store"
 import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
 
 import { MEMBER_INVITED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles, ROLE } from "@constants/workspace"
+import { ERoles, ROLES } from "@constants/iam"
 
 import { WorkspaceService } from "@services/workspace.service"
 
@@ -46,7 +46,7 @@ type Props = {
 
 type EmailRole = {
     email: string
-    role: EUserWorkspaceRoles
+    role: ERoles
     role_active: boolean
 }
 
@@ -149,7 +149,7 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                                 name={`emails.${index}.email`}
                                 type="text"
                                 value={value}
-                                onChange={(event) => {
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                                     emailOnChange(event)
                                     onChange(event)
                                 }}
@@ -190,7 +190,7 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                                                 : "text-onboarding-text-100"
                                         } sm:text-sm`}
                                     >
-                                        {ROLE[value]}
+                                        {ROLES[value]}
                                     </span>
 
                                     <ChevronDown
@@ -217,7 +217,7 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
                                         className="fixed z-10 mt-1 max-h-48 w-36 overflow-y-auto rounded-md border border-onboarding-border-100 bg-onboarding-background-200 text-xs shadow-lg focus:outline-none"
                                     >
                                         <div className="space-y-1 p-2">
-                                            {Object.entries(ROLE).map(([key, value]) => (
+                                            {Object.entries(ROLES).map(([key, value]) => (
                                                 <Listbox.Option
                                                     key={key}
                                                     value={parseInt(key)}

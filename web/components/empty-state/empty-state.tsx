@@ -76,12 +76,7 @@ export const EmptyState: React.FC<Props> = ({
             >
                 <div className="flex flex-col gap-1.5 flex-shrink">{emptyStateHeader}</div>
 
-                <Image
-                    src={image}
-                    alt={primaryButton?.text || "button image"}
-                    width={384}
-                    height={250}
-                />
+                <Image src={image} alt={primaryButton?.text || "button image"} width={384} height={250} />
 
                 <div className="relative flex items-center justify-center gap-2 flex-shrink-0 w-full">
                     {primaryButton && (

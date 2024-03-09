@@ -12,7 +12,7 @@ import { CreateProjectModal, ProjectSidebarListItem } from "@components/project"
 
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
 
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { cn } from "@helpers/common.helper"
 import { orderJoinedProjects } from "@helpers/project.helper"
@@ -45,7 +45,7 @@ export const ProjectSidebarList: FC = observer(() => {
     const { workspaceSlug } = useParams()
     // toast
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     const handleCopyText = (projectId: string) => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {

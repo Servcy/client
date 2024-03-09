@@ -8,7 +8,7 @@ import toast from "react-hot-toast"
 
 import { useEventTracker, useProject, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { IProject } from "@servcy/types"
 import { DiceIcon, ToggleSwitch } from "@servcy/ui"
@@ -51,7 +51,7 @@ export const ProjectFeaturesList: FC<Props> = observer(() => {
         membership: { currentProjectRole },
     } = useUser()
     const { currentProjectDetails, updateProject } = useProject()
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const isAdmin = currentProjectRole === ERoles.ADMIN
 
     const handleSubmit = async (formData: Partial<IProject>) => {
         if (!workspaceSlug || !projectId || !currentProjectDetails) return

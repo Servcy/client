@@ -9,7 +9,7 @@ import { CycleGanttSidebar, GanttChartRoot, IBlockUpdateData } from "@components
 
 import { useCycle, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { ICycle } from "@servcy/types"
 
@@ -52,8 +52,7 @@ export const CyclesListGanttChartView: FC<Props> = observer((props) => {
         return structuredBlocks
     }
 
-    const isAllowed =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const isAllowed = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
 
     return (
         <div className="h-full w-full overflow-y-auto">

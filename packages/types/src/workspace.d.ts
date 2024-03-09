@@ -1,4 +1,4 @@
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import type { IProjectMember, IUser, IUserLite, IWorkspaceViewProps } from "@servcy/types"
 
@@ -30,7 +30,7 @@ export interface IWorkspaceMemberInvitation {
     id: string
     message: string
     responded_at: Date
-    role: EUserWorkspaceRoles
+    role: ERoles
     token: string
     workspace: {
         id: string
@@ -41,7 +41,7 @@ export interface IWorkspaceMemberInvitation {
 }
 
 export interface IWorkspaceBulkInviteFormData {
-    emails: { email: string; role: EUserWorkspaceRoles }[]
+    emails: { email: string; role: ERoles }[]
 }
 
 export type Properties = {
@@ -63,7 +63,7 @@ export type Properties = {
 export interface IWorkspaceMember {
     id: string
     member: IUserLite
-    role: EUserWorkspaceRoles
+    role: ERoles
 }
 
 export interface IWorkspaceMemberMe {
@@ -73,7 +73,7 @@ export interface IWorkspaceMemberMe {
     default_props: IWorkspaceViewProps
     id: string
     member: string
-    role: EUserWorkspaceRoles
+    role: ERoles
     updated_at: Date
     updated_by: string
     view_props: IWorkspaceViewProps

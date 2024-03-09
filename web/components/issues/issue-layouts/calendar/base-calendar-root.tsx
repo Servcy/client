@@ -10,7 +10,7 @@ import { CalendarChart } from "@components/issues"
 
 import { useIssues, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
@@ -47,7 +47,7 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
         membership: { currentProjectRole },
     } = useUser()
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const displayFilters = issuesFilterStore.issueFilters?.displayFilters
 

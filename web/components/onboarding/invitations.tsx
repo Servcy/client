@@ -7,7 +7,7 @@ import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
 
 import { MEMBER_ACCEPTED } from "@constants/event-tracker"
 import { USER_WORKSPACE_INVITATIONS, USER_WORKSPACES } from "@constants/fetch-keys"
-import { ROLE } from "@constants/workspace"
+import { ROLES } from "@constants/iam"
 
 import { WorkspaceService } from "@services/workspace.service"
 
@@ -135,7 +135,7 @@ export const Invitations: React.FC<Props> = (props) => {
                                         <div className="text-sm font-medium">
                                             {truncateText(invitedWorkspace?.name ?? "", 30) ?? "Workspace Name"}
                                         </div>
-                                        <p className="text-xs text-custom-text-200">{ROLE[invitation.role]}</p>
+                                        <p className="text-xs text-custom-text-200">{ROLES[invitation.role]}</p>
                                     </div>
                                     <span
                                         className={`flex-shrink-0 ${isSelected ? "text-custom-primary-100" : "text-custom-text-200"}`}

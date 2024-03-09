@@ -12,8 +12,8 @@ import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules"
 import { useEventTracker, useMember, useModule, useUser } from "@hooks/store"
 
 import { MODULE_FAVORITED, MODULE_UNFAVORITED } from "@constants/event-tracker"
+import { ERoles } from "@constants/iam"
 import { MODULE_STATUS } from "@constants/module"
-import { EUserProjectRoles } from "@constants/project"
 
 import { renderFormattedDate } from "@helpers/date-time.helper"
 import { copyUrlToClipboard } from "@helpers/string.helper"
@@ -43,7 +43,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
     const { setTrackElement, captureEvent } = useEventTracker()
     // derived values
     const moduleDetails = getModuleById(moduleId)
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const handleAddToFavorites = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()

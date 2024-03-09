@@ -12,7 +12,7 @@ import { DeleteWorkspaceModal } from "@components/workspace"
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
 
 import { WORKSPACE_UPDATED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { FileService } from "@services/document.service"
 
@@ -124,7 +124,7 @@ export const WorkspaceDetails: FC = observer(() => {
         if (currentWorkspace) reset({ ...currentWorkspace })
     }, [currentWorkspace, reset])
 
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const isAdmin = currentWorkspaceRole === ERoles.ADMIN
 
     if (!currentWorkspace)
         return (

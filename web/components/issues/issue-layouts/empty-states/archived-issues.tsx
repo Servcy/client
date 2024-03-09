@@ -9,8 +9,8 @@ import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { useIssues, useUser } from "@hooks/store"
 
 import { EMPTY_FILTER_STATE_DETAILS, EMPTY_ISSUE_STATE_DETAILS } from "@constants/empty-state"
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { IIssueFilterOptions } from "@servcy/types"
 
@@ -65,7 +65,7 @@ export const ProjectArchivedEmptyState: React.FC = observer(() => {
         })
     }
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const emptyStateProps: EmptyStateProps =
         issueFilterCount > 0

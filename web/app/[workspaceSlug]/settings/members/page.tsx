@@ -15,7 +15,7 @@ import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/
 import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
 
 import { MEMBER_INVITED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingLayout } from "@wrappers/settings"
@@ -76,8 +76,7 @@ const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {
     }
 
     // derived values
-    const hasAddMemberPermission =
-        currentWorkspaceRole && [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER].includes(currentWorkspaceRole)
+    const hasAddMemberPermission = currentWorkspaceRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentWorkspaceRole)
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Members` : undefined
 
     return (

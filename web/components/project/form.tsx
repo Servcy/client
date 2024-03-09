@@ -10,7 +10,7 @@ import EmojiIconPicker from "@components/emoji-icon-picker"
 import { useEventTracker, useProject } from "@hooks/store"
 
 import { PROJECT_UPDATED } from "@constants/event-tracker"
-import { ACCESS_CHOICES } from "@constants/project"
+import { ACCESS_CHOICES } from "@constants/iam"
 
 import { ProjectService } from "@services/project"
 

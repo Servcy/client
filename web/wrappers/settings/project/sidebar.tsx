@@ -5,7 +5,8 @@ import React from "react"
 
 import { useUser } from "@hooks/store"
 
-import { EUserProjectRoles, PROJECT_SETTINGS_LINKS } from "@constants/project"
+import { ERoles } from "@constants/iam"
+import { PROJECT_SETTINGS_LINKS } from "@constants/project"
 
 import { Loader } from "@servcy/ui"
 
@@ -18,7 +19,7 @@ export const ProjectSettingsSidebar = () => {
         membership: { currentProjectRole },
     } = useUser()
 
-    const projectMemberInfo = currentProjectRole || EUserProjectRoles.GUEST
+    const projectMemberInfo = currentProjectRole || ERoles.GUEST
 
     if (!currentProjectRole) {
         return (

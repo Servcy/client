@@ -12,7 +12,7 @@ import { Props } from "@components/icons/types"
 import { TDurationFilterOptions, TIssuesListTypes, TStateGroups } from "@servcy/types"
 import { ContrastIcon } from "@servcy/ui"
 
-import { EUserWorkspaceRoles } from "./workspace"
+import { ERoles } from "./iam"
 
 // gradients for issues by priority widget graph bars
 export const PRIORITY_GRAPH_GRADIENTS = [
@@ -238,7 +238,7 @@ export const SIDEBAR_MENU_ITEMS: {
     key: string
     label: string
     href: string
-    access: EUserWorkspaceRoles
+    access: ERoles
     highlight: (pathname: string, baseUrl: string) => boolean
     Icon: React.FC<Props>
 }[] = [
@@ -246,7 +246,7 @@ export const SIDEBAR_MENU_ITEMS: {
         key: "dashboard",
         label: "Dashboard",
         href: ``,
-        access: EUserWorkspaceRoles.GUEST,
+        access: ERoles.GUEST,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}`,
         Icon: LayoutGrid,
     },
@@ -254,7 +254,7 @@ export const SIDEBAR_MENU_ITEMS: {
         key: "analytics",
         label: "Analytics",
         href: `/analytics`,
-        access: EUserWorkspaceRoles.MEMBER,
+        access: ERoles.MEMBER,
         highlight: (pathname: string, baseUrl: string) => pathname.includes(`${baseUrl}/analytics`),
         Icon: BarChart2,
     },
@@ -262,7 +262,7 @@ export const SIDEBAR_MENU_ITEMS: {
         key: "projects",
         label: "Projects",
         href: `/projects`,
-        access: EUserWorkspaceRoles.GUEST,
+        access: ERoles.GUEST,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/projects`,
         Icon: Briefcase,
     },
@@ -270,7 +270,7 @@ export const SIDEBAR_MENU_ITEMS: {
         key: "all-issues",
         label: "All Issues",
         href: `/workspace-views/all-issues`,
-        access: EUserWorkspaceRoles.GUEST,
+        access: ERoles.GUEST,
         highlight: (pathname: string, baseUrl: string) => pathname.includes(`${baseUrl}/workspace-views`),
         Icon: CheckCircle,
     },
@@ -278,7 +278,7 @@ export const SIDEBAR_MENU_ITEMS: {
         key: "active-cycles",
         label: "Active Cycles",
         href: `/active-cycles`,
-        access: EUserWorkspaceRoles.GUEST,
+        access: ERoles.GUEST,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/active-cycles`,
         Icon: ContrastIcon,
     },

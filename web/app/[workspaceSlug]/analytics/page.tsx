@@ -17,7 +17,7 @@ import { useApplication, useEventTracker, useProject, useUser, useWorkspace } fr
 
 import { ANALYTICS_TABS } from "@constants/analytics"
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 
@@ -43,7 +43,7 @@ const AnalyticsPage: NextPageWithWrapper = observer(() => {
     // derived values
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "analytics", isLightMode)
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Analytics` : undefined
 
     return (

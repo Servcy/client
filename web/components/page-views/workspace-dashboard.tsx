@@ -13,7 +13,7 @@ import { useApplication, useDashboard, useEventTracker, useProject, useUser } fr
 
 import { WORKSPACE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { PRODUCT_TOUR_COMPLETED } from "@constants/event-tracker"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { Spinner } from "@servcy/ui"
 
@@ -57,7 +57,7 @@ export const WorkspaceDashboardView = observer(() => {
         fetchHomeDashboardWidgets(workspaceSlug)
     }, [fetchHomeDashboardWidgets, workspaceSlug])
 
-    const isEditingAllowed = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const isEditingAllowed = currentWorkspaceRole === ERoles.ADMIN
 
     return (
         <>

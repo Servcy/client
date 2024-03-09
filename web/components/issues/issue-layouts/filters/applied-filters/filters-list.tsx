@@ -15,7 +15,7 @@ import {
 
 import { useApplication, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
 
@@ -47,8 +47,7 @@ export const AppliedFiltersList: React.FC<Props> = observer((props) => {
 
     if (Object.keys(appliedFilters).length === 0) return null
 
-    const isEditingAllowed =
-        alwaysAllowEditing || (currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER)
+    const isEditingAllowed = alwaysAllowEditing || (currentProjectRole && currentProjectRole >= ERoles.MEMBER)
 
     return (
         <div className="flex flex-wrap items-stretch gap-2 bg-custom-background-100">

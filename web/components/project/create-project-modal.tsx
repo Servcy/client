@@ -13,8 +13,8 @@ import EmojiIconPicker from "@components/emoji-icon-picker"
 import { useEventTracker, useProject, useUser } from "@hooks/store"
 
 import { PROJECT_CREATED } from "@constants/event-tracker"
-import { ACCESS_CHOICES, PROJECT_UNSPLASH_COVERS } from "@constants/project"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ACCESS_CHOICES, ERoles } from "@constants/iam"
+import { PROJECT_UNSPLASH_COVERS } from "@constants/project"
 
 import { getRandomEmoji, renderEmoji } from "@helpers/emoji.helper"
 
@@ -90,7 +90,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
     const currentAccess = ACCESS_CHOICES.find((n) => n.key === watch("access"))
 
     if (currentWorkspaceRole && isOpen)
-        if (currentWorkspaceRole < EUserWorkspaceRoles.MEMBER) return <IsGuestCondition onClose={onClose} />
+        if (currentWorkspaceRole < ERoles.MEMBER) return <IsGuestCondition onClose={onClose} />
 
     const handleClose = () => {
         onClose()

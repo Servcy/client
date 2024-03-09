@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
 
-import { authRoutes, wipRoutes } from "@constants/routes"
-
 import { isJwtTokenValid } from "@helpers/jwt.helper"
 
 export const config = {
@@ -21,15 +19,12 @@ export async function middleware(request: NextRequest) {
     const accessToken = request.cookies.get("accessToken")?.value ?? ""
     const requestedPath = request.nextUrl.pathname
     if (isJwtTokenValid(accessToken)) {
-        if (authRoutes.includes(requestedPath))
+        if (requestedPath === "/login")
             // Redirect to home if user is already logged in
             return NextResponse.redirect(new URL("/", request.nextUrl.origin))
-        else if (wipRoutes.includes(requestedPath))
-            // Redirect to WIP page if user is already logged in
-            return NextResponse.redirect(new URL("/wip", request.nextUrl.origin))
         // If user is already logged in, continue to the requested page
         else return null
     }
-    if (authRoutes.includes(requestedPath)) return null
+    if (requestedPath === "/login") return null
     return NextResponse.redirect(new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin))
 }

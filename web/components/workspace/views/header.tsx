@@ -12,7 +12,8 @@ import { CreateUpdateWorkspaceViewModal } from "@components/workspace"
 import { useEventTracker, useGlobalView, useUser } from "@hooks/store"
 
 import { GLOBAL_VIEW_OPENED } from "@constants/event-tracker"
-import { DEFAULT_GLOBAL_VIEWS_LIST, EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
+import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 const ViewTab = observer((props: { viewId: string }) => {
     const { viewId } = props
@@ -70,7 +71,7 @@ export const GlobalViewsHeader: React.FC = observer(() => {
         }
     }, [globalViewId, currentWorkspaceViews, containerRef])
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     return (
         <>

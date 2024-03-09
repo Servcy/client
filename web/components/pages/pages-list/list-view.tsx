@@ -10,7 +10,7 @@ import { useApplication, useUser } from "@hooks/store"
 import useLocalStorage from "@hooks/use-local-storage"
 
 import { PAGE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { Loader } from "@servcy/ui"
 
@@ -47,7 +47,7 @@ export const PagesListView: FC<IPagesListView> = (props) => {
 
     // here we are only observing the projectPageStore, so that we can re-render the component when the projectPageStore changes
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

@@ -11,7 +11,7 @@ import { useApplication, useEventTracker, useModule, useUser } from "@hooks/stor
 import useLocalStorage from "@hooks/use-local-storage"
 
 import { MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 export const ModulesListView: React.FC = observer(() => {
     const { workspaceSlug, projectId, peekModule } = useParams()
@@ -31,7 +31,7 @@ export const ModulesListView: React.FC = observer(() => {
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "modules", isLightMode)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     if (loader || !projectModuleIds)
         return (

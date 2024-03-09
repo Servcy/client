@@ -6,8 +6,8 @@ import { observer } from "mobx-react-lite"
 
 import { useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { ICycleIssues, ICycleIssuesFilter } from "@store/issue/cycle"
 import { IModuleIssues, IModuleIssuesFilter } from "@store/issue/module"
@@ -55,7 +55,7 @@ export const BaseSpreadsheetRoot = observer((props: IBaseSpreadsheetRoot) => {
     // derived values
     const { enableInlineEditing, enableQuickAdd, enableIssueCreation } = issueStore?.viewFlags || {}
     // user role validation
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const canEditProperties = useCallback(
         (projectId: string | undefined) => {

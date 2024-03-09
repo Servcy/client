@@ -17,9 +17,8 @@ import { useApplication, useEventTracker, useGlobalView, useIssues, useProject, 
 import { useWorkspaceIssueProperties } from "@hooks/use-workspace-issue-properties"
 
 import { ALL_ISSUES_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
-import { EUserWorkspaceRoles } from "@constants/workspace"
 
 import { IIssueDisplayFilterOptions, TIssue } from "@servcy/types"
 
@@ -123,7 +122,7 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
 
             const currentProjectRole = currentWorkspaceAllProjectsRole && currentWorkspaceAllProjectsRole[projectId]
 
-            return !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+            return !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
         },
         [currentWorkspaceAllProjectsRole]
     )
@@ -195,7 +194,7 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
         [canEditProperties, handleIssues]
     )
 
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     if (loader === "init-loader" || !globalViewId || globalViewId !== dataViewId || !issueIds) {
         return <SpreadsheetLayoutLoader />

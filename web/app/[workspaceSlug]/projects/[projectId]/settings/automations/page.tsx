@@ -11,7 +11,7 @@ import { ProjectSettingHeader } from "@components/headers"
 
 import { useProject, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
@@ -36,7 +36,7 @@ const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
     }
 
     // derived values
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const isAdmin = currentProjectRole === ERoles.ADMIN
     const pageTitle = projectDetails?.name ? `${projectDetails?.name} - Automations` : undefined
 
     return (

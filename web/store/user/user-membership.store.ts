@@ -1,8 +1,7 @@
 import { set } from "lodash"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 
-import { EUserProjectRoles } from "@constants/project"
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { ProjectMemberService } from "@services/project"
 import { UserService } from "@services/user.service"
@@ -31,8 +30,8 @@ export interface IUserMembershipStore {
     // computed
     currentProjectMemberInfo: IProjectMember | undefined
     currentWorkspaceMemberInfo: IWorkspaceMemberMe | undefined
-    currentProjectRole: EUserProjectRoles | undefined
-    currentWorkspaceRole: EUserWorkspaceRoles | undefined
+    currentProjectRole: ERoles | undefined
+    currentWorkspaceRole: ERoles | undefined
     currentWorkspaceAllProjectsRole: IUserProjectsRole | undefined
 
     hasPermissionToCurrentWorkspace: boolean | undefined

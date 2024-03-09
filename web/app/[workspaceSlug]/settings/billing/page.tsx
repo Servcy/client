@@ -7,7 +7,7 @@ import { WorkspaceSettingHeader } from "@components/headers"
 
 import { useUser, useWorkspace } from "@hooks/store"
 
-import { EUserWorkspaceRoles } from "@constants/workspace"
+import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingLayout } from "@wrappers/settings"
@@ -22,7 +22,7 @@ const BillingSettingsPage: NextPageWithWrapper = observer(() => {
     } = useUser()
     const { currentWorkspace } = useWorkspace()
     // derived values
-    const isAdmin = currentWorkspaceRole === EUserWorkspaceRoles.ADMIN
+    const isAdmin = currentWorkspaceRole === ERoles.ADMIN
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Billing & Plans` : undefined
 
     if (!isAdmin)

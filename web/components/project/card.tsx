@@ -11,7 +11,7 @@ import { DeleteProjectModal, JoinProjectModal } from "@components/project"
 
 import { useProject } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 import { copyTextToClipboard } from "@helpers/string.helper"
@@ -36,8 +36,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     const { addProjectToFavorites, removeProjectFromFavorites } = useProject()
 
     project.member_role
-    const isOwner = project.member_role === EUserProjectRoles.ADMIN
-    const isMember = project.member_role === EUserProjectRoles.MEMBER
+    const isOwner = project.member_role === ERoles.ADMIN
+    const isMember = project.member_role === ERoles.MEMBER
 
     const handleAddToFavorites = () => {
         if (!workspaceSlug) return

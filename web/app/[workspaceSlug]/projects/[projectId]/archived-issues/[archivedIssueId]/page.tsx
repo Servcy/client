@@ -15,8 +15,8 @@ import { IssueDetailRoot } from "@components/issues"
 
 import { useIssueDetail, useIssues, useProject, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { EIssuesStoreType } from "@constants/issue"
-import { EUserProjectRoles } from "@constants/project"
 
 import { AppWrapper } from "@wrappers/app"
 
@@ -57,7 +57,7 @@ const ArchivedIssueDetailsPage: NextPageWithWrapper = observer(() => {
     const project = issue ? getProjectById(issue?.project_id) : undefined
     const pageTitle = project && issue ? `${project?.identifier}-${issue?.sequence_id} ${issue?.name}` : undefined
     // auth
-    const canRestoreIssue = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const canRestoreIssue = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     if (!issue) return <></>
 

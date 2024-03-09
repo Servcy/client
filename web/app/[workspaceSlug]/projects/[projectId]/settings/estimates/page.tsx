@@ -8,7 +8,7 @@ import { ProjectSettingHeader } from "@components/headers"
 
 import { useProject, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
@@ -21,7 +21,7 @@ const EstimatesSettingsPage: NextPageWithWrapper = observer(() => {
     } = useUser()
     const { currentProjectDetails } = useProject()
     // derived values
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const isAdmin = currentProjectRole === ERoles.ADMIN
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Estimates` : undefined
 
     return (

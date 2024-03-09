@@ -9,7 +9,7 @@ import { NotAuthorizedView } from "@components/auth-screens"
 
 import { useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { Button, LayersIcon } from "@servcy/ui"
 
@@ -28,7 +28,7 @@ export const ProjectSettingLayout: FC<IProjectSettingLayout> = observer((props) 
         membership: { currentProjectRole },
     } = useUser()
 
-    const restrictViewSettings = currentProjectRole && currentProjectRole <= EUserProjectRoles.VIEWER
+    const restrictViewSettings = currentProjectRole && currentProjectRole <= ERoles.VIEWER
 
     return restrictViewSettings ? (
         <NotAuthorizedView

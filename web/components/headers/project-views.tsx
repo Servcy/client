@@ -8,7 +8,7 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 
 import { useApplication, useProject, useUser } from "@hooks/store"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 
@@ -25,8 +25,7 @@ export const ProjectViewsHeader: React.FC = observer(() => {
     } = useUser()
     const { currentProjectDetails } = useProject()
 
-    const canUserCreateIssue =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const canUserCreateIssue = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
 
     return (
         <>

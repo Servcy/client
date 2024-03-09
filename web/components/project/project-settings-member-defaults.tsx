@@ -12,7 +12,7 @@ import { MemberSelect } from "@components/project"
 import { useProject, useUser } from "@hooks/store"
 
 import { PROJECT_MEMBERS } from "@constants/fetch-keys"
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { IProject, IUser, IUserLite, IWorkspace } from "@servcy/types"
 import { Loader } from "@servcy/ui"
@@ -30,7 +30,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
     } = useUser()
     const { currentProjectDetails, fetchProjectDetails, updateProject } = useProject()
     // derived values
-    const isAdmin = currentProjectRole === EUserProjectRoles.ADMIN
+    const isAdmin = currentProjectRole === ERoles.ADMIN
 
     // form info
     const { reset, control } = useForm<IProject>({ defaultValues })

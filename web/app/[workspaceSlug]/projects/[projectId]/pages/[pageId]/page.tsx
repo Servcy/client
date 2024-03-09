@@ -18,7 +18,7 @@ import { usePage, useUser, useWorkspace } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-specific-pages"
 import useReloadConfirmations from "@hooks/use-reload-confirmation"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { FileService } from "@services/document.service"
 
@@ -231,17 +231,13 @@ const PageDetailsPage: NextPageWithWrapper = observer(() => {
     }
 
     const isPageReadOnly =
-        is_locked ||
-        archived_at ||
-        (currentProjectRole && [EUserProjectRoles.VIEWER, EUserProjectRoles.GUEST].includes(currentProjectRole))
+        is_locked || archived_at || (currentProjectRole && [ERoles.VIEWER, ERoles.GUEST].includes(currentProjectRole))
 
     const isCurrentUserOwner = owned_by === currentUser?.id
 
-    const userCanDuplicate =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
-    const userCanArchive = isCurrentUserOwner || currentProjectRole === EUserProjectRoles.ADMIN
-    const userCanLock =
-        currentProjectRole && [EUserProjectRoles.ADMIN, EUserProjectRoles.MEMBER].includes(currentProjectRole)
+    const userCanDuplicate = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
+    const userCanArchive = isCurrentUserOwner || currentProjectRole === ERoles.ADMIN
+    const userCanLock = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
 
     return pageIdMobx ? (
         <AppWrapper header={<PageDetailsHeader />} withProjectWrapper>

@@ -26,8 +26,8 @@ import { DeleteModuleModal } from "@components/modules"
 import { useEventTracker, useModule, useUser } from "@hooks/store"
 
 import { MODULE_LINK_CREATED, MODULE_LINK_DELETED, MODULE_LINK_UPDATED, MODULE_UPDATED } from "@constants/event-tracker"
+import { ERoles } from "@constants/iam"
 import { MODULE_STATUS } from "@constants/module"
-import { EUserProjectRoles } from "@constants/project"
 
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
 import { copyUrlToClipboard } from "@helpers/string.helper"
@@ -199,7 +199,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
     const issueCount =
         moduleDetails.total_issues === 0 ? "0 Issue" : `${moduleDetails.completed_issues}/${moduleDetails.total_issues}`
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= EUserProjectRoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>
@@ -545,12 +545,10 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                                             handleEditLink={handleEditLink}
                                                             handleDeleteLink={handleDeleteLink}
                                                             userAuth={{
-                                                                isGuest: currentProjectRole === EUserProjectRoles.GUEST,
-                                                                isViewer:
-                                                                    currentProjectRole === EUserProjectRoles.VIEWER,
-                                                                isMember:
-                                                                    currentProjectRole === EUserProjectRoles.MEMBER,
-                                                                isOwner: currentProjectRole === EUserProjectRoles.ADMIN,
+                                                                isGuest: currentProjectRole === ERoles.GUEST,
+                                                                isViewer: currentProjectRole === ERoles.VIEWER,
+                                                                isMember: currentProjectRole === ERoles.MEMBER,
+                                                                isOwner: currentProjectRole === ERoles.ADMIN,
                                                             }}
                                                         />
                                                     </>

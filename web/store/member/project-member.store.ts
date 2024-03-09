@@ -3,7 +3,7 @@ import sortBy from "lodash/sortBy"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
 
-import { EUserProjectRoles } from "@constants/project"
+import { ERoles } from "@constants/iam"
 
 import { ProjectMemberService } from "@services/project"
 
@@ -18,7 +18,7 @@ import { IMemberRootStore } from "."
 interface IProjectMemberDetails {
     id: string
     member: IUserLite
-    role: EUserProjectRoles
+    role: ERoles
 }
 
 export interface IProjectMemberStore {
@@ -44,7 +44,7 @@ export interface IProjectMemberStore {
         workspaceSlug: string,
         projectId: string,
         userId: string,
-        data: { role: EUserProjectRoles }
+        data: { role: ERoles }
     ) => Promise<IProjectMember>
     removeMemberFromProject: (workspaceSlug: string, projectId: string, userId: string) => Promise<void>
 }
@@ -169,12 +169,7 @@ export class ProjectMemberStore implements IProjectMemberStore {
      * @param userId
      * @param data
      */
-    updateMember = async (
-        workspaceSlug: string,
-        projectId: string,
-        userId: string,
-        data: { role: EUserProjectRoles }
-    ) => {
+    updateMember = async (workspaceSlug: string, projectId: string, userId: string, data: { role: ERoles }) => {
         const memberDetails = this.getProjectMemberDetails(userId)
         if (!memberDetails) throw new Error("Member not found")
         // original data to revert back in case of error

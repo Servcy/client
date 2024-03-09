@@ -15,8 +15,8 @@ import { KanbanLayoutLoader, ListLayoutLoader } from "@components/ui"
 import { useIssues, useUser } from "@hooks/store"
 
 import { PROFILE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
+import { ERoles } from "@constants/iam"
 import { EIssuesStoreType } from "@constants/issue"
-import { EUserWorkspaceRoles } from "@constants/workspace"
 
 interface IProfileIssuesPage {
     type: "assigned" | "subscribed" | "created"
@@ -60,7 +60,7 @@ export const ProfileIssuesPage = observer((props: IProfileIssuesPage) => {
 
     const activeLayout = issueFilters?.displayFilters?.layout || undefined
 
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= EUserWorkspaceRoles.MEMBER
+    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
 
     if (!groupedIssueIds || loader === "init-loader")
         return <>{activeLayout === "list" ? <ListLayoutLoader /> : <KanbanLayoutLoader />}</>
