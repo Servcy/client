@@ -16,7 +16,7 @@ import { useUser, useWorkspace } from "@hooks/store"
 import useUserAuth from "@hooks/use-user-auth"
 
 import PostHogProvider from "@contexts/PosthogContext"
-import ProgressBarProvider from '@contexts/ProgressBarProvider';
+import ProgressBarProvider from "@contexts/ProgressBarProvider"
 import { StoreProvider } from "@contexts/StoreContext"
 
 import { SWR_CONFIG } from "@constants/swr-config"

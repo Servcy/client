@@ -1,9 +1,8 @@
 "use client"
 
-import { useRouter } from 'next-nprogress-bar';
-
 import { useEffect } from "react"
 
+import { useRouter } from "next-nprogress-bar"
 import { AiOutlineHome, AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai"
 
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
