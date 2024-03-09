@@ -2,3 +2,7 @@
     text-decoration: underline;
     color: #d1bfae;
 }
+
+#servcy-google-login iframe {
+    border-radius: 8px !important;
+}

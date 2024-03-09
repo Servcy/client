@@ -186,7 +186,7 @@ export default function Login(): JSX.Element {
                                 {!loading && <BiLogIn className="mr-2 inline" />} Send OTP
                             </Button>
                             <h2 className="servcy-hr-lines my-4">Or</h2>
-                            <div className="flex place-content-center">
+                            <div className="flex place-content-center" id="servcy-google-login">
                                 <GoogleLogin
                                     onSuccess={(credentialResponse) => {
                                         const { credential } = credentialResponse
