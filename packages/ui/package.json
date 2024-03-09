@@ -11,6 +11,9 @@
   "files": [
     "dist/**"
   ],
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --external react --minify",
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts --external react",
