@@ -2,9 +2,9 @@ import { Globe2, Lock, LucideIcon } from "lucide-react"
 
 export enum ERoles {
     GUEST = 0,
-    VIEWER = 1,
-    MEMBER = 2,
-    ADMIN = 3,
+    MEMBER = 1,
+    ADMIN = 2,
+    OWNER = 3,
 }
 
 export const ROLES = {
@@ -12,6 +12,11 @@ export const ROLES = {
     1: "Member",
     2: "Admin",
     3: "Owner",
+}
+
+export enum EAccess {
+    PRIVATE = 1,
+    PUBLIC = 0,
 }
 
 export const ACCESS_CHOICES: {

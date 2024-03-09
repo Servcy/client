@@ -333,16 +333,16 @@ export const InviteMembers: React.FC<Props> = (props) => {
     }
 
     const appendField = () => {
-        append({ email: "", role: 1, role_active: false })
+        append({ email: "", role: ERoles.MEMBER, role_active: false })
     }
 
     useEffect(() => {
         if (fields.length === 0) {
             append(
                 [
-                    { email: "", role: 1, role_active: false },
-                    { email: "", role: 1, role_active: false },
-                    { email: "", role: 1, role_active: false },
+                    { email: "", role: ERoles.MEMBER, role_active: false },
+                    { email: "", role: ERoles.MEMBER, role_active: false },
+                    { email: "", role: ERoles.MEMBER, role_active: false },
                 ],
                 {
                     focusIndex: 0,

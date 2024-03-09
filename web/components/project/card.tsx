@@ -11,7 +11,7 @@ import { DeleteProjectModal, JoinProjectModal } from "@components/project"
 
 import { useProject } from "@hooks/store"
 
-import { ERoles } from "@constants/iam"
+import { EAccess, ERoles } from "@constants/iam"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 import { copyTextToClipboard } from "@helpers/string.helper"
@@ -119,7 +119,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                                 <h3 className="truncate font-semibold text-white">{project.name}</h3>
                                 <span className="flex items-center gap-1.5">
                                     <p className="text-xs font-medium text-white">{project.identifier} </p>
-                                    {project.access === 1 && <Lock className="h-2.5 w-2.5 text-white " />}
+                                    {project.access === EAccess.PRIVATE && <Lock className="h-2.5 w-2.5 text-white " />}
                                 </span>
                             </div>
                         </div>

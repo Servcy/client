@@ -8,6 +8,8 @@ import { ModuleGanttBlock } from "@components/modules"
 // mobx store
 import { useModule, useProject } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
+
 import { IModule } from "@servcy/types"
 
 export const ModulesListGanttChartView: React.FC = observer(() => {
@@ -37,7 +39,7 @@ export const ModulesListGanttChartView: React.FC = observer(() => {
             }
         })
 
-    const isAllowed = currentProjectDetails?.member_role === 3 || currentProjectDetails?.member_role === 2
+    const isAllowed = (currentProjectDetails?.member_role ?? 0) >= ERoles.ADMIN
 
     return (
         <div className="h-full w-full overflow-y-auto">

@@ -1,3 +1,5 @@
+import { EAccess } from "./iam.js"
+
 export type IssueEventProps = {
     eventName: string
     payload: any
@@ -23,7 +25,7 @@ export const getProjectEventPayload = (payload: any) => ({
     workspace_id: payload.workspace_id,
     project_id: payload.id,
     identifier: payload.identifier,
-    project_visibility: payload.access == 0 ? "Public" : "Private",
+    project_visibility: payload.access == EAccess.PUBLIC ? "Public" : "Private",
     changed_properties: payload.changed_properties,
     lead_id: payload.project_lead,
     created_at: payload.created_at,

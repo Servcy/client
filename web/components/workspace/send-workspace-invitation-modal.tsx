@@ -31,7 +31,7 @@ const defaultValues: FormValues = {
     emails: [
         {
             email: "",
-            role: 1,
+            role: ERoles.MEMBER,
         },
     ],
 }

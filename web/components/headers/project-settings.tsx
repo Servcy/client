@@ -31,7 +31,7 @@ export const ProjectSettingHeader: FC<IProjectSettingHeader> = observer((props) 
     } = useUser()
     const { currentProjectDetails } = useProject()
 
-    if (currentProjectRole && currentProjectRole <= ERoles.VIEWER) return null
+    if (currentProjectRole && currentProjectRole <= ERoles.MEMBER) return null
 
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">

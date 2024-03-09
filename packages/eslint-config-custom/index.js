@@ -4,7 +4,7 @@ module.exports = {
     plugins: ["react", "@typescript-eslint"],
     settings: {
         next: {
-            rootDir: ["web/", "space/", "packages/*/"],
+            rootDir: ["web/", "packages/*/"],
         },
     },
     rules: {

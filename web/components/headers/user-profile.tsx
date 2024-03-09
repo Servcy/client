@@ -11,6 +11,7 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 
 import { useApplication, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { PROFILE_ADMINS_TAB, PROFILE_VIEWER_TAB } from "@constants/profile"
 
 import { cn } from "@helpers/common.helper"
@@ -25,14 +26,13 @@ export const UserProfileHeader: FC<TUserProfileHeader> = observer((props) => {
     const { type = undefined } = props
     const { workspaceSlug, userId } = useParams()
 
-    const AUTHORIZED_ROLES = [3, 2, 1]
     const {
         membership: { currentWorkspaceRole },
     } = useUser()
 
     if (!currentWorkspaceRole) return null
 
-    const isAuthorized = AUTHORIZED_ROLES.includes(currentWorkspaceRole)
+    const isAuthorized = (currentWorkspaceRole ?? 0) >= ERoles.GUEST
     const tabsList = isAuthorized ? [...PROFILE_VIEWER_TAB, ...PROFILE_ADMINS_TAB] : PROFILE_VIEWER_TAB
 
     const { theme: themStore } = useApplication()

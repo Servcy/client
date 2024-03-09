@@ -546,7 +546,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                                             handleDeleteLink={handleDeleteLink}
                                                             userAuth={{
                                                                 isGuest: currentProjectRole === ERoles.GUEST,
-                                                                isViewer: currentProjectRole === ERoles.VIEWER,
+                                                                isViewer: currentProjectRole === ERoles.MEMBER,
                                                                 isMember: currentProjectRole === ERoles.MEMBER,
                                                                 isOwner: currentProjectRole === ERoles.ADMIN,
                                                             }}

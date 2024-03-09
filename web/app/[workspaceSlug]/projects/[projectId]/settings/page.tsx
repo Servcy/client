@@ -18,10 +18,12 @@ import {
 
 import { useProject } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
+
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-import type { NextPageWithWrapper } from "@servcy/types"
+import type { IProject, NextPageWithWrapper } from "@servcy/types"
 
 const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
     // states
@@ -37,7 +39,7 @@ const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
         workspaceSlug && projectId ? () => fetchProjectDetails(workspaceSlug.toString(), projectId.toString()) : null
     )
     // derived values
-    const isAdmin = currentProjectDetails?.member_role === 2
+    const isAdmin = (currentProjectDetails?.member_role ?? 0) >= ERoles.ADMIN
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - General Settings` : undefined
 
     return (
@@ -66,8 +68,8 @@ const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
 
                     {isAdmin && (
                         <DeleteProjectSection
-                            projectDetails={currentProjectDetails}
-                            handleDelete={() => setSelectedProject(currentProjectDetails.id ?? null)}
+                            projectDetails={currentProjectDetails ?? ({} as IProject)}
+                            handleDelete={() => setSelectedProject(currentProjectDetails?.id ?? null)}
                         />
                     )}
                 </div>

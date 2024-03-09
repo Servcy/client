@@ -11,6 +11,8 @@ import { ProjectFeaturesList } from "@components/project"
 
 import { useProject, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
+
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
@@ -29,7 +31,7 @@ const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
         workspaceSlug && projectId ? () => fetchUserProjectInfo(workspaceSlug.toString(), projectId.toString()) : null
     )
     // derived values
-    const isAdmin = memberDetails?.role === 3
+    const isAdmin = (memberDetails?.role ?? 0) >= ERoles.ADMIN
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Features` : undefined
 
     return (

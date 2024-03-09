@@ -10,7 +10,7 @@ import EmojiIconPicker from "@components/emoji-icon-picker"
 import { useEventTracker, useProject } from "@hooks/store"
 
 import { PROJECT_UPDATED } from "@constants/event-tracker"
-import { ACCESS_CHOICES } from "@constants/iam"
+import { ACCESS_CHOICES, EAccess } from "@constants/iam"
 
 import { ProjectService } from "@services/project"
 
@@ -157,7 +157,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                             <span className="flex items-center gap-2 text-sm">
                                 <span>{watch("identifier")} .</span>
                                 <span className="flex items-center gap-1.5">
-                                    {project.access === 1 && <Lock className="h-2.5 w-2.5 text-white " />}
+                                    {project.access === EAccess.PRIVATE && <Lock className="h-2.5 w-2.5 text-white " />}
                                     {currentAccess?.label}
                                 </span>
                             </span>

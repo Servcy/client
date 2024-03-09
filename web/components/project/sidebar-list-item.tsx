@@ -97,7 +97,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
     const project = getProjectById(projectId)
 
     const isAdmin = project?.member_role === ERoles.ADMIN
-    const isViewerOrGuest = project?.member_role && [ERoles.VIEWER, ERoles.GUEST].includes(project.member_role)
+    const isViewerOrGuest = project?.member_role && [ERoles.MEMBER, ERoles.GUEST].includes(project.member_role)
 
     const isCollapsed = themeStore.sidebarCollapsed
 

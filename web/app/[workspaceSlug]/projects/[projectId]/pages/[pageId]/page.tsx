@@ -231,7 +231,7 @@ const PageDetailsPage: NextPageWithWrapper = observer(() => {
     }
 
     const isPageReadOnly =
-        is_locked || archived_at || (currentProjectRole && [ERoles.VIEWER, ERoles.GUEST].includes(currentProjectRole))
+        is_locked || archived_at || (currentProjectRole && [ERoles.MEMBER, ERoles.GUEST].includes(currentProjectRole))
 
     const isCurrentUserOwner = owned_by === currentUser?.id
 
