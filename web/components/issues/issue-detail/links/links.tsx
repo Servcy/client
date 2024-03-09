@@ -4,6 +4,8 @@ import { observer } from "mobx-react-lite"
 
 import { useIssueDetail, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
+
 // computed
 import { IssueLinkDetail } from "./link-detail"
 import { TLinkOperations } from "./root"
@@ -38,7 +40,7 @@ export const IssueLinkList: FC<TIssueLinkList> = observer((props) => {
                     <IssueLinkDetail
                         linkId={linkId}
                         linkOperations={linkOperations}
-                        isNotAllowed={currentProjectRole === 5 || currentProjectRole === 10}
+                        isNotAllowed={currentProjectRole === ERoles.GUEST}
                     />
                 ))}
         </div>
