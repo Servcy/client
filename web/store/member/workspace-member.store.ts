@@ -95,14 +95,21 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
     get workspaceMemberIds() {
         const workspaceSlug = this.routerStore.workspaceSlug
         if (!workspaceSlug) return null
-        let members = Object.values(this.workspaceMemberMap?.[workspaceSlug] ?? {})
+        const workspaceMembers = this.workspaceMemberMap?.[workspaceSlug]
+        if (!workspaceMembers) return null
+        let members = Object.values(workspaceMembers)
         members = sortBy(members, [
-            (m) => m.member !== this.userStore.currentUser?.id,
-            (m) => this.memberRoot?.memberMap?.[m.member]?.display_name?.toLowerCase(),
+            (m) => {
+                if (m && m.member) return m.member !== this.userStore.currentUser?.id
+                return false
+            },
+            (m) => {
+                if (m && m.member) return this.memberRoot?.memberMap?.[m.member]?.display_name?.toLowerCase()
+                return false
+            },
         ])
-        //filter out bots
-        const memberIds = members.map((m) => m.member)
-        return memberIds
+        const memberIds = members.map((m) => m && m.member ? m.member : "").filter((m) => m !== "")
+        return memberIds.length > 0 ? memberIds : null
     }
 
     get memberMap() {
@@ -203,6 +210,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
                         role: member.role,
                     })
                 })
+                console.log("megham", this.workspaceMemberMap[workspaceSlug], "run in action completed")
             })
             return response
         })
