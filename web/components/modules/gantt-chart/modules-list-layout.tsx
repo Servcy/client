@@ -37,7 +37,7 @@ export const ModulesListGanttChartView: React.FC = observer(() => {
             }
         })
 
-    const isAllowed = currentProjectDetails?.member_role === 20 || currentProjectDetails?.member_role === 15
+    const isAllowed = currentProjectDetails?.member_role === 3 || currentProjectDetails?.member_role === 2
 
     return (
         <div className="h-full w-full overflow-y-auto">

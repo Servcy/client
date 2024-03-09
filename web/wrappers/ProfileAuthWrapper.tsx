@@ -12,7 +12,7 @@ type Props = {
     showProfileIssuesFilter?: boolean
 }
 
-const AUTHORIZED_ROLES = [20, 15, 10]
+const AUTHORIZED_ROLES = [3, 2, 1]
 
 const ProfileAuthWrapper: React.FC<Props> = observer((props) => {
     const { children, className, showProfileIssuesFilter } = props

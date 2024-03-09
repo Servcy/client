@@ -25,7 +25,7 @@ export const UserProfileHeader: FC<TUserProfileHeader> = observer((props) => {
     const { type = undefined } = props
     const { workspaceSlug, userId } = useParams()
 
-    const AUTHORIZED_ROLES = [20, 15, 10]
+    const AUTHORIZED_ROLES = [3, 2, 1]
     const {
         membership: { currentWorkspaceRole },
     } = useUser()

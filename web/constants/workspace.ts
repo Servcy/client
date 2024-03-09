@@ -10,31 +10,18 @@ import { Props } from "@components/icons/types"
 import { TStaticViewTypes } from "@servcy/types"
 
 export enum EUserWorkspaceRoles {
-    GUEST = 5,
-    VIEWER = 10,
-    MEMBER = 15,
-    ADMIN = 20,
+    GUEST = 0,
+    MEMBER = 1,
+    ADMIN = 2,
+    OWNER = 3,
 }
 
 export const ROLE = {
-    5: "Guest",
-    10: "Viewer",
-    15: "Member",
-    20: "Admin",
+    0: "Guest",
+    1: "Member",
+    2: "Admin",
+    3: "Owner",
 }
-
-export const USER_ROLES = [
-    { value: "Product / Project Manager", label: "Product / Project Manager" },
-    { value: "Development / Engineering", label: "Development / Engineering" },
-    { value: "Founder / Executive", label: "Founder / Executive" },
-    { value: "Freelancer / Consultant", label: "Freelancer / Consultant" },
-    { value: "Marketing / Growth", label: "Marketing / Growth" },
-    { value: "Sales / Business Development", label: "Sales / Business Development" },
-    { value: "Support / Operations", label: "Support / Operations" },
-    { value: "Student / Professor", label: "Student / Professor" },
-    { value: "Human Resources", label: "Human Resources" },
-    { value: "Other", label: "Other" },
-]
 
 export const IMPORTERS_LIST = [
     {

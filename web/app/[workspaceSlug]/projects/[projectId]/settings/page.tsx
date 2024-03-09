@@ -37,7 +37,7 @@ const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
         workspaceSlug && projectId ? () => fetchProjectDetails(workspaceSlug.toString(), projectId.toString()) : null
     )
     // derived values
-    const isAdmin = currentProjectDetails?.member_role === 20
+    const isAdmin = currentProjectDetails?.member_role === 2
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - General Settings` : undefined
 
     return (

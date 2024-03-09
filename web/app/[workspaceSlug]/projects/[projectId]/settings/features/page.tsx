@@ -29,7 +29,7 @@ const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
         workspaceSlug && projectId ? () => fetchUserProjectInfo(workspaceSlug.toString(), projectId.toString()) : null
     )
     // derived values
-    const isAdmin = memberDetails?.role === 20
+    const isAdmin = memberDetails?.role === 3
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Features` : undefined
 
     return (

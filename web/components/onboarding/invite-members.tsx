@@ -333,16 +333,16 @@ export const InviteMembers: React.FC<Props> = (props) => {
     }
 
     const appendField = () => {
-        append({ email: "", role: 15, role_active: false })
+        append({ email: "", role: 1, role_active: false })
     }
 
     useEffect(() => {
         if (fields.length === 0) {
             append(
                 [
-                    { email: "", role: 15, role_active: false },
-                    { email: "", role: 15, role_active: false },
-                    { email: "", role: 15, role_active: false },
+                    { email: "", role: 1, role_active: false },
+                    { email: "", role: 1, role_active: false },
+                    { email: "", role: 1, role_active: false },
                 ],
                 {
                     focusIndex: 0,
@@ -447,10 +447,6 @@ export const InviteMembers: React.FC<Props> = (props) => {
                         >
                             {isSubmitting ? "Inviting..." : "Invite members"}
                         </Button>
-                        {/* <Button variant="outline-primary" size="md" onClick={nextStep}>
-            Copy invite link
-          </Button> */}
-
                         <span className="text-sm text-onboarding-text-400 hover:cursor-pointer" onClick={nextStep}>
                             Do this later
                         </span>

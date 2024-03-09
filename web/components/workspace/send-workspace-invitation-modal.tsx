@@ -31,7 +31,7 @@ const defaultValues: FormValues = {
     emails: [
         {
             email: "",
-            role: 15,
+            role: 1,
         },
     ],
 }
@@ -65,7 +65,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
     }
 
     const appendField = () => {
-        append({ email: "", role: 15 })
+        append({ email: "", role: 1 })
     }
 
     const onSubmitForm = async (data: FormValues) => {
@@ -75,7 +75,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
     }
 
     useEffect(() => {
-        if (fields.length === 0) append([{ email: "", role: 15 }])
+        if (fields.length === 0) append([{ email: "", role: 1 }])
     }, [fields, append])
 
     return (
