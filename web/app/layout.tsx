@@ -13,7 +13,6 @@ import { Toaster } from "react-hot-toast"
 import { SWRConfig } from "swr"
 
 import { useUser, useWorkspace } from "@hooks/store"
-import useUserAuth from "@hooks/use-user-auth"
 
 import PostHogProvider from "@contexts/PosthogContext"
 import ProgressBarProvider from "@contexts/ProgressBarProvider"
@@ -30,11 +29,9 @@ import { isMobileDevice } from "@helpers/common.helper"
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     const {
         currentUser,
-        currentUserLoader,
         membership: { currentProjectRole, currentWorkspaceRole },
     } = useUser()
     const { currentWorkspace } = useWorkspace()
-    const {} = useUserAuth({ user: currentUser, isUserLoading: currentUserLoader })
     if (typeof window !== "undefined" && navigator && isMobileDevice(navigator.userAgent))
         return (
             <div className="flex h-screen justify-center">
