@@ -92,7 +92,7 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
         })
     }
     const redirectToIssueDetail = () => {
-        router.push({ pathname: `/${issueLink}` })
+        router.push(`/${issueLink}`)
         removeRoutePeekId()
     }
     // auth
