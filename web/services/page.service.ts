@@ -90,7 +90,10 @@ export class PageService extends APIService {
         pageId: string,
         data: Partial<IPageBlock>
     ): Promise<IPageBlock> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/`, data)
+        return this.post(
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/`,
+            data
+        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

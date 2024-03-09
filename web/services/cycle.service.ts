@@ -125,7 +125,9 @@ export class CycleService extends APIService {
     }
 
     async removeCycleFromFavorites(workspaceSlug: string, projectId: string, cycleId: string): Promise<any> {
-        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/user-favorite-cycles/${cycleId}/`)
+        return this.delete(
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/user-favorite-cycles/${cycleId}/`
+        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

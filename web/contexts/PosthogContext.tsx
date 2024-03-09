@@ -1,4 +1,4 @@
-import { usePathname, useParams } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import { FC, ReactNode, useEffect, useState } from "react"
 

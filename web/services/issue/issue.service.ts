@@ -79,7 +79,10 @@ export class IssueService extends APIService {
             issues: string[]
         }
     ) {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/cycle-issues/`, data)
+        return this.post(
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/cycle-issues/`,
+            data
+        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -188,7 +191,10 @@ export class IssueService extends APIService {
         issueId: string,
         data: { sub_issue_ids: string[] }
     ): Promise<TIssueSubIssues> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/sub-issues/`, data)
+        return this.post(
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/sub-issues/`,
+            data
+        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -209,7 +215,10 @@ export class IssueService extends APIService {
         issueId: string,
         data: Partial<TIssueLink>
     ): Promise<TIssueLink> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/`, data)
+        return this.post(
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/`,
+            data
+        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response

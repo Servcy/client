@@ -63,7 +63,9 @@ export class IssueFiltersService extends APIService {
         projectId: string,
         moduleId: string
     ): Promise<IIssueFiltersResponse> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/user-properties/`)
+        return this.get(
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/user-properties/`
+        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

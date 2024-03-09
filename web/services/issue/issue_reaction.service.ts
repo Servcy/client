@@ -15,7 +15,10 @@ export class IssueReactionService extends APIService {
         issueId: string,
         data: Partial<TIssueReaction>
     ): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/`, data)
+        return this.post(
+            `/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/reactions/`,
+            data
+        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
