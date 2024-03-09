@@ -1,4 +1,4 @@
-import { useParams } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 
 import { FC, useEffect, useRef, useState } from "react"
 
@@ -67,7 +67,7 @@ const defaultValues: Partial<TIssue> = {
 export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observer((props) => {
     const { prePopulatedData, quickAddCallback, viewId } = props
     const { workspaceSlug, projectId } = useParams()
-
+    const pathname = usePathname()
     const { getProjectById } = useProject()
     const { captureIssueEvent } = useEventTracker()
 
