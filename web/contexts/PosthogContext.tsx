@@ -1,4 +1,4 @@
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname, useParams } from "next/navigation"
 
 import { FC, ReactNode, useEffect, useState } from "react"
 
@@ -22,7 +22,7 @@ export interface IPosthogWrapper {
 const PostHogProvider: FC<IPosthogWrapper> = (props) => {
     const { children, user, workspaceRole, currentWorkspaceId, projectRole } = props
     const pathame = usePathname()
-    const searchParams = useSearchParams()
+    const params = useParams()
     // states
     const [lastWorkspaceId, setLastWorkspaceId] = useState(currentWorkspaceId)
 
@@ -62,7 +62,7 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
             capture_pageview: false,
         })
         handleRouteChange()
-    }, [pathame, searchParams])
+    }, [pathame, params])
 
     return <PHProvider client={posthog}>{children}</PHProvider>
 }

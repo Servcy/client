@@ -51,7 +51,7 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
     } = useForm<IUser>({ defaultValues })
 
     // store hooks
-    const { currentUser: myProfile, updateCurrentUser, currentUserLoader } = useUser()
+    const { currentUser: myProfile, updateCurrentUser } = useUser()
     const { theme: themeStore } = useApplication()
 
     useEffect(() => {
