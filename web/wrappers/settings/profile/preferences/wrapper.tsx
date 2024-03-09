@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import { FC, ReactNode } from "react"
 
@@ -23,11 +23,11 @@ interface IProfilePreferenceSettingsLayout {
 
 export const ProfilePreferenceSettingsLayout: FC<IProfilePreferenceSettingsLayout> = (props) => {
     const { children, header } = props
-    const router = useRouter()
+    const pathname = usePathname()
     const { theme: themeStore } = useApplication()
 
     const showMenuItem = () => {
-        const item = router.asPath.split("/")
+        const item = pathname.split("/")
         let splittedItem = item[item.length - 1]
         splittedItem = splittedItem?.replace(splittedItem[0] ?? "", (splittedItem[0] ?? "").toUpperCase())
         return splittedItem

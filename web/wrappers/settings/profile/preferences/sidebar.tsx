@@ -1,10 +1,10 @@
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import React from "react"
 
 export const ProfilePreferenceSettingsSidebar = () => {
-    const router = useRouter()
+    const pathname = usePathname()
 
     const profilePreferenceLinks: Array<{
         label: string
@@ -28,11 +28,7 @@ export const ProfilePreferenceSettingsSidebar = () => {
                         <Link key={link.href} href={link.href}>
                             <div
                                 className={`rounded-md px-4 py-2 text-sm font-medium ${
-                                    (
-                                        link.label === "Import"
-                                            ? router.asPath.includes(link.href)
-                                            : router.asPath === link.href
-                                    )
+                                    (link.label === "Import" ? pathname.includes(link.href) : pathname === link.href)
                                         ? "bg-custom-primary-100/10 text-custom-primary-100"
                                         : "text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80 focus:bg-custom-sidebar-background-80"
                                 }`}
