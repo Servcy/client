@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { Button, ConfigProvider, Input, Select, Tabs, theme } from "antd"
 import cn from "classnames"
 import debounce from "lodash/debounce"
+import { useTheme } from "next-themes"
 import {
     AiOutlineComment,
     AiOutlineInbox,
@@ -72,7 +73,8 @@ export default function Gmail(): JSX.Element {
     const [isInboxItemModalVisible, setIsInboxItemModalVisible] = useState<boolean>(false)
     const [filterByIAmMentionedButtonText, setFilterByIAmMentionedButtonText] = useState<string>("For Me")
     const { currentUserLoader } = useUser()
-    const { darkAlgorithm } = theme
+    const { darkAlgorithm, defaultAlgorithm } = theme
+    const { resolvedTheme } = useTheme()
 
     const refetchInboxItems = async () => {
         try {
@@ -201,10 +203,11 @@ export default function Gmail(): JSX.Element {
                                 theme={{
                                     components: {
                                         Tabs: {
-                                            inkBarColor: "rgb(67, 72, 79)",
+                                            inkBarColor:
+                                                resolvedTheme !== "dark" ? "rgb(67, 72, 79)" : "rgb(255, 255, 255)",
                                         },
                                     },
-                                    algorithm: darkAlgorithm,
+                                    algorithm: resolvedTheme === "dark" ? darkAlgorithm : defaultAlgorithm,
                                 }}
                             >
                                 <Tabs

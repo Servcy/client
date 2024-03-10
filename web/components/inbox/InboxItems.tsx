@@ -5,6 +5,7 @@ import React, { Dispatch, SetStateAction } from "react"
 import { Avatar, Button, ConfigProvider, Table, theme, Tooltip } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import cn from "classnames"
+import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
 import { HiArchiveBoxArrowDown } from "react-icons/hi2"
 import { MdOutlineBlock } from "react-icons/md"
@@ -18,33 +19,35 @@ import { Spinner } from "@servcy/ui"
 
 const integrationService = new IntegrationService()
 
-const InboxItems = ({
-    setPage,
-    page,
-    inboxItems,
-    inboxPagination,
-    archiveItems,
-    setSelectedRowIndex,
-    loading,
-    deleteItems,
-    setIsInboxItemModalVisible,
-    setSelectedItemIds,
-    readItem,
-    activeTab,
-}: {
-    setPage: Dispatch<SetStateAction<number>>
-    page: number
-    readItem: (id: string | undefined) => void
-    inboxItems: InboxItem[]
-    inboxPagination: PaginationDetails
-    loading: boolean
-    activeTab: string
-    archiveItems: (_: React.Key[]) => void
-    deleteItems: (_: number[]) => void
-    setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
-    setSelectedRowIndex: Dispatch<SetStateAction<number>>
-    setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
-}) => {
+const InboxItems = (
+    {
+        setPage,
+        page,
+        inboxItems,
+        inboxPagination,
+        archiveItems,
+        setSelectedRowIndex,
+        loading,
+        deleteItems,
+        setIsInboxItemModalVisible,
+        setSelectedItemIds,
+        readItem,
+        activeTab,
+    }: {
+        setPage: Dispatch<SetStateAction<number>>
+        page: number
+        readItem: (id: string | undefined) => void
+        inboxItems: InboxItem[]
+        inboxPagination: PaginationDetails
+        loading: boolean
+        activeTab: string
+        archiveItems: (_: React.Key[]) => void
+        deleteItems: (_: number[]) => void
+        setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
+        setSelectedRowIndex: Dispatch<SetStateAction<number>>
+        setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
+    }
+) => {
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[]) => {
             setSelectedItemIds(selectedRowKeys)
@@ -53,7 +56,8 @@ const InboxItems = ({
             name: record.id,
         }),
     }
-    const { darkAlgorithm } = theme
+    const { resolvedTheme } = useTheme()
+    const { darkAlgorithm, defaultAlgorithm } = theme
     const disableNotificationTypeHandler = (event: string, user_integration_id: number) => {
         integrationService
             .disableNotificationType({ event, user_integration_id })
@@ -179,7 +183,7 @@ const InboxItems = ({
                             rowSelectedHoverBg: "#2B3232",
                         },
                     },
-                    algorithm: darkAlgorithm,
+                    algorithm: resolvedTheme === "dark" ? darkAlgorithm : defaultAlgorithm,
                 }}
             >
                 <Table
