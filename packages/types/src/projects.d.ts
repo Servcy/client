@@ -107,11 +107,6 @@ export interface IGithubRepository {
     url: string
 }
 
-export interface GithubRepositoriesResponse {
-    repositories: IGithubRepository[]
-    total_count: number
-}
-
 export type TProjectIssuesSearchParams = {
     search: string
     parent?: boolean

@@ -105,13 +105,6 @@ export interface IUserActivityResponse {
     total_pages: number
 }
 
-export type UserAuth = {
-    isMember: boolean
-    isOwner: boolean
-    isAdmin: boolean
-    isGuest: boolean
-}
-
 export type TOnboardingSteps = {
     profile_complete: boolean
     workspace_create: boolean

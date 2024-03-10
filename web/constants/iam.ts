@@ -4,14 +4,12 @@ export enum ERoles {
     GUEST = 0,
     MEMBER = 1,
     ADMIN = 2,
-    OWNER = 3,
 }
 
 export const ROLES = {
     0: "Guest",
     1: "Member",
     2: "Admin",
-    3: "Owner",
 }
 
 export enum EAccess {

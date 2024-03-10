@@ -3,7 +3,6 @@ import { APIService } from "@services/api.service"
 import { API_BASE_URL } from "@helpers/common.helper"
 
 import type {
-    GithubRepositoriesResponse,
     IProject,
     ISearchIssueResponse,
     TProjectIssuesSearchParams,
@@ -74,49 +73,6 @@ export class ProjectService extends APIService {
         }
     ): Promise<any> {
         await this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/project-views/`, data)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async getGithubRepositories(url: string): Promise<GithubRepositoriesResponse> {
-        return this.request({
-            method: "get",
-            url,
-            headers: this.getAccessToken() ? this.getHeaders() : {},
-        })
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async syncGithubRepository(
-        workspaceSlug: string,
-        projectId: string,
-        workspaceIntegrationId: string,
-        data: {
-            name: string
-            owner: string
-            repository_id: string
-            url: string
-        }
-    ): Promise<any> {
-        return this.post(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/workspace-integrations/${workspaceIntegrationId}/github-repository-sync/`,
-            data
-        )
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async getProjectGithubRepository(workspaceSlug: string, projectId: string, integrationId: string): Promise<any> {
-        return this.get(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/workspace-integrations/${integrationId}/github-repository-sync/`
-        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

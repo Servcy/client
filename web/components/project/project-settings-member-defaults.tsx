@@ -96,10 +96,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                                                 submitChanges({ project_lead: val })
                                             }}
                                             isDisabled={
-                                                !(
-                                                    currentProjectRole &&
-                                                    [ERoles.ADMIN, ERoles.OWNER].includes(currentProjectRole)
-                                                )
+                                                currentProjectRole !== ERoles.ADMIN
                                             }
                                         />
                                     )}
@@ -126,10 +123,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                                                 submitChanges({ default_assignee: val })
                                             }}
                                             isDisabled={
-                                                !(
-                                                    currentProjectRole &&
-                                                    [ERoles.ADMIN, ERoles.OWNER].includes(currentProjectRole)
-                                                )
+                                                currentProjectRole !== ERoles.ADMIN
                                             }
                                         />
                                     )}

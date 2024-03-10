@@ -544,12 +544,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                                             links={moduleDetails.link_module}
                                                             handleEditLink={handleEditLink}
                                                             handleDeleteLink={handleDeleteLink}
-                                                            userAuth={{
-                                                                isGuest: (currentProjectRole ?? 0) > ERoles.GUEST,
-                                                                isAdmin: currentProjectRole === ERoles.ADMIN,
-                                                                isMember: currentProjectRole === ERoles.MEMBER,
-                                                                isOwner: currentProjectRole === ERoles.OWNER,
-                                                            }}
+                                                            isNotAllowed={(currentProjectRole ?? 0) < ERoles.MEMBER}
                                                         />
                                                     </>
                                                 ) : (

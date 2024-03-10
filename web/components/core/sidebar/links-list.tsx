@@ -6,22 +6,20 @@ import { useMember } from "@hooks/store"
 
 import { calculateTimeAgo } from "@helpers/date-time.helper"
 
-import { ILinkDetails, UserAuth } from "@servcy/types"
+import { ILinkDetails } from "@servcy/types"
 import { ExternalLinkIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
     links: ILinkDetails[]
     handleDeleteLink: (linkId: string) => void
     handleEditLink: (link: ILinkDetails) => void
-    userAuth: UserAuth
+    isNotAllowed: boolean
 }
 
-export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, handleEditLink, userAuth }) => {
+export const LinksList: React.FC<Props> = observer(({ links, handleDeleteLink, handleEditLink, isNotAllowed }) => {
     // toast
 
     const { getUserDetails } = useMember()
-
-    const isNotAllowed = userAuth.isGuest
 
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text)

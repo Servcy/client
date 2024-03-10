@@ -39,7 +39,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
     const { captureEvent } = useEventTracker()
 
     // derived values
-    const isAdmin = currentProjectRole && [ERoles.ADMIN, ERoles.OWNER].includes(currentProjectRole)
+    const isAdmin = currentProjectRole === ERoles.ADMIN
     const userDetails = getProjectMemberDetails(userId)
 
     const handleRemove = async () => {

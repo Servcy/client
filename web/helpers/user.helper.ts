@@ -8,7 +8,5 @@ export const getUserRole = (role: ERoles) => {
             return "MEMBER"
         case ERoles.ADMIN:
             return "ADMIN"
-        case ERoles.OWNER:
-            return "OWNER"
     }
 }

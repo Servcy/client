@@ -262,7 +262,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
 
                                     {/* publish project settings */}
                                     {project?.member_role &&
-                                        [ERoles.ADMIN, ERoles.OWNER].includes(project?.member_role) && (
+                                        project?.member_role === ERoles.ADMIN && (
                                             <CustomMenu.MenuItem onClick={() => setPublishModal(true)}>
                                                 <div className="relative flex flex-shrink-0 items-center justify-start gap-2">
                                                     <div className="flex h-4 w-4 cursor-pointer items-center justify-center rounded text-custom-sidebar-text-200 transition-all duration-300 hover:bg-custom-sidebar-background-80">
