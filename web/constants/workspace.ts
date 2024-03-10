@@ -108,20 +108,4 @@ export const WORKSPACE_SETTINGS_LINKS: {
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/billing`,
         Icon: SettingIcon,
     },
-    {
-        key: "webhooks",
-        label: "Webhooks",
-        href: `/settings/webhooks`,
-        access: ERoles.ADMIN,
-        highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/webhooks`,
-        Icon: SettingIcon,
-    },
-    {
-        key: "api-tokens",
-        label: "API tokens",
-        href: `/settings/api-tokens`,
-        access: ERoles.ADMIN,
-        highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/api-tokens`,
-        Icon: SettingIcon,
-    },
 ]
