@@ -1,7 +1,5 @@
 import CSVLogo from "public/services/csv.svg"
 import ExcelLogo from "public/services/excel.svg"
-import GithubLogo from "public/services/github.png"
-import JiraLogo from "public/services/jira.svg"
 import JSONLogo from "public/services/json.svg"
 
 import { SettingIcon } from "@components/icons"
@@ -10,23 +8,6 @@ import { Props } from "@components/icons/types"
 import { ERoles } from "@constants/iam"
 
 import { TStaticViewTypes } from "@servcy/types"
-
-export const IMPORTERS_LIST = [
-    {
-        provider: "github",
-        type: "import",
-        title: "GitHub",
-        description: "Import issues from GitHub repositories and sync them.",
-        logo: GithubLogo,
-    },
-    {
-        provider: "jira",
-        type: "import",
-        title: "Jira",
-        description: "Import issues and epics from Jira projects and epics.",
-        logo: JiraLogo,
-    },
-]
 
 export const EXPORTERS_LIST = [
     {
