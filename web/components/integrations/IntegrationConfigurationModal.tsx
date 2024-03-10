@@ -13,13 +13,9 @@ import type { Integration, IntegrationEvent, UserIntegration } from "@servcy/typ
 
 const integrationService = new IntegrationService()
 
-export default function IntegrationConfigurationModal({
-    selectedIntegration,
-    onClose,
-}: {
-    selectedIntegration: Integration
-    onClose: () => void
-}) {
+export default function IntegrationConfigurationModal(
+    { selectedIntegration, onClose }: { selectedIntegration: Integration; onClose: () => void }
+) {
     const [loading, setLoading] = useState<boolean>(false)
     const [events, setEvents] = useState<IntegrationEvent[]>([])
     const [userIntegrations, setUserIntegrations] = useState<UserIntegration[]>([])
@@ -173,30 +169,6 @@ export default function IntegrationConfigurationModal({
                     )}
                 </Card>
             )}
-            <Card
-                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
-                title={<div className="text-custom-text-200">Additional Configuration</div>}
-            >
-                <GithubConfiguration />
-            </Card>
-            <Card
-                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
-                title={<div className="text-custom-text-200">Additional Configuration</div>}
-            >
-                <GoogleConfiguration selectedIntegration={selectedIntegration} />
-            </Card>
-            <Card
-                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
-                title={<div className="text-custom-text-200">Additional Configuration</div>}
-            >
-                <MicrosoftConfiguration selectedIntegration={selectedIntegration} />
-            </Card>
-            <Card
-                className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
-                title={<div className="text-custom-text-200">Additional Configuration</div>}
-            >
-                <FigmaConfiguration selectedIntegration={selectedIntegration} />
-            </Card>
         </Modal>
     )
 }
