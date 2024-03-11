@@ -1,6 +1,8 @@
 "use client"
 
 import { observer } from "mobx-react-lite"
+import useSWR from "swr"
+import { useParams } from "next/navigation"
 
 import { PageHead } from "@components/core"
 import { WorkspaceSettingHeader } from "@components/headers"
@@ -18,18 +20,27 @@ import { Button } from "@servcy/ui"
 const BillingSettingsPage: NextPageWithWrapper = observer(() => {
     // store hooks
     const {
-        membership: { currentWorkspaceRole },
+        membership: { currentWorkspaceRole, fetchUserWorkspaceInfo },
     } = useUser()
+
     const { currentWorkspace } = useWorkspace()
+    const { workspaceSlug } = useParams()
     // derived values
     const isAdmin = currentWorkspaceRole && currentWorkspaceRole >= ERoles.ADMIN
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Billing & Plans` : undefined
+
+    // fetching user workspace information
+    useSWR(
+        workspaceSlug ? `WORKSPACE_MEMBERS_ME_${workspaceSlug}` : null,
+        workspaceSlug ? () => fetchUserWorkspaceInfo(workspaceSlug.toString()) : null,
+        { revalidateIfStale: false, revalidateOnFocus: false }
+    )
 
     if (!isAdmin)
         return (
             <>
                 <PageHead title={pageTitle} />
-                <div className="mt-10 flex h-full w-full justify-center p-4">
+                <div className="mt-10 flex h-screen w-full justify-center p-4">
                     <p className="text-sm text-custom-text-300">You are not authorized to access this page.</p>
                 </div>
             </>
