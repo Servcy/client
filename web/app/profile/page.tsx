@@ -21,7 +21,7 @@ import { FileService } from "@services/document.service"
 import { ProfileSettingsLayout } from "@wrappers/settings"
 
 import type { IUser, NextPageWithWrapper } from "@servcy/types"
-import { Button, CustomSearchSelect, Input, Spinner } from "@servcy/ui"
+import { Button, CustomSearchSelect, Input } from "@servcy/ui"
 
 const defaultValues: Partial<IUser> = {
     avatar: "",
@@ -104,13 +104,6 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
         content: timeZone.label,
     }))
 
-    if (!myProfile)
-        return (
-            <div className="grid h-screen w-full place-items-center px-4 sm:px-0">
-                <Spinner />
-            </div>
-        )
-
     return (
         <ProfileSettingsLayout>
             <PageHead title="Profile - General Settings" />
@@ -167,7 +160,7 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
                                                                 src={watch("avatar")}
                                                                 className="absolute left-0 top-0 h-full w-full rounded-lg object-cover"
                                                                 onClick={() => setIsImageUploadModalOpen(true)}
-                                                                alt={myProfile.display_name}
+                                                                alt={myProfile?.display_name ?? "Profile picture"}
                                                                 role="button"
                                                             />
                                                         </div>

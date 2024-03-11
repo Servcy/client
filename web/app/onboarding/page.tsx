@@ -22,7 +22,7 @@ import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
 
 import { WorkspaceService } from "@services/workspace.service"
 
-import DefaultWrapper from "@wrappers/DefaultWrapper"
+import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import type { IUser, NextPageWithWrapper, TOnboardingSteps } from "@servcy/types"
@@ -139,7 +139,7 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
 
     return (
         <UserAuthWrapper>
-            <DefaultWrapper>
+            <NoSidebarWrapper>
                 <PageHead title="Onboarding" />
                 <SwitchOrDeleteAccountModal
                     isOpen={showDeleteAccountModal}
@@ -249,7 +249,7 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
                         <Spinner />
                     </div>
                 )}
-            </DefaultWrapper>
+            </NoSidebarWrapper>
         </UserAuthWrapper>
     )
 })

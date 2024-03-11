@@ -24,7 +24,7 @@ import { ROLES } from "@constants/iam"
 import { UserService } from "@services/user.service"
 import { WorkspaceService } from "@services/workspace.service"
 
-import DefaultWrapper from "@wrappers/DefaultWrapper"
+import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { truncateText } from "@helpers/string.helper"
@@ -112,7 +112,7 @@ const UserInvitationsPage: NextPageWithWrapper = observer(() => {
 
     return (
         <UserAuthWrapper>
-            <DefaultWrapper>
+            <NoSidebarWrapper>
                 <PageHead title="Invitations" />
                 <div className="flex h-full flex-col gap-y-2 overflow-hidden sm:flex-row sm:gap-y-0">
                     <div className="relative h-1/6 flex-shrink-0 sm:w-2/12 md:w-3/12 lg:w-1/5">
@@ -222,7 +222,7 @@ const UserInvitationsPage: NextPageWithWrapper = observer(() => {
                         )
                     ) : null}
                 </div>
-            </DefaultWrapper>
+            </NoSidebarWrapper>
         </UserAuthWrapper>
     )
 })

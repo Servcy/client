@@ -1,11 +1,11 @@
 import Link from "next/link"
 
-import DefaultWrapper from "@wrappers/DefaultWrapper"
+import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 
 import { Button } from "@servcy/ui"
 
 export const NotAWorkspaceMember = () => (
-    <DefaultWrapper>
+    <NoSidebarWrapper>
         <div className="grid h-full place-items-center p-4">
             <div className="space-y-8 text-center">
                 <div className="space-y-2">
@@ -29,5 +29,5 @@ export const NotAWorkspaceMember = () => (
                 </div>
             </div>
         </div>
-    </DefaultWrapper>
+    </NoSidebarWrapper>
 )

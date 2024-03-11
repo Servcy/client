@@ -9,7 +9,7 @@ import { mutate } from "swr"
 
 import { useUser } from "@hooks/store"
 
-import DefaultWrapper from "@wrappers/DefaultWrapper"
+import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 
 import { Button } from "@servcy/ui"
 
@@ -33,7 +33,7 @@ const CustomErrorComponent = () => {
     }
 
     return (
-        <DefaultWrapper>
+        <NoSidebarWrapper>
             <div className="grid h-full place-items-center p-4">
                 <div className="space-y-8 text-center">
                     <div className="space-y-2">
@@ -57,7 +57,7 @@ const CustomErrorComponent = () => {
                     </div>
                 </div>
             </div>
-        </DefaultWrapper>
+        </NoSidebarWrapper>
     )
 }
 

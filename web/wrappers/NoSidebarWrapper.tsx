@@ -5,8 +5,8 @@ type Props = {
     gradient?: boolean
 }
 
-const DefaultWrapper: FC<Props> = ({ children, gradient = false }) => (
+const NoSidebarWrapper: FC<Props> = ({ children, gradient = false }) => (
     <div className={`h-screen w-full overflow-hidden ${gradient ? "" : "bg-custom-background-100"}`}>{children}</div>
 )
 
-export default DefaultWrapper
+export default NoSidebarWrapper

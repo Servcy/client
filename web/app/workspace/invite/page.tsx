@@ -14,7 +14,7 @@ import { WORKSPACE_INVITATION } from "@constants/fetch-keys"
 
 import { WorkspaceService } from "@services/workspace.service"
 
-import DefaultWrapper from "@wrappers/DefaultWrapper"
+import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 
 import type { NextPageWithWrapper } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
@@ -65,7 +65,7 @@ const WorkspaceInvitationPage: NextPageWithWrapper = observer(() => {
     }
 
     return (
-        <DefaultWrapper>
+        <NoSidebarWrapper>
             <div className="flex h-full w-full flex-col items-center justify-center px-3">
                 {invitationDetail ? (
                     <>
@@ -120,7 +120,7 @@ const WorkspaceInvitationPage: NextPageWithWrapper = observer(() => {
                     </div>
                 )}
             </div>
-        </DefaultWrapper>
+        </NoSidebarWrapper>
     )
 })
 

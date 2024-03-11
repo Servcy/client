@@ -10,7 +10,7 @@ import WorkspaceNotAuthorizedImg from "public/auth/workspace-not-authorized.svg"
 
 import { useUser } from "@hooks/store"
 
-import DefaultWrapper from "@wrappers/DefaultWrapper"
+import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 
 type Props = {
     actionButton?: React.ReactNode
@@ -23,7 +23,7 @@ export const NotAuthorizedView: React.FC<Props> = observer((props) => {
     const { nextUrl } = useParams()
 
     return (
-        <DefaultWrapper>
+        <NoSidebarWrapper>
             <div className="flex h-full w-full flex-col items-center justify-center gap-y-5 bg-custom-background-100 text-center">
                 <div className="h-44 w-72">
                     <Image
@@ -59,6 +59,6 @@ export const NotAuthorizedView: React.FC<Props> = observer((props) => {
 
                 {actionButton}
             </div>
-        </DefaultWrapper>
+        </NoSidebarWrapper>
     )
 })
