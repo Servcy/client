@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 
 import { Card, Skeleton, Tag } from "antd"
 import toast from "react-hot-toast"
+import { observer } from "mobx-react"
 import { AiOutlineSetting } from "react-icons/ai"
 import { HiArrowsRightLeft } from "react-icons/hi2"
 
@@ -23,12 +24,12 @@ import { IntegrationsHeader } from "@components/headers/integrations"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 import { oauthUrlGenerators } from "@helpers/integration.helper"
 
-import type { Integration } from "@servcy/types"
+import type { Integration, NextPageWithWrapper } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 const integrationService = new IntegrationService()
 
-export default function Integrations(): JSX.Element {
+const Integrations: NextPageWithWrapper = observer(() => {
     const [integrations, setIntegrations] = useState<Integration[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [search, setSearch] = useState<string>("")
@@ -188,4 +189,8 @@ export default function Integrations(): JSX.Element {
             </div>
         </DefaultWrapper>
     )
-}
+})
+
+Integrations.hasWrapper = true
+
+export default Integrations

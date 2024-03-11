@@ -2,11 +2,13 @@
 
 import { useEffect } from "react"
 
+import { observer } from "mobx-react"
 import { useRouter } from "next-nprogress-bar"
-import { AiOutlineHome, AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai"
+import { AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai"
 
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
+import { NextPageWithWrapper } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 const activationSteps = [
@@ -18,7 +20,7 @@ const activationSteps = [
     },
 ]
 
-export default function Index(): JSX.Element {
+const Home: NextPageWithWrapper = observer(() => {
     const router = useRouter()
 
     const requestNotificationPermission = async () => {
@@ -67,4 +69,8 @@ export default function Index(): JSX.Element {
             </main>
         </DefaultWrapper>
     )
-}
+})
+
+Home.hasWrapper = true
+
+export default Home

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { Button, ConfigProvider, Select, Tabs, theme } from "antd"
 import cn from "classnames"
 import debounce from "lodash/debounce"
+import { observer } from "mobx-react"
 import { useTheme } from "next-themes"
 import { AiOutlineComment, AiOutlineMessage, AiOutlineNotification, AiOutlineRead } from "react-icons/ai"
 import { GoMention } from "react-icons/go"
@@ -21,7 +22,7 @@ import InboxService from "@services/inbox.service"
 
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
-import type { InboxItem, PaginationDetails } from "@servcy/types"
+import type { InboxItem, NextPageWithWrapper, PaginationDetails } from "@servcy/types"
 import { Button as ServcyButton } from "@servcy/ui"
 
 const inboxService = new InboxService()
@@ -49,7 +50,7 @@ const tabItems = [
     },
 ]
 
-export default function Gmail(): JSX.Element {
+const Inbox: NextPageWithWrapper = observer(() => {
     const [loading, setLoading] = useState<boolean>(false)
     const [search, setSearch] = useState<string>("")
     const [selectedItemIds, setSelectedItemIds] = useState<React.Key[]>([])
@@ -295,4 +296,8 @@ export default function Gmail(): JSX.Element {
             </div>
         </DefaultWrapper>
     )
-}
+})
+
+Inbox.hasWrapper = true
+
+export default Inbox
