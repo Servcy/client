@@ -3,6 +3,7 @@ import { FC, ReactNode,useEffect, useRef, useState } from "react"
 import { CommandPalette } from "@components/command-palette"
 
 import UserAuthWrapper from "@wrappers/UserAuthWrapper"
+import { observer } from "mobx-react-lite"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -59,7 +60,7 @@ interface INoWorkspaceWrapper {
     header?: ReactNode
 }
 
-const DefaultWrapper: FC<INoWorkspaceWrapper> = (props) => {
+const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
     const { children, header } = props
     const [isSigningOut, setIsSigningOut] = useState(false)
     const router = useRouter()
@@ -264,6 +265,6 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = (props) => {
             </UserAuthWrapper>
         </>
     )
-}
+})
 
 export default DefaultWrapper
