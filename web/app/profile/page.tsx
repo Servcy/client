@@ -106,7 +106,7 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
 
     if (!myProfile)
         return (
-            <div className="grid h-full w-full place-items-center px-4 sm:px-0">
+            <div className="grid h-screen w-full place-items-center px-4 sm:px-0">
                 <Spinner />
             </div>
         )
