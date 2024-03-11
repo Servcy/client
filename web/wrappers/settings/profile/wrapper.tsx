@@ -10,7 +10,7 @@ interface IProfileSettingsLayout {
     header?: ReactNode
 }
 
-export const ProfileSettingsLayout: FC<IProfileSettingsLayout> = (props) => {
+export const ProfileSettingsWrapper: FC<IProfileSettingsLayout> = (props) => {
     const { children, header } = props
 
     return (

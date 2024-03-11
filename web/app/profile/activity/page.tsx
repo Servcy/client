@@ -16,7 +16,7 @@ import { USER_ACTIVITY } from "@constants/fetch-keys"
 
 import { UserService } from "@services/user.service"
 
-import { ProfileSettingsLayout } from "@wrappers/settings"
+import { ProfileSettingsWrapper } from "@wrappers/settings"
 
 import { calculateTimeAgo } from "@helpers/date-time.helper"
 
@@ -32,7 +32,7 @@ const ProfileActivityPage: NextPageWithWrapper = observer(() => {
     const { theme: themeStore } = useApplication()
 
     return (
-        <ProfileSettingsLayout>
+        <ProfileSettingsWrapper>
             <PageHead title="Profile - Activity" />
             <section className="mx-auto mt-5  md:mt-16 flex h-full w-full flex-col overflow-hidden px-8 pb-8 lg:w-3/5">
                 <div className="flex items-center border-b border-custom-border-100 gap-4 pb-3.5">
@@ -202,7 +202,7 @@ const ProfileActivityPage: NextPageWithWrapper = observer(() => {
                     <ActivitySettingsLoader />
                 )}
             </section>
-        </ProfileSettingsLayout>
+        </ProfileSettingsWrapper>
     )
 })
 

@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { useRouter } from "next-nprogress-bar"
 import { AiOutlineHome, AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai"
 
-import UserAuthWrapper from "@wrappers/UserAuthWrapper"
+import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import { Button } from "@servcy/ui"
 
@@ -31,15 +31,9 @@ export default function Index(): JSX.Element {
     }, [])
 
     return (
-        <UserAuthWrapper>
-            <main className="order-2 h-screen flex-[1_0_16rem] overflow-y-scroll p-3">
-                <header className="mb-6 h-[80px] rounded-lg bg-custom-background-100 p-6">
-                    <div className="flex flex-row">
-                        <AiOutlineHome size="24" className="my-auto mr-2" />
-                        <p className="text-xl">Dashboard</p>
-                    </div>
-                </header>
-                <div className="mb-6 min-h-[80px] rounded-lg bg-custom-background-100 p-6 text-lg">
+        <DefaultWrapper>
+            <main className="h-screen flex-[1_0_16rem] overflow-y-scroll p-3">
+                <div className="mb-6 min-h-[80px] rounded-lg bg-custom-background-100 p-6 text-lg border-custom-border-200">
                     <div className="mb-4 flex flex-row">
                         <AiOutlineRocket size="24" className="my-auto mr-2" />
                         Start Your Journey
@@ -71,6 +65,6 @@ export default function Index(): JSX.Element {
                     </div>
                 </div>
             </main>
-        </UserAuthWrapper>
+        </DefaultWrapper>
     )
 }

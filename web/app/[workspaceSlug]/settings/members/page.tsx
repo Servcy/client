@@ -18,7 +18,7 @@ import { MEMBER_INVITED } from "@constants/event-tracker"
 import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
-import { WorkspaceSettingLayout } from "@wrappers/settings"
+import { WorkspaceSettingWrapper } from "@wrappers/settings"
 
 import { getUserRole } from "@helpers/user.helper"
 
@@ -81,7 +81,7 @@ const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {
 
     return (
         <AppWrapper header={<WorkspaceSettingHeader title="Members Settings" />}>
-            <WorkspaceSettingLayout>
+            <WorkspaceSettingWrapper>
                 <PageHead title={pageTitle} />
                 <SendWorkspaceInvitationModal
                     isOpen={inviteModal}
@@ -109,7 +109,7 @@ const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {
                     </div>
                     <WorkspaceMembersList searchQuery={searchQuery} />
                 </section>
-            </WorkspaceSettingLayout>
+            </WorkspaceSettingWrapper>
         </AppWrapper>
     )
 })

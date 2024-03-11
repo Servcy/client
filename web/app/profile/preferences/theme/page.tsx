@@ -12,7 +12,7 @@ import { useUser } from "@hooks/store"
 
 import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
 
-import { ProfilePreferenceSettingsLayout } from "@wrappers/settings/profile/preferences"
+import { ProfilePreferenceSettingsWrapper } from "@wrappers/settings/profile/preferences"
 
 import type { NextPageWithWrapper } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
@@ -44,7 +44,7 @@ const ProfilePreferencesThemePage: NextPageWithWrapper = observer(() => {
     }
 
     return (
-        <ProfilePreferenceSettingsLayout>
+        <ProfilePreferenceSettingsWrapper>
             <PageHead title="Profile - Theme Prefrence" />
             {currentUser ? (
                 <div className="mx-auto mt-10 md:mt-14 h-full w-full overflow-y-auto px-6 lg:px-20 pb-8">
@@ -69,7 +69,7 @@ const ProfilePreferencesThemePage: NextPageWithWrapper = observer(() => {
                     <Spinner />
                 </div>
             )}
-        </ProfilePreferenceSettingsLayout>
+        </ProfilePreferenceSettingsWrapper>
     )
 })
 

@@ -10,7 +10,7 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { useApplication } from "@hooks/store"
 
 // layout
-import { ProfileSettingsLayout } from "@wrappers/settings"
+import { ProfileSettingsWrapper } from "@wrappers/settings"
 
 import { CustomMenu } from "@servcy/ui"
 
@@ -21,7 +21,7 @@ interface IProfilePreferenceSettingsLayout {
     header?: ReactNode
 }
 
-export const ProfilePreferenceSettingsLayout: FC<IProfilePreferenceSettingsLayout> = (props) => {
+export const ProfilePreferenceSettingsWrapper: FC<IProfilePreferenceSettingsLayout> = (props) => {
     const { children, header } = props
     const pathname = usePathname()
     const { theme: themeStore } = useApplication()
@@ -48,7 +48,7 @@ export const ProfilePreferenceSettingsLayout: FC<IProfilePreferenceSettingsLayou
     ]
 
     return (
-        <ProfileSettingsLayout
+        <ProfileSettingsWrapper
             header={
                 <div className="md:hidden flex flex-shrink-0 gap-4 items-center justify-start border-b border-custom-border-200 p-4">
                     <SidebarHamburgerToggle onClick={() => themeStore.toggleSidebar()} />
@@ -85,6 +85,6 @@ export const ProfilePreferenceSettingsLayout: FC<IProfilePreferenceSettingsLayou
                     <div className="h-full w-full overflow-x-hidden overflow-y-scroll">{children}</div>
                 </main>
             </div>
-        </ProfileSettingsLayout>
+        </ProfileSettingsWrapper>
     )
 }

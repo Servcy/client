@@ -9,7 +9,7 @@ import { WorkspaceDetails } from "@components/workspace"
 import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
-import { WorkspaceSettingLayout } from "@wrappers/settings"
+import { WorkspaceSettingWrapper } from "@wrappers/settings"
 
 import type { NextPageWithWrapper } from "@servcy/types"
 
@@ -21,10 +21,10 @@ const WorkspaceSettingsPage: NextPageWithWrapper = observer(() => {
 
     return (
         <AppWrapper header={<WorkspaceSettingHeader title="General Settings" />}>
-            <WorkspaceSettingLayout>
+            <WorkspaceSettingWrapper>
                 <PageHead title={pageTitle} />
                 <WorkspaceDetails />
-            </WorkspaceSettingLayout>
+            </WorkspaceSettingWrapper>
         </AppWrapper>
     )
 })

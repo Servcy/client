@@ -6,7 +6,7 @@ export interface IWorkspaceSettingLayout {
     children: ReactNode
 }
 
-export const WorkspaceSettingLayout: FC<IWorkspaceSettingLayout> = (props) => {
+export const WorkspaceSettingWrapper: FC<IWorkspaceSettingLayout> = (props) => {
     const { children } = props
 
     return (

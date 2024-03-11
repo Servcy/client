@@ -10,7 +10,7 @@ import { useUser, useWorkspace } from "@hooks/store"
 import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
-import { WorkspaceSettingLayout } from "@wrappers/settings"
+import { WorkspaceSettingWrapper } from "@wrappers/settings"
 
 import type { NextPageWithWrapper } from "@servcy/types"
 import { Button } from "@servcy/ui"
@@ -37,7 +37,7 @@ const BillingSettingsPage: NextPageWithWrapper = observer(() => {
 
     return (
         <AppWrapper header={<WorkspaceSettingHeader title="Billing & Plans Settings" />}>
-            <WorkspaceSettingLayout>
+            <WorkspaceSettingWrapper>
                 <PageHead title={pageTitle} />
                 <section className="w-full overflow-y-auto py-8 pr-9">
                     <div>
@@ -55,7 +55,7 @@ const BillingSettingsPage: NextPageWithWrapper = observer(() => {
                         </div>
                     </div>
                 </section>
-            </WorkspaceSettingLayout>
+            </WorkspaceSettingWrapper>
         </AppWrapper>
     )
 })

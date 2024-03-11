@@ -8,7 +8,7 @@ import { EmailSettingsLoader } from "@components/ui"
 
 import { UserService } from "@services/user.service"
 
-import { ProfilePreferenceSettingsLayout } from "@wrappers/settings/profile/preferences"
+import { ProfilePreferenceSettingsWrapper } from "@wrappers/settings/profile/preferences"
 
 import type { NextPageWithWrapper } from "@servcy/types"
 
@@ -25,12 +25,12 @@ const ProfilePreferencesEmailPage: NextPageWithWrapper = () => {
     }
 
     return (
-        <ProfilePreferenceSettingsLayout>
+        <ProfilePreferenceSettingsWrapper>
             <PageHead title="Profile - Email Preference" />
             <div className="mx-auto mt-8 h-full w-full overflow-y-auto px-6 lg:px-20 pb-8">
                 <EmailNotificationForm data={data} />
             </div>
-        </ProfilePreferenceSettingsLayout>
+        </ProfilePreferenceSettingsWrapper>
     )
 }
 

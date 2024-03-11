@@ -18,7 +18,7 @@ import { TIME_ZONES } from "@constants/timezones"
 
 import { FileService } from "@services/document.service"
 
-import { ProfileSettingsLayout } from "@wrappers/settings"
+import { ProfileSettingsWrapper } from "@wrappers/settings"
 
 import type { IUser, NextPageWithWrapper } from "@servcy/types"
 import { Button, CustomSearchSelect, Input } from "@servcy/ui"
@@ -105,7 +105,7 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
     }))
 
     return (
-        <ProfileSettingsLayout>
+        <ProfileSettingsWrapper>
             <PageHead title="Profile - General Settings" />
             <div className="flex flex-col h-full">
                 <div className="block md:hidden flex-shrink-0 border-b border-custom-border-200 p-4">
@@ -409,7 +409,7 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
                     </div>
                 </div>
             </div>
-        </ProfileSettingsLayout>
+        </ProfileSettingsWrapper>
     )
 })
 
