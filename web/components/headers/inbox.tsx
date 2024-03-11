@@ -15,30 +15,24 @@ export const InboxHeader = (
         search: string
     }
 ) => (
-    <>
-        <div className="relative z-[15] flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 mb-6 rounded-lg border-[0.5px] p-6">
-            <div className="flex">
-                <AiOutlineInbox className="my-auto mr-2" size="24" />
-                <p className="text-xl text-custom-text-100">Inbox</p>
-                <Input
-                    className="ml-auto max-w-[200px]"
-                    value={search}
-                    placeholder="search by notification..."
-                    onChange={(event) => setSearch(event.target.value || "")}
+    <div className="mb-6 h-[80px] rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 hover:shadow-custom-shadow-4xl p-6">
+        <div className="flex flex-row items-center">
+            <AiOutlineInbox size="24" />
+            <p className="truncate px-2 text-xl max-md:text-lg">Inbox</p>
+            <Input
+                className="ml-auto max-w-[200px]"
+                value={search}
+                placeholder="search by notification..."
+                onChange={(event) => setSearch(event.target.value || "")}
+            />
+            <Button onClick={fetchInbox} className="ml-2 h-full text-custom-text-100 border-none" disabled={loading}>
+                <AiOutlineSync
+                    className={cn("my-auto", {
+                        "animate-spin": loading,
+                    })}
+                    size="24"
                 />
-                <Button
-                    onClick={fetchInbox}
-                    className="ml-2 h-full text-custom-text-100 border-none"
-                    disabled={loading}
-                >
-                    <AiOutlineSync
-                        className={cn("my-auto", {
-                            "animate-spin": loading,
-                        })}
-                        size="24"
-                    />
-                </Button>
-            </div>
+            </Button>
         </div>
-    </>
+    </div>
 )
