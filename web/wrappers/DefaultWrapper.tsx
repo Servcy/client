@@ -1,21 +1,21 @@
-import { FC, ReactNode,useEffect, useRef, useState } from "react"
-
-import { CommandPalette } from "@components/command-palette"
-
-import UserAuthWrapper from "@wrappers/UserAuthWrapper"
-import { observer } from "mobx-react-lite"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
+import { FC, ReactNode, useEffect, useRef, useState } from "react"
 
-import { LogOut, MoveLeft, Plus, UserPlus, Home, Inbox } from "lucide-react"
-import { AiOutlineApi } from "react-icons/ai"
+import { Home, Inbox, LogOut, MoveLeft, Plus, UserPlus } from "lucide-react"
+import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
+import { AiOutlineApi } from "react-icons/ai"
 import { mutate } from "swr"
+
+import { CommandPalette } from "@components/command-palette"
 
 import { useApplication, useUser, useWorkspace } from "@hooks/store"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 import { Tooltip } from "@servcy/ui"
 
@@ -112,7 +112,6 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
             .finally(() => setIsSigningOut(false))
     }
 
-
     return (
         <>
             <CommandPalette />
@@ -135,7 +134,12 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                 )}
                                 <div className="mt-2 h-full space-y-1.5 overflow-y-auto">
                                     {HOME_ACTION_LINKS.map((link) => (
-                                        <Link key={link.key} href={link.href} className="block w-full" onClick={handleItemClick}>
+                                        <Link
+                                            key={link.key}
+                                            href={link.href}
+                                            className="block w-full"
+                                            onClick={handleItemClick}
+                                        >
                                             <Tooltip
                                                 tooltipContent={link.label}
                                                 position="right"
@@ -177,7 +181,8 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                                 >
                                                     <span
                                                         className={`relative flex h-6 w-6 flex-shrink-0 items-center  justify-center p-2 text-xs uppercase ${
-                                                            !workspace?.logo && "rounded bg-custom-primary-500 text-white"
+                                                            !workspace?.logo &&
+                                                            "rounded bg-custom-primary-500 text-white"
                                                         }`}
                                                     >
                                                         {workspace?.logo && workspace.logo !== "" ? (
@@ -202,7 +207,12 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                 )}
                                 <div className="mt-1.5">
                                     {WORKSPACE_ACTION_LINKS.map((link) => (
-                                        <Link className="block w-full" key={link.key} href={link.href} onClick={handleItemClick}>
+                                        <Link
+                                            className="block w-full"
+                                            key={link.key}
+                                            href={link.href}
+                                            onClick={handleItemClick}
+                                        >
                                             <Tooltip
                                                 tooltipContent={link.label}
                                                 position="right"
@@ -225,7 +235,9 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                             <div className="flex flex-shrink-0 flex-grow items-end px-6 py-2">
                                 <div
                                     className={`flex w-full ${
-                                        sidebarCollapsed ? "flex-col justify-center gap-2" : "items-center justify-between gap-2"
+                                        sidebarCollapsed
+                                            ? "flex-col justify-center gap-2"
+                                            : "items-center justify-between gap-2"
                                     }`}
                                 >
                                     <button
@@ -235,7 +247,9 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                         disabled={isSigningOut}
                                     >
                                         <LogOut className="h-3.5 w-3.5" />
-                                        {!sidebarCollapsed && <span>{isSigningOut ? "Signing out..." : "Sign out"}</span>}
+                                        {!sidebarCollapsed && (
+                                            <span>{isSigningOut ? "Signing out..." : "Sign out"}</span>
+                                        )}
                                     </button>
                                     <button
                                         type="button"
@@ -251,7 +265,9 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                         }`}
                                         onClick={() => toggleSidebar()}
                                     >
-                                        <MoveLeft className={`h-3.5 w-3.5 duration-300 ${sidebarCollapsed ? "rotate-180" : ""}`} />
+                                        <MoveLeft
+                                            className={`h-3.5 w-3.5 duration-300 ${sidebarCollapsed ? "rotate-180" : ""}`}
+                                        />
                                     </button>
                                 </div>
                             </div>
