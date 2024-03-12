@@ -14,10 +14,10 @@ import { ERoles } from "@constants/iam"
 import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingWrapper } from "@wrappers/settings"
 
-import type { NextPageWithWrapper } from "@servcy/types"
+
 import { Button } from "@servcy/ui"
 
-const BillingSettingsPage: NextPageWithWrapper = observer(() => {
+const BillingSettingsPage = observer(() => {
     // store hooks
     const {
         membership: { currentWorkspaceRole, fetchUserWorkspaceInfo },

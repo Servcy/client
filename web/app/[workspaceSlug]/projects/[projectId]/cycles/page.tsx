@@ -23,10 +23,10 @@ import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper, TCycleLayout, TCycleView } from "@servcy/types"
+import type {  TCycleLayout, TCycleView } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
 
-const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
+const ProjectCyclesPage = observer(() => {
     const [createModal, setCreateModal] = useState(false)
     // theme
     const { resolvedTheme } = useTheme()

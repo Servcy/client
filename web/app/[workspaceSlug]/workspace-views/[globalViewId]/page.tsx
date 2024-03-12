@@ -15,9 +15,9 @@ import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const GlobalViewIssuesPage: NextPageWithWrapper = observer(() => {
+
+const GlobalViewIssuesPage = observer(() => {
     const { globalViewId } = useParams()
     // store hooks
     const { currentWorkspace } = useWorkspace()

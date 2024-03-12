@@ -23,9 +23,9 @@ import { ERoles } from "@constants/iam"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-import type { IProject, NextPageWithWrapper } from "@servcy/types"
+import type { IProject } from "@servcy/types"
 
-const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
+const GeneralSettingsPage = observer(() => {
     // states
     const [selectProject, setSelectedProject] = useState<string | null>(null)
 

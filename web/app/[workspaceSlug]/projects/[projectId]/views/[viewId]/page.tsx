@@ -15,9 +15,9 @@ import { useProject, useProjectView } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const ProjectViewIssuesPage: NextPageWithWrapper = observer(() => {
+
+const ProjectViewIssuesPage = observer(() => {
     const router = useRouter()
     const { workspaceSlug, projectId, viewId } = useParams()
     // store hooks

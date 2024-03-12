@@ -20,7 +20,7 @@ import { FileService } from "@services/document.service"
 
 import { ProfileSettingsWrapper } from "@wrappers/settings"
 
-import type { IUser, NextPageWithWrapper } from "@servcy/types"
+import type { IUser } from "@servcy/types"
 import { Button, CustomSearchSelect, Input } from "@servcy/ui"
 
 const defaultValues: Partial<IUser> = {
@@ -35,7 +35,7 @@ const defaultValues: Partial<IUser> = {
 
 const fileService = new FileService()
 
-const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
+const ProfileSettingsPage = observer(() => {
     // states
     const [isLoading, setIsLoading] = useState(false)
     const [isRemoving, setIsRemoving] = useState(false)

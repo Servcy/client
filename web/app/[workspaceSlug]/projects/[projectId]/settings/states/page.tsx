@@ -7,9 +7,7 @@ import { ProjectSettingStateList } from "@components/states"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-import type { NextPageWithWrapper } from "@servcy/types"
-
-const StatesSettingsPage: NextPageWithWrapper = () => (
+const StatesSettingsPage = () => (
     <AppWrapper withProjectWrapper header={<ProjectSettingHeader title="States Settings" />}>
         <ProjectSettingLayout>
             <div className="w-full gap-10 overflow-y-auto py-8 pr-9">

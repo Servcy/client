@@ -11,9 +11,9 @@ import { useProject } from "@hooks/store"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const LabelsSettingsPage: NextPageWithWrapper = observer(() => {
+
+const LabelsSettingsPage = observer(() => {
     const { currentProjectDetails } = useProject()
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Labels` : undefined
 

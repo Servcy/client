@@ -9,9 +9,7 @@ import { ProfileIssuesPage } from "@components/profile/profile-issues"
 import { AppWrapper } from "@wrappers/app"
 import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
 
-import type { NextPageWithWrapper } from "@servcy/types"
-
-const ProfileCreatedIssuesPage: NextPageWithWrapper = () => (
+const ProfileCreatedIssuesPage = () => (
     <AppWrapper header={<UserProfileHeader type="Created" />}>
         <ProfileAuthWrapper showProfileIssuesFilter>
             <PageHead title="Profile - Created" />

@@ -26,7 +26,7 @@ import { PAGE_TABS_LIST } from "@constants/page"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
+
 
 const AllPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.AllPagesList), {
     ssr: false,
@@ -48,7 +48,7 @@ const SharedPagesList = dynamic<any>(() => import("@components/pages").then((a) 
     ssr: false,
 })
 
-const ProjectPagesPage: NextPageWithWrapper = observer(() => {
+const ProjectPagesPage = observer(() => {
     const { workspaceSlug, projectId } = useParams()
     // states
     const [createUpdatePageModal, setCreateUpdatePageModal] = useState(false)

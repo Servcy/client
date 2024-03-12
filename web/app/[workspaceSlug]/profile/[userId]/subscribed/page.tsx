@@ -9,9 +9,7 @@ import { ProfileIssuesPage } from "@components/profile/profile-issues"
 import { AppWrapper } from "@wrappers/app"
 import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
 
-import type { NextPageWithWrapper } from "@servcy/types"
-
-const ProfileSubscribedIssuesPage: NextPageWithWrapper = () => (
+const ProfileSubscribedIssuesPage = () => (
     <AppWrapper header={<UserProfileHeader type="Subscribed" />}>
         <ProfileAuthWrapper showProfileIssuesFilter>
             <PageHead title="Profile - Subscribed" />

@@ -21,11 +21,11 @@ import { ProfileSettingsWrapper } from "@wrappers/settings"
 import { calculateTimeAgo } from "@helpers/date-time.helper"
 
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor"
-import type { NextPageWithWrapper } from "@servcy/types"
+
 
 const userService = new UserService()
 
-const ProfileActivityPage: NextPageWithWrapper = observer(() => {
+const ProfileActivityPage = observer(() => {
     const { data: userActivity } = useSWR(USER_ACTIVITY, () => userService.getUserActivity())
     // store hooks
     const { currentUser } = useUser()

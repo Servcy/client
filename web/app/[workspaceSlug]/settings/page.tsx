@@ -11,9 +11,9 @@ import { useWorkspace } from "@hooks/store"
 import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingWrapper } from "@wrappers/settings"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const WorkspaceSettingsPage: NextPageWithWrapper = observer(() => {
+
+const WorkspaceSettingsPage = observer(() => {
     // store hooks
     const { currentWorkspace } = useWorkspace()
     // derived values

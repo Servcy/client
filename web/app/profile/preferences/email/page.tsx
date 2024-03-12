@@ -10,11 +10,9 @@ import { UserService } from "@services/user.service"
 
 import { ProfilePreferenceSettingsWrapper } from "@wrappers/settings/profile/preferences"
 
-import type { NextPageWithWrapper } from "@servcy/types"
-
 const userService = new UserService()
 
-const ProfilePreferencesEmailPage: NextPageWithWrapper = () => {
+const ProfilePreferencesEmailPage = () => {
     // fetching user email notification settings
     const { data, isLoading } = useSWR("CURRENT_USER_EMAIL_NOTIFICATION_SETTINGS", () =>
         userService.currentUserEmailNotificationSettings()

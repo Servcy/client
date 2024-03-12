@@ -13,9 +13,9 @@ import { ERoles } from "@constants/iam"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const EstimatesSettingsPage: NextPageWithWrapper = observer(() => {
+
+const EstimatesSettingsPage = observer(() => {
     const {
         membership: { currentProjectRole },
     } = useUser()

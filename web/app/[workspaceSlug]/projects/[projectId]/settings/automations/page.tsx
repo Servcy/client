@@ -16,9 +16,9 @@ import { ERoles } from "@constants/iam"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-import type { IProject, NextPageWithWrapper } from "@servcy/types"
+import type { IProject } from "@servcy/types"
 
-const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
+const AutomationSettingsPage = observer(() => {
     const { workspaceSlug, projectId } = useParams()
 
     // store hooks

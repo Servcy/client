@@ -22,10 +22,10 @@ import { WorkspaceSettingWrapper } from "@wrappers/settings"
 
 import { getUserRole } from "@helpers/user.helper"
 
-import type { IWorkspaceBulkInviteFormData, NextPageWithWrapper } from "@servcy/types"
+import type { IWorkspaceBulkInviteFormData } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
-const WorkspaceMembersSettingsPage: NextPageWithWrapper = observer(() => {
+const WorkspaceMembersSettingsPage = observer(() => {
     // states
     const [inviteModal, setInviteModal] = useState(false)
     const [searchQuery, setSearchQuery] = useState<string>("")

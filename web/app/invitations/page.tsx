@@ -30,13 +30,13 @@ import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 import { truncateText } from "@helpers/string.helper"
 import { getUserRole } from "@helpers/user.helper"
 
-import type { IWorkspaceMemberInvitation, NextPageWithWrapper } from "@servcy/types"
+import type { IWorkspaceMemberInvitation } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 const workspaceService = new WorkspaceService()
 const userService = new UserService()
 
-const UserInvitationsPage: NextPageWithWrapper = observer(() => {
+const UserInvitationsPage = observer(() => {
     // states
     const [invitationsRespond, setInvitationsRespond] = useState<string[]>([])
     const [isJoiningWorkspaces, setIsJoiningWorkspaces] = useState(false)

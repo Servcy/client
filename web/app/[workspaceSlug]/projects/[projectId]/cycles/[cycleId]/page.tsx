@@ -17,9 +17,9 @@ import useLocalStorage from "@hooks/use-local-storage"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const CycleDetailPage: NextPageWithWrapper = observer(() => {
+
+const CycleDetailPage = observer(() => {
     const router = useRouter()
     const { workspaceSlug, projectId, cycleId } = useParams()
     // store hooks

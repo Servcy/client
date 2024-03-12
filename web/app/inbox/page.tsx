@@ -22,7 +22,7 @@ import InboxService from "@services/inbox.service"
 
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
-import type { InboxItem, NextPageWithWrapper, PaginationDetails } from "@servcy/types"
+import type { InboxItem, PaginationDetails } from "@servcy/types"
 import { Button as ServcyButton } from "@servcy/ui"
 
 const inboxService = new InboxService()
@@ -50,7 +50,7 @@ const tabItems = [
     },
 ]
 
-const Inbox: NextPageWithWrapper = observer(() => {
+const Inbox = observer(() => {
     const [loading, setLoading] = useState<boolean>(false)
     const [search, setSearch] = useState<string>("")
     const [selectedItemIds, setSelectedItemIds] = useState<React.Key[]>([])

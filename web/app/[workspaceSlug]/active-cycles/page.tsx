@@ -10,9 +10,9 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const WorkspaceActiveCyclesPage: NextPageWithWrapper = observer(() => {
+
+const WorkspaceActiveCyclesPage = observer(() => {
     const { currentWorkspace } = useWorkspace()
     // derived values
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Active Cycles` : undefined

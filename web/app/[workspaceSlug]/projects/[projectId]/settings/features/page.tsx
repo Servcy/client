@@ -16,9 +16,9 @@ import { ERoles } from "@constants/iam"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
+
+const FeaturesSettingsPage = observer(() => {
     const { workspaceSlug, projectId } = useParams()
     // store
     const {

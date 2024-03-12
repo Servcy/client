@@ -15,10 +15,10 @@ import { useApplication, useIssueDetail, useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
+
 import { Loader } from "@servcy/ui"
 
-const IssueDetailsPage: NextPageWithWrapper = observer(() => {
+const IssueDetailsPage = observer(() => {
     const params = useParams()
     const { workspaceSlug, projectId, issueId } = params
 

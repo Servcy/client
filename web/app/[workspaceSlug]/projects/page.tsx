@@ -10,9 +10,9 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const ProjectsPage: NextPageWithWrapper = observer(() => {
+
+const ProjectsPage = observer(() => {
     // store
     const { currentWorkspace } = useWorkspace()
     // derived values

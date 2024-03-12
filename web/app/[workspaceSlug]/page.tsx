@@ -10,9 +10,9 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const WorkspacePage: NextPageWithWrapper = observer(() => {
+
+const WorkspacePage = observer(() => {
     const { currentWorkspace } = useWorkspace()
     // derived values
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Dashboard` : undefined

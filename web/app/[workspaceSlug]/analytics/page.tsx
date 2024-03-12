@@ -21,9 +21,9 @@ import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const AnalyticsPage: NextPageWithWrapper = observer(() => {
+
+const AnalyticsPage = observer(() => {
     const router = useRouter()
     const params = useParams()
     const { analytics_tab } = params

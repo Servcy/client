@@ -17,9 +17,9 @@ import useLocalStorage from "@hooks/use-local-storage"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const ModuleIssuesPage: NextPageWithWrapper = observer(() => {
+
+const ModuleIssuesPage = observer(() => {
     const router = useRouter()
     const params = useParams()
     const { workspaceSlug, projectId, moduleId } = params

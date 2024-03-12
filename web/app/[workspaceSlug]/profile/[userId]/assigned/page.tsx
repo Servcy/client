@@ -9,9 +9,7 @@ import { ProfileIssuesPage } from "@components/profile/profile-issues"
 import { AppWrapper } from "@wrappers/app"
 import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
 
-import type { NextPageWithWrapper } from "@servcy/types"
-
-const ProfileAssignedIssuesPage: NextPageWithWrapper = () => (
+const ProfileAssignedIssuesPage = () => (
     <AppWrapper header={<UserProfileHeader type="Assigned" />}>
         <ProfileAuthWrapper showProfileIssuesFilter>
             <PageHead title="Profile - Assigned" />

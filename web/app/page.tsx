@@ -8,7 +8,6 @@ import { AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai"
 
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
-import { NextPageWithWrapper } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 const activationSteps = [
@@ -32,7 +31,7 @@ const activationSteps = [
     },
 ]
 
-const Home: NextPageWithWrapper = observer(() => {
+const Home = observer(() => {
     const router = useRouter()
 
     const requestNotificationPermission = async () => {

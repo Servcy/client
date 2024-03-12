@@ -24,12 +24,12 @@ import { IntegrationsHeader } from "@components/headers/integrations"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 import { oauthUrlGenerators } from "@helpers/integration.helper"
 
-import type { Integration, NextPageWithWrapper } from "@servcy/types"
+import type { Integration } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 const integrationService = new IntegrationService()
 
-const Integrations: NextPageWithWrapper = observer(() => {
+const Integrations = observer(() => {
     const [integrations, setIntegrations] = useState<Integration[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [search, setSearch] = useState<string>("")

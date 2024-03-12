@@ -20,10 +20,10 @@ import { EIssuesStoreType } from "@constants/issue"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
+
 import { ArchiveIcon, Button, Loader } from "@servcy/ui"
 
-const ArchivedIssueDetailsPage: NextPageWithWrapper = observer(() => {
+const ArchivedIssueDetailsPage = observer(() => {
     const router = useRouter()
     const params = useParams()
     const { workspaceSlug, projectId, archivedIssueId } = params

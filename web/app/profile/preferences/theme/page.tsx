@@ -14,10 +14,10 @@ import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
 
 import { ProfilePreferenceSettingsWrapper } from "@wrappers/settings/profile/preferences"
 
-import type { NextPageWithWrapper } from "@servcy/types"
+
 import { Spinner } from "@servcy/ui"
 
-const ProfilePreferencesThemePage: NextPageWithWrapper = observer(() => {
+const ProfilePreferencesThemePage = observer(() => {
     // states
     const [currentTheme, setCurrentTheme] = useState<I_THEME_OPTION | null>(null)
     // store hooks

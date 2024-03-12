@@ -12,9 +12,9 @@ import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 
-const ProjectViewsPage: NextPageWithWrapper = observer(() => {
+
+const ProjectViewsPage = observer(() => {
     const { projectId } = useParams()
     // store
     const { getProjectById } = useProject()

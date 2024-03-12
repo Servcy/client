@@ -15,10 +15,10 @@ import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type { NextPageWithWrapper } from "@servcy/types"
+
 import { Input } from "@servcy/ui"
 
-const WorkspaceViewsPage: NextPageWithWrapper = observer(() => {
+const WorkspaceViewsPage = observer(() => {
     const [query, setQuery] = useState("")
     // store
     const { currentWorkspace } = useWorkspace()

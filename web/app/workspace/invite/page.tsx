@@ -16,12 +16,11 @@ import { WorkspaceService } from "@services/workspace.service"
 
 import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 
-import type { NextPageWithWrapper } from "@servcy/types"
 import { Spinner } from "@servcy/ui"
 
 const workspaceService = new WorkspaceService()
 
-const WorkspaceInvitationPage: NextPageWithWrapper = observer(() => {
+const WorkspaceInvitationPage = observer(() => {
     const router = useRouter()
     const { invitation_id, email, slug } = useParams()
     // store hooks
