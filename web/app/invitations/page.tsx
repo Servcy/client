@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 
 import { useState } from "react"
 
-import { CheckCircle2, UserPlus } from "lucide-react"
+import { CheckCircle2, Mails } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import emptyInvitation from "public/empty-state/invitation.svg"
 import toast from "react-hot-toast"
@@ -110,7 +110,7 @@ const UserInvitationsPage = observer(() => {
 
     return (
         <DefaultWrapper
-            header={<DefaultHeader title="Invitations" icon={<UserPlus className="h-4 w-4 text-custom-text-300" />} />}
+            header={<DefaultHeader title="Invitations" icon={<Mails className="h-4 w-4 text-custom-text-300" />} />}
         >
             <PageHead title="Invitations" />
             <div className="flex h-full flex-col gap-y-2 overflow-hidden sm:flex-row sm:gap-y-0">
