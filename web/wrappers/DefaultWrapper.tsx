@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 import { FC, Fragment, ReactNode, useEffect, useRef, useState } from "react"
 
@@ -79,7 +79,6 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
     } = useApplication()
     const { logOut, currentUser } = useUser()
     const { workspaces } = useWorkspace()
-    const { workspaceSlug } = useParams()
     const workspacesList = Object.values(workspaces ?? {})
     const ref = useRef<HTMLDivElement>(null)
 
