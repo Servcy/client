@@ -26,6 +26,4 @@ const ProjectsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-ProjectsPage.hasWrapper = true
-
 export default ProjectsPage

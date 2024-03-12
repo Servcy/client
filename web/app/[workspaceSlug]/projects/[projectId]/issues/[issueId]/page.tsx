@@ -89,6 +89,4 @@ const IssueDetailsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-IssueDetailsPage.hasWrapper = true
-
 export default IssueDetailsPage

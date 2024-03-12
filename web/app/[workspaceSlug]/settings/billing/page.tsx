@@ -71,6 +71,4 @@ const BillingSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-BillingSettingsPage.hasWrapper = true
-
 export default BillingSettingsPage

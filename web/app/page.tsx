@@ -83,6 +83,4 @@ const Home: NextPageWithWrapper = observer(() => {
     )
 })
 
-Home.hasWrapper = true
-
 export default Home

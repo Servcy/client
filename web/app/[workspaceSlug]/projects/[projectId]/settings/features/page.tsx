@@ -49,6 +49,4 @@ const FeaturesSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-FeaturesSettingsPage.hasWrapper = true
-
 export default FeaturesSettingsPage

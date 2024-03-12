@@ -78,6 +78,4 @@ const GeneralSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-GeneralSettingsPage.hasWrapper = true
-
 export default GeneralSettingsPage

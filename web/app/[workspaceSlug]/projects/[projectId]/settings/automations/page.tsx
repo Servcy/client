@@ -55,6 +55,4 @@ const AutomationSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-AutomationSettingsPage.hasWrapper = true
-
 export default AutomationSettingsPage

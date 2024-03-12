@@ -73,6 +73,4 @@ const ProfilePreferencesThemePage: NextPageWithWrapper = observer(() => {
     )
 })
 
-ProfilePreferencesThemePage.hasWrapper = true
-
 export default ProfilePreferencesThemePage

@@ -82,6 +82,4 @@ const CycleDetailPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-CycleDetailPage.hasWrapper = true
-
 export default CycleDetailPage

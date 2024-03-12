@@ -20,6 +20,4 @@ const ProfileAssignedIssuesPage: NextPageWithWrapper = () => (
     </AppWrapper>
 )
 
-ProfileAssignedIssuesPage.hasWrapper = true
-
 export default ProfileAssignedIssuesPage

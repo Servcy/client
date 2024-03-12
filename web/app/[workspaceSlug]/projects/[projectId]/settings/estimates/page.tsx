@@ -38,6 +38,4 @@ const EstimatesSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-EstimatesSettingsPage.hasWrapper = true
-
 export default EstimatesSettingsPage

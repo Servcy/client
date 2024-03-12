@@ -191,6 +191,4 @@ const Integrations: NextPageWithWrapper = observer(() => {
     )
 })
 
-Integrations.hasWrapper = true
-
 export default Integrations

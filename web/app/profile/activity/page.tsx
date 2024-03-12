@@ -206,6 +206,4 @@ const ProfileActivityPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-ProfileActivityPage.hasWrapper = true
-
 export default ProfileActivityPage

@@ -29,6 +29,4 @@ const WorkspaceSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-WorkspaceSettingsPage.hasWrapper = true
-
 export default WorkspaceSettingsPage

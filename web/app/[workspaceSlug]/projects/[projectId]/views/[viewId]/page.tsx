@@ -57,6 +57,4 @@ const ProjectViewIssuesPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-ProjectViewIssuesPage.hasWrapper = true
-
 export default ProjectViewIssuesPage

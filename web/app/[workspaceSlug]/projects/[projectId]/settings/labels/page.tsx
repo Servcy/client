@@ -29,6 +29,4 @@ const LabelsSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-LabelsSettingsPage.hasWrapper = true
-
 export default LabelsSettingsPage

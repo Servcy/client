@@ -30,6 +30,4 @@ const ProjectModulesPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-ProjectModulesPage.hasWrapper = true
-
 export default ProjectModulesPage

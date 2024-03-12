@@ -25,6 +25,4 @@ const WorkspaceActiveCyclesPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-WorkspaceActiveCyclesPage.hasWrapper = true
-
 export default WorkspaceActiveCyclesPage

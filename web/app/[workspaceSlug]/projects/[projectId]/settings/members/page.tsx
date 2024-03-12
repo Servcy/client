@@ -32,6 +32,4 @@ const MembersSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-MembersSettingsPage.hasWrapper = true
-
 export default MembersSettingsPage

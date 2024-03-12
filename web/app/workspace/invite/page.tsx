@@ -124,6 +124,4 @@ const WorkspaceInvitationPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-WorkspaceInvitationPage.hasWrapper = true
-
 export default WorkspaceInvitationPage

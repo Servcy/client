@@ -52,6 +52,4 @@ const WorkspaceViewsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-WorkspaceViewsPage.hasWrapper = true
-
 export default WorkspaceViewsPage

@@ -45,6 +45,4 @@ const GlobalViewIssuesPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-GlobalViewIssuesPage.hasWrapper = true
-
 export default GlobalViewIssuesPage

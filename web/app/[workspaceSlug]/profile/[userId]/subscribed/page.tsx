@@ -20,6 +20,4 @@ const ProfileSubscribedIssuesPage: NextPageWithWrapper = () => (
     </AppWrapper>
 )
 
-ProfileSubscribedIssuesPage.hasWrapper = true
-
 export default observer(ProfileSubscribedIssuesPage)

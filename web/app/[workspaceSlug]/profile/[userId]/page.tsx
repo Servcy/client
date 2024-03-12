@@ -62,6 +62,4 @@ const ProfileOverviewPage: NextPageWithWrapper = () => {
     )
 }
 
-ProfileOverviewPage.hasWrapper = true
-
 export default ProfileOverviewPage

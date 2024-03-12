@@ -254,6 +254,4 @@ const OnboardingPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-OnboardingPage.hasWrapper = true
-
 export default OnboardingPage

@@ -413,6 +413,4 @@ const ProfileSettingsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-ProfileSettingsPage.hasWrapper = true
-
 export default ProfileSettingsPage

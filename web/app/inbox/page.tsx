@@ -298,6 +298,4 @@ const Inbox: NextPageWithWrapper = observer(() => {
     )
 })
 
-Inbox.hasWrapper = true
-
 export default Inbox

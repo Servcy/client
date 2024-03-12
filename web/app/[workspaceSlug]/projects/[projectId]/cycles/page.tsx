@@ -230,6 +230,4 @@ const ProjectCyclesPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-ProjectCyclesPage.hasWrapper = true
-
 export default ProjectCyclesPage

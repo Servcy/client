@@ -108,6 +108,4 @@ const AnalyticsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-AnalyticsPage.hasWrapper = true
-
 export default AnalyticsPage

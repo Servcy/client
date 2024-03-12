@@ -227,6 +227,4 @@ const UserInvitationsPage: NextPageWithWrapper = observer(() => {
     )
 })
 
-UserInvitationsPage.hasWrapper = true
-
 export default UserInvitationsPage

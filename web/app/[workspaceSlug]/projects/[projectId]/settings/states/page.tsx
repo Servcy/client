@@ -22,6 +22,4 @@ const StatesSettingsPage: NextPageWithWrapper = () => (
     </AppWrapper>
 )
 
-StatesSettingsPage.hasWrapper = true
-
 export default StatesSettingsPage

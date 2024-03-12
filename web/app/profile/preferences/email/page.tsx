@@ -34,6 +34,4 @@ const ProfilePreferencesEmailPage: NextPageWithWrapper = () => {
     )
 }
 
-ProfilePreferencesEmailPage.hasWrapper = true
-
 export default ProfilePreferencesEmailPage
