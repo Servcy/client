@@ -322,13 +322,13 @@ export const InviteMembers: React.FC<Props> = (props) => {
                 toast.success("Invitations sent successfully.")
                 await nextStep()
             })
-            .catch((err) => {
+            .catch((error) => {
                 captureEvent(MEMBER_INVITED, {
                     project_id: undefined,
                     state: "FAILED",
                     element: "Onboarding",
                 })
-                toast.error(err?.error)
+                toast.error(error?.response?.data?.detail || "Something went wrong!")
             })
     }
 
