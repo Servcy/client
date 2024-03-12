@@ -88,6 +88,9 @@ export class WorkspaceService extends APIService {
     }
 
     async userWorkspaceInvitations(): Promise<{
+        count: number
+        next: string
+        previous: string
         results: IWorkspaceMemberInvitation[]
     }> {
         return this.get("/iam/users/me/workspaces/invitations/")
