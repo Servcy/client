@@ -39,7 +39,7 @@ const CreateWorkspacePage = observer(() => {
         >
             <PageHead title="Create Workspace" />
             <div className="flex h-full flex-col gap-y-2 overflow-hidden sm:flex-row sm:gap-y-0">
-                <div className="relative flex h-full justify-center px-12 pb-8 sm:items-center sm:justify-start sm:p-0 sm:pr-[8.33%] w-full">
+                <div className="relative flex h-full justify-center px-12 pb-8 sm:items-center sm:justify-start w-full">
                     <div className="w-full">
                         <h4 className="text-2xl font-semibold">Create your workspace</h4>
                         <div className="sm:w-3/4 md:w-2/5">
