@@ -40,7 +40,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
             .then(() => {
                 mutate("CURRENT_USER_DETAILS", null)
                 setTheme("system")
-                router.push("/")
+                router.push("/login")
                 handleClose()
             })
             .catch(() => toast.error("Failed to sign out. Please try again."))
@@ -55,7 +55,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
                 toast.success("Account deleted successfully.")
                 mutate("CURRENT_USER_DETAILS", null)
                 setTheme("system")
-                router.push("/")
+                router.push("/login")
                 handleClose()
             })
             .catch((err) => toast.error(err?.error))
