@@ -56,11 +56,11 @@ const HOME_ACTION_LINKS = [
     },
 ]
 
-const USER_LINKS = (workspaceSlug: string) => [
+const USER_LINKS = () => [
     {
         key: "settings",
         name: "Settings",
-        href: `/${workspaceSlug}/settings`,
+        href: `/profile`,
         icon: Settings,
     },
 ]
@@ -199,7 +199,7 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                                         </h6>
                                                     </div>
                                                     <div className="flex w-full flex-col items-start justify-start gap-2 px-4 py-2 text-sm">
-                                                        {USER_LINKS(workspaceSlug?.toString() ?? "").map(
+                                                        {USER_LINKS().map(
                                                             (link, index) => (
                                                                 <Link
                                                                     key={link.key}
