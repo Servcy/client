@@ -26,15 +26,15 @@ import { Button, Spinner } from "@servcy/ui"
 const authService = new AuthService()
 
 export default function Login(): JSX.Element {
-    const [stage, setStage] = useState<number>(0)
     const [inputType, setInputType] = useState<string>("email")
-    const [input, setInput] = useState<string>("")
-    const [invalidPhone, setInvalidPhone] = useState<boolean>(false)
     const [otp, setOtp] = useState<string>("")
-    const { isRedirecting, handleRedirection } = useLoginRedirection()
-    const { currentUser } = useUser()
+    const [input, setInput] = useState<string>("")
+    const [stage, setStage] = useState<number>(0)
+    const [invalidPhone, setInvalidPhone] = useState<boolean>(false)
     const [invalidEmail, setInvalidEmail] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
+    const { isRedirecting, handleRedirection } = useLoginRedirection()
+    const { currentUser } = useUser()
 
     const sendOtp = async (e: React.MouseEvent | React.KeyboardEvent) => {
         try {
@@ -51,8 +51,10 @@ export default function Login(): JSX.Element {
             if (!isPhoneValid) setInvalidEmail(!isEmailValid)
             else if (!isEmailValid) setInvalidPhone(!isPhoneValid)
             if ((!isEmailValid && !isPhoneValid) || !agree_terms_conditions_and_privacy_policy.checked) return
+            // set input type and value
             setInputType(isEmailValid ? "email" : "phone_number")
             setInput(isEmailValid ? email.value : phone_number.value.replace("+", ""))
+            // send otp
             await toast.promise(
                 authService.sendOtp(
                     isEmailValid ? email.value : phone_number.value.replace("+", ""),
@@ -64,6 +66,7 @@ export default function Login(): JSX.Element {
                     error: "Failed to send OTP",
                 }
             )
+            // set stage to otp input
             setStage(1)
         } finally {
             setLoading(false)
@@ -73,13 +76,16 @@ export default function Login(): JSX.Element {
     const verifyOtp = async (otp: string) => {
         try {
             setLoading(true)
+            // validate otp
             const otpIsValid = validateOtp(otp)
             if (!otpIsValid) return
+            // verify otp
             await toast.promise(authService.verifyOtp(otp, input, inputType), {
                 loading: "Verifying OTP...",
                 success: "OTP verified successfully",
                 error: "Failed to verify OTP",
             })
+            // handle redirection
             handleRedirection()
         } finally {
             setLoading(false)
@@ -89,6 +95,7 @@ export default function Login(): JSX.Element {
     const googleLogin = async (credential: string) => {
         try {
             setLoading(true)
+            // login with google
             await toast.promise(authService.googleLogin(credential), {
                 loading: "Logging in..",
                 success: "Logged in successfully",
