@@ -261,17 +261,16 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                     </CustomMenu.MenuItem>
 
                                     {/* publish project settings */}
-                                    {project?.member_role &&
-                                        project?.member_role === ERoles.ADMIN && (
-                                            <CustomMenu.MenuItem onClick={() => setPublishModal(true)}>
-                                                <div className="relative flex flex-shrink-0 items-center justify-start gap-2">
-                                                    <div className="flex h-4 w-4 cursor-pointer items-center justify-center rounded text-custom-sidebar-text-200 transition-all duration-300 hover:bg-custom-sidebar-background-80">
-                                                        <Share2 className="h-3.5 w-3.5 stroke-[1.5]" />
-                                                    </div>
-                                                    <div>{project.is_deployed ? "Publish settings" : "Publish"}</div>
+                                    {project?.member_role && project?.member_role === ERoles.ADMIN && (
+                                        <CustomMenu.MenuItem onClick={() => setPublishModal(true)}>
+                                            <div className="relative flex flex-shrink-0 items-center justify-start gap-2">
+                                                <div className="flex h-4 w-4 cursor-pointer items-center justify-center rounded text-custom-sidebar-text-200 transition-all duration-300 hover:bg-custom-sidebar-background-80">
+                                                    <Share2 className="h-3.5 w-3.5 stroke-[1.5]" />
                                                 </div>
-                                            </CustomMenu.MenuItem>
-                                        )}
+                                                <div>{project.is_deployed ? "Publish settings" : "Publish"}</div>
+                                            </div>
+                                        </CustomMenu.MenuItem>
+                                    )}
                                     {!isGuest && (
                                         <CustomMenu.MenuItem>
                                             <Link href={`/${workspaceSlug}/projects/${project?.id}/archived-issues/`}>
