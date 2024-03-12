@@ -34,7 +34,7 @@ export const ProfileSidebar = observer(() => {
     const { data: userProjectsData } = useSWR(
         workspaceSlug && userId ? USER_PROFILE_PROJECT_SEGREGATION(workspaceSlug.toString(), userId.toString()) : null,
         workspaceSlug && userId
-            ? () => userService.getUserProfileProjectsSegregation(workspaceSlug.toString(), userId.toString())
+            ? () => userService.getUserProfileProjectsStats(workspaceSlug.toString(), userId.toString())
             : null
     )
 
