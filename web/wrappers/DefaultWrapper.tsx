@@ -4,11 +4,10 @@ import { useParams, useRouter } from "next/navigation"
 import { FC, Fragment, ReactNode, useEffect, useRef, useState } from "react"
 
 import { Menu, Transition } from "@headlessui/react"
-import { ChevronDown, Home, Inbox, LogOut, MoveLeft, Plus, Settings, UserPlus } from "lucide-react"
+import { ChevronDown, Home, Inbox, LogOut, MoveLeft, Plus, Settings, Mails, Workflow } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
-import { AiOutlineApi } from "react-icons/ai"
 import { mutate } from "swr"
 
 import { CommandPalette } from "@components/command-palette"
@@ -29,7 +28,7 @@ const WORKSPACE_ACTION_LINKS = [
     },
     {
         key: "invitations",
-        Icon: UserPlus,
+        Icon: Mails,
         label: "Invitations",
         href: "/invitations",
     },
@@ -44,7 +43,7 @@ const HOME_ACTION_LINKS = [
     },
     {
         key: "integrations",
-        Icon: AiOutlineApi,
+        Icon: Workflow,
         label: "Integrations",
         href: "/integrations",
     },
