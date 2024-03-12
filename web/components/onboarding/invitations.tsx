@@ -38,9 +38,11 @@ export const Invitations: React.FC<Props> = (props) => {
 
     const workspacesList = Object.values(workspaces)
 
-    const { data: invitations, mutate: mutateInvitations } = useSWR(USER_WORKSPACE_INVITATIONS, () =>
+    const { data, mutate: mutateInvitations } = useSWR(USER_WORKSPACE_INVITATIONS, () =>
         workspaceService.userWorkspaceInvitations()
     )
+
+    const invitations = data?.results ?? []
 
     const handleInvitation = (workspace_invitation: IWorkspaceMemberInvitation, action: "accepted" | "withdraw") => {
         if (action === "accepted") {

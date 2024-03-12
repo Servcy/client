@@ -56,9 +56,11 @@ const OnboardingPage = observer(() => {
         shouldRetryOnError: false,
     })
 
-    const { data: invitations } = useSWR("USER_WORKSPACE_INVITATIONS_LIST", () =>
+    const { data } = useSWR("USER_WORKSPACE_INVITATIONS_LIST", () =>
         workspaceService.userWorkspaceInvitations()
     )
+
+    const invitations = data?.results ?? []
 
     // handle step change
     const stepChange = async (steps: Partial<TOnboardingSteps>) => {
