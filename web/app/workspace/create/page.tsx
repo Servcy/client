@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation"
 
 import { useState } from "react"
 
+import { Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { PageHead } from "@components/core"
+import { DefaultHeader } from "@components/headers"
 import { CreateWorkspaceForm } from "@components/workspace"
 
 import { useUser } from "@hooks/store"
@@ -30,7 +32,11 @@ const CreateWorkspacePage = observer(() => {
     }
 
     return (
-        <DefaultWrapper>
+        <DefaultWrapper
+            header={
+                <DefaultHeader title="Create A Workspace" icon={<Plus className="h-4 w-4 text-custom-text-300" />} />
+            }
+        >
             <PageHead title="Create Workspace" />
             <div className="flex h-full flex-col gap-y-2 overflow-hidden sm:flex-row sm:gap-y-0">
                 <div className="relative flex h-full justify-center px-12 pb-8 sm:items-center sm:justify-start sm:p-0 sm:pr-[8.33%] w-full">

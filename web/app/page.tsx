@@ -2,9 +2,12 @@
 
 import { useEffect } from "react"
 
+import { Home } from "lucide-react"
 import { observer } from "mobx-react"
 import { useRouter } from "next-nprogress-bar"
 import { AiOutlineRightCircle, AiOutlineRocket } from "react-icons/ai"
+
+import { DefaultHeader } from "@components/headers"
 
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
@@ -31,7 +34,7 @@ const activationSteps = [
     },
 ]
 
-const Home = observer(() => {
+const HomePage = observer(() => {
     const router = useRouter()
 
     const requestNotificationPermission = async () => {
@@ -44,7 +47,9 @@ const Home = observer(() => {
     }, [])
 
     return (
-        <DefaultWrapper>
+        <DefaultWrapper
+            header={<DefaultHeader title="Home" icon={<Home className="h-4 w-4 text-custom-text-300" />} />}
+        >
             <main className="h-screen flex-[1_0_16rem] overflow-y-scroll p-3">
                 <div className="mb-6 min-h-[80px] rounded-lg bg-custom-background-100 p-6 text-lg border-custom-border-200 border-[0.5px]">
                     <div className="mb-4 flex flex-row">
@@ -82,4 +87,4 @@ const Home = observer(() => {
     )
 })
 
-export default Home
+export default HomePage
