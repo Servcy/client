@@ -67,7 +67,6 @@ export interface IWorkspaceMember {
 }
 
 export interface IWorkspaceMemberMe {
-    company_role: string | null
     created_at: Date
     created_by: string
     default_props: IWorkspaceViewProps
