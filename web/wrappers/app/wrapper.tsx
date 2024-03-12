@@ -4,9 +4,9 @@ import { observer } from "mobx-react-lite"
 
 import { CommandPalette } from "@components/command-palette"
 
-import ProjectAuthWrapper from "@wrappers/ProjectAuthWrapper"
-import UserAuthWrapper from "@wrappers/UserAuthWrapper"
-import WorkspaceAuthWrapper from "@wrappers/WorkspaceAuthWrapper"
+import ProjectAuthWrapper from "@wrappers/auth/ProjectAuthWrapper"
+import UserAuthWrapper from "@wrappers/auth/UserAuthWrapper"
+import WorkspaceAuthWrapper from "@wrappers/auth/WorkspaceAuthWrapper"
 
 import { AppSidebar } from "./sidebar"
 

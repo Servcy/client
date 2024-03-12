@@ -7,7 +7,7 @@ import { UserProfileHeader } from "@components/headers"
 import { ProfileIssuesPage } from "@components/profile/profile-issues"
 
 import { AppWrapper } from "@wrappers/app"
-import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
+import ProfileAuthWrapper from "@wrappers/auth/ProfileAuthWrapper"
 
 const ProfileSubscribedIssuesPage = () => (
     <AppWrapper header={<UserProfileHeader type="Subscribed" />}>

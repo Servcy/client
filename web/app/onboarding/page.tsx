@@ -23,7 +23,7 @@ import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
 import { WorkspaceService } from "@services/workspace.service"
 
 import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
-import UserAuthWrapper from "@wrappers/UserAuthWrapper"
+import UserAuthWrapper from "@wrappers/auth/UserAuthWrapper"
 
 import type { IUser, TOnboardingSteps } from "@servcy/types"
 import { Avatar, Spinner } from "@servcy/ui"

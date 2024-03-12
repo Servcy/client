@@ -3,7 +3,7 @@ import isEmpty from "lodash/isEmpty"
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 
 // lib
-import { storage } from "@wrappers/LocalStorageWrapper"
+import { storage } from "@wrappers/common/LocalStorageWrapper"
 
 import {
     IIssueDisplayFilterOptions,

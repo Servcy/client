@@ -16,7 +16,7 @@ import { CommandPalette } from "@components/command-palette"
 import { useApplication, useUser, useWorkspace } from "@hooks/store"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
-import UserAuthWrapper from "@wrappers/UserAuthWrapper"
+import UserAuthWrapper from "@wrappers/auth/UserAuthWrapper"
 
 import { Avatar, Tooltip } from "@servcy/ui"
 

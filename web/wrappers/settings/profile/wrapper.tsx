@@ -2,8 +2,8 @@ import { FC, ReactNode } from "react"
 
 import { CommandPalette } from "@components/command-palette"
 
+import UserAuthWrapper from "@wrappers/auth/UserAuthWrapper"
 import { ProfileLayoutSidebar } from "@wrappers/settings"
-import UserAuthWrapper from "@wrappers/UserAuthWrapper"
 
 interface IProfileSettingsLayout {
     children: ReactNode

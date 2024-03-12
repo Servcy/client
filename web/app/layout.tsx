@@ -22,7 +22,7 @@ import { SWR_CONFIG } from "@constants/swr-config"
 import { THEMES } from "@constants/themes"
 
 import CrispWrapper from "@wrappers/external/CrispWrapper"
-import StoreWrapper from "@wrappers/StoreWrapper"
+import StoreWrapper from "@wrappers/store/StoreWrapper"
 
 import { isMobileDevice } from "@helpers/common.helper"
 

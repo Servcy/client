@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation"
 import { Fragment, useState } from "react"
 
 import { Menu, Transition } from "@headlessui/react"
-import { Check, ChevronDown, CircleUserRound, Home, LogOut, Mails, PlusSquare, Settings, UserCircle2, Inbox, Workflow } from "lucide-react"
+import { Check, ChevronDown, CircleUserRound, Home, LogOut, Mails, PlusSquare, Settings, Users, Inbox, Workflow } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
@@ -17,32 +17,28 @@ import { IWorkspace } from "@servcy/types"
 import { Avatar, Loader } from "@servcy/ui"
 
 // Static Data
-const userLinks = (workspaceSlug: string, userId: string) => [
+const workspaceLinks = (workspaceSlug: string, userId: string) => [
     {
-        key: "workspace_invites",
-        name: "Workspace invites",
-        href: "/invitations",
-        icon: Mails,
+        key: "workspace-members",
+        name: "Manage Members",
+        href: `/${workspaceSlug}/settings/members`,
+        icon: Users,
     },
     {
-        key: "view_profile",
-        name: "View profile",
+        key: "workspace-profile",
+        name: "Workspace Profile",
         href: `/${workspaceSlug}/profile/${userId}`,
         icon: CircleUserRound,
     },
     {
-        key: "settings",
-        name: "Settings",
+        key: "workspace-settings",
+        name: "Workspace Settings",
         href: `/${workspaceSlug}/settings`,
         icon: Settings,
     },
 ]
-const profileLinks = (workspaceSlug: string, userId: string) => [
-    {
-        name: "View profile",
-        icon: UserCircle2,
-        link: `/${workspaceSlug}/profile/${userId}`,
-    },
+
+const userLinks = () => [
     {
         name: "Home",
         icon: Home,
@@ -63,7 +59,13 @@ const profileLinks = (workspaceSlug: string, userId: string) => [
         icon: Settings,
         link: "/profile",
     },
+    {
+        name: "Invites",
+        icon: Mails,
+        link: "/invitations",
+    },
 ]
+
 export const WorkspaceSidebarDropdown = observer(() => {
     const router = useRouter()
     const { workspaceSlug } = useParams()
@@ -239,7 +241,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                                 Create workspace
                                             </Menu.Item>
                                         </Link>
-                                        {userLinks(workspaceSlug?.toString() ?? "", currentUser?.id ?? "").map(
+                                        {workspaceLinks(workspaceSlug?.toString() ?? "", currentUser?.id ?? "").map(
                                             (link, index) => (
                                                 <Link
                                                     key={link.key}
@@ -306,7 +308,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
                         >
                             <div className="flex flex-col gap-2.5 pb-2">
                                 <span className="px-2 text-custom-sidebar-text-200">{currentUser?.email}</span>
-                                {profileLinks(workspaceSlug?.toString() ?? "", currentUser?.id ?? "").map(
+                                {userLinks().map(
                                     (link, index) => (
                                         <Link
                                             key={index}

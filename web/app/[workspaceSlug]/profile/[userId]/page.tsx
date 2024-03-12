@@ -20,7 +20,7 @@ import { GROUP_CHOICES } from "@constants/project"
 import { UserService } from "@services/user.service"
 
 import { AppWrapper } from "@wrappers/app"
-import ProfileAuthWrapper from "@wrappers/ProfileAuthWrapper"
+import ProfileAuthWrapper from "@wrappers/auth/ProfileAuthWrapper"
 
 import type { IUserStateDistribution, TStateGroups } from "@servcy/types"
 
