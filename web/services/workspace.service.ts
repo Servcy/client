@@ -22,7 +22,7 @@ export class WorkspaceService extends APIService {
     }
 
     async userWorkspaces(): Promise<IWorkspace[]> {
-        return this.get("/iam/users/me/workspaces/")
+        return this.get("/project/users/me/workspaces/")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

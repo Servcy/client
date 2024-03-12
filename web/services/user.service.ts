@@ -97,7 +97,7 @@ export class UserService extends APIService {
     }
 
     async getUserActivity(): Promise<IUserActivityResponse> {
-        return this.get(`/iam/users/me/activities/`)
+        return this.get(`/project/users/me/activities/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -105,7 +105,7 @@ export class UserService extends APIService {
     }
 
     async userWorkspaceDashboard(workspaceSlug: string, month: number): Promise<IUserWorkspaceDashboard> {
-        return this.get(`/iam/users/me/workspaces/${workspaceSlug}/dashboard/`, {
+        return this.get(`/project/users/me/workspaces/${workspaceSlug}/dashboard/`, {
             params: {
                 month: month,
             },
