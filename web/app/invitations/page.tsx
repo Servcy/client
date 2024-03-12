@@ -47,7 +47,7 @@ const UserInvitationsPage = observer(() => {
     const { data } = useSWR("USER_WORKSPACE_INVITATIONS", () =>
         workspaceService.userWorkspaceInvitations()
     )
-    const invitations = data?.results;
+    const invitations = data?.results || [];
 
     const redirectWorkspaceSlug =
         currentUserSettings?.workspace?.last_workspace_slug ||
