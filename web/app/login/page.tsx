@@ -50,7 +50,10 @@ export default function Login(): JSX.Element {
             const isPhoneValid = validatePhone(phone_number.value)
             if (!isPhoneValid) setInvalidEmail(!isEmailValid)
             else if (!isEmailValid) setInvalidPhone(!isPhoneValid)
-            if ((!isEmailValid && !isPhoneValid) || !agree_terms_conditions_and_privacy_policy.checked) return
+            if ((!isEmailValid && !isPhoneValid) || !agree_terms_conditions_and_privacy_policy.checked) {
+                toast.error(!isEmailValid ? "Please enter a valid email address" : "Please enter a valid phone number")
+                return
+            }
             // set input type and value
             setInputType(isEmailValid ? "email" : "phone_number")
             setInput(isEmailValid ? email.value : phone_number.value.replace("+", ""))
