@@ -45,16 +45,10 @@ export const ProfileLayoutSidebar = observer(() => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
     } = useApplication()
-    const { currentUserSettings, logOut } = useUser()
+    const { logOut } = useUser()
     const { workspaces } = useWorkspace()
 
     const workspacesList = Object.values(workspaces ?? {})
-
-    // redirect url for normal mode
-    const redirectWorkspaceSlug =
-        currentUserSettings?.workspace?.last_workspace_slug ||
-        currentUserSettings?.workspace?.fallback_workspace_slug ||
-        ""
 
     const ref = useRef<HTMLDivElement>(null)
 
@@ -108,7 +102,7 @@ export const ProfileLayoutSidebar = observer(() => {
       `}
         >
             <div ref={ref} className="flex h-full w-full flex-col gap-y-4">
-                <Link href={`/${redirectWorkspaceSlug}`} onClick={handleItemClick}>
+                <Link href="/" onClick={handleItemClick}>
                     <div
                         className={`flex flex-shrink-0 items-center gap-2 truncate px-4 pt-4 ${
                             sidebarCollapsed ? "justify-center" : ""
@@ -118,7 +112,7 @@ export const ProfileLayoutSidebar = observer(() => {
                             <ChevronLeft className="h-5 w-5" strokeWidth={1} />
                         </span>
                         {!sidebarCollapsed && (
-                            <h4 className="truncate text-lg font-semibold text-custom-text-200">Profile settings</h4>
+                            <h4 className="truncate text-lg font-semibold text-custom-text-200">Profile Settings</h4>
                         )}
                     </div>
                 </Link>

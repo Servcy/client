@@ -135,7 +135,7 @@ const OnboardingPage = observer(() => {
         }
 
         handleStepChange()
-    }, [user, invitations, , updateCurrentUser, workspacesList])
+    }, [user, invitations, updateCurrentUser, workspacesList])
 
     return (
         <UserAuthWrapper>
