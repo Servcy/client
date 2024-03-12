@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation"
 import { Fragment, useState } from "react"
 
 import { Menu, Transition } from "@headlessui/react"
-import { Check, ChevronDown, CircleUserRound, LogOut, Mails, PlusSquare, Settings, UserCircle2 } from "lucide-react"
+import { Check, ChevronDown, CircleUserRound, Home, LogOut, Mails, PlusSquare, Settings, UserCircle2, Inbox, Workflow } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
@@ -42,6 +42,21 @@ const profileLinks = (workspaceSlug: string, userId: string) => [
         name: "View profile",
         icon: UserCircle2,
         link: `/${workspaceSlug}/profile/${userId}`,
+    },
+    {
+        name: "Home",
+        icon: Home,
+        link: `/`,
+    },
+    {
+        name: "Integrations",
+        icon: Workflow,
+        link: `/integrations`,
+    },
+    {
+        name: "Inbox",
+        icon: Inbox,
+        link: `/inbox`,
     },
     {
         name: "Settings",
