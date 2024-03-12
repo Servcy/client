@@ -44,9 +44,10 @@ const UserInvitationsPage = observer(() => {
 
     const router = useRouter()
 
-    const { data: invitations } = useSWR("USER_WORKSPACE_INVITATIONS", () =>
+    const { data } = useSWR("USER_WORKSPACE_INVITATIONS", () =>
         workspaceService.userWorkspaceInvitations()
     )
+    const invitations = data?.results;
 
     const redirectWorkspaceSlug =
         currentUserSettings?.workspace?.last_workspace_slug ||
@@ -116,7 +117,7 @@ const UserInvitationsPage = observer(() => {
             <div className="flex h-full flex-col gap-y-2 overflow-hidden sm:flex-row sm:gap-y-0">
                 {invitations ? (
                     invitations.length > 0 ? (
-                        <div className="relative flex h-full justify-center px-8 pb-8 sm:items-center sm:justify-start sm:p-0 sm:pr-[8.33%] w-full">
+                        <div className="relative flex h-full justify-center px-12 pb-8 sm:items-center sm:justify-start w-full">
                             <div className="w-full space-y-10">
                                 <h5 className="text-lg">We see that someone has invited you to</h5>
                                 <h4 className="text-2xl font-semibold">Join a workspace</h4>

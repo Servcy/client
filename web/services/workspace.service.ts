@@ -87,7 +87,9 @@ export class WorkspaceService extends APIService {
             })
     }
 
-    async userWorkspaceInvitations(): Promise<IWorkspaceMemberInvitation[]> {
+    async userWorkspaceInvitations(): Promise<{
+        results: IWorkspaceMemberInvitation[]
+    }> {
         return this.get("/iam/users/me/workspaces/invitations/")
             .then((response) => response?.data)
             .catch((error) => {
