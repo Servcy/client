@@ -21,7 +21,7 @@ export const NotAWorkspaceMember = () => (
                             <Button variant="neutral-primary">Check pending invites</Button>
                         </span>
                     </Link>
-                    <Link href="/create-workspace">
+                    <Link href="/workspace/create">
                         <span>
                             <Button variant="primary">Create new workspace</Button>
                         </span>

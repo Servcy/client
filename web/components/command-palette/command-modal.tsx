@@ -87,7 +87,7 @@ export const CommandModal: React.FC = observer(() => {
 
     const createNewWorkspace = () => {
         closePalette()
-        router.push("/create-workspace")
+        router.push("/workspace/create")
     }
 
     useEffect(

@@ -84,7 +84,7 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
                                     </Button>
                                 </span>
                             </Link>
-                            <Link href="/create-workspace">
+                            <Link href="/workspace/create">
                                 <span>
                                     <Button variant="primary" size="sm">
                                         Create new workspace

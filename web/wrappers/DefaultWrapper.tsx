@@ -21,10 +21,10 @@ import { Tooltip } from "@servcy/ui"
 
 const WORKSPACE_ACTION_LINKS = [
     {
-        key: "create-workspace",
+        key: "workspace-create",
         Icon: Plus,
         label: "Create workspace",
-        href: "/create-workspace",
+        href: "/workspace/create",
     },
     {
         key: "invitations",
