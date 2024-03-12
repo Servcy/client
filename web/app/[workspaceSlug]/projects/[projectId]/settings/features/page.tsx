@@ -16,8 +16,6 @@ import { ERoles } from "@constants/iam"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-
-
 const FeaturesSettingsPage = observer(() => {
     const { workspaceSlug, projectId } = useParams()
     // store

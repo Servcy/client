@@ -17,8 +17,6 @@ import useLocalStorage from "@hooks/use-local-storage"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const ModuleIssuesPage = observer(() => {
     const router = useRouter()
     const params = useParams()

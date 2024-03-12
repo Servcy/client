@@ -11,8 +11,6 @@ import { useProject } from "@hooks/store"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-
-
 const LabelsSettingsPage = observer(() => {
     const { currentProjectDetails } = useProject()
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Labels` : undefined

@@ -1,8 +1,9 @@
 "use client"
 
+import { useParams } from "next/navigation"
+
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
-import { useParams } from "next/navigation"
 
 import { PageHead } from "@components/core"
 import { WorkspaceSettingHeader } from "@components/headers"
@@ -13,7 +14,6 @@ import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingWrapper } from "@wrappers/settings"
-
 
 import { Button } from "@servcy/ui"
 

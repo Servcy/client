@@ -13,8 +13,6 @@ import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const ProjectDraftIssuesPage = observer(() => {
     const router = useRouter()
     const params = useParams()

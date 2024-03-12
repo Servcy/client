@@ -23,7 +23,7 @@ import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 
-import type {  TCycleLayout, TCycleView } from "@servcy/types"
+import type { TCycleLayout, TCycleView } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
 
 const ProjectCyclesPage = observer(() => {

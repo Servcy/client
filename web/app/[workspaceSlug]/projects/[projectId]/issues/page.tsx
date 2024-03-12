@@ -13,8 +13,6 @@ import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const ProjectIssuesPage = observer(() => {
     const params = useParams()
     const { projectId } = params

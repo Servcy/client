@@ -22,7 +22,6 @@ import { calculateTimeAgo } from "@helpers/date-time.helper"
 
 import { RichReadOnlyEditor } from "@servcy/rich-text-editor"
 
-
 const userService = new UserService()
 
 const ProfileActivityPage = observer(() => {

@@ -12,8 +12,6 @@ import { useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const ProjectArchivedIssuesPage = observer(() => {
     const params = useParams()
     const { projectId } = params

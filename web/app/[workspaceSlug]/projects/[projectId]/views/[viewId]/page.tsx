@@ -15,8 +15,6 @@ import { useProject, useProjectView } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const ProjectViewIssuesPage = observer(() => {
     const router = useRouter()
     const { workspaceSlug, projectId, viewId } = useParams()

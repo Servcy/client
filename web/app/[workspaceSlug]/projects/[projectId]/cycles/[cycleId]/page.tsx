@@ -17,8 +17,6 @@ import useLocalStorage from "@hooks/use-local-storage"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const CycleDetailPage = observer(() => {
     const router = useRouter()
     const { workspaceSlug, projectId, cycleId } = useParams()

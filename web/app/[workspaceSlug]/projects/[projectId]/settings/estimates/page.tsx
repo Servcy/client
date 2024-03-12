@@ -13,8 +13,6 @@ import { ERoles } from "@constants/iam"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-
-
 const EstimatesSettingsPage = observer(() => {
     const {
         membership: { currentProjectRole },

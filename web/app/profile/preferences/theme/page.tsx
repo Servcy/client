@@ -14,7 +14,6 @@ import { I_THEME_OPTION, THEME_OPTIONS } from "@constants/themes"
 
 import { ProfilePreferenceSettingsWrapper } from "@wrappers/settings/profile/preferences"
 
-
 import { Spinner } from "@servcy/ui"
 
 const ProfilePreferencesThemePage = observer(() => {

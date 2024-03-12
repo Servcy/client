@@ -11,8 +11,6 @@ import { useWorkspace } from "@hooks/store"
 import { AppWrapper } from "@wrappers/app"
 import { WorkspaceSettingWrapper } from "@wrappers/settings"
 
-
-
 const WorkspaceSettingsPage = observer(() => {
     // store hooks
     const { currentWorkspace } = useWorkspace()

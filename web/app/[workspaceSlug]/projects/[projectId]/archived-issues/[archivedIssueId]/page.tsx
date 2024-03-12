@@ -20,7 +20,6 @@ import { EIssuesStoreType } from "@constants/issue"
 
 import { AppWrapper } from "@wrappers/app"
 
-
 import { ArchiveIcon, Button, Loader } from "@servcy/ui"
 
 const ArchivedIssueDetailsPage = observer(() => {

@@ -26,8 +26,6 @@ import { PAGE_TABS_LIST } from "@constants/page"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const AllPagesList = dynamic<any>(() => import("@components/pages").then((a) => a.AllPagesList), {
     ssr: false,
 })

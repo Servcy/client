@@ -10,8 +10,6 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const ProjectsPage = observer(() => {
     // store
     const { currentWorkspace } = useWorkspace()

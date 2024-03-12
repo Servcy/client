@@ -11,8 +11,6 @@ import { useProject } from "@hooks/store"
 import { AppWrapper } from "@wrappers/app"
 import { ProjectSettingLayout } from "@wrappers/settings"
 
-
-
 const MembersSettingsPage = observer(() => {
     // store
     const { currentProjectDetails } = useProject()

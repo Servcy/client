@@ -15,8 +15,6 @@ import { DEFAULT_GLOBAL_VIEWS_LIST } from "@constants/workspace"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const GlobalViewIssuesPage = observer(() => {
     const { globalViewId } = useParams()
     // store hooks

@@ -10,8 +10,6 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const WorkspaceActiveCyclesPage = observer(() => {
     const { currentWorkspace } = useWorkspace()
     // derived values

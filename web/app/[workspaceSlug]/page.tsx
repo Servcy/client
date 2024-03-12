@@ -10,8 +10,6 @@ import { useWorkspace } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const WorkspacePage = observer(() => {
     const { currentWorkspace } = useWorkspace()
     // derived values
@@ -24,6 +22,5 @@ const WorkspacePage = observer(() => {
         </AppWrapper>
     )
 })
-
 
 export default WorkspacePage

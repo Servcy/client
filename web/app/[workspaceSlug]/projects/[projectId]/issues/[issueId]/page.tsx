@@ -15,7 +15,6 @@ import { useApplication, useIssueDetail, useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
 
-
 import { Loader } from "@servcy/ui"
 
 const IssueDetailsPage = observer(() => {

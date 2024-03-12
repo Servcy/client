@@ -2,19 +2,17 @@ import { Button, Input } from "antd"
 import cn from "classnames"
 import { AiOutlineInbox, AiOutlineSync } from "react-icons/ai"
 
-export const InboxHeader = (
-    {
-        loading,
-        fetchInbox,
-        setSearch,
-        search,
-    }: {
-        loading: boolean
-        fetchInbox: () => void
-        setSearch: (search: string) => void
-        search: string
-    }
-) => (
+export const InboxHeader = ({
+    loading,
+    fetchInbox,
+    setSearch,
+    search,
+}: {
+    loading: boolean
+    fetchInbox: () => void
+    setSearch: (search: string) => void
+    search: string
+}) => (
     <div className="mb-6 h-[80px] rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 hover:shadow-custom-shadow-4xl p-6">
         <div className="flex flex-row items-center">
             <AiOutlineInbox size="24" />

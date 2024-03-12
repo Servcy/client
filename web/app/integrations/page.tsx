@@ -5,12 +5,13 @@ import Image from "next/image.js"
 import { useEffect, useState } from "react"
 
 import { Card, Skeleton, Tag } from "antd"
-import toast from "react-hot-toast"
 import { observer } from "mobx-react"
+import toast from "react-hot-toast"
 import { AiOutlineSetting } from "react-icons/ai"
 import { HiArrowsRightLeft } from "react-icons/hi2"
 
 import { PageHead } from "@components/core"
+import { IntegrationsHeader } from "@components/headers/integrations"
 import IntegrationConfigurationModal from "@components/integrations/IntegrationConfigurationModal"
 
 import { integrationCategories } from "@constants/integration"
@@ -20,7 +21,6 @@ import IntegrationService from "@services/integration.service"
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import { getQueryParams } from "@helpers/common.helper"
-import { IntegrationsHeader } from "@components/headers/integrations"
 import { capitalizeFirstLetter } from "@helpers/formatter.helper"
 import { oauthUrlGenerators } from "@helpers/integration.helper"
 
@@ -107,8 +107,7 @@ const Integrations = observer(() => {
                         integrations
                             .filter(
                                 (integration) =>
-                                    (search === "" ||
-                                        integration.name.toLowerCase().includes(search.toLowerCase())) &&
+                                    (search === "" || integration.name.toLowerCase().includes(search.toLowerCase())) &&
                                     (!category || integrationCategories[integration.name]?.includes(category))
                             )
                             .map((integration: Integration) => (
@@ -140,16 +139,16 @@ const Integrations = observer(() => {
                                     <div className="mt-2 h-10 py-3 pr-3">
                                         {integrationCategories[integration.name] !== undefined
                                             ? integrationCategories[integration.name]?.map(
-                                                    (category: string, index: number) => (
-                                                        <Tag
-                                                            key={`category-${index}`}
-                                                            className="mr-1 font-bold"
-                                                            bordered={false}
-                                                        >
-                                                            {category.charAt(0).toUpperCase() + category.slice(1)}
-                                                        </Tag>
-                                                    )
-                                                )
+                                                  (category: string, index: number) => (
+                                                      <Tag
+                                                          key={`category-${index}`}
+                                                          className="mr-1 font-bold"
+                                                          bordered={false}
+                                                      >
+                                                          {category.charAt(0).toUpperCase() + category.slice(1)}
+                                                      </Tag>
+                                                  )
+                                              )
                                             : null}
                                     </div>
                                     <div className="mt-6 flex flex-row justify-between">

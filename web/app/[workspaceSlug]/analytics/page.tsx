@@ -21,8 +21,6 @@ import { ERoles } from "@constants/iam"
 
 import { AppWrapper } from "@wrappers/app"
 
-
-
 const AnalyticsPage = observer(() => {
     const router = useRouter()
     const params = useParams()

@@ -19,35 +19,33 @@ import { Spinner } from "@servcy/ui"
 
 const integrationService = new IntegrationService()
 
-const InboxItems = (
-    {
-        setPage,
-        page,
-        inboxItems,
-        inboxPagination,
-        archiveItems,
-        setSelectedRowIndex,
-        loading,
-        deleteItems,
-        setIsInboxItemModalVisible,
-        setSelectedItemIds,
-        readItem,
-        activeTab,
-    }: {
-        setPage: Dispatch<SetStateAction<number>>
-        page: number
-        readItem: (id: string | undefined) => void
-        inboxItems: InboxItem[]
-        inboxPagination: PaginationDetails
-        loading: boolean
-        activeTab: string
-        archiveItems: (_: React.Key[]) => void
-        deleteItems: (_: number[]) => void
-        setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
-        setSelectedRowIndex: Dispatch<SetStateAction<number>>
-        setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
-    }
-) => {
+const InboxItems = ({
+    setPage,
+    page,
+    inboxItems,
+    inboxPagination,
+    archiveItems,
+    setSelectedRowIndex,
+    loading,
+    deleteItems,
+    setIsInboxItemModalVisible,
+    setSelectedItemIds,
+    readItem,
+    activeTab,
+}: {
+    setPage: Dispatch<SetStateAction<number>>
+    page: number
+    readItem: (id: string | undefined) => void
+    inboxItems: InboxItem[]
+    inboxPagination: PaginationDetails
+    loading: boolean
+    activeTab: string
+    archiveItems: (_: React.Key[]) => void
+    deleteItems: (_: number[]) => void
+    setSelectedItemIds: Dispatch<SetStateAction<React.Key[]>>
+    setSelectedRowIndex: Dispatch<SetStateAction<number>>
+    setIsInboxItemModalVisible: Dispatch<SetStateAction<boolean>>
+}) => {
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[]) => {
             setSelectedItemIds(selectedRowKeys)
