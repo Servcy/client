@@ -37,7 +37,7 @@ export class UserService extends APIService {
     }
 
     async currentUserEmailNotificationSettings(): Promise<IUserEmailNotificationSettings> {
-        return this.get("/notification/users/me/notification-preferences")
+        return this.get("/notification/me/notification-preferences")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -91,7 +91,7 @@ export class UserService extends APIService {
     }
 
     async updateCurrentUserEmailNotificationSettings(data: Partial<IUserEmailNotificationSettings>): Promise<any> {
-        return this.patch("/notification/users/me/notification-preferences", data)
+        return this.patch("/notification/me/notification-preferences", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -99,7 +99,7 @@ export class UserService extends APIService {
     }
 
     async getUserActivity(): Promise<IUserActivityResponse> {
-        return this.get(`/project/users/me/activities/`)
+        return this.get(`/project/me/activities/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -107,7 +107,7 @@ export class UserService extends APIService {
     }
 
     async userWorkspaceDashboard(workspaceSlug: string, month: number): Promise<IUserWorkspaceDashboard> {
-        return this.get(`/project/users/me/workspace/${workspaceSlug}/dashboard/`, {
+        return this.get(`/project/me/workspace/${workspaceSlug}/dashboard/`, {
             params: {
                 month: month,
             },
@@ -172,7 +172,7 @@ export class UserService extends APIService {
     }
 
     async joinProject(workspaceSlug: string, project_ids: string[]): Promise<any> {
-        return this.post(`/project/users/me/workspace/${workspaceSlug}/projects/invitations/`, { project_ids })
+        return this.post(`/project/me/workspace/${workspaceSlug}/projects/invitations/`, { project_ids })
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

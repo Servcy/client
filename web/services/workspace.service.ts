@@ -260,7 +260,7 @@ export class WorkspaceService extends APIService {
     }
 
     async getWorkspaceUserProjectsRole(workspaceSlug: string): Promise<IUserProjectsRole> {
-        return this.get(`/project/users/me/workspace/${workspaceSlug}/project-roles/`)
+        return this.get(`/project/me/workspace/${workspaceSlug}/project-roles/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
