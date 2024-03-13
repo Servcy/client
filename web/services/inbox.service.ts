@@ -8,7 +8,7 @@ class InboxService extends APIService {
     }
 
     async fetchInbox(payload: object): Promise<any> {
-        const response = await this.post("/inbox/items", payload)
+        const response = await this.post("/inbox/fetch", payload)
         return response
     }
 
@@ -24,11 +24,6 @@ class InboxService extends APIService {
 
     async deleteItems(payload: object): Promise<any> {
         const response = await this.post("/inbox/delete", payload)
-        return response
-    }
-
-    async generateReply(payload: object): Promise<any> {
-        const response = await this.post("/inbox/assisstant/generate-reply", payload)
         return response
     }
 }
