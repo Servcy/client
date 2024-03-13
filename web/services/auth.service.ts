@@ -30,6 +30,7 @@ export class AuthService extends APIService {
                 throw error?.response?.data
             })
     }
+
     async sendOtp(input: string, inputType: string): Promise<object> {
         return this.get(`/authentication?input=${input}&input_type=${inputType}`)
             .then((response) => response?.data)
@@ -37,6 +38,7 @@ export class AuthService extends APIService {
                 throw error?.response?.data
             })
     }
+
     async googleLogin(credential: string): Promise<ILoginTokenResponse> {
         return this.post(
             "/authentication",
