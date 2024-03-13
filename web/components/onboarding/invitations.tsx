@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { CheckCircle2, Search } from "lucide-react"
 import useSWR, { mutate } from "swr"
 
-import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
+import { useEventTracker, useUser } from "@hooks/store"
 
 import { MEMBER_ACCEPTED } from "@constants/event-tracker"
 import { USER_WORKSPACE_INVITATIONS, USER_WORKSPACES } from "@constants/fetch-keys"
@@ -33,10 +33,7 @@ export const Invitations: React.FC<Props> = (props) => {
     const [invitationsRespond, setInvitationsRespond] = useState<string[]>([])
     // store hooks
     const { captureEvent } = useEventTracker()
-    const { currentUser, updateCurrentUser } = useUser()
-    const { workspaces, fetchWorkspaces } = useWorkspace()
-
-    const workspacesList = Object.values(workspaces)
+    const { currentUser } = useUser()
 
     const { data, mutate: mutateInvitations } = useSWR(USER_WORKSPACE_INVITATIONS, () =>
         workspaceService.userWorkspaceInvitations()
@@ -50,13 +47,6 @@ export const Invitations: React.FC<Props> = (props) => {
         } else if (action === "withdraw") {
             setInvitationsRespond((prevData) => prevData.filter((item: string) => item !== workspace_invitation.id))
         }
-    }
-
-    const updateLastWorkspace = async () => {
-        if (!workspacesList) return
-        await updateCurrentUser({
-            last_workspace_id: workspacesList[0]?.id,
-        })
     }
 
     const submitInvitations = async () => {
@@ -76,9 +66,7 @@ export const Invitations: React.FC<Props> = (props) => {
                     state: "SUCCESS",
                     element: "Workspace invitations page",
                 })
-                await fetchWorkspaces()
                 await mutate(USER_WORKSPACES)
-                await updateLastWorkspace()
                 await handleNextStep()
                 await mutateInvitations()
             })
@@ -105,7 +93,7 @@ export const Invitations: React.FC<Props> = (props) => {
                         invitations.length > 0 &&
                         invitations.map((invitation) => {
                             const isSelected = invitationsRespond.includes(invitation.id)
-                            const invitedWorkspace = workspaces[invitation.workspace.id]
+                            const invitedWorkspace = invitation.workspace
                             return (
                                 <div
                                     key={invitation.id}

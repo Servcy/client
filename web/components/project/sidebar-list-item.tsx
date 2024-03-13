@@ -68,11 +68,6 @@ const navigation = (workspaceSlug: string, projectId: string) => [
         Icon: FileText,
     },
     {
-        name: "Inbox",
-        href: `/${workspaceSlug}/projects/${projectId}/inbox`,
-        Icon: Inbox,
-    },
-    {
         name: "Settings",
         href: `/${workspaceSlug}/projects/${projectId}/settings`,
         Icon: Settings,
