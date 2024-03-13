@@ -157,8 +157,14 @@ export class UserService extends APIService {
 
     async deactivateAccount() {
         return this.delete(`/iam/me`)
-            .then((response) => response?.data)
+            .then((response) => {
+                this.purgeAccessToken()
+                this.purgeRefreshToken()
+                return response?.data
+            })
             .catch((error) => {
+                this.purgeAccessToken()
+                this.purgeRefreshToken()
                 throw error?.response?.data
             })
     }
