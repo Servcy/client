@@ -43,7 +43,7 @@ export class FileService extends APIService {
 
     // getters
 
-    getUploadFileFunction(workspaceId?: number): (file: File) => Promise<string> {
+    getUploadFileFunction(workspaceId?: string): (file: File) => Promise<string> {
         return async (file: File) => {
             try {
                 const formData = new FormData()

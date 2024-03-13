@@ -14,7 +14,7 @@ import { IUser } from "@servcy/types"
 export interface IPosthogWrapper {
     children: ReactNode
     user: IUser | null
-    currentWorkspaceId: number | undefined
+    currentWorkspaceId: string | undefined
     workspaceRole: number | undefined
     projectRole: number | undefined
 }

@@ -27,7 +27,7 @@ export interface IEventTrackerStore {
     resetSession: () => void
     setTrackElement: (element: string) => void
     captureEvent: (eventName: string, payload?: any) => void
-    joinWorkspaceMetricGroup: (workspaceId?: number) => void
+    joinWorkspaceMetricGroup: (workspaceId?: string) => void
     captureWorkspaceEvent: (props: EventProps) => void
     captureProjectEvent: (props: EventProps) => void
     captureCycleEvent: (props: EventProps) => void
@@ -87,11 +87,11 @@ export class EventTrackerStore implements IEventTrackerStore {
     /**
      * @description: Creates the workspace metric group.
      * @param {string} userEmail
-     * @param {number} workspaceId
+     * @param {string} workspaceId
      */
-    joinWorkspaceMetricGroup = (workspaceId?: number) => {
+    joinWorkspaceMetricGroup = (workspaceId?: string) => {
         if (!workspaceId) return
-        posthog?.group(GROUP_WORKSPACE, String(workspaceId), {
+        posthog?.group(GROUP_WORKSPACE, workspaceId, {
             date: new Date().toDateString(),
             workspace_id: workspaceId,
         })
