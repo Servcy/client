@@ -33,7 +33,7 @@ export interface IWorkspaceMemberInvitation {
     role: ERoles
     token: string
     workspace: {
-        id: string
+        id: number
         logo: string
         name: string
         slug: string
