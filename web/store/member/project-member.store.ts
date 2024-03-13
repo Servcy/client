@@ -88,13 +88,21 @@ export class ProjectMemberStore implements IProjectMemberStore {
     get projectMemberIds() {
         const projectId = this.routerStore.projectId
         if (!projectId) return null
-        let members = Object.values(this.projectMemberMap?.[projectId] ?? {})
+        const projectMembers = this.projectMemberMap?.[projectId]
+        if(!projectMembers) return null
+        let members = Object.values(projectMembers)
         members = sortBy(members, [
-            (m) => m.member !== this.userStore.currentUser?.id,
-            (m) => this.memberRoot.memberMap?.[m.member]?.display_name.toLowerCase(),
+            (m) => {
+                if (m && m.member) return m.member !== this.userStore.currentUser?.id
+                return false
+            },
+            (m) => {
+                if (m && m.member) return this.memberRoot.memberMap?.[m.member]?.display_name.toLowerCase()
+                return false
+            },
         ])
-        const memberIds = members.map((m) => m.member)
-        return memberIds
+        const memberIds = members.map((m) => (m && m.member ? m.member : "")).filter((m) => m !== "")
+        return memberIds.length > 0 ? memberIds : null
     }
 
     /**
@@ -121,13 +129,21 @@ export class ProjectMemberStore implements IProjectMemberStore {
      */
     getProjectMemberIds = computedFn((projectId: string): string[] | null => {
         if (!this.projectMemberMap?.[projectId]) return null
-        let members = Object.values(this.projectMemberMap?.[projectId])
+        const projectMembers = this.projectMemberMap?.[projectId]
+        if (!projectMembers) return null
+        let members = Object.values(projectMembers)
         members = sortBy(members, [
-            (m) => m.member !== this.userStore.currentUser?.id,
-            (m) => this.memberRoot?.memberMap?.[m.member]?.display_name?.toLowerCase(),
+            (m) => {
+                if (m && m.member) return m.member !== this.userStore.currentUser?.id
+                return false
+            },
+            (m) => {
+                if (m && m.member) return this.memberRoot?.memberMap?.[m.member]?.display_name?.toLowerCase()
+                return false
+            },
         ])
-        const memberIds = members.map((m) => m.member)
-        return memberIds
+        const memberIds = members.map((m) => (m && m.member ? m.member : "")).filter((m) => m !== "")
+        return memberIds.length > 0 ? memberIds : null
     })
 
     /**

@@ -19,7 +19,7 @@ export class IssueLabelService extends APIService {
 
     async getProjectLabels(workspaceSlug: string, projectId: string): Promise<IIssueLabel[]> {
         return this.get(`/project/${workspaceSlug}/${projectId}/labels/`)
-            .then((response) => response?.data)
+            .then((response) => response?.data?.results)
             .catch((error) => {
                 throw error?.response?.data
             })
