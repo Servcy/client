@@ -9,8 +9,8 @@ export class ProjectPublishService extends APIService {
         super(API_BASE_URL)
     }
 
-    async getProjectSettingsAsync(workspaceSlug: string, project_slug: string): Promise<any> {
-        return this.get(`/project/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/`)
+    async getProjectSettingsAsync(workspaceSlug: string, projectId: string): Promise<any> {
+        return this.get(`/project/${workspaceSlug}/${projectId}/project-deploy-boards/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -19,10 +19,10 @@ export class ProjectPublishService extends APIService {
 
     async createProjectSettingsAsync(
         workspaceSlug: string,
-        project_slug: string,
+        projectId: string,
         data: IProjectPublishSettings
     ): Promise<any> {
-        return this.post(`/project/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/`, data)
+        return this.post(`/project/${workspaceSlug}/${projectId}/project-deploy-boards/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -31,12 +31,12 @@ export class ProjectPublishService extends APIService {
 
     async updateProjectSettingsAsync(
         workspaceSlug: string,
-        project_slug: string,
+        projectId: string,
         project_publish_id: string,
         data: IProjectPublishSettings
     ): Promise<any> {
         return this.patch(
-            `/project/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/${project_publish_id}/`,
+            `/project/${workspaceSlug}/${projectId}/project-deploy-boards/${project_publish_id}/`,
             data
         )
             .then((response) => response?.data)
@@ -47,11 +47,11 @@ export class ProjectPublishService extends APIService {
 
     async deleteProjectSettingsAsync(
         workspaceSlug: string,
-        project_slug: string,
+        projectId: string,
         project_publish_id: string
     ): Promise<any> {
         return this.delete(
-            `/project/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/${project_publish_id}/`
+            `/project/${workspaceSlug}/${projectId}/project-deploy-boards/${project_publish_id}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
