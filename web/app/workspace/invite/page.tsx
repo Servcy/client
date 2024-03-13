@@ -106,11 +106,11 @@ const WorkspaceInvitationPage = observer(() => {
                         ) : (
                             <EmptySpaceItem Icon={Boxes} title="Continue to Dashboard" href="/" />
                         )}
-                        <EmptySpaceItem Icon={Star} title="Star us on GitHub" href="https://github.com/Servcy" />
+                        <EmptySpaceItem Icon={Star} title="Upvote us on ProductHunt" href="https://www.producthunt.com/posts/servcy" />
                         <EmptySpaceItem
                             Icon={Share2}
-                            title="Join our community of active creators"
-                            href="https://discord.com/invite/8SR2N9PAcJ"
+                            title="Join our community on twitter"
+                            href="https://twitter.com/ContactServcy"
                         />
                     </EmptySpace>
                 ) : (
