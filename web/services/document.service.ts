@@ -41,7 +41,7 @@ export class FileService extends APIService {
 
     async uploadFile(workspaceSlug: string, file: FormData): Promise<any> {
         this.cancelSource = axios.CancelToken.source()
-        return this.post(`/project/workspace/${workspaceSlug}/file-assets/`, file, {
+        return this.post(`/project/${workspaceSlug}/file-assets/`, file, {
             headers: {
                 ...this.getHeaders(),
                 "Content-Type": "multipart/form-data",

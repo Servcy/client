@@ -10,7 +10,7 @@ export class ProjectPublishService extends APIService {
     }
 
     async getProjectSettingsAsync(workspaceSlug: string, project_slug: string): Promise<any> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/`)
+        return this.get(`/project/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -22,7 +22,7 @@ export class ProjectPublishService extends APIService {
         project_slug: string,
         data: IProjectPublishSettings
     ): Promise<any> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/`, data)
+        return this.post(`/project/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -36,7 +36,7 @@ export class ProjectPublishService extends APIService {
         data: IProjectPublishSettings
     ): Promise<any> {
         return this.patch(
-            `/project/workspace/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/${project_publish_id}/`,
+            `/project/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/${project_publish_id}/`,
             data
         )
             .then((response) => response?.data)
@@ -51,7 +51,7 @@ export class ProjectPublishService extends APIService {
         project_publish_id: string
     ): Promise<any> {
         return this.delete(
-            `/project/workspace/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/${project_publish_id}/`
+            `/project/${workspaceSlug}/projects/${project_slug}/project-deploy-boards/${project_publish_id}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
