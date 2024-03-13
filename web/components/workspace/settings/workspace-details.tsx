@@ -99,7 +99,7 @@ export const WorkspaceDetails: FC = observer(() => {
 
         setIsImageRemoving(true)
 
-        fileService.deleteFile(currentWorkspace.id, url).then(() => {
+        fileService.deleteFile(url).then(() => {
             updateWorkspace(currentWorkspace.slug, { logo: "" })
                 .then(() => {
                     toast.success("Workspace picture removed successfully.")

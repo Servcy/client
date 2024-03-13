@@ -6,6 +6,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import { UserCircle2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useDropzone } from "react-dropzone"
+import toast from "react-hot-toast"
 
 import { useWorkspace } from "@hooks/store"
 
@@ -61,20 +62,21 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
 
         const formData = new FormData()
         formData.append("file", image)
+        formData.append("workspace_id", String(currentWorkspace?.id))
 
         if (!workspaceSlug) return
 
         fileService
-            .uploadFile(workspaceSlug.toString(), formData)
+            .uploadFile(formData)
             .then((res) => {
-                const imageUrl = res.asset
+                const imageUrl = res.url
 
                 onSuccess(imageUrl)
                 setImage(null)
 
-                if (value && currentWorkspace) fileService.deleteFile(currentWorkspace.id, value)
+                if (value && currentWorkspace) fileService.deleteFile(value)
             })
-            .catch((err) => err?.error ?? "Something went wrong. Please try again.")
+            .catch((err) => toast.error(err?.error ?? "Something went wrong. Please try again."))
             .finally(() => setIsImageUploading(false))
     }
 
@@ -124,12 +126,6 @@ export const WorkspaceImageUploadModal: React.FC<Props> = observer((props) => {
                                             >
                                                 {image !== null || (value && value !== "") ? (
                                                     <>
-                                                        <button
-                                                            type="button"
-                                                            className="absolute right-0 top-0 z-40 -translate-y-1/2 translate-x-1/2 rounded bg-custom-background-90 px-2 py-0.5 text-xs font-medium text-custom-text-200"
-                                                        >
-                                                            Edit
-                                                        </button>
                                                         <img
                                                             src={
                                                                 image ? URL.createObjectURL(image) : value ? value : ""

@@ -35,7 +35,7 @@ The `@servcy/rich-text-editor` package extends from the `editor-core` package, i
 
 ```tsx
 <RichTextEditor
-  uploadFile={fileService.getUploadFileFunction(workspaceSlug)}
+  uploadFile={fileService.getUploadFileFunction}
   deleteFile={fileService.deleteImage}
   value={value}
   debouncedUpdatesEnabled={true}

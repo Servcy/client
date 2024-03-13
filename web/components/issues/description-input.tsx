@@ -34,7 +34,7 @@ export const IssueDescriptionInput: FC<IssueDescriptionInputProps> = (props) => 
 
     const debouncedValue = useDebounce(descriptionHTML, 1500)
     // computed values
-    const workspaceId = getWorkspaceBySlug(workspaceSlug)?.id as string
+    const workspaceId = getWorkspaceBySlug(workspaceSlug)?.id
 
     useEffect(() => {
         setDescriptionHTML(value)
@@ -74,9 +74,9 @@ export const IssueDescriptionInput: FC<IssueDescriptionInputProps> = (props) => 
     return (
         <RichTextEditor
             cancelUploadImage={fileService.cancelUpload}
-            uploadFile={fileService.getUploadFileFunction(workspaceSlug)}
-            deleteFile={fileService.getDeleteImageFunction(workspaceId)}
-            restoreFile={fileService.getRestoreImageFunction(workspaceId)}
+            uploadFile={fileService.getUploadFileFunction(workspaceId)}
+            deleteFile={fileService.getDeleteImageFunction()}
+            restoreFile={fileService.getRestoreImageFunction()}
             value={descriptionHTML}
             initialValue={initialValue}
             dragDropEnabled

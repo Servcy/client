@@ -44,7 +44,7 @@ export interface IProject {
     total_modules: number
     updated_at: Date
     updated_by: string
-    workspace: IWorkspace | string
+    workspace: IWorkspace | number
     workspace_detail: IWorkspaceLite
 }
 

@@ -44,7 +44,7 @@ const commentAccess: commentAccessType[] = [
 export const IssueCommentCreate: FC<TIssueCommentCreate> = (props) => {
     const { workspaceSlug, activityOperations, showAccessSpecifier = false } = props
     const workspaceStore = useWorkspace()
-    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
+    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id
 
     const { mentionHighlights, mentionSuggestions } = useMention()
 
@@ -90,9 +90,9 @@ export const IssueCommentCreate: FC<TIssueCommentCreate> = (props) => {
                         render={({ field: { value, onChange } }) => (
                             <LiteTextEditorWithRef
                                 cancelUploadImage={fileService.cancelUpload}
-                                uploadFile={fileService.getUploadFileFunction(workspaceSlug as string)}
-                                deleteFile={fileService.getDeleteImageFunction(workspaceId)}
-                                restoreFile={fileService.getRestoreImageFunction(workspaceId)}
+                                uploadFile={fileService.getUploadFileFunction(workspaceId)}
+                                deleteFile={fileService.getDeleteImageFunction()}
+                                restoreFile={fileService.getRestoreImageFunction()}
                                 ref={editorRef}
                                 value={!value ? "<p></p>" : value}
                                 customClassName="p-2"

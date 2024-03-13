@@ -55,13 +55,13 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
         formData.append("file", image)
 
         fileService
-            .uploadDocument(formData)
+            .uploadFile(formData)
             .then((res) => {
                 const imageUrl = res.url
                 onSuccess(imageUrl)
                 setImage(null)
 
-                if (value) fileService.deleteDocument(value)
+                if (value) fileService.deleteFile(value)
             })
             .catch((err) => toast.error(err?.error ?? "Something went wrong. Please try again."))
             .finally(() => setIsImageUploading(false))

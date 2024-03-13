@@ -37,7 +37,7 @@ The `@servcy/lite-text-editor` package extends from the `editor-core` package, i
 ```tsx
 <LiteTextEditor
   onEnterKeyPress={handleSubmit(handleCommentUpdate)}
-  uploadFile={fileService.getUploadFileFunction(workspaceSlug)}
+  uploadFile={fileService.getUploadFileFunction}
   deleteFile={fileService.deleteImage}
   value={value}
   debouncedUpdatesEnabled={false}

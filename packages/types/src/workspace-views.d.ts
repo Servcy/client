@@ -1,9 +1,4 @@
-import {
-    IIssueDisplayFilterOptions,
-    IIssueDisplayProperties,
-    IIssueFilterOptions,
-    IWorkspaceViewProps,
-} from "./view-props"
+import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IWorkspaceViewProps } from "./view-props"
 
 export interface IWorkspaceView {
     id: string
@@ -21,7 +16,7 @@ export interface IWorkspaceView {
     query: any
     query_data: IWorkspaceViewProps
     project: string
-    workspace: string
+    workspace: number
     workspace_detail?: {
         id: string
         name: string

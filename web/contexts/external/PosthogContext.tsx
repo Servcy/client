@@ -14,7 +14,7 @@ import { IUser } from "@servcy/types"
 export interface IPosthogWrapper {
     children: ReactNode
     user: IUser | null
-    currentWorkspaceId: string | undefined
+    currentWorkspaceId: number | undefined
     workspaceRole: number | undefined
     projectRole: number | undefined
 }
@@ -48,7 +48,7 @@ const PostHogProvider: FC<IPosthogWrapper> = (props) => {
         if (lastWorkspaceId !== currentWorkspaceId && currentWorkspaceId && user) {
             setLastWorkspaceId(currentWorkspaceId)
             posthog?.identify(user.email)
-            posthog?.group(GROUP_WORKSPACE, currentWorkspaceId)
+            posthog?.group(GROUP_WORKSPACE, String(currentWorkspaceId))
         }
     }, [currentWorkspaceId, lastWorkspaceId, user])
 

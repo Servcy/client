@@ -21,7 +21,7 @@ export interface IUser {
         workspace_create?: boolean
         workspace_invite?: boolean
     }
-    last_workspace_id: string
+    last_workspace_id: number
     user_timezone: string
     username: string
     theme: IUserTheme

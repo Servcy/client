@@ -84,7 +84,7 @@ const ProfileSettingsPage = observer(() => {
 
         setIsRemoving(true)
 
-        fileService.deleteDocument(url).then(() => {
+        fileService.deleteFile(url).then(() => {
             if (updateUser)
                 updateCurrentUser({ avatar: "" })
                     .then(() => {

@@ -37,7 +37,7 @@ const PageDetailsPage = observer(() => {
     const editorRef = useRef<any>(null)
     const { workspaceSlug, projectId, pageId } = useParams()
     const workspaceStore = useWorkspace()
-    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
+    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id
 
     const {
         currentUser,
@@ -289,9 +289,9 @@ const PageDetailsPage = observer(() => {
                                             last_updated_at: updated_at,
                                             last_updated_by: updated_by,
                                         }}
-                                        uploadFile={fileService.getUploadFileFunction(workspaceSlug as string)}
-                                        deleteFile={fileService.getDeleteImageFunction(workspaceId)}
-                                        restoreFile={fileService.getRestoreImageFunction(workspaceId)}
+                                        uploadFile={fileService.getUploadFileFunction(workspaceId)}
+                                        deleteFile={fileService.getDeleteImageFunction()}
+                                        restoreFile={fileService.getRestoreImageFunction()}
                                         value={pageDescription}
                                         setShouldShowAlert={setShowAlert}
                                         cancelUploadImage={fileService.cancelUpload}

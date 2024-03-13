@@ -41,7 +41,7 @@ const fileService = new FileService()
 export const IssueDescriptionForm: FC<IssueDetailsProps> = observer((props) => {
     const { workspaceSlug, projectId, issueId, issue, issueOperations, disabled, isSubmitting, setIsSubmitting } = props
     const workspaceStore = useWorkspace()
-    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug)?.id as string
+    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug)?.id
     // states
     const [characterLimit, setCharacterLimit] = useState(false)
 
@@ -173,9 +173,9 @@ export const IssueDescriptionForm: FC<IssueDetailsProps> = observer((props) => {
                             !disabled ? (
                                 <RichTextEditor
                                     cancelUploadImage={fileService.cancelUpload}
-                                    uploadFile={fileService.getUploadFileFunction(workspaceSlug)}
-                                    deleteFile={fileService.getDeleteImageFunction(workspaceId)}
-                                    restoreFile={fileService.getRestoreImageFunction(workspaceId)}
+                                    uploadFile={fileService.getUploadFileFunction(workspaceId)}
+                                    deleteFile={fileService.getDeleteImageFunction()}
+                                    restoreFile={fileService.getRestoreImageFunction()}
                                     value={localIssueDescription.description_html}
                                     rerenderOnPropsChange={localIssueDescription}
                                     setShouldShowAlert={setShowAlert}

@@ -3,7 +3,7 @@ import { ERoles } from "@constants/iam"
 import type { IProjectMember, IUser, IUserLite, IWorkspaceViewProps } from "@servcy/types"
 
 export interface IWorkspace {
-    readonly id: string
+    readonly id: number
     readonly owner: IUser
     readonly created_at: Date
     readonly updated_at: Date

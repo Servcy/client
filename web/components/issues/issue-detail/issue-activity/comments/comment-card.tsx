@@ -43,7 +43,7 @@ export const IssueCommentCard: FC<TIssueCommentCard> = (props) => {
 
     const comment = getCommentById(commentId)
     const workspaceStore = useWorkspace()
-    const workspaceId = workspaceStore.getWorkspaceBySlug(comment?.workspace_detail?.slug as string)?.id as string
+    const workspaceId = workspaceStore.getWorkspaceBySlug(comment?.workspace_detail?.slug as string)?.id
 
     const {
         formState: { isSubmitting },
@@ -136,9 +136,9 @@ export const IssueCommentCard: FC<TIssueCommentCard> = (props) => {
                     >
                         <LiteTextEditorWithRef
                             cancelUploadImage={fileService.cancelUpload}
-                            uploadFile={fileService.getUploadFileFunction(comment?.workspace_detail?.slug as string)}
-                            deleteFile={fileService.getDeleteImageFunction(workspaceId)}
-                            restoreFile={fileService.getRestoreImageFunction(workspaceId)}
+                            uploadFile={fileService.getUploadFileFunction(workspaceId)}
+                            deleteFile={fileService.getDeleteImageFunction()}
+                            restoreFile={fileService.getRestoreImageFunction()}
                             ref={editorRef}
                             value={watch("comment_html") ?? ""}
                             debouncedUpdatesEnabled={false}

@@ -111,7 +111,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
     const editorRef = useRef<any>(null)
     const { workspaceSlug } = useParams()
     const workspaceStore = useWorkspace()
-    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id as string
+    const workspaceId = workspaceStore.getWorkspaceBySlug(workspaceSlug as string)?.id
 
     const { getProjectById } = useProject()
     const { areEstimatesEnabledForProject } = useEstimate()
@@ -427,11 +427,9 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                             render={({ field: { value, onChange } }) => (
                                                 <RichTextEditorWithRef
                                                     cancelUploadImage={fileService.cancelUpload}
-                                                    uploadFile={fileService.getUploadFileFunction(
-                                                        workspaceSlug as string
-                                                    )}
-                                                    deleteFile={fileService.getDeleteImageFunction(workspaceId)}
-                                                    restoreFile={fileService.getRestoreImageFunction(workspaceId)}
+                                                    uploadFile={fileService.getUploadFileFunction(workspaceId)}
+                                                    deleteFile={fileService.getDeleteImageFunction()}
+                                                    restoreFile={fileService.getRestoreImageFunction()}
                                                     ref={editorRef}
                                                     debouncedUpdatesEnabled={false}
                                                     value={

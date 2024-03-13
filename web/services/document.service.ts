@@ -1,5 +1,3 @@
-import axios from "axios"
-
 import { APIService } from "@services/api.service"
 
 import { API_BASE_URL } from "@helpers/common.helper"
@@ -34,42 +32,25 @@ export class FileService extends APIService {
     constructor() {
         super(API_BASE_URL)
         this.uploadFile = this.uploadFile.bind(this)
-        this.deleteImage = this.deleteImage.bind(this)
-        this.restoreImage = this.restoreImage.bind(this)
+        this.deleteFile = this.deleteFile.bind(this)
+        this.restoreFile = this.restoreFile.bind(this)
         this.cancelUpload = this.cancelUpload.bind(this)
-    }
-
-    async uploadFile(workspaceSlug: string, file: FormData): Promise<any> {
-        this.cancelSource = axios.CancelToken.source()
-        return this.post(`/project/${workspaceSlug}/file-assets/`, file, {
-            headers: {
-                ...this.getHeaders(),
-                "Content-Type": "multipart/form-data",
-            },
-            cancelToken: this.cancelSource.token,
-        })
-            .then((response) => response?.data)
-            .catch((error) => {
-                if (axios.isCancel(error)) {
-                    console.log(error.message)
-                } else {
-                    console.log(error)
-                    throw error?.response?.data
-                }
-            })
     }
 
     cancelUpload() {
         this.cancelSource.cancel("Upload cancelled")
     }
 
-    getUploadFileFunction(workspaceSlug: string): (file: File) => Promise<string> {
+    // getters
+
+    getUploadFileFunction(workspaceId?: number): (file: File) => Promise<string> {
         return async (file: File) => {
             try {
                 const formData = new FormData()
                 formData.append("file", file)
+                if (workspaceId) formData.append("workspace_id", workspaceId.toString())
 
-                const data = await this.uploadFile(workspaceSlug, formData)
+                const data = await this.uploadFile(formData)
                 return data.asset
             } catch (e) {
                 console.error(e)
@@ -77,11 +58,10 @@ export class FileService extends APIService {
         }
     }
 
-    getDeleteImageFunction(workspaceId: string) {
+    getDeleteImageFunction() {
         return async (src: string) => {
             try {
-                const assetUrlWithWorkspaceId = `${workspaceId}/${this.extractAssetIdFromUrl(src, workspaceId)}`
-                const data = await this.deleteImage(assetUrlWithWorkspaceId)
+                const data = await this.deleteFile(src)
                 return data
             } catch (e) {
                 console.error(e)
@@ -89,11 +69,10 @@ export class FileService extends APIService {
         }
     }
 
-    getRestoreImageFunction(workspaceId: string) {
+    getRestoreImageFunction() {
         return async (src: string) => {
             try {
-                const assetUrlWithWorkspaceId = `${workspaceId}/${this.extractAssetIdFromUrl(src, workspaceId)}`
-                const data = await this.restoreImage(assetUrlWithWorkspaceId)
+                const data = await this.restoreFile(src)
                 return data
             } catch (e) {
                 console.error(e)
@@ -101,46 +80,9 @@ export class FileService extends APIService {
         }
     }
 
-    extractAssetIdFromUrl(src: string, workspaceId: string): string {
-        const indexWhereAssetIdStarts = src.indexOf(workspaceId) + workspaceId.length + 1
-        if (indexWhereAssetIdStarts === -1) {
-            throw new Error("Workspace ID not found in source string")
-        }
-        const assetUrl = src.substring(indexWhereAssetIdStarts)
-        return assetUrl
-    }
+    // document routes
 
-    async deleteImage(assetUrlWithWorkspaceId: string): Promise<any> {
-        return this.delete(`/project/file-assets/${assetUrlWithWorkspaceId}/`)
-            .then((response) => response?.status)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async restoreImage(assetUrlWithWorkspaceId: string): Promise<any> {
-        return this.post(`/project/file-assets/${assetUrlWithWorkspaceId}/restore/`, {
-            headers: this.getHeaders(),
-            "Content-Type": "application/json",
-        })
-            .then((response) => response?.status)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async deleteFile(workspaceId: string, assetUrl: string): Promise<any> {
-        const lastIndex = assetUrl.lastIndexOf("/")
-        const assetId = assetUrl.substring(lastIndex + 1)
-
-        return this.delete(`/project/file-assets/${workspaceId}/${assetId}/`)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async uploadDocument(file: FormData): Promise<any> {
+    async uploadFile(file: FormData): Promise<any> {
         return this.post(`/document/upload`, file, {
             headers: {
                 ...this.getHeaders(),
@@ -153,11 +95,20 @@ export class FileService extends APIService {
             })
     }
 
-    async deleteDocument(assetUrl: string): Promise<any> {
-        const lastIndex = assetUrl.lastIndexOf("/")
-        const assetId = assetUrl.substring(lastIndex + 1)
+    async deleteFile(assetUrl: string): Promise<any> {
+        return this.delete(`/document/delete`, {
+            file: assetUrl.substring(assetUrl.indexOf("/media/") + 7)
+        })
+            .then((response) => response?.data)
+            .catch((error) => {
+                throw error?.response?.data
+            })
+    }
 
-        return this.delete(`/document/${assetId}`)
+    async restoreFile(assetUrl: string): Promise<any> {
+        return this.post(`/document/restore`, {
+            file: assetUrl.substring(assetUrl.indexOf("/media/") + 7)
+        })
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -171,14 +122,6 @@ export class FileService extends APIService {
             },
         })
             .then((res) => res?.data?.results ?? res?.data)
-            .catch((err) => {
-                throw err?.response?.data
-            })
-    }
-
-    async getProjectCoverImages(): Promise<string[]> {
-        return this.get(`/project/project-covers/`)
-            .then((res) => res?.data)
             .catch((err) => {
                 throw err?.response?.data
             })

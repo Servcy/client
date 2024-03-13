@@ -25,10 +25,6 @@ const tabOptions = [
         title: "Unsplash",
     },
     {
-        key: "images",
-        title: "Images",
-    },
-    {
         key: "upload",
         title: "Upload",
     },
@@ -71,11 +67,6 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
         }
     )
 
-    const { data: projectCoverImages } = useSWR(`PROJECT_COVER_IMAGES`, () => fileService.getProjectCoverImages(), {
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-    })
-
     const imagePickerRef = useRef<HTMLDivElement>(null)
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -97,9 +88,10 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
 
         const formData = new FormData()
         formData.append("file", image)
+        if (currentWorkspace?.id) formData.append("workspace_id", String(currentWorkspace.id))
 
         fileService
-            .uploadFile(workspaceSlug.toString(), formData)
+            .uploadFile(formData)
             .then((res) => {
                 const oldValue = value
                 const isUnsplashImage = oldValue?.split("/")[2] === "images.unsplash.com"
@@ -112,7 +104,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
 
                 if (isUnsplashImage) return
 
-                if (oldValue && currentWorkspace) fileService.deleteFile(currentWorkspace.id, oldValue)
+                if (oldValue && currentWorkspace) fileService.deleteFile(oldValue)
             })
             .catch((err) => {
                 console.error(err)
@@ -166,8 +158,6 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                             <Tab.List as="span" className="inline-block rounded bg-custom-background-80 p-1">
                                 {tabOptions.map((tab) => {
                                     if (!unsplashImages && unsplashError && tab.key === "unsplash") return null
-                                    if (projectCoverImages && projectCoverImages.length === 0 && tab.key === "images")
-                                        return null
 
                                     return (
                                         <Tab
@@ -240,47 +230,6 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                                             )
                                         ) : (
                                             <Loader className="grid grid-cols-4 gap-4">
-                                                <Loader.Item height="80px" width="100%" />
-                                                <Loader.Item height="80px" width="100%" />
-                                                <Loader.Item height="80px" width="100%" />
-                                                <Loader.Item height="80px" width="100%" />
-                                                <Loader.Item height="80px" width="100%" />
-                                                <Loader.Item height="80px" width="100%" />
-                                                <Loader.Item height="80px" width="100%" />
-                                                <Loader.Item height="80px" width="100%" />
-                                            </Loader>
-                                        )}
-                                    </Tab.Panel>
-                                )}
-                                {(!projectCoverImages || projectCoverImages.length !== 0) && (
-                                    <Tab.Panel className="mt-4 h-full w-full space-y-4">
-                                        {projectCoverImages ? (
-                                            projectCoverImages.length > 0 ? (
-                                                <div className="grid grid-cols-4 gap-4">
-                                                    {projectCoverImages.map((image, index) => (
-                                                        <div
-                                                            key={image}
-                                                            className="relative col-span-2 aspect-video md:col-span-1"
-                                                            onClick={() => {
-                                                                setIsOpen(false)
-                                                                onChange(image)
-                                                            }}
-                                                        >
-                                                            <img
-                                                                src={image}
-                                                                alt={`Default project cover image- ${index}`}
-                                                                className="absolute left-0 top-0 h-full w-full cursor-pointer rounded object-cover"
-                                                            />
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            ) : (
-                                                <p className="pt-7 text-center text-xs text-custom-text-300">
-                                                    No images found.
-                                                </p>
-                                            )
-                                        ) : (
-                                            <Loader className="grid grid-cols-4 gap-4 pt-4">
                                                 <Loader.Item height="80px" width="100%" />
                                                 <Loader.Item height="80px" width="100%" />
                                                 <Loader.Item height="80px" width="100%" />
