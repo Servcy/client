@@ -16,7 +16,7 @@ export interface IWorkspaceView {
     query: any
     query_data: IWorkspaceViewProps
     project: string
-    workspace: number
+    workspace: string
     workspace_detail?: {
         id: string
         name: string
