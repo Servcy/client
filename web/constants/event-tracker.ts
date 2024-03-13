@@ -185,15 +185,6 @@ export const MEMBER_ACCEPTED = "Member accepted"
 export const PROJECT_MEMBER_ADDED = "Project member added"
 export const PROJECT_MEMBER_LEAVE = "Project member leave"
 export const WORKSPACE_MEMBER_lEAVE = "Workspace member leave"
-// Sign-in & Sign-up Events
-export const CODE_VERIFIED = "Code verified"
-export const SETUP_PASSWORD = "Password setup"
-export const PASSWORD_CREATE_SELECTED = "Password created"
-export const PASSWORD_CREATE_SKIPPED = "Skipped to setup"
-export const SIGN_IN_WITH_PASSWORD = "Sign in with password"
-export const FORGOT_PASSWORD = "Forgot password clicked"
-export const FORGOT_PASS_LINK = "Forgot password link generated"
-export const NEW_PASS_CREATED = "New password created"
 // Onboarding Events
 export const USER_DETAILS = "User details added"
 export const USER_ONBOARDING_COMPLETED = "User onboarding completed"
@@ -203,7 +194,6 @@ export const PRODUCT_TOUR_COMPLETED = "Product tour completed"
 export const PRODUCT_TOUR_SKIPPED = "Product tour skipped"
 // Dashboard Events
 export const CHANGELOG_REDIRECTED = "Changelog redirected"
-export const GITHUB_REDIRECTED = "Github redirected"
 // Sidebar Events
 export const SIDEBAR_CLICKED = "Sidenav clicked"
 // Global View Events

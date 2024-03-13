@@ -17,13 +17,6 @@ export const PROFILE_ACTION_LINKS: {
         Icon: CircleUser,
     },
     {
-        key: "change-password",
-        label: "Change password",
-        href: `/profile/change-password`,
-        highlight: (pathname: string) => pathname === "/profile/change-password",
-        Icon: KeyRound,
-    },
-    {
         key: "activity",
         label: "Activity",
         href: `/profile/activity`,
