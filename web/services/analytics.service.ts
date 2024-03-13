@@ -15,7 +15,7 @@ export class AnalyticsService extends APIService {
     }
 
     async getAnalytics(workspaceSlug: string, params: IAnalyticsParams): Promise<IAnalyticsResponse> {
-        return this.get(`/dashboard/workspaces/${workspaceSlug}/analytics`, {
+        return this.get(`/dashboard/${workspaceSlug}/analytics`, {
             params: {
                 ...params,
                 project: params?.project ? params.project.toString() : null,
@@ -31,7 +31,7 @@ export class AnalyticsService extends APIService {
         workspaceSlug: string,
         params?: Partial<IAnalyticsParams>
     ): Promise<IDefaultAnalyticsResponse> {
-        return this.get(`/dashboard/workspaces/${workspaceSlug}/analytics/default`, {
+        return this.get(`/dashboard/${workspaceSlug}/analytics/default`, {
             params: {
                 ...params,
                 project: params?.project ? params.project.toString() : null,
@@ -44,7 +44,7 @@ export class AnalyticsService extends APIService {
     }
 
     async exportAnalytics(workspaceSlug: string, data: IExportAnalyticsFormData): Promise<any> {
-        return this.post(`/dashboard/workspaces/${workspaceSlug}/analytics/export`, data)
+        return this.post(`/dashboard/${workspaceSlug}/analytics/export`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
