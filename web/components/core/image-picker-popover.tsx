@@ -269,6 +269,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                                                             }
                                                             alt="image"
                                                             className="rounded-lg"
+                                                            loader={({ src }) => src}
                                                         />
                                                     </>
                                                 ) : (
