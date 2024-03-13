@@ -41,7 +41,7 @@ const ProfileActivityPage = observer(() => {
                 {userActivity ? (
                     <div className="flex h-full w-full flex-col gap-2 overflow-y-auto">
                         <ul role="list" className="-mb-4">
-                            {userActivity.results.map((activityItem: any) => {
+                            {userActivity.map((activityItem: any) => {
                                 if (activityItem.field === "comment") {
                                     return (
                                         <div key={activityItem.id} className="mt-2">
