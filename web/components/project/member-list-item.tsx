@@ -154,7 +154,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                             if (currentProjectRole && !isAdmin && currentProjectRole < parseInt(key)) return null
 
                             return (
-                                <CustomSelect.Option key={key} value={parseInt(key, 10)}>
+                                <CustomSelect.Option key={key} value={parseInt(key, ERoles.MEMBER)}>
                                     <>{ROLES[parseInt(key) as keyof typeof ROLES]}</>
                                 </CustomSelect.Option>
                             )
