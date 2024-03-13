@@ -1,6 +1,6 @@
 "use client"
 
-import { useParams, useRouter } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation"
 
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -22,14 +22,17 @@ const workspaceService = new WorkspaceService()
 
 const WorkspaceInvitationPage = observer(() => {
     const router = useRouter()
-    const { invitation_id, email, slug } = useParams()
+    const params = useSearchParams()
+    const email = params.get("email")
+    const invitationId = params.get("invitation_id")
+    const slug = params.get("slug")
     // store hooks
     const { currentUser } = useUser()
 
     const { data: invitationDetail, error } = useSWR(
-        invitation_id && slug && WORKSPACE_INVITATION(invitation_id.toString()),
-        invitation_id && slug
-            ? () => workspaceService.getWorkspaceInvitation(slug.toString(), invitation_id.toString())
+        !!invitationId && !!slug && WORKSPACE_INVITATION(invitationId.toString()),
+        !!invitationId && !!slug
+            ? () => workspaceService.getWorkspaceInvitation(slug.toString(), invitationId.toString())
             : null
     )
 
