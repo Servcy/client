@@ -140,7 +140,7 @@ export class WorkspaceService extends APIService {
 
     async workspaceInvitations(workspaceSlug: string): Promise<IWorkspaceMemberInvitation[]> {
         return this.get(`/iam/${workspaceSlug}/invitations`)
-            .then((response) => response?.data)
+            .then((response) => response?.data?.results)
             .catch((error) => {
                 throw error?.response?.data
             })
