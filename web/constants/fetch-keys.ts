@@ -240,7 +240,7 @@ export const getPaginatedNotificationKey = (index: number, prevData: any, worksp
     if (prevData && !prevData?.results?.length) return null
 
     if (index === 0)
-        return `/project/workspace/${workspaceSlug}/users/notifications?${objToQueryParams({
+        return `/notification/${workspaceSlug}?${objToQueryParams({
             ...params,
             cursor: "30:0:0",
         })}`
@@ -250,7 +250,7 @@ export const getPaginatedNotificationKey = (index: number, prevData: any, worksp
 
     if (!nextPageResults) return null
 
-    return `/project/workspace/${workspaceSlug}/users/notifications?${objToQueryParams({
+    return `/notification/${workspaceSlug}?${objToQueryParams({
         ...params,
         cursor,
     })}`

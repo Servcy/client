@@ -37,7 +37,7 @@ export class UserService extends APIService {
     }
 
     async currentUserEmailNotificationSettings(): Promise<IUserEmailNotificationSettings> {
-        return this.get("/notification/me/notification-preferences")
+        return this.get("/notification/me/preferences")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -91,7 +91,7 @@ export class UserService extends APIService {
     }
 
     async updateCurrentUserEmailNotificationSettings(data: Partial<IUserEmailNotificationSettings>): Promise<any> {
-        return this.patch("/notification/me/notification-preferences", data)
+        return this.patch("/notification/me/preferences", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
