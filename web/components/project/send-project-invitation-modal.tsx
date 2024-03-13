@@ -33,7 +33,7 @@ type FormValues = {
 const defaultValues: FormValues = {
     members: [
         {
-            role: 5,
+            role: ERoles.MEMBER,
             member_id: "",
         },
     ],
