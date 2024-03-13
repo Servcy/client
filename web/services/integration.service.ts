@@ -8,30 +8,30 @@ class IntegrationService extends APIService {
     }
 
     async fetchIntegrations() {
-        const response = await this.get("/integration/fetch-integrations")
+        const response = await this.get("/integration/fetch")
         const results = response.data.results
         return JSON.parse(results)
     }
 
     async fetchUserIntegrations(integration_name: string) {
-        const response = await this.get(`/integration/user-integration?integration_name=${integration_name}`)
+        const response = await this.get(`/integration/user?integration_name=${integration_name}`)
         return response.data.results
     }
 
     async disconnectUserIntegration(integration_id: string) {
-        const response = await this.post("/integration/user-integration", {
+        const response = await this.post("/integration/user", {
             integration_id,
         })
         return response.data.results
     }
 
     async fetchIntegrationEvents(integration_id: string) {
-        const response = await this.get(`/integration/integration-event/fetch-events?integration_id=${integration_id}`)
+        const response = await this.get(`/integration/event/fetch?integration_id=${integration_id}`)
         return response.data.results
     }
 
     async configureUserIntegration(id: number, configuration: object, integration_name: string) {
-        const response = await this.put(`/integration/user-integration/${id}?integration_name=${integration_name}`, {
+        const response = await this.put(`/integration/user/${id}?integration_name=${integration_name}`, {
             configuration,
         })
         return response
@@ -43,17 +43,17 @@ class IntegrationService extends APIService {
     }
 
     async enableIntegrationEvent(payload: object) {
-        const response = await this.post("/integration/integration-event/enable-event", payload)
+        const response = await this.post("/integration/event/enable", payload)
         return response
     }
 
     async disableIntegrationEvent(payload: object) {
-        const response = await this.post("/integration/integration-event/disable-event", payload)
+        const response = await this.post("/integration/event/disable", payload)
         return response
     }
 
     async disableNotificationType(payload: object) {
-        const response = await this.post("/integration/integration-event/disable-such-notifications", payload)
+        const response = await this.post("/integration/event/notification", payload)
         return response
     }
 }
