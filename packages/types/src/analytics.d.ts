@@ -74,11 +74,6 @@ export interface IAnalyticsParams {
     module?: string | null
 }
 
-export interface ISaveAnalyticsFormData {
-    name: string
-    description: string
-    query_dict: IExportAnalyticsFormData
-}
 export interface IExportAnalyticsFormData {
     x_axis: TXAxisValues
     y_axis: TYAxisValues

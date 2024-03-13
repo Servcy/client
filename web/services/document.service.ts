@@ -165,7 +165,7 @@ export class FileService extends APIService {
     }
 
     async getUnsplashImages(query?: string): Promise<UnSplashImage[]> {
-        return this.get(`/document/unsplash/`, {
+        return this.get(`/document/unsplash`, {
             params: {
                 query,
             },

@@ -7,7 +7,6 @@ import {
     IAnalyticsResponse,
     IDefaultAnalyticsResponse,
     IExportAnalyticsFormData,
-    ISaveAnalyticsFormData,
 } from "@servcy/types"
 
 export class AnalyticsService extends APIService {
@@ -16,7 +15,7 @@ export class AnalyticsService extends APIService {
     }
 
     async getAnalytics(workspaceSlug: string, params: IAnalyticsParams): Promise<IAnalyticsResponse> {
-        return this.get(`/project/workspaces/${workspaceSlug}/analytics/`, {
+        return this.get(`/dashboard/workspaces/${workspaceSlug}/analytics`, {
             params: {
                 ...params,
                 project: params?.project ? params.project.toString() : null,
@@ -32,7 +31,7 @@ export class AnalyticsService extends APIService {
         workspaceSlug: string,
         params?: Partial<IAnalyticsParams>
     ): Promise<IDefaultAnalyticsResponse> {
-        return this.get(`/project/workspaces/${workspaceSlug}/default-analytics/`, {
+        return this.get(`/dashboard/workspaces/${workspaceSlug}/analytics/default`, {
             params: {
                 ...params,
                 project: params?.project ? params.project.toString() : null,
@@ -44,16 +43,8 @@ export class AnalyticsService extends APIService {
             })
     }
 
-    async saveAnalytics(workspaceSlug: string, data: ISaveAnalyticsFormData): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/analytic-view/`, data)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
     async exportAnalytics(workspaceSlug: string, data: IExportAnalyticsFormData): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/export-analytics/`, data)
+        return this.post(`/dashboard/workspaces/${workspaceSlug}/analytics/export`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
