@@ -10,7 +10,7 @@ export class ModuleService extends APIService {
     }
 
     async getWorkspaceModules(workspaceSlug: string): Promise<IModule[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/modules/`)
+        return this.get(`/project/workspace/${workspaceSlug}/modules/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -18,7 +18,7 @@ export class ModuleService extends APIService {
     }
 
     async getModules(workspaceSlug: string, projectId: string): Promise<IModule[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/modules/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -26,7 +26,7 @@ export class ModuleService extends APIService {
     }
 
     async createModule(workspaceSlug: string, projectId: string, data: any): Promise<IModule> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/modules/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -34,7 +34,7 @@ export class ModuleService extends APIService {
     }
 
     async updateModule(workspaceSlug: string, projectId: string, moduleId: string, data: any): Promise<any> {
-        return this.put(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/`, data)
+        return this.put(`/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -42,7 +42,7 @@ export class ModuleService extends APIService {
     }
 
     async getModuleDetails(workspaceSlug: string, projectId: string, moduleId: string): Promise<IModule> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -55,7 +55,7 @@ export class ModuleService extends APIService {
         moduleId: string,
         data: Partial<IModule>
     ): Promise<IModule> {
-        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/`, data)
+        return this.patch(`/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -63,7 +63,7 @@ export class ModuleService extends APIService {
     }
 
     async deleteModule(workspaceSlug: string, projectId: string, moduleId: string): Promise<any> {
-        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/`)
+        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -76,7 +76,7 @@ export class ModuleService extends APIService {
         moduleId: string,
         queries?: any
     ): Promise<TIssue[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/`, {
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/`, {
             params: queries,
         })
             .then((response) => response?.data)
@@ -91,7 +91,7 @@ export class ModuleService extends APIService {
         moduleId: string,
         data: { issues: string[] }
     ): Promise<void> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -104,7 +104,7 @@ export class ModuleService extends APIService {
         issueId: string,
         data: { modules: string[] }
     ): Promise<void> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/modules/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/modules/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -118,7 +118,7 @@ export class ModuleService extends APIService {
         issueId: string
     ): Promise<any> {
         return this.delete(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/${issueId}/`
+            `/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/${issueId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -136,7 +136,7 @@ export class ModuleService extends APIService {
         issueIds.forEach((issueId) => {
             promiseDataUrls.push(
                 this.delete(
-                    `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/${issueId}/`
+                    `/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/${issueId}/`
                 )
             )
         })
@@ -157,7 +157,7 @@ export class ModuleService extends APIService {
         moduleIds.forEach((moduleId) => {
             promiseDataUrls.push(
                 this.delete(
-                    `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/${issueId}/`
+                    `/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/issues/${issueId}/`
                 )
             )
         })
@@ -175,7 +175,7 @@ export class ModuleService extends APIService {
         data: Partial<ModuleLink>
     ): Promise<ILinkDetails> {
         return this.post(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/module-links/`,
+            `/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/module-links/`,
             data
         )
             .then((response) => response?.data)
@@ -192,7 +192,7 @@ export class ModuleService extends APIService {
         data: Partial<ModuleLink>
     ): Promise<ILinkDetails> {
         return this.patch(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/module-links/${linkId}/`,
+            `/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/module-links/${linkId}/`,
             data
         )
             .then((response) => response?.data)
@@ -203,7 +203,7 @@ export class ModuleService extends APIService {
 
     async deleteModuleLink(workspaceSlug: string, projectId: string, moduleId: string, linkId: string): Promise<any> {
         return this.delete(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/module-links/${linkId}/`
+            `/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/module-links/${linkId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -218,7 +218,7 @@ export class ModuleService extends APIService {
             module: string
         }
     ): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/user-favorite-modules/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/user-favorite-modules/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -227,7 +227,7 @@ export class ModuleService extends APIService {
 
     async removeModuleFromFavorites(workspaceSlug: string, projectId: string, moduleId: string): Promise<any> {
         return this.delete(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/user-favorite-modules/${moduleId}/`
+            `/project/workspace/${workspaceSlug}/projects/${projectId}/user-favorite-modules/${moduleId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {

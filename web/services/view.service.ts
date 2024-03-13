@@ -10,7 +10,7 @@ export class ViewService extends APIService {
     }
 
     async createView(workspaceSlug: string, projectId: string, data: Partial<IProjectView>): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/views/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/views/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -23,7 +23,7 @@ export class ViewService extends APIService {
         viewId: string,
         data: Partial<IProjectView>
     ): Promise<any> {
-        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/views/${viewId}/`, data)
+        return this.patch(`/project/workspace/${workspaceSlug}/projects/${projectId}/views/${viewId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -31,7 +31,7 @@ export class ViewService extends APIService {
     }
 
     async deleteView(workspaceSlug: string, projectId: string, viewId: string): Promise<any> {
-        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/views/${viewId}/`)
+        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/views/${viewId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -39,7 +39,7 @@ export class ViewService extends APIService {
     }
 
     async getViews(workspaceSlug: string, projectId: string): Promise<IProjectView[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/views/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/views/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -47,7 +47,7 @@ export class ViewService extends APIService {
     }
 
     async getViewDetails(workspaceSlug: string, projectId: string, viewId: string): Promise<IProjectView> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/views/${viewId}/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/views/${viewId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -55,7 +55,7 @@ export class ViewService extends APIService {
     }
 
     async getViewIssues(workspaceSlug: string, projectId: string, viewId: string): Promise<any> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/views/${viewId}/issues/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/views/${viewId}/issues/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -69,7 +69,7 @@ export class ViewService extends APIService {
             view: string
         }
     ): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/user-favorite-views/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/user-favorite-views/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -77,7 +77,7 @@ export class ViewService extends APIService {
     }
 
     async removeViewFromFavorites(workspaceSlug: string, projectId: string, viewId: string): Promise<any> {
-        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/user-favorite-views/${viewId}/`)
+        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/user-favorite-views/${viewId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

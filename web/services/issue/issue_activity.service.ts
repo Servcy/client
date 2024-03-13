@@ -20,7 +20,7 @@ export class IssueActivityService extends APIService {
               }
             | {} = {}
     ): Promise<TIssueActivity[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`, {
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`, {
             params: {
                 activity_type: "issue-property",
                 ...params,

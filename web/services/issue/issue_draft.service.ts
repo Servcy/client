@@ -10,7 +10,7 @@ export class IssueDraftService extends APIService {
     }
 
     async getDraftIssues(workspaceSlug: string, projectId: string, query?: any): Promise<TIssue[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issue-drafts/`, {
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-drafts/`, {
             params: { ...query },
         })
             .then((response) => response?.data)
@@ -20,7 +20,7 @@ export class IssueDraftService extends APIService {
     }
 
     async createDraftIssue(workspaceSlug: string, projectId: string, data: any): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issue-drafts/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-drafts/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -28,7 +28,7 @@ export class IssueDraftService extends APIService {
     }
 
     async updateDraftIssue(workspaceSlug: string, projectId: string, issueId: string, data: any): Promise<any> {
-        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issue-drafts/${issueId}/`, data)
+        return this.patch(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-drafts/${issueId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -36,7 +36,7 @@ export class IssueDraftService extends APIService {
     }
 
     async deleteDraftIssue(workspaceSlug: string, projectId: string, issueId: string): Promise<any> {
-        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issue-drafts/${issueId}/`)
+        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-drafts/${issueId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -44,7 +44,7 @@ export class IssueDraftService extends APIService {
     }
 
     async getDraftIssueById(workspaceSlug: string, projectId: string, issueId: string, queries?: any): Promise<any> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/issue-drafts/${issueId}/`, {
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-drafts/${issueId}/`, {
             params: queries,
         })
             .then((response) => response?.data)

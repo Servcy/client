@@ -11,7 +11,7 @@ export class IssueFiltersService extends APIService {
 
     // project issue filters
     async fetchProjectIssueFilters(workspaceSlug: string, projectId: string): Promise<IIssueFiltersResponse> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/user-properties/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/user-properties/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -22,7 +22,7 @@ export class IssueFiltersService extends APIService {
         projectId: string,
         data: Partial<IIssueFiltersResponse>
     ): Promise<any> {
-        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/user-properties/`, data)
+        return this.patch(`/project/workspace/${workspaceSlug}/projects/${projectId}/user-properties/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -35,7 +35,7 @@ export class IssueFiltersService extends APIService {
         projectId: string,
         cycleId: string
     ): Promise<IIssueFiltersResponse> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/user-properties/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/user-properties/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -48,7 +48,7 @@ export class IssueFiltersService extends APIService {
         data: Partial<IIssueFiltersResponse>
     ): Promise<any> {
         return this.patch(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/user-properties/`,
+            `/project/workspace/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/user-properties/`,
             data
         )
             .then((response) => response?.data)
@@ -64,7 +64,7 @@ export class IssueFiltersService extends APIService {
         moduleId: string
     ): Promise<IIssueFiltersResponse> {
         return this.get(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/user-properties/`
+            `/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/user-properties/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -78,7 +78,7 @@ export class IssueFiltersService extends APIService {
         data: Partial<IIssueFiltersResponse>
     ): Promise<any> {
         return this.patch(
-            `/project/workspaces/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/user-properties/`,
+            `/project/workspace/${workspaceSlug}/projects/${projectId}/modules/${moduleId}/user-properties/`,
             data
         )
             .then((response) => response?.data)

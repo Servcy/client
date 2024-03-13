@@ -21,16 +21,10 @@ export class WorkspaceService extends APIService {
         super(API_BASE_URL)
     }
 
-    async userWorkspaces(): Promise<IWorkspace[]> {
-        return this.get("/project/users/me/workspaces/")
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
+    // iam routes
 
     async createWorkspace(data: Partial<IWorkspace>): Promise<IWorkspace> {
-        return this.post("/iam/workspaces/", data)
+        return this.post("/iam/workspaces", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -38,7 +32,7 @@ export class WorkspaceService extends APIService {
     }
 
     async updateWorkspace(workspaceSlug: string, data: Partial<IWorkspace>): Promise<IWorkspace> {
-        return this.patch(`/iam/workspaces/${workspaceSlug}/`, data)
+        return this.patch(`/iam/workspace/${workspaceSlug}`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -46,7 +40,7 @@ export class WorkspaceService extends APIService {
     }
 
     async deleteWorkspace(workspaceSlug: string): Promise<any> {
-        return this.delete(`/iam/workspaces/${workspaceSlug}/`)
+        return this.delete(`/iam/workspace/${workspaceSlug}`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -54,7 +48,7 @@ export class WorkspaceService extends APIService {
     }
 
     async inviteWorkspace(workspaceSlug: string, data: IWorkspaceBulkInviteFormData): Promise<any> {
-        return this.post(`/iam/workspaces/${workspaceSlug}/invitations/`, data)
+        return this.post(`/iam/workspace/${workspaceSlug}/invitations`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -62,7 +56,7 @@ export class WorkspaceService extends APIService {
     }
 
     async joinWorkspace(workspaceSlug: string, invitationId: string, data: any): Promise<any> {
-        return this.post(`/iam/workspaces/${workspaceSlug}/invitations/${invitationId}/join/`, data, {
+        return this.post(`/iam/workspace/${workspaceSlug}/invitations/${invitationId}/join`, data, {
             headers: {},
         })
             .then((response) => response?.data)
@@ -72,7 +66,7 @@ export class WorkspaceService extends APIService {
     }
 
     async joinWorkspaces(data: any): Promise<any> {
-        return this.post("/iam/users/me/workspaces/invitations/", data)
+        return this.post("/iam/me/workspace/invitations", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -80,7 +74,7 @@ export class WorkspaceService extends APIService {
     }
 
     async getLastActiveWorkspaceAndProjects(): Promise<ILastActiveWorkspaceDetails> {
-        return this.get("/project/users/last-visited-workspace/")
+        return this.get("/iam/me/last/visited/workspace/project")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -93,7 +87,7 @@ export class WorkspaceService extends APIService {
         previous: string
         results: IWorkspaceMemberInvitation[]
     }> {
-        return this.get("/iam/users/me/workspaces/invitations/")
+        return this.get("/iam/me/workspace/invitations")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -101,7 +95,7 @@ export class WorkspaceService extends APIService {
     }
 
     async workspaceMemberMe(workspaceSlug: string): Promise<IWorkspaceMemberMe> {
-        return this.get(`/iam/workspaces/${workspaceSlug}/workspace-members/me/`)
+        return this.get(`/iam/workspace/${workspaceSlug}/members/me`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -109,7 +103,7 @@ export class WorkspaceService extends APIService {
     }
 
     async updateWorkspaceView(workspaceSlug: string, data: { view_props: IWorkspaceViewProps }): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/workspace-views/`, data)
+        return this.post(`/iam/workspace/${workspaceSlug}/views`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -117,7 +111,7 @@ export class WorkspaceService extends APIService {
     }
 
     async fetchWorkspaceMembers(workspaceSlug: string): Promise<IWorkspaceMember[]> {
-        return this.get(`/iam/workspaces/${workspaceSlug}/members/`)
+        return this.get(`/iam/workspace/${workspaceSlug}/members`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -129,7 +123,7 @@ export class WorkspaceService extends APIService {
         memberId: string,
         data: Partial<IWorkspaceMember>
     ): Promise<IWorkspaceMember> {
-        return this.patch(`/iam/workspaces/${workspaceSlug}/members/${memberId}/`, data)
+        return this.patch(`/iam/workspace/${workspaceSlug}/members/${memberId}`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -137,7 +131,7 @@ export class WorkspaceService extends APIService {
     }
 
     async deleteWorkspaceMember(workspaceSlug: string, memberId: string): Promise<any> {
-        return this.delete(`/iam/workspaces/${workspaceSlug}/members/${memberId}/`)
+        return this.delete(`/iam/workspace/${workspaceSlug}/members/${memberId}`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -145,7 +139,7 @@ export class WorkspaceService extends APIService {
     }
 
     async workspaceInvitations(workspaceSlug: string): Promise<IWorkspaceMemberInvitation[]> {
-        return this.get(`/iam/workspaces/${workspaceSlug}/invitations/`)
+        return this.get(`/iam/workspace/${workspaceSlug}/invitations`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -153,7 +147,7 @@ export class WorkspaceService extends APIService {
     }
 
     async getWorkspaceInvitation(workspaceSlug: string, invitationId: string): Promise<IWorkspaceMemberInvitation> {
-        return this.get(`/iam/workspaces/${workspaceSlug}/invitations/${invitationId}/join/`, { headers: {} })
+        return this.get(`/iam/workspace/${workspaceSlug}/invitations/${invitationId}/join`, { headers: {} })
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -165,7 +159,7 @@ export class WorkspaceService extends APIService {
         invitationId: string,
         data: Partial<IWorkspaceMember>
     ): Promise<any> {
-        return this.patch(`/iam/workspaces/${workspaceSlug}/invitations/${invitationId}/`, data)
+        return this.patch(`/iam/workspace/${workspaceSlug}/invitations/${invitationId}`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -173,7 +167,7 @@ export class WorkspaceService extends APIService {
     }
 
     async deleteWorkspaceInvitations(workspaceSlug: string, invitationId: string): Promise<any> {
-        return this.delete(`/iam/workspaces/${workspaceSlug}/invitations/${invitationId}/`)
+        return this.delete(`/iam/workspace/${workspaceSlug}/invitations/${invitationId}`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -181,7 +175,17 @@ export class WorkspaceService extends APIService {
     }
 
     async workspaceSlugCheck(slug: string): Promise<any> {
-        return this.get(`/iam/workspace-slug-check/?slug=${slug}`)
+        return this.get(`/iam/workspace/slug/check?slug=${slug}`)
+            .then((response) => response?.data)
+            .catch((error) => {
+                throw error?.response?.data
+            })
+    }
+
+    // project routes
+
+    async userWorkspaces(): Promise<IWorkspace[]> {
+        return this.get("/project/me/workspaces")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -196,7 +200,7 @@ export class WorkspaceService extends APIService {
             workspace_search: boolean
         }
     ): Promise<IWorkspaceSearchResults> {
-        return this.get(`/project/workspaces/${workspaceSlug}/search/`, {
+        return this.get(`/project/workspace/${workspaceSlug}/search/`, {
             params,
         })
             .then((res) => res?.data)
@@ -206,7 +210,7 @@ export class WorkspaceService extends APIService {
     }
 
     async createView(workspaceSlug: string, data: Partial<IWorkspaceView>): Promise<IWorkspaceView> {
-        return this.post(`/project/workspaces/${workspaceSlug}/views/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/views/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -214,7 +218,7 @@ export class WorkspaceService extends APIService {
     }
 
     async updateView(workspaceSlug: string, viewId: string, data: Partial<IWorkspaceView>): Promise<IWorkspaceView> {
-        return this.patch(`/project/workspaces/${workspaceSlug}/views/${viewId}/`, data)
+        return this.patch(`/project/workspace/${workspaceSlug}/views/${viewId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -222,7 +226,7 @@ export class WorkspaceService extends APIService {
     }
 
     async deleteView(workspaceSlug: string, viewId: string): Promise<any> {
-        return this.delete(`/project/workspaces/${workspaceSlug}/views/${viewId}/`)
+        return this.delete(`/project/workspace/${workspaceSlug}/views/${viewId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -230,7 +234,7 @@ export class WorkspaceService extends APIService {
     }
 
     async getAllViews(workspaceSlug: string): Promise<IWorkspaceView[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/views/`)
+        return this.get(`/project/workspace/${workspaceSlug}/views/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -238,7 +242,7 @@ export class WorkspaceService extends APIService {
     }
 
     async getViewDetails(workspaceSlug: string, viewId: string): Promise<IWorkspaceView> {
-        return this.get(`/project/workspaces/${workspaceSlug}/views/${viewId}/`)
+        return this.get(`/project/workspace/${workspaceSlug}/views/${viewId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -246,7 +250,7 @@ export class WorkspaceService extends APIService {
     }
 
     async getViewIssues(workspaceSlug: string, params: any): Promise<TIssue[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/issues/`, {
+        return this.get(`/project/workspace/${workspaceSlug}/issues/`, {
             params,
         })
             .then((response) => response?.data)
@@ -256,7 +260,7 @@ export class WorkspaceService extends APIService {
     }
 
     async getWorkspaceUserProjectsRole(workspaceSlug: string): Promise<IUserProjectsRole> {
-        return this.get(`/project/users/me/workspaces/${workspaceSlug}/project-roles/`)
+        return this.get(`/project/users/me/workspace/${workspaceSlug}/project-roles/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

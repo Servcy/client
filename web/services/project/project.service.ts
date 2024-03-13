@@ -10,7 +10,7 @@ export class ProjectService extends APIService {
     }
 
     async createProject(workspaceSlug: string, data: Partial<IProject>): Promise<IProject> {
-        return this.post(`/project/workspaces/${workspaceSlug}/projects/`, data)
+        return this.post(`/project/workspace/${workspaceSlug}/projects/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -18,7 +18,7 @@ export class ProjectService extends APIService {
     }
 
     async checkProjectIdentifierAvailability(workspaceSlug: string, data: string): Promise<any> {
-        return this.get(`/project/workspaces/${workspaceSlug}/project-identifiers`, {
+        return this.get(`/project/workspace/${workspaceSlug}/project-identifiers`, {
             params: {
                 name: data,
             },
@@ -30,7 +30,7 @@ export class ProjectService extends APIService {
     }
 
     async getProjects(workspaceSlug: string): Promise<IProject[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -38,7 +38,7 @@ export class ProjectService extends APIService {
     }
 
     async getProject(workspaceSlug: string, projectId: string): Promise<IProject> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/`)
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -46,7 +46,7 @@ export class ProjectService extends APIService {
     }
 
     async updateProject(workspaceSlug: string, projectId: string, data: Partial<IProject>): Promise<IProject> {
-        return this.patch(`/project/workspaces/${workspaceSlug}/projects/${projectId}/`, data)
+        return this.patch(`/project/workspace/${workspaceSlug}/projects/${projectId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -54,7 +54,7 @@ export class ProjectService extends APIService {
     }
 
     async deleteProject(workspaceSlug: string, projectId: string): Promise<any> {
-        return this.delete(`/project/workspaces/${workspaceSlug}/projects/${projectId}/`)
+        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -68,7 +68,7 @@ export class ProjectService extends APIService {
             sort_order?: number
         }
     ): Promise<any> {
-        await this.post(`/project/workspaces/${workspaceSlug}/projects/${projectId}/project-views/`, data)
+        await this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/project-views/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -76,7 +76,7 @@ export class ProjectService extends APIService {
     }
 
     async getUserProjectFavorites(workspaceSlug: string): Promise<any[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/user-favorite-projects/`)
+        return this.get(`/project/workspace/${workspaceSlug}/user-favorite-projects/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -84,7 +84,7 @@ export class ProjectService extends APIService {
     }
 
     async addProjectToFavorites(workspaceSlug: string, project: string): Promise<any> {
-        return this.post(`/project/workspaces/${workspaceSlug}/user-favorite-projects/`, { project })
+        return this.post(`/project/workspace/${workspaceSlug}/user-favorite-projects/`, { project })
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -92,7 +92,7 @@ export class ProjectService extends APIService {
     }
 
     async removeProjectFromFavorites(workspaceSlug: string, projectId: string): Promise<any> {
-        return this.delete(`/project/workspaces/${workspaceSlug}/user-favorite-projects/${projectId}/`)
+        return this.delete(`/project/workspace/${workspaceSlug}/user-favorite-projects/${projectId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -104,7 +104,7 @@ export class ProjectService extends APIService {
         projectId: string,
         params: TProjectIssuesSearchParams
     ): Promise<ISearchIssueResponse[]> {
-        return this.get(`/project/workspaces/${workspaceSlug}/projects/${projectId}/search-issues/`, {
+        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/search-issues/`, {
             params,
         })
             .then((response) => response?.data)
