@@ -19,12 +19,12 @@ export async function middleware(request: NextRequest) {
     const accessToken = request.cookies.get("accessToken")?.value ?? ""
     const requestedPath = request.nextUrl.pathname
     if (isJwtTokenValid(accessToken)) {
-        if (requestedPath === "/login")
+        if (["/login", "/workspace/invite"].includes(requestedPath))
             // Redirect to home if user is already logged in
             return NextResponse.redirect(new URL("/", request.nextUrl.origin))
         // If user is already logged in, continue to the requested page
         else return null
     }
-    if (requestedPath === "/login") return null
+    if (["/login", "/workspace/invite"].includes(requestedPath)) return null
     return NextResponse.redirect(new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin))
 }
