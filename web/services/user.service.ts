@@ -180,7 +180,7 @@ export class UserService extends APIService {
     }
 
     async leaveProject(workspaceSlug: string, projectId: string) {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/members/leave/`)
+        return this.post(`/project/${workspaceSlug}/${projectId}/members/leave/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

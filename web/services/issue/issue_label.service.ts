@@ -18,7 +18,7 @@ export class IssueLabelService extends APIService {
     }
 
     async getProjectLabels(workspaceSlug: string, projectId: string): Promise<IIssueLabel[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-labels/`)
+        return this.get(`/project/${workspaceSlug}/${projectId}/labels/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -26,7 +26,7 @@ export class IssueLabelService extends APIService {
     }
 
     async createIssueLabel(workspaceSlug: string, projectId: string, data: any): Promise<IIssueLabel> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-labels/`, data)
+        return this.post(`/project/${workspaceSlug}/${projectId}/labels/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -34,7 +34,7 @@ export class IssueLabelService extends APIService {
     }
 
     async patchIssueLabel(workspaceSlug: string, projectId: string, labelId: string, data: any): Promise<any> {
-        return this.patch(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-labels/${labelId}/`, data)
+        return this.patch(`/project/${workspaceSlug}/${projectId}/labels/${labelId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -42,7 +42,7 @@ export class IssueLabelService extends APIService {
     }
 
     async deleteIssueLabel(workspaceSlug: string, projectId: string, labelId: string): Promise<any> {
-        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-labels/${labelId}/`)
+        return this.delete(`/project/${workspaceSlug}/${projectId}/labels/${labelId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

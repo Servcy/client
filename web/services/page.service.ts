@@ -10,7 +10,7 @@ export class PageService extends APIService {
     }
 
     async createPage(workspaceSlug: string, projectId: string, data: Partial<IPage>): Promise<IPage> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/`, data)
+        return this.post(`/project/${workspaceSlug}/${projectId}/pages/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -18,7 +18,7 @@ export class PageService extends APIService {
     }
 
     async patchPage(workspaceSlug: string, projectId: string, pageId: string, data: Partial<IPage>): Promise<IPage> {
-        return this.patch(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/`, data)
+        return this.patch(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 console.error("error", error?.response?.data)
@@ -27,7 +27,7 @@ export class PageService extends APIService {
     }
 
     async deletePage(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
-        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/`)
+        return this.delete(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -35,7 +35,7 @@ export class PageService extends APIService {
     }
 
     async addPageToFavorites(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/user-favorite-pages/`, {
+        return this.post(`/project/${workspaceSlug}/${projectId}/pages/favorite/`, {
             page: pageId,
         })
             .then((response) => response?.data)
@@ -45,7 +45,7 @@ export class PageService extends APIService {
     }
 
     async removePageFromFavorites(workspaceSlug: string, projectId: string, pageId: string) {
-        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/user-favorite-pages/${pageId}`)
+        return this.delete(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/favorite/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -53,7 +53,7 @@ export class PageService extends APIService {
     }
 
     async getProjectPages(workspaceSlug: string, projectId: string): Promise<IPage[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/`)
+        return this.get(`/project/${workspaceSlug}/${projectId}/pages/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -65,7 +65,7 @@ export class PageService extends APIService {
         projectId: string,
         pageType: "all" | "favorite" | "private" | "shared"
     ): Promise<IPage[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/`, {
+        return this.get(`/project/${workspaceSlug}/${projectId}/pages/`, {
             params: {
                 page_view: pageType,
             },
@@ -77,88 +77,7 @@ export class PageService extends APIService {
     }
 
     async getPageDetails(workspaceSlug: string, projectId: string, pageId: string): Promise<IPage> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/`)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async createPageBlock(
-        workspaceSlug: string,
-        projectId: string,
-        pageId: string,
-        data: Partial<IPageBlock>
-    ): Promise<IPageBlock> {
-        return this.post(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/`,
-            data
-        )
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async getPageBlock(
-        workspaceSlug: string,
-        projectId: string,
-        pageId: string,
-        pageBlockId: string
-    ): Promise<IPageBlock[]> {
-        return this.get(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/${pageBlockId}/`
-        )
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async patchPageBlock(
-        workspaceSlug: string,
-        projectId: string,
-        pageId: string,
-        pageBlockId: string,
-        data: Partial<IPageBlock>
-    ): Promise<IPage> {
-        return this.patch(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/${pageBlockId}/`,
-            data
-        )
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async deletePageBlock(workspaceSlug: string, projectId: string, pageId: string, pageBlockId: string): Promise<any> {
-        return this.delete(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/${pageBlockId}/`
-        )
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async listPageBlocks(workspaceSlug: string, projectId: string, pageId: string): Promise<IPageBlock[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/`)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async convertPageBlockToIssue(
-        workspaceSlug: string,
-        projectId: string,
-        pageId: string,
-        blockId: string
-    ): Promise<TIssue> {
-        return this.post(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/page-blocks/${blockId}/issues/`
-        )
+        return this.get(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -167,7 +86,7 @@ export class PageService extends APIService {
 
     // =============== Archiving & Unarchiving Pages =================
     async archivePage(workspaceSlug: string, projectId: string, pageId: string): Promise<void> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/archive/`)
+        return this.post(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/archive/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -175,7 +94,7 @@ export class PageService extends APIService {
     }
 
     async restorePage(workspaceSlug: string, projectId: string, pageId: string): Promise<void> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/unarchive/`)
+        return this.post(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/unarchive/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -183,7 +102,7 @@ export class PageService extends APIService {
     }
 
     async getArchivedPages(workspaceSlug: string, projectId: string): Promise<IPage[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/archived-pages/`)
+        return this.get(`/project/${workspaceSlug}/${projectId}/pages/archived/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error
@@ -191,7 +110,7 @@ export class PageService extends APIService {
     }
     // ==================== Pages Locking Services ==========================
     async lockPage(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/lock/`)
+        return this.post(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/lock/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -199,7 +118,7 @@ export class PageService extends APIService {
     }
 
     async unlockPage(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/pages/${pageId}/unlock/`)
+        return this.post(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/unlock/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

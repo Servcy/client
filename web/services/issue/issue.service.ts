@@ -4,7 +4,7 @@ import { APIService } from "@services/api.service"
 import { API_BASE_URL } from "@helpers/common.helper"
 
 // type
-import type { IIssueDisplayProperties, TIssue, TIssueActivity, TIssueLink, TIssueSubIssues } from "@servcy/types"
+import type { TIssue, TIssueActivity, TIssueLink, TIssueSubIssues } from "@servcy/types"
 
 export class IssueService extends APIService {
     constructor() {
@@ -12,7 +12,7 @@ export class IssueService extends APIService {
     }
 
     async createIssue(workspaceSlug: string, projectId: string, data: any): Promise<any> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/`, data)
+        return this.post(`/project/${workspaceSlug}/${projectId}/issues/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -20,7 +20,7 @@ export class IssueService extends APIService {
     }
 
     async getIssues(workspaceSlug: string, projectId: string, queries?: any): Promise<TIssue[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/`, {
+        return this.get(`/project/${workspaceSlug}/${projectId}/issues/`, {
             params: queries,
         })
             .then((response) => response?.data)
@@ -34,7 +34,7 @@ export class IssueService extends APIService {
         projectId: string,
         queries?: any
     ): Promise<TIssue[] | { [key: string]: TIssue[] }> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/`, {
+        return this.get(`/project/${workspaceSlug}/${projectId}/issues/`, {
             params: queries,
         })
             .then((response) => response?.data)
@@ -44,7 +44,7 @@ export class IssueService extends APIService {
     }
 
     async retrieve(workspaceSlug: string, projectId: string, issueId: string, queries?: any): Promise<TIssue> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/`, {
+        return this.get(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/`, {
             params: queries,
         })
             .then((response) => response?.data)
@@ -54,7 +54,7 @@ export class IssueService extends APIService {
     }
 
     async retrieveIssues(workspaceSlug: string, projectId: string, issueIds: string[]): Promise<TIssue[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/list/`, {
+        return this.get(`/project/${workspaceSlug}/${projectId}/issues/list/`, {
             params: { issues: issueIds.join(",") },
         })
             .then((response) => response?.data)
@@ -64,7 +64,7 @@ export class IssueService extends APIService {
     }
 
     async getIssueActivities(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueActivity[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/history/`)
+        return this.get(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/history/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -80,7 +80,7 @@ export class IssueService extends APIService {
         }
     ) {
         return this.post(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/cycle-issues/`,
+            `/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/cycle-issues/`,
             data
         )
             .then((response) => response?.data)
@@ -91,7 +91,7 @@ export class IssueService extends APIService {
 
     async removeIssueFromCycle(workspaceSlug: string, projectId: string, cycleId: string, bridgeId: string) {
         return this.delete(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}/cycle-issues/${bridgeId}/`
+            `/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/cycle-issues/${bridgeId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -112,7 +112,7 @@ export class IssueService extends APIService {
         }
     ) {
         return this.post(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/`,
+            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/`,
             data
         )
             .then((response) => response?.data)
@@ -123,7 +123,7 @@ export class IssueService extends APIService {
 
     async deleteIssueRelation(workspaceSlug: string, projectId: string, issueId: string, relationId: string) {
         return this.delete(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-relation/${relationId}/`
+            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/${relationId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {
@@ -131,30 +131,8 @@ export class IssueService extends APIService {
             })
     }
 
-    async getIssueDisplayProperties(workspaceSlug: string, projectId: string): Promise<any> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-display-properties/`)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
-    async updateIssueDisplayProperties(
-        workspaceSlug: string,
-        projectId: string,
-        data: IIssueDisplayProperties
-    ): Promise<any> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/issue-display-properties/`, {
-            properties: data,
-        })
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
     async patchIssue(workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssue>): Promise<any> {
-        return this.patch(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/`, data)
+        return this.patch(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -162,7 +140,7 @@ export class IssueService extends APIService {
     }
 
     async deleteIssue(workspaceSlug: string, projectId: string, issuesId: string): Promise<any> {
-        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issuesId}/`)
+        return this.delete(`/project/${workspaceSlug}/${projectId}/issues/${issuesId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -170,7 +148,7 @@ export class IssueService extends APIService {
     }
 
     async bulkDeleteIssues(workspaceSlug: string, projectId: string, data: any): Promise<any> {
-        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/bulk-delete-issues/`, data)
+        return this.delete(`/project/${workspaceSlug}/${projectId}/issues/delete/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -178,7 +156,7 @@ export class IssueService extends APIService {
     }
 
     async subIssues(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueSubIssues> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/sub-issues/`)
+        return this.get(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/sub/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -192,7 +170,7 @@ export class IssueService extends APIService {
         data: { sub_issue_ids: string[] }
     ): Promise<TIssueSubIssues> {
         return this.post(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/sub-issues/`,
+            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/sub/`,
             data
         )
             .then((response) => response?.data)
@@ -202,7 +180,7 @@ export class IssueService extends APIService {
     }
 
     async fetchIssueLinks(workspaceSlug: string, projectId: string, issueId: string): Promise<TIssueLink[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/`)
+        return this.get(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -216,7 +194,7 @@ export class IssueService extends APIService {
         data: Partial<TIssueLink>
     ): Promise<TIssueLink> {
         return this.post(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/`,
+            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/`,
             data
         )
             .then((response) => response?.data)
@@ -233,7 +211,7 @@ export class IssueService extends APIService {
         data: Partial<TIssueLink>
     ): Promise<TIssueLink> {
         return this.patch(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/${linkId}/`,
+            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/${linkId}/`,
             data
         )
             .then((response) => response?.data)
@@ -244,7 +222,7 @@ export class IssueService extends APIService {
 
     async deleteIssueLink(workspaceSlug: string, projectId: string, issueId: string, linkId: string): Promise<any> {
         return this.delete(
-            `/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/issue-links/${linkId}/`
+            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/${linkId}/`
         )
             .then((response) => response?.data)
             .catch((error) => {

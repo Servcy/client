@@ -116,7 +116,7 @@ export class NotificationService extends APIService {
     // end of notification routes
 
     async subscribeToIssueNotifications(workspaceSlug: string, projectId: string, issueId: string): Promise<any> {
-        return this.post(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/subscribe/`)
+        return this.post(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/subscribe/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -130,7 +130,7 @@ export class NotificationService extends APIService {
     ): Promise<{
         subscribed: boolean
     }> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/subscribe/`)
+        return this.get(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/subscribe/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -138,7 +138,7 @@ export class NotificationService extends APIService {
     }
 
     async unsubscribeFromIssueNotifications(workspaceSlug: string, projectId: string, issueId: string): Promise<any> {
-        return this.delete(`/project/workspace/${workspaceSlug}/projects/${projectId}/issues/${issueId}/subscribe/`)
+        return this.delete(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/subscribe/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
