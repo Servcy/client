@@ -100,7 +100,7 @@ export class UserService extends APIService {
 
     async getUserActivity(): Promise<IUserActivityResponse> {
         return this.get(`/project/me/activities/`)
-            .then((response) => response?.data)
+            .then((response) => response?.data?.results)
             .catch((error) => {
                 throw error?.response?.data
             })
