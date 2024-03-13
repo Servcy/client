@@ -200,7 +200,7 @@ export class WorkspaceService extends APIService {
             workspace_search: boolean
         }
     ): Promise<IWorkspaceSearchResults> {
-        return this.get(`/project/workspace/${workspaceSlug}/search/`, {
+        return this.get(`/project/${workspaceSlug}/search`, {
             params,
         })
             .then((res) => res?.data)

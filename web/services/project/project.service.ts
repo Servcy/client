@@ -104,7 +104,7 @@ export class ProjectService extends APIService {
         projectId: string,
         params: TProjectIssuesSearchParams
     ): Promise<ISearchIssueResponse[]> {
-        return this.get(`/project/workspace/${workspaceSlug}/projects/${projectId}/search-issues/`, {
+        return this.get(`/project/${workspaceSlug}/${projectId}/search/issues`, {
             params,
         })
             .then((response) => response?.data)
