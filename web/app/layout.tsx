@@ -21,7 +21,6 @@ import { StoreProvider } from "@contexts/StoreContext"
 import { SWR_CONFIG } from "@constants/swr-config"
 import { THEMES } from "@constants/themes"
 
-import CrispWrapper from "@wrappers/external/CrispWrapper"
 import StoreWrapper from "@wrappers/store/StoreWrapper"
 
 import { isMobileDevice } from "@helpers/common.helper"
@@ -48,16 +47,14 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
                         <StoreProvider>
                             <ThemeProvider themes={THEMES} defaultTheme="system">
                                 <StoreWrapper>
-                                    <CrispWrapper user={currentUser}>
-                                        <PostHogProvider
-                                            user={currentUser}
-                                            currentWorkspaceId={currentWorkspace?.id}
-                                            workspaceRole={currentWorkspaceRole}
-                                            projectRole={currentProjectRole}
-                                        >
-                                            <SWRConfig value={SWR_CONFIG}>{children}</SWRConfig>
-                                        </PostHogProvider>
-                                    </CrispWrapper>
+                                    <PostHogProvider
+                                        user={currentUser}
+                                        currentWorkspaceId={currentWorkspace?.id}
+                                        workspaceRole={currentWorkspaceRole}
+                                        projectRole={currentProjectRole}
+                                    >
+                                        <SWRConfig value={SWR_CONFIG}>{children}</SWRConfig>
+                                    </PostHogProvider>
                                 </StoreWrapper>
                             </ThemeProvider>
                         </StoreProvider>

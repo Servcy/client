@@ -12,7 +12,6 @@ import {
     ChangeIssueAssignee,
     ChangeIssuePriority,
     ChangeIssueState,
-    CommandPaletteHelpActions,
     CommandPaletteIssueActions,
     CommandPaletteProjectActions,
     CommandPaletteSearchResults,
@@ -368,9 +367,6 @@ export const CommandModal: React.FC = observer(() => {
                                                             </div>
                                                         </Command.Item>
                                                     </Command.Group>
-
-                                                    {/* help options */}
-                                                    <CommandPaletteHelpActions closePalette={closePalette} />
                                                 </>
                                             )}
 
