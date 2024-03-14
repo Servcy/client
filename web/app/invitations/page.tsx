@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { useState } from "react"
@@ -14,7 +13,7 @@ import useSWR, { mutate } from "swr"
 import { EmptyState } from "@components/common"
 import { PageHead } from "@components/core"
 
-import { useEventTracker, useUser } from "@hooks/store"
+import { useEventTracker } from "@hooks/store"
 
 import { MEMBER_ACCEPTED } from "@constants/event-tracker"
 import { ROLES } from "@constants/iam"
@@ -40,7 +39,6 @@ const UserInvitationsPage = observer(() => {
     const [isJoiningWorkspaces, setIsJoiningWorkspaces] = useState(false)
     // store hooks
     const { captureEvent, joinWorkspaceMetricGroup } = useEventTracker()
-    const { currentUserSettings } = useUser()
 
     const router = useRouter()
 
@@ -49,11 +47,6 @@ const UserInvitationsPage = observer(() => {
     )
 
     const invitations = data?.results ?? []
-
-    const redirectWorkspaceSlug =
-        currentUserSettings?.workspace?.last_workspace_slug ||
-        currentUserSettings?.workspace?.fallback_workspace_slug ||
-        ""
 
     const handleInvitation = (workspace_invitation: IWorkspaceMemberInvitation, action: "accepted" | "withdraw") => {
         if (action === "accepted") {
@@ -120,8 +113,8 @@ const UserInvitationsPage = observer(() => {
                     invitations.length > 0 ? (
                         <div className="relative flex h-full justify-center px-12 pb-8 sm:items-center sm:justify-start w-full">
                             <div className="w-full space-y-10">
-                                <h5 className="text-lg">We see that someone has invited you to</h5>
-                                <h4 className="text-2xl font-semibold">Join a workspace</h4>
+                                <h5 className="text-lg">It seems like you are popular, people have invited you to</h5>
+                                <h4 className="text-2xl font-semibold">Join their workspace</h4>
                                 <div className="max-h-[37vh] space-y-4 overflow-y-auto md:w-3/5">
                                     {invitations.map((invitation) => {
                                         const isSelected = invitationsRespond.includes(invitation.id)
@@ -187,13 +180,6 @@ const UserInvitationsPage = observer(() => {
                                     >
                                         Accept & Join
                                     </Button>
-                                    <Link href={`/${redirectWorkspaceSlug}`}>
-                                        <span>
-                                            <Button variant="neutral-primary" size="md">
-                                                Go Home
-                                            </Button>
-                                        </span>
-                                    </Link>
                                 </div>
                             </div>
                         </div>
