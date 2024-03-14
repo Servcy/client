@@ -9,7 +9,7 @@ class InboxService extends APIService {
 
     async fetchInbox(payload: object): Promise<any> {
         const response = await this.post("/inbox/fetch", payload)
-        return response
+        return response?.data
     }
 
     async archiveItems(payload: object): Promise<any> {

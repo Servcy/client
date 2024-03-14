@@ -39,7 +39,7 @@ class IntegrationService extends APIService {
 
     async integrationOauth(payload: object, slug: string) {
         const response = await this.put(`/integration/oauth/${slug}`, payload)
-        return response
+        return response?.data
     }
 
     async enableIntegrationEvent(payload: object) {
