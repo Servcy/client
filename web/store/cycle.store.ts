@@ -106,7 +106,7 @@ export class CycleStore implements ICycleStore {
     get currentProjectCycleIds() {
         const projectId = this.rootStore.app.router.projectId
         if (!projectId || !this.fetchedMap[projectId] || !this.cycleMap) return null
-        let allCycles = Object.values(this.cycleMap).filter((c) => c.project_id == projectId)
+        let allCycles = Object.values(this.cycleMap).filter((c) => c.project_id === projectId)
         allCycles = sortBy(allCycles, [(c) => c.sort_order])
         const allCycleIds = allCycles.map((c) => c.id)
         return allCycleIds
