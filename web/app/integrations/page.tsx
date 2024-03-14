@@ -21,7 +21,7 @@ import IntegrationService from "@services/integration.service"
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import { getQueryParams } from "@helpers/common.helper"
-import { capitalizeFirstLetter } from "@helpers/formatter.helper"
+import { capitalizeFirstLetter } from "@helpers/string.helper"
 import { oauthUrlGenerators } from "@helpers/integration.helper"
 
 import type { Integration } from "@servcy/types"

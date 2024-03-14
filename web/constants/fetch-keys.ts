@@ -97,67 +97,67 @@ export const PROJECTS_LIST = (
 
     return `PROJECTS_LIST_${workspaceSlug.toUpperCase()}_${params.is_favorite.toString().toUpperCase()}`
 }
-export const PROJECT_DETAILS = (projectId: string) => `PROJECT_DETAILS_${projectId.toUpperCase()}`
+export const PROJECT_DETAILS = (projectId: string) => `PROJECT_DETAILS_${projectId}`
 
-export const PROJECT_MEMBERS = (projectId: string) => `PROJECT_MEMBERS_${projectId.toUpperCase()}`
+export const PROJECT_MEMBERS = (projectId: string) => `PROJECT_MEMBERS_${projectId}`
 export const PROJECT_INVITATIONS = (projectId: string) => `PROJECT_INVITATIONS_${projectId.toString()}`
 
 export const PROJECT_ISSUES_LIST = (workspaceSlug: string, projectId: string) =>
-    `PROJECT_ISSUES_LIST_${workspaceSlug.toUpperCase()}_${projectId.toUpperCase()}`
+    `PROJECT_ISSUES_LIST_${workspaceSlug.toUpperCase()}_${projectId}`
 export const PROJECT_ISSUES_LIST_WITH_PARAMS = (projectId: string, params?: any) => {
-    if (!params) return `PROJECT_ISSUES_LIST_WITH_PARAMS_${projectId.toUpperCase()}`
+    if (!params) return `PROJECT_ISSUES_LIST_WITH_PARAMS_${projectId}`
 
     const paramsKey = paramsToKey(params)
 
-    return `PROJECT_ISSUES_LIST_WITH_PARAMS_${projectId.toUpperCase()}_${paramsKey}`
+    return `PROJECT_ISSUES_LIST_WITH_PARAMS_${projectId}_${paramsKey}`
 }
 export const PROJECT_ARCHIVED_ISSUES_LIST_WITH_PARAMS = (projectId: string, params?: any) => {
-    if (!params) return `PROJECT_ARCHIVED_ISSUES_LIST_WITH_PARAMS_${projectId.toUpperCase()}`
+    if (!params) return `PROJECT_ARCHIVED_ISSUES_LIST_WITH_PARAMS_${projectId}`
 
     const paramsKey = paramsToKey(params)
 
-    return `PROJECT_ARCHIVED_ISSUES_LIST_WITH_PARAMS_${projectId.toUpperCase()}_${paramsKey}`
+    return `PROJECT_ARCHIVED_ISSUES_LIST_WITH_PARAMS_${projectId}_${paramsKey}`
 }
 
 export const PROJECT_DRAFT_ISSUES_LIST_WITH_PARAMS = (projectId: string, params?: any) => {
-    if (!params) return `PROJECT_DRAFT_ISSUES_LIST_WITH_PARAMS${projectId.toUpperCase()}`
+    if (!params) return `PROJECT_DRAFT_ISSUES_LIST_WITH_PARAMS${projectId}`
 
     const paramsKey = paramsToKey(params)
 
-    return `PROJECT_DRAFT_ISSUES_LIST_WITH_PARAMS${projectId.toUpperCase()}_${paramsKey}`
+    return `PROJECT_DRAFT_ISSUES_LIST_WITH_PARAMS${projectId}_${paramsKey}`
 }
 
 export const GLOBAL_VIEWS_LIST = (workspaceSlug: string) => `GLOBAL_VIEWS_LIST_${workspaceSlug.toUpperCase()}`
-export const GLOBAL_VIEW_DETAILS = (globalViewId: string) => `GLOBAL_VIEW_DETAILS_${globalViewId.toUpperCase()}`
-export const GLOBAL_VIEW_ISSUES = (globalViewId: string) => `GLOBAL_VIEW_ISSUES_${globalViewId.toUpperCase()}`
+export const GLOBAL_VIEW_DETAILS = (globalViewId: string) => `GLOBAL_VIEW_DETAILS_${globalViewId}`
+export const GLOBAL_VIEW_ISSUES = (globalViewId: string) => `GLOBAL_VIEW_ISSUES_${globalViewId}`
 
-export const PROJECT_ISSUES_DETAILS = (issueId: string) => `PROJECT_ISSUES_DETAILS_${issueId.toUpperCase()}`
-export const PROJECT_ISSUES_PROPERTIES = (projectId: string) => `PROJECT_ISSUES_PROPERTIES_${projectId.toUpperCase()}`
-export const PROJECT_ISSUES_COMMENTS = (issueId: string) => `PROJECT_ISSUES_COMMENTS_${issueId.toUpperCase()}`
-export const PROJECT_ISSUES_ACTIVITY = (issueId: string) => `PROJECT_ISSUES_ACTIVITY_${issueId.toUpperCase()}`
-export const PROJECT_ISSUE_BY_STATE = (projectId: string) => `PROJECT_ISSUE_BY_STATE_${projectId.toUpperCase()}`
-export const PROJECT_ISSUE_LABELS = (projectId: string) => `PROJECT_ISSUE_LABELS_${projectId.toUpperCase()}`
+export const PROJECT_ISSUES_DETAILS = (issueId: string) => `PROJECT_ISSUES_DETAILS_${issueId}`
+export const PROJECT_ISSUES_PROPERTIES = (projectId: string) => `PROJECT_ISSUES_PROPERTIES_${projectId}`
+export const PROJECT_ISSUES_COMMENTS = (issueId: string) => `PROJECT_ISSUES_COMMENTS_${issueId}`
+export const PROJECT_ISSUES_ACTIVITY = (issueId: string) => `PROJECT_ISSUES_ACTIVITY_${issueId}`
+export const PROJECT_ISSUE_BY_STATE = (projectId: string) => `PROJECT_ISSUE_BY_STATE_${projectId}`
+export const PROJECT_ISSUE_LABELS = (projectId: string) => `PROJECT_ISSUE_LABELS_${projectId}`
 export const WORKSPACE_LABELS = (workspaceSlug: string) => `WORKSPACE_LABELS_${workspaceSlug.toUpperCase()}`
-export const PROJECT_GITHUB_REPOSITORY = (projectId: string) => `PROJECT_GITHUB_REPOSITORY_${projectId.toUpperCase()}`
+export const PROJECT_GITHUB_REPOSITORY = (projectId: string) => `PROJECT_GITHUB_REPOSITORY_${projectId}`
 
 // cycles
-export const CYCLES_LIST = (projectId: string) => `CYCLE_LIST_${projectId.toUpperCase()}`
-export const INCOMPLETE_CYCLES_LIST = (projectId: string) => `INCOMPLETE_CYCLES_LIST_${projectId.toUpperCase()}`
-export const CURRENT_CYCLE_LIST = (projectId: string) => `CURRENT_CYCLE_LIST_${projectId.toUpperCase()}`
-export const UPCOMING_CYCLES_LIST = (projectId: string) => `UPCOMING_CYCLES_LIST_${projectId.toUpperCase()}`
-export const DRAFT_CYCLES_LIST = (projectId: string) => `DRAFT_CYCLES_LIST_${projectId.toUpperCase()}`
-export const COMPLETED_CYCLES_LIST = (projectId: string) => `COMPLETED_CYCLES_LIST_${projectId.toUpperCase()}`
-export const CYCLE_ISSUES = (cycleId: string) => `CYCLE_ISSUES_${cycleId.toUpperCase()}`
+export const CYCLES_LIST = (projectId: string) => `CYCLE_LIST_${projectId}`
+export const INCOMPLETE_CYCLES_LIST = (projectId: string) => `INCOMPLETE_CYCLES_LIST_${projectId}`
+export const CURRENT_CYCLE_LIST = (projectId: string) => `CURRENT_CYCLE_LIST_${projectId}`
+export const UPCOMING_CYCLES_LIST = (projectId: string) => `UPCOMING_CYCLES_LIST_${projectId}`
+export const DRAFT_CYCLES_LIST = (projectId: string) => `DRAFT_CYCLES_LIST_${projectId}`
+export const COMPLETED_CYCLES_LIST = (projectId: string) => `COMPLETED_CYCLES_LIST_${projectId}`
+export const CYCLE_ISSUES = (cycleId: string) => `CYCLE_ISSUES_${cycleId}`
 export const CYCLE_ISSUES_WITH_PARAMS = (cycleId: string, params?: any) => {
-    if (!params) return `CYCLE_ISSUES_WITH_PARAMS_${cycleId.toUpperCase()}`
+    if (!params) return `CYCLE_ISSUES_WITH_PARAMS_${cycleId}`
 
     const paramsKey = paramsToKey(params)
 
-    return `CYCLE_ISSUES_WITH_PARAMS_${cycleId.toUpperCase()}_${paramsKey.toUpperCase()}`
+    return `CYCLE_ISSUES_WITH_PARAMS_${cycleId}_${paramsKey.toUpperCase()}`
 }
-export const CYCLE_DETAILS = (cycleId: string) => `CYCLE_DETAILS_${cycleId.toUpperCase()}`
+export const CYCLE_DETAILS = (cycleId: string) => `CYCLE_DETAILS_${cycleId}`
 
-export const STATES_LIST = (projectId: string) => `STATES_LIST_${projectId.toUpperCase()}`
+export const STATES_LIST = (projectId: string) => `STATES_LIST_${projectId}`
 
 export const USER_ISSUE = (workspaceSlug: string) => `USER_ISSUE_${workspaceSlug.toUpperCase()}`
 export const USER_ISSUES = (workspaceSlug: string, params: any) => {
@@ -168,50 +168,50 @@ export const USER_ISSUES = (workspaceSlug: string, params: any) => {
 export const USER_ACTIVITY = "USER_ACTIVITY"
 export const USER_WORKSPACE_DASHBOARD = (workspaceSlug: string) =>
     `USER_WORKSPACE_DASHBOARD_${workspaceSlug.toUpperCase()}`
-export const USER_PROJECT_VIEW = (projectId: string) => `USER_PROJECT_VIEW_${projectId.toUpperCase()}`
+export const USER_PROJECT_VIEW = (projectId: string) => `USER_PROJECT_VIEW_${projectId}`
 
-export const MODULE_LIST = (projectId: string) => `MODULE_LIST_${projectId.toUpperCase()}`
-export const MODULE_ISSUES = (moduleId: string) => `MODULE_ISSUES_${moduleId.toUpperCase()}`
+export const MODULE_LIST = (projectId: string) => `MODULE_LIST_${projectId}`
+export const MODULE_ISSUES = (moduleId: string) => `MODULE_ISSUES_${moduleId}`
 export const MODULE_ISSUES_WITH_PARAMS = (moduleId: string, params?: any) => {
-    if (!params) return `MODULE_ISSUES_WITH_PARAMS_${moduleId.toUpperCase()}`
+    if (!params) return `MODULE_ISSUES_WITH_PARAMS_${moduleId}`
 
     const paramsKey = paramsToKey(params)
 
-    return `MODULE_ISSUES_WITH_PARAMS_${moduleId.toUpperCase()}_${paramsKey.toUpperCase()}`
+    return `MODULE_ISSUES_WITH_PARAMS_${moduleId}_${paramsKey.toUpperCase()}`
 }
-export const MODULE_DETAILS = (moduleId: string) => `MODULE_DETAILS_${moduleId.toUpperCase()}`
+export const MODULE_DETAILS = (moduleId: string) => `MODULE_DETAILS_${moduleId}`
 
-export const VIEWS_LIST = (projectId: string) => `VIEWS_LIST_${projectId.toUpperCase()}`
-export const VIEW_DETAILS = (viewId: string) => `VIEW_DETAILS_${viewId.toUpperCase()}`
+export const VIEWS_LIST = (projectId: string) => `VIEWS_LIST_${projectId}`
+export const VIEW_DETAILS = (viewId: string) => `VIEW_DETAILS_${viewId}`
 export const VIEW_ISSUES = (viewId: string, params: any) => {
-    if (!params) return `VIEW_ISSUES_${viewId.toUpperCase()}`
+    if (!params) return `VIEW_ISSUES_${viewId}`
 
     const paramsKey = paramsToKey(params)
 
-    return `VIEW_ISSUES_${viewId.toUpperCase()}_${paramsKey.toUpperCase()}`
+    return `VIEW_ISSUES_${viewId}_${paramsKey.toUpperCase()}`
 }
 
 // Issues
-export const ISSUE_DETAILS = (issueId: string) => `ISSUE_DETAILS_${issueId.toUpperCase()}`
-export const SUB_ISSUES = (issueId: string) => `SUB_ISSUES_${issueId.toUpperCase()}`
-export const ISSUE_ATTACHMENTS = (issueId: string) => `ISSUE_ATTACHMENTS_${issueId.toUpperCase()}`
-export const ARCHIVED_ISSUE_DETAILS = (issueId: string) => `ARCHIVED_ISSUE_DETAILS_${issueId.toUpperCase()}`
+export const ISSUE_DETAILS = (issueId: string) => `ISSUE_DETAILS_${issueId}`
+export const SUB_ISSUES = (issueId: string) => `SUB_ISSUES_${issueId}`
+export const ISSUE_ATTACHMENTS = (issueId: string) => `ISSUE_ATTACHMENTS_${issueId}`
+export const ARCHIVED_ISSUE_DETAILS = (issueId: string) => `ARCHIVED_ISSUE_DETAILS_${issueId}`
 
 // Pages
-export const RECENT_PAGES_LIST = (projectId: string) => `RECENT_PAGES_LIST_${projectId.toUpperCase()}`
-export const ALL_PAGES_LIST = (projectId: string) => `ALL_PAGES_LIST_${projectId.toUpperCase()}`
-export const ARCHIVED_PAGES_LIST = (projectId: string) => `ARCHIVED_PAGES_LIST_${projectId.toUpperCase}`
-export const FAVORITE_PAGES_LIST = (projectId: string) => `FAVORITE_PAGES_LIST_${projectId.toUpperCase()}`
-export const PRIVATE_PAGES_LIST = (projectId: string) => `PRIVATE_PAGES_LIST_${projectId.toUpperCase()}`
-export const SHARED_PAGES_LIST = (projectId: string) => `SHARED_PAGES_LIST_${projectId.toUpperCase()}`
-export const PAGE_DETAILS = (pageId: string) => `PAGE_DETAILS_${pageId.toUpperCase()}`
-export const PAGE_BLOCKS_LIST = (pageId: string) => `PAGE_BLOCK_LIST_${pageId.toUpperCase()}`
-export const PAGE_BLOCK_DETAILS = (pageId: string) => `PAGE_BLOCK_DETAILS_${pageId.toUpperCase()}`
+export const RECENT_PAGES_LIST = (projectId: string) => `RECENT_PAGES_LIST_${projectId}`
+export const ALL_PAGES_LIST = (projectId: string) => `ALL_PAGES_LIST_${projectId}`
+export const ARCHIVED_PAGES_LIST = (projectId: string) => `ARCHIVED_PAGES_LIST_${projectId}`
+export const FAVORITE_PAGES_LIST = (projectId: string) => `FAVORITE_PAGES_LIST_${projectId}`
+export const PRIVATE_PAGES_LIST = (projectId: string) => `PRIVATE_PAGES_LIST_${projectId}`
+export const SHARED_PAGES_LIST = (projectId: string) => `SHARED_PAGES_LIST_${projectId}`
+export const PAGE_DETAILS = (pageId: string) => `PAGE_DETAILS_${pageId}`
+export const PAGE_BLOCKS_LIST = (pageId: string) => `PAGE_BLOCK_LIST_${pageId}`
+export const PAGE_BLOCK_DETAILS = (pageId: string) => `PAGE_BLOCK_DETAILS_${pageId}`
 export const MY_PAGES_LIST = (pageId: string) => `MY_PAGE_LIST_${pageId}`
 
 // estimates
-export const ESTIMATES_LIST = (projectId: string) => `ESTIMATES_LIST_${projectId.toUpperCase()}`
-export const ESTIMATE_DETAILS = (estimateId: string) => `ESTIMATE_DETAILS_${estimateId.toUpperCase()}`
+export const ESTIMATES_LIST = (projectId: string) => `ESTIMATES_LIST_${projectId}`
+export const ESTIMATE_DETAILS = (estimateId: string) => `ESTIMATE_DETAILS_${estimateId}`
 
 // analytics
 export const ANALYTICS = (workspaceSlug: string, params: IAnalyticsParams) =>
@@ -258,19 +258,19 @@ export const getPaginatedNotificationKey = (index: number, prevData: any, worksp
 
 // profile
 export const USER_PROFILE_DATA = (workspaceSlug: string, userId: string) =>
-    `USER_PROFILE_ACTIVITY_${workspaceSlug.toUpperCase()}_${userId.toUpperCase()}`
+    `USER_PROFILE_ACTIVITY_${workspaceSlug.toUpperCase()}_${userId}`
 export const USER_PROFILE_ACTIVITY = (workspaceSlug: string, userId: string) =>
-    `USER_WORKSPACE_PROFILE_ACTIVITY_${workspaceSlug.toUpperCase()}_${userId.toUpperCase()}`
+    `USER_WORKSPACE_PROFILE_ACTIVITY_${workspaceSlug.toUpperCase()}_${userId}`
 export const USER_PROFILE_PROJECT_SEGREGATION = (workspaceSlug: string, userId: string) =>
-    `USER_PROFILE_PROJECT_SEGREGATION_${workspaceSlug.toUpperCase()}_${userId.toUpperCase()}`
+    `USER_PROFILE_PROJECT_SEGREGATION_${workspaceSlug.toUpperCase()}_${userId}`
 export const USER_PROFILE_ISSUES = (workspaceSlug: string, userId: string, params: any) => {
     const paramsKey = myIssuesParamsToKey(params)
 
-    return `USER_PROFILE_ISSUES_${workspaceSlug.toUpperCase()}_${userId.toUpperCase()}_${paramsKey}`
+    return `USER_PROFILE_ISSUES_${workspaceSlug.toUpperCase()}_${userId}_${paramsKey}`
 }
 
 // reactions
 export const ISSUE_REACTION_LIST = (workspaceSlug: string, projectId: string, issueId: string) =>
-    `ISSUE_REACTION_LIST_${workspaceSlug.toUpperCase()}_${projectId.toUpperCase()}_${issueId.toUpperCase()}`
+    `ISSUE_REACTION_LIST_${workspaceSlug.toUpperCase()}_${projectId}_${issueId}`
 export const COMMENT_REACTION_LIST = (workspaceSlug: string, projectId: string, commendId: string) =>
-    `COMMENT_REACTION_LIST_${workspaceSlug.toUpperCase()}_${projectId.toUpperCase()}_${commendId.toUpperCase()}`
+    `COMMENT_REACTION_LIST_${workspaceSlug.toUpperCase()}_${projectId}_${commendId}`

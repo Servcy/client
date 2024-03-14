@@ -9,7 +9,7 @@ import toast from "react-hot-toast"
 import IntegrationService from "@services/integration.service"
 
 import { getQueryParams } from "@helpers/common.helper"
-import { capitalizeFirstLetter } from "@helpers/formatter.helper"
+import { capitalizeFirstLetter } from "@helpers/string.helper"
 
 import { Spinner } from "@servcy/ui"
 
