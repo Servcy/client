@@ -86,9 +86,19 @@ const InboxItems = (
             ),
         },
         {
-            dataIndex: "cause",
-            title: "From",
-            render: (cause, record) => <Cause cause={cause} source={record.source} />,
+            dataIndex: "account",
+            title: "Source",
+            render: (account, record) => (
+                <>
+                    <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
+                        <Avatar className="mr-2 rounded-full" size="small">
+                            {account.slice(0, 1).toUpperCase()}
+                        </Avatar>
+                        <div className="overflow-hidden truncate mr-6">{account}</div>
+                        <Cause cause={record.cause} source={record.source} />
+                    </div>
+                </>
+            ),
         },
         {
             dataIndex: "created_at",
