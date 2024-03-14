@@ -101,7 +101,7 @@ const InboxItems = (
         {
             dataIndex: "cause",
             title: "From",
-            width: 200,
+            width: 100,
             render: (cause, record) => <Cause cause={cause} source={record.source} />,
         },
         {
