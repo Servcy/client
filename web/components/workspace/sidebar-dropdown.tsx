@@ -4,7 +4,19 @@ import { useParams, useRouter } from "next/navigation"
 import { Fragment, useState } from "react"
 
 import { Menu, Transition } from "@headlessui/react"
-import { Check, ChevronDown, CircleUserRound, Home, LogOut, Mails, PlusSquare, Settings, Users, Inbox, Workflow } from "lucide-react"
+import {
+    Check,
+    ChevronDown,
+    CircleUserRound,
+    Home,
+    Inbox,
+    LogOut,
+    Mails,
+    PlusSquare,
+    Settings,
+    Users,
+    Workflow,
+} from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
@@ -308,24 +320,22 @@ export const WorkspaceSidebarDropdown = observer(() => {
                         >
                             <div className="flex flex-col gap-2.5 pb-2">
                                 <span className="px-2 text-custom-sidebar-text-200">{currentUser?.email}</span>
-                                {userLinks().map(
-                                    (link, index) => (
-                                        <Link
-                                            key={index}
-                                            href={link.link}
-                                            onClick={() => {
-                                                if (index == 0) handleItemClick()
-                                            }}
-                                        >
-                                            <Menu.Item key={index} as="div">
-                                                <span className="flex w-full items-center gap-2 rounded px-2 py-1 hover:bg-custom-sidebar-background-80">
-                                                    <link.icon className="h-4 w-4 stroke-[1.5]" />
-                                                    {link.name}
-                                                </span>
-                                            </Menu.Item>
-                                        </Link>
-                                    )
-                                )}
+                                {userLinks().map((link, index) => (
+                                    <Link
+                                        key={index}
+                                        href={link.link}
+                                        onClick={() => {
+                                            if (index == 0) handleItemClick()
+                                        }}
+                                    >
+                                        <Menu.Item key={index} as="div">
+                                            <span className="flex w-full items-center gap-2 rounded px-2 py-1 hover:bg-custom-sidebar-background-80">
+                                                <link.icon className="h-4 w-4 stroke-[1.5]" />
+                                                {link.name}
+                                            </span>
+                                        </Menu.Item>
+                                    </Link>
+                                ))}
                             </div>
                             <div className="pt-2">
                                 <Menu.Item

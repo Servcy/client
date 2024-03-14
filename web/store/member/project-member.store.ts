@@ -89,7 +89,7 @@ export class ProjectMemberStore implements IProjectMemberStore {
         const projectId = this.routerStore.projectId
         if (!projectId) return null
         const projectMembers = this.projectMemberMap?.[projectId]
-        if(!projectMembers) return null
+        if (!projectMembers) return null
         let members = Object.values(projectMembers)
         members = sortBy(members, [
             (m) => {
