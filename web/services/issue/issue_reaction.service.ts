@@ -15,10 +15,7 @@ export class IssueReactionService extends APIService {
         issueId: string,
         data: Partial<TIssueReaction>
     ): Promise<any> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/reactions/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/reactions/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -39,9 +36,7 @@ export class IssueReactionService extends APIService {
         issueId: string,
         reaction: string
     ): Promise<any> {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/reactions/${reaction}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/reactions/${reaction}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -54,10 +49,7 @@ export class IssueReactionService extends APIService {
         commentId: string,
         data: Partial<TIssueCommentReaction>
     ): Promise<any> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/comments/${commentId}/reactions/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/comments/${commentId}/reactions/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -82,9 +74,7 @@ export class IssueReactionService extends APIService {
         commentId: string,
         reaction: string
     ): Promise<any> {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/comments/${commentId}/reactions/${reaction}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/comments/${commentId}/reactions/${reaction}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

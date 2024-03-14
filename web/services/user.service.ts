@@ -126,10 +126,7 @@ export class UserService extends APIService {
             })
     }
 
-    async getUserProfileProjectsStats(
-        workspaceSlug: string,
-        userId: string
-    ): Promise<IUserProfileProjectSegregation> {
+    async getUserProfileProjectsStats(workspaceSlug: string, userId: string): Promise<IUserProfileProjectSegregation> {
         return this.get(`/project/${workspaceSlug}/user-project-stats/${userId}/`)
             .then((response) => response?.data)
             .catch((error) => {

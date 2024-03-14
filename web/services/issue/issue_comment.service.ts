@@ -52,10 +52,7 @@ export class IssueCommentService extends APIService {
         commentId: string,
         data: Partial<TIssueComment>
     ): Promise<any> {
-        return this.patch(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/comments/${commentId}/`,
-            data
-        )
+        return this.patch(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/comments/${commentId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -68,9 +65,7 @@ export class IssueCommentService extends APIService {
         issueId: string,
         commentId: string
     ): Promise<any> {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/comments/${commentId}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/comments/${commentId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

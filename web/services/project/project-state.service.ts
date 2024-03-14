@@ -18,10 +18,7 @@ export class ProjectStateService extends APIService {
     }
 
     async markDefault(workspaceSlug: string, projectId: string, stateId: string): Promise<void> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/states/${stateId}/mark/default`,
-            {}
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/states/${stateId}/mark/default`, {})
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response

@@ -117,9 +117,7 @@ export class ModuleService extends APIService {
         moduleId: string,
         issueId: string
     ): Promise<any> {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/issues/${issueId}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/issues/${issueId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -135,9 +133,7 @@ export class ModuleService extends APIService {
         const promiseDataUrls: any = []
         issueIds.forEach((issueId) => {
             promiseDataUrls.push(
-                this.delete(
-                    `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/issues/${issueId}/`
-                )
+                this.delete(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/issues/${issueId}/`)
             )
         })
         return await Promise.all(promiseDataUrls)
@@ -156,9 +152,7 @@ export class ModuleService extends APIService {
         const promiseDataUrls: any = []
         moduleIds.forEach((moduleId) => {
             promiseDataUrls.push(
-                this.delete(
-                    `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/issues/${issueId}/`
-                )
+                this.delete(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/issues/${issueId}/`)
             )
         })
         return await Promise.all(promiseDataUrls)
@@ -174,10 +168,7 @@ export class ModuleService extends APIService {
         moduleId: string,
         data: Partial<ModuleLink>
     ): Promise<ILinkDetails> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/links/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/links/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -191,10 +182,7 @@ export class ModuleService extends APIService {
         linkId: string,
         data: Partial<ModuleLink>
     ): Promise<ILinkDetails> {
-        return this.patch(
-            `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/links/${linkId}/`,
-            data
-        )
+        return this.patch(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/links/${linkId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -202,9 +190,7 @@ export class ModuleService extends APIService {
     }
 
     async deleteModuleLink(workspaceSlug: string, projectId: string, moduleId: string, linkId: string): Promise<any> {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/links/${linkId}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/links/${linkId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -226,9 +212,7 @@ export class ModuleService extends APIService {
     }
 
     async removeModuleFromFavorites(workspaceSlug: string, projectId: string, moduleId: string): Promise<any> {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/favorite/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/favorite/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

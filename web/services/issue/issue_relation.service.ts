@@ -23,10 +23,7 @@ export class IssueRelationService extends APIService {
         issueId: string,
         data: { relation_type: TIssueRelationTypes; issues: string[] }
     ): Promise<TIssue[]> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -39,10 +36,7 @@ export class IssueRelationService extends APIService {
         issueId: string,
         data: { relation_type: TIssueRelationTypes; related_issue: string }
     ): Promise<any> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/remove/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/remove/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

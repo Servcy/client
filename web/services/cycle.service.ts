@@ -114,10 +114,7 @@ export class CycleService extends APIService {
             new_cycle_id: string
         }
     ): Promise<any> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/transfer-issues/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/transfer-issues/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -125,9 +122,7 @@ export class CycleService extends APIService {
     }
 
     async removeCycleFromFavorites(workspaceSlug: string, projectId: string, cycleId: string): Promise<any> {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/user-favorite-cycles/${cycleId}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/user-favorite-cycles/${cycleId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

@@ -79,10 +79,7 @@ export class IssueService extends APIService {
             issues: string[]
         }
     ) {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/cycle-issues/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/cycle-issues/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -90,9 +87,7 @@ export class IssueService extends APIService {
     }
 
     async removeIssueFromCycle(workspaceSlug: string, projectId: string, cycleId: string, bridgeId: string) {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/cycle-issues/${bridgeId}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/cycle-issues/${bridgeId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -111,10 +106,7 @@ export class IssueService extends APIService {
             relation?: "blocking" | null
         }
     ) {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -122,9 +114,7 @@ export class IssueService extends APIService {
     }
 
     async deleteIssueRelation(workspaceSlug: string, projectId: string, issueId: string, relationId: string) {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/${relationId}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/relation/${relationId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -169,10 +159,7 @@ export class IssueService extends APIService {
         issueId: string,
         data: { sub_issue_ids: string[] }
     ): Promise<TIssueSubIssues> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/sub/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/sub/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -193,10 +180,7 @@ export class IssueService extends APIService {
         issueId: string,
         data: Partial<TIssueLink>
     ): Promise<TIssueLink> {
-        return this.post(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/`,
-            data
-        )
+        return this.post(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -210,10 +194,7 @@ export class IssueService extends APIService {
         linkId: string,
         data: Partial<TIssueLink>
     ): Promise<TIssueLink> {
-        return this.patch(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/${linkId}/`,
-            data
-        )
+        return this.patch(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/${linkId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -221,9 +202,7 @@ export class IssueService extends APIService {
     }
 
     async deleteIssueLink(workspaceSlug: string, projectId: string, issueId: string, linkId: string): Promise<any> {
-        return this.delete(
-            `/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/${linkId}/`
-        )
+        return this.delete(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/links/${linkId}/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

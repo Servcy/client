@@ -97,7 +97,7 @@ export class FileService extends APIService {
 
     async deleteFile(assetUrl: string): Promise<any> {
         return this.delete(`/document/delete`, {
-            file: assetUrl.substring(assetUrl.indexOf("/media/") + 7)
+            file: assetUrl.substring(assetUrl.indexOf("/media/") + 7),
         })
             .then((response) => response?.data)
             .catch((error) => {
@@ -107,7 +107,7 @@ export class FileService extends APIService {
 
     async restoreFile(assetUrl: string): Promise<any> {
         return this.post(`/document/restore`, {
-            file: assetUrl.substring(assetUrl.indexOf("/media/") + 7)
+            file: assetUrl.substring(assetUrl.indexOf("/media/") + 7),
         })
             .then((response) => response?.data)
             .catch((error) => {

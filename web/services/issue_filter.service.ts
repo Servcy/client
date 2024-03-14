@@ -47,10 +47,7 @@ export class IssueFiltersService extends APIService {
         cycleId: string,
         data: Partial<IIssueFiltersResponse>
     ): Promise<any> {
-        return this.patch(
-            `/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/user-properties/`,
-            data
-        )
+        return this.patch(`/project/${workspaceSlug}/${projectId}/cycles/${cycleId}/user-properties/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -63,9 +60,7 @@ export class IssueFiltersService extends APIService {
         projectId: string,
         moduleId: string
     ): Promise<IIssueFiltersResponse> {
-        return this.get(
-            `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/user-properties/`
-        )
+        return this.get(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/user-properties/`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -77,10 +72,7 @@ export class IssueFiltersService extends APIService {
         moduleId: string,
         data: Partial<IIssueFiltersResponse>
     ): Promise<any> {
-        return this.patch(
-            `/project/${workspaceSlug}/${projectId}/modules/${moduleId}/user-properties/`,
-            data
-        )
+        return this.patch(`/project/${workspaceSlug}/${projectId}/modules/${moduleId}/user-properties/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
