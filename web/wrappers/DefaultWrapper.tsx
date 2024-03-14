@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import { FC, Fragment, ReactNode, useEffect, useRef, useState } from "react"
 
 import { Menu, Transition } from "@headlessui/react"
-import { ChevronDown, Home, Inbox, LogOut, MoveLeft, Plus, Settings, Mails, Workflow } from "lucide-react"
+import { ChevronDown, Home, Inbox, LogOut, Mails, MoveLeft, Plus, Settings, Workflow } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
@@ -17,6 +17,7 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
 import UserAuthWrapper from "@wrappers/auth/UserAuthWrapper"
 
+import { IWorkspace } from "@servcy/types"
 import { Avatar, Tooltip } from "@servcy/ui"
 
 const WORKSPACE_ACTION_LINKS = [
@@ -77,7 +78,7 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
     } = useApplication()
-    const { logOut, currentUser } = useUser()
+    const { logOut, updateCurrentUser, currentUser } = useUser()
     const { workspaces } = useWorkspace()
     const workspacesList = Object.values(workspaces ?? {})
     const ref = useRef<HTMLDivElement>(null)
@@ -120,6 +121,11 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
             .catch(() => toast.error("Failed to sign out. Please try again."))
             .finally(() => setIsSigningOut(false))
     }
+
+    const handleWorkspaceNavigation = (workspace: IWorkspace) =>
+        updateCurrentUser({
+            last_workspace_id: workspace?.id,
+        })
 
     return (
         <>
@@ -197,26 +203,24 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                                         </h6>
                                                     </div>
                                                     <div className="flex w-full flex-col items-start justify-start gap-2 px-4 py-2 text-sm">
-                                                        {USER_LINKS().map(
-                                                            (link, index) => (
-                                                                <Link
-                                                                    key={link.key}
-                                                                    href={link.href}
-                                                                    className="w-full"
-                                                                    onClick={() => {
-                                                                        if (index > 0) handleItemClick()
-                                                                    }}
+                                                        {USER_LINKS().map((link, index) => (
+                                                            <Link
+                                                                key={link.key}
+                                                                href={link.href}
+                                                                className="w-full"
+                                                                onClick={() => {
+                                                                    if (index > 0) handleItemClick()
+                                                                }}
+                                                            >
+                                                                <Menu.Item
+                                                                    as="div"
+                                                                    className="flex items-center gap-2 rounded px-2 py-1 text-sm text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80 font-medium"
                                                                 >
-                                                                    <Menu.Item
-                                                                        as="div"
-                                                                        className="flex items-center gap-2 rounded px-2 py-1 text-sm text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80 font-medium"
-                                                                    >
-                                                                        <link.icon className="h-4 w-4 flex-shrink-0" />
-                                                                        {link.name}
-                                                                    </Menu.Item>
-                                                                </Link>
-                                                            )
-                                                        )}
+                                                                    <link.icon className="h-4 w-4 flex-shrink-0" />
+                                                                    {link.name}
+                                                                </Menu.Item>
+                                                            </Link>
+                                                        ))}
                                                     </div>
                                                     <div className="w-full px-4 py-2">
                                                         <Menu.Item
@@ -283,7 +287,10 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                                 className={`flex flex-grow cursor-pointer select-none items-center truncate text-left text-sm font-medium ${
                                                     sidebarCollapsed ? "justify-center" : `justify-between`
                                                 }`}
-                                                onClick={handleItemClick}
+                                                onClick={() => {
+                                                    handleWorkspaceNavigation(workspace)
+                                                    handleItemClick()
+                                                }}
                                             >
                                                 <span
                                                     className={`flex w-full flex-grow items-center gap-x-2 truncate rounded-md px-3 py-1 hover:bg-custom-sidebar-background-80 ${
