@@ -15,12 +15,7 @@ export interface IUser {
     is_onboarded: boolean
     is_tour_completed: boolean
     mobile_number: string | null
-    onboarding_step: {
-        workspace_join?: boolean
-        profile_complete?: boolean
-        workspace_create?: boolean
-        workspace_invite?: boolean
-    }
+    onboarding_step: TOnboardingSteps
     last_workspace_id: string
     user_timezone: string
     username: string

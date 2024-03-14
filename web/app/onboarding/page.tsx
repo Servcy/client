@@ -14,7 +14,7 @@ import { Controller, useForm } from "react-hook-form"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
-import { InviteMembers, JoinWorkspaces, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding"
+import { InviteMembers, JoinOrCreateWorkspace, SwitchOrDeleteAccountModal, UserDetails } from "@components/onboarding"
 
 import { useEventTracker, useUser, useWorkspace } from "@hooks/store"
 
@@ -22,8 +22,8 @@ import { USER_ONBOARDING_COMPLETED } from "@constants/event-tracker"
 
 import { WorkspaceService } from "@services/workspace.service"
 
-import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 import UserAuthWrapper from "@wrappers/auth/UserAuthWrapper"
+import NoSidebarWrapper from "@wrappers/NoSidebarWrapper"
 
 import type { IUser, TOnboardingSteps } from "@servcy/types"
 import { Avatar, Spinner } from "@servcy/ui"
@@ -56,9 +56,7 @@ const OnboardingPage = observer(() => {
         shouldRetryOnError: false,
     })
 
-    const { data } = useSWR("USER_WORKSPACE_INVITATIONS_LIST", () =>
-        workspaceService.userWorkspaceInvitations()
-    )
+    const { data } = useSWR("USER_WORKSPACE_INVITATIONS_LIST", () => workspaceService.userWorkspaceInvitations())
 
     const invitations = data?.results ?? []
 
@@ -101,39 +99,27 @@ const OnboardingPage = observer(() => {
     useEffect(() => {
         const handleStepChange = async () => {
             if (!user || !invitations) return
-
             const onboardingStep = user.onboarding_step
-
-            if (
-                !onboardingStep.workspace_join &&
-                !onboardingStep.workspace_create &&
-                workspacesList &&
-                workspacesList?.length > 0
-            ) {
+            if (!onboardingStep.profile_complete) {
+                setStep(1)
+                return
+            }
+            if (!(onboardingStep.workspace_join || onboardingStep.workspace_create)) {
+                setStep(2)
+                return
+            }
+            if (workspacesList && workspacesList?.length > 0 && onboardingStep.workspace_join) {
                 await updateCurrentUser({
                     onboarding_step: {
                         ...user.onboarding_step,
                         workspace_join: true,
-                        workspace_create: true,
                     },
                     last_workspace_id: workspacesList[0]?.id,
                 })
-                setStep(2)
+                finishOnboarding()
                 return
             }
-
-            if (!onboardingStep.workspace_join && !onboardingStep.workspace_create && step !== 1) setStep(1)
-
-            if (onboardingStep.workspace_join || onboardingStep.workspace_create) {
-                if (!onboardingStep.profile_complete && step !== 2) setStep(2)
-            }
-            if (
-                onboardingStep.profile_complete &&
-                (onboardingStep.workspace_join || onboardingStep.workspace_create) &&
-                !onboardingStep.workspace_invite &&
-                step !== 3
-            )
-                setStep(3)
+            setStep(3)
         }
 
         handleStepChange()
@@ -226,15 +212,14 @@ const OnboardingPage = observer(() => {
                         <div className="mx-auto h-full w-full overflow-auto rounded-t-md border-x border-t border-custom-border-200 bg-onboarding-gradient-100 px-4 pt-4 shadow-sm sm:w-4/5 lg:w-4/5 xl:w-3/4">
                             <div className={`h-full w-full overflow-auto rounded-t-md bg-onboarding-gradient-200`}>
                                 {step === 1 ? (
-                                    <JoinWorkspaces
+                                    <UserDetails setUserName={(value) => setValue("full_name", value)} user={user} />
+                                ) : step === 2 ? (
+                                    <JoinOrCreateWorkspace
                                         setTryDiffAccount={() => {
                                             setShowDeleteAccountModal(true)
                                         }}
-                                        finishOnboarding={finishOnboarding}
                                         stepChange={stepChange}
                                     />
-                                ) : step === 2 ? (
-                                    <UserDetails setUserName={(value) => setValue("full_name", value)} user={user} />
                                 ) : (
                                     <InviteMembers
                                         finishOnboarding={finishOnboarding}

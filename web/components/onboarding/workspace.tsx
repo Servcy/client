@@ -82,7 +82,6 @@ export const Workspace: React.FC<Props> = (props) => {
 
         const payload: Partial<TOnboardingSteps> = {
             workspace_create: true,
-            workspace_join: true,
         }
 
         await stepChange(payload)

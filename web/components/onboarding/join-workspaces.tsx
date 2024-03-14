@@ -10,12 +10,11 @@ import { useUser } from "@hooks/store"
 import { IWorkspace, TOnboardingSteps } from "@servcy/types"
 
 type Props = {
-    finishOnboarding: () => Promise<void>
     stepChange: (steps: Partial<TOnboardingSteps>) => Promise<void>
     setTryDiffAccount: () => void
 }
 
-export const JoinWorkspaces: React.FC<Props> = observer((props) => {
+export const JoinOrCreateWorkspace: React.FC<Props> = observer((props) => {
     const { stepChange, setTryDiffAccount } = props
     // store hooks
     const { currentUser } = useUser()
@@ -36,7 +35,7 @@ export const JoinWorkspaces: React.FC<Props> = observer((props) => {
 
     const handleNextStep = async () => {
         if (!currentUser) return
-        await stepChange({ workspace_join: true, workspace_create: true })
+        await stepChange({ workspace_join: true })
     }
 
     return (

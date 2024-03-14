@@ -12,6 +12,7 @@ import useSWR, { mutate } from "swr"
 
 import { EmptyState } from "@components/common"
 import { PageHead } from "@components/core"
+import { DefaultHeader } from "@components/headers"
 
 import { useEventTracker } from "@hooks/store"
 
@@ -21,7 +22,6 @@ import { ROLES } from "@constants/iam"
 import { UserService } from "@services/user.service"
 import { WorkspaceService } from "@services/workspace.service"
 
-import { DefaultHeader } from "@components/headers"
 import DefaultWrapper from "@wrappers/DefaultWrapper"
 
 import { truncateText } from "@helpers/string.helper"
@@ -42,9 +42,7 @@ const UserInvitationsPage = observer(() => {
 
     const router = useRouter()
 
-    const { data } = useSWR("USER_WORKSPACE_INVITATIONS", () =>
-        workspaceService.userWorkspaceInvitations()
-    )
+    const { data } = useSWR("USER_WORKSPACE_INVITATIONS", () => workspaceService.userWorkspaceInvitations())
 
     const invitations = data?.results ?? []
 
@@ -128,10 +126,7 @@ const UserInvitationsPage = observer(() => {
                                                         : "border-custom-border-200 hover:bg-custom-background-80"
                                                 }`}
                                                 onClick={() =>
-                                                    handleInvitation(
-                                                        invitation,
-                                                        isSelected ? "withdraw" : "accepted"
-                                                    )
+                                                    handleInvitation(invitation, isSelected ? "withdraw" : "accepted")
                                                 }
                                             >
                                                 <div className="flex-shrink-0">
