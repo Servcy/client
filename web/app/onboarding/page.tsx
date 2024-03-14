@@ -51,32 +51,23 @@ const OnboardingPage = observer(() => {
             full_name: "",
         },
     })
-
     useSWR(`USER_WORKSPACES_LIST`, () => fetchWorkspaces(), {
         shouldRetryOnError: false,
     })
-
     const { data } = useSWR("USER_WORKSPACE_INVITATIONS_LIST", () => workspaceService.userWorkspaceInvitations())
-
     const invitations = data?.results ?? []
-
-    // handle step change
     const stepChange = async (steps: Partial<TOnboardingSteps>) => {
         if (!user) return
-
         const payload: Partial<IUser> = {
             onboarding_step: {
                 ...user.onboarding_step,
                 ...steps,
             },
         }
-
         await updateCurrentUser(payload)
     }
-    // complete onboarding
     const finishOnboarding = async () => {
         if (!user || !workspacesList) return
-
         await updateUserOnBoard()
             .then(() => {
                 captureEvent(USER_ONBOARDING_COMPLETED, {
@@ -88,18 +79,20 @@ const OnboardingPage = observer(() => {
             .catch((error) => {
                 console.log(error)
             })
-
-        router.replace(`/${workspacesList[0]?.slug}`)
+        router.push("/")
     }
-
     useEffect(() => {
         setTheme("system")
     }, [setTheme])
-
     useEffect(() => {
         const handleStepChange = async () => {
             if (!user || !invitations) return
             const onboardingStep = user.onboarding_step
+            const is_onbarded = user.is_onboarded
+            if (is_onbarded) {
+                router.push("/")
+                return
+            }
             if (!onboardingStep.profile_complete) {
                 setStep(1)
                 return
@@ -109,17 +102,16 @@ const OnboardingPage = observer(() => {
                 return
             }
             if (workspacesList && workspacesList?.length > 0 && onboardingStep.workspace_join) {
-                await updateCurrentUser({
-                    onboarding_step: {
-                        ...user.onboarding_step,
-                        workspace_join: true,
-                    },
-                    last_workspace_id: workspacesList[0]?.id,
-                })
                 finishOnboarding()
                 return
             }
-            setStep(3)
+            if (
+                workspacesList &&
+                workspacesList?.length > 0 &&
+                onboardingStep.workspace_create &&
+                onboardingStep.profile_complete
+            )
+                setStep(3)
         }
 
         handleStepChange()
