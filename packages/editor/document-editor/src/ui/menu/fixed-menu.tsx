@@ -17,14 +17,14 @@ import {
   HeadingThreeItem,
   findTableAncestor,
   EditorMenuItem,
-  UploadImage,
+  UploadFile,
 } from "@servcy/editor-core";
 
 export type BubbleMenuItem = EditorMenuItem;
 
 type EditorBubbleMenuProps = {
   editor: Editor;
-  uploadFile: UploadImage;
+  uploadFile: UploadFile;
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void;
 };
 

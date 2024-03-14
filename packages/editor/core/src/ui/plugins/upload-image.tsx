@@ -1,6 +1,6 @@
 import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
 import { Decoration, DecorationSet, EditorView } from "@tiptap/pm/view";
-import { UploadImage } from "src/types/upload-image";
+import { UploadFile } from "src/types/upload-image";
 
 const uploadKey = new PluginKey("upload-image");
 
@@ -77,7 +77,7 @@ export async function startImageUpload(
   file: File,
   view: EditorView,
   pos: number,
-  uploadFile: UploadImage,
+  uploadFile: UploadFile,
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void
 ) {
   if (!file) {
@@ -140,7 +140,7 @@ export async function startImageUpload(
   }
 }
 
-const UploadImageHandler = (file: File, uploadFile: UploadImage): Promise<string> => {
+const UploadImageHandler = (file: File, uploadFile: UploadFile): Promise<string> => {
   try {
     return new Promise(async (resolve, reject) => {
       try {

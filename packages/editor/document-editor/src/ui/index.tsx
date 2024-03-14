@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { UploadImage, DeleteImage, RestoreImage, getEditorClassNames, useEditor } from "@servcy/editor-core";
+import { UploadFile, DeleteFile, RestoreFile, getEditorClassNames, useEditor } from "@servcy/editor-core";
 import { DocumentEditorExtensions } from "src/ui/extensions";
 import { IDuplicationConfig, IPageArchiveConfig, IPageLockConfig } from "src/types/menu-actions";
 import { EditorHeader } from "src/ui/components/editor-header";
@@ -21,9 +21,9 @@ interface IDocumentEditor {
   };
 
   // file operations
-  uploadFile: UploadImage;
-  deleteFile: DeleteImage;
-  restoreFile: RestoreImage;
+  uploadFile: UploadFile;
+  deleteFile: DeleteFile;
+  restoreFile: RestoreFile;
   cancelUploadImage: () => any;
 
   // editor state managers

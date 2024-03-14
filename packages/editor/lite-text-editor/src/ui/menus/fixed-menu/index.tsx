@@ -15,7 +15,7 @@ import {
   StrikeThroughItem,
   TableItem,
   UnderLineItem,
-  UploadImage,
+  UploadFile,
 } from "@servcy/editor-core";
 import { Tooltip } from "@servcy/ui";
 
@@ -40,7 +40,7 @@ type EditorBubbleMenuProps = {
         }[]
       | undefined;
   };
-  uploadFile: UploadImage;
+  uploadFile: UploadFile;
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void;
   submitButton: React.ReactNode;
 };

@@ -1,9 +1,9 @@
 import * as React from "react";
 import {
-  UploadImage,
-  DeleteImage,
+  UploadFile,
+  DeleteFile,
   IMentionSuggestion,
-  RestoreImage,
+  RestoreFile,
   EditorContainer,
   EditorContentWrapper,
   getEditorClassNames,
@@ -14,9 +14,9 @@ import { LiteTextEditorExtensions } from "src/ui/extensions";
 
 interface ILiteTextEditor {
   value: string;
-  uploadFile: UploadImage;
-  deleteFile: DeleteImage;
-  restoreFile: RestoreImage;
+  uploadFile: UploadFile;
+  deleteFile: DeleteFile;
+  restoreFile: RestoreFile;
 
   noBorder?: boolean;
   borderOnFocus?: boolean;

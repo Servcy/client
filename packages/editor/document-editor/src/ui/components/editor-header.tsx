@@ -2,7 +2,7 @@ import { Editor } from "@tiptap/react";
 import { Archive, RefreshCw, Lock } from "lucide-react";
 import { IMarking, DocumentDetails } from "src/types/editor-types";
 import { FixedMenu } from "src/ui/menu";
-import { UploadImage } from "@servcy/editor-core";
+import { UploadFile } from "@servcy/editor-core";
 import { AlertLabel } from "src/ui/components/alert-label";
 import { IVerticalDropdownItemProps, VerticalDropdownMenu } from "src/ui/components/vertical-dropdown-menu";
 import { SummaryPopover } from "src/ui/components/summary-popover";
@@ -18,7 +18,7 @@ interface IEditorHeader {
   isArchived: boolean;
   archivedAt?: Date;
   readonly: boolean;
-  uploadFile?: UploadImage;
+  uploadFile?: UploadFile;
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void;
   documentDetails: DocumentDetails;
   isSubmitting?: "submitting" | "submitted" | "saved";

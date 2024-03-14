@@ -18,9 +18,9 @@ export { useReadOnlyEditor } from "src/hooks/use-read-only-editor";
 export * from "src/ui/menus/menu-items";
 export * from "src/lib/editor-commands";
 
-export type { DeleteImage } from "src/types/delete-image";
-export type { UploadImage } from "src/types/upload-image";
-export type { RestoreImage } from "src/types/restore-image";
+export type { DeleteFile } from "src/types/delete-image";
+export type { UploadFile } from "src/types/upload-image";
+export type { RestoreFile } from "src/types/restore-image";
 export type { IMentionHighlight, IMentionSuggestion } from "src/types/mention-suggestion";
 export type { ISlashCommandItem, CommandProps } from "src/types/slash-commands-suggestion";
 export type { LucideIconType } from "src/types/lucide-icon";

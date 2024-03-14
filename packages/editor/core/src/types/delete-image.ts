@@ -1,1 +1,1 @@
-export type DeleteImage = (assetUrlWithWorkspaceId: string) => Promise<any>;
+export type DeleteFile = (assetUrl: string) => Promise<any>;

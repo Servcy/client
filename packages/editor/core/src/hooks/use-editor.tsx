@@ -4,19 +4,19 @@ import { CoreEditorProps } from "src/ui/props";
 import { CoreEditorExtensions } from "src/ui/extensions";
 import { EditorProps } from "@tiptap/pm/view";
 import { getTrimmedHTML } from "src/lib/utils";
-import { DeleteImage } from "src/types/delete-image";
+import { DeleteFile } from "src/types/delete-image";
 import { IMentionSuggestion } from "src/types/mention-suggestion";
-import { RestoreImage } from "src/types/restore-image";
-import { UploadImage } from "src/types/upload-image";
+import { RestoreFile } from "src/types/restore-image";
+import { UploadFile } from "src/types/upload-image";
 
 interface CustomEditorProps {
-  uploadFile: UploadImage;
-  restoreFile: RestoreImage;
+  uploadFile: UploadFile;
+  restoreFile: RestoreFile;
   rerenderOnPropsChange?: {
     id: string;
     description_html: string;
   };
-  deleteFile: DeleteImage;
+  deleteFile: DeleteFile;
   cancelUploadImage?: () => any;
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void;
   setShouldShowAlert?: (showAlert: boolean) => void;

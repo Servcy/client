@@ -18,7 +18,7 @@ import {
   Table,
 } from "lucide-react";
 import {
-  UploadImage,
+  UploadFile,
   ISlashCommandItem,
   CommandProps,
   cn,
@@ -72,7 +72,7 @@ const Command = Extension.create<SlashCommandOptions>({
 
 const getSuggestionItems =
   (
-    uploadFile: UploadImage,
+    uploadFile: UploadFile,
     setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void,
     additionalOptions?: Array<ISlashCommandItem>
   ) =>
@@ -361,7 +361,7 @@ const renderItems = () => {
 };
 
 export const SlashCommand = (
-  uploadFile: UploadImage,
+  uploadFile: UploadFile,
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void,
   additionalOptions?: Array<ISlashCommandItem>
 ) =>

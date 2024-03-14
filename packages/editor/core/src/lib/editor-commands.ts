@@ -1,7 +1,7 @@
 import { Editor, Range } from "@tiptap/core";
 import { startImageUpload } from "src/ui/plugins/upload-image";
 import { findTableAncestor } from "src/lib/utils";
-import { UploadImage } from "src/types/upload-image";
+import { UploadFile } from "src/types/upload-image";
 
 export const toggleHeadingOne = (editor: Editor, range?: Range) => {
   if (range) editor.chain().focus().deleteRange(range).setNode("heading", { level: 1 }).run();
@@ -111,7 +111,7 @@ export const setLinkEditor = (editor: Editor, url: string) => {
 
 export const insertImageCommand = (
   editor: Editor,
-  uploadFile: UploadImage,
+  uploadFile: UploadFile,
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void,
   range?: Range
 ) => {

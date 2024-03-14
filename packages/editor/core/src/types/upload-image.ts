@@ -1,1 +1,1 @@
-export type UploadImage = (file: File) => Promise<string>;
+export type UploadFile = (file: File) => Promise<string>;

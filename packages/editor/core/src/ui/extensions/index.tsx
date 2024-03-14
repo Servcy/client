@@ -21,9 +21,9 @@ import { ListKeymap } from "src/ui/extensions/custom-list-keymap";
 import { CustomKeymap } from "src/ui/extensions/keymap";
 import { CustomQuoteExtension } from "src/ui/extensions/quote";
 
-import { DeleteImage } from "src/types/delete-image";
+import { DeleteFile } from "src/types/delete-image";
 import { IMentionSuggestion } from "src/types/mention-suggestion";
-import { RestoreImage } from "src/types/restore-image";
+import { RestoreFile } from "src/types/restore-image";
 import { CustomLinkExtension } from "src/ui/extensions/custom-link";
 import { CustomCodeInlineExtension } from "src/ui/extensions/code-inline";
 import { CustomTypographyExtension } from "src/ui/extensions/typography";
@@ -33,8 +33,8 @@ export const CoreEditorExtensions = (
     mentionSuggestions: IMentionSuggestion[];
     mentionHighlights: string[];
   },
-  deleteFile: DeleteImage,
-  restoreFile: RestoreImage,
+  deleteFile: DeleteFile,
+  restoreFile: RestoreFile,
   cancelUploadImage?: () => any
 ) => [
   StarterKit.configure({

@@ -1,9 +1,9 @@
-import { UploadImage } from "@servcy/editor-core";
+import { UploadFile } from "@servcy/editor-core";
 import { DragAndDrop, SlashCommand } from "@servcy/editor-extensions";
 import Placeholder from "@tiptap/extension-placeholder";
 
 export const RichTextEditorExtensions = (
-  uploadFile: UploadImage,
+  uploadFile: UploadFile,
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void,
   dragDropEnabled?: boolean,
   setHideDragHandle?: (hideDragHandlerFromDragDrop: () => void) => void

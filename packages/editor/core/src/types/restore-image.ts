@@ -1,1 +1,1 @@
-export type RestoreImage = (assetUrlWithWorkspaceId: string) => Promise<any>;
+export type RestoreFile = (assetUrl: string) => Promise<any>;

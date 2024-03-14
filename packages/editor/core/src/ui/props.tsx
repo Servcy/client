@@ -1,10 +1,10 @@
 import { EditorProps } from "@tiptap/pm/view";
 import { findTableAncestor } from "src/lib/utils";
-import { UploadImage } from "src/types/upload-image";
+import { UploadFile } from "src/types/upload-image";
 import { startImageUpload } from "src/ui/plugins/upload-image";
 
 export function CoreEditorProps(
-  uploadFile: UploadImage,
+  uploadFile: UploadFile,
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void
 ): EditorProps {
   return {

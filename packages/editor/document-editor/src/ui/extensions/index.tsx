@@ -2,10 +2,10 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { IssueWidgetPlaceholder } from "src/ui/extensions/widgets/issue-embed-widget";
 
 import { SlashCommand, DragAndDrop } from "@servcy/editor-extensions";
-import { UploadImage } from "@servcy/editor-core";
+import { UploadFile } from "@servcy/editor-core";
 
 export const DocumentEditorExtensions = (
-  uploadFile: UploadImage,
+  uploadFile: UploadFile,
   setHideDragHandle?: (hideDragHandlerFromDragDrop: () => void) => void,
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void
 ) => [

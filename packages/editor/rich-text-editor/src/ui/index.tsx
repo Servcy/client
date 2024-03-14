@@ -1,12 +1,12 @@
 "use client";
 import {
-  DeleteImage,
+  DeleteFile,
   EditorContainer,
   EditorContentWrapper,
   getEditorClassNames,
   IMentionSuggestion,
-  RestoreImage,
-  UploadImage,
+  RestoreFile,
+  UploadFile,
   useEditor,
 } from "@servcy/editor-core";
 import * as React from "react";
@@ -17,9 +17,9 @@ export type IRichTextEditor = {
   value: string;
   initialValue?: string;
   dragDropEnabled?: boolean;
-  uploadFile: UploadImage;
-  restoreFile: RestoreImage;
-  deleteFile: DeleteImage;
+  uploadFile: UploadFile;
+  restoreFile: RestoreFile;
+  deleteFile: DeleteFile;
   noBorder?: boolean;
   borderOnFocus?: boolean;
   cancelUploadImage?: () => any;

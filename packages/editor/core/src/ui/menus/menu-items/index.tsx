@@ -32,7 +32,7 @@ import {
   toggleUnderline,
 } from "src/lib/editor-commands";
 import { LucideIconType } from "src/types/lucide-icon";
-import { UploadImage } from "src/types/upload-image";
+import { UploadFile } from "src/types/upload-image";
 
 export interface EditorMenuItem {
   name: string;
@@ -134,7 +134,7 @@ export const TableItem = (editor: Editor): EditorMenuItem => ({
 
 export const ImageItem = (
   editor: Editor,
-  uploadFile: UploadImage,
+  uploadFile: UploadFile,
   setIsSubmitting?: (isSubmitting: "submitting" | "submitted" | "saved") => void
 ): EditorMenuItem => ({
   name: "image",
