@@ -37,7 +37,7 @@ export interface IProject {
     members: IProjectMemberLite[]
     name: string
     access: number
-    project_lead: IUserLite | string | null
+    lead: IUserLite | string | null
     sort_order: number | null
     total_cycles: number
     total_members: number
