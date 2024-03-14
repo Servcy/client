@@ -191,7 +191,7 @@ const UserNotificationContextProvider: React.FC<{
                 })
         } else {
             notificationsMutate(
-                (prev: any) => prev?.filter((prevNotification: any) => prevNotification.id !== notificationId),
+                (prev: any) => prev?.filter((prevNotification: any) => String(prevNotification.id) !== notificationId),
                 false
             )
             await notificationService

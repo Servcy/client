@@ -318,7 +318,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
         await this.workspaceService.deleteWorkspaceInvitations(workspaceSlug.toString(), invitationId).then(() => {
             runInAction(() => {
                 this.workspaceMemberInvitations[workspaceSlug] =
-                    this.workspaceMemberInvitations[workspaceSlug]?.filter((inv) => inv.id !== invitationId) ?? []
+                    this.workspaceMemberInvitations[workspaceSlug]?.filter((inv) => String(inv.id) !== invitationId) ?? []
             })
         })
 }

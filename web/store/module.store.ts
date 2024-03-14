@@ -292,7 +292,7 @@ export class ModulesStore implements IModuleStore {
         const originalModuleDetails = this.getModuleById(moduleId)
         try {
             const linkModules = originalModuleDetails?.link_module.map((link) =>
-                link.id === linkId ? { ...link, ...data } : link
+                String(link.id) === linkId ? { ...link, ...data } : link
             )
             runInAction(() => {
                 set(this.moduleMap, [moduleId, "link_module"], linkModules)
@@ -318,7 +318,7 @@ export class ModulesStore implements IModuleStore {
     deleteModuleLink = async (workspaceSlug: string, projectId: string, moduleId: string, linkId: string) =>
         await this.moduleService.deleteModuleLink(workspaceSlug, projectId, moduleId, linkId).then(() => {
             const moduleDetails = this.getModuleById(moduleId)
-            const linkModules = moduleDetails?.link_module.filter((link) => link.id !== linkId)
+            const linkModules = moduleDetails?.link_module.filter((link) => String(link.id) !== linkId)
             runInAction(() => {
                 set(this.moduleMap, [moduleId, "link_module"], linkModules)
             })
