@@ -59,6 +59,7 @@ const RenderIfVisible: React.FC<Props> = (props) => {
             observer.observe(intersectionRef.current)
             return () => {
                 if (intersectionRef.current) {
+                    // eslint-disable-next-line react-hooks/exhaustive-deps
                     observer.unobserve(intersectionRef.current)
                 }
             }
