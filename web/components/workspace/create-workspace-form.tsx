@@ -188,7 +188,7 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                 </Button>
                 {!secondaryButton && (
                     <Button variant="neutral-primary" type="button" size="md" onClick={() => router.back()}>
-                        Go back
+                        Cancel
                     </Button>
                 )}
             </div>
