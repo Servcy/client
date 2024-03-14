@@ -8,7 +8,6 @@ import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
 import {
     ChevronDown,
     FileText,
-    Inbox,
     LinkIcon,
     LogOut,
     MoreHorizontal,
