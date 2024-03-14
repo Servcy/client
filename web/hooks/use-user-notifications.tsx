@@ -120,11 +120,11 @@ const useUserNotification = (): UseUserNotification => {
                 previousNotifications
                     .map((d: any) => d.results)
                     .flat()
-                    .findIndex((notification: any) => notification.id === notificationId) / PER_PAGE
+                    .findIndex((notification: any) => String(notification.id) === notificationId) / PER_PAGE
             )
 
             let notificationIndexInPage = previousNotifications[notificationIndex].results.findIndex(
-                (notification: any) => notification.id === notificationId
+                (notification: any) => String(notification.id) === notificationId
             )
 
             if (notificationIndexInPage === -1) return previousNotifications
@@ -152,11 +152,11 @@ const useUserNotification = (): UseUserNotification => {
                 previousNotifications
                     .map((d: any) => d.results)
                     .flat()
-                    .findIndex((notification: any) => notification.id === notificationId) / PER_PAGE
+                    .findIndex((notification: any) => String(notification.id) === notificationId) / PER_PAGE
             )
 
             let notificationIndexInPage = previousNotifications[notificationIndex].results.findIndex(
-                (notification: any) => notification.id === notificationId
+                (notification: any) => String(notification.id) === notificationId
             )
 
             if (notificationIndexInPage === -1) return previousNotifications
@@ -176,7 +176,7 @@ const useUserNotification = (): UseUserNotification => {
     const markNotificationReadStatus = async (notificationId: string) => {
         if (!workspaceSlug) return
 
-        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null
+        const isRead = notifications?.find((notification) => String(notification.id) === notificationId)?.read_at !== null
 
         handleReadMutation(isRead ? "unread" : "read")
         mutateNotification(notificationId, { read_at: isRead ? null : new Date() })
@@ -207,7 +207,7 @@ const useUserNotification = (): UseUserNotification => {
     const markNotificationAsRead = async (notificationId: string) => {
         if (!workspaceSlug) return
 
-        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null
+        const isRead = notifications?.find((notification) => String(notification.id) === notificationId)?.read_at !== null
 
         if (isRead) return
 
@@ -226,7 +226,7 @@ const useUserNotification = (): UseUserNotification => {
     const markNotificationArchivedStatus = async (notificationId: string) => {
         if (!workspaceSlug) return
         const isArchived =
-            notifications?.find((notification) => notification.id === notificationId)?.archived_at !== null
+            notifications?.find((notification) => String(notification.id) === notificationId)?.archived_at !== null
 
         if (!isArchived) {
             handleReadMutation("read")
@@ -264,7 +264,7 @@ const useUserNotification = (): UseUserNotification => {
         if (!workspaceSlug) return
 
         const isSnoozed =
-            notifications?.find((notification) => notification.id === notificationId)?.snoozed_till !== null
+            notifications?.find((notification) => String(notification.id) === notificationId)?.snoozed_till !== null
 
         mutateNotification(notificationId, { snoozed_till: isSnoozed ? null : dateTime })
 
