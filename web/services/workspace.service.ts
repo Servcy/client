@@ -51,7 +51,7 @@ export class WorkspaceService extends APIService {
         return this.post(`/iam/${workspaceSlug}/invitations`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                throw error?.response?.data
+                throw error
             })
     }
 

@@ -322,12 +322,17 @@ export const InviteMembers: React.FC<Props> = (props) => {
                 toast.success("Invitations sent successfully.")
                 await nextStep()
             })
-            .catch((error) => {
+            .catch(async (error) => {
                 captureEvent(MEMBER_INVITED, {
                     project_id: undefined,
                     state: "FAILED",
                     element: "Onboarding",
                 })
+                if (error?.response?.status === 403) {
+                    toast.error("Only workspace admins can invite members.")
+                    await nextStep()
+                    return
+                }
                 toast.error(error?.response?.data?.detail || "Something went wrong!")
             })
     }
