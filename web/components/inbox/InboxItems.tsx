@@ -165,8 +165,6 @@ const InboxItems = (
         },
     ]
 
-    console.log("inboxItems", inboxItems)
-
     return (
         <>
             <ConfigProvider
