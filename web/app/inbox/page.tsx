@@ -135,6 +135,7 @@ const Inbox = observer(() => {
     useEffect(() => {
         const debouncedFetchInbox = debounce(async () => {
             try {
+                setLoading(true)
                 const response = await inboxService.fetchInbox({
                     filters,
                     search,
