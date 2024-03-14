@@ -2,7 +2,8 @@ import Image from "next/image"
 
 import React, { Dispatch, SetStateAction } from "react"
 
-import { Avatar, Button, ConfigProvider, Table, theme, Tooltip } from "antd"
+import { SyncOutlined } from "@ant-design/icons"
+import { Avatar, Button, ConfigProvider, Spin, Table, theme, Tooltip } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import cn from "classnames"
 import { useTheme } from "next-themes"
@@ -15,7 +16,6 @@ import Cause from "@components/inbox/Cause"
 import IntegrationService from "@services/integration.service"
 
 import type { InboxItem, PaginationDetails } from "@servcy/types"
-import { Spinner } from "@servcy/ui"
 
 const integrationService = new IntegrationService()
 
@@ -193,7 +193,20 @@ const InboxItems = (
                     }}
                     loading={{
                         spinning: loading,
-                        indicator: <Spinner />,
+                        indicator: (
+                            <Spin
+                                className="m-auto"
+                                size="large"
+                                indicator={
+                                    <SyncOutlined
+                                        spin
+                                        style={{
+                                            color: "#26542F",
+                                        }}
+                                    />
+                                }
+                            />
+                        ),
                     }}
                     rowClassName={(record) =>
                         cn("text-custom-text-100 rounded-tr", {
