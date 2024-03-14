@@ -21,6 +21,8 @@ export class UserService extends APIService {
     // iam routes
 
     async currentUser(): Promise<IUser> {
+        const accessToken = this.getAccessToken()
+        if (!accessToken) throw new Error("Access token not found")
         return this.get("/iam/me")
             .then((response) => response?.data)
             .catch((error) => {
