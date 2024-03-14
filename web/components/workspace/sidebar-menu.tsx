@@ -3,7 +3,7 @@ import { useParams, usePathname } from "next/navigation"
 
 import React from "react"
 
-import { Crown } from "lucide-react"
+import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { NotificationPopover } from "@components/notifications"
@@ -73,7 +73,7 @@ export const WorkspaceSidebarMenu = observer(() => {
                                         }
                                         {!themeStore?.sidebarCollapsed && link.label}
                                         {!themeStore?.sidebarCollapsed && link.key === "active-cycles" && (
-                                            <Crown className="h-3.5 w-3.5 text-amber-400" />
+                                            <Sparkle className="h-3.5 w-3.5 text-amber-400" />
                                         )}
                                     </div>
                                 </Tooltip>

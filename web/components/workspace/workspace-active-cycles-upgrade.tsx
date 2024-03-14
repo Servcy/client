@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import React from "react"
 
-import { Crown } from "lucide-react"
+import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react"
 
 import { useUser } from "@hooks/store"
@@ -43,8 +43,8 @@ export const WorkspaceActiveCyclesUpgrade = observer(() => {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <Crown className="h-3.5 w-3.5" />
-                            Upgrade
+                            <Sparkle className="h-3.5 w-3.5" />
+                            Coming Soon...
                         </a>
                     </div>
                     <span className="absolute left-0 top-0">

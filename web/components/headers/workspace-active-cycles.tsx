@@ -1,4 +1,4 @@
-import { Crown } from "lucide-react"
+import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
@@ -22,7 +22,7 @@ export const WorkspaceActiveCycleHeader = observer(() => (
                         }
                     />
                 </Breadcrumbs>
-                <Crown className="h-3.5 w-3.5 text-amber-400" />
+                <Sparkle className="h-3.5 w-3.5 text-amber-400" />
             </div>
         </div>
     </div>

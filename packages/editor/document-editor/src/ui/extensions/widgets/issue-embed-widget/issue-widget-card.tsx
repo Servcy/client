@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Button } from "@servcy/ui";
 import { NodeViewWrapper } from "@tiptap/react";
-import { Crown } from "lucide-react";
+import { Sparkle } from "lucide-react";
 
 export const IssueWidgetCard = (props) => (
   <NodeViewWrapper className="issue-embed-component m-2">
@@ -17,14 +17,14 @@ export const IssueWidgetCard = (props) => (
         <div className="h-full backdrop-filter backdrop-blur-[30px] bg-custom-background-80 bg-opacity-30 flex items-center w-full justify-between gap-5 mt-2.5 pl-4 pr-5 py-3 max-md:max-w-full max-md:flex-wrap relative">
           <div className="flex gap-2 items-center">
             <div className="rounded">
-              <Crown className="m-2" size={16} color="#FFBA18" />
+              <Sparkle className="m-2" size={16} color="#FFBA18" />
             </div>
             <div className="text-custom-text text-sm">
               Embed and access issues in pages seamlessly, upgrade to servcy pro now.
             </div>
           </div>
           <a href="https://servcy.so/pricing" target="_blank" rel="noreferrer">
-            <Button>Upgrade</Button>
+            <Button>Coming Soon...</Button>
           </a>
         </div>
       </div>
