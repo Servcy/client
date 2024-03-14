@@ -28,10 +28,10 @@ export const InboxHeader = (
                 placeholder="search by notification..."
                 onChange={(event) => setSearch(event.target.value || "")}
             />
-            <Button onClick={fetchInbox} className="ml-2 h-full text-custom-text-100 border-none" disabled={loading}>
+            <Button onClick={fetchInbox} className="ml-2 h-full !text-custom-text-100 border-none" disabled={loading}>
                 <AiOutlineSync
                     className={cn("my-auto", {
-                        "animate-spin": loading,
+                        "animate-spin text-servcy": loading,
                     })}
                     size="24"
                 />
