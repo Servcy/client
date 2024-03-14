@@ -18,7 +18,7 @@ import { IProject, IUser, IUserLite, IWorkspace } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 
 const defaultValues: Partial<IProject> = {
-    project_lead: null,
+    lead: null,
     default_assignee: null,
 }
 
@@ -45,7 +45,7 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
             ...currentProjectDetails,
             default_assignee:
                 (currentProjectDetails.default_assignee as IUser)?.id ?? currentProjectDetails.default_assignee,
-            project_lead: (currentProjectDetails.project_lead as IUserLite)?.id ?? currentProjectDetails.project_lead,
+            lead: (currentProjectDetails.lead as IUserLite)?.id ?? currentProjectDetails.lead,
             workspace: (currentProjectDetails.workspace as IWorkspace).id,
         })
     }, [currentProjectDetails, reset])
@@ -57,13 +57,13 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
             ...currentProjectDetails,
             default_assignee:
                 (currentProjectDetails?.default_assignee as IUser)?.id ?? currentProjectDetails?.default_assignee,
-            project_lead: (currentProjectDetails?.project_lead as IUserLite)?.id ?? currentProjectDetails?.project_lead,
+            lead: (currentProjectDetails?.lead as IUserLite)?.id ?? currentProjectDetails?.lead,
             ...formData,
         })
 
         await updateProject(workspaceSlug.toString(), projectId.toString(), {
             default_assignee: formData.default_assignee === "none" ? null : formData.default_assignee,
-            project_lead: formData.project_lead === "none" ? null : formData.project_lead,
+            lead: formData.lead === "none" ? null : formData.lead,
         })
             .then(() => {
                 fetchProjectDetails(workspaceSlug.toString(), projectId.toString())
@@ -88,12 +88,12 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
                             {currentProjectDetails ? (
                                 <Controller
                                     control={control}
-                                    name="project_lead"
+                                    name="lead"
                                     render={({ field: { value } }) => (
                                         <MemberSelect
                                             value={value}
                                             onChange={(val: string) => {
-                                                submitChanges({ project_lead: val })
+                                                submitChanges({ lead: val })
                                             }}
                                             isDisabled={currentProjectRole !== ERoles.ADMIN}
                                         />

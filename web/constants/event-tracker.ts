@@ -27,7 +27,7 @@ export const getProjectEventPayload = (payload: any) => ({
     identifier: payload.identifier,
     project_visibility: payload.access == EAccess.PUBLIC ? "Public" : "Private",
     changed_properties: payload.changed_properties,
-    lead_id: payload.project_lead,
+    lead_id: payload.lead,
     created_at: payload.created_at,
     updated_at: payload.updated_at,
     state: payload.state,

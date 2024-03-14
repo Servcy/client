@@ -46,8 +46,8 @@ export interface ICreateProjectForm {
     description: string
     emoji_and_icon: string
     access: number
-    project_lead_member: string
-    project_lead: string
+    lead_member: string
+    lead: string
     cover_image: string
     icon_prop: any
     emoji: string
@@ -82,7 +82,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
             identifier: "",
             name: "",
             access: 0,
-            project_lead: undefined,
+            lead: undefined,
         },
         reValidateMode: "onChange",
     })
@@ -100,12 +100,12 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
 
     const onSubmit = async (formData: ICreateProjectForm) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { emoji_and_icon, project_lead_member, ...payload } = formData
+        const { emoji_and_icon, lead_member, ...payload } = formData
 
         if (typeof formData.emoji_and_icon === "object") payload.icon_prop = formData.emoji_and_icon
         else payload.emoji = formData.emoji_and_icon
 
-        payload.project_lead = formData.project_lead_member
+        payload.lead = formData.lead_member
         // Upper case identifier
         payload.identifier = payload.identifier.toUpperCase()
 
@@ -360,7 +360,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                 )}
                                             />
                                             <Controller
-                                                name="project_lead_member"
+                                                name="lead_member"
                                                 control={control}
                                                 render={({ field: { value, onChange } }) => (
                                                     <div className="h-7 flex-shrink-0" tabIndex={5}>
