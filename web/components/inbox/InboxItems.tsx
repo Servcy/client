@@ -86,28 +86,14 @@ const InboxItems = (
             ),
         },
         {
-            dataIndex: "account",
-            width: 100,
-            title: "Source",
-            render: (account) => (
-                <div className="flex min-h-[50px] max-w-[250px] items-center text-sm">
-                    <Avatar className="mr-2 rounded-full" size="small">
-                        {account.slice(0, 1).toUpperCase()}
-                    </Avatar>
-                    <div className="overflow-hidden truncate">{account}</div>
-                </div>
-            ),
-        },
-        {
             dataIndex: "cause",
             title: "From",
-            width: 100,
             render: (cause, record) => <Cause cause={cause} source={record.source} />,
         },
         {
             dataIndex: "created_at",
             title: "Date",
-            width: 200,
+            width: 150,
             render: (date) =>
                 new Date(date).toLocaleDateString(navigator.language || "en-US", {
                     month: "short",
@@ -119,7 +105,6 @@ const InboxItems = (
         },
         {
             dataIndex: "source",
-            width: 100,
             title: "Source",
             render: (source, _, index) => (
                 <Image
@@ -135,7 +120,6 @@ const InboxItems = (
         {
             dataIndex: "id",
             title: "Actions",
-            width: 100,
             render: (id, record) => (
                 <div className="flex gap-1">
                     <Tooltip title={activeTab === "archived" ? "Delete" : "Archive"}>
