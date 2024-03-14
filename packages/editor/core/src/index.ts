@@ -7,7 +7,7 @@ export { isCellSelection } from "src/ui/extensions/table/table/utilities/is-cell
 
 export * from "src/lib/utils";
 export * from "src/ui/extensions/table/table";
-export { startImageUpload } from "src/ui/plugins/upload-image";
+export { startImageUpload } from "src/ui/plugins/upload-file";
 
 export { EditorContainer } from "src/ui/components/editor-container";
 export { EditorContentWrapper } from "src/ui/components/editor-content";
@@ -19,8 +19,8 @@ export * from "src/ui/menus/menu-items";
 export * from "src/lib/editor-commands";
 
 export type { DeleteFile } from "src/types/delete-file";
-export type { UploadFile } from "src/types/upload-image";
-export type { RestoreFile } from "src/types/restore-image";
+export type { UploadFile } from "src/types/upload-file";
+export type { RestoreFile } from "src/types/restore-file";
 export type { IMentionHighlight, IMentionSuggestion } from "src/types/mention-suggestion";
 export type { ISlashCommandItem, CommandProps } from "src/types/slash-commands-suggestion";
 export type { LucideIconType } from "src/types/lucide-icon";

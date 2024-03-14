@@ -6,8 +6,8 @@ import { EditorProps } from "@tiptap/pm/view";
 import { getTrimmedHTML } from "src/lib/utils";
 import { DeleteFile } from "src/types/delete-file";
 import { IMentionSuggestion } from "src/types/mention-suggestion";
-import { RestoreFile } from "src/types/restore-image";
-import { UploadFile } from "src/types/upload-image";
+import { RestoreFile } from "src/types/restore-file";
+import { UploadFile } from "src/types/upload-file";
 
 interface CustomEditorProps {
   uploadFile: UploadFile;

@@ -1,8 +1,8 @@
 import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
 import { Decoration, DecorationSet, EditorView } from "@tiptap/pm/view";
-import { UploadFile } from "src/types/upload-image";
+import { UploadFile } from "src/types/upload-file";
 
-const uploadKey = new PluginKey("upload-image");
+const uploadKey = new PluginKey("upload-file");
 
 export const UploadImagesPlugin = (cancelUploadImage?: () => any) =>
   new Plugin({

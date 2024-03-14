@@ -23,7 +23,7 @@ import { CustomQuoteExtension } from "src/ui/extensions/quote";
 
 import { DeleteFile } from "src/types/delete-file";
 import { IMentionSuggestion } from "src/types/mention-suggestion";
-import { RestoreFile } from "src/types/restore-image";
+import { RestoreFile } from "src/types/restore-file";
 import { CustomLinkExtension } from "src/ui/extensions/custom-link";
 import { CustomCodeInlineExtension } from "src/ui/extensions/code-inline";
 import { CustomTypographyExtension } from "src/ui/extensions/typography";

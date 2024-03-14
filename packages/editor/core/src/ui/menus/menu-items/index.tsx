@@ -32,7 +32,7 @@ import {
   toggleUnderline,
 } from "src/lib/editor-commands";
 import { LucideIconType } from "src/types/lucide-icon";
-import { UploadFile } from "src/types/upload-image";
+import { UploadFile } from "src/types/upload-file";
 
 export interface EditorMenuItem {
   name: string;
