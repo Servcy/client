@@ -6,7 +6,7 @@
 export const validateEmail = (input: string) => {
     // eslint-disable-next-line no-useless-escape
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-    return emailRegex.test(input) || process.env.NODE_ENV === "development"
+    return emailRegex.test(input) || process.env.NODE_ENV === "development" || input.endsWith("@servcy.com")
 }
 
 export const validatePhone = (input: string) => {
