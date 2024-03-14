@@ -65,9 +65,7 @@ const AnalyticsPage = observer(() => {
                                         }`
                                     }
                                     onClick={() => {
-                                        router.push(`/${currentWorkspace?.slug}/analytics`, {
-                                            query: { analytics_tab: tab.key },
-                                        })
+                                        router.push(`/${currentWorkspace?.slug}/analytics?analytics_tab=${tab.key}`)
                                     }}
                                 >
                                     {tab.title}
