@@ -4,7 +4,7 @@ import { CoreEditorProps } from "src/ui/props";
 import { CoreEditorExtensions } from "src/ui/extensions";
 import { EditorProps } from "@tiptap/pm/view";
 import { getTrimmedHTML } from "src/lib/utils";
-import { DeleteFile } from "src/types/delete-image";
+import { DeleteFile } from "src/types/delete-file";
 import { IMentionSuggestion } from "src/types/mention-suggestion";
 import { RestoreFile } from "src/types/restore-image";
 import { UploadFile } from "src/types/upload-image";

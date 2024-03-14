@@ -18,7 +18,7 @@ export { useReadOnlyEditor } from "src/hooks/use-read-only-editor";
 export * from "src/ui/menus/menu-items";
 export * from "src/lib/editor-commands";
 
-export type { DeleteFile } from "src/types/delete-image";
+export type { DeleteFile } from "src/types/delete-file";
 export type { UploadFile } from "src/types/upload-image";
 export type { RestoreFile } from "src/types/restore-image";
 export type { IMentionHighlight, IMentionSuggestion } from "src/types/mention-suggestion";

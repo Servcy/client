@@ -2,8 +2,8 @@ import { EditorState, Plugin, PluginKey, Transaction } from "@tiptap/pm/state";
 import { Node as ProseMirrorNode } from "@tiptap/pm/model";
 import { UploadImagesPlugin } from "src/ui/plugins/upload-image";
 import ImageExt from "@tiptap/extension-image";
-import { onNodeDeleted, onNodeRestored } from "src/ui/plugins/delete-image";
-import { DeleteFile } from "src/types/delete-image";
+import { onNodeDeleted, onNodeRestored } from "src/ui/plugins/delete-file";
+import { DeleteFile } from "src/types/delete-file";
 import { RestoreFile } from "src/types/restore-image";
 
 interface ImageNode extends ProseMirrorNode {
@@ -13,7 +13,7 @@ interface ImageNode extends ProseMirrorNode {
   };
 }
 
-const deleteKey = new PluginKey("delete-image");
+const deleteKey = new PluginKey("delete-file");
 const IMAGE_NODE_TYPE = "image";
 
 export const ImageExtension = (deleteImage: DeleteFile, restoreFile: RestoreFile, cancelUploadImage?: () => any) =>

@@ -21,7 +21,7 @@ import { ListKeymap } from "src/ui/extensions/custom-list-keymap";
 import { CustomKeymap } from "src/ui/extensions/keymap";
 import { CustomQuoteExtension } from "src/ui/extensions/quote";
 
-import { DeleteFile } from "src/types/delete-image";
+import { DeleteFile } from "src/types/delete-file";
 import { IMentionSuggestion } from "src/types/mention-suggestion";
 import { RestoreFile } from "src/types/restore-image";
 import { CustomLinkExtension } from "src/ui/extensions/custom-link";

@@ -1,9 +1,9 @@
 import { EditorState, Plugin, PluginKey, Transaction } from "@tiptap/pm/state";
 import { Node as ProseMirrorNode } from "@tiptap/pm/model";
-import { DeleteFile } from "src/types/delete-image";
+import { DeleteFile } from "src/types/delete-file";
 import { RestoreFile } from "src/types/restore-image";
 
-const deleteKey = new PluginKey("delete-image");
+const deleteKey = new PluginKey("delete-file");
 const IMAGE_NODE_TYPE = "image";
 
 interface ImageNode extends ProseMirrorNode {
