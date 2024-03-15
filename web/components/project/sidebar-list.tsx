@@ -3,7 +3,15 @@ import { useParams } from "next/navigation"
 import { FC, useEffect, useRef, useState } from "react"
 
 import { Disclosure, Transition } from "@headlessui/react"
-import { DragDropContext, Draggable, Droppable, DropResult } from "@hello-pangea/dnd"
+import {
+    DragDropContext,
+    Draggable,
+    DraggableProvided,
+    DraggableStateSnapshot,
+    Droppable,
+    DroppableProvided,
+    DropResult,
+} from "@hello-pangea/dnd"
 import { ChevronDown, ChevronRight, Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
@@ -115,7 +123,7 @@ export const ProjectSidebarList: FC = observer(() => {
             >
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable droppableId="favorite-projects">
-                        {(provided) => (
+                        {(provided: DroppableProvided) => (
                             <div ref={provided.innerRef} {...provided.droppableProps}>
                                 {favoriteProjects && favoriteProjects.length > 0 && (
                                     <Disclosure as="div" className="flex flex-col" defaultOpen>
@@ -163,10 +171,11 @@ export const ProjectSidebarList: FC = observer(() => {
                                                                 key={projectId}
                                                                 draggableId={projectId}
                                                                 index={index}
-                                                                // FIXME refactor the Draggable to a different component
-                                                                //isDragDisabled={!project.is_member}
                                                             >
-                                                                {(provided, snapshot) => (
+                                                                {(
+                                                                    provided: DraggableProvided,
+                                                                    snapshot: DraggableStateSnapshot
+                                                                ) => (
                                                                     <div
                                                                         ref={provided.innerRef}
                                                                         {...provided.draggableProps}
@@ -199,7 +208,7 @@ export const ProjectSidebarList: FC = observer(() => {
                 </DragDropContext>
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable droppableId="joined-projects">
-                        {(provided) => (
+                        {(provided: DroppableProvided) => (
                             <div ref={provided.innerRef} {...provided.droppableProps}>
                                 {joinedProjects && joinedProjects.length > 0 && (
                                     <Disclosure as="div" className="flex flex-col" defaultOpen>
@@ -248,7 +257,10 @@ export const ProjectSidebarList: FC = observer(() => {
                                                                 draggableId={projectId}
                                                                 index={index}
                                                             >
-                                                                {(provided, snapshot) => (
+                                                                {(
+                                                                    provided: DraggableProvided,
+                                                                    snapshot: DraggableStateSnapshot
+                                                                ) => (
                                                                     <div
                                                                         ref={provided.innerRef}
                                                                         {...provided.draggableProps}
