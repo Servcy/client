@@ -177,7 +177,10 @@ const ProfileSettingsPage = observer(() => {
                                             render={({ field: { value, onChange } }) => (
                                                 <ImagePickerPopover
                                                     label={"Change cover"}
-                                                    onChange={(imageUrl) => onChange(imageUrl)}
+                                                    onChange={(imageUrl) => {
+                                                        onChange(imageUrl);
+                                                        handleSubmit(onSubmit)()
+                                                    }}
                                                     control={control}
                                                     value={
                                                         value ??

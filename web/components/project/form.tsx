@@ -172,7 +172,10 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                                     <ImagePickerPopover
                                         label={"Change cover"}
                                         control={control}
-                                        onChange={onChange}
+                                        onChange={(url) => {
+                                            onChange(url)
+                                            handleSubmit(onSubmit)()
+                                        }}
                                         value={value}
                                         disabled={!isAdmin}
                                     />
