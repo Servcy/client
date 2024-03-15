@@ -59,7 +59,7 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
 
         await deleteProject(workspaceSlug.toString(), project.id)
             .then(() => {
-                if (projectId && projectId.toString() === project.id) router.push(`/${workspaceSlug}/projects`)
+                if (projectId && projectId.toString() === String(project.id)) router.push(`/${workspaceSlug}/projects`)
 
                 handleClose()
                 captureProjectEvent({
