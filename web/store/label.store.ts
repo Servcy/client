@@ -96,7 +96,7 @@ export class LabelStore implements ILabelStore {
     get projectLabels() {
         const projectId = this.rootStore.app.router.projectId
         const worksapceSlug = this.rootStore.app.router.workspaceSlug || ""
-        if (!projectId || !(this.fetchedMap[projectId] || this.fetchedMap[worksapceSlug])) return
+        if (!projectId || !(this.fetchedMap[projectId] || this.fetchedMap[worksapceSlug])) return []
         return sortBy(
             Object.values(this.labelMap).filter((label) => label.project_id === projectId),
             "sort_order"
