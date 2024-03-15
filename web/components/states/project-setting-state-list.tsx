@@ -74,7 +74,7 @@ export const ProjectSettingStateList: React.FC = observer(() => {
                                         />
                                     )}
                                     {sortByField(orderedStateGroups[group], "sequence").map((state, index) =>
-                                        String(state.id) !== selectedState ? (
+                                        state.id !== selectedState ? (
                                             <StatesListItem
                                                 key={state.id}
                                                 index={index}

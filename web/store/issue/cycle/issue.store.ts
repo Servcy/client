@@ -320,7 +320,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
             })
             issueIds.forEach((issueId) => {
                 const issueCycleId = this.rootIssueStore.issues.getIssueById(issueId)?.cycle_id
-                if (issueCycleId && String(issueCycleId) !== cycleId) {
+                if (issueCycleId && issueCycleId !== cycleId) {
                     runInAction(() => {
                         pull(this.issues[issueCycleId], issueId)
                     })

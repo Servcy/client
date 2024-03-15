@@ -73,19 +73,14 @@ export class IssueStore implements IIssueStore {
             const query = {
                 expand: "issue_reactions,issue_attachment,issue_link,parent",
             }
-
             let issue: TIssue
-            let issuePayload: TIssue
-
             if (issueType === "ARCHIVED")
                 issue = await this.issueArchiveService.retrieveArchivedIssue(workspaceSlug, projectId, issueId, query)
             else if (issueType === "DRAFT")
                 issue = await this.issueDraftService.getDraftIssueById(workspaceSlug, projectId, issueId, query)
             else issue = await this.issueService.retrieve(workspaceSlug, projectId, issueId, query)
-
             if (!issue) throw new Error("Issue not found")
-
-            issuePayload = {
+            this.rootIssueDetailStore.rootIssueStore.issues.addIssue([{
                 id: issue?.id,
                 sequence_id: issue?.sequence_id,
                 name: issue?.name,
@@ -113,17 +108,12 @@ export class IssueStore implements IIssueStore {
                 updated_by: issue?.updated_by,
                 is_draft: issue?.is_draft,
                 is_subscribed: issue?.is_subscribed,
-            }
-
-            this.rootIssueDetailStore.rootIssueStore.issues.addIssue([issuePayload], true)
+            }], true)
 
             // store handlers from issue detail
             // parent
             if (issue && issue?.parent && issue?.parent?.id)
                 this.rootIssueDetailStore.rootIssueStore.issues.addIssue([issue.parent])
-            // assignees
-            // labels
-            // state
 
             // issue reactions
             if (issue.issue_reactions) this.rootIssueDetailStore.addReactions(issueId, issue.issue_reactions)

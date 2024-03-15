@@ -133,12 +133,12 @@ const UserNotificationContextProvider: React.FC<{
 
     const markNotificationReadStatus = async (notificationId: string) => {
         if (!workspaceSlug) return
-        const isRead = notifications?.find((notification) => String(notification.id) === notificationId)?.read_at !== null
+        const isRead = notifications?.find((notification) => notification.id === notificationId)?.read_at !== null
 
         notificationsMutate(
             (previousNotifications: any) =>
                 previousNotifications?.map((notification: any) =>
-                    String(notification.id) === notificationId
+                    notification.id === notificationId
                         ? { ...notification, read_at: isRead ? null : new Date() }
                         : notification
                 ),
@@ -173,7 +173,7 @@ const UserNotificationContextProvider: React.FC<{
     const markNotificationArchivedStatus = async (notificationId: string) => {
         if (!workspaceSlug) return
         const isArchived =
-            notifications?.find((notification) => String(notification.id) === notificationId)?.archived_at !== null
+            notifications?.find((notification) => notification.id === notificationId)?.archived_at !== null
 
         if (!isArchived) {
             handleReadMutation("read")
@@ -191,7 +191,7 @@ const UserNotificationContextProvider: React.FC<{
                 })
         } else {
             notificationsMutate(
-                (prev: any) => prev?.filter((prevNotification: any) => String(prevNotification.id) !== notificationId),
+                (prev: any) => prev?.filter((prevNotification: any) => prevNotification.id !== notificationId),
                 false
             )
             await notificationService
@@ -210,12 +210,12 @@ const UserNotificationContextProvider: React.FC<{
         if (!workspaceSlug) return
 
         const isSnoozed =
-            notifications?.find((notification) => String(notification.id) === notificationId)?.snoozed_till !== null
+            notifications?.find((notification) => notification.id === notificationId)?.snoozed_till !== null
 
         notificationsMutate(
             (previousNotifications: any) =>
                 previousNotifications?.map((notification: any) =>
-                    String(notification.id) === notificationId
+                    notification.id === notificationId
                         ? { ...notification, snoozed_till: isSnoozed ? null : new Date(dateTime!) }
                         : notification
                 ) || [],
