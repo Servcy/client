@@ -17,9 +17,9 @@ export interface ILabelStore {
     //Observable
     labelMap: Record<string, IIssueLabel>
     // computed
-    projectLabels: IIssueLabel[] | undefined
+    projectLabels: IIssueLabel[]
     projectLabelsTree: IIssueLabelTree[] | undefined
-    workspaceLabels: IIssueLabel[] | undefined
+    workspaceLabels: IIssueLabel[]
     //computed actions
     getProjectLabels: (projectId: string | null) => IIssueLabel[] | undefined
     getLabelById: (labelId: string) => IIssueLabel | null
@@ -83,7 +83,7 @@ export class LabelStore implements ILabelStore {
     get workspaceLabels() {
         const currentWorkspaceDetails = this.rootStore.workspace.currentWorkspace
         const worksapceSlug = this.rootStore.app.router.workspaceSlug || ""
-        if (!currentWorkspaceDetails || !this.fetchedMap[worksapceSlug]) return
+        if (!currentWorkspaceDetails || !this.fetchedMap[worksapceSlug]) return []
         return sortBy(
             Object.values(this.labelMap).filter((label) => label.workspace_id === currentWorkspaceDetails.id),
             "sort_order"

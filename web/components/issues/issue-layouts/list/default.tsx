@@ -1,5 +1,5 @@
 import { useRef } from "react"
-
+import {useParams} from "next/navigation"
 import { IssueBlocksList, ListQuickAddIssueForm } from "@components/issues"
 
 import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store"
@@ -68,7 +68,7 @@ const GroupByList: React.FC<IGroupByList> = (props) => {
     const projectState = useProjectState()
     const cycle = useCycle()
     const _module = useModule()
-
+    const params = useParams()
     const containerRef = useRef<HTMLDivElement | null>(null)
 
     const groups = getGroupByColumns(
@@ -79,7 +79,8 @@ const GroupByList: React.FC<IGroupByList> = (props) => {
         label,
         projectState,
         member,
-        true
+        true,
+        params?.projectId?.toString()
     )
 
     if (!groups) return null

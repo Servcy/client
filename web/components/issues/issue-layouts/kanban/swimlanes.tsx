@@ -2,6 +2,7 @@ import { MutableRefObject } from "react"
 
 import { observer } from "mobx-react-lite"
 
+import { useParams } from "next/navigation"
 import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store"
 
 import { TCreateModalStoreTypes } from "@constants/issue"
@@ -231,6 +232,7 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
     const cycle = useCycle()
     const _module = useModule()
     const projectState = useProjectState()
+    const params = useParams()
 
     const groupByList = getGroupByColumns(
         group_by as GroupByColumnTypes,
@@ -239,7 +241,9 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         _module,
         label,
         projectState,
-        member
+        member,
+        undefined,
+        params?.projectId?.toString()
     )
     const subGroupByList = getGroupByColumns(
         sub_group_by as GroupByColumnTypes,
@@ -248,7 +252,9 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         _module,
         label,
         projectState,
-        member
+        member,
+        undefined,
+        params?.projectId?.toString()
     )
 
     if (!groupByList || !subGroupByList) return null

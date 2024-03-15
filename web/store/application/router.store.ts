@@ -17,7 +17,6 @@ export interface IRouterStore {
     userId: string | undefined
     peekId: string | undefined
     issueId: string | undefined
-    webhookId: string | undefined
 }
 
 export class RouterStore implements IRouterStore {
@@ -40,7 +39,6 @@ export class RouterStore implements IRouterStore {
             userId: computed,
             peekId: computed,
             issueId: computed,
-            webhookId: computed,
         })
     }
 
@@ -124,13 +122,5 @@ export class RouterStore implements IRouterStore {
      */
     get issueId() {
         return this.query?.["issueId"]?.toString()
-    }
-
-    /**
-     * Returns the webhook id from the query
-     * @returns string|undefined
-     */
-    get webhookId() {
-        return this.query?.["webhookId"]?.toString()
     }
 }

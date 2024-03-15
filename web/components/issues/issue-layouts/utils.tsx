@@ -24,7 +24,8 @@ export const getGroupByColumns = (
     label: ILabelStore,
     projectState: IStateStore,
     member: IMemberRootStore,
-    includeNone?: boolean
+    includeNone?: boolean,
+    projectId?: string
 ): IGroupByColumn[] | undefined => {
     switch (groupBy) {
         case "project":
@@ -40,7 +41,7 @@ export const getGroupByColumns = (
         case "priority":
             return getPriorityColumns()
         case "labels":
-            return getLabelsColumns(label) as any
+            return getLabelsColumns(label, projectId) as any
         case "assignees":
             return getAssigneeColumns(member) as any
         case "created_by":
@@ -173,13 +174,11 @@ const getPriorityColumns = () => {
     }))
 }
 
-const getLabelsColumns = (label: ILabelStore) => {
-    const { projectLabels } = label
-
-    if (!projectLabels) return
-
-    const labels = [...projectLabels, { id: "None", name: "None", color: "#666" }]
-
+const getLabelsColumns = (label: ILabelStore, projectId?:  string) => {
+    const { projectLabels, workspaceLabels } = label
+    let labels = [{ id: "None", name: "None", color: "#666" }]
+    if (!projectId || projectId === "null" || projectId === "undefined") labels = [...workspaceLabels, ...labels]
+    else labels = [...projectLabels, { id: "None", name: "None", color: "#666" }]
     return labels.map((label) => ({
         id: label.id,
         name: label.name,
