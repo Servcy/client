@@ -96,7 +96,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                 const oldValue = value
                 const isUnsplashImage = oldValue?.split("/")[2] === "images.unsplash.com"
 
-                const imageUrl = res.asset
+                const imageUrl = res.url
                 onChange(imageUrl)
                 setIsImageUploading(false)
                 setImage(null)
@@ -253,12 +253,6 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
                                                         : ""
                                                 }`}
                                             >
-                                                <button
-                                                    type="button"
-                                                    className="absolute right-0 top-0 z-40 -translate-y-1/2 rounded bg-custom-background-90 px-2 py-0.5 text-xs font-medium text-custom-text-200"
-                                                >
-                                                    Edit
-                                                </button>
                                                 {image !== null || (value && value !== "") ? (
                                                     <>
                                                         <Image

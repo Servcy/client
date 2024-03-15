@@ -51,7 +51,7 @@ export class FileService extends APIService {
                 if (workspaceId) formData.append("workspace_id", workspaceId.toString())
 
                 const data = await this.uploadFile(formData)
-                return data.asset
+                return data.url
             } catch (e) {
                 console.error(e)
             }
