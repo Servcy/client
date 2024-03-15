@@ -110,7 +110,6 @@ export class StateStore implements IStateStore {
         const worksapceSlug = this.router.workspaceSlug || ""
         if (!projectId || !(this.fetchedMap[projectId] || this.fetchedMap[worksapceSlug])) return
         const results = sortStates(Object.values(this.stateMap).filter((state) => state.project_id === projectId))
-        console.log("megham-results", results)
         return results
     })
 
