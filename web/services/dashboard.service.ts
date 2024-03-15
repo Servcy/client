@@ -36,7 +36,7 @@ export class DashboardService extends APIService {
     }
 
     async updateDashboardWidget(dashboardId: string, widgetId: string, data: Partial<TWidget>): Promise<TWidget> {
-        return this.patch(`/dashboard/${dashboardId}/widgets/${widgetId}`, data)
+        return this.patch(`/dashboard/${dashboardId}/widgets/${widgetId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
