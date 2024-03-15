@@ -1,4 +1,4 @@
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 
 import React, { Fragment, useCallback, useMemo } from "react"
 
@@ -26,6 +26,7 @@ import { EIssueActions } from "../types"
 
 export const AllIssueLayoutRoot: React.FC = observer(() => {
     const params = useParams()
+    const searchParams = useSearchParams()
     const { workspaceSlug, globalViewId } = params
     // theme
     const { resolvedTheme } = useTheme()
@@ -55,15 +56,14 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("all-issues", currentView, isLightMode)
 
-    // filter init from the query params
-
     const routerFilterParams = () => {
+        // filter init from the query params
         if (
             workspaceSlug &&
             globalViewId &&
             ["all-issues", "assigned", "created", "subscribed"].includes(globalViewId.toString())
         ) {
-            const routerQueryParams = params
+            const routerQueryParams = Object.fromEntries(searchParams)
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { ["workspaceSlug"]: _workspaceSlug, ["globalViewId"]: _globalViewId, ...filters } = routerQueryParams
 
