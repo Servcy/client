@@ -76,8 +76,7 @@ export class IssueHelperStore implements TIssueHelperStore {
             let groupArray = []
 
             if (groupBy === "state_detail.group") {
-                const state_group =
-                    this.rootStore?.stateDetails?.find((_state) => _state.id === _issue?.state_id)?.group || "None"
+                const state_group = this.rootStore?.stateMap?.[_issue?.state_id]?.group || "backlog"
                 groupArray = [state_group]
             } else {
                 const groupValue = get(_issue, ISSUE_FILTER_DEFAULT_DATA[groupBy])
