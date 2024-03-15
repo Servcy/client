@@ -31,10 +31,12 @@ const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
     // fetching user settings
     useSWR("CURRENT_USER_SETTINGS", () => fetchCurrentUserSettings(), {
         shouldRetryOnError: false,
+        revalidateOnFocus: false,
     })
     // fetching all workspaces
     useSWR("USER_WORKSPACES_LIST", () => fetchWorkspaces(), {
         shouldRetryOnError: false,
+        revalidateOnFocus: false,
     })
 
     useEffect(() => {
