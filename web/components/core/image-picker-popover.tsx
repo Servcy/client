@@ -84,7 +84,7 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
     const handleSubmit = async () => {
         setIsImageUploading(true)
 
-        if (!image || !workspaceSlug) return
+        if (!image) return
 
         const formData = new FormData()
         formData.append("file", image)
