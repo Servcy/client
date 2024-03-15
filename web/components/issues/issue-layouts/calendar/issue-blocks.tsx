@@ -69,7 +69,7 @@ export const CalendarIssueBlocks: React.FC<Props> = observer((props) => {
                 return (
                     <Draggable
                         key={issue?.id}
-                        draggableId={issue?.id ?? ""}
+                        draggableId={`${issue?.id ?? ""}`}
                         index={index}
                         isDragDisabled={isDragDisabled}
                     >

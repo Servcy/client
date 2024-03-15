@@ -132,7 +132,7 @@ export const KanbanIssueBlock: React.FC<IssueBlockProps> = memo((props) => {
     return (
         <Draggable
             key={draggableId}
-            draggableId={draggableId}
+            draggableId={`${draggableId}`}
             index={index}
             isDragDisabled={!canEditIssueProperties || isDragDisabled}
         >

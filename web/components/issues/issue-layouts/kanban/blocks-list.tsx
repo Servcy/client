@@ -58,7 +58,7 @@ const KanbanIssueBlocksListMemo: React.FC<IssueBlocksListProps> = (props) => {
                                 displayProperties={displayProperties}
                                 handleIssues={handleIssues}
                                 quickActions={quickActions}
-                                draggableId={draggableId}
+                                draggableId={`${draggableId}`}
                                 index={index}
                                 isDragDisabled={isDragDisabled}
                                 canEditProperties={canEditProperties}

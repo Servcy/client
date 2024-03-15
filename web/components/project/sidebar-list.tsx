@@ -225,7 +225,7 @@ export const ProjectSidebarList: FC = observer(() => {
                                                         {joinedProjects.map((projectId, index) => (
                                                             <Draggable
                                                                 key={projectId}
-                                                                draggableId={projectId}
+                                                                draggableId={`${projectId}`}
                                                                 index={index}
                                                             >
                                                                 {(
