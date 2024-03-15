@@ -48,7 +48,7 @@ export const SPREADSHEET_PROPERTY_DETAILS: {
         icon: UserGroupIcon,
         Column: SpreadsheetAssigneeColumn,
     },
-    created_on: {
+    created_at: {
         title: "Created on",
         ascendingOrderKey: "-created_at",
         ascendingOrderTitle: "New",
@@ -129,7 +129,7 @@ export const SPREADSHEET_PROPERTY_DETAILS: {
         icon: DoubleCircleIcon,
         Column: SpreadsheetStateColumn,
     },
-    updated_on: {
+    updated_at: {
         title: "Updated on",
         ascendingOrderKey: "-updated_at",
         ascendingOrderTitle: "New",
@@ -177,8 +177,8 @@ export const SPREADSHEET_PROPERTY_LIST: (keyof IIssueDisplayProperties)[] = [
     "start_date",
     "due_date",
     "estimate",
-    "created_on",
-    "updated_on",
+    "created_at",
+    "updated_at",
     "link",
     "attachment_count",
     "sub_issue_count",

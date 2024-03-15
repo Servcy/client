@@ -194,8 +194,8 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
         link: displayProperties?.link ?? true,
         estimate: displayProperties?.estimate ?? true,
         key: displayProperties?.key ?? true,
-        created_on: displayProperties?.created_on ?? true,
-        updated_on: displayProperties?.updated_on ?? true,
+        created_at: displayProperties?.created_at ?? true,
+        updated_at: displayProperties?.updated_at ?? true,
         modules: displayProperties?.modules ?? true,
         cycle: displayProperties?.cycle ?? true,
     })

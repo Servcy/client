@@ -254,9 +254,9 @@ const PageDetailsPage = observer(() => {
                             documentDetails={{
                                 title: pageTitle,
                                 created_by: created_by,
-                                created_on: created_at,
-                                last_updated_at: updated_at,
-                                last_updated_by: updated_by,
+                                created_at: created_at,
+                                updated_at: updated_at,
+                                updated_by: updated_by,
                             }}
                             pageLockConfig={
                                 userCanLock && !archived_at ? { action: unlockPage, is_locked: is_locked } : undefined
@@ -285,9 +285,9 @@ const PageDetailsPage = observer(() => {
                                         documentDetails={{
                                             title: pageTitle,
                                             created_by: created_by,
-                                            created_on: created_at,
-                                            last_updated_at: updated_at,
-                                            last_updated_by: updated_by,
+                                            created_at: created_at,
+                                            updated_at: updated_at,
+                                            updated_by: updated_by,
                                         }}
                                         uploadFile={fileService.getUploadFileFunction(workspaceId)}
                                         deleteFile={fileService.getDeleteImageFunction()}

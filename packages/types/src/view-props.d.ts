@@ -112,8 +112,8 @@ export interface IIssueDisplayProperties {
     link?: boolean
     attachment_count?: boolean
     estimate?: boolean
-    created_on?: boolean
-    updated_on?: boolean
+    created_at?: boolean
+    updated_at?: boolean
     modules?: boolean
     cycle?: boolean
 }
