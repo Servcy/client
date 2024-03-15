@@ -4,7 +4,7 @@ import Blocked from "@components/shared/blocked"
 
 import "@styles/global.css"
 
-import { FC, PropsWithChildren } from "react"
+import { FC, Suspense, PropsWithChildren } from "react"
 
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
@@ -46,16 +46,18 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
                     <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
                         <StoreProvider>
                             <ThemeProvider themes={THEMES} defaultTheme="system">
-                                <StoreWrapper>
-                                    <PostHogProvider
-                                        user={currentUser}
-                                        currentWorkspaceId={currentWorkspace?.id}
-                                        workspaceRole={currentWorkspaceRole}
-                                        projectRole={currentProjectRole}
-                                    >
-                                        <SWRConfig value={SWR_CONFIG}>{children}</SWRConfig>
-                                    </PostHogProvider>
-                                </StoreWrapper>
+                                <Suspense>
+                                    <StoreWrapper>
+                                        <PostHogProvider
+                                            user={currentUser}
+                                            currentWorkspaceId={currentWorkspace?.id}
+                                            workspaceRole={currentWorkspaceRole}
+                                            projectRole={currentProjectRole}
+                                        >
+                                            <SWRConfig value={SWR_CONFIG}>{children}</SWRConfig>
+                                        </PostHogProvider>
+                                    </StoreWrapper>
+                                </Suspense>
                             </ThemeProvider>
                         </StoreProvider>
                     </GoogleOAuthProvider>

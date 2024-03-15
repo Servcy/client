@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation"
 
-import { Suspense } from "react"
 
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -131,11 +130,9 @@ const InvitationList = observer(() => {
 })
 
 const WorkspaceInvitationPage = observer(() => (
-    <Suspense>
-        <NoSidebarWrapper>
-            <InvitationList />
-        </NoSidebarWrapper>
-    </Suspense>
+    <NoSidebarWrapper>
+        <InvitationList />
+    </NoSidebarWrapper>
 ))
 
 export default WorkspaceInvitationPage

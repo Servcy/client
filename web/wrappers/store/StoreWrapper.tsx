@@ -1,4 +1,4 @@
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 
 import { FC, ReactNode, useEffect, useState } from "react"
 
@@ -19,6 +19,7 @@ const StoreWrapper: FC<IStoreWrapper> = observer((props) => {
     const [dom, setDom] = useState<any>()
 
     const params = useParams()
+    const searchParams = useSearchParams()
     // store hooks
     const {
         theme: { sidebarCollapsed, toggleSidebar },
@@ -50,7 +51,12 @@ const StoreWrapper: FC<IStoreWrapper> = observer((props) => {
 
     useEffect(() => {
         if (!params) return
-        setQuery(params)
+        setQuery(
+            {
+                ...Object.fromEntries(searchParams),
+                ...params,
+            }
+        )
     }, [params, setQuery])
 
     return <>{children}</>
