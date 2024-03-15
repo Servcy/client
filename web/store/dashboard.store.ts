@@ -19,19 +19,7 @@ export interface IDashboardStore {
     // observables
     homeDashboardId: string | null
     widgetDetails: { [workspaceSlug: string]: Record<string, TWidget[]> }
-    // {
-    //  workspaceSlug: {
-    //    dashboardId: TWidget[]
-    //   }
-    // }
     widgetStats: { [workspaceSlug: string]: Record<string, Record<TWidgetKeys, TWidgetStatsResponse>> }
-    //  {
-    //    workspaceSlug: {
-    //      dashboardId: {
-    //        widgetKey: TWidgetStatsResponse;
-    //        }
-    //     }
-    //  }
     // computed
     homeDashboardWidgets: TWidget[] | undefined
     // computed actions
