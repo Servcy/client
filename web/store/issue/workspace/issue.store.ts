@@ -144,7 +144,7 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
         workspaceSlug: string,
         projectId: string,
         data: Partial<TIssue>,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View id is required")
@@ -170,7 +170,7 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
         projectId: string,
         issueId: string,
         data: Partial<TIssue>,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View id is required")
@@ -187,7 +187,7 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View id is required")
@@ -212,7 +212,7 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View id is required")

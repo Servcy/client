@@ -137,7 +137,7 @@ export class ProjectViewIssuesFilter extends IssueFilterHelperStore implements I
         projectId: string,
         type: EIssueFilterType,
         filters: IIssueFilterOptions | IIssueDisplayFilterOptions | IIssueDisplayProperties | TIssueKanbanFilters,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View id is required")

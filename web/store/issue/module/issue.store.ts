@@ -166,7 +166,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         workspaceSlug: string,
         projectId: string,
         loadType: TLoader = "init-loader",
-        moduleId: string | undefined = undefined
+        moduleId?: string
     ) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
@@ -200,7 +200,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         workspaceSlug: string,
         projectId: string,
         data: Partial<TIssue>,
-        moduleId: string | undefined = undefined
+        moduleId?: string
     ) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
@@ -220,7 +220,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         projectId: string,
         issueId: string,
         data: Partial<TIssue>,
-        moduleId: string | undefined = undefined
+        moduleId?: string
     ) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
@@ -237,7 +237,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        moduleId: string | undefined = undefined
+        moduleId?: string
     ) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
@@ -259,7 +259,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        moduleId: string | undefined = undefined
+        moduleId?: string
     ) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
@@ -279,7 +279,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
-        moduleId: string | undefined = undefined
+        moduleId?: string
     ) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")

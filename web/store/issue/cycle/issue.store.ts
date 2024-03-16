@@ -162,7 +162,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         workspaceSlug: string,
         projectId: string,
         loadType: TLoader = "init-loader",
-        cycleId: string | undefined = undefined
+        cycleId?: string
     ) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
@@ -195,7 +195,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         workspaceSlug: string,
         projectId: string,
         data: Partial<TIssue>,
-        cycleId: string | undefined = undefined
+        cycleId?: string
     ) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
@@ -215,7 +215,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         projectId: string,
         issueId: string,
         data: Partial<TIssue>,
-        cycleId: string | undefined = undefined
+        cycleId?: string
     ) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
@@ -232,7 +232,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        cycleId: string | undefined = undefined
+        cycleId?: string
     ) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
@@ -254,7 +254,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        cycleId: string | undefined = undefined
+        cycleId?: string
     ) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
@@ -274,7 +274,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
-        cycleId: string | undefined = undefined
+        cycleId?: string
     ) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")

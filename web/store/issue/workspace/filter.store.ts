@@ -162,7 +162,7 @@ export class WorkspaceIssuesFilter extends IssueFilterHelperStore implements IWo
         projectId: string | undefined,
         type: EIssueFilterType,
         filters: IIssueFilterOptions | IIssueDisplayFilterOptions | IIssueDisplayProperties | TIssueKanbanFilters,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View id is required")

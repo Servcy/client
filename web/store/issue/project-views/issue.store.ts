@@ -129,7 +129,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         workspaceSlug: string,
         projectId: string,
         loadType: TLoader = "init-loader",
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View Id is required")
@@ -162,7 +162,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         workspaceSlug: string,
         projectId: string,
         data: Partial<TIssue>,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View Id is required")
@@ -185,7 +185,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         projectId: string,
         issueId: string,
         data: Partial<TIssue>,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View Id is required")
@@ -201,7 +201,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View Id is required")
@@ -223,7 +223,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View Id is required")
@@ -243,7 +243,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         workspaceSlug: string,
         projectId: string,
         data: TIssue,
-        viewId: string | undefined = undefined
+        viewId?: string
     ) => {
         try {
             if (!viewId) throw new Error("View Id is required")

@@ -139,7 +139,7 @@ export class ModuleIssuesFilter extends IssueFilterHelperStore implements IModul
         projectId: string,
         type: EIssueFilterType,
         filters: IIssueFilterOptions | IIssueDisplayFilterOptions | IIssueDisplayProperties | TIssueKanbanFilters,
-        moduleId: string | undefined = undefined
+        moduleId?: string
     ) => {
         try {
             if (!moduleId) throw new Error("Module id is required")

@@ -198,7 +198,7 @@ export class ProfileIssues extends IssueHelperStore implements IProfileIssues {
         workspaceSlug: string,
         projectId: string,
         data: Partial<TIssue>,
-        userId: string | undefined = undefined
+        userId?: string
     ) => {
         try {
             if (!userId) throw new Error("user id is required")
@@ -224,7 +224,7 @@ export class ProfileIssues extends IssueHelperStore implements IProfileIssues {
         projectId: string,
         issueId: string,
         data: Partial<TIssue>,
-        userId: string | undefined = undefined
+        userId?: string
     ) => {
         try {
             if (!userId) throw new Error("user id is required")
@@ -241,7 +241,7 @@ export class ProfileIssues extends IssueHelperStore implements IProfileIssues {
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        userId: string | undefined = undefined
+        userId?: string
     ) => {
         if (!userId) return
         try {
@@ -263,7 +263,7 @@ export class ProfileIssues extends IssueHelperStore implements IProfileIssues {
         workspaceSlug: string,
         projectId: string,
         issueId: string,
-        userId: string | undefined = undefined
+        userId?: string
     ) => {
         if (!userId) return
         try {

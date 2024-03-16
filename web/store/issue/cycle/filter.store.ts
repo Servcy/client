@@ -139,7 +139,7 @@ export class CycleIssuesFilter extends IssueFilterHelperStore implements ICycleI
         projectId: string,
         type: EIssueFilterType,
         filters: IIssueFilterOptions | IIssueDisplayFilterOptions | IIssueDisplayProperties | TIssueKanbanFilters,
-        cycleId: string | undefined = undefined
+        cycleId?: string
     ) => {
         try {
             if (!cycleId) throw new Error("Cycle id is required")
