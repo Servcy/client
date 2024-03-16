@@ -29,9 +29,12 @@ export const EstimatesList: React.FC = observer(() => {
     const { resolvedTheme } = useTheme()
     // store hooks
     const { updateProject, currentProjectDetails } = useProject()
-    const { projectEstimates, getProjectEstimateById } = useEstimate()
+    const { projectEstimates, fetchProjectEstimates, getProjectEstimateById } = useEstimate()
     const { currentUser } = useUser()
-
+    const refreshEstimates = () => {
+        if (!workspaceSlug || !projectId) return
+        fetchProjectEstimates(workspaceSlug.toString(), projectId.toString())
+    }
     const editEstimate = (estimate: IEstimate) => {
         setEstimateFormOpen(true)
         // Order the points array by key before updating the estimate to update state
@@ -40,7 +43,6 @@ export const EstimatesList: React.FC = observer(() => {
             points: orderArrayBy(estimate.points, "key"),
         })
     }
-
     const disableEstimates = () => {
         if (!workspaceSlug || !projectId) return
 
@@ -50,7 +52,6 @@ export const EstimatesList: React.FC = observer(() => {
             toast.error(errorString ?? "Estimate could not be disabled. Please try again")
         })
     }
-
     const emptyStateDetail = PROJECT_SETTINGS_EMPTY_STATE_DETAILS["estimate"]
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("project-settings", "estimates", isLightMode)
@@ -60,6 +61,7 @@ export const EstimatesList: React.FC = observer(() => {
             <CreateUpdateEstimateModal
                 isOpen={estimateFormOpen}
                 data={estimateToUpdate}
+                onEstimateCreate={() => refreshEstimates()}
                 handleClose={() => {
                     setEstimateFormOpen(false)
                     setEstimateToUpdate(undefined)

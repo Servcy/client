@@ -19,6 +19,7 @@ type Props = {
     isOpen: boolean
     handleClose: () => void
     data?: IEstimate
+    onEstimateCreate: () => void
 }
 
 const defaultValues = {
@@ -35,7 +36,7 @@ const defaultValues = {
 type FormValues = typeof defaultValues
 
 export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
-    const { handleClose, data, isOpen } = props
+    const { handleClose, data, isOpen, onEstimateCreate } = props
     const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { createEstimate, updateEstimate } = useEstimate()
@@ -61,6 +62,7 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
         await createEstimate(workspaceSlug.toString(), projectId.toString(), payload)
             .then(() => {
                 onClose()
+                onEstimateCreate()
             })
             .catch((err) => {
                 const error = err?.error
