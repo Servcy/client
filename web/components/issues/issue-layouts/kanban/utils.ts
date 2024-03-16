@@ -60,7 +60,7 @@ export const handleDragDrop = async (
     groupBy: string | null,
     issueMap: IIssueMap,
     issueWithIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined,
-    viewId: string | null = null // it can be moduleId, cycleId
+    viewId: string | null = null, // it can be moduleId, cycleId
 ) => {
     if (!issueMap || !issueWithIds || !source || !destination || !workspaceSlug) return
 
