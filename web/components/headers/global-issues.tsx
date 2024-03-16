@@ -1,9 +1,8 @@
-import Link from "next/link"
 import { useParams } from "next/navigation"
 
 import { useCallback, useState } from "react"
 
-import { List, PlusIcon, Sheet } from "lucide-react"
+import { PlusIcon } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
@@ -17,12 +16,7 @@ import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types"
-import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon, Tooltip } from "@servcy/ui"
-
-const GLOBAL_VIEW_LAYOUTS = [
-    { key: "list", title: "List", link: "/workspace-views", icon: List },
-    { key: "spreadsheet", title: "Spreadsheet", link: "/workspace-views/all-issues", icon: Sheet },
-]
+import { Breadcrumbs, Button, LayersIcon, PhotoFilterIcon } from "@servcy/ui"
 
 type Props = {
     activeLayout: "list" | "spreadsheet"
@@ -127,30 +121,6 @@ export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
                     </Breadcrumbs>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-1 rounded bg-custom-background-80 p-1">
-                        {GLOBAL_VIEW_LAYOUTS.map((layout) => (
-                            <Link key={layout.key} href={`/${workspaceSlug}/${layout.link}`}>
-                                <span>
-                                    <Tooltip tooltipContent={layout.title}>
-                                        <div
-                                            className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${
-                                                activeLayout === layout.key
-                                                    ? "bg-custom-background-100 shadow-custom-shadow-2xs"
-                                                    : ""
-                                            }`}
-                                        >
-                                            <layout.icon
-                                                size={14}
-                                                strokeWidth={2}
-                                                className={`${activeLayout === layout.key ? "text-custom-text-100" : "text-custom-text-200"}`}
-                                            />
-                                        </div>
-                                    </Tooltip>
-                                </span>
-                            </Link>
-                        ))}
-                    </div>
-
                     {activeLayout === "spreadsheet" && (
                         <>
                             <FiltersDropdown title="Filters" placement="bottom-end">
