@@ -85,7 +85,7 @@ export class EstimateStore implements IEstimateStore {
         const projectId = this.rootStore.app.router.projectId
         const worksapceSlug = this.rootStore.app.router.workspaceSlug || ""
         if (!projectId || !(this.fetchedMap[projectId] || this.fetchedMap[worksapceSlug])) return null
-        return Object.values(this.estimateMap).filter((estimate) => estimate.project.toString() === projectId)
+        return Object.values(this.estimateMap).filter((estimate) => estimate.project.toString() === String(projectId))
     }
 
     /**

@@ -85,7 +85,7 @@ export class LabelStore implements ILabelStore {
         const worksapceSlug = this.rootStore.app.router.workspaceSlug || ""
         if (!currentWorkspaceDetails || !this.fetchedMap[worksapceSlug]) return []
         return sortBy(
-            Object.values(this.labelMap).filter((label) => label.workspace_id.toString() === currentWorkspaceDetails.id),
+            Object.values(this.labelMap).filter((label) => label.workspace_id.toString() === String(currentWorkspaceDetails.id)),
             "sort_order"
         )
     }
@@ -98,7 +98,7 @@ export class LabelStore implements ILabelStore {
         const worksapceSlug = this.rootStore.app.router.workspaceSlug || ""
         if (!projectId || !(this.fetchedMap[projectId] || this.fetchedMap[worksapceSlug])) return []
         return sortBy(
-            Object.values(this.labelMap).filter((label) => label.project_id.toString() === projectId),
+            Object.values(this.labelMap).filter((label) => label.project_id.toString() === String(projectId)),
             "sort_order"
         )
     }
@@ -115,7 +115,7 @@ export class LabelStore implements ILabelStore {
         const worksapceSlug = this.rootStore.app.router.workspaceSlug || ""
         if (!projectId || !(this.fetchedMap[projectId] || this.fetchedMap[worksapceSlug])) return
         return sortBy(
-            Object.values(this.labelMap).filter((label) => label.project_id === projectId),
+            Object.values(this.labelMap).filter((label) => label.project_id.toString() === String(projectId)),
             "sort_order"
         )
     })

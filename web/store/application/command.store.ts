@@ -72,7 +72,6 @@ export class CommandPaletteStore implements ICommandPaletteStore {
             isBulkDeleteIssueModalOpen: observable.ref,
             // computed
             isAnyModalOpen: computed,
-            // projectPages: computed,
             // toggle actions
             toggleCommandPaletteModal: action,
             toggleShortcutModal: action,

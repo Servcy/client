@@ -78,7 +78,7 @@ export class ProjectViewStore implements IProjectViewStore {
         const projectId = this.rootStore.app.router.projectId
         if (!projectId || !this.fetchedMap[projectId]) return null
         const viewIds = Object.keys(this.viewMap ?? {})?.filter(
-            (viewId) => this.viewMap?.[viewId]?.project === projectId
+            (viewId) => this.viewMap?.[viewId]?.project.toString() === String(projectId)
         )
         return viewIds
     }

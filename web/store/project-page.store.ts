@@ -120,7 +120,7 @@ export class ProjectPageStore implements IProjectPageStore {
         const publicPages: string[] = this.projectPageIds.filter(
             (page) =>
                 this.projectPageMap[projectId][page].access === 0 &&
-                this.projectPageMap[projectId][page].owned_by === userId
+                this.projectPageMap[projectId][page].owned_by.toString() === String(userId)
         )
         return publicPages
     }

@@ -62,7 +62,7 @@ export class GlobalViewStore implements IGlobalViewStore {
         const currentWorkspaceId = currentWorkspaceDetails.id
         return (
             Object.keys(this.globalViewMap ?? {})?.filter(
-                (viewId) => this.globalViewMap[viewId]?.workspace === currentWorkspaceId
+                (viewId) => this.globalViewMap[viewId]?.workspace.toString() === String(currentWorkspaceId)
             ) ?? null
         )
     }
