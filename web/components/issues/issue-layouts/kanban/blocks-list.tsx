@@ -8,7 +8,7 @@ import { IIssueDisplayProperties, IIssueMap, TIssue } from "@servcy/types"
 import { EIssueActions } from "../types"
 
 interface IssueBlocksListProps {
-    sub_group_id: string
+    sub_group_id?: string
     columnId: string
     issuesMap: IIssueMap
     peekIssueId?: string
@@ -45,7 +45,7 @@ const KanbanIssueBlocksListMemo: React.FC<IssueBlocksListProps> = (props) => {
                     {issueIds.map((issueId, index) => {
                         if (!issueId) return null
 
-                        let draggableId = issueId
+                        let draggableId = `${issueId}`
                         if (columnId) draggableId = `${draggableId}__${columnId}`
                         if (sub_group_id) draggableId = `${draggableId}__${sub_group_id}`
 

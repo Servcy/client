@@ -26,7 +26,7 @@ interface IKanbanGroup {
     displayProperties: IIssueDisplayProperties | undefined
     sub_group_by: string | null
     group_by: string | null
-    sub_group_id: string
+    sub_group_id?: string
     isDragDisabled: boolean
     handleIssues: (issue: TIssue, action: EIssueActions) => void
     quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
@@ -73,7 +73,7 @@ export const KanbanGroup = (props: IKanbanGroup) => {
         groupByKey: string | null,
         subGroupByKey: string | null,
         groupValue: string,
-        subGroupValue: string
+        subGroupValue?: string
     ) => {
         const defaultState = projectState.projectStates?.find((state) => state.default)
         let preloadedData: object = { state_id: defaultState?.id }

@@ -40,7 +40,7 @@ export interface IGroupByKanBan {
     displayProperties: IIssueDisplayProperties | undefined
     sub_group_by: string | null
     group_by: string | null
-    sub_group_id: string
+    sub_group_id?: string
     isDragDisabled: boolean
     handleIssues: (issue: TIssue, action: EIssueActions) => void
     quickActions: (issue: TIssue, customActionButton?: React.ReactElement) => React.ReactNode
@@ -70,7 +70,7 @@ const GroupByKanBan: React.FC<IGroupByKanBan> = observer((props) => {
         displayProperties,
         sub_group_by,
         group_by,
-        sub_group_id = "null",
+        sub_group_id = undefined,
         isDragDisabled,
         handleIssues,
         quickActions,
@@ -212,7 +212,7 @@ export const KanBan: React.FC<IKanBan> = observer((props) => {
         displayProperties,
         sub_group_by,
         group_by,
-        sub_group_id = "null",
+        sub_group_id = undefined,
         handleIssues,
         quickActions,
         kanbanFilters,
