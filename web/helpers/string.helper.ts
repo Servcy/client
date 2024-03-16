@@ -115,7 +115,6 @@ export const getFirstCharacters = (str: string) => {
  * @example:
  * const html = "<p>Some text</p>";
  * const text = stripHTML(html);
- * console.log(text); // Some text
  */
 
 export const stripHTML = (html: string) => {
@@ -128,7 +127,6 @@ export const stripHTML = (html: string) => {
  * @example:
  * const html = "<p>Some text</p>";
  * const text = stripAndTruncateHTML(html);
- * console.log(text); // Some text
  */
 
 export const stripAndTruncateHTML = (html: string, length: number = 55) => truncateText(stripHTML(html), length)
@@ -140,7 +138,6 @@ export const stripAndTruncateHTML = (html: string, length: number = 55) => trunc
  * @example:
  * const number = 100;
  * const text = getNumberCount(number);
- * console.log(text); // 99+
  */
 
 export const getNumberCount = (number: number): string => {

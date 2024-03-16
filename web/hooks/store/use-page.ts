@@ -11,7 +11,6 @@ export const usePage = (pageId: string) => {
 
     const { projectId, workspaceSlug } = context.app.router
     if (!projectId || !workspaceSlug) {
-        console.log("usePage must be used within ProjectProvider")
         return
     }
 

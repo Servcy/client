@@ -77,7 +77,7 @@ const OnboardingPage = observer(() => {
                 })
             })
             .catch((error) => {
-                console.log(error)
+                console.error(error)
             })
         router.push("/")
     }

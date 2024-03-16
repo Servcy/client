@@ -6,6 +6,6 @@ export const trackEvent = (eventName: string, payload: object | [] | null = null
             ...payload,
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }

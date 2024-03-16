@@ -130,7 +130,6 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
 
     const onDragEnd = async (result: DropResult) => {
         setIsDragStarted(false)
-        console.log("megham-debug: onDragEnd -> result", result)
         if (!result) return
         if (
             result.destination &&

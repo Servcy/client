@@ -178,7 +178,7 @@ export class ProjectStore implements IProjectStore {
             })
             return projectsResponse
         } catch (error) {
-            console.log("Failed to fetch project from workspace store")
+            console.error("Failed to fetch project from workspace store")
             throw error
         }
     }
@@ -197,7 +197,7 @@ export class ProjectStore implements IProjectStore {
             })
             return response
         } catch (error) {
-            console.log("Error while fetching project details", error)
+            console.error("Error while fetching project details", error)
             throw error
         }
     }
@@ -238,7 +238,7 @@ export class ProjectStore implements IProjectStore {
             const response = await this.projectService.addProjectToFavorites(workspaceSlug, projectId)
             return response
         } catch (error) {
-            console.log("Failed to add project to favorite")
+            console.error("Failed to add project to favorite")
             runInAction(() => {
                 set(this.projectMap, [projectId, "is_favorite"], false)
             })
@@ -263,7 +263,7 @@ export class ProjectStore implements IProjectStore {
             await this.fetchProjects(workspaceSlug)
             return response
         } catch (error) {
-            console.log("Failed to add project to favorite")
+            console.error("Failed to add project to favorite")
             runInAction(() => {
                 set(this.projectMap, [projectId, "is_favorite"], true)
             })
@@ -290,7 +290,7 @@ export class ProjectStore implements IProjectStore {
             runInAction(() => {
                 set(this.projectMap, [projectId, "sort_order"], currentProjectSortOrder)
             })
-            console.log("Failed to update sort order of the projects")
+            console.error("Failed to update sort order of the projects")
             throw error
         }
     }
@@ -314,7 +314,7 @@ export class ProjectStore implements IProjectStore {
             })
             return response
         } catch (error) {
-            console.log("Failed to create project from project store")
+            console.error("Failed to create project from project store")
             throw error
         }
     }
@@ -335,7 +335,7 @@ export class ProjectStore implements IProjectStore {
             const response = await this.projectService.updateProject(workspaceSlug, projectId, data)
             return response
         } catch (error) {
-            console.log("Failed to create project from project store")
+            console.error("Failed to create project from project store")
             this.fetchProjects(workspaceSlug)
             this.fetchProjectDetails(workspaceSlug, projectId)
             throw error
@@ -356,7 +356,7 @@ export class ProjectStore implements IProjectStore {
                 delete this.projectMap[projectId]
             })
         } catch (error) {
-            console.log("Failed to delete project from project store")
+            console.error("Failed to delete project from project store")
             this.fetchProjects(workspaceSlug)
         }
     }

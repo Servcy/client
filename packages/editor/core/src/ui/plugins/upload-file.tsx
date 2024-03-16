@@ -153,7 +153,7 @@ const UploadImageHandler = (file: File, uploadFile: UploadFile): Promise<string>
         };
       } catch (error) {
         if (error instanceof Error) {
-          console.log(error.message);
+          console.error(error.message);
         }
         reject(error);
       }
