@@ -130,9 +130,8 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
 
     const onDragEnd = async (result: DropResult) => {
         setIsDragStarted(false)
-
+        console.log("megham-debug: onDragEnd -> result", result)
         if (!result) return
-
         if (
             result.destination &&
             result.source &&
@@ -142,35 +141,32 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
             result.destination.index === result.source.index
         )
             return
-
-        if (handleDragDrop) {
-            if (
-                result.destination?.droppableId &&
-                result.destination?.droppableId.split("__")[0] === "issue-trash-box"
-            ) {
-                setDragState({
-                    ...dragState,
-                    source: result.source,
-                    destination: result.destination,
-                })
-                setDeleteIssueModal(true)
-            } else {
-                await handleDragDrop(
-                    result.source,
-                    result.destination,
-                    workspaceSlug?.toString(),
-                    projectId?.toString(),
-                    issues,
-                    sub_group_by,
-                    group_by,
-                    issueMap,
-                    issueIds,
-                    viewId
-                ).catch((err) => {
-                    toast.error(err.detail ?? "Failed to perform this action")
-                })
-            }
+        if (!handleDragDrop) return
+        if (
+            result.destination?.droppableId &&
+            result.destination?.droppableId.split("__")[0] === "issue-trash-box"
+        ) {
+            setDragState({
+                ...dragState,
+                source: result.source,
+                destination: result.destination,
+            })
+            setDeleteIssueModal(true)
+            return
         }
+        await handleDragDrop(
+            result.source,
+            result.destination,
+            workspaceSlug?.toString(),
+            issues,
+            sub_group_by,
+            group_by,
+            issueMap,
+            issueIds,
+            viewId
+        ).catch((err) => {
+            toast.error(err.detail ?? "Failed to perform this action")
+        })
     }
 
     const handleIssues = useCallback(
@@ -221,7 +217,6 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
             dragState.source,
             dragState.destination,
             workspaceSlug?.toString(),
-            projectId?.toString(),
             issues,
             sub_group_by,
             group_by,
@@ -288,18 +283,18 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
                         >
                             <Droppable droppableId="issue-trash-box" isDropDisabled={!isDragStarted}>
                                 {(provided, snapshot) => (
-                                    <div
-                                        className={`${
-                                            isDragStarted ? `opacity-100` : `opacity-0`
-                                        } flex w-full items-center justify-center rounded border-2 border-red-500/20 bg-custom-background-100 px-3 py-5 text-xs font-medium italic text-red-500 ${
-                                            snapshot.isDraggingOver ? "bg-red-500 opacity-70 blur-2xl" : ""
-                                        } transition duration-300`}
-                                        ref={provided.innerRef}
-                                        {...provided.droppableProps}
-                                    >
-                                        Drop here to delete the issue.
-                                    </div>
-                                )}
+                                        <div
+                                            className={`${
+                                                isDragStarted ? `opacity-100` : `opacity-0`
+                                            } flex w-full items-center justify-center rounded border-2 border-red-500/20 bg-custom-background-100 px-3 py-5 text-xs font-medium italic text-red-500 ${
+                                                snapshot.isDraggingOver ? "bg-red-500 opacity-70 blur-2xl" : ""
+                                            } transition duration-300`}
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps}
+                                        >
+                                            Drop here to delete the issue.
+                                        </div>
+                                    )}
                             </Droppable>
                         </div>
 

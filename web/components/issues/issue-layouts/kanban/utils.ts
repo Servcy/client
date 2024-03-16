@@ -50,7 +50,6 @@ export const handleDragDrop = async (
     source: DraggableLocation | null | undefined,
     destination: DraggableLocation | null | undefined,
     workspaceSlug: string | undefined,
-    projectId: string | undefined, // projectId for all views or user id in profile issues
     store:
         | IProjectIssues
         | ICycleIssues
@@ -66,7 +65,7 @@ export const handleDragDrop = async (
     issueWithIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined,
     viewId: string | null = null // it can be moduleId, cycleId
 ) => {
-    if (!issueMap || !issueWithIds || !source || !destination || !workspaceSlug || !projectId) return
+    if (!issueMap || !issueWithIds || !source || !destination || !workspaceSlug) return
 
     let updateIssue: any = {}
 
@@ -86,7 +85,6 @@ export const handleDragDrop = async (
 
     if (
         !workspaceSlug ||
-        !projectId ||
         !groupBy ||
         !sourceGroupByColumnId ||
         !destinationGroupByColumnId ||
@@ -104,8 +102,8 @@ export const handleDragDrop = async (
 
         if (removed) {
             if (viewId)
-                return await store?.removeIssue(workspaceSlug, projectId, removed) //, viewId);
-            else return await store?.removeIssue(workspaceSlug, projectId, removed)
+                return await store?.removeIssue(workspaceSlug, issueMap[removed]?.project_id, removed)
+            else return await store?.removeIssue(workspaceSlug, issueMap[removed]?.project_id, removed)
         }
     } else {
         //spreading the array to stop changing the original reference
