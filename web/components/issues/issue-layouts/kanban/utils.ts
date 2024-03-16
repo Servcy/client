@@ -6,7 +6,6 @@ import { IModuleIssues } from "@store/issue/module"
 import { IProfileIssues } from "@store/issue/profile"
 import { IProjectIssues } from "@store/issue/project"
 import { IProjectViewIssues } from "@store/issue/project-views"
-import { IWorkspaceIssues } from "@store/issue/workspace"
 
 import { IIssueMap, TGroupedIssues, TSubGroupedIssues, TUnGroupedIssues } from "@servcy/types"
 
@@ -55,10 +54,8 @@ export const handleDragDrop = async (
         | ICycleIssues
         | IDraftIssues
         | IModuleIssues
-        | IDraftIssues
         | IProjectViewIssues
-        | IProfileIssues
-        | IWorkspaceIssues,
+        | IProfileIssues,
     subGroupBy: string | null,
     groupBy: string | null,
     issueMap: IIssueMap,
@@ -67,7 +64,7 @@ export const handleDragDrop = async (
 ) => {
     if (!issueMap || !issueWithIds || !source || !destination || !workspaceSlug) return
 
-    let updateIssue: any = {}
+    let updatedIssue: any = {}
 
     const sourceDroppableId = source?.droppableId
     const destinationDroppableId = destination?.droppableId
@@ -97,14 +94,9 @@ export const handleDragDrop = async (
         const sourceIssues: string[] = subGroupBy
             ? ((issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[sourceGroupByColumnId] as string[])
             : ((issueWithIds as TGroupedIssues)[sourceGroupByColumnId] as string[])
-
         const [removed] = sourceIssues.splice(source.index, 1)
-
-        if (removed) {
-            if (viewId)
-                return await store?.removeIssue(workspaceSlug, issueMap[removed]?.project_id, removed)
-            else return await store?.removeIssue(workspaceSlug, issueMap[removed]?.project_id, removed)
-        }
+        if (removed)
+            return await store?.removeIssue(workspaceSlug, issueMap[removed]?.project_id, removed)
     } else {
         //spreading the array to stop changing the original reference
         //since we are removing an id from array further down
@@ -118,16 +110,16 @@ export const handleDragDrop = async (
             : (issueWithIds as TGroupedIssues)[destinationGroupByColumnId]
 
         const [removed] = sourceIssues.splice(source.index, 1)
-        const removedIssueDetail = issueMap[removed ?? ""]
+        const removedIssueDetail = issueMap[removed]
 
-        updateIssue = {
+        updatedIssue = {
             id: removedIssueDetail?.id,
             project_id: removedIssueDetail?.project_id,
         }
 
         // for both horizontal and vertical dnd
-        updateIssue = {
-            ...updateIssue,
+        updatedIssue = {
+            ...updatedIssue,
             ...handleSortOrder(
                 sourceDroppableId === destinationDroppableId ? sourceIssues : (destinationIssues as string[]),
                 destination.index,
@@ -138,19 +130,19 @@ export const handleDragDrop = async (
         if (subGroupBy && sourceSubGroupByColumnId && destinationSubGroupByColumnId) {
             if (sourceSubGroupByColumnId === destinationSubGroupByColumnId) {
                 if (sourceGroupByColumnId != destinationGroupByColumnId) {
-                    if (groupBy === "state") updateIssue = { ...updateIssue, state_id: destinationGroupByColumnId }
-                    if (groupBy === "priority") updateIssue = { ...updateIssue, priority: destinationGroupByColumnId }
+                    if (groupBy === "state") updatedIssue = { ...updatedIssue, state_id: destinationGroupByColumnId }
+                    if (groupBy === "priority") updatedIssue = { ...updatedIssue, priority: destinationGroupByColumnId }
                 }
             } else {
                 if (subGroupBy === "state")
-                    updateIssue = {
-                        ...updateIssue,
+                    updatedIssue = {
+                        ...updatedIssue,
                         state_id: destinationSubGroupByColumnId,
                         priority: destinationGroupByColumnId,
                     }
                 if (subGroupBy === "priority")
-                    updateIssue = {
-                        ...updateIssue,
+                    updatedIssue = {
+                        ...updatedIssue,
                         state_id: destinationGroupByColumnId,
                         priority: destinationSubGroupByColumnId,
                     }
@@ -158,21 +150,21 @@ export const handleDragDrop = async (
         } else {
             // for horizontal dnd
             if (sourceColumnId != destinationColumnId) {
-                if (groupBy === "state") updateIssue = { ...updateIssue, state_id: destinationGroupByColumnId }
-                if (groupBy === "priority") updateIssue = { ...updateIssue, priority: destinationGroupByColumnId }
+                if (groupBy === "state") updatedIssue = { ...updatedIssue, state_id: destinationGroupByColumnId }
+                if (groupBy === "priority") updatedIssue = { ...updatedIssue, priority: destinationGroupByColumnId }
             }
         }
 
-        if (updateIssue && updateIssue?.id) {
+        if (updatedIssue && updatedIssue?.id) {
             if (viewId)
                 return await store?.updateIssue(
                     workspaceSlug,
-                    updateIssue.project_id,
-                    updateIssue.id,
-                    updateIssue,
+                    updatedIssue.project_id,
+                    updatedIssue.id,
+                    updatedIssue,
                     viewId
                 )
-            else return await store?.updateIssue(workspaceSlug, updateIssue.project_id, updateIssue.id, updateIssue)
+            else return await store?.updateIssue(workspaceSlug, updatedIssue.project_id, updatedIssue.id, updatedIssue)
         }
     }
 }
