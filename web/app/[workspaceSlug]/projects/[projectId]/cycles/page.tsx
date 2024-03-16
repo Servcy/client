@@ -68,15 +68,6 @@ const ProjectCyclesPage = observer(() => {
 
     if (!workspaceSlug || !projectId) return null
 
-    if (loader)
-        return (
-            <>
-                {cycleLayout === "list" && <CycleModuleListLayout />}
-                {cycleLayout === "board" && <CycleModuleBoardLayout />}
-                {cycleLayout === "gantt" && <GanttLayoutLoader />}
-            </>
-        )
-
     return (
         <AppWrapper header={<CyclesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
@@ -87,7 +78,13 @@ const ProjectCyclesPage = observer(() => {
                     isOpen={createModal}
                     handleClose={() => setCreateModal(false)}
                 />
-                {totalCycles === 0 ? (
+                {loader? (
+                    <>
+                    {cycleLayout === "list" && <CycleModuleListLayout />}
+                    {cycleLayout === "board" && <CycleModuleBoardLayout />}
+                    {cycleLayout === "gantt" && <GanttLayoutLoader />}
+                </>
+                ):totalCycles === 0 ? (
                     <div className="h-full place-items-center">
                         <EmptyState
                             title={CYCLE_EMPTY_STATE_DETAILS["cycles"].title}
