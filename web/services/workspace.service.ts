@@ -239,7 +239,7 @@ export class WorkspaceService extends APIService {
 
     async getAllViews(workspaceSlug: string): Promise<IWorkspaceView[]> {
         return this.get(`/project/${workspaceSlug}/views/`)
-            .then((response) => response?.data)
+            .then((response) => response?.data?.results)
             .catch((error) => {
                 throw error?.response?.data
             })
