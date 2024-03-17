@@ -119,7 +119,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                                 return null
 
                             return (
-                                <CustomSelect.Option key={key} value={parseInt(key, 0)}>
+                                <CustomSelect.Option key={key} value={parseInt(key, 10)}>
                                     <>{ROLES[parseInt(key) as keyof typeof ROLES]}</>
                                 </CustomSelect.Option>
                             )
