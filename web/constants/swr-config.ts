@@ -4,5 +4,5 @@ export const SWR_CONFIG = {
     revalidateOnFocus: true,
     revalidateOnMount: true,
     refreshInterval: 600000,
-    errorRetryCount: 3,
+    errorRetryCount: 1,
 }

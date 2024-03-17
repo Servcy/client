@@ -34,7 +34,7 @@ export const DraftIssueLayoutRoot: React.FC = observer(() => {
                 )
             }
         },
-        { revalidateIfStale: false, revalidateOnFocus: false }
+        { revalidateIfStale: false }
     )
 
     const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout || undefined
