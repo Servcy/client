@@ -129,7 +129,7 @@ export class ModulesStore implements IModuleStore {
     getProjectModuleIds = computedFn((projectId: string) => {
         if (!this.fetchedMap[projectId]) return null
 
-        let projectModules = Object.values(this.moduleMap).filter((m) => m.project_id === projectId)
+        let projectModules = Object.values(this.moduleMap).filter((m) => m.project_id.toString() === String(projectId))
         projectModules = sortBy(projectModules, [(m) => m.sort_order])
         const projectModuleIds = projectModules.map((m) => m.id)
         return projectModuleIds

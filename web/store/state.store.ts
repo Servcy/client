@@ -81,7 +81,9 @@ export class StateStore implements IStateStore {
         const projectId = this.router.projectId
         const worksapceSlug = this.router.workspaceSlug || ""
         if (!projectId || !(this.fetchedMap[projectId] || this.fetchedMap[worksapceSlug])) return
-        return sortStates(Object.values(this.stateMap).filter((state) => state.project_id.toString() === String(projectId)))
+        return sortStates(
+            Object.values(this.stateMap).filter((state) => state.project_id.toString() === String(projectId))
+        )
     }
 
     /**
@@ -109,7 +111,9 @@ export class StateStore implements IStateStore {
     getProjectStates = computedFn((projectId: string) => {
         const worksapceSlug = this.router.workspaceSlug || ""
         if (!projectId || !(this.fetchedMap[projectId] || this.fetchedMap[worksapceSlug])) return
-        const results = sortStates(Object.values(this.stateMap).filter((state) => state.project_id === projectId))
+        const results = sortStates(
+            Object.values(this.stateMap).filter((state) => state.project_id.toString() === String(projectId))
+        )
         return results
     })
 
@@ -212,7 +216,7 @@ export class StateStore implements IStateStore {
     markStateAsDefault = async (workspaceSlug: string, projectId: string, stateId: string) => {
         const originalStates = this.stateMap
         const currentDefaultState = Object.values(this.stateMap).find(
-            (state) => state.project_id === projectId && state.default
+            (state) => state.project_id.toString() === String(projectId) && state.default
         )
         try {
             runInAction(() => {
