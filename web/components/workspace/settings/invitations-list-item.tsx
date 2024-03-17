@@ -99,7 +99,8 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                         }
                         value={invitationDetails.role}
                         onChange={(value: ERoles) => {
-                            if (!workspaceSlug || !value) return
+                            if (!workspaceSlug) return
+                            if (!(value in ROLES)) return
 
                             updateMemberInvitation(workspaceSlug.toString(), invitationDetails.id, {
                                 role: value,

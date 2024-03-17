@@ -151,7 +151,8 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                         }
                         value={memberDetails.role}
                         onChange={(value: ERoles) => {
-                            if (!workspaceSlug || !value) return
+                            if (!workspaceSlug) return
+                            if (!(value in ROLES)) return
 
                             updateMember(workspaceSlug.toString(), memberDetails.member.id, {
                                 role: value,
