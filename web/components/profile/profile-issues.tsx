@@ -52,7 +52,7 @@ export const ProfileIssuesPage = observer((props: IProfileIssuesPage) => {
                 await fetchIssues(workspaceSlug, undefined, groupedIssueIds ? "mutation" : "init-loader", userId, type)
             }
         },
-        { revalidateIfStale: false, revalidateOnFocus: false }
+        { revalidateIfStale: false }
     )
 
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"

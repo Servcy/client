@@ -33,7 +33,7 @@ const BillingSettingsPage = observer(() => {
     useSWR(
         workspaceSlug ? `WORKSPACE_MEMBERS_ME_${workspaceSlug}` : null,
         workspaceSlug ? () => fetchUserWorkspaceInfo(workspaceSlug.toString()) : null,
-        { revalidateIfStale: false, revalidateOnFocus: false }
+        { revalidateIfStale: false }
     )
 
     if (!isAdmin)

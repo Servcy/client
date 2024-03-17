@@ -29,25 +29,25 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
     useSWR(
         workspaceSlug ? `WORKSPACE_MEMBERS_ME_${workspaceSlug}` : null,
         workspaceSlug ? () => membership.fetchUserWorkspaceInfo(workspaceSlug.toString()) : null,
-        { revalidateIfStale: false, revalidateOnFocus: false }
+        { revalidateIfStale: false }
     )
     // fetching workspace projects
     useSWR(
         workspaceSlug ? `WORKSPACE_PROJECTS_${workspaceSlug}` : null,
         workspaceSlug ? () => fetchProjects(workspaceSlug.toString()) : null,
-        { revalidateIfStale: false, revalidateOnFocus: false, refreshInterval: 60000 }
+        { revalidateIfStale: false }
     )
     // fetch workspace members
     useSWR(
         workspaceSlug ? `WORKSPACE_MEMBERS_${workspaceSlug}` : null,
         workspaceSlug ? () => fetchWorkspaceMembers(workspaceSlug.toString()) : null,
-        { revalidateIfStale: false, revalidateOnFocus: false }
+        { revalidateIfStale: false }
     )
     // fetch workspace user projects role
     useSWR(
         workspaceSlug ? `WORKSPACE_PROJECTS_ROLE_${workspaceSlug}` : null,
         workspaceSlug ? () => membership.fetchUserWorkspaceProjectsRole(workspaceSlug.toString()) : null,
-        { revalidateIfStale: false, revalidateOnFocus: false }
+        { revalidateIfStale: false }
     )
 
     // while data is being loaded
