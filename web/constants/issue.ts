@@ -58,7 +58,6 @@ export const ISSUE_GROUP_BY_OPTIONS: {
     { key: "project", title: "Project" }, // required this on my issues
     { key: "cycle", title: "Cycle" }, // required this on my issues
     { key: "module", title: "Module" }, // required this on my issues
-    { key: "labels", title: "Labels" },
     { key: "assignees", title: "Assignees" },
     { key: "created_by", title: "Created By" },
     { key: null, title: "None" },
@@ -148,7 +147,7 @@ export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
             filters: ["priority", "state_group", "labels", "start_date", "target_date"],
             display_properties: true,
             display_filters: {
-                group_by: ["state_detail.group", "priority", "project", "labels", null],
+                group_by: ["state_detail.group", "priority", "project", null],
                 order_by: ["sort_order", "-created_at", "-updated_at", "start_date", "-priority"],
                 type: [null, "active", "backlog"],
             },
@@ -161,7 +160,7 @@ export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
             filters: ["priority", "state_group", "labels", "start_date", "target_date"],
             display_properties: true,
             display_filters: {
-                group_by: ["state_detail.group", "priority", "project", "labels"],
+                group_by: ["state_detail.group", "priority", "project"],
                 order_by: ["sort_order", "-created_at", "-updated_at", "start_date", "-priority"],
                 type: [null, "active", "backlog"],
             },
@@ -192,7 +191,6 @@ export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
                     "module",
                     "state_detail.group",
                     "priority",
-                    "labels",
                     "assignees",
                     "created_by",
                     null,
@@ -211,7 +209,7 @@ export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
             filters: ["priority", "state_group", "cycle", "module", "labels", "start_date", "target_date"],
             display_properties: true,
             display_filters: {
-                group_by: ["state_detail.group", "cycle", "module", "priority", "project", "labels", null],
+                group_by: ["state_detail.group", "cycle", "module", "priority", "project", null],
                 order_by: ["sort_order", "-created_at", "-updated_at", "start_date", "-priority"],
                 type: [null, "active", "backlog"],
             },
@@ -224,7 +222,7 @@ export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
             filters: ["priority", "state_group", "cycle", "module", "labels", "start_date", "target_date"],
             display_properties: true,
             display_filters: {
-                group_by: ["state_detail.group", "cycle", "module", "priority", "project", "labels"],
+                group_by: ["state_detail.group", "cycle", "module", "priority", "project"],
                 order_by: ["sort_order", "-created_at", "-updated_at", "start_date", "-priority"],
                 type: [null, "active", "backlog"],
             },
@@ -294,7 +292,7 @@ export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
             ],
             display_properties: true,
             display_filters: {
-                group_by: ["state", "priority", "cycle", "module", "labels", "assignees", "created_by", null],
+                group_by: ["state", "priority", "cycle", "module", "assignees", "created_by", null],
                 order_by: ["sort_order", "-created_at", "-updated_at", "start_date", "-priority"],
                 type: [null, "active", "backlog"],
             },
@@ -318,8 +316,8 @@ export const ISSUE_DISPLAY_FILTERS_BY_LAYOUT: {
             ],
             display_properties: true,
             display_filters: {
-                group_by: ["state", "priority", "cycle", "module", "labels", "assignees", "created_by"],
-                sub_group_by: ["state", "priority", "cycle", "module", "labels", "assignees", "created_by", null],
+                group_by: ["state", "priority", "cycle", "module", "assignees", "created_by"],
+                sub_group_by: ["state", "priority", "cycle", "module", "assignees", "created_by", null],
                 order_by: ["sort_order", "-created_at", "-updated_at", "start_date", "-priority", "target_date"],
                 type: [null, "active", "backlog"],
             },
