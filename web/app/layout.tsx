@@ -4,7 +4,7 @@ import Blocked from "@components/shared/blocked"
 
 import "@styles/global.css"
 
-import { FC, Suspense, PropsWithChildren } from "react"
+import { FC, PropsWithChildren, Suspense } from "react"
 
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import { Analytics } from "@vercel/analytics/react"
@@ -31,17 +31,34 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
         membership: { currentProjectRole, currentWorkspaceRole },
     } = useUser()
     const { currentWorkspace } = useWorkspace()
-    if (typeof window !== "undefined" && navigator && isMobileDevice(navigator.userAgent))
+    if (typeof window !== "undefined" && navigator && isMobileDevice(navigator.userAgent)) {
         return (
             <div className="flex h-screen justify-center">
                 <Blocked />
             </div>
         )
+    }
     return (
         <html lang="en">
             <body>
                 <ProgressBarProvider>
-                    <Toaster />
+                    <Toaster
+                        toastOptions={{
+                            style: {
+                                background: "#333",
+                                color: "#fff",
+                            },
+                            position: "bottom-right",
+                            success: {
+                                icon: "🎉",
+                                duration: 3000,
+                            },
+                            error: {
+                                icon: "🚧",
+                                duration: 3000,
+                            },
+                        }}
+                    />
                     <Analytics />
                     <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
                         <StoreProvider>
