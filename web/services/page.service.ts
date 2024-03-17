@@ -35,7 +35,7 @@ export class PageService extends APIService {
     }
 
     async addPageToFavorites(workspaceSlug: string, projectId: string, pageId: string): Promise<any> {
-        return this.post(`/project/${workspaceSlug}/${projectId}/pages/favorite/`, {
+        return this.post(`/project/${workspaceSlug}/${projectId}/favorite-pages/`, {
             page: pageId,
         })
             .then((response) => response?.data)

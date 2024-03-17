@@ -74,7 +74,7 @@ export class WorkspaceService extends APIService {
     }
 
     async getLastActiveWorkspaceAndProjects(): Promise<ILastActiveWorkspaceDetails> {
-        return this.get("/iam/me/last/visited/workspace/project")
+        return this.get("/iam/me/last-visited-workspace")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
@@ -175,7 +175,7 @@ export class WorkspaceService extends APIService {
     }
 
     async workspaceSlugCheck(slug: string): Promise<any> {
-        return this.get(`/iam/workspace/slug/check?slug=${slug}`)
+        return this.get(`/iam/workspace-slug-check?slug=${slug}`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

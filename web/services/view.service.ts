@@ -61,7 +61,7 @@ export class ViewService extends APIService {
             view: string
         }
     ): Promise<any> {
-        return this.post(`/project/${workspaceSlug}/${projectId}/views/favorite/`, data)
+        return this.post(`/project/${workspaceSlug}/${projectId}/favorite-view/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data

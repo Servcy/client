@@ -39,7 +39,7 @@ export class UserService extends APIService {
     }
 
     async currentUserEmailNotificationSettings(): Promise<IUserEmailNotificationSettings> {
-        return this.get("/notification/me/preferences")
+        return this.get("/notification/preferences")
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response
@@ -65,7 +65,7 @@ export class UserService extends APIService {
     }
 
     async updateUserTourCompleted(): Promise<any> {
-        return this.patch("/iam/me/tour/completed", {
+        return this.patch("/iam/me/tour-completed", {
             is_tour_completed: true,
         })
             .then((response) => response?.data)
@@ -93,7 +93,7 @@ export class UserService extends APIService {
     }
 
     async updateCurrentUserEmailNotificationSettings(data: Partial<IUserEmailNotificationSettings>): Promise<any> {
-        return this.patch("/notification/me/preferences", data)
+        return this.patch("/notification/preferences", data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
