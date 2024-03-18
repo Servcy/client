@@ -49,18 +49,12 @@ export const handleDragDrop = async (
     source: DraggableLocation | null | undefined,
     destination: DraggableLocation | null | undefined,
     workspaceSlug: string | undefined,
-    store:
-        | IProjectIssues
-        | ICycleIssues
-        | IDraftIssues
-        | IModuleIssues
-        | IProjectViewIssues
-        | IProfileIssues,
+    store: IProjectIssues | ICycleIssues | IDraftIssues | IModuleIssues | IProjectViewIssues | IProfileIssues,
     subGroupBy: string | null,
     groupBy: string | null,
     issueMap: IIssueMap,
     issueWithIds: TGroupedIssues | TSubGroupedIssues | TUnGroupedIssues | undefined,
-    viewId: string | null = null, // it can be moduleId, cycleId
+    viewId: string | null = null // it can be moduleId, cycleId
 ) => {
     if (!issueMap || !issueWithIds || !source || !destination || !workspaceSlug) return
 
@@ -95,8 +89,7 @@ export const handleDragDrop = async (
             ? ((issueWithIds as TSubGroupedIssues)[sourceSubGroupByColumnId]?.[sourceGroupByColumnId] as string[])
             : ((issueWithIds as TGroupedIssues)[sourceGroupByColumnId] as string[])
         const [removed] = sourceIssues.splice(source.index, 1)
-        if (removed)
-            return await store?.removeIssue(workspaceSlug, issueMap[removed]?.project_id, removed)
+        if (removed) return await store?.removeIssue(workspaceSlug, issueMap[removed]?.project_id, removed)
     } else {
         //spreading the array to stop changing the original reference
         //since we are removing an id from array further down

@@ -26,7 +26,12 @@ export interface IProjectIssues {
     removeIssue: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>
     archiveIssue: (workspaceSlug: string, projectId: string, issueId: string) => Promise<void>
     quickAddIssue: (workspaceSlug: string, projectId: string, data: TIssue) => Promise<TIssue>
-    removeBulkIssues: (workspaceSlug: string, projectId: string, issueIds: string[]) => Promise<void>
+    removeBulkIssues: (
+        workspaceSlug: string,
+        payload: {
+            [projectId: string]: TIssue["id"][]
+        }
+    ) => Promise<void>
 }
 
 export class ProjectIssues extends IssueHelperStore implements IProjectIssues {
@@ -207,22 +212,23 @@ export class ProjectIssues extends IssueHelperStore implements IProjectIssues {
         }
     }
 
-    removeBulkIssues = async (workspaceSlug: string, projectId: string, issueIds: string[]) => {
+    /*
+      Remove bulk issues
+      * @param {string} workspaceSlug
+    */
+    removeBulkIssues = async (workspaceSlug: string, payload: { [projectId: string]: TIssue["id"][] }) => {
         try {
             runInAction(() => {
-                issueIds.forEach((issueId) => {
-                    pull(this.issues[projectId], issueId)
-                    this.rootStore.issues.removeIssue(issueId)
+                Object.keys(payload).forEach((projectId: string) => {
+                    payload[projectId].forEach((issueId: string) => {
+                        pull(this.issues[projectId], issueId)
+                        this.rootStore.issues.removeIssue(issueId)
+                    })
                 })
             })
-
-            const response = await this.issueService.bulkDeleteIssues(workspaceSlug, projectId, {
-                issue_ids: issueIds,
-            })
-
+            const response = await this.issueService.bulkDeleteIssues(workspaceSlug, payload)
             return response
         } catch (error) {
-            this.fetchIssues(workspaceSlug, projectId, "mutation")
             throw error
         }
     }

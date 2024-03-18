@@ -158,12 +158,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         }
     }
 
-    createIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        data: Partial<TIssue>,
-        viewId?: string
-    ) => {
+    createIssue = async (workspaceSlug: string, projectId: string, data: Partial<TIssue>, viewId?: string) => {
         try {
             if (!viewId) throw new Error("View Id is required")
 
@@ -197,12 +192,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         }
     }
 
-    removeIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        viewId?: string
-    ) => {
+    removeIssue = async (workspaceSlug: string, projectId: string, issueId: string, viewId?: string) => {
         try {
             if (!viewId) throw new Error("View Id is required")
 
@@ -219,12 +209,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         }
     }
 
-    archiveIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        viewId?: string
-    ) => {
+    archiveIssue = async (workspaceSlug: string, projectId: string, issueId: string, viewId?: string) => {
         try {
             if (!viewId) throw new Error("View Id is required")
 
@@ -239,12 +224,7 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
         }
     }
 
-    quickAddIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        data: TIssue,
-        viewId?: string
-    ) => {
+    quickAddIssue = async (workspaceSlug: string, projectId: string, data: TIssue, viewId?: string) => {
         try {
             if (!viewId) throw new Error("View Id is required")
 

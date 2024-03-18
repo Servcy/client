@@ -178,7 +178,7 @@ const ProfileSettingsPage = observer(() => {
                                                 <ImagePickerPopover
                                                     label={"Change cover"}
                                                     onChange={(imageUrl) => {
-                                                        onChange(imageUrl);
+                                                        onChange(imageUrl)
                                                         handleSubmit(onSubmit)()
                                                     }}
                                                     control={control}

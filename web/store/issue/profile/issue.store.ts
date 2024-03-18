@@ -194,12 +194,7 @@ export class ProfileIssues extends IssueHelperStore implements IProfileIssues {
         }
     }
 
-    createIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        data: Partial<TIssue>,
-        userId?: string
-    ) => {
+    createIssue = async (workspaceSlug: string, projectId: string, data: Partial<TIssue>, userId?: string) => {
         try {
             if (!userId) throw new Error("user id is required")
 
@@ -237,12 +232,7 @@ export class ProfileIssues extends IssueHelperStore implements IProfileIssues {
         }
     }
 
-    removeIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        userId?: string
-    ) => {
+    removeIssue = async (workspaceSlug: string, projectId: string, issueId: string, userId?: string) => {
         if (!userId) return
         try {
             await this.rootIssueStore.projectIssues.removeIssue(workspaceSlug, projectId, issueId)
@@ -259,12 +249,7 @@ export class ProfileIssues extends IssueHelperStore implements IProfileIssues {
         }
     }
 
-    archiveIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        userId?: string
-    ) => {
+    archiveIssue = async (workspaceSlug: string, projectId: string, issueId: string, userId?: string) => {
         if (!userId) return
         try {
             await this.rootIssueStore.projectIssues.archiveIssue(workspaceSlug, projectId, issueId)

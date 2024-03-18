@@ -1,11 +1,13 @@
 import { Combobox } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
 
-import { useProjectState } from "@hooks/store"
+import { useProject, useProjectState } from "@hooks/store"
 
 export const BulkDeleteIssuesModalItem: React.FC<any> = observer((props) => {
-    const { issue, delete_issue_ids, identifier } = props
+    const { issue, delete_issue_ids } = props
+    const { getProjectById } = useProject()
     const { getStateById } = useProjectState()
+    const projectDetails = getProjectById(issue.project_id)
 
     const color = getStateById(issue.state_id)?.color
 
@@ -29,7 +31,7 @@ export const BulkDeleteIssuesModalItem: React.FC<any> = observer((props) => {
                     }}
                 />
                 <span className="flex-shrink-0 text-xs">
-                    {identifier}-{issue.sequence_id}
+                    {projectDetails?.identifier}-{issue.sequence_id}
                 </span>
                 <span>{issue.name}</span>
             </div>
