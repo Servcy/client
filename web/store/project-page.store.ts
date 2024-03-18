@@ -75,8 +75,8 @@ export class ProjectPageStore implements IProjectPageStore {
 
         const allProjectIds = Object.keys(this.projectPageMap[projectId])
         return allProjectIds.sort((a, b) => {
-            const dateA = new Date(this.projectPageMap[projectId][a].created_at).getTime()
-            const dateB = new Date(this.projectPageMap[projectId][b].created_at).getTime()
+            const dateA = new Date(this.projectPageMap[projectId][a]?.created_at).getTime()
+            const dateB = new Date(this.projectPageMap[projectId][b]?.created_at).getTime()
             return dateB - dateA
         })
     }
@@ -86,8 +86,8 @@ export class ProjectPageStore implements IProjectPageStore {
         if (!projectId || !this.projectArchivedPageMap[projectId]) return []
         const archivedPages = Object.keys(this.projectArchivedPageMap[projectId])
         return archivedPages.sort((a, b) => {
-            const dateA = new Date(this.projectArchivedPageMap[projectId][a].created_at).getTime()
-            const dateB = new Date(this.projectArchivedPageMap[projectId][b].created_at).getTime()
+            const dateA = new Date(this.projectArchivedPageMap[projectId][a]?.created_at).getTime()
+            const dateB = new Date(this.projectArchivedPageMap[projectId][b]?.created_at).getTime()
             return dateB - dateA
         })
     }
@@ -97,7 +97,7 @@ export class ProjectPageStore implements IProjectPageStore {
         if (!this.projectPageIds || !projectId) return []
 
         const favouritePages: string[] = this.projectPageIds.filter(
-            (page) => this.projectPageMap[projectId][page].is_favorite
+            (page) => this.projectPageMap[projectId][page]?.is_favorite
         )
         return favouritePages
     }
@@ -107,7 +107,7 @@ export class ProjectPageStore implements IProjectPageStore {
         if (!this.projectPageIds || !projectId) return []
 
         const privatePages: string[] = this.projectPageIds.filter(
-            (page) => this.projectPageMap[projectId][page].access === 1
+            (page) => this.projectPageMap[projectId][page]?.access === 1
         )
         return privatePages
     }
@@ -119,8 +119,8 @@ export class ProjectPageStore implements IProjectPageStore {
 
         const publicPages: string[] = this.projectPageIds.filter(
             (page) =>
-                this.projectPageMap[projectId][page].access === 0 &&
-                this.projectPageMap[projectId][page].owned_by.toString() === String(userId)
+                this.projectPageMap[projectId][page]?.access === 0 &&
+                this.projectPageMap[projectId][page]?.owned_by.toString() === String(userId)
         )
         return publicPages
     }
@@ -130,15 +130,15 @@ export class ProjectPageStore implements IProjectPageStore {
         if (!this.projectPageIds || !projectId) return
 
         const today: string[] = this.projectPageIds.filter((page) =>
-            isToday(new Date(this.projectPageMap[projectId][page].updated_at))
+            isToday(new Date(this.projectPageMap[projectId][page]?.updated_at))
         )
 
         const yesterday: string[] = this.projectPageIds.filter((page) =>
-            isYesterday(new Date(this.projectPageMap[projectId][page].updated_at))
+            isYesterday(new Date(this.projectPageMap[projectId][page]?.updated_at))
         )
 
         const this_week: string[] = this.projectPageIds.filter((page) => {
-            const pageUpdatedAt = this.projectPageMap[projectId][page].updated_at
+            const pageUpdatedAt = this.projectPageMap[projectId][page]?.updated_at
             return (
                 isThisWeek(new Date(pageUpdatedAt)) &&
                 !isToday(new Date(pageUpdatedAt)) &&
@@ -147,7 +147,7 @@ export class ProjectPageStore implements IProjectPageStore {
         })
 
         const older: string[] = this.projectPageIds.filter((page) => {
-            const pageUpdatedAt = this.projectPageMap[projectId][page].updated_at
+            const pageUpdatedAt = this.projectPageMap[projectId][page]?.updated_at
             return !isThisWeek(new Date(pageUpdatedAt)) && !isYesterday(new Date(pageUpdatedAt))
         })
 
