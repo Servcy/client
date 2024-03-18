@@ -1,3 +1,5 @@
+import { useParams } from "next/navigation"
+
 import { FC, useCallback } from "react"
 
 import { observer } from "mobx-react-lite"
@@ -67,9 +69,9 @@ export const BaseListRoot = observer((props: IBaseListRoot) => {
     } = props
     // mobx store
     const {
-        membership: { currentProjectRole },
+        membership: { currentProjectRole, projectRoleById },
     } = useUser()
-
+    const { workspaceSlug } = useParams()
     const { issueMap } = useIssues()
 
     const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
@@ -105,33 +107,36 @@ export const BaseListRoot = observer((props: IBaseListRoot) => {
     )
 
     const renderQuickActions = useCallback(
-        (issue: TIssue) => (
-            <QuickActions
-                issue={issue}
-                handleDelete={async () => handleIssues(issue, EIssueActions.DELETE)}
-                handleUpdate={
-                    issueActions[EIssueActions.UPDATE]
-                        ? async (data) => handleIssues(data, EIssueActions.UPDATE)
-                        : undefined
-                }
-                handleRemoveFromView={
-                    issueActions[EIssueActions.REMOVE]
-                        ? async () => handleIssues(issue, EIssueActions.REMOVE)
-                        : undefined
-                }
-                handleArchive={
-                    issueActions[EIssueActions.ARCHIVE]
-                        ? async () => handleIssues(issue, EIssueActions.ARCHIVE)
-                        : undefined
-                }
-                handleRestore={
-                    issueActions[EIssueActions.RESTORE]
-                        ? async () => handleIssues(issue, EIssueActions.RESTORE)
-                        : undefined
-                }
-                readOnly={!isEditingAllowed || isCompletedCycle}
-            />
-        ),
+        (issue: TIssue) => {
+            const isEditingAllowedForIssue = projectRoleById(issue.project_id, workspaceSlug.toString())
+            return (
+                <QuickActions
+                    issue={issue}
+                    handleDelete={async () => handleIssues(issue, EIssueActions.DELETE)}
+                    handleUpdate={
+                        issueActions[EIssueActions.UPDATE]
+                            ? async (data) => handleIssues(data, EIssueActions.UPDATE)
+                            : undefined
+                    }
+                    handleRemoveFromView={
+                        issueActions[EIssueActions.REMOVE]
+                            ? async () => handleIssues(issue, EIssueActions.REMOVE)
+                            : undefined
+                    }
+                    handleArchive={
+                        issueActions[EIssueActions.ARCHIVE]
+                            ? async () => handleIssues(issue, EIssueActions.ARCHIVE)
+                            : undefined
+                    }
+                    handleRestore={
+                        issueActions[EIssueActions.RESTORE]
+                            ? async () => handleIssues(issue, EIssueActions.RESTORE)
+                            : undefined
+                    }
+                    readOnly={!isEditingAllowedForIssue || isCompletedCycle}
+                />
+            )
+        },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [handleIssues]
     )

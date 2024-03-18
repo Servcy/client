@@ -81,7 +81,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
     const { workspaceSlug, projectId } = useParams()
     // store hooks
     const {
-        membership: { currentProjectRole },
+        membership: { currentProjectRole, projectRoleById },
     } = useUser()
     const { captureIssueEvent } = useEventTracker()
     const { issueMap } = useIssues()
@@ -120,7 +120,6 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
         },
         [canEditPropertiesBasedOnProject, enableInlineEditing, isEditingAllowed]
     )
-
     const onDragStart = (dragStart: DragStart) => {
         setDragState({
             draggedIssueId: dragStart.draggableId.split("__")[0],
@@ -141,10 +140,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
         )
             return
         if (!handleDragDrop) return
-        if (
-            result.destination?.droppableId &&
-            result.destination?.droppableId.split("__")[0] === "issue-trash-box"
-        ) {
+        if (result.destination?.droppableId && result.destination?.droppableId.split("__")[0] === "issue-trash-box") {
             setDragState({
                 ...dragState,
                 source: result.source,
@@ -178,34 +174,37 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
     )
 
     const renderQuickActions = useCallback(
-        (issue: TIssue, customActionButton?: React.ReactElement) => (
-            <QuickActions
-                customActionButton={customActionButton}
-                issue={issue}
-                handleDelete={async () => handleIssues(issue, EIssueActions.DELETE)}
-                handleUpdate={
-                    issueActions[EIssueActions.UPDATE]
-                        ? async (data) => handleIssues(data, EIssueActions.UPDATE)
-                        : undefined
-                }
-                handleRemoveFromView={
-                    issueActions[EIssueActions.REMOVE]
-                        ? async () => handleIssues(issue, EIssueActions.REMOVE)
-                        : undefined
-                }
-                handleArchive={
-                    issueActions[EIssueActions.ARCHIVE]
-                        ? async () => handleIssues(issue, EIssueActions.ARCHIVE)
-                        : undefined
-                }
-                handleRestore={
-                    issueActions[EIssueActions.RESTORE]
-                        ? async () => handleIssues(issue, EIssueActions.RESTORE)
-                        : undefined
-                }
-                readOnly={!isEditingAllowed || isCompletedCycle}
-            />
-        ),
+        (issue: TIssue, customActionButton?: React.ReactElement) => {
+            const isEditingAllowedForIssue = projectRoleById(issue.project_id, workspaceSlug.toString())
+            return (
+                <QuickActions
+                    customActionButton={customActionButton}
+                    issue={issue}
+                    handleDelete={async () => handleIssues(issue, EIssueActions.DELETE)}
+                    handleUpdate={
+                        issueActions[EIssueActions.UPDATE]
+                            ? async (data) => handleIssues(data, EIssueActions.UPDATE)
+                            : undefined
+                    }
+                    handleRemoveFromView={
+                        issueActions[EIssueActions.REMOVE]
+                            ? async () => handleIssues(issue, EIssueActions.REMOVE)
+                            : undefined
+                    }
+                    handleArchive={
+                        issueActions[EIssueActions.ARCHIVE]
+                            ? async () => handleIssues(issue, EIssueActions.ARCHIVE)
+                            : undefined
+                    }
+                    handleRestore={
+                        issueActions[EIssueActions.RESTORE]
+                            ? async () => handleIssues(issue, EIssueActions.RESTORE)
+                            : undefined
+                    }
+                    readOnly={!isEditingAllowedForIssue || isCompletedCycle}
+                />
+            )
+        },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [issueActions, handleIssues]
     )
@@ -283,18 +282,18 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
                             {projectId && (
                                 <Droppable droppableId="issue-trash-box" isDropDisabled={!isDragStarted}>
                                     {(provided, snapshot) => (
-                                            <div
-                                                className={`${
-                                                    isDragStarted ? `opacity-100` : `opacity-0`
-                                                } flex w-full items-center justify-center rounded border-2 border-red-500/20 bg-custom-background-100 px-3 py-5 text-xs font-medium italic text-red-500 ${
-                                                    snapshot.isDraggingOver ? "bg-red-500 opacity-70 blur-2xl" : ""
-                                                } transition duration-300`}
-                                                ref={provided.innerRef}
-                                                {...provided.droppableProps}
-                                            >
-                                                Drop here to delete the issue.
-                                            </div>
-                                        )}
+                                        <div
+                                            className={`${
+                                                isDragStarted ? `opacity-100` : `opacity-0`
+                                            } flex w-full items-center justify-center rounded border-2 border-red-500/20 bg-custom-background-100 px-3 py-5 text-xs font-medium italic text-red-500 ${
+                                                snapshot.isDraggingOver ? "bg-red-500 opacity-70 blur-2xl" : ""
+                                            } transition duration-300`}
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps}
+                                        >
+                                            Drop here to delete the issue.
+                                        </div>
+                                    )}
                                 </Droppable>
                             )}
                         </div>

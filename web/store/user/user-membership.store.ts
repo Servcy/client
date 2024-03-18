@@ -1,5 +1,6 @@
 import { set } from "lodash"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { computedFn } from "mobx-utils"
 
 import { ERoles } from "@constants/iam"
 
@@ -32,6 +33,7 @@ export interface IUserMembershipStore {
     currentWorkspaceMemberInfo: IWorkspaceMemberMe | undefined
     currentProjectRole: ERoles | undefined
     currentWorkspaceRole: ERoles | undefined
+    projectRoleById: (projectId: string, workspaceSlug: string) => ERoles
     currentWorkspaceAllProjectsRole: IUserProjectsRole | undefined
 
     hasPermissionToCurrentWorkspace: boolean | undefined
@@ -105,6 +107,14 @@ export class UserMembershipStore implements IUserMembershipStore {
         if (!this.router.workspaceSlug) return
         return this.workspaceMemberInfo[this.router.workspaceSlug]
     }
+
+    /*
+     * Returns the project role by id
+     * @param projectId
+     */
+    projectRoleById = computedFn(
+        (projectId: string, workspaceSlug: string) => this.workspaceProjectsRole[workspaceSlug][projectId]
+    )
 
     /**
      * Returns the current workspace role
