@@ -58,9 +58,9 @@ export const IssueAttachmentsDetail: FC<TIssueAttachmentsDetail> = (props) => {
                         <div className="h-7 w-7">{getFileIcon(getFileExtension(attachment.asset))}</div>
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-2">
-                                <Tooltip tooltipContent={getFileName(attachment.attributes.name)}>
+                                <Tooltip tooltipContent={getFileName(attachment.meta_data.name)}>
                                     <span className="text-sm">
-                                        {truncateText(`${getFileName(attachment.attributes.name)}`, 10)}
+                                        {truncateText(`${getFileName(attachment.meta_data.name)}`, 10)}
                                     </span>
                                 </Tooltip>
                                 <Tooltip
@@ -76,7 +76,7 @@ export const IssueAttachmentsDetail: FC<TIssueAttachmentsDetail> = (props) => {
 
                             <div className="flex items-center gap-3 text-xs text-custom-text-200">
                                 <span>{getFileExtension(attachment.asset).toUpperCase()}</span>
-                                <span>{convertBytesToSize(attachment.attributes.size)}</span>
+                                <span>{convertBytesToSize(attachment.meta_data.size)}</span>
                             </div>
                         </div>
                     </div>

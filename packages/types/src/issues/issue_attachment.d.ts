@@ -1,10 +1,10 @@
 export type TIssueAttachment = {
     id: string
-    attributes: {
+    meta_data: {
         name: string
         size: number
     }
-    asset: string
+    file: string
     issue_id: string
 
     //need

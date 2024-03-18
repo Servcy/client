@@ -166,8 +166,8 @@ export interface IIssueLite {
 }
 
 export interface IIssueAttachment {
-    asset: string
-    attributes: {
+    file: string
+    meta_data: {
         name: string
         size: number
     }
