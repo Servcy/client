@@ -93,7 +93,7 @@ const PageDetailsPage = observer(() => {
 
     if (!pageStore) {
         return (
-            <div className="grid h-full w-full place-items-center">
+            <div className="grid h-screen w-full place-items-center">
                 <Spinner />
             </div>
         )

@@ -111,12 +111,12 @@ const ProjectPagesPage = observer(() => {
     const project = projectId ? getProjectById(projectId.toString()) : undefined
     const pageTitle = project?.name ? `${project?.name} - Pages` : undefined
 
-    if (loader || archivedPageLoader) return <PagesLoader />
-
     return (
         <AppWrapper header={<PagesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
-            {projectPageIds && archivedPageIds && projectPageIds.length + archivedPageIds.length > 0 ? (
+            {loader || archivedPageLoader ? (
+                <PagesLoader />
+            ) : projectPageIds && archivedPageIds && projectPageIds.length + archivedPageIds.length > 0 ? (
                 <>
                     {workspaceSlug && projectId && (
                         <CreateUpdatePageModal
