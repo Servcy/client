@@ -580,6 +580,7 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                         handleFormChange()
                                                     }}
                                                     value={value}
+                                                    workspaceSlug={workspaceSlug.toString()}
                                                     buttonVariant="border-with-text"
                                                     tabIndex={getTabIndex("cycle_id")}
                                                 />
