@@ -238,7 +238,7 @@ export const CommandPalette: FC = observer(() => {
                     isOpen={isCreateViewModalOpen}
                     onClose={() => toggleCreateViewModal(false)}
                     workspaceSlug={workspaceSlug.toString()}
-                    projectId={projectId?.toString()}
+                    projectId={projectId.toString()}
                 />
             )}
             {workspaceSlug && projectId && issueId && issueDetails && (
@@ -247,7 +247,7 @@ export const CommandPalette: FC = observer(() => {
                     isOpen={isDeleteIssueModalOpen}
                     data={issueDetails}
                     onSubmit={async () => {
-                        await removeIssue(workspaceSlug.toString(), projectId?.toString(), issueId.toString())
+                        await removeIssue(workspaceSlug.toString(), projectId.toString(), issueId.toString())
                         router.push(`/${workspaceSlug}/projects/${projectId}/issues`)
                     }}
                 />
