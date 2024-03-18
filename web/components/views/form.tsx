@@ -109,9 +109,12 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
     return (
         <form onSubmit={handleSubmit(handleCreateUpdateView)}>
             <div className="space-y-5">
-                <h3 className="text-lg font-medium leading-6 text-custom-text-100">
-                    {data ? "Update" : "Create"} View
-                </h3>
+                <div className="flex items-center gap-x-3">
+                    <h3 className="text-lg font-medium leading-6 text-custom-text-100">
+                        {data ? "Update" : "Create"} Project View
+                    </h3>
+                </div>
+
                 <div className="space-y-3">
                     <div>
                         <Controller

@@ -18,7 +18,7 @@ type Props = {
     onClose: () => void
     data?: IModule
     workspaceSlug: string
-    projectId: string
+    projectId?: string
 }
 
 const defaultValues: Partial<IModule> = {
@@ -48,9 +48,9 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
     })
 
     const handleCreateModule = async (payload: Partial<IModule>) => {
-        if (!workspaceSlug || !projectId) return
+        if (!workspaceSlug || !activeProject) return
 
-        const selectedProjectId = payload.project_id ?? projectId.toString()
+        const selectedProjectId = payload.project_id ?? activeProject.toString()
         await createModule(workspaceSlug.toString(), selectedProjectId, payload)
             .then((res) => {
                 handleClose()
@@ -70,9 +70,9 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
     }
 
     const handleUpdateModule = async (payload: Partial<IModule>, dirtyFields: any) => {
-        if (!workspaceSlug || !projectId || !data) return
+        if (!workspaceSlug || !activeProject || !data) return
 
-        const selectedProjectId = payload.project_id ?? projectId.toString()
+        const selectedProjectId = payload.project_id ?? activeProject.toString()
         await updateModuleDetails(workspaceSlug.toString(), selectedProjectId, data.id, payload)
             .then((res) => {
                 handleClose()
@@ -92,7 +92,7 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
     }
 
     const handleFormSubmit = async (formData: Partial<IModule>, dirtyFields: any) => {
-        if (!workspaceSlug || !projectId) return
+        if (!workspaceSlug || !activeProject) return
 
         const payload: Partial<IModule> = {
             ...formData,

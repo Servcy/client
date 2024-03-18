@@ -19,7 +19,7 @@ type CycleModalProps = {
     handleClose: () => void
     data?: ICycle | null
     workspaceSlug: string
-    projectId: string
+    projectId?: string
 }
 
 const cycleService = new CycleService()
@@ -36,9 +36,9 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
     const { setValue: setCycleTab } = useLocalStorage<TCycleView>("cycle_tab", "active")
 
     const handleCreateCycle = async (payload: Partial<ICycle>) => {
-        if (!workspaceSlug || !projectId) return
+        if (!workspaceSlug || !activeProject) return
 
-        const selectedProjectId = payload.project_id ?? projectId.toString()
+        const selectedProjectId = payload.project_id ?? activeProject.toString()
         await createCycle(workspaceSlug, selectedProjectId, payload)
             .then((res) => {
                 toast.success("Cycle created successfully.")
@@ -57,9 +57,9 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
     }
 
     const handleUpdateCycle = async (cycleId: string, payload: Partial<ICycle>, dirtyFields: any) => {
-        if (!workspaceSlug || !projectId) return
+        if (!workspaceSlug || !activeProject) return
 
-        const selectedProjectId = payload.project_id ?? projectId.toString()
+        const selectedProjectId = payload.project_id ?? activeProject.toString()
         await updateCycleDetails(workspaceSlug, selectedProjectId, cycleId, payload)
             .then((res) => {
                 const changed_properties = Object.keys(dirtyFields)
@@ -81,7 +81,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
     const dateChecker = async (payload: CycleDateCheckData) => {
         let status = false
 
-        await cycleService.cycleDateCheck(workspaceSlug as string, projectId as string, payload).then((res) => {
+        await cycleService.cycleDateCheck(workspaceSlug as string, activeProject as string, payload).then((res) => {
             status = res.status
         })
 
@@ -89,7 +89,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
     }
 
     const handleFormSubmit = async (formData: Partial<ICycle>, dirtyFields: any) => {
-        if (!workspaceSlug || !projectId) return
+        if (!workspaceSlug || !activeProject) return
 
         const payload: Partial<ICycle> = {
             ...formData,

@@ -29,6 +29,7 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
     }
 
     const handleCreateView = async (payload: IProjectView) => {
+        if (!projectId) return
         await createView(workspaceSlug, projectId, payload)
             .then(() => {
                 handleClose()
@@ -38,6 +39,7 @@ export const CreateUpdateProjectViewModal: FC<Props> = observer((props) => {
     }
 
     const handleUpdateView = async (payload: IProjectView) => {
+        if (!projectId) return
         await updateView(workspaceSlug, projectId, data?.id as string, payload)
             .then(() => handleClose())
             .catch((err) => toast.error(err.detail ?? "Something went wrong. Please try again."))
