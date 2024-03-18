@@ -42,7 +42,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
     const [archiveIssueModal, setArchiveIssueModal] = useState(false)
     // store hooks
     const {
-        membership: { currentProjectRole },
+        membership: { projectRoleById },
     } = useUser()
     const { setTrackElement } = useEventTracker()
     const { issuesFilter } = useIssues(EIssuesStoreType.PROJECT)
@@ -51,7 +51,8 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
     const activeLayout = `${issuesFilter.issueFilters?.displayFilters?.layout} layout`
     const stateDetails = getStateById(issue.state_id)
     // auth
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER && !readOnly
+    const projectRole = projectRoleById(issue.project_id, workspaceSlug.toString())
+    const isEditingAllowed = !!projectRole && projectRole >= ERoles.MEMBER && !readOnly
     const isArchivingAllowed = handleArchive && isEditingAllowed
     const isInArchivableGroup =
         !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group)
