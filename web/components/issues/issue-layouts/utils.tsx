@@ -174,7 +174,7 @@ const getPriorityColumns = () => {
     }))
 }
 
-const getLabelsColumns = (label: ILabelStore, projectId?:  string) => {
+const getLabelsColumns = (label: ILabelStore, projectId?: string) => {
     const { projectLabels, workspaceLabels } = label
     let labels = [{ id: "None", name: "None", color: "#666" }]
     if (!projectId || projectId === "null" || projectId === "undefined") labels = [...workspaceLabels, ...labels]

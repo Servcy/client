@@ -51,12 +51,10 @@ const StoreWrapper: FC<IStoreWrapper> = observer((props) => {
 
     useEffect(() => {
         if (!params) return
-        setQuery(
-            {
-                ...Object.fromEntries(searchParams),
-                ...params,
-            }
-        )
+        setQuery({
+            ...Object.fromEntries(searchParams),
+            ...params,
+        })
     }, [params, setQuery])
 
     return <>{children}</>

@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation"
 
-
 import { Boxes, Check, Share2, Star, User2, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"

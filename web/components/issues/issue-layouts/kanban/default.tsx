@@ -1,6 +1,6 @@
-import { MutableRefObject } from "react"
-
 import { useParams } from "next/navigation"
+
+import { MutableRefObject } from "react"
 
 import { observer } from "mobx-react-lite"
 
@@ -97,7 +97,17 @@ const GroupByKanBan: React.FC<IGroupByKanBan> = observer((props) => {
     const { peekIssue } = useIssueDetail()
     const params = useParams()
 
-    const list = getGroupByColumns(group_by as GroupByColumnTypes, project, cycle, _module, label, projectState, member, undefined, params?.projectId?.toString())
+    const list = getGroupByColumns(
+        group_by as GroupByColumnTypes,
+        project,
+        cycle,
+        _module,
+        label,
+        projectState,
+        member,
+        undefined,
+        params?.projectId?.toString()
+    )
 
     if (!list) return null
 

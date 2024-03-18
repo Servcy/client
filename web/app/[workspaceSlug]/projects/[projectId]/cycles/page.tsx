@@ -78,13 +78,13 @@ const ProjectCyclesPage = observer(() => {
                     isOpen={createModal}
                     handleClose={() => setCreateModal(false)}
                 />
-                {loader? (
+                {loader ? (
                     <>
-                    {cycleLayout === "list" && <CycleModuleListLayout />}
-                    {cycleLayout === "board" && <CycleModuleBoardLayout />}
-                    {cycleLayout === "gantt" && <GanttLayoutLoader />}
-                </>
-                ):totalCycles === 0 ? (
+                        {cycleLayout === "list" && <CycleModuleListLayout />}
+                        {cycleLayout === "board" && <CycleModuleBoardLayout />}
+                        {cycleLayout === "gantt" && <GanttLayoutLoader />}
+                    </>
+                ) : totalCycles === 0 ? (
                     <div className="h-full place-items-center">
                         <EmptyState
                             title={CYCLE_EMPTY_STATE_DETAILS["cycles"].title}

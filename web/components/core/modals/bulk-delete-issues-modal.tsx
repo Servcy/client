@@ -102,7 +102,13 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
                 toast.success("Issues deleted successfully!")
                 handleClose()
             })
-            .catch(() => toast.error("Something went wrong. Please try again."))
+            .catch((err) => {
+                if (err.response.status === 403) {
+                    toast.error("You don't have permission to delete some of the issues.")
+                    return
+                }
+                toast.error("Something went wrong. Please try again.")
+            })
     }
 
     const filteredIssues: TIssue[] =

@@ -196,12 +196,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         }
     }
 
-    createIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        data: Partial<TIssue>,
-        moduleId?: string
-    ) => {
+    createIssue = async (workspaceSlug: string, projectId: string, data: Partial<TIssue>, moduleId?: string) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
 
@@ -233,12 +228,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         }
     }
 
-    removeIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        moduleId?: string
-    ) => {
+    removeIssue = async (workspaceSlug: string, projectId: string, issueId: string, moduleId?: string) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
 
@@ -255,12 +245,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         }
     }
 
-    archiveIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        moduleId?: string
-    ) => {
+    archiveIssue = async (workspaceSlug: string, projectId: string, issueId: string, moduleId?: string) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
 
@@ -275,12 +260,7 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
         }
     }
 
-    quickAddIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        data: TIssue,
-        moduleId?: string
-    ) => {
+    quickAddIssue = async (workspaceSlug: string, projectId: string, data: TIssue, moduleId?: string) => {
         try {
             if (!moduleId) throw new Error("Module Id is required")
 

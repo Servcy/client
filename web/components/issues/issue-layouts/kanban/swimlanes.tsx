@@ -1,8 +1,9 @@
+import { useParams } from "next/navigation"
+
 import { MutableRefObject } from "react"
 
 import { observer } from "mobx-react-lite"
 
-import { useParams } from "next/navigation"
 import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store"
 
 import { TCreateModalStoreTypes } from "@constants/issue"

@@ -1,5 +1,7 @@
+import { useParams } from "next/navigation"
+
 import { useRef } from "react"
-import {useParams} from "next/navigation"
+
 import { IssueBlocksList, ListQuickAddIssueForm } from "@components/issues"
 
 import { useCycle, useLabel, useMember, useModule, useProject, useProjectState } from "@hooks/store"

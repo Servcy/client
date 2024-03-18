@@ -140,12 +140,7 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
         }
     }
 
-    createIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        data: Partial<TIssue>,
-        viewId?: string
-    ) => {
+    createIssue = async (workspaceSlug: string, projectId: string, data: Partial<TIssue>, viewId?: string) => {
         try {
             if (!viewId) throw new Error("View id is required")
 
@@ -183,12 +178,7 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
         }
     }
 
-    removeIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        viewId?: string
-    ) => {
+    removeIssue = async (workspaceSlug: string, projectId: string, issueId: string, viewId?: string) => {
         try {
             if (!viewId) throw new Error("View id is required")
 
@@ -208,12 +198,7 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
         }
     }
 
-    archiveIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        viewId?: string
-    ) => {
+    archiveIssue = async (workspaceSlug: string, projectId: string, issueId: string, viewId?: string) => {
         try {
             if (!viewId) throw new Error("View id is required")
 

@@ -191,12 +191,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         }
     }
 
-    createIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        data: Partial<TIssue>,
-        cycleId?: string
-    ) => {
+    createIssue = async (workspaceSlug: string, projectId: string, data: Partial<TIssue>, cycleId?: string) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
 
@@ -228,12 +223,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         }
     }
 
-    removeIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        cycleId?: string
-    ) => {
+    removeIssue = async (workspaceSlug: string, projectId: string, issueId: string, cycleId?: string) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
 
@@ -250,12 +240,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         }
     }
 
-    archiveIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        issueId: string,
-        cycleId?: string
-    ) => {
+    archiveIssue = async (workspaceSlug: string, projectId: string, issueId: string, cycleId?: string) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
 
@@ -270,12 +255,7 @@ export class CycleIssues extends IssueHelperStore implements ICycleIssues {
         }
     }
 
-    quickAddIssue = async (
-        workspaceSlug: string,
-        projectId: string,
-        data: TIssue,
-        cycleId?: string
-    ) => {
+    quickAddIssue = async (workspaceSlug: string, projectId: string, data: TIssue, cycleId?: string) => {
         try {
             if (!cycleId) throw new Error("Cycle Id is required")
 

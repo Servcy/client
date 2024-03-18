@@ -85,7 +85,9 @@ export class LabelStore implements ILabelStore {
         const worksapceSlug = this.rootStore.app.router.workspaceSlug || ""
         if (!currentWorkspaceDetails || !this.fetchedMap[worksapceSlug]) return []
         return sortBy(
-            Object.values(this.labelMap).filter((label) => label.workspace_id.toString() === String(currentWorkspaceDetails.id)),
+            Object.values(this.labelMap).filter(
+                (label) => label.workspace_id.toString() === String(currentWorkspaceDetails.id)
+            ),
             "sort_order"
         )
     }
