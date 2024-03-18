@@ -4,7 +4,7 @@ import { Combobox } from "@headlessui/react"
 import { ChevronDown, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
-import { useModule } from "@hooks/store"
+import { useApplication, useModule } from "@hooks/store"
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
@@ -172,34 +172,32 @@ export const ModuleDropdown: React.FC<Props> = observer((props) => {
     // popper-js refs
     const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
 
-    const { getModuleNameById } = useModule()
-
+    // store hooks
+    const {
+        router: { workspaceSlug },
+    } = useApplication()
+    const { getProjectModuleIds, fetchModules, getModuleNameById } = useModule()
+    const moduleIds = getProjectModuleIds(projectId)
     const handleClose = () => {
         if (!isOpen) return
         setIsOpen(false)
         onClose && onClose()
     }
-
     const toggleDropdown = () => {
         setIsOpen((prevIsOpen) => !prevIsOpen)
         if (isOpen) onClose && onClose()
     }
-
     const dropdownOnChange = (val: string & string[]) => {
         onChange(val)
         if (!multiple) handleClose()
     }
-
     const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
-
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation()
         e.preventDefault()
         toggleDropdown()
     }
-
     useOutsideClickDetector(dropdownRef, handleClose)
-
     const comboboxProps: any = {
         value,
         onChange: dropdownOnChange,
@@ -212,6 +210,9 @@ export const ModuleDropdown: React.FC<Props> = observer((props) => {
             inputRef.current.focus()
         }
     }, [isOpen])
+    useEffect(() => {
+        if (workspaceSlug && !moduleIds) fetchModules(workspaceSlug, projectId)
+    }, [])
 
     return (
         <Combobox
@@ -283,7 +284,7 @@ export const ModuleDropdown: React.FC<Props> = observer((props) => {
             {isOpen && (
                 <ModuleOptions
                     isOpen={isOpen}
-                    projectId={projectId}
+                    moduleIds={moduleIds ?? []}
                     placement={placement}
                     referenceElement={referenceElement}
                     multiple={multiple}

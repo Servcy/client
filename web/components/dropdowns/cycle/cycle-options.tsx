@@ -5,7 +5,7 @@ import { Check, Search } from "lucide-react"
 import { observer } from "mobx-react"
 import { usePopper } from "react-popper"
 
-import { useApplication, useCycle } from "@hooks/store"
+import { useCycle } from "@hooks/store"
 
 import { TCycleGroups } from "@servcy/types"
 import { ContrastIcon, CycleGroupIcon } from "@servcy/ui"
@@ -26,15 +26,10 @@ export const CycleOptions = observer((props: any) => {
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
     const inputRef = useRef<HTMLInputElement | null>(null)
 
-    // store hooks
-    const {
-        router: { workspaceSlug },
-    } = useApplication()
-    const { getProjectCycleIds, fetchAllCycles, getCycleById } = useCycle()
+    const { getProjectCycleIds, getCycleById } = useCycle()
 
     useEffect(() => {
         if (isOpen) {
-            onOpen()
             inputRef.current && inputRef.current.focus()
         }
     }, [isOpen])
@@ -56,10 +51,6 @@ export const CycleOptions = observer((props: any) => {
         const cycleDetails = getCycleById(cycleId)
         return cycleDetails?.status ? (cycleDetails?.status.toLowerCase() != "completed" ? true : false) : true
     })
-
-    const onOpen = () => {
-        if (workspaceSlug && !cycleIds) fetchAllCycles(workspaceSlug, projectId)
-    }
 
     const searchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (query !== "" && e.key === "Escape") {
