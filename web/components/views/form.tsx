@@ -3,7 +3,6 @@ import { useEffect } from "react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 
-import { ProjectDropdown } from "@components/dropdowns"
 import { AppliedFiltersList, FiltersDropdown, FilterSelection } from "@components/issues"
 
 import { useLabel, useMember, useProjectState } from "@hooks/store"
@@ -17,8 +16,6 @@ type Props = {
     data?: IProjectView | null
     handleClose: () => void
     handleFormSubmit: (values: IProjectView) => Promise<void>
-    setActiveProject: React.Dispatch<React.SetStateAction<string | null>>
-    projectId: string
     preLoadedData?: Partial<IProjectView> | null
 }
 
@@ -28,7 +25,7 @@ const defaultValues: Partial<IProjectView> = {
 }
 
 export const ProjectViewForm: React.FC<Props> = observer((props) => {
-    const { handleFormSubmit, handleClose, data, projectId, preLoadedData, setActiveProject } = props
+    const { handleFormSubmit, handleClose, data, preLoadedData } = props
     // store hooks
     const { projectStates } = useProjectState()
     const { projectLabels } = useLabel()
@@ -44,10 +41,7 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
         setValue,
         watch,
     } = useForm<IProjectView>({
-        defaultValues: {
-            ...defaultValues,
-            project: projectId,
-        },
+        defaultValues,
     })
 
     const selectedFilters: IIssueFilterOptions = {}
@@ -109,7 +103,6 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
             ...defaultValues,
             ...preLoadedData,
             ...data,
-            project: projectId,
         })
     }, [data, preLoadedData, reset])
 
@@ -117,27 +110,8 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
         <form onSubmit={handleSubmit(handleCreateUpdateView)}>
             <div className="space-y-5">
                 <div className="flex items-center gap-x-3">
-                    {!data && (
-                        <Controller
-                            control={control}
-                            name="project"
-                            render={({ field: { value, onChange } }) => (
-                                <div className="h-7">
-                                    <ProjectDropdown
-                                        value={value}
-                                        onChange={(val: string) => {
-                                            onChange(val)
-                                            setActiveProject(val)
-                                        }}
-                                        buttonVariant="border-with-text"
-                                        tabIndex={10}
-                                    />
-                                </div>
-                            )}
-                        />
-                    )}
-                    <h3 className="text-xl font-medium leading-6 text-custom-text-200">
-                        {data ? "Update" : "New"} View
+                    <h3 className="text-lg font-medium leading-6 text-custom-text-100">
+                        {data ? "Update" : "Create"} Project View
                     </h3>
                 </div>
 

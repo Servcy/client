@@ -14,6 +14,7 @@ import { CreateUpdateModuleModal } from "@components/modules"
 import { CreateUpdatePageModal } from "@components/pages"
 import { CreateProjectModal } from "@components/project"
 import { CreateUpdateProjectViewModal } from "@components/views"
+import { CreateUpdateWorkspaceViewModal } from "@components/workspace"
 
 import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store"
 
@@ -51,6 +52,8 @@ export const CommandPalette: FC = observer(() => {
         toggleCreateCycleModal,
         isCreatePageModalOpen,
         toggleCreatePageModal,
+        isWorkspaceViewCreateModalOpen,
+        toggleWorkspaceViewCreateModal,
         isCreateProjectModalOpen,
         toggleCreateProjectModal,
         isCreateModuleModalOpen,
@@ -125,7 +128,7 @@ export const CommandPalette: FC = observer(() => {
                 } else if (keyPressed === "p") {
                     toggleCreateProjectModal(true)
                 } else if (keyPressed === "v") {
-                    toggleCreateViewModal(true)
+                    projectId ? toggleCreateViewModal(true) : toggleWorkspaceViewCreateModal(true)
                 } else if (keyPressed === "d") {
                     toggleCreatePageModal(true)
                 } else if (keyPressed === "q") {
@@ -197,12 +200,6 @@ export const CommandPalette: FC = observer(() => {
                         workspaceSlug={workspaceSlug.toString()}
                         projectId={projectId?.toString()}
                     />
-                    <CreateUpdateProjectViewModal
-                        isOpen={isCreateViewModalOpen}
-                        onClose={() => toggleCreateViewModal(false)}
-                        workspaceSlug={workspaceSlug.toString()}
-                        projectId={projectId?.toString()}
-                    />
                     <CreateUpdatePageModal
                         isOpen={isCreatePageModalOpen}
                         handleClose={() => toggleCreatePageModal(false)}
@@ -228,7 +225,21 @@ export const CommandPalette: FC = observer(() => {
                         }}
                         user={currentUser}
                     />
+                    <CreateUpdateWorkspaceViewModal
+                        isOpen={isWorkspaceViewCreateModalOpen}
+                        onClose={() => {
+                            toggleWorkspaceViewCreateModal(false)
+                        }}
+                    />
                 </>
+            )}
+            {workspaceSlug && projectId && (
+                <CreateUpdateProjectViewModal
+                    isOpen={isCreateViewModalOpen}
+                    onClose={() => toggleCreateViewModal(false)}
+                    workspaceSlug={workspaceSlug.toString()}
+                    projectId={projectId?.toString()}
+                />
             )}
             {workspaceSlug && projectId && issueId && issueDetails && (
                 <DeleteIssueModal

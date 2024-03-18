@@ -19,6 +19,7 @@ export interface ICommandPaletteStore {
     isCreateModuleModalOpen: boolean
     isCreateViewModalOpen: boolean
     isCreatePageModalOpen: boolean
+    isWorkspaceViewCreateModalOpen: boolean
     isCreateIssueModalOpen: boolean
     isDeleteIssueModalOpen: boolean
     isBulkDeleteIssueModalOpen: boolean
@@ -30,6 +31,7 @@ export interface ICommandPaletteStore {
     toggleCreateProjectModal: (value?: boolean) => void
     toggleCreateCycleModal: (value?: boolean) => void
     toggleCreateViewModal: (value?: boolean) => void
+    toggleWorkspaceViewCreateModal: (value?: boolean) => void
     toggleCreatePageModal: (value?: boolean) => void
     toggleCreateIssueModal: (value?: boolean, storeType?: TCreateModalStoreTypes) => void
     toggleCreateModuleModal: (value?: boolean) => void
@@ -48,6 +50,7 @@ export class CommandPaletteStore implements ICommandPaletteStore {
     isCreateModuleModalOpen: boolean = false
     isCreateViewModalOpen: boolean = false
     isCreatePageModalOpen: boolean = false
+    isWorkspaceViewCreateModalOpen: boolean = false
     isCreateIssueModalOpen: boolean = false
     isDeleteIssueModalOpen: boolean = false
     isBulkDeleteIssueModalOpen: boolean = false
@@ -70,12 +73,14 @@ export class CommandPaletteStore implements ICommandPaletteStore {
             isCreateIssueModalOpen: observable.ref,
             isDeleteIssueModalOpen: observable.ref,
             isBulkDeleteIssueModalOpen: observable.ref,
+            isWorkspaceViewCreateModalOpen: observable.ref,
             // computed
             isAnyModalOpen: computed,
             // toggle actions
             toggleCommandPaletteModal: action,
             toggleShortcutModal: action,
             toggleCreateProjectModal: action,
+            toggleWorkspaceViewCreateModal: action,
             toggleCreateCycleModal: action,
             toggleCreateViewModal: action,
             toggleCreatePageModal: action,
@@ -100,6 +105,7 @@ export class CommandPaletteStore implements ICommandPaletteStore {
                 this.isCreatePageModalOpen ||
                 this.isCreateProjectModalOpen ||
                 this.isCreateModuleModalOpen ||
+                this.isWorkspaceViewCreateModalOpen ||
                 this.isCreateViewModalOpen ||
                 this.isShortcutModalOpen ||
                 this.isBulkDeleteIssueModalOpen ||
@@ -169,6 +175,19 @@ export class CommandPaletteStore implements ICommandPaletteStore {
             this.isCreateViewModalOpen = value
         } else {
             this.isCreateViewModalOpen = !this.isCreateViewModalOpen
+        }
+    }
+
+    /*
+     * Toggles the workspace view create modal
+     * @param value
+     * @returns
+     */
+    toggleWorkspaceViewCreateModal = (value?: boolean) => {
+        if (value !== undefined) {
+            this.isWorkspaceViewCreateModalOpen = value
+        } else {
+            this.isWorkspaceViewCreateModalOpen = !this.isWorkspaceViewCreateModalOpen
         }
     }
 
