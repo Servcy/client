@@ -13,10 +13,10 @@ import useSWR from "swr"
 import { useIssues, useProject } from "@hooks/store"
 
 // fetch keys
-import { PROJECT_ISSUES_LIST } from "@constants/fetch-keys"
+import { WORKSPACE_ISSUES_LIST } from "@constants/fetch-keys"
 import { EIssuesStoreType } from "@constants/issue"
 
-import { IssueService } from "@services/issue"
+import { WorkspaceService } from "@services/workspace.service"
 
 import { IUser, TIssue } from "@servcy/types"
 import { Button, LayersIcon } from "@servcy/ui"
@@ -33,13 +33,13 @@ type Props = {
     user: IUser | undefined
 }
 
-const issueService = new IssueService()
+const workspaceService = new WorkspaceService()
 
 export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
     const { isOpen, onClose } = props
 
     const params = useParams()
-    const { workspaceSlug, projectId } = params
+    const { workspaceSlug } = params
 
     const { getProjectById } = useProject()
     const {
@@ -49,9 +49,9 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
     const [query, setQuery] = useState("")
     // fetching project issues.
     const { data: issues } = useSWR(
-        workspaceSlug && projectId && isOpen ? PROJECT_ISSUES_LIST(workspaceSlug as string, projectId as string) : null,
-        workspaceSlug && projectId && isOpen
-            ? () => issueService.getIssues(workspaceSlug as string, projectId as string)
+        workspaceSlug && isOpen ? WORKSPACE_ISSUES_LIST(workspaceSlug as string) : null,
+        workspaceSlug && isOpen
+            ? () => workspaceService.getViewIssues(workspaceSlug.toString(), { sub_issues: true })
             : null
     )
 
@@ -74,7 +74,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
     }
 
     const handleDelete: SubmitHandler<FormInput> = async (data) => {
-        if (!workspaceSlug || !projectId) return
+        if (!workspaceSlug) return
 
         if (!data.delete_issue_ids || data.delete_issue_ids.length === 0) {
             toast.error("Please select at least one issue.")
@@ -83,7 +83,21 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
 
         if (!Array.isArray(data.delete_issue_ids)) data.delete_issue_ids = [data.delete_issue_ids]
 
-        await removeBulkIssues(workspaceSlug as string, projectId as string, data.delete_issue_ids)
+        const payload: {
+            [projectId: string]: TIssue["id"][]
+        } = {}
+        data.delete_issue_ids.forEach((issueId) => {
+            const issue: TIssue = Object.values(issues ?? {}).find((i) => i.id === issueId) ?? ({} as TIssue)
+            if (issue) {
+                if (payload[issue.project_id]) {
+                    payload[issue.project_id].push(issue.id)
+                } else {
+                    payload[issue.project_id] = [issue.id]
+                }
+            }
+        })
+
+        await removeBulkIssues(workspaceSlug as string, payload)
             .then(() => {
                 toast.success("Issues deleted successfully!")
                 handleClose()
@@ -91,16 +105,16 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
             .catch(() => toast.error("Something went wrong. Please try again."))
     }
 
-    const projectDetails = getProjectById(projectId as string)
-
     const filteredIssues: TIssue[] =
         query === ""
             ? Object.values(issues ?? {})
-            : Object.values(issues ?? {})?.filter(
-                  (issue) =>
+            : Object.values(issues ?? {})?.filter((issue) => {
+                  const projectDetails = getProjectById(issue.project_id)
+                  return (
                       issue.name.toLowerCase().includes(query.toLowerCase()) ||
                       `${projectDetails?.identifier}-${issue.sequence_id}`.toLowerCase().includes(query.toLowerCase())
-              ) ?? []
+                  )
+              }) ?? []
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment} afterLeave={() => setQuery("")} appear>
@@ -157,7 +171,6 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
                                                         {filteredIssues.map((issue) => (
                                                             <BulkDeleteIssuesModalItem
                                                                 issue={issue}
-                                                                identifier={projectDetails?.identifier}
                                                                 delete_issue_ids={watch("delete_issue_ids").includes(
                                                                     issue.id
                                                                 )}

@@ -137,8 +137,8 @@ export class IssueService extends APIService {
             })
     }
 
-    async bulkDeleteIssues(workspaceSlug: string, projectId: string, data: any): Promise<any> {
-        return this.delete(`/project/${workspaceSlug}/${projectId}/issues/delete/`, data)
+    async bulkDeleteIssues(workspaceSlug: string, data: any): Promise<any> {
+        return this.delete(`/project/${workspaceSlug}/issues/delete/`, data)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
