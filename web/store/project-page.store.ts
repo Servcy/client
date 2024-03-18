@@ -72,8 +72,12 @@ export class ProjectPageStore implements IProjectPageStore {
     get projectPageIds() {
         const projectId = this.rootStore.app.router.projectId
         if (!projectId || !this.projectPageMap?.[projectId]) return []
-
-        const allProjectIds = Object.keys(this.projectPageMap[projectId])
+        const allProjectIds: string[] = []
+        Object.keys(this.projectPageMap[projectId]).forEach((pageId) => {
+            if (this.projectPageMap[projectId][pageId]) {
+                allProjectIds.push(pageId)
+            }
+        })
         return allProjectIds.sort((a, b) => {
             const dateA = new Date(this.projectPageMap[projectId][a]?.created_at).getTime()
             const dateB = new Date(this.projectPageMap[projectId][b]?.created_at).getTime()
@@ -84,8 +88,13 @@ export class ProjectPageStore implements IProjectPageStore {
     get archivedPageIds() {
         const projectId = this.rootStore.app.router.projectId
         if (!projectId || !this.projectArchivedPageMap[projectId]) return []
-        const archivedPages = Object.keys(this.projectArchivedPageMap[projectId])
-        return archivedPages.sort((a, b) => {
+        const archivedPageIds: string[] = []
+        Object.keys(this.projectArchivedPageMap[projectId]).forEach((pageId) => {
+            if (this.projectArchivedPageMap[projectId][pageId]) {
+                archivedPageIds.push(pageId)
+            }
+        })
+        return archivedPageIds.sort((a, b) => {
             const dateA = new Date(this.projectArchivedPageMap[projectId][a]?.created_at).getTime()
             const dateB = new Date(this.projectArchivedPageMap[projectId][b]?.created_at).getTime()
             return dateB - dateA
