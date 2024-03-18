@@ -53,9 +53,9 @@ export const IssueAttachmentsDetail: FC<TIssueAttachmentsDetail> = (props) => {
                 key={attachmentId}
                 className="flex h-[60px] items-center justify-between gap-1 rounded-md border-[2px] border-custom-border-200 bg-custom-background-100 px-4 py-2 text-sm"
             >
-                <Link href={attachment.asset} target="_blank" rel="noopener noreferrer">
+                <Link href={attachment.file} target="_blank" rel="noopener noreferrer">
                     <div className="flex items-center gap-3">
-                        <div className="h-7 w-7">{getFileIcon(getFileExtension(attachment.asset))}</div>
+                        <div className="h-7 w-7">{getFileIcon(getFileExtension(attachment.file))}</div>
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center gap-2">
                                 <Tooltip tooltipContent={getFileName(attachment.meta_data.name)}>
@@ -75,7 +75,7 @@ export const IssueAttachmentsDetail: FC<TIssueAttachmentsDetail> = (props) => {
                             </div>
 
                             <div className="flex items-center gap-3 text-xs text-custom-text-200">
-                                <span>{getFileExtension(attachment.asset).toUpperCase()}</span>
+                                <span>{getFileExtension(attachment.file).toUpperCase()}</span>
                                 <span>{convertBytesToSize(attachment.meta_data.size)}</span>
                             </div>
                         </div>

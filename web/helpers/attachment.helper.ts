@@ -14,6 +14,9 @@ export const getFileExtension = (filename: string) => filename.slice(((filename.
 export const getFileName = (fileName: string) => {
     const dotIndex = fileName.lastIndexOf(".")
 
+    // if there is no dot in the file name, return the whole name
+    if (dotIndex === -1) return fileName
+
     const nameWithoutExtension = fileName.substring(0, dotIndex)
 
     return nameWithoutExtension

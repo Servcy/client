@@ -80,7 +80,7 @@ export const IssueAttachmentDeleteModal: FC<Props> = (props) => {
                                                     <p className="text-sm text-custom-text-200">
                                                         Are you sure you want to delete attachment-{" "}
                                                         <span className="font-bold">
-                                                            {getFileName(data.attributes.name)}
+                                                            {getFileName(data.meta_data.name)}
                                                         </span>
                                                         ? This attachment will be permanently removed. This action
                                                         cannot be undone.
