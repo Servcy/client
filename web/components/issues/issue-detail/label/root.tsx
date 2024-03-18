@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react"
+import { FC, useEffect, useMemo } from "react"
 
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
@@ -27,8 +27,14 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
     const { workspaceSlug, projectId, issueId, disabled = false, isInboxIssue = false, onLabelUpdate } = props
 
     const { updateIssue } = useIssueDetail()
-    const { createLabel } = useLabel()
-
+    const { createLabel, fetchProjectLabels, getProjectLabels } = useLabel()
+    const projectLabels = getProjectLabels(projectId)
+    const fetchLabels = () => {
+        if (!projectLabels && workspaceSlug && projectId) fetchProjectLabels(workspaceSlug, projectId)
+    }
+    useEffect(() => {
+        if (!projectLabels) fetchLabels()
+    }, [])
     const labelOperations: TLabelOperations = useMemo(
         () => ({
             updateIssue: async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<TIssue>) => {

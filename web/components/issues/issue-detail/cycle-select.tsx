@@ -48,6 +48,7 @@ export const IssueCycleSelect: React.FC<TIssueCycleSelect> = observer((props) =>
                 onChange={handleIssueCycleChange}
                 projectId={projectId}
                 disabled={disableSelect}
+                workspaceSlug={workspaceSlug}
                 buttonVariant="transparent-with-text"
                 className="w-full group"
                 buttonContainerClassName="w-full text-left"

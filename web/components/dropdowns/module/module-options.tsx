@@ -26,29 +26,25 @@ type DropdownOptions =
     | undefined
 
 interface Props {
-    projectId: string
     referenceElement: HTMLButtonElement | null
     placement: Placement | undefined
     isOpen: boolean
+    moduleIds: string[]
     multiple: boolean
 }
 
 export const ModuleOptions = observer((props: Props) => {
-    const { projectId, isOpen, referenceElement, placement, multiple } = props
+    const { isOpen, moduleIds, referenceElement, placement, multiple } = props
 
     const [query, setQuery] = useState("")
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
     const inputRef = useRef<HTMLInputElement | null>(null)
 
     // store hooks
-    const {
-        router: { workspaceSlug },
-    } = useApplication()
-    const { getProjectModuleIds, fetchModules, getModuleById } = useModule()
+    const { getModuleById } = useModule()
 
     useEffect(() => {
         if (isOpen) {
-            onOpen()
             inputRef.current && inputRef.current.focus()
         }
     }, [isOpen])
@@ -65,12 +61,6 @@ export const ModuleOptions = observer((props: Props) => {
             },
         ],
     })
-
-    const moduleIds = getProjectModuleIds(projectId)
-
-    const onOpen = () => {
-        if (workspaceSlug && !moduleIds) fetchModules(workspaceSlug, projectId)
-    }
 
     const searchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (query !== "" && e.key === "Escape") {

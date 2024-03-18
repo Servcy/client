@@ -152,6 +152,10 @@ export const EstimateDropdown: React.FC<Props> = observer((props) => {
         }
     }, [isOpen])
 
+    useEffect(() => {
+        if (!activeEstimate && workspaceSlug) fetchProjectEstimates(workspaceSlug, projectId)
+    }, [])
+
     return (
         <Combobox
             as="div"

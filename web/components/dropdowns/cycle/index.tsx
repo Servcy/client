@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useRef, useState } from "react"
+import { Fragment, ReactNode, useEffect, useRef, useState } from "react"
 
 import { Combobox } from "@headlessui/react"
 import { ChevronDown } from "lucide-react"
@@ -19,6 +19,7 @@ import { CycleOptions } from "./cycle-options"
 
 type Props = TDropdownProps & {
     button?: ReactNode
+    workspaceSlug?: string
     dropdownArrow?: boolean
     dropdownArrowClassName?: string
     onChange: (val: string | null) => void
@@ -39,6 +40,7 @@ export const CycleDropdown: React.FC<Props> = observer((props) => {
         dropdownArrowClassName = "",
         hideIcon = false,
         onChange,
+        workspaceSlug,
         onClose,
         placeholder = "Cycle",
         placement,
@@ -50,39 +52,35 @@ export const CycleDropdown: React.FC<Props> = observer((props) => {
     // states
 
     const [isOpen, setIsOpen] = useState(false)
-    const { getCycleNameById } = useCycle()
+    const { getCycleNameById, fetchAllCycles } = useCycle()
     // refs
     const dropdownRef = useRef<HTMLDivElement | null>(null)
     // popper-js refs
     const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null)
-
     const selectedName = value ? getCycleNameById(value) : null
-
     const handleClose = () => {
         if (!isOpen) return
         setIsOpen(false)
         onClose && onClose()
     }
-
     const toggleDropdown = () => {
         setIsOpen((prevIsOpen) => !prevIsOpen)
         if (isOpen) onClose && onClose()
     }
-
     const dropdownOnChange = (val: string | null) => {
         onChange(val)
         handleClose()
     }
-
     const handleKeyDown = useDropdownKeyDown(toggleDropdown, handleClose)
-
     const handleOnClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation()
         e.preventDefault()
         toggleDropdown()
     }
-
     useOutsideClickDetector(dropdownRef, handleClose)
+    useEffect(() => {
+        if (workspaceSlug) fetchAllCycles(workspaceSlug, projectId)
+    }, [])
 
     return (
         <Combobox
