@@ -115,19 +115,22 @@ export const CommandPalette: FC = observer(() => {
                 }
             } else if (!isAnyModalOpen) {
                 setTrackElement("Shortcut key")
+                if (keyPressed === "h") {
+                    toggleShortcutModal(true)
+                    return
+                }
+                if (!workspaceSlug) return
                 if (keyPressed === "c") {
                     toggleCreateIssueModal(true)
                 } else if (keyPressed === "p") {
                     toggleCreateProjectModal(true)
-                } else if (keyPressed === "h") {
-                    toggleShortcutModal(true)
-                } else if (keyPressed === "v" && workspaceSlug && projectId) {
+                } else if (keyPressed === "v") {
                     toggleCreateViewModal(true)
-                } else if (keyPressed === "d" && workspaceSlug && projectId) {
+                } else if (keyPressed === "d") {
                     toggleCreatePageModal(true)
-                } else if (keyPressed === "q" && workspaceSlug && projectId) {
+                } else if (keyPressed === "q") {
                     toggleCreateCycleModal(true)
-                } else if (keyPressed === "m" && workspaceSlug && projectId) {
+                } else if (keyPressed === "m") {
                     toggleCreateModuleModal(true)
                 } else if (keyPressed === "backspace" || keyPressed === "delete") {
                     e.preventDefault()
@@ -172,21 +175,19 @@ export const CommandPalette: FC = observer(() => {
                 }}
             />
             {workspaceSlug && (
-                <CreateProjectModal
-                    isOpen={isCreateProjectModalOpen}
-                    onClose={() => {
-                        toggleCreateProjectModal(false)
-                    }}
-                    workspaceSlug={workspaceSlug.toString()}
-                />
-            )}
-            {workspaceSlug && projectId && (
                 <>
+                    <CreateProjectModal
+                        isOpen={isCreateProjectModalOpen}
+                        onClose={() => {
+                            toggleCreateProjectModal(false)
+                        }}
+                        workspaceSlug={workspaceSlug.toString()}
+                    />
                     <CycleCreateUpdateModal
                         isOpen={isCreateCycleModalOpen}
                         handleClose={() => toggleCreateCycleModal(false)}
                         workspaceSlug={workspaceSlug.toString()}
-                        projectId={projectId.toString()}
+                        projectId={projectId?.toString()}
                     />
                     <CreateUpdateModuleModal
                         isOpen={isCreateModuleModalOpen}
@@ -194,55 +195,52 @@ export const CommandPalette: FC = observer(() => {
                             toggleCreateModuleModal(false)
                         }}
                         workspaceSlug={workspaceSlug.toString()}
-                        projectId={projectId.toString()}
+                        projectId={projectId?.toString()}
                     />
                     <CreateUpdateProjectViewModal
                         isOpen={isCreateViewModalOpen}
                         onClose={() => toggleCreateViewModal(false)}
                         workspaceSlug={workspaceSlug.toString()}
-                        projectId={projectId.toString()}
+                        projectId={projectId?.toString()}
                     />
                     <CreateUpdatePageModal
                         isOpen={isCreatePageModalOpen}
                         handleClose={() => toggleCreatePageModal(false)}
-                        projectId={projectId.toString()}
+                        projectId={projectId?.toString()}
+                    />
+                    <CreateUpdateIssueModal
+                        isOpen={isCreateIssueModalOpen}
+                        onClose={() => toggleCreateIssueModal(false)}
+                        data={
+                            cycleId
+                                ? { cycle_id: cycleId.toString() }
+                                : moduleId
+                                  ? { module_ids: [moduleId.toString()] }
+                                  : undefined
+                        }
+                        storeType={createIssueStoreType}
+                        isDraft={isDraftIssue}
+                    />
+                    <BulkDeleteIssuesModal
+                        isOpen={isBulkDeleteIssueModalOpen}
+                        onClose={() => {
+                            toggleBulkDeleteIssueModal(false)
+                        }}
+                        user={currentUser}
                     />
                 </>
             )}
-
-            <CreateUpdateIssueModal
-                isOpen={isCreateIssueModalOpen}
-                onClose={() => toggleCreateIssueModal(false)}
-                data={
-                    cycleId
-                        ? { cycle_id: cycleId.toString() }
-                        : moduleId
-                          ? { module_ids: [moduleId.toString()] }
-                          : undefined
-                }
-                storeType={createIssueStoreType}
-                isDraft={isDraftIssue}
-            />
-
             {workspaceSlug && projectId && issueId && issueDetails && (
                 <DeleteIssueModal
                     handleClose={() => toggleDeleteIssueModal(false)}
                     isOpen={isDeleteIssueModalOpen}
                     data={issueDetails}
                     onSubmit={async () => {
-                        await removeIssue(workspaceSlug.toString(), projectId.toString(), issueId.toString())
+                        await removeIssue(workspaceSlug.toString(), projectId?.toString(), issueId.toString())
                         router.push(`/${workspaceSlug}/projects/${projectId}/issues`)
                     }}
                 />
             )}
-
-            <BulkDeleteIssuesModal
-                isOpen={isBulkDeleteIssueModalOpen}
-                onClose={() => {
-                    toggleBulkDeleteIssueModal(false)
-                }}
-                user={currentUser}
-            />
             <CommandModal />
         </>
     )

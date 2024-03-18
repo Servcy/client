@@ -1,5 +1,7 @@
 import { Controller, useForm } from "react-hook-form"
 
+import { ProjectDropdown } from "@components/dropdowns"
+
 import { PAGE_ACCESS_SPECIFIERS } from "@constants/page"
 
 import { IPageStore } from "@store/page.store"
@@ -11,6 +13,8 @@ type Props = {
     handleFormSubmit: (values: IPage) => Promise<void>
     handleClose: () => void
     pageStore?: IPageStore
+    projectId?: string
+    setActiveProject: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const defaultValues = {
@@ -20,7 +24,7 @@ const defaultValues = {
 }
 
 export const PageForm: React.FC<Props> = (props) => {
-    const { handleFormSubmit, handleClose, pageStore } = props
+    const { handleFormSubmit, handleClose, setActiveProject, projectId, pageStore } = props
 
     const {
         formState: { errors, isSubmitting },
@@ -28,8 +32,8 @@ export const PageForm: React.FC<Props> = (props) => {
         control,
     } = useForm<IPage>({
         defaultValues: pageStore
-            ? { name: pageStore.name, description: pageStore.description, access: pageStore.access }
-            : defaultValues,
+            ? { name: pageStore.name, description: pageStore.description, access: pageStore.access, project: projectId }
+            : { ...defaultValues, project: projectId },
     })
 
     const handleCreateUpdatePage = (formData: IPage) => handleFormSubmit(formData)
@@ -37,9 +41,30 @@ export const PageForm: React.FC<Props> = (props) => {
     return (
         <form onSubmit={handleSubmit(handleCreateUpdatePage)}>
             <div className="space-y-4">
-                <h3 className="text-lg font-medium leading-6 text-custom-text-100">
-                    {pageStore ? "Update" : "Create"} Page
-                </h3>
+                <div className="flex items-center gap-x-3">
+                    {!pageStore && (
+                        <Controller
+                            control={control}
+                            name="project"
+                            render={({ field: { value, onChange } }) => (
+                                <div className="h-7">
+                                    <ProjectDropdown
+                                        value={value}
+                                        onChange={(val: string) => {
+                                            onChange(val)
+                                            setActiveProject(val)
+                                        }}
+                                        buttonVariant="border-with-text"
+                                        tabIndex={10}
+                                    />
+                                </div>
+                            )}
+                        />
+                    )}
+                    <h3 className="text-xl font-medium leading-6 text-custom-text-200">
+                        {pageStore ? "Update" : "New"} Page
+                    </h3>
+                </div>
                 <div className="space-y-3">
                     <div>
                         <Controller

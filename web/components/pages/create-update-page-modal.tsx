@@ -1,10 +1,11 @@
 import { useParams } from "next/navigation"
 
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
+import toast from "react-hot-toast"
 
-import { useEventTracker } from "@hooks/store"
+import { useEventTracker, useProject } from "@hooks/store"
 import { useProjectPages } from "@hooks/store/use-project-page"
 
 import { PAGE_CREATED, PAGE_UPDATED } from "@constants/event-tracker"
@@ -16,23 +17,24 @@ import { IPage } from "@servcy/types"
 import { PageForm } from "./page-form"
 
 type Props = {
-    // data?: IPage | null;
     pageStore?: IPageStore
     handleClose: () => void
     isOpen: boolean
-    projectId: string
+    projectId?: string
 }
 
 export const CreateUpdatePageModal: FC<Props> = (props) => {
     const { isOpen, handleClose, projectId, pageStore } = props
     const { workspaceSlug } = useParams()
+    const [activeProject, setActiveProject] = useState<string | null>(null)
     // store hooks
     const { createPage } = useProjectPages()
     const { capturePageEvent } = useEventTracker()
+    const { workspaceProjectIds } = useProject()
 
     const createProjectPage = async (payload: IPage) => {
-        if (!workspaceSlug) return
-        await createPage(workspaceSlug.toString(), projectId, payload)
+        if (!workspaceSlug || !activeProject) return
+        await createPage(workspaceSlug.toString(), activeProject, payload)
             .then((res) => {
                 capturePageEvent({
                     eventName: PAGE_CREATED,
@@ -41,6 +43,7 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                         state: "SUCCESS",
                     },
                 })
+                toast.success("Page created successfully")
             })
             .catch(() => {
                 capturePageEvent({
@@ -49,11 +52,12 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                         state: "FAILED",
                     },
                 })
+                toast.error("Failed to create page")
             })
     }
 
     const handleFormSubmit = async (formData: IPage) => {
-        if (!workspaceSlug || !projectId) return
+        if (!workspaceSlug || !activeProject) return
         try {
             if (pageStore) {
                 if (pageStore.name !== formData.name) {
@@ -77,6 +81,27 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
             console.log(error)
         }
     }
+
+    useEffect(() => {
+        // if modal is closed, reset active project to null
+        // and return to avoid activeProject being set to some other project
+        if (!isOpen) {
+            setActiveProject(null)
+            return
+        }
+
+        // if data is present, set active project to the project of the
+        // issue. This has more priority than the project in the url.
+        if (pageStore && pageStore.project) {
+            setActiveProject(pageStore.project)
+            return
+        }
+
+        // if data is not present, set active project to the project
+        // in the url. This has the least priority.
+        if (workspaceProjectIds && workspaceProjectIds.length > 0 && !activeProject)
+            setActiveProject(projectId ?? workspaceProjectIds?.[0] ?? null)
+    }, [activeProject, projectId, workspaceProjectIds, isOpen])
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -108,6 +133,8 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                                 <PageForm
                                     handleFormSubmit={handleFormSubmit}
                                     handleClose={handleClose}
+                                    projectId={activeProject ?? ""}
+                                    setActiveProject={setActiveProject}
                                     pageStore={pageStore}
                                 />
                             </Dialog.Panel>
