@@ -137,7 +137,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
                     >
                         <Dialog.Panel className="relative flex w-full items-center justify-center ">
                             <div className="w-full max-w-2xl transform divide-y divide-custom-border-200 divide-opacity-10 rounded-lg bg-custom-background-100 shadow-custom-shadow-md transition-all">
-                                <form>
+                                <form onSubmit={(e) => e.preventDefault()}>
                                     <Combobox
                                         onChange={(val: string) => {
                                             const selectedIssues = watch("delete_issue_ids")
