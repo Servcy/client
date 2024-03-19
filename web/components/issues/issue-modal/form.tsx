@@ -163,13 +163,13 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
 
     const handleFormSubmit = async (formData: Partial<TIssue>, is_draft_issue = false) => {
         await onSubmit(formData, is_draft_issue)
-
         setGptAssistantModal(false)
-
-        reset({
-            ...defaultValues,
-            project_id: getValues("project_id"),
-        })
+        !isCreateMoreToggleEnabled &&
+            reset({
+                ...defaultValues,
+                project_id: getValues("project_id"),
+            })
+        isCreateMoreToggleEnabled && setValue("name", "")
         editorRef?.current?.clearEditor()
     }
 
