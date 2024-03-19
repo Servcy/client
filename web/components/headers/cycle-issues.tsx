@@ -77,7 +77,7 @@ export const CycleIssuesHeader: React.FC = observer(() => {
     } = useApplication()
     const { setTrackElement } = useEventTracker()
     const {
-        membership: { currentProjectRole },
+        membership: { currentProjectRole, currentWorkspaceRole },
     } = useUser()
     const { currentProjectDetails } = useProject()
     const { projectStates } = useProjectState()
@@ -250,9 +250,11 @@ export const CycleIssuesHeader: React.FC = observer(() => {
 
                         {canUserCreateIssue && (
                             <>
-                                <Button onClick={() => setAnalyticsModal(true)} variant="neutral-primary" size="sm">
-                                    Analytics
-                                </Button>
+                                {(currentWorkspaceRole === ERoles.ADMIN || currentProjectRole === ERoles.ADMIN) && (
+                                    <Button onClick={() => setAnalyticsModal(true)} variant="neutral-primary" size="sm">
+                                        Analytics
+                                    </Button>
+                                )}
                                 <Button
                                     onClick={() => {
                                         setTrackElement("Cycle issues page")

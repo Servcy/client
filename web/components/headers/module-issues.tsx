@@ -77,7 +77,7 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
     } = useApplication()
     const { setTrackElement } = useEventTracker()
     const {
-        membership: { currentProjectRole },
+        membership: { currentProjectRole, currentWorkspaceRole },
     } = useUser()
     const { currentProjectDetails } = useProject()
     const { projectLabels } = useLabel()
@@ -256,14 +256,16 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
 
                         {canUserCreateIssue && (
                             <>
-                                <Button
-                                    className="hidden md:block"
-                                    onClick={() => setAnalyticsModal(true)}
-                                    variant="neutral-primary"
-                                    size="sm"
-                                >
-                                    Analytics
-                                </Button>
+                                {(currentWorkspaceRole === ERoles.ADMIN || currentProjectRole === ERoles.ADMIN) && (
+                                    <Button
+                                        className="hidden md:block"
+                                        onClick={() => setAnalyticsModal(true)}
+                                        variant="neutral-primary"
+                                        size="sm"
+                                    >
+                                        Analytics
+                                    </Button>
+                                )}
                                 <Button
                                     className="hidden sm:flex"
                                     onClick={() => {
@@ -283,7 +285,9 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
                             onClick={toggleSidebar}
                         >
                             <ArrowRight
-                                className={`h-4 w-4 duration-300 hidden md:block ${isSidebarCollapsed ? "-rotate-180" : ""}`}
+                                className={`h-4 w-4 duration-300 hidden md:block ${
+                                    isSidebarCollapsed ? "-rotate-180" : ""
+                                }`}
                             />
                             <PanelRight
                                 className={cn(

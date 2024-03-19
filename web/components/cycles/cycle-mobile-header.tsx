@@ -7,8 +7,9 @@ import { Calendar, ChevronDown, Kanban, List } from "lucide-react"
 import { ProjectAnalyticsModal } from "@components/analytics"
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues"
 
-import { useCycle, useIssues, useLabel, useMember, useProjectState } from "@hooks/store"
+import { useCycle, useIssues, useLabel, useMember, useProjectState, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue"
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
@@ -43,6 +44,9 @@ export const CycleMobileHeader = () => {
         },
         [workspaceSlug, projectId, cycleId, updateFilters]
     )
+    const {
+        membership: { currentProjectRole, currentWorkspaceRole },
+    } = useUser()
 
     const { projectStates } = useProjectState()
     const { projectLabels } = useLabel()
@@ -161,13 +165,14 @@ export const CycleMobileHeader = () => {
                         />
                     </FiltersDropdown>
                 </div>
-
-                <span
-                    onClick={() => setAnalyticsModal(true)}
-                    className="flex flex-grow justify-center text-custom-text-200 text-sm border-l border-custom-border-200"
-                >
-                    Analytics
-                </span>
+                {(currentWorkspaceRole === ERoles.ADMIN || currentProjectRole === ERoles.ADMIN) && (
+                    <span
+                        onClick={() => setAnalyticsModal(true)}
+                        className="flex flex-grow justify-center text-custom-text-200 text-sm border-l border-custom-border-200"
+                    >
+                        Analytics
+                    </span>
+                )}
             </div>
         </>
     )

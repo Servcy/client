@@ -49,7 +49,7 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
     } = useApplication()
     const { setTrackElement } = useEventTracker()
     const {
-        membership: { currentProjectRole },
+        membership: { currentProjectRole, currentWorkspaceRole },
     } = useUser()
     const { currentProjectDetails } = useProject()
     const { projectStates } = useProjectState()
@@ -191,14 +191,16 @@ export const ProjectIssuesHeader: React.FC = observer(() => {
 
                     {canUserCreateIssue && (
                         <>
-                            <Button
-                                className="hidden md:block"
-                                onClick={() => setAnalyticsModal(true)}
-                                variant="neutral-primary"
-                                size="sm"
-                            >
-                                Analytics
-                            </Button>
+                            {(currentWorkspaceRole === ERoles.ADMIN || currentProjectRole === ERoles.ADMIN) && (
+                                <Button
+                                    className="hidden md:block"
+                                    onClick={() => setAnalyticsModal(true)}
+                                    variant="neutral-primary"
+                                    size="sm"
+                                >
+                                    Analytics
+                                </Button>
+                            )}
                             <Button
                                 onClick={() => {
                                     setTrackElement("Project issues page")

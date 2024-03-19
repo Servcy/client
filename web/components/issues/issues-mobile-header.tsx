@@ -6,8 +6,9 @@ import { Calendar, ChevronDown, Kanban, List } from "lucide-react"
 
 import { ProjectAnalyticsModal } from "@components/analytics"
 
-import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store"
+import { useIssues, useLabel, useMember, useProject, useProjectState, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT, ISSUE_LAYOUTS } from "@constants/issue"
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
@@ -26,6 +27,9 @@ export const IssuesMobileHeader = () => {
         workspaceSlug: string
         projectId: string
     }
+    const {
+        membership: { currentProjectRole, currentWorkspaceRole },
+    } = useUser()
     const { currentProjectDetails } = useProject()
     const { projectStates } = useProjectState()
     const { projectLabels } = useLabel()
@@ -158,12 +162,14 @@ export const IssuesMobileHeader = () => {
                     </FiltersDropdown>
                 </div>
 
-                <button
-                    onClick={() => setAnalyticsModal(true)}
-                    className="flex flex-grow justify-center text-custom-text-200 text-sm border-l border-custom-border-200"
-                >
-                    Analytics
-                </button>
+                {(currentWorkspaceRole === ERoles.ADMIN || currentProjectRole === ERoles.ADMIN) && (
+                    <button
+                        onClick={() => setAnalyticsModal(true)}
+                        className="flex flex-grow justify-center text-custom-text-200 text-sm border-l border-custom-border-200"
+                    >
+                        Analytics
+                    </button>
+                )}
             </div>
         </>
     )
