@@ -18,7 +18,7 @@ export class AnalyticsService extends APIService {
         return this.get(`/dashboard/${workspaceSlug}/analytics`, {
             params: {
                 ...params,
-                project: params?.project ? params.project.toString() : null,
+                project_id: params?.project ? params.project.toString() : null,
             },
         })
             .then((response) => response?.data)
