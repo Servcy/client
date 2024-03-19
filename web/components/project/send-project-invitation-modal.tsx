@@ -124,7 +124,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
         if (fields.length === 0) {
             append([
                 {
-                    role: 5,
+                    role: ERoles.MEMBER,
                     member_id: "",
                 },
             ])
@@ -339,7 +339,11 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                             </Button>
                                             <Button variant="primary" size="sm" type="submit" loading={isSubmitting}>
                                                 {isSubmitting
-                                                    ? `${fields && fields.length > 1 ? "Adding Members..." : "Adding Member..."}`
+                                                    ? `${
+                                                          fields && fields.length > 1
+                                                              ? "Adding Members..."
+                                                              : "Adding Member..."
+                                                      }`
                                                     : `${fields && fields.length > 1 ? "Add Members" : "Add Member"}`}
                                             </Button>
                                         </div>
