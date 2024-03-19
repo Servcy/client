@@ -165,7 +165,7 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
                             control={control}
                             name="filters"
                             render={({ field: { onChange, value: filters } }) => (
-                                <FiltersDropdown title="Filters" tabIndex={3}>
+                                <FiltersDropdown title="Filters" tabIndex={3} placement="bottom-end">
                                     <FilterSelection
                                         filters={filters ?? {}}
                                         handleFiltersUpdate={(key, value) => {
