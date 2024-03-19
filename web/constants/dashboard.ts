@@ -254,7 +254,7 @@ export const SIDEBAR_MENU_ITEMS: {
         key: "analytics",
         label: "Analytics",
         href: `/analytics`,
-        access: ERoles.MEMBER,
+        access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname.includes(`${baseUrl}/analytics`),
         Icon: BarChart2,
     },
