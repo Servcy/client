@@ -70,10 +70,12 @@ export const generateBarColor = (
     if (!analytics) return color
 
     if (params[type] === "state_id")
-        color = analytics?.extras.state_details.find((s) => s.state_id === value)?.state__color
+        color = analytics?.extras.state_details.find((s) => s.state_id?.toString() === String(value))?.state__color
 
     if (params[type] === "labels__id")
-        color = analytics?.extras.label_details.find((l) => l.labels__id === value)?.labels__color ?? undefined
+        color =
+            analytics?.extras.label_details.find((l) => l.labels__id?.toString() === String(value))?.labels__color ??
+            undefined
 
     if (params[type] === "state__group") color = STATE_GROUPS[value.toLowerCase() as TStateGroups].color
 
