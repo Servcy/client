@@ -143,7 +143,7 @@ export default function Login(): JSX.Element {
                                 type="email"
                                 className="mb-[16px] p-3 text-sm"
                             />
-                            <h2 className="servcy-hr-lines mb-[16px]">Or</h2>
+                            {/* <h2 className="servcy-hr-lines mb-[16px]">Or</h2>
                             <Input
                                 id="phone_number"
                                 color={invalidPhone ? "failure" : "default"}
@@ -156,7 +156,7 @@ export default function Login(): JSX.Element {
                                 autoComplete="off"
                                 type="email"
                                 className="mb-[16px] p-3 text-sm"
-                            />
+                            /> */}
                             <div className="mb-6 text-left">
                                 <input
                                     id="agree_terms_conditions_and_privacy_policy"
