@@ -27,7 +27,7 @@ export const AnalyticsScope: React.FC<Props> = ({ defaultAnalytics }) => (
                         )}
                         tooltip={(datum) => {
                             const assignee = defaultAnalytics.pending_issue_user.find(
-                                (a) => a.assignees__id === `${datum.indexValue}`
+                                (a) => a.assignees__id.toString() === `${datum.indexValue}`
                             )
 
                             return (
