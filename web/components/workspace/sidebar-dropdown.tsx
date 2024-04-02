@@ -24,6 +24,9 @@ import { usePopper } from "react-popper"
 import { mutate } from "swr"
 
 import { useApplication, useUser, useWorkspace } from "@hooks/store"
+import useUserInbox from "@hooks/use-user-inbox"
+
+import { getNumberCount } from "@helpers/string.helper"
 
 import { IWorkspace } from "@servcy/types"
 import { Avatar, Loader } from "@servcy/ui"
@@ -64,6 +67,7 @@ const userLinks = () => [
     {
         name: "Inbox",
         icon: Inbox,
+        showUnreadCount: true,
         link: `/inbox`,
     },
     {
@@ -82,6 +86,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
     const router = useRouter()
     const { workspaceSlug } = useParams()
     // store hooks
+    const { totalUnreadCount } = useUserInbox()
     const {
         theme: { sidebarCollapsed, toggleSidebar },
     } = useApplication()
@@ -332,6 +337,11 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                             <span className="flex w-full items-center gap-2 rounded px-2 py-1 hover:bg-custom-sidebar-background-80">
                                                 <link.icon className="h-4 w-4 stroke-[1.5]" />
                                                 {link.name}
+                                                {link.showUnreadCount && totalUnreadCount && totalUnreadCount > 0 && (
+                                                    <span className="ml-auto rounded-full bg-custom-primary-300 px-1.5 text-xs text-white">
+                                                        {getNumberCount(totalUnreadCount)}
+                                                    </span>
+                                                )}
                                             </span>
                                         </Menu.Item>
                                     </Link>
