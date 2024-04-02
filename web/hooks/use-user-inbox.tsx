@@ -16,7 +16,7 @@ const useUserInbox = (): UseUserInbox => {
     )
 
     return {
-        totalUnreadCount: unreadCount ? unreadCount.count : null,
+        totalUnreadCount: unreadCount ? unreadCount.message + unreadCount.notification + unreadCount.comment : null,
         unreadCount,
         mutateUnreadCount,
     }
