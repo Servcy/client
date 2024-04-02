@@ -10,7 +10,6 @@ import { Input } from "antd"
 import toast from "react-hot-toast"
 import { BiLogIn } from "react-icons/bi"
 import { HiMail } from "react-icons/hi"
-import { RiWhatsappLine } from "react-icons/ri"
 
 import OTPInput from "@components/login/OTPInput"
 
@@ -19,7 +18,7 @@ import useLoginRedirection from "@hooks/use-login-redirection"
 
 import { AuthService } from "@services/auth.service"
 
-import { validateEmail, validateOtp, validatePhone } from "@helpers/validation.helper"
+import { validateEmail, validateOtp } from "@helpers/validation.helper"
 
 import { Button, Spinner } from "@servcy/ui"
 
@@ -30,8 +29,6 @@ export default function Login(): JSX.Element {
     const [otp, setOtp] = useState<string>("")
     const [input, setInput] = useState<string>("")
     const [stage, setStage] = useState<number>(0)
-    const [invalidPhone, setInvalidPhone] = useState<boolean>(false)
-    const [invalidEmail, setInvalidEmail] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
     const { isRedirecting, handleRedirection } = useLoginRedirection()
     const { currentUser } = useUser()
@@ -41,34 +38,28 @@ export default function Login(): JSX.Element {
             e.preventDefault()
             setLoading(true)
             const email = document.getElementById("email") as HTMLInputElement
-            const phone_number = document.getElementById("phone_number") as HTMLInputElement
             const agree_terms_conditions_and_privacy_policy = document.getElementById(
                 "agree_terms_conditions_and_privacy_policy"
             ) as HTMLInputElement
-            // validate email address and phone number
+            // validate email address
             const isEmailValid = validateEmail(email.value)
-            const isPhoneValid = validatePhone(phone_number.value)
-            if (!isPhoneValid) setInvalidEmail(!isEmailValid)
-            else if (!isEmailValid) setInvalidPhone(!isPhoneValid)
-            if ((!isEmailValid && !isPhoneValid) || !agree_terms_conditions_and_privacy_policy.checked) {
-                toast.error(!isEmailValid ? "Please enter a valid email address" : "Please enter a valid phone number")
+            if (!isEmailValid) {
+                toast.error("Please enter a valid email address")
+                return
+            }
+            if (!agree_terms_conditions_and_privacy_policy.checked) {
+                toast.error("Please agree to our privacy policy and TOS by checking the checkbox")
                 return
             }
             // set input type and value
-            setInputType(isEmailValid ? "email" : "phone_number")
-            setInput(isEmailValid ? email.value : phone_number.value.replace("+", ""))
+            setInputType("email")
+            setInput(email.value)
             // send otp
-            await toast.promise(
-                authService.sendOtp(
-                    isEmailValid ? email.value : phone_number.value.replace("+", ""),
-                    isEmailValid ? "email" : "phone_number"
-                ),
-                {
-                    loading: "Sending OTP...",
-                    success: "OTP sent successfully",
-                    error: "Failed to send OTP",
-                }
-            )
+            await toast.promise(authService.sendOtp(email.value, "email"), {
+                loading: "Sending OTP...",
+                success: "OTP sent successfully",
+                error: "Failed to send OTP",
+            })
             // set stage to otp input
             setStage(1)
         } finally {
@@ -132,7 +123,7 @@ export default function Login(): JSX.Element {
                         <>
                             <Input
                                 id="email"
-                                color={invalidEmail ? "failure" : "default"}
+                                color="default"
                                 prefix={<HiMail className="mr-1" />}
                                 required
                                 onKeyDown={(event) => {
@@ -143,20 +134,6 @@ export default function Login(): JSX.Element {
                                 type="email"
                                 className="mb-[16px] p-3 text-sm"
                             />
-                            {/* <h2 className="servcy-hr-lines mb-[16px]">Or</h2>
-                            <Input
-                                id="phone_number"
-                                color={invalidPhone ? "failure" : "default"}
-                                prefix={<RiWhatsappLine className="mr-1" />}
-                                required
-                                onKeyDown={(event) => {
-                                    if (event.code === "Enter") sendOtp(event)
-                                }}
-                                placeholder="+123 456 7890"
-                                autoComplete="off"
-                                type="email"
-                                className="mb-[16px] p-3 text-sm"
-                            /> */}
                             <div className="mb-6 text-left">
                                 <input
                                     id="agree_terms_conditions_and_privacy_policy"
