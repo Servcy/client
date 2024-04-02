@@ -12,6 +12,11 @@ class InboxService extends APIService {
         return response?.data
     }
 
+    async fetchInboxUnreadCount(): Promise<any> {
+        const response = await this.get("/inbox/unread-count")
+        return JSON.parse(response?.data?.results)
+    }
+
     async archiveItems(payload: object): Promise<any> {
         const response = await this.post("/inbox/archive", payload)
         return response

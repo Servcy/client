@@ -14,8 +14,11 @@ import { CommandPalette } from "@components/command-palette"
 
 import { useApplication, useUser, useWorkspace } from "@hooks/store"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+import useUserInbox from "@hooks/use-user-inbox"
 
 import UserAuthWrapper from "@wrappers/auth/UserAuthWrapper"
+
+import { getNumberCount } from "@helpers/string.helper"
 
 import { IWorkspace } from "@servcy/types"
 import { Avatar, Tooltip } from "@servcy/ui"
@@ -52,6 +55,7 @@ const HOME_ACTION_LINKS = [
         key: "inbox",
         Icon: Inbox,
         label: "Inbox",
+        showUnreadCount: true,
         href: "/inbox",
     },
 ]
@@ -81,6 +85,7 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
     const { logOut, updateCurrentUser, currentUser } = useUser()
     const { workspaces } = useWorkspace()
     const workspacesList = Object.values(workspaces ?? {})
+    const { totalUnreadCount } = useUserInbox()
     const ref = useRef<HTMLDivElement>(null)
 
     useOutsideClickDetector(ref, () => {
@@ -266,6 +271,13 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                                 >
                                                     {<link.Icon className="h-4 w-4" />}
                                                     {!sidebarCollapsed && link.label}
+                                                    {link.showUnreadCount &&
+                                                        totalUnreadCount &&
+                                                        totalUnreadCount > 0 && (
+                                                            <span className="ml-auto rounded-full bg-custom-primary-300 px-1.5 text-xs text-white">
+                                                                {getNumberCount(totalUnreadCount)}
+                                                            </span>
+                                                        )}
                                                 </div>
                                             </Tooltip>
                                         </Link>
