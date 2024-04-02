@@ -272,7 +272,7 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                                     {<link.Icon className="h-4 w-4" />}
                                                     {!sidebarCollapsed && link.label}
                                                     {link.showUnreadCount &&
-                                                        totalUnreadCount &&
+                                                        !!totalUnreadCount &&
                                                         totalUnreadCount > 0 &&
                                                         (sidebarCollapsed ? (
                                                             <span className="absolute right-3.5 top-2 h-2 w-2 rounded-full bg-custom-primary-300" />

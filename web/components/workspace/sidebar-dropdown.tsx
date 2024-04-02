@@ -337,7 +337,7 @@ export const WorkspaceSidebarDropdown = observer(() => {
                                             <span className="flex w-full items-center gap-2 rounded px-2 py-1 hover:bg-custom-sidebar-background-80">
                                                 <link.icon className="h-4 w-4 stroke-[1.5]" />
                                                 {link.name}
-                                                {link.showUnreadCount && totalUnreadCount && totalUnreadCount > 0 && (
+                                                {link.showUnreadCount && !!totalUnreadCount && totalUnreadCount > 0 && (
                                                     <span className="ml-auto rounded-full bg-custom-primary-300 px-1.5 text-xs text-white">
                                                         {getNumberCount(totalUnreadCount)}
                                                     </span>
