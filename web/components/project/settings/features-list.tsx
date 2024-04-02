@@ -51,7 +51,7 @@ export const ProjectFeaturesList: FC<Props> = observer(() => {
         membership: { currentProjectRole },
     } = useUser()
     const { currentProjectDetails, updateProject } = useProject()
-    const isAdmin = currentProjectRole && currentProjectRole > ERoles.MEMBER
+    const isAdmin = currentProjectRole !== undefined && currentProjectRole > ERoles.MEMBER
 
     const handleSubmit = async (formData: Partial<IProject>) => {
         if (!workspaceSlug || !projectId || !currentProjectDetails) return

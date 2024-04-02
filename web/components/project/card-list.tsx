@@ -25,7 +25,7 @@ export const ProjectCardList = observer(() => {
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("onboarding", "projects", isLightMode)
 
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
     if (!workspaceProjectIds) return <ProjectsLoader />
 

@@ -194,7 +194,7 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
         [canEditProperties, handleIssues]
     )
 
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
     if (loader === "init-loader" || !globalViewId || globalViewId !== dataViewId || !issueIds) {
         return <SpreadsheetLayoutLoader />

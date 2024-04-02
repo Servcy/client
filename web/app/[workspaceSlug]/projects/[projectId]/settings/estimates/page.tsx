@@ -19,7 +19,7 @@ const EstimatesSettingsPage = observer(() => {
     } = useUser()
     const { currentProjectDetails } = useProject()
     // derived values
-    const isAdmin = currentProjectRole && currentProjectRole >= ERoles.ADMIN
+    const isAdmin = currentProjectRole !== undefined && currentProjectRole >= ERoles.ADMIN
     const pageTitle = currentProjectDetails?.name ? `${currentProjectDetails?.name} - Estimates` : undefined
 
     return (

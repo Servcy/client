@@ -26,7 +26,7 @@ const BillingSettingsPage = observer(() => {
     const { currentWorkspace } = useWorkspace()
     const { workspaceSlug } = useParams()
     // derived values
-    const isAdmin = currentWorkspaceRole && currentWorkspaceRole >= ERoles.ADMIN
+    const isAdmin = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.ADMIN
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Billing & Plans` : undefined
 
     // fetching user workspace information

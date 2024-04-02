@@ -151,7 +151,8 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                         placement="bottom-end"
                     >
                         {Object.keys(ROLES).map((key) => {
-                            if (currentProjectRole && !isAdmin && currentProjectRole < parseInt(key)) return null
+                            if (currentProjectRole !== undefined && !isAdmin && currentProjectRole < parseInt(key))
+                                return null
 
                             return (
                                 <CustomSelect.Option key={key} value={key}>

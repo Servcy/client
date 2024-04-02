@@ -524,7 +524,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                     <Transition show={open}>
                                         <Disclosure.Panel>
                                             <div className="mt-2 flex h-72 w-full flex-col space-y-3 overflow-y-auto">
-                                                {currentProjectRole &&
+                                                {currentProjectRole !== undefined &&
                                                 moduleDetails.link_module &&
                                                 moduleDetails.link_module.length > 0 ? (
                                                     <>

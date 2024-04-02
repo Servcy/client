@@ -36,7 +36,7 @@ const AutomationSettingsPage = observer(() => {
     }
 
     // derived values
-    const isAdmin = currentProjectRole && currentProjectRole >= ERoles.ADMIN
+    const isAdmin = currentProjectRole !== undefined && currentProjectRole >= ERoles.ADMIN
     const pageTitle = projectDetails?.name ? `${projectDetails?.name} - Automations` : undefined
 
     return (

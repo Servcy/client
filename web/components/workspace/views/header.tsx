@@ -71,7 +71,7 @@ export const GlobalViewsHeader: React.FC = observer(() => {
         }
     }, [globalViewId, currentWorkspaceViews, containerRef])
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const isAuthorizedUser = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
     return (
         <>

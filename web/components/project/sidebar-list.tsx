@@ -53,7 +53,7 @@ export const ProjectSidebarList: FC = observer(() => {
     const { workspaceSlug } = useParams()
     // toast
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const isAuthorizedUser = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
     const handleCopyText = (projectId: string) => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {

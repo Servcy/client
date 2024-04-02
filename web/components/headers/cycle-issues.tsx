@@ -140,7 +140,7 @@ export const CycleIssuesHeader: React.FC = observer(() => {
 
     // derived values
     const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined
-    const canUserCreateIssue = currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const canUserCreateIssue = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

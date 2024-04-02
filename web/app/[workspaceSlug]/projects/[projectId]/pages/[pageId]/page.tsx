@@ -230,12 +230,15 @@ const PageDetailsPage = observer(() => {
         }
     }
 
-    const isPageReadOnly = is_locked || archived_at || (currentProjectRole && currentProjectRole <= ERoles.MEMBER)
+    const isPageReadOnly =
+        is_locked || archived_at || (currentProjectRole !== undefined && currentProjectRole <= ERoles.MEMBER)
 
     const isCurrentUserOwner = owned_by === currentUser?.id
 
-    const userCanDuplicate = currentProjectRole && currentProjectRole && currentProjectRole >= ERoles.MEMBER
-    const userCanArchive = isCurrentUserOwner || (currentProjectRole && currentProjectRole >= ERoles.ADMIN)
+    const userCanDuplicate =
+        currentProjectRole && currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
+    const userCanArchive =
+        isCurrentUserOwner || (currentProjectRole !== undefined && currentProjectRole >= ERoles.ADMIN)
     const userCanLock = (currentProjectRole ?? 0) > ERoles.GUEST
 
     return pageIdMobx ? (

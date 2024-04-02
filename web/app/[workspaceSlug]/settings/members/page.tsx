@@ -76,7 +76,7 @@ const WorkspaceMembersSettingsPage = observer(() => {
     }
 
     // derived values
-    const hasAddMemberPermission = currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const hasAddMemberPermission = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace.name} - Members` : undefined
 
     return (

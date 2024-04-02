@@ -41,7 +41,7 @@ const AnalyticsPage = observer(() => {
     // derived values
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "analytics", isLightMode)
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
     const pageTitle = currentWorkspace?.name ? `${currentWorkspace?.name} - Analytics` : undefined
 
     return (

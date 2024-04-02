@@ -37,7 +37,7 @@ export const WorkspaceSidebarQuickAction = observer(() => {
 
     const isSidebarCollapsed = themeStore.sidebarCollapsed
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const isAuthorizedUser = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
     const disabled = joinedProjectIds.length === 0
 

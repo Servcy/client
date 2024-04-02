@@ -94,7 +94,7 @@ export const GlobalIssuesHeader: React.FC<Props> = observer((props) => {
         [workspaceSlug, updateFilters, globalViewId]
     )
 
-    const isAuthorizedUser = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const isAuthorizedUser = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
     return (
         <>

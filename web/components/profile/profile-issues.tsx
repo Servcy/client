@@ -60,7 +60,7 @@ export const ProfileIssuesPage = observer((props: IProfileIssuesPage) => {
 
     const activeLayout = issueFilters?.displayFilters?.layout || undefined
 
-    const isEditingAllowed = !!currentWorkspaceRole && currentWorkspaceRole >= ERoles.MEMBER
+    const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
     if (!groupedIssueIds || loader === "init-loader")
         return <>{activeLayout === "list" ? <ListLayoutLoader /> : <KanbanLayoutLoader />}</>
