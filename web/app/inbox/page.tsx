@@ -16,11 +16,15 @@ import { InboxHeader } from "@components/headers/inbox"
 import InboxItemModal from "@components/inbox/InboxItemModal"
 import InboxItems from "@components/inbox/InboxItems"
 
+import useUserInbox from "@hooks/use-user-inbox"
+
 import { integrationInboxCategories } from "@constants/integration"
 
 import InboxService from "@services/inbox.service"
 
 import DefaultWrapper from "@wrappers/DefaultWrapper"
+
+import { getNumberCount } from "@helpers/string.helper"
 
 import type { InboxItem, PaginationDetails } from "@servcy/types"
 import { Button as ServcyButton } from "@servcy/ui"
@@ -58,6 +62,7 @@ const Inbox = observer(() => {
     const [inboxPagination, setInboxPagination] = useState<PaginationDetails>({} as PaginationDetails)
     const [activeTab, setActiveTab] = useState<string>("message")
     const [page, setPage] = useState<number>(1)
+    const { unreadCount, mutateUnreadCount } = useUserInbox()
     const [filters, setFilters] = useState<Record<string, string | boolean>>({
         category: "message",
     })
@@ -94,6 +99,7 @@ const Inbox = observer(() => {
                 setInboxItems([])
                 refetchInboxItems()
             } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))))
+            mutateUnreadCount()
         } catch (err) {
             console.error(err)
         }
@@ -113,6 +119,7 @@ const Inbox = observer(() => {
                     return item
                 })
             )
+            mutateUnreadCount()
         } catch (err) {
             console.error(err)
         }
@@ -127,6 +134,7 @@ const Inbox = observer(() => {
                 setInboxItems([])
                 refetchInboxItems()
             } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))))
+            mutateUnreadCount()
         } catch (err) {
             console.error(err)
         }
@@ -260,7 +268,9 @@ const Inbox = observer(() => {
                                     >
                                         <item.Icon className="my-auto mr-2" />
                                         {item.label}{" "}
-                                        {activeTab === item.key ? `(${inboxPagination.total_items || "-"})` : ""}
+                                        {unreadCount[item.key]
+                                            ? `(${getNumberCount(unreadCount[item.key]) || "-"})`
+                                            : ""}
                                     </div>
                                 ),
                                 key: item.key,
