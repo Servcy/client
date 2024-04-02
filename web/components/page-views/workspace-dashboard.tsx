@@ -57,7 +57,7 @@ export const WorkspaceDashboardView = observer(() => {
         fetchHomeDashboardWidgets(workspaceSlug)
     }, [fetchHomeDashboardWidgets, workspaceSlug])
 
-    const isEditingAllowed = currentWorkspaceRole && currentWorkspaceRole >= ERoles.ADMIN
+    const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.ADMIN
 
     return (
         <>

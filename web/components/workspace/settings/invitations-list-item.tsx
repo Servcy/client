@@ -52,7 +52,8 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
     // 1. user cannot change their own role
     // 2. only admin or member can change role
     // 3. user cannot change role of higher role
-    const hasRoleChangeAccess = currentWorkspaceRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentWorkspaceRole)
+    const hasRoleChangeAccess =
+        currentWorkspaceRole !== undefined && [ERoles.ADMIN, ERoles.MEMBER].includes(currentWorkspaceRole)
 
     if (!currentWorkspaceMemberInfo) return null
 
@@ -113,7 +114,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                     >
                         {Object.keys(ROLES).map((key) => {
                             if (
-                                currentWorkspaceRole &&
+                                currentWorkspaceRole !== undefined &&
                                 currentWorkspaceRole < ERoles.ADMIN &&
                                 currentWorkspaceRole < parseInt(key)
                             )

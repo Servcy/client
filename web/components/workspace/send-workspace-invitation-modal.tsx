@@ -181,7 +181,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
                                                                 >
                                                                     {Object.entries(ROLES).map(([key, value]) => {
                                                                         if (
-                                                                            currentWorkspaceRole &&
+                                                                            currentWorkspaceRole !== undefined &&
                                                                             currentWorkspaceRole >= parseInt(key)
                                                                         )
                                                                             return (
