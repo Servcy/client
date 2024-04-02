@@ -31,7 +31,7 @@ export const ModulesListView: React.FC = observer(() => {
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const EmptyStateImagePath = getEmptyStateImagePath("onboarding", "modules", isLightMode)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     if (loader || !projectModuleIds)
         return (

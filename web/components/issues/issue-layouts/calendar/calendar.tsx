@@ -57,7 +57,7 @@ export const CalendarChart: React.FC<Props> = observer((props) => {
     } = useUser()
 
     const { enableIssueCreation } = viewFlags || {}
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     const calendarPayload = issueCalendarView.calendarPayload
 

@@ -122,7 +122,7 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
     const endDate = new Date(cycleDetails.end_date ?? "")
     const startDate = new Date(cycleDetails.start_date ?? "")
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     const cycleTotalIssues =
         cycleDetails.backlog_issues +

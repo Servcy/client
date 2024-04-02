@@ -199,7 +199,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
     const issueCount =
         moduleDetails.total_issues === 0 ? "0 Issue" : `${moduleDetails.completed_issues}/${moduleDetails.total_issues}`
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

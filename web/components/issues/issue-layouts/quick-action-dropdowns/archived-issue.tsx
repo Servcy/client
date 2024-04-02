@@ -32,7 +32,7 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
     // derived values
     const activeLayout = `${issuesFilter.issueFilters?.displayFilters?.layout} layout`
     // auth
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER && !readOnly
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER && !readOnly
     const isRestoringAllowed = handleRestore && isEditingAllowed
 
     const issueLink = `${workspaceSlug}/projects/${issue.project_id}/archived-issues/${issue.id}`

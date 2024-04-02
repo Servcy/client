@@ -58,7 +58,7 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
 
     const totalFilters = calculateTotalFilters(view.filters ?? {})
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

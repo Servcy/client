@@ -39,7 +39,7 @@ export const ProjectViewsList = observer(() => {
 
     const filteredViewsList = viewsList.filter((v) => v?.name.toLowerCase().includes(query.toLowerCase()))
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

@@ -28,7 +28,7 @@ export const ProjectSettingLayout: FC<IProjectSettingLayout> = observer((props) 
         membership: { currentProjectRole },
     } = useUser()
 
-    const restrictViewSettings = currentProjectRole && currentProjectRole <= ERoles.MEMBER
+    const restrictViewSettings = currentProjectRole !== undefined && currentProjectRole <= ERoles.MEMBER
 
     return restrictViewSettings ? (
         <NotAuthorizedView

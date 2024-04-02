@@ -55,7 +55,7 @@ export const BaseSpreadsheetRoot = observer((props: IBaseSpreadsheetRoot) => {
     // derived values
     const { enableInlineEditing, enableQuickAdd, enableIssueCreation } = issueStore?.viewFlags || {}
     // user role validation
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     const canEditProperties = useCallback(
         (projectId: string | undefined) => {

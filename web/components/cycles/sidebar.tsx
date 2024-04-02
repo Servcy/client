@@ -206,7 +206,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
 
     const daysLeft = findHowManyDaysLeft(cycleDetails.end_date)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

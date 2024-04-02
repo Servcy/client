@@ -49,7 +49,7 @@ export const ProfileIssuesKanBanLayout: React.FC = observer(() => {
     const canEditPropertiesBasedOnProject = (projectId: string) => {
         const currentProjectRole = currentWorkspaceAllProjectsRole && currentWorkspaceAllProjectsRole[projectId]
 
-        return !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+        return currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
     }
 
     return (

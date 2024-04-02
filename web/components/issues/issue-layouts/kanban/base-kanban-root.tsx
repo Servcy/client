@@ -107,7 +107,7 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
     const [dragState, setDragState] = useState<KanbanDragState>({})
     const [deleteIssueModal, setDeleteIssueModal] = useState(false)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     const canEditProperties = useCallback(
         (projectId: string | undefined) => {

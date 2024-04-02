@@ -55,7 +55,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
     const startDate = new Date(cycleDetails.start_date ?? "")
     const isDateValid = cycleDetails.start_date || cycleDetails.end_date
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     const currentCycle = CYCLE_STATUS.find((status) => status.value === cycleStatus)
 

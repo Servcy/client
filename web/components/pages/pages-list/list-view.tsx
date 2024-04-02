@@ -47,7 +47,7 @@ export const PagesListView: FC<IPagesListView> = (props) => {
 
     // here we are only observing the projectPageStore, so that we can re-render the component when the projectPageStore changes
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

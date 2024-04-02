@@ -322,7 +322,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
     // issue details
     const issue = getIssueById(issueId)
     // checking if issue is editable, based on user role
-    const is_editable = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const is_editable = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
         <>

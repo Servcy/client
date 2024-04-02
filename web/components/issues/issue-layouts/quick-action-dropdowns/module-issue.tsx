@@ -51,7 +51,7 @@ export const ModuleIssueQuickActions: React.FC<IQuickActionProps> = observer((pr
     // derived values
     const stateDetails = getStateById(issue.state_id)
     // auth
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER && !readOnly
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER && !readOnly
     const isArchivingAllowed = handleArchive && isEditingAllowed
     const isInArchivableGroup =
         !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group)

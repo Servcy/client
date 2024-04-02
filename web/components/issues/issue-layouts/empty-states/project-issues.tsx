@@ -66,7 +66,7 @@ export const ProjectEmptyState: React.FC = observer(() => {
         })
     }
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     const emptyStateProps: EmptyStateProps =
         issueFilterCount > 0

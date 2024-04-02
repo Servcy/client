@@ -74,7 +74,7 @@ export const BaseListRoot = observer((props: IBaseListRoot) => {
     const { workspaceSlug } = useParams()
     const { issueMap } = useIssues()
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     const issueIds = issues?.groupedIssueIds || []
 

@@ -27,7 +27,7 @@ export const ProjectAppliedFiltersRoot: React.FC = observer(() => {
     } = useUser()
     const { projectStates } = useProjectState()
     // derived values
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
     const userFilters = issueFilters?.filters
     // filters whose value not null or empty array
     const appliedFilters: IIssueFilterOptions = {}

@@ -33,7 +33,7 @@ export const RecentPagesList: FC = observer(() => {
     // FIXME: replace any with proper type
     const isEmpty = recentProjectPages && Object.values(recentProjectPages).every((value: any) => value.length === 0)
 
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     if (!recentProjectPages) {
         return (

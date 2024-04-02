@@ -44,7 +44,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
     const { setTrackElement, captureEvent } = useEventTracker()
     // derived values
     const moduleDetails = getModuleById(moduleId)
-    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     const handleAddToFavorites = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
