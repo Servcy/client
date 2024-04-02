@@ -267,18 +267,20 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
                                                 disabled={!sidebarCollapsed}
                                             >
                                                 <div
-                                                    className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium outline-none text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80 ${sidebarCollapsed ? "justify-center" : ""}`}
+                                                    className={`group relative flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium outline-none text-custom-sidebar-text-200 hover:bg-custom-sidebar-background-80 ${sidebarCollapsed ? "justify-center" : ""}`}
                                                 >
                                                     {<link.Icon className="h-4 w-4" />}
                                                     {!sidebarCollapsed && link.label}
-                                                    {!sidebarCollapsed &&
-                                                        link.showUnreadCount &&
+                                                    {link.showUnreadCount &&
                                                         totalUnreadCount &&
-                                                        totalUnreadCount > 0 && (
+                                                        totalUnreadCount > 0 &&
+                                                        (sidebarCollapsed ? (
+                                                            <span className="absolute right-3.5 top-2 h-2 w-2 rounded-full bg-custom-primary-300" />
+                                                        ) : (
                                                             <span className="ml-auto rounded-full bg-custom-primary-300 px-1.5 text-xs text-white">
                                                                 {getNumberCount(totalUnreadCount)}
                                                             </span>
-                                                        )}
+                                                        ))}
                                                 </div>
                                             </Tooltip>
                                         </Link>
