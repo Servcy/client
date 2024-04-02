@@ -142,6 +142,7 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                             layout="fill"
                             objectFit="cover"
                             className="rounded-full"
+                            loader={({ src }) => src}
                         />
                     </div>
                 ) : (
