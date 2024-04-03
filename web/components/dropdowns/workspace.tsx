@@ -5,7 +5,7 @@ import { Check, ChevronDown, Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { usePopper } from "react-popper"
 
-import { useWorkspace } from "@hooks/store"
+import { useProject, useWorkspace } from "@hooks/store"
 import { useDropdownKeyDown } from "@hooks/use-dropdown-key-down"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
@@ -64,6 +64,7 @@ export const WorkspaceDropdown: React.FC<Props> = observer((props) => {
         ],
     })
     // store hooks
+    const { fetchProjects } = useProject()
     const { workspaces } = useWorkspace()
     const workspacesList = Object.values(workspaces ?? {})
     const options = workspacesList?.map((workspace) => ({
@@ -107,7 +108,7 @@ export const WorkspaceDropdown: React.FC<Props> = observer((props) => {
     }
 
     const dropdownOnChange = (val: string) => {
-        console.log(val, "megham-22")
+        fetchProjects(workspaces[val].slug)
         onChange(val)
         handleClose()
     }

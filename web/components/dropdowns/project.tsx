@@ -20,6 +20,7 @@ type Props = TDropdownProps & {
     button?: ReactNode
     dropdownArrow?: boolean
     dropdownArrowClassName?: string
+    workspaceId?: string
     onChange: (val: string) => void
     onClose?: () => void
     value: string | null
@@ -32,6 +33,7 @@ export const ProjectDropdown: React.FC<Props> = observer((props) => {
         buttonContainerClassName,
         buttonVariant,
         className = "",
+        workspaceId,
         disabled = false,
         dropdownArrow = false,
         dropdownArrowClassName = "",
@@ -66,28 +68,30 @@ export const ProjectDropdown: React.FC<Props> = observer((props) => {
         ],
     })
     // store hooks
-    const { joinedProjectIds, getProjectById } = useProject()
+    const { joinedProjectIds, getProjectById, getJoinedProjectIdsForWorkspace } = useProject()
 
-    const options = joinedProjectIds?.map((projectId) => {
-        const projectDetails = getProjectById(projectId)
+    const options = (workspaceId ? getJoinedProjectIdsForWorkspace(workspaceId) : joinedProjectIds)?.map(
+        (projectId) => {
+            const projectDetails = getProjectById(projectId)
 
-        return {
-            value: projectId,
-            query: `${projectDetails?.name}`,
-            content: (
-                <div className="flex items-center gap-2">
-                    <span className="grid place-items-center flex-shrink-0">
-                        {projectDetails?.emoji
-                            ? renderEmoji(projectDetails?.emoji)
-                            : projectDetails?.icon_prop
-                              ? renderEmoji(projectDetails?.icon_prop)
-                              : null}
-                    </span>
-                    <span className="flex-grow truncate">{projectDetails?.name}</span>
-                </div>
-            ),
+            return {
+                value: projectId,
+                query: `${projectDetails?.name}`,
+                content: (
+                    <div className="flex items-center gap-2">
+                        <span className="grid place-items-center flex-shrink-0">
+                            {projectDetails?.emoji
+                                ? renderEmoji(projectDetails?.emoji)
+                                : projectDetails?.icon_prop
+                                  ? renderEmoji(projectDetails?.icon_prop)
+                                  : null}
+                        </span>
+                        <span className="flex-grow truncate">{projectDetails?.name}</span>
+                    </div>
+                ),
+            }
         }
-    })
+    )
 
     const filteredOptions =
         query === "" ? options : options?.filter((o) => o.query.toLowerCase().includes(query.toLowerCase()))

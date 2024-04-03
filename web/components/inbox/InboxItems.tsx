@@ -56,6 +56,7 @@ const InboxItems = ({
         }),
     }
     const [isConvertToIssueModalVisible, setIsConvertToIssueModalVisible] = React.useState(false)
+    const [selectedRecord, setSelectedRecord] = React.useState<InboxItem | null>(null)
     const { resolvedTheme } = useTheme()
     const { darkAlgorithm, defaultAlgorithm } = theme
     const disableNotificationTypeHandler = (event: string, user_integration_id: number) => {
@@ -166,7 +167,10 @@ const InboxItems = ({
                             className="bg-custom-servcy-cream text-custom-servcy-black hover:!bg-custom-servcy-wheat"
                             size="small"
                             icon={<MdAddTask className="mt-1" />}
-                            onClick={() => setIsConvertToIssueModalVisible(true)}
+                            onClick={() => {
+                                setIsConvertToIssueModalVisible(true)
+                                setSelectedRecord(record)
+                            }}
                         />
                     </Tooltip>
                 </div>
@@ -239,6 +243,7 @@ const InboxItems = ({
                 onClose={() => {
                     setIsConvertToIssueModalVisible(false)
                 }}
+                data={selectedRecord}
             />
         </>
     )

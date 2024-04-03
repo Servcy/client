@@ -26,6 +26,7 @@ export interface IProjectStore {
     setSearchQuery: (query: string) => void
     getProjectById: (projectId: string) => IProject | null
     getProjectIdentifierById: (projectId: string) => string
+    getJoinedProjectIdsForWorkspace: (workspaceId: string) => string[]
     // fetch actions
     fetchProjects: (workspaceSlug: string) => Promise<IProject[]>
     fetchProjectDetails: (workspaceSlug: string, projectId: string) => Promise<any>
@@ -220,6 +221,19 @@ export class ProjectStore implements IProjectStore {
     getProjectIdentifierById = computedFn((projectId: string) => {
         const projectInfo = this.projectMap?.[projectId]
         return projectInfo?.identifier
+    })
+
+    /**
+     * Returns joined project IDs for the workspace using workspace id
+     * @param workspaceId
+     * @returns string[]
+     */
+    getJoinedProjectIdsForWorkspace = computedFn((workspaceId: string) => {
+        const projects = Object.values(this.projectMap ?? {})
+        const projectIds = projects
+            .filter((project) => project.workspace.toString() === workspaceId.toString() && project.is_member)
+            .map((project) => project.id)
+        return projectIds
     })
 
     /**
