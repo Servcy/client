@@ -169,10 +169,10 @@ const InboxItems = ({
                 theme={{
                     components: {
                         Table: {
-                            rowHoverBg: "#2B3232",
+                            rowHoverBg: resolvedTheme === "dark" ? "#2B3232" : "#F1F2EF",
                             headerBg: "#F1F2EF",
-                            rowSelectedBg: "#2B3232",
-                            rowSelectedHoverBg: "#2B3232",
+                            rowSelectedBg: resolvedTheme === "dark" ? "#2B3232" : "#F1F2EF",
+                            rowSelectedHoverBg: resolvedTheme === "dark" ? "#2B3232" : "#F1F2EF",
                         },
                     },
                     algorithm: resolvedTheme === "dark" ? darkAlgorithm : defaultAlgorithm,
