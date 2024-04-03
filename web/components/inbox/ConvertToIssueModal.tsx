@@ -14,7 +14,7 @@ import { useEventTracker, useIssues, useWorkspace } from "@hooks/store"
 import { ISSUE_CREATED } from "@constants/event-tracker"
 import { EIssuesStoreType } from "@constants/issue"
 
-import { Button } from "@servcy/ui"
+import { Button, Input } from "@servcy/ui"
 
 export interface ConvertToIssueModalProps {
     isOpen: boolean
@@ -109,8 +109,35 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
                                     <div className="space-y-5">
                                         <div className="flex items-center gap-x-2">
                                             <h3 className="text-xl font-semibold leading-6 text-custom-text-100">
-                                                Create issue {data?.title}
+                                                Create issue
                                             </h3>
+                                        </div>
+                                        <div className="space-y-3">
+                                            <div className="mt-2 space-y-3">
+                                                <Controller
+                                                    control={control}
+                                                    name="name"
+                                                    rules={{
+                                                        required: "Title is required",
+                                                        maxLength: {
+                                                            value: 255,
+                                                            message: "Title should be less than 255 characters",
+                                                        },
+                                                    }}
+                                                    render={({ field: { ref } }) => (
+                                                        <Input
+                                                            id="name"
+                                                            name="name"
+                                                            type="text"
+                                                            value={data?.title}
+                                                            disabled
+                                                            ref={ref}
+                                                            placeholder="Issue Title"
+                                                            className="resize-none text-xl w-full"
+                                                        />
+                                                    )}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="flex flex-wrap items-center gap-2 my-5">
