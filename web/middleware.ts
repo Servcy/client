@@ -18,7 +18,7 @@ export const config = {
 }
 
 export async function middleware(request: NextRequest) {
-    const accessToken = Cookies.get("accessToken") ?? ""
+    const accessToken = request.cookies.get("accessToken")?.value ?? ""
     const requestedPath = request.nextUrl.pathname
     if (isJwtTokenValid(accessToken)) {
         if (["/login", "/workspace/invite"].includes(requestedPath))
@@ -29,6 +29,8 @@ export async function middleware(request: NextRequest) {
     }
     Cookies.remove("accessToken")
     Cookies.remove("refreshToken")
+    request.cookies.set("accessToken", "")
+    request.cookies.set("refreshToken", "")
     if (["/login", "/workspace/invite"].includes(requestedPath)) return null
     return NextResponse.redirect(new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin))
 }
