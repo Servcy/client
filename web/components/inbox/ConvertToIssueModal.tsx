@@ -19,13 +19,13 @@ import { FileService } from "@services/document.service"
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
 
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor"
-import { TIssuePriorities } from "@servcy/types"
+import { InboxItem, TIssuePriorities } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 
 export interface ConvertToIssueModalProps {
     isOpen: boolean
     onClose: () => void
-    data?: any
+    data: InboxItem
 }
 const fileService = new FileService()
 
@@ -43,7 +43,7 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
         defaultValues: {
             workspace_id: null,
             project_id: null,
-            name: data?.title ?? "",
+            name: data.title,
             description_html: "<p></p>",
             priority: "none",
             start_date: null,
@@ -69,7 +69,7 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
         if (!workspaceSlug || !projectId) return
         const payload = {
             project_id: projectId,
-            name: data?.title ?? "",
+            name: formData.name,
             description_html: formData.description_html,
             priority: formData.priority,
             start_date: formData.start_date,
@@ -85,6 +85,8 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
         try {
             const response = await projectIssues.createIssue(workspaceSlug, projectId, payload)
             if (!response) throw new Error()
+            const issueLink = `/${workspaceSlug}/projects/${projectId}/issues/${response.id}`
+            window.open(issueLink, "_blank")
             projectIssues.fetchIssues(workspaceSlug, projectId, "mutation")
             toast.success("Issue created successfully.")
             captureIssueEvent({
@@ -178,12 +180,12 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
                                                             message: "Title should be less than 255 characters",
                                                         },
                                                     }}
-                                                    render={({ field: { ref } }) => (
+                                                    render={({ field: { value, ref } }) => (
                                                         <Input
                                                             id="name"
                                                             name="name"
                                                             type="text"
-                                                            value={data?.title}
+                                                            value={value}
                                                             disabled
                                                             ref={ref}
                                                             placeholder="Issue Title"
@@ -210,7 +212,7 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
                                                                     ? watch("description_html")
                                                                     : value
                                                             }
-                                                            initialValue={data?.description_html}
+                                                            initialValue={"<p></p>"}
                                                             customClassName="min-h-[7rem] border-custom-border-100"
                                                             onChange={(_: Object, description_html: string) => {
                                                                 onChange(description_html)
