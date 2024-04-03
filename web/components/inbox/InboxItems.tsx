@@ -168,8 +168,8 @@ const InboxItems = ({
                             size="small"
                             icon={<MdAddTask className="mt-1" />}
                             onClick={() => {
-                                setIsConvertToIssueModalVisible(true)
                                 setSelectedRecord(record)
+                                setIsConvertToIssueModalVisible(true)
                             }}
                         />
                     </Tooltip>
@@ -238,13 +238,15 @@ const InboxItems = ({
                     }}
                 />
             </ConfigProvider>
-            <ConvertToIssueModal
-                isOpen={isConvertToIssueModalVisible}
-                onClose={() => {
-                    setIsConvertToIssueModalVisible(false)
-                }}
-                data={selectedRecord}
-            />
+            {isConvertToIssueModalVisible && selectedRecord && (
+                <ConvertToIssueModal
+                    isOpen={isConvertToIssueModalVisible}
+                    onClose={() => {
+                        setIsConvertToIssueModalVisible(false)
+                    }}
+                    data={selectedRecord}
+                />
+            )}
         </>
     )
 }
