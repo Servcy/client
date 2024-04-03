@@ -17,6 +17,7 @@ import { EIssuesStoreType } from "@constants/issue"
 import { FileService } from "@services/document.service"
 
 import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+import { generateDescription } from "@helpers/inbox.helper"
 
 import { RichTextEditorWithRef } from "@servcy/rich-text-editor"
 import { InboxItem, TIssuePriorities } from "@servcy/types"
@@ -44,7 +45,7 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
             workspace_id: null,
             project_id: null,
             name: data.title,
-            description_html: "<p></p>",
+            description_html: generateDescription(data),
             priority: "none",
             start_date: null,
             target_date: null,
@@ -212,7 +213,7 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
                                                                     ? watch("description_html")
                                                                     : value
                                                             }
-                                                            initialValue={"<p></p>"}
+                                                            initialValue={value}
                                                             customClassName="min-h-[7rem] border-custom-border-100"
                                                             onChange={(_: Object, description_html: string) => {
                                                                 onChange(description_html)
