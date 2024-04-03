@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
+import Cookies from "js-cookie"
+
 import { isJwtTokenValid } from "@helpers/jwt.helper"
 
 export const config = {
@@ -16,7 +18,7 @@ export const config = {
 }
 
 export async function middleware(request: NextRequest) {
-    const accessToken = request.cookies.get("accessToken")?.value ?? ""
+    const accessToken = Cookies.get("accessToken") ?? ""
     const requestedPath = request.nextUrl.pathname
     if (isJwtTokenValid(accessToken)) {
         if (["/login", "/workspace/invite"].includes(requestedPath))
@@ -25,6 +27,8 @@ export async function middleware(request: NextRequest) {
         // If user is already logged in, continue to the requested page
         else return null
     }
+    Cookies.remove("accessToken", { path: "/" })
+    Cookies.remove("refreshToken", { path: "/" })
     if (["/login", "/workspace/invite"].includes(requestedPath)) return null
     return NextResponse.redirect(new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin))
 }
