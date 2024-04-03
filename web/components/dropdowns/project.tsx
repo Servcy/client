@@ -20,7 +20,7 @@ type Props = TDropdownProps & {
     button?: ReactNode
     dropdownArrow?: boolean
     dropdownArrowClassName?: string
-    workspaceId?: string
+    workspaceId?: string | null
     onChange: (val: string) => void
     onClose?: () => void
     value: string | null
