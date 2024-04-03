@@ -7,13 +7,19 @@ import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-import { ProjectDropdown, WorkspaceDropdown } from "@components/dropdowns"
+import { DateDropdown, PriorityDropdown, ProjectDropdown, WorkspaceDropdown } from "@components/dropdowns"
 
-import { useEventTracker, useIssues, useWorkspace } from "@hooks/store"
+import { useEventTracker, useIssues, useMention, useWorkspace } from "@hooks/store"
 
 import { ISSUE_CREATED } from "@constants/event-tracker"
 import { EIssuesStoreType } from "@constants/issue"
 
+import { FileService } from "@services/document.service"
+
+import { renderFormattedPayloadDate } from "@helpers/date-time.helper"
+
+import { RichTextEditorWithRef } from "@servcy/rich-text-editor"
+import { TIssuePriorities } from "@servcy/types"
 import { Button, Input } from "@servcy/ui"
 
 export interface ConvertToIssueModalProps {
@@ -21,6 +27,7 @@ export interface ConvertToIssueModalProps {
     onClose: () => void
     data?: any
 }
+const fileService = new FileService()
 
 const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props) => {
     const { isOpen, onClose, data } = props
@@ -29,13 +36,32 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
         formState: { isSubmitting },
         control,
         handleSubmit,
+        reset,
         setValue,
         watch,
-    } = useForm()
+    } = useForm({
+        defaultValues: {
+            workspace_id: null,
+            project_id: null,
+            name: data?.title ?? "",
+            description_html: "<p></p>",
+            priority: "none",
+            start_date: null,
+            target_date: null,
+        },
+    })
     const { workspaces } = useWorkspace()
+    const targetDate = watch("target_date")
+    const startDate = watch("start_date")
     const workspaceId = watch("workspace_id")
-    const { captureIssueEvent } = useEventTracker()
     const projectId = watch("project_id")
+    const maxDate = targetDate ? new Date(targetDate) : null
+    maxDate?.setDate(maxDate.getDate())
+    const minDate = startDate ? new Date(startDate) : null
+    minDate?.setDate(minDate.getDate())
+    const editorRef = React.useRef<any>(null)
+    const { mentionHighlights, mentionSuggestions } = useMention()
+    const { captureIssueEvent } = useEventTracker()
     const { issues: projectIssues } = useIssues(EIssuesStoreType.PROJECT)
     const handleFormSubmit = async (formData: any) => {
         const workspaceSlug = workspaces[formData.workspace_id].slug
@@ -44,17 +70,17 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
         const payload = {
             project_id: projectId,
             name: data?.title ?? "",
-            description_html: "<p></p>",
+            description_html: formData.description_html,
+            priority: formData.priority,
+            start_date: formData.start_date,
+            target_date: formData.target_date,
             estimate_point: null,
             state_id: "",
             parent_id: null,
-            priority: "none",
             assignee_ids: [],
             label_ids: [],
             cycle_id: null,
             module_ids: null,
-            start_date: null,
-            target_date: null,
         }
         try {
             const response = await projectIssues.createIssue(workspaceSlug, projectId, payload)
@@ -80,7 +106,14 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
-            <Dialog as="div" className="relative z-20" onClose={onClose}>
+            <Dialog
+                as="div"
+                className="relative z-20"
+                onClose={() => {
+                    onClose()
+                    reset()
+                }}
+            >
                 <Transition.Child
                     as={React.Fragment}
                     enter="ease-out duration-300"
@@ -108,6 +141,27 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
                                 <form onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
                                     <div className="space-y-5">
                                         <div className="flex items-center gap-x-2">
+                                            <Controller
+                                                control={control}
+                                                name="workspace_id"
+                                                rules={{
+                                                    required: true,
+                                                }}
+                                                render={({ field: { value, onChange } }) => (
+                                                    <div className="h-7">
+                                                        <WorkspaceDropdown
+                                                            value={value}
+                                                            dropdownArrow={true}
+                                                            onChange={(workspaceId) => {
+                                                                onChange(workspaceId)
+                                                                setValue("project_id", null)
+                                                            }}
+                                                            placeholder="Select a workspace"
+                                                            buttonVariant="border-with-text"
+                                                        />
+                                                    </div>
+                                                )}
+                                            />
                                             <h3 className="text-xl font-semibold leading-6 text-custom-text-100">
                                                 Create issue
                                             </h3>
@@ -137,54 +191,120 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
                                                         />
                                                     )}
                                                 />
+                                                <Controller
+                                                    name="description_html"
+                                                    control={control}
+                                                    render={({ field: { value, onChange } }) => (
+                                                        <RichTextEditorWithRef
+                                                            cancelUploadImage={fileService.cancelUpload}
+                                                            uploadFile={fileService.getUploadFileFunction(workspaceId)}
+                                                            deleteFile={fileService.getDeleteImageFunction()}
+                                                            restoreFile={fileService.getRestoreImageFunction()}
+                                                            ref={editorRef}
+                                                            debouncedUpdatesEnabled={false}
+                                                            value={
+                                                                !value ||
+                                                                value === "" ||
+                                                                (typeof value === "object" &&
+                                                                    Object.keys(value).length === 0)
+                                                                    ? watch("description_html")
+                                                                    : value
+                                                            }
+                                                            initialValue={data?.description_html}
+                                                            customClassName="min-h-[7rem] border-custom-border-100"
+                                                            onChange={(_: Object, description_html: string) => {
+                                                                onChange(description_html)
+                                                            }}
+                                                            mentionHighlights={mentionHighlights}
+                                                            mentionSuggestions={mentionSuggestions}
+                                                            // tabIndex={2}
+                                                        />
+                                                    )}
+                                                />
+                                                <div className="flex flex-wrap items-center gap-2">
+                                                    <Controller
+                                                        control={control}
+                                                        name="priority"
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <div className="h-7">
+                                                                <PriorityDropdown
+                                                                    value={value as TIssuePriorities}
+                                                                    onChange={(priority) => {
+                                                                        onChange(priority)
+                                                                    }}
+                                                                    buttonVariant="border-with-text"
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    />
+                                                    <Controller
+                                                        control={control}
+                                                        name="start_date"
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <div className="h-7">
+                                                                <DateDropdown
+                                                                    value={value}
+                                                                    onChange={(date) =>
+                                                                        onChange(
+                                                                            date
+                                                                                ? renderFormattedPayloadDate(date)
+                                                                                : null
+                                                                        )
+                                                                    }
+                                                                    buttonVariant="border-with-text"
+                                                                    maxDate={maxDate ?? undefined}
+                                                                    placeholder="Start date"
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    />
+                                                    <Controller
+                                                        control={control}
+                                                        name="target_date"
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <div className="h-7">
+                                                                <DateDropdown
+                                                                    value={value}
+                                                                    onChange={(date) =>
+                                                                        onChange(
+                                                                            date
+                                                                                ? renderFormattedPayloadDate(date)
+                                                                                : null
+                                                                        )
+                                                                    }
+                                                                    buttonVariant="border-with-text"
+                                                                    minDate={minDate ?? undefined}
+                                                                    placeholder="Due date"
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    />
+                                                    <Controller
+                                                        control={control}
+                                                        name="project_id"
+                                                        rules={{
+                                                            required: true,
+                                                        }}
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <div className="h-7">
+                                                                <ProjectDropdown
+                                                                    value={value}
+                                                                    dropdownArrow={true}
+                                                                    workspaceId={workspaceId}
+                                                                    onChange={(projectId) => {
+                                                                        onChange(projectId)
+                                                                    }}
+                                                                    placeholder="Select a project"
+                                                                    buttonVariant="border-with-text"
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-wrap items-center gap-2 my-5">
-                                        <Controller
-                                            control={control}
-                                            name="workspace_id"
-                                            rules={{
-                                                required: true,
-                                            }}
-                                            render={({ field: { value, onChange } }) => (
-                                                <div className="h-7">
-                                                    <WorkspaceDropdown
-                                                        value={value}
-                                                        dropdownArrow={true}
-                                                        onChange={(workspaceId) => {
-                                                            onChange(workspaceId)
-                                                            setValue("project_id", null)
-                                                        }}
-                                                        placeholder="Select a workspace"
-                                                        buttonVariant="border-with-text"
-                                                    />
-                                                </div>
-                                            )}
-                                        />
-                                        <Controller
-                                            control={control}
-                                            name="project_id"
-                                            rules={{
-                                                required: true,
-                                            }}
-                                            render={({ field: { value, onChange } }) => (
-                                                <div className="h-7">
-                                                    <ProjectDropdown
-                                                        value={value}
-                                                        dropdownArrow={true}
-                                                        workspaceId={workspaceId}
-                                                        onChange={(projectId) => {
-                                                            onChange(projectId)
-                                                        }}
-                                                        placeholder="Select a project"
-                                                        buttonVariant="border-with-text"
-                                                    />
-                                                </div>
-                                            )}
-                                        />
-                                    </div>
-                                    <div className="-mx-5 flex items-center justify-between gap-2 border-t border-custom-border-100 px-5 pt-5">
+                                    <div className="-mx-5 mt-5 flex items-center justify-between gap-2 border-t border-custom-border-100 px-5 pt-5">
                                         <div className="flex items-center gap-2">
                                             <Button
                                                 variant="primary"
