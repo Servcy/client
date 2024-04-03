@@ -9,9 +9,10 @@ import cn from "classnames"
 import { useTheme } from "next-themes"
 import toast from "react-hot-toast"
 import { HiArchiveBoxArrowDown } from "react-icons/hi2"
-import { MdOutlineBlock } from "react-icons/md"
+import { MdAddTask, MdOutlineBlock } from "react-icons/md"
 
 import Cause from "@components/inbox/Cause"
+import ConvertToIssueModal from "@components/inbox/ConvertToIssueModal"
 
 import IntegrationService from "@services/integration.service"
 
@@ -54,6 +55,7 @@ const InboxItems = ({
             name: record.id,
         }),
     }
+    const [isConvertToIssueModalVisible, setIsConvertToIssueModalVisible] = React.useState(false)
     const { resolvedTheme } = useTheme()
     const { darkAlgorithm, defaultAlgorithm } = theme
     const disableNotificationTypeHandler = (event: string, user_integration_id: number) => {
@@ -158,6 +160,15 @@ const InboxItems = ({
                             />
                         </Tooltip>
                     )}
+                    <Tooltip title="Create a task from this inbox item">
+                        <Button
+                            type="primary"
+                            className="bg-custom-servcy-cream text-custom-servcy-black hover:!bg-custom-servcy-wheat"
+                            size="small"
+                            icon={<MdAddTask className="mt-1" />}
+                            onClick={() => setIsConvertToIssueModalVisible(true)}
+                        />
+                    </Tooltip>
                 </div>
             ),
         },
@@ -223,6 +234,12 @@ const InboxItems = ({
                     }}
                 />
             </ConfigProvider>
+            <ConvertToIssueModal
+                isOpen={isConvertToIssueModalVisible}
+                onClose={() => {
+                    setIsConvertToIssueModalVisible(false)
+                }}
+            />
         </>
     )
 }
