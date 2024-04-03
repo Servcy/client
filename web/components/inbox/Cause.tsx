@@ -36,7 +36,7 @@ const Cause = ({ cause, source }: { cause: any; source: string }) => {
                     width={20}
                     height={20}
                 />
-                <a href={html_url} target="_blank" rel="noreferrer" className="text-white">
+                <a href={html_url} target="_blank" rel="noreferrer">
                     {login}
                 </a>
             </div>
