@@ -268,7 +268,7 @@ const Inbox = observer(() => {
                                     >
                                         <item.Icon className="my-auto mr-2" />
                                         {item.label}{" "}
-                                        {unreadCount[item.key]
+                                        {unreadCount && unreadCount[item.key]
                                             ? `(${getNumberCount(unreadCount[item.key]) || "-"})`
                                             : ""}
                                     </div>
