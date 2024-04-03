@@ -27,8 +27,8 @@ export async function middleware(request: NextRequest) {
         // If user is already logged in, continue to the requested page
         else return null
     }
-    Cookies.remove("accessToken", { path: "/" })
-    Cookies.remove("refreshToken", { path: "/" })
+    Cookies.remove("accessToken")
+    Cookies.remove("refreshToken")
     if (["/login", "/workspace/invite"].includes(requestedPath)) return null
     return NextResponse.redirect(new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin))
 }
