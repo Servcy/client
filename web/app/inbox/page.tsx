@@ -81,8 +81,8 @@ const Inbox = observer(() => {
                 page,
                 pagination: { page },
             })
-            setInboxItems(JSON.parse(response.results).items)
-            setInboxPagination(JSON.parse(response.results).details)
+            setInboxItems(response.results.items)
+            setInboxPagination(response.results.details)
         } catch (err) {
             console.error(err)
         } finally {
@@ -150,8 +150,8 @@ const Inbox = observer(() => {
                     page,
                     pagination: { page },
                 })
-                setInboxItems(JSON.parse(response.results).items)
-                setInboxPagination(JSON.parse(response.results).details)
+                setInboxItems(response.results.items)
+                setInboxPagination(response.results.details)
             } catch (err) {
                 console.error(err)
             } finally {

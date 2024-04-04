@@ -9,8 +9,7 @@ class IntegrationService extends APIService {
 
     async fetchIntegrations() {
         const response = await this.get("/integration/fetch")
-        const results = response.data.results
-        return JSON.parse(results)
+        return response.data.results
     }
 
     async fetchUserIntegrations(integration_name: string) {

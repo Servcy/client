@@ -14,7 +14,7 @@ class InboxService extends APIService {
 
     async fetchInboxUnreadCount(): Promise<any> {
         const response = await this.get("/inbox/unread-count")
-        return JSON.parse(response?.data?.results)
+        return response?.data?.results
     }
 
     async archiveItems(payload: object): Promise<any> {

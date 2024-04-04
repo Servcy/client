@@ -37,7 +37,7 @@ export default function IntegrationConfigurationModal({
         integrationService
             .fetchIntegrationEvents(String(selectedIntegration.id))
             .then((events) => {
-                setEvents(JSON.parse(events))
+                setEvents(events)
             })
             .finally(() => {
                 setTimeout(() => {

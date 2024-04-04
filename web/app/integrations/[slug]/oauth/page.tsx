@@ -37,7 +37,7 @@ export default function IntegrationOauth(): JSX.Element {
                 toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`)
                 if (response?.results !== "null") {
                     const redirect_uri =
-                        JSON.parse(response?.results)?.redirect_uri ||
+                        response?.results?.redirect_uri ||
                         `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`
                     if (redirect_uri.startsWith("https")) {
                         window.open(`/integrations?openConfigurationModal=1&selectedIntegration=${slug}`, "_blank")
