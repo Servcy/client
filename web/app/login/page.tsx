@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link.js"
+import { useSearchParams } from "next/navigation"
 
 import { useEffect, useState } from "react"
 
@@ -32,10 +33,11 @@ export default function Login(): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false)
     const { isRedirecting, handleRedirection } = useLoginRedirection()
     const { currentUser } = useUser()
+    const searchParams = useSearchParams()
 
-    const sendOtp = async (e: React.MouseEvent | React.KeyboardEvent) => {
+    const sendOtp = async (e?: React.MouseEvent | React.KeyboardEvent) => {
         try {
-            e.preventDefault()
+            if (e) e.preventDefault()
             setLoading(true)
             const email = document.getElementById("email") as HTMLInputElement
             const agree_terms_conditions_and_privacy_policy = document.getElementById(
@@ -100,6 +102,14 @@ export default function Login(): JSX.Element {
             setLoading(false)
         }
     }
+
+    useEffect(() => {
+        if (searchParams.has("email")) {
+            const email = searchParams.get("email") as string
+            document.getElementById("email")?.setAttribute("value", email)
+            sendOtp()
+        }
+    }, [searchParams])
 
     useEffect(() => {
         handleRedirection()
