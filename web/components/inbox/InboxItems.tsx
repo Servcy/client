@@ -88,18 +88,22 @@ const InboxItems = ({
         },
         {
             dataIndex: "account",
-            title: "Source",
-            render: (account, record) => (
+            title: "To",
+            render: (account) => (
                 <>
                     <div className="flex min-h-[50px] max-w-[250px] items-center text-ellipsis text-sm">
                         <Avatar className="mr-2 rounded-full" size="small">
                             {account.slice(0, 1).toUpperCase()}
                         </Avatar>
-                        <div className="overflow-hidden truncate mr-6">{account}</div>
-                        <Cause cause={record.cause} source={record.source} />
+                        <div className="overflow-hidden truncate">{account}</div>
                     </div>
                 </>
             ),
+        },
+        {
+            dataIndex: "cause",
+            title: "From",
+            render: (cause, record) => <Cause cause={cause} source={record.source} />,
         },
         {
             dataIndex: "created_at",
@@ -228,8 +232,8 @@ const InboxItems = ({
                     showHeader={false}
                     pagination={{
                         current: page,
-                        pageSizeOptions: ["50"],
-                        pageSize: 50,
+                        pageSizeOptions: ["10"],
+                        pageSize: 10,
                         total: inboxPagination.total_items,
                         hideOnSinglePage: true,
                         onChange: (page) => {
