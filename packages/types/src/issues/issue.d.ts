@@ -39,7 +39,7 @@ export type TIssue = {
     is_draft: boolean
     is_subscribed?: boolean
 
-    parent?: Partial<TIssue>
+    parent?: partial<TIssue>
     issue_reactions?: TIssueReaction[]
     issue_attachment?: TIssueAttachment[]
     issue_link?: TIssueLink[]
