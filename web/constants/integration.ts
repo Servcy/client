@@ -5,8 +5,9 @@ export const integrationCategories: Record<string, string[]> = {
     Notion: ["Inbox"],
     Slack: ["Inbox"],
     Figma: ["Inbox"],
-    Asana: ["Inbox"],
-    Trello: ["Inbox"],
+    Asana: ["Importer"],
+    Jira: ["Importer"],
+    Trello: ["Importer"],
 }
 
 export const integrationInboxCategories: Record<string, string[]> = {
@@ -16,9 +17,9 @@ export const integrationInboxCategories: Record<string, string[]> = {
     Notion: ["archived", "comment", "notification"],
     Slack: ["archived", "message", "notification"],
     Figma: ["archived", "comment", "notification"],
-    Asana: ["archived", "comment", "notification"],
-    Trello: ["archived", "comment", "notification"],
-    Jira: ["archived", "comment", "notification"],
+    Asana: [],
+    Trello: [],
+    Jira: [],
 }
 
 export const uniqueIntegrationCategories = ["Inbox"]
