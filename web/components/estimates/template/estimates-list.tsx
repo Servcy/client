@@ -20,9 +20,9 @@ export const EstimatesList: React.FC<Props> = observer((props) => {
     const { estimates, updateEstimates } = props
     // states
     const [estimateFormOpen, setEstimateFormOpen] = useState(false)
-    const [estimateToUpdate, setEstimateToUpdate] = useState<IEstimate | undefined>()
+    const [estimateToUpdate, setEstimateToUpdate] = useState<Partial<IEstimate> | undefined>()
     // theme
-    const editEstimate = (estimate: IEstimate) => {
+    const editEstimate = (estimate: Partial<IEstimate>) => {
         setEstimateToUpdate(estimate)
         setEstimateFormOpen(true)
     }

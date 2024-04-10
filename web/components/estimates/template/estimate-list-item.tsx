@@ -10,7 +10,7 @@ import { CustomMenu } from "@servcy/ui"
 
 type Props = {
     estimate: Partial<IEstimate>
-    editEstimate: (estimate: IEstimate) => void
+    editEstimate: (estimate: Partial<IEstimate>) => void
 }
 
 export const EstimateListItem: React.FC<Props> = observer((props) => {
