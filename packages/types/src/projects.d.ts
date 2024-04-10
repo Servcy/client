@@ -1,6 +1,6 @@
 import { ERoles } from "@constants/iam"
 
-import type { IUser, IUserLite, IWorkspace, IWorkspaceLite, TStateGroups } from "."
+import type { IEstimatePointLite, IIssueLabel, IUser, IUserLite, IWorkspace, IWorkspaceLite, TStateGroups } from "."
 
 export interface IProject {
     archive_in: number
@@ -46,6 +46,16 @@ export interface IProject {
     updated_by: string
     workspace: IWorkspace | string
     workspace_detail: IWorkspaceLite
+}
+
+export interface IProjectTemplate {
+    workspace: IWorkspace | string
+    estimates: {
+        name: string
+        description: string
+        points: IEstimatePointLite[]
+    }
+    labels: Partial<IIssueLabel>[]
 }
 
 export interface IProjectLite {
