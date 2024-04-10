@@ -46,7 +46,7 @@ const ProjectTemplateLabelList: React.FC<IProjectTemplateLabelList> = observer((
         updateLabels([...labels, label])
     }
     const updateLabel = (data: Partial<IIssueLabel>) => {
-        const index = labels.findIndex((label) => label.name === label.name)
+        const index = labels.findIndex((label) => label.name === data.name)
         if (index === -1) return
         const updatedLabels = [...labels]
         updatedLabels[index] = data
