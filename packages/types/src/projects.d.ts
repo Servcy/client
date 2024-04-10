@@ -48,6 +48,32 @@ export interface IProject {
     workspace_detail: IWorkspaceLite
 }
 
+export interface IProjectTemplate {
+    workspace: IWorkspace | string
+    states: {
+        name: string
+        color: string
+        group: string
+        default: boolean
+        description: string
+        sequence: number
+    }[]
+    estimates: {
+        name: string
+        description: string
+        points: {
+            key: number
+            value: string
+            description: string
+        }[]
+    }[]
+    labels: {
+        name: string
+        color: string
+        sort_order: number
+    }[]
+}
+
 export interface IProjectLite {
     id: string
     name: string
