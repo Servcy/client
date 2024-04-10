@@ -42,8 +42,15 @@ const ProjectTemplateLabelList: React.FC<IProjectTemplateLabelList> = observer((
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("project-settings", "labels", isLightMode)
     const addLabel = (label: Partial<IIssueLabel>) => {
-        if (labels.some((label) => label.name === label.name)) return
-        updateLabels([...labels, label])
+        if (labels.filter((l) => l.name === label.name).length > 0) return
+        const minSortOrder = labels.reduce((acc, curr) => (acc < curr.sort_order ? acc : curr.sort_order), 0)
+        updateLabels([
+            ...labels,
+            {
+                ...label,
+                sort_order: minSortOrder - 1,
+            },
+        ])
     }
     const updateLabel = (data: Partial<IIssueLabel>) => {
         const index = labels.findIndex((label) => label.name === label.name)
