@@ -47,7 +47,16 @@ const LabelsTemplatePage = observer(() => {
                             <h3 className="text-xl font-medium">Label Template</h3>
                         </div>
                     </div>
-                    <ProjectTemplateLabelList {...workspaceProjectTemplate} />
+                    <ProjectTemplateLabelList
+                        labels={workspaceProjectTemplate.labels}
+                        updateLabels={(labels: any) => {
+                            setWorkspaceProjectTemplate((prev) => ({ ...prev, labels }))
+                            projectTemplateService.patchTemplate(workspaceSlug.toString(), {
+                                ...workspaceProjectTemplate,
+                                labels,
+                            })
+                        }}
+                    />
                 </section>
             </WorkspaceSettingWrapper>
         </AppWrapper>
