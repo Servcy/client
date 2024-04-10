@@ -159,6 +159,8 @@ export const CYCLE_DETAILS = (cycleId: string) => `CYCLE_DETAILS_${cycleId}`
 
 export const STATES_LIST = (projectId: string) => `STATES_LIST_${projectId}`
 
+export const TEMPLATE_STATES_LIST = (workspaceSlug: string) => `STATES_LIST_${workspaceSlug}`
+
 export const USER_ISSUE = (workspaceSlug: string) => `USER_ISSUE_${workspaceSlug.toUpperCase()}`
 export const USER_ISSUES = (workspaceSlug: string, params: any) => {
     const paramsKey = myIssuesParamsToKey(params)
