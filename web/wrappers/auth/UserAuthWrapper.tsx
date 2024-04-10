@@ -25,9 +25,19 @@ const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
     const pathname = usePathname()
 
     // fetching user information
-    useSWR("CURRENT_USER_DETAILS", () => fetchCurrentUser(), {
-        shouldRetryOnError: false,
-    })
+    useSWR(
+        "CURRENT_USER_DETAILS",
+        () => {
+            try {
+                fetchCurrentUser()
+            } catch {
+                router.push("/login")
+            }
+        },
+        {
+            shouldRetryOnError: false,
+        }
+    )
     // fetching user settings
     useSWR("CURRENT_USER_SETTINGS", () => fetchCurrentUserSettings(), {
         shouldRetryOnError: false,

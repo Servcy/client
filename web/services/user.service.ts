@@ -26,6 +26,10 @@ export class UserService extends APIService {
         return this.get("/iam/me")
             .then((response) => response?.data)
             .catch((error) => {
+                if (error?.response?.status === 401) {
+                    this.purgeAccessToken()
+                    this.purgeRefreshToken()
+                }
                 throw error?.response
             })
     }
