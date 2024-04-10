@@ -8,8 +8,8 @@ import { observer } from "mobx-react"
 import useSWR from "swr"
 
 import { PageHead } from "@components/core"
+import { EstimatesList } from "@components/estimates/template"
 import { WorkspaceSettingHeader } from "@components/headers"
-import ProjectTemplateLabelList from "@components/labels/template/project-label-list"
 
 import { WORKSPACE_PROJECT_TEMPLATE } from "@constants/fetch-keys"
 
@@ -38,17 +38,22 @@ const LabelsTemplatePage = observer(() => {
         }
     )
     return (
-        <AppWrapper header={<WorkspaceSettingHeader title="Workspace Label Template" />}>
+        <AppWrapper header={<WorkspaceSettingHeader title="Workspace Estimates Template" />}>
             <WorkspaceSettingWrapper>
-                <PageHead title="Label Template" />
+                <PageHead title="Estimates Template" />
                 <section className="w-full overflow-y-auto py-8 pr-9">
-                    <ProjectTemplateLabelList
-                        labels={workspaceProjectTemplate.labels}
-                        updateLabels={(labels: any) => {
-                            setWorkspaceProjectTemplate((prev) => ({ ...prev, labels }))
+                    <div>
+                        <div className="flex  items-center border-b border-custom-border-100 py-3.5">
+                            <h3 className="text-xl font-medium">Estimates Template</h3>
+                        </div>
+                    </div>
+                    <EstimatesList
+                        estimates={workspaceProjectTemplate.estimates}
+                        updateEstimates={(estimates: any) => {
+                            setWorkspaceProjectTemplate((prev) => ({ ...prev, estimates }))
                             projectTemplateService.patchTemplate(workspaceSlug.toString(), {
                                 ...workspaceProjectTemplate,
-                                labels,
+                                estimates,
                             })
                         }}
                     />
