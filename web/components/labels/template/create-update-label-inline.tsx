@@ -29,7 +29,7 @@ const defaultValues: Partial<IIssueLabel> = {
 
 export const CreateUpdateLabelInline = observer(
     forwardRef<HTMLFormElement, Props>(function CreateUpdateLabelInline(props, ref) {
-        const { labelForm, setLabelForm, addLabel, isUpdating, labelToUpdate, onClose } = props
+        const { labelForm, setLabelForm, addLabel, updateLabel, isUpdating, labelToUpdate, onClose } = props
         const { workspaceSlug } = useParams()
         // form info
         const {
