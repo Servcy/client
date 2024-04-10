@@ -44,7 +44,7 @@ export const ProjectViewLayoutRoot: React.FC = observer(() => {
                 )
             }
         },
-        { revalidateIfStale: false }
+        { revalidateIfStale: false, revalidateOnFocus: false }
     )
 
     const issueActions = useMemo(

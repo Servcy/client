@@ -35,7 +35,7 @@ export const ArchivedIssueLayoutRoot: React.FC = observer(() => {
                 )
             }
         },
-        { revalidateIfStale: false }
+        { revalidateIfStale: false, revalidateOnFocus: false }
     )
 
     if (issues?.loader === "init-loader" || !issues?.groupedIssueIds) {

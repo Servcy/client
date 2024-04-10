@@ -97,7 +97,7 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
                 await fetchAllGlobalViews(workspaceSlug.toString())
             }
         },
-        { revalidateIfStale: false }
+        { revalidateIfStale: false, revalidateOnFocus: false }
     )
 
     useSWR(
@@ -113,7 +113,7 @@ export const AllIssueLayoutRoot: React.FC = observer(() => {
                 routerFilterParams()
             }
         },
-        { revalidateIfStale: false }
+        { revalidateIfStale: false, revalidateOnFocus: false }
     )
 
     const canEditProperties = useCallback(

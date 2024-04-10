@@ -49,7 +49,7 @@ export const CycleLayoutRoot: React.FC = observer(() => {
                 )
             }
         },
-        { revalidateIfStale: false }
+        { revalidateIfStale: false, revalidateOnFocus: false }
     )
 
     const activeLayout = issuesFilter?.issueFilters?.displayFilters?.layout
