@@ -53,11 +53,13 @@ export const CreateUpdateLabelInline = observer(
         const handleLabelCreate: SubmitHandler<IIssueLabel> = async (formData) => {
             if (!workspaceSlug || isSubmitting) return
             addLabel?.(formData)
+            if (onClose) onClose()
         }
 
         const handleLabelUpdate: SubmitHandler<IIssueLabel> = async (formData) => {
             if (!workspaceSlug || isSubmitting) return
             updateLabel?.(formData)
+            if (onClose) onClose()
         }
 
         /**
