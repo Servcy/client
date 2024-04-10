@@ -82,14 +82,6 @@ export const WORKSPACE_SETTINGS_LINKS: {
         Icon: SettingIcon,
     },
     {
-        key: "states",
-        label: "States",
-        href: `/settings/states`,
-        access: ERoles.ADMIN,
-        highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/states`,
-        Icon: SettingIcon,
-    },
-    {
         key: "labels",
         label: "Labels",
         href: `/settings/labels`,
