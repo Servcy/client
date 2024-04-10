@@ -20,7 +20,7 @@ interface IProjectTemplateLabelList {
     updateLabels: (labels: Partial<IIssueLabel>[]) => void
 }
 
-export const ProjectTemplateLabelList: React.FC<IProjectTemplateLabelList> = observer((props) => {
+const ProjectTemplateLabelList: React.FC<IProjectTemplateLabelList> = observer((props) => {
     const { labels, updateLabels } = props
     // states
     const [showLabelForm, setLabelForm] = useState(false)
@@ -121,3 +121,5 @@ export const ProjectTemplateLabelList: React.FC<IProjectTemplateLabelList> = obs
         </>
     )
 })
+
+export default ProjectTemplateLabelList

@@ -9,7 +9,7 @@ import useSWR from "swr"
 
 import { PageHead } from "@components/core"
 import { WorkspaceSettingHeader } from "@components/headers"
-import { ProjectTemplateLabelList } from "@components/labels"
+import ProjectTemplateLabelList from "@components/labels/template/project-label-list"
 
 import { WORKSPACE_PROJECT_TEMPLATE } from "@constants/fetch-keys"
 
