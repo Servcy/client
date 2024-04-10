@@ -5,6 +5,7 @@ export interface Integration {
     description: string
     is_connected: boolean
     configure_at: string
+    to_be_shown: boolean
 }
 
 export interface UserIntegration {

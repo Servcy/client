@@ -43,9 +43,10 @@ const Integrations = observer(() => {
         integrationService
             .fetchIntegrations()
             .then((results) => {
-                setIntegrations(results)
+                const integrationsToBeShown = results.filter((integration: Integration) => integration.to_be_shown)
+                setIntegrations(integrationsToBeShown)
                 if (queryParams["integration"]) {
-                    const integration = results.find(
+                    const integration = integrationsToBeShown.find(
                         (integration: Integration) => integration.id === Number(queryParams["integration"])
                     )
                     if (integration) {
@@ -59,7 +60,7 @@ const Integrations = observer(() => {
                     }
                 }
                 if (queryParams["selectedIntegration"] && queryParams["openConfigurationModal"]) {
-                    const integration = results.find(
+                    const integration = integrationsToBeShown.find(
                         (integration: Integration) =>
                             integration.name === capitalizeFirstLetter(queryParams["selectedIntegration"] ?? "")
                     )
