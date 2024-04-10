@@ -9,7 +9,7 @@ export class ProjectTemplateService extends APIService {
         super(API_BASE_URL)
     }
 
-    async getState(workspaceSlug: string): Promise<any> {
+    async getTemplate(workspaceSlug: string): Promise<any> {
         return this.get(`/project/${workspaceSlug}/project-template/`)
             .then((response) => response?.data)
             .catch((error) => {
@@ -17,7 +17,7 @@ export class ProjectTemplateService extends APIService {
             })
     }
 
-    async patchState(workspaceSlug: string, data: Partial<IProjectTemplate>): Promise<any> {
+    async patchTemplate(workspaceSlug: string, data: Partial<IProjectTemplate>): Promise<any> {
         return this.patch(`/project/${workspaceSlug}/project-template/`, data)
             .then((response) => response?.data)
             .catch((error) => {
