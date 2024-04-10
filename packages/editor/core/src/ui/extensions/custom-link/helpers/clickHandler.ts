@@ -29,7 +29,7 @@ export function clickHandler(options: ClickHandlerOptions): Plugin {
 
         if (link && href) {
           if (view.editable) {
-            window.open(href, target);
+            window.open(href, target, "noopener noreferrer");
           }
 
           return true;

@@ -40,7 +40,11 @@ export default function IntegrationOauth(): JSX.Element {
                         response?.results?.redirect_uri ||
                         `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`
                     if (redirect_uri.startsWith("https")) {
-                        window.open(`/integrations?openConfigurationModal=1&selectedIntegration=${slug}`, "_blank")
+                        window.open(
+                            `/integrations?openConfigurationModal=1&selectedIntegration=${slug}`,
+                            "_blank",
+                            "noopener noreferrer"
+                        )
                         setTimeout(() => {
                             router.push(redirect_uri)
                         }, 1000)

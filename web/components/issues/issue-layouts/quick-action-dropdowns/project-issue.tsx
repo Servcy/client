@@ -60,7 +60,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
 
     const issueLink = `${workspaceSlug}/projects/${issue.project_id}/issues/${issue.id}`
 
-    const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank")
+    const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank", "noopener noreferrer")
 
     const handleCopyIssueLink = () =>
         copyUrlToClipboard(issueLink).then(() => toast.error("Issue link copied to clipboard"))

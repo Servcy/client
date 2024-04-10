@@ -87,7 +87,7 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
             const response = await projectIssues.createIssue(workspaceSlug, projectId, payload)
             if (!response) throw new Error()
             const issueLink = `/${workspaceSlug}/projects/${projectId}/issues/${response.id}`
-            window.open(issueLink, "_blank")
+            window.open(issueLink, "_blank", "noopener noreferrer")
             projectIssues.fetchIssues(workspaceSlug, projectId, "mutation")
             toast.success("Issue created successfully.")
             captureIssueEvent({
