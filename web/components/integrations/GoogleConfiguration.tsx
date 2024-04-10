@@ -132,7 +132,10 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                     </span>
                     <ul className="mt-4 list-inside font-serif text-sm font-light">
                         <li className="mb-4">You can provide exact email addresses</li>
-                        <li>You can also use wildcard characters like *@servcy.com</li>
+                        <li>
+                            You can also use following wildcard entries, *@company.com to allow all emails from this
+                            company, *@* to allow all emails
+                        </li>
                     </ul>
                 </section>
             </div>
