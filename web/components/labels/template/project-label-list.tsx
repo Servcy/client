@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { DeleteLabelModal, ProjectTemplateLabelItem } from "@components/labels"
+import { DeleteLabelModal } from "@components/labels"
 
 import { useUser } from "@hooks/store"
 
@@ -14,6 +14,7 @@ import { IIssueLabel } from "@servcy/types"
 import { Button, Loader } from "@servcy/ui"
 
 import { CreateUpdateLabelInline } from "./create-update-label-inline"
+import { ProjectTemplateLabelItem } from "./project-label-item"
 
 interface IProjectTemplateLabelList {
     labels: Partial<IIssueLabel>[]
