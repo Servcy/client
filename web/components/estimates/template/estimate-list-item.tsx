@@ -5,16 +5,21 @@ import { observer } from "mobx-react-lite"
 
 import { orderArrayBy } from "@helpers/array.helper"
 
-import { IEstimate } from "@servcy/types"
+import { IEstimatePointLite } from "@servcy/types"
 import { CustomMenu } from "@servcy/ui"
 
 type Props = {
-    estimate: Partial<IEstimate>
-    editEstimate: (estimate: Partial<IEstimate>) => void
+    estimate: {
+        name: string
+        description: string
+        points: IEstimatePointLite[]
+    }
+    editEstimate: (estimate: { name: string; description: string; points: IEstimatePointLite[] }) => void
 }
 
 export const EstimateListItem: React.FC<Props> = observer((props) => {
     const { estimate, editEstimate } = props
+    if (!estimate || !estimate.points) return null
     return (
         <>
             <div className="gap-2 border-b border-custom-border-100 p-4">

@@ -4,25 +4,32 @@ import { observer } from "mobx-react-lite"
 
 import { EstimateListItem, UpdateEstimateModal } from "@components/estimates/template"
 
-import { IEstimate, IEstimatePoint } from "@servcy/types"
+import { IEstimatePointLite } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 
 interface Props {
     estimates: {
         name: string
         description: string
-        points: Partial<IEstimatePoint>[]
-    }[]
-    updateEstimates: (estimates: Partial<IEstimate>) => void
+        points: IEstimatePointLite[]
+    }
+    updateEstimates: (estimates: { name: string; description: string; points: IEstimatePointLite[] }) => void
 }
 
 export const EstimatesList: React.FC<Props> = observer((props) => {
     const { estimates, updateEstimates } = props
     // states
     const [estimateFormOpen, setEstimateFormOpen] = useState(false)
-    const [estimateToUpdate, setEstimateToUpdate] = useState<Partial<IEstimate> | undefined>()
+    const [estimateToUpdate, setEstimateToUpdate] = useState<
+        | {
+              name: string
+              description: string
+              points: IEstimatePointLite[]
+          }
+        | undefined
+    >()
     // theme
-    const editEstimate = (estimate: Partial<IEstimate>) => {
+    const editEstimate = (estimate: { name: string; description: string; points: IEstimatePointLite[] }) => {
         setEstimateToUpdate(estimate)
         setEstimateFormOpen(true)
     }

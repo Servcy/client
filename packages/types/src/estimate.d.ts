@@ -27,6 +27,12 @@ export interface IEstimatePoint {
     workspace: string
 }
 
+export interface IEstimatePointLite {
+    description: string
+    key: number
+    value: string
+}
+
 export interface IEstimateFormData {
     estimate: {
         name: string

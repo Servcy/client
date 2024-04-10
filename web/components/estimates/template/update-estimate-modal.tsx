@@ -8,14 +8,18 @@ import toast from "react-hot-toast"
 // store hooks
 import { checkDuplicates } from "@helpers/array.helper"
 
-import { IEstimate } from "@servcy/types"
+import { IEstimatePointLite } from "@servcy/types"
 import { Button, Input, TextArea } from "@servcy/ui"
 
 type Props = {
     isOpen: boolean
     handleClose: () => void
-    updateEstimates: (payload: partial<IEstimate>) => void
-    data?: partial<IEstimate>
+    updateEstimates: (payload: { name: string; description: string; points: IEstimatePointLite[] }) => void
+    data?: {
+        name: string
+        description: string
+        points: IEstimatePointLite[]
+    }
 }
 
 const defaultValues = {
@@ -48,7 +52,7 @@ export const UpdateEstimateModal: React.FC<Props> = observer((props) => {
         reset()
     }
 
-    const handleUpdateEstimate = (payload) => {
+    const handleUpdateEstimate = (payload: { name: string; description: string; points: IEstimatePointLite[] }) => {
         updateEstimates(payload)
         onClose()
     }
@@ -97,30 +101,24 @@ export const UpdateEstimateModal: React.FC<Props> = observer((props) => {
             return
         }
 
-        const payload = {
-            name: formData.name,
-            description: formData.description,
-            points: [],
-        }
-
+        const points = []
         for (let i = 0; i < 6; i++) {
             const point = {
                 key: i,
                 value: formData[`value${i + 1}` as keyof FormValues],
+                description: "",
             }
-
-            if (data)
-                payload.points.push({
-                    id: data.points[i]?.id,
-                    ...point,
-                })
-            else payload.points.push({ ...point })
+            points.push({ ...point })
         }
-        handleUpdateEstimate(payload)
+        handleUpdateEstimate({
+            name: formData.name,
+            description: formData.description,
+            points: points,
+        })
     }
 
     useEffect(() => {
-        if (data)
+        if (data && data.points)
             reset({
                 ...defaultValues,
                 ...data,
