@@ -1,4 +1,4 @@
-import type { IIssueFilterOptions, IProjectLite, IUser, IUserLite, IWorkspaceLite, TIssue } from "@servcy/types"
+import type { IIssueFilterOptions, TIssue } from "@servcy/types"
 
 export type TCycleView = "all" | "active" | "upcoming" | "completed" | "draft"
 

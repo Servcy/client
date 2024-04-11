@@ -366,9 +366,9 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                     <div className="h-7 flex-shrink-0" tabIndex={5}>
                                                         <MemberDropdown
                                                             value={value}
-                                                            onChange={onChange}
                                                             placeholder="Lead"
                                                             multiple={false}
+                                                            onChange={(lead) => onChange(lead === value ? null : lead)}
                                                             buttonVariant="border-with-text"
                                                             tabIndex={5}
                                                         />
