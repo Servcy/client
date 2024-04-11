@@ -2,7 +2,7 @@ import { useParams } from "next/navigation"
 
 import { FC } from "react"
 
-import { ContrastIcon, FileText, Layers } from "lucide-react"
+import { FileText } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
@@ -11,32 +11,32 @@ import { useEventTracker, useProject, useUser } from "@hooks/store"
 import { ERoles } from "@constants/iam"
 
 import { IProject } from "@servcy/types"
-import { DiceIcon, ToggleSwitch } from "@servcy/ui"
+import { ContrastIcon, DiceIcon, PhotoFilterIcon, ToggleSwitch } from "@servcy/ui"
 
 type Props = {}
 
 const PROJECT_FEATURES_LIST = [
     {
         title: "Cycles",
-        description: "Cycles are enabled for all the projects in this workspace. Access them from the sidebar.",
+        description: "Time-box issues and boost momentum, similar to sprints in scrum.",
         icon: <ContrastIcon className="h-4 w-4 flex-shrink-0 rotate-180 text-purple-500" />,
         property: "cycle_view",
     },
     {
         title: "Modules",
-        description: "Modules are enabled for all the projects in this workspace. Access it from the sidebar.",
-        icon: <DiceIcon width={16} height={16} className="flex-shrink-0" />,
+        description: "Group multiple issues together and track the progress.",
+        icon: <DiceIcon width={16} height={16} className="flex-shrink-0 text-red-500" />,
         property: "module_view",
     },
     {
         title: "Views",
-        description: "Views are enabled for all the projects in this workspace. Access it from the sidebar.",
-        icon: <Layers className="h-4 w-4 flex-shrink-0 text-cyan-500" />,
+        description: "Apply filters to issues and save them to analyse and investigate work.",
+        icon: <PhotoFilterIcon className="h-4 w-4 flex-shrink-0 text-cyan-500" />,
         property: "issue_views_view",
     },
     {
         title: "Pages",
-        description: "Pages are enabled for all the projects in this workspace. Access it from the sidebar.",
+        description: "Document ideas, feature requirements, discussions within your project.",
         icon: <FileText className="h-4 w-4 flex-shrink-0 text-red-400" />,
         property: "page_view",
     },
