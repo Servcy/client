@@ -109,6 +109,7 @@ export const ProjectIssueQuickActions: React.FC<IQuickActionProps> = observer((p
                 customButton={customActionButton}
                 portalElement={portalElement}
                 closeOnSelect
+                maxHeight="lg"
                 ellipsis
             >
                 {isEditingAllowed && (

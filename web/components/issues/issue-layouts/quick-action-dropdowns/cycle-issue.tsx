@@ -106,6 +106,7 @@ export const CycleIssueQuickActions: React.FC<IQuickActionProps> = observer((pro
                 portalElement={portalElement}
                 closeOnSelect
                 ellipsis
+                maxHeight="lg"
             >
                 {isEditingAllowed && (
                     <CustomMenu.MenuItem
