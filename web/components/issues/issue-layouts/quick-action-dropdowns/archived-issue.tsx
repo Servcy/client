@@ -55,6 +55,7 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
                 customButton={customActionButton}
                 portalElement={portalElement}
                 closeOnSelect
+                maxHeight="lg"
                 ellipsis
             >
                 {isRestoringAllowed && (

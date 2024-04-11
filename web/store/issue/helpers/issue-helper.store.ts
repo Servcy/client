@@ -76,16 +76,17 @@ export class IssueHelperStore implements TIssueHelperStore {
             let groupArray = []
 
             if (groupBy === "state_detail.group") {
-                const state_group = this.rootStore?.stateMap?.[_issue?.state_id]?.group || "backlog"
+                // if groupBy state_detail.group is coming from the project level the we are using stateDetails from root store else we are looping through the stateMap
+                const state_group = (this.rootStore?.stateMap || {})?.[_issue?.state_id]?.group || "None"
                 groupArray = [state_group]
             } else {
                 const groupValue = get(_issue, ISSUE_FILTER_DEFAULT_DATA[groupBy])
-                groupArray = groupValue !== undefined ? this.getGroupArray(groupValue, isCalendarIssues) : []
+                groupArray = groupValue !== undefined ? this.getGroupArray(groupValue, isCalendarIssues) : ["None"]
             }
 
             for (const group of groupArray) {
-                if (group && _issues[group]) _issues[group]?.push(_issue?.id)
-                else if (group) _issues[group] = [_issue?.id]
+                if (group && _issues[group]) _issues[group].push(_issue.id)
+                else if (group) _issues[group] = [_issue.id]
             }
         }
 
@@ -101,7 +102,7 @@ export class IssueHelperStore implements TIssueHelperStore {
         const _issues: { [sub_group_id: string]: { [group_id: string]: string[] } } = {}
         if (!subGroupBy || !groupBy) return _issues
 
-        this.issueDisplayFiltersDefaultData(subGroupBy).forEach((sub_group: any) => {
+        this.issueDisplayFiltersDefaultData(subGroupBy).forEach((sub_group) => {
             const groupByIssues: { [group_id: string]: string[] } = {}
             this.issueDisplayFiltersDefaultData(groupBy).forEach((group) => {
                 groupByIssues[group] = []
@@ -116,15 +117,16 @@ export class IssueHelperStore implements TIssueHelperStore {
             let subGroupArray = []
             let groupArray = []
             if (subGroupBy === "state_detail.group" || groupBy === "state_detail.group") {
-                const state_group =
-                    this.rootStore?.stateDetails?.find((_state) => _state.id === _issue?.state_id)?.group || "None"
+                const state_group = (this.rootStore?.stateMap || {})?.[_issue?.state_id]?.group || "None"
+
                 subGroupArray = [state_group]
                 groupArray = [state_group]
             } else {
                 const subGroupValue = get(_issue, ISSUE_FILTER_DEFAULT_DATA[subGroupBy])
                 const groupValue = get(_issue, ISSUE_FILTER_DEFAULT_DATA[groupBy])
-                subGroupArray = subGroupValue != undefined ? this.getGroupArray(subGroupValue) : []
-                groupArray = groupValue != undefined ? this.getGroupArray(groupValue) : []
+
+                subGroupArray = subGroupValue != undefined ? this.getGroupArray(subGroupValue) : ["None"]
+                groupArray = groupValue != undefined ? this.getGroupArray(groupValue) : ["None"]
             }
 
             for (const subGroup of subGroupArray) {
