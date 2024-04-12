@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
@@ -16,7 +16,8 @@ import { MODULE_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { ERoles } from "@constants/iam"
 
 export const ModulesListView: React.FC = observer(() => {
-    const { workspaceSlug, projectId, peekModule } = useParams()
+    const { workspaceSlug, projectId } = useParams()
+    const searchParams = useSearchParams()
     // theme
     const { resolvedTheme } = useTheme()
     // store hooks
@@ -85,7 +86,7 @@ export const ModulesListView: React.FC = observer(() => {
                             <div className="flex h-full w-full justify-between">
                                 <div
                                     className={`grid h-full w-full grid-cols-1 gap-6 overflow-y-auto p-8 ${
-                                        peekModule
+                                        searchParams.has("peekModule")
                                             ? "lg:grid-cols-1 xl:grid-cols-2 3xl:grid-cols-3"
                                             : "lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4"
                                     } auto-rows-max transition-all vertical-scrollbar scrollbar-lg`}

@@ -1,4 +1,4 @@
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -54,7 +54,9 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
     const [moduleDeleteModal, setModuleDeleteModal] = useState(false)
     const [moduleLinkModal, setModuleLinkModal] = useState(false)
     const [selectedLinkToUpdate, setSelectedLinkToUpdate] = useState<ILinkDetails | null>(null)
-    const { workspaceSlug, projectId, peekModule } = useParams()
+    const { workspaceSlug, projectId } = useParams()
+    const searchParams = useSearchParams()
+
     // store hooks
     const {
         membership: { currentProjectRole },
@@ -195,8 +197,9 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
 
     const moduleStatus = MODULE_STATUS.find((status) => status.value === moduleDetails.status)
 
-    const issueCount =
-        moduleDetails.total_issues === 0 ? "0 Issue" : `${moduleDetails.completed_issues}/${moduleDetails.total_issues}`
+    const issueCount = !moduleDetails.total_issues
+        ? "0 Issue"
+        : `${moduleDetails.completed_issues}/${moduleDetails.total_issues}`
 
     const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
@@ -492,7 +495,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                                                             }}
                                                             totalIssues={moduleDetails.total_issues}
                                                             module={moduleDetails}
-                                                            isPeekView={Boolean(peekModule)}
+                                                            isPeekView={searchParams.has("peekModule")}
                                                         />
                                                     </div>
                                                 )}

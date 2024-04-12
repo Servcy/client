@@ -177,10 +177,10 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
 
     const issueCount =
         isCompleted && !isEmpty(cycleDetails.progress_snapshot)
-            ? cycleDetails.progress_snapshot.total_issues === 0
+            ? !cycleDetails.progress_snapshot.total_issues
                 ? "0 Issue"
                 : `${cycleDetails.progress_snapshot.completed_issues}/${cycleDetails.progress_snapshot.total_issues}`
-            : cycleDetails.total_issues === 0
+            : !cycleDetails.total_issues
               ? "0 Issue"
               : `${cycleDetails.completed_issues}/${cycleDetails.total_issues}`
 

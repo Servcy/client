@@ -1,4 +1,4 @@
-import { useParams, useRouter } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 
 import React, { useState } from "react"
 
@@ -26,7 +26,8 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
     const [isDeleteLoading, setIsDeleteLoading] = useState(false)
 
     const router = useRouter()
-    const { workspaceSlug, projectId, moduleId, peekModule } = useParams()
+    const { workspaceSlug, projectId, moduleId } = useParams()
+    const searchParams = useSearchParams()
     // store hooks
     const { captureModuleEvent } = useEventTracker()
     const { deleteModule } = useModule()
@@ -43,7 +44,8 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
 
         await deleteModule(workspaceSlug.toString(), projectId.toString(), data.id)
             .then(() => {
-                if (moduleId || peekModule) router.push(`/${workspaceSlug}/projects/${data.project_id}/modules`)
+                if (moduleId || searchParams.has("peekModule"))
+                    router.push(`/${workspaceSlug}/projects/${data.project_id}/modules`)
                 handleClose()
                 toast.success("Module deleted successfully.")
                 captureModuleEvent({
