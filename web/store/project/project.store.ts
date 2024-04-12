@@ -26,6 +26,7 @@ export interface IProjectStore {
     // actions
     getProjectById: (projectId: string) => IProject | null
     getProjectIdentifierById: (projectId: string) => string
+    getJoinedProjectIdsForWorkspace: (workspaceId: string) => string[]
     // fetch actions
     fetchProjects: (workspaceSlug: string) => Promise<IProject[]>
     fetchProjectDetails: (workspaceSlug: string, projectId: string) => Promise<IProject>
