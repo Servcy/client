@@ -10,14 +10,12 @@ import { IModule, TModuleDisplayFilters, TModuleFilters, TModuleOrderByOptions }
  * @returns {IModule[]}
  */
 export const orderModules = (modules: IModule[], orderByKey?: TModuleOrderByOptions | undefined): IModule[] => {
-    let orderedModules: IModule[] = []
     if (modules.length === 0) return []
-
-    if (orderByKey === "-created_at" || !orderByKey) orderedModules = sortBy(modules, [(m) => !m.created_at])
-    if (orderByKey === "name") orderedModules = sortBy(modules, [(m) => m.name.toLowerCase()])
-    if (orderByKey === "-name") orderedModules = sortBy(modules, [(m) => m.name.toLowerCase()]).reverse()
+    if (orderByKey === undefined) return sortBy(modules, [(m) => !m.created_at])
+    if (orderByKey === "name") return sortBy(modules, [(m) => m.name.toLowerCase()])
+    if (orderByKey === "-name") return sortBy(modules, [(m) => m.name.toLowerCase()]).reverse()
     if (["progress", "-progress"].includes(orderByKey))
-        orderedModules = sortBy(modules, [
+        return sortBy(modules, [
             (m) => {
                 let progress = (m.completed_issues + m.cancelled_issues) / m.total_issues
                 if (isNaN(progress)) progress = 0
@@ -26,15 +24,12 @@ export const orderModules = (modules: IModule[], orderByKey?: TModuleOrderByOpti
             "name",
         ])
     if (["issues_length", "-issues_length"].includes(orderByKey))
-        orderedModules = sortBy(modules, [
-            (m) => (orderByKey === "issues_length" ? m.total_issues : !m.total_issues),
-            "name",
-        ])
-    if (orderByKey === "target_date") orderedModules = sortBy(modules, [(m) => m.target_date])
-    if (orderByKey === "-target_date") orderedModules = sortBy(modules, [(m) => !m.target_date])
-    if (orderByKey === "created_at") orderedModules = sortBy(modules, [(m) => m.created_at])
-
-    return orderedModules
+        return sortBy(modules, [(m) => (orderByKey === "issues_length" ? m.total_issues : !m.total_issues), "name"])
+    if (orderByKey === "target_date") return sortBy(modules, [(m) => m.target_date])
+    if (orderByKey === "-target_date") return sortBy(modules, [(m) => !m.target_date])
+    if (orderByKey === "created_at") return sortBy(modules, [(m) => m.created_at])
+    if (orderByKey === "-created_at") return sortBy(modules, [(m) => !m.created_at])
+    return modules
 }
 
 /**
