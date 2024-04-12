@@ -11,6 +11,7 @@ type Props = {
     children: React.ReactNode
     title?: string
     placement?: Placement
+    icon?: React.ReactNode
     disabled?: boolean
     tabIndex?: number
     menuButton?: React.ReactNode
@@ -43,6 +44,7 @@ export const FiltersDropdown: React.FC<Props> = (props) => {
                                     disabled={disabled}
                                     ref={setReferenceElement}
                                     variant="neutral-primary"
+                                    prependIcon={icon}
                                     size="sm"
                                     appendIcon={
                                         <ChevronUp
