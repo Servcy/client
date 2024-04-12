@@ -56,6 +56,7 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
         })
     }
 
+    // @ts-expect-error key types are not compatible
     const totalFilters = calculateTotalFilters(view.filters ?? {})
 
     const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
