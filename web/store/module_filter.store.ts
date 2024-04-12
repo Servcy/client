@@ -1,9 +1,10 @@
-import { TModuleDisplayFilters, TModuleFilters } from "@plane/types"
 import set from "lodash/set"
 import { action, autorun, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
 // types
 import { RootStore } from "store/root.store"
+
+import { TModuleDisplayFilters, TModuleFilters } from "@servcy/types"
 
 export interface IModuleFilterStore {
     // observables
