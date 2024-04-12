@@ -66,7 +66,10 @@ export const ProjectsHeader = observer(() => {
     const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Escape") {
             if (searchQuery && searchQuery.trim() !== "") updateSearchQuery("")
-            else setIsSearchOpen(false)
+            else {
+                setIsSearchOpen(false)
+                inputRef.current?.blur()
+            }
         }
     }
 
