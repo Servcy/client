@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { observer } from "mobx-react"
@@ -68,8 +69,6 @@ export const CycleGanttBlock: React.FC<Props> = observer((props) => {
 
 export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
     const { cycleId } = props
-
-    const router = useRouter()
     // store hooks
     const {
         router: { workspaceSlug },
@@ -81,11 +80,9 @@ export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
     const cycleStatus = cycleDetails?.status.toLocaleLowerCase()
 
     return (
-        <div
+        <Link
             className="relative flex h-full w-full items-center gap-2"
-            onClick={() =>
-                router.push(`/${workspaceSlug}/projects/${cycleDetails?.project_id}/cycles/${cycleDetails?.id}`)
-            }
+            href={`/${workspaceSlug}/projects/${cycleDetails?.project_id}/cycles/${cycleDetails?.id}`}
         >
             <ContrastIcon
                 className="h-5 w-5 flex-shrink-0"
@@ -102,6 +99,6 @@ export const CycleGanttSidebarBlock: React.FC<Props> = observer((props) => {
                 }`}
             />
             <h6 className="flex-grow truncate text-sm font-medium">{cycleDetails?.name}</h6>
-        </div>
+        </Link>
     )
 })
