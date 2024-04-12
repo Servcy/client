@@ -394,7 +394,7 @@ export class IssueHelperStore implements TIssueHelperStore {
     getGroupArray(value: boolean | number | string | string[] | null, isDate: boolean = false): string[] {
         if (!value || value === null || value === undefined) return ["None"]
         if (Array.isArray(value))
-            if (value.length) return value
+            if (value && value.length) return value
             else return ["None"]
         else if (typeof value === "boolean") return [value ? "True" : "False"]
         else if (typeof value === "number") return [value.toString()]
