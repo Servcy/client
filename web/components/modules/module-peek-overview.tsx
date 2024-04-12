@@ -29,7 +29,7 @@ export const ModulePeekOverview: React.FC<Props> = observer(({ projectId, worksp
     useEffect(() => {
         if (!searchParams.has("peekModule")) return
         fetchModuleDetails(workspaceSlug, projectId, searchParams.get("peekModule") as string)
-    }, [fetchModuleDetails, searchParams, projectId, workspaceSlug])
+    }, [fetchModuleDetails, searchParams.get("peekModule"), projectId, workspaceSlug])
 
     return (
         <>
