@@ -1,7 +1,7 @@
 import { SettingIcon } from "@components/icons"
 import { Props } from "@components/icons/types"
 
-import { TProjectOrderByOptions } from "@servcy/types"
+import { TProjectAppliedDisplayFilterKeys, TProjectOrderByOptions } from "@servcy/types"
 
 import { ERoles } from "./iam"
 
@@ -127,5 +127,19 @@ export const PROJECT_ORDER_BY_OPTIONS: {
     {
         key: "members_length",
         label: "Number of members",
+    },
+]
+
+export const PROJECT_DISPLAY_FILTER_OPTIONS: {
+    key: TProjectAppliedDisplayFilterKeys
+    label: string
+}[] = [
+    {
+        key: "my_projects",
+        label: "My projects",
+    },
+    {
+        key: "archived_projects",
+        label: "Archived",
     },
 ]
