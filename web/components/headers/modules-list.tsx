@@ -1,13 +1,14 @@
 import { useParams, useRouter } from "next/navigation"
 
-import { GanttChartSquare, LayoutGrid, List, Plus } from "lucide-react"
+import { GanttChartSquare, LayoutGrid, List, ListFilter, Plus, Search, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
+import { FiltersDropdown } from "@components/issues"
+import { ModuleFiltersSelection, ModuleOrderByDropdown } from "@components/modules"
 
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
-import useLocalStorage from "@hooks/use-local-storage"
 
 import { ERoles } from "@constants/iam"
 import { MODULE_VIEW_LAYOUTS } from "@constants/module"
@@ -18,8 +19,10 @@ import { renderEmoji } from "@helpers/emoji.helper"
 import { Breadcrumbs, Button, CustomMenu, DiceIcon, Tooltip } from "@servcy/ui"
 
 export const ModulesListHeader: React.FC = observer(() => {
+    const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const inputRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
-    const { workspaceSlug } = useParams()
+    const { workspaceSlug, projectId } = useParams()
     // store hooks
     const { commandPalette: commandPaletteStore } = useApplication()
     const { setTrackElement } = useEventTracker()
@@ -27,9 +30,48 @@ export const ModulesListHeader: React.FC = observer(() => {
         membership: { currentProjectRole },
     } = useUser()
     const { currentProjectDetails } = useProject()
+    const {
+        workspace: { workspaceMemberIds },
+    } = useMember()
+    const {
+        currentProjectDisplayFilters: displayFilters,
+        currentProjectFilters: filters,
+        searchQuery,
+        updateDisplayFilters,
+        updateFilters,
+        updateSearchQuery,
+    } = useModuleFilter()
+    useOutsideClickDetector(inputRef, () => {
+        if (isSearchOpen && searchQuery.trim() === "") setIsSearchOpen(false)
+    })
+    const handleFilters = useCallback(
+        (key: keyof TModuleFilters, value: string | string[]) => {
+            if (!projectId) return
+            const newValues = filters?.[key] ?? []
 
-    const { storedValue: modulesView, setValue: setModulesView } = useLocalStorage("modules_view", "grid")
+            if (Array.isArray(value))
+                value.forEach((val) => {
+                    if (!newValues.includes(val)) newValues.push(val)
+                })
+            else {
+                if (filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                else newValues.push(value)
+            }
 
+            updateFilters(projectId.toString(), { [key]: newValues })
+        },
+        [filters, projectId, updateFilters]
+    )
+
+    const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Escape") {
+            if (searchQuery && searchQuery.trim() !== "") updateSearchQuery("")
+            else {
+                setIsSearchOpen(false)
+                inputRef.current?.blur()
+            }
+        }
+    }
     const canUserCreateModule = (currentProjectRole ?? 0) >= ERoles.MEMBER
     return (
         <div>
@@ -71,28 +113,98 @@ export const ModulesListHeader: React.FC = observer(() => {
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="items-center gap-1 rounded bg-custom-background-80 p-1 hidden md:flex">
+                    <div className="flex items-center">
+                        {!isSearchOpen && (
+                            <button
+                                type="button"
+                                className="-mr-1 p-2 hover:bg-custom-background-80 rounded text-custom-text-400 grid place-items-center"
+                                onClick={() => {
+                                    setIsSearchOpen(true)
+                                    inputRef.current?.focus()
+                                }}
+                            >
+                                <Search className="h-3.5 w-3.5" />
+                            </button>
+                        )}
+                        <div
+                            className={cn(
+                                "ml-auto flex items-center justify-start gap-1 rounded-md border border-transparent bg-custom-background-100 text-custom-text-400 w-0 transition-[width] ease-linear overflow-hidden opacity-0",
+                                {
+                                    "w-64 px-2.5 py-1.5 border-custom-border-200 opacity-100": isSearchOpen,
+                                }
+                            )}
+                        >
+                            <Search className="h-3.5 w-3.5" />
+                            <input
+                                ref={inputRef}
+                                className="w-full max-w-[234px] border-none bg-transparent text-sm text-custom-text-100 placeholder:text-custom-text-400 focus:outline-none"
+                                placeholder="Search"
+                                value={searchQuery}
+                                onChange={(e) => updateSearchQuery(e.target.value)}
+                                onKeyDown={handleInputKeyDown}
+                            />
+                            {isSearchOpen && (
+                                <button
+                                    type="button"
+                                    className="grid place-items-center"
+                                    onClick={() => {
+                                        // updateSearchQuery("");
+                                        setIsSearchOpen(false)
+                                    }}
+                                >
+                                    <X className="h-3 w-3" />
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                    <div className="hidden md:flex items-center gap-1 rounded bg-custom-background-80 p-1">
                         {MODULE_VIEW_LAYOUTS.map((layout) => (
                             <Tooltip key={layout.key} tooltipContent={layout.title}>
                                 <button
                                     type="button"
-                                    className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${
-                                        modulesView == layout.key
-                                            ? "bg-custom-background-100 shadow-custom-shadow-2xs"
-                                            : ""
-                                    }`}
-                                    onClick={() => setModulesView(layout.key)}
+                                    className={cn(
+                                        "group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100",
+                                        {
+                                            "bg-custom-background-100 shadow-custom-shadow-2xs":
+                                                displayFilters?.layout === layout.key,
+                                        }
+                                    )}
+                                    onClick={() => {
+                                        if (!projectId) return
+                                        updateDisplayFilters(projectId.toString(), { layout: layout.key })
+                                    }}
                                 >
                                     <layout.icon
                                         strokeWidth={2}
-                                        className={`h-3.5 w-3.5 ${
-                                            modulesView == layout.key ? "text-custom-text-100" : "text-custom-text-200"
-                                        }`}
+                                        className={cn("h-3.5 w-3.5 text-custom-text-200", {
+                                            "text-custom-text-100": displayFilters?.layout === layout.key,
+                                        })}
                                     />
                                 </button>
                             </Tooltip>
                         ))}
                     </div>
+                    <ModuleOrderByDropdown
+                        value={displayFilters?.order_by}
+                        onChange={(val) => {
+                            if (!projectId || val === displayFilters?.order_by) return
+                            updateDisplayFilters(projectId.toString(), {
+                                order_by: val,
+                            })
+                        }}
+                    />
+                    <FiltersDropdown icon={<ListFilter className="h-3 w-3" />} title="Filters" placement="bottom-end">
+                        <ModuleFiltersSelection
+                            displayFilters={displayFilters ?? {}}
+                            filters={filters ?? {}}
+                            handleDisplayFiltersUpdate={(val) => {
+                                if (!projectId) return
+                                updateDisplayFilters(projectId.toString(), val)
+                            }}
+                            handleFiltersUpdate={handleFilters}
+                            memberIds={workspaceMemberIds ?? undefined}
+                        />
+                    </FiltersDropdown>
                     {canUserCreateModule && (
                         <Button
                             variant="primary"
@@ -115,9 +227,9 @@ export const ModulesListHeader: React.FC = observer(() => {
                     // placement="bottom-start"
                     customButton={
                         <span className="flex items-center gap-2">
-                            {modulesView === "gantt_chart" ? (
+                            {displayFilters?.layout === "gantt" ? (
                                 <GanttChartSquare className="w-3 h-3" />
-                            ) : modulesView === "grid" ? (
+                            ) : displayFilters?.layout === "board" ? (
                                 <LayoutGrid className="w-3 h-3" />
                             ) : (
                                 <List className="w-3 h-3" />
@@ -130,7 +242,11 @@ export const ModulesListHeader: React.FC = observer(() => {
                 >
                     {MODULE_VIEW_LAYOUTS.map((layout) => (
                         <CustomMenu.MenuItem
-                            onClick={() => setModulesView(layout.key)}
+                            key={layout.key}
+                            onClick={() => {
+                                if (!projectId) return
+                                updateDisplayFilters(projectId.toString(), { layout: layout.key })
+                            }}
                             className="flex items-center gap-2"
                         >
                             <layout.icon className="w-3 h-3" />
