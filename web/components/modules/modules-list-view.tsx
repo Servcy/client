@@ -64,7 +64,7 @@ export const ModulesListView: React.FC = observer(() => {
         <>
             {filteredModuleIds.length > 0 ? (
                 <>
-                    {displayFilters?.layout === "list" && (
+                    {displayFilters?.layout === "list" ? (
                         <div className="h-full overflow-y-auto">
                             <div className="flex h-full w-full justify-between">
                                 <div className="flex h-full w-full flex-col overflow-y-auto vertical-scrollbar scrollbar-lg">
@@ -78,8 +78,7 @@ export const ModulesListView: React.FC = observer(() => {
                                 />
                             </div>
                         </div>
-                    )}
-                    {displayFilters?.layout === "gantt" ? (
+                    ) : displayFilters?.layout === "gantt" ? (
                         <ModulesListGanttChartView />
                     ) : (
                         <div className="h-full w-full">
