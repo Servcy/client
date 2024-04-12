@@ -4,7 +4,6 @@ import { useParams } from "next/navigation"
 
 import { useCallback } from "react"
 
-import { TModuleFilters } from "@plane/types"
 import { calculateTotalFilters } from "helpers/filter.helper"
 import { observer } from "mobx-react"
 
@@ -15,6 +14,8 @@ import { ModuleAppliedFiltersList, ModulesListView } from "@components/modules"
 import { useModuleFilter, useProject } from "@hooks/store"
 
 import { AppWrapper } from "@wrappers/app"
+
+import { TModuleFilters } from "@servcy/types"
 
 const ProjectModulesPage = observer(() => {
     const { projectId } = useParams()
@@ -30,7 +31,7 @@ const ProjectModulesPage = observer(() => {
             let newValues = currentProjectFilters?.[key] ?? []
 
             if (!value) newValues = []
-            else newValues = newValues.filter((val) => val !== value)
+            else newValues = newValues.filter((val: any) => val !== value)
 
             updateFilters(projectId.toString(), { [key]: newValues })
         },
