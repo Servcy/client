@@ -1,13 +1,13 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 
-import { FC, MouseEvent, useState } from "react"
+import { FC, MouseEvent } from "react"
 
-import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react"
+import { Info, Star } from "lucide-react"
 import { observer } from "mobx-react"
 import toast from "react-hot-toast"
 
-import { CycleCreateUpdateModal, CycleDeleteModal } from "@components/cycles"
+import { CycleQuickActions } from "@components/cycles"
 
 import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
 
@@ -15,12 +15,10 @@ import { CYCLE_STATUS } from "@constants/cycle"
 import { CYCLE_FAVORITED, CYCLE_UNFAVORITED } from "@constants/event-tracker"
 import { ERoles } from "@constants/iam"
 
-import { findHowManyDaysLeft, renderFormattedDate } from "@helpers/date-time.helper"
-import { copyTextToClipboard } from "@helpers/string.helper"
+import { findHowManyDaysLeft, getDate, renderFormattedDate } from "@helpers/date-time.helper"
 
-//.types
-import { TCycleGroups } from "@servcy/types"
-import { Avatar, AvatarGroup, CustomMenu, CycleGroupIcon, LayersIcon, Tooltip } from "@servcy/ui"
+import type { TCycleGroups } from "@servcy/types"
+import { Avatar, AvatarGroup, CycleGroupIcon, LayersIcon, Tooltip } from "@servcy/ui"
 
 export interface ICyclesBoardCard {
     workspaceSlug: string
@@ -30,32 +28,26 @@ export interface ICyclesBoardCard {
 
 export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
     const { cycleId, workspaceSlug, projectId } = props
-    // states
-    const [updateModal, setUpdateModal] = useState(false)
-    const [deleteModal, setDeleteModal] = useState(false)
-
-    const router = useRouter()
     const pathname = usePathname()
+    const router = useRouter()
     // store
-    const { setTrackElement, captureEvent } = useEventTracker()
+    const { captureEvent } = useEventTracker()
     const {
         membership: { currentProjectRole },
     } = useUser()
     const { addCycleToFavorites, removeCycleFromFavorites, getCycleById } = useCycle()
     const { getUserDetails } = useMember()
-
     // computed
     const cycleDetails = getCycleById(cycleId)
 
     if (!cycleDetails) return null
 
-    const cycleStatus = cycleDetails.status.toLocaleLowerCase()
-    const isCompleted = cycleStatus === "completed"
-    const endDate = new Date(cycleDetails.end_date ?? "")
-    const startDate = new Date(cycleDetails.start_date ?? "")
+    const cycleStatus = cycleDetails.status?.toLocaleLowerCase()
+    const endDate = getDate(cycleDetails.end_date)
+    const startDate = getDate(cycleDetails.start_date)
     const isDateValid = cycleDetails.start_date || cycleDetails.end_date
 
-    const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
+    const isEditingAllowed = !!currentProjectRole && currentProjectRole >= ERoles.MEMBER
 
     const currentCycle = CYCLE_STATUS.find((status) => status.value === cycleStatus)
 
@@ -76,62 +68,48 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
               : `${cycleDetails.completed_issues}/${cycleTotalIssues} Issues`
         : "0 Issue"
 
-    const handleCopyText = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
-
-        copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`).then(() => {
-            toast.success("Cycle link copied to clipboard.")
-        })
-    }
-
     const handleAddToFavorites = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if (!workspaceSlug || !projectId) return
 
-        addCycleToFavorites(workspaceSlug?.toString(), projectId.toString(), cycleId)
-            .then(() => {
+        const addToFavoritePromise = addCycleToFavorites(workspaceSlug?.toString(), projectId.toString(), cycleId).then(
+            () => {
                 captureEvent(CYCLE_FAVORITED, {
                     cycle_id: cycleId,
                     element: "Grid layout",
                     state: "SUCCESS",
                 })
-            })
-            .catch(() => {
-                toast.error("Couldn't add the cycle to favorites. Please try again.")
-            })
+            }
+        )
+
+        toast.promise(addToFavoritePromise, {
+            loading: "Adding cycle to favorites...",
+            success: "Cycle added to favorites.",
+            error: "Couldn't add the cycle to favorites. Please try again.",
+        })
     }
 
     const handleRemoveFromFavorites = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if (!workspaceSlug || !projectId) return
 
-        removeCycleFromFavorites(workspaceSlug?.toString(), projectId.toString(), cycleId)
-            .then(() => {
-                captureEvent(CYCLE_UNFAVORITED, {
-                    cycle_id: cycleId,
-                    element: "Grid layout",
-                    state: "SUCCESS",
-                })
+        const removeFromFavoritePromise = removeCycleFromFavorites(
+            workspaceSlug?.toString(),
+            projectId.toString(),
+            cycleId
+        ).then(() => {
+            captureEvent(CYCLE_UNFAVORITED, {
+                cycle_id: cycleId,
+                element: "Grid layout",
+                state: "SUCCESS",
             })
-            .catch(() => {
-                toast.error("Couldn't add the cycle to favorites. Please try again.")
-            })
-    }
+        })
 
-    const handleEditCycle = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setTrackElement("Cycles page grid layout")
-        setUpdateModal(true)
-    }
-
-    const handleDeleteCycle = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setTrackElement("Cycles page grid layout")
-        setDeleteModal(true)
+        toast.promise(removeFromFavoritePromise, {
+            loading: "Removing cycle from favorites...",
+            success: "Cycle removed from favorites.",
+            error: "Couldn't remove the cycle from favorites. Please try again.",
+        })
     }
 
     const openCycleOverview = (e: MouseEvent<HTMLButtonElement>) => {
@@ -144,22 +122,6 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
 
     return (
         <div>
-            <CycleCreateUpdateModal
-                data={cycleDetails}
-                isOpen={updateModal}
-                handleClose={() => setUpdateModal(false)}
-                workspaceSlug={workspaceSlug}
-                projectId={projectId}
-            />
-
-            <CycleDeleteModal
-                cycle={cycleDetails}
-                isOpen={deleteModal}
-                handleClose={() => setDeleteModal(false)}
-                workspaceSlug={workspaceSlug}
-                projectId={projectId}
-            />
-
             <Link href={`/${workspaceSlug}/projects/${projectId}/cycles/${cycleDetails.id}`}>
                 <div className="flex h-44 w-full flex-col justify-between rounded  border border-custom-border-100 bg-custom-background-100 p-4 text-sm hover:shadow-md">
                     <div className="flex items-center justify-between gap-2">
@@ -197,7 +159,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
                                 <LayersIcon className="h-4 w-4 text-custom-text-300" />
                                 <span className="text-xs text-custom-text-300">{issueCount}</span>
                             </div>
-                            {cycleDetails.assignee_ids.length > 0 && (
+                            {cycleDetails.assignee_ids && cycleDetails.assignee_ids.length > 0 && (
                                 <Tooltip tooltipContent={`${cycleDetails.assignee_ids.length} Members`}>
                                     <div className="flex cursor-default items-center gap-1">
                                         <AvatarGroup showTooltip={false}>
@@ -257,30 +219,12 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
                                             <Star className="h-3.5 w-3.5 text-custom-text-200" />
                                         </button>
                                     ))}
-                                <CustomMenu ellipsis className="z-10">
-                                    {!isCompleted && isEditingAllowed && (
-                                        <>
-                                            <CustomMenu.MenuItem onClick={handleEditCycle}>
-                                                <span className="flex items-center justify-start gap-2">
-                                                    <Pencil className="h-3 w-3" />
-                                                    <span>Edit cycle</span>
-                                                </span>
-                                            </CustomMenu.MenuItem>
-                                            <CustomMenu.MenuItem onClick={handleDeleteCycle}>
-                                                <span className="flex items-center justify-start gap-2">
-                                                    <Trash2 className="h-3 w-3" />
-                                                    <span>Delete cycle</span>
-                                                </span>
-                                            </CustomMenu.MenuItem>
-                                        </>
-                                    )}
-                                    <CustomMenu.MenuItem onClick={handleCopyText}>
-                                        <span className="flex items-center justify-start gap-2">
-                                            <LinkIcon className="h-3 w-3" />
-                                            <span>Copy cycle link</span>
-                                        </span>
-                                    </CustomMenu.MenuItem>
-                                </CustomMenu>
+
+                                <CycleQuickActions
+                                    cycleId={cycleId}
+                                    projectId={projectId}
+                                    workspaceSlug={workspaceSlug}
+                                />
                             </div>
                         </div>
                     </div>

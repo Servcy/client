@@ -1,4 +1,4 @@
-import { useParams, useRouter } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 
 import { Fragment, useState } from "react"
 
@@ -28,7 +28,8 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
     const [loader, setLoader] = useState(false)
 
     const router = useRouter()
-    const { cycleId, peekCycle } = useParams()
+    const { cycleId } = useParams()
+    const searchParams = useSearchParams()
     // store hooks
     const { captureCycleEvent } = useEventTracker()
     const { deleteCycle } = useCycle()
@@ -53,7 +54,8 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
                     })
                 })
 
-            if (cycleId || peekCycle) router.push(`/${workspaceSlug}/projects/${projectId}/cycles`)
+            if (cycleId || searchParams.has("peekCycle"))
+                router.push(`/${workspaceSlug}/projects/${projectId}/cycles?peekCycle=${cycleId}`)
 
             handleClose()
         } catch (error) {

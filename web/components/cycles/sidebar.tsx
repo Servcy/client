@@ -1,4 +1,4 @@
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -40,12 +40,12 @@ const defaultValues: Partial<ICycle> = {
 
 const cycleService = new CycleService()
 
-// TODO: refactor the whole component
 export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     const { cycleId, handleClose } = props
     // states
     const [cycleDeleteModal, setCycleDeleteModal] = useState(false)
-    const { workspaceSlug, projectId, peekCycle } = useParams()
+    const { workspaceSlug, projectId } = useParams()
+    const searchParams = useSearchParams()
     // store hooks
     const { setTrackElement, captureCycleEvent } = useEventTracker()
     const {
@@ -471,7 +471,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                                                                         totalIssues={
                                                                             cycleDetails.progress_snapshot.total_issues
                                                                         }
-                                                                        isPeekView={Boolean(peekCycle)}
+                                                                        isPeekView={searchParams.has("peekCycle")}
                                                                     />
                                                                 </div>
                                                             )}
@@ -490,7 +490,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                                                                         cancelled: cycleDetails.cancelled_issues,
                                                                     }}
                                                                     totalIssues={cycleDetails.total_issues}
-                                                                    isPeekView={Boolean(peekCycle)}
+                                                                    isPeekView={searchParams.has("peekCycle")}
                                                                 />
                                                             </div>
                                                         )}

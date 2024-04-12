@@ -2,6 +2,7 @@ import { enableStaticRendering } from "mobx-react-lite"
 
 // root stores
 import { AppRootStore, IAppRootStore } from "./application"
+import { CycleFilterStore, ICycleFilterStore } from "./cycle_filter.store"
 import { CycleStore, ICycleStore } from "./cycle.store"
 import { DashboardStore, IDashboardStore } from "./dashboard.store"
 import { EstimateStore, IEstimateStore } from "./estimate.store"
@@ -34,6 +35,7 @@ export class RootStore {
     module: IModuleStore
     projectView: IProjectViewStore
     globalView: IGlobalViewStore
+    cycleFilter: ICycleFilterStore
     issue: IIssueRootStore
     state: IStateStore
     label: ILabelStore
@@ -55,6 +57,7 @@ export class RootStore {
         this.projectView = new ProjectViewStore(this)
         this.globalView = new GlobalViewStore(this)
         this.issue = new IssueRootStore(this)
+        this.cycleFilter = new CycleFilterStore(this)
         this.state = new StateStore(this)
         this.moduleFilter = new ModuleFilterStore(this)
         this.label = new LabelStore(this)
@@ -71,6 +74,7 @@ export class RootStore {
         this.workspace = new WorkspaceStore(this)
         this.cycle = new CycleStore(this)
         this.module = new ModulesStore(this)
+        this.cycleFilter = new CycleFilterStore(this)
         this.moduleFilter = new ModuleFilterStore(this)
         this.projectView = new ProjectViewStore(this)
         this.globalView = new GlobalViewStore(this)

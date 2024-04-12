@@ -42,7 +42,7 @@ interface IActiveCycleDetails {
     projectId: string
 }
 
-export const ActiveCycleDetails: React.FC<IActiveCycleDetails> = observer((props) => {
+export const ActiveCycleRoot: React.FC<IActiveCycleDetails> = observer((props) => {
     // props
     const { workspaceSlug, projectId } = props
     const { resolvedTheme } = useTheme()

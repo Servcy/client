@@ -7,9 +7,7 @@ import { observer } from "mobx-react-lite"
 import { CycleGanttBlock } from "@components/cycles"
 import { CycleGanttSidebar, GanttChartRoot, IBlockUpdateData } from "@components/gantt-chart"
 
-import { useCycle, useUser } from "@hooks/store"
-
-import { ERoles } from "@constants/iam"
+import { useCycle } from "@hooks/store"
 
 import { ICycle } from "@servcy/types"
 
@@ -21,10 +19,6 @@ type Props = {
 export const CyclesListGanttChartView: FC<Props> = observer((props) => {
     const { cycleIds } = props
     const { workspaceSlug } = useParams()
-    // store hooks
-    const {
-        membership: { currentProjectRole },
-    } = useUser()
     const { getCycleById, updateCycleDetails } = useCycle()
 
     const handleCycleUpdate = async (cycle: ICycle, data: IBlockUpdateData) => {
@@ -52,8 +46,6 @@ export const CyclesListGanttChartView: FC<Props> = observer((props) => {
         return structuredBlocks
     }
 
-    const isAllowed = (currentProjectRole ?? 0) >= ERoles.MEMBER
-
     return (
         <div className="h-full w-full overflow-y-auto">
             <GanttChartRoot
@@ -66,7 +58,7 @@ export const CyclesListGanttChartView: FC<Props> = observer((props) => {
                 enableBlockLeftResize={false}
                 enableBlockRightResize={false}
                 enableBlockMove={false}
-                enableReorder={isAllowed}
+                enableReorder={false}
             />
         </div>
     )

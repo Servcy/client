@@ -8,8 +8,9 @@ import { CycleService } from "@services/cycle.service"
 import { IssueService } from "@services/issue"
 import { ProjectService } from "@services/project"
 
-// mobx
 import { RootStore } from "@store/root.store"
+
+import { orderCycles, shouldFilterCycle } from "@helpers/cycle.helper"
 
 import { CycleDateCheckData, ICycle } from "@servcy/types"
 
@@ -30,6 +31,8 @@ export interface ICycleStore {
     // computed actions
     getCycleById: (cycleId: string) => ICycle | null
     getCycleNameById: (cycleId: string) => string | undefined
+    getFilteredCycleIds: (projectId: string) => string[] | null
+    getFilteredCompletedCycleIds: (projectId: string) => string[] | null
     getActiveCycleById: (cycleId: string) => ICycle | null
     getProjectCycleIds: (projectId: string) => string[] | null
     // actions
@@ -171,6 +174,47 @@ export class CycleStore implements ICycleStore {
         const draftCycleIds = draftCycles.map((c) => c.id)
         return draftCycleIds
     }
+
+    /**
+     * @description returns filtered cycle ids based on display filters and filters
+     * @param {TCycleDisplayFilters} displayFilters
+     * @param {TCycleFilters} filters
+     * @returns {string[] | null}
+     */
+    getFilteredCycleIds = computedFn((projectId: string) => {
+        const filters = this.rootStore.cycleFilter.getFiltersByProjectId(projectId)
+        const searchQuery = this.rootStore.cycleFilter.searchQuery
+        if (!this.fetchedMap[projectId]) return null
+        const cycles = Object.values(this.cycleMap ?? {}).filter(
+            (c) =>
+                c.project_id.toString() === projectId.toString() &&
+                c.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+                shouldFilterCycle(c, filters ?? {})
+        )
+        const orderedCycles = orderCycles(cycles)
+        return orderedCycles.map((c) => c.id)
+    })
+
+    /**
+     * @description returns filtered cycle ids based on display filters and filters
+     * @param {TCycleDisplayFilters} displayFilters
+     * @param {TCycleFilters} filters
+     * @returns {string[] | null}
+     */
+    getFilteredCompletedCycleIds = computedFn((projectId: string) => {
+        const filters = this.rootStore.cycleFilter.getFiltersByProjectId(projectId)
+        const searchQuery = this.rootStore.cycleFilter.searchQuery
+        if (!this.fetchedMap[projectId]) return null
+        const cycles = Object.values(this.cycleMap ?? {}).filter(
+            (c) =>
+                c.project_id === projectId &&
+                c.status.toLowerCase() === "completed" &&
+                c.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+                shouldFilterCycle(c, filters ?? {})
+        )
+        const orderedCycles = sortBy(cycles, [(c) => !c.start_date])
+        return orderedCycles.map((c) => c.id)
+    })
 
     /**
      * returns active cycle id for a project

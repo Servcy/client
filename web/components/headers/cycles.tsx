@@ -1,26 +1,23 @@
 import { useParams, useRouter } from "next/navigation"
 
-import { FC, useCallback } from "react"
+import { FC } from "react"
 
-import { List, Plus } from "lucide-react"
+import { Plus } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
-import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 
 import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
-import useLocalStorage from "@hooks/use-local-storage"
 
-import { CYCLE_VIEW_LAYOUTS } from "@constants/cycle"
 import { ERoles } from "@constants/iam"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 
-import { TCycleLayout } from "@servcy/types"
-import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui"
+import { Breadcrumbs, Button, ContrastIcon } from "@servcy/ui"
 
 export const CyclesHeader: FC = observer(() => {
     const router = useRouter()
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
         commandPalette: { toggleCreateCycleModal },
@@ -31,25 +28,12 @@ export const CyclesHeader: FC = observer(() => {
     } = useUser()
     const { currentProjectDetails } = useProject()
 
-    const canUserCreateCycle = (currentProjectRole ?? 0) >= ERoles.MEMBER
-
-    const { workspaceSlug } = useParams() as {
-        workspaceSlug: string
-    }
-    const { setValue: setCycleLayout } = useLocalStorage<TCycleLayout>("cycle_layout", "list")
-
-    const handleCurrentLayout = useCallback(
-        (_layout: TCycleLayout) => {
-            setCycleLayout(_layout)
-        },
-        [setCycleLayout]
-    )
+    const canUserCreateCycle = currentProjectRole && [ERoles.ADMIN, ERoles.MEMBER].includes(currentProjectRole)
 
     return (
         <div className="relative z-10 items-center justify-between gap-x-2 gap-y-4">
-            <div className="flex border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
+            <div className="flex bg-custom-sidebar-background-100 p-4">
                 <div className="flex w-full flex-grow items-center gap-2 overflow-ellipsis whitespace-nowrap">
-                    <SidebarHamburgerToggle />
                     <div>
                         <Breadcrumbs onBack={router.back}>
                             <Breadcrumbs.BreadcrumbItem
@@ -99,34 +83,6 @@ export const CyclesHeader: FC = observer(() => {
                         </Button>
                     </div>
                 )}
-            </div>
-            <div className="flex justify-center sm:hidden">
-                <CustomMenu
-                    maxHeight={"md"}
-                    className="flex flex-grow justify-center text-custom-text-200 text-sm py-2 border-b border-custom-border-200 bg-custom-sidebar-background-100"
-                    // placement="bottom-start"
-                    customButton={
-                        <span className="flex items-center gap-2">
-                            <List className="h-4 w-4" />
-                            <span className="flex flex-grow justify-center text-custom-text-200 text-sm">Layout</span>
-                        </span>
-                    }
-                    customButtonClassName="flex flex-grow justify-center items-center text-custom-text-200 text-sm"
-                    closeOnSelect
-                >
-                    {CYCLE_VIEW_LAYOUTS.map((layout) => (
-                        <CustomMenu.MenuItem
-                            onClick={() => {
-                                // handleLayoutChange(ISSUE_LAYOUTS[index].key);
-                                handleCurrentLayout(layout.key as TCycleLayout)
-                            }}
-                            className="flex items-center gap-2"
-                        >
-                            <layout.icon className="w-3 h-3" />
-                            <div className="text-custom-text-300">{layout.title}</div>
-                        </CustomMenu.MenuItem>
-                    ))}
-                </CustomMenu>
             </div>
         </div>
     )

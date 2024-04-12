@@ -81,7 +81,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
     const dateChecker = async (payload: CycleDateCheckData) => {
         let status = false
 
-        await cycleService.cycleDateCheck(workspaceSlug, activeProject, payload).then((res) => {
+        await cycleService.cycleDateCheck(workspaceSlug, activeProject as String, payload).then((res) => {
             status = res.status
         })
 
