@@ -6,44 +6,42 @@ import { computedFn } from "mobx-utils"
 import { IssueLabelService, IssueService } from "@services/issue"
 import { ProjectService, ProjectStateService } from "@services/project"
 
+import { orderProjects, shouldFilterProject } from "@helpers/project.helper"
+
 import { IProject } from "@servcy/types"
 
 import { RootStore } from "../root.store"
 
 export interface IProjectStore {
     // observables
-    searchQuery: string
     projectMap: {
         [projectId: string]: IProject // projectId: project Info
     }
     // computed
-    searchedProjects: string[]
-    workspaceProjectIds: string[] | null
+    filteredProjectIds: string[] | undefined
+    workspaceProjectIds: string[] | undefined
     joinedProjectIds: string[]
     favoriteProjectIds: string[]
     currentProjectDetails: IProject | undefined
     // actions
-    setSearchQuery: (query: string) => void
     getProjectById: (projectId: string) => IProject | null
     getProjectIdentifierById: (projectId: string) => string
-    getJoinedProjectIdsForWorkspace: (workspaceId: string) => string[]
     // fetch actions
     fetchProjects: (workspaceSlug: string) => Promise<IProject[]>
-    fetchProjectDetails: (workspaceSlug: string, projectId: string) => Promise<any>
+    fetchProjectDetails: (workspaceSlug: string, projectId: string) => Promise<IProject>
     // favorites actions
     addProjectToFavorites: (workspaceSlug: string, projectId: string) => Promise<any>
     removeProjectFromFavorites: (workspaceSlug: string, projectId: string) => Promise<any>
     // project-view action
     updateProjectView: (workspaceSlug: string, projectId: string, viewProps: any) => Promise<any>
     // CRUD actions
-    createProject: (workspaceSlug: string, data: any) => Promise<any>
-    updateProject: (workspaceSlug: string, projectId: string, data: Partial<IProject>) => Promise<any>
+    createProject: (workspaceSlug: string, data: Partial<IProject>) => Promise<IProject>
+    updateProject: (workspaceSlug: string, projectId: string, data: Partial<IProject>) => Promise<IProject>
     deleteProject: (workspaceSlug: string, projectId: string) => Promise<void>
 }
 
 export class ProjectStore implements IProjectStore {
     // observables
-    searchQuery: string = ""
     projectMap: {
         [projectId: string]: IProject // projectId: project Info
     } = {}
@@ -58,16 +56,13 @@ export class ProjectStore implements IProjectStore {
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
             // observables
-            searchQuery: observable.ref,
             projectMap: observable,
             // computed
-            searchedProjects: computed,
+            filteredProjectIds: computed,
             workspaceProjectIds: computed,
             currentProjectDetails: computed,
             joinedProjectIds: computed,
             favoriteProjectIds: computed,
-            // actions
-            setSearchQuery: action.bound,
             // fetch actions
             fetchProjects: action,
             fetchProjectDetails: action,
@@ -90,17 +85,24 @@ export class ProjectStore implements IProjectStore {
     }
 
     /**
-     * Returns searched projects based on search query
+     * @description returns filtered projects based on filters and search query
      */
-    get searchedProjects() {
+    get filteredProjectIds() {
         const workspaceDetails = this.rootStore.workspace.currentWorkspace
-        if (!workspaceDetails) return []
-        const workspaceProjects = Object.values(this.projectMap).filter(
+        const {
+            currentWorkspaceDisplayFilters: displayFilters,
+            currentWorkspaceFilters: filters,
+            searchQuery,
+        } = this.rootStore.projectRoot.projectFilter
+        if (!workspaceDetails || !displayFilters || !filters) return
+        let workspaceProjects = Object.values(this.projectMap).filter(
             (p) =>
-                p.workspace === workspaceDetails.id &&
-                (p.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                    p.identifier.toLowerCase().includes(this.searchQuery.toLowerCase()))
+                p.workspace.toString() === workspaceDetails.id.toString() &&
+                (p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    p.identifier.toLowerCase().includes(searchQuery.toLowerCase())) &&
+                shouldFilterProject(p, displayFilters, filters)
         )
+        workspaceProjects = orderProjects(workspaceProjects, displayFilters.order_by)
         return workspaceProjects.map((p) => p.id)
     }
 
@@ -109,7 +111,7 @@ export class ProjectStore implements IProjectStore {
      */
     get workspaceProjectIds() {
         const workspaceDetails = this.rootStore.workspace.currentWorkspace
-        if (!workspaceDetails) return null
+        if (!workspaceDetails) return
         const workspaceProjects = Object.values(this.projectMap).filter((p) => p.workspace === workspaceDetails.id)
         const projectIds = workspaceProjects.map((p) => p.id)
         return projectIds ?? null
@@ -153,14 +155,6 @@ export class ProjectStore implements IProjectStore {
             .filter((project) => project.workspace === currentWorkspace.id && project.is_member && project.is_favorite)
             .map((project) => project.id)
         return projectIds
-    }
-
-    /**
-     * Sets search query
-     * @param query
-     */
-    setSearchQuery = (query: string) => {
-        this.searchQuery = query
     }
 
     /**

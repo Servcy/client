@@ -1,12 +1,12 @@
 import set from "lodash/set"
-import { action, computed, makeObservable, observable, reaction, runInAction } from "mobx"
+import { action, autorun, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
 
 // store
 import { RootStore } from "@store/root.store"
 
 // types
-import { TProjectAppliedDisplayFilterKeys, TProjectDisplayFilters, TProjectFilters } from "@servcy/types"
+import { TProjectDisplayFilters, TProjectFilters } from "@servcy/types"
 
 export interface IProjectFilterStore {
     // observables
@@ -15,7 +15,6 @@ export interface IProjectFilterStore {
     searchQuery: string
     // computed
     currentWorkspaceDisplayFilters: TProjectDisplayFilters | undefined
-    currentWorkspaceAppliedDisplayFilters: TProjectAppliedDisplayFilterKeys[] | undefined
     currentWorkspaceFilters: TProjectFilters | undefined
     // computed functions
     getDisplayFiltersByWorkspaceSlug: (workspaceSlug: string) => TProjectDisplayFilters | undefined
@@ -25,7 +24,6 @@ export interface IProjectFilterStore {
     updateFilters: (workspaceSlug: string, filters: TProjectFilters) => void
     updateSearchQuery: (query: string) => void
     clearAllFilters: (workspaceSlug: string) => void
-    clearAllAppliedDisplayFilters: (workspaceSlug: string) => void
 }
 
 export class ProjectFilterStore implements IProjectFilterStore {
@@ -44,25 +42,21 @@ export class ProjectFilterStore implements IProjectFilterStore {
             searchQuery: observable.ref,
             // computed
             currentWorkspaceDisplayFilters: computed,
-            currentWorkspaceAppliedDisplayFilters: computed,
             currentWorkspaceFilters: computed,
             // actions
             updateDisplayFilters: action,
             updateFilters: action,
             updateSearchQuery: action,
             clearAllFilters: action,
-            clearAllAppliedDisplayFilters: action,
         })
         // root store
         this.rootStore = _rootStore
         // initialize display filters of the current workspace
-        reaction(
-            () => this.rootStore.app.router.workspaceSlug,
-            (workspaceSlug) => {
-                if (!workspaceSlug) return
-                this.initWorkspaceFilters(workspaceSlug)
-            }
-        )
+        autorun(() => {
+            const workspaceSlug = this.rootStore.app.router.workspaceSlug
+            if (!workspaceSlug) return
+            this.initWorkspaceFilters(workspaceSlug)
+        })
     }
 
     /**
@@ -72,22 +66,6 @@ export class ProjectFilterStore implements IProjectFilterStore {
         const workspaceSlug = this.rootStore.app.router.workspaceSlug
         if (!workspaceSlug) return
         return this.displayFilters[workspaceSlug]
-    }
-
-    /**
-     * @description get project state applied display filter of the current workspace
-     * @returns {TProjectAppliedDisplayFilterKeys[] | undefined} // An array of keys of applied display filters
-     */
-    // TODO: Figure out a better approach for this
-    get currentWorkspaceAppliedDisplayFilters() {
-        const workspaceSlug = this.rootStore.app.router.workspaceSlug
-        if (!workspaceSlug) return
-        const displayFilters = this.displayFilters[workspaceSlug]
-        return Object.keys(displayFilters).filter(
-            (key): key is TProjectAppliedDisplayFilterKeys =>
-                ["my_projects", "archived_projects"].includes(key) &&
-                !!displayFilters[key as keyof TProjectDisplayFilters]
-        )
     }
 
     /**
@@ -121,7 +99,7 @@ export class ProjectFilterStore implements IProjectFilterStore {
             this.displayFilters[workspaceSlug] = {
                 order_by: displayFilters?.order_by || "created_at",
             }
-            this.filters[workspaceSlug] = this.filters[workspaceSlug] ?? {}
+            this.filters[workspaceSlug] = {}
         })
     }
 
@@ -164,19 +142,6 @@ export class ProjectFilterStore implements IProjectFilterStore {
     clearAllFilters = (workspaceSlug: string) => {
         runInAction(() => {
             this.filters[workspaceSlug] = {}
-        })
-    }
-
-    /**
-     * @description clear project display filters of a workspace
-     * @param {string} workspaceSlug
-     */
-    clearAllAppliedDisplayFilters = (workspaceSlug: string) => {
-        runInAction(() => {
-            if (!this.currentWorkspaceAppliedDisplayFilters) return
-            this.currentWorkspaceAppliedDisplayFilters.forEach((key) => {
-                set(this.displayFilters, [workspaceSlug, key], false)
-            })
         })
     }
 }
