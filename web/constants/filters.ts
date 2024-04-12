@@ -1,4 +1,4 @@
-export const DATE_FILTER_OPTIONS = [
+export const DATE_AFTER_FILTER_OPTIONS = [
     {
         name: "1 week from now",
         value: "1_weeks;after;fromnow",
