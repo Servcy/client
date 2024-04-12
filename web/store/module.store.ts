@@ -8,6 +8,8 @@ import { ProjectService } from "@services/project"
 
 import { RootStore } from "@store/root.store"
 
+import { orderModules, shouldFilterModule } from "@helpers/module.helper"
+
 import { ILinkDetails, IModule } from "@servcy/types"
 
 export interface IModuleStore {
@@ -17,6 +19,7 @@ export interface IModuleStore {
     // observables
     moduleMap: Record<string, IModule>
     // computed
+    getFilteredModuleIds: (projectId: string) => string[] | null
     projectModuleIds: string[] | null
     // computed actions
     getModuleById: (moduleId: string) => IModule | null
@@ -107,6 +110,28 @@ export class ModulesStore implements IModuleStore {
         const projectModuleIds = projectModules.map((m) => m.id)
         return projectModuleIds || null
     }
+
+    /**
+     * @description returns filtered module ids based on display filters and filters
+     * @param {TModuleDisplayFilters} displayFilters
+     * @param {TModuleFilters} filters
+     * @returns {string[] | null}
+     */
+    getFilteredModuleIds = computedFn((projectId: string) => {
+        const displayFilters = this.rootStore.moduleFilter.getDisplayFiltersByProjectId(projectId)
+        const filters = this.rootStore.moduleFilter.getFiltersByProjectId(projectId)
+        const searchQuery = this.rootStore.moduleFilter.searchQuery
+        if (!this.fetchedMap[projectId]) return null
+        let modules = Object.values(this.moduleMap ?? {}).filter(
+            (m) =>
+                m.project_id.toString() === projectId.toString() &&
+                m.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+                shouldFilterModule(m, displayFilters ?? {}, filters ?? {})
+        )
+        modules = orderModules(modules, displayFilters?.order_by)
+        const moduleIds = modules.map((m) => m.id)
+        return moduleIds
+    })
 
     /**
      * @description get module by id

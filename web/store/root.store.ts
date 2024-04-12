@@ -11,6 +11,7 @@ import { IIssueRootStore, IssueRootStore } from "./issue/root.store"
 import { ILabelStore, LabelStore } from "./label.store"
 import { IMemberRootStore, MemberRootStore } from "./member"
 import { IMentionStore, MentionStore } from "./mention.store"
+import { IModuleFilterStore, ModuleFilterStore } from "./module_filter.store"
 import { IModuleStore, ModulesStore } from "./module.store"
 import { IProjectRootStore, ProjectRootStore } from "./project"
 import { IProjectPageStore, ProjectPageStore } from "./project-page.store"
@@ -29,6 +30,7 @@ export class RootStore {
     projectRoot: IProjectRootStore
     memberRoot: IMemberRootStore
     cycle: ICycleStore
+    moduleFilter: IModuleFilterStore
     module: IModuleStore
     projectView: IProjectViewStore
     globalView: IGlobalViewStore
@@ -54,6 +56,7 @@ export class RootStore {
         this.globalView = new GlobalViewStore(this)
         this.issue = new IssueRootStore(this)
         this.state = new StateStore(this)
+        this.moduleFilter = new ModuleFilterStore(this)
         this.label = new LabelStore(this)
         this.estimate = new EstimateStore(this)
         this.mention = new MentionStore(this)
@@ -68,6 +71,7 @@ export class RootStore {
         this.workspace = new WorkspaceStore(this)
         this.cycle = new CycleStore(this)
         this.module = new ModulesStore(this)
+        this.moduleFilter = new ModuleFilterStore(this)
         this.projectView = new ProjectViewStore(this)
         this.globalView = new GlobalViewStore(this)
         this.issue = new IssueRootStore(this)

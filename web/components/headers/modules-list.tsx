@@ -1,5 +1,7 @@
 import { useParams, useRouter } from "next/navigation"
 
+import { useCallback, useRef, useState } from "react"
+
 import { GanttChartSquare, LayoutGrid, List, ListFilter, Plus, Search, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
@@ -8,14 +10,16 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { FiltersDropdown } from "@components/issues"
 import { ModuleFiltersSelection, ModuleOrderByDropdown } from "@components/modules"
 
-import { useApplication, useEventTracker, useProject, useUser } from "@hooks/store"
+import { useApplication, useEventTracker, useMember, useModuleFilter, useProject, useUser } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
 import { ERoles } from "@constants/iam"
 import { MODULE_VIEW_LAYOUTS } from "@constants/module"
 
-// helper
+import { cn } from "@helpers/common.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
 
+import { TModuleFilters } from "@servcy/types"
 import { Breadcrumbs, Button, CustomMenu, DiceIcon, Tooltip } from "@servcy/ui"
 
 export const ModulesListHeader: React.FC = observer(() => {
