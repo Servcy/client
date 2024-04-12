@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { useParams, useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 
 import React, { useState } from "react"
 
-import { LinkIcon, Lock, Pencil, Star } from "lucide-react"
+import { Check, LinkIcon, Lock, Pencil, Star } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
@@ -13,8 +13,9 @@ import { useProject } from "@hooks/store"
 
 import { EAccess, ERoles } from "@constants/iam"
 
+import { renderFormattedDate } from "@helpers/date-time.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
-import { copyTextToClipboard } from "@helpers/string.helper"
+import { copyUrlToClipboard } from "@helpers/string.helper"
 
 import type { IProject } from "@servcy/types"
 import { Avatar, AvatarGroup, Button, Tooltip } from "@servcy/ui"
@@ -25,17 +26,10 @@ export type ProjectCardProps = {
 
 export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     const { project } = props
-
-    const router = useRouter()
     const { workspaceSlug } = useParams()
-
-    // states
     const [deleteProjectModalOpen, setDeleteProjectModal] = useState(false)
     const [joinProjectModalOpen, setJoinProjectModal] = useState(false)
-    // store hooks
     const { addProjectToFavorites, removeProjectFromFavorites } = useProject()
-
-    project.member_role
     const isGuest = project.member_role === ERoles.GUEST
 
     const handleAddToFavorites = () => {
@@ -47,26 +41,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
     }
 
     const handleRemoveFromFavorites = () => {
-        if (!workspaceSlug || !project) return
+        if (!workspaceSlug) return
 
         removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
             toast.error("Couldn't remove the project from favorites. Please try again.")
         })
     }
 
-    const handleCopyText = () => {
-        const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
-
-        copyTextToClipboard(`${originURL}/${workspaceSlug}/projects/${project.id}/issues`).then(() => {
+    const handleCopyText = () =>
+        copyUrlToClipboard(`${workspaceSlug}/projects/${project.id}/issues`).then(() =>
             toast.success("Project link copied to clipboard.")
-        })
-    }
+        )
 
     const projectMembersIds = project.members?.map((member) => member.member_id)
 
     return (
         <>
-            {/* Delete Project Modal  */}
             <DeleteProjectModal
                 project={project}
                 isOpen={deleteProjectModalOpen}
@@ -75,20 +65,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
             {/* Join Project Modal */}
             {workspaceSlug && (
                 <JoinProjectModal
-                    workspaceSlug={workspaceSlug?.toString()}
+                    workspaceSlug={workspaceSlug.toString()}
                     project={project}
                     isOpen={joinProjectModalOpen}
                     handleClose={() => setJoinProjectModal(false)}
                 />
             )}
-
-            {/* Card Information */}
-            <div
-                onClick={() => {
-                    if (project.is_member) router.push(`/${workspaceSlug?.toString()}/projects/${project.id}/issues`)
-                    else setJoinProjectModal(true)
+            <Link
+                href={`/${workspaceSlug}/projects/${project.id}/issues`}
+                onClick={(e) => {
+                    if (!project.is_member) {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setJoinProjectModal(true)
+                    }
                 }}
-                className="flex cursor-pointer flex-col rounded border border-custom-border-200 bg-custom-background-100"
+                className="flex flex-col rounded border border-custom-border-200 bg-custom-background-100"
             >
                 <div className="relative h-[118px] w-full rounded-t ">
                     <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/60 to-transparent" />
@@ -137,15 +129,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                             <button
                                 className="flex h-6 w-6 items-center justify-center rounded bg-white/10"
                                 onClick={(e) => {
-                                    if (project.is_favorite) {
-                                        e.preventDefault()
-                                        e.stopPropagation()
-                                        handleRemoveFromFavorites()
-                                    } else {
-                                        e.preventDefault()
-                                        e.stopPropagation()
-                                        handleAddToFavorites()
-                                    }
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    if (project.is_favorite) handleRemoveFromFavorites()
+                                    else handleAddToFavorites()
                                 }}
                             >
                                 <Star
@@ -157,7 +144,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                 </div>
 
                 <div className="flex h-[104px] w-full flex-col justify-between rounded-b p-4">
-                    <p className="line-clamp-2 break-words text-sm text-custom-text-300">{project.description}</p>
+                    <p className="line-clamp-2 break-words text-sm text-custom-text-300">
+                        {project.description && project.description.trim() !== ""
+                            ? project.description
+                            : `Created on ${renderFormattedDate(project.created_at)}`}
+                    </p>
                     <div className="item-center flex justify-between">
                         <Tooltip
                             tooltipHeading="Members"
@@ -190,19 +181,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                                 <span className="text-sm italic text-custom-text-400">No Member Yet</span>
                             )}
                         </Tooltip>
-                        {!isGuest && (
-                            <Link
-                                className="flex items-center justify-center rounded p-1 text-custom-text-400 hover:bg-custom-background-80 hover:text-custom-text-200"
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                }}
-                                href={`/${workspaceSlug}/projects/${project.id}/settings`}
-                            >
-                                <Pencil className="h-3.5 w-3.5" />
-                            </Link>
-                        )}
-
-                        {!project.is_member ? (
+                        {project.is_member &&
+                            (!isGuest ? (
+                                <Link
+                                    className="flex items-center justify-center rounded p-1 text-custom-text-400 hover:bg-custom-background-80 hover:text-custom-text-200"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                    }}
+                                    href={`/${workspaceSlug}/projects/${project.id}/settings`}
+                                >
+                                    <Pencil className="h-3.5 w-3.5" />
+                                </Link>
+                            ) : (
+                                <span className="flex items-center gap-1 text-custom-text-400 text-sm">
+                                    <Check className="h-3.5 w-3.5" />
+                                    Joined
+                                </span>
+                            ))}
+                        {!project.is_member && (
                             <div className="flex items-center">
                                 <Button
                                     variant="link-primary"
@@ -216,10 +212,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
                                     Join
                                 </Button>
                             </div>
-                        ) : null}
+                        )}
                     </div>
                 </div>
-            </div>
+            </Link>
         </>
     )
 })
