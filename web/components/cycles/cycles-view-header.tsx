@@ -65,7 +65,7 @@ export const CyclesViewHeader: React.FC<Props> = observer((props) => {
             else setIsSearchOpen(false)
         }
     }
-
+    const activeLayout = currentProjectDisplayFilters?.layout ?? "list"
     return (
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-custom-border-200 px-4 sm:px-5 sm:pb-0">
             <Tab.List as="div" className="flex items-center overflow-x-scroll">
@@ -138,7 +138,7 @@ export const CyclesViewHeader: React.FC<Props> = observer((props) => {
                                 <button
                                     type="button"
                                     className={`group grid h-[22px] w-7 place-items-center overflow-hidden rounded transition-all hover:bg-custom-background-100 ${
-                                        currentProjectDisplayFilters?.layout == layout.key
+                                        activeLayout == layout.key
                                             ? "bg-custom-background-100 shadow-custom-shadow-2xs"
                                             : ""
                                     }`}
@@ -151,9 +151,7 @@ export const CyclesViewHeader: React.FC<Props> = observer((props) => {
                                     <layout.icon
                                         strokeWidth={2}
                                         className={`h-3.5 w-3.5 ${
-                                            currentProjectDisplayFilters?.layout == layout.key
-                                                ? "text-custom-text-100"
-                                                : "text-custom-text-200"
+                                            activeLayout == layout.key ? "text-custom-text-100" : "text-custom-text-200"
                                         }`}
                                     />
                                 </button>
