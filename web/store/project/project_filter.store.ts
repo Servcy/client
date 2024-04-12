@@ -53,10 +53,10 @@ export class ProjectFilterStore implements IProjectFilterStore {
         this.rootStore = _rootStore
         // initialize display filters of the current workspace
         reaction(
-            () => this.rootStore.app.router.projectId,
-            (projectId) => {
-                if (!projectId) return
-                this.initProjectModuleFilters(projectId)
+            () => this.rootStore.app.router.workspaceSlug,
+            (workspaceSlug) => {
+                if (!workspaceSlug) return
+                this.initWorkspaceFilters(workspaceSlug)
             }
         )
     }
