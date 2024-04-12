@@ -58,6 +58,7 @@ export interface IGroupByKanBan {
     storeType?: TCreateModalStoreTypes
     addIssuesToView?: (issueIds: string[]) => Promise<TIssue>
     canEditProperties: (projectId: string | undefined) => boolean
+    subGroupIssueHeaderCount?: (listId: string) => number
     scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>
     isDragStarted?: boolean
     showEmptyGroup?: boolean
@@ -76,6 +77,7 @@ const GroupByKanBan: React.FC<IGroupByKanBan> = observer((props) => {
         quickActions,
         kanbanFilters,
         handleKanbanFilters,
+        subGroupIssueHeaderCount,
         enableQuickIssueCreate,
         quickAddCallback,
         viewId,
@@ -111,17 +113,27 @@ const GroupByKanBan: React.FC<IGroupByKanBan> = observer((props) => {
 
     if (!list) return null
 
-    const groupWithIssues = list.filter((_list) => (issueIds as TGroupedIssues)?.[_list.id]?.length > 0)
-
-    const groupList = showEmptyGroup ? list : groupWithIssues
-
-    const visibilityGroupBy = (_list: IGroupByColumn) => {
+    const visibilityGroupBy = (_list: IGroupByColumn): { showGroup: boolean; showIssues: boolean } => {
         if (sub_group_by) {
-            if (kanbanFilters?.sub_group_by.includes(_list.id)) return true
-            return false
+            const groupVisibility = {
+                showGroup: true,
+                showIssues: true,
+            }
+            if (!showEmptyGroup) {
+                groupVisibility.showGroup = subGroupIssueHeaderCount ? subGroupIssueHeaderCount(_list.id) > 0 : true
+            }
+            return groupVisibility
         } else {
-            if (kanbanFilters?.group_by.includes(_list.id)) return true
-            return false
+            const groupVisibility = {
+                showGroup: true,
+                showIssues: true,
+            }
+            if (!showEmptyGroup) {
+                if ((issueIds as TGroupedIssues)?.[_list.id]?.length > 0) groupVisibility.showGroup = true
+                else groupVisibility.showGroup = false
+            }
+            if (kanbanFilters?.group_by.includes(_list.id)) groupVisibility.showIssues = false
+            return groupVisibility
         }
     }
 
@@ -129,14 +141,17 @@ const GroupByKanBan: React.FC<IGroupByKanBan> = observer((props) => {
 
     return (
         <div className={`relative w-full flex gap-2 ${sub_group_by ? "h-full" : "h-full"}`}>
-            {groupList &&
-                groupList.length > 0 &&
-                groupList.map((_list: IGroupByColumn) => {
+            {list &&
+                list.length > 0 &&
+                list.map((_list: IGroupByColumn) => {
                     const groupByVisibilityToggle = visibilityGroupBy(_list)
 
+                    if (groupByVisibilityToggle.showGroup === false) return <></>
                     return (
                         <div
-                            className={`relative flex flex-shrink-0 flex-col group ${groupByVisibilityToggle ? `` : `w-[350px]`}`}
+                            className={`relative flex flex-shrink-0 flex-col group ${
+                                groupByVisibilityToggle.showIssues ? `w-[350px]` : ``
+                            } `}
                         >
                             {sub_group_by === null && (
                                 <div className="flex-shrink-0 sticky top-0 z-[2] w-full bg-custom-background-90 py-1">
@@ -157,7 +172,7 @@ const GroupByKanBan: React.FC<IGroupByKanBan> = observer((props) => {
                                 </div>
                             )}
 
-                            {!groupByVisibilityToggle && (
+                            {groupByVisibilityToggle.showIssues && (
                                 <KanbanGroup
                                     groupId={_list.id}
                                     issuesMap={issuesMap}
@@ -175,7 +190,6 @@ const GroupByKanBan: React.FC<IGroupByKanBan> = observer((props) => {
                                     viewId={viewId}
                                     disableIssueCreation={disableIssueCreation}
                                     canEditProperties={canEditProperties}
-                                    groupByVisibilityToggle={groupByVisibilityToggle}
                                     scrollableContainerRef={scrollableContainerRef}
                                     isDragStarted={isDragStarted}
                                 />
@@ -213,6 +227,7 @@ export interface IKanBan {
     canEditProperties: (projectId: string | undefined) => boolean
     scrollableContainerRef?: MutableRefObject<HTMLDivElement | null>
     isDragStarted?: boolean
+    subGroupIssueHeaderCount?: (listId: string) => number
 }
 
 export const KanBan: React.FC<IKanBan> = observer((props) => {
@@ -222,7 +237,7 @@ export const KanBan: React.FC<IKanBan> = observer((props) => {
         displayProperties,
         sub_group_by,
         group_by,
-        sub_group_id = undefined,
+        sub_group_id = "null",
         handleIssues,
         quickActions,
         kanbanFilters,
@@ -237,6 +252,7 @@ export const KanBan: React.FC<IKanBan> = observer((props) => {
         scrollableContainerRef,
         isDragStarted,
         showEmptyGroup,
+        subGroupIssueHeaderCount,
     } = props
 
     const issueKanBanView = useKanbanView()
@@ -264,6 +280,7 @@ export const KanBan: React.FC<IKanBan> = observer((props) => {
             scrollableContainerRef={scrollableContainerRef}
             isDragStarted={isDragStarted}
             showEmptyGroup={showEmptyGroup}
+            subGroupIssueHeaderCount={subGroupIssueHeaderCount}
         />
     )
 })
