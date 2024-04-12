@@ -64,7 +64,7 @@ export const shouldFilterProject = (
     Object.keys(filters).forEach((key) => {
         const filterKey = key as keyof TProjectFilters
         if (filterKey === "access" && filters.access && filters.access.length > 0)
-            fallsInFilters = fallsInFilters && filters.access.includes(`${project.network}`)
+            fallsInFilters = fallsInFilters && filters.access.includes(`${project.access}`)
         if (filterKey === "lead" && filters.lead && filters.lead.length > 0)
             fallsInFilters = fallsInFilters && filters.lead.includes(`${project.project_lead}`)
         if (filterKey === "members" && filters.members && filters.members.length > 0) {
