@@ -28,7 +28,6 @@ export const ProjectCardList = observer(() => {
     const { searchQuery } = useProjectFilter()
     const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
-    if (!filteredProjectIds) return <ProjectsLoader />
     if (workspaceProjectIds?.length === 0)
         return (
             <EmptyState
@@ -50,6 +49,7 @@ export const ProjectCardList = observer(() => {
                 disabled={!isEditingAllowed}
             />
         )
+    if (!filteredProjectIds) return <ProjectsLoader />
     if (filteredProjectIds.length === 0)
         return (
             <div className="h-full w-full grid place-items-center">
