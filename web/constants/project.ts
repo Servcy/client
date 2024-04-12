@@ -1,6 +1,8 @@
 import { SettingIcon } from "@components/icons"
 import { Props } from "@components/icons/types"
 
+import { TProjectOrderByOptions } from "@servcy/types"
+
 import { ERoles } from "./iam"
 
 export const GROUP_CHOICES = {
@@ -10,21 +12,6 @@ export const GROUP_CHOICES = {
     completed: "Completed",
     cancelled: "Cancelled",
 }
-
-export const MONTHS = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-]
 
 export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
@@ -118,5 +105,27 @@ export const PROJECT_SETTINGS_LINKS: {
         access: ERoles.ADMIN,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/automations`,
         Icon: SettingIcon,
+    },
+]
+
+export const PROJECT_ORDER_BY_OPTIONS: {
+    key: TProjectOrderByOptions
+    label: string
+}[] = [
+    {
+        key: "sort_order",
+        label: "Manual",
+    },
+    {
+        key: "name",
+        label: "Name",
+    },
+    {
+        key: "created_at",
+        label: "Created date",
+    },
+    {
+        key: "members_length",
+        label: "Number of members",
     },
 ]
