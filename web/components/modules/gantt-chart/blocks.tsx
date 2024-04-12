@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { observer } from "mobx-react"
@@ -57,8 +58,6 @@ export const ModuleGanttBlock: React.FC<Props> = observer((props) => {
 
 export const ModuleGanttSidebarBlock: React.FC<Props> = observer((props) => {
     const { moduleId } = props
-
-    const router = useRouter()
     // store hooks
     const {
         router: { workspaceSlug },
@@ -68,14 +67,12 @@ export const ModuleGanttSidebarBlock: React.FC<Props> = observer((props) => {
     const moduleDetails = getModuleById(moduleId)
 
     return (
-        <div
+        <Link
             className="relative flex h-full w-full items-center gap-2"
-            onClick={() =>
-                router.push(`/${workspaceSlug}/projects/${moduleDetails?.project_id}/modules/${moduleDetails?.id}`)
-            }
+            href={`/${workspaceSlug}/projects/${moduleDetails?.project_id}/modules/${moduleDetails?.id}`}
         >
             <ModuleStatusIcon status={moduleDetails?.status ?? "backlog"} height="16px" width="16px" />
             <h6 className="flex-grow truncate text-sm font-medium">{moduleDetails?.name}</h6>
-        </div>
+        </Link>
     )
 })
