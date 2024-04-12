@@ -62,7 +62,7 @@ const ProjectCyclesPage = observer(() => {
         updateFilters,
     } = useCycleFilter()
     const cycleTab = currentProjectDisplayFilters?.active_tab
-    const cycleLayout = currentProjectDisplayFilters?.layout
+    const cycleLayout = currentProjectDisplayFilters?.layout ?? "list"
     const handleRemoveFilter = (key: keyof TCycleFilters, value: string | null) => {
         if (!projectId) return
         let newValues = currentProjectFilters?.[key] ?? []
@@ -145,14 +145,12 @@ const ProjectCyclesPage = observer(() => {
                                 />
                             </Tab.Panel>
                             <Tab.Panel as="div" className="h-full overflow-y-auto">
-                                {cycleTab && cycleLayout && (
-                                    <CyclesView
-                                        layout={cycleLayout}
-                                        workspaceSlug={workspaceSlug.toString()}
-                                        projectId={projectId.toString()}
-                                        peekCycle={searchParams.get("peekCycle") as string}
-                                    />
-                                )}
+                                <CyclesView
+                                    layout={cycleLayout}
+                                    workspaceSlug={workspaceSlug.toString()}
+                                    projectId={projectId.toString()}
+                                    peekCycle={searchParams.get("peekCycle") as string}
+                                />
                             </Tab.Panel>
                         </Tab.Panels>
                     </Tab.Group>
