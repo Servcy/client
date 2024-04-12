@@ -122,15 +122,14 @@ export class ModulesStore implements IModuleStore {
         const filters = this.rootStore.moduleFilter.getFiltersByProjectId(projectId)
         const searchQuery = this.rootStore.moduleFilter.searchQuery
         if (!this.fetchedMap[projectId]) return null
-        let modules = Object.values(this.moduleMap ?? {}).filter(
+        const modules = Object.values(this.moduleMap ?? {}).filter(
             (m) =>
                 m.project_id.toString() === projectId.toString() &&
                 m.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
                 shouldFilterModule(m, displayFilters ?? {}, filters ?? {})
         )
-        modules = orderModules(modules, displayFilters?.order_by)
-        const moduleIds = modules.map((m) => m.id)
-        return moduleIds
+        const orderedModules = orderModules(modules, displayFilters?.order_by)
+        return orderedModules.map((m) => m.id)
     })
 
     /**

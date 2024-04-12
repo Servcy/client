@@ -9,10 +9,11 @@ import { IModule, TModuleDisplayFilters, TModuleFilters, TModuleOrderByOptions }
  * @param {TModuleOrderByOptions | undefined} orderByKey
  * @returns {IModule[]}
  */
-export const orderModules = (modules: IModule[], orderByKey: TModuleOrderByOptions | undefined): IModule[] => {
+export const orderModules = (modules: IModule[], orderByKey?: TModuleOrderByOptions | undefined): IModule[] => {
     let orderedModules: IModule[] = []
-    if (modules.length === 0 || !orderByKey) return []
+    if (modules.length === 0) return []
 
+    if (orderByKey === "-created_at" || !orderByKey) orderedModules = sortBy(modules, [(m) => !m.created_at])
     if (orderByKey === "name") orderedModules = sortBy(modules, [(m) => m.name.toLowerCase()])
     if (orderByKey === "-name") orderedModules = sortBy(modules, [(m) => m.name.toLowerCase()]).reverse()
     if (["progress", "-progress"].includes(orderByKey))
@@ -32,7 +33,6 @@ export const orderModules = (modules: IModule[], orderByKey: TModuleOrderByOptio
     if (orderByKey === "target_date") orderedModules = sortBy(modules, [(m) => m.target_date])
     if (orderByKey === "-target_date") orderedModules = sortBy(modules, [(m) => !m.target_date])
     if (orderByKey === "created_at") orderedModules = sortBy(modules, [(m) => m.created_at])
-    if (orderByKey === "-created_at") orderedModules = sortBy(modules, [(m) => !m.created_at])
 
     return orderedModules
 }
