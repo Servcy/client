@@ -150,7 +150,7 @@ const ProjectCyclesPage = observer(() => {
                                         layout={cycleLayout}
                                         workspaceSlug={workspaceSlug.toString()}
                                         projectId={projectId.toString()}
-                                        peekCycle={searchParams.get("peekCycle") as String}
+                                        peekCycle={searchParams.get("peekCycle") as string}
                                     />
                                 )}
                             </Tab.Panel>

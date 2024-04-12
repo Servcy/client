@@ -26,7 +26,7 @@ export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, workspa
 
     useEffect(() => {
         if (!params.has("peekCycle")) return
-        fetchCycleDetails(workspaceSlug, projectId, params.get("peekCycle") as String)
+        fetchCycleDetails(workspaceSlug, projectId, params.get("peekCycle") as string)
     }, [fetchCycleDetails, params.get("peekCycle"), projectId, workspaceSlug])
 
     return (
