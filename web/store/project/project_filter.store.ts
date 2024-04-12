@@ -1,5 +1,5 @@
 import set from "lodash/set"
-import { action, autorun, computed, makeObservable, observable, runInAction } from "mobx"
+import { action, computed, makeObservable, observable, reaction, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
 
 // store
@@ -52,11 +52,13 @@ export class ProjectFilterStore implements IProjectFilterStore {
         // root store
         this.rootStore = _rootStore
         // initialize display filters of the current workspace
-        autorun(() => {
-            const workspaceSlug = this.rootStore.app.router.workspaceSlug
-            if (!workspaceSlug) return
-            this.initWorkspaceFilters(workspaceSlug)
-        })
+        reaction(
+            () => this.rootStore.app.router.projectId,
+            (projectId) => {
+                if (!projectId) return
+                this.initProjectModuleFilters(projectId)
+            }
+        )
     }
 
     /**
@@ -99,7 +101,7 @@ export class ProjectFilterStore implements IProjectFilterStore {
             this.displayFilters[workspaceSlug] = {
                 order_by: displayFilters?.order_by || "created_at",
             }
-            this.filters[workspaceSlug] = {}
+            this.filters[workspaceSlug] = this.filters[workspaceSlug] ?? {}
         })
     }
 
