@@ -79,7 +79,9 @@ export const ModulesListView: React.FC = observer(() => {
                             </div>
                         </div>
                     )}
-                    {displayFilters?.layout === "board" && (
+                    {displayFilters?.layout === "gantt" ? (
+                        <ModulesListGanttChartView />
+                    ) : (
                         <div className="h-full w-full">
                             <div className="flex h-full w-full justify-between">
                                 <div
@@ -100,7 +102,6 @@ export const ModulesListView: React.FC = observer(() => {
                             </div>
                         </div>
                     )}
-                    {displayFilters?.layout === "gantt" && <ModulesListGanttChartView />}
                 </>
             ) : (
                 <EmptyState
