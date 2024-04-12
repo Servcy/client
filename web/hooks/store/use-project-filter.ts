@@ -1,6 +1,6 @@
 import { useContext } from "react"
 
-import { StoreContext } from "@contexts/store-context"
+import { StoreContext } from "@contexts/StoreContext"
 
 import { IProjectFilterStore } from "@store/project/project_filter.store"
 

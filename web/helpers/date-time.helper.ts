@@ -1,6 +1,11 @@
 import { differenceInDays, format, formatDistanceToNow, isAfter, isEqual, isValid, parseISO } from "date-fns"
 import { isNil } from "lodash"
 
+export const isDate = (date: string) => {
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/
+    return datePattern.test(date)
+}
+
 // Format Date Helpers
 /**
  * @returns {string | null} formatted date in the format of MMM dd, yyyy
