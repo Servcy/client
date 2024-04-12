@@ -106,6 +106,7 @@ export default function Login(): JSX.Element {
     useEffect(() => {
         if (searchParams.has("email")) {
             const email = searchParams.get("email") as string
+            if (!validateEmail(email)) return
             document.getElementById("email")?.setAttribute("value", email)
             sendOtp()
         }
