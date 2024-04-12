@@ -1,14 +1,4 @@
-import type {
-    IIssueFilterOptions,
-    ILinkDetails,
-    IProject,
-    IProjectLite,
-    IUser,
-    IUserLite,
-    IWorkspace,
-    IWorkspaceLite,
-    TIssue,
-} from "@servcy/types"
+import type { IIssueFilterOptions, ILinkDetails, TIssue } from "@servcy/types"
 
 export type TModuleStatus = "backlog" | "planned" | "in-progress" | "paused" | "completed" | "cancelled"
 
@@ -37,6 +27,7 @@ export interface IModule {
     start_date: string | null
     started_issues: number
     status: TModuleStatus
+    sub_issues: number
     target_date: string | null
     total_issues: number
     unstarted_issues: number

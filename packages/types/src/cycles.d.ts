@@ -29,6 +29,7 @@ export interface ICycle {
     status: TCycleGroups
     sort_order: number
     start_date: string | null
+    sub_issues: number
     started_issues: number
     total_issues: number
     unstarted_issues: number

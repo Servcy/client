@@ -6,15 +6,21 @@ export interface IProject {
     archive_in: number
     close_in: number
     created_at: Date
+    archived_issues: number
+    archived_sub_issues: number
     created_by: string
     cover_image: string | null
     cycle_view: boolean
     issue_views_view: boolean
+    draft_issues: number
+    draft_sub_issues: number
     module_view: boolean
     page_view: boolean
     default_assignee: IUser | string | null
     default_state: string | null
     description: string
+    sub_issues: number
+    total_issues: number
     emoji: string | null
     emoji_and_icon:
         | string

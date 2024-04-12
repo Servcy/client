@@ -48,7 +48,6 @@ type Props = {
     handleClose: () => void
 }
 
-// TODO: refactor this component
 export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
     const { moduleId, handleClose } = props
     // states
@@ -202,7 +201,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
     const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
-        <>
+        <div className="relative">
             <LinkModal
                 isOpen={moduleLinkModal}
                 handleClose={() => {
@@ -221,7 +220,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
             />
 
             <>
-                <div className="flex w-full items-center justify-between">
+                <div className="sticky z-10 top-0 flex items-center justify-between bg-custom-sidebar-background-100 py-5">
                     <div>
                         <button
                             className="flex h-5 w-5 items-center justify-center rounded-full bg-custom-border-300"
@@ -573,6 +572,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     </div>
                 </div>
             </>
-        </>
+        </div>
     )
 })

@@ -144,26 +144,6 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
         }
     }
 
-    // TODO: refactor this
-    // const handleFiltersUpdate = useCallback(
-    //   (key: keyof IIssueFilterOptions, value: string | string[]) => {
-    //     if (!workspaceSlug || !projectId) return;
-    //     const newValues = issueFilters?.filters?.[key] ?? [];
-
-    //     if (Array.isArray(value)) {
-    //       value.forEach((val) => {
-    //         if (!newValues.includes(val)) newValues.push(val);
-    //       });
-    //     } else {
-    //       if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1);
-    //       else newValues.push(value);
-    //     }
-
-    //     updateFilters(workspaceSlug.toString(), projectId.toString(), EFilterType.FILTERS, { [key]: newValues }, cycleId);
-    //   },
-    //   [workspaceSlug, projectId, cycleId, issueFilters, updateFilters]
-    // );
-
     const cycleStatus = cycleDetails?.status.toLocaleLowerCase()
     const isCompleted = cycleStatus === "completed"
 
@@ -209,7 +189,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
     return (
-        <>
+        <div className="relative">
             {cycleDetails && workspaceSlug && projectId && (
                 <CycleDeleteModal
                     cycle={cycleDetails}
@@ -221,7 +201,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
             )}
 
             <>
-                <div className="flex w-full items-center justify-between">
+                <div className="sticky z-10 top-0 flex items-center justify-between bg-custom-sidebar-background-100 py-5">
                     <div>
                         <button
                             className="flex h-5 w-5 items-center justify-center rounded-full bg-custom-border-300"
@@ -525,6 +505,6 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                     </div>
                 </div>
             </>
-        </>
+        </div>
     )
 })
