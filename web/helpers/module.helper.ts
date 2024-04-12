@@ -55,7 +55,7 @@ export const shouldFilterModule = (
         if (filterKey === "status" && filters.status && filters.status.length > 0)
             fallsInFilters = fallsInFilters && filters.status.includes(module.status.toLowerCase())
         if (filterKey === "lead" && filters.lead && filters.lead.length > 0)
-            fallsInFilters = fallsInFilters && filters.lead.map((lead) => lead.toString()).includes(`${module.lead}`)
+            fallsInFilters = fallsInFilters && filters.lead.map((lead) => lead.toString()).includes(`${module.lead_id}`)
         if (filterKey === "members" && filters.members && filters.members.length > 0)
             fallsInFilters =
                 fallsInFilters &&
