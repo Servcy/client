@@ -99,13 +99,13 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
 
         if (payload.start_date && payload.end_date) {
             if (data?.start_date && data?.end_date)
-                isDateValid = await dateChecker(payload.project_id ?? projectId, {
+                isDateValid = await dateChecker(payload.project_id ?? projectId.toString(), {
                     start_date: payload.start_date,
                     end_date: payload.end_date,
                     cycle_id: data.id,
                 })
             else
-                isDateValid = await dateChecker(payload.project_id ?? projectId, {
+                isDateValid = await dateChecker(payload.project_id ?? projectId.toString(), {
                     start_date: payload.start_date,
                     end_date: payload.end_date,
                 })
