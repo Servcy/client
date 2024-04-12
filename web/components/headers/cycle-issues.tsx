@@ -33,7 +33,7 @@ import { renderEmoji } from "@helpers/emoji.helper"
 import { truncateText } from "@helpers/string.helper"
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
-import { Breadcrumbs, Button, ContrastIcon, CustomMenu } from "@servcy/ui"
+import { Breadcrumbs, Button, ContrastIcon, CustomMenu, Tooltip } from "@servcy/ui"
 
 const CycleDropdownOption: React.FC<{ cycleId: string }> = ({ cycleId }) => {
     const { workspaceSlug, projectId } = useParams()
@@ -142,6 +142,12 @@ export const CycleIssuesHeader: React.FC = observer(() => {
     const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined
     const canUserCreateIssue = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
 
+    const issueCount = cycleDetails
+        ? issueFilters?.displayFilters?.sub_issue
+            ? cycleDetails.total_issues + cycleDetails?.sub_issues
+            : cycleDetails.total_issues
+        : undefined
+
     return (
         <>
             <ProjectAnalyticsModal
@@ -201,12 +207,26 @@ export const CycleIssuesHeader: React.FC = observer(() => {
                                         label={
                                             <>
                                                 <ContrastIcon className="h-3 w-3" />
-                                                <div className=" w-auto max-w-[70px] sm:max-w-[200px] inline-block truncate line-clamp-1 overflow-hidden whitespace-nowrap">
-                                                    {cycleDetails?.name && cycleDetails.name}
+                                                <div className="flex items-center gap-2 w-auto max-w-[70px] sm:max-w-[200px] truncate">
+                                                    <p className="truncate">
+                                                        {cycleDetails?.name && cycleDetails.name}
+                                                    </p>
+                                                    {issueCount && issueCount > 0 ? (
+                                                        <Tooltip
+                                                            tooltipContent={`There are ${issueCount} ${
+                                                                issueCount > 1 ? "issues" : "issue"
+                                                            } in this cycle`}
+                                                            position="bottom"
+                                                        >
+                                                            <span className="cursor-default flex items-center text-center justify-center px-2 flex-shrink-0 bg-custom-primary-100/20 text-custom-primary-100 text-xs font-semibold rounded-xl">
+                                                                {issueCount}
+                                                            </span>
+                                                        </Tooltip>
+                                                    ) : null}
                                                 </div>
                                             </>
                                         }
-                                        className="ml-1.5 flex-shrink-0"
+                                        className="ml-1.5 flex-shrink-0 truncate"
                                         placement="bottom-start"
                                     >
                                         {currentProjectCycleIds?.map((cycleId) => (

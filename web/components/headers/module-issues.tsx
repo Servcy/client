@@ -33,7 +33,7 @@ import { renderEmoji } from "@helpers/emoji.helper"
 import { truncateText } from "@helpers/string.helper"
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
-import { Breadcrumbs, Button, CustomMenu, DiceIcon } from "@servcy/ui"
+import { Breadcrumbs, Button, CustomMenu, DiceIcon, Tooltip } from "@servcy/ui"
 
 const ModuleDropdownOption: React.FC<{ moduleId: string }> = ({ moduleId }) => {
     const { workspaceSlug, projectId } = useParams()
@@ -142,6 +142,11 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
     const moduleDetails = moduleId ? getModuleById(moduleId.toString()) : undefined
     const canUserCreateIssue = (currentProjectRole ?? 0) >= ERoles.MEMBER
 
+    const issueCount = moduleDetails
+        ? issueFilters?.displayFilters?.sub_issue
+            ? moduleDetails.total_issues + moduleDetails.sub_issues
+            : moduleDetails.total_issues
+        : undefined
     return (
         <>
             <ProjectAnalyticsModal
@@ -201,8 +206,22 @@ export const ModuleIssuesHeader: React.FC = observer(() => {
                                         label={
                                             <>
                                                 <DiceIcon className="h-3 w-3" />
-                                                <div className="w-auto max-w-[70px] sm:max-w-[200px] inline-block truncate line-clamp-1 overflow-hidden whitespace-nowrap">
-                                                    {moduleDetails?.name && moduleDetails.name}
+                                                <div className="flex items-center gap-2 w-auto max-w-[70px] sm:max-w-[200px] truncate">
+                                                    <p className="truncate">
+                                                        {moduleDetails?.name && moduleDetails.name}
+                                                    </p>
+                                                    {issueCount && issueCount > 0 ? (
+                                                        <Tooltip
+                                                            tooltipContent={`There are ${issueCount} ${
+                                                                issueCount > 1 ? "issues" : "issue"
+                                                            } in this module`}
+                                                            position="bottom"
+                                                        >
+                                                            <span className="cursor-default flex items-center text-center justify-center px-2 flex-shrink-0 bg-custom-primary-100/20 text-custom-primary-100 text-xs font-semibold rounded-xl">
+                                                                {issueCount}
+                                                            </span>
+                                                        </Tooltip>
+                                                    ) : null}
                                                 </div>
                                             </>
                                         }

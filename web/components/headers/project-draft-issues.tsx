@@ -16,7 +16,7 @@ import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } f
 import { renderEmoji } from "@helpers/emoji.helper"
 
 import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions, TIssueLayouts } from "@servcy/types"
-import { Breadcrumbs, LayersIcon } from "@servcy/ui"
+import { Breadcrumbs, LayersIcon, Tooltip } from "@servcy/ui"
 
 export const ProjectDraftIssueHeader: FC = observer(() => {
     const { workspaceSlug, projectId } = useParams() as { workspaceSlug: string; projectId: string }
@@ -75,11 +75,17 @@ export const ProjectDraftIssueHeader: FC = observer(() => {
         },
         [workspaceSlug, projectId, updateFilters]
     )
+
+    const issueCount = currentProjectDetails
+        ? issueFilters?.displayFilters?.sub_issue
+            ? currentProjectDetails.draft_issues + currentProjectDetails.draft_sub_issues
+            : currentProjectDetails.draft_issues
+        : undefined
     return (
         <div className="relative z-10 flex h-[3.75rem] w-full flex-shrink-0 flex-row items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
             <div className="flex w-full flex-grow items-center gap-2 overflow-ellipsis whitespace-nowrap">
                 <SidebarHamburgerToggle />
-                <div>
+                <div className="flex items-center gap-2.5">
                     <Breadcrumbs>
                         <Breadcrumbs.BreadcrumbItem
                             type="text"
@@ -111,6 +117,17 @@ export const ProjectDraftIssueHeader: FC = observer(() => {
                                 />
                             }
                         />
+
+                        {issueCount && issueCount > 0 ? (
+                            <Tooltip
+                                tooltipContent={`There are ${issueCount} ${issueCount > 1 ? "issues" : "issue"} in project's draft`}
+                                position="bottom"
+                            >
+                                <span className="cursor-default flex items-center text-center justify-center px-2.5 py-0.5 flex-shrink-0 bg-custom-primary-100/20 text-custom-primary-100 text-xs font-semibold rounded-xl">
+                                    {issueCount}
+                                </span>
+                            </Tooltip>
+                        ) : null}
                     </Breadcrumbs>
                 </div>
 
