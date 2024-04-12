@@ -57,7 +57,7 @@ export const PeekOverviewIssueDetails: FC<IPeekOverviewIssueDetails> = observer(
             : undefined
 
     return (
-        <>
+        <div className="space-y-2">
             <span className="text-base font-medium text-custom-text-400">
                 {projectDetails?.identifier}-{issue?.sequence_id}
             </span>
@@ -91,6 +91,6 @@ export const PeekOverviewIssueDetails: FC<IPeekOverviewIssueDetails> = observer(
                     currentUser={currentUser}
                 />
             )}
-        </>
+        </div>
     )
 })

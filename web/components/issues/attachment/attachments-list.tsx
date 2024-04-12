@@ -28,15 +28,14 @@ export const IssueAttachmentsList: FC<TIssueAttachmentsList> = observer((props) 
 
     return (
         <>
-            {issueAttachments &&
-                issueAttachments.length > 0 &&
-                issueAttachments.map((attachmentId) => (
-                    <IssueAttachmentsDetail
-                        attachmentId={attachmentId}
-                        disabled={disabled}
-                        handleAttachmentOperations={handleAttachmentOperations}
-                    />
-                ))}
+            {issueAttachments?.map((attachmentId) => (
+                <IssueAttachmentsDetail
+                    attachmentId={attachmentId}
+                    key={attachmentId}
+                    disabled={disabled}
+                    handleAttachmentOperations={handleAttachmentOperations}
+                />
+            ))}
         </>
     )
 })

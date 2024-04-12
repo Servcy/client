@@ -1,10 +1,12 @@
 import React from "react"
 
-import { ChevronDown, ChevronRight, Link as LinkIcon, Loader, Pencil, Trash, X } from "lucide-react"
+import { ChevronRight, Link as LinkIcon, Loader, Pencil, Trash, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 // import { ISubIssuesRootLoaders, ISubIssuesRootLoadersHandler } from "./root";
 import { useIssueDetail, useProject, useProjectState } from "@hooks/store"
+
+import { cn } from "@helpers/common.helper"
 
 import { TIssue } from "@servcy/types"
 import { ControlLink, CustomMenu, Tooltip } from "@servcy/ui"
@@ -94,11 +96,12 @@ export const IssueListItem: React.FC<ISubIssues> = observer((props) => {
                                             setSubIssueHelpers(parentIssueId, "issue_visibility", issueId)
                                         }}
                                     >
-                                        {subIssueHelpers.issue_visibility.includes(issue.id) ? (
-                                            <ChevronDown width={14} strokeWidth={2} />
-                                        ) : (
-                                            <ChevronRight width={14} strokeWidth={2} />
-                                        )}
+                                        <ChevronRight
+                                            className={cn("h-3 w-3 transition-all", {
+                                                "rotate-90": subIssueHelpers.issue_visibility.includes(issue.id),
+                                            })}
+                                            strokeWidth={2}
+                                        />
                                     </div>
                                 )}
                             </>

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 import { FC } from "react"
 
@@ -69,7 +69,6 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
         isSubmitting,
     } = props
 
-    const router = useRouter()
     // store hooks
     const { currentUser } = useUser()
     const {
@@ -91,11 +90,6 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
             toast.success("Issue link copied to clipboard.")
         })
     }
-    const redirectToIssueDetail = () => {
-        router.push(`/${issueLink}`)
-        removeRoutePeekId()
-    }
-    // auth
     const isArchivingAllowed = !isArchived && !disabled
     const isInArchivableGroup =
         !!stateDetails && [STATE_GROUPS.completed.key, STATE_GROUPS.cancelled.key].includes(stateDetails?.group)
@@ -112,9 +106,9 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
                     <MoveRight className="h-4 w-4 text-custom-text-300 hover:text-custom-text-200" />
                 </button>
 
-                <button onClick={redirectToIssueDetail}>
+                <Link href={`/${issueLink}`} onClick={() => removeRoutePeekId()}>
                     <MoveDiagonal className="h-4 w-4 text-custom-text-300 hover:text-custom-text-200" />
-                </button>
+                </Link>
                 {currentMode && (
                     <div className="flex flex-shrink-0 items-center gap-2">
                         <CustomSelect
