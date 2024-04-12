@@ -1,6 +1,7 @@
 import concat from "lodash/concat"
 import pull from "lodash/pull"
 import set from "lodash/set"
+import uniq from "lodash/uniq"
 import update from "lodash/update"
 import { action, makeObservable, observable, runInAction } from "mobx"
 
@@ -49,6 +50,7 @@ export interface IIssueSubIssuesStore extends IIssueSubIssuesStoreActions {
     subIssuesByIssueId: (issueId: string) => string[] | undefined
     subIssueHelpersByIssueId: (issueId: string) => TSubIssueHelpers
     // actions
+    fetchOtherProjectProperties: (workspaceSlug: string, projectIds: string[]) => Promise<void>
     setSubIssueHelpers: (parentIssueId: string, key: TSubIssueHelpersKeys, value: string) => void
 }
 
@@ -115,7 +117,13 @@ export class IssueSubIssuesStore implements IIssueSubIssuesStore {
             const subIssues = (response.sub_issues ?? []) as TIssue[]
 
             this.rootIssueDetailStore.rootIssueStore.issues.addIssue(subIssues)
-
+            // fetch other issues states and members when sub-issues are from different project
+            if (subIssues && subIssues.length > 0) {
+                const otherProjectIds = uniq(
+                    subIssues.map((issue) => issue.project_id).filter((id) => id !== projectId)
+                )
+                this.fetchOtherProjectProperties(workspaceSlug, otherProjectIds)
+            }
             runInAction(() => {
                 set(this.subIssuesStateDistribution, parentIssueId, subIssuesStateDistribution)
                 set(
@@ -139,6 +147,13 @@ export class IssueSubIssuesStore implements IIssueSubIssuesStore {
 
             const subIssuesStateDistribution = response?.state_distribution
             const subIssues = response.sub_issues as TIssue[]
+            // fetch other issues states and members when sub-issues are from different project
+            if (subIssues && subIssues.length > 0) {
+                const otherProjectIds = uniq(
+                    subIssues.map((issue) => issue.project_id).filter((id) => id !== projectId)
+                )
+                this.fetchOtherProjectProperties(workspaceSlug, otherProjectIds)
+            }
 
             runInAction(() => {
                 Object.keys(subIssuesStateDistribution).forEach((key) => {
@@ -309,6 +324,40 @@ export class IssueSubIssuesStore implements IIssueSubIssuesStore {
             })
 
             return
+        } catch (error) {
+            throw error
+        }
+    }
+    fetchOtherProjectProperties = async (workspaceSlug: string, projectIds: string[]) => {
+        try {
+            if (projectIds.length > 0) {
+                for (const projectId of projectIds) {
+                    // fetching other project states
+                    this.rootIssueDetailStore.rootIssueStore.rootStore.state.fetchProjectStates(
+                        workspaceSlug,
+                        projectId
+                    )
+                    // fetching other project members
+                    this.rootIssueDetailStore.rootIssueStore.rootStore.memberRoot.project.fetchProjectMembers(
+                        workspaceSlug,
+                        projectId
+                    )
+                    // fetching other project labels
+                    this.rootIssueDetailStore.rootIssueStore.rootStore.label.fetchProjectLabels(
+                        workspaceSlug,
+                        projectId
+                    )
+                    // fetching other project cycles
+                    this.rootIssueDetailStore.rootIssueStore.rootStore.cycle.fetchAllCycles(workspaceSlug, projectId)
+                    // fetching other project modules
+                    this.rootIssueDetailStore.rootIssueStore.rootStore.module.fetchModules(workspaceSlug, projectId)
+                    // fetching other project estimates
+                    this.rootIssueDetailStore.rootIssueStore.rootStore.estimate.fetchProjectEstimates(
+                        workspaceSlug,
+                        projectId
+                    )
+                }
+            }
         } catch (error) {
             throw error
         }
