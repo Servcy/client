@@ -32,7 +32,7 @@ const ProjectsPage = observer(() => {
             let newValues = currentWorkspaceFilters?.[key] ?? []
 
             if (!value) newValues = []
-            else newValues = newValues.filter((val) => val !== value)
+            else newValues = newValues.filter((val: any) => val !== value)
 
             updateFilters(workspaceSlug.toString(), { [key]: newValues })
         },

@@ -96,14 +96,14 @@ export class ProjectStore implements IProjectStore {
         } = this.rootStore.projectRoot.projectFilter
         if (!workspaceDetails || !displayFilters || !filters) return
         let workspaceProjects = Object.values(this.projectMap).filter(
-            (p) =>
-                p.workspace.toString() === workspaceDetails.id.toString() &&
-                (p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    p.identifier.toLowerCase().includes(searchQuery.toLowerCase())) &&
-                shouldFilterProject(p, displayFilters, filters)
+            (_project) =>
+                _project.workspace.toString() === workspaceDetails.id.toString() &&
+                (_project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    _project.identifier.toLowerCase().includes(searchQuery.toLowerCase())) &&
+                shouldFilterProject(_project, displayFilters, filters)
         )
         workspaceProjects = orderProjects(workspaceProjects, displayFilters.order_by)
-        return workspaceProjects.map((p) => p.id)
+        return workspaceProjects.map((_project) => _project.id)
     }
 
     /**

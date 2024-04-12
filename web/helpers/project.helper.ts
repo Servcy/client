@@ -66,11 +66,13 @@ export const shouldFilterProject = (
         if (filterKey === "access" && filters.access && filters.access.length > 0)
             fallsInFilters = fallsInFilters && filters.access.includes(`${project.access}`)
         if (filterKey === "lead" && filters.lead && filters.lead.length > 0)
-            fallsInFilters = fallsInFilters && filters.lead.includes(`${project.project_lead}`)
-        if (filterKey === "members" && filters.members && filters.members.length > 0) {
-            const memberIds = project.members.map((member) => member.member_id)
-            fallsInFilters = fallsInFilters && filters.members.some((memberId) => memberIds.includes(memberId))
-        }
+            fallsInFilters = fallsInFilters && filters.lead.map((lead) => lead.toString()).includes(`${project.lead}`)
+        if (filterKey === "members" && filters.members && filters.members.length > 0)
+            fallsInFilters =
+                fallsInFilters &&
+                filters.members.some((memberId) =>
+                    project.members.map((member) => member.member_id.toString()).includes(memberId.toString())
+                )
         if (filterKey === "created_at" && filters.created_at && filters.created_at.length > 0) {
             filters.created_at.forEach((dateFilter) => {
                 fallsInFilters = fallsInFilters && satisfiesDateFilter(new Date(project.created_at), dateFilter)
