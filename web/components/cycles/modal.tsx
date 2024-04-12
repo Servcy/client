@@ -78,10 +78,10 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
             })
     }
 
-    const dateChecker = async (payload: CycleDateCheckData) => {
+    const dateChecker = async (projectId: string, payload: CycleDateCheckData) => {
         let status = false
 
-        await cycleService.cycleDateCheck(workspaceSlug as string, activeProject as string, payload).then((res) => {
+        await cycleService.cycleDateCheck(workspaceSlug, projectId, payload).then((res) => {
             status = res.status
         })
 
@@ -99,13 +99,13 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
 
         if (payload.start_date && payload.end_date) {
             if (data?.start_date && data?.end_date)
-                isDateValid = await dateChecker({
+                isDateValid = await dateChecker(payload.project_id ?? projectId, {
                     start_date: payload.start_date,
                     end_date: payload.end_date,
                     cycle_id: data.id,
                 })
             else
-                isDateValid = await dateChecker({
+                isDateValid = await dateChecker(payload.project_id ?? projectId, {
                     start_date: payload.start_date,
                     end_date: payload.end_date,
                 })
