@@ -118,7 +118,10 @@ export const WorkspaceActiveCycleRoot: React.FC<IActiveCycleDetails> = observer(
 
                     const daysLeft = findHowManyDaysLeft(activeCycle.end_date) ?? 0
                     return (
-                        <div className="grid-row-2 grid divide-y rounded-[10px] border border-custom-border-200 bg-custom-background-100 shadow">
+                        <div
+                            className="grid-row-2 grid divide-y rounded-[10px] border border-custom-border-200 bg-custom-background-100 shadow"
+                            key={activeCycle.id}
+                        >
                             <div className="grid grid-cols-1 divide-y border-custom-border-200 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
                                 <div className="flex flex-col text-xs">
                                     <div className="h-full w-full">
