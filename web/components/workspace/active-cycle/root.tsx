@@ -39,7 +39,6 @@ import {
 
 interface IActiveCycleDetails {
     workspaceSlug: string
-    projectId: string
 }
 
 export const WorkspaceActiveCycleRoot: React.FC<IActiveCycleDetails> = observer((props) => {
