@@ -45,6 +45,9 @@ export interface ICycleStore {
     fetchWorkspaceCycles: (workspaceSlug: string) => Promise<ICycle[]>
     fetchAllCycles: (workspaceSlug: string, projectId: string) => Promise<undefined | ICycle[]>
     fetchActiveCycle: (workspaceSlug: string, projectId: string) => Promise<undefined | ICycle[]>
+    fetchActiveWorkspaceCycles: (workspaceSlug: string) => Promise<{
+        [projectId: string]: ICycle[]
+    }>
     fetchArchivedCycles: (workspaceSlug: string, projectId: string) => Promise<undefined | ICycle[]>
     fetchCycleDetails: (workspaceSlug: string, projectId: string, cycleId: string) => Promise<ICycle>
     // crud
@@ -98,6 +101,7 @@ export class CycleStore implements ICycleStore {
             fetchWorkspaceCycles: action,
             fetchAllCycles: action,
             fetchActiveCycle: action,
+            fetchActiveWorkspaceCycles: action,
             fetchArchivedCycles: action,
             fetchCycleDetails: action,
             createCycle: action,
@@ -415,6 +419,15 @@ export class CycleStore implements ICycleStore {
             })
             return response
         })
+
+    /**
+     * @description fetches active cycle for a project
+     * @param workspaceSlug
+     * @param projectId
+     * @returns
+     */
+    fetchActiveWorkspaceCycles = async (workspaceSlug: string) =>
+        await this.cycleService.workspaceActiveCycles(workspaceSlug).then((response) => response)
 
     /**
      * @description fetches cycle details

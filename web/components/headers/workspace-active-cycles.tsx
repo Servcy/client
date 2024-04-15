@@ -1,4 +1,3 @@
-import { Sparkle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
@@ -22,7 +21,6 @@ export const WorkspaceActiveCycleHeader = observer(() => (
                         }
                     />
                 </Breadcrumbs>
-                <Sparkle className="h-3.5 w-3.5 text-amber-400" />
             </div>
         </div>
     </div>

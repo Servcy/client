@@ -1,14 +1,4 @@
-import {
-    AlertOctagon,
-    BarChart4,
-    CircleDashed,
-    Folder,
-    GanttChartSquare,
-    LayoutGrid,
-    List,
-    Microscope,
-    Search,
-} from "lucide-react"
+import { GanttChartSquare, LayoutGrid, List } from "lucide-react"
 
 // types
 import { TCycleLayoutOptions, TCycleTabOptions } from "@servcy/types"
@@ -116,42 +106,5 @@ export const CYCLE_STATE_GROUPS_DETAILS = [
         key: "cancelled_issues",
         title: "Cancelled",
         color: "#ef4444",
-    },
-]
-
-export const WORKSPACE_ACTIVE_CYCLES_DETAILS = [
-    {
-        title: "10,000-feet view of all active cycles.",
-        description:
-            "Zoom out to see running cycles across all your projects at once instead of going from Cycle to Cycle in each project.",
-        icon: Folder,
-    },
-    {
-        title: "Get a snapshot of each active cycle.",
-        description:
-            "Track high-level metrics for all active cycles, see their state of progress, and get a sense of scope against deadlines.",
-        icon: CircleDashed,
-    },
-    {
-        title: "Compare burndowns.",
-        description: "Monitor how each of your teams are performing with a peek into each cycle’s burndown report.",
-        icon: BarChart4,
-    },
-    {
-        title: "Quickly see make-or-break issues. ",
-        description:
-            "Preview high-priority issues for each cycle against due dates. See all of them per cycle in one click.",
-        icon: AlertOctagon,
-    },
-    {
-        title: "Zoom into cycles that need attention. ",
-        description: "Investigate the state of any cycle that doesn’t conform to expectations in one click.",
-        icon: Search,
-    },
-    {
-        title: "Stay ahead of blockers.",
-        description:
-            "Spot challenges from one project to another and see inter-cycle dependencies that aren’t obvious from any other view.",
-        icon: Microscope,
     },
 ]

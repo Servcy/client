@@ -17,7 +17,9 @@ export class CycleService extends APIService {
             })
     }
 
-    async workspaceActiveCycles(workspaceSlug: string): Promise<ICycle[]> {
+    async workspaceActiveCycles(workspaceSlug: string): Promise<{
+        [projectId: string]: ICycle[]
+    }> {
         return this.get(`/project/${workspaceSlug}/active-cycles/`)
             .then((res) => res?.data)
             .catch((err) => {
