@@ -1,17 +1,26 @@
-import { useParams, useSearchParams } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
 import { Disclosure, Transition } from "@headlessui/react"
 import isEmpty from "lodash/isEmpty"
-import { AlertCircle, CalendarClock, ChevronDown, ChevronRight, LinkIcon, Trash2, UserCircle2 } from "lucide-react"
+import {
+    AlertCircle,
+    ArchiveRestoreIcon,
+    CalendarClock,
+    ChevronDown,
+    ChevronRight,
+    LinkIcon,
+    Trash2,
+    UserCircle2,
+} from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 import { SidebarProgressStats } from "@components/core"
 import ProgressChart from "@components/core/sidebar/progress-chart"
-import { CycleDeleteModal } from "@components/cycles/delete-modal"
+import { ArchiveCycleModal, CycleDeleteModal } from "@components/cycles"
 import { DateRangeDropdown } from "@components/dropdowns"
 
 import { useCycle, useEventTracker, useMember, useUser } from "@hooks/store"
@@ -26,11 +35,12 @@ import { findHowManyDaysLeft, renderFormattedPayloadDate } from "@helpers/date-t
 import { copyUrlToClipboard } from "@helpers/string.helper"
 
 import { ICycle } from "@servcy/types"
-import { Avatar, CustomMenu, LayersIcon, Loader } from "@servcy/ui"
+import { ArchiveIcon, Avatar, CustomMenu, LayersIcon, Loader } from "@servcy/ui"
 
 type Props = {
     cycleId: string
     handleClose: () => void
+    isArchived?: boolean
 }
 
 const defaultValues: Partial<ICycle> = {
@@ -41,9 +51,11 @@ const defaultValues: Partial<ICycle> = {
 const cycleService = new CycleService()
 
 export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
-    const { cycleId, handleClose } = props
+    const { cycleId, handleClose, isArchived } = props
+    const router = useRouter()
     // states
     const [cycleDeleteModal, setCycleDeleteModal] = useState(false)
+    const [archiveCycleModal, setArchiveCycleModal] = useState(false)
     const { workspaceSlug, projectId } = useParams()
     const searchParams = useSearchParams()
     // store hooks
@@ -51,7 +63,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     const {
         membership: { currentProjectRole },
     } = useUser()
-    const { getCycleById, updateCycleDetails } = useCycle()
+    const { getCycleById, updateCycleDetails, restoreCycle } = useCycle()
     const { getUserDetails } = useMember()
     // derived values
     const cycleDetails = getCycleById(cycleId)
@@ -144,6 +156,15 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
         }
     }
 
+    const handleRestoreCycle = async () => {
+        if (!workspaceSlug || !projectId) return
+        await restoreCycle(workspaceSlug.toString(), projectId.toString(), cycleId)
+            .then(() => {
+                toast.success("Cycle restored successfully.")
+                router.push(`/${workspaceSlug.toString()}/projects/${projectId.toString()}/cycles/${cycleId}`)
+            })
+            .catch(() => toast.error("Cycle could not be restored. Please try again."))
+    }
     const cycleStatus = cycleDetails?.status.toLocaleLowerCase()
     const isCompleted = cycleStatus === "completed"
 
@@ -191,13 +212,22 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     return (
         <div className="relative">
             {cycleDetails && workspaceSlug && projectId && (
-                <CycleDeleteModal
-                    cycle={cycleDetails}
-                    isOpen={cycleDeleteModal}
-                    handleClose={() => setCycleDeleteModal(false)}
-                    workspaceSlug={workspaceSlug.toString()}
-                    projectId={projectId.toString()}
-                />
+                <>
+                    <ArchiveCycleModal
+                        workspaceSlug={workspaceSlug.toString()}
+                        projectId={projectId.toString()}
+                        cycleId={cycleId}
+                        isOpen={archiveCycleModal}
+                        handleClose={() => setArchiveCycleModal(false)}
+                    />
+                    <CycleDeleteModal
+                        cycle={cycleDetails}
+                        isOpen={cycleDeleteModal}
+                        handleClose={() => setCycleDeleteModal(false)}
+                        workspaceSlug={workspaceSlug.toString()}
+                        projectId={projectId.toString()}
+                    />
+                </>
             )}
 
             <>
@@ -211,22 +241,57 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                         </button>
                     </div>
                     <div className="flex items-center gap-3.5">
-                        <button onClick={handleCopyText}>
-                            <LinkIcon className="h-3 w-3 text-custom-text-300" />
-                        </button>
-                        {!isCompleted && isEditingAllowed && (
+                        {!isArchived && (
+                            <button onClick={handleCopyText}>
+                                <LinkIcon className="h-3 w-3 text-custom-text-300" />
+                            </button>
+                        )}
+                        {isEditingAllowed && (
                             <CustomMenu placement="bottom-end" ellipsis>
-                                <CustomMenu.MenuItem
-                                    onClick={() => {
-                                        setTrackElement("CYCLE_PAGE_SIDEBAR")
-                                        setCycleDeleteModal(true)
-                                    }}
-                                >
-                                    <span className="flex items-center justify-start gap-2">
-                                        <Trash2 className="h-3 w-3" />
-                                        <span>Delete cycle</span>
-                                    </span>
-                                </CustomMenu.MenuItem>
+                                {!isArchived && (
+                                    <CustomMenu.MenuItem
+                                        onClick={() => setArchiveCycleModal(true)}
+                                        disabled={!isCompleted}
+                                    >
+                                        {isCompleted ? (
+                                            <div className="flex items-center gap-2">
+                                                <ArchiveIcon className="h-3 w-3" />
+                                                Archive cycle
+                                            </div>
+                                        ) : (
+                                            <div className="flex items-start gap-2">
+                                                <ArchiveIcon className="h-3 w-3" />
+                                                <div className="-mt-1">
+                                                    <p>Archive cycle</p>
+                                                    <p className="text-xs text-custom-text-400">
+                                                        Only completed cycle <br /> can be archived.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </CustomMenu.MenuItem>
+                                )}
+                                {isArchived && (
+                                    <CustomMenu.MenuItem onClick={handleRestoreCycle}>
+                                        <span className="flex items-center justify-start gap-2">
+                                            <ArchiveRestoreIcon className="h-3 w-3" />
+                                            <span>Restore cycle</span>
+                                        </span>
+                                    </CustomMenu.MenuItem>
+                                )}
+                                {!isCompleted && (
+                                    <CustomMenu.MenuItem
+                                        onClick={() => {
+                                            setTrackElement("CYCLE_PAGE_SIDEBAR")
+                                            setCycleDeleteModal(true)
+                                        }}
+                                    >
+                                        <span className="flex items-center justify-start gap-2">
+                                            <Trash2 className="h-3 w-3" />
+                                            <span>Delete cycle</span>
+                                        </span>
+                                    </CustomMenu.MenuItem>
+                                )}
                             </CustomMenu>
                         )}
                     </div>
@@ -277,6 +342,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
                                             <DateRangeDropdown
                                                 className="h-7"
                                                 buttonContainerClassName="w-full"
+                                                disabled={isArchived}
                                                 buttonVariant="background-with-text"
                                                 minDate={new Date()}
                                                 value={{
