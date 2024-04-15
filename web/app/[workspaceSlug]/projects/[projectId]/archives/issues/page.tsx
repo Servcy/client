@@ -6,7 +6,7 @@ import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
 import { ProjectArchivedIssuesHeader } from "@components/headers"
-import { ArchivedIssueLayoutRoot } from "@components/issues"
+import { ArchivedIssueLayoutRoot, ArchivedIssuesHeader } from "@components/issues"
 
 import { useProject } from "@hooks/store"
 
@@ -24,6 +24,7 @@ const ProjectArchivedIssuesPage = observer(() => {
     return (
         <AppWrapper header={<ProjectArchivedIssuesHeader />} withProjectWrapper>
             <PageHead title={pageTitle} />
+            <ArchivedIssuesHeader />
             <ArchivedIssueLayoutRoot />
         </AppWrapper>
     )
