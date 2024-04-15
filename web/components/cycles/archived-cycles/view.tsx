@@ -2,10 +2,10 @@ import Image from "next/image"
 
 import { FC } from "react"
 
-// assets
-import AllFiltersImage from "@public/empty-state/cycle/all-filters.svg"
-import NameFilterImage from "@public/empty-state/cycle/name-filter.svg"
 import { observer } from "mobx-react-lite"
+// assets
+import AllFiltersImage from "public/empty-state/cycle/all-filters.svg"
+import NameFilterImage from "public/empty-state/cycle/name-filter.svg"
 
 // components
 import { CyclesList } from "@components/cycles"

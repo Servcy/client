@@ -2,9 +2,9 @@ import Image from "next/image"
 
 import { FC } from "react"
 
-import AllFiltersImage from "@public/empty-state/module/all-filters.svg"
-import NameFilterImage from "@public/empty-state/module/name-filter.svg"
 import { observer } from "mobx-react-lite"
+import AllFiltersImage from "public/empty-state/module/all-filters.svg"
+import NameFilterImage from "public/empty-state/module/name-filter.svg"
 
 import { ModuleListItem, ModulePeekOverview } from "@components/modules"
 import { CycleModuleListLayout } from "@components/ui"
