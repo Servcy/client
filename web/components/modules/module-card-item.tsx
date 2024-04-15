@@ -1,13 +1,13 @@
 import Link from "next/link"
 import { useParams, usePathname, useRouter } from "next/navigation"
 
-import React, { useState } from "react"
+import React from "react"
 
-import { Info, LinkIcon, Pencil, Star, Trash2 } from "lucide-react"
+import { Info, Star } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
-import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules"
+import { ModuleQuickActions } from "@components/modules"
 
 import { useEventTracker, useMember, useModule, useUser } from "@hooks/store"
 
@@ -16,9 +16,8 @@ import { ERoles } from "@constants/iam"
 import { MODULE_STATUS } from "@constants/module"
 
 import { renderFormattedDate } from "@helpers/date-time.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
 
-import { Avatar, AvatarGroup, CustomMenu, LayersIcon, Tooltip } from "@servcy/ui"
+import { Avatar, AvatarGroup, LayersIcon, Tooltip } from "@servcy/ui"
 
 type Props = {
     moduleId: string
@@ -26,10 +25,6 @@ type Props = {
 
 export const ModuleCardItem: React.FC<Props> = observer((props) => {
     const { moduleId } = props
-    // states
-    const [editModal, setEditModal] = useState(false)
-    const [deleteModal, setDeleteModal] = useState(false)
-
     const pathname = usePathname()
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams()
@@ -40,7 +35,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
     } = useUser()
     const { getModuleById, addModuleToFavorites, removeModuleFromFavorites } = useModule()
     const { getUserDetails } = useMember()
-    const { setTrackElement, captureEvent } = useEventTracker()
+    const { captureEvent } = useEventTracker()
     // derived values
     const moduleDetails = getModuleById(moduleId)
     const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
@@ -81,28 +76,6 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
             })
     }
 
-    const handleCopyText = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation()
-        e.preventDefault()
-        copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`).then(() => {
-            toast.success("Module link copied to clipboard.")
-        })
-    }
-
-    const handleEditModule = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setTrackElement("Modules page grid layout")
-        setEditModal(true)
-    }
-
-    const handleDeleteModule = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setTrackElement("Modules page grid layout")
-        setDeleteModal(true)
-    }
-
     const openModuleOverview = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         e.preventDefault()
@@ -139,16 +112,6 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
 
     return (
         <>
-            {workspaceSlug && projectId && (
-                <CreateUpdateModuleModal
-                    isOpen={editModal}
-                    onClose={() => setEditModal(false)}
-                    data={moduleDetails}
-                    projectId={projectId.toString()}
-                    workspaceSlug={workspaceSlug.toString()}
-                />
-            )}
-            <DeleteModuleModal data={moduleDetails} isOpen={deleteModal} onClose={() => setDeleteModal(false)} />
             <Link href={`/${workspaceSlug}/projects/${moduleDetails.project_id}/modules/${moduleDetails.id}`}>
                 <div className="flex h-44 w-full flex-col justify-between rounded  border border-custom-border-100 bg-custom-background-100 p-4 text-sm hover:shadow-md">
                     <div>
@@ -245,31 +208,13 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
                                             <Star className="h-3.5 w-3.5 text-custom-text-200" />
                                         </button>
                                     ))}
-
-                                <CustomMenu ellipsis className="z-10">
-                                    {isEditingAllowed && (
-                                        <>
-                                            <CustomMenu.MenuItem onClick={handleEditModule}>
-                                                <span className="flex items-center justify-start gap-2">
-                                                    <Pencil className="h-3 w-3" />
-                                                    <span>Edit module</span>
-                                                </span>
-                                            </CustomMenu.MenuItem>
-                                            <CustomMenu.MenuItem onClick={handleDeleteModule}>
-                                                <span className="flex items-center justify-start gap-2">
-                                                    <Trash2 className="h-3 w-3" />
-                                                    <span>Delete module</span>
-                                                </span>
-                                            </CustomMenu.MenuItem>
-                                        </>
-                                    )}
-                                    <CustomMenu.MenuItem onClick={handleCopyText}>
-                                        <span className="flex items-center justify-start gap-2">
-                                            <LinkIcon className="h-3 w-3" />
-                                            <span>Copy module link</span>
-                                        </span>
-                                    </CustomMenu.MenuItem>
-                                </CustomMenu>
+                                {workspaceSlug && projectId && (
+                                    <ModuleQuickActions
+                                        moduleId={moduleId}
+                                        projectId={projectId.toString()}
+                                        workspaceSlug={workspaceSlug.toString()}
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>
