@@ -34,11 +34,12 @@ type TCyclesListItem = {
     handleAddToFavorites?: () => void
     handleRemoveFromFavorites?: () => void
     workspaceSlug: string
+    isArchived?: boolean
     projectId: string
 }
 
 export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
-    const { cycleId, workspaceSlug, projectId } = props
+    const { cycleId, workspaceSlug, projectId, isArchived } = props
     const pathname = usePathname()
     const router = useRouter()
     // store hooks
@@ -103,7 +104,6 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
 
     if (!cycleDetails) return null
 
-    // TODO: change this logic once backend fix the response
     const cycleStatus = cycleDetails.status ? (cycleDetails.status.toLocaleLowerCase() as TCycleGroups) : "draft"
     const isCompleted = cycleStatus === "completed"
     const endDate = getDate(cycleDetails.end_date)
@@ -130,7 +130,14 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
 
     return (
         <>
-            <Link href={`/${workspaceSlug}/projects/${projectId}/cycles/${cycleDetails.id}`}>
+            <Link
+                href={`/${workspaceSlug}/projects/${projectId}/cycles/${cycleDetails.id}`}
+                onClick={(e) => {
+                    if (isArchived) {
+                        openCycleOverview(e)
+                    }
+                }}
+            >
                 <div className="group flex w-full flex-col items-center justify-between gap-5 border-b border-custom-border-100 bg-custom-background-100 px-5 py-6 text-sm hover:bg-custom-background-90 md:flex-row">
                     <div className="relative flex w-full items-center justify-between gap-3 overflow-hidden">
                         <div className="relative flex w-full items-center gap-3 overflow-hidden">
@@ -211,6 +218,7 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
                             </Tooltip>
 
                             {isEditingAllowed &&
+                                !isArchived &&
                                 (cycleDetails.is_favorite ? (
                                     <button type="button" onClick={handleRemoveFromFavorites}>
                                         <Star className="h-3.5 w-3.5 fill-current text-amber-500" />
@@ -220,7 +228,12 @@ export const CyclesListItem: FC<TCyclesListItem> = observer((props) => {
                                         <Star className="h-3.5 w-3.5 text-custom-text-200" />
                                     </button>
                                 ))}
-                            <CycleQuickActions cycleId={cycleId} projectId={projectId} workspaceSlug={workspaceSlug} />
+                            <CycleQuickActions
+                                cycleId={cycleId}
+                                projectId={projectId}
+                                workspaceSlug={workspaceSlug}
+                                isArchived={isArchived}
+                            />
                         </div>
                     </div>
                 </div>

@@ -11,9 +11,10 @@ import { CycleDetailsSidebar } from "./sidebar"
 type Props = {
     projectId: string
     workspaceSlug: string
+    isArchived?: boolean
 }
 
-export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, workspaceSlug }) => {
+export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, isArchived, workspaceSlug }) => {
     const router = useRouter()
     const params = useSearchParams()
     const pathname = usePathname()
@@ -25,9 +26,9 @@ export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, workspa
     }
 
     useEffect(() => {
-        if (!params.has("peekCycle")) return
+        if (!params.has("peekCycle") || isArchived) return
         fetchCycleDetails(workspaceSlug, projectId, params.get("peekCycle") as string)
-    }, [fetchCycleDetails, params.get("peekCycle"), projectId, workspaceSlug])
+    }, [fetchCycleDetails, params.get("peekCycle"), isArchived, projectId, workspaceSlug])
 
     return (
         <>
@@ -40,7 +41,11 @@ export const CyclePeekOverview: React.FC<Props> = observer(({ projectId, workspa
                             "0px 1px 4px 0px rgba(0, 0, 0, 0.06), 0px 2px 4px 0px rgba(16, 24, 40, 0.06), 0px 1px 8px -1px rgba(16, 24, 40, 0.06)",
                     }}
                 >
-                    <CycleDetailsSidebar cycleId={params.get("peekCycle") ?? ""} handleClose={handleClose} />
+                    <CycleDetailsSidebar
+                        cycleId={params.get("peekCycle") ?? ""}
+                        handleClose={handleClose}
+                        isArchived={isArchived}
+                    />
                 </div>
             )}
         </>

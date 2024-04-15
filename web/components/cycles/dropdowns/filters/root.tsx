@@ -10,10 +10,11 @@ import { TCycleFilters, TCycleGroups } from "@servcy/types"
 type Props = {
     filters: TCycleFilters
     handleFiltersUpdate: (key: keyof TCycleFilters, value: string | string[]) => void
+    isArchived?: boolean
 }
 
 export const CycleFiltersSelection: React.FC<Props> = observer((props) => {
-    const { filters, handleFiltersUpdate } = props
+    const { filters, isArchived, handleFiltersUpdate } = props
     const [filtersSearchQuery, setFiltersSearchQuery] = useState("")
 
     return (
@@ -43,11 +44,13 @@ export const CycleFiltersSelection: React.FC<Props> = observer((props) => {
             <div className="h-full w-full divide-y divide-custom-border-200 overflow-y-auto px-2.5 vertical-scrollbar scrollbar-sm">
                 {/* cycle status */}
                 <div className="py-2">
-                    <FilterStatus
-                        appliedFilters={(filters.status as TCycleGroups[]) ?? null}
-                        handleUpdate={(val) => handleFiltersUpdate("status", val)}
-                        searchQuery={filtersSearchQuery}
-                    />
+                    {!isArchived && (
+                        <FilterStatus
+                            appliedFilters={(filters.status as TCycleGroups[]) ?? null}
+                            handleUpdate={(val) => handleFiltersUpdate("status", val)}
+                            searchQuery={filtersSearchQuery}
+                        />
+                    )}
                 </div>
 
                 {/* start date */}

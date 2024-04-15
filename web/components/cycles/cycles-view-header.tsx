@@ -23,11 +23,7 @@ type Props = {
 
 export const CyclesViewHeader: React.FC<Props> = observer((props) => {
     const { projectId } = props
-    // states
-    const [isSearchOpen, setIsSearchOpen] = useState(false)
-    // refs
     const inputRef = useRef<HTMLInputElement>(null)
-    // hooks
     const {
         currentProjectDisplayFilters,
         currentProjectFilters,
@@ -36,10 +32,10 @@ export const CyclesViewHeader: React.FC<Props> = observer((props) => {
         updateFilters,
         updateSearchQuery,
     } = useCycleFilter()
-    // outside click detector hook
     useOutsideClickDetector(inputRef, () => {
         if (isSearchOpen && searchQuery.trim() === "") setIsSearchOpen(false)
     })
+    const [isSearchOpen, setIsSearchOpen] = useState(searchQuery !== "" ? true : false)
 
     const handleFilters = useCallback(
         (key: keyof TCycleFilters, value: string | string[]) => {
