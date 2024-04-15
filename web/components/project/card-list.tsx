@@ -25,10 +25,10 @@ export const ProjectCardList = observer(() => {
     const { workspaceProjectIds, filteredProjectIds, getProjectById } = useProject()
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("onboarding", "projects", isLightMode)
-    const { searchQuery } = useProjectFilter()
+    const { searchQuery, currentWorkspaceDisplayFilters } = useProjectFilter()
     const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
-    if (workspaceProjectIds?.length === 0)
+    if (workspaceProjectIds?.length === 0 && !currentWorkspaceDisplayFilters?.archived_projects)
         return (
             <EmptyState
                 image={emptyStateImage}
