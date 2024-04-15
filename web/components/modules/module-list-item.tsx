@@ -1,13 +1,13 @@
 import Link from "next/link"
 import { useParams, usePathname, useRouter } from "next/navigation"
 
-import React, { useState } from "react"
+import React from "react"
 
-import { Check, Info, LinkIcon, Pencil, Star, Trash2, User2 } from "lucide-react"
+import { Check, Info, Star, User2 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
-import { CreateUpdateModuleModal, DeleteModuleModal } from "@components/modules"
+import { ModuleQuickActions } from "@components/modules"
 
 import { useEventTracker, useMember, useModule, useUser } from "@hooks/store"
 
@@ -16,19 +16,16 @@ import { ERoles } from "@constants/iam"
 import { MODULE_STATUS } from "@constants/module"
 
 import { renderFormattedDate } from "@helpers/date-time.helper"
-import { copyUrlToClipboard } from "@helpers/string.helper"
 
-import { Avatar, AvatarGroup, CircularProgressIndicator, CustomMenu, Tooltip } from "@servcy/ui"
+import { Avatar, AvatarGroup, CircularProgressIndicator, Tooltip } from "@servcy/ui"
 
 type Props = {
     moduleId: string
+    isArchived?: boolean
 }
 
 export const ModuleListItem: React.FC<Props> = observer((props) => {
-    const { moduleId } = props
-    // states
-    const [editModal, setEditModal] = useState(false)
-    const [deleteModal, setDeleteModal] = useState(false)
+    const { moduleId, isArchived = false } = props
 
     const router = useRouter()
     const pathname = usePathname()
@@ -41,7 +38,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
     } = useUser()
     const { getModuleById, addModuleToFavorites, removeModuleFromFavorites } = useModule()
     const { getUserDetails } = useMember()
-    const { setTrackElement, captureEvent } = useEventTracker()
+    const { captureEvent } = useEventTracker()
     // derived values
     const moduleDetails = getModuleById(moduleId)
     const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
@@ -82,29 +79,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
             })
     }
 
-    const handleCopyText = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation()
-        e.preventDefault()
-        copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`).then(() => {
-            toast.success("Module link copied to clipboard.")
-        })
-    }
-
-    const handleEditModule = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setTrackElement("Modules page list layout")
-        setEditModal(true)
-    }
-
-    const handleDeleteModule = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setTrackElement("Modules page list layout")
-        setDeleteModal(true)
-    }
-
-    const openModuleOverview = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const openModuleOverview = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
         e.stopPropagation()
         e.preventDefault()
         router.push(`${pathname}?peekModule=${moduleId}`)
@@ -130,17 +105,14 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
 
     return (
         <>
-            {workspaceSlug && projectId && (
-                <CreateUpdateModuleModal
-                    isOpen={editModal}
-                    onClose={() => setEditModal(false)}
-                    data={moduleDetails}
-                    projectId={projectId.toString()}
-                    workspaceSlug={workspaceSlug.toString()}
-                />
-            )}
-            <DeleteModuleModal data={moduleDetails} isOpen={deleteModal} onClose={() => setDeleteModal(false)} />
-            <Link href={`/${workspaceSlug}/projects/${moduleDetails.project_id}/modules/${moduleDetails.id}`}>
+            <Link
+                href={`/${workspaceSlug}/projects/${moduleDetails.project_id}/modules/${moduleDetails.id}`}
+                onClick={(e) => {
+                    if (isArchived) {
+                        openModuleOverview(e)
+                    }
+                }}
+            >
                 <div className="group flex w-full items-center justify-between gap-5 border-b border-custom-border-100 bg-custom-background-100 flex-col sm:flex-row px-5 py-6 text-sm hover:bg-custom-background-90">
                     <div className="relative flex w-full items-center gap-3 justify-between overflow-hidden">
                         <div className="relative w-full flex items-center gap-3 overflow-hidden">
@@ -220,6 +192,7 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
                             </Tooltip>
 
                             {isEditingAllowed &&
+                                !isArchived &&
                                 (moduleDetails.is_favorite ? (
                                     <button type="button" onClick={handleRemoveFromFavorites} className="z-[1]">
                                         <Star className="h-3.5 w-3.5 fill-current text-amber-500" />
@@ -229,31 +202,14 @@ export const ModuleListItem: React.FC<Props> = observer((props) => {
                                         <Star className="h-3.5 w-3.5 text-custom-text-300" />
                                     </button>
                                 ))}
-
-                            <CustomMenu verticalEllipsis buttonClassName="z-[1]" placement="bottom-end">
-                                {isEditingAllowed && (
-                                    <>
-                                        <CustomMenu.MenuItem onClick={handleEditModule}>
-                                            <span className="flex items-center justify-start gap-2">
-                                                <Pencil className="h-3 w-3" />
-                                                <span>Edit module</span>
-                                            </span>
-                                        </CustomMenu.MenuItem>
-                                        <CustomMenu.MenuItem onClick={handleDeleteModule}>
-                                            <span className="flex items-center justify-start gap-2">
-                                                <Trash2 className="h-3 w-3" />
-                                                <span>Delete module</span>
-                                            </span>
-                                        </CustomMenu.MenuItem>
-                                    </>
-                                )}
-                                <CustomMenu.MenuItem onClick={handleCopyText}>
-                                    <span className="flex items-center justify-start gap-2">
-                                        <LinkIcon className="h-3 w-3" />
-                                        <span>Copy module link</span>
-                                    </span>
-                                </CustomMenu.MenuItem>
-                            </CustomMenu>
+                            {workspaceSlug && projectId && (
+                                <ModuleQuickActions
+                                    moduleId={moduleId}
+                                    projectId={projectId.toString()}
+                                    workspaceSlug={workspaceSlug.toString()}
+                                    isArchived={isArchived}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
