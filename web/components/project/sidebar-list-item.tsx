@@ -247,14 +247,6 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                             </span>
                                         </CustomMenu.MenuItem>
                                     )}
-                                    <CustomMenu.MenuItem onClick={handleCopyText}>
-                                        <span className="flex items-center justify-start gap-2">
-                                            <LinkIcon className="h-3.5 w-3.5 stroke-[1.5]" />
-                                            <span>Copy project link</span>
-                                        </span>
-                                    </CustomMenu.MenuItem>
-
-                                    {/* publish project settings */}
                                     {project?.member_role && project?.member_role === ERoles.ADMIN && (
                                         <CustomMenu.MenuItem onClick={() => setPublishModal(true)}>
                                             <div className="relative flex flex-shrink-0 items-center justify-start gap-2">
@@ -265,16 +257,6 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                             </div>
                                         </CustomMenu.MenuItem>
                                     )}
-                                    {!isGuest && (
-                                        <CustomMenu.MenuItem>
-                                            <Link href={`/${workspaceSlug}/projects/${project?.id}/archived-issues/`}>
-                                                <div className="flex items-center justify-start gap-2">
-                                                    <ArchiveIcon className="h-3.5 w-3.5 stroke-[1.5]" />
-                                                    <span>Archived issues</span>
-                                                </div>
-                                            </Link>
-                                        </CustomMenu.MenuItem>
-                                    )}
                                     <CustomMenu.MenuItem>
                                         <Link href={`/${workspaceSlug}/projects/${project?.id}/draft-issues/`}>
                                             <div className="flex items-center justify-start gap-2">
@@ -283,6 +265,23 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
                                             </div>
                                         </Link>
                                     </CustomMenu.MenuItem>
+                                    <CustomMenu.MenuItem onClick={handleCopyText}>
+                                        <span className="flex items-center justify-start gap-2">
+                                            <LinkIcon className="h-3.5 w-3.5 stroke-[1.5]" />
+                                            <span>Copy link</span>
+                                        </span>
+                                    </CustomMenu.MenuItem>
+
+                                    {!isGuest && (
+                                        <CustomMenu.MenuItem>
+                                            <Link href={`/${workspaceSlug}/projects/${project?.id}/archives/issues`}>
+                                                <div className="flex items-center justify-start gap-2">
+                                                    <ArchiveIcon className="h-3.5 w-3.5 stroke-[1.5]" />
+                                                    <span>Archives</span>
+                                                </div>
+                                            </Link>
+                                        </CustomMenu.MenuItem>
+                                    )}
                                     <CustomMenu.MenuItem>
                                         <Link href={`/${workspaceSlug}/projects/${project?.id}/settings`}>
                                             <div className="flex items-center justify-start gap-2">
