@@ -18,6 +18,10 @@ export type TModuleDisplayFilters = {
     order_by?: TModuleOrderByOptions
 }
 
+export type TModuleFiltersByState = {
+    default: TModuleFilters
+    archived: TModuleFilters
+}
 export type TModuleFilters = {
     lead?: string[] | null
     members?: string[] | null

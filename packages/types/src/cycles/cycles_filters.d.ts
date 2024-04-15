@@ -17,3 +17,8 @@ export type TCycleStoredFilters = {
     display_filters?: TCycleDisplayFilters
     filters?: TCycleFilters
 }
+
+export type TCycleFiltersByState = {
+    default: TCycleFilters
+    archived: TCycleFilters
+}

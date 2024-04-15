@@ -21,6 +21,7 @@ export interface ICycle {
     name: string
     owned_by_id: string
     progress_snapshot: TProgressSnapshot
+    archived_at: string | null
     project_id: string
     status: TCycleGroups
     sort_order: number

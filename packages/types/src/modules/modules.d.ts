@@ -25,6 +25,7 @@ export interface IModule {
     project_id: string
     sort_order: number
     start_date: string | null
+    archived_at: string | null
     started_issues: number
     status: TModuleStatus
     sub_issues: number
