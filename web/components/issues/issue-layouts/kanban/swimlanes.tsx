@@ -19,7 +19,7 @@ import {
 } from "@servcy/types"
 
 import { EIssueActions } from "../types"
-import { getGroupByColumns, isWorkspaceLevel } from "../utils"
+import { getGroupByColumns } from "../utils"
 import { KanBan } from "./default"
 import { HeaderGroupByCard } from "./headers/group-by-card"
 import { HeaderSubGroupByCard } from "./headers/sub-group-by-card"
@@ -290,8 +290,7 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         _module,
         label,
         projectState,
-        member,
-        storeType ? isWorkspaceLevel(storeType) : true
+        member
     )
     const subGroupByList = getGroupByColumns(
         sub_group_by as GroupByColumnTypes,
@@ -300,8 +299,7 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         _module,
         label,
         projectState,
-        member,
-        storeType ? isWorkspaceLevel(storeType) : true
+        member
     )
 
     if (!groupByList || !subGroupByList) return null

@@ -1,6 +1,6 @@
 import { ContrastIcon } from "lucide-react"
 
-import { EIssuesStoreType, ISSUE_PRIORITIES } from "@constants/issue"
+import { ISSUE_PRIORITIES } from "@constants/issue"
 import { STATE_GROUPS } from "@constants/state"
 
 import { ICycleStore } from "@store/cycle.store"
@@ -15,9 +15,6 @@ import { renderEmoji } from "@helpers/emoji.helper"
 
 import { GroupByColumnTypes, IGroupByColumn, TCycleGroups } from "@servcy/types"
 import { Avatar, CycleGroupIcon, DiceIcon, PriorityIcon, StateGroupIcon } from "@servcy/ui"
-
-export const isWorkspaceLevel = (type: EIssuesStoreType) =>
-    [EIssuesStoreType.PROFILE, EIssuesStoreType.GLOBAL].includes(type) ? true : false
 
 export const getGroupByColumns = (
     groupBy: GroupByColumnTypes | null,
