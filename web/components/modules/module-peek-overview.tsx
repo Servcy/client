@@ -11,9 +11,10 @@ import { ModuleDetailsSidebar } from "./sidebar"
 type Props = {
     projectId: string
     workspaceSlug: string
+    isArchived?: boolean
 }
 
-export const ModulePeekOverview: React.FC<Props> = observer(({ projectId, workspaceSlug }) => {
+export const ModulePeekOverview: React.FC<Props> = observer(({ projectId, workspaceSlug, isArchived = false }) => {
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -27,9 +28,9 @@ export const ModulePeekOverview: React.FC<Props> = observer(({ projectId, worksp
     }
 
     useEffect(() => {
-        if (!searchParams.has("peekModule")) return
+        if (!searchParams.has("peekModule") || isArchived) return
         fetchModuleDetails(workspaceSlug, projectId, searchParams.get("peekModule") as string)
-    }, [fetchModuleDetails, searchParams.get("peekModule"), projectId, workspaceSlug])
+    }, [fetchModuleDetails, isArchived, searchParams.get("peekModule"), projectId, workspaceSlug])
 
     return (
         <>
@@ -45,6 +46,7 @@ export const ModulePeekOverview: React.FC<Props> = observer(({ projectId, worksp
                     <ModuleDetailsSidebar
                         moduleId={searchParams.get("peekModule") as string}
                         handleClose={handleClose}
+                        isArchived={isArchived}
                     />
                 </div>
             )}
