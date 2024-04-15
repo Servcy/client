@@ -1,34 +1,39 @@
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, reaction, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
-// types
-import { RootStore } from "store/root.store"
 
-import { TModuleDisplayFilters, TModuleFilters } from "@servcy/types"
+import { RootStore } from "@store/root.store"
+
+import { TModuleDisplayFilters, TModuleFilters, TModuleFiltersByState } from "@servcy/types"
 
 export interface IModuleFilterStore {
     // observables
     displayFilters: Record<string, TModuleDisplayFilters>
-    filters: Record<string, TModuleFilters>
+    filters: Record<string, TModuleFiltersByState>
     searchQuery: string
+    archivedModulesSearchQuery: string
     // computed
     currentProjectDisplayFilters: TModuleDisplayFilters | undefined
     currentProjectFilters: TModuleFilters | undefined
+    currentProjectArchivedFilters: TModuleFilters | undefined
     // computed functions
     getDisplayFiltersByProjectId: (projectId: string) => TModuleDisplayFilters | undefined
     getFiltersByProjectId: (projectId: string) => TModuleFilters | undefined
+    getArchivedFiltersByProjectId: (projectId: string) => TModuleFilters | undefined
     // actions
     updateDisplayFilters: (projectId: string, displayFilters: TModuleDisplayFilters) => void
-    updateFilters: (projectId: string, filters: TModuleFilters) => void
+    updateFilters: (projectId: string, filters: TModuleFilters, state?: keyof TModuleFiltersByState) => void
     updateSearchQuery: (query: string) => void
-    clearAllFilters: (projectId: string) => void
+    updateArchivedModulesSearchQuery: (query: string) => void
+    clearAllFilters: (projectId: string, state?: keyof TModuleFiltersByState) => void
 }
 
 export class ModuleFilterStore implements IModuleFilterStore {
     // observables
     displayFilters: Record<string, TModuleDisplayFilters> = {}
-    filters: Record<string, TModuleFilters> = {}
+    filters: Record<string, TModuleFiltersByState> = {}
     searchQuery: string = ""
+    archivedModulesSearchQuery: string = ""
     // root store
     rootStore: RootStore
 
@@ -38,13 +43,16 @@ export class ModuleFilterStore implements IModuleFilterStore {
             displayFilters: observable,
             filters: observable,
             searchQuery: observable.ref,
+            archivedModulesSearchQuery: observable.ref,
             // computed
             currentProjectDisplayFilters: computed,
             currentProjectFilters: computed,
+            currentProjectArchivedFilters: computed,
             // actions
             updateDisplayFilters: action,
             updateFilters: action,
             updateSearchQuery: action,
+            updateArchivedModulesSearchQuery: action,
             clearAllFilters: action,
         })
         // root store
@@ -74,7 +82,16 @@ export class ModuleFilterStore implements IModuleFilterStore {
     get currentProjectFilters() {
         const projectId = this.rootStore.app.router.projectId
         if (!projectId) return
-        return this.filters[projectId]
+        return this.filters[projectId]?.default ?? {}
+    }
+
+    /**
+     * @description get archived filters of the current project
+     */
+    get currentProjectArchivedFilters() {
+        const projectId = this.rootStore.app.router.projectId
+        if (!projectId) return
+        return this.filters[projectId].archived
     }
 
     /**
@@ -87,7 +104,13 @@ export class ModuleFilterStore implements IModuleFilterStore {
      * @description get filters of a project by projectId
      * @param {string} projectId
      */
-    getFiltersByProjectId = computedFn((projectId: string) => this.filters[projectId])
+    getFiltersByProjectId = computedFn((projectId: string) => this.filters[projectId]?.default ?? {})
+
+    /**
+     * @description get archived filters of a project by projectId
+     * @param {string} projectId
+     */
+    getArchivedFiltersByProjectId = computedFn((projectId: string) => this.filters[projectId].archived)
 
     /**
      * @description initialize display filters and filters of a project
@@ -101,7 +124,10 @@ export class ModuleFilterStore implements IModuleFilterStore {
                 layout: displayFilters?.layout || "list",
                 order_by: displayFilters?.order_by || "name",
             }
-            this.filters[projectId] = this.filters[projectId] ?? {}
+            this.filters[projectId] = this.filters[projectId] ?? {
+                default: {},
+                archived: {},
+            }
         })
     }
 
@@ -123,10 +149,10 @@ export class ModuleFilterStore implements IModuleFilterStore {
      * @param {string} projectId
      * @param {TModuleFilters} filters
      */
-    updateFilters = (projectId: string, filters: TModuleFilters) => {
+    updateFilters = (projectId: string, filters: TModuleFilters, state: keyof TModuleFiltersByState = "default") => {
         runInAction(() => {
             Object.keys(filters).forEach((key) => {
-                set(this.filters, [projectId, key], filters[key as keyof TModuleFilters])
+                set(this.filters, [projectId, state, key], filters[key as keyof TModuleFilters])
             })
         })
     }
@@ -138,12 +164,18 @@ export class ModuleFilterStore implements IModuleFilterStore {
     updateSearchQuery = (query: string) => (this.searchQuery = query)
 
     /**
+     * @description update archived search query
+     * @param {string} query
+     */
+    updateArchivedModulesSearchQuery = (query: string) => (this.archivedModulesSearchQuery = query)
+
+    /**
      * @description clear all filters of a project
      * @param {string} projectId
      */
-    clearAllFilters = (projectId: string) => {
+    clearAllFilters = (projectId: string, state: keyof TModuleFiltersByState = "default") => {
         runInAction(() => {
-            this.filters[projectId] = {}
+            this.filters[projectId][state] = {}
         })
     }
 }
