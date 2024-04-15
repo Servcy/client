@@ -22,6 +22,8 @@ type Props = {
     handleDisplayPropertiesUpdate: (updatedDisplayProperties: Partial<IIssueDisplayProperties>) => void
     layoutDisplayFiltersOptions: ILayoutDisplayFiltersOptions | undefined
     ignoreGroupedFilters?: Partial<TIssueGroupByOptions>[]
+    cycleViewDisabled?: boolean
+    moduleViewDisabled?: boolean
 }
 
 export const DisplayFiltersSelection: React.FC<Props> = observer((props) => {
@@ -31,6 +33,8 @@ export const DisplayFiltersSelection: React.FC<Props> = observer((props) => {
         handleDisplayFiltersUpdate,
         handleDisplayPropertiesUpdate,
         layoutDisplayFiltersOptions,
+        cycleViewDisabled = false,
+        moduleViewDisabled = false,
         ignoreGroupedFilters = [],
     } = props
 

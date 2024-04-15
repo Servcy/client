@@ -80,7 +80,7 @@ const KanbanIssueDetailsBlock: React.FC<IssueDetailsBlockProps> = observer((prop
                 </Tooltip>
             ) : (
                 <ControlLink
-                    href={`/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
+                    href={`/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archives" : "issues"}/${
                         issue.id
                     }`}
                     target="_blank"

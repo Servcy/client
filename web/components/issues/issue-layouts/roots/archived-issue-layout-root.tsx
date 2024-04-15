@@ -44,7 +44,7 @@ export const ArchivedIssueLayoutRoot: React.FC = observer(() => {
 
     if (!workspaceSlug || !projectId) return <></>
     return (
-        <div className="relative flex h-full w-full flex-col overflow-hidden">
+        <>
             <ArchivedIssueAppliedFiltersRoot />
 
             {issues?.groupedIssueIds?.length === 0 ? (
@@ -59,6 +59,6 @@ export const ArchivedIssueLayoutRoot: React.FC = observer(() => {
                     <IssuePeekOverview is_archived />
                 </Fragment>
             )}
-        </div>
+        </>
     )
 })

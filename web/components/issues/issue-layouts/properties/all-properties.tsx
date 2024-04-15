@@ -222,7 +222,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
 
     const redirectToIssueDetail = () => {
         router.push(
-            `/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archived-issues" : "issues"}/${
+            `/${workspaceSlug}/projects/${issue.project_id}/${issue.archived_at ? "archives" : "issues"}/${
                 issue.id
             }#sub-issues`
         )

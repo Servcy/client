@@ -2,7 +2,7 @@ import { useParams } from "next/navigation"
 
 import { useState } from "react"
 
-import { ExternalLink, Link, RotateCcw, Trash2 } from "lucide-react"
+import { ArchiveRestoreIcon, ExternalLink, Link, Trash2 } from "lucide-react"
 import toast from "react-hot-toast"
 
 import { DeleteIssueModal } from "@components/issues"
@@ -35,7 +35,7 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
     const isEditingAllowed = currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER && !readOnly
     const isRestoringAllowed = handleRestore && isEditingAllowed
 
-    const issueLink = `${workspaceSlug}/projects/${issue.project_id}/archived-issues/${issue.id}`
+    const issueLink = `${workspaceSlug}/projects/${issue.project_id}/archives/${issue.id}`
 
     const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank", "noopener noreferrer")
     const handleCopyIssueLink = () =>
@@ -61,7 +61,7 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
                 {isRestoringAllowed && (
                     <CustomMenu.MenuItem onClick={handleRestore}>
                         <div className="flex items-center gap-2">
-                            <RotateCcw className="h-3 w-3" />
+                            <ArchiveRestoreIcon className="h-3 w-3" />
                             Restore
                         </div>
                     </CustomMenu.MenuItem>

@@ -1,6 +1,6 @@
 import { FC } from "react"
 
-import { RotateCcw } from "lucide-react"
+import { ArchiveRestoreIcon } from "lucide-react"
 import { observer } from "mobx-react"
 
 import { useIssueDetail } from "@hooks/store"
@@ -26,7 +26,7 @@ export const IssueArchivedAtActivity: FC<TIssueArchivedAtActivity> = observer((p
         <IssueActivityBlockComponent
             icon={
                 activity.new_value === "restore" ? (
-                    <RotateCcw className="h-3.5 w-3.5" color="#6b7280" aria-hidden="true" />
+                    <ArchiveRestoreIcon className="h-3.5 w-3.5" color="#6b7280" aria-hidden="true" />
                 ) : (
                     <ArchiveIcon className="h-3.5 w-3.5" color="#6b7280" aria-hidden="true" />
                 )

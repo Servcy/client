@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation"
 
 import { useState } from "react"
 
-import { RotateCcw } from "lucide-react"
+import { ArchiveRestoreIcon } from "lucide-react"
 import { observer } from "mobx-react"
 import toast from "react-hot-toast"
 import useSWR from "swr"
@@ -116,7 +116,7 @@ const ArchivedIssueDetailsPage = observer(() => {
                                     disabled={isRestoring}
                                     variant="neutral-primary"
                                 >
-                                    <RotateCcw className="h-3 w-3" />
+                                    <ArchiveRestoreIcon className="h-3 w-3" />
                                     <span>{isRestoring ? "Restoring" : "Restore"}</span>
                                 </Button>
                             </div>
