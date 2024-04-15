@@ -37,7 +37,11 @@ const WorkspaceActiveCyclesPage = observer(() => {
                   const response = await fetchActiveWorkspaceCycles(workspaceSlug.toString())
                   setWorkspaceCycles(response)
               }
-            : null
+            : null,
+        {
+            revalidateOnFocus: false,
+            revalidateIfStale: false,
+        }
     )
     const { resolvedTheme } = useTheme()
     const { currentUser } = useUser()
