@@ -9,7 +9,7 @@ import { ArchiveTabsList } from "@components/archives"
 import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues"
 
 // hooks
-import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store"
+import { useIssues, useLabel, useMember, useProjectState } from "@hooks/store"
 
 // constants
 import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
@@ -20,7 +20,6 @@ import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterO
 export const ArchivedIssuesHeader: FC = observer(() => {
     const { workspaceSlug, projectId } = useParams()
     // store hooks
-    const { currentProjectDetails } = useProject()
     const {
         issuesFilter: { issueFilters, updateFilters },
     } = useIssues(EIssuesStoreType.ARCHIVED)
