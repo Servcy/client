@@ -148,7 +148,6 @@ export const PROFILE_EMPTY_STATE_DETAILS = {
 }
 
 // project empty state
-
 export const PROJECT_SETTINGS_EMPTY_STATE_DETAILS = {
     labels: {
         key: "labels",
@@ -212,6 +211,12 @@ export const CYCLE_EMPTY_STATE_DETAILS = {
         key: "draft",
         title: "No draft cycles",
         description: "No dates added in cycles? Find them here as drafts.",
+    },
+    archived: {
+        key: "archived",
+        title: "No archived cycles yet",
+        description: "To tidy up your project, archive completed cycles. Find them here once archived.",
+        path: "/empty-state/archived/empty-cycles",
     },
 }
 
@@ -296,6 +301,12 @@ export const MODULE_EMPTY_STATE_DETAILS = {
         primaryButton: {
             text: "Build your first module",
         },
+    },
+    archived: {
+        key: "archived",
+        title: "No archived Modules yet",
+        description: "To tidy up your project, archive completed or cancelled modules. Find them here once archived.",
+        path: "/empty-state/archived/empty-modules",
     },
 }
 
