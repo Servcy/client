@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useParams } from "next/navigation"
 
 import { FC, useCallback, useRef, useState } from "react"
 
@@ -22,9 +22,7 @@ import { cn } from "@helpers/common.helper"
 import type { TCycleFilters } from "@servcy/types"
 
 export const ArchivedCyclesHeader: FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { projectId } = router.query
+    const { projectId } = useParams()
     // refs
     const inputRef = useRef<HTMLInputElement>(null)
     // hooks

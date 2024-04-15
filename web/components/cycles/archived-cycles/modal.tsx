@@ -1,14 +1,12 @@
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 import { Fragment, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
 import toast from "react-hot-toast"
 
-// hooks
 import { useCycle } from "@hooks/store"
 
-// ui
 import { Button } from "@servcy/ui"
 
 type Props = {

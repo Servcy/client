@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useParams } from "next/navigation"
 
 import React from "react"
 
@@ -24,9 +24,7 @@ import { calculateTotalFilters } from "@helpers/filter.helper"
 import { TCycleFilters } from "@servcy/types"
 
 export const ArchivedCycleLayoutRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     const { currentUser } = useUser()
     // hooks
     const { fetchArchivedCycles, currentProjectArchivedCycleIds, loader } = useCycle()
