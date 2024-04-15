@@ -4,6 +4,7 @@ import type { IEstimatePointLite, IIssueLabel, IUser, IUserLite, IWorkspace, IWo
 
 export interface IProject {
     archive_in: number
+    archived_at: string | null
     close_in: number
     created_at: Date
     archived_issues: number

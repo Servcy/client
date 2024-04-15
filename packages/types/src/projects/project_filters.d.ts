@@ -10,6 +10,7 @@ export type TProjectOrderByOptions =
 export type TProjectDisplayFilters = {
     my_projects?: boolean
     archived_projects?: boolean
+    archived_projects?: boolean
     order_by?: TProjectOrderByOptions
 }
 
