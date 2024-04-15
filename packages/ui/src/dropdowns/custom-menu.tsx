@@ -113,6 +113,7 @@ const CustomMenu = (props: ICustomMenuDropdownProps) => {
                 ref={setReferenceElement}
                 type="button"
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   isOpen ? closeDropdown() : openDropdown();
                   if (menuButtonOnClick) menuButtonOnClick();
@@ -131,6 +132,7 @@ const CustomMenu = (props: ICustomMenuDropdownProps) => {
                     ref={setReferenceElement}
                     type="button"
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
                       isOpen ? closeDropdown() : openDropdown();
                       if (menuButtonOnClick) menuButtonOnClick();
