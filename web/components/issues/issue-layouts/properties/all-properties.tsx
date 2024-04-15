@@ -247,6 +247,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                     <StateDropdown
                         value={issue.state_id}
                         onChange={handleState}
+                        buttonContainerClassName="truncate max-w-40"
                         projectId={issue.project_id}
                         disabled={isReadOnly}
                         buttonVariant="border-with-text"
@@ -345,6 +346,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
                             disabled={isReadOnly}
                             multiple
                             buttonVariant="border-with-text"
+                            buttonContainerClassName="truncate max-w-40"
                             showCount={true}
                             showTooltip
                         />
@@ -355,7 +357,7 @@ export const IssueProperties: React.FC<IIssueProperties> = observer((props) => {
             {/* cycles */}
             {cycleId === undefined && (
                 <WithDisplayPropertiesHOC displayProperties={displayProperties} displayPropertyKey="cycle">
-                    <div className="h-5 truncate">
+                    <div className="h-5">
                         <CycleDropdown
                             projectId={issue?.project_id}
                             value={issue?.cycle_id}
