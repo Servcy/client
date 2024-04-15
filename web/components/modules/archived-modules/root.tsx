@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { useParams } from "next/navigation"
 
 import React, { useCallback } from "react"
 
@@ -24,9 +24,7 @@ import { calculateTotalFilters } from "@helpers/filter.helper"
 import { TModuleFilters } from "@servcy/types"
 
 export const ArchivedModuleLayoutRoot: React.FC = observer(() => {
-    // router
-    const router = useRouter()
-    const { workspaceSlug, projectId } = router.query
+    const { workspaceSlug, projectId } = useParams()
     // hooks
     const { currentUser } = useUser()
     const { fetchArchivedModules, projectArchivedModuleIds, loader } = useModule()
