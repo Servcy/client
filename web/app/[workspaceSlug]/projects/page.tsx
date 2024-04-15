@@ -14,7 +14,7 @@ import { AppWrapper } from "@wrappers/app"
 
 import { calculateTotalFilters } from "@helpers/filter.helper"
 
-import { TProjectFilters } from "@servcy/types"
+import { TProjectAppliedDisplayFilterKeys, TProjectFilters } from "@servcy/types"
 
 const ProjectsPage = observer(() => {
     const { currentWorkspace } = useWorkspace()
@@ -23,8 +23,29 @@ const ProjectsPage = observer(() => {
     const {
         router: { workspaceSlug },
     } = useApplication()
-    const { workspaceProjectIds, filteredProjectIds } = useProject()
-    const { currentWorkspaceFilters, clearAllFilters, updateFilters } = useProjectFilter()
+    const { totalProjectIds, filteredProjectIds } = useProject()
+    const {
+        currentWorkspaceFilters,
+        currentWorkspaceAppliedDisplayFilters,
+        clearAllFilters,
+        clearAllAppliedDisplayFilters,
+        updateFilters,
+        updateDisplayFilters,
+    } = useProjectFilter()
+
+    const handleRemoveDisplayFilter = useCallback(
+        (key: TProjectAppliedDisplayFilterKeys) => {
+            if (!workspaceSlug) return
+            updateDisplayFilters(workspaceSlug.toString(), { [key]: false })
+        },
+        [updateDisplayFilters, workspaceSlug]
+    )
+
+    const handleClearAllFilters = useCallback(() => {
+        if (!workspaceSlug) return
+        clearAllFilters(workspaceSlug.toString())
+        clearAllAppliedDisplayFilters(workspaceSlug.toString())
+    }, [clearAllFilters, clearAllAppliedDisplayFilters, workspaceSlug])
 
     const handleRemoveFilter = useCallback(
         (key: keyof TProjectFilters, value: string | null) => {
@@ -43,14 +64,17 @@ const ProjectsPage = observer(() => {
             <PageHead title={pageTitle} />
 
             <div className="h-full w-full flex flex-col">
-                {calculateTotalFilters(currentWorkspaceFilters ?? {}) !== 0 && (
+                {(calculateTotalFilters(currentWorkspaceFilters ?? {}) !== 0 ||
+                    currentWorkspaceAppliedDisplayFilters?.length !== 0) && (
                     <div className="border-b border-custom-border-200 px-5 py-3">
                         <ProjectAppliedFiltersList
                             appliedFilters={currentWorkspaceFilters ?? {}}
-                            handleClearAllFilters={() => clearAllFilters(`${workspaceSlug}`)}
+                            appliedDisplayFilters={currentWorkspaceAppliedDisplayFilters ?? []}
+                            handleClearAllFilters={handleClearAllFilters}
                             handleRemoveFilter={handleRemoveFilter}
+                            handleRemoveDisplayFilter={handleRemoveDisplayFilter}
                             filteredProjects={filteredProjectIds?.length ?? 0}
-                            totalProjects={workspaceProjectIds?.length ?? 0}
+                            totalProjects={totalProjectIds?.length ?? 0}
                             alwaysAllowEditing
                         />
                     </div>

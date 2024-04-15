@@ -4,7 +4,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
 
 import { IssueLabelService, IssueService } from "@services/issue"
-import { ProjectService, ProjectStateService } from "@services/project"
+import { ProjectArchiveService, ProjectService, ProjectStateService } from "@services/project"
 
 import { orderProjects, shouldFilterProject } from "@helpers/project.helper"
 
@@ -20,6 +20,8 @@ export interface IProjectStore {
     // computed
     filteredProjectIds: string[] | undefined
     workspaceProjectIds: string[] | undefined
+    archivedProjectIds: string[] | undefined
+    totalProjectIds: string[] | undefined
     joinedProjectIds: string[]
     favoriteProjectIds: string[]
     currentProjectDetails: IProject | undefined
@@ -39,6 +41,9 @@ export interface IProjectStore {
     createProject: (workspaceSlug: string, data: Partial<IProject>) => Promise<IProject>
     updateProject: (workspaceSlug: string, projectId: string, data: Partial<IProject>) => Promise<IProject>
     deleteProject: (workspaceSlug: string, projectId: string) => Promise<void>
+    // archive actions
+    archiveProject: (workspaceSlug: string, projectId: string) => Promise<void>
+    restoreProject: (workspaceSlug: string, projectId: string) => Promise<void>
 }
 
 export class ProjectStore implements IProjectStore {
@@ -50,36 +55,32 @@ export class ProjectStore implements IProjectStore {
     rootStore: RootStore
     // service
     projectService
+    projectArchiveService
     issueLabelService
     issueService
     stateService
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
-            // observables
             projectMap: observable,
-            // computed
             filteredProjectIds: computed,
             workspaceProjectIds: computed,
+            archivedProjectIds: computed,
+            totalProjectIds: computed,
             currentProjectDetails: computed,
             joinedProjectIds: computed,
             favoriteProjectIds: computed,
-            // fetch actions
             fetchProjects: action,
             fetchProjectDetails: action,
-            // favorites actions
             addProjectToFavorites: action,
             removeProjectFromFavorites: action,
-            // project-view action
             updateProjectView: action,
-            // CRUD actions
             createProject: action,
             updateProject: action,
         })
-        // root store
         this.rootStore = _rootStore
-
         this.projectService = new ProjectService()
+        this.projectArchiveService = new ProjectArchiveService()
         this.issueService = new IssueService()
         this.issueLabelService = new IssueLabelService()
         this.stateService = new ProjectStateService()
@@ -119,6 +120,37 @@ export class ProjectStore implements IProjectStore {
     }
 
     /**
+     * Returns archived project IDs belong to current workspace.
+     */
+    get archivedProjectIds() {
+        const currentWorkspace = this.rootStore.workspace.currentWorkspace
+        if (!currentWorkspace) return
+
+        let projects = Object.values(this.projectMap ?? {})
+        projects = sortBy(projects, "archived_at")
+
+        const projectIds = projects
+            .filter(
+                (project) => project.workspace.toString() === currentWorkspace.id.toString() && !!project.archived_at
+            )
+            .map((project) => project.id)
+        return projectIds
+    }
+
+    /**
+     * Returns total project IDs belong to the current workspace
+     */
+    // workspaceProjectIds + archivedProjectIds
+    get totalProjectIds() {
+        const currentWorkspace = this.rootStore.workspace.currentWorkspace
+        if (!currentWorkspace) return
+
+        const workspaceProjects = this.workspaceProjectIds ?? []
+        const archivedProjects = this.archivedProjectIds ?? []
+        return [...workspaceProjects, ...archivedProjects]
+    }
+
+    /**
      * Returns current project details
      */
     get currentProjectDetails() {
@@ -137,7 +169,12 @@ export class ProjectStore implements IProjectStore {
         projects = sortBy(projects, "sort_order")
 
         const projectIds = projects
-            .filter((project) => project.workspace === currentWorkspace.id && project.is_member)
+            .filter(
+                (project) =>
+                    project.workspace.toString() === currentWorkspace.id.toString() &&
+                    project.is_member &&
+                    !project.archived_at
+            )
             .map((project) => project.id)
         return projectIds
     }
@@ -153,7 +190,13 @@ export class ProjectStore implements IProjectStore {
         projects = sortBy(projects, "created_at")
 
         const projectIds = projects
-            .filter((project) => project.workspace === currentWorkspace.id && project.is_member && project.is_favorite)
+            .filter(
+                (project) =>
+                    project.workspace === currentWorkspace.id &&
+                    project.is_member &&
+                    project.is_favorite &&
+                    !project.archived_at
+            )
             .map((project) => project.id)
         return projectIds
     }
@@ -174,7 +217,6 @@ export class ProjectStore implements IProjectStore {
             })
             return projectsResponse
         } catch (error) {
-            console.error("Failed to fetch project from workspace store")
             throw error
         }
     }
@@ -193,7 +235,6 @@ export class ProjectStore implements IProjectStore {
             })
             return response
         } catch (error) {
-            console.error("Error while fetching project details", error)
             throw error
         }
     }
@@ -247,7 +288,6 @@ export class ProjectStore implements IProjectStore {
             const response = await this.projectService.addProjectToFavorites(workspaceSlug, projectId)
             return response
         } catch (error) {
-            console.error("Failed to add project to favorite")
             runInAction(() => {
                 set(this.projectMap, [projectId, "is_favorite"], false)
             })
@@ -272,7 +312,6 @@ export class ProjectStore implements IProjectStore {
             await this.fetchProjects(workspaceSlug)
             return response
         } catch (error) {
-            console.error("Failed to add project to favorite")
             runInAction(() => {
                 set(this.projectMap, [projectId, "is_favorite"], true)
             })
@@ -299,7 +338,6 @@ export class ProjectStore implements IProjectStore {
             runInAction(() => {
                 set(this.projectMap, [projectId, "sort_order"], currentProjectSortOrder)
             })
-            console.error("Failed to update sort order of the projects")
             throw error
         }
     }
@@ -323,7 +361,6 @@ export class ProjectStore implements IProjectStore {
             })
             return response
         } catch (error) {
-            console.error("Failed to create project from project store")
             throw error
         }
     }
@@ -344,7 +381,6 @@ export class ProjectStore implements IProjectStore {
             const response = await this.projectService.updateProject(workspaceSlug, projectId, data)
             return response
         } catch (error) {
-            console.error("Failed to create project from project store")
             this.fetchProjects(workspaceSlug)
             this.fetchProjectDetails(workspaceSlug, projectId)
             throw error
@@ -365,8 +401,49 @@ export class ProjectStore implements IProjectStore {
                 delete this.projectMap[projectId]
             })
         } catch (error) {
-            console.error("Failed to delete project from project store")
             this.fetchProjects(workspaceSlug)
         }
+    }
+
+    /**
+     * Archives a project from specific workspace and updates it in the store
+     * @param workspaceSlug
+     * @param projectId
+     * @returns Promise<void>
+     */
+    archiveProject = async (workspaceSlug: string, projectId: string) => {
+        await this.projectArchiveService
+            .archiveProject(workspaceSlug, projectId)
+            .then((response) => {
+                runInAction(() => {
+                    set(this.projectMap, [projectId, "archived_at"], response.archived_at)
+                })
+            })
+            .catch((error) => {
+                this.fetchProjects(workspaceSlug)
+                this.fetchProjectDetails(workspaceSlug, projectId)
+                throw error
+            })
+    }
+
+    /**
+     * Restores a project from specific workspace and updates it in the store
+     * @param workspaceSlug
+     * @param projectId
+     * @returns Promise<void>
+     */
+    restoreProject = async (workspaceSlug: string, projectId: string) => {
+        await this.projectArchiveService
+            .restoreProject(workspaceSlug, projectId)
+            .then(() => {
+                runInAction(() => {
+                    set(this.projectMap, [projectId, "archived_at"], null)
+                })
+            })
+            .catch((error) => {
+                this.fetchProjects(workspaceSlug)
+                this.fetchProjectDetails(workspaceSlug, projectId)
+                throw error
+            })
     }
 }
