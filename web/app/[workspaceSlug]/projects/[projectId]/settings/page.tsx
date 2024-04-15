@@ -10,6 +10,8 @@ import useSWR from "swr"
 import { PageHead } from "@components/core"
 import { ProjectSettingHeader } from "@components/headers"
 import {
+    ArchiveProjectSelection,
+    ArchiveRestoreProjectModal,
     DeleteProjectModal,
     DeleteProjectSection,
     ProjectDetailsForm,
@@ -26,14 +28,10 @@ import { ProjectSettingLayout } from "@wrappers/settings"
 import type { IProject } from "@servcy/types"
 
 const GeneralSettingsPage = observer(() => {
-    // states
     const [selectProject, setSelectedProject] = useState<string | null>(null)
-
     const { workspaceSlug, projectId } = useParams()
-    // store hooks
     const { currentProjectDetails, fetchProjectDetails } = useProject()
-    // api call to fetch project details
-    // TODO: removed this API if not necessary
+    const [archiveProject, setArchiveProject] = useState<boolean>(false)
     const { isLoading } = useSWR(
         workspaceSlug && projectId ? `PROJECT_DETAILS_${projectId}` : null,
         workspaceSlug && projectId ? () => fetchProjectDetails(workspaceSlug.toString(), projectId.toString()) : null
@@ -46,12 +44,21 @@ const GeneralSettingsPage = observer(() => {
         <AppWrapper header={<ProjectSettingHeader title="General Settings" />} withProjectWrapper>
             <ProjectSettingLayout>
                 <PageHead title={pageTitle} />
-                {currentProjectDetails && (
-                    <DeleteProjectModal
-                        project={currentProjectDetails}
-                        isOpen={Boolean(selectProject)}
-                        onClose={() => setSelectedProject(null)}
-                    />
+                {currentProjectDetails && workspaceSlug && projectId && (
+                    <>
+                        <ArchiveRestoreProjectModal
+                            workspaceSlug={workspaceSlug.toString()}
+                            projectId={projectId.toString()}
+                            isOpen={archiveProject}
+                            onClose={() => setArchiveProject(false)}
+                            archive
+                        />
+                        <DeleteProjectModal
+                            project={currentProjectDetails}
+                            isOpen={Boolean(selectProject)}
+                            onClose={() => setSelectedProject(null)}
+                        />
+                    </>
                 )}
 
                 <div className={`w-full overflow-y-auto py-8 pr-9 ${isAdmin ? "" : "opacity-60"}`}>
@@ -67,10 +74,16 @@ const GeneralSettingsPage = observer(() => {
                     )}
 
                     {isAdmin && (
-                        <DeleteProjectSection
-                            projectDetails={currentProjectDetails ?? ({} as IProject)}
-                            handleDelete={() => setSelectedProject(currentProjectDetails?.id ?? null)}
-                        />
+                        <>
+                            <ArchiveProjectSelection
+                                projectDetails={currentProjectDetails as IProject}
+                                handleArchive={() => setArchiveProject(true)}
+                            />
+                            <DeleteProjectSection
+                                projectDetails={currentProjectDetails as IProject}
+                                handleDelete={() => setSelectedProject(currentProjectDetails?.id ?? null)}
+                            />
+                        </>
                     )}
                 </div>
             </ProjectSettingLayout>
