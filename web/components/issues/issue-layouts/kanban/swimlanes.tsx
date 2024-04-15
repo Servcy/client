@@ -1,5 +1,3 @@
-import { useParams } from "next/navigation"
-
 import { MutableRefObject } from "react"
 
 import { observer } from "mobx-react-lite"
@@ -21,7 +19,7 @@ import {
 } from "@servcy/types"
 
 import { EIssueActions } from "../types"
-import { getGroupByColumns } from "../utils"
+import { getGroupByColumns, isWorkspaceLevel } from "../utils"
 import { KanBan } from "./default"
 import { HeaderGroupByCard } from "./headers/group-by-card"
 import { HeaderSubGroupByCard } from "./headers/sub-group-by-card"
@@ -265,6 +263,7 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         handleIssues,
         quickActions,
         kanbanFilters,
+        storeType,
         handleKanbanFilters,
         showEmptyGroup,
         isDragStarted,
@@ -291,7 +290,8 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         _module,
         label,
         projectState,
-        member
+        member,
+        isWorkspaceLevel(storeType)
     )
     const subGroupByList = getGroupByColumns(
         sub_group_by as GroupByColumnTypes,
@@ -300,7 +300,8 @@ export const KanBanSwimLanes: React.FC<IKanBanSwimLanes> = observer((props) => {
         _module,
         label,
         projectState,
-        member
+        member,
+        isWorkspaceLevel(storeType)
     )
 
     if (!groupByList || !subGroupByList) return null

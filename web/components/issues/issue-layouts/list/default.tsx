@@ -19,7 +19,7 @@ import {
 } from "@servcy/types"
 
 import { EIssueActions } from "../types"
-import { getGroupByColumns } from "../utils"
+import { getGroupByColumns, isWorkspaceLevel } from "../utils"
 import { HeaderGroupByCard } from "./headers/group-by-card"
 
 export interface IGroupByList {
@@ -81,7 +81,7 @@ const GroupByList: React.FC<IGroupByList> = (props) => {
         label,
         projectState,
         member,
-        true,
+        isWorkspaceLevel(storeType),
         params?.projectId?.toString()
     )
 

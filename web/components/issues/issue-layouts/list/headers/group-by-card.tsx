@@ -64,8 +64,12 @@ export const HeaderGroupByCard = observer(
                     </div>
 
                     <div className="flex w-full flex-row items-center gap-1">
-                        <div className="line-clamp-1 font-medium text-custom-text-100">{title}</div>
-                        <div className="pl-2 text-sm font-medium text-custom-text-300">{count || 0}</div>
+                        <div className="relative overflow-hidden line-clamp-1 font-medium text-custom-text-100">
+                            {title}
+                        </div>
+                        <div className="inline-block truncate pl-2 text-sm font-medium text-custom-text-300">
+                            {count || 0}
+                        </div>
                     </div>
 
                     {!disableIssueCreation &&
