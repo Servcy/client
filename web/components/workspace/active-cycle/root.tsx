@@ -77,8 +77,8 @@ export const WorkspaceActiveCycleRoot: React.FC<IActiveCycleDetails> = observer(
 
     const daysLeft = findHowManyDaysLeft(activeCycle.end_date) ?? 0
     return (
-        <div className="border-custom-border-200">
-            <div className="flex items-center gap-1">
+        <div className="border-custom-border-100 border p-4 rounded-[10px] shadow">
+            <div className="flex items-center gap-1 mb-2">
                 {projectDetails?.emoji ? (
                     <div className="grid h-6 w-6 flex-shrink-0 place-items-center">
                         {renderEmoji(projectDetails.emoji)}
@@ -92,7 +92,7 @@ export const WorkspaceActiveCycleRoot: React.FC<IActiveCycleDetails> = observer(
                         {projectDetails?.name.charAt(0)}
                     </span>
                 )}
-                <h4 className="break-words font-medium">{projectDetails?.name}</h4>
+                <h4 className="break-words text-xl font-semibold">{projectDetails?.name}</h4>
             </div>
             <div
                 className="grid-row-2 grid divide-y rounded-[10px] border border-custom-border-200 bg-custom-background-100 shadow"
