@@ -123,7 +123,7 @@ export class ProjectIssues extends IssueHelperStore implements IProjectIssues {
             })
 
             this.rootStore.issues.addIssue(response)
-
+            this.rootIssueStore.rootStore.projectRoot.project.fetchProjectDetails(workspaceSlug, projectId)
             return response
         } catch (error) {
             this.loader = undefined
@@ -143,6 +143,7 @@ export class ProjectIssues extends IssueHelperStore implements IProjectIssues {
             })
 
             this.rootStore.issues.addIssue([response])
+            this.rootIssueStore.rootStore.projectRoot.project.fetchProjectDetails(workspaceSlug, projectId)
 
             return response
         } catch (error) {
@@ -170,6 +171,7 @@ export class ProjectIssues extends IssueHelperStore implements IProjectIssues {
             })
 
             this.rootStore.issues.removeIssue(issueId)
+            this.rootIssueStore.rootStore.projectRoot.project.fetchProjectDetails(workspaceSlug, projectId)
         } catch (error) {
             throw error
         }
@@ -185,6 +187,7 @@ export class ProjectIssues extends IssueHelperStore implements IProjectIssues {
                 })
                 pull(this.issues[projectId], issueId)
             })
+            this.rootIssueStore.rootStore.projectRoot.project.fetchProjectDetails(workspaceSlug, projectId)
         } catch (error) {
             throw error
         }
