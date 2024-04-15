@@ -253,7 +253,7 @@ export class CycleStore implements ICycleStore {
         if (!this.fetchedMap[projectId]) return null
         let cycles = Object.values(this.cycleMap ?? {}).filter(
             (c) =>
-                c.project_id === projectId &&
+                c.project_id.toString() === projectId.toString() &&
                 !c.archived_at &&
                 c.status.toLowerCase() === "completed" &&
                 c.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
