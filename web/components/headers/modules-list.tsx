@@ -23,7 +23,6 @@ import { TModuleFilters } from "@servcy/types"
 import { Breadcrumbs, Button, CustomMenu, DiceIcon, Tooltip } from "@servcy/ui"
 
 export const ModulesListHeader: React.FC = observer(() => {
-    const [isSearchOpen, setIsSearchOpen] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams()
@@ -45,6 +44,7 @@ export const ModulesListHeader: React.FC = observer(() => {
         updateFilters,
         updateSearchQuery,
     } = useModuleFilter()
+    const [isSearchOpen, setIsSearchOpen] = useState(searchQuery !== "" ? true : false)
     useOutsideClickDetector(inputRef, () => {
         if (isSearchOpen && searchQuery.trim() === "") setIsSearchOpen(false)
     })
