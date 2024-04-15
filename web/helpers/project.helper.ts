@@ -80,7 +80,8 @@ export const shouldFilterProject = (
         }
     })
     if (displayFilters.my_projects && !project.is_member) fallsInFilters = false
-
+    if (displayFilters.archived_projects && !project.archived_at) fallsInFilters = false
+    if (project.archived_at) fallsInFilters = displayFilters.archived_projects ? fallsInFilters : false
     return fallsInFilters
 }
 
