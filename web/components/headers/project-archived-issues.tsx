@@ -7,67 +7,23 @@ import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues"
 
-import { useIssues, useLabel, useMember, useProject, useProjectState } from "@hooks/store"
+import { useIssues, useProject } from "@hooks/store"
 
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EIssuesStoreType } from "@constants/issue"
 
 import { renderEmoji } from "@helpers/emoji.helper"
 
-import type { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types"
 import { Breadcrumbs, LayersIcon, Tooltip } from "@servcy/ui"
 
 export const ProjectArchivedIssuesHeader: FC = observer(() => {
     const router = useRouter()
-    const { workspaceSlug, projectId } = useParams()
+    const { workspaceSlug } = useParams()
     // store hooks
     const {
-        issuesFilter: { issueFilters, updateFilters },
+        issuesFilter: { issueFilters },
     } = useIssues(EIssuesStoreType.ARCHIVED)
     const { currentProjectDetails } = useProject()
-    const { projectStates } = useProjectState()
-    const { projectLabels } = useLabel()
-    const {
-        project: { projectMemberIds },
-    } = useMember()
-
-    // for archived issues list layout is the only option
-    const activeLayout = "list"
-
-    const handleFiltersUpdate = (key: keyof IIssueFilterOptions, value: string | string[]) => {
-        if (!workspaceSlug || !projectId) return
-
-        const newValues = issueFilters?.filters?.[key] ?? []
-
-        if (Array.isArray(value)) {
-            value.forEach((val) => {
-                if (!newValues.includes(val)) newValues.push(val)
-            })
-        } else {
-            if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
-            else newValues.push(value)
-        }
-
-        updateFilters(workspaceSlug.toString(), projectId.toString(), EIssueFilterType.FILTERS, {
-            [key]: newValues,
-        })
-    }
-
-    const handleDisplayFiltersUpdate = (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-        if (!workspaceSlug || !projectId) return
-
-        updateFilters(workspaceSlug.toString(), projectId.toString(), EIssueFilterType.DISPLAY_FILTERS, {
-            ...issueFilters?.displayFilters,
-            ...updatedDisplayFilter,
-        })
-    }
-
-    const handleDisplayPropertiesUpdate = (property: Partial<IIssueDisplayProperties>) => {
-        if (!workspaceSlug || !projectId) return
-
-        updateFilters(workspaceSlug.toString(), projectId.toString(), EIssueFilterType.DISPLAY_PROPERTIES, property)
-    }
 
     const issueCount = currentProjectDetails
         ? issueFilters?.displayFilters?.sub_issue
@@ -132,33 +88,6 @@ export const ProjectArchivedIssuesHeader: FC = observer(() => {
                         </Tooltip>
                     ) : null}
                 </div>
-            </div>
-
-            {/* filter options */}
-            <div className="flex items-center gap-2">
-                <FiltersDropdown title="Filters" placement="bottom-end">
-                    <FilterSelection
-                        filters={issueFilters?.filters || {}}
-                        handleFiltersUpdate={handleFiltersUpdate}
-                        layoutDisplayFiltersOptions={
-                            activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT.archived_issues[activeLayout] : undefined
-                        }
-                        labels={projectLabels}
-                        memberIds={projectMemberIds ?? undefined}
-                        states={projectStates}
-                    />
-                </FiltersDropdown>
-                <FiltersDropdown title="Display" placement="bottom-end">
-                    <DisplayFiltersSelection
-                        displayFilters={issueFilters?.displayFilters || {}}
-                        displayProperties={issueFilters?.displayProperties || {}}
-                        handleDisplayFiltersUpdate={handleDisplayFiltersUpdate}
-                        handleDisplayPropertiesUpdate={handleDisplayPropertiesUpdate}
-                        layoutDisplayFiltersOptions={
-                            activeLayout ? ISSUE_DISPLAY_FILTERS_BY_LAYOUT.issues[activeLayout] : undefined
-                        }
-                    />
-                </FiltersDropdown>
             </div>
         </div>
     )
