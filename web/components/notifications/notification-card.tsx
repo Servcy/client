@@ -124,8 +124,8 @@ export const NotificationCard: React.FC<NotificationCardProps> = (props) => {
                 closePopover()
             }}
             href={`/${workspaceSlug}/projects/${notification.project}/${
-                notificationField === "archived_at" ? "archived-issues" : "issues"
-            }/${notification.data.issue.id}`}
+                notificationField === "archived_at" ? "archives/" : ""
+            }issues/${notification.data.issue.id}`}
             className={`group relative flex w-full cursor-pointer items-center gap-4 p-3 pl-6 ${
                 notification.read_at === null ? "bg-custom-primary-70/5" : "hover:bg-custom-background-200"
             }`}
