@@ -59,9 +59,9 @@ const BillingSettingsPage = observer(() => {
                     <div className="px-4 py-6">
                         <div>
                             <h4 className="text-md mb-1 leading-6">Current plan</h4>
-                            <p className="mb-3 text-sm text-custom-text-200">You are currently on a free trial.</p>
+                            <p className="mb-3 text-sm text-custom-text-200">You are currently on the starter plan.</p>
                             <a href="https://servcy.com/pricing" target="_blank" rel="noreferrer">
-                                <Button variant="neutral-primary">View Plans</Button>
+                                <Button variant="neutral-primary">Upgrade Plan</Button>
                             </a>
                         </div>
                     </div>
