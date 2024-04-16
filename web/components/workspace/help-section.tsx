@@ -1,6 +1,6 @@
 import React from "react"
 
-import { MoveLeft, Zap } from "lucide-react"
+import { MoveLeft, Sparkle, Zap } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { useApplication } from "@hooks/store"
@@ -27,7 +27,8 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
             >
                 {!isCollapsed && (
                     <div className="w-1/2 cursor-default rounded-md bg-green-500/10 px-2.5 py-1.5 text-center text-sm font-medium text-green-500 outline-none">
-                        Starter Plan
+                        <Sparkle className="mr-2" size={16} />
+                        Upgrade Plan
                     </div>
                 )}
                 <div

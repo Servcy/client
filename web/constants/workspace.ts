@@ -97,12 +97,4 @@ export const WORKSPACE_SETTINGS_LINKS: {
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/estimates`,
         Icon: SettingIcon,
     },
-    {
-        key: "billing-and-plans",
-        label: "Billing and plans",
-        href: `/settings/billing`,
-        access: ERoles.ADMIN,
-        highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/settings/billing`,
-        Icon: SettingIcon,
-    },
 ]
