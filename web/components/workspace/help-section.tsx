@@ -14,9 +14,14 @@ export interface WorkspaceHelpSectionProps {
 export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observer(() => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
-        commandPalette: { toggleShortcutModal, toggleUpgradePlanModal, toggleSupportModal },
+        commandPalette: { toggleShortcutModal, isSupportModalOpen, toggleUpgradePlanModal, toggleSupportModal },
     } = useApplication()
     const isCollapsed = sidebarCollapsed || false
+
+    useEffect(() => {
+        if (isSupportModalOpen && FreshworksWidget) FreshworksWidget("open")
+        else if (FreshworksWidget) FreshworksWidget("close")
+    }, [isSupportModalOpen])
 
     return (
         <>
