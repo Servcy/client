@@ -35,7 +35,7 @@ export default function Login(): JSX.Element {
     const { currentUser } = useUser()
     const searchParams = useSearchParams()
 
-    const sendOtp = async (e?: React.MouseEvent | React.KeyboardEvent) => {
+    const sendOtp = async (e: React.MouseEvent | React.KeyboardEvent) => {
         try {
             if (e) e.preventDefault()
             setLoading(true)
@@ -104,12 +104,29 @@ export default function Login(): JSX.Element {
     }
 
     useEffect(() => {
-        if (searchParams.has("email")) {
-            const email = searchParams.get("email") as string
-            if (!validateEmail(email)) return
-            document.getElementById("email")?.setAttribute("value", email)
-            sendOtp()
-        }
+        // IIFE: Immediately Invoked Function Expression
+        ;(async () => {
+            if (searchParams.has("email")) {
+                try {
+                    const email = searchParams.get("email") as string
+                    if (!validateEmail(email)) {
+                        toast.error("Please enter a valid email address!")
+                        return
+                    }
+                    setLoading(true)
+                    setInputType("email")
+                    setInput(email)
+                    await toast.promise(authService.sendOtp(email, "email"), {
+                        loading: "Sending OTP...",
+                        success: "OTP sent successfully",
+                        error: "Failed to send OTP",
+                    })
+                    setStage(1)
+                } finally {
+                    setLoading(false)
+                }
+            }
+        })()
     }, [searchParams])
 
     useEffect(() => {
