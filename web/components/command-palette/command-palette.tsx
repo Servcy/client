@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 import useSWR from "swr"
 
+import { UpgradePlanModal } from "@components/billing"
 import { CommandModal, ShortcutsModal } from "@components/command-palette"
 import { BulkDeleteIssuesModal } from "@components/core"
 import { CycleCreateUpdateModal } from "@components/cycles"
@@ -45,6 +46,8 @@ export const CommandPalette: FC = observer(() => {
     } = useIssues(EIssuesStoreType.PROJECT)
 
     const {
+        isUpgradePlanModalOpen,
+        toggleUpgradePlanModal,
         toggleCommandPaletteModal,
         isCreateIssueModalOpen,
         toggleCreateIssueModal,
@@ -179,6 +182,12 @@ export const CommandPalette: FC = observer(() => {
             />
             {workspaceSlug && (
                 <>
+                    <UpgradePlanModal
+                        isOpen={isUpgradePlanModalOpen}
+                        onClose={() => {
+                            toggleUpgradePlanModal(false)
+                        }}
+                    />
                     <CreateProjectModal
                         isOpen={isCreateProjectModalOpen}
                         onClose={() => {
