@@ -9,7 +9,7 @@ import { UserService } from "@services/user.service"
 import { WorkspaceService } from "@services/workspace.service"
 
 // interfaces
-import { IProjectMember, IUserProjectsRole, IWorkspaceMemberMe } from "@servcy/types"
+import { IProjectMember, IUserProjectsRole, IWorkspaceMemberMe, IWorkspaceSubscription } from "@servcy/types"
 
 import { RootStore } from "../root.store"
 
@@ -17,6 +17,9 @@ export interface IUserMembershipStore {
     // observables
     workspaceMemberInfo: {
         [workspaceSlug: string]: IWorkspaceMemberMe
+    }
+    workspaceSubscriptionInfo: {
+        [workspaceSlug: string]: IWorkspaceSubscription
     }
     hasPermissionToWorkspace: {
         [workspaceSlug: string]: boolean | null
@@ -40,6 +43,7 @@ export interface IUserMembershipStore {
     hasPermissionToCurrentProject: boolean | undefined
     // fetch actions
     fetchUserWorkspaceInfo: (workspaceSlug: string) => Promise<IWorkspaceMemberMe>
+    fetchWorkspaceSubscriptionInfo: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
     fetchUserProjectInfo: (workspaceSlug: string, projectId: string) => Promise<IProjectMember>
     fetchUserWorkspaceProjectsRole: (workspaceSlug: string) => Promise<IUserProjectsRole>
     // crud actions
@@ -51,6 +55,9 @@ export interface IUserMembershipStore {
 export class UserMembershipStore implements IUserMembershipStore {
     workspaceMemberInfo: {
         [workspaceSlug: string]: IWorkspaceMemberMe
+    } = {}
+    workspaceSubscriptionInfo: {
+        [workspaceSlug: string]: IWorkspaceSubscription
     } = {}
     hasPermissionToWorkspace: {
         [workspaceSlug: string]: boolean
@@ -73,6 +80,7 @@ export class UserMembershipStore implements IUserMembershipStore {
         makeObservable(this, {
             // observables
             workspaceMemberInfo: observable,
+            workspaceSubscriptionInfo: observable,
             hasPermissionToWorkspace: observable,
             projectMemberInfo: observable,
             hasPermissionToProject: observable,
@@ -87,6 +95,7 @@ export class UserMembershipStore implements IUserMembershipStore {
             hasPermissionToCurrentProject: computed,
             // actions
             fetchUserWorkspaceInfo: action,
+            fetchWorkspaceSubscriptionInfo: action,
             fetchUserProjectInfo: action,
             leaveWorkspace: action,
             joinProject: action,
@@ -174,6 +183,19 @@ export class UserMembershipStore implements IUserMembershipStore {
             runInAction(() => {
                 set(this.workspaceMemberInfo, [workspaceSlug], response)
                 set(this.hasPermissionToWorkspace, [workspaceSlug], true)
+            })
+            return response
+        })
+
+    /**
+     * Fetches the current user workspace info
+     * @param workspaceSlug
+     * @returns Promise<IWorkspaceMemberMe>
+     */
+    fetchWorkspaceSubscriptionInfo = async (workspaceSlug: string) =>
+        await this.workspaceService.workspaceSubscription(workspaceSlug).then((response) => {
+            runInAction(() => {
+                set(this.workspaceSubscriptionInfo, [workspaceSlug], response)
             })
             return response
         })

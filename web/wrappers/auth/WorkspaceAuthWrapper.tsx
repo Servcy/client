@@ -31,6 +31,12 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
         workspaceSlug ? () => membership.fetchUserWorkspaceInfo(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
     )
+    // fetching user workspace information
+    useSWR(
+        workspaceSlug ? `WORKSPACE_SUBSCRIPTION_${workspaceSlug}` : null,
+        workspaceSlug ? () => membership.fetchWorkspaceSubscriptionInfo(workspaceSlug.toString()) : null,
+        { revalidateIfStale: false, revalidateOnFocus: false }
+    )
     // fetching workspace projects
     useSWR(
         workspaceSlug ? `WORKSPACE_PROJECTS_${workspaceSlug}` : null,
