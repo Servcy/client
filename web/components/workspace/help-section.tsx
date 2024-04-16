@@ -14,7 +14,7 @@ export interface WorkspaceHelpSectionProps {
 export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observer(() => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
-        commandPalette: { toggleShortcutModal },
+        commandPalette: { toggleShortcutModal, toggleUpgradePlanModal, toggleSupportModal },
     } = useApplication()
     const isCollapsed = sidebarCollapsed || false
 
@@ -26,10 +26,13 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                 }`}
             >
                 {!isCollapsed && (
-                    <div className="w-1/2 flex cursor-default rounded-md bg-green-500/10 px-2.5 py-1.5 text-center text-sm font-medium text-green-500 outline-none">
+                    <button
+                        onClick={() => toggleUpgradePlanModal(true)}
+                        className="w-1/2 flex cursor-default rounded-md bg-green-500/10 px-2.5 py-1.5 text-center text-sm font-medium text-green-500 outline-none"
+                    >
                         <Gem className="mr-2" size={16} />
                         Upgrade Plan
-                    </div>
+                    </button>
                 )}
                 <div
                     className={`flex items-center gap-1 ${
@@ -53,7 +56,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                             className={`grid place-items-center rounded-md p-1.5 text-custom-text-200 outline-none hover:bg-custom-background-90 hover:text-custom-text-100 ${
                                 isCollapsed ? "w-full" : ""
                             }`}
-                            onClick={() => toggleShortcutModal(true)}
+                            onClick={() => toggleSupportModal(true)}
                         >
                             <LifeBuoy className="h-3.5 w-3.5" />
                         </button>
