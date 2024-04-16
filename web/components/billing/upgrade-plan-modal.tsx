@@ -62,7 +62,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                         />
                                         <BadgeIndianRupee size="32" color="#F1F2EF" />
                                     </div>
-                                    <div className="grid grid-cols-2 md:grid-cols-3 p-4 gap-4">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 mt-4 gap-4">
                                         {Object.values(plans).map((plan) => (
                                             <div
                                                 className="col-span-1 border border-custom-border-200 bg-custom-background-300 rounded p-8"
