@@ -84,7 +84,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                     </div>
                                                 </div>
                                                 <div className="mb-6 h-16 border-b-2 border-neutral-500 pb-4">
-                                                    {isInrSelected ? (
+                                                    {!isInrSelected ? (
                                                         <span className="text-3xl font-extrabold text-custom-servcy-wheat">
                                                             $
                                                         </span>
