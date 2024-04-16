@@ -86,7 +86,9 @@ export interface IWorkspaceSubscription {
     subscription_details: object
     is_active: boolean
     valid_till: Date
-    limits: object
+    limits: {
+        invitations: number
+    }
     created_at: Date
     created_by: string
     updated_at: Date

@@ -24,7 +24,7 @@ import toast from "react-hot-toast"
 
 import { OnboardingStepIndicator } from "@components/onboarding/step-indicator"
 
-import { useEventTracker } from "@hooks/store"
+import { useEventTracker, useMember, useWorkspace } from "@hooks/store"
 import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
 
 import { MEMBER_INVITED } from "@constants/event-tracker"
@@ -264,13 +264,14 @@ const InviteMemberForm: React.FC<InviteMemberFormProps> = (props) => {
 
 export const InviteMembers: React.FC<Props> = (props) => {
     const { finishOnboarding, stepChange, workspace } = props
-
     const [isInvitationDisabled, setIsInvitationDisabled] = useState(true)
-
     const { resolvedTheme } = useTheme()
     // store hooks
     const { captureEvent } = useEventTracker()
-
+    const {
+        workspace: { totalWorkspaceMembers },
+    } = useMember()
+    const { workspaceInvitationLimit } = useWorkspace()
     const {
         control,
         watch,
@@ -296,7 +297,10 @@ export const InviteMembers: React.FC<Props> = (props) => {
 
     const onSubmit = async (formData: FormValues) => {
         if (!workspace) return
-
+        const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
+        if (fields.length >= seatsRemaining) {
+            return toast.error("Please upgrade your plan to invite more members.")
+        }
         let payload = { ...formData }
         payload = { emails: payload.emails.filter((email) => email.email !== "") }
 
@@ -338,6 +342,10 @@ export const InviteMembers: React.FC<Props> = (props) => {
     }
 
     const appendField = () => {
+        const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
+        if (fields.length >= seatsRemaining) {
+            return toast.error("Please upgrade your plan to invite more members.")
+        }
         append({ email: "", role: ERoles.MEMBER, role_active: false })
     }
 

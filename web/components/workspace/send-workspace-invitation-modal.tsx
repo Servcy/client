@@ -4,8 +4,9 @@ import { Dialog, Transition } from "@headlessui/react"
 import { Plus, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
-import { useUser } from "@hooks/store"
+import { useMember, useUser, useWorkspace } from "@hooks/store"
 
 import { ERoles, ROLES } from "@constants/iam"
 
@@ -42,6 +43,10 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
     const {
         membership: { currentWorkspaceRole },
     } = useUser()
+    const {
+        workspace: { totalWorkspaceMembers },
+    } = useMember()
+    const { workspaceInvitationLimit } = useWorkspace()
     // form info
     const {
         control,
@@ -65,10 +70,18 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
     }
 
     const appendField = () => {
+        const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
+        if (fields.length >= seatsRemaining) {
+            return toast.error("Please upgrade your plan to invite more members.")
+        }
         append({ email: "", role: 1 })
     }
 
     const onSubmitForm = async (data: FormValues) => {
+        const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
+        if (fields.length >= seatsRemaining) {
+            return toast.error("Please upgrade your plan to invite more members.")
+        }
         await onSubmit(data)?.then(() => {
             reset(defaultValues)
         })

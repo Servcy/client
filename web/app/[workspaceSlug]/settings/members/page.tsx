@@ -36,10 +36,9 @@ const WorkspaceMembersSettingsPage = observer(() => {
         membership: { currentWorkspaceRole },
     } = useUser()
     const {
-        workspace: { inviteMembersToWorkspace },
+        workspace: { inviteMembersToWorkspace, totalWorkspaceMembers },
     } = useMember()
-    const { currentWorkspace } = useWorkspace()
-
+    const { currentWorkspace, workspaceInvitationLimit } = useWorkspace()
     const handleWorkspaceInvite = (data: IWorkspaceBulkInviteFormData) => {
         if (!workspaceSlug) return
 
@@ -102,7 +101,17 @@ const WorkspaceMembersSettingsPage = observer(() => {
                             />
                         </div>
                         {hasAddMemberPermission && (
-                            <Button variant="primary" size="sm" onClick={() => setInviteModal(true)}>
+                            <Button
+                                variant="primary"
+                                size="sm"
+                                onClick={() => {
+                                    const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
+                                    if (seatsRemaining <= 0) {
+                                        return toast.error("Please upgrade your plan to invite more members.")
+                                    }
+                                    setInviteModal(true)
+                                }}
+                            >
                                 Add member
                             </Button>
                         )}

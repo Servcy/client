@@ -29,6 +29,7 @@ export interface IWorkspaceMemberStore {
     workspaceMemberIds: string[] | null
     workspaceMemberInvitationIds: string[] | null
     memberMap: Record<string, IWorkspaceMembership> | null
+    totalWorkspaceMembers: number
     // computed actions
     getSearchedWorkspaceMemberIds: (searchQuery: string) => string[] | null
     getSearchedWorkspaceInvitationIds: (searchQuery: string) => string[] | null
@@ -71,6 +72,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
             // computed
             workspaceMemberIds: computed,
             workspaceMemberInvitationIds: computed,
+            totalWorkspaceMembers: computed,
             memberMap: computed,
             // actions
             fetchWorkspaceMembers: action,
@@ -116,6 +118,12 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
         const workspaceSlug = this.routerStore.workspaceSlug
         if (!workspaceSlug) return null
         return this.workspaceMemberMap?.[workspaceSlug] ?? {}
+    }
+
+    get totalWorkspaceMembers() {
+        const workspaceSlug = this.routerStore.workspaceSlug
+        if (!workspaceSlug) return 0
+        return Object.keys(this.workspaceMemberMap?.[workspaceSlug] ?? {}).length
     }
 
     get workspaceMemberInvitationIds() {
