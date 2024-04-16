@@ -383,18 +383,6 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                                                         )}
                                                     />
                                                 </div>
-
-                                                {/* toggle inbox */}
-                                                {/* <div className="relative flex justify-between items-center gap-2">
-                      <div className="text-sm">Allow issue proposals</div>
-                      <Controller
-                        control={control}
-                        name="inbox"
-                        render={({ field: { onChange, value } }) => (
-                          <ToggleSwitch value={value} onChange={onChange} size="sm" />
-                        )}
-                      />
-                    </div> */}
                                             </div>
                                         </div>
                                     )}

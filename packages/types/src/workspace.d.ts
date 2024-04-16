@@ -82,7 +82,9 @@ export interface IWorkspaceMemberMe {
 export interface IWorkspaceSubscription {
     id: number
     workspace: string
-    plan_details: object
+    plan_details: {
+        name: string
+    }
     subscription_details: object
     is_active: boolean
     valid_till: Date

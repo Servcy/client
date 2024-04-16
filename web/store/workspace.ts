@@ -15,6 +15,7 @@ export interface StoreIWorkspaceStore {
     workspaces: Record<string, IWorkspace>
     // computed
     currentWorkspace: IWorkspace | null
+    currentWorkspaceSubscription: IWorkspaceSubscription | null
     workspaceInvitationLimit: number
     workspacesCreatedByCurrentUser: IWorkspace[] | null
     // computed actions
@@ -50,6 +51,7 @@ export class WorkspaceStore implements StoreIWorkspaceStore {
             currentWorkspace: computed,
             workspacesCreatedByCurrentUser: computed,
             workspaceInvitationLimit: computed,
+            currentWorkspaceSubscription: computed,
             // computed actions
             getWorkspaceBySlug: action,
             getWorkspaceById: action,
@@ -84,6 +86,15 @@ export class WorkspaceStore implements StoreIWorkspaceStore {
         const workspaceSlug = this.router.workspaceSlug
         if (!workspaceSlug) return 5
         return this.workspaceSubscriptionInfo[workspaceSlug]?.limits.invitations || 5
+    }
+
+    /**
+     * computed value of the current workspace subscription
+     */
+    get currentWorkspaceSubscription() {
+        const workspaceSlug = this.router.workspaceSlug
+        if (!workspaceSlug) return null
+        return this.workspaceSubscriptionInfo[workspaceSlug] || null
     }
 
     /**
