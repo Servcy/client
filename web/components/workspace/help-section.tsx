@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 
 import { Gem, LifeBuoy, MoveLeft, Zap } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -14,14 +14,9 @@ export interface WorkspaceHelpSectionProps {
 export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observer(() => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
-        commandPalette: { toggleShortcutModal, isSupportModalOpen, toggleUpgradePlanModal, toggleSupportModal },
+        commandPalette: { toggleShortcutModal, toggleUpgradePlanModal },
     } = useApplication()
     const isCollapsed = sidebarCollapsed || false
-
-    useEffect(() => {
-        if (isSupportModalOpen && FreshworksWidget) FreshworksWidget("open")
-        else if (FreshworksWidget) FreshworksWidget("close")
-    }, [isSupportModalOpen])
 
     return (
         <>
@@ -61,7 +56,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                             className={`grid place-items-center rounded-md p-1.5 text-custom-text-200 outline-none hover:bg-custom-background-90 hover:text-custom-text-100 ${
                                 isCollapsed ? "w-full" : ""
                             }`}
-                            onClick={() => toggleSupportModal(true)}
+                            onClick={() => FreshworksWidget("open")}
                         >
                             <LifeBuoy className="h-3.5 w-3.5" />
                         </button>
