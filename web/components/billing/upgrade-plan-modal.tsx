@@ -5,19 +5,19 @@ import React, { FC } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 
 type Props = {
-    handleClose: () => void
+    onClose: () => void
     isOpen: boolean
 }
 
 export const UpgradePlanModal: FC<Props> = (props) => {
-    const { isOpen, handleClose } = props
+    const { isOpen, onClose } = props
     const { workspaceSlug } = useParams()
 
     if (!workspaceSlug) return null
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
-            <Dialog as="div" className="relative z-20" onClose={handleClose}>
+            <Dialog as="div" className="relative z-20" onClose={onClose}>
                 <Transition.Child
                     as={React.Fragment}
                     enter="ease-out duration-300"
