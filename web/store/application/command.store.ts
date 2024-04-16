@@ -16,6 +16,8 @@ export interface ICommandPaletteStore {
     isShortcutModalOpen: boolean
     isCreateProjectModalOpen: boolean
     isCreateCycleModalOpen: boolean
+    isUpgradePlanModalOpen: boolean
+    isSupportModalOpen: boolean
     isCreateModuleModalOpen: boolean
     isCreateViewModalOpen: boolean
     isCreatePageModalOpen: boolean
@@ -32,6 +34,8 @@ export interface ICommandPaletteStore {
     toggleCreateCycleModal: (value?: boolean) => void
     toggleCreateViewModal: (value?: boolean) => void
     toggleWorkspaceViewCreateModal: (value?: boolean) => void
+    toggleUpgradePlanModal: (value?: boolean) => void
+    toggleSupportModal: (value?: boolean) => void
     toggleCreatePageModal: (value?: boolean) => void
     toggleCreateIssueModal: (value?: boolean, storeType?: TCreateModalStoreTypes) => void
     toggleCreateModuleModal: (value?: boolean) => void
@@ -48,6 +52,8 @@ export class CommandPaletteStore implements ICommandPaletteStore {
     isCreateProjectModalOpen: boolean = false
     isCreateCycleModalOpen: boolean = false
     isCreateModuleModalOpen: boolean = false
+    isSupportModalOpen: boolean = false
+    isUpgradePlanModalOpen: boolean = false
     isCreateViewModalOpen: boolean = false
     isCreatePageModalOpen: boolean = false
     isWorkspaceViewCreateModalOpen: boolean = false
@@ -65,6 +71,8 @@ export class CommandPaletteStore implements ICommandPaletteStore {
             // observable
             isCommandPaletteOpen: observable.ref,
             isShortcutModalOpen: observable.ref,
+            isUpgradePlanModalOpen: observable.ref,
+            isSupportModalOpen: observable.ref,
             isCreateProjectModalOpen: observable.ref,
             isCreateCycleModalOpen: observable.ref,
             isCreateModuleModalOpen: observable.ref,
@@ -84,6 +92,8 @@ export class CommandPaletteStore implements ICommandPaletteStore {
             toggleCreateCycleModal: action,
             toggleCreateViewModal: action,
             toggleCreatePageModal: action,
+            toggleUpgradePlanModal: action,
+            toggleSupportModal: action,
             toggleCreateIssueModal: action,
             toggleCreateModuleModal: action,
             toggleDeleteIssueModal: action,
@@ -108,6 +118,8 @@ export class CommandPaletteStore implements ICommandPaletteStore {
                 this.isWorkspaceViewCreateModalOpen ||
                 this.isCreateViewModalOpen ||
                 this.isShortcutModalOpen ||
+                this.isSupportModalOpen ||
+                this.isUpgradePlanModalOpen ||
                 this.isBulkDeleteIssueModalOpen ||
                 this.isDeleteIssueModalOpen
         )
@@ -136,6 +148,32 @@ export class CommandPaletteStore implements ICommandPaletteStore {
             this.isShortcutModalOpen = value
         } else {
             this.isShortcutModalOpen = !this.isShortcutModalOpen
+        }
+    }
+
+    /**
+     * Toggles the upgrade plan modal
+     * @param value
+     * @returns
+     */
+    toggleUpgradePlanModal = (value?: boolean) => {
+        if (value !== undefined) {
+            this.isUpgradePlanModalOpen = value
+        } else {
+            this.isUpgradePlanModalOpen = !this.isUpgradePlanModalOpen
+        }
+    }
+
+    /**
+     * Toggles the support modal
+     * @param value
+     * @returns
+     */
+    toggleSupportModal = (value?: boolean) => {
+        if (value !== undefined) {
+            this.isSupportModalOpen = value
+        } else {
+            this.isSupportModalOpen = !this.isSupportModalOpen
         }
     }
 
