@@ -43,7 +43,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                         <Tooltip tooltipContent="Shortcuts">
                             <button
                                 type="button"
-                                className="grid place-items-center rounded-md p-1.5 text-custom-text-200 outline-none hover:bg-custom-background-90 hover:text-custom-text-100 w-full"
+                                className="grid place-items-center rounded-md p-1.5 bg-green-500/10 text-green-500 outline-none hover:bg-green-500/20 hover:text-green-500 w-full"
                                 onClick={() => toggleUpgradePlanModal(true)}
                             >
                                 <Gem className="h-3.5 w-3.5" />
