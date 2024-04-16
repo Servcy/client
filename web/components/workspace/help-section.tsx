@@ -40,7 +40,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                     }`}
                 >
                     {isCollapsed && (
-                        <Tooltip tooltipContent="Shortcuts">
+                        <Tooltip tooltipContent="Upgrade Plan">
                             <button
                                 type="button"
                                 className="grid place-items-center rounded-md p-1.5 bg-green-500/10 text-green-500 outline-none hover:bg-green-500/20 hover:text-green-500 w-full"
