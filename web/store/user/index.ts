@@ -90,8 +90,10 @@ export class UserRootStore implements IUserRootStore {
                 this.currentUserError = null
                 this.currentUserLoader = false
             })
-            if (FreshworksWidget)
-                FreshworksWidget("identify", "ticketForm", {
+            // @ts-ignore
+            if (window.FreshworksWidget)
+                // @ts-ignore
+                window.FreshworksWidget("identify", "ticketForm", {
                     name: response.display_name,
                     email: response.email,
                 })
