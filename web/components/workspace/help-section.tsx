@@ -50,7 +50,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                             <Zap className="h-3.5 w-3.5" />
                         </button>
                     </Tooltip>
-                    <Tooltip tooltipContent="Shortcuts">
+                    <Tooltip tooltipContent="Support">
                         <button
                             type="button"
                             className={`grid place-items-center rounded-md p-1.5 text-custom-text-200 outline-none hover:bg-custom-background-90 hover:text-custom-text-100 ${
