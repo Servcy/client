@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 import { Gem, LifeBuoy, MoveLeft, Zap } from "lucide-react"
 import { observer } from "mobx-react-lite"
