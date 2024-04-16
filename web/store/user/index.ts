@@ -90,6 +90,11 @@ export class UserRootStore implements IUserRootStore {
                 this.currentUserError = null
                 this.currentUserLoader = false
             })
+            if (FreshworksWidget)
+                FreshworksWidget("identify", "ticketForm", {
+                    name: response.display_name,
+                    email: response.email,
+                })
             return response
         } catch (error) {
             runInAction(() => {
