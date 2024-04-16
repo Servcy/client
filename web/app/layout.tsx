@@ -56,7 +56,7 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
                     })(window, document, "clarity", "script", "lca3vb6j6d");`}
             </Script>
             <Script type="text/javascript" id="">
-                {`window.fwSettings={'widget_id':1060000001144};!function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}();FreshworksWidget('hide', 'launcher');`}
+                {`window.fwSettings={'widget_id':1060000001144};!function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}();FreshworksWidget('hide', 'launcher');FreshworksWidget('hide', 'ticketForm', ['product_id']);`}
             </Script>
             <Script
                 type="text/javascript"
