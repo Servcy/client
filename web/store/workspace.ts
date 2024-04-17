@@ -9,21 +9,15 @@ import { RootStore } from "./root.store"
 
 export interface StoreIWorkspaceStore {
     // observables
-    workspaceSubscriptionInfo: {
-        [workspaceSlug: string]: IWorkspaceSubscription
-    }
     workspaces: Record<string, IWorkspace>
     // computed
     currentWorkspace: IWorkspace | null
-    currentWorkspaceSubscription: IWorkspaceSubscription | null
-    workspaceInvitationLimit: number
     workspacesCreatedByCurrentUser: IWorkspace[] | null
     // computed actions
     getWorkspaceBySlug: (workspaceSlug: string) => IWorkspace | null
     getWorkspaceById: (workspaceId: string) => IWorkspace | null
     // fetch actions
     fetchWorkspaces: () => Promise<IWorkspace[]>
-    fetchWorkspaceSubscriptionInfo: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
     // crud actions
     createWorkspace: (data: Partial<IWorkspace>) => Promise<IWorkspace>
     updateWorkspace: (workspaceSlug: string, data: Partial<IWorkspace>) => Promise<IWorkspace>
@@ -32,7 +26,7 @@ export interface StoreIWorkspaceStore {
 
 export class WorkspaceStore implements StoreIWorkspaceStore {
     // observables
-    workspaceSubscriptionInfo: {
+    workspaceSubscriptionMap: {
         [workspaceSlug: string]: IWorkspaceSubscription
     } = {}
     workspaces: Record<string, IWorkspace> = {}
@@ -46,18 +40,14 @@ export class WorkspaceStore implements StoreIWorkspaceStore {
         makeObservable(this, {
             // observables
             workspaces: observable,
-            workspaceSubscriptionInfo: observable,
             // computed
             currentWorkspace: computed,
             workspacesCreatedByCurrentUser: computed,
-            workspaceInvitationLimit: computed,
-            currentWorkspaceSubscription: computed,
             // computed actions
             getWorkspaceBySlug: action,
             getWorkspaceById: action,
             // actions
             fetchWorkspaces: action,
-            fetchWorkspaceSubscriptionInfo: action,
             createWorkspace: action,
             updateWorkspace: action,
             deleteWorkspace: action,
@@ -77,24 +67,6 @@ export class WorkspaceStore implements StoreIWorkspaceStore {
         if (!workspaceSlug) return null
         const workspaceDetails = Object.values(this.workspaces ?? {})?.find((w) => w.slug === workspaceSlug)
         return workspaceDetails || null
-    }
-
-    /**
-     * computed value of the workspace seats limit
-     */
-    get workspaceInvitationLimit() {
-        const workspaceSlug = this.router.workspaceSlug
-        if (!workspaceSlug) return 5
-        return this.workspaceSubscriptionInfo[workspaceSlug]?.limits.invitations || 5
-    }
-
-    /**
-     * computed value of the current workspace subscription
-     */
-    get currentWorkspaceSubscription() {
-        const workspaceSlug = this.router.workspaceSlug
-        if (!workspaceSlug) return null
-        return this.workspaceSubscriptionInfo[workspaceSlug] || null
     }
 
     /**
@@ -155,19 +127,6 @@ export class WorkspaceStore implements StoreIWorkspaceStore {
         await this.workspaceService.updateWorkspace(workspaceSlug, data).then((response) => {
             runInAction(() => {
                 set(this.workspaces, response.id, response)
-            })
-            return response
-        })
-
-    /**
-     * Fetches the current user workspace info
-     * @param workspaceSlug
-     * @returns Promise<IWorkspaceMemberMe>
-     */
-    fetchWorkspaceSubscriptionInfo = async (workspaceSlug: string) =>
-        await this.workspaceService.workspaceSubscription(workspaceSlug).then((response) => {
-            runInAction(() => {
-                set(this.workspaceSubscriptionInfo, [workspaceSlug], response)
             })
             return response
         })

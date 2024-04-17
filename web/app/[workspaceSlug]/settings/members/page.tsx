@@ -12,7 +12,7 @@ import { PageHead } from "@components/core"
 import { WorkspaceSettingHeader } from "@components/headers"
 import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace"
 
-import { useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
+import { useBilling, useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
 
 import { MEMBER_INVITED } from "@constants/event-tracker"
 import { ERoles } from "@constants/iam"
@@ -38,7 +38,8 @@ const WorkspaceMembersSettingsPage = observer(() => {
     const {
         workspace: { inviteMembersToWorkspace, totalWorkspaceMembers },
     } = useMember()
-    const { currentWorkspace, workspaceInvitationLimit } = useWorkspace()
+    const { currentWorkspace } = useWorkspace()
+    const { workspaceInvitationLimit } = useBilling()
     const handleWorkspaceInvite = (data: IWorkspaceBulkInviteFormData) => {
         if (!workspaceSlug) return
 

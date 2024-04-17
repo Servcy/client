@@ -24,7 +24,7 @@ import toast from "react-hot-toast"
 
 import { OnboardingStepIndicator } from "@components/onboarding/step-indicator"
 
-import { useEventTracker, useMember, useWorkspace } from "@hooks/store"
+import { useBilling, useEventTracker, useMember } from "@hooks/store"
 import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
 
 import { MEMBER_INVITED } from "@constants/event-tracker"
@@ -271,7 +271,7 @@ export const InviteMembers: React.FC<Props> = (props) => {
     const {
         workspace: { totalWorkspaceMembers },
     } = useMember()
-    const { workspaceInvitationLimit } = useWorkspace()
+    const { workspaceInvitationLimit } = useBilling()
     const {
         control,
         watch,

@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-import { useMember, useUser, useWorkspace } from "@hooks/store"
+import { useBilling, useMember, useUser } from "@hooks/store"
 
 import { ERoles, ROLES } from "@constants/iam"
 
@@ -46,7 +46,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
     const {
         workspace: { totalWorkspaceMembers },
     } = useMember()
-    const { workspaceInvitationLimit } = useWorkspace()
+    const { workspaceInvitationLimit } = useBilling()
     // form info
     const {
         control,

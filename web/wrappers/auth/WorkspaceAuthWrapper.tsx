@@ -6,7 +6,7 @@ import { FC, ReactNode } from "react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
-import { useMember, useProject, useUser, useWorkspace } from "@hooks/store"
+import { useBilling, useMember, useProject, useUser } from "@hooks/store"
 
 import { Button, Spinner } from "@servcy/ui"
 
@@ -18,7 +18,7 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
     const { children } = props
     // store hooks
     const { membership } = useUser()
-    const { fetchWorkspaceSubscriptionInfo } = useWorkspace()
+    const { fetchWorkspaceSubscriptionInfo } = useBilling()
     const { fetchProjects } = useProject()
     const {
         workspace: { fetchWorkspaceMembers },

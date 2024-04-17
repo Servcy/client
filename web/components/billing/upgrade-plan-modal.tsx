@@ -6,7 +6,7 @@ import React, { FC, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { BadgeDollarSign, BadgeIndianRupee } from "lucide-react"
 
-import { useWorkspace } from "@hooks/store"
+import { useBilling } from "@hooks/store"
 
 import { offerings, plans } from "@constants/billing"
 
@@ -21,7 +21,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
     const { isOpen, onClose } = props
     const { workspaceSlug } = useParams()
     const [isInrSelected, setIsInrSelected] = useState(true)
-    const { currentWorkspaceSubscription } = useWorkspace()
+    const { currentWorkspaceSubscription } = useBilling()
 
     if (!workspaceSlug) return null
 
