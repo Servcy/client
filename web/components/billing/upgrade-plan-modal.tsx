@@ -28,14 +28,12 @@ export const UpgradePlanModal: FC<Props> = (props) => {
     const [isInrSelected, setIsInrSelected] = useState(true)
     const [isInitiating, setIsInitiating] = useState("")
     const { fetchRazorpayPlans, createRazorpaySubscription, currentWorkspaceSubscription } = useBilling()
-
     // fetching razorpay plans
     useSWR(
         workspaceSlug ? `RAZORPAY_PLANS_${workspaceSlug}` : null,
         workspaceSlug ? () => fetchRazorpayPlans(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
     )
-
     const initiateSubscription = async (planName: string) => {
         try {
             setIsInitiating(planName)
@@ -66,9 +64,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
             setIsInitiating("")
         }
     }
-
     if (!workspaceSlug) return null
-
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
             <Dialog as="div" className="relative z-20" onClose={onClose}>
