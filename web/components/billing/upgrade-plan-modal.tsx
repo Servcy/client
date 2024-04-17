@@ -1,16 +1,19 @@
+"use client"
+
 import Image from "next/image"
 import { useParams } from "next/navigation"
 
 import React, { FC, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { BadgeDollarSign, BadgeIndianRupee } from "lucide-react"
+import { BadgeDollarSign, BadgeIndianRupee, Loader } from "lucide-react"
 import useSWR from "swr"
 
-import { useBilling } from "@hooks/store"
+import { useBilling, useUser } from "@hooks/store"
 
 import { offerings, plans } from "@constants/billing"
 
+import { IRazorpaySubscription } from "@servcy/types"
 import { Button, TButtonVariant, ToggleSwitch } from "@servcy/ui"
 
 type Props = {
@@ -20,9 +23,11 @@ type Props = {
 
 export const UpgradePlanModal: FC<Props> = (props) => {
     const { isOpen, onClose } = props
+    const { currentUser } = useUser()
     const { workspaceSlug } = useParams()
     const [isInrSelected, setIsInrSelected] = useState(true)
-    const { fetchRazorpayPlans, currentWorkspaceSubscription } = useBilling()
+    const [isInitiating, setIsInitiating] = useState("")
+    const { fetchRazorpayPlans, createRazorpaySubscription, currentWorkspaceSubscription } = useBilling()
 
     // fetching razorpay plans
     useSWR(
@@ -30,6 +35,37 @@ export const UpgradePlanModal: FC<Props> = (props) => {
         workspaceSlug ? () => fetchRazorpayPlans(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
     )
+
+    const initiateSubscription = async (planName: string) => {
+        try {
+            setIsInitiating(planName)
+            if (!workspaceSlug || !planName || !currentUser) return
+            const response = (await createRazorpaySubscription(
+                workspaceSlug.toString(),
+                planName
+            )) as IRazorpaySubscription
+            const key = process.env["NEXT_PUBLIC_RAZORPAY_API_KEY"] ?? ""
+            if (!key) throw new Error("Razorpay API key not found")
+            // @ts-ignore
+            const razorpay = new Razorpay({
+                key: key,
+                subscription_id: response.id,
+                name: "Servcy",
+                description: `${planName} plan`,
+                cancel_url: `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/${workspaceSlug}`,
+                callback_url: `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/${workspaceSlug}`,
+                prefill: {
+                    name: currentUser.display_name,
+                    email: currentUser.email,
+                },
+            })
+            razorpay.open()
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsInitiating("")
+        }
+    }
 
     if (!workspaceSlug) return null
 
@@ -114,11 +150,16 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         size="sm"
                                                         disabled={
                                                             currentWorkspaceSubscription?.plan_details.name ===
-                                                            plan.name
+                                                                plan.name || isInitiating === plan.name
                                                         }
+                                                        onClick={() => initiateSubscription(plan.name)}
                                                         variant={plan.buttonVariant as TButtonVariant}
                                                     >
-                                                        <plan.buttonIcon className="mr-2" size="24" />
+                                                        {isInitiating !== plan.name ? (
+                                                            <plan.buttonIcon className="mr-2" size="24" />
+                                                        ) : (
+                                                            <Loader className="mr-2 animate-spin" size="24" />
+                                                        )}
                                                         <span className="truncate">
                                                             {currentWorkspaceSubscription?.plan_details.name ===
                                                             plan.name

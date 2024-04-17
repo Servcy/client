@@ -18,20 +18,20 @@ export interface IWorkspaceSubscription {
 
 export interface IRazorpayPlanDetails {
     id: string
-    active: true
+    active: boolean
     name: string
     description: string
     amount: number
     unit_amount: number
     currency: string
     type: string
-    unit: null
-    tax_inclusive: false
-    hsn_code: null
-    sac_code: null
-    tax_rate: null
-    tax_id: null
-    tax_group_id: null
+    unit: number
+    tax_inclusive: boolean
+    hsn_code: number
+    sac_code: number
+    tax_rate: number
+    tax_id: number
+    tax_group_id: number
     created_at: number
     updated_at: number
 }
@@ -49,4 +49,30 @@ export interface IRazorpayPlans {
     entity: string
     count: number
     items: IRazorpayPlan[]
+}
+
+export interface IRazorpaySubscription {
+    id: string
+    entity: string
+    plan_id: string
+    status: string
+    current_start: number
+    current_end: number
+    ended_at: number
+    quantity: number
+    charge_at: number
+    start_at: number
+    end_at: number
+    auth_attempts: number
+    total_count: number
+    paid_count: number
+    customer_notify: boolean
+    created_at: number
+    expire_by: number
+    short_url: string
+    has_scheduled_changes: boolean
+    change_scheduled_at: number
+    source: string
+    offer_id: string
+    remaining_count: number
 }

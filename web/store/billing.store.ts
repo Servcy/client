@@ -4,7 +4,7 @@ import { computedFn } from "mobx-utils"
 
 import { BillingService } from "@services/billing.service"
 
-import { IRazorpayPlan, IRazorpayPlans, IWorkspaceSubscription } from "@servcy/types"
+import { IRazorpayPlan, IRazorpayPlans, IRazorpaySubscription, IWorkspaceSubscription } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
@@ -22,7 +22,7 @@ export interface StoreIBillingStore {
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
     fetchRazorpayPlans: (workspaceSlug: string) => Promise<IRazorpayPlans>
-    initiateSubscription: (workspaceSlug: string, planName: string) => Promise<any>
+    createRazorpaySubscription: (workspaceSlug: string, planName: string) => Promise<IRazorpaySubscription>
 }
 
 export class BillingStore implements StoreIBillingStore {
@@ -48,7 +48,7 @@ export class BillingStore implements StoreIBillingStore {
             // actions
             fetchWorkspaceSubscription: action,
             fetchRazorpayPlans: action,
-            initiateSubscription: action,
+            createRazorpaySubscription: action,
         })
         this.billingService = new BillingService()
         this.router = _rootStore.app.router
@@ -113,9 +113,9 @@ export class BillingStore implements StoreIBillingStore {
      * Initiate the subscription process
      * @param workspaceSlug
      * @param planName
-     * @returns Promise<any>
+     * @returns Promise<IRazorpaySubscription>
      */
-    initiateSubscription = async (workspaceSlug: string, planName: string) => {
+    createRazorpaySubscription = async (workspaceSlug: string, planName: string) => {
         const plan = this.getPlanByName(planName)
         if (!plan) throw new Error("Plan not found")
         return await this.billingService.createRazorpaySubscription(workspaceSlug, plan.id)
