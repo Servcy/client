@@ -11,7 +11,6 @@ import {
     IWorkspaceMemberInvitation,
     IWorkspaceMemberMe,
     IWorkspaceSearchResults,
-    IWorkspaceSubscription,
     IWorkspaceView,
     IWorkspaceViewProps,
     TIssue,
@@ -97,14 +96,6 @@ export class WorkspaceService extends APIService {
 
     async workspaceMemberMe(workspaceSlug: string): Promise<IWorkspaceMemberMe> {
         return this.get(`/iam/${workspaceSlug}/members/me`)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response
-            })
-    }
-
-    async workspaceSubscription(workspaceSlug: string): Promise<IWorkspaceSubscription> {
-        return this.get(`/billing/${workspaceSlug}/subscription`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response

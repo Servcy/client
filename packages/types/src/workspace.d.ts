@@ -79,24 +79,6 @@ export interface IWorkspaceMemberMe {
     workspace: string
 }
 
-export interface IWorkspaceSubscription {
-    id: number
-    workspace: string
-    plan_details: {
-        name: string
-    }
-    subscription_details: object
-    is_active: boolean
-    valid_till: Date
-    limits: {
-        invitations: number
-    }
-    created_at: Date
-    created_by: string
-    updated_at: Date
-    updated_by: string
-}
-
 export interface ILastActiveWorkspaceDetails {
     workspace_details: IWorkspace
     project_details?: IProjectMember[]

@@ -18,7 +18,7 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
     const { children } = props
     // store hooks
     const { membership } = useUser()
-    const { fetchWorkspaceSubscriptionInfo } = useBilling()
+    const { fetchWorkspaceSubscription } = useBilling()
     const { fetchProjects } = useProject()
     const {
         workspace: { fetchWorkspaceMembers },
@@ -35,7 +35,7 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
     // fetching user workspace information
     useSWR(
         workspaceSlug ? `WORKSPACE_SUBSCRIPTION_${workspaceSlug}` : null,
-        workspaceSlug ? () => fetchWorkspaceSubscriptionInfo(workspaceSlug.toString()) : null,
+        workspaceSlug ? () => fetchWorkspaceSubscription(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
     )
     // fetching workspace projects

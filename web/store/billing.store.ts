@@ -1,9 +1,9 @@
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 
-import { WorkspaceService } from "@services/workspace.service"
+import { BillingService } from "@services/billing.service"
 
-import { IWorkspaceSubscription } from "@servcy/types"
+import { IWorkspaceSubscription, RazorpayPlans } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
@@ -12,11 +12,13 @@ export interface StoreIBillingStore {
     workspaceSubscriptionMap: {
         [workspaceSlug: string]: IWorkspaceSubscription
     }
+    razorpayPlans: RazorpayPlans
     // computed
     workspaceInvitationLimit: number
     currentWorkspaceSubscription: IWorkspaceSubscription | null
     // fetch actions
-    fetchWorkspaceSubscriptionInfo: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
+    fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
+    fetchRazorpayPlans: (workspaceSlug: string) => Promise<RazorpayPlans>
 }
 
 export class BillingStore implements StoreIBillingStore {
@@ -24,8 +26,9 @@ export class BillingStore implements StoreIBillingStore {
     workspaceSubscriptionMap: {
         [workspaceSlug: string]: IWorkspaceSubscription
     } = {}
+    razorpayPlans = {} as RazorpayPlans
     // services
-    workspaceService
+    billingService
     // root store
     router
     user
@@ -34,13 +37,15 @@ export class BillingStore implements StoreIBillingStore {
         makeObservable(this, {
             // observables
             workspaceSubscriptionMap: observable,
+            razorpayPlans: observable,
             // computed
             currentWorkspaceSubscription: computed,
             workspaceInvitationLimit: computed,
             // actions
-            fetchWorkspaceSubscriptionInfo: action,
+            fetchWorkspaceSubscription: action,
+            fetchRazorpayPlans: action,
         })
-        this.workspaceService = new WorkspaceService()
+        this.billingService = new BillingService()
         this.router = _rootStore.app.router
         this.user = _rootStore.user
     }
@@ -66,12 +71,24 @@ export class BillingStore implements StoreIBillingStore {
     /**
      * Fetches the current user workspace info
      * @param workspaceSlug
-     * @returns Promise<IWorkspaceMemberMe>
+     * @returns Promise<IWorkspaceSubscription>
      */
-    fetchWorkspaceSubscriptionInfo = async (workspaceSlug: string) =>
-        await this.workspaceService.workspaceSubscription(workspaceSlug).then((response) => {
+    fetchWorkspaceSubscription = async (workspaceSlug: string) =>
+        await this.billingService.fetchWorkspaceSubscription(workspaceSlug).then((response) => {
             runInAction(() => {
                 set(this.workspaceSubscriptionMap, [workspaceSlug], response)
+            })
+            return response
+        })
+
+    /**
+     * Fetches the current user workspace info
+     * @returns Promise<RazorpayPlans>
+     */
+    fetchRazorpayPlans = async (workspaceSlug: string) =>
+        await this.billingService.fetchRazorpayPlans(workspaceSlug).then((response) => {
+            runInAction(() => {
+                this.razorpayPlans = response
             })
             return response
         })
