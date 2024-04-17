@@ -21,6 +21,7 @@ export interface StoreIBillingStore {
     getPlanByName: (name: string) => IRazorpayPlan | undefined
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
+    cancelSubscription: (workspaceSlug: string) => Promise<void>
     fetchRazorpayPlans: (workspaceSlug: string) => Promise<IRazorpayPlans>
     createRazorpaySubscription: (workspaceSlug: string, planName: string) => Promise<IRazorpaySubscription>
 }
@@ -48,6 +49,7 @@ export class BillingStore implements StoreIBillingStore {
             // actions
             fetchWorkspaceSubscription: action,
             fetchRazorpayPlans: action,
+            cancelSubscription: action,
             createRazorpaySubscription: action,
         })
         this.billingService = new BillingService()
@@ -120,4 +122,11 @@ export class BillingStore implements StoreIBillingStore {
         if (!plan) throw new Error("Plan not found")
         return await this.billingService.createRazorpaySubscription(workspaceSlug, plan.id)
     }
+
+    /**
+     * Cancel the current subscription
+     * @param workspaceSlug
+     * @returns Promise<void>
+     */
+    cancelSubscription = async (workspaceSlug: string) => await this.billingService.cancelSubscription(workspaceSlug)
 }

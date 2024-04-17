@@ -32,4 +32,12 @@ export class BillingService extends APIService {
                 throw error?.response
             })
     }
+
+    cancelSubscription(workspaceSlug: string): Promise<void> {
+        return this.delete(`/billing/${workspaceSlug}/subscription`)
+            .then(() => {})
+            .catch((error) => {
+                throw error?.response
+            })
+    }
 }

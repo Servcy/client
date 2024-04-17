@@ -27,7 +27,8 @@ export const UpgradePlanModal: FC<Props> = (props) => {
     const { workspaceSlug } = useParams()
     const [isInrSelected, setIsInrSelected] = useState(true)
     const [isInitiating, setIsInitiating] = useState("")
-    const { fetchRazorpayPlans, createRazorpaySubscription, currentWorkspaceSubscription } = useBilling()
+    const { fetchRazorpayPlans, createRazorpaySubscription, cancelSubscription, currentWorkspaceSubscription } =
+        useBilling()
     // fetching razorpay plans
     useSWR(
         workspaceSlug ? `RAZORPAY_PLANS_${workspaceSlug}` : null,
@@ -163,6 +164,18 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                                 : `Upgrade To ${plan.name}`}
                                                         </span>
                                                     </Button>
+                                                </div>
+                                                <div className="h-4 flex justify-end">
+                                                    {currentWorkspaceSubscription?.plan_details.name === plan.name && (
+                                                        <Button
+                                                            variant="link-danger"
+                                                            className="p-0"
+                                                            size="sm"
+                                                            onClick={() => cancelSubscription(workspaceSlug.toString())}
+                                                        >
+                                                            <span className="underline">cancel subscription</span>
+                                                        </Button>
+                                                    )}
                                                 </div>
                                                 {plan.differentiators.map((diff) => (
                                                     <div className="my-2 flex text-sm" key={diff}>
