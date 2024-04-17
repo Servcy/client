@@ -24,4 +24,12 @@ export class BillingService extends APIService {
                 throw error?.response
             })
     }
+
+    async createRazorpaySubscription(workspaceSlug: string, planId: string): Promise<any> {
+        return this.post(`/billing/${workspaceSlug}/razorpay`, { planId })
+            .then((response) => response?.data)
+            .catch((error) => {
+                throw error?.response
+            })
+    }
 }

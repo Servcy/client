@@ -22,6 +22,7 @@ export interface StoreIBillingStore {
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
     fetchRazorpayPlans: (workspaceSlug: string) => Promise<IRazorpayPlans>
+    initiateSubscription: (workspaceSlug: string, planName: string) => Promise<any>
 }
 
 export class BillingStore implements StoreIBillingStore {
@@ -47,6 +48,7 @@ export class BillingStore implements StoreIBillingStore {
             // actions
             fetchWorkspaceSubscription: action,
             fetchRazorpayPlans: action,
+            initiateSubscription: action,
         })
         this.billingService = new BillingService()
         this.router = _rootStore.app.router
@@ -76,7 +78,11 @@ export class BillingStore implements StoreIBillingStore {
      * @param name
      * @returns IRazorpayPlan | undefined
      */
-    getPlanByName = computedFn((name: string) => this.razorpayPlans.items.find((plan) => plan.item.name === name))
+    getPlanByName = computedFn((name: string) =>
+        this.razorpayPlans.items.find(
+            (plan) => plan.item.name.toString().toLowerCase() === name.toString().toLowerCase()
+        )
+    )
 
     /**
      * Fetches the current user workspace info
@@ -102,4 +108,16 @@ export class BillingStore implements StoreIBillingStore {
             })
             return response
         })
+
+    /**
+     * Initiate the subscription process
+     * @param workspaceSlug
+     * @param planName
+     * @returns Promise<any>
+     */
+    initiateSubscription = async (workspaceSlug: string, planName: string) => {
+        const plan = this.getPlanByName(planName)
+        if (!plan) throw new Error("Plan not found")
+        return await this.billingService.createRazorpaySubscription(workspaceSlug, plan.id)
+    }
 }
