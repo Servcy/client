@@ -22,12 +22,6 @@ export interface StoreIBillingStore {
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
     fetchRazorpayPlans: (workspaceSlug: string) => Promise<IRazorpayPlans>
-    validateRazorpayPayment: (
-        workspaceSlug: string,
-        paymentId: string,
-        signature: string,
-        subscriptionId: string
-    ) => Promise<IRazorpaySubscription>
     createRazorpaySubscription: (workspaceSlug: string, planName: string) => Promise<IRazorpaySubscription>
 }
 
@@ -52,7 +46,6 @@ export class BillingStore implements StoreIBillingStore {
             currentWorkspaceSubscription: computed,
             workspaceInvitationLimit: computed,
             // actions
-            validateRazorpayPayment: action,
             fetchWorkspaceSubscription: action,
             fetchRazorpayPlans: action,
             createRazorpaySubscription: action,
@@ -127,19 +120,4 @@ export class BillingStore implements StoreIBillingStore {
         if (!plan) throw new Error("Plan not found")
         return await this.billingService.createRazorpaySubscription(workspaceSlug, plan.id)
     }
-
-    /**
-     * Validate the razorpay payment
-     * @param workspaceSlug
-     * @param paymentId
-     * @param signature
-     * @param subscriptionId
-     * @returns Promise<IRazorpaySubscription>
-     */
-    validateRazorpayPayment = async (
-        workspaceSlug: string,
-        paymentId: string,
-        signature: string,
-        subscriptionId: string
-    ) => await this.billingService.validateRazorpayPayment(workspaceSlug, paymentId, signature, subscriptionId)
 }
