@@ -1,9 +1,10 @@
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { computedFn } from "mobx-utils"
 
 import { BillingService } from "@services/billing.service"
 
-import { IWorkspaceSubscription, RazorpayPlans } from "@servcy/types"
+import { IRazorpayPlan, IRazorpayPlans, IWorkspaceSubscription } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
@@ -12,13 +13,15 @@ export interface StoreIBillingStore {
     workspaceSubscriptionMap: {
         [workspaceSlug: string]: IWorkspaceSubscription
     }
-    razorpayPlans: RazorpayPlans
+    razorpayPlans: IRazorpayPlans
     // computed
     workspaceInvitationLimit: number
     currentWorkspaceSubscription: IWorkspaceSubscription | null
+    // computed actions
+    getPlanByName: (name: string) => IRazorpayPlan | undefined
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
-    fetchRazorpayPlans: (workspaceSlug: string) => Promise<RazorpayPlans>
+    fetchRazorpayPlans: (workspaceSlug: string) => Promise<IRazorpayPlans>
 }
 
 export class BillingStore implements StoreIBillingStore {
@@ -26,7 +29,7 @@ export class BillingStore implements StoreIBillingStore {
     workspaceSubscriptionMap: {
         [workspaceSlug: string]: IWorkspaceSubscription
     } = {}
-    razorpayPlans = {} as RazorpayPlans
+    razorpayPlans = {} as IRazorpayPlans
     // services
     billingService
     // root store
@@ -69,6 +72,13 @@ export class BillingStore implements StoreIBillingStore {
     }
 
     /**
+     * Returns plan by name
+     * @param name
+     * @returns IRazorpayPlan | undefined
+     */
+    getPlanByName = computedFn((name: string) => this.razorpayPlans.items.find((plan) => plan.item.name === name))
+
+    /**
      * Fetches the current user workspace info
      * @param workspaceSlug
      * @returns Promise<IWorkspaceSubscription>
@@ -83,7 +93,7 @@ export class BillingStore implements StoreIBillingStore {
 
     /**
      * Fetches the current user workspace info
-     * @returns Promise<RazorpayPlans>
+     * @returns Promise<IRazorpayPlans>
      */
     fetchRazorpayPlans = async (workspaceSlug: string) =>
         await this.billingService.fetchRazorpayPlans(workspaceSlug).then((response) => {

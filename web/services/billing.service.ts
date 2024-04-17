@@ -2,7 +2,7 @@ import { APIService } from "@services/api.service"
 
 import { API_BASE_URL } from "@helpers/common.helper"
 
-import { IWorkspaceSubscription, RazorpayPlans } from "@servcy/types"
+import { IRazorpayPlans, IWorkspaceSubscription } from "@servcy/types"
 
 export class BillingService extends APIService {
     constructor() {
@@ -17,7 +17,7 @@ export class BillingService extends APIService {
             })
     }
 
-    async fetchRazorpayPlans(workspaceSlug: string): Promise<RazorpayPlans> {
+    async fetchRazorpayPlans(workspaceSlug: string): Promise<IRazorpayPlans> {
         return this.get(`/billing/${workspaceSlug}/razorpay`)
             .then((response) => response?.data)
             .catch((error) => {

@@ -16,7 +16,7 @@ export interface IWorkspaceSubscription {
     updated_by: string
 }
 
-export interface RazorpayPlanDetails {
+export interface IRazorpayPlanDetails {
     id: string
     active: true
     name: string
@@ -36,7 +36,7 @@ export interface RazorpayPlanDetails {
     updated_at: number
 }
 
-export interface RazorpayPlan {
+export interface IRazorpayPlan {
     id: string
     entity: string
     interval: number
@@ -45,8 +45,8 @@ export interface RazorpayPlan {
     created_at: number
 }
 
-export interface RazorpayPlans {
+export interface IRazorpayPlans {
     entity: string
     count: number
-    items: RazorpayPlan[]
+    items: IRazorpayPlan[]
 }
