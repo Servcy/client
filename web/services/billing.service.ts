@@ -32,4 +32,22 @@ export class BillingService extends APIService {
                 throw error?.response
             })
     }
+
+    async validateRazorpayPayment(
+        workspaceSlug: string,
+        paymentId: string,
+        signature: string,
+        subscriptionId: string
+    ): Promise<IRazorpaySubscription> {
+        return this.patch(`/billing/razorpay`, {
+            workspace_slug: workspaceSlug,
+            payment_id: paymentId,
+            signature,
+            subscription_id: subscriptionId,
+        })
+            .then((response) => response?.data)
+            .catch((error) => {
+                throw error?.response
+            })
+    }
 }
