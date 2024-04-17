@@ -146,7 +146,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         size="sm"
                                                         disabled={
                                                             currentWorkspaceSubscription?.plan_details.name ===
-                                                                plan.name || isInitiating === plan.name
+                                                                plan.name || isInitiating !== ""
                                                         }
                                                         onClick={() => initiateSubscription(plan.name)}
                                                         variant={plan.buttonVariant as TButtonVariant}
