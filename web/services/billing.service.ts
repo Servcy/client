@@ -39,7 +39,7 @@ export class BillingService extends APIService {
         signature: string,
         subscriptionId: string
     ): Promise<IRazorpaySubscription> {
-        return this.patch(`/billing/razorpay`, {
+        return this.patch(`/billing/${workspaceSlug}/razorpay`, {
             workspace_slug: workspaceSlug,
             payment_id: paymentId,
             signature,
