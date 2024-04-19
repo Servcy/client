@@ -37,8 +37,8 @@ export const IssueGithubActivity: FC<TIssueAssigneeActivity> = observer((props) 
                 >
                     {activity.new_value}
                 </a>
-                {showIssue && ` to `}
-                {showIssue && <IssueLink activityId={activityId} />}.
+                {showIssue && activity.verb === "added" && ` to `}
+                {showIssue && activity.verb === "added" && <IssueLink activityId={activityId} />}.
             </>
         </IssueActivityBlockComponent>
     )
