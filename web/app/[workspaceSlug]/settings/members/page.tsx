@@ -12,7 +12,7 @@ import { PageHead } from "@components/core"
 import { WorkspaceSettingHeader } from "@components/headers"
 import { SendWorkspaceInvitationModal, WorkspaceMembersList } from "@components/workspace"
 
-import { useBilling, useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
+import { useApplication, useBilling, useEventTracker, useMember, useUser, useWorkspace } from "@hooks/store"
 
 import { MEMBER_INVITED } from "@constants/event-tracker"
 import { ERoles } from "@constants/iam"
@@ -32,6 +32,9 @@ const WorkspaceMembersSettingsPage = observer(() => {
     const { workspaceSlug } = useParams()
     // store hooks
     const { captureEvent } = useEventTracker()
+    const {
+        commandPalette: { toggleUpgradePlanModal },
+    } = useApplication()
     const {
         membership: { currentWorkspaceRole },
     } = useUser()
@@ -108,6 +111,7 @@ const WorkspaceMembersSettingsPage = observer(() => {
                                 onClick={() => {
                                     const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
                                     if (seatsRemaining <= 0) {
+                                        toggleUpgradePlanModal(true)
                                         return toast.error("Please upgrade your plan to invite more members.")
                                     }
                                     setInviteModal(true)

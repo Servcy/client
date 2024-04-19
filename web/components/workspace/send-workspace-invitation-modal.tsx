@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-import { useBilling, useMember, useUser } from "@hooks/store"
+import { useApplication, useBilling, useMember, useUser } from "@hooks/store"
 
 import { ERoles, ROLES } from "@constants/iam"
 
@@ -47,6 +47,9 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
         workspace: { totalWorkspaceMembers },
     } = useMember()
     const { workspaceInvitationLimit } = useBilling()
+    const {
+        commandPalette: { toggleUpgradePlanModal },
+    } = useApplication()
     // form info
     const {
         control,
@@ -72,6 +75,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
     const appendField = () => {
         const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
         if (fields.length >= seatsRemaining) {
+            toggleUpgradePlanModal(true)
             return toast.error("Please upgrade your plan to invite more members.")
         }
         append({ email: "", role: 1 })
@@ -80,6 +84,7 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
     const onSubmitForm = async (data: FormValues) => {
         const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
         if (fields.length >= seatsRemaining) {
+            toggleUpgradePlanModal(true)
             return toast.error("Please upgrade your plan to invite more members.")
         }
         await onSubmit(data)?.then(() => {
