@@ -27,12 +27,13 @@ export const IssueGithubActivity: FC<TIssueAssigneeActivity> = observer((props) 
             ends={ends}
         >
             <>
-                added a new {activity.comment}
+                {activity.verb}
+                {activity.comment}
                 <a
                     href={activity.old_value}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center font-medium text-custom-text-100 hover:underline capitalize"
+                    className="inline-flex items-center font-medium text-custom-text-100 hover:underline capitalize truncate"
                 >
                     {activity.new_value}
                 </a>
