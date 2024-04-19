@@ -24,7 +24,7 @@ import toast from "react-hot-toast"
 
 import { OnboardingStepIndicator } from "@components/onboarding/step-indicator"
 
-import { useBilling, useEventTracker, useMember } from "@hooks/store"
+import { useEventTracker } from "@hooks/store"
 import useDynamicDropdownPosition from "@hooks/use-dynamic-dropdown"
 
 import { MEMBER_INVITED } from "@constants/event-tracker"
@@ -269,10 +269,6 @@ export const InviteMembers: React.FC<Props> = (props) => {
     // store hooks
     const { captureEvent } = useEventTracker()
     const {
-        workspace: { totalWorkspaceMembers },
-    } = useMember()
-    const { workspaceInvitationLimit } = useBilling()
-    const {
         control,
         watch,
         getValues,
@@ -280,12 +276,10 @@ export const InviteMembers: React.FC<Props> = (props) => {
         handleSubmit,
         formState: { isSubmitting, errors, isValid },
     } = useForm<FormValues>()
-
     const { fields, append, remove } = useFieldArray({
         control,
         name: "emails",
     })
-
     const nextStep = async () => {
         const payload: Partial<TOnboardingSteps> = {
             workspace_invite: true,
@@ -294,16 +288,13 @@ export const InviteMembers: React.FC<Props> = (props) => {
         await stepChange(payload)
         await finishOnboarding()
     }
-
     const onSubmit = async (formData: FormValues) => {
         if (!workspace) return
-        const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
-        if (fields.length >= seatsRemaining) {
-            return toast.error("Please upgrade your plan to invite more members.")
+        if (fields.length >= 5) {
+            return toast.error("You can invite a maximum of 5 members while onboarding.")
         }
         let payload = { ...formData }
         payload = { emails: payload.emails.filter((email) => email.email !== "") }
-
         await workspaceService
             .inviteWorkspace(workspace.slug, {
                 emails: payload.emails.map((email) => ({
@@ -342,9 +333,8 @@ export const InviteMembers: React.FC<Props> = (props) => {
     }
 
     const appendField = () => {
-        const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
-        if (fields.length >= seatsRemaining) {
-            return toast.error("Please upgrade your plan to invite more members.")
+        if (fields.length >= 5) {
+            return toast.error("You can invite a maximum of 5 members while onboarding.")
         }
         append({ email: "", role: ERoles.MEMBER, role_active: false })
     }
