@@ -1,6 +1,8 @@
 import { FC, useEffect } from "react"
 
+import { ClipboardCopy } from "lucide-react"
 import { observer } from "mobx-react"
+import { toast } from "react-hot-toast"
 
 import { TIssueOperations } from "@components/issues"
 
@@ -56,10 +58,20 @@ export const PeekOverviewIssueDetails: FC<IPeekOverviewIssueDetails> = observer(
                 : "<p></p>"
             : undefined
 
+    const copyIssueIdentifierToClipboard = () => {
+        if (!projectDetails?.identifier || !issue?.sequence_id || !navigator || !navigator.clipboard) return
+        navigator.clipboard.writeText(`${projectDetails?.identifier}-${issue?.sequence_id}`)
+        toast.success("Copied Issue Identifier to clipboard")
+    }
+
     return (
         <div className="space-y-2">
             <span className="text-base font-medium text-custom-text-400">
                 {projectDetails?.identifier}-{issue?.sequence_id}
+                <ClipboardCopy
+                    className="inline ml-2 cursor-pointer stroke-custom-text-400 size-4"
+                    onClick={copyIssueIdentifierToClipboard}
+                />
             </span>
             <IssueTitleInput
                 workspaceSlug={workspaceSlug}
