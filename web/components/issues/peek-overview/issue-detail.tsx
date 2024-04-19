@@ -10,6 +10,8 @@ import { TIssueOperations } from "@components/issues"
 import { useIssueDetail, useProject, useUser } from "@hooks/store"
 import useReloadConfirmations from "@hooks/use-reload-confirmation"
 
+import { Tooltip } from "@servcy/ui"
+
 import { IssueDescriptionInput } from "../description-input"
 import { IssueReaction } from "../issue-detail/reactions"
 import { IssueTitleInput } from "../title-input"
@@ -68,10 +70,12 @@ export const PeekOverviewIssueDetails: FC<IPeekOverviewIssueDetails> = observer(
         <div className="space-y-2">
             <span className="text-base font-medium text-custom-text-400">
                 {projectDetails?.identifier}-{issue?.sequence_id}
-                <ClipboardCopy
-                    className="inline ml-2 cursor-pointer stroke-custom-text-400 size-4"
-                    onClick={copyIssueIdentifierToClipboard}
-                />
+                <Tooltip tooltipContent="Copy Issue ID" position="top-left">
+                    <ClipboardCopy
+                        className="inline ml-2 cursor-pointer stroke-custom-text-400 size-4"
+                        onClick={copyIssueIdentifierToClipboard}
+                    />
+                </Tooltip>
             </span>
             <IssueTitleInput
                 workspaceSlug={workspaceSlug}
