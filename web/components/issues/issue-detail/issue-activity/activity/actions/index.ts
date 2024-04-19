@@ -15,7 +15,7 @@ export * from "./label"
 export * from "./link"
 export * from "./attachment"
 export * from "./archived-at"
-
+export * from "./github"
 export * from "./helpers/activity-block"
 export * from "./helpers/issue-user"
 export * from "./helpers/issue-link"

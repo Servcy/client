@@ -12,6 +12,7 @@ import {
     IssueDefaultActivity,
     IssueDescriptionActivity,
     IssueEstimateActivity,
+    IssueGithubActivity,
     IssueLabelActivity,
     IssueLinkActivity,
     IssueModuleActivity,
@@ -75,6 +76,8 @@ export const IssueActivityList: FC<TIssueActivityList> = observer((props) => {
             return <IssueAttachmentActivity {...componentDefaultProps} showIssue={false} />
         case "archived_at":
             return <IssueArchivedAtActivity {...componentDefaultProps} />
+        case "github":
+            return <IssueGithubActivity {...componentDefaultProps} />
         default:
             return <></>
     }
