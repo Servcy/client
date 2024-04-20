@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 
-import { ChevronDown, Dot, XCircle } from "lucide-react"
+import { Briefcase, ChevronDown, Dot, Timer, XCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
@@ -11,10 +11,11 @@ import { ConfirmProjectMemberRemove } from "@components/project"
 
 import { useEventTracker, useMember, useProject, useUser } from "@hooks/store"
 
+import { CURRENCY_CODES } from "@constants/billing"
 import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
 import { ERoles, ROLES } from "@constants/iam"
 
-import { CustomSelect, Tooltip } from "@servcy/ui"
+import { CustomSelect, Input, Tooltip } from "@servcy/ui"
 
 type Props = {
     userId: string
@@ -41,6 +42,20 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
     // derived values
     const isAdmin = currentProjectRole === ERoles.ADMIN
     const userDetails = getProjectMemberDetails(userId)
+    const handleRateChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (Number.isNaN(Number(e.target.value))) return
+        if (!workspaceSlug || !projectId || !userDetails) return
+        updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
+            role: userDetails.role ?? ERoles.MEMBER,
+            rate: e.target.value,
+            currency: userDetails.rate?.currency ?? "USD",
+            per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
+        }).catch((err) => {
+            const error = err.error
+            const errorString = Array.isArray(error) ? error[0] : error
+            toast.error(errorString ?? "An error occurred while updating member cost details. Please try again.")
+        })
+    }
 
     const handleRemove = async () => {
         if (!workspaceSlug || !projectId || !userDetails) return
@@ -111,71 +126,181 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                 </div>
 
                 <div className="flex items-center gap-2 text-xs">
-                    <CustomSelect
-                        customButton={
-                            <div className="item-center flex gap-1 rounded px-2 py-0.5">
-                                <span
-                                    className={`flex items-center rounded text-xs font-medium ${
-                                        userDetails.member.id !== currentUser?.id ? "" : "text-custom-text-400"
-                                    }`}
-                                >
-                                    {ROLES[userDetails.role]}
-                                </span>
-                                {userDetails.member.id !== currentUser?.id && (
-                                    <span className="grid place-items-center">
-                                        <ChevronDown className="h-3 w-3" />
-                                    </span>
-                                )}
-                            </div>
-                        }
-                        value={userDetails.role}
-                        onChange={(value: ERoles) => {
-                            if (!workspaceSlug || !projectId) return
-
-                            updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
-                                role: value,
-                            }).catch((err) => {
-                                const error = err.error
-                                const errorString = Array.isArray(error) ? error[0] : error
-
-                                toast.error(
-                                    errorString ?? "An error occurred while updating member role. Please try again."
-                                )
-                            })
-                        }}
-                        disabled={
-                            userDetails.member.id === currentUser?.id ||
-                            !currentProjectRole ||
-                            currentProjectRole < userDetails.role
-                        }
-                        placement="bottom-end"
-                    >
-                        {Object.keys(ROLES).map((key) => {
-                            if (currentProjectRole !== undefined && !isAdmin && currentProjectRole < parseInt(key))
-                                return null
-
-                            return (
-                                <CustomSelect.Option key={key} value={key}>
-                                    <>{ROLES[parseInt(key) as keyof typeof ROLES]}</>
-                                </CustomSelect.Option>
-                            )
-                        })}
-                    </CustomSelect>
-                    {(isAdmin || userDetails.member.id === currentUser?.id) && (
-                        <Tooltip
-                            tooltipContent={
-                                userDetails.member.id === currentUser?.id ? "Leave project" : "Remove member"
-                            }
-                        >
-                            <button
-                                type="button"
-                                onClick={() => setRemoveMemberModal(true)}
-                                className="pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100"
+                    {!Number.isNaN(userDetails.rate?.rate) && (
+                        <>
+                            <Input
+                                id={`project-member.${userDetails.member.id}.rate`}
+                                type="text"
+                                value={userDetails?.rate?.rate ?? ""}
+                                placeholder="Member cost..."
+                                onChange={handleRateChange}
+                                className="focus:border-blue-400 w-28"
+                            />
+                            <CustomSelect
+                                label={
+                                    <div className="flex items-center gap-1">
+                                        {userDetails?.rate?.currency ?? "USD"}
+                                    </div>
+                                }
+                                value={userDetails?.rate?.currency ?? "USD"}
+                                placement="bottom-start"
+                                noChevron
+                                onChange={(value: string) => {
+                                    if (!workspaceSlug || !projectId) return
+                                    updateMember(
+                                        workspaceSlug.toString(),
+                                        projectId.toString(),
+                                        userDetails.member.id,
+                                        {
+                                            role: userDetails.role ?? ERoles.MEMBER,
+                                            rate: userDetails.rate?.rate ?? "0",
+                                            currency: value,
+                                            per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
+                                        }
+                                    ).catch((err) => {
+                                        const error = err.error
+                                        const errorString = Array.isArray(error) ? error[0] : error
+                                        toast.error(
+                                            errorString ??
+                                                "An error occurred while updating member cost details. Please try again."
+                                        )
+                                    })
+                                }}
+                                input
+                                optionsClassName="w-full"
                             >
-                                <XCircle className="h-3.5 w-3.5 text-red-500" strokeWidth={2} />
-                            </button>
-                        </Tooltip>
+                                {CURRENCY_CODES.map((currency) => (
+                                    <CustomSelect.Option key={currency.code} value={currency.code}>
+                                        <div className="flex items-center gap-2">
+                                            <currency.icon className="h-3.5 w-3.5" />
+                                            <div>{currency.code}</div>
+                                        </div>
+                                    </CustomSelect.Option>
+                                ))}
+                            </CustomSelect>
+                            <CustomSelect
+                                label={
+                                    <div className="flex items-center gap-1">
+                                        {userDetails?.rate?.per_hour_or_per_project ? (
+                                            <Timer className="h-3 w-3" />
+                                        ) : (
+                                            <Briefcase className="h-3 w-3" />
+                                        )}
+                                        {userDetails?.rate?.per_hour_or_per_project ? "Per Hour" : "For Project"}
+                                    </div>
+                                }
+                                value={userDetails?.rate?.per_hour_or_per_project ?? true}
+                                placement="bottom-start"
+                                noChevron
+                                onChange={(value: boolean) => {
+                                    if (!workspaceSlug || !projectId) return
+                                    updateMember(
+                                        workspaceSlug.toString(),
+                                        projectId.toString(),
+                                        userDetails.member.id,
+                                        {
+                                            role: userDetails.role ?? ERoles.MEMBER,
+                                            rate: userDetails.rate?.rate ?? "0",
+                                            per_hour_or_per_project: value,
+                                            currency: userDetails.rate?.currency ?? "USD",
+                                        }
+                                    ).catch((err) => {
+                                        const error = err.error
+                                        const errorString = Array.isArray(error) ? error[0] : error
+                                        toast.error(
+                                            errorString ??
+                                                "An error occurred while updating member cost details. Please try again."
+                                        )
+                                    })
+                                }}
+                                input
+                                className="w-32"
+                            >
+                                <CustomSelect.Option value={true}>
+                                    <div className="flex items-center gap-2">
+                                        <Timer className="h-3.5 w-3.5" />
+                                        <div>Per Hour</div>
+                                    </div>
+                                </CustomSelect.Option>
+                                <CustomSelect.Option value={false}>
+                                    <div className="flex items-center gap-2">
+                                        <Briefcase className="h-3.5 w-3.5" />
+                                        <div>For Project</div>
+                                    </div>
+                                </CustomSelect.Option>
+                            </CustomSelect>
+                        </>
                     )}
+                    <div className="w-20 flex gap-2">
+                        <CustomSelect
+                            customButton={
+                                <div className="item-center flex gap-1 rounded px-2 py-0.5">
+                                    <span
+                                        className={`flex items-center rounded text-xs font-medium ${
+                                            userDetails.member.id !== currentUser?.id ? "" : "text-custom-text-400"
+                                        }`}
+                                    >
+                                        {ROLES[userDetails.role]}
+                                    </span>
+                                    {userDetails.member.id !== currentUser?.id && (
+                                        <span className="grid place-items-center">
+                                            <ChevronDown className="h-3 w-3" />
+                                        </span>
+                                    )}
+                                </div>
+                            }
+                            value={userDetails.role}
+                            onChange={(value: ERoles) => {
+                                if (!workspaceSlug || !projectId) return
+
+                                updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
+                                    role: value,
+                                    rate: userDetails.rate?.rate ?? "0",
+                                    per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
+                                    currency: userDetails.rate?.currency ?? "USD",
+                                }).catch((err) => {
+                                    const error = err.error
+                                    const errorString = Array.isArray(error) ? error[0] : error
+
+                                    toast.error(
+                                        errorString ?? "An error occurred while updating member role. Please try again."
+                                    )
+                                })
+                            }}
+                            disabled={
+                                userDetails.member.id === currentUser?.id ||
+                                !currentProjectRole ||
+                                currentProjectRole < userDetails.role
+                            }
+                            placement="bottom-end"
+                        >
+                            {Object.keys(ROLES).map((key) => {
+                                if (currentProjectRole !== undefined && !isAdmin && currentProjectRole < parseInt(key))
+                                    return null
+
+                                return (
+                                    <CustomSelect.Option key={key} value={key}>
+                                        <>{ROLES[parseInt(key) as keyof typeof ROLES]}</>
+                                    </CustomSelect.Option>
+                                )
+                            })}
+                        </CustomSelect>
+                        {(isAdmin || userDetails.member.id === currentUser?.id) && (
+                            <Tooltip
+                                tooltipContent={
+                                    userDetails.member.id === currentUser?.id ? "Leave project" : "Remove member"
+                                }
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => setRemoveMemberModal(true)}
+                                    className="pointer-events-none opacity-0 group-hover:pointer-events-auto group-hover:opacity-100"
+                                >
+                                    <XCircle className="h-3.5 w-3.5 text-red-500" strokeWidth={2} />
+                                </button>
+                            </Tooltip>
+                        )}
+                    </div>
                 </div>
             </div>
         </>

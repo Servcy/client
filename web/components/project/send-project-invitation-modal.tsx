@@ -357,7 +357,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                                 {...field}
                                                                                 label={
                                                                                     <div className="flex items-center gap-1">
-                                                                                        {field.value ?? "Per Project"}
+                                                                                        {field.value ?? "USD"}
                                                                                     </div>
                                                                                 }
                                                                                 placement="bottom-start"

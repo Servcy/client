@@ -11,7 +11,13 @@ import { IRouterStore } from "@store/application/router.store"
 import { RootStore } from "@store/root.store"
 import { IUserRootStore } from "@store/user"
 
-import { IProjectBulkAddFormData, IProjectMember, IProjectMembership, IUserLite } from "@servcy/types"
+import {
+    IProjectBulkAddFormData,
+    IProjectMember,
+    IProjectMemberRate,
+    IProjectMembership,
+    IUserLite,
+} from "@servcy/types"
 
 import { IMemberRootStore } from "."
 
@@ -19,6 +25,7 @@ interface IProjectMemberDetails {
     id: string
     member: IUserLite
     role: ERoles
+    rate?: IProjectMemberRate
 }
 
 export interface IProjectMemberStore {
@@ -44,7 +51,12 @@ export interface IProjectMemberStore {
         workspaceSlug: string,
         projectId: string,
         userId: string,
-        data: { role: ERoles }
+        data: {
+            role: ERoles
+            rate: string
+            currency: string
+            per_hour_or_per_project: boolean
+        }
     ) => Promise<IProjectMember>
     removeMemberFromProject: (workspaceSlug: string, projectId: string, userId: string) => Promise<void>
 }
@@ -119,6 +131,7 @@ export class ProjectMemberStore implements IProjectMemberStore {
             id: projectMember.id,
             role: projectMember.role,
             member: this.memberRoot?.memberMap?.[projectMember.member],
+            rate: projectMember?.rate,
         }
         return memberDetails
     })
@@ -185,14 +198,27 @@ export class ProjectMemberStore implements IProjectMemberStore {
      * @param userId
      * @param data
      */
-    updateMember = async (workspaceSlug: string, projectId: string, userId: string, data: { role: ERoles }) => {
+    updateMember = async (
+        workspaceSlug: string,
+        projectId: string,
+        userId: string,
+        data: { role: ERoles; rate: string; currency: string; per_hour_or_per_project: boolean }
+    ) => {
         const memberDetails = this.getProjectMemberDetails(userId)
         if (!memberDetails) throw new Error("Member not found")
         // original data to revert back in case of error
         const originalProjectMemberData = this.projectMemberMap?.[projectId]?.[userId]
         try {
             runInAction(() => {
-                set(this.projectMemberMap, [projectId, userId, "role"], data.role)
+                set(this.projectMemberMap, [projectId, userId], {
+                    ...originalProjectMemberData,
+                    role: data.role,
+                    rate: {
+                        rate: data.rate,
+                        currency: data.currency,
+                        per_hour_or_per_project: data.per_hour_or_per_project,
+                    },
+                })
             })
             const response = await this.projectMemberService.updateProjectMember(
                 workspaceSlug,
