@@ -7,11 +7,11 @@ import toast from "react-hot-toast"
 import { ImagePickerPopover } from "@components/core"
 import EmojiIconPicker from "@components/emoji-icon-picker"
 
-import { useEventTracker, useProject } from "@hooks/store"
+import { useEventTracker, useProject, useUser } from "@hooks/store"
 
 import { CURRENCY_CODES } from "@constants/billing"
 import { PROJECT_UPDATED } from "@constants/event-tracker"
-import { ACCESS_CHOICES, EAccess } from "@constants/iam"
+import { ACCESS_CHOICES, EAccess, ERoles } from "@constants/iam"
 
 import { ProjectService } from "@services/project"
 
@@ -32,6 +32,9 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
     const { project, workspaceSlug, projectId, isAdmin } = props
     // states
     const [isLoading, setIsLoading] = useState(false)
+    const {
+        membership: { currentProjectRole },
+    } = useUser()
     // store hooks
     const { captureProjectEvent } = useEventTracker()
     const { updateProject } = useProject()
@@ -110,12 +113,12 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
         setIsLoading(true)
         const payload: Partial<IProject> = {
             name: formData.name,
-            budget: formData.budget,
             access: formData.access,
             identifier: formData.identifier,
             description: formData.description,
             cover_image: formData.cover_image,
         }
+        if (currentProjectRole === ERoles.ADMIN) payload.budget = formData.budget
         if (typeof formData.emoji_and_icon === "object") {
             payload.emoji = null
             payload.icon_prop = formData.emoji_and_icon
@@ -324,67 +327,69 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                         />
                     </div>
                 </div>
-                <div className="flex relative flex-col gap-1">
-                    <h4 className="text-sm">Project Budget</h4>
-                    <Controller
-                        control={control}
-                        name="budget.amount"
-                        render={({ field: { value, onChange, ref } }) => (
-                            <Input
-                                id="budget-amount"
-                                name="budget.amount"
-                                type="text"
-                                ref={ref}
-                                value={value}
-                                onChange={handleBudgetChange(onChange, true)}
-                                hasError={Boolean(errors.budget)}
-                                className="rounded-md !p-3 font-medium"
-                                placeholder="Project budget..."
-                                disabled={!isAdmin}
-                            />
-                        )}
-                    />
-                    <div className="absolute top-[26px] right-[6px]">
+                {currentProjectRole === ERoles.ADMIN && (
+                    <div className="flex relative flex-col gap-1">
+                        <h4 className="text-sm">Project Budget</h4>
                         <Controller
-                            name="budget.currency"
                             control={control}
-                            render={({ field: { onChange, value } }) => (
-                                <div className="flex-shrink-0">
-                                    <CustomSelect
-                                        value={value ?? "USD"}
-                                        onChange={handleBudgetChange(onChange, false)}
-                                        label={
-                                            <div className="flex items-center gap-1">
-                                                {currentCurrency ? (
-                                                    <>
-                                                        <currentCurrency.icon className="h-3 w-3" />
-                                                        {currentCurrency.code}
-                                                    </>
-                                                ) : (
-                                                    <span className="text-custom-text-400">Select Currency</span>
-                                                )}
-                                            </div>
-                                        }
-                                        placement="bottom-start"
-                                        noChevron
-                                        buttonClassName="!border-custom-border-200 !shadow-none font-medium rounded-md"
-                                        input
-                                        disabled={!isAdmin}
-                                    >
-                                        {CURRENCY_CODES.map((currency) => (
-                                            <CustomSelect.Option key={currency.code} value={currency.code}>
-                                                <div className="flex items-center gap-2">
-                                                    <currency.icon className="h-3.5 w-3.5" />
-                                                    <div>{currency.code}</div>
-                                                </div>
-                                            </CustomSelect.Option>
-                                        ))}
-                                    </CustomSelect>
-                                </div>
+                            name="budget.amount"
+                            render={({ field: { value, onChange, ref } }) => (
+                                <Input
+                                    id="budget-amount"
+                                    name="budget.amount"
+                                    type="text"
+                                    ref={ref}
+                                    value={value}
+                                    onChange={handleBudgetChange(onChange, true)}
+                                    hasError={Boolean(errors.budget)}
+                                    className="rounded-md !p-3 font-medium"
+                                    placeholder="Project budget..."
+                                    disabled={!isAdmin}
+                                />
                             )}
                         />
+                        <div className="absolute top-[26px] right-[6px]">
+                            <Controller
+                                name="budget.currency"
+                                control={control}
+                                render={({ field: { onChange, value } }) => (
+                                    <div className="flex-shrink-0">
+                                        <CustomSelect
+                                            value={value ?? "USD"}
+                                            onChange={handleBudgetChange(onChange, false)}
+                                            label={
+                                                <div className="flex items-center gap-1">
+                                                    {currentCurrency ? (
+                                                        <>
+                                                            <currentCurrency.icon className="h-3 w-3" />
+                                                            {currentCurrency.code}
+                                                        </>
+                                                    ) : (
+                                                        <span className="text-custom-text-400">Select Currency</span>
+                                                    )}
+                                                </div>
+                                            }
+                                            placement="bottom-start"
+                                            noChevron
+                                            buttonClassName="!border-custom-border-200 !shadow-none font-medium rounded-md"
+                                            input
+                                            disabled={!isAdmin}
+                                        >
+                                            {CURRENCY_CODES.map((currency) => (
+                                                <CustomSelect.Option key={currency.code} value={currency.code}>
+                                                    <div className="flex items-center gap-2">
+                                                        <currency.icon className="h-3.5 w-3.5" />
+                                                        <div>{currency.code}</div>
+                                                    </div>
+                                                </CustomSelect.Option>
+                                            ))}
+                                        </CustomSelect>
+                                    </div>
+                                )}
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className="flex items-center justify-between py-2">
                     <>
                         <Button variant="primary" type="submit" loading={isLoading} disabled={!isAdmin}>

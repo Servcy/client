@@ -100,7 +100,6 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
     const projectBudget = watch("budget")
     const currentAccess = ACCESS_CHOICES.find((n) => n.key === watch("access"))
     const currentCurrency = CURRENCY_CODES.find((n) => n.code === projectBudget?.currency)
-
     if (isOpen && currentWorkspaceRole !== undefined && currentWorkspaceRole < ERoles.MEMBER)
         return <IsGuestCondition onClose={onClose} />
 
@@ -329,72 +328,76 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                     )}
                                                 />
                                             </div>
-                                            <div className="md:col-span-4 relative">
-                                                <Controller
-                                                    control={control}
-                                                    name="budget.amount"
-                                                    render={({ field: { value, onChange } }) => (
-                                                        <Input
-                                                            id="budget-amount"
-                                                            name="budget.amount"
-                                                            type="text"
-                                                            value={value}
-                                                            onChange={handleBudgetChange(onChange, true)}
-                                                            hasError={Boolean(errors.budget)}
-                                                            placeholder="Project budget..."
-                                                            className="w-full focus:border-blue-400"
-                                                            tabIndex={8}
-                                                        />
-                                                    )}
-                                                />
-                                                <span className="text-xs text-red-500">{errors?.budget?.message}</span>
-                                                <div className="absolute right-[10px] top-[5px]">
+                                            {currentWorkspaceRole === ERoles.ADMIN && (
+                                                <div className="md:col-span-4 relative">
                                                     <Controller
-                                                        name="budget.currency"
                                                         control={control}
-                                                        render={({ field: { onChange, value } }) => (
-                                                            <div tabIndex={9} className="flex-shrink-0">
-                                                                <CustomSelect
-                                                                    value={value}
-                                                                    onChange={handleBudgetChange(onChange, false)}
-                                                                    label={
-                                                                        <div className="flex items-center gap-1">
-                                                                            {currentCurrency ? (
-                                                                                <>
-                                                                                    <currentCurrency.icon className="h-3 w-3" />
-                                                                                    {currentCurrency.code}
-                                                                                </>
-                                                                            ) : (
-                                                                                <span className="text-custom-text-400">
-                                                                                    Select Currency
-                                                                                </span>
-                                                                            )}
-                                                                        </div>
-                                                                    }
-                                                                    placement="bottom-start"
-                                                                    noChevron
-                                                                    tabIndex={9}
-                                                                >
-                                                                    {CURRENCY_CODES.map((currency) => (
-                                                                        <CustomSelect.Option
-                                                                            key={currency.code}
-                                                                            value={currency.code}
-                                                                        >
-                                                                            <div className="flex items-center gap-2">
-                                                                                <currency.icon className="h-3.5 w-3.5" />
-                                                                                <div>{currency.code}</div>
-                                                                            </div>
-                                                                        </CustomSelect.Option>
-                                                                    ))}
-                                                                </CustomSelect>
-                                                            </div>
+                                                        name="budget.amount"
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <Input
+                                                                id="budget-amount"
+                                                                name="budget.amount"
+                                                                type="text"
+                                                                value={value}
+                                                                onChange={handleBudgetChange(onChange, true)}
+                                                                hasError={Boolean(errors.budget)}
+                                                                placeholder="Project budget..."
+                                                                className="w-full focus:border-blue-400"
+                                                                tabIndex={8}
+                                                            />
                                                         )}
                                                     />
                                                     <span className="text-xs text-red-500">
                                                         {errors?.budget?.message}
                                                     </span>
+                                                    <div className="absolute right-[10px] top-[5px]">
+                                                        <Controller
+                                                            name="budget.currency"
+                                                            control={control}
+                                                            render={({ field: { onChange, value } }) => (
+                                                                <div tabIndex={9} className="flex-shrink-0">
+                                                                    <CustomSelect
+                                                                        value={value}
+                                                                        onChange={handleBudgetChange(onChange, false)}
+                                                                        label={
+                                                                            <div className="flex items-center gap-1">
+                                                                                {currentCurrency ? (
+                                                                                    <>
+                                                                                        <currentCurrency.icon className="h-3 w-3" />
+                                                                                        {currentCurrency.code}
+                                                                                    </>
+                                                                                ) : (
+                                                                                    <span className="text-custom-text-400">
+                                                                                        Select Currency
+                                                                                    </span>
+                                                                                )}
+                                                                            </div>
+                                                                        }
+                                                                        placement="bottom-start"
+                                                                        noChevron
+                                                                        tabIndex={9}
+                                                                    >
+                                                                        {CURRENCY_CODES.map((currency) => (
+                                                                            <CustomSelect.Option
+                                                                                key={currency.code}
+                                                                                value={currency.code}
+                                                                            >
+                                                                                <div className="flex items-center gap-2">
+                                                                                    <currency.icon className="h-3.5 w-3.5" />
+                                                                                    <div>{currency.code}</div>
+                                                                                </div>
+                                                                            </CustomSelect.Option>
+                                                                        ))}
+                                                                    </CustomSelect>
+                                                                </div>
+                                                            )}
+                                                        />
+                                                        <span className="text-xs text-red-500">
+                                                            {errors?.budget?.message}
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            )}
                                         </div>
                                         <div className="flex flex-wrap items-center gap-2">
                                             <Controller
