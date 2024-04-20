@@ -112,10 +112,18 @@ export interface IProjectMember {
     updated_by: string
 }
 
+export interface IProjectMemberRate {
+    id?: string
+    rate?: string
+    currency?: string
+    per_hour_or_per_project?: boolean
+}
+
 export interface IProjectMembership {
     id: string
     member: string
     role: ERoles
+    rate?: IProjectMemberRate
 }
 
 export interface IProjectBulkAddFormData {
