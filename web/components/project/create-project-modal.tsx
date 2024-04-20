@@ -12,6 +12,7 @@ import EmojiIconPicker from "@components/emoji-icon-picker"
 
 import { useEventTracker, useProject, useUser } from "@hooks/store"
 
+import { CURRENCY_CODES } from "@constants/billing"
 import { PROJECT_CREATED } from "@constants/event-tracker"
 import { ACCESS_CHOICES, ERoles } from "@constants/iam"
 import { PROJECT_UNSPLASH_COVERS } from "@constants/project"
@@ -47,6 +48,10 @@ export interface ICreateProjectForm {
     emoji_and_icon: string
     access: number
     lead_member: string
+    budget: {
+        amount: string
+        currency: string
+    }
     lead: string
     cover_image: string
     icon_prop: any
@@ -63,8 +68,6 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
     const { createProject } = useProject()
     // states
     const [isChangeInIdentifierRequired, setIsChangeInIdentifierRequired] = useState(true)
-    // toast
-
     // form info
     const cover_image = PROJECT_UNSPLASH_COVERS[Math.floor(Math.random() * PROJECT_UNSPLASH_COVERS.length)]
     const {
@@ -82,12 +85,18 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
             identifier: "",
             name: "",
             access: 0,
+            budget: {
+                amount: "",
+                currency: "USD",
+            },
             lead: undefined,
         },
         reValidateMode: "onChange",
     })
 
+    const projectBudget = watch("budget")
     const currentAccess = ACCESS_CHOICES.find((n) => n.key === watch("access"))
+    const currentCurrency = CURRENCY_CODES.find((n) => n.code === projectBudget?.currency)
 
     if (isOpen && currentWorkspaceRole !== undefined && currentWorkspaceRole < ERoles.MEMBER)
         return <IsGuestCondition onClose={onClose} />
@@ -144,6 +153,14 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
         const alphanumericValue = value.replace(/[^ÇŞĞIİÖÜA-Za-z0-9]/g, "")
         setIsChangeInIdentifierRequired(false)
         onChange(alphanumericValue)
+    }
+
+    const handleBudgetChange = (onChange: any, isAmount: boolean) => (e: ChangeEvent<HTMLInputElement>) => {
+        if (isAmount && Number.isNaN(Number(e.target.value))) return
+        onChange({
+            amount: isAmount ? Number(e.target.value) : projectBudget.amount,
+            currency: isAmount ? projectBudget.currency : e,
+        })
     }
 
     return (
@@ -310,8 +327,73 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                     )}
                                                 />
                                             </div>
+                                            <div className="md:col-span-4 relative">
+                                                <Controller
+                                                    control={control}
+                                                    name="budget"
+                                                    render={({ field: { value, onChange } }) => (
+                                                        <Input
+                                                            id="budget_amount"
+                                                            name="budget_amount"
+                                                            type="text"
+                                                            value={value.amount}
+                                                            onChange={handleBudgetChange(onChange, true)}
+                                                            hasError={Boolean(errors.budget)}
+                                                            placeholder="Project budget..."
+                                                            className="w-full focus:border-blue-400"
+                                                            tabIndex={8}
+                                                        />
+                                                    )}
+                                                />
+                                                <span className="text-xs text-red-500">{errors?.budget?.message}</span>
+                                                <div className="absolute right-[10px] top-[5px]">
+                                                    <Controller
+                                                        name="budget"
+                                                        control={control}
+                                                        render={({ field: { onChange, value } }) => (
+                                                            <div tabIndex={9} className="flex-shrink-0 h-8">
+                                                                <CustomSelect
+                                                                    value={value.currency}
+                                                                    onChange={handleBudgetChange(onChange, false)}
+                                                                    label={
+                                                                        <div className="flex items-center gap-1">
+                                                                            {currentCurrency ? (
+                                                                                <>
+                                                                                    <currentCurrency.icon className="h-3 w-3" />
+                                                                                    {currentCurrency.code}
+                                                                                </>
+                                                                            ) : (
+                                                                                <span className="text-custom-text-400">
+                                                                                    Select Currency
+                                                                                </span>
+                                                                            )}
+                                                                        </div>
+                                                                    }
+                                                                    placement="bottom-start"
+                                                                    noChevron
+                                                                    tabIndex={9}
+                                                                >
+                                                                    {CURRENCY_CODES.map((currency) => (
+                                                                        <CustomSelect.Option
+                                                                            key={currency.code}
+                                                                            value={currency.code}
+                                                                        >
+                                                                            <div className="flex items-center gap-2">
+                                                                                <currency.icon className="h-3.5 w-3.5" />
+                                                                                <div>{currency.code}</div>
+                                                                            </div>
+                                                                        </CustomSelect.Option>
+                                                                    ))}
+                                                                </CustomSelect>
+                                                            </div>
+                                                        )}
+                                                    />
+                                                    <span className="text-xs text-red-500">
+                                                        {errors?.budget?.message}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-
                                         <div className="flex flex-wrap items-center gap-2">
                                             <Controller
                                                 name="access"

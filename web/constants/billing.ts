@@ -1,4 +1,4 @@
-import { Flame, Gem, Sparkles } from "lucide-react"
+import { BadgeDollarSign, BadgeIndianRupee, Flame, Gem, Sparkles } from "lucide-react"
 
 export const offerings = [
     { text: "Unlimited Projects" },
@@ -45,3 +45,8 @@ export const plans = {
         usdPrice: "249",
     },
 }
+
+export const CURRENCY_CODES = [
+    { code: "USD", icon: BadgeDollarSign },
+    { code: "INR", icon: BadgeIndianRupee },
+]
