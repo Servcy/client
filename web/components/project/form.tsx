@@ -112,6 +112,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
         setIsLoading(true)
         const payload: Partial<IProject> = {
             name: formData.name,
+            budget: formData.budget,
             access: formData.access,
             identifier: formData.identifier,
             description: formData.description,
