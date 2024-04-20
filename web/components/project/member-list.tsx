@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useSearchParams } from "next/navigation"
+
+import { useEffect, useState } from "react"
 
 import { Search } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -11,6 +13,7 @@ import { useEventTracker, useMember } from "@hooks/store"
 import { Button } from "@servcy/ui"
 
 export const ProjectMemberList: React.FC = observer(() => {
+    const searchParams = useSearchParams()
     // states
     const [inviteModal, setInviteModal] = useState(false)
     const [searchQuery, setSearchQuery] = useState("")
@@ -30,6 +33,10 @@ export const ProjectMemberList: React.FC = observer(() => {
 
         return displayName?.includes(searchQuery.toLowerCase()) || fullName.includes(searchQuery.toLowerCase())
     })
+
+    useEffect(() => {
+        if (searchParams.has("openAddMember")) setInviteModal(true)
+    }, [searchParams])
 
     return (
         <>

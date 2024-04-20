@@ -1,3 +1,5 @@
+import { useRouter } from "next/navigation"
+
 import { ChangeEvent, FC, Fragment, useEffect, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
@@ -59,6 +61,7 @@ export interface ICreateProjectForm {
 }
 
 export const CreateProjectModal: FC<Props> = observer((props) => {
+    const router = useRouter()
     const { isOpen, onClose, workspaceSlug } = props
     // store
     const { captureProjectEvent } = useEventTracker()
@@ -129,6 +132,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                     payload: newPayload,
                 })
                 toast.success("Project created successfully.")
+                router.push(`/${workspaceSlug}/projects/${res.id}/settings/members?openAddMember=true`)
                 handleClose()
             })
             .catch((err) => {
