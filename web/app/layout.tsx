@@ -4,8 +4,6 @@ import Head from "next/head"
 import { useParams } from "next/navigation"
 import Script from "next/script"
 
-import Blocked from "@components/shared/blocked"
-
 import "@styles/global.css"
 
 import { FC, PropsWithChildren, Suspense } from "react"
@@ -27,8 +25,6 @@ import { THEMES } from "@constants/themes"
 
 import StoreWrapper from "@wrappers/store/StoreWrapper"
 
-import { isMobileDevice } from "@helpers/common.helper"
-
 const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     const {
         currentUser,
@@ -36,13 +32,6 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
     } = useUser()
     const { workspaceSlug } = useParams()
     const { currentWorkspace } = useWorkspace()
-    if (typeof window !== "undefined" && navigator && isMobileDevice(navigator.userAgent)) {
-        return (
-            <div className="flex h-screen justify-center">
-                <Blocked />
-            </div>
-        )
-    }
     return (
         <html lang="en">
             <Head>
