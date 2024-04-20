@@ -102,10 +102,8 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
     }
     const handleBudgetChange = (onChange: any, isAmount: boolean) => (e: ChangeEvent<HTMLInputElement>) => {
         if (isAmount && Number.isNaN(Number(e.target.value))) return
-        onChange({
-            amount: isAmount ? Number(e.target.value) : projectBudget?.amount,
-            currency: isAmount ? projectBudget?.currency : e,
-        })
+        if (isAmount) onChange(e.target.value)
+        else onChange(e)
     }
     const onSubmit = async (formData: IProject) => {
         if (!workspaceSlug) return
@@ -330,14 +328,14 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                     <h4 className="text-sm">Project Budget</h4>
                     <Controller
                         control={control}
-                        name="budget"
+                        name="budget.amount"
                         render={({ field: { value, onChange, ref } }) => (
                             <Input
-                                id="budget_amount"
-                                name="budget_amount"
+                                id="budget-amount"
+                                name="budget.amount"
                                 type="text"
                                 ref={ref}
-                                value={value?.amount ?? ""}
+                                value={value}
                                 onChange={handleBudgetChange(onChange, true)}
                                 hasError={Boolean(errors.budget)}
                                 className="rounded-md !p-3 font-medium"
@@ -348,12 +346,12 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                     />
                     <div className="absolute top-[26px] right-[6px]">
                         <Controller
-                            name="budget"
+                            name="budget.currency"
                             control={control}
                             render={({ field: { onChange, value } }) => (
                                 <div className="flex-shrink-0">
                                     <CustomSelect
-                                        value={value?.currency ?? "USD"}
+                                        value={value ?? "USD"}
                                         onChange={handleBudgetChange(onChange, false)}
                                         label={
                                             <div className="flex items-center gap-1">

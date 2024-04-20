@@ -161,10 +161,8 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
 
     const handleBudgetChange = (onChange: any, isAmount: boolean) => (e: ChangeEvent<HTMLInputElement>) => {
         if (isAmount && Number.isNaN(Number(e.target.value))) return
-        onChange({
-            amount: isAmount ? Number(e.target.value) : projectBudget.amount,
-            currency: isAmount ? projectBudget.currency : e,
-        })
+        if (isAmount) onChange(e.target.value)
+        else onChange(e)
     }
 
     return (
@@ -334,13 +332,13 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                             <div className="md:col-span-4 relative">
                                                 <Controller
                                                     control={control}
-                                                    name="budget"
+                                                    name="budget.amount"
                                                     render={({ field: { value, onChange } }) => (
                                                         <Input
-                                                            id="budget_amount"
-                                                            name="budget_amount"
+                                                            id="budget-amount"
+                                                            name="budget.amount"
                                                             type="text"
-                                                            value={value.amount}
+                                                            value={value}
                                                             onChange={handleBudgetChange(onChange, true)}
                                                             hasError={Boolean(errors.budget)}
                                                             placeholder="Project budget..."
@@ -352,12 +350,12 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                 <span className="text-xs text-red-500">{errors?.budget?.message}</span>
                                                 <div className="absolute right-[10px] top-[5px]">
                                                     <Controller
-                                                        name="budget"
+                                                        name="budget.currency"
                                                         control={control}
                                                         render={({ field: { onChange, value } }) => (
                                                             <div tabIndex={9} className="flex-shrink-0">
                                                                 <CustomSelect
-                                                                    value={value.currency}
+                                                                    value={value}
                                                                     onChange={handleBudgetChange(onChange, false)}
                                                                     label={
                                                                         <div className="flex items-center gap-1">
