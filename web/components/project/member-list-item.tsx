@@ -31,7 +31,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
     // store hooks
     const {
         currentUser,
-        membership: { currentProjectRole, leaveProject },
+        membership: { currentProjectRole, currentWorkspaceRole, leaveProject },
     } = useUser()
     const { fetchProjects } = useProject()
     const {
@@ -126,7 +126,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                 </div>
 
                 <div className="flex items-center gap-2 text-xs">
-                    {!Number.isNaN(userDetails.rate?.rate) && (
+                    {!Number.isNaN(userDetails.rate?.rate) && currentWorkspaceRole === ERoles.ADMIN && (
                         <>
                             <Input
                                 id={`project-member.${userDetails.member.id}.rate`}

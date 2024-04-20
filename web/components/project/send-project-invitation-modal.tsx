@@ -53,7 +53,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
     // store hooks
     const { captureEvent } = useEventTracker()
     const {
-        membership: { currentProjectRole },
+        membership: { currentProjectRole, currentWorkspaceRole },
     } = useUser()
     const {
         project: { projectMemberIds, bulkAddMembersToProject },
@@ -322,7 +322,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                 </span>
                                                             )}
                                                         </div>
-                                                        {currentProjectRole === ERoles.ADMIN && (
+                                                        {currentWorkspaceRole === ERoles.ADMIN && (
                                                             <div className="relative flex w-full flex-col gap-1">
                                                                 <Controller
                                                                     name={`members.${index}.rate`}

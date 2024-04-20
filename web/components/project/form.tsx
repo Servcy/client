@@ -33,7 +33,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
     // states
     const [isLoading, setIsLoading] = useState(false)
     const {
-        membership: { currentProjectRole },
+        membership: { currentWorkspaceRole },
     } = useUser()
     // store hooks
     const { captureProjectEvent } = useEventTracker()
@@ -118,7 +118,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
             description: formData.description,
             cover_image: formData.cover_image,
         }
-        if (currentProjectRole === ERoles.ADMIN) payload.budget = formData.budget
+        if (currentWorkspaceRole === ERoles.ADMIN) payload.budget = formData.budget
         if (typeof formData.emoji_and_icon === "object") {
             payload.emoji = null
             payload.icon_prop = formData.emoji_and_icon
@@ -327,7 +327,7 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                         />
                     </div>
                 </div>
-                {currentProjectRole === ERoles.ADMIN && (
+                {currentWorkspaceRole === ERoles.ADMIN && (
                     <div className="flex relative flex-col gap-1">
                         <h4 className="text-sm">Project Budget</h4>
                         <Controller
