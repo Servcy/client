@@ -348,7 +348,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                         {errors.members[index]?.rate?.message}
                                                                     </span>
                                                                 )}
-                                                                <div className="absolute right-[90px]">
+                                                                <div className="absolute right-0 w-14">
                                                                     <Controller
                                                                         name={`members.${index}.currency`}
                                                                         control={control}
@@ -389,7 +389,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                             </span>
                                                                         )}
                                                                 </div>
-                                                                <div className="absolute right-0">
+                                                                <div className="absolute right-[56px]">
                                                                     <Controller
                                                                         name={`members.${index}.per_hour_or_per_project`}
                                                                         control={control}
@@ -405,7 +405,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                                         )}
                                                                                         {field.value
                                                                                             ? "Per Hour"
-                                                                                            : "Per Project"}
+                                                                                            : "For Project"}
                                                                                     </div>
                                                                                 }
                                                                                 placement="bottom-start"
@@ -421,7 +421,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                                 <CustomSelect.Option value={false}>
                                                                                     <div className="flex items-center gap-2">
                                                                                         <Briefcase className="h-3.5 w-3.5" />
-                                                                                        <div>Per Project</div>
+                                                                                        <div>For Project</div>
                                                                                     </div>
                                                                                 </CustomSelect.Option>
                                                                             </CustomSelect>
