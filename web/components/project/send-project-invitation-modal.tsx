@@ -1,19 +1,20 @@
 import { useParams } from "next/navigation"
 
-import React, { useEffect } from "react"
+import React, { ChangeEvent, useEffect } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { ChevronDown, Plus, X } from "lucide-react"
+import { Briefcase, ChevronDown, Plus, Timer, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 import { useEventTracker, useMember, useUser } from "@hooks/store"
 
+import { CURRENCY_CODES } from "@constants/billing"
 import { PROJECT_MEMBER_ADDED } from "@constants/event-tracker"
 import { ERoles, ROLES } from "@constants/iam"
 
-import { Avatar, Button, CustomSearchSelect, CustomSelect } from "@servcy/ui"
+import { Avatar, Button, CustomSearchSelect, CustomSelect, Input } from "@servcy/ui"
 
 type Props = {
     isOpen: boolean
@@ -24,6 +25,9 @@ type Props = {
 type member = {
     role: ERoles
     member_id: string
+    rate: string
+    currency: string
+    per_hour_or_per_project: boolean // true for per hour, false for per project
 }
 
 type FormValues = {
@@ -35,6 +39,9 @@ const defaultValues: FormValues = {
         {
             role: ERoles.MEMBER,
             member_id: "",
+            rate: "",
+            currency: "USD",
+            per_hour_or_per_project: true,
         },
     ],
 }
@@ -103,7 +110,6 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                 reset(defaultValues)
             })
     }
-
     const handleClose = () => {
         onClose()
 
@@ -112,20 +118,29 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
             clearTimeout(timeout)
         }, 500)
     }
-
     const appendField = () => {
+        if (fields.length >= 10) return toast.error("You can only add 10 members at a time.")
         append({
-            role: 5,
+            role: ERoles.MEMBER,
             member_id: "",
+            rate: "",
+            currency: "USD",
+            per_hour_or_per_project: true,
         })
     }
-
+    const handleRateChange = (onChange: any) => (e: ChangeEvent<HTMLInputElement>) => {
+        if (Number.isNaN(Number(e.target.value))) return
+        onChange(e.target.value)
+    }
     useEffect(() => {
         if (fields.length === 0) {
             append([
                 {
                     role: ERoles.MEMBER,
                     member_id: "",
+                    rate: "",
+                    currency: "USD",
+                    per_hour_or_per_project: true,
                 },
             ])
         }
@@ -179,7 +194,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative transform rounded-lg bg-custom-background-100 p-5 text-left shadow-custom-shadow-md transition-all sm:w-full sm:max-w-2xl">
+                            <Dialog.Panel className="relative transform rounded-lg bg-custom-background-100 p-5 text-left shadow-custom-shadow-md transition-all sm:w-full lg:max-w-5xl max-w-2xl">
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="space-y-5">
                                         <Dialog.Title
@@ -198,9 +213,9 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                             {fields.map((field, index) => (
                                                 <div
                                                     key={field.id}
-                                                    className="group mb-1 grid grid-cols-12 items-start gap-x-4 text-sm"
+                                                    className="group mb-1 lg:grid lg:grid-cols-12 items-start gap-x-4 text-sm flex-wrap flex"
                                                 >
-                                                    <div className="col-span-7 flex flex-col gap-1">
+                                                    <div className="lg:col-span-7 lg:flex lg:flex-col gap-1 max-lg:w-full">
                                                         <Controller
                                                             control={control}
                                                             name={`members.${index}.member_id`}
@@ -257,8 +272,8 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                         )}
                                                     </div>
 
-                                                    <div className="col-span-5 flex items-center justify-between gap-2">
-                                                        <div className="flex w-full flex-col gap-1">
+                                                    <div className="lg:col-span-5 flex items-center justify-between gap-2 max-lg:w-full max-lg:mt-1">
+                                                        <div className="flex flex-col gap-1">
                                                             <Controller
                                                                 name={`members.${index}.role`}
                                                                 control={control}
@@ -307,6 +322,125 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                 </span>
                                                             )}
                                                         </div>
+                                                        {currentProjectRole === ERoles.ADMIN && (
+                                                            <div className="relative flex w-full flex-col gap-1">
+                                                                <Controller
+                                                                    name={`members.${index}.rate`}
+                                                                    control={control}
+                                                                    render={({ field: { value, onChange } }) => (
+                                                                        <Input
+                                                                            id={`members.${index}.rate`}
+                                                                            name={`members.${index}.rate`}
+                                                                            type="text"
+                                                                            value={value}
+                                                                            onChange={handleRateChange(onChange)}
+                                                                            hasError={Boolean(
+                                                                                errors.members &&
+                                                                                    errors.members[index]?.rate
+                                                                            )}
+                                                                            placeholder="Member cost..."
+                                                                            className="focus:border-blue-400"
+                                                                        />
+                                                                    )}
+                                                                />
+                                                                {errors.members && errors.members[index]?.rate && (
+                                                                    <span className="px-1 text-sm text-red-500">
+                                                                        {errors.members[index]?.rate?.message}
+                                                                    </span>
+                                                                )}
+                                                                <div className="absolute right-[90px]">
+                                                                    <Controller
+                                                                        name={`members.${index}.currency`}
+                                                                        control={control}
+                                                                        render={({ field }) => (
+                                                                            <CustomSelect
+                                                                                {...field}
+                                                                                label={
+                                                                                    <div className="flex items-center gap-1">
+                                                                                        {field.value ?? "Per Project"}
+                                                                                    </div>
+                                                                                }
+                                                                                placement="bottom-start"
+                                                                                noChevron
+                                                                                input
+                                                                                optionsClassName="w-full"
+                                                                            >
+                                                                                {CURRENCY_CODES.map((currency) => (
+                                                                                    <CustomSelect.Option
+                                                                                        key={currency.code}
+                                                                                        value={currency.code}
+                                                                                    >
+                                                                                        <div className="flex items-center gap-2">
+                                                                                            <currency.icon className="h-3.5 w-3.5" />
+                                                                                            <div>{currency.code}</div>
+                                                                                        </div>
+                                                                                    </CustomSelect.Option>
+                                                                                ))}
+                                                                            </CustomSelect>
+                                                                        )}
+                                                                    />
+                                                                    {errors.members &&
+                                                                        errors.members[index]?.currency && (
+                                                                            <span className="px-1 text-sm text-red-500">
+                                                                                {
+                                                                                    errors.members[index]?.currency
+                                                                                        ?.message
+                                                                                }
+                                                                            </span>
+                                                                        )}
+                                                                </div>
+                                                                <div className="absolute right-0">
+                                                                    <Controller
+                                                                        name={`members.${index}.per_hour_or_per_project`}
+                                                                        control={control}
+                                                                        render={({ field }) => (
+                                                                            <CustomSelect
+                                                                                {...field}
+                                                                                label={
+                                                                                    <div className="flex items-center gap-1">
+                                                                                        {field.value ? (
+                                                                                            <Timer className="h-3 w-3" />
+                                                                                        ) : (
+                                                                                            <Briefcase className="h-3 w-3" />
+                                                                                        )}
+                                                                                        {field.value
+                                                                                            ? "Per Hour"
+                                                                                            : "Per Project"}
+                                                                                    </div>
+                                                                                }
+                                                                                placement="bottom-start"
+                                                                                noChevron
+                                                                                input
+                                                                            >
+                                                                                <CustomSelect.Option value={true}>
+                                                                                    <div className="flex items-center gap-2">
+                                                                                        <Timer className="h-3.5 w-3.5" />
+                                                                                        <div>Per Hour</div>
+                                                                                    </div>
+                                                                                </CustomSelect.Option>
+                                                                                <CustomSelect.Option value={false}>
+                                                                                    <div className="flex items-center gap-2">
+                                                                                        <Briefcase className="h-3.5 w-3.5" />
+                                                                                        <div>Per Project</div>
+                                                                                    </div>
+                                                                                </CustomSelect.Option>
+                                                                            </CustomSelect>
+                                                                        )}
+                                                                    />
+                                                                    {errors.members &&
+                                                                        errors.members[index]
+                                                                            ?.per_hour_or_per_project && (
+                                                                            <span className="px-1 text-sm text-red-500">
+                                                                                {
+                                                                                    errors.members[index]
+                                                                                        ?.per_hour_or_per_project
+                                                                                        ?.message
+                                                                                }
+                                                                            </span>
+                                                                        )}
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                         <div className="flex-item flex w-6">
                                                             {fields.length > 1 && (
                                                                 <button
