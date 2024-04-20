@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { ChangeEvent, FC, useEffect, useState } from "react"
 
 import { Lock } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
@@ -9,6 +9,7 @@ import EmojiIconPicker from "@components/emoji-icon-picker"
 
 import { useEventTracker, useProject } from "@hooks/store"
 
+import { CURRENCY_CODES } from "@constants/billing"
 import { PROJECT_UPDATED } from "@constants/event-tracker"
 import { ACCESS_CHOICES, EAccess } from "@constants/iam"
 
@@ -48,11 +49,16 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
     } = useForm<IProject>({
         defaultValues: {
             ...project,
+            budget: project.budget ?? {
+                currency: "USD",
+                amount: "",
+            },
             emoji_and_icon: project.emoji ?? project.icon_prop,
             workspace: (project.workspace as IWorkspace).id,
         },
     })
-
+    const projectBudget = watch("budget")
+    const currentCurrency = CURRENCY_CODES.find((n) => n.code === projectBudget?.currency)
     useEffect(() => {
         if (project && projectId !== getValues("id")) {
             reset({
@@ -93,6 +99,13 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                 })
                 toast.error(error?.error ?? "Project could not be updated. Please try again.")
             })
+    }
+    const handleBudgetChange = (onChange: any, isAmount: boolean) => (e: ChangeEvent<HTMLInputElement>) => {
+        if (isAmount && Number.isNaN(Number(e.target.value))) return
+        onChange({
+            amount: isAmount ? Number(e.target.value) : projectBudget?.amount,
+            currency: isAmount ? projectBudget?.currency : e,
+        })
     }
     const onSubmit = async (formData: IProject) => {
         if (!workspaceSlug) return
@@ -309,6 +322,67 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                                     </CustomSelect>
                                 )
                             }}
+                        />
+                    </div>
+                </div>
+                <div className="flex relative flex-col gap-1">
+                    <h4 className="text-sm">Project Budget</h4>
+                    <Controller
+                        control={control}
+                        name="budget"
+                        render={({ field: { value, onChange, ref } }) => (
+                            <Input
+                                id="budget_amount"
+                                name="budget_amount"
+                                type="text"
+                                ref={ref}
+                                value={value?.amount ?? ""}
+                                onChange={handleBudgetChange(onChange, true)}
+                                hasError={Boolean(errors.budget)}
+                                className="rounded-md !p-3 font-medium"
+                                placeholder="Project budget..."
+                                disabled={!isAdmin}
+                            />
+                        )}
+                    />
+                    <div className="absolute top-[26px] right-[6px]">
+                        <Controller
+                            name="budget"
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+                                <div className="flex-shrink-0">
+                                    <CustomSelect
+                                        value={value?.currency ?? "USD"}
+                                        onChange={handleBudgetChange(onChange, false)}
+                                        label={
+                                            <div className="flex items-center gap-1">
+                                                {currentCurrency ? (
+                                                    <>
+                                                        <currentCurrency.icon className="h-3 w-3" />
+                                                        {currentCurrency.code}
+                                                    </>
+                                                ) : (
+                                                    <span className="text-custom-text-400">Select Currency</span>
+                                                )}
+                                            </div>
+                                        }
+                                        placement="bottom-start"
+                                        noChevron
+                                        buttonClassName="!border-custom-border-200 !shadow-none font-medium rounded-md"
+                                        input
+                                        disabled={!isAdmin}
+                                    >
+                                        {CURRENCY_CODES.map((currency) => (
+                                            <CustomSelect.Option key={currency.code} value={currency.code}>
+                                                <div className="flex items-center gap-2">
+                                                    <currency.icon className="h-3.5 w-3.5" />
+                                                    <div>{currency.code}</div>
+                                                </div>
+                                            </CustomSelect.Option>
+                                        ))}
+                                    </CustomSelect>
+                                </div>
+                            )}
                         />
                     </div>
                 </div>

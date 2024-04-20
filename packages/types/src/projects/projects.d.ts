@@ -21,6 +21,11 @@ export interface IProject {
     default_state: string | null
     description: string
     sub_issues: number
+    budget?: {
+        id?: string
+        currency: string
+        amount: string
+    }
     total_issues: number
     emoji: string | null
     emoji_and_icon:

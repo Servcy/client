@@ -351,7 +351,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                         name="budget"
                                                         control={control}
                                                         render={({ field: { onChange, value } }) => (
-                                                            <div tabIndex={9} className="flex-shrink-0 h-8">
+                                                            <div tabIndex={9} className="flex-shrink-0">
                                                                 <CustomSelect
                                                                     value={value.currency}
                                                                     onChange={handleBudgetChange(onChange, false)}
