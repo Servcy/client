@@ -266,7 +266,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                             onChange={handleNameChange(onChange)}
                                                             hasError={Boolean(errors.name)}
                                                             placeholder="Project Title"
-                                                            className="w-full focus:border-blue-400"
+                                                            className="w-full focus:border-green-300"
                                                             tabIndex={1}
                                                         />
                                                     )}
@@ -301,7 +301,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                             onChange={handleIdentifierChange(onChange)}
                                                             hasError={Boolean(errors.identifier)}
                                                             placeholder="Identifier"
-                                                            className="w-full text-xs focus:border-blue-400 uppercase"
+                                                            className="w-full text-xs focus:border-green-300 uppercase"
                                                             tabIndex={2}
                                                         />
                                                     )}
@@ -321,7 +321,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                             value={value}
                                                             placeholder="Description..."
                                                             onChange={onChange}
-                                                            className="!h-24 text-sm focus:border-blue-400"
+                                                            className="!h-24 text-sm focus:border-green-300"
                                                             hasError={Boolean(errors?.description)}
                                                             tabIndex={3}
                                                         />
@@ -342,7 +342,7 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                                                                 onChange={handleBudgetChange(onChange, true)}
                                                                 hasError={Boolean(errors.budget)}
                                                                 placeholder="Project budget..."
-                                                                className="w-full focus:border-blue-400"
+                                                                className="w-full focus:border-green-300"
                                                                 tabIndex={8}
                                                             />
                                                         )}

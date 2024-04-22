@@ -219,6 +219,11 @@ module.exports = {
                     from: { left: "-100%" },
                     to: { left: "100%" },
                 },
+                "border-spin": {
+                    "100%": {
+                        transform: "rotate(-360deg)",
+                    },
+                },
             },
             typography: () => ({
                 brand: {
@@ -386,6 +391,9 @@ module.exports = {
                 "onboarding-gradient-100": "var( --gradient-onboarding-100)",
                 "onboarding-gradient-200": "var( --gradient-onboarding-200)",
                 "onboarding-gradient-300": "var( --gradient-onboarding-300)",
+            },
+            animation: {
+                "border-spin": "border-spin 7s linear infinite",
             },
         },
         fontFamily: {

@@ -24,9 +24,11 @@ export interface ICommandPaletteStore {
     isCreateIssueModalOpen: boolean
     isDeleteIssueModalOpen: boolean
     isBulkDeleteIssueModalOpen: boolean
+    isTimeTrackerModalOpen: boolean
     // computed
     isAnyModalOpen: boolean
     // toggle actions
+    toggleTimeTrackerModal: (value?: boolean) => void
     toggleCommandPaletteModal: (value?: boolean) => void
     toggleShortcutModal: (value?: boolean) => void
     toggleCreateProjectModal: (value?: boolean) => void
@@ -51,6 +53,7 @@ export class CommandPaletteStore implements ICommandPaletteStore {
     isCreateCycleModalOpen: boolean = false
     isCreateModuleModalOpen: boolean = false
     isUpgradePlanModalOpen: boolean = false
+    isTimeTrackerModalOpen: boolean = false
     isCreateViewModalOpen: boolean = false
     isCreatePageModalOpen: boolean = false
     isWorkspaceViewCreateModalOpen: boolean = false
@@ -74,6 +77,7 @@ export class CommandPaletteStore implements ICommandPaletteStore {
             isCreateModuleModalOpen: observable.ref,
             isCreateViewModalOpen: observable.ref,
             isCreatePageModalOpen: observable.ref,
+            isTimeTrackerModalOpen: observable.ref,
             isCreateIssueModalOpen: observable.ref,
             isDeleteIssueModalOpen: observable.ref,
             isBulkDeleteIssueModalOpen: observable.ref,
@@ -91,6 +95,7 @@ export class CommandPaletteStore implements ICommandPaletteStore {
             toggleUpgradePlanModal: action,
             toggleCreateIssueModal: action,
             toggleCreateModuleModal: action,
+            toggleTimeTrackerModal: action,
             toggleDeleteIssueModal: action,
             toggleBulkDeleteIssueModal: action,
         })
@@ -109,6 +114,7 @@ export class CommandPaletteStore implements ICommandPaletteStore {
                 this.isCreateCycleModalOpen ||
                 this.isCreatePageModalOpen ||
                 this.isCreateProjectModalOpen ||
+                this.isTimeTrackerModalOpen ||
                 this.isCreateModuleModalOpen ||
                 this.isWorkspaceViewCreateModalOpen ||
                 this.isCreateViewModalOpen ||
@@ -117,6 +123,19 @@ export class CommandPaletteStore implements ICommandPaletteStore {
                 this.isBulkDeleteIssueModalOpen ||
                 this.isDeleteIssueModalOpen
         )
+    }
+
+    /**
+     * Toggles the time tracker modal
+     * @param value
+     * @returns
+     */
+    toggleTimeTrackerModal = (value?: boolean) => {
+        if (value !== undefined) {
+            this.isTimeTrackerModalOpen = value
+        } else {
+            this.isTimeTrackerModalOpen = !this.isTimeTrackerModalOpen
+        }
     }
 
     /**

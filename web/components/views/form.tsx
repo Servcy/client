@@ -136,7 +136,7 @@ export const ProjectViewForm: React.FC<Props> = observer((props) => {
                                     onChange={onChange}
                                     hasError={Boolean(errors.name)}
                                     placeholder="Title"
-                                    className="w-full resize-none text-xl focus:border-blue-400"
+                                    className="w-full resize-none text-xl focus:border-green-300"
                                     tabIndex={1}
                                 />
                             )}

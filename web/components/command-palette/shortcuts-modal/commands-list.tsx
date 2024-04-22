@@ -21,6 +21,7 @@ const KEYBOARD_SHORTCUTS = [
             { keys: "Q", description: "Create cycle" },
             { keys: "M", description: "Create module" },
             { keys: "V", description: "Create view" },
+            { keys: "T", description: "Track time" },
             { keys: "D", description: "Create page" },
             { keys: "Delete", description: "Bulk delete issues" },
             { keys: "H", description: "Open shortcuts guide" },

@@ -134,7 +134,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                                 value={userDetails?.rate?.rate ?? ""}
                                 placeholder="Member cost..."
                                 onChange={handleRateChange}
-                                className="focus:border-blue-400 w-28"
+                                className="focus:border-green-300 w-28"
                             />
                             <CustomSelect
                                 label={
