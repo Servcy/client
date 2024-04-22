@@ -18,6 +18,15 @@ export class TimeTrackerService extends APIService {
         }
     }
 
+    async stopIssueTimer(workspaceSlug: string, timerId: string) {
+        try {
+            const response = await this.post(`/project/${workspaceSlug}/${timerId}/stop-timer`)
+            return response?.data
+        } catch (error) {
+            throw error
+        }
+    }
+
     async fetchTimeSheet(workspaceSlug: string, queries?: any) {
         try {
             const response = await this.get(`/project/${workspaceSlug}/timer`, {
