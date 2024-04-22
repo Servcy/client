@@ -4,9 +4,6 @@ export interface ITrackedTime {
     issue_id: string
     project_id: string
     workspace_id: string
-    user_id: string
-    cycle_id: string
-    module_id: string
 
     description: string
 
