@@ -9,7 +9,7 @@ import { RootStore } from "./root.store"
 
 export interface ITimerStore {
     timerMap: Record<string, ITrackedTime[]>
-    isTimerRunning: ITrackedTime | null
+    timerRunning: ITrackedTime | null
     startTimer: (
         workspaceSlug: string,
         projectId: string,
@@ -17,20 +17,20 @@ export interface ITimerStore {
         data: Partial<ITrackedTime>
     ) => Promise<void>
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
-    stopIssueTimer: (workspaceSlug: string, projectId: string, issueId: string, timerId: string) => Promise<void>
+    stopIssueTimer: (workspaceSlug: string) => Promise<void>
     fetchTimeSheet: (workspaceSlug: string, queries?: any) => Promise<void>
 }
 
 export class TimerStore implements ITimerStore {
     timerMap: Record<string, ITrackedTime[]> = {}
-    isTimerRunning = null
+    timerRunning = null
     router
     timerService
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
             timerMap: observable,
-            isTimerRunning: observable,
+            timerRunning: observable,
         })
         this.timerService = new TimeTrackerService()
         this.router = _rootStore.app.router
@@ -48,7 +48,7 @@ export class TimerStore implements ITimerStore {
         try {
             const trackedTime = await this.timerService.startIssueTimer(workspaceSlug, projectId, issueId, data)
             runInAction(() => {
-                this.isTimerRunning = trackedTime
+                this.timerRunning = trackedTime
             })
         } catch (error) {
             throw error
@@ -62,7 +62,10 @@ export class TimerStore implements ITimerStore {
      */
     checkIsTimerRunning = async (workspaceSlug: string) => {
         try {
-            this.isTimerRunning = await this.timerService.isTimerRunning(workspaceSlug)
+            const response = await this.timerService.isTimerRunning(workspaceSlug)
+            runInAction(() => {
+                this.timerRunning = response
+            })
         } catch (error) {
             throw error
         }
@@ -71,18 +74,17 @@ export class TimerStore implements ITimerStore {
     /**
      * Stop timer for an issue
      * @param workspaceSlug
-     * @param projectId
-     * @param issueId
-     * @param timerId
      * @returns
      */
-    stopIssueTimer = async (workspaceSlug: string, projectId: string, issueId: string, timerId: string) => {
+    stopIssueTimer = async (workspaceSlug: string) => {
         try {
-            if (!this.isTimerRunning) return
-            await this.timerService.stopIssueTimer(workspaceSlug, projectId, timerId)
+            if (!this.timerRunning) return
+            const issueId = this.timerRunning["issue"]
+            const projectId = this.timerRunning["project"]
+            await this.timerService.stopIssueTimer(workspaceSlug, projectId, this.timerRunning["id"])
             runInAction(() => {
-                set(this.timerMap, issueId, [...(this.timerMap[issueId] || []), this.isTimerRunning])
-                this.isTimerRunning = null
+                set(this.timerMap, issueId, [...(this.timerMap[issueId] || []), this.timerRunning])
+                this.timerRunning = null
             })
         } catch (error) {
             throw error
@@ -100,7 +102,7 @@ export class TimerStore implements ITimerStore {
             const timeSheet = await this.timerService.fetchTimeSheet(workspaceSlug, queries)
             runInAction(() => {
                 timeSheet.forEach((time: ITrackedTime) => {
-                    set(this.timerMap, time.issue_id, [...(this.timerMap[time.issue_id] || []), time])
+                    set(this.timerMap, time.issue, [...(this.timerMap[time.issue] || []), time])
                 })
             })
         } catch (error) {

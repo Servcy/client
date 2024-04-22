@@ -5,6 +5,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    /* Act as a border */
+    .servcy-card-wrapper {
+        @apply overflow-hidden rounded-2xl;
+    }
+
+    /* Gradient */
+    .servcy-card-wrapper::before {
+        background: conic-gradient(rgba(39, 63, 31, 0.9) 0deg, rgba(77, 126, 62, 0.7) 0deg, transparent 80deg);
+
+        @apply absolute left-[-25%] top-[-25%] h-[150%] w-[150%] animate-border-spin content-[''];
+    }
+
+    /* Body */
+    .servcy-card-content {
+        @apply absolute left-[2px] top-[2px] h-[calc(100%-4px)] w-[calc(100%-4px)] rounded-2xl;
+    }
+}
+
 @layer components {
     .text-1\.5xl {
         font-size: 1.375rem;

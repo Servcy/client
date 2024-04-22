@@ -23,7 +23,7 @@ interface IssuesModalProps {
 }
 
 const getTabIndex = (key: string) =>
-    ["project_id", "issue_id", "description", "is_billable", "discard_button", "submit_button"].findIndex(
+    ["project", "issue", "description", "is_billable", "discard_button", "submit_button"].findIndex(
         (tabIndex) => tabIndex === key
     ) + 1
 
@@ -33,7 +33,7 @@ const defaultValues: Partial<ITrackedTime> = {
 }
 
 export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props) => {
-    const { issueId, projectId, workspaceSlug } = useParams()
+    const { workspaceSlug } = useParams()
     const { isOpen, handleClose } = props
     const { workspaceProjectIds, getProjectById } = useProject()
     const {
@@ -54,12 +54,7 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
     const { startTimer } = useTimeTracker()
     const handleFormSubmit = async (formData: Partial<ITrackedTime>) => {
         try {
-            await startTimer(
-                workspaceSlug.toString(),
-                formData.project_id as string,
-                formData.issue_id as string,
-                formData
-            )
+            await startTimer(workspaceSlug.toString(), formData.project as string, formData.issue as string, formData)
             toast.success("Timer started successfully")
         } catch (error: any) {
             if (error?.response?.status === 400) toast.error("Your timer is already running...")
@@ -67,16 +62,15 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
         }
     }
     const { issues: projectIssues } = useIssues(EIssuesStoreType.PROJECT)
-    const activeProjectId = watch("project_id")
-    const activeIssueId = watch("issue_id")
+    const activeProjectId = watch("project")
+    const activeIssueId = watch("issue")
     useEffect(() => {
-        if (issueId) setValue("issue_id", issueId.toString())
-        if (projectId) setValue("project_id", projectId.toString())
         if (workspaceProjectIds && workspaceProjectIds.length > 0 && !activeProjectId)
-            setValue("project_id", workspaceProjectIds[0])
-    }, [issueId, projectId, workspaceProjectIds, activeProjectId, isOpen])
+            setValue("project", workspaceProjectIds[0])
+    }, [workspaceProjectIds, activeProjectId, isOpen])
     useEffect(() => {
-        if (activeProjectId) projectIssues.fetchIssues(workspaceSlug.toString(), activeProjectId, "init-loader")
+        if (activeProjectId) projectIssues.fetchIssues(workspaceSlug.toString(), activeProjectId, "mutation")
+        setValue("issue", "")
     }, [activeProjectId])
     if (!workspaceProjectIds || workspaceProjectIds.length === 0) return null
     return (
@@ -111,7 +105,7 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
                                         <div className="flex items-center gap-x-2">
                                             <Controller
                                                 control={control}
-                                                name="project_id"
+                                                name="project"
                                                 rules={{
                                                     required: true,
                                                 }}
@@ -121,7 +115,7 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
                                                             value={value}
                                                             onChange={onChange}
                                                             buttonVariant="border-with-text"
-                                                            tabIndex={getTabIndex("project_id")}
+                                                            tabIndex={getTabIndex("project")}
                                                         />
                                                     </div>
                                                 )}
@@ -149,7 +143,7 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
                                         <div className="grid grid-cols-2 gap-4">
                                             {activeProjectId && workspaceSlug && (
                                                 <Controller
-                                                    name="issue_id"
+                                                    name="issue"
                                                     control={control}
                                                     rules={{ required: "Issue needs to be selected" }}
                                                     render={({ field: { value, onChange } }) => (
@@ -158,7 +152,7 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
                                                             onChange={onChange}
                                                             project={getProjectById(activeProjectId) as IProject}
                                                             buttonVariant="border-with-text"
-                                                            tabIndex={getTabIndex("project_id")}
+                                                            tabIndex={getTabIndex("issue")}
                                                             className="h-8 w-96"
                                                         />
                                                     )}

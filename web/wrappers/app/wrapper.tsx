@@ -3,6 +3,9 @@ import { FC, ReactNode } from "react"
 import { observer } from "mobx-react-lite"
 
 import { CommandPalette } from "@components/command-palette"
+import { TimerFloatingWidget } from "@components/issues"
+
+import { useTimeTracker } from "@hooks/store"
 
 import ProjectAuthWrapper from "@wrappers/auth/ProjectAuthWrapper"
 import UserAuthWrapper from "@wrappers/auth/UserAuthWrapper"
@@ -18,6 +21,7 @@ export interface IAppLayout {
 
 export const AppWrapper: FC<IAppLayout> = observer((props) => {
     const { children, header, withProjectWrapper = false } = props
+    const { timerRunning } = useTimeTracker()
 
     return (
         <>
@@ -38,6 +42,7 @@ export const AppWrapper: FC<IAppLayout> = observer((props) => {
                                 </div>
                             </div>
                         </main>
+                        {timerRunning && <TimerFloatingWidget />}
                     </div>
                 </WorkspaceAuthWrapper>
             </UserAuthWrapper>
