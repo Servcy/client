@@ -165,7 +165,7 @@ export class TimeTrackerStore implements ITimeTrackerStore {
     fetchSnapshots = async (timeTrackedId: string) => {
         try {
             const response = await this.timeTrackerService.getTimeTrackedSnapshot(timeTrackedId)
-            this.addSnapshots(issueId, response)
+            this.addSnapshots(timeTrackedId, response)
             return response
         } catch (error) {
             throw error
