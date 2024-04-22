@@ -56,6 +56,7 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
     }
     const { issues: projectIssues } = useIssues(EIssuesStoreType.PROJECT)
     const activeProjectId = watch("project_id")
+    const activeIssueId = watch("issue_id")
     useEffect(() => {
         if (issueId) setValue("issue_id", issueId.toString())
         if (projectId) setValue("project_id", projectId.toString())
@@ -133,39 +134,41 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
                                                 />
                                             )}
                                         />
-                                        {activeProjectId && workspaceSlug && (
-                                            <Controller
-                                                name="issue_id"
-                                                control={control}
-                                                rules={{ required: "Issue needs to be selected" }}
-                                                render={({ field: { value, onChange } }) => (
-                                                    <IssueDropdown
-                                                        value={value}
-                                                        onChange={onChange}
-                                                        project={getProjectById(activeProjectId) as IProject}
-                                                        buttonVariant="border-with-text"
-                                                        tabIndex={getTabIndex("project_id")}
-                                                        className="h-8"
-                                                    />
-                                                )}
-                                            />
-                                        )}
-                                        <div className="flex gap-2 items-center">
-                                            <div className="grow text-sm font-normal text-custom-text-300">
-                                                Is this time entry billable?
-                                            </div>
-                                            <div className="shrink-0">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            {activeProjectId && workspaceSlug && (
                                                 <Controller
+                                                    name="issue_id"
                                                     control={control}
-                                                    name="is_billable"
+                                                    rules={{ required: "Issue needs to be selected" }}
                                                     render={({ field: { value, onChange } }) => (
-                                                        <Checkbox
-                                                            checked={value}
-                                                            onChange={() => onChange(!value)}
-                                                            className="mx-2"
+                                                        <IssueDropdown
+                                                            value={value}
+                                                            onChange={onChange}
+                                                            project={getProjectById(activeProjectId) as IProject}
+                                                            buttonVariant="border-with-text"
+                                                            tabIndex={getTabIndex("project_id")}
+                                                            className="h-8 w-96"
                                                         />
                                                     )}
                                                 />
+                                            )}
+                                            <div className="flex gap-2 items-center justify-end">
+                                                <div className="text-sm font-normal text-custom-text-300">
+                                                    Is this time entry billable?
+                                                </div>
+                                                <div className="shrink-0">
+                                                    <Controller
+                                                        control={control}
+                                                        name="is_billable"
+                                                        render={({ field: { value, onChange } }) => (
+                                                            <Checkbox
+                                                                checked={value}
+                                                                onChange={() => onChange(!value)}
+                                                                className="mx-2"
+                                                            />
+                                                        )}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -182,6 +185,7 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
                                             variant="primary"
                                             type="submit"
                                             size="sm"
+                                            disabled={!activeProjectId || !activeIssueId}
                                             loading={isSubmitting}
                                             tabIndex={getTabIndex("submit_button")}
                                         >
