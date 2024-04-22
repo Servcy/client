@@ -41,15 +41,12 @@ export class TimerStore implements ITimerStore {
      * @returns
      */
     startTimer = async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<ITrackedTime>) => {
-        await this.timerService
-            .startIssueTimer(workspaceSlug, projectId, issueId, data)
-            .then((response) => {
-                this.isTimerRunning = true
-                this.timerMap[issueId] = response
-                return response
-            })
-            .catch((error) => {
-                throw error
-            })
+        try {
+            const trackedTime = await this.timerService.startIssueTimer(workspaceSlug, projectId, issueId, data)
+            this.isTimerRunning = true
+            this.timerMap[issueId] = trackedTime
+        } catch (error) {
+            throw error
+        }
     }
 }

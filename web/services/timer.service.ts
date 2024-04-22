@@ -10,10 +10,11 @@ export class TimeTrackerService extends APIService {
     }
 
     async startIssueTimer(workspaceSlug: string, projectId: string, issueId: string, data: Partial<ITrackedTime>) {
-        return this.post(`/project/${workspaceSlug}/${projectId}/${issueId}/start-timer`, data)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
+        try {
+            const response = await this.post(`/project/${workspaceSlug}/${projectId}/${issueId}/start-timer`, data)
+            return response?.data
+        } catch (error) {
+            throw error
+        }
     }
 }
