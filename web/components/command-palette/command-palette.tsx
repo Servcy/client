@@ -10,7 +10,7 @@ import { UpgradePlanModal } from "@components/billing"
 import { CommandModal, ShortcutsModal } from "@components/command-palette"
 import { BulkDeleteIssuesModal } from "@components/core"
 import { CycleCreateUpdateModal } from "@components/cycles"
-import { CreateUpdateIssueModal, DeleteIssueModal } from "@components/issues"
+import { CreateUpdateIssueModal, DeleteIssueModal, IssueTimeTrackerModal } from "@components/issues"
 import { CreateUpdateModuleModal } from "@components/modules"
 import { CreateUpdatePageModal } from "@components/pages"
 import { CreateProjectModal } from "@components/project"
@@ -69,6 +69,8 @@ export const CommandPalette: FC = observer(() => {
         toggleBulkDeleteIssueModal,
         isDeleteIssueModalOpen,
         toggleDeleteIssueModal,
+        isTimeTrackerModalOpen,
+        toggleTimeTrackerModal,
         isAnyModalOpen,
         createIssueStoreType,
     } = commandPalette
@@ -138,6 +140,8 @@ export const CommandPalette: FC = observer(() => {
                     toggleCreateCycleModal(true)
                 } else if (keyPressed === "m") {
                     toggleCreateModuleModal(true)
+                } else if (keyPressed === "t") {
+                    toggleTimeTrackerModal(true)
                 } else if (keyPressed === "backspace" || keyPressed === "delete") {
                     e.preventDefault()
                     toggleBulkDeleteIssueModal(true)
@@ -239,6 +243,10 @@ export const CommandPalette: FC = observer(() => {
                         onClose={() => {
                             toggleWorkspaceViewCreateModal(false)
                         }}
+                    />
+                    <IssueTimeTrackerModal
+                        handleClose={() => toggleTimeTrackerModal(false)}
+                        isOpen={isTimeTrackerModalOpen}
                     />
                 </>
             )}

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Gem, LifeBuoy, MoveLeft, Zap } from "lucide-react"
+import { Gem, LifeBuoy, MoveLeft, Timer, Zap } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { useApplication } from "@hooks/store"
@@ -14,7 +14,7 @@ export interface WorkspaceHelpSectionProps {
 export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observer(() => {
     const {
         theme: { sidebarCollapsed, toggleSidebar },
-        commandPalette: { toggleShortcutModal, toggleUpgradePlanModal },
+        commandPalette: { toggleShortcutModal, toggleUpgradePlanModal, toggleTimeTrackerModal },
     } = useApplication()
     const isCollapsed = sidebarCollapsed || false
 
@@ -59,6 +59,17 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                             onClick={() => toggleShortcutModal(true)}
                         >
                             <Zap className="h-3.5 w-3.5" />
+                        </button>
+                    </Tooltip>
+                    <Tooltip tooltipContent="Time Tracker">
+                        <button
+                            type="button"
+                            className={`grid place-items-center rounded-md p-1.5 text-custom-text-200 outline-none hover:bg-custom-background-90 hover:text-custom-text-100 ${
+                                isCollapsed ? "w-full" : ""
+                            }`}
+                            onClick={() => toggleTimeTrackerModal(true)}
+                        >
+                            <Timer className="h-3.5 w-3.5" />
                         </button>
                     </Tooltip>
                     <Tooltip tooltipContent="Support">
