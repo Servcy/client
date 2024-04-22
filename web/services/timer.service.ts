@@ -18,9 +18,9 @@ export class TimeTrackerService extends APIService {
         }
     }
 
-    async stopIssueTimer(workspaceSlug: string, timerId: string) {
+    async stopIssueTimer(workspaceSlug: string, projectId: string, timerId: string) {
         try {
-            const response = await this.post(`/project/${workspaceSlug}/${timerId}/stop-timer`)
+            const response = await this.post(`/project/${workspaceSlug}/${projectId}/${timerId}/stop-timer`)
             return response?.data
         } catch (error) {
             throw error
@@ -32,6 +32,15 @@ export class TimeTrackerService extends APIService {
             const response = await this.get(`/project/${workspaceSlug}/timer`, {
                 params: queries,
             })
+            return response?.data
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async isTimerRunning(workspaceSlug: string) {
+        try {
+            const response = await this.get(`/project/${workspaceSlug}/is-timer-running`)
             return response?.data
         } catch (error) {
             throw error
