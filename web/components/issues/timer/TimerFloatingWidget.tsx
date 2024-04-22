@@ -13,15 +13,15 @@ export const TimerFloatingWidget: FC<any> = observer(() => {
     const { stopIssueTimer } = useTimeTracker()
     const { workspaceSlug } = useParams()
     return (
-        <div
-            className="servcy-card-wrapper absolute bottom-8 right-8 cursor-pointer h-12 w-12 bg-custom-primary-800 hover:scale-150 transition-transform duration-300 ease-in-out"
-            onClick={() => stopIssueTimer(workspaceSlug.toString())}
-        >
-            <div className="servcy-card-content flex items-center justify-center gap-4 bg-custom-primary-800">
-                <Tooltip tooltipContent="Stop timer">
+        <Tooltip tooltipContent="Stop timer">
+            <div
+                className="servcy-card-wrapper absolute bottom-8 right-8 cursor-pointer h-12 w-12 bg-custom-primary-800 hover:scale-125 transition-transform duration-300 ease-in-out"
+                onClick={() => stopIssueTimer(workspaceSlug.toString())}
+            >
+                <div className="servcy-card-content flex items-center justify-center gap-4 bg-custom-primary-800">
                     <Timer className="size-4 text-custom-primary-100 focus:outline-none" />
-                </Tooltip>
+                </div>
             </div>
-        </div>
+        </Tooltip>
     )
 })
