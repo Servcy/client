@@ -26,17 +26,19 @@ export const IssueUpdateStatus: React.FC<Props> = (props) => {
     return (
         <>
             {issueDetail && (
-                <h4 className="mr text-lg font-medium text-custom-text-300">
-                    {projectDetails?.identifier}-{issueDetail.sequence_id}
-                </h4>
+                <>
+                    <h4 className="mr text-lg font-medium text-custom-text-300">
+                        {projectDetails?.identifier}-{issueDetail.sequence_id}
+                    </h4>
+                    <Tooltip tooltipContent="Copy Issue ID" position="top-left">
+                        <ClipboardCopy
+                            className="inline mx-4 cursor-pointer stroke-custom-text-400 size-4"
+                            onClick={copyIssueIdentifierToClipboard}
+                        />
+                    </Tooltip>
+                </>
             )}
 
-            <Tooltip tooltipContent="Copy Issue ID" position="top-left">
-                <ClipboardCopy
-                    className="inline mx-4 cursor-pointer stroke-custom-text-400 size-4"
-                    onClick={copyIssueIdentifierToClipboard}
-                />
-            </Tooltip>
             <div
                 className={`flex items-center gap-x-2 transition-all duration-300 ${
                     isSubmitting === "saved" ? "fadeOut" : "fadeIn"
