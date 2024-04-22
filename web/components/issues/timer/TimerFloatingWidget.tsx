@@ -14,7 +14,7 @@ export const TimerFloatingWidget: FC<any> = observer(() => {
     const { workspaceSlug } = useParams()
     return (
         <div
-            className="servcy-card-wrapper absolute bottom-8 right-8 cursor-pointer h-12 w-12 bg-custom-primary-800 hover:scale-150"
+            className="servcy-card-wrapper absolute bottom-8 right-8 cursor-pointer h-12 w-12 bg-custom-primary-800 hover:scale-150 transition-transform duration-300 ease-in-out"
             onClick={() => stopIssueTimer(workspaceSlug.toString())}
         >
             <div className="servcy-card-content flex items-center justify-center gap-4 bg-custom-primary-800">
