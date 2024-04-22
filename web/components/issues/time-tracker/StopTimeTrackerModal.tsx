@@ -103,7 +103,7 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
                                                     handleSnapshotOperations={handleSnapshotOperations}
                                                 />
                                                 <SnapshotsList
-                                                    timeTrackedId={runningTimeTracker["id"]}
+                                                    timeTrackedId={runningTimeTracker["id"] as string}
                                                     handleSnapshotOperations={handleSnapshotOperations}
                                                 />
                                             </div>
