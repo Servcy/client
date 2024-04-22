@@ -9,9 +9,11 @@ import { Controller, useForm } from "react-hook-form"
 
 import { IssueDropdown, ProjectDropdown } from "@components/dropdowns"
 
-import { useProject, useWorkspace } from "@hooks/store"
+import { useIssues, useProject } from "@hooks/store"
 
-import type { ITrackedTime } from "@servcy/types"
+import { EIssuesStoreType } from "@constants/issue"
+
+import type { IProject, ITrackedTime } from "@servcy/types"
 import { Button, Checkbox, TextArea } from "@servcy/ui"
 
 interface IssuesModalProps {
@@ -26,15 +28,12 @@ const getTabIndex = (key: string) =>
 
 const defaultValues: Partial<ITrackedTime> = {
     description: "",
-    project_id: null,
-    issue_id: null,
     is_billable: true,
 }
 
 export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props) => {
     const { issueId, projectId, workspaceSlug } = useParams()
     const { isOpen, handleClose } = props
-    const { getWorkspaceBySlug } = useWorkspace()
     const { workspaceProjectIds, getProjectById } = useProject()
     const {
         formState: { errors, isSubmitting },
@@ -48,20 +47,24 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
         reValidateMode: "onChange",
     })
     const onClose = () => {
-        handleClose(true)
+        handleClose()
         reset(defaultValues)
     }
     const handleFormSubmit = async (formData: Partial<ITrackedTime>) => {
         console.log(formData)
         onClose()
     }
+    const { issues: projectIssues } = useIssues(EIssuesStoreType.PROJECT)
     const activeProjectId = watch("project_id")
     useEffect(() => {
-        if (issueId) setValue("issue_id", issueId)
-        if (projectId) setValue("project_id", projectId)
+        if (issueId) setValue("issue_id", issueId.toString())
+        if (projectId) setValue("project_id", projectId.toString())
         if (workspaceProjectIds && workspaceProjectIds.length > 0 && !activeProjectId)
             setValue("project_id", workspaceProjectIds[0])
     }, [issueId, projectId, workspaceProjectIds, activeProjectId, isOpen])
+    useEffect(() => {
+        if (activeProjectId) projectIssues.fetchIssues(workspaceSlug.toString(), activeProjectId, "init-loader")
+    }, [activeProjectId])
     if (!workspaceProjectIds || workspaceProjectIds.length === 0) return null
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -139,8 +142,7 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
                                                     <IssueDropdown
                                                         value={value}
                                                         onChange={onChange}
-                                                        project={getProjectById(activeProjectId)}
-                                                        workspace={getWorkspaceBySlug(workspaceSlug.toString())}
+                                                        project={getProjectById(activeProjectId) as IProject}
                                                         buttonVariant="border-with-text"
                                                         tabIndex={getTabIndex("project_id")}
                                                         className="h-8"
