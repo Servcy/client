@@ -62,8 +62,8 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
             )
             toast.success("Timer started successfully")
         } catch (error: any) {
-            if (error?.status === 400) toast.error("Timer is already running...")
-            else toast.error("Failed to start timer")
+            if (error?.response?.status === 400) toast.error("Your timer is already running...")
+            else toast.error("Failed to start timer.")
         }
     }
     const { issues: projectIssues } = useIssues(EIssuesStoreType.PROJECT)
