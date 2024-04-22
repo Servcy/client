@@ -23,10 +23,9 @@ export interface ITimeTrackerStore {
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
     stopTrackingTime: (workspaceSlug: string) => Promise<void>
     fetchTimeSheet: (workspaceSlug: string, queries?: any) => Promise<void>
-    // snapshots relateds
-    snapshots: Record<string, ITrackedTimeSnapshot[]>
+    snapshots: Record<string, string[]>
     snapshotMap: Record<string, ITrackedTimeSnapshot>
-    getSnapshotsByTimeTrackedId: (timeTrackedId: string) => ITrackedTimeSnapshot[]
+    getSnapshotsByTimeTrackedId: (timeTrackedId: string) => string[]
     getSnapshotById: (snapshotId: string) => ITrackedTimeSnapshot | undefined
     addSnapshots: (timeTrackedId: string, snapshots: ITrackedTimeSnapshot[]) => void
     fetchSnapshots: (timeTrackedId: string) => Promise<ITrackedTimeSnapshot[]>
@@ -37,7 +36,7 @@ export interface ITimeTrackerStore {
 export class TimeTrackerStore implements ITimeTrackerStore {
     timeTrackingMap: Record<string, ITrackedTime[]> = {}
     runningTimeTracker = null
-    snapshots: Record<string, ITrackedTimeSnapshot[]> = {}
+    snapshots: Record<string, string[]> = {}
     snapshotMap: Record<string, ITrackedTimeSnapshot> = {}
     router
     timeTrackerService

@@ -17,14 +17,14 @@ type TIssueSnapshotsList = {
 export const SnapshotsList: FC<TIssueSnapshotsList> = observer((props) => {
     const { timeTrackedId, handleSnapshotOperations } = props
     const { getSnapshotsByTimeTrackedId } = useTimeTracker()
-    const snapshots = getSnapshotsByTimeTrackedId(timeTrackedId)
-    if (!snapshots) return <></>
+    const snapshotIds = getSnapshotsByTimeTrackedId(timeTrackedId)
+    if (!snapshotIds) return <></>
     return (
         <>
-            {snapshots?.map((snapshot) => (
+            {snapshotIds?.map((snapshotId) => (
                 <SnapshotsDetail
-                    snapshotId={snapshot.id}
-                    key={snapshot.id}
+                    snapshotId={snapshotId}
+                    key={snapshotId}
                     handleSnapshotOperations={handleSnapshotOperations}
                 />
             ))}
