@@ -141,7 +141,7 @@ export const CommandPalette: FC = observer(() => {
                     toggleCreateCycleModal(true)
                 } else if (keyPressed === "m") {
                     toggleCreateModuleModal(true)
-                } else if (keyPressed === "t" && runningTimeTracker !== null) {
+                } else if (keyPressed === "t" && runningTimeTracker === null) {
                     toggleTimeTrackerModal(true)
                 } else if (keyPressed === "backspace" || keyPressed === "delete") {
                     e.preventDefault()
