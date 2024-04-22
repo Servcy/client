@@ -9,7 +9,7 @@ import { Controller, useForm } from "react-hook-form"
 
 import { IssueDropdown, ProjectDropdown } from "@components/dropdowns"
 
-import { useIssues, useProject } from "@hooks/store"
+import { useIssues, useProject, useTimeTracker } from "@hooks/store"
 
 import { EIssuesStoreType } from "@constants/issue"
 
@@ -50,8 +50,9 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
         handleClose()
         reset(defaultValues)
     }
+    const { startTimer } = useTimeTracker()
     const handleFormSubmit = async (formData: Partial<ITrackedTime>) => {
-        console.log(formData)
+        startTimer(workspaceSlug.toString(), formData.project_id as string, formData.issue_id as string, formData)
         onClose()
     }
     const { issues: projectIssues } = useIssues(EIssuesStoreType.PROJECT)

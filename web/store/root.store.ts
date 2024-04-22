@@ -19,6 +19,7 @@ import { IProjectRootStore, ProjectRootStore } from "./project"
 import { IProjectPageStore, ProjectPageStore } from "./project-page.store"
 import { IProjectViewStore, ProjectViewStore } from "./project-view.store"
 import { IStateStore, StateStore } from "./state.store"
+import { ITimerStore, TimerStore } from "./timer.store"
 import { IUserRootStore, UserRootStore } from "./user"
 import { StoreIWorkspaceStore, WorkspaceStore } from "./workspace"
 
@@ -41,6 +42,7 @@ export class RootStore {
     issue: IIssueRootStore
     state: IStateStore
     label: ILabelStore
+    timer: ITimerStore
     estimate: IEstimateStore
     mention: IMentionStore
     dashboard: IDashboardStore
@@ -59,6 +61,7 @@ export class RootStore {
         this.projectView = new ProjectViewStore(this)
         this.globalView = new GlobalViewStore(this)
         this.issue = new IssueRootStore(this)
+        this.timer = new TimerStore(this)
         this.cycleFilter = new CycleFilterStore(this)
         this.state = new StateStore(this)
         this.moduleFilter = new ModuleFilterStore(this)
@@ -86,6 +89,7 @@ export class RootStore {
         this.state = new StateStore(this)
         this.label = new LabelStore(this)
         this.estimate = new EstimateStore(this)
+        this.timer = new TimerStore(this)
         this.mention = new MentionStore(this)
         this.projectPages = new ProjectPageStore(this)
         this.dashboard = new DashboardStore(this)
