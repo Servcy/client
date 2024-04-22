@@ -123,7 +123,11 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
                                             <Button
                                                 variant="danger"
                                                 size="sm"
-                                                onClick={() => stopTrackingTime(workspaceSlug.toString())}
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    e.stopPropagation()
+                                                    stopTrackingTime(workspaceSlug.toString())
+                                                }}
                                             >
                                                 Stop Timer
                                             </Button>
