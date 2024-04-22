@@ -6,6 +6,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import { Timer } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
 import { IssueDropdown, ProjectDropdown } from "@components/dropdowns"
 
@@ -52,8 +53,14 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
     }
     const { startTimer } = useTimeTracker()
     const handleFormSubmit = async (formData: Partial<ITrackedTime>) => {
-        startTimer(workspaceSlug.toString(), formData.project_id as string, formData.issue_id as string, formData)
-        onClose()
+        await startTimer(workspaceSlug.toString(), formData.project_id as string, formData.issue_id as string, formData)
+            .catch((error) => {
+                if (error.status === 400) toast.error("Timer is already running...")
+                else toast.error("Failed to start timer")
+            })
+            .finally(() => {
+                onClose()
+            })
     }
     const { issues: projectIssues } = useIssues(EIssuesStoreType.PROJECT)
     const activeProjectId = watch("project_id")

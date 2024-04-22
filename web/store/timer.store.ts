@@ -47,7 +47,7 @@ export class TimerStore implements ITimerStore {
             this.timerMap[issueId] = response
             return response
         } catch (error) {
-            console.error("Error starting timer", error)
+            throw error
         }
     }
 }
