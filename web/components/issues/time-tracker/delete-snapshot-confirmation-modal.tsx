@@ -26,9 +26,9 @@ export const SnapshotDeleteModal: FC<Props> = (props) => {
         setIsOpen(false)
         setLoader(false)
     }
-    const handleDeletion = async (assetId: string) => {
+    const handleDeletion = async (snapshotId: string) => {
         setLoader(true)
-        handleSnapshotOperations.remove(assetId).finally(() => handleClose())
+        handleSnapshotOperations.remove(snapshotId).finally(() => handleClose())
     }
     return (
         data && (
