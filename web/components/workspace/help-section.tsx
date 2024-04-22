@@ -82,7 +82,6 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                     >
                         <MoveLeft className="h-3.5 w-3.5" />
                     </button>
-
                     <Tooltip tooltipContent={`${isCollapsed ? "Expand" : "Hide"}`}>
                         <button
                             type="button"
