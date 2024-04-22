@@ -20,7 +20,7 @@ export const SnapshotsList: FC<TIssueSnapshotsList> = observer((props) => {
     const snapshotIds = getSnapshotsByTimeTrackedId(timeTrackedId)
     if (!snapshotIds) return <></>
     return (
-        <>
+        <div className="flex flex-wrap gap-4">
             {snapshotIds?.map((snapshotId) => (
                 <SnapshotsDetail
                     snapshotId={snapshotId}
@@ -28,6 +28,6 @@ export const SnapshotsList: FC<TIssueSnapshotsList> = observer((props) => {
                     handleSnapshotOperations={handleSnapshotOperations}
                 />
             ))}
-        </>
+        </div>
     )
 })

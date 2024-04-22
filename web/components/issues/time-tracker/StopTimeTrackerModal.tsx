@@ -99,16 +99,14 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
                                         </div>
                                         <div className="relative py-3 space-y-3">
                                             <h3 className="text-lg">Snapshots</h3>
-                                            <div className="grid  grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                                                <TimeTrackerSnapshotUpload
-                                                    workspaceSlug={workspaceSlug.toString()}
-                                                    handleSnapshotOperations={handleSnapshotOperations}
-                                                />
-                                                <SnapshotsList
-                                                    timeTrackedId={runningTimeTracker["id"] as string}
-                                                    handleSnapshotOperations={handleSnapshotOperations}
-                                                />
-                                            </div>
+                                            <TimeTrackerSnapshotUpload
+                                                workspaceSlug={workspaceSlug.toString()}
+                                                handleSnapshotOperations={handleSnapshotOperations}
+                                            />
+                                            <SnapshotsList
+                                                timeTrackedId={runningTimeTracker["id"] as string}
+                                                handleSnapshotOperations={handleSnapshotOperations}
+                                            />
                                         </div>
                                         <div className="flex justify-end gap-2">
                                             <Button
