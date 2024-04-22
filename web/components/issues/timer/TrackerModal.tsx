@@ -55,7 +55,6 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
     const handleFormSubmit = async (formData: Partial<ITrackedTime>) => {
         try {
             await startTimer(workspaceSlug.toString(), formData.project as string, formData.issue as string, formData)
-            toast.success("Timer started successfully")
             onClose()
         } catch (error: any) {
             if (error?.response?.status === 400) toast.error("Your timer is already running...")
