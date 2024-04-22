@@ -5,7 +5,7 @@ import { AlertTriangle } from "lucide-react"
 
 import { getFileName } from "@helpers/attachment.helper"
 
-import type { TIssueSnapshot } from "@servcy/types"
+import type { ITrackedTimeSnapshot } from "@servcy/types"
 import { Button } from "@servcy/ui"
 
 import { TSnapshotOperations } from "./StopTimeTrackerModal"
@@ -15,7 +15,7 @@ export type TSnapshotOperationsRemoveModal = Exclude<TSnapshotOperations, "creat
 type Props = {
     isOpen: boolean
     setIsOpen: Dispatch<SetStateAction<boolean>>
-    data: TIssueSnapshot
+    data: ITrackedTimeSnapshot
     handleSnapshotOperations: TSnapshotOperationsRemoveModal
 }
 

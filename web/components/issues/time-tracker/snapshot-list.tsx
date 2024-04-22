@@ -21,10 +21,10 @@ export const SnapshotsList: FC<TIssueSnapshotsList> = observer((props) => {
     if (!snapshots) return <></>
     return (
         <>
-            {snapshots?.map((snapshotId) => (
+            {snapshots?.map((snapshot) => (
                 <SnapshotsDetail
-                    snapshotId={snapshotId}
-                    key={snapshotId}
+                    snapshotId={snapshot.id}
+                    key={snapshot.id}
                     handleSnapshotOperations={handleSnapshotOperations}
                 />
             ))}

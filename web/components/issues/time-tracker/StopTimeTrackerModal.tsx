@@ -53,6 +53,8 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
             [runningTimeTracker]
         )
 
+        if (!runningTimeTracker) return <></>
+
         return (
             <Transition.Root show={isConfirmationModalOpen} as={React.Fragment}>
                 <Dialog as="div" className="relative z-20" onClose={() => setIsConfirmationModalOpen(false)}>
