@@ -45,7 +45,7 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
                     try {
                         if (!runningTimeTracker) return
                         await removeSnapshot(runningTimeTracker["id"], snapshotId)
-                        toast.error("The snapshot has been successfully removed")
+                        toast.success("The snapshot has been successfully removed")
                     } catch (error) {
                         toast.error("The Snapshot could not be removed")
                     }
