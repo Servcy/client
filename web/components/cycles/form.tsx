@@ -94,7 +94,7 @@ export const CycleForm: React.FC<Props> = (props) => {
                                         name="name"
                                         type="text"
                                         placeholder="Cycle Title"
-                                        className="w-full resize-none placeholder:text-sm placeholder:font-medium focus:border-blue-400"
+                                        className="w-full resize-none placeholder:text-sm placeholder:font-medium focus:border-green-300"
                                         value={value}
                                         inputSize="md"
                                         onChange={onChange}

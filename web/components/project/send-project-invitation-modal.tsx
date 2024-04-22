@@ -339,7 +339,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                                                                                     errors.members[index]?.rate
                                                                             )}
                                                                             placeholder="Member cost..."
-                                                                            className="focus:border-blue-400"
+                                                                            className="focus:border-green-300"
                                                                         />
                                                                     )}
                                                                 />

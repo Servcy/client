@@ -111,7 +111,7 @@ export const ModuleForm: React.FC<Props> = (props) => {
                                     ref={ref}
                                     hasError={Boolean(errors.name)}
                                     placeholder="Module Title"
-                                    className="w-full resize-none placeholder:text-sm placeholder:font-medium focus:border-blue-400"
+                                    className="w-full resize-none placeholder:text-sm placeholder:font-medium focus:border-green-300"
                                     tabIndex={1}
                                 />
                             )}
