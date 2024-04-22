@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import { observer } from "mobx-react-lite"
 
-import { IssueAttachmentRoot, IssueUpdateStatus } from "@components/issues"
+import { IssueAttachmentRoot, IssueTimeTracker, IssueUpdateStatus } from "@components/issues"
 
 import { useIssueDetail, useProjectState, useUser } from "@hooks/store"
 import useReloadConfirmations from "@hooks/use-reload-confirmation"
@@ -125,6 +125,8 @@ export const IssueMainContent: React.FC<Props> = observer((props) => {
                     />
                 )}
             </div>
+
+            <IssueTimeTracker workspaceSlug={workspaceSlug} projectId={projectId} issueId={issueId} />
 
             <IssueAttachmentRoot
                 workspaceSlug={workspaceSlug}

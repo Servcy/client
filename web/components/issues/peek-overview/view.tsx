@@ -6,6 +6,7 @@ import {
     ArchiveIssueModal,
     DeleteIssueModal,
     IssuePeekOverviewHeader,
+    IssueTimeTracker,
     PeekOverviewIssueAttachments,
     PeekOverviewIssueDetails,
     PeekOverviewProperties,
@@ -162,6 +163,14 @@ export const IssueView: FC<IIssueView> = observer((props) => {
                                                     isSubmitting={isSubmitting}
                                                     setIsSubmitting={(value) => setIsSubmitting(value)}
                                                 />
+
+                                                {currentUser && (
+                                                    <IssueTimeTracker
+                                                        workspaceSlug={workspaceSlug}
+                                                        projectId={projectId}
+                                                        issueId={issueId}
+                                                    />
+                                                )}
 
                                                 {currentUser && (
                                                     <SubIssuesRoot
