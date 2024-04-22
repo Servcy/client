@@ -1,6 +1,6 @@
 import { useParams } from "next/navigation"
 
-import React, { FC, useMemo } from "react"
+import React, { FC, useEffect, useMemo } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
 import { AlertTriangle } from "lucide-react"
@@ -26,7 +26,8 @@ export type TStopTimeTrackerModal = {
 
 export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
     ({ isConfirmationModalOpen, setIsConfirmationModalOpen }) => {
-        const { stopTrackingTime, runningTimeTracker, createSnapshot, removeSnapshot } = useTimeTracker()
+        const { stopTrackingTime, runningTimeTracker, createSnapshot, removeSnapshot, fetchSnapshots } =
+            useTimeTracker()
         const { workspaceSlug } = useParams()
 
         const handleSnapshotOperations: TSnapshotOperations = useMemo(
@@ -52,6 +53,12 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
             }),
             [runningTimeTracker]
         )
+
+        useEffect(() => {
+            if (isConfirmationModalOpen && runningTimeTracker) {
+                fetchSnapshots(runningTimeTracker["id"])
+            }
+        }, [isConfirmationModalOpen])
 
         if (!runningTimeTracker) return <></>
 
