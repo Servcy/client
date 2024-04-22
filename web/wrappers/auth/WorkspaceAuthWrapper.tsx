@@ -6,7 +6,7 @@ import { FC, ReactNode } from "react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
-import { useBilling, useMember, useProject, useUser } from "@hooks/store"
+import { useBilling, useMember, useProject, useTimeTracker, useUser } from "@hooks/store"
 
 import { Button, Spinner } from "@servcy/ui"
 
@@ -18,6 +18,7 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
     const { children } = props
     // store hooks
     const { membership } = useUser()
+    const { checkIsTimerRunning } = useTimeTracker()
     const { fetchWorkspaceSubscription } = useBilling()
     const { fetchProjects } = useProject()
     const {
@@ -31,6 +32,11 @@ const WorkspaceAuthWrapper: FC<IWorkspaceAuthWrapper> = observer((props) => {
         workspaceSlug ? `WORKSPACE_MEMBERS_ME_${workspaceSlug}` : null,
         workspaceSlug ? () => membership.fetchUserWorkspaceInfo(workspaceSlug.toString()) : null,
         { revalidateIfStale: false, revalidateOnFocus: false }
+    )
+    // fetching user timer status
+    useSWR(
+        workspaceSlug ? `IS_TIMER_RUNNING_${workspaceSlug}` : null,
+        workspaceSlug ? () => checkIsTimerRunning(workspaceSlug.toString()) : null
     )
     // fetching user workspace information
     useSWR(
