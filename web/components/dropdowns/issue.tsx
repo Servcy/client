@@ -20,9 +20,7 @@ import { BUTTON_VARIANTS_WITH_TEXT } from "./constants"
 import { TDropdownProps } from "./types"
 
 type TIssueDropdown = TDropdownProps & {
-    workspaceSlug: string
     onChange: (val: string) => void
-    hasError: boolean
     value: string | null
     project: IProject
 }
@@ -144,7 +142,9 @@ export const IssueDropdown: FC<TIssueDropdown> = observer((props) => {
                     >
                         <h4 className="font-medium text-custom-text-300">{project?.identifier}</h4>
                         {BUTTON_VARIANTS_WITH_TEXT.includes(buttonVariant) && (
-                            <span className="truncate">{issueMap[value]?.name ?? "Select related issue..."}</span>
+                            <span className="truncate">
+                                {value ? issueMap[value]?.name : "Select related issue..."}
+                            </span>
                         )}
                     </DropdownButton>
                 </button>
