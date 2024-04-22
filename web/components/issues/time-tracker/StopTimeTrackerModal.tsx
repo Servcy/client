@@ -89,10 +89,7 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
                                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-custom-background-100 text-left shadow-custom-shadow-md transition-all sm:my-8 sm:w-full sm:max-w-2xl">
-                                    <form
-                                        className="flex flex-col gap-6 p-6"
-                                        onSubmit={() => stopTrackingTime(workspaceSlug.toString())}
-                                    >
+                                    <form className="flex flex-col gap-6 p-6" onSubmit={(e) => e.preventDefault()}>
                                         <div className="flex w-full items-center justify-start gap-6">
                                             <span className="place-items-center rounded-full bg-orange-500/20 p-4">
                                                 <AlertTriangle className="h-6 w-6 text-orange-600" aria-hidden="true" />
@@ -123,7 +120,11 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
                                             >
                                                 Cancel
                                             </Button>
-                                            <Button variant="danger" size="sm" type="submit">
+                                            <Button
+                                                variant="danger"
+                                                size="sm"
+                                                onClick={() => stopTrackingTime(workspaceSlug.toString())}
+                                            >
                                                 Stop Timer
                                             </Button>
                                         </div>

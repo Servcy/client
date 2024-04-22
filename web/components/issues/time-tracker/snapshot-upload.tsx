@@ -59,7 +59,7 @@ export const TimeTrackerSnapshotUpload: React.FC<Props> = observer((props) => {
     return (
         <div
             {...getRootProps()}
-            className={`flex h-[60px] items-center justify-center rounded-md border-2 border-dashed bg-custom-primary/5 px-4 text-xs text-custom-primary ${
+            className={`flex h-[60px] cursor-pointer items-center justify-center rounded-md border-2 border-dashed bg-custom-primary/5 px-4 text-xs text-custom-primary ${
                 isDragActive ? "border-custom-primary bg-custom-primary/10" : "border-custom-border-200"
             } ${isDragReject ? "bg-red-100" : ""}`}
         >
