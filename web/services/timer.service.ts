@@ -17,4 +17,15 @@ export class TimeTrackerService extends APIService {
             throw error
         }
     }
+
+    async fetchTimeSheet(workspaceSlug: string, queries?: any) {
+        try {
+            const response = await this.get(`/project/${workspaceSlug}/timer`, {
+                params: queries,
+            })
+            return response?.data
+        } catch (error) {
+            throw error
+        }
+    }
 }
