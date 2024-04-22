@@ -14,7 +14,7 @@ export interface ITimerStore {
         projectId: string,
         issueId: string,
         data: Partial<ITrackedTime>
-    ) => Promise<ITrackedTime>
+    ) => Promise<void>
 }
 
 export class TimerStore implements ITimerStore {
@@ -41,13 +41,15 @@ export class TimerStore implements ITimerStore {
      * @returns
      */
     startTimer = async (workspaceSlug: string, projectId: string, issueId: string, data: Partial<ITrackedTime>) => {
-        try {
-            const response = await this.timerService.startIssueTimer(workspaceSlug, projectId, issueId, data)
-            this.isTimerRunning = true
-            this.timerMap[issueId] = response
-            return response
-        } catch (error) {
-            throw error
-        }
+        await this.timerService
+            .startIssueTimer(workspaceSlug, projectId, issueId, data)
+            .then((response) => {
+                this.isTimerRunning = true
+                this.timerMap[issueId] = response
+                return response
+            })
+            .catch((error) => {
+                throw error
+            })
     }
 }
