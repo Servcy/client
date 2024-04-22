@@ -3,7 +3,7 @@ import React from "react"
 import { Gem, LifeBuoy, MoveLeft, Timer, Zap } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
-import { useApplication } from "@hooks/store"
+import { useApplication, useTimeTracker } from "@hooks/store"
 
 import { Tooltip } from "@servcy/ui"
 
@@ -16,6 +16,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
         theme: { sidebarCollapsed, toggleSidebar },
         commandPalette: { toggleShortcutModal, toggleUpgradePlanModal, toggleTimeTrackerModal },
     } = useApplication()
+    const { runningTimeTracker } = useTimeTracker()
     const isCollapsed = sidebarCollapsed || false
 
     return (
@@ -64,9 +65,13 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                     <Tooltip tooltipContent="Time Tracker">
                         <button
                             type="button"
-                            className={`grid place-items-center rounded-md p-1.5 text-custom-text-200 outline-none hover:bg-custom-background-90 hover:text-custom-text-100 ${
-                                isCollapsed ? "w-full" : ""
+                            className={`grid place-items-center rounded-md p-1.5 text-custom-text-200 outline-none ${
+                                (isCollapsed ? "w-full" : "",
+                                runningTimeTracker !== null
+                                    ? "cursor-not-allowed"
+                                    : "hover:bg-custom-background-90 hover:text-custom-text-100")
                             }`}
+                            disabled={runningTimeTracker !== null}
                             onClick={() => toggleTimeTrackerModal(true)}
                         >
                             <Timer className="h-3.5 w-3.5" />

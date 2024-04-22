@@ -32,7 +32,7 @@ const defaultValues: Partial<ITrackedTime> = {
     is_billable: true,
 }
 
-export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props) => {
+export const StartTimeTrackerModal: React.FC<IssuesModalProps> = observer((props) => {
     const { workspaceSlug } = useParams()
     const { isOpen, handleClose } = props
     const { workspaceProjectIds, getProjectById } = useProject()
@@ -51,10 +51,15 @@ export const IssueTimeTrackerModal: React.FC<IssuesModalProps> = observer((props
         handleClose()
         reset(defaultValues)
     }
-    const { startTimer } = useTimeTracker()
+    const { startTrackingTime } = useTimeTracker()
     const handleFormSubmit = async (formData: Partial<ITrackedTime>) => {
         try {
-            await startTimer(workspaceSlug.toString(), formData.project as string, formData.issue as string, formData)
+            await startTrackingTime(
+                workspaceSlug.toString(),
+                formData.project as string,
+                formData.issue as string,
+                formData
+            )
             onClose()
         } catch (error: any) {
             if (error?.response?.status === 400) toast.error("Your timer is already running...")

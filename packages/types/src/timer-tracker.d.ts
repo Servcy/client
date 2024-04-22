@@ -18,3 +18,18 @@ export interface ITrackedTime {
     created_by: string
     updated_by: string
 }
+
+export type ITrackedTimeSnapshot = {
+    id: string
+    meta_data: {
+        name: string
+        size: number
+    }
+    file: string
+    tracked_time: string
+
+    created_at: string
+    updated_at: string
+    created_by: string
+    updated_by: string
+}

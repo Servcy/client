@@ -8,7 +8,7 @@ export * from "./parent-issues-list-modal"
 export * from "./label"
 export * from "./confirm-issue-discard"
 export * from "./issue-update-status"
-export * from "./timer"
+export * from "./time-tracker"
 
 // issue details
 export * from "./issue-detail"
