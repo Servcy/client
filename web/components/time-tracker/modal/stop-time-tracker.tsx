@@ -7,14 +7,13 @@ import { AlertTriangle } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
+import { SnapshotsList, TimeTrackerSnapshotUpload } from "@components/time-tracker"
+
 import { useApplication, useTimeTracker } from "@hooks/store"
 
 import { calculateTimeAgo, renderFormattedDateTime } from "@helpers/date-time.helper"
 
 import { Button } from "@servcy/ui"
-
-import { SnapshotsList } from "./snapshot-list"
-import { TimeTrackerSnapshotUpload } from "./snapshot-upload"
 
 export type TSnapshotOperations = {
     create: (data: FormData) => Promise<void>

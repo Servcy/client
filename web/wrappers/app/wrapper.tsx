@@ -3,7 +3,7 @@ import { FC, ReactNode } from "react"
 import { observer } from "mobx-react-lite"
 
 import { CommandPalette } from "@components/command-palette"
-import { TimeTrackerWidget } from "@components/issues"
+import { TimeTrackerWidget } from "@components/time-tracker"
 
 import { useTimeTracker } from "@hooks/store"
 

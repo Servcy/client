@@ -6,7 +6,7 @@ import { FC, useEffect } from "react"
 import { CircleDollarSign, Info, Timer } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
-import { SnapshotsDetail } from "@components/issues/time-tracker"
+import { SnapshotsDetail } from "@components/time-tracker"
 
 import { useMember, useTimeTracker } from "@hooks/store"
 
