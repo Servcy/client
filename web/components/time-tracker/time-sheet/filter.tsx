@@ -27,13 +27,13 @@ export type ITimesheetParams =
     | "is_approved"
     | "is_manually_added"
 
-type Props = {
+type ITimesheetFilterSelection = {
     filters: ITimesheetFilters
     handleFiltersUpdate: (key: keyof ITimesheetFilters, value: string | string[]) => void
     memberIds?: string[] | undefined
 }
 
-export const TimesheetFilterSelection: React.FC<Props> = observer((props) => {
+export const TimesheetFilterSelection: React.FC<ITimesheetFilterSelection> = observer((props) => {
     const { filters, handleFiltersUpdate, memberIds } = props
     const [filtersSearchQuery, setFiltersSearchQuery] = useState("")
 
