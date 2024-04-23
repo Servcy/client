@@ -2,7 +2,7 @@ import { useParams } from "next/navigation"
 
 import { useCallback } from "react"
 
-import { CalendarClock, FolderClock } from "lucide-react"
+import { CalendarClock, FolderClock, Timer } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
@@ -10,15 +10,19 @@ import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-ha
 import { FiltersDropdown } from "@components/issues"
 import { ITimesheetFilters, TimesheetFilterSelection } from "@components/time-tracker"
 
-import { useMember, useTimeTrackerFilter } from "@hooks/store"
+import { useApplication, useMember, useTimeTracker, useTimeTrackerFilter } from "@hooks/store"
 
-import { Breadcrumbs } from "@servcy/ui"
+import { Breadcrumbs, Button } from "@servcy/ui"
 
 export const TimesheetHeader: React.FC<{
     activeLayout: "my-timesheet" | "workspace-timesheet"
 }> = observer(({ activeLayout }) => {
     const { workspaceSlug, viewKey } = useParams()
     const { filters, updateFilters } = useTimeTrackerFilter()
+    const { runningTimeTracker } = useTimeTracker()
+    const {
+        commandPalette: { toggleTimeTrackerModal },
+    } = useApplication()
     const {
         workspace: { workspaceMemberIds },
     } = useMember()
@@ -71,6 +75,14 @@ export const TimesheetHeader: React.FC<{
                         />
                     </FiltersDropdown>
                 </div>
+                <Button
+                    variant="primary"
+                    size="sm"
+                    prependIcon={<Timer />}
+                    onClick={() => toggleTimeTrackerModal(true)}
+                >
+                    {runningTimeTracker === null ? "Start Timer" : "Stop Timer"}
+                </Button>
             </div>
         </>
     )

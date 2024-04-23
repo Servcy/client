@@ -8,7 +8,7 @@ import { useTheme } from "next-themes"
 import useSWR from "swr"
 
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { GlobalViewsAppliedFiltersRoot, IssuePeekOverview } from "@components/issues"
+import { GlobalViewsAppliedFiltersRoot } from "@components/issues"
 import { SpreadsheetView } from "@components/issues/issue-layouts"
 import { AllIssueQuickActions } from "@components/issues/issue-layouts/quick-action-dropdowns"
 import { SpreadsheetLayoutLoader } from "@components/ui"
@@ -242,8 +242,6 @@ export const TimeSheetRoot: React.FC = observer(() => {
                             canEditProperties={canEditProperties}
                             viewId={globalViewId}
                         />
-                        {/* peek overview */}
-                        <IssuePeekOverview />
                     </Fragment>
                 )}
             </div>

@@ -9,6 +9,7 @@ import { observer } from "mobx-react"
 import { NotAuthorizedView } from "@components/auth-screens"
 import { PageHead } from "@components/core"
 import { TimesheetHeader } from "@components/headers"
+import { TimeSheetRoot } from "@components/time-tracker"
 
 import { useUser } from "@hooks/store"
 
@@ -46,7 +47,9 @@ const GlobalTimeTrackerPage = observer(() => {
         <AppWrapper header={<TimesheetHeader activeLayout={viewKey} />}>
             <PageHead title={viewKey === "my-timesheet" ? "My Timesheet" : "Workspace Timesheet"} />
             <div className="h-full overflow-hidden bg-custom-background-100">
-                <div className="flex h-full w-full flex-col border-b border-custom-border-300" />
+                <div className="flex h-full w-full flex-col border-b border-custom-border-300">
+                    <TimeSheetRoot />
+                </div>
             </div>
         </AppWrapper>
     )
