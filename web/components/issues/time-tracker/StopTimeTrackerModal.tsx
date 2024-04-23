@@ -9,7 +9,7 @@ import toast from "react-hot-toast"
 
 import { useApplication, useTimeTracker } from "@hooks/store"
 
-import { findTimePassedSinceDate, renderFormattedDateTime } from "@helpers/date-time.helper"
+import { calculateTimeAgo, renderFormattedDateTime } from "@helpers/date-time.helper"
 
 import { Button } from "@servcy/ui"
 
@@ -126,7 +126,10 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(({ isOpe
                                         <h3 className="text-lg">
                                             Time Log:{" "}
                                             <pre className="inline text-sm bg-custom-background-80 rounded-md p-2">
-                                                {findTimePassedSinceDate(runningTimeTracker["start_time"])}
+                                                {calculateTimeAgo(runningTimeTracker["start_time"], {
+                                                    addSuffix: false,
+                                                    includeSeconds: true,
+                                                })}
                                             </pre>
                                         </h3>
                                         <div className="flex items-center gap-2">

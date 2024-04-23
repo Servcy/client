@@ -142,17 +142,28 @@ export const findHowManyDaysLeft = (
     return findTotalDaysInRange(new Date(), date, inclusive)
 }
 
+// Time Difference Helpers
 /**
- * @returns {string} Time passed since the date
- * @description Returns time passed since the date
- * @param {string | Date} start_date
+ * @returns {string} formatted date in the form of amount of time passed since the event happened
+ * @description Returns time passed since the event happened
+ * @param {string | Date} time
+ * @param {object} options (optional) // default { addSuffix: true, includeSeconds: true }
+ * @example calculateTimeAgo("2023-01-01") // 1 year ago
  */
-export const findTimePassedSinceDate = (start_date: string): string => {
-    if (!start_date) return ""
-    const parsedStartDate = new Date(start_date)
-    if (!isValid(parsedStartDate)) return ""
-    const diffInTime = formatDistanceToNow(parsedStartDate, { addSuffix: false, includeSeconds: true })
-    return diffInTime
+export const calculateTimeAgo = (
+    time: string | number | Date | null,
+    options: object = {
+        addSuffix: true,
+        includeSeconds: true,
+    }
+): string => {
+    if (!time) return ""
+    // Parse the time to check if it is valid
+    const parsedTime = typeof time === "string" || typeof time === "number" ? parseISO(String(time)) : time
+    if (!parsedTime) return "" // Return empty string for invalid dates
+    // Format the time in the form of amount of time passed since the event happened
+    const distance = formatDistanceToNow(parsedTime, options)
+    return distance
 }
 
 // Date Validation Helpers
