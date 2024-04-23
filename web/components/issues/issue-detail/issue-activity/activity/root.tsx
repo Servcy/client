@@ -19,7 +19,9 @@ export const IssueActivityRoot: FC<TIssueActivityRoot> = observer((props) => {
 
     const activityIds = getActivitiesByIssueId(issueId)
 
-    if (!activityIds) return <></>
+    if (!activityIds)
+        return <div className="flex items-center justify-center h-40 text-custom-text-100">No activity found.</div>
+
     return (
         <div>
             {activityIds.map((activityId, index) => (

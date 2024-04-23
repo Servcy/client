@@ -23,6 +23,7 @@ export interface ITrackedTime {
         id: string
         identifier: string
     }
+    snapshots: ITrackedTimeSnapshot[]
 
     created_at: string
     updated_at: string
@@ -37,7 +38,7 @@ export type ITrackedTimeSnapshot = {
         size: number
     }
     file: string
-    tracked_time: ITrackedTime
+    tracked_time: string
 
     created_at: string
     updated_at: string

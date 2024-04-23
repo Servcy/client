@@ -1,6 +1,7 @@
 export * from "./root"
 
 export * from "./activity-comment-root"
+export * from "./tracked-time-log"
 
 // activity
 export * from "./activity/root"

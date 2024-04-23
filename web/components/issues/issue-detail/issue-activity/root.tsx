@@ -1,6 +1,6 @@
 import { FC, useMemo, useState } from "react"
 
-import { History, ListRestart, LucideIcon, MessageCircle } from "lucide-react"
+import { History, ListRestart, LucideIcon, MessageCircle, Timer } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
@@ -8,7 +8,7 @@ import { useIssueDetail, useProject } from "@hooks/store"
 
 import { TIssueComment } from "@servcy/types"
 
-import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentCreate, IssueCommentRoot } from "./"
+import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentCreate, IssueCommentRoot, TrackedTimeLog } from "./"
 
 type TIssueActivity = {
     workspaceSlug: string
@@ -16,7 +16,7 @@ type TIssueActivity = {
     issueId: string
 }
 
-type TActivityTabs = "all" | "activity" | "comments"
+type TActivityTabs = "all" | "activity" | "comments" | "time-log"
 
 const activityTabs: { key: TActivityTabs; title: string; icon: LucideIcon }[] = [
     {
@@ -33,6 +33,11 @@ const activityTabs: { key: TActivityTabs; title: string; icon: LucideIcon }[] = 
         key: "comments",
         title: "Comments",
         icon: MessageCircle,
+    },
+    {
+        key: "time-log",
+        title: "Time Logs",
+        icon: Timer,
     },
 ]
 
@@ -129,6 +134,8 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                                 showAccessSpecifier={project.is_deployed}
                             />
                         </div>
+                    ) : activityTab === "time-log" ? (
+                        <TrackedTimeLog issueId={issueId} />
                     ) : activityTab === "activity" ? (
                         <IssueActivityRoot issueId={issueId} />
                     ) : (

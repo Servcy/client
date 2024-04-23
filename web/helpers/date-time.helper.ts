@@ -1,4 +1,13 @@
-import { differenceInDays, format, formatDistanceToNow, isAfter, isEqual, isValid, parseISO } from "date-fns"
+import {
+    differenceInDays,
+    format,
+    formatDistance,
+    formatDistanceToNow,
+    isAfter,
+    isEqual,
+    isValid,
+    parseISO,
+} from "date-fns"
 import { isNil } from "lodash"
 
 export const isDate = (date: string) => {
@@ -163,6 +172,33 @@ export const calculateTimeAgo = (
     if (!parsedTime) return "" // Return empty string for invalid dates
     // Format the time in the form of amount of time passed since the event happened
     const distance = formatDistanceToNow(parsedTime, options)
+    return distance
+}
+
+/**
+ * @returns {string} formatted date in the form of amount of time passed between two dates
+ * @description Returns time passed since the event happened
+ * @param {string | Date} startTime
+ * @param {string | Date} endTime
+ * @param {object} options (optional) // default { addSuffix: true, includeSeconds: true }
+ * @example calculateTimeAgo("2023-01-01 13:00:00", "2023-01-01 14:00:00") // 1 hour
+ */
+export const calculateTimeBetween = (
+    startTime: string | Date | null,
+    endTime: string | Date | null,
+    options: object = {
+        addSuffix: true,
+        includeSeconds: true,
+    }
+): string => {
+    if (!startTime || !endTime) return ""
+    // Parse the time to check if it is valid
+    const parsedStartTime = new Date(startTime)
+    const parsedEndTime = new Date(endTime)
+    // Check if the parsed dates are valid before calculating the difference
+    if (!isValid(parsedStartTime) || !isValid(parsedEndTime)) return "" // Return empty string for invalid dates
+    // Format the time in the form of amount of time passed between two dates
+    const distance = formatDistance(parsedEndTime, parsedStartTime, options)
     return distance
 }
 
