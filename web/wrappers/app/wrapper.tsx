@@ -1,9 +1,9 @@
-import { FC, ReactNode, useState } from "react"
+import { FC, ReactNode } from "react"
 
 import { observer } from "mobx-react-lite"
 
 import { CommandPalette } from "@components/command-palette"
-import { StopTimeTrackerModal, TimeTrackerWidget } from "@components/issues"
+import { TimeTrackerWidget } from "@components/issues"
 
 import { useTimeTracker } from "@hooks/store"
 
@@ -21,7 +21,6 @@ export interface IAppLayout {
 
 export const AppWrapper: FC<IAppLayout> = observer((props) => {
     const { children, header, withProjectWrapper = false } = props
-    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false)
     const { runningTimeTracker } = useTimeTracker()
 
     return (
@@ -45,11 +44,7 @@ export const AppWrapper: FC<IAppLayout> = observer((props) => {
                         </main>
                         {runningTimeTracker && (
                             <>
-                                <TimeTrackerWidget setIsConfirmationModalOpen={setIsConfirmationModalOpen} />
-                                <StopTimeTrackerModal
-                                    isConfirmationModalOpen={isConfirmationModalOpen}
-                                    setIsConfirmationModalOpen={setIsConfirmationModalOpen}
-                                />
+                                <TimeTrackerWidget />
                             </>
                         )}
                     </div>

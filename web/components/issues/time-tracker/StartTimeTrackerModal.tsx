@@ -17,7 +17,7 @@ import { EIssuesStoreType } from "@constants/issue"
 import type { IProject, ITrackedTime } from "@servcy/types"
 import { Button, Checkbox, TextArea } from "@servcy/ui"
 
-interface IssuesModalProps {
+interface TStartTimeTrackerModal {
     isOpen: boolean
     handleClose: () => void
 }
@@ -32,9 +32,8 @@ const defaultValues: Partial<ITrackedTime> = {
     is_billable: true,
 }
 
-export const StartTimeTrackerModal: React.FC<IssuesModalProps> = observer((props) => {
+export const StartTimeTrackerModal: React.FC<TStartTimeTrackerModal> = observer(({ isOpen, handleClose }) => {
     const { workspaceSlug } = useParams()
-    const { isOpen, handleClose } = props
     const { workspaceProjectIds, getProjectById } = useProject()
     const {
         formState: { errors, isSubmitting },

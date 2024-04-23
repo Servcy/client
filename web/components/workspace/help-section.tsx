@@ -65,14 +65,13 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                     <Tooltip tooltipContent="Time Tracker">
                         <button
                             type="button"
-                            className={`grid place-items-center rounded-md p-1.5 text-custom-text-200 outline-none ${
+                            className={`grid place-items-center rounded-md p-1.5 outline-none ${
                                 isCollapsed ? "w-full" : ""
                             } ${
                                 runningTimeTracker !== null
-                                    ? "cursor-not-allowed"
-                                    : "hover:bg-custom-background-90 hover:text-custom-text-100"
+                                    ? "bg-custom-primary-100/10 text-custom-primary-100 hover:bg-custom-primary-90/10 hover:text-custom-primary-200"
+                                    : "text-custom-text-200 hover:bg-custom-background-90 hover:text-custom-text-100"
                             }`}
-                            disabled={runningTimeTracker !== null}
                             onClick={() => toggleTimeTrackerModal(true)}
                         >
                             <Timer className="h-3.5 w-3.5" />

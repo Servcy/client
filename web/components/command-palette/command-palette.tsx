@@ -10,14 +10,14 @@ import { UpgradePlanModal } from "@components/billing"
 import { CommandModal, ShortcutsModal } from "@components/command-palette"
 import { BulkDeleteIssuesModal } from "@components/core"
 import { CycleCreateUpdateModal } from "@components/cycles"
-import { CreateUpdateIssueModal, DeleteIssueModal, StartTimeTrackerModal } from "@components/issues"
+import { CreateUpdateIssueModal, DeleteIssueModal, TimeTrackerModal } from "@components/issues"
 import { CreateUpdateModuleModal } from "@components/modules"
 import { CreateUpdatePageModal } from "@components/pages"
 import { CreateProjectModal } from "@components/project"
 import { CreateUpdateProjectViewModal } from "@components/views"
 import { CreateUpdateWorkspaceViewModal } from "@components/workspace"
 
-import { useApplication, useEventTracker, useIssues, useTimeTracker, useUser } from "@hooks/store"
+import { useApplication, useEventTracker, useIssues, useUser } from "@hooks/store"
 
 // fetch keys
 import { ISSUE_DETAILS } from "@constants/fetch-keys"
@@ -44,7 +44,6 @@ export const CommandPalette: FC = observer(() => {
     const {
         issues: { removeIssue },
     } = useIssues(EIssuesStoreType.PROJECT)
-    const { runningTimeTracker } = useTimeTracker()
 
     const {
         isUpgradePlanModalOpen,
@@ -141,7 +140,7 @@ export const CommandPalette: FC = observer(() => {
                     toggleCreateCycleModal(true)
                 } else if (keyPressed === "m") {
                     toggleCreateModuleModal(true)
-                } else if (keyPressed === "t" && runningTimeTracker === null) {
+                } else if (keyPressed === "t") {
                     toggleTimeTrackerModal(true)
                 } else if (keyPressed === "backspace" || keyPressed === "delete") {
                     e.preventDefault()
@@ -245,7 +244,7 @@ export const CommandPalette: FC = observer(() => {
                             toggleWorkspaceViewCreateModal(false)
                         }}
                     />
-                    <StartTimeTrackerModal
+                    <TimeTrackerModal
                         handleClose={() => toggleTimeTrackerModal(false)}
                         isOpen={isTimeTrackerModalOpen}
                     />
