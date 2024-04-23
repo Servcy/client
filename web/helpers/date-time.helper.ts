@@ -25,6 +25,23 @@ export const renderFormattedDate = (date?: string | Date): string | null => {
 }
 
 /**
+ * @returns {string} formatted date time in the format of MMM dd, yyyy hh:mm
+ * @description Returns date time in the formatted format
+ * @param {string | Date} date
+ * @example renderFormattedDateTime("2024-01-01 13:00:00") // Jan 01, 2024 13:00
+ */
+export const renderFormattedDateTime = (date: string | Date): string => {
+    if (!date) return ""
+    // Parse the date to check if it is valid
+    const parsedDate = new Date(date)
+    // Check if the parsed date is valid before formatting
+    if (!isValid(parsedDate)) return "" // Return empty string for invalid dates
+    // Format the date in format (MMM dd, yyyy hh:mm)
+    const formattedDateTime = format(parsedDate, "MMM dd, yyyy HH:mm")
+    return formattedDateTime
+}
+
+/**
  * @returns {string} formatted date in the format of MMM dd
  * @description Returns date in the formatted format
  * @param {string | Date} date

@@ -96,8 +96,8 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
                                             </span>
                                             <div>
                                                 <h3 className="text-xl font-medium 2xl:text-2xl">Stop Tracking</h3>
-                                                <p className="text-sm leading-7 text-custom-text-200">
-                                                    Are you sure you want to stop the timer?
+                                                <p className="text-sm text-custom-text-200">
+                                                    If the total log time is less than 5 minutes, it will be discarded.
                                                 </p>
                                             </div>
                                         </div>
