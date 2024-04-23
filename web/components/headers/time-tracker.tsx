@@ -7,13 +7,13 @@ import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { DisplayFiltersSelection, FiltersDropdown, FilterSelection } from "@components/issues"
+import { FiltersDropdown, FilterSelection } from "@components/issues"
 
 import { useIssues, useLabel, useMember } from "@hooks/store"
 
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
+import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/time-tracker"
 
-import { IIssueDisplayFilterOptions, IIssueDisplayProperties, IIssueFilterOptions } from "@servcy/types"
+import { IIssueFilterOptions } from "@servcy/types"
 import { Breadcrumbs } from "@servcy/ui"
 
 type Props = {
@@ -55,32 +55,6 @@ export const TimesheetHeader: React.FC<Props> = observer((props) => {
         },
         [workspaceSlug, issueFilters, updateFilters, globalViewId]
     )
-    const handleDisplayFilters = useCallback(
-        (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-            if (!workspaceSlug || !globalViewId) return
-            updateFilters(
-                workspaceSlug.toString(),
-                undefined,
-                EIssueFilterType.DISPLAY_FILTERS,
-                updatedDisplayFilter,
-                globalViewId.toString()
-            )
-        },
-        [workspaceSlug, updateFilters, globalViewId]
-    )
-    const handleDisplayProperties = useCallback(
-        (property: Partial<IIssueDisplayProperties>) => {
-            if (!workspaceSlug || !globalViewId) return
-            updateFilters(
-                workspaceSlug.toString(),
-                undefined,
-                EIssueFilterType.DISPLAY_PROPERTIES,
-                property,
-                globalViewId.toString()
-            )
-        },
-        [workspaceSlug, updateFilters, globalViewId]
-    )
 
     return (
         <>
@@ -113,15 +87,6 @@ export const TimesheetHeader: React.FC<Props> = observer((props) => {
                             handleFiltersUpdate={handleFiltersUpdate}
                             labels={workspaceLabels ?? undefined}
                             memberIds={workspaceMemberIds ?? undefined}
-                        />
-                    </FiltersDropdown>
-                    <FiltersDropdown title="Display" placement="bottom-end">
-                        <DisplayFiltersSelection
-                            layoutDisplayFiltersOptions={ISSUE_DISPLAY_FILTERS_BY_LAYOUT.my_issues.spreadsheet}
-                            displayFilters={issueFilters?.displayFilters ?? {}}
-                            handleDisplayFiltersUpdate={handleDisplayFilters}
-                            displayProperties={issueFilters?.displayProperties ?? {}}
-                            handleDisplayPropertiesUpdate={handleDisplayProperties}
                         />
                     </FiltersDropdown>
                 </div>
