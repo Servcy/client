@@ -74,15 +74,15 @@ export const TimesheetHeader: React.FC<{
                             memberIds={workspaceMemberIds ?? undefined}
                         />
                     </FiltersDropdown>
+                    <Button
+                        variant="primary"
+                        size="sm"
+                        prependIcon={<Timer />}
+                        onClick={() => toggleTimeTrackerModal(true)}
+                    >
+                        {runningTimeTracker === null ? "Start Timer" : "Stop Timer"}
+                    </Button>
                 </div>
-                <Button
-                    variant="primary"
-                    size="sm"
-                    prependIcon={<Timer />}
-                    onClick={() => toggleTimeTrackerModal(true)}
-                >
-                    {runningTimeTracker === null ? "Start Timer" : "Stop Timer"}
-                </Button>
             </div>
         </>
     )
