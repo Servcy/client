@@ -7,53 +7,36 @@ import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
-import { FiltersDropdown, FilterSelection } from "@components/issues"
+import { FiltersDropdown } from "@components/issues"
+import { IFilterOptions, TimesheetFilterSelection } from "@components/time-tracker"
 
-import { useIssues, useLabel, useMember } from "@hooks/store"
+import { useMember, useTimeTrackerFilter } from "@hooks/store"
 
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/time-tracker"
-
-import { IIssueFilterOptions } from "@servcy/types"
 import { Breadcrumbs } from "@servcy/ui"
 
-type Props = {
+export const TimesheetHeader: React.FC<{
     activeLayout: "my-timesheet" | "workspace-timesheet"
-}
-
-export const TimesheetHeader: React.FC<Props> = observer((props) => {
-    const { activeLayout } = props
-    const { workspaceSlug, globalViewId } = useParams()
-    const {
-        issuesFilter: { filters, updateFilters },
-    } = useIssues(EIssuesStoreType.GLOBAL)
-    const { workspaceLabels } = useLabel()
+}> = observer(({ activeLayout }) => {
+    const { workspaceSlug, viewKey } = useParams()
+    const { filters, updateFilters } = useTimeTrackerFilter()
     const {
         workspace: { workspaceMemberIds },
     } = useMember()
-    const issueFilters = globalViewId ? filters[globalViewId.toString()] : undefined
     const handleFiltersUpdate = useCallback(
-        (key: keyof IIssueFilterOptions, value: string | string[]) => {
-            if (!workspaceSlug || !globalViewId) return
-            const newValues = issueFilters?.filters?.[key] ?? []
-
+        (key: keyof IFilterOptions, value: string | string[]) => {
+            if (!workspaceSlug || !viewKey) return
+            const newValues = filters?.[key] ?? []
             if (Array.isArray(value)) {
                 value.forEach((val) => {
                     if (!newValues.includes(val)) newValues.push(val)
                 })
             } else {
-                if (issueFilters?.filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                if (filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
                 else newValues.push(value)
             }
-
-            updateFilters(
-                workspaceSlug.toString(),
-                undefined,
-                EIssueFilterType.FILTERS,
-                { [key]: newValues },
-                globalViewId.toString()
-            )
+            updateFilters(workspaceSlug.toString(), "filters", { [key]: newValues }, viewKey.toString())
         },
-        [workspaceSlug, issueFilters, updateFilters, globalViewId]
+        [workspaceSlug, filters, updateFilters, viewKey]
     )
 
     return (
@@ -81,11 +64,9 @@ export const TimesheetHeader: React.FC<Props> = observer((props) => {
                 </div>
                 <div className="flex items-center gap-2">
                     <FiltersDropdown title="Filters" placement="bottom-end">
-                        <FilterSelection
-                            layoutDisplayFiltersOptions={ISSUE_DISPLAY_FILTERS_BY_LAYOUT.my_issues.spreadsheet}
-                            filters={issueFilters?.filters ?? {}}
+                        <TimesheetFilterSelection
+                            filters={filters ?? {}}
                             handleFiltersUpdate={handleFiltersUpdate}
-                            labels={workspaceLabels ?? undefined}
                             memberIds={workspaceMemberIds ?? undefined}
                         />
                     </FiltersDropdown>
