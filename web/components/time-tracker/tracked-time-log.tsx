@@ -20,7 +20,7 @@ type TTimeLog = {
 
 export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
     const { workspaceSlug } = useParams()
-    const { fetchTimeSheet, loadingTimeSheet, getTrackTimeByIssueId } = useTimeTracker()
+    const { fetchTimeSheet, loader, getTrackTimeByIssueId } = useTimeTracker()
     const timeLogs = getTrackTimeByIssueId(issueId)
     const {
         workspace: { getWorkspaceMemberDetails },
@@ -32,7 +32,7 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
 
     if (!workspaceSlug) return <></>
 
-    if (loadingTimeSheet)
+    if (loader === "init-loader")
         return (
             <Loader className="mt-5 space-y-5">
                 <Loader.Item height="40px" />

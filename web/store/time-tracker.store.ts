@@ -7,7 +7,7 @@ import { action, makeObservable, observable, runInAction } from "mobx"
 
 import { TimeTrackerService } from "@services/time-tracker.service"
 
-import { ITrackedTime, ITrackedTimeSnapshot } from "@servcy/types"
+import { ITrackedTime, ITrackedTimeSnapshot, TLoader } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
@@ -20,7 +20,7 @@ export interface ITimeTrackerStore {
         issueId: string,
         data: Partial<ITrackedTime>
     ) => Promise<void>
-    loadingTimeSheet: boolean
+    loader: TLoader
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
     stopTrackingTime: (workspaceSlug: string) => Promise<void>
     fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any) => Promise<void>
@@ -38,7 +38,7 @@ export interface ITimeTrackerStore {
 export class TimeTrackerStore implements ITimeTrackerStore {
     timeTrackingMap: Record<string, ITrackedTime[]> = {}
     runningTimeTracker = null
-    loadingTimeSheet = false
+    loader: TLoader = "init-loader"
     snapshots: Record<string, string[]> = {}
     snapshotMap: Record<string, ITrackedTimeSnapshot> = {}
     router
@@ -49,7 +49,7 @@ export class TimeTrackerStore implements ITimeTrackerStore {
             timeTrackingMap: observable,
             snapshots: observable,
             snapshotMap: observable,
-            loadingTimeSheet: observable,
+            loader: observable,
             runningTimeTracker: observable,
             createSnapshot: action,
             removeSnapshot: action,
@@ -106,11 +106,14 @@ export class TimeTrackerStore implements ITimeTrackerStore {
      * @param queries
      * @returns
      */
-    fetchTimeSheet = async (workspaceSlug: string, viewId: string, queries?: any) => {
+    fetchTimeSheet = async (
+        workspaceSlug: string,
+        viewId: string,
+        queries?: any,
+        loadType: TLoader = "init-loader"
+    ) => {
         try {
-            runInAction(() => {
-                this.loadingTimeSheet = true
-            })
+            this.loader = loadType
             const timeSheet = await this.timeTrackerService.fetchTimeSheet(workspaceSlug, viewId, queries)
             timeSheet.forEach((trackedTime: ITrackedTime) => {
                 const issueKey = trackedTime.issue
@@ -127,7 +130,7 @@ export class TimeTrackerStore implements ITimeTrackerStore {
             throw error
         } finally {
             runInAction(() => {
-                this.loadingTimeSheet = false
+                this.loader = undefined
             })
         }
     }
