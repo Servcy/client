@@ -6,6 +6,8 @@ import { FC, useEffect } from "react"
 import { Timer } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
+import { SnapshotsDetail } from "@components/issues/time-tracker"
+
 import { useMember, useTimeTracker } from "@hooks/store"
 
 import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-time.helper"
@@ -25,7 +27,7 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
     } = useMember()
 
     useEffect(() => {
-        if (issueId && workspaceSlug) fetchTimeSheet(workspaceSlug, { issue_id: issueId })
+        if (issueId && workspaceSlug) fetchTimeSheet(workspaceSlug.toString(), { issue_id: issueId })
     }, [issueId])
 
     if (!workspaceSlug) return <></>
@@ -58,6 +60,7 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
                 return (
                     <div
                         className={`relative flex items-center gap-3 text-xs ${index === 0 ? "pb-2" : index === timeLogs.length - 1 ? "pt-2" : "py-2"}`}
+                        key={timeLog.id}
                     >
                         <div
                             className="absolute left-[13px] top-0 bottom-0 w-0.5 bg-custom-background-80"
@@ -67,26 +70,35 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
                             <Timer className="h-4 w-4 flex-shrink-0" />
                         </div>
                         <div className="w-full text-custom-text-200">
-                            <Link
-                                href={`/${workspaceSlug.toString()}/profile/${memberDetails?.id}`}
-                                className="hover:underline text-custom-text-100 font-medium"
-                            >
-                                {memberDetails?.display_name}
-                            </Link>
-                            <span className="truncate">
-                                {" "}
-                                logged
-                                <pre className="inline text-sm bg-custom-background-80 rounded-md p-1 ml-1">
-                                    {calculateTimeBetween(timeLog["start_time"], timeLog["end_time"], {
-                                        addSuffix: false,
-                                        includeSeconds: true,
-                                    })}
-                                </pre>{" "}
-                                starting at
-                                <pre className="inline text-sm bg-custom-background-80 rounded-md p-1 ml-1">
-                                    {renderFormattedDateTime(timeLog["start_time"])}
-                                </pre>
-                            </span>
+                            <div>
+                                <Link
+                                    href={`/${workspaceSlug.toString()}/profile/${memberDetails?.id}`}
+                                    className="hover:underline text-custom-text-100 font-medium"
+                                >
+                                    {memberDetails?.display_name}
+                                </Link>
+                                <span className="truncate">
+                                    {" "}
+                                    logged
+                                    <pre className="inline text-sm bg-custom-background-80 rounded-md p-1 ml-1">
+                                        {calculateTimeBetween(timeLog["start_time"], timeLog["end_time"], {
+                                            addSuffix: false,
+                                            includeSeconds: true,
+                                        })}
+                                    </pre>{" "}
+                                    starting at
+                                    <pre className="inline text-sm bg-custom-background-80 rounded-md p-1 ml-1">
+                                        {renderFormattedDateTime(timeLog["start_time"])}
+                                    </pre>
+                                </span>
+                            </div>
+                            {timeLog["snapshots"]?.length > 0 && (
+                                <div className="flex flex-wrap gap-4">
+                                    {timeLog["snapshots"]?.map((snapshot) => (
+                                        <SnapshotsDetail snapshotId={snapshot.id} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                 )

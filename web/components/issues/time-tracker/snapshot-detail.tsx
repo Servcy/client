@@ -21,11 +21,12 @@ type TSnapshotOperationsRemoveModal = Exclude<TSnapshotOperations, "create">
 
 type TSnapshotsDetail = {
     snapshotId: string
-    handleSnapshotOperations: TSnapshotOperationsRemoveModal
+    handleSnapshotOperations?: TSnapshotOperationsRemoveModal
+    deleteSnapshotDisabled?: boolean
 }
 
 export const SnapshotsDetail: FC<TSnapshotsDetail> = (props) => {
-    const { snapshotId, handleSnapshotOperations } = props
+    const { snapshotId, handleSnapshotOperations, deleteSnapshotDisabled = false } = props
     const { getUserDetails } = useMember()
     const { getSnapshotById } = useTimeTracker()
     const [snapshotDeleteModal, setSnapshotDeleteModal] = useState<boolean>(false)
@@ -33,12 +34,14 @@ export const SnapshotsDetail: FC<TSnapshotsDetail> = (props) => {
     if (!snapshot) return <></>
     return (
         <>
-            <SnapshotDeleteModal
-                isOpen={snapshotDeleteModal}
-                setIsOpen={setSnapshotDeleteModal}
-                handleSnapshotOperations={handleSnapshotOperations}
-                data={snapshot}
-            />
+            {!deleteSnapshotDisabled && handleSnapshotOperations && (
+                <SnapshotDeleteModal
+                    isOpen={snapshotDeleteModal}
+                    setIsOpen={setSnapshotDeleteModal}
+                    handleSnapshotOperations={handleSnapshotOperations}
+                    data={snapshot}
+                />
+            )}
             <div
                 key={snapshotId}
                 className="flex h-[60px] items-center justify-between gap-1 rounded-md border-[2px] border-custom-border-200 bg-custom-background-100 px-4 py-2 text-sm"
@@ -71,13 +74,15 @@ export const SnapshotsDetail: FC<TSnapshotsDetail> = (props) => {
                         </div>
                     </div>
                 </Link>
-                <button
-                    onClick={() => {
-                        setSnapshotDeleteModal(true)
-                    }}
-                >
-                    <X className="h-4 w-4 text-custom-text-200 hover:text-custom-text-100" />
-                </button>
+                {!deleteSnapshotDisabled && (
+                    <button
+                        onClick={() => {
+                            setSnapshotDeleteModal(true)
+                        }}
+                    >
+                        <X className="h-4 w-4 text-custom-text-200 hover:text-custom-text-100" />
+                    </button>
+                )}
             </div>
         </>
     )
