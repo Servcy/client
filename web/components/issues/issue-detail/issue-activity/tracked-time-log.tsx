@@ -82,7 +82,7 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
                                         includeSeconds: true,
                                     })}
                                 </pre>{" "}
-                                which started at
+                                starting at
                                 <pre className="inline text-sm bg-custom-background-80 rounded-md p-1 ml-1">
                                     {renderFormattedDateTime(timeLog["start_time"])}
                                 </pre>
