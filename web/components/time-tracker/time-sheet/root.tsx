@@ -1,6 +1,6 @@
 import { useParams, useSearchParams } from "next/navigation"
 
-import React, { Fragment, useCallback, useMemo } from "react"
+import React, { Fragment } from "react"
 
 import isEmpty from "lodash/isEmpty"
 import { observer } from "mobx-react-lite"
@@ -9,31 +9,27 @@ import useSWR from "swr"
 
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
 import { GlobalViewsAppliedFiltersRoot } from "@components/issues"
-import { SpreadsheetView } from "@components/issues/issue-layouts"
-import { AllIssueQuickActions } from "@components/issues/issue-layouts/quick-action-dropdowns"
 import { SpreadsheetLayoutLoader } from "@components/ui"
 
-import { useApplication, useEventTracker, useIssues, useProject, useUser } from "@hooks/store"
+import {
+    useApplication,
+    useEventTracker,
+    useIssues,
+    useProject,
+    useTimeTracker,
+    useTimeTrackerFilter,
+    useUser,
+} from "@hooks/store"
 import { useWorkspaceIssueProperties } from "@hooks/use-workspace-issue-properties"
 
 import { ALL_ISSUES_EMPTY_STATE_DETAILS } from "@constants/empty-state"
 import { ERoles } from "@constants/iam"
-import { EIssueFilterType, EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
-
-import { IIssueDisplayFilterOptions, TIssue } from "@servcy/types"
-
-enum EIssueActions {
-    UPDATE = "update",
-    DELETE = "delete",
-    REMOVE = "remove",
-    ARCHIVE = "archive",
-    RESTORE = "restore",
-}
+import { EIssuesStoreType, ISSUE_DISPLAY_FILTERS_BY_LAYOUT } from "@constants/issue"
 
 export const TimeSheetRoot: React.FC = observer(() => {
     const params = useParams()
     const searchParams = useSearchParams()
-    const { workspaceSlug, globalViewId } = params
+    const { workspaceSlug, viewId } = params
     // theme
     const { resolvedTheme } = useTheme()
     //swr hook for fetching issue properties
@@ -41,13 +37,14 @@ export const TimeSheetRoot: React.FC = observer(() => {
     // store
     const { commandPalette: commandPaletteStore } = useApplication()
     const {
-        issuesFilter: { filters, fetchFilters, updateFilters },
-        issues: { loader, groupedIssueIds, fetchIssues, updateIssue, removeIssue, archiveIssue },
+        issues: { loader, groupedIssueIds },
     } = useIssues(EIssuesStoreType.GLOBAL)
+    const { filters, fetchFilters, updateFilters } = useTimeTrackerFilter()
+    const { fetchTimeSheet } = useTimeTracker()
 
     const { dataViewId, issueIds } = groupedIssueIds
     const {
-        membership: { currentWorkspaceAllProjectsRole, currentWorkspaceRole },
+        membership: { currentWorkspaceRole },
         currentUser,
     } = useUser()
     const { workspaceProjectIds } = useProject()
@@ -65,14 +62,14 @@ export const TimeSheetRoot: React.FC = observer(() => {
         // filter init from the query params
         if (
             workspaceSlug &&
-            globalViewId &&
-            ["all-issues", "assigned", "created", "subscribed"].includes(globalViewId.toString())
+            viewId &&
+            ["all-issues", "assigned", "created", "subscribed"].includes(viewId.toString())
         ) {
             const routerQueryParams = Object.fromEntries(searchParams)
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { ["workspaceSlug"]: _workspaceSlug, ["globalViewId"]: _globalViewId, ...filters } = routerQueryParams
+            const { ["workspaceSlug"]: _workspaceSlug, ["viewId"]: _globalViewId, ...filters } = routerQueryParams
 
-            let issueFilters: any = {}
+            let timesheetFilters: any = {}
             Object.keys(filters).forEach((key) => {
                 const filterKey: any = key
                 const filterValue = filters[key]?.toString() || undefined
@@ -81,124 +78,35 @@ export const TimeSheetRoot: React.FC = observer(() => {
                     filterKey &&
                     filterValue
                 )
-                    issueFilters = { ...issueFilters, [filterKey]: filterValue.split(",") }
+                    timesheetFilters = { ...timesheetFilters, [filterKey]: filterValue.split(",") }
             })
 
-            if (!isEmpty(filters))
-                updateFilters(
-                    workspaceSlug.toString(),
-                    undefined,
-                    EIssueFilterType.FILTERS,
-                    issueFilters,
-                    globalViewId.toString()
-                )
+            if (!isEmpty(filters)) updateFilters(workspaceSlug.toString(), timesheetFilters, viewId.toString())
         }
     }
 
     useSWR(
-        workspaceSlug && globalViewId ? `WORKSPACE_GLOBAL_VIEW_ISSUES_${workspaceSlug}_${globalViewId}` : null,
+        workspaceSlug && viewId ? `TIMESHEET_ENTRIES_${workspaceSlug}_${viewId}` : null,
         async () => {
-            if (workspaceSlug && globalViewId) {
-                await fetchFilters(workspaceSlug.toString(), globalViewId.toString())
-                await fetchIssues(
-                    workspaceSlug.toString(),
-                    globalViewId.toString(),
-                    issueIds ? "mutation" : "init-loader"
-                )
+            if (workspaceSlug && viewId) {
+                await fetchFilters(workspaceSlug.toString(), viewId.toString())
+                await fetchTimeSheet(workspaceSlug.toString(), viewId.toString(), filters)
                 routerFilterParams()
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
     )
 
-    const canEditProperties = useCallback(
-        (projectId: string | undefined) => {
-            if (!projectId) return false
-
-            const currentProjectRole = currentWorkspaceAllProjectsRole && currentWorkspaceAllProjectsRole[projectId]
-
-            return currentProjectRole !== undefined && currentProjectRole >= ERoles.MEMBER
-        },
-        [currentWorkspaceAllProjectsRole]
-    )
-
-    const issueFilters = globalViewId ? filters?.[globalViewId.toString()] : undefined
-
-    const issueActions = useMemo(
-        () => ({
-            [EIssueActions.UPDATE]: async (issue: TIssue) => {
-                const projectId = issue.project_id
-                if (!workspaceSlug || !projectId || !globalViewId) return
-
-                await updateIssue(workspaceSlug.toString(), projectId, issue.id, issue, globalViewId.toString())
-            },
-            [EIssueActions.DELETE]: async (issue: TIssue) => {
-                const projectId = issue.project_id
-                if (!workspaceSlug || !projectId || !globalViewId) return
-
-                await removeIssue(workspaceSlug.toString(), projectId, issue.id, globalViewId.toString())
-            },
-            [EIssueActions.ARCHIVE]: async (issue: TIssue) => {
-                const projectId = issue.project_id
-                if (!workspaceSlug || !projectId || !globalViewId) return
-
-                await archiveIssue(workspaceSlug.toString(), projectId, issue.id, globalViewId.toString())
-            },
-        }),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [updateIssue, removeIssue, workspaceSlug]
-    )
-
-    const handleIssues = useCallback(
-        async (issue: TIssue, action: EIssueActions) => {
-            if (action === EIssueActions.UPDATE) await issueActions[action]!(issue)
-            if (action === EIssueActions.DELETE) await issueActions[action]!(issue)
-            if (action === EIssueActions.ARCHIVE) await issueActions[action]!(issue)
-        },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        []
-    )
-
-    const handleDisplayFiltersUpdate = useCallback(
-        (updatedDisplayFilter: Partial<IIssueDisplayFilterOptions>) => {
-            if (!workspaceSlug || !globalViewId) return
-
-            updateFilters(
-                workspaceSlug.toString(),
-                undefined,
-                EIssueFilterType.DISPLAY_FILTERS,
-                { ...updatedDisplayFilter },
-                globalViewId.toString()
-            )
-        },
-        [updateFilters, workspaceSlug, globalViewId]
-    )
-
-    const renderQuickActions = useCallback(
-        (issue: TIssue, customActionButton?: React.ReactElement, portalElement?: HTMLDivElement | null) => (
-            <AllIssueQuickActions
-                customActionButton={customActionButton}
-                issue={issue}
-                handleUpdate={async () => handleIssues({ ...issue }, EIssueActions.UPDATE)}
-                handleDelete={async () => handleIssues(issue, EIssueActions.DELETE)}
-                handleArchive={async () => handleIssues(issue, EIssueActions.ARCHIVE)}
-                portalElement={portalElement}
-                readOnly={!canEditProperties(issue.project_id)}
-            />
-        ),
-        [canEditProperties, handleIssues]
-    )
-
     const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
 
-    if (loader === "init-loader" || !globalViewId || globalViewId !== dataViewId || !issueIds) {
+    if (loader === "init-loader" || !viewId || viewId !== dataViewId || !issueIds) {
         return <SpreadsheetLayoutLoader />
     }
 
     return (
         <div className="relative flex h-full w-full flex-col overflow-hidden">
             <div className="relative h-full w-full flex flex-col">
-                <GlobalViewsAppliedFiltersRoot globalViewId={globalViewId} />
+                <GlobalViewsAppliedFiltersRoot globalViewId={viewId.toString()} />
                 {issueIds.length === 0 ? (
                     <EmptyState
                         image={emptyStateImage}
@@ -231,18 +139,7 @@ export const TimeSheetRoot: React.FC = observer(() => {
                         disabled={!isEditingAllowed}
                     />
                 ) : (
-                    <Fragment>
-                        <SpreadsheetView
-                            displayProperties={issueFilters?.displayProperties ?? {}}
-                            displayFilters={issueFilters?.displayFilters ?? {}}
-                            handleDisplayFilterUpdate={handleDisplayFiltersUpdate}
-                            issueIds={issueIds}
-                            quickActions={renderQuickActions}
-                            handleIssues={handleIssues}
-                            canEditProperties={canEditProperties}
-                            viewId={globalViewId}
-                        />
-                    </Fragment>
+                    <Fragment />
                 )}
             </div>
         </div>
