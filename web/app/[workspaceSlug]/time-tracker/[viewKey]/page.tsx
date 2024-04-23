@@ -2,26 +2,20 @@
 
 import { useParams } from "next/navigation"
 
-import { CalendarClock } from "lucide-react"
 import { observer } from "mobx-react"
 
 import { PageHead } from "@components/core"
-import { DefaultHeader } from "@components/headers"
+import { TimesheetHeader } from "@components/headers"
 
 import { AppWrapper } from "@wrappers/app"
 
 const GlobalTimeTrackerPage = observer(() => {
     const { viewKey } = useParams<{ viewKey: "my-timesheet" | "workspace-timesheet" }>()
 
+    if (["my-timesheet", "workspace-timesheet"].includes(viewKey) === false) return null
+
     return (
-        <AppWrapper
-            header={
-                <DefaultHeader
-                    title={viewKey === "my-timesheet" ? "My Timesheet" : "Workspace Timesheet"}
-                    icon={<CalendarClock className="h-4 w-4 text-custom-text-300" />}
-                />
-            }
-        >
+        <AppWrapper header={<TimesheetHeader activeLayout={viewKey} />}>
             <PageHead title={viewKey === "my-timesheet" ? "My Timesheet" : "Workspace Timesheet"} />
             <div className="h-full overflow-hidden bg-custom-background-100">
                 <div className="flex h-full w-full flex-col border-b border-custom-border-300" />
