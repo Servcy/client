@@ -1,19 +1,47 @@
 "use client"
 
+import Link from "next/link"
 import { useParams } from "next/navigation"
 
+import { CalendarClock } from "lucide-react"
 import { observer } from "mobx-react"
 
+import { NotAuthorizedView } from "@components/auth-screens"
 import { PageHead } from "@components/core"
 import { TimesheetHeader } from "@components/headers"
 
+import { useUser } from "@hooks/store"
+
+import { ERoles } from "@constants/iam"
+
 import { AppWrapper } from "@wrappers/app"
 
+import { Button } from "@servcy/ui"
+
 const GlobalTimeTrackerPage = observer(() => {
-    const { viewKey } = useParams<{ viewKey: "my-timesheet" | "workspace-timesheet" }>()
+    const { viewKey, workspaceSlug } = useParams<{
+        workspaceSlug: string
+        viewKey: "my-timesheet" | "workspace-timesheet"
+    }>()
+    const {
+        membership: { currentWorkspaceRole },
+    } = useUser()
+    const isWorkspaceAdmin = currentWorkspaceRole === ERoles.ADMIN
 
-    if (["my-timesheet", "workspace-timesheet"].includes(viewKey) === false) return null
-
+    if (!isWorkspaceAdmin && viewKey === "workspace-timesheet")
+        return (
+            <NotAuthorizedView
+                type="workspace"
+                actionButton={
+                    <Link href={`/${workspaceSlug}/time-tracker/my-timesheet`}>
+                        <Button variant="primary" size="md" prependIcon={<CalendarClock />}>
+                            Go to your timesheet
+                        </Button>
+                    </Link>
+                }
+            />
+        )
+    if (!["my-timesheet", "workspace-timesheet"].includes(viewKey)) return null
     return (
         <AppWrapper header={<TimesheetHeader activeLayout={viewKey} />}>
             <PageHead title={viewKey === "my-timesheet" ? "My Timesheet" : "Workspace Timesheet"} />
