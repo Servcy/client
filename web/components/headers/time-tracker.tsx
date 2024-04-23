@@ -8,7 +8,7 @@ import { observer } from "mobx-react-lite"
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import { FiltersDropdown } from "@components/issues"
-import { IFilterOptions, TimesheetFilterSelection } from "@components/time-tracker"
+import { ITimesheetFilters, TimesheetFilterSelection } from "@components/time-tracker"
 
 import { useMember, useTimeTrackerFilter } from "@hooks/store"
 
@@ -23,7 +23,7 @@ export const TimesheetHeader: React.FC<{
         workspace: { workspaceMemberIds },
     } = useMember()
     const handleFiltersUpdate = useCallback(
-        (key: keyof IFilterOptions, value: string | string[]) => {
+        (key: keyof ITimesheetFilters, value: string | string[]) => {
             if (!workspaceSlug || !viewKey) return
             const newValues = filters?.[key] ?? []
             if (Array.isArray(value)) {
@@ -34,7 +34,7 @@ export const TimesheetHeader: React.FC<{
                 if (filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
                 else newValues.push(value)
             }
-            updateFilters(workspaceSlug.toString(), "filters", { [key]: newValues }, viewKey.toString())
+            updateFilters(workspaceSlug.toString(), { [key]: newValues }, viewKey.toString())
         },
         [workspaceSlug, filters, updateFilters, viewKey]
     )

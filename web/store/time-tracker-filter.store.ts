@@ -2,321 +2,210 @@ import isArray from "lodash/isArray"
 import isEmpty from "lodash/isEmpty"
 import pickBy from "lodash/pickBy"
 import set from "lodash/set"
-import { action, computed, makeObservable, observable, runInAction } from "mobx"
+import { action, makeObservable, observable, runInAction } from "mobx"
+
+import { ITimesheetFilters, ITimesheetParams } from "@components/time-tracker"
 
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 
-import { WorkspaceService } from "@services/workspace.service"
+import { storage } from "@wrappers/common/LocalStorageWrapper"
 
-import { handleIssueQueryParamsByLayout } from "@helpers/issue.helper"
+import { RootStore } from "./root.store"
 
-import {
-    IIssueDisplayFilterOptions,
-    IIssueDisplayProperties,
-    IIssueFilterOptions,
-    IIssueFilters,
-    TIssueKanbanFilters,
-    TIssueParams,
-    TStaticViewTypes,
-} from "@servcy/types"
-
-// base class
-import { IssueFilterHelperStore } from "../helpers/issue-filter-helper.store"
-import { IIssueRootStore } from "../root.store"
-
-type TWorkspaceFilters = "all-issues" | "assigned" | "created" | "subscribed" | string
-
-export interface ITimeTrackerFilter {
-    // observables
-    filters: Record<TWorkspaceFilters, IIssueFilters> // Record defines viewId as key and IIssueFilters as value
-    // computed
-    issueFilters: IIssueFilters | undefined
-    appliedFilters: Partial<Record<TIssueParams, string | boolean>> | undefined
-    // fetch action
-    fetchFilters: (workspaceSlug: string, viewId: string) => Promise<void>
-    updateFilters: (
-        workspaceSlug: string,
-        projectId: string | undefined,
-        filterType: EIssueFilterType,
-        filters: IIssueFilterOptions | IIssueDisplayFilterOptions | IIssueDisplayProperties | TIssueKanbanFilters,
-        viewId?: string | undefined
-    ) => Promise<void>
-    //helper action
-    getIssueFilters: (viewId: string | undefined) => IIssueFilters | undefined
-    getAppliedFilters: (viewId: string) => Partial<Record<TIssueParams, string | boolean>> | undefined
+interface ILocalStoreTimesheetFilters {
+    key: EIssuesStoreType
+    workspaceSlug: string
+    viewId: string | undefined
+    userId: string | undefined
+    filters: ITimesheetFilters
 }
 
-export class TimeTrackerFilter extends IssueFilterHelperStore implements ITimeTrackerFilter {
-    // observables
-    filters: { [viewId: string]: IIssueFilters } = {}
-    // root store
-    rootIssueStore
+export interface ITimeTrackerFilter {
+    filters: Record<"my-timesheet" | "workspace-timesheet" | string, ITimesheetFilters>
+    getFilters: (viewId: string | undefined) => ITimesheetFilters | undefined
+    getAppliedFilters: (viewId: string) => Partial<Record<ITimesheetParams, string | boolean>> | undefined
+    fetchFilters: (workspaceSlug: string, viewId: string) => Promise<void>
+    updateFilters: (workspaceSlug: string, filters: ITimesheetFilters, viewId?: string | undefined) => Promise<void>
 
-    issueFilterService
+    // utils
+    computedFilteredParams(
+        filters: ITimesheetFilters,
+        filteredParams: ITimesheetParams[]
+    ): Partial<Record<ITimesheetParams, string | boolean>>
+}
 
-    constructor(_rootStore: IIssueRootStore) {
-        super()
+export class TimeTrackerFilter implements ITimeTrackerFilter {
+    filters: { [viewId: string]: ITimesheetFilters } = {}
+    rootStore
+
+    constructor(_rootStore: RootStore) {
         makeObservable(this, {
-            // observables
             filters: observable,
-            // computed
-            issueFilters: computed,
-            appliedFilters: computed,
-            // fetch actions
+            getFilters: action,
+            getAppliedFilters: action,
             fetchFilters: action,
             updateFilters: action,
-            // helper actions
-            getIssueFilters: action,
-            getAppliedFilters: action,
         })
-        // root store
-        this.rootIssueStore = _rootStore
-
-        this.issueFilterService = new WorkspaceService()
+        this.rootStore = _rootStore
     }
 
-    getIssueFilters = (viewId: string | undefined) => {
+    /**
+     * @description This method is used to convert the filters array params to string params
+     * @param {ITimesheetFilters} filters
+     * @param {string[]} acceptableParamsByLayout
+     * @returns {Partial<Record<ITimesheetParams, string | boolean>>}
+     */
+    computedFilteredParams = (filters: ITimesheetFilters, acceptableParamsByLayout: ITimesheetParams[]) => {
+        const computedFilters: Partial<Record<ITimesheetParams, undefined | string[] | boolean | string>> = {
+            created_by: filters?.created_by || undefined,
+            project: filters.project || undefined,
+            start_time: filters.start_time || undefined,
+            duration: filters.duration || undefined,
+            is_billable: filters.is_billable || undefined,
+            is_approved: filters.is_approved || undefined,
+            is_manually_added: filters.is_manually_added || undefined,
+        }
+        const timesheetFiltersParams: Partial<Record<ITimesheetParams, boolean | string>> = {}
+        Object.keys(computedFilters).forEach((key) => {
+            const _key = key as ITimesheetParams
+            const _value: string | boolean | string[] | undefined = computedFilters[_key]
+            if (_value != undefined && acceptableParamsByLayout.includes(_key))
+                timesheetFiltersParams[_key] = Array.isArray(_value) ? _value.join(",") : _value
+        })
+        return timesheetFiltersParams
+    }
+
+    handleIssuesLocalFilters = {
+        fetchFiltersFromStorage: () => {
+            const _filters = storage.get("timesheet_local_filters")
+            return _filters ? JSON.parse(_filters) : []
+        },
+        get: (
+            currentView: EIssuesStoreType,
+            workspaceSlug: string,
+            viewId: string | undefined,
+            userId: string | undefined
+        ) => {
+            const storageFilters = this.handleIssuesLocalFilters.fetchFiltersFromStorage()
+            const currentFilterIndex = storageFilters.findIndex(
+                (filter: ILocalStoreTimesheetFilters) =>
+                    filter.key === currentView &&
+                    filter.workspaceSlug === workspaceSlug &&
+                    filter.viewId === viewId &&
+                    filter.userId === userId
+            )
+            if (!currentFilterIndex && currentFilterIndex.length < 0) return undefined
+            return storageFilters[currentFilterIndex]?.filters || {}
+        },
+        set: (
+            currentView: EIssuesStoreType,
+            filterType: EIssueFilterType,
+            workspaceSlug: string,
+            viewId: string | undefined,
+            userId: string | undefined,
+            filters: Partial<ITimesheetFilters>
+        ) => {
+            const storageFilters = this.handleIssuesLocalFilters.fetchFiltersFromStorage()
+            const currentFilterIndex = storageFilters.findIndex(
+                (filter: ILocalStoreTimesheetFilters) =>
+                    filter.key === currentView &&
+                    filter.workspaceSlug === workspaceSlug &&
+                    filter.viewId === viewId &&
+                    filter.userId === userId
+            )
+
+            if (currentFilterIndex < 0)
+                storageFilters.push({
+                    key: currentView,
+                    workspaceSlug: workspaceSlug,
+                    viewId: viewId,
+                    userId: userId,
+                    filters: filters,
+                })
+            else
+                storageFilters[currentFilterIndex] = {
+                    ...storageFilters[currentFilterIndex],
+                    filters: {
+                        ...storageFilters[currentFilterIndex].filters,
+                        [filterType]: filters,
+                    },
+                }
+            storage.set("timesheet_local_filters", JSON.stringify(storageFilters))
+        },
+    }
+
+    /**
+     * @description This method is used to apply the filters on the issues
+     * @param {ITimesheetFilters} filters
+     * @returns {ITimesheetFilters}
+     */
+    computedFilters = (filters: ITimesheetFilters): ITimesheetFilters => ({
+        created_by: filters?.created_by || undefined,
+        project: filters.project || undefined,
+        start_time: filters.start_time || undefined,
+        duration: filters.duration || undefined,
+        is_billable: filters.is_billable || undefined,
+        is_approved: filters.is_approved || undefined,
+        is_manually_added: filters.is_manually_added || undefined,
+    })
+
+    getFilters = (viewId: string | undefined) => {
         if (!viewId) return undefined
-
-        const displayFilters = this.filters[viewId] || undefined
-        if (isEmpty(displayFilters)) return undefined
-
-        const _filters: IIssueFilters = this.computedIssueFilters(displayFilters)
-
-        return _filters
+        return this.filters[viewId]
     }
 
     getAppliedFilters = (viewId: string | undefined) => {
         if (!viewId) return undefined
-
-        const userFilters = this.getIssueFilters(viewId)
-        if (!userFilters) return undefined
-
-        const filteredParams = handleIssueQueryParamsByLayout(userFilters?.displayFilters?.layout, "my_issues")
-        if (!filteredParams) return undefined
-
-        const filteredRouteParams: Partial<Record<TIssueParams, string | boolean>> = this.computedFilteredParams(
-            userFilters?.filters as IIssueFilterOptions,
-            userFilters?.displayFilters as IIssueDisplayFilterOptions,
+        const selectedFilters = this.getFilters(viewId)
+        if (!selectedFilters) return undefined
+        const filteredParams: ITimesheetParams[] = [
+            "created_by",
+            "project",
+            "start_time",
+            "duration",
+            "is_billable",
+            "is_approved",
+            "is_manually_added",
+        ]
+        const filteredRouteParams: Partial<Record<ITimesheetParams, string | boolean>> = this.computedFilteredParams(
+            selectedFilters,
             filteredParams
         )
-
         return filteredRouteParams
     }
 
-    get issueFilters() {
-        const viewId = this.rootIssueStore.globalViewId
-        return this.getIssueFilters(viewId)
-    }
-
-    get appliedFilters() {
-        const viewId = this.rootIssueStore.globalViewId
-        return this.getAppliedFilters(viewId)
-    }
-
-    fetchFilters = async (workspaceSlug: string, viewId: TWorkspaceFilters) => {
+    fetchFilters = async (workspaceSlug: string, viewId: "my-timesheet" | "workspace-timesheet" | string) => {
         try {
-            let filters: IIssueFilterOptions
-            let displayFilters: IIssueDisplayFilterOptions
-            let displayProperties: IIssueDisplayProperties
-            let kanbanFilters: TIssueKanbanFilters = {
-                group_by: [],
-                sub_group_by: [],
-            }
-
+            const currentUser = this.rootStore.user.currentUser
             const _filters = this.handleIssuesLocalFilters.get(
                 EIssuesStoreType.GLOBAL,
                 workspaceSlug,
-                undefined,
-                viewId
+                viewId,
+                currentUser?.id
             )
-            displayFilters = this.computedDisplayFilters(_filters?.display_filters, { layout: "spreadsheet" })
-            displayProperties = this.computedDisplayProperties(_filters?.display_properties)
-            kanbanFilters = {
-                group_by: _filters?.kanban_filters?.group_by || [],
-                sub_group_by: _filters?.kanban_filters?.sub_group_by || [],
-            }
-
-            if (["all-issues", "assigned", "created", "subscribed"].includes(viewId)) {
-                const currentUserId = this.rootIssueStore.currentUserId
-                filters = this.getComputedFiltersBasedOnViews(currentUserId, viewId as TStaticViewTypes)
-            } else {
-                const _filters = await this.issueFilterService.getViewDetails(workspaceSlug, viewId)
-                filters = this.computedFilters(_filters?.filters)
-                displayFilters = this.computedDisplayFilters(_filters?.display_filters)
-                displayProperties = this.computedDisplayProperties(_filters?.display_properties)
-            }
-
+            const filters = this.computedFilters(_filters)
             runInAction(() => {
-                set(this.filters, [viewId, "filters"], filters)
-                set(this.filters, [viewId, "displayFilters"], displayFilters)
-                set(this.filters, [viewId, "displayProperties"], displayProperties)
-                set(this.filters, [viewId, "kanbanFilters"], kanbanFilters)
+                set(this.filters, [viewId], filters)
             })
         } catch (error) {
             throw error
         }
     }
 
-    updateFilters = async (
-        workspaceSlug: string,
-        projectId: string | undefined,
-        type: EIssueFilterType,
-        filters: IIssueFilterOptions | IIssueDisplayFilterOptions | IIssueDisplayProperties | TIssueKanbanFilters,
-        viewId?: string
-    ) => {
+    updateFilters = async (workspaceSlug: string, filters: ITimesheetFilters, viewId?: string) => {
         try {
             if (!viewId) throw new Error("View id is required")
-            const issueFilters = this.getIssueFilters(viewId)
-
-            if (!issueFilters || isEmpty(filters)) return
-
-            const _filters = {
-                filters: issueFilters.filters as IIssueFilterOptions,
-                displayFilters: issueFilters.displayFilters as IIssueDisplayFilterOptions,
-                displayProperties: issueFilters.displayProperties as IIssueDisplayProperties,
-                kanbanFilters: issueFilters.kanbanFilters as TIssueKanbanFilters,
-            }
-
-            switch (type) {
-                case EIssueFilterType.FILTERS:
-                    const updatedFilters = filters as IIssueFilterOptions
-                    _filters.filters = { ..._filters.filters, ...updatedFilters }
-
-                    runInAction(() => {
-                        Object.keys(updatedFilters).forEach((_key) => {
-                            set(
-                                this.filters,
-                                [viewId, "filters", _key],
-                                updatedFilters[_key as keyof IIssueFilterOptions]
-                            )
-                        })
-                    })
-                    const appliedFilters = _filters.filters || {}
-                    const filteredFilters = pickBy(
-                        appliedFilters,
-                        (value) => value && isArray(value) && value.length > 0
-                    )
-                    this.rootIssueStore.workspaceIssues.fetchIssues(
-                        workspaceSlug,
-                        viewId,
-                        isEmpty(filteredFilters) ? "init-loader" : "mutation"
-                    )
-                    break
-                case EIssueFilterType.DISPLAY_FILTERS:
-                    const updatedDisplayFilters = filters as IIssueDisplayFilterOptions
-                    _filters.displayFilters = { ..._filters.displayFilters, ...updatedDisplayFilters }
-
-                    // set sub_group_by to null if group_by is set to null
-                    if (_filters.displayFilters.group_by === null) {
-                        _filters.displayFilters.sub_group_by = null
-                        updatedDisplayFilters.sub_group_by = null
-                    }
-                    // set sub_group_by to null if layout is switched to kanban group_by and sub_group_by are same
-                    if (
-                        _filters.displayFilters.layout === "kanban" &&
-                        _filters.displayFilters.group_by === _filters.displayFilters.sub_group_by
-                    ) {
-                        _filters.displayFilters.sub_group_by = null
-                        updatedDisplayFilters.sub_group_by = null
-                    }
-                    // set group_by to state if layout is switched to kanban and group_by is null
-                    if (_filters.displayFilters.layout === "kanban" && _filters.displayFilters.group_by === null) {
-                        _filters.displayFilters.group_by = "state"
-                        updatedDisplayFilters.group_by = "state"
-                    }
-
-                    runInAction(() => {
-                        Object.keys(updatedDisplayFilters).forEach((_key) => {
-                            set(
-                                this.filters,
-                                [viewId, "displayFilters", _key],
-                                updatedDisplayFilters[_key as keyof IIssueDisplayFilterOptions]
-                            )
-                        })
-                    })
-
-                    if (this.requiresServerUpdate(updatedDisplayFilters))
-                        this.rootIssueStore.workspaceIssues.fetchIssues(workspaceSlug, viewId, "mutation")
-
-                    if (["all-issues", "assigned", "created", "subscribed"].includes(viewId))
-                        this.handleIssuesLocalFilters.set(
-                            EIssuesStoreType.GLOBAL,
-                            type,
-                            workspaceSlug,
-                            undefined,
-                            viewId,
-                            {
-                                display_filters: _filters.displayFilters,
-                            }
-                        )
-                    else
-                        await this.issueFilterService.updateView(workspaceSlug, viewId, {
-                            display_filters: _filters.displayFilters,
-                        })
-
-                    break
-                case EIssueFilterType.DISPLAY_PROPERTIES:
-                    const updatedDisplayProperties = filters as IIssueDisplayProperties
-                    _filters.displayProperties = { ..._filters.displayProperties, ...updatedDisplayProperties }
-
-                    runInAction(() => {
-                        Object.keys(updatedDisplayProperties).forEach((_key) => {
-                            set(
-                                this.filters,
-                                [viewId, "displayProperties", _key],
-                                updatedDisplayProperties[_key as keyof IIssueDisplayProperties]
-                            )
-                        })
-                    })
-                    if (["all-issues", "assigned", "created", "subscribed"].includes(viewId))
-                        this.handleIssuesLocalFilters.set(
-                            EIssuesStoreType.GLOBAL,
-                            type,
-                            workspaceSlug,
-                            undefined,
-                            viewId,
-                            {
-                                display_properties: _filters.displayProperties,
-                            }
-                        )
-                    else
-                        await this.issueFilterService.updateView(workspaceSlug, viewId, {
-                            display_properties: _filters.displayProperties,
-                        })
-                    break
-
-                case EIssueFilterType.KANBAN_FILTERS:
-                    const updatedKanbanFilters = filters as TIssueKanbanFilters
-                    _filters.kanbanFilters = { ..._filters.kanbanFilters, ...updatedKanbanFilters }
-
-                    const currentUserId = this.rootIssueStore.currentUserId
-                    if (currentUserId)
-                        this.handleIssuesLocalFilters.set(
-                            EIssuesStoreType.PROJECT,
-                            type,
-                            workspaceSlug,
-                            undefined,
-                            viewId,
-                            {
-                                kanban_filters: _filters.kanbanFilters,
-                            }
-                        )
-
-                    runInAction(() => {
-                        Object.keys(updatedKanbanFilters).forEach((_key) => {
-                            set(
-                                this.filters,
-                                [viewId, "kanbanFilters", _key],
-                                updatedKanbanFilters[_key as keyof TIssueKanbanFilters]
-                            )
-                        })
-                    })
-
-                    break
-                default:
-                    break
-            }
+            const timesheetFilters = this.getFilters(viewId)
+            if (!timesheetFilters || isEmpty(filters)) return
+            const updatedFilters = filters as ITimesheetFilters
+            runInAction(() => {
+                Object.keys(updatedFilters).forEach((_key) => {
+                    set(this.filters, [viewId, _key], updatedFilters[_key as keyof ITimesheetFilters])
+                })
+            })
+            const appliedFilters = { ...timesheetFilters, ...updatedFilters }
+            const validatedFilters = pickBy(appliedFilters, (value) => value && isArray(value) && value.length > 0)
+            this.rootStore.timeTracker.fetchTimeSheet(workspaceSlug, viewId, validatedFilters)
         } catch (error) {
             if (viewId) this.fetchFilters(workspaceSlug, viewId)
             throw error

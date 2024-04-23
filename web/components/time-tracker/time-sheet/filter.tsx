@@ -5,19 +5,28 @@ import { observer } from "mobx-react-lite"
 
 import { FilterCreatedBy, FilterProjects, FilterStartDate } from "@components/issues"
 
-export type IFilterOptions = {
+export type ITimesheetFilters = {
     created_by?: string[] | null
     project?: string[] | null
-    start_date?: string[] | null
+    start_time?: string[] | null
     duration?: string[] | null
     is_billable?: boolean
     is_approved?: boolean
     is_manually_added?: boolean
 }
 
+export type ITimesheetParams =
+    | "created_by"
+    | "project"
+    | "start_time"
+    | "duration"
+    | "is_billable"
+    | "is_approved"
+    | "is_manually_added"
+
 type Props = {
-    filters: IFilterOptions
-    handleFiltersUpdate: (key: keyof IFilterOptions, value: string | string[]) => void
+    filters: ITimesheetFilters
+    handleFiltersUpdate: (key: keyof ITimesheetFilters, value: string | string[]) => void
     memberIds?: string[] | undefined
 }
 
@@ -69,11 +78,11 @@ export const TimesheetFilterSelection: React.FC<Props> = observer((props) => {
                     />
                 </div>
 
-                {/* start_date */}
+                {/* start_time */}
                 <div className="py-2">
                     <FilterStartDate
-                        appliedFilters={filters.start_date ?? null}
-                        handleUpdate={(val) => handleFiltersUpdate("start_date", val)}
+                        appliedFilters={filters.start_time ?? null}
+                        handleUpdate={(val) => handleFiltersUpdate("start_time", val)}
                         searchQuery={filtersSearchQuery}
                     />
                 </div>

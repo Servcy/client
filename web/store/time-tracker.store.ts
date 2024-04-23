@@ -23,7 +23,7 @@ export interface ITimeTrackerStore {
     loadingTimeSheet: boolean
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
     stopTrackingTime: (workspaceSlug: string) => Promise<void>
-    fetchTimeSheet: (workspaceSlug: string, queries?: any) => Promise<void>
+    fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any) => Promise<void>
     getTrackTimeByIssueId: (issueId: string) => ITrackedTime[]
     snapshots: Record<string, string[]>
     snapshotMap: Record<string, ITrackedTimeSnapshot>
@@ -106,12 +106,12 @@ export class TimeTrackerStore implements ITimeTrackerStore {
      * @param queries
      * @returns
      */
-    fetchTimeSheet = async (workspaceSlug: string, queries?: any) => {
+    fetchTimeSheet = async (workspaceSlug: string, viewId: string, queries?: any) => {
         try {
             runInAction(() => {
                 this.loadingTimeSheet = true
             })
-            const timeSheet = await this.timeTrackerService.fetchTimeSheet(workspaceSlug, queries)
+            const timeSheet = await this.timeTrackerService.fetchTimeSheet(workspaceSlug, viewId, queries)
             timeSheet.forEach((trackedTime: ITrackedTime) => {
                 const issueKey = trackedTime.issue
                 const existingTrackedTimes = this.timeTrackingMap[issueKey] ?? []

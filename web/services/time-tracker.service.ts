@@ -27,9 +27,9 @@ export class TimeTrackerService extends APIService {
         }
     }
 
-    async fetchTimeSheet(workspaceSlug: string, queries?: any) {
+    async fetchTimeSheet(workspaceSlug: string, viewId: string, queries?: any) {
         try {
-            const response = await this.get(`/project/${workspaceSlug}/timer`, {
+            const response = await this.get(`/project/${workspaceSlug}/timer/${viewId}`, {
                 params: queries,
             })
             return response?.data

@@ -27,7 +27,7 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
     } = useMember()
 
     useEffect(() => {
-        if (issueId && workspaceSlug) fetchTimeSheet(workspaceSlug.toString(), { issue_id: issueId })
+        if (issueId && workspaceSlug) fetchTimeSheet(workspaceSlug.toString(), "my-timesheet", { issue_id: issueId })
     }, [issueId])
 
     if (!workspaceSlug) return <></>
