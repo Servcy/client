@@ -113,13 +113,15 @@ export class TimeTrackerStore implements ITimeTrackerStore {
             })
             const timeSheet = await this.timeTrackerService.fetchTimeSheet(workspaceSlug, queries)
             timeSheet.forEach((trackedTime: ITrackedTime) => {
-                runInAction(() => {
-                    set(this.timeTrackingMap, trackedTime.issue, [
-                        ...(this.timeTrackingMap[trackedTime.issue] || []),
-                        trackedTime,
-                    ])
-                })
-                if (trackedTime?.snapshots?.length > 0) this.addSnapshots(trackedTime.id, trackedTime.snapshots)
+                const issueKey = trackedTime.issue
+                const existingTrackedTimes = this.timeTrackingMap[issueKey] ?? []
+                const isExisting = existingTrackedTimes.some((timeLog) => timeLog.id === trackedTime.id)
+                if (!isExisting) {
+                    runInAction(() => {
+                        set(this.timeTrackingMap, issueKey, [...existingTrackedTimes, trackedTime])
+                    })
+                    if (trackedTime?.snapshots?.length > 0) this.addSnapshots(trackedTime.id, trackedTime.snapshots)
+                }
             })
         } catch (error) {
             throw error
