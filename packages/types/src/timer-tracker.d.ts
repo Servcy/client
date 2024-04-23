@@ -13,6 +13,16 @@ export interface ITrackedTime {
     is_billable: boolean
     is_approved: boolean
 
+    issue_detail: {
+        id: string
+        name: string
+        sequence_id: number
+    }
+    project_detail: {
+        id: string
+        identifier: string
+    }
+
     created_at: string
     updated_at: string
     created_by: string
@@ -26,7 +36,7 @@ export type ITrackedTimeSnapshot = {
         size: number
     }
     file: string
-    tracked_time: string
+    tracked_time: ITrackedTime
 
     created_at: string
     updated_at: string
