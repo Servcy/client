@@ -2,10 +2,10 @@ import { useContext } from "react"
 
 import { StoreContext } from "@contexts/StoreContext"
 
-import { ITimeTrackerFilterStore } from "@store/time-tracker-filter.store"
+import { ITimeTrackerFilter } from "@store/time-tracker-filter.store"
 
-export const useTimeTrackerFilter = (): ITimeTrackerFilterStore => {
+export const useTimeTrackerFilter = (): ITimeTrackerFilter => {
     const context = useContext(StoreContext)
     if (context === undefined) throw new Error("useTimeTrackerFilter must be used within StoreProvider")
-    return context.timeTracker
+    return context.timeTrackerFilter
 }

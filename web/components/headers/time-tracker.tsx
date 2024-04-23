@@ -25,13 +25,13 @@ export const TimesheetHeader: React.FC<{
     const handleFiltersUpdate = useCallback(
         (key: keyof ITimesheetFilters, value: string | string[]) => {
             if (!workspaceSlug || !viewKey) return
-            const newValues = filters?.[key] ?? []
+            const newValues = filters[activeLayout]?.[key] ?? []
             if (Array.isArray(value)) {
                 value.forEach((val) => {
                     if (!newValues.includes(val)) newValues.push(val)
                 })
             } else {
-                if (filters?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
+                if (filters[activeLayout]?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
                 else newValues.push(value)
             }
             updateFilters(workspaceSlug.toString(), { [key]: newValues }, viewKey.toString())

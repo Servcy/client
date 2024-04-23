@@ -10,6 +10,9 @@ export type ITimesheetFilters = {
     project?: string[] | null
     start_time?: string[] | null
     duration?: string[] | null
+}
+
+export type ITimesheetDisplayFilters = {
     is_billable?: boolean
     is_approved?: boolean
     is_manually_added?: boolean
