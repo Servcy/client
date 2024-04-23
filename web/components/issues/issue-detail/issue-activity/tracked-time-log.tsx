@@ -3,7 +3,7 @@ import { useParams } from "next/navigation"
 
 import { FC, useEffect } from "react"
 
-import { Timer } from "lucide-react"
+import { CircleDollarSign, Info, Timer } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { SnapshotsDetail } from "@components/issues/time-tracker"
@@ -12,7 +12,7 @@ import { useMember, useTimeTracker } from "@hooks/store"
 
 import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-time.helper"
 
-import { Loader } from "@servcy/ui"
+import { Loader, Tooltip } from "@servcy/ui"
 
 type TTimeLog = {
     issueId: string
@@ -69,7 +69,7 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
                         <div className="flex-shrink-0 ring-6 w-7 h-7 rounded-full overflow-hidden flex justify-center items-center z-[4] bg-custom-background-80 text-custom-text-200">
                             <Timer className="h-4 w-4 flex-shrink-0" />
                         </div>
-                        <div className="w-full text-custom-text-200">
+                        <div className="w-full relative text-custom-text-200">
                             <div>
                                 <Link
                                     href={`/${workspaceSlug.toString()}/profile/${memberDetails?.id}`}
@@ -90,6 +90,18 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
                                     <pre className="inline text-sm bg-custom-background-80 rounded-md p-1 ml-1">
                                         {renderFormattedDateTime(timeLog["start_time"])}
                                     </pre>
+                                    <Tooltip
+                                        tooltipContent={`Description: ${timeLog["description"] ?? "-"}`}
+                                        position="top"
+                                    >
+                                        <Info className="size-3.5 cursor-pointer ml-2 inline" />
+                                    </Tooltip>
+                                    <Tooltip
+                                        tooltipContent={`${timeLog["is_billable"] ? "Billable" : "Non-Billable"}`}
+                                        position="top"
+                                    >
+                                        <CircleDollarSign className="size-3.5 cursor-pointer ml-2 inline" />
+                                    </Tooltip>
                                 </span>
                             </div>
                             {timeLog["snapshots"]?.length > 0 && (
