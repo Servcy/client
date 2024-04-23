@@ -1,6 +1,6 @@
 import { useParams } from "next/navigation"
 
-import React, { FC, useEffect, useMemo } from "react"
+import React, { FC, useEffect, useMemo, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
 import { AlertTriangle } from "lucide-react"
@@ -8,6 +8,8 @@ import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
 import { useTimeTracker } from "@hooks/store"
+
+import { findTimePassedSinceDate, renderFormattedDateTime } from "@helpers/date-time.helper"
 
 import { Button } from "@servcy/ui"
 
@@ -28,7 +30,15 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
     ({ isConfirmationModalOpen, setIsConfirmationModalOpen }) => {
         const { stopTrackingTime, runningTimeTracker, createSnapshot, removeSnapshot, fetchSnapshots } =
             useTimeTracker()
+        const [currentTime, setCurrentTime] = useState(new Date())
         const { workspaceSlug } = useParams()
+
+        useEffect(() => {
+            const interval = setInterval(() => {
+                setCurrentTime(new Date())
+            }, 1000)
+            return () => clearInterval(interval)
+        }, [])
 
         const handleSnapshotOperations: TSnapshotOperations = useMemo(
             () => ({
@@ -99,6 +109,34 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(
                                                 <p className="text-sm text-custom-text-200">
                                                     If the total log time is less than 5 minutes, it will be discarded.
                                                 </p>
+                                            </div>
+                                        </div>
+                                        <div className="relative py-3 space-y-3">
+                                            <h3 className="text-lg">Issue</h3>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm text-custom-text-200">
+                                                    {runningTimeTracker["project_detail"]["identifier"]}
+                                                </span>
+                                                <span className="text-sm text-custom-text-100">
+                                                    {runningTimeTracker["issue_detail"]["name"]}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="relative py-3 space-y-3">
+                                            <h3 className="text-lg">
+                                                Time Log:{" "}
+                                                <pre className="inline text-sm bg-custom-background-80 rounded-md p-2">
+                                                    {findTimePassedSinceDate(runningTimeTracker["start_time"])}
+                                                </pre>
+                                            </h3>
+                                            <div className="flex items-center gap-2">
+                                                <pre className="text-sm bg-custom-background-80 rounded-md p-2">
+                                                    {renderFormattedDateTime(runningTimeTracker["start_time"])}
+                                                </pre>
+                                                -
+                                                <pre className="text-sm bg-custom-background-80 rounded-md p-2">
+                                                    {renderFormattedDateTime(currentTime)}
+                                                </pre>
                                             </div>
                                         </div>
                                         <div className="relative py-3 space-y-3">

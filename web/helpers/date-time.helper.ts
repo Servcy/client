@@ -25,10 +25,10 @@ export const renderFormattedDate = (date?: string | Date): string | null => {
 }
 
 /**
- * @returns {string} formatted date time in the format of MMM dd, yyyy hh:mm
+ * @returns {string} formatted date time in the format of MMM dd, yyyy hh:mm:ss
  * @description Returns date time in the formatted format
  * @param {string | Date} date
- * @example renderFormattedDateTime("2024-01-01 13:00:00") // Jan 01, 2024 13:00
+ * @example renderFormattedDateTime("2024-01-01 13:00:00") // Jan 01, 2024 13:00:00
  */
 export const renderFormattedDateTime = (date: string | Date): string => {
     if (!date) return ""
@@ -37,7 +37,7 @@ export const renderFormattedDateTime = (date: string | Date): string => {
     // Check if the parsed date is valid before formatting
     if (!isValid(parsedDate)) return "" // Return empty string for invalid dates
     // Format the date in format (MMM dd, yyyy hh:mm)
-    const formattedDateTime = format(parsedDate, "MMM dd, yyyy HH:mm")
+    const formattedDateTime = format(parsedDate, "MMM dd, yyyy HH:mm:ss")
     return formattedDateTime
 }
 
@@ -142,21 +142,17 @@ export const findHowManyDaysLeft = (
     return findTotalDaysInRange(new Date(), date, inclusive)
 }
 
-// Time Difference Helpers
 /**
- * @returns {string} formatted date in the form of amount of time passed since the event happened
- * @description Returns time passed since the event happened
- * @param {string | Date} time
- * @example calculateTimeAgo("2023-01-01") // 1 year ago
+ * @returns {string} Time passed since the date
+ * @description Returns time passed since the date
+ * @param {string | Date} start_date
  */
-export const calculateTimeAgo = (time: string | number | Date | null): string => {
-    if (!time) return ""
-    // Parse the time to check if it is valid
-    const parsedTime = typeof time === "string" || typeof time === "number" ? parseISO(String(time)) : time
-    if (!parsedTime) return "" // Return empty string for invalid dates
-    // Format the time in the form of amount of time passed since the event happened
-    const distance = formatDistanceToNow(parsedTime, { addSuffix: true })
-    return distance
+export const findTimePassedSinceDate = (start_date: string): string => {
+    if (!start_date) return ""
+    const parsedStartDate = new Date(start_date)
+    if (!isValid(parsedStartDate)) return ""
+    const diffInTime = formatDistanceToNow(parsedStartDate, { addSuffix: false, includeSeconds: true })
+    return diffInTime
 }
 
 // Date Validation Helpers
