@@ -12,6 +12,7 @@ export interface ITrackedTime {
 
     is_billable: boolean
     is_approved: boolean
+    is_manually_added: boolean
 
     issue_detail: {
         id: string
