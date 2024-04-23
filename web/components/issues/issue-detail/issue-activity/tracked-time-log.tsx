@@ -93,9 +93,9 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
                                 </span>
                             </div>
                             {timeLog["snapshots"]?.length > 0 && (
-                                <div className="flex flex-wrap gap-4">
+                                <div className="flex flex-wrap gap-4 mt-2">
                                     {timeLog["snapshots"]?.map((snapshot) => (
-                                        <SnapshotsDetail snapshotId={snapshot.id} />
+                                        <SnapshotsDetail snapshotId={snapshot.id} deleteSnapshotDisabled={true} />
                                     ))}
                                 </div>
                             )}
