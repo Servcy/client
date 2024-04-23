@@ -1,5 +1,5 @@
 import { linearGradientDef } from "@nivo/core"
-import { BarChart2, Briefcase, CheckCircle, LayoutGrid } from "lucide-react"
+import { BarChart2, Briefcase, CalendarClock, CheckCircle, LayoutGrid } from "lucide-react"
 import CompletedIssuesDark from "public/empty-state/dashboard/dark/completed-issues.svg"
 import OverdueIssuesDark from "public/empty-state/dashboard/dark/overdue-issues.svg"
 import UpcomingIssuesDark from "public/empty-state/dashboard/dark/upcoming-issues.svg"
@@ -249,6 +249,14 @@ export const SIDEBAR_MENU_ITEMS: {
         access: ERoles.GUEST,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}`,
         Icon: LayoutGrid,
+    },
+    {
+        key: "my-timesheet",
+        label: "My Timesheet",
+        href: "/time-tracker/my-timesheet",
+        access: ERoles.GUEST,
+        highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/time-tracker`,
+        Icon: CalendarClock,
     },
     {
         key: "analytics",
