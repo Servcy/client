@@ -3,7 +3,7 @@ import { useParams } from "next/navigation"
 
 import { FC, useRef } from "react"
 
-import { BadgeAlert, BadgeCheck, CircleDotDashed, ShieldCheck } from "lucide-react"
+import { BadgeAlert, ShieldCheck } from "lucide-react"
 
 import { useMember } from "@hooks/store"
 
@@ -12,6 +12,7 @@ import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-tim
 import { ITimesheetDisplayPropertyOptions, ITrackedTime } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
 
+import { ApprovalColumn } from "./columns/approve-column"
 import { IsBillableColumn } from "./columns/is-billable-column"
 
 interface ITimesheetRowCell {
@@ -21,7 +22,6 @@ interface ITimesheetRowCell {
 
 export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) => {
     const { workspaceSlug } = useParams()
-
     const {
         workspace: { getWorkspaceMemberDetails },
     } = useMember()
@@ -84,22 +84,7 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
                 </td>
             )
         case "is_approved":
-            return (
-                <td
-                    tabIndex={0}
-                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
-                    ref={tableCellRef}
-                >
-                    <div className="h-11 border-b-[0.5px] border-custom-border-200 py-2 px-4 truncate flex items-center justify-left gap-x-2">
-                        {timeLog.is_approved ? (
-                            <BadgeCheck className="size-4 text-custom-primary-100" />
-                        ) : (
-                            <CircleDotDashed className="size-4 text-amber-700" />
-                        )}
-                        <div>{timeLog.is_approved ? "Approved" : "In Review"}</div>
-                    </div>
-                </td>
-            )
+            return <ApprovalColumn tableCellRef={tableCellRef} timeLog={timeLog} />
         case "duration":
             return (
                 <td
