@@ -12,18 +12,6 @@ import {
     Text,
 } from "lucide-react"
 
-// import {
-//     TimesheetApprovedColumn,
-//     TimesheetBillableColumn,
-//     TimesheetCreatorColumn,
-//     TimesheetDescriptionColumn,
-//     TimesheetDurationColumn,
-//     TimesheetEndedAtColumn,
-//     TimesheetManuallyAddedColumn,
-//     TimesheetSnapshotsColumn,
-//     TimesheetStartedAtColumn,
-// } from "@components/time-tracker"
-
 import { ITimesheetDisplayPropertyOptions } from "@servcy/types"
 import { ISvgIcons } from "@servcy/ui/src/icons/type"
 
@@ -66,58 +54,43 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         title: string
         icon: FC<ISvgIcons>
         width?: string
-        // Column: React.FC<{
-        //     trackedTime: ITrackedTime
-        //     onClose: () => void
-        //     onChange: (trackedTime: ITrackedTime, data: Partial<ITrackedTime>, updates: any) => void // eslint-disable-line
-        //     disabled: boolean
-        // }>
     }
 } = {
     description: {
         title: "Description",
         icon: Text,
         width: "min-w-96",
-        // Column: TimesheetDescriptionColumn,
     },
     duration: {
         title: "Duration",
         icon: AudioLines,
-        // column: TimesheetDurationColumn,
     },
     start_time: {
         title: "Start Time",
         icon: CalendarClock,
-        // Column: TimesheetStartedAtColumn,
     },
     end_time: {
         title: "End Time",
         icon: CalendarCheck2,
-        // Column: TimesheetEndedAtColumn,
     },
     created_by: {
         title: "Creator",
         icon: CircleUser,
-        // Column: TimesheetCreatorColumn,
     },
     is_billable: {
         title: "Billable",
         icon: DollarSign,
-        // Column: TimesheetBillableColumn,
     },
     is_approved: {
         title: "Approved",
         icon: Check,
-        // Column: TimesheetApprovedColumn,
     },
     snapshots_count: {
         title: "Snapshots",
         icon: Camera,
-        // Column: TimesheetSnapshotsColumn,
     },
     is_manually_added: {
         title: "Manually Added",
         icon: PlusCircle,
-        // Column: TimesheetManuallyAddedColumn,
     },
 }
