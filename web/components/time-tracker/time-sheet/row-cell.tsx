@@ -10,9 +10,9 @@ import { useMember } from "@hooks/store"
 import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-time.helper"
 
 import { ITimesheetDisplayPropertyOptions, ITrackedTime } from "@servcy/types"
-import { Tooltip } from "@servcy/ui"
 
 import { ApprovalColumn } from "./columns/approve-column"
+import { DescriptionColumn } from "./columns/description-column"
 import { IsBillableColumn } from "./columns/is-billable-column"
 
 interface ITimesheetRowCell {
@@ -29,27 +29,7 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
     const tableCellRef = useRef<HTMLTableCellElement | null>(null)
     switch (property) {
         case "description":
-            return (
-                <td
-                    tabIndex={0}
-                    className="h-11 w-full max-w-96 min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
-                    ref={tableCellRef}
-                >
-                    {timeLog.description.length > 0 ? (
-                        <div className="w-full overflow-hidden">
-                            <Tooltip tooltipHeading="Description" tooltipContent={timeLog.description}>
-                                <div className="h-full w-full cursor-pointer truncate px-4 py-2.5 text-left text-[0.825rem] text-custom-text-100 focus:outline-none">
-                                    {timeLog.description}
-                                </div>
-                            </Tooltip>
-                        </div>
-                    ) : (
-                        <div className="h-11 border-b-[0.5px] border-custom-border-200 truncate p-2 flex items-center">
-                            N/A
-                        </div>
-                    )}
-                </td>
-            )
+            return <DescriptionColumn tableCellRef={tableCellRef} timeLog={timeLog} />
         case "start_time":
             return (
                 <td
