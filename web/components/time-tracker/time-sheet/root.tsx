@@ -35,7 +35,6 @@ export const TimeSheetRoot: React.FC = observer(() => {
     const { setTrackElement } = useEventTracker()
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("all-issues", "assigned", isLightMode)
-
     useSWR(
         workspaceSlug && viewKey ? `TIMESHEET_ENTRIES_${workspaceSlug}_${viewKey}` : null,
         async () => {
@@ -46,13 +45,8 @@ export const TimeSheetRoot: React.FC = observer(() => {
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
     )
-
     const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
-
-    if (loader === "init-loader" || !viewKey || !timesheet) {
-        return <SpreadsheetLayoutLoader />
-    }
-
+    if (loader === "init-loader" || !viewKey || !timesheet) return <SpreadsheetLayoutLoader />
     return (
         <div className="relative flex h-full w-full flex-col overflow-hidden">
             <div className="relative h-full w-full flex flex-col">
