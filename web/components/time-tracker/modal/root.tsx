@@ -2,10 +2,9 @@ import { FC } from "react"
 
 import { observer } from "mobx-react-lite"
 
-import { useTimeTracker } from "@hooks/store"
+import { StartTimeTrackerModal, StopTimeTrackerModal } from "@components/time-tracker"
 
-import { StartTimeTrackerModal } from "./StartTimeTrackerModal"
-import { StopTimeTrackerModal } from "./StopTimeTrackerModal"
+import { useTimeTracker } from "@hooks/store"
 
 interface ITimeTrackerModal {
     isOpen: boolean

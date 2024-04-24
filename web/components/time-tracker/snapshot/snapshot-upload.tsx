@@ -3,11 +3,11 @@ import { useCallback, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { useDropzone } from "react-dropzone"
 
+import { TSnapshotOperations } from "@components/time-tracker"
+
 import { MAX_FILE_SIZE } from "@constants/common"
 
 import { generateFileName } from "@helpers/attachment.helper"
-
-import { TSnapshotOperations } from "./StopTimeTrackerModal"
 
 type TSnapshotOperationsModal = Exclude<TSnapshotOperations, "remove">
 

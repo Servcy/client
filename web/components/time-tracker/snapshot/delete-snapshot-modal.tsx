@@ -3,12 +3,12 @@ import { Dispatch, FC, Fragment, SetStateAction, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { AlertTriangle } from "lucide-react"
 
+import { TSnapshotOperations } from "@components/time-tracker"
+
 import { getFileName } from "@helpers/attachment.helper"
 
 import type { ITrackedTimeSnapshot } from "@servcy/types"
 import { Button } from "@servcy/ui"
-
-import { TSnapshotOperations } from "./StopTimeTrackerModal"
 
 export type TSnapshotOperationsRemoveModal = Exclude<TSnapshotOperations, "create">
 

@@ -9,7 +9,12 @@ export class TimeTrackerService extends APIService {
         super(API_BASE_URL)
     }
 
-    async startTrackingTime(workspaceSlug: string, projectId: string, issueId: string, data: Partial<ITrackedTime>) {
+    async startTrackingTime(
+        workspaceSlug: string,
+        projectId: string,
+        issueId: string,
+        data: Partial<ITrackedTime>
+    ): Promise<ITrackedTime> {
         try {
             const response = await this.post(`/project/${workspaceSlug}/${projectId}/${issueId}/start-timer`, data)
             return response?.data
@@ -18,7 +23,7 @@ export class TimeTrackerService extends APIService {
         }
     }
 
-    async stopTrackingTime(workspaceSlug: string, projectId: string, timerId: string) {
+    async stopTrackingTime(workspaceSlug: string, projectId: string, timerId: string): Promise<ITrackedTime> {
         try {
             const response = await this.post(`/project/${workspaceSlug}/${projectId}/${timerId}/stop-timer`)
             return response?.data
@@ -27,9 +32,9 @@ export class TimeTrackerService extends APIService {
         }
     }
 
-    async fetchTimeSheet(workspaceSlug: string, queries?: any) {
+    async fetchTimeSheet(workspaceSlug: string, viewId: string, queries?: any): Promise<ITrackedTime[]> {
         try {
-            const response = await this.get(`/project/${workspaceSlug}/timer`, {
+            const response = await this.get(`/project/${workspaceSlug}/timer/${viewId}`, {
                 params: queries,
             })
             return response?.data
@@ -38,7 +43,7 @@ export class TimeTrackerService extends APIService {
         }
     }
 
-    async isTimerRunning(workspaceSlug: string) {
+    async isTimerRunning(workspaceSlug: string): Promise<ITrackedTime> {
         try {
             const response = await this.get(`/project/${workspaceSlug}/is-timer-running`)
             return response?.data

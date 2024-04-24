@@ -7,24 +7,24 @@ import { action, makeObservable, observable, runInAction } from "mobx"
 
 import { TimeTrackerService } from "@services/time-tracker.service"
 
-import { ITrackedTime, ITrackedTimeSnapshot } from "@servcy/types"
+import { ITrackedTime, ITrackedTimeSnapshot, TIssue, TLoader } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
 export interface ITimeTrackerStore {
-    timeTrackingMap: Record<string, ITrackedTime[]>
-    runningTimeTracker: ITrackedTime | null
+    timesheet: ITrackedTime[]
+    runningTimeTracker?: ITrackedTime
     startTrackingTime: (
         workspaceSlug: string,
         projectId: string,
         issueId: string,
         data: Partial<ITrackedTime>
     ) => Promise<void>
-    loadingTimeSheet: boolean
+    loader: TLoader
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
     stopTrackingTime: (workspaceSlug: string) => Promise<void>
-    fetchTimeSheet: (workspaceSlug: string, queries?: any) => Promise<void>
-    getTrackTimeByIssueId: (issueId: string) => ITrackedTime[]
+    fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any) => Promise<void>
+    getTimeLogsByIssueId: (issueId: TIssue["id"]) => ITrackedTime[]
     snapshots: Record<string, string[]>
     snapshotMap: Record<string, ITrackedTimeSnapshot>
     getSnapshotsByTimeTrackedId: (timeTrackedId: string) => string[]
@@ -36,9 +36,9 @@ export interface ITimeTrackerStore {
 }
 
 export class TimeTrackerStore implements ITimeTrackerStore {
-    timeTrackingMap: Record<string, ITrackedTime[]> = {}
-    runningTimeTracker = null
-    loadingTimeSheet = false
+    timesheet: ITrackedTime[] = []
+    runningTimeTracker?: ITrackedTime = undefined
+    loader: TLoader = "init-loader"
     snapshots: Record<string, string[]> = {}
     snapshotMap: Record<string, ITrackedTimeSnapshot> = {}
     router
@@ -46,10 +46,10 @@ export class TimeTrackerStore implements ITimeTrackerStore {
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
-            timeTrackingMap: observable,
+            timesheet: observable,
             snapshots: observable,
             snapshotMap: observable,
-            loadingTimeSheet: observable,
+            loader: observable,
             runningTimeTracker: observable,
             createSnapshot: action,
             removeSnapshot: action,
@@ -106,30 +106,37 @@ export class TimeTrackerStore implements ITimeTrackerStore {
      * @param queries
      * @returns
      */
-    fetchTimeSheet = async (workspaceSlug: string, queries?: any) => {
+    fetchTimeSheet = async (
+        workspaceSlug: string,
+        viewId: string,
+        queries?: any,
+        loadType: TLoader = "init-loader"
+    ) => {
         try {
+            this.loader = loadType
+            const timeSheet = await this.timeTrackerService.fetchTimeSheet(workspaceSlug, viewId, queries)
             runInAction(() => {
-                this.loadingTimeSheet = true
+                this.timesheet = timeSheet
             })
-            const timeSheet = await this.timeTrackerService.fetchTimeSheet(workspaceSlug, queries)
-            timeSheet.forEach((trackedTime: ITrackedTime) => {
-                const issueKey = trackedTime.issue
-                const existingTrackedTimes = this.timeTrackingMap[issueKey] ?? []
-                const isExisting = existingTrackedTimes.some((timeLog) => timeLog.id === trackedTime.id)
-                if (!isExisting) {
-                    runInAction(() => {
-                        set(this.timeTrackingMap, issueKey, [...existingTrackedTimes, trackedTime])
+            runInAction(() => {
+                timeSheet
+                    .filter((trackedTime: ITrackedTime) => trackedTime?.snapshots?.length > 0)
+                    .forEach((trackedTime: ITrackedTime) => {
+                        if (trackedTime?.snapshots?.length > 0) this.addSnapshots(trackedTime.id, trackedTime.snapshots)
                     })
-                    if (trackedTime?.snapshots?.length > 0) this.addSnapshots(trackedTime.id, trackedTime.snapshots)
-                }
             })
         } catch (error) {
             throw error
         } finally {
             runInAction(() => {
-                this.loadingTimeSheet = false
+                this.loader = undefined
             })
         }
+    }
+
+    getTimeLogsByIssueId = (issueId: TIssue["id"]) => {
+        if (!issueId) return []
+        return this.timesheet.filter((trackedTime: ITrackedTime) => trackedTime.issue === issueId)
     }
 
     /**
@@ -140,22 +147,22 @@ export class TimeTrackerStore implements ITimeTrackerStore {
     stopTrackingTime = async (workspaceSlug: string) => {
         try {
             if (!this.runningTimeTracker) return
-            const issueId = this.runningTimeTracker["issue"]
             const projectId = this.runningTimeTracker["project"]
-            await this.timeTrackerService.stopTrackingTime(workspaceSlug, projectId, this.runningTimeTracker["id"])
+            const trackedTime = await this.timeTrackerService.stopTrackingTime(
+                workspaceSlug,
+                projectId,
+                this.runningTimeTracker["id"]
+            )
             runInAction(() => {
-                update(this.timeTrackingMap, [issueId], (trackedTimes = []) => [
-                    ...trackedTimes,
-                    this.runningTimeTracker,
-                ])
-                this.runningTimeTracker = null
+                if (trackedTime) {
+                    this.timesheet.push(trackedTime)
+                }
+                this.runningTimeTracker = undefined
             })
         } catch (error) {
             throw error
         }
     }
-
-    getTrackTimeByIssueId = (issueId: string) => this.timeTrackingMap[issueId] ?? []
 
     getSnapshotsByTimeTrackedId = (timeTrackedId: string) => {
         if (!timeTrackedId) return []

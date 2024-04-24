@@ -2,10 +2,9 @@ import { FC } from "react"
 
 import { observer } from "mobx-react-lite"
 
-import { useTimeTracker } from "@hooks/store"
+import { SnapshotsDetail, TSnapshotOperations } from "@components/time-tracker"
 
-import { SnapshotsDetail } from "./snapshot-detail"
-import { TSnapshotOperations } from "./StopTimeTrackerModal"
+import { useTimeTracker } from "@hooks/store"
 
 type TSnapshotOperationsRemoveModal = Exclude<TSnapshotOperations, "create">
 

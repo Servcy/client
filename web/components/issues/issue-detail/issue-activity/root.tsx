@@ -4,11 +4,13 @@ import { History, ListRestart, LucideIcon, MessageCircle, Timer } from "lucide-r
 import { observer } from "mobx-react-lite"
 import toast from "react-hot-toast"
 
+import { TrackedTimeLog } from "@components/time-tracker"
+
 import { useIssueDetail, useProject } from "@hooks/store"
 
 import { TIssueComment } from "@servcy/types"
 
-import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentCreate, IssueCommentRoot, TrackedTimeLog } from "./"
+import { IssueActivityCommentRoot, IssueActivityRoot, IssueCommentCreate, IssueCommentRoot } from "./"
 
 type TIssueActivity = {
     workspaceSlug: string

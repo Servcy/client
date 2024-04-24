@@ -6,12 +6,13 @@ import { FC, useEffect } from "react"
 import { CircleDollarSign, Info, Timer } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
-import { SnapshotsDetail } from "@components/issues/time-tracker"
+import { SnapshotsDetail } from "@components/time-tracker"
 
 import { useMember, useTimeTracker } from "@hooks/store"
 
 import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-time.helper"
 
+import { ITrackedTimeSnapshot } from "@servcy/types"
 import { Loader, Tooltip } from "@servcy/ui"
 
 type TTimeLog = {
@@ -20,19 +21,19 @@ type TTimeLog = {
 
 export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
     const { workspaceSlug } = useParams()
-    const { fetchTimeSheet, loadingTimeSheet, getTrackTimeByIssueId } = useTimeTracker()
-    const timeLogs = getTrackTimeByIssueId(issueId)
+    const { fetchTimeSheet, loader, getTimeLogsByIssueId } = useTimeTracker()
+    const timeLogs = getTimeLogsByIssueId(issueId)
     const {
         workspace: { getWorkspaceMemberDetails },
     } = useMember()
 
     useEffect(() => {
-        if (issueId && workspaceSlug) fetchTimeSheet(workspaceSlug.toString(), { issue_id: issueId })
+        if (issueId && workspaceSlug) fetchTimeSheet(workspaceSlug.toString(), "my-timesheet", { issue_id: issueId })
     }, [issueId])
 
     if (!workspaceSlug) return <></>
 
-    if (loadingTimeSheet)
+    if (loader === "init-loader")
         return (
             <Loader className="mt-5 space-y-5">
                 <Loader.Item height="40px" />
@@ -106,7 +107,7 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
                             </div>
                             {timeLog["snapshots"]?.length > 0 && (
                                 <div className="flex flex-wrap gap-4 mt-2">
-                                    {timeLog["snapshots"]?.map((snapshot) => (
+                                    {timeLog["snapshots"]?.map((snapshot: ITrackedTimeSnapshot) => (
                                         <SnapshotsDetail snapshotId={snapshot.id} deleteSnapshotDisabled={true} />
                                     ))}
                                 </div>

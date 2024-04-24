@@ -5,6 +5,7 @@ import { FC, useState } from "react"
 import { AlertCircle, X } from "lucide-react"
 
 import { getFileIcon } from "@components/icons"
+import { SnapshotDeleteModal, TSnapshotOperations } from "@components/time-tracker"
 
 import { useMember, useTimeTracker } from "@hooks/store"
 
@@ -13,9 +14,6 @@ import { renderFormattedDate } from "@helpers/date-time.helper"
 import { truncateText } from "@helpers/string.helper"
 
 import { Tooltip } from "@servcy/ui"
-
-import { SnapshotDeleteModal } from "./delete-snapshot-confirmation-modal"
-import { TSnapshotOperations } from "./StopTimeTrackerModal"
 
 type TSnapshotOperationsRemoveModal = Exclude<TSnapshotOperations, "create">
 
