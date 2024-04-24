@@ -59,7 +59,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
     description: {
         title: "Description",
         icon: Text,
-        width: "min-w-96",
+        width: "max-w-96",
     },
     duration: {
         title: "Duration",

@@ -3,6 +3,8 @@ import { useParams } from "next/navigation"
 
 import { FC, useRef } from "react"
 
+import { AlertTriangle, BadgeAlert, BadgeCheck, CircleDollarSign, CircleDotDashed, ShieldCheck } from "lucide-react"
+
 import { useMember } from "@hooks/store"
 
 import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-time.helper"
@@ -45,7 +47,7 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="h-11 w-full min-w-[10rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
                     ref={tableCellRef}
                 >
                     <div className="h-11 border-b-[0.5px] border-custom-border-200 p-2">
@@ -55,11 +57,62 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
                     </div>
                 </td>
             )
-        case "duration":
+        case "is_billable":
             return (
                 <td
                     tabIndex={0}
                     className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    ref={tableCellRef}
+                >
+                    <div className="h-11 border-b-[0.5px] border-custom-border-200 py-2 px-4 truncate flex items-center justify-left gap-x-2">
+                        {timeLog.is_billable ? (
+                            <CircleDollarSign className="size-4 text-custom-text-200" />
+                        ) : (
+                            <AlertTriangle className="size-4 text-custom-text-200" />
+                        )}
+                        <div>{timeLog.is_billable ? "Billable" : "Non-Billable"}</div>
+                    </div>
+                </td>
+            )
+        case "is_manually_added":
+            return (
+                <td
+                    tabIndex={0}
+                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    ref={tableCellRef}
+                >
+                    <div className="h-11 border-b-[0.5px] border-custom-border-200 py-2 px-4 truncate flex items-center justify-left gap-x-2">
+                        {!timeLog.is_manually_added ? (
+                            <ShieldCheck className="size-4 text-custom-primary-100" />
+                        ) : (
+                            <BadgeAlert className="size-4 text-amber-700" />
+                        )}
+                        <div>{timeLog.is_manually_added ? "Manual" : "Tracked"}</div>
+                    </div>
+                </td>
+            )
+        case "is_approved":
+            return (
+                <td
+                    tabIndex={0}
+                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    ref={tableCellRef}
+                >
+                    <div className="h-11 border-b-[0.5px] border-custom-border-200 py-2 px-4 truncate flex items-center justify-left gap-x-2">
+                        {timeLog.is_approved ? (
+                            <BadgeCheck className="size-4 text-custom-primary-100" />
+                        ) : (
+                            <CircleDotDashed className="size-4 text-amber-700" />
+                        )}
+                        <div>{timeLog.is_approved ? "Approved" : "In Review"}</div>
+                    </div>
+                </td>
+            )
+        case "duration":
+            return (
+                <td
+                    tabIndex={0}
+                    className="h-11 w-full min-w-[14rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
                     ref={tableCellRef}
                 >
                     <div className="h-11 border-b-[0.5px] border-custom-border-200 p-2">
@@ -76,7 +129,7 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="h-11 w-full min-w-[10rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
                     ref={tableCellRef}
                 >
                     <div className="h-11 border-b-[0.5px] border-custom-border-200 p-2">
@@ -91,7 +144,7 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="h-11 w-full min-w-[12rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
                     ref={tableCellRef}
                 >
                     <div className="h-11 border-b-[0.5px] border-custom-border-200 p-2 flex justify-center items-center gap-x-2">
@@ -119,6 +172,18 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
                                 </span>
                             </Link>
                         </div>
+                    </div>
+                </td>
+            )
+        case "snapshots_count":
+            return (
+                <td
+                    tabIndex={0}
+                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    ref={tableCellRef}
+                >
+                    <div className="flex h-11 w-full items-center px-2.5 py-1 text-xs border-b-[0.5px] border-custom-border-200 hover:bg-custom-background-80">
+                        {timeLog.snapshots.length} {timeLog.snapshots.length === 1 ? "snapshot" : "snapshots"}
                     </div>
                 </td>
             )
