@@ -65,6 +65,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
     [key: string]: {
         title: string
         icon: FC<ISvgIcons>
+        width?: string
         // Column: React.FC<{
         //     trackedTime: ITrackedTime
         //     onClose: () => void
@@ -76,6 +77,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
     description: {
         title: "Description",
         icon: Text,
+        width: "min-w-96",
         // Column: TimesheetDescriptionColumn,
     },
     duration: {
