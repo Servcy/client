@@ -10,6 +10,7 @@ import { useMember } from "@hooks/store"
 import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-time.helper"
 
 import { ITimesheetDisplayPropertyOptions, ITrackedTime } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
 
 interface ITimesheetRowCell {
     timeLog: ITrackedTime
@@ -29,12 +30,16 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="h-11 w-full max-w-96 min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
                     ref={tableCellRef}
                 >
                     {timeLog.description.length > 0 ? (
-                        <div className="h-11 border-b-[0.5px] border-custom-border-200 truncate p-2 flex items-center">
-                            {timeLog.description}
+                        <div className="w-full overflow-hidden">
+                            <Tooltip tooltipHeading="Title" tooltipContent={timeLog.description}>
+                                <div className="h-full w-full cursor-pointer truncate px-4 py-2.5 text-left text-[0.825rem] text-custom-text-100 focus:outline-none">
+                                    {timeLog.description}
+                                </div>
+                            </Tooltip>
                         </div>
                     ) : (
                         <div className="h-11 border-b-[0.5px] border-custom-border-200 truncate p-2 flex items-center">
