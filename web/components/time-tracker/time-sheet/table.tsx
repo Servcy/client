@@ -3,6 +3,7 @@ import { useParams } from "next/navigation"
 import { FC, useCallback, useEffect, useMemo, useRef } from "react"
 
 import { observer } from "mobx-react-lite"
+import { toast } from "react-hot-toast"
 
 import {
     TimeLogQuickActions,
@@ -55,7 +56,11 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
         () => ({
             ["UPDATE"]: async (timeLog: ITrackedTime) => {
                 if (!workspaceSlug) return
-                await updateTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id, timeLog)
+                try {
+                    await updateTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id, timeLog)
+                } catch {
+                    toast.error("Failed to update time log")
+                }
             },
             ["DELETE"]: async (timeLog: ITrackedTime) => {
                 if (!workspaceSlug) return

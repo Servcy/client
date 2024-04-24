@@ -3,7 +3,7 @@ import { useParams } from "next/navigation"
 
 import { FC, useRef } from "react"
 
-import { AlertTriangle, BadgeAlert, BadgeCheck, CircleDollarSign, CircleDotDashed, ShieldCheck } from "lucide-react"
+import { BadgeAlert, BadgeCheck, CircleDotDashed, ShieldCheck } from "lucide-react"
 
 import { useMember } from "@hooks/store"
 
@@ -11,6 +11,8 @@ import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-tim
 
 import { ITimesheetDisplayPropertyOptions, ITrackedTime } from "@servcy/types"
 import { Tooltip } from "@servcy/ui"
+
+import { IsBillableColumn } from "./columns/is-billable-column"
 
 interface ITimesheetRowCell {
     timeLog: ITrackedTime
@@ -63,22 +65,7 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
                 </td>
             )
         case "is_billable":
-            return (
-                <td
-                    tabIndex={0}
-                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
-                    ref={tableCellRef}
-                >
-                    <div className="h-11 border-b-[0.5px] border-custom-border-200 py-2 px-4 truncate flex items-center justify-left gap-x-2">
-                        {timeLog.is_billable ? (
-                            <CircleDollarSign className="size-4 text-custom-text-200" />
-                        ) : (
-                            <AlertTriangle className="size-4 text-custom-text-200" />
-                        )}
-                        <div>{timeLog.is_billable ? "Billable" : "Non-Billable"}</div>
-                    </div>
-                </td>
-            )
+            return <IsBillableColumn tableCellRef={tableCellRef} timeLog={timeLog} />
         case "is_manually_added":
             return (
                 <td
