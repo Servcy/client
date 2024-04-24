@@ -1,4 +1,7 @@
 export * from "./root"
 export * from "./tabs"
 export * from "./filter"
+export * from "./table"
+export * from "./row"
+export * from "./columns"
 export * from "./applied-filters"
