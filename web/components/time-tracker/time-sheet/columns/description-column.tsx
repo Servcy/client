@@ -1,6 +1,6 @@
 import { useParams } from "next/navigation"
 
-import { FC, useState } from "react"
+import { FC, useRef, useState } from "react"
 
 import toast from "react-hot-toast"
 
@@ -15,10 +15,11 @@ export const DescriptionColumn: FC<{
     timeLog: ITrackedTime
 }> = ({ tableCellRef, timeLog }) => {
     const { workspaceSlug } = useParams()
+    const inputRef = useRef<HTMLInputElement>(null)
     const [description, setDescription] = useState<string>(timeLog.description)
     const { updateTimeLog } = useTimeTracker()
     const { currentUser } = useUser()
-    useOutsideClickDetector(tableCellRef, async () => {
+    useOutsideClickDetector(inputRef, async () => {
         if (description === timeLog.description) return
         try {
             await updateTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id, { description })
@@ -36,7 +37,7 @@ export const DescriptionColumn: FC<{
                 <Tooltip tooltipHeading="Description" tooltipContent={timeLog.description}>
                     <div className="h-full w-full cursor-pointer truncate text-left text-custom-text-100 focus:outline-none">
                         <Input
-                            id="description"
+                            id={`description-${timeLog.id}`}
                             name="description"
                             type="text"
                             value={description}
@@ -45,6 +46,7 @@ export const DescriptionColumn: FC<{
                             placeholder="Enter description..."
                             className="w-full border-none rounded-none"
                             inputSize="sm"
+                            ref={inputRef}
                             tabIndex={0}
                         />
                     </div>
