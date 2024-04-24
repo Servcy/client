@@ -1,3 +1,5 @@
+import { useParams } from "next/navigation"
+
 import { FC } from "react"
 
 import { BadgeCheck, CircleDotDashed } from "lucide-react"
@@ -12,6 +14,7 @@ export const ApprovalColumn: FC<{
     tableCellRef: React.RefObject<HTMLTableCellElement>
     timeLog: ITrackedTime
 }> = ({ tableCellRef, timeLog }) => {
+    const { workspaceSlug } = useParams()
     const { updateTimeLog } = useTimeTracker()
     const { currentUser } = useUser()
     return (
@@ -39,7 +42,9 @@ export const ApprovalColumn: FC<{
                     onChange={async (value: boolean) => {
                         if (timeLog.is_approved === value) return
                         try {
-                            await updateTimeLog(timeLog.workspace, timeLog.project, timeLog.id, { is_approved: value })
+                            await updateTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id, {
+                                is_approved: value,
+                            })
                         } catch {
                             toast.error("Failed to update time log")
                         }

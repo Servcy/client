@@ -1,3 +1,5 @@
+import { useParams } from "next/navigation"
+
 import { FC } from "react"
 
 import { AlertTriangle, CircleDollarSign } from "lucide-react"
@@ -12,6 +14,7 @@ export const IsBillableColumn: FC<{
     tableCellRef: React.RefObject<HTMLTableCellElement>
     timeLog: ITrackedTime
 }> = ({ tableCellRef, timeLog }) => {
+    const { workspaceSlug } = useParams()
     const { updateTimeLog } = useTimeTracker()
     const { currentUser } = useUser()
     return (
@@ -39,7 +42,9 @@ export const IsBillableColumn: FC<{
                     onChange={async (value: boolean) => {
                         if (timeLog.is_billable === value) return
                         try {
-                            await updateTimeLog(timeLog.workspace, timeLog.project, timeLog.id, { is_billable: value })
+                            await updateTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id, {
+                                is_billable: value,
+                            })
                         } catch {
                             toast.error("Failed to update time log")
                         }

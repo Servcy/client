@@ -27,7 +27,7 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
     const containerRef = useRef<HTMLTableElement | null>(null)
     const isScrolled = useRef(false)
     const { workspaceSlug } = useParams()
-    const { timesheet, updateTimeLog, deleteTimeLog } = useTimeTracker()
+    const { timesheet, deleteTimeLog } = useTimeTracker()
     const portalRef = useRef<HTMLDivElement | null>(null)
     const handleKeyBoardNavigation = useTableKeyboardNavigation()
 
@@ -59,7 +59,7 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
             },
         }),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [updateTimeLog, deleteTimeLog, workspaceSlug]
+        [deleteTimeLog, workspaceSlug]
     )
 
     const handleTimeLog = useCallback(async (timeLog: ITrackedTime, action: string) => {
