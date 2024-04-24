@@ -12,8 +12,8 @@ import { ITrackedTime, ITrackedTimeSnapshot, TLoader } from "@servcy/types"
 import { RootStore } from "./root.store"
 
 export interface ITimeTrackerStore {
-    timeTrackingMap: Record<string, ITrackedTime[]>
-    runningTimeTracker: ITrackedTime | null
+    timesheet: ITrackedTime[]
+    runningTimeTracker?: ITrackedTime
     startTrackingTime: (
         workspaceSlug: string,
         projectId: string,
@@ -24,7 +24,6 @@ export interface ITimeTrackerStore {
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
     stopTrackingTime: (workspaceSlug: string) => Promise<void>
     fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any) => Promise<void>
-    getTrackTimeByIssueId: (issueId: string) => ITrackedTime[]
     snapshots: Record<string, string[]>
     snapshotMap: Record<string, ITrackedTimeSnapshot>
     getSnapshotsByTimeTrackedId: (timeTrackedId: string) => string[]
@@ -36,8 +35,8 @@ export interface ITimeTrackerStore {
 }
 
 export class TimeTrackerStore implements ITimeTrackerStore {
-    timeTrackingMap: Record<string, ITrackedTime[]> = {}
-    runningTimeTracker = null
+    timesheet: ITrackedTime[] = []
+    runningTimeTracker?: ITrackedTime = undefined
     loader: TLoader = "init-loader"
     snapshots: Record<string, string[]> = {}
     snapshotMap: Record<string, ITrackedTimeSnapshot> = {}
@@ -46,7 +45,7 @@ export class TimeTrackerStore implements ITimeTrackerStore {
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
-            timeTrackingMap: observable,
+            timesheet: observable,
             snapshots: observable,
             snapshotMap: observable,
             loader: observable,
@@ -115,16 +114,15 @@ export class TimeTrackerStore implements ITimeTrackerStore {
         try {
             this.loader = loadType
             const timeSheet = await this.timeTrackerService.fetchTimeSheet(workspaceSlug, viewId, queries)
-            timeSheet.forEach((trackedTime: ITrackedTime) => {
-                const issueKey = trackedTime.issue
-                const existingTrackedTimes = this.timeTrackingMap[issueKey] ?? []
-                const isExisting = existingTrackedTimes.some((timeLog) => timeLog.id === trackedTime.id)
-                if (!isExisting) {
-                    runInAction(() => {
-                        set(this.timeTrackingMap, issueKey, [...existingTrackedTimes, trackedTime])
+            runInAction(() => {
+                this.timesheet = timeSheet
+            })
+            runInAction(() => {
+                timeSheet
+                    .filter((trackedTime: ITrackedTime) => trackedTime?.snapshots?.length > 0)
+                    .forEach((trackedTime: ITrackedTime) => {
+                        this.addSnapshots(trackedTime.id, trackedTime.snapshots)
                     })
-                    if (trackedTime?.snapshots?.length > 0) this.addSnapshots(trackedTime.id, trackedTime.snapshots)
-                }
             })
         } catch (error) {
             throw error
@@ -143,22 +141,20 @@ export class TimeTrackerStore implements ITimeTrackerStore {
     stopTrackingTime = async (workspaceSlug: string) => {
         try {
             if (!this.runningTimeTracker) return
-            const issueId = this.runningTimeTracker["issue"]
             const projectId = this.runningTimeTracker["project"]
-            await this.timeTrackerService.stopTrackingTime(workspaceSlug, projectId, this.runningTimeTracker["id"])
+            const trackedTime = await this.timeTrackerService.stopTrackingTime(
+                workspaceSlug,
+                projectId,
+                this.runningTimeTracker["id"]
+            )
             runInAction(() => {
-                update(this.timeTrackingMap, [issueId], (trackedTimes = []) => [
-                    ...trackedTimes,
-                    this.runningTimeTracker,
-                ])
-                this.runningTimeTracker = null
+                if (trackedTime) this.timesheet.push(trackedTime)
+                this.runningTimeTracker = undefined
             })
         } catch (error) {
             throw error
         }
     }
-
-    getTrackTimeByIssueId = (issueId: string) => this.timeTrackingMap[issueId] ?? []
 
     getSnapshotsByTimeTrackedId = (timeTrackedId: string) => {
         if (!timeTrackedId) return []

@@ -252,7 +252,7 @@ export const SIDEBAR_MENU_ITEMS: {
     },
     {
         key: "my-timesheet",
-        label: "My Timesheet",
+        label: "Timesheet",
         href: "/time-tracker/my-timesheet",
         access: ERoles.GUEST,
         highlight: (pathname: string, baseUrl: string) => pathname === `${baseUrl}/time-tracker`,

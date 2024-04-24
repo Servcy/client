@@ -80,7 +80,7 @@ export const TimesheetHeader: React.FC<{
                         prependIcon={<Timer />}
                         onClick={() => toggleTimeTrackerModal(true)}
                     >
-                        {runningTimeTracker === null ? "Start Timer" : "Stop Timer"}
+                        {!runningTimeTracker ? "Start Timer" : "Stop Timer"}
                     </Button>
                 </div>
             </div>
