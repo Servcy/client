@@ -19,6 +19,7 @@ export interface IWorkspaceMembership {
     id: string
     member: string
     role: ERoles
+    auto_approve_tracked_time: boolean
 }
 
 export interface IWorkspaceMemberStore {
@@ -39,7 +40,11 @@ export interface IWorkspaceMemberStore {
     fetchWorkspaceMembers: (workspaceSlug: string) => Promise<IWorkspaceMember[]>
     fetchWorkspaceMemberInvitations: (workspaceSlug: string) => Promise<IWorkspaceMemberInvitation[]>
     // crud actions
-    updateMember: (workspaceSlug: string, userId: string, data: { role: ERoles }) => Promise<void>
+    updateMember: (
+        workspaceSlug: string,
+        userId: string,
+        data: { role: ERoles; auto_approve_tracked_time: boolean }
+    ) => Promise<void>
     removeMemberFromWorkspace: (workspaceSlug: string, userId: string) => Promise<void>
     // invite actions
     inviteMembersToWorkspace: (workspaceSlug: string, data: IWorkspaceBulkInviteFormData) => Promise<void>
@@ -184,6 +189,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
             id: workspaceMember.id,
             role: workspaceMember.role,
             member: this.memberRoot?.memberMap?.[workspaceMember.member] ?? ({} as IUserLite),
+            auto_approve_tracked_time: workspaceMember.auto_approve_tracked_time,
         }
         return memberDetails
     })
@@ -216,6 +222,7 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
                         id: member.id,
                         member: member.member.id,
                         role: member.role,
+                        auto_approve_tracked_time: member.auto_approve_tracked_time,
                     })
                 })
             })
@@ -228,7 +235,11 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
      * @param userId
      * @param data
      */
-    updateMember = async (workspaceSlug: string, userId: string, data: { role: ERoles }) => {
+    updateMember = async (
+        workspaceSlug: string,
+        userId: string,
+        data: { role: ERoles; auto_approve_tracked_time: boolean }
+    ) => {
         const memberDetails = this.getWorkspaceMemberDetails(userId)
         if (!memberDetails) throw new Error("Member not found")
         // original data to revert back in case of error
@@ -236,6 +247,11 @@ export class WorkspaceMemberStore implements IWorkspaceMemberStore {
         try {
             runInAction(() => {
                 set(this.workspaceMemberMap, [workspaceSlug, userId, "role"], data.role)
+                set(
+                    this.workspaceMemberMap,
+                    [workspaceSlug, userId, "auto_approve_tracked_time"],
+                    data.auto_approve_tracked_time
+                )
             })
             await this.workspaceService.updateWorkspaceMember(workspaceSlug, memberDetails.id, data)
         } catch (error) {

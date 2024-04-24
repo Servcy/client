@@ -14,7 +14,7 @@ import { useEventTracker, useMember, useUser } from "@hooks/store"
 import { WORKSPACE_MEMBER_lEAVE } from "@constants/event-tracker"
 import { ERoles, ROLES } from "@constants/iam"
 
-import { CustomSelect, Tooltip } from "@servcy/ui"
+import { CustomSelect, ToggleSwitch, Tooltip } from "@servcy/ui"
 
 type Props = {
     memberId: string
@@ -153,9 +153,9 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                         onChange={(value: ERoles) => {
                             if (!workspaceSlug) return
                             if (!(value in ROLES)) return
-
                             updateMember(workspaceSlug.toString(), memberDetails.member.id, {
                                 role: value,
+                                auto_approve_tracked_time: memberDetails.auto_approve_tracked_time ?? false,
                             }).catch(() => {
                                 toast.error("An error occurred while updating member role. Please try again.")
                             })
@@ -178,6 +178,21 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                             )
                         })}
                     </CustomSelect>
+                    <div className="flex items-center justify-center gap-x-2 border p-3 border-custom-border-300 rounded">
+                        <div className="text-sm text-custom-text-200">Auto Approve Time Logs?</div>
+                        <ToggleSwitch
+                            value={memberDetails.auto_approve_tracked_time}
+                            onChange={(value: boolean) => {
+                                if (!workspaceSlug) return
+                                updateMember(workspaceSlug.toString(), memberDetails.member.id, {
+                                    auto_approve_tracked_time: value,
+                                    role: memberDetails.role,
+                                }).catch(() => {
+                                    toast.error("An error occurred while updating time log settings. Please try again.")
+                                })
+                            }}
+                        />
+                    </div>
                     <Tooltip
                         tooltipContent={isCurrentUser ? "Leave workspace" : "Remove member"}
                         disabled={!isAdmin && !isCurrentUser}

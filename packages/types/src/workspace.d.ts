@@ -64,6 +64,7 @@ export interface IWorkspaceMember {
     id: string
     member: IUserLite
     role: ERoles
+    auto_approve_tracked_time: boolean
 }
 
 export interface IWorkspaceMemberMe {
