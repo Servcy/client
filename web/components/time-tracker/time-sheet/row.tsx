@@ -8,6 +8,8 @@ import { WithDisplayPropertiesHOC } from "@components/time-tracker"
 
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
+import { TIMESHEET_PROPERTY_LIST } from "@constants/timesheet"
+
 import { cn } from "@helpers/common.helper"
 
 import { ITimesheetDisplayPropertyOptions, ITrackedTime } from "@servcy/types"
@@ -81,6 +83,20 @@ export const TimeLogRow: FC<ITimeLogRow> = observer((props) => {
                     </div>
                 </WithDisplayPropertiesHOC>
             </td>
+            {TIMESHEET_PROPERTY_LIST.map((property) => {
+                const tableCellRef = useRef<HTMLTableCellElement | null>(null)
+                return (
+                    <WithDisplayPropertiesHOC displayProperties={displayProperties} displayPropertyKey={property}>
+                        <td
+                            tabIndex={0}
+                            className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                            ref={tableCellRef}
+                        >
+                            <div className="h-11 border-b-[0.5px] border-custom-border-200" />
+                        </td>
+                    </WithDisplayPropertiesHOC>
+                )
+            })}
         </RenderIfVisible>
     )
 })
