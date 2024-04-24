@@ -140,9 +140,9 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
     ): ITimesheetDisplayFilterOptions => {
         const filters = displayFilters || defaultValues
         return {
-            is_billable: filters?.is_billable || true,
-            is_approved: filters?.is_approved || false,
-            is_manually_added: filters?.is_manually_added || false,
+            is_billable: filters?.is_billable,
+            is_approved: filters?.is_approved,
+            is_manually_added: filters?.is_manually_added,
         }
     }
 
