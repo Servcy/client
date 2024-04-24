@@ -7,7 +7,7 @@ import { action, makeObservable, observable, runInAction } from "mobx"
 
 import { TimeTrackerService } from "@services/time-tracker.service"
 
-import { ITrackedTime, ITrackedTimeSnapshot, TLoader } from "@servcy/types"
+import { ITrackedTime, ITrackedTimeSnapshot, TIssue, TLoader } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
@@ -24,6 +24,7 @@ export interface ITimeTrackerStore {
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
     stopTrackingTime: (workspaceSlug: string) => Promise<void>
     fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any) => Promise<void>
+    getTimeLogsByIssueId: (issueId: TIssue["id"]) => ITrackedTime[]
     snapshots: Record<string, string[]>
     snapshotMap: Record<string, ITrackedTimeSnapshot>
     getSnapshotsByTimeTrackedId: (timeTrackedId: string) => string[]
@@ -121,7 +122,7 @@ export class TimeTrackerStore implements ITimeTrackerStore {
                 timeSheet
                     .filter((trackedTime: ITrackedTime) => trackedTime?.snapshots?.length > 0)
                     .forEach((trackedTime: ITrackedTime) => {
-                        this.addSnapshots(trackedTime.id, trackedTime.snapshots)
+                        if (trackedTime?.snapshots?.length > 0) this.addSnapshots(trackedTime.id, trackedTime.snapshots)
                     })
             })
         } catch (error) {
@@ -131,6 +132,11 @@ export class TimeTrackerStore implements ITimeTrackerStore {
                 this.loader = undefined
             })
         }
+    }
+
+    getTimeLogsByIssueId = (issueId: TIssue["id"]) => {
+        if (!issueId) return []
+        return this.timesheet.filter((trackedTime: ITrackedTime) => trackedTime.issue === issueId)
     }
 
     /**
@@ -148,7 +154,9 @@ export class TimeTrackerStore implements ITimeTrackerStore {
                 this.runningTimeTracker["id"]
             )
             runInAction(() => {
-                if (trackedTime) this.timesheet.push(trackedTime)
+                if (trackedTime) {
+                    this.timesheet.push(trackedTime)
+                }
                 this.runningTimeTracker = undefined
             })
         } catch (error) {

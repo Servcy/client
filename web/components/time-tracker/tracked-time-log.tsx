@@ -12,6 +12,7 @@ import { useMember, useTimeTracker } from "@hooks/store"
 
 import { calculateTimeBetween, renderFormattedDateTime } from "@helpers/date-time.helper"
 
+import { ITrackedTimeSnapshot } from "@servcy/types"
 import { Loader, Tooltip } from "@servcy/ui"
 
 type TTimeLog = {
@@ -20,8 +21,8 @@ type TTimeLog = {
 
 export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
     const { workspaceSlug } = useParams()
-    const { fetchTimeSheet, loader, getTrackTimeByIssueId } = useTimeTracker()
-    const timeLogs = getTrackTimeByIssueId(issueId)
+    const { fetchTimeSheet, loader, getTimeLogsByIssueId } = useTimeTracker()
+    const timeLogs = getTimeLogsByIssueId(issueId)
     const {
         workspace: { getWorkspaceMemberDetails },
     } = useMember()
@@ -106,7 +107,7 @@ export const TrackedTimeLog: FC<TTimeLog> = observer(({ issueId }) => {
                             </div>
                             {timeLog["snapshots"]?.length > 0 && (
                                 <div className="flex flex-wrap gap-4 mt-2">
-                                    {timeLog["snapshots"]?.map((snapshot) => (
+                                    {timeLog["snapshots"]?.map((snapshot: ITrackedTimeSnapshot) => (
                                         <SnapshotsDetail snapshotId={snapshot.id} deleteSnapshotDisabled={true} />
                                     ))}
                                 </div>

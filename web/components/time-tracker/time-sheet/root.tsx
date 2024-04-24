@@ -7,7 +7,7 @@ import { useTheme } from "next-themes"
 import useSWR from "swr"
 
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { TimesheetAppliedFilters } from "@components/time-tracker"
+import { TimesheetAppliedFilters, TimesheetViewTabs } from "@components/time-tracker"
 import { SpreadsheetLayoutLoader } from "@components/ui"
 
 import {
@@ -48,42 +48,45 @@ export const TimeSheetRoot: React.FC = observer(() => {
     const isEditingAllowed = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.MEMBER
     if (loader === "init-loader" || !viewKey || !timesheet) return <SpreadsheetLayoutLoader />
     return (
-        <div className="relative flex h-full w-full flex-col overflow-hidden">
-            <div className="relative h-full w-full flex flex-col">
-                <TimesheetAppliedFilters viewKey={viewKey.toString()} />
-                {timesheet.length === 0 ? (
-                    <EmptyState
-                        image={emptyStateImage}
-                        title={(workspaceProjectIds ?? []).length > 0 ? "No time logs yet" : "No project"}
-                        description={
-                            (workspaceProjectIds ?? []).length > 0
-                                ? "To view your time logs, you need to track time for issues first."
-                                : "To track time for issues, you need to create a project or be a part of one."
-                        }
-                        size="sm"
-                        primaryButton={
-                            (workspaceProjectIds ?? []).length > 0
-                                ? {
-                                      text: "Start Timer",
-                                      onClick: () => {
-                                          setTrackElement("Timesheet empty state")
-                                          commandPaletteStore.toggleTimeTrackerModal(true)
-                                      },
-                                  }
-                                : {
-                                      text: "Start your first project",
-                                      onClick: () => {
-                                          setTrackElement("All issues empty state")
-                                          commandPaletteStore.toggleCreateProjectModal(true)
-                                      },
-                                  }
-                        }
-                        disabled={!isEditingAllowed}
-                    />
-                ) : (
-                    <Fragment />
-                )}
+        <>
+            <TimesheetViewTabs />
+            <div className="relative flex h-full w-full flex-col overflow-hidden">
+                <div className="relative h-full w-full flex flex-col">
+                    <TimesheetAppliedFilters viewKey={viewKey.toString()} />
+                    {timesheet.length === 0 ? (
+                        <EmptyState
+                            image={emptyStateImage}
+                            title={(workspaceProjectIds ?? []).length > 0 ? "No time logs yet" : "No project"}
+                            description={
+                                (workspaceProjectIds ?? []).length > 0
+                                    ? "To view your time logs, you need to track time for issues first."
+                                    : "To track time for issues, you need to create a project or be a part of one."
+                            }
+                            size="sm"
+                            primaryButton={
+                                (workspaceProjectIds ?? []).length > 0
+                                    ? {
+                                          text: "Start Timer",
+                                          onClick: () => {
+                                              setTrackElement("Timesheet empty state")
+                                              commandPaletteStore.toggleTimeTrackerModal(true)
+                                          },
+                                      }
+                                    : {
+                                          text: "Start your first project",
+                                          onClick: () => {
+                                              setTrackElement("All issues empty state")
+                                              commandPaletteStore.toggleCreateProjectModal(true)
+                                          },
+                                      }
+                            }
+                            disabled={!isEditingAllowed}
+                        />
+                    ) : (
+                        <Fragment />
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 })
