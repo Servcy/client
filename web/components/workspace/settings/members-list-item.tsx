@@ -178,21 +178,25 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                             )
                         })}
                     </CustomSelect>
-                    <div className="flex items-center justify-center gap-x-2 border p-3 border-custom-border-300 rounded">
-                        <div className="text-sm text-custom-text-200">Auto Approve Time Logs?</div>
-                        <ToggleSwitch
-                            value={memberDetails.auto_approve_tracked_time}
-                            onChange={(value: boolean) => {
-                                if (!workspaceSlug) return
-                                updateMember(workspaceSlug.toString(), memberDetails.member.id, {
-                                    auto_approve_tracked_time: value,
-                                    role: memberDetails.role,
-                                }).catch(() => {
-                                    toast.error("An error occurred while updating time log settings. Please try again.")
-                                })
-                            }}
-                        />
-                    </div>
+                    {isAdmin && (
+                        <div className="flex items-center justify-center gap-x-2 border p-3 border-custom-border-300 rounded">
+                            <div className="text-sm text-custom-text-200">Auto Approve Time Logs?</div>
+                            <ToggleSwitch
+                                value={memberDetails.auto_approve_tracked_time}
+                                onChange={(value: boolean) => {
+                                    if (!workspaceSlug) return
+                                    updateMember(workspaceSlug.toString(), memberDetails.member.id, {
+                                        auto_approve_tracked_time: value,
+                                        role: memberDetails.role,
+                                    }).catch(() => {
+                                        toast.error(
+                                            "An error occurred while updating time log settings. Please try again."
+                                        )
+                                    })
+                                }}
+                            />
+                        </div>
+                    )}
                     <Tooltip
                         tooltipContent={isCurrentUser ? "Leave workspace" : "Remove member"}
                         disabled={!isAdmin && !isCurrentUser}
