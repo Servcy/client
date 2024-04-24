@@ -196,7 +196,8 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
             })
             const appliedFilters = { ...timesheetFilters, ...updatedFilters }
             const validatedFilters = pickBy(appliedFilters, (value) => value && isArray(value) && value.length > 0)
-            this.rootStore.timeTracker.fetchTimeSheet(workspaceSlug, viewId, validatedFilters)
+            const params = this.computedFilteredParams(validatedFilters, ["created_by", "project", "start_time"])
+            this.rootStore.timeTracker.fetchTimeSheet(workspaceSlug, viewId, params)
         } catch (error) {
             if (viewId) this.fetchFilters(workspaceSlug, viewId)
             throw error
