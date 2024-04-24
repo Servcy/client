@@ -84,7 +84,7 @@ export const TimeSheetRoot: FC = observer(() => {
                                     : {
                                           text: "Start your first project",
                                           onClick: () => {
-                                              setTrackElement("All issues empty state")
+                                              setTrackElement("All projects empty state")
                                               commandPaletteStore.toggleCreateProjectModal(true)
                                           },
                                       }
