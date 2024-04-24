@@ -69,7 +69,7 @@ export const TimesheetHeader: React.FC<{
                 <div className="flex items-center gap-2">
                     <FiltersDropdown title="Filters" placement="bottom-end">
                         <TimesheetFilterSelection
-                            filters={filters ?? {}}
+                            filters={filters?.[viewKey.toString()] ?? {}}
                             handleFiltersUpdate={handleFiltersUpdate}
                             memberIds={workspaceMemberIds ?? undefined}
                         />
