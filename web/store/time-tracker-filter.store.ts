@@ -4,11 +4,11 @@ import pickBy from "lodash/pickBy"
 import set from "lodash/set"
 import { action, makeObservable, observable, runInAction } from "mobx"
 
-import { ITimesheetFilters, ITimesheetParams } from "@components/time-tracker"
-
 import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
 
 import { storage } from "@wrappers/common/LocalStorageWrapper"
+
+import { ITimesheetFilters, ITimesheetParams } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 

@@ -4,11 +4,12 @@ import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { AppliedDateFilters, AppliedMembersFilters, AppliedProjectFilters } from "@components/issues"
-import { ITimesheetFilters } from "@components/time-tracker"
 
 import { useTimeTrackerFilter } from "@hooks/store"
 
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
+
+import { ITimesheetFilters } from "@servcy/types"
 
 export const TimesheetAppliedFilters = observer(({ viewKey }: { viewKey: string }) => {
     const { workspaceSlug } = useParams()

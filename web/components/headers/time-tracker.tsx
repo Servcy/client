@@ -8,10 +8,11 @@ import { observer } from "mobx-react-lite"
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import { FiltersDropdown } from "@components/issues"
-import { ITimesheetFilters, TimesheetFilterSelection } from "@components/time-tracker"
+import { TimesheetFilterSelection } from "@components/time-tracker"
 
 import { useApplication, useMember, useTimeTracker, useTimeTrackerFilter } from "@hooks/store"
 
+import { ITimesheetFilters } from "@servcy/types"
 import { Breadcrumbs, Button } from "@servcy/ui"
 
 export const TimesheetHeader: React.FC<{
