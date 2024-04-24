@@ -11,10 +11,11 @@ type ITimesheetFilterSelection = {
     filters: ITimesheetFilterOptions
     handleFiltersUpdate: (key: keyof ITimesheetFilterOptions, value: string | string[]) => void
     memberIds?: string[] | undefined
+    activeLayout?: "my-timesheet" | "workspace-timesheet"
 }
 
 export const TimesheetFilterSelection: React.FC<ITimesheetFilterSelection> = observer((props) => {
-    const { filters, handleFiltersUpdate, memberIds } = props
+    const { filters, handleFiltersUpdate, activeLayout, memberIds } = props
     const [filtersSearchQuery, setFiltersSearchQuery] = useState("")
 
     return (
@@ -42,15 +43,16 @@ export const TimesheetFilterSelection: React.FC<ITimesheetFilterSelection> = obs
                 </div>
             </div>
             <div className="h-full w-full divide-y divide-custom-border-200 overflow-y-auto px-2.5">
-                {/* created_by */}
-                <div className="py-2">
-                    <FilterCreatedBy
-                        appliedFilters={filters.created_by ?? null}
-                        handleUpdate={(val) => handleFiltersUpdate("created_by", val)}
-                        memberIds={memberIds}
-                        searchQuery={filtersSearchQuery}
-                    />
-                </div>
+                {activeLayout !== "my-timesheet" && (
+                    <div className="py-2">
+                        <FilterCreatedBy
+                            appliedFilters={filters.created_by ?? null}
+                            handleUpdate={(val) => handleFiltersUpdate("created_by", val)}
+                            memberIds={memberIds}
+                            searchQuery={filtersSearchQuery}
+                        />
+                    </div>
+                )}
 
                 {/* project */}
                 <div className="py-2">

@@ -108,6 +108,7 @@ export const TimesheetHeader: React.FC<{
                         <TimesheetFilterSelection
                             filters={filters?.[activeLayout.toString()]?.filters ?? {}}
                             handleFiltersUpdate={handleFiltersUpdate}
+                            activeLayout={activeLayout}
                             memberIds={workspaceMemberIds ?? undefined}
                         />
                     </FiltersDropdown>
