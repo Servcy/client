@@ -40,7 +40,7 @@ export const TimeSheetRoot: React.FC = observer(() => {
         async () => {
             if (workspaceSlug && viewKey) {
                 await fetchFilters(workspaceSlug.toString(), viewKey.toString())
-                await fetchTimeSheet(workspaceSlug.toString(), viewKey.toString(), filters)
+                await fetchTimeSheet(workspaceSlug.toString(), viewKey.toString(), filters[viewKey.toString()])
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
