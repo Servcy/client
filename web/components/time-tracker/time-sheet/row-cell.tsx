@@ -35,7 +35,7 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
                 >
                     {timeLog.description.length > 0 ? (
                         <div className="w-full overflow-hidden">
-                            <Tooltip tooltipHeading="Title" tooltipContent={timeLog.description}>
+                            <Tooltip tooltipHeading="Description" tooltipContent={timeLog.description}>
                                 <div className="h-full w-full cursor-pointer truncate px-4 py-2.5 text-left text-[0.825rem] text-custom-text-100 focus:outline-none">
                                     {timeLog.description}
                                 </div>
