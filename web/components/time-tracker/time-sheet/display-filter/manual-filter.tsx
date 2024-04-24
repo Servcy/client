@@ -14,8 +14,6 @@ export const FilterManualTrackedType: React.FC<TFilterManualTrackedType> = obser
 
     const [previewEnabled, setPreviewEnabled] = React.useState(true)
 
-    const activeType = is_manually_added ?? null
-
     return (
         <>
             <FilterHeader
@@ -26,19 +24,19 @@ export const FilterManualTrackedType: React.FC<TFilterManualTrackedType> = obser
             {previewEnabled && (
                 <div>
                     <FilterOption
-                        isChecked={activeType === undefined ? true : false}
+                        isChecked={is_manually_added === undefined ? true : false}
                         onClick={() => handleUpdate(undefined)}
                         title={"All"}
                         multiple={false}
                     />
                     <FilterOption
-                        isChecked={activeType === true ? true : false}
+                        isChecked={is_manually_added === true ? true : false}
                         onClick={() => handleUpdate(true)}
                         title={"Manual"}
                         multiple={false}
                     />
                     <FilterOption
-                        isChecked={activeType === false ? true : false}
+                        isChecked={is_manually_added === false ? true : false}
                         onClick={() => handleUpdate(false)}
                         title={"Tracked"}
                         multiple={false}

@@ -14,8 +14,6 @@ export const FilterBillableType: React.FC<TFilterBillableType> = observer((props
 
     const [previewEnabled, setPreviewEnabled] = React.useState(true)
 
-    const activeType = is_billable ?? null
-
     return (
         <>
             <FilterHeader
@@ -26,19 +24,19 @@ export const FilterBillableType: React.FC<TFilterBillableType> = observer((props
             {previewEnabled && (
                 <div>
                     <FilterOption
-                        isChecked={activeType === undefined ? true : false}
+                        isChecked={is_billable === undefined ? true : false}
                         onClick={() => handleUpdate(undefined)}
                         title={"All"}
                         multiple={false}
                     />
                     <FilterOption
-                        isChecked={activeType === true ? true : false}
+                        isChecked={is_billable === true ? true : false}
                         onClick={() => handleUpdate(true)}
                         title={"Billable"}
                         multiple={false}
                     />
                     <FilterOption
-                        isChecked={activeType === false ? true : false}
+                        isChecked={is_billable === false ? true : false}
                         onClick={() => handleUpdate(false)}
                         title={"Non-Billable"}
                         multiple={false}

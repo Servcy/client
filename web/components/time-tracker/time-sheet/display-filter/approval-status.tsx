@@ -14,8 +14,6 @@ export const FilterApprovalType: React.FC<TFilterApprovalType> = observer((props
 
     const [previewEnabled, setPreviewEnabled] = React.useState(true)
 
-    const activeType = is_approved ?? null
-
     return (
         <>
             <FilterHeader
@@ -26,19 +24,19 @@ export const FilterApprovalType: React.FC<TFilterApprovalType> = observer((props
             {previewEnabled && (
                 <div>
                     <FilterOption
-                        isChecked={activeType === undefined ? true : false}
+                        isChecked={is_approved === undefined ? true : false}
                         onClick={() => handleUpdate(undefined)}
                         title={"All"}
                         multiple={false}
                     />
                     <FilterOption
-                        isChecked={activeType === true ? true : false}
+                        isChecked={is_approved === true ? true : false}
                         onClick={() => handleUpdate(true)}
                         title={"Approved"}
                         multiple={false}
                     />
                     <FilterOption
-                        isChecked={activeType === false ? true : false}
+                        isChecked={is_approved === false ? true : false}
                         onClick={() => handleUpdate(false)}
                         title={"Under Review"}
                         multiple={false}
