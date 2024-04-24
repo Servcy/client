@@ -1,6 +1,4 @@
-import isArray from "lodash/isArray"
 import isEmpty from "lodash/isEmpty"
-import pickBy from "lodash/pickBy"
 import set from "lodash/set"
 import { action, makeObservable, observable, runInAction } from "mobx"
 
@@ -250,21 +248,16 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
                             )
                         })
                     })
-                    const appliedFilters = _filters.filters || {}
-                    const filteredFilters = pickBy(
-                        appliedFilters,
-                        (value) => value && isArray(value) && value.length > 0
-                    )
                     const filteredRouteParams = this.computedFilteredParams(
-                        filteredFilters.filters as ITimesheetFilterOptions,
-                        filteredFilters.displayFilters as ITimesheetDisplayFilterOptions,
+                        _filters.filters as ITimesheetFilterOptions,
+                        _filters.displayFilters as ITimesheetDisplayFilterOptions,
                         ["created_by", "project", "start_time", "is_billable", "is_approved", "is_manually_added"]
                     )
                     this.rootStore.timeTracker.fetchTimeSheet(
                         workspaceSlug,
                         viewId,
                         filteredRouteParams,
-                        isEmpty(filteredFilters) ? "init-loader" : "mutation"
+                        isEmpty(_filters) ? "init-loader" : "mutation"
                     )
                     break
                 case ETimesheetFilterType.DISPLAY_FILTERS:
