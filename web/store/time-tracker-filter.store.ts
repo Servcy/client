@@ -185,14 +185,6 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
         return filteredRouteParams
     }
 
-    requiresServerUpdate = (displayFilters: ITimesheetDisplayFilterOptions) => {
-        const SERVER_DISPLAY_FILTERS = ["is_billable", "is_approved", "is_manually_added"]
-        const displayFilterKeys = Object.keys(displayFilters)
-        return SERVER_DISPLAY_FILTERS.some((serverDisplayfilter: string) =>
-            displayFilterKeys.includes(serverDisplayfilter)
-        )
-    }
-
     fetchFilters = async (workspaceSlug: string, viewId: "my-timesheet" | "workspace-timesheet" | string) => {
         try {
             const currentUser = this.rootStore.user.currentUser
@@ -268,13 +260,7 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
                         _filters.filters as ITimesheetFilterOptions,
                         _filters.displayFilters as ITimesheetDisplayFilterOptions
                     )
-                    if (this.requiresServerUpdate(updatedDisplayFilters))
-                        this.rootStore.timeTracker.fetchTimeSheet(
-                            workspaceSlug,
-                            viewId,
-                            filteredRouteParams2,
-                            "mutation"
-                        )
+                    this.rootStore.timeTracker.fetchTimeSheet(workspaceSlug, viewId, filteredRouteParams2, "mutation")
                     this.handleTimesheetLocalFilters.set(type, workspaceSlug, currentUser?.id, viewId, {
                         displayFilters: _filters.displayFilters,
                     })
