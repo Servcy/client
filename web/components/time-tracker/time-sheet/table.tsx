@@ -2,8 +2,9 @@ import { FC, useEffect, useRef } from "react"
 
 import { observer } from "mobx-react-lite"
 
-import { TimesheetTableHeadCell, WithDisplayPropertiesHOC } from "@components/time-tracker"
+import { TimeLogRow, TimesheetTableHeadCell, WithDisplayPropertiesHOC } from "@components/time-tracker"
 
+import { useTimeTracker } from "@hooks/store"
 import { useTableKeyboardNavigation } from "@hooks/use-table-keyboard-navigation"
 
 import { TIMESHEET_PROPERTY_LIST } from "@constants/timesheet"
@@ -18,6 +19,7 @@ interface ITimeLogTable {
 export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, displayFilters }) => {
     const containerRef = useRef<HTMLTableElement | null>(null)
     const isScrolled = useRef(false)
+    const { timesheet } = useTimeTracker()
     const portalRef = useRef<HTMLDivElement | null>(null)
     const handleKeyBoardNavigation = useTableKeyboardNavigation()
 
@@ -78,6 +80,21 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
                             ))}
                         </tr>
                     </thead>
+                    {timesheet && timesheet.length > 0 && (
+                        <tbody>
+                            {timesheet.map((timeLog) => (
+                                <TimeLogRow
+                                    key={timeLog.id}
+                                    timeLog={timeLog}
+                                    timesheet={timesheet}
+                                    displayProperties={displayProperties}
+                                    portalElement={portalRef}
+                                    containerRef={containerRef}
+                                    isScrolled={isScrolled}
+                                />
+                            ))}
+                        </tbody>
+                    )}
                 </table>
             </div>
         </div>

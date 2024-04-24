@@ -24,7 +24,7 @@ import {
 //     TimesheetStartedAtColumn,
 // } from "@components/time-tracker"
 
-import { ITimesheetDisplayPropertyOptions, TTimesheetOrderByOptions } from "@servcy/types"
+import { ITimesheetDisplayPropertyOptions } from "@servcy/types"
 import { ISvgIcons } from "@servcy/ui/src/icons/type"
 
 export const TIMESHEET_PROPERTY_LIST: (keyof ITimesheetDisplayPropertyOptions)[] = [
