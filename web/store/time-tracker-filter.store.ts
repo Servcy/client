@@ -31,8 +31,7 @@ export interface ITimeTrackerFilter {
     ) => Promise<void>
     computedFilteredParams(
         filters: ITimesheetFilterOptions,
-        displayFilters: ITimesheetDisplayFilterOptions,
-        filteredParams: ITimesheetParams[]
+        displayFilters: ITimesheetDisplayFilterOptions
     ): Partial<Record<ITimesheetParams, string | boolean>>
     computedFilters(filters: ITimesheetFilterOptions): ITimesheetFilterOptions
     computedDisplayFilters(
@@ -57,11 +56,15 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
         this.rootStore = _rootStore
     }
 
-    computedFilteredParams = (
-        filters: ITimesheetFilterOptions,
-        displayFilters: ITimesheetDisplayFilterOptions,
-        acceptableParamsByLayout: ITimesheetParams[]
-    ) => {
+    computedFilteredParams = (filters: ITimesheetFilterOptions, displayFilters: ITimesheetDisplayFilterOptions) => {
+        const acceptableParamsByLayout: ITimesheetParams[] = [
+            "created_by",
+            "project",
+            "start_time",
+            "is_billable",
+            "is_approved",
+            "is_manually_added",
+        ]
         const computedFilters: Partial<Record<ITimesheetParams, undefined | string[] | boolean | string>> = {
             created_by: filters?.created_by || undefined,
             project: filters?.project || undefined,
@@ -175,19 +178,9 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
         if (!viewId) return undefined
         const filters = this.getFilters(viewId)
         if (!filters) return undefined
-        const filteredParams: ITimesheetParams[] = [
-            "created_by",
-            "project",
-            "start_time",
-            "is_billable",
-            "is_approved",
-            "is_manually_added",
-        ]
-        if (!filteredParams) return undefined
         const filteredRouteParams: Partial<Record<ITimesheetParams, string | boolean>> = this.computedFilteredParams(
             filters?.filters as ITimesheetFilterOptions,
-            filters?.displayFilters as ITimesheetDisplayFilterOptions,
-            filteredParams
+            filters?.displayFilters as ITimesheetDisplayFilterOptions
         )
         return filteredRouteParams
     }
@@ -250,8 +243,7 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
                     })
                     const filteredRouteParams = this.computedFilteredParams(
                         _filters.filters as ITimesheetFilterOptions,
-                        _filters.displayFilters as ITimesheetDisplayFilterOptions,
-                        ["created_by", "project", "start_time", "is_billable", "is_approved", "is_manually_added"]
+                        _filters.displayFilters as ITimesheetDisplayFilterOptions
                     )
                     this.rootStore.timeTracker.fetchTimeSheet(
                         workspaceSlug,
@@ -274,8 +266,7 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
                     })
                     const filteredRouteParams2 = this.computedFilteredParams(
                         _filters.filters as ITimesheetFilterOptions,
-                        _filters.displayFilters as ITimesheetDisplayFilterOptions,
-                        ["created_by", "project", "start_time", "is_billable", "is_approved", "is_manually_added"]
+                        _filters.displayFilters as ITimesheetDisplayFilterOptions
                     )
                     if (this.requiresServerUpdate(updatedDisplayFilters))
                         this.rootStore.timeTracker.fetchTimeSheet(

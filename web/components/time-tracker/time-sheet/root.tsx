@@ -21,13 +21,17 @@ import {
 
 import { ERoles } from "@constants/iam"
 
-import { ITimesheetDisplayFilterOptions, ITimesheetDisplayPropertyOptions } from "@servcy/types"
+import {
+    ITimesheetDisplayFilterOptions,
+    ITimesheetDisplayPropertyOptions,
+    ITimesheetFilterOptions,
+} from "@servcy/types"
 
 export const TimeSheetRoot: FC = observer(() => {
     const { workspaceSlug, viewKey } = useParams()
     const { resolvedTheme } = useTheme()
     const { commandPalette: commandPaletteStore } = useApplication()
-    const { filters, fetchFilters } = useTimeTrackerFilter()
+    const { filters, fetchFilters, computedFilteredParams } = useTimeTrackerFilter()
     const { fetchTimeSheet, timesheet, loader } = useTimeTracker()
     const {
         membership: { currentWorkspaceRole },
@@ -43,13 +47,12 @@ export const TimeSheetRoot: FC = observer(() => {
         workspaceSlug && viewKey ? `TIMESHEET_ENTRIES_${workspaceSlug}_${viewKey}` : null,
         async () => {
             if (workspaceSlug && viewKey) {
-                await fetchFilters(workspaceSlug.toString(), viewKey.toString())
-                await fetchTimeSheet(
-                    workspaceSlug.toString(),
-                    viewKey.toString(),
-                    filters[viewKey.toString()]?.filters,
-                    "init-loader"
+                const routeParams = computedFilteredParams(
+                    filters[viewKey.toString()]?.filters as ITimesheetFilterOptions,
+                    filters[viewKey.toString()]?.displayFilters as ITimesheetDisplayFilterOptions
                 )
+                await fetchFilters(workspaceSlug.toString(), viewKey.toString())
+                await fetchTimeSheet(workspaceSlug.toString(), viewKey.toString(), routeParams, "init-loader")
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
