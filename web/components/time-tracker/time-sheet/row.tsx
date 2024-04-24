@@ -1,4 +1,4 @@
-import { FC, MutableRefObject, useRef, useState } from "react"
+import { FC, MutableRefObject, ReactElement, ReactNode, useRef, useState } from "react"
 
 import { MoreHorizontal } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -14,15 +14,20 @@ import { ITimesheetDisplayPropertyOptions, ITrackedTime } from "@servcy/types"
 
 interface ITimeLogRow {
     timeLog: ITrackedTime
+    quickActions: (
+        timeLog: ITrackedTime,
+        customActionButton?: ReactElement,
+        portalElement?: HTMLDivElement | null
+    ) => ReactNode
     timesheet: ITrackedTime[]
     displayProperties: ITimesheetDisplayPropertyOptions
-    portalElement: React.MutableRefObject<HTMLDivElement | null>
+    portalElement: MutableRefObject<HTMLDivElement | null>
     isScrolled: MutableRefObject<boolean>
     containerRef: MutableRefObject<HTMLTableElement | null>
 }
 
 export const TimeLogRow: FC<ITimeLogRow> = observer((props) => {
-    const { timeLog, timesheet, containerRef, displayProperties, portalElement, isScrolled } = props
+    const { timeLog, quickActions, timesheet, containerRef, displayProperties, portalElement, isScrolled } = props
     const [isMenuActive, setIsMenuActive] = useState(false)
     const menuActionRef = useRef<HTMLDivElement | null>(null)
     useOutsideClickDetector(menuActionRef, () => setIsMenuActive(false))
@@ -70,7 +75,7 @@ export const TimeLogRow: FC<ITimeLogRow> = observer((props) => {
                                     isMenuActive ? "!block" : ""
                                 }`}
                             >
-                                {/* {quickActions(issueDetail, customActionButton, portalElement.current)} */}
+                                {quickActions(timeLog, customActionButton, portalElement.current)}
                             </div>
                         </div>
                     </div>

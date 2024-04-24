@@ -1,15 +1,22 @@
-import { FC, useEffect, useRef } from "react"
+import { useParams } from "next/navigation"
+
+import { FC, useCallback, useEffect, useMemo, useRef } from "react"
 
 import { observer } from "mobx-react-lite"
 
-import { TimeLogRow, TimesheetTableHeadCell, WithDisplayPropertiesHOC } from "@components/time-tracker"
+import {
+    TimeLogQuickActions,
+    TimeLogRow,
+    TimesheetTableHeadCell,
+    WithDisplayPropertiesHOC,
+} from "@components/time-tracker"
 
 import { useTimeTracker } from "@hooks/store"
 import { useTableKeyboardNavigation } from "@hooks/use-table-keyboard-navigation"
 
 import { TIMESHEET_PROPERTY_LIST } from "@constants/timesheet"
 
-import { ITimesheetDisplayFilterOptions, ITimesheetDisplayPropertyOptions } from "@servcy/types"
+import { ITimesheetDisplayFilterOptions, ITimesheetDisplayPropertyOptions, ITrackedTime } from "@servcy/types"
 
 interface ITimeLogTable {
     displayFilters: ITimesheetDisplayFilterOptions
@@ -19,7 +26,8 @@ interface ITimeLogTable {
 export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, displayFilters }) => {
     const containerRef = useRef<HTMLTableElement | null>(null)
     const isScrolled = useRef(false)
-    const { timesheet } = useTimeTracker()
+    const { workspaceSlug } = useParams()
+    const { timesheet, updateTimeLog, deleteTimeLog } = useTimeTracker()
     const portalRef = useRef<HTMLDivElement | null>(null)
     const handleKeyBoardNavigation = useTableKeyboardNavigation()
 
@@ -42,6 +50,39 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
             isScrolled.current = scrollLeft > 0
         }
     }
+
+    const timeLogActions = useMemo(
+        () => ({
+            ["UPDATE"]: async (timeLog: ITrackedTime) => {
+                if (!workspaceSlug) return
+                await updateTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id, timeLog)
+            },
+            ["DELETE"]: async (timeLog: ITrackedTime) => {
+                if (!workspaceSlug) return
+                await deleteTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id)
+            },
+        }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [updateTimeLog, deleteTimeLog, workspaceSlug]
+    )
+
+    const handleTimeLog = useCallback(async (timeLog: ITrackedTime, action: string) => {
+        if (action === "UPDATE") await timeLogActions[action]!(timeLog)
+        if (action === "DELETE") await timeLogActions[action]!(timeLog)
+    }, [])
+
+    const renderQuickActions = useCallback(
+        (timeLog: ITrackedTime, customActionButton?: React.ReactElement, portalElement?: HTMLDivElement | null) => (
+            <TimeLogQuickActions
+                customActionButton={customActionButton}
+                timeLog={timeLog}
+                handleUpdate={async () => handleTimeLog({ ...timeLog }, "UPDATE")}
+                handleDelete={async () => handleTimeLog(timeLog, "DELETE")}
+                portalElement={portalElement}
+            />
+        ),
+        [handleTimeLog]
+    )
 
     useEffect(() => {
         const currentContainerRef = containerRef.current
@@ -86,6 +127,7 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
                                 <TimeLogRow
                                     key={timeLog.id}
                                     timeLog={timeLog}
+                                    quickActions={renderQuickActions}
                                     timesheet={timesheet}
                                     displayProperties={displayProperties}
                                     portalElement={portalRef}

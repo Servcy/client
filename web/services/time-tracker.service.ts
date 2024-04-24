@@ -32,6 +32,29 @@ export class TimeTrackerService extends APIService {
         }
     }
 
+    async updateTimeLog(
+        workspaceSlug: string,
+        projectId: string,
+        timerId: string,
+        data: Partial<ITrackedTime>
+    ): Promise<ITrackedTime> {
+        try {
+            const response = await this.patch(`/project/${workspaceSlug}/${projectId}/${timerId}/update-time-log`, data)
+            return response?.data
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async deleteTimeLog(workspaceSlug: string, projectId: string, timerId: string): Promise<ITrackedTime> {
+        try {
+            const response = await this.delete(`/project/${workspaceSlug}/${projectId}/${timerId}/delete-time-log`)
+            return response?.data
+        } catch (error) {
+            throw error
+        }
+    }
+
     async fetchTimeSheet(workspaceSlug: string, viewId: string, queries?: any): Promise<ITrackedTime[]> {
         try {
             const response = await this.get(`/project/${workspaceSlug}/timer/${viewId}`, {
