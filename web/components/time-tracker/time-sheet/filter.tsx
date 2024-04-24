@@ -5,11 +5,11 @@ import { observer } from "mobx-react-lite"
 
 import { FilterCreatedBy, FilterProjects, FilterStartDate } from "@components/issues"
 
-import { ITimesheetFilters } from "@servcy/types"
+import { ITimesheetFilterOptions } from "@servcy/types"
 
 type ITimesheetFilterSelection = {
-    filters: ITimesheetFilters
-    handleFiltersUpdate: (key: keyof ITimesheetFilters, value: string | string[]) => void
+    filters: ITimesheetFilterOptions
+    handleFiltersUpdate: (key: keyof ITimesheetFilterOptions, value: string | string[]) => void
     memberIds?: string[] | undefined
 }
 

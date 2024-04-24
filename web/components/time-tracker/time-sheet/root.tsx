@@ -1,13 +1,13 @@
 import { useParams } from "next/navigation"
 
-import React, { Fragment } from "react"
+import { FC, Fragment, useCallback } from "react"
 
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import useSWR from "swr"
 
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { TimesheetAppliedFilters, TimesheetViewTabs } from "@components/time-tracker"
+import { TimeLogTable, TimesheetAppliedFilters, TimesheetViewTabs } from "@components/time-tracker"
 import { SpreadsheetLayoutLoader } from "@components/ui"
 
 import {
@@ -20,12 +20,15 @@ import {
 } from "@hooks/store"
 
 import { ERoles } from "@constants/iam"
+import { ETimesheetFilterType } from "@constants/timesheet"
 
-export const TimeSheetRoot: React.FC = observer(() => {
+import { ITimesheetDisplayFilterOptions, ITimesheetDisplayPropertyOptions } from "@servcy/types"
+
+export const TimeSheetRoot: FC = observer(() => {
     const { workspaceSlug, viewKey } = useParams()
     const { resolvedTheme } = useTheme()
     const { commandPalette: commandPaletteStore } = useApplication()
-    const { filters, fetchFilters } = useTimeTrackerFilter()
+    const { filters, fetchFilters, updateFilters } = useTimeTrackerFilter()
     const { fetchTimeSheet, timesheet, loader } = useTimeTracker()
     const {
         membership: { currentWorkspaceRole },
@@ -35,12 +38,31 @@ export const TimeSheetRoot: React.FC = observer(() => {
     const { setTrackElement } = useEventTracker()
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("all-issues", "assigned", isLightMode)
+    const handleDisplayFilterUpdate = useCallback(
+        (updatedDisplayFilter: Partial<ITimesheetDisplayFilterOptions>) => {
+            if (!workspaceSlug || !viewKey) return
+            updateFilters(
+                workspaceSlug.toString(),
+                ETimesheetFilterType.DISPLAY_FILTERS,
+                { ...updatedDisplayFilter },
+                viewKey.toString()
+            )
+        },
+        [updateFilters, workspaceSlug, viewKey]
+    )
+    const displayFilters = filters[viewKey.toString()]?.displayFilters as ITimesheetDisplayFilterOptions
+    const displayProperties = filters[viewKey.toString()]?.displayProperties as ITimesheetDisplayPropertyOptions
     useSWR(
         workspaceSlug && viewKey ? `TIMESHEET_ENTRIES_${workspaceSlug}_${viewKey}` : null,
         async () => {
             if (workspaceSlug && viewKey) {
                 await fetchFilters(workspaceSlug.toString(), viewKey.toString())
-                await fetchTimeSheet(workspaceSlug.toString(), viewKey.toString(), filters[viewKey.toString()])
+                await fetchTimeSheet(
+                    workspaceSlug.toString(),
+                    viewKey.toString(),
+                    filters[viewKey.toString()]?.filters,
+                    "init-loader"
+                )
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
@@ -83,7 +105,13 @@ export const TimeSheetRoot: React.FC = observer(() => {
                             disabled={!isEditingAllowed}
                         />
                     ) : (
-                        <Fragment />
+                        <Fragment>
+                            <TimeLogTable
+                                handleDisplayFilterUpdate={handleDisplayFilterUpdate}
+                                displayFilters={displayFilters}
+                                displayProperties={displayProperties}
+                            />
+                        </Fragment>
                     )}
                 </div>
             </div>

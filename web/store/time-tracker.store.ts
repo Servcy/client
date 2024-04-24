@@ -23,7 +23,7 @@ export interface ITimeTrackerStore {
     loader: TLoader
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
     stopTrackingTime: (workspaceSlug: string) => Promise<void>
-    fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any) => Promise<void>
+    fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any, loadType?: TLoader) => Promise<void>
     getTimeLogsByIssueId: (issueId: TIssue["id"]) => ITrackedTime[]
     snapshots: Record<string, string[]>
     snapshotMap: Record<string, ITrackedTimeSnapshot>

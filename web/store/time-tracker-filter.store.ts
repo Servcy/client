@@ -4,38 +4,48 @@ import pickBy from "lodash/pickBy"
 import set from "lodash/set"
 import { action, makeObservable, observable, runInAction } from "mobx"
 
-import { EIssueFilterType, EIssuesStoreType } from "@constants/issue"
+import { ETimesheetFilterType } from "@constants/timesheet"
 
 import { storage } from "@wrappers/common/LocalStorageWrapper"
 
-import { ITimesheetFilters, ITimesheetParams } from "@servcy/types"
+import {
+    ILocalStoreTimesheetFilters,
+    ITimesheetDisplayFilterOptions,
+    ITimesheetDisplayPropertyOptions,
+    ITimesheetFilter,
+    ITimesheetFilterOptions,
+    ITimesheetFilterResponse,
+    ITimesheetParams,
+} from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
-interface ILocalStoreTimesheetFilters {
-    key: EIssuesStoreType
-    workspaceSlug: string
-    viewId: string | undefined
-    userId: string | undefined
-    filters: ITimesheetFilters
-}
-
 export interface ITimeTrackerFilter {
-    filters: Record<"my-timesheet" | "workspace-timesheet" | string, ITimesheetFilters>
-    getFilters: (viewId: string | undefined) => ITimesheetFilters | undefined
+    filters: Record<"my-timesheet" | "workspace-timesheet" | string, ITimesheetFilter>
+    getFilters: (viewId: string | undefined) => ITimesheetFilter | undefined
     getAppliedFilters: (viewId: string) => Partial<Record<ITimesheetParams, string | boolean>> | undefined
     fetchFilters: (workspaceSlug: string, viewId: string) => Promise<void>
-    updateFilters: (workspaceSlug: string, filters: ITimesheetFilters, viewId?: string | undefined) => Promise<void>
-
-    // utils
+    updateFilters: (
+        workspaceSlug: string,
+        type: ETimesheetFilterType,
+        filters: ITimesheetFilterOptions | ITimesheetDisplayFilterOptions | ITimesheetDisplayPropertyOptions,
+        viewId?: string | undefined
+    ) => Promise<void>
     computedFilteredParams(
-        filters: ITimesheetFilters,
+        filters: ITimesheetFilterOptions,
+        displayFilters: ITimesheetDisplayFilterOptions,
         filteredParams: ITimesheetParams[]
     ): Partial<Record<ITimesheetParams, string | boolean>>
+    computedFilters(filters: ITimesheetFilterOptions): ITimesheetFilterOptions
+    computedDisplayFilters(
+        displayFilters: ITimesheetDisplayFilterOptions,
+        defaultValues?: ITimesheetDisplayFilterOptions
+    ): ITimesheetDisplayFilterOptions
+    computedDisplayProperties(filters: ITimesheetDisplayPropertyOptions): ITimesheetDisplayPropertyOptions
 }
 
 export class TimeTrackerFilter implements ITimeTrackerFilter {
-    filters: { [viewId: string]: ITimesheetFilters } = {}
+    filters: { [viewId: string]: ITimesheetFilter } = {}
     rootStore
 
     constructor(_rootStore: RootStore) {
@@ -49,13 +59,11 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
         this.rootStore = _rootStore
     }
 
-    /**
-     * @description This method is used to convert the filters array params to string params
-     * @param {ITimesheetFilters} filters
-     * @param {string[]} acceptableParamsByLayout
-     * @returns {Partial<Record<ITimesheetParams, string | boolean>>}
-     */
-    computedFilteredParams = (filters: ITimesheetFilters, acceptableParamsByLayout: ITimesheetParams[]) => {
+    computedFilteredParams = (
+        filters: ITimesheetFilterOptions,
+        displayFilters: ITimesheetDisplayFilterOptions,
+        acceptableParamsByLayout: ITimesheetParams[]
+    ) => {
         const computedFilters: Partial<Record<ITimesheetParams, undefined | string[] | boolean | string>> = {
             created_by: filters?.created_by || undefined,
             project: filters.project || undefined,
@@ -71,48 +79,35 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
         return timesheetFiltersParams
     }
 
-    handleIssuesLocalFilters = {
+    handleTimesheetLocalFilters = {
         fetchFiltersFromStorage: () => {
             const _filters = storage.get("timesheet_local_filters")
             return _filters ? JSON.parse(_filters) : []
         },
-        get: (
-            currentView: EIssuesStoreType,
-            workspaceSlug: string,
-            viewId: string | undefined,
-            userId: string | undefined
-        ) => {
-            const storageFilters = this.handleIssuesLocalFilters.fetchFiltersFromStorage()
+        get: (workspaceSlug: string, viewId: string | undefined, userId: string | undefined) => {
+            const storageFilters = this.handleTimesheetLocalFilters.fetchFiltersFromStorage()
             const currentFilterIndex = storageFilters.findIndex(
                 (filter: ILocalStoreTimesheetFilters) =>
-                    filter.key === currentView &&
-                    filter.workspaceSlug === workspaceSlug &&
-                    filter.viewId === viewId &&
-                    filter.userId === userId
+                    filter.workspaceSlug === workspaceSlug && filter.viewId === viewId && filter.userId === userId
             )
             if (!currentFilterIndex && currentFilterIndex.length < 0) return undefined
             return storageFilters[currentFilterIndex]?.filters || {}
         },
         set: (
-            currentView: EIssuesStoreType,
-            filterType: EIssueFilterType,
+            filterType: ETimesheetFilterType,
             workspaceSlug: string,
             viewId: string | undefined,
             userId: string | undefined,
-            filters: Partial<ITimesheetFilters>
+            filters: Partial<ITimesheetFilterResponse>
         ) => {
-            const storageFilters = this.handleIssuesLocalFilters.fetchFiltersFromStorage()
+            const storageFilters = this.handleTimesheetLocalFilters.fetchFiltersFromStorage()
             const currentFilterIndex = storageFilters.findIndex(
                 (filter: ILocalStoreTimesheetFilters) =>
-                    filter.key === currentView &&
-                    filter.workspaceSlug === workspaceSlug &&
-                    filter.viewId === viewId &&
-                    filter.userId === userId
+                    filter.workspaceSlug === workspaceSlug && filter.viewId === viewId && filter.userId === userId
             )
 
             if (currentFilterIndex < 0)
                 storageFilters.push({
-                    key: currentView,
                     workspaceSlug: workspaceSlug,
                     viewId: viewId,
                     userId: userId,
@@ -123,33 +118,62 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
                     ...storageFilters[currentFilterIndex],
                     filters: {
                         ...storageFilters[currentFilterIndex].filters,
-                        [filterType]: filters,
+                        [filterType]: filters[filterType],
                     },
                 }
             storage.set("timesheet_local_filters", JSON.stringify(storageFilters))
         },
     }
 
-    /**
-     * @description This method is used to apply the filters on the issues
-     * @param {ITimesheetFilters} filters
-     * @returns {ITimesheetFilters}
-     */
-    computedFilters = (filters: ITimesheetFilters): ITimesheetFilters => ({
+    computedFilters = (filters: ITimesheetFilterOptions): ITimesheetFilterOptions => ({
         created_by: filters?.created_by || undefined,
         project: filters.project || undefined,
         start_time: filters.start_time || undefined,
     })
 
+    computedDisplayFilters = (
+        displayFilters: ITimesheetDisplayFilterOptions,
+        defaultValues?: ITimesheetDisplayFilterOptions
+    ): ITimesheetDisplayFilterOptions => {
+        const filters = displayFilters || defaultValues
+        return {
+            is_billable: filters?.is_billable || true,
+            is_approved: filters?.is_approved || false,
+            is_manually_added: filters?.is_manually_added || false,
+        }
+    }
+
+    computedDisplayProperties = (
+        displayProperties: ITimesheetDisplayPropertyOptions
+    ): ITimesheetDisplayPropertyOptions => ({
+        issue_id: displayProperties?.issue_id ?? true,
+        description: displayProperties?.description ?? true,
+        duration: displayProperties?.duration ?? true,
+        start_time: displayProperties?.start_time ?? true,
+        end_time: displayProperties?.end_time ?? true,
+        created_by: displayProperties?.created_by ?? true,
+        is_billable: displayProperties?.is_billable ?? true,
+        is_approved: displayProperties?.is_approved ?? true,
+        snapshots_count: displayProperties?.snapshots_count ?? true,
+        is_manually_added: displayProperties?.is_manually_added ?? true,
+    })
+
     getFilters = (viewId: string | undefined) => {
         if (!viewId) return undefined
-        return this.filters[viewId]
+        const filters = this.filters[viewId] || undefined
+        if (isEmpty(filters)) return undefined
+        const _filters: ITimesheetFilter = {
+            filters: isEmpty(filters?.filters) ? undefined : filters?.filters,
+            displayFilters: isEmpty(filters?.displayFilters) ? undefined : filters?.displayFilters,
+            displayProperties: isEmpty(filters?.displayProperties) ? undefined : filters?.displayProperties,
+        }
+        return _filters
     }
 
     getAppliedFilters = (viewId: string | undefined) => {
         if (!viewId) return undefined
-        const selectedFilters = this.getFilters(viewId)
-        if (!selectedFilters) return undefined
+        const filters = this.getFilters(viewId)
+        if (!filters) return undefined
         const filteredParams: ITimesheetParams[] = [
             "created_by",
             "project",
@@ -158,46 +182,134 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
             "is_approved",
             "is_manually_added",
         ]
+        if (!filteredParams) return undefined
         const filteredRouteParams: Partial<Record<ITimesheetParams, string | boolean>> = this.computedFilteredParams(
-            selectedFilters,
+            filters?.filters as ITimesheetFilterOptions,
+            filters?.displayFilters as ITimesheetDisplayFilterOptions,
             filteredParams
         )
         return filteredRouteParams
     }
 
+    requiresServerUpdate = (displayFilters: ITimesheetDisplayFilterOptions) => {
+        const SERVER_DISPLAY_FILTERS = ["is_billable", "is_approved", "is_manually_added"]
+        const displayFilterKeys = Object.keys(displayFilters)
+        return SERVER_DISPLAY_FILTERS.some((serverDisplayfilter: string) =>
+            displayFilterKeys.includes(serverDisplayfilter)
+        )
+    }
+
     fetchFilters = async (workspaceSlug: string, viewId: "my-timesheet" | "workspace-timesheet" | string) => {
         try {
             const currentUser = this.rootStore.user.currentUser
-            const _filters = this.handleIssuesLocalFilters.get(
-                EIssuesStoreType.GLOBAL,
-                workspaceSlug,
-                viewId,
-                currentUser?.id
-            )
+            const _filters = this.handleTimesheetLocalFilters.get(workspaceSlug, viewId, currentUser?.id)
             const filters = this.computedFilters(_filters)
+            const displayFilters: ITimesheetDisplayFilterOptions = this.computedDisplayFilters(_filters?.displayFilters)
+            const displayProperties: ITimesheetDisplayPropertyOptions = this.computedDisplayProperties(
+                _filters?.display_properties
+            )
             runInAction(() => {
-                set(this.filters, [viewId], filters)
+                set(this.filters, [viewId, "filters"], filters)
+                set(this.filters, [viewId, "displayFilters"], displayFilters)
+                set(this.filters, [viewId, "displayProperties"], displayProperties)
             })
         } catch (error) {
             throw error
         }
     }
 
-    updateFilters = async (workspaceSlug: string, filters: ITimesheetFilters, viewId?: string) => {
+    updateFilters = async (
+        workspaceSlug: string,
+        type: ETimesheetFilterType,
+        filters: ITimesheetFilterOptions | ITimesheetDisplayFilterOptions | ITimesheetDisplayPropertyOptions,
+        viewId?: string
+    ) => {
         try {
             if (!viewId) throw new Error("View id is required")
             const timesheetFilters = this.getFilters(viewId)
             if (!timesheetFilters || isEmpty(filters)) return
-            const updatedFilters = filters as ITimesheetFilters
-            runInAction(() => {
-                Object.keys(updatedFilters).forEach((_key) => {
-                    set(this.filters, [viewId, _key], updatedFilters[_key as keyof ITimesheetFilters])
-                })
-            })
-            const appliedFilters = { ...timesheetFilters, ...updatedFilters }
-            const validatedFilters = pickBy(appliedFilters, (value) => value && isArray(value) && value.length > 0)
-            const params = this.computedFilteredParams(validatedFilters, ["created_by", "project", "start_time"])
-            this.rootStore.timeTracker.fetchTimeSheet(workspaceSlug, viewId, params)
+            const currentUser = this.rootStore.user.currentUser
+            const _filters = {
+                filters: timesheetFilters.filters as ITimesheetFilterOptions,
+                displayFilters: timesheetFilters.displayFilters as ITimesheetDisplayFilterOptions,
+                displayProperties: timesheetFilters.displayProperties as ITimesheetDisplayPropertyOptions,
+            }
+            switch (type) {
+                case ETimesheetFilterType.FILTERS:
+                    const updatedFilters = filters as ITimesheetFilterOptions
+                    _filters.filters = { ..._filters.filters, ...updatedFilters }
+                    runInAction(() => {
+                        Object.keys(updatedFilters).forEach((_key) => {
+                            set(
+                                this.filters,
+                                [viewId, "filters", _key],
+                                updatedFilters[_key as keyof ITimesheetFilterOptions]
+                            )
+                        })
+                    })
+                    const appliedFilters = _filters.filters || {}
+                    const filteredFilters = pickBy(
+                        appliedFilters,
+                        (value) => value && isArray(value) && value.length > 0
+                    )
+                    const filteredRouteParams = this.computedFilteredParams(
+                        filteredFilters.filters as ITimesheetFilterOptions,
+                        filteredFilters.displayFilters as ITimesheetDisplayFilterOptions,
+                        ["created_by", "project", "start_time", "is_billable", "is_approved", "is_manually_added"]
+                    )
+                    this.rootStore.timeTracker.fetchTimeSheet(
+                        workspaceSlug,
+                        viewId,
+                        filteredRouteParams,
+                        isEmpty(filteredFilters) ? "init-loader" : "mutation"
+                    )
+                    break
+                case ETimesheetFilterType.DISPLAY_FILTERS:
+                    const updatedDisplayFilters = filters as ITimesheetDisplayFilterOptions
+                    _filters.displayFilters = { ..._filters.displayFilters, ...updatedDisplayFilters }
+                    runInAction(() => {
+                        Object.keys(updatedDisplayFilters).forEach((_key) => {
+                            set(
+                                this.filters,
+                                [viewId, "displayFilters", _key],
+                                updatedDisplayFilters[_key as keyof ITimesheetDisplayFilterOptions]
+                            )
+                        })
+                    })
+                    const filteredRouteParams2 = this.computedFilteredParams(
+                        _filters.filters as ITimesheetFilterOptions,
+                        _filters.displayFilters as ITimesheetDisplayFilterOptions,
+                        ["created_by", "project", "start_time", "is_billable", "is_approved", "is_manually_added"]
+                    )
+                    if (this.requiresServerUpdate(updatedDisplayFilters))
+                        this.rootStore.timeTracker.fetchTimeSheet(
+                            workspaceSlug,
+                            viewId,
+                            filteredRouteParams2,
+                            "mutation"
+                        )
+                    this.handleTimesheetLocalFilters.set(type, workspaceSlug, currentUser?.id, viewId, {
+                        displayFilters: _filters.displayFilters,
+                    })
+                    break
+                case ETimesheetFilterType.DISPLAY_PROPERTIES:
+                    const updatedDisplayProperties = filters as ITimesheetDisplayPropertyOptions
+                    _filters.displayProperties = { ..._filters.displayProperties, ...updatedDisplayProperties }
+                    runInAction(() => {
+                        Object.keys(updatedDisplayProperties).forEach((_key) => {
+                            set(
+                                this.filters,
+                                [viewId, "displayProperties", _key],
+                                updatedDisplayProperties[_key as keyof ITimesheetDisplayPropertyOptions]
+                            )
+                        })
+                    })
+                    this.handleTimesheetLocalFilters.set(type, workspaceSlug, currentUser?.id, viewId, {
+                        displayProperties: _filters.displayProperties,
+                    })
+                default:
+                    break
+            }
         } catch (error) {
             if (viewId) this.fetchFilters(workspaceSlug, viewId)
             throw error

@@ -12,22 +12,22 @@ import {
     Text,
 } from "lucide-react"
 
-import {
-    TimesheetApprovedColumn,
-    TimesheetBillableColumn,
-    TimesheetCreatorColumn,
-    TimesheetDescriptionColumn,
-    TimesheetDurationColumn,
-    TimesheetEndedAtColumn,
-    TimesheetManuallyAddedColumn,
-    TimesheetSnapshotsColumn,
-    TimesheetStartedAtColumn,
-} from "@components/time-tracker"
+// import {
+//     TimesheetApprovedColumn,
+//     TimesheetBillableColumn,
+//     TimesheetCreatorColumn,
+//     TimesheetDescriptionColumn,
+//     TimesheetDurationColumn,
+//     TimesheetEndedAtColumn,
+//     TimesheetManuallyAddedColumn,
+//     TimesheetSnapshotsColumn,
+//     TimesheetStartedAtColumn,
+// } from "@components/time-tracker"
 
-import { ITimesheetDisplayProperties, ITrackedTime, TIssueOrderByOptions } from "@servcy/types"
+import { ITimesheetDisplayPropertyOptions, TTimesheetOrderByOptions } from "@servcy/types"
 import { ISvgIcons } from "@servcy/ui/src/icons/type"
 
-export const TIMESHEET_PROPERTY_LIST: (keyof ITimesheetDisplayProperties)[] = [
+export const TIMESHEET_PROPERTY_LIST: (keyof ITimesheetDisplayPropertyOptions)[] = [
     "description",
     "duration",
     "start_time",
@@ -39,20 +39,42 @@ export const TIMESHEET_PROPERTY_LIST: (keyof ITimesheetDisplayProperties)[] = [
     "is_manually_added",
 ]
 
+export enum ETimesheetFilterType {
+    FILTERS = "filters",
+    DISPLAY_FILTERS = "displayFilters",
+    DISPLAY_PROPERTIES = "displayProperties",
+}
+
+export const TIMESHEET_DISPLAY_PROPERTIES: {
+    key: keyof ITimesheetDisplayPropertyOptions
+    title: string
+}[] = [
+    { key: "issue_id", title: "Issue id" },
+    { key: "description", title: "Description" },
+    { key: "duration", title: "Duration" },
+    { key: "start_time", title: "Start Time" },
+    { key: "end_time", title: "End Time" },
+    { key: "created_by", title: "Created By" },
+    { key: "is_billable", title: "Billable" },
+    { key: "is_approved", title: "Approved" },
+    { key: "snapshots_count", title: "Snapshots" },
+    { key: "is_manually_added", title: "Manually Added" },
+]
+
 export const TIMESHEET_PROPERTY_DETAILS: {
     [key: string]: {
         title: string
-        ascendingOrderKey: TIssueOrderByOptions
+        ascendingOrderKey: TTimesheetOrderByOptions
         ascendingOrderTitle: string
-        descendingOrderKey: TIssueOrderByOptions
+        descendingOrderKey: TTimesheetOrderByOptions
         descendingOrderTitle: string
         icon: FC<ISvgIcons>
-        Column: React.FC<{
-            trackedTime: ITrackedTime
-            onClose: () => void
-            onChange: (trackedTime: ITrackedTime, data: Partial<ITrackedTime>, updates: any) => void // eslint-disable-line
-            disabled: boolean
-        }>
+        // Column: React.FC<{
+        //     trackedTime: ITrackedTime
+        //     onClose: () => void
+        //     onChange: (trackedTime: ITrackedTime, data: Partial<ITrackedTime>, updates: any) => void // eslint-disable-line
+        //     disabled: boolean
+        // }>
     }
 } = {
     description: {
@@ -62,7 +84,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "-description",
         descendingOrderTitle: "Z",
         icon: Text,
-        Column: TimesheetDescriptionColumn,
+        // Column: TimesheetDescriptionColumn,
     },
     duration: {
         title: "Duration",
@@ -71,7 +93,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "-duration",
         descendingOrderTitle: "Long",
         icon: AudioLines,
-        column: TimesheetDurationColumn,
+        // column: TimesheetDurationColumn,
     },
     start_time: {
         title: "Start Time",
@@ -80,7 +102,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "start_time",
         descendingOrderTitle: "Old",
         icon: CalendarClock,
-        Column: TimesheetStartedAtColumn,
+        // Column: TimesheetStartedAtColumn,
     },
     end_time: {
         title: "End Time",
@@ -89,7 +111,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "end_time",
         descendingOrderTitle: "Old",
         icon: CalendarCheck2,
-        Column: TimesheetEndedAtColumn,
+        // Column: TimesheetEndedAtColumn,
     },
     created_by: {
         title: "Creator",
@@ -98,7 +120,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "-created_by__first_name",
         descendingOrderTitle: "Z",
         icon: CircleUser,
-        Column: TimesheetCreatorColumn,
+        // Column: TimesheetCreatorColumn,
     },
     is_billable: {
         title: "Billable",
@@ -107,7 +129,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "-is_billable",
         descendingOrderTitle: "No",
         icon: DollarSign,
-        Column: TimesheetBillableColumn,
+        // Column: TimesheetBillableColumn,
     },
     is_approved: {
         title: "Approved",
@@ -116,7 +138,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "-is_approved",
         descendingOrderTitle: "No",
         icon: Check,
-        Column: TimesheetApprovedColumn,
+        // Column: TimesheetApprovedColumn,
     },
     snapshots_count: {
         title: "Snapshots",
@@ -125,7 +147,7 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "-snapshots_count",
         descendingOrderTitle: "High",
         icon: Camera,
-        Column: TimesheetSnapshotsColumn,
+        // Column: TimesheetSnapshotsColumn,
     },
     is_manually_added: {
         title: "Manually Added",
@@ -134,6 +156,6 @@ export const TIMESHEET_PROPERTY_DETAILS: {
         descendingOrderKey: "-is_manually_added",
         descendingOrderTitle: "No",
         icon: PlusCircle,
-        Column: TimesheetManuallyAddedColumn,
+        // Column: TimesheetManuallyAddedColumn,
     },
 }
