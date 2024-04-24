@@ -69,9 +69,9 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
             created_by: filters?.created_by || undefined,
             project: filters?.project || undefined,
             start_time: filters?.start_time || undefined,
-            is_billable: displayFilters?.is_billable || undefined,
-            is_approved: displayFilters?.is_approved || undefined,
-            is_manually_added: displayFilters?.is_manually_added || undefined,
+            is_billable: displayFilters?.is_billable,
+            is_approved: displayFilters?.is_approved,
+            is_manually_added: displayFilters?.is_manually_added,
         }
         const timesheetFiltersParams: Partial<Record<ITimesheetParams, boolean | string>> = {}
         Object.keys(computedFilters).forEach((key) => {
