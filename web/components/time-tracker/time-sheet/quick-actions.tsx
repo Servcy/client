@@ -13,16 +13,13 @@ import { CustomMenu } from "@servcy/ui"
 export interface IQuickActionProps {
     timeLog: ITrackedTime
     handleDelete: () => Promise<void>
-    handleUpdate?: (data: ITrackedTime) => Promise<void>
     customActionButton?: React.ReactElement
     portalElement?: HTMLDivElement | null
 }
 
 export const TimeLogQuickActions: React.FC<IQuickActionProps> = observer((props) => {
-    const { timeLog, handleDelete, handleUpdate, customActionButton, portalElement } = props
-    const [updateModal, setUpdateModal] = useState(false)
+    const { timeLog, handleDelete, customActionButton, portalElement } = props
     const [deleteModal, setDeleteModal] = useState(false)
-    const [timeLogToEdit, setTimeLogToEdit] = useState<ITrackedTime | undefined>(undefined)
     const { currentUser } = useUser()
 
     return (
@@ -42,19 +39,6 @@ export const TimeLogQuickActions: React.FC<IQuickActionProps> = observer((props)
                 closeOnSelect
                 ellipsis
             >
-                {!timeLog.is_approved && currentUser?.id.toString() === timeLog.created_by.toString() && (
-                    <CustomMenu.MenuItem
-                        onClick={() => {
-                            setTimeLogToEdit(timeLog)
-                            setUpdateModal(true)
-                        }}
-                    >
-                        <div className="flex items-center gap-2">
-                            <Pencil className="h-3 w-3" />
-                            Edit
-                        </div>
-                    </CustomMenu.MenuItem>
-                )}
                 {!timeLog.is_approved && currentUser?.id.toString() === timeLog.created_by.toString() && (
                     <CustomMenu.MenuItem
                         onClick={() => {

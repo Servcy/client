@@ -3,7 +3,6 @@ import { useParams } from "next/navigation"
 import { FC, useCallback, useEffect, useMemo, useRef } from "react"
 
 import { observer } from "mobx-react-lite"
-import { toast } from "react-hot-toast"
 
 import {
     TimeLogQuickActions,
@@ -54,14 +53,6 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
 
     const timeLogActions = useMemo(
         () => ({
-            ["UPDATE"]: async (timeLog: ITrackedTime) => {
-                if (!workspaceSlug) return
-                try {
-                    await updateTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id, timeLog)
-                } catch {
-                    toast.error("Failed to update time log")
-                }
-            },
             ["DELETE"]: async (timeLog: ITrackedTime) => {
                 if (!workspaceSlug) return
                 await deleteTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id)
@@ -72,7 +63,6 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
     )
 
     const handleTimeLog = useCallback(async (timeLog: ITrackedTime, action: string) => {
-        if (action === "UPDATE") await timeLogActions[action]!(timeLog)
         if (action === "DELETE") await timeLogActions[action]!(timeLog)
     }, [])
 
@@ -81,7 +71,6 @@ export const TimeLogTable: FC<ITimeLogTable> = observer(({ displayProperties, di
             <TimeLogQuickActions
                 customActionButton={customActionButton}
                 timeLog={timeLog}
-                handleUpdate={async () => handleTimeLog({ ...timeLog }, "UPDATE")}
                 handleDelete={async () => handleTimeLog(timeLog, "DELETE")}
                 portalElement={portalElement}
             />
