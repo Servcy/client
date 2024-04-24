@@ -12,6 +12,7 @@ interface IWithDisplayPropertiesHOC {
 
 export const WithDisplayPropertiesHOC = observer(
     ({ displayProperties, displayPropertyKey, children }: IWithDisplayPropertiesHOC) => {
+        if (!displayProperties) return null
         let shouldDisplayPropertyFromFilters = false
         if (Array.isArray(displayPropertyKey))
             shouldDisplayPropertyFromFilters = displayPropertyKey.every((key) => !!displayProperties[key])
