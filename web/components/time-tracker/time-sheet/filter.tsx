@@ -9,7 +9,6 @@ export type ITimesheetFilters = {
     created_by?: string[] | null
     project?: string[] | null
     start_time?: string[] | null
-    duration?: string[] | null
 }
 
 export type ITimesheetDisplayFilters = {
@@ -22,7 +21,6 @@ export type ITimesheetParams =
     | "created_by"
     | "project"
     | "start_time"
-    | "duration"
     | "is_billable"
     | "is_approved"
     | "is_manually_added"
@@ -87,6 +85,7 @@ export const TimesheetFilterSelection: React.FC<ITimesheetFilterSelection> = obs
                         appliedFilters={filters.start_time ?? null}
                         handleUpdate={(val) => handleFiltersUpdate("start_time", val)}
                         searchQuery={filtersSearchQuery}
+                        title="Tracked on"
                     />
                 </div>
             </div>

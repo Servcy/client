@@ -10,11 +10,12 @@ import { DATE_AFTER_FILTER_OPTIONS } from "@constants/filters"
 type Props = {
     appliedFilters: string[] | null
     handleUpdate: (val: string | string[]) => void
+    title?: string
     searchQuery: string
 }
 
 export const FilterStartDate: React.FC<Props> = observer((props) => {
-    const { appliedFilters, handleUpdate, searchQuery } = props
+    const { appliedFilters, handleUpdate, searchQuery, title = "Start date" } = props
 
     const [previewEnabled, setPreviewEnabled] = useState(true)
     const [isDateFilterModalOpen, setIsDateFilterModalOpen] = useState(false)
@@ -32,11 +33,11 @@ export const FilterStartDate: React.FC<Props> = observer((props) => {
                     handleClose={() => setIsDateFilterModalOpen(false)}
                     isOpen={isDateFilterModalOpen}
                     onSelect={(val) => handleUpdate(val)}
-                    title="Start date"
+                    title={title}
                 />
             )}
             <FilterHeader
-                title={`Start date${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
+                title={`${title}${appliedFiltersCount > 0 ? ` (${appliedFiltersCount})` : ""}`}
                 isPreviewEnabled={previewEnabled}
                 handleIsPreviewEnabled={() => setPreviewEnabled(!previewEnabled)}
             />

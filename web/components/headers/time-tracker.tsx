@@ -17,7 +17,7 @@ import { Breadcrumbs, Button } from "@servcy/ui"
 export const TimesheetHeader: React.FC<{
     activeLayout: "my-timesheet" | "workspace-timesheet"
 }> = observer(({ activeLayout }) => {
-    const { workspaceSlug, viewKey } = useParams()
+    const { workspaceSlug } = useParams()
     const { filters, updateFilters } = useTimeTrackerFilter()
     const { runningTimeTracker } = useTimeTracker()
     const {
@@ -28,7 +28,7 @@ export const TimesheetHeader: React.FC<{
     } = useMember()
     const handleFiltersUpdate = useCallback(
         (key: keyof ITimesheetFilters, value: string | string[]) => {
-            if (!workspaceSlug || !viewKey) return
+            if (!workspaceSlug || !activeLayout) return
             const newValues = filters[activeLayout]?.[key] ?? []
             if (Array.isArray(value)) {
                 value.forEach((val) => {
@@ -38,9 +38,9 @@ export const TimesheetHeader: React.FC<{
                 if (filters[activeLayout]?.[key]?.includes(value)) newValues.splice(newValues.indexOf(value), 1)
                 else newValues.push(value)
             }
-            updateFilters(workspaceSlug.toString(), { [key]: newValues }, viewKey.toString())
+            updateFilters(workspaceSlug.toString(), { [key]: newValues }, activeLayout.toString())
         },
-        [workspaceSlug, filters, updateFilters, viewKey]
+        [workspaceSlug, filters, updateFilters, activeLayout]
     )
 
     return (
@@ -69,7 +69,7 @@ export const TimesheetHeader: React.FC<{
                 <div className="flex items-center gap-2">
                     <FiltersDropdown title="Filters" placement="bottom-end">
                         <TimesheetFilterSelection
-                            filters={filters?.[viewKey.toString()] ?? {}}
+                            filters={filters?.[activeLayout.toString()] ?? {}}
                             handleFiltersUpdate={handleFiltersUpdate}
                             memberIds={workspaceMemberIds ?? undefined}
                         />

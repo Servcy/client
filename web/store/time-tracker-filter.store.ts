@@ -60,7 +60,6 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
             created_by: filters?.created_by || undefined,
             project: filters.project || undefined,
             start_time: filters.start_time || undefined,
-            duration: filters.duration || undefined,
         }
         const timesheetFiltersParams: Partial<Record<ITimesheetParams, boolean | string>> = {}
         Object.keys(computedFilters).forEach((key) => {
@@ -140,7 +139,6 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
         created_by: filters?.created_by || undefined,
         project: filters.project || undefined,
         start_time: filters.start_time || undefined,
-        duration: filters.duration || undefined,
     })
 
     getFilters = (viewId: string | undefined) => {
@@ -156,7 +154,6 @@ export class TimeTrackerFilter implements ITimeTrackerFilter {
             "created_by",
             "project",
             "start_time",
-            "duration",
             "is_billable",
             "is_approved",
             "is_manually_added",
