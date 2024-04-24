@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite"
 import RenderIfVisible from "@components/core/render-if-visible-HOC"
 import { TimesheetRowCell, WithDisplayPropertiesHOC } from "@components/time-tracker"
 
+import { useUser } from "@hooks/store"
 import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
 import { TIMESHEET_PROPERTY_LIST } from "@constants/timesheet"
@@ -32,6 +33,7 @@ export const TimeLogRow: FC<ITimeLogRow> = observer((props) => {
     const { timeLog, quickActions, timesheet, containerRef, displayProperties, portalElement, isScrolled } = props
     const [isMenuActive, setIsMenuActive] = useState(false)
     const menuActionRef = useRef<HTMLDivElement | null>(null)
+    const { currentUser } = useUser()
     useOutsideClickDetector(menuActionRef, () => setIsMenuActive(false))
     const customActionButton = (
         <div
@@ -72,13 +74,15 @@ export const TimeLogRow: FC<ITimeLogRow> = observer((props) => {
                             >
                                 {timeLog.project_detail.identifier}-{timeLog.issue_detail.sequence_id}
                             </span>
-                            <div
-                                className={`absolute left-2.5 top-0 hidden group-hover:block ${
-                                    isMenuActive ? "!block" : ""
-                                }`}
-                            >
-                                {quickActions(timeLog, customActionButton, portalElement.current)}
-                            </div>
+                            {timeLog.created_by === currentUser?.id && (
+                                <div
+                                    className={`absolute left-2.5 top-0 hidden group-hover:block ${
+                                        isMenuActive ? "!block" : ""
+                                    }`}
+                                >
+                                    {quickActions(timeLog, customActionButton, portalElement.current)}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </WithDisplayPropertiesHOC>
