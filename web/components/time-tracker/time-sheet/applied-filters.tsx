@@ -4,41 +4,44 @@ import { X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { AppliedDateFilters, AppliedMembersFilters, AppliedProjectFilters } from "@components/issues"
-import { ITimesheetFilters } from "@components/time-tracker"
 
 import { useTimeTrackerFilter } from "@hooks/store"
 
+import { ETimesheetFilterType } from "@constants/timesheet"
+
 import { replaceUnderscoreIfSnakeCase } from "@helpers/string.helper"
+
+import { ITimesheetFilterOptions } from "@servcy/types"
 
 export const TimesheetAppliedFilters = observer(({ viewKey }: { viewKey: string }) => {
     const { workspaceSlug } = useParams()
     const { filters, updateFilters } = useTimeTrackerFilter()
-    const userFilters = filters?.[viewKey]
+    const userFilters = filters?.[viewKey]?.filters
     // filters whose value not null or empty array
-    let appliedFilters: ITimesheetFilters | undefined = undefined
+    let appliedFilters: ITimesheetFilterOptions | undefined = undefined
     Object.entries(userFilters ?? {}).forEach(([key, value]) => {
         if (!value) return
         if (Array.isArray(value) && value.length === 0) return
         if (!appliedFilters) appliedFilters = {}
-        appliedFilters[key as keyof ITimesheetFilters] = value
+        appliedFilters[key as keyof ITimesheetFilterOptions] = value
     })
-    const handleRemoveFilter = (key: keyof ITimesheetFilters, value: string | null) => {
+    const handleRemoveFilter = (key: keyof ITimesheetFilterOptions, value: string | null) => {
         if (!workspaceSlug || !viewKey) return
         if (!value) {
-            updateFilters(workspaceSlug.toString(), { [key]: null }, viewKey.toString())
+            updateFilters(workspaceSlug.toString(), ETimesheetFilterType.FILTERS, { [key]: null }, viewKey.toString())
             return
         }
         let newValues = userFilters?.[key] ?? []
         newValues = newValues.filter((val) => val !== value)
-        updateFilters(workspaceSlug.toString(), { [key]: newValues }, viewKey.toString())
+        updateFilters(workspaceSlug.toString(), ETimesheetFilterType.FILTERS, { [key]: newValues }, viewKey.toString())
     }
     const handleClearAllFilters = () => {
         if (!workspaceSlug || !viewKey) return
-        const newFilters: ITimesheetFilters = {}
+        const newFilters: ITimesheetFilterOptions = {}
         Object.keys(userFilters ?? {}).forEach((key) => {
-            newFilters[key as keyof ITimesheetFilters] = []
+            newFilters[key as keyof ITimesheetFilterOptions] = []
         })
-        updateFilters(workspaceSlug.toString(), { ...newFilters }, viewKey.toString())
+        updateFilters(workspaceSlug.toString(), ETimesheetFilterType.FILTERS, { ...newFilters }, viewKey.toString())
     }
     if (!appliedFilters) return null
     if (Object.keys(appliedFilters).length === 0) return null
@@ -46,7 +49,7 @@ export const TimesheetAppliedFilters = observer(({ viewKey }: { viewKey: string 
         <div className="flex items-start justify-between gap-4 p-4">
             <div className="flex flex-wrap items-stretch gap-2 bg-custom-background-100">
                 {Object.entries(appliedFilters).map(([key, value]) => {
-                    const filterKey = key as keyof ITimesheetFilters
+                    const filterKey = key as keyof ITimesheetFilterOptions
                     if (!value) return
                     return (
                         <div

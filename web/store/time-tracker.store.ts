@@ -23,7 +23,14 @@ export interface ITimeTrackerStore {
     loader: TLoader
     checkIsTimerRunning: (workspaceSlug: string) => Promise<void>
     stopTrackingTime: (workspaceSlug: string) => Promise<void>
-    fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any) => Promise<void>
+    deleteTimeLog: (workspaceSlug: string, projectId: string, timeLogId: string) => Promise<void>
+    updateTimeLog: (
+        workspaceSlug: string,
+        projectId: string,
+        timeLogId: string,
+        data: Partial<ITrackedTime>
+    ) => Promise<ITrackedTime>
+    fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any, loadType?: TLoader) => Promise<void>
     getTimeLogsByIssueId: (issueId: TIssue["id"]) => ITrackedTime[]
     snapshots: Record<string, string[]>
     snapshotMap: Record<string, ITrackedTimeSnapshot>
@@ -159,6 +166,40 @@ export class TimeTrackerStore implements ITimeTrackerStore {
                 }
                 this.runningTimeTracker = undefined
             })
+        } catch (error) {
+            throw error
+        }
+    }
+
+    deleteTimeLog = async (workspaceSlug: string, projectId: string, timeLogId: string) => {
+        try {
+            await this.timeTrackerService.deleteTimeLog(workspaceSlug, projectId, timeLogId)
+            runInAction(() => {
+                const index = this.timesheet.findIndex((timeLog) => timeLog.id === timeLogId)
+                if (index !== -1) {
+                    this.timesheet.splice(index, 1)
+                }
+            })
+        } catch (error) {
+            throw error
+        }
+    }
+
+    updateTimeLog = async (
+        workspaceSlug: string,
+        projectId: string,
+        timeLogId: string,
+        data: Partial<ITrackedTime>
+    ) => {
+        try {
+            const response = await this.timeTrackerService.updateTimeLog(workspaceSlug, projectId, timeLogId, data)
+            runInAction(() => {
+                const index = this.timesheet.findIndex((timeLog) => timeLog.id === timeLogId)
+                if (index !== -1) {
+                    this.timesheet[index] = response
+                }
+            })
+            return response
         } catch (error) {
             throw error
         }

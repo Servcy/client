@@ -5,34 +5,17 @@ import { observer } from "mobx-react-lite"
 
 import { FilterCreatedBy, FilterProjects, FilterStartDate } from "@components/issues"
 
-export type ITimesheetFilters = {
-    created_by?: string[] | null
-    project?: string[] | null
-    start_time?: string[] | null
-}
-
-export type ITimesheetDisplayFilters = {
-    is_billable?: boolean
-    is_approved?: boolean
-    is_manually_added?: boolean
-}
-
-export type ITimesheetParams =
-    | "created_by"
-    | "project"
-    | "start_time"
-    | "is_billable"
-    | "is_approved"
-    | "is_manually_added"
+import { ITimesheetFilterOptions } from "@servcy/types"
 
 type ITimesheetFilterSelection = {
-    filters: ITimesheetFilters
-    handleFiltersUpdate: (key: keyof ITimesheetFilters, value: string | string[]) => void
+    filters: ITimesheetFilterOptions
+    handleFiltersUpdate: (key: keyof ITimesheetFilterOptions, value: string | string[]) => void
     memberIds?: string[] | undefined
+    activeLayout?: "my-timesheet" | "workspace-timesheet"
 }
 
 export const TimesheetFilterSelection: React.FC<ITimesheetFilterSelection> = observer((props) => {
-    const { filters, handleFiltersUpdate, memberIds } = props
+    const { filters, handleFiltersUpdate, activeLayout, memberIds } = props
     const [filtersSearchQuery, setFiltersSearchQuery] = useState("")
 
     return (
@@ -60,15 +43,16 @@ export const TimesheetFilterSelection: React.FC<ITimesheetFilterSelection> = obs
                 </div>
             </div>
             <div className="h-full w-full divide-y divide-custom-border-200 overflow-y-auto px-2.5">
-                {/* created_by */}
-                <div className="py-2">
-                    <FilterCreatedBy
-                        appliedFilters={filters.created_by ?? null}
-                        handleUpdate={(val) => handleFiltersUpdate("created_by", val)}
-                        memberIds={memberIds}
-                        searchQuery={filtersSearchQuery}
-                    />
-                </div>
+                {activeLayout !== "my-timesheet" && (
+                    <div className="py-2">
+                        <FilterCreatedBy
+                            appliedFilters={filters.created_by ?? null}
+                            handleUpdate={(val) => handleFiltersUpdate("created_by", val)}
+                            memberIds={memberIds}
+                            searchQuery={filtersSearchQuery}
+                        />
+                    </div>
+                )}
 
                 {/* project */}
                 <div className="py-2">

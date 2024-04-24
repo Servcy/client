@@ -29,26 +29,26 @@ const GlobalTimeTrackerPage = observer(() => {
     } = useUser()
     const isWorkspaceAdmin = currentWorkspaceRole === ERoles.ADMIN
 
-    if (!isWorkspaceAdmin && viewKey === "workspace-timesheet")
-        return (
-            <NotAuthorizedView
-                type="workspace"
-                actionButton={
-                    <Link href={`/${workspaceSlug}/time-tracker/my-timesheet`}>
-                        <Button variant="primary" size="md" prependIcon={<CalendarClock />}>
-                            Go to your timesheet
-                        </Button>
-                    </Link>
-                }
-            />
-        )
     if (!["my-timesheet", "workspace-timesheet"].includes(viewKey)) return null
     return (
         <AppWrapper header={<TimesheetHeader activeLayout={viewKey} />}>
             <PageHead title={viewKey === "my-timesheet" ? "My Timesheet" : "Workspace Timesheet"} />
             <div className="h-full overflow-hidden bg-custom-background-100">
                 <div className="flex h-full w-full flex-col border-b border-custom-border-300">
-                    <TimeSheetRoot />
+                    {!isWorkspaceAdmin && viewKey === "workspace-timesheet" ? (
+                        <NotAuthorizedView
+                            type="workspace"
+                            actionButton={
+                                <Link href={`/${workspaceSlug}/time-tracker/my-timesheet`}>
+                                    <Button variant="primary" size="md" prependIcon={<CalendarClock />}>
+                                        Go to your timesheet
+                                    </Button>
+                                </Link>
+                            }
+                        />
+                    ) : (
+                        <TimeSheetRoot />
+                    )}
                 </div>
             </div>
         </AppWrapper>

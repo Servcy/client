@@ -1,13 +1,13 @@
 import { useParams } from "next/navigation"
 
-import React, { Fragment } from "react"
+import { FC, Fragment } from "react"
 
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import useSWR from "swr"
 
 import { EmptyState, getEmptyStateImagePath } from "@components/empty-state"
-import { TimesheetAppliedFilters, TimesheetViewTabs } from "@components/time-tracker"
+import { TimeLogTable, TimesheetAppliedFilters, TimesheetViewTabs } from "@components/time-tracker"
 import { SpreadsheetLayoutLoader } from "@components/ui"
 
 import {
@@ -21,11 +21,17 @@ import {
 
 import { ERoles } from "@constants/iam"
 
-export const TimeSheetRoot: React.FC = observer(() => {
+import {
+    ITimesheetDisplayFilterOptions,
+    ITimesheetDisplayPropertyOptions,
+    ITimesheetFilterOptions,
+} from "@servcy/types"
+
+export const TimeSheetRoot: FC = observer(() => {
     const { workspaceSlug, viewKey } = useParams()
     const { resolvedTheme } = useTheme()
     const { commandPalette: commandPaletteStore } = useApplication()
-    const { filters, fetchFilters } = useTimeTrackerFilter()
+    const { filters, fetchFilters, computedFilteredParams } = useTimeTrackerFilter()
     const { fetchTimeSheet, timesheet, loader } = useTimeTracker()
     const {
         membership: { currentWorkspaceRole },
@@ -35,12 +41,18 @@ export const TimeSheetRoot: React.FC = observer(() => {
     const { setTrackElement } = useEventTracker()
     const isLightMode = resolvedTheme ? resolvedTheme === "light" : currentUser?.theme.theme === "light"
     const emptyStateImage = getEmptyStateImagePath("all-issues", "assigned", isLightMode)
+    const displayFilters = filters[viewKey.toString()]?.displayFilters as ITimesheetDisplayFilterOptions
+    const displayProperties = filters[viewKey.toString()]?.displayProperties as ITimesheetDisplayPropertyOptions
     useSWR(
         workspaceSlug && viewKey ? `TIMESHEET_ENTRIES_${workspaceSlug}_${viewKey}` : null,
         async () => {
             if (workspaceSlug && viewKey) {
+                const routeParams = computedFilteredParams(
+                    filters[viewKey.toString()]?.filters as ITimesheetFilterOptions,
+                    filters[viewKey.toString()]?.displayFilters as ITimesheetDisplayFilterOptions
+                )
                 await fetchFilters(workspaceSlug.toString(), viewKey.toString())
-                await fetchTimeSheet(workspaceSlug.toString(), viewKey.toString(), filters[viewKey.toString()])
+                await fetchTimeSheet(workspaceSlug.toString(), viewKey.toString(), routeParams, "init-loader")
             }
         },
         { revalidateIfStale: false, revalidateOnFocus: false }
@@ -75,7 +87,7 @@ export const TimeSheetRoot: React.FC = observer(() => {
                                     : {
                                           text: "Start your first project",
                                           onClick: () => {
-                                              setTrackElement("All issues empty state")
+                                              setTrackElement("All projects empty state")
                                               commandPaletteStore.toggleCreateProjectModal(true)
                                           },
                                       }
@@ -83,7 +95,9 @@ export const TimeSheetRoot: React.FC = observer(() => {
                             disabled={!isEditingAllowed}
                         />
                     ) : (
-                        <Fragment />
+                        <Fragment>
+                            <TimeLogTable displayFilters={displayFilters} displayProperties={displayProperties} />
+                        </Fragment>
                     )}
                 </div>
             </div>
