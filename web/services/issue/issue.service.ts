@@ -29,20 +29,6 @@ export class IssueService extends APIService {
             })
     }
 
-    async getIssuesWithParams(
-        workspaceSlug: string,
-        projectId: string,
-        queries?: any
-    ): Promise<TIssue[] | { [key: string]: TIssue[] }> {
-        return this.get(`/project/${workspaceSlug}/${projectId}/issues/`, {
-            params: queries,
-        })
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response?.data
-            })
-    }
-
     async retrieve(workspaceSlug: string, projectId: string, issueId: string, queries?: any): Promise<TIssue> {
         return this.get(`/project/${workspaceSlug}/${projectId}/issues/${issueId}/`, {
             params: queries,
