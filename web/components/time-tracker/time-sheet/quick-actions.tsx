@@ -3,6 +3,8 @@ import { useState } from "react"
 import { Pencil, Trash2 } from "lucide-react"
 import { observer } from "mobx-react"
 
+import { DeleteTimeLogModal } from "@components/time-tracker"
+
 import { useUser } from "@hooks/store"
 
 import { ITrackedTime } from "@servcy/types"
@@ -25,6 +27,12 @@ export const TimeLogQuickActions: React.FC<IQuickActionProps> = observer((props)
 
     return (
         <>
+            <DeleteTimeLogModal
+                timeLog={timeLog}
+                isOpen={deleteModal}
+                handleClose={() => setDeleteModal(false)}
+                onSubmit={handleDelete}
+            />
             <CustomMenu
                 menuItemsClassName="z-[14]"
                 placement="bottom-start"

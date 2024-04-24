@@ -10,11 +10,12 @@ type TSnapshotOperationsRemoveModal = Exclude<TSnapshotOperations, "create">
 
 type TIssueSnapshotsList = {
     timeTrackedId: string
-    handleSnapshotOperations: TSnapshotOperationsRemoveModal
+    deleteSnapshotDisabled?: boolean
+    handleSnapshotOperations?: TSnapshotOperationsRemoveModal
 }
 
 export const SnapshotsList: FC<TIssueSnapshotsList> = observer((props) => {
-    const { timeTrackedId, handleSnapshotOperations } = props
+    const { timeTrackedId, handleSnapshotOperations, deleteSnapshotDisabled = false } = props
     const { getSnapshotsByTimeTrackedId } = useTimeTracker()
     const snapshotIds = getSnapshotsByTimeTrackedId(timeTrackedId)
     if (!snapshotIds) return <></>
@@ -24,6 +25,7 @@ export const SnapshotsList: FC<TIssueSnapshotsList> = observer((props) => {
                 <SnapshotsDetail
                     snapshotId={snapshotId}
                     key={snapshotId}
+                    deleteSnapshotDisabled={deleteSnapshotDisabled}
                     handleSnapshotOperations={handleSnapshotOperations}
                 />
             ))}
