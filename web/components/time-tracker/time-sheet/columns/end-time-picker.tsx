@@ -86,6 +86,38 @@ export const EndTimePicker: FC<{
                             layout: {
                                 sx: {
                                     backgroundColor: "rgba(var(--color-background-90))",
+                                    color: "rgba(var(--color-text-100))",
+                                    ".MuiButtonBase-root": {
+                                        color: "rgba(var(--color-text-100)) !important",
+                                    },
+                                    ".MuiPickersDay-dayOutsideMonth": {
+                                        color: "rgba(var(--color-text-200)) !important",
+                                    },
+                                    ".MuiPickersMonth-monthButton": {
+                                        color: "rgba(var(--color-text-100)) !important",
+                                    },
+                                    ".Mui-selected": {
+                                        backgroundColor: "rgba(var(--color-primary-100)) !important",
+                                    },
+                                    ".MuiButtonBase-root.MuiPickersDay-root:hover": {
+                                        "&:hover": {
+                                            backgroundColor: "rgba(var(--color-background-80)) !important",
+                                        },
+                                    },
+                                    ".MuiClockPointer-root,.MuiClock-pin,.MuiClockPointer-thumb": {
+                                        backgroundColor: "rgba(var(--color-primary-100)) !important",
+                                    },
+                                    ".MuiClockPointer-thumb": {
+                                        borderColor: "rgba(var(--color-primary-100)) !important",
+                                    },
+                                    ".MuiTimeClock-root": {
+                                        span: {
+                                            color: "rgba(var(--color-text-100)) !important",
+                                        },
+                                        "span.Mui-disabled": {
+                                            color: "rgba(var(--color-text-200)) !important",
+                                        },
+                                    },
                                 },
                             },
                             calendarHeader: {
@@ -93,12 +125,6 @@ export const EndTimePicker: FC<{
                                     color: "rgba(var(--color-text-100))",
                                     ".MuiSvgIcon-root": {
                                         color: "rgba(var(--color-text-100))",
-                                    },
-                                    ".MuiPickersDay-root": {
-                                        color: "rgba(var(--color-text-100))",
-                                    },
-                                    ".MuiPickersDay-root.Mui-selected": {
-                                        backgroundColor: "rgba(var(--color-primary-100))",
                                     },
                                 },
                             },
@@ -152,3 +178,5 @@ export const EndTimePicker: FC<{
         </td>
     )
 }
+// MuiButtonBase-root Mui-disabled MuiPickersDay-root Mui-disabled MuiPickersDay-dayWithMargin
+// MuiButtonBase-root MuiPickersDay-root Mui-selected MuiPickersDay-dayWithMargin
