@@ -41,7 +41,7 @@ export const DescriptionColumn: FC<{
                             name="description"
                             type="text"
                             value={description}
-                            disabled={timeLog.created_by !== currentUser?.id}
+                            disabled={timeLog.created_by !== currentUser?.id || timeLog.is_approved}
                             onChange={(e) => setDescription(e.target.value)}
                             placeholder="Enter description..."
                             className="w-full border-none rounded-none"
