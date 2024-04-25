@@ -94,14 +94,14 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                             <Dialog.Panel className="relative transform rounded-lg bg-custom-background-100 p-5 px-4 text-left shadow-custom-shadow-md transition-all w-full sm:max-w-2xl min-w-[70vw]">
                                 <div className="border border-custom-border-100 bg-custom-background-200 rounded p-8">
                                     <div className="flex items-center justify-end border border-custom-border-200 bg-custom-background-300 rounded p-4">
-                                        <BadgeDollarSign size="32" color="#F1F2EF" />
+                                        <BadgeDollarSign size="32" className="text-custom-text-400" />
                                         <ToggleSwitch
                                             value={isInrSelected}
                                             onChange={(val) => setIsInrSelected(val)}
                                             className="mx-4"
                                             size="lg"
                                         />
-                                        <BadgeIndianRupee size="32" color="#F1F2EF" />
+                                        <BadgeIndianRupee size="32" className="text-custom-text-400" />
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-3 mt-4 gap-4">
                                         {Object.values(plans).map((plan) => (
@@ -119,7 +119,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                     />
                                                     <div>
                                                         <span className="text-custom-servcy-wheat">{plan.name}</span>
-                                                        <div className="text-sm text-custom-servcy-white">
+                                                        <div className="text-sm text-custom-text-100">
                                                             {plan.description}
                                                         </div>
                                                     </div>
@@ -186,7 +186,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                             width="24"
                                                             height="24"
                                                         />
-                                                        <span className="text-custom-servcy-cream">{diff}</span>
+                                                        <span className="text-custom-text-100">{diff}</span>
                                                     </div>
                                                 ))}
                                                 {offerings
@@ -200,7 +200,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                                 width="24"
                                                                 height="24"
                                                             />
-                                                            <span className="text-custom-servcy-cream truncate">
+                                                            <span className="text-custom-text-100 truncate">
                                                                 {offer.text}
                                                             </span>
                                                         </div>
