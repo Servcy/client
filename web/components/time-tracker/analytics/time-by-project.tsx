@@ -113,7 +113,7 @@ export const ProjectTimesheetPieChart: React.FC<{
                     y={centerY + 20}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    className="text-sm font-medium fill-custom-text-300 capitalize"
+                    className="text-sm font-medium fill-custom-text-300 capitalize truncate"
                 >
                     {data?.label}
                 </text>

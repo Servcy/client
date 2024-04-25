@@ -1,6 +1,7 @@
 import { convertSecondsToReadableTime } from "@helpers/date-time.helper"
 
 import { ITimesheetAnalyticsResponse } from "@servcy/types"
+import { Tooltip } from "@servcy/ui"
 
 const calculatePercentage = (value: string | null, total: string | null) => {
     if (!value || !total) return 0
@@ -91,7 +92,9 @@ export const TimesheetDurationStats: React.FC<{
                                 backgroundColor: "#f59e0b",
                             }}
                         />
-                        <h6 className="capitalize">Billable</h6>
+                        <Tooltip tooltipContent="End time was manually added/updated" position="top-left">
+                            <h6 className="capitalize">Manual</h6>
+                        </Tooltip>
                         <span className="bg-custom-background-80 text-custom-text-200 ml-1 rounded-3xl px-2 py-0.5 text-[0.65rem]">
                             {convertSecondsToReadableTime(analytics.manually_added_timesheet_duration)}
                         </span>
