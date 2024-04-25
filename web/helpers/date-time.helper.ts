@@ -267,6 +267,14 @@ function isNumber(value: any) {
     return typeof value === "number"
 }
 
+export const convertSecondsToReadableTime = (seconds: string | null): string => {
+    if (Number.isNaN(Number(seconds)) || !seconds) return ""
+    const secondsInt = parseInt(seconds)
+    const hours = Math.floor(secondsInt / 3600)
+    const minutes = Math.floor((secondsInt % 3600) / 60)
+    return `${hours} hours ${minutes} minutes`
+}
+
 /**
  * This method returns a date from string of type yyyy-mm-dd
  * This method is recommended to use instead of new Date() as this does not introduce any timezone offsets
