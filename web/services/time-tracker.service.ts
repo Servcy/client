@@ -69,6 +69,7 @@ export class TimeTrackerService extends APIService {
     async isTimerRunning(workspaceSlug: string): Promise<ITrackedTime> {
         try {
             const response = await this.get(`/project/${workspaceSlug}/is-timer-running`)
+            if (response?.status === 204) throw new Error("Timer is not running")
             return response?.data
         } catch (error) {
             throw error
