@@ -6,7 +6,7 @@ import { useParams } from "next/navigation"
 import React, { FC, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { BadgeDollarSign, BadgeIndianRupee, Loader } from "lucide-react"
+import { BadgeCheckIcon, BadgeDollarSign, BadgeIndianRupee, Loader } from "lucide-react"
 import useSWR from "swr"
 
 import { useBilling, useUser } from "@hooks/store"
@@ -179,13 +179,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                 </div>
                                                 {plan.differentiators.map((diff) => (
                                                     <div className="my-2 flex text-sm" key={diff}>
-                                                        <Image
-                                                            alt={diff}
-                                                            src="/plans/new-releases.svg"
-                                                            className="mr-2"
-                                                            width="24"
-                                                            height="24"
-                                                        />
+                                                        <BadgeCheckIcon className="mr-2 size-6 text-custom-text-100" />
                                                         <span className="text-custom-text-100">{diff}</span>
                                                     </div>
                                                 ))}
@@ -193,13 +187,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                     .filter((offer) => !offer.comingSoon)
                                                     .map((offer) => (
                                                         <div className="my-2 flex text-sm" key={offer.text}>
-                                                            <Image
-                                                                alt={offer.text}
-                                                                src="/plans/new-releases.svg"
-                                                                className="mr-2"
-                                                                width="24"
-                                                                height="24"
-                                                            />
+                                                            <BadgeCheckIcon className="mr-2 size-6 text-custom-text-100" />
                                                             <span className="text-custom-text-100 truncate">
                                                                 {offer.text}
                                                             </span>
