@@ -1,6 +1,6 @@
 import { useParams } from "next/navigation"
 
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 
 import { CalendarClock, FolderClock, Timer } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -8,10 +8,15 @@ import { observer } from "mobx-react-lite"
 import { BreadcrumbLink } from "@components/common"
 import { SidebarHamburgerToggle } from "@components/core/sidebar/sidebar-menu-hamburger-toggle"
 import { FiltersDropdown } from "@components/issues"
-import { TimesheetDisplayFiltersSelection, TimesheetFilterSelection } from "@components/time-tracker"
+import {
+    TimesheetAnalyticsModal,
+    TimesheetDisplayFiltersSelection,
+    TimesheetFilterSelection,
+} from "@components/time-tracker"
 
-import { useApplication, useMember, useTimeTracker, useTimeTrackerFilter } from "@hooks/store"
+import { useApplication, useMember, useTimeTracker, useTimeTrackerFilter, useUser } from "@hooks/store"
 
+import { ERoles } from "@constants/iam"
 import { ETimesheetFilterType } from "@constants/timesheet"
 
 import {
@@ -25,7 +30,11 @@ export const TimesheetHeader: React.FC<{
     activeLayout: "my-timesheet" | "workspace-timesheet"
 }> = observer(({ activeLayout }) => {
     const { workspaceSlug } = useParams()
+    const [analyticsModal, setAnalyticsModal] = useState(false)
     const { filters, updateFilters } = useTimeTrackerFilter()
+    const {
+        membership: { currentWorkspaceRole },
+    } = useUser()
     const { runningTimeTracker } = useTimeTracker()
     const {
         commandPalette: { toggleTimeTrackerModal },
@@ -82,6 +91,11 @@ export const TimesheetHeader: React.FC<{
     )
     return (
         <>
+            <TimesheetAnalyticsModal
+                isOpen={analyticsModal}
+                onClose={() => setAnalyticsModal(false)}
+                activeLayout={activeLayout}
+            />
             <div className="relative z-[15] flex h-[3.75rem] w-full items-center justify-between gap-x-2 gap-y-4 border-b border-custom-border-200 bg-custom-sidebar-background-100 p-4">
                 <div className="relative flex gap-2">
                     <SidebarHamburgerToggle />
@@ -129,6 +143,16 @@ export const TimesheetHeader: React.FC<{
                         {!runningTimeTracker ? "Start Timer" : "Stop Timer"}
                     </Button>
                 </div>
+                {(currentWorkspaceRole === ERoles.ADMIN || activeLayout === "my-timesheet") && (
+                    <Button
+                        className="hidden md:block"
+                        onClick={() => setAnalyticsModal(true)}
+                        variant="neutral-primary"
+                        size="sm"
+                    >
+                        Analytics
+                    </Button>
+                )}
             </div>
         </>
     )
