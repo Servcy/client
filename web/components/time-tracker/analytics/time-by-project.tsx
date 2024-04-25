@@ -113,9 +113,10 @@ export const ProjectTimesheetPieChart: React.FC<{
                     y={centerY + 20}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    className="text-sm font-medium fill-custom-text-300 capitalize truncate"
+                    className="text-sm font-medium fill-custom-text-300 capitalize"
                 >
-                    {data?.label}
+                    {data?.label?.slice(0, 8)}
+                    {data.label.length > 8 ? "..." : ""}
                 </text>
             </g>
         )
@@ -176,14 +177,14 @@ export const ProjectTimesheetPieChart: React.FC<{
                                     <div className="flex items-center gap-x-1 w-24 truncate text-custom-text-300 text-sm font-medium capitalize">
                                         {renderEmoji(item.emoji)} {item.label}
                                     </div>
-                                    <div className="flex items-center gap-x-1">
+                                    <div className="flex items-center gap-x-1 w-14">
                                         <div
                                             className="size-3 rounded-full"
                                             style={{
                                                 backgroundColor: item.color,
                                             }}
                                         />
-                                        <span className="text-custom-text-400 text-sm">{item.value.toFixed(0)}%</span>
+                                        <div className="text-custom-text-400 text-sm">{item.value.toFixed(0)}%</div>
                                     </div>
                                 </div>
                             ))}
