@@ -43,6 +43,14 @@ export class AnalyticsService extends APIService {
             })
     }
 
+    async getTimesheetAnalytics(workspaceSlug: string, activeLayout: string): Promise<IDefaultAnalyticsResponse> {
+        return this.get(`/dashboard/${workspaceSlug}/timesheet-analytics/${activeLayout}`)
+            .then((response) => response?.data)
+            .catch((error) => {
+                throw error?.response?.data
+            })
+    }
+
     async exportAnalytics(workspaceSlug: string, data: IExportAnalyticsFormData): Promise<any> {
         return this.post(`/dashboard/${workspaceSlug}/export-analytics`, data)
             .then((response) => response?.data)

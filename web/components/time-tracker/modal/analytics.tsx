@@ -1,10 +1,17 @@
+import { useParams } from "next/navigation"
+
 import React, { FC, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
 import { Expand, Shrink, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
+import useSWR from "swr"
 
 import { useTimeTracker } from "@hooks/store"
+
+import { AnalyticsService } from "@services/analytics.service"
+
+import { Button, Loader } from "@servcy/ui"
 
 interface ITimesheetAnalyticsModal {
     isOpen: boolean
@@ -12,13 +19,27 @@ interface ITimesheetAnalyticsModal {
     activeLayout: "my-timesheet" | "workspace-timesheet"
 }
 
+const analyticsService = new AnalyticsService()
+
 export const TimesheetAnalyticsModal: FC<ITimesheetAnalyticsModal> = observer((props) => {
     const { onClose, isOpen, activeLayout } = props
+    const { workspaceSlug } = useParams()
     const {} = useTimeTracker()
     const [fullScreen, setFullScreen] = useState(false)
     const handleClose = () => {
         onClose()
     }
+    const {
+        data: analytics,
+        error: analyticsError,
+        mutate: mutateAnalytics,
+    } = useSWR(
+        workspaceSlug
+            ? `TIMESHEET_ANALYTICS_${workspaceSlug.toString().toUpperCase()}_${activeLayout.toUpperCase()}`
+            : null,
+        workspaceSlug ? () => analyticsService.getTimesheetAnalytics(workspaceSlug.toString(), activeLayout) : null
+    )
+
     return (
         <Transition.Root appear show={isOpen} as={React.Fragment}>
             <Dialog as="div" className="relative z-20" onClose={handleClose}>
@@ -67,12 +88,37 @@ export const TimesheetAnalyticsModal: FC<ITimesheetAnalyticsModal> = observer((p
                                         </button>
                                     </div>
                                 </div>
-                                {/* <ProjectAnalyticsModalMainContent
-                                    fullScreen={fullScreen}
-                                    cycleDetails={cycleDetails}
-                                    moduleDetails={moduleDetails}
-                                    projectDetails={projectDetails}
-                                /> */}
+                                {!analyticsError ? (
+                                    analytics ? (
+                                        <div className="vertical-scrollbar scrollbar-lg h-full overflow-y-auto p-5 text-sm">
+                                            <div
+                                                className={`grid grid-cols-1 gap-5 ${
+                                                    fullScreen ? "md:grid-cols-2" : ""
+                                                }`}
+                                            >
+                                                Work in progress...
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <Loader className="grid grid-cols-1 gap-5 p-5 lg:grid-cols-2">
+                                            <Loader.Item height="250px" />
+                                            <Loader.Item height="250px" />
+                                            <Loader.Item height="250px" />
+                                            <Loader.Item height="250px" />
+                                        </Loader>
+                                    )
+                                ) : (
+                                    <div className="grid h-full place-items-center p-5">
+                                        <div className="text-custom-text-200 space-y-4">
+                                            <p className="text-sm">There was some error in fetching the data.</p>
+                                            <div className="flex items-center justify-center gap-2">
+                                                <Button variant="primary" onClick={() => mutateAnalytics()}>
+                                                    Refresh
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </Dialog.Panel>

@@ -2,7 +2,7 @@ import { useParams } from "next/navigation"
 
 import { useCallback, useState } from "react"
 
-import { CalendarClock, FolderClock, Timer } from "lucide-react"
+import { CalendarClock, FolderClock, Timer, TrendingUp } from "lucide-react"
 import { observer } from "mobx-react-lite"
 
 import { BreadcrumbLink } from "@components/common"
@@ -134,6 +134,16 @@ export const TimesheetHeader: React.FC<{
                             handleDisplayPropertiesUpdate={handleDisplayProperties}
                         />
                     </FiltersDropdown>
+                    {(currentWorkspaceRole === ERoles.ADMIN || activeLayout === "my-timesheet") && (
+                        <Button
+                            onClick={() => setAnalyticsModal(true)}
+                            variant="neutral-primary"
+                            prependIcon={<TrendingUp />}
+                            size="sm"
+                        >
+                            Analytics
+                        </Button>
+                    )}
                     <Button
                         variant="primary"
                         size="sm"
@@ -143,16 +153,6 @@ export const TimesheetHeader: React.FC<{
                         {!runningTimeTracker ? "Start Timer" : "Stop Timer"}
                     </Button>
                 </div>
-                {(currentWorkspaceRole === ERoles.ADMIN || activeLayout === "my-timesheet") && (
-                    <Button
-                        className="hidden md:block"
-                        onClick={() => setAnalyticsModal(true)}
-                        variant="neutral-primary"
-                        size="sm"
-                    >
-                        Analytics
-                    </Button>
-                )}
             </div>
         </>
     )
