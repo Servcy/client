@@ -64,7 +64,7 @@ export const SnapshotsColumn: FC<{
                                             </div>
                                         </div>
                                         {timeLog.snapshots.length > 0 && (
-                                            <div className=" relative space-y-3 py-3 flex flex-wrap gap-4">
+                                            <div className="flex flex-wrap gap-4">
                                                 {timeLog.snapshots?.map((snapshot) => (
                                                     <SnapshotsDetail
                                                         snapshotId={snapshot.id}
