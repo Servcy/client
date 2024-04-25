@@ -2,7 +2,14 @@ import { useParams } from "next/navigation"
 
 import { Dispatch, FC, SetStateAction, useState } from "react"
 
-import { LocalizationProvider, MobileDateTimePicker } from "@mui/x-date-pickers"
+import {
+    LocalizationProvider,
+    MobileDateTimePicker,
+    pickersCalendarHeaderClasses,
+    pickersLayoutClasses,
+    pickersMonthClasses,
+    pickersYearClasses,
+} from "@mui/x-date-pickers"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { format } from "date-fns"
 import { toast } from "react-hot-toast"
@@ -76,6 +83,53 @@ export const EndTimePicker: FC<{
                                 setOpen: setOpen,
                                 disabled: timeLog.created_by !== currentUser?.id || timeLog.is_approved,
                             } as any,
+                            layout: {
+                                sx: {
+                                    backgroundColor: "rgba(var(--color-background-90))",
+                                },
+                            },
+                            calendarHeader: {
+                                sx: {
+                                    color: "rgba(var(--color-text-100))",
+                                    ".MuiSvgIcon-root": {
+                                        color: "rgba(var(--color-text-100))",
+                                    },
+                                    ".MuiPickersDay-root": {
+                                        color: "rgba(var(--color-text-100))",
+                                    },
+                                    ".MuiPickersDay-root.Mui-selected": {
+                                        backgroundColor: "rgba(var(--color-primary-100))",
+                                    },
+                                },
+                            },
+                            actionBar: {
+                                sx: {
+                                    "& .MuiButton-root": {
+                                        fontSize: "0.75rem",
+                                        fontWeight: 400,
+                                        textTransform: "capitalize",
+                                        borderRadius: "0.75rem",
+                                        padding: "0.3rem 0.7rem",
+                                        border: "1px solid rgba(var(--color-border-200))",
+                                        whiteSpace: "nowrap",
+                                    },
+                                    "& .MuiButton-root:first-child": {
+                                        color: "rgba(var(--color-text-200))",
+                                        backgroundColor: "rgba(var(--color-background-100))",
+                                        "&:hover": {
+                                            color: "rgba(var(--color-text-100))",
+                                        },
+                                    },
+                                    "& .MuiButton-root:last-child": {
+                                        color: "rgba(var(--color-text-100))",
+                                        backgroundColor: "rgba(var(--color-primary-100))",
+                                        "&:hover": {
+                                            color: "white",
+                                            backgroundColor: "rgba(var(--color-primary-200))",
+                                        },
+                                    },
+                                },
+                            },
                         }}
                         slots={{
                             textField: CustomTextField,
