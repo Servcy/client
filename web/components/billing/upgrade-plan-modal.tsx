@@ -178,16 +178,19 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                     )}
                                                 </div>
                                                 {plan.differentiators.map((diff) => (
-                                                    <div className="my-2 flex text-sm" key={diff}>
-                                                        <BadgeCheckIcon className="mr-2 size-6 text-custom-text-100" />
+                                                    <div className="my-2 flex text-sm items-center" key={diff}>
+                                                        <BadgeCheckIcon className="mr-2 size-4 text-custom-text-100" />
                                                         <span className="text-custom-text-100">{diff}</span>
                                                     </div>
                                                 ))}
                                                 {offerings
                                                     .filter((offer) => !offer.comingSoon)
                                                     .map((offer) => (
-                                                        <div className="my-2 flex text-sm" key={offer.text}>
-                                                            <BadgeCheckIcon className="mr-2 size-6 text-custom-text-100" />
+                                                        <div
+                                                            className="my-2 flex text-sm items-center"
+                                                            key={offer.text}
+                                                        >
+                                                            <BadgeCheckIcon className="mr-2 size-4 text-custom-text-100" />
                                                             <span className="text-custom-text-100 truncate">
                                                                 {offer.text}
                                                             </span>
