@@ -12,7 +12,7 @@ export const TimesheetYearWiseLogs: React.FC<{
 }> = ({ analytics }) => (
     <div className="rounded-[10px] border border-custom-border-200 py-3">
         <h1 className="px-3 text-base font-medium">Hours logged in a year</h1>
-        {analytics.month_wise_timesheet_duration.length > 0 ? (
+        {analytics && analytics.month_wise_timesheet_duration.length > 0 ? (
             <LineGraph
                 data={[
                     {
