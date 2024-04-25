@@ -10,7 +10,7 @@ type Props = {
         display_name: string | null
         firstName: string
         lastName: string
-        sum: number
+        sum: string
         id: string
     }[]
     title: string
