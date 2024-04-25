@@ -7,6 +7,7 @@ import {
     IAnalyticsResponse,
     IDefaultAnalyticsResponse,
     IExportAnalyticsFormData,
+    ITimesheetAnalyticsResponse,
 } from "@servcy/types"
 
 export class AnalyticsService extends APIService {
@@ -43,7 +44,7 @@ export class AnalyticsService extends APIService {
             })
     }
 
-    async getTimesheetAnalytics(workspaceSlug: string, activeLayout: string): Promise<IDefaultAnalyticsResponse> {
+    async getTimesheetAnalytics(workspaceSlug: string, activeLayout: string): Promise<ITimesheetAnalyticsResponse> {
         return this.get(`/dashboard/${workspaceSlug}/timesheet-analytics/${activeLayout}`)
             .then((response) => response?.data)
             .catch((error) => {

@@ -109,3 +109,24 @@ export interface IDefaultAnalyticsResponse {
     total_issues: number
     total_issues_classified: { state_group: string; state_count: number }[]
 }
+
+export interface ITimesheetAnalyticsResponse {
+    month_wise_timesheet_duration: { month: string; sum: string }[] | null
+    project_wise_timesheet_duration:
+        | { project_id: string; project__name: string; project__emoji: string; sum: string }[]
+        | null
+    workspace_member_wise_timesheet_duration:
+        | {
+              created_by__avatar: string | null
+              created_by__first_name: string
+              created_by__last_name: string
+              created_by__display_name: string
+              created_by__id: string
+              sum: string
+          }[]
+        | null
+    total_timesheet_duration: string | null
+    billable_timesheet_duration: string | null
+    approved_timesheet_duration: string | null
+    manually_added_timesheet_duration: string | null
+}
