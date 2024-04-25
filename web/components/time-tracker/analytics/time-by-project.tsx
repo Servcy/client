@@ -177,7 +177,7 @@ export const ProjectTimesheetPieChart: React.FC<{
                                     <div className="flex items-center gap-x-1 w-24 truncate text-custom-text-300 text-sm font-medium capitalize">
                                         {renderEmoji(item.emoji)} {item.label}
                                     </div>
-                                    <div className="flex items-center gap-x-1 w-14">
+                                    <div className="flex items-center gap-x-2 w-14">
                                         <div
                                             className="size-3 rounded-full"
                                             style={{
