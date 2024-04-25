@@ -7,7 +7,12 @@ import { Expand, Shrink, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
-import { TimesheetDurationStats, TimesheetLeaderBoard, TimesheetYearWiseLogs } from "@components/time-tracker"
+import {
+    ProjectTimesheetPieChart,
+    TimesheetDurationStats,
+    TimesheetLeaderBoard,
+    TimesheetYearWiseLogs,
+} from "@components/time-tracker"
 
 import { useTimeTracker } from "@hooks/store"
 
@@ -99,23 +104,28 @@ export const TimesheetAnalyticsModal: FC<ITimesheetAnalyticsModal> = observer((p
                                                 }`}
                                             >
                                                 <TimesheetDurationStats analytics={analytics} />
-                                                {activeLayout === "workspace-timesheet" && (
-                                                    <TimesheetLeaderBoard
-                                                        users={analytics.workspace_member_wise_timesheet_duration?.map(
-                                                            (user) => ({
-                                                                avatar: user?.created_by__avatar,
-                                                                firstName: user?.created_by__first_name,
-                                                                lastName: user?.created_by__last_name,
-                                                                display_name: user?.created_by__display_name,
-                                                                sum: user?.sum,
-                                                                id: user?.created_by__id,
-                                                            })
-                                                        )}
-                                                        title="Most Time Spent"
-                                                        emptyStateMessage="Co-workers and the time spent by them appears here."
-                                                        workspaceSlug={workspaceSlug?.toString() ?? ""}
-                                                    />
-                                                )}
+                                                {activeLayout === "workspace-timesheet" &&
+                                                    analytics.workspace_member_wise_timesheet_duration && (
+                                                        <TimesheetLeaderBoard
+                                                            users={analytics.workspace_member_wise_timesheet_duration.map(
+                                                                (user) => ({
+                                                                    avatar: user.created_by__avatar,
+                                                                    firstName: user.created_by__first_name,
+                                                                    lastName: user.created_by__last_name,
+                                                                    display_name: user.created_by__display_name,
+                                                                    sum: user.sum,
+                                                                    id: user.created_by__id,
+                                                                })
+                                                            )}
+                                                            title="Most Time Spent"
+                                                            emptyStateMessage="Co-workers and the time spent by them appears here."
+                                                            workspaceSlug={workspaceSlug?.toString() ?? ""}
+                                                        />
+                                                    )}
+                                                <ProjectTimesheetPieChart
+                                                    analytics={analytics}
+                                                    workspaceSlug={workspaceSlug.toString()}
+                                                />
                                                 <TimesheetYearWiseLogs analytics={analytics} />
                                             </div>
                                         </div>
