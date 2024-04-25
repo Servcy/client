@@ -11,7 +11,7 @@ export const TimesheetYearWiseLogs: React.FC<{
     analytics: ITimesheetAnalyticsResponse
 }> = ({ analytics }) => (
     <div className="rounded-[10px] border border-custom-border-200 py-3">
-        <h1 className="px-3 text-base font-medium">Issues closed in a year</h1>
+        <h1 className="px-3 text-base font-medium">Hours logged in a year</h1>
         {analytics.month_wise_timesheet_duration.length > 0 ? (
             <LineGraph
                 data={[
@@ -42,7 +42,7 @@ export const TimesheetYearWiseLogs: React.FC<{
                 sliceTooltip={(datum) => (
                     <div className="rounded-md border border-custom-border-200 bg-custom-background-80 p-2 text-xs">
                         {datum.slice.points[0].data.yFormatted}
-                        <span className="text-custom-text-200"> issues closed in </span>
+                        <span className="text-custom-text-200"> hours logged in </span>
                         {datum.slice.points[0].data.xFormatted}
                     </div>
                 )}
