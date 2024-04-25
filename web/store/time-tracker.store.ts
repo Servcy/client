@@ -162,7 +162,7 @@ export class TimeTrackerStore implements ITimeTrackerStore {
             )
             runInAction(() => {
                 if (trackedTime) {
-                    this.timesheet.push(trackedTime)
+                    this.timesheet.unshift(trackedTime)
                 }
                 this.runningTimeTracker = undefined
             })
