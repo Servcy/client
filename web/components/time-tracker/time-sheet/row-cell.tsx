@@ -13,6 +13,7 @@ import { ITimesheetDisplayPropertyOptions, ITrackedTime } from "@servcy/types"
 
 import { ApprovalColumn } from "./columns/approve-column"
 import { DescriptionColumn } from "./columns/description-column"
+import { EndTimePicker } from "./columns/end-time-picker"
 import { IsBillableColumn } from "./columns/is-billable-column"
 
 interface ITimesheetRowCell {
@@ -34,12 +35,12 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[10rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="bg-custom-background-100 after:border-custom-border-100 border-custom-border-100 h-11 w-full min-w-[10rem] border-r-[1px] text-sm after:absolute after:bottom-[-1px] after:w-full after:border"
                     ref={tableCellRef}
                 >
-                    <div className="h-11 border-b-[0.5px] border-custom-border-200 p-2">
+                    <div className="border-custom-border-200 h-11 border-b-[0.5px] p-2">
                         <pre className="bg-custom-background-80 rounded-md p-2">
-                            {renderFormattedDateTime(timeLog.start_time, "MMM dd, HH:mm:ss")}
+                            {renderFormattedDateTime(timeLog.start_time, "MMM dd HH:mm:ss")}
                         </pre>
                     </div>
                 </td>
@@ -50,12 +51,12 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="bg-custom-background-100 after:border-custom-border-100 border-custom-border-100 h-11 w-full min-w-[8rem] border-r-[1px] text-sm after:absolute after:bottom-[-1px] after:w-full after:border"
                     ref={tableCellRef}
                 >
-                    <div className="h-11 border-b-[0.5px] border-custom-border-200 py-2 px-4 truncate flex items-center justify-left gap-x-2">
+                    <div className="border-custom-border-200 justify-left flex h-11 items-center gap-x-2 truncate border-b-[0.5px] px-4 py-2">
                         {!timeLog.is_manually_added ? (
-                            <ShieldCheck className="size-4 text-custom-primary-100" />
+                            <ShieldCheck className="text-custom-primary-100 size-4" />
                         ) : (
                             <BadgeAlert className="size-4 text-amber-700" />
                         )}
@@ -69,10 +70,10 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[14rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="bg-custom-background-100 after:border-custom-border-100 border-custom-border-100 h-11 w-full min-w-[14rem] border-r-[1px] text-sm after:absolute after:bottom-[-1px] after:w-full after:border"
                     ref={tableCellRef}
                 >
-                    <div className="h-11 border-b-[0.5px] border-custom-border-200 p-2">
+                    <div className="border-custom-border-200 h-11 border-b-[0.5px] p-2">
                         <pre className="bg-custom-background-80 rounded-md p-2">
                             {calculateTimeBetween(timeLog.start_time, timeLog.end_time, {
                                 addSuffix: false,
@@ -83,28 +84,16 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
                 </td>
             )
         case "end_time":
-            return (
-                <td
-                    tabIndex={0}
-                    className="h-11 w-full min-w-[10rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
-                    ref={tableCellRef}
-                >
-                    <div className="h-11 border-b-[0.5px] border-custom-border-200 p-2">
-                        <pre className="bg-custom-background-80 rounded-md p-2">
-                            {renderFormattedDateTime(timeLog.end_time, "MMM dd, HH:mm:ss")}
-                        </pre>
-                    </div>
-                </td>
-            )
+            return <EndTimePicker tableCellRef={tableCellRef} timeLog={timeLog} />
         case "created_by":
             if (!memberDetails) return <></>
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[12rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="bg-custom-background-100 after:border-custom-border-100 border-custom-border-100 h-11 w-full min-w-[12rem] border-r-[1px] text-sm after:absolute after:bottom-[-1px] after:w-full after:border"
                     ref={tableCellRef}
                 >
-                    <div className="h-11 border-b-[0.5px] border-custom-border-200 p-2 flex justify-center items-center gap-x-2">
+                    <div className="border-custom-border-200 flex h-11 items-center justify-center gap-x-2 border-b-[0.5px] p-2">
                         {memberDetails.member.avatar && memberDetails.member.avatar.trim() !== "" ? (
                             <Link href={`/${workspaceSlug}/profile/${memberDetails.member.id}`}>
                                 <span className="relative flex size-4 items-center justify-center rounded p-4 capitalize text-white">
@@ -136,10 +125,10 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
             return (
                 <td
                     tabIndex={0}
-                    className="h-11 w-full min-w-[8rem] bg-custom-background-100 text-sm after:absolute after:w-full after:bottom-[-1px] after:border after:border-custom-border-100 border-r-[1px] border-custom-border-100"
+                    className="bg-custom-background-100 after:border-custom-border-100 border-custom-border-100 h-11 w-full min-w-[8rem] border-r-[1px] text-sm after:absolute after:bottom-[-1px] after:w-full after:border"
                     ref={tableCellRef}
                 >
-                    <div className="flex h-11 w-full items-center px-2.5 py-1 text-xs border-b-[0.5px] border-custom-border-200 hover:bg-custom-background-80">
+                    <div className="border-custom-border-200 hover:bg-custom-background-80 flex h-11 w-full items-center border-b-[0.5px] px-2.5 py-1 text-xs">
                         {timeLog.snapshots.length} {timeLog.snapshots.length === 1 ? "snapshot" : "snapshots"}
                     </div>
                 </td>
