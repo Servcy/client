@@ -15,6 +15,7 @@ import { ApprovalColumn } from "./columns/approve-column"
 import { DescriptionColumn } from "./columns/description-column"
 import { EndTimePicker } from "./columns/end-time-picker"
 import { IsBillableColumn } from "./columns/is-billable-column"
+import { SnapshotsColumn } from "./columns/snapshots-column"
 
 interface ITimesheetRowCell {
     timeLog: ITrackedTime
@@ -122,17 +123,7 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
                 </td>
             )
         case "snapshots_count":
-            return (
-                <td
-                    tabIndex={0}
-                    className="bg-custom-background-100 after:border-custom-border-100 border-custom-border-100 h-11 w-full min-w-[8rem] border-r-[1px] text-sm after:absolute after:bottom-[-1px] after:w-full after:border"
-                    ref={tableCellRef}
-                >
-                    <div className="border-custom-border-200 hover:bg-custom-background-80 flex h-11 w-full items-center border-b-[0.5px] px-2.5 py-1 text-xs">
-                        {timeLog.snapshots.length} {timeLog.snapshots.length === 1 ? "snapshot" : "snapshots"}
-                    </div>
-                </td>
-            )
+            return <SnapshotsColumn tableCellRef={tableCellRef} timeLog={timeLog} />
         default:
             return <></>
     }
