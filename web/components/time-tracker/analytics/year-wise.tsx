@@ -12,7 +12,7 @@ export const TimesheetYearWiseLogs: React.FC<{
 }> = ({ analytics }) => (
     <div className="rounded-[10px] border border-custom-border-200 py-3">
         <h1 className="px-3 text-base font-medium">Hours logged in a year</h1>
-        {analytics && analytics.month_wise_timesheet_duration.length > 0 ? (
+        {analytics && analytics.month_wise_timesheet_duration && analytics.month_wise_timesheet_duration.length > 0 ? (
             <LineGraph
                 data={[
                     {
@@ -20,14 +20,15 @@ export const TimesheetYearWiseLogs: React.FC<{
                         color: "rgb(var(--color-primary-100))",
                         data: Object.entries(MONTHS_LIST).map(([index, month]) => ({
                             x: month.shortTitle,
-                            y:
-                                Math.floor(
-                                    Number(
-                                        analytics.month_wise_timesheet_duration.find(
-                                            (data) => data.month === parseInt(index, 10)
-                                        )?.sum
-                                    ) / 3600
-                                ) || 0,
+                            y: analytics.month_wise_timesheet_duration
+                                ? Math.floor(
+                                      Number(
+                                          analytics.month_wise_timesheet_duration.find(
+                                              (data) => data.month === parseInt(index, 10)
+                                          )?.sum
+                                      ) / 3600
+                                  ) || 0
+                                : 0,
                         })),
                     },
                 ]}

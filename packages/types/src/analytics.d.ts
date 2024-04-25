@@ -111,7 +111,7 @@ export interface IDefaultAnalyticsResponse {
 }
 
 export interface ITimesheetAnalyticsResponse {
-    month_wise_timesheet_duration: { month: string; sum: string }[] | null
+    month_wise_timesheet_duration: { month: number; sum: string }[] | null
     project_wise_timesheet_duration:
         | { project_id: string; project__name: string; project__emoji: string; sum: string }[]
         | null
