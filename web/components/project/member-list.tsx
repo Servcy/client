@@ -45,7 +45,7 @@ export const ProjectMemberList: React.FC<{
         <>
             <SendProjectInvitationModal isOpen={inviteModal} onClose={() => setInviteModal(false)} />
 
-            <div className="flex items-center justify-between gap-4 border-b border-custom-border-100 py-3.5">
+            <div className="flex items-center justify-between gap-4 border-b px-3 border-custom-border-100 py-3.5">
                 <h4 className="text-xl font-medium">Members</h4>
                 <div className="ml-auto flex items-center justify-start gap-1 rounded-md border border-custom-border-200 bg-custom-background-100 px-2.5 py-1.5 text-custom-text-400">
                     <Search className="h-3.5 w-3.5" />

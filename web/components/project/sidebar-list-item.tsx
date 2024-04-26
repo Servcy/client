@@ -7,6 +7,7 @@ import { Disclosure, Transition } from "@headlessui/react"
 import { DraggableProvided, DraggableStateSnapshot } from "@hello-pangea/dnd"
 import {
     ChevronDown,
+    DollarSign,
     FileText,
     LinkIcon,
     LogOut,
@@ -65,6 +66,11 @@ const navigation = (workspaceSlug: string, projectId: string) => [
         name: "Pages",
         href: `/${workspaceSlug}/projects/${projectId}/pages`,
         Icon: FileText,
+    },
+    {
+        name: "Costing",
+        href: `/${workspaceSlug}/projects/${projectId}/costing`,
+        Icon: DollarSign,
     },
     {
         name: "Settings",
