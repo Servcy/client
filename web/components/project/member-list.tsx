@@ -15,7 +15,8 @@ import { Button } from "@servcy/ui"
 export const ProjectMemberList: React.FC<{
     disableLeave?: boolean
     disableAddMember?: boolean
-}> = observer(({ disableLeave = false, disableAddMember = false }) => {
+    title?: string
+}> = observer(({ disableLeave = false, disableAddMember = false, title = "Members" }) => {
     const searchParams = useSearchParams()
     // states
     const [inviteModal, setInviteModal] = useState(false)
@@ -46,7 +47,7 @@ export const ProjectMemberList: React.FC<{
             <SendProjectInvitationModal isOpen={inviteModal} onClose={() => setInviteModal(false)} />
 
             <div className="flex items-center justify-between gap-4 border-b px-3 border-custom-border-100 py-3.5">
-                <h4 className="text-xl font-medium">Members</h4>
+                <h4 className="text-xl font-medium">{title}</h4>
                 <div className="ml-auto flex items-center justify-start gap-1 rounded-md border border-custom-border-200 bg-custom-background-100 px-2.5 py-1.5 text-custom-text-400">
                     <Search className="h-3.5 w-3.5" />
                     <input

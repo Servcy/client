@@ -18,7 +18,7 @@ const ProjectCostAnalysis = () => {
         <AppWrapper header={<div />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <div className="h-full w-full">
-                <ProjectMemberList />
+                <ProjectMemberList disableLeave={true} disableAddMember={true} title="Members Cost" />
             </div>
         </AppWrapper>
     )
