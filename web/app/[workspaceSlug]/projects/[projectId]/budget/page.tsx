@@ -16,7 +16,7 @@ const ProjectCostAnalysis = () => {
     return (
         <AppWrapper header={<div />} withProjectWrapper>
             <PageHead title={pageTitle} />
-            <div className="h-full w-full flex flex-col">{/*  */}</div>
+            <div className="h-full w-full flex flex-col" />
         </AppWrapper>
     )
 }
