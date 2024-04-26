@@ -94,31 +94,32 @@ export const TimesheetRowCell: FC<ITimesheetRowCell> = ({ timeLog, property }) =
                     className="bg-custom-background-100 after:border-custom-border-100 border-custom-border-100 h-11 w-full min-w-[12rem] border-r-[1px] text-sm after:absolute after:bottom-[-1px] after:w-full after:border"
                     ref={tableCellRef}
                 >
-                    <div className="border-custom-border-200 flex h-11 items-center justify-center gap-x-2 border-b-[0.5px] p-2">
+                    <div className="border-custom-border-200 flex h-11 items-center gap-x-2 border-b-[0.5px] p-2">
                         {memberDetails.member.avatar && memberDetails.member.avatar.trim() !== "" ? (
-                            <Link href={`/${workspaceSlug}/profile/${memberDetails.member.id}`}>
-                                <span className="relative flex size-4 items-center justify-center rounded p-4 capitalize text-white">
-                                    <img
-                                        src={memberDetails.member.avatar}
-                                        className="absolute left-0 top-0 h-full w-full rounded object-cover"
-                                        alt={memberDetails.member.display_name || memberDetails.member.email}
-                                    />
-                                </span>
+                            <Link
+                                href={`/${workspaceSlug}/profile/${memberDetails.member.id}`}
+                                className="relative size-5 flex-shrink-0 rounded-full"
+                            >
+                                <img
+                                    src={memberDetails.member.avatar}
+                                    className="absolute left-0 top-0 h-full w-full rounded-full object-cover"
+                                    alt={memberDetails.member.display_name || memberDetails.member.email}
+                                />
                             </Link>
                         ) : (
-                            <Link href={`/${workspaceSlug}/profile/${memberDetails.member.id}`}>
-                                <span className="relative flex size-4 items-center justify-center rounded-xl bg-gray-700 p-4 capitalize text-white">
-                                    {(memberDetails.member.email ?? memberDetails.member.display_name ?? "?")[0]}
-                                </span>
+                            <Link
+                                href={`/${workspaceSlug}/profile/${memberDetails.member.id}`}
+                                className="grid size-5 flex-shrink-0 place-items-center rounded-full bg-gray-700 text-[11px] capitalize text-white"
+                            >
+                                {(memberDetails.member.email ?? memberDetails.member.display_name ?? "?")[0]}
                             </Link>
                         )}
-                        <div>
-                            <Link href={`/${workspaceSlug}/profile/${memberDetails.member.id}`}>
-                                <span className="text-sm font-medium">
-                                    {memberDetails.member.first_name} {memberDetails.member.last_name}
-                                </span>
-                            </Link>
-                        </div>
+                        <Link
+                            href={`/${workspaceSlug}/profile/${memberDetails.member.id}`}
+                            className="text-sm font-medium"
+                        >
+                            {memberDetails.member.first_name} {memberDetails.member.last_name}
+                        </Link>
                     </div>
                 </td>
             )
