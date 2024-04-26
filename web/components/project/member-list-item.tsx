@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 
-import { ChangeEvent, useState } from "react"
+import { useRef, useState } from "react"
 
 import { Briefcase, ChevronDown, Dot, Timer, XCircle } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -10,6 +10,7 @@ import toast from "react-hot-toast"
 import { ConfirmProjectMemberRemove } from "@components/project"
 
 import { useEventTracker, useMember, useProject, useUser } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 
 import { CURRENCY_CODES } from "@constants/billing"
 import { PROJECT_MEMBER_LEAVE } from "@constants/event-tracker"
@@ -17,18 +18,14 @@ import { ERoles, ROLES } from "@constants/iam"
 
 import { CustomSelect, Input, Tooltip } from "@servcy/ui"
 
-type Props = {
+export const ProjectMemberListItem: React.FC<{
     userId: string
-}
-
-export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
-    const { userId } = props
-    // states
+    disableLeave?: boolean
+}> = observer((props) => {
+    const { userId, disableLeave = false } = props
     const [removeMemberModal, setRemoveMemberModal] = useState(false)
-
     const router = useRouter()
     const { workspaceSlug, projectId } = useParams()
-    // store hooks
     const {
         currentUser,
         membership: { currentProjectRole, currentWorkspaceRole, leaveProject },
@@ -38,16 +35,14 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
         project: { removeMemberFromProject, getProjectMemberDetails, updateMember },
     } = useMember()
     const { captureEvent } = useEventTracker()
-
-    // derived values
     const isAdmin = currentProjectRole === ERoles.ADMIN
     const userDetails = getProjectMemberDetails(userId)
-    const handleRateChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (Number.isNaN(Number(e.target.value))) return
+    const [rate, setRate] = useState(userDetails?.rate?.rate ?? "")
+    const handleRateChange = () => {
         if (!workspaceSlug || !projectId || !userDetails) return
         updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
             role: userDetails.role ?? ERoles.MEMBER,
-            rate: e.target.value,
+            rate: rate,
             currency: userDetails.rate?.currency ?? "USD",
             per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
         }).catch((err) => {
@@ -56,7 +51,6 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
             toast.error(errorString ?? "An error occurred while updating member cost details. Please try again.")
         })
     }
-
     const handleRemove = async () => {
         if (!workspaceSlug || !projectId || !userDetails) return
 
@@ -76,7 +70,11 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                 (err) => toast.error(err?.error || "Something went wrong. Please try again.")
             )
     }
-
+    const inputRateRef = useRef<HTMLInputElement>(null)
+    useOutsideClickDetector(inputRateRef, async () => {
+        if (rate === userDetails?.rate?.rate) return
+        handleRateChange()
+    })
     if (!userDetails) return null
 
     return (
@@ -131,9 +129,13 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                             <Input
                                 id={`project-member.${userDetails.member.id}.rate`}
                                 type="text"
-                                value={userDetails?.rate?.rate ?? ""}
+                                value={rate}
                                 placeholder="Member cost..."
-                                onChange={handleRateChange}
+                                ref={inputRateRef}
+                                onChange={(e) => {
+                                    if (Number.isNaN(Number(e.target.value))) return
+                                    setRate(e.target.value)
+                                }}
                                 className="focus:border-green-300 w-28"
                             />
                             <CustomSelect
@@ -285,7 +287,7 @@ export const ProjectMemberListItem: React.FC<Props> = observer((props) => {
                                 )
                             })}
                         </CustomSelect>
-                        {(isAdmin || userDetails.member.id === currentUser?.id) && (
+                        {(isAdmin || userDetails.member.id === currentUser?.id || disableLeave) && (
                             <Tooltip
                                 tooltipContent={
                                     userDetails.member.id === currentUser?.id ? "Leave project" : "Remove member"

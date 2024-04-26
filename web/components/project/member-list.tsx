@@ -12,7 +12,10 @@ import { useEventTracker, useMember } from "@hooks/store"
 
 import { Button } from "@servcy/ui"
 
-export const ProjectMemberList: React.FC = observer(() => {
+export const ProjectMemberList: React.FC<{
+    disableLeave?: boolean
+    disableAddMember?: boolean
+}> = observer(({ disableLeave = false, disableAddMember = false }) => {
     const searchParams = useSearchParams()
     // states
     const [inviteModal, setInviteModal] = useState(false)
@@ -54,22 +57,26 @@ export const ProjectMemberList: React.FC = observer(() => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                 </div>
-                <Button
-                    variant="primary"
-                    onClick={() => {
-                        setTrackElement("PROJECT_SETTINGS_MEMBERS_PAGE_HEADER")
-                        setInviteModal(true)
-                    }}
-                >
-                    Add member
-                </Button>
+                {!disableAddMember && (
+                    <Button
+                        variant="primary"
+                        onClick={() => {
+                            setTrackElement("PROJECT_SETTINGS_MEMBERS_PAGE_HEADER")
+                            setInviteModal(true)
+                        }}
+                    >
+                        Add member
+                    </Button>
+                )}
             </div>
             {!projectMemberIds ? (
                 <MembersSettingsLoader />
             ) : (
                 <div className="divide-y divide-custom-border-100">
                     {projectMemberIds.length > 0
-                        ? searchedMembers.map((userId) => <ProjectMemberListItem key={userId} userId={userId} />)
+                        ? searchedMembers.map((userId) => (
+                              <ProjectMemberListItem disableLeave={disableLeave} key={userId} userId={userId} />
+                          ))
                         : null}
                     {searchedMembers.length === 0 && (
                         <h4 className="text-sm mt-16 text-center text-custom-text-400">No matching members</h4>
