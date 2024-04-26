@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation"
 
 import { PageHead } from "@components/core"
+import { ProjectMemberList } from "@components/project"
 
 import { useProject } from "@hooks/store"
 
@@ -16,7 +17,9 @@ const ProjectCostAnalysis = () => {
     return (
         <AppWrapper header={<div />} withProjectWrapper>
             <PageHead title={pageTitle} />
-            <div className="h-full w-full flex flex-col" />
+            <div className="h-full w-full">
+                <ProjectMemberList />
+            </div>
         </AppWrapper>
     )
 }
