@@ -287,7 +287,7 @@ export const ProjectMemberListItem: React.FC<{
                                 )
                             })}
                         </CustomSelect>
-                        {(isAdmin || userDetails.member.id === currentUser?.id || disableLeave) && (
+                        {!disableLeave && (isAdmin || userDetails.member.id === currentUser?.id) && (
                             <Tooltip
                                 tooltipContent={
                                     userDetails.member.id === currentUser?.id ? "Leave project" : "Remove member"
