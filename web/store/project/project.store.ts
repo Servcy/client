@@ -4,7 +4,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
 
 import { IssueLabelService, IssueService } from "@services/issue"
-import { ProjectArchiveService, ProjectService, ProjectStateService } from "@services/project"
+import { ProjectArchiveService, ProjectExpenseService, ProjectService, ProjectStateService } from "@services/project"
 
 import { orderProjects, shouldFilterProject } from "@helpers/project.helper"
 
@@ -59,6 +59,7 @@ export class ProjectStore implements IProjectStore {
     issueLabelService
     issueService
     stateService
+    projectExpenseService
 
     constructor(_rootStore: RootStore) {
         makeObservable(this, {
@@ -84,6 +85,7 @@ export class ProjectStore implements IProjectStore {
         this.issueService = new IssueService()
         this.issueLabelService = new IssueLabelService()
         this.stateService = new ProjectStateService()
+        this.projectExpenseService = new ProjectExpenseService()
     }
 
     /**

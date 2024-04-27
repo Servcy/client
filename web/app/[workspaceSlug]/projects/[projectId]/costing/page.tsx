@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation"
 
 import { PageHead } from "@components/core"
-import { ProjectMemberList } from "@components/project"
+import { ProjectCostAnalysisRoot } from "@components/project"
 
 import { useProject } from "@hooks/store"
 
@@ -14,12 +14,11 @@ const ProjectCostAnalysis = () => {
     const { getProjectById } = useProject()
     const project = projectId ? getProjectById(projectId.toString()) : undefined
     const pageTitle = project?.name ? `${project?.name} - Cost Analysis` : undefined
+
     return (
         <AppWrapper header={<div />} withProjectWrapper>
             <PageHead title={pageTitle} />
-            <div className="h-full w-full">
-                <ProjectMemberList disableLeave={true} disableAddMember={true} title="Members Cost" />
-            </div>
+            <ProjectCostAnalysisRoot />
         </AppWrapper>
     )
 }
