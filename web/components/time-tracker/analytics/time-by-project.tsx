@@ -78,7 +78,7 @@ export const ProjectTimesheetPieChart: React.FC<{
         project_wise_timesheet_duration
             ?.filter((duration) => duration.sum)
             ?.map((duration) => ({ ...duration, sum: parseInt(duration.sum) })),
-        "-duration"
+        "-sum"
     )
         ?.filter((duration) => duration.sum)
         ?.slice(0, 5)
