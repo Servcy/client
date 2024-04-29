@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation"
 
 import { PageHead } from "@components/core"
+import { ProjectSettingHeader } from "@components/headers"
 import { ProjectCostAnalysisRoot } from "@components/project"
 
 import { useProject } from "@hooks/store"
@@ -16,7 +17,7 @@ const ProjectCostAnalysis = () => {
     const pageTitle = project?.name ? `${project?.name} - Cost Analysis` : undefined
 
     return (
-        <AppWrapper header={<div />} withProjectWrapper>
+        <AppWrapper header={<ProjectSettingHeader title="Cost Analysis" />} withProjectWrapper>
             <PageHead title={pageTitle} />
             <ProjectCostAnalysisRoot />
         </AppWrapper>
