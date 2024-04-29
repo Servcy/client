@@ -129,7 +129,7 @@ export const ProjectTimesheetPieChart: React.FC<{
                     href={`/${workspaceSlug}/time-tracker/my-timesheet`}
                     className="text-lg font-semibold text-custom-text-300 hover:underline"
                 >
-                    Time by project
+                    Top 5 Projects
                 </Link>
             </div>
             {totalCount > 0 ? (
