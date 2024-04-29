@@ -7,9 +7,13 @@ import { MembersSettingsLoader } from "@components/ui"
 
 import { useMember } from "@hooks/store"
 
+import { IMemberWiseTimesheetDuration } from "@servcy/types"
+
 import { MemberCostRow } from "./member-cost-row"
 
-export const MemberCostList: React.FC = observer(() => {
+export const MemberCostList: React.FC<{
+    memberTimeLogData: IMemberWiseTimesheetDuration[]
+}> = observer(({ memberTimeLogData }) => {
     const [searchQuery, setSearchQuery] = useState("")
     const {
         project: { projectMemberIds, getProjectMemberDetails },
@@ -24,6 +28,11 @@ export const MemberCostList: React.FC = observer(() => {
 
         return displayName?.includes(searchQuery.toLowerCase()) || fullName.includes(searchQuery.toLowerCase())
     })
+    const memberTimeLogDataMap = memberTimeLogData?.reduce((acc, curr) => {
+        if (Number.isNaN(parseInt(curr.sum))) acc[curr.created_by__id] = parseInt(curr.sum)
+        else acc[curr.created_by__id] = 0
+        return acc
+    }, {})
 
     return (
         <>
@@ -45,7 +54,13 @@ export const MemberCostList: React.FC = observer(() => {
             ) : (
                 <div className="divide-y divide-custom-border-100">
                     {projectMemberIds.length > 0
-                        ? searchedMembers.map((userId) => <MemberCostRow key={userId} userId={userId} />)
+                        ? searchedMembers.map((userId) => (
+                              <MemberCostRow
+                                  key={userId}
+                                  userId={userId}
+                                  totalLoggedSeconds={memberTimeLogDataMap?.[userId] ?? 0}
+                              />
+                          ))
                         : null}
                     {searchedMembers.length === 0 && (
                         <h4 className="text-sm mt-16 text-center text-custom-text-400">No matching members</h4>

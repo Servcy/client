@@ -17,8 +17,9 @@ import { CustomSelect, Input } from "@servcy/ui"
 
 export const MemberCostRow: React.FC<{
     userId: string
+    totalLoggedSeconds: number
 }> = observer((props) => {
-    const { userId } = props
+    const { userId, totalLoggedSeconds } = props
     const { workspaceSlug, projectId } = useParams()
     const {
         membership: { currentProjectRole, currentWorkspaceRole },
@@ -47,6 +48,7 @@ export const MemberCostRow: React.FC<{
         if (rate === userDetails?.rate?.rate) return
         handleRateChange()
     })
+    const memberCost = (totalLoggedSeconds / 3600) * (Number(rate) ?? 0)
     if (!userDetails) return null
     return (
         <>
@@ -69,7 +71,6 @@ export const MemberCostRow: React.FC<{
                             </span>
                         </Link>
                     )}
-
                     <div>
                         <Link href={`/${workspaceSlug}/profile/${userDetails.member.id}`}>
                             <span className="text-sm font-medium">
@@ -87,117 +88,108 @@ export const MemberCostRow: React.FC<{
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center gap-2 text-xs">
-                    {!Number.isNaN(userDetails.rate?.rate) && currentWorkspaceRole === ERoles.ADMIN && (
-                        <>
-                            <Input
-                                id={`project-member.${userDetails.member.id}.rate`}
-                                type="text"
-                                value={rate}
-                                placeholder="Member cost..."
-                                ref={inputRateRef}
-                                onChange={(e) => {
-                                    if (Number.isNaN(Number(e.target.value))) return
-                                    setRate(e.target.value)
-                                }}
-                                className="focus:border-green-300 w-28"
-                            />
-                            <CustomSelect
-                                label={
-                                    <div className="flex items-center gap-1">
-                                        {userDetails?.rate?.currency ?? "USD"}
-                                    </div>
-                                }
-                                value={userDetails?.rate?.currency ?? "USD"}
-                                placement="bottom-start"
-                                noChevron
-                                onChange={(value: string) => {
-                                    if (!workspaceSlug || !projectId) return
-                                    updateMember(
-                                        workspaceSlug.toString(),
-                                        projectId.toString(),
-                                        userDetails.member.id,
-                                        {
-                                            role: userDetails.role ?? ERoles.MEMBER,
-                                            rate: userDetails.rate?.rate ?? "0",
-                                            currency: value,
-                                            per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
-                                        }
-                                    ).catch((err) => {
-                                        const error = err.error
-                                        const errorString = Array.isArray(error) ? error[0] : error
-                                        toast.error(
-                                            errorString ??
-                                                "An error occurred while updating member cost details. Please try again."
-                                        )
-                                    })
-                                }}
-                                input
-                                optionsClassName="w-full"
-                            >
-                                {CURRENCY_CODES.map((currency) => (
-                                    <CustomSelect.Option key={currency.code} value={currency.code}>
-                                        <div className="flex items-center gap-2">
-                                            <currency.icon className="h-3.5 w-3.5" />
-                                            <div>{currency.code}</div>
-                                        </div>
-                                    </CustomSelect.Option>
-                                ))}
-                            </CustomSelect>
-                            <CustomSelect
-                                label={
-                                    <div className="flex items-center gap-1">
-                                        {userDetails?.rate?.per_hour_or_per_project ? (
-                                            <Timer className="h-3 w-3" />
-                                        ) : (
-                                            <Briefcase className="h-3 w-3" />
-                                        )}
-                                        {userDetails?.rate?.per_hour_or_per_project ? "Per Hour" : "For Project"}
-                                    </div>
-                                }
-                                value={userDetails?.rate?.per_hour_or_per_project ?? true}
-                                placement="bottom-start"
-                                noChevron
-                                onChange={(value: boolean) => {
-                                    if (!workspaceSlug || !projectId) return
-                                    updateMember(
-                                        workspaceSlug.toString(),
-                                        projectId.toString(),
-                                        userDetails.member.id,
-                                        {
-                                            role: userDetails.role ?? ERoles.MEMBER,
-                                            rate: userDetails.rate?.rate ?? "0",
-                                            per_hour_or_per_project: value,
-                                            currency: userDetails.rate?.currency ?? "USD",
-                                        }
-                                    ).catch((err) => {
-                                        const error = err.error
-                                        const errorString = Array.isArray(error) ? error[0] : error
-                                        toast.error(
-                                            errorString ??
-                                                "An error occurred while updating member cost details. Please try again."
-                                        )
-                                    })
-                                }}
-                                input
-                                className="w-32"
-                            >
-                                <CustomSelect.Option value={true}>
+                {!Number.isNaN(userDetails.rate?.rate) && currentWorkspaceRole === ERoles.ADMIN && (
+                    <div className="flex items-center gap-2 text-xs">
+                        <Input
+                            id={`project-member.${userDetails.member.id}.rate`}
+                            type="text"
+                            value={rate}
+                            placeholder="Member cost..."
+                            ref={inputRateRef}
+                            onChange={(e) => {
+                                if (Number.isNaN(Number(e.target.value))) return
+                                setRate(e.target.value)
+                            }}
+                            className="focus:border-green-300 w-28"
+                        />
+                        <CustomSelect
+                            label={
+                                <div className="flex items-center gap-1">{userDetails?.rate?.currency ?? "USD"}</div>
+                            }
+                            value={userDetails?.rate?.currency ?? "USD"}
+                            placement="bottom-start"
+                            noChevron
+                            onChange={(value: string) => {
+                                if (!workspaceSlug || !projectId) return
+                                updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
+                                    role: userDetails.role ?? ERoles.MEMBER,
+                                    rate: userDetails.rate?.rate ?? "0",
+                                    currency: value,
+                                    per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
+                                }).catch((err) => {
+                                    const error = err.error
+                                    const errorString = Array.isArray(error) ? error[0] : error
+                                    toast.error(
+                                        errorString ??
+                                            "An error occurred while updating member cost details. Please try again."
+                                    )
+                                })
+                            }}
+                            input
+                            optionsClassName="w-full"
+                        >
+                            {CURRENCY_CODES.map((currency) => (
+                                <CustomSelect.Option key={currency.code} value={currency.code}>
                                     <div className="flex items-center gap-2">
-                                        <Timer className="h-3.5 w-3.5" />
-                                        <div>Per Hour</div>
+                                        <currency.icon className="h-3.5 w-3.5" />
+                                        <div>{currency.code}</div>
                                     </div>
                                 </CustomSelect.Option>
-                                <CustomSelect.Option value={false}>
-                                    <div className="flex items-center gap-2">
-                                        <Briefcase className="h-3.5 w-3.5" />
-                                        <div>For Project</div>
-                                    </div>
-                                </CustomSelect.Option>
-                            </CustomSelect>
-                        </>
-                    )}
-                </div>
+                            ))}
+                        </CustomSelect>
+                        <CustomSelect
+                            label={
+                                <div className="flex items-center gap-1">
+                                    {userDetails?.rate?.per_hour_or_per_project ? (
+                                        <Timer className="h-3 w-3" />
+                                    ) : (
+                                        <Briefcase className="h-3 w-3" />
+                                    )}
+                                    {userDetails?.rate?.per_hour_or_per_project ? "Per Hour" : "For Project"}
+                                </div>
+                            }
+                            value={userDetails?.rate?.per_hour_or_per_project ?? true}
+                            placement="bottom-start"
+                            noChevron
+                            onChange={(value: boolean) => {
+                                if (!workspaceSlug || !projectId) return
+                                updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
+                                    role: userDetails.role ?? ERoles.MEMBER,
+                                    rate: userDetails.rate?.rate ?? "0",
+                                    per_hour_or_per_project: value,
+                                    currency: userDetails.rate?.currency ?? "USD",
+                                }).catch((err) => {
+                                    const error = err.error
+                                    const errorString = Array.isArray(error) ? error[0] : error
+                                    toast.error(
+                                        errorString ??
+                                            "An error occurred while updating member cost details. Please try again."
+                                    )
+                                })
+                            }}
+                            input
+                            className="w-32"
+                        >
+                            <CustomSelect.Option value={true}>
+                                <div className="flex items-center gap-2">
+                                    <Timer className="h-3.5 w-3.5" />
+                                    <div>Per Hour</div>
+                                </div>
+                            </CustomSelect.Option>
+                            <CustomSelect.Option value={false}>
+                                <div className="flex items-center gap-2">
+                                    <Briefcase className="h-3.5 w-3.5" />
+                                    <div>For Project</div>
+                                </div>
+                            </CustomSelect.Option>
+                        </CustomSelect>
+                        <div className="text-sm bg-custom-background-80 rounded-md p-2 min-w-10">
+                            {userDetails.rate?.currency === "USD" ? "$" : "&#8377"}
+                            &nbsp;
+                            {memberCost}
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     )
