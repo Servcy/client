@@ -194,7 +194,6 @@ export const MemberCostRow: React.FC<{
                         </div>
                         <div className="text-sm bg-amber-600/20 rounded-md p-2 min-w-24 text-right text-amber-600">
                             {userDetails.rate?.currency === "USD" ? "$" : "&#8377"}
-                            &nbsp;
                             {memberCost.toFixed(2)}
                         </div>
                     </div>
