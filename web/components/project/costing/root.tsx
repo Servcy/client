@@ -79,7 +79,7 @@ export const ProjectCostAnalysisRoot = () => {
                                 </div>
                             </div>
                             <div>
-                                <GaugeChart value={allocatedBudget ? totalCost / allocatedBudget : 0} />
+                                <GaugeChart value={allocatedBudget ? 100 * (totalCost / allocatedBudget) : 0} />
                                 <div className="text-custom-text-300 truncate text-center text-sm font-medium capitalize">
                                     Actual Cost
                                 </div>
