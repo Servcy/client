@@ -28,11 +28,14 @@ export const MemberCostList: React.FC<{
 
         return displayName?.includes(searchQuery.toLowerCase()) || fullName.includes(searchQuery.toLowerCase())
     })
-    const memberTimeLogDataMap = memberTimeLogData?.reduce((acc, curr) => {
-        if (Number.isNaN(parseInt(curr.sum))) acc[curr.created_by__id] = parseInt(curr.sum)
-        else acc[curr.created_by__id] = 0
-        return acc
-    }, {})
+    const memberTimeLogDataMap = memberTimeLogData?.reduce(
+        (acc: Record<string, number>, curr: IMemberWiseTimesheetDuration) => {
+            if (Number.isNaN(parseInt(curr.sum))) acc[curr.created_by__id] = parseInt(curr.sum)
+            else acc[curr.created_by__id] = 0
+            return acc
+        },
+        {}
+    )
 
     return (
         <>

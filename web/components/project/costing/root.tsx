@@ -6,6 +6,8 @@ import useSWR from "swr"
 
 import { useTimeTracker } from "@hooks/store"
 
+import { IMemberWiseTimesheetDuration } from "@servcy/types"
+
 import { MemberCostList } from "./member-cost-list"
 
 export const ProjectCostAnalysisRoot = () => {
@@ -23,7 +25,7 @@ export const ProjectCostAnalysisRoot = () => {
 
     return (
         <div className="h-full w-full">
-            <MemberCostList memberTimeLogData={memberTimeLogData} />
+            <MemberCostList memberTimeLogData={memberTimeLogData as IMemberWiseTimesheetDuration[]} />
         </div>
     )
 }
