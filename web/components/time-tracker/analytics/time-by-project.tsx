@@ -12,6 +12,7 @@ import LightImage from "public/empty-state/dashboard/light/issues-by-priority.sv
 
 import { PieGraph } from "@components/ui"
 
+import { orderArrayBy } from "@helpers/array.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
 
 import { ITimesheetAnalyticsResponse, TStateGroups } from "@servcy/types"
@@ -73,9 +74,13 @@ export const ProjectTimesheetPieChart: React.FC<{
         if (item.sum) return acc + parseInt(item.sum)
         return acc
     }, 0)
-    const chartData = project_wise_timesheet_duration
+    const chartData = orderArrayBy(
+        project_wise_timesheet_duration
+            ?.filter((duration) => duration.sum)
+            ?.map((duration) => ({ ...duration, sum: parseInt(duration.sum) })),
+        "-duration"
+    )
         ?.filter((duration) => duration.sum)
-        ?.map((duration) => ({ ...duration, sum: parseInt(duration.sum) }))
         ?.slice(0, 5)
         ?.map((item, index) => ({
             color: PROJECT_COLORS[index],
