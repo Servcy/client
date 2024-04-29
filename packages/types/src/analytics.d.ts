@@ -129,6 +129,15 @@ export interface IMemberWiseCalculatedCost {
     cost: number
 }
 
+export interface IMemberWiseEstimate {
+    assignees__avatar: string | null
+    assignees__first_name: string
+    assignees__last_name: string
+    assignees__display_name: string
+    assignees__id: string
+    sum: string
+}
+
 export interface ITimesheetAnalyticsResponse {
     month_wise_timesheet_duration: { month: number; sum: string }[] | null
     project_wise_timesheet_duration:

@@ -7,7 +7,14 @@ import { action, makeObservable, observable, runInAction } from "mobx"
 
 import { TimeTrackerService } from "@services/time-tracker.service"
 
-import { IMemberWiseTimesheetDuration, ITrackedTime, ITrackedTimeSnapshot, TIssue, TLoader } from "@servcy/types"
+import {
+    IMemberWiseEstimate,
+    IMemberWiseTimesheetDuration,
+    ITrackedTime,
+    ITrackedTimeSnapshot,
+    TIssue,
+    TLoader,
+} from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
@@ -34,6 +41,7 @@ export interface ITimeTrackerStore {
         workspaceSlug: string,
         projectId: string
     ) => Promise<IMemberWiseTimesheetDuration[]>
+    fetchProjectMemberWiseEstimate: (workspaceSlug: string, projectId: string) => Promise<IMemberWiseEstimate[]>
     fetchTimeSheet: (workspaceSlug: string, viewId: string, queries?: any, loadType?: TLoader) => Promise<void>
     getTimeLogsByIssueId: (issueId: TIssue["id"]) => ITrackedTime[]
     snapshots: Record<string, string[]>
@@ -184,6 +192,15 @@ export class TimeTrackerStore implements ITimeTrackerStore {
     fetchProjectMemberWiseTimeLogged = async (workspaceSlug: string, projectId: string) => {
         try {
             const response = await this.timeTrackerService.fetchProjectMemberWiseTimeLogged(workspaceSlug, projectId)
+            return response
+        } catch (error) {
+            throw error
+        }
+    }
+
+    fetchProjectMemberWiseEstimate = async (workspaceSlug: string, projectId: string) => {
+        try {
+            const response = await this.timeTrackerService.fetchProjectMemberWiseEstimate(workspaceSlug, projectId)
             return response
         } catch (error) {
             throw error

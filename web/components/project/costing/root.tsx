@@ -13,7 +13,7 @@ import { useMember, useProject, useTimeTracker } from "@hooks/store"
 
 import { formatAmount } from "@helpers/currency.helper"
 
-import { IMemberWiseCalculatedCost } from "@servcy/types"
+import { IMemberWiseCalculatedCost, IMemberWiseEstimate } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 
 import { MemberCostList } from "./member-cost-list"
@@ -21,8 +21,9 @@ import { MemberCostPieChart } from "./member-cost-pie-chart"
 
 export const ProjectCostAnalysisRoot = observer(() => {
     const { projectId, workspaceSlug } = useParams()
-    const { fetchProjectMemberWiseTimeLogged } = useTimeTracker()
+    const { fetchProjectMemberWiseTimeLogged, fetchProjectMemberWiseEstimate } = useTimeTracker()
     const [totalCost, setTotalCost] = useState(0)
+    const [estimatedCost, setEstimatedCost] = useState(0)
     const [memberWiseCalculatedMap, setMemberWiseCalculatedMap] = useState<Record<string, IMemberWiseCalculatedCost>>(
         {}
     )
@@ -38,31 +39,47 @@ export const ProjectCostAnalysisRoot = observer(() => {
             ? () => fetchProjectMemberWiseTimeLogged(workspaceSlug.toString(), projectId.toString())
             : null
     )
+    const { data: memberTimeEstimateData } = useSWR(
+        workspaceSlug && projectId
+            ? `PROJECT_MEMBER_WISE_ESTIMATE_${workspaceSlug.toString()}_${projectId.toString()}`
+            : null,
+        workspaceSlug && projectId
+            ? () => fetchProjectMemberWiseEstimate(workspaceSlug.toString(), projectId.toString())
+            : null
+    )
     useEffect(() => {
         let cost = 0
+        let estimate = 0
         projectMemberIds?.forEach((userId) => {
             const memberTimeLog = memberTimeLogData?.find((item) => item.created_by__id === userId)
             let memberSum = 0
             if (memberTimeLog && !Number.isNaN(Number(memberTimeLog.sum))) memberSum = Number(memberTimeLog.sum)
             const memberDetails = getProjectMemberDetails(userId)
             let memberCost = 0
-            if (memberDetails?.rate?.per_hour_or_per_project)
+            if (memberDetails?.rate?.per_hour_or_per_project) {
                 memberCost = Number(memberDetails?.rate?.rate ?? "0") * (memberSum / 3600)
-            else memberCost = Number(memberDetails?.rate?.rate) ?? 0
+                const memberEstimate = memberTimeEstimateData?.find((item) => item.assignees__id === userId)
+                estimate += memberEstimate
+                    ? Number(memberDetails?.rate?.rate ?? "0") * (Number(memberEstimate.sum) / 3600)
+                    : 0
+            } else {
+                memberCost = Number(memberDetails?.rate?.rate) ?? 0
+                estimate += Number(memberDetails?.rate?.rate) ?? 0
+            }
             cost += memberCost
             const memberData = {
                 created_by__avatar: memberTimeLog
                     ? memberTimeLog.created_by__avatar
-                    : memberDetails?.member.avatar ?? "",
+                    : memberDetails?.member?.avatar ?? "",
                 created_by__first_name: memberTimeLog
                     ? memberTimeLog.created_by__first_name
-                    : memberDetails?.member.first_name ?? "",
+                    : memberDetails?.member?.first_name ?? "",
                 created_by__last_name: memberTimeLog
                     ? memberTimeLog.created_by__last_name
-                    : memberDetails?.member.last_name ?? "",
+                    : memberDetails?.member?.last_name ?? "",
                 created_by__display_name: memberTimeLog
                     ? memberTimeLog.created_by__display_name
-                    : memberDetails?.member.display_name ?? "",
+                    : memberDetails?.member?.display_name ?? "",
                 created_by__id: userId,
                 sum: memberSum,
                 cost: memberCost,
@@ -70,7 +87,8 @@ export const ProjectCostAnalysisRoot = observer(() => {
             setMemberWiseCalculatedMap((prev) => ({ ...prev, [userId]: memberData }))
         })
         setTotalCost(cost)
-    }, [memberTimeLogData, projectMemberIds])
+        setEstimatedCost(estimate)
+    }, [memberTimeLogData, projectMemberIds, memberTimeEstimateData])
     return (
         <div className="h-full w-full">
             {memberTimeLogData ? (
@@ -87,9 +105,18 @@ export const ProjectCostAnalysisRoot = observer(() => {
                         </div>
                         <div className="grid grid-cols-2">
                             <div>
-                                <GaugeChart value={0} />
+                                <GaugeChart
+                                    value={Math.ceil(
+                                        Number(projectDetails?.budget?.amount) ?? 0
+                                            ? 100 * (estimatedCost / (Number(projectDetails?.budget?.amount) ?? 0))
+                                            : 0
+                                    )}
+                                />
                                 <div className="text-custom-text-300 truncate text-center text-sm font-medium capitalize">
-                                    Estimated Cost: -
+                                    Estimated Cost:{" "}
+                                    {estimatedCost
+                                        ? formatAmount(estimatedCost, projectDetails?.budget?.currency ?? "USD")
+                                        : "-"}
                                 </div>
                             </div>
                             <div>

@@ -2,7 +2,12 @@ import { APIService } from "@services/api.service"
 
 import { API_BASE_URL } from "@helpers/common.helper"
 
-import type { IMemberWiseTimesheetDuration, ITrackedTime, ITrackedTimeSnapshot } from "@servcy/types"
+import type {
+    IMemberWiseEstimate,
+    IMemberWiseTimesheetDuration,
+    ITrackedTime,
+    ITrackedTimeSnapshot,
+} from "@servcy/types"
 
 export class TimeTrackerService extends APIService {
     constructor() {
@@ -102,6 +107,14 @@ export class TimeTrackerService extends APIService {
         projectId: string
     ): Promise<IMemberWiseTimesheetDuration[]> {
         return this.get(`/project/${workspaceSlug}/${projectId}/member-wise-time-logged`)
+            .then((response) => response?.data)
+            .catch((error) => {
+                throw error?.response?.data
+            })
+    }
+
+    async fetchProjectMemberWiseEstimate(workspaceSlug: string, projectId: string): Promise<IMemberWiseEstimate[]> {
+        return this.get(`/project/${workspaceSlug}/${projectId}/member-wise-estimate`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
