@@ -1,20 +1,25 @@
 "use client"
 
+import Link from "next/link"
 import { useParams } from "next/navigation"
 
 import { useEffect, useState } from "react"
 
+import { CalendarClock } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
+import { NotAuthorizedView } from "@components/auth-screens"
 import { GaugeChart } from "@components/ui"
 
-import { useMember, useProject, useTimeTracker } from "@hooks/store"
+import { useMember, useProject, useTimeTracker, useUser } from "@hooks/store"
+
+import { ERoles } from "@constants/iam"
 
 import { formatAmount } from "@helpers/currency.helper"
 
 import { IMemberWiseCalculatedCost } from "@servcy/types"
-import { Loader } from "@servcy/ui"
+import { Button, Loader } from "@servcy/ui"
 
 import { MemberCostList } from "./member-cost-list"
 import { MemberCostPieChart } from "./member-cost-pie-chart"
@@ -31,6 +36,10 @@ export const ProjectCostAnalysisRoot = observer(() => {
     const {
         project: { projectMemberIds, getProjectMemberDetails },
     } = useMember()
+    const {
+        membership: { currentWorkspaceRole },
+    } = useUser()
+    const isWorkspaceAdmin = currentWorkspaceRole !== undefined && currentWorkspaceRole >= ERoles.ADMIN
     const { data: memberTimeLogData } = useSWR(
         workspaceSlug && projectId
             ? `PROJECT_MEMBER_WISE_TIME_LOGGED_${workspaceSlug.toString()}_${projectId.toString()}`
@@ -91,7 +100,18 @@ export const ProjectCostAnalysisRoot = observer(() => {
     }, [memberTimeLogData, projectMemberIds, memberTimeEstimateData])
     return (
         <div className="h-full w-full">
-            {memberTimeLogData ? (
+            {!isWorkspaceAdmin ? (
+                <NotAuthorizedView
+                    type="workspace"
+                    actionButton={
+                        <Link href={`/${workspaceSlug}/time-tracker/my-timesheet`}>
+                            <Button variant="primary" size="md" prependIcon={<CalendarClock />}>
+                                Go to your timesheet
+                            </Button>
+                        </Link>
+                    }
+                />
+            ) : memberTimeLogData ? (
                 <div className="grid gap-4 px-3 py-3.5 max-md:grid-cols-1 md:grid-cols-2">
                     <div className="hover:shadow-custom-shadow-4xl bg-custom-background-100 border-custom-border-200 overflow-hidden rounded-xl border-[0.5px] px-3.5 py-6 duration-300">
                         <div className="flex items-center justify-center space-y-4">
