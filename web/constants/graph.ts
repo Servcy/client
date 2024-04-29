@@ -33,12 +33,12 @@ export const DEFAULT_MARGIN = {
     left: 50,
 }
 
-export const INDEX_COLORS = ["#CDCED6", "#80838D", "#FFC53D", "#3E9B4F", "#E5484D"]
+export const INDEX_COLORS = ["#61cdbb", "#80838D", "#FFC53D", "#3E9B4F", "#E5484D"]
 
 export const INDEX_GRADIENTS = [
     linearGradientDef("gradient0", [
-        { offset: 0, color: "#DEDEDE" },
-        { offset: 100, color: "#BABABE" },
+        { offset: 0, color: "#61cdbb" },
+        { offset: 100, color: "#00B3C3" },
     ]),
     linearGradientDef("gradient1", [
         { offset: 0, color: "#D4D4D4" },
