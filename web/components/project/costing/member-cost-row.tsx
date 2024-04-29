@@ -1,0 +1,204 @@
+import Link from "next/link"
+import { useParams } from "next/navigation"
+
+import { useRef, useState } from "react"
+
+import { Briefcase, Dot, Timer } from "lucide-react"
+import { observer } from "mobx-react-lite"
+import toast from "react-hot-toast"
+
+import { useMember, useUser } from "@hooks/store"
+import useOutsideClickDetector from "@hooks/use-outside-click-detector"
+
+import { CURRENCY_CODES } from "@constants/billing"
+import { ERoles } from "@constants/iam"
+
+import { CustomSelect, Input } from "@servcy/ui"
+
+export const MemberCostRow: React.FC<{
+    userId: string
+}> = observer((props) => {
+    const { userId } = props
+    const { workspaceSlug, projectId } = useParams()
+    const {
+        membership: { currentProjectRole, currentWorkspaceRole },
+    } = useUser()
+    const {
+        project: { getProjectMemberDetails, updateMember },
+    } = useMember()
+    const isAdmin = currentProjectRole === ERoles.ADMIN
+    const userDetails = getProjectMemberDetails(userId)
+    const [rate, setRate] = useState(userDetails?.rate?.rate ?? "")
+    const handleRateChange = () => {
+        if (!workspaceSlug || !projectId || !userDetails) return
+        updateMember(workspaceSlug.toString(), projectId.toString(), userDetails.member.id, {
+            role: userDetails.role ?? ERoles.MEMBER,
+            rate: rate,
+            currency: userDetails.rate?.currency ?? "USD",
+            per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
+        }).catch((err) => {
+            const error = err.error
+            const errorString = Array.isArray(error) ? error[0] : error
+            toast.error(errorString ?? "An error occurred while updating member cost details. Please try again.")
+        })
+    }
+    const inputRateRef = useRef<HTMLInputElement>(null)
+    useOutsideClickDetector(inputRateRef, async () => {
+        if (rate === userDetails?.rate?.rate) return
+        handleRateChange()
+    })
+    if (!userDetails) return null
+    return (
+        <>
+            <div className="group flex items-center justify-between px-3 py-4 hover:bg-custom-background-90">
+                <div className="flex items-center gap-x-4 gap-y-2">
+                    {userDetails.member.avatar && userDetails.member.avatar !== "" ? (
+                        <Link href={`/${workspaceSlug}/profile/${userDetails.member.id}`}>
+                            <span className="relative flex h-10 w-10 items-center justify-center rounded p-4 capitalize text-white">
+                                <img
+                                    src={userDetails.member.avatar}
+                                    alt={userDetails.member.display_name || userDetails.member.email}
+                                    className="absolute left-0 top-0 h-full w-full rounded object-cover"
+                                />
+                            </span>
+                        </Link>
+                    ) : (
+                        <Link href={`/${workspaceSlug}/profile/${userDetails.id}`}>
+                            <span className="relative flex h-10 w-10 items-center justify-center rounded bg-gray-700 p-4 capitalize text-white">
+                                {(userDetails.member.display_name ?? userDetails.member.email ?? "?")[0]}
+                            </span>
+                        </Link>
+                    )}
+
+                    <div>
+                        <Link href={`/${workspaceSlug}/profile/${userDetails.member.id}`}>
+                            <span className="text-sm font-medium">
+                                {userDetails.member.first_name} {userDetails.member.last_name}
+                            </span>
+                        </Link>
+                        <div className="flex items-center">
+                            <p className="text-xs text-custom-text-300">{userDetails.member.display_name}</p>
+                            {isAdmin && (
+                                <>
+                                    <Dot height={16} width={16} className="text-custom-text-300" />
+                                    <p className="text-xs text-custom-text-300">{userDetails.member.email}</p>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                    {!Number.isNaN(userDetails.rate?.rate) && currentWorkspaceRole === ERoles.ADMIN && (
+                        <>
+                            <Input
+                                id={`project-member.${userDetails.member.id}.rate`}
+                                type="text"
+                                value={rate}
+                                placeholder="Member cost..."
+                                ref={inputRateRef}
+                                onChange={(e) => {
+                                    if (Number.isNaN(Number(e.target.value))) return
+                                    setRate(e.target.value)
+                                }}
+                                className="focus:border-green-300 w-28"
+                            />
+                            <CustomSelect
+                                label={
+                                    <div className="flex items-center gap-1">
+                                        {userDetails?.rate?.currency ?? "USD"}
+                                    </div>
+                                }
+                                value={userDetails?.rate?.currency ?? "USD"}
+                                placement="bottom-start"
+                                noChevron
+                                onChange={(value: string) => {
+                                    if (!workspaceSlug || !projectId) return
+                                    updateMember(
+                                        workspaceSlug.toString(),
+                                        projectId.toString(),
+                                        userDetails.member.id,
+                                        {
+                                            role: userDetails.role ?? ERoles.MEMBER,
+                                            rate: userDetails.rate?.rate ?? "0",
+                                            currency: value,
+                                            per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
+                                        }
+                                    ).catch((err) => {
+                                        const error = err.error
+                                        const errorString = Array.isArray(error) ? error[0] : error
+                                        toast.error(
+                                            errorString ??
+                                                "An error occurred while updating member cost details. Please try again."
+                                        )
+                                    })
+                                }}
+                                input
+                                optionsClassName="w-full"
+                            >
+                                {CURRENCY_CODES.map((currency) => (
+                                    <CustomSelect.Option key={currency.code} value={currency.code}>
+                                        <div className="flex items-center gap-2">
+                                            <currency.icon className="h-3.5 w-3.5" />
+                                            <div>{currency.code}</div>
+                                        </div>
+                                    </CustomSelect.Option>
+                                ))}
+                            </CustomSelect>
+                            <CustomSelect
+                                label={
+                                    <div className="flex items-center gap-1">
+                                        {userDetails?.rate?.per_hour_or_per_project ? (
+                                            <Timer className="h-3 w-3" />
+                                        ) : (
+                                            <Briefcase className="h-3 w-3" />
+                                        )}
+                                        {userDetails?.rate?.per_hour_or_per_project ? "Per Hour" : "For Project"}
+                                    </div>
+                                }
+                                value={userDetails?.rate?.per_hour_or_per_project ?? true}
+                                placement="bottom-start"
+                                noChevron
+                                onChange={(value: boolean) => {
+                                    if (!workspaceSlug || !projectId) return
+                                    updateMember(
+                                        workspaceSlug.toString(),
+                                        projectId.toString(),
+                                        userDetails.member.id,
+                                        {
+                                            role: userDetails.role ?? ERoles.MEMBER,
+                                            rate: userDetails.rate?.rate ?? "0",
+                                            per_hour_or_per_project: value,
+                                            currency: userDetails.rate?.currency ?? "USD",
+                                        }
+                                    ).catch((err) => {
+                                        const error = err.error
+                                        const errorString = Array.isArray(error) ? error[0] : error
+                                        toast.error(
+                                            errorString ??
+                                                "An error occurred while updating member cost details. Please try again."
+                                        )
+                                    })
+                                }}
+                                input
+                                className="w-32"
+                            >
+                                <CustomSelect.Option value={true}>
+                                    <div className="flex items-center gap-2">
+                                        <Timer className="h-3.5 w-3.5" />
+                                        <div>Per Hour</div>
+                                    </div>
+                                </CustomSelect.Option>
+                                <CustomSelect.Option value={false}>
+                                    <div className="flex items-center gap-2">
+                                        <Briefcase className="h-3.5 w-3.5" />
+                                        <div>For Project</div>
+                                    </div>
+                                </CustomSelect.Option>
+                            </CustomSelect>
+                        </>
+                    )}
+                </div>
+            </div>
+        </>
+    )
+})

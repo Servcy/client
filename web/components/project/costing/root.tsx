@@ -2,22 +2,17 @@
 
 import { useParams } from "next/navigation"
 
-import { useState } from "react"
-
 import useSWR from "swr"
-
-import { ProjectMemberList } from "@components/project"
 
 import { useTimeTracker } from "@hooks/store"
 
-import { IMemberWiseTimesheetDuration } from "@servcy/types"
+import { MemberCostList } from "./member-cost-list"
 
 export const ProjectCostAnalysisRoot = () => {
     const { projectId, workspaceSlug } = useParams()
     const { fetchProjectMemberWiseTimeLogged } = useTimeTracker()
-    const [projectExpense, setProjectExpense] = useState<number>(0)
 
-    useSWR(
+    const {} = useSWR(
         workspaceSlug && projectId
             ? `PROJECT_MEMBER_WISE_TIME_LOGGED_${workspaceSlug.toString()}_${projectId.toString()}`
             : null,
@@ -28,7 +23,7 @@ export const ProjectCostAnalysisRoot = () => {
 
     return (
         <div className="h-full w-full">
-            <ProjectMemberList disableLeave={true} disableAddMember={true} title="Members Cost" />
+            <MemberCostList />
         </div>
     )
 }
