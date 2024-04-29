@@ -54,10 +54,10 @@ export const MemberCostRow: React.FC<{
         if (rate === userDetails?.rate?.rate) return
         handleRateChange()
     })
+    if (!userDetails) return null
     const memberCost = userDetails.rate?.per_hour_or_per_project
         ? (totalLoggedSeconds / 3600) * (Number(rate) ?? 0)
         : Number(rate) ?? 0
-    if (!userDetails) return null
     return (
         <>
             <div className="group flex items-center justify-between px-3 py-4 hover:bg-custom-background-90">
