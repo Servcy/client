@@ -6,7 +6,7 @@ import useSWR from "swr"
 
 import { GaugeChart } from "@components/ui"
 
-import { useMember, useTimeTracker } from "@hooks/store"
+import { useMember, useProject, useTimeTracker } from "@hooks/store"
 
 import { formatAmount } from "@helpers/currency.helper"
 
@@ -19,6 +19,7 @@ import { MemberCostPieChart } from "./member-cost-pie-chart"
 export const ProjectCostAnalysisRoot = () => {
     const { projectId, workspaceSlug } = useParams()
     const { fetchProjectMemberWiseTimeLogged } = useTimeTracker()
+    const { currentProjectDetails: projectDetails } = useProject()
     const {
         project: { getProjectMemberDetails },
     } = useMember()
@@ -54,7 +55,11 @@ export const ProjectCostAnalysisRoot = () => {
               {}
           )
         : ({} as Record<string, IMemberWiseCalculatedCost>)
-
+    const totalCost = Object.values(memberWiseCalculatedMap)?.reduce(
+        (acc: number, item: IMemberWiseCalculatedCost) => acc + item.cost,
+        0
+    )
+    const allocatedBudget = Number(projectDetails?.budget?.amount) ?? 0
     return (
         <div className="h-full w-full">
             {memberTimeLogData ? (
@@ -62,18 +67,19 @@ export const ProjectCostAnalysisRoot = () => {
                     <div className="hover:shadow-custom-shadow-4xl bg-custom-background-100 border-custom-border-200 overflow-hidden rounded-xl border-[0.5px] px-3.5 py-6 duration-300">
                         <div className="flex items-center justify-center space-y-4">
                             <div className="bg-custom-background-80 text-custom-text-200 rounded px-3.5 py-3 text-center font-medium capitalize">
-                                Budget Allocated: {formatAmount(10000, "USD")}
+                                Budget Allocated:{" "}
+                                {formatAmount(allocatedBudget, projectDetails?.budget?.currency ?? "USD")}
                             </div>
                         </div>
                         <div className="grid grid-cols-2">
                             <div>
-                                <GaugeChart value={40} />
+                                <GaugeChart value={0} />
                                 <div className="text-custom-text-300 truncate text-center text-sm font-medium capitalize">
                                     Estimated Cost
                                 </div>
                             </div>
                             <div>
-                                <GaugeChart value={89} />
+                                <GaugeChart value={allocatedBudget ? totalCost / allocatedBudget : 0} />
                                 <div className="text-custom-text-300 truncate text-center text-sm font-medium capitalize">
                                     Actual Cost
                                 </div>
@@ -83,6 +89,7 @@ export const ProjectCostAnalysisRoot = () => {
                     <MemberCostPieChart
                         memberWiseCalculatedMap={memberWiseCalculatedMap}
                         workspaceSlug={workspaceSlug.toString()}
+                        totalCost={totalCost}
                     />
                 </div>
             ) : (

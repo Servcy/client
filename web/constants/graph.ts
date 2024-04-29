@@ -33,7 +33,7 @@ export const DEFAULT_MARGIN = {
     left: 50,
 }
 
-export const INDEX_COLORS = ["#FFC53D", "#3E9B4F", "#E5484D", "#80838D", "#CDCED6"]
+export const INDEX_COLORS = ["#CDCED6", "#80838D", "#FFC53D", "#3E9B4F", "#E5484D"]
 
 export const INDEX_GRADIENTS = [
     linearGradientDef("gradient0", [

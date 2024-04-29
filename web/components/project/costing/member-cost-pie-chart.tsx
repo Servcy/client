@@ -20,22 +20,19 @@ import { IMemberWiseCalculatedCost, TStateGroups } from "@servcy/types"
 export const MemberCostPieChart: React.FC<{
     memberWiseCalculatedMap: Record<string, IMemberWiseCalculatedCost>
     workspaceSlug: string
-}> = observer(({ memberWiseCalculatedMap, workspaceSlug }) => {
+    totalCost: number
+}> = observer(({ memberWiseCalculatedMap, totalCost, workspaceSlug }) => {
     const [activeMember, setActiveMember] = useState<string | null>(null)
     const { resolvedTheme } = useTheme()
     const image = resolvedTheme === "dark" ? DarkImage : LightImage
     const router = useRouter()
-    const totalCount = Object.values(memberWiseCalculatedMap)?.reduce((acc: number, item: any) => {
-        if (item.cost) return acc + item.cost
-        return acc
-    }, 0)
     const chartData = orderArrayBy(Object.values(memberWiseCalculatedMap), "-cost")
         ?.slice(0, 5)
         ?.map((item: any, index: number) => ({
             color: INDEX_COLORS[index],
             id: item?.created_by__id,
             label: item.created_by__display_name ?? item.created_by__first_name ?? "?",
-            value: (item?.cost / totalCount) * 100,
+            value: (item?.cost / totalCost) * 100,
         }))
     const CenteredMetric = ({ dataWithArc, centerX, centerY }: any) => {
         let data: any
@@ -85,7 +82,7 @@ export const MemberCostPieChart: React.FC<{
                     Top Members Cost:
                 </Link>
             </div>
-            {totalCount > 0 ? (
+            {totalCost > 0 ? (
                 <div className="flex items-center pl-10 md:pl-11 lg:pl-14 pr-11 mt-11">
                     <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row items-center justify-evenly gap-x-10 gap-y-8 w-full">
                         <div>
