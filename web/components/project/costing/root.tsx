@@ -13,7 +13,7 @@ import { useMember, useProject, useTimeTracker } from "@hooks/store"
 
 import { formatAmount } from "@helpers/currency.helper"
 
-import { IMemberWiseCalculatedCost, IMemberWiseEstimate } from "@servcy/types"
+import { IMemberWiseCalculatedCost } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 
 import { MemberCostList } from "./member-cost-list"
