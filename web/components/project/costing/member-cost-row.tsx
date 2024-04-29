@@ -185,15 +185,15 @@ export const MemberCostRow: React.FC<{
                                 </div>
                             </CustomSelect.Option>
                         </CustomSelect>
-                        <div className="bg-custom-background-100 border border-custom-border-100 min-w-[14rem] text-sm after:border">
-                            <pre className="bg-custom-background-80 rounded-md p-2">
+                        <div className="bg-custom-background-100 border border-custom-border-100 min-w-48 rounded-md">
+                            <pre className="bg-custom-background-80 rounded-md text-sm p-2">
                                 {convertSecondsToReadableTime(`${totalLoggedSeconds}`)}
                             </pre>
                         </div>
-                        <div className="text-sm bg-custom-background-80 rounded-md p-2 min-w-10">
+                        <div className="text-sm bg-amber-600/20 rounded-md p-2 min-w-24 text-right text-amber-600">
                             {userDetails.rate?.currency === "USD" ? "$" : "&#8377"}
                             &nbsp;
-                            {memberCost}
+                            {memberCost.toFixed(2)}
                         </div>
                     </div>
                 )}

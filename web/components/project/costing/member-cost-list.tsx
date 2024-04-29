@@ -30,7 +30,7 @@ export const MemberCostList: React.FC<{
     })
     const memberTimeLogDataMap = memberTimeLogData?.reduce(
         (acc: Record<string, number>, curr: IMemberWiseTimesheetDuration) => {
-            if (Number.isNaN(parseInt(curr.sum))) acc[curr.created_by__id] = parseInt(curr.sum)
+            if (!Number.isNaN(parseInt(curr.sum))) acc[curr.created_by__id] = parseInt(curr.sum)
             else acc[curr.created_by__id] = 0
             return acc
         },
