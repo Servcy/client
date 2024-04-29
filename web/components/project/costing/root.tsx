@@ -59,9 +59,9 @@ export const ProjectCostAnalysisRoot = observer(() => {
             if (memberDetails?.rate?.per_hour_or_per_project) {
                 memberCost = Number(memberDetails?.rate?.rate ?? "0") * (memberSum / 3600)
                 const memberEstimate = memberTimeEstimateData?.find((item) => item.assignees__id === userId)
-                estimate += memberEstimate
-                    ? Number(memberDetails?.rate?.rate ?? "0") * (Number(memberEstimate.sum) / 3600)
-                    : 0
+                if (memberEstimate) {
+                    estimate += Number(memberDetails?.rate?.rate ?? "0") * Number(memberEstimate.sum)
+                }
             } else {
                 memberCost = Number(memberDetails?.rate?.rate) ?? 0
                 estimate += Number(memberDetails?.rate?.rate) ?? 0
