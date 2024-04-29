@@ -119,7 +119,7 @@ export const MemberCostPieChart: React.FC<{
                     href={`/${workspaceSlug}/time-tracker/my-timesheet`}
                     className="text-lg font-semibold text-custom-text-300 hover:underline"
                 >
-                    Top 5 Expenses
+                    Top Members Cost:
                 </Link>
             </div>
             {totalCount > 0 ? (
