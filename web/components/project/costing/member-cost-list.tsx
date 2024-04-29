@@ -7,13 +7,13 @@ import { MembersSettingsLoader } from "@components/ui"
 
 import { useMember } from "@hooks/store"
 
-import { IMemberWiseTimesheetDuration } from "@servcy/types"
+import { IMemberWiseCalculatedCost } from "@servcy/types"
 
 import { MemberCostRow } from "./member-cost-row"
 
 export const MemberCostList: React.FC<{
-    memberTimeLogData: IMemberWiseTimesheetDuration[]
-}> = observer(({ memberTimeLogData }) => {
+    memberWiseCalculatedMap: Record<string, IMemberWiseCalculatedCost>
+}> = observer(({ memberWiseCalculatedMap }) => {
     const [searchQuery, setSearchQuery] = useState("")
     const {
         project: { projectMemberIds, getProjectMemberDetails },
@@ -28,14 +28,6 @@ export const MemberCostList: React.FC<{
 
         return displayName?.includes(searchQuery.toLowerCase()) || fullName.includes(searchQuery.toLowerCase())
     })
-    const memberTimeLogDataMap = memberTimeLogData?.reduce(
-        (acc: Record<string, number>, curr: IMemberWiseTimesheetDuration) => {
-            if (!Number.isNaN(parseInt(curr.sum))) acc[curr.created_by__id] = parseInt(curr.sum)
-            else acc[curr.created_by__id] = 0
-            return acc
-        },
-        {}
-    )
 
     return (
         <>
@@ -61,7 +53,7 @@ export const MemberCostList: React.FC<{
                               <MemberCostRow
                                   key={userId}
                                   userId={userId}
-                                  totalLoggedSeconds={memberTimeLogDataMap?.[userId] ?? 0}
+                                  totalLoggedSeconds={memberWiseCalculatedMap?.[userId].sum}
                               />
                           ))
                         : null}

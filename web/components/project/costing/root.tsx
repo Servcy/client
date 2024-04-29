@@ -6,11 +6,11 @@ import useSWR from "swr"
 
 import { GaugeChart } from "@components/ui"
 
-import { useTimeTracker } from "@hooks/store"
+import { useMember, useTimeTracker } from "@hooks/store"
 
 import { formatAmount } from "@helpers/currency.helper"
 
-import { IMemberWiseTimesheetDuration } from "@servcy/types"
+import { IMemberWiseCalculatedCost, IMemberWiseTimesheetDuration } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 
 import { MemberCostList } from "./member-cost-list"
@@ -19,7 +19,9 @@ import { MemberCostPieChart } from "./member-cost-pie-chart"
 export const ProjectCostAnalysisRoot = () => {
     const { projectId, workspaceSlug } = useParams()
     const { fetchProjectMemberWiseTimeLogged } = useTimeTracker()
-
+    const {
+        project: { getProjectMemberDetails },
+    } = useMember()
     const { data: memberTimeLogData } = useSWR(
         workspaceSlug && projectId
             ? `PROJECT_MEMBER_WISE_TIME_LOGGED_${workspaceSlug.toString()}_${projectId.toString()}`
@@ -28,6 +30,30 @@ export const ProjectCostAnalysisRoot = () => {
             ? () => fetchProjectMemberWiseTimeLogged(workspaceSlug.toString(), projectId.toString())
             : null
     )
+    const memberWiseCalculatedMap = memberTimeLogData
+        ? memberTimeLogData.reduce(
+              (acc: Record<string, IMemberWiseCalculatedCost>, curr: IMemberWiseTimesheetDuration) => {
+                  let sum = 0
+                  if (Number.isNaN(Number(curr.sum))) sum = 0
+                  else sum = parseInt(curr.sum)
+                  const memberDetails = getProjectMemberDetails(curr.created_by__id)
+                  let rate = 0
+                  if (Number.isNaN(Number(memberDetails?.rate?.rate))) rate = 0
+                  else {
+                      if (memberDetails?.rate?.per_hour_or_per_project)
+                          rate = (sum / 3600) * (Number(memberDetails?.rate?.rate) ?? 0)
+                      else rate = Number(memberDetails?.rate?.rate ?? 0)
+                  }
+                  acc[curr.created_by__id] = {
+                      ...curr,
+                      sum,
+                      cost: rate,
+                  }
+                  return acc
+              },
+              {}
+          )
+        : ({} as Record<string, IMemberWiseCalculatedCost>)
 
     return (
         <div className="h-full w-full">
@@ -55,7 +81,7 @@ export const ProjectCostAnalysisRoot = () => {
                         </div>
                     </div>
                     <MemberCostPieChart
-                        memberTimeLogData={memberTimeLogData as IMemberWiseTimesheetDuration[]}
+                        memberWiseCalculatedMap={memberWiseCalculatedMap}
                         workspaceSlug={workspaceSlug.toString()}
                     />
                 </div>
@@ -77,7 +103,7 @@ export const ProjectCostAnalysisRoot = () => {
                     </div>
                 </Loader>
             )}
-            <MemberCostList memberTimeLogData={memberTimeLogData as IMemberWiseTimesheetDuration[]} />
+            <MemberCostList memberWiseCalculatedMap={memberWiseCalculatedMap} />
         </div>
     )
 }
