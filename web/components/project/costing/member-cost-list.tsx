@@ -13,8 +13,7 @@ import { MemberCostRow } from "./member-cost-row"
 
 export const MemberCostList: React.FC<{
     memberTimeLogData: IMemberWiseTimesheetDuration[]
-    onRateChange: () => void
-}> = observer(({ memberTimeLogData, onRateChange }) => {
+}> = observer(({ memberTimeLogData }) => {
     const [searchQuery, setSearchQuery] = useState("")
     const {
         project: { projectMemberIds, getProjectMemberDetails },
@@ -63,7 +62,6 @@ export const MemberCostList: React.FC<{
                                   key={userId}
                                   userId={userId}
                                   totalLoggedSeconds={memberTimeLogDataMap?.[userId] ?? 0}
-                                  onRateChange={onRateChange}
                               />
                           ))
                         : null}

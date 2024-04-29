@@ -20,10 +20,9 @@ import { CustomSelect, Input } from "@servcy/ui"
 
 export const MemberCostRow: React.FC<{
     userId: string
-    onRateChange: () => void
     totalLoggedSeconds: number
 }> = observer((props) => {
-    const { userId, totalLoggedSeconds, onRateChange } = props
+    const { userId, totalLoggedSeconds } = props
     const { workspaceSlug, projectId } = useParams()
     const {
         membership: { currentProjectRole, currentWorkspaceRole },
@@ -41,13 +40,11 @@ export const MemberCostRow: React.FC<{
             rate: rate,
             currency: userDetails.rate?.currency ?? "USD",
             per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
+        }).catch((err) => {
+            const error = err.error
+            const errorString = Array.isArray(error) ? error[0] : error
+            toast.error(errorString ?? "An error occurred while updating member cost details. Please try again.")
         })
-            .then(() => onRateChange())
-            .catch((err) => {
-                const error = err.error
-                const errorString = Array.isArray(error) ? error[0] : error
-                toast.error(errorString ?? "An error occurred while updating member cost details. Please try again.")
-            })
     }
     const inputRateRef = useRef<HTMLInputElement>(null)
     useOutsideClickDetector(inputRateRef, async () => {
@@ -197,7 +194,7 @@ export const MemberCostRow: React.FC<{
                             </pre>
                         </div>
                         <div className="text-sm bg-amber-600/20 rounded-md p-2 min-w-24 text-right text-amber-600">
-                            {formatAmount(memberCost.toFixed(2), userDetails.rate?.currency ?? "USD")}
+                            {formatAmount(memberCost, userDetails.rate?.currency ?? "USD")}
                         </div>
                     </div>
                 )}
