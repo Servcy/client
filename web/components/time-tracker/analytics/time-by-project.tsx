@@ -169,7 +169,7 @@ export const ProjectTimesheetPieChart: React.FC<{
                                 onClick={(datum, e) => {
                                     e.preventDefault()
                                     e.stopPropagation()
-                                    router.push(`/${workspaceSlug}/projects/${datum.id}/budget/timesheet`)
+                                    router.push(`/${workspaceSlug}/projects/${datum.id}/costing`)
                                 }}
                                 onMouseEnter={(datum) => setActiveProject(datum.id as TStateGroups)}
                                 onMouseLeave={() => setActiveProject(null)}
