@@ -13,6 +13,8 @@ import useOutsideClickDetector from "@hooks/use-outside-click-detector"
 import { CURRENCY_CODES } from "@constants/billing"
 import { ERoles } from "@constants/iam"
 
+import { convertSecondsToReadableTime } from "@helpers/date-time.helper"
+
 import { CustomSelect, Input } from "@servcy/ui"
 
 export const MemberCostRow: React.FC<{
@@ -183,6 +185,11 @@ export const MemberCostRow: React.FC<{
                                 </div>
                             </CustomSelect.Option>
                         </CustomSelect>
+                        <div className="bg-custom-background-100 border border-custom-border-100 min-w-[14rem] text-sm after:border">
+                            <pre className="bg-custom-background-80 rounded-md p-2">
+                                {convertSecondsToReadableTime(totalLoggedSeconds)}
+                            </pre>
+                        </div>
                         <div className="text-sm bg-custom-background-80 rounded-md p-2 min-w-10">
                             {userDetails.rate?.currency === "USD" ? "$" : "&#8377"}
                             &nbsp;

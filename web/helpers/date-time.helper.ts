@@ -267,7 +267,7 @@ function isNumber(value: any) {
     return typeof value === "number"
 }
 
-export const convertSecondsToReadableTime = (seconds: string | null): string => {
+export const convertSecondsToReadableTime = (seconds: string | null | number): string => {
     if (Number.isNaN(Number(seconds)) || !seconds) return ""
     const secondsInt = parseInt(seconds)
     const hours = Math.floor(secondsInt / 3600)
