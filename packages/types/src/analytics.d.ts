@@ -119,6 +119,16 @@ export interface IMemberWiseTimesheetDuration {
     sum: string
 }
 
+export interface IMemberWiseCalculatedCost {
+    created_by__avatar: string | null
+    created_by__first_name: string
+    created_by__last_name: string
+    created_by__display_name: string | null
+    created_by__id: string
+    sum: number
+    cost: number
+}
+
 export interface ITimesheetAnalyticsResponse {
     month_wise_timesheet_duration: { month: number; sum: string }[] | null
     project_wise_timesheet_duration:

@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation"
 
 import { useState } from "react"
 
-import { linearGradientDef } from "@nivo/core"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
 import DarkImage from "public/empty-state/dashboard/dark/issues-by-priority.svg"
@@ -12,35 +11,13 @@ import LightImage from "public/empty-state/dashboard/light/issues-by-priority.sv
 
 import { PieGraph } from "@components/ui"
 
+import { INDEX_COLORS, INDEX_GRADIENTS } from "@constants/graph"
+
 import { orderArrayBy } from "@helpers/array.helper"
 import { renderEmoji } from "@helpers/emoji.helper"
 
 import { ITimesheetAnalyticsResponse, TStateGroups } from "@servcy/types"
 import { Loader } from "@servcy/ui"
-
-const PROJECT_COLORS = ["#FFC53D", "#3E9B4F", "#E5484D", "#80838D", "#CDCED6"]
-const PROJECT_GRAPH_GRADIENTS = [
-    linearGradientDef("gradient0", [
-        { offset: 0, color: "#DEDEDE" },
-        { offset: 100, color: "#BABABE" },
-    ]),
-    linearGradientDef("gradient1", [
-        { offset: 0, color: "#D4D4D4" },
-        { offset: 100, color: "#878796" },
-    ]),
-    linearGradientDef("gradient2", [
-        { offset: 0, color: "#FFD300" },
-        { offset: 100, color: "#FAE270" },
-    ]),
-    linearGradientDef("gradient3", [
-        { offset: 0, color: "#0E8B1B" },
-        { offset: 100, color: "#37CB46" },
-    ]),
-    linearGradientDef("gradient4", [
-        { offset: 0, color: "#C90004" },
-        { offset: 100, color: "#FF7679" },
-    ]),
-]
 
 export const ProjectTimesheetPieChart: React.FC<{
     analytics: ITimesheetAnalyticsResponse
@@ -83,7 +60,7 @@ export const ProjectTimesheetPieChart: React.FC<{
         ?.filter((duration) => duration.sum)
         ?.slice(0, 5)
         ?.map((item, index) => ({
-            color: PROJECT_COLORS[index],
+            color: INDEX_COLORS[index],
             id: item?.project_id,
             label: item?.project__name,
             value: (item?.sum / totalCount) * 100,
@@ -159,7 +136,7 @@ export const ProjectTimesheetPieChart: React.FC<{
                                     bottom: 0,
                                     left: 5,
                                 }}
-                                defs={PROJECT_GRAPH_GRADIENTS}
+                                defs={INDEX_GRADIENTS}
                                 fill={[0, 1, 2, 3, 4].map((p) => ({
                                     match: {
                                         id: p,
