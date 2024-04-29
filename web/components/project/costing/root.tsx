@@ -2,6 +2,9 @@
 
 import { useParams } from "next/navigation"
 
+import { useEffect, useState } from "react"
+
+import { observer } from "mobx-react-lite"
 import useSWR from "swr"
 
 import { GaugeChart } from "@components/ui"
@@ -10,18 +13,22 @@ import { useMember, useProject, useTimeTracker } from "@hooks/store"
 
 import { formatAmount } from "@helpers/currency.helper"
 
-import { IMemberWiseCalculatedCost, IMemberWiseTimesheetDuration } from "@servcy/types"
+import { IMemberWiseCalculatedCost } from "@servcy/types"
 import { Loader } from "@servcy/ui"
 
 import { MemberCostList } from "./member-cost-list"
 import { MemberCostPieChart } from "./member-cost-pie-chart"
 
-export const ProjectCostAnalysisRoot = () => {
+export const ProjectCostAnalysisRoot = observer(() => {
     const { projectId, workspaceSlug } = useParams()
     const { fetchProjectMemberWiseTimeLogged } = useTimeTracker()
+    const [totalCost, setTotalCost] = useState(0)
+    const [memberWiseCalculatedMap, setMemberWiseCalculatedMap] = useState<Record<string, IMemberWiseCalculatedCost>>(
+        {}
+    )
     const { currentProjectDetails: projectDetails } = useProject()
     const {
-        project: { getProjectMemberDetails },
+        project: { projectMemberIds, getProjectMemberDetails },
     } = useMember()
     const { data: memberTimeLogData } = useSWR(
         workspaceSlug && projectId
@@ -31,35 +38,39 @@ export const ProjectCostAnalysisRoot = () => {
             ? () => fetchProjectMemberWiseTimeLogged(workspaceSlug.toString(), projectId.toString())
             : null
     )
-    const memberWiseCalculatedMap = memberTimeLogData
-        ? memberTimeLogData.reduce(
-              (acc: Record<string, IMemberWiseCalculatedCost>, curr: IMemberWiseTimesheetDuration) => {
-                  let sum = 0
-                  if (Number.isNaN(Number(curr.sum))) sum = 0
-                  else sum = parseInt(curr.sum)
-                  const memberDetails = getProjectMemberDetails(curr.created_by__id)
-                  let rate = 0
-                  if (Number.isNaN(Number(memberDetails?.rate?.rate))) rate = 0
-                  else {
-                      if (memberDetails?.rate?.per_hour_or_per_project)
-                          rate = (sum / 3600) * (Number(memberDetails?.rate?.rate) ?? 0)
-                      else rate = Number(memberDetails?.rate?.rate ?? 0)
-                  }
-                  acc[curr.created_by__id] = {
-                      ...curr,
-                      sum,
-                      cost: rate,
-                  }
-                  return acc
-              },
-              {}
-          )
-        : ({} as Record<string, IMemberWiseCalculatedCost>)
-    const totalCost = Object.values(memberWiseCalculatedMap)?.reduce(
-        (acc: number, item: IMemberWiseCalculatedCost) => acc + item.cost,
-        0
-    )
-    const allocatedBudget = Number(projectDetails?.budget?.amount) ?? 0
+    useEffect(() => {
+        let cost = 0
+        projectMemberIds?.forEach((userId) => {
+            const memberTimeLog = memberTimeLogData?.find((item) => item.created_by__id === userId)
+            let memberSum = 0
+            if (memberTimeLog && !Number.isNaN(Number(memberTimeLog.sum))) memberSum = Number(memberTimeLog.sum)
+            const memberDetails = getProjectMemberDetails(userId)
+            let memberCost = 0
+            if (memberDetails?.rate?.per_hour_or_per_project)
+                memberCost = Number(memberDetails?.rate?.rate ?? "0") * (memberSum / 3600)
+            else memberCost = Number(memberDetails?.rate?.rate) ?? 0
+            cost += memberCost
+            const memberData = {
+                created_by__avatar: memberTimeLog
+                    ? memberTimeLog.created_by__avatar
+                    : memberDetails?.member.avatar ?? "",
+                created_by__first_name: memberTimeLog
+                    ? memberTimeLog.created_by__first_name
+                    : memberDetails?.member.first_name ?? "",
+                created_by__last_name: memberTimeLog
+                    ? memberTimeLog.created_by__last_name
+                    : memberDetails?.member.last_name ?? "",
+                created_by__display_name: memberTimeLog
+                    ? memberTimeLog.created_by__display_name
+                    : memberDetails?.member.display_name ?? "",
+                created_by__id: userId,
+                sum: memberSum,
+                cost: memberCost,
+            }
+            setMemberWiseCalculatedMap((prev) => ({ ...prev, [userId]: memberData }))
+        })
+        setTotalCost(cost)
+    }, [memberTimeLogData, projectMemberIds])
     return (
         <div className="h-full w-full">
             {memberTimeLogData ? (
@@ -68,7 +79,10 @@ export const ProjectCostAnalysisRoot = () => {
                         <div className="flex items-center justify-center space-y-4">
                             <div className="bg-custom-background-80 text-custom-text-200 rounded px-3.5 py-3 text-center font-medium capitalize">
                                 Budget Allocated:{" "}
-                                {formatAmount(allocatedBudget, projectDetails?.budget?.currency ?? "USD")}
+                                {formatAmount(
+                                    Number(projectDetails?.budget?.amount) ?? 0,
+                                    projectDetails?.budget?.currency ?? "USD"
+                                )}
                             </div>
                         </div>
                         <div className="grid grid-cols-2">
@@ -80,7 +94,11 @@ export const ProjectCostAnalysisRoot = () => {
                             </div>
                             <div>
                                 <GaugeChart
-                                    value={Math.ceil(allocatedBudget ? 100 * (totalCost / allocatedBudget) : 0)}
+                                    value={Math.ceil(
+                                        Number(projectDetails?.budget?.amount) ?? 0
+                                            ? 100 * (totalCost / (Number(projectDetails?.budget?.amount) ?? 0))
+                                            : 0
+                                    )}
                                 />
                                 <div className="text-custom-text-300 truncate text-center text-sm font-medium capitalize">
                                     Actual Cost:{" "}
@@ -118,4 +136,4 @@ export const ProjectCostAnalysisRoot = () => {
             <MemberCostList memberWiseCalculatedMap={memberWiseCalculatedMap} />
         </div>
     )
-}
+})
