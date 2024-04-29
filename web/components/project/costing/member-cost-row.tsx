@@ -105,7 +105,7 @@ export const MemberCostRow: React.FC<{
                                 if (Number.isNaN(Number(e.target.value))) return
                                 setRate(e.target.value)
                             }}
-                            className="focus:border-green-300 w-28"
+                            className="focus:border-green-300 w-28 max-md:hidden"
                         />
                         <CustomSelect
                             label={
@@ -131,6 +131,7 @@ export const MemberCostRow: React.FC<{
                                 })
                             }}
                             input
+                            className="max-md:hidden"
                             optionsClassName="w-full"
                         >
                             {CURRENCY_CODES.map((currency) => (
@@ -173,7 +174,7 @@ export const MemberCostRow: React.FC<{
                                 })
                             }}
                             input
-                            className="w-32"
+                            className="w-32 max-md:hidden"
                         >
                             <CustomSelect.Option value={true}>
                                 <div className="flex items-center gap-2">
@@ -188,7 +189,7 @@ export const MemberCostRow: React.FC<{
                                 </div>
                             </CustomSelect.Option>
                         </CustomSelect>
-                        <div className="bg-custom-background-100 border border-custom-border-100 min-w-48 rounded-md">
+                        <div className="bg-custom-background-100 border border-custom-border-100 min-w-44 rounded-md truncate">
                             <pre className="bg-custom-background-80 rounded-md text-sm p-2">
                                 {convertSecondsToReadableTime(`${totalLoggedSeconds}`)}
                             </pre>
