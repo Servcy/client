@@ -14,7 +14,7 @@ export const ProjectCostAnalysisRoot = () => {
     const { projectId, workspaceSlug } = useParams()
     const { fetchProjectMemberWiseTimeLogged } = useTimeTracker()
 
-    const { data: memberTimeLogData } = useSWR(
+    const { data: memberTimeLogData, mutate: mutateTimeLogData } = useSWR(
         workspaceSlug && projectId
             ? `PROJECT_MEMBER_WISE_TIME_LOGGED_${workspaceSlug.toString()}_${projectId.toString()}`
             : null,
@@ -25,7 +25,10 @@ export const ProjectCostAnalysisRoot = () => {
 
     return (
         <div className="h-full w-full">
-            <MemberCostList memberTimeLogData={memberTimeLogData as IMemberWiseTimesheetDuration[]} />
+            <MemberCostList
+                memberTimeLogData={memberTimeLogData as IMemberWiseTimesheetDuration[]}
+                onRateChange={() => mutateTimeLogData()}
+            />
         </div>
     )
 }
