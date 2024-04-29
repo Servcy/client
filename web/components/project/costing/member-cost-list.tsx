@@ -53,7 +53,7 @@ export const MemberCostList: React.FC<{
                               <MemberCostRow
                                   key={userId}
                                   userId={userId}
-                                  totalLoggedSeconds={memberWiseCalculatedMap?.[userId].sum}
+                                  totalLoggedSeconds={memberWiseCalculatedMap?.[userId]?.sum ?? 0}
                               />
                           ))
                         : null}
