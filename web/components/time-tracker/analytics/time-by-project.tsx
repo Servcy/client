@@ -137,11 +137,11 @@ export const ProjectTimesheetPieChart: React.FC<{
                                     left: 5,
                                 }}
                                 defs={INDEX_GRADIENTS}
-                                fill={[0, 1, 2, 3, 4].map((p) => ({
+                                fill={chartData.map((p, index) => ({
                                     match: {
-                                        id: p,
+                                        id: p.id,
                                     },
-                                    id: `gradient${p}`,
+                                    id: `gradient${index}`,
                                 }))}
                                 onClick={(datum, e) => {
                                     e.preventDefault()
