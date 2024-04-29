@@ -50,7 +50,9 @@ export const MemberCostRow: React.FC<{
         if (rate === userDetails?.rate?.rate) return
         handleRateChange()
     })
-    const memberCost = (totalLoggedSeconds / 3600) * (Number(rate) ?? 0)
+    const memberCost = userDetails.rate?.per_hour_or_per_project
+        ? (totalLoggedSeconds / 3600) * (Number(rate) ?? 0)
+        : Number(rate) ?? 0
     if (!userDetails) return null
     return (
         <>
