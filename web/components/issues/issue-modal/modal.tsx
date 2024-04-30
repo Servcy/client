@@ -1,4 +1,4 @@
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 import React, { useEffect, useState } from "react"
 
@@ -36,6 +36,7 @@ export interface IssuesModalProps {
 }
 
 export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((props) => {
+    const router = useRouter()
     const {
         data,
         isOpen,
@@ -167,6 +168,10 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
         onClose()
     }
 
+    const redirectToIssue = (issueId: string, projectId: string) => {
+        router.push(`/${workspaceSlug}/projects/${projectId}/issues/${issueId}`)
+    }
+
     const handleCreateIssue = async (
         payload: Partial<TIssue>,
         is_draft_issue: boolean = false
@@ -191,7 +196,10 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
                 payload: { ...response, state: "SUCCESS" },
                 path: pathname,
             })
-            !createMore && handleClose()
+            if (!createMore) {
+                handleClose()
+                redirectToIssue(response.id, payload.project_id)
+            }
             return response
         } catch (error) {
             toast.error("Please try again later")
