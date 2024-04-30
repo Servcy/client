@@ -121,9 +121,7 @@ export const MemberCostRow: React.FC<{
                                     rate: userDetails.rate?.rate ?? "0",
                                     currency: value,
                                     per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
-                                }).catch((err) => {
-                                    const error = err.error
-                                    const errorString = Array.isArray(error) ? error[0] : error
+                                }).catch(() => {
                                     toast.error("Please try again later")
                                 })
                             }}
