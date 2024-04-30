@@ -2,7 +2,7 @@ import { useParams } from "next/navigation"
 
 import React, { FC, Fragment, useEffect, useRef, useState } from "react"
 
-import { LayoutPanelTop, Sparkle, X } from "lucide-react"
+import { Gem, LayoutPanelTop, Sparkle, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -402,9 +402,14 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                 >
                                                     {iAmFeelingLucky ? (
                                                         "Generating response"
+                                                    ) : !isCurrentWorkspaceSubscribed ? (
+                                                        <>
+                                                            <Gem className="size-3.5 bg-green-500/10 text-green-500" />I
+                                                            {"'"}m feeling lucky
+                                                        </>
                                                     ) : (
                                                         <>
-                                                            <Sparkle className="h-3.5 w-3.5" />I{"'"}m feeling lucky
+                                                            <Sparkle className="size-3.5" />I{"'"}m feeling lucky
                                                         </>
                                                     )}
                                                 </button>
@@ -435,7 +440,11 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
                                                         }}
                                                         tabIndex={getTabIndex("ai_assistant")}
                                                     >
-                                                        <Sparkle className="h-4 w-4" />
+                                                        {isCurrentWorkspaceSubscribed ? (
+                                                            <Sparkle className="size-4" />
+                                                        ) : (
+                                                            <Gem className="size-4 bg-green-500/10 text-green-500" />
+                                                        )}
                                                         AI
                                                     </button>
                                                 }
