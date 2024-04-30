@@ -68,7 +68,7 @@ export const WorkspaceHelpSection: React.FC<WorkspaceHelpSectionProps> = observe
                             className={`grid place-items-center rounded-md p-1.5 outline-none ${
                                 isCollapsed ? "w-full" : ""
                             } ${
-                                !runningTimeTracker
+                                runningTimeTracker
                                     ? "bg-custom-primary-100/10 text-custom-primary-100 hover:bg-custom-primary-90/10 hover:text-custom-primary-200"
                                     : "text-custom-text-200 hover:bg-custom-background-90 hover:text-custom-text-100"
                             }`}
