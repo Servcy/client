@@ -96,7 +96,7 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
             })
             onClose()
         } catch (error) {
-            toast.error("Issue could not be created. Please try again.")
+            toast.error("Please try again later")
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED" },

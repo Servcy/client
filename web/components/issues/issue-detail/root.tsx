@@ -155,7 +155,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                         path: pathname,
                     })
                 } catch (error) {
-                    toast.error("Issue could not be archived. Please try again.")
+                    toast.error("Please try again later")
                     captureIssueEvent({
                         eventName: ISSUE_ARCHIVED,
                         payload: { id: issueId, state: "FAILED", element: "Issue details page" },
@@ -287,7 +287,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                 try {
                     await removeModulesFromIssue(workspaceSlug, projectId, issueId, moduleIds)
                 } catch (error) {
-                    toast.error("Issue could not be removed from module. Please try again.")
+                    toast.error("Please try again later")
                 }
             },
         }),

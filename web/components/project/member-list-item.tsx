@@ -248,13 +248,8 @@ export const ProjectMemberListItem: React.FC<{
                                     rate: userDetails.rate?.rate ?? "0",
                                     per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
                                     currency: userDetails.rate?.currency ?? "USD",
-                                }).catch((err) => {
-                                    const error = err.error
-                                    const errorString = Array.isArray(error) ? error[0] : error
-
-                                    toast.error(
-                                        errorString ?? "An error occurred while updating member role. Please try again."
-                                    )
+                                }).catch(() => {
+                                    toast.error("Please try again later")
                                 })
                             }}
                             disabled={

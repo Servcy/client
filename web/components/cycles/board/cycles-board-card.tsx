@@ -85,7 +85,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
         toast.promise(addToFavoritePromise, {
             loading: "Adding cycle to favorites...",
             success: "Cycle added to favorites.",
-            error: "Couldn't add the cycle to favorites. Please try again.",
+            error: "Couldn't add the cycle to favorites",
         })
     }
 
@@ -108,7 +108,7 @@ export const CyclesBoardCard: FC<ICyclesBoardCard> = observer((props) => {
         toast.promise(removeFromFavoritePromise, {
             loading: "Removing cycle from favorites...",
             success: "Cycle removed from favorites.",
-            error: "Couldn't remove the cycle from favorites. Please try again.",
+            error: "Couldn't remove the cycle from favorites",
         })
     }
 
