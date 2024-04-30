@@ -73,7 +73,7 @@ export const getMenuOptions = ({
           .catch(() => {
             onActionCompleteHandler({
               title: "Copy Failed",
-              message: "Sorry, page cannot be copied, please try again later.",
+              message: "Please try again later",
               type: "error",
             });
           });
@@ -102,7 +102,7 @@ export const getMenuOptions = ({
           .catch(() => {
             onActionCompleteHandler({
               title: `Page cannot be ${state}`,
-              message: `Sorry, page cannot be ${state}, please try again later`,
+              message: "Please try again later",
               type: "error",
             });
           });
@@ -131,7 +131,7 @@ export const getMenuOptions = ({
           .catch(() => {
             onActionCompleteHandler({
               title: `Page cannot be ${state}`,
-              message: `Sorry, page cannot be ${state}, please try again later.`,
+              message: "Please try again later",
               type: "success",
             });
           });

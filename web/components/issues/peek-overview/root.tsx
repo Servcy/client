@@ -114,7 +114,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         payload: { state: "FAILED", element: "Issue peek-overview" },
                         path: pathname,
                     })
-                    toast.error("Issue update failed")
+                    toast.error("Please try again later")
                 }
             },
             remove: async (workspaceSlug: string, projectId: string, issueId: string) => {
@@ -126,7 +126,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         path: pathname,
                     })
                 } catch (error) {
-                    toast.error("Issue delete failed")
+                    toast.error("Please try again later")
                     captureIssueEvent({
                         eventName: ISSUE_DELETED,
                         payload: { id: issueId, state: "FAILED", element: "Issue peek-overview" },
@@ -143,7 +143,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         path: pathname,
                     })
                 } catch (error) {
-                    toast.error("Issue could not be archived. Please try again.")
+                    toast.error("Please try again later")
                     captureIssueEvent({
                         eventName: ISSUE_ARCHIVED,
                         payload: { id: issueId, state: "FAILED", element: "Issue peek-overview" },
@@ -160,7 +160,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         path: pathname,
                     })
                 } catch (error) {
-                    toast.error("Issue could not be restored. Please try again.")
+                    toast.error("Please try again later")
                     captureIssueEvent({
                         eventName: ISSUE_RESTORED,
                         payload: { id: issueId, state: "FAILED", element: "Issue peek-overview" },
@@ -190,7 +190,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         },
                         path: pathname,
                     })
-                    toast.error("Cycle add to issue failed")
+                    toast.error("Please try again later")
                 }
             },
             removeIssueFromCycle: async (
@@ -211,7 +211,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         path: pathname,
                     })
                 } catch (error) {
-                    toast.error("Cycle remove from issue failed")
+                    toast.error("Please try again later")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { state: "FAILED", element: "Issue peek-overview" },
@@ -250,7 +250,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         },
                         path: pathname,
                     })
-                    toast.error("Module add to issue failed")
+                    toast.error("Please try again later")
                 }
             },
             removeIssueFromModule: async (
@@ -280,7 +280,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         },
                         path: pathname,
                     })
-                    toast.error("Module remove from issue failed")
+                    toast.error("Please try again later")
                 }
             },
             removeModulesFromIssue: async (
@@ -292,7 +292,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                 try {
                     await removeModulesFromIssue(workspaceSlug, projectId, issueId, moduleIds)
                 } catch (error) {
-                    toast.error("Module remove from issue failed")
+                    toast.error("Please try again later")
                 }
             },
         }),

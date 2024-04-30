@@ -48,7 +48,7 @@ export const DeleteIssueModal: React.FC<Props> = (props) => {
                     onClose()
                 })
                 .catch(() => {
-                    toast.error("Failed to delete issue")
+                    toast.error("Please try again later")
                 })
                 .finally(() => setIsDeleting(false))
     }

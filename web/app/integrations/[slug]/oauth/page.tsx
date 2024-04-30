@@ -49,8 +49,8 @@ export default function IntegrationOauth(): JSX.Element {
                     } else router.push(redirect_uri)
                 } else router.push(`/integrations?openConfigurationModal=1&selectedIntegration=${slug}`)
             })
-            .catch((error: any) => {
-                toast.error(error?.response?.data?.detail || "Something went wrong!")
+            .catch(() => {
+                toast.error("Please try again later")
                 router.push("/integrations")
             })
     }, [])

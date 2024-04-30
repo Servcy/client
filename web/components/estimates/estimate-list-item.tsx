@@ -31,11 +31,8 @@ export const EstimateListItem: React.FC<Props> = observer((props) => {
 
         await updateProject(workspaceSlug.toString(), projectId.toString(), {
             estimate: estimate.id,
-        }).catch((err) => {
-            const error = err?.error
-            const errorString = Array.isArray(error) ? error[0] : error
-
-            toast.error(errorString ?? "Estimate points could not be used. Please try again.")
+        }).catch(() => {
+            toast.error("Please try again later")
         })
     }
 

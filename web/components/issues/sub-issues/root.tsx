@@ -138,7 +138,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                 try {
                     await fetchSubIssues(workspaceSlug, projectId, parentIssueId)
                 } catch (error) {
-                    toast.error("Error fetching sub-issues")
+                    toast.error("Please try again later")
                 }
             },
             addSubIssue: async (
@@ -150,7 +150,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                 try {
                     await createSubIssues(workspaceSlug, projectId, parentIssueId, issueIds)
                 } catch (error) {
-                    toast.error("Error adding sub-issue")
+                    toast.error("Please try again later")
                 }
             },
             updateSubIssue: async (
@@ -193,7 +193,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         },
                         path: pathname,
                     })
-                    toast.error("Error updating sub-issue")
+                    toast.error("Please try again later")
                 }
             },
             removeSubIssue: async (
@@ -225,7 +225,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         },
                         path: pathname,
                     })
-                    toast.error("Error removing sub-issue")
+                    toast.error("Please try again later")
                 }
             },
             deleteSubIssue: async (
@@ -237,7 +237,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                 try {
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
                     await deleteSubIssue(workspaceSlug, projectId, parentIssueId, issueId)
-                    toast.error("Issue deleted successfully")
+                    toast.error("Please try again later")
                     captureIssueEvent({
                         eventName: "Sub-issue deleted",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -250,7 +250,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         payload: { id: issueId, state: "FAILED", element: "Issue detail page" },
                         path: pathname,
                     })
-                    toast.error("Error deleting issue")
+                    toast.error("Please try again later")
                 }
             },
         }),

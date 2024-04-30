@@ -69,7 +69,7 @@ export const PeekOverviewIssueAttachments: React.FC<Props> = (props) => {
                             change_details: "",
                         },
                     })
-                    toast.error("The Attachment could not be removed")
+                    toast.error("Please try again later")
                 }
             },
         }),

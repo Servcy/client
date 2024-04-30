@@ -86,7 +86,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
             .then(() => {
                 router.push(`/${workspaceSlug}/projects/${projectId}/modules/${moduleId}`)
             })
-            .catch(() => toast.error("Module could not be restored. Please try again."))
+            .catch(() => toast.error("Please try again later"))
     }
     const submitChanges = (data: Partial<IModule>) => {
         if (!workspaceSlug || !projectId || !moduleId) return
@@ -123,7 +123,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error("Some error occurred")
+                toast.error("Please try again later")
             })
     }
 
@@ -140,7 +140,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error("Some error occurred")
+                toast.error("Please try again later")
             })
     }
 
@@ -155,7 +155,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error("Some error occurred")
+                toast.error("Please try again later")
             })
     }
 
@@ -163,7 +163,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`)
             .then(() => {})
             .catch(() => {
-                toast.error("Some error occurred")
+                toast.error("Please try again later")
             })
     }
 

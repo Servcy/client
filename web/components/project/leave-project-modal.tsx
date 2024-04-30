@@ -78,13 +78,13 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
                             })
                         })
                 } else {
-                    toast.error("Please confirm leaving the project by typing the 'Leave Project'.")
+                    toast.error("Invalid confirmation text")
                 }
             } else {
-                toast.error("Please enter the project name as shown in the description.")
+                toast.error("Invalid project name")
             }
         } else {
-            toast.error("Please fill all fields.")
+            toast.error("Missing fields")
         }
     }
 

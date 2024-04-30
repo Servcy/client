@@ -133,10 +133,8 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                 router.push(`/${workspaceSlug}/projects/${res.id}/settings/members?openAddMember=true`)
                 handleClose()
             })
-            .catch((err) => {
-                Object.keys(err.data).map((key) => {
-                    toast.error(err.data[key])
-                })
+            .catch(() => {
+                toast.error("Please try again later")
             })
     }
 

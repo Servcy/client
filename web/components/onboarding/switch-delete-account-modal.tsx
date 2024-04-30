@@ -43,7 +43,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
                 router.push("/login")
                 handleClose()
             })
-            .catch(() => toast.error("Failed to sign out. Please try again."))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => setSwitchingAccount(false))
     }
 
@@ -57,7 +57,7 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
                 router.push("/login")
                 handleClose()
             })
-            .catch((err) => toast.error(err?.error))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => setIsDeactivating(false))
     }
 
@@ -126,7 +126,9 @@ export const SwitchOrDeleteAccountModal: React.FC<Props> = (props) => {
                                     <button
                                         onClick={handleSwitchAccount}
                                         disabled={switchingAccount}
-                                        className={`${resolvedTheme === "dark" ? "bg-[#2F3135]" : ""} rounded-sm px-4 py-1.5 text-sm`}
+                                        className={`${
+                                            resolvedTheme === "dark" ? "bg-[#2F3135]" : ""
+                                        } rounded-sm px-4 py-1.5 text-sm`}
                                     >
                                         {switchingAccount ? "Switching..." : "Switch account"}
                                     </button>

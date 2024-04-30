@@ -33,8 +33,8 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                         setWhitelistedEmails(new Set(response[0].configuration.whitelisted_emails))
                 }
             })
-            .catch((error) => {
-                toast.error(error.response.data.detail)
+            .catch(() => {
+                toast.error("Please try again later")
             })
             .finally(() => {
                 setLoading(false)
@@ -65,8 +65,8 @@ export default function GoogleConfiguration({ selectedIntegration }: { selectedI
                 },
                 "Gmail"
             )
-            .catch((error: any) => {
-                toast.error(error?.response?.data?.detail || "Something went wrong!")
+            .catch(() => {
+                toast.error("Please try again later")
             })
             .finally(() => {
                 setSaving(false)

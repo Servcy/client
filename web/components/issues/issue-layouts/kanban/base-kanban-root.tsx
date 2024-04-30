@@ -159,8 +159,8 @@ export const BaseKanBanRoot: React.FC<IBaseKanBanLayout> = observer((props: IBas
             issueMap,
             issueIds,
             viewId
-        ).catch((err) => {
-            toast.error(err.detail ?? "Failed to perform this action")
+        ).catch(() => {
+            toast.error("Please try again later")
         })
     }
 

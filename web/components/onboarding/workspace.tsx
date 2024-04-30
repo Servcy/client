@@ -67,11 +67,11 @@ export const Workspace: React.FC<Props> = (props) => {
                                     element: "Onboarding",
                                 },
                             })
-                            toast.error("Workspace could not be created. Please try again.")
+                            toast.error("Please try again later")
                         })
                 } else setSlugError(true)
             })
-            .catch(() => toast.error("Some error occurred while creating workspace. Please try again."))
+            .catch(() => toast.error("Please try again later"))
     }
 
     const completeStep = async () => {

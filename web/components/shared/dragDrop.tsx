@@ -38,7 +38,7 @@ const DragDrop = ({
                 onSuccess("Ok")
                 onSave(res.data, file.name)
             } catch (err: any) {
-                toast.error(err?.response?.data?.detail || "Some error occoured.")
+                toast.error("Please try again later")
                 onError({ err: new Error("Some error") })
             }
         },

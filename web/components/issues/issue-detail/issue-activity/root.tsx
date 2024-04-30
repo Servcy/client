@@ -65,7 +65,7 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
                     await createComment(workspaceSlug, projectId, issueId, data)
                 } catch (error) {
-                    toast.error("Comment creation failed. Please try again later.")
+                    toast.error("Please try again later")
                 }
             },
             updateComment: async (commentId: string, data: Partial<TIssueComment>) => {
@@ -73,7 +73,7 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
                     await updateComment(workspaceSlug, projectId, issueId, commentId, data)
                 } catch (error) {
-                    toast.error("Comment update failed. Please try again later.")
+                    toast.error("Please try again later")
                 }
             },
             removeComment: async (commentId: string) => {
@@ -81,7 +81,7 @@ export const IssueActivity: FC<TIssueActivity> = observer((props) => {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
                     await removeComment(workspaceSlug, projectId, issueId, commentId)
                 } catch (error) {
-                    toast.error("Comment remove failed. Please try again later.")
+                    toast.error("Please try again later")
                 }
             },
         }),

@@ -40,11 +40,9 @@ export const DeleteLabelModal: React.FC<Props> = observer((props) => {
             .then(() => {
                 handleClose()
             })
-            .catch((err) => {
+            .catch(() => {
                 setIsDeleteLoading(false)
-
-                const error = err?.error || "Label could not be deleted. Please try again."
-                toast.error(error)
+                toast.error("Please try again later")
             })
     }
 

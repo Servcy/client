@@ -41,7 +41,7 @@ export const ArchiveRestoreProjectModal: React.FC<Props> = (props) => {
                 onClose()
                 router.push(`/${workspaceSlug}/projects/`)
             })
-            .catch(() => toast.error("Project could not be archived. Please try again."))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => setIsLoading(false))
     }
 
@@ -52,7 +52,7 @@ export const ArchiveRestoreProjectModal: React.FC<Props> = (props) => {
                 onClose()
                 router.push(`/${workspaceSlug}/projects/`)
             })
-            .catch(() => toast.error(`Project could not be restored. Please try again.`))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => setIsLoading(false))
     }
 

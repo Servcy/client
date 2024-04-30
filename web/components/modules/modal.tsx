@@ -59,8 +59,8 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
                     payload: { ...res, state: "SUCCESS" },
                 })
             })
-            .catch((err) => {
-                toast.error(err.detail ?? "Module could not be created. Please try again.")
+            .catch(() => {
+                toast.error("Please try again later")
                 captureModuleEvent({
                     eventName: MODULE_CREATED,
                     payload: { ...data, state: "FAILED" },
@@ -80,8 +80,8 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
                     payload: { ...res, changed_properties: Object.keys(dirtyFields), state: "SUCCESS" },
                 })
             })
-            .catch((err) => {
-                toast.error(err.detail ?? "Module could not be updated. Please try again.")
+            .catch(() => {
+                toast.error("Please try again later")
                 captureModuleEvent({
                     eventName: MODULE_UPDATED,
                     payload: { ...data, state: "FAILED" },

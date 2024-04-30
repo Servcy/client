@@ -83,11 +83,8 @@ export const CreateUpdateEstimateModal: React.FC<Props> = observer((props) => {
             .then(() => {
                 onClose()
             })
-            .catch((err) => {
-                const error = err?.error
-                const errorString = Array.isArray(error) ? error[0] : error
-
-                toast.error(errorString ?? "Estimate could not be updated. Please try again.")
+            .catch(() => {
+                toast.error("Please try again later")
             })
     }
 

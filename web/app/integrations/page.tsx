@@ -70,8 +70,8 @@ const Integrations = observer(() => {
                     }
                 }
             })
-            .catch((error) => {
-                toast.error(error.response.data.detail)
+            .catch(() => {
+                toast.error("Please try again later")
             })
             .finally(() => {
                 setLoading(false)

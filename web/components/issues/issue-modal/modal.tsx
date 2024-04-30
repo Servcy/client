@@ -194,7 +194,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             !createMore && handleClose()
             return response
         } catch (error) {
-            toast.error("Issue could not be created. Please try again.")
+            toast.error("Please try again later")
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED" },
@@ -219,7 +219,7 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             })
             handleClose()
         } catch (error) {
-            toast.error("Issue could not be created. Please try again.")
+            toast.error("Please try again later")
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...payload, state: "FAILED" },

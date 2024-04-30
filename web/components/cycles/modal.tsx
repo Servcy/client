@@ -46,8 +46,8 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
                     payload: { ...res, state: "SUCCESS" },
                 })
             })
-            .catch((err) => {
-                toast.error(err.detail ?? "Error in creating cycle. Please try again.")
+            .catch(() => {
+                toast.error("Please try again later")
                 captureCycleEvent({
                     eventName: CYCLE_CREATED,
                     payload: { ...payload, state: "FAILED" },
@@ -67,12 +67,12 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
                     payload: { ...res, changed_properties: changed_properties, state: "SUCCESS" },
                 })
             })
-            .catch((err) => {
+            .catch(() => {
                 captureCycleEvent({
                     eventName: CYCLE_UPDATED,
                     payload: { ...payload, state: "FAILED" },
                 })
-                toast.error(err.detail ?? "Error in updating cycle. Please try again.")
+                toast.error("Please try again later")
             })
     }
 

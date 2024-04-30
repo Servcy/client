@@ -51,7 +51,7 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                         state: "FAILED",
                     },
                 })
-                toast.error("Failed to create page")
+                toast.error("Please try again later")
             })
     }
 

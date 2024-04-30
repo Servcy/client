@@ -94,12 +94,12 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                     },
                 })
             })
-            .catch((error) => {
+            .catch(() => {
                 captureProjectEvent({
                     eventName: PROJECT_UPDATED,
                     payload: { ...payload, state: "FAILED", element: "Project general settings" },
                 })
-                toast.error(error?.error ?? "Project could not be updated. Please try again.")
+                toast.error("Please try again later")
             })
     }
     const handleBudgetChange = (onChange: any, isAmount: boolean) => (e: ChangeEvent<HTMLInputElement>) => {

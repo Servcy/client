@@ -118,7 +118,7 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
                 payload: { ...payload, state: "FAILED", element: "List quick add" },
                 path: pathname,
             })
-            toast.error(err?.message || "Please try again later")
+            toast.error("Please try again later")
         }
     }
 

@@ -41,7 +41,7 @@ export const ArchiveModuleModal: React.FC<Props> = (props) => {
                 onClose()
                 router.push(`/${workspaceSlug}/projects/${projectId}/modules`)
             })
-            .catch(() => toast.error("Module could not be archived. Please try again."))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => setIsArchiving(false))
     }
 

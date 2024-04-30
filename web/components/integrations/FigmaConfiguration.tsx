@@ -32,8 +32,8 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                     setTeamIds(new Set(response[0].configuration.team_ids))
                 }
             })
-            .catch((error) => {
-                toast.error(error.response.data.detail)
+            .catch(() => {
+                toast.error("Please try again later")
             })
             .finally(() => {
                 setLoading(false)
@@ -64,8 +64,8 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                 },
                 "Figma"
             )
-            .catch((error: any) => {
-                toast.error(error?.response?.data?.detail || "Something went wrong!")
+            .catch(() => {
+                toast.error("Please try again later")
             })
             .finally(() => {
                 setSaving(false)

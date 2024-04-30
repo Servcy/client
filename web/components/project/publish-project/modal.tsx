@@ -141,7 +141,6 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
 
         await updateProjectSettingsAsync(workspaceSlug.toString(), project.id, payload.id ?? "", payload)
             .then((res) => {
-                toast.error("Publish settings updated successfully!")
                 handleClose()
                 return res
             })
@@ -158,13 +157,13 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                 handleClose()
                 return res
             })
-            .catch(() => toast.error("Something went wrong while un-publishing the project."))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => setIsUnPublishing(false))
     }
 
     const handleFormSubmit = async (formData: FormData) => {
         if (!formData.views || formData.views.length === 0) {
-            toast.error("Please select at least one view layout to publish the project.")
+            toast.error("Select at least one view layout to publish")
             return
         }
 

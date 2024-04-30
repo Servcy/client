@@ -126,7 +126,7 @@ export const GanttQuickAddIssueForm: React.FC<IGanttQuickAddIssueForm> = observe
                 payload: { ...payload, state: "FAILED", element: "Gantt quick add" },
                 path: pathname,
             })
-            toast.error(err?.message || "Please try again later")
+            toast.error("Please try again later")
         }
     }
     return (

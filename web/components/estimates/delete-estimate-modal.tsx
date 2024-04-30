@@ -37,10 +37,8 @@ export const DeleteEstimateModal: React.FC<Props> = observer((props) => {
                 setIsDeleteLoading(false)
                 handleClose()
             })
-            .catch((err) => {
-                const error = err?.error
-                const errorString = Array.isArray(error) ? error[0] : error
-                toast.error(errorString ?? "Estimate could not be deleted. Please try again")
+            .catch(() => {
+                toast.error("Please try again later")
             })
     }
 

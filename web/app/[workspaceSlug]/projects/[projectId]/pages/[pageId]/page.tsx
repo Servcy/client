@@ -172,7 +172,7 @@ const PageDetailsPage = observer(() => {
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be duplicated`,
-                message: `Sorry, page could not be duplicated, please try again later`,
+                message: "Please try again later",
                 type: "error",
             })
         }
@@ -185,7 +185,7 @@ const PageDetailsPage = observer(() => {
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be archived`,
-                message: `Sorry, page could not be archived, please try again later`,
+                message: "Please try again later",
                 type: "error",
             })
         }
@@ -198,7 +198,7 @@ const PageDetailsPage = observer(() => {
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be restored`,
-                message: `Sorry, page could not be restored, please try again later`,
+                message: "Please try again later",
                 type: "error",
             })
         }
@@ -211,7 +211,7 @@ const PageDetailsPage = observer(() => {
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be locked`,
-                message: `Sorry, page could not be locked, please try again later`,
+                message: "Please try again later",
                 type: "error",
             })
         }
@@ -224,7 +224,7 @@ const PageDetailsPage = observer(() => {
         } catch (error) {
             actionCompleteAlert({
                 title: `Page could not be unlocked`,
-                message: `Sorry, page could not be unlocked, please try again later`,
+                message: "Please try again later",
                 type: "error",
             })
         }

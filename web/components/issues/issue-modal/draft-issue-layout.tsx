@@ -99,7 +99,7 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
                 onClose(false)
             })
             .catch(() => {
-                toast.error("Issue could not be created. Please try again.")
+                toast.error("Please try again later")
                 captureIssueEvent({
                     eventName: "Draft issue created",
                     payload: { ...payload, state: "FAILED" },

@@ -46,10 +46,8 @@ export const EstimatesList: React.FC = observer(() => {
     const disableEstimates = () => {
         if (!workspaceSlug || !projectId) return
 
-        updateProject(workspaceSlug.toString(), projectId.toString(), { estimate: null }).catch((err) => {
-            const error = err?.error
-            const errorString = Array.isArray(error) ? error[0] : error
-            toast.error(errorString ?? "Estimate could not be disabled. Please try again")
+        updateProject(workspaceSlug.toString(), projectId.toString(), { estimate: null }).catch(() => {
+            toast.error("Please try again later")
         })
     }
     const emptyStateDetail = PROJECT_SETTINGS_EMPTY_STATE_DETAILS["estimate"]

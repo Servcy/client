@@ -62,10 +62,10 @@ export const ProjectMemberListItem: React.FC<{
                     await fetchProjects(workspaceSlug.toString())
                     router.push(`/${workspaceSlug}/projects`)
                 })
-                .catch((err) => toast.error(err?.error || "Please try again later"))
+                .catch(() => toast.error("Please try again later"))
         } else
             await removeMemberFromProject(workspaceSlug.toString(), projectId.toString(), userDetails.member.id).catch(
-                (err) => toast.error(err?.error || "Please try again later")
+                () => toast.error("Please try again later")
             )
     }
     const inputRateRef = useRef<HTMLInputElement>(null)

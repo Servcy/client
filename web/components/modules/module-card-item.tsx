@@ -54,7 +54,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error("Couldn't add the module to favorites. Please try again.")
+                toast.error("Please try again later")
             })
     }
 
@@ -72,7 +72,7 @@ export const ModuleCardItem: React.FC<Props> = observer((props) => {
                 })
             })
             .catch(() => {
-                toast.error("Couldn't remove the module from favorites. Please try again.")
+                toast.error("Please try again later")
             })
     }
 

@@ -80,7 +80,7 @@ export const ModuleQuickActions: React.FC<Props> = observer((props) => {
             .then(() => {
                 router.push(`/${workspaceSlug}/projects/${projectId}/archives/modules`)
             })
-            .catch(() => toast.error("Module could not be restored. Please try again."))
+            .catch(() => toast.error("Please try again later"))
     }
 
     const handleDeleteModule = (e: React.MouseEvent<HTMLButtonElement>) => {

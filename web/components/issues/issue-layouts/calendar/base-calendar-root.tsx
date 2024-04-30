@@ -72,8 +72,8 @@ export const BaseCalendarRoot = observer((props: IBaseCalendarRoot) => {
                 issueMap,
                 groupedIssueIds,
                 viewId
-            ).catch((err) => {
-                toast.error(err.detail ?? "Failed to perform this action")
+            ).catch(() => {
+                toast.error("Please try again later")
             })
         }
     }

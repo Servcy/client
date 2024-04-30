@@ -62,8 +62,8 @@ export const CreateUpdateLabelInline = observer(
                     handleClose()
                     reset(defaultValues)
                 })
-                .catch((error) => {
-                    toast.error(error?.error ?? "Error while adding the label")
+                .catch(() => {
+                    toast.error("Please try again later")
                     reset(formData)
                 })
         }
@@ -76,8 +76,8 @@ export const CreateUpdateLabelInline = observer(
                     reset(defaultValues)
                     handleClose()
                 })
-                .catch((error) => {
-                    toast.error(error?.error ?? "Error while updating the label")
+                .catch(() => {
+                    toast.error("Please try again later")
                     reset(formData)
                 })
         }

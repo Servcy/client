@@ -291,7 +291,7 @@ export const InviteMembers: React.FC<Props> = (props) => {
     const onSubmit = async (formData: FormValues) => {
         if (!workspace) return
         if (fields.length >= 5) {
-            return toast.error("You can invite a maximum of 5 members while onboarding.")
+            return toast.error("Maximum 5 invitations during onboarding")
         }
         let payload = { ...formData }
         payload = { emails: payload.emails.filter((email) => email.email !== "") }
@@ -323,17 +323,17 @@ export const InviteMembers: React.FC<Props> = (props) => {
                     element: "Onboarding",
                 })
                 if (error?.response?.status === 403) {
-                    toast.error("Only workspace admins can invite members.")
+                    toast.error("Only workspace admins can invite members")
                     await nextStep()
                     return
                 }
-                toast.error(error?.response?.data?.detail || "Something went wrong!")
+                toast.error("Please try again later")
             })
     }
 
     const appendField = () => {
         if (fields.length >= 5) {
-            return toast.error("You can invite a maximum of 5 members while onboarding.")
+            return toast.error("Maximum 5 invitations during onboarding")
         }
         append({ email: "", role: ERoles.MEMBER, role_active: false })
     }
