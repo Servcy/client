@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 
 import { Controller, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
 
 import { UserService } from "@services/user.service"
 
@@ -40,10 +39,7 @@ export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) =>
                 [key]: formData[key as keyof IUserEmailNotificationSettings],
             }
         })
-        await userService
-            .updateCurrentUserEmailNotificationSettings(payload)
-            .then(() => toast.success("Email Notification Settings updated successfully"))
-            .catch((err) => console.error(err))
+        await userService.updateCurrentUserEmailNotificationSettings(payload).catch((err) => console.error(err))
     }
 
     return (

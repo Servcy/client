@@ -41,7 +41,6 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
         const selectedProjectId = payload.project_id ?? activeProject.toString()
         await createCycle(workspaceSlug, selectedProjectId, payload)
             .then((res) => {
-                toast.success("Cycle created successfully.")
                 captureCycleEvent({
                     eventName: CYCLE_CREATED,
                     payload: { ...res, state: "SUCCESS" },
@@ -67,7 +66,6 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
                     eventName: CYCLE_UPDATED,
                     payload: { ...res, changed_properties: changed_properties, state: "SUCCESS" },
                 })
-                toast.success("Cycle updated successfully.")
             })
             .catch((err) => {
                 captureCycleEvent({
@@ -119,10 +117,7 @@ export const CycleCreateUpdateModal: React.FC<CycleModalProps> = (props) => {
                 })
             }
             handleClose()
-        } else
-            toast.error(
-                "You already have a cycle on the given dates, if you want to create a draft cycle, remove the dates."
-            )
+        } else toast.error("Cycle has conflicting dates, for draft cycles, remove the dates")
     }
 
     useEffect(() => {

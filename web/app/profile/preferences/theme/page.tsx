@@ -38,7 +38,7 @@ const ProfilePreferencesThemePage = observer(() => {
     const handleThemeChange = (themeOption: I_THEME_OPTION) => {
         setTheme(themeOption.value)
         updateCurrentUserTheme(themeOption.value).catch(() => {
-            toast.error("Failed to Update the theme")
+            toast.error("Please try again later")
         })
     }
 

@@ -38,7 +38,7 @@ export const IssueSubscription: FC<TIssueSubscription> = observer((props) => {
             setLoading(false)
         } catch (error) {
             setLoading(false)
-            toast.error("Something went wrong. Please try again later.")
+            toast.error("Please try again later")
         }
     }
 

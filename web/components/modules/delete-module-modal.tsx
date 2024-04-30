@@ -47,7 +47,6 @@ export const DeleteModuleModal: React.FC<Props> = observer((props) => {
                 if (moduleId || searchParams.has("peekModule"))
                     router.push(`/${workspaceSlug}/projects/${data.project_id}/modules`)
                 handleClose()
-                toast.success("Module deleted successfully.")
                 captureModuleEvent({
                     eventName: MODULE_DELETED,
                     payload: { ...data, state: "SUCCESS" },

@@ -7,7 +7,6 @@ import { Menu, Transition } from "@headlessui/react"
 import { ChevronDown, Home, Inbox, LogOut, Mails, MoveLeft, Plus, Settings, Workflow } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
-import toast from "react-hot-toast"
 import { mutate } from "swr"
 
 import { CommandPalette } from "@components/command-palette"
@@ -121,9 +120,8 @@ const DefaultWrapper: FC<INoWorkspaceWrapper> = observer((props) => {
             .then(() => {
                 mutate("CURRENT_USER_DETAILS", null)
                 setTheme("system")
-                router.push("/")
+                router.push("/login")
             })
-            .catch(() => toast.error("Failed to sign out. Please try again."))
             .finally(() => setIsSigningOut(false))
     }
 

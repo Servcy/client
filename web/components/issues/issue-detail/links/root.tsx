@@ -44,7 +44,6 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     await createLink(workspaceSlug, projectId, issueId, data)
-                    toast.success("The link has been successfully created")
                     toggleIssueLinkModal(false)
                 } catch (error) {
                     toast.error("The link could not be created")
@@ -54,7 +53,6 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     await updateLink(workspaceSlug, projectId, issueId, linkId, data)
-                    toast.success("The link has been successfully updated")
                     toggleIssueLinkModal(false)
                 } catch (error) {
                     toast.error("The link could not be updated")
@@ -64,7 +62,6 @@ export const IssueLinkRoot: FC<TIssueLinkRoot> = (props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     await removeLink(workspaceSlug, projectId, issueId, linkId)
-                    toast.success("The link has been successfully removed")
                     toggleIssueLinkModal(false)
                 } catch (error) {
                     toast.error("The link could not be removed")

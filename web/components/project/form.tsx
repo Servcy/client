@@ -93,7 +93,6 @@ export const ProjectDetailsForm: FC<IProjectDetailsForm> = (props) => {
                         element: "Project general settings",
                     },
                 })
-                toast.success("Project updated successfully")
             })
             .catch((error) => {
                 captureProjectEvent({

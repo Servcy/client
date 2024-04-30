@@ -112,14 +112,13 @@ export const ListQuickAddIssueForm: FC<IListQuickAddIssueForm> = observer((props
                         })
                     }
                 ))
-            toast.success("Issue created successfully.")
         } catch (err: any) {
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "List quick add" },
                 path: pathname,
             })
-            toast.error(err?.message || "Some error occurred. Please try again.")
+            toast.error(err?.message || "Please try again later")
         }
     }
 

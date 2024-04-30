@@ -56,7 +56,6 @@ const UserInvitationsPage = observer(() => {
 
     const submitInvitations = () => {
         if (invitationsRespond.length === 0) {
-            toast.error("Please select at least one invitation.")
             return
         }
 
@@ -85,7 +84,7 @@ const UserInvitationsPage = observer(() => {
                         router.push(`/${redirectWorkspace?.slug}`)
                     })
                     .catch(() => {
-                        toast.error("Something went wrong, Please try again.")
+                        toast.error("Please try again later")
                         setIsJoiningWorkspaces(false)
                     })
             })
@@ -96,7 +95,7 @@ const UserInvitationsPage = observer(() => {
                     state: "FAILED",
                     element: "Workspace invitations page",
                 })
-                toast.error("Something went wrong, Please try again.")
+                toast.error("Please try again later")
                 setIsJoiningWorkspaces(false)
             })
     }

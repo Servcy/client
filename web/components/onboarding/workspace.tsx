@@ -46,7 +46,6 @@ export const Workspace: React.FC<Props> = (props) => {
 
                     await createWorkspace(formData)
                         .then(async (res) => {
-                            toast.success("Workspace created successfully.")
                             captureWorkspaceEvent({
                                 eventName: WORKSPACE_CREATED,
                                 payload: {

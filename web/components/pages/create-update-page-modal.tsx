@@ -43,7 +43,6 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                         state: "SUCCESS",
                     },
                 })
-                toast.success("Page created successfully")
             })
             .catch(() => {
                 capturePageEvent({

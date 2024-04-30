@@ -89,7 +89,6 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
         await issueDraftService
             .createDraftIssue(workspaceSlug.toString(), projectId.toString(), payload)
             .then((res) => {
-                toast.success("Draft Issue created successfully.")
                 captureIssueEvent({
                     eventName: "Draft issue created",
                     payload: { ...res, state: "SUCCESS" },

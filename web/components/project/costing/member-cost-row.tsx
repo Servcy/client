@@ -124,10 +124,7 @@ export const MemberCostRow: React.FC<{
                                 }).catch((err) => {
                                     const error = err.error
                                     const errorString = Array.isArray(error) ? error[0] : error
-                                    toast.error(
-                                        errorString ??
-                                            "An error occurred while updating member cost details. Please try again."
-                                    )
+                                    toast.error(errorString ?? "Please try again later")
                                 })
                             }}
                             input
@@ -167,10 +164,7 @@ export const MemberCostRow: React.FC<{
                                 }).catch((err) => {
                                     const error = err.error
                                     const errorString = Array.isArray(error) ? error[0] : error
-                                    toast.error(
-                                        errorString ??
-                                            "An error occurred while updating member cost details. Please try again."
-                                    )
+                                    toast.error(errorString ?? "Please try again later")
                                 })
                             }}
                             input

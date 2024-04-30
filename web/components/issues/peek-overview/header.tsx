@@ -87,7 +87,7 @@ export const IssuePeekOverviewHeader: FC<PeekOverviewHeaderProps> = observer((pr
         e.stopPropagation()
         e.preventDefault()
         copyUrlToClipboard(issueLink).then(() => {
-            toast.success("Issue link copied to clipboard.")
+            toast.success("Copied to clipboard")
         })
     }
     const isArchivingAllowed = !isArchived && !disabled

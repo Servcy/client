@@ -48,7 +48,7 @@ export const ProjectMemberListItem: React.FC<{
         }).catch((err) => {
             const error = err.error
             const errorString = Array.isArray(error) ? error[0] : error
-            toast.error(errorString ?? "An error occurred while updating member cost details. Please try again.")
+            toast.error(errorString ?? "Please try again later")
         })
     }
     const handleRemove = async () => {
@@ -64,10 +64,10 @@ export const ProjectMemberListItem: React.FC<{
                     await fetchProjects(workspaceSlug.toString())
                     router.push(`/${workspaceSlug}/projects`)
                 })
-                .catch((err) => toast.error(err?.error || "Something went wrong. Please try again."))
+                .catch((err) => toast.error(err?.error || "Please try again later"))
         } else
             await removeMemberFromProject(workspaceSlug.toString(), projectId.toString(), userDetails.member.id).catch(
-                (err) => toast.error(err?.error || "Something went wrong. Please try again.")
+                (err) => toast.error(err?.error || "Please try again later")
             )
     }
     const inputRateRef = useRef<HTMLInputElement>(null)
@@ -162,10 +162,7 @@ export const ProjectMemberListItem: React.FC<{
                                     ).catch((err) => {
                                         const error = err.error
                                         const errorString = Array.isArray(error) ? error[0] : error
-                                        toast.error(
-                                            errorString ??
-                                                "An error occurred while updating member cost details. Please try again."
-                                        )
+                                        toast.error(errorString ?? "Please try again later")
                                     })
                                 }}
                                 input
@@ -209,10 +206,7 @@ export const ProjectMemberListItem: React.FC<{
                                     ).catch((err) => {
                                         const error = err.error
                                         const errorString = Array.isArray(error) ? error[0] : error
-                                        toast.error(
-                                            errorString ??
-                                                "An error occurred while updating member cost details. Please try again."
-                                        )
+                                        toast.error(errorString ?? "Please try again later")
                                     })
                                 }}
                                 input

@@ -20,7 +20,7 @@ export const IssueUpdateStatus: React.FC<Props> = (props) => {
     const copyIssueIdentifierToClipboard = () => {
         if (!projectDetails?.identifier || !issueDetail?.sequence_id || !navigator || !navigator.clipboard) return
         navigator.clipboard.writeText(`${projectDetails?.identifier}-${issueDetail?.sequence_id}`)
-        toast.success("Copied Issue Identifier to clipboard")
+        toast.success("Copied to clipboard")
     }
 
     return (

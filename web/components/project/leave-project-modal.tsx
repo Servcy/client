@@ -71,7 +71,7 @@ export const LeaveProjectModal: FC<ILeaveProjectModal> = observer((props) => {
                             })
                         })
                         .catch(() => {
-                            toast.error("Something went wrong please try again later.")
+                            toast.error("Please try again later")
                             captureEvent(PROJECT_MEMBER_LEAVE, {
                                 state: "FAILED",
                                 element: "Project settings members page",

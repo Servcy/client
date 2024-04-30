@@ -52,7 +52,7 @@ export const ProjectViewListItem: React.FC<Props> = observer((props) => {
         e.stopPropagation()
         e.preventDefault()
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/views/${view.id}`).then(() => {
-            toast.success("View link copied to clipboard.")
+            toast.success("Copied to clipboard")
         })
     }
 

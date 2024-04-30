@@ -36,7 +36,6 @@ export const IssueReaction: FC<TIssueReaction> = observer((props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing fields")
                     await createReaction(workspaceSlug, projectId, issueId, reaction)
-                    toast.success("Reaction created successfully")
                 } catch (error) {
                     toast.error("Reaction creation failed")
                 }
@@ -45,7 +44,6 @@ export const IssueReaction: FC<TIssueReaction> = observer((props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId || !currentUser?.id) throw new Error("Missing fields")
                     await removeReaction(workspaceSlug, projectId, issueId, reaction, currentUser.id)
-                    toast.success("Reaction removed successfully")
                 } catch (error) {
                     toast.error("Reaction remove failed")
                 }

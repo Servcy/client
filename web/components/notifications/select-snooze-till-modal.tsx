@@ -5,7 +5,6 @@ import { FC, Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { X } from "lucide-react"
 import { Controller, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
 
 import { DateDropdown } from "@components/dropdowns"
 
@@ -97,7 +96,6 @@ export const SnoozeNotificationModal: FC<SnoozeModalProps> = (props) => {
         await handleSubmitSnooze(notification.id, dateTime).then(() => {
             handleClose()
             onSuccess()
-            toast.success("Notification snoozed successfully")
         })
     }
 

@@ -41,7 +41,6 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
         try {
             await deleteCycle(workspaceSlug, projectId, cycle.id)
                 .then(() => {
-                    toast.success("Cycle deleted successfully.")
                     captureCycleEvent({
                         eventName: CYCLE_DELETED,
                         payload: { ...cycle, state: "SUCCESS" },
@@ -59,7 +58,7 @@ export const CycleDeleteModal: React.FC<ICycleDelete> = observer((props) => {
 
             handleClose()
         } catch (error) {
-            toast.error("Something went wrong please try again later.")
+            toast.error("Please try again later")
         }
 
         setLoader(false)

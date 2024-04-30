@@ -45,12 +45,7 @@ const UploadButton = ({
                 setUploading(false)
             }
         },
-        onChange(info: any) {
-            const status = info.file.status
-            if (status === "done") {
-                toast.success(`${info.file.name} file uploaded successfully.`)
-            }
-        },
+        onChange() {},
         maxCount: 10,
         onRemove,
     }

@@ -9,7 +9,6 @@ import toast from "react-hot-toast"
 import IntegrationService from "@services/integration.service"
 
 import { getQueryParams } from "@helpers/common.helper"
-import { capitalizeFirstLetter } from "@helpers/string.helper"
 
 import { Spinner } from "@servcy/ui"
 
@@ -34,7 +33,6 @@ export default function IntegrationOauth(): JSX.Element {
         integrationService
             .integrationOauth(oauthParams, slug)
             .then((response) => {
-                toast.success(`${capitalizeFirstLetter(slug)} connected successfully!`)
                 if (response?.results !== "null") {
                     const redirect_uri =
                         response?.results?.redirect_uri ||

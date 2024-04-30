@@ -4,7 +4,6 @@ import { useEffect } from "react"
 
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
 import useSWR from "swr"
 
 import { MemberSelect } from "@components/project"
@@ -67,7 +66,6 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
         })
             .then(() => {
                 fetchProjectDetails(workspaceSlug.toString(), projectId.toString())
-                toast.success("Project updated successfully")
             })
             .catch((err) => {
                 console.error(err)

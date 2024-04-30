@@ -24,7 +24,7 @@ export const LinkPreview = ({
     navigator.clipboard.writeText(url);
     viewProps.onActionCompleteHandler({
       title: "Link successfully copied",
-      message: "The link was copied to the clipboard.",
+      message: "Copied to the clipboard",
       type: "success",
     });
     viewProps.closeLinkView();

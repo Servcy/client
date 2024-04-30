@@ -162,7 +162,7 @@ export const EndTimePicker: FC<{
                                     end_time: format(value, "yyyy-MM-dd'T'HH:mm"),
                                 })
                             } catch {
-                                toast.error("Failed to update time log")
+                                toast.error("Please try again later")
                             }
                         }}
                     />

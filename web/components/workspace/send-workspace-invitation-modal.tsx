@@ -4,7 +4,6 @@ import { Dialog, Transition } from "@headlessui/react"
 import { Plus, X } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
 
 import { useApplication, useBilling, useMember, useUser } from "@hooks/store"
 
@@ -76,7 +75,6 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
         const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
         if (fields.length >= seatsRemaining) {
             toggleUpgradePlanModal(true)
-            return toast.error("Please upgrade your plan to invite more members.")
         }
         append({ email: "", role: 1 })
     }
@@ -85,7 +83,6 @@ export const SendWorkspaceInvitationModal: React.FC<Props> = observer((props) =>
         const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
         if (fields.length >= seatsRemaining) {
             toggleUpgradePlanModal(true)
-            return toast.error("Please upgrade your plan to invite more members.")
         }
         await onSubmit(data)?.then(() => {
             reset(defaultValues)

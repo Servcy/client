@@ -72,7 +72,7 @@ export const CommandPaletteIssueActions: React.FC<Props> = observer((props) => {
                 toast.success("Copied to clipboard")
             })
             .catch(() => {
-                toast.error("Some error occurred")
+                toast.error("Please try again later")
             })
     }
 

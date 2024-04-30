@@ -37,11 +37,9 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
     const handleRemoveInvitation = async () => {
         if (!workspaceSlug || !invitationDetails) return
 
-        await deleteMemberInvitation(workspaceSlug.toString(), invitationDetails.id)
-            .then(() => {
-                toast.success("Invitation removed successfully.")
-            })
-            .catch((err) => toast.error(err?.error || "Something went wrong. Please try again."))
+        await deleteMemberInvitation(workspaceSlug.toString(), invitationDetails.id).catch(() =>
+            toast.error("Please try again later")
+        )
     }
 
     if (!invitationDetails) return null
@@ -106,7 +104,7 @@ export const WorkspaceInvitationsListItem: FC<Props> = observer((props) => {
                             updateMemberInvitation(workspaceSlug.toString(), invitationDetails.id, {
                                 role: value,
                             }).catch(() => {
-                                toast.error("An error occurred while updating member role. Please try again.")
+                                toast.error("Please try again later")
                             })
                         }}
                         disabled={!hasRoleChangeAccess}

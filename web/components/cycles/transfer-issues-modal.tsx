@@ -34,15 +34,15 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
 
     const transferIssue = async (payload: any) => {
         if (!workspaceSlug || !projectId || !cycleId) return
-
         // TODO: import transferIssuesFromCycle from store
-        await transferIssuesFromCycle(workspaceSlug.toString(), projectId.toString(), cycleId.toString(), payload)
-            .then(() => {
-                toast.success("Issues have been transferred successfully")
-            })
-            .catch(() => {
-                toast.error("Issues cannot be transfer. Please try again.")
-            })
+        await transferIssuesFromCycle(
+            workspaceSlug.toString(),
+            projectId.toString(),
+            cycleId.toString(),
+            payload
+        ).catch(() => {
+            toast.error("Issues cannot be transfer. Please try again.")
+        })
     }
 
     const filteredOptions = currentProjectIncompleteCycleIds?.filter((optionId) => {

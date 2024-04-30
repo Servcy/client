@@ -105,7 +105,7 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
     const handleCopyText = () => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`)
             .then(() => {
-                toast.success("Cycle link copied to clipboard.")
+                toast.success("Copied to clipboard")
             })
             .catch(() => {
                 toast.error("Some error occurred")
@@ -147,11 +147,8 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
 
         if (isDateValid) {
             submitChanges(payload, "date_range")
-            toast.success("Cycle updated successfully.")
         } else {
-            toast.error(
-                "You already have a cycle on the given dates, if you want to create a draft cycle, you can do that by removing both the dates."
-            )
+            toast.error("Cycle has conflicting dates, for draft cycles, remove the dates")
             reset({ ...cycleDetails })
         }
     }
@@ -160,10 +157,9 @@ export const CycleDetailsSidebar: React.FC<Props> = observer((props) => {
         if (!workspaceSlug || !projectId) return
         await restoreCycle(workspaceSlug.toString(), projectId.toString(), cycleId)
             .then(() => {
-                toast.success("Cycle restored successfully.")
                 router.push(`/${workspaceSlug.toString()}/projects/${projectId.toString()}/cycles/${cycleId}`)
             })
-            .catch(() => toast.error("Cycle could not be restored. Please try again."))
+            .catch(() => toast.error("Please try again later"))
     }
     const cycleStatus = cycleDetails?.status.toLocaleLowerCase()
     const isCompleted = cycleStatus === "completed"

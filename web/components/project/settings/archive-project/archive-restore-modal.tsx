@@ -38,7 +38,6 @@ export const ArchiveRestoreProjectModal: React.FC<Props> = (props) => {
         setIsLoading(true)
         await archiveProject(workspaceSlug, projectId)
             .then(() => {
-                toast.success(`${projectDetails.name} has been archived successfully`)
                 onClose()
                 router.push(`/${workspaceSlug}/projects/`)
             })
@@ -50,7 +49,6 @@ export const ArchiveRestoreProjectModal: React.FC<Props> = (props) => {
         setIsLoading(true)
         await restoreProject(workspaceSlug, projectId)
             .then(() => {
-                toast.success(`You can find ${projectDetails.name} in your projects.`)
                 onClose()
                 router.push(`/${workspaceSlug}/projects/`)
             })

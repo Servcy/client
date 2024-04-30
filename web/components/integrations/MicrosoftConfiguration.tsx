@@ -65,9 +65,6 @@ export default function MicrosoftConfiguration({ selectedIntegration }: { select
                 },
                 "Outlook"
             )
-            .then(() => {
-                toast.success("Email IDs configured successfully")
-            })
             .catch((error: any) => {
                 toast.error(error?.response?.data?.detail || "Something went wrong!")
             })

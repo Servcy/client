@@ -193,18 +193,15 @@ export const IssueFormRoot: FC<IssueFormProps> = observer((props) => {
             .then((res) => {
                 if (res.response === "")
                     toast.error(
-                        "Issue title isn't informative enough to generate the description. Please try with a different title."
+                        "Issue title isn't informative enough to generate the description. Please try a different title."
                     )
                 else handleAiAssistance(res.response_html)
             })
             .catch((err) => {
                 const error = err?.data?.error
 
-                if (err.status === 429)
-                    toast.error(
-                        error || "You have reached the maximum number of requests of 50 requests per month per user."
-                    )
-                else toast.error(error || "Some error occurred. Please try again.")
+                if (err.status === 429) toast.error(error || "You have reached the maximum requests limit")
+                else toast.error(error || "Please try again later")
             })
             .finally(() => setIAmFeelingLucky(false))
     }

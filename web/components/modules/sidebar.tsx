@@ -84,7 +84,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
 
         await restoreModule(workspaceSlug.toString(), projectId.toString(), moduleId)
             .then(() => {
-                toast.success("Module restored successfully.")
                 router.push(`/${workspaceSlug}/projects/${projectId}/modules/${moduleId}`)
             })
             .catch(() => toast.error("Module could not be restored. Please try again."))
@@ -122,7 +121,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     module_id: moduleId,
                     state: "SUCCESS",
                 })
-                toast.success("Module link created successfully.")
             })
             .catch(() => {
                 toast.error("Some error occurred")
@@ -140,7 +138,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     module_id: moduleId,
                     state: "SUCCESS",
                 })
-                toast.success("Module link updated successfully.")
             })
             .catch(() => {
                 toast.error("Some error occurred")
@@ -156,7 +153,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
                     module_id: moduleId,
                     state: "SUCCESS",
                 })
-                toast.success("Module link deleted successfully.")
             })
             .catch(() => {
                 toast.error("Some error occurred")
@@ -165,9 +161,7 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
 
     const handleCopyText = () => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`)
-            .then(() => {
-                toast.success("Module link copied to clipboard")
-            })
+            .then(() => {})
             .catch(() => {
                 toast.error("Some error occurred")
             })
@@ -178,7 +172,6 @@ export const ModuleDetailsSidebar: React.FC<Props> = observer((props) => {
             start_date: startDate ? renderFormattedPayloadDate(startDate) : null,
             target_date: targetDate ? renderFormattedPayloadDate(targetDate) : null,
         })
-        toast.success("Module date range updated successfully.")
     }
 
     useEffect(() => {

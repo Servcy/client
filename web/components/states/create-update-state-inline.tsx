@@ -80,7 +80,6 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
         await createState(workspaceSlug.toString(), projectId.toString(), formData)
             .then((res) => {
                 handleClose()
-                toast.success("State created successfully.")
                 captureProjectStateEvent({
                     eventName: STATE_CREATED,
                     payload: {
@@ -91,9 +90,8 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                 })
             })
             .catch((error) => {
-                if (error.status === 400)
-                    toast.error("State with that name already exists. Please try again with another name.")
-                else toast.error("State could not be created. Please try again.")
+                if (error.status === 400) toast.error("State exists with this name. Please try with another name")
+                else toast.error("Please try again later")
 
                 captureProjectStateEvent({
                     eventName: STATE_CREATED,
@@ -120,12 +118,10 @@ export const CreateUpdateStateInline: React.FC<Props> = observer((props) => {
                         element: "Project settings states page",
                     },
                 })
-                toast.success("State updated successfully.")
             })
             .catch((error) => {
-                if (error.status === 400)
-                    toast.error("Another state exists with the same name. Please try again with another name.")
-                else toast.error("State could not be updated. Please try again.")
+                if (error.status === 400) toast.error("State exists with this name. Please try with another name")
+                else toast.error("Please try again later")
                 captureProjectStateEvent({
                     eventName: STATE_UPDATED,
                     payload: {

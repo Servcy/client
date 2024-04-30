@@ -106,7 +106,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
         if (!workspaceSlug || !project) return
 
         addProjectToFavorites(workspaceSlug.toString(), project.id).catch(() => {
-            toast.error("Couldn't remove the project from favorites. Please try again.")
+            toast.error("Please try again later")
         })
     }
 
@@ -114,7 +114,7 @@ export const ProjectSidebarListItem: React.FC<Props> = observer((props) => {
         if (!workspaceSlug || !project) return
 
         removeProjectFromFavorites(workspaceSlug.toString(), project.id).catch(() => {
-            toast.error("Couldn't remove the project from favorites. Please try again.")
+            toast.error("Please try again later")
         })
     }
 

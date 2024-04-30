@@ -54,7 +54,6 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
         await createModule(workspaceSlug.toString(), selectedProjectId, payload)
             .then((res) => {
                 handleClose()
-                toast.success("Module created successfully.")
                 captureModuleEvent({
                     eventName: MODULE_CREATED,
                     payload: { ...res, state: "SUCCESS" },
@@ -76,7 +75,6 @@ export const CreateUpdateModuleModal: React.FC<Props> = observer((props) => {
         await updateModuleDetails(workspaceSlug.toString(), selectedProjectId, data.id, payload)
             .then((res) => {
                 handleClose()
-                toast.success("Module updated successfully.")
                 captureModuleEvent({
                     eventName: MODULE_UPDATED,
                     payload: { ...res, changed_properties: Object.keys(dirtyFields), state: "SUCCESS" },

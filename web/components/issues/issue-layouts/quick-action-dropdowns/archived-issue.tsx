@@ -38,8 +38,7 @@ export const ArchivedIssueQuickActions: React.FC<IQuickActionProps> = (props) =>
     const issueLink = `${workspaceSlug}/projects/${issue.project_id}/archives/${issue.id}`
 
     const handleOpenInNewTab = () => window.open(`/${issueLink}`, "_blank", "noopener noreferrer")
-    const handleCopyIssueLink = () =>
-        copyUrlToClipboard(issueLink).then(() => toast.success("Issue link copied to clipboard"))
+    const handleCopyIssueLink = () => copyUrlToClipboard(issueLink).then(() => toast.success("Copied to clipboard"))
 
     return (
         <>

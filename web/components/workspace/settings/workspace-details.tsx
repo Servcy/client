@@ -73,7 +73,6 @@ export const WorkspaceDetails: FC = observer(() => {
                         element: "Workspace general settings page",
                     },
                 })
-                toast.success("Workspace updated successfully")
             })
             .catch((err) => {
                 captureWorkspaceEvent({
@@ -102,11 +101,10 @@ export const WorkspaceDetails: FC = observer(() => {
         fileService.deleteFile(url).then(() => {
             updateWorkspace(currentWorkspace.slug, { logo: "" })
                 .then(() => {
-                    toast.success("Workspace picture removed successfully.")
                     setIsImageUploadModalOpen(false)
                 })
                 .catch(() => {
-                    toast.error("There was some error in deleting your profile picture. Please try again.")
+                    toast.error("Please try again later")
                 })
                 .finally(() => setIsImageRemoving(false))
         })
@@ -114,10 +112,7 @@ export const WorkspaceDetails: FC = observer(() => {
 
     const handleCopyUrl = () => {
         if (!currentWorkspace) return
-
-        copyUrlToClipboard(`${currentWorkspace.slug}`).then(() => {
-            toast.success("Workspace URL copied to the clipboard.")
-        })
+        copyUrlToClipboard(`${currentWorkspace.slug}`)
     }
 
     useEffect(() => {

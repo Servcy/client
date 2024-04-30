@@ -77,7 +77,7 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
         if (!workspaceSlug) return
 
         if (!data.delete_issue_ids || data.delete_issue_ids.length === 0) {
-            toast.error("Please select at least one issue.")
+            toast.error("Select at least one issue to delete")
             return
         }
 
@@ -99,15 +99,14 @@ export const BulkDeleteIssuesModal: React.FC<Props> = observer((props) => {
 
         await removeBulkIssues(workspaceSlug as string, payload)
             .then(() => {
-                toast.success("Issues deleted successfully!")
                 handleClose()
             })
             .catch((err) => {
                 if (err.response.status === 403) {
-                    toast.error("You don't have permission to delete some of the issues.")
+                    toast.error("You don't have permission to delete issues")
                     return
                 }
-                toast.error("Something went wrong. Please try again.")
+                toast.error("Please try again later")
             })
     }
 

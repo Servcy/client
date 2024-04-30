@@ -63,7 +63,7 @@ export const PeekOverviewIssueDetails: FC<IPeekOverviewIssueDetails> = observer(
     const copyIssueIdentifierToClipboard = () => {
         if (!projectDetails?.identifier || !issue?.sequence_id || !navigator || !navigator.clipboard) return
         navigator.clipboard.writeText(`${projectDetails?.identifier}-${issue?.sequence_id}`)
-        toast.success("Copied Issue Identifier to clipboard")
+        toast.success("Copied to clipboard")
     }
 
     return (
