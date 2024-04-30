@@ -21,7 +21,6 @@ export class PageService extends APIService {
         return this.patch(`/project/${workspaceSlug}/${projectId}/pages/${pageId}/`, data)
             .then((response) => response?.data)
             .catch((error) => {
-                console.error("error", error?.response?.data)
                 throw error?.response?.data
             })
     }

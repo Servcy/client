@@ -51,11 +51,8 @@ export const DeleteStateModal: React.FC<Props> = observer((props) => {
                 handleClose()
             })
             .catch((err) => {
-                if (err.status === 400)
-                    toast.error(
-                        "This state contains some issues within it, please move them to some other state to delete this state."
-                    )
-                else toast.error("State could not be deleted. Please try again.")
+                if (err.status === 400) toast.error("State has some issues, please move them to delete this state")
+                else toast.error("Please try again later")
                 captureProjectStateEvent({
                     eventName: STATE_DELETED,
                     payload: {

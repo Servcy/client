@@ -32,7 +32,6 @@ export const IssueAttachmentRoot: FC<TIssueAttachmentRoot> = (props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     const res = await createAttachment(workspaceSlug, projectId, issueId, data)
-                    toast.success("The attachment has been successfully uploaded")
                     captureIssueEvent({
                         eventName: "Issue attachment added",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },

@@ -4,7 +4,6 @@ import { FC } from "react"
 
 import { FileText } from "lucide-react"
 import { observer } from "mobx-react-lite"
-import toast from "react-hot-toast"
 
 import { useEventTracker, useProject, useUser } from "@hooks/store"
 
@@ -55,7 +54,6 @@ export const ProjectFeaturesList: FC<Props> = observer(() => {
 
     const handleSubmit = async (formData: Partial<IProject>) => {
         if (!workspaceSlug || !projectId || !currentProjectDetails) return
-        toast.success("Project feature updated successfully.")
         updateProject(workspaceSlug.toString(), projectId.toString(), formData)
     }
 

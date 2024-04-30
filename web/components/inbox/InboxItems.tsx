@@ -60,14 +60,9 @@ const InboxItems = ({
     const { resolvedTheme } = useTheme()
     const { darkAlgorithm, defaultAlgorithm } = theme
     const disableNotificationTypeHandler = (event: string, user_integration_id: number) => {
-        integrationService
-            .disableNotificationType({ event, user_integration_id })
-            .then(() => {
-                toast.success("Notification type disabled successfully")
-            })
-            .catch(() => {
-                toast.error("Error in disabling notification type")
-            })
+        integrationService.disableNotificationType({ event, user_integration_id }).catch(() => {
+            toast.error("Error in disabling notification type")
+        })
     }
     const columns: ColumnsType<InboxItem> = [
         {

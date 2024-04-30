@@ -54,7 +54,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = observer((props) => {
 
     const handleCopyText = () =>
         copyUrlToClipboard(`${workspaceSlug}/projects/${project.id}/issues`).then(() =>
-            toast.success("Project link copied to clipboard.")
+            toast.success("Copied to clipboard")
         )
 
     const projectMembersIds = project.members?.map((member) => member.member_id)

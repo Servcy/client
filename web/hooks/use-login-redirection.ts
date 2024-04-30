@@ -58,7 +58,6 @@ const useLoginRedirection = (): UseLoginRedirectionProps => {
                 if (workspaceSlug) router.push(`/${workspaceSlug}`)
                 else router.push("/")
             } catch (error) {
-                console.error("Error in handleLoginRedirection:", error)
                 setError(error)
             }
         },

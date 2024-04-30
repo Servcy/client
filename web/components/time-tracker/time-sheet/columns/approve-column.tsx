@@ -46,7 +46,7 @@ export const ApprovalColumn: FC<{
                                 is_approved: value,
                             })
                         } catch {
-                            toast.error("Failed to update time log")
+                            toast.error("Please try again later")
                         }
                     }}
                     className="grow"

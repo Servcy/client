@@ -26,14 +26,9 @@ export default function IntegrationConfigurationModal({
 
     useEffect(() => {
         setLoading(true)
-        integrationService
-            .fetchUserIntegrations(selectedIntegration.name)
-            .then((response) => {
-                setUserIntegrations(response)
-            })
-            .catch((error) => {
-                console.error("Error fetching user integrations", error)
-            })
+        integrationService.fetchUserIntegrations(selectedIntegration.name).then((response) => {
+            setUserIntegrations(response)
+        })
         integrationService
             .fetchIntegrationEvents(String(selectedIntegration.id))
             .then((events) => {

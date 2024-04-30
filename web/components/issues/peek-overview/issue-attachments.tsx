@@ -52,7 +52,6 @@ export const PeekOverviewIssueAttachments: React.FC<Props> = (props) => {
                 try {
                     if (!workspaceSlug || !projectId || !issueId) throw new Error("Missing required fields")
                     await removeAttachment(workspaceSlug, projectId, issueId, attachmentId)
-                    toast.success("The attachment has been successfully removed")
                     captureIssueEvent({
                         eventName: "Issue attachment deleted",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },

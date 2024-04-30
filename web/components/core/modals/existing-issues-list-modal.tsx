@@ -52,18 +52,12 @@ export const ExistingIssuesListModal: React.FC<Props> = (props) => {
 
     const onSubmit = async () => {
         if (selectedIssues.length === 0) {
-            toast.error("Please select at least one issue.")
-
+            toast.error("Select at least one issue to add")
             return
         }
-
         setIsSubmitting(true)
-
         await handleOnSubmit(selectedIssues).finally(() => setIsSubmitting(false))
-
         handleClose()
-
-        toast.success(`Issue${selectedIssues.length > 1 ? "s" : ""} added successfully`)
     }
 
     useEffect(() => {

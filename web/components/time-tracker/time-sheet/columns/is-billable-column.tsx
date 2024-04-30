@@ -46,7 +46,7 @@ export const IsBillableColumn: FC<{
                                 is_billable: value,
                             })
                         } catch {
-                            toast.error("Failed to update time log")
+                            toast.error("Please try again later")
                         }
                     }}
                     className="grow"

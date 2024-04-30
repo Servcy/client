@@ -67,16 +67,10 @@ const ArchivedIssueDetailsPage = observer(() => {
 
         await restoreIssue(workspaceSlug.toString(), projectId.toString(), archivedIssueId.toString())
             .then(() => {
-                toast.success(
-                    issue &&
-                        `${getProjectById(issue.project_id)?.identifier}-${
-                            issue?.sequence_id
-                        } is restored successfully under the project ${getProjectById(issue.project_id)?.name}`
-                )
                 router.push(`/${workspaceSlug}/projects/${projectId}/issues/${archivedIssueId}`)
             })
             .catch(() => {
-                toast.error("Something went wrong. Please try again.")
+                toast.error("Please try again later")
             })
             .finally(() => setIsRestoring(false))
     }

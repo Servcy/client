@@ -43,7 +43,6 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                         state: "SUCCESS",
                     },
                 })
-                toast.success("Page created successfully")
             })
             .catch(() => {
                 capturePageEvent({
@@ -77,9 +76,7 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                 await createProjectPage(formData)
             }
             handleClose()
-        } catch (error) {
-            console.log(error)
-        }
+        } catch {}
     }
 
     useEffect(() => {

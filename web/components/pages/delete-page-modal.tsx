@@ -56,7 +56,6 @@ export const DeletePageModal: React.FC<TConfirmPageDeletionProps> = observer((pr
                     },
                 })
                 handleClose()
-                toast.success("Page deleted successfully.")
             })
             .catch(() => {
                 capturePageEvent({

@@ -69,11 +69,7 @@ const ProfileSettingsPage = observer(() => {
             user_timezone: formData.user_timezone,
         }
 
-        await updateCurrentUser(payload)
-            .then(() => {
-                toast.success("Profile updated successfully.")
-            })
-            .catch(() => toast.error("There was some error in updating your profile. Please try again."))
+        await updateCurrentUser(payload).catch(() => toast.error("Please try again later"))
         setTimeout(() => {
             setIsLoading(false)
         }, 300)
@@ -88,11 +84,10 @@ const ProfileSettingsPage = observer(() => {
             if (updateUser)
                 updateCurrentUser({ avatar: "" })
                     .then(() => {
-                        toast.success("Profile picture removed successfully.")
                         setIsRemoving(false)
                     })
                     .catch(() => {
-                        toast.error("There was some error in deleting your profile picture. Please try again.")
+                        toast.error("Please try again later")
                     })
                     .finally(() => setIsRemoving(false))
         })

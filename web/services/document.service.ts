@@ -52,9 +52,7 @@ export class FileService extends APIService {
 
                 const data = await this.uploadFile(formData)
                 return data.url
-            } catch (e) {
-                console.error(e)
-            }
+            } catch {}
         }
     }
 
@@ -63,9 +61,7 @@ export class FileService extends APIService {
             try {
                 const data = await this.deleteFile(src)
                 return data
-            } catch (e) {
-                console.error(e)
-            }
+            } catch {}
         }
     }
 
@@ -74,9 +70,7 @@ export class FileService extends APIService {
             try {
                 const data = await this.restoreFile(src)
                 return data
-            } catch (e) {
-                console.error(e)
-            }
+            } catch {}
         }
     }
 

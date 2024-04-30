@@ -58,11 +58,8 @@ export const ChangeIssueAssignee: React.FC<Props> = observer((props) => {
 
     const handleUpdateIssue = async (formData: Partial<TIssue>) => {
         if (!workspaceSlug || !projectId || !issue) return
-
         const payload = { ...formData }
-        await updateIssue(workspaceSlug.toString(), projectId.toString(), issue.id, payload).catch((e) => {
-            console.error(e)
-        })
+        await updateIssue(workspaceSlug.toString(), projectId.toString(), issue.id, payload)
     }
 
     const handleIssueAssignees = (assignee: string) => {

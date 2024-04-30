@@ -130,7 +130,6 @@ export const CreateProjectModal: FC<Props> = observer((props) => {
                     eventName: PROJECT_CREATED,
                     payload: newPayload,
                 })
-                toast.success("Project created successfully.")
                 router.push(`/${workspaceSlug}/projects/${res.id}/settings/members?openAddMember=true`)
                 handleClose()
             })

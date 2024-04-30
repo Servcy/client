@@ -87,7 +87,6 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
             .then(() => {
                 if (onSuccess) onSuccess()
                 onClose()
-                toast.success("Members added successfully.")
                 captureEvent(PROJECT_MEMBER_ADDED, {
                     members: [
                         ...payload.members.map((member) => ({
@@ -99,8 +98,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                     element: "Project settings members page",
                 })
             })
-            .catch((error) => {
-                console.error(error)
+            .catch(() => {
                 captureEvent(PROJECT_MEMBER_ADDED, {
                     state: "FAILED",
                     element: "Project settings members page",
@@ -119,7 +117,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
         }, 500)
     }
     const appendField = () => {
-        if (fields.length >= 10) return toast.error("You can only add 10 members at a time.")
+        if (fields.length >= 10) return toast.error("Only 10 invites are allowed at a time")
         append({
             role: ERoles.MEMBER,
             member_id: "",

@@ -48,7 +48,7 @@ export const CycleQuickActions: React.FC<Props> = observer((props) => {
         e.stopPropagation()
 
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/cycles/${cycleId}`).then(() => {
-            toast.success("Cycle link copied to clipboard.")
+            toast.success("Copied to clipboard")
         })
     }
 
@@ -70,10 +70,9 @@ export const CycleQuickActions: React.FC<Props> = observer((props) => {
         e.stopPropagation()
         await restoreCycle(workspaceSlug, projectId, cycleId)
             .then(() => {
-                toast.success("Cycle restored successfully.")
                 router.push(`/${workspaceSlug}/projects/${projectId}/archives/cycles`)
             })
-            .catch(() => toast.error("Cycle could not be restored. Please try again."))
+            .catch(() => toast.error("Please try again later"))
     }
 
     const handleDeleteCycle = (e: React.MouseEvent<HTMLButtonElement>) => {

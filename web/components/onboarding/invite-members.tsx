@@ -314,7 +314,6 @@ export const InviteMembers: React.FC<Props> = (props) => {
                     state: "SUCCESS",
                     element: "Onboarding",
                 })
-                toast.success("Invitations sent successfully.")
                 await nextStep()
             })
             .catch(async (error) => {

@@ -190,7 +190,6 @@ export class ModuleIssues extends IssueHelperStore implements IModuleIssues {
 
             return response
         } catch (error) {
-            console.error(error)
             this.loader = undefined
             throw error
         }

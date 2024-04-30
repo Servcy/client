@@ -57,7 +57,7 @@ export const ProjectSidebarList: FC = observer(() => {
 
     const handleCopyText = (projectId: string) => {
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {
-            toast.success("Project link copied to clipboard.")
+            toast.success("Copied to clipboard")
         })
     }
 
@@ -76,7 +76,7 @@ export const ProjectSidebarList: FC = observer(() => {
         const updatedSortOrder = orderJoinedProjects(source.index, destination.index, draggableId, joinedProjectsList)
         if (updatedSortOrder != undefined)
             updateProjectView(workspaceSlug.toString(), draggableId, { sort_order: updatedSortOrder }).catch(() => {
-                toast.error("Something went wrong. Please try again.")
+                toast.error("Please try again later")
             })
     }
 

@@ -24,7 +24,7 @@ export type TLabelOperations = {
 }
 
 export const IssueLabel: FC<TIssueLabel> = observer((props) => {
-    const { workspaceSlug, projectId, issueId, disabled = false, isInboxIssue = false, onLabelUpdate } = props
+    const { workspaceSlug, projectId, issueId, disabled = false, onLabelUpdate } = props
 
     const { updateIssue } = useIssueDetail()
     const { createLabel, fetchProjectLabels, getProjectLabels } = useLabel()
@@ -41,7 +41,6 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
                 try {
                     if (onLabelUpdate) onLabelUpdate(data.label_ids || [])
                     else await updateIssue(workspaceSlug, projectId, issueId, data)
-                    if (!isInboxIssue) toast.success("Issue updated successfully")
                 } catch (error) {
                     toast.error("Issue update failed")
                 }
@@ -49,7 +48,6 @@ export const IssueLabel: FC<TIssueLabel> = observer((props) => {
             createLabel: async (workspaceSlug: string, projectId: string, data: Partial<IIssueLabel>) => {
                 try {
                     const labelResponse = await createLabel(workspaceSlug, projectId, data)
-                    if (!isInboxIssue) toast.success("Label created successfully")
                     return labelResponse
                 } catch (error) {
                     toast.error("Label creation failed")

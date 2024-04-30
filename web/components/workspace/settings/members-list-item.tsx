@@ -52,14 +52,13 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                 })
                 router.push("/profile")
             })
-            .catch((err) => toast.error(err?.error || "Something went wrong. Please try again."))
+            .catch(() => toast.error("Please try again later"))
     }
 
     const handleRemoveMember = async () => {
         if (!workspaceSlug || !memberDetails) return
-
-        await removeMemberFromWorkspace(workspaceSlug.toString(), memberDetails.member.id).catch((err) =>
-            toast.error(err?.error || "Something went wrong. Please try again.")
+        await removeMemberFromWorkspace(workspaceSlug.toString(), memberDetails.member.id).catch(() =>
+            toast.error("Please try again later")
         )
     }
 
@@ -157,7 +156,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                                 role: value,
                                 auto_approve_tracked_time: memberDetails.auto_approve_tracked_time ?? false,
                             }).catch(() => {
-                                toast.error("An error occurred while updating member role. Please try again.")
+                                toast.error("Please try again later")
                             })
                         }}
                         disabled={!hasRoleChangeAccess}
@@ -189,9 +188,7 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                                         auto_approve_tracked_time: value,
                                         role: memberDetails.role,
                                     }).catch(() => {
-                                        toast.error(
-                                            "An error occurred while updating time log settings. Please try again."
-                                        )
+                                        toast.error("Please try again later")
                                     })
                                 }}
                             />

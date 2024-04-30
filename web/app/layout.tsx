@@ -9,7 +9,6 @@ import "@styles/global.css"
 import { FC, PropsWithChildren, Suspense } from "react"
 
 import { GoogleOAuthProvider } from "@react-oauth/google"
-import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "next-themes"
 import { Toaster } from "react-hot-toast"
 import { SWRConfig } from "swr"
@@ -73,7 +72,6 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
                             },
                         }}
                     />
-                    <Analytics />
                     <GoogleOAuthProvider clientId={process.env["NEXT_PUBLIC_GOOGLE_SSO_CLIENT_ID"] ?? ""}>
                         <StoreProvider>
                             <ThemeProvider themes={THEMES} defaultTheme="system">

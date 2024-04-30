@@ -34,15 +34,15 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
 
     const transferIssue = async (payload: any) => {
         if (!workspaceSlug || !projectId || !cycleId) return
-
         // TODO: import transferIssuesFromCycle from store
-        await transferIssuesFromCycle(workspaceSlug.toString(), projectId.toString(), cycleId.toString(), payload)
-            .then(() => {
-                toast.success("Issues have been transferred successfully")
-            })
-            .catch(() => {
-                toast.error("Issues cannot be transfer. Please try again.")
-            })
+        await transferIssuesFromCycle(
+            workspaceSlug.toString(),
+            projectId.toString(),
+            cycleId.toString(),
+            payload
+        ).catch(() => {
+            toast.error("Please try again later")
+        })
     }
 
     const filteredOptions = currentProjectIncompleteCycleIds?.filter((optionId) => {
@@ -50,14 +50,6 @@ export const TransferIssuesModal: React.FC<Props> = observer((props) => {
 
         return cycleDetails?.name?.toLowerCase().includes(query?.toLowerCase())
     })
-
-    // useEffect(() => {
-    //   const handleKeyDown = (e: KeyboardEvent) => {
-    //     if (e.key === "Escape") {
-    //       handleClose();
-    //     }
-    //   };
-    // }, [handleClose]);
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>

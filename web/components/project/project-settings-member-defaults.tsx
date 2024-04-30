@@ -4,7 +4,6 @@ import { useEffect } from "react"
 
 import { observer } from "mobx-react-lite"
 import { Controller, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
 import useSWR from "swr"
 
 import { MemberSelect } from "@components/project"
@@ -64,14 +63,9 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
         await updateProject(workspaceSlug.toString(), projectId.toString(), {
             default_assignee: formData.default_assignee === "none" ? null : formData.default_assignee,
             lead: formData.lead === "none" ? null : formData.lead,
+        }).then(() => {
+            fetchProjectDetails(workspaceSlug.toString(), projectId.toString())
         })
-            .then(() => {
-                fetchProjectDetails(workspaceSlug.toString(), projectId.toString())
-                toast.success("Project updated successfully")
-            })
-            .catch((err) => {
-                console.error(err)
-            })
     }
 
     return (

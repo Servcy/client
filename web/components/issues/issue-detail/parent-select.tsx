@@ -43,9 +43,7 @@ export const IssueParentSelect: React.FC<TIssueParentSelect> = observer((props) 
             await issueOperations.update(workspaceSlug, projectId, issueId, { parent_id: _issueId })
             await issueOperations.fetch(workspaceSlug, projectId, issueId)
             toggleParentIssueModal(false)
-        } catch (error) {
-            console.error("something went wrong while fetching the issue")
-        }
+        } catch {}
     }
 
     if (!issue) return <></>

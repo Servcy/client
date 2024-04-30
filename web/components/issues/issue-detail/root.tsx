@@ -94,22 +94,18 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             fetch: async (workspaceSlug: string, projectId: string, issueId: string) => {
                 try {
                     await fetchIssue(workspaceSlug, projectId, issueId)
-                } catch (error) {
-                    console.error("Error fetching the parent issue")
-                }
+                } catch {}
             },
             update: async (
                 workspaceSlug: string,
                 projectId: string,
                 issueId: string,
                 data: Partial<TIssue>,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 showToast: boolean = true
             ) => {
                 try {
                     await updateIssue(workspaceSlug, projectId, issueId, data)
-                    if (showToast) {
-                        toast.success("Issue updated successfully")
-                    }
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { ...data, issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -136,7 +132,6 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
                 try {
                     if (is_archived) await removeArchivedIssue(workspaceSlug, projectId, issueId)
                     else await removeIssue(workspaceSlug, projectId, issueId)
-                    toast.success("Issue deleted successfully")
                     captureIssueEvent({
                         eventName: ISSUE_DELETED,
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -154,7 +149,6 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             archive: async (workspaceSlug: string, projectId: string, issueId: string) => {
                 try {
                     await archiveIssue(workspaceSlug, projectId, issueId)
-                    toast.success("Issue archived successfully.")
                     captureIssueEvent({
                         eventName: ISSUE_ARCHIVED,
                         payload: { id: issueId, state: "SUCCESS", element: "Issue details page" },
@@ -172,7 +166,6 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             addIssueToCycle: async (workspaceSlug: string, projectId: string, cycleId: string, issueIds: string[]) => {
                 try {
                     await addIssueToCycle(workspaceSlug, projectId, cycleId, issueIds)
-                    toast.success("Issue added to issue successfully")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { ...issueIds, state: "SUCCESS", element: "Issue detail page" },
@@ -203,7 +196,6 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             ) => {
                 try {
                     const response = await removeIssueFromCycle(workspaceSlug, projectId, cycleId, issueId)
-                    toast.success("Cycle removed from issue successfully")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { ...response, state: "SUCCESS", element: "Issue detail page" },
@@ -234,7 +226,6 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             ) => {
                 try {
                     const response = await addModulesToIssue(workspaceSlug, projectId, issueId, moduleIds)
-                    toast.success("Module added to issue successfully")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { ...response, state: "SUCCESS", element: "Issue detail page" },
@@ -265,7 +256,6 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             ) => {
                 try {
                     await removeIssueFromModule(workspaceSlug, projectId, moduleId, issueId)
-                    toast.success("Module removed from issue successfully")
                     captureIssueEvent({
                         eventName: ISSUE_UPDATED,
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },
@@ -296,7 +286,6 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             ) => {
                 try {
                     await removeModulesFromIssue(workspaceSlug, projectId, issueId, moduleIds)
-                    toast.success("Issue removed from module successfully.")
                 } catch (error) {
                     toast.error("Issue could not be removed from module. Please try again.")
                 }

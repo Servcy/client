@@ -60,9 +60,8 @@ const WorkspaceMembersSettingsPage = observer(() => {
                     state: "SUCCESS",
                     element: "Workspace settings member page",
                 })
-                toast.success("Invitations sent successfully.")
             })
-            .catch((err) => {
+            .catch(() => {
                 captureEvent(MEMBER_INVITED, {
                     emails: [
                         ...data.emails.map((email) => ({
@@ -74,7 +73,7 @@ const WorkspaceMembersSettingsPage = observer(() => {
                     state: "FAILED",
                     element: "Workspace settings member page",
                 })
-                toast.error(`${err.error ?? "Something went wrong. Please try again."}`)
+                toast.error("Please try again later")
             })
     }
 
@@ -112,7 +111,6 @@ const WorkspaceMembersSettingsPage = observer(() => {
                                     const seatsRemaining = workspaceInvitationLimit - totalWorkspaceMembers
                                     if (seatsRemaining <= 0) {
                                         toggleUpgradePlanModal(true)
-                                        return toast.error("Please upgrade your plan to invite more members.")
                                     }
                                     setInviteModal(true)
                                 }}

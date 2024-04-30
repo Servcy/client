@@ -74,7 +74,7 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
         const errorMessage =
             err?.status === 429
                 ? error || "You have reached the maximum number of requests of 50 requests per month per user."
-                : error || "Some error occurred. Please try again."
+                : error || "Please try again later"
 
         toast.error(errorMessage)
 
@@ -98,7 +98,7 @@ export const GptAssistantPopover: React.FC<Props> = (props) => {
     }
 
     const handleInvalidTask = () => {
-        toast.error("Please enter some task to get AI assistance.")
+        toast.error("Enter some task to get AI assistance")
     }
 
     const handleAIResponse = async (formData: FormData) => {

@@ -186,7 +186,6 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
             if (payload.module_ids && payload.module_ids.length > 0 && storeType !== EIssuesStoreType.MODULE)
                 await addIssueToModule(response, payload.module_ids)
 
-            toast.success("Issue created successfully.")
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...response, state: "SUCCESS" },
@@ -213,7 +212,6 @@ export const CreateUpdateIssueModal: React.FC<IssuesModalProps> = observer((prop
                 ? await draftIssues.updateIssue(workspaceSlug, payload.project_id, data.id, payload)
                 : await currentIssueStore.updateIssue(workspaceSlug, payload.project_id, data.id, payload, viewId)
 
-            toast.success("Issue updated successfully.")
             captureIssueEvent({
                 eventName: ISSUE_UPDATED,
                 payload: { ...payload, issueId: data.id, state: "SUCCESS" },

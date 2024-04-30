@@ -46,11 +46,10 @@ export default function Login(): JSX.Element {
             // validate email address
             const isEmailValid = validateEmail(email.value)
             if (!isEmailValid) {
-                toast.error("Please enter a valid email address")
+                toast.error("Invalid email address")
                 return
             }
             if (!agree_terms_conditions_and_privacy_policy.checked) {
-                toast.error("Please agree to our privacy policy and TOS by checking the checkbox")
                 return
             }
             // set input type and value
@@ -110,7 +109,7 @@ export default function Login(): JSX.Element {
                 try {
                     const email = searchParams.get("email") as string
                     if (!validateEmail(email)) {
-                        toast.error("Please enter a valid email address!")
+                        toast.error("Invalid email address")
                         return
                     }
                     setLoading(true)
@@ -208,12 +207,7 @@ export default function Login(): JSX.Element {
                                         const agree_terms_conditions_and_privacy_policy = document.getElementById(
                                             "agree_terms_conditions_and_privacy_policy"
                                         ) as HTMLInputElement
-                                        if (!agree_terms_conditions_and_privacy_policy.checked) {
-                                            toast.error(
-                                                "Please agree to our privacy policy and TOS by checking the checkbox"
-                                            )
-                                            return
-                                        }
+                                        if (!agree_terms_conditions_and_privacy_policy.checked) return
                                         if (credential) googleLogin(credential)
                                         else toast.error("Failed to login with Google")
                                     }}

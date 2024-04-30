@@ -58,16 +58,12 @@ export async function onNodeDeleted(src: string, deleteImage: DeleteFile): Promi
   try {
     const assetUrlWithWorkspaceId = new URL(src).pathname.substring(1);
     await deleteImage(assetUrlWithWorkspaceId);
-  } catch (error) {
-    console.error("Error deleting image: ", error);
-  }
+  } catch {}
 }
 
 export async function onNodeRestored(src: string, restoreImage: RestoreFile): Promise<void> {
   try {
     const assetUrlWithWorkspaceId = new URL(src).pathname.substring(1);
     await restoreImage(assetUrlWithWorkspaceId);
-  } catch (error) {
-    console.error("Error restoring image: ", error);
-  }
+  } catch {}
 }

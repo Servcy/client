@@ -56,7 +56,7 @@ export const ModuleQuickActions: React.FC<Props> = observer((props) => {
         e.stopPropagation()
         e.preventDefault()
         copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/modules/${moduleId}`).then(() => {
-            toast.success("Link Copied!")
+            toast.success("Copied to clipboard")
         })
     }
 
@@ -78,7 +78,6 @@ export const ModuleQuickActions: React.FC<Props> = observer((props) => {
         e.stopPropagation()
         await restoreModule(workspaceSlug, projectId, moduleId)
             .then(() => {
-                toast.success("Restore success!")
                 router.push(`/${workspaceSlug}/projects/${projectId}/archives/modules`)
             })
             .catch(() => toast.error("Module could not be restored. Please try again."))

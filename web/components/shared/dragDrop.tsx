@@ -42,12 +42,7 @@ const DragDrop = ({
                 onError({ err: new Error("Some error") })
             }
         },
-        onChange(info: any) {
-            const status = info.file.status
-            if (status === "done") {
-                toast.success(`${info.file.name} file uploaded successfully.`)
-            }
-        },
+        onChange() {},
         accept,
         maxCount,
         onRemove,

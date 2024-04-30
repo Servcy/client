@@ -66,14 +66,13 @@ export const DeleteProjectModal: React.FC<DeleteProjectModal> = (props) => {
                     eventName: PROJECT_DELETED,
                     payload: { ...project, state: "SUCCESS", element: "Project general settings" },
                 })
-                toast.success("Project deleted successfully.")
             })
             .catch(() => {
                 captureProjectEvent({
                     eventName: PROJECT_DELETED,
                     payload: { ...project, state: "FAILED", element: "Project general settings" },
                 })
-                toast.error("Something went wrong. Please try again later.")
+                toast.error("Please try again later")
             })
     }
 

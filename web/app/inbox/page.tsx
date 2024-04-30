@@ -83,8 +83,6 @@ const Inbox = observer(() => {
             })
             setInboxItems(response.results.items)
             setInboxPagination(response.results.details)
-        } catch (err) {
-            console.error(err)
         } finally {
             setLoading(false)
         }
@@ -100,9 +98,7 @@ const Inbox = observer(() => {
                 refetchInboxItems()
             } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))))
             mutateUnreadCount()
-        } catch (err) {
-            console.error(err)
-        }
+        } catch {}
     }
 
     const readItem = async (itemId: string | undefined) => {
@@ -120,9 +116,7 @@ const Inbox = observer(() => {
                 })
             )
             mutateUnreadCount()
-        } catch (err) {
-            console.error(err)
-        }
+        } catch {}
     }
 
     const deleteItems = async (itemIds: number[]) => {
@@ -135,9 +129,7 @@ const Inbox = observer(() => {
                 refetchInboxItems()
             } else setInboxItems((prevState) => prevState.filter((item) => !itemIds.includes(parseInt(item.id))))
             mutateUnreadCount()
-        } catch (err) {
-            console.error(err)
-        }
+        } catch {}
     }
 
     useEffect(() => {
@@ -152,8 +144,6 @@ const Inbox = observer(() => {
                 })
                 setInboxItems(response.results.items)
                 setInboxPagination(response.results.details)
-            } catch (err) {
-                console.error(err)
             } finally {
                 setLoading(false)
             }

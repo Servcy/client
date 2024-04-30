@@ -152,7 +152,6 @@ export class ProjectViewIssues extends IssueHelperStore implements IProjectViewI
 
             return response
         } catch (error) {
-            console.error(error)
             this.loader = undefined
             throw error
         }

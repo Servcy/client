@@ -105,7 +105,6 @@ export class ArchivedIssues extends IssueHelperStore implements IArchivedIssues 
 
             return response
         } catch (error) {
-            console.error(error)
             this.loader = undefined
             throw error
         }

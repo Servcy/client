@@ -61,8 +61,8 @@ export const StartTimeTrackerModal: React.FC<TStartTimeTrackerModal> = observer(
             )
             onClose()
         } catch (error: any) {
-            if (error?.response?.status === 400) toast.error("Your timer is already running...")
-            else toast.error("Failed to start timer.")
+            if (error?.response?.status === 400) toast.error("Timer is already running")
+            else toast.error("Please try again later")
         }
     }
     const { issues: projectIssues } = useIssues(EIssuesStoreType.PROJECT)

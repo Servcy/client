@@ -39,10 +39,8 @@ export const DeleteProjectViewModal: React.FC<Props> = observer((props) => {
         await deleteView(workspaceSlug.toString(), projectId.toString(), data.id)
             .then(() => {
                 handleClose()
-
-                toast.success("View deleted successfully.")
             })
-            .catch(() => toast.error("View could not be deleted. Please try again."))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => {
                 setIsDeleteLoading(false)
             })

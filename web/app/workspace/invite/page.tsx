@@ -50,7 +50,6 @@ const InvitationList = observer(() => {
                     router.push("/")
                 }
             })
-            .catch((err) => console.error(err))
     }
 
     const handleReject = () => {
@@ -63,7 +62,6 @@ const InvitationList = observer(() => {
             .then(() => {
                 router.push("/")
             })
-            .catch((err) => console.error(err))
     }
 
     return (

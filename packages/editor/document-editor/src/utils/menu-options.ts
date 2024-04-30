@@ -45,7 +45,7 @@ export const getMenuOptions = ({
       action: () => {
         onActionCompleteHandler({
           title: "Link Copied",
-          message: "Link to the page has been copied to clipboard",
+          message: "Copied to clipboard",
           type: "success",
         });
         CopyPageLink();

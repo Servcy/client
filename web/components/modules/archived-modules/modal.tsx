@@ -38,7 +38,6 @@ export const ArchiveModuleModal: React.FC<Props> = (props) => {
         setIsArchiving(true)
         await archiveModule(workspaceSlug, projectId, moduleId)
             .then(() => {
-                toast.success("Module archived successfully.")
                 onClose()
                 router.push(`/${workspaceSlug}/projects/${projectId}/modules`)
             })

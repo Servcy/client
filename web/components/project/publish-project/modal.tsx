@@ -145,10 +145,7 @@ export const PublishProjectModal: React.FC<Props> = observer((props) => {
                 handleClose()
                 return res
             })
-            .catch((error) => {
-                console.error("error", error)
-                return error
-            })
+            .catch((error) => error)
     }
 
     const handleUnPublishProject = async (publishId: string) => {

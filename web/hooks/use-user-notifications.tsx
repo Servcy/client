@@ -301,11 +301,8 @@ const useUserNotification = (): UseUserNotification => {
 
         await userNotificationServices
             .markAllNotificationsAsRead(workspaceSlug.toString(), markAsReadParams)
-            .then(() => {
-                toast.success("All Notifications marked as read.")
-            })
             .catch(() => {
-                toast.error("Something went wrong. Please try again.")
+                toast.error("Please try again later")
             })
             .finally(() => {
                 notificationMutate()

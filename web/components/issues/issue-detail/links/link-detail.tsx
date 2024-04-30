@@ -54,7 +54,7 @@ export const IssueLinkDetail: FC<TIssueLinkDetail> = (props) => {
                     className="flex w-full items-start justify-between gap-2 cursor-pointer"
                     onClick={() => {
                         copyTextToClipboard(linkDetail.url)
-                        toast.success("Link copied to clipboard")
+                        toast.success("Copied to clipboard")
                     }}
                 >
                     <div className="flex items-start gap-2 truncate">

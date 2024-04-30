@@ -26,7 +26,7 @@ const CustomErrorComponent = () => {
                     setTheme("system")
                     router.push("/login")
                 })
-                .catch(() => toast.error("Failed to sign out. Please try again."))
+                .catch(() => toast.error("Please try again later"))
             googleLogout()
         } finally {
         }

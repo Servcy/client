@@ -87,25 +87,20 @@ export const ImagePickerPopover: React.FC<Props> = observer((props) => {
         formData.append("file", image)
         if (currentWorkspace?.id) formData.append("workspace_id", String(currentWorkspace.id))
 
-        fileService
-            .uploadFile(formData)
-            .then((res) => {
-                const oldValue = value
-                const isUnsplashImage = oldValue?.split("/")[2] === "images.unsplash.com"
+        fileService.uploadFile(formData).then((res) => {
+            const oldValue = value
+            const isUnsplashImage = oldValue?.split("/")[2] === "images.unsplash.com"
 
-                const imageUrl = res.url
-                onChange(imageUrl)
-                setIsImageUploading(false)
-                setImage(null)
-                setIsOpen(false)
+            const imageUrl = res.url
+            onChange(imageUrl)
+            setIsImageUploading(false)
+            setImage(null)
+            setIsOpen(false)
 
-                if (isUnsplashImage) return
+            if (isUnsplashImage) return
 
-                if (oldValue && currentWorkspace) fileService.deleteFile(oldValue)
-            })
-            .catch((err) => {
-                console.error(err)
-            })
+            if (oldValue && currentWorkspace) fileService.deleteFile(oldValue)
+        })
     }
 
     useEffect(() => {

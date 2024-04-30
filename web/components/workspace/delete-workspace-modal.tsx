@@ -69,10 +69,9 @@ export const DeleteWorkspaceModal: React.FC<Props> = observer((props) => {
                         element: "Workspace general settings page",
                     },
                 })
-                toast.success("Workspace deleted successfully.")
             })
             .catch(() => {
-                toast.error("Something went wrong. Please try again later.")
+                toast.error("Please try again later")
                 captureWorkspaceEvent({
                     eventName: WORKSPACE_DELETED,
                     payload: {

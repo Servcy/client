@@ -39,7 +39,6 @@ export const DeactivateAccountModal: React.FC<Props> = (props) => {
 
         await deactivateAccount()
             .then(() => {
-                toast.success("Account deactivated successfully.")
                 mutate("CURRENT_USER_DETAILS", null)
                 setTheme("system")
                 router.push("/")

@@ -103,12 +103,10 @@ export const CustomAnalyticsSidebar: React.FC<Props> = observer((props) => {
 
         analyticsService
             .exportAnalytics(workspaceSlug.toString(), data)
-            .then((res) => {
-                toast.success(res.message)
-
+            .then(() => {
                 trackExportAnalytics()
             })
-            .catch(() => toast.error("There was some error in exporting the analytics. Please try again."))
+            .catch(() => toast.error("Please try again later"))
     }
 
     const cycleDetails = cycleId ? getCycleById(cycleId.toString()) : undefined

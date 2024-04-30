@@ -199,7 +199,6 @@ export class ProjectViewStore implements IProjectViewStore {
                 view: viewId,
             })
         } catch (error) {
-            console.error("Failed to add view to favorites in view store", error)
             runInAction(() => {
                 set(this.viewMap, [viewId, "is_favorite"], false)
             })
@@ -222,7 +221,6 @@ export class ProjectViewStore implements IProjectViewStore {
             })
             await this.viewService.removeViewFromFavorites(workspaceSlug, projectId, viewId)
         } catch (error) {
-            console.error("Failed to remove view from favorites in view store", error)
             runInAction(() => {
                 set(this.viewMap, [viewId, "is_favorite"], true)
             })

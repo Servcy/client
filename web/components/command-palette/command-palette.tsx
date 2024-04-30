@@ -92,7 +92,7 @@ export const CommandPalette: FC = observer(() => {
                 toast.success("Copied to clipboard")
             })
             .catch(() => {
-                toast.error("Some error occurred")
+                toast.error("Please try again later")
             })
     }, [issueId])
 

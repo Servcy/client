@@ -45,18 +45,16 @@ export const StopTimeTrackerModal: FC<TStopTimeTrackerModal> = observer(({ isOpe
                 try {
                     if (!runningTimeTracker) return
                     await createSnapshot(runningTimeTracker["id"], data)
-                    toast.success("The snapshot has been successfully uploaded")
                 } catch (error) {
-                    toast.error("The snapshot could not be uploaded")
+                    toast.error("Please try again later")
                 }
             },
             remove: async (snapshotId: string) => {
                 try {
                     if (!runningTimeTracker) return
                     await removeSnapshot(runningTimeTracker["id"], snapshotId)
-                    toast.success("The snapshot has been successfully removed")
                 } catch (error) {
-                    toast.error("The Snapshot could not be removed")
+                    toast.error("Please try again later")
                 }
             },
         }),

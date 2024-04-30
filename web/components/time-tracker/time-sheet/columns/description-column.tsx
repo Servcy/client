@@ -24,7 +24,7 @@ export const DescriptionColumn: FC<{
         try {
             await updateTimeLog(workspaceSlug.toString(), timeLog.project, timeLog.id, { description })
         } catch {
-            toast.error("Failed to update time log")
+            toast.error("Please try again later")
         }
     })
     return (

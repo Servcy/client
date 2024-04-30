@@ -38,11 +38,10 @@ export const ArchiveCycleModal: React.FC<Props> = (props) => {
         setIsArchiving(true)
         await archiveCycle(workspaceSlug, projectId, cycleId)
             .then(() => {
-                toast.success("Your archives can be found in project archives.")
                 onClose()
                 router.push(`/${workspaceSlug}/projects/${projectId}/cycles`)
             })
-            .catch(() => toast.error("Cycle could not be archived. Please try again."))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => setIsArchiving(false))
     }
 

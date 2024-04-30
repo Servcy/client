@@ -78,8 +78,6 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                                     element: "Create workspace page",
                                 },
                             })
-                            toast.success("Workspace created successfully.")
-
                             if (onSubmit) await onSubmit(res)
                         })
                         .catch(() => {
@@ -90,12 +88,12 @@ export const CreateWorkspaceForm: FC<Props> = observer((props) => {
                                     element: "Create workspace page",
                                 },
                             })
-                            toast.error("Workspace could not be created. Please try again.")
+                            toast.error("Please try again later")
                         })
                 } else setSlugError(true)
             })
             .catch(() => {
-                toast.error("Some error occurred while creating workspace. Please try again.")
+                toast.error("Please try again later")
             })
     }
 

@@ -19,7 +19,6 @@ import {
 } from "lucide-react"
 import { observer } from "mobx-react-lite"
 import { useTheme } from "next-themes"
-import toast from "react-hot-toast"
 import { usePopper } from "react-popper"
 import { mutate } from "swr"
 
@@ -114,13 +113,11 @@ export const WorkspaceSidebarDropdown = observer(() => {
             last_workspace_id: workspace?.id,
         })
     const handleSignOut = async () => {
-        await logOut()
-            .then(() => {
-                mutate("CURRENT_USER_DETAILS", null)
-                setTheme("system")
-                router.push("/")
-            })
-            .catch(() => toast.error("Failed to sign out. Please try again."))
+        await logOut().then(() => {
+            mutate("CURRENT_USER_DETAILS", null)
+            setTheme("system")
+            router.push("/login")
+        })
     }
     const handleItemClick = () => {
         if (window.innerWidth < 768) {

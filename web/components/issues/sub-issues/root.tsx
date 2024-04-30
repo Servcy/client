@@ -131,7 +131,7 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
             copyText: (text: string) => {
                 const originURL = typeof window !== "undefined" && window.location.origin ? window.location.origin : ""
                 copyTextToClipboard(`${originURL}/${text}`).then(() => {
-                    toast.success("Issue link copied to clipboard.")
+                    toast.success("Copied to clipboard")
                 })
             },
             fetchSubIssues: async (workspaceSlug: string, projectId: string, parentIssueId: string) => {
@@ -149,7 +149,6 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
             ) => {
                 try {
                     await createSubIssues(workspaceSlug, projectId, parentIssueId, issueIds)
-                    toast.success("Sub-issues added successfully")
                 } catch (error) {
                     toast.error("Error adding sub-issue")
                 }
@@ -183,7 +182,6 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                         },
                         path: pathname,
                     })
-                    toast.success("Sub-issue updated successfully")
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
                 } catch (error) {
                     captureIssueEvent({
@@ -207,7 +205,6 @@ export const SubIssuesRoot: FC<ISubIssuesRoot> = observer((props) => {
                 try {
                     setSubIssueHelpers(parentIssueId, "issue_loader", issueId)
                     await removeSubIssue(workspaceSlug, projectId, parentIssueId, issueId)
-                    toast.success("Sub-issue removed successfully")
                     captureIssueEvent({
                         eventName: "Sub-issue removed",
                         payload: { id: issueId, state: "SUCCESS", element: "Issue detail page" },

@@ -64,9 +64,6 @@ export default function FigmaConfiguration({ selectedIntegration }: { selectedIn
                 },
                 "Figma"
             )
-            .then(() => {
-                toast.success("Figma configured successfully!")
-            })
             .catch((error: any) => {
                 toast.error(error?.response?.data?.detail || "Something went wrong!")
             })

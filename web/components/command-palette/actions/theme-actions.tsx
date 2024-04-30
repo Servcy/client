@@ -27,7 +27,7 @@ export const CommandPaletteThemeActions: FC<Props> = observer((props) => {
         setTheme(newTheme)
 
         return updateCurrentUserTheme(newTheme).catch(() => {
-            toast.error("Failed to save user theme settings!")
+            toast.error("Please try again later")
         })
     }
 
