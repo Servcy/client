@@ -50,3 +50,9 @@ export const CURRENCY_CODES = [
     { code: "USD", icon: BadgeDollarSign },
     { code: "INR", icon: BadgeIndianRupee },
 ]
+
+export const PLAN_LIMITS = {
+    starter: {
+        invitations: 5,
+    },
+}

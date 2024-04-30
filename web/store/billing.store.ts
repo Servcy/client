@@ -2,6 +2,8 @@ import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { computedFn } from "mobx-utils"
 
+import { PLAN_LIMITS } from "@constants/billing"
+
 import { BillingService } from "@services/billing.service"
 
 import { IRazorpayPlan, IRazorpayPlans, IRazorpaySubscription, IWorkspaceSubscription } from "@servcy/types"
@@ -16,6 +18,7 @@ export interface StoreIBillingStore {
     razorpayPlans: IRazorpayPlans
     // computed
     workspaceInvitationLimit: number
+    isCurrentWorkspaceSubscribed: boolean
     currentWorkspaceSubscription: IWorkspaceSubscription | null
     // computed actions
     getSubscriptionByWorkspaceSlug: (workspaceSlug: string) => IWorkspaceSubscription | undefined
@@ -47,6 +50,7 @@ export class BillingStore implements StoreIBillingStore {
             // computed
             currentWorkspaceSubscription: computed,
             workspaceInvitationLimit: computed,
+            isCurrentWorkspaceSubscribed: computed,
             // actions
             fetchWorkspaceSubscription: action,
             fetchRazorpayPlans: action,
@@ -63,8 +67,14 @@ export class BillingStore implements StoreIBillingStore {
      */
     get workspaceInvitationLimit() {
         const workspaceSlug = this.router.workspaceSlug
-        if (!workspaceSlug) return 5
-        return this.workspaceSubscriptionMap[workspaceSlug]?.limits.invitations || 5
+        if (!workspaceSlug) return PLAN_LIMITS.starter.invitations
+        return this.workspaceSubscriptionMap[workspaceSlug]?.limits.invitations || PLAN_LIMITS.starter.invitations
+    }
+
+    get isCurrentWorkspaceSubscribed() {
+        const workspaceSlug = this.router.workspaceSlug
+        if (!workspaceSlug) return false
+        return this.workspaceSubscriptionMap?.[workspaceSlug]?.plan_details?.name !== "Starter"
     }
 
     /**
