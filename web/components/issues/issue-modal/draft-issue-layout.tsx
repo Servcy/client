@@ -52,8 +52,8 @@ export const DraftIssueLayout: React.FC<DraftIssueProps> = observer((props) => {
     // store hooks
     const { captureIssueEvent } = useEventTracker()
 
-    const handleClose = () => {
-        if (changesMade) {
+    const handleClose = (val: boolean = true) => {
+        if (changesMade && val) {
             Object.entries(changesMade).forEach(([key, value]) => {
                 const issueKey = key as keyof TIssue
                 if (value === null || value === undefined || value === "") delete changesMade[issueKey]
