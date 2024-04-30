@@ -63,7 +63,7 @@ export const UserImageUploadModal: React.FC<Props> = observer((props) => {
 
                 if (value) fileService.deleteFile(value)
             })
-            .catch((err) => toast.error(err?.error ?? "Please try again later"))
+            .catch(() => toast.error("Please try again later"))
             .finally(() => setIsImageUploading(false))
     }
 

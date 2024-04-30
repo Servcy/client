@@ -45,10 +45,8 @@ export const ProjectMemberListItem: React.FC<{
             rate: rate,
             currency: userDetails.rate?.currency ?? "USD",
             per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
-        }).catch((err) => {
-            const error = err.error
-            const errorString = Array.isArray(error) ? error[0] : error
-            toast.error(errorString ?? "Please try again later")
+        }).catch(() => {
+            toast.error("Please try again later")
         })
     }
     const handleRemove = async () => {
@@ -159,10 +157,8 @@ export const ProjectMemberListItem: React.FC<{
                                             currency: value,
                                             per_hour_or_per_project: userDetails.rate?.per_hour_or_per_project ?? true,
                                         }
-                                    ).catch((err) => {
-                                        const error = err.error
-                                        const errorString = Array.isArray(error) ? error[0] : error
-                                        toast.error(errorString ?? "Please try again later")
+                                    ).catch(() => {
+                                        toast.error("Please try again later")
                                     })
                                 }}
                                 input
@@ -203,10 +199,8 @@ export const ProjectMemberListItem: React.FC<{
                                             per_hour_or_per_project: value,
                                             currency: userDetails.rate?.currency ?? "USD",
                                         }
-                                    ).catch((err) => {
-                                        const error = err.error
-                                        const errorString = Array.isArray(error) ? error[0] : error
-                                        toast.error(errorString ?? "Please try again later")
+                                    ).catch(() => {
+                                        toast.error("Please try again later")
                                     })
                                 }}
                                 input
