@@ -114,8 +114,7 @@ export async function startImageUpload(
   };
 
   // Handle FileReader errors
-  reader.onerror = (error) => {
-    console.error("FileReader error: ", error);
+  reader.onerror = () => {
     removePlaceholder(view, id);
     return;
   };
@@ -134,8 +133,7 @@ export async function startImageUpload(
     const transaction = view.state.tr.insert(pos - 1, node).setMeta(uploadKey, { remove: { id } });
 
     view.dispatch(transaction);
-  } catch (error) {
-    console.error("Upload error: ", error);
+  } catch {
     removePlaceholder(view, id);
   }
 }
@@ -152,9 +150,6 @@ const UploadImageHandler = (file: File, uploadFile: UploadFile): Promise<string>
           resolve(imageUrl);
         };
       } catch (error) {
-        if (error instanceof Error) {
-          console.error(error.message);
-        }
         reject(error);
       }
     });

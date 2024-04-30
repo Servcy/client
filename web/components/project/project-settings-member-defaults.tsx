@@ -63,13 +63,9 @@ export const ProjectSettingsMemberDefaults: React.FC = observer(() => {
         await updateProject(workspaceSlug.toString(), projectId.toString(), {
             default_assignee: formData.default_assignee === "none" ? null : formData.default_assignee,
             lead: formData.lead === "none" ? null : formData.lead,
+        }).then(() => {
+            fetchProjectDetails(workspaceSlug.toString(), projectId.toString())
         })
-            .then(() => {
-                fetchProjectDetails(workspaceSlug.toString(), projectId.toString())
-            })
-            .catch((err) => {
-                console.error(err)
-            })
     }
 
     return (

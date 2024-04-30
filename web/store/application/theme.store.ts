@@ -119,8 +119,6 @@ export class ThemeStore implements IThemeStore {
                     themeSettings?.theme?.darkPalette
                 )
             } else unsetCustomCssVariables()
-        } catch (error) {
-            console.error("setting user theme error", error)
-        }
+        } catch {}
     }
 }

@@ -41,9 +41,7 @@ export const CommandPaletteIssueActions: React.FC<Props> = observer((props) => {
         if (!workspaceSlug || !projectId || !issueDetails) return
 
         const payload = { ...formData }
-        await updateIssue(workspaceSlug.toString(), projectId.toString(), issueDetails.id, payload).catch((e) => {
-            console.error(e)
-        })
+        await updateIssue(workspaceSlug.toString(), projectId.toString(), issueDetails.id, payload)
     }
 
     const handleIssueAssignees = (assignee: string) => {

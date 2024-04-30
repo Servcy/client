@@ -553,16 +553,11 @@ export class CycleStore implements ICycleStore {
     archiveCycle = async (workspaceSlug: string, projectId: string, cycleId: string) => {
         const cycleDetails = this.getCycleById(cycleId)
         if (cycleDetails?.archived_at) return
-        await this.cycleArchiveService
-            .archiveCycle(workspaceSlug, projectId, cycleId)
-            .then((response) => {
-                runInAction(() => {
-                    set(this.cycleMap, [cycleId, "archived_at"], response.archived_at)
-                })
+        await this.cycleArchiveService.archiveCycle(workspaceSlug, projectId, cycleId).then((response) => {
+            runInAction(() => {
+                set(this.cycleMap, [cycleId, "archived_at"], response.archived_at)
             })
-            .catch((error) => {
-                console.error("Failed to archive cycle in cycle store", error)
-            })
+        })
     }
 
     /**
@@ -575,15 +570,10 @@ export class CycleStore implements ICycleStore {
     restoreCycle = async (workspaceSlug: string, projectId: string, cycleId: string) => {
         const cycleDetails = this.getCycleById(cycleId)
         if (!cycleDetails?.archived_at) return
-        await this.cycleArchiveService
-            .restoreCycle(workspaceSlug, projectId, cycleId)
-            .then(() => {
-                runInAction(() => {
-                    set(this.cycleMap, [cycleId, "archived_at"], null)
-                })
+        await this.cycleArchiveService.restoreCycle(workspaceSlug, projectId, cycleId).then(() => {
+            runInAction(() => {
+                set(this.cycleMap, [cycleId, "archived_at"], null)
             })
-            .catch((error) => {
-                console.error("Failed to restore cycle in cycle store", error)
-            })
+        })
     }
 }

@@ -134,8 +134,7 @@ export const SpreadsheetQuickAddIssueForm: React.FC<Props> = observer((props) =>
                 payload: { ...payload, state: "FAILED", element: "Spreadsheet quick add" },
                 path: pathname,
             })
-            console.error(err)
-            toast.error(err?.message || "Please try again later")
+            toast.error("Please try again later")
         }
     }
 

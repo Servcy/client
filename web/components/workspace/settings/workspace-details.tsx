@@ -74,7 +74,7 @@ export const WorkspaceDetails: FC = observer(() => {
                     },
                 })
             })
-            .catch((err) => {
+            .catch(() => {
                 captureWorkspaceEvent({
                     eventName: WORKSPACE_UPDATED,
                     payload: {
@@ -82,7 +82,6 @@ export const WorkspaceDetails: FC = observer(() => {
                         element: "Workspace general settings page",
                     },
                 })
-                console.error(err)
             })
         setTimeout(() => {
             setIsLoading(false)
@@ -112,7 +111,7 @@ export const WorkspaceDetails: FC = observer(() => {
 
     const handleCopyUrl = () => {
         if (!currentWorkspace) return
-        copyUrlToClipboard(`${currentWorkspace.slug}`)
+        copyUrlToClipboard(`${currentWorkspace.slug}`).then(() => toast.success("Copied to clipboard"))
     }
 
     useEffect(() => {

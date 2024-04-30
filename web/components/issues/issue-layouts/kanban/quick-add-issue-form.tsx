@@ -120,8 +120,7 @@ export const KanBanQuickAddIssueForm: React.FC<IKanBanQuickAddIssueForm> = obser
                 payload: { ...payload, state: "FAILED", element: "Kanban quick add" },
                 path: pathname,
             })
-            console.error(err)
-            toast.error(err?.message || "Please try again later")
+            toast.error("Please try again later")
         }
     }
 

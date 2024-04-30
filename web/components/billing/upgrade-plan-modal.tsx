@@ -59,8 +59,6 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                 },
             })
             razorpay.open()
-        } catch (error) {
-            console.error(error)
         } finally {
             setIsInitiating("")
         }

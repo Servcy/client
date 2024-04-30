@@ -106,9 +106,7 @@ export const ImageExtension = (deleteImage: DeleteFile, restoreFile: RestoreFile
         try {
           const assetUrlWithWorkspaceId = new URL(src).pathname.substring(1);
           await restoreFile(assetUrlWithWorkspaceId);
-        } catch (error) {
-          console.error("Error restoring image: ", error);
-        }
+        } catch {}
       });
     },
 

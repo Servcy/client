@@ -70,8 +70,7 @@ export const Invitations: React.FC<Props> = (props) => {
                 await handleNextStep()
                 await mutateInvitations()
             })
-            .catch((error) => {
-                console.error(error)
+            .catch(() => {
                 captureEvent(MEMBER_ACCEPTED, {
                     member_id: invitation?.id,
                     role: getUserRole(invitation?.role!),

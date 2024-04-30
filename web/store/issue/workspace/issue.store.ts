@@ -134,7 +134,6 @@ export class WorkspaceIssues extends IssueHelperStore implements IWorkspaceIssue
 
             return response
         } catch (error) {
-            console.error(error)
             this.loader = undefined
             throw error
         }

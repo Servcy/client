@@ -302,7 +302,6 @@ export class ModulesStore implements IModuleStore {
             this.fetchModuleDetails(workspaceSlug, projectId, moduleId)
             return response
         } catch (error) {
-            console.error("Failed to update module in module store", error)
             runInAction(() => {
                 set(this.moduleMap, [moduleId], { ...originalModuleDetails })
             })
@@ -374,7 +373,6 @@ export class ModulesStore implements IModuleStore {
             const response = await this.moduleService.updateModuleLink(workspaceSlug, projectId, moduleId, linkId, data)
             return response
         } catch (error) {
-            console.error("Failed to update module link in module store", error)
             runInAction(() => {
                 set(this.moduleMap, [moduleId, "link_module"], originalModuleDetails?.link_module)
             })
@@ -416,7 +414,6 @@ export class ModulesStore implements IModuleStore {
                 module: moduleId,
             })
         } catch (error) {
-            console.error("Failed to add module to favorites in module store", error)
             runInAction(() => {
                 set(this.moduleMap, [moduleId, "is_favorite"], false)
             })
@@ -439,7 +436,6 @@ export class ModulesStore implements IModuleStore {
             })
             await this.moduleService.removeModuleFromFavorites(workspaceSlug, projectId, moduleId)
         } catch (error) {
-            console.error("Failed to remove module from favorites in module store", error)
             runInAction(() => {
                 set(this.moduleMap, [moduleId, "is_favorite"], true)
             })
@@ -481,16 +477,11 @@ export class ModulesStore implements IModuleStore {
     archiveModule = async (workspaceSlug: string, projectId: string, moduleId: string) => {
         const moduleDetails = this.getModuleById(moduleId)
         if (moduleDetails?.archived_at) return
-        await this.moduleArchiveService
-            .archiveModule(workspaceSlug, projectId, moduleId)
-            .then((response) => {
-                runInAction(() => {
-                    set(this.moduleMap, [moduleId, "archived_at"], response.archived_at)
-                })
+        await this.moduleArchiveService.archiveModule(workspaceSlug, projectId, moduleId).then((response) => {
+            runInAction(() => {
+                set(this.moduleMap, [moduleId, "archived_at"], response.archived_at)
             })
-            .catch((error) => {
-                console.error("Failed to archive module in module store", error)
-            })
+        })
     }
 
     /**
@@ -503,15 +494,10 @@ export class ModulesStore implements IModuleStore {
     restoreModule = async (workspaceSlug: string, projectId: string, moduleId: string) => {
         const moduleDetails = this.getModuleById(moduleId)
         if (!moduleDetails?.archived_at) return
-        await this.moduleArchiveService
-            .restoreModule(workspaceSlug, projectId, moduleId)
-            .then(() => {
-                runInAction(() => {
-                    set(this.moduleMap, [moduleId, "archived_at"], null)
-                })
+        await this.moduleArchiveService.restoreModule(workspaceSlug, projectId, moduleId).then(() => {
+            runInAction(() => {
+                set(this.moduleMap, [moduleId, "archived_at"], null)
             })
-            .catch((error) => {
-                console.error("Failed to restore module in module store", error)
-            })
+        })
     }
 }

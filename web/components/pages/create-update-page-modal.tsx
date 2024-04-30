@@ -76,9 +76,7 @@ export const CreateUpdatePageModal: FC<Props> = (props) => {
                 await createProjectPage(formData)
             }
             handleClose()
-        } catch (error) {
-            console.log(error)
-        }
+        } catch {}
     }
 
     useEffect(() => {

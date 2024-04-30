@@ -131,13 +131,12 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
                     })
                 }))
         } catch (err: any) {
-            console.error(err)
             captureIssueEvent({
                 eventName: ISSUE_CREATED,
                 payload: { ...payload, state: "FAILED", element: "Calendar quick add" },
                 path: pathname,
             })
-            toast.error(err?.message || "Please try again later")
+            toast.error("Please try again later")
         }
     }
 

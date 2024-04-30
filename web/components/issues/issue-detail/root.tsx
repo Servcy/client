@@ -94,9 +94,7 @@ export const IssueDetailRoot: FC<TIssueDetailRoot> = observer((props) => {
             fetch: async (workspaceSlug: string, projectId: string, issueId: string) => {
                 try {
                     await fetchIssue(workspaceSlug, projectId, issueId)
-                } catch (error) {
-                    console.error("Error fetching the parent issue")
-                }
+                } catch {}
             },
             update: async (
                 workspaceSlug: string,

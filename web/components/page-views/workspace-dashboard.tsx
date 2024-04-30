@@ -38,16 +38,12 @@ export const WorkspaceDashboardView = observer(() => {
     const emptyStateImage = getEmptyStateImagePath("onboarding", "dashboard", isLightMode)
 
     const handleTourCompleted = () => {
-        updateTourCompleted()
-            .then(() => {
-                captureEvent(PRODUCT_TOUR_COMPLETED, {
-                    user_id: currentUser?.id,
-                    state: "SUCCESS",
-                })
+        updateTourCompleted().then(() => {
+            captureEvent(PRODUCT_TOUR_COMPLETED, {
+                user_id: currentUser?.id,
+                state: "SUCCESS",
             })
-            .catch((error) => {
-                console.error(error)
-            })
+        })
     }
 
     // fetch home dashboard widgets on workspace change

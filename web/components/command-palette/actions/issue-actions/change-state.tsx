@@ -29,9 +29,7 @@ export const ChangeIssueState: React.FC<Props> = observer((props) => {
         if (!workspaceSlug || !projectId || !issue) return
 
         const payload = { ...formData }
-        await updateIssue(workspaceSlug.toString(), projectId.toString(), issue.id, payload).catch((e) => {
-            console.error(e)
-        })
+        await updateIssue(workspaceSlug.toString(), projectId.toString(), issue.id, payload)
     }
 
     const handleIssueState = (stateId: string) => {

@@ -39,7 +39,7 @@ export const EmailNotificationForm: FC<IEmailNotificationFormProps> = (props) =>
                 [key]: formData[key as keyof IUserEmailNotificationSettings],
             }
         })
-        await userService.updateCurrentUserEmailNotificationSettings(payload).catch((err) => console.error(err))
+        await userService.updateCurrentUserEmailNotificationSettings(payload)
     }
 
     return (

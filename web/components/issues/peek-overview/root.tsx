@@ -87,9 +87,7 @@ export const IssuePeekOverview: FC<IIssuePeekOverview> = observer((props) => {
                         issueId,
                         is_archived ? "ARCHIVED" : is_draft ? "DRAFT" : "DEFAULT"
                     )
-                } catch (error) {
-                    console.error("Error fetching the parent issue")
-                }
+                } catch {}
             },
             update: async (
                 workspaceSlug: string,

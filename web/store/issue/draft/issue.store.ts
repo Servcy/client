@@ -118,7 +118,6 @@ export class DraftIssues extends IssueHelperStore implements IDraftIssues {
 
             return response
         } catch (error) {
-            console.error(error)
             this.loader = undefined
             throw error
         }

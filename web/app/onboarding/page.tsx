@@ -68,17 +68,13 @@ const OnboardingPage = observer(() => {
     }
     const finishOnboarding = async () => {
         if (!user || !workspacesList) return
-        await updateUserOnBoard()
-            .then(() => {
-                captureEvent(USER_ONBOARDING_COMPLETED, {
-                    email: user.email,
-                    user_id: user.id,
-                    status: "SUCCESS",
-                })
+        await updateUserOnBoard().then(() => {
+            captureEvent(USER_ONBOARDING_COMPLETED, {
+                email: user.email,
+                user_id: user.id,
+                status: "SUCCESS",
             })
-            .catch((error) => {
-                console.error(error)
-            })
+        })
         router.push("/")
     }
     useEffect(() => {

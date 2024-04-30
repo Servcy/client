@@ -98,8 +98,7 @@ export const SendProjectInvitationModal: React.FC<Props> = observer((props) => {
                     element: "Project settings members page",
                 })
             })
-            .catch((error) => {
-                console.error(error)
+            .catch(() => {
                 captureEvent(PROJECT_MEMBER_ADDED, {
                     state: "FAILED",
                     element: "Project settings members page",

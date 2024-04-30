@@ -5,7 +5,5 @@ export const trackEvent = (eventName: string, payload: object | [] | null = null
         posthog?.capture(eventName, {
             ...payload,
         })
-    } catch (error) {
-        console.error(error)
-    }
+    } catch {}
 }

@@ -82,8 +82,6 @@ const Integrations = observer(() => {
         const oauthUrlGenerator = oauthUrlGenerators[integration.name]
         if (oauthUrlGenerator) {
             window.location.href = oauthUrlGenerator(window.location.href)
-        } else {
-            console.error(`Unknown integration: ${integration.name}`)
         }
     }
 
