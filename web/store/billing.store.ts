@@ -18,6 +18,7 @@ export interface StoreIBillingStore {
     workspaceInvitationLimit: number
     currentWorkspaceSubscription: IWorkspaceSubscription | null
     // computed actions
+    getSubscriptionByWorkspaceSlug: (workspaceSlug: string) => IWorkspaceSubscription | undefined
     getPlanByName: (name: string) => IRazorpayPlan | undefined
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
@@ -74,6 +75,13 @@ export class BillingStore implements StoreIBillingStore {
         if (!workspaceSlug) return null
         return this.workspaceSubscriptionMap[workspaceSlug] || null
     }
+
+    /**
+     * Returns subscription by workspace slug
+     * @param workspaceSlug
+     * @returns IWorkspaceSubscription | undefined
+     */
+    getSubscriptionByWorkspaceSlug = (workspaceSlug: string) => this.workspaceSubscriptionMap?.[workspaceSlug]
 
     /**
      * Returns plan by name

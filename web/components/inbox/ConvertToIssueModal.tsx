@@ -1,6 +1,6 @@
 import { usePathname } from "next/navigation"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
 import { observer } from "mobx-react-lite"
@@ -9,7 +9,7 @@ import toast from "react-hot-toast"
 
 import { DateDropdown, PriorityDropdown, ProjectDropdown, WorkspaceDropdown } from "@components/dropdowns"
 
-import { useEventTracker, useIssues, useMention, useWorkspace } from "@hooks/store"
+import { useBilling, useEventTracker, useIssues, useMention, useWorkspace } from "@hooks/store"
 
 import { ISSUE_CREATED } from "@constants/event-tracker"
 import { EIssuesStoreType } from "@constants/issue"
@@ -32,6 +32,8 @@ const fileService = new FileService()
 
 const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props) => {
     const { isOpen, onClose, data } = props
+    const { fetchWorkspaceSubscription, workspaceSubscriptionMap, getSubscriptionByWorkspaceSlug } = useBilling()
+    const [canCreateIssue, setCanCreateIssue] = useState(true)
     const pathname = usePathname()
     const {
         formState: { isSubmitting },
@@ -105,6 +107,20 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
         }
         return undefined
     }
+    useEffect(() => {
+        if (!workspaceId || !workspaces?.[workspaceId] || !workspaces?.[workspaceId]?.slug) return
+        fetchWorkspaceSubscription(workspaces?.[workspaceId]?.slug)
+    }, [workspaceId, workspaces])
+    useEffect(() => {
+        if (!workspaceId || !workspaces?.[workspaceId] || !workspaces[workspaceId]?.slug) return
+        const currentPlan = getSubscriptionByWorkspaceSlug(workspaces[workspaceId].slug)
+        if (currentPlan?.plan_details?.name === "Starter") {
+            toast.error("Please upgrade your subscription")
+            setCanCreateIssue(false)
+        } else {
+            setCanCreateIssue(true)
+        }
+    }, [workspaceSubscriptionMap, workspaceId, workspaces])
 
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -313,7 +329,7 @@ const ConvertToIssueModal: React.FC<ConvertToIssueModalProps> = observer((props)
                                                 type="submit"
                                                 size="sm"
                                                 loading={isSubmitting}
-                                                disabled={!projectId || !workspaceId}
+                                                disabled={!projectId || !workspaceId || !canCreateIssue}
                                             >
                                                 {isSubmitting ? "Creating..." : "Create issue"}
                                             </Button>
