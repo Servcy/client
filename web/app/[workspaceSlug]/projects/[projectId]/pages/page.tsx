@@ -125,7 +125,7 @@ const ProjectPagesPage = observer(() => {
                             projectId={projectId.toString()}
                         />
                     )}
-                    <div className="flex h-full flex-col md:space-y-5 overflow-hidden md:py-6">
+                    <div className="flex h-full flex-col space-y-5 overflow-hidden md:py-6">
                         <div className="justify-between gap-4 hidden md:flex px-6">
                             <h3 className="text-2xl font-semibold text-custom-text-100">Pages</h3>
                         </div>
