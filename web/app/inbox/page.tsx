@@ -200,7 +200,7 @@ const Inbox = observer(() => {
                                         <span>{filterByIAmMentionedButtonText}</span>
                                     </ServcyButton>
                                     <Button
-                                        className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
+                                        className="mr-2 text-sm hover:!border-red-400 max-md:hidden hover:!text-red-400"
                                         disabled={inboxItems.length === 0}
                                         onClick={() => {
                                             if (activeTab !== "archived")
@@ -214,7 +214,7 @@ const Inbox = observer(() => {
                                         </span>
                                     </Button>
                                     <Button
-                                        className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400"
+                                        className="mr-2 text-sm hover:!border-red-400 hover:!text-red-400 max-md:hidden"
                                         disabled={selectedItemIds.length === 0}
                                         onClick={() => {
                                             if (activeTab !== "archived")
