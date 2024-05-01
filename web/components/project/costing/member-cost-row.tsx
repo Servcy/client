@@ -55,7 +55,7 @@ export const MemberCostRow: React.FC<{
         : Number(rate) ?? 0
     return (
         <>
-            <div className="group flex items-center justify-between px-3 py-4 hover:bg-custom-background-90">
+            <div className="group w-max flex items-center justify-between px-3 py-4 hover:bg-custom-background-90 gap-x-4">
                 <div className="flex items-center gap-x-4 gap-y-2">
                     {userDetails.member.avatar && userDetails.member.avatar !== "" ? (
                         <Link href={`/${workspaceSlug}/profile/${userDetails.member.id}`}>

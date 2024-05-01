@@ -47,7 +47,7 @@ export const MemberCostList: React.FC<{
             {!projectMemberIds ? (
                 <MembersSettingsLoader />
             ) : (
-                <div className="divide-y divide-custom-border-100">
+                <div className="divide-y divide-custom-border-100 horizontal-scrollbar scrollbar-sm">
                     {projectMemberIds.length > 0
                         ? searchedMembers.map((userId) => (
                               <MemberCostRow
