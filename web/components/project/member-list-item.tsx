@@ -83,7 +83,7 @@ export const ProjectMemberListItem: React.FC<{
                 data={userDetails.member}
                 onSubmit={handleRemove}
             />
-            <div className="group flex items-center justify-between px-3 py-4 hover:bg-custom-background-90">
+            <div className="group flex items-center justify-between px-3 py-4 hover:bg-custom-background-90 max-md:flex-wrap">
                 <div className="flex items-center gap-x-4 gap-y-2">
                     {userDetails.member.avatar && userDetails.member.avatar !== "" ? (
                         <Link href={`/${workspaceSlug}/profile/${userDetails.member.id}`}>
@@ -121,7 +121,7 @@ export const ProjectMemberListItem: React.FC<{
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs">
+                <div className="flex items-center gap-2 text-xs max-md:flex-wrap">
                     {!Number.isNaN(userDetails.rate?.rate) && currentWorkspaceRole === ERoles.ADMIN && (
                         <>
                             <Input
