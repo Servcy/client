@@ -83,7 +83,7 @@ export const ProjectMemberListItem: React.FC<{
                 data={userDetails.member}
                 onSubmit={handleRemove}
             />
-            <div className="group flex items-center justify-between px-3 py-4 hover:bg-custom-background-90 max-md:flex-wrap">
+            <div className="group flex items-center justify-between px-3 py-4 hover:bg-custom-background-90 max-md:flex-wrap gap-4">
                 <div className="flex items-center gap-x-4 gap-y-2">
                     {userDetails.member.avatar && userDetails.member.avatar !== "" ? (
                         <Link href={`/${workspaceSlug}/profile/${userDetails.member.id}`}>
