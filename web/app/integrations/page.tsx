@@ -166,6 +166,7 @@ const Integrations = observer(() => {
                                                     setIsModalVisible(true)
                                                 }}
                                                 variant="outline-primary"
+                                                className="max-sm:hidden"
                                             >
                                                 <AiOutlineSetting /> Settings
                                             </Button>
