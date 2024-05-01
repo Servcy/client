@@ -55,7 +55,7 @@ export const MemberCostRow: React.FC<{
         : Number(rate) ?? 0
     return (
         <>
-            <div className="group w-max flex items-center justify-between px-3 py-4 hover:bg-custom-background-90 gap-x-4">
+            <div className="group flex items-center justify-between px-3 py-4 hover:bg-custom-background-90 gap-4 max-md:flex-wrap">
                 <div className="flex items-center gap-x-4 gap-y-2">
                     {userDetails.member.avatar && userDetails.member.avatar !== "" ? (
                         <Link href={`/${workspaceSlug}/profile/${userDetails.member.id}`}>
@@ -103,7 +103,7 @@ export const MemberCostRow: React.FC<{
                                 if (Number.isNaN(Number(e.target.value))) return
                                 setRate(e.target.value)
                             }}
-                            className="focus:border-green-300 w-28 max-md:hidden"
+                            className="focus:border-green-300 w-28"
                         />
                         <CustomSelect
                             label={
@@ -124,7 +124,6 @@ export const MemberCostRow: React.FC<{
                                 })
                             }}
                             input
-                            className="max-md:hidden"
                             optionsClassName="w-full"
                         >
                             {CURRENCY_CODES.map((currency) => (
@@ -162,7 +161,7 @@ export const MemberCostRow: React.FC<{
                                 })
                             }}
                             input
-                            className="w-32 max-md:hidden"
+                            className="w-32"
                         >
                             <CustomSelect.Option value={true}>
                                 <div className="flex items-center gap-2">
