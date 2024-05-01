@@ -44,12 +44,6 @@ export interface IRazorpayPlan {
     created_at: number
 }
 
-export interface IRazorpayPlans {
-    entity: string
-    count: number
-    items: IRazorpayPlan[]
-}
-
 export interface IRazorpaySubscription {
     id: string
     entity: string

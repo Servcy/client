@@ -7,7 +7,6 @@ import React, { FC, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
 import { BadgeCheckIcon, BadgeDollarSign, BadgeIndianRupee, Loader, ShieldCheck } from "lucide-react"
-import useSWR from "swr"
 
 import { useBilling, useUser } from "@hooks/store"
 
@@ -27,14 +26,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
     const { workspaceSlug } = useParams()
     const [isInrSelected, setIsInrSelected] = useState(true)
     const [isInitiating, setIsInitiating] = useState("")
-    const { fetchRazorpayPlans, createRazorpaySubscription, cancelSubscription, currentWorkspaceSubscription } =
-        useBilling()
-    // fetching razorpay plans
-    useSWR(
-        workspaceSlug ? `RAZORPAY_PLANS_${workspaceSlug}` : null,
-        workspaceSlug ? () => fetchRazorpayPlans(workspaceSlug.toString()) : null,
-        { revalidateIfStale: false, revalidateOnFocus: false }
-    )
+    const { createRazorpaySubscription, cancelSubscription, currentWorkspaceSubscription } = useBilling()
     const initiateSubscription = async (planName: string) => {
         try {
             setIsInitiating(planName)

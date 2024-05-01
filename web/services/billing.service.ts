@@ -2,7 +2,7 @@ import { APIService } from "@services/api.service"
 
 import { API_BASE_URL } from "@helpers/common.helper"
 
-import { IRazorpayPlans, IRazorpaySubscription, IWorkspaceSubscription } from "@servcy/types"
+import { IRazorpaySubscription, IWorkspaceSubscription } from "@servcy/types"
 
 export class BillingService extends APIService {
     constructor() {
@@ -17,16 +17,8 @@ export class BillingService extends APIService {
             })
     }
 
-    async fetchRazorpayPlans(workspaceSlug: string): Promise<IRazorpayPlans> {
-        return this.get(`/billing/${workspaceSlug}/razorpay`)
-            .then((response) => response?.data)
-            .catch((error) => {
-                throw error?.response
-            })
-    }
-
-    async createRazorpaySubscription(workspaceSlug: string, planId: string): Promise<IRazorpaySubscription> {
-        return this.post(`/billing/${workspaceSlug}/razorpay`, { plan_id: planId })
+    async createRazorpaySubscription(workspaceSlug: string, planName: string): Promise<IRazorpaySubscription> {
+        return this.post(`/billing/${workspaceSlug}/razorpay`, { plan_name: planName })
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response

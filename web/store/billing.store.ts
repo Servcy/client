@@ -1,12 +1,11 @@
 import set from "lodash/set"
 import { action, computed, makeObservable, observable, runInAction } from "mobx"
-import { computedFn } from "mobx-utils"
 
 import { PLAN_LIMITS } from "@constants/billing"
 
 import { BillingService } from "@services/billing.service"
 
-import { IRazorpayPlan, IRazorpayPlans, IRazorpaySubscription, IWorkspaceSubscription } from "@servcy/types"
+import { IRazorpaySubscription, IWorkspaceSubscription } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
@@ -15,18 +14,15 @@ export interface StoreIBillingStore {
     workspaceSubscriptionMap: {
         [workspaceSlug: string]: IWorkspaceSubscription
     }
-    razorpayPlans: IRazorpayPlans
     // computed
     workspaceInvitationLimit: number
     isCurrentWorkspaceSubscribed: boolean
     currentWorkspaceSubscription: IWorkspaceSubscription | null
     // computed actions
     getSubscriptionByWorkspaceSlug: (workspaceSlug: string) => IWorkspaceSubscription | undefined
-    getPlanByName: (name: string) => IRazorpayPlan | undefined
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
     cancelSubscription: (workspaceSlug: string) => Promise<void>
-    fetchRazorpayPlans: (workspaceSlug: string) => Promise<IRazorpayPlans>
     createRazorpaySubscription: (workspaceSlug: string, planName: string) => Promise<IRazorpaySubscription>
 }
 
@@ -35,7 +31,6 @@ export class BillingStore implements StoreIBillingStore {
     workspaceSubscriptionMap: {
         [workspaceSlug: string]: IWorkspaceSubscription
     } = {}
-    razorpayPlans = {} as IRazorpayPlans
     // services
     billingService
     // root store
@@ -46,14 +41,12 @@ export class BillingStore implements StoreIBillingStore {
         makeObservable(this, {
             // observables
             workspaceSubscriptionMap: observable,
-            razorpayPlans: observable,
             // computed
             currentWorkspaceSubscription: computed,
             workspaceInvitationLimit: computed,
             isCurrentWorkspaceSubscribed: computed,
             // actions
             fetchWorkspaceSubscription: action,
-            fetchRazorpayPlans: action,
             cancelSubscription: action,
             createRazorpaySubscription: action,
         })
@@ -94,17 +87,6 @@ export class BillingStore implements StoreIBillingStore {
     getSubscriptionByWorkspaceSlug = (workspaceSlug: string) => this.workspaceSubscriptionMap?.[workspaceSlug]
 
     /**
-     * Returns plan by name
-     * @param name
-     * @returns IRazorpayPlan | undefined
-     */
-    getPlanByName = computedFn((name: string) =>
-        this.razorpayPlans.items.find(
-            (plan) => plan.item.name.toString().toLowerCase() === name.toString().toLowerCase()
-        )
-    )
-
-    /**
      * Fetches the current user workspace info
      * @param workspaceSlug
      * @returns Promise<IWorkspaceSubscription>
@@ -118,28 +100,13 @@ export class BillingStore implements StoreIBillingStore {
         })
 
     /**
-     * Fetches the current user workspace info
-     * @returns Promise<IRazorpayPlans>
-     */
-    fetchRazorpayPlans = async (workspaceSlug: string) =>
-        await this.billingService.fetchRazorpayPlans(workspaceSlug).then((response) => {
-            runInAction(() => {
-                this.razorpayPlans = response
-            })
-            return response
-        })
-
-    /**
      * Initiate the subscription process
      * @param workspaceSlug
      * @param planName
      * @returns Promise<IRazorpaySubscription>
      */
-    createRazorpaySubscription = async (workspaceSlug: string, planName: string) => {
-        const plan = this.getPlanByName(planName)
-        if (!plan) throw new Error("Plan not found")
-        return await this.billingService.createRazorpaySubscription(workspaceSlug, plan.id)
-    }
+    createRazorpaySubscription = async (workspaceSlug: string, planName: string) =>
+        await this.billingService.createRazorpaySubscription(workspaceSlug, planName)
 
     /**
      * Cancel the current subscription
