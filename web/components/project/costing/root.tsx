@@ -112,7 +112,7 @@ export const ProjectCostAnalysisRoot = observer(() => {
                     }
                 />
             ) : memberTimeLogData ? (
-                <div className="grid gap-4 px-3 py-3.5 max-md:grid-cols-1 md:grid-cols-2">
+                <div className="grid gap-4 px-3 py-3.5 max-lg:grid-cols-1 lg:grid-cols-2">
                     <div className="hover:shadow-custom-shadow-4xl bg-custom-background-100 border-custom-border-200 overflow-hidden rounded-xl border-[0.5px] px-3.5 py-6 duration-300">
                         <div className="flex items-center justify-center space-y-4">
                             <div className="bg-custom-background-80 text-custom-text-200 rounded px-3.5 py-3 text-center font-medium capitalize">
