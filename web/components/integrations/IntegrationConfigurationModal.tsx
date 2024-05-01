@@ -105,7 +105,7 @@ export default function IntegrationConfigurationModal({
                             >
                                 <div className="truncate">{userIntegration.account_display_name}</div>
                                 <button
-                                    className="ml-4 cursor-not-allowed rounded p-2 bg-custom-servcy-gray text-custom-text-300"
+                                    className="ml-4 cursor-not-allowed rounded max-md:hidden p-2 bg-custom-servcy-gray text-custom-text-300"
                                     disabled
                                 >
                                     Disconnect
@@ -128,7 +128,7 @@ export default function IntegrationConfigurationModal({
                     }
                     loading={loading}
                 >
-                    <div className="grid max-h-[400px] grid-cols-2 gap-2 overflow-auto">
+                    <div className="grid max-h-[400px] md:grid-cols-2 gap-2 overflow-auto max-md:grid-cols-1">
                         {events.map((event) => (
                             <div key={event.id} className="flex flex-row">
                                 <Checkbox
@@ -153,7 +153,7 @@ export default function IntegrationConfigurationModal({
             )}
             {["Github", "Figma", "Gmail", "Outlook"].includes(selectedIntegration.name) && (
                 <Card
-                    className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200"
+                    className="mt-4 rounded-lg bg-custom-background-90 border-[0.5px] border-custom-border-200 overflow-auto"
                     title={<div className="text-custom-text-200">Additional Configuration</div>}
                 >
                     {selectedIntegration.name === "Github" && <GithubConfiguration />}
