@@ -11,7 +11,7 @@ import useSWR from "swr"
 
 import { useBilling, useUser } from "@hooks/store"
 
-import { offerings, plans } from "@constants/billing"
+import { plans } from "@constants/billing"
 
 import { IRazorpaySubscription } from "@servcy/types"
 import { Button, TButtonVariant, ToggleSwitch } from "@servcy/ui"
@@ -123,21 +123,29 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                     </div>
                                                 </div>
                                                 <div className="mb-6 h-16 border-b-2 border-neutral-500 pb-4">
-                                                    {!isInrSelected ? (
-                                                        <span className="text-3xl font-extrabold text-custom-servcy-wheat">
-                                                            $
-                                                        </span>
+                                                    {plan.usdPrice && plan.inrPrice ? (
+                                                        <>
+                                                            {!isInrSelected ? (
+                                                                <span className="text-3xl font-extrabold text-custom-servcy-wheat">
+                                                                    $
+                                                                </span>
+                                                            ) : (
+                                                                <span className="text-3xl font-extrabold text-custom-servcy-wheat">
+                                                                    &#8377;
+                                                                </span>
+                                                            )}
+                                                            <span className="ml-1 text-3xl font-extrabold text-custom-servcy-wheat">
+                                                                {!isInrSelected ? plan.usdPrice : plan.inrPrice}
+                                                            </span>
+                                                            <span className="text-xl font-extrabold text-custom-servcy-silver">
+                                                                /mo
+                                                            </span>
+                                                        </>
                                                     ) : (
-                                                        <span className="text-3xl font-extrabold text-custom-servcy-wheat">
-                                                            &#8377;
+                                                        <span className="text-stone-400 text-sm">
+                                                            Get a custom demo and see how Servcy aligns with your goals.
                                                         </span>
                                                     )}
-                                                    <span className="ml-1 text-3xl font-extrabold text-custom-servcy-wheat">
-                                                        {!isInrSelected ? plan.usdPrice : plan.inrPrice}
-                                                    </span>
-                                                    <span className="text-xl font-extrabold text-custom-servcy-silver">
-                                                        /mo
-                                                    </span>
                                                 </div>
                                                 <div className="mb-4">
                                                     <Button
@@ -147,7 +155,17 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                             currentWorkspaceSubscription?.plan_details.name ===
                                                                 plan.name || isInitiating !== ""
                                                         }
-                                                        onClick={() => initiateSubscription(plan.name)}
+                                                        onClick={() => {
+                                                            if (plan.usdPrice && plan.inrPrice)
+                                                                initiateSubscription(plan.name)
+                                                            else {
+                                                                window.open(
+                                                                    "https://calendly.com/servcy/demo",
+                                                                    "_blank",
+                                                                    "noopener,noreferrer"
+                                                                )
+                                                            }
+                                                        }}
                                                         variant={plan.buttonVariant as TButtonVariant}
                                                     >
                                                         {isInitiating !== plan.name ? (
@@ -175,25 +193,12 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         </Button>
                                                     )}
                                                 </div>
-                                                {plan.differentiators.map((diff) => (
-                                                    <div className="my-2 flex text-sm items-center" key={diff}>
+                                                {plan.offerings.map((offer) => (
+                                                    <div className="my-2 flex text-sm items-center" key={offer}>
                                                         <BadgeCheckIcon className="mr-2 size-4 text-custom-text-100" />
-                                                        <span className="text-custom-text-100">{diff}</span>
+                                                        <span className="text-custom-text-100 truncate">{offer}</span>
                                                     </div>
                                                 ))}
-                                                {offerings
-                                                    .filter((offer) => !offer.comingSoon)
-                                                    .map((offer) => (
-                                                        <div
-                                                            className="my-2 flex text-sm items-center"
-                                                            key={offer.text}
-                                                        >
-                                                            <BadgeCheckIcon className="mr-2 size-4 text-custom-text-100" />
-                                                            <span className="text-custom-text-100 truncate">
-                                                                {offer.text}
-                                                            </span>
-                                                        </div>
-                                                    ))}
                                             </div>
                                         ))}
                                     </div>
