@@ -163,7 +163,7 @@ const InboxItems = ({
                     <Tooltip title="Create a task from this inbox item">
                         <Button
                             type="primary"
-                            className="bg-custom-servcy-cream text-custom-servcy-black hover:!bg-custom-servcy-wheat"
+                            className="bg-custom-servcy-cream max-md:hidden text-custom-servcy-black hover:!bg-custom-servcy-wheat"
                             size="small"
                             icon={<MdAddTask className="mt-1" />}
                             onClick={() => {
