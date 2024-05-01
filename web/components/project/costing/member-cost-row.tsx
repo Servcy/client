@@ -92,7 +92,7 @@ export const MemberCostRow: React.FC<{
                     </div>
                 </div>
                 {!Number.isNaN(userDetails.rate?.rate) && currentWorkspaceRole === ERoles.ADMIN && (
-                    <div className="flex items-center gap-2 text-xs">
+                    <div className="flex items-center gap-2 text-xs max-md:flex-wrap">
                         <Input
                             id={`project-member.${userDetails.member.id}.rate`}
                             type="text"
