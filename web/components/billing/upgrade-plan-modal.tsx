@@ -6,7 +6,7 @@ import { useParams } from "next/navigation"
 import React, { FC, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { BadgeCheckIcon, BadgeDollarSign, BadgeIndianRupee, Loader } from "lucide-react"
+import { BadgeCheckIcon, BadgeDollarSign, BadgeIndianRupee, Loader, ShieldCheck } from "lucide-react"
 import useSWR from "swr"
 
 import { useBilling, useUser } from "@hooks/store"
@@ -193,6 +193,14 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         </Button>
                                                     )}
                                                 </div>
+                                                {plan.addedBenefits && (
+                                                    <div className="my-2 flex text-sm items-center">
+                                                        <ShieldCheck className="mr-2 size-4 text-custom-text-100" />
+                                                        <span className="text-custom-text-100 truncate">
+                                                            {plan.addedBenefits}
+                                                        </span>
+                                                    </div>
+                                                )}
                                                 {plan.offerings.map((offer) => (
                                                     <div className="my-2 flex text-sm items-center" key={offer}>
                                                         <BadgeCheckIcon className="mr-2 size-4 text-custom-text-100" />

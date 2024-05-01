@@ -6,6 +6,7 @@ export const plans = {
         description: "For startups that are making waves.",
         icon: "/plans/plus.svg",
         inrPrice: "7,999",
+        addedBenefits: "Everything in Starter",
         usdPrice: "99",
         buttonVariant: "outline-primary",
         offerings: [
@@ -31,6 +32,7 @@ export const plans = {
         name: "Business",
         description: "For businesses that are growing.",
         icon: "/plans/business.svg",
+        addedBenefits: "Everything in Plus",
         buttonVariant: "primary",
         inrPrice: "11,999",
         buttonIcon: Sparkles,
@@ -51,6 +53,7 @@ export const plans = {
         name: "Enterprise",
         description: "For enterprises that are scaling.",
         buttonVariant: "outline-primary",
+        addedBenefits: "Everything in Business",
         buttonIcon: Flame,
         differentiators: ["Seats for more than 50 techies"],
         icon: "/plans/enterprise.svg",
