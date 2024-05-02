@@ -187,8 +187,8 @@ export const WorkspaceMembersListItem: FC<Props> = observer((props) => {
                                     updateMember(workspaceSlug.toString(), memberDetails.member.id, {
                                         auto_approve_tracked_time: value,
                                         role: memberDetails.role,
-                                    }).catch(() => {
-                                        toast.error("Please try again later")
+                                    }).catch((error) => {
+                                        toast.error(error?.error ?? "Please try again later")
                                     })
                                 }}
                             />
