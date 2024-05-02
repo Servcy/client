@@ -96,7 +96,10 @@ export const CalendarQuickAddIssueForm: React.FC<Props> = observer((props) => {
 
     useEffect(() => {
         if (!errors) return
-        toast.error("Please try again later")
+        Object.keys(errors).forEach((key) => {
+            const error = errors[key as keyof TIssue]
+            toast.error(error?.message?.toString() || "Please try again later")
+        })
     }, [errors])
 
     const onSubmitHandler = async (formData: TIssue) => {
