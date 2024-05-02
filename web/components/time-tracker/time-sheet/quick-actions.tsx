@@ -1,6 +1,8 @@
+import { useParams, useRouter } from "next/navigation"
+
 import { useState } from "react"
 
-import { Pencil, Trash2 } from "lucide-react"
+import { Link2, Trash2 } from "lucide-react"
 import { observer } from "mobx-react"
 
 import { DeleteTimeLogModal } from "@components/time-tracker"
@@ -21,6 +23,14 @@ export const TimeLogQuickActions: React.FC<IQuickActionProps> = observer((props)
     const { timeLog, handleDelete, customActionButton, portalElement } = props
     const [deleteModal, setDeleteModal] = useState(false)
     const { currentUser } = useUser()
+    const { workspaceSlug } = useParams()
+    const router = useRouter()
+    const openIssue = () => {
+        const projectId = timeLog.project
+        const issueId = timeLog.issue
+        if (!projectId || !issueId || !workspaceSlug) return
+        router.push(`/${workspaceSlug}/projects/${projectId}/issues/${issueId}`)
+    }
 
     return (
         <>
@@ -51,6 +61,16 @@ export const TimeLogQuickActions: React.FC<IQuickActionProps> = observer((props)
                         </div>
                     </CustomMenu.MenuItem>
                 )}
+                <CustomMenu.MenuItem
+                    onClick={() => {
+                        openIssue()
+                    }}
+                >
+                    <div className="flex items-center gap-2">
+                        <Link2 className="h-3 w-3" />
+                        Open Issue
+                    </div>
+                </CustomMenu.MenuItem>
             </CustomMenu>
         </>
     )
