@@ -98,7 +98,7 @@ export const WorkspaceDetails: FC = observer(() => {
         setIsImageRemoving(true)
 
         fileService.deleteFile(url).then(() => {
-            updateWorkspace(currentWorkspace.slug, { logo: "" })
+            updateWorkspace(currentWorkspace.slug, { logo: null })
                 .then(() => {
                     setIsImageUploadModalOpen(false)
                 })
