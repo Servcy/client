@@ -135,11 +135,13 @@ const PageDetailsPage = observer(() => {
 
     const actionCompleteAlert = ({
         message,
+        type,
     }: {
         title: string
         message: string
         type: "success" | "error" | "warning" | "info"
     }) => {
+        if (["success", "info"].includes(type)) toast.success(message)
         toast.error(message)
     }
 
