@@ -142,7 +142,7 @@ const PageDetailsPage = observer(() => {
         type: "success" | "error" | "warning" | "info"
     }) => {
         if (["success", "info"].includes(type)) toast.success(message)
-        toast.error(message)
+        else toast.error(message)
     }
 
     const updatePageTitle = (title: string) => {
