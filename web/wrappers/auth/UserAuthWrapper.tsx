@@ -96,7 +96,7 @@ const UserAuthWrapper: FC<IUserAuthWrapper> = observer((props) => {
     }
 
     if (currentUserError) {
-        const redirectTo = `/login?nextUrl=${encodeURIComponent(pathname)}`
+        const redirectTo = "/login"
         router.replace(redirectTo)
         return null
     }

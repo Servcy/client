@@ -32,5 +32,5 @@ export async function middleware(request: NextRequest) {
     request.cookies.set("accessToken", "")
     request.cookies.set("refreshToken", "")
     if (["/login", "/workspace/invite"].includes(requestedPath)) return null
-    return NextResponse.redirect(new URL("/login?nextUrl=" + encodeURIComponent(requestedPath), request.nextUrl.origin))
+    return NextResponse.redirect(new URL("/login", request.nextUrl.origin))
 }
