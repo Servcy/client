@@ -9,6 +9,12 @@ export const validateEmail = (input: string) => {
     return emailRegex.test(input) || process.env.NODE_ENV === "development" || input.endsWith("@servcy.com")
 }
 
+export const isWorkspaceEmail = (email: string) => {
+    return email.match(
+        /^[a-zA-Z0-9._%+-]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)(?!yahoo.co.in)(?!aol.com)(?!live.com)(?!outlook.com)[a-zA-Z0-9_-]+.[a-zA-Z0-9-.]{2,61}$/
+    )
+}
+
 export const validatePhone = (input: string) => {
     const phoneRegex = /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/g
     return phoneRegex.test(input)

@@ -19,7 +19,7 @@ import useLoginRedirection from "@hooks/use-login-redirection"
 
 import { AuthService } from "@services/auth.service"
 
-import { validateEmail, validateOtp } from "@helpers/validation.helper"
+import { validateEmail, isWorkspaceEmail, validateOtp } from "@helpers/validation.helper"
 
 import { Button, Spinner } from "@servcy/ui"
 
@@ -47,6 +47,10 @@ export default function Login(): JSX.Element {
             const isEmailValid = validateEmail(email.value)
             if (!isEmailValid) {
                 toast.error("Invalid email address")
+                return
+            }
+            if (!isWorkspaceEmail(email.value)) {
+                toast.error("Only workspace emails are allowed")
                 return
             }
             if (!agree_terms_conditions_and_privacy_policy.checked) {
