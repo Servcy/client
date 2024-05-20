@@ -19,7 +19,7 @@ import useLoginRedirection from "@hooks/use-login-redirection"
 
 import { AuthService } from "@services/auth.service"
 
-import { validateEmail, isWorkspaceEmail, validateOtp } from "@helpers/validation.helper"
+import { isWorkspaceEmail, validateEmail, validateOtp } from "@helpers/validation.helper"
 
 import { Button, Spinner } from "@servcy/ui"
 
@@ -84,7 +84,7 @@ export default function Login(): JSX.Element {
             const otpIsValid = validateOtp(otp)
             if (!otpIsValid) return
             // verify otp
-            await toast.promise(authService.verifyOtp(otp, input, inputType), {
+            await toast.promise(authService.verifyOtp(otp, input, inputType, utm_parameters), {
                 loading: "Verifying OTP...",
                 success: "OTP verified successfully",
                 error: "Failed to verify OTP",

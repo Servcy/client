@@ -11,13 +11,23 @@ export class AuthService extends APIService {
         super(API_BASE_URL)
     }
 
-    async verifyOtp(otp: string, input: string, inputType: string): Promise<ILoginTokenResponse> {
+    async verifyOtp(
+        otp: string,
+        input: string,
+        inputType: string,
+        utm_parameters = {
+            utm_source: "",
+            utm_medium: "",
+            utm_campaign: "",
+        }
+    ): Promise<ILoginTokenResponse> {
         return this.post(
             "/authentication",
             {
                 otp,
                 input,
                 input_type: inputType,
+                ...utm_parameters,
             },
             { headers: {} }
         )
@@ -31,23 +41,32 @@ export class AuthService extends APIService {
             })
     }
 
-    async sendOtp(input: string, inputType: string, utm_parameters = {
-        utm_source: "",
-        utm_medium: "",
-        utm_campaign: "",
-    }): Promise<object> {
-        return this.get(`/authentication?input=${input}&input_type=${inputType}&utm_source=${utm_parameters?.utm_source}&utm_medium=${utm_parameters?.utm_medium}&utm_campaign=${utm_parameters?.utm_campaign}`)
+    async sendOtp(
+        input: string,
+        inputType: string,
+        utm_parameters = {
+            utm_source: "",
+            utm_medium: "",
+            utm_campaign: "",
+        }
+    ): Promise<object> {
+        return this.get(
+            `/authentication?input=${input}&input_type=${inputType}&utm_source=${utm_parameters?.utm_source}&utm_medium=${utm_parameters?.utm_medium}&utm_campaign=${utm_parameters?.utm_campaign}`
+        )
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
             })
     }
 
-    async googleLogin(credential: string, utm_parameters = {
-        utm_source: "",
-        utm_medium: "",
-        utm_campaign: "",
-    }): Promise<ILoginTokenResponse> {
+    async googleLogin(
+        credential: string,
+        utm_parameters = {
+            utm_source: "",
+            utm_medium: "",
+            utm_campaign: "",
+        }
+    ): Promise<ILoginTokenResponse> {
         return this.post(
             "/authentication",
             {
