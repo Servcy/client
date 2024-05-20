@@ -28,6 +28,11 @@ const authService = new AuthService()
 export default function Login(): JSX.Element {
     const [inputType, setInputType] = useState<string>("email")
     const [otp, setOtp] = useState<string>("")
+    const [utm_parameters, setUtmParameters] = useState({
+        utm_source: "",
+        utm_medium: "",
+        utm_campaign: "",
+    })
     const [input, setInput] = useState<string>("")
     const [stage, setStage] = useState<number>(0)
     const [loading, setLoading] = useState<boolean>(false)
@@ -60,7 +65,7 @@ export default function Login(): JSX.Element {
             setInputType("email")
             setInput(email.value)
             // send otp
-            await toast.promise(authService.sendOtp(email.value, "email"), {
+            await toast.promise(authService.sendOtp(email.value, "email", utm_parameters), {
                 loading: "Sending OTP...",
                 success: "OTP sent successfully",
                 error: "Failed to send OTP",
@@ -95,7 +100,7 @@ export default function Login(): JSX.Element {
         try {
             setLoading(true)
             // login with google
-            await toast.promise(authService.googleLogin(credential), {
+            await toast.promise(authService.googleLogin(credential, utm_parameters), {
                 loading: "Logging in..",
                 success: "Logged in successfully",
                 error: "Failed to login with Google",
@@ -129,6 +134,21 @@ export default function Login(): JSX.Element {
                     setLoading(false)
                 }
             }
+            if (searchParams.has("utm_source"))
+                setUtmParameters((prev) => ({
+                    ...prev,
+                    utm_source: searchParams.get("utm_source") as string,
+                }))
+            if (searchParams.has("utm_medium"))
+                setUtmParameters((prev) => ({
+                    ...prev,
+                    utm_medium: searchParams.get("utm_medium") as string,
+                }))
+            if (searchParams.has("utm_campaign"))
+                setUtmParameters((prev) => ({
+                    ...prev,
+                    utm_campaign: searchParams.get("utm_campaign") as string,
+                }))
         })()
     }, [searchParams])
 

@@ -31,20 +31,29 @@ export class AuthService extends APIService {
             })
     }
 
-    async sendOtp(input: string, inputType: string): Promise<object> {
-        return this.get(`/authentication?input=${input}&input_type=${inputType}`)
+    async sendOtp(input: string, inputType: string, utm_parameters = {
+        utm_source: "",
+        utm_medium: "",
+        utm_campaign: "",
+    }): Promise<object> {
+        return this.get(`/authentication?input=${input}&input_type=${inputType}&utm_source=${utm_parameters?.utm_source}&utm_medium=${utm_parameters?.utm_medium}&utm_campaign=${utm_parameters?.utm_campaign}`)
             .then((response) => response?.data)
             .catch((error) => {
                 throw error?.response?.data
             })
     }
 
-    async googleLogin(credential: string): Promise<ILoginTokenResponse> {
+    async googleLogin(credential: string, utm_parameters = {
+        utm_source: "",
+        utm_medium: "",
+        utm_campaign: "",
+    }): Promise<ILoginTokenResponse> {
         return this.post(
             "/authentication",
             {
                 ...jwtDecode(credential),
                 type: "google",
+                ...utm_parameters,
             },
             { headers: {} }
         )
