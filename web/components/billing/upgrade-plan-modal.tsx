@@ -3,16 +3,15 @@
 import Image from "next/image"
 import { useParams } from "next/navigation"
 
-import React, { FC, useState } from "react"
+import React, { FC } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { BadgeCheckIcon, Loader, ShieldCheck } from "lucide-react"
+import { BadgeCheckIcon, ShieldCheck } from "lucide-react"
 
-import { useBilling, useUser } from "@hooks/store"
+import { useBilling } from "@hooks/store"
 
 import { plans } from "@constants/billing"
 
-import { IRazorpaySubscription } from "@servcy/types"
 import { Button, TButtonVariant } from "@servcy/ui"
 
 type Props = {
@@ -22,38 +21,8 @@ type Props = {
 
 export const UpgradePlanModal: FC<Props> = (props) => {
     const { isOpen, onClose } = props
-    const { currentUser } = useUser()
     const { workspaceSlug } = useParams()
-    const [isInitiating, setIsInitiating] = useState("")
-    const { createRazorpaySubscription, cancelSubscription, currentWorkspaceSubscription } = useBilling()
-    const initiateSubscription = async (planName: string) => {
-        try {
-            setIsInitiating(planName)
-            if (!workspaceSlug || !planName || !currentUser) return
-            const response = (await createRazorpaySubscription(
-                workspaceSlug.toString(),
-                planName
-            )) as IRazorpaySubscription
-            const key = process.env["NEXT_PUBLIC_RAZORPAY_API_KEY"] ?? ""
-            if (!key) throw new Error("Razorpay API key not found")
-            // @ts-ignore
-            const razorpay = new Razorpay({
-                key: key,
-                subscription_id: response.id,
-                name: "Servcy",
-                description: `${planName} plan`,
-                cancel_url: `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/${workspaceSlug}`,
-                callback_url: `${process.env["NEXT_PUBLIC_CLIENT_URL"]}/${workspaceSlug}`,
-                prefill: {
-                    name: currentUser.display_name,
-                    email: currentUser.email,
-                },
-            })
-            razorpay.open()
-        } finally {
-            setIsInitiating("")
-        }
-    }
+    const { cancelSubscription, currentWorkspaceSubscription } = useBilling()
     if (!workspaceSlug) return null
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -128,12 +97,10 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         size="sm"
                                                         disabled={
                                                             currentWorkspaceSubscription?.plan_details.name ===
-                                                                plan.name || isInitiating !== ""
+                                                                plan.name
                                                         }
                                                         onClick={() => {
-                                                            if (plan.usdPrice && plan.inrPrice)
-                                                                initiateSubscription(plan.name)
-                                                            else {
+                                                            if (!(plan.usdPrice && plan.inrPrice)) {
                                                                 window.open(
                                                                     "https://calendly.com/servcy/demo",
                                                                     "_blank",
@@ -143,11 +110,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         }}
                                                         variant={plan.buttonVariant as TButtonVariant}
                                                     >
-                                                        {isInitiating !== plan.name ? (
-                                                            <plan.buttonIcon className="mr-2" size="24" />
-                                                        ) : (
-                                                            <Loader className="mr-2 animate-spin" size="24" />
-                                                        )}
+                                                        <plan.buttonIcon className="mr-2" size="24" />
                                                         <span className="truncate">
                                                             {currentWorkspaceSubscription?.plan_details.name ===
                                                             plan.name

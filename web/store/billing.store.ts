@@ -5,7 +5,7 @@ import { PLAN_LIMITS } from "@constants/billing"
 
 import { BillingService } from "@services/billing.service"
 
-import { IRazorpaySubscription, IWorkspaceSubscription } from "@servcy/types"
+import { IWorkspaceSubscription } from "@servcy/types"
 
 import { RootStore } from "./root.store"
 
@@ -23,7 +23,6 @@ export interface StoreIBillingStore {
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
     cancelSubscription: (workspaceSlug: string) => Promise<void>
-    createRazorpaySubscription: (workspaceSlug: string, planName: string) => Promise<IRazorpaySubscription>
 }
 
 export class BillingStore implements StoreIBillingStore {
@@ -48,7 +47,6 @@ export class BillingStore implements StoreIBillingStore {
             // actions
             fetchWorkspaceSubscription: action,
             cancelSubscription: action,
-            createRazorpaySubscription: action,
         })
         this.billingService = new BillingService()
         this.router = _rootStore.app.router
@@ -98,15 +96,6 @@ export class BillingStore implements StoreIBillingStore {
             })
             return response
         })
-
-    /**
-     * Initiate the subscription process
-     * @param workspaceSlug
-     * @param planName
-     * @returns Promise<IRazorpaySubscription>
-     */
-    createRazorpaySubscription = async (workspaceSlug: string, planName: string) =>
-        await this.billingService.createRazorpaySubscription(workspaceSlug, planName)
 
     /**
      * Cancel the current subscription
