@@ -52,7 +52,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                             <Dialog.Panel className="relative transform rounded-lg bg-custom-background-100 p-5 px-4 text-left shadow-custom-shadow-md transition-all w-full sm:max-w-2xl min-w-[70vw]">
                                 <div className="border border-custom-border-100 bg-custom-background-200 rounded p-8">
                                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                        {Object.values(plans).map((plan) => (
+                                        {Object.values(plans).map((plan, index) => (
                                             <div
                                                 className="col-span-1 border border-custom-border-200 bg-custom-background-300 rounded p-8"
                                                 key={plan.name}
@@ -97,16 +97,19 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         size="sm"
                                                         disabled={
                                                             currentWorkspaceSubscription?.plan_details.name ===
-                                                                plan.name
+                                                                plan.name ||
+                                                            index < Object.values(plans).findIndex(
+                                                                (p) =>
+                                                                    currentWorkspaceSubscription?.plan_details.name ===
+                                                                    p.name
+                                                            )
                                                         }
                                                         onClick={() => {
-                                                            if (!(plan.usdPrice && plan.inrPrice)) {
-                                                                window.open(
-                                                                    "https://calendly.com/servcy/demo",
-                                                                    "_blank",
-                                                                    "noopener,noreferrer"
-                                                                )
-                                                            }
+                                                            window.open(
+                                                                "https://calendly.com/servcy/demo",
+                                                                "_blank",
+                                                                "noopener,noreferrer"
+                                                            )
                                                         }}
                                                         variant={plan.buttonVariant as TButtonVariant}
                                                     >
