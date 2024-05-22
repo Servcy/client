@@ -4,7 +4,7 @@ export interface IWorkspaceSubscription {
     plan_details: {
         name: string
     }
-    subscription_details: object
+    subscription_id: string
     is_active: boolean
     limits: {
         invitations: number
