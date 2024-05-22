@@ -23,6 +23,7 @@ export interface StoreIBillingStore {
     // fetch actions
     fetchWorkspaceSubscription: (workspaceSlug: string) => Promise<IWorkspaceSubscription>
     cancelSubscription: (workspaceSlug: string) => Promise<void>
+    pauseSubscription: (workspaceSlug: string) => Promise<void>
 }
 
 export class BillingStore implements StoreIBillingStore {
@@ -47,6 +48,7 @@ export class BillingStore implements StoreIBillingStore {
             // actions
             fetchWorkspaceSubscription: action,
             cancelSubscription: action,
+            pauseSubscription: action,
         })
         this.billingService = new BillingService()
         this.router = _rootStore.app.router
@@ -103,4 +105,11 @@ export class BillingStore implements StoreIBillingStore {
      * @returns Promise<void>
      */
     cancelSubscription = async (workspaceSlug: string) => await this.billingService.cancelSubscription(workspaceSlug)
+
+    /**
+     * Pause the current subscription
+     * @param workspaceSlug
+     * @returns Promise<void>
+     */
+    pauseSubscription = async (workspaceSlug: string) => await this.billingService.pauseSubscription(workspaceSlug)
 }

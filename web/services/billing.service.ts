@@ -24,4 +24,12 @@ export class BillingService extends APIService {
                 throw error?.response
             })
     }
+
+    pauseSubscription(workspaceSlug: string): Promise<void> {
+        return this.put(`/billing/${workspaceSlug}/subscription`)
+            .then(() => {})
+            .catch((error) => {
+                throw error?.response
+            })
+    }
 }

@@ -22,7 +22,7 @@ type Props = {
 export const UpgradePlanModal: FC<Props> = (props) => {
     const { isOpen, onClose } = props
     const { workspaceSlug } = useParams()
-    const { cancelSubscription, currentWorkspaceSubscription } = useBilling()
+    const { cancelSubscription, pauseSubscription, currentWorkspaceSubscription } = useBilling()
     if (!workspaceSlug) return null
     return (
         <Transition.Root show={isOpen} as={React.Fragment}>
@@ -130,7 +130,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                                 variant="link-danger"
                                                                 className="p-0"
                                                                 size="sm"
-                                                                onClick={() => cancelSubscription(workspaceSlug.toString())}
+                                                                onClick={() => pauseSubscription(workspaceSlug.toString())}
                                                             >
                                                                 <span className="underline">pause subscription</span>
                                                             </Button>
