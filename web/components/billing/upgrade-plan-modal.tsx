@@ -125,14 +125,24 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                 </div>
                                                 <div className="h-4 flex justify-end">
                                                     {currentWorkspaceSubscription?.plan_details.name === plan.name && (
-                                                        <Button
-                                                            variant="link-danger"
-                                                            className="p-0"
-                                                            size="sm"
-                                                            onClick={() => cancelSubscription(workspaceSlug.toString())}
-                                                        >
-                                                            <span className="underline">cancel subscription</span>
-                                                        </Button>
+                                                        <>
+                                                            <Button
+                                                                variant="link-danger"
+                                                                className="p-0"
+                                                                size="sm"
+                                                                onClick={() => cancelSubscription(workspaceSlug.toString())}
+                                                            >
+                                                                <span className="underline">pause subscription</span>
+                                                            </Button>
+                                                            <Button
+                                                                variant="link-danger"
+                                                                className="p-0"
+                                                                size="sm"
+                                                                onClick={() => cancelSubscription(workspaceSlug.toString())}
+                                                            >
+                                                                <span className="underline">cancel subscription</span>
+                                                            </Button>
+                                                        </>
                                                     )}
                                                 </div>
                                                 {plan.addedBenefits && (
