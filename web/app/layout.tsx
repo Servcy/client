@@ -52,7 +52,6 @@ const RootLayout: FC<PropsWithChildren> = function ({ children }) {
                 async
                 defer
             />
-            <Script src="https://checkout.razorpay.com/v1/checkout.js" />
             <body>
                 <ProgressBarProvider>
                     <Toaster
