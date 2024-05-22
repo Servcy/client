@@ -123,7 +123,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         </span>
                                                     </Button>
                                                 </div>
-                                                <div className="h-4 flex justify-end">
+                                                <div className="h-4 flex justify-between">
                                                     {currentWorkspaceSubscription?.plan_details.name === plan.name && (
                                                         <>
                                                             <Button
