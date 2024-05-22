@@ -10,6 +10,7 @@ export const plans = {
         usdPrice: "99",
         buttonVariant: "outline-primary",
         offerings: [
+            "Invite Upto 10 Users",
             "Unlimited Projects",
             "Unlimited Cycles",
             "Unlimited Modules",

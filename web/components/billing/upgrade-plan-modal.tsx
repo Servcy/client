@@ -6,14 +6,14 @@ import { useParams } from "next/navigation"
 import React, { FC, useState } from "react"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { BadgeCheckIcon, BadgeDollarSign, BadgeIndianRupee, Loader, ShieldCheck } from "lucide-react"
+import { BadgeCheckIcon, Loader, ShieldCheck } from "lucide-react"
 
 import { useBilling, useUser } from "@hooks/store"
 
 import { plans } from "@constants/billing"
 
 import { IRazorpaySubscription } from "@servcy/types"
-import { Button, TButtonVariant, ToggleSwitch } from "@servcy/ui"
+import { Button, TButtonVariant } from "@servcy/ui"
 
 type Props = {
     onClose: () => void
@@ -24,7 +24,6 @@ export const UpgradePlanModal: FC<Props> = (props) => {
     const { isOpen, onClose } = props
     const { currentUser } = useUser()
     const { workspaceSlug } = useParams()
-    const [isInrSelected, setIsInrSelected] = useState(true)
     const [isInitiating, setIsInitiating] = useState("")
     const { createRazorpaySubscription, cancelSubscription, currentWorkspaceSubscription } = useBilling()
     const initiateSubscription = async (planName: string) => {
@@ -83,17 +82,7 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                         >
                             <Dialog.Panel className="relative transform rounded-lg bg-custom-background-100 p-5 px-4 text-left shadow-custom-shadow-md transition-all w-full sm:max-w-2xl min-w-[70vw]">
                                 <div className="border border-custom-border-100 bg-custom-background-200 rounded p-8">
-                                    <div className="flex items-center justify-end border border-custom-border-200 bg-custom-background-300 rounded p-4">
-                                        <BadgeDollarSign size="32" className="text-custom-text-400" />
-                                        <ToggleSwitch
-                                            value={isInrSelected}
-                                            onChange={(val) => setIsInrSelected(val)}
-                                            className="mx-4"
-                                            size="lg"
-                                        />
-                                        <BadgeIndianRupee size="32" className="text-custom-text-400" />
-                                    </div>
-                                    <div className="grid grid-cols-2 md:grid-cols-3 mt-4 gap-4">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                         {Object.values(plans).map((plan) => (
                                             <div
                                                 className="col-span-1 border border-custom-border-200 bg-custom-background-300 rounded p-8"
@@ -117,17 +106,11 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                 <div className="mb-6 h-16 border-b-2 border-neutral-500 pb-4">
                                                     {plan.usdPrice && plan.inrPrice ? (
                                                         <>
-                                                            {!isInrSelected ? (
-                                                                <span className="text-3xl font-extrabold text-custom-servcy-wheat">
-                                                                    $
-                                                                </span>
-                                                            ) : (
-                                                                <span className="text-3xl font-extrabold text-custom-servcy-wheat">
-                                                                    &#8377;
-                                                                </span>
-                                                            )}
+                                                            <span className="text-3xl font-extrabold text-custom-servcy-wheat">
+                                                                $
+                                                            </span>
                                                             <span className="ml-1 text-3xl font-extrabold text-custom-servcy-wheat">
-                                                                {!isInrSelected ? plan.usdPrice : plan.inrPrice}
+                                                                {plan.usdPrice}
                                                             </span>
                                                             <span className="text-xl font-extrabold text-custom-servcy-silver">
                                                                 /mo
