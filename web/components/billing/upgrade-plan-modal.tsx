@@ -98,11 +98,12 @@ export const UpgradePlanModal: FC<Props> = (props) => {
                                                         disabled={
                                                             currentWorkspaceSubscription?.plan_details.name ===
                                                                 plan.name ||
-                                                            index < Object.values(plans).findIndex(
-                                                                (p) =>
-                                                                    currentWorkspaceSubscription?.plan_details.name ===
-                                                                    p.name
-                                                            )
+                                                            index <
+                                                                Object.values(plans).findIndex(
+                                                                    (p) =>
+                                                                        currentWorkspaceSubscription?.plan_details
+                                                                            .name === p.name
+                                                                )
                                                         }
                                                         onClick={() => {
                                                             window.open(
