@@ -164,8 +164,8 @@ export default function Login(): JSX.Element {
         )
 
     return (
-        <main className="flex min-h-screen w-full">
-            <div className="m-auto w-[430px] rounded-lg border border-custom-border-200 bg-onboarding-gradient-200 p-10 text-center shadow-md">
+        <main className="flex h-screen items-center justify-center">
+            <div className="rounded-lg border border-custom-border-200 bg-onboarding-gradient-200 p-10 text-center shadow-md">
                 <Image src="/logo.svg" alt="Servcy logo" height="64" width="64" className="mx-auto" />
                 <h4 className="my-5 font-semibold">Welcome To Servcy</h4>
                 <form autoComplete="off">
