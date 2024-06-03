@@ -1,5 +1,7 @@
 # Servcy - One For All Platform
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FServcy%2FClient)
+
 [Servcy](https://servcy.com) is a software tool kit for all your business needs.
 
 > Servcy is still in its early days, not everything will be perfect yet, and hiccups may happen. Please let us know of any suggestions, ideas, or bugs that you encounter using GitHub issues, and we will use your feedback to improve on our upcoming releases.
