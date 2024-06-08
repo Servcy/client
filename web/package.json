@@ -2,6 +2,16 @@
     "name": "web",
     "version": "0.0.0",
     "private": true,
+    "author": {
+      "name": "Megham Garg",
+      "email": "business@meghamgarg.com",
+      "url": "https://meghamgarg.com"
+    },
+    "repository": {
+      "url": "https://github.com/Servcy/Client",
+      "type": "git"
+    },
+    "license": "AGPL-3.0-only",
     "scripts": {
         "build": "next build",
         "dev": "turbo run develop",
